@@ -188,14 +188,12 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 
 			@Override
 			public void onClick(View view){
-				Intent intent = new Intent();
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				intent.setClassName(app.packageName,app.className);
-				try {
-					view.getContext().startActivity(intent);
-				}catch (Exception e){
-					Tools.toast(getContext(),R.string.headsup_appuninstalled);
-				}
+				Tools.createScaleInScaleOutAnim(view, new Runnable() {
+                    @Override
+                    public void run() {
+                        Tools.startApp(getContext(),app);
+                    }
+                });
 			}
 
 			ImageView iv;
