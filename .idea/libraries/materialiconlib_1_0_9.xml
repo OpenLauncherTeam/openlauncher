@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="materialiconlib-1.0.9">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/net.steamcrafted/materialiconlib/1.0.9/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/net.steamcrafted/materialiconlib/1.0.9/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.steamcrafted/materialiconlib/1.0.9/558103ccc4a7d4d1d89ce08610471b18c4660ea0/materialiconlib-1.0.9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
