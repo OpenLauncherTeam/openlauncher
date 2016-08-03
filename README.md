@@ -16,6 +16,6 @@ There are three module
 ###Some screen shot
 ![alt tag](https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/Screenshot_2016-08-03-20-57-15.png)
 
-![alt tag]
+![alt tag](https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/Screenshot_2016-08-03-20-57-26.png)
 
 Please go to the OpenLauncher [Wiki](https://github.com/Benny-Kok/OpenLauncher/wiki) for more information.
