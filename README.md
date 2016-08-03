@@ -13,6 +13,6 @@ There are three module
 
 - viewpagerindicator - A modified version of original [ViewPagerIndicator](https://github.com/JakeWharton/ViewPagerIndicator)
 
-
+![alt tag]
 
 Please go to the OpenLauncher [Wiki](https://github.com/Benny-Kok/OpenLauncher/wiki) for more information.
