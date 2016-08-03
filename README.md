@@ -2,6 +2,6 @@
 
 This an open source Android Launcher project, aim to start every thing from scratch (if possible).
 
-So help me, will you?
+Let's work it out.
 
-I will have more info. here later.
+Please go to the WiKi for more information.
