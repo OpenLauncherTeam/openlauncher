@@ -16,7 +16,7 @@ import com.viewpagerindicator.PageIndicator;
 
 public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedListener
 {
-	private List<AppManager.App> apps;
+	private static List<AppManager.App> apps;
 
 	private Home home;
 
