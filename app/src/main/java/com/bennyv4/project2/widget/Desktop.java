@@ -72,7 +72,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener
         iv.getLayoutParams().width = (int)Tools.convertDpToPixel(AppDrawer.iconSize,getContext());
         iv.getLayoutParams().height = (int)Tools.convertDpToPixel(AppDrawer.iconSize,getContext());
 
-        final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.packageName[0], item.className[0]);
+        final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(),item.actions[0].getComponent().getClassName());
         if (app == null){
             LauncherSettings.getInstance(getContext()).desktopData.get(page).remove(item);
             return;
@@ -129,7 +129,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener
 			iv.getLayoutParams().width = (int)Tools.convertDpToPixel(AppDrawer.iconSize,getContext());
 			iv.getLayoutParams().height = (int)Tools.convertDpToPixel(AppDrawer.iconSize,getContext());
 
-			final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.packageName[0], item.className[0]);
+            final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(),item.actions[0].getComponent().getClassName());
             if (app == null)
                 return;
 
@@ -222,9 +222,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener
 
 		public Type type;
 
-		public String packageName[];
+		public Intent[] actions;
 
-		public String className[];
+		//public String packageName[];
+
+		//public String className[];
 
 		public int x , y;
 
@@ -232,8 +234,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener
 		public boolean equals(Object obj) {
 			return obj instanceof Item
 					&& ((Item)obj).type == this.type
-					&& Arrays.equals(((Item)obj).packageName,this.packageName)
-					&& Arrays.equals(((Item)obj).className,this.className)
+                    && Arrays.equals(((Item)obj).actions,this.actions)
 					&& ((Item)obj).x == this.x
 					&& ((Item)obj).y == this.y
 					;
@@ -244,8 +245,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener
 		public static Item newAppItem(AppManager.App app){
 			Desktop.Item item = new Item();
 			item.type = Type.APP;
-			item.packageName = new String[]{app.packageName};
-			item.className = new String[]{app.className};
+			item.actions = new Intent[]{toIntent(app)};
 			return item;
 		}
 
@@ -254,10 +254,16 @@ public class Desktop extends SmoothViewPager implements OnDragListener
 			switch(type){
 				case GROUP:
 				case APP:
-					packageName = in.createStringArray();
-					className = in.createStringArray();
+					actions = in.createTypedArray(Intent.CREATOR);
 					break;
 			}
+        }
+
+        private static Intent toIntent(AppManager.App app){
+            Intent intent = new Intent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setClassName(app.packageName,app.className);
+            return intent;
         }
 
 		@Override
@@ -271,8 +277,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener
 			switch(type){
 				case GROUP:
 				case APP:
-					out.writeStringArray(packageName);
-					out.writeStringArray(className);
+					out.writeTypedArray(actions,0);
 					break;
 			}
         }

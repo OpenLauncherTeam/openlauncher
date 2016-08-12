@@ -14,7 +14,6 @@ public class AppManager
 	private PackageManager pm;
 	private List<App> apps = new ArrayList<>();
 	private List<AppUpdatedListener> updateListeners = new ArrayList<>();
-    private List<AppUpdatedListener> updateListenersToremove = new ArrayList<>();
 	private List<AppDeletedListener> deleteListeners = new ArrayList<>();
 	private AsyncTask task;
 
@@ -44,17 +43,9 @@ public class AppManager
 		updateListeners.add(listener);
 	}
 
-	public void removeAppUpdatedListener(AppUpdatedListener listener){
-        updateListenersToremove.remove(listener);
-	}
-
 	public void addAppDeletedListener(AppDeletedListener listener){
 		deleteListeners.add(listener);
 	}
-
-	//public void removeAppDeletedListener(AppDeletedListener listener){
-	//	deleteListeners.remove(listener);
-	//}
 
 	private void getAllApps(){
 		if(task == null || task.getStatus() == AsyncTask.Status.FINISHED)
@@ -102,10 +93,6 @@ public class AppManager
 			for(AppUpdatedListener listener : updateListeners){
 				listener.onAppUpdated(apps);
 			}
-            if (updateListenersToremove.size() > 0){
-                updateListeners.removeAll(updateListenersToremove);
-                updateListenersToremove.clear();
-            }
 
 			if(tempapps.size() > apps.size()){
 				App temp = null;
@@ -150,12 +137,12 @@ public class AppManager
 		}
 	}
 
-	public static interface AppUpdatedListener
+	public interface AppUpdatedListener
 	{
 		public void onAppUpdated(List<App> apps);
 	}
 
-	public static interface AppDeletedListener
+	public interface AppDeletedListener
 	{
 		public void onAppDeleted(App app);
 	}

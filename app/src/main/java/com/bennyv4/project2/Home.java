@@ -65,10 +65,12 @@ public class Home extends AppCompatActivity {
         dock.addViewToGrid(appDrawerBtn, 2, 0);
 
         AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
+            boolean fired = false;
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {
+                if (fired)return;
+                fired = true;
                 initSettings();
-                AppManager.getInstance(Home.this).removeAppUpdatedListener(this);
             }
         });
     }

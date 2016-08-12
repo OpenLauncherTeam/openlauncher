@@ -75,7 +75,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
         ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
         iv.getLayoutParams().width = (int) Tools.convertDpToPixel(AppDrawer.iconSize,getContext());
 
-        final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.packageName[0], item.className[0]);
+        final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(),item.actions[0].getComponent().getClassName());
         if (app == null){
             LauncherSettings.getInstance(getContext()).dockData.remove(item);
             return;
@@ -130,7 +130,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
             ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
             iv.getLayoutParams().width = (int) Tools.convertDpToPixel(AppDrawer.iconSize,getContext());
 
-            final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.packageName[0], item.className[0]);
+            final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(),item.actions[0].getComponent().getClassName());
             if (app == null)
                 return;
 
