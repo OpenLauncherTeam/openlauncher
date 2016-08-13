@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:2:1-37:12
+ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:2:1-29:12
 	package
 		ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:3:5-35
 		INJECTED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml
@@ -14,7 +14,7 @@ ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:2
 		INJECTED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml
 application
-ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:5:5-35:19
+ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:5:5-27:19
 MERGED from [net.steamcrafted:materialiconlib:1.0.9] C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\exploded-aar\net.steamcrafted\materialiconlib\1.0.9\AndroidManifest.xml:11:5-12:19
 MERGED from [com.github.ozodrukh:CircularReveal:2.0.1] C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\exploded-aar\com.github.ozodrukh\CircularReveal\2.0.1\AndroidManifest.xml:10:5-20
 MERGED from [com.android.support:support-v4:24.0.0] C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\AndroidManifest.xml:25:5-20
@@ -95,24 +95,6 @@ category#android.intent.category.DEFAULT
 ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:23:17-75
 	android:name
 		ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:23:27-73
-receiver#com.bennyv4.project2.util.AppManager$Receiver
-ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:27:3-33:14
-	android:name
-		ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:27:13-53
-intent-filter#android.intent.action.PACKAGE_ADDED+android.intent.action.PACKAGE_CHANGED+android.intent.action.PACKAGE_REMOVED
-ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:28:4-32:29
-action#android.intent.action.PACKAGE_ADDED
-ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:29:17-77
-	android:name
-		ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:29:25-75
-action#android.intent.action.PACKAGE_REMOVED
-ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:30:5-67
-	android:name
-		ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:30:13-65
-action#android.intent.action.PACKAGE_CHANGED
-ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:31:5-67
-	android:name
-		ADDED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml:31:13-65
 uses-sdk
 INJECTED from C:\Users\USER\Desktop\OpenLauncher\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [net.steamcrafted:materialiconlib:1.0.9] C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\exploded-aar\net.steamcrafted\materialiconlib\1.0.9\AndroidManifest.xml:7:5-9:41

@@ -4,42 +4,26 @@
     api-level="21"
     density="xhdpi"
     format="7"
-    timestamp="91573471599621"
+    timestamp="173343642036630"
     token="-4955736591565270452" >
 
     <task
         name="javac"
-        duration="320" />
+        duration="332" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="78" />
+        duration="35" />
     <task
         name="verifier"
-        duration="17" />
+        duration="5" />
 
     <artifact
-        location="C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
-        type="DEX" />
-    <artifact
-        location="C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
-        type="DEX" />
+        location="C:\Users\USER\Desktop\OpenLauncher\app\build\outputs\apk\app-debug.apk"
+        type="MAIN" />
 
-    <build timestamp="90536010807522" >
-        <artifact
-            location="C:\Users\USER\Desktop\OpenLauncher\app\build\outputs\apk\app-debug.apk"
-            type="MAIN" />
-    </build>
-    <build timestamp="91573471599621" >
-        <artifact
-            location="C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
-            type="DEX" />
-        <artifact
-            location="C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
-            type="DEX" />
-    </build>
     <build timestamp="252582929312429" >
         <artifact
             location="C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"

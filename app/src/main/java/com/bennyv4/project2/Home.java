@@ -1,6 +1,9 @@
 package com.bennyv4.project2;
 
 import android.animation.*;
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.*;
 import android.graphics.drawable.*;
 import android.os.*;
@@ -14,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bennyv4.project2.util.AppManager;
+import com.bennyv4.project2.util.AppUpdateReceiver;
 import com.bennyv4.project2.util.LauncherSettings;
 import com.bennyv4.project2.widget.*;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -29,6 +33,7 @@ public class Home extends AppCompatActivity {
     FrameLayout appDrawerBtn;
     CirclePageIndicator appDrawerIndicator, desktopIndicator;
     Animator animator;
+    BroadcastReceiver appUpdateReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,14 @@ public class Home extends AppCompatActivity {
         });
         dock.addViewToGrid(appDrawerBtn, 2, 0);
 
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_PACKAGE_ADDED);
+        filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
+        filter.addDataScheme("package");
+        appUpdateReceiver = new AppUpdateReceiver();
+        registerReceiver(appUpdateReceiver, filter);
+
         AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             boolean fired = false;
             @Override
@@ -84,6 +97,12 @@ public class Home extends AppCompatActivity {
                 desktop.addAppToPagePosition(LauncherSettings.getInstance(this).desktopData.get(i).get(j),i);
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(appUpdateReceiver);
+        super.onDestroy();
     }
 
     @Override

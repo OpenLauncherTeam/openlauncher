@@ -24,14 +24,6 @@
             </intent-filter>
         </activity>
 
-		<receiver android:name=".util.AppManager$Receiver">
-			<intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED"/>
-				<action android:name="android.intent.action.PACKAGE_REMOVED"/>
-				<action android:name="android.intent.action.PACKAGE_CHANGED"/>
-            </intent-filter>
-		</receiver>
-
     </application>
 
 </manifest>

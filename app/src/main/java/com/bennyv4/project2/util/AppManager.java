@@ -4,6 +4,9 @@ import android.content.*;
 import android.content.pm.*;
 import android.graphics.drawable.*;
 import android.os.*;
+import android.util.Log;
+import android.widget.Toast;
+
 import java.util.*;
 
 public class AppManager
@@ -36,7 +39,7 @@ public class AppManager
 	}
 
 	public void init(){
-		getAllApps();
+        getAllApps();
 	}
 
 	public void addAppUpdatedListener(AppUpdatedListener listener){
@@ -145,13 +148,5 @@ public class AppManager
 	public interface AppDeletedListener
 	{
 		public void onAppDeleted(App app);
-	}
-	
-	public static class Receiver extends BroadcastReceiver
-	{
-		@Override
-		public void onReceive(Context p1, Intent p2){
-			AppManager.getInstance(p1).onReceive(p1,p2);
-		}
 	}
 }
