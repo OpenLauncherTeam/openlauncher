@@ -30,14 +30,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <receiver android:name="com.bennyv4.project2.util.AppManager$Receiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <action android:name="android.intent.action.PACKAGE_CHANGED" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>
