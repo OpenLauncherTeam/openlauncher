@@ -30,7 +30,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener
 	}
 
 	private void init(Context c){
-        pageCount = LauncherSettings.getInstance(c).normalSettings.desktopPageCount;
+        pageCount = LauncherSettings.getInstance(c).generalSettings.desktopPageCount;
 		setAdapter(new Adapter());
 		setOnDragListener(this);
 	}
@@ -69,8 +69,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener
         ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, null);
         TextView tv = (TextView) item_layout.findViewById(R.id.tv);
         ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
-        iv.getLayoutParams().width = (int)Tools.convertDpToPixel(AppDrawer.iconSize,getContext());
-        iv.getLayoutParams().height = (int)Tools.convertDpToPixel(AppDrawer.iconSize,getContext());
+        iv.getLayoutParams().width = (int)Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize,getContext());
+        iv.getLayoutParams().height = (int)Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize,getContext());
 
         final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(),item.actions[0].getComponent().getClassName());
         if (app == null){
@@ -126,8 +126,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener
 			ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, null);
 			TextView tv = (TextView) item_layout.findViewById(R.id.tv);
 			ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
-			iv.getLayoutParams().width = (int)Tools.convertDpToPixel(AppDrawer.iconSize,getContext());
-			iv.getLayoutParams().height = (int)Tools.convertDpToPixel(AppDrawer.iconSize,getContext());
+			iv.getLayoutParams().width = (int)Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize,getContext());
+			iv.getLayoutParams().height = (int)Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize,getContext());
 
             final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(),item.actions[0].getComponent().getClassName());
             if (app == null)

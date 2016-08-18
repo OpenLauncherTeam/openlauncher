@@ -133,13 +133,16 @@ public class Home extends AppCompatActivity {
         animator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(appDrawer, cx, cy, 0, finalRadius);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
         animator.setDuration(200);
+        animator.setStartDelay(100);
+
+        dock.animate().alpha(0).setDuration(100);
+        desktop.animate().alpha(0).setDuration(100);
+        appDrawerBtn.animate().scaleX(0).scaleY(0).setDuration(100);
+
         animator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator p1) {
                 appDrawer.setVisibility(View.VISIBLE);
-                dock.animate().alpha(0);
-                desktop.animate().alpha(0);
-                appDrawerBtn.animate().scaleX(0).scaleY(0);
             }
 
             @Override

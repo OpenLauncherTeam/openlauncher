@@ -7,6 +7,7 @@ import android.os.*;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.text.Collator;
 import java.util.*;
 
 public class AppManager
@@ -85,6 +86,14 @@ public class AppManager
 			Intent intent = new Intent(Intent.ACTION_MAIN,null);
 			intent.addCategory(Intent.CATEGORY_LAUNCHER);
 			List<ResolveInfo> activitiesInfo = pm.queryIntentActivities(intent,0);
+            Collections.sort(activitiesInfo, new Comparator<ResolveInfo>()
+            {
+                @Override
+                public int compare(ResolveInfo p1, ResolveInfo p2)
+                {
+                    return Collator.getInstance().compare(p1.loadLabel(pm).toString(),p2.loadLabel(pm).toString());
+                }
+            });
 			for(ResolveInfo info : activitiesInfo){
 				apps.add(new App(info, pm));
 			}

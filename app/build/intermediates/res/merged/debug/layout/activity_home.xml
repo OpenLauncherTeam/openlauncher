@@ -31,7 +31,7 @@
 		<com.bennyv4.project2.widget.AppDrawer
 			android:visibility="invisible"
 			android:id="@+id/appDrawer"
-			android:layout_marginBottom="10dp"
+			android:layout_marginBottom="18dp"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"/>
 		
