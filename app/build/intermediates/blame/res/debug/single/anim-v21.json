@@ -1,5 +1,13 @@
 [
     {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_appbar_state_list_animator.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\anim-v21\\design_appbar_state_list_animator.xml"
+    },
+    {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
     },
@@ -10,5 +18,9 @@
     {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_appbar_state_list_animator.xml",
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\anim-v21\\design_appbar_state_list_animator.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
     }
 ]

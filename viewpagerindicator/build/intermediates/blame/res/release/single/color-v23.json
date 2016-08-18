@@ -4,6 +4,10 @@
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_seek_thumb.xml"
     },
     {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_tint_spinner.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_spinner.xml"
+    },
+    {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_color_highlight_material.xml",
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_color_highlight_material.xml"
     },
@@ -20,19 +24,51 @@
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_switch_track.xml"
     },
     {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_btn_colored_borderless_text_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_btn_colored_borderless_text_material.xml"
+    },
+    {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_tint_default.xml",
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_default.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_tint_switch_thumb.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_switch_thumb.xml"
     },
     {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_tint_switch_thumb.xml",
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_switch_thumb.xml"
     },
     {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_tint_edittext.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_edittext.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_tint_switch_track.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_switch_track.xml"
+    },
+    {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_tint_spinner.xml",
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_spinner.xml"
     },
     {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_tint_btn_checkable.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_color_highlight_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_color_highlight_material.xml"
+    },
+    {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_tint_edittext.xml",
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_edittext.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_tint_default.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_default.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_tint_seek_thumb.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\viewpagerindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\color-v23\\abc_tint_seek_thumb.xml"
     }
 ]
