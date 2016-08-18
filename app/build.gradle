@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.bennyv4.project2"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -30,6 +30,7 @@ dependencies {
     compile('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
         transitive = true;
     }
+    compile 'com.github.mancj:MaterialSearchBar:0.2.1'
     compile 'com.android.support:recyclerview-v7:24.0.0'
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'

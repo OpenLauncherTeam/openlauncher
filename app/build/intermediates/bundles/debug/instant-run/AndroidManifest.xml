@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="15"
+        android:minSdkVersion="16"
         android:targetSdkVersion="24" />
 
     <application
@@ -21,7 +21,8 @@
             android:configChanges="orientation|keyboard|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:stateNotNeeded="true" >
+            android:stateNotNeeded="true"
+            android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
