@@ -4,44 +4,48 @@
     api-level="21"
     density="xhdpi"
     format="7"
-    timestamp="28235242573261"
-    token="-4955736591565270452"
-    verifier="COMPATIBLE" >
+    timestamp="10705440643548"
+    token="-4955736591565270452" >
 
     <task
         name="javac"
-        duration="271" />
+        duration="398" />
     <task
         name="instant-run-dex"
-        duration="373" />
+        duration="0" />
     <task
         name="instant-run-transform"
-        duration="22" />
+        duration="48" />
     <task
         name="verifier"
-        duration="2" />
+        duration="10" />
 
     <artifact
-        location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\reload-dex\debug\classes.dex"
-        type="RELOAD_DEX" />
+        location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
+        type="DEX" />
+    <artifact
+        location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
+        type="DEX" />
 
-    <build timestamp="27013442230643" >
+    <build timestamp="9884511021204" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
-    <build timestamp="27797569556685" >
+    <build
+        timestamp="10417364708281"
+        verifier="FIELD_ADDED" >
+        <artifact
+            location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\res\resources-debug.ap_"
+            type="RESOURCES" />
+    </build>
+    <build timestamp="10705440643548" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
             type="DEX" />
         <artifact
-            location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
+            location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
             type="DEX" />
-    </build>
-    <build timestamp="28010296302687" >
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\res\resources-debug.ap_"
-            type="RESOURCES" />
     </build>
     <build timestamp="252582929312429" >
         <artifact

@@ -1,12 +1,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 	<com.bennyv4.project2.widget.Desktop
 		android:id="@+id/desktop"
+        android:layout_marginTop="70dp"
 		android:layout_above="@+id/desktopIndicator"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"/>
+
+    <com.mancj.materialsearchbar.MaterialSearchBar
+        app:speechMode="true"
+        app:hint="Google"
+        app:maxSuggestionsCount="5"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchBar" />
 
 	<com.viewpagerindicator.CirclePageIndicator
 		android:padding="5dp"
@@ -31,7 +42,7 @@
 		<com.bennyv4.project2.widget.AppDrawer
 			android:visibility="invisible"
 			android:id="@+id/appDrawer"
-			android:layout_marginBottom="18dp"
+			android:layout_marginBottom="24dp"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"/>
 		

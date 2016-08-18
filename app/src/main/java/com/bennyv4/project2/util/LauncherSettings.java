@@ -66,5 +66,6 @@ public class LauncherSettings {
     public static class GeneralSettings {
         public int desktopPageCount = 1;
         public int iconSize = 58;
+        public ArrayList<String> searchHistory;
     }
 }

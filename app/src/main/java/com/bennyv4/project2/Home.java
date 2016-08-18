@@ -1,6 +1,7 @@
 package com.bennyv4.project2;
 
 import android.animation.*;
+import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -19,11 +20,14 @@ import android.widget.ImageView;
 import com.bennyv4.project2.util.AppManager;
 import com.bennyv4.project2.util.AppUpdateReceiver;
 import com.bennyv4.project2.util.LauncherSettings;
+import com.bennyv4.project2.util.Tools;
 import com.bennyv4.project2.widget.*;
+import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import net.steamcrafted.materialiconlib.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Home extends AppCompatActivity {
@@ -33,6 +37,7 @@ public class Home extends AppCompatActivity {
     FrameLayout appDrawerBtn;
     CirclePageIndicator appDrawerIndicator, desktopIndicator;
     Animator animator;
+    MaterialSearchBar searchBar;
     BroadcastReceiver appUpdateReceiver;
 
     @Override
@@ -48,6 +53,7 @@ public class Home extends AppCompatActivity {
         dock = (Dock) findViewById(R.id.desktopDock);
         appDrawerIndicator = (CirclePageIndicator) findViewById(R.id.appDrawerIndicator);
         desktopIndicator = (CirclePageIndicator) findViewById(R.id.desktopIndicator);
+        searchBar = (MaterialSearchBar) findViewById(R.id.searchBar);
         appDrawerBtn = (FrameLayout) getLayoutInflater().inflate(R.layout.item_appdrawerbtn, null);
 
         appDrawer.withHome(this, appDrawerIndicator);
@@ -68,6 +74,41 @@ public class Home extends AppCompatActivity {
             }
         });
         dock.addViewToGrid(appDrawerBtn, 2, 0);
+
+        List<String> history;
+        if ((history = LauncherSettings.getInstance(this).generalSettings.searchHistory) != null)
+            searchBar.setLastSuggestions(history);
+
+        searchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener(){
+            @Override
+            public void onSearchStateChanged(boolean b) {
+
+            }
+
+            @Override
+            public void onSearchConfirmed(CharSequence charSequence) {
+                Intent i = new Intent(Intent.ACTION_WEB_SEARCH);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                i.putExtra(SearchManager.QUERY, charSequence.toString());
+                Home.this.startActivity(i);
+                searchBar.disableSearch();
+                searchBar.disableSearch();
+            }
+
+            @Override
+            public void onSpeechIconSelected() {
+                try
+                {
+                    Intent i = new Intent(Intent.ACTION_MAIN);
+                    i.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.VoiceSearchActivity");
+                    Home.this.startActivity(i);
+                }
+                catch (Exception e)
+                {
+                    Tools.toast(Home.this, "Can not find google search app");
+                }
+            }
+        });
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_PACKAGE_ADDED);
@@ -107,6 +148,7 @@ public class Home extends AppCompatActivity {
 
     @Override
     protected void onStop() {
+        LauncherSettings.getInstance(this).generalSettings.searchHistory = (ArrayList<String>) searchBar.getLastSuggestions();
         LauncherSettings.getInstance(this).writeSettings();
         super.onStop();
     }
@@ -136,6 +178,7 @@ public class Home extends AppCompatActivity {
         animator.setStartDelay(100);
 
         dock.animate().alpha(0).setDuration(100);
+        searchBar.animate().alpha(0).setDuration(80);
         desktop.animate().alpha(0).setDuration(100);
         appDrawerBtn.animate().scaleX(0).scaleY(0).setDuration(100);
 
@@ -186,6 +229,7 @@ public class Home extends AppCompatActivity {
                 appDrawerBtn.setVisibility(View.VISIBLE);
                 dock.animate().alpha(1);
                 desktop.animate().alpha(1);
+                searchBar.animate().alpha(1);
                 appDrawerBtn.animate().scaleX(1).scaleY(1);
             }
 
