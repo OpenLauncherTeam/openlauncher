@@ -260,7 +260,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener
         }
 
         private static Intent toIntent(AppManager.App app){
-            Intent intent = new Intent();
+            Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setClassName(app.packageName,app.className);
             return intent;

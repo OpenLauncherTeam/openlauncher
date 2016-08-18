@@ -1,6 +1,2 @@
-CHANGED,C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
-CHANGED,C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\bennyv4\project2\Home$3$override.class
-CHANGED,C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\bennyv4\project2\Home$4$override.class
-CHANGED,C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\bennyv4\project2\Home$1$override.class
-CHANGED,C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\bennyv4\project2\Home$2$override.class
-CHANGED,C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\bennyv4\project2\Home$override.class
+CHANGED,E:\USER\ProjectData\OpenLauncher\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
+CHANGED,E:\USER\ProjectData\OpenLauncher\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\bennyv4\project2\util\Tools$override.class
