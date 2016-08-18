@@ -2,20 +2,13 @@ package com.bennyv4.project2.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.Debug;
-import android.os.Parcel;
 
 import com.bennyv4.project2.widget.Desktop;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import junit.framework.Assert;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LauncherSettings {
 
@@ -29,7 +22,7 @@ public class LauncherSettings {
 
     public List<Desktop.Item> dockData;
 
-    public NormalSettings normalSettings;
+    public GeneralSettings generalSettings;
 
     public SharedPreferences pref;
 
@@ -54,11 +47,11 @@ public class LauncherSettings {
         else
             desktopData = gson.fromJson(raw,new TypeToken<ArrayList<ArrayList<Desktop.Item>>>(){}.getType());
 
-        raw = pref.getString("normalSettings",null);
+        raw = pref.getString("generalSettings",null);
         if (raw == null)
-            normalSettings = new NormalSettings();
+            generalSettings = new GeneralSettings();
         else
-            normalSettings = gson.fromJson(raw,NormalSettings.class);
+            generalSettings = gson.fromJson(raw,GeneralSettings.class);
 
         System.out.print(raw);
     }
@@ -67,10 +60,11 @@ public class LauncherSettings {
         Gson gson = new Gson();
         pref.edit().putString("dockData",gson.toJson(dockData)).apply();
         pref.edit().putString("desktopData",gson.toJson(desktopData)).apply();
-        pref.edit().putString("normalSettings",gson.toJson(normalSettings)).apply();
+        pref.edit().putString("generalSettings",gson.toJson(generalSettings)).apply();
     }
 
-    public static class NormalSettings{
+    public static class GeneralSettings {
         public int desktopPageCount = 1;
+        public int iconSize = 58;
     }
 }

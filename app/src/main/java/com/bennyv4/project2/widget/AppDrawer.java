@@ -20,23 +20,21 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 
 	private Home home;
 
-	private static int pageHeight = 5 , pageWidth = 4;
+	private static int vertCellCount = 5 , horiCellCount = 4;
 
 	private boolean mPortrait,mPrePortrait;
 
 	private int realPageHeight,realPageWidth,
 
-	itemOffset = 20,
+	itemOffset = 25,
 
 	textHeight = 22;
-
-	public static int iconSize = 58;
 
 	private PageIndicator appDrawerIndicator;
 
 	@Override
 	public void onAppUpdated(List<AppManager.App> apps){
-		this.apps = apps;
+		AppDrawer.apps = apps;
 		setAdapter(new Adapter());
 		appDrawerIndicator.setViewPager(this);
 	}
@@ -56,36 +54,38 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 		mPrePortrait = mPortrait;
 		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
 			mPortrait = false;
-			pageWidth = 5;
-			pageHeight = 3;
-			realPageHeight = (int)Tools.convertDpToPixel((itemOffset + iconSize + textHeight) * pageHeight, getContext());
-			realPageWidth =  (int)Tools.convertDpToPixel((itemOffset + iconSize) * pageWidth, getContext());
+			horiCellCount = 5;
+			vertCellCount = 3;
+            calculatePageSize();
 			setAdapter(new Adapter());
 		}
 		else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
 			mPortrait = true;
-			pageWidth = 4;
-			pageHeight = 5;
-			realPageHeight = (int)Tools.convertDpToPixel((itemOffset + iconSize + textHeight) * pageHeight, getContext());
-			realPageWidth =  (int)Tools.convertDpToPixel((itemOffset + iconSize) * pageWidth, getContext());
+			horiCellCount = 4;
+			vertCellCount = 5;
+			calculatePageSize();
 			setAdapter(new Adapter());
 		}
 		super.onConfigurationChanged(newConfig);
 	}
+
+	private void calculatePageSize(){
+        realPageHeight = (int)Tools.convertDpToPixel((itemOffset + LauncherSettings.getInstance(getContext()).generalSettings.iconSize + textHeight) * vertCellCount, getContext());
+        realPageWidth =  (int)Tools.convertDpToPixel((itemOffset + LauncherSettings.getInstance(getContext()).generalSettings.iconSize) * horiCellCount, getContext());
+    }
 
 	private void init(Context c){
 		mPortrait = c.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 		mPrePortrait = mPortrait;
 
 		if(mPortrait){
-			pageWidth = 4;
-			pageHeight = 5;
+			horiCellCount = 4;
+			vertCellCount = 5;
 		} else {
-			pageWidth = 5;
-			pageHeight = 3;
+			horiCellCount = 5;
+			vertCellCount = 3;
 		}
-		realPageHeight = (int)Tools.convertDpToPixel((itemOffset + iconSize + textHeight) * pageHeight, getContext());
-		realPageWidth =  (int)Tools.convertDpToPixel((itemOffset + iconSize) * pageWidth, getContext());
+        calculatePageSize();
 
 		AppManager.getInstance(c).addAppUpdatedListener(this);
 		AppManager.getInstance(c).init();
@@ -105,7 +105,7 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 			for(int i = 0 ; i < getCount() ; i++){
 				ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_appdrawer_page, null);
 				RecyclerView rv = (RecyclerView) layout.findViewById(R.id.rv);
-				rv.setLayoutManager(new GridLayoutManager(getContext(), pageWidth));
+				rv.setLayoutManager(new GridLayoutManager(getContext(), horiCellCount));
 				rv.setAdapter(new AppItemAdapter(i));
 				rv.setOverScrollMode(OVER_SCROLL_NEVER);
 				rv.addItemDecoration(new MyDecor());
@@ -120,7 +120,7 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 		public int getCount(){
 			int page = 0;
 			int appsSize = apps.size();
-			while((appsSize = appsSize - (pageHeight * pageWidth)) >= (pageHeight * pageWidth) || (appsSize > -(pageHeight*pageWidth))){
+			while((appsSize = appsSize - (vertCellCount * horiCellCount)) >= (vertCellCount * horiCellCount) || (appsSize > -(vertCellCount * horiCellCount))){
 				page ++;                                                                           
 			}
 			return page;
@@ -153,7 +153,7 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 
 			if(mPortrait != mPrePortrait){
 				rv.getAdapter().notifyDataSetChanged();
-				((GridLayoutManager)rv.getLayoutManager()).setSpanCount(pageWidth);
+				((GridLayoutManager)rv.getLayoutManager()).setSpanCount(horiCellCount);
 				rv.getLayoutParams().height = realPageHeight;
 				rv.getLayoutParams().width = realPageWidth;
 			}
@@ -205,14 +205,14 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 				iv = (ImageView) itemView.findViewById(R.id.iv);
 				tv = (TextView) itemView.findViewById(R.id.tv);
 
-				iv.getLayoutParams().width = (int)Tools.convertDpToPixel(iconSize, getContext());
-				iv.getLayoutParams().height = (int)Tools.convertDpToPixel(iconSize, getContext());
+				iv.getLayoutParams().width = (int)Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+				iv.getLayoutParams().height = (int)Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
 
 				tv.getLayoutParams().height = (int)Tools.convertDpToPixel(textHeight, getContext());
 			}                                                               
 
 			public void setup(int page, int pos){
-				AppManager.App temp = apps.get(pageHeight * pageWidth * page + pos);
+				AppManager.App temp = apps.get(vertCellCount * horiCellCount * page + pos);
 				app = temp;
 
 				itemView.setOnClickListener(this);
@@ -244,13 +244,13 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 			public int getItemCount(){
 				int page = 0;
 				int appsSize = apps.size();
-				while((appsSize = appsSize - (pageHeight * pageWidth)) >= (pageHeight * pageWidth) || (appsSize > -(pageHeight*pageWidth))){
+				while((appsSize = appsSize - (vertCellCount * horiCellCount)) >= (vertCellCount * horiCellCount) || (appsSize > -(vertCellCount * horiCellCount))){
 					page ++;                                                                               
 				}
 				if(pos == page - 1)
-					return  apps.size() - pos * pageHeight * pageWidth;
+					return  apps.size() - pos * vertCellCount * horiCellCount;
 				else
-					return pageHeight * pageWidth;
+					return vertCellCount * horiCellCount;
 			}
 		}
 
