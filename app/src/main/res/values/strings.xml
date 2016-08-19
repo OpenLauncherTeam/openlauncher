@@ -4,5 +4,7 @@
     <string name="app_name">OpenLauncher</string>
     <string name="hello_world">Hello world!</string>
     <string name="headsup_appuninstalled">This app has uninstalled.</string>
+    <string name="info">Info</string>
+    <string name="uninstall">Uninstall</string>
 
 </resources>

@@ -396,7 +396,7 @@
                     "endOffset": 155
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -415,7 +415,7 @@
                     "endOffset": 263
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -434,7 +434,7 @@
                     "endOffset": 386
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -453,7 +453,7 @@
                     "endOffset": 490
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -468,17 +468,17 @@
                     "startLine": 6,
                     "startColumn": 4,
                     "startOffset": 495,
-                    "endColumn": 116,
-                    "endOffset": 607
+                    "endColumn": 113,
+                    "endOffset": 604
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
                         "startOffset": 495,
-                        "endColumn": 116,
-                        "endOffset": 607
+                        "endColumn": 113,
+                        "endOffset": 604
                     }
                 }
             },
@@ -486,18 +486,18 @@
                 "to": {
                     "startLine": 7,
                     "startColumn": 4,
-                    "startOffset": 612,
+                    "startOffset": 609,
                     "endColumn": 85,
-                    "endOffset": 693
+                    "endOffset": 690
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 612,
+                        "startOffset": 609,
                         "endColumn": 85,
-                        "endOffset": 693
+                        "endOffset": 690
                     }
                 }
             },
@@ -505,18 +505,18 @@
                 "to": {
                     "startLine": 8,
                     "startColumn": 4,
-                    "startOffset": 698,
+                    "startOffset": 695,
                     "endColumn": 110,
-                    "endOffset": 804
+                    "endOffset": 801
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
-                        "startOffset": 698,
+                        "startOffset": 695,
                         "endColumn": 110,
-                        "endOffset": 804
+                        "endOffset": 801
                     }
                 }
             },
@@ -524,18 +524,18 @@
                 "to": {
                     "startLine": 9,
                     "startColumn": 4,
-                    "startOffset": 809,
+                    "startOffset": 806,
                     "endColumn": 115,
-                    "endOffset": 920
+                    "endOffset": 917
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
-                        "startOffset": 809,
+                        "startOffset": 806,
                         "endColumn": 115,
-                        "endOffset": 920
+                        "endOffset": 917
                     }
                 }
             },
@@ -543,18 +543,18 @@
                 "to": {
                     "startLine": 10,
                     "startColumn": 4,
-                    "startOffset": 925,
+                    "startOffset": 922,
                     "endColumn": 79,
-                    "endOffset": 1000
+                    "endOffset": 997
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
-                        "startOffset": 925,
+                        "startOffset": 922,
                         "endColumn": 79,
-                        "endOffset": 1000
+                        "endOffset": 997
                     }
                 }
             },
@@ -562,18 +562,18 @@
                 "to": {
                     "startLine": 11,
                     "startColumn": 4,
-                    "startOffset": 1005,
+                    "startOffset": 1002,
                     "endColumn": 78,
-                    "endOffset": 1079
+                    "endOffset": 1076
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
-                        "startOffset": 1005,
+                        "startOffset": 1002,
                         "endColumn": 78,
-                        "endOffset": 1079
+                        "endOffset": 1076
                     }
                 }
             },
@@ -581,18 +581,18 @@
                 "to": {
                     "startLine": 12,
                     "startColumn": 4,
-                    "startOffset": 1084,
+                    "startOffset": 1081,
                     "endColumn": 83,
-                    "endOffset": 1163
+                    "endOffset": 1160
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
-                        "startOffset": 1084,
+                        "startOffset": 1081,
                         "endColumn": 83,
-                        "endOffset": 1163
+                        "endOffset": 1160
                     }
                 }
             },
@@ -600,18 +600,18 @@
                 "to": {
                     "startLine": 13,
                     "startColumn": 4,
-                    "startOffset": 1168,
+                    "startOffset": 1165,
                     "endColumn": 108,
-                    "endOffset": 1272
+                    "endOffset": 1269
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
-                        "startOffset": 1168,
+                        "startOffset": 1165,
                         "endColumn": 108,
-                        "endOffset": 1272
+                        "endOffset": 1269
                     }
                 }
             },
@@ -619,18 +619,18 @@
                 "to": {
                     "startLine": 14,
                     "startColumn": 4,
-                    "startOffset": 1277,
+                    "startOffset": 1274,
                     "endColumn": 106,
-                    "endOffset": 1379
+                    "endOffset": 1376
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
-                        "startOffset": 1277,
+                        "startOffset": 1274,
                         "endColumn": 106,
-                        "endOffset": 1379
+                        "endOffset": 1376
                     }
                 }
             },
@@ -638,18 +638,18 @@
                 "to": {
                     "startLine": 15,
                     "startColumn": 4,
-                    "startOffset": 1384,
+                    "startOffset": 1381,
                     "endColumn": 100,
-                    "endOffset": 1480
+                    "endOffset": 1477
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
-                        "startOffset": 1384,
+                        "startOffset": 1381,
                         "endColumn": 100,
-                        "endOffset": 1480
+                        "endOffset": 1477
                     }
                 }
             },
@@ -657,18 +657,18 @@
                 "to": {
                     "startLine": 16,
                     "startColumn": 4,
-                    "startOffset": 1485,
+                    "startOffset": 1482,
                     "endColumn": 107,
-                    "endOffset": 1588
+                    "endOffset": 1585
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
-                        "startOffset": 1485,
+                        "startOffset": 1482,
                         "endColumn": 107,
-                        "endOffset": 1588
+                        "endOffset": 1585
                     }
                 }
             },
@@ -676,18 +676,18 @@
                 "to": {
                     "startLine": 17,
                     "startColumn": 4,
-                    "startOffset": 1593,
+                    "startOffset": 1590,
                     "endColumn": 104,
-                    "endOffset": 1693
+                    "endOffset": 1690
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 4,
-                        "startOffset": 1593,
+                        "startOffset": 1590,
                         "endColumn": 104,
-                        "endOffset": 1693
+                        "endOffset": 1690
                     }
                 }
             },
@@ -695,18 +695,18 @@
                 "to": {
                     "startLine": 18,
                     "startColumn": 4,
-                    "startOffset": 1698,
+                    "startOffset": 1695,
                     "endColumn": 106,
-                    "endOffset": 1800
+                    "endOffset": 1797
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 18,
                         "startColumn": 4,
-                        "startOffset": 1698,
+                        "startOffset": 1695,
                         "endColumn": 106,
-                        "endOffset": 1800
+                        "endOffset": 1797
                     }
                 }
             },
@@ -714,18 +714,18 @@
                 "to": {
                     "startLine": 19,
                     "startColumn": 4,
-                    "startOffset": 1805,
+                    "startOffset": 1802,
                     "endColumn": 123,
-                    "endOffset": 1924
+                    "endOffset": 1921
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
-                        "startOffset": 1805,
+                        "startOffset": 1802,
                         "endColumn": 123,
-                        "endOffset": 1924
+                        "endOffset": 1921
                     }
                 }
             },
@@ -733,18 +733,18 @@
                 "to": {
                     "startLine": 20,
                     "startColumn": 4,
-                    "startOffset": 1929,
+                    "startOffset": 1926,
                     "endColumn": 98,
-                    "endOffset": 2023
+                    "endOffset": 2020
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
-                        "startOffset": 1929,
+                        "startOffset": 1926,
                         "endColumn": 98,
-                        "endOffset": 2023
+                        "endOffset": 2020
                     }
                 }
             },
@@ -752,18 +752,18 @@
                 "to": {
                     "startLine": 21,
                     "startColumn": 4,
-                    "startOffset": 2028,
+                    "startOffset": 2025,
                     "endColumn": 100,
-                    "endOffset": 2124
+                    "endOffset": 2121
                 },
                 "from": {
-                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "file": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
-                        "startOffset": 2028,
+                        "startOffset": 2025,
                         "endColumn": 100,
-                        "endOffset": 2124
+                        "endOffset": 2121
                     }
                 }
             }

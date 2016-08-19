@@ -4427,20 +4427,23 @@ containing a value of this type.
         public static final int design_snackbar_background=0x7f02004d;
         public static final int ic_arrow_left_black_48dp=0x7f02004e;
         public static final int ic_close_black_48dp=0x7f02004f;
-        public static final int ic_dots_vertical_black_48dp=0x7f020050;
-        public static final int ic_history_black_48dp=0x7f020051;
-        public static final int ic_launcher=0x7f020052;
-        public static final int ic_magnify_black_48dp=0x7f020053;
-        public static final int ic_microphone_black_48dp=0x7f020054;
-        public static final int notification_template_icon_bg=0x7f02005d;
-        public static final int round_corners=0x7f020055;
-        public static final int vpi__tab_indicator=0x7f020056;
-        public static final int vpi__tab_selected_focused_holo=0x7f020057;
-        public static final int vpi__tab_selected_holo=0x7f020058;
-        public static final int vpi__tab_selected_pressed_holo=0x7f020059;
-        public static final int vpi__tab_unselected_focused_holo=0x7f02005a;
-        public static final int vpi__tab_unselected_holo=0x7f02005b;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f02005c;
+        public static final int ic_delete_black_24dp=0x7f020050;
+        public static final int ic_dots_vertical_black_48dp=0x7f020051;
+        public static final int ic_history_black_48dp=0x7f020052;
+        public static final int ic_info_outline_black_24dp=0x7f020053;
+        public static final int ic_launcher=0x7f020054;
+        public static final int ic_magnify_black_48dp=0x7f020055;
+        public static final int ic_microphone_black_48dp=0x7f020056;
+        public static final int ic_search_black_24dp=0x7f020057;
+        public static final int notification_template_icon_bg=0x7f020060;
+        public static final int round_corners=0x7f020058;
+        public static final int vpi__tab_indicator=0x7f020059;
+        public static final int vpi__tab_selected_focused_holo=0x7f02005a;
+        public static final int vpi__tab_selected_holo=0x7f02005b;
+        public static final int vpi__tab_selected_pressed_holo=0x7f02005c;
+        public static final int vpi__tab_unselected_focused_holo=0x7f02005d;
+        public static final int vpi__tab_unselected_holo=0x7f02005e;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f02005f;
     }
     public static final class id {
         public static final int access_point=0x7f0b0035;
@@ -4467,7 +4470,7 @@ containing a value of this type.
         public static final int account_star=0x7f0b004a;
         public static final int account_star_variant=0x7f0b004b;
         public static final int account_switch=0x7f0b004c;
-        public static final int action0=0x7f0b0630;
+        public static final int action0=0x7f0b0632;
         public static final int action_bar=0x7f0b060b;
         public static final int action_bar_activity_content=0x7f0b0000;
         public static final int action_bar_container=0x7f0b060a;
@@ -4476,7 +4479,7 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f0b05ed;
         public static final int action_bar_title=0x7f0b05ec;
         public static final int action_context_bar=0x7f0b060c;
-        public static final int action_divider=0x7f0b0634;
+        public static final int action_divider=0x7f0b0636;
         public static final int action_menu_divider=0x7f0b0002;
         public static final int action_menu_presenter=0x7f0b0003;
         public static final int action_mode_bar=0x7f0b0608;
@@ -4512,8 +4515,8 @@ containing a value of this type.
         public static final int android=0x7f0b0064;
         public static final int android_debug_bridge=0x7f0b0065;
         public static final int android_studio=0x7f0b0066;
-        public static final int appDrawer=0x7f0b061e;
-        public static final int appDrawerIndicator=0x7f0b061f;
+        public static final int appDrawer=0x7f0b0620;
+        public static final int appDrawerIndicator=0x7f0b0621;
         public static final int apple=0x7f0b0067;
         public static final int apple_finder=0x7f0b0068;
         public static final int apple_ios=0x7f0b0069;
@@ -4572,6 +4575,7 @@ containing a value of this type.
         public static final int barcode_scan=0x7f0b009d;
         public static final int barley=0x7f0b009e;
         public static final int barrel=0x7f0b009f;
+        public static final int baseLayout=0x7f0b061a;
         public static final int basecamp=0x7f0b00a0;
         public static final int basket=0x7f0b00a1;
         public static final int basket_fill=0x7f0b00a2;
@@ -4723,7 +4727,7 @@ containing a value of this type.
         public static final int camera_rear_variant=0x7f0b0131;
         public static final int camera_switch=0x7f0b0132;
         public static final int camera_timer=0x7f0b0133;
-        public static final int cancel_action=0x7f0b0631;
+        public static final int cancel_action=0x7f0b0633;
         public static final int candycane=0x7f0b0134;
         public static final int car=0x7f0b0135;
         public static final int car_battery=0x7f0b0136;
@@ -4786,7 +4790,7 @@ containing a value of this type.
         public static final int chevron_left=0x7f0b016b;
         public static final int chevron_right=0x7f0b016c;
         public static final int chevron_up=0x7f0b016d;
-        public static final int chronometer=0x7f0b0637;
+        public static final int chronometer=0x7f0b0639;
         public static final int church=0x7f0b016e;
         public static final int cisco_webex=0x7f0b016f;
         public static final int city=0x7f0b0170;
@@ -4919,17 +4923,18 @@ containing a value of this type.
         public static final int decor_content_parent=0x7f0b0609;
         public static final int default_activity_button=0x7f0b05f1;
         public static final int delete=0x7f0b01e9;
+        public static final int deleteIcon=0x7f0b0647;
         public static final int delete_variant=0x7f0b01ea;
         public static final int delta=0x7f0b01eb;
-        public static final int design_bottom_sheet=0x7f0b0621;
-        public static final int design_menu_item_action_area=0x7f0b0628;
-        public static final int design_menu_item_action_area_stub=0x7f0b0627;
-        public static final int design_menu_item_text=0x7f0b0626;
-        public static final int design_navigation_view=0x7f0b0625;
+        public static final int design_bottom_sheet=0x7f0b0623;
+        public static final int design_menu_item_action_area=0x7f0b062a;
+        public static final int design_menu_item_action_area_stub=0x7f0b0629;
+        public static final int design_menu_item_text=0x7f0b0628;
+        public static final int design_navigation_view=0x7f0b0627;
         public static final int deskphone=0x7f0b01ec;
-        public static final int desktop=0x7f0b061a;
-        public static final int desktopDock=0x7f0b061d;
-        public static final int desktopIndicator=0x7f0b061b;
+        public static final int desktop=0x7f0b061b;
+        public static final int desktopDock=0x7f0b061f;
+        public static final int desktopIndicator=0x7f0b061c;
         public static final int desktop_mac=0x7f0b01ed;
         public static final int desktop_tower=0x7f0b01ee;
         public static final int details=0x7f0b01ef;
@@ -4955,6 +4960,7 @@ containing a value of this type.
         public static final int dots_vertical=0x7f0b0202;
         public static final int download=0x7f0b0203;
         public static final int drag=0x7f0b0204;
+        public static final int dragOptionPanel=0x7f0b061e;
         public static final int drag_horizontal=0x7f0b0205;
         public static final int drag_vertical=0x7f0b0206;
         public static final int drawing=0x7f0b0207;
@@ -4987,7 +4993,7 @@ containing a value of this type.
         public static final int emoticon_sad=0x7f0b0221;
         public static final int emoticon_tongue=0x7f0b0222;
         public static final int end=0x7f0b0025;
-        public static final int end_padder=0x7f0b063b;
+        public static final int end_padder=0x7f0b063d;
         public static final int engine=0x7f0b0223;
         public static final int engine_outline=0x7f0b0224;
         public static final int enterAlways=0x7f0b0015;
@@ -5238,7 +5244,7 @@ containing a value of this type.
         public static final int icon=0x7f0b05f3;
         public static final int ifRoom=0x7f0b05e6;
         public static final int image=0x7f0b030f;
-        public static final int imageView=0x7f0b062d;
+        public static final int imageView=0x7f0b062f;
         public static final int image_album=0x7f0b0310;
         public static final int image_area=0x7f0b0311;
         public static final int image_area_close=0x7f0b0312;
@@ -5257,17 +5263,18 @@ containing a value of this type.
         public static final int image_multiple=0x7f0b031f;
         public static final int import_icon=0x7f0b0320;
         public static final int inbox=0x7f0b0321;
-        public static final int info=0x7f0b063a;
+        public static final int info=0x7f0b063c;
+        public static final int infoIcon=0x7f0b0648;
         public static final int information=0x7f0b0322;
         public static final int information_outline=0x7f0b0323;
-        public static final int inputContainer=0x7f0b063f;
+        public static final int inputContainer=0x7f0b0641;
         public static final int instagram=0x7f0b0324;
         public static final int instapaper=0x7f0b0325;
         public static final int internet_explorer=0x7f0b0326;
         public static final int invert_colors=0x7f0b0327;
         public static final int item_touch_helper_previous_elevation=0x7f0b0005;
-        public static final int iv=0x7f0b0629;
-        public static final int iv_delete=0x7f0b062f;
+        public static final int iv=0x7f0b062b;
+        public static final int iv_delete=0x7f0b0631;
         public static final int jeepney=0x7f0b0328;
         public static final int jira=0x7f0b0329;
         public static final int jsfiddle=0x7f0b032a;
@@ -5303,7 +5310,7 @@ containing a value of this type.
         public static final int laptop_chromebook=0x7f0b0348;
         public static final int laptop_mac=0x7f0b0349;
         public static final int laptop_windows=0x7f0b034a;
-        public static final int last=0x7f0b0643;
+        public static final int last=0x7f0b0645;
         public static final int lastfm=0x7f0b034b;
         public static final int launch=0x7f0b034c;
         public static final int layers=0x7f0b034d;
@@ -5322,8 +5329,8 @@ containing a value of this type.
         public static final int library_plus=0x7f0b0359;
         public static final int lightbulb=0x7f0b035a;
         public static final int lightbulb_outline=0x7f0b035b;
-        public static final int line1=0x7f0b0635;
-        public static final int line3=0x7f0b0639;
+        public static final int line1=0x7f0b0637;
+        public static final int line3=0x7f0b063b;
         public static final int link=0x7f0b035c;
         public static final int link_off=0x7f0b035d;
         public static final int link_variant=0x7f0b035e;
@@ -5361,7 +5368,7 @@ containing a value of this type.
         public static final int material_ui=0x7f0b037c;
         public static final int math_compass=0x7f0b037d;
         public static final int maxcdn=0x7f0b037e;
-        public static final int media_actions=0x7f0b0633;
+        public static final int media_actions=0x7f0b0635;
         public static final int medium=0x7f0b037f;
         public static final int memory=0x7f0b0380;
         public static final int menu=0x7f0b0381;
@@ -5403,12 +5410,12 @@ containing a value of this type.
         public static final int mouse_variant=0x7f0b03a3;
         public static final int mouse_variant_off=0x7f0b03a4;
         public static final int movie=0x7f0b03a5;
-        public static final int mt_arrow=0x7f0b0640;
-        public static final int mt_clear=0x7f0b0642;
-        public static final int mt_editText=0x7f0b0641;
-        public static final int mt_menu=0x7f0b063e;
-        public static final int mt_recycler=0x7f0b0644;
-        public static final int mt_search=0x7f0b063d;
+        public static final int mt_arrow=0x7f0b0642;
+        public static final int mt_clear=0x7f0b0644;
+        public static final int mt_editText=0x7f0b0643;
+        public static final int mt_menu=0x7f0b0640;
+        public static final int mt_recycler=0x7f0b0646;
+        public static final int mt_search=0x7f0b063f;
         public static final int multiplication=0x7f0b03a6;
         public static final int multiplication_box=0x7f0b03a7;
         public static final int multiply=0x7f0b001b;
@@ -5425,7 +5432,7 @@ containing a value of this type.
         public static final int nature=0x7f0b03b2;
         public static final int nature_people=0x7f0b03b3;
         public static final int navigation=0x7f0b03b4;
-        public static final int navigation_header_container=0x7f0b0624;
+        public static final int navigation_header_container=0x7f0b0626;
         public static final int needle=0x7f0b03b5;
         public static final int nest_protect=0x7f0b03b6;
         public static final int nest_thermostat=0x7f0b03b7;
@@ -5635,7 +5642,7 @@ containing a value of this type.
         public static final int reply=0x7f0b047b;
         public static final int reply_all=0x7f0b047c;
         public static final int reproduction=0x7f0b047d;
-        public static final int requestItem=0x7f0b062c;
+        public static final int requestItem=0x7f0b062e;
         public static final int resize_bottom_right=0x7f0b047e;
         public static final int responsive=0x7f0b047f;
         public static final int rewind=0x7f0b0480;
@@ -5644,7 +5651,7 @@ containing a value of this type.
         public static final int road=0x7f0b0482;
         public static final int road_variant=0x7f0b0483;
         public static final int rocket=0x7f0b0484;
-        public static final int root=0x7f0b063c;
+        public static final int root=0x7f0b063e;
         public static final int rotate_3d=0x7f0b0485;
         public static final int rotate_left=0x7f0b0486;
         public static final int rotate_left_variant=0x7f0b0487;
@@ -5656,7 +5663,7 @@ containing a value of this type.
         public static final int rss_box=0x7f0b048d;
         public static final int ruler=0x7f0b048e;
         public static final int run=0x7f0b048f;
-        public static final int rv=0x7f0b062b;
+        public static final int rv=0x7f0b062d;
         public static final int sale=0x7f0b0490;
         public static final int satellite=0x7f0b0491;
         public static final int satellite_variant=0x7f0b0492;
@@ -5675,7 +5682,7 @@ containing a value of this type.
         public static final int scrollable=0x7f0b05ea;
         public static final int sd=0x7f0b049a;
         public static final int seal=0x7f0b049b;
-        public static final int searchBar=0x7f0b061c;
+        public static final int searchBar=0x7f0b061d;
         public static final int search_badge=0x7f0b060f;
         public static final int search_bar=0x7f0b060e;
         public static final int search_button=0x7f0b0610;
@@ -5750,8 +5757,8 @@ containing a value of this type.
         public static final int sleep_off=0x7f0b04d4;
         public static final int smoking=0x7f0b04d5;
         public static final int smoking_off=0x7f0b04d6;
-        public static final int snackbar_action=0x7f0b0623;
-        public static final int snackbar_text=0x7f0b0622;
+        public static final int snackbar_action=0x7f0b0625;
+        public static final int snackbar_text=0x7f0b0624;
         public static final int snap=0x7f0b0019;
         public static final int snapchat=0x7f0b04d7;
         public static final int snowman=0x7f0b04d8;
@@ -5787,7 +5794,7 @@ containing a value of this type.
         public static final int star_off=0x7f0b04f1;
         public static final int star_outline=0x7f0b04f2;
         public static final int start=0x7f0b0029;
-        public static final int status_bar_latest_event_content=0x7f0b0632;
+        public static final int status_bar_latest_event_content=0x7f0b0634;
         public static final int steam=0x7f0b04f3;
         public static final int steering=0x7f0b04f4;
         public static final int step_backward=0x7f0b04f5;
@@ -5846,8 +5853,8 @@ containing a value of this type.
         public static final int tennis=0x7f0b0527;
         public static final int tent=0x7f0b0528;
         public static final int terrain=0x7f0b0529;
-        public static final int text=0x7f0b062e;
-        public static final int text2=0x7f0b0638;
+        public static final int text=0x7f0b0630;
+        public static final int text2=0x7f0b063a;
         public static final int textSpacerNoButtons=0x7f0b05fe;
         public static final int text_to_speech=0x7f0b052a;
         public static final int text_to_speech_off=0x7f0b052b;
@@ -5865,7 +5872,7 @@ containing a value of this type.
         public static final int ticket_account=0x7f0b0537;
         public static final int ticket_confirmation=0x7f0b0538;
         public static final int tie=0x7f0b0539;
-        public static final int time=0x7f0b0636;
+        public static final int time=0x7f0b0638;
         public static final int timelapse=0x7f0b053a;
         public static final int timer=0x7f0b053b;
         public static final int timer_10=0x7f0b053c;
@@ -5886,7 +5893,7 @@ containing a value of this type.
         public static final int top=0x7f0b002a;
         public static final int topPanel=0x7f0b05f8;
         public static final int tor=0x7f0b0549;
-        public static final int touch_outside=0x7f0b0620;
+        public static final int touch_outside=0x7f0b0622;
         public static final int traffic_light=0x7f0b054a;
         public static final int train=0x7f0b054b;
         public static final int tram=0x7f0b054c;
@@ -5911,7 +5918,7 @@ containing a value of this type.
         public static final int tshirt_v=0x7f0b055f;
         public static final int tumblr=0x7f0b0560;
         public static final int tumblr_reblog=0x7f0b0561;
-        public static final int tv=0x7f0b062a;
+        public static final int tv=0x7f0b062c;
         public static final int twitch=0x7f0b0562;
         public static final int twitter=0x7f0b0563;
         public static final int twitter_box=0x7f0b0564;
@@ -6119,6 +6126,7 @@ containing a value of this type.
         public static final int select_dialog_multichoice_material=0x7f030035;
         public static final int select_dialog_singlechoice_material=0x7f030036;
         public static final int support_simple_spinner_dropdown_item=0x7f030037;
+        public static final int view_dragoptionpanel_horiiconlist=0x7f030038;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f050000;
@@ -6159,8 +6167,10 @@ containing a value of this type.
         public static final int character_counter_pattern=0x7f050024;
         public static final int headsup_appuninstalled=0x7f050025;
         public static final int hello_world=0x7f050026;
+        public static final int info=0x7f050027;
         public static final int status_bar_notification_info_overflow=0x7f050013;
-        public static final int title_activity_main2=0x7f050027;
+        public static final int title_activity_main2=0x7f050028;
+        public static final int uninstall=0x7f050029;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f07008d;
@@ -7493,6 +7503,74 @@ containing a value of this type.
           @attr name com.bennyv4.project2:tickMarkTintMode
         */
         public static final int AppCompatSeekBar_tickMarkTintMode = 3;
+        /** Attributes that can be used with a AppCompatTextHelper.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #AppCompatTextHelper_android_drawableBottom android:drawableBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #AppCompatTextHelper_android_drawableEnd android:drawableEnd}</code></td><td></td></tr>
+           <tr><td><code>{@link #AppCompatTextHelper_android_drawableLeft android:drawableLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #AppCompatTextHelper_android_drawableRight android:drawableRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #AppCompatTextHelper_android_drawableStart android:drawableStart}</code></td><td></td></tr>
+           <tr><td><code>{@link #AppCompatTextHelper_android_drawableTop android:drawableTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #AppCompatTextHelper_android_textAppearance android:textAppearance}</code></td><td></td></tr>
+           </table>
+           @see #AppCompatTextHelper_android_drawableBottom
+           @see #AppCompatTextHelper_android_drawableEnd
+           @see #AppCompatTextHelper_android_drawableLeft
+           @see #AppCompatTextHelper_android_drawableRight
+           @see #AppCompatTextHelper_android_drawableStart
+           @see #AppCompatTextHelper_android_drawableTop
+           @see #AppCompatTextHelper_android_textAppearance
+         */
+        public static final int[] AppCompatTextHelper = {
+            0x01010034, 0x0101016d, 0x0101016e, 0x0101016f,
+            0x01010170, 0x01010392, 0x01010393
+        };
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#drawableBottom}
+          attribute's value can be found in the {@link #AppCompatTextHelper} array.
+          @attr name android:drawableBottom
+        */
+        public static final int AppCompatTextHelper_android_drawableBottom = 2;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#drawableEnd}
+          attribute's value can be found in the {@link #AppCompatTextHelper} array.
+          @attr name android:drawableEnd
+        */
+        public static final int AppCompatTextHelper_android_drawableEnd = 6;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#drawableLeft}
+          attribute's value can be found in the {@link #AppCompatTextHelper} array.
+          @attr name android:drawableLeft
+        */
+        public static final int AppCompatTextHelper_android_drawableLeft = 3;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#drawableRight}
+          attribute's value can be found in the {@link #AppCompatTextHelper} array.
+          @attr name android:drawableRight
+        */
+        public static final int AppCompatTextHelper_android_drawableRight = 4;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#drawableStart}
+          attribute's value can be found in the {@link #AppCompatTextHelper} array.
+          @attr name android:drawableStart
+        */
+        public static final int AppCompatTextHelper_android_drawableStart = 5;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#drawableTop}
+          attribute's value can be found in the {@link #AppCompatTextHelper} array.
+          @attr name android:drawableTop
+        */
+        public static final int AppCompatTextHelper_android_drawableTop = 1;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#textAppearance}
+          attribute's value can be found in the {@link #AppCompatTextHelper} array.
+          @attr name android:textAppearance
+        */
+        public static final int AppCompatTextHelper_android_textAppearance = 0;
         /** Attributes that can be used with a AppCompatTextView.
            <p>Includes the following attributes:</p>
            <table>

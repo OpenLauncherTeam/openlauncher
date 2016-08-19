@@ -11,7 +11,7 @@
     <string msgid="121134116657445385" name="abc_capital_off">"ပိတ်"</string>
     <string msgid="3405795526292276155" name="abc_capital_on">"ဖွင့်"</string>
     <string msgid="7723749260725869598" name="abc_search_hint">"ရှာဖွေပါ..."</string>
-    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"ရှာစရာ အချက်အလက်များ ရှင်းလင်းရန်"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"ရှာစရာ အချက်အလက်များ ဖယ်ရှားရန်"</string>
     <string msgid="2550479030709304392" name="abc_searchview_description_query">"ရှာစရာ အချက်အလက်နေရာ"</string>
     <string msgid="8264924765203268293" name="abc_searchview_description_search">"ရှာဖွေရန်"</string>
     <string msgid="8928215447528550784" name="abc_searchview_description_submit">"ရှာဖွေစရာ အချက်အလက်ကို အတည်ပြုရန်"</string>

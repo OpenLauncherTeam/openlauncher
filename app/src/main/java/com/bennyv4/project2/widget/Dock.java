@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.DragEvent;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +14,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bennyv4.project2.Home;
 import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.AppManager;
 import com.bennyv4.project2.util.DragAction;
 import com.bennyv4.project2.util.LauncherSettings;
 import com.bennyv4.project2.util.Tools;
 
+import java.util.ArrayList;
+
 public class Dock extends CellContainer implements View.OnDragListener {
+
+    public View previousItemView;
+    public Desktop.Item previousItem;
 
     public Dock (Context c){
         super(c);
@@ -59,60 +66,42 @@ public class Dock extends CellContainer implements View.OnDragListener {
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
                 Desktop.Item item = intent.getParcelableExtra("mDragData");
-                if(item.type == Desktop.Item.Type.APP)
-                    addAppToDock(item, (int)p2.getX(), (int)p2.getY());
+                if(item.type == Desktop.Item.Type.APP) {
+                    Home.desktop.consumeRevert();
+                    Home.dock.consumeRevert();
+                    addAppToDock(item, (int) p2.getX(), (int) p2.getY());
+                }
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
+                revertLastDraggedItem();
                 setHideGrid(true);
                 return true;
         }
         return false;
     }
 
-    public void addAppToPosition(final Desktop.Item item){
-        ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, null);
-        TextView tv = (TextView) item_layout.findViewById(R.id.tv);
-        ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
-        iv.getLayoutParams().width = (int) Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize,getContext());
+    public void consumeRevert(){
+        previousItem = null;
+        previousItemView = null;
+    }
 
-        final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(),item.actions[0].getComponent().getClassName());
-        if (app == null){
-            LauncherSettings.getInstance(getContext()).dockData.remove(item);
-            return;
+    public void revertLastDraggedItem(){
+        if (previousItemView != null) {
+           addViewToGrid(previousItemView);
+
+            LauncherSettings.getInstance(getContext()).dockData.add(previousItem);
+
+            previousItem = null;
+            previousItemView = null;
         }
+    }
 
-        tv.setText(app.appName);
-        tv.setTextColor(Color.WHITE);
-        tv.setVisibility(View.GONE);
-        iv.setImageDrawable(app.icon);
-        item_layout.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Intent i = new Intent();
-                i.putExtra("mDragData", Desktop.Item.newAppItem(app));
-                ClipData data = ClipData.newIntent("mDragIntent", i);
-                view.startDrag(data, new DragShadowBuilder(view), DragAction.ACTION_APP, 0);
-
-                //Remove the item from settings
-                LauncherSettings.getInstance(getContext()).dockData.remove(item);
-                //end
-
-                removeView(view);
-                return true;
-            }
-        });
-        item_layout.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Tools.createScaleInScaleOutAnim(view, new Runnable() {
-                    @Override
-                    public void run() {
-                        Tools.startApp(getContext(),app);
-                    }
-                });
-            }
-        });
-        addViewToGrid(item_layout,item.x,item.y);
+    public void addAppToPosition(final Desktop.Item item){
+        View itemView = getAppItemView(item);
+        if (itemView == null){
+            LauncherSettings.getInstance(getContext()).dockData.remove(item);
+        }else
+            addViewToGrid(itemView,item.x,item.y);
     }
 
     public void addAppToDock(final Desktop.Item item, int x, int y){
@@ -125,52 +114,66 @@ public class Dock extends CellContainer implements View.OnDragListener {
             LauncherSettings.getInstance(getContext()).dockData.add(item);
             //end
 
-            ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, null);
-            TextView tv = (TextView) item_layout.findViewById(R.id.tv);
-            ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
-            iv.getLayoutParams().width = (int) Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize,getContext());
-
-            final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(),item.actions[0].getComponent().getClassName());
-            if (app == null)
-                return;
-
-            tv.setText(app.appName);
-            tv.setTextColor(Color.WHITE);
-            tv.setVisibility(View.GONE);
-            iv.setImageDrawable(app.icon);
-            item_layout.setLayoutParams(positionToLayoutPrams);
-            item_layout.setOnLongClickListener(new OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    Intent i = new Intent();
-                    i.putExtra("mDragData", Desktop.Item.newAppItem(app));
-                    ClipData data = ClipData.newIntent("mDragIntent", i);
-                    view.startDrag(data, new DragShadowBuilder(view), DragAction.ACTION_APP, 0);
-
-                    //Remove the item from settings
-                    LauncherSettings.getInstance(getContext()).dockData.remove(item);
-                    //end
-
-                    removeView(view);
-                    return true;
-                }
-            });
-            item_layout.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Tools.createScaleInScaleOutAnim(view, new Runnable() {
-                        @Override
-                        public void run() {
-                            Tools.startApp(getContext(),app);
-                        }
-                    });
-                }
-            });
-            addView(item_layout);
+            View itemView = getAppItemView(item);
+            if (itemView != null){
+                itemView.setLayoutParams(positionToLayoutPrams);
+                addView(itemView);
+            }
         }
         else{
             Toast.makeText(getContext(), "Occupied", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private View getAppItemView(final Desktop.Item item){
+        ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, null);
+        TextView tv = (TextView) item_layout.findViewById(R.id.tv);
+        ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
+
+        iv.getLayoutParams().width = (int) Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+        iv.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;//(int) Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+
+        final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(), item.actions[0].getComponent().getClassName());
+        if (app == null) {
+            return null;
+        }
+
+        tv.setText(app.appName);
+        tv.setTextColor(Color.WHITE);
+        tv.setVisibility(View.GONE);
+        iv.setImageDrawable(app.icon);
+        item_layout.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                Intent i = new Intent();
+                i.putExtra("mDragData", Desktop.Item.newAppItem(app));
+                ClipData data = ClipData.newIntent("mDragIntent", i);
+                view.startDrag(data, new DragShadowBuilder(view), DragAction.ACTION_APP, 0);
+
+                //Remove the item from settings
+                LauncherSettings.getInstance(getContext()).dockData.remove(item);
+                //end
+
+                previousItemView = view;
+                previousItem = item;
+                removeView(view);
+                return true;
+            }
+        });
+        item_layout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tools.createScaleInScaleOutAnim(view, new Runnable() {
+                    @Override
+                    public void run() {
+                        Tools.startApp(getContext(), app);
+                    }
+                });
+            }
+        });
+
+        return item_layout;
     }
 
 }
