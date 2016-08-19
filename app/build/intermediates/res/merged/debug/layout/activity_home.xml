@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/baseLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,6 +19,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchBar" />
+
+    <com.bennyv4.project2.widget.DragOptionPanel
+        android:id="@+id/dragOptionPanel"
+		android:layout_marginLeft="8dp"
+		android:layout_marginRight="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="58dp">
+
+    </com.bennyv4.project2.widget.DragOptionPanel>
 
 	<com.viewpagerindicator.CirclePageIndicator
 		android:padding="5dp"

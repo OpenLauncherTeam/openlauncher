@@ -112,6 +112,10 @@ public class CellContainer extends ViewGroup
 		addView(view);
 	}
 
+	public void addViewToGrid(View view){
+		addView(view);
+	}
+
 	@Override
 	public void removeView(View view) {
 		LayoutParams lp = (CellContainer.LayoutParams) view.getLayoutParams();

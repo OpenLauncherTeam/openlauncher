@@ -16,7 +16,7 @@ import com.viewpagerindicator.PageIndicator;
 
 public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedListener
 {
-	private static List<AppManager.App> apps;
+	private List<AppManager.App> apps;
 
 	private Home home;
 
@@ -26,7 +26,9 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 
 	private int realPageHeight,realPageWidth,
 
-	itemOffset = 25,
+	vertItemOffset,
+
+	horiItemOffset,
 
 	textHeight = 22;
 
@@ -34,7 +36,7 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 
 	@Override
 	public void onAppUpdated(List<AppManager.App> apps){
-		AppDrawer.apps = apps;
+		this.apps = apps;
 		setAdapter(new Adapter());
 		appDrawerIndicator.setViewPager(this);
 	}
@@ -54,24 +56,36 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 		mPrePortrait = mPortrait;
 		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
 			mPortrait = false;
-			horiCellCount = 5;
-			vertCellCount = 3;
+            setLandscapeValue();
             calculatePageSize();
 			setAdapter(new Adapter());
 		}
 		else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
 			mPortrait = true;
-			horiCellCount = 4;
-			vertCellCount = 5;
+            setPortraitValue();
 			calculatePageSize();
 			setAdapter(new Adapter());
 		}
 		super.onConfigurationChanged(newConfig);
 	}
 
+    private void setPortraitValue(){
+        horiCellCount = 4;
+        vertCellCount = 5;
+        vertItemOffset = 22;
+        horiItemOffset = 21;
+    }
+
+    private void setLandscapeValue(){
+        horiCellCount = 5;
+        vertCellCount = 3;
+        vertItemOffset = 18;
+        horiItemOffset = 30;
+    }
+
 	private void calculatePageSize(){
-        realPageHeight = (int)Tools.convertDpToPixel((itemOffset + LauncherSettings.getInstance(getContext()).generalSettings.iconSize + textHeight) * vertCellCount, getContext());
-        realPageWidth =  (int)Tools.convertDpToPixel((itemOffset + LauncherSettings.getInstance(getContext()).generalSettings.iconSize) * horiCellCount, getContext());
+        realPageHeight = (int)Tools.convertDpToPixel((vertItemOffset + LauncherSettings.getInstance(getContext()).generalSettings.iconSize + textHeight) * vertCellCount, getContext());
+        realPageWidth =  (int)Tools.convertDpToPixel((horiItemOffset + LauncherSettings.getInstance(getContext()).generalSettings.iconSize) * horiCellCount, getContext());
     }
 
 	private void init(Context c){
@@ -79,11 +93,9 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 		mPrePortrait = mPortrait;
 
 		if(mPortrait){
-			horiCellCount = 4;
-			vertCellCount = 5;
+            setPortraitValue();
 		} else {
-			horiCellCount = 5;
-			vertCellCount = 3;
+			setLandscapeValue();
 		}
         calculatePageSize();
 
@@ -167,10 +179,10 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 		{
 			@Override
 			public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state){
-				outRect.top = itemOffset;
-				outRect.bottom = itemOffset;
-				outRect.left = itemOffset;
-				outRect.right = itemOffset;
+				outRect.top = vertItemOffset;
+				outRect.bottom = vertItemOffset;
+				outRect.left = horiItemOffset;
+				outRect.right = horiItemOffset;
 			}
 		}
 

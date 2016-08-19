@@ -16,7 +16,7 @@
     <string msgid="8264924765203268293" name="abc_searchview_description_search">"Որոնել"</string>
     <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Ուղարկել հարցումը"</string>
     <string msgid="893419373245838918" name="abc_searchview_description_voice">"Ձայնային որոնում"</string>
-    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Տարածել"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Կիսվել"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Տարածել ըստ %s"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Թաքցնել"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
