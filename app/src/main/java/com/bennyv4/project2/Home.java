@@ -14,10 +14,13 @@ import android.view.View.*;
 import android.view.animation.*;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bennyv4.project2.util.AppManager;
 import com.bennyv4.project2.util.AppUpdateReceiver;
+import com.bennyv4.project2.util.DragNavigationControl;
+import com.bennyv4.project2.widget.DragOptionView;
 import com.bennyv4.project2.util.LauncherSettings;
 import com.bennyv4.project2.util.Tools;
 import com.bennyv4.project2.widget.*;
@@ -39,7 +42,8 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
     CirclePageIndicator appDrawerIndicator, desktopIndicator;
     Animator appDrawerAnimator;
     MaterialSearchBar searchBar;
-    DragOptionPanel dragOptionPanel;
+    DragOptionView dragOptionView;
+    LinearLayout desktopEditOptionView;
     BroadcastReceiver appUpdateReceiver;
 
     @Override
@@ -61,11 +65,46 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
         desktopIndicator = (CirclePageIndicator) findViewById(R.id.desktopIndicator);
         searchBar = (MaterialSearchBar) findViewById(R.id.searchBar);
         appDrawerBtn = (FrameLayout) getLayoutInflater().inflate(R.layout.item_appdrawerbtn, null);
-        dragOptionPanel = (DragOptionPanel) findViewById(R.id.dragOptionPanel);
+        desktopEditOptionView = (LinearLayout) findViewById(R.id.desktopeditoptionpanel);
+        dragOptionView = (DragOptionView) findViewById(R.id.dragOptionPanel);
     }
 
     private void initViews() {
+        DragNavigationControl dragNavigationControl = new DragNavigationControl(findViewById(R.id.left),findViewById(R.id.right));
+
         appDrawer.withHome(this, appDrawerIndicator);
+
+        desktop.listener = new Desktop.OnDestopEditListener() {
+            @Override
+            public void onStart() {
+                dragOptionView.setAutoHideView(null);
+                desktopEditOptionView.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+                searchBar.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+                dock.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+            }
+
+            @Override
+            public void onFinished() {
+                dragOptionView.setAutoHideView(searchBar);
+                desktopEditOptionView.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+                searchBar.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+                dock.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+            }
+        };
+
+        desktopEditOptionView.findViewById(R.id.removepage).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                desktop.removeCurrentPage();
+            }
+        });
+        desktopEditOptionView.findViewById(R.id.setashomepage).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage = desktop.getCurrentItem();
+            }
+        });
+
         desktopIndicator.setViewPager(desktop);
 
         Drawable appDrawerBtnIcon = MaterialDrawableBuilder.with(this)
@@ -78,7 +117,8 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
         appDrawerIcon.setImageDrawable(appDrawerBtnIcon);
         appDrawerBtn.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View p1) {
+            public void onClick(View view) {
+                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                 openAppDrawer();
             }
         });
@@ -89,17 +129,7 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
             searchBar.setLastSuggestions(history);
         searchBar.setOnSearchActionListener(this);
 
-        dragOptionPanel.setAutoHideView(searchBar);
-
-        AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
-            boolean fired = false;
-            @Override
-            public void onAppUpdated(List<AppManager.App> apps) {
-                if (fired)return;
-                fired = true;
-                initDesktopItem();
-            }
-        });
+        dragOptionView.setAutoHideView(searchBar);
     }
 
     private void registerAppUpdateReceiver() {
@@ -110,17 +140,6 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
         filter.addDataScheme("package");
         appUpdateReceiver = new AppUpdateReceiver();
         registerReceiver(appUpdateReceiver, filter);
-    }
-
-    private void initDesktopItem(){
-        for (Desktop.Item item : LauncherSettings.getInstance(this).dockData) {
-            dock.addAppToPosition(item);
-        }
-        for (int i = 0 ; i < LauncherSettings.getInstance(this).desktopData.size() ; i++){
-            for (int j = 0 ; j < LauncherSettings.getInstance(this).desktopData.get(i).size() ; j++){
-                desktop.addAppToPagePosition(LauncherSettings.getInstance(this).desktopData.get(i).get(j),i);
-            }
-        }
     }
 
     //region ACTIVITYLIFECYCLE
@@ -139,12 +158,14 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
 
     @Override
     public void onBackPressed() {
+        desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
         if (appDrawer.getVisibility() == View.VISIBLE)
             closeAppDrawer();
     }
 
     @Override
     protected void onResume() {
+        desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
         if (appDrawer.getVisibility() == View.VISIBLE)
             closeAppDrawer();
         super.onResume();
@@ -215,7 +236,7 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
                 appDrawerBtn.setVisibility(View.VISIBLE);
                 dock.animate().alpha(1);
                 desktop.animate().alpha(1);
-                if (!dragOptionPanel.dragging)
+                if (!dragOptionView.dragging)
                     searchBar.animate().alpha(1);
                 appDrawerBtn.animate().scaleX(1).scaleY(1);
             }

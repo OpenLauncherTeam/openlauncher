@@ -1,70 +1,92 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:id="@+id/baseLayout"
+    android:id="@+id/baseLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-	<com.bennyv4.project2.widget.Desktop
-		android:id="@+id/desktop"
-        android:layout_marginTop="70dp"
-		android:layout_above="@+id/desktopIndicator"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"/>
+    <com.bennyv4.project2.widget.Desktop
+        android:id="@+id/desktop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/desktopIndicator"
+        android:layout_marginTop="70dp" />
 
     <com.mancj.materialsearchbar.MaterialSearchBar
-        app:speechMode="true"
-        app:hint="Google"
-        app:maxSuggestionsCount="5"
-        android:layout_alignParentTop="true"
+        android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searchBar" />
+        android:layout_alignParentTop="true"
+        app:hint="Google"
+        app:maxSuggestionsCount="5"
+        app:speechMode="true" />
 
-    <com.bennyv4.project2.widget.DragOptionPanel
+    <include
+        android:id="@+id/desktopeditoptionpanel"
+        layout="@layout/view_desktopeditoption"/>
+
+    <com.bennyv4.project2.widget.DragOptionView
         android:id="@+id/dragOptionPanel"
-		android:layout_marginLeft="8dp"
-		android:layout_marginRight="8dp"
         android:layout_width="match_parent"
-        android:layout_height="58dp">
+        android:layout_height="58dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
 
-    </com.bennyv4.project2.widget.DragOptionPanel>
+    </com.bennyv4.project2.widget.DragOptionView>
 
-	<com.viewpagerindicator.CirclePageIndicator
-		android:padding="5dp"
-		android:layout_above="@+id/desktopDock"
-		android:layout_marginTop="10dp"
-		android:id="@+id/desktopIndicator"
-		android:layout_height="wrap_content"
-		android:layout_width="match_parent"/>
+    <View
+        android:alpha="0"
+        android:id="@+id/left"
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/desktopIndicator"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/outlinebg" />
 
-	<com.bennyv4.project2.widget.Dock
-		android:id="@+id/desktopDock"
-		android:layout_alignParentBottom="true"
-		android:layout_marginBottom="10dp"
-		android:layout_width="match_parent"
-		android:layout_height="75dp"/>
+    <View
+        android:layout_alignParentRight="true"
+        android:alpha="0"
+        android:id="@+id/right"
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/desktopIndicator"
+        android:layout_gravity="end"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/outlinebg" />
 
-	<io.codetail.widget.RevealFrameLayout
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent">
-		
-		<com.bennyv4.project2.widget.AppDrawer
-			android:visibility="invisible"
-			android:id="@+id/appDrawer"
-			android:layout_marginBottom="24dp"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"/>
-		
-		<com.viewpagerindicator.CirclePageIndicator
-			android:padding="5dp"
-			android:visibility="invisible"
-			android:layout_gravity="bottom"
-			android:layout_marginBottom="10dp"
-			android:id="@+id/appDrawerIndicator"
-			android:layout_height="wrap_content"
-			android:layout_width="match_parent"/>
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/desktopIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/desktopDock"
+        android:padding="5dp" />
 
-	</io.codetail.widget.RevealFrameLayout>
+    <com.bennyv4.project2.widget.Dock
+        android:id="@+id/desktopDock"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp" />
+
+    <io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.bennyv4.project2.widget.AppDrawer
+            android:id="@+id/appDrawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="24dp"
+            android:visibility="invisible" />
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/appDrawerIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
+            android:visibility="invisible" />
+
+    </io.codetail.widget.RevealFrameLayout>
 
 </RelativeLayout>

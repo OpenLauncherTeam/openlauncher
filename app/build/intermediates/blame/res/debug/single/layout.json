@@ -12,12 +12,12 @@
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\select_dialog_singlechoice_material.xml"
     },
     {
-        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
-        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
-    },
-    {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
     },
     {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
@@ -64,6 +64,10 @@
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\layout\\design_navigation_menu_item.xml"
     },
     {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\view_dragoption_horiiconlist.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\layout\\view_dragoption_horiiconlist.xml"
+    },
+    {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\notification_template_part_time.xml"
     },
@@ -82,6 +86,10 @@
     {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_text.xml",
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\layout\\design_layout_tab_text.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\view_desktopeditoption.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\layout\\view_desktopeditoption.xml"
     },
     {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
@@ -234,10 +242,6 @@
     {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item.xml",
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\layout\\design_navigation_item.xml"
-    },
-    {
-        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\view_dragoptionpanel_horiiconlist.xml",
-        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\layout\\view_dragoptionpanel_horiiconlist.xml"
     },
     {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",

@@ -1,11 +1,15 @@
 package com.bennyv4.project2.widget;
 
-import android.content.*;
-import android.view.*;
-import android.util.*;
-import android.graphics.*;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.bennyv4.project2.util.Tools;
+import com.bennyv4.project2.R;
 
 public class CellContainer extends ViewGroup
 {
@@ -41,6 +45,7 @@ public class CellContainer extends ViewGroup
 	}
 
 	public void init(){
+
 		occupied = new boolean[cellSpanHori][cellSpanVert];
 
 		for(int i = 0 ; i < cellSpanHori ; i++){
@@ -51,7 +56,9 @@ public class CellContainer extends ViewGroup
 		
 		setWillNotDraw(false);
 		mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		mPaint.setStyle(Paint.Style.FILL);
+		mPaint.setStyle(Paint.Style.STROKE);
+		mPaint.setStrokeWidth(2f);
+		mPaint.setStrokeJoin(Paint.Join.ROUND);
 		mPaint.setColor(Color.WHITE);
 		mPaint.setAlpha(0);
 	}
@@ -61,7 +68,7 @@ public class CellContainer extends ViewGroup
 		super.onDraw(canvas);
 
 		
-		float s = 5f;
+		float s = 7f;
 		for(int x = 0 ; x < cellSpanHori ; x++){
 			for(int y = 0 ; y < cellSpanVert ; y++){
 				Rect cell = cells[x][y];

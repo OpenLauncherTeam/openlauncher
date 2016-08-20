@@ -40,6 +40,10 @@
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\drawable\\abc_btn_radio_material.xml"
     },
     {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\outlinebg.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\outlinebg.xml"
+    },
+    {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
     },
@@ -260,8 +264,16 @@
         "source": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\drawable\\abc_textfield_search_material.xml"
     },
     {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_clear_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_clear_black_24dp.xml"
+    },
+    {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_seekbar_thumb_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_star_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_star_black_24dp.xml"
     },
     {
         "merged": "C:\\Users\\USER\\Desktop\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
