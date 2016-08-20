@@ -50,6 +50,7 @@ public class DragNavigationControl {
                     case DragEvent.ACTION_DRAG_STARTED:
                         switch ((DragAction) dragEvent.getLocalState()) {
                             case ACTION_APP:
+                            case ACTION_WIDGET:
                                 leftView.animate().alpha(1);
                                 return true;
                         }
@@ -86,6 +87,7 @@ public class DragNavigationControl {
                     case DragEvent.ACTION_DRAG_STARTED:
                         switch ((DragAction) dragEvent.getLocalState()) {
                             case ACTION_APP:
+                            case ACTION_WIDGET:
                                 rightView.animate().alpha(1);
                                 return true;
                         }

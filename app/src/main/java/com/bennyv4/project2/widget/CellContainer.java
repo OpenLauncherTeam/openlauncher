@@ -45,7 +45,6 @@ public class CellContainer extends ViewGroup
 	}
 
 	public void init(){
-
 		occupied = new boolean[cellSpanHori][cellSpanVert];
 
 		for(int i = 0 ; i < cellSpanHori ; i++){
@@ -109,12 +108,27 @@ public class CellContainer extends ViewGroup
 	@Override
 	public void addView(View child){
 		LayoutParams lp = (CellContainer.LayoutParams) child.getLayoutParams();
-		occupied[lp.x][lp.y] = true;
+        setOccupied(true,lp);
 		super.addView(child);
 	}
 
-	public void addViewToGrid(View view, int x, int y){
-		LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,x,y);
+    @Override
+    public void removeView(View view) {
+        LayoutParams lp = (CellContainer.LayoutParams) view.getLayoutParams();
+        setOccupied(false,lp);
+        super.removeView(view);
+    }
+
+    private void setOccupied(boolean b,LayoutParams lp){
+        for (int x = lp.x ; x < lp.x + lp.xSpan ; x++){
+            for (int y = lp.y ; y < lp.y + lp.ySpan ; y++){
+                occupied[x][y] = b;
+            }
+        }
+    }
+
+	public void addViewToGrid(View view, int x, int y,int xSpan,int ySpan){
+		LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,x,y,xSpan,ySpan);
 		view.setLayoutParams(lp);
 		addView(view);
 	}
@@ -123,14 +137,7 @@ public class CellContainer extends ViewGroup
 		addView(view);
 	}
 
-	@Override
-	public void removeView(View view) {
-		LayoutParams lp = (CellContainer.LayoutParams) view.getLayoutParams();
-		occupied[lp.x][lp.y] = false;
-		super.removeView(view);
-	}
-
-	public LayoutParams positionToLayoutPrams(int mX, int mY){
+	public LayoutParams positionToLayoutPrams(int mX, int mY, int xSpan, int ySpan){
 		for(int x = 0 ; x < cellSpanHori ; x++){
 			for(int y = 0 ; y < cellSpanVert ; y++){
 				Rect cell = cells[x][y];
@@ -138,7 +145,33 @@ public class CellContainer extends ViewGroup
 					if(occupied[x][y]){
 						return null;
 					}
-					return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, x, y);
+
+                    int dx = x;
+                    int dy = y;
+                    if (xSpan > 1) {
+                        dx = x + xSpan;
+                        if (dx >= cellSpanHori - 1) {
+                            dx = cellSpanHori - 1;
+                            xSpan = dx - x+1;
+                        }
+                    }
+                    if (ySpan > 1) {
+                        dy = y + ySpan;
+                        if (dy >= cellSpanVert - 1) {
+                            dy = cellSpanVert - 1;
+                            ySpan = dy - y+1;
+                        }
+                    }
+
+                    for (int x2 = x ; x2 < dx ; x2++){
+                        for (int y2 = y ; y < dy ; y2++){
+                            if(occupied[x2][y2]){
+                                return null;
+                            }
+                        }
+                    }
+
+					return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, x, y,xSpan,ySpan);
 				}
 			}
 		}
@@ -170,8 +203,20 @@ public class CellContainer extends ViewGroup
 			int childHeight = lp.ySpan * cellHeight;
             child.measure(MeasureSpec.makeMeasureSpec(childWidth, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(childHeight, MeasureSpec.EXACTLY));
 
-			Rect rect = cells[lp.x][lp.y];
-            child.layout(rect.left, rect.top, rect.right, rect.bottom);
+			Rect upRect = cells[lp.x][lp.y];
+            Rect downRect = new Rect();
+            if (lp.x+lp.xSpan-1 < cellSpanHori && lp.y+lp.ySpan-1 < cellSpanVert)
+                downRect = cells[lp.x+lp.xSpan-1][lp.y+lp.ySpan-1];
+
+            if (lp.xSpan == 1 && lp.ySpan == 1)
+                child.layout(upRect.left, upRect.top, upRect.right, upRect.bottom);
+            else if (lp.xSpan > 1 && lp.ySpan > 1)
+                child.layout(upRect.left, upRect.top, downRect.right, downRect.bottom);
+            else if (lp.xSpan > 1)
+                child.layout(upRect.left, upRect.top, downRect.right, upRect.bottom);
+            else if (lp.ySpan > 1)
+                child.layout(upRect.left, upRect.top, upRect.right, downRect.bottom);
+
         }
     }
 
@@ -218,6 +263,16 @@ public class CellContainer extends ViewGroup
 			this.x = x;
 			this.y = y;
 		}
+
+        public LayoutParams(int w, int h, int x, int y,int xSpan,int ySpan){
+            super(w, h);
+
+            this.x = x;
+            this.y = y;
+
+            this.xSpan = xSpan;
+            this.ySpan = ySpan;
+        }
 
 		public LayoutParams(int w, int h){
 			super(w, h);

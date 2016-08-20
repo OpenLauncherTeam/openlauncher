@@ -11,14 +11,53 @@
         android:layout_above="@+id/desktopIndicator"
         android:layout_marginTop="70dp" />
 
-    <com.mancj.materialsearchbar.MaterialSearchBar
+    <android.support.v7.widget.CardView
+        android:onClick="onSearch"
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
+        android:layout_height="54dp"
+        app:cardElevation="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true" >
+
+            <ImageView
+                android:onClick="onVoiceSearch"
+                android:layout_marginRight="14dp"
+                android:layout_gravity="center_vertical|end"
+                android:src="@drawable/ic_mic_black_24dp"
+                android:tint="#686868"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <DigitalClock
+                android:layout_marginLeft="14dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="#686868"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </android.support.v7.widget.CardView>
+
+    <Button
+        android:alpha="0"
+        android:visibility="invisible"
+        android:id="@+id/addwidgetbtn"
+        android:textColor="@android:color/white"
+        android:padding="20dp"
+        android:layout_marginBottom="84dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:onClick="pickWidget"
+        android:gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        app:hint="Google"
-        app:maxSuggestionsCount="5"
-        app:speechMode="true" />
+        android:drawableLeft="@drawable/ic_dashboard_dark_24dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/add_widget"
+        />
 
     <include
         android:id="@+id/desktopeditoptionpanel"
@@ -63,7 +102,7 @@
     <com.bennyv4.project2.widget.Dock
         android:id="@+id/desktopDock"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp" />
 

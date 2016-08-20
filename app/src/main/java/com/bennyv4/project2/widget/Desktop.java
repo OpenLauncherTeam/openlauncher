@@ -1,5 +1,8 @@
 package com.bennyv4.project2.widget;
 
+import android.app.WallpaperManager;
+import android.appwidget.AppWidgetHostView;
+import android.appwidget.AppWidgetProviderInfo;
 import android.content.*;
 import android.graphics.Color;
 import android.os.*;
@@ -23,11 +26,14 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
 
     public List<CellContainer> pages = new ArrayList<>();
 
-    public OnDestopEditListener listener;
+    public OnDesktopEditListener listener;
+
+    public boolean inEditMode;
 
     public View previousItemView;
     public Item previousItem;
     public int previousPage = -1;
+    private boolean inited = false;
 
     public Desktop(Context c, AttributeSet attr) {
         super(c, attr);
@@ -47,11 +53,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         setCurrentItem(LauncherSettings.getInstance(c).generalSettings.desktopHomePage);
 
         AppManager.getInstance(getContext()).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
-            boolean fired = false;
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {
-                if (fired)return;
-                fired = true;
+                if (inited)return;
+                inited = true;
                 initDesktopItem();
             }
         });
@@ -60,13 +65,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
     private void initDesktopItem(){
         for (int i = 0 ; i < LauncherSettings.getInstance(getContext()).desktopData.size() ; i++){
             for (int j = 0 ; j < LauncherSettings.getInstance(getContext()).desktopData.get(i).size() ; j++){
-                addAppToPagePosition(LauncherSettings.getInstance(getContext()).desktopData.get(i).get(j),i);
+                addItemToPagePosition(LauncherSettings.getInstance(getContext()).desktopData.get(i).get(j),i);
             }
         }
     }
 
     public void addPageRight(){
-        //pages.add(new CellContainer(getContext()));
         LauncherSettings.getInstance(getContext()).desktopData.add(new ArrayList<Item>());
         LauncherSettings.getInstance(getContext()).generalSettings.desktopPageCount ++;
         pageCount ++;
@@ -83,7 +87,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
     }
 
     public void addPageLeft(){
-        //pages.add(getCurrentItem(),new CellContainer(getContext()));
         LauncherSettings.getInstance(getContext()).desktopData.add(getCurrentItem(),new ArrayList<Item>());
         LauncherSettings.getInstance(getContext()).generalSettings.desktopPageCount ++;
         pageCount ++;
@@ -121,6 +124,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             case DragEvent.ACTION_DRAG_STARTED:
                 switch ((DragAction) p2.getLocalState()) {
                     case ACTION_APP:
+                    case ACTION_WIDGET:
                         for (CellContainer cellContainer : pages)
                             cellContainer.setHideGrid(false);
                         return true;
@@ -136,10 +140,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(Item.class.getClassLoader());
                 Item item = intent.getParcelableExtra("mDragData");
-                if (item.type == Desktop.Item.Type.APP) {
+                if (item.type == Desktop.Item.Type.APP||item.type == Item.Type.WIDGET) {
                     Home.desktop.consumeRevert();
                     Home.dock.consumeRevert();
-                    addAppToCurrentPage(item, (int) p2.getX(), (int) p2.getY());
+                    addItemToCurrentPage(item, (int) p2.getX(), (int) p2.getY());
                 }
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
@@ -171,18 +175,17 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         }
     }
 
-    public void addAppToPagePosition(final Item item, int page) {
-        View itemView = getAppItemView(item);
+    public void addItemToPagePosition(final Item item, int page) {
+        View itemView = item.type == Item.Type.WIDGET ? getWidgetView(item): getAppItemView(item);
         if (itemView == null){
             LauncherSettings.getInstance(getContext()).desktopData.get(page).remove(item);
         }else
-            pages.get(page).addViewToGrid(itemView, item.x, item.y);
+            pages.get(page).addViewToGrid(itemView, item.x, item.y,item.spanX,item.spanY);
     }
 
-    public void addAppToCurrentPage(final Item item, int x, int y) {
-        CellContainer.LayoutParams positionToLayoutPrams = pages.get(getCurrentItem()).positionToLayoutPrams(x, y);
+    public void addItemToCurrentPage(final Item item, int x, int y) {
+        CellContainer.LayoutParams positionToLayoutPrams = pages.get(getCurrentItem()).positionToLayoutPrams(x, y,item.spanX,item.spanY);
         if (positionToLayoutPrams != null) {
-
             //Add the item to settings
             item.x = positionToLayoutPrams.x;
             item.y = positionToLayoutPrams.y;
@@ -191,7 +194,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).add(item);
             //end
 
-            View itemView = getAppItemView(item);
+            View itemView = item.type == Item.Type.WIDGET ? getWidgetView(item): getAppItemView(item);
             if (itemView != null) {
                 itemView.setLayoutParams(positionToLayoutPrams);
                 pages.get(getCurrentItem()).addView(itemView);
@@ -199,6 +202,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         } else {
             Toast.makeText(getContext(), "Occupied", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onPageScrolled(int position, float offset, int offsetPixels) {
+        WallpaperManager.getInstance(getContext()).setWallpaperOffsets(getWindowToken(), (float) (position + offset) / (pageCount-1), 0);
+        super.onPageScrolled(position, offset, offsetPixels);
     }
 
     private View getAppItemView(final Item item){
@@ -219,9 +228,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         item_layout.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                if (Home.desktop.inEditMode)return false;
                 view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                 Intent i = new Intent();
-                i.putExtra("mDragData", Desktop.Item.newAppItem(app));
+                i.putExtra("mDragData",item);
                 ClipData data = ClipData.newIntent("mDragIntent", i);
                 view.startDrag(data, new DragShadowBuilder(view), DragAction.ACTION_APP, 0);
 
@@ -239,6 +249,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         item_layout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (Home.desktop.inEditMode)return;
                 Tools.createScaleInScaleOutAnim(view, new Runnable() {
                     @Override
                     public void run() {
@@ -249,6 +260,32 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         });
 
         return item_layout;
+    }
+
+    private View getWidgetView(final Item item){
+        WidgetView widgetView = (WidgetView) Home.appWidgetHost.createView(getContext(),item.widgetID,Home.appWidgetManager.getAppWidgetInfo(item.widgetID));
+
+        widgetView.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                Intent i = new Intent();
+                i.putExtra("mDragData", item);
+                ClipData data = ClipData.newIntent("mDragIntent", i);
+                view.startDrag(data, new DragShadowBuilder(view), DragAction.ACTION_WIDGET, 0);
+
+                //Remove the item from settings
+                LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).remove(item);
+                //end
+
+                previousPage = getCurrentItem();
+                previousItemView = view;
+                previousItem = item;
+                pages.get(getCurrentItem()).removeView(view);
+                return true;
+            }
+        });
+        return widgetView;
     }
 
     public class Adapter extends SmoothPagerAdapter {
@@ -267,6 +304,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                             v.setBackground(null);
                             v.animate().scaleX(sacleFactor).scaleY(sacleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
                         }
+                        inEditMode = false;
                         if (listener != null)
                             listener.onFinished();
                     }
@@ -279,13 +317,14 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                             v.setBackgroundResource(R.drawable.outlinebg);
                             v.animate().scaleX(sacleFactor).scaleY(sacleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
                         }
+                        inEditMode = true;
                         if (listener != null)
                             listener.onStart();
                         return true;
                     }
                 });
-                int pad = (int) Tools.convertDpToPixel(8, getContext());
-                layout.setPadding(0, pad, 0, pad);
+                //int pad = (int) Tools.convertDpToPixel(5, getContext());
+                //layout.setPadding(0,pad,0,pad);
                 pages.add(layout);
             }
         }
@@ -333,7 +372,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
 
         public Intent[] actions;
 
-        public int x, y;
+        public int x = 0, y = 0;
+
+        public int widgetID;
+
+        public int spanX = 1,spanY = 1;
 
         @Override
         public boolean equals(Object obj) {
@@ -355,12 +398,26 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             return item;
         }
 
+        public static Item newWidgetItem(int widgetID) {
+            Desktop.Item item = new Item();
+            item.type = Type.WIDGET;
+            item.widgetID = widgetID;
+            item.spanX = 1;
+            item.spanY = 1;
+            return item;
+        }
+
         public Item(Parcel in) {
             type = Type.valueOf(in.readString());
             switch (type) {
                 case GROUP:
                 case APP:
                     actions = in.createTypedArray(Intent.CREATOR);
+                    break;
+                case WIDGET:
+                    widgetID = in.readInt();
+                    spanX = in.readInt();
+                    spanY = in.readInt();
                     break;
             }
         }
@@ -385,6 +442,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 case APP:
                     out.writeTypedArray(actions, 0);
                     break;
+                case WIDGET:
+                    out.writeInt(widgetID);
+                    out.writeInt(spanX);
+                    out.writeInt(spanY);
+                    break;
             }
         }
 
@@ -392,11 +454,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             APP,
             WIDGET,
             SHORTCUT,
-            GROUP;
+            GROUP
         }
     }
 
-    public interface OnDestopEditListener{
+    public interface OnDesktopEditListener {
         void onStart();
         void onFinished();
     }

@@ -17,8 +17,8 @@ public class AppManager
 	private Context c;
 	private PackageManager pm;
 	private List<App> apps = new ArrayList<>();
-	private List<AppUpdatedListener> updateListeners = new ArrayList<>();
-	private List<AppDeletedListener> deleteListeners = new ArrayList<>();
+	public List<AppUpdatedListener> updateListeners = new ArrayList<>();
+	public List<AppDeletedListener> deleteListeners = new ArrayList<>();
 	private AsyncTask task;
 
 	public static AppManager getInstance(Context c){

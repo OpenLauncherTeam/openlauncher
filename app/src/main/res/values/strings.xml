@@ -6,5 +6,6 @@
     <string name="headsup_appuninstalled">This app has uninstalled.</string>
     <string name="info">Info</string>
     <string name="uninstall">Uninstall</string>
+    <string name="add_widget">Add widget</string>
 
 </resources>

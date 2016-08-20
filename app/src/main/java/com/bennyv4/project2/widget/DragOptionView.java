@@ -42,7 +42,7 @@ public class DragOptionView extends CardView{
         horiIconList = (LinearLayout)((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_dragoption_horiiconlist, this, false);
         addView(horiIconList);
 
-        horiIconList.findViewById(R.id.deleteIcon).setOnDragListener(new OnDragListener() {
+        horiIconList.findViewById(R.id.deleteIcon).setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch(dragEvent.getAction()){

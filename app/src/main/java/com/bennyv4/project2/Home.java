@@ -1,38 +1,42 @@
 package com.bennyv4.project2;
 
 import android.animation.*;
+import android.app.Activity;
 import android.app.SearchManager;
+import android.appwidget.AppWidgetHost;
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.*;
 import android.graphics.drawable.*;
 import android.os.*;
-import android.support.v7.app.*;
+import android.support.v7.widget.CardView;
 import android.view.*;
 import android.view.View.*;
 import android.view.animation.*;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.bennyv4.project2.util.AppManager;
 import com.bennyv4.project2.util.AppUpdateReceiver;
 import com.bennyv4.project2.util.DragNavigationControl;
+import com.bennyv4.project2.util.WidgetHost;
 import com.bennyv4.project2.widget.DragOptionView;
 import com.bennyv4.project2.util.LauncherSettings;
 import com.bennyv4.project2.util.Tools;
 import com.bennyv4.project2.widget.*;
-import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.viewpagerindicator.CirclePageIndicator;
 
-import net.steamcrafted.materialiconlib.*;
+import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearchActionListener{
+public class Home extends Activity{
 
     RelativeLayout baseLayout;
     AppDrawer appDrawer;
@@ -41,29 +45,96 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
     FrameLayout appDrawerBtn;
     CirclePageIndicator appDrawerIndicator, desktopIndicator;
     Animator appDrawerAnimator;
-    MaterialSearchBar searchBar;
+    CardView searchBar;
     DragOptionView dragOptionView;
     LinearLayout desktopEditOptionView;
+    Button addWidgetBtn;
     BroadcastReceiver appUpdateReceiver;
+    public static WidgetHost appWidgetHost;
+    public static AppWidgetManager appWidgetManager;
+
+    public static int REQUEST_PICK_APPWIDGET = 0x6475;
+    public static int REQUEST_CREATE_APPWIDGET = 0x3648;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LauncherSettings.getInstance(this);
         setContentView(R.layout.activity_home);
+
+        appWidgetHost = new WidgetHost(this,R.id.m_AppWidgetHost);
+        appWidgetManager = AppWidgetManager.getInstance(this);
+
         findViews();
         initViews();
         registerAppUpdateReceiver();
+    }
+
+    public void pickWidget(View view) {
+        int appWidgetId = appWidgetHost.allocateAppWidgetId();
+        Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
+        pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        startActivityForResult(pickIntent, REQUEST_PICK_APPWIDGET);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK ) {
+            if (requestCode == REQUEST_PICK_APPWIDGET) {
+                configureWidget(data);
+            }
+            else if (requestCode == REQUEST_CREATE_APPWIDGET) {
+                createWidget(data);
+            }
+        }
+        else if (resultCode == RESULT_CANCELED && data != null) {
+            int appWidgetId =
+                    data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
+            if (appWidgetId != -1) {
+                appWidgetHost.deleteAppWidgetId(appWidgetId);
+            }
+        }
+    }
+
+    private void configureWidget(Intent data) {
+        Bundle extras = data.getExtras();
+        int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
+        AppWidgetProviderInfo appWidgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId);
+        if (appWidgetInfo.configure != null) {
+            Intent intent =
+                    new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
+            intent.setComponent(appWidgetInfo.configure);
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            startActivityForResult(intent, REQUEST_CREATE_APPWIDGET);
+        } else {
+            createWidget(data);
+        }
+    }
+
+    public void createWidget(Intent data) {
+        Bundle extras = data.getExtras();
+        int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
+        Desktop.Item item = Desktop.Item.newWidgetItem(appWidgetId);
+        item.spanX = 4;
+        //Add the item to settings
+        item.x = 0;
+        item.y = 0;
+        if (LauncherSettings.getInstance(this).desktopData.size() < desktop.getCurrentItem() + 1)
+            LauncherSettings.getInstance(this).desktopData.add(desktop.getCurrentItem(), new ArrayList<Desktop.Item>());
+        LauncherSettings.getInstance(this).desktopData.get(desktop.getCurrentItem()).add(item);
+        //end
+        desktop.addItemToPagePosition(item,desktop.getCurrentItem());
     }
 
     private void findViews() {
         baseLayout = (RelativeLayout) findViewById(R.id.baseLayout);
         appDrawer = (AppDrawer) findViewById(R.id.appDrawer);
         desktop = (Desktop) findViewById(R.id.desktop);
+        addWidgetBtn = (Button) findViewById(R.id.addwidgetbtn);
         dock = (Dock) findViewById(R.id.desktopDock);
         appDrawerIndicator = (CirclePageIndicator) findViewById(R.id.appDrawerIndicator);
         desktopIndicator = (CirclePageIndicator) findViewById(R.id.desktopIndicator);
-        searchBar = (MaterialSearchBar) findViewById(R.id.searchBar);
+        searchBar = (CardView) findViewById(R.id.searchBar);
         appDrawerBtn = (FrameLayout) getLayoutInflater().inflate(R.layout.item_appdrawerbtn, null);
         desktopEditOptionView = (LinearLayout) findViewById(R.id.desktopeditoptionpanel);
         dragOptionView = (DragOptionView) findViewById(R.id.dragOptionPanel);
@@ -74,10 +145,15 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
 
         appDrawer.withHome(this, appDrawerIndicator);
 
-        desktop.listener = new Desktop.OnDestopEditListener() {
+        desktop.listener = new Desktop.OnDesktopEditListener() {
             @Override
             public void onStart() {
+                addWidgetBtn.setVisibility(View.VISIBLE);
+                desktopEditOptionView.setVisibility(View.VISIBLE);
+
+                addWidgetBtn.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 dragOptionView.setAutoHideView(null);
+                desktopIndicator.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 desktopEditOptionView.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 searchBar.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 dock.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
@@ -85,10 +161,20 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
 
             @Override
             public void onFinished() {
+                addWidgetBtn.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 dragOptionView.setAutoHideView(searchBar);
+                desktopIndicator.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 desktopEditOptionView.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 searchBar.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 dock.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+
+                addWidgetBtn.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        addWidgetBtn.setVisibility(View.INVISIBLE);
+                        desktopEditOptionView.setVisibility(View.INVISIBLE);
+                    }
+                },100);
             }
         };
 
@@ -122,12 +208,7 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
                 openAppDrawer();
             }
         });
-        dock.addViewToGrid(appDrawerBtn, 2, 0);
-
-        List<String> history;
-        if ((history = LauncherSettings.getInstance(this).generalSettings.searchHistory) != null)
-            searchBar.setLastSuggestions(history);
-        searchBar.setOnSearchActionListener(this);
+        dock.addViewToGrid(appDrawerBtn, 2, 0,1,1);
 
         dragOptionView.setAutoHideView(searchBar);
     }
@@ -150,24 +231,40 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
     }
 
     @Override
-    protected void onStop() {
-        LauncherSettings.getInstance(this).generalSettings.searchHistory = (ArrayList<String>) searchBar.getLastSuggestions();
+    protected void onStart() {
+        appWidgetHost.startListening();
+        super.onStart();
+    }
+
+    @Override
+    protected void onPause() {
         LauncherSettings.getInstance(this).writeSettings();
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        appWidgetHost.stopListening();
         super.onStop();
     }
 
     @Override
     public void onBackPressed() {
-        desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
-        if (appDrawer.getVisibility() == View.VISIBLE)
-            closeAppDrawer();
+        if (!desktop.inEditMode) {
+            desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
+            if (appDrawer.getVisibility() == View.VISIBLE)
+                closeAppDrawer();
+        }
     }
 
     @Override
     protected void onResume() {
-        desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
-        if (appDrawer.getVisibility() == View.VISIBLE)
-            closeAppDrawer();
+        if (!desktop.inEditMode) {
+            desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
+            if (appDrawer.getVisibility() == View.VISIBLE)
+                closeAppDrawer();
+        }
+
         super.onResume();
     }
     //endregion
@@ -251,26 +348,17 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
         });
         appDrawerAnimator.start();
     }
+
     //endregion
 
-    //region SEARCHBARACTION
-    @Override
-    public void onSearchStateChanged(boolean b) {
-
-    }
-
-    @Override
-    public void onSearchConfirmed(CharSequence charSequence) {
+    public void onSearch(View view) {
         Intent i = new Intent(Intent.ACTION_WEB_SEARCH);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        i.putExtra(SearchManager.QUERY, charSequence.toString());
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //i.putExtra(SearchManager.QUERY,"");
         Home.this.startActivity(i);
-        searchBar.disableSearch();
-        searchBar.disableSearch();
     }
 
-    @Override
-    public void onSpeechIconSelected() {
+    public void onVoiceSearch(View view) {
         try {
             Intent i = new Intent(Intent.ACTION_MAIN);
             i.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.VoiceSearchActivity");
@@ -280,5 +368,4 @@ public class Home extends AppCompatActivity implements MaterialSearchBar.OnSearc
             Tools.toast(Home.this, "Can not find google search app");
         }
     }
-    //endregion
 }

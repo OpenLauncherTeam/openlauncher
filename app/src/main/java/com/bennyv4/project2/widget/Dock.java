@@ -27,6 +27,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
 
     public View previousItemView;
     public Desktop.Item previousItem;
+    private boolean inited = false;
 
     public Dock (Context c){
         super(c);
@@ -45,11 +46,10 @@ public class Dock extends CellContainer implements View.OnDragListener {
         setOnDragListener(this);
 
         AppManager.getInstance(getContext()).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
-            boolean fired = false;
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {
-                if (fired)return;
-                fired = true;
+                if (inited)return;
+                inited = true;
                 initDockItem();
             }
         });
@@ -117,11 +117,11 @@ public class Dock extends CellContainer implements View.OnDragListener {
         if (itemView == null){
             LauncherSettings.getInstance(getContext()).dockData.remove(item);
         }else
-            addViewToGrid(itemView,item.x,item.y);
+            addViewToGrid(itemView,item.x,item.y,item.spanX,item.spanY);
     }
 
     public void addAppToDock(final Desktop.Item item, int x, int y){
-        CellContainer.LayoutParams positionToLayoutPrams = positionToLayoutPrams(x, y);
+        CellContainer.LayoutParams positionToLayoutPrams = positionToLayoutPrams(x, y,item.spanX,item.spanY);
         if(positionToLayoutPrams != null){
 
             //Add the item to settings
@@ -161,9 +161,10 @@ public class Dock extends CellContainer implements View.OnDragListener {
         item_layout.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                if (Home.desktop.inEditMode)return false;
                 view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                 Intent i = new Intent();
-                i.putExtra("mDragData", Desktop.Item.newAppItem(app));
+                i.putExtra("mDragData", item);
                 ClipData data = ClipData.newIntent("mDragIntent", i);
                 view.startDrag(data, new DragShadowBuilder(view), DragAction.ACTION_APP, 0);
 
@@ -180,6 +181,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
         item_layout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (Home.desktop.inEditMode)return;
                 Tools.createScaleInScaleOutAnim(view, new Runnable() {
                     @Override
                     public void run() {
