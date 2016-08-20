@@ -15,18 +15,18 @@ import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.DragAction;
 import com.bennyv4.project2.util.Tools;
 
-public class DragOptionPanel extends CardView{
+public class DragOptionView extends CardView{
 
     private View hideView;
     private LinearLayout horiIconList;
     public boolean dragging = false;
 
-    public DragOptionPanel(Context context) {
+    public DragOptionView(Context context) {
         super(context);
         init();
     }
 
-    public DragOptionPanel(Context context, AttributeSet attr) {
+    public DragOptionView(Context context, AttributeSet attr) {
         super(context,attr);
         init();
     }
@@ -39,7 +39,7 @@ public class DragOptionPanel extends CardView{
         setCardElevation(Tools.convertDpToPixel(8,getContext()));
         setRadius(Tools.convertDpToPixel(2,getContext()));
         setY(-Tools.convertDpToPixel(68,getContext()));
-        horiIconList = (LinearLayout)((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_dragoptionpanel_horiiconlist, this, false);
+        horiIconList = (LinearLayout)((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_dragoption_horiiconlist, this, false);
         addView(horiIconList);
 
         horiIconList.findViewById(R.id.deleteIcon).setOnDragListener(new OnDragListener() {

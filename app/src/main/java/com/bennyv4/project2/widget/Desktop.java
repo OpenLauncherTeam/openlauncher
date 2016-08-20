@@ -12,6 +12,7 @@ import com.bennyv4.project2.util.*;
 
 import java.util.*;
 
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.*;
 
 import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
@@ -21,6 +22,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
     public int pageCount;
 
     public List<CellContainer> pages = new ArrayList<>();
+
+    public OnDestopEditListener listener;
 
     public View previousItemView;
     public Item previousItem;
@@ -40,6 +43,76 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         pageCount = LauncherSettings.getInstance(c).generalSettings.desktopPageCount;
         setAdapter(new Adapter());
         setOnDragListener(this);
+
+        setCurrentItem(LauncherSettings.getInstance(c).generalSettings.desktopHomePage);
+
+        AppManager.getInstance(getContext()).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
+            boolean fired = false;
+            @Override
+            public void onAppUpdated(List<AppManager.App> apps) {
+                if (fired)return;
+                fired = true;
+                initDesktopItem();
+            }
+        });
+    }
+
+    private void initDesktopItem(){
+        for (int i = 0 ; i < LauncherSettings.getInstance(getContext()).desktopData.size() ; i++){
+            for (int j = 0 ; j < LauncherSettings.getInstance(getContext()).desktopData.get(i).size() ; j++){
+                addAppToPagePosition(LauncherSettings.getInstance(getContext()).desktopData.get(i).get(j),i);
+            }
+        }
+    }
+
+    public void addPageRight(){
+        //pages.add(new CellContainer(getContext()));
+        LauncherSettings.getInstance(getContext()).desktopData.add(new ArrayList<Item>());
+        LauncherSettings.getInstance(getContext()).generalSettings.desktopPageCount ++;
+        pageCount ++;
+
+        int previousPage = getCurrentItem();
+        //getAdapter().notifyDataSetChanged();
+        setAdapter(new Adapter());
+        initDesktopItem();
+
+        setCurrentItem(previousPage+1);
+
+        for (CellContainer cellContainer : pages)
+            cellContainer.setHideGrid(false);
+    }
+
+    public void addPageLeft(){
+        //pages.add(getCurrentItem(),new CellContainer(getContext()));
+        LauncherSettings.getInstance(getContext()).desktopData.add(getCurrentItem(),new ArrayList<Item>());
+        LauncherSettings.getInstance(getContext()).generalSettings.desktopPageCount ++;
+        pageCount ++;
+
+        int previousPage = getCurrentItem();
+        //getAdapter().notifyDataSetChanged();
+        setAdapter(new Adapter());
+        initDesktopItem();
+
+        setCurrentItem(previousPage-1);
+
+        for (CellContainer cellContainer : pages)
+            cellContainer.setHideGrid(false);
+    }
+
+    public void removeCurrentPage(){
+        if (pageCount == 1)return;
+        //pages.add(getCurrentItem(),new CellContainer(getContext()));
+        LauncherSettings.getInstance(getContext()).desktopData.remove(getCurrentItem());
+        LauncherSettings.getInstance(getContext()).generalSettings.desktopPageCount --;
+        pageCount --;
+
+        int previousPage = getCurrentItem();
+        //getAdapter().notifyDataSetChanged();
+        setAdapter(new Adapter());
+        initDesktopItem();
+
+            pages.get(0).performLongClick();
+        setCurrentItem(previousPage);
     }
 
     @Override
@@ -48,7 +121,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             case DragEvent.ACTION_DRAG_STARTED:
                 switch ((DragAction) p2.getLocalState()) {
                     case ACTION_APP:
-                        pages.get(getCurrentItem()).setHideGrid(false);
+                        for (CellContainer cellContainer : pages)
+                            cellContainer.setHideGrid(false);
                         return true;
                 }
                 return false;
@@ -70,7 +144,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
                 revertLastDraggedItem();
-                pages.get(getCurrentItem()).setHideGrid(true);
+                for (CellContainer cellContainer : pages)
+                    cellContainer.setHideGrid(true);
                 return true;
         }
         return false;
@@ -87,8 +162,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             pages.get(getCurrentItem()).addViewToGrid(previousItemView);
 
             if (LauncherSettings.getInstance(getContext()).desktopData.size() < getCurrentItem() + 1)
-                LauncherSettings.getInstance(getContext()).desktopData.add(getCurrentItem(), new ArrayList<Item>());
-            LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).add(previousItem);
+                LauncherSettings.getInstance(getContext()).desktopData.add(previousPage, new ArrayList<Item>());
+            LauncherSettings.getInstance(getContext()).desktopData.get(previousPage).add(previousItem);
 
             previousItem = null;
             previousItemView = null;
@@ -177,11 +252,40 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
     }
 
     public class Adapter extends SmoothPagerAdapter {
+
+        float sacleFactor = 1f;
+
         public Adapter() {
+            pages = new ArrayList<>();
             for (int i = 0; i < getCount(); i++) {
                 CellContainer layout = new CellContainer(getContext());
-                int pad = (int) Tools.convertDpToPixel(10, getContext());
-                layout.setPadding(pad, pad, pad, pad);
+                layout.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        sacleFactor = 1f;
+                        for (View v : pages) {
+                            v.setBackground(null);
+                            v.animate().scaleX(sacleFactor).scaleY(sacleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
+                        }
+                        if (listener != null)
+                            listener.onFinished();
+                    }
+                });
+                layout.setOnLongClickListener(new OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        sacleFactor = 0.7f;
+                        for (View v : pages) {
+                            v.setBackgroundResource(R.drawable.outlinebg);
+                            v.animate().scaleX(sacleFactor).scaleY(sacleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
+                        }
+                        if (listener != null)
+                            listener.onStart();
+                        return true;
+                    }
+                });
+                int pad = (int) Tools.convertDpToPixel(8, getContext());
+                layout.setPadding(0, pad, 0, pad);
                 pages.add(layout);
             }
         }
@@ -290,6 +394,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             SHORTCUT,
             GROUP;
         }
+    }
+
+    public interface OnDestopEditListener{
+        void onStart();
+        void onFinished();
     }
 
 }

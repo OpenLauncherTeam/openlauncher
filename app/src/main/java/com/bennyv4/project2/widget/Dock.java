@@ -21,7 +21,7 @@ import com.bennyv4.project2.util.DragAction;
 import com.bennyv4.project2.util.LauncherSettings;
 import com.bennyv4.project2.util.Tools;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Dock extends CellContainer implements View.OnDragListener {
 
@@ -43,7 +43,23 @@ public class Dock extends CellContainer implements View.OnDragListener {
         cellSpanVert = 1;
         cellSpanHori = 5;
         setOnDragListener(this);
+
+        AppManager.getInstance(getContext()).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
+            boolean fired = false;
+            @Override
+            public void onAppUpdated(List<AppManager.App> apps) {
+                if (fired)return;
+                fired = true;
+                initDockItem();
+            }
+        });
         super.init();
+    }
+
+    private void initDockItem(){
+        for (Desktop.Item item : LauncherSettings.getInstance(getContext()).dockData) {
+            Home.dock.addAppToPosition(item);
+        }
     }
 
     @Override
