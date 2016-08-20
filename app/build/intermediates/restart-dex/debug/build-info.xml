@@ -4,56 +4,30 @@
     api-level="21"
     density="xhdpi"
     format="7"
-    timestamp="156301538501155"
-    token="-4955736591565270452" >
+    timestamp="179636214035809"
+    token="3099035274272616869" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="341" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="96" />
     <task
         name="verifier"
-        duration="0" />
+        duration="12" />
 
-    <build timestamp="153983405821540" >
+    <artifact
+        location="E:\USER\ProjectData\OpenLauncher\app\build\outputs\apk\app-debug.apk"
+        type="MAIN" />
+
+    <build timestamp="179636214035809" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
-    </build>
-    <build
-        timestamp="155569581597468"
-        verifier="CLASS_ADDED" >
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
-            type="DEX" />
-    </build>
-    <build timestamp="155708980544773" >
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
-            type="DEX" />
-    </build>
-    <build
-        timestamp="156084748818549"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\reload-dex\debug\classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build timestamp="156173567466131" >
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\res\resources-debug.ap_"
-            type="RESOURCES" />
-    </build>
-    <build timestamp="156301538501155" />
-    <build timestamp="252582929312429" >
-        <artifact
-            location="C:\Users\USER\Desktop\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
-            type="DEX" />
     </build>
 
 </instant-run>

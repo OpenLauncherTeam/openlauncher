@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
-		<item name="android:colorPrimaryDark">@android:color/transparent</item>
-		<item name="android:navigationBarColor">@android:color/transparent</item>
+    <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
 		<item name="android:windowBackground">@android:color/transparent</item>
 		<item name="android:windowNoTitle">true</item>
 		<item name="android:windowShowWallpaper">true</item>
