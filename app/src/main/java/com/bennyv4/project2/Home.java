@@ -51,6 +51,7 @@ public class Home extends Activity{
     LinearLayout desktopEditOptionView;
     Button addWidgetBtn;
     BroadcastReceiver appUpdateReceiver;
+
     public static WidgetHost appWidgetHost;
     public static AppWidgetManager appWidgetManager;
 
@@ -63,8 +64,9 @@ public class Home extends Activity{
         LauncherSettings.getInstance(this);
         setContentView(R.layout.activity_home);
 
-        appWidgetHost = new WidgetHost(this,R.id.m_AppWidgetHost);
+        appWidgetHost = new WidgetHost(getApplicationContext(),R.id.m_AppWidgetHost);
         appWidgetManager = AppWidgetManager.getInstance(this);
+        appWidgetHost.startListening();
 
         findViews();
         initViews();
@@ -80,6 +82,8 @@ public class Home extends Activity{
                 dock.initDockItem();
             }
         });
+
+        System.gc();
     }
 
     public void pickWidget(View view) {
@@ -169,6 +173,14 @@ public class Home extends Activity{
                 desktopEditOptionView.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 searchBar.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 dock.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+
+                addWidgetBtn.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dock.setVisibility(View.INVISIBLE);
+                        searchBar.setVisibility(View.INVISIBLE);
+                    }
+                },100);
             }
 
             @Override
@@ -185,6 +197,9 @@ public class Home extends Activity{
                     public void run() {
                         addWidgetBtn.setVisibility(View.INVISIBLE);
                         desktopEditOptionView.setVisibility(View.INVISIBLE);
+
+                        dock.setVisibility(View.VISIBLE);
+                        searchBar.setVisibility(View.VISIBLE);
                     }
                 },100);
             }
@@ -238,6 +253,8 @@ public class Home extends Activity{
     //region ACTIVITYLIFECYCLE
     @Override
     protected void onDestroy() {
+        appWidgetHost.stopListening();
+        appWidgetHost = null;
         unregisterReceiver(appUpdateReceiver);
         super.onDestroy();
     }
@@ -256,7 +273,6 @@ public class Home extends Activity{
 
     @Override
     protected void onStop() {
-        appWidgetHost.stopListening();
         super.onStop();
     }
 

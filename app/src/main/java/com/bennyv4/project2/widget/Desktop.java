@@ -104,7 +104,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         setAdapter(new Adapter());
         initDesktopItem();
 
-            pages.get(0).performLongClick();
+        for (View v : pages) {
+            v.setBackgroundResource(R.drawable.outlinebg);
+            v.setScaleX(0.7f);
+            v.setScaleY(0.7f);
+        }
         setCurrentItem(previousPage);
     }
 
@@ -328,6 +332,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         widgetView.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                if (Home.desktop.inEditMode){
+                    pages.get(getCurrentItem()).performClick();
+                    return false;
+                }
                 view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                 Intent i = new Intent();
                 i.putExtra("mDragData", item);
