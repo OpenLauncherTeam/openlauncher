@@ -289,10 +289,11 @@
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <string name="add_widget">Add widget</string>
     <string name="app_name">OpenLauncher</string>
-    <string name="headsup_appuninstalled">This app has uninstalled.</string>
-    <string name="hello_world">Hello world!</string>
     <string name="info">Info</string>
+    <string name="remove">Remove</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="toast_appuninstalled">This app has uninstalled.</string>
+    <string name="toast_notenoughspace">Not enough space</string>
     <string name="uninstall">Uninstall</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>

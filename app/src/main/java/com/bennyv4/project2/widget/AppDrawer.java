@@ -193,7 +193,7 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 				Intent i = new Intent();
 				i.putExtra("mDragData", Desktop.Item.newAppItem(app));
 				ClipData data = ClipData.newIntent("mDragIntent", i);
-				p1.startDrag(data, new DragShadowBuilder(p1), DragAction.ACTION_APP, 0);
+				p1.startDrag(data, new DragShadowBuilder(p1), DragAction.ACTION_APP_DRAWER, 0);
 				home.closeAppDrawer();
 				return true;
 			}

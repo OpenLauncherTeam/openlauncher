@@ -1,6 +1,5 @@
 package com.bennyv4.project2.util;
 
-import android.animation.Animator;
 import android.content.*;
 import android.content.res.*;
 import android.os.Handler;
@@ -35,7 +34,7 @@ public class Tools
         try {
             c.startActivity(intent);
         }catch (Exception e){
-            Tools.toast(c, R.string.headsup_appuninstalled);
+            Tools.toast(c, R.string.toast_appuninstalled);
         }
     }
 

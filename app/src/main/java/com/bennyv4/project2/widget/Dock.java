@@ -21,13 +21,10 @@ import com.bennyv4.project2.util.DragAction;
 import com.bennyv4.project2.util.LauncherSettings;
 import com.bennyv4.project2.util.Tools;
 
-import java.util.List;
-
 public class Dock extends CellContainer implements View.OnDragListener {
 
     public View previousItemView;
     public Desktop.Item previousItem;
-    private boolean inited = false;
 
     public Dock (Context c){
         super(c);
@@ -45,18 +42,10 @@ public class Dock extends CellContainer implements View.OnDragListener {
         cellSpanHori = 5;
         setOnDragListener(this);
 
-        AppManager.getInstance(getContext()).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
-            @Override
-            public void onAppUpdated(List<AppManager.App> apps) {
-                if (inited)return;
-                inited = true;
-                initDockItem();
-            }
-        });
         super.init();
     }
 
-    private void initDockItem(){
+    public void initDockItem(){
         for (Desktop.Item item : LauncherSettings.getInstance(getContext()).dockData) {
             Home.dock.addAppToPosition(item);
         }
@@ -83,9 +72,10 @@ public class Dock extends CellContainer implements View.OnDragListener {
                 intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
                 Desktop.Item item = intent.getParcelableExtra("mDragData");
                 if(item.type == Desktop.Item.Type.APP) {
-                    Home.desktop.consumeRevert();
-                    Home.dock.consumeRevert();
-                    addAppToDock(item, (int) p2.getX(), (int) p2.getY());
+                    if(addAppToDock(item, (int) p2.getX(), (int) p2.getY())){
+                        Home.desktop.consumeRevert();
+                        Home.dock.consumeRevert();
+                    }
                 }
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
@@ -120,7 +110,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
             addViewToGrid(itemView,item.x,item.y,item.spanX,item.spanY);
     }
 
-    public void addAppToDock(final Desktop.Item item, int x, int y){
+    public boolean addAppToDock(final Desktop.Item item, int x, int y){
         CellContainer.LayoutParams positionToLayoutPrams = positionToLayoutPrams(x, y,item.spanX,item.spanY);
         if(positionToLayoutPrams != null){
 
@@ -135,9 +125,11 @@ public class Dock extends CellContainer implements View.OnDragListener {
                 itemView.setLayoutParams(positionToLayoutPrams);
                 addView(itemView);
             }
-        }
-        else{
-            Toast.makeText(getContext(), "Occupied", Toast.LENGTH_SHORT).show();
+
+            return true;
+        } else{
+            Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
+            return false;
         }
     }
 

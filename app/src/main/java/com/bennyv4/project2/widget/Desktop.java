@@ -1,7 +1,7 @@
 package com.bennyv4.project2.widget;
 
 import android.app.WallpaperManager;
-import android.appwidget.AppWidgetHostView;
+import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.*;
 import android.graphics.Color;
@@ -33,7 +33,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
     public View previousItemView;
     public Item previousItem;
     public int previousPage = -1;
-    private boolean inited = false;
 
     public Desktop(Context c, AttributeSet attr) {
         super(c, attr);
@@ -51,18 +50,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         setOnDragListener(this);
 
         setCurrentItem(LauncherSettings.getInstance(c).generalSettings.desktopHomePage);
-
-        AppManager.getInstance(getContext()).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
-            @Override
-            public void onAppUpdated(List<AppManager.App> apps) {
-                if (inited)return;
-                inited = true;
-                initDesktopItem();
-            }
-        });
     }
 
-    private void initDesktopItem(){
+    public void initDesktopItem(){
         for (int i = 0 ; i < LauncherSettings.getInstance(getContext()).desktopData.size() ; i++){
             for (int j = 0 ; j < LauncherSettings.getInstance(getContext()).desktopData.get(i).size() ; j++){
                 addItemToPagePosition(LauncherSettings.getInstance(getContext()).desktopData.get(i).get(j),i);
@@ -141,9 +131,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 intent.setExtrasClassLoader(Item.class.getClassLoader());
                 Item item = intent.getParcelableExtra("mDragData");
                 if (item.type == Desktop.Item.Type.APP||item.type == Item.Type.WIDGET) {
-                    Home.desktop.consumeRevert();
-                    Home.dock.consumeRevert();
-                    addItemToCurrentPage(item, (int) p2.getX(), (int) p2.getY());
+                    if (addItemToCurrentPage(item, (int) p2.getX(), (int) p2.getY())){
+                        Home.desktop.consumeRevert();
+                        Home.dock.consumeRevert();
+                    }
                 }
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
@@ -183,7 +174,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             pages.get(page).addViewToGrid(itemView, item.x, item.y,item.spanX,item.spanY);
     }
 
-    public void addItemToCurrentPage(final Item item, int x, int y) {
+    public boolean addItemToCurrentPage(final Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = pages.get(getCurrentItem()).positionToLayoutPrams(x, y,item.spanX,item.spanY);
         if (positionToLayoutPrams != null) {
             //Add the item to settings
@@ -199,8 +190,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 itemView.setLayoutParams(positionToLayoutPrams);
                 pages.get(getCurrentItem()).addView(itemView);
             }
+            return true;
         } else {
-            Toast.makeText(getContext(), "Occupied", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
+            return false;
         }
     }
 
@@ -262,8 +255,75 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         return item_layout;
     }
 
+    private void scaleWidget(View view,Item item){
+        item.spanX = Math.min(item.spanX,4);
+        item.spanX = Math.max(item.spanX,1);
+        item.spanY = Math.min(item.spanY,4);
+        item.spanY = Math.max(item.spanY,1);
+
+        CellContainer.LayoutParams cellPositionToLayoutPrams = pages.get(getCurrentItem()).cellPositionToLayoutPrams(item.x,item.y,item.spanX,item.spanY,(CellContainer.LayoutParams)view.getLayoutParams());
+        if (cellPositionToLayoutPrams == null)
+            Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
+        else{
+            LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).remove(item);
+            item.x = cellPositionToLayoutPrams.x;
+            item.y = cellPositionToLayoutPrams.y;
+            LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).add(item);
+            view.setLayoutParams(cellPositionToLayoutPrams);
+
+            updateWidgetOption(item);
+        }
+
+    }
+
+    private void updateWidgetOption(Item item){
+        Bundle newOps = new Bundle();
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH,0);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH,item.spanX * pages.get(getCurrentItem()).cellWidth);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT,0);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT,item.spanY * pages.get(getCurrentItem()).cellHeight);
+        Home.appWidgetManager.updateAppWidgetOptions(item.widgetID,newOps);
+    }
+
     private View getWidgetView(final Item item){
-        WidgetView widgetView = (WidgetView) Home.appWidgetHost.createView(getContext(),item.widgetID,Home.appWidgetManager.getAppWidgetInfo(item.widgetID));
+        AppWidgetProviderInfo appWidgetInfo = Home.appWidgetManager.getAppWidgetInfo(item.widgetID);
+        WidgetView widgetView = (WidgetView) Home.appWidgetHost.createView(getContext(),item.widgetID, appWidgetInfo);
+        widgetView.setAppWidget(item.widgetID,appWidgetInfo);
+
+        widgetView.post(new Runnable() {
+            @Override
+            public void run() {
+               updateWidgetOption(item);
+            }
+        });
+
+        final FrameLayout widgetContainer = (FrameLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_widgetcontainer,null);
+        widgetContainer.addView(widgetView);
+
+        final View ve = widgetContainer.findViewById(R.id.vertexpand);
+        ve.bringToFront();
+        final View he = widgetContainer.findViewById(R.id.horiexpand);
+        he.bringToFront();
+        final View vl = widgetContainer.findViewById(R.id.vertless);
+        vl.bringToFront();
+        final View hl = widgetContainer.findViewById(R.id.horiless);
+        hl.bringToFront();
+
+        ve.animate().scaleY(1).scaleX(1);
+        he.animate().scaleY(1).scaleX(1);
+        vl.animate().scaleY(1).scaleX(1);
+        hl.animate().scaleY(1).scaleX(1);
+
+        final Runnable action = new Runnable() {
+            @Override
+            public void run() {
+                ve.animate().scaleY(0).scaleX(0);
+                he.animate().scaleY(0).scaleX(0);
+                vl.animate().scaleY(0).scaleX(0);
+                hl.animate().scaleY(0).scaleX(0);
+            }
+        };
+        widgetContainer.postDelayed(action,2000);
 
         widgetView.setOnLongClickListener(new OnLongClickListener() {
             @Override
@@ -279,13 +339,56 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 //end
 
                 previousPage = getCurrentItem();
-                previousItemView = view;
+                previousItemView = (View)view.getParent();
                 previousItem = item;
-                pages.get(getCurrentItem()).removeView(view);
+                pages.get(getCurrentItem()).removeView((View)view.getParent());
+
                 return true;
             }
         });
-        return widgetView;
+
+        ve.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view.getScaleX() < 1)return;
+                item.spanY++;
+                scaleWidget(widgetContainer,item);
+                widgetContainer.removeCallbacks(action);
+                widgetContainer.postDelayed(action,2000);
+            }
+        });
+        he.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view.getScaleX() < 1)return;
+                item.spanX++;
+                scaleWidget(widgetContainer,item);
+                widgetContainer.removeCallbacks(action);
+                widgetContainer.postDelayed(action,2000);
+            }
+        });
+        vl.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view.getScaleX() < 1)return;
+                item.spanY--;
+                scaleWidget(widgetContainer,item);
+                widgetContainer.removeCallbacks(action);
+                widgetContainer.postDelayed(action,2000);
+            }
+        });
+        hl.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view.getScaleX() < 1)return;
+                item.spanX--;
+                scaleWidget(widgetContainer,item);
+                widgetContainer.removeCallbacks(action);
+                widgetContainer.postDelayed(action,2000);
+            }
+        });
+
+        return widgetContainer;
     }
 
     public class Adapter extends SmoothPagerAdapter {
