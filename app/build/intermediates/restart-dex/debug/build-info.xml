@@ -4,45 +4,35 @@
     api-level="21"
     density="xhdpi"
     format="7"
-    timestamp="255501795899850"
-    token="3099035274272616869"
-    verifier="COMPATIBLE" >
+    timestamp="258277197836462"
+    token="3099035274272616869" >
 
     <task
         name="javac"
-        duration="419" />
+        duration="381" />
     <task
         name="instant-run-dex"
-        duration="1198" />
+        duration="0" />
     <task
         name="instant-run-transform"
-        duration="25" />
+        duration="37" />
     <task
         name="verifier"
-        duration="5" />
+        duration="12" />
 
     <artifact
-        location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\reload-dex\debug\classes.dex"
-        type="RELOAD_DEX" />
+        location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
+        type="DEX" />
 
-    <build timestamp="254162121957076" >
+    <build timestamp="257754720685762" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
-    <build
-        timestamp="255415994954388"
-        verifier="FIELD_REMOVED" >
+    <build timestamp="258277197836462" >
         <artifact
-            location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
+            location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
             type="DEX" />
-    </build>
-    <build
-        timestamp="255501795899850"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\app\build\intermediates\reload-dex\debug\classes.dex"
-            type="RELOAD_DEX" />
     </build>
 
 </instant-run>
