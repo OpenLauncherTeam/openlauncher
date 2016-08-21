@@ -152,6 +152,10 @@
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\view_widgetcontainer.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\layout\\view_widgetcontainer.xml"
+    },
+    {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_list_menu_item_icon.xml"
     },

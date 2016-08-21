@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.bennyv4.project2.util.AppManager;
 import com.bennyv4.project2.util.AppUpdateReceiver;
 import com.bennyv4.project2.util.DragNavigationControl;
 import com.bennyv4.project2.util.WidgetHost;
@@ -68,6 +69,17 @@ public class Home extends Activity{
         findViews();
         initViews();
         registerAppUpdateReceiver();
+
+        AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
+            boolean inited;
+            @Override
+            public void onAppUpdated(List<AppManager.App> apps) {
+                if (inited)return;
+                inited = true;
+                desktop.initDesktopItem();
+                dock.initDockItem();
+            }
+        });
     }
 
     public void pickWidget(View view) {
@@ -101,8 +113,7 @@ public class Home extends Activity{
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
         AppWidgetProviderInfo appWidgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId);
         if (appWidgetInfo.configure != null) {
-            Intent intent =
-                    new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
+            Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
             intent.setComponent(appWidgetInfo.configure);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             startActivityForResult(intent, REQUEST_CREATE_APPWIDGET);
@@ -116,6 +127,7 @@ public class Home extends Activity{
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
         Desktop.Item item = Desktop.Item.newWidgetItem(appWidgetId);
         item.spanX = 4;
+        item.spanY = 1;
         //Add the item to settings
         item.x = 0;
         item.y = 0;
@@ -259,6 +271,7 @@ public class Home extends Activity{
 
     @Override
     protected void onResume() {
+        appWidgetHost.startListening();
         if (!desktop.inEditMode) {
             desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
             if (appDrawer.getVisibility() == View.VISIBLE)
@@ -294,6 +307,7 @@ public class Home extends Activity{
 
             @Override
             public void onAnimationEnd(Animator p1) {
+                searchBar.setVisibility(View.INVISIBLE);
                 appDrawerIndicator.setVisibility(View.VISIBLE);
                 appDrawerBtn.setVisibility(View.INVISIBLE);
             }
@@ -324,6 +338,7 @@ public class Home extends Activity{
         appDrawerAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator p1) {
+                searchBar.setVisibility(View.VISIBLE);
                 appDrawerIndicator.setVisibility(View.INVISIBLE);
             }
 

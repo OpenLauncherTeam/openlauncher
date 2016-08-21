@@ -3696,23 +3696,30 @@ containing a value of this type.
         public static final int abc_textfield_search_activated_mtrl_alpha=0x7f020049;
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f02004a;
         public static final int abc_textfield_search_material=0x7f02004b;
-        public static final int ic_clear_black_24dp=0x7f02004c;
-        public static final int ic_dashboard_dark_24dp=0x7f02004d;
-        public static final int ic_delete_black_24dp=0x7f02004e;
-        public static final int ic_info_outline_black_24dp=0x7f02004f;
-        public static final int ic_launcher=0x7f020050;
-        public static final int ic_mic_black_24dp=0x7f020051;
-        public static final int ic_search_black_24dp=0x7f020052;
-        public static final int ic_star_black_24dp=0x7f020053;
-        public static final int notification_template_icon_bg=0x7f02005c;
-        public static final int outlinebg=0x7f020054;
-        public static final int vpi__tab_indicator=0x7f020055;
-        public static final int vpi__tab_selected_focused_holo=0x7f020056;
-        public static final int vpi__tab_selected_holo=0x7f020057;
-        public static final int vpi__tab_selected_pressed_holo=0x7f020058;
-        public static final int vpi__tab_unselected_focused_holo=0x7f020059;
-        public static final int vpi__tab_unselected_holo=0x7f02005a;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f02005b;
+        public static final int ic_chevron_left_black_24dp=0x7f02004c;
+        public static final int ic_chevron_right_black_24dp=0x7f02004d;
+        public static final int ic_clear_black_24dp=0x7f02004e;
+        public static final int ic_close_black_24dp=0x7f02004f;
+        public static final int ic_dashboard_dark_24dp=0x7f020050;
+        public static final int ic_delete_black_24dp=0x7f020051;
+        public static final int ic_expand_less_black_24dp=0x7f020052;
+        public static final int ic_expand_more_black_24dp=0x7f020053;
+        public static final int ic_info_outline_black_24dp=0x7f020054;
+        public static final int ic_launcher=0x7f020055;
+        public static final int ic_mic_black_24dp=0x7f020056;
+        public static final int ic_search_black_24dp=0x7f020057;
+        public static final int ic_star_black_24dp=0x7f020058;
+        public static final int ic_unfold_more_black_24dp=0x7f020059;
+        public static final int notification_template_icon_bg=0x7f020063;
+        public static final int outlinebg=0x7f02005a;
+        public static final int roundbg=0x7f02005b;
+        public static final int vpi__tab_indicator=0x7f02005c;
+        public static final int vpi__tab_selected_focused_holo=0x7f02005d;
+        public static final int vpi__tab_selected_holo=0x7f02005e;
+        public static final int vpi__tab_selected_pressed_holo=0x7f02005f;
+        public static final int vpi__tab_unselected_focused_holo=0x7f020060;
+        public static final int vpi__tab_unselected_holo=0x7f020061;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f020062;
     }
     public static final class id {
         public static final int access_point=0x7f0a001f;
@@ -4485,6 +4492,8 @@ containing a value of this type.
         public static final int home_modern=0x7f0a02ed;
         public static final int home_variant=0x7f0a02ee;
         public static final int hops=0x7f0a02ef;
+        public static final int horiexpand=0x7f0a0627;
+        public static final int horiless=0x7f0a0629;
         public static final int hospital=0x7f0a02f0;
         public static final int hospital_building=0x7f0a02f1;
         public static final int hospital_marker=0x7f0a02f2;
@@ -4875,6 +4884,7 @@ containing a value of this type.
         public static final int relative_scale=0x7f0a045e;
         public static final int reload=0x7f0a045f;
         public static final int remote=0x7f0a0460;
+        public static final int removeIcon=0x7f0a0625;
         public static final int removepage=0x7f0a0621;
         public static final int rename_box=0x7f0a0461;
         public static final int repeat=0x7f0a0462;
@@ -5192,6 +5202,8 @@ containing a value of this type.
         public static final int vector_triangle=0x7f0a056e;
         public static final int vector_union=0x7f0a056f;
         public static final int verified=0x7f0a0570;
+        public static final int vertexpand=0x7f0a0626;
+        public static final int vertless=0x7f0a0628;
         public static final int vibrate=0x7f0a0571;
         public static final int video=0x7f0a0572;
         public static final int video_off=0x7f0a0573;
@@ -5345,6 +5357,7 @@ containing a value of this type.
         public static final int support_simple_spinner_dropdown_item=0x7f030029;
         public static final int view_desktopeditoption=0x7f03002a;
         public static final int view_dragoption_horiiconlist=0x7f03002b;
+        public static final int view_widgetcontainer=0x7f03002c;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f050000;
@@ -5380,11 +5393,12 @@ containing a value of this type.
         public static final int abc_toolbar_collapse_description=0x7f050012;
         public static final int add_widget=0x7f050020;
         public static final int app_name=0x7f050021;
-        public static final int headsup_appuninstalled=0x7f050022;
-        public static final int hello_world=0x7f050023;
-        public static final int info=0x7f050024;
+        public static final int info=0x7f050022;
+        public static final int remove=0x7f050023;
         public static final int status_bar_notification_info_overflow=0x7f050013;
-        public static final int uninstall=0x7f050025;
+        public static final int toast_appuninstalled=0x7f050024;
+        public static final int toast_notenoughspace=0x7f050025;
+        public static final int uninstall=0x7f050026;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f07008c;

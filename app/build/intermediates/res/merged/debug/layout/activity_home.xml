@@ -16,7 +16,7 @@
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        app:cardElevation="4dp"
+        app:cardElevation="2dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"

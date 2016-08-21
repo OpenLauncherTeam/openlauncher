@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 
+import com.bennyv4.project2.Home;
 import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.DragAction;
 import com.bennyv4.project2.util.Tools;
@@ -20,6 +21,13 @@ public class DragOptionView extends CardView{
     private View hideView;
     private LinearLayout horiIconList;
     public boolean dragging = false;
+
+    private View removeIcon;
+    private View infoIcon;
+    private View deleteIcon;
+
+    final Long animSpeed = 200L;
+    final Long animDelay = 200L;
 
     public DragOptionView(Context context) {
         super(context);
@@ -42,16 +50,16 @@ public class DragOptionView extends CardView{
         horiIconList = (LinearLayout)((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_dragoption_horiiconlist, this, false);
         addView(horiIconList);
 
-        horiIconList.findViewById(R.id.deleteIcon).setOnDragListener(new View.OnDragListener() {
+        deleteIcon = horiIconList.findViewById(R.id.deleteIcon);
+        deleteIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch(dragEvent.getAction()){
                     case DragEvent.ACTION_DRAG_STARTED:
                         switch((DragAction)dragEvent.getLocalState()){
-                            case ACTION_APP:
+                            case ACTION_APP_DRAWER:
                                 return true;
                         }
-                        return false;
                     case DragEvent.ACTION_DRAG_ENTERED:
                         return true;
                     case DragEvent.ACTION_DRAG_EXITED:
@@ -77,16 +85,17 @@ public class DragOptionView extends CardView{
                 return false;
             }
         });
-        horiIconList.findViewById(R.id.infoIcon).setOnDragListener(new OnDragListener() {
+        infoIcon = horiIconList.findViewById(R.id.infoIcon);
+        infoIcon.setOnDragListener(new OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch(dragEvent.getAction()){
                     case DragEvent.ACTION_DRAG_STARTED:
                         switch((DragAction)dragEvent.getLocalState()){
                             case ACTION_APP:
+                            case ACTION_APP_DRAWER:
                                 return true;
                         }
-                        return false;
                     case DragEvent.ACTION_DRAG_ENTERED:
                         return true;
                     case DragEvent.ACTION_DRAG_EXITED:
@@ -100,7 +109,7 @@ public class DragOptionView extends CardView{
                                getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.actions[0].getComponent().getPackageName())));
                             }
                             catch (Exception e) {
-                                Tools.toast(getContext(),R.string.headsup_appuninstalled);
+                                Tools.toast(getContext(),R.string.toast_appuninstalled);
                             }
                         }
                         return true;
@@ -110,6 +119,41 @@ public class DragOptionView extends CardView{
                 return false;
             }
         });
+        removeIcon = horiIconList.findViewById(R.id.removeIcon);
+        removeIcon.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                switch(dragEvent.getAction()){
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        switch((DragAction)dragEvent.getLocalState()){
+                            case ACTION_APP:
+                            case ACTION_WIDGET:
+                                return true;
+                        }
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        return true;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        return true;
+                    case DragEvent.ACTION_DROP:
+//                        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
+//                        intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
+//                        Desktop.Item item = intent.getParcelableExtra("mDragData");
+//                        if(item.type == Desktop.Item.Type.APP) {
+//
+//                        }
+                        Home.desktop.consumeRevert();
+                        Home.dock.consumeRevert();
+                        return true;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        for (int i = 0 ; i < horiIconList.getChildCount() ; i ++){
+            horiIconList.getChildAt(i).setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -121,32 +165,45 @@ public class DragOptionView extends CardView{
             // onDragEvent wasn't called by ViewGroup.dispatchDragEvent
             // So we do it here.
             onDragEvent(ev);
+            super.dispatchDragEvent(ev);
         }
         return r;
     }
 
+    private void animShowView(){
+        if (hideView != null)
+            hideView.animate().alpha(0).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
+
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                animate().y(0).setStartDelay(animDelay).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
+            }
+        },animDelay/2);
+    }
+
     @Override
     public boolean onDragEvent(DragEvent event) {
-        final Long animSpeed = 200L;
-        final Long animDelay = 200L;
+
         switch(event.getAction()){
             case DragEvent.ACTION_DRAG_STARTED:
                 dragging = true;
                 switch((DragAction)event.getLocalState()){
                     case ACTION_APP:
-                        removeCallbacks(null);
-                        if (hideView != null)
-                            hideView.animate().alpha(0).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
-
-                        postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                animate().y(0).setStartDelay(animDelay).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
-                            }
-                        },animDelay/2);
+                        removeIcon.setVisibility(View.VISIBLE);
+                        infoIcon.setVisibility(View.VISIBLE);
+                        animShowView();
+                        return true;
+                    case ACTION_APP_DRAWER:
+                        deleteIcon.setVisibility(View.VISIBLE);
+                        infoIcon.setVisibility(View.VISIBLE);
+                        animShowView();
+                        return true;
+                    case ACTION_WIDGET:
+                        removeIcon.setVisibility(View.VISIBLE);
+                        animShowView();
                         return true;
                 }
-                return false;
             case DragEvent.ACTION_DRAG_ENTERED:
                 return true;
 
@@ -163,6 +220,10 @@ public class DragOptionView extends CardView{
                     postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            removeIcon.setVisibility(View.GONE);
+                            infoIcon.setVisibility(View.GONE);
+                            deleteIcon.setVisibility(View.GONE);
+
                             hideView.animate().alpha(1).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
                         }
                     },animDelay*2);
