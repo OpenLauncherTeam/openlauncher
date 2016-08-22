@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bennyv4.project2.Home;
 import com.bennyv4.project2.R;
@@ -22,9 +23,9 @@ public class DragOptionView extends CardView{
     private LinearLayout horiIconList;
     public boolean dragging = false;
 
-    private View removeIcon;
-    private View infoIcon;
-    private View deleteIcon;
+    private TextView removeIcon;
+    private TextView infoIcon;
+    private TextView deleteIcon;
 
     final Long animSpeed = 200L;
     final Long animDelay = 200L;
@@ -50,13 +51,13 @@ public class DragOptionView extends CardView{
         horiIconList = (LinearLayout)((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_dragoption_horiiconlist, this, false);
         addView(horiIconList);
 
-        deleteIcon = horiIconList.findViewById(R.id.deleteIcon);
+        deleteIcon = (TextView) horiIconList.findViewById(R.id.deleteIcon);
         deleteIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch(dragEvent.getAction()){
                     case DragEvent.ACTION_DRAG_STARTED:
-                        switch((DragAction)dragEvent.getLocalState()){
+                        switch(((DragAction)dragEvent.getLocalState()).action){
                             case ACTION_APP_DRAWER:
                                 return true;
                         }
@@ -85,13 +86,13 @@ public class DragOptionView extends CardView{
                 return false;
             }
         });
-        infoIcon = horiIconList.findViewById(R.id.infoIcon);
+        infoIcon = (TextView) horiIconList.findViewById(R.id.infoIcon);
         infoIcon.setOnDragListener(new OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch(dragEvent.getAction()){
                     case DragEvent.ACTION_DRAG_STARTED:
-                        switch((DragAction)dragEvent.getLocalState()){
+                        switch(((DragAction)dragEvent.getLocalState()).action){
                             case ACTION_APP:
                             case ACTION_APP_DRAWER:
                                 return true;
@@ -119,13 +120,14 @@ public class DragOptionView extends CardView{
                 return false;
             }
         });
-        removeIcon = horiIconList.findViewById(R.id.removeIcon);
+        removeIcon = (TextView) horiIconList.findViewById(R.id.removeIcon);
         removeIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch(dragEvent.getAction()){
                     case DragEvent.ACTION_DRAG_STARTED:
-                        switch((DragAction)dragEvent.getLocalState()){
+                        switch(((DragAction)dragEvent.getLocalState()).action){
+                            case ACTION_GROUP:
                             case ACTION_APP:
                             case ACTION_WIDGET:
                                 return true;
@@ -135,12 +137,6 @@ public class DragOptionView extends CardView{
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-//                        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
-//                        intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
-//                        Desktop.Item item = intent.getParcelableExtra("mDragData");
-//                        if(item.type == Desktop.Item.Type.APP) {
-//
-//                        }
                         Home.desktop.consumeRevert();
                         Home.dock.consumeRevert();
                         return true;
@@ -150,6 +146,10 @@ public class DragOptionView extends CardView{
                 return false;
             }
         });
+
+        removeIcon.setText(removeIcon.getText(),TextView.BufferType.SPANNABLE);
+        infoIcon.setText(infoIcon.getText(),TextView.BufferType.SPANNABLE);
+        deleteIcon.setText(deleteIcon.getText(),TextView.BufferType.SPANNABLE);
 
         for (int i = 0 ; i < horiIconList.getChildCount() ; i ++){
             horiIconList.getChildAt(i).setVisibility(View.GONE);
@@ -188,20 +188,39 @@ public class DragOptionView extends CardView{
         switch(event.getAction()){
             case DragEvent.ACTION_DRAG_STARTED:
                 dragging = true;
-                switch((DragAction)event.getLocalState()){
+                switch(((DragAction)event.getLocalState()).action){
                     case ACTION_APP:
                         removeIcon.setVisibility(View.VISIBLE);
                         infoIcon.setVisibility(View.VISIBLE);
                         animShowView();
+
+                        Home.dock.setHideGrid(false);
+                        for (CellContainer cellContainer : Home.desktop.pages)
+                            cellContainer.setHideGrid(false);
                         return true;
                     case ACTION_APP_DRAWER:
                         deleteIcon.setVisibility(View.VISIBLE);
                         infoIcon.setVisibility(View.VISIBLE);
                         animShowView();
+
+                        Home.dock.setHideGrid(false);
+                        for (CellContainer cellContainer : Home.desktop.pages)
+                            cellContainer.setHideGrid(false);
                         return true;
                     case ACTION_WIDGET:
                         removeIcon.setVisibility(View.VISIBLE);
                         animShowView();
+
+                        for (CellContainer cellContainer : Home.desktop.pages)
+                            cellContainer.setHideGrid(false);
+                        return true;
+                    case ACTION_GROUP:
+                        removeIcon.setVisibility(View.VISIBLE);
+                        animShowView();
+
+                        Home.dock.setHideGrid(false);
+                        for (CellContainer cellContainer : Home.desktop.pages)
+                            cellContainer.setHideGrid(false);
                         return true;
                 }
             case DragEvent.ACTION_DRAG_ENTERED:
@@ -214,6 +233,10 @@ public class DragOptionView extends CardView{
                 return true;
 
             case DragEvent.ACTION_DRAG_ENDED:
+                Home.dock.setHideGrid(true);
+                for (CellContainer cellContainer : Home.desktop.pages)
+                    cellContainer.setHideGrid(true);
+
                 dragging = false;
                 if (hideView != null){
                     hideView.setAlpha(0);

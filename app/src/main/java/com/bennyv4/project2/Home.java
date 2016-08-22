@@ -62,6 +62,7 @@ public class Home extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LauncherSettings.getInstance(this);
+
         setContentView(R.layout.activity_home);
 
         appWidgetHost = new WidgetHost(getApplicationContext(),R.id.m_AppWidgetHost);
@@ -83,6 +84,7 @@ public class Home extends Activity{
             }
         });
 
+        AppManager.getInstance(this).init();
         System.gc();
     }
 
@@ -220,11 +222,16 @@ public class Home extends Activity{
 
         desktopIndicator.setViewPager(desktop);
 
+        int iconSize = LauncherSettings.getInstance(this).generalSettings.iconSize;
         Drawable appDrawerBtnIcon = MaterialDrawableBuilder.with(this)
                 .setIcon(MaterialDrawableBuilder.IconValue.APPS)
                 .setColor(Color.DKGRAY)
-                .setSizeDp(25)
+                .setSizeDp(iconSize/2-8)
                 .build();
+        CardView appDrawerBtnCard = (CardView) appDrawerBtn.findViewById(R.id.card);
+        appDrawerBtnCard.setRadius((Tools.convertDpToPixel((iconSize-8) / 2,this)));
+        appDrawerBtnCard.getLayoutParams().width = Tools.convertDpToPixel(iconSize-8,this);
+        appDrawerBtnCard.getLayoutParams().height = Tools.convertDpToPixel(iconSize-8,this);
 
         ImageView appDrawerIcon = (ImageView) appDrawerBtn.findViewById(R.id.iv);
         appDrawerIcon.setImageDrawable(appDrawerBtnIcon);
@@ -235,7 +242,8 @@ public class Home extends Activity{
                 openAppDrawer();
             }
         });
-        dock.addViewToGrid(appDrawerBtn, 2, 0,1,1);
+        dock.getLayoutParams().height = Tools.convertDpToPixel(22+iconSize,this);
+        dock.addViewToGrid(appDrawerBtn,2,0,1,1);
 
         dragOptionView.setAutoHideView(searchBar);
     }
@@ -282,6 +290,8 @@ public class Home extends Activity{
             desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
             if (appDrawer.getVisibility() == View.VISIBLE)
                 closeAppDrawer();
+        }else{
+            desktop.pages.get(desktop.getCurrentItem()).performClick();
         }
     }
 
@@ -292,6 +302,8 @@ public class Home extends Activity{
             desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
             if (appDrawer.getVisibility() == View.VISIBLE)
                 closeAppDrawer();
+        }else{
+            desktop.pages.get(desktop.getCurrentItem()).performClick();
         }
 
         super.onResume();
