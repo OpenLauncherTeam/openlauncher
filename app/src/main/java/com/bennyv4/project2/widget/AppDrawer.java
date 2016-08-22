@@ -1,15 +1,28 @@
 package com.bennyv4.project2.widget;
 
-import android.content.*;
+import android.content.ClipData;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.*;
-import android.graphics.*;
-import android.support.v7.widget.*;
-import android.util.*;
-import android.view.*;
-import android.widget.*;
-import com.bennyv4.project2.util.*;
-import java.util.*;
-import com.bennyv4.project2.*;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.bennyv4.project2.Home;
+import com.bennyv4.project2.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bennyv4.project2.util.AppManager;
+import com.bennyv4.project2.util.DragAction;
+import com.bennyv4.project2.util.LauncherSettings;
+import com.bennyv4.project2.util.Tools;
 import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
 import com.bennyv5.smoothviewpager.SmoothViewPager;
 import com.viewpagerindicator.PageIndicator;
@@ -20,17 +33,11 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 
 	private Home home;
 
-	private static int vertCellCount = 5 , horiCellCount = 4;
+	private static int vertCellCount, horiCellCount;
 
-	private boolean mPortrait,mPrePortrait;
+	private boolean mPortrait;
 
-	private int realPageHeight,realPageWidth,
-
-	vertItemOffset,
-
-	horiItemOffset,
-
-	textHeight = 22;
+	private int textHeight = 22;
 
 	private PageIndicator appDrawerIndicator;
 
@@ -53,56 +60,40 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 
 	@Override
 	protected void onConfigurationChanged(Configuration newConfig){
-		mPrePortrait = mPortrait;
 		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
 			mPortrait = false;
             setLandscapeValue();
-            calculatePageSize();
 			setAdapter(new Adapter());
 		}
 		else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
 			mPortrait = true;
             setPortraitValue();
-			calculatePageSize();
 			setAdapter(new Adapter());
 		}
 		super.onConfigurationChanged(newConfig);
 	}
 
     private void setPortraitValue(){
-        horiCellCount = 4;
-        vertCellCount = 5;
-        vertItemOffset = 22;
-        horiItemOffset = 21;
+        horiCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridx;
+        vertCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridy;
     }
 
     private void setLandscapeValue(){
-        horiCellCount = 5;
-        vertCellCount = 3;
-        vertItemOffset = 18;
-        horiItemOffset = 30;
-    }
-
-	private void calculatePageSize(){
-        realPageHeight = (int)Tools.convertDpToPixel((vertItemOffset + LauncherSettings.getInstance(getContext()).generalSettings.iconSize + textHeight) * vertCellCount, getContext());
-        realPageWidth =  (int)Tools.convertDpToPixel((horiItemOffset + LauncherSettings.getInstance(getContext()).generalSettings.iconSize) * horiCellCount, getContext());
+        horiCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridxL;
+        vertCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridyL;
     }
 
 	private void init(Context c){
 		mPortrait = c.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-		mPrePortrait = mPortrait;
 
 		if(mPortrait){
             setPortraitValue();
 		} else {
 			setLandscapeValue();
 		}
-        calculatePageSize();
 
 		AppManager.getInstance(c).addAppUpdatedListener(this);
-		AppManager.getInstance(c).init();
 	}
-
 
 	public void withHome(Home home, PageIndicator appDrawerIndicator){
 		this.home = home;
@@ -113,16 +104,71 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 	{
 		List<ViewGroup> views = new ArrayList<>();
 
+        private View getItemView(int page,int x,int y){
+            int pagePos = y * horiCellCount + x;
+            final int pos = vertCellCount * horiCellCount * page + pagePos;
+
+            if (pos >= apps.size())
+                return null;
+
+            final AppManager.App app = apps.get(pos);
+
+            FrameLayout itemView = new FrameLayout(getContext());
+            LinearLayout innerView = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.item_app,itemView,false);
+            itemView.addView(innerView);
+
+            ImageView iv = (ImageView) itemView.findViewById(R.id.iv);
+            TextView tv = (TextView) itemView.findViewById(R.id.tv);
+
+            iv.getLayoutParams().width = (int)Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+            iv.getLayoutParams().height = (int)Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+
+            tv.getLayoutParams().height = (int)Tools.convertDpToPixel(textHeight, getContext());
+
+            itemView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Tools.createScaleInScaleOutAnim(view, new Runnable() {
+                        @Override
+                        public void run() {
+                            Tools.startApp(getContext(),app);
+                        }
+                    });
+                }
+            });
+            itemView.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    Intent i = new Intent();
+                    i.putExtra("mDragData", Desktop.Item.newAppItem(app));
+                    ClipData data = ClipData.newIntent("mDragIntent", i);
+                    view.startDrag(data, new DragShadowBuilder(view),new DragAction(DragAction.Action.ACTION_APP_DRAWER,0), 0);
+                    home.closeAppDrawer();
+                    return true;
+                }
+            });
+            iv.setImageDrawable(app.icon);
+            tv.setText(app.appName);
+
+            return itemView;
+        }
+
 		public Adapter(){
 			for(int i = 0 ; i < getCount() ; i++){
 				ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_appdrawer_page, null);
-				RecyclerView rv = (RecyclerView) layout.findViewById(R.id.rv);
-				rv.setLayoutManager(new GridLayoutManager(getContext(), horiCellCount));
-				rv.setAdapter(new AppItemAdapter(i));
-				rv.setOverScrollMode(OVER_SCROLL_NEVER);
-				rv.addItemDecoration(new MyDecor());
-				rv.getLayoutParams().height = realPageHeight;
-				rv.getLayoutParams().width = realPageWidth;
+				CellContainer cc = (CellContainer) layout.findViewById(R.id.cc);
+                cc.setGridSize(horiCellCount,vertCellCount);
+
+                for (int x = 0 ; x < horiCellCount ; x ++){
+                    for (int y = 0 ; y < vertCellCount ; y ++){
+                        View view = getItemView(i,x,y);
+                        if (view != null) {
+                            CellContainer.LayoutParams lp = new CellContainer.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, x, y, 1, 1);
+                            view.setLayoutParams(lp);
+                            cc.addViewToGrid(view);
+                        }
+                    }
+                }
 
 				views.add(layout);
 			}
@@ -160,111 +206,8 @@ public class AppDrawer extends SmoothViewPager implements AppManager.AppUpdatedL
 		@Override
 		public Object instantiateItem(ViewGroup container, int pos){
 			ViewGroup layout = views.get(pos);
-
-			RecyclerView rv = (RecyclerView) layout.findViewById(R.id.rv);
-
-			if(mPortrait != mPrePortrait){
-				rv.getAdapter().notifyDataSetChanged();
-				((GridLayoutManager)rv.getLayoutManager()).setSpanCount(horiCellCount);
-				rv.getLayoutParams().height = realPageHeight;
-				rv.getLayoutParams().width = realPageWidth;
-			}
-
 			container.addView(layout);
-
 			return layout;
 		}
-
-		private class MyDecor extends RecyclerView.ItemDecoration
-		{
-			@Override
-			public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state){
-				outRect.top = vertItemOffset;
-				outRect.bottom = vertItemOffset;
-				outRect.left = horiItemOffset;
-				outRect.right = horiItemOffset;
-			}
-		}
-
-		public class AppItem extends RecyclerView.ViewHolder implements OnClickListener,OnLongClickListener
-		{
-			@Override
-			public boolean onLongClick(View p1){
-				Intent i = new Intent();
-				i.putExtra("mDragData", Desktop.Item.newAppItem(app));
-				ClipData data = ClipData.newIntent("mDragIntent", i);
-				p1.startDrag(data, new DragShadowBuilder(p1), DragAction.ACTION_APP_DRAWER, 0);
-				home.closeAppDrawer();
-				return true;
-			}
-
-			@Override
-			public void onClick(View view){
-				Tools.createScaleInScaleOutAnim(view, new Runnable() {
-                    @Override
-                    public void run() {
-                        Tools.startApp(getContext(),app);
-                    }
-                });
-			}
-
-			ImageView iv;
-			TextView tv;
-			AppManager.App app;
-
-			public AppItem(View v){
-				super(v);
-				iv = (ImageView) itemView.findViewById(R.id.iv);
-				tv = (TextView) itemView.findViewById(R.id.tv);
-
-				iv.getLayoutParams().width = (int)Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
-				iv.getLayoutParams().height = (int)Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
-
-				tv.getLayoutParams().height = (int)Tools.convertDpToPixel(textHeight, getContext());
-			}                                                               
-
-			public void setup(int page, int pos){
-				AppManager.App temp = apps.get(vertCellCount * horiCellCount * page + pos);
-				app = temp;
-
-				itemView.setOnClickListener(this);
-				itemView.setOnLongClickListener(this);
-				iv.setImageDrawable(temp.icon);
-				tv.setText(temp.appName);
-			}
-		}
-
-		public class AppItemAdapter extends RecyclerView.Adapter<AppItem>
-		{
-			public int pos;
-
-			public AppItemAdapter(int pos){
-				this.pos = pos;
-			}
-
-			@Override
-			public AppItem onCreateViewHolder(ViewGroup p1, int p2){
-				return new AppItem(LayoutInflater.from(getContext()).inflate(R.layout.item_app, p1, false));
-			}
-
-			@Override
-			public void onBindViewHolder(AppItem p1, int p2){
-				p1.setup(pos, p2);
-			}
-
-			@Override
-			public int getItemCount(){
-				int page = 0;
-				int appsSize = apps.size();
-				while((appsSize = appsSize - (vertCellCount * horiCellCount)) >= (vertCellCount * horiCellCount) || (appsSize > -(vertCellCount * horiCellCount))){
-					page ++;                                                                               
-				}
-				if(pos == page - 1)
-					return  apps.size() - pos * vertCellCount * horiCellCount;
-				else
-					return vertCellCount * horiCellCount;
-			}
-		}
-
 	}
 }

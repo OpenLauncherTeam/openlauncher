@@ -30,7 +30,7 @@ public class WidgetView extends AppWidgetHostView {
                 down = System.currentTimeMillis();
                 break;
             case MotionEvent.ACTION_MOVE:
-                boolean upVal = System.currentTimeMillis() - down > 300L;
+                boolean upVal = System.currentTimeMillis() - down > 400L;
                 if( upVal ) {
                     longClick.onLongClick( WidgetView.this );
                 }

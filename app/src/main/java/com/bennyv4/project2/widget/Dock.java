@@ -3,7 +3,13 @@ package com.bennyv4.project2.widget;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.DragEvent;
 import android.view.HapticFeedbackConstants;
@@ -11,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +25,11 @@ import com.bennyv4.project2.Home;
 import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.AppManager;
 import com.bennyv4.project2.util.DragAction;
+import com.bennyv4.project2.util.GroupIconDrawable;
 import com.bennyv4.project2.util.LauncherSettings;
 import com.bennyv4.project2.util.Tools;
+
+import java.util.UUID;
 
 public class Dock extends CellContainer implements View.OnDragListener {
 
@@ -38,8 +48,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
 
     @Override
     public void init() {
-        cellSpanVert = 1;
-        cellSpanHori = 5;
+        setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.dockGridx,1);
         setOnDragListener(this);
 
         super.init();
@@ -55,9 +64,10 @@ public class Dock extends CellContainer implements View.OnDragListener {
     public boolean onDrag(View p1, DragEvent p2){
         switch(p2.getAction()){
             case DragEvent.ACTION_DRAG_STARTED:
-                switch((DragAction)p2.getLocalState()){
+                switch(((DragAction)p2.getLocalState()).action){
                     case ACTION_APP:
-                        setHideGrid(false);
+                    case ACTION_GROUP:
+                    case ACTION_APP_DRAWER:
                         return true;
                 }
                 return false;
@@ -71,7 +81,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
                 Desktop.Item item = intent.getParcelableExtra("mDragData");
-                if(item.type == Desktop.Item.Type.APP) {
+                if(item.type == Desktop.Item.Type.APP  || item.type == Desktop.Item.Type.GROUP) {
                     if(addAppToDock(item, (int) p2.getX(), (int) p2.getY())){
                         Home.desktop.consumeRevert();
                         Home.dock.consumeRevert();
@@ -80,7 +90,6 @@ public class Dock extends CellContainer implements View.OnDragListener {
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
                 revertLastDraggedItem();
-                setHideGrid(true);
                 return true;
         }
         return false;
@@ -103,7 +112,11 @@ public class Dock extends CellContainer implements View.OnDragListener {
     }
 
     public void addAppToPosition(final Desktop.Item item){
-        View itemView = getAppItemView(item);
+        View itemView = null;
+        if (item.type == Desktop.Item.Type.APP)
+            itemView = getAppItemView(item);
+        else if (item.type == Desktop.Item.Type.GROUP)
+            itemView = getGroupItemView(item);
         if (itemView == null){
             LauncherSettings.getInstance(getContext()).dockData.remove(item);
         }else
@@ -120,7 +133,12 @@ public class Dock extends CellContainer implements View.OnDragListener {
             LauncherSettings.getInstance(getContext()).dockData.add(item);
             //end
 
-            View itemView = getAppItemView(item);
+            View itemView = null;
+            if (item.type == Desktop.Item.Type.APP)
+                itemView = getAppItemView(item);
+            else if (item.type == Desktop.Item.Type.GROUP)
+                itemView = getGroupItemView(item);
+
             if (itemView != null){
                 itemView.setLayoutParams(positionToLayoutPrams);
                 addView(itemView);
@@ -134,11 +152,11 @@ public class Dock extends CellContainer implements View.OnDragListener {
     }
 
     private View getAppItemView(final Desktop.Item item){
-        ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, null);
+        final ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, null);
         TextView tv = (TextView) item_layout.findViewById(R.id.tv);
         ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
 
-        iv.getLayoutParams().width = (int) Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+        iv.getLayoutParams().width = Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
         iv.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;//(int) Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
 
         final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(), item.actions[0].getComponent().getClassName());
@@ -150,6 +168,43 @@ public class Dock extends CellContainer implements View.OnDragListener {
         tv.setTextColor(Color.WHITE);
         tv.setVisibility(View.GONE);
         iv.setImageDrawable(app.icon);
+        item_layout.setOnDragListener(new OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                switch (dragEvent.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        if (((DragAction)dragEvent.getLocalState()).viewID == view.getId())
+                            return false;
+                        switch (((DragAction)dragEvent.getLocalState()).action) {
+                            case ACTION_APP:
+                            case ACTION_APP_DRAWER:
+                                return true;
+                        }
+                        return false;
+                    case DragEvent.ACTION_DROP:
+                        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
+                        intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
+                        Desktop.Item dropitem = intent.getParcelableExtra("mDragData");
+                        if (dropitem.type == Desktop.Item.Type.APP) {
+                            LauncherSettings.getInstance(getContext()).dockData.remove(item);
+                            removeView(view);
+
+                            item.addActions(dropitem.actions[0]);
+                            item.type = Desktop.Item.Type.GROUP;
+                            LauncherSettings.getInstance(getContext()).dockData.add(item);
+                            addAppToPosition(item);
+
+                            Home.desktop.consumeRevert();
+                            Home.dock.consumeRevert();
+                        }
+                        return true;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        return true;
+                }
+                return false;
+            }
+        });
+        item_layout.setId(UUID.randomUUID().hashCode());
         item_layout.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -158,7 +213,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
                 Intent i = new Intent();
                 i.putExtra("mDragData", item);
                 ClipData data = ClipData.newIntent("mDragIntent", i);
-                view.startDrag(data, new DragShadowBuilder(view), DragAction.ACTION_APP, 0);
+                view.startDrag(data, new DragShadowBuilder(view),new DragAction(DragAction.Action.ACTION_APP,item_layout.getId()), 0);
 
                 //Remove the item from settings
                 LauncherSettings.getInstance(getContext()).dockData.remove(item);
@@ -180,6 +235,106 @@ public class Dock extends CellContainer implements View.OnDragListener {
                         Tools.startApp(getContext(), app);
                     }
                 });
+            }
+        });
+
+        return item_layout;
+    }
+
+    private View getGroupItemView(final Desktop.Item item) {
+        final ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, null);
+        TextView tv = (TextView) item_layout.findViewById(R.id.tv);
+        ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
+
+        final int iconSize = Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+        iv.getLayoutParams().width = iconSize;
+        iv.getLayoutParams().height = iconSize;
+
+        AppManager.App[] apps = new AppManager.App[item.actions.length];
+
+        for (int i = 0; i < item.actions.length; i++) {
+            apps[i] = AppManager.getInstance(getContext()).findApp(item.actions[i].getComponent().getPackageName(), item.actions[i].getComponent().getClassName());
+            if (apps[i] == null)
+                return null;
+        }
+
+        final Bitmap[] icons = new Bitmap[4];
+        for (int i = 0; i < 4; i++) {
+            if (i < apps.length)
+                icons[i] = Tools.drawableToBitmap(apps[i].icon);
+            else
+                icons[i] = Tools.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
+        }
+
+        iv.setImageDrawable(new GroupIconDrawable(icons,iconSize));
+
+        tv.setText("");
+        tv.setTextColor(Color.WHITE);
+        tv.setVisibility(View.GONE);
+        item_layout.setOnDragListener(new OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                switch (dragEvent.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        switch (((DragAction)dragEvent.getLocalState()).action) {
+                            case ACTION_APP:
+                            case ACTION_APP_DRAWER:
+                                return true;
+                        }
+                        return false;
+                    case DragEvent.ACTION_DROP:
+                        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
+                        intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
+                        Desktop.Item dropitem = intent.getParcelableExtra("mDragData");
+                        if (dropitem.type == Desktop.Item.Type.APP) {
+                            LauncherSettings.getInstance(getContext()).dockData.remove(item);
+                            removeView(view);
+
+                            item.addActions(dropitem.actions[0]);
+                            item.type = Desktop.Item.Type.GROUP;
+                            LauncherSettings.getInstance(getContext()).dockData.add(item);
+                            addAppToPosition(item);
+
+                            Home.desktop.consumeRevert();
+                            Home.dock.consumeRevert();
+                        }
+                        return true;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        return true;
+                }
+                return false;
+            }
+        });
+        item_layout.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (Home.desktop.inEditMode)return false;
+                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                Intent i = new Intent();
+                i.putExtra("mDragData", item);
+                ClipData data = ClipData.newIntent("mDragIntent", i);
+                view.startDrag(data, new DragShadowBuilder(view),new DragAction(DragAction.Action.ACTION_GROUP,0), 0);
+
+                //Remove the item from settings
+                LauncherSettings.getInstance(getContext()).dockData.remove(item);
+                //end
+
+                previousItemView = view;
+                previousItem = item;
+                removeView(view);
+                return true;
+            }
+        });
+        item_layout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                if (Home.desktop.inEditMode) return;
+//                Tools.createScaleInScaleOutAnim(view, new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Tools.startApp(getContext(), app);
+//                    }
+//                });
             }
         });
 

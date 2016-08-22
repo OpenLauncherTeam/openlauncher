@@ -615,7 +615,7 @@ int id account_search 0x7f0a0033
 int id account_star 0x7f0a0034
 int id account_star_variant 0x7f0a0035
 int id account_switch 0x7f0a0036
-int id action0 0x7f0a0614
+int id action0 0x7f0a0615
 int id action_bar 0x7f0a05f6
 int id action_bar_activity_content 0x7f0a0000
 int id action_bar_container 0x7f0a05f5
@@ -624,7 +624,7 @@ int id action_bar_spinner 0x7f0a0001
 int id action_bar_subtitle 0x7f0a05d8
 int id action_bar_title 0x7f0a05d7
 int id action_context_bar 0x7f0a05f7
-int id action_divider 0x7f0a0618
+int id action_divider 0x7f0a0619
 int id action_menu_divider 0x7f0a0002
 int id action_menu_presenter 0x7f0a0003
 int id action_mode_bar 0x7f0a05f3
@@ -872,12 +872,13 @@ int id camera_rear 0x7f0a011a
 int id camera_rear_variant 0x7f0a011b
 int id camera_switch 0x7f0a011c
 int id camera_timer 0x7f0a011d
-int id cancel_action 0x7f0a0615
+int id cancel_action 0x7f0a0616
 int id candycane 0x7f0a011e
 int id car 0x7f0a011f
 int id car_battery 0x7f0a0120
 int id car_connected 0x7f0a0121
 int id car_wash 0x7f0a0122
+int id card 0x7f0a0614
 int id carrot 0x7f0a0123
 int id cart 0x7f0a0124
 int id cart_outline 0x7f0a0125
@@ -891,6 +892,7 @@ int id cast 0x7f0a012c
 int id cast_connected 0x7f0a012d
 int id castle 0x7f0a012e
 int id cat 0x7f0a012f
+int id cc 0x7f0a0613
 int id cellphone 0x7f0a0130
 int id cellphone_android 0x7f0a0131
 int id cellphone_basic 0x7f0a0132
@@ -932,7 +934,7 @@ int id chevron_down 0x7f0a0154
 int id chevron_left 0x7f0a0155
 int id chevron_right 0x7f0a0156
 int id chevron_up 0x7f0a0157
-int id chronometer 0x7f0a061b
+int id chronometer 0x7f0a061c
 int id church 0x7f0a0158
 int id cisco_webex 0x7f0a0159
 int id city 0x7f0a015a
@@ -1063,7 +1065,7 @@ int id decimal_increase 0x7f0a01d2
 int id decor_content_parent 0x7f0a05f4
 int id default_activity_button 0x7f0a05dc
 int id delete 0x7f0a01d3
-int id deleteIcon 0x7f0a0623
+int id deleteIcon 0x7f0a0624
 int id delete_variant 0x7f0a01d4
 int id delta 0x7f0a01d5
 int id deskphone 0x7f0a01d6
@@ -1129,7 +1131,7 @@ int id emoticon_poop 0x7f0a020a
 int id emoticon_sad 0x7f0a020b
 int id emoticon_tongue 0x7f0a020c
 int id end 0x7f0a001d
-int id end_padder 0x7f0a0620
+int id end_padder 0x7f0a0621
 int id engine 0x7f0a020d
 int id engine_outline 0x7f0a020e
 int id equal 0x7f0a020f
@@ -1361,8 +1363,8 @@ int id homeAsUp 0x7f0a000f
 int id home_modern 0x7f0a02ed
 int id home_variant 0x7f0a02ee
 int id hops 0x7f0a02ef
-int id horiexpand 0x7f0a0627
-int id horiless 0x7f0a0629
+int id horiexpand 0x7f0a0628
+int id horiless 0x7f0a062a
 int id hospital 0x7f0a02f0
 int id hospital_building 0x7f0a02f1
 int id hospital_marker 0x7f0a02f2
@@ -1393,8 +1395,8 @@ int id image_filter_vintage 0x7f0a0308
 int id image_multiple 0x7f0a0309
 int id import_icon 0x7f0a030a
 int id inbox 0x7f0a030b
-int id info 0x7f0a061f
-int id infoIcon 0x7f0a0624
+int id info 0x7f0a0620
+int id infoIcon 0x7f0a0625
 int id information 0x7f0a030c
 int id information_outline 0x7f0a030d
 int id instagram 0x7f0a030e
@@ -1456,8 +1458,8 @@ int id library_music 0x7f0a0342
 int id library_plus 0x7f0a0343
 int id lightbulb 0x7f0a0344
 int id lightbulb_outline 0x7f0a0345
-int id line1 0x7f0a0619
-int id line3 0x7f0a061d
+int id line1 0x7f0a061a
+int id line3 0x7f0a061e
 int id link 0x7f0a0346
 int id link_off 0x7f0a0347
 int id link_variant 0x7f0a0348
@@ -1496,7 +1498,7 @@ int id martini 0x7f0a0365
 int id material_ui 0x7f0a0366
 int id math_compass 0x7f0a0367
 int id maxcdn 0x7f0a0368
-int id media_actions 0x7f0a0617
+int id media_actions 0x7f0a0618
 int id medium 0x7f0a0369
 int id memory 0x7f0a036a
 int id menu 0x7f0a036b
@@ -1753,8 +1755,8 @@ int id regex 0x7f0a045d
 int id relative_scale 0x7f0a045e
 int id reload 0x7f0a045f
 int id remote 0x7f0a0460
-int id removeIcon 0x7f0a0625
-int id removepage 0x7f0a0621
+int id removeIcon 0x7f0a0626
+int id removepage 0x7f0a0622
 int id rename_box 0x7f0a0461
 int id repeat 0x7f0a0462
 int id repeat_off 0x7f0a0463
@@ -1782,7 +1784,6 @@ int id rss 0x7f0a0477
 int id rss_box 0x7f0a0478
 int id ruler 0x7f0a0479
 int id run 0x7f0a047a
-int id rv 0x7f0a0613
 int id sale 0x7f0a047b
 int id satellite 0x7f0a047c
 int id satellite_variant 0x7f0a047d
@@ -1835,7 +1836,7 @@ int id server_off 0x7f0a049b
 int id server_plus 0x7f0a049c
 int id server_remove 0x7f0a049d
 int id server_security 0x7f0a049e
-int id setashomepage 0x7f0a0622
+int id setashomepage 0x7f0a0623
 int id settings 0x7f0a049f
 int id settings_box 0x7f0a04a0
 int id shape_plus 0x7f0a04a1
@@ -1908,7 +1909,7 @@ int id star_circle 0x7f0a04da
 int id star_half 0x7f0a04db
 int id star_off 0x7f0a04dc
 int id star_outline 0x7f0a04dd
-int id status_bar_latest_event_content 0x7f0a0616
+int id status_bar_latest_event_content 0x7f0a0617
 int id steam 0x7f0a04de
 int id steering 0x7f0a04df
 int id step_backward 0x7f0a04e0
@@ -1967,8 +1968,8 @@ int id temperature_kelvin 0x7f0a0511
 int id tennis 0x7f0a0512
 int id tent 0x7f0a0513
 int id terrain 0x7f0a0514
-int id text 0x7f0a061e
-int id text2 0x7f0a061c
+int id text 0x7f0a061f
+int id text2 0x7f0a061d
 int id textSpacerNoButtons 0x7f0a05e9
 int id text_to_speech 0x7f0a0515
 int id text_to_speech_off 0x7f0a0516
@@ -1986,7 +1987,7 @@ int id ticket 0x7f0a0521
 int id ticket_account 0x7f0a0522
 int id ticket_confirmation 0x7f0a0523
 int id tie 0x7f0a0524
-int id time 0x7f0a061a
+int id time 0x7f0a061b
 int id timelapse 0x7f0a0525
 int id timer 0x7f0a0526
 int id timer_10 0x7f0a0527
@@ -2071,8 +2072,8 @@ int id vector_square 0x7f0a056d
 int id vector_triangle 0x7f0a056e
 int id vector_union 0x7f0a056f
 int id verified 0x7f0a0570
-int id vertexpand 0x7f0a0626
-int id vertless 0x7f0a0628
+int id vertexpand 0x7f0a0627
+int id vertless 0x7f0a0629
 int id vibrate 0x7f0a0571
 int id video 0x7f0a0572
 int id video_off 0x7f0a0573

@@ -55,7 +55,7 @@ public class AppManager
 		if(task == null || task.getStatus() == AsyncTask.Status.FINISHED)
 			task = new AsyncGetApps().execute();
 		else if(task.getStatus() == AsyncTask.Status.RUNNING){
-			task.cancel(true);
+			task.cancel(false);
 			task = new AsyncGetApps().execute();
 		}
 	}

@@ -3746,7 +3746,7 @@ containing a value of this type.
         public static final int account_star=0x7f0a0034;
         public static final int account_star_variant=0x7f0a0035;
         public static final int account_switch=0x7f0a0036;
-        public static final int action0=0x7f0a0614;
+        public static final int action0=0x7f0a0615;
         public static final int action_bar=0x7f0a05f6;
         public static final int action_bar_activity_content=0x7f0a0000;
         public static final int action_bar_container=0x7f0a05f5;
@@ -3755,7 +3755,7 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f0a05d8;
         public static final int action_bar_title=0x7f0a05d7;
         public static final int action_context_bar=0x7f0a05f7;
-        public static final int action_divider=0x7f0a0618;
+        public static final int action_divider=0x7f0a0619;
         public static final int action_menu_divider=0x7f0a0002;
         public static final int action_menu_presenter=0x7f0a0003;
         public static final int action_mode_bar=0x7f0a05f3;
@@ -4003,12 +4003,13 @@ containing a value of this type.
         public static final int camera_rear_variant=0x7f0a011b;
         public static final int camera_switch=0x7f0a011c;
         public static final int camera_timer=0x7f0a011d;
-        public static final int cancel_action=0x7f0a0615;
+        public static final int cancel_action=0x7f0a0616;
         public static final int candycane=0x7f0a011e;
         public static final int car=0x7f0a011f;
         public static final int car_battery=0x7f0a0120;
         public static final int car_connected=0x7f0a0121;
         public static final int car_wash=0x7f0a0122;
+        public static final int card=0x7f0a0614;
         public static final int carrot=0x7f0a0123;
         public static final int cart=0x7f0a0124;
         public static final int cart_outline=0x7f0a0125;
@@ -4022,6 +4023,7 @@ containing a value of this type.
         public static final int cast_connected=0x7f0a012d;
         public static final int castle=0x7f0a012e;
         public static final int cat=0x7f0a012f;
+        public static final int cc=0x7f0a0613;
         public static final int cellphone=0x7f0a0130;
         public static final int cellphone_android=0x7f0a0131;
         public static final int cellphone_basic=0x7f0a0132;
@@ -4063,7 +4065,7 @@ containing a value of this type.
         public static final int chevron_left=0x7f0a0155;
         public static final int chevron_right=0x7f0a0156;
         public static final int chevron_up=0x7f0a0157;
-        public static final int chronometer=0x7f0a061b;
+        public static final int chronometer=0x7f0a061c;
         public static final int church=0x7f0a0158;
         public static final int cisco_webex=0x7f0a0159;
         public static final int city=0x7f0a015a;
@@ -4194,7 +4196,7 @@ containing a value of this type.
         public static final int decor_content_parent=0x7f0a05f4;
         public static final int default_activity_button=0x7f0a05dc;
         public static final int delete=0x7f0a01d3;
-        public static final int deleteIcon=0x7f0a0623;
+        public static final int deleteIcon=0x7f0a0624;
         public static final int delete_variant=0x7f0a01d4;
         public static final int delta=0x7f0a01d5;
         public static final int deskphone=0x7f0a01d6;
@@ -4260,7 +4262,7 @@ containing a value of this type.
         public static final int emoticon_sad=0x7f0a020b;
         public static final int emoticon_tongue=0x7f0a020c;
         public static final int end=0x7f0a001d;
-        public static final int end_padder=0x7f0a0620;
+        public static final int end_padder=0x7f0a0621;
         public static final int engine=0x7f0a020d;
         public static final int engine_outline=0x7f0a020e;
         public static final int equal=0x7f0a020f;
@@ -4492,8 +4494,8 @@ containing a value of this type.
         public static final int home_modern=0x7f0a02ed;
         public static final int home_variant=0x7f0a02ee;
         public static final int hops=0x7f0a02ef;
-        public static final int horiexpand=0x7f0a0627;
-        public static final int horiless=0x7f0a0629;
+        public static final int horiexpand=0x7f0a0628;
+        public static final int horiless=0x7f0a062a;
         public static final int hospital=0x7f0a02f0;
         public static final int hospital_building=0x7f0a02f1;
         public static final int hospital_marker=0x7f0a02f2;
@@ -4524,8 +4526,8 @@ containing a value of this type.
         public static final int image_multiple=0x7f0a0309;
         public static final int import_icon=0x7f0a030a;
         public static final int inbox=0x7f0a030b;
-        public static final int info=0x7f0a061f;
-        public static final int infoIcon=0x7f0a0624;
+        public static final int info=0x7f0a0620;
+        public static final int infoIcon=0x7f0a0625;
         public static final int information=0x7f0a030c;
         public static final int information_outline=0x7f0a030d;
         public static final int instagram=0x7f0a030e;
@@ -4587,8 +4589,8 @@ containing a value of this type.
         public static final int library_plus=0x7f0a0343;
         public static final int lightbulb=0x7f0a0344;
         public static final int lightbulb_outline=0x7f0a0345;
-        public static final int line1=0x7f0a0619;
-        public static final int line3=0x7f0a061d;
+        public static final int line1=0x7f0a061a;
+        public static final int line3=0x7f0a061e;
         public static final int link=0x7f0a0346;
         public static final int link_off=0x7f0a0347;
         public static final int link_variant=0x7f0a0348;
@@ -4627,7 +4629,7 @@ containing a value of this type.
         public static final int material_ui=0x7f0a0366;
         public static final int math_compass=0x7f0a0367;
         public static final int maxcdn=0x7f0a0368;
-        public static final int media_actions=0x7f0a0617;
+        public static final int media_actions=0x7f0a0618;
         public static final int medium=0x7f0a0369;
         public static final int memory=0x7f0a036a;
         public static final int menu=0x7f0a036b;
@@ -4884,8 +4886,8 @@ containing a value of this type.
         public static final int relative_scale=0x7f0a045e;
         public static final int reload=0x7f0a045f;
         public static final int remote=0x7f0a0460;
-        public static final int removeIcon=0x7f0a0625;
-        public static final int removepage=0x7f0a0621;
+        public static final int removeIcon=0x7f0a0626;
+        public static final int removepage=0x7f0a0622;
         public static final int rename_box=0x7f0a0461;
         public static final int repeat=0x7f0a0462;
         public static final int repeat_off=0x7f0a0463;
@@ -4913,7 +4915,6 @@ containing a value of this type.
         public static final int rss_box=0x7f0a0478;
         public static final int ruler=0x7f0a0479;
         public static final int run=0x7f0a047a;
-        public static final int rv=0x7f0a0613;
         public static final int sale=0x7f0a047b;
         public static final int satellite=0x7f0a047c;
         public static final int satellite_variant=0x7f0a047d;
@@ -4966,7 +4967,7 @@ containing a value of this type.
         public static final int server_plus=0x7f0a049c;
         public static final int server_remove=0x7f0a049d;
         public static final int server_security=0x7f0a049e;
-        public static final int setashomepage=0x7f0a0622;
+        public static final int setashomepage=0x7f0a0623;
         public static final int settings=0x7f0a049f;
         public static final int settings_box=0x7f0a04a0;
         public static final int shape_plus=0x7f0a04a1;
@@ -5039,7 +5040,7 @@ containing a value of this type.
         public static final int star_half=0x7f0a04db;
         public static final int star_off=0x7f0a04dc;
         public static final int star_outline=0x7f0a04dd;
-        public static final int status_bar_latest_event_content=0x7f0a0616;
+        public static final int status_bar_latest_event_content=0x7f0a0617;
         public static final int steam=0x7f0a04de;
         public static final int steering=0x7f0a04df;
         public static final int step_backward=0x7f0a04e0;
@@ -5098,8 +5099,8 @@ containing a value of this type.
         public static final int tennis=0x7f0a0512;
         public static final int tent=0x7f0a0513;
         public static final int terrain=0x7f0a0514;
-        public static final int text=0x7f0a061e;
-        public static final int text2=0x7f0a061c;
+        public static final int text=0x7f0a061f;
+        public static final int text2=0x7f0a061d;
         public static final int textSpacerNoButtons=0x7f0a05e9;
         public static final int text_to_speech=0x7f0a0515;
         public static final int text_to_speech_off=0x7f0a0516;
@@ -5117,7 +5118,7 @@ containing a value of this type.
         public static final int ticket_account=0x7f0a0522;
         public static final int ticket_confirmation=0x7f0a0523;
         public static final int tie=0x7f0a0524;
-        public static final int time=0x7f0a061a;
+        public static final int time=0x7f0a061b;
         public static final int timelapse=0x7f0a0525;
         public static final int timer=0x7f0a0526;
         public static final int timer_10=0x7f0a0527;
@@ -5202,8 +5203,8 @@ containing a value of this type.
         public static final int vector_triangle=0x7f0a056e;
         public static final int vector_union=0x7f0a056f;
         public static final int verified=0x7f0a0570;
-        public static final int vertexpand=0x7f0a0626;
-        public static final int vertless=0x7f0a0628;
+        public static final int vertexpand=0x7f0a0627;
+        public static final int vertless=0x7f0a0629;
         public static final int vibrate=0x7f0a0571;
         public static final int video=0x7f0a0572;
         public static final int video_off=0x7f0a0573;

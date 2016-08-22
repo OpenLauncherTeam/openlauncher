@@ -48,9 +48,11 @@ public class DragNavigationControl {
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
-                        switch ((DragAction) dragEvent.getLocalState()) {
+                        switch (((DragAction)dragEvent.getLocalState()).action) {
                             case ACTION_APP:
                             case ACTION_WIDGET:
+                            case ACTION_APP_DRAWER:
+                            case ACTION_GROUP:
                                 leftView.animate().alpha(1);
                                 return true;
                         }
@@ -85,9 +87,11 @@ public class DragNavigationControl {
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
-                        switch ((DragAction) dragEvent.getLocalState()) {
+                        switch (((DragAction)dragEvent.getLocalState()).action) {
                             case ACTION_APP:
                             case ACTION_WIDGET:
+                            case ACTION_APP_DRAWER:
+                            case ACTION_GROUP:
                                 rightView.animate().alpha(1);
                                 return true;
                         }

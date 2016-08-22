@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bennyv4.project2.R;
+import com.bennyv4.project2.util.Tools;
 
 public class CellContainer extends ViewGroup {
     private boolean[][] occupied;
@@ -21,9 +22,9 @@ public class CellContainer extends ViewGroup {
 
     cellHeight,
 
-    cellSpanVert = 4,
+    cellSpanVert = 0,
 
-    cellSpanHori = 4;
+    cellSpanHori = 0;
 
     private Paint mPaint;
 
@@ -39,12 +40,10 @@ public class CellContainer extends ViewGroup {
         init();
     }
 
-    public void setHideGrid(boolean hideGrid) {
-        this.hideGrid = hideGrid;
-        invalidate();
-    }
+    public void setGridSize(int x, int y) {
+        cellSpanVert = y;
+        cellSpanHori = x;
 
-    public void init() {
         occupied = new boolean[cellSpanHori][cellSpanVert];
 
         for (int i = 0; i < cellSpanHori; i++) {
@@ -53,6 +52,16 @@ public class CellContainer extends ViewGroup {
             }
         }
 
+        requestLayout();
+    }
+
+    public void setHideGrid(boolean hideGrid) {
+        this.hideGrid = hideGrid;
+        invalidate();
+        Tools.print("Hide grid: "+String.valueOf(hideGrid));
+    }
+
+    public void init() {
         setWillNotDraw(false);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
@@ -65,7 +74,6 @@ public class CellContainer extends ViewGroup {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
 
         float s = 7f;
         for (int x = 0; x < cellSpanHori; x++) {
@@ -136,10 +144,10 @@ public class CellContainer extends ViewGroup {
         addView(view);
     }
 
-    public LayoutParams cellPositionToLayoutPrams(int cellx, int celly, int xSpan, int ySpan,LayoutParams current) {
-        setOccupied(false,current);
+    public LayoutParams cellPositionToLayoutPrams(int cellx, int celly, int xSpan, int ySpan, LayoutParams current) {
+        setOccupied(false, current);
         if (occupied[cellx][celly]) {
-            setOccupied(true,current);
+            setOccupied(true, current);
             return null;
         }
 
@@ -159,7 +167,7 @@ public class CellContainer extends ViewGroup {
         for (int x2 = cellx; x2 < cellx + xSpan; x2++) {
             for (int y2 = celly; y2 < celly + ySpan; y2++) {
                 if (occupied[x2][y2]) {
-                    setOccupied(true,current);
+                    setOccupied(true, current);
                     return null;
                 }
             }
