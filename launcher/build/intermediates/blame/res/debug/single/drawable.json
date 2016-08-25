@@ -1,0 +1,390 @@
+[
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_delete_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_delete_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_clear_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_clear_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_track_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_dialog_material_background.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_chevron_left_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_chevron_left_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_borderless_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\vpi__tab_indicator.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\OpenLauncher\\viewpagerindicator\\unspecified\\res\\drawable\\vpi__tab_indicator.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_colored_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_tick_mark_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_seekbar_tick_mark_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_search_api_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_search_api_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_star_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_star_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_dashboard_dark_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_dashboard_dark_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_light.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_arrow_drop_right_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_arrow_drop_right_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_search_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_search_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_track_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_delete_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_delete_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_chevron_left_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_chevron_left_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_voice_search_api_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_voice_search_api_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_dialog_material_background.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_check_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_btn_check_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_tab_indicator_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_expand_less_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_expand_less_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_tab_indicator_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_expand_more_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_expand_more_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_light.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_voice_search_api_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_voice_search_api_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_light.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_seekbar_thumb_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_switch_thumb_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_small_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ratingbar_small_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_chevron_right_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_chevron_right_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_search_api_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_search_api_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\roundbg.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\roundbg.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_indicator_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ratingbar_indicator_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_clear_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_clear_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_seekbar_thumb_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_star_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_star_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_internal_bg.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_colored_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_tick_mark_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_seekbar_tick_mark_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ratingbar_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_radio_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_search_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_search_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_borderless_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_switch_thumb_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_info_outline_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_info_outline_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\outlinebg.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\outlinebg.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_radio_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_small_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ratingbar_small_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ratingbar_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_close_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_close_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_go_search_api_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_go_search_api_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_expand_more_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_expand_more_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_internal_bg.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_check_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_btn_check_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_clear_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_clear_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_chevron_right_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_chevron_right_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\roundbg.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\roundbg.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_unfold_more_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_unfold_more_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_go_search_api_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_go_search_api_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_unfold_more_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_unfold_more_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_menu_overflow_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_menu_overflow_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_text_cursor_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_text_cursor_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_edit_text_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_edit_text_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_light.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_expand_less_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_expand_less_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_ab_back_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_ab_back_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_dashboard_dark_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_dashboard_dark_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\outlinebg.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\outlinebg.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_light.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_edit_text_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_edit_text_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_search_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_clear_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_clear_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_arrow_drop_right_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_arrow_drop_right_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_search_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_close_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_close_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_mic_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_mic_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_mic_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_mic_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_light.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_text_cursor_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_text_cursor_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_indicator_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ratingbar_indicator_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_info_outline_black_24dp.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\src\\main\\res\\drawable\\ic_info_outline_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_menu_overflow_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_menu_overflow_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_ab_back_material.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_ic_ab_back_material.xml"
+    }
+]
