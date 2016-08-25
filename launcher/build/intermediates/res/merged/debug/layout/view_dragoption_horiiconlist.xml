@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/deleteIcon"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="#686868"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/ic_delete_black_24dp"
+        android:text="@string/uninstall"
+        />
+
+    <TextView
+        android:id="@+id/infoIcon"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="#686868"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/ic_info_outline_black_24dp"
+        android:text="@string/info"
+        />
+
+    <TextView
+        android:id="@+id/removeIcon"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="#686868"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/ic_close_black_24dp"
+        android:text="@string/remove"
+        />
+
+</LinearLayout>
