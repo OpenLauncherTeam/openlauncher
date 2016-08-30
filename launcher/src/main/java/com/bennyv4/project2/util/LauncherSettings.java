@@ -32,8 +32,14 @@ public class LauncherSettings {
 
     public SharedPreferences pref;
 
+    public Context c;
+
+    private static final String DesktopDataFileName = "desktopData.json";
+    private static final String DockDataFileName = "dockData.json";
+
     private LauncherSettings(Context c) {
-        pref = c.getSharedPreferences("launcherSettings",Context.MODE_PRIVATE);
+        this.c = c;
+        pref = c.getSharedPreferences("LauncherSettings",Context.MODE_PRIVATE);
         readSettings();
     }
 
@@ -42,13 +48,13 @@ public class LauncherSettings {
 
         Gson gson = new Gson();
 
-        String raw = pref.getString("dockData",null);
+        String raw = Tools.getStringFromFile(DockDataFileName,c);
         if (raw == null)
             simpleDockData = new ArrayList<>();
         else
             simpleDockData = gson.fromJson(raw,new TypeToken<ArrayList<Desktop.SimpleItem>>(){}.getType());
 
-        raw = pref.getString("desktopData",null);
+        raw = Tools.getStringFromFile(DesktopDataFileName,c);
         if (raw == null)
             simpleDesktopData = new ArrayList<>();
         else
@@ -88,8 +94,11 @@ public class LauncherSettings {
                 page.add(new Desktop.SimpleItem(item));
             }
         }
-        pref.edit().putString("dockData",gson.toJson(simpleDockData)).apply();
-        pref.edit().putString("desktopData",gson.toJson(simpleDesktopData)).apply();
+        Tools.writeToFile(DockDataFileName,gson.toJson(simpleDockData),c);
+        Tools.writeToFile(DesktopDataFileName,gson.toJson(simpleDesktopData),c);
+
+        //pref.edit().putString("dockData",gson.toJson(simpleDockData)).apply();
+        //pref.edit().putString("desktopData",gson.toJson(simpleDesktopData)).apply();
         pref.edit().putString("generalSettings",gson.toJson(generalSettings)).apply();
     }
 
@@ -108,5 +117,9 @@ public class LauncherSettings {
 
         public int dockGridx = 5;
         public int iconSize = 58;
+
+        public ArrayList<String> minBarArrangement;
     }
+
+
 }

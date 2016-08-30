@@ -27,8 +27,7 @@ public class DragOptionView extends CardView{
     private TextView infoIcon;
     private TextView deleteIcon;
 
-    final Long animSpeed = 200L;
-    final Long animDelay = 200L;
+    final Long animSpeed = 180L;
 
     public DragOptionView(Context context) {
         super(context);
@@ -172,14 +171,13 @@ public class DragOptionView extends CardView{
 
     private void animShowView(){
         if (hideView != null)
-            hideView.animate().alpha(0).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
+            hideView.animate().alpha(0).setDuration(Math.round(animSpeed/1.3f)).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    animate().y(0).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
 
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                animate().y(0).setStartDelay(animDelay).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
-            }
-        },animDelay/2);
+                }
+            });
     }
 
     @Override
@@ -240,18 +238,18 @@ public class DragOptionView extends CardView{
                 dragging = false;
                 if (hideView != null){
                     hideView.setAlpha(0);
-                    postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            removeIcon.setVisibility(View.GONE);
-                            infoIcon.setVisibility(View.GONE);
-                            deleteIcon.setVisibility(View.GONE);
-
-                            hideView.animate().alpha(1).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
-                        }
-                    },animDelay*2);
                 }
-                animate().y(-Tools.convertDpToPixel(68,getContext())).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
+                animate().y(-Tools.convertDpToPixel(68,getContext())).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        removeIcon.setVisibility(View.GONE);
+                        infoIcon.setVisibility(View.GONE);
+                        deleteIcon.setVisibility(View.GONE);
+
+                        if (hideView != null)
+                        hideView.animate().alpha(1).setDuration(Math.round(animSpeed/1.3f)).setInterpolator(new AccelerateDecelerateInterpolator());
+                    }
+                });
                 return true;
         }
         return false;

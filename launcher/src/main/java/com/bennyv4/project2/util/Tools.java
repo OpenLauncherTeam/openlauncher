@@ -7,13 +7,27 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.util.*;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
+import com.bennyv4.project2.Home;
 import com.bennyv4.project2.R;
+import com.bennyv4.project2.widget.Desktop;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class Tools
@@ -117,6 +131,65 @@ public class Tools
 
     public static float clampFloat(float target,float min,float max){
         return Math.max(min, Math.min(max, target));
+    }
+
+    public static void writeToFile(String name,String data,Context context) {
+        try {
+
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(name, Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException ignore) {
+
+        }
+    }
+
+    public static View.OnTouchListener getItemOnTouchListener(){
+        return new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Home.touchX = (int) motionEvent.getX();
+                Home.touchY = (int) motionEvent.getY();
+                Tools.print(Home.touchX);
+                Tools.print(Home.touchY);
+                return false;
+            }
+        };
+    }
+
+    private static String convertStreamToString(InputStream is) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+        reader.close();
+        return sb.toString();
+    }
+
+    public static String getStringFromFile (String name,Context context){
+        try {
+            FileInputStream fin = context.openFileInput(name);
+            String ret = convertStreamToString(fin);
+            fin.close();
+            return ret;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public static Bitmap blur(Bitmap b,Context c){
+        final RenderScript rs = RenderScript.create(c);
+        final Allocation input = Allocation.createFromBitmap(rs,b,Allocation.MipmapControl.MIPMAP_NONE,Allocation.USAGE_SCRIPT);
+        final Allocation output = Allocation.createTyped(rs,input.getType());
+        final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+        script.setRadius(25f);
+        script.setInput(input);
+        script.forEach(output);
+        output.copyTo(b);
+        return b;
     }
 
 	public static void createScaleInScaleOutAnim(final View view, final Runnable endAction){

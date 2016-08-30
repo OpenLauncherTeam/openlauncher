@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="@android:style/Theme.Material.Light">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimaryDark">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -258,4 +258,7 @@
     </style>
     <style name="Platform.ThemeOverlay.AppCompat.Dark"/>
     <style name="Platform.ThemeOverlay.AppCompat.Light"/>
+    <style name="Widget.Design.AppBarLayout" parent="Base.Widget.Design.AppBarLayout">
+        <item name="android:stateListAnimator">@anim/design_appbar_state_list_animator</item>
+    </style>
 </resources>

@@ -8,6 +8,9 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="24" />
 
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+
     <application
         android:name="com.android.tools.fd.runtime.BootstrapApplication"
         android:allowBackup="true"
@@ -33,6 +36,22 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.bennyv4.project2.activity.MinBarEditActivity"
+            android:label="Edit Item"
+            android:theme="@style/NormalActivity" />
+
+        <receiver
+            android:name="com.bennyv4.project2.util.DeviceAdminReceiver"
+            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin" />
+        </receiver>
     </application>
 
 </manifest>
