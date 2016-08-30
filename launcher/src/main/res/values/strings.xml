@@ -6,9 +6,12 @@
     <string name="info">Info</string>
     <string name="uninstall">Uninstall</string>
     <string name="add_widget">Add widget</string>
+    <string name="remove">Remove</string>
 
     <string name="toast_notenoughspace">Not enough space</string>
     <string name="toast_appuninstalled">This app has uninstalled.</string>
-    <string name="remove">Remove</string>
+    <string name="toast_freeram" formatted="false">Free Memory: %d mb saved %d mb</string>
+    <string name="toast_freeallram" formatted="false">Free Memory: %d mb Your ram is in best state</string>
+    <string name="toast_plzenabledeviceadmin">Please enable device administration</string>
 
 </resources>

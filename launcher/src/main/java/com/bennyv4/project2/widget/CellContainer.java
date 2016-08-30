@@ -5,13 +5,17 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.Tools;
+
+import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class CellContainer extends ViewGroup {
     private boolean[][] occupied;
@@ -29,6 +33,10 @@ public class CellContainer extends ViewGroup {
     private Paint mPaint;
 
     private boolean hideGrid = true;
+
+    public boolean blockTouch= false;
+
+    public SimpleFingerGestures gestures;
 
     public CellContainer(Context c) {
         super(c);
@@ -59,6 +67,41 @@ public class CellContainer extends ViewGroup {
         this.hideGrid = hideGrid;
         invalidate();
         Tools.print("Hide grid: "+String.valueOf(hideGrid));
+    }
+
+    Long down = 0L;
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch(MotionEventCompat.getActionMasked(event) ) {
+            case MotionEvent.ACTION_DOWN:
+                down = System.currentTimeMillis();
+                break;
+            case MotionEvent.ACTION_UP:
+                if(System.currentTimeMillis() - down < 260L && blockTouch) {
+                    performClick();
+                }
+                break;
+        }
+        Tools.print(System.currentTimeMillis() - event.getDownTime());
+
+        if (blockTouch)
+            return true;
+
+        if (gestures != null)
+            try {
+                gestures.onTouch(this,event);
+            }catch (Exception ignore){
+
+            }
+
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (blockTouch)
+            return true;
+        return super.onInterceptTouchEvent(ev);
     }
 
     public void init() {

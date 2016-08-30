@@ -21,11 +21,11 @@ import java.util.List;
 
 import com.bennyv4.project2.util.AppManager;
 import com.bennyv4.project2.util.DragAction;
+import com.bennyv4.project2.util.GoodDragShadowBuilder;
 import com.bennyv4.project2.util.LauncherSettings;
 import com.bennyv4.project2.util.Tools;
 import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
 import com.bennyv5.smoothviewpager.SmoothViewPager;
-import com.viewpagerindicator.PageIndicator;
 
 public class AppDrawer extends SmoothViewPager
 {
@@ -124,10 +124,10 @@ public class AppDrawer extends SmoothViewPager
             ImageView iv = (ImageView) itemView.findViewById(R.id.iv);
             TextView tv = (TextView) itemView.findViewById(R.id.tv);
 
-            iv.getLayoutParams().width = (int)Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
-            iv.getLayoutParams().height = (int)Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+            iv.getLayoutParams().width = Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+            iv.getLayoutParams().height = Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
 
-            tv.getLayoutParams().height = (int)Tools.convertDpToPixel(textHeight, getContext());
+            tv.getLayoutParams().height = Tools.convertDpToPixel(textHeight, getContext());
 
             itemView.setOnClickListener(new OnClickListener() {
                 @Override
@@ -140,13 +140,14 @@ public class AppDrawer extends SmoothViewPager
                     });
                 }
             });
+            itemView.setOnTouchListener(Tools.getItemOnTouchListener());
             itemView.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     Intent i = new Intent();
                     i.putExtra("mDragData", Desktop.Item.newAppItem(app));
                     ClipData data = ClipData.newIntent("mDragIntent", i);
-                    view.startDrag(data, new DragShadowBuilder(view),new DragAction(DragAction.Action.ACTION_APP_DRAWER,0), 0);
+                    view.startDrag(data, new GoodDragShadowBuilder(view),new DragAction(DragAction.Action.ACTION_APP_DRAWER,0), 0);
                     home.closeAppDrawer();
                     return true;
                 }

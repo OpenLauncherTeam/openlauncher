@@ -21,6 +21,7 @@ import com.bennyv4.project2.Home;
 import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.AppManager;
 import com.bennyv4.project2.util.DragAction;
+import com.bennyv4.project2.util.GoodDragShadowBuilder;
 import com.bennyv4.project2.util.GroupIconDrawable;
 import com.bennyv4.project2.util.LauncherSettings;
 import com.bennyv4.project2.util.Tools;
@@ -202,15 +203,15 @@ public class Dock extends CellContainer implements View.OnDragListener {
             }
         });
         item_layout.setId(UUID.randomUUID().hashCode());
+        item_layout.setOnTouchListener(Tools.getItemOnTouchListener());
         item_layout.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                if (Home.desktop.inEditMode)return false;
                 view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                 Intent i = new Intent();
                 i.putExtra("mDragData", item);
                 ClipData data = ClipData.newIntent("mDragIntent", i);
-                view.startDrag(data, new DragShadowBuilder(view),new DragAction(DragAction.Action.ACTION_APP,item_layout.getId()), 0);
+                view.startDrag(data, new GoodDragShadowBuilder(view),new DragAction(DragAction.Action.ACTION_APP,item_layout.getId()), 0);
 
                 //Remove the item from settings
                 LauncherSettings.getInstance(getContext()).dockData.remove(item);
@@ -225,7 +226,6 @@ public class Dock extends CellContainer implements View.OnDragListener {
         item_layout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Home.desktop.inEditMode)return;
                 Tools.createScaleInScaleOutAnim(view, new Runnable() {
                     @Override
                     public void run() {
@@ -303,15 +303,16 @@ public class Dock extends CellContainer implements View.OnDragListener {
                 return false;
             }
         });
+
+        item_layout.setOnTouchListener(Tools.getItemOnTouchListener());
         item_layout.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                if (Home.desktop.inEditMode)return false;
                 view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                 Intent i = new Intent();
                 i.putExtra("mDragData", item);
                 ClipData data = ClipData.newIntent("mDragIntent", i);
-                view.startDrag(data, new DragShadowBuilder(view),new DragAction(DragAction.Action.ACTION_GROUP,0), 0);
+                view.startDrag(data, new GoodDragShadowBuilder(view),new DragAction(DragAction.Action.ACTION_GROUP,0), 0);
 
                 //Remove the item from settings
                 LauncherSettings.getInstance(getContext()).dockData.remove(item);
@@ -326,7 +327,6 @@ public class Dock extends CellContainer implements View.OnDragListener {
         item_layout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Home.desktop.inEditMode) return;
                 item_layout.animate().setDuration(150).scaleX(0.5f).scaleY(0.5f).setInterpolator(new AccelerateDecelerateInterpolator());
                 ((GroupIconDrawable)(iv).getDrawable()).popUp();
                 Home.groupPopup.showWindowV(item,view,true);

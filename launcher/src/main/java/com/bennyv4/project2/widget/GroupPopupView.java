@@ -78,6 +78,8 @@ public class GroupPopupView extends FrameLayout {
                 if (y2 * cellSize[0] + x2 > item.actions.length - 1) continue;
                 final AppManager.App app = AppManager.getInstance(c).findApp(item.actions[y2 * cellSize[0] + x2].getComponent().getPackageName(), item.actions[y2 * cellSize[0] + x2].getComponent().getClassName());
 
+                if (app == null)continue;
+
                 FrameLayout itemView = new FrameLayout(getContext());
                 final ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, itemView, false);
                 itemView.addView(item_layout);
@@ -155,7 +157,7 @@ public class GroupPopupView extends FrameLayout {
                 else
                     view.findViewById(R.id.iv).animate().setDuration(200).scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator());
 
-                ((GroupIconDrawable) ((ImageView) view.findViewById(R.id.iv)).getDrawable()).popBack(view);
+                ((GroupIconDrawable) ((ImageView) view.findViewById(R.id.iv)).getDrawable()).popBack();
             }
         });
         p.showAsDropDown(view);
