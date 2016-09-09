@@ -26,6 +26,7 @@ out/
 # Gradle files
 .gradle
 /build
+/gradle
 
 # Local configuration file (sdk path, etc)
 /local.properties
@@ -44,11 +45,14 @@ proguard/
 
 # Intellij
 *.iml
-/.idea/workspace.xml
-/.idea/libraries
+/.idea
 
 # Keystore files
 *.jks
 
 # MacOS Cache Files
 .DS_Store
+
+#Project/Module build directories
+/launcher/build
+/smoothviewpager/build
