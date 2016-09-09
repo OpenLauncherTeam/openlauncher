@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp">
 
     <ImageView
-        android:padding="10dp"
         android:id="@+id/iv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:tint="?android:textColorPrimary" />
 
     <LinearLayout
-        android:orientation="vertical"
+        android:layout_toRightOf="@+id/iv"
+        android:layout_toLeftOf="@+id/cb"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/tv2"
-        android:gravity="start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv2"
+            android:textColor="?android:textColorSecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start" />
 
     </LinearLayout>
 
-</LinearLayout>
+    <CheckBox
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/cb"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

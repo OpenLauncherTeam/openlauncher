@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Light.PrimaryDark">#9e9e9e</color>
+    <color name="Light.Background">#ffffff</color>
+    <color name="Light.GreyBackground">#f9f9f9</color>
+    <color name="Light.TextColor">#616161</color>
+    <color name="Light.TextColorSec">#616161</color>
+
+    <color name="Dark.Background">#424242</color>
+    <color name="Dark.TextColor">#ffffff</color>
+    <color name="Dark.TextColorSec">#bdbdbd</color>
+</resources>

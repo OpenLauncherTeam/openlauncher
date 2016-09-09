@@ -9,10 +9,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardBackgroundColor="?colorViewBackground"
         app:cardCornerRadius="25dp">
 
         <ImageView
+            android:tint="?android:textColorPrimary"
             android:id="@+id/iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

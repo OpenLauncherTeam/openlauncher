@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:paddingTop="24dp"
-    android:paddingBottom="24dp"
-    android:orientation="vertical"
+<com.balysv.materialripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingBottom="24dp"
+    android:paddingTop="24dp"
+    app:mrl_rippleColor="?android:textColorPrimary"
+    app:mrl_rippleDuration="250"
+    app:mrl_rippleFadeDuration="150"
+    app:mrl_rippleOverlay="true"
+    app:mrl_rippleDimension="40dp"
+    app:mrl_rippleRoundedCorners="40dp">
 
-    <ImageView
-        android:id="@+id/iv"
-        android:tint="#686868"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="28dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/tv"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:tint="?android:textColorPrimary" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</com.balysv.materialripple.MaterialRippleLayout>

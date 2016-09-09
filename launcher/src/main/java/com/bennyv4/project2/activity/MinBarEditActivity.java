@@ -9,12 +9,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.LauncherAction;
 import com.bennyv4.project2.util.LauncherSettings;
+import com.bennyv4.project2.util.Tools;
 import com.h6ah4i.android.widget.advrecyclerview.decoration.SimpleListDividerDecorator;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
@@ -31,23 +34,32 @@ public class MinBarEditActivity extends AppCompatActivity{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        //setTheme();
+        switch (LauncherSettings.getInstance(this).generalSettings.theme){
+            case Light:
+                setTheme(R.style.NormalActivity_Light);
+                break;
+            case Dark:
+                setTheme(R.style.NormalActivity_Dark);
+                break;
+        }
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_minbaredit);
         setSupportActionBar((Toolbar) findViewById(R.id.tb));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         int i = 0;
         ArrayList<Item> mItems = new ArrayList<>();
         final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.minBarArrangement;
         for (String act : minBarArrangement) {
-            LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act);
-            mItems.add(new Item(i,item));
+            LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act.substring(1));
+            mItems.add(new Item(i,item,act.charAt(0) == '0'));
             i++;
         }
 
         recyclerView = (RecyclerView) findViewById(R.id.rv);
-        recyclerView.addItemDecoration(new SimpleListDividerDecorator(ContextCompat.getDrawable(this, R.drawable.list_divider_h), true));
+        //recyclerView.addItemDecoration(new SimpleListDividerDecorator(ContextCompat.getDrawable(this, R.drawable.list_divider_h), true));
 
         RecyclerViewDragDropManager dragMgr = new RecyclerViewDragDropManager();
 
@@ -63,27 +75,30 @@ public class MinBarEditActivity extends AppCompatActivity{
     }
 
     @Override
-    public void onBackPressed() {
-        if(edited)
-            setResult(RESULT_OK);
-        super.onBackPressed();
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
     protected void onPause() {
         LauncherSettings.getInstance(this).generalSettings.minBarArrangement.clear();
         for (Item item : adapter.mItems)
-            LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add(item.item.label.toString());
+            if (item.enable)
+                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("0"+item.item.label.toString());
+            else
+                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("1"+item.item.label.toString());
         super.onPause();
     }
 
     private static class Item {
         public final long id;
         public final LauncherAction.ActionItem item;
+        public boolean enable;
 
-        public Item(long id, LauncherAction.ActionItem item) {
+        public Item(long id, LauncherAction.ActionItem item,boolean enable) {
             this.id = id;
             this.item = item;
+            this.enable = enable;
         }
     }
 
@@ -91,12 +106,14 @@ public class MinBarEditActivity extends AppCompatActivity{
         TextView tv;
         TextView tv2;
         ImageView iv;
+        CheckBox cb;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             tv = (TextView) itemView.findViewById(R.id.tv);
             tv2 = (TextView) itemView.findViewById(R.id.tv2);
             iv = (ImageView) itemView.findViewById(R.id.iv);
+            cb = (CheckBox) itemView.findViewById(R.id.cb);
         }
     }
 
@@ -122,10 +139,19 @@ public class MinBarEditActivity extends AppCompatActivity{
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
-            Item item = mItems.get(position);
+            final Item item = mItems.get(position);
             holder.tv.setText(item.item.label.toString());
             holder.tv2.setText(item.item.des);
             holder.iv.setImageResource(item.item.icon);
+            holder.cb.setChecked(item.enable);
+            holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    MinBarEditActivity.this.edited = true;
+                    setResult(RESULT_OK);
+                    item.enable = b;
+                }
+            });
         }
 
         @Override
@@ -136,6 +162,7 @@ public class MinBarEditActivity extends AppCompatActivity{
         @Override
         public void onMoveItem(int fromPosition, int toPosition) {
             MinBarEditActivity.this.edited = true;
+            setResult(RESULT_OK);
             Item movedItem = mItems.remove(fromPosition);
             mItems.add(toPosition, movedItem);
             notifyItemMoved(fromPosition, toPosition);

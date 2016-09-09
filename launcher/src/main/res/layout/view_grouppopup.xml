@@ -3,6 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="?colorViewBackground"
     app:contentPadding="5dp"
     app:cardElevation="4dp">
 
