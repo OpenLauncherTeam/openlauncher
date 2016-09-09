@@ -17,12 +17,10 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
-import com.bennyv4.project2.Home;
+import com.bennyv4.project2.activity.Home;
 import com.bennyv4.project2.R;
-import com.bennyv4.project2.widget.Desktop;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;

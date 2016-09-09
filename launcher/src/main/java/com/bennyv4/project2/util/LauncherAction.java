@@ -1,5 +1,6 @@
 package com.bennyv4.project2.util;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
@@ -7,10 +8,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 
 import com.bennyv4.project2.R;
+import com.bennyv4.project2.activity.SettingsActivity;
 
 import net.qiujuer.genius.blur.StackBlur;
 
@@ -22,14 +25,16 @@ public class LauncherAction {
     private static boolean clearingRam = false;
 
     public static ActionItem[] actionItems = new ActionItem[]{
-            new ActionItem(Action.SetWallpaper,"Set the wallpaper or blur the it",R.drawable.ic_photo_black_24dp),
+            new ActionItem(Action.SetWallpaper,"Set the wallpaper or blur it",R.drawable.ic_photo_black_24dp),
             new ActionItem(Action.LockScreen,"Lock the screen immediately, require device administration.",R.drawable.ic_lock_black_24dp),
             new ActionItem(Action.ClearRam,"Free the ram, force close other running services.",R.drawable.ic_donut_large_black_24dp),
-            new ActionItem(Action.DeviceSettings,"Shortcut to device/Android settings",R.drawable.ic_settings_black_24dp),
-            new ActionItem(Action.LauncherSettings,"OpenLauncher settings page",R.drawable.ic_settings_applications_black_24dp)
+            new ActionItem(Action.DeviceSettings,"Shortcut to device/Android settings.",R.drawable.ic_settings_black_24dp),
+            new ActionItem(Action.LauncherSettings,"OpenLauncher settings page.",R.drawable.ic_settings_applications_black_24dp),
+            new ActionItem(Action.ThemePicker,"Pick themes.",R.drawable.ic_brush_black_24dp),
+            new ActionItem(Action.VolumeDialog,"Open the volume dialog.",R.drawable.ic_volume_up_black_24dp)
     };
 
-    public static void RunAction(Action act,final Context c){
+    public static void RunAction(Action act,final Context c,final Activity a){
         switch (act){
             case LockScreen:
                 try{
@@ -95,7 +100,7 @@ public class LauncherAction {
                                 break;
                             case 1 :
                                 try{
-                                    WallpaperManager.getInstance(c).setBitmap(StackBlur.blur(Tools.drawableToBitmap(c.getWallpaper()),4,true));
+                                    WallpaperManager.getInstance(c).setBitmap(StackBlur.blur(Tools.drawableToBitmap(c.getWallpaper()),12,false));
                                 }catch (IOException ignore){}
                                 break;
                         }
@@ -106,7 +111,35 @@ public class LauncherAction {
             case DeviceSettings:
                 c.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
                 break;
+            case ThemePicker:
+                AlertDialog.Builder b2 = new AlertDialog.Builder(c);
+                b2.setTitle("Theme");
+                b2.setIcon(R.drawable.ic_brush_black_24dp);
+                b2.setItems(Theme.names(),new DialogInterface.OnClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface p1, int p2){
+                        if (!LauncherSettings.getInstance(c).generalSettings.theme.toString().equals(Theme.names()[p2])){
+                            switch (p2){
+                                case 0 :
+                                    LauncherSettings.getInstance(c).generalSettings.theme = Theme.Dark;
+                                    break;
+                                case 1 :
+                                    LauncherSettings.getInstance(c).generalSettings.theme = Theme.Light;
+                                    break;
+                            }
+                            a.recreate();
+                        }
+                    }
+                });
+                b2.show();
+                break;
+            case VolumeDialog:
+                AudioManager audioManager = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
+                audioManager.setStreamVolume(AudioManager.STREAM_RING,audioManager.getStreamVolume(AudioManager.STREAM_RING),AudioManager.FLAG_SHOW_UI);
+                break;
             case LauncherSettings:
+                c.startActivity(new Intent(a, SettingsActivity.class));
                 break;
         }
     }
@@ -131,7 +164,22 @@ public class LauncherAction {
         return null;
     }
 
+    public enum Theme{
+        Dark,Light;
+
+        public static String[] names() {
+            Theme[] states = values();
+            String[] names = new String[states.length];
+
+            for (int i = 0; i < states.length; i++) {
+                names[i] = states[i].name();
+            }
+
+            return names;
+        }
+    }
+
     public enum Action{
-        LockScreen, ClearRam,SetWallpaper,DeviceSettings, LauncherSettings
+        LockScreen, ClearRam,SetWallpaper,DeviceSettings,LauncherSettings,ThemePicker,VolumeDialog
     }
 }

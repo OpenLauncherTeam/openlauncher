@@ -1,6 +1,5 @@
 package com.bennyv4.project2.widget;
 
-import android.animation.Animator;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
-import android.view.Gravity;
+import android.view.DragEvent;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +19,11 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.bennyv4.project2.Home;
+import com.bennyv4.project2.activity.Home;
 import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.AppManager;
+import com.bennyv4.project2.util.DragAction;
+import com.bennyv4.project2.util.GoodDragShadowBuilder;
 import com.bennyv4.project2.util.GroupIconDrawable;
 import com.bennyv4.project2.util.LauncherSettings;
 import com.bennyv4.project2.util.Tools;
@@ -80,7 +81,7 @@ public class GroupPopupView extends FrameLayout {
 
                 if (app == null)continue;
 
-                FrameLayout itemView = new FrameLayout(getContext());
+                final FrameLayout itemView = new FrameLayout(getContext());
                 final ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, itemView, false);
                 itemView.addView(item_layout);
 
@@ -107,9 +108,6 @@ public class GroupPopupView extends FrameLayout {
                         else
                             LauncherSettings.getInstance(getContext()).desktopData.get(Home.desktop.getCurrentItem()).add(item);
 
-                        p.dismiss();
-
-
                         AppManager.App[] apps = new AppManager.App[item.actions.length];
                         for (int i = 0; i < item.actions.length; i++) {
                             apps[i] = AppManager.getInstance(getContext()).findApp(item.actions[i].getComponent().getPackageName(), item.actions[i].getComponent().getClassName());
@@ -127,6 +125,21 @@ public class GroupPopupView extends FrameLayout {
                             ((ImageView) view.findViewById(R.id.iv)).setImageDrawable(new GroupIconDrawable(icons, Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext())));
                         else
                             ((ImageView) view.findViewById(R.id.iv)).setImageDrawable(new GroupIconDrawable(icons, Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext()), view));
+
+
+                        AppManager.App dapps = AppManager.getInstance(getContext()).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
+                        if (dapps == null)
+                            return true;
+
+//                        itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+//                        Intent i = new Intent();
+//                        i.putExtra("mDragData",Desktop.Item.newAppItem(dapps));
+//                        ClipData data = ClipData.newIntent("mDragIntent", i);
+//
+//                        itemView.startDrag(data, new GoodDragShadowBuilder(itemView),new DragAction(DragAction.Action.ACTION_APP,0),0);
+//
+//                        setVisibility(INVISIBLE);
+                        p.dismiss();
                         view.performClick();
                         return true;
                     }
@@ -152,10 +165,10 @@ public class GroupPopupView extends FrameLayout {
         p.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                if (view.getScaleX() != 1)
-                    view.animate().setDuration(200).scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator());
-                else
-                    view.findViewById(R.id.iv).animate().setDuration(200).scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator());
+//                if (view.getScaleX() != 1)
+//                    view.animate().setDuration(200).scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator());
+//                else
+//                    view.findViewById(R.id.iv).animate().setDuration(200).scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator());
 
                 ((GroupIconDrawable) ((ImageView) view.findViewById(R.id.iv)).getDrawable()).popBack();
             }

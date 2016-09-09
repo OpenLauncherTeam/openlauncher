@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bennyv4.project2.Home;
+import com.bennyv4.project2.activity.Home;
 import com.bennyv4.project2.R;
 
 import java.util.ArrayList;
@@ -40,6 +40,8 @@ public class AppDrawer extends SmoothViewPager
 	private int textHeight = 22;
 
 	private PagerIndicator appDrawerIndicator;
+
+	private int pageCount = 0;
 
 	public AppDrawer(Context c, AttributeSet attr){
 		super(c, attr);
@@ -80,6 +82,14 @@ public class AppDrawer extends SmoothViewPager
         vertCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridyL;
     }
 
+    private void calculatePage(){
+        pageCount = 0;
+        int appsSize = apps.size();
+        while((appsSize = appsSize - (vertCellCount * horiCellCount)) >= (vertCellCount * horiCellCount) || (appsSize > -(vertCellCount * horiCellCount))){
+            pageCount ++;
+        }
+    }
+
 	private void init(Context c){
 		mPortrait = c.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 
@@ -93,6 +103,7 @@ public class AppDrawer extends SmoothViewPager
 			@Override
 			public void onAppUpdated(List<AppManager.App> apps) {
 				AppDrawer.this.apps = apps;
+                calculatePage();
 				setAdapter(new Adapter());
 				appDrawerIndicator.setViewPager(AppDrawer.this);
 			}
@@ -181,12 +192,7 @@ public class AppDrawer extends SmoothViewPager
 
 		@Override
 		public int getCount(){
-			int page = 0;
-			int appsSize = apps.size();
-			while((appsSize = appsSize - (vertCellCount * horiCellCount)) >= (vertCellCount * horiCellCount) || (appsSize > -(vertCellCount * horiCellCount))){
-				page ++;                                                                           
-			}
-			return page;
+			return pageCount;
 		}
 
 		@Override

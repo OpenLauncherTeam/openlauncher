@@ -12,7 +12,8 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv"
-                android:padding="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:clipToPadding="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
@@ -25,6 +26,7 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/tb"
+            android:background="?colorViewBackground"
             android:layout_height="?attr/actionBarSize"
             android:layout_width="match_parent"
             app:layout_scrollFlags="scroll|enterAlways"/>

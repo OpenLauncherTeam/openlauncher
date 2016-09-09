@@ -36,6 +36,7 @@ public class LauncherSettings {
 
     private static final String DesktopDataFileName = "desktopData.json";
     private static final String DockDataFileName = "dockData.json";
+    private static final String GeneralSettingsFileName = "generalSettings.json";
 
     private LauncherSettings(Context c) {
         this.c = c;
@@ -44,8 +45,7 @@ public class LauncherSettings {
     }
 
     private void readSettings(){
-        //pref.edit().clear().commit();
-
+        pref.edit().clear().commit();
         Gson gson = new Gson();
 
         String raw = Tools.getStringFromFile(DockDataFileName,c);
@@ -60,11 +60,12 @@ public class LauncherSettings {
         else
             simpleDesktopData = gson.fromJson(raw,new TypeToken<ArrayList<ArrayList<Desktop.SimpleItem>>>(){}.getType());
 
-        raw = pref.getString("generalSettings",null);
+        raw = Tools.getStringFromFile(GeneralSettingsFileName,c);
         if (raw == null)
             generalSettings = new GeneralSettings();
         else
             generalSettings = gson.fromJson(raw,GeneralSettings.class);
+
 
         for (Desktop.SimpleItem item:simpleDockData) {
             dockData.add(new Desktop.Item(item));
@@ -96,10 +97,11 @@ public class LauncherSettings {
         }
         Tools.writeToFile(DockDataFileName,gson.toJson(simpleDockData),c);
         Tools.writeToFile(DesktopDataFileName,gson.toJson(simpleDesktopData),c);
+        Tools.writeToFile(GeneralSettingsFileName,gson.toJson(generalSettings),c);
 
         //pref.edit().putString("dockData",gson.toJson(simpleDockData)).apply();
         //pref.edit().putString("desktopData",gson.toJson(simpleDesktopData)).apply();
-        pref.edit().putString("generalSettings",gson.toJson(generalSettings)).apply();
+        //pref.edit().putString("generalSettings",gson.toJson(generalSettings)).apply();
     }
 
     public static class GeneralSettings {
@@ -110,6 +112,8 @@ public class LauncherSettings {
         public int drawerGridx = 4;
         public int drawerGridy = 5;
 
+        public boolean rememberappdrawerpage = true;
+
         public int desktopGridxL = 4;
         public int desktopGridyL = 4;
         public int drawerGridxL = 5;
@@ -118,8 +122,9 @@ public class LauncherSettings {
         public int dockGridx = 5;
         public int iconSize = 58;
 
+        public LauncherAction.Theme theme = LauncherAction.Theme.Light;
+
         public ArrayList<String> minBarArrangement;
     }
-
 
 }
