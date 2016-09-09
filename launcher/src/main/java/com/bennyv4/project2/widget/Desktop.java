@@ -25,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bennyv4.project2.Home;
+import com.bennyv4.project2.activity.Home;
 import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.AppManager;
 import com.bennyv4.project2.util.DragAction;
@@ -430,7 +430,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         item_layout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                iv.animate().setDuration(150).scaleX(0.5f).scaleY(0.5f).setInterpolator(new AccelerateDecelerateInterpolator());
+                //iv.animate().setDuration(150).scaleX(0.5f).scaleY(0.5f).setInterpolator(new AccelerateDecelerateInterpolator());
                 ((GroupIconDrawable)(iv).getDrawable()).popUp();
                 Home.groupPopup.showWindowV(item,view,false);
             }
@@ -622,7 +622,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
 
                     @Override
                     public boolean onDoubleTap(int i) {
-                        LauncherAction.RunAction(LauncherAction.Action.LockScreen,getContext());
+                        LauncherAction.RunAction(LauncherAction.Action.LockScreen,getContext(),null);
                         return true;
                     }
                 });

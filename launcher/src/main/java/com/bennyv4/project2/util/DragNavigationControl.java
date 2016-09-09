@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.view.DragEvent;
 import android.view.View;
 
-import com.bennyv4.project2.Home;
+import com.bennyv4.project2.activity.Home;
 
 public class DragNavigationControl {
 

@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.view.View;
 
-import com.bennyv4.project2.Home;
+import com.bennyv4.project2.activity.Home;
 
 public class GoodDragShadowBuilder extends View.DragShadowBuilder {
     int x;

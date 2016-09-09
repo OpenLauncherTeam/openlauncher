@@ -12,7 +12,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bennyv4.project2.Home;
+import com.bennyv4.project2.activity.Home;
 import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.DragAction;
 import com.bennyv4.project2.util.Tools;
@@ -182,7 +182,6 @@ public class DragOptionView extends CardView{
 
     @Override
     public boolean onDragEvent(DragEvent event) {
-
         switch(event.getAction()){
             case DragEvent.ACTION_DRAG_STARTED:
                 dragging = true;
