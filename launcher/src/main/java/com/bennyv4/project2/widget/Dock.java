@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bennyv4.project2.Home;
+import com.bennyv4.project2.activity.Home;
 import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.AppManager;
 import com.bennyv4.project2.util.DragAction;
@@ -327,7 +327,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
         item_layout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                item_layout.animate().setDuration(150).scaleX(0.5f).scaleY(0.5f).setInterpolator(new AccelerateDecelerateInterpolator());
+                //item_layout.animate().setDuration(150).scaleX(0.5f).scaleY(0.5f).setInterpolator(new AccelerateDecelerateInterpolator());
                 ((GroupIconDrawable)(iv).getDrawable()).popUp();
                 Home.groupPopup.showWindowV(item,view,true);
             }

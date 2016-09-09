@@ -5,8 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 
+import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.Tools;
 import com.bennyv5.smoothviewpager.SmoothViewPager;
 
@@ -44,6 +46,8 @@ public class PagerIndicator extends View{
     private void init(){
         setWillNotDraw(false);
         dotPaint = new Paint();
+        //TypedValue typedValue = new TypedValue();
+        //getContext().getTheme().resolveAttribute(R.attr.colorViewBackground, typedValue, true);
         dotPaint.setColor(Color.WHITE);
         dotPaint.setAntiAlias(true);
     }

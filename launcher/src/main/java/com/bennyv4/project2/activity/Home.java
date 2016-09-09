@@ -1,4 +1,4 @@
-package com.bennyv4.project2;
+package com.bennyv4.project2.activity;
 
 import android.animation.*;
 import android.app.Activity;
@@ -7,10 +7,10 @@ import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.*;
 import android.graphics.drawable.*;
 import android.os.*;
 import android.support.v7.widget.CardView;
+import android.util.TypedValue;
 import android.view.*;
 import android.view.View.*;
 import android.view.animation.*;
@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-import com.bennyv4.project2.activity.MinBarEditActivity;
+import com.bennyv4.project2.R;
 import com.bennyv4.project2.util.AppManager;
 import com.bennyv4.project2.util.AppUpdateReceiver;
 import com.bennyv4.project2.util.DragNavigationControl;
@@ -68,13 +68,20 @@ public class Home extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //setTheme();
+        switch (LauncherSettings.getInstance(this).generalSettings.theme){
+            case Light:
+                setTheme(R.style.Home_Light);
+                break;
+            case Dark:
+                setTheme(R.style.Home_Dark);
+                break;
+        }
         super.onCreate(savedInstanceState);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         }
-
+        
         AppManager.getInstance(this).clearListener();
         LauncherSettings.getInstance(this);
 
@@ -103,30 +110,12 @@ public class Home extends Activity {
 
     }
 
+    //region WIDGET
     public void pickWidget(View view) {
         int appWidgetId = appWidgetHost.allocateAppWidgetId();
         Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
         pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         startActivityForResult(pickIntent, REQUEST_PICK_APPWIDGET);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_PICK_APPWIDGET) {
-                configureWidget(data);
-            } else if (requestCode == REQUEST_CREATE_APPWIDGET) {
-                createWidget(data);
-            }else if (requestCode == MINBAREDIT){
-                initMinBar();
-            }
-        } else if (resultCode == RESULT_CANCELED && data != null) {
-            int appWidgetId =
-                    data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
-            if (appWidgetId != -1) {
-                appWidgetHost.deleteAppWidgetId(appWidgetId);
-            }
-        }
     }
 
     private void configureWidget(Intent data) {
@@ -158,6 +147,7 @@ public class Home extends Activity {
         //end
         desktop.addItemToPagePosition(item, desktop.getCurrentItem());
     }
+    //endregion
 
     private void findViews() {
         baseLayout = (RelativeLayout) findViewById(R.id.baseLayout);
@@ -241,10 +231,13 @@ public class Home extends Activity {
 
         desktopIndicator.setViewPager(desktop);
 
+        TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
+
         int iconSize = LauncherSettings.getInstance(this).generalSettings.iconSize;
         Drawable appDrawerBtnIcon = MaterialDrawableBuilder.with(this)
                 .setIcon(MaterialDrawableBuilder.IconValue.APPS)
-                .setColor(Color.DKGRAY)
+                .setColor(typedValue.data)
                 .setSizeDp(iconSize / 2 - 8)
                 .build();
         CardView appDrawerBtnCard = (CardView) appDrawerBtn.findViewById(R.id.card);
@@ -277,21 +270,23 @@ public class Home extends Activity {
         if (minBarArrangement == null) {
             LauncherSettings.getInstance(this).generalSettings.minBarArrangement = new ArrayList<>();
             for(LauncherAction.ActionItem item : LauncherAction.actionItems){
-                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add(item.label.toString());
+                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("0"+item.label.toString());
                 labels.add(item.label.toString());
                 icons.add(item.icon);
             }
         } else{
             if (minBarArrangement.size() == LauncherAction.actionItems.length){
                 for (String act : minBarArrangement) {
-                    LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act);
-                    labels.add(item.label.toString());
-                    icons.add(item.icon);
+                    if (act.charAt(0) == '0') {
+                        LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act.substring(1));
+                        labels.add(item.label.toString());
+                        icons.add(item.icon);
+                    }
                 }
             }else {
                 LauncherSettings.getInstance(this).generalSettings.minBarArrangement = new ArrayList<>();
                 for(LauncherAction.ActionItem item : LauncherAction.actionItems){
-                    LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add(item.label.toString());
+                    LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("0"+item.label.toString());
                     labels.add(item.label.toString());
                     icons.add(item.icon);
                 }
@@ -306,7 +301,7 @@ public class Home extends Activity {
                 if (i == 0)
                     startActivityForResult(new Intent(Home.this, MinBarEditActivity.class),MINBAREDIT);
                 else
-                    LauncherAction.RunAction(LauncherAction.Action.valueOf(labels.get(i)),Home.this);
+                    LauncherAction.RunAction(LauncherAction.Action.valueOf(labels.get(i)),Home.this,Home.this);
             }
         });
     }
@@ -328,6 +323,31 @@ public class Home extends Activity {
         appWidgetHost = null;
         unregisterReceiver(appUpdateReceiver);
         super.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        System.gc();
+        super.onLowMemory();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_PICK_APPWIDGET) {
+                configureWidget(data);
+            } else if (requestCode == REQUEST_CREATE_APPWIDGET) {
+                createWidget(data);
+            }else if (requestCode == MINBAREDIT){
+                initMinBar();
+            }
+        } else if (resultCode == RESULT_CANCELED && data != null) {
+            int appWidgetId =
+                    data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
+            if (appWidgetId != -1) {
+                appWidgetHost.deleteAppWidgetId(appWidgetId);
+            }
+        }
     }
 
     @Override
@@ -437,6 +457,8 @@ public class Home extends Activity {
 
             @Override
             public void onAnimationEnd(Animator p1) {
+                if (LauncherSettings.getInstance(Home.this).generalSettings.rememberappdrawerpage)
+                    appDrawer.setCurrentItem(0,false);
                 desktopIndicator.animate().alpha(1);
                 appDrawer.setVisibility(View.INVISIBLE);
                 appDrawerBtn.setVisibility(View.VISIBLE);
@@ -460,6 +482,7 @@ public class Home extends Activity {
 
     //endregion
 
+    //region SEARCHACTION
     public void onSearch(View view) {
         Intent i = new Intent(Intent.ACTION_WEB_SEARCH);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -476,4 +499,5 @@ public class Home extends Activity {
             Tools.toast(Home.this, "Can not find google search app");
         }
     }
+    //endregion
 }

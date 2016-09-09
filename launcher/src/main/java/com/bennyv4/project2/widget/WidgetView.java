@@ -5,8 +5,7 @@ import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 
-import com.bennyv4.project2.Home;
-import com.bennyv4.project2.util.Tools;
+import com.bennyv4.project2.activity.Home;
 
 public class WidgetView extends AppWidgetHostView {
 
