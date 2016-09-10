@@ -38,7 +38,20 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
             theme.resolveAttribute(R.attr.colorAccent, typedValue, true);
             int color = typedValue.data;
 
-            Fragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(color,false)
+            TypedValue typedValue2 = new TypedValue();
+            theme.resolveAttribute(R.attr.colorViewBackground, typedValue2, true);
+            int color2 = typedValue2.data;
+
+            TypedValue typedValue3 = new TypedValue();
+            theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue3, true);
+            int color3 = typedValue3.data;
+
+            TypedValue typedValue4 = new TypedValue();
+            theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue4, true);
+            int color4 = typedValue4.data;
+
+
+            Fragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(color3,color4,color2,color,false)
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
                     .add(new MaterialPrefFragment.TBPref("rememberappdrawerpage","Remember last page","The page will not reset to the first page when reopen app drawer",LauncherSettings.getInstance(this).generalSettings.rememberappdrawerpage))
                     .add(new MaterialPrefFragment.GroupTitle("Others"))
