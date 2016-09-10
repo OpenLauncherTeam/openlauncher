@@ -11,6 +11,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,7 +35,13 @@ import java.util.List;
 
 public class MaterialPrefFragment extends Fragment implements OnClickListener
 {
-    private static int accentColor = -1;
+    private static int accentColor = Color.BLUE;
+
+    private static int cardColor = Color.WHITE;
+
+    private static int textColor = Color.DKGRAY;
+
+    private static int textColorSec = Color.GRAY;
 
     private List<Pref> prefs = new ArrayList<>();
 
@@ -54,6 +62,9 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
     public static MaterialPrefFragment newInstance(Builder b){
         MaterialPrefFragment fragment = new MaterialPrefFragment();
         fragment.useSystemPref = b.useSystemPref;
+        fragment.textColorSec = b.textColorSec;
+        fragment.cardColor = b.cardColor;
+        fragment.textColor = b.textColor;
         fragment.accentColor = b.accentColor;
         fragment.prefs = b.prefs;
         fragment.listener = b.listener;
@@ -115,10 +126,8 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
             b.setPadding(CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),12),CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),12));
             b.setTypeface(Typeface.DEFAULT_BOLD);
             b.setBackgroundColor(Color.TRANSPARENT);
-            if (accentColor != -1)
-                b.setTextColor(accentColor);
-            else
-                b.setTextColor(c.getResources().getColor(R.color.colorAccent));
+            b.setTextColor(accentColor);
+            //b.setTextColor(c.getResources().getColor(R.color.colorAccent));
             return b;
         }
     }
@@ -143,7 +152,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
 
             s.setTag(TAG_ID,id);
             s.setOnClickListener(fragment);
-            s.setText(summary == null ? title : Html.fromHtml(title + "<br>" + "<small>" + CommonUtility.warpColorTag(summary,Color.GRAY) + "</small>"));
+            s.setText(warpText(summary,title));
             s.setChecked(sharedPrefs.getBoolean(id,defaultValue));
             s.setOnCheckedChangeListener(new OnCheckedChangeListener(){
                 @Override
@@ -239,7 +248,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
                     dialog.show();
                 }
             });
-            b.setText(summary == null ? title : Html.fromHtml(title + "<br>" + "<small>" + CommonUtility.warpColorTag(summary,Color.GRAY) + "</small>"));
+            b.setText(warpText(summary,title));
             return warpCardView(b);
         }
     }
@@ -261,7 +270,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
 
             b.setTag(TAG_ID,id);
             b.setOnClickListener(fragment);
-            b.setText(summary == null ? title : Html.fromHtml(title + "<br>" + "<small>" + CommonUtility.warpColorTag(summary,Color.GRAY) + "</small>"));
+            b.setText(warpText(summary,title));
             return warpCardView(b);
         }
     }
@@ -274,14 +283,19 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
     private static View warpCardView(View v){
         CardView cv = new CardView(v.getContext());
         cv.setLayoutParams(CommonUtility.matchParentWidthLayoutParams());
+        cv.setCardBackgroundColor(cardColor);
         cv.setCardElevation(4);
         cv.setRadius(0);
         cv.addView(v);
         return cv;
     }
 
+    private static Spanned warpText(String summary, String title){
+        return summary == null ? new SpannableString(title) : Html.fromHtml(title + "<br>" + "<small>" + CommonUtility.warpColorTag(summary,textColorSec) + "</small>");
+    }
+
     private static void setStyle(TextView b){
-        b.setTextColor(Color.DKGRAY);
+        b.setTextColor(textColor);
         b.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
         b.setAllCaps(false);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -290,7 +304,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
         b.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
         b.setTypeface(Typeface.DEFAULT);
         b.setPadding(CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),pad));
-        b.setBackgroundResource(R.drawable.selector_dark);
+        //b.setBackgroundResource(R.drawable.selector_dark);
         b.setLayoutParams(CommonUtility.matchParentWidthLayoutParams());
     }
 
@@ -304,11 +318,23 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
 
         private int accentColor;
 
+        private int cardColor;
+
+        private int textColor;
+
+        private int textColorSec;
+
         private boolean useSystemPref;
 
-        public Builder(int accentColor,boolean useSystemPref){this.accentColor = accentColor; this.useSystemPref = useSystemPref;}
+        public Builder(int textColor,int textColorSec,int cardColor,int accentColor,boolean useSystemPref){
+            this.textColorSec = textColorSec;
+            this.textColor = textColor;
+            this.accentColor = accentColor;
+            this.useSystemPref = useSystemPref;
+            this.cardColor = cardColor;
+        }
 
-        public Builder(){this.accentColor = -1; this.useSystemPref = true;}
+        public Builder(){this.useSystemPref = true;}
 
         public Builder add(Pref pref){
             prefs.add(pref);
