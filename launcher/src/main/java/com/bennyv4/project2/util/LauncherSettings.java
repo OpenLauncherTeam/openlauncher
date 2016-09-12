@@ -1,14 +1,15 @@
 package com.bennyv4.project2.util;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.bennyv4.project2.widget.Desktop;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +24,6 @@ public class LauncherSettings {
     public List<List<Desktop.Item>> desktopData = new ArrayList<>();
 
     public List<Desktop.Item> dockData = new ArrayList<>();
-
-    private List<List<Desktop.SimpleItem>> simpleDesktopData;
-
-    private List<Desktop.SimpleItem> simpleDockData;
 
     public GeneralSettings generalSettings;
 
@@ -44,46 +41,62 @@ public class LauncherSettings {
         readSettings();
     }
 
+    private void readDockData(Gson gson){
+        try {
+            JsonReader reader = new JsonReader(new InputStreamReader(c.openFileInput(DockDataFileName)));
+            reader.beginArray();
+            while (reader.hasNext()) {
+                Desktop.SimpleItem item = gson.fromJson(reader,Desktop.SimpleItem.class);
+                dockData.add(new Desktop.Item(item));
+            }
+            reader.endArray();
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readDesktopData(Gson gson){
+        try {
+            JsonReader reader = new JsonReader(new InputStreamReader(c.openFileInput(DesktopDataFileName)));
+            reader.beginArray();
+            while (reader.hasNext()) {
+                reader.beginArray();
+                ArrayList<Desktop.Item> items = new ArrayList<>();
+                while (reader.hasNext()) {
+                    Desktop.SimpleItem item = gson.fromJson(reader,Desktop.SimpleItem.class);
+                    items.add(new Desktop.Item(item));
+                }
+                desktopData.add(items);
+                reader.endArray();
+            }
+            reader.endArray();
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void readSettings(){
-        pref.edit().clear().commit();
+        //pref.edit().clear().commit();
+
         Gson gson = new Gson();
 
-        String raw = Tools.getStringFromFile(DockDataFileName,c);
-        if (raw == null)
-            simpleDockData = new ArrayList<>();
-        else
-            simpleDockData = gson.fromJson(raw,new TypeToken<ArrayList<Desktop.SimpleItem>>(){}.getType());
+        readDockData(gson);
+        readDesktopData(gson);
 
-        raw = Tools.getStringFromFile(DesktopDataFileName,c);
-        if (raw == null)
-            simpleDesktopData = new ArrayList<>();
-        else
-            simpleDesktopData = gson.fromJson(raw,new TypeToken<ArrayList<ArrayList<Desktop.SimpleItem>>>(){}.getType());
-
-        raw = Tools.getStringFromFile(GeneralSettingsFileName,c);
+        String raw = Tools.getStringFromFile(GeneralSettingsFileName,c);
         if (raw == null)
             generalSettings = new GeneralSettings();
         else
             generalSettings = gson.fromJson(raw,GeneralSettings.class);
-
-
-        for (Desktop.SimpleItem item:simpleDockData) {
-            dockData.add(new Desktop.Item(item));
-        }
-        for (List<Desktop.SimpleItem> pages:simpleDesktopData) {
-            final ArrayList<Desktop.Item> page = new ArrayList<>();
-            desktopData.add(page);
-            for (Desktop.SimpleItem item:pages) {
-                page.add(new Desktop.Item(item));
-            }
-        }
     }
 
     public void writeSettings(){
         Gson gson = new Gson();
 
-        simpleDockData.clear();
-        simpleDesktopData.clear();
+        List<List<Desktop.SimpleItem>> simpleDesktopData = new ArrayList<>();
+        List<Desktop.SimpleItem> simpleDockData = new ArrayList<>();
 
         for (Desktop.Item item:dockData) {
             simpleDockData.add(new Desktop.SimpleItem(item));
@@ -98,10 +111,6 @@ public class LauncherSettings {
         Tools.writeToFile(DockDataFileName,gson.toJson(simpleDockData),c);
         Tools.writeToFile(DesktopDataFileName,gson.toJson(simpleDesktopData),c);
         Tools.writeToFile(GeneralSettingsFileName,gson.toJson(generalSettings),c);
-
-        //pref.edit().putString("dockData",gson.toJson(simpleDockData)).apply();
-        //pref.edit().putString("desktopData",gson.toJson(simpleDesktopData)).apply();
-        //pref.edit().putString("generalSettings",gson.toJson(generalSettings)).apply();
     }
 
     public static class GeneralSettings {
@@ -114,8 +123,6 @@ public class LauncherSettings {
 
         public boolean rememberappdrawerpage = true;
 
-        public int desktopGridxL = 4;
-        public int desktopGridyL = 4;
         public int drawerGridxL = 5;
         public int drawerGridyL = 3;
 

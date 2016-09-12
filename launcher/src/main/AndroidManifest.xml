@@ -21,6 +21,8 @@
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:stateNotNeeded="true"
+            android:taskAffinity=""
+            android:enabled="true"
             android:windowSoftInputMode="adjustPan">
 
             <intent-filter>
@@ -30,6 +32,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="reset5secs"
+            android:grantUriPermissions="true"
+            android:exported="true"
+            android:enabled="true"
+            android:readPermission="android.permission.permRead"
+            android:name=".util.FiveSecsDelayContentProvider"/>
 
         <activity android:name=".activity.MinBarEditActivity"
             android:label="Edit Item"

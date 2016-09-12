@@ -16,6 +16,7 @@ import android.util.AttributeSet;
 import android.view.DragEvent;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
 import android.view.ViewGroup;
@@ -292,6 +293,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                             pages.get(getCurrentItem()).removeView(view);
 
                             item.addActions(dropitem.actions[0]);
+                            item.name = "Unnamed";
                             item.type = Item.Type.GROUP;
                             LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).add(item);
                             addItemToPagePosition(item,getCurrentItem());
@@ -369,9 +371,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         }
         iv.setImageDrawable(new GroupIconDrawable(icons,iconSize));
 
-        tv.setText("");
+        tv.setText(item.name);
         tv.setTextColor(Color.WHITE);
-        tv.setVisibility(View.GONE);
         item_layout.setOnDragListener(new OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
@@ -431,8 +432,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             @Override
             public void onClick(View view) {
                 //iv.animate().setDuration(150).scaleX(0.5f).scaleY(0.5f).setInterpolator(new AccelerateDecelerateInterpolator());
-                ((GroupIconDrawable)(iv).getDrawable()).popUp();
-                Home.groupPopup.showWindowV(item,view,false);
+
+                if (Home.groupPopup.showWindowV(item,view,false)){
+                    ((GroupIconDrawable)(iv).getDrawable()).popUp();
+                }
             }
         });
 
@@ -583,6 +586,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
 
         float sacleFactor = 1f;
 
+        private MotionEvent currentEvent;
+
         public Adapter() {
             pages = new ArrayList<>();
             for (int i = 0; i < getCount(); i++) {
@@ -628,6 +633,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 });
                 layout.gestures = mySfg;
                 layout.setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.desktopGridx, LauncherSettings.getInstance(getContext()).generalSettings.desktopGridy);
+                layout.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        currentEvent = motionEvent;
+                        return false;
+                    }
+                });
                 layout.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -641,6 +653,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                                 }
                             });
                         }
+                        if (!inEditMode)
+                            if (currentEvent != null)
+                                WallpaperManager.getInstance(view.getContext()).sendWallpaperCommand(view.getWindowToken(),WallpaperManager.COMMAND_TAP,(int)currentEvent.getX(),(int)currentEvent.getY(),0,null);
+
                         inEditMode = false;
                         if (listener != null)
                             listener.onFinished();
@@ -696,12 +712,14 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         public String actions;
         public int x = 0;
         public int y = 0;
+        public String name;
         public int widgetID;
         public int spanX = 1;
         public int spanY = 1;
 
         public SimpleItem(){}
         public SimpleItem(Item in){
+            this.name = in.name;
             this.type = in.type;
             this.actions = in.getActionsAsString();
             this.x = in.x;
@@ -733,6 +751,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         public int x = 0, y = 0;
 
         public int widgetID;
+
+        public String name;
 
         public int spanX = 1, spanY = 1;
 
@@ -771,6 +791,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
 
         public Item(SimpleItem in) {
             this.type = in.type;
+            this.name = in.name;
             this.actions = getActionsFromString(in.actions);
             this.x = in.x;
             this.y = in.y;
@@ -808,6 +829,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                     spanY = in.readInt();
                     break;
             }
+            name = in.readString();
         }
 
         private static Intent toIntent(AppManager.App app) {
@@ -874,6 +896,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                     out.writeInt(spanY);
                     break;
             }
+            out.writeString(name);
         }
 
         public enum Type {

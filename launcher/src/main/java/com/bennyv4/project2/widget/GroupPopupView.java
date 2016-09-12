@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.DragEvent;
+import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ import com.bennyv4.project2.util.Tools;
 public class GroupPopupView extends FrameLayout {
 
     CellContainer cc;
+    TextView tv;
     CardView popup;
 
     PopupWindow p;
@@ -49,7 +51,8 @@ public class GroupPopupView extends FrameLayout {
         bringToFront();
         popup = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_grouppopup, null, false);
         popup.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
-        cc = (CellContainer) popup.getChildAt(0);
+        cc = (CellContainer) popup.findViewById(R.id.cc);
+        tv = (TextView) popup.findViewById(R.id.tv);
 
         setVisibility(View.INVISIBLE);
         setOnClickListener(new OnClickListener() {
@@ -61,7 +64,9 @@ public class GroupPopupView extends FrameLayout {
         });
     }
 
-    public void showWindowV(final Desktop.Item item, final View view, final boolean fromDock) {
+    public boolean showWindowV(final Desktop.Item item, final View view, final boolean fromDock) {
+        if (getVisibility() == View.VISIBLE)return false;
+
         setVisibility(View.VISIBLE);
         final Context c = view.getContext();
 
@@ -70,8 +75,8 @@ public class GroupPopupView extends FrameLayout {
 
         int iconSize = Tools.convertDpToPixel(LauncherSettings.getInstance(c).generalSettings.iconSize, c);
 
-        popup.getLayoutParams().width = (iconSize + iconSize / 3) * cellSize[0];
-        popup.getLayoutParams().height = (iconSize + iconSize / 2 + iconSize / 4) * cellSize[1];
+        popup.getLayoutParams().width = (int)(iconSize + iconSize / 2.5f) * cellSize[0];
+        popup.getLayoutParams().height = (iconSize*2) * cellSize[1]+ popup.getPaddingBottom();
 
         cc.removeAllViews();
         for (int x2 = 0; x2 < cellSize[0]; x2++) {
@@ -126,20 +131,13 @@ public class GroupPopupView extends FrameLayout {
                         else
                             ((ImageView) view.findViewById(R.id.iv)).setImageDrawable(new GroupIconDrawable(icons, Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext()), view));
 
-
                         AppManager.App dapps = AppManager.getInstance(getContext()).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
                         if (dapps == null)
                             return true;
 
-//                        itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-//                        Intent i = new Intent();
-//                        i.putExtra("mDragData",Desktop.Item.newAppItem(dapps));
-//                        ClipData data = ClipData.newIntent("mDragIntent", i);
-//
-//                        itemView.startDrag(data, new GoodDragShadowBuilder(itemView),new DragAction(DragAction.Action.ACTION_APP,0),0);
-//
-//                        setVisibility(INVISIBLE);
                         p.dismiss();
+
+                        setVisibility(View.INVISIBLE);
                         view.performClick();
                         return true;
                     }
@@ -160,6 +158,7 @@ public class GroupPopupView extends FrameLayout {
                 cc.addViewToGrid(itemView, x2, y2, 1, 1);
             }
         }
+        tv.setText(item.name);
 
         p = new PopupWindow(popup, popup.getLayoutParams().width, popup.getLayoutParams().height);
         p.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -169,100 +168,12 @@ public class GroupPopupView extends FrameLayout {
 //                    view.animate().setDuration(200).scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator());
 //                else
 //                    view.findViewById(R.id.iv).animate().setDuration(200).scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator());
-
                 ((GroupIconDrawable) ((ImageView) view.findViewById(R.id.iv)).getDrawable()).popBack();
             }
         });
-        p.showAsDropDown(view);
+        p.showAsDropDown(view,0,-view.getHeight());
+        return true;
     }
-
-    //region Can be reuse
-//    public void showWindow(Desktop.Item item,float x,float y){
-//        setVisibility(View.VISIBLE);
-//
-//        int[] cellSize = GroupDef.getCellSize(item.actions.length);
-//        cc.setGridSize(cellSize[0],cellSize[1]);
-//
-//        int iconSize = Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize,getContext());
-//
-//        popup.getLayoutParams().width = iconSize * cellSize[0] + iconSize/2;
-//        popup.getLayoutParams().height = iconSize * cellSize[1] + iconSize/2;
-//
-//        x = x-iconSize;
-//        y = y-iconSize;
-//        popup.setTranslationX(x);
-//        popup.setTranslationY(y);
-//
-//        cc.removeAllViews();
-//        for (int x2 = 0; x2 < cellSize[0]; x2++) {
-//            for (int y2 = 0; y2 < cellSize[1]; y2++) {
-//                if (y2 * cellSize[0] + x2 > item.actions.length-1)return;
-//                final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[y2 * cellSize[0] + x2].getComponent().getPackageName(), item.actions[y2 * cellSize[0] + x2].getComponent().getClassName());
-//                ImageView v = new ImageView(getContext());
-//                v.setImageDrawable(app.icon);
-//                LayoutParams lp = new FrameLayout.LayoutParams(iconSize, iconSize);
-//                lp.gravity = Gravity.CENTER;
-//                v.setLayoutParams(lp);
-//
-//                final FrameLayout l = new FrameLayout(getContext());
-//                l.addView(v);
-//
-//                l.setOnClickListener(new OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Tools.createScaleInScaleOutAnim(view, new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                Tools.startApp(getContext(),app);
-//                            }
-//                        });
-//                    }
-//                });
-//                if (app != null)
-//                    cc.addViewToGrid(l,x2,y2,1,1);
-//            }
-//        }
-//
-//        animateViewShow(popup,x,y);
-//    }
-//
-//    private void animateViewHide(View view,float x,float y){
-//        int finalRadius = Math.max(view.getWidth(),view.getHeight());
-//        Animator appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(view
-//                ,(int)x,(int)y,finalRadius
-//                ,Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize,getContext()));
-//        appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-//        appDrawerAnimator.setDuration(200);
-//        appDrawerAnimator.addListener(new Animator.AnimatorListener() {
-//            @Override
-//            public void onAnimationStart(Animator p1) {}
-//
-//            @Override
-//            public void onAnimationEnd(Animator p1) {
-//                setVisibility(View.INVISIBLE);
-//            }
-//
-//            @Override
-//            public void onAnimationCancel(Animator p1) {}
-//
-//            @Override
-//            public void onAnimationRepeat(Animator p1) {}
-//        });
-//        appDrawerAnimator.start();
-//    }
-//
-//    private void animateViewShow(View view,float x,float y){
-//        curX=x;
-//        curY=y;
-//        int finalRadius = Math.max(view.getWidth(),view.getHeight());
-//        Animator appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(view
-//                ,(int)x,(int)y
-//                ,Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize,getContext())
-//                ,finalRadius);
-//        appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-//        appDrawerAnimator.setDuration(200);
-//        appDrawerAnimator.start();
-//
 
     public static class GroupDef {
         public static int maxItem = 12;

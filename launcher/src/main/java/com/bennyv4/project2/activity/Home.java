@@ -2,6 +2,7 @@ package com.bennyv4.project2.activity;
 
 import android.animation.*;
 import android.app.Activity;
+import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
@@ -81,11 +82,17 @@ public class Home extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         }
-        
+
         AppManager.getInstance(this).clearListener();
         LauncherSettings.getInstance(this);
 
-        View myScreen = getLayoutInflater().inflate(R.layout.activity_home, null);
+        final View myScreen = getLayoutInflater().inflate(R.layout.activity_home, null);
+        myScreen.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return false;
+            }
+        });
         setContentView(myScreen);
 
         appWidgetHost = new WidgetHost(getApplicationContext(), R.id.m_AppWidgetHost);
@@ -352,6 +359,7 @@ public class Home extends Activity {
 
     @Override
     protected void onStart() {
+        if (appWidgetHost != null)
         appWidgetHost.startListening();
         super.onStart();
     }
@@ -380,7 +388,8 @@ public class Home extends Activity {
 
     @Override
     protected void onResume() {
-        appWidgetHost.startListening();
+        if (appWidgetHost != null)
+            appWidgetHost.startListening();
         if (!desktop.inEditMode) {
             desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
             if (appDrawer.getVisibility() == View.VISIBLE)
