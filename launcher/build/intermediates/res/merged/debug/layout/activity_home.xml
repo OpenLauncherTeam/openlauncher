@@ -154,6 +154,7 @@
         android:layout_height="match_parent">
 
         <ListView
+            android:scrollbars="none"
             android:id="@+id/minbar"
             android:listSelector="@android:color/transparent"
             android:layout_width="match_parent"

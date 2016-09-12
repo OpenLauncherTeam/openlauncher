@@ -11,6 +11,7 @@
     <bool name="abc_config_closeDialogWhenTouchOutside">true</bool>
     <bool name="abc_config_showMenuShortcutsWhenKeyboardPresent">false</bool>
     <color name="Dark.Background">#424242</color>
+    <color name="Dark.GreyBackground">#464646</color>
     <color name="Dark.TextColor">#ffffff</color>
     <color name="Dark.TextColorSec">#bdbdbd</color>
     <color name="Light.Background">#ffffff</color>
@@ -1374,7 +1375,7 @@
         <item name="android:windowShowWallpaper">true</item>
 
         <item name="colorAccent">#fafafa</item>
-        <item name="colorViewBackground">#424242</item>
+        <item name="colorViewBackground">@color/Dark.Background</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:textColorPrimary">@color/Dark.TextColor</item>
         <item name="android:textColor">@color/Dark.TextColor</item>
@@ -1388,7 +1389,7 @@
 		<item name="android:windowShowWallpaper">true</item>
 
         <item name="colorAccent">#000000</item>
-        <item name="colorViewBackground">#FFF</item>
+        <item name="colorViewBackground">@color/Light.Background</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:textColorPrimary">@color/Light.TextColor</item>
         <item name="android:textColor">@color/Light.TextColor</item>
@@ -1405,7 +1406,7 @@
 
         <item name="colorAccent">#fafafa</item>
         <item name="colorViewBackground">@color/Dark.Background</item>
-        <item name="android:windowBackground">@color/Dark.Background</item>
+        <item name="android:windowBackground">@color/Dark.GreyBackground</item>
         <item name="android:textColorPrimary">@color/Dark.TextColor</item>
         <item name="android:textColor">@color/Dark.TextColor</item>
         <item name="android:textColorSecondary">@color/Dark.TextColorSec</item>

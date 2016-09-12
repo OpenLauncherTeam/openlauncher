@@ -53,7 +53,7 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
 
             Fragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(color3,color4,color2,color,false)
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
-                    .add(new MaterialPrefFragment.TBPref("rememberappdrawerpage","Remember last page","The page will not reset to the first page when reopen app drawer",LauncherSettings.getInstance(this).generalSettings.rememberappdrawerpage))
+                    .add(new MaterialPrefFragment.TBPref("rememberappdrawerpage","Remember last page","The page will not reset to the first page when reopen app drawer",!LauncherSettings.getInstance(this).generalSettings.rememberappdrawerpage))
                     .add(new MaterialPrefFragment.GroupTitle("Others"))
                     .setOnPrefChangedListener(this));
             getSupportFragmentManager().beginTransaction().add(R.id.ll, fragment).commit();
@@ -65,7 +65,7 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
     public void onPrefChanged(String id, Object p2) {
         switch (id){
             case "rememberappdrawerpage":
-                LauncherSettings.getInstance(this).generalSettings.rememberappdrawerpage = (boolean) p2;
+                LauncherSettings.getInstance(this).generalSettings.rememberappdrawerpage = !(boolean) p2;
                 break;
         }
     }

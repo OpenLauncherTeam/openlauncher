@@ -4,70 +4,83 @@
     api-level="21"
     density="xhdpi"
     format="7"
-    timestamp="490628532473833"
+    timestamp="79707214076291"
     token="8770670177837021869"
     verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="797" />
+        duration="605" />
     <task
         name="instant-run-dex"
-        duration="334" />
+        duration="359" />
     <task
         name="instant-run-transform"
-        duration="28" />
+        duration="26" />
     <task
         name="verifier"
         duration="3" />
 
     <artifact
-        location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\res\resources-debug.ap_"
-        type="RESOURCES" />
-    <artifact
         location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\reload-dex\debug\classes.dex"
         type="RELOAD_DEX" />
 
-    <build timestamp="489201643893763" >
+    <build timestamp="78109484252421" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\launcher\build\outputs\apk\launcher-debug.apk"
             type="MAIN" />
     </build>
-    <build
-        timestamp="490246145747685"
-        verifier="R_CLASS_CHANGE" >
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
-            type="DEX" />
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
-            type="DEX" />
+    <build timestamp="79459637029586" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_5\classes.dex"
             type="DEX" />
         <artifact
-            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_6\classes.dex"
-            type="DEX" />
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_3\classes.dex"
-            type="DEX" />
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_2\classes.dex"
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
             type="DEX" />
     </build>
     <build
-        timestamp="490474359512392"
+        timestamp="79518650207159"
         verifier="COMPATIBLE" >
         <artifact
-            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\builds\debug\490474359512392\classes.dex"
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\builds\debug\79518650207159\classes.dex"
             type="RELOAD_DEX" />
     </build>
     <build
-        timestamp="490628532473833"
+        timestamp="79541521920648"
         verifier="COMPATIBLE" >
+        <artifact
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\builds\debug\79541521920648\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="79562495839624"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\builds\debug\79562495839624\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build timestamp="79616653106225" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\res\resources-debug.ap_"
             type="RESOURCES" />
+    </build>
+    <build
+        timestamp="79656104202135"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\builds\debug\79656104202135\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="79676130952232"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\builds\debug\79676130952232\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="79707214076291"
+        verifier="COMPATIBLE" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\reload-dex\debug\classes.dex"
             type="RELOAD_DEX" />

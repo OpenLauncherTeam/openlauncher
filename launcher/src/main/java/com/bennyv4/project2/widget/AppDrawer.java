@@ -62,11 +62,13 @@ public class AppDrawer extends SmoothViewPager
 		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
 			mPortrait = false;
             setLandscapeValue();
+			calculatePage();
 			setAdapter(new Adapter());
 		}
 		else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
 			mPortrait = true;
             setPortraitValue();
+			calculatePage();
 			setAdapter(new Adapter());
 		}
 		super.onConfigurationChanged(newConfig);

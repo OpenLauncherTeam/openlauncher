@@ -328,8 +328,10 @@ public class Dock extends CellContainer implements View.OnDragListener {
             @Override
             public void onClick(View view) {
                 //item_layout.animate().setDuration(150).scaleX(0.5f).scaleY(0.5f).setInterpolator(new AccelerateDecelerateInterpolator());
-                ((GroupIconDrawable)(iv).getDrawable()).popUp();
-                Home.groupPopup.showWindowV(item,view,true);
+
+                if(Home.groupPopup.showWindowV(item,view,true)){
+                    ((GroupIconDrawable)(iv).getDrawable()).popUp();
+                }
             }
         });
 
