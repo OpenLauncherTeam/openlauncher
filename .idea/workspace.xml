@@ -18,183 +18,111 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="hey" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/Desktop.java" line="782" />
+    <bookmark url="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java" line="782" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58bfc817-6edf-408a-8db0-9ab3850a2884" name="Default" comment="bug fixed">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/FiveSecsDelayContentProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/cardview/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/cardview/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$drawable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$id.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$integer.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$layout.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$string.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/R$styleable.class" />
+    <list default="true" id="58bfc817-6edf-408a-8db0-9ab3850a2884" name="Default" comment="added support for klwp and changed pkg name.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/AutoFinishActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/FiveSecsDelayContentProvider.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/com/bennyv4/project2/R.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/FiveSecsDelayContentProvider.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/util/LauncherSettings$GeneralSettings.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/util/LauncherSettings$GeneralSettings.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/util/LauncherSettings.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/util/LauncherSettings.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/AppDrawer$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/AppDrawer$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/AppDrawer$Adapter$1$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/AppDrawer$Adapter$1$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/AppDrawer$Adapter$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/AppDrawer$Adapter$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/AppDrawer$Adapter$2.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/AppDrawer$Adapter$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/AppDrawer$Adapter.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/AppDrawer$Adapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/AppDrawer.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/AppDrawer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Desktop$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Desktop$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Desktop$4.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Desktop$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Desktop$6.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Desktop$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Desktop$9.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Desktop$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Desktop$Adapter$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Desktop$Adapter$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Desktop.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Desktop.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Dock$6.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Dock$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Dock.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/Dock.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView$2.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView$3$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView$3$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView$3.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView$4.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView$GroupDef.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView$GroupDef.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/GroupPopupView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$color.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/PagerIndicator$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/PagerIndicator$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/PagerIndicator.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv4/project2/widget/PagerIndicator.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/exploded-aar/OpenLauncher/smoothviewpager/unspecified/jars/classes.jar" afterPath="$PROJECT_DIR$/launcher/build/intermediates/exploded-aar/OpenLauncher/smoothviewpager/unspecified/jars/classes.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-runtime-classes/debug/instant-run.jar" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-runtime-classes/debug/instant-run.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/cardview/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/cardview/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$drawable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$id.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$integer.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$layout.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$string.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/R$styleable.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/util/LauncherSettings$GeneralSettings.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/util/LauncherSettings$GeneralSettings.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/util/LauncherSettings.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/util/LauncherSettings.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/AppDrawer$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/AppDrawer$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/AppDrawer$Adapter$1$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/AppDrawer$Adapter$1$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/AppDrawer$Adapter$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/AppDrawer$Adapter$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/AppDrawer$Adapter$2.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/AppDrawer$Adapter$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/AppDrawer$Adapter.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/AppDrawer$Adapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/AppDrawer.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/AppDrawer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Desktop$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Desktop$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Desktop$4.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Desktop$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Desktop$6.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Desktop$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Desktop$9.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Desktop$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Desktop$Adapter$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Desktop$Adapter$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Desktop.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Desktop.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Dock$6.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Dock$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Dock.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/Dock.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView$2.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView$3$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView$3$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView$3.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView$4.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView$GroupDef.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView$GroupDef.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/GroupPopupView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$color.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/PagerIndicator$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/PagerIndicator$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/PagerIndicator.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv4/project2/widget/PagerIndicator.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/classes.zip" afterPath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/classes.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/resources.zip" afterPath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/resources.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/resources-debug.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$color.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/util/LauncherSettings$GeneralSettings.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/util/LauncherSettings$GeneralSettings.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/AppDrawer$Adapter$1$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/AppDrawer$Adapter$1$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/AppDrawer$Adapter$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/AppDrawer$Adapter$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/AppDrawer$Adapter$2.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/AppDrawer$Adapter$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/GroupPopupView$2.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/GroupPopupView$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/GroupPopupView$3$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/GroupPopupView$3$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/GroupPopupView$3.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/GroupPopupView$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/GroupPopupView$4.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/GroupPopupView$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/GroupPopupView$GroupDef.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/GroupPopupView$GroupDef.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/GroupPopupView.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/GroupPopupView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/android/support/v7/cardview/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/android/support/v7/cardview/R$color.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/PagerIndicator$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/PagerIndicator$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/PagerIndicator.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv4/project2/widget/PagerIndicator.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/com/bennyv4/project2/util/LauncherSettings$GeneralSettings.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/com/bennyv4/project2/util/LauncherSettings$GeneralSettings.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/com/bennyv4/project2/util/LauncherSettings.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/com/bennyv4/project2/util/LauncherSettings.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$drawable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$id.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$integer.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$layout.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$string.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_4/com/bennyv4/project2/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/AppDrawer$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/AppDrawer$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/AppDrawer$Adapter$1$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/AppDrawer$Adapter$1$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/AppDrawer$Adapter$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/AppDrawer$Adapter$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/AppDrawer$Adapter$2.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/AppDrawer$Adapter$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/AppDrawer$Adapter.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/AppDrawer$Adapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/AppDrawer.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/AppDrawer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Desktop$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Desktop$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Desktop$4.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Desktop$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Desktop$6.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Desktop$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Desktop$9.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Desktop$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Desktop$Adapter$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Desktop$Adapter$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Desktop.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Desktop.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Dock$6.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Dock$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Dock.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/Dock.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView$2.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView$3$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView$3$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView$3.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView$4.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView$GroupDef.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView$GroupDef.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/GroupPopupView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/PagerIndicator$1.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/PagerIndicator$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/PagerIndicator.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_8/com/bennyv4/project2/widget/PagerIndicator.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build.gradle" afterPath="$PROJECT_DIR$/launcher/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/android/support/v7/cardview/R.java" afterPath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/android/support/v7/cardview/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/com/bennyv4/project2/R.java" afterPath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/com/bennyv4/project2/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/com/bennyv5/smoothviewpager/R.java" afterPath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/com/bennyv5/smoothviewpager/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/multi/values.json" afterPath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/multi/values.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/single/drawable-xhdpi-v4.json" afterPath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/single/drawable-xhdpi-v4.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/single/drawable.json" afterPath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/single/drawable.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/bundles/debug/instant-run/AndroidManifest.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/bundles/debug/instant-run/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental/mergeDebugResources/merger.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/coldswap.marker" afterPath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/coldswap.marker" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/manifest.crc" afterPath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/manifest.crc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/drawable/ic_close_black_24dp.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/drawable/ic_close_black_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/drawable/ic_delete_black_24dp.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/drawable/ic_delete_black_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/drawable/ic_info_outline_black_24dp.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/drawable/ic_info_outline_black_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/drawable/roundbg.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/drawable/roundbg.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/activity_home.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/activity_home.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/item_appdrawer_page.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/item_appdrawer_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/item_appdrawerbtn.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/item_appdrawerbtn.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/view_dragoption_horiiconlist.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/view_dragoption_horiiconlist.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/view_grouppopup.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/view_grouppopup.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/view_widgetcontainer.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/view_widgetcontainer.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/values/values.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/values/values.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/restart-dex/debug/build-info.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/restart-dex/debug/build-info.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/launcher/build/intermediates/symbols/debug/R.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/launcher/build/outputs/logs/manifest-merger-debug-report.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/launcher.iml" afterPath="$PROJECT_DIR$/launcher/launcher.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/Home.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/Home.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/SettingsActivity.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/SettingsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherAction.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherSettings.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherSettings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/AppDrawer.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/AppDrawer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/Desktop.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/Desktop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/Dock.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/Dock.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/GroupPopupView.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/GroupPopupView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml" afterPath="$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/res/layout/item_appdrawer_page.xml" afterPath="$PROJECT_DIR$/launcher/src/main/res/layout/item_appdrawer_page.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/res/layout/view_grouppopup.xml" afterPath="$PROJECT_DIR$/launcher/src/main/res/layout/view_grouppopup.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smoothviewpager/smoothviewpager.iml" afterPath="$PROJECT_DIR$/smoothviewpager/smoothviewpager.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/materialpreffragment/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/materialpreffragment/src/main/AndroidManifest.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/Home.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/MinBarEditActivity.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/MinBarEditActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/SettingsActivity.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/SettingsActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/AppManager.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/AppManager.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/AppUpdateReceiver.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/AppUpdateReceiver.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/DeviceAdminReceiver.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/DeviceAdminReceiver.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/DragAction.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/DragAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/DragNavigationControl.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/DragNavigationControl.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/GoodDragShadowBuilder.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/GoodDragShadowBuilder.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/GroupIconDrawable.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/GroupIconDrawable.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/IconListAdapter.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/IconListAdapter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherAction.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/LauncherAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherSettings.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/LauncherSettings.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/Tools.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/Tools.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/WidgetHost.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/WidgetHost.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/AppDrawer.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/AppDrawer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/CellContainer.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/CellContainer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/Desktop.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/Dock.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Dock.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/DragOptionView.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/DragOptionView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/GroupPopupView.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/GroupPopupView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/PagerIndicator.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/PagerIndicator.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/WidgetView.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/WidgetView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/materialpreffragment/src/androidTest/java/com/bennnyv5/materialpreffragment/ApplicationTest.java" afterPath="$PROJECT_DIR$/materialpreffragment/src/androidTest/java/com/bennyv5/materialpreffragment/ApplicationTest.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/materialpreffragment/src/main/java/com/bennnyv5/materialpreffragment/CommonUtility.java" afterPath="$PROJECT_DIR$/materialpreffragment/src/main/java/com/bennyv5/materialpreffragment/CommonUtility.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/materialpreffragment/src/main/java/com/bennnyv5/materialpreffragment/MaterialPrefFragment.java" afterPath="$PROJECT_DIR$/materialpreffragment/src/main/java/com/bennyv5/materialpreffragment/MaterialPrefFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/materialpreffragment/src/test/java/com/bennnyv5/materialpreffragment/ExampleUnitTest.java" afterPath="$PROJECT_DIR$/materialpreffragment/src/test/java/com/bennyv5/materialpreffragment/ExampleUnitTest.java" />
     </list>
     <ignored path="OpenLauncher.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -303,51 +231,57 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SettingsActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/SettingsActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="170" selection-start-line="55" selection-start-column="170" selection-end-line="55" selection-end-column="170" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LauncherSettings.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="131" column="71" selection-start-line="131" selection-start-column="71" selection-end-line="131" selection-end-column="71" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="activity_home.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml">
           <provider editor-type-id="android-designer">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.951613">
-              <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
+            <state vertical-scroll-proportion="-20.774193">
+              <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FiveSecsDelayContentProvider.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/FiveSecsDelayContentProvider.java">
+      <file leaf-file-name="Home.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49655172">
-              <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="139" column="54" selection-start-line="139" selection-start-column="54" selection-end-line="139" selection-end-column="54" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#634#635#0" expanded="true" />
-                <element signature="e#661#662#0" expanded="true" />
-                <element signature="e#752#753#0" expanded="true" />
-                <element signature="e#779#780#0" expanded="true" />
+                <element signature="method#onStart#0;class#5676:8074" expanded="false" />
+                <element signature="method#onFinished#0;class#5676:8074" expanded="false" />
+                <element signature="method#initSettings#0;class#Home#0" expanded="false" />
+                <element signature="method#initMinBar#0;class#Home#0" expanded="false" />
+                <element signature="method#registerAppUpdateReceiver#0;class#Home#0" expanded="false" />
+                <element signature="e#13571#13586#0" expanded="false" />
+                <element signature="e#15382#15408#0" expanded="false" />
+                <element signature="e#17715#17742#0" expanded="false" />
+                <element signature="e#21066#21087#0" expanded="false" />
+                <element signature="method#onSearch#0;class#Home#0" expanded="false" />
+                <element signature="method#onVoiceSearch#0;class#Home#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/launcher/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/materialpreffragment/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -355,62 +289,21 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.272727">
-              <caret line="46" column="58" selection-start-line="46" selection-start-column="58" selection-end-line="46" selection-end-column="58" />
+            <state vertical-scroll-proportion="-10.181818">
+              <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
               <folding>
-                <element signature="e#533#551#0" expanded="true" />
-                <element signature="e#829#847#0" expanded="true" />
+                <element signature="e#535#553#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GroupPopupView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/GroupPopupView.java">
+      <file leaf-file-name="Tools.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/Tools.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.5">
+              <caret line="188" column="27" selection-start-line="188" selection-start-column="27" selection-end-line="188" selection-end-column="27" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view_grouppopup.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/view_grouppopup.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.580645">
-              <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Dock.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/Dock.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="330" column="0" selection-start-line="330" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Home.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/Home.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="154" column="28" selection-start-line="154" selection-start-column="28" selection-end-line="154" selection-end-column="28" />
-              <folding>
-                <element signature="method#initMinBar#0;class#Home#0" expanded="false" />
-                <element signature="e#14209#14235#0" expanded="false" />
-                <element signature="e#16542#16569#0" expanded="false" />
-                <element signature="e#19893#19914#0" expanded="false" />
-                <element signature="method#onSearch#0;class#Home#0" expanded="false" />
-                <element signature="method#onVoiceSearch#0;class#Home#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -3305,7 +3198,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="7365240492066" />
+        <entry key="$PROJECT_DIR$" value="7365618842765" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -3970,10 +3863,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/WidgetView.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/CellContainer.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/launcher/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/LauncherAction.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/IconListAdapter.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/Tools.java" />
@@ -3990,13 +3879,11 @@
         <option value="$PROJECT_DIR$/launcher/src/main/res/layout/view_widgetcontainer.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/values/attrs.xml" />
         <option value="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/values/values.xml" />
-        <option value="$PROJECT_DIR$/launcher/build.gradle" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/layout/item_minbaredit.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/Home.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/layout/activity_minbaredit.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/drawable/ic_photo_black_24dp.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/drawable/ic_brush_black_24dp.xml" />
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/PagerIndicator.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/GroupIconDrawable.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/DragOptionView.java" />
         <option value="$PROJECT_DIR$/materialpreffragment/build.gradle" />
@@ -4009,18 +3896,24 @@
         <option value="$PROJECT_DIR$/launcher/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/AppDrawer.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherAction.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/FiveSecsDelayContentProvider.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/BlankActivity.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/Home.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherSettings.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/Dock.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/Desktop.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/SettingsActivity.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/layout/view_grouppopup.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/GroupPopupView.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/PagerIndicator.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherSettings.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/SettingsActivity.java" />
+        <option value="$PROJECT_DIR$/launcher/build/intermediates/bundles/debug/instant-run/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/materialpreffragment/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/AutoFinishActivity.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/FiveSecsDelayContentProvider.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/Home.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/launcher/build.gradle" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/Tools.java" />
       </list>
     </option>
   </component>
@@ -4065,7 +3958,7 @@
       <showMembers />
       <showModules />
       <showLibraryContents />
-      <hideEmptyPackages />
+      <hideEmptyPackages AndroidView="false" />
       <abbreviatePackageNames />
       <autoscrollToSource />
       <autoscrollFromSource />
@@ -4074,6 +3967,37 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenLauncher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenLauncher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenLauncher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenLauncher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -4106,11 +4030,15 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="project2" />
+              <option name="myItemId" value="com" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="widget" />
+              <option name="myItemId" value="benny" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openlauncher" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -4128,8 +4056,16 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="project2" />
+              <option name="myItemId" value="com" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="benny" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openlauncher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="util" />
@@ -4150,8 +4086,16 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="project2" />
+              <option name="myItemId" value="com" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="benny" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openlauncher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="activity" />
@@ -4176,37 +4120,6 @@
       </pane>
       <pane id="Scratches">
         <subPane />
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
       </pane>
     </panes>
   </component>
@@ -4597,7 +4510,13 @@
       <option name="project" value="LOCAL" />
       <updated>1473474032700</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="support livewallpaper tap action and bug fixed.">
+      <created>1473690483987</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1473690483987</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -4614,12 +4533,12 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55345213" sideWeight="0.5042644" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6959911" sideWeight="0.49573562" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58129174" sideWeight="0.49573562" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2260128" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -4629,6 +4548,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21801706" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -4640,7 +4560,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -4666,75 +4585,17 @@
     <MESSAGE value="resize widget , bug fixed" />
     <MESSAGE value="bug fixed" />
     <MESSAGE value="fixed some theme bug." />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed some theme bug." />
+    <MESSAGE value="support livewallpaper tap action and bug fixed." />
+    <MESSAGE value="added support for klwp and changed pkg name." />
+    <option name="LAST_COMMIT_MESSAGE" value="added support for klwp and changed pkg name." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="16" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/PagerIndicator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41379312">
-          <caret line="46" column="30" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-24/android.jar!/android/view/View.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2366" column="50" selection-start-line="2366" selection-start-column="50" selection-end-line="2366" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/DragOptionView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="183" column="49" selection-start-line="183" selection-start-column="49" selection-end-line="183" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/materialpreffragment/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/materialpreffragment/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26666668">
-          <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/materialpreffragment/src/main/res/values/dimenes.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/materialpreffragment/src/main/res/values/color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/materialpreffragment/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/activity_settings.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -4755,7 +4616,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/materialpreffragment/src/main/java/com/bennnyv5/materialpreffragment/CommonUtility.java">
+    <entry file="file://$PROJECT_DIR$/materialpreffragment/src/main/java/com/bennyv5/materialpreffragment/CommonUtility.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
@@ -4812,7 +4673,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/MinBarEditActivity.java">
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/MinBarEditActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="49" column="32" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
@@ -4826,14 +4687,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/materialpreffragment/src/main/java/com/bennnyv5/materialpreffragment/MaterialPrefFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="293" column="167" selection-start-line="293" selection-start-column="167" selection-end-line="293" selection-end-column="167" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/GoodDragShadowBuilder.java">
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/GoodDragShadowBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22068965">
           <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
@@ -4905,7 +4759,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/AppDrawer.java">
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/AppDrawer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
@@ -4913,7 +4767,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherAction.java">
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/LauncherAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="37" column="21" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="21" />
@@ -4925,10 +4779,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-          <folding>
-            <element signature="e#324#325#0" expanded="true" />
-            <element signature="e#375#376#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4936,7 +4786,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1764706">
           <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4948,7 +4797,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/CellContainer.java">
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/CellContainer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.74252874">
           <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
@@ -4964,33 +4813,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/Tools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="172" column="23" selection-start-line="172" selection-start-column="23" selection-end-line="172" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-24/android.jar!/android/widget/PopupWindow.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="217" column="16" selection-start-line="217" selection-start-column="16" selection-end-line="217" selection-end-column="16" />
-          <folding>
-            <element signature="e#5678#5679#0" expanded="true" />
-            <element signature="e#5729#5730#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.951613">
-          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5005,68 +4831,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/SettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="170" selection-start-line="55" selection-start-column="170" selection-end-line="55" selection-end-column="170" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="131" column="71" selection-start-line="131" selection-start-column="71" selection-end-line="131" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.272727">
-          <caret line="46" column="58" selection-start-line="46" selection-start-column="58" selection-end-line="46" selection-end-column="58" />
-          <folding>
-            <element signature="e#533#551#0" expanded="true" />
-            <element signature="e#829#847#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/view_grouppopup.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.580645">
+        <state vertical-scroll-proportion="0.0">
           <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/GroupPopupView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/Home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="154" column="28" selection-start-line="154" selection-start-column="28" selection-end-line="154" selection-end-column="28" />
-          <folding>
-            <element signature="method#initMinBar#0;class#Home#0" expanded="false" />
-            <element signature="e#14209#14235#0" expanded="false" />
-            <element signature="e#16542#16569#0" expanded="false" />
-            <element signature="e#19893#19914#0" expanded="false" />
-            <element signature="method#onSearch#0;class#Home#0" expanded="false" />
-            <element signature="method#onVoiceSearch#0;class#Home#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/Desktop.java">
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="207" column="16" selection-start-line="207" selection-start-column="16" selection-end-line="207" selection-end-column="16" />
@@ -5090,25 +4866,178 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/Dock.java">
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Dock.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="330" column="0" selection-start-line="330" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#9076#9077#0" expanded="false" />
+            <element signature="e#9157#9158#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/GroupPopupView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="139" column="54" selection-start-line="139" selection-start-column="54" selection-end-line="139" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/FiveSecsDelayContentProvider.java">
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/DragOptionView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49655172">
-          <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding>
+            <element signature="e#1690#3348#0" expanded="true" />
+            <element signature="e#3347#3348#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/PagerIndicator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="38" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/LauncherSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="123" column="30" selection-start-line="123" selection-start-column="30" selection-end-line="123" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/build/intermediates/bundles/debug/instant-run/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33271718">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="119" selection-start-line="55" selection-start-column="119" selection-end-line="55" selection-end-column="119" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/materialpreffragment/src/main/java/com/bennyv5/materialpreffragment/MaterialPrefFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.63448274">
+          <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/materialpreffragment/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11469534">
+          <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/AutoFinishActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41379312">
+          <caret line="15" column="55" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#634#635#0" expanded="true" />
-            <element signature="e#661#662#0" expanded="true" />
-            <element signature="e#752#753#0" expanded="true" />
-            <element signature="e#779#780#0" expanded="true" />
+            <element signature="e#390#391#0" expanded="true" />
+            <element signature="e#461#462#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/FiveSecsDelayContentProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="59" column="51" selection-start-line="59" selection-start-column="51" selection-end-line="59" selection-end-column="51" />
+          <folding>
+            <element signature="e#575#576#0" expanded="true" />
+            <element signature="e#602#603#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/materialpreffragment/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11034483">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="139" column="54" selection-start-line="139" selection-start-column="54" selection-end-line="139" selection-end-column="54" />
+          <folding>
+            <element signature="method#onStart#0;class#5676:8074" expanded="false" />
+            <element signature="method#onFinished#0;class#5676:8074" expanded="false" />
+            <element signature="method#initSettings#0;class#Home#0" expanded="false" />
+            <element signature="method#initMinBar#0;class#Home#0" expanded="false" />
+            <element signature="method#registerAppUpdateReceiver#0;class#Home#0" expanded="false" />
+            <element signature="e#13571#13586#0" expanded="false" />
+            <element signature="e#15382#15408#0" expanded="false" />
+            <element signature="e#17715#17742#0" expanded="false" />
+            <element signature="e#21066#21087#0" expanded="false" />
+            <element signature="method#onSearch#0;class#Home#0" expanded="false" />
+            <element signature="method#onVoiceSearch#0;class#Home#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.774193">
+          <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.181818">
+          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+          <folding>
+            <element signature="e#535#553#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/Tools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5">
+          <caret line="188" column="27" selection-start-line="188" selection-start-column="27" selection-end-line="188" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>

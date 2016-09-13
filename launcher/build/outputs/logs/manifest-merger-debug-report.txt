@@ -1,8 +1,8 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:2:1-67:12
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:2:1-70:12
 	package
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:3:5-35
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:3:5-37
 		INJECTED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
 		INJECTED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
 	android:versionName
@@ -22,7 +22,7 @@ ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 	android:name
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:7:22-81
 application
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:9:5-65:19
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:9:5-68:19
 MERGED from [com.balysv:material-ripple:1.0.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.balysv\material-ripple\1.0.2\AndroidManifest.xml:12:5-20
 MERGED from [com.github.traex.rippleeffect:library:1.3] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.traex.rippleeffect\library\1.3\AndroidManifest.xml:12:5-20
 MERGED from [net.steamcrafted:materialiconlib:1.0.9] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.steamcrafted\materialiconlib\1.0.9\AndroidManifest.xml:11:5-12:19
@@ -86,7 +86,7 @@ MERGED from [com.android.support:cardview-v7:24.1.1] E:\USER\ProjectData\OpenLau
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:14:9-34
 	android:theme
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:15:9-42
-activity#com.bennyv4.project2.activity.Home
+activity#com.benny.openlauncher.activity.Home
 ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:17:9-34:20
 	android:clearTaskOnLaunch
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:19:13-45
@@ -105,7 +105,7 @@ ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 	android:taskAffinity
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:24:13-36
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:18:13-42
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:18:13-64
 intent-filter#android.intent.action.MAIN+android.intent.category.DEFAULT+android.intent.category.HOME+android.intent.category.LAUNCHER
 ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:28:13-33:29
 action#android.intent.action.MAIN
@@ -124,12 +124,10 @@ category#android.intent.category.DEFAULT
 ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:32:17-76
 	android:name
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:32:27-73
-provider#com.bennyv4.project2.util.FiveSecsDelayContentProvider
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:36:9-42:64
-	android:readPermission
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:41:13-65
+provider#com.benny.openlauncher.util.FiveSecsDelayContentProvider
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:36:9-41:86
 	android:authorities
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:37:13-45
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:37:13-91
 	android:enabled
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:40:13-35
 	android:grantUriPermissions
@@ -137,45 +135,51 @@ ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 	android:exported
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:39:13-36
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:42:13-62
-activity#com.bennyv4.project2.activity.MinBarEditActivity
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:44:9-47:59
-	android:label
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:45:13-38
-	android:parentActivityName
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:47:13-56
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:41:13-84
+activity#com.benny.openlauncher.activity.AutoFinishActivity
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:43:9-45:80
 	android:theme
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:46:13-56
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:44:13-83
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:44:19-62
-activity#com.bennyv4.project2.activity.SettingsActivity
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:49:9-52:58
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:45:13-78
+activity#com.benny.openlauncher.activity.MinBarEditActivity
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:47:9-50:81
 	android:label
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:50:13-37
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:48:13-38
 	android:parentActivityName
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:52:13-56
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:50:13-78
 	android:theme
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:51:13-56
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:49:13-56
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:49:19-60
-receiver#com.bennyv4.project2.util.DeviceAdminReceiver
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:54:9-63:20
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:47:19-84
+activity#com.benny.openlauncher.activity.SettingsActivity
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:52:9-55:80
+	android:label
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:53:13-37
+	android:parentActivityName
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:55:13-78
+	android:theme
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:54:13-56
+	android:name
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:52:19-82
+receiver#com.benny.openlauncher.util.DeviceAdminReceiver
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:57:9-66:20
 	android:permission
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:56:13-70
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:59:13-70
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:55:13-53
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:58:13-75
 intent-filter#android.app.action.DEVICE_ADMIN_ENABLED
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:57:13-59:29
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:60:13-62:29
 action#android.app.action.DEVICE_ADMIN_ENABLED
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:58:17-82
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:61:17-82
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:58:25-79
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:61:25-79
 meta-data#android.app.device_admin
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:60:13-62:56
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:63:13-65:56
 	android:resource
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:62:17-53
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:65:17-53
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:61:17-56
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:64:17-56
 uses-sdk
 INJECTED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.balysv:material-ripple:1.0.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.balysv\material-ripple\1.0.2\AndroidManifest.xml:8:5-10:41

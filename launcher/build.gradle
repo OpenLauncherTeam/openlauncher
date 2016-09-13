@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         multiDexEnabled false
-        applicationId "com.bennyv4.project2"
+        applicationId "com.benny.openlauncher"
         vectorDrawables.useSupportLibrary = true
         minSdkVersion 16
         targetSdkVersion 24
