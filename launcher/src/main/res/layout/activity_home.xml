@@ -145,9 +145,10 @@
             android:layout_marginRight="8dp"/>
 
         <android.support.v7.widget.CardView
+            android:layout_alignParentBottom="true"
             android:id="@+id/quickcenter"
             android:layout_width="match_parent"
-            android:layout_height="70dp">
+            android:layout_height="match_parent">
 
         </android.support.v7.widget.CardView>
 
