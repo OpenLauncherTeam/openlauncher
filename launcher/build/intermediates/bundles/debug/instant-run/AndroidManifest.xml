@@ -42,12 +42,14 @@
 
         <provider
             android:name="com.bennyv4.project2.util.FiveSecsDelayContentProvider"
-            android:authorities="reset5secs"
+            android:authorities="com.bennyv4.project2.util.FiveSecsDelayContentProvider"
             android:enabled="true"
             android:exported="true"
-            android:grantUriPermissions="true"
-            android:readPermission="android.permission.permRead" />
+            android:grantUriPermissions="true" />
 
+        <activity
+            android:name="com.bennyv4.project2.activity.AutoFinishActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.bennyv4.project2.activity.MinBarEditActivity"
             android:label="Edit Item"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bennyv4.project2"
+    package="com.benny.openlauncher"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/Home.Light" >
         <activity
-            android:name="com.bennyv4.project2.activity.Home"
+            android:name="com.benny.openlauncher.activity.Home"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|keyboard|screenSize"
             android:enabled="true"
@@ -40,26 +40,28 @@
         </activity>
 
         <provider
-            android:name="com.bennyv4.project2.util.FiveSecsDelayContentProvider"
-            android:authorities="reset5secs"
+            android:name="com.benny.openlauncher.util.FiveSecsDelayContentProvider"
+            android:authorities="com.benny.openlauncher.util.FiveSecsDelayContentProvider"
             android:enabled="true"
             android:exported="true"
-            android:grantUriPermissions="true"
-            android:readPermission="android.permission.permRead" />
+            android:grantUriPermissions="true" />
 
         <activity
-            android:name="com.bennyv4.project2.activity.MinBarEditActivity"
+            android:name="com.benny.openlauncher.activity.AutoFinishActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.benny.openlauncher.activity.MinBarEditActivity"
             android:label="Edit Item"
-            android:parentActivityName="com.bennyv4.project2.activity.Home"
+            android:parentActivityName="com.benny.openlauncher.activity.Home"
             android:theme="@style/NormalActivity.Light" />
         <activity
-            android:name="com.bennyv4.project2.activity.SettingsActivity"
+            android:name="com.benny.openlauncher.activity.SettingsActivity"
             android:label="Settings"
-            android:parentActivityName="com.bennyv4.project2.activity.Home"
+            android:parentActivityName="com.benny.openlauncher.activity.Home"
             android:theme="@style/NormalActivity.Light" />
 
         <receiver
-            android:name="com.bennyv4.project2.util.DeviceAdminReceiver"
+            android:name="com.benny.openlauncher.util.DeviceAdminReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN" >
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
