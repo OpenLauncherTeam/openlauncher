@@ -1,11 +1,11 @@
 [
     {
-        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png",
-        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
-    },
-    {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable-xhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
     {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
@@ -50,10 +50,6 @@
     {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
-        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable-xhdpi\\ic_launcher.png"
     },
     {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_half_black_48dp.png",

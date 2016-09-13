@@ -81,7 +81,7 @@ MERGED from [com.android.support:cardview-v7:24.1.1] E:\USER\ProjectData\OpenLau
 	android:allowBackup
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:10:9-35
 	android:icon
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:12:9-45
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:12:9-43
 	android:largeHeap
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:14:9-34
 	android:theme

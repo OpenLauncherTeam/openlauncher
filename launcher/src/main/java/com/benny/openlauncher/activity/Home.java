@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.*;
 import android.os.*;
+import android.provider.Settings;
 import android.support.v7.widget.CardView;
 import android.util.TypedValue;
 import android.view.*;
@@ -220,29 +221,36 @@ public class Home extends Activity {
         appDrawerBtnCard.getLayoutParams().width = Tools.convertDpToPixel(iconSize - 8, this);
         appDrawerBtnCard.getLayoutParams().height = Tools.convertDpToPixel(iconSize - 8, this);
 
+        quickCenterLayout.setTranslationY(getResources().getDisplayMetrics().heightPixels);
+
         ImageView appDrawerIcon = (ImageView) appDrawerBtn.findViewById(R.id.iv);
         appDrawerIcon.setImageDrawable(appDrawerBtnIcon);
+
         appDrawerBtn.setOnTouchListener(new OnTouchListener() {
             private float startY;
+            private float dy;
+            private long startTime;
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN)
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    startTime = System.currentTimeMillis();
                     startY = motionEvent.getY();
+                }
                 if (motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    float dy = motionEvent.getY() - startY;
-
+                    dy = startY - motionEvent.getY();
+                    quickCenterLayout.setTranslationY(getResources().getDisplayMetrics().heightPixels-dy);
                 }
                 if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-
+                    if(System.currentTimeMillis() - startTime < 100L) {
+                        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                        openAppDrawer();
+                    }
+                    if (dy < quickCenterLayout.getHeight()/3)
+                        quickCenterLayout.animate().y(getResources().getDisplayMetrics().heightPixels);
+                    else
+                        quickCenterLayout.animate().y(0);
                 }
-                return false;
-            }
-        });
-        appDrawerBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                openAppDrawer();
+                return true;
             }
         });
 
@@ -407,6 +415,8 @@ public class Home extends Activity {
 
     @Override
     public void onBackPressed() {
+        if (quickCenterLayout != null)
+            quickCenterLayout.animate().y(getResources().getDisplayMetrics().heightPixels);
         if (!desktop.inEditMode) {
             desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
             if (appDrawer.getVisibility() == View.VISIBLE)
@@ -418,6 +428,8 @@ public class Home extends Activity {
 
     @Override
     protected void onResume() {
+        if (quickCenterLayout != null)
+            quickCenterLayout.animate().y(getResources().getDisplayMetrics().heightPixels);
         if (appWidgetHost != null)
             appWidgetHost.startListening();
         if (!desktop.inEditMode) {
