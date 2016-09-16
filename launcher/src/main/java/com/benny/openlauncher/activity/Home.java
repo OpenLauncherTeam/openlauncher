@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.*;
 import android.os.*;
-import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.*;
 import android.view.View.*;
@@ -29,11 +31,16 @@ import com.benny.openlauncher.util.AppUpdateReceiver;
 import com.benny.openlauncher.util.DragNavigationControl;
 import com.benny.openlauncher.util.IconListAdapter;
 import com.benny.openlauncher.util.LauncherAction;
+import com.benny.openlauncher.util.QuickCenterItem;
 import com.benny.openlauncher.util.WidgetHost;
 import com.benny.openlauncher.widget.DragOptionView;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tools;
 import com.benny.openlauncher.widget.*;
+import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
+import com.bennyv5.smoothviewpager.SmoothViewPager;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
+import com.mikepenz.fastadapter.adapters.HeaderAdapter;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
@@ -63,8 +70,8 @@ public class Home extends Activity {
     DragOptionView dragOptionView;
     LinearLayout desktopEditOptionView;
     Button addWidgetBtn;
+    RecyclerView quickCenter;
     BroadcastReceiver appUpdateReceiver;
-    CardView quickCenterLayout;
     ListView minBar;
 
     public static final int REQUEST_PICK_APPWIDGET = 0x6475;
@@ -105,8 +112,17 @@ public class Home extends Activity {
         appWidgetManager = AppWidgetManager.getInstance(this);
         appWidgetHost.startListening();
 
-        findViews();
-        initViews();
+        SmoothViewPager main = (SmoothViewPager) findViewById(R.id.home);
+        main.setAsOuterMostView();
+
+        ViewGroup quickLayout = (ViewGroup) LayoutInflater.from(Home.this).inflate(R.layout.view_quickcenter, main,false);
+        quickCenter = (RecyclerView) quickLayout.findViewById(R.id.rv);
+        ViewGroup home = (ViewGroup) LayoutInflater.from(Home.this).inflate(R.layout.view_home, main,false);
+
+        main.setAdapter(new HomeAdapter(quickLayout,home));
+
+        findViews(home);
+        initViews(home);
         registerAppUpdateReceiver();
 
         AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
@@ -124,27 +140,59 @@ public class Home extends Activity {
         System.gc();
     }
 
-    private void findViews() {
-        baseLayout = (RelativeLayout) findViewById(R.id.baseLayout);
-        appDrawer = (AppDrawer) findViewById(R.id.appDrawer);
-        desktop = (Desktop) findViewById(R.id.desktop);
-        addWidgetBtn = (Button) findViewById(R.id.addwidgetbtn);
-        dock = (Dock) findViewById(R.id.desktopDock);
-        appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
-        desktopIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
-        searchBar = (CardView) findViewById(R.id.searchBar);
+    private class HomeAdapter extends SmoothPagerAdapter{
+        List<View> pages = new ArrayList<>();
+
+        public HomeAdapter(@NonNull View... views){
+            pages.add(views[0]);
+            pages.add(views[1]);
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+
+        @Override
+        public boolean isViewFromObject(View p1, Object p2) {
+            return p1 == p2;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int pos) {
+            View layout = pages.get(pos);
+            container.addView(layout);
+            return layout;
+        }
+    }
+
+    private void findViews(ViewGroup home) {
+        baseLayout = (RelativeLayout) home.findViewById(R.id.baseLayout);
+        appDrawer = (AppDrawer) home.findViewById(R.id.appDrawer);
+        desktop = (Desktop) home.findViewById(R.id.desktop);
+        addWidgetBtn = (Button) home.findViewById(R.id.addwidgetbtn);
+        dock = (Dock) home.findViewById(R.id.desktopDock);
+        appDrawerIndicator = (PagerIndicator) home.findViewById(R.id.appDrawerIndicator);
+        desktopIndicator = (PagerIndicator) home.findViewById(R.id.desktopIndicator);
+        searchBar = (CardView) home.findViewById(R.id.searchBar);
         appDrawerBtn = (FrameLayout) getLayoutInflater().inflate(R.layout.item_appdrawerbtn, null);
-        desktopEditOptionView = (LinearLayout) findViewById(R.id.desktopeditoptionpanel);
-        dragOptionView = (DragOptionView) findViewById(R.id.dragOptionPanel);
-        groupPopup = (GroupPopupView) findViewById(R.id.groupPopup);
-        quickCenterLayout = (CardView) findViewById(R.id.quickcenter);
+        desktopEditOptionView = (LinearLayout) home.findViewById(R.id.desktopeditoptionpanel);
+        dragOptionView = (DragOptionView) home.findViewById(R.id.dragOptionPanel);
+        groupPopup = (GroupPopupView) home.findViewById(R.id.groupPopup);
+
         minBar = (ListView) findViewById(R.id.minbar);
     }
 
-    private void initViews() {
+    private void initViews(ViewGroup home) {
         initMinBar();
+        initQuickCenter();
 
-        DragNavigationControl dragNavigationControl = new DragNavigationControl(findViewById(R.id.left), findViewById(R.id.right));
+        DragNavigationControl dragNavigationControl = new DragNavigationControl(home.findViewById(R.id.left), home.findViewById(R.id.right));
 
         appDrawer.withHome(this, appDrawerIndicator);
 
@@ -221,42 +269,32 @@ public class Home extends Activity {
         appDrawerBtnCard.getLayoutParams().width = Tools.convertDpToPixel(iconSize - 8, this);
         appDrawerBtnCard.getLayoutParams().height = Tools.convertDpToPixel(iconSize - 8, this);
 
-        quickCenterLayout.setTranslationY(getResources().getDisplayMetrics().heightPixels);
-
         ImageView appDrawerIcon = (ImageView) appDrawerBtn.findViewById(R.id.iv);
         appDrawerIcon.setImageDrawable(appDrawerBtnIcon);
 
-        appDrawerBtn.setOnTouchListener(new OnTouchListener() {
-            private float startY;
-            private float dy;
-            private long startTime;
+        appDrawerBtn.setOnClickListener(new OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    startTime = System.currentTimeMillis();
-                    startY = motionEvent.getY();
-                }
-                if (motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    dy = startY - motionEvent.getY();
-                    quickCenterLayout.setTranslationY(getResources().getDisplayMetrics().heightPixels-dy);
-                }
-                if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    if(System.currentTimeMillis() - startTime < 100L) {
-                        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                        openAppDrawer();
-                    }
-                    if (dy < quickCenterLayout.getHeight()/3)
-                        quickCenterLayout.animate().y(getResources().getDisplayMetrics().heightPixels);
-                    else
-                        quickCenterLayout.animate().y(0);
-                }
-                return true;
+            public void onClick(View view) {
+                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                openAppDrawer();
             }
         });
 
         dock.getLayoutParams().height = Tools.convertDpToPixel(22 + iconSize, this);
 
         dragOptionView.setAutoHideView(searchBar);
+    }
+
+    private void initQuickCenter() {
+        quickCenter.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+
+        HeaderAdapter<QuickCenterItem.SearchHeader> header = new HeaderAdapter<>();
+        FastItemAdapter<QuickCenterItem.NoteItem> fastAdapter = new FastItemAdapter<>();
+
+        quickCenter.setAdapter(header.wrap(fastAdapter));
+
+        header.add(new QuickCenterItem.SearchHeader());
+        fastAdapter.add(new QuickCenterItem.NoteItem("","Remember to eat moon cake!!"),new QuickCenterItem.NoteItem("","Remember to eat moon cake!!"));
     }
 
     private void initSettings() {
@@ -415,8 +453,7 @@ public class Home extends Activity {
 
     @Override
     public void onBackPressed() {
-        if (quickCenterLayout != null)
-            quickCenterLayout.animate().y(getResources().getDisplayMetrics().heightPixels);
+
         if (!desktop.inEditMode) {
             desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
             if (appDrawer.getVisibility() == View.VISIBLE)
@@ -428,8 +465,7 @@ public class Home extends Activity {
 
     @Override
     protected void onResume() {
-        if (quickCenterLayout != null)
-            quickCenterLayout.animate().y(getResources().getDisplayMetrics().heightPixels);
+
         if (appWidgetHost != null)
             appWidgetHost.startListening();
         if (!desktop.inEditMode) {

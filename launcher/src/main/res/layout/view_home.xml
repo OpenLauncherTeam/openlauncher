@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:id="@+id/baseLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.benny.openlauncher.widget.Desktop
+        android:id="@+id/desktop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/desktopIndicator"
+        android:layout_below="@+id/searchBar"
+        android:layout_marginTop="0dp" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="onSearch"
+        app:cardBackgroundColor="?colorViewBackground"
+        app:cardElevation="2dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginRight="14dp"
+            android:onClick="onVoiceSearch"
+            android:src="@drawable/ic_mic_black_24dp"
+            android:tint="?android:textColorPrimary" />
+
+        <DigitalClock
+            android:textColor="?android:textColorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="14dp"
+            android:textSize="20sp" />
+
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/addwidgetbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="84dp"
+        android:alpha="0"
+        android:background="?android:attr/selectableItemBackground"
+        android:drawableLeft="@drawable/ic_dashboard_dark_24dp"
+        android:gravity="center"
+        android:onClick="pickWidget"
+        android:padding="20dp"
+        android:text="@string/add_widget"
+        android:textColor="@android:color/white"
+        android:visibility="invisible" />
+
+    <include
+        android:id="@+id/desktopeditoptionpanel"
+        layout="@layout/view_desktopeditoption" />
+
+    <View
+        android:id="@+id/left"
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/desktopIndicator"
+        android:layout_marginTop="64dp"
+        android:alpha="0"
+        android:background="@drawable/outlinebg" />
+
+    <View
+        android:id="@+id/right"
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/desktopIndicator"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="64dp"
+        android:alpha="0"
+        android:background="@drawable/outlinebg" />
+
+    <com.benny.openlauncher.widget.PagerIndicator
+        android:id="@+id/desktopIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="9dp"
+        android:layout_above="@+id/desktopDock"
+        android:layout_centerHorizontal="true" />
+
+    <com.benny.openlauncher.widget.Dock
+        android:id="@+id/desktopDock"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp" />
+
+    <io.codetail.widget.RevealFrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.benny.openlauncher.widget.AppDrawer
+            android:id="@+id/appDrawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="24dp"
+            android:visibility="invisible" />
+
+        <com.benny.openlauncher.widget.PagerIndicator
+            android:id="@+id/appDrawerIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="9dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="14dp"
+            android:alpha="0"
+            android:visibility="visible" />
+
+    </io.codetail.widget.RevealFrameLayout>
+
+    <com.benny.openlauncher.widget.GroupPopupView
+        android:id="@+id/groupPopup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.benny.openlauncher.widget.DragOptionView
+        app:cardBackgroundColor="?colorViewBackground"
+        android:id="@+id/dragOptionPanel"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"/>
+
+</RelativeLayout>
