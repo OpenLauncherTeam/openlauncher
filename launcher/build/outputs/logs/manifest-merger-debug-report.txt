@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:2:1-70:12
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:2:1-75:12
 	package
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:3:5-37
 		INJECTED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
@@ -22,56 +22,176 @@ ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 	android:name
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:7:22-81
 application
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:9:5-68:19
-MERGED from [com.balysv:material-ripple:1.0.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.balysv\material-ripple\1.0.2\AndroidManifest.xml:12:5-20
-MERGED from [com.github.traex.rippleeffect:library:1.3] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.traex.rippleeffect\library\1.3\AndroidManifest.xml:12:5-20
-MERGED from [net.steamcrafted:materialiconlib:1.0.9] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.steamcrafted\materialiconlib\1.0.9\AndroidManifest.xml:11:5-12:19
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:9:5-73:19
+MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
 MERGED from [com.github.ozodrukh:CircularReveal:2.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.ozodrukh\CircularReveal\2.0.1\AndroidManifest.xml:10:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:appcompat-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
 MERGED from [net.qiujuer.genius:blur:2.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.qiujuer.genius\blur\2.0.0\AndroidManifest.xml:11:5-13:38
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:appcompat-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:cardview-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.1.1\AndroidManifest.xml:22:5-20
+MERGED from [com.balysv:material-ripple:1.0.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.balysv\material-ripple\1.0.2\AndroidManifest.xml:12:5-20
+MERGED from [net.steamcrafted:materialiconlib:1.0.9] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.steamcrafted\materialiconlib\1.0.9\AndroidManifest.xml:11:5-12:19
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:cardview-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\design\24.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
 MERGED from [OpenLauncher:smoothviewpager:unspecified] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\smoothviewpager\unspecified\AndroidManifest.xml:11:5-15:19
-MERGED from [com.android.support:appcompat-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:design:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\design\24.1.1\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:appcompat-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
 MERGED from [OpenLauncher:materialpreffragment:unspecified] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\materialpreffragment\unspecified\AndroidManifest.xml:11:5-15:19
-MERGED from [com.android.support:appcompat-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:cardview-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.1.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:cardview-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.1\AndroidManifest.xml:22:5-20
 	android:label
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:13:9-41
 	android:supportsRtl
@@ -136,109 +256,239 @@ ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:39:13-36
 	android:name
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:41:13-84
+activity#com.benny.openlauncher.activity.QuickCenterActivity
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:43:9-46:48
+	android:windowSoftInputMode
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:44:13-54
+	android:theme
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:46:13-46
+	android:name
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:45:13-57
 activity#com.benny.openlauncher.activity.AutoFinishActivity
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:43:9-45:80
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:48:9-50:80
 	android:theme
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:44:13-83
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:49:13-83
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:45:13-78
-activity#com.benny.openlauncher.activity.MinBarEditActivity
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:47:9-50:81
-	android:label
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:48:13-38
-	android:parentActivityName
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:50:13-78
-	android:theme
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:49:13-56
-	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:47:19-84
-activity#com.benny.openlauncher.activity.SettingsActivity
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:52:9-55:80
+activity#com.benny.openlauncher.activity.MinBarEditActivity
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:52:9-55:81
 	android:label
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:53:13-37
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:53:13-38
 	android:parentActivityName
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:55:13-78
 	android:theme
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:54:13-56
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:52:19-82
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:52:19-84
+activity#com.benny.openlauncher.activity.SettingsActivity
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:57:9-60:80
+	android:label
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:58:13-37
+	android:parentActivityName
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:60:13-78
+	android:theme
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:59:13-56
+	android:name
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:57:19-82
 receiver#com.benny.openlauncher.util.DeviceAdminReceiver
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:57:9-66:20
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:62:9-71:20
 	android:permission
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:59:13-70
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:64:13-70
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:58:13-75
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:63:13-75
 intent-filter#android.app.action.DEVICE_ADMIN_ENABLED
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:60:13-62:29
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:65:13-67:29
 action#android.app.action.DEVICE_ADMIN_ENABLED
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:61:17-82
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:66:17-82
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:61:25-79
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:66:25-79
 meta-data#android.app.device_admin
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:63:13-65:56
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:68:13-70:56
 	android:resource
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:65:17-53
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:70:17-53
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:64:17-56
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:69:17-56
 uses-sdk
 INJECTED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.balysv:material-ripple:1.0.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.balysv\material-ripple\1.0.2\AndroidManifest.xml:8:5-10:41
-MERGED from [com.github.traex.rippleeffect:library:1.3] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.traex.rippleeffect\library\1.3\AndroidManifest.xml:8:5-10:41
-MERGED from [in.championswimmer:SimpleFingerGestures_Android_Library:1.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\in.championswimmer\SimpleFingerGestures_Android_Library\1.2\AndroidManifest.xml:7:5-9:41
-MERGED from [net.steamcrafted:materialiconlib:1.0.9] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.steamcrafted\materialiconlib\1.0.9\AndroidManifest.xml:7:5-9:41
+MERGED from [com.mikepenz:fastadapter:1.8.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.mikepenz\fastadapter\1.8.2\AndroidManifest.xml:8:5-10:41
+MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:recyclerview-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
 MERGED from [com.github.ozodrukh:CircularReveal:2.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.ozodrukh\CircularReveal\2.0.1\AndroidManifest.xml:6:5-8:41
 MERGED from [com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.9.3] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.h6ah4i.android.widget.advrecyclerview\advrecyclerview\0.9.3\AndroidManifest.xml:23:5-25:41
-MERGED from [com.android.support:recyclerview-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.1.1\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:appcompat-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:multidex:1.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\multidex\1.0.1\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:recyclerview-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
 MERGED from [net.qiujuer.genius:blur:2.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.qiujuer.genius\blur\2.0.0\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:recyclerview-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.1.1\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:appcompat-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:cardview-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.1.1\AndroidManifest.xml:20:5-43
+MERGED from [com.balysv:material-ripple:1.0.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.balysv\material-ripple\1.0.2\AndroidManifest.xml:8:5-10:41
+MERGED from [in.championswimmer:SimpleFingerGestures_Android_Library:1.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\in.championswimmer\SimpleFingerGestures_Android_Library\1.2\AndroidManifest.xml:7:5-9:41
+MERGED from [net.steamcrafted:materialiconlib:1.0.9] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.steamcrafted\materialiconlib\1.0.9\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:multidex:1.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\multidex\1.0.1\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:recyclerview-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:cardview-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:design:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\design\24.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:recyclerview-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
 MERGED from [OpenLauncher:smoothviewpager:unspecified] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\smoothviewpager\unspecified\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:design:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\design\24.1.1\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:recyclerview-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.1.1\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:appcompat-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
 MERGED from [OpenLauncher:materialpreffragment:unspecified] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\materialpreffragment\unspecified\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-vector-drawable:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:cardview-v7:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.1.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-fragment:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:cardview-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.1\AndroidManifest.xml:20:5-43
 	tools:overrideLibrary
-		ADDED from [com.android.support:support-v4:24.1.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:23:9-51
+		ADDED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
 		INJECTED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
 		INJECTED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml

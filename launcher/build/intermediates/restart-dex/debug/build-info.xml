@@ -4,38 +4,59 @@
     api-level="21"
     density="xhdpi"
     format="7"
-    timestamp="14305296182280"
-    token="8770670177837021869"
-    verifier="IMPLEMENTED_INTERFACES_CHANGE" >
+    timestamp="253065949754572"
+    token="8770670177837021869" >
 
     <task
         name="javac"
-        duration="765" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="34" />
+        duration="0" />
     <task
         name="verifier"
-        duration="7" />
+        duration="0" />
 
     <artifact
-        location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_6\classes.dex"
-        type="DEX" />
+        location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\res\resources-debug.ap_"
+        type="RESOURCES" />
 
-    <build timestamp="13624308869749" >
+    <build timestamp="248219700433085" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\launcher\build\outputs\apk\launcher-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="14305296182280"
-        verifier="IMPLEMENTED_INTERFACES_CHANGE" >
+        timestamp="252419343898672"
+        verifier="R_CLASS_CHANGE" >
+        <artifact
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_7\classes.dex"
+            type="DEX" />
+        <artifact
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
+            type="DEX" />
+        <artifact
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_3\classes.dex"
+            type="DEX" />
+        <artifact
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_5\classes.dex"
+            type="DEX" />
+        <artifact
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_2\classes.dex"
+            type="DEX" />
+    </build>
+    <build timestamp="252820427883206" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_6\classes.dex"
             type="DEX" />
+    </build>
+    <build timestamp="253065949754572" >
+        <artifact
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\res\resources-debug.ap_"
+            type="RESOURCES" />
     </build>
 
 </instant-run>

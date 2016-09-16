@@ -1926,12 +1926,14 @@ public class SmoothViewPager extends ViewGroup {
                 final float yDiff = Math.abs(y - mInitialMotionY);
                 if (DEBUG) Log.v(TAG, "Moved x to " + x + "," + y + " diff=" + xDiff + "," + yDiff);
 
-                if (dx != 0 && !isGutterDrag(mLastMotionX, dx) &&
+                if (dx != 0 &&
+                        !isGutterDrag(mLastMotionX, dx) &&
                         canScroll(this, false, (int) dx, (int) x, (int) y)) {
                     // Nested view has scrollable area under this point. Let it be handled there.
                     //mLastMotionX = x;
                     //mLastMotionY = y;
                     //mIsUnableToDrag = true;
+                    Log.d("Hey","killed");
                     return false;
                 }
                 if (xDiff > mTouchSlop){ //&& xDiff * 0.5f > yDiff) {
@@ -2534,6 +2536,13 @@ public class SmoothViewPager extends ViewGroup {
         }
     }
 
+    //Custom check for launcher
+    boolean isOuterMostView;
+    public void setAsOuterMostView(){
+        isOuterMostView = true;
+    }
+    //end
+
     /**
      * Tests scrollability within child views of v given a delta of dx.
      *
@@ -2555,6 +2564,11 @@ public class SmoothViewPager extends ViewGroup {
             for (int i = count - 1; i >= 0; i--) {
                 // This will not work for transformed views in Honeycomb+
                 final View child = group.getChildAt(i);
+
+                //Custom check for launcher
+
+                //end
+
                 if (x + scrollX >= child.getLeft() && x + scrollX < child.getRight() &&
                         y + scrollY >= child.getTop() && y + scrollY < child.getBottom() &&
                         canScroll(child, true, dx, x + scrollX - child.getLeft(),

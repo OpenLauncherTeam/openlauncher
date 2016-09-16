@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="m_AppWidgetHost" type="id"/>
+    <item name="item_note" type="id"/>
+    <item name="item_header_search" type="id"/>
 </resources>
