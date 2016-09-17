@@ -5,17 +5,14 @@
     android:layout_height="match_parent">
 
     <!-- The main content view -->
-    <com.bennyv5.smoothviewpager.SmoothViewPager
-        android:id="@+id/home"
-        android:fitsSystemWindows="true"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <include
+        layout="@layout/view_home" />
 
     <!-- The navigation drawer -->
     <FrameLayout
         android:fitsSystemWindows="true"
         android:layout_gravity="start"
-        android:layout_width="74dp"
+        android:layout_width="wrap_content"
         android:background="?colorViewBackground"
         android:layout_height="match_parent">
 
@@ -23,12 +20,18 @@
             android:scrollbars="none"
             android:id="@+id/minbar"
             android:listSelector="@android:color/transparent"
-            android:layout_width="match_parent"
+            android:layout_width="74dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center_vertical|start"
             android:divider="@android:color/transparent"
             android:dividerHeight="0dp" />
 
     </FrameLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </android.support.v4.widget.DrawerLayout>

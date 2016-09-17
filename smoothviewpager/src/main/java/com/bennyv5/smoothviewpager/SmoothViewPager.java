@@ -2536,12 +2536,6 @@ public class SmoothViewPager extends ViewGroup {
         }
     }
 
-    //Custom check for launcher
-    boolean isOuterMostView;
-    public void setAsOuterMostView(){
-        isOuterMostView = true;
-    }
-    //end
 
     /**
      * Tests scrollability within child views of v given a delta of dx.

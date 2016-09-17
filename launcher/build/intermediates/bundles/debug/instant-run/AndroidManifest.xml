@@ -48,10 +48,6 @@
             android:grantUriPermissions="true" />
 
         <activity
-            android:name="com.benny.openlauncher.activity.QuickCenterActivity"
-            android:theme="@style/Home.Light"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
             android:name="com.benny.openlauncher.activity.AutoFinishActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <activity

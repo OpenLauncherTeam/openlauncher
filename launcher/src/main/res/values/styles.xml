@@ -44,7 +44,7 @@
     </style>
 
     <style name="NormalActivity.Dark" parent="@style/Theme.AppCompat.NoActionBar">
-        <item name="android:colorPrimaryDark"  tools:targetApi="21">@color/Dark.Background</item>
+        <item name="android:colorPrimaryDark"  tools:targetApi="21">@color/Dark.PrimaryDark</item>
 
         <item name="colorAccent">#fafafa</item>
         <item name="colorViewBackground">@color/Dark.Background</item>

@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:alpha="0"
+    android:layout_marginTop="8dp"
     android:visibility="invisible"
-    android:layout_marginTop="55dp"
     android:layout_centerHorizontal="true"
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
