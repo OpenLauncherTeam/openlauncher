@@ -11,8 +11,9 @@
     <bool name="abc_config_actionMenuItemAllCaps">true</bool>
     <bool name="abc_config_closeDialogWhenTouchOutside">true</bool>
     <bool name="abc_config_showMenuShortcutsWhenKeyboardPresent">false</bool>
-    <color name="Dark.Background">#424242</color>
-    <color name="Dark.GreyBackground">#464646</color>
+    <color name="Dark.Background">#464646</color>
+    <color name="Dark.GreyBackground">#424242</color>
+    <color name="Dark.PrimaryDark">#424242</color>
     <color name="Dark.TextColor">#ffffff</color>
     <color name="Dark.TextColorSec">#bdbdbd</color>
     <color name="Light.Background">#ffffff</color>
@@ -1429,7 +1430,7 @@
     <style name="MyAppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="MyAppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
     <style name="NormalActivity.Dark" parent="@style/Theme.AppCompat.NoActionBar">
-        <item name="android:colorPrimaryDark" ns1:targetApi="21">@color/Dark.Background</item>
+        <item name="android:colorPrimaryDark" ns1:targetApi="21">@color/Dark.PrimaryDark</item>
 
         <item name="colorAccent">#fafafa</item>
         <item name="colorViewBackground">@color/Dark.Background</item>

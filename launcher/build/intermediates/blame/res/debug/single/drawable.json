@@ -60,6 +60,10 @@
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_dashboard_dark_24dp.xml"
     },
     {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\googlepill.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\googlepill.xml"
+    },
+    {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_donut_large_black_24dp.xml",
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\drawable\\ic_donut_large_black_24dp.xml"
     },

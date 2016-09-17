@@ -18,77 +18,28 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Hey" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java" line="794" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58bfc817-6edf-408a-8db0-9ab3850a2884" name="Default" comment="trying to achieve the google now launcher swipe to left function.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/QuickCenterItem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/launcher/src/main/res/layout/item_header_search.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/launcher/src/main/res/layout/item_note.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/launcher/src/main/res/layout/view_home.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/launcher/src/main/res/layout/view_quickcenter.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_24_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_24_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/cardview_v7_24_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_24_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_24_1_1.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$attr.class" />
+    <list default="true" id="58bfc817-6edf-408a-8db0-9ab3850a2884" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/launcher/src/main/res/drawable/googlepill.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/launcher/src/main/res/layout/view_quickcenter.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$dimen.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$drawable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/appcompat/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/cardview/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/cardview/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/cardview/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/cardview/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/cardview/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/cardview/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/cardview/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/cardview/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/recyclerview/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/recyclerview/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/recyclerview/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/recyclerview/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/recyclerview/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/recyclerview/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$attr.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/cardview/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/android/support/v7/cardview/R$color.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$dimen.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$drawable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$id.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$layout.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/com/bennyv5/smoothviewpager/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/net/steamcrafted/materialiconlib/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/net/steamcrafted/materialiconlib/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/net/steamcrafted/materialiconlib/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/classes/debug/net/steamcrafted/materialiconlib/R$styleable.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/exploded-aar/OpenLauncher/smoothviewpager/unspecified/jars/classes.jar" afterPath="$PROJECT_DIR$/launcher/build/intermediates/exploded-aar/OpenLauncher/smoothviewpager/unspecified/jars/classes.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-runtime-classes/debug/instant-run.jar" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-runtime-classes/debug/instant-run.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$attr.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$dimen.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$drawable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$layout.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/appcompat/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/cardview/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/cardview/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/cardview/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/cardview/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/cardview/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/cardview/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/cardview/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/cardview/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/recyclerview/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/recyclerview/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/recyclerview/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/recyclerview/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/recyclerview/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/recyclerview/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$attr.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/cardview/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/android/support/v7/cardview/R$color.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$dimen.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$drawable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$id.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$layout.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/com/bennyv5/smoothviewpager/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/net/steamcrafted/materialiconlib/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/net/steamcrafted/materialiconlib/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/net/steamcrafted/materialiconlib/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental-verifier/debug/net/steamcrafted/materialiconlib/R$styleable.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/classes.zip" afterPath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/classes.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/resources.zip" afterPath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/resources.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/resources-debug.ap_" />
@@ -97,58 +48,19 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$attr.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$dimen.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$drawable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$layout.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/appcompat/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/cardview/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/android/support/v7/cardview/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$attr.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$dimen.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$drawable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$id.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$layout.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/bennyv5/smoothviewpager/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/net/steamcrafted/materialiconlib/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/net/steamcrafted/materialiconlib/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/net/steamcrafted/materialiconlib/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRun/debug/folders/1/5/main/net/steamcrafted/materialiconlib/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/android/support/v7/cardview/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/android/support/v7/cardview/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/android/support/v7/cardview/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/android/support/v7/cardview/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/android/support/v7/cardview/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/android/support/v7/cardview/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/android/support/v7/cardview/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/android/support/v7/cardview/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$attr.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/android/support/v7/cardview/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_0/android/support/v7/cardview/R$color.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$dimen.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$drawable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$layout.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_2/android/support/v7/appcompat/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$attr.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$color.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$dimen.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$drawable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$id.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$layout.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$style.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_6/com/bennyv5/smoothviewpager/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_7/android/support/v7/recyclerview/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_7/android/support/v7/recyclerview/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_7/android/support/v7/recyclerview/R$dimen.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_7/android/support/v7/recyclerview/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_7/android/support/v7/recyclerview/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_7/android/support/v7/recyclerview/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_7/net/steamcrafted/materialiconlib/R$attr.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_7/net/steamcrafted/materialiconlib/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_7/net/steamcrafted/materialiconlib/R$styleable.class" afterPath="$PROJECT_DIR$/launcher/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_7/net/steamcrafted/materialiconlib/R$styleable.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build.gradle" afterPath="$PROJECT_DIR$/launcher/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/android/support/v7/cardview/R.java" afterPath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/android/support/v7/cardview/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/android/support/v7/recyclerview/R.java" afterPath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/android/support/v7/recyclerview/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/com/bennyv5/smoothviewpager/R.java" afterPath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/com/bennyv5/smoothviewpager/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/net/steamcrafted/materialiconlib/R.java" afterPath="$PROJECT_DIR$/launcher/build/generated/source/r/debug/net/steamcrafted/materialiconlib/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/multi/values.json" afterPath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/multi/values.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/single/anim.json" afterPath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/single/anim.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/single/drawable-xhdpi-v4.json" afterPath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/single/drawable-xhdpi-v4.json" />
@@ -157,7 +69,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/bundles/debug/instant-run/AndroidManifest.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/bundles/debug/instant-run/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental/mergeDebugAssets/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/incremental/mergeDebugResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/coldswap.marker" afterPath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/coldswap.marker" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/manifest.crc" afterPath="$PROJECT_DIR$/launcher/build/intermediates/instant-run-support/debug/manifest.crc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/activity_home.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/activity_home.xml" />
@@ -165,12 +76,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/restart-dex/debug/build-info.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/restart-dex/debug/build-info.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/launcher/build/intermediates/symbols/debug/R.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/launcher/build/outputs/logs/manifest-merger-debug-report.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/launcher.iml" afterPath="$PROJECT_DIR$/launcher/launcher.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml" afterPath="$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/res/values/attrs.xml" afterPath="$PROJECT_DIR$/launcher/src/main/res/values/attrs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/res/values/ids.xml" afterPath="$PROJECT_DIR$/launcher/src/main/res/values/ids.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/res/layout/view_desktopeditoption.xml" afterPath="$PROJECT_DIR$/launcher/src/main/res/layout/view_desktopeditoption.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/res/layout/view_home.xml" afterPath="$PROJECT_DIR$/launcher/src/main/res/layout/view_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/launcher/src/main/res/values/colors.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/launcher/src/main/res/values/styles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smoothviewpager/src/main/java/com/bennyv5/smoothviewpager/SmoothViewPager.java" afterPath="$PROJECT_DIR$/smoothviewpager/src/main/java/com/bennyv5/smoothviewpager/SmoothViewPager.java" />
     </list>
@@ -285,26 +195,25 @@
         <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="117" column="122" selection-start-line="117" selection-start-column="122" selection-end-line="117" selection-end-column="122" />
+              <caret line="166" column="141" selection-start-line="166" selection-start-column="141" selection-end-line="166" selection-end-column="141" />
               <folding>
-                <element signature="class#HomeAdapter#0;class#Home#0" expanded="false" />
-                <element signature="e#5550#5551#0" expanded="true" />
-                <element signature="e#5582#5583#0" expanded="true" />
-                <element signature="e#5663#5664#0" expanded="true" />
-                <element signature="e#5702#5703#0" expanded="true" />
-                <element signature="method#onStart#0;class#7437:9835" expanded="false" />
-                <element signature="method#onFinished#0;class#7437:9835" expanded="false" />
-                <element signature="e#11463#11690#0" expanded="true" />
-                <element signature="e#11689#11690#0" expanded="true" />
+                <element signature="e#3939#4111#0" expanded="true" />
+                <element signature="e#4110#4111#0" expanded="true" />
+                <element signature="e#6894#7693#0" expanded="true" />
+                <element signature="e#7692#7693#0" expanded="true" />
+                <element signature="e#10475#10634#0" expanded="true" />
+                <element signature="e#10633#10634#0" expanded="true" />
+                <element signature="e#10719#10949#0" expanded="true" />
+                <element signature="e#10948#10949#0" expanded="true" />
+                <element signature="e#12021#12248#0" expanded="true" />
+                <element signature="e#12247#12248#0" expanded="true" />
                 <element signature="method#initSettings#0;class#Home#0" expanded="false" />
                 <element signature="method#registerAppUpdateReceiver#0;class#Home#0" expanded="false" />
-                <element signature="e#15312#15327#0" expanded="false" />
-                <element signature="method#onDestroy#0;class#Home#0" expanded="false" />
+                <element signature="e#15814#15829#0" expanded="false" />
                 <element signature="method#onLowMemory#0;class#Home#0" expanded="false" />
                 <element signature="method#onActivityResult#0;class#Home#0" expanded="false" />
                 <element signature="method#onStart#0;class#Home#0" expanded="false" />
-                <element signature="e#19458#19485#0" expanded="false" />
-                <element signature="e#22809#22830#0" expanded="false" />
+                <element signature="e#23536#23557#0" expanded="false" />
                 <element signature="method#onSearch#0;class#Home#0" expanded="false" />
                 <element signature="method#onVoiceSearch#0;class#Home#0" expanded="false" />
               </folding>
@@ -312,24 +221,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view_home.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/view_home.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.548387">
-              <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="activity_home.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.483871">
-              <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+            <state vertical-scroll-proportion="-3.096774">
+              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -338,46 +234,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml">
+      <file leaf-file-name="view_home.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/view_home.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21996303">
-              <caret line="40" column="85" selection-start-line="40" selection-start-column="85" selection-end-line="40" selection-end-column="85" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view_quickcenter.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/view_quickcenter.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.9354838">
-              <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-              <folding />
+            <state vertical-scroll-proportion="0.8613861">
+              <caret line="83" column="41" selection-start-line="83" selection-start-column="41" selection-end-line="83" selection-end-column="41" />
+              <folding>
+                <element signature="e#3842#3862#0" expanded="true" />
+              </folding>
             </state>
           </provider>
           <provider editor-type-id="android-designer">
             <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="styles.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/res/values/styles.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.4">
-              <caret line="11" column="38" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="attrs.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/res/values/attrs.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.1818182">
-              <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
-              <folding />
-            </state>
           </provider>
         </entry>
       </file>
@@ -387,10 +255,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile" />
-        <option value="resourceFile" />
         <option value="valueResourceFile" />
         <option value="layoutResourceFile_vertical" />
         <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -4016,8 +3884,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/launcher/src/main/res/layout/view_widgetcontainer.xml" />
-        <option value="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/values/values.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/layout/item_minbaredit.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/Home.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/layout/activity_minbaredit.xml" />
@@ -4032,7 +3898,6 @@
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/MinBarEditActivity.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/materialpreffragment/src/main/java/com/bennnyv5/materialpreffragment/MaterialPrefFragment.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/widget/AppDrawer.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/util/LauncherAction.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/bennyv4/project2/activity/BlankActivity.java" />
@@ -4059,14 +3924,17 @@
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/QuickCenterItem.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/QuickCenterItem.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java" />
-        <option value="$PROJECT_DIR$/smoothviewpager/src/main/java/com/bennyv5/smoothviewpager/SmoothViewPager.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/values/attrs.xml" />
-        <option value="$PROJECT_DIR$/launcher/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/smoothviewpager/src/main/java/com/bennyv5/smoothviewpager/SmoothViewPager.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/res/layout/view_quickcenter.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml" />
+        <option value="$PROJECT_DIR$/launcher/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/launcher/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/launcher/src/main/res/drawable/googlepill.xml" />
+        <option value="$PROJECT_DIR$/launcher/src/main/res/layout/view_desktopeditoption.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/layout/view_home.xml" />
-        <option value="$PROJECT_DIR$/launcher/src/main/res/layout/view_quickcenter.xml" />
-        <option value="$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -4120,94 +3988,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches">
-        <subPane />
-      </pane>
       <pane id="AndroidView">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="smoothviewpager" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="smoothviewpager" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="smoothviewpager" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="smoothviewpager" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="OpenLauncher" />
@@ -4274,60 +4056,12 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="openlauncher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="widget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="launcher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openlauncher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="launcher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openlauncher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -4342,6 +4076,40 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenLauncher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenLauncher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenLauncher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenLauncher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches">
+        <subPane />
+      </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -4749,7 +4517,13 @@
       <option name="project" value="LOCAL" />
       <updated>1473786640139</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="trying to achieve the google now launcher swipe to left function.">
+      <created>1474025430015</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1474025430015</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -4766,13 +4540,13 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55345213" sideWeight="0.5042644" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4933185" sideWeight="0.49573562" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2260128" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2238806" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -4780,7 +4554,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21801706" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21748401" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -4830,58 +4604,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/drawable/ic_info_outline_black_24dp.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.4545455">
-          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/drawable/ic_delete_black_24dp.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.3636365">
-          <caret line="6" column="52" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/drawable/ic_expand_more_black_24dp.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/AppDrawer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/LauncherAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="21" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-24/android.jar!/android/util/JsonReader.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-24/android.jar!/java/io/Reader.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1764706">
@@ -4936,11 +4658,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="330" column="0" selection-start-line="330" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#9076#9077#0" expanded="false" />
-            <element signature="e#9157#9158#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4948,7 +4665,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="139" column="54" selection-start-line="139" selection-start-column="54" selection-end-line="139" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4956,10 +4672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding>
-            <element signature="e#1690#3348#0" expanded="true" />
-            <element signature="e#3347#3348#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4967,7 +4679,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="46" column="38" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4975,14 +4686,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="123" column="30" selection-start-line="123" selection-start-column="30" selection-end-line="123" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/SettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="119" selection-start-line="55" selection-start-column="119" selection-end-line="55" selection-end-column="119" />
         </state>
       </provider>
     </entry>
@@ -5012,10 +4715,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="51" selection-start-line="59" selection-start-column="51" selection-end-line="59" selection-end-column="51" />
-          <folding>
-            <element signature="e#575#576#0" expanded="false" />
-            <element signature="e#602#603#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5039,7 +4738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="190" column="7" selection-start-line="190" selection-start-column="7" selection-end-line="190" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5047,7 +4745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47586206">
           <caret line="44" column="51" selection-start-line="44" selection-start-column="51" selection-end-line="44" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5066,7 +4763,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5074,7 +4770,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="77" selection-start-line="14" selection-start-column="77" selection-end-line="14" selection-end-column="77" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5082,7 +4777,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.11034483">
           <caret line="19" column="3" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5090,10 +4784,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.4091954">
           <caret line="148" column="11" selection-start-line="148" selection-start-column="11" selection-end-line="148" selection-end-column="11" />
-          <folding>
-            <element signature="e#5264#5265#0" expanded="false" />
-            <element signature="e#5310#5311#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5101,7 +4791,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.7586207">
           <caret line="128" column="47" selection-start-line="128" selection-start-column="47" selection-end-line="128" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5117,7 +4806,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="5.5471263">
           <caret line="453" column="17" selection-start-line="453" selection-start-column="17" selection-end-line="453" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5169,7 +4857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.24827586">
           <caret line="66" column="60" selection-start-line="66" selection-start-column="60" selection-end-line="66" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5177,10 +4864,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33103448">
           <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
-          <folding>
-            <element signature="e#1396#3071#0" expanded="true" />
-            <element signature="e#3070#3071#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5188,9 +4871,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="76" column="18" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5219,99 +4899,161 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/res/values/attrs.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.1818182">
+        <state vertical-scroll-proportion="0.0">
           <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/values/styles.xml">
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.4">
-          <caret line="11" column="38" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="38" />
+        <state vertical-scroll-proportion="-18.878788">
+          <caret line="61" column="28" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/smoothviewpager/src/main/java/com/bennyv5/smoothviewpager/SmoothViewPager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.86206895">
-          <caret line="2568" column="0" selection-start-line="2568" selection-start-column="0" selection-end-line="2568" selection-end-column="0" />
-          <folding>
-            <element signature="e#99158#99159#0" expanded="true" />
-            <element signature="e#99196#99197#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.22014052">
+          <caret line="2537" column="4" selection-start-line="2537" selection-start-column="4" selection-end-line="2537" selection-end-column="4" />
+          <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6413793">
+          <caret line="74" column="28" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.7">
+          <caret line="46" column="91" selection-start-line="46" selection-start-column="91" selection-end-line="46" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-24/android.jar!/android/view/View.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4117647">
+          <caret line="73" column="58" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22939068">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/drawable/outlinebg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.72727275">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="17" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/drawable/roundbg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.3636365">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/view_desktopeditoption.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.548387">
+          <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/drawable/googlepill.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2580645">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-24/android.jar!/android/icu/util/Calendar.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1764706">
+          <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-24/android.jar!/java/util/Calendar.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="148" column="18" selection-start-line="148" selection-start-column="18" selection-end-line="148" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.096774">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="117" column="122" selection-start-line="117" selection-start-column="122" selection-end-line="117" selection-end-column="122" />
+          <caret line="166" column="141" selection-start-line="166" selection-start-column="141" selection-end-line="166" selection-end-column="141" />
           <folding>
-            <element signature="class#HomeAdapter#0;class#Home#0" expanded="false" />
-            <element signature="e#5550#5551#0" expanded="true" />
-            <element signature="e#5582#5583#0" expanded="true" />
-            <element signature="e#5663#5664#0" expanded="true" />
-            <element signature="e#5702#5703#0" expanded="true" />
-            <element signature="method#onStart#0;class#7437:9835" expanded="false" />
-            <element signature="method#onFinished#0;class#7437:9835" expanded="false" />
-            <element signature="e#11463#11690#0" expanded="true" />
-            <element signature="e#11689#11690#0" expanded="true" />
+            <element signature="e#3939#4111#0" expanded="true" />
+            <element signature="e#4110#4111#0" expanded="true" />
+            <element signature="e#6894#7693#0" expanded="true" />
+            <element signature="e#7692#7693#0" expanded="true" />
+            <element signature="e#10475#10634#0" expanded="true" />
+            <element signature="e#10633#10634#0" expanded="true" />
+            <element signature="e#10719#10949#0" expanded="true" />
+            <element signature="e#10948#10949#0" expanded="true" />
+            <element signature="e#12021#12248#0" expanded="true" />
+            <element signature="e#12247#12248#0" expanded="true" />
             <element signature="method#initSettings#0;class#Home#0" expanded="false" />
             <element signature="method#registerAppUpdateReceiver#0;class#Home#0" expanded="false" />
-            <element signature="e#15312#15327#0" expanded="false" />
-            <element signature="method#onDestroy#0;class#Home#0" expanded="false" />
+            <element signature="e#15814#15829#0" expanded="false" />
             <element signature="method#onLowMemory#0;class#Home#0" expanded="false" />
             <element signature="method#onActivityResult#0;class#Home#0" expanded="false" />
             <element signature="method#onStart#0;class#Home#0" expanded="false" />
-            <element signature="e#19458#19485#0" expanded="false" />
-            <element signature="e#22809#22830#0" expanded="false" />
+            <element signature="e#23536#23557#0" expanded="false" />
             <element signature="method#onSearch#0;class#Home#0" expanded="false" />
             <element signature="method#onVoiceSearch#0;class#Home#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/view_quickcenter.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9354838">
-          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/view_home.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.548387">
-          <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-          <folding />
+        <state vertical-scroll-proportion="0.8613861">
+          <caret line="83" column="41" selection-start-line="83" selection-start-column="41" selection-end-line="83" selection-end-column="41" />
+          <folding>
+            <element signature="e#3842#3862#0" expanded="true" />
+          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.483871">
-          <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21996303">
-          <caret line="40" column="85" selection-start-line="40" selection-start-column="85" selection-end-line="40" selection-end-column="85" />
-          <folding />
-        </state>
       </provider>
     </entry>
   </component>

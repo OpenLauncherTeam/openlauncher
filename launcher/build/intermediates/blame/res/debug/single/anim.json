@@ -1,11 +1,11 @@
 [
     {
-        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_out.xml",
-        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_bottom_sheet_slide_out.xml"
-    },
-    {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_out.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_bottom_sheet_slide_out.xml"
     },
     {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",

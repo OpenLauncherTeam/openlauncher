@@ -6,8 +6,9 @@
     <color name="Light.TextColor">#616161</color>
     <color name="Light.TextColorSec">#616161</color>
 
-    <color name="Dark.Background">#424242</color>
-    <color name="Dark.GreyBackground">#464646</color>
+    <color name="Dark.PrimaryDark">#424242</color>
+    <color name="Dark.Background">#464646</color>
+    <color name="Dark.GreyBackground">#424242</color>
     <color name="Dark.TextColor">#ffffff</color>
     <color name="Dark.TextColorSec">#bdbdbd</color>
 </resources>
