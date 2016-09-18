@@ -187,6 +187,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
                             removeView(view);
 
                             item.addActions(dropitem.actions[0]);
+                            item.name = "Unnamed";
                             item.type = Desktop.Item.Type.GROUP;
                             LauncherSettings.getInstance(getContext()).dockData.add(item);
                             addAppToPosition(item);

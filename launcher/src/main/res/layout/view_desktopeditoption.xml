@@ -21,6 +21,7 @@
         app:mrl_rippleRoundedCorners="0dp">
 
         <Button
+            android:fontFamily="sans-serif-light"
             android:textAllCaps="false"
             android:id="@+id/removepage"
             android:layout_width="wrap_content"
@@ -46,6 +47,7 @@
         app:mrl_rippleRoundedCorners="0dp">
 
         <Button
+            android:fontFamily="sans-serif-light"
             android:textAllCaps="false"
             android:id="@+id/setashomepage"
             android:layout_width="wrap_content"
@@ -71,6 +73,7 @@
         app:mrl_rippleRoundedCorners="0dp">
 
         <Button
+            android:fontFamily="sans-serif-light"
             android:textAllCaps="false"
             android:id="@+id/addwidgetbtn"
             android:layout_width="wrap_content"
