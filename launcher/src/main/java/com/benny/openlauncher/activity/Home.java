@@ -22,6 +22,7 @@ import android.view.animation.*;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -73,8 +74,7 @@ public class Home extends Activity {
     PagerIndicator desktopIndicator, appDrawerIndicator;
     Animator appDrawerAnimator;
     DragOptionView dragOptionView;
-    LinearLayout desktopEditOptionView;
-    Button addWidgetBtn;
+    ViewGroup desktopEditOptionView;
     RecyclerView quickCenter;
     BroadcastReceiver appUpdateReceiver;
     TextView searchbarclock;
@@ -143,13 +143,12 @@ public class Home extends Activity {
         baseLayout = (RelativeLayout) findViewById(R.id.baseLayout);
         appDrawer = (AppDrawer) findViewById(R.id.appDrawer);
         desktop = (Desktop) findViewById(R.id.desktop);
-        addWidgetBtn = (Button) findViewById(R.id.addwidgetbtn);
         dock = (Dock) findViewById(R.id.desktopDock);
         appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
         desktopIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
         searchBar = findViewById(R.id.searchBar);
         appDrawerBtn = (FrameLayout) getLayoutInflater().inflate(R.layout.item_appdrawerbtn, null);
-        desktopEditOptionView = (LinearLayout) findViewById(R.id.desktopeditoptionpanel);
+        desktopEditOptionView = (ViewGroup) findViewById(R.id.desktopeditoptionpanel);
         dragOptionView = (DragOptionView) findViewById(R.id.dragOptionPanel);
         groupPopup = (GroupPopupView) findViewById(R.id.groupPopup);
 
@@ -166,7 +165,7 @@ public class Home extends Activity {
                 String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
         String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault()) + ", " +
                 String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.YEAR));
-        searchbarclock.setText(Html.fromHtml(date+"<br><small><small><small><small>"+date2+"</small></small></small></small>"));
+        searchbarclock.setText(Html.fromHtml(date+"<br><small><small><small><small><small>"+date2+"</small></small></small></small></small>"));
         searchbarclock.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -174,7 +173,7 @@ public class Home extends Activity {
                         String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
                 String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault()) + ", " +
                         String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.YEAR));
-                searchbarclock.setText(Html.fromHtml(date+"<br><small><small><small><small>"+date2+"</small></small></small></small>"));
+                searchbarclock.setText(Html.fromHtml(date+"<br><small><small><small><small><small>"+date2+"</small></small></small></small></small>"));
                 searchbarclock.postDelayed(this,60000);
             }
         },60000);
@@ -184,17 +183,15 @@ public class Home extends Activity {
         desktop.listener = new Desktop.OnDesktopEditListener() {
             @Override
             public void onStart() {
-                addWidgetBtn.setVisibility(View.VISIBLE);
                 desktopEditOptionView.setVisibility(View.VISIBLE);
 
-                addWidgetBtn.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 dragOptionView.setAutoHideView(null);
                 desktopIndicator.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 desktopEditOptionView.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 searchBar.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 dock.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
 
-                addWidgetBtn.postDelayed(new Runnable() {
+                desktopEditOptionView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         dock.setVisibility(View.INVISIBLE);
@@ -206,17 +203,15 @@ public class Home extends Activity {
 
             @Override
             public void onFinished() {
-                addWidgetBtn.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 dragOptionView.setAutoHideView(searchBar);
                 desktopIndicator.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 desktopEditOptionView.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 searchBar.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
                 dock.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
 
-                addWidgetBtn.postDelayed(new Runnable() {
+                desktopEditOptionView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        addWidgetBtn.setVisibility(View.INVISIBLE);
                         desktopEditOptionView.setVisibility(View.INVISIBLE);
 
                         dock.setVisibility(View.VISIBLE);
@@ -237,6 +232,12 @@ public class Home extends Activity {
             @Override
             public void onClick(View view) {
                 LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage = desktop.getCurrentItem();
+            }
+        });
+        desktopEditOptionView.findViewById(R.id.addwidgetbtn).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickWidget(view);
             }
         });
 

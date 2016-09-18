@@ -4,7 +4,7 @@
     api-level="21"
     density="xhdpi"
     format="7"
-    timestamp="99299092393908"
+    timestamp="143444746904502"
     token="8770670177837021869" >
 
     <task
@@ -24,38 +24,19 @@
         location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\res\resources-debug.ap_"
         type="RESOURCES" />
 
-    <build timestamp="96573310545478" >
+    <build timestamp="142198827679130" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\launcher\build\outputs\apk\launcher-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="98480939268090"
-        verifier="CLASS_ADDED" >
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_5\classes.dex"
-            type="DEX" />
-    </build>
-    <build timestamp="98986623209183" >
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_6\classes.dex"
-            type="DEX" />
-    </build>
-    <build
-        timestamp="99127145974068"
+        timestamp="142962650090260"
         verifier="COMPATIBLE" >
         <artifact
-            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\builds\debug\99127145974068\classes.dex"
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\builds\debug\142962650090260\classes.dex"
             type="RELOAD_DEX" />
     </build>
-    <build
-        timestamp="99219218773445"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\builds\debug\99219218773445\classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build timestamp="99299092393908" >
+    <build timestamp="143444746904502" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\res\resources-debug.ap_"
             type="RESOURCES" />

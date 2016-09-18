@@ -750,7 +750,7 @@ int id action_mode_bar_stub 0x7f0d060a
 int id action_mode_close_button 0x7f0d05f1
 int id activity_chooser_view_content 0x7f0d05f2
 int id add 0x7f0d001d
-int id addwidgetbtn 0x7f0d064a
+int id addwidgetbtn 0x7f0d0642
 int id adjust 0x7f0d0051
 int id air_conditioner 0x7f0d0052
 int id airballoon 0x7f0d0053
@@ -780,8 +780,8 @@ int id anchor 0x7f0d0067
 int id android 0x7f0d0068
 int id android_debug_bridge 0x7f0d0069
 int id android_studio 0x7f0d006a
-int id appDrawer 0x7f0d064d
-int id appDrawerIndicator 0x7f0d064e
+int id appDrawer 0x7f0d064c
+int id appDrawerIndicator 0x7f0d064d
 int id apple 0x7f0d006b
 int id apple_finder 0x7f0d006c
 int id apple_ios 0x7f0d006d
@@ -840,7 +840,7 @@ int id barcode 0x7f0d00a0
 int id barcode_scan 0x7f0d00a1
 int id barley 0x7f0d00a2
 int id barrel 0x7f0d00a3
-int id baseLayout 0x7f0d0645
+int id baseLayout 0x7f0d0646
 int id basecamp 0x7f0d00a4
 int id basket 0x7f0d00a5
 int id basket_fill 0x7f0d00a6
@@ -1191,7 +1191,7 @@ int id decimal_increase 0x7f0d01ec
 int id decor_content_parent 0x7f0d060c
 int id default_activity_button 0x7f0d05f4
 int id delete 0x7f0d01ed
-int id deleteIcon 0x7f0d0642
+int id deleteIcon 0x7f0d0643
 int id delete_variant 0x7f0d01ee
 int id delta 0x7f0d01ef
 int id design_bottom_sheet 0x7f0d0623
@@ -1200,12 +1200,12 @@ int id design_menu_item_action_area_stub 0x7f0d0629
 int id design_menu_item_text 0x7f0d0628
 int id design_navigation_view 0x7f0d0627
 int id deskphone 0x7f0d01f0
-int id desktop 0x7f0d0646
-int id desktopDock 0x7f0d064c
-int id desktopIndicator 0x7f0d0647
+int id desktop 0x7f0d0647
+int id desktopDock 0x7f0d064b
+int id desktopIndicator 0x7f0d0648
 int id desktop_mac 0x7f0d01f1
 int id desktop_tower 0x7f0d01f2
-int id desktopeditoptionpanel 0x7f0d064b
+int id desktopeditoptionpanel 0x7f0d064a
 int id details 0x7f0d01f3
 int id deviantart 0x7f0d01f4
 int id diamond 0x7f0d01f5
@@ -1229,7 +1229,7 @@ int id dots_horizontal 0x7f0d0205
 int id dots_vertical 0x7f0d0206
 int id download 0x7f0d0207
 int id drag 0x7f0d0208
-int id dragOptionPanel 0x7f0d0650
+int id dragOptionPanel 0x7f0d064f
 int id drag_horizontal 0x7f0d0209
 int id drag_vertical 0x7f0d020a
 int id drawer_layout 0x7f0d061d
@@ -1474,7 +1474,7 @@ int id google_wallet 0x7f0d02eb
 int id grid 0x7f0d02ec
 int id grid_off 0x7f0d02ed
 int id group 0x7f0d02ee
-int id groupPopup 0x7f0d064f
+int id groupPopup 0x7f0d064e
 int id guitar 0x7f0d02ef
 int id guitar_pick 0x7f0d02f0
 int id guitar_pick_outline 0x7f0d02f1
@@ -1537,7 +1537,7 @@ int id image_multiple 0x7f0d0323
 int id import_icon 0x7f0d0324
 int id inbox 0x7f0d0325
 int id info 0x7f0d063e
-int id infoIcon 0x7f0d0643
+int id infoIcon 0x7f0d0644
 int id information 0x7f0d0326
 int id information_outline 0x7f0d0327
 int id instagram 0x7f0d0328
@@ -1903,7 +1903,7 @@ int id regex 0x7f0d0476
 int id relative_scale 0x7f0d0477
 int id reload 0x7f0d0478
 int id remote 0x7f0d0479
-int id removeIcon 0x7f0d0644
+int id removeIcon 0x7f0d0645
 int id removepage 0x7f0d0640
 int id rename_box 0x7f0d047a
 int id repeat 0x7f0d047b
@@ -1951,7 +1951,7 @@ int id scrollView 0x7f0d0600
 int id scrollable 0x7f0d05ee
 int id sd 0x7f0d049e
 int id seal 0x7f0d049f
-int id searchBar 0x7f0d0648
+int id searchBar 0x7f0d0649
 int id search_badge 0x7f0d0612
 int id search_bar 0x7f0d0611
 int id search_button 0x7f0d0613
@@ -1962,7 +1962,7 @@ int id search_mag_icon 0x7f0d0615
 int id search_plate 0x7f0d0616
 int id search_src_text 0x7f0d0617
 int id search_voice_btn 0x7f0d061b
-int id searchbarclock 0x7f0d0649
+int id searchbarclock 0x7f0d0650
 int id seat_flat 0x7f0d04a0
 int id seat_flat_angled 0x7f0d04a1
 int id seat_individual_suite 0x7f0d04a2
@@ -2402,8 +2402,11 @@ int layout view_desktopeditoption 0x7f04003d
 int layout view_dragoption_horiiconlist 0x7f04003e
 int layout view_grouppopup 0x7f04003f
 int layout view_home 0x7f040040
-int layout view_widgetcontainer 0x7f040041
-int mipmap ic_launcher 0x7f030000
+int layout view_searchbar_normal 0x7f040041
+int layout view_searchbar_nougat 0x7f040042
+int layout view_widgetcontainer 0x7f040043
+int mipmap googleicon 0x7f030000
+int mipmap ic_launcher 0x7f030001
 int string abc_action_bar_home_description 0x7f070000
 int string abc_action_bar_home_description_format 0x7f070001
 int string abc_action_bar_home_subtitle_description_format 0x7f070002
