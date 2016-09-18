@@ -561,9 +561,16 @@ public class Home extends Activity {
 
     //region SEARCHACTION
     public void onSearch(View view) {
-        Intent i = new Intent(Intent.ACTION_WEB_SEARCH);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //i.putExtra(SearchManager.QUERY,"");
+        Intent i;
+        try {
+            i = new Intent(Intent.ACTION_MAIN);
+            i.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.SearchActivity");
+            Home.this.startActivity(i);
+        } catch (Exception e) {
+            i = new Intent(Intent.ACTION_WEB_SEARCH);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            //i.putExtra(SearchManager.QUERY,"");
+        }
         Home.this.startActivity(i);
     }
 

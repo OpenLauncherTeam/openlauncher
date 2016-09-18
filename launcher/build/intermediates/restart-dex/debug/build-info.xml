@@ -4,7 +4,7 @@
     api-level="21"
     density="xhdpi"
     format="7"
-    timestamp="143444746904502"
+    timestamp="145803717886697"
     token="8770670177837021869" >
 
     <task
@@ -24,19 +24,17 @@
         location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\res\resources-debug.ap_"
         type="RESOURCES" />
 
-    <build timestamp="142198827679130" >
+    <build timestamp="145463273019279" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\launcher\build\outputs\apk\launcher-debug.apk"
             type="MAIN" />
     </build>
-    <build
-        timestamp="142962650090260"
-        verifier="COMPATIBLE" >
+    <build timestamp="145732830002382" >
         <artifact
-            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\builds\debug\142962650090260\classes.dex"
-            type="RELOAD_DEX" />
+            location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\transforms\dex\debug\folders\1000\5\slice_5\classes.dex"
+            type="DEX" />
     </build>
-    <build timestamp="143444746904502" >
+    <build timestamp="145803717886697" >
         <artifact
             location="E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\res\resources-debug.ap_"
             type="RESOURCES" />

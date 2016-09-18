@@ -145,6 +145,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
 
         for (View v : pages) {
             v.setBackgroundResource(R.drawable.outlinebg);
+            v.setAlpha(0);
+            v.animate().alpha(1);
             v.setScaleX(0.7f);
             v.setScaleY(0.7f);
         }
