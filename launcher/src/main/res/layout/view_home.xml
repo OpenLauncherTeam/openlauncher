@@ -13,97 +13,9 @@
         android:layout_below="@+id/searchBar"
         android:layout_marginTop="0dp" />
 
-    <!--<android.support.v7.widget.CardView-->
-    <!--android:id="@+id/searchBar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="54dp"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:layout_marginTop="8dp"-->
-    <!--android:onClick="onSearch"-->
-    <!--app:cardBackgroundColor="?colorViewBackground"-->
-    <!--app:cardElevation="2dp">-->
+    <!--<include layout="@layout/view_searchbar_normal" />-->
 
-    <!--<ImageView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center_vertical|end"-->
-    <!--android:layout_marginRight="14dp"-->
-    <!--android:onClick="onVoiceSearch"-->
-    <!--android:src="@drawable/ic_mic_black_24dp"-->
-    <!--android:tint="?android:textColorPrimary" />-->
-
-    <!--<DigitalClock-->
-    <!--android:textColor="?android:textColorPrimary"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center_vertical"-->
-    <!--android:layout_marginLeft="14dp"-->
-    <!--android:textSize="20sp" />-->
-
-    <!--</android.support.v7.widget.CardView>-->
-
-    <FrameLayout
-        android:id="@+id/searchBar"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp">
-
-        <FrameLayout
-            android:layout_width="84dp"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:src="@drawable/googlepill"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:onClick="onSearch" />
-
-            <TextView
-                android:textColor="?android:textColorPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="G"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-        </FrameLayout>
-
-        <TextView
-            android:lineSpacingMultiplier="1.05"
-            android:id="@+id/searchbarclock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:gravity="end"
-            android:layout_marginRight="8dp"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="30sp" />
-
-    </FrameLayout>
-
-
-    <Button
-        android:id="@+id/addwidgetbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="76dp"
-        android:alpha="0"
-        android:background="?android:attr/selectableItemBackground"
-        android:drawableLeft="@drawable/ic_dashboard_dark_24dp"
-        android:gravity="center"
-        android:onClick="pickWidget"
-        android:padding="20dp"
-        android:text="@string/add_widget"
-        android:textColor="@android:color/white"
-        android:visibility="invisible" />
+    <include layout="@layout/view_searchbar_nougat" />
 
     <include
         android:id="@+id/desktopeditoptionpanel"

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/searchBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="24dp"
+    tools:showIn="@layout/view_home">
+
+    <FrameLayout
+        android:layout_width="78dp"
+        android:layout_height="56dp">
+
+        <com.balysv.materialripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:mrl_rippleColor="?android:textColorPrimary"
+            app:mrl_rippleDuration="250"
+            app:mrl_rippleFadeDuration="150"
+            app:mrl_rippleOverlay="true"
+            app:mrl_rippleDimension="40dp"
+            app:mrl_rippleRoundedCorners="40dp">
+
+        <ImageView
+            android:src="@drawable/googlepill"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="onSearch" />
+
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@mipmap/googleicon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:fontFamily="sans-serif-light"
+        android:lineSpacingMultiplier="1.05"
+        android:id="@+id/searchbarclock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:gravity="end"
+        android:layout_marginRight="8dp"
+        android:textColor="#fff"
+        android:textSize="36sp" />
+
+</FrameLayout>

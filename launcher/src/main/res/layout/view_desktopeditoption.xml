@@ -1,35 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:alpha="0"
-    android:layout_marginTop="8dp"
-    android:visibility="invisible"
-    android:layout_centerHorizontal="true"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="40dp"
+    android:alpha="0"
+    android:orientation="horizontal"
+    android:visibility="invisible">
 
-    <Button
-        android:textColor="@android:color/white"
-        android:padding="20dp"
-        android:id="@+id/removepage"
-        android:gravity="center"
+    <com.balysv.materialripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_clear_black_24dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:text="Remove"
-        />
+        app:mrl_rippleColor="#fff"
+        app:mrl_rippleDimension="40dp"
+        app:mrl_rippleDuration="250"
+        app:mrl_rippleFadeDuration="150"
+        app:mrl_rippleOverlay="true"
+        app:mrl_rippleRoundedCorners="0dp">
 
-    <Button
-        android:textColor="@android:color/white"
-        android:padding="20dp"
-        android:id="@+id/setashomepage"
-        android:gravity="center"
+        <Button
+            android:textAllCaps="false"
+            android:id="@+id/removepage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_clear_black_24dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Remove"
+            android:textColor="#fff" />
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+    <com.balysv.materialripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_star_black_24dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:text="Set as home"
-        />
+        app:mrl_rippleColor="#fff"
+        app:mrl_rippleDimension="40dp"
+        app:mrl_rippleDuration="250"
+        app:mrl_rippleFadeDuration="150"
+        app:mrl_rippleOverlay="true"
+        app:mrl_rippleRoundedCorners="0dp">
+
+        <Button
+            android:textAllCaps="false"
+            android:id="@+id/setashomepage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_star_black_24dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Set as home"
+            android:textColor="#fff" />
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+    <com.balysv.materialripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:mrl_rippleColor="#fff"
+        app:mrl_rippleDimension="40dp"
+        app:mrl_rippleDuration="250"
+        app:mrl_rippleFadeDuration="150"
+        app:mrl_rippleOverlay="true"
+        app:mrl_rippleRoundedCorners="0dp">
+
+        <Button
+            android:textAllCaps="false"
+            android:id="@+id/addwidgetbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_dashboard_dark_24dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/add_widget"
+            android:textColor="#fff" />
+
+    </com.balysv.materialripple.MaterialRippleLayout>
 
 </LinearLayout>
