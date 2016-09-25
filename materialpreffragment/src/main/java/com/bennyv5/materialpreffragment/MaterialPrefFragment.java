@@ -265,7 +265,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
 
         @Override
         public View onCreateView(Context c,MaterialPrefFragment fragment,SharedPreferences sharedPrefs){
-            Button b = new Button(c);
+            TextView b = new TextView(c);
             setStyle(b);
 
             b.setTag(TAG_ID,id);
@@ -304,7 +304,10 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
         b.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
         b.setTypeface(Typeface.DEFAULT);
         b.setPadding(CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),pad));
-        //b.setBackgroundResource(R.drawable.selector_dark);
+        if (cardColor == Color.WHITE)
+            b.setBackgroundResource(R.drawable.selector_dark);
+        else
+            b.setBackgroundResource(R.drawable.selector);
         b.setLayoutParams(CommonUtility.matchParentWidthLayoutParams());
     }
 
@@ -352,12 +355,12 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
         }
     }
 
-    public static interface OnPrefChangedListener{
-        public void onPrefChanged(String id,Object p2);
+    public interface OnPrefChangedListener{
+        void onPrefChanged(String id,Object p2);
     }
 
-    public static interface OnPrefClickedListener
+    public interface OnPrefClickedListener
     {
-        public void onPrefClicked(String id);
+        void onPrefClicked(String id);
     }
 }

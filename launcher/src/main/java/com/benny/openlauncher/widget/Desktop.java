@@ -93,7 +93,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         pageCount++;
 
         final int previousPage = getCurrentItem();
-        //getAdapter().notifyDataSetChanged();
         setAdapter(new Adapter());
         initDesktopItem();
 
@@ -115,7 +114,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         pageCount++;
 
         final int previousPage = getCurrentItem();
-        //getAdapter().notifyDataSetChanged();
         setAdapter(new Adapter());
         initDesktopItem();
 
@@ -133,13 +131,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
 
     public void removeCurrentPage() {
         if (pageCount == 1) return;
-        //pages.add(getCurrentItem(),new CellContainer(getContext()));
         LauncherSettings.getInstance(getContext()).desktopData.remove(getCurrentItem());
         LauncherSettings.getInstance(getContext()).generalSettings.desktopPageCount--;
         pageCount--;
 
         int previousPage = getCurrentItem();
-        //getAdapter().notifyDataSetChanged();
         setAdapter(new Adapter());
         initDesktopItem();
 

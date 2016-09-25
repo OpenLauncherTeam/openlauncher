@@ -1,30 +1,30 @@
 package com.benny.openlauncher.activity;
 
-import android.animation.*;
+import android.animation.Animator;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.drawable.*;
-import android.os.*;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.TypedValue;
-import android.view.*;
-import android.view.View.*;
-import android.view.animation.*;
+import android.view.HapticFeedbackConstants;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,14 +35,16 @@ import com.benny.openlauncher.util.AppUpdateReceiver;
 import com.benny.openlauncher.util.DragNavigationControl;
 import com.benny.openlauncher.util.IconListAdapter;
 import com.benny.openlauncher.util.LauncherAction;
-import com.benny.openlauncher.util.QuickCenterItem;
-import com.benny.openlauncher.util.WidgetHost;
-import com.benny.openlauncher.widget.DragOptionView;
 import com.benny.openlauncher.util.LauncherSettings;
+import com.benny.openlauncher.util.QuickCenterItem;
 import com.benny.openlauncher.util.Tools;
-import com.benny.openlauncher.widget.*;
-import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
-import com.bennyv5.smoothviewpager.SmoothViewPager;
+import com.benny.openlauncher.util.WidgetHost;
+import com.benny.openlauncher.widget.AppDrawer;
+import com.benny.openlauncher.widget.Desktop;
+import com.benny.openlauncher.widget.Dock;
+import com.benny.openlauncher.widget.DragOptionView;
+import com.benny.openlauncher.widget.GroupPopupView;
+import com.benny.openlauncher.widget.PagerIndicator;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.adapters.HeaderAdapter;
 
@@ -56,6 +58,7 @@ import java.util.Locale;
 public class Home extends Activity {
 
     //static members, easier to access from any activity and class.
+    public static Activity launcher;
     public static Desktop desktop;
     public static Dock dock;
     public static View searchBar;
@@ -68,17 +71,17 @@ public class Home extends Activity {
     public static int touchX = 0, touchY = 0;
 
     //normal members, currently not necessary to access from elsewhere.
-    RelativeLayout baseLayout;
-    AppDrawer appDrawer;
-    FrameLayout appDrawerBtn;
-    PagerIndicator desktopIndicator, appDrawerIndicator;
-    Animator appDrawerAnimator;
-    DragOptionView dragOptionView;
-    ViewGroup desktopEditOptionView;
-    RecyclerView quickCenter;
-    BroadcastReceiver appUpdateReceiver;
-    TextView searchbarclock;
-    ListView minBar;
+    private RelativeLayout baseLayout;
+    private AppDrawer appDrawer;
+    private FrameLayout appDrawerBtn;
+    private PagerIndicator desktopIndicator, appDrawerIndicator;
+    private Animator appDrawerAnimator;
+    private DragOptionView dragOptionView;
+    private ViewGroup desktopEditOptionView;
+    private RecyclerView quickCenter;
+    private BroadcastReceiver appUpdateReceiver;
+    private TextView searchbarclock;
+    private ListView minBar;
 
     public static final int REQUEST_PICK_APPWIDGET = 0x6475;
     public static final int REQUEST_CREATE_APPWIDGET = 0x3648;
@@ -88,20 +91,13 @@ public class Home extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (LauncherSettings.getInstance(this).generalSettings.theme){
-            case Light:
-                setTheme(R.style.Home_Light);
-                break;
-            case Dark:
-                setTheme(R.style.Home_Dark);
-                break;
-        }
+        Tools.setHomeTheme(this);
         super.onCreate(savedInstanceState);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         }
-
+        launcher = this;
         AppManager.getInstance(this).clearListener();
         LauncherSettings.getInstance(this);
 
@@ -134,9 +130,12 @@ public class Home extends Activity {
         AppManager.getInstance(this).init();
 
         initSettings();
+
+        System.runFinalization();
         System.gc();
     }
 
+    //region INIT
     private void findViews() {
         searchbarclock = (TextView) findViewById(R.id.searchbarclock);
         quickCenter = (RecyclerView) findViewById(R.id.rv);
@@ -273,17 +272,6 @@ public class Home extends Activity {
         dragOptionView.setAutoHideView(searchBar);
     }
 
-    private void initQuickCenter() {
-        quickCenter.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-
-        HeaderAdapter<QuickCenterItem.SearchHeader> header = new HeaderAdapter<>();
-        FastItemAdapter<QuickCenterItem.NoteItem> fastAdapter = new FastItemAdapter<>();
-
-        quickCenter.setAdapter(header.wrap(fastAdapter));
-
-        fastAdapter.add(new QuickCenterItem.NoteItem("","Remember to eat moon cake!!"),new QuickCenterItem.NoteItem("","Remember to eat moon cake!!"));
-    }
-
     private void initSettings() {
         if (!LauncherSettings.getInstance(this).generalSettings.showsearchbar){
             searchBar.setVisibility(View.GONE);
@@ -337,6 +325,17 @@ public class Home extends Activity {
         });
     }
 
+    private void initQuickCenter() {
+        quickCenter.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+
+        HeaderAdapter<QuickCenterItem.SearchHeader> header = new HeaderAdapter<>();
+        FastItemAdapter<QuickCenterItem.NoteItem> fastAdapter = new FastItemAdapter<>();
+
+        quickCenter.setAdapter(header.wrap(fastAdapter));
+
+        fastAdapter.add(new QuickCenterItem.NoteItem("","Remember to eat moon cake!!"),new QuickCenterItem.NoteItem("","Remember to eat moon cake!!"));
+    }
+
     private void registerAppUpdateReceiver() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_PACKAGE_ADDED);
@@ -346,6 +345,7 @@ public class Home extends Activity {
         appUpdateReceiver = new AppUpdateReceiver();
         registerReceiver(appUpdateReceiver, filter);
     }
+    //endregion
 
     //region WIDGET
     public void pickWidget(View view) {
@@ -559,7 +559,11 @@ public class Home extends Activity {
 
     //endregion
 
-    //region SEARCHACTION
+    //region VIEWONCLICK
+    public void onAddNote(View view){
+
+    }
+
     public void onSearch(View view) {
         Intent i;
         try {

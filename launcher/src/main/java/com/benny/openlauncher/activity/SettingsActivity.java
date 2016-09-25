@@ -8,22 +8,16 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.benny.openlauncher.util.Tools;
 import com.bennyv5.materialpreffragment.MaterialPrefFragment;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.LauncherSettings;
 
-public class SettingsActivity extends AppCompatActivity implements MaterialPrefFragment.OnPrefChangedListener{
+public class SettingsActivity extends AppCompatActivity implements MaterialPrefFragment.OnPrefClickedListener, MaterialPrefFragment.OnPrefChangedListener{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        switch (LauncherSettings.getInstance(this).generalSettings.theme) {
-            case Light:
-                setTheme(R.style.NormalActivity_Light);
-                break;
-            case Dark:
-                setTheme(R.style.NormalActivity_Dark);
-                break;
-        }
+        Tools.setTheme(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_settings);
@@ -57,7 +51,8 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
                     .add(new MaterialPrefFragment.TBPref("rememberappdrawerpage","Remember last page","The page will not reset to the first page when reopen app drawer",!LauncherSettings.getInstance(this).generalSettings.rememberappdrawerpage))
                     .add(new MaterialPrefFragment.GroupTitle("Others"))
-                    .setOnPrefChangedListener(this));
+                    .add(new MaterialPrefFragment.ButtonPref("restart","Restart","Restart the launcher"))
+                    .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
             getSupportFragmentManager().beginTransaction().add(R.id.ll, fragment).commit();
         }
 
@@ -75,6 +70,16 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                     Home.searchBar.setVisibility(View.GONE);
                 else
                     Home.searchBar.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
+    @Override
+    public void onPrefClicked(String id) {
+        switch (id){
+            case "restart":
+                Home.launcher.recreate();
+                finish();
                 break;
         }
     }

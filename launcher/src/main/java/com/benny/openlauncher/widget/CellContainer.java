@@ -20,13 +20,7 @@ public class CellContainer extends ViewGroup {
 
     private Rect[][] cells;
 
-    public int cellWidth,
-
-    cellHeight,
-
-    cellSpanVert = 0,
-
-    cellSpanHori = 0;
+    public int cellWidth, cellHeight, cellSpanVert = 0, cellSpanHori = 0;
 
     private Paint mPaint;
 
@@ -57,17 +51,15 @@ public class CellContainer extends ViewGroup {
                 occupied[i][j] = false;
             }
         }
-
         requestLayout();
     }
 
     public void setHideGrid(boolean hideGrid) {
         this.hideGrid = hideGrid;
         invalidate();
-        Tools.print("Hide grid: "+String.valueOf(hideGrid));
     }
 
-    Long down = 0L;
+    private Long down = 0L;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch(MotionEventCompat.getActionMasked(event) ) {
@@ -80,18 +72,11 @@ public class CellContainer extends ViewGroup {
                 }
                 break;
         }
-        Tools.print(System.currentTimeMillis() - event.getDownTime());
-
-        if (blockTouch)
-            return true;
-
+        if (blockTouch) return true;
         if (gestures != null)
             try {
                 gestures.onTouch(this,event);
-            }catch (Exception ignore){
-
-            }
-
+            }catch (Exception ignore){}
         return super.onTouchEvent(event);
     }
 
@@ -356,13 +341,7 @@ public class CellContainer extends ViewGroup {
     }
 
     public static class LayoutParams extends ViewGroup.LayoutParams {
-        public int x,
-
-        y,
-
-        xSpan = 1,
-
-        ySpan = 1;
+        public int x, y, xSpan = 1, ySpan = 1;
 
         public LayoutParams(int w, int h, int x, int y) {
             super(w, h);
