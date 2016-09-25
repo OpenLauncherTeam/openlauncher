@@ -1,5 +1,6 @@
 package com.benny.openlauncher.util;
 
+import android.app.Activity;
 import android.content.*;
 import android.content.res.*;
 import android.graphics.Bitmap;
@@ -178,17 +179,26 @@ public class Tools
         }
     }
 
-//    public static Bitmap blur(Bitmap b,Context c){
-//        final RenderScript rs = RenderScript.create(c);
-//        final Allocation input = Allocation.createFromBitmap(rs,b,Allocation.MipmapControl.MIPMAP_NONE,Allocation.USAGE_SCRIPT);
-//        final Allocation output = Allocation.createTyped(rs,input.getType());
-//        final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
-//        script.setRadius(25f);
-//        script.setInput(input);
-//        script.forEach(output);
-//        output.copyTo(b);
-//        return b;
-//    }
+    public static void setTheme(Activity act){
+        switch (LauncherSettings.getInstance(act).generalSettings.theme){
+            case Light:
+                act.setTheme(R.style.NormalActivity_Light);
+                break;
+            case Dark:
+                act.setTheme(R.style.NormalActivity_Dark);
+                break;
+        }
+    }
+    public static void setHomeTheme(Activity act){
+        switch (LauncherSettings.getInstance(act).generalSettings.theme){
+            case Light:
+                act.setTheme(R.style.Home_Light);
+                break;
+            case Dark:
+                act.setTheme(R.style.Home_Dark);
+                break;
+        }
+    }
 
 	public static void createScaleInScaleOutAnim(final View view, final Runnable endAction){
         view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(80).setInterpolator(new AccelerateDecelerateInterpolator());

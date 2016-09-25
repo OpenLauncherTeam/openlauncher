@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
+import com.benny.openlauncher.util.Tools;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
@@ -31,14 +32,7 @@ public class MinBarEditActivity extends AppCompatActivity{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        switch (LauncherSettings.getInstance(this).generalSettings.theme){
-            case Light:
-                setTheme(R.style.NormalActivity_Light);
-                break;
-            case Dark:
-                setTheme(R.style.NormalActivity_Dark);
-                break;
-        }
+        Tools.setTheme(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_minbaredit);
@@ -56,7 +50,6 @@ public class MinBarEditActivity extends AppCompatActivity{
         }
 
         recyclerView = (RecyclerView) findViewById(R.id.rv);
-        //recyclerView.addItemDecoration(new SimpleListDividerDecorator(ContextCompat.getDrawable(this, R.drawable.list_divider_h), true));
 
         RecyclerViewDragDropManager dragMgr = new RecyclerViewDragDropManager();
 
