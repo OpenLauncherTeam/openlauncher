@@ -13,5 +13,7 @@
     <string name="toast_freeram" formatted="false">Free Memory: %d mb saved %d mb</string>
     <string name="toast_freeallram" formatted="false">Free Memory: %d mb Your ram is in best state</string>
     <string name="toast_plzenabledeviceadmin">Please enable device administration</string>
+    <string name="cancel">cancel</string>
+    <string name="ok">ok</string>
 
 </resources>

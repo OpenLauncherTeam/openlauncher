@@ -8,9 +8,9 @@ package net.steamcrafted.materialiconlib;
 
 public final class R {
 	public static final class attr {
-		public static final int materialIcon = 0x7f0100e5;
-		public static final int materialIconColor = 0x7f0100e4;
-		public static final int materialIconSize = 0x7f0100e3;
+		public static final int materialIcon = 0x7f010102;
+		public static final int materialIconColor = 0x7f010101;
+		public static final int materialIconSize = 0x7f010100;
 	}
 	public static final class id {
 		public static final int access_point = 0x7f0d0039;
@@ -1472,7 +1472,7 @@ public final class R {
 		public static final int zip_box = 0x7f0d05e7;
 	}
 	public static final class styleable {
-		public static final int[] MaterialIconViewFormat = { 0x7f0100e3, 0x7f0100e4, 0x7f0100e5 };
+		public static final int[] MaterialIconViewFormat = { 0x7f010100, 0x7f010101, 0x7f010102 };
 		public static final int MaterialIconViewFormat_materialIcon = 2;
 		public static final int MaterialIconViewFormat_materialIconColor = 1;
 		public static final int MaterialIconViewFormat_materialIconSize = 0;

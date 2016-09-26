@@ -26,8 +26,7 @@
             android:id="@+id/tb"
             android:background="?colorViewBackground"
             android:layout_height="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            android:layout_width="match_parent" />
 
     </android.support.design.widget.AppBarLayout>
 

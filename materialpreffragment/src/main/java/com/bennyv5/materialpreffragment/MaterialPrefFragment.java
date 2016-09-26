@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -29,6 +30,9 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +86,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
         ScrollView contentView = new ScrollView(getContext());
         LinearLayout layout = new LinearLayout(getContext());
-        layout.setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
+        layout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
         layout.setDividerDrawable(getContext().getResources().getDrawable(android.R.drawable.divider_horizontal_dark));
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(0,0,0,CommonUtility.pixelToDp(getContext(),6));
@@ -175,11 +179,15 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
 
         int defaultValue,start,end;
 
+        int currentState;
+
         public NUMPref(String id,String title,String summary,int defaultValue,int start,int end){
             this.id = id;
             this.title = title;
             this.summary = summary;
             this.defaultValue = defaultValue;
+
+            currentState = defaultValue;
 
             this.start = start;
             this.end = end;
@@ -196,17 +204,23 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
                 public void onClick(View p1){
                     final SeekBar picker = new SeekBar(p1.getContext());
                     final TextView tv = new TextView(p1.getContext());
+                    tv.setTextColor(textColor);
                     picker.setMax(end);
-                    picker.setProgress(sharedPrefs.getInt(id,defaultValue)-start);
+
+                    if (useSystemPref)
+                        currentState = sharedPrefs.getInt(id,defaultValue);
+
+                    picker.setProgress(currentState-start);
                     picker.setPadding(CommonUtility.pixelToDp(p1.getContext(),60),picker.getPaddingTop(),picker.getPaddingRight(),0);
                     tv.setText(String.valueOf(picker.getProgress()+start));
                     tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
-                    tv.setTextColor(Color.DKGRAY);
                     tv.setPadding(CommonUtility.pixelToDp(p1.getContext(),20),0,0,0);
                     picker.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
                         @Override
                         public void onProgressChanged(SeekBar p1,int p2,boolean p3){
                             tv.setText(String.valueOf(p2+start));
+                            if (!useSystemPref)
+                            currentState = p2+start;
                         }
 
                         @Override
@@ -228,24 +242,23 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
                     l2.gravity = Gravity.CENTER_VERTICAL;
                     layout.addView(tv,l2);
 
-                    AlertDialog dialog = new AlertDialog.Builder(p1.getContext())
-                            .setView(layout)
-                            .setTitle(title)
-                            .setNegativeButton("cancel",null)
-                            .setPositiveButton("ok",new DialogInterface.OnClickListener(){
+                    new MaterialDialog.Builder(c)
+                            .title(title)
+                            .customView(layout,false)
+                            .positiveText("ok")
+                            .negativeText("cancel")
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
                                 @Override
-                                public void onClick(DialogInterface p1,int p2){
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                     if (useSystemPref)
                                         sharedPrefs.edit().putInt(id,picker.getProgress()+start).apply();
 
                                     if (listener2 != null) {
-                                        listener2.onPrefChanged(id,p2);
+                                        listener2.onPrefChanged(id,picker.getProgress()+start);
                                     }
                                 }
-                            }).create()
-                            ;
-                    dialog.getWindow().getAttributes().windowAnimations = R.style.MyAnimation_Window;
-                    dialog.show();
+                            })
+                            .show();
                 }
             });
             b.setText(warpText(summary,title));
@@ -265,7 +278,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
 
         @Override
         public View onCreateView(Context c,MaterialPrefFragment fragment,SharedPreferences sharedPrefs){
-            TextView b = new TextView(c);
+            Button b = new Button(c);
             setStyle(b);
 
             b.setTag(TAG_ID,id);
