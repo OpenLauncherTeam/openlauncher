@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.benny.openlauncher">
 
-    <!--android:name="android.support.multidex.MultiDexApplication"-->
+    <!--android:date="android.support.multidex.MultiDexApplication"-->
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
 
@@ -15,6 +15,7 @@
         android:theme="@style/Home.Light">
 
         <activity
+            android:screenOrientation="portrait"
             android:name="com.benny.openlauncher.activity.Home"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|keyboard|screenSize"
@@ -23,7 +24,7 @@
             android:stateNotNeeded="true"
             android:taskAffinity=""
             android:enabled="true"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustNothing">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

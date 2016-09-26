@@ -12,12 +12,20 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.util.*;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
 
@@ -198,6 +206,24 @@ public class Tools
                 act.setTheme(R.style.Home_Dark);
                 break;
         }
+    }
+
+    public static void askForText(String title,String defaultText,Context c,final OnTextGotListener listener){
+        new MaterialDialog.Builder(c)
+                .title(title)
+                .input(null, defaultText, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                        listener.hereIsTheText(input.toString());
+                    }
+                })
+                .positiveText(R.string.ok)
+                .negativeText(R.string.cancel)
+                .show();
+    }
+
+    public interface OnTextGotListener{
+        void hereIsTheText(String str);
     }
 
 	public static void createScaleInScaleOutAnim(final View view, final Runnable endAction){

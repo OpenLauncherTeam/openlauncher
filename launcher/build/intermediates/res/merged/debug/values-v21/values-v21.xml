@@ -219,6 +219,28 @@
     <style name="Base.Widget.AppCompat.TextView.SpinnerItem" parent="android:Widget.Material.TextView.SpinnerItem"/>
     <style name="Base.Widget.AppCompat.Toolbar.Button.Navigation" parent="android:Widget.Material.Toolbar.Button.Navigation">
     </style>
+    <style name="MD_Dark" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
+
+        <item name="md_divider">@color/md_divider_white</item>
+        <item name="md_list_selector">?android:selectableItemBackground</item>
+        <item name="md_btn_stacked_selector">?android:selectableItemBackground</item>
+        <item name="md_btn_positive_selector">@drawable/md_btn_selector_ripple_dark</item>
+        <item name="md_btn_neutral_selector">@drawable/md_btn_selector_ripple_dark</item>
+        <item name="md_btn_negative_selector">@drawable/md_btn_selector_ripple_dark</item>
+    </style>
+    <style name="MD_Light" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
+
+        <item name="md_divider">@color/md_divider_black</item>
+        <item name="md_list_selector">?android:selectableItemBackground</item>
+        <item name="md_btn_stacked_selector">?android:selectableItemBackground</item>
+        <item name="md_btn_positive_selector">@drawable/md_btn_selector_ripple</item>
+        <item name="md_btn_neutral_selector">@drawable/md_btn_selector_ripple</item>
+        <item name="md_btn_negative_selector">@drawable/md_btn_selector_ripple</item>
+    </style>
     <style name="Platform.AppCompat" parent="android:Theme.Material">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>

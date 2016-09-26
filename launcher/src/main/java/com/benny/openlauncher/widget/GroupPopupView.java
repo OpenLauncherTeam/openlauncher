@@ -152,15 +152,35 @@ public class GroupPopupView extends FrameLayout {
             }
         }
         tv.setText(item.name);
+        tv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tools.askForText("Rename", item.name, getContext(), new Tools.OnTextGotListener() {
+                    @Override
+                    public void hereIsTheText(String str) {
+                        if (str.isEmpty())return;
+                        if (fromDock)
+                            LauncherSettings.getInstance(getContext()).dockData.remove(item);
+                        else
+                            LauncherSettings.getInstance(getContext()).desktopData.get(Home.desktop.getCurrentItem()).remove(item);
+                        item.name = str;
+                        if (fromDock)
+                            LauncherSettings.getInstance(getContext()).dockData.add(item);
+                        else
+                            LauncherSettings.getInstance(getContext()).desktopData.get(Home.desktop.getCurrentItem()).add(item);
+                        tv.setText(str);
+                    }
+                });
+            }
+        });
 
         p = new PopupWindow(popup, popup.getLayoutParams().width, popup.getLayoutParams().height);
         p.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-//                if (view.getScaleX() != 1)
-//                    view.animate().setDuration(200).scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator());
-//                else
-//                    view.findViewById(R.id.iv).animate().setDuration(200).scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator());
+                TextView otv = (TextView) view.findViewById(R.id.tv);
+                if (!otv.getText().toString().isEmpty())
+                    otv.setText(tv.getText());
                 ((GroupIconDrawable) ((ImageView) view.findViewById(R.id.iv)).getDrawable()).popBack();
             }
         });

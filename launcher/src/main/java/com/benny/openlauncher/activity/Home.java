@@ -8,8 +8,10 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,11 +47,17 @@ import com.benny.openlauncher.widget.Dock;
 import com.benny.openlauncher.widget.DragOptionView;
 import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.adapters.HeaderAdapter;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -63,6 +71,10 @@ public class Home extends Activity {
     public static Dock dock;
     public static View searchBar;
     public static GroupPopupView groupPopup;
+
+    //QuickCenter
+    public static FastItemAdapter<QuickCenterItem.NoteItem> noteAdapter;
+    public static ArrayList<QuickCenterItem.NoteContent> notes = new ArrayList<>();
 
     public static WidgetHost appWidgetHost;
     public static AppWidgetManager appWidgetManager;
@@ -82,6 +94,7 @@ public class Home extends Activity {
     private BroadcastReceiver appUpdateReceiver;
     private TextView searchbarclock;
     private ListView minBar;
+    private DrawerLayout myScreen;
 
     public static final int REQUEST_PICK_APPWIDGET = 0x6475;
     public static final int REQUEST_CREATE_APPWIDGET = 0x3648;
@@ -101,7 +114,7 @@ public class Home extends Activity {
         AppManager.getInstance(this).clearListener();
         LauncherSettings.getInstance(this);
 
-        final View myScreen = getLayoutInflater().inflate(R.layout.activity_home, null);
+        myScreen = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_home, null);
         myScreen.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -319,8 +332,12 @@ public class Home extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0)
                     startActivityForResult(new Intent(Home.this, MinBarEditActivity.class),MINBAREDIT);
-                else
-                    LauncherAction.RunAction(LauncherAction.Action.valueOf(labels.get(i)),Home.this,Home.this);
+                else{
+                    LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
+                    LauncherAction.RunAction(action,Home.this,Home.this);
+                    if (action != LauncherAction.Action.LauncherSettings)
+                        myScreen.closeDrawers();
+                }
             }
         });
     }
@@ -329,11 +346,41 @@ public class Home extends Activity {
         quickCenter.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
         HeaderAdapter<QuickCenterItem.SearchHeader> header = new HeaderAdapter<>();
-        FastItemAdapter<QuickCenterItem.NoteItem> fastAdapter = new FastItemAdapter<>();
+        noteAdapter = new FastItemAdapter<>();
 
-        quickCenter.setAdapter(header.wrap(fastAdapter));
+        quickCenter.setAdapter(header.wrap(noteAdapter));
 
-        fastAdapter.add(new QuickCenterItem.NoteItem("","Remember to eat moon cake!!"),new QuickCenterItem.NoteItem("","Remember to eat moon cake!!"));
+        new AsyncTask<Void,Void,Void>(){
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                Gson gson = new Gson();
+                notes.clear();
+                try {
+                    JsonReader reader = new JsonReader(new InputStreamReader(Home.this.openFileInput("noteData.json")));
+                    reader.beginArray();
+                    while (reader.hasNext()) {
+                        QuickCenterItem.NoteContent content = gson.fromJson(reader,QuickCenterItem.NoteContent.class);
+                        notes.add(content);
+                    }
+                    reader.endArray();
+                    reader.close();
+                } catch (IOException e) {e.printStackTrace();}
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                for (int i = 0; i < notes.size(); i++) {
+                    noteAdapter.add(new QuickCenterItem.NoteItem(notes.get(i).date,notes.get(i).content));
+                }
+                super.onPostExecute(aVoid);
+            }
+        }.execute();
     }
 
     private void registerAppUpdateReceiver() {
@@ -398,6 +445,7 @@ public class Home extends Activity {
 
     @Override
     public void onLowMemory() {
+        System.runFinalization();
         System.gc();
         super.onLowMemory();
     }
@@ -431,6 +479,8 @@ public class Home extends Activity {
     @Override
     protected void onPause() {
         LauncherSettings.getInstance(this).writeSettings();
+        Gson gson = new Gson();
+        Tools.writeToFile("noteData.json",gson.toJson(notes),Home.this);
         super.onPause();
     }
 
@@ -441,7 +491,7 @@ public class Home extends Activity {
 
     @Override
     public void onBackPressed() {
-
+        myScreen.closeDrawers();
         if (!desktop.inEditMode) {
             desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
             if (appDrawer.getVisibility() == View.VISIBLE)
@@ -453,7 +503,6 @@ public class Home extends Activity {
 
     @Override
     protected void onResume() {
-
         if (appWidgetHost != null)
             appWidgetHost.startListening();
         if (!desktop.inEditMode) {
@@ -463,7 +512,6 @@ public class Home extends Activity {
         } else {
             desktop.pages.get(desktop.getCurrentItem()).performClick();
         }
-
         super.onResume();
     }
     //endregion
@@ -561,7 +609,17 @@ public class Home extends Activity {
 
     //region VIEWONCLICK
     public void onAddNote(View view){
+        Tools.askForText("Note", null, this, new Tools.OnTextGotListener() {
+            @Override
+            public void hereIsTheText(String str) {
+                if (str.isEmpty())return;
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                String time = df.format(Calendar.getInstance().getTime());
 
+                notes.add(new QuickCenterItem.NoteContent(time,str));
+                noteAdapter.add(new QuickCenterItem.NoteItem(time,str));
+            }
+        });
     }
 
     public void onSearch(View view) {

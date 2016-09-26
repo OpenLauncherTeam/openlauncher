@@ -1,19 +1,13 @@
 package com.benny.openlauncher.util;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.util.LauncherSettings;
-import com.mikepenz.fastadapter.adapters.FastItemAdapter;
-import com.mikepenz.fastadapter.adapters.HeaderAdapter;
+import com.benny.openlauncher.activity.Home;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
@@ -23,11 +17,11 @@ import java.util.List;
 public class QuickCenterItem{
 
     public static class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
-        public String name;
+        public String date;
         public String description;
 
-        public NoteItem(String name,String description){
-            this.name = name;
+        public NoteItem(String date,String description){
+            this.date = date;
             this.description = description;
         }
 
@@ -42,11 +36,19 @@ public class QuickCenterItem{
         }
 
         @Override
-        public void bindView(ViewHolder viewHolder, List payloads) {
+        public void bindView(final ViewHolder viewHolder, List payloads) {
             super.bindView(viewHolder, payloads);
 
-            //viewHolder.name.setText(name);
-            viewHolder.description.setText(description);
+            viewHolder.date.setText(Html.fromHtml("<b><big>Note</big></b><br><small>created on: "+date+"</small>"));
+            viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    Home.notes.remove(viewHolder.getAdapterPosition());
+                    Home.noteAdapter.remove(viewHolder.getAdapterPosition());
+                    return true;
+                }
+            });
+            viewHolder.description.setText(Html.fromHtml("<big>"+description+"</big>"));
         }
 
         private final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
@@ -63,14 +65,24 @@ public class QuickCenterItem{
         }
 
         protected class ViewHolder extends RecyclerView.ViewHolder {
-            protected TextView name;
+            protected TextView date;
             protected TextView description;
 
             public ViewHolder(View view) {
                 super(view);
-                this.name = (TextView) view.findViewById(R.id.tv);
+                this.date = (TextView) view.findViewById(R.id.tv);
                 this.description = (TextView) view.findViewById(R.id.tv2);
             }
+        }
+    }
+
+    public static class NoteContent{
+        public String content;
+        public String date;
+
+        public NoteContent(String date,String content){
+            this.content = content;
+            this.date = date;
         }
     }
 

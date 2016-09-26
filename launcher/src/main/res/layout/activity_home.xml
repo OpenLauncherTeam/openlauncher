@@ -1,72 +1,73 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <!-- The main content view -->
-    <include
-        layout="@layout/view_home" />
+    <include layout="@layout/view_home" />
 
     <!-- The navigation drawer -->
     <FrameLayout
-        android:fitsSystemWindows="true"
-        android:layout_gravity="start"
         android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
         android:background="?colorViewBackground"
-        android:layout_height="match_parent">
+        android:fitsSystemWindows="true">
 
         <ListView
-            android:scrollbars="none"
             android:id="@+id/minbar"
-            android:listSelector="@android:color/transparent"
             android:layout_width="74dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
             android:divider="@android:color/transparent"
-            android:dividerHeight="0dp" />
+            android:dividerHeight="0dp"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none" />
 
     </FrameLayout>
 
     <RelativeLayout
-        android:layout_gravity="end"
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="end">
 
         <android.support.v7.widget.RecyclerView
-            android:layout_above="@+id/addnote"
             android:id="@+id/rv"
+            android:clipToPadding="false"
+            android:paddingBottom="80dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/addnote"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:elevation="@dimen/cardview_default_elevation"
-            android:background="@drawable/roundbg"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
 
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/addnote"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/roundbg"
+            android:elevation="@dimen/cardview_default_elevation"
             app:mrl_rippleColor="?android:textColorPrimary"
+            app:mrl_rippleDimension="40dp"
             app:mrl_rippleDuration="250"
             app:mrl_rippleFadeDuration="150"
             app:mrl_rippleOverlay="true"
-            app:mrl_rippleDimension="40dp"
             app:mrl_rippleRoundedCorners="40dp">
 
-        <ImageView
-            android:tint="?android:textColorPrimary"
-            android:padding="18dp"
-            android:clickable="true"
-            android:onClick="onAddNote"
-            android:src="@drawable/ic_add_black_24dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:onClick="onAddNote"
+                android:padding="16dp"
+                android:src="@drawable/ic_add_black_24dp"
+                android:tint="?android:textColorPrimary" />
 
         </com.balysv.materialripple.MaterialRippleLayout>
 

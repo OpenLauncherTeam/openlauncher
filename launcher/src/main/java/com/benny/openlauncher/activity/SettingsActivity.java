@@ -15,6 +15,7 @@ import com.benny.openlauncher.util.LauncherSettings;
 
 public class SettingsActivity extends AppCompatActivity implements MaterialPrefFragment.OnPrefClickedListener, MaterialPrefFragment.OnPrefChangedListener{
 
+    private boolean requireLauncherRestart = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Tools.setTheme(this);
@@ -49,7 +50,11 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                     .add(new MaterialPrefFragment.GroupTitle("Desktop"))
                     .add(new MaterialPrefFragment.TBPref("showsearchbar","Show search bar","Display a search bar always on top of the desktop",LauncherSettings.getInstance(this).generalSettings.showsearchbar))
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
+                    .add(new MaterialPrefFragment.NUMPref("horigridsize","Horizontal grid size","App drawer grid size",LauncherSettings.getInstance(this).generalSettings.drawerGridx,1,10))
+                    .add(new MaterialPrefFragment.NUMPref("vertigridsize","Vertical grid size","App drawer grid size",LauncherSettings.getInstance(this).generalSettings.drawerGridy,1,10))
                     .add(new MaterialPrefFragment.TBPref("rememberappdrawerpage","Remember last page","The page will not reset to the first page when reopen app drawer",!LauncherSettings.getInstance(this).generalSettings.rememberappdrawerpage))
+                    .add(new MaterialPrefFragment.GroupTitle("Apps"))
+                    .add(new MaterialPrefFragment.NUMPref("iconsize","Icon Size","Size of all app icon",LauncherSettings.getInstance(this).generalSettings.iconSize,30,80))
                     .add(new MaterialPrefFragment.GroupTitle("Others"))
                     .add(new MaterialPrefFragment.ButtonPref("restart","Restart","Restart the launcher"))
                     .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
@@ -71,7 +76,25 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                 else
                     Home.searchBar.setVisibility(View.VISIBLE);
                 break;
+            case "iconsize":
+                LauncherSettings.getInstance(this).generalSettings.iconSize = (int)p2;
+                requireLauncherRestart = true;
+                break;
+            case "horigridsize":
+                LauncherSettings.getInstance(this).generalSettings.drawerGridx = (int)p2;
+                requireLauncherRestart = true;
+                break;
+            case "vertgridsize":
+                LauncherSettings.getInstance(this).generalSettings.drawerGridy = (int)p2;
+                requireLauncherRestart = true;
+                break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (requireLauncherRestart)Home.launcher.recreate();
+        super.onDestroy();
     }
 
     @Override
@@ -79,6 +102,7 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
         switch (id){
             case "restart":
                 Home.launcher.recreate();
+                requireLauncherRestart = false;
                 finish();
                 break;
         }
