@@ -1,6 +1,10 @@
 <p align="center"><img src="https://github.com/BennyKok/OpenLauncher/blob/master/launcher/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="200"></p>
 <p align="center"><b>OpenLauncher</b> <br> The ideal home screen for Android</p>
 
+###Status>>
+
+Debugging multiple errors that lead to crashes on android api level lower that 21.
+
 ###About>>
 
 This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven Android launcher.
