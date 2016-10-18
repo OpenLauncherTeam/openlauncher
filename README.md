@@ -3,7 +3,9 @@
 
 ###Status>>
 
-Debugging multiple errors that lead to crashes on android api level lower that 21.
+Debugging multiple errors that lead to crashes on Android api level lower that 21.
+
+After looking in the errors, it turns out that the attr refering to the color is not support on Android api level lower that 21 and I will remove the light - dark theme stuff and re-theme tha app, ah so many bugs....
 
 ###About>>
 
