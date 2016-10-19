@@ -93,6 +93,8 @@ public class AppDrawer extends SmoothViewPager
     }
 
 	private void init(Context c){
+		if (isInEditMode())return;
+
 		mPortrait = c.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 
 		if(mPortrait){

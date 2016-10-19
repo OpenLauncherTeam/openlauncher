@@ -14,6 +14,7 @@ import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -39,13 +40,13 @@ import java.util.List;
 
 public class MaterialPrefFragment extends Fragment implements OnClickListener
 {
-    private static int accentColor = Color.BLUE;
+    private int accentColor = Color.BLUE;
 
-    private static int cardColor = Color.WHITE;
+    private int cardColor = Color.WHITE;
 
-    private static int textColor = Color.DKGRAY;
+    private int textColor = Color.DKGRAY;
 
-    private static int textColorSec = Color.GRAY;
+    private int textColorSec = Color.GRAY;
 
     private List<Pref> prefs = new ArrayList<>();
 
@@ -53,13 +54,13 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
 
     private OnPrefClickedListener listener;
 
-    private static OnPrefChangedListener listener2;
+    private OnPrefChangedListener listener2;
 
-    private static final int TAG_ID = 638390376;
+    private final int TAG_ID = 638390376;
 
-    private static final int pad = 18;
+    private final int pad = 18;
 
-    private static boolean useSystemPref = true;
+    private boolean useSystemPref = true;
 
     public MaterialPrefFragment(){}
 
@@ -124,13 +125,13 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
         @Override
         public View onCreateView(Context c,MaterialPrefFragment fragment,SharedPreferences sharedPrefs){
             TextView b = new TextView(c);
-            setStyle(b);
+            setStyle(b,fragment);
 
             b.setText(title);
-            b.setPadding(CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),12),CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),12));
+            b.setPadding(CommonUtility.pixelToDp(b.getContext(),fragment.pad),CommonUtility.pixelToDp(b.getContext(),12),CommonUtility.pixelToDp(b.getContext(),fragment.pad),CommonUtility.pixelToDp(b.getContext(),12));
             b.setTypeface(Typeface.DEFAULT_BOLD);
             b.setBackgroundColor(Color.TRANSPARENT);
-            b.setTextColor(accentColor);
+            b.setTextColor(fragment.accentColor);
             //b.setTextColor(c.getResources().getColor(R.color.colorAccent));
             return b;
         }
@@ -150,26 +151,26 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
         }
 
         @Override
-        public View onCreateView(Context c,MaterialPrefFragment fragment,final SharedPreferences sharedPrefs){
+        public View onCreateView(Context c,final MaterialPrefFragment fragment,final SharedPreferences sharedPrefs){
             Switch s = new Switch(c);
-            setStyle(s);
+            setStyle(s,fragment);
 
-            s.setTag(TAG_ID,id);
+            s.setTag(fragment.TAG_ID,id);
             s.setOnClickListener(fragment);
-            s.setText(warpText(summary,title));
+            s.setText(warpText(summary,title,fragment));
             s.setChecked(sharedPrefs.getBoolean(id,defaultValue));
             s.setOnCheckedChangeListener(new OnCheckedChangeListener(){
                 @Override
                 public void onCheckedChanged(CompoundButton p1,boolean p2){
-                    if (useSystemPref)
+                    if (fragment.useSystemPref)
                         sharedPrefs.edit().putBoolean(id,p2).apply();
 
-                    if (listener2 != null) {
-                        listener2.onPrefChanged(id,p2);
+                    if (fragment.listener2 != null) {
+                        fragment.listener2.onPrefChanged(id,p2);
                     }
                 }
             });
-            return warpCardView(s);
+            return warpCardView(s,fragment);
         }
     }
 
@@ -194,20 +195,20 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
         }
 
         @Override
-        public View onCreateView(final Context c,MaterialPrefFragment fragment,final SharedPreferences sharedPrefs){
+        public View onCreateView(final Context c,final MaterialPrefFragment fragment,final SharedPreferences sharedPrefs){
             Button b = new Button(c);
-            setStyle(b);
+            setStyle(b,fragment);
 
-            b.setTag(TAG_ID,id);
+            b.setTag(fragment.TAG_ID,id);
             b.setOnClickListener(new OnClickListener(){
                 @Override
                 public void onClick(View p1){
                     final SeekBar picker = new SeekBar(p1.getContext());
                     final TextView tv = new TextView(p1.getContext());
-                    tv.setTextColor(textColor);
+                    tv.setTextColor(fragment.textColor);
                     picker.setMax(end);
 
-                    if (useSystemPref)
+                    if (fragment.useSystemPref)
                         currentState = sharedPrefs.getInt(id,defaultValue);
 
                     picker.setProgress(currentState-start);
@@ -219,7 +220,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
                         @Override
                         public void onProgressChanged(SeekBar p1,int p2,boolean p3){
                             tv.setText(String.valueOf(p2+start));
-                            if (!useSystemPref)
+                            if (!fragment.useSystemPref)
                             currentState = p2+start;
                         }
 
@@ -250,19 +251,19 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
                             .onPositive(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    if (useSystemPref)
+                                    if (fragment.useSystemPref)
                                         sharedPrefs.edit().putInt(id,picker.getProgress()+start).apply();
 
-                                    if (listener2 != null) {
-                                        listener2.onPrefChanged(id,picker.getProgress()+start);
+                                    if (fragment.listener2 != null) {
+                                        fragment.listener2.onPrefChanged(id,picker.getProgress()+start);
                                     }
                                 }
                             })
                             .show();
                 }
             });
-            b.setText(warpText(summary,title));
-            return warpCardView(b);
+            b.setText(warpText(summary,title,fragment));
+            return warpCardView(b,fragment);
         }
     }
 
@@ -279,12 +280,12 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
         @Override
         public View onCreateView(Context c,MaterialPrefFragment fragment,SharedPreferences sharedPrefs){
             Button b = new Button(c);
-            setStyle(b);
+            setStyle(b,fragment);
 
-            b.setTag(TAG_ID,id);
+            b.setTag(fragment.TAG_ID,id);
             b.setOnClickListener(fragment);
-            b.setText(warpText(summary,title));
-            return warpCardView(b);
+            b.setText(warpText(summary,title,fragment));
+            return warpCardView(b,fragment);
         }
     }
 
@@ -293,22 +294,22 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
         View onCreateView(Context c,MaterialPrefFragment fragment,SharedPreferences sharedPrefs);
     }
 
-    private static View warpCardView(View v){
+    private static View warpCardView(View v,MaterialPrefFragment fragment){
         CardView cv = new CardView(v.getContext());
         cv.setLayoutParams(CommonUtility.matchParentWidthLayoutParams());
-        cv.setCardBackgroundColor(cardColor);
+        cv.setCardBackgroundColor(fragment.cardColor);
         cv.setCardElevation(4);
         cv.setRadius(0);
         cv.addView(v);
         return cv;
     }
 
-    private static Spanned warpText(String summary, String title){
-        return summary == null ? new SpannableString(title) : Html.fromHtml(title + "<br>" + "<small>" + CommonUtility.warpColorTag(summary,textColorSec) + "</small>");
+    private static Spanned warpText(String summary, String title,MaterialPrefFragment fragment){
+        return summary == null ? new SpannableString(title) : Html.fromHtml(title + "<br>" + "<small>" + CommonUtility.warpColorTag(summary,fragment.textColorSec) + "</small>");
     }
 
-    private static void setStyle(TextView b){
-        b.setTextColor(textColor);
+    private static void setStyle(TextView b,MaterialPrefFragment fragment){
+        b.setTextColor(fragment.textColor);
         b.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
         b.setAllCaps(false);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -316,8 +317,8 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
         }
         b.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
         b.setTypeface(Typeface.DEFAULT);
-        b.setPadding(CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),pad),CommonUtility.pixelToDp(b.getContext(),pad));
-        if (cardColor == Color.WHITE)
+        b.setPadding(CommonUtility.pixelToDp(b.getContext(),fragment.pad),CommonUtility.pixelToDp(b.getContext(),fragment.pad),CommonUtility.pixelToDp(b.getContext(),fragment.pad),CommonUtility.pixelToDp(b.getContext(),fragment.pad));
+        if (fragment.cardColor == Color.WHITE)
             b.setBackgroundResource(R.drawable.selector_dark);
         else
             b.setBackgroundResource(R.drawable.selector);

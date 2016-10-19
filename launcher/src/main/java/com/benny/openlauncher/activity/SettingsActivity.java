@@ -28,25 +28,25 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
 
 
         if (savedInstanceState == null){
-            TypedValue typedValue = new TypedValue();
-            Resources.Theme theme = getTheme();
-            theme.resolveAttribute(R.attr.colorAccent, typedValue, true);
-            int color = typedValue.data;
+//            TypedValue typedValue = new TypedValue();
+//            Resources.Theme theme = getTheme();
+//            theme.resolveAttribute(R.attr.colorAccent, typedValue, true);
+//            int color = typedValue.data;
+//
+//            TypedValue typedValue2 = new TypedValue();
+//            theme.resolveAttribute(R.attr.colorViewBackground, typedValue2, true);
+//            int color2 = typedValue2.data;
+//
+//            TypedValue typedValue3 = new TypedValue();
+//            theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue3, true);
+//            int color3 = typedValue3.data;
+//
+//            TypedValue typedValue4 = new TypedValue();
+//            theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue4, true);
+//            int color4 = typedValue4.data;
 
-            TypedValue typedValue2 = new TypedValue();
-            theme.resolveAttribute(R.attr.colorViewBackground, typedValue2, true);
-            int color2 = typedValue2.data;
 
-            TypedValue typedValue3 = new TypedValue();
-            theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue3, true);
-            int color3 = typedValue3.data;
-
-            TypedValue typedValue4 = new TypedValue();
-            theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue4, true);
-            int color4 = typedValue4.data;
-
-
-            Fragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(color3,color4,color2,color,false)
+            Fragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(getResources().getColor(R.color.Light_TextColor),getResources().getColor(R.color.Light_TextColorSec),getResources().getColor(R.color.Light_Background),getResources().getColor(R.color.colorAccent),false)
                     .add(new MaterialPrefFragment.GroupTitle("Desktop"))
                     .add(new MaterialPrefFragment.TBPref("showsearchbar","Show search bar","Display a search bar always on top of the desktop",LauncherSettings.getInstance(this).generalSettings.showsearchbar))
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))

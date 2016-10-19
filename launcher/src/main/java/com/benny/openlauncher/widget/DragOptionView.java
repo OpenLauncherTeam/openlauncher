@@ -23,9 +23,9 @@ public class DragOptionView extends CardView{
     private LinearLayout horiIconList;
     public boolean dragging = false;
 
-    private TextView removeIcon;
-    private TextView infoIcon;
-    private TextView deleteIcon;
+    private View removeIcon;
+    private View infoIcon;
+    private View deleteIcon;
 
     final Long animSpeed = 180L;
 
@@ -46,11 +46,11 @@ public class DragOptionView extends CardView{
     private void init(){
         setCardElevation(Tools.convertDpToPixel(8,getContext()));
         setRadius(Tools.convertDpToPixel(2,getContext()));
-        setY(-Tools.convertDpToPixel(68,getContext()));
+        setY(-Tools.convertDpToPixel(120,getContext()));
         horiIconList = (LinearLayout)((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_dragoption_horiiconlist, this, false);
         addView(horiIconList);
 
-        deleteIcon = (TextView) horiIconList.findViewById(R.id.deleteIcon);
+        deleteIcon = horiIconList.findViewById(R.id.deleteIcon);
         deleteIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
@@ -85,7 +85,7 @@ public class DragOptionView extends CardView{
                 return false;
             }
         });
-        infoIcon = (TextView) horiIconList.findViewById(R.id.infoIcon);
+        infoIcon = horiIconList.findViewById(R.id.infoIcon);
         infoIcon.setOnDragListener(new OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
@@ -119,7 +119,7 @@ public class DragOptionView extends CardView{
                 return false;
             }
         });
-        removeIcon = (TextView) horiIconList.findViewById(R.id.removeIcon);
+        removeIcon = horiIconList.findViewById(R.id.removeIcon);
         removeIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
@@ -146,9 +146,9 @@ public class DragOptionView extends CardView{
             }
         });
 
-        removeIcon.setText(removeIcon.getText(),TextView.BufferType.SPANNABLE);
-        infoIcon.setText(infoIcon.getText(),TextView.BufferType.SPANNABLE);
-        deleteIcon.setText(deleteIcon.getText(),TextView.BufferType.SPANNABLE);
+//        removeIcon.setText(removeIcon.getText(),TextView.BufferType.SPANNABLE);
+//        infoIcon.setText(infoIcon.getText(),TextView.BufferType.SPANNABLE);
+//        deleteIcon.setText(deleteIcon.getText(),TextView.BufferType.SPANNABLE);
 
         for (int i = 0 ; i < horiIconList.getChildCount() ; i ++){
             horiIconList.getChildAt(i).setVisibility(View.GONE);
@@ -238,7 +238,7 @@ public class DragOptionView extends CardView{
                 if (hideView != null){
                     hideView.setAlpha(0);
                 }
-                animate().y(-Tools.convertDpToPixel(68,getContext())).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                animate().y(-Tools.convertDpToPixel(120,getContext())).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                     @Override
                     public void run() {
                         removeIcon.setVisibility(View.GONE);

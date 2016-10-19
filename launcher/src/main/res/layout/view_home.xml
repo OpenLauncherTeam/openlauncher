@@ -1,64 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/baseLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.benny.openlauncher.widget.Desktop
         android:id="@+id/desktop"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/desktopIndicator"
-        android:layout_below="@+id/searchBar"
-        android:layout_marginTop="0dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/desktopIndicator"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
     <!--<include layout="@layout/view_searchbar_normal" />-->
 
-    <include layout="@layout/view_searchbar_nougat" />
+    <include
+        android:id="@+id/searchBar"
+        layout="@layout/view_searchbar_nougat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/desktopeditoptionpanel"
-        layout="@layout/view_desktopeditoption" />
+        layout="@layout/view_desktopeditoption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.82" />
 
     <View
         android:id="@+id/left"
-        android:layout_width="10dp"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/desktopIndicator"
-        android:layout_marginTop="64dp"
+        android:layout_width="20dp"
+        android:layout_height="0dp"
         android:alpha="0"
-        android:background="@drawable/outlinebg" />
+        android:background="@drawable/outlinebg"
+        app:layout_constraintBottom_toBottomOf="@+id/desktop"
+        app:layout_constraintLeft_toLeftOf="@+id/desktop"
+        app:layout_constraintTop_toTopOf="@+id/desktop" />
 
     <View
         android:id="@+id/right"
-        android:layout_width="10dp"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/desktopIndicator"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="end"
-        android:layout_marginTop="64dp"
+        android:layout_width="20dp"
+        android:layout_height="0dp"
         android:alpha="0"
-        android:background="@drawable/outlinebg" />
+        android:background="@drawable/outlinebg"
+        app:layout_constraintBottom_toBottomOf="@+id/desktop"
+        app:layout_constraintRight_toRightOf="@+id/desktop"
+        app:layout_constraintTop_toTopOf="@+id/desktop" />
 
     <com.benny.openlauncher.widget.PagerIndicator
         android:id="@+id/desktopIndicator"
         android:layout_width="wrap_content"
         android:layout_height="9dp"
-        android:layout_above="@+id/desktopDock"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/desktopDock"
+        app:layout_constraintLeft_toLeftOf="@+id/desktopDock"
+        app:layout_constraintRight_toRightOf="@+id/desktopDock" />
 
     <com.benny.openlauncher.widget.Dock
         android:id="@+id/desktopDock"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="8dp" />
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 
     <io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/appDrawerOtter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/groupPopup"
+        app:layout_constraintLeft_toLeftOf="@+id/groupPopup"
+        app:layout_constraintRight_toRightOf="@+id/groupPopup"
+        app:layout_constraintTop_toTopOf="@+id/groupPopup">
 
         <com.benny.openlauncher.widget.AppDrawer
             android:id="@+id/appDrawer"
@@ -78,17 +120,29 @@
 
     </io.codetail.widget.RevealFrameLayout>
 
-    <com.benny.openlauncher.widget.GroupPopupView
-        android:id="@+id/groupPopup"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
     <com.benny.openlauncher.widget.DragOptionView
         android:id="@+id/dragOptionPanel"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        app:cardBackgroundColor="?colorViewBackground" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/Light.Background"
+        app:layout_constraintBottom_toBottomOf="@+id/searchBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+    <com.benny.openlauncher.widget.GroupPopupView
+        android:id="@+id/groupPopup"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

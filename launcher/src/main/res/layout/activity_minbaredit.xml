@@ -26,7 +26,7 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/tb"
-            android:background="?colorViewBackground"
+            android:background="@color/Light.Primary"
             android:layout_height="?attr/actionBarSize"
             android:layout_width="match_parent" />
 

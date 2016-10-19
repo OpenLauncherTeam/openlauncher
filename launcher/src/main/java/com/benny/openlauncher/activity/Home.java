@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -83,7 +84,7 @@ public class Home extends Activity {
     public static int touchX = 0, touchY = 0;
 
     //normal members, currently not necessary to access from elsewhere.
-    private RelativeLayout baseLayout;
+    private ConstraintLayout baseLayout;
     private AppDrawer appDrawer;
     private FrameLayout appDrawerBtn;
     private PagerIndicator desktopIndicator, appDrawerIndicator;
@@ -107,7 +108,7 @@ public class Home extends Activity {
         Tools.setHomeTheme(this);
         super.onCreate(savedInstanceState);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         }
         launcher = this;
@@ -152,7 +153,7 @@ public class Home extends Activity {
     private void findViews() {
         searchbarclock = (TextView) findViewById(R.id.searchbarclock);
         quickCenter = (RecyclerView) findViewById(R.id.rv);
-        baseLayout = (RelativeLayout) findViewById(R.id.baseLayout);
+        baseLayout = (ConstraintLayout) findViewById(R.id.baseLayout);
         appDrawer = (AppDrawer) findViewById(R.id.appDrawer);
         desktop = (Desktop) findViewById(R.id.desktop);
         dock = (Dock) findViewById(R.id.desktopDock);
@@ -264,8 +265,9 @@ public class Home extends Activity {
                 .setColor(typedValue.data)
                 .setSizeDp(iconSize / 2 - 8)
                 .build();
-        CardView appDrawerBtnCard = (CardView) appDrawerBtn.findViewById(R.id.card);
-        appDrawerBtnCard.setRadius((Tools.convertDpToPixel((iconSize - 8) / 2, this)));
+
+        View appDrawerBtnCard = appDrawerBtn.findViewById(R.id.card);
+        //appDrawerBtnCard.setRadius((Tools.convertDpToPixel((iconSize - 8), this)) / 2);
         appDrawerBtnCard.getLayoutParams().width = Tools.convertDpToPixel(iconSize - 8, this);
         appDrawerBtnCard.getLayoutParams().height = Tools.convertDpToPixel(iconSize - 8, this);
 
@@ -279,7 +281,6 @@ public class Home extends Activity {
                 openAppDrawer();
             }
         });
-
         dock.getLayoutParams().height = Tools.convertDpToPixel(22 + iconSize, this);
 
         dragOptionView.setAutoHideView(searchBar);

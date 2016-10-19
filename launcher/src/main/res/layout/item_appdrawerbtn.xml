@@ -4,13 +4,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
+    <FrameLayout
         android:id="@+id/card"
+        android:background="@drawable/appdrawerbg"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
-        app:cardBackgroundColor="?colorViewBackground"
-        app:cardCornerRadius="25dp">
+        android:layout_gravity="center">
 
         <ImageView
             android:tint="?android:textColorPrimary"
@@ -19,6 +18,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
-    </android.support.v7.widget.CardView>
+    </FrameLayout>
 
 </FrameLayout>

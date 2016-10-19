@@ -70,6 +70,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
     }
 
     private void init(Context c) {
+        if (isInEditMode())return;
+
         pageCount = LauncherSettings.getInstance(c).generalSettings.desktopPageCount;
         setAdapter(new Adapter());
         setOnDragListener(this);
@@ -260,6 +262,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
 
     @Override
     protected void onPageScrolled(int position, float offset, int offsetPixels) {
+        if (isInEditMode())return;
+
         WallpaperManager.getInstance(getContext()).setWallpaperOffsets(getWindowToken(), (float) (position + offset) / (pageCount - 1), 0);
         super.onPageScrolled(position, offset, offsetPixels);
     }

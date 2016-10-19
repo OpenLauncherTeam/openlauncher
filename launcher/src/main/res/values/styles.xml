@@ -7,51 +7,28 @@
 		<item name="android:windowNoTitle">true</item>
 		<item name="android:windowShowWallpaper">true</item>
 
-        <item name="colorAccent">#000000</item>
-        <item name="colorViewBackground">@color/Light.Background</item>
-        <item name="mywindowBackground">@color/Light.GreyBackground</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/Light.Primary</item>
+
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:textColorPrimary">@color/Light.TextColor</item>
         <item name="android:textColor">@color/Light.TextColor</item>
         <item name="android:textColorSecondary">@color/Light.TextColorSec</item>
 	</style>
 
-    <style name="Home.Dark" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:navigationBarColor" tools:targetApi="21">@android:color/transparent</item>
-        <item name="android:colorPrimaryDark"  tools:targetApi="21">@android:color/transparent</item>
-
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowShowWallpaper">true</item>
-
-        <item name="colorAccent">#fafafa</item>
-        <item name="colorViewBackground">@color/Dark.Background</item>
-        <item name="mywindowBackground">@color/Dark.GreyBackground</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:textColorPrimary">@color/Dark.TextColor</item>
-        <item name="android:textColor">@color/Dark.TextColor</item>
-        <item name="android:textColorSecondary">@color/Dark.TextColorSec</item>
-    </style>
-
     <style name="NormalActivity.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimaryDark"  tools:targetApi="21">@color/Light.PrimaryDark</item>
 
-        <item name="colorAccent">#000000</item>
-        <item name="colorViewBackground">@color/Light.Background</item>
+        <item name="colorControlNormal">#FFF</item>
+
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/Light.Primary</item>
+
         <item name="android:windowBackground">@color/Light.GreyBackground</item>
+
         <item name="android:textColorPrimary">@color/Light.TextColor</item>
         <item name="android:textColor">@color/Light.TextColor</item>
         <item name="android:textColorSecondary">@color/Light.TextColorSec</item>
-    </style>
-
-    <style name="NormalActivity.Dark" parent="@style/Theme.AppCompat.NoActionBar">
-        <item name="android:colorPrimaryDark"  tools:targetApi="21">@color/Dark.PrimaryDark</item>
-
-        <item name="colorAccent">#fafafa</item>
-        <item name="colorViewBackground">@color/Dark.Background</item>
-        <item name="android:windowBackground">@color/Dark.GreyBackground</item>
-        <item name="android:textColorPrimary">@color/Dark.TextColor</item>
-        <item name="android:textColor">@color/Dark.TextColor</item>
-        <item name="android:textColorSecondary">@color/Dark.TextColorSec</item>
     </style>
 
 </resources>
