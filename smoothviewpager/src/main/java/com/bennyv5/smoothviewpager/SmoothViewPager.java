@@ -1535,6 +1535,8 @@ public class SmoothViewPager extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        if (isInEditMode())return;
+
         final int count = getChildCount();
         int width = r - l;
         int height = b - t;

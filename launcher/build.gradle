@@ -5,9 +5,9 @@ android {
     buildToolsVersion '24.0.0'
 
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         multiDexEnabled false
         applicationId "com.benny.openlauncher"
-        vectorDrawables.useSupportLibrary = true
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
@@ -55,4 +55,5 @@ dependencies {
     compile project(':materialpreffragment')
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
 }

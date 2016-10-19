@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <attr name="colorViewBackground" format="reference|color" />
-    <attr name="mywindowBackground" format="reference|color" />
-</resources>

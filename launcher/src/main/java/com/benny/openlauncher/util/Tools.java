@@ -188,24 +188,24 @@ public class Tools
     }
 
     public static void setTheme(Activity act){
-        switch (LauncherSettings.getInstance(act).generalSettings.theme){
-            case Light:
-                act.setTheme(R.style.NormalActivity_Light);
-                break;
-            case Dark:
-                act.setTheme(R.style.NormalActivity_Dark);
-                break;
-        }
+//        switch (LauncherSettings.getInstance(act).generalSettings.theme){
+//            case Light:
+//                act.setTheme(R.style.NormalActivity_Light);
+//                break;
+//            case Dark:
+//                act.setTheme(R.style.NormalActivity_Dark);
+//                break;
+//        }
     }
     public static void setHomeTheme(Activity act){
-        switch (LauncherSettings.getInstance(act).generalSettings.theme){
-            case Light:
-                act.setTheme(R.style.Home_Light);
-                break;
-            case Dark:
-                act.setTheme(R.style.Home_Dark);
-                break;
-        }
+//        switch (LauncherSettings.getInstance(act).generalSettings.theme){
+//            case Light:
+//                act.setTheme(R.style.Home_Light);
+//                break;
+//            case Dark:
+//                act.setTheme(R.style.Home_Dark);
+//                break;
+//        }
     }
 
     public static void askForText(String title,String defaultText,Context c,final OnTextGotListener listener){

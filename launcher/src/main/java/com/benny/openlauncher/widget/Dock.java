@@ -44,6 +44,8 @@ public class Dock extends CellContainer implements View.OnDragListener {
 
     @Override
     public void init() {
+        if (isInEditMode())return;
+        
         setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.dockGridx,1);
         setOnDragListener(this);
 

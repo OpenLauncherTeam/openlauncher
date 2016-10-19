@@ -82,8 +82,16 @@ public class PagerIndicator extends View{
     }
 
     @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        dotSize = getHeight()-pad*1.25f;
+        if (pager != null)
+            getLayoutParams().width = Math.round(this.pager.getAdapter().getCount()*(dotSize+pad*2));
+        super.onLayout(changed, left, top, right, bottom);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
-        dotSize = getHeight()-pad;
+        dotSize = getHeight()-pad*1.25f;
         if (pager != null) {
             getLayoutParams().width = Math.round(pager.getAdapter().getCount()*(dotSize+pad*2));
             if(realPreviousPage != pager.getCurrentItem()){

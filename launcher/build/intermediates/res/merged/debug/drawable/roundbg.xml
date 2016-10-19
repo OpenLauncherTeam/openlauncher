@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false">
         <shape android:shape="oval">
-            <solid android:color="?attr/colorViewBackground"/>
+            <solid android:color="@color/Light.TextColor"/>
         </shape>
     </item>
 </selector>
