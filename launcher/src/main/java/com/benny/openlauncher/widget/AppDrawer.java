@@ -23,7 +23,7 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.GoodDragShadowBuilder;
 import com.benny.openlauncher.util.LauncherSettings;
-import com.benny.openlauncher.util.Tools;
+import com.benny.openlauncher.util.Tool;
 import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
 import com.bennyv5.smoothviewpager.SmoothViewPager;
 
@@ -139,23 +139,23 @@ public class AppDrawer extends SmoothViewPager
             ImageView iv = (ImageView) itemView.findViewById(R.id.iv);
             TextView tv = (TextView) itemView.findViewById(R.id.tv);
 
-            iv.getLayoutParams().width = Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
-            iv.getLayoutParams().height = Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+            iv.getLayoutParams().width = Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+            iv.getLayoutParams().height = Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
 
-            tv.getLayoutParams().height = Tools.convertDpToPixel(textHeight, getContext());
+            tv.getLayoutParams().height = Tool.convertDpToPixel(textHeight, getContext());
 
             itemView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Tools.createScaleInScaleOutAnim(view, new Runnable() {
+                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
                         @Override
                         public void run() {
-                            Tools.startApp(getContext(),app);
+                            Tool.startApp(getContext(),app);
                         }
                     });
                 }
             });
-            itemView.setOnTouchListener(Tools.getItemOnTouchListener());
+            itemView.setOnTouchListener(Tool.getItemOnTouchListener());
             itemView.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {

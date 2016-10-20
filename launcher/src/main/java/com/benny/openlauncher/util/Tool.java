@@ -8,21 +8,12 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
-import android.text.InputType;
 import android.util.*;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -37,9 +28,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-public class Tools
+public class Tool
 {
-	private Tools(){}
+	private Tool(){}
 	
 	public static float convertDpToPixel(float dp, Context context){
 		Resources resources = context.getResources();
@@ -128,7 +119,7 @@ public class Tools
         try {
             c.startActivity(intent);
         }catch (Exception e){
-            Tools.toast(c, R.string.toast_appuninstalled);
+            Tool.toast(c, R.string.toast_appuninstalled);
         }
     }
 
@@ -158,8 +149,8 @@ public class Tools
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 Home.touchX = (int) motionEvent.getX();
                 Home.touchY = (int) motionEvent.getY();
-                Tools.print(Home.touchX);
-                Tools.print(Home.touchY);
+                Tool.print(Home.touchX);
+                Tool.print(Home.touchY);
                 return false;
             }
         };
@@ -206,6 +197,10 @@ public class Tools
 //                act.setTheme(R.style.Home_Dark);
 //                break;
 //        }
+    }
+
+    public static String wrapColorTag(String str , @ColorInt int color){
+        return "<font color='"+String.format("#%06X", 0xFFFFFF & color)+"'>"+str+"</font>";
     }
 
     public static void askForText(String title,String defaultText,Context c,final OnTextGotListener listener){

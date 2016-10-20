@@ -136,7 +136,7 @@ public class AppManager
             }
             updateListenersToRemove.clear();
 
-			Tools.print(updateListeners.size());
+			Tool.print(updateListeners.size());
 
 
 			super.onPostExecute(result);

@@ -1,6 +1,7 @@
 package com.benny.openlauncher.util;
 
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
@@ -19,10 +21,12 @@ public class QuickCenterItem{
     public static class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
         public String date;
         public String description;
+        private FastItemAdapter<QuickCenterItem.NoteItem> adapter;
 
-        public NoteItem(String date,String description){
+        public NoteItem(String date, String description, FastItemAdapter<QuickCenterItem.NoteItem> adapter){
             this.date = date;
             this.description = description;
+            this.adapter = adapter;
         }
 
         @Override
@@ -39,12 +43,12 @@ public class QuickCenterItem{
         public void bindView(final ViewHolder viewHolder, List payloads) {
             super.bindView(viewHolder, payloads);
 
-            viewHolder.date.setText(Html.fromHtml("<b><big>Note</big></b><br><small>created on: "+date+"</small>"));
+            viewHolder.date.setText(Html.fromHtml("<b><big>Note</big></b><br><small>"+date+"</small>"));
             viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    Home.notes.remove(viewHolder.getAdapterPosition());
-                    Home.noteAdapter.remove(viewHolder.getAdapterPosition());
+                    adapter.remove(viewHolder.getAdapterPosition());
+                    adapter.remove(viewHolder.getAdapterPosition());
                     return true;
                 }
             });

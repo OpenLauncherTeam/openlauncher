@@ -19,8 +19,6 @@
     <style name="NormalActivity.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimaryDark"  tools:targetApi="21">@color/Light.PrimaryDark</item>
 
-        <item name="colorControlNormal">#FFF</item>
-
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorPrimary">@color/Light.Primary</item>
 
@@ -29,6 +27,10 @@
         <item name="android:textColorPrimary">@color/Light.TextColor</item>
         <item name="android:textColor">@color/Light.TextColor</item>
         <item name="android:textColorSecondary">@color/Light.TextColorSec</item>
+    </style>
+
+    <style name="Toolbar.LightButton" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">#FFF</item>
     </style>
 
 </resources>

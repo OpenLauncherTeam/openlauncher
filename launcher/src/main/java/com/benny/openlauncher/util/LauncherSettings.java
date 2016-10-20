@@ -84,7 +84,7 @@ public class LauncherSettings {
         readDockData(gson);
         readDesktopData(gson);
 
-        String raw = Tools.getStringFromFile(GeneralSettingsFileName,c);
+        String raw = Tool.getStringFromFile(GeneralSettingsFileName,c);
         if (raw == null)
             generalSettings = new GeneralSettings();
         else
@@ -107,9 +107,9 @@ public class LauncherSettings {
                 page.add(new Desktop.SimpleItem(item));
             }
         }
-        Tools.writeToFile(DockDataFileName,gson.toJson(simpleDockData),c);
-        Tools.writeToFile(DesktopDataFileName,gson.toJson(simpleDesktopData),c);
-        Tools.writeToFile(GeneralSettingsFileName,gson.toJson(generalSettings),c);
+        Tool.writeToFile(DockDataFileName,gson.toJson(simpleDockData),c);
+        Tool.writeToFile(DesktopDataFileName,gson.toJson(simpleDesktopData),c);
+        Tool.writeToFile(GeneralSettingsFileName,gson.toJson(generalSettings),c);
     }
 
     public static class GeneralSettings {

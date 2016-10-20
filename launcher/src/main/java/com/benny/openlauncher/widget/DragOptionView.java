@@ -3,19 +3,20 @@ package com.benny.openlauncher.widget;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.Tools;
+import com.benny.openlauncher.util.Tool;
 
 public class DragOptionView extends CardView{
 
@@ -26,6 +27,8 @@ public class DragOptionView extends CardView{
     private View removeIcon;
     private View infoIcon;
     private View deleteIcon;
+
+    private boolean inited = false;
 
     final Long animSpeed = 180L;
 
@@ -43,10 +46,27 @@ public class DragOptionView extends CardView{
         hideView = v;
     }
 
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        if (!inited){
+            inited = true;
+            setY(-getHeight()-getCardElevation());
+        }
+        super.onLayout(changed, left, top, right, bottom);
+    }
+
+    private ViewPropertyAnimator hide(){
+        return animate().y(-getHeight() - getCardElevation()).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
+    }
+
+    private ViewPropertyAnimator show(){
+        return animate().y(((ConstraintLayout.LayoutParams)getLayoutParams()).topMargin).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
+    }
+
     private void init(){
-        setCardElevation(Tools.convertDpToPixel(8,getContext()));
-        setRadius(Tools.convertDpToPixel(2,getContext()));
-        setY(-Tools.convertDpToPixel(120,getContext()));
+        inited = false;
+        setCardElevation(Tool.convertDpToPixel(8,getContext()));
+        setRadius(Tool.convertDpToPixel(2,getContext()));
         horiIconList = (LinearLayout)((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_dragoption_horiiconlist, this, false);
         addView(horiIconList);
 
@@ -109,7 +129,7 @@ public class DragOptionView extends CardView{
                                getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.actions[0].getComponent().getPackageName())));
                             }
                             catch (Exception e) {
-                                Tools.toast(getContext(),R.string.toast_appuninstalled);
+                                Tool.toast(getContext(),R.string.toast_appuninstalled);
                             }
                         }
                         return true;
@@ -174,8 +194,7 @@ public class DragOptionView extends CardView{
             hideView.animate().alpha(0).setDuration(Math.round(animSpeed/1.3f)).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                 @Override
                 public void run() {
-                    animate().y(0).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
-
+                    show();
                 }
             });
     }
@@ -238,7 +257,7 @@ public class DragOptionView extends CardView{
                 if (hideView != null){
                     hideView.setAlpha(0);
                 }
-                animate().y(-Tools.convertDpToPixel(120,getContext())).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                hide().withEndAction(new Runnable() {
                     @Override
                     public void run() {
                         removeIcon.setVisibility(View.GONE);

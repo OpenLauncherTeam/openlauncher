@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/Light.Background"
+        android:background="@color/colorAccent"
         android:fitsSystemWindows="true">
 
         <ListView
@@ -41,35 +41,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <com.balysv.materialripple.MaterialRippleLayout
+        <android.support.design.widget.FloatingActionButton
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:onClick="onAddNote"
+            android:tint="?android:textColorPrimaryInverse"
+            android:src="@drawable/ic_add_black_24dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginRight="24dp"
             android:id="@+id/addnote"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/roundbg"
-            android:elevation="@dimen/cardview_default_elevation"
-            app:mrl_rippleColor="?android:textColorPrimary"
-            app:mrl_rippleDimension="40dp"
-            app:mrl_rippleDuration="250"
-            app:mrl_rippleFadeDuration="150"
-            app:mrl_rippleOverlay="true"
-            app:mrl_rippleRoundedCorners="40dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:onClick="onAddNote"
-                android:padding="16dp"
-                app:srcCompat="@drawable/ic_add_black_24dp"
-                android:tint="?android:textColorPrimary" />
-
-        </com.balysv.materialripple.MaterialRippleLayout>
+            app:fabSize="normal" />
 
     </RelativeLayout>
 

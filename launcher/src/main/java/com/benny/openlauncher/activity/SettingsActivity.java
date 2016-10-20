@@ -1,14 +1,12 @@
 package com.benny.openlauncher.activity;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.View;
 
-import com.benny.openlauncher.util.Tools;
+import com.benny.openlauncher.util.Tool;
 import com.bennyv5.materialpreffragment.MaterialPrefFragment;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.LauncherSettings;
@@ -18,7 +16,7 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
     private boolean requireLauncherRestart = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Tools.setTheme(this);
+        Tool.setTheme(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_settings);

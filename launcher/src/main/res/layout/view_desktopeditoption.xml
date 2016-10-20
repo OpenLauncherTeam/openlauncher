@@ -8,6 +8,7 @@
     android:visibility="invisible">
 
     <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_margin="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:mrl_rippleColor="#fff"
@@ -15,15 +16,19 @@
         app:mrl_rippleFadeDuration="150"
         app:mrl_rippleOverlay="true">
 
-        <ImageView
+        <TextView
+            android:padding="5dp"
+            android:textColor="?android:textColorPrimaryInverse"
+            android:text="@string/remove"
             android:id="@+id/removepage"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            app:srcCompat="@drawable/ic_clear_black_24dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_clear_black_24dp" />
 
     </com.balysv.materialripple.MaterialRippleLayout>
 
     <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_margin="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:mrl_rippleColor="#fff"
@@ -31,15 +36,19 @@
         app:mrl_rippleFadeDuration="150"
         app:mrl_rippleOverlay="true">
 
-        <ImageView
+        <TextView
+            android:padding="5dp"
+            android:textColor="?android:textColorPrimaryInverse"
+            android:text="Set as home"
             android:id="@+id/setashomepage"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            app:srcCompat="@drawable/ic_star_black_24dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_star_black_24dp" />
 
     </com.balysv.materialripple.MaterialRippleLayout>
 
     <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_margin="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:mrl_rippleColor="#fff"
@@ -47,11 +56,14 @@
         app:mrl_rippleFadeDuration="150"
         app:mrl_rippleOverlay="true">
 
-        <ImageView
+        <TextView
+            android:padding="5dp"
+            android:textColor="?android:textColorPrimaryInverse"
+            android:text="@string/add_widget"
             android:id="@+id/addwidgetbtn"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            app:srcCompat="@drawable/ic_dashboard_dark_24dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_dashboard_dark_24dp" />
 
     </com.balysv.materialripple.MaterialRippleLayout>
 

@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -29,7 +28,6 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
@@ -40,7 +38,7 @@ import com.benny.openlauncher.util.IconListAdapter;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.QuickCenterItem;
-import com.benny.openlauncher.util.Tools;
+import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.util.WidgetHost;
 import com.benny.openlauncher.widget.AppDrawer;
 import com.benny.openlauncher.widget.Desktop;
@@ -57,7 +55,6 @@ import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -74,8 +71,8 @@ public class Home extends Activity {
     public static GroupPopupView groupPopup;
 
     //QuickCenter
-    public static FastItemAdapter<QuickCenterItem.NoteItem> noteAdapter;
-    public static ArrayList<QuickCenterItem.NoteContent> notes = new ArrayList<>();
+    public FastItemAdapter<QuickCenterItem.NoteItem> noteAdapter;
+    public ArrayList<QuickCenterItem.NoteContent> notes = new ArrayList<>();
 
     public static WidgetHost appWidgetHost;
     public static AppWidgetManager appWidgetManager;
@@ -105,7 +102,7 @@ public class Home extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Tools.setHomeTheme(this);
+        Tool.setHomeTheme(this);
         super.onCreate(savedInstanceState);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -267,9 +264,9 @@ public class Home extends Activity {
                 .build();
 
         View appDrawerBtnCard = appDrawerBtn.findViewById(R.id.card);
-        //appDrawerBtnCard.setRadius((Tools.convertDpToPixel((iconSize - 8), this)) / 2);
-        appDrawerBtnCard.getLayoutParams().width = Tools.convertDpToPixel(iconSize - 8, this);
-        appDrawerBtnCard.getLayoutParams().height = Tools.convertDpToPixel(iconSize - 8, this);
+        //appDrawerBtnCard.setRadius((Tool.convertDpToPixel((iconSize - 8), this)) / 2);
+        appDrawerBtnCard.getLayoutParams().width = Tool.convertDpToPixel(iconSize - 8, this);
+        appDrawerBtnCard.getLayoutParams().height = Tool.convertDpToPixel(iconSize - 8, this);
 
         ImageView appDrawerIcon = (ImageView) appDrawerBtn.findViewById(R.id.iv);
         appDrawerIcon.setImageDrawable(appDrawerBtnIcon);
@@ -281,7 +278,7 @@ public class Home extends Activity {
                 openAppDrawer();
             }
         });
-        dock.getLayoutParams().height = Tools.convertDpToPixel(22 + iconSize, this);
+        dock.getLayoutParams().height = Tool.convertDpToPixel(22 + iconSize, this);
 
         dragOptionView.setAutoHideView(searchBar);
     }
@@ -377,7 +374,7 @@ public class Home extends Activity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 for (int i = 0; i < notes.size(); i++) {
-                    noteAdapter.add(new QuickCenterItem.NoteItem(notes.get(i).date,notes.get(i).content));
+                    noteAdapter.add(new QuickCenterItem.NoteItem(notes.get(i).date,notes.get(i).content,noteAdapter));
                 }
                 super.onPostExecute(aVoid);
             }
@@ -481,7 +478,7 @@ public class Home extends Activity {
     protected void onPause() {
         LauncherSettings.getInstance(this).writeSettings();
         Gson gson = new Gson();
-        Tools.writeToFile("noteData.json",gson.toJson(notes),Home.this);
+        Tool.writeToFile("noteData.json",gson.toJson(notes),Home.this);
         super.onPause();
     }
 
@@ -610,7 +607,7 @@ public class Home extends Activity {
 
     //region VIEWONCLICK
     public void onAddNote(View view){
-        Tools.askForText("Note", null, this, new Tools.OnTextGotListener() {
+        Tool.askForText("Note", null, this, new Tool.OnTextGotListener() {
             @Override
             public void hereIsTheText(String str) {
                 if (str.isEmpty())return;
@@ -618,7 +615,7 @@ public class Home extends Activity {
                 String time = df.format(Calendar.getInstance().getTime());
 
                 notes.add(new QuickCenterItem.NoteContent(time,str));
-                noteAdapter.add(new QuickCenterItem.NoteItem(time,str));
+                noteAdapter.add(new QuickCenterItem.NoteItem(time,str,noteAdapter));
             }
         });
     }
@@ -643,7 +640,7 @@ public class Home extends Activity {
             i.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.VoiceSearchActivity");
             Home.this.startActivity(i);
         } catch (Exception e) {
-            Tools.toast(Home.this, "Can not find google search app");
+            Tool.toast(Home.this, "Can not find google search app");
         }
     }
     //endregion

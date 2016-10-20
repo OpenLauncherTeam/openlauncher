@@ -11,8 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.benny.openlauncher.util.Tools;
-
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class CellContainer extends ViewGroup {

@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.benny.openlauncher.util.Tools;
+import com.benny.openlauncher.util.Tool;
 import com.bennyv5.smoothviewpager.SmoothViewPager;
 
 public class PagerIndicator extends View{
@@ -37,7 +37,7 @@ public class PagerIndicator extends View{
     }
 
     private void init(){
-        pad = Tools.convertDpToPixel(3,getContext());
+        pad = Tool.convertDpToPixel(3,getContext());
         setWillNotDraw(false);
         dotPaint = new Paint();
         //TypedValue typedValue = new TypedValue();
@@ -76,7 +76,7 @@ public class PagerIndicator extends View{
             @Override
             public void onPageScrollStateChanged(int state) {}
         });
-        Tools.print(pager.getAdapter().getCount());
+        Tool.print(pager.getAdapter().getCount());
         getLayoutParams().width = Math.round(this.pager.getAdapter().getCount()*(dotSize+pad*2));
         invalidate();
     }
@@ -103,8 +103,8 @@ public class PagerIndicator extends View{
                 float targetFactor2 = 1f;
                 float increFactor = 0.05f;
                 if (i == previousPage && i != pager.getCurrentItem()){
-                    scaleFactor2 = Tools.clampFloat(scaleFactor2- increFactor, targetFactor2, targetFactor);
-                    Tools.print(scaleFactor2);
+                    scaleFactor2 = Tool.clampFloat(scaleFactor2- increFactor, targetFactor2, targetFactor);
+                    Tool.print(scaleFactor2);
                     canvas.drawCircle(dotSize/2+pad + (dotSize + pad * 2) * i,  getHeight() / 2,(scaleFactor2 * dotSize) / 2, dotPaint);
                     if (scaleFactor2 != targetFactor2)
                         invalidate();
@@ -116,7 +116,7 @@ public class PagerIndicator extends View{
                 if (pager.getCurrentItem() == i){
                     if(previousPage == -1)
                         previousPage = i;
-                    scaleFactor = Tools.clampFloat(scaleFactor+ increFactor, targetFactor2, targetFactor);
+                    scaleFactor = Tool.clampFloat(scaleFactor+ increFactor, targetFactor2, targetFactor);
                     canvas.drawCircle(dotSize/2+pad + (dotSize + pad * 2) * i,  getHeight() / 2,(scaleFactor * dotSize) / 2, dotPaint);
                     if (scaleFactor != targetFactor)
                         invalidate();
