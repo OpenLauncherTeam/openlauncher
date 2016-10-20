@@ -5,9 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -16,23 +15,24 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
-import com.benny.openlauncher.util.Tools;
-import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
-import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
-import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
-import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemViewHolder;
+import com.benny.openlauncher.util.Tool;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
+import com.mikepenz.fastadapter.items.AbstractItem;
+import com.mikepenz.fastadapter.utils.ViewHolderFactory;
+import com.mikepenz.fastadapter_extensions.drag.ItemTouchCallback;
+import com.mikepenz.fastadapter_extensions.drag.SimpleDragCallback;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class MinBarEditActivity extends AppCompatActivity{
+public class MinBarEditActivity extends AppCompatActivity implements ItemTouchCallback {
     RecyclerView recyclerView;
-    boolean edited = false;
-    private MyAdapter adapter;
+    private FastItemAdapter<Item> adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Tools.setTheme(this);
+        Tool.setTheme(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_minbaredit);
@@ -40,137 +40,114 @@ public class MinBarEditActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        int i = 0;
-        ArrayList<Item> mItems = new ArrayList<>();
-        final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.minBarArrangement;
-        for (String act : minBarArrangement) {
-            LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act.substring(1));
-            mItems.add(new Item(i,item,act.charAt(0) == '0'));
-            i++;
-        }
-
         recyclerView = (RecyclerView) findViewById(R.id.rv);
 
-        RecyclerViewDragDropManager dragMgr = new RecyclerViewDragDropManager();
+        adapter = new FastItemAdapter<>();
 
-        dragMgr.setInitiateOnMove(false);
-        dragMgr.setInitiateOnLongPress(true);
+        SimpleDragCallback touchCallback = new SimpleDragCallback(this);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(touchCallback);
+        touchHelper.attachToRecyclerView(recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new MyAdapter(mItems);
-        recyclerView.setAdapter(dragMgr.createWrappedAdapter(adapter));
+        recyclerView.setAdapter(adapter);
 
-        dragMgr.attachRecyclerView(recyclerView);
-    }
+        int i = 0;
+        final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.minBarArrangement;
+        for (String act : minBarArrangement) {
+            LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act.substring(1));
+            adapter.add(new Item(i,item,act.charAt(0) == '0'));
+            i++;
+        }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+        setResult(RESULT_OK);
     }
 
     @Override
     protected void onPause() {
         LauncherSettings.getInstance(this).generalSettings.minBarArrangement.clear();
-        for (Item item : adapter.mItems)
-            if (item.enable)
-                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("0"+item.item.label.toString());
-            else
-                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("1"+item.item.label.toString());
+        for (Item item : adapter.getAdapterItems()) {
+            if (item.enable) {
+                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("0" + item.item.label.toString());
+            } else
+                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("1" + item.item.label.toString());
+        }
         super.onPause();
     }
 
-    private static class Item {
+    @Override
+    public boolean itemTouchOnMove(int oldPosition, int newPosition) {
+        setResult(RESULT_OK);
+
+        Collections.swap(adapter.getAdapterItems(), oldPosition, newPosition);
+        adapter.notifyAdapterDataSetChanged();
+        return false;
+    }
+
+    public static class Item extends AbstractItem<Item,Item.ViewHolder>{
         public final long id;
         public final LauncherAction.ActionItem item;
         public boolean enable;
+        public boolean edited;
 
         public Item(long id, LauncherAction.ActionItem item,boolean enable) {
             this.id = id;
             this.item = item;
             this.enable = enable;
         }
-    }
 
-    private static class MyViewHolder extends AbstractDraggableItemViewHolder {
-        TextView tv;
-        TextView tv2;
-        ImageView iv;
-        CheckBox cb;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            tv = (TextView) itemView.findViewById(R.id.tv);
-            tv2 = (TextView) itemView.findViewById(R.id.tv2);
-            iv = (ImageView) itemView.findViewById(R.id.iv);
-            cb = (CheckBox) itemView.findViewById(R.id.cb);
-        }
-    }
-
-    private class MyAdapter extends RecyclerView.Adapter<MyViewHolder> implements DraggableItemAdapter<MyViewHolder> {
-        List<Item> mItems;
-
-        public MyAdapter(List<Item> items) {
-            setHasStableIds(true); // this is required for D&D feature.
-
-            mItems = items;
+        @Override
+        public int getType() {
+            return 0;
         }
 
         @Override
-        public long getItemId(int position) {
-            return mItems.get(position).id; // need to return stable (= not change even after reordered) value
+        public int getLayoutRes() {
+            return R.layout.item_minbaredit;
+        }
+
+        private static final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
+
+        static class ItemFactory implements ViewHolderFactory<ViewHolder> {
+            public ViewHolder create(View v) {
+                return new ViewHolder(v);
+            }
         }
 
         @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_minbaredit, parent, false);
-            return new MyViewHolder(v);
+        public ViewHolderFactory<? extends ViewHolder> getFactory() {
+            return FACTORY;
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
-            final Item item = mItems.get(position);
-            holder.tv.setText(item.item.label.toString());
-            holder.tv2.setText(item.item.des);
-            holder.iv.setImageResource(item.item.icon);
-            holder.cb.setChecked(item.enable);
+        public void bindView(Item.ViewHolder holder, List payloads) {
+            holder.tv.setText(item.label.toString());
+            holder.tv2.setText(item.des);
+            holder.iv.setImageResource(item.icon);
+            holder.cb.setChecked(enable);
             holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    MinBarEditActivity.this.edited = true;
-                    setResult(RESULT_OK);
-                    item.enable = b;
+                    edited = true;
+                    enable = b;
                 }
             });
+            super.bindView(holder, payloads);
         }
 
-        @Override
-        public int getItemCount() {
-            return mItems.size();
-        }
+        public static class ViewHolder extends RecyclerView.ViewHolder{
+            TextView tv;
+            TextView tv2;
+            ImageView iv;
+            CheckBox cb;
 
-        @Override
-        public void onMoveItem(int fromPosition, int toPosition) {
-            MinBarEditActivity.this.edited = true;
-            setResult(RESULT_OK);
-            Item movedItem = mItems.remove(fromPosition);
-            mItems.add(toPosition, movedItem);
-            notifyItemMoved(fromPosition, toPosition);
-        }
-
-        @Override
-        public boolean onCheckCanStartDrag(MyViewHolder holder, int position, int x, int y) {
-            return true;
-        }
-
-        @Override
-        public ItemDraggableRange onGetItemDraggableRange(MyViewHolder holder, int position) {
-            return null;
-        }
-
-        @Override
-        public boolean onCheckCanDrop(int draggingPosition, int dropPosition) {
-            return true;
+            public  ViewHolder(View itemView) {
+                super(itemView);
+                tv = (TextView) itemView.findViewById(R.id.tv);
+                tv2 = (TextView) itemView.findViewById(R.id.tv2);
+                iv = (ImageView) itemView.findViewById(R.id.iv);
+                cb = (CheckBox) itemView.findViewById(R.id.cb);
+            }
         }
     }
 }

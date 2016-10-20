@@ -23,7 +23,7 @@ import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.GoodDragShadowBuilder;
 import com.benny.openlauncher.util.GroupIconDrawable;
 import com.benny.openlauncher.util.LauncherSettings;
-import com.benny.openlauncher.util.Tools;
+import com.benny.openlauncher.util.Tool;
 
 import java.util.UUID;
 
@@ -155,8 +155,8 @@ public class Dock extends CellContainer implements View.OnDragListener {
         TextView tv = (TextView) item_layout.findViewById(R.id.tv);
         ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
 
-        iv.getLayoutParams().width = Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
-        iv.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;//(int) Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+        iv.getLayoutParams().width = Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+        iv.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;//(int) Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
 
         final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(), item.actions[0].getComponent().getClassName());
         if (app == null) {
@@ -205,7 +205,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
             }
         });
         item_layout.setId(UUID.randomUUID().hashCode());
-        item_layout.setOnTouchListener(Tools.getItemOnTouchListener());
+        item_layout.setOnTouchListener(Tool.getItemOnTouchListener());
         item_layout.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -228,10 +228,10 @@ public class Dock extends CellContainer implements View.OnDragListener {
         item_layout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Tools.createScaleInScaleOutAnim(view, new Runnable() {
+                Tool.createScaleInScaleOutAnim(view, new Runnable() {
                     @Override
                     public void run() {
-                        Tools.startApp(getContext(), app);
+                        Tool.startApp(getContext(), app);
                     }
                 });
             }
@@ -246,7 +246,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
         TextView tv = (TextView) item_layout.findViewById(R.id.tv);
         final ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
 
-        final int iconSize = Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+        final int iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
         iv.getLayoutParams().width = iconSize;
         iv.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
 
@@ -261,9 +261,9 @@ public class Dock extends CellContainer implements View.OnDragListener {
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {
             if (i < apps.length)
-                icons[i] = Tools.drawableToBitmap(apps[i].icon);
+                icons[i] = Tool.drawableToBitmap(apps[i].icon);
             else
-                icons[i] = Tools.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
+                icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
         }
 
         iv.setImageDrawable(new GroupIconDrawable(icons,iconSize,item_layout));
@@ -306,7 +306,7 @@ public class Dock extends CellContainer implements View.OnDragListener {
             }
         });
 
-        item_layout.setOnTouchListener(Tools.getItemOnTouchListener());
+        item_layout.setOnTouchListener(Tool.getItemOnTouchListener());
         item_layout.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {

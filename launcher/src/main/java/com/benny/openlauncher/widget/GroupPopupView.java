@@ -20,7 +20,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.GroupIconDrawable;
 import com.benny.openlauncher.util.LauncherSettings;
-import com.benny.openlauncher.util.Tools;
+import com.benny.openlauncher.util.Tool;
 
 public class GroupPopupView extends FrameLayout {
 
@@ -66,7 +66,7 @@ public class GroupPopupView extends FrameLayout {
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.actions.length);
         cc.setGridSize(cellSize[0], cellSize[1]);
 
-        int iconSize = Tools.convertDpToPixel(LauncherSettings.getInstance(c).generalSettings.iconSize, c);
+        int iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(c).generalSettings.iconSize, c);
 
         popup.getLayoutParams().width = (int)(iconSize + iconSize / 2.5f) * cellSize[0];
         popup.getLayoutParams().height = (iconSize*2) * cellSize[1]+ popup.getPaddingBottom();
@@ -115,14 +115,14 @@ public class GroupPopupView extends FrameLayout {
                         final Bitmap[] icons = new Bitmap[4];
                         for (int i = 0; i < 4; i++) {
                             if (i < apps.length)
-                                icons[i] = Tools.drawableToBitmap(apps[i].icon);
+                                icons[i] = Tool.drawableToBitmap(apps[i].icon);
                             else
-                                icons[i] = Tools.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
+                                icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
                         }
                         if (((GroupIconDrawable) ((ImageView) view.findViewById(R.id.iv)).getDrawable()).v == null)
-                            ((ImageView) view.findViewById(R.id.iv)).setImageDrawable(new GroupIconDrawable(icons, Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext())));
+                            ((ImageView) view.findViewById(R.id.iv)).setImageDrawable(new GroupIconDrawable(icons, Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext())));
                         else
-                            ((ImageView) view.findViewById(R.id.iv)).setImageDrawable(new GroupIconDrawable(icons, Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext()), view));
+                            ((ImageView) view.findViewById(R.id.iv)).setImageDrawable(new GroupIconDrawable(icons, Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext()), view));
 
                         AppManager.App dapps = AppManager.getInstance(getContext()).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
                         if (dapps == null)
@@ -138,12 +138,12 @@ public class GroupPopupView extends FrameLayout {
                 itemView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Tools.createScaleInScaleOutAnim(view, new Runnable() {
+                        Tool.createScaleInScaleOutAnim(view, new Runnable() {
                             @Override
                             public void run() {
                                 p.dismiss();
                                 setVisibility(View.INVISIBLE);
-                                Tools.startApp(c, app);
+                                Tool.startApp(c, app);
                             }
                         });
                     }
@@ -155,7 +155,7 @@ public class GroupPopupView extends FrameLayout {
         tv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Tools.askForText("Rename", item.name, getContext(), new Tools.OnTextGotListener() {
+                Tool.askForText("Rename", item.name, getContext(), new Tool.OnTextGotListener() {
                     @Override
                     public void hereIsTheText(String str) {
                         if (str.isEmpty())return;

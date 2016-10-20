@@ -30,7 +30,7 @@ public class LauncherAction {
             new ActionItem(Action.ClearRam,"Free the ram, force close other running services.",R.drawable.ic_donut_large_black_24dp),
             new ActionItem(Action.DeviceSettings,"Shortcut to device/Android settings.",R.drawable.ic_settings_applications_black_24dp),
             new ActionItem(Action.LauncherSettings,"OpenLauncher settings page.",R.drawable.ic_settings_black_24dp),
-            new ActionItem(Action.ThemePicker,"Pick themes.",R.drawable.ic_brush_black_24dp),
+            //new ActionItem(Action.ThemePicker,"Pick themes.",R.drawable.ic_brush_black_24dp),
             new ActionItem(Action.VolumeDialog,"Open the volume dialog.",R.drawable.ic_volume_up_black_24dp)
     };
 
@@ -40,7 +40,7 @@ public class LauncherAction {
                 try{
                     ((DevicePolicyManager)c.getSystemService(Context.DEVICE_POLICY_SERVICE)).lockNow();
                 }catch (Exception e){
-                    Tools.toast(c,c.getString(R.string.toast_plzenabledeviceadmin));
+                    Tool.toast(c,c.getString(R.string.toast_plzenabledeviceadmin));
                     Intent intent = new Intent();
                     intent.setComponent(new ComponentName("com.android.settings","com.android.settings.DeviceAdminSettings"));
                     c.startActivity(intent);
@@ -77,9 +77,9 @@ public class LauncherAction {
                         activityManager.getMemoryInfo(mi);
                         long current = mi.availMem / 1048576L;
                         if (current - pre > 10)
-                            Tools.toast(c,c.getResources().getString(R.string.toast_freeram, current,current - pre));
+                            Tool.toast(c,c.getResources().getString(R.string.toast_freeram, current,current - pre));
                         else
-                            Tools.toast(c,c.getResources().getString(R.string.toast_freeallram, current));
+                            Tool.toast(c,c.getResources().getString(R.string.toast_freeallram, current));
                         super.onPostExecute(result);
                     }
                 }.execute();
@@ -100,7 +100,7 @@ public class LauncherAction {
                                 break;
                             case 1 :
                                 try{
-                                    WallpaperManager.getInstance(c).setBitmap(StackBlur.blur(Tools.drawableToBitmap(c.getWallpaper()),12,false));
+                                    WallpaperManager.getInstance(c).setBitmap(StackBlur.blur(Tool.drawableToBitmap(c.getWallpaper()),12,false));
                                 }catch (IOException ignore){}
                                 break;
                         }

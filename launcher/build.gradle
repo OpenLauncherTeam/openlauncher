@@ -5,7 +5,6 @@ android {
     buildToolsVersion '24.0.0'
 
     defaultConfig {
-        vectorDrawables.useSupportLibrary = true
         multiDexEnabled false
         applicationId "com.benny.openlauncher"
         minSdkVersion 16
@@ -31,11 +30,10 @@ dependencies {
     compile('com.mikepenz:fastadapter:1.8.2@aar') {
         transitive = true
     }
+    compile 'com.mikepenz:fastadapter-extensions:1.8.0@aar'
+
     compile('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
         transitive = true;
-    }
-    compile('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.9.3@aar') {
-        transitive = true
     }
 
     compile 'net.qiujuer.genius:blur:2.0.0'

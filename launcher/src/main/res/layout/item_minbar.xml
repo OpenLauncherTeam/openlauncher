@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="24dp"
     android:paddingTop="24dp"
-    app:mrl_rippleColor="?android:textColorPrimary"
+    app:mrl_rippleColor="?android:textColorPrimaryInverse"
     app:mrl_rippleDuration="250"
     app:mrl_rippleFadeDuration="150"
     app:mrl_rippleOverlay="true"
@@ -21,7 +21,7 @@
             android:id="@+id/iv"
             android:layout_width="match_parent"
             android:layout_height="28dp"
-            android:tint="?android:textColorPrimary" />
+            android:tint="?android:textColorPrimaryInverse" />
 
         <TextView
             android:id="@+id/tv"

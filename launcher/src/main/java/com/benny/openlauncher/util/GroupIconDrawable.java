@@ -53,7 +53,7 @@ public class GroupIconDrawable extends Drawable{
         paint4.setAntiAlias(true);
         paint4.setFlags(Paint.ANTI_ALIAS_FLAG);
         paint4.setStyle(Paint.Style.STROKE);
-        outlinepad = Tools.convertDpToPixel(2, Home.desktop.getContext());
+        outlinepad = Tool.convertDpToPixel(2, Home.desktop.getContext());
         paint4.setStrokeWidth(outlinepad);
 
         this.paint2 = new Paint();
@@ -86,9 +86,9 @@ public class GroupIconDrawable extends Drawable{
         canvas.save();
 
         if (needAnimatScale){
-            scaleFactor = Tools.clampFloat(scaleFactor-0.09f,0.5f,1f);
+            scaleFactor = Tool.clampFloat(scaleFactor-0.09f,0.5f,1f);
         }else {
-            scaleFactor = Tools.clampFloat(scaleFactor+0.09f,0.5f,1f);
+            scaleFactor = Tool.clampFloat(scaleFactor+0.09f,0.5f,1f);
         }
         if (v == null)
             canvas.scale(scaleFactor,scaleFactor,iconSize/2,iconSize/2);
@@ -115,10 +115,10 @@ public class GroupIconDrawable extends Drawable{
         canvas.restore();
 
         if (needAnimate){
-            paint2.setAlpha(Tools.clampInt(paint2.getAlpha()-25,0,255));
+            paint2.setAlpha(Tool.clampInt(paint2.getAlpha()-25,0,255));
             invalidateSelf();
         }else if (paint2.getAlpha() != 255){
-            paint2.setAlpha(Tools.clampInt(paint2.getAlpha()+25,0,255));
+            paint2.setAlpha(Tool.clampInt(paint2.getAlpha()+25,0,255));
             invalidateSelf();
         }
     }

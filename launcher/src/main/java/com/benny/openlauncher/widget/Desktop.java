@@ -34,7 +34,7 @@ import com.benny.openlauncher.util.GoodDragShadowBuilder;
 import com.benny.openlauncher.util.GroupIconDrawable;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
-import com.benny.openlauncher.util.Tools;
+import com.benny.openlauncher.util.Tool;
 import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
 import com.bennyv5.smoothviewpager.SmoothViewPager;
 
@@ -272,8 +272,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         final ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, null);
         TextView tv = (TextView) item_layout.findViewById(R.id.tv);
         ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
-        iv.getLayoutParams().width = Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
-        iv.getLayoutParams().height = Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+        iv.getLayoutParams().width = Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+        iv.getLayoutParams().height = Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
 
         final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(), item.actions[0].getComponent().getClassName());
         if (app == null) {
@@ -289,7 +289,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 switch (dragEvent.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
                         if (((DragAction)dragEvent.getLocalState()).viewID == view.getId()) {
-                            Tools.print(true);
+                            Tool.print(true);
                             return false;
                         }
                         switch (((DragAction)dragEvent.getLocalState()).action) {
@@ -323,7 +323,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             }
         });
         item_layout.setId(UUID.randomUUID().hashCode());
-        item_layout.setOnTouchListener(Tools.getItemOnTouchListener());
+        item_layout.setOnTouchListener(Tool.getItemOnTouchListener());
         item_layout.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -347,10 +347,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         item_layout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Tools.createScaleInScaleOutAnim(view, new Runnable() {
+                Tool.createScaleInScaleOutAnim(view, new Runnable() {
                     @Override
                     public void run() {
-                        Tools.startApp(getContext(), app);
+                        Tool.startApp(getContext(), app);
                     }
                 });
             }
@@ -364,7 +364,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         TextView tv = (TextView) item_layout.findViewById(R.id.tv);
         final ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
 
-        final int iconSize = Tools.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
+        final int iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
         iv.getLayoutParams().width = iconSize;
         iv.getLayoutParams().height = iconSize;
 
@@ -379,9 +379,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {
             if (i < apps.length)
-                icons[i] = Tools.drawableToBitmap(apps[i].icon);
+                icons[i] = Tool.drawableToBitmap(apps[i].icon);
             else
-                icons[i] = Tools.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
+                icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
         }
         iv.setImageDrawable(new GroupIconDrawable(icons,iconSize));
 
@@ -421,7 +421,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 return false;
             }
         });
-        item_layout.setOnTouchListener(Tools.getItemOnTouchListener());
+        item_layout.setOnTouchListener(Tool.getItemOnTouchListener());
         item_layout.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -526,7 +526,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         };
         widgetContainer.postDelayed(action, 2000);
 
-        //widgetView.setOnTouchListener(Tools.getItemOnTouchListener());
+        //widgetView.setOnTouchListener(Tool.getItemOnTouchListener());
         widgetView.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -878,7 +878,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                         return new Intent[0];
                     }
                 }
-                String[] raw = Tools.split(str,"[MyActs]");
+                String[] raw = Tool.split(str,"[MyActs]");
                 Intent[] acts = new Intent[raw.length];
                 for (int i = 0; i < acts.length; i++) {
                     try {

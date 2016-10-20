@@ -689,7 +689,11 @@
     <item name="m_AppWidgetHost" type="id"/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
+    <item name="progress_item_id" type="id"/>
+    <item name="single_line_item_id" type="id"/>
     <item name="split_action_bar" type="id"/>
+    <item name="three_line_item_id" type="id"/>
+    <item name="two_line_item_id" type="id"/>
     <item name="up" type="id"/>
     <item name="view_offset_helper" type="id"/>
     <integer name="abc_config_activityDefaultDur">220</integer>
@@ -1871,8 +1875,6 @@
     <style name="NormalActivity.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimaryDark" ns1:targetApi="21">@color/Light.PrimaryDark</item>
 
-        <item name="colorControlNormal">#FFF</item>
-
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorPrimary">@color/Light.Primary</item>
 
@@ -2180,6 +2182,9 @@
     <style name="ThemeOverlay.AppCompat.Dialog" parent="Base.ThemeOverlay.AppCompat.Dialog"/>
     <style name="ThemeOverlay.AppCompat.Dialog.Alert" parent="Base.ThemeOverlay.AppCompat.Dialog.Alert"/>
     <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light"/>
+    <style name="Toolbar.LightButton" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">#FFF</item>
+    </style>
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
 		<item name="android:textSize">18sp</item>
 	</style>

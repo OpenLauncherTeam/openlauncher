@@ -11,7 +11,7 @@
     tools:showIn="@layout/view_home">
 
     <FrameLayout
-        android:layout_width="78dp"
+        android:layout_width="80dp"
         android:layout_height="56dp">
 
         <com.balysv.materialripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
