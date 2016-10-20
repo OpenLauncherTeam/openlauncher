@@ -21,7 +21,7 @@
             android:id="@+id/iv"
             android:layout_width="match_parent"
             android:layout_height="28dp"
-            android:tint="?android:textColorPrimaryInverse" />
+            android:tint="#FFF" />
 
         <TextView
             android:id="@+id/tv"
