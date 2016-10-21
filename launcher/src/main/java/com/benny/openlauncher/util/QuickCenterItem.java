@@ -48,7 +48,6 @@ public class QuickCenterItem{
                 @Override
                 public boolean onLongClick(View view) {
                     adapter.remove(viewHolder.getAdapterPosition());
-                    adapter.remove(viewHolder.getAdapterPosition());
                     return true;
                 }
             });
