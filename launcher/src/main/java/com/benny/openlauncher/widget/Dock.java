@@ -84,11 +84,13 @@ public class Dock extends CellContainer implements View.OnDragListener {
                     if(addAppToDock(item, (int) p2.getX(), (int) p2.getY())){
                         Home.desktop.consumeRevert();
                         Home.dock.consumeRevert();
+                    }else {
+                        Home.dock.revertLastDraggedItem();
+                        Home.desktop.revertLastDraggedItem();
                     }
                 }
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
-                revertLastDraggedItem();
                 return true;
         }
         return false;

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.graphics.drawable.Drawable;
@@ -130,5 +131,5 @@ public class GroupIconDrawable extends Drawable{
     public void setColorFilter(ColorFilter colorFilter) {}
 
     @Override
-    public int getOpacity() {return 0;}
+    public int getOpacity() {return PixelFormat.TRANSPARENT;}
 }

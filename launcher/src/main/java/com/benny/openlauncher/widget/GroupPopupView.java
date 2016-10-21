@@ -1,15 +1,22 @@
 package com.benny.openlauncher.widget;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.ViewUtils;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -18,17 +25,27 @@ import android.widget.TextView;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.DragAction;
+import com.benny.openlauncher.util.GoodDragShadowBuilder;
 import com.benny.openlauncher.util.GroupIconDrawable;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 
 public class GroupPopupView extends FrameLayout {
 
-    CellContainer cc;
-    TextView tv;
-    CardView popup;
+//    CellContainer cc;
+//    TextView tv;
+//    CardView popup;
+//
+//    PopupWindow p;
 
-    PopupWindow p;
+    CardView popupParent;
+    CellContainer cellContainer;
+    TextView title;
+
+    boolean init = false;
+
+    PopupWindow.OnDismissListener dismissListener;
 
     public GroupPopupView(Context context) {
         super(context);
@@ -41,37 +58,55 @@ public class GroupPopupView extends FrameLayout {
     }
 
     private void init() {
-        bringToFront();
-        popup = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_grouppopup, null, false);
-        popup.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
-        cc = (CellContainer) popup.findViewById(R.id.cc);
-        tv = (TextView) popup.findViewById(R.id.tv);
+        if (isInEditMode())return;
+        init = false;
 
-        setVisibility(View.INVISIBLE);
+        bringToFront();
+        popupParent = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_grouppopup, this, false);
+        cellContainer = (CellContainer) popupParent.findViewById(R.id.cc);
+        title = (TextView) popupParent.findViewById(R.id.tv);
+
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (dismissListener != null)
+                    dismissListener.onDismiss();
                 setVisibility(View.INVISIBLE);
-                p.dismiss();
+                dismissPopup();
             }
         });
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        if (!init){
+            init = true;
+            setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void dismissPopup(){
+        removeAllViews();
+        cellContainer.removeAllViews();
+        setVisibility(View.INVISIBLE);
     }
 
     public boolean showWindowV(final Desktop.Item item, final View view, final boolean fromDock) {
         if (getVisibility() == View.VISIBLE)return false;
 
         setVisibility(View.VISIBLE);
+        popupParent.setVisibility(View.VISIBLE);
         final Context c = view.getContext();
 
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.actions.length);
-        cc.setGridSize(cellSize[0], cellSize[1]);
+        cellContainer.setGridSize(cellSize[0], cellSize[1]);
 
         int iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(c).generalSettings.iconSize, c);
+        int textHeight = Tool.convertDpToPixel(22,c);
 
-        popup.getLayoutParams().width = (int)(iconSize + iconSize / 2.5f) * cellSize[0];
-        popup.getLayoutParams().height = (iconSize*2) * cellSize[1]+ popup.getPaddingBottom();
+        int contentPadding = Tool.convertDpToPixel(5,c);
 
-        cc.removeAllViews();
         for (int x2 = 0; x2 < cellSize[0]; x2++) {
             for (int y2 = 0; y2 < cellSize[1]; y2++) {
                 if (y2 * cellSize[0] + x2 > item.actions.length - 1) continue;
@@ -89,6 +124,8 @@ public class GroupPopupView extends FrameLayout {
                 iv.getLayoutParams().width = iconSize;
                 iv.getLayoutParams().height = iconSize;
 
+                tv.getLayoutParams().height = textHeight;
+
                 tv.setText(app.appName);
                 iv.setImageDrawable(app.icon);
 
@@ -96,6 +133,10 @@ public class GroupPopupView extends FrameLayout {
                 itemView.setOnLongClickListener(new OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view2) {
+//                        Home.desktop.previousPage = Home.desktop.getCurrentItem();
+//                        Home.desktop.previousItemView = view;
+//                        Home.desktop.previousItem = Desktop.Item.fromGroupItem(item);
+
                         if (fromDock)
                             LauncherSettings.getInstance(getContext()).dockData.remove(item);
                         else
@@ -128,10 +169,13 @@ public class GroupPopupView extends FrameLayout {
                         if (dapps == null)
                             return true;
 
-                        p.dismiss();
+                        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                        Intent i = new Intent();
+                        i.putExtra("mDragData",Desktop.Item.newAppItem(dapps));
+                        ClipData data = ClipData.newIntent("mDragIntent", i);
+                        itemView.startDrag(data, new GoodDragShadowBuilder(itemView),new DragAction(DragAction.Action.ACTION_APP,0), 0);
 
-                        setVisibility(View.INVISIBLE);
-                        view.performClick();
+                        dismissPopup();
                         return true;
                     }
                 });
@@ -141,18 +185,18 @@ public class GroupPopupView extends FrameLayout {
                         Tool.createScaleInScaleOutAnim(view, new Runnable() {
                             @Override
                             public void run() {
-                                p.dismiss();
+                                dismissPopup();
                                 setVisibility(View.INVISIBLE);
                                 Tool.startApp(c, app);
                             }
                         });
                     }
                 });
-                cc.addViewToGrid(itemView, x2, y2, 1, 1);
+                cellContainer.addViewToGrid(itemView, x2, y2, 1, 1);
             }
         }
-        tv.setText(item.name);
-        tv.setOnClickListener(new OnClickListener() {
+        title.setText(item.name);
+        title.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Tool.askForText("Rename", item.name, getContext(), new Tool.OnTextGotListener() {
@@ -168,23 +212,61 @@ public class GroupPopupView extends FrameLayout {
                             LauncherSettings.getInstance(getContext()).dockData.add(item);
                         else
                             LauncherSettings.getInstance(getContext()).desktopData.get(Home.desktop.getCurrentItem()).add(item);
-                        tv.setText(str);
+                        title.setText(str);
                     }
                 });
             }
         });
 
-        p = new PopupWindow(popup, popup.getLayoutParams().width, popup.getLayoutParams().height);
-        p.setOnDismissListener(new PopupWindow.OnDismissListener() {
+        dismissListener = new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 TextView otv = (TextView) view.findViewById(R.id.tv);
                 if (!otv.getText().toString().isEmpty())
-                    otv.setText(tv.getText());
+                    otv.setText(title.getText());
                 ((GroupIconDrawable) ((ImageView) view.findViewById(R.id.iv)).getDrawable()).popBack();
             }
-        });
-        p.showAsDropDown(view,0,-view.getHeight());
+        };
+
+        int popupWidth = contentPadding*4 + popupParent.getContentPaddingLeft() + popupParent.getContentPaddingRight() + (iconSize) * cellSize[0];
+        popupParent.getLayoutParams().width = popupWidth;
+        int popupHeight = contentPadding*2 + popupParent.getContentPaddingTop() + popupParent.getContentPaddingBottom() + Tool.convertDpToPixel(30, c)
+                + (iconSize + textHeight) * cellSize[1];
+        popupParent.getLayoutParams().height = popupHeight;
+
+        int[] coord = new int[2];
+        view.getLocationInWindow(coord);
+
+        coord[0] += view.getWidth()/2;
+        coord[1] += view.getHeight()/2;
+
+        coord[0] -= popupWidth/2;
+        coord[1] -= popupHeight/2;
+
+        int width = getWidth();
+        int height = getHeight();
+
+        if (coord[0]+popupWidth > width){
+            coord[0] += width - (coord[0]+popupWidth);
+        }
+        if (coord[1]+popupHeight > height){
+            coord[1] += height - (coord[1]+popupHeight);
+        }
+        if (coord[0]< 0){
+            coord[0] -= view.getWidth()/2;
+            coord[0] += popupWidth/2;
+        }
+        if (coord[1] < 0){
+            coord[1] -= view.getHeight()/2;
+            coord[1] += popupHeight/2;
+        }
+
+        popupParent.setPivotX(0);
+        popupParent.setPivotX(0);
+        popupParent.setX(coord[0]);
+        popupParent.setY(coord[1]);
+
+        addView(popupParent);
         return true;
     }
 
