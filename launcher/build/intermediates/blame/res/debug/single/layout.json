@@ -1,11 +1,11 @@
 [
     {
-        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
-        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
-    },
-    {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_app.xml",
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_app.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
     {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
