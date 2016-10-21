@@ -181,17 +181,22 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                     if (addItemToCurrentPage(item, (int) p2.getX(), (int) p2.getY() )) {
                         Home.desktop.consumeRevert();
                         Home.dock.consumeRevert();
+                    }else {
+                        Home.dock.revertLastDraggedItem();
+                        Home.desktop.revertLastDraggedItem();
                     }
                 }
                 if (item.type == Desktop.Item.Type.APP  || item.type == Item.Type.GROUP) {
                     if (addItemToCurrentPage(item, (int) p2.getX(), (int) p2.getY())) {
                         Home.desktop.consumeRevert();
                         Home.dock.consumeRevert();
+                    }else {
+                        Home.dock.revertLastDraggedItem();
+                        Home.desktop.revertLastDraggedItem();
                     }
                 }
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
-                revertLastDraggedItem();
                 return true;
         }
         return false;
@@ -361,6 +366,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
 
     private View getGroupItemView(final Item item) {
         final ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, null);
+        item_layout.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         TextView tv = (TextView) item_layout.findViewById(R.id.tv);
         final ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
 
@@ -446,8 +452,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             @Override
             public void onClick(View view) {
                 //iv.animate().setDuration(150).scaleX(0.5f).scaleY(0.5f).setInterpolator(new AccelerateDecelerateInterpolator());
-
-                if (Home.groupPopup.showWindowV(item,view,false)){
+                if (Home.groupPopup.showWindowV(item,item_layout,false)){
                     ((GroupIconDrawable)(iv).getDrawable()).popUp();
                 }
             }
@@ -829,6 +834,16 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             item.spanY = 1;
             return item;
         }
+
+        public static Item fromGroupItem(Item gItem) {
+            Desktop.Item item = new Item();
+            item.type = Type.GROUP;
+            item.spanX = 1;
+            item.spanY = 1;
+            item.actions = gItem.actions.clone();
+            return item;
+        }
+
 
         public Item(Parcel in) {
             type = Type.valueOf(in.readString());

@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.benny.openlauncher.util.Tool;
+
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class CellContainer extends ViewGroup {
@@ -263,7 +265,6 @@ public class CellContainer extends ViewGroup {
         }
         return null;
     }
-
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
