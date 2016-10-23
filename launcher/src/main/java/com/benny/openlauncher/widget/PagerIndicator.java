@@ -40,8 +40,6 @@ public class PagerIndicator extends View{
         pad = Tool.convertDpToPixel(3,getContext());
         setWillNotDraw(false);
         dotPaint = new Paint();
-        //TypedValue typedValue = new TypedValue();
-        //getContext().getTheme().resolveAttribute(R.attr.colorViewBackground, typedValue, true);
         dotPaint.setColor(Color.WHITE);
         dotPaint.setAntiAlias(true);
     }
@@ -61,12 +59,19 @@ public class PagerIndicator extends View{
         invalidate();
     }
 
+    public int prePageCount;
+
     public void setViewPager(final SmoothViewPager pager){
         if (pager == null)return;
         this.pager = pager;
+        prePageCount = pager.getAdapter().getCount();
         pager.addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (prePageCount != pager.getAdapter().getCount()){
+                    getLayoutParams().width = Math.round(pager.getAdapter().getCount()*(dotSize+pad*2));
+                    prePageCount = pager.getAdapter().getCount();
+                }
                 invalidate();
             }
 
@@ -121,8 +126,9 @@ public class PagerIndicator extends View{
                     if (scaleFactor != targetFactor)
                         invalidate();
                 }
-                else
-                    canvas.drawCircle(dotSize/2+pad + (dotSize + pad * 2) * i, getHeight() / 2, dotSize / 2, dotPaint);
+                else {
+                    canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, getHeight() / 2, dotSize / 2, dotPaint);
+                }
             }
         }
     }

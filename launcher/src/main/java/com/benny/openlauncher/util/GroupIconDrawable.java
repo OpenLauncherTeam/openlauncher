@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -18,12 +19,12 @@ public class GroupIconDrawable extends Drawable{
 
     private int outlinepad;
     Bitmap[] icons;
-    public int iconSize;
+    public float iconSize;
     Paint paint;
     Paint paint2;
     Paint paint4;
     private int iconSizeDiv2;
-    private int padding;
+    private float padding;
 
     private float scaleFactor = 1;
 
@@ -34,15 +35,15 @@ public class GroupIconDrawable extends Drawable{
     private float sx = 1;
     private float sy = 1 ;
 
-    public GroupIconDrawable(Bitmap[] icons,int size){
+    public GroupIconDrawable(Bitmap[] icons,float size){
         init(icons,size);
     }
 
-    private void init(Bitmap[] icons,int size){
+    private void init(Bitmap[] icons,float size){
         this.icons = icons;
         this.iconSize = size;
         iconSizeDiv2 = Math.round(iconSize / 2f);
-        padding = iconSize /25;
+        padding = iconSize /25f;
 
         this.paint = new Paint();
         paint.setColor(Color.WHITE);
@@ -105,10 +106,10 @@ public class GroupIconDrawable extends Drawable{
 
         canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2-outlinepad,paint);
 
-        canvas.drawBitmap(icons[0],null,new Rect(padding,padding, iconSizeDiv2-padding, iconSizeDiv2-padding),paint2);
-        canvas.drawBitmap(icons[1],null,new Rect(iconSizeDiv2+padding,padding,iconSize-padding, iconSizeDiv2-padding),paint2);
-        canvas.drawBitmap(icons[2],null,new Rect(padding, iconSizeDiv2+padding, iconSizeDiv2-padding,iconSize-padding),paint2);
-        canvas.drawBitmap(icons[3],null,new Rect(iconSizeDiv2+padding, iconSizeDiv2+padding,iconSize-padding,iconSize-padding),paint2);
+        canvas.drawBitmap(icons[0],null,new RectF(padding,padding, iconSizeDiv2-padding, iconSizeDiv2-padding),paint2);
+        canvas.drawBitmap(icons[1],null,new RectF(iconSizeDiv2+padding,padding,iconSize-padding, iconSizeDiv2-padding),paint2);
+        canvas.drawBitmap(icons[2],null,new RectF(padding, iconSizeDiv2+padding, iconSizeDiv2-padding,iconSize-padding),paint2);
+        canvas.drawBitmap(icons[3],null,new RectF(iconSizeDiv2+padding, iconSizeDiv2+padding,iconSize-padding,iconSize-padding),paint2);
 
         canvas.clipRect(0,0,iconSize,iconSize, Region.Op.REPLACE);
 

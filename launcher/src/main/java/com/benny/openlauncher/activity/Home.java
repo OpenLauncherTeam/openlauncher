@@ -252,6 +252,7 @@ public class Home extends Activity {
         });
 
         desktopIndicator.setViewPager(desktop);
+        desktop.setPageIndicator(desktopIndicator);
 
         TypedValue typedValue = new TypedValue();
         getTheme().resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);

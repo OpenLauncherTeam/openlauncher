@@ -24,6 +24,8 @@ public class CellContainer extends ViewGroup {
 
     private Paint mPaint;
 
+    private Paint bgPaint;
+
     private boolean hideGrid = true;
 
     public boolean blockTouch= false;
@@ -95,11 +97,29 @@ public class CellContainer extends ViewGroup {
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setColor(Color.WHITE);
         mPaint.setAlpha(0);
+
+        bgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        bgPaint.setStyle(Paint.Style.FILL);
+        bgPaint.setColor(Color.WHITE);
+        bgPaint.setAlpha(0);
+    }
+
+    private boolean animateBackground;
+    public void animateBackgroundShow(){
+        animateBackground = true;
+        invalidate();
+    }
+
+    public void animateBackgroundHide(){
+        animateBackground = false;
+        invalidate();
     }
 
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        canvas.drawRect(0,0,getWidth(),getHeight(),bgPaint);
 
         float s = 7f;
         for (int x = 0; x < cellSpanHori; x++) {
@@ -134,6 +154,14 @@ public class CellContainer extends ViewGroup {
             invalidate();
         } else if ((!hideGrid) && mPaint.getAlpha() != 255) {
             mPaint.setAlpha(Math.min(mPaint.getAlpha() + 20, 255));
+            invalidate();
+        }
+
+        if (!animateBackground && bgPaint.getAlpha() != 0) {
+            bgPaint.setAlpha(Math.max(bgPaint.getAlpha() - 10, 0));
+            invalidate();
+        } else if (animateBackground && bgPaint.getAlpha() != 100) {
+            bgPaint.setAlpha(Math.min(bgPaint.getAlpha() + 10, 100));
             invalidate();
         }
     }
