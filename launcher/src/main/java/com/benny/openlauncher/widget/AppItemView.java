@@ -35,9 +35,6 @@ public class AppItemView extends View implements Drawable.Callback{
     }
 
     public void setIcon(Drawable icon, boolean isStatic) {
-//        if (isStatic)
-//            this.iconBitmap = Tool.drawableToBitmap(icon);
-
         this.icon = icon;
         this.icon.setCallback(this);
         invalidate();
@@ -72,7 +69,6 @@ public class AppItemView extends View implements Drawable.Callback{
 
     private float iconSize;
 
-    private Bitmap iconBitmap;
     private Drawable icon;
     private String label;
 
@@ -133,12 +129,7 @@ public class AppItemView extends View implements Drawable.Callback{
             canvas.drawText(label,x, getHeight() - heightPadding, textPaint);
         }
 
-        if (false) {
-            canvas.save();
-            canvas.translate((getWidth()-iconSize)/2,heightPadding);
-            canvas.drawBitmap(iconBitmap,null,new RectF(0,0,iconSize,iconSize),null);
-            canvas.restore();
-        }else if (icon != null){
+        if (icon != null){
             canvas.save();
             canvas.translate((getWidth()-iconSize)/2,heightPadding);
             icon.setBounds(0,0,(int)iconSize,(int)iconSize);
