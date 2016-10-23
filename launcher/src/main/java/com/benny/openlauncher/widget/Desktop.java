@@ -1,7 +1,5 @@
 package com.benny.openlauncher.widget;
 
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
@@ -11,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -62,6 +59,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
     public Item previousItem;
     public int previousPage = -1;
 
+    private PagerIndicator pageIndicator;
+
+    public void setPageIndicator(PagerIndicator pageIndicator){
+        this.pageIndicator = pageIndicator;
+    }
+
     public Desktop(Context c, AttributeSet attr) {
         super(c, attr);
         init(c);
@@ -98,19 +101,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         pageCount++;
 
         final int previousPage = getCurrentItem();
-        setAdapter(new Adapter());
-        initDesktopItem();
-
-        setCurrentItem(previousPage);
-        post(new Runnable() {
-            @Override
-            public void run() {
-                setCurrentItem(previousPage + 1);
-            }
-        });
+        ((Adapter)getAdapter()).addPageRight();
+        setCurrentItem(previousPage + 1);
 
         for (CellContainer cellContainer : pages)
             cellContainer.setHideGrid(false);
+
+        pageIndicator.invalidate();
     }
 
     public void addPageLeft() {
@@ -119,19 +116,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         pageCount++;
 
         final int previousPage = getCurrentItem();
-        setAdapter(new Adapter());
-        initDesktopItem();
-
-        setCurrentItem(previousPage);
-        post(new Runnable() {
-            @Override
-            public void run() {
-                setCurrentItem(previousPage - 1);
-            }
-        });
+        ((Adapter)getAdapter()).addPageLeft();
+        setCurrentItem(previousPage - 1);
 
         for (CellContainer cellContainer : pages)
             cellContainer.setHideGrid(false);
+
+        pageIndicator.invalidate();
     }
 
     public void removeCurrentPage() {
@@ -141,16 +132,18 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         pageCount--;
 
         int previousPage = getCurrentItem();
-        setAdapter(new Adapter());
-        initDesktopItem();
+        ((Adapter)getAdapter()).removePage(getCurrentItem());
 
-        for (View v : pages) {
-            ((View)v.getParent()).setAlpha(0);
-            ((View)v.getParent()).animate().alpha(1);
-            ((View)v.getParent()).setScaleX(0.7f);
-            ((View)v.getParent()).setScaleY(0.7f);
+        for (CellContainer v : pages) {
+            v.setAlpha(0);
+            v.animate().alpha(1);
+            v.setScaleX(0.7f);
+            v.setScaleY(0.7f);
+            v.animateBackgroundShow();
         }
         setCurrentItem(previousPage);
+
+        pageIndicator.invalidate();
     }
 
     @Override
@@ -276,29 +269,39 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
     }
 
     private View getAppItemView(final Item item) {
-        final ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, null);
-        TextView tv = (TextView) item_layout.findViewById(R.id.tv);
-        ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
-        iv.getLayoutParams().width = Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
-        iv.getLayoutParams().height = Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
-
         final AppManager.App app = AppManager.getInstance(getContext()).findApp(item.actions[0].getComponent().getPackageName(), item.actions[0].getComponent().getClassName());
         if (app == null) {
             return null;
         }
 
-        tv.setText(app.appName);
-        tv.setTextColor(Color.WHITE);
-        iv.setImageDrawable(app.icon);
-        item_layout.setOnDragListener(new OnDragListener() {
+        AppItemView view = new AppItemView.Builder(getContext())
+                .setAppItem(app)
+                .withOnClickLaunchApp(app)
+                .withOnTouchGetPosition()
+                .vibrateWhenLongPress()
+                .withOnLongClickDrag(item, DragAction.Action.ACTION_APP, new OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        //Remove the item from settings
+                        LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).remove(item);
+                        //end
+
+                        previousPage = getCurrentItem();
+                        previousItemView = v;
+                        previousItem = item;
+                        pages.get(getCurrentItem()).removeView(v);
+                        return false;
+                    }
+                })
+                .setTextColor(Color.WHITE)
+                .getView();
+
+
+        view.setOnDragListener(new OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
-                        if (((DragAction) dragEvent.getLocalState()).viewID == view.getId()) {
-                            Tool.print(true);
-                            return false;
-                        }
                         switch (((DragAction) dragEvent.getLocalState()).action) {
                             case ACTION_APP:
                             case ACTION_APP_DRAWER:
@@ -329,61 +332,40 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 return false;
             }
         });
-        item_layout.setId(UUID.randomUUID().hashCode());
-        item_layout.setOnTouchListener(Tool.getItemOnTouchListener());
-        item_layout.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                Intent i = new Intent();
-                i.putExtra("mDragData", item);
-                ClipData data = ClipData.newIntent("mDragIntent", i);
-                view.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.ACTION_APP, item_layout.getId()), 0);
 
-                //Remove the item from settings
-                LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).remove(item);
-                //end
-
-                previousPage = getCurrentItem();
-                previousItemView = view;
-                previousItem = item;
-                pages.get(getCurrentItem()).removeView(view);
-                return true;
-            }
-        });
-        item_layout.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Tool.createScaleInScaleOutAnim(view, new Runnable() {
-                    @Override
-                    public void run() {
-                        Tool.startApp(getContext(), app);
-                    }
-                });
-            }
-        });
-
-        return item_layout;
+        return view;
     }
 
     private View getGroupItemView(final Item item) {
-        final ViewGroup item_layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_app, null);
-        item_layout.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        TextView tv = (TextView) item_layout.findViewById(R.id.tv);
-        final ImageView iv = (ImageView) item_layout.findViewById(R.id.iv);
+        final AppItemView view = new AppItemView.Builder(getContext())
+                .withOnLongClickDrag(item, DragAction.Action.ACTION_GROUP, new OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        //Remove the item from settings
+                        LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).remove(item);
+                        //end
 
-        final int iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
-        iv.getLayoutParams().width = iconSize;
-        iv.getLayoutParams().height = iconSize;
+                        previousPage = getCurrentItem();
+                        previousItemView = v;
+                        previousItem = item;
+                        pages.get(getCurrentItem()).removeView(v);
+                        return false;
+                    }
+                })
+                .vibrateWhenLongPress()
+                .setTextColor(Color.WHITE)
+                .withOnTouchGetPosition()
+                .getView();
 
+        view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+
+        final float iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext());
         AppManager.App[] apps = new AppManager.App[item.actions.length];
-
         for (int i = 0; i < item.actions.length; i++) {
             apps[i] = AppManager.getInstance(getContext()).findApp(item.actions[i].getComponent().getPackageName(), item.actions[i].getComponent().getClassName());
             if (apps[i] == null)
                 return null;
         }
-
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {
             if (i < apps.length)
@@ -391,11 +373,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             else
                 icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
         }
-        iv.setImageDrawable(new GroupIconDrawable(icons, iconSize));
+        view.setIcon(new GroupIconDrawable(icons, iconSize),false);
+        view.setLabel((item.name));
 
-        tv.setText(item.name);
-        tv.setTextColor(Color.WHITE);
-        item_layout.setOnDragListener(new OnDragListener() {
+        view.setOnDragListener(new OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
@@ -429,38 +410,16 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 return false;
             }
         });
-        item_layout.setOnTouchListener(Tool.getItemOnTouchListener());
-        item_layout.setOnLongClickListener(new OnLongClickListener() {
+        view.setOnClickListener(new OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
-                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                Intent i = new Intent();
-                i.putExtra("mDragData", item);
-                ClipData data = ClipData.newIntent("mDragIntent", i);
-                view.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.ACTION_GROUP, 0), 0);
-
-                //Remove the item from settings
-                LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).remove(item);
-                //end
-
-                previousPage = getCurrentItem();
-                previousItemView = view;
-                previousItem = item;
-                pages.get(getCurrentItem()).removeView(view);
-                return true;
-            }
-        });
-        item_layout.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //iv.animate().setDuration(150).scaleX(0.5f).scaleY(0.5f).setInterpolator(new AccelerateDecelerateInterpolator());
-                if (Home.groupPopup.showWindowV(item, item_layout, false)) {
-                    ((GroupIconDrawable) (iv).getDrawable()).popUp();
+            public void onClick(View v) {
+                if (Home.groupPopup.showWindowV(item, view, false)) {
+                    ((GroupIconDrawable)view.getIcon()).popUp();
                 }
             }
         });
 
-        return item_layout;
+        return view;
     }
 
     private void scaleWidget(View view, Item item) {
@@ -545,7 +504,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 i.putExtra("mW", view.getWidth() / 2);
                 i.putExtra("mH", view.getHeight() / 2);
                 ClipData data = ClipData.newIntent("mDragIntent", i);
-                view.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.ACTION_WIDGET, 0), 0);
+                view.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.ACTION_WIDGET), 0);
 
                 //Remove the item from settings
                 LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).remove(item);
@@ -605,113 +564,35 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
 
     public class Adapter extends SmoothPagerAdapter {
 
-        float sacleFactor = 1f;
+        float scaleFactor = 1f;
 
         private MotionEvent currentEvent;
 
         public Adapter() {
             pages = new ArrayList<>();
             for (int i = 0; i < getCount(); i++) {
-                final FrameLayout parent = new FrameLayout(getContext());
-                CellContainer layout = new CellContainer(getContext());
-                final View bg = new View(getContext());
-                bg.setBackgroundResource(R.drawable.outlinebg);
-                //bg.setScaleType(ImageView.ScaleType.FIT_XY);
-                bg.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                bg.setAlpha(0);
-
-                parent.addView(bg);
-                parent.addView(layout);
-
-                layout.setSoundEffectsEnabled(false);
-                SimpleFingerGestures mySfg = new SimpleFingerGestures();
-                mySfg.setOnFingerGestureListener(new SimpleFingerGestures.OnFingerGestureListener() {
-                    @Override
-                    public boolean onSwipeUp(int i, long l, double v) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onSwipeDown(int i, long l, double v) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onSwipeLeft(int i, long l, double v) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onSwipeRight(int i, long l, double v) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onPinch(int i, long l, double v) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onUnpinch(int i, long l, double v) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onDoubleTap(int i) {
-                        LauncherAction.RunAction(LauncherAction.Action.LockScreen, getContext(), null);
-                        return true;
-                    }
-                });
-                layout.gestures = mySfg;
-                layout.setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.desktopGridx, LauncherSettings.getInstance(getContext()).generalSettings.desktopGridy);
-                layout.setOnTouchListener(new OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View view, MotionEvent motionEvent) {
-                        currentEvent = motionEvent;
-                        return false;
-                    }
-                });
-                layout.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        sacleFactor = 1f;
-                        for (final CellContainer v : pages) {
-                            v.blockTouch = false;
-                            ((ViewGroup)v.getParent()).getChildAt(0).animate().alpha(0);
-                            ((View)v.getParent()).animate().scaleX(sacleFactor).scaleY(sacleFactor).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                }
-                            });
-                        }
-                        if (!inEditMode)
-                            if (currentEvent != null)
-                                WallpaperManager.getInstance(view.getContext()).sendWallpaperCommand(view.getWindowToken(), WallpaperManager.COMMAND_TAP, (int) currentEvent.getX(), (int) currentEvent.getY(), 0, null);
-
-                        inEditMode = false;
-                        if (listener != null)
-                            listener.onFinished();
-                    }
-                });
-                layout.setOnLongClickListener(new OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View view) {
-                        sacleFactor = 0.7f;
-                        for (CellContainer v : pages) {
-                            v.blockTouch = true;
-
-                            ((ViewGroup)v.getParent()).getChildAt(0).animate().alpha(1);
-                            ((View)v.getParent()).animate().scaleX(sacleFactor).scaleY(sacleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
-                        }
-                        inEditMode = true;
-                        if (listener != null)
-                            listener.onStart();
-                        return true;
-                    }
-                });
-                pages.add(layout);
+                pages.add(getItemLayout());
             }
+        }
+
+        public void addPageLeft(){
+            pages.add(0,getItemLayout());
+            notifyDataSetChanged();
+        }
+
+        public void addPageRight(){
+            pages.add(getItemLayout());
+            notifyDataSetChanged();
+        }
+
+        public void removePage(int position){
+            pages.remove(position);
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
         }
 
         @Override
@@ -731,8 +612,95 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
 
         @Override
         public Object instantiateItem(ViewGroup container, int pos) {
-            ViewGroup layout = (ViewGroup)pages.get(pos).getParent();
+            ViewGroup layout = pages.get(pos);
             container.addView(layout);
+            return layout;
+        }
+
+        private CellContainer getItemLayout(){
+            CellContainer layout = new CellContainer(getContext());
+
+            layout.setSoundEffectsEnabled(false);
+            SimpleFingerGestures mySfg = new SimpleFingerGestures();
+            mySfg.setOnFingerGestureListener(new SimpleFingerGestures.OnFingerGestureListener() {
+                @Override
+                public boolean onSwipeUp(int i, long l, double v) {
+                    return false;
+                }
+
+                @Override
+                public boolean onSwipeDown(int i, long l, double v) {
+                    return false;
+                }
+
+                @Override
+                public boolean onSwipeLeft(int i, long l, double v) {
+                    return false;
+                }
+
+                @Override
+                public boolean onSwipeRight(int i, long l, double v) {
+                    return false;
+                }
+
+                @Override
+                public boolean onPinch(int i, long l, double v) {
+                    return false;
+                }
+
+                @Override
+                public boolean onUnpinch(int i, long l, double v) {
+                    return false;
+                }
+
+                @Override
+                public boolean onDoubleTap(int i) {
+                    LauncherAction.RunAction(LauncherAction.Action.LockScreen, getContext(), null);
+                    return true;
+                }
+            });
+            layout.gestures = mySfg;
+            layout.setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.desktopGridx, LauncherSettings.getInstance(getContext()).generalSettings.desktopGridy);
+            layout.setOnTouchListener(new OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    currentEvent = motionEvent;
+                    return false;
+                }
+            });
+            layout.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    scaleFactor = 1f;
+                    for (final CellContainer v : pages) {
+                        v.blockTouch = false;
+                        v.animateBackgroundHide();
+                        v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
+                    }
+                    if (!inEditMode)
+                        if (currentEvent != null)
+                            WallpaperManager.getInstance(view.getContext()).sendWallpaperCommand(view.getWindowToken(), WallpaperManager.COMMAND_TAP, (int) currentEvent.getX(), (int) currentEvent.getY(), 0, null);
+
+                    inEditMode = false;
+                    if (listener != null)
+                        listener.onFinished();
+                }
+            });
+            layout.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    scaleFactor = 0.7f;
+                    for (CellContainer v : pages) {
+                        v.blockTouch = true;
+                        v.animateBackgroundShow();
+                        v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
+                    }
+                    inEditMode = true;
+                    if (listener != null)
+                        listener.onStart();
+                    return true;
+                }
+            });
 
             return layout;
         }
