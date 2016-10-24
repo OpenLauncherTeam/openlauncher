@@ -150,6 +150,7 @@ public class DragOptionView extends CardView{
                             case ACTION_GROUP:
                             case ACTION_APP:
                             case ACTION_WIDGET:
+                            case ACTION_SHORTCUT:
                                 return true;
                         }
                     case DragEvent.ACTION_DRAG_ENTERED:
@@ -232,6 +233,14 @@ public class DragOptionView extends CardView{
                             cellContainer.setHideGrid(false);
                         return true;
                     case ACTION_GROUP:
+                        removeIcon.setVisibility(View.VISIBLE);
+                        animShowView();
+
+                        Home.dock.setHideGrid(false);
+                        for (CellContainer cellContainer : Home.desktop.pages)
+                            cellContainer.setHideGrid(false);
+                        return true;
+                    case ACTION_SHORTCUT:
                         removeIcon.setVisibility(View.VISIBLE);
                         animShowView();
 

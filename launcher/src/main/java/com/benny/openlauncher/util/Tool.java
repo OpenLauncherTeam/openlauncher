@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.*;
 import android.content.res.*;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
@@ -21,12 +23,15 @@ import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Tool
 {
@@ -88,6 +93,51 @@ public class Tool
             list.add(s);
         }
         return list.toArray(new String[list.size()]);
+    }
+
+    public static Drawable getIconFromID(Context context,String ID){
+        Drawable icon = null;
+        Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/" + ID);
+        if (bitmap != null){
+            icon = new BitmapDrawable(context.getResources(),bitmap);
+        }
+        return icon;
+    }
+
+    public static String saveIconAndReturnID(Context context,Bitmap bitmap){
+        int i = 0;
+        String filename = Integer.toString(i);
+
+        File f = new File(context.getFilesDir() + "/" + filename);
+
+        while (f.exists()) {
+            i++;
+            filename = Integer.toString(i);
+            f = new File(context.getFilesDir() + "/" + filename);
+        }
+
+        try {
+            f.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(f);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null)
+                    out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return String.valueOf(i);
     }
 
     public static Bitmap drawableToBitmap (Drawable drawable) {

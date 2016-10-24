@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
@@ -113,6 +114,16 @@ public class CellContainer extends ViewGroup {
     public void animateBackgroundHide(){
         animateBackground = false;
         invalidate();
+    }
+
+    public Point findFreeSpace(){
+        for (int x = 0; x < occupied.length; x++) {
+            for (int y = 0; y < occupied[x].length; y++) {
+                if (!occupied[x][y])
+                    return new Point(x,y);
+            }
+        }
+        return null;
     }
 
     @Override
