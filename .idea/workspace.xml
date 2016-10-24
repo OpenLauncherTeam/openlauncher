@@ -26,28 +26,22 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java" line="506" />
+    <bookmark url="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java" line="501" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58bfc817-6edf-408a-8db0-9ab3850a2884" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ItemViewFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ShortcutReceiver.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/launcher/build/intermediates/res/resources-debug.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/launcher/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/launcher/build/outputs/logs/manifest-merger-debug-report.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/single/layout.json" afterPath="$PROJECT_DIR$/launcher/build/intermediates/blame/res/debug/single/layout.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/launcher.iml" afterPath="$PROJECT_DIR$/launcher/launcher.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/launcher/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/DragAction.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/DragAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/DragNavigationControl.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/DragNavigationControl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/GroupIconDrawable.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/GroupIconDrawable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ItemViewFactory.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ItemViewFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/LauncherSettings.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/LauncherSettings.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/Tool.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/Tool.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/AppItemView.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/AppItemView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/CellContainer.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/CellContainer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Dock.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Dock.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/DragOptionView.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/DragOptionView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/GroupPopupView.java" afterPath="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/GroupPopupView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smoothviewpager/smoothviewpager.iml" afterPath="$PROJECT_DIR$/smoothviewpager/smoothviewpager.iml" />
     </list>
     <ignored path="OpenLauncher.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -164,15 +158,11 @@
       <file leaf-file-name="AppItemView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/AppItemView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="976">
-              <caret line="185" column="44" selection-start-line="185" selection-start-column="44" selection-end-line="185" selection-end-column="44" />
+            <state relative-caret-position="544">
+              <caret line="231" column="15" selection-start-line="221" selection-start-column="12" selection-end-line="231" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6626#7033#0" expanded="true" />
-                <element signature="e#6779#6999#0" expanded="true" />
-                <element signature="e#6998#6999#0" expanded="true" />
-                <element signature="e#7032#7033#0" expanded="true" />
-                <marker date="1477277773731" expanded="true" signature="6163:6526" ph="..." />
+                <marker date="1477308631784" expanded="true" signature="6195:6558" ph="..." />
               </folding>
             </state>
           </provider>
@@ -181,18 +171,18 @@
       <file leaf-file-name="ShortcutReceiver.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ShortcutReceiver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="51" column="43" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="43" />
+            <state relative-caret-position="290">
+              <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DragNavigationControl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DragNavigationControl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/DragNavigationControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="95" column="49" selection-start-line="95" selection-start-column="49" selection-end-line="95" selection-end-column="49" />
+            <state relative-caret-position="240">
+              <caret line="94" column="39" selection-start-line="94" selection-start-column="39" selection-end-line="94" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -201,8 +191,18 @@
       <file leaf-file-name="Home.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="418" column="23" selection-start-line="418" selection-start-column="23" selection-end-line="418" selection-end-column="23" />
+            <state relative-caret-position="328">
+              <caret line="115" column="49" selection-start-line="115" selection-start-column="49" selection-end-line="115" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LauncherSettings.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/LauncherSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="146">
+              <caret line="73" column="5" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -211,108 +211,47 @@
       <file leaf-file-name="Desktop.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="100" column="26" selection-start-line="100" selection-start-column="26" selection-end-line="100" selection-end-column="26" />
+            <state relative-caret-position="443">
+              <caret line="574" column="27" selection-start-line="574" selection-start-column="27" selection-end-line="574" selection-end-column="27" />
               <folding>
-                <element signature="e#3243#3244#0" expanded="true" />
-                <element signature="e#3278#3279#0" expanded="true" />
+                <element signature="imports" expanded="true" />
                 <element signature="method#consumeRevert#0;class#Desktop#0" expanded="false" />
                 <element signature="method#revertLastDraggedItem#0;class#Desktop#0" expanded="false" />
                 <element signature="method#onPageScrolled#0;class#Desktop#0" expanded="false" />
                 <element signature="class#Adapter#0;class#Desktop#0" expanded="false" />
                 <element signature="method#getItemLayout#0;class#Adapter#0;class#Desktop#0" expanded="false" />
-                <element signature="class#12478:13656" expanded="false" />
+                <element signature="class#12466:13644" expanded="false" />
                 <element signature="class#OnDesktopEditListener#0;class#Desktop#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Dock.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Dock.java">
+      <file leaf-file-name="GroupPopupView.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/GroupPopupView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ItemViewFactory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ItemViewFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="33" column="81" selection-start-line="33" selection-start-column="81" selection-end-line="33" selection-end-column="81" />
+            <state relative-caret-position="378">
+              <caret line="68" column="5" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#getShortcutView#0;class#ItemViewFactory#0" expanded="false" />
-                <element signature="e#1389#1913#0" expanded="true" />
-                <element signature="e#1912#1913#0" expanded="true" />
-                <element signature="method#getAppItemView#0;class#ItemViewFactory#0" expanded="false" />
-                <element signature="e#2671#3195#0" expanded="true" />
-                <element signature="e#3194#3195#0" expanded="true" />
-                <element signature="e#3301#5085#0" expanded="true" />
-                <element signature="e#5084#5085#0" expanded="true" />
-                <element signature="method#getGroupItemView#0;class#ItemViewFactory#0" expanded="false" />
-                <element signature="e#5352#5876#0" expanded="true" />
-                <element signature="e#5875#5876#0" expanded="true" />
-                <element signature="e#7071#8800#0" expanded="true" />
-                <element signature="e#8799#8800#0" expanded="true" />
-                <element signature="e#8835#9103#0" expanded="true" />
-                <element signature="e#9102#9103#0" expanded="true" />
-                <element signature="method#getShortcutView#1;class#ItemViewFactory#0" expanded="false" />
-                <element signature="e#9521#10199#0" expanded="true" />
-                <element signature="e#10198#10199#0" expanded="true" />
-                <element signature="method#getAppItemView#1;class#ItemViewFactory#0" expanded="false" />
-                <element signature="e#10940#11618#0" expanded="true" />
-                <element signature="e#11617#11618#0" expanded="true" />
-                <element signature="e#11724#13652#0" expanded="true" />
-                <element signature="e#13651#13652#0" expanded="true" />
-                <element signature="method#getGroupItemView#1;class#ItemViewFactory#0" expanded="false" />
-                <element signature="e#13927#14605#0" expanded="true" />
-                <element signature="e#14604#14605#0" expanded="true" />
-                <element signature="e#15779#17653#0" expanded="true" />
-                <element signature="e#17652#17653#0" expanded="true" />
-                <element signature="e#17688#17957#0" expanded="true" />
-                <element signature="e#17956#17957#0" expanded="true" />
-                <element signature="method#getWidgetView#0;class#ItemViewFactory#0" expanded="false" />
-                <element signature="e#18399#18543#0" expanded="true" />
-                <element signature="e#18542#18543#0" expanded="true" />
-                <element signature="e#19329#19623#0" expanded="true" />
-                <element signature="e#19622#19623#0" expanded="true" />
-                <element signature="e#19791#20986#0" expanded="true" />
-                <element signature="e#20985#20986#0" expanded="true" />
-                <element signature="e#21020#21395#0" expanded="true" />
-                <element signature="e#21394#21395#0" expanded="true" />
-                <element signature="e#21428#21803#0" expanded="true" />
-                <element signature="e#21802#21803#0" expanded="true" />
-                <element signature="e#21836#22211#0" expanded="true" />
-                <element signature="e#22210#22211#0" expanded="true" />
-                <element signature="e#22244#22619#0" expanded="true" />
-                <element signature="e#22618#22619#0" expanded="true" />
-                <element signature="method#scaleWidget#0;class#ItemViewFactory#0" expanded="false" />
-                <element signature="e#23254#23283#0" expanded="true" />
-                <element signature="method#updateWidgetOption#0;class#ItemViewFactory#0" expanded="false" />
+                <element signature="e#3923#5892#0" expanded="true" />
+                <element signature="e#5891#5892#0" expanded="true" />
+                <element signature="e#6133#6715#0" expanded="true" />
+                <element signature="e#6714#6715#0" expanded="true" />
+                <element signature="e#6787#7381#0" expanded="true" />
+                <element signature="e#7380#7381#0" expanded="true" />
+                <element signature="e#8648#9022#0" expanded="true" />
+                <element signature="e#9021#9022#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CellContainer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/CellContainer.java">
+      <file leaf-file-name="GroupIconDrawable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/GroupIconDrawable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="125" column="19" selection-start-line="125" selection-start-column="15" selection-end-line="125" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DragOptionView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/DragOptionView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2910">
-              <caret line="232" column="61" selection-start-line="232" selection-start-column="61" selection-end-line="232" selection-end-column="61" />
+            <state relative-caret-position="482">
+              <caret line="71" column="19" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -321,9 +260,25 @@
       <file leaf-file-name="Tool.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/Tool.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="101" column="69" selection-start-line="101" selection-start-column="69" selection-end-line="101" selection-end-column="69" />
+            <state relative-caret-position="290">
+              <caret line="97" column="40" selection-start-line="97" selection-start-column="40" selection-end-line="97" selection-end-column="40" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ItemViewFactory.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ItemViewFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="314">
+              <caret line="226" column="57" selection-start-line="226" selection-start-column="57" selection-end-line="226" selection-end-column="57" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#getWidgetView#0;class#ItemViewFactory#0" expanded="false" />
+                <element signature="method#scaleWidget#0;class#ItemViewFactory#0" expanded="false" />
+                <element signature="method#updateWidgetOption#0;class#ItemViewFactory#0" expanded="false" />
+                <marker date="1477311160184" expanded="false" signature="5212:5329" ph="(view, dragEvent) → {" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -3943,8 +3898,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/launcher/src/main/res/layout/view_searchbar_normal.xml" />
-        <option value="$PROJECT_DIR$/launcher/build/intermediates/res/merged/debug/layout/activity_minbaredit.xml" />
         <option value="$PROJECT_DIR$/smoothviewpager/src/main/java/com/bennyv5/smoothviewpager/SmoothViewPager.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/drawable/appdrawerbg.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/res/layout/item_appdrawerbtn.xml" />
@@ -3981,19 +3934,21 @@
         <option value="$PROJECT_DIR$/launcher/src/main/res/layout/item_new_app.xml" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/AppDrawer.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/GoodDragShadowBuilder.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/GroupPopupView.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/GroupIconDrawable.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/Tool.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/AppItemView.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/DragAction.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ItemViewFactory.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Dock.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/DragOptionView.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/CellContainer.java" />
-        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ShortcutReceiver.java" />
         <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/DragNavigationControl.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/Tool.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/AppManager.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/AppItemView.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ItemViewFactory.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/GroupIconDrawable.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/LauncherSettings.java" />
+        <option value="$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/GroupPopupView.java" />
       </list>
     </option>
   </component>
@@ -4047,7 +4002,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -4152,24 +4106,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OpenLauncher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="launcher" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
-      </pane>
-      <pane id="Scratches">
-        <subPane />
       </pane>
       <pane id="PackagesPane">
         <subPane>
@@ -4180,6 +4117,10 @@
             </PATH_ELEMENT>
           </PATH>
         </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches">
+        <subPane />
       </pane>
     </panes>
   </component>
@@ -4197,14 +4138,14 @@
     <property name="VectorAssetImportPath" value="E:\USER\ProjectData" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\USER\ProjectData\OpenLauncher\launcher\src\main\res\drawable" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\USER\ProjectData\OpenLauncher\materialpreffragment\src\main\res" />
       <recent name="E:\USER\ProjectData\OpenLauncher\materialpreffragment\src\main\res\drawable" />
       <recent name="E:\USER\ProjectData\OpenLauncher\materialpreffragment\src\main\java\com\bennnyv5\materialpreffragment" />
       <recent name="E:\USER\ProjectData\OpenLauncher\app\src\main\assets" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\USER\ProjectData\OpenLauncher\launcher\src\main\res\drawable" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.launcher">
@@ -4810,7 +4751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1477233091405</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="centralised all item view's creation to a single class ItemViewFactory and now support shortcut broadcast event and add shortcut to the home screen">
+      <created>1477280033749</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1477280033749</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TodoView">
@@ -4926,7 +4874,8 @@
     <MESSAGE value="Updated minbaractivity interface and quickcenter interface + fixed crashes on Android 4.4" />
     <MESSAGE value="Updated minbaractivity interface and quickcenter interface + fixed crashes on Android 4.4 + group item can now be drag out" />
     <MESSAGE value="remove nested layout of each app item , replaced by a new custom view, AppItemView" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove nested layout of each app item , replaced by a new custom view, AppItemView" />
+    <MESSAGE value="centralised all item view's creation to a single class ItemViewFactory and now support shortcut broadcast event and add shortcut to the home screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="centralised all item view's creation to a single class ItemViewFactory and now support shortcut broadcast event and add shortcut to the home screen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -4935,41 +4884,24 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/item_minbar.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/activity_minbaredit.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/IconListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="44" column="52" selection-start-line="44" selection-start-column="52" selection-end-line="44" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/activity_minbaredit.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/view_searchbar_nougat.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/view_searchbar_nougat.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/res/drawable/googlepill.xml">
@@ -4987,13 +4919,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/view_grouppopup.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="10" column="41" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/LauncherViewReference.java" />
@@ -5007,33 +4939,33 @@
     <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/AlphaAnimatableDrawable.java" />
     <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout-land/view_home.xml" />
     <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/activity_home.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="984">
           <caret line="41" column="51" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/item_note.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1032">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/view_home.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="3312">
           <caret line="138" column="41" selection-start-line="138" selection-start-column="41" selection-end-line="138" selection-end-column="41" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/QuickCenterItem.java">
@@ -5070,20 +5002,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/item_new_app.xml" />
     <entry file="file://$PROJECT_DIR$/launcher/src/main/res/layout/item_app.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
-        </state>
-      </provider>
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/AppManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3216">
-          <caret line="148" column="20" selection-start-line="148" selection-start-column="20" selection-end-line="148" selection-end-column="20" />
-          <folding />
+        <state relative-caret-position="72">
+          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -5139,19 +5063,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/GroupPopupView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3720">
-          <caret line="184" column="45" selection-start-line="184" selection-start-column="45" selection-end-line="184" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-24/android/view/View.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414120">
           <caret line="17678" column="67" selection-start-line="17678" selection-start-column="67" selection-end-line="17678" selection-end-column="67" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5275,19 +5190,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/GroupIconDrawable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1608">
-          <caret line="82" column="18" selection-start-line="82" selection-start-column="18" selection-end-line="82" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-24/android/app/LauncherActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3545">
           <caret line="247" column="17" selection-start-line="247" selection-start-column="17" selection-end-line="247" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5295,9 +5201,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-14522">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5359,130 +5262,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="11" column="82" selection-start-line="11" selection-start-column="67" selection-end-line="11" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/Tool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="101" column="69" selection-start-line="101" selection-start-column="69" selection-end-line="101" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/AppItemView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="976">
-          <caret line="185" column="44" selection-start-line="185" selection-start-column="44" selection-end-line="185" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6626#7033#0" expanded="true" />
-            <element signature="e#6779#6999#0" expanded="true" />
-            <element signature="e#6998#6999#0" expanded="true" />
-            <element signature="e#7032#7033#0" expanded="true" />
-            <marker date="1477277773731" expanded="true" signature="6163:6526" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/DragOptionView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2910">
+        <state relative-caret-position="5064">
           <caret line="232" column="61" selection-start-line="232" selection-start-column="61" selection-end-line="232" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ItemViewFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="33" column="81" selection-start-line="33" selection-start-column="81" selection-end-line="33" selection-end-column="81" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getShortcutView#0;class#ItemViewFactory#0" expanded="false" />
-            <element signature="e#1389#1913#0" expanded="true" />
-            <element signature="e#1912#1913#0" expanded="true" />
-            <element signature="method#getAppItemView#0;class#ItemViewFactory#0" expanded="false" />
-            <element signature="e#2671#3195#0" expanded="true" />
-            <element signature="e#3194#3195#0" expanded="true" />
-            <element signature="e#3301#5085#0" expanded="true" />
-            <element signature="e#5084#5085#0" expanded="true" />
-            <element signature="method#getGroupItemView#0;class#ItemViewFactory#0" expanded="false" />
-            <element signature="e#5352#5876#0" expanded="true" />
-            <element signature="e#5875#5876#0" expanded="true" />
-            <element signature="e#7071#8800#0" expanded="true" />
-            <element signature="e#8799#8800#0" expanded="true" />
-            <element signature="e#8835#9103#0" expanded="true" />
-            <element signature="e#9102#9103#0" expanded="true" />
-            <element signature="method#getShortcutView#1;class#ItemViewFactory#0" expanded="false" />
-            <element signature="e#9521#10199#0" expanded="true" />
-            <element signature="e#10198#10199#0" expanded="true" />
-            <element signature="method#getAppItemView#1;class#ItemViewFactory#0" expanded="false" />
-            <element signature="e#10940#11618#0" expanded="true" />
-            <element signature="e#11617#11618#0" expanded="true" />
-            <element signature="e#11724#13652#0" expanded="true" />
-            <element signature="e#13651#13652#0" expanded="true" />
-            <element signature="method#getGroupItemView#1;class#ItemViewFactory#0" expanded="false" />
-            <element signature="e#13927#14605#0" expanded="true" />
-            <element signature="e#14604#14605#0" expanded="true" />
-            <element signature="e#15779#17653#0" expanded="true" />
-            <element signature="e#17652#17653#0" expanded="true" />
-            <element signature="e#17688#17957#0" expanded="true" />
-            <element signature="e#17956#17957#0" expanded="true" />
-            <element signature="method#getWidgetView#0;class#ItemViewFactory#0" expanded="false" />
-            <element signature="e#18399#18543#0" expanded="true" />
-            <element signature="e#18542#18543#0" expanded="true" />
-            <element signature="e#19329#19623#0" expanded="true" />
-            <element signature="e#19622#19623#0" expanded="true" />
-            <element signature="e#19791#20986#0" expanded="true" />
-            <element signature="e#20985#20986#0" expanded="true" />
-            <element signature="e#21020#21395#0" expanded="true" />
-            <element signature="e#21394#21395#0" expanded="true" />
-            <element signature="e#21428#21803#0" expanded="true" />
-            <element signature="e#21802#21803#0" expanded="true" />
-            <element signature="e#21836#22211#0" expanded="true" />
-            <element signature="e#22210#22211#0" expanded="true" />
-            <element signature="e#22244#22619#0" expanded="true" />
-            <element signature="e#22618#22619#0" expanded="true" />
-            <element signature="method#scaleWidget#0;class#ItemViewFactory#0" expanded="false" />
-            <element signature="e#23254#23283#0" expanded="true" />
-            <element signature="method#updateWidgetOption#0;class#ItemViewFactory#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/CellContainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
+        <state relative-caret-position="2664">
           <caret line="125" column="19" selection-start-line="125" selection-start-column="15" selection-end-line="125" selection-end-column="19" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="418" column="23" selection-start-line="418" selection-start-column="23" selection-end-line="418" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="100" column="26" selection-start-line="100" selection-start-column="26" selection-end-line="100" selection-end-column="26" />
-          <folding>
-            <element signature="e#3243#3244#0" expanded="true" />
-            <element signature="e#3278#3279#0" expanded="true" />
-            <element signature="method#consumeRevert#0;class#Desktop#0" expanded="false" />
-            <element signature="method#revertLastDraggedItem#0;class#Desktop#0" expanded="false" />
-            <element signature="method#onPageScrolled#0;class#Desktop#0" expanded="false" />
-            <element signature="class#Adapter#0;class#Desktop#0" expanded="false" />
-            <element signature="method#getItemLayout#0;class#Adapter#0;class#Desktop#0" expanded="false" />
-            <element signature="class#12478:13656" expanded="false" />
-            <element signature="class#OnDesktopEditListener#0;class#Desktop#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5494,19 +5289,127 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ShortcutReceiver.java">
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-24/java/io/File.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="51" column="43" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="43" />
+        <state relative-caret-position="5472">
+          <caret line="259" column="11" selection-start-line="259" selection-start-column="11" selection-end-line="259" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/DragNavigationControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="95" column="49" selection-start-line="95" selection-start-column="49" selection-end-line="95" selection-end-column="49" />
+        <state relative-caret-position="240">
+          <caret line="94" column="39" selection-start-line="94" selection-start-column="39" selection-end-line="94" selection-end-column="39" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/activity/Home.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="115" column="49" selection-start-line="115" selection-start-column="49" selection-end-line="115" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/AppManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="33" column="62" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/Desktop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="574" column="27" selection-start-line="574" selection-start-column="27" selection-end-line="574" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#consumeRevert#0;class#Desktop#0" expanded="false" />
+            <element signature="method#revertLastDraggedItem#0;class#Desktop#0" expanded="false" />
+            <element signature="method#onPageScrolled#0;class#Desktop#0" expanded="false" />
+            <element signature="class#Adapter#0;class#Desktop#0" expanded="false" />
+            <element signature="method#getItemLayout#0;class#Adapter#0;class#Desktop#0" expanded="false" />
+            <element signature="class#12466:13644" expanded="false" />
+            <element signature="class#OnDesktopEditListener#0;class#Desktop#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/Tool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="97" column="40" selection-start-line="97" selection-start-column="40" selection-end-line="97" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/LauncherSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="73" column="5" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/AppItemView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="231" column="15" selection-start-line="221" selection-start-column="12" selection-end-line="231" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1477308631784" expanded="true" signature="6195:6558" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ShortcutReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/ItemViewFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="226" column="57" selection-start-line="226" selection-start-column="57" selection-end-line="226" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getWidgetView#0;class#ItemViewFactory#0" expanded="false" />
+            <element signature="method#scaleWidget#0;class#ItemViewFactory#0" expanded="false" />
+            <element signature="method#updateWidgetOption#0;class#ItemViewFactory#0" expanded="false" />
+            <marker date="1477311160184" expanded="false" signature="5212:5329" ph="(view, dragEvent) → {" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/util/GroupIconDrawable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="71" column="19" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/main/java/com/benny/openlauncher/widget/GroupPopupView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="68" column="5" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3923#5892#0" expanded="true" />
+            <element signature="e#5891#5892#0" expanded="true" />
+            <element signature="e#6133#6715#0" expanded="true" />
+            <element signature="e#6714#6715#0" expanded="true" />
+            <element signature="e#6787#7381#0" expanded="true" />
+            <element signature="e#7380#7381#0" expanded="true" />
+            <element signature="e#8648#9022#0" expanded="true" />
+            <element signature="e#9021#9022#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

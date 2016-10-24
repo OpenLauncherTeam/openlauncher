@@ -132,12 +132,12 @@
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_alert_dialog_material.xml"
     },
     {
-        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_separator.xml",
-        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_item_separator.xml"
-    },
-    {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_separator.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_item_separator.xml"
     },
     {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_basic.xml",
