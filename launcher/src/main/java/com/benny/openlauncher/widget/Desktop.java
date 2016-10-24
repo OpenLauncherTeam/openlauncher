@@ -229,7 +229,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         if (item.type == Desktop.Item.Type.APP)
             itemView = ItemViewFactory.getAppItemView(this,item);
         else if (item.type == Desktop.Item.Type.GROUP)
-            itemView = ItemViewFactory.getWidgetView(this,item);
+            itemView = ItemViewFactory.getGroupItemView(this,item);
         else if (item.type == Item.Type.WIDGET)
             itemView = ItemViewFactory.getWidgetView(this,item);
         else if (item.type == Item.Type.SHORTCUT)
@@ -252,9 +252,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             //end
 
             View itemView = null;
-            if (item.type == Desktop.Item.Type.APP)
+            if (item.type == Item.Type.APP)
                 itemView = ItemViewFactory.getAppItemView(this,item);
-            else if (item.type == Desktop.Item.Type.GROUP)
+            else if (item.type ==  Item.Type.GROUP)
                 itemView = ItemViewFactory.getGroupItemView(this,item);
             else if (item.type == Item.Type.WIDGET)
                 itemView = ItemViewFactory.getWidgetView(this,item);
@@ -433,7 +433,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         public int widgetID;
         public int spanX = 1;
         public int spanY = 1;
-        public String shortCutIconID = "";
 
         public SimpleItem() {
         }
@@ -447,7 +446,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             this.spanX = in.spanX;
             this.spanY = in.spanY;
             this.widgetID = in.widgetID;
-            this.shortCutIconID = in.shortCutIconID;
         }
     }
 
@@ -464,8 +462,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                 return new Item[size];
             }
         };
-
-        public String shortCutIconID = "";
 
         public Type type;
 
@@ -486,7 +482,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                     && Arrays.equals(((Item) obj).actions, this.actions)
                     && ((Item) obj).x == this.x
                     && ((Item) obj).y == this.y
-                    && ((Item) obj).shortCutIconID.equals(((Item) obj).shortCutIconID)
                     ;
         }
 
@@ -523,7 +518,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             this.spanX = in.spanX;
             this.spanY = in.spanY;
             this.widgetID = in.widgetID;
-            this.shortCutIconID = in.shortCutIconID;
         }
 
         public static Item newAppItem(AppManager.App app) {
@@ -548,9 +542,21 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
             item.spanX = 1;
             item.spanY = 1;
 
+            String iconID = Tool.saveIconAndReturnID(context,icon);
+            intent.putExtra("shortCutIconID",iconID);
+            intent.putExtra("shortCutName",name);
+
             item.actions = new Intent[]{intent};
-            item.name = name;
-            item.shortCutIconID = Tool.saveIconAndReturnID(context,icon);
+            return item;
+        }
+
+        public static Item newShortcutItem(Intent intent) {
+            Desktop.Item item = new Item();
+            item.type = Type.SHORTCUT;
+            item.spanX = 1;
+            item.spanY = 1;
+
+            item.actions = new Intent[]{intent};
             return item;
         }
 
@@ -567,6 +573,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         public Item(Parcel in) {
             type = Type.valueOf(in.readString());
             switch (type) {
+                case SHORTCUT:
                 case GROUP:
                 case APP:
                     actions = in.createTypedArray(Intent.CREATOR);
@@ -575,9 +582,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                     widgetID = in.readInt();
                     spanX = in.readInt();
                     spanY = in.readInt();
-                    break;
-                case SHORTCUT:
-                    shortCutIconID = in.readString();
                     break;
             }
             name = in.readString();
@@ -637,6 +641,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
         public void writeToParcel(Parcel out, int flags) {
             out.writeString(type.toString());
             switch (type) {
+                case SHORTCUT:
                 case GROUP:
                 case APP:
                     out.writeTypedArray(actions, 0);
@@ -645,9 +650,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener {
                     out.writeInt(widgetID);
                     out.writeInt(spanX);
                     out.writeInt(spanY);
-                    break;
-                case SHORTCUT:
-                    out.writeString(shortCutIconID);
                     break;
             }
             out.writeString(name);

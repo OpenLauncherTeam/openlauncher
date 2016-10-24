@@ -28,25 +28,43 @@ public class LauncherSettings {
 
     public SharedPreferences pref;
 
-    public Context c;
+    public Context context;
 
     private static final String DesktopDataFileName = "desktopData.json";
     private static final String DockDataFileName = "dockData.json";
     private static final String GeneralSettingsFileName = "generalSettings.json";
 
+    private ArrayList<String> iconCacheIDs = new ArrayList<>();
+
     private LauncherSettings(Context c) {
-        this.c = c;
+        this.context = c;
         pref = c.getSharedPreferences("LauncherSettings",Context.MODE_PRIVATE);
+        iconCacheIDs.clear();
+
         readSettings();
     }
 
     private void readDockData(Gson gson){
         try {
-            JsonReader reader = new JsonReader(new InputStreamReader(c.openFileInput(DockDataFileName)));
+            JsonReader reader = new JsonReader(new InputStreamReader(context.openFileInput(DockDataFileName)));
             reader.beginArray();
             while (reader.hasNext()) {
                 Desktop.SimpleItem item = gson.fromJson(reader,Desktop.SimpleItem.class);
-                dockData.add(new Desktop.Item(item));
+                Desktop.Item item1 = new Desktop.Item(item);
+                dockData.add(item1);
+
+                //We get all the icon cache id
+                if (item1.type == Desktop.Item.Type.SHORTCUT){
+                    iconCacheIDs.add(item1.actions[0].getStringExtra("shortCutIconID"));
+                }
+                if (item1.type == Desktop.Item.Type.GROUP){
+                    for (int i = 0; i < item1.actions.length; i++) {
+                        String ID;
+                        if ((ID = item1.actions[i].getStringExtra("shortCutIconID")) != null){
+                            iconCacheIDs.add(ID);
+                        }
+                    }
+                }
             }
             reader.endArray();
             reader.close();
@@ -57,14 +75,28 @@ public class LauncherSettings {
 
     private void readDesktopData(Gson gson){
         try {
-            JsonReader reader = new JsonReader(new InputStreamReader(c.openFileInput(DesktopDataFileName)));
+            JsonReader reader = new JsonReader(new InputStreamReader(context.openFileInput(DesktopDataFileName)));
             reader.beginArray();
             while (reader.hasNext()) {
                 reader.beginArray();
                 ArrayList<Desktop.Item> items = new ArrayList<>();
                 while (reader.hasNext()) {
                     Desktop.SimpleItem item = gson.fromJson(reader,Desktop.SimpleItem.class);
-                    items.add(new Desktop.Item(item));
+                    Desktop.Item item1 = new Desktop.Item(item);
+                    items.add(item1);
+
+                    //We get all the icon cache id
+                    if (item.type == Desktop.Item.Type.SHORTCUT){
+                        iconCacheIDs.add(item1.actions[0].getStringExtra("shortCutIconID"));
+                    }
+                    if (item1.type == Desktop.Item.Type.GROUP){
+                        for (int i = 0; i < item1.actions.length; i++) {
+                            String ID;
+                            if ((ID = item1.actions[i].getStringExtra("shortCutIconID")) != null){
+                                iconCacheIDs.add(ID);
+                            }
+                        }
+                    }
                 }
                 desktopData.add(items);
                 reader.endArray();
@@ -77,14 +109,13 @@ public class LauncherSettings {
     }
 
     private void readSettings(){
-        //pref.edit().clear().commit();
-
         Gson gson = new Gson();
 
         readDockData(gson);
         readDesktopData(gson);
+        Tool.checkForUnusedIconAndDelete(context, iconCacheIDs);
 
-        String raw = Tool.getStringFromFile(GeneralSettingsFileName,c);
+        String raw = Tool.getStringFromFile(GeneralSettingsFileName, context);
         if (raw == null)
             generalSettings = new GeneralSettings();
         else
@@ -107,9 +138,9 @@ public class LauncherSettings {
                 page.add(new Desktop.SimpleItem(item));
             }
         }
-        Tool.writeToFile(DockDataFileName,gson.toJson(simpleDockData),c);
-        Tool.writeToFile(DesktopDataFileName,gson.toJson(simpleDesktopData),c);
-        Tool.writeToFile(GeneralSettingsFileName,gson.toJson(generalSettings),c);
+        Tool.writeToFile(DockDataFileName,gson.toJson(simpleDockData), context);
+        Tool.writeToFile(DesktopDataFileName,gson.toJson(simpleDesktopData), context);
+        Tool.writeToFile(GeneralSettingsFileName,gson.toJson(generalSettings), context);
     }
 
     public static class GeneralSettings {

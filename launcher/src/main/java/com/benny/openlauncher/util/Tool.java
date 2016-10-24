@@ -95,9 +95,31 @@ public class Tool
         return list.toArray(new String[list.size()]);
     }
 
+    public static void checkForUnusedIconAndDelete(Context context,ArrayList<String> IDs){
+        File dir = new File(context.getFilesDir() + "/iconCache");
+        if (dir.exists()){
+            ArrayList<String> availableIDs = new ArrayList<>();
+            File[] iconCaches = dir.listFiles();
+            for (int i = 0; i < iconCaches.length; i++) {
+                availableIDs.add(iconCaches[i].getName());
+            }
+            availableIDs.removeAll(IDs);
+            for (int i = 0; i < availableIDs.size(); i++) {
+                for (int j = 0; j < iconCaches.length; j++) {
+                    if (iconCaches[j].getName().equals(availableIDs.get(i))){
+                        iconCaches[j].delete();
+                        continue;
+                    }
+                }
+            }
+        }
+    }
+
     public static Drawable getIconFromID(Context context,String ID){
+        if (ID == null)
+            return null;
         Drawable icon = null;
-        Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/" + ID);
+        Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/iconCache/" + ID);
         if (bitmap != null){
             icon = new BitmapDrawable(context.getResources(),bitmap);
         }
@@ -108,12 +130,16 @@ public class Tool
         int i = 0;
         String filename = Integer.toString(i);
 
-        File f = new File(context.getFilesDir() + "/" + filename);
+        File dir = new File(context.getFilesDir() + "/iconCache");
+        if (!dir.exists())
+            dir.mkdirs();
+
+        File f = new File(context.getFilesDir() + "/iconCache/" + filename);
 
         while (f.exists()) {
             i++;
             filename = Integer.toString(i);
-            f = new File(context.getFilesDir() + "/" + filename);
+            f = new File(context.getFilesDir() + "/iconCache/" + filename);
         }
 
         try {
@@ -141,6 +167,9 @@ public class Tool
     }
 
     public static Bitmap drawableToBitmap (Drawable drawable) {
+        if (drawable == null)
+            return null;
+
         Bitmap bitmap = null;
 
         if (drawable instanceof BitmapDrawable) {

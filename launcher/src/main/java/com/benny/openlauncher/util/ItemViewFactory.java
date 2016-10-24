@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.HapticFeedbackConstants;
@@ -33,7 +34,7 @@ public class ItemViewFactory {
     //Item view for dock
     public static View getShortcutView(final Dock dock, final Desktop.Item item) {
         AppItemView view = new AppItemView.Builder(dock.getContext())
-                .setShortItem(item)
+                .setShortcutItem(item.actions[0])
                 .withOnTouchGetPosition()
                 .vibrateWhenLongPress()
                 .withOnLongClickDrag(item, DragAction.Action.ACTION_SHORTCUT, new View.OnLongClickListener() {
@@ -51,6 +52,42 @@ public class ItemViewFactory {
                 })
                 .setTextColor(Color.WHITE)
                 .getView();
+        view.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                switch (dragEvent.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        switch (((DragAction) dragEvent.getLocalState()).action) {
+                            case ACTION_APP:
+                            case ACTION_APP_DRAWER:
+                            case ACTION_SHORTCUT:
+                                return true;
+                        }
+                        return false;
+                    case DragEvent.ACTION_DROP:
+                        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
+                        intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
+                        Desktop.Item dropitem = intent.getParcelableExtra("mDragData");
+                        if (dropitem.type == Desktop.Item.Type.APP || dropitem.type == Desktop.Item.Type.SHORTCUT) {
+                            LauncherSettings.getInstance(dock.getContext()).dockData.remove(item);
+                            dock.removeView(view);
+
+                            item.addActions(dropitem.actions[0]);
+                            item.name = "Unnamed";
+                            item.type = Desktop.Item.Type.GROUP;
+                            LauncherSettings.getInstance(dock.getContext()).dockData.add(item);
+                            dock.addAppToPosition(item);
+
+                            Home.desktop.consumeRevert();
+                            Home.dock.consumeRevert();
+                        }
+                        return true;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        return true;
+                }
+                return false;
+            }
+        });
         return view;
     }
 
@@ -90,6 +127,7 @@ public class ItemViewFactory {
                         switch (((DragAction) dragEvent.getLocalState()).action) {
                             case ACTION_APP:
                             case ACTION_APP_DRAWER:
+                            case ACTION_SHORTCUT:
                                 return true;
                         }
                         return false;
@@ -97,7 +135,7 @@ public class ItemViewFactory {
                         Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
                         intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
                         Desktop.Item dropitem = intent.getParcelableExtra("mDragData");
-                        if (dropitem.type == Desktop.Item.Type.APP || dropitem.actions.length < GroupPopupView.GroupDef.maxItem) {
+                        if (dropitem.type == Desktop.Item.Type.APP || dropitem.type == Desktop.Item.Type.SHORTCUT) {
                             LauncherSettings.getInstance(dock.getContext()).dockData.remove(item);
                             dock.removeView(view);
 
@@ -144,21 +182,7 @@ public class ItemViewFactory {
 
         view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
-        final float iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(dock.getContext()).generalSettings.iconSize, dock.getContext());
-        AppManager.App[] apps = new AppManager.App[item.actions.length];
-        for (int i = 0; i < item.actions.length; i++) {
-            apps[i] = AppManager.getInstance(dock.getContext()).findApp(item.actions[i].getComponent().getPackageName(), item.actions[i].getComponent().getClassName());
-            if (apps[i] == null)
-                return null;
-        }
-        final Bitmap[] icons = new Bitmap[4];
-        for (int i = 0; i < 4; i++) {
-            if (i < apps.length)
-                icons[i] = Tool.drawableToBitmap(apps[i].icon);
-            else
-                icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
-        }
-        view.setIcon(new GroupIconDrawable(icons, iconSize),false);
+        view.setIcon(getGroupIconDrawable(dock.getContext(), item), false);
         view.setLabel((item.name));
 
         view.setOnDragListener(new View.OnDragListener() {
@@ -169,6 +193,7 @@ public class ItemViewFactory {
                         switch (((DragAction) dragEvent.getLocalState()).action) {
                             case ACTION_APP:
                             case ACTION_APP_DRAWER:
+                            case ACTION_SHORTCUT:
                                 return true;
                         }
                         return false;
@@ -176,7 +201,7 @@ public class ItemViewFactory {
                         Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
                         intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
                         Desktop.Item dropitem = intent.getParcelableExtra("mDragData");
-                        if (dropitem.type == Desktop.Item.Type.APP && item.actions.length < GroupPopupView.GroupDef.maxItem) {
+                        if ((dropitem.type == Desktop.Item.Type.APP || dropitem.type == Desktop.Item.Type.SHORTCUT) && item.actions.length < GroupPopupView.GroupDef.maxItem) {
                             LauncherSettings.getInstance(dock.getContext()).dockData.remove(item);
                             dock.removeView(view);
 
@@ -199,7 +224,7 @@ public class ItemViewFactory {
             @Override
             public void onClick(View v) {
                 if (Home.groupPopup.showWindowV(item, view, true)) {
-                    ((GroupIconDrawable)view.getIcon()).popUp();
+                    ((GroupIconDrawable) view.getIcon()).popUp();
                 }
             }
         });
@@ -210,7 +235,7 @@ public class ItemViewFactory {
     //Item view for desktop
     public static View getShortcutView(final Desktop desktop, final Desktop.Item item) {
         AppItemView view = new AppItemView.Builder(desktop.getContext())
-                .setShortItem(item)
+                .setShortcutItem(item.actions[0])
                 .withOnTouchGetPosition()
                 .vibrateWhenLongPress()
                 .withOnLongClickDrag(item, DragAction.Action.ACTION_SHORTCUT, new View.OnLongClickListener() {
@@ -229,6 +254,43 @@ public class ItemViewFactory {
                 })
                 .setTextColor(Color.WHITE)
                 .getView();
+
+        view.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                switch (dragEvent.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        switch (((DragAction) dragEvent.getLocalState()).action) {
+                            case ACTION_APP:
+                            case ACTION_APP_DRAWER:
+                            case ACTION_SHORTCUT:
+                                return true;
+                        }
+                        return false;
+                    case DragEvent.ACTION_DROP:
+                        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
+                        intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
+                        Desktop.Item dropitem = intent.getParcelableExtra("mDragData");
+                        if (dropitem.type == Desktop.Item.Type.APP || dropitem.type == Desktop.Item.Type.SHORTCUT) {
+                            LauncherSettings.getInstance(desktop.getContext()).desktopData.get(desktop.getCurrentItem()).remove(item);
+                            desktop.pages.get(desktop.getCurrentItem()).removeView(view);
+
+                            item.addActions(dropitem.actions[0]);
+                            item.name = "Unnamed";
+                            item.type = Desktop.Item.Type.GROUP;
+                            LauncherSettings.getInstance(desktop.getContext()).desktopData.get(desktop.getCurrentItem()).add(item);
+                            desktop.addItemToPagePosition(item, desktop.getCurrentItem());
+
+                            Home.desktop.consumeRevert();
+                            Home.dock.consumeRevert();
+                        }
+                        return true;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        return true;
+                }
+                return false;
+            }
+        });
         return view;
     }
 
@@ -269,6 +331,7 @@ public class ItemViewFactory {
                         switch (((DragAction) dragEvent.getLocalState()).action) {
                             case ACTION_APP:
                             case ACTION_APP_DRAWER:
+                            case ACTION_SHORTCUT:
                                 return true;
                         }
                         return false;
@@ -276,7 +339,7 @@ public class ItemViewFactory {
                         Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
                         intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
                         Desktop.Item dropitem = intent.getParcelableExtra("mDragData");
-                        if (dropitem.type == Desktop.Item.Type.APP || dropitem.actions.length < GroupPopupView.GroupDef.maxItem) {
+                        if (dropitem.type == Desktop.Item.Type.APP || dropitem.type == Desktop.Item.Type.SHORTCUT) {
                             LauncherSettings.getInstance(desktop.getContext()).desktopData.get(desktop.getCurrentItem()).remove(item);
                             desktop.pages.get(desktop.getCurrentItem()).removeView(view);
 
@@ -284,7 +347,7 @@ public class ItemViewFactory {
                             item.name = "Unnamed";
                             item.type = Desktop.Item.Type.GROUP;
                             LauncherSettings.getInstance(desktop.getContext()).desktopData.get(desktop.getCurrentItem()).add(item);
-                            desktop.addItemToPagePosition(item,desktop.getCurrentItem());
+                            desktop.addItemToPagePosition(item, desktop.getCurrentItem());
 
                             Home.desktop.consumeRevert();
                             Home.dock.consumeRevert();
@@ -322,21 +385,7 @@ public class ItemViewFactory {
 
         view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
-        final float iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(desktop.getContext()).generalSettings.iconSize, desktop.getContext());
-        AppManager.App[] apps = new AppManager.App[item.actions.length];
-        for (int i = 0; i < item.actions.length; i++) {
-            apps[i] = AppManager.getInstance(desktop.getContext()).findApp(item.actions[i].getComponent().getPackageName(), item.actions[i].getComponent().getClassName());
-            if (apps[i] == null)
-                return null;
-        }
-        final Bitmap[] icons = new Bitmap[4];
-        for (int i = 0; i < 4; i++) {
-            if (i < apps.length)
-                icons[i] = Tool.drawableToBitmap(apps[i].icon);
-            else
-                icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
-        }
-        view.setIcon(new GroupIconDrawable(icons, iconSize),false);
+        view.setIcon(getGroupIconDrawable(desktop.getContext(), item), false);
         view.setLabel((item.name));
 
         view.setOnDragListener(new View.OnDragListener() {
@@ -347,6 +396,7 @@ public class ItemViewFactory {
                         switch (((DragAction) dragEvent.getLocalState()).action) {
                             case ACTION_APP:
                             case ACTION_APP_DRAWER:
+                            case ACTION_SHORTCUT:
                                 return true;
                         }
                         return false;
@@ -354,7 +404,7 @@ public class ItemViewFactory {
                         Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
                         intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
                         Desktop.Item dropitem = intent.getParcelableExtra("mDragData");
-                        if (dropitem.type == Desktop.Item.Type.APP && item.actions.length < GroupPopupView.GroupDef.maxItem) {
+                        if ((dropitem.type == Desktop.Item.Type.APP || dropitem.type == Desktop.Item.Type.SHORTCUT) && item.actions.length < GroupPopupView.GroupDef.maxItem) {
                             LauncherSettings.getInstance(desktop.getContext()).desktopData.get(desktop.getCurrentItem()).remove(item);
                             desktop.pages.get(desktop.getCurrentItem()).removeView(view);
 
@@ -377,7 +427,7 @@ public class ItemViewFactory {
             @Override
             public void onClick(View v) {
                 if (Home.groupPopup.showWindowV(item, view, false)) {
-                    ((GroupIconDrawable)view.getIcon()).popUp();
+                    ((GroupIconDrawable) view.getIcon()).popUp();
                 }
             }
         });
@@ -393,7 +443,7 @@ public class ItemViewFactory {
         widgetView.post(new Runnable() {
             @Override
             public void run() {
-                updateWidgetOption(desktop,item);
+                updateWidgetOption(desktop, item);
             }
         });
 
@@ -456,7 +506,7 @@ public class ItemViewFactory {
             public void onClick(View view) {
                 if (view.getScaleX() < 1) return;
                 item.spanY++;
-                scaleWidget(desktop,widgetContainer, item);
+                scaleWidget(desktop, widgetContainer, item);
                 widgetContainer.removeCallbacks(action);
                 widgetContainer.postDelayed(action, 2000);
             }
@@ -466,7 +516,7 @@ public class ItemViewFactory {
             public void onClick(View view) {
                 if (view.getScaleX() < 1) return;
                 item.spanX++;
-                scaleWidget(desktop,widgetContainer, item);
+                scaleWidget(desktop, widgetContainer, item);
                 widgetContainer.removeCallbacks(action);
                 widgetContainer.postDelayed(action, 2000);
             }
@@ -476,7 +526,7 @@ public class ItemViewFactory {
             public void onClick(View view) {
                 if (view.getScaleX() < 1) return;
                 item.spanY--;
-                scaleWidget(desktop,widgetContainer, item);
+                scaleWidget(desktop, widgetContainer, item);
                 widgetContainer.removeCallbacks(action);
                 widgetContainer.postDelayed(action, 2000);
             }
@@ -486,7 +536,7 @@ public class ItemViewFactory {
             public void onClick(View view) {
                 if (view.getScaleX() < 1) return;
                 item.spanX--;
-                scaleWidget(desktop,widgetContainer, item);
+                scaleWidget(desktop, widgetContainer, item);
                 widgetContainer.removeCallbacks(action);
                 widgetContainer.postDelayed(action, 2000);
             }
@@ -495,7 +545,7 @@ public class ItemViewFactory {
         return widgetContainer;
     }
 
-    private static void scaleWidget(Desktop desktop,View view, Desktop.Item item) {
+    private static void scaleWidget(Desktop desktop, View view, Desktop.Item item) {
         item.spanX = Math.min(item.spanX, 4);
         item.spanX = Math.max(item.spanX, 1);
         item.spanY = Math.min(item.spanY, 4);
@@ -511,18 +561,37 @@ public class ItemViewFactory {
             LauncherSettings.getInstance(desktop.getContext()).desktopData.get(desktop.getCurrentItem()).add(item);
             view.setLayoutParams(cellPositionToLayoutPrams);
 
-            updateWidgetOption(desktop,item);
+            updateWidgetOption(desktop, item);
 
         }
 
     }
 
-    private static void updateWidgetOption(Desktop desktop,Desktop.Item item){
+    private static void updateWidgetOption(Desktop desktop, Desktop.Item item) {
         Bundle newOps = new Bundle();
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, item.spanX * desktop.pages.get(desktop.getCurrentItem()).cellWidth);
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.spanX * desktop.pages.get(desktop.getCurrentItem()).cellWidth);
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.spanX * desktop.pages.get(desktop.getCurrentItem()).cellWidth);
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.spanY * desktop.pages.get(desktop.getCurrentItem()).cellHeight);
         Home.appWidgetManager.updateAppWidgetOptions(item.widgetID, newOps);
+    }
+
+    //Common methods
+    public static Drawable getGroupIconDrawable(Context context, Desktop.Item item) {
+        final float iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(context).generalSettings.iconSize, context);
+        final Bitmap[] icons = new Bitmap[4];
+        for (int i = 0; i < 4; i++) {
+            if (i < item.actions.length) {
+                if (item.actions[i].getStringExtra("shortCutIconID") != null)
+                    icons[i] = Tool.drawableToBitmap(Tool.getIconFromID(context, item.actions[i].getStringExtra("shortCutIconID")));
+                else {
+                    AppManager.App app = AppManager.getInstance(context).findApp(item.actions[i].getComponent().getPackageName(), item.actions[i].getComponent().getClassName());
+                    icons[i] = Tool.drawableToBitmap(app.icon);
+                }
+            } else {
+                icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
+            }
+        }
+        return new GroupIconDrawable(icons, iconSize);
     }
 }

@@ -3,22 +3,12 @@ package com.benny.openlauncher.widget;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.ViewUtils;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -28,6 +18,7 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.GoodDragShadowBuilder;
 import com.benny.openlauncher.util.GroupIconDrawable;
+import com.benny.openlauncher.util.ItemViewFactory;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 
@@ -58,7 +49,7 @@ public class GroupPopupView extends FrameLayout {
     }
 
     private void init() {
-        if (isInEditMode())return;
+        if (isInEditMode()) return;
         init = false;
 
         bringToFront();
@@ -80,20 +71,21 @@ public class GroupPopupView extends FrameLayout {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        if (!init){
+        if (!init) {
             init = true;
             setVisibility(View.INVISIBLE);
         }
     }
 
-    public void dismissPopup(){
+    public void dismissPopup() {
         removeAllViews();
+        dismissListener.onDismiss();
         cellContainer.removeAllViews();
         setVisibility(View.INVISIBLE);
     }
 
     public boolean showWindowV(final Desktop.Item item, final View itemView, final boolean fromDock) {
-        if (getVisibility() == View.VISIBLE)return false;
+        if (getVisibility() == View.VISIBLE) return false;
 
         setVisibility(View.VISIBLE);
         popupParent.setVisibility(View.VISIBLE);
@@ -103,30 +95,25 @@ public class GroupPopupView extends FrameLayout {
         cellContainer.setGridSize(cellSize[0], cellSize[1]);
 
         int iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(c).generalSettings.iconSize, c);
-        int textHeight = Tool.convertDpToPixel(22,c);
+        int textHeight = Tool.convertDpToPixel(22, c);
 
-        int contentPadding = Tool.convertDpToPixel(5,c);
+        int contentPadding = Tool.convertDpToPixel(5, c);
 
         for (int x2 = 0; x2 < cellSize[0]; x2++) {
             for (int y2 = 0; y2 < cellSize[1]; y2++) {
                 if (y2 * cellSize[0] + x2 > item.actions.length - 1) continue;
-                final AppManager.App app = AppManager.getInstance(c).findApp(item.actions[y2 * cellSize[0] + x2].getComponent().getPackageName(), item.actions[y2 * cellSize[0] + x2].getComponent().getClassName());
-
-                if (app == null)continue;
-
-                final AppItemView view = new AppItemView.Builder(getContext())
-                        .setAppItem(app)
-                        .withOnTouchGetPosition()
-                        .getView();
-
                 final Intent act = item.actions[y2 * cellSize[0] + x2];
+                AppItemView.Builder b = new AppItemView.Builder(getContext()).withOnTouchGetPosition();
+                if (act.getStringExtra("shortCutIconID") != null) {
+                    b.setShortcutItem(act);
+                } else {
+                    b.setAppItem(AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName()));
+                }
+                final AppItemView view = b.getView();
+
                 view.setOnLongClickListener(new OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view2) {
-//                        Home.desktop.previousPage = Home.desktop.getCurrentItem();
-//                        Home.desktop.previousItemView = itemView;
-//                        Home.desktop.previousItem = Desktop.Item.fromGroupItem(item);
-
                         if (fromDock)
                             LauncherSettings.getInstance(getContext()).dockData.remove(item);
                         else
@@ -137,51 +124,54 @@ public class GroupPopupView extends FrameLayout {
                         else
                             LauncherSettings.getInstance(getContext()).desktopData.get(Home.desktop.getCurrentItem()).add(item);
 
-                        AppManager.App[] apps = new AppManager.App[item.actions.length];
-                        for (int i = 0; i < item.actions.length; i++) {
-                            apps[i] = AppManager.getInstance(getContext()).findApp(item.actions[i].getComponent().getPackageName(), item.actions[i].getComponent().getClassName());
-                            if (apps[i] == null)
-                                return true;
-                        }
-                        final Bitmap[] icons = new Bitmap[4];
-                        for (int i = 0; i < 4; i++) {
-                            if (i < apps.length)
-                                icons[i] = Tool.drawableToBitmap(apps[i].icon);
-                            else
-                                icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
-                        }
-                        if (((GroupIconDrawable) ((AppItemView) itemView).getIcon()).v == null)
-                            ((AppItemView) itemView).setIcon(new GroupIconDrawable(icons, Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext())),false);
-                        else
-                            ((AppItemView) itemView).setIcon(new GroupIconDrawable(icons, Tool.convertDpToPixel(LauncherSettings.getInstance(getContext()).generalSettings.iconSize, getContext()), itemView),false);
-
-                        AppManager.App dapps = AppManager.getInstance(getContext()).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
-                        if (dapps == null)
-                            return true;
+                        ((AppItemView) itemView).setIcon(ItemViewFactory.getGroupIconDrawable(c, item), false);
 
                         itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                         Intent i = new Intent();
-                        i.putExtra("mDragData",Desktop.Item.newAppItem(dapps));
-                        ClipData data = ClipData.newIntent("mDragIntent", i);
-                        itemView.startDrag(data, new GoodDragShadowBuilder(view),new DragAction(DragAction.Action.ACTION_APP), 0);
 
+                        if (act.getStringExtra("shortCutIconID") == null) {
+                            i.putExtra("mDragData", Desktop.Item.newAppItem(AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName())));
+                            ClipData data = ClipData.newIntent("mDragIntent", i);
+                            itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.ACTION_APP), 0);
+                        } else {
+                            i.putExtra("mDragData", Desktop.Item.newShortcutItem(act));
+                            ClipData data = ClipData.newIntent("mDragIntent", i);
+                            itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.ACTION_SHORTCUT), 0);
+                        }
                         dismissPopup();
                         return true;
                     }
                 });
-                view.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Tool.createScaleInScaleOutAnim(view, new Runnable() {
-                            @Override
-                            public void run() {
-                                dismissPopup();
-                                setVisibility(View.INVISIBLE);
-                                Tool.startApp(c, app);
-                            }
-                        });
-                    }
-                });
+                if (!view.isShortcut) {
+                    final AppManager.App app = AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
+                    view.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                                @Override
+                                public void run() {
+                                    dismissPopup();
+                                    setVisibility(View.INVISIBLE);
+                                    Tool.startApp(c, app);
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    view.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                                @Override
+                                public void run() {
+                                    dismissPopup();
+                                    setVisibility(View.INVISIBLE);
+                                    view.getContext().startActivity(act);
+                                }
+                            });
+                        }
+                    });
+                }
                 cellContainer.addViewToGrid(view, x2, y2, 1, 1);
             }
         }
@@ -192,7 +182,7 @@ public class GroupPopupView extends FrameLayout {
                 Tool.askForText("Rename", item.name, getContext(), new Tool.OnTextGotListener() {
                     @Override
                     public void hereIsTheText(String str) {
-                        if (str.isEmpty())return;
+                        if (str.isEmpty()) return;
                         if (fromDock)
                             LauncherSettings.getInstance(getContext()).dockData.remove(item);
                         else
@@ -218,37 +208,37 @@ public class GroupPopupView extends FrameLayout {
             }
         };
 
-        int popupWidth = contentPadding*4 + popupParent.getContentPaddingLeft() + popupParent.getContentPaddingRight() + (iconSize) * cellSize[0];
+        int popupWidth = contentPadding * 4 + popupParent.getContentPaddingLeft() + popupParent.getContentPaddingRight() + (iconSize) * cellSize[0];
         popupParent.getLayoutParams().width = popupWidth;
-        int popupHeight = contentPadding*2 + popupParent.getContentPaddingTop() + popupParent.getContentPaddingBottom() + Tool.convertDpToPixel(30, c)
+        int popupHeight = contentPadding * 2 + popupParent.getContentPaddingTop() + popupParent.getContentPaddingBottom() + Tool.convertDpToPixel(30, c)
                 + (iconSize + textHeight) * cellSize[1];
         popupParent.getLayoutParams().height = popupHeight;
 
         int[] coord = new int[2];
         itemView.getLocationInWindow(coord);
 
-        coord[0] += itemView.getWidth()/2;
-        coord[1] += itemView.getHeight()/2;
+        coord[0] += itemView.getWidth() / 2;
+        coord[1] += itemView.getHeight() / 2;
 
-        coord[0] -= popupWidth/2;
-        coord[1] -= popupHeight/2;
+        coord[0] -= popupWidth / 2;
+        coord[1] -= popupHeight / 2;
 
         int width = getWidth();
         int height = getHeight();
 
-        if (coord[0]+popupWidth > width){
-            coord[0] += width - (coord[0]+popupWidth);
+        if (coord[0] + popupWidth > width) {
+            coord[0] += width - (coord[0] + popupWidth);
         }
-        if (coord[1]+popupHeight > height){
-            coord[1] += height - (coord[1]+popupHeight);
+        if (coord[1] + popupHeight > height) {
+            coord[1] += height - (coord[1] + popupHeight);
         }
-        if (coord[0]< 0){
-            coord[0] -= itemView.getWidth()/2;
-            coord[0] += popupWidth/2;
+        if (coord[0] < 0) {
+            coord[0] -= itemView.getWidth() / 2;
+            coord[0] += popupWidth / 2;
         }
-        if (coord[1] < 0){
-            coord[1] -= itemView.getHeight()/2;
-            coord[1] += popupHeight/2;
+        if (coord[1] < 0) {
+            coord[1] -= itemView.getHeight() / 2;
+            coord[1] += popupHeight / 2;
         }
 
         popupParent.setPivotX(0);

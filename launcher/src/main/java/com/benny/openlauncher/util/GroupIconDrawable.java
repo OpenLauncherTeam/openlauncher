@@ -30,8 +30,6 @@ public class GroupIconDrawable extends Drawable{
 
     private boolean needAnimate,needAnimatScale;
 
-    public View v;
-
     private float sx = 1;
     private float sy = 1 ;
 
@@ -63,12 +61,6 @@ public class GroupIconDrawable extends Drawable{
         paint2.setFilterBitmap(true);
     }
 
-    public GroupIconDrawable(Bitmap[] icons,int size,View v){
-        init(icons,size);
-
-        this.v =v;
-    }
-
     public void popUp(){
         sy = 1;
         sx = 1;
@@ -92,13 +84,8 @@ public class GroupIconDrawable extends Drawable{
         }else {
             scaleFactor = Tool.clampFloat(scaleFactor+0.09f,0.5f,1f);
         }
-        if (v == null)
-            canvas.scale(scaleFactor,scaleFactor,iconSize/2,iconSize/2);
-        else
-            canvas.scale(scaleFactor,scaleFactor,iconSize/2,v.getHeight() / 2);
 
-        if (v!= null)
-            canvas.translate(0,v.getHeight()/2-iconSize/2);
+        canvas.scale(scaleFactor,scaleFactor,iconSize/2,iconSize/2);
 
         Path clipp = new Path();
         clipp.addCircle(iconSize / 2,iconSize / 2,iconSize / 2-outlinepad, Path.Direction.CW);
