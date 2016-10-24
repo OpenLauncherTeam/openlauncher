@@ -38,6 +38,7 @@ import com.benny.openlauncher.util.IconListAdapter;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.QuickCenterItem;
+import com.benny.openlauncher.util.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.util.WidgetHost;
 import com.benny.openlauncher.widget.AppDrawer;
@@ -89,7 +90,7 @@ public class Home extends Activity {
     private DragOptionView dragOptionView;
     private ViewGroup desktopEditOptionView;
     private RecyclerView quickCenter;
-    private BroadcastReceiver appUpdateReceiver;
+    private BroadcastReceiver appUpdateReceiver , shortcutReceiver;
     private TextView searchbarclock;
     private ListView minBar;
     private DrawerLayout myScreen;
@@ -128,6 +129,7 @@ public class Home extends Activity {
         findViews();
         initViews();
         registerAppUpdateReceiver();
+        registerShortcutReceiver();
 
         AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             @Override
@@ -391,6 +393,13 @@ public class Home extends Activity {
         appUpdateReceiver = new AppUpdateReceiver();
         registerReceiver(appUpdateReceiver, filter);
     }
+
+    private void registerShortcutReceiver(){
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        shortcutReceiver = new ShortcutReceiver();
+        registerReceiver(shortcutReceiver, filter);
+    }
     //endregion
 
     //region WIDGET
@@ -439,6 +448,7 @@ public class Home extends Activity {
         appWidgetHost.stopListening();
         appWidgetHost = null;
         unregisterReceiver(appUpdateReceiver);
+        unregisterReceiver(shortcutReceiver);
         super.onDestroy();
     }
 

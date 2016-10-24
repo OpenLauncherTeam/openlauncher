@@ -214,5 +214,22 @@ public class AppItemView extends View implements Drawable.Callback{
             view.vibrateWhenLongPress = true;
             return this;
         }
+
+        public Builder setShortItem(final Desktop.Item item){
+            view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                        @Override
+                        public void run() {
+                            view.getContext().startActivity(item.actions[0]);
+                        }
+                    });
+                }
+            });
+            view.setIcon(Tool.getIconFromID(view.getContext(),item.shortCutIconID),true);
+            view.setLabel(item.name);
+            return this;
+        }
     }
 }
