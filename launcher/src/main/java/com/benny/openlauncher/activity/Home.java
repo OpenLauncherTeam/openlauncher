@@ -267,7 +267,6 @@ public class Home extends Activity {
                 .build();
 
         View appDrawerBtnCard = appDrawerBtn.findViewById(R.id.card);
-        //appDrawerBtnCard.setRadius((Tool.convertDpToPixel((iconSize - 8), this)) / 2);
         appDrawerBtnCard.getLayoutParams().width = Tool.convertDpToPixel(iconSize - 8, this);
         appDrawerBtnCard.getLayoutParams().height = Tool.convertDpToPixel(iconSize - 8, this);
 

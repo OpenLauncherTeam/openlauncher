@@ -57,6 +57,7 @@
             android:theme="@style/NormalActivity.Light" />
         <activity
             android:name="com.benny.openlauncher.activity.SettingsActivity"
+            android:configChanges="orientation|keyboard|screenSize"
             android:label="Settings"
             android:parentActivityName="com.benny.openlauncher.activity.Home"
             android:theme="@style/NormalActivity.Light" />
