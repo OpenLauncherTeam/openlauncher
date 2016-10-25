@@ -22,11 +22,9 @@ public class ShortcutReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getExtras() == null) return;
-        //Tools.print(intent.getExtras().getString(Intent.EXTRA_SHORTCUT_NAME));
 
         String name = intent.getExtras().getString(Intent.EXTRA_SHORTCUT_NAME);
         Intent newIntent = (Intent) intent.getExtras().get(Intent.EXTRA_SHORTCUT_INTENT);
-        //Tools.debug(intent.toURI());
         Drawable shortcutIconDrawable = null;
         try {
             Parcelable iconResourceParcelable = intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);

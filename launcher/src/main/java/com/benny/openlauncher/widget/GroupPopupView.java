@@ -24,12 +24,6 @@ import com.benny.openlauncher.util.Tool;
 
 public class GroupPopupView extends FrameLayout {
 
-//    CellContainer cc;
-//    TextView tv;
-//    CardView popup;
-//
-//    PopupWindow p;
-
     CardView popupParent;
     CellContainer cellContainer;
     TextView title;

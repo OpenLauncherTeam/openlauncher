@@ -49,6 +49,7 @@
             android:parentActivityName=".activity.Home"
             android:theme="@style/NormalActivity.Light" />
         <activity
+            android:configChanges="orientation|keyboard|screenSize"
             android:name=".activity.SettingsActivity"
             android:label="Settings"
             android:parentActivityName=".activity.Home"
@@ -68,7 +69,7 @@
         <receiver
             android:name=".util.ShortcutReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
     </application>
 
 </manifest>

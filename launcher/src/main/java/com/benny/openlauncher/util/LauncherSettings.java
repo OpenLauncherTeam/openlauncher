@@ -160,6 +160,8 @@ public class LauncherSettings {
         public int dockGridx = 5;
         public int iconSize = 58;
 
+        public String iconPackName = "";
+
         public LauncherAction.Theme theme = LauncherAction.Theme.Light;
 
         public ArrayList<String> minBarArrangement;

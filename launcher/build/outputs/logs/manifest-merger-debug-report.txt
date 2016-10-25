@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:2:1-74:12
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:2:1-75:12
 	package
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:3:5-37
 		INJECTED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
@@ -22,7 +22,7 @@ ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 	android:name
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:7:22-81
 application
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:9:5-72:19
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:9:5-73:19
 MERGED from [com.android.support:appcompat-v7:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-v4:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-compat:24.2.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
@@ -125,41 +125,43 @@ ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 	android:name
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:47:13-56
 activity#com.benny.openlauncher.activity.SettingsActivity
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:51:9-55:59
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:51:9-56:59
 	android:label
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:53:13-37
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:54:13-37
 	android:parentActivityName
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:54:13-56
-	android:theme
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:55:13-56
+	android:configChanges
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:52:13-68
+	android:theme
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:56:13-56
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:52:13-54
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:53:13-54
 receiver#com.benny.openlauncher.util.DeviceAdminReceiver
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:57:9-67:20
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:58:9-68:20
 	android:permission
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:59:13-70
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:60:13-70
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:58:13-53
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:59:13-53
 intent-filter#android.app.action.DEVICE_ADMIN_ENABLED
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:60:13-62:29
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:61:13-63:29
 action#android.app.action.DEVICE_ADMIN_ENABLED
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:61:17-82
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:62:17-82
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:61:25-79
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:62:25-79
 meta-data#android.app.device_admin
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:64:13-66:56
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:65:13-67:56
 	android:resource
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:66:17-53
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:67:17-53
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:65:17-56
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:66:17-56
 receiver#com.benny.openlauncher.util.ShortcutReceiver
-ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:68:9-71:48
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:69:9-72:39
 	android:enabled
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:70:13-35
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:71:13-35
 	android:exported
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:71:13-36
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:72:13-36
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:69:13-50
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:70:13-50
 uses-sdk
 INJECTED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.mikepenz:fastadapter:1.8.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.mikepenz\fastadapter\1.8.2\AndroidManifest.xml:8:5-10:41
