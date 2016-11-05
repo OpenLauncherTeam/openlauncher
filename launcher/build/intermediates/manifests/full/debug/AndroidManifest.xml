@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="24" />
+        android:targetSdkVersion="25" />
 
     <!-- android:date="android.support.multidex.MultiDexApplication" -->
     <uses-permission android:name="android.permission.SET_WALLPAPER" />

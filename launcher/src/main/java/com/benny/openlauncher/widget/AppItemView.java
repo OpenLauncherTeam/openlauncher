@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
+import android.widget.TextView;
 
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
@@ -203,8 +204,8 @@ public class AppItemView extends View implements Drawable.Callback{
             return this;
         }
 
-        public Builder setNoLabel(){
-            view.noLabel = true;
+        public Builder setLabelVisibility(boolean visible){
+            view.noLabel = !visible;
             return this;
         }
 

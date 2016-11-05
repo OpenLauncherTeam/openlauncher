@@ -11,7 +11,9 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.SettingsActivity;
 
@@ -85,15 +87,15 @@ public class LauncherAction {
                 }.execute();
                 break;
             case SetWallpaper:
-                AlertDialog.Builder b = new AlertDialog.Builder(c);
-                b.setTitle("Wallpaper");
-                b.setIcon(R.drawable.ic_photo_black_24dp);
+                MaterialDialog.Builder b = new MaterialDialog.Builder(c);
+                b.title("Wallpaper");
+                b.iconRes(R.drawable.ic_photo_black_24dp);
                 String[] s = new String[]{"Set Wallpaper","Blur Wallpaper"};
-                b.setItems(s,new DialogInterface.OnClickListener(){
-
+                b.items(s);
+                b.itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
-                    public void onClick(DialogInterface p1, int p2){
-                        switch (p2){
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                        switch (position){
                             case 0 :
                                 Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
                                 c.startActivity(Intent.createChooser(intent,"Pick Wallpaper"));

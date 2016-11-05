@@ -486,14 +486,13 @@ public class Home extends Activity {
 
     @Override
     protected void onPause() {
-        LauncherSettings.getInstance(this).writeSettings();
-        Gson gson = new Gson();
-        Tool.writeToFile("noteData.json",gson.toJson(notes),Home.this);
         super.onPause();
     }
 
     @Override
     protected void onStop() {
+        Gson gson = LauncherSettings.getInstance(this).writeSettings();
+        Tool.writeToFile("noteData.json",gson.toJson(notes),Home.this);
         super.onStop();
     }
 
