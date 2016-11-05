@@ -12,8 +12,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.benny.openlauncher.util.Tool;
-
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class CellContainer extends ViewGroup {
@@ -29,7 +27,7 @@ public class CellContainer extends ViewGroup {
 
     private boolean hideGrid = true;
 
-    public boolean blockTouch= false;
+    public boolean blockTouch = false;
 
     public SimpleFingerGestures gestures;
 
@@ -63,14 +61,15 @@ public class CellContainer extends ViewGroup {
     }
 
     private Long down = 0L;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch(MotionEventCompat.getActionMasked(event) ) {
+        switch (MotionEventCompat.getActionMasked(event)) {
             case MotionEvent.ACTION_DOWN:
                 down = System.currentTimeMillis();
                 break;
             case MotionEvent.ACTION_UP:
-                if(System.currentTimeMillis() - down < 260L && blockTouch) {
+                if (System.currentTimeMillis() - down < 260L && blockTouch) {
                     performClick();
                 }
                 break;
@@ -78,8 +77,9 @@ public class CellContainer extends ViewGroup {
         if (blockTouch) return true;
         if (gestures != null)
             try {
-                gestures.onTouch(this,event);
-            }catch (Exception ignore){}
+                gestures.onTouch(this, event);
+            } catch (Exception ignore) {
+            }
         return super.onTouchEvent(event);
     }
 
@@ -106,21 +106,22 @@ public class CellContainer extends ViewGroup {
     }
 
     private boolean animateBackground;
-    public void animateBackgroundShow(){
+
+    public void animateBackgroundShow() {
         animateBackground = true;
         invalidate();
     }
 
-    public void animateBackgroundHide(){
+    public void animateBackgroundHide() {
         animateBackground = false;
         invalidate();
     }
 
-    public Point findFreeSpace(){
+    public Point findFreeSpace() {
         for (int x = 0; x < occupied.length; x++) {
             for (int y = 0; y < occupied[x].length; y++) {
                 if (!occupied[x][y])
-                    return new Point(x,y);
+                    return new Point(x, y);
             }
         }
         return null;
@@ -130,7 +131,7 @@ public class CellContainer extends ViewGroup {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawRect(0,0,getWidth(),getHeight(),bgPaint);
+        canvas.drawRect(0, 0, getWidth(), getHeight(), bgPaint);
 
         float s = 7f;
         for (int x = 0; x < cellSpanHori; x++) {
@@ -268,41 +269,65 @@ public class CellContainer extends ViewGroup {
         return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, cellx, celly, xSpan, ySpan);
     }
 
-    public LayoutParams positionToLayoutPrams(int mX, int mY, int xSpan, int ySpan) {
+    public View coordinateToChildView(Point pos){
+        for (int i = 0; i < getChildCount(); i++) {
+            LayoutParams lp = (LayoutParams) getChildAt(i).getLayoutParams();
+            if (lp.x == pos.x && lp.y == pos.y)
+                return getChildAt(i);
+        }
+        return null;
+    }
+
+    public Point touchPosToCoordinate(int mX, int mY, int xSpan, int ySpan,boolean checkAvailability) {
         for (int x = 0; x < cellSpanHori; x++) {
             for (int y = 0; y < cellSpanVert; y++) {
                 Rect cell = cells[x][y];
                 if (mY >= cell.top && mY <= cell.bottom && mX >= cell.left && mX <= cell.right) {
-                    if (occupied[x][y]) {
-                        return null;
-                    }
+                    if (checkAvailability) {
+                        if (occupied[x][y]) {
+                            return null;
+                        }
 
-                    int dx;
-                    int dy;
-                    dx = x + xSpan - 1;
-                    if (dx >= cellSpanHori - 1) {
-                        dx = cellSpanHori - 1;
-                        x = dx + 1 - xSpan;
-                    }
-                    dy = y + ySpan - 1;
-                    if (dy >= cellSpanVert - 1) {
-                        dy = cellSpanVert - 1;
-                        y = dy + 1 - ySpan;
-                    }
+                        int dx;
+                        int dy;
+                        dx = x + xSpan - 1;
+                        if (dx >= cellSpanHori - 1) {
+                            dx = cellSpanHori - 1;
+                            x = dx + 1 - xSpan;
+                        }
+                        dy = y + ySpan - 1;
+                        if (dy >= cellSpanVert - 1) {
+                            dy = cellSpanVert - 1;
+                            y = dy + 1 - ySpan;
+                        }
 
-                    for (int x2 = x; x2 < x + xSpan; x2++) {
-                        for (int y2 = y; y2 < y + ySpan; y2++) {
-                            if (occupied[x2][y2]) {
-                                return null;
+                        for (int x2 = x; x2 < x + xSpan; x2++) {
+                            for (int y2 = y; y2 < y + ySpan; y2++) {
+                                if (occupied[x2][y2]) {
+                                    return null;
+                                }
                             }
                         }
                     }
 
-                    return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, x, y, xSpan, ySpan);
+                    return new Point(x, y);
                 }
             }
         }
         return null;
+    }
+
+    public LayoutParams positionToLayoutPrams(int mX, int mY, int xSpan, int ySpan) {
+        Point pos = touchPosToCoordinate(mX, mY, xSpan, ySpan,true);
+        if (pos != null)
+            return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, pos.x, pos.y, xSpan, ySpan);
+        else return null;
+    }
+
+    public LayoutParams positionToLayoutPrams(Point pos, int xSpan, int ySpan) {
+        if (pos != null)
+            return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, pos.x, pos.y, xSpan, ySpan);
+        else return null;
     }
 
     @Override

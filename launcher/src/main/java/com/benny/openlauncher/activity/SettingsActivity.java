@@ -31,6 +31,8 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
             Fragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(getResources().getColor(R.color.Light_TextColor), getResources().getColor(R.color.Light_TextColorSec), getResources().getColor(R.color.Light_Background), getResources().getColor(R.color.colorAccent), false)
                     .add(new MaterialPrefFragment.GroupTitle("Desktop"))
                     .add(new MaterialPrefFragment.TBPref("showsearchbar", "Show search bar", "Display a search bar always on top of the desktop", LauncherSettings.getInstance(this).generalSettings.showsearchbar))
+                    .add(new MaterialPrefFragment.GroupTitle("Dock"))
+                    .add(new MaterialPrefFragment.TBPref("dockshowlabel","Show app label","show the app's name in the dock",LauncherSettings.getInstance(this).generalSettings.dockshowlabel))
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
                     .add(new MaterialPrefFragment.NUMPref("horigridsize", "Horizontal grid size", "App drawer grid size", LauncherSettings.getInstance(this).generalSettings.drawerGridx, 1, 10))
                     .add(new MaterialPrefFragment.NUMPref("vertigridsize", "Vertical grid size", "App drawer grid size", LauncherSettings.getInstance(this).generalSettings.drawerGridy, 1, 10))
@@ -69,6 +71,10 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                 break;
             case "vertgridsize":
                 LauncherSettings.getInstance(this).generalSettings.drawerGridy = (int) p2;
+                requireLauncherRestart = true;
+                break;
+            case "dockshowlabel":
+                LauncherSettings.getInstance(this).generalSettings.dockshowlabel = (boolean)p2;
                 requireLauncherRestart = true;
                 break;
         }

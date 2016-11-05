@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.DesktopCallBack;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.GoodDragShadowBuilder;
 import com.benny.openlauncher.util.GroupIconDrawable;
@@ -78,7 +79,7 @@ public class GroupPopupView extends FrameLayout {
         setVisibility(View.INVISIBLE);
     }
 
-    public boolean showWindowV(final Desktop.Item item, final View itemView, final boolean fromDock) {
+    public boolean showWindowV(final Desktop.Item item, final View itemView, final DesktopCallBack callBack) {
         if (getVisibility() == View.VISIBLE) return false;
 
         setVisibility(View.VISIBLE);
@@ -108,15 +109,9 @@ public class GroupPopupView extends FrameLayout {
                 view.setOnLongClickListener(new OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view2) {
-                        if (fromDock)
-                            LauncherSettings.getInstance(getContext()).dockData.remove(item);
-                        else
-                            LauncherSettings.getInstance(getContext()).desktopData.get(Home.desktop.getCurrentItem()).remove(item);
+                        callBack.removeItemFromSettings(item);
                         item.removeActions(act);
-                        if (fromDock)
-                            LauncherSettings.getInstance(getContext()).dockData.add(item);
-                        else
-                            LauncherSettings.getInstance(getContext()).desktopData.get(Home.desktop.getCurrentItem()).add(item);
+                        callBack.addItemToSettings(item);
 
                         ((AppItemView) itemView).setIcon(ItemViewFactory.getGroupIconDrawable(c, item), false);
 
@@ -177,15 +172,10 @@ public class GroupPopupView extends FrameLayout {
                     @Override
                     public void hereIsTheText(String str) {
                         if (str.isEmpty()) return;
-                        if (fromDock)
-                            LauncherSettings.getInstance(getContext()).dockData.remove(item);
-                        else
-                            LauncherSettings.getInstance(getContext()).desktopData.get(Home.desktop.getCurrentItem()).remove(item);
+                        callBack.removeItemFromSettings(item);
                         item.name = str;
-                        if (fromDock)
-                            LauncherSettings.getInstance(getContext()).dockData.add(item);
-                        else
-                            LauncherSettings.getInstance(getContext()).desktopData.get(Home.desktop.getCurrentItem()).add(item);
+                        callBack.addItemToSettings(item);
+
                         title.setText(str);
                     }
                 });

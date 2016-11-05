@@ -122,7 +122,7 @@ public class LauncherSettings {
             generalSettings = gson.fromJson(raw,GeneralSettings.class);
     }
 
-    public void writeSettings(){
+    public Gson writeSettings(){
         Gson gson = new Gson();
 
         List<List<Desktop.SimpleItem>> simpleDesktopData = new ArrayList<>();
@@ -141,6 +141,8 @@ public class LauncherSettings {
         Tool.writeToFile(DockDataFileName,gson.toJson(simpleDockData), context);
         Tool.writeToFile(DesktopDataFileName,gson.toJson(simpleDesktopData), context);
         Tool.writeToFile(GeneralSettingsFileName,gson.toJson(generalSettings), context);
+
+        return gson;
     }
 
     public static class GeneralSettings {
@@ -159,6 +161,8 @@ public class LauncherSettings {
 
         public int dockGridx = 5;
         public int iconSize = 58;
+
+        public boolean dockshowlabel = true;
 
         public String iconPackName = "";
 
