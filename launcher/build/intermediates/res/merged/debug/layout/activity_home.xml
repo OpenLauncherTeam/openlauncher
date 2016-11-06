@@ -34,39 +34,34 @@
         android:layout_height="match_parent"
         android:layout_gravity="end">
 
+        <android.support.v7.widget.RecyclerView
+            android:layout_toRightOf="@+id/notecontrol"
+            android:layout_marginTop="5dp"
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <android.support.v7.widget.CardView
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="24dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
             app:cardBackgroundColor="@color/colorAccent"
             android:id="@+id/notecontrol"
-            android:layout_width="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:padding="15dp"
-                android:drawablePadding="10dp"
+            <ImageView
+                android:padding="12dp"
                 android:background="?selectableItemBackground"
                 android:id="@+id/addnote"
                 android:onClick="onAddNote"
-                android:text="Add note"
                 android:gravity="center"
-                android:textColor="#FFF"
-                android:drawableStart="@drawable/ic_add_black_24dp"
-                android:drawableLeft="@drawable/ic_add_black_24dp"
+                android:src="@drawable/ic_add_black_24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/notecontrol"
-            android:id="@+id/rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
     </RelativeLayout>
 

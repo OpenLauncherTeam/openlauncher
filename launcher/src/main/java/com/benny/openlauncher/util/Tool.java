@@ -6,6 +6,7 @@ import android.content.res.*;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
@@ -16,6 +17,7 @@ import android.util.*;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -208,6 +210,23 @@ public class Tool
 
     public static float clampFloat(float target,float min,float max){
         return Math.max(min, Math.min(max, target));
+    }
+
+    public static View.OnTouchListener getBtnColorMaskController(){
+        return new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        ((TextView)v).setTextColor(Color.rgb(200, 200, 200));
+                        return false;
+                    case MotionEvent.ACTION_UP:
+                        ((TextView)v).setTextColor(Color.WHITE);
+                        return false;
+                }
+                return false;
+            }
+        };
     }
 
     public static void writeToFile(String name,String data,Context context) {
