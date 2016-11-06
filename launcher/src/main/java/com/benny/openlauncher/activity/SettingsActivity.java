@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.widget.AppDrawer;
 import com.bennyv5.materialpreffragment.MaterialPrefFragment;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.LauncherSettings;
@@ -34,6 +35,7 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                     .add(new MaterialPrefFragment.GroupTitle("Dock"))
                     .add(new MaterialPrefFragment.TBPref("dockshowlabel","Show app label","show the app's name in the dock",LauncherSettings.getInstance(this).generalSettings.dockshowlabel))
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
+                    .add(new MaterialPrefFragment.ButtonPref("drawerstyle", "Drawer Style", "choose the style of the app drawer"))
                     .add(new MaterialPrefFragment.NUMPref("horigridsize", "Horizontal grid size", "App drawer grid size", LauncherSettings.getInstance(this).generalSettings.drawerGridx, 1, 10))
                     .add(new MaterialPrefFragment.NUMPref("vertigridsize", "Vertical grid size", "App drawer grid size", LauncherSettings.getInstance(this).generalSettings.drawerGridy, 1, 10))
                     .add(new MaterialPrefFragment.TBPref("rememberappdrawerpage", "Remember last page", "The page will not reset to the first page when reopen app drawer", !LauncherSettings.getInstance(this).generalSettings.rememberappdrawerpage))
@@ -96,6 +98,10 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                 break;
             case "iconpack":
                 AppManager.getInstance(this).startPickIconPackIntent(this);
+                break;
+            case "drawerstyle":
+                AppDrawer.startStylePicker(this);
+                requireLauncherRestart = true;
                 break;
         }
     }

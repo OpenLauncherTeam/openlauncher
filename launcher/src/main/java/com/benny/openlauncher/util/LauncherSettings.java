@@ -3,6 +3,7 @@ package com.benny.openlauncher.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.benny.openlauncher.widget.AppDrawer;
 import com.benny.openlauncher.widget.Desktop;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -152,6 +153,8 @@ public class LauncherSettings {
         public int desktopGridy = 4;
         public int drawerGridx = 4;
         public int drawerGridy = 5;
+
+        public AppDrawer.DrawerMode drawerMode = AppDrawer.DrawerMode.Paged;
 
         public boolean rememberappdrawerpage = true;
         public boolean showsearchbar = true;

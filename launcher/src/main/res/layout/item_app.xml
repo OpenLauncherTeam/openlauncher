@@ -1,28 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="wrap_content"
-	android:layout_width="wrap_content"
-	android:layout_gravity="center"
-	android:clipChildren="false"
-	android:orientation="vertical">
-
-	<ImageView
-		android:id="@+id/iv"
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:layout_gravity="center_horizontal"/>
-
-	<TextView
-		android:id="@+id/tv"
-		android:paddingTop="2dp"
-		android:singleLine="true"
-		android:gravity="center"
-		android:textSize="14sp"
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:layout_gravity="center_horizontal"/>
-
-</LinearLayout>
-
+<com.benny.openlauncher.widget.AppItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
 

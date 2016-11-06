@@ -42,6 +42,7 @@ import com.benny.openlauncher.util.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.util.WidgetHost;
 import com.benny.openlauncher.widget.AppDrawer;
+import com.benny.openlauncher.widget.PagedAppDrawer;
 import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.Dock;
 import com.benny.openlauncher.widget.DragOptionView;
@@ -65,7 +66,7 @@ import java.util.Locale;
 public class Home extends Activity {
 
     //static members, easier to access from any activity and class.
-    public static Activity launcher;
+    public static Home launcher;
     public static Desktop desktop;
     public static Dock dock;
     public static View searchBar;
@@ -83,7 +84,8 @@ public class Home extends Activity {
 
     //normal members, currently not necessary to access from elsewhere.
     private ConstraintLayout baseLayout;
-    private AppDrawer appDrawer;
+    private AppDrawer appDrawerOtter;
+    private View appDrawer;
     private FrameLayout appDrawerBtn;
     private PagerIndicator desktopIndicator, appDrawerIndicator;
     private Animator appDrawerAnimator;
@@ -153,7 +155,8 @@ public class Home extends Activity {
         searchbarclock = (TextView) findViewById(R.id.searchbarclock);
         quickCenter = (RecyclerView) findViewById(R.id.rv);
         baseLayout = (ConstraintLayout) findViewById(R.id.baseLayout);
-        appDrawer = (AppDrawer) findViewById(R.id.appDrawer);
+        appDrawerOtter = (AppDrawer) findViewById(R.id.appDrawerOtter);
+        appDrawer = appDrawerOtter.getChildAt(0);
         desktop = (Desktop) findViewById(R.id.desktop);
         dock = (Dock) findViewById(R.id.desktopDock);
         appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
@@ -190,7 +193,7 @@ public class Home extends Activity {
             }
         },60000);
 
-        appDrawer.withHome(this, appDrawerIndicator);
+        appDrawerOtter.withHome(this);
 
         desktop.listener = new Desktop.OnDesktopEditListener() {
             @Override
@@ -527,6 +530,8 @@ public class Home extends Activity {
     public void openAppDrawer() {
         int cx = (dock.getLeft() + dock.getRight()) / 2;
         int cy = (dock.getTop() + dock.getBottom()) / 2;
+        int margin = ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).leftMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
+        cx -= margin;
 
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
 
@@ -541,6 +546,7 @@ public class Home extends Activity {
         desktop.animate().alpha(0).setDuration(100);
         appDrawerBtn.animate().scaleX(0).scaleY(0).setDuration(100);
 
+        if (appDrawerIndicator != null)
         appDrawerIndicator.animate().alpha(1).setDuration(100);
 
         appDrawerAnimator.addListener(new Animator.AnimatorListener() {
@@ -573,6 +579,8 @@ public class Home extends Activity {
 
         int cx = (dock.getLeft() + dock.getRight()) / 2;
         int cy = (dock.getTop() + dock.getBottom()) / 2;
+        int margin = ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).leftMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
+        cx -= margin;
 
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
 
@@ -584,13 +592,14 @@ public class Home extends Activity {
             public void onAnimationStart(Animator p1) {
                 if (LauncherSettings.getInstance(Home.this).generalSettings.showsearchbar)
                     searchBar.setVisibility(View.VISIBLE);
+                if (appDrawerIndicator != null)
                 appDrawerIndicator.animate().alpha(0);
             }
 
             @Override
             public void onAnimationEnd(Animator p1) {
                 if (LauncherSettings.getInstance(Home.this).generalSettings.rememberappdrawerpage)
-                    appDrawer.setCurrentItem(0,false);
+                    appDrawerOtter.scrollToStart();
                 desktopIndicator.animate().alpha(1);
                 appDrawer.setVisibility(View.INVISIBLE);
                 appDrawerBtn.setVisibility(View.VISIBLE);

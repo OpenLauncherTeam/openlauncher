@@ -59,6 +59,10 @@ public class AppManager {
         return null;
     }
 
+    public List<App> getApps() {
+        return apps;
+    }
+
     public void clearListener() {
         updateListeners.clear();
         deleteListeners.clear();
