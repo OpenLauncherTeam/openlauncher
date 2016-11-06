@@ -13,7 +13,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
-import android.widget.TextView;
 
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
@@ -78,6 +77,8 @@ public class AppItemView extends View implements Drawable.Callback{
 
     private float labelHeight;
 
+    private int targetedWidth, targetedHeightPadding;
+
     public AppItemView(Context context) {
         super(context);
 
@@ -90,8 +91,26 @@ public class AppItemView extends View implements Drawable.Callback{
         init();
     }
 
+    public void setTargetedWidth(int width){
+        targetedWidth = width;
+    }
+    public void setTargetedHeightPadding(int padding){
+        targetedHeightPadding = padding;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        float mWidth = iconSize;
+        float mHeight = iconSize + (noLabel? 0 : labelHeight);
+        if (targetedWidth != 0)
+            mWidth = targetedWidth;
+        setMeasuredDimension((int)Math.ceil(mWidth),(int)Math.ceil((int)mHeight) + Tool.convertDpToPixel(2,getContext()) + targetedHeightPadding *2);
+    }
+
     private void init(){
         setWillNotDraw(false);
+        setDrawingCacheEnabled(true);
+        setWillNotCacheDrawing(false);
 
         labelHeight = Tool.convertDpToPixel(14,getContext());
 
@@ -142,6 +161,12 @@ public class AppItemView extends View implements Drawable.Callback{
 
         public Builder(Context context){
             view = new AppItemView(context);
+            float iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(context).generalSettings.iconSize, view.getContext());
+            view.setIconSize(iconSize);
+        }
+
+        public Builder(AppItemView view){
+            this.view = view;
             float iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(view.getContext()).generalSettings.iconSize, view.getContext());
             view.setIconSize(iconSize);
         }

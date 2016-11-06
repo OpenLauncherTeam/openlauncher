@@ -88,7 +88,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dependency-cache" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.0.2/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support.constraint/constraint-layout/1.0.0-alpha9/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support.constraint/constraint-layout/1.0.0-beta3/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/cardview-v7/25.0.0/jars" />
@@ -132,15 +132,15 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="constraint-layout-1.0.0-beta3" level="project" />
     <orderEntry type="library" exported="" name="design-25.0.0" level="project" />
     <orderEntry type="library" exported="" name="gson-2.8.0" level="project" />
     <orderEntry type="library" exported="" name="CircularReveal-2.0.1" level="project" />
-    <orderEntry type="library" exported="" name="constraint-layout-solver-1.0.0-alpha9" level="project" />
+    <orderEntry type="library" exported="" name="constraint-layout-solver-1.0.0-beta3" level="project" />
     <orderEntry type="library" exported="" name="material-ripple-1.0.2" level="project" />
     <orderEntry type="library" exported="" name="support-fragment-25.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-core-ui-25.0.0" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="constraint-layout-1.0.0-alpha9" level="project" />
     <orderEntry type="library" exported="" name="library-1.1.7" level="project" />
     <orderEntry type="library" exported="" name="support-core-utils-25.0.0" level="project" />
     <orderEntry type="library" exported="" name="core-0.9.0.2" level="project" />

@@ -47,6 +47,6 @@ dependencies {
     compile project(':smoothviewpager')
     compile project(':materialpreffragment')
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
     compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta3'
 }

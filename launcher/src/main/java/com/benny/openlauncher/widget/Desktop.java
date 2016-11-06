@@ -445,6 +445,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
     }
 
     public static boolean handleOnDropOver(Item dropItem,Item item,View itemView,ViewGroup parent,int page,DesktopCallBack callBack){
+        if (item == null){
+            return false;
+        }
         switch (item.type){
             case APP:
             case SHORTCUT:

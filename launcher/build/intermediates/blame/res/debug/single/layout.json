@@ -1,5 +1,9 @@
 [
     {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_griddrawer.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_griddrawer.xml"
+    },
+    {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.0\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
@@ -216,6 +220,10 @@
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.0.2\\res\\layout\\md_dialog_input.xml"
     },
     {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_drawerindicator.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_drawerindicator.xml"
+    },
+    {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.0\\res\\layout\\notification_template_lines_media.xml"
     },
@@ -318,6 +326,10 @@
     {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_iconlabel.xml",
         "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_iconlabel.xml"
+    },
+    {
+        "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_pageddrawer.xml",
+        "source": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_pageddrawer.xml"
     },
     {
         "merged": "E:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",

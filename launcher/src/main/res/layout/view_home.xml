@@ -91,33 +91,42 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-
-    <io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.benny.openlauncher.widget.AppDrawer
         android:id="@+id/appDrawerOtter"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/groupPopup"
         app:layout_constraintLeft_toLeftOf="@+id/groupPopup"
         app:layout_constraintRight_toRightOf="@+id/groupPopup"
-        app:layout_constraintTop_toTopOf="@+id/groupPopup">
+        app:layout_constraintTop_toTopOf="@+id/groupPopup" />
 
-        <com.benny.openlauncher.widget.AppDrawer
-            android:id="@+id/appDrawer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="24dp"
-            android:visibility="invisible" />
 
-        <com.benny.openlauncher.widget.PagerIndicator
-            android:id="@+id/appDrawerIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="9dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="14dp"
-            android:alpha="0"
-            android:visibility="visible" />
+    <!--<io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:id="@+id/appDrawerOtter"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/groupPopup"-->
+        <!--app:layout_constraintLeft_toLeftOf="@+id/groupPopup"-->
+        <!--app:layout_constraintRight_toRightOf="@+id/groupPopup"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/groupPopup">-->
 
-    </io.codetail.widget.RevealFrameLayout>
+        <!--<com.benny.openlauncher.widget.PagedAppDrawer-->
+            <!--android:id="@+id/appDrawer"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginBottom="24dp"-->
+            <!--android:visibility="invisible" />-->
+
+        <!--<com.benny.openlauncher.widget.PagerIndicator-->
+            <!--android:id="@+id/appDrawerIndicator"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="9dp"-->
+            <!--android:layout_gravity="bottom|center_horizontal"-->
+            <!--android:layout_marginBottom="14dp"-->
+            <!--android:alpha="0"-->
+            <!--android:visibility="visible" />-->
+
+    <!--</io.codetail.widget.RevealFrameLayout>-->
 
 
     <com.benny.openlauncher.widget.DragOptionView
