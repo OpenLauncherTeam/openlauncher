@@ -237,24 +237,30 @@ public class Home extends Activity {
             }
         };
 
-        desktopEditOptionView.findViewById(R.id.removepage).setOnClickListener(new OnClickListener() {
+        View btn1 = desktopEditOptionView.findViewById(R.id.removepage);
+        btn1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 desktop.removeCurrentPage();
             }
         });
-        desktopEditOptionView.findViewById(R.id.setashomepage).setOnClickListener(new OnClickListener() {
+        btn1.setOnTouchListener(Tool.getBtnColorMaskController());
+        View btn2 = desktopEditOptionView.findViewById(R.id.setashomepage);
+        btn2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage = desktop.getCurrentItem();
             }
         });
-        desktopEditOptionView.findViewById(R.id.addwidgetbtn).setOnClickListener(new OnClickListener() {
+        btn2.setOnTouchListener(Tool.getBtnColorMaskController());
+        View btn3 = desktopEditOptionView.findViewById(R.id.addwidgetbtn);
+        btn3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 pickWidget(view);
             }
         });
+        btn3.setOnTouchListener(Tool.getBtnColorMaskController());
 
         desktopIndicator.setViewPager(desktop);
         desktop.setPageIndicator(desktopIndicator);
@@ -532,12 +538,14 @@ public class Home extends Activity {
         int cy = (dock.getTop() + dock.getBottom()) / 2;
         int margin = ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).leftMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
         cx -= margin;
+        int marginh = ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).topMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
+        cy -= marginh;
 
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
 
         appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(appDrawer, cx, cy, 0, finalRadius);
         appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        appDrawerAnimator.setDuration(200);
+        appDrawerAnimator.setDuration(180);
         appDrawerAnimator.setStartDelay(100);
 
         dock.animate().alpha(0).setDuration(100);
@@ -570,7 +578,12 @@ public class Home extends Activity {
             public void onAnimationRepeat(Animator p1) {
             }
         });
+        appDrawer.setPivotX(cx);
+        appDrawer.setPivotY(cy);
         appDrawerAnimator.start();
+        appDrawer.setScaleX(0.95f);
+        appDrawer.setScaleY(0.95f);
+        appDrawer.animate().setStartDelay(100).scaleX(1).scaleY(1).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
     }
 
     public void closeAppDrawer() {
@@ -581,12 +594,14 @@ public class Home extends Activity {
         int cy = (dock.getTop() + dock.getBottom()) / 2;
         int margin = ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).leftMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
         cx -= margin;
+        int marginh = ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).topMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
+        cy -= marginh;
 
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
 
         appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(appDrawer, cx, cy, finalRadius, 0);
         appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        appDrawerAnimator.setDuration(200);
+        appDrawerAnimator.setDuration(180);
         appDrawerAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator p1) {
@@ -619,6 +634,7 @@ public class Home extends Activity {
             }
         });
         appDrawerAnimator.start();
+        appDrawer.animate().setStartDelay(0).scaleX(0.95f).scaleY(0.95f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
     }
 
     //endregion

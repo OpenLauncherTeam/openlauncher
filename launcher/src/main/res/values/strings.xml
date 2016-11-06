@@ -15,5 +15,6 @@
     <string name="toast_plzenabledeviceadmin">Please enable device administration</string>
     <string name="cancel">cancel</string>
     <string name="ok">ok</string>
+    <string name="set_as_home">Set as home</string>
 
 </resources>

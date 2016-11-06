@@ -6,8 +6,8 @@
     android:layout_gravity="center"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
     android:visibility="invisible"
     app:cardBackgroundColor="@color/Light.Background"
     app:cardElevation="4dp" />

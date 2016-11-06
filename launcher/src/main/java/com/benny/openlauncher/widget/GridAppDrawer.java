@@ -7,9 +7,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
@@ -20,6 +22,9 @@ import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
+import com.turingtechnologies.materialscrollbar.AlphabetIndicator;
+import com.turingtechnologies.materialscrollbar.DragScrollBar;
+import com.turingtechnologies.materialscrollbar.INameableAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +36,7 @@ import java.util.List;
 public class GridAppDrawer extends CardView{
 
     public RecyclerView rv;
-    FastItemAdapter<AppItem> fa;
+    MyAdapter fa;
 
     List<AppManager.App> apps;
     private GridLayoutManager layoutManager;
@@ -82,7 +87,7 @@ public class GridAppDrawer extends CardView{
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         itemWidth = (getWidth()-rv.getPaddingRight()-rv.getPaddingRight()) / layoutManager.getSpanCount();
-        itemHeightPadding = Tool.convertDpToPixel(10,getContext());
+        itemHeightPadding = Tool.convertDpToPixel(12,getContext());
         super.onLayout(changed, left, top, right, bottom);
     }
 
@@ -90,17 +95,13 @@ public class GridAppDrawer extends CardView{
     public static int itemHeightPadding;
 
     private void init(){
-        rv = new RecyclerView(getContext());
-        FrameLayout.LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        layoutParams.gravity = Gravity.CENTER;
-
-        rv.setLayoutParams(layoutParams);
-        int pad = Tool.convertDpToPixel(8,getContext());
-        rv.setClipToPadding(false);
-        rv.setPadding(pad,pad,pad,pad);
+        RelativeLayout rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_griddrawerinner,this,false);
+        DragScrollBar bar = (DragScrollBar) rl.findViewById(R.id.dragScrollBar);
+        bar.setIndicator(new AlphabetIndicator(getContext()),true);
+        rv = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
 
         boolean mPortrait = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-        fa = new FastItemAdapter<>();
+        fa = new MyAdapter();
         rv.setAdapter(fa);
 
         layoutManager = new GridLayoutManager(getContext(), LauncherSettings.getInstance(getContext()).generalSettings.drawerGridx);
@@ -110,7 +111,6 @@ public class GridAppDrawer extends CardView{
             setLandscapeValue();
         }
         rv.setLayoutManager(layoutManager);
-
 
         if (AppManager.getInstance(getContext()).getApps().size() != 0){
             GridAppDrawer.this.apps = AppManager.getInstance(getContext()).getApps();
@@ -132,7 +132,18 @@ public class GridAppDrawer extends CardView{
             }
         });
 
-        addView(rv);
+        addView(rl);
+    }
+
+    private class MyAdapter extends FastItemAdapter<AppItem> implements INameableAdapter{
+
+        @Override
+        public Character getCharacterForElement(int element) {
+            if (apps != null)
+            return apps.get(element).appName.charAt(0);
+            else return '#';
+        }
+
     }
 
     public static class AppItem extends AbstractItem<AppItem,AppItem.ViewHolder> {

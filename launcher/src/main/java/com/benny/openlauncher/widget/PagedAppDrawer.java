@@ -46,6 +46,7 @@ public class PagedAppDrawer extends SmoothViewPager {
             super.onConfigurationChanged(newConfig);
             return;
         }
+
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             setLandscapeValue();
             calculatePage();
