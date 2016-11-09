@@ -47,7 +47,10 @@ public class QuickCenterItem{
             viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    adapter.remove(viewHolder.getAdapterPosition());
+                    if (view.getContext() instanceof Home){
+                        ((Home)view.getContext()).notes.remove(viewHolder.getAdapterPosition());
+                        adapter.remove(viewHolder.getAdapterPosition());
+                    }
                     return true;
                 }
             });
