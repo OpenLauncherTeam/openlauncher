@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -66,17 +67,26 @@ import java.util.Locale;
 public class Home extends Activity {
 
     //static members, easier to access from any activity and class.
+    @Nullable
     public static Home launcher;
+    @Nullable
     public static Desktop desktop;
+    @Nullable
     public static Dock dock;
+    @Nullable
     public static View searchBar;
+    @Nullable
     public static GroupPopupView groupPopup;
 
     //QuickCenter
+    @Nullable
     public FastItemAdapter<QuickCenterItem.NoteItem> noteAdapter;
+    @Nullable
     public ArrayList<QuickCenterItem.NoteContent> notes = new ArrayList<>();
 
+    @Nullable
     public static WidgetHost appWidgetHost;
+    @Nullable
     public static AppWidgetManager appWidgetManager;
 
     //This two integer is used for the drag shadow builder to get the touch point os users' finger.
@@ -638,6 +648,7 @@ public class Home extends Activity {
     }
 
     //endregion
+
 
     //region VIEWONCLICK
     public void onAddNote(View view){
