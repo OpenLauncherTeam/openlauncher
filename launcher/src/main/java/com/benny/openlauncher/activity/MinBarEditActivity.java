@@ -40,7 +40,7 @@ public class MinBarEditActivity extends AppCompatActivity implements ItemTouchCa
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv);
+        recyclerView = (RecyclerView) findViewById(R.id.quickCenter);
 
         adapter = new FastItemAdapter<>();
 

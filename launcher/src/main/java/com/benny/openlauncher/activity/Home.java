@@ -18,12 +18,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -43,7 +45,6 @@ import com.benny.openlauncher.util.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.util.WidgetHost;
 import com.benny.openlauncher.widget.AppDrawer;
-import com.benny.openlauncher.widget.PagedAppDrawer;
 import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.Dock;
 import com.benny.openlauncher.widget.DragOptionView;
@@ -64,7 +65,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class Home extends Activity {
+public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     //static members, easier to access from any activity and class.
     @Nullable
@@ -102,10 +103,11 @@ public class Home extends Activity {
     private DragOptionView dragOptionView;
     private ViewGroup desktopEditOptionView;
     private RecyclerView quickCenter;
-    private BroadcastReceiver appUpdateReceiver , shortcutReceiver;
-    private TextView searchbarclock;
+    private BroadcastReceiver appUpdateReceiver, shortcutReceiver;
+    private TextView searchBarClock;
     private ListView minBar;
-    private DrawerLayout myScreen;
+    private DrawerLayout drawerLayout;
+    private ViewGroup myScreen;
 
     public static final int REQUEST_PICK_APPWIDGET = 0x6475;
     public static final int REQUEST_CREATE_APPWIDGET = 0x3648;
@@ -125,7 +127,7 @@ public class Home extends Activity {
         AppManager.getInstance(this).clearListener();
         LauncherSettings.getInstance(this);
 
-        myScreen = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_home, null);
+        myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, null);
         myScreen.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -133,6 +135,13 @@ public class Home extends Activity {
             }
         });
         setContentView(myScreen);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            findViewById(R.id.shortcutLayout).setPadding(0, Tool.getStatusBarHeight(this), 0, 0);
+        }
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout.addDrawerListener(this);
 
         appWidgetHost = new WidgetHost(getApplicationContext(), R.id.m_AppWidgetHost);
         appWidgetManager = AppWidgetManager.getInstance(this);
@@ -162,8 +171,8 @@ public class Home extends Activity {
 
     //region INIT
     private void findViews() {
-        searchbarclock = (TextView) findViewById(R.id.searchbarclock);
-        quickCenter = (RecyclerView) findViewById(R.id.rv);
+        searchBarClock = (TextView) findViewById(R.id.searchbarclock);
+        quickCenter = (RecyclerView) findViewById(R.id.quickCenter);
         baseLayout = (ConstraintLayout) findViewById(R.id.baseLayout);
         appDrawerOtter = (AppDrawer) findViewById(R.id.appDrawerOtter);
         appDrawer = appDrawerOtter.getChildAt(0);
@@ -184,24 +193,24 @@ public class Home extends Activity {
         initMinBar();
         initQuickCenter();
 
-        DragNavigationControl dragNavigationControl = new DragNavigationControl(findViewById(R.id.left),findViewById(R.id.right));
+        DragNavigationControl dragNavigationControl = new DragNavigationControl(findViewById(R.id.left), findViewById(R.id.right));
 
-        String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault()) + " " +
+        String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
                 String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
-        String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault()) + ", " +
+        String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " +
                 String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.YEAR));
-        searchbarclock.setText(Html.fromHtml(date+"<br><small><small><small><small><small>"+date2+"</small></small></small></small></small>"));
-        searchbarclock.postDelayed(new Runnable() {
+        searchBarClock.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
+        searchBarClock.postDelayed(new Runnable() {
             @Override
             public void run() {
-                String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault()) + " " +
+                String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
                         String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
-                String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault()) + ", " +
+                String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " +
                         String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.YEAR));
-                searchbarclock.setText(Html.fromHtml(date+"<br><small><small><small><small><small>"+date2+"</small></small></small></small></small>"));
-                searchbarclock.postDelayed(this,60000);
+                searchBarClock.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
+                searchBarClock.postDelayed(this, 60000);
             }
-        },60000);
+        }, 60000);
 
         appDrawerOtter.withHome(this);
 
@@ -305,7 +314,7 @@ public class Home extends Activity {
     }
 
     private void initSettings() {
-        if (!LauncherSettings.getInstance(this).generalSettings.showsearchbar){
+        if (!LauncherSettings.getInstance(this).generalSettings.showsearchbar) {
             searchBar.setVisibility(View.GONE);
         }
     }
@@ -320,13 +329,13 @@ public class Home extends Activity {
         final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.minBarArrangement;
         if (minBarArrangement == null) {
             LauncherSettings.getInstance(this).generalSettings.minBarArrangement = new ArrayList<>();
-            for(LauncherAction.ActionItem item : LauncherAction.actionItems){
-                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("0"+item.label.toString());
+            for (LauncherAction.ActionItem item : LauncherAction.actionItems) {
+                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("0" + item.label.toString());
                 labels.add(item.label.toString());
                 icons.add(item.icon);
             }
-        } else{
-            if (minBarArrangement.size() == LauncherAction.actionItems.length){
+        } else {
+            if (minBarArrangement.size() == LauncherAction.actionItems.length) {
                 for (String act : minBarArrangement) {
                     if (act.charAt(0) == '0') {
                         LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act.substring(1));
@@ -334,10 +343,10 @@ public class Home extends Activity {
                         icons.add(item.icon);
                     }
                 }
-            }else {
+            } else {
                 LauncherSettings.getInstance(this).generalSettings.minBarArrangement = new ArrayList<>();
-                for(LauncherAction.ActionItem item : LauncherAction.actionItems){
-                    LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("0"+item.label.toString());
+                for (LauncherAction.ActionItem item : LauncherAction.actionItems) {
+                    LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("0" + item.label.toString());
                     labels.add(item.label.toString());
                     icons.add(item.icon);
                 }
@@ -350,26 +359,26 @@ public class Home extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0)
-                    startActivityForResult(new Intent(Home.this, MinBarEditActivity.class),MINBAREDIT);
-                else{
+                    startActivityForResult(new Intent(Home.this, MinBarEditActivity.class), MINBAREDIT);
+                else {
                     LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
-                    LauncherAction.RunAction(action,Home.this,Home.this);
+                    LauncherAction.RunAction(action, Home.this, Home.this);
                     if (action != LauncherAction.Action.LauncherSettings)
-                        myScreen.closeDrawers();
+                        drawerLayout.closeDrawers();
                 }
             }
         });
     }
 
     private void initQuickCenter() {
-        quickCenter.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        quickCenter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         HeaderAdapter<QuickCenterItem.SearchHeader> header = new HeaderAdapter<>();
         noteAdapter = new FastItemAdapter<>();
 
         quickCenter.setAdapter(header.wrap(noteAdapter));
 
-        new AsyncTask<Void,Void,Void>(){
+        new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -383,19 +392,21 @@ public class Home extends Activity {
                     JsonReader reader = new JsonReader(new InputStreamReader(Home.this.openFileInput("noteData.json")));
                     reader.beginArray();
                     while (reader.hasNext()) {
-                        QuickCenterItem.NoteContent content = gson.fromJson(reader,QuickCenterItem.NoteContent.class);
+                        QuickCenterItem.NoteContent content = gson.fromJson(reader, QuickCenterItem.NoteContent.class);
                         notes.add(content);
                     }
                     reader.endArray();
                     reader.close();
-                } catch (IOException e) {e.printStackTrace();}
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void aVoid) {
                 for (int i = 0; i < notes.size(); i++) {
-                    noteAdapter.add(new QuickCenterItem.NoteItem(notes.get(i).date,notes.get(i).content,noteAdapter));
+                    noteAdapter.add(new QuickCenterItem.NoteItem(notes.get(i).date, notes.get(i).content, noteAdapter));
                 }
                 super.onPostExecute(aVoid);
             }
@@ -412,7 +423,7 @@ public class Home extends Activity {
         registerReceiver(appUpdateReceiver, filter);
     }
 
-    private void registerShortcutReceiver(){
+    private void registerShortcutReceiver() {
         IntentFilter filter = new IntentFilter();
         filter.addAction("com.android.launcher.action.INSTALL_SHORTCUT");
         shortcutReceiver = new ShortcutReceiver();
@@ -463,7 +474,7 @@ public class Home extends Activity {
     @Override
     protected void onDestroy() {
         if (appWidgetHost != null)
-        appWidgetHost.stopListening();
+            appWidgetHost.stopListening();
         appWidgetHost = null;
         unregisterReceiver(appUpdateReceiver);
         unregisterReceiver(shortcutReceiver);
@@ -484,7 +495,7 @@ public class Home extends Activity {
                 configureWidget(data);
             } else if (requestCode == REQUEST_CREATE_APPWIDGET) {
                 createWidget(data);
-            }else if (requestCode == MINBAREDIT){
+            } else if (requestCode == MINBAREDIT) {
                 initMinBar();
             }
         } else if (resultCode == RESULT_CANCELED && data != null) {
@@ -499,7 +510,7 @@ public class Home extends Activity {
     @Override
     protected void onStart() {
         if (appWidgetHost != null)
-        appWidgetHost.startListening();
+            appWidgetHost.startListening();
         super.onStart();
     }
 
@@ -511,13 +522,13 @@ public class Home extends Activity {
     @Override
     protected void onStop() {
         Gson gson = LauncherSettings.getInstance(this).writeSettings();
-        Tool.writeToFile("noteData.json",gson.toJson(notes),Home.this);
+        Tool.writeToFile("noteData.json", gson.toJson(notes), Home.this);
         super.onStop();
     }
 
     @Override
     public void onBackPressed() {
-        myScreen.closeDrawers();
+        drawerLayout.closeDrawers();
         if (!desktop.inEditMode) {
             desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
             if (appDrawer.getVisibility() == View.VISIBLE)
@@ -546,9 +557,9 @@ public class Home extends Activity {
     public void openAppDrawer() {
         int cx = (dock.getLeft() + dock.getRight()) / 2;
         int cy = (dock.getTop() + dock.getBottom()) / 2;
-        int margin = ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).leftMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
+        int margin = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).leftMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
         cx -= margin;
-        int marginh = ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).topMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
+        int marginh = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).topMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
         cy -= marginh;
 
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
@@ -565,7 +576,7 @@ public class Home extends Activity {
         appDrawerBtn.animate().scaleX(0).scaleY(0).setDuration(100);
 
         if (appDrawerIndicator != null)
-        appDrawerIndicator.animate().alpha(1).setDuration(100);
+            appDrawerIndicator.animate().alpha(1).setDuration(100);
 
         appDrawerAnimator.addListener(new Animator.AnimatorListener() {
             @Override
@@ -602,9 +613,9 @@ public class Home extends Activity {
 
         int cx = (dock.getLeft() + dock.getRight()) / 2;
         int cy = (dock.getTop() + dock.getBottom()) / 2;
-        int margin = ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).leftMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
+        int margin = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).leftMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
         cx -= margin;
-        int marginh = ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).topMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
+        int marginh = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).topMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
         cy -= marginh;
 
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
@@ -618,7 +629,7 @@ public class Home extends Activity {
                 if (LauncherSettings.getInstance(Home.this).generalSettings.showsearchbar)
                     searchBar.setVisibility(View.VISIBLE);
                 if (appDrawerIndicator != null)
-                appDrawerIndicator.animate().alpha(0);
+                    appDrawerIndicator.animate().alpha(0);
             }
 
             @Override
@@ -651,18 +662,35 @@ public class Home extends Activity {
 
 
     //region VIEWONCLICK
-    public void onAddNote(View view){
+    public void onAddNote(View view) {
         Tool.askForText("Note", null, this, new Tool.OnTextGotListener() {
             @Override
             public void hereIsTheText(String str) {
-                if (str.isEmpty())return;
+                if (str.isEmpty()) return;
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 String time = df.format(Calendar.getInstance().getTime());
 
-                notes.add(new QuickCenterItem.NoteContent(time,str));
-                noteAdapter.add(new QuickCenterItem.NoteItem(time,str,noteAdapter));
+                notes.add(new QuickCenterItem.NoteContent(time, str));
+                noteAdapter.add(new QuickCenterItem.NoteItem(time, str, noteAdapter));
             }
         });
+    }
+
+    public void onNoteToggle(View view) {
+        final View target = findViewById(R.id.quickCenterLayout);
+        int offset = Tool.convertDpToPixel(5, this);
+        if (target.getVisibility() == View.VISIBLE) {
+            target.animate().setDuration(180L).alpha(0).translationY(+offset).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    target.setVisibility(View.INVISIBLE);
+                }
+            });
+        } else {
+            target.setAlpha(0);
+            target.setVisibility(View.VISIBLE);
+            target.animate().setDuration(180L).alpha(1).translationY(-offset).setInterpolator(new AccelerateDecelerateInterpolator());
+        }
     }
 
     public void onSearch(View view) {
@@ -686,6 +714,45 @@ public class Home extends Activity {
             Home.this.startActivity(i);
         } catch (Exception e) {
             Tool.toast(Home.this, "Can not find google search app");
+        }
+    }
+
+    @Override
+    public void onDrawerSlide(View drawerView, float slideOffset) {
+
+    }
+
+    @Override
+    public void onDrawerOpened(View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerClosed(View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
+        final View target = findViewById(R.id.shortcutLayout);
+        switch (newState) {
+            case DrawerLayout.STATE_DRAGGING:
+            case DrawerLayout.STATE_SETTLING:
+                if (target.getAlpha() == 1)
+                    target.animate().setDuration(180L).alpha(0).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            target.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                break;
+            case DrawerLayout.STATE_IDLE:
+                if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                    target.setVisibility(View.VISIBLE);
+                    target.setAlpha(0);
+                    target.animate().setDuration(180L).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+                }
+                break;
         }
     }
     //endregion
