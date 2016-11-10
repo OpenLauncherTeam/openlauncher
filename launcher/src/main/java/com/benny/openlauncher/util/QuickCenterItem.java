@@ -90,6 +90,11 @@ public class QuickCenterItem{
             this.content = content;
             this.date = date;
         }
+
+        @Override
+        public boolean equals(Object obj) {
+            return obj instanceof NoteContent && this.content.equals(((NoteContent)obj).content) && this.date.equals(((NoteContent)obj).date);
+        }
     }
 
     public static class SearchHeader extends AbstractItem<SearchHeader, SearchHeader.ViewHolder> {

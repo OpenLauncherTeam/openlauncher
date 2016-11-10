@@ -11,7 +11,7 @@
         <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv"
+                android:id="@+id/quickCenter"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
