@@ -2,6 +2,13 @@
 <p align="center"><b>OpenLauncher</b> <br> The ideal home screen for Android</p>
 
 ###Status>>
+OnGoing: 
+
+Add an ios like easy-to-arrange desktop option (feature request).
+
+Support hide apps function
+
+Finished:
 
 Debugging multiple errors that lead to crashes on Android api level lower that 21.
 
@@ -23,10 +30,10 @@ Dock | Yes
 Scrollable background | Yes
 Drag n drop | Yes
 Paged app drawer | Yes
-Vertical app drawer | No
+Vertical app drawer | Yes
 Hide apps | No
 Search bar | Yes
-Iocn packs | No
+Iocn packs | Yes
 
 
 Please go to the OpenLauncher [Wiki](https://github.com/Benny-Kok/OpenLauncher/wiki) for more information.
