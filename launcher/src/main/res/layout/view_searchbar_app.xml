@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/ic_search_black_24dp"/>
 
-        <EditText
+        <com.benny.openlauncher.widget.SearchBar
             android:fontFamily="sans-serif-condensed"
             android:gravity="center_vertical"
             android:background="@android:color/transparent"
