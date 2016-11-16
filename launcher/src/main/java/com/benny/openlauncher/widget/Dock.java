@@ -22,6 +22,8 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
     public View previousItemView;
     public Item previousItem;
 
+    private Home home;
+
     public Dock(Context c) {
         super(c);
         init();
@@ -42,7 +44,8 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
         super.init();
     }
 
-    public void initDockItem() {
+    public void initDockItem(Home home) {
+        this.home = home;
         removeAllViews();
         for (Item item : LauncherSettings.getInstance(getContext()).dockData) {
             addItemToPagePosition(item,0);
@@ -73,25 +76,25 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
                 Item item = intent.getParcelableExtra("mDragData");
                 if (item.type == Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT) {
                     if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
-                        Home.desktop.consumeRevert();
-                        Home.dock.consumeRevert();
+                        home.desktop.consumeRevert();
+                        home.dock.consumeRevert();
                     } else {
                         Point pos = touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY,false);
                         View itemView = coordinateToChildView(pos);
 
                         if (itemView != null)
-                            if (Desktop.handleOnDropOver(item, (Item) itemView.getTag(),itemView,this,0,this)){
-                                Home.desktop.consumeRevert();
-                                Home.dock.consumeRevert();
+                            if (Desktop.handleOnDropOver(home,item, (Item) itemView.getTag(),itemView,this,0,this)){
+                                home.desktop.consumeRevert();
+                                home.dock.consumeRevert();
                             }else {
                                 Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                                Home.dock.revertLastItem();
-                                Home.desktop.revertLastItem();
+                                home.dock.revertLastItem();
+                                home.desktop.revertLastItem();
                             }
                         else {
                             Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                            Home.dock.revertLastItem();
-                            Home.desktop.revertLastItem();
+                            home.dock.revertLastItem();
+                            home.desktop.revertLastItem();
                         }
                     }
                 }

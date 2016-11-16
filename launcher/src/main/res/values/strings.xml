@@ -5,7 +5,7 @@
 
     <string name="info">Info</string>
     <string name="uninstall">Uninstall</string>
-    <string name="add_widget">Add widget</string>
+    <string name="add_widget">Widget</string>
     <string name="remove">Remove</string>
 
     <string name="toast_notenoughspace">Not enough space</string>
@@ -15,6 +15,7 @@
     <string name="toast_plzenabledeviceadmin">Please enable device administration</string>
     <string name="cancel">cancel</string>
     <string name="ok">ok</string>
-    <string name="set_as_home">Set as home</string>
+    <string name="set_as_home">HomePage</string>
+    <string name="search_apps">Search apps...</string>
 
 </resources>

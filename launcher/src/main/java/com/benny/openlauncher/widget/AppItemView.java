@@ -104,7 +104,7 @@ public class AppItemView extends View implements Drawable.Callback{
         float mHeight = iconSize + (noLabel? 0 : labelHeight);
         if (targetedWidth != 0)
             mWidth = targetedWidth;
-        setMeasuredDimension((int)Math.ceil(mWidth),(int)Math.ceil((int)mHeight) + Tool.convertDpToPixel(2,getContext()) + targetedHeightPadding *2);
+        setMeasuredDimension((int)Math.ceil(mWidth),(int)Math.ceil((int)mHeight) + Tool.dp2px(2,getContext()) + targetedHeightPadding *2);
     }
 
     private void init(){
@@ -112,7 +112,7 @@ public class AppItemView extends View implements Drawable.Callback{
         setDrawingCacheEnabled(true);
         setWillNotCacheDrawing(false);
 
-        labelHeight = Tool.convertDpToPixel(14,getContext());
+        labelHeight = Tool.dp2px(14,getContext());
 
         textPaint.setTextSize(sp2px(getContext(),14));
         textPaint.setColor(Color.DKGRAY);
@@ -161,13 +161,13 @@ public class AppItemView extends View implements Drawable.Callback{
 
         public Builder(Context context){
             view = new AppItemView(context);
-            float iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(context).generalSettings.iconSize, view.getContext());
+            float iconSize = Tool.dp2px(LauncherSettings.getInstance(context).generalSettings.iconSize, view.getContext());
             view.setIconSize(iconSize);
         }
 
         public Builder(AppItemView view){
             this.view = view;
-            float iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(view.getContext()).generalSettings.iconSize, view.getContext());
+            float iconSize = Tool.dp2px(LauncherSettings.getInstance(view.getContext()).generalSettings.iconSize, view.getContext());
             view.setIconSize(iconSize);
         }
 

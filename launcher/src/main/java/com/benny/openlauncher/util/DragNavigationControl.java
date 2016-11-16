@@ -8,13 +8,16 @@ import com.benny.openlauncher.activity.Home;
 
 public class DragNavigationControl {
 
-    Handler l;
-    Runnable left, right;
-    boolean leftok = true, rightok = true;
+    private Handler l;
+    private Runnable left, right;
+    private boolean leftok = true, rightok = true;
 
-    View rightView,leftView;
+    private View rightView,leftView;
 
-    public DragNavigationControl(View left, View right) {
+    private Home home;
+
+    public DragNavigationControl(Home home,View left, View right) {
+        this.home = home;
         rightView = right;
         leftView = left;
         init();
@@ -25,20 +28,20 @@ public class DragNavigationControl {
         right = new Runnable() {
             @Override
             public void run() {
-                if (Home.desktop.getCurrentItem() < Home.desktop.pageCount-1)
-                    Home.desktop.setCurrentItem(Home.desktop.getCurrentItem() + 1);
-                else if (Home.desktop.getCurrentItem() == Home.desktop.pageCount-1)
-                    Home.desktop.addPageRight();
+                if (home.desktop.getCurrentItem() < home.desktop.pageCount-1)
+                    home.desktop.setCurrentItem(home.desktop.getCurrentItem() + 1);
+                else if (home.desktop.getCurrentItem() == home.desktop.pageCount-1)
+                    home.desktop.addPageRight();
                 l.postDelayed(this, 1000);
             }
         };
         left = new Runnable() {
             @Override
             public void run() {
-                if (Home.desktop.getCurrentItem() > 0)
-                    Home.desktop.setCurrentItem(Home.desktop.getCurrentItem() - 1);
-                else if (Home.desktop.getCurrentItem() == 0)
-                    Home.desktop.addPageLeft();
+                if (home.desktop.getCurrentItem() > 0)
+                    home.desktop.setCurrentItem(home.desktop.getCurrentItem() - 1);
+                else if (home.desktop.getCurrentItem() == 0)
+                    home.desktop.addPageLeft();
                 l.postDelayed(this, 1000);
             }
         };

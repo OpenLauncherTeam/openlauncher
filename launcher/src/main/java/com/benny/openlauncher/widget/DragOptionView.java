@@ -31,6 +31,12 @@ public class DragOptionView extends CardView{
 
     private boolean inited = false;
 
+    public void setHome(Home home) {
+        this.home = home;
+    }
+
+    private Home home;
+
     final Long animSpeed = 180L;
 
     public DragOptionView(Context context) {
@@ -66,8 +72,8 @@ public class DragOptionView extends CardView{
 
     private void init(){
         inited = false;
-        setCardElevation(Tool.convertDpToPixel(8,getContext()));
-        setRadius(Tool.convertDpToPixel(2,getContext()));
+        setCardElevation(Tool.dp2px(8,getContext()));
+        setRadius(Tool.dp2px(2,getContext()));
         horiIconList = (LinearLayout)((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_dragoption_horiiconlist, this, false);
         addView(horiIconList);
 
@@ -158,8 +164,8 @@ public class DragOptionView extends CardView{
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Home.desktop.consumeRevert();
-                        Home.dock.consumeRevert();
+                       home.desktop.consumeRevert();
+                       home.dock.consumeRevert();
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;
@@ -212,8 +218,8 @@ public class DragOptionView extends CardView{
                         infoIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
-                        Home.dock.setHideGrid(false);
-                        for (CellContainer cellContainer : Home.desktop.pages)
+                       home.dock.setHideGrid(false);
+                        for (CellContainer cellContainer :home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
                     case ACTION_APP_DRAWER:
@@ -221,31 +227,31 @@ public class DragOptionView extends CardView{
                         infoIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
-                        Home.dock.setHideGrid(false);
-                        for (CellContainer cellContainer : Home.desktop.pages)
+                       home.dock.setHideGrid(false);
+                        for (CellContainer cellContainer :home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
                     case ACTION_WIDGET:
                         removeIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
-                        for (CellContainer cellContainer : Home.desktop.pages)
+                        for (CellContainer cellContainer :home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
                     case ACTION_GROUP:
                         removeIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
-                        Home.dock.setHideGrid(false);
-                        for (CellContainer cellContainer : Home.desktop.pages)
+                       home.dock.setHideGrid(false);
+                        for (CellContainer cellContainer :home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
                     case ACTION_SHORTCUT:
                         removeIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
-                        Home.dock.setHideGrid(false);
-                        for (CellContainer cellContainer : Home.desktop.pages)
+                       home.dock.setHideGrid(false);
+                        for (CellContainer cellContainer :home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
                 }
@@ -259,8 +265,8 @@ public class DragOptionView extends CardView{
                 return true;
 
             case DragEvent.ACTION_DRAG_ENDED:
-                Home.dock.setHideGrid(true);
-                for (CellContainer cellContainer : Home.desktop.pages)
+               home.dock.setHideGrid(true);
+                for (CellContainer cellContainer :home.desktop.pages)
                     cellContainer.setHideGrid(true);
 
                 dragging = false;
