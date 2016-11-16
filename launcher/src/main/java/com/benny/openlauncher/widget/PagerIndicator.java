@@ -37,7 +37,7 @@ public class PagerIndicator extends View{
     }
 
     private void init(){
-        pad = Tool.convertDpToPixel(3,getContext());
+        pad = Tool.dp2px(3,getContext());
         setWillNotDraw(false);
         dotPaint = new Paint();
         dotPaint.setColor(Color.WHITE);

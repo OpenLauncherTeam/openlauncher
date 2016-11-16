@@ -6,11 +6,9 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.Filter;
 import android.widget.RelativeLayout;
 
 import com.benny.openlauncher.R;
@@ -19,6 +17,7 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
+import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
@@ -35,8 +34,11 @@ import java.util.List;
 
 public class GridAppDrawer extends CardView{
 
+    public static int itemWidth;
+    public static int itemHeightPadding;
+
     public RecyclerView rv;
-    MyAdapter fa;
+    GridAppDrawerAdapter fa;
 
     List<AppManager.App> apps;
     private GridLayoutManager layoutManager;
@@ -87,12 +89,9 @@ public class GridAppDrawer extends CardView{
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         itemWidth = (getWidth()-rv.getPaddingRight()-rv.getPaddingRight()) / layoutManager.getSpanCount();
-        itemHeightPadding = Tool.convertDpToPixel(12,getContext());
+        itemHeightPadding = Tool.dp2px(12,getContext());
         super.onLayout(changed, left, top, right, bottom);
     }
-
-    public static int itemWidth;
-    public static int itemHeightPadding;
 
     private void init(){
         RelativeLayout rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_griddrawerinner,this,false);
@@ -101,7 +100,7 @@ public class GridAppDrawer extends CardView{
         rv = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
 
         boolean mPortrait = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-        fa = new MyAdapter();
+        fa = new GridAppDrawerAdapter();
         rv.setAdapter(fa);
 
         layoutManager = new GridLayoutManager(getContext(), LauncherSettings.getInstance(getContext()).generalSettings.drawerGridx);
@@ -135,7 +134,16 @@ public class GridAppDrawer extends CardView{
         addView(rl);
     }
 
-    private class MyAdapter extends FastItemAdapter<AppItem> implements INameableAdapter{
+    public class GridAppDrawerAdapter extends FastItemAdapter<AppItem> implements INameableAdapter{
+
+        public GridAppDrawerAdapter(){
+            withFilterPredicate(new IItemAdapter.Predicate<AppItem>() {
+                @Override
+                public boolean filter(AppItem item, CharSequence constraint) {
+                    return !item.app.appName.toLowerCase().contains(constraint.toString().toLowerCase());
+                }
+            });
+        }
 
         @Override
         public Character getCharacterForElement(int element) {
@@ -143,11 +151,10 @@ public class GridAppDrawer extends CardView{
             return apps.get(element).appName.charAt(0);
             else return '#';
         }
-
     }
 
     public static class AppItem extends AbstractItem<AppItem,AppItem.ViewHolder> {
-        AppManager.App app;
+        public AppManager.App app;
 
         public AppItem(AppManager.App app) {
             this.app = app;

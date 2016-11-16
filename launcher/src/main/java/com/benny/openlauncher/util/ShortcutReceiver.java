@@ -44,7 +44,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
 
         Desktop.Item item = Desktop.Item.newShortcutItem(context, name, newIntent, Tool.drawableToBitmap(shortcutIconDrawable));
 
-        Point perferedPos = Home.desktop.pages.get(Home.desktop.getCurrentItem()).findFreeSpace();
+        Point perferedPos = Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).findFreeSpace();
 //        while (perferedPos == null && Home.desktop.getCurrentItem() != Home.desktop.pages.size()-2){
 //            Home.desktop.setCurrentItem(Home.desktop.getCurrentItem() + 1);
 //            perferedPos = Home.desktop.pages.get(Home.desktop.getCurrentItem()).findFreeSpace();
@@ -57,9 +57,9 @@ public class ShortcutReceiver extends BroadcastReceiver {
             item.x = perferedPos.x;
             item.y = perferedPos.y;
         }
-        if (LauncherSettings.getInstance(context).desktopData.size() <  Home.desktop.getCurrentItem() + 1)
-            LauncherSettings.getInstance(context).desktopData.add( Home.desktop.getCurrentItem(), new ArrayList<Desktop.Item>());
-        LauncherSettings.getInstance(context).desktopData.get( Home.desktop.getCurrentItem()).add(item);
-        Home.desktop.addItemToPagePosition(item,Home.desktop.getCurrentItem());
+        if (LauncherSettings.getInstance(context).desktopData.size() <  Home.launcher.desktop.getCurrentItem() + 1)
+            LauncherSettings.getInstance(context).desktopData.add( Home.launcher.desktop.getCurrentItem(), new ArrayList<Desktop.Item>());
+        LauncherSettings.getInstance(context).desktopData.get( Home.launcher.desktop.getCurrentItem()).add(item);
+        Home.launcher.desktop.addItemToPagePosition(item,Home.launcher.desktop.getCurrentItem());
     }
 }

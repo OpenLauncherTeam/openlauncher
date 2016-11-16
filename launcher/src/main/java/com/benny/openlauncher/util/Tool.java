@@ -39,12 +39,12 @@ public class Tool
 {
 	private Tool(){}
 	
-	public static float convertDpToPixel(float dp, Context context){
+	public static float dp2px(float dp, Context context){
 		Resources resources = context.getResources();
 		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
 	}
 
-    public static int convertDpToPixel(int dp, Context context){
+    public static int dp2px(int dp, Context context){
         Resources resources = context.getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics()));
     }
@@ -227,9 +227,11 @@ public class Tool
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        v.animate().scaleY(1.1f).scaleX(1.1f).setDuration(50);
                         ((TextView)v).setTextColor(Color.rgb(200, 200, 200));
                         return false;
                     case MotionEvent.ACTION_UP:
+                        v.animate().scaleY(1f).scaleX(1f).setDuration(50);
                         ((TextView)v).setTextColor(Color.WHITE);
                         return false;
                 }

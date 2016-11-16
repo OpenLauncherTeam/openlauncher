@@ -8,6 +8,7 @@
     android:visibility="invisible">
 
     <TextView
+        android:fontFamily="sans-serif-condensed"
         android:id="@+id/removepage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,6 +18,7 @@
         android:textColor="?android:textColorPrimaryInverse" />
 
     <TextView
+        android:fontFamily="sans-serif-condensed"
         android:id="@+id/setashomepage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,6 +28,7 @@
         android:textColor="?android:textColorPrimaryInverse" />
 
     <TextView
+        android:fontFamily="sans-serif-condensed"
         android:id="@+id/addwidgetbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

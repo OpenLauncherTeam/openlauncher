@@ -10,7 +10,6 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
 import java.text.Collator;
@@ -170,7 +169,7 @@ public class AppManager {
 
             LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(context).generalSettings;
             if (!generalSettings.iconPackName.isEmpty()) {
-                IconPackHelper.themePacs(AppManager.this, Tool.convertDpToPixel(generalSettings.iconSize, context), generalSettings.iconPackName, apps);
+                IconPackHelper.themePacs(AppManager.this, Tool.dp2px(generalSettings.iconSize, context), generalSettings.iconPackName, apps);
             }
             return null;
         }
@@ -202,8 +201,8 @@ public class AppManager {
 
             if (recreateAfterGettingApps){
                 recreateAfterGettingApps = false;
-                if (Home.launcher != null)
-                    Home.launcher.recreate();
+                if (context instanceof Home)
+                    ((Home)context).recreate();
             }
 
             super.onPostExecute(result);

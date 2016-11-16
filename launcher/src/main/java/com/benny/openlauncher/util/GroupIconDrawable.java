@@ -7,11 +7,9 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.drawable.Drawable;
-import android.view.View;
 
 import com.benny.openlauncher.activity.Home;
 
@@ -53,7 +51,7 @@ public class GroupIconDrawable extends Drawable{
         paint4.setAntiAlias(true);
         paint4.setFlags(Paint.ANTI_ALIAS_FLAG);
         paint4.setStyle(Paint.Style.STROKE);
-        outlinepad = Tool.convertDpToPixel(2, Home.desktop.getContext());
+        outlinepad = Tool.dp2px(2, Home.launcher.desktop.getContext());
         paint4.setStrokeWidth(outlinepad);
 
         this.paint2 = new Paint();

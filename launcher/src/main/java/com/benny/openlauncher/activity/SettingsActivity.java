@@ -36,6 +36,7 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                     .add(new MaterialPrefFragment.TBPref("dockshowlabel","Show app label","show the app's name in the dock",LauncherSettings.getInstance(this).generalSettings.dockshowlabel))
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
                     .add(new MaterialPrefFragment.ButtonPref("drawerstyle", "Drawer Style", "choose the style of the app drawer"))
+                    .add(new MaterialPrefFragment.TBPref("appdrawersearchbar", "Search Bar", "search bar will only appear in grid drawer", LauncherSettings.getInstance(this).generalSettings.appDrawerSearchbar))
                     .add(new MaterialPrefFragment.NUMPref("horigridsize", "Grid column", "App drawer grid size", LauncherSettings.getInstance(this).generalSettings.drawerGridx, 1, 10))
                     .add(new MaterialPrefFragment.NUMPref("vertigridsize", "Grid row", "App drawer grid size", LauncherSettings.getInstance(this).generalSettings.drawerGridy, 1, 10))
                     .add(new MaterialPrefFragment.TBPref("rememberappdrawerpage", "Remember last page", "The page will not reset to the first page when reopen app drawer", !LauncherSettings.getInstance(this).generalSettings.rememberappdrawerpage))
@@ -59,9 +60,9 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
             case "showsearchbar":
                 LauncherSettings.getInstance(this).generalSettings.showsearchbar = (boolean) p2;
                 if (!(boolean) p2)
-                    Home.searchBar.setVisibility(View.GONE);
+                    Home.launcher.searchBar.setVisibility(View.GONE);
                 else
-                    Home.searchBar.setVisibility(View.VISIBLE);
+                    Home.launcher.searchBar.setVisibility(View.VISIBLE);
                 break;
             case "iconsize":
                 LauncherSettings.getInstance(this).generalSettings.iconSize = (int) p2;
@@ -77,6 +78,10 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                 break;
             case "dockshowlabel":
                 LauncherSettings.getInstance(this).generalSettings.dockshowlabel = (boolean)p2;
+                requireLauncherRestart = true;
+                break;
+            case "appdrawersearchbar":
+                LauncherSettings.getInstance(this).generalSettings.appDrawerSearchbar = (boolean)p2;
                 requireLauncherRestart = true;
                 break;
         }

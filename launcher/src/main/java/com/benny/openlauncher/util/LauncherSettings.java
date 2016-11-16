@@ -154,6 +154,8 @@ public class LauncherSettings {
         public int drawerGridx = 4;
         public int drawerGridy = 5;
 
+        public boolean appDrawerSearchbar = true;
+
         public AppDrawer.DrawerMode drawerMode = AppDrawer.DrawerMode.Paged;
 
         public boolean rememberappdrawerpage = true;

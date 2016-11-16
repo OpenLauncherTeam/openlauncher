@@ -48,6 +48,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
     public Item previousItem;
     public int previousPage = -1;
 
+    private Home home;
+
     private PagerIndicator pageIndicator;
 
     public void setPageIndicator(PagerIndicator pageIndicator) {
@@ -74,7 +76,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         setCurrentItem(LauncherSettings.getInstance(c).generalSettings.desktopHomePage);
     }
 
-    public void initDesktopItem() {
+    public void initDesktopItem(Home home) {
+        this.home = home;
         for (int i = 0; i < LauncherSettings.getInstance(getContext()).desktopData.size(); i++) {
             if (pages.size() <= i) break;
             pages.get(i).removeAllViews();
@@ -168,35 +171,35 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                 Item item = intent.getParcelableExtra("mDragData");
                 if (item.type == Item.Type.WIDGET) {
                     if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
-                        Home.desktop.consumeRevert();
-                        Home.dock.consumeRevert();
+                        home.desktop.consumeRevert();
+                        home.dock.consumeRevert();
                     } else {
                         Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                        Home.dock.revertLastItem();
-                        Home.desktop.revertLastItem();
+                        home.dock.revertLastItem();
+                        home.desktop.revertLastItem();
                     }
                 }
                 if (item.type == Desktop.Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT) {
                     if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
-                        Home.desktop.consumeRevert();
-                        Home.dock.consumeRevert();
+                        home.desktop.consumeRevert();
+                        home.dock.consumeRevert();
                     } else {
                         Point pos = pages.get(getCurrentItem()).touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY,false);
                         View itemView = pages.get(getCurrentItem()).coordinateToChildView(pos);
 
                         if (itemView != null)
-                            if (Desktop.handleOnDropOver(item, (Item) itemView.getTag(),itemView,pages.get(getCurrentItem()),getCurrentItem(),this)){
-                                Home.desktop.consumeRevert();
-                                Home.dock.consumeRevert();
+                            if (Desktop.handleOnDropOver(home,item, (Item) itemView.getTag(),itemView,pages.get(getCurrentItem()),getCurrentItem(),this)){
+                                home.desktop.consumeRevert();
+                                home.dock.consumeRevert();
                             }else {
                                 Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                                Home.dock.revertLastItem();
-                                Home.desktop.revertLastItem();
+                                home.dock.revertLastItem();
+                                home.desktop.revertLastItem();
                             }
                         else {
                             Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                            Home.dock.revertLastItem();
-                            Home.desktop.revertLastItem();
+                            home.dock.revertLastItem();
+                            home.desktop.revertLastItem();
                         }
                     }
                 }
@@ -355,12 +358,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             return layout;
         }
 
-        private CellContainer getItemLayout() {
-            CellContainer layout = new CellContainer(getContext());
-
-            layout.setSoundEffectsEnabled(false);
-            SimpleFingerGestures mySfg = new SimpleFingerGestures();
-            mySfg.setOnFingerGestureListener(new SimpleFingerGestures.OnFingerGestureListener() {
+        private SimpleFingerGestures.OnFingerGestureListener getGestureListener(){
+            return new SimpleFingerGestures.OnFingerGestureListener() {
                 @Override
                 public boolean onSwipeUp(int i, long l, double v) {
                     return false;
@@ -393,10 +392,18 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
                 @Override
                 public boolean onDoubleTap(int i) {
-                    LauncherAction.RunAction(LauncherAction.Action.LockScreen, getContext(), null);
+                    LauncherAction.RunAction(LauncherAction.Action.LockScreen,getContext(), null);
                     return true;
                 }
-            });
+            };
+        }
+
+        private CellContainer getItemLayout() {
+            CellContainer layout = new CellContainer(getContext());
+
+            layout.setSoundEffectsEnabled(false);
+            SimpleFingerGestures mySfg = new SimpleFingerGestures();
+            mySfg.setOnFingerGestureListener(getGestureListener());
             layout.gestures = mySfg;
             layout.setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.desktopGridx, LauncherSettings.getInstance(getContext()).generalSettings.desktopGridy);
             layout.setOnTouchListener(new OnTouchListener() {
@@ -427,8 +434,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             layout.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    scaleFactor = 0.7f;
+                    scaleFactor = 0.8f;
                     for (CellContainer v : pages) {
+                        v.setPivotY(v.getHeight()/2 -Tool.dp2px(50,getContext()));
+                        v.setPivotX(v.getWidth()/2);
+
                         v.blockTouch = true;
                         v.animateBackgroundShow();
                         v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
@@ -444,7 +454,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         }
     }
 
-    public static boolean handleOnDropOver(Item dropItem,Item item,View itemView,ViewGroup parent,int page,DesktopCallBack callBack){
+    public static boolean handleOnDropOver(Home home,Item dropItem,Item item,View itemView,ViewGroup parent,int page,DesktopCallBack callBack){
         if (item == null){
             return false;
         }
@@ -463,8 +473,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                     callBack.addItemToSettings(item);
                     callBack.addItemToPagePosition(item,page);
 
-                    Home.desktop.consumeRevert();
-                    Home.dock.consumeRevert();
+                    home.desktop.consumeRevert();
+                    home.dock.consumeRevert();
                     return true;
                 }
                 break;

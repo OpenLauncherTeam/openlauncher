@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.DrawerLayout;
@@ -25,7 +26,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -67,39 +67,29 @@ import java.util.Locale;
 
 public class Home extends Activity implements DrawerLayout.DrawerListener {
 
+    public static final int REQUEST_PICK_APPWIDGET = 0x6475;
+    public static final int REQUEST_CREATE_APPWIDGET = 0x3648;
+    public static final int MINIBAR_EDIT = 0x2873;
     //static members, easier to access from any activity and class.
     @Nullable
     public static Home launcher;
-    @Nullable
-    public static Desktop desktop;
-    @Nullable
-    public static Dock dock;
-    @Nullable
-    public static View searchBar;
-    @Nullable
-    public static GroupPopupView groupPopup;
-
-    //QuickCenter
-    @Nullable
-    public FastItemAdapter<QuickCenterItem.NoteItem> noteAdapter;
-    @Nullable
-    public ArrayList<QuickCenterItem.NoteContent> notes = new ArrayList<>();
-
-    @Nullable
     public static WidgetHost appWidgetHost;
-    @Nullable
     public static AppWidgetManager appWidgetManager;
-
-    //This two integer is used for the drag shadow builder to get the touch point os users' finger.
+    //This two integer is used for the drag shadow builder to get the touch point of users' finger.
     public static int touchX = 0, touchY = 0;
-
+    public Desktop desktop;
+    public Dock dock;
+    public View searchBar;
+    public GroupPopupView groupPopup;
+    public ArrayList<QuickCenterItem.NoteContent> notes = new ArrayList<>();
+    //QuickCenter
+    private FastItemAdapter<QuickCenterItem.NoteItem> noteAdapter;
     //normal members, currently not necessary to access from elsewhere.
     private ConstraintLayout baseLayout;
     private AppDrawer appDrawerOtter;
-    private View appDrawer;
+    private View appDrawer, appSearchBar;
     private FrameLayout appDrawerBtn;
     private PagerIndicator desktopIndicator, appDrawerIndicator;
-    private Animator appDrawerAnimator;
     private DragOptionView dragOptionView;
     private ViewGroup desktopEditOptionView;
     private RecyclerView quickCenter;
@@ -108,12 +98,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     private ListView minBar;
     private DrawerLayout drawerLayout;
     private ViewGroup myScreen;
-
-    public static final int REQUEST_PICK_APPWIDGET = 0x6475;
-    public static final int REQUEST_CREATE_APPWIDGET = 0x3648;
-
-    public static final int MINBAREDIT = 0x2873;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,8 +139,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {
-                desktop.initDesktopItem();
-                dock.initDockItem();
+                desktop.initDesktopItem(Home.this);
+                dock.initDockItem(Home.this);
                 dock.addViewToGrid(appDrawerBtn, 2, 0, 1, 1);
                 AppManager.getInstance(Home.this).removeAppUpdatedListener(this);
             }
@@ -171,6 +155,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     //region INIT
     private void findViews() {
+        appSearchBar = findViewById(R.id.appSearchBar);
         searchBarClock = (TextView) findViewById(R.id.searchbarclock);
         quickCenter = (RecyclerView) findViewById(R.id.quickCenter);
         baseLayout = (ConstraintLayout) findViewById(R.id.baseLayout);
@@ -193,7 +178,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         initMinBar();
         initQuickCenter();
 
-        DragNavigationControl dragNavigationControl = new DragNavigationControl(findViewById(R.id.left), findViewById(R.id.right));
+        DragNavigationControl dragNavigationControl = new DragNavigationControl(this, findViewById(R.id.left), findViewById(R.id.right));
 
         String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
                 String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
@@ -212,7 +197,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             }
         }, 60000);
 
-        appDrawerOtter.withHome(this);
+        appDrawerOtter.setHome(this);
+        dragOptionView.setHome(this);
 
         desktop.listener = new Desktop.OnDesktopEditListener() {
             @Override
@@ -295,8 +281,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 .build();
 
         View appDrawerBtnCard = appDrawerBtn.findViewById(R.id.card);
-        appDrawerBtnCard.getLayoutParams().width = Tool.convertDpToPixel(iconSize - 8, this);
-        appDrawerBtnCard.getLayoutParams().height = Tool.convertDpToPixel(iconSize - 8, this);
+        appDrawerBtnCard.getLayoutParams().width = Tool.dp2px(iconSize - 8, this);
+        appDrawerBtnCard.getLayoutParams().height = Tool.dp2px(iconSize - 8, this);
 
         ImageView appDrawerIcon = (ImageView) appDrawerBtn.findViewById(R.id.iv);
         appDrawerIcon.setImageDrawable(appDrawerBtnIcon);
@@ -308,9 +294,71 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 openAppDrawer();
             }
         });
-        dock.getLayoutParams().height = Tool.convertDpToPixel(22 + iconSize, this);
+        dock.getLayoutParams().height = Tool.dp2px(22 + iconSize, this);
 
         dragOptionView.setAutoHideView(searchBar);
+
+        appDrawerOtter.setCallBack(new AppDrawer.CallBack() {
+            @Override
+            public void onStart() {
+                dock.animate().alpha(0).setDuration(100);
+                desktopIndicator.animate().alpha(0).setDuration(100);
+                searchBar.animate().alpha(0).setDuration(80);
+                desktop.animate().alpha(0).setDuration(100);
+                appDrawerBtn.animate().scaleX(0).scaleY(0).setDuration(100);
+
+                if (appSearchBar != null) {
+                    appSearchBar.setAlpha(0);
+                    appSearchBar.setVisibility(View.VISIBLE);
+                    appSearchBar.animate().alpha(1).setDuration(100);
+                }
+                if (appDrawerIndicator != null)
+                    appDrawerIndicator.animate().alpha(1).setDuration(100);
+
+                appDrawer.setScaleX(0.95f);
+                appDrawer.setScaleY(0.95f);
+                appDrawer.animate().scaleX(1).scaleY(1).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
+            }
+
+            @Override
+            public void onEnd() {
+                if (LauncherSettings.getInstance(Home.this).generalSettings.showsearchbar)
+                    searchBar.setVisibility(View.INVISIBLE);
+                appDrawerBtn.setVisibility(View.INVISIBLE);
+            }
+        }, new AppDrawer.CallBack() {
+            @Override
+            public void onStart() {
+                if (LauncherSettings.getInstance(Home.this).generalSettings.showsearchbar)
+                    searchBar.setVisibility(View.VISIBLE);
+                if (appDrawerIndicator != null)
+                    appDrawerIndicator.animate().alpha(0).setDuration(100);
+                if (appSearchBar != null) {
+                    appSearchBar.animate().alpha(0).setDuration(100).withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            appSearchBar.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                }
+                appDrawer.animate().setStartDelay(0).scaleX(0.95f).scaleY(0.95f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
+
+            }
+
+            @Override
+            public void onEnd() {
+                if (LauncherSettings.getInstance(Home.this).generalSettings.rememberappdrawerpage)
+                    appDrawerOtter.scrollToStart();
+                desktopIndicator.animate().alpha(1);
+                appDrawer.setVisibility(View.INVISIBLE);
+                appDrawerBtn.setVisibility(View.VISIBLE);
+                dock.animate().alpha(1);
+                desktop.animate().alpha(1);
+                if (!dragOptionView.dragging)
+                    searchBar.animate().alpha(1);
+                appDrawerBtn.animate().scaleX(1).scaleY(1);
+            }
+        });
     }
 
     private void initSettings() {
@@ -359,7 +407,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0)
-                    startActivityForResult(new Intent(Home.this, MinBarEditActivity.class), MINBAREDIT);
+                    startActivityForResult(new Intent(Home.this, MinBarEditActivity.class), MINIBAR_EDIT);
                 else {
                     LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
                     LauncherAction.RunAction(action, Home.this, Home.this);
@@ -478,6 +526,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         appWidgetHost = null;
         unregisterReceiver(appUpdateReceiver);
         unregisterReceiver(shortcutReceiver);
+
+        launcher = null;
         super.onDestroy();
     }
 
@@ -495,7 +545,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 configureWidget(data);
             } else if (requestCode == REQUEST_CREATE_APPWIDGET) {
                 createWidget(data);
-            } else if (requestCode == MINBAREDIT) {
+            } else if (requestCode == MINIBAR_EDIT) {
                 initMinBar();
             }
         } else if (resultCode == RESULT_CANCELED && data != null) {
@@ -557,105 +607,29 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     public void openAppDrawer() {
         int cx = (dock.getLeft() + dock.getRight()) / 2;
         int cy = (dock.getTop() + dock.getBottom()) / 2;
-        int margin = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).leftMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
+        int margin = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).leftMargin;
         cx -= margin;
-        int marginh = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).topMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
+        int marginh = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).topMargin;
         cy -= marginh;
-
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
 
-        appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(appDrawer, cx, cy, 0, finalRadius);
-        appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        appDrawerAnimator.setDuration(180);
-        appDrawerAnimator.setStartDelay(100);
-
-        dock.animate().alpha(0).setDuration(100);
-        desktopIndicator.animate().alpha(0).setDuration(100);
-        searchBar.animate().alpha(0).setDuration(80);
-        desktop.animate().alpha(0).setDuration(100);
-        appDrawerBtn.animate().scaleX(0).scaleY(0).setDuration(100);
-
-        if (appDrawerIndicator != null)
-            appDrawerIndicator.animate().alpha(1).setDuration(100);
-
-        appDrawerAnimator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator p1) {
-                appDrawer.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationEnd(Animator p1) {
-                if (LauncherSettings.getInstance(Home.this).generalSettings.showsearchbar)
-                    searchBar.setVisibility(View.INVISIBLE);
-                appDrawerBtn.setVisibility(View.INVISIBLE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator p1) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator p1) {
-            }
-        });
         appDrawer.setPivotX(cx);
         appDrawer.setPivotY(cy);
-        appDrawerAnimator.start();
-        appDrawer.setScaleX(0.95f);
-        appDrawer.setScaleY(0.95f);
-        appDrawer.animate().setStartDelay(100).scaleX(1).scaleY(1).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
+
+        appDrawerOtter.open(cx, cy, finalRadius);
     }
 
     public void closeAppDrawer() {
-        if (appDrawerAnimator == null || appDrawerAnimator.isRunning())
-            return;
-
         int cx = (dock.getLeft() + dock.getRight()) / 2;
         int cy = (dock.getTop() + dock.getBottom()) / 2;
-        int margin = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).leftMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
+        int margin = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).leftMargin;
         cx -= margin;
-        int marginh = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).topMargin;// + ((FrameLayout.LayoutParams)appDrawer.getLayoutParams()).rightMargin;
+        int marginh = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).topMargin;
         cy -= marginh;
 
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
 
-        appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(appDrawer, cx, cy, finalRadius, 0);
-        appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        appDrawerAnimator.setDuration(180);
-        appDrawerAnimator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator p1) {
-                if (LauncherSettings.getInstance(Home.this).generalSettings.showsearchbar)
-                    searchBar.setVisibility(View.VISIBLE);
-                if (appDrawerIndicator != null)
-                    appDrawerIndicator.animate().alpha(0);
-            }
-
-            @Override
-            public void onAnimationEnd(Animator p1) {
-                if (LauncherSettings.getInstance(Home.this).generalSettings.rememberappdrawerpage)
-                    appDrawerOtter.scrollToStart();
-                desktopIndicator.animate().alpha(1);
-                appDrawer.setVisibility(View.INVISIBLE);
-                appDrawerBtn.setVisibility(View.VISIBLE);
-                dock.animate().alpha(1);
-                desktop.animate().alpha(1);
-                if (!dragOptionView.dragging)
-                    searchBar.animate().alpha(1);
-                appDrawerBtn.animate().scaleX(1).scaleY(1);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator p1) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator p1) {
-            }
-        });
-        appDrawerAnimator.start();
-        appDrawer.animate().setStartDelay(0).scaleX(0.95f).scaleY(0.95f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
+        appDrawerOtter.close(cx, cy, finalRadius);
     }
 
     //endregion
@@ -678,7 +652,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     public void onNoteToggle(View view) {
         final View target = findViewById(R.id.quickCenterLayout);
-        int offset = Tool.convertDpToPixel(5, this);
+        int offset = Tool.dp2px(5, this);
         if (target.getVisibility() == View.VISIBLE) {
             target.animate().setDuration(180L).alpha(0).translationY(+offset).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                 @Override

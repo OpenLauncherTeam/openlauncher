@@ -12,7 +12,6 @@ import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DesktopCallBack;
@@ -89,10 +88,10 @@ public class GroupPopupView extends FrameLayout {
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.actions.length);
         cellContainer.setGridSize(cellSize[0], cellSize[1]);
 
-        int iconSize = Tool.convertDpToPixel(LauncherSettings.getInstance(c).generalSettings.iconSize, c);
-        int textHeight = Tool.convertDpToPixel(22, c);
+        int iconSize = Tool.dp2px(LauncherSettings.getInstance(c).generalSettings.iconSize, c);
+        int textHeight = Tool.dp2px(22, c);
 
-        int contentPadding = Tool.convertDpToPixel(5, c);
+        int contentPadding = Tool.dp2px(5, c);
 
         for (int x2 = 0; x2 < cellSize[0]; x2++) {
             for (int y2 = 0; y2 < cellSize[1]; y2++) {
@@ -194,7 +193,7 @@ public class GroupPopupView extends FrameLayout {
 
         int popupWidth = contentPadding * 4 + popupParent.getContentPaddingLeft() + popupParent.getContentPaddingRight() + (iconSize) * cellSize[0];
         popupParent.getLayoutParams().width = popupWidth;
-        int popupHeight = contentPadding * 2 + popupParent.getContentPaddingTop() + popupParent.getContentPaddingBottom() + Tool.convertDpToPixel(30, c)
+        int popupHeight = contentPadding * 2 + popupParent.getContentPaddingTop() + popupParent.getContentPaddingBottom() + Tool.dp2px(30, c)
                 + (iconSize + textHeight) * cellSize[1];
         popupParent.getLayoutParams().height = popupHeight;
 
