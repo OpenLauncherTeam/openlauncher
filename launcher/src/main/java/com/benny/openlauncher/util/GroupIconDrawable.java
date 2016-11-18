@@ -26,7 +26,7 @@ public class GroupIconDrawable extends Drawable{
 
     private float scaleFactor = 1;
 
-    private boolean needAnimate,needAnimatScale;
+    private boolean needAnimate, needAnimateScale;
 
     private float sx = 1;
     private float sy = 1 ;
@@ -43,7 +43,7 @@ public class GroupIconDrawable extends Drawable{
 
         this.paint = new Paint();
         paint.setColor(Color.WHITE);
-        paint.setAlpha(200);
+        paint.setAlpha(150);
         paint.setAntiAlias(true);
 
         this.paint4 = new Paint();
@@ -63,13 +63,13 @@ public class GroupIconDrawable extends Drawable{
         sy = 1;
         sx = 1;
         needAnimate = true;
-        needAnimatScale = true;
+        needAnimateScale = true;
         invalidateSelf();
     }
 
     public void popBack(){
         needAnimate = false;
-        needAnimatScale = false;
+        needAnimateScale = false;
         invalidateSelf();
     }
 
@@ -77,7 +77,7 @@ public class GroupIconDrawable extends Drawable{
     public void draw(Canvas canvas) {
         canvas.save();
 
-        if (needAnimatScale){
+        if (needAnimateScale){
             scaleFactor = Tool.clampFloat(scaleFactor-0.09f,0.5f,1f);
         }else {
             scaleFactor = Tool.clampFloat(scaleFactor+0.09f,0.5f,1f);

@@ -6,11 +6,20 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.support.v4.content.Loader;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
+import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.benny.openlauncher.util.Tool;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
@@ -19,7 +28,7 @@ public class CellContainer extends ViewGroup {
 
     private Rect[][] cells;
 
-    public int cellWidth, cellHeight, cellSpanVert = 0, cellSpanHori = 0;
+    public int cellWidth, cellHeight, cellSpanV = 0, cellSpanH = 0;
 
     private Paint mPaint;
 
@@ -29,7 +38,13 @@ public class CellContainer extends ViewGroup {
 
     public boolean blockTouch = false;
 
+    private Long down = 0L;
+
     public SimpleFingerGestures gestures;
+
+    private boolean animateBackground;
+
+    public OnItemRearrangeListener onItemRearrangeListener;
 
     public CellContainer(Context c) {
         super(c);
@@ -42,13 +57,13 @@ public class CellContainer extends ViewGroup {
     }
 
     public void setGridSize(int x, int y) {
-        cellSpanVert = y;
-        cellSpanHori = x;
+        cellSpanV = y;
+        cellSpanH = x;
 
-        occupied = new boolean[cellSpanHori][cellSpanVert];
+        occupied = new boolean[cellSpanH][cellSpanV];
 
-        for (int i = 0; i < cellSpanHori; i++) {
-            for (int j = 0; j < cellSpanVert; j++) {
+        for (int i = 0; i < cellSpanH; i++) {
+            for (int j = 0; j < cellSpanV; j++) {
                 occupied[i][j] = false;
             }
         }
@@ -60,7 +75,42 @@ public class CellContainer extends ViewGroup {
         invalidate();
     }
 
-    private Long down = 0L;
+    private Point preCoordinate = new Point(-1,-1);
+    private Long peekDownTime = -1L;
+
+    public void peekItemAndSwap(DragEvent event) {
+        Point coordinate = touchPosToCoordinate((int) event.getX(), (int) event.getY(), 1, 1, false);
+        if (!preCoordinate.equals(coordinate)){
+            peekDownTime = -1L;
+        }
+        if (peekDownTime == -1L) {
+            peekDownTime = System.currentTimeMillis();
+            preCoordinate = coordinate;
+        }
+        if (!(System.currentTimeMillis() - peekDownTime > 600L)) {
+            preCoordinate = coordinate;
+            return;
+        }
+
+        if (!occupied[coordinate.x][coordinate.y]) return;
+        View targetView = coordinateToChildView(coordinate);
+        if (targetView == null) return;
+        LayoutParams targetParams = (LayoutParams) targetView.getLayoutParams();
+        if (targetParams.xSpan > 1 || targetParams.ySpan > 1)
+            return;
+        occupied[targetParams.x][targetParams.y] = false;
+        Point targetPoint = findFreeSpace(targetParams.x, targetParams.y);
+        onItemRearrange(new Point(targetParams.x, targetParams.y), targetPoint);
+        targetParams.x = targetPoint.x;
+        targetParams.y = targetPoint.y;
+        occupied[targetPoint.x][targetPoint.y] = true;
+        requestLayout();
+    }
+
+    public void onItemRearrange(Point from, Point to) {
+        if (onItemRearrangeListener != null)
+            onItemRearrangeListener.onItemRearrange(from, to);
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -105,8 +155,6 @@ public class CellContainer extends ViewGroup {
         bgPaint.setAlpha(0);
     }
 
-    private boolean animateBackground;
-
     public void animateBackgroundShow() {
         animateBackground = true;
         invalidate();
@@ -118,10 +166,69 @@ public class CellContainer extends ViewGroup {
     }
 
     public Point findFreeSpace() {
-        for (int x = 0; x < occupied.length; x++) {
-            for (int y = 0; y < occupied[x].length; y++) {
+        for (int y = 0; y < occupied[0].length; y++) {
+            for (int x = 0; x < occupied.length; x++) {
                 if (!occupied[x][y])
                     return new Point(x, y);
+            }
+        }
+        return null;
+    }
+
+    public boolean isValid(int x, int y) {
+        return (x >= 0 && x <= occupied.length - 1 && y >= 0 && y <= occupied[0].length - 1);
+
+    }
+
+    public Point findFreeSpace(int cx, int cy) {
+        Queue<Point> toExplore = new LinkedList<>();
+        HashSet<Point> explored = new HashSet<>();
+        toExplore.add(new Point(cx, cy));
+        while (!toExplore.isEmpty()) {
+            Point p = toExplore.remove();
+            Point cp;
+            if (isValid(p.x, p.y - 1)) {
+                cp = new Point(p.x, p.y - 1);
+                if (!explored.contains(cp)) {
+                    if (!occupied[cp.x][cp.y])
+                        return cp;
+                    else
+                        toExplore.add(cp);
+                    explored.add(cp);
+                }
+            }
+
+            if (isValid(p.x, p.y + 1)) {
+                cp = new Point(p.x, p.y + 1);
+                if (!explored.contains(cp)) {
+                    if (!occupied[cp.x][cp.y])
+                        return cp;
+                    else
+                        toExplore.add(cp);
+                    explored.add(cp);
+                }
+            }
+
+            if (isValid(p.x - 1, p.y)) {
+                cp = new Point(p.x - 1, p.y);
+                if (!explored.contains(cp)) {
+                    if (!occupied[cp.x][cp.y])
+                        return cp;
+                    else
+                        toExplore.add(cp);
+                    explored.add(cp);
+                }
+            }
+
+            if (isValid(p.x + 1, p.y)) {
+                cp = new Point(p.x + 1, p.y);
+                if (!explored.contains(cp)) {
+                    if (!occupied[cp.x][cp.y])
+                        return cp;
+                    else
+                        toExplore.add(cp);
+                    explored.add(cp);
+                }
             }
         }
         return null;
@@ -134,8 +241,8 @@ public class CellContainer extends ViewGroup {
         canvas.drawRect(0, 0, getWidth(), getHeight(), bgPaint);
 
         float s = 7f;
-        for (int x = 0; x < cellSpanHori; x++) {
-            for (int y = 0; y < cellSpanVert; y++) {
+        for (int x = 0; x < cellSpanH; x++) {
+            for (int y = 0; y < cellSpanV; y++) {
                 Rect cell = cells[x][y];
 
                 canvas.save();
@@ -220,13 +327,13 @@ public class CellContainer extends ViewGroup {
         int dx;
         int dy;
         dx = cellx + xSpan - 1;
-        if (dx >= cellSpanHori - 1) {
-            dx = cellSpanHori - 1;
+        if (dx >= cellSpanH - 1) {
+            dx = cellSpanH - 1;
             cellx = dx + 1 - xSpan;
         }
         dy = celly + ySpan - 1;
-        if (dy >= cellSpanVert - 1) {
-            dy = cellSpanVert - 1;
+        if (dy >= cellSpanV - 1) {
+            dy = cellSpanV - 1;
             celly = dy + 1 - ySpan;
         }
 
@@ -249,13 +356,13 @@ public class CellContainer extends ViewGroup {
         int dx;
         int dy;
         dx = cellx + xSpan - 1;
-        if (dx >= cellSpanHori - 1) {
-            dx = cellSpanHori - 1;
+        if (dx >= cellSpanH - 1) {
+            dx = cellSpanH - 1;
             cellx = dx + 1 - xSpan;
         }
         dy = celly + ySpan - 1;
-        if (dy >= cellSpanVert - 1) {
-            dy = cellSpanVert - 1;
+        if (dy >= cellSpanV - 1) {
+            dy = cellSpanV - 1;
             celly = dy + 1 - ySpan;
         }
 
@@ -269,7 +376,8 @@ public class CellContainer extends ViewGroup {
         return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, cellx, celly, xSpan, ySpan);
     }
 
-    public View coordinateToChildView(Point pos){
+    public View coordinateToChildView(Point pos) {
+        if (pos == null) return null;
         for (int i = 0; i < getChildCount(); i++) {
             LayoutParams lp = (LayoutParams) getChildAt(i).getLayoutParams();
             if (lp.x == pos.x && lp.y == pos.y)
@@ -278,9 +386,9 @@ public class CellContainer extends ViewGroup {
         return null;
     }
 
-    public Point touchPosToCoordinate(int mX, int mY, int xSpan, int ySpan,boolean checkAvailability) {
-        for (int x = 0; x < cellSpanHori; x++) {
-            for (int y = 0; y < cellSpanVert; y++) {
+    public Point touchPosToCoordinate(int mX, int mY, int xSpan, int ySpan, boolean checkAvailability) {
+        for (int x = 0; x < cellSpanH; x++) {
+            for (int y = 0; y < cellSpanV; y++) {
                 Rect cell = cells[x][y];
                 if (mY >= cell.top && mY <= cell.bottom && mX >= cell.left && mX <= cell.right) {
                     if (checkAvailability) {
@@ -291,13 +399,13 @@ public class CellContainer extends ViewGroup {
                         int dx;
                         int dy;
                         dx = x + xSpan - 1;
-                        if (dx >= cellSpanHori - 1) {
-                            dx = cellSpanHori - 1;
+                        if (dx >= cellSpanH - 1) {
+                            dx = cellSpanH - 1;
                             x = dx + 1 - xSpan;
                         }
                         dy = y + ySpan - 1;
-                        if (dy >= cellSpanVert - 1) {
-                            dy = cellSpanVert - 1;
+                        if (dy >= cellSpanV - 1) {
+                            dy = cellSpanV - 1;
                             y = dy + 1 - ySpan;
                         }
 
@@ -318,7 +426,7 @@ public class CellContainer extends ViewGroup {
     }
 
     public LayoutParams positionToLayoutPrams(int mX, int mY, int xSpan, int ySpan) {
-        Point pos = touchPosToCoordinate(mX, mY, xSpan, ySpan,true);
+        Point pos = touchPosToCoordinate(mX, mY, xSpan, ySpan, true);
         if (pos != null)
             return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, pos.x, pos.y, xSpan, ySpan);
         else return null;
@@ -335,13 +443,13 @@ public class CellContainer extends ViewGroup {
         int width = r - l - getPaddingLeft() - getPaddingRight();
         int height = b - t - getPaddingTop() - getPaddingBottom();
 
-        if (cellSpanHori == 0)
-            cellSpanHori = 1;
-        if (cellSpanVert == 0)
-            cellSpanVert = 1;
+        if (cellSpanH == 0)
+            cellSpanH = 1;
+        if (cellSpanV == 0)
+            cellSpanV = 1;
 
-        cellWidth = width / cellSpanHori;
-        cellHeight = height / cellSpanVert;
+        cellWidth = width / cellSpanH;
+        cellHeight = height / cellSpanV;
 
         initCellInfo(getPaddingLeft(), getPaddingTop(), width - getPaddingRight(), height - getPaddingBottom());
 
@@ -361,7 +469,7 @@ public class CellContainer extends ViewGroup {
 
             Rect upRect = cells[lp.x][lp.y];
             Rect downRect = new Rect();
-            if (lp.x + lp.xSpan - 1 < cellSpanHori && lp.y + lp.ySpan - 1 < cellSpanVert)
+            if (lp.x + lp.xSpan - 1 < cellSpanH && lp.y + lp.ySpan - 1 < cellSpanV)
                 downRect = cells[lp.x + lp.xSpan - 1][lp.y + lp.ySpan - 1];
 
             if (lp.xSpan == 1 && lp.ySpan == 1)
@@ -377,19 +485,19 @@ public class CellContainer extends ViewGroup {
     }
 
     private void initCellInfo(int l, int t, int r, int b) {
-        cells = new Rect[cellSpanHori][cellSpanVert];
+        cells = new Rect[cellSpanH][cellSpanV];
 
         int curLeft = l;
         int curTop = t;
         int curRight = l + cellWidth;
         int curBottom = t + cellHeight;
 
-        for (int i = 0; i < cellSpanHori; i++) {
+        for (int i = 0; i < cellSpanH; i++) {
             if (i != 0) {
                 curLeft += cellWidth;
                 curRight += cellWidth;
             }
-            for (int j = 0; j < cellSpanVert; j++) {
+            for (int j = 0; j < cellSpanV; j++) {
                 if (j != 0) {
                     curTop += cellHeight;
                     curBottom += cellHeight;
@@ -401,6 +509,10 @@ public class CellContainer extends ViewGroup {
             curTop = t;
             curBottom = t + cellHeight;
         }
+    }
+
+    public interface OnItemRearrangeListener {
+        void onItemRearrange(Point from, Point to);
     }
 
     public static class LayoutParams extends ViewGroup.LayoutParams {

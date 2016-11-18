@@ -70,7 +70,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         if (isInEditMode()) return;
 
         pageCount = LauncherSettings.getInstance(c).generalSettings.desktopPageCount;
-        setAdapter(new Adapter());
+        setAdapter(new DesktopAdapter(this));
         setOnDragListener(this);
 
         setCurrentItem(LauncherSettings.getInstance(c).generalSettings.desktopHomePage);
@@ -97,7 +97,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         pageCount++;
 
         final int previousPage = getCurrentItem();
-        ((Adapter) getAdapter()).addPageRight();
+        ((DesktopAdapter) getAdapter()).addPageRight();
         setCurrentItem(previousPage + 1);
 
         for (CellContainer cellContainer : pages)
@@ -112,7 +112,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         pageCount++;
 
         final int previousPage = getCurrentItem();
-        ((Adapter) getAdapter()).addPageLeft();
+        ((DesktopAdapter) getAdapter()).addPageLeft();
         setCurrentItem(previousPage - 1);
 
         for (CellContainer cellContainer : pages)
@@ -128,13 +128,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         pageCount--;
 
         int previousPage = getCurrentItem();
-        ((Adapter) getAdapter()).removePage(getCurrentItem());
+        ((DesktopAdapter) getAdapter()).removePage(getCurrentItem());
 
         for (CellContainer v : pages) {
             v.setAlpha(0);
             v.animate().alpha(1);
-            v.setScaleX(0.7f);
-            v.setScaleY(0.7f);
+            v.setScaleX(0.8f);
+            v.setScaleY(0.8f);
             v.animateBackgroundShow();
         }
         setCurrentItem(previousPage);
@@ -164,6 +164,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                 Tool.print("ACTION_DRAG_EXITED");
                 return true;
 
+            case DragEvent.ACTION_DRAG_LOCATION:
+                getCurrentPage().peekItemAndSwap(p2);
+                return true;
+
             case DragEvent.ACTION_DROP:
                 Tool.print("ACTION_DROP");
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
@@ -184,11 +188,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                         home.desktop.consumeRevert();
                         home.dock.consumeRevert();
                     } else {
-                        Point pos = pages.get(getCurrentItem()).touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY,false);
-                        View itemView = pages.get(getCurrentItem()).coordinateToChildView(pos);
+                        Point pos = getCurrentPage().touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY,false);
+                        View itemView = getCurrentPage().coordinateToChildView(pos);
 
                         if (itemView != null)
-                            if (Desktop.handleOnDropOver(home,item, (Item) itemView.getTag(),itemView,pages.get(getCurrentItem()),getCurrentItem(),this)){
+                            if (Desktop.handleOnDropOver(home,item, (Item) itemView.getTag(),itemView, getCurrentPage(),getCurrentItem(),this)){
                                 home.desktop.consumeRevert();
                                 home.dock.consumeRevert();
                             }else {
@@ -211,6 +215,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         return false;
     }
 
+    private CellContainer getCurrentPage() {
+        return pages.get(getCurrentItem());
+    }
+
     /**
      * @param args array storing the item(pos 0) and view ref(pos 1).
      */
@@ -226,7 +234,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         previousPage = getCurrentItem();
         previousItemView = v;
         previousItem = item;
-        pages.get(getCurrentItem()).removeView(v);
+        getCurrentPage().removeView(v);
     }
 
     @Override
@@ -239,7 +247,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
     @Override
     public void revertLastItem() {
         if (previousItemView != null && getAdapter().getCount() >= previousPage && previousPage > -1) {
-            pages.get(getCurrentItem()).addViewToGrid(previousItemView);
+            getCurrentPage().addViewToGrid(previousItemView);
 
             if (LauncherSettings.getInstance(getContext()).desktopData.size() < getCurrentItem() + 1)
                 LauncherSettings.getInstance(getContext()).desktopData.add(previousPage, new ArrayList<Item>());
@@ -263,7 +271,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
     @Override
     public boolean addItemToPosition(final Item item, int x, int y) {
-        CellContainer.LayoutParams positionToLayoutPrams = pages.get(getCurrentItem()).positionToLayoutPrams(x, y, item.spanX, item.spanY);
+        CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().positionToLayoutPrams(x, y, item.spanX, item.spanY);
         if (positionToLayoutPrams != null) {
             //Add the item to settings
             item.x = positionToLayoutPrams.x;
@@ -277,7 +285,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
             if (itemView != null) {
                 itemView.setLayoutParams(positionToLayoutPrams);
-                pages.get(getCurrentItem()).addView(itemView);
+                getCurrentPage().addView(itemView);
             }
             return true;
         } else {
@@ -303,31 +311,34 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).add(item);
     }
 
-    public class Adapter extends SmoothPagerAdapter {
+    public static class DesktopAdapter extends SmoothPagerAdapter {
 
         float scaleFactor = 1f;
 
         private MotionEvent currentEvent;
 
-        public Adapter() {
-            pages = new ArrayList<>();
+        private Desktop desktop;
+
+        public DesktopAdapter(Desktop desktop) {
+            this.desktop = desktop;
+            desktop.pages = new ArrayList<>();
             for (int i = 0; i < getCount(); i++) {
-                pages.add(getItemLayout());
+                desktop.pages.add(getItemLayout());
             }
         }
 
         public void addPageLeft() {
-            pages.add(0, getItemLayout());
+            desktop.pages.add(0, getItemLayout());
             notifyDataSetChanged();
         }
 
         public void addPageRight() {
-            pages.add(getItemLayout());
+            desktop.pages.add(getItemLayout());
             notifyDataSetChanged();
         }
 
         public void removePage(int position) {
-            pages.remove(position);
+            desktop.pages.remove(position);
             notifyDataSetChanged();
         }
 
@@ -338,7 +349,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
         @Override
         public int getCount() {
-            return pageCount;
+            return desktop.pageCount;
         }
 
         @Override
@@ -353,7 +364,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
         @Override
         public Object instantiateItem(ViewGroup container, int pos) {
-            ViewGroup layout = pages.get(pos);
+            ViewGroup layout = desktop.pages.get(pos);
             container.addView(layout);
             return layout;
         }
@@ -392,20 +403,39 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
                 @Override
                 public boolean onDoubleTap(int i) {
-                    LauncherAction.RunAction(LauncherAction.Action.LockScreen,getContext(), null);
+                    LauncherAction.RunAction(LauncherAction.Action.LockScreen,desktop.getContext(), null);
                     return true;
                 }
             };
         }
 
+        private Desktop.Item getItemFromCoordinate(Point coordinate){
+            List<Item> pageData = LauncherSettings.getInstance(desktop.getContext()).desktopData.get(desktop.getCurrentItem());
+            for (int i = 0; i < pageData.size(); i++) {
+                Item item = pageData.get(i);
+                if (item.x == coordinate.x && item.y == coordinate.y && item.spanX == 1 && item.spanY == 1)
+                    return pageData.get(i);
+            }
+            return null;
+        }
+
         private CellContainer getItemLayout() {
-            CellContainer layout = new CellContainer(getContext());
+            CellContainer layout = new CellContainer(desktop.getContext());
 
             layout.setSoundEffectsEnabled(false);
             SimpleFingerGestures mySfg = new SimpleFingerGestures();
             mySfg.setOnFingerGestureListener(getGestureListener());
             layout.gestures = mySfg;
-            layout.setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.desktopGridx, LauncherSettings.getInstance(getContext()).generalSettings.desktopGridy);
+            layout.onItemRearrangeListener = new CellContainer.OnItemRearrangeListener() {
+                @Override
+                public void onItemRearrange(Point from, Point to) {
+                    Item itemFromCoordinate = getItemFromCoordinate(from);
+                    if (itemFromCoordinate == null)return;
+                    itemFromCoordinate.x = to.x;
+                    itemFromCoordinate.y = to.y;
+                }
+            };
+            layout.setGridSize(LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridx, LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridy);
             layout.setOnTouchListener(new OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -417,35 +447,35 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                 @Override
                 public void onClick(View view) {
                     scaleFactor = 1f;
-                    for (final CellContainer v : pages) {
+                    for (final CellContainer v : desktop.pages) {
                         v.blockTouch = false;
                         v.animateBackgroundHide();
                         v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
                     }
-                    if (!inEditMode)
+                    if (!desktop.inEditMode)
                         if (currentEvent != null)
                             WallpaperManager.getInstance(view.getContext()).sendWallpaperCommand(view.getWindowToken(), WallpaperManager.COMMAND_TAP, (int) currentEvent.getX(), (int) currentEvent.getY(), 0, null);
 
-                    inEditMode = false;
-                    if (listener != null)
-                        listener.onFinished();
+                    desktop.inEditMode = false;
+                    if (desktop.listener != null)
+                        desktop.listener.onFinished();
                 }
             });
             layout.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     scaleFactor = 0.8f;
-                    for (CellContainer v : pages) {
-                        v.setPivotY(v.getHeight()/2 -Tool.dp2px(50,getContext()));
+                    for (CellContainer v : desktop.pages) {
+                        v.setPivotY(v.getHeight()/2 -Tool.dp2px(50,desktop.getContext()));
                         v.setPivotX(v.getWidth()/2);
 
                         v.blockTouch = true;
                         v.animateBackgroundShow();
                         v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
                     }
-                    inEditMode = true;
-                    if (listener != null)
-                        listener.onStart();
+                    desktop.inEditMode = true;
+                    if (desktop.listener != null)
+                        desktop.listener.onStart();
                     return true;
                 }
             });
