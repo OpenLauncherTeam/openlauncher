@@ -310,14 +310,14 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 if (appSearchBar != null) {
                     appSearchBar.setAlpha(0);
                     appSearchBar.setVisibility(View.VISIBLE);
-                    appSearchBar.animate().alpha(1).setDuration(100);
+                    appSearchBar.animate().setStartDelay(100).alpha(1).setDuration(100);
                 }
                 if (appDrawerIndicator != null)
                     appDrawerIndicator.animate().alpha(1).setDuration(100);
 
                 appDrawer.setScaleX(0.95f);
                 appDrawer.setScaleY(0.95f);
-                appDrawer.animate().scaleX(1).scaleY(1).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
+                appDrawer.animate().setStartDelay(100).scaleX(1).scaleY(1).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
             }
 
             @Override
@@ -334,7 +334,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 if (appDrawerIndicator != null)
                     appDrawerIndicator.animate().alpha(0).setDuration(100);
                 if (appSearchBar != null) {
-                    appSearchBar.animate().alpha(0).setDuration(100).withEndAction(new Runnable() {
+                    appSearchBar.animate().setStartDelay(0).alpha(0).setDuration(100).withEndAction(new Runnable() {
                         @Override
                         public void run() {
                             appSearchBar.setVisibility(View.INVISIBLE);
