@@ -1,6 +1,5 @@
 package com.benny.openlauncher.activity;
 
-import android.animation.Animator;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
@@ -11,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.DrawerLayout;
@@ -36,14 +34,14 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppUpdateReceiver;
-import com.benny.openlauncher.util.DragNavigationControl;
-import com.benny.openlauncher.util.IconListAdapter;
+import com.benny.openlauncher.viewutil.DragNavigationControl;
+import com.benny.openlauncher.viewutil.IconListAdapter;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
-import com.benny.openlauncher.util.QuickCenterItem;
+import com.benny.openlauncher.viewutil.QuickCenterItem;
 import com.benny.openlauncher.util.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.util.WidgetHost;
+import com.benny.openlauncher.viewutil.WidgetHost;
 import com.benny.openlauncher.widget.AppDrawer;
 import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.Dock;
@@ -215,7 +213,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                     @Override
                     public void run() {
                         dock.setVisibility(View.INVISIBLE);
-                        if (LauncherSettings.getInstance(Home.this).generalSettings.showsearchbar)
+                        if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar)
                             searchBar.setVisibility(View.INVISIBLE);
                     }
                 }, 100);
@@ -235,7 +233,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                         desktopEditOptionView.setVisibility(View.INVISIBLE);
 
                         dock.setVisibility(View.VISIBLE);
-                        if (LauncherSettings.getInstance(Home.this).generalSettings.showsearchbar)
+                        if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar)
                             searchBar.setVisibility(View.VISIBLE);
                     }
                 }, 100);
@@ -322,14 +320,14 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
             @Override
             public void onEnd() {
-                if (LauncherSettings.getInstance(Home.this).generalSettings.showsearchbar)
+                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar)
                     searchBar.setVisibility(View.INVISIBLE);
                 appDrawerBtn.setVisibility(View.INVISIBLE);
             }
         }, new AppDrawer.CallBack() {
             @Override
             public void onStart() {
-                if (LauncherSettings.getInstance(Home.this).generalSettings.showsearchbar)
+                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar)
                     searchBar.setVisibility(View.VISIBLE);
                 if (appDrawerIndicator != null)
                     appDrawerIndicator.animate().alpha(0).setDuration(100);
@@ -347,7 +345,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
             @Override
             public void onEnd() {
-                if (LauncherSettings.getInstance(Home.this).generalSettings.rememberappdrawerpage)
+                if (LauncherSettings.getInstance(Home.this).generalSettings.drawerRememberPage)
                     appDrawerOtter.scrollToStart();
                 desktopIndicator.animate().alpha(1);
                 appDrawer.setVisibility(View.INVISIBLE);
@@ -362,7 +360,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
 
     private void initSettings() {
-        if (!LauncherSettings.getInstance(this).generalSettings.showsearchbar) {
+        if (!LauncherSettings.getInstance(this).generalSettings.desktopSearchBar) {
             searchBar.setVisibility(View.GONE);
         }
     }
@@ -374,11 +372,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         ArrayList<Integer> icons = new ArrayList<>();
         icons.add(R.drawable.ic_mode_edit_black_24dp);
 
-        final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.minBarArrangement;
+        final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.miniBarArrangement;
         if (minBarArrangement == null) {
-            LauncherSettings.getInstance(this).generalSettings.minBarArrangement = new ArrayList<>();
+            LauncherSettings.getInstance(this).generalSettings.miniBarArrangement = new ArrayList<>();
             for (LauncherAction.ActionItem item : LauncherAction.actionItems) {
-                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("0" + item.label.toString());
+                LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("0" + item.label.toString());
                 labels.add(item.label.toString());
                 icons.add(item.icon);
             }
@@ -392,9 +390,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                     }
                 }
             } else {
-                LauncherSettings.getInstance(this).generalSettings.minBarArrangement = new ArrayList<>();
+                LauncherSettings.getInstance(this).generalSettings.miniBarArrangement = new ArrayList<>();
                 for (LauncherAction.ActionItem item : LauncherAction.actionItems) {
-                    LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("0" + item.label.toString());
+                    LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("0" + item.label.toString());
                     labels.add(item.label.toString());
                     icons.add(item.icon);
                 }

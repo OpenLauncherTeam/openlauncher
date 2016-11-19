@@ -16,7 +16,7 @@ import android.view.View;
 
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.GoodDragShadowBuilder;
+import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 

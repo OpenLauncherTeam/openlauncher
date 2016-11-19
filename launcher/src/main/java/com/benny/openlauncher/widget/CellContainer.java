@@ -14,6 +14,7 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 
 import com.benny.openlauncher.util.Tool;
 
@@ -77,10 +78,27 @@ public class CellContainer extends ViewGroup {
 
     private Point preCoordinate = new Point(-1,-1);
     private Long peekDownTime = -1L;
+    private PeekDirection peekDirection;
+
+    private PeekDirection getPeekDirectionFromCoordinate(Point from,Point to){
+        if (from.y - to.y > 0)
+            return PeekDirection.T;
+        else if (from.y - to.y < 0)
+            return PeekDirection.B;
+
+        if (from.x - to.x > 0)
+            return PeekDirection.L;
+        else if (from.x - to.x < 0)
+            return PeekDirection.R;
+
+        return null;
+    }
 
     public void peekItemAndSwap(DragEvent event) {
         Point coordinate = touchPosToCoordinate((int) event.getX(), (int) event.getY(), 1, 1, false);
+
         if (!preCoordinate.equals(coordinate)){
+            peekDirection = getPeekDirectionFromCoordinate(preCoordinate,coordinate);
             peekDownTime = -1L;
         }
         if (peekDownTime == -1L) {
@@ -99,7 +117,7 @@ public class CellContainer extends ViewGroup {
         if (targetParams.xSpan > 1 || targetParams.ySpan > 1)
             return;
         occupied[targetParams.x][targetParams.y] = false;
-        Point targetPoint = findFreeSpace(targetParams.x, targetParams.y);
+        Point targetPoint = findFreeSpace(targetParams.x, targetParams.y,peekDirection);
         onItemRearrange(new Point(targetParams.x, targetParams.y), targetPoint);
         targetParams.x = targetPoint.x;
         targetParams.y = targetPoint.y;
@@ -180,7 +198,32 @@ public class CellContainer extends ViewGroup {
 
     }
 
-    public Point findFreeSpace(int cx, int cy) {
+    public Point findFreeSpace(int cx, int cy,PeekDirection peekDirection) {
+        if (peekDirection != null) {
+            Point target;
+            switch (peekDirection) {
+                case B:
+                    target = new Point(cx,cy - 1);
+                    if (isValid(target.x,target.y) && !occupied[target.x][target.y])
+                        return target;
+                    break;
+                case L:
+                    target = new Point(cx + 1,cy);
+                    if (isValid(target.x,target.y) && !occupied[target.x][target.y])
+                        return target;
+                    break;
+                case R:
+                    target = new Point(cx - 1,cy);
+                    if (isValid(target.x,target.y) && !occupied[target.x][target.y])
+                        return target;
+                    break;
+                case T:
+                    target = new Point(cx,cy + 1);
+                    if (isValid(target.x,target.y) && !occupied[target.x][target.y])
+                        return target;
+                    break;
+            }
+        }
         Queue<Point> toExplore = new LinkedList<>();
         HashSet<Point> explored = new HashSet<>();
         toExplore.add(new Point(cx, cy));
@@ -509,6 +552,10 @@ public class CellContainer extends ViewGroup {
             curTop = t;
             curBottom = t + cellHeight;
         }
+    }
+
+    private enum PeekDirection{
+        T,L,R,B
     }
 
     public interface OnItemRearrangeListener {

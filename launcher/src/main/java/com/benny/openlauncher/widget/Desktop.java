@@ -16,12 +16,13 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.util.DesktopCallBack;
+import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.ItemViewFactory;
+import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
@@ -435,7 +436,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                     itemFromCoordinate.y = to.y;
                 }
             };
-            layout.setGridSize(LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridx, LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridy);
+            layout.setGridSize(LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridX, LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridY);
             layout.setOnTouchListener(new OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -536,6 +537,26 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             this.spanY = in.spanY;
             this.widgetID = in.widgetID;
         }
+    }
+
+    public enum DesktopMode{
+        Normal,ShowAllApps
+    }
+
+    public static void startStylePicker(final Context context) {
+        final String[] items = new String[DesktopMode.values().length];
+        for (int i = 0; i < DesktopMode.values().length; i++) {
+            items[i] = DesktopMode.values()[i].name();
+        }
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        builder.title("Desktop style")
+                .items(items)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                        LauncherSettings.getInstance(context).switchDesktopMode(DesktopMode.valueOf(items[position]));
+                    }
+                }).show();
     }
 
     public static class Item implements Parcelable {

@@ -10,6 +10,7 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
 import java.text.Collator;
@@ -40,8 +41,8 @@ public class AppManager {
     private List<AppUpdatedListener> updateListenersToRemove = new ArrayList<>();
     private AsyncTask task;
 
-    public static AppManager getInstance(Context c) {
-        return ref == null ? (ref = new AppManager(c)) : ref;
+    public static AppManager getInstance(Context context) {
+        return ref == null ? (ref = new AppManager(context)) : ref;
     }
 
     public AppManager(Context c) {

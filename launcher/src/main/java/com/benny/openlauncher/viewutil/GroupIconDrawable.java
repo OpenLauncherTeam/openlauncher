@@ -1,4 +1,4 @@
-package com.benny.openlauncher.util;
+package com.benny.openlauncher.viewutil;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,6 +12,7 @@ import android.graphics.Region;
 import android.graphics.drawable.Drawable;
 
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.util.Tool;
 
 public class GroupIconDrawable extends Drawable{
 

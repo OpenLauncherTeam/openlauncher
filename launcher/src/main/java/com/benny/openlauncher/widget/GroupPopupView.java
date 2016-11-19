@@ -14,11 +14,11 @@ import android.widget.TextView;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.util.DesktopCallBack;
+import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.GoodDragShadowBuilder;
-import com.benny.openlauncher.util.GroupIconDrawable;
-import com.benny.openlauncher.util.ItemViewFactory;
+import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
+import com.benny.openlauncher.viewutil.GroupIconDrawable;
+import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 

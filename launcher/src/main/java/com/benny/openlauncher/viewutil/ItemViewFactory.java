@@ -1,4 +1,4 @@
-package com.benny.openlauncher.util;
+package com.benny.openlauncher.viewutil;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
@@ -18,6 +18,10 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.DragAction;
+import com.benny.openlauncher.util.LauncherSettings;
+import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.widget.CellContainer;
 import com.benny.openlauncher.widget.Desktop;
@@ -31,7 +35,7 @@ public class ItemViewFactory {
 
     public static final int NO_FLAGS = 0x01;
     public static final int NO_LABEL = 0x02;
-    public static View getItemView(final Context context, final DesktopCallBack callBack, final Desktop.Item item,int flags) {
+    public static View getItemView(final Context context, final DesktopCallBack callBack, final Desktop.Item item, int flags) {
         View view = null;
         switch (item.type) {
             case APP:
@@ -44,11 +48,11 @@ public class ItemViewFactory {
                         .withOnClickLaunchApp(app)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongClickDrag(item, DragAction.Action.ACTION_SHORTCUT, new View.OnLongClickListener() {
+                        .withOnLongClickDrag(item, DragAction.Action.ACTION_APP, new View.OnLongClickListener() {
                             @Override
                             public boolean onLongClick(View v) {
                                 callBack.setLastItem(item, v);
-                                return false;
+                                return true;
                             }
                         })
                         .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
@@ -161,7 +165,7 @@ public class ItemViewFactory {
                             @Override
                             public boolean onLongClick(View v) {
                                 callBack.setLastItem(item, v);
-                                return false;
+                                return true;
                             }
                         })
                         .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
@@ -174,7 +178,7 @@ public class ItemViewFactory {
                             @Override
                             public boolean onLongClick(View v) {
                                 callBack.setLastItem(item, v);
-                                return false;
+                                return true;
                             }
                         })
                         .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
