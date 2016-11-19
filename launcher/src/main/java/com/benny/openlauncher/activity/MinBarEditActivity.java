@@ -53,7 +53,7 @@ public class MinBarEditActivity extends AppCompatActivity implements ItemTouchCa
         recyclerView.setAdapter(adapter);
 
         int i = 0;
-        final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.minBarArrangement;
+        final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.miniBarArrangement;
         for (String act : minBarArrangement) {
             LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act.substring(1));
             adapter.add(new Item(i,item,act.charAt(0) == '0'));
@@ -65,12 +65,12 @@ public class MinBarEditActivity extends AppCompatActivity implements ItemTouchCa
 
     @Override
     protected void onPause() {
-        LauncherSettings.getInstance(this).generalSettings.minBarArrangement.clear();
+        LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.clear();
         for (Item item : adapter.getAdapterItems()) {
             if (item.enable) {
-                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("0" + item.item.label.toString());
+                LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("0" + item.item.label.toString());
             } else
-                LauncherSettings.getInstance(this).generalSettings.minBarArrangement.add("1" + item.item.label.toString());
+                LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("1" + item.item.label.toString());
         }
         super.onPause();
     }

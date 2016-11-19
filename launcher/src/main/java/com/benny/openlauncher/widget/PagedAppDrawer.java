@@ -22,6 +22,8 @@ import com.bennyv5.smoothviewpager.SmoothViewPager;
 public class PagedAppDrawer extends SmoothViewPager {
     private List<AppManager.App> apps;
 
+    public List<ViewGroup> pages = new ArrayList<>();
+
     private Home home;
 
     private static int vertCellCount, horiCellCount;
@@ -60,13 +62,13 @@ public class PagedAppDrawer extends SmoothViewPager {
     }
 
     private void setPortraitValue() {
-        horiCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridx;
-        vertCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridy;
+        horiCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX;
+        vertCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridY;
     }
 
     private void setLandscapeValue() {
-        horiCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridxL;
-        vertCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridyL;
+        horiCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX_L;
+        vertCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridY_L;
     }
 
     private void calculatePage() {
@@ -113,8 +115,6 @@ public class PagedAppDrawer extends SmoothViewPager {
 
     public class Adapter extends SmoothPagerAdapter {
 
-        List<ViewGroup> views = new ArrayList<>();
-
         private View getItemView(int page, int x, int y) {
             int pagePos = y * horiCellCount + x;
             final int pos = vertCellCount * horiCellCount * page + pagePos;
@@ -131,8 +131,12 @@ public class PagedAppDrawer extends SmoothViewPager {
                     .withOnLongClickDrag(app, DragAction.Action.ACTION_APP_DRAWER, new OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View v) {
-                            home.closeAppDrawer();
-                            return false;
+                            if (LauncherSettings.getInstance(v.getContext()).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps){
+                                return false;
+                            }else {
+                                home.closeAppDrawer();
+                                return true;
+                            }
                         }
                     }).getView();
         }
@@ -154,7 +158,7 @@ public class PagedAppDrawer extends SmoothViewPager {
                     }
                 }
 
-                views.add(layout);
+                pages.add(layout);
             }
         }
 
@@ -175,7 +179,7 @@ public class PagedAppDrawer extends SmoothViewPager {
 
         @Override
         public int getItemPosition(Object object) {
-            int index = views.indexOf(object);
+            int index = pages.indexOf(object);
             if (index == -1)
                 return POSITION_NONE;
             else
@@ -184,7 +188,7 @@ public class PagedAppDrawer extends SmoothViewPager {
 
         @Override
         public Object instantiateItem(ViewGroup container, int pos) {
-            ViewGroup layout = views.get(pos);
+            ViewGroup layout = pages.get(pos);
             container.addView(layout);
             return layout;
         }

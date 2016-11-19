@@ -1,11 +1,8 @@
-package com.benny.openlauncher.util;
+package com.benny.openlauncher.viewutil;
 
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;

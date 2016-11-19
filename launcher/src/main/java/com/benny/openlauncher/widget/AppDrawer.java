@@ -3,14 +3,12 @@ package com.benny.openlauncher.widget;
 import android.animation.Animator;
 import android.content.Context;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.PopupMenu;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
 
@@ -65,6 +63,18 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
             @Override
             public void onAnimationStart(Animator p1) {
                 getChildAt(0).setVisibility(View.VISIBLE);
+
+                switch (drawerMode) {
+                    case Paged:
+                        View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
+                        mGrid.setAlpha(0);
+                        mGrid.animate().setStartDelay(100L).alpha(1).setDuration(200L);
+                        break;
+                    case Grid:
+                        drawerViewGrid.rv.setAlpha(0);
+                        drawerViewGrid.rv.animate().setStartDelay(100L).alpha(1).setDuration(200L);
+                        break;
+                }
             }
 
             @Override
@@ -95,6 +105,16 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
             @Override
             public void onAnimationStart(Animator p1) {
                 closeCallBack.onStart();
+
+                switch (drawerMode) {
+                    case Paged:
+                        View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
+                        mGrid.animate().setStartDelay(0).alpha(0).setDuration(80L);
+                        break;
+                    case Grid:
+                        drawerViewGrid.rv.animate().setStartDelay(0).alpha(0).setDuration(80L);
+                        break;
+                }
             }
 
             @Override
@@ -126,19 +146,19 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
         switch (drawerMode) {
             case Paged:
                 drawerViewPaged = (PagedAppDrawer) layoutInflater.inflate(R.layout.view_pageddrawer, this, false);
-//                if (LauncherSettings.getInstance(getContext()).generalSettings.appDrawerSearchbar)
+//                if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar)
 //                    ((LayoutParams) drawerViewPaged.getLayoutParams()).topMargin += Tool.dp2px(70, getContext());
                 addView(drawerViewPaged);
                 addView(layoutInflater.inflate(R.layout.view_drawerindicator, this, false));
                 break;
             case Grid:
                 drawerViewGrid = (GridAppDrawer) layoutInflater.inflate(R.layout.view_griddrawer, this, false);
-                if (LauncherSettings.getInstance(getContext()).generalSettings.appDrawerSearchbar)
+                if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar)
                     ((LayoutParams) drawerViewGrid.getLayoutParams()).topMargin += Tool.dp2px(60, getContext());
                 addView(drawerViewGrid);
                 break;
         }
-        if (LauncherSettings.getInstance(getContext()).generalSettings.appDrawerSearchbar && drawerMode == Grid) {
+        if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar && drawerMode == Grid) {
             CardView cv = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_searchbar_app, this, false);
             addView(cv);
             searchBar = (EditText) cv.findViewById(R.id.et);

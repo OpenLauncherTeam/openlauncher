@@ -10,9 +10,9 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.util.DesktopCallBack;
+import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.ItemViewFactory;
+import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.util.LauncherSettings;
 
 import static com.benny.openlauncher.widget.Desktop.*;
@@ -38,7 +38,7 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
     public void init() {
         if (isInEditMode()) return;
 
-        setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.dockGridx, 1);
+        setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.dockGridX, 1);
         setOnDragListener(this);
 
         super.init();
@@ -142,7 +142,7 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
 
     @Override
     public void addItemToPagePosition(final Item item,int page) {
-        int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockshowlabel ?  ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+        int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ?  ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(),this,item,flag);
 
         if (itemView == null) {
@@ -162,7 +162,7 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
             LauncherSettings.getInstance(getContext()).dockData.add(item);
             //end
 
-            int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockshowlabel ?  ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+            int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ?  ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
             View itemView = ItemViewFactory.getItemView(getContext(),this,item,flag);
 
             if (itemView != null) {

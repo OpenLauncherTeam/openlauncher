@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Filter;
 import android.widget.RelativeLayout;
 
 import com.benny.openlauncher.R;
@@ -77,12 +76,12 @@ public class GridAppDrawer extends CardView{
     }
 
     private void setPortraitValue(){
-        layoutManager.setSpanCount(LauncherSettings.getInstance(getContext()).generalSettings.drawerGridx);
+        layoutManager.setSpanCount(LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX);
         fa.notifyAdapterDataSetChanged();
     }
 
     private void setLandscapeValue() {
-        layoutManager.setSpanCount(LauncherSettings.getInstance(getContext()).generalSettings.drawerGridxL);
+        layoutManager.setSpanCount(LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX_L);
         fa.notifyAdapterDataSetChanged();
     }
 
@@ -103,7 +102,7 @@ public class GridAppDrawer extends CardView{
         fa = new GridAppDrawerAdapter();
         rv.setAdapter(fa);
 
-        layoutManager = new GridLayoutManager(getContext(), LauncherSettings.getInstance(getContext()).generalSettings.drawerGridx);
+        layoutManager = new GridLayoutManager(getContext(), LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX);
         if (mPortrait) {
             setPortraitValue();
         } else {
@@ -188,8 +187,12 @@ public class GridAppDrawer extends CardView{
             new AppItemView.Builder(holder.appItemView).setAppItem(app).withOnClickLaunchApp(app).withOnTouchGetPosition().withOnLongClickDrag(app, DragAction.Action.ACTION_APP_DRAWER, new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    Home.launcher.closeAppDrawer();
-                    return false;
+                    if (LauncherSettings.getInstance(v.getContext()).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps){
+                        return false;
+                    }else {
+                        Home.launcher.closeAppDrawer();
+                        return true;
+                    }
                 }
             });
             super.bindView(holder, payloads);

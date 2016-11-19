@@ -1,4 +1,4 @@
-package com.benny.openlauncher.util;
+package com.benny.openlauncher.viewutil;
 
 import android.content.Context;
 import android.view.LayoutInflater;

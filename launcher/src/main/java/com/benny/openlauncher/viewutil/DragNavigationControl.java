@@ -1,10 +1,11 @@
-package com.benny.openlauncher.util;
+package com.benny.openlauncher.viewutil;
 
 import android.os.Handler;
 import android.view.DragEvent;
 import android.view.View;
 
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.util.DragAction;
 
 public class DragNavigationControl {
 
