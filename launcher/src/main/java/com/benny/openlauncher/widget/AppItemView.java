@@ -196,15 +196,19 @@ public class AppItemView extends View implements Drawable.Callback{
             return this;
         }
 
-        public Builder withOnLongClickDrag(final AppManager.App app,final DragAction.Action action,@Nullable final OnLongClickListener eventAction){
-            withOnLongClickDrag(Desktop.Item.newAppItem(app),action,eventAction);
+        public Builder withOnLongPressDrag(final AppManager.App app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction){
+            withOnLongPressDrag(Desktop.Item.newAppItem(app),action,eventAction);
             return this;
         }
 
-        public Builder withOnLongClickDrag(final Desktop.Item item, final DragAction.Action action, @Nullable final OnLongClickListener eventAction){
+        public Builder withOnLongPressDrag(final Desktop.Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction){
             view.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    if (eventAction != null){
+                        if (!eventAction.readyForDrag(v))return false;
+                    }
+
                     if (view.vibrateWhenLongPress)
                         v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                     Intent i = new Intent();
@@ -212,11 +216,16 @@ public class AppItemView extends View implements Drawable.Callback{
                     ClipData data = ClipData.newIntent("mDragIntent", i);
                     v.startDrag(data, new GoodDragShadowBuilder(v), new DragAction(action), 0);
                     if (eventAction != null)
-                        eventAction.onLongClick(v);
+                        eventAction.afterDrag(v);
                     return true;
                 }
             });
             return this;
+        }
+
+        public interface LongPressCallBack{
+            boolean readyForDrag(View view);
+            void afterDrag(View view);
         }
 
         public Builder withOnTouchGetPosition(){

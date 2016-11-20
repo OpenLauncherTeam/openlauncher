@@ -139,7 +139,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             public void onAppUpdated(List<AppManager.App> apps) {
                 desktop.initDesktopItem(Home.this);
                 dock.initDockItem(Home.this);
-                dock.addViewToGrid(appDrawerBtn, 2, 0, 1, 1);
+                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps){
+
+                }else {
+                    dock.addViewToGrid(appDrawerBtn, 2, 0, 1, 1);
+                }
                 AppManager.getInstance(Home.this).removeAppUpdatedListener(this);
             }
         });

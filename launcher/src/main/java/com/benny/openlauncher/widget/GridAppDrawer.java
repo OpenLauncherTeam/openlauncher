@@ -33,30 +33,27 @@ import java.util.List;
 
 public class GridAppDrawer extends CardView{
 
-    public static int itemWidth;
-    public static int itemHeightPadding;
+    private static int itemWidth;
+    private static int itemHeightPadding;
 
-    public RecyclerView rv;
-    GridAppDrawerAdapter fa;
+    public RecyclerView recyclerView;
+    public GridAppDrawerAdapter gridDrawerAdapter;
 
-    List<AppManager.App> apps;
+    private List<AppManager.App> apps;
     private GridLayoutManager layoutManager;
 
     public GridAppDrawer(Context context) {
         super(context);
-
         init();
     }
 
     public GridAppDrawer(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         init();
     }
 
     public GridAppDrawer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         init();
     }
 
@@ -77,30 +74,31 @@ public class GridAppDrawer extends CardView{
 
     private void setPortraitValue(){
         layoutManager.setSpanCount(LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX);
-        fa.notifyAdapterDataSetChanged();
+        gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
     private void setLandscapeValue() {
         layoutManager.setSpanCount(LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX_L);
-        fa.notifyAdapterDataSetChanged();
+        gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        itemWidth = (getWidth()-rv.getPaddingRight()-rv.getPaddingRight()) / layoutManager.getSpanCount();
-        itemHeightPadding = Tool.dp2px(12,getContext());
+        itemWidth = (getWidth()- recyclerView.getPaddingRight()- recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
         super.onLayout(changed, left, top, right, bottom);
     }
 
     private void init(){
+        itemHeightPadding = Tool.dp2px(12,getContext());
+
         RelativeLayout rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_griddrawerinner,this,false);
         DragScrollBar bar = (DragScrollBar) rl.findViewById(R.id.dragScrollBar);
         bar.setIndicator(new AlphabetIndicator(getContext()),true);
-        rv = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
+        recyclerView = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
 
         boolean mPortrait = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-        fa = new GridAppDrawerAdapter();
-        rv.setAdapter(fa);
+        gridDrawerAdapter = new GridAppDrawerAdapter();
+        recyclerView.setAdapter(gridDrawerAdapter);
 
         layoutManager = new GridLayoutManager(getContext(), LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX);
         if (mPortrait) {
@@ -108,7 +106,7 @@ public class GridAppDrawer extends CardView{
         } else {
             setLandscapeValue();
         }
-        rv.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);
 
         if (AppManager.getInstance(getContext()).getApps().size() != 0){
             GridAppDrawer.this.apps = AppManager.getInstance(getContext()).getApps();
@@ -116,7 +114,7 @@ public class GridAppDrawer extends CardView{
             for (int i = 0; i < apps.size(); i++) {
                 items.add(new AppItem(apps.get(i)));
             }
-            fa.set(items);
+            gridDrawerAdapter.set(items);
         }
         AppManager.getInstance(getContext()).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             @Override
@@ -126,7 +124,7 @@ public class GridAppDrawer extends CardView{
                 for (int i = 0; i < apps.size(); i++) {
                     items.add(new AppItem(apps.get(i)));
                 }
-                fa.set(items);
+                gridDrawerAdapter.set(items);
             }
         });
 
@@ -184,15 +182,16 @@ public class GridAppDrawer extends CardView{
 
         @Override
         public void bindView(AppItem.ViewHolder holder, List payloads) {
-            new AppItemView.Builder(holder.appItemView).setAppItem(app).withOnClickLaunchApp(app).withOnTouchGetPosition().withOnLongClickDrag(app, DragAction.Action.ACTION_APP_DRAWER, new OnLongClickListener() {
+            new AppItemView.Builder(holder.appItemView).setAppItem(app).withOnClickLaunchApp(app).withOnTouchGetPosition().withOnLongPressDrag(app, DragAction.Action.ACTION_APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                 @Override
-                public boolean onLongClick(View v) {
-                    if (LauncherSettings.getInstance(v.getContext()).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps){
-                        return false;
-                    }else {
-                        Home.launcher.closeAppDrawer();
-                        return true;
-                    }
+                public boolean readyForDrag(View view) {
+                    return LauncherSettings.getInstance(view.getContext()).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps;
+                }
+
+                @Override
+                public void afterDrag(View view) {
+                    Home.launcher.closeAppDrawer();
+
                 }
             });
             super.bindView(holder, payloads);

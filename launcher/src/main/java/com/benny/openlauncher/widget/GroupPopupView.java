@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.util.DragAction;
@@ -24,13 +25,13 @@ import com.benny.openlauncher.util.Tool;
 
 public class GroupPopupView extends FrameLayout {
 
-    CardView popupParent;
-    CellContainer cellContainer;
-    TextView title;
+    private CardView popupParent;
+    private CellContainer cellContainer;
+    private TextView title;
 
-    boolean init = false;
+    private boolean init = false;
 
-    PopupWindow.OnDismissListener dismissListener;
+    private PopupWindow.OnDismissListener dismissListener;
 
     public GroupPopupView(Context context) {
         super(context);
@@ -110,9 +111,28 @@ public class GroupPopupView extends FrameLayout {
                     public boolean onLongClick(View view2) {
                         callBack.removeItemFromSettings(item);
                         item.removeActions(act);
-                        callBack.addItemToSettings(item);
+                        if (item.actions.length == 1){
+                            item.type = Desktop.Item.Type.APP;
+                            AppItemView.Builder builder = new AppItemView.Builder((AppItemView) itemView);
+                            final AppManager.App app = AppManager.getInstance(view2.getContext()).findApp(item.actions[0].getComponent().getPackageName(), item.actions[0].getComponent().getClassName());
+                            if (app != null) {
+                                builder.setAppItem(app).withOnClickLaunchApp(app).withOnLongPressDrag(item, DragAction.Action.ACTION_APP, new AppItemView.Builder.LongPressCallBack() {
+                                    @Override
+                                    public boolean readyForDrag(View view) {
+                                        return true;
+                                    }
 
-                        ((AppItemView) itemView).setIcon(ItemViewFactory.getGroupIconDrawable(c, item), false);
+                                    @Override
+                                    public void afterDrag(View view) {
+                                        callBack.setLastItem(item, view);
+                                    }
+                                });
+                            }
+                            Home.launcher.desktop.requestLayout();
+                        }else {
+                            ((AppItemView) itemView).setIcon(ItemViewFactory.getGroupIconDrawable(c, item), false);
+                        }
+                        callBack.addItemToSettings(item);
 
                         itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                         Intent i = new Intent();
@@ -187,7 +207,8 @@ public class GroupPopupView extends FrameLayout {
                 AppItemView otv = ((AppItemView) itemView);
                 if (!otv.getLabel().isEmpty())
                     otv.setLabel(title.getText().toString());
-                ((GroupIconDrawable) ((AppItemView) itemView).getIcon()).popBack();
+                if (((AppItemView) itemView).getIcon() instanceof  GroupIconDrawable)
+                    ((GroupIconDrawable) ((AppItemView) itemView).getIcon()).popBack();
             }
         };
 

@@ -8,7 +8,6 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
 
@@ -71,8 +70,8 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
                         mGrid.animate().setStartDelay(100L).alpha(1).setDuration(200L);
                         break;
                     case Grid:
-                        drawerViewGrid.rv.setAlpha(0);
-                        drawerViewGrid.rv.animate().setStartDelay(100L).alpha(1).setDuration(200L);
+                        drawerViewGrid.recyclerView.setAlpha(0);
+                        drawerViewGrid.recyclerView.animate().setStartDelay(100L).alpha(1).setDuration(200L);
                         break;
                 }
             }
@@ -112,7 +111,7 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
                         mGrid.animate().setStartDelay(0).alpha(0).setDuration(80L);
                         break;
                     case Grid:
-                        drawerViewGrid.rv.animate().setStartDelay(0).alpha(0).setDuration(80L);
+                        drawerViewGrid.recyclerView.animate().setStartDelay(0).alpha(0).setDuration(80L);
                         break;
                 }
             }
@@ -173,7 +172,7 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
                 drawerViewPaged.setCurrentItem(0, false);
                 break;
             case Grid:
-                drawerViewGrid.rv.scrollToPosition(0);
+                drawerViewGrid.recyclerView.scrollToPosition(0);
                 break;
         }
     }
@@ -216,7 +215,7 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
             case Paged:
                 break;
             case Grid:
-                drawerViewGrid.fa.filter(charSequence);
+                drawerViewGrid.gridDrawerAdapter.filter(charSequence);
                 break;
         }
     }

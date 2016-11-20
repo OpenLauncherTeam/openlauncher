@@ -118,6 +118,7 @@ public class CellContainer extends ViewGroup {
             return;
         occupied[targetParams.x][targetParams.y] = false;
         Point targetPoint = findFreeSpace(targetParams.x, targetParams.y,peekDirection);
+        Tool.print(targetPoint);
         onItemRearrange(new Point(targetParams.x, targetParams.y), targetPoint);
         targetParams.x = targetPoint.x;
         targetParams.y = targetPoint.y;
@@ -237,7 +238,7 @@ public class CellContainer extends ViewGroup {
                         return cp;
                     else
                         toExplore.add(cp);
-                    explored.add(cp);
+                    explored.add(p);
                 }
             }
 
@@ -248,7 +249,7 @@ public class CellContainer extends ViewGroup {
                         return cp;
                     else
                         toExplore.add(cp);
-                    explored.add(cp);
+                    explored.add(p);
                 }
             }
 
@@ -259,7 +260,7 @@ public class CellContainer extends ViewGroup {
                         return cp;
                     else
                         toExplore.add(cp);
-                    explored.add(cp);
+                    explored.add(p);
                 }
             }
 
@@ -270,7 +271,7 @@ public class CellContainer extends ViewGroup {
                         return cp;
                     else
                         toExplore.add(cp);
-                    explored.add(cp);
+                    explored.add(p);
                 }
             }
         }

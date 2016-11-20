@@ -124,6 +124,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
     public void removeCurrentPage() {
         if (pageCount == 1) return;
+        if (LauncherSettings.getInstance(getContext()).generalSettings.desktopMode == DesktopMode.ShowAllApps
+                && LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).size() != 0)
+            return;
         LauncherSettings.getInstance(getContext()).desktopData.remove(getCurrentItem());
         LauncherSettings.getInstance(getContext()).generalSettings.desktopPageCount--;
         pageCount--;
