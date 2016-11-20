@@ -30,6 +30,7 @@ public class LauncherSettings {
 
     private static final String DesktopData2FileName = "desktopData2.json";
     private static final String DesktopDataFileName = "desktopData.json";
+    private static final String DockData2FileName = "dockData2.json";
     private static final String DockDataFileName = "dockData.json";
     private static final String GeneralSettingsFileName = "generalSettings.json";
 
@@ -43,10 +44,19 @@ public class LauncherSettings {
         readSettings();
     }
 
-    private void readDockData(Gson gson){
+    private void readDockData(Gson gson, Desktop.DesktopMode mode){
         dockData.clear();
+        String dataName = null;
+        switch (mode){
+            case Normal:
+                dataName = DockDataFileName;
+                break;
+            case ShowAllApps:
+                dataName = DockData2FileName;
+                break;
+        }
         try {
-            JsonReader reader = new JsonReader(new InputStreamReader(context.openFileInput(DockDataFileName)));
+            JsonReader reader = new JsonReader(new InputStreamReader(context.openFileInput(dataName)));
             reader.beginArray();
             while (reader.hasNext()) {
                 Desktop.SimpleItem item = gson.fromJson(reader,Desktop.SimpleItem.class);
@@ -127,16 +137,19 @@ public class LauncherSettings {
         else
             generalSettings = gson.fromJson(raw,GeneralSettings.class);
 
-        readDockData(gson);
+        readDockData(gson,generalSettings.desktopMode);
         readDesktopData(gson,generalSettings.desktopMode);
+
+        // FIXME: 11/20/2016 it will crash due to different set of data as all the icon file will be erased when set to ShowAllApps mode
         Tool.checkForUnusedIconAndDelete(context, iconCacheIDs);
     }
 
     public void switchDesktopMode(Desktop.DesktopMode mode){
-        generalSettings.desktopMode = mode;
         writeSettings();
+        generalSettings.desktopMode = mode;
         Gson gson = new Gson();
         readDesktopData(gson,mode);
+        readDockData(gson,mode);
 
         //We init all the apps to the desktop for the first time.
         if (mode == Desktop.DesktopMode.ShowAllApps && desktopData.size() == 0){
@@ -147,17 +160,19 @@ public class LauncherSettings {
                 pageCount++;
             }
             Tool.print("Page count:"+pageCount);
+            generalSettings.desktopPageCount = pageCount;
             for (int i = 0; i < pageCount; i++) {
                 ArrayList<Desktop.Item> items = new ArrayList<>();
                 for (int x = 0; x < generalSettings.desktopGridX; x++) {
                     for (int y = 0; y < generalSettings.desktopGridY; y++) {
                         int pagePos = y * generalSettings.desktopGridY + x;
                         final int pos = generalSettings.desktopGridY * generalSettings.desktopGridX * i + pagePos;
-                        if (pos >= apps.size())break;
-                        Desktop.Item appItem = Desktop.Item.newAppItem(apps.get(pos));
-                        appItem.x = x;
-                        appItem.y = y;
-                        items.add(appItem);
+                        if (!(pos >= apps.size())) {
+                            Desktop.Item appItem = Desktop.Item.newAppItem(apps.get(pos));
+                            appItem.x = x;
+                            appItem.y = y;
+                            items.add(appItem);
+                        }
                     }
                 }
                 desktopData.add(items);
@@ -184,12 +199,13 @@ public class LauncherSettings {
         switch (generalSettings.desktopMode){
             case Normal:
                 Tool.writeToFile(DesktopDataFileName,gson.toJson(simpleDesktopData), context);
+                Tool.writeToFile(DockDataFileName,gson.toJson(simpleDockData), context);
                 break;
             case ShowAllApps:
                 Tool.writeToFile(DesktopData2FileName,gson.toJson(simpleDesktopData), context);
+                Tool.writeToFile(DockData2FileName,gson.toJson(simpleDockData), context);
                 break;
         }
-        Tool.writeToFile(DockDataFileName,gson.toJson(simpleDockData), context);
         Tool.writeToFile(GeneralSettingsFileName,gson.toJson(generalSettings), context);
 
         return gson;

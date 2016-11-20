@@ -26,7 +26,7 @@ public class PagedAppDrawer extends SmoothViewPager {
 
     private Home home;
 
-    private static int vertCellCount, horiCellCount;
+    private static int vCellCount, hCellCount;
 
     private PagerIndicator appDrawerIndicator;
 
@@ -62,19 +62,19 @@ public class PagedAppDrawer extends SmoothViewPager {
     }
 
     private void setPortraitValue() {
-        horiCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX;
-        vertCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridY;
+        hCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX;
+        vCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridY;
     }
 
     private void setLandscapeValue() {
-        horiCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX_L;
-        vertCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridY_L;
+        hCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX_L;
+        vCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridY_L;
     }
 
     private void calculatePage() {
         pageCount = 0;
         int appsSize = apps.size();
-        while ((appsSize = appsSize - (vertCellCount * horiCellCount)) >= (vertCellCount * horiCellCount) || (appsSize > -(vertCellCount * horiCellCount))) {
+        while ((appsSize = appsSize - (vCellCount * hCellCount)) >= (vCellCount * hCellCount) || (appsSize > -(vCellCount * hCellCount))) {
             pageCount++;
         }
     }
@@ -116,8 +116,8 @@ public class PagedAppDrawer extends SmoothViewPager {
     public class Adapter extends SmoothPagerAdapter {
 
         private View getItemView(int page, int x, int y) {
-            int pagePos = y * horiCellCount + x;
-            final int pos = vertCellCount * horiCellCount * page + pagePos;
+            int pagePos = y * hCellCount + x;
+            final int pos = vCellCount * hCellCount * page + pagePos;
 
             if (pos >= apps.size())
                 return null;
@@ -128,15 +128,16 @@ public class PagedAppDrawer extends SmoothViewPager {
                     .setAppItem(app)
                     .withOnClickLaunchApp(app)
                     .withOnTouchGetPosition()
-                    .withOnLongClickDrag(app, DragAction.Action.ACTION_APP_DRAWER, new OnLongClickListener() {
+                    .withOnLongPressDrag(app, DragAction.Action.ACTION_APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                         @Override
-                        public boolean onLongClick(View v) {
-                            if (LauncherSettings.getInstance(v.getContext()).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps){
-                                return false;
-                            }else {
-                                home.closeAppDrawer();
-                                return true;
-                            }
+                        public boolean readyForDrag(View view) {
+                            return LauncherSettings.getInstance(view.getContext()).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps;
+                        }
+
+                        @Override
+                        public void afterDrag(View view) {
+                            home.closeAppDrawer();
+
                         }
                     }).getView();
         }
@@ -145,10 +146,10 @@ public class PagedAppDrawer extends SmoothViewPager {
             for (int i = 0; i < getCount(); i++) {
                 ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_appdrawer_page, null);
                 CellContainer cc = (CellContainer) layout.findViewById(R.id.cc);
-                cc.setGridSize(horiCellCount, vertCellCount);
+                cc.setGridSize(hCellCount, vCellCount);
 
-                for (int x = 0; x < horiCellCount; x++) {
-                    for (int y = 0; y < vertCellCount; y++) {
+                for (int x = 0; x < hCellCount; x++) {
+                    for (int y = 0; y < vCellCount; y++) {
                         View view = getItemView(i, x, y);
                         if (view != null) {
                             CellContainer.LayoutParams lp = new CellContainer.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, x, y, 1, 1);

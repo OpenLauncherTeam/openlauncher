@@ -47,8 +47,12 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
     public void initDockItem(Home home) {
         this.home = home;
         removeAllViews();
+        boolean showAllAppsMode = LauncherSettings.getInstance(home).generalSettings.desktopMode == DesktopMode.ShowAllApps;
         for (Item item : LauncherSettings.getInstance(getContext()).dockData) {
-            addItemToPagePosition(item,0);
+            if (showAllAppsMode && item.x == 2){
+
+            }else
+                addItemToPagePosition(item,0);
         }
     }
 

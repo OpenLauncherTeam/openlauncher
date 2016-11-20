@@ -48,11 +48,15 @@ public class ItemViewFactory {
                         .withOnClickLaunchApp(app)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongClickDrag(item, DragAction.Action.ACTION_APP, new View.OnLongClickListener() {
+                        .withOnLongPressDrag(item, DragAction.Action.ACTION_APP, new AppItemView.Builder.LongPressCallBack() {
                             @Override
-                            public boolean onLongClick(View v) {
-                                callBack.setLastItem(item, v);
+                            public boolean readyForDrag(View view) {
                                 return true;
+                            }
+
+                            @Override
+                            public void afterDrag(View view) {
+                                callBack.setLastItem(item, view);
                             }
                         })
                         .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
@@ -161,11 +165,16 @@ public class ItemViewFactory {
                         .setShortcutItem(item.actions[0])
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongClickDrag(item, DragAction.Action.ACTION_SHORTCUT, new View.OnLongClickListener() {
+
+                        .withOnLongPressDrag(item, DragAction.Action.ACTION_SHORTCUT, new AppItemView.Builder.LongPressCallBack() {
                             @Override
-                            public boolean onLongClick(View v) {
-                                callBack.setLastItem(item, v);
+                            public boolean readyForDrag(View view) {
                                 return true;
+                            }
+
+                            @Override
+                            public void afterDrag(View view) {
+                                callBack.setLastItem(item, view);
                             }
                         })
                         .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
@@ -174,11 +183,15 @@ public class ItemViewFactory {
                 break;
             case GROUP:
                 view = new AppItemView.Builder(context)
-                        .withOnLongClickDrag(item, DragAction.Action.ACTION_GROUP, new View.OnLongClickListener() {
+                        .withOnLongPressDrag(item, DragAction.Action.ACTION_GROUP, new AppItemView.Builder.LongPressCallBack() {
                             @Override
-                            public boolean onLongClick(View v) {
-                                callBack.setLastItem(item, v);
+                            public boolean readyForDrag(View view) {
                                 return true;
+                            }
+
+                            @Override
+                            public void afterDrag(View view) {
+                                callBack.setLastItem(item, view);
                             }
                         })
                         .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
