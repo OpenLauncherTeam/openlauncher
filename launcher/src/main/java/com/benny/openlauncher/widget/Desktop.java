@@ -496,7 +496,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             case APP:
             case SHORTCUT:
             case GROUP:
-                if (dropItem.type == Desktop.Item.Type.APP || dropItem.type == Desktop.Item.Type.SHORTCUT && item.actions.length < GroupPopupView.GroupDef.maxItem) {
+                if ((dropItem.type == Desktop.Item.Type.APP || dropItem.type == Desktop.Item.Type.SHORTCUT) && item.actions.length < GroupPopupView.GroupDef.maxItem) {
                     callBack.removeItemFromSettings(item);
                     parent.removeView(itemView);
 

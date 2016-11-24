@@ -185,7 +185,7 @@ public class GridAppDrawer extends CardView{
             new AppItemView.Builder(holder.appItemView).setAppItem(app).withOnClickLaunchApp(app).withOnTouchGetPosition().withOnLongPressDrag(app, DragAction.Action.ACTION_APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                 @Override
                 public boolean readyForDrag(View view) {
-                    return LauncherSettings.getInstance(view.getContext()).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps;
+                    return LauncherSettings.getInstance(view.getContext()).generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps;
                 }
 
                 @Override

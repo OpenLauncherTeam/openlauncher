@@ -2,6 +2,7 @@ package com.benny.openlauncher.util;
 
 import android.app.Activity;
 import android.content.*;
+import android.content.pm.PackageManager;
 import android.content.res.*;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -95,6 +96,15 @@ public class Tool
             list.add(s);
         }
         return list.toArray(new String[list.size()]);
+    }
+
+    public static boolean isPackageInstalled(String packageName, PackageManager packageManager) {
+        try {
+            packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
     public static void checkForUnusedIconAndDelete(Context context,ArrayList<String> IDs){
