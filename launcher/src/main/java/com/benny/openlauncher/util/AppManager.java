@@ -169,7 +169,7 @@ public class AppManager {
             }
 
             LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(context).generalSettings;
-            if (!generalSettings.iconPackName.isEmpty()) {
+            if (!generalSettings.iconPackName.isEmpty() && Tool.isPackageInstalled(generalSettings.iconPackName,packageManager)) {
                 IconPackHelper.themePacs(AppManager.this, Tool.dp2px(generalSettings.iconSize, context), generalSettings.iconPackName, apps);
             }
             return null;
