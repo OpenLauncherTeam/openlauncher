@@ -17,7 +17,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
@@ -142,6 +141,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 if (LauncherSettings.getInstance(Home.this).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps){
 
                 }else {
+                    //int drawerBtnPos = LauncherSettings.getInstance(Home.this).generalSettings.dockGridX - 5 + 2;
                     dock.addViewToGrid(appDrawerBtn, 2, 0, 1, 1);
                 }
                 AppManager.getInstance(Home.this).removeAppUpdatedListener(this);
@@ -409,7 +409,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0)
-                    startActivityForResult(new Intent(Home.this, MinBarEditActivity.class), MINIBAR_EDIT);
+                    startActivityForResult(new Intent(Home.this, MiniBarEditActivity.class), MINIBAR_EDIT);
                 else {
                     LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
                     LauncherAction.RunAction(action, Home.this, Home.this);
@@ -653,20 +653,21 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
 
     public void onNoteToggle(View view) {
-        final View target = findViewById(R.id.quickCenterLayout);
-        int offset = Tool.dp2px(5, this);
-        if (target.getVisibility() == View.VISIBLE) {
-            target.animate().setDuration(180L).alpha(0).translationY(+offset).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
-                @Override
-                public void run() {
-                    target.setVisibility(View.INVISIBLE);
-                }
-            });
-        } else {
-            target.setAlpha(0);
-            target.setVisibility(View.VISIBLE);
-            target.animate().setDuration(180L).alpha(1).translationY(-offset).setInterpolator(new AccelerateDecelerateInterpolator());
-        }
+        //TODO I will modify this function later
+//        final View target = findViewById(R.id.quickCenterLayout);
+//        int offset = Tool.dp2px(5, this);
+//        if (target.getVisibility() == View.VISIBLE) {
+//            target.animate().setDuration(180L).alpha(0).translationY(+offset).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+//                @Override
+//                public void run() {
+//                    target.setVisibility(View.INVISIBLE);
+//                }
+//            });
+//        } else {
+//            target.setAlpha(0);
+//            target.setVisibility(View.VISIBLE);
+//            target.animate().setDuration(180L).alpha(1).translationY(-offset).setInterpolator(new AccelerateDecelerateInterpolator());
+//        }
     }
 
     public void onSearch(View view) {
@@ -710,26 +711,27 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     @Override
     public void onDrawerStateChanged(int newState) {
-        final View target = findViewById(R.id.shortcutLayout);
-        switch (newState) {
-            case DrawerLayout.STATE_DRAGGING:
-            case DrawerLayout.STATE_SETTLING:
-                if (target.getAlpha() == 1)
-                    target.animate().setDuration(180L).alpha(0).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            target.setVisibility(View.INVISIBLE);
-                        }
-                    });
-                break;
-            case DrawerLayout.STATE_IDLE:
-                if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                    target.setVisibility(View.VISIBLE);
-                    target.setAlpha(0);
-                    target.animate().setDuration(180L).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
-                }
-                break;
-        }
+        //TODO I will modify this function later
+//        final View target = findViewById(R.id.shortcutLayout);
+//        switch (newState) {
+//            case DrawerLayout.STATE_DRAGGING:
+//            case DrawerLayout.STATE_SETTLING:
+//                if (target.getAlpha() == 1)
+//                    target.animate().setDuration(180L).alpha(0).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            target.setVisibility(View.INVISIBLE);
+//                        }
+//                    });
+//                break;
+//            case DrawerLayout.STATE_IDLE:
+//                if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+//                    target.setVisibility(View.VISIBLE);
+//                    target.setAlpha(0);
+//                    target.animate().setDuration(180L).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+//                }
+//                break;
+//        }
     }
     //endregion
 }

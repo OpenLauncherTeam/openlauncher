@@ -33,8 +33,12 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                     .add(new MaterialPrefFragment.GroupTitle("Desktop"))
                     .add(new MaterialPrefFragment.ButtonPref("desktopMode", "Style", "choose different style of your desktop"))
                     .add(new MaterialPrefFragment.TBPref("desktopSearchBar", "Show search bar", "Display a search bar always on top of the desktop", LauncherSettings.getInstance(this).generalSettings.desktopSearchBar))
+                    // FIXME: 11/25/2016 This will have problem (in allappsmode) as the apps will be cut off when scale down
+                    .add(new MaterialPrefFragment.NUMPref("horigridsizedesktop", "Grid column", "Desktop grid size", LauncherSettings.getInstance(this).generalSettings.desktopGridX, 4, 10))
+                    .add(new MaterialPrefFragment.NUMPref("vertgridsizedesktop", "Grid row", "Desktop grid size", LauncherSettings.getInstance(this).generalSettings.desktopGridY, 4, 10))
                     .add(new MaterialPrefFragment.GroupTitle("Dock"))
                     .add(new MaterialPrefFragment.TBPref("dockShowLabel","Show app label","show the app's name in the dock",LauncherSettings.getInstance(this).generalSettings.dockShowLabel))
+                    .add(new MaterialPrefFragment.NUMPref("horigridsizedock", "Grid column", "Dock grid size", LauncherSettings.getInstance(this).generalSettings.dockGridX, 5, 10))
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
                     .add(new MaterialPrefFragment.ButtonPref("drawerstyle", "Style", "choose the style of the app drawer"))
                     .add(new MaterialPrefFragment.TBPref("appdrawersearchbar", "Search Bar", "search bar will only appear in grid drawer", LauncherSettings.getInstance(this).generalSettings.drawerSearchBar))
@@ -83,6 +87,18 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                 break;
             case "appdrawersearchbar":
                 LauncherSettings.getInstance(this).generalSettings.drawerSearchBar = (boolean)p2;
+                requireLauncherRestart = true;
+                break;
+            case "horigridsizedesktop":
+                LauncherSettings.getInstance(this).generalSettings.desktopGridX = (int)p2;
+                requireLauncherRestart = true;
+                break;
+            case "vertgridsizedesktop":
+                LauncherSettings.getInstance(this).generalSettings.desktopGridY = (int)p2;
+                requireLauncherRestart = true;
+                break;
+            case "horigridsizedock":
+                LauncherSettings.getInstance(this).generalSettings.dockGridX = (int)p2;
                 requireLauncherRestart = true;
                 break;
         }

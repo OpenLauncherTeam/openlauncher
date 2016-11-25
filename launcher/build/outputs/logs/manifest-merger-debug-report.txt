@@ -46,11 +46,12 @@ MERGED from [com.android.support:transition:25.0.0] E:\USER\ProjectData\OpenLaun
 MERGED from [net.qiujuer.genius:blur:2.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.qiujuer.genius\blur\2.0.0\AndroidManifest.xml:11:5-13:38
 MERGED from [com.balysv:material-ripple:1.0.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.balysv\material-ripple\1.0.2\AndroidManifest.xml:12:5-20
 MERGED from [net.steamcrafted:materialiconlib:1.0.9] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.steamcrafted\materialiconlib\1.0.9\AndroidManifest.xml:11:5-12:19
-MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta3] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta3\AndroidManifest.xml:9:5-20
 MERGED from [OpenLauncher:smoothviewpager:unspecified] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\smoothviewpager\unspecified\AndroidManifest.xml:11:5-15:19
 MERGED from [OpenLauncher:materialpreffragment:unspecified] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\materialpreffragment\unspecified\AndroidManifest.xml:11:5-15:19
 MERGED from [com.android.support:cardview-v7:25.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.afollestad.material-dialogs:core:0.9.0.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.afollestad.material-dialogs\core\0.9.0.2\AndroidManifest.xml:13:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta4\AndroidManifest.xml:9:5-20
+MERGED from [com.github.medyo:fancybuttons:1.8.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.medyo\fancybuttons\1.8.2\AndroidManifest.xml:11:5-20
 	android:label
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:15:9-41
 	android:supportsRtl
@@ -123,7 +124,7 @@ ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:47:13-83
 	android:name
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:46:13-56
-activity#com.benny.openlauncher.activity.MinBarEditActivity
+activity#com.benny.openlauncher.activity.MiniBarEditActivity
 ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:48:9-52:59
 	android:label
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:50:13-38
@@ -132,7 +133,7 @@ ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 	android:theme
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:52:13-56
 	android:name
-		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:49:13-56
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:49:13-57
 activity#com.benny.openlauncher.activity.SettingsActivity
 ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:53:9-58:59
 	android:label
@@ -194,12 +195,13 @@ MERGED from [com.balysv:material-ripple:1.0.2] E:\USER\ProjectData\OpenLauncher\
 MERGED from [in.championswimmer:SimpleFingerGestures_Android_Library:1.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\in.championswimmer\SimpleFingerGestures_Android_Library\1.2\AndroidManifest.xml:7:5-9:41
 MERGED from [net.steamcrafted:materialiconlib:1.0.9] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.steamcrafted\materialiconlib\1.0.9\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:multidex:1.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\multidex\1.0.1\AndroidManifest.xml:18:5-42
-MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta3] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta3\AndroidManifest.xml:5:5-7:41
 MERGED from [OpenLauncher:smoothviewpager:unspecified] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\smoothviewpager\unspecified\AndroidManifest.xml:7:5-9:41
 MERGED from [OpenLauncher:materialpreffragment:unspecified] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\materialpreffragment\unspecified\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:cardview-v7:25.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.0.0\AndroidManifest.xml:20:5-43
 MERGED from [com.afollestad.material-dialogs:core:0.9.0.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.afollestad.material-dialogs\core\0.9.0.2\AndroidManifest.xml:8:5-11:75
 MERGED from [me.zhanghai.android.materialprogressbar:library:1.1.7] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\me.zhanghai.android.materialprogressbar\library\1.1.7\AndroidManifest.xml:12:5-14:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta4\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.medyo:fancybuttons:1.8.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.medyo\fancybuttons\1.8.2\AndroidManifest.xml:7:5-9:41
 	tools:overrideLibrary
 		ADDED from [com.android.support:appcompat-v7:25.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
