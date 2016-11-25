@@ -53,7 +53,7 @@
             android:name="com.benny.openlauncher.activity.AutoFinishActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <activity
-            android:name="com.benny.openlauncher.activity.MinBarEditActivity"
+            android:name="com.benny.openlauncher.activity.MiniBarEditActivity"
             android:label="Edit Item"
             android:parentActivityName="com.benny.openlauncher.activity.Home"
             android:theme="@style/NormalActivity.Light" />

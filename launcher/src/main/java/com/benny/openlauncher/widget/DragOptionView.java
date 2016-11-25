@@ -38,7 +38,7 @@ public class DragOptionView extends CardView {
 
     private Home home;
 
-    final Long animSpeed = 180L;
+    final Long animSpeed = 120L;
 
     public DragOptionView(Context context) {
         super(context);
@@ -73,7 +73,7 @@ public class DragOptionView extends CardView {
 
     private void init() {
         inited = false;
-        setCardElevation(Tool.dp2px(8, getContext()));
+        setCardElevation(Tool.dp2px(4, getContext()));
         setRadius(Tool.dp2px(2, getContext()));
         horiIconList = (LinearLayout) ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_dragoption_horiiconlist, this, false);
         addView(horiIconList);
@@ -86,6 +86,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_STARTED:
                         switch (((DragAction) dragEvent.getLocalState()).action) {
                             case ACTION_APP_DRAWER:
+                            case ACTION_APP:
                                 return true;
                         }
                     case DragEvent.ACTION_DRAG_ENTERED:
@@ -152,12 +153,8 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        if (LauncherSettings.getInstance(getContext()).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps) {
-                            startDeletePackageDialog(dragEvent);
-                        } else {
-                            home.desktop.consumeRevert();
-                            home.dock.consumeRevert();
-                        }
+                        home.desktop.consumeRevert();
+                        home.dock.consumeRevert();
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;
@@ -221,7 +218,9 @@ public class DragOptionView extends CardView {
                 dragging = true;
                 switch (((DragAction) event.getLocalState()).action) {
                     case ACTION_APP:
-                        removeIcon.setVisibility(View.VISIBLE);
+                        deleteIcon.setVisibility(View.VISIBLE);
+                        if (LauncherSettings.getInstance(getContext()).generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps)
+                            removeIcon.setVisibility(View.VISIBLE);
                         infoIcon.setVisibility(View.VISIBLE);
                         animShowView();
 

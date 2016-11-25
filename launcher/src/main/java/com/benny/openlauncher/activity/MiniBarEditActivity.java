@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MinBarEditActivity extends AppCompatActivity implements ItemTouchCallback {
+public class MiniBarEditActivity extends AppCompatActivity implements ItemTouchCallback {
     RecyclerView recyclerView;
     private FastItemAdapter<Item> adapter;
 

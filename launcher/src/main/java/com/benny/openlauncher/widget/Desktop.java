@@ -70,7 +70,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
     private void init(Context c) {
         if (isInEditMode()) return;
 
-        pageCount = LauncherSettings.getInstance(c).generalSettings.desktopPageCount;
+        pageCount = LauncherSettings.getInstance(c).desktopData.size();
+        if (pageCount == 0)
+            pageCount = 1;
         setAdapter(new DesktopAdapter(this));
         setOnDragListener(this);
 
@@ -94,7 +96,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
     public void addPageRight(boolean hideGrid) {
         LauncherSettings.getInstance(getContext()).desktopData.add(new ArrayList<Item>());
-        LauncherSettings.getInstance(getContext()).generalSettings.desktopPageCount++;
         pageCount++;
 
         final int previousPage = getCurrentItem();
@@ -109,7 +110,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
     public void addPageLeft() {
         LauncherSettings.getInstance(getContext()).desktopData.add(getCurrentItem(), new ArrayList<Item>());
-        LauncherSettings.getInstance(getContext()).generalSettings.desktopPageCount++;
         pageCount++;
 
         final int previousPage = getCurrentItem();
@@ -128,7 +128,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                 && LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).size() != 0)
             return;
         LauncherSettings.getInstance(getContext()).desktopData.remove(getCurrentItem());
-        LauncherSettings.getInstance(getContext()).generalSettings.desktopPageCount--;
         pageCount--;
 
         int previousPage = getCurrentItem();

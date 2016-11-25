@@ -62,16 +62,15 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
             @Override
             public void onAnimationStart(Animator p1) {
                 getChildAt(0).setVisibility(View.VISIBLE);
-
                 switch (drawerMode) {
                     case Paged:
                         View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
                         mGrid.setAlpha(0);
-                        mGrid.animate().setStartDelay(100L).alpha(1).setDuration(200L);
+                        mGrid.animate().alpha(1).setDuration(100L).setStartDelay(100L);
                         break;
                     case Grid:
                         drawerViewGrid.recyclerView.setAlpha(0);
-                        drawerViewGrid.recyclerView.animate().setStartDelay(100L).alpha(1).setDuration(200L);
+                        drawerViewGrid.recyclerView.animate().alpha(1).setDuration(100L).setStartDelay(100L);
                         break;
                 }
             }
@@ -108,10 +107,10 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
                 switch (drawerMode) {
                     case Paged:
                         View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
-                        mGrid.animate().setStartDelay(0).alpha(0).setDuration(80L);
+                        mGrid.animate().setStartDelay(0).alpha(0).setDuration(60L);
                         break;
                     case Grid:
-                        drawerViewGrid.recyclerView.animate().setStartDelay(0).alpha(0).setDuration(80L);
+                        drawerViewGrid.recyclerView.animate().setStartDelay(0).alpha(0).setDuration(60L);
                         break;
                 }
             }

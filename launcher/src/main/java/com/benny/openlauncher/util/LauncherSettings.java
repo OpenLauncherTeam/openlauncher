@@ -159,8 +159,6 @@ public class LauncherSettings {
             while ((appsSize = appsSize - (generalSettings.desktopGridY * generalSettings.desktopGridX)) >= (generalSettings.desktopGridY * generalSettings.desktopGridX) || (appsSize > -(generalSettings.desktopGridY * generalSettings.desktopGridX))) {
                 pageCount++;
             }
-            Tool.print("Page count:"+pageCount);
-            generalSettings.desktopPageCount = pageCount;
             for (int i = 0; i < pageCount; i++) {
                 ArrayList<Desktop.Item> items = new ArrayList<>();
                 for (int x = 0; x < generalSettings.desktopGridX; x++) {
@@ -218,7 +216,6 @@ public class LauncherSettings {
 
         //Desktop
         public Desktop.DesktopMode desktopMode = Desktop.DesktopMode.Normal;
-        public int desktopPageCount = 1;
         public int desktopHomePage;
         public int desktopGridX = 4;
         public int desktopGridY = 4;
