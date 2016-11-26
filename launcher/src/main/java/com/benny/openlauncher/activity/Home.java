@@ -1,22 +1,30 @@
 package com.benny.openlauncher.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.CallLog;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,6 +56,7 @@ import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.adapters.HeaderAdapter;
 
@@ -56,8 +65,10 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class Home extends Activity implements DrawerLayout.DrawerListener {
 
@@ -91,6 +102,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     private ListView minBar;
     private DrawerLayout drawerLayout;
     private ViewGroup myScreen;
+    private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,11 +146,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             public void onAppUpdated(List<AppManager.App> apps) {
                 desktop.initDesktopItem(Home.this);
                 dock.initDockItem(Home.this);
-                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps){
+                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps) {
 
-                }else {
+                } else {
                     if (LauncherSettings.getInstance(Home.this).generalSettings.firstLauncher)
-                        dock.addItemToPosition(Desktop.Item.newAppDrawerBtn(),2,0);
+                        dock.addItemToPosition(Desktop.Item.newAppDrawerBtn(), 2, 0);
                 }
                 AppManager.getInstance(Home.this).removeAppUpdatedListener(this);
             }
@@ -339,8 +351,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         });
     }
 
-    private void addLauncherAction(View view){
-        PopupMenu pm = new PopupMenu(this,view);
+    private void addLauncherAction(View view) {
+        PopupMenu pm = new PopupMenu(this, view);
         pm.inflate(R.menu.launcher_action);
         pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -353,10 +365,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.appDrawer:
                 Point pos = desktop.getCurrentPage().findFreeSpace();
-                desktop.addItemToPosition(Desktop.Item.newAppDrawerBtn(),pos.x,pos.y);
+                desktop.addItemToPosition(Desktop.Item.newAppDrawerBtn(), pos.x, pos.y);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -420,46 +432,100 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
 
     private void initQuickCenter() {
-        quickCenter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+//        quickCenter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+//
+//        HeaderAdapter<QuickCenterItem.SearchHeader> header = new HeaderAdapter<>();
+//        noteAdapter = new FastItemAdapter<>();
+//
+//        quickCenter.setAdapter(header.wrap(noteAdapter));
+//
+//        new AsyncTask<Void, Void, Void>() {
+//            @Override
+//            protected void onPreExecute() {
+//                super.onPreExecute();
+//            }
+//
+//            @Override
+//            protected Void doInBackground(Void... voids) {
+//                Gson gson = new Gson();
+//                notes.clear();
+//                try {
+//                    JsonReader reader = new JsonReader(new InputStreamReader(Home.this.openFileInput("noteData.json")));
+//                    reader.beginArray();
+//                    while (reader.hasNext()) {
+//                        QuickCenterItem.NoteContent content = gson.fromJson(reader, QuickCenterItem.NoteContent.class);
+//                        notes.add(content);
+//                    }
+//                    reader.endArray();
+//                    reader.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Void aVoid) {
+//                for (int i = 0; i < notes.size(); i++) {
+//                    noteAdapter.add(new QuickCenterItem.NoteItem(notes.get(i).date, notes.get(i).content, noteAdapter));
+//                }
+//                super.onPostExecute(aVoid);
+//            }
+//        }.execute();
 
-        HeaderAdapter<QuickCenterItem.SearchHeader> header = new HeaderAdapter<>();
-        noteAdapter = new FastItemAdapter<>();
+        ////////////////////////////////////Quick Contact///////////////////////////////////////////
 
-        quickCenter.setAdapter(header.wrap(noteAdapter));
+        RecyclerView quickContact = (RecyclerView) findViewById(R.id.quickContactRv);
+        quickContact.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        quickContactFA = new FastItemAdapter<>();
+        quickContact.setAdapter(quickContactFA);
 
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+        ArrayList<QuickCenterItem.ContactContent> contact = getRecentContacts();
+        quickContactFA.clear();
+        for (int i = 0; i < contact.size(); i++) {
+            quickContactFA.add(new QuickCenterItem.ContactItem(contact.get(i)));
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private ArrayList<QuickCenterItem.ContactContent> getRecentContacts() {
+        ArrayList<QuickCenterItem.ContactContent> contactMap = new ArrayList<>();
+
+        Uri queryUri = android.provider.CallLog.Calls.CONTENT_URI;
+
+        String[] projection = new String[]{
+                ContactsContract.Contacts._ID,
+                CallLog.Calls._ID,
+                CallLog.Calls.NUMBER,
+                CallLog.Calls.CACHED_NAME,
+                CallLog.Calls.DATE};
+
+        String sortOrder = String.format("%s limit 4 ", CallLog.Calls.DATE + " DESC");
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+            Cursor cursor = getContentResolver().query(queryUri, projection, null, null, sortOrder);
+            if (cursor == null) return contactMap;
+            while (cursor.moveToNext()) {
+                String phoneNumber = cursor.getString(cursor
+                        .getColumnIndex(CallLog.Calls.NUMBER));
+
+                String title = (cursor.getString(cursor.getColumnIndex(CallLog.Calls.CACHED_NAME)));
+
+                if(phoneNumber==null||title==null)continue;
+
+                String uri = "tel:" + phoneNumber;
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse(uri));
+
+                contactMap.add(new QuickCenterItem.ContactContent(title,intent,Tool.openPhoto(this,Tool.getContactIDFromNumber(this,phoneNumber))));
             }
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-                Gson gson = new Gson();
-                notes.clear();
-                try {
-                    JsonReader reader = new JsonReader(new InputStreamReader(Home.this.openFileInput("noteData.json")));
-                    reader.beginArray();
-                    while (reader.hasNext()) {
-                        QuickCenterItem.NoteContent content = gson.fromJson(reader, QuickCenterItem.NoteContent.class);
-                        notes.add(content);
-                    }
-                    reader.endArray();
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                for (int i = 0; i < notes.size(); i++) {
-                    noteAdapter.add(new QuickCenterItem.NoteItem(notes.get(i).date, notes.get(i).content, noteAdapter));
-                }
-                super.onPostExecute(aVoid);
-            }
-        }.execute();
+            cursor.close();
+        }
+        return contactMap;
     }
 
     private void registerAppUpdateReceiver() {
@@ -714,27 +780,26 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     @Override
     public void onDrawerStateChanged(int newState) {
-        //TODO I will modify this function later
-//        final View target = findViewById(R.id.shortcutLayout);
-//        switch (newState) {
-//            case DrawerLayout.STATE_DRAGGING:
-//            case DrawerLayout.STATE_SETTLING:
-//                if (target.getAlpha() == 1)
-//                    target.animate().setDuration(180L).alpha(0).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            target.setVisibility(View.INVISIBLE);
-//                        }
-//                    });
-//                break;
-//            case DrawerLayout.STATE_IDLE:
-//                if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-//                    target.setVisibility(View.VISIBLE);
-//                    target.setAlpha(0);
-//                    target.animate().setDuration(180L).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
-//                }
-//                break;
-//        }
+        final View target = findViewById(R.id.shortcutLayout);
+        switch (newState) {
+            case DrawerLayout.STATE_DRAGGING:
+            case DrawerLayout.STATE_SETTLING:
+                if (target.getAlpha() == 1)
+                    target.animate().setDuration(180L).alpha(0).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            target.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                break;
+            case DrawerLayout.STATE_IDLE:
+                if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                    target.setVisibility(View.VISIBLE);
+                    target.setAlpha(0);
+                    target.animate().setDuration(180L).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+                }
+                break;
+        }
     }
     //endregion
 }
