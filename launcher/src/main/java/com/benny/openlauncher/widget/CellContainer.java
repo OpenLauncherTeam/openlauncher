@@ -191,7 +191,7 @@ public class CellContainer extends ViewGroup {
                     return new Point(x, y);
             }
         }
-        return null;
+        return new Point(0,0);
     }
 
     public boolean isValid(int x, int y) {

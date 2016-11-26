@@ -38,6 +38,19 @@ public class ItemViewFactory {
     public static View getItemView(final Context context, final DesktopCallBack callBack, final Desktop.Item item, int flags) {
         View view = null;
         switch (item.type) {
+            case LAUNCHER_APP_DRAWER:
+                view = new AppItemView.Builder(context).vibrateWhenLongPress().setLauncherAction(item.type).setTextColor(Color.WHITE).withOnTouchGetPosition().withOnLongPressDrag(item, DragAction.Action.ACTION_LAUNCHER, new AppItemView.Builder.LongPressCallBack() {
+                    @Override
+                    public boolean readyForDrag(View view) {
+                        return true;
+                    }
+
+                    @Override
+                    public void afterDrag(View view) {
+                        callBack.setLastItem(item, view);
+                    }
+                }).setLabelVisibility((flags & NO_LABEL) != NO_LABEL).getView();
+                break;
             case APP:
                 final AppManager.App app = AppManager.getInstance(context).findApp(item.actions[0].getComponent().getPackageName(), item.actions[0].getComponent().getClassName());
                 if (app == null) {

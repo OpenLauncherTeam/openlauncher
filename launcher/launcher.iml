@@ -112,7 +112,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/in.championswimmer/SimpleFingerGestures_Android_Library/1.2/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/me.zhanghai.android.materialprogressbar/library/1.1.7/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/net.qiujuer.genius/blur/2.0.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/net.steamcrafted/materialiconlib/1.0.9/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
@@ -150,7 +149,6 @@
     <orderEntry type="library" exported="" name="blur-2.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-25.0.0" level="project" />
     <orderEntry type="library" exported="" name="lib-10.1.4" level="project" />
-    <orderEntry type="library" exported="" name="materialiconlib-1.0.9" level="project" />
     <orderEntry type="library" exported="" name="fastadapter-1.8.2" level="project" />
     <orderEntry type="library" exported="" name="support-v4-25.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-media-compat-25.0.0" level="project" />

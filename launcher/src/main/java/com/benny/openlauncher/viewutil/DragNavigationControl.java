@@ -58,6 +58,7 @@ public class DragNavigationControl {
                             case ACTION_APP_DRAWER:
                             case ACTION_GROUP:
                             case ACTION_SHORTCUT:
+                            case ACTION_LAUNCHER:
                                 leftView.animate().alpha(1);
                                 return true;
                         }
@@ -98,6 +99,7 @@ public class DragNavigationControl {
                             case ACTION_APP_DRAWER:
                             case ACTION_GROUP:
                             case ACTION_SHORTCUT:
+                            case ACTION_LAUNCHER:
                                 rightView.animate().alpha(1);
                                 return true;
                         }

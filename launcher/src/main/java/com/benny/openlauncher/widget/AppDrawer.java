@@ -30,7 +30,7 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
     private PagedAppDrawer drawerViewPaged;
     private GridAppDrawer drawerViewGrid;
     private DrawerMode drawerMode;
-    private EditText searchBar;
+    public EditText searchBar;
     private CallBack openCallBack,closeCallBack;
 
     private Animator appDrawerAnimator;
@@ -52,10 +52,11 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
         this.closeCallBack = closeCallBack;
     }
 
-    public void open(int cx,int cy,int finalRadius){
-        appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(getChildAt(0), cx, cy, 0, finalRadius);
+    private Long drawerAnimationTime = 200L;
+    public void open(int cx,int cy,int startRadius,int finalRadius){
+        appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(getChildAt(0), cx, cy, startRadius, finalRadius);
         appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        appDrawerAnimator.setDuration(180);
+        appDrawerAnimator.setDuration(drawerAnimationTime);
         appDrawerAnimator.setStartDelay(100L);
         openCallBack.onStart();
         appDrawerAnimator.addListener(new Animator.AnimatorListener() {
@@ -64,13 +65,16 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
                 getChildAt(0).setVisibility(View.VISIBLE);
                 switch (drawerMode) {
                     case Paged:
+                        for (int i = 0; i < drawerViewPaged.pages.size(); i++) {
+                            drawerViewPaged.pages.get(i).findViewById(R.id.cc).setAlpha(1);
+                        }
                         View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
                         mGrid.setAlpha(0);
-                        mGrid.animate().alpha(1).setDuration(100L).setStartDelay(100L);
+                        mGrid.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime-50).setInterpolator(new AccelerateDecelerateInterpolator());
                         break;
                     case Grid:
                         drawerViewGrid.recyclerView.setAlpha(0);
-                        drawerViewGrid.recyclerView.animate().alpha(1).setDuration(100L).setStartDelay(100L);
+                        drawerViewGrid.recyclerView.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime-50).setInterpolator(new AccelerateDecelerateInterpolator());
                         break;
                 }
             }
@@ -92,13 +96,13 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
         appDrawerAnimator.start();
     }
 
-    public void close(int cx,int cy,int finalRadius){
+    public void close(int cx,int cy,int startRadius,int finalRadius){
         if (appDrawerAnimator == null || appDrawerAnimator.isRunning())
             return;
 
-        appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(getChildAt(0), cx, cy, finalRadius, 0);
+        appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(getChildAt(0), cx, cy, finalRadius, startRadius);
         appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        appDrawerAnimator.setDuration(180);
+        appDrawerAnimator.setDuration(drawerAnimationTime);
         appDrawerAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator p1) {
