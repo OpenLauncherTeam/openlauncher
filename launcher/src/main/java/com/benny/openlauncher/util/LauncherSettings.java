@@ -62,19 +62,6 @@ public class LauncherSettings {
                 Desktop.SimpleItem item = gson.fromJson(reader,Desktop.SimpleItem.class);
                 Desktop.Item item1 = new Desktop.Item(item);
                 dockData.add(item1);
-
-                //We get all the icon cache id
-                if (item1.type == Desktop.Item.Type.SHORTCUT){
-                    iconCacheIDs.add(item1.actions[0].getStringExtra("shortCutIconID"));
-                }
-                if (item1.type == Desktop.Item.Type.GROUP){
-                    for (int i = 0; i < item1.actions.length; i++) {
-                        String ID;
-                        if ((ID = item1.actions[i].getStringExtra("shortCutIconID")) != null){
-                            iconCacheIDs.add(ID);
-                        }
-                    }
-                }
             }
             reader.endArray();
             reader.close();
@@ -104,19 +91,6 @@ public class LauncherSettings {
                     Desktop.SimpleItem item = gson.fromJson(reader,Desktop.SimpleItem.class);
                     Desktop.Item item1 = new Desktop.Item(item);
                     items.add(item1);
-
-                    //We get all the icon cache id
-                    if (item.type == Desktop.Item.Type.SHORTCUT){
-                        iconCacheIDs.add(item1.actions[0].getStringExtra("shortCutIconID"));
-                    }
-                    if (item1.type == Desktop.Item.Type.GROUP){
-                        for (int i = 0; i < item1.actions.length; i++) {
-                            String ID;
-                            if ((ID = item1.actions[i].getStringExtra("shortCutIconID")) != null){
-                                iconCacheIDs.add(ID);
-                            }
-                        }
-                    }
                 }
                 desktopData.add(items);
                 reader.endArray();
@@ -125,6 +99,20 @@ public class LauncherSettings {
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void checkIconCacheIDs(Desktop.Item item){
+        if (item.type == Desktop.Item.Type.SHORTCUT){
+            iconCacheIDs.add(item.actions[0].getStringExtra("shortCutIconID"));
+        }else
+        if (item.type == Desktop.Item.Type.GROUP){
+            for (int i = 0; i < item.actions.length; i++) {
+                String ID;
+                if ((ID = item.actions[i].getStringExtra("shortCutIconID")) != null){
+                    iconCacheIDs.add(ID);
+                }
+            }
         }
     }
 
@@ -139,17 +127,27 @@ public class LauncherSettings {
 
         readDockData(gson,generalSettings.desktopMode);
         readDesktopData(gson,generalSettings.desktopMode);
-
-        // FIXME: 11/20/2016 it will crash due to different set of data as all the icon file will be erased when set to ShowAllApps mode
-        Tool.checkForUnusedIconAndDelete(context, iconCacheIDs);
     }
 
     public void switchDesktopMode(Desktop.DesktopMode mode){
         writeSettings();
-        generalSettings.desktopMode = mode;
+
+        iconCacheIDs.clear();
+        for (int i = 0; i < desktopData.size(); i++) {
+            for (int l = 0; l < desktopData.get(i).size(); l++) {
+                checkIconCacheIDs(desktopData.get(i).get(l));
+            }
+        }
+        for (int i = 0; i < dockData.size(); i++) {
+            checkIconCacheIDs(dockData.get(i));
+        }
+
         Gson gson = new Gson();
+        generalSettings.desktopMode = mode;
         readDesktopData(gson,mode);
         readDockData(gson,mode);
+
+        Tool.checkForUnusedIconAndDelete(context, iconCacheIDs);
 
         //We init all the apps to the desktop for the first time.
         if (mode == Desktop.DesktopMode.ShowAllApps && desktopData.size() == 0){
@@ -179,6 +177,8 @@ public class LauncherSettings {
     }
 
     public Gson writeSettings(){
+        generalSettings.firstLauncher = false;
+
         Gson gson = new Gson();
 
         List<List<Desktop.SimpleItem>> simpleDesktopData = new ArrayList<>();
@@ -239,6 +239,9 @@ public class LauncherSettings {
 
         //Not used
         public LauncherAction.Theme theme = LauncherAction.Theme.Light;
+
+        //Others
+        public boolean firstLauncher = true;
     }
 
 }

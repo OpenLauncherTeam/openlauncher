@@ -38,7 +38,6 @@ dependencies {
     compile 'net.qiujuer.genius:blur:2.0.0'
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'in.championswimmer:SimpleFingerGestures_Android_Library:1.2'
-    compile 'net.steamcrafted:materialiconlib:1.0.9'
     compile 'com.afollestad.material-dialogs:core:0.9.0.2'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:recyclerview-v7:25.0.0'

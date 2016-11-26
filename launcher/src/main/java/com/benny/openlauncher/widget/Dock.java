@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
@@ -47,12 +48,8 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
     public void initDockItem(Home home) {
         this.home = home;
         removeAllViews();
-        boolean showAllAppsMode = LauncherSettings.getInstance(home).generalSettings.desktopMode == DesktopMode.ShowAllApps;
         for (Item item : LauncherSettings.getInstance(getContext()).dockData) {
-            if (showAllAppsMode && item.x == 2){
-
-            }else
-                addItemToPagePosition(item,0);
+            addItemToPagePosition(item,0);
         }
     }
 
@@ -65,6 +62,7 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
                     case ACTION_GROUP:
                     case ACTION_APP_DRAWER:
                     case ACTION_SHORTCUT:
+                    case ACTION_LAUNCHER:
                         return true;
                 }
                 return false;
@@ -78,7 +76,7 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(Item.class.getClassLoader());
                 Item item = intent.getParcelableExtra("mDragData");
-                if (item.type == Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT) {
+                if (item.type == Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type ==  Item.Type.LAUNCHER_APP_DRAWER) {
                     if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
                         home.desktop.consumeRevert();
                         home.dock.consumeRevert();
@@ -159,7 +157,6 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
     public boolean addItemToPosition(final Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = positionToLayoutPrams(x, y, item.spanX, item.spanY);
         if (positionToLayoutPrams != null) {
-
             //Add the item to settings
             item.x = positionToLayoutPrams.x;
             item.y = positionToLayoutPrams.y;

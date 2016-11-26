@@ -11,14 +11,17 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 
+import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
 
 /**
  * Created by BennyKok on 10/23/2016.
@@ -65,19 +68,61 @@ public class AppItemView extends View implements Drawable.Callback{
 
     private float iconSize;
 
+    public float getIconSizeSmall() {
+        return iconSizeSmall;
+    }
+
+    public void setIconSizeSmall(float iconSizeSmall) {
+        this.iconSizeSmall = iconSizeSmall;
+    }
+
+    private float iconSizeSmall;
+
     private Drawable icon;
     private String label;
 
     public boolean isShortcut;
 
-    public  Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    public  Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG),bgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);;
     private Rect mTextBound = new Rect();
 
-    private boolean noLabel,vibrateWhenLongPress;
+    private boolean noLabel = false;
+
+    public boolean isNoLabel() {
+        return noLabel;
+    }
+
+    private boolean vibrateWhenLongPress;
+
+    public boolean isRoundBg() {
+        return roundBg;
+    }
+
+    public void setRoundBg(boolean roundBg) {
+        this.roundBg = roundBg;
+    }
+
+    public int getBgColor() {
+        return bgColor;
+    }
+
+    public void setBgColor(int bgColor) {
+        this.bgColor = bgColor;
+        bgPaint.setColor(bgColor);
+    }
+
+    private boolean roundBg;
+    private int bgColor;
 
     private float labelHeight;
 
     private int targetedWidth, targetedHeightPadding;
+
+    public float getHeightPadding() {
+        return heightPadding;
+    }
+
+    private float heightPadding;
 
     public AppItemView(Context context) {
         super(context);
@@ -138,7 +183,7 @@ public class AppItemView extends View implements Drawable.Callback{
 
         //The height should be the same as they have the same text size.
         float mHeight = iconSize + (noLabel? 0 : labelHeight);
-        float heightPadding = (getHeight() - mHeight)/2f;
+        heightPadding = (getHeight() - mHeight)/2f;
 
         if (label != null && !noLabel) {
             float x = (getWidth()-mTextBound.width())/2f;
@@ -150,7 +195,13 @@ public class AppItemView extends View implements Drawable.Callback{
         if (icon != null){
             canvas.save();
             canvas.translate((getWidth()-iconSize)/2,heightPadding);
-            icon.setBounds(0,0,(int)iconSize,(int)iconSize);
+            if (roundBg){
+                canvas.drawCircle(iconSize/2,iconSize/2,iconSize/2,bgPaint);
+                canvas.translate((iconSize-iconSizeSmall)/2,(iconSize-iconSizeSmall)/2);
+                icon.setBounds(0, 0, (int) iconSizeSmall, (int) iconSizeSmall);
+            }else {
+                icon.setBounds(0, 0, (int) iconSize, (int) iconSize);
+            }
             icon.draw(canvas);
             canvas.restore();
         }
@@ -178,6 +229,35 @@ public class AppItemView extends View implements Drawable.Callback{
         public Builder setAppItem(AppManager.App app){
             view.setIcon(app.icon,true);
             view.setLabel(app.appName);
+            return this;
+        }
+
+        public Builder setLauncherAction(Desktop.Item.Type type){
+            switch (type){
+                case LAUNCHER_APP_DRAWER:
+                    int iconSize = LauncherSettings.getInstance(view.getContext()).generalSettings.iconSize;
+
+                    TypedValue typedValue = new TypedValue();
+                    view.getContext().getTheme().resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
+
+                    view.setIconSize(Tool.dp2px(iconSize - 8, view.getContext()));
+                    view.setIcon(view.getResources().getDrawable(R.drawable.ic_apps_black_24dp),true);
+                    view.setBgColor(Color.WHITE);
+                    view.setRoundBg(true);
+                    view.setIconSizeSmall(Tool.dp2px(iconSize / 2 - 8,view.getContext()));
+                    view.setLabel("All Apps");
+
+                    view.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                            if (Home.launcher != null) {
+                                Home.launcher.openAppDrawer(view);
+                            }
+                        }
+                    });
+                    break;
+            }
             return this;
         }
 

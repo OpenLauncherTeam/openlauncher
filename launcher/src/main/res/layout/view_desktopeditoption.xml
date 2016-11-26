@@ -37,4 +37,14 @@
         android:text="@string/add_widget"
         android:textColor="?android:textColorPrimaryInverse" />
 
+    <TextView
+        android:fontFamily="sans-serif-condensed"
+        android:id="@+id/addLauncherAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_launch_black_24dp"
+        android:padding="5dp"
+        android:text="Action"
+        android:textColor="?android:textColorPrimaryInverse" />
+
 </LinearLayout>

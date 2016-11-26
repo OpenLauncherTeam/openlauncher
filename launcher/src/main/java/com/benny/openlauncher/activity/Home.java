@@ -6,7 +6,7 @@ import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.drawable.Drawable;
+import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.TypedValue;
-import android.view.HapticFeedbackConstants;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,23 +25,22 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppUpdateReceiver;
-import com.benny.openlauncher.viewutil.DragNavigationControl;
-import com.benny.openlauncher.viewutil.IconListAdapter;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
-import com.benny.openlauncher.viewutil.QuickCenterItem;
 import com.benny.openlauncher.util.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.viewutil.DragNavigationControl;
+import com.benny.openlauncher.viewutil.IconListAdapter;
+import com.benny.openlauncher.viewutil.QuickCenterItem;
 import com.benny.openlauncher.viewutil.WidgetHost;
 import com.benny.openlauncher.widget.AppDrawer;
+import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.Dock;
 import com.benny.openlauncher.widget.DragOptionView;
@@ -51,8 +50,6 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.adapters.HeaderAdapter;
-
-import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -85,7 +82,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     private ConstraintLayout baseLayout;
     private AppDrawer appDrawerOtter;
     private View appDrawer, appSearchBar;
-    private FrameLayout appDrawerBtn;
     private PagerIndicator desktopIndicator, appDrawerIndicator;
     private DragOptionView dragOptionView;
     private ViewGroup desktopEditOptionView;
@@ -141,8 +137,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 if (LauncherSettings.getInstance(Home.this).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps){
 
                 }else {
-                    //int drawerBtnPos = LauncherSettings.getInstance(Home.this).generalSettings.dockGridX - 5 + 2;
-                    dock.addViewToGrid(appDrawerBtn, 2, 0, 1, 1);
+                    if (LauncherSettings.getInstance(Home.this).generalSettings.firstLauncher)
+                        dock.addItemToPosition(Desktop.Item.newAppDrawerBtn(),2,0);
                 }
                 AppManager.getInstance(Home.this).removeAppUpdatedListener(this);
             }
@@ -168,7 +164,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
         desktopIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
         searchBar = findViewById(R.id.searchBar);
-        appDrawerBtn = (FrameLayout) getLayoutInflater().inflate(R.layout.item_appdrawerbtn, null);
         desktopEditOptionView = (ViewGroup) findViewById(R.id.desktopeditoptionpanel);
         dragOptionView = (DragOptionView) findViewById(R.id.dragOptionPanel);
         groupPopup = (GroupPopupView) findViewById(R.id.groupPopup);
@@ -268,34 +263,19 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             }
         });
         btn3.setOnTouchListener(Tool.getBtnColorMaskController());
+        View btn4 = desktopEditOptionView.findViewById(R.id.addLauncherAction);
+        btn4.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addLauncherAction(view);
+            }
+        });
+        btn4.setOnTouchListener(Tool.getBtnColorMaskController());
 
         desktopIndicator.setViewPager(desktop);
         desktop.setPageIndicator(desktopIndicator);
-
-        TypedValue typedValue = new TypedValue();
-        getTheme().resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
-
         int iconSize = LauncherSettings.getInstance(this).generalSettings.iconSize;
-        Drawable appDrawerBtnIcon = MaterialDrawableBuilder.with(this)
-                .setIcon(MaterialDrawableBuilder.IconValue.APPS)
-                .setColor(typedValue.data)
-                .setSizeDp(iconSize / 2 - 8)
-                .build();
 
-        View appDrawerBtnCard = appDrawerBtn.findViewById(R.id.card);
-        appDrawerBtnCard.getLayoutParams().width = Tool.dp2px(iconSize - 8, this);
-        appDrawerBtnCard.getLayoutParams().height = Tool.dp2px(iconSize - 8, this);
-
-        ImageView appDrawerIcon = (ImageView) appDrawerBtn.findViewById(R.id.iv);
-        appDrawerIcon.setImageDrawable(appDrawerBtnIcon);
-
-        appDrawerBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                openAppDrawer();
-            }
-        });
         dock.getLayoutParams().height = Tool.dp2px(22 + iconSize, this);
 
         dragOptionView.setAutoHideView(searchBar);
@@ -307,7 +287,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 desktopIndicator.animate().alpha(0).setDuration(100);
                 searchBar.animate().alpha(0).setDuration(80);
                 desktop.animate().alpha(0).setDuration(100);
-                appDrawerBtn.animate().scaleX(0).scaleY(0).setDuration(100);
 
                 if (appSearchBar != null) {
                     appSearchBar.setAlpha(0);
@@ -317,16 +296,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 if (appDrawerIndicator != null)
                     appDrawerIndicator.animate().alpha(1).setDuration(100);
 
-                appDrawer.setScaleX(0.95f);
-                appDrawer.setScaleY(0.95f);
-                appDrawer.animate().setStartDelay(100).scaleX(1).scaleY(1).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
+//                appDrawer.setScaleX(0.95f);
+//                appDrawer.setScaleY(0.95f);
+//                appDrawer.animate().setStartDelay(100).scaleX(1).scaleY(1).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
             }
 
             @Override
             public void onEnd() {
                 if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar)
                     searchBar.setVisibility(View.INVISIBLE);
-                appDrawerBtn.setVisibility(View.INVISIBLE);
             }
         }, new AppDrawer.CallBack() {
             @Override
@@ -343,7 +321,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                         }
                     });
                 }
-                appDrawer.animate().setStartDelay(0).scaleX(0.95f).scaleY(0.95f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
+//                appDrawer.animate().setStartDelay(0).scaleX(0.95f).scaleY(0.95f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
 
             }
 
@@ -353,14 +331,35 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                     appDrawerOtter.scrollToStart();
                 desktopIndicator.animate().alpha(1);
                 appDrawer.setVisibility(View.INVISIBLE);
-                appDrawerBtn.setVisibility(View.VISIBLE);
                 dock.animate().alpha(1);
                 desktop.animate().alpha(1);
                 if (!dragOptionView.dragging)
                     searchBar.animate().alpha(1);
-                appDrawerBtn.animate().scaleX(1).scaleY(1);
             }
         });
+    }
+
+    private void addLauncherAction(View view){
+        PopupMenu pm = new PopupMenu(this,view);
+        pm.inflate(R.menu.launcher_action);
+        pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return onOptionsItemSelected(item);
+            }
+        });
+        pm.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.appDrawer:
+                Point pos = desktop.getCurrentPage().findFreeSpace();
+                desktop.addItemToPosition(Desktop.Item.newAppDrawerBtn(),pos.x,pos.y);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initSettings() {
@@ -606,32 +605,36 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     //endregion
 
     //region APPDRAWERANIMATION
-    public void openAppDrawer() {
-        int cx = (dock.getLeft() + dock.getRight()) / 2;
-        int cy = (dock.getTop() + dock.getBottom()) / 2;
-        int margin = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).leftMargin;
-        cx -= margin;
-        int marginh = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).topMargin;
-        cy -= marginh;
+    private int cx,cy,rad;
+    public void openAppDrawer(View view) {
+        int[] pos = new int[2];
+        view.getLocationOnScreen(pos);
+        cx = pos[0];
+        cy = pos[1];
+
+        cx += view.getWidth()/2;
+        cy += view.getHeight();
+        if (view instanceof AppItemView){
+            AppItemView appItemView = (AppItemView) view;
+            if (!appItemView.isNoLabel()){
+                cy -= Tool.dp2px(14,this);
+            }
+            rad = (int) (appItemView.getIconSize()/2);
+            cy -= appItemView.getHeightPadding() + appItemView.getIconSize();
+        }
+        cx -= ((ViewGroup.MarginLayoutParams)appDrawer.getLayoutParams()).leftMargin;
+        cy -= ((ViewGroup.MarginLayoutParams)appDrawer.getLayoutParams()).topMargin;
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
 
         appDrawer.setPivotX(cx);
         appDrawer.setPivotY(cy);
 
-        appDrawerOtter.open(cx, cy, finalRadius);
+        appDrawerOtter.open(cx, cy,rad, finalRadius);
     }
 
     public void closeAppDrawer() {
-        int cx = (dock.getLeft() + dock.getRight()) / 2;
-        int cy = (dock.getTop() + dock.getBottom()) / 2;
-        int margin = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).leftMargin;
-        cx -= margin;
-        int marginh = ((FrameLayout.LayoutParams) appDrawer.getLayoutParams()).topMargin;
-        cy -= marginh;
-
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
-
-        appDrawerOtter.close(cx, cy, finalRadius);
+        appDrawerOtter.close(cx, cy,rad, finalRadius);
     }
 
     //endregion

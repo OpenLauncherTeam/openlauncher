@@ -217,6 +217,11 @@ public class DragOptionView extends CardView {
             case DragEvent.ACTION_DRAG_STARTED:
                 dragging = true;
                 switch (((DragAction) event.getLocalState()).action) {
+                    case ACTION_LAUNCHER:
+                        home.dock.setHideGrid(false);
+                        for (CellContainer cellContainer : home.desktop.pages)
+                            cellContainer.setHideGrid(false);
+                        return false;
                     case ACTION_APP:
                         deleteIcon.setVisibility(View.VISIBLE);
                         if (LauncherSettings.getInstance(getContext()).generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps)
@@ -276,9 +281,6 @@ public class DragOptionView extends CardView {
                     cellContainer.setHideGrid(true);
 
                 dragging = false;
-                if (hideView != null) {
-                    hideView.setAlpha(0);
-                }
                 hide().withEndAction(new Runnable() {
                     @Override
                     public void run() {

@@ -136,8 +136,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         for (CellContainer v : pages) {
             v.setAlpha(0);
             v.animate().alpha(1);
-            v.setScaleX(0.8f);
-            v.setScaleY(0.8f);
+            v.setScaleX(0.85f);
+            v.setScaleY(0.85f);
             v.animateBackgroundShow();
         }
         setCurrentItem(previousPage);
@@ -156,6 +156,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                     case ACTION_APP_DRAWER:
                     case ACTION_WIDGET:
                     case ACTION_SHORTCUT:
+                    case ACTION_LAUNCHER:
                         return true;
                 }
                 return true;
@@ -186,7 +187,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                         home.desktop.revertLastItem();
                     }
                 }
-                if (item.type == Desktop.Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT) {
+                if (item.type == Desktop.Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type ==  Item.Type.LAUNCHER_APP_DRAWER) {
                     if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
                         home.desktop.consumeRevert();
                         home.dock.consumeRevert();
@@ -218,7 +219,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         return false;
     }
 
-    private CellContainer getCurrentPage() {
+    public CellContainer getCurrentPage() {
         return pages.get(getCurrentItem());
     }
 
@@ -467,7 +468,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             layout.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    scaleFactor = 0.8f;
+                    scaleFactor = 0.85f;
                     for (CellContainer v : desktop.pages) {
                         v.setPivotY(v.getHeight()/2 -Tool.dp2px(50,desktop.getContext()));
                         v.setPivotX(v.getWidth()/2);
@@ -662,6 +663,15 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             return item;
         }
 
+        public static Item newAppDrawerBtn(){
+            Desktop.Item item = new Item();
+            item.type = Type.LAUNCHER_APP_DRAWER;
+            item.spanX = 1;
+            item.spanY = 1;
+
+            return item;
+        }
+
         public static Item newShortcutItem(Intent intent) {
             Desktop.Item item = new Item();
             item.type = Type.SHORTCUT;
@@ -771,7 +781,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             APP,
             WIDGET,
             SHORTCUT,
-            GROUP
+            GROUP,
+            LAUNCHER_APP_DRAWER
         }
     }
 
