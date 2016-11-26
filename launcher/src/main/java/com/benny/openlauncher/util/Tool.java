@@ -4,14 +4,17 @@ import android.app.Activity;
 import android.content.*;
 import android.content.pm.PackageManager;
 import android.content.res.*;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.util.*;
@@ -26,6 +29,7 @@ import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -35,6 +39,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class Tool
 {
@@ -96,6 +101,41 @@ public class Tool
             list.add(s);
         }
         return list.toArray(new String[list.size()]);
+    }
+
+    public static long getContactIDFromNumber(Context context,String contactNumber) {
+        String UriContactNumber = Uri.encode(contactNumber);
+        long phoneContactID = new Random().nextInt();
+        Cursor contactLookupCursor = context.getContentResolver().query(Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, UriContactNumber),
+                new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.PhoneLookup._ID}, null, null, null);
+        while (contactLookupCursor.moveToNext()) {
+            phoneContactID = contactLookupCursor.getLong(contactLookupCursor.getColumnIndexOrThrow(ContactsContract.PhoneLookup._ID));
+        }
+        contactLookupCursor.close();
+
+        return phoneContactID;
+    }
+
+    public static Bitmap openPhoto(Context context,long contactId) {
+        Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
+        Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
+        Cursor cursor = context.getContentResolver().query(photoUri,
+                new String[] {ContactsContract.Contacts.Photo.PHOTO}, null, null, null);
+        if (cursor == null) {
+            return null;
+        }
+        try {
+            if (cursor.moveToFirst()) {
+                byte[] data = cursor.getBlob(0);
+                if (data != null) {
+                    return BitmapFactory.decodeStream(new ByteArrayInputStream(data));
+                }
+            }
+        } finally {
+            cursor.close();
+        }
+        return null;
+
     }
 
     public static boolean isPackageInstalled(String packageName, PackageManager packageManager) {

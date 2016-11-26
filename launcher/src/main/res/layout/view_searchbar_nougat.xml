@@ -12,7 +12,7 @@
     tools:showIn="@layout/view_home">
 
     <mehdi.sakout.fancybuttons.FancyButton
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="bottom"
         android:onClick="onSearch"
         android:layout_width="80dp"
         android:layout_height="56dp"
@@ -32,7 +32,7 @@
         android:layout_gravity="end"
         android:layout_marginRight="8dp"
         android:fontFamily="sans-serif-light"
-        android:gravity="end|center_vertical"
+        android:gravity="center"
         android:lineSpacingMultiplier="1.05"
         android:textColor="#fff"
         android:textSize="36sp" />

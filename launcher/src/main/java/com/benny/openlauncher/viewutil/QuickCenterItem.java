@@ -1,5 +1,7 @@
 package com.benny.openlauncher.viewutil;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
@@ -13,6 +15,8 @@ import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 //Concept idea of adding a place that enable user to take notes, suggest apps and contacts;
 public class QuickCenterItem{
@@ -93,6 +97,70 @@ public class QuickCenterItem{
         @Override
         public boolean equals(Object obj) {
             return obj instanceof NoteContent && this.content.equals(((NoteContent)obj).content) && this.date.equals(((NoteContent)obj).date);
+        }
+    }
+
+    public static class ContactItem extends AbstractItem<ContactItem, ContactItem.ViewHolder> {
+        private ContactContent info;
+
+        public ContactItem(ContactContent info){
+            this.info = info;
+        }
+
+        @Override
+        public int getType() {
+            return 0;
+        }
+
+        @Override
+        public int getLayoutRes() {
+            return R.layout.view_contact;
+        }
+
+        @Override
+        public void bindView(final ViewHolder viewHolder, List payloads) {
+            super.bindView(viewHolder, payloads);
+
+            viewHolder.imageView.setImageBitmap(info.icon);
+        }
+
+        private final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
+
+        class ItemFactory implements ViewHolderFactory<ViewHolder> {
+            public ViewHolder create(View v) {
+                return new ViewHolder(v);
+            }
+        }
+
+        @Override
+        public ViewHolderFactory<? extends ViewHolder> getFactory() {
+            return FACTORY;
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
+            CircleImageView imageView;
+
+            ViewHolder(View view) {
+                super(view);
+                this.imageView = (CircleImageView) itemView;
+            }
+        }
+    }
+
+    public static class ContactContent{
+        public String name;
+        public Intent data;
+        public Bitmap icon;
+
+        public ContactContent(String name,Intent data,Bitmap icon){
+            this.name = name;
+            this.data = data;
+            this.icon = icon;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return obj instanceof ContactContent && this.data.equals(((ContactContent)obj).data);
         }
     }
 
