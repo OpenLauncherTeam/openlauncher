@@ -8,13 +8,16 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.CallLog;
+import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -23,7 +26,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.telecom.Call;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -103,6 +108,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     private DrawerLayout drawerLayout;
     private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
+    private CallLogObserver callLogObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -474,58 +480,88 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 //        }.execute();
 
         ////////////////////////////////////Quick Contact///////////////////////////////////////////
-
         RecyclerView quickContact = (RecyclerView) findViewById(R.id.quickContactRv);
         quickContact.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         quickContactFA = new FastItemAdapter<>();
         quickContact.setAdapter(quickContactFA);
 
-        ArrayList<QuickCenterItem.ContactContent> contact = getRecentContacts();
-        quickContactFA.clear();
-        for (int i = 0; i < contact.size(); i++) {
-            quickContactFA.add(new QuickCenterItem.ContactItem(contact.get(i)));
-        }
+        callLogObserver = new CallLogObserver(new Handler());
+        getApplicationContext().getContentResolver().registerContentObserver(
+                android.provider.CallLog.Calls.CONTENT_URI, true, callLogObserver);
+
+        callLogObserver.onChange(true);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 0x981294) {
+            //Read call log permitted
+        }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    private ArrayList<QuickCenterItem.ContactContent> getRecentContacts() {
-        ArrayList<QuickCenterItem.ContactContent> contactMap = new ArrayList<>();
+    public class CallLogObserver extends ContentObserver {
 
-        Uri queryUri = android.provider.CallLog.Calls.CONTENT_URI;
-
-        String[] projection = new String[]{
-                ContactsContract.Contacts._ID,
+        private final String columns[] = new String[] {
                 CallLog.Calls._ID,
                 CallLog.Calls.NUMBER,
-                CallLog.Calls.CACHED_NAME,
-                CallLog.Calls.DATE};
+                CallLog.Calls.DATE,
+                CallLog.Calls.DURATION,
+                CallLog.Calls.TYPE};
 
-        String sortOrder = String.format("%s limit 4 ", CallLog.Calls.DATE + " DESC");
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
-            Cursor cursor = getContentResolver().query(queryUri, projection, null, null, sortOrder);
-            if (cursor == null) return contactMap;
-            while (cursor.moveToNext()) {
-                String phoneNumber = cursor.getString(cursor
-                        .getColumnIndex(CallLog.Calls.NUMBER));
-
-                String title = (cursor.getString(cursor.getColumnIndex(CallLog.Calls.CACHED_NAME)));
-
-                if(phoneNumber==null||title==null)continue;
-
-                String uri = "tel:" + phoneNumber;
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse(uri));
-
-                contactMap.add(new QuickCenterItem.ContactContent(title,intent,Tool.openPhoto(this,Tool.getContactIDFromNumber(this,phoneNumber))));
-            }
-            cursor.close();
+        public CallLogObserver(Handler handler) {
+            super(handler);
         }
-        return contactMap;
+
+        @Override
+        public boolean deliverSelfNotifications() {
+            return true;
+        }
+
+        public void logCallLog() {
+            if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+                Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_DENIED");
+                ActivityCompat.requestPermissions(Home.this,new String[]{Manifest.permission.READ_CALL_LOG},0x981294);
+            }else {
+                Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, null, null, null, CallLog.Calls.DATE + " DESC");
+
+                int number = c.getColumnIndex(CallLog.Calls.NUMBER);
+                int id = c.getColumnIndex(ContactsContract.Contacts._ID);
+                int name = c.getColumnIndex(CallLog.Calls.CACHED_NAME);
+                int type = c.getColumnIndex(CallLog.Calls.TYPE);
+                int date = c.getColumnIndex(CallLog.Calls.DATE);
+                int duration = c.getColumnIndex(CallLog.Calls.DURATION);
+
+                Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_GRANTED");
+                quickContactFA.clear();
+                int count = 0;
+                while (c.moveToNext()) {
+                    Tool.print("Getting data");
+                    if (count == 4) break;
+                    count ++;
+                    String phone = c.getString(number);
+                    String uri = "tel:" + phone;
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    intent.setData(Uri.parse(uri));
+                    String caller = c.getString(name);
+                    String contactId = c.getString(id);
+                    quickContactFA.add(new QuickCenterItem.ContactItem(
+                            new QuickCenterItem.ContactContent(caller,intent,
+                                    Tool.fetchThumbnail(Home.this,phone))));
+                }
+            }
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            this.onChange(selfChange,null);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            logCallLog();
+        }
+
     }
 
     private void registerAppUpdateReceiver() {
@@ -593,7 +629,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         appWidgetHost = null;
         unregisterReceiver(appUpdateReceiver);
         unregisterReceiver(shortcutReceiver);
-
+        if (callLogObserver != null)
+        getApplicationContext().getContentResolver().unregisterContentObserver(callLogObserver);
         launcher = null;
         super.onDestroy();
     }

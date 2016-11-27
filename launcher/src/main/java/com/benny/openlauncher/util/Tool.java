@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -41,31 +43,31 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-public class Tool
-{
-	private Tool(){}
-	
-	public static float dp2px(float dp, Context context){
-		Resources resources = context.getResources();
-		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
-	}
+public class Tool {
+    private Tool() {
+    }
 
-    public static int dp2px(int dp, Context context){
+    public static float dp2px(float dp, Context context) {
+        Resources resources = context.getResources();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
+    }
+
+    public static int dp2px(int dp, Context context) {
         Resources resources = context.getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics()));
     }
 
-	public static void toast(Context context,String str){
-        Toast.makeText(context,str,Toast.LENGTH_SHORT).show();
+    public static void toast(Context context, String str) {
+        Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
     }
 
-    public static void toast(Context context,int str){
-        Toast.makeText(context,context.getResources().getString(str),Toast.LENGTH_SHORT).show();
+    public static void toast(Context context, int str) {
+        Toast.makeText(context, context.getResources().getString(str), Toast.LENGTH_SHORT).show();
     }
 
-    public static void print(Object o){
+    public static void print(Object o) {
         if (o != null)
-        Log.d("Hey",o.toString());
+            Log.d("Hey", o.toString());
     }
 
     public static String[] split(String string, String delem) {
@@ -76,7 +78,7 @@ public class Tool
         for (int i = 0; i < charArr.length; i++) {
             int k = 0;
             for (int j = 0; j < delemArr.length; j++) {
-                if (charArr[i+j] == delemArr[j]) {
+                if (charArr[i + j] == delemArr[j]) {
                     k++;
                 } else {
                     break;
@@ -84,7 +86,7 @@ public class Tool
             }
             if (k == delemArr.length) {
                 String s = "";
-                while (counter < i ) {
+                while (counter < i) {
                     s += charArr[counter];
                     counter++;
                 }
@@ -103,7 +105,7 @@ public class Tool
         return list.toArray(new String[list.size()]);
     }
 
-    public static long getContactIDFromNumber(Context context,String contactNumber) {
+    public static long getContactIDFromNumber(Context context, String contactNumber) {
         String UriContactNumber = Uri.encode(contactNumber);
         long phoneContactID = new Random().nextInt();
         Cursor contactLookupCursor = context.getContentResolver().query(Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, UriContactNumber),
@@ -116,11 +118,53 @@ public class Tool
         return phoneContactID;
     }
 
-    public static Bitmap openPhoto(Context context,long contactId) {
+    public static Integer fetchThumbnailId(Context context,String phoneNumber) {
+
+        final Uri uri = Uri.withAppendedPath(ContactsContract.CommonDataKinds.Phone.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
+        final Cursor cursor = context.getContentResolver().query(uri, new String[]{ContactsContract.Contacts.PHOTO_ID}, null, null, ContactsContract.Contacts.DISPLAY_NAME + " ASC");
+
+        try {
+            Integer thumbnailId = null;
+            if (cursor.moveToFirst()) {
+                thumbnailId = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_ID));
+            }
+            return thumbnailId;
+        }
+        finally {
+            cursor.close();
+        }
+
+    }
+
+    public static Bitmap fetchThumbnail(Context context,String phoneNumber) {
+        Tool.print(phoneNumber);
+        long thumbnailId = fetchThumbnailId(context, phoneNumber);
+        final Uri uri = ContentUris.withAppendedId(ContactsContract.Data.CONTENT_URI, thumbnailId);
+        final Cursor cursor = context.getContentResolver().query(uri, new String[] {ContactsContract.CommonDataKinds.Photo.PHOTO}, null, null, null);
+
+        try {
+            Bitmap thumbnail = null;
+            if (cursor.moveToFirst()) {
+                final byte[] thumbnailBytes = cursor.getBlob(0);
+                if (thumbnailBytes != null) {
+                    thumbnail = BitmapFactory.decodeByteArray(thumbnailBytes, 0, thumbnailBytes.length);
+                }
+            }
+            return thumbnail;
+        }
+        finally {
+            cursor.close();
+        }
+
+    }
+
+    public static Bitmap openPhoto(Context context, String number) {
+        Tool.print(number);
+        long contactId = Tool.getContactIDFromNumber(context,number);
         Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
         Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
-        Cursor cursor = context.getContentResolver().query(photoUri,
-                new String[] {ContactsContract.Contacts.Photo.PHOTO}, null, null, null);
+
+        Cursor cursor = context.getContentResolver().query(photoUri, new String[]{ContactsContract.Contacts.Photo.PHOTO}, null, null, null);
         if (cursor == null) {
             return null;
         }
@@ -131,11 +175,12 @@ public class Tool
                     return BitmapFactory.decodeStream(new ByteArrayInputStream(data));
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             cursor.close();
         }
         return null;
-
     }
 
     public static boolean isPackageInstalled(String packageName, PackageManager packageManager) {
@@ -147,9 +192,9 @@ public class Tool
         }
     }
 
-    public static void checkForUnusedIconAndDelete(Context context,ArrayList<String> IDs){
+    public static void checkForUnusedIconAndDelete(Context context, ArrayList<String> IDs) {
         File dir = new File(context.getFilesDir() + "/iconCache");
-        if (dir.exists()){
+        if (dir.exists()) {
             ArrayList<String> availableIDs = new ArrayList<>();
             File[] iconCaches = dir.listFiles();
             for (int i = 0; i < iconCaches.length; i++) {
@@ -158,7 +203,7 @@ public class Tool
             availableIDs.removeAll(IDs);
             for (int i = 0; i < availableIDs.size(); i++) {
                 for (int j = 0; j < iconCaches.length; j++) {
-                    if (iconCaches[j].getName().equals(availableIDs.get(i))){
+                    if (iconCaches[j].getName().equals(availableIDs.get(i))) {
                         iconCaches[j].delete();
                         continue;
                     }
@@ -167,18 +212,18 @@ public class Tool
         }
     }
 
-    public static Drawable getIconFromID(Context context,String ID){
+    public static Drawable getIconFromID(Context context, String ID) {
         if (ID == null)
             return null;
         Drawable icon = null;
         Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/iconCache/" + ID);
-        if (bitmap != null){
-            icon = new BitmapDrawable(context.getResources(),bitmap);
+        if (bitmap != null) {
+            icon = new BitmapDrawable(context.getResources(), bitmap);
         }
         return icon;
     }
 
-    public static String saveIconAndReturnID(Context context,Bitmap bitmap){
+    public static String saveIconAndReturnID(Context context, Bitmap bitmap) {
         int i = 0;
         String filename = Integer.toString(i);
 
@@ -218,7 +263,7 @@ public class Tool
         return String.valueOf(i);
     }
 
-    public static Bitmap drawableToBitmap (Drawable drawable) {
+    public static Bitmap drawableToBitmap(Drawable drawable) {
         if (drawable == null)
             return null;
 
@@ -226,12 +271,12 @@ public class Tool
 
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            if(bitmapDrawable.getBitmap() != null) {
+            if (bitmapDrawable.getBitmap() != null) {
                 return bitmapDrawable.getBitmap();
             }
         }
 
-        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+        if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
             bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
         } else {
             bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -252,37 +297,37 @@ public class Tool
         return result;
     }
 
-    public static void startApp(Context c,AppManager.App app){
+    public static void startApp(Context c, AppManager.App app) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setClassName(app.packageName,app.className);
+        intent.setClassName(app.packageName, app.className);
         try {
             c.startActivity(intent);
-        }catch (Exception e){
+        } catch (Exception e) {
             Tool.toast(c, R.string.toast_appuninstalled);
         }
     }
 
-    public static int clampInt(int target,int min,int max){
+    public static int clampInt(int target, int min, int max) {
         return Math.max(min, Math.min(max, target));
     }
 
-    public static float clampFloat(float target,float min,float max){
+    public static float clampFloat(float target, float min, float max) {
         return Math.max(min, Math.min(max, target));
     }
 
-    public static View.OnTouchListener getBtnColorMaskController(){
+    public static View.OnTouchListener getBtnColorMaskController() {
         return new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         v.animate().scaleY(1.1f).scaleX(1.1f).setDuration(50);
-                        ((TextView)v).setTextColor(Color.rgb(200, 200, 200));
+                        ((TextView) v).setTextColor(Color.rgb(200, 200, 200));
                         return false;
                     case MotionEvent.ACTION_UP:
                         v.animate().scaleY(1f).scaleX(1f).setDuration(50);
-                        ((TextView)v).setTextColor(Color.WHITE);
+                        ((TextView) v).setTextColor(Color.WHITE);
                         return false;
                 }
                 return false;
@@ -290,19 +335,18 @@ public class Tool
         };
     }
 
-    public static void writeToFile(String name,String data,Context context) {
+    public static void writeToFile(String name, String data, Context context) {
         try {
 
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(name, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
-        }
-        catch (IOException ignore) {
+        } catch (IOException ignore) {
 
         }
     }
 
-    public static View.OnTouchListener getItemOnTouchListener(){
+    public static View.OnTouchListener getItemOnTouchListener() {
         return new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -326,18 +370,18 @@ public class Tool
         return sb.toString();
     }
 
-    public static String getStringFromFile (String name,Context context){
+    public static String getStringFromFile(String name, Context context) {
         try {
             FileInputStream fin = context.openFileInput(name);
             String ret = convertStreamToString(fin);
             fin.close();
             return ret;
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    public static void setTheme(Activity act){
+    public static void setTheme(Activity act) {
 //        switch (LauncherSettings.getInstance(act).generalSettings.theme){
 //            case Light:
 //                act.setTheme(R.style.NormalActivity_Light);
@@ -347,7 +391,8 @@ public class Tool
 //                break;
 //        }
     }
-    public static void setHomeTheme(Activity act){
+
+    public static void setHomeTheme(Activity act) {
 //        switch (LauncherSettings.getInstance(act).generalSettings.theme){
 //            case Light:
 //                act.setTheme(R.style.Home_Light);
@@ -358,11 +403,11 @@ public class Tool
 //        }
     }
 
-    public static String wrapColorTag(String str , @ColorInt int color){
-        return "<font color='"+String.format("#%06X", 0xFFFFFF & color)+"'>"+str+"</font>";
+    public static String wrapColorTag(String str, @ColorInt int color) {
+        return "<font color='" + String.format("#%06X", 0xFFFFFF & color) + "'>" + str + "</font>";
     }
 
-    public static void askForText(String title,String defaultText,Context c,final OnTextGotListener listener){
+    public static void askForText(String title, String defaultText, Context c, final OnTextGotListener listener) {
         new MaterialDialog.Builder(c)
                 .title(title)
                 .input(null, defaultText, new MaterialDialog.InputCallback() {
@@ -376,11 +421,11 @@ public class Tool
                 .show();
     }
 
-    public interface OnTextGotListener{
+    public interface OnTextGotListener {
         void hereIsTheText(String str);
     }
 
-	public static void createScaleInScaleOutAnim(final View view, final Runnable endAction){
+    public static void createScaleInScaleOutAnim(final View view, final Runnable endAction) {
         view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(80).setInterpolator(new AccelerateDecelerateInterpolator());
         new Handler().postDelayed(new Runnable() {
             public void run() {

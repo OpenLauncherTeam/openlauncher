@@ -51,4 +51,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     compile 'com.github.medyo:fancybuttons:1.8.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }

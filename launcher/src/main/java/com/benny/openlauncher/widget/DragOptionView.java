@@ -221,7 +221,7 @@ public class DragOptionView extends CardView {
                         home.dock.setHideGrid(false);
                         for (CellContainer cellContainer : home.desktop.pages)
                             cellContainer.setHideGrid(false);
-                        return false;
+                        return true;
                     case ACTION_APP:
                         deleteIcon.setVisibility(View.VISIBLE);
                         if (LauncherSettings.getInstance(getContext()).generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps)
