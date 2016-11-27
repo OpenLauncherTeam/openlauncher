@@ -68,6 +68,16 @@ public class AppItemView extends View implements Drawable.Callback{
 
     private float iconSize;
 
+    public float getIconPadding() {
+        return iconPadding;
+    }
+
+    public void setIconPadding(float iconPadding) {
+        this.iconPadding = iconPadding;
+    }
+
+    private float iconPadding;
+
     public float getIconSizeSmall() {
         return iconSizeSmall;
     }
@@ -194,13 +204,13 @@ public class AppItemView extends View implements Drawable.Callback{
 
         if (icon != null){
             canvas.save();
-            canvas.translate((getWidth()-iconSize)/2,heightPadding);
+            canvas.translate((getWidth()-iconSize + iconPadding*2)/2,heightPadding + iconPadding);
             if (roundBg){
-                canvas.drawCircle(iconSize/2,iconSize/2,iconSize/2,bgPaint);
-                canvas.translate((iconSize-iconSizeSmall)/2,(iconSize-iconSizeSmall)/2);
+                canvas.drawCircle((iconSize-iconPadding*2)/2,(iconSize-iconPadding*2)/2,(iconSize-iconPadding*2)/2,bgPaint);
+                canvas.translate((iconSize-iconSizeSmall-iconPadding*2)/2,(iconSize-iconSizeSmall-iconPadding*2)/2);
                 icon.setBounds(0, 0, (int) iconSizeSmall, (int) iconSizeSmall);
             }else {
-                icon.setBounds(0, 0, (int) iconSize, (int) iconSize);
+                icon.setBounds(0, 0, (int) iconSize - (int)(iconPadding * 2), (int) iconSize - (int)(iconPadding * 2));
             }
             icon.draw(canvas);
             canvas.restore();
@@ -240,7 +250,7 @@ public class AppItemView extends View implements Drawable.Callback{
                     TypedValue typedValue = new TypedValue();
                     view.getContext().getTheme().resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
 
-                    view.setIconSize(Tool.dp2px(iconSize - 8, view.getContext()));
+                    view.setIconPadding(Tool.dp2px(4, view.getContext()));
                     view.setIcon(view.getResources().getDrawable(R.drawable.ic_apps_black_24dp),true);
                     view.setBgColor(Color.WHITE);
                     view.setRoundBg(true);

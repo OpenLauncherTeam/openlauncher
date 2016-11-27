@@ -32,7 +32,7 @@
         android:layout_gravity="end"
         android:layout_marginRight="8dp"
         android:fontFamily="sans-serif-light"
-        android:gravity="center"
+        android:gravity="end"
         android:lineSpacingMultiplier="1.05"
         android:textColor="#fff"
         android:textSize="36sp" />

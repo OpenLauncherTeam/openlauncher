@@ -41,6 +41,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/shortcutBtnLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,7 +76,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/shortcutBtnLayout"
             android:orientation="horizontal"
-            android:visibility="invisible">
+            android:visibility="gone">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/noteControl"
@@ -106,6 +107,8 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:layout_marginLeft="74dp"
+            android:paddingBottom="74dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:id="@+id/quickContactRv"

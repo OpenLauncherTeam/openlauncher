@@ -13,6 +13,10 @@ ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 	android:versionCode
 		INJECTED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
 		INJECTED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
+uses-permission#android.permission.READ_CONTACTS
+ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:5:5-71
+	android:name
+		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:5:22-69
 uses-permission#android.permission.READ_CALL_LOG
 ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:6:5-72
 	android:name
@@ -56,6 +60,7 @@ MERGED from [com.afollestad.material-dialogs:core:0.9.0.2] E:\USER\ProjectData\O
 MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta4\AndroidManifest.xml:9:5-20
 MERGED from [com.github.medyo:fancybuttons:1.8.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.medyo\fancybuttons\1.8.2\AndroidManifest.xml:11:5-20
 MERGED from [de.hdodenhof:circleimageview:2.1.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.1.0\AndroidManifest.xml:9:5-20
+MERGED from [com.amulyakhare:com.amulyakhare.textdrawable:1.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.amulyakhare\com.amulyakhare.textdrawable\1.0.1\AndroidManifest.xml:12:5-20
 	android:label
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:16:9-41
 	android:supportsRtl
@@ -206,6 +211,7 @@ MERGED from [me.zhanghai.android.materialprogressbar:library:1.1.7] E:\USER\Proj
 MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta4\AndroidManifest.xml:5:5-7:41
 MERGED from [com.github.medyo:fancybuttons:1.8.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.medyo\fancybuttons\1.8.2\AndroidManifest.xml:7:5-9:41
 MERGED from [de.hdodenhof:circleimageview:2.1.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.1.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.amulyakhare:com.amulyakhare.textdrawable:1.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.amulyakhare\com.amulyakhare.textdrawable\1.0.1\AndroidManifest.xml:8:5-10:41
 	tools:overrideLibrary
 		ADDED from [com.android.support:appcompat-v7:25.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion

@@ -6,10 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
@@ -120,8 +124,17 @@ public class QuickCenterItem{
         @Override
         public void bindView(final ViewHolder viewHolder, List payloads) {
             super.bindView(viewHolder, payloads);
+            Tool.print(info.icon == null);
+            if (info.icon != null)
+                viewHolder.imageView.setImageBitmap(info.icon);
+            else {
+                ColorGenerator generator = ColorGenerator.MATERIAL;
+                int color1 = generator.getRandomColor();
+                TextDrawable.IBuilder builder = TextDrawable.builder().round();
+                TextDrawable ic1 = builder.build(info.name.substring(0,1), color1);
 
-            viewHolder.imageView.setImageBitmap(info.icon);
+                viewHolder.imageView.setImageDrawable(ic1);
+            }
         }
 
         private final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
@@ -138,11 +151,11 @@ public class QuickCenterItem{
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            CircleImageView imageView;
+            ImageView imageView;
 
             ViewHolder(View view) {
                 super(view);
-                this.imageView = (CircleImageView) itemView;
+                this.imageView = (ImageView) view;
             }
         }
     }
