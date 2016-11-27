@@ -1,7 +1,10 @@
 package com.benny.openlauncher.viewutil;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
@@ -131,9 +134,19 @@ public class QuickCenterItem{
                 ColorGenerator generator = ColorGenerator.MATERIAL;
                 int color1 = generator.getRandomColor();
                 TextDrawable.IBuilder builder = TextDrawable.builder().round();
-                TextDrawable ic1 = builder.build(info.name.substring(0,1), color1);
+                String name = info.name == null || info.name.isEmpty() ? info.number : info.name;
+                TextDrawable ic1 = builder.build(name.substring(0,1), color1);
 
                 viewHolder.imageView.setImageDrawable(ic1);
+                viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (Home.launcher != null) {
+                            if (ActivityCompat.checkSelfPermission(view.getContext(),Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
+                                Home.launcher.startActivity(info.data);
+                        }
+                    }
+                });
             }
         }
 
@@ -164,11 +177,13 @@ public class QuickCenterItem{
         public String name;
         public Intent data;
         public Bitmap icon;
+        public String number;
 
-        public ContactContent(String name,Intent data,Bitmap icon){
+        public ContactContent(String name,String number,Intent data,Bitmap icon){
             this.name = name;
             this.data = data;
             this.icon = icon;
+            this.number = number;
         }
 
         @Override

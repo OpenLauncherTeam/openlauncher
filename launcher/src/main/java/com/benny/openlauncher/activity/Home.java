@@ -546,7 +546,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                     String caller = c.getString(name);
                     String contactId = c.getString(id);
                     quickContactFA.add(new QuickCenterItem.ContactItem(
-                            new QuickCenterItem.ContactContent(caller,intent,
+                            new QuickCenterItem.ContactContent(caller,phone,intent,
                                     Tool.fetchThumbnail(Home.this,phone))));
                 }
             }
@@ -723,7 +723,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 cy -= Tool.dp2px(14,this);
             }
             rad = (int) (appItemView.getIconSize()/2);
-            cy -= appItemView.getHeightPadding() + appItemView.getIconSize();
+            cy -= appItemView.getHeightPadding()/2 + appItemView.getIconSize();
         }
         cx -= ((ViewGroup.MarginLayoutParams)appDrawer.getLayoutParams()).leftMargin;
         cy -= ((ViewGroup.MarginLayoutParams)appDrawer.getLayoutParams()).topMargin;
