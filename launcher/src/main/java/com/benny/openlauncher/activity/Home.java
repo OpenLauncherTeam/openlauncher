@@ -12,13 +12,10 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Point;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
-import android.provider.Contacts;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
@@ -26,9 +23,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.telecom.Call;
 import android.text.Html;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -60,20 +55,13 @@ import com.benny.openlauncher.widget.DragOptionView;
 import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
-import com.mikepenz.fastadapter.adapters.HeaderAdapter;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 public class Home extends Activity implements DrawerLayout.DrawerListener {
 
@@ -112,27 +100,19 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Tool.setHomeTheme(this);
         super.onCreate(savedInstanceState);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-        }
         launcher = this;
         AppManager.getInstance(this).clearListener();
         LauncherSettings.getInstance(this);
 
         myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, null);
-        myScreen.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return false;
-            }
-        });
         setContentView(myScreen);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            findViewById(R.id.shortcutLayout).setPadding(0, Tool.getStatusBarHeight(this), 0, 0);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+
+            findViewById(R.id.shortcutLayout).setPadding(0, Tool.getStatusBarHeight(this), 0, Tool.getNavBarHeight(this));
         }
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -147,6 +127,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         registerAppUpdateReceiver();
         registerShortcutReceiver();
 
+        //We init all the desktop and dock app data
         AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {
@@ -170,6 +151,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
 
     //region INIT
+    /** This should be only called to find the view at Activity start up*/
     private void findViews() {
         appSearchBar = findViewById(R.id.appSearchBar);
         searchBarClock = (TextView) findViewById(R.id.searchbarclock);
@@ -189,6 +171,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         minBar = (ListView) findViewById(R.id.minbar);
     }
 
+    /** This should be only called to init the view at Activity start up*/
     private void initViews() {
         initMinBar();
         initQuickCenter();
@@ -313,10 +296,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 }
                 if (appDrawerIndicator != null)
                     appDrawerIndicator.animate().alpha(1).setDuration(100);
-
-//                appDrawer.setScaleX(0.95f);
-//                appDrawer.setScaleY(0.95f);
-//                appDrawer.animate().setStartDelay(100).scaleX(1).scaleY(1).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
             }
 
             @Override
@@ -339,8 +318,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                         }
                     });
                 }
-//                appDrawer.animate().setStartDelay(0).scaleX(0.95f).scaleY(0.95f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100L);
-
             }
 
             @Override
@@ -489,6 +466,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         getApplicationContext().getContentResolver().registerContentObserver(
                 android.provider.CallLog.Calls.CONTENT_URI, true, callLogObserver);
 
+        //First call get the call history for the adapter
         callLogObserver.onChange(true);
     }
 
@@ -505,9 +483,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         private final String columns[] = new String[] {
                 CallLog.Calls._ID,
                 CallLog.Calls.NUMBER,
-                CallLog.Calls.DATE,
-                CallLog.Calls.DURATION,
-                CallLog.Calls.TYPE};
+                CallLog.Calls.CACHED_NAME};
+//                CallLog.Calls.DATE,
+//                CallLog.Calls.DURATION,
+//                CallLog.Calls.TYPE};
 
         public CallLogObserver(Handler handler) {
             super(handler);
@@ -523,28 +502,22 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_DENIED");
                 ActivityCompat.requestPermissions(Home.this,new String[]{Manifest.permission.READ_CALL_LOG},0x981294);
             }else {
-                Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, null, null, null, CallLog.Calls.DATE + " DESC");
+                Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, columns, null, null, CallLog.Calls.DATE + " DESC LIMIT 15");
 
                 int number = c.getColumnIndex(CallLog.Calls.NUMBER);
-                int id = c.getColumnIndex(ContactsContract.Contacts._ID);
                 int name = c.getColumnIndex(CallLog.Calls.CACHED_NAME);
-                int type = c.getColumnIndex(CallLog.Calls.TYPE);
-                int date = c.getColumnIndex(CallLog.Calls.DATE);
-                int duration = c.getColumnIndex(CallLog.Calls.DURATION);
+//                int type = c.getColumnIndex(CallLog.Calls.TYPE);
+//                int date = c.getColumnIndex(CallLog.Calls.DATE);
+//                int duration = c.getColumnIndex(CallLog.Calls.DURATION);
 
                 Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_GRANTED");
                 quickContactFA.clear();
-                int count = 0;
                 while (c.moveToNext()) {
-                    Tool.print("Getting data");
-                    if (count == 4) break;
-                    count ++;
                     String phone = c.getString(number);
                     String uri = "tel:" + phone;
                     Intent intent = new Intent(Intent.ACTION_CALL);
                     intent.setData(Uri.parse(uri));
                     String caller = c.getString(name);
-                    String contactId = c.getString(id);
                     quickContactFA.add(new QuickCenterItem.ContactItem(
                             new QuickCenterItem.ContactContent(caller,phone,intent,
                                     Tool.fetchThumbnail(Home.this,phone))));
@@ -669,12 +642,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
     protected void onStop() {
+        //We write and save the settings here to the device
         Gson gson = LauncherSettings.getInstance(this).writeSettings();
         Tool.writeToFile("noteData.json", gson.toJson(notes), Home.this);
         super.onStop();
@@ -707,8 +676,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
     //endregion
 
-    //region APPDRAWERANIMATION
+    //region APP_DRAWER_ANIMATION
     private int cx,cy,rad;
+    /** Call this to open the app drawer with animation*/
     public void openAppDrawer(View view) {
         int[] pos = new int[2];
         view.getLocationOnScreen(pos);
@@ -743,7 +713,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     //endregion
 
 
-    //region VIEWONCLICK
+    //region VIEW_ONCLICK
     public void onAddNote(View view) {
         Tool.askForText("Note", null, this, new Tool.OnTextGotListener() {
             @Override
@@ -776,7 +746,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 //        }
     }
 
+    /** When the search button of the search bar clicked*/
     public void onSearch(View view) {
+
         Intent i;
         try {
             i = new Intent(Intent.ACTION_MAIN);
@@ -801,19 +773,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
 
     @Override
-    public void onDrawerSlide(View drawerView, float slideOffset) {
-
-    }
+    public void onDrawerSlide(View drawerView, float slideOffset) {}
 
     @Override
-    public void onDrawerOpened(View drawerView) {
-
-    }
+    public void onDrawerOpened(View drawerView) {}
 
     @Override
-    public void onDrawerClosed(View drawerView) {
-
-    }
+    public void onDrawerClosed(View drawerView) {}
 
     @Override
     public void onDrawerStateChanged(int newState) {

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
@@ -129,25 +130,25 @@ public class QuickCenterItem{
             super.bindView(viewHolder, payloads);
             Tool.print(info.icon == null);
             if (info.icon != null)
-                viewHolder.imageView.setImageBitmap(info.icon);
+                viewHolder.imageView.setImageDrawable(new RoundDrawable(info.icon));
             else {
                 ColorGenerator generator = ColorGenerator.MATERIAL;
                 int color1 = generator.getRandomColor();
                 TextDrawable.IBuilder builder = TextDrawable.builder().round();
                 String name = info.name == null || info.name.isEmpty() ? info.number : info.name;
                 TextDrawable ic1 = builder.build(name.substring(0,1), color1);
-
                 viewHolder.imageView.setImageDrawable(ic1);
-                viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (Home.launcher != null) {
+            }
+
+            viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (Home.launcher != null) {
                             if (ActivityCompat.checkSelfPermission(view.getContext(),Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
                                 Home.launcher.startActivity(info.data);
-                        }
                     }
-                });
-            }
+                }
+            });
         }
 
         private final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();

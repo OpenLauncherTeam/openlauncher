@@ -108,7 +108,9 @@
 
         <android.support.v7.widget.RecyclerView
             android:layout_marginLeft="74dp"
-            android:paddingBottom="74dp"
+            android:paddingLeft="8dp"
+            android:clipToPadding="false"
+            android:layout_marginBottom="8dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:id="@+id/quickContactRv"
