@@ -118,8 +118,7 @@ public class Tool {
         return phoneContactID;
     }
 
-    public static Integer fetchThumbnailId(Context context,String phoneNumber) {
-
+    public static Integer fetchThumbnailId(Context context, String phoneNumber) {
         final Uri uri = Uri.withAppendedPath(ContactsContract.CommonDataKinds.Phone.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
         final Cursor cursor = context.getContentResolver().query(uri, new String[]{ContactsContract.Contacts.PHOTO_ID}, null, null, ContactsContract.Contacts.DISPLAY_NAME + " ASC");
 
@@ -129,18 +128,19 @@ public class Tool {
                 thumbnailId = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_ID));
             }
             return thumbnailId;
-        }
-        finally {
+        } finally {
             cursor.close();
         }
 
     }
 
-    public static Bitmap fetchThumbnail(Context context,String phoneNumber) {
+    public static Bitmap fetchThumbnail(Context context, String phoneNumber) {
         Tool.print(phoneNumber);
-        long thumbnailId = fetchThumbnailId(context, phoneNumber);
+        Integer thumbnailId = fetchThumbnailId(context, phoneNumber);
+        if (thumbnailId == null)
+            return null;
         final Uri uri = ContentUris.withAppendedId(ContactsContract.Data.CONTENT_URI, thumbnailId);
-        final Cursor cursor = context.getContentResolver().query(uri, new String[] {ContactsContract.CommonDataKinds.Photo.PHOTO}, null, null, null);
+        final Cursor cursor = context.getContentResolver().query(uri, new String[]{ContactsContract.CommonDataKinds.Photo.PHOTO}, null, null, null);
 
         try {
             Bitmap thumbnail = null;
@@ -151,8 +151,7 @@ public class Tool {
                 }
             }
             return thumbnail;
-        }
-        finally {
+        } finally {
             cursor.close();
         }
 
@@ -160,7 +159,7 @@ public class Tool {
 
     public static Bitmap openPhoto(Context context, String number) {
         Tool.print(number);
-        long contactId = Tool.getContactIDFromNumber(context,number);
+        long contactId = Tool.getContactIDFromNumber(context, number);
         Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
         Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
 
@@ -286,6 +285,15 @@ public class Tool {
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
         return bitmap;
+    }
+
+    public static int getNavBarHeight(Context context){
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return resources.getDimensionPixelSize(resourceId);
+        }
+        return 0;
     }
 
     public static int getStatusBarHeight(Context context) {
@@ -421,10 +429,6 @@ public class Tool {
                 .show();
     }
 
-    public interface OnTextGotListener {
-        void hereIsTheText(String str);
-    }
-
     public static void createScaleInScaleOutAnim(final View view, final Runnable endAction) {
         view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(80).setInterpolator(new AccelerateDecelerateInterpolator());
         new Handler().postDelayed(new Runnable() {
@@ -437,5 +441,9 @@ public class Tool {
                 }, 80);
             }
         }, 80);
+    }
+
+    public interface OnTextGotListener {
+        void hereIsTheText(String str);
     }
 }
