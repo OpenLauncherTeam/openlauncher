@@ -146,6 +146,10 @@ public class QuickCenterItem{
                     if (Home.launcher != null) {
                             if (ActivityCompat.checkSelfPermission(view.getContext(),Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
                                 Home.launcher.startActivity(info.data);
+                            else {
+                                Tool.toast(view.getContext(),"Unable to call the person without Manifest.permission.CALL_PHONE granted");
+                                ActivityCompat.requestPermissions(Home.launcher,new String[]{Manifest.permission.CALL_PHONE},Home.REQUEST_PERMISSION_CALL);
+                            }
                     }
                 }
             });

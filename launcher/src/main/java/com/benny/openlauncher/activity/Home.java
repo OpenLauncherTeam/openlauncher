@@ -26,10 +26,8 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
@@ -68,6 +66,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     public static final int REQUEST_PICK_APPWIDGET = 0x6475;
     public static final int REQUEST_CREATE_APPWIDGET = 0x3648;
     public static final int MINIBAR_EDIT = 0x2873;
+    public static final int REQUEST_PERMISSION_READ_CALL_LOG = 0x981294;
+    public static final int REQUEST_PERMISSION_CALL = 0x981295;
+    public static final int REQUEST_PERMISSION_STORAGE = 0x981296;
     //static members, easier to access from any activity and class.
     @Nullable
     public static Home launcher;
@@ -472,7 +473,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == 0x981294) {
+        if (requestCode == REQUEST_PERMISSION_READ_CALL_LOG) {
             //Read call log permitted
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -500,7 +501,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         public void logCallLog() {
             if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
                 Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_DENIED");
-                ActivityCompat.requestPermissions(Home.this,new String[]{Manifest.permission.READ_CALL_LOG},0x981294);
+                ActivityCompat.requestPermissions(Home.this,new String[]{Manifest.permission.READ_CALL_LOG}, REQUEST_PERMISSION_READ_CALL_LOG);
             }else {
                 Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, columns, null, null, CallLog.Calls.DATE + " DESC LIMIT 15");
 

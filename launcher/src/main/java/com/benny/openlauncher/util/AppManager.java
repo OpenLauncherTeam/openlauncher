@@ -1,10 +1,12 @@
 package com.benny.openlauncher.util;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.*;
 import android.content.pm.*;
 import android.graphics.drawable.*;
 import android.os.*;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -101,13 +103,13 @@ public class AppManager {
         FastItemAdapter<IconLabelItem> fastItemAdapter = new FastItemAdapter<>();
 
         final List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, 0);
-        Collections.sort(resolveInfos,new ResolveInfo.DisplayNameComparator(packageManager));
+        Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(packageManager));
         final MaterialDialog d = new MaterialDialog.Builder(activity)
-                .adapter(fastItemAdapter,null)
+                .adapter(fastItemAdapter, null)
                 .title("Pick icon pack")
                 .build();
 
-        fastItemAdapter.add(new IconLabelItem(activity.getResources().getDrawable(R.mipmap.ic_launcher),"Default", new View.OnClickListener() {
+        fastItemAdapter.add(new IconLabelItem(activity.getResources().getDrawable(R.mipmap.ic_launcher), "Default", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recreateAfterGettingApps = true;
@@ -119,13 +121,19 @@ public class AppManager {
 
         for (int i = 0; i < resolveInfos.size(); i++) {
             final int mI = i;
-            fastItemAdapter.add(new IconLabelItem(resolveInfos.get(i).loadIcon(packageManager),resolveInfos.get(i).loadLabel(packageManager).toString(), new View.OnClickListener() {
+            fastItemAdapter.add(new IconLabelItem(resolveInfos.get(i).loadIcon(packageManager), resolveInfos.get(i).loadLabel(packageManager).toString(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    recreateAfterGettingApps = true;
-                    LauncherSettings.getInstance(context).generalSettings.iconPackName = resolveInfos.get(mI).activityInfo.packageName;
-                    getAllApps();
-                    d.dismiss();
+                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        recreateAfterGettingApps = true;
+                        LauncherSettings.getInstance(context).generalSettings.iconPackName = resolveInfos.get(mI).activityInfo.packageName;
+                        getAllApps();
+                        d.dismiss();
+                    } else {
+                        Tool.toast(context, "Unable to grab the icon without Manifest.permission.READ_EXTERNAL_STORAGE granted");
+                        ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
+                    }
+
                 }
             }));
         }
@@ -169,7 +177,7 @@ public class AppManager {
             }
 
             LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(context).generalSettings;
-            if (!generalSettings.iconPackName.isEmpty() && Tool.isPackageInstalled(generalSettings.iconPackName,packageManager)) {
+            if (!generalSettings.iconPackName.isEmpty() && Tool.isPackageInstalled(generalSettings.iconPackName, packageManager)) {
                 IconPackHelper.themePacs(AppManager.this, Tool.dp2px(generalSettings.iconSize, context), generalSettings.iconPackName, apps);
             }
             return null;
@@ -200,10 +208,10 @@ public class AppManager {
             }
             updateListenersToRemove.clear();
 
-            if (recreateAfterGettingApps){
+            if (recreateAfterGettingApps) {
                 recreateAfterGettingApps = false;
                 if (context instanceof Home)
-                    ((Home)context).recreate();
+                    ((Home) context).recreate();
             }
 
             super.onPostExecute(result);
