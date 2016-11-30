@@ -1,5 +1,6 @@
 package com.benny.openlauncher.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         if (savedInstanceState == null) {
-            Fragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(getResources().getColor(R.color.Light_TextColor), getResources().getColor(R.color.Light_TextColorSec), getResources().getColor(R.color.Light_Background), getResources().getColor(R.color.colorAccent), false)
+            Fragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(Color.DKGRAY, getResources().getColor(R.color.Light_TextColor), getResources().getColor(R.color.Light_Background), getResources().getColor(R.color.colorAccent), false)
                     .add(new MaterialPrefFragment.GroupTitle("Desktop"))
                     .add(new MaterialPrefFragment.ButtonPref("desktopMode", "Style", "choose different style of your desktop"))
                     .add(new MaterialPrefFragment.TBPref("desktopSearchBar", "Show search bar", "Display a search bar always on top of the desktop", LauncherSettings.getInstance(this).generalSettings.desktopSearchBar))

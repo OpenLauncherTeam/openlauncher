@@ -308,21 +308,21 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener
         return summary == null ? new SpannableString(title) : Html.fromHtml(title + "<br>" + "<small>" + CommonUtility.warpColorTag(summary,fragment.textColorSec) + "</small>");
     }
 
-    private static void setStyle(TextView b,MaterialPrefFragment fragment){
-        b.setTextColor(fragment.textColor);
-        b.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-        b.setAllCaps(false);
+    private static void setStyle(TextView textView,MaterialPrefFragment fragment){
+        textView.setTextColor(fragment.textColor);
+        textView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+        textView.setAllCaps(false);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            b.setStateListAnimator(null);
+            textView.setStateListAnimator(null);
         }
-        b.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
-        b.setTypeface(Typeface.DEFAULT);
-        b.setPadding(CommonUtility.pixelToDp(b.getContext(),fragment.pad),CommonUtility.pixelToDp(b.getContext(),fragment.pad),CommonUtility.pixelToDp(b.getContext(),fragment.pad),CommonUtility.pixelToDp(b.getContext(),fragment.pad));
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
+        textView.setTypeface(Typeface.DEFAULT);
+        textView.setPadding(CommonUtility.pixelToDp(textView.getContext(),fragment.pad),CommonUtility.pixelToDp(textView.getContext(),fragment.pad),CommonUtility.pixelToDp(textView.getContext(),fragment.pad),CommonUtility.pixelToDp(textView.getContext(),fragment.pad));
         if (fragment.cardColor == Color.WHITE)
-            b.setBackgroundResource(R.drawable.selector_dark);
+            textView.setBackgroundResource(R.drawable.selector_dark);
         else
-            b.setBackgroundResource(R.drawable.selector);
-        b.setLayoutParams(CommonUtility.matchParentWidthLayoutParams());
+            textView.setBackgroundResource(R.drawable.selector);
+        textView.setLayoutParams(CommonUtility.matchParentWidthLayoutParams());
     }
 
     public static class Builder
