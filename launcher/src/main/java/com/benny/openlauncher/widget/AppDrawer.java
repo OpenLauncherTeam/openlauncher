@@ -143,6 +143,8 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
     }
 
     public void init() {
+        if (isInEditMode())
+            return;
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
         drawerMode = LauncherSettings.getInstance(getContext()).generalSettings.drawerMode;
         switch (drawerMode) {
