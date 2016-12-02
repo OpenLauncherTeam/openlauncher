@@ -63,7 +63,6 @@ MERGED from [com.android.support:cardview-v7:25.0.0] E:\USER\ProjectData\OpenLau
 MERGED from [com.afollestad.material-dialogs:core:0.9.0.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.afollestad.material-dialogs\core\0.9.0.2\AndroidManifest.xml:13:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta4\AndroidManifest.xml:9:5-20
 MERGED from [com.github.medyo:fancybuttons:1.8.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.medyo\fancybuttons\1.8.2\AndroidManifest.xml:11:5-20
-MERGED from [de.hdodenhof:circleimageview:2.1.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.1.0\AndroidManifest.xml:9:5-20
 MERGED from [com.amulyakhare:com.amulyakhare.textdrawable:1.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.amulyakhare\com.amulyakhare.textdrawable\1.0.1\AndroidManifest.xml:12:5-20
 	android:label
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:17:9-41
@@ -206,7 +205,6 @@ MERGED from [com.android.support:transition:25.0.0] E:\USER\ProjectData\OpenLaun
 MERGED from [net.qiujuer.genius:blur:2.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.qiujuer.genius\blur\2.0.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.balysv:material-ripple:1.0.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.balysv\material-ripple\1.0.2\AndroidManifest.xml:8:5-10:41
 MERGED from [in.championswimmer:SimpleFingerGestures_Android_Library:1.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\in.championswimmer\SimpleFingerGestures_Android_Library\1.2\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:multidex:1.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\multidex\1.0.1\AndroidManifest.xml:18:5-42
 MERGED from [OpenLauncher:smoothviewpager:unspecified] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\smoothviewpager\unspecified\AndroidManifest.xml:7:5-9:41
 MERGED from [OpenLauncher:materialpreffragment:unspecified] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\materialpreffragment\unspecified\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:cardview-v7:25.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.0.0\AndroidManifest.xml:20:5-43
@@ -214,7 +212,6 @@ MERGED from [com.afollestad.material-dialogs:core:0.9.0.2] E:\USER\ProjectData\O
 MERGED from [me.zhanghai.android.materialprogressbar:library:1.1.7] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\me.zhanghai.android.materialprogressbar\library\1.1.7\AndroidManifest.xml:12:5-14:41
 MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta4\AndroidManifest.xml:5:5-7:41
 MERGED from [com.github.medyo:fancybuttons:1.8.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.medyo\fancybuttons\1.8.2\AndroidManifest.xml:7:5-9:41
-MERGED from [de.hdodenhof:circleimageview:2.1.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.1.0\AndroidManifest.xml:5:5-7:41
 MERGED from [com.amulyakhare:com.amulyakhare.textdrawable:1.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.amulyakhare\com.amulyakhare.textdrawable\1.0.1\AndroidManifest.xml:8:5-10:41
 	tools:overrideLibrary
 		ADDED from [com.android.support:appcompat-v7:25.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\AndroidManifest.xml:23:9-75
