@@ -35,16 +35,22 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                     .add(new MaterialPrefFragment.ButtonPref("desktopMode", "Style", "choose different style of your desktop"))
                     .add(new MaterialPrefFragment.TBPref("desktopSearchBar", "Show search bar", "Display a search bar always on top of the desktop", LauncherSettings.getInstance(this).generalSettings.desktopSearchBar))
                     // FIXME: 11/25/2016 This will have problem (in allappsmode) as the apps will be cut off when scale down
-                    .add(new MaterialPrefFragment.NUMPref("horigridsizedesktop", "Grid column", "Desktop grid size", LauncherSettings.getInstance(this).generalSettings.desktopGridX, 4, 10))
-                    .add(new MaterialPrefFragment.NUMPref("vertgridsizedesktop", "Grid row", "Desktop grid size", LauncherSettings.getInstance(this).generalSettings.desktopGridY, 4, 10))
+                    .add(new MaterialPrefFragment.NUMPref("gridsizedesktop","Grid size", "Desktop grid size",
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedesktop","Column",LauncherSettings.getInstance(this).generalSettings.desktopGridX, 4, 10),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsizedesktop","Row",LauncherSettings.getInstance(this).generalSettings.desktopGridY, 4, 10)
+                    ))
                     .add(new MaterialPrefFragment.GroupTitle("Dock"))
                     .add(new MaterialPrefFragment.TBPref("dockShowLabel","Show app label","show the app's name in the dock",LauncherSettings.getInstance(this).generalSettings.dockShowLabel))
-                    .add(new MaterialPrefFragment.NUMPref("horigridsizedock", "Grid column", "Dock grid size", LauncherSettings.getInstance(this).generalSettings.dockGridX, 5, 10))
+                    .add(new MaterialPrefFragment.NUMPref("gridsizedock","Grid size", "Dock grid size",
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedock","Column",LauncherSettings.getInstance(this).generalSettings.dockGridX, 5, 10)
+                    ))
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
                     .add(new MaterialPrefFragment.ButtonPref("drawerstyle", "Style", "choose the style of the app drawer"))
                     .add(new MaterialPrefFragment.TBPref("appdrawersearchbar", "Search Bar", "search bar will only appear in grid drawer", LauncherSettings.getInstance(this).generalSettings.drawerSearchBar))
-                    .add(new MaterialPrefFragment.NUMPref("horigridsize", "Grid column", "App drawer grid size", LauncherSettings.getInstance(this).generalSettings.drawerGridX, 1, 10))
-                    .add(new MaterialPrefFragment.NUMPref("vertigridsize", "Grid row", "App drawer grid size", LauncherSettings.getInstance(this).generalSettings.drawerGridY, 1, 10))
+                    .add(new MaterialPrefFragment.NUMPref("gridsize","Grid size", "App drawer grid size",
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsize","Column",LauncherSettings.getInstance(this).generalSettings.drawerGridX, 1, 10),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertigridsize","Row",LauncherSettings.getInstance(this).generalSettings.drawerGridY, 1, 10)
+                    ))
                     .add(new MaterialPrefFragment.TBPref("drawerRememberPage", "Remember last page", "The page will not reset to the first page when reopen app drawer", !LauncherSettings.getInstance(this).generalSettings.drawerRememberPage))
                     .add(new MaterialPrefFragment.GroupTitle("Apps"))
                     .add(new MaterialPrefFragment.NUMPref("iconsize", "Icon Size", "Size of all app icon", LauncherSettings.getInstance(this).generalSettings.iconSize, 30, 80))
