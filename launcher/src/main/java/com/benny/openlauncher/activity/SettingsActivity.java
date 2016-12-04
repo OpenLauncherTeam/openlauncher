@@ -2,20 +2,24 @@ package com.benny.openlauncher.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppDrawer;
 import com.benny.openlauncher.widget.Desktop;
+import com.bennyv5.materialpreffragment.BaseSettingsActivity;
 import com.bennyv5.materialpreffragment.MaterialPrefFragment;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.LauncherSettings;
 
-public class SettingsActivity extends AppCompatActivity implements MaterialPrefFragment.OnPrefClickedListener, MaterialPrefFragment.OnPrefChangedListener {
+public class SettingsActivity extends BaseSettingsActivity implements MaterialPrefFragment.OnPrefClickedListener, MaterialPrefFragment.OnPrefChangedListener {
 
     private boolean requireLauncherRestart = false;
 
@@ -30,34 +34,37 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         if (savedInstanceState == null) {
-            Fragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(Color.DKGRAY, getResources().getColor(R.color.Light_TextColor), getResources().getColor(R.color.Light_Background), getResources().getColor(R.color.colorAccent), false)
+            LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(this).generalSettings;
+            MaterialPrefFragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this,Color.DKGRAY, getResources().getColor(R.color.Light_TextColor), getResources().getColor(R.color.Light_Background), getResources().getColor(R.color.colorAccent), false)
                     .add(new MaterialPrefFragment.GroupTitle("Desktop"))
                     .add(new MaterialPrefFragment.ButtonPref("desktopMode", "Style", "choose different style of your desktop"))
-                    .add(new MaterialPrefFragment.TBPref("desktopSearchBar", "Show search bar", "Display a search bar always on top of the desktop", LauncherSettings.getInstance(this).generalSettings.desktopSearchBar))
+                    .add(new MaterialPrefFragment.TBPref("desktopSearchBar", "Show search bar", "Display a search bar always on top of the desktop", generalSettings.desktopSearchBar))
                     // FIXME: 11/25/2016 This will have problem (in allappsmode) as the apps will be cut off when scale down
                     .add(new MaterialPrefFragment.NUMPref("gridsizedesktop","Grid size", "Desktop grid size",
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedesktop","Column",LauncherSettings.getInstance(this).generalSettings.desktopGridX, 4, 10),
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsizedesktop","Row",LauncherSettings.getInstance(this).generalSettings.desktopGridY, 4, 10)
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedesktop","Column", generalSettings.desktopGridX, 4, 10),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsizedesktop","Row", generalSettings.desktopGridY, 4, 10)
                     ))
                     .add(new MaterialPrefFragment.GroupTitle("Dock"))
-                    .add(new MaterialPrefFragment.TBPref("dockShowLabel","Show app label","show the app's name in the dock",LauncherSettings.getInstance(this).generalSettings.dockShowLabel))
+                    .add(new MaterialPrefFragment.ColorPref("dockBackground","Background","Dock background color",generalSettings.dockColor))
+                    .add(new MaterialPrefFragment.TBPref("dockShowLabel","Show app label","show the app's name in the dock", generalSettings.dockShowLabel))
                     .add(new MaterialPrefFragment.NUMPref("gridsizedock","Grid size", "Dock grid size",
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedock","Column",LauncherSettings.getInstance(this).generalSettings.dockGridX, 5, 10)
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedock","Column", generalSettings.dockGridX, 5, 10)
                     ))
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
                     .add(new MaterialPrefFragment.ButtonPref("drawerstyle", "Style", "choose the style of the app drawer"))
-                    .add(new MaterialPrefFragment.TBPref("appdrawersearchbar", "Search Bar", "search bar will only appear in grid drawer", LauncherSettings.getInstance(this).generalSettings.drawerSearchBar))
+                    .add(new MaterialPrefFragment.TBPref("appdrawersearchbar", "Search Bar", "search bar will only appear in grid drawer", generalSettings.drawerSearchBar))
                     .add(new MaterialPrefFragment.NUMPref("gridsize","Grid size", "App drawer grid size",
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsize","Column",LauncherSettings.getInstance(this).generalSettings.drawerGridX, 1, 10),
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertigridsize","Row",LauncherSettings.getInstance(this).generalSettings.drawerGridY, 1, 10)
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsize","Column", generalSettings.drawerGridX, 1, 10),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertigridsize","Row", generalSettings.drawerGridY, 1, 10)
                     ))
-                    .add(new MaterialPrefFragment.TBPref("drawerRememberPage", "Remember last page", "The page will not reset to the first page when reopen app drawer", !LauncherSettings.getInstance(this).generalSettings.drawerRememberPage))
+                    .add(new MaterialPrefFragment.TBPref("drawerRememberPage", "Remember last page", "The page will not reset to the first page when reopen app drawer", !generalSettings.drawerRememberPage))
                     .add(new MaterialPrefFragment.GroupTitle("Apps"))
-                    .add(new MaterialPrefFragment.NUMPref("iconsize", "Icon Size", "Size of all app icon", LauncherSettings.getInstance(this).generalSettings.iconSize, 30, 80))
+                    .add(new MaterialPrefFragment.NUMPref("iconsize", "Icon Size", "Size of all app icon", generalSettings.iconSize, 30, 80))
                     .add(new MaterialPrefFragment.ButtonPref("iconpack", "Icon Pack", "Select installed icon pack"))
                     .add(new MaterialPrefFragment.GroupTitle("Others"))
                     .add(new MaterialPrefFragment.ButtonPref("restart", "Restart", "Restart the launcher"))
                     .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
+            setSettingsFragment(fragment);
             getSupportFragmentManager().beginTransaction().add(R.id.ll, fragment).commit();
         }
 
@@ -65,50 +72,62 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
 
     @Override
     public void onPrefChanged(String id, Object p2) {
+        LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(this).generalSettings;
         switch (id) {
             case "drawerRememberPage":
-                LauncherSettings.getInstance(this).generalSettings.drawerRememberPage = !(boolean) p2;
+                generalSettings.drawerRememberPage = !(boolean) p2;
                 break;
             case "desktopSearchBar":
-                LauncherSettings.getInstance(this).generalSettings.desktopSearchBar = (boolean) p2;
+                generalSettings.desktopSearchBar = (boolean) p2;
                 if (!(boolean) p2)
                     Home.launcher.searchBar.setVisibility(View.GONE);
                 else
                     Home.launcher.searchBar.setVisibility(View.VISIBLE);
                 break;
             case "iconsize":
-                LauncherSettings.getInstance(this).generalSettings.iconSize = (int) p2;
-                requireLauncherRestart = true;
+                generalSettings.iconSize = (int) p2;
+                prepareRestart();
                 break;
             case "horigridsize":
-                LauncherSettings.getInstance(this).generalSettings.drawerGridX = (int) p2;
-                requireLauncherRestart = true;
+                generalSettings.drawerGridX = (int) p2;
+                prepareRestart();
                 break;
             case "vertgridsize":
-                LauncherSettings.getInstance(this).generalSettings.drawerGridY = (int) p2;
-                requireLauncherRestart = true;
+                generalSettings.drawerGridY = (int) p2;
+                prepareRestart();
                 break;
             case "dockShowLabel":
-                LauncherSettings.getInstance(this).generalSettings.dockShowLabel = (boolean)p2;
-                requireLauncherRestart = true;
+                generalSettings.dockShowLabel = (boolean)p2;
+                prepareRestart();
                 break;
             case "appdrawersearchbar":
-                LauncherSettings.getInstance(this).generalSettings.drawerSearchBar = (boolean)p2;
-                requireLauncherRestart = true;
+                generalSettings.drawerSearchBar = (boolean)p2;
+                prepareRestart();
                 break;
             case "horigridsizedesktop":
-                LauncherSettings.getInstance(this).generalSettings.desktopGridX = (int)p2;
-                requireLauncherRestart = true;
+                generalSettings.desktopGridX = (int)p2;
+                prepareRestart();
                 break;
             case "vertgridsizedesktop":
-                LauncherSettings.getInstance(this).generalSettings.desktopGridY = (int)p2;
-                requireLauncherRestart = true;
+                generalSettings.desktopGridY = (int)p2;
+                prepareRestart();
                 break;
             case "horigridsizedock":
-                LauncherSettings.getInstance(this).generalSettings.dockGridX = (int)p2;
-                requireLauncherRestart = true;
+                generalSettings.dockGridX = (int)p2;
+                prepareRestart();
+                break;
+            case "dockBackground":
+                generalSettings.dockColor = (int)p2;
+                if (Home.launcher != null)
+                    Home.launcher.dock.setBackgroundColor((int)p2);
+                else
+                    prepareRestart();
                 break;
         }
+    }
+
+    private void prepareRestart() {
+        requireLauncherRestart = true;
     }
 
     @Override
@@ -130,11 +149,11 @@ public class SettingsActivity extends AppCompatActivity implements MaterialPrefF
                 break;
             case "drawerstyle":
                 AppDrawer.startStylePicker(this);
-                requireLauncherRestart = true;
+                prepareRestart();
                 break;
             case "desktopMode":
                 Desktop.startStylePicker(this);
-                requireLauncherRestart = true;
+                prepareRestart();
                 break;
         }
     }

@@ -2,6 +2,7 @@ package com.benny.openlauncher.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 
 import com.benny.openlauncher.widget.AppDrawer;
 import com.benny.openlauncher.widget.Desktop;
@@ -231,6 +232,7 @@ public class LauncherSettings {
         public boolean drawerRememberPage = true;
 
         //Dock
+        public int dockColor = Color.TRANSPARENT;
         public int dockGridX = 5;
         public boolean dockShowLabel = true;
 

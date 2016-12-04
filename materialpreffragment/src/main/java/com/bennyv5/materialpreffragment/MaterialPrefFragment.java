@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.color.ColorChooserDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,9 +50,9 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
 
     private SharedPreferences sharedPrefs;
 
-    private OnPrefClickedListener listener;
+    public OnPrefClickedListener listener;
 
-    private OnPrefChangedListener listener2;
+    public OnPrefChangedListener listener2;
 
     private final int TAG_ID = 638390376;
 
@@ -59,11 +60,16 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
 
     private boolean useSystemPref = true;
 
+    private BaseSettingsActivity activity;
+
+    public ColorPref currentColorPref;
+
     public MaterialPrefFragment() {
     }
 
     public static MaterialPrefFragment newInstance(Builder b) {
         MaterialPrefFragment fragment = new MaterialPrefFragment();
+        fragment.activity = b.activity;
         fragment.useSystemPref = b.useSystemPref;
         fragment.textColorSec = b.textColorSec;
         fragment.cardColor = b.cardColor;
@@ -296,6 +302,42 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
         }
     }
 
+    public static class ColorPref implements Pref {
+        String id, title, summary;
+        int selected;
+
+        public ColorPref(String id, String title, String summary,int selected) {
+            this.id = id;
+            this.title = title;
+            this.summary = summary;
+            this.selected = selected;
+        }
+
+        @Override
+        public View onCreateView(Context c, final MaterialPrefFragment fragment, SharedPreferences sharedPrefs) {
+            Button b = new Button(c);
+            setStyle(b, fragment);
+
+            b.setTag(fragment.TAG_ID, id);
+            b.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fragment.currentColorPref = ColorPref.this;
+                    new ColorChooserDialog.Builder(fragment.activity,R.string.choose_color)
+                            .titleSub(R.string.choose_color)
+                            .doneButton(R.string.md_done_label)
+                            .cancelButton(R.string.md_cancel_label)
+                            .backButton(R.string.md_back_label)
+                            .preselect(selected)
+                            .dynamicButtonColor(false)
+                            .show();
+                }
+            });
+            b.setText(warpText(summary, title, fragment));
+            return warpCardView(b, fragment);
+        }
+    }
+
     public static class ButtonPref implements Pref {
         String id, title, summary;
 
@@ -359,6 +401,8 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
 
         private OnPrefChangedListener listener2;
 
+        private BaseSettingsActivity activity;
+
         private int accentColor;
 
         private int cardColor;
@@ -369,7 +413,8 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
 
         private boolean useSystemPref;
 
-        public Builder(int textColor, int textColorSec, int cardColor, int accentColor, boolean useSystemPref) {
+        public Builder(BaseSettingsActivity activity,int textColor, int textColorSec, int cardColor, int accentColor, boolean useSystemPref) {
+            this.activity = activity;
             this.textColorSec = textColorSec;
             this.textColor = textColor;
             this.accentColor = accentColor;
