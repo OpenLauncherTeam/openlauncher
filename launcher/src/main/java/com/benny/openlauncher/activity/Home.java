@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
@@ -19,6 +20,7 @@ import android.provider.CallLog;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
@@ -110,12 +112,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, null);
         setContentView(myScreen);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-
-            findViewById(R.id.shortcutLayout).setPadding(0, Tool.getStatusBarHeight(this), 0, Tool.getNavBarHeight(this));
-        }
-
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.addDrawerListener(this);
 
@@ -125,6 +121,26 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
         findViews();
         initViews();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+
+            findViewById(R.id.shortcutLayout).setPadding(0, Tool.getStatusBarHeight(this), 0, Tool.getNavBarHeight(this));
+            searchBar.setPadding(0,Tool.getStatusBarHeight(this),0,0);
+            //dragOptionView.setPadding(0,Tool.getStatusBarHeight(this),0,0);
+
+//            if (Color.alpha(LauncherSettings.getInstance(this).generalSettings.dockColor) == 0){
+                dock.getLayoutParams().height += Tool.getNavBarHeight(this);
+                dock.setPadding(dock.getPaddingRight(),dock.getPaddingTop(),dock.getPaddingLeft(),dock.getPaddingBottom() + Tool.getNavBarHeight(this));
+//            }else{
+//                dock.getLayoutParams().height += Tool.getNavBarHeight(this) + Tool.dp2px(6,this);
+//                dock.setPadding(dock.getPaddingRight(),dock.getPaddingTop() + Tool.dp2px(6,this),dock.getPaddingLeft(),dock.getPaddingBottom() + Tool.getNavBarHeight(this));
+//            }
+            appDrawerOtter.setPadding(0,Tool.getStatusBarHeight(this),0,Tool.getNavBarHeight(this));
+
+            desktopEditOptionView.setPadding(0,0,0,Tool.getNavBarHeight(this));
+        }
+
         registerAppUpdateReceiver();
         registerShortcutReceiver();
 
@@ -278,7 +294,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         desktop.setPageIndicator(desktopIndicator);
         int iconSize = LauncherSettings.getInstance(this).generalSettings.iconSize;
 
-        dock.getLayoutParams().height = Tool.dp2px(22 + iconSize, this);
+        dock.getLayoutParams().height = Tool.dp2px(24 + iconSize, this);
 
         dragOptionView.setAutoHideView(searchBar);
 
@@ -327,7 +343,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                     appDrawerOtter.scrollToStart();
                 desktopIndicator.animate().alpha(1);
                 appDrawer.setVisibility(View.INVISIBLE);
-                dock.animate().alpha(1);
+                dock.animate().alpha(1).setDuration(50);
                 desktop.animate().alpha(1);
                 if (!dragOptionView.dragging)
                     searchBar.animate().alpha(1);
@@ -362,6 +378,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         if (!LauncherSettings.getInstance(this).generalSettings.desktopSearchBar) {
             searchBar.setVisibility(View.GONE);
         }
+        dock.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.dockColor);
     }
 
     public void initMinBar() {
@@ -682,22 +699,22 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     /** Call this to open the app drawer with animation*/
     public void openAppDrawer(View view) {
         int[] pos = new int[2];
-        view.getLocationOnScreen(pos);
+        view.getLocationInWindow(pos);
         cx = pos[0];
         cy = pos[1];
 
         cx += view.getWidth()/2;
-        cy += view.getHeight();
+        cy += view.getHeight()/2;
         if (view instanceof AppItemView){
             AppItemView appItemView = (AppItemView) view;
             if (!appItemView.isNoLabel()){
-                cy -= Tool.dp2px(14,this);
+                cy -= Tool.dp2px(14,this)/2;
             }
             rad = (int) (appItemView.getIconSize()/2);
-            cy -= appItemView.getHeightPadding()/2 + appItemView.getIconSize();
         }
         cx -= ((ViewGroup.MarginLayoutParams)appDrawer.getLayoutParams()).leftMargin;
         cy -= ((ViewGroup.MarginLayoutParams)appDrawer.getLayoutParams()).topMargin;
+        cy -= appDrawerOtter.getPaddingTop();
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
 
         appDrawer.setPivotX(cx);
