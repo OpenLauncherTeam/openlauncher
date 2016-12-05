@@ -80,15 +80,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     public static int touchX = 0, touchY = 0;
     public Desktop desktop;
     public Dock dock;
-    public View searchBar;
+    public View searchBar, appDrawer;
     public GroupPopupView groupPopup;
+    public AppDrawer appDrawerOtter;
     public ArrayList<QuickCenterItem.NoteContent> notes = new ArrayList<>();
     //QuickCenter
     private FastItemAdapter<QuickCenterItem.NoteItem> noteAdapter;
     //normal members, currently not necessary to access from elsewhere.
     private ConstraintLayout baseLayout;
-    private AppDrawer appDrawerOtter;
-    private View appDrawer, appSearchBar;
+    private View appSearchBar;
     private PagerIndicator desktopIndicator, appDrawerIndicator;
     private DragOptionView dragOptionView;
     private ViewGroup desktopEditOptionView;
@@ -379,6 +379,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             searchBar.setVisibility(View.GONE);
         }
         dock.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.dockColor);
+        appDrawerOtter.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.drawerColor);
+        appDrawerOtter.getBackground().setAlpha(0);
+
+        appDrawerOtter.reloadDrawerCardTheme();
     }
 
     public void initMinBar() {

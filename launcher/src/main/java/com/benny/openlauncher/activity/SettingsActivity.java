@@ -2,14 +2,9 @@ package com.benny.openlauncher.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppDrawer;
@@ -51,6 +46,10 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedock","Column", generalSettings.dockGridX, 5, 10)
                     ))
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
+                    .add(new MaterialPrefFragment.ColorPref("drawerBackground","Background","Drawer background color",generalSettings.drawerColor))
+                    .add(new MaterialPrefFragment.TBPref("drawerCard", "Use Card", "Drawer card", generalSettings.drawerUseCard))
+                    .add(new MaterialPrefFragment.ColorPref("drawerCardBackground","Card Background","Drawer card background color",generalSettings.drawerCardColor))
+                    .add(new MaterialPrefFragment.ColorPref("drawerLabelColor","Label Color","Drawer label Color",generalSettings.drawerLabelColor))
                     .add(new MaterialPrefFragment.ButtonPref("drawerstyle", "Style", "choose the style of the app drawer"))
                     .add(new MaterialPrefFragment.TBPref("appdrawersearchbar", "Search Bar", "search bar will only appear in grid drawer", generalSettings.drawerSearchBar))
                     .add(new MaterialPrefFragment.NUMPref("gridsize","Grid size", "App drawer grid size",
@@ -121,6 +120,35 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 if (Home.launcher != null)
                     Home.launcher.dock.setBackgroundColor((int)p2);
                 else
+                    prepareRestart();
+                break;
+            case "drawerBackground":
+                generalSettings.drawerColor = (int)p2;
+                if (Home.launcher != null) {
+                    Home.launcher.appDrawerOtter.setBackgroundColor((int) p2);
+                    Home.launcher.appDrawerOtter.getBackground().setAlpha(0);
+                }else
+                    prepareRestart();
+                break;
+            case "drawerCard":
+                generalSettings.drawerUseCard = (boolean)p2;
+                if (Home.launcher != null) {
+                    Home.launcher.appDrawerOtter.reloadDrawerCardTheme();
+                }else
+                    prepareRestart();
+                break;
+            case "drawerCardBackground":
+                generalSettings.drawerCardColor = (int)p2;
+                if (Home.launcher != null) {
+                    Home.launcher.appDrawerOtter.reloadDrawerCardTheme();
+                }else
+                    prepareRestart();
+                break;
+            case "drawerLabelColor":
+                generalSettings.drawerCardColor = (int)p2;
+                if (Home.launcher != null) {
+                    Home.launcher.appDrawerOtter.reloadDrawerCardTheme();
+                }else
                     prepareRestart();
                 break;
         }

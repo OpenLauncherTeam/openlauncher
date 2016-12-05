@@ -1,7 +1,10 @@
 package com.benny.openlauncher.widget;
 
 import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,15 +28,16 @@ import static com.benny.openlauncher.widget.AppDrawer.DrawerMode.Grid;
  * Created by BennyKok on 11/5/2016.
  */
 
-public class AppDrawer extends RevealFrameLayout implements TextWatcher{
+public class AppDrawer extends RevealFrameLayout implements TextWatcher {
 
+    public EditText searchBar;
     private PagedAppDrawer drawerViewPaged;
     private GridAppDrawer drawerViewGrid;
     private DrawerMode drawerMode;
-    public EditText searchBar;
-    private CallBack openCallBack,closeCallBack;
+    private CallBack openCallBack, closeCallBack;
 
     private Animator appDrawerAnimator;
+    private Long drawerAnimationTime = 200L;
 
     public AppDrawer(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -47,13 +51,34 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
         init();
     }
 
-    public void setCallBack(CallBack openCallBack,CallBack closeCallBack){
+    public AppDrawer(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+
+        init();
+    }
+
+    public static void startStylePicker(final Context context) {
+        final String[] items = new String[DrawerMode.values().length];
+        for (int i = 0; i < DrawerMode.values().length; i++) {
+            items[i] = DrawerMode.values()[i].name();
+        }
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        builder.title("App drawer style")
+                .items(items)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                        LauncherSettings.getInstance(context).generalSettings.drawerMode = DrawerMode.valueOf(items[position]);
+                    }
+                }).show();
+    }
+
+    public void setCallBack(CallBack openCallBack, CallBack closeCallBack) {
         this.openCallBack = openCallBack;
         this.closeCallBack = closeCallBack;
     }
 
-    private Long drawerAnimationTime = 200L;
-    public void open(int cx,int cy,int startRadius,int finalRadius){
+    public void open(int cx, int cy, int startRadius, int finalRadius) {
         appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(getChildAt(0), cx, cy, startRadius, finalRadius);
         appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         appDrawerAnimator.setDuration(drawerAnimationTime);
@@ -63,6 +88,13 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
             @Override
             public void onAnimationStart(Animator p1) {
                 getChildAt(0).setVisibility(View.VISIBLE);
+
+                ObjectAnimator animator = ObjectAnimator
+                        .ofPropertyValuesHolder(getBackground(),
+                                PropertyValuesHolder.ofInt("alpha", 0, 255));
+                animator.setDuration(200);
+                animator.start();
+
                 switch (drawerMode) {
                     case Paged:
                         for (int i = 0; i < drawerViewPaged.pages.size(); i++) {
@@ -70,11 +102,11 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
                         }
                         View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
                         mGrid.setAlpha(0);
-                        mGrid.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime-50).setInterpolator(new AccelerateDecelerateInterpolator());
+                        mGrid.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime - 50).setInterpolator(new AccelerateDecelerateInterpolator());
                         break;
                     case Grid:
                         drawerViewGrid.recyclerView.setAlpha(0);
-                        drawerViewGrid.recyclerView.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime-50).setInterpolator(new AccelerateDecelerateInterpolator());
+                        drawerViewGrid.recyclerView.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime - 50).setInterpolator(new AccelerateDecelerateInterpolator());
                         break;
                 }
             }
@@ -96,7 +128,7 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
         appDrawerAnimator.start();
     }
 
-    public void close(int cx,int cy,int startRadius,int finalRadius){
+    public void close(int cx, int cy, int startRadius, int finalRadius) {
         if (appDrawerAnimator == null || appDrawerAnimator.isRunning())
             return;
 
@@ -107,6 +139,12 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
             @Override
             public void onAnimationStart(Animator p1) {
                 closeCallBack.onStart();
+
+                ObjectAnimator animator = ObjectAnimator
+                        .ofPropertyValuesHolder(getBackground(),
+                                PropertyValuesHolder.ofInt("alpha", 255, 0));
+                animator.setDuration(200);
+                animator.start();
 
                 switch (drawerMode) {
                     case Paged:
@@ -134,12 +172,6 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
         });
 
         appDrawerAnimator.start();
-    }
-
-    public AppDrawer(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-
-        init();
     }
 
     public void init() {
@@ -171,6 +203,24 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
         }
     }
 
+    public void reloadDrawerCardTheme(){
+        switch (drawerMode) {
+            case Paged:
+                drawerViewPaged.resetAdapter();
+                break;
+            case Grid:
+                if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerUseCard){
+                    drawerViewGrid.setCardBackgroundColor(Color.TRANSPARENT);
+                    drawerViewGrid.setCardElevation(0);
+                }else {
+                    drawerViewGrid.setCardBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
+                    drawerViewGrid.setCardElevation(Tool.dp2px(4,getContext()));
+                }
+                drawerViewGrid.gridDrawerAdapter.notifyDataSetChanged();
+                break;
+        }
+    }
+
     public void scrollToStart() {
         switch (drawerMode) {
             case Paged:
@@ -190,23 +240,6 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
             case Grid:
                 break;
         }
-    }
-
-
-    public static void startStylePicker(final Context context) {
-        final String[] items = new String[DrawerMode.values().length];
-        for (int i = 0; i < DrawerMode.values().length; i++) {
-            items[i] = DrawerMode.values()[i].name();
-        }
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title("App drawer style")
-                .items(items)
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).generalSettings.drawerMode = DrawerMode.valueOf(items[position]);
-                    }
-                }).show();
     }
 
     @Override
@@ -234,8 +267,9 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher{
         Paged, Grid
     }
 
-    public interface CallBack{
+    public interface CallBack {
         void onStart();
+
         void onEnd();
     }
 }

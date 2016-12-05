@@ -33,8 +33,8 @@ import java.util.List;
 
 public class GridAppDrawer extends CardView{
 
-    private static int itemWidth;
-    private static int itemHeightPadding;
+    private int itemWidth;
+    private int itemHeightPadding;
 
     public RecyclerView recyclerView;
     public GridAppDrawerAdapter gridDrawerAdapter;
@@ -84,12 +84,14 @@ public class GridAppDrawer extends CardView{
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        itemWidth = (getWidth()- recyclerView.getPaddingRight()- recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
+        if (itemWidth == 0)
+            itemWidth = (getWidth()- recyclerView.getPaddingRight()- recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
         super.onLayout(changed, left, top, right, bottom);
     }
 
     private void init(){
         itemHeightPadding = Tool.dp2px(12,getContext());
+        //itemWidth = Tool.dp2px(22 + LauncherSettings.getInstance(getContext()).generalSettings.iconSize,getContext());
 
         RelativeLayout rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_griddrawerinner,this,false);
         DragScrollBar bar = (DragScrollBar) rl.findViewById(R.id.dragScrollBar);
@@ -150,7 +152,7 @@ public class GridAppDrawer extends CardView{
         }
     }
 
-    public static class AppItem extends AbstractItem<AppItem,AppItem.ViewHolder> {
+    public class AppItem extends AbstractItem<AppItem,AppItem.ViewHolder> {
         public AppManager.App app;
 
         public AppItem(AppManager.App app) {
@@ -167,9 +169,9 @@ public class GridAppDrawer extends CardView{
             return R.layout.item_app;
         }
 
-        private static final ViewHolderFactory<? extends AppItem.ViewHolder> FACTORY = new AppItem.ItemFactory();
+        private final ViewHolderFactory<? extends AppItem.ViewHolder> FACTORY = new AppItem.ItemFactory();
 
-        static class ItemFactory implements ViewHolderFactory<AppItem.ViewHolder> {
+        class ItemFactory implements ViewHolderFactory<AppItem.ViewHolder> {
             public AppItem.ViewHolder create(View v) {
                 return new AppItem.ViewHolder(v);
             }
@@ -182,7 +184,12 @@ public class GridAppDrawer extends CardView{
 
         @Override
         public void bindView(AppItem.ViewHolder holder, List payloads) {
-            new AppItemView.Builder(holder.appItemView).setAppItem(app).withOnClickLaunchApp(app).withOnTouchGetPosition().withOnLongPressDrag(app, DragAction.Action.ACTION_APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
+            new AppItemView.Builder(holder.appItemView)
+                    .setAppItem(app)
+                    .withOnClickLaunchApp(app)
+                    .withOnTouchGetPosition()
+                    .setTextColor(LauncherSettings.getInstance(holder.appItemView.getContext()).generalSettings.drawerLabelColor)
+                    .withOnLongPressDrag(app, DragAction.Action.ACTION_APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                 @Override
                 public boolean readyForDrag(View view) {
                     return LauncherSettings.getInstance(view.getContext()).generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps;
@@ -197,7 +204,7 @@ public class GridAppDrawer extends CardView{
             super.bindView(holder, payloads);
         }
 
-        public static class ViewHolder extends RecyclerView.ViewHolder{
+        public class ViewHolder extends RecyclerView.ViewHolder{
             AppItemView appItemView;
 
             public  ViewHolder(View itemView) {

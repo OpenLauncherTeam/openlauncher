@@ -2,6 +2,8 @@ package com.benny.openlauncher.widget;
 
 import android.content.Context;
 import android.content.res.*;
+import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import java.util.List;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
+import com.benny.openlauncher.util.Tool;
 import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
 import com.bennyv5.smoothviewpager.SmoothViewPager;
 
@@ -113,6 +116,10 @@ public class PagedAppDrawer extends SmoothViewPager {
             appDrawerIndicator.setViewPager(PagedAppDrawer.this);
     }
 
+    public void resetAdapter(){
+        setAdapter(new Adapter());
+    }
+
     public class Adapter extends SmoothPagerAdapter {
 
         private View getItemView(int page, int x, int y) {
@@ -127,6 +134,7 @@ public class PagedAppDrawer extends SmoothViewPager {
             return new AppItemView.Builder(getContext())
                     .setAppItem(app)
                     .withOnClickLaunchApp(app)
+                    .setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor)
                     .withOnTouchGetPosition()
                     .withOnLongPressDrag(app, DragAction.Action.ACTION_APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                         @Override
@@ -145,6 +153,13 @@ public class PagedAppDrawer extends SmoothViewPager {
         public Adapter() {
             for (int i = 0; i < getCount(); i++) {
                 ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_appdrawer_page, null);
+                if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerUseCard){
+                    ((CardView)layout.getChildAt(0)).setCardBackgroundColor(Color.TRANSPARENT);
+                    ((CardView)layout.getChildAt(0)).setCardElevation(0);
+                }else {
+                    ((CardView)layout.getChildAt(0)).setCardBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
+                    ((CardView)layout.getChildAt(0)).setCardElevation(Tool.dp2px(4,getContext()));
+                }
                 CellContainer cc = (CellContainer) layout.findViewById(R.id.cc);
                 cc.setGridSize(hCellCount, vCellCount);
 
