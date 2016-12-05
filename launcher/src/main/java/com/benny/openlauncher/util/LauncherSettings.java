@@ -16,39 +16,35 @@ import java.util.List;
 
 public class LauncherSettings {
 
-    private static LauncherSettings ourInstance;
-
-    public static LauncherSettings getInstance(Context c) {
-        return ourInstance == null ? ourInstance = new LauncherSettings(c) : ourInstance;
-    }
-
-    public List<List<Desktop.Item>> desktopData = new ArrayList<>();
-    public List<Desktop.Item> dockData = new ArrayList<>();
-
-    public GeneralSettings generalSettings;
-    public SharedPreferences pref;
-    public Context context;
-
     private static final String DesktopData2FileName = "desktopData2.json";
     private static final String DesktopDataFileName = "desktopData.json";
     private static final String DockData2FileName = "dockData2.json";
     private static final String DockDataFileName = "dockData.json";
     private static final String GeneralSettingsFileName = "generalSettings.json";
-
+    private static LauncherSettings ourInstance;
+    public List<List<Desktop.Item>> desktopData = new ArrayList<>();
+    public List<Desktop.Item> dockData = new ArrayList<>();
+    public GeneralSettings generalSettings;
+    public SharedPreferences pref;
+    public Context context;
     private ArrayList<String> iconCacheIDs = new ArrayList<>();
 
     private LauncherSettings(Context c) {
         this.context = c;
-        pref = c.getSharedPreferences("LauncherSettings",Context.MODE_PRIVATE);
+        pref = c.getSharedPreferences("LauncherSettings", Context.MODE_PRIVATE);
         iconCacheIDs.clear();
 
         readSettings();
     }
 
-    private void readDockData(Gson gson, Desktop.DesktopMode mode){
+    public static LauncherSettings getInstance(Context c) {
+        return ourInstance == null ? ourInstance = new LauncherSettings(c) : ourInstance;
+    }
+
+    private void readDockData(Gson gson, Desktop.DesktopMode mode) {
         dockData.clear();
         String dataName = null;
-        switch (mode){
+        switch (mode) {
             case Normal:
                 dataName = DockDataFileName;
                 break;
@@ -60,7 +56,7 @@ public class LauncherSettings {
             JsonReader reader = new JsonReader(new InputStreamReader(context.openFileInput(dataName)));
             reader.beginArray();
             while (reader.hasNext()) {
-                Desktop.SimpleItem item = gson.fromJson(reader,Desktop.SimpleItem.class);
+                Desktop.SimpleItem item = gson.fromJson(reader, Desktop.SimpleItem.class);
                 Desktop.Item item1 = new Desktop.Item(item);
                 dockData.add(item1);
             }
@@ -71,10 +67,10 @@ public class LauncherSettings {
         }
     }
 
-    private void readDesktopData(Gson gson, Desktop.DesktopMode mode){
+    private void readDesktopData(Gson gson, Desktop.DesktopMode mode) {
         desktopData.clear();
         String dataName = null;
-        switch (mode){
+        switch (mode) {
             case Normal:
                 dataName = DesktopDataFileName;
                 break;
@@ -89,7 +85,7 @@ public class LauncherSettings {
                 reader.beginArray();
                 ArrayList<Desktop.Item> items = new ArrayList<>();
                 while (reader.hasNext()) {
-                    Desktop.SimpleItem item = gson.fromJson(reader,Desktop.SimpleItem.class);
+                    Desktop.SimpleItem item = gson.fromJson(reader, Desktop.SimpleItem.class);
                     Desktop.Item item1 = new Desktop.Item(item);
                     items.add(item1);
                 }
@@ -103,34 +99,33 @@ public class LauncherSettings {
         }
     }
 
-    private void checkIconCacheIDs(Desktop.Item item){
-        if (item.type == Desktop.Item.Type.SHORTCUT){
+    private void checkIconCacheIDs(Desktop.Item item) {
+        if (item.type == Desktop.Item.Type.SHORTCUT) {
             iconCacheIDs.add(item.actions[0].getStringExtra("shortCutIconID"));
-        }else
-        if (item.type == Desktop.Item.Type.GROUP){
+        } else if (item.type == Desktop.Item.Type.GROUP) {
             for (int i = 0; i < item.actions.length; i++) {
                 String ID;
-                if ((ID = item.actions[i].getStringExtra("shortCutIconID")) != null){
+                if ((ID = item.actions[i].getStringExtra("shortCutIconID")) != null) {
                     iconCacheIDs.add(ID);
                 }
             }
         }
     }
 
-    private void readSettings(){
+    private void readSettings() {
         Gson gson = new Gson();
 
         String raw = Tool.getStringFromFile(GeneralSettingsFileName, context);
         if (raw == null)
             generalSettings = new GeneralSettings();
         else
-            generalSettings = gson.fromJson(raw,GeneralSettings.class);
+            generalSettings = gson.fromJson(raw, GeneralSettings.class);
 
-        readDockData(gson,generalSettings.desktopMode);
-        readDesktopData(gson,generalSettings.desktopMode);
+        readDockData(gson, generalSettings.desktopMode);
+        readDesktopData(gson, generalSettings.desktopMode);
     }
 
-    public void switchDesktopMode(Desktop.DesktopMode mode){
+    public void switchDesktopMode(Desktop.DesktopMode mode) {
         writeSettings();
 
         iconCacheIDs.clear();
@@ -145,13 +140,13 @@ public class LauncherSettings {
 
         Gson gson = new Gson();
         generalSettings.desktopMode = mode;
-        readDesktopData(gson,mode);
-        readDockData(gson,mode);
+        readDesktopData(gson, mode);
+        readDockData(gson, mode);
 
         Tool.checkForUnusedIconAndDelete(context, iconCacheIDs);
 
         //We init all the apps to the desktop for the first time.
-        if (mode == Desktop.DesktopMode.ShowAllApps && desktopData.size() == 0){
+        if (mode == Desktop.DesktopMode.ShowAllApps && desktopData.size() == 0) {
             int pageCount = 0;
             List<AppManager.App> apps = AppManager.getInstance(context).getApps();
             int appsSize = apps.size();
@@ -177,7 +172,7 @@ public class LauncherSettings {
         }
     }
 
-    public Gson writeSettings(){
+    public Gson writeSettings() {
         generalSettings.firstLauncher = false;
 
         Gson gson = new Gson();
@@ -185,27 +180,27 @@ public class LauncherSettings {
         List<List<Desktop.SimpleItem>> simpleDesktopData = new ArrayList<>();
         List<Desktop.SimpleItem> simpleDockData = new ArrayList<>();
 
-        for (Desktop.Item item:dockData) {
+        for (Desktop.Item item : dockData) {
             simpleDockData.add(new Desktop.SimpleItem(item));
         }
-        for (List<Desktop.Item> pages:desktopData) {
+        for (List<Desktop.Item> pages : desktopData) {
             final ArrayList<Desktop.SimpleItem> page = new ArrayList<>();
             simpleDesktopData.add(page);
-            for (Desktop.Item item:pages) {
+            for (Desktop.Item item : pages) {
                 page.add(new Desktop.SimpleItem(item));
             }
         }
-        switch (generalSettings.desktopMode){
+        switch (generalSettings.desktopMode) {
             case Normal:
-                Tool.writeToFile(DesktopDataFileName,gson.toJson(simpleDesktopData), context);
-                Tool.writeToFile(DockDataFileName,gson.toJson(simpleDockData), context);
+                Tool.writeToFile(DesktopDataFileName, gson.toJson(simpleDesktopData), context);
+                Tool.writeToFile(DockDataFileName, gson.toJson(simpleDockData), context);
                 break;
             case ShowAllApps:
-                Tool.writeToFile(DesktopData2FileName,gson.toJson(simpleDesktopData), context);
-                Tool.writeToFile(DockData2FileName,gson.toJson(simpleDockData), context);
+                Tool.writeToFile(DesktopData2FileName, gson.toJson(simpleDesktopData), context);
+                Tool.writeToFile(DockData2FileName, gson.toJson(simpleDockData), context);
                 break;
         }
-        Tool.writeToFile(GeneralSettingsFileName,gson.toJson(generalSettings), context);
+        Tool.writeToFile(GeneralSettingsFileName, gson.toJson(generalSettings), context);
 
         return gson;
     }
@@ -223,6 +218,10 @@ public class LauncherSettings {
         public boolean desktopSearchBar = true;
 
         //Drawer
+        public int drawerColor = Color.TRANSPARENT;
+        public boolean drawerUseCard = true;
+        public int drawerCardColor = Color.WHITE;
+        public int drawerLabelColor = Color.DKGRAY;
         public AppDrawer.DrawerMode drawerMode = AppDrawer.DrawerMode.Paged;
         public int drawerGridX = 4;
         public int drawerGridY = 5;
