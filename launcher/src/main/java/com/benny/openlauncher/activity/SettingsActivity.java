@@ -145,7 +145,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                     prepareRestart();
                 break;
             case "drawerLabelColor":
-                generalSettings.drawerCardColor = (int)p2;
+                generalSettings.drawerLabelColor = (int)p2;
                 if (Home.launcher != null) {
                     Home.launcher.appDrawerOtter.reloadDrawerCardTheme();
                 }else
@@ -160,7 +160,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
 
     @Override
     protected void onDestroy() {
-        if (requireLauncherRestart) Home.launcher.recreate();
+        if (requireLauncherRestart && Home.launcher != null) Home.launcher.recreate();
         super.onDestroy();
     }
 

@@ -714,7 +714,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             if (!appItemView.isNoLabel()){
                 cy -= Tool.dp2px(14,this)/2;
             }
-            rad = (int) (appItemView.getIconSize()/2);
+            rad = (int) (appItemView.getIconSize()/2 - Tool.dp2px(4, view.getContext()));
         }
         cx -= ((ViewGroup.MarginLayoutParams)appDrawer.getLayoutParams()).leftMargin;
         cy -= ((ViewGroup.MarginLayoutParams)appDrawer.getLayoutParams()).topMargin;
