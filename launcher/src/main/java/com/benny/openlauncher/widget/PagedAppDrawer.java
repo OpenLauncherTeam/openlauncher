@@ -117,6 +117,7 @@ public class PagedAppDrawer extends SmoothViewPager {
     }
 
     public void resetAdapter(){
+        setAdapter(null);
         setAdapter(new Adapter());
     }
 
@@ -151,6 +152,7 @@ public class PagedAppDrawer extends SmoothViewPager {
         }
 
         public Adapter() {
+            pages.clear();
             for (int i = 0; i < getCount(); i++) {
                 ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_appdrawer_page, null);
                 if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerUseCard){
@@ -173,7 +175,6 @@ public class PagedAppDrawer extends SmoothViewPager {
                         }
                     }
                 }
-
                 pages.add(layout);
             }
         }

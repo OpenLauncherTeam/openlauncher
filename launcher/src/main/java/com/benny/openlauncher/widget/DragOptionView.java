@@ -150,6 +150,7 @@ public class DragOptionView extends CardView {
                             case ACTION_APP:
                             case ACTION_WIDGET:
                             case ACTION_SHORTCUT:
+                            case ACTION_APP_DRAWER:
                                 return true;
                         }
                     case DragEvent.ACTION_DRAG_ENTERED:
