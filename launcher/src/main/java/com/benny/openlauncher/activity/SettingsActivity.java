@@ -1,10 +1,18 @@
 package com.benny.openlauncher.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppDrawer;
@@ -54,7 +62,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                     .add(new MaterialPrefFragment.TBPref("appdrawersearchbar", "Search Bar", "search bar will only appear in grid drawer", generalSettings.drawerSearchBar))
                     .add(new MaterialPrefFragment.NUMPref("gridsize","Grid size", "App drawer grid size",
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsize","Column", generalSettings.drawerGridX, 1, 10),
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertigridsize","Row", generalSettings.drawerGridY, 1, 10)
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsize","Row", generalSettings.drawerGridY, 1, 10)
                     ))
                     .add(new MaterialPrefFragment.TBPref("drawerRememberPage", "Remember last page", "The page will not reset to the first page when reopen app drawer", !generalSettings.drawerRememberPage))
                     .add(new MaterialPrefFragment.GroupTitle("Apps"))
@@ -67,6 +75,45 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             getSupportFragmentManager().beginTransaction().add(R.id.ll, fragment).commit();
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_options,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.launcherInfo:
+                new MaterialDialog.Builder(this).title("About")
+                        .content(R.string.launcherInfo)
+                        .positiveText("Ok")
+                        .negativeText("Rate")
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                String url = "https://play.google.com/store/apps/details?id=com.benny.openlauncher";
+                                Intent i = new Intent(Intent.ACTION_VIEW);
+                                i.setData(Uri.parse(url));
+                                startActivity(i);
+                            }
+                        })
+                        .neutralText("GitHub")
+                        .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                String url = "https://github.com/BennyKok/OpenLauncher";
+                                Intent i = new Intent(Intent.ACTION_VIEW);
+                                i.setData(Uri.parse(url));
+                                startActivity(i);
+                            }
+                        })
+                        .show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -168,7 +215,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
     public void onPrefClicked(String id) {
         switch (id) {
             case "restart":
-                Home.launcher.recreate();
+                if (Home.launcher != null)
+                    Home.launcher.recreate();
                 requireLauncherRestart = false;
                 finish();
                 break;

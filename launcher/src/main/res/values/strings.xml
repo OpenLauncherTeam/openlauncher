@@ -17,5 +17,19 @@
     <string name="ok">ok</string>
     <string name="set_as_home">Home</string>
     <string name="search_apps">Search apps...</string>
+    <string name="launcherInfo"><![CDATA[
+                                    Open source project<br>
+                                    Copyright <a href="http://bennykok.weebly.com/projects.html">BennyKok</a> @2016-2017<br><br>
+
+                                    <a href="https://github.com/BennyKok/OpenLauncher/wiki/Open-Source-libraries">Open Source libraries</a><br><br>
+
+                                    Credit:<br>
+                                    Chris DeBrodie
+                                ]]></string>
+    <string name="wallpaper">Wallpaper</string>
+    <string name="wallpaper_set">Set Wallpaper</string>
+    <string name="wallpaper_blur">Blur Wallpaper</string>
+    <string name="wallpaper_pick">Pick Wallpaper</string>
+    <string name="wallpaper_unable_to_blur">Unable to blur</string>
 
 </resources>

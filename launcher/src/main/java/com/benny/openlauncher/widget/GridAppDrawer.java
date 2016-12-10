@@ -31,7 +31,7 @@ import java.util.List;
  * Created by BennyKok on 11/6/2016.
  */
 
-public class GridAppDrawer extends CardView{
+public class GridAppDrawer extends CardView {
 
     private int itemWidth;
     private int itemHeightPadding;
@@ -41,20 +41,21 @@ public class GridAppDrawer extends CardView{
 
     private List<AppManager.App> apps;
     private GridLayoutManager layoutManager;
+    private RelativeLayout rl;
 
     public GridAppDrawer(Context context) {
         super(context);
-        init();
+        //init();
     }
 
     public GridAppDrawer(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        //init();
     }
 
     public GridAppDrawer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        //init();
     }
 
     @Override
@@ -72,7 +73,7 @@ public class GridAppDrawer extends CardView{
         super.onConfigurationChanged(newConfig);
     }
 
-    private void setPortraitValue(){
+    private void setPortraitValue() {
         layoutManager.setSpanCount(LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX);
         gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
@@ -84,25 +85,28 @@ public class GridAppDrawer extends CardView{
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        if (itemWidth == 0)
-            itemWidth = (getWidth()- recyclerView.getPaddingRight()- recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
+        if (itemWidth == 0) {
+            rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_griddrawerinner, this, false);
+            recyclerView = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
+            layoutManager = new GridLayoutManager(getContext(), LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX);
+
+            itemWidth = (getWidth() - recyclerView.getPaddingRight() - recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
+            init();
+        }
         super.onLayout(changed, left, top, right, bottom);
     }
 
-    private void init(){
-        itemHeightPadding = Tool.dp2px(12,getContext());
-        //itemWidth = Tool.dp2px(22 + LauncherSettings.getInstance(getContext()).generalSettings.iconSize,getContext());
+    private void init() {
+        itemHeightPadding = Tool.dp2px(15, getContext());
 
-        RelativeLayout rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_griddrawerinner,this,false);
         DragScrollBar bar = (DragScrollBar) rl.findViewById(R.id.dragScrollBar);
-        bar.setIndicator(new AlphabetIndicator(getContext()),true);
-        recyclerView = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
+        bar.setIndicator(new AlphabetIndicator(getContext()), true);
+
 
         boolean mPortrait = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
         gridDrawerAdapter = new GridAppDrawerAdapter();
         recyclerView.setAdapter(gridDrawerAdapter);
 
-        layoutManager = new GridLayoutManager(getContext(), LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX);
         if (mPortrait) {
             setPortraitValue();
         } else {
@@ -110,7 +114,7 @@ public class GridAppDrawer extends CardView{
         }
         recyclerView.setLayoutManager(layoutManager);
 
-        if (AppManager.getInstance(getContext()).getApps().size() != 0){
+        if (AppManager.getInstance(getContext()).getApps().size() != 0) {
             GridAppDrawer.this.apps = AppManager.getInstance(getContext()).getApps();
             ArrayList<AppItem> items = new ArrayList<>();
             for (int i = 0; i < apps.size(); i++) {
@@ -133,9 +137,9 @@ public class GridAppDrawer extends CardView{
         addView(rl);
     }
 
-    public class GridAppDrawerAdapter extends FastItemAdapter<AppItem> implements INameableAdapter{
+    public class GridAppDrawerAdapter extends FastItemAdapter<AppItem> implements INameableAdapter {
 
-        public GridAppDrawerAdapter(){
+        public GridAppDrawerAdapter() {
             withFilterPredicate(new IItemAdapter.Predicate<AppItem>() {
                 @Override
                 public boolean filter(AppItem item, CharSequence constraint) {
@@ -147,12 +151,12 @@ public class GridAppDrawer extends CardView{
         @Override
         public Character getCharacterForElement(int element) {
             if (apps != null)
-            return apps.get(element).appName.charAt(0);
+                return apps.get(element).appName.charAt(0);
             else return '#';
         }
     }
 
-    public class AppItem extends AbstractItem<AppItem,AppItem.ViewHolder> {
+    public class AppItem extends AbstractItem<AppItem, AppItem.ViewHolder> {
         public AppManager.App app;
 
         public AppItem(AppManager.App app) {
@@ -190,24 +194,24 @@ public class GridAppDrawer extends CardView{
                     .withOnTouchGetPosition()
                     .setTextColor(LauncherSettings.getInstance(holder.appItemView.getContext()).generalSettings.drawerLabelColor)
                     .withOnLongPressDrag(app, DragAction.Action.ACTION_APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
-                @Override
-                public boolean readyForDrag(View view) {
-                    return LauncherSettings.getInstance(view.getContext()).generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps;
-                }
+                        @Override
+                        public boolean readyForDrag(View view) {
+                            return LauncherSettings.getInstance(view.getContext()).generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps;
+                        }
 
-                @Override
-                public void afterDrag(View view) {
-                    Home.launcher.closeAppDrawer();
+                        @Override
+                        public void afterDrag(View view) {
+                            Home.launcher.closeAppDrawer();
 
-                }
-            });
+                        }
+                    });
             super.bindView(holder, payloads);
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder{
+        public class ViewHolder extends RecyclerView.ViewHolder {
             AppItemView appItemView;
 
-            public  ViewHolder(View itemView) {
+            public ViewHolder(View itemView) {
                 super(itemView);
                 appItemView = (AppItemView) itemView;
                 appItemView.setTargetedWidth(itemWidth);

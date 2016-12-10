@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,7 +21,6 @@ import android.provider.CallLog;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.graphics.ColorUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
@@ -33,9 +33,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.benny.launcheranim.LauncherLoadingIcon;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppUpdateReceiver;
@@ -107,10 +109,48 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
         launcher = this;
         AppManager.getInstance(this).clearListener();
-        LauncherSettings.getInstance(this);
 
         myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, null);
         setContentView(myScreen);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+
+        findViews();
+
+        searchBar.setVisibility(View.INVISIBLE);
+        final LauncherLoadingIcon loadingIcon = (LauncherLoadingIcon) findViewById(R.id.loadingIcon);
+        final FrameLayout loadingSplash = (FrameLayout) findViewById(R.id.loadingSplash);
+        if (LauncherSettings.getInstance(Home.this).init){
+            myScreen.removeView(loadingSplash);
+            init();
+        }else {
+            loadingIcon.setLoading(true);
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    //We read all the settings from the file through Gson, it is slow on low end devices.
+                    LauncherSettings.getInstance(Home.this).readSettings();
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    loadingIcon.setLoading(false);
+                    loadingSplash.animate().alpha(0).withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            myScreen.removeView(loadingSplash);
+                        }
+                    });
+                    init();
+                }
+            }.execute();
+        }
+    }
+
+    private void init() {
+        searchBar.setVisibility(View.VISIBLE);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.addDrawerListener(this);
@@ -119,12 +159,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         appWidgetManager = AppWidgetManager.getInstance(this);
         appWidgetHost.startListening();
 
-        findViews();
         initViews();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-
             findViewById(R.id.shortcutLayout).setPadding(0, Tool.getStatusBarHeight(this), 0, Tool.getNavBarHeight(this));
             searchBar.setPadding(0,Tool.getStatusBarHeight(this),0,0);
             //dragOptionView.setPadding(0,Tool.getStatusBarHeight(this),0,0);
@@ -170,15 +207,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     //region INIT
     /** This should be only called to find the view at Activity start up*/
     private void findViews() {
-        appSearchBar = findViewById(R.id.appSearchBar);
         searchBarClock = (TextView) findViewById(R.id.searchbarclock);
         quickCenter = (RecyclerView) findViewById(R.id.quickCenter);
         baseLayout = (ConstraintLayout) findViewById(R.id.baseLayout);
         appDrawerOtter = (AppDrawer) findViewById(R.id.appDrawerOtter);
-        appDrawer = appDrawerOtter.getChildAt(0);
         desktop = (Desktop) findViewById(R.id.desktop);
         dock = (Dock) findViewById(R.id.desktopDock);
-        appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
         desktopIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
         searchBar = findViewById(R.id.searchBar);
         desktopEditOptionView = (ViewGroup) findViewById(R.id.desktopeditoptionpanel);
@@ -212,9 +246,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             }
         }, 60000);
 
+        appDrawerOtter.init();
+        appSearchBar = findViewById(R.id.appSearchBar);
+        appDrawer = appDrawerOtter.getChildAt(0);
+        appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
+
         appDrawerOtter.setHome(this);
         dragOptionView.setHome(this);
 
+        desktop.init(this);
         desktop.listener = new Desktop.OnDesktopEditListener() {
             @Override
             public void onStart() {
@@ -294,7 +334,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         desktop.setPageIndicator(desktopIndicator);
         int iconSize = LauncherSettings.getInstance(this).generalSettings.iconSize;
 
-        dock.getLayoutParams().height = Tool.dp2px(24 + iconSize, this);
+        dock.init();
+        dock.getLayoutParams().height = Tool.dp2px(40 + iconSize, this);
 
         dragOptionView.setAutoHideView(searchBar);
 
@@ -674,6 +715,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     @Override
     public void onBackPressed() {
         drawerLayout.closeDrawers();
+        if (desktop != null)
         if (!desktop.inEditMode) {
             desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
             if (appDrawer.getVisibility() == View.VISIBLE)
@@ -687,8 +729,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     protected void onResume() {
         if (appWidgetHost != null)
             appWidgetHost.startListening();
+        if (desktop != null)
         if (!desktop.inEditMode) {
+            if (LauncherSettings.getInstance(Home.this).generalSettings != null)
             desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
+        if (appDrawer != null)
             if (appDrawer.getVisibility() == View.VISIBLE)
                 closeAppDrawer();
         } else {

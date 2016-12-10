@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/launcher" />
+            <option value="$PROJECT_DIR$/launcheranim" />
             <option value="$PROJECT_DIR$/materialpreffragment" />
             <option value="$PROJECT_DIR$/smoothviewpager" />
           </set>

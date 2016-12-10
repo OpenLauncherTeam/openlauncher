@@ -102,37 +102,16 @@ public class GroupPopupView extends FrameLayout {
                 if (act.getStringExtra("shortCutIconID") != null) {
                     b.setShortcutItem(act);
                 } else {
-                    b.setAppItem(AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName()));
+                    AppManager.App app = AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
+                    if (app != null)
+                    b.setAppItem(app);
                 }
                 final AppItemView view = b.getView();
 
                 view.setOnLongClickListener(new OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view2) {
-                        callBack.removeItemFromSettings(item);
-                        item.removeActions(act);
-                        if (item.actions.length == 1){
-                            item.type = Desktop.Item.Type.APP;
-                            AppItemView.Builder builder = new AppItemView.Builder((AppItemView) itemView);
-                            final AppManager.App app = AppManager.getInstance(view2.getContext()).findApp(item.actions[0].getComponent().getPackageName(), item.actions[0].getComponent().getClassName());
-                            if (app != null) {
-                                builder.setAppItem(app).withOnClickLaunchApp(app).withOnLongPressDrag(item, DragAction.Action.ACTION_APP, new AppItemView.Builder.LongPressCallBack() {
-                                    @Override
-                                    public boolean readyForDrag(View view) {
-                                        return true;
-                                    }
-
-                                    @Override
-                                    public void afterDrag(View view) {
-                                        callBack.setLastItem(item, view);
-                                    }
-                                });
-                            }
-                            Home.launcher.desktop.requestLayout();
-                        }else {
-                            ((AppItemView) itemView).setIcon(ItemViewFactory.getGroupIconDrawable(c, item), false);
-                        }
-                        callBack.addItemToSettings(item);
+                        removeItem(callBack, item, act, (AppItemView) itemView, c);
 
                         itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                         Intent i = new Intent();
@@ -152,6 +131,9 @@ public class GroupPopupView extends FrameLayout {
                 });
                 if (!view.isShortcut) {
                     final AppManager.App app = AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
+                    if (app == null){
+                        removeItem(callBack, item, act, (AppItemView) itemView, c);
+                    }else {
                     view.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -164,7 +146,7 @@ public class GroupPopupView extends FrameLayout {
                                 }
                             });
                         }
-                    });
+                    });}
                 } else {
                     view.setOnClickListener(new OnClickListener() {
                         @Override
@@ -252,6 +234,33 @@ public class GroupPopupView extends FrameLayout {
 
         addView(popupParent);
         return true;
+    }
+
+    private void removeItem(final DesktopCallBack callBack, final Desktop.Item item, Intent act, AppItemView itemView, Context c) {
+        callBack.removeItemFromSettings(item);
+        item.removeActions(act);
+        if (item.actions.length == 1){
+            item.type = Desktop.Item.Type.APP;
+            AppItemView.Builder builder = new AppItemView.Builder(itemView);
+            final AppManager.App app = AppManager.getInstance(itemView.getContext()).findApp(item.actions[0].getComponent().getPackageName(), item.actions[0].getComponent().getClassName());
+            if (app != null) {
+                builder.setAppItem(app).withOnClickLaunchApp(app).withOnLongPressDrag(item, DragAction.Action.ACTION_APP, new AppItemView.Builder.LongPressCallBack() {
+                    @Override
+                    public boolean readyForDrag(View view) {
+                        return true;
+                    }
+
+                    @Override
+                    public void afterDrag(View view) {
+                        callBack.setLastItem(item, view);
+                    }
+                });
+            }
+            Home.launcher.desktop.requestLayout();
+        }else {
+            itemView.setIcon(ItemViewFactory.getGroupIconDrawable(c, item), false);
+        }
+        callBack.addItemToSettings(item);
     }
 
     public static class GroupDef {

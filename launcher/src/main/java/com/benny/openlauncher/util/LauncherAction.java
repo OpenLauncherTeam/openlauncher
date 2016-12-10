@@ -88,9 +88,9 @@ public class LauncherAction {
                 break;
             case SetWallpaper:
                 MaterialDialog.Builder b = new MaterialDialog.Builder(c);
-                b.title("Wallpaper");
+                b.title(R.string.wallpaper);
                 b.iconRes(R.drawable.ic_photo_black_24dp);
-                String[] s = new String[]{"Set Wallpaper","Blur Wallpaper"};
+                String[] s = new String[]{c.getString(R.string.wallpaper_set),c.getString(R.string.wallpaper_blur)};
                 b.items(s);
                 b.itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
@@ -98,12 +98,14 @@ public class LauncherAction {
                         switch (position){
                             case 0 :
                                 Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
-                                c.startActivity(Intent.createChooser(intent,"Pick Wallpaper"));
+                                c.startActivity(Intent.createChooser(intent,c.getString(R.string.wallpaper_pick)));
                                 break;
                             case 1 :
                                 try{
-                                    WallpaperManager.getInstance(c).setBitmap(StackBlur.blur(Tool.drawableToBitmap(c.getWallpaper()),12,false));
-                                }catch (IOException ignore){}
+                                    WallpaperManager.getInstance(c).setBitmap(StackBlur.blur(Tool.drawableToBitmap(c.getWallpaper()),10,false));
+                                }catch (Exception e){
+                                    Tool.toast(c,c.getString(R.string.wallpaper_unable_to_blur));
+                                }
                                 break;
                         }
                     }
