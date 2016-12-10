@@ -274,7 +274,10 @@ public class ItemViewFactory {
                     icons[i] = Tool.drawableToBitmap(Tool.getIconFromID(context, item.actions[i].getStringExtra("shortCutIconID")));
                 else {
                     AppManager.App app = AppManager.getInstance(context).findApp(item.actions[i].getComponent().getPackageName(), item.actions[i].getComponent().getClassName());
+                    if (app != null)
                     icons[i] = Tool.drawableToBitmap(app.icon);
+                    else
+                    icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
                 }
             } else {
                 icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));

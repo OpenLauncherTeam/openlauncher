@@ -287,8 +287,15 @@ public class Tool {
         return bitmap;
     }
 
+    public static boolean hasNavBar (Resources resources)
+    {
+        int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
+        return id > 0 && resources.getBoolean(id);
+    }
+
     public static int getNavBarHeight(Context context){
         Resources resources = context.getResources();
+        if (!hasNavBar(resources))return 0;
         int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
         if (resourceId > 0) {
             return resources.getDimensionPixelSize(resourceId);
@@ -306,10 +313,10 @@ public class Tool {
     }
 
     public static void startApp(Context c, AppManager.App app) {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setClassName(app.packageName, app.className);
         try {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setClassName(app.packageName, app.className);
             c.startActivity(intent);
         } catch (Exception e) {
             Tool.toast(c, R.string.toast_appuninstalled);

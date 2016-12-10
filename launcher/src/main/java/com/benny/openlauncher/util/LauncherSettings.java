@@ -29,12 +29,11 @@ public class LauncherSettings {
     public Context context;
     private ArrayList<String> iconCacheIDs = new ArrayList<>();
 
+    public boolean init = false;
+
+
     private LauncherSettings(Context c) {
         this.context = c;
-        pref = c.getSharedPreferences("LauncherSettings", Context.MODE_PRIVATE);
-        iconCacheIDs.clear();
-
-        readSettings();
     }
 
     public static LauncherSettings getInstance(Context c) {
@@ -112,7 +111,11 @@ public class LauncherSettings {
         }
     }
 
-    private void readSettings() {
+    public void readSettings() {
+        pref = context.getSharedPreferences("LauncherSettings", Context.MODE_PRIVATE);
+        iconCacheIDs.clear();
+        init = true;
+
         Gson gson = new Gson();
 
         String raw = Tool.getStringFromFile(GeneralSettingsFileName, context);

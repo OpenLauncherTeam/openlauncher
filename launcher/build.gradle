@@ -10,7 +10,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "alpha1"
     }
     buildTypes {
         release {
@@ -34,6 +34,7 @@ dependencies {
     compile('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
         transitive = true;
     }
+    compile 'com.mikepenz:materialize:1.0.0@aar'
     compile 'com.turingtechnologies.materialscrollbar:lib:10.1.4'
     compile 'net.qiujuer.genius:blur:2.0.0'
     compile 'com.balysv:material-ripple:1.0.2'
@@ -50,4 +51,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     compile 'com.github.medyo:fancybuttons:1.8.2'
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    compile project(path: ':launcheranim')
 }

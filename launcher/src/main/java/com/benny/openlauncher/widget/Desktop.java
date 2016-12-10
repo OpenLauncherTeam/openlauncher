@@ -59,15 +59,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
     public Desktop(Context c, AttributeSet attr) {
         super(c, attr);
-        init(c);
     }
 
     public Desktop(Context c) {
         super(c);
-        init(c);
     }
 
-    private void init(Context c) {
+    public void init(Context c) {
         if (isInEditMode()) return;
 
         pageCount = LauncherSettings.getInstance(c).desktopData.size();
@@ -551,13 +549,14 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         for (int i = 0; i < DesktopMode.values().length; i++) {
             items[i] = DesktopMode.values()[i].name();
         }
+        items[1] += "(Experimental)";
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title("Desktop style")
                 .items(items)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).switchDesktopMode(DesktopMode.valueOf(items[position]));
+                        LauncherSettings.getInstance(context).switchDesktopMode(DesktopMode.values()[position]);
                     }
                 }).show();
     }

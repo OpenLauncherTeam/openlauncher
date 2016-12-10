@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OpenLauncher.iml" filepath="$PROJECT_DIR$/OpenLauncher.iml" />
       <module fileurl="file://$PROJECT_DIR$/launcher/launcher.iml" filepath="$PROJECT_DIR$/launcher/launcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/launcheranim/launcheranim.iml" filepath="$PROJECT_DIR$/launcheranim/launcheranim.iml" />
       <module fileurl="file://$PROJECT_DIR$/materialpreffragment/materialpreffragment.iml" filepath="$PROJECT_DIR$/materialpreffragment/materialpreffragment.iml" />
       <module fileurl="file://$PROJECT_DIR$/smoothviewpager/smoothviewpager.iml" filepath="$PROJECT_DIR$/smoothviewpager/smoothviewpager.iml" />
     </modules>

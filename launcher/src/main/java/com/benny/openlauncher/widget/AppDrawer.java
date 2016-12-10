@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -41,20 +42,14 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
 
     public AppDrawer(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        init();
     }
 
     public AppDrawer(Context context) {
         super(context);
-
-        init();
     }
 
     public AppDrawer(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
-        init();
     }
 
     public static void startStylePicker(final Context context) {
@@ -145,16 +140,6 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
                                 PropertyValuesHolder.ofInt("alpha", 255, 0));
                 animator.setDuration(200);
                 animator.start();
-
-                switch (drawerMode) {
-                    case Paged:
-                        View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
-                        mGrid.animate().setStartDelay(0).alpha(0).setDuration(60L);
-                        break;
-                    case Grid:
-                        drawerViewGrid.recyclerView.animate().setStartDelay(0).alpha(0).setDuration(60L);
-                        break;
-                }
             }
 
             @Override
@@ -171,7 +156,27 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
             }
         });
 
-        appDrawerAnimator.start();
+        switch (drawerMode) {
+            case Paged:
+                View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
+                mGrid.animate().setStartDelay(0).alpha(0).setDuration(60L).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        appDrawerAnimator.start();
+
+                    }
+                });
+                break;
+            case Grid:
+                drawerViewGrid.recyclerView.animate().setStartDelay(0).alpha(0).setDuration(60L).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        appDrawerAnimator.start();
+
+                    }
+                });
+                break;
+        }
     }
 
     public void init() {
@@ -216,7 +221,8 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
                     drawerViewGrid.setCardBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
                     drawerViewGrid.setCardElevation(Tool.dp2px(4,getContext()));
                 }
-                drawerViewGrid.gridDrawerAdapter.notifyDataSetChanged();
+                if (drawerViewGrid.gridDrawerAdapter != null)
+                    drawerViewGrid.gridDrawerAdapter.notifyDataSetChanged();
                 break;
         }
     }

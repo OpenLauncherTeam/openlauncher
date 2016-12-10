@@ -66,6 +66,7 @@ MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] E:\US
 MERGED from [com.afollestad.material-dialogs:commons:0.9.1.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.afollestad.material-dialogs\commons\0.9.1.0\AndroidManifest.xml:12:5-20
 MERGED from [com.github.medyo:fancybuttons:1.8.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.medyo\fancybuttons\1.8.2\AndroidManifest.xml:11:5-20
 MERGED from [com.amulyakhare:com.amulyakhare.textdrawable:1.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.amulyakhare\com.amulyakhare.textdrawable\1.0.1\AndroidManifest.xml:12:5-20
+MERGED from [OpenLauncher:launcheranim:unspecified] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\launcheranim\unspecified\AndroidManifest.xml:11:5-15:19
 	android:label
 		ADDED from E:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:17:9-41
 	android:supportsRtl
@@ -201,6 +202,7 @@ MERGED from [com.android.support:animated-vector-drawable:25.0.0] E:\USER\Projec
 MERGED from [com.android.support:recyclerview-v7:25.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.0.0\AndroidManifest.xml:20:5-43
 MERGED from [com.mikepenz:fastadapter-extensions:1.8.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.mikepenz\fastadapter-extensions\1.8.0\AndroidManifest.xml:8:5-10:41
 MERGED from [com.github.ozodrukh:CircularReveal:2.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.ozodrukh\CircularReveal\2.0.1\AndroidManifest.xml:6:5-8:41
+MERGED from [com.mikepenz:materialize:1.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.mikepenz\materialize\1.0.0\AndroidManifest.xml:8:5-10:41
 MERGED from [com.turingtechnologies.materialscrollbar:lib:10.1.4] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.turingtechnologies.materialscrollbar\lib\10.1.4\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:design:25.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\design\25.0.0\AndroidManifest.xml:21:5-23:62
 MERGED from [com.android.support:transition:25.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\transition\25.0.0\AndroidManifest.xml:20:5-44
@@ -217,6 +219,7 @@ MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] E:\US
 MERGED from [com.afollestad.material-dialogs:commons:0.9.1.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.afollestad.material-dialogs\commons\0.9.1.0\AndroidManifest.xml:8:5-10:41
 MERGED from [com.github.medyo:fancybuttons:1.8.2] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.medyo\fancybuttons\1.8.2\AndroidManifest.xml:7:5-9:41
 MERGED from [com.amulyakhare:com.amulyakhare.textdrawable:1.0.1] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.amulyakhare\com.amulyakhare.textdrawable\1.0.1\AndroidManifest.xml:8:5-10:41
+MERGED from [OpenLauncher:launcheranim:unspecified] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\launcheranim\unspecified\AndroidManifest.xml:7:5-9:41
 	tools:overrideLibrary
 		ADDED from [com.android.support:appcompat-v7:25.0.0] E:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion

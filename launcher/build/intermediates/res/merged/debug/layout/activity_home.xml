@@ -118,6 +118,20 @@
 
     </RelativeLayout>
 
+    <FrameLayout
+        android:background="#90000000"
+        android:id="@+id/loadingSplash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.benny.launcheranim.LauncherLoadingIcon
+            android:layout_gravity="center"
+            android:id="@+id/loadingIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+    </FrameLayout>
+
 </FrameLayout>
 
 
