@@ -1,6 +1,10 @@
 <p align="center"><img src="https://github.com/BennyKok/OpenLauncher/blob/master/launcher/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="200"></p>
 <p align="center"><b>OpenLauncher</b> <br> The ideal home screen for Android</p>
 
+Get it on:
+
+[Play Store](https://play.google.com/store/apps/details?id=com.benny.openlauncher)
+
 ###Status>>
 OnGoing: 
 
