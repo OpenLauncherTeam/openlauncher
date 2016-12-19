@@ -176,6 +176,7 @@ public class LauncherSettings {
     }
 
     public Gson writeSettings() {
+        if (generalSettings == null)return null;
         generalSettings.firstLauncher = false;
 
         Gson gson = new Gson();
