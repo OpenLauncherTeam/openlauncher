@@ -19,8 +19,11 @@ import android.provider.ContactsContract;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.util.*;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -287,15 +290,21 @@ public class Tool {
         return bitmap;
     }
 
-    public static boolean hasNavBar (Resources resources)
-    {
+    public static boolean hasNavBar(Context context) {
+        Resources resources = context.getResources();
         int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
-        return id > 0 && resources.getBoolean(id);
+        if (id > 0) {
+            return resources.getBoolean(id);
+        } else {    // Check for keys
+            boolean hasMenuKey = ViewConfiguration.get(context).hasPermanentMenuKey();
+            boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
+            return !hasMenuKey && !hasBackKey;
+        }
     }
 
     public static int getNavBarHeight(Context context){
         Resources resources = context.getResources();
-        if (!hasNavBar(resources))return 0;
+        if (!hasNavBar(context))return 0;
         int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
         if (resourceId > 0) {
             return resources.getDimensionPixelSize(resourceId);
