@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
@@ -94,7 +95,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     private PagerIndicator desktopIndicator, appDrawerIndicator;
     private DragOptionView dragOptionView;
     private ViewGroup desktopEditOptionView;
-    private RecyclerView quickCenter;
     private BroadcastReceiver appUpdateReceiver, shortcutReceiver;
     private TextView searchBarClock;
     private ListView minBar;
@@ -106,6 +106,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Tool.print("Activity started : 0");
+        long now = System.currentTimeMillis();
 
         launcher = this;
         AppManager.getInstance(this).clearListener();
@@ -113,18 +115,27 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, null);
         setContentView(myScreen);
 
+        Tool.print("Content View sat: " + String.valueOf(System.currentTimeMillis() - now));
+        now = System.currentTimeMillis();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
         findViews();
 
+        Tool.print("Found views: " + String.valueOf(System.currentTimeMillis() - now));
+        now = System.currentTimeMillis();
+
         searchBar.setVisibility(View.INVISIBLE);
         final LauncherLoadingIcon loadingIcon = (LauncherLoadingIcon) findViewById(R.id.loadingIcon);
         final FrameLayout loadingSplash = (FrameLayout) findViewById(R.id.loadingSplash);
-        if (LauncherSettings.getInstance(Home.this).init){
+        if (LauncherSettings.getInstance(Home.this).init) {
             myScreen.removeView(loadingSplash);
             init();
-        }else {
+        } else {
+            Tool.print("Start loading: " + String.valueOf(System.currentTimeMillis() - now));
+            now = System.currentTimeMillis();
+
             loadingIcon.setLoading(true);
             new AsyncTask<Void, Void, Void>() {
                 @Override
@@ -162,20 +173,17 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         initViews();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            findViewById(R.id.shortcutLayout).setPadding(0, Tool.getStatusBarHeight(this), 0, Tool.getNavBarHeight(this));
-            searchBar.setPadding(0,Tool.getStatusBarHeight(this),0,0);
-            //dragOptionView.setPadding(0,Tool.getStatusBarHeight(this),0,0);
+            int navBarHeight = Tool.getNavBarHeight(this);
+            int statusBarHeight = Tool.getStatusBarHeight(this);
 
-//            if (Color.alpha(LauncherSettings.getInstance(this).generalSettings.dockColor) == 0){
-                dock.getLayoutParams().height += Tool.getNavBarHeight(this);
-                dock.setPadding(dock.getPaddingRight(),dock.getPaddingTop(),dock.getPaddingLeft(),dock.getPaddingBottom() + Tool.getNavBarHeight(this));
-//            }else{
-//                dock.getLayoutParams().height += Tool.getNavBarHeight(this) + Tool.dp2px(6,this);
-//                dock.setPadding(dock.getPaddingRight(),dock.getPaddingTop() + Tool.dp2px(6,this),dock.getPaddingLeft(),dock.getPaddingBottom() + Tool.getNavBarHeight(this));
-//            }
-            appDrawerOtter.setPadding(0,Tool.getStatusBarHeight(this),0,Tool.getNavBarHeight(this));
+            findViewById(R.id.shortcutLayout).setPadding(0, statusBarHeight, 0, navBarHeight);
+            searchBar.setPadding(0, statusBarHeight, 0, 0);
 
-            desktopEditOptionView.setPadding(0,0,0,Tool.getNavBarHeight(this));
+            dock.getLayoutParams().height += navBarHeight;
+            dock.setPadding(dock.getPaddingLeft(), dock.getPaddingTop(),dock.getPaddingRight() , dock.getPaddingBottom() + navBarHeight);
+
+            appDrawerOtter.setPadding(0, statusBarHeight, 0, navBarHeight);
+            desktopEditOptionView.setPadding(0, 0, 0,navBarHeight);
         }
 
         registerAppUpdateReceiver();
@@ -185,17 +193,23 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {
+                LauncherSettings launcherSettings = LauncherSettings.getInstance(Home.this);
+                if (launcherSettings.generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps) {
+                    if (launcherSettings.generalSettings.firstLauncher) {
+                        launcherSettings.generalSettings.firstLauncher = false;
+                        Desktop.Item appDrawerBtnItem = Desktop.Item.newAppDrawerBtn();
+                        //We center it
+                        appDrawerBtnItem.x = 2;
+                        launcherSettings.dockData.add(appDrawerBtnItem);
+                    }
+                }
                 desktop.initDesktopItem(Home.this);
                 dock.initDockItem(Home.this);
-                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopMode == Desktop.DesktopMode.ShowAllApps) {
 
-                } else {
-                    if (LauncherSettings.getInstance(Home.this).generalSettings.firstLauncher)
-                        dock.addItemToPosition(Desktop.Item.newAppDrawerBtn(), 2, 0);
-                }
                 AppManager.getInstance(Home.this).removeAppUpdatedListener(this);
             }
         });
+
         AppManager.getInstance(this).init();
 
         initSettings();
@@ -205,10 +219,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
 
     //region INIT
-    /** This should be only called to find the view at Activity start up*/
+
+    /**
+     * This should be only called to find the view at Activity start up
+     */
     private void findViews() {
         searchBarClock = (TextView) findViewById(R.id.searchbarclock);
-        quickCenter = (RecyclerView) findViewById(R.id.quickCenter);
         baseLayout = (ConstraintLayout) findViewById(R.id.baseLayout);
         appDrawerOtter = (AppDrawer) findViewById(R.id.appDrawerOtter);
         desktop = (Desktop) findViewById(R.id.desktop);
@@ -222,7 +238,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         minBar = (ListView) findViewById(R.id.minbar);
     }
 
-    /** This should be only called to init the view at Activity start up*/
+    /**
+     * This should be only called to init the view at Activity start up
+     */
     private void initViews() {
         initMinBar();
         initQuickCenter();
@@ -478,72 +496,37 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
 
     private void initQuickCenter() {
-//        quickCenter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-//
-//        HeaderAdapter<QuickCenterItem.SearchHeader> header = new HeaderAdapter<>();
-//        noteAdapter = new FastItemAdapter<>();
-//
-//        quickCenter.setAdapter(header.wrap(noteAdapter));
-//
-//        new AsyncTask<Void, Void, Void>() {
-//            @Override
-//            protected void onPreExecute() {
-//                super.onPreExecute();
-//            }
-//
-//            @Override
-//            protected Void doInBackground(Void... voids) {
-//                Gson gson = new Gson();
-//                notes.clear();
-//                try {
-//                    JsonReader reader = new JsonReader(new InputStreamReader(Home.this.openFileInput("noteData.json")));
-//                    reader.beginArray();
-//                    while (reader.hasNext()) {
-//                        QuickCenterItem.NoteContent content = gson.fromJson(reader, QuickCenterItem.NoteContent.class);
-//                        notes.add(content);
-//                    }
-//                    reader.endArray();
-//                    reader.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                return null;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Void aVoid) {
-//                for (int i = 0; i < notes.size(); i++) {
-//                    noteAdapter.add(new QuickCenterItem.NoteItem(notes.get(i).date, notes.get(i).content, noteAdapter));
-//                }
-//                super.onPostExecute(aVoid);
-//            }
-//        }.execute();
-
         ////////////////////////////////////Quick Contact///////////////////////////////////////////
         RecyclerView quickContact = (RecyclerView) findViewById(R.id.quickContactRv);
-        quickContact.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        quickContact.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         quickContactFA = new FastItemAdapter<>();
         quickContact.setAdapter(quickContactFA);
 
-        callLogObserver = new CallLogObserver(new Handler());
-        getApplicationContext().getContentResolver().registerContentObserver(
-                android.provider.CallLog.Calls.CONTENT_URI, true, callLogObserver);
-
-        //First call get the call history for the adapter
-        callLogObserver.onChange(true);
+        if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED) {
+            callLogObserver = new CallLogObserver(new Handler());
+            getApplicationContext().getContentResolver().registerContentObserver(android.provider.CallLog.Calls.CONTENT_URI, true, callLogObserver);
+            //First call get the call history for the adapter
+            callLogObserver.onChange(true);
+        } else {
+            ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.READ_CALL_LOG}, REQUEST_PERMISSION_READ_CALL_LOG);
+        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == REQUEST_PERMISSION_READ_CALL_LOG) {
             //Read call log permitted
+            callLogObserver = new CallLogObserver(new Handler());
+            getApplicationContext().getContentResolver().registerContentObserver(android.provider.CallLog.Calls.CONTENT_URI, true, callLogObserver);
+            //First call get the call history for the adapter
+            callLogObserver.onChange(true);
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public class CallLogObserver extends ContentObserver {
 
-        private final String columns[] = new String[] {
+        private final String columns[] = new String[]{
                 CallLog.Calls._ID,
                 CallLog.Calls.NUMBER,
                 CallLog.Calls.CACHED_NAME};
@@ -563,10 +546,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         public void logCallLog() {
             if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
                 Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_DENIED");
-                ActivityCompat.requestPermissions(Home.this,new String[]{Manifest.permission.READ_CALL_LOG}, REQUEST_PERMISSION_READ_CALL_LOG);
-            }else {
+                ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.READ_CALL_LOG}, REQUEST_PERMISSION_READ_CALL_LOG);
+            } else {
                 Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, columns, null, null, CallLog.Calls.DATE + " DESC LIMIT 15");
-
                 int number = c.getColumnIndex(CallLog.Calls.NUMBER);
                 int name = c.getColumnIndex(CallLog.Calls.CACHED_NAME);
 //                int type = c.getColumnIndex(CallLog.Calls.TYPE);
@@ -582,15 +564,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                     intent.setData(Uri.parse(uri));
                     String caller = c.getString(name);
                     quickContactFA.add(new QuickCenterItem.ContactItem(
-                            new QuickCenterItem.ContactContent(caller,phone,intent,
-                                    Tool.fetchThumbnail(Home.this,phone))));
+                            new QuickCenterItem.ContactContent(caller, phone, intent,
+                                    Tool.fetchThumbnail(Home.this, phone))));
                 }
             }
         }
 
         @Override
         public void onChange(boolean selfChange) {
-            this.onChange(selfChange,null);
+            this.onChange(selfChange, null);
         }
 
         @Override
@@ -666,7 +648,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         unregisterReceiver(appUpdateReceiver);
         unregisterReceiver(shortcutReceiver);
         if (callLogObserver != null)
-        getApplicationContext().getContentResolver().unregisterContentObserver(callLogObserver);
+            getApplicationContext().getContentResolver().unregisterContentObserver(callLogObserver);
         launcher = null;
         super.onDestroy();
     }
@@ -708,7 +690,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     protected void onStop() {
         //We write and save the settings here to the device
         Gson gson = LauncherSettings.getInstance(this).writeSettings();
-        Tool.writeToFile("noteData.json", gson.toJson(notes), Home.this);
+        //Tool.writeToFile("noteData.json", gson.toJson(notes), Home.this);
         super.onStop();
     }
 
@@ -716,13 +698,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     public void onBackPressed() {
         drawerLayout.closeDrawers();
         if (desktop != null)
-        if (!desktop.inEditMode) {
-            desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
-            if (appDrawer.getVisibility() == View.VISIBLE)
-                closeAppDrawer();
-        } else {
-            desktop.pages.get(desktop.getCurrentItem()).performClick();
-        }
+            if (!desktop.inEditMode) {
+                desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
+                if (appDrawer.getVisibility() == View.VISIBLE)
+                    closeAppDrawer();
+            } else {
+                desktop.pages.get(desktop.getCurrentItem()).performClick();
+            }
     }
 
     @Override
@@ -730,90 +712,64 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         if (appWidgetHost != null)
             appWidgetHost.startListening();
         if (desktop != null)
-        if (!desktop.inEditMode) {
-            if (LauncherSettings.getInstance(Home.this).generalSettings != null)
-            desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
-        if (appDrawer != null)
-            if (appDrawer.getVisibility() == View.VISIBLE)
-                closeAppDrawer();
-        } else {
-            desktop.pages.get(desktop.getCurrentItem()).performClick();
-        }
+            if (!desktop.inEditMode) {
+                if (LauncherSettings.getInstance(Home.this).generalSettings != null)
+                    desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
+                if (appDrawer != null)
+                    if (appDrawer.getVisibility() == View.VISIBLE)
+                        closeAppDrawer();
+            } else {
+                desktop.pages.get(desktop.getCurrentItem()).performClick();
+            }
         super.onResume();
     }
     //endregion
 
     //region APP_DRAWER_ANIMATION
-    private int cx,cy,rad;
-    /** Call this to open the app drawer with animation*/
+    private int cx, cy, rad;
+
+    /**
+     * Call this to open the app drawer with animation
+     */
     public void openAppDrawer(View view) {
         int[] pos = new int[2];
         view.getLocationInWindow(pos);
         cx = pos[0];
         cy = pos[1];
 
-        cx += view.getWidth()/2;
-        cy += view.getHeight()/2;
-        if (view instanceof AppItemView){
+        cx += view.getWidth() / 2;
+        cy += view.getHeight() / 2;
+        if (view instanceof AppItemView) {
             AppItemView appItemView = (AppItemView) view;
-            if (!appItemView.isNoLabel()){
-                cy -= Tool.dp2px(14,this)/2;
+            if (!appItemView.isNoLabel()) {
+                cy -= Tool.dp2px(14, this) / 2;
             }
-            rad = (int) (appItemView.getIconSize()/2 - Tool.dp2px(4, view.getContext()));
+            rad = (int) (appItemView.getIconSize() / 2 - Tool.dp2px(4, view.getContext()));
         }
-        cx -= ((ViewGroup.MarginLayoutParams)appDrawer.getLayoutParams()).leftMargin;
-        cy -= ((ViewGroup.MarginLayoutParams)appDrawer.getLayoutParams()).topMargin;
+        cx -= ((ViewGroup.MarginLayoutParams) appDrawer.getLayoutParams()).leftMargin;
+        cy -= ((ViewGroup.MarginLayoutParams) appDrawer.getLayoutParams()).topMargin;
         cy -= appDrawerOtter.getPaddingTop();
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
 
         appDrawer.setPivotX(cx);
         appDrawer.setPivotY(cy);
 
-        appDrawerOtter.open(cx, cy,rad, finalRadius);
+        appDrawerOtter.open(cx, cy, rad, finalRadius);
     }
 
     public void closeAppDrawer() {
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
-        appDrawerOtter.close(cx, cy,rad, finalRadius);
+        appDrawerOtter.close(cx, cy, rad, finalRadius);
     }
 
     //endregion
 
 
     //region VIEW_ONCLICK
-    public void onAddNote(View view) {
-        Tool.askForText("Note", null, this, new Tool.OnTextGotListener() {
-            @Override
-            public void hereIsTheText(String str) {
-                if (str.isEmpty()) return;
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                String time = df.format(Calendar.getInstance().getTime());
 
-                notes.add(new QuickCenterItem.NoteContent(time, str));
-                noteAdapter.add(new QuickCenterItem.NoteItem(time, str, noteAdapter));
-            }
-        });
-    }
-
-    public void onNoteToggle(View view) {
-        //TODO I will modify this function later
-//        final View target = findViewById(R.id.quickCenterLayout);
-//        int offset = Tool.dp2px(5, this);
-//        if (target.getVisibility() == View.VISIBLE) {
-//            target.animate().setDuration(180L).alpha(0).translationY(+offset).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
-//                @Override
-//                public void run() {
-//                    target.setVisibility(View.INVISIBLE);
-//                }
-//            });
-//        } else {
-//            target.setAlpha(0);
-//            target.setVisibility(View.VISIBLE);
-//            target.animate().setDuration(180L).alpha(1).translationY(-offset).setInterpolator(new AccelerateDecelerateInterpolator());
-//        }
-    }
-
-    /** When the search button of the search bar clicked*/
+    /**
+     * When the search button of the search bar clicked
+     */
     public void onSearch(View view) {
 
         Intent i;
@@ -840,13 +796,16 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
 
     @Override
-    public void onDrawerSlide(View drawerView, float slideOffset) {}
+    public void onDrawerSlide(View drawerView, float slideOffset) {
+    }
 
     @Override
-    public void onDrawerOpened(View drawerView) {}
+    public void onDrawerOpened(View drawerView) {
+    }
 
     @Override
-    public void onDrawerClosed(View drawerView) {}
+    public void onDrawerClosed(View drawerView) {
+    }
 
     @Override
     public void onDrawerStateChanged(int newState) {
