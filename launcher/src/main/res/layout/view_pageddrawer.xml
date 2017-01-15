@@ -2,6 +2,6 @@
 <com.benny.openlauncher.widget.PagedAppDrawer
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="24dp"
+    android:layout_marginBottom="20dp"
     android:visibility="invisible"
     xmlns:android="http://schemas.android.com/apk/res/android" />

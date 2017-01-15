@@ -245,7 +245,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         initMinBar();
         initQuickCenter();
 
-        DragNavigationControl dragNavigationControl = new DragNavigationControl(this, findViewById(R.id.left), findViewById(R.id.right));
+        DragNavigationControl.init(this, findViewById(R.id.left), findViewById(R.id.right));
 
         String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
                 String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
@@ -353,14 +353,14 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         int iconSize = LauncherSettings.getInstance(this).generalSettings.iconSize;
 
         dock.init();
-        dock.getLayoutParams().height = Tool.dp2px(40 + iconSize, this);
+        dock.getLayoutParams().height = Tool.dp2px(36 + iconSize, this);
 
         dragOptionView.setAutoHideView(searchBar);
 
         appDrawerOtter.setCallBack(new AppDrawer.CallBack() {
             @Override
             public void onStart() {
-                dock.animate().alpha(0).setDuration(100);
+                //dock.animate().alpha(0).setDuration(100);
                 desktopIndicator.animate().alpha(0).setDuration(100);
                 searchBar.animate().alpha(0).setDuration(80);
                 desktop.animate().alpha(0).setDuration(100);
@@ -402,7 +402,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                     appDrawerOtter.scrollToStart();
                 desktopIndicator.animate().alpha(1);
                 appDrawer.setVisibility(View.INVISIBLE);
-                dock.animate().alpha(1).setDuration(50);
+                //dock.animate().alpha(1).setDuration(50);
                 desktop.animate().alpha(1);
                 if (!dragOptionView.dragging)
                     searchBar.animate().alpha(1);

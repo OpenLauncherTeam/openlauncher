@@ -11,28 +11,28 @@
     android:layout_marginTop="20dp"
     tools:showIn="@layout/view_home">
 
-    <mehdi.sakout.fancybuttons.FancyButton
-        android:layout_gravity="bottom"
-        android:onClick="onSearch"
-        android:layout_width="80dp"
-        android:layout_height="56dp"
-        app:fb_defaultColor="#FFFFFF"
-        app:fb_iconResource="@mipmap/googleicon"
-        app:fb_focusColor="#dcdcdc"
-        app:fb_iconPaddingLeft="13dp"
-        app:fb_iconPaddingRight="13dp"
-        app:fb_iconPaddingTop="13dp"
-        app:fb_iconPaddingBottom="13dp"
-        app:fb_radius="40dp" />
+    <!--<mehdi.sakout.fancybuttons.FancyButton-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:onClick="onSearch"-->
+        <!--android:layout_width="80dp"-->
+        <!--android:layout_height="56dp"-->
+        <!--app:fb_defaultColor="#FFFFFF"-->
+        <!--app:fb_iconResource="@mipmap/googleicon"-->
+        <!--app:fb_focusColor="#dcdcdc"-->
+        <!--app:fb_iconPaddingLeft="13dp"-->
+        <!--app:fb_iconPaddingRight="13dp"-->
+        <!--app:fb_iconPaddingTop="13dp"-->
+        <!--app:fb_iconPaddingBottom="13dp"-->
+        <!--app:fb_radius="40dp" />-->
 
     <TextView
         android:id="@+id/searchbarclock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginRight="8dp"
+        android:layout_gravity="start"
+        android:layout_marginLeft="8dp"
         android:fontFamily="sans-serif-light"
-        android:gravity="end"
+        android:gravity="start"
         android:lineSpacingMultiplier="1.05"
         android:textColor="#fff"
         android:textSize="36sp" />
