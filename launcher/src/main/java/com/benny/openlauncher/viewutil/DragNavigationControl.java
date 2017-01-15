@@ -9,24 +9,11 @@ import com.benny.openlauncher.util.DragAction;
 
 public class DragNavigationControl {
 
-    private Handler l;
-    private Runnable left, right;
-    private boolean leftok = true, rightok = true;
+    private static boolean leftok = true, rightok = true;
 
-    private View rightView,leftView;
-
-    private Home home;
-
-    public DragNavigationControl(Home home,View left, View right) {
-        this.home = home;
-        rightView = right;
-        leftView = left;
-        init();
-    }
-
-    private void init() {
-        l = new Handler();
-        right = new Runnable() {
+    public static void init(final Home home,final View leftView,final View rightView) {
+        final Handler l = new Handler();
+        final Runnable right = new Runnable() {
             @Override
             public void run() {
                 if (home.desktop.getCurrentItem() < home.desktop.pageCount-1)
@@ -36,7 +23,7 @@ public class DragNavigationControl {
                 l.postDelayed(this, 1000);
             }
         };
-        left = new Runnable() {
+        final Runnable left = new Runnable() {
             @Override
             public void run() {
                 if (home.desktop.getCurrentItem() > 0)

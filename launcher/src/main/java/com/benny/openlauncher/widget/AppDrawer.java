@@ -259,7 +259,8 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
             case Paged:
                 break;
             case Grid:
-                drawerViewGrid.gridDrawerAdapter.filter(charSequence);
+                if (drawerViewGrid.gridDrawerAdapter != null)
+                    drawerViewGrid.gridDrawerAdapter.filter(charSequence);
                 break;
         }
     }

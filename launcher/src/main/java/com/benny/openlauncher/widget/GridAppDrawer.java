@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 
 import com.benny.openlauncher.R;
@@ -45,17 +46,33 @@ public class GridAppDrawer extends CardView {
 
     public GridAppDrawer(Context context) {
         super(context);
-        //init();
+        preInit();
     }
 
     public GridAppDrawer(Context context, AttributeSet attrs) {
         super(context, attrs);
-        //init();
+        preInit();
     }
 
     public GridAppDrawer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        //init();
+        preInit();
+    }
+
+    public void preInit(){
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_griddrawerinner, GridAppDrawer.this, false);
+                recyclerView = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
+                layoutManager = new GridLayoutManager(getContext(), LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX);
+
+                itemWidth = (getWidth() - recyclerView.getPaddingRight() - recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
+                init();
+            }
+        });
     }
 
     @Override
@@ -81,19 +98,6 @@ public class GridAppDrawer extends CardView {
     private void setLandscapeValue() {
         layoutManager.setSpanCount(LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX_L);
         gridDrawerAdapter.notifyAdapterDataSetChanged();
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        if (itemWidth == 0) {
-            rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_griddrawerinner, this, false);
-            recyclerView = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
-            layoutManager = new GridLayoutManager(getContext(), LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX);
-
-            itemWidth = (getWidth() - recyclerView.getPaddingRight() - recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
-            init();
-        }
-        super.onLayout(changed, left, top, right, bottom);
     }
 
     private void init() {
