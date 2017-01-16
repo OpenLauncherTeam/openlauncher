@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:2:1-79:12
+ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:2:1-85:12
 	package
 		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:3:5-37
 		INJECTED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
@@ -14,11 +14,11 @@ ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 		INJECTED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
 		INJECTED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
 uses-permission#android.permission.CALL_PHONE
-ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:5:5-68
+ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:5:5-69
 	android:name
 		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:5:22-66
 uses-permission#android.permission.READ_CONTACTS
-ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:6:5-71
+ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:6:5-72
 	android:name
 		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:6:22-69
 uses-permission#android.permission.READ_CALL_LOG
@@ -34,29 +34,29 @@ ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 	android:name
 		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:9:22-81
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:10:5-79
+ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:10:5-80
 	android:name
 		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:10:22-77
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:11:5-80
+ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:11:5-81
 	android:name
 		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:11:22-78
 application
-ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:13:5-77:19
+ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:13:5-83:19
 MERGED from [com.github.ozodrukh:CircularReveal:2.0.1] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.ozodrukh\CircularReveal\2.0.1\AndroidManifest.xml:10:5-20
 MERGED from [net.qiujuer.genius:blur:2.0.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.qiujuer.genius\blur\2.0.0\AndroidManifest.xml:11:5-13:38
 MERGED from [com.balysv:material-ripple:1.0.2] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.balysv\material-ripple\1.0.2\AndroidManifest.xml:12:5-20
-MERGED from [com.android.support:design:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\design\25.1.0\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:transition:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\transition\25.1.0\AndroidManifest.xml:22:5-20
 MERGED from [OpenLauncher:smoothviewpager:unspecified] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\smoothviewpager\unspecified\AndroidManifest.xml:11:5-15:19
 MERGED from [OpenLauncher:materialpreffragment:unspecified] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\materialpreffragment\unspecified\AndroidManifest.xml:11:5-15:19
-MERGED from [com.android.support:cardview-v7:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.1.0\AndroidManifest.xml:22:5-20
 MERGED from [com.afollestad.material-dialogs:commons:0.9.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.afollestad.material-dialogs\commons\0.9.1.0\AndroidManifest.xml:12:5-20
 MERGED from [com.afollestad.material-dialogs:core:0.9.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.afollestad.material-dialogs\core\0.9.1.0\AndroidManifest.xml:13:5-20
 MERGED from [com.android.support:support-v13:25.0.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v13\25.0.0\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta4\AndroidManifest.xml:9:5-20
 MERGED from [com.github.medyo:fancybuttons:1.8.2] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.medyo\fancybuttons\1.8.2\AndroidManifest.xml:11:5-20
 MERGED from [com.amulyakhare:com.amulyakhare.textdrawable:1.0.1] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.amulyakhare\com.amulyakhare.textdrawable\1.0.1\AndroidManifest.xml:12:5-20
+MERGED from [com.android.support:cardview-v7:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\design\25.1.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:transition:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\transition\25.1.0\AndroidManifest.xml:22:5-20
 MERGED from [OpenLauncher:launcheranim:unspecified] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\launcheranim\unspecified\AndroidManifest.xml:11:5-15:19
 MERGED from [com.android.support:appcompat-v7:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.0\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-v4:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.0\AndroidManifest.xml:25:5-20
@@ -156,11 +156,11 @@ ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 	android:parentActivityName
 		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:59:13-56
 	android:configChanges
-		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:56:13-68
+		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:57:13-68
 	android:theme
 		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:60:13-56
 	android:name
-		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:57:13-54
+		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:56:13-54
 receiver#com.benny.openlauncher.util.DeviceAdminReceiver
 ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:62:9-72:20
 	android:permission
@@ -187,6 +187,16 @@ ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xm
 		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:76:13-36
 	android:name
 		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:74:13-50
+activity#com.benny.openlauncher.activity.AboutActivity
+ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:78:9-82:70
+	android:label
+		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:80:13-34
+	android:parentActivityName
+		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:82:13-68
+	android:theme
+		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:81:13-66
+	android:name
+		ADDED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml:79:13-51
 uses-sdk
 INJECTED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.mikepenz:fastadapter:1.8.2] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.mikepenz\fastadapter\1.8.2\AndroidManifest.xml:8:5-10:41
@@ -197,19 +207,20 @@ MERGED from [com.turingtechnologies.materialscrollbar:lib:10.1.4] D:\USER\Projec
 MERGED from [net.qiujuer.genius:blur:2.0.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\net.qiujuer.genius\blur\2.0.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.balysv:material-ripple:1.0.2] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.balysv\material-ripple\1.0.2\AndroidManifest.xml:8:5-10:41
 MERGED from [in.championswimmer:SimpleFingerGestures_Android_Library:1.2] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\in.championswimmer\SimpleFingerGestures_Android_Library\1.2\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:design:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\design\25.1.0\AndroidManifest.xml:21:5-23:62
-MERGED from [com.android.support:transition:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\transition\25.1.0\AndroidManifest.xml:20:5-44
 MERGED from [OpenLauncher:smoothviewpager:unspecified] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\smoothviewpager\unspecified\AndroidManifest.xml:7:5-9:41
 MERGED from [OpenLauncher:materialpreffragment:unspecified] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\materialpreffragment\unspecified\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:cardview-v7:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.1.0\AndroidManifest.xml:20:5-43
 MERGED from [com.afollestad.material-dialogs:commons:0.9.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.afollestad.material-dialogs\commons\0.9.1.0\AndroidManifest.xml:8:5-10:41
 MERGED from [com.afollestad.material-dialogs:core:0.9.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.afollestad.material-dialogs\core\0.9.1.0\AndroidManifest.xml:8:5-11:75
 MERGED from [com.android.support:support-v13:25.0.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v13\25.0.0\AndroidManifest.xml:21:5-23:55
-MERGED from [com.android.support:recyclerview-v7:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.1.0\AndroidManifest.xml:20:5-43
 MERGED from [me.zhanghai.android.materialprogressbar:library:1.3.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\me.zhanghai.android.materialprogressbar\library\1.3.0\AndroidManifest.xml:12:5-14:41
 MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta4\AndroidManifest.xml:5:5-7:41
 MERGED from [com.github.medyo:fancybuttons:1.8.2] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.medyo\fancybuttons\1.8.2\AndroidManifest.xml:7:5-9:41
 MERGED from [com.amulyakhare:com.amulyakhare.textdrawable:1.0.1] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.amulyakhare\com.amulyakhare.textdrawable\1.0.1\AndroidManifest.xml:8:5-10:41
+MERGED from [com.github.daniel-stoneuk:material-about-library:1.4.2] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.daniel-stoneuk\material-about-library\1.4.2\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:cardview-v7:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:design:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\design\25.1.0\AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:recyclerview-v7:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:transition:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\transition\25.1.0\AndroidManifest.xml:20:5-44
 MERGED from [OpenLauncher:launcheranim:unspecified] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\OpenLauncher\launcheranim\unspecified\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.0\AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:support-v4:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.0\AndroidManifest.xml:21:5-23:54
@@ -221,10 +232,14 @@ MERGED from [com.android.support:animated-vector-drawable:25.1.0] D:\USER\Projec
 MERGED from [com.android.support:support-vector-drawable:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.0\AndroidManifest.xml:21:5-43
 MERGED from [com.android.support:support-compat:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.0\AndroidManifest.xml:21:5-23:58
 	tools:overrideLibrary
-		ADDED from [com.android.support:design:25.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.android.support\design\25.1.0\AndroidManifest.xml:23:9-59
+		ADDED from [com.afollestad.material-dialogs:core:0.9.1.0] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.afollestad.material-dialogs\core\0.9.1.0\AndroidManifest.xml:11:9-72
 	android:targetSdkVersion
 		INJECTED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
 		INJECTED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
 		INJECTED from D:\USER\ProjectData\OpenLauncher\launcher\src\main\AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from [com.github.daniel-stoneuk:material-about-library:1.4.2] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.daniel-stoneuk\material-about-library\1.4.2\AndroidManifest.xml:11:5-67
+	android:name
+		ADDED from [com.github.daniel-stoneuk:material-about-library:1.4.2] D:\USER\ProjectData\OpenLauncher\launcher\build\intermediates\exploded-aar\com.github.daniel-stoneuk\material-about-library\1.4.2\AndroidManifest.xml:11:22-64

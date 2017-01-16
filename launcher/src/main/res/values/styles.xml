@@ -16,11 +16,16 @@
         <item name="android:textColorSecondary">@color/Light.TextColorSec</item>
 	</style>
 
-    <style name="NormalActivity.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="android:colorPrimaryDark"  tools:targetApi="21">@color/Light.PrimaryDark</item>
-
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme.MaterialAboutActivity" parent="Theme.Mal" >
+        <item name="colorPrimaryDark">@color/Light.PrimaryDark</item>
         <item name="colorPrimary">@color/Light.Primary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="NormalActivity.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/Light.PrimaryDark</item>
+        <item name="colorPrimary">@color/Light.Primary</item>
+        <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:windowBackground">@color/Light.GreyBackground</item>
 

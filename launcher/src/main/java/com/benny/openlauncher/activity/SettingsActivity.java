@@ -87,30 +87,31 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.launcherInfo:
-                new MaterialDialog.Builder(this).title("About")
-                        .content(R.string.launcherInfo)
-                        .positiveText("Ok")
-                        .negativeText("Rate")
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                String url = "https://play.google.com/store/apps/details?id=com.benny.openlauncher";
-                                Intent i = new Intent(Intent.ACTION_VIEW);
-                                i.setData(Uri.parse(url));
-                                startActivity(i);
-                            }
-                        })
-                        .neutralText("GitHub")
-                        .onNeutral(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                String url = "https://github.com/BennyKok/OpenLauncher";
-                                Intent i = new Intent(Intent.ACTION_VIEW);
-                                i.setData(Uri.parse(url));
-                                startActivity(i);
-                            }
-                        })
-                        .show();
+                startActivity(new Intent(this,AboutActivity.class));
+//                new MaterialDialog.Builder(this).title("About")
+//                        .content(R.string.launcherInfo)
+//                        .positiveText("Ok")
+//                        .negativeText("Rate")
+//                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+//                            @Override
+//                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                                String url = "https://play.google.com/store/apps/details?id=com.benny.openlauncher";
+//                                Intent i = new Intent(Intent.ACTION_VIEW);
+//                                i.setData(Uri.parse(url));
+//                                startActivity(i);
+//                            }
+//                        })
+//                        .neutralText("GitHub")
+//                        .onNeutral(new MaterialDialog.SingleButtonCallback() {
+//                            @Override
+//                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                                String url = "https://github.com/BennyKok/OpenLauncher";
+//                                Intent i = new Intent(Intent.ACTION_VIEW);
+//                                i.setData(Uri.parse(url));
+//                                startActivity(i);
+//                            }
+//                        })
+//                        .show();
                 break;
         }
         return super.onOptionsItemSelected(item);
