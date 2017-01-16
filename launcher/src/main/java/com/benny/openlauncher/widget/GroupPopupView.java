@@ -74,7 +74,8 @@ public class GroupPopupView extends FrameLayout {
 
     public void dismissPopup() {
         removeAllViews();
-        dismissListener.onDismiss();
+        if (dismissListener != null)
+            dismissListener.onDismiss();
         cellContainer.removeAllViews();
         setVisibility(View.INVISIBLE);
     }

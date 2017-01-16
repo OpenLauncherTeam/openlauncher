@@ -102,6 +102,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
     private CallLogObserver callLogObserver;
+    //region APP_DRAWER_ANIMATION
+    private int cx, cy, rad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +162,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         }
     }
 
+    //region INIT
+
     private void init() {
         searchBar.setVisibility(View.VISIBLE);
 
@@ -180,10 +184,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             searchBar.setPadding(0, statusBarHeight, 0, 0);
 
             dock.getLayoutParams().height += navBarHeight;
-            dock.setPadding(dock.getPaddingLeft(), dock.getPaddingTop(),dock.getPaddingRight() , dock.getPaddingBottom() + navBarHeight);
+
+            dock.setPadding(dock.getPaddingLeft(), dock.getPaddingTop(), dock.getPaddingRight(), dock.getPaddingBottom() + navBarHeight);
 
             appDrawerOtter.setPadding(0, statusBarHeight, 0, navBarHeight);
-            desktopEditOptionView.setPadding(0, 0, 0,navBarHeight);
+            desktopEditOptionView.setPadding(0, 0, 0, navBarHeight);
         }
 
         registerAppUpdateReceiver();
@@ -218,8 +223,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         System.gc();
     }
 
-    //region INIT
-
     /**
      * This should be only called to find the view at Activity start up
      */
@@ -243,7 +246,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
      */
     private void initViews() {
         initMinBar();
-        initQuickCenter();
+        // TODO: 1/16/2017 enable this later
+        //initQuickCenter();
 
         DragNavigationControl.init(this, findViewById(R.id.left), findViewById(R.id.right));
 
@@ -353,7 +357,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         int iconSize = LauncherSettings.getInstance(this).generalSettings.iconSize;
 
         dock.init();
-        dock.getLayoutParams().height = Tool.dp2px(36 + iconSize, this);
+        if (LauncherSettings.getInstance(this).generalSettings.dockShowLabel) {
+            dock.getLayoutParams().height = Tool.dp2px(36 + iconSize + 14, this);
+            if (LauncherSettings.getInstance(this).generalSettings.drawerMode == AppDrawer.DrawerMode.Paged)
+                dock.setPadding(dock.getPaddingLeft(), dock.getPaddingTop(), dock.getPaddingRight(), dock.getPaddingBottom() + Tool.dp2px(9, this));
+        }else
+            dock.getLayoutParams().height = Tool.dp2px(36 + iconSize, this);
 
         dragOptionView.setAutoHideView(searchBar);
 
@@ -361,9 +370,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             @Override
             public void onStart() {
                 //dock.animate().alpha(0).setDuration(100);
-                desktopIndicator.animate().alpha(0).setDuration(100);
-                searchBar.animate().alpha(0).setDuration(80);
-                desktop.animate().alpha(0).setDuration(100);
+                //desktopIndicator.animate().alpha(0).setDuration(100);
+                //desktop.animate().alpha(0).setDuration(100);
+
+                searchBar.animate().alpha(0).setDuration(100);
 
                 if (appSearchBar != null) {
                     appSearchBar.setAlpha(0);
@@ -376,14 +386,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
             @Override
             public void onEnd() {
-                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar)
-                    searchBar.setVisibility(View.INVISIBLE);
+                dock.setVisibility(View.INVISIBLE);
+                desktopIndicator.setVisibility(View.INVISIBLE);
+                desktop.setVisibility(View.INVISIBLE);
             }
         }, new AppDrawer.CallBack() {
             @Override
             public void onStart() {
-                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar)
-                    searchBar.setVisibility(View.VISIBLE);
                 if (appDrawerIndicator != null)
                     appDrawerIndicator.animate().alpha(0).setDuration(100);
                 if (appSearchBar != null) {
@@ -394,16 +403,22 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                         }
                     });
                 }
+
+                dock.setVisibility(View.VISIBLE);
+                desktopIndicator.setVisibility(View.VISIBLE);
+                desktop.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onEnd() {
                 if (LauncherSettings.getInstance(Home.this).generalSettings.drawerRememberPage)
                     appDrawerOtter.scrollToStart();
-                desktopIndicator.animate().alpha(1);
-                appDrawer.setVisibility(View.INVISIBLE);
+
                 //dock.animate().alpha(1).setDuration(50);
-                desktop.animate().alpha(1);
+                //desktopIndicator.animate().alpha(1);
+                //desktop.animate().alpha(1);
+
+                appDrawer.setVisibility(View.INVISIBLE);
                 if (!dragOptionView.dragging)
                     searchBar.animate().alpha(1);
             }
@@ -514,7 +529,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == REQUEST_PERMISSION_READ_CALL_LOG) {
+        if (requestCode == REQUEST_PERMISSION_READ_CALL_LOG && callLogObserver != null) {
             //Read call log permitted
             callLogObserver = new CallLogObserver(new Handler());
             getApplicationContext().getContentResolver().registerContentObserver(android.provider.CallLog.Calls.CONTENT_URI, true, callLogObserver);
@@ -522,64 +537,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             callLogObserver.onChange(true);
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    public class CallLogObserver extends ContentObserver {
-
-        private final String columns[] = new String[]{
-                CallLog.Calls._ID,
-                CallLog.Calls.NUMBER,
-                CallLog.Calls.CACHED_NAME};
-//                CallLog.Calls.DATE,
-//                CallLog.Calls.DURATION,
-//                CallLog.Calls.TYPE};
-
-        public CallLogObserver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        public boolean deliverSelfNotifications() {
-            return true;
-        }
-
-        public void logCallLog() {
-            if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
-                Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_DENIED");
-                ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.READ_CALL_LOG}, REQUEST_PERMISSION_READ_CALL_LOG);
-            } else {
-                Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, columns, null, null, CallLog.Calls.DATE + " DESC LIMIT 15");
-                int number = c.getColumnIndex(CallLog.Calls.NUMBER);
-                int name = c.getColumnIndex(CallLog.Calls.CACHED_NAME);
-//                int type = c.getColumnIndex(CallLog.Calls.TYPE);
-//                int date = c.getColumnIndex(CallLog.Calls.DATE);
-//                int duration = c.getColumnIndex(CallLog.Calls.DURATION);
-
-                Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_GRANTED");
-                quickContactFA.clear();
-                while (c.moveToNext()) {
-                    String phone = c.getString(number);
-                    String uri = "tel:" + phone;
-                    Intent intent = new Intent(Intent.ACTION_CALL);
-                    intent.setData(Uri.parse(uri));
-                    String caller = c.getString(name);
-                    quickContactFA.add(new QuickCenterItem.ContactItem(
-                            new QuickCenterItem.ContactContent(caller, phone, intent,
-                                    Tool.fetchThumbnail(Home.this, phone))));
-                }
-            }
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            this.onChange(selfChange, null);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            logCallLog();
-        }
-
     }
 
     private void registerAppUpdateReceiver() {
@@ -697,20 +654,19 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     @Override
     public void onBackPressed() {
         drawerLayout.closeDrawers();
-        if (desktop != null)
-            if (!desktop.inEditMode) {
-                desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
-                if (appDrawer.getVisibility() == View.VISIBLE)
-                    closeAppDrawer();
-            } else {
-                desktop.pages.get(desktop.getCurrentItem()).performClick();
-            }
+        handleLauncherPause();
     }
 
     @Override
     protected void onResume() {
         if (appWidgetHost != null)
             appWidgetHost.startListening();
+        handleLauncherPause();
+
+        super.onResume();
+    }
+
+    private void handleLauncherPause() {
         if (desktop != null)
             if (!desktop.inEditMode) {
                 if (LauncherSettings.getInstance(Home.this).generalSettings != null)
@@ -721,12 +677,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             } else {
                 desktop.pages.get(desktop.getCurrentItem()).performClick();
             }
-        super.onResume();
+
+        if (groupPopup != null) {
+            groupPopup.dismissPopup();
+        }
     }
     //endregion
-
-    //region APP_DRAWER_ANIMATION
-    private int cx, cy, rad;
 
     /**
      * Call this to open the app drawer with animation
@@ -762,11 +718,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         appDrawerOtter.close(cx, cy, rad, finalRadius);
     }
 
-    //endregion
-
-
-    //region VIEW_ONCLICK
-
     /**
      * When the search button of the search bar clicked
      */
@@ -784,6 +735,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         }
         Home.this.startActivity(i);
     }
+
+    //endregion
+
+
+    //region VIEW_ONCLICK
 
     public void onVoiceSearch(View view) {
         try {
@@ -829,6 +785,64 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 }
                 break;
         }
+    }
+
+    public class CallLogObserver extends ContentObserver {
+
+        private final String columns[] = new String[]{
+                CallLog.Calls._ID,
+                CallLog.Calls.NUMBER,
+                CallLog.Calls.CACHED_NAME};
+//                CallLog.Calls.DATE,
+//                CallLog.Calls.DURATION,
+//                CallLog.Calls.TYPE};
+
+        public CallLogObserver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        public boolean deliverSelfNotifications() {
+            return true;
+        }
+
+        public void logCallLog() {
+            if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+                Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_DENIED");
+                ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.READ_CALL_LOG}, REQUEST_PERMISSION_READ_CALL_LOG);
+            } else {
+                Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, columns, null, null, CallLog.Calls.DATE + " DESC LIMIT 15");
+                int number = c.getColumnIndex(CallLog.Calls.NUMBER);
+                int name = c.getColumnIndex(CallLog.Calls.CACHED_NAME);
+//                int type = c.getColumnIndex(CallLog.Calls.TYPE);
+//                int date = c.getColumnIndex(CallLog.Calls.DATE);
+//                int duration = c.getColumnIndex(CallLog.Calls.DURATION);
+
+                Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_GRANTED");
+                quickContactFA.clear();
+                while (c.moveToNext()) {
+                    String phone = c.getString(number);
+                    String uri = "tel:" + phone;
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    intent.setData(Uri.parse(uri));
+                    String caller = c.getString(name);
+                    quickContactFA.add(new QuickCenterItem.ContactItem(
+                            new QuickCenterItem.ContactContent(caller, phone, intent,
+                                    Tool.fetchThumbnail(Home.this, phone))));
+                }
+            }
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            this.onChange(selfChange, null);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            logCallLog();
+        }
+
     }
     //endregion
 }

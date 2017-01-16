@@ -73,6 +73,14 @@ public class Tool {
             Log.d("Hey", o.toString());
     }
 
+    public static void print(Object... o) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < o.length; i++) {
+            sb.append(o[i].toString()).append("  ");
+        }
+        Log.d("Hey", sb.toString());
+    }
+
     public static String[] split(String string, String delem) {
         ArrayList<String> list = new ArrayList<String>();
         char[] charArr = string.toCharArray();

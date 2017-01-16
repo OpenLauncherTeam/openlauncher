@@ -12,7 +12,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -23,7 +22,7 @@ import com.benny.openlauncher.util.Tool;
 
 import io.codetail.widget.RevealFrameLayout;
 
-import static com.benny.openlauncher.widget.AppDrawer.DrawerMode.Grid;
+import static com.benny.openlauncher.widget.AppDrawer.DrawerMode.Vertical;
 
 /**
  * Created by BennyKok on 11/5/2016.
@@ -99,7 +98,7 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
                         mGrid.setAlpha(0);
                         mGrid.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime - 50).setInterpolator(new AccelerateDecelerateInterpolator());
                         break;
-                    case Grid:
+                    case Vertical:
                         drawerViewGrid.recyclerView.setAlpha(0);
                         drawerViewGrid.recyclerView.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime - 50).setInterpolator(new AccelerateDecelerateInterpolator());
                         break;
@@ -167,7 +166,7 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
                     }
                 });
                 break;
-            case Grid:
+            case Vertical:
                 drawerViewGrid.recyclerView.animate().setStartDelay(0).alpha(0).setDuration(60L).withEndAction(new Runnable() {
                     @Override
                     public void run() {
@@ -192,14 +191,14 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
                 addView(drawerViewPaged);
                 addView(layoutInflater.inflate(R.layout.view_drawerindicator, this, false));
                 break;
-            case Grid:
+            case Vertical:
                 drawerViewGrid = (GridAppDrawer) layoutInflater.inflate(R.layout.view_griddrawer, this, false);
                 if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar)
                     ((LayoutParams) drawerViewGrid.getLayoutParams()).topMargin += Tool.dp2px(60, getContext());
                 addView(drawerViewGrid);
                 break;
         }
-        if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar && drawerMode == Grid) {
+        if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar && drawerMode == Vertical) {
             CardView cv = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_searchbar_app, this, false);
             addView(cv);
             searchBar = (EditText) cv.findViewById(R.id.et);
@@ -213,7 +212,7 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
             case Paged:
                 drawerViewPaged.resetAdapter();
                 break;
-            case Grid:
+            case Vertical:
                 if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerUseCard){
                     drawerViewGrid.setCardBackgroundColor(Color.TRANSPARENT);
                     drawerViewGrid.setCardElevation(0);
@@ -232,7 +231,7 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
             case Paged:
                 drawerViewPaged.setCurrentItem(0, false);
                 break;
-            case Grid:
+            case Vertical:
                 drawerViewGrid.recyclerView.scrollToPosition(0);
                 break;
         }
@@ -243,7 +242,7 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
             case Paged:
                 drawerViewPaged.withHome(home, (PagerIndicator) findViewById(R.id.appDrawerIndicator));
                 break;
-            case Grid:
+            case Vertical:
                 break;
         }
     }
@@ -258,7 +257,7 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
         switch (drawerMode) {
             case Paged:
                 break;
-            case Grid:
+            case Vertical:
                 if (drawerViewGrid.gridDrawerAdapter != null)
                     drawerViewGrid.gridDrawerAdapter.filter(charSequence);
                 break;
@@ -271,7 +270,7 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
     }
 
     public enum DrawerMode {
-        Paged, Grid
+        Paged, Vertical
     }
 
     public interface CallBack {
