@@ -43,24 +43,24 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                     .add(new MaterialPrefFragment.ButtonPref("desktopMode", "Style", "choose different style of your desktop"))
                     .add(new MaterialPrefFragment.TBPref("desktopSearchBar", "Show search bar", "Display a search bar always on top of the desktop", generalSettings.desktopSearchBar))
                     // FIXME: 11/25/2016 This will have problem (in allappsmode) as the apps will be cut off when scale down
-                    .add(new MaterialPrefFragment.NUMPref("gridsizedesktop","Grid size", "Desktop grid size",
+                    .add(new MaterialPrefFragment.NUMPref("gridsizedesktop","Vertical size", "Desktop grid size",
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedesktop","Column", generalSettings.desktopGridX, 4, 10),
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsizedesktop","Row", generalSettings.desktopGridY, 4, 10)
                     ))
                     .add(new MaterialPrefFragment.GroupTitle("Dock"))
                     .add(new MaterialPrefFragment.ColorPref("dockBackground","Background","Dock background color",generalSettings.dockColor))
                     .add(new MaterialPrefFragment.TBPref("dockShowLabel","Show app label","show the app's name in the dock", generalSettings.dockShowLabel))
-                    .add(new MaterialPrefFragment.NUMPref("gridsizedock","Grid size", "Dock grid size",
+                    .add(new MaterialPrefFragment.NUMPref("gridsizedock","Vertical size", "Dock grid size",
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedock","Column", generalSettings.dockGridX, 5, 10)
                     ))
                     .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
+                    .add(new MaterialPrefFragment.ButtonPref("drawerstyle", "Style", "choose the style of the app drawer"))
                     .add(new MaterialPrefFragment.ColorPref("drawerBackground","Background","Drawer background color",generalSettings.drawerColor))
                     .add(new MaterialPrefFragment.TBPref("drawerCard", "Use Card", "Drawer card", generalSettings.drawerUseCard))
                     .add(new MaterialPrefFragment.ColorPref("drawerCardBackground","Card Background","Drawer card background color",generalSettings.drawerCardColor))
                     .add(new MaterialPrefFragment.ColorPref("drawerLabelColor","Label Color","Drawer label Color",generalSettings.drawerLabelColor))
-                    .add(new MaterialPrefFragment.ButtonPref("drawerstyle", "Style", "choose the style of the app drawer"))
                     .add(new MaterialPrefFragment.TBPref("appdrawersearchbar", "Search Bar", "search bar will only appear in grid drawer", generalSettings.drawerSearchBar))
-                    .add(new MaterialPrefFragment.NUMPref("gridsize","Grid size", "App drawer grid size",
+                    .add(new MaterialPrefFragment.NUMPref("gridsize","Vertical size", "App drawer grid size",
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsize","Column", generalSettings.drawerGridX, 1, 10),
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsize","Row", generalSettings.drawerGridY, 1, 10)
                     ))

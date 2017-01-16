@@ -35,6 +35,7 @@ public class ItemViewFactory {
 
     public static final int NO_FLAGS = 0x01;
     public static final int NO_LABEL = 0x02;
+
     public static View getItemView(final Context context, final DesktopCallBack callBack, final Desktop.Item item, int flags) {
         View view = null;
         switch (item.type) {
@@ -221,7 +222,7 @@ public class ItemViewFactory {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (Home.launcher.groupPopup.showWindowV(item, v, callBack)) {
+                        if (Home.launcher != null && Home.launcher.groupPopup.showWindowV(item, v, callBack)) {
                             ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
                         }
                     }
@@ -275,9 +276,9 @@ public class ItemViewFactory {
                 else {
                     AppManager.App app = AppManager.getInstance(context).findApp(item.actions[i].getComponent().getPackageName(), item.actions[i].getComponent().getClassName());
                     if (app != null)
-                    icons[i] = Tool.drawableToBitmap(app.icon);
+                        icons[i] = Tool.drawableToBitmap(app.icon);
                     else
-                    icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
+                        icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
                 }
             } else {
                 icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));

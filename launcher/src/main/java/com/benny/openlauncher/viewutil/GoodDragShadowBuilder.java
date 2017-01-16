@@ -19,7 +19,7 @@ public class GoodDragShadowBuilder extends View.DragShadowBuilder {
 
     @Override
     public void onProvideShadowMetrics(Point shadowSize, Point shadowTouchPoint) {
-        super.onProvideShadowMetrics(shadowSize, shadowTouchPoint);
+        shadowSize.set(getView().getWidth(), getView().getHeight());
         shadowTouchPoint.set(x, y);
     }
 

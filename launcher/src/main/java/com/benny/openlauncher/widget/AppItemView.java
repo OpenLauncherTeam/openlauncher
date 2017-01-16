@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
@@ -44,6 +45,8 @@ public class AppItemView extends View implements Drawable.Callback{
         invalidateDrawable(icon);
         super.refreshDrawableState();
     }
+
+    private static Typeface myType;
 
     @Override
     public void invalidateDrawable(Drawable drawable) {
@@ -122,6 +125,7 @@ public class AppItemView extends View implements Drawable.Callback{
     }
 
     private boolean roundBg;
+
     private int bgColor;
 
     private float labelHeight;
@@ -133,6 +137,8 @@ public class AppItemView extends View implements Drawable.Callback{
     }
 
     private float heightPadding;
+
+    private float horizPadding = 8; // In dp
 
     public AppItemView(Context context) {
         super(context);
@@ -163,14 +169,18 @@ public class AppItemView extends View implements Drawable.Callback{
     }
 
     private void init(){
+        if (myType == null)
+            myType = Typeface.createFromAsset(getContext().getAssets(),"RobotoCondensed-Regular.ttf");
         setWillNotDraw(false);
         setDrawingCacheEnabled(true);
         setWillNotCacheDrawing(false);
 
         labelHeight = Tool.dp2px(14,getContext());
+        horizPadding = Tool.dp2px(horizPadding,getContext());
 
         textPaint.setTextSize(sp2px(getContext(),14));
         textPaint.setColor(Color.DKGRAY);
+        textPaint.setTypeface(myType);
     }
 
     public static int sp2px(Context context, float spValue) {
@@ -196,10 +206,18 @@ public class AppItemView extends View implements Drawable.Callback{
         heightPadding = (getHeight() - mHeight)/2f;
 
         if (label != null && !noLabel) {
+            float eachTextSize = mTextBound.width() / label.length();
+            int charToTruncate = (int)Math.ceil(horizPadding / eachTextSize);
+            Tool.print(label,eachTextSize,charToTruncate);
             float x = (getWidth()-mTextBound.width())/2f;
+
             if (x < 0)
                 x = 0;
-            canvas.drawText(label,x, getHeight() - heightPadding, textPaint);
+
+            if (mTextBound.width() + horizPadding > getWidth())
+                canvas.drawText(label.substring(0,label.length()-3-charToTruncate) + "..",x + horizPadding, getHeight() - heightPadding, textPaint);
+            else
+                canvas.drawText(label,x, getHeight() - heightPadding, textPaint);
         }
 
         if (icon != null){
