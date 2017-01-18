@@ -1663,7 +1663,8 @@ int layout view_widgetcontainer 0x7f040077
 int menu launcher_action 0x7f0f0000
 int menu settings_options 0x7f0f0001
 int mipmap googleicon 0x7f030000
-int mipmap ic_launcher 0x7f030001
+int mipmap ic_chris 0x7f030001
+int mipmap ic_launcher 0x7f030002
 int string abc_action_bar_home_description 0x7f080000
 int string abc_action_bar_home_description_format 0x7f080001
 int string abc_action_bar_home_subtitle_description_format 0x7f080002

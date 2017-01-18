@@ -34,8 +34,10 @@ public class AboutActivity extends MaterialAboutActivity {
         MaterialAboutCard.Builder creditCard = new MaterialAboutCard.Builder();
         creditCard.title("Credit");
         creditCard.addItem(new MaterialAboutActionItem.Builder()
+                .icon(R.mipmap.ic_chris)
                 .text("Chris DeBrodie")
                 .subText("Helped me a lot with bugs and suggestion")
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this,Uri.parse("https://plus.google.com/111923938461696019967")))
                 .build());
         //authorCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(),"Chris DeBrodie",false, Uri.parse("")));
 
