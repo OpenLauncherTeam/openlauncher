@@ -117,6 +117,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, null);
         setContentView(myScreen);
 
+
         Tool.print("Content View sat: " + String.valueOf(System.currentTimeMillis() - now));
         now = System.currentTimeMillis();
 
