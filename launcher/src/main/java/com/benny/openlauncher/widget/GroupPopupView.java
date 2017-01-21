@@ -3,6 +3,8 @@ package com.benny.openlauncher.widget;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
@@ -46,11 +48,21 @@ public class GroupPopupView extends FrameLayout {
     private void init() {
         if (isInEditMode()) return;
         init = false;
+        int color;
 
         bringToFront();
         popupParent = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_grouppopup, this, false);
         cellContainer = (CellContainer) popupParent.findViewById(R.id.cc);
         title = (TextView) popupParent.findViewById(R.id.tv);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                title.setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
+                popupParent.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
+            }
+        }, 2000);
 
         setOnClickListener(new OnClickListener() {
             @Override
@@ -100,6 +112,7 @@ public class GroupPopupView extends FrameLayout {
                 if (y2 * cellSize[0] + x2 > item.actions.length - 1) continue;
                 final Intent act = item.actions[y2 * cellSize[0] + x2];
                 AppItemView.Builder b = new AppItemView.Builder(getContext()).withOnTouchGetPosition();
+                b.setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
                 if (act.getStringExtra("shortCutIconID") != null) {
                     b.setShortcutItem(act);
                 } else {
@@ -228,10 +241,13 @@ public class GroupPopupView extends FrameLayout {
             coord[1] += popupHeight / 2;
         }
 
+        int x = coord[0];
+        int y = coord[1];
+
         popupParent.setPivotX(0);
         popupParent.setPivotX(0);
-        popupParent.setX(coord[0]);
-        popupParent.setY(coord[1]);
+        popupParent.setX(x);
+        popupParent.setY(y - 200);
 
         addView(popupParent);
         return true;
