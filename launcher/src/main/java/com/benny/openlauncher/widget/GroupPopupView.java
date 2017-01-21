@@ -208,7 +208,7 @@ public class GroupPopupView extends FrameLayout {
             }
         };
 
-        int popupWidth = contentPadding * 4 + popupParent.getContentPaddingLeft() + popupParent.getContentPaddingRight() + (iconSize) * cellSize[0];
+        int popupWidth = contentPadding * 8 + popupParent.getContentPaddingLeft() + popupParent.getContentPaddingRight() + (iconSize) * cellSize[0];
         popupParent.getLayoutParams().width = popupWidth;
         int popupHeight = contentPadding * 2 + popupParent.getContentPaddingTop() + popupParent.getContentPaddingBottom() + Tool.dp2px(30, c)
                 + (iconSize + textHeight) * cellSize[1];
@@ -247,7 +247,7 @@ public class GroupPopupView extends FrameLayout {
         popupParent.setPivotX(0);
         popupParent.setPivotX(0);
         popupParent.setX(x);
-        popupParent.setY(y - 200);
+        popupParent.setY(y - 175);
 
         addView(popupParent);
         return true;

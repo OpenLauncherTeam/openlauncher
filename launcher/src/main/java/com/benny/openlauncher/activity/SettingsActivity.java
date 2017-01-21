@@ -47,24 +47,31 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedesktop","Column", generalSettings.desktopGridX, 4, 10),
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsizedesktop","Row", generalSettings.desktopGridY, 4, 10)
                     ))
+                    .add(new MaterialPrefFragment.TBPref("fullscreen", "Fullscreen", "Enable fullscreen for desktop", generalSettings.fullscreen))
+                    .add(new MaterialPrefFragment.TBPref("swipe", "Swipe", "Swipe up to open app drawer", generalSettings.swipe))
+
                     .add(new MaterialPrefFragment.GroupTitle("Dock"))
-                    .add(new MaterialPrefFragment.ColorPref("dockBackground","Background","Dock background color",generalSettings.dockColor))
                     .add(new MaterialPrefFragment.TBPref("dockShowLabel","Show app label","show the app's name in the dock", generalSettings.dockShowLabel))
                     .add(new MaterialPrefFragment.NUMPref("gridsizedock","Vertical size", "Dock grid size",
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedock","Column", generalSettings.dockGridX, 5, 10)
                     ))
-                    .add(new MaterialPrefFragment.GroupTitle("AppDrawer"))
+
+                    .add(new MaterialPrefFragment.GroupTitle("AppDrawer and Folder"))
                     .add(new MaterialPrefFragment.ButtonPref("drawerstyle", "Style", "choose the style of the app drawer"))
-                    .add(new MaterialPrefFragment.ColorPref("drawerBackground","Background","Drawer background color",generalSettings.drawerColor))
                     .add(new MaterialPrefFragment.TBPref("drawerCard", "Use Card", "Drawer card", generalSettings.drawerUseCard))
-                    .add(new MaterialPrefFragment.ColorPref("drawerCardBackground","Card Background","Drawer card background color",generalSettings.drawerCardColor))
-                    .add(new MaterialPrefFragment.ColorPref("drawerLabelColor","Label Color","Drawer label Color",generalSettings.drawerLabelColor))
                     .add(new MaterialPrefFragment.TBPref("appdrawersearchbar", "Search Bar", "search bar will only appear in grid drawer", generalSettings.drawerSearchBar))
                     .add(new MaterialPrefFragment.NUMPref("gridsize","Vertical size", "App drawer grid size",
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsize","Column", generalSettings.drawerGridX, 1, 10),
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsize","Row", generalSettings.drawerGridY, 1, 10)
                     ))
                     .add(new MaterialPrefFragment.TBPref("drawerRememberPage", "Remember last page", "The page will not reset to the first page when reopen app drawer", !generalSettings.drawerRememberPage))
+
+                    .add(new MaterialPrefFragment.GroupTitle("Color"))
+                    .add(new MaterialPrefFragment.ColorPref("dockBackground","Dock","Dock background color",generalSettings.dockColor))
+                    .add(new MaterialPrefFragment.ColorPref("drawerBackground","Drawer","Drawer background color",generalSettings.drawerColor))
+                    .add(new MaterialPrefFragment.ColorPref("drawerCardBackground","Folder and Card","Folder and Drawer card background color",generalSettings.drawerCardColor))
+                    .add(new MaterialPrefFragment.ColorPref("drawerLabelColor","Label Color","Folder and Drawer label Color",generalSettings.drawerLabelColor))
+
                     .add(new MaterialPrefFragment.GroupTitle("Apps"))
                     .add(new MaterialPrefFragment.NUMPref("iconsize", "Icon Size", "Size of all app icon", generalSettings.iconSize, 30, 80))
                     .add(new MaterialPrefFragment.ButtonPref("iconpack", "Icon Pack", "Select installed icon pack"))
@@ -130,6 +137,14 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                     Home.launcher.searchBar.setVisibility(View.GONE);
                 else
                     Home.launcher.searchBar.setVisibility(View.VISIBLE);
+                break;
+            case "fullscreen":
+                generalSettings.fullscreen = (boolean)p2;
+                prepareRestart();
+                break;
+            case "swipe":
+                generalSettings.swipe = (boolean)p2;
+                prepareRestart();
                 break;
             case "iconsize":
                 generalSettings.iconSize = (int) p2;

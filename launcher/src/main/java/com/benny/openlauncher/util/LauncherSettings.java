@@ -219,6 +219,8 @@ public class LauncherSettings {
         public int desktopGridX = 4;
         public int desktopGridY = 4;
         public boolean desktopSearchBar = true;
+        public boolean fullscreen = false;
+        public boolean swipe = false;
 
         //Drawer
         public int drawerColor = Color.TRANSPARENT;
