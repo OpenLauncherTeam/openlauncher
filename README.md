@@ -51,6 +51,11 @@ Support landscape orientation
 Add more customization settings
 
 ###Some screenshots>>
+<img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/p1.jpg" width="300">
+<img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/p2.jpg" width="300">
+<img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/p3.jpg" width="300">
+<img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/p4.jpg" width="300">
+These are the older version.
 <img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/Screenshot_2016-08-03-20-57-15.png" width="300">
 <img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/Screenshot_2016-08-03-20-57-26.png" width="300">
 
