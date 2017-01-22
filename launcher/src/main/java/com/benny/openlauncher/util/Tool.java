@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -384,11 +385,23 @@ public class Tool {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 Home.touchX = (int) motionEvent.getX();
                 Home.touchY = (int) motionEvent.getY();
-                Tool.print(Home.touchX);
-                Tool.print(Home.touchY);
+                //Tool.print(Home.touchX);
+                //Tool.print(Home.touchY);
                 return false;
             }
         };
+    }
+
+    public static Point convertPoint(Point fromPoint, View fromView, View toView){
+        int[] fromCoord = new int[2];
+        int[] toCoord = new int[2];
+        fromView.getLocationOnScreen(fromCoord);
+        toView.getLocationOnScreen(toCoord);
+
+        Point toPoint = new Point(fromCoord[0] - toCoord[0] + fromPoint.x,
+                fromCoord[1] - toCoord[1] + fromPoint.y);
+
+        return toPoint;
     }
 
     private static String convertStreamToString(InputStream is) throws Exception {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,10 +19,12 @@ import com.benny.openlauncher.util.LauncherSettings;
 
 import static com.benny.openlauncher.widget.Desktop.*;
 
-public class Dock extends CellContainer implements View.OnDragListener ,DesktopCallBack{
+public class Dock extends CellContainer implements View.OnDragListener, DesktopCallBack {
 
     public View previousItemView;
     public Item previousItem;
+
+    private float startPosX, startPosY;
 
     private Home home;
 
@@ -38,7 +41,7 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
         if (isInEditMode()) return;
 
         if (LauncherSettings.getInstance(getContext()).generalSettings != null)
-        setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.dockGridX, 1);
+            setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.dockGridX, 1);
         setOnDragListener(this);
 
         super.init();
@@ -48,8 +51,30 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
         this.home = home;
         removeAllViews();
         for (Item item : LauncherSettings.getInstance(getContext()).dockData) {
-            addItemToPagePosition(item,0);
+            addItemToPagePosition(item, 0);
         }
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            startPosX = ev.getX();
+            startPosY = ev.getY();
+        }
+
+        if (ev.getAction() == MotionEvent.ACTION_UP) {
+            float minDist = 150f;
+            Tool.print((int)ev.getX(),(int)ev.getY());
+            if (startPosY - ev.getY() > minDist) {
+                if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
+                    Point p = Tool.convertPoint(new Point((int)ev.getX(),(int)ev.getY()),this,Home.launcher.appDrawerOtter);
+                    // FIXME: 1/22/2017 This seem weird, but the extra offset ( Tool.getNavBarHeight(getContext()) ) works on my phone
+                    // FIXME: 1/22/2017 This part of the code is identical as the code in Desktop so will combine them later
+                    Home.launcher.openAppDrawer(this,p.x,p.y - Tool.getNavBarHeight(getContext()));
+                }
+            }
+        }
+        return super.onInterceptTouchEvent(ev);
     }
 
     @Override
@@ -75,19 +100,19 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(Item.class.getClassLoader());
                 Item item = intent.getParcelableExtra("mDragData");
-                if (item.type == Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type ==  Item.Type.LAUNCHER_APP_DRAWER) {
+                if (item.type == Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type == Item.Type.LAUNCHER_APP_DRAWER) {
                     if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
                         home.desktop.consumeRevert();
                         home.dock.consumeRevert();
                     } else {
-                        Point pos = touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY,false);
+                        Point pos = touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY, false);
                         View itemView = coordinateToChildView(pos);
 
                         if (itemView != null)
-                            if (Desktop.handleOnDropOver(home,item, (Item) itemView.getTag(),itemView,this,0,this)){
+                            if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, this, 0, this)) {
                                 home.desktop.consumeRevert();
                                 home.dock.consumeRevert();
-                            }else {
+                            } else {
                                 Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
                                 home.dock.revertLastItem();
                                 home.desktop.revertLastItem();
@@ -110,7 +135,7 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
      * @param args array storing the item(pos 0) and view ref(pos 1).
      */
     @Override
-    public void setLastItem(Object... args){
+    public void setLastItem(Object... args) {
         View v = (View) args[1];
         Item item = (Item) args[0];
 
@@ -142,9 +167,9 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
     }
 
     @Override
-    public void addItemToPagePosition(final Item item,int page) {
-        int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ?  ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
-        View itemView = ItemViewFactory.getItemView(getContext(),this,item,flag);
+    public void addItemToPagePosition(final Item item, int page) {
+        int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
         if (itemView == null) {
             LauncherSettings.getInstance(getContext()).dockData.remove(item);
@@ -162,8 +187,8 @@ public class Dock extends CellContainer implements View.OnDragListener ,DesktopC
             LauncherSettings.getInstance(getContext()).dockData.add(item);
             //end
 
-            int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ?  ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
-            View itemView = ItemViewFactory.getItemView(getContext(),this,item,flag);
+            int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+            View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
             if (itemView != null) {
                 itemView.setLayoutParams(positionToLayoutPrams);

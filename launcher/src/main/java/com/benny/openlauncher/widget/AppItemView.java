@@ -208,7 +208,7 @@ public class AppItemView extends View implements Drawable.Callback{
         if (label != null && !noLabel) {
             float eachTextSize = mTextBound.width() / label.length();
             int charToTruncate = (int)Math.ceil(horizPadding / eachTextSize);
-            Tool.print(label,eachTextSize,charToTruncate);
+            //Tool.print(label,eachTextSize,charToTruncate);
             float x = (getWidth()-mTextBound.width())/2f;
 
             if (x < 0)

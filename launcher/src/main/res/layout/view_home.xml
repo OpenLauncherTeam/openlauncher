@@ -83,11 +83,11 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:paddingBottom="16dp"
-        android:paddingTop="0dp"
         android:paddingEnd="8dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:paddingStart="8dp"
+        android:paddingTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -103,6 +103,8 @@
 
     <com.benny.openlauncher.widget.DragOptionView
         android:id="@+id/dragOptionPanel"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -111,9 +113,7 @@
         app:cardBackgroundColor="@color/Light.Background"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="60dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.benny.openlauncher.widget.GroupPopupView
         android:id="@+id/groupPopup"
