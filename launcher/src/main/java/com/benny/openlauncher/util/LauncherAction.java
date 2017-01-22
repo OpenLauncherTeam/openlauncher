@@ -22,18 +22,20 @@ import net.qiujuer.genius.blur.StackBlur;
 import java.io.IOException;
 import java.util.List;
 
+import static com.benny.openlauncher.activity.Home.resources;
+
 public class LauncherAction {
 
     private static boolean clearingRam = false;
 
     public static ActionItem[] actionItems = new ActionItem[]{
-            new ActionItem(Action.SetWallpaper,"Set the wallpaper or blur it",R.drawable.ic_photo_black_24dp),
-            new ActionItem(Action.LockScreen,"Lock the screen immediately, require device administration.",R.drawable.ic_lock_black_24dp),
-            new ActionItem(Action.ClearRam,"Free the ram, force close other running services.",R.drawable.ic_donut_large_black_24dp),
-            new ActionItem(Action.DeviceSettings,"Shortcut to device/Android settings.",R.drawable.ic_settings_applications_black_24dp),
-            new ActionItem(Action.LauncherSettings,"OpenLauncher settings page.",R.drawable.ic_settings_black_24dp),
-            //new ActionItem(Action.ThemePicker,"Pick themes.",R.drawable.ic_brush_black_24dp),
-            new ActionItem(Action.VolumeDialog,"Open the volume dialog.",R.drawable.ic_volume_up_black_24dp)
+            new ActionItem(Action.SetWallpaper, resources.getString(R.string.minibar_1),R.drawable.ic_photo_black_24dp),
+            new ActionItem(Action.LockScreen,resources.getString(R.string.minibar_2),R.drawable.ic_lock_black_24dp),
+            new ActionItem(Action.ClearRam,resources.getString(R.string.minibar_3),R.drawable.ic_donut_large_black_24dp),
+            new ActionItem(Action.DeviceSettings,resources.getString(R.string.minibar_4),R.drawable.ic_settings_applications_black_24dp),
+            new ActionItem(Action.LauncherSettings,resources.getString(R.string.minibar_5),R.drawable.ic_settings_black_24dp),
+            //new ActionItem(Action.ThemePicker,resources.getString(R.string.minibar_6),R.drawable.ic_brush_black_24dp),
+            new ActionItem(Action.VolumeDialog,resources.getString(R.string.minibar_7),R.drawable.ic_volume_up_black_24dp)
     };
 
     public static void RunAction(Action act,final Context c,final Activity a){

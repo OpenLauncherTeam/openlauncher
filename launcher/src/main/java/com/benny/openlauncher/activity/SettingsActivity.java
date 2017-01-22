@@ -30,6 +30,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
         setSupportActionBar((Toolbar) findViewById(R.id.tb));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle(R.string.settings);
 
         if (savedInstanceState == null) {
             LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(this).generalSettings;

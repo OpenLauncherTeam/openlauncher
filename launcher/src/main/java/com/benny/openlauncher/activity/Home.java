@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Point;
@@ -104,12 +105,14 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     private CallLogObserver callLogObserver;
     //region APP_DRAWER_ANIMATION
     private int cx, cy, rad;
+    public static Resources resources;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Tool.print("Activity started : 0");
         long now = System.currentTimeMillis();
+        resources = getResources();
 
         launcher = this;
         AppManager.getInstance(this).clearListener();

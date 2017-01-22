@@ -24,19 +24,19 @@ public class AboutActivity extends MaterialAboutActivity {
             e.printStackTrace();
         }
         titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(R.drawable.ic_github),"GitHub",false, Uri.parse("https://github.com/BennyKok/OpenLauncher")));
-        titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(R.drawable.ic_github),"Open Source libraries",false, Uri.parse("https://github.com/BennyKok/OpenLauncher/wiki/Open-Source-libraries")));
-        titleCard.addItem(ConvenienceBuilder.createRateActionItem(this,getResources().getDrawable(R.drawable.ic_thumb_up_24dp),"Rate",null));
+        titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(R.drawable.ic_github),getString(R.string.about_libs),false, Uri.parse("https://github.com/BennyKok/OpenLauncher/wiki/Open-Source-libraries")));
+        titleCard.addItem(ConvenienceBuilder.createRateActionItem(this,getResources().getDrawable(R.drawable.ic_thumb_up_24dp),getString(R.string.about_rate),null));
 
         MaterialAboutCard.Builder authorCard = new MaterialAboutCard.Builder();
-        authorCard.title("Developer");
+        authorCard.title(getString(R.string.about_dev));
         authorCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(R.drawable.ic_benny),"BennyKok",false, Uri.parse("http://bennykok.weebly.com/contact.html")));
 
         MaterialAboutCard.Builder creditCard = new MaterialAboutCard.Builder();
-        creditCard.title("Credit");
+        creditCard.title(getString(R.string.about_credit));
         creditCard.addItem(new MaterialAboutActionItem.Builder()
                 .icon(R.mipmap.ic_chris)
                 .text("Chris DeBrodie")
-                .subText("Helped me a lot with bugs and suggestion")
+                .subText(getString(R.string.about_credit_text))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this,Uri.parse("https://plus.google.com/111923938461696019967")))
                 .build());
         //authorCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(),"Chris DeBrodie",false, Uri.parse("")));
@@ -50,6 +50,6 @@ public class AboutActivity extends MaterialAboutActivity {
 
     @Override
     protected CharSequence getActivityTitle() {
-        return "About";
+        return getString(R.string.about);
     }
 }
