@@ -27,6 +27,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -56,13 +57,14 @@ import com.benny.openlauncher.widget.Dock;
 import com.benny.openlauncher.widget.DragOptionView;
 import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
-import com.google.gson.Gson;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class Home extends Activity implements DrawerLayout.DrawerListener {
 
@@ -367,13 +369,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         appDrawerOtter.setCallBack(new AppDrawer.CallBack() {
             @Override
             public void onStart() {
-                //dock.animate().alpha(0).setDuration(100);
-                //desktopIndicator.animate().alpha(0).setDuration(100);
-                //desktop.animate().alpha(0).setDuration(100);
-
-                searchBar.animate().alpha(0).setDuration(100);
-
                 if (appSearchBar != null) {
+                    searchBar.animate().alpha(0).setDuration(100);
                     appSearchBar.setAlpha(0);
                     appSearchBar.setVisibility(View.VISIBLE);
                     appSearchBar.animate().setStartDelay(100).alpha(1).setDuration(100);
@@ -384,6 +381,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
             @Override
             public void onEnd() {
+                searchBar.setVisibility(View.INVISIBLE);
                 dock.setVisibility(View.INVISIBLE);
                 desktopIndicator.setVisibility(View.INVISIBLE);
                 desktop.setVisibility(View.INVISIBLE);
@@ -391,6 +389,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         }, new AppDrawer.CallBack() {
             @Override
             public void onStart() {
+                searchBar.setVisibility(View.VISIBLE);
+                dock.setVisibility(View.VISIBLE);
+                desktopIndicator.setVisibility(View.VISIBLE);
+                desktop.setVisibility(View.VISIBLE);
+
                 if (appDrawerIndicator != null)
                     appDrawerIndicator.animate().alpha(0).setDuration(100);
                 if (appSearchBar != null) {
@@ -401,10 +404,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                         }
                     });
                 }
-
-                dock.setVisibility(View.VISIBLE);
-                desktopIndicator.setVisibility(View.VISIBLE);
-                desktop.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -412,12 +411,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 if (LauncherSettings.getInstance(Home.this).generalSettings.drawerRememberPage)
                     appDrawerOtter.scrollToStart();
 
-                //dock.animate().alpha(1).setDuration(50);
-                //desktopIndicator.animate().alpha(1);
-                //desktop.animate().alpha(1);
-
                 appDrawer.setVisibility(View.INVISIBLE);
-                if (!dragOptionView.dragging)
+                if (!dragOptionView.dragging && appSearchBar != null)
                     searchBar.animate().alpha(1);
             }
         });
@@ -651,7 +646,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     @Override
     protected void onStop() {
         //We write and save the settings here to the device
-        Gson gson = LauncherSettings.getInstance(this).writeSettings();
+        LauncherSettings.getInstance(this).writeSettings();
         //Tool.writeToFile("noteData.json", gson.toJson(notes), Home.this);
         super.onStop();
     }
@@ -693,28 +688,33 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
      * Call this to open the app drawer with animation
      */
     public void openAppDrawer(View view) {
-        int[] pos = new int[2];
-        view.getLocationInWindow(pos);
-        cx = pos[0];
-        cy = pos[1];
+        openAppDrawer(view,-1,-1);
+    }
+    public void openAppDrawer(View view,int x,int y) {
+        if (!(x > 0 && y > 0)) {
+            int[] pos = new int[2];
+            view.getLocationInWindow(pos);
+            cx = pos[0];
+            cy = pos[1];
 
-        cx += view.getWidth() / 2;
-        cy += view.getHeight() / 2;
-        if (view instanceof AppItemView) {
-            AppItemView appItemView = (AppItemView) view;
-            if (!appItemView.isNoLabel()) {
-                cy -= Tool.dp2px(14, this) / 2;
+            cx += view.getWidth() / 2;
+            cy += view.getHeight() / 2;
+            if (view instanceof AppItemView) {
+                AppItemView appItemView = (AppItemView) view;
+                if (!appItemView.isNoLabel()) {
+                    cy -= Tool.dp2px(14, this) / 2;
+                }
+                rad = (int) (appItemView.getIconSize() / 2 - Tool.dp2px(4, view.getContext()));
             }
-            rad = (int) (appItemView.getIconSize() / 2 - Tool.dp2px(4, view.getContext()));
+            cx -= ((ViewGroup.MarginLayoutParams) appDrawer.getLayoutParams()).leftMargin;
+            cy -= ((ViewGroup.MarginLayoutParams) appDrawer.getLayoutParams()).topMargin;
+            cy -= appDrawerOtter.getPaddingTop();
+        }else {
+            cx = x;
+            cy = y;
+            rad = 0;
         }
-        cx -= ((ViewGroup.MarginLayoutParams) appDrawer.getLayoutParams()).leftMargin;
-        cy -= ((ViewGroup.MarginLayoutParams) appDrawer.getLayoutParams()).topMargin;
-        cy -= appDrawerOtter.getPaddingTop();
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
-
-        appDrawer.setPivotX(cx);
-        appDrawer.setPivotY(cy);
-
         appDrawerOtter.open(cx, cy, rad, finalRadius);
     }
 
@@ -723,8 +723,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         appDrawerOtter.close(cx, cy, rad, finalRadius);
     }
 
+    //endregion
+
+
+    //region VIEW_ONCLICK
     /**
      * When the search button of the search bar clicked
+     * However the search bar is removed out for now
      */
     public void onSearch(View view) {
 
@@ -741,11 +746,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         Home.this.startActivity(i);
     }
 
-    //endregion
-
-
-    //region VIEW_ONCLICK
-
+    /**
+     * When the voice button of the search bar clicked
+     * However the search bar is removed out for now
+     */
     public void onVoiceSearch(View view) {
         try {
             Intent i = new Intent(Intent.ACTION_MAIN);

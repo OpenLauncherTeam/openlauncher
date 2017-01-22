@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/searchBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
@@ -10,20 +8,6 @@
     android:layout_marginRight="4dp"
     android:layout_marginTop="20dp"
     tools:showIn="@layout/view_home">
-
-    <!--<mehdi.sakout.fancybuttons.FancyButton-->
-        <!--android:layout_gravity="bottom"-->
-        <!--android:onClick="onSearch"-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="56dp"-->
-        <!--app:fb_defaultColor="#FFFFFF"-->
-        <!--app:fb_iconResource="@mipmap/googleicon"-->
-        <!--app:fb_focusColor="#dcdcdc"-->
-        <!--app:fb_iconPaddingLeft="13dp"-->
-        <!--app:fb_iconPaddingRight="13dp"-->
-        <!--app:fb_iconPaddingTop="13dp"-->
-        <!--app:fb_iconPaddingBottom="13dp"-->
-        <!--app:fb_radius="40dp" />-->
 
     <TextView
         android:id="@+id/searchbarclock"

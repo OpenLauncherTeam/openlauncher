@@ -147,8 +147,7 @@ public class CellContainer extends ViewGroup {
         if (gestures != null)
             try {
                 gestures.onTouch(this, event);
-            } catch (Exception ignore) {
-            }
+            } catch (Exception ignore) {}
         return super.onTouchEvent(event);
     }
 
