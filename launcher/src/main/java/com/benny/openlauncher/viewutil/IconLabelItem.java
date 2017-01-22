@@ -12,7 +12,7 @@ import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 import java.util.List;
 
 /**
- * Created by BennyKok on 10/25/2016.
+ * Created by BennyKok on 10/25/2016
  */
 
 public class IconLabelItem extends AbstractItem<IconLabelItem,IconLabelItem.ViewHolder> {
