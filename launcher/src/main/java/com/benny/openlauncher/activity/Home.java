@@ -352,7 +352,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         });
         btn4.setOnTouchListener(Tool.getBtnColorMaskController());
 
-        desktopIndicator.setViewPager(desktop);
+        if (!LauncherSettings.getInstance(this).generalSettings.hideIndicator) {
+            desktopIndicator.setViewPager(desktop);
+        }
+
         desktop.setPageIndicator(desktopIndicator);
         int iconSize = LauncherSettings.getInstance(this).generalSettings.iconSize;
 
@@ -662,7 +665,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         if (appWidgetHost != null)
             appWidgetHost.startListening();
         handleLauncherPause();
-
         super.onResume();
     }
 

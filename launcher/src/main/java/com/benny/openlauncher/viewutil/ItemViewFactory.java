@@ -57,25 +57,31 @@ public class ItemViewFactory {
                 if (app == null) {
                     break;
                 }
-                view = new AppItemView.Builder(context)
-                        .setAppItem(app)
-                        .withOnClickLaunchApp(app)
-                        .withOnTouchGetPosition()
-                        .vibrateWhenLongPress()
-                        .withOnLongPressDrag(item, DragAction.Action.ACTION_APP, new AppItemView.Builder.LongPressCallBack() {
-                            @Override
-                            public boolean readyForDrag(View view) {
-                                return true;
-                            }
 
-                            @Override
-                            public void afterDrag(View view) {
-                                callBack.setLastItem(item, view);
-                            }
-                        })
-                        .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
-                        .setTextColor(Color.WHITE)
-                        .getView();
+                if (app.appName.contains("way")) {
+
+                } else {
+                    view = new AppItemView.Builder(context)
+                            .setAppItem(app)
+                            .withOnClickLaunchApp(app)
+                            .withOnTouchGetPosition()
+                            .vibrateWhenLongPress()
+                            .withOnLongPressDrag(item, DragAction.Action.ACTION_APP, new AppItemView.Builder.LongPressCallBack() {
+                                @Override
+                                public boolean readyForDrag(View view) {
+                                    return true;
+                                }
+
+                                @Override
+                                public void afterDrag(View view) {
+                                    callBack.setLastItem(item, view);
+                                }
+                            })
+                            .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
+                            .setTextColor(Color.WHITE)
+                            .getView();
+                }
+
                 break;
             case WIDGET:
                 AppWidgetProviderInfo appWidgetInfo = Home.appWidgetManager.getAppWidgetInfo(item.widgetID);
