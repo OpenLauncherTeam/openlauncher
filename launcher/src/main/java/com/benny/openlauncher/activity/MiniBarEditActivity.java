@@ -39,6 +39,7 @@ public class MiniBarEditActivity extends AppCompatActivity implements ItemTouchC
         setSupportActionBar((Toolbar) findViewById(R.id.tb));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle(R.string.minibar);
 
         recyclerView = (RecyclerView) findViewById(R.id.quickCenter);
 

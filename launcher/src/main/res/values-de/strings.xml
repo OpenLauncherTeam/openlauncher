@@ -35,7 +35,31 @@
     <string name="unnamed">Ohne Namen</string>
 
 
+    // MiniBar
+
+    <string name="minibar">Einträge auswählen</string>
+    <string name="minibar_1">Wallpaper aussuchen oder unscharf machen</string>
+    <string name="minibar_2">Sperre sofort den Bildschirm, braucht die Berechtigung \"Geräteadministrator\".</string>
+    <string name="minibar_3">Setze Ram frei, beende andere laufende Prozesse.</string>
+    <string name="minibar_4">Verknüpfung zu den Systemeinstellungen.</string>
+    <string name="minibar_5">OpenLauncher Einstellungsseite.</string>
+    <string name="minibar_6">Wähle ein Theme aus.</string>
+    <string name="minibar_7">Öffne den Lautstärkedialog.</string>
+
+
+    // About
+
+    <string name="about">Über Open Launcher</string>
+    <string name="about_libs">Open Source Bibliotheken</string>
+    <string name="about_rate">Bewerte die App</string>
+    <string name="about_dev">Entwickler</string>
+    <string name="about_credit">Dank</string>
+    <string name="about_credit_text">Hat mir bei Fehlern geholfen und Vorschläge gemacht.</string>
+
+
     // Settings
+
+    <string name="settings">Einstellungen</string>
 
     <string name="settings_column">Spalte</string>
     <string name="settings_row">Reihe</string>
