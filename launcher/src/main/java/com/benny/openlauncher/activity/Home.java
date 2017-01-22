@@ -10,7 +10,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -18,7 +17,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
@@ -32,6 +30,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -60,7 +59,6 @@ import com.benny.openlauncher.widget.PagerIndicator;
 import com.google.gson.Gson;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -452,10 +450,17 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         if (!LauncherSettings.getInstance(this).generalSettings.desktopSearchBar) {
             searchBar.setVisibility(View.GONE);
         }
+
+        if (LauncherSettings.getInstance(this).generalSettings.fullscreen) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        }
+
         dock.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.dockColor);
+
         appDrawerOtter.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.drawerColor);
         appDrawerOtter.getBackground().setAlpha(0);
-
         appDrawerOtter.reloadDrawerCardTheme();
     }
 

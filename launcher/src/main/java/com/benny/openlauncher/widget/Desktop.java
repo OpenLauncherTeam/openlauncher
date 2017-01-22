@@ -313,7 +313,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).add(item);
     }
 
-    public static class DesktopAdapter extends SmoothPagerAdapter {
+    public class DesktopAdapter extends SmoothPagerAdapter {
 
         float scaleFactor = 1f;
 
@@ -375,6 +375,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             return new SimpleFingerGestures.OnFingerGestureListener() {
                 @Override
                 public boolean onSwipeUp(int i, long l, double v) {
+                    if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
+                        Home.launcher.openAppDrawer(desktop);
+                    }
                     return false;
                 }
 
