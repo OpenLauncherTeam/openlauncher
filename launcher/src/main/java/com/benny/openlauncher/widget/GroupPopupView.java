@@ -247,7 +247,7 @@ public class GroupPopupView extends FrameLayout {
         popupParent.setPivotX(0);
         popupParent.setPivotX(0);
         popupParent.setX(x);
-        popupParent.setY(y - 175);
+        popupParent.setY(y - 200);
 
         addView(popupParent);
         return true;

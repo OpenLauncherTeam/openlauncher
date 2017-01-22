@@ -172,6 +172,7 @@ public class AppManager {
                     return Collator.getInstance().compare(p1.loadLabel(packageManager).toString(), p2.loadLabel(packageManager).toString());
                 }
             });
+
             for (ResolveInfo info : activitiesInfo) {
                 apps.add(new App(info, packageManager));
             }
