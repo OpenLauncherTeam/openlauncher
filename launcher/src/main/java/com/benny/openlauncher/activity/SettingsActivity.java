@@ -49,6 +49,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                     ))
                     .add(new MaterialPrefFragment.TBPref("fullscreen", "Fullscreen", "Enable fullscreen for desktop", generalSettings.fullscreen))
                     .add(new MaterialPrefFragment.TBPref("swipe", "Swipe", "Swipe up to open app drawer", generalSettings.swipe))
+                    .add(new MaterialPrefFragment.TBPref("hideIndicator", "Hide indicator", "Hide page indicator on desktop", generalSettings.hideIndicator))
 
                     .add(new MaterialPrefFragment.GroupTitle("Dock"))
                     .add(new MaterialPrefFragment.TBPref("dockShowLabel","Show app label","show the app's name in the dock", generalSettings.dockShowLabel))
@@ -144,6 +145,10 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "swipe":
                 generalSettings.swipe = (boolean)p2;
+                prepareRestart();
+                break;
+            case "hideIndicator":
+                generalSettings.hideIndicator = (boolean)p2;
                 prepareRestart();
                 break;
             case "iconsize":
