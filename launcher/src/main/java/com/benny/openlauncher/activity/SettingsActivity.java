@@ -2,17 +2,12 @@ package com.benny.openlauncher.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppDrawer;
@@ -39,44 +34,52 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
         if (savedInstanceState == null) {
             LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(this).generalSettings;
             MaterialPrefFragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this,Color.DKGRAY, getResources().getColor(R.color.Light_TextColor), getResources().getColor(R.color.Light_Background), getResources().getColor(R.color.colorAccent), false)
-                    .add(new MaterialPrefFragment.GroupTitle("Desktop"))
-                    .add(new MaterialPrefFragment.ButtonPref("desktopMode", "Style", "choose different style of your desktop"))
-                    .add(new MaterialPrefFragment.TBPref("desktopSearchBar", "Show search bar", "Display a search bar always on top of the desktop", generalSettings.desktopSearchBar))
+
+
+                    .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_desktop)))
+                    .add(new MaterialPrefFragment.ButtonPref("desktopMode", (getString(R.string.settings_desktopStyle)), (getString(R.string.settings_desktopStyle_summary))))
+                    .add(new MaterialPrefFragment.TBPref("desktopSearchBar", (getString(R.string.settings_desktopSearch)), (getString(R.string.settings_desktopSearch_summary)), generalSettings.desktopSearchBar))
                     // FIXME: 11/25/2016 This will have problem (in allappsmode) as the apps will be cut off when scale down
-                    .add(new MaterialPrefFragment.NUMPref("gridsizedesktop","Vertical size", "Desktop grid size",
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedesktop","Column", generalSettings.desktopGridX, 4, 10),
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsizedesktop","Row", generalSettings.desktopGridY, 4, 10)
+                    .add(new MaterialPrefFragment.NUMPref("gridsizedesktop",(getString(R.string.settings_desktopSize)), (getString(R.string.settings_desktopSize_summary)),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedesktop",(getString(R.string.settings_column)), generalSettings.desktopGridX, 4, 10),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsizedesktop",(getString(R.string.settings_row)), generalSettings.desktopGridY, 4, 10)
                     ))
-                    .add(new MaterialPrefFragment.TBPref("fullscreen", "Fullscreen", "Enable fullscreen for desktop", generalSettings.fullscreen))
-                    .add(new MaterialPrefFragment.TBPref("swipe", "Swipe", "Swipe up to open app drawer", generalSettings.swipe))
-                    .add(new MaterialPrefFragment.TBPref("hideIndicator", "Hide indicator", "Hide page indicator on desktop", generalSettings.hideIndicator))
+                    .add(new MaterialPrefFragment.TBPref("fullscreen", (getString(R.string.settings_desktopFull)), (getString(R.string.settings_desktopFull_summary)), generalSettings.fullscreen))
+                    .add(new MaterialPrefFragment.TBPref("swipe", (getString(R.string.settings_desktopClick)), (getString(R.string.settings_desktopClick_summary)), generalSettings.swipe))
+                    .add(new MaterialPrefFragment.TBPref("hideIndicator", (getString(R.string.settings_desktopIndicator)), (getString(R.string.settings_desktopIndicator_summary)), generalSettings.hideIndicator))
 
-                    .add(new MaterialPrefFragment.GroupTitle("Dock"))
-                    .add(new MaterialPrefFragment.TBPref("dockShowLabel","Show app label","show the app's name in the dock", generalSettings.dockShowLabel))
-                    .add(new MaterialPrefFragment.NUMPref("gridsizedock","Vertical size", "Dock grid size",
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedock","Column", generalSettings.dockGridX, 5, 10)
+
+                    .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_dock)))
+                    .add(new MaterialPrefFragment.TBPref("dockShowLabel",(getString(R.string.settings_dockLabel)),(getString(R.string.settings_dockLabel_summary)), generalSettings.dockShowLabel))
+                    .add(new MaterialPrefFragment.NUMPref("gridsizedock",(getString(R.string.settings_dockSize)), (getString(R.string.settings_dockSize_summary)),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedock",(getString(R.string.settings_column)), generalSettings.dockGridX, 5, 10)
                     ))
 
-                    .add(new MaterialPrefFragment.GroupTitle("AppDrawer and Folder"))
-                    .add(new MaterialPrefFragment.ButtonPref("drawerstyle", "Style", "choose the style of the app drawer"))
-                    .add(new MaterialPrefFragment.TBPref("drawerCard", "Use Card", "Drawer card", generalSettings.drawerUseCard))
-                    .add(new MaterialPrefFragment.TBPref("appdrawersearchbar", "Search Bar", "search bar will only appear in grid drawer", generalSettings.drawerSearchBar))
-                    .add(new MaterialPrefFragment.NUMPref("gridsize","Vertical size", "App drawer grid size",
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsize","Column", generalSettings.drawerGridX, 1, 10),
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsize","Row", generalSettings.drawerGridY, 1, 10)
+
+                    .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_drawer)))
+                    .add(new MaterialPrefFragment.ButtonPref("drawerstyle", (getString(R.string.settings_drawerStyle)), (getString(R.string.settings_drawerStyle_summary))))
+                    .add(new MaterialPrefFragment.TBPref("drawerCard", (getString(R.string.settings_drawerCard)), (getString(R.string.settings_drawerCard_summary)), generalSettings.drawerUseCard))
+                    .add(new MaterialPrefFragment.TBPref("appdrawersearchbar", (getString(R.string.settings_drawerSearch)), (getString(R.string.settings_drawerSearch_summary)), generalSettings.drawerSearchBar))
+                    .add(new MaterialPrefFragment.NUMPref("gridsize",(getString(R.string.settings_drawerSize)), (getString(R.string.settings_drawerSize_summary)),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsize",(getString(R.string.settings_column)), generalSettings.drawerGridX, 1, 10),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsize",(getString(R.string.settings_row)), generalSettings.drawerGridY, 1, 10)
                     ))
-                    .add(new MaterialPrefFragment.TBPref("drawerRememberPage", "Remember last page", "The page will not reset to the first page when reopen app drawer", !generalSettings.drawerRememberPage))
+                    .add(new MaterialPrefFragment.TBPref("drawerRememberPage", (getString(R.string.settings_drawerPage)), (getString(R.string.settings_drawerPage_summary)), !generalSettings.drawerRememberPage))
 
-                    .add(new MaterialPrefFragment.GroupTitle("Color"))
-                    .add(new MaterialPrefFragment.ColorPref("dockBackground","Dock","Dock background color",generalSettings.dockColor))
-                    .add(new MaterialPrefFragment.ColorPref("drawerBackground","Drawer","Drawer background color",generalSettings.drawerColor))
-                    .add(new MaterialPrefFragment.ColorPref("drawerCardBackground","Folder and Card","Folder and Drawer card background color",generalSettings.drawerCardColor))
-                    .add(new MaterialPrefFragment.ColorPref("drawerLabelColor","Label Color","Folder and Drawer label Color",generalSettings.drawerLabelColor))
 
-                    .add(new MaterialPrefFragment.GroupTitle("Apps"))
-                    .add(new MaterialPrefFragment.NUMPref("iconsize", "Icon Size", "Size of all app icon", generalSettings.iconSize, 30, 80))
-                    .add(new MaterialPrefFragment.ButtonPref("iconpack", "Icon Pack", "Select installed icon pack"))
-                    .add(new MaterialPrefFragment.GroupTitle("Others"))
+                    .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_color)))
+                    .add(new MaterialPrefFragment.ColorPref("dockBackground",(getString(R.string.settings_colorDock)),(getString(R.string.settings_colorDock_summary)),generalSettings.dockColor))
+                    .add(new MaterialPrefFragment.ColorPref("drawerBackground",(getString(R.string.settings_colorDrawer)),(getString(R.string.settings_colorDrawer_summary)),generalSettings.drawerColor))
+                    .add(new MaterialPrefFragment.ColorPref("drawerCardBackground",(getString(R.string.settings_colorFolder)),(getString(R.string.settings_colorFolder_summary)),generalSettings.drawerCardColor))
+                    .add(new MaterialPrefFragment.ColorPref("drawerLabelColor",(getString(R.string.settings_colorLabel)),(getString(R.string.settings_colorLabel_summary)),generalSettings.drawerLabelColor))
+
+
+                    .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_icons)))
+                    .add(new MaterialPrefFragment.NUMPref("iconsize", (getString(R.string.settings_iconSize)), (getString(R.string.settings_iconSize_summary)), generalSettings.iconSize, 30, 80))
+                    .add(new MaterialPrefFragment.ButtonPref("iconpack", (getString(R.string.settings_iconPack_summary)), (getString(R.string.settings_iconPack_summary))))
+
+
+                    .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_others)))
                     .add(new MaterialPrefFragment.ButtonPref("restart", "Restart", "Restart the launcher"))
                     .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
             setSettingsFragment(fragment);
@@ -209,6 +212,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 generalSettings.drawerCardColor = (int)p2;
                 if (Home.launcher != null) {
                     Home.launcher.appDrawerOtter.reloadDrawerCardTheme();
+                    prepareRestart();
                 }else
                     prepareRestart();
                 break;
@@ -216,6 +220,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 generalSettings.drawerLabelColor = (int)p2;
                 if (Home.launcher != null) {
                     Home.launcher.appDrawerOtter.reloadDrawerCardTheme();
+                    prepareRestart();
                 }else
                     prepareRestart();
                 break;
