@@ -1154,6 +1154,7 @@
     <string name="about_libs">Open Source libraries</string>
     <string name="about_rate">Rate</string>
     <string name="add_widget">Widget</string>
+    <string name="allApps">All Apps</string>
     <string name="app_name">OpenLauncher</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
@@ -1217,19 +1218,12 @@
     <string name="md_storage_perm_error">Your app has not been granted the READ_EXTERNAL_STORAGE permission.</string>
     <string name="minibar">Edit items</string>
     <string name="minibar_1">Set the wallpaper or blur it</string>
-    <string name="minibar_1_title">Set the wallpaper or blur it</string>
     <string name="minibar_2">Lock the screen immediately, require device administration.</string>
-    <string name="minibar_2_title">Lock the screen immediately, require device administration.</string>
     <string name="minibar_3">Free the ram, force close other running services.</string>
-    <string name="minibar_3_title">Free the ram, force close other running services.</string>
     <string name="minibar_4">Shortcut to device/Android settings.</string>
-    <string name="minibar_4_title">Shortcut to device/Android settings.</string>
     <string name="minibar_5">OpenLauncher settings page.</string>
-    <string name="minibar_5_title">OpenLauncher settings page.</string>
     <string name="minibar_6">Pick themes.</string>
-    <string name="minibar_6_title">Pick themes.</string>
     <string name="minibar_7">Open the volume dialog.</string>
-    <string name="minibar_7_title">Open the volume dialog.</string>
     <string name="new_folder">New Folder</string>
     <string name="ok">OK</string>
     <string name="password_toggle_content_description">Toggle password visibility</string>
@@ -1250,7 +1244,7 @@
     <string name="settings_colorFolder_summary">Background color for folders and the app drawer card.</string>
     <string name="settings_colorLabel">Label</string>
     <string name="settings_colorLabel_summary">Label color for for folders and the app drawer.</string>
-    <string name="settings_column">Column</string>
+    <string name="settings_column">Columns</string>
     <string name="settings_desktopClick">Click</string>
     <string name="settings_desktopClick_summary">Click on your desktop to open the app drawer.</string>
     <string name="settings_desktopFull">Fullscreen</string>
@@ -1289,11 +1283,13 @@
     <string name="settings_iconPack_toast">Unable to grab the icon without Manifest.permission.READ_EXTERNAL_STORAGE granted.</string>
     <string name="settings_iconSize">Size</string>
     <string name="settings_iconSize_summary">Size of all app icons.</string>
+    <string name="settings_othersHide">Hide icon</string>
+    <string name="settings_othersHide_summary">Hide the launchers icon in the app drawer.</string>
     <string name="settings_othersRestart">Restart</string>
     <string name="settings_othersRestart_summary">Restart the launcher to aply all changes.</string>
-    <string name="settings_row">Row</string>
-    <string name="settings_stylePicker_allApps">Show all apps</string>
-    <string name="settings_stylePicker_ex">(Experimental)</string>
+    <string name="settings_row">Rows</string>
+    <string name="settings_stylePicker_allApps">Show all apps (Experimental)</string>
+    <string name="settings_stylePicker_ex">(experimental)</string>
     <string name="settings_stylePicker_normal">Normal</string>
     <string name="settings_stylePicker_paged">Paged</string>
     <string name="settings_stylePicker_title">Desktop style</string>
@@ -1305,6 +1301,7 @@
     <string formatted="false" name="toast_freeram">Free Memory: %d mb saved %d mb</string>
     <string name="toast_notenoughspace">Not enough space</string>
     <string name="toast_plzenabledeviceadmin">Please enable device administration</string>
+    <string name="toast_rename">Rename</string>
     <string name="uninstall">Uninstall</string>
     <string name="unnamed">Unnamed</string>
     <string name="wallpaper">Wallpaper</string>

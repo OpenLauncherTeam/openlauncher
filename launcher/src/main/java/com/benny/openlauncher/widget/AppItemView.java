@@ -24,6 +24,8 @@ import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
 
+import static com.benny.openlauncher.activity.Home.resources;
+
 /**
  * Created by BennyKok on 10/23/2016.
  */
@@ -273,7 +275,7 @@ public class AppItemView extends View implements Drawable.Callback{
                     view.setBgColor(Color.WHITE);
                     view.setRoundBg(true);
                     view.setIconSizeSmall(Tool.dp2px(iconSize / 2 - 8,view.getContext()));
-                    view.setLabel("All Apps");
+                    view.setLabel(resources.getString(R.string.allApps));
 
                     view.setOnClickListener(new OnClickListener() {
                         @Override
