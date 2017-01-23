@@ -91,8 +91,8 @@
     <string name="settings_desktopSize_summary">Set the desktop grid size.</string>
     <string name="settings_desktopFull">Fullscreen</string>
     <string name="settings_desktopFull_summary">Enable fullscreen for your desktop.</string>
-    <string name="settings_desktopClick">Click</string>
-    <string name="settings_desktopClick_summary">Click on your desktop to open the app drawer.</string>
+    <string name="settings_desktopClick">Fast App Drawer</string>
+    <string name="settings_desktopClick_summary">Swipe/click on your desktop to open the app drawer.</string>
     <string name="settings_desktopIndicator">Hide indicator</string>
     <string name="settings_desktopIndicator_summary">Hide the page indicator on the desktop.</string>
 
