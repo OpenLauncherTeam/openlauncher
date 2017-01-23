@@ -81,7 +81,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
 
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_others)))
-                    .add(new MaterialPrefFragment.ButtonPref("restart", "Restart", "Restart the launcher"))
+                    .add(new MaterialPrefFragment.TBPref("hideIcon", getString(R.string.settings_othersHide), getString(R.string.settings_othersHide_summary), generalSettings.hideIcon))
+                    .add(new MaterialPrefFragment.ButtonPref("restart", getString(R.string.settings_othersRestart), getString(R.string.settings_othersRestart_summary)))
                     .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
             setSettingsFragment(fragment);
             getSupportFragmentManager().beginTransaction().add(R.id.ll, fragment).commit();
@@ -153,6 +154,10 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "hideIndicator":
                 generalSettings.hideIndicator = (boolean)p2;
+                prepareRestart();
+                break;
+            case "hideIcon":
+                generalSettings.hideIcon = (boolean)p2;
                 prepareRestart();
                 break;
             case "iconsize":
