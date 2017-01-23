@@ -222,6 +222,7 @@ public class LauncherSettings {
         public boolean fullscreen = false;
         public boolean swipe = false;
         public boolean hideIndicator = false;
+        public boolean hideIcon = false;
 
         //Drawer
         public int drawerColor = Color.TRANSPARENT;

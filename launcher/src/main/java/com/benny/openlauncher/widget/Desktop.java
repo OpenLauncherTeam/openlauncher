@@ -455,7 +455,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                                 Home.launcher.openAppDrawer(desktop);
                             }
                         }
-                    }, 750);
+                    }, 500);
 
                     scaleFactor = 1f;
                     for (final CellContainer v : desktop.pages) {
@@ -558,7 +558,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         for (int i = 0; i < DesktopMode.values().length; i++) {
             items[i] = DesktopMode.values()[i].name();
         }
-        items[1] += " " + (context.getString(R.string.settings_stylePicker_ex));
+        items[1] += (context.getString(R.string.settings_stylePicker_ex));
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(context.getString(R.string.settings_stylePicker_title))
                 .items(context.getString(R.string.settings_stylePicker_normal), context.getString(R.string.settings_stylePicker_allApps))

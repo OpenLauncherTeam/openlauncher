@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -463,11 +464,23 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         }
 
+        PackageManager p = getPackageManager();
+        ComponentName componentName = new ComponentName("com.benny.openlauncher","com.benny.openlauncher.Activity_start");
+        if (LauncherSettings.getInstance(this).generalSettings.hideIcon) {
+            p.setComponentEnabledSetting(componentName , PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
+        } else {
+            p.setComponentEnabledSetting(componentName , PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0);
+        }
+
         dock.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.dockColor);
 
         appDrawerOtter.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.drawerColor);
         appDrawerOtter.getBackground().setAlpha(0);
         appDrawerOtter.reloadDrawerCardTheme();
+
+
+
+
     }
 
     public void initMinBar() {
