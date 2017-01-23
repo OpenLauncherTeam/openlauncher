@@ -36,6 +36,8 @@ import java.util.List;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
+import static com.benny.openlauncher.activity.Home.resources;
+
 public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopCallBack {
     public int pageCount;
 
@@ -516,7 +518,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
                     item.addActions(dropItem.actions[0]);
                     if (item.name == null || item.name.isEmpty())
-                        item.name = "Unnamed";
+                        item.name = resources.getString(R.string.unnamed);
                     item.type = Desktop.Item.Type.GROUP;
                     callBack.addItemToSettings(item);
                     callBack.addItemToPagePosition(item,page);
