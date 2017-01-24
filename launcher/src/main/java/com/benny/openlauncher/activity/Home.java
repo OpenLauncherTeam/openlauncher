@@ -469,7 +469,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
             searchBar.setVisibility(View.VISIBLE);
         } else {
-            searchBar.setVisibility(View.INVISIBLE);
+            searchBar.setVisibility(View.GONE);
         }
 
         if (LauncherSettings.getInstance(this).generalSettings.fullscreen) {
