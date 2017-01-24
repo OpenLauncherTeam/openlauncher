@@ -29,6 +29,7 @@ import static com.benny.openlauncher.activity.Home.resources;
 
 public class GroupPopupView extends FrameLayout {
 
+    public boolean isShowing = false;
     private CardView popupParent;
     private CellContainer cellContainer;
     private TextView title;
@@ -87,6 +88,7 @@ public class GroupPopupView extends FrameLayout {
     }
 
     public void dismissPopup() {
+        isShowing = false;
         removeAllViews();
         if (dismissListener != null)
             dismissListener.onDismiss();
@@ -96,6 +98,8 @@ public class GroupPopupView extends FrameLayout {
 
     public boolean showWindowV(final Desktop.Item item, final View itemView, final DesktopCallBack callBack) {
         if (getVisibility() == View.VISIBLE) return false;
+
+        isShowing = true;
 
         setVisibility(View.VISIBLE);
         popupParent.setVisibility(View.VISIBLE);

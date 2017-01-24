@@ -46,7 +46,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                             new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsizedesktop",(getString(R.string.settings_row)), generalSettings.desktopGridY, 4, 10)
                     ))
                     .add(new MaterialPrefFragment.TBPref("fullscreen", (getString(R.string.settings_desktopFull)), (getString(R.string.settings_desktopFull_summary)), generalSettings.fullscreen))
-                    .add(new MaterialPrefFragment.TBPref("swipe", (getString(R.string.settings_desktopClick)), (getString(R.string.settings_desktopClick_summary)), generalSettings.swipe))
+                    .add(new MaterialPrefFragment.TBPref("swipe", (getString(R.string.settings_desktopSwipe)), (getString(R.string.settings_desktopSwipe_summary)), generalSettings.swipe))
+                    .add(new MaterialPrefFragment.TBPref("clickToOpen", (getString(R.string.settings_desktopClick)), (getString(R.string.settings_desktopClick_summary)), generalSettings.clickToOpen))
                     .add(new MaterialPrefFragment.TBPref("hideIndicator", (getString(R.string.settings_desktopIndicator)), (getString(R.string.settings_desktopIndicator_summary)), generalSettings.hideIndicator))
 
 
@@ -150,7 +151,9 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "swipe":
                 generalSettings.swipe = (boolean)p2;
-                prepareRestart();
+                break;
+            case "clickToOpen":
+                generalSettings.clickToOpen = (boolean)p2;
                 break;
             case "hideIndicator":
                 generalSettings.hideIndicator = (boolean)p2;

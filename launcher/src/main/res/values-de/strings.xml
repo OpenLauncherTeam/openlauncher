@@ -93,6 +93,8 @@
     <string name="settings_desktopFull_summary">Aktiviere den Vollbildmodus für deinen Desktop.</string>
     <string name="settings_desktopClick">App Drawer Schnellzugriff</string>
     <string name="settings_desktopClick_summary">Wische/klicke auf den Desktop um den App Drawer zu öffnen.</string>
+    <string name="settings_desktopSwipe">Fast swipe Drawer</string>
+    <string name="settings_desktopSwipe_summary">Swipe on your desktop to open the app drawer.</string>
     <string name="settings_desktopIndicator">Indicator ausblenden</string>
     <string name="settings_desktopIndicator_summary">Blende den Seitenindikator auf dem Desktop aus.</string>
 
