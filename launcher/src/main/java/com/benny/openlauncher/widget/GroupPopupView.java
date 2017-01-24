@@ -25,6 +25,8 @@ import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 
+import static com.benny.openlauncher.activity.Home.resources;
+
 public class GroupPopupView extends FrameLayout {
 
     private CardView popupParent;
@@ -183,7 +185,7 @@ public class GroupPopupView extends FrameLayout {
         title.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Tool.askForText("Rename", item.name, getContext(), new Tool.OnTextGotListener() {
+                Tool.askForText(resources.getString(R.string.toast_rename), item.name, getContext(), new Tool.OnTextGotListener() {
                     @Override
                     public void hereIsTheText(String str) {
                         if (str.isEmpty()) return;
@@ -247,7 +249,7 @@ public class GroupPopupView extends FrameLayout {
         popupParent.setPivotX(0);
         popupParent.setPivotX(0);
         popupParent.setX(x);
-        popupParent.setY(y - 175);
+        popupParent.setY(y - 200);
 
         addView(popupParent);
         return true;

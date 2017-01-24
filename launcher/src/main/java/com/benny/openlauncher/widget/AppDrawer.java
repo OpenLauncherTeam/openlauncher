@@ -57,8 +57,8 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
             items[i] = DrawerMode.values()[i].name();
         }
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title("App drawer style")
-                .items(items)
+        builder.title(context.getString(R.string.settings_stylePicker_title_drawer))
+                .items(context.getString(R.string.settings_stylePicker_paged), context.getString(R.string.settings_stylePicker_vertical))
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
