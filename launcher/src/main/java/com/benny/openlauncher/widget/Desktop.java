@@ -50,6 +50,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
     public Item previousItem;
     public int previousPage = -1;
 
+    private float startPosX,startPosY;
+
     private Home home;
 
     private PagerIndicator pageIndicator;
@@ -441,21 +443,35 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             layout.setGridSize(LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridX, LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridY);
             layout.setOnTouchListener(new OnTouchListener() {
                 @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    currentEvent = motionEvent;
+                public boolean onTouch(View view, MotionEvent ev) {
+                    currentEvent = ev;
+
+                    if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+                        startPosX = ev.getX();
+                        startPosY = ev.getY();
+                    }
+
+                    if (ev.getAction() == MotionEvent.ACTION_UP) {
+                        float minDist = 150f;
+                        Tool.print((int)ev.getX(),(int)ev.getY());
+                        if (startPosY - ev.getY() > minDist) {
+                            if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
+                                Point p = Tool.convertPoint(new Point((int)ev.getX(),(int)ev.getY()),Desktop.this,Home.launcher.appDrawerOtter);
+                                // FIXME: 1/22/2017 This seem weird, but the extra offset ( Tool.getNavBarHeight(getContext()) ) works on my phone
+                                // FIXME: 1/22/2017 This part of the code is identical as the code in Desktop so will combine them later
+                                Home.launcher.openAppDrawer(Desktop.this,p.x,p.y - Tool.getNavBarHeight(getContext())/2);
+                            }
+                        }
+                    }
                     return false;
                 }
             });
             layout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new Handler().postDelayed(new Runnable() {
-                        public void run() {
-                            if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
-                                Home.launcher.openAppDrawer(desktop);
-                            }
-                        }
-                    }, 500);
+                    if (!desktop.inEditMode && LauncherSettings.getInstance(getContext()).generalSettings.clickToOpen) {
+                        Home.launcher.openAppDrawer(desktop,(int)currentEvent.getX(),(int)currentEvent.getY());
+                    }
 
                     scaleFactor = 1f;
                     for (final CellContainer v : desktop.pages) {

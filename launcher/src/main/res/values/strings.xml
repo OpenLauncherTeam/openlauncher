@@ -91,8 +91,10 @@
     <string name="settings_desktopSize_summary">Set the desktop grid size.</string>
     <string name="settings_desktopFull">Fullscreen</string>
     <string name="settings_desktopFull_summary">Enable fullscreen for your desktop.</string>
-    <string name="settings_desktopClick">Fast App Drawer</string>
-    <string name="settings_desktopClick_summary">Swipe/click on your desktop to open the app drawer.</string>
+    <string name="settings_desktopSwipe">Fast swipe Drawer</string>
+    <string name="settings_desktopSwipe_summary">Swipe on your desktop to open the app drawer.</string>
+    <string name="settings_desktopClick">Fast click Drawer</string>
+    <string name="settings_desktopClick_summary">Click on your desktop to open the app drawer.</string>
     <string name="settings_desktopIndicator">Hide indicator</string>
     <string name="settings_desktopIndicator_summary">Hide the page indicator on the desktop.</string>
 
@@ -109,7 +111,7 @@
     <string name="settings_drawerSearch_summary">Will only appear in vertical view layout.</string>
     <string name="settings_drawerSize">Size</string>
     <string name="settings_drawerSize_summary">Set the drawer grid size.</string>
-    <string name="settings_drawerPage">Remenber last page</string>
+    <string name="settings_drawerPage">Remember last page</string>
     <string name="settings_drawerPage_summary">The page will not be reset to the first page, when you reopen the app drawer.</string>
 
     <string name="settings_colorDock">Dock</string>
@@ -119,15 +121,15 @@
     <string name="settings_colorFolder">Folder and card</string>
     <string name="settings_colorFolder_summary">Background color for folders and the app drawer card.</string>
     <string name="settings_colorLabel">Label</string>
-    <string name="settings_colorLabel_summary">Label color for for folders and the app drawer.</string>
+    <string name="settings_colorLabel_summary">Label color for folders and the app drawer.</string>
 
     <string name="settings_iconSize">Size</string>
     <string name="settings_iconSize_summary">Size of all app icons.</string>
     <string name="settings_iconPack">Icon pack</string>
-    <string name="settings_iconPack_summary">Select a installes icon pack.</string>
+    <string name="settings_iconPack_summary">Select an installed icon pack.</string>
 
     <string name="settings_othersRestart">Restart</string>
-    <string name="settings_othersRestart_summary">Restart the launcher to aply all changes.</string>
+    <string name="settings_othersRestart_summary">Restart the launcher in case the launcher behaving weird.</string>
     <string name="settings_othersHide">Hide icon</string>
     <string name="settings_othersHide_summary">Hide the launchers icon in the app drawer.</string>
 

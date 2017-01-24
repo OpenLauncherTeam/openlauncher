@@ -52,7 +52,7 @@ public class GroupIconDrawable extends Drawable{
         paint4.setAntiAlias(true);
         paint4.setFlags(Paint.ANTI_ALIAS_FLAG);
         paint4.setStyle(Paint.Style.STROKE);
-        outlinepad = Tool.dp2px(2, Home.launcher.desktop.getContext());
+        outlinepad = Tool.dp2px(2, Home.launcher);
         paint4.setStrokeWidth(outlinepad);
 
         this.paint2 = new Paint();

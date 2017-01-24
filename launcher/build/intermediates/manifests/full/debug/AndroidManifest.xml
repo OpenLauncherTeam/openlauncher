@@ -26,7 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/Home.Light" >
         <activity
-            android:name="com.benny.openlauncher.Activity_start"
+            android:name="com.benny.openlauncher.Activity_init"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|keyboard|screenSize"
             android:enabled="true"

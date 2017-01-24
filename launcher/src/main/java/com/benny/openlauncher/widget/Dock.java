@@ -70,7 +70,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                     Point p = Tool.convertPoint(new Point((int)ev.getX(),(int)ev.getY()),this,Home.launcher.appDrawerOtter);
                     // FIXME: 1/22/2017 This seem weird, but the extra offset ( Tool.getNavBarHeight(getContext()) ) works on my phone
                     // FIXME: 1/22/2017 This part of the code is identical as the code in Desktop so will combine them later
-                    Home.launcher.openAppDrawer(this,p.x,p.y - Tool.getNavBarHeight(getContext()));
+                    Home.launcher.openAppDrawer(this,p.x,p.y - Tool.getNavBarHeight(getContext())/2);
                 }
             }
         }

@@ -297,7 +297,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                         if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
                             searchBar.setVisibility(View.VISIBLE);
                         } else {
-                            searchBar.setVisibility(View.INVISIBLE);
+                            searchBar.setVisibility(View.GONE);
                         }
                     }
                 }, 100);
@@ -320,7 +320,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                         if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
                             searchBar.setVisibility(View.VISIBLE);
                         } else {
-                            searchBar.setVisibility(View.INVISIBLE);
+                            searchBar.setVisibility(View.GONE);
                         }
                     }
                 }, 100);
@@ -381,7 +381,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             @Override
             public void onStart() {
                 if (appSearchBar != null) {
-                    searchBar.animate().alpha(0).setDuration(100);
+                    if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar)
+                        searchBar.animate().alpha(0).setDuration(100);
                     appSearchBar.setAlpha(0);
                     appSearchBar.setVisibility(View.VISIBLE);
                     appSearchBar.animate().setStartDelay(100).alpha(1).setDuration(100);
@@ -393,9 +394,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             @Override
             public void onEnd() {
                 if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
-                    searchBar.setVisibility(View.VISIBLE);
-                } else {
                     searchBar.setVisibility(View.INVISIBLE);
+                } else {
+                    searchBar.setVisibility(View.GONE);
                 }
                 dock.setVisibility(View.INVISIBLE);
                 desktopIndicator.setVisibility(View.INVISIBLE);
@@ -407,7 +408,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
                     searchBar.setVisibility(View.VISIBLE);
                 } else {
-                    searchBar.setVisibility(View.INVISIBLE);
+                    searchBar.setVisibility(View.GONE);
                 }
                 dock.setVisibility(View.VISIBLE);
                 desktopIndicator.setVisibility(View.VISIBLE);
@@ -422,7 +423,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                             if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
                                 searchBar.setVisibility(View.VISIBLE);
                             } else {
-                                searchBar.setVisibility(View.INVISIBLE);
+                                searchBar.setVisibility(View.GONE);
                             }
                         }
                     });
@@ -478,7 +479,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         }
 
         PackageManager p = getPackageManager();
-        ComponentName componentName = new ComponentName("com.benny.openlauncher","com.benny.openlauncher.Activity_start");
+        ComponentName componentName = new ComponentName("com.benny.openlauncher","com.benny.openlauncher.Activity_init");
         if (LauncherSettings.getInstance(this).generalSettings.hideIcon) {
             p.setComponentEnabledSetting(componentName , PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
         } else {
@@ -705,11 +706,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     private void handleLauncherPause() {
         if (desktop != null)
             if (!desktop.inEditMode) {
-                if (LauncherSettings.getInstance(Home.this).generalSettings != null)
-                    desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
-                if (appDrawer != null)
-                    if (appDrawer.getVisibility() == View.VISIBLE)
+                if (appDrawer != null && appDrawer.getVisibility() == View.VISIBLE)
                         closeAppDrawer();
+                else if (LauncherSettings.getInstance(Home.this).generalSettings != null && !groupPopup.isShowing)
+                        desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
             } else {
                 desktop.pages.get(desktop.getCurrentItem()).performClick();
             }
