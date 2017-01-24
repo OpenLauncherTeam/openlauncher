@@ -18,7 +18,7 @@
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="set_as_home">Home</string>
-    <string name="search_apps">Search apps...</string>
+    <string name="search_apps">Search apps …</string>
     <string name="launcherInfo"><![CDATA[
                                     Open source project<br>
                                     Copyright <a href="http://bennykok.weebly.com/projects.html">BennyKok</a> @2016-2017<br><br>
@@ -35,6 +35,22 @@
     <string name="wallpaper_unable_to_blur">Unable to blur</string>
 
     <string name="unnamed">Unnamed</string>
+
+
+    // Intro
+
+    <string name="intro_skip">Skip</string>
+    <string name="intro_finish">Let\'s start.</string>
+
+    <string name="intro1_title">OpenLauncher</string>
+    <string name="intro1_text">A short intro how to use …</string>
+
+    <string name="intro2_title">Minibar</string>
+    <string name="intro2_text">Swipe right from the left border of your screen, to open the Minibar. There you can find the settings,
+    change the wallpaper and do some other stuff.</string>
+
+    <string name="intro3_title">Settings</string>
+    <string name="intro3_text">You can configure your desktop, the app drawer, the dock and … Just try it out!</string>
 
 
     // MiniBar
