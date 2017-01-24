@@ -84,6 +84,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/builds" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dependency-cache" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/jars" />
@@ -104,6 +105,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/transition/25.1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.2/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.chyrta/AndroidOnboarder/0.6/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.daniel-stoneuk/material-about-library/1.4.2/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.medyo/fancybuttons/1.8.2/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.ozodrukh/CircularReveal/2.0.1/jars" />
@@ -154,6 +156,7 @@
     <orderEntry type="library" exported="" name="blur-2.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-core-utils-25.1.0" level="project" />
     <orderEntry type="library" exported="" name="lib-10.1.4" level="project" />
+    <orderEntry type="library" exported="" name="AndroidOnboarder-0.6" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-25.1.0" level="project" />
     <orderEntry type="library" exported="" name="com.amulyakhare.textdrawable-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="fastadapter-1.8.2" level="project" />

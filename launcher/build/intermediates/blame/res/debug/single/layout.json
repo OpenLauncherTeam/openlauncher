@@ -8,6 +8,10 @@
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_widgetcontainer.xml"
     },
     {
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/fragment_onboarder.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.github.chyrta/AndroidOnboarder/0.6/res/layout/fragment_onboarder.xml"
+    },
+    {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_navigation_item_header.xml",
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_navigation_item_header.xml"
     },
@@ -20,12 +24,12 @@
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/support_simple_spinner_dropdown_item.xml"
     },
     {
-        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
-        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_action_bar_up_container.xml"
-    },
-    {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_action_bar_up_container.xml"
     },
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
@@ -234,6 +238,10 @@
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_navigation_menu_item.xml",
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/activity_onboarder.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.github.chyrta/AndroidOnboarder/0.6/res/layout/activity_onboarder.xml"
     },
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
