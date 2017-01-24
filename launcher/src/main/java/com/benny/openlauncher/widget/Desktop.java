@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -374,7 +375,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         private SimpleFingerGestures.OnFingerGestureListener getGestureListener(){
             return new SimpleFingerGestures.OnFingerGestureListener() {
                 @Override
-                public boolean onSwipeUp(int i, long l, double v) {return false;}
+                public boolean onSwipeUp(int i, long l, double v) {
+                    return false;
+                }
 
                 @Override
                 public boolean onSwipeDown(int i, long l, double v) {
@@ -420,7 +423,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         }
 
         private CellContainer getItemLayout() {
-            final CellContainer layout = new CellContainer(desktop.getContext());
+            CellContainer layout = new CellContainer(desktop.getContext());
 
             layout.setSoundEffectsEnabled(false);
             SimpleFingerGestures mySfg = new SimpleFingerGestures();
@@ -437,33 +440,23 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             };
             layout.setGridSize(LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridX, LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridY);
             layout.setOnTouchListener(new OnTouchListener() {
-                private float startPosX, startPosY;
                 @Override
-                public boolean onTouch(View view, MotionEvent ev) {
-                    currentEvent = ev;
-
-                    if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-                        startPosX = ev.getX();
-                        startPosY = ev.getY();
-                    }
-
-                    if (ev.getAction() == MotionEvent.ACTION_UP) {
-                        float minDist = 150f;
-                        Tool.print((int)ev.getX(),(int)ev.getY());
-                        if (startPosY - ev.getY() > minDist) {
-                            if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
-                                Point p = Tool.convertPoint(new Point((int)ev.getX(),(int)ev.getY()),layout,Home.launcher.appDrawerOtter);
-                                // FIXME: 1/22/2017 This seem weird, but the extra offset ( Tool.getNavBarHeight(getContext()) ) works on my phone
-                                Home.launcher.openAppDrawer(layout,p.x,p.y - Tool.getNavBarHeight(getContext()));
-                            }
-                        }
-                    }
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    currentEvent = motionEvent;
                     return false;
                 }
             });
             layout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
+                                Home.launcher.openAppDrawer(desktop);
+                            }
+                        }
+                    }, 500);
+
                     scaleFactor = 1f;
                     for (final CellContainer v : desktop.pages) {
                         v.blockTouch = false;
@@ -516,7 +509,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
                     item.addActions(dropItem.actions[0]);
                     if (item.name == null || item.name.isEmpty())
-                        item.name = "Unnamed";
+                        item.name = (home.getString(R.string.unnamed));
                     item.type = Desktop.Item.Type.GROUP;
                     callBack.addItemToSettings(item);
                     callBack.addItemToPagePosition(item,page);
@@ -565,10 +558,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         for (int i = 0; i < DesktopMode.values().length; i++) {
             items[i] = DesktopMode.values()[i].name();
         }
-        items[1] += "(Experimental)";
+        items[1] += (context.getString(R.string.settings_stylePicker_ex));
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title("Desktop style")
-                .items(items)
+        builder.title(context.getString(R.string.settings_stylePicker_title))
+                .items(context.getString(R.string.settings_stylePicker_normal), context.getString(R.string.settings_stylePicker_allApps))
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {

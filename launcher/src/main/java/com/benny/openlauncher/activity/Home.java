@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Point;
@@ -104,12 +106,14 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     private CallLogObserver callLogObserver;
     //region APP_DRAWER_ANIMATION
     private int cx, cy, rad;
+    public static Resources resources;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Tool.print("Activity started : 0");
         long now = System.currentTimeMillis();
+        resources = getResources();
 
         launcher = this;
         AppManager.getInstance(this).clearListener();
@@ -128,7 +132,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         Tool.print("Found views: " + String.valueOf(System.currentTimeMillis() - now));
         now = System.currentTimeMillis();
 
-        searchBar.setVisibility(View.INVISIBLE);
         final LauncherLoadingIcon loadingIcon = (LauncherLoadingIcon) findViewById(R.id.loadingIcon);
         final FrameLayout loadingSplash = (FrameLayout) findViewById(R.id.loadingSplash);
         if (LauncherSettings.getInstance(Home.this).init) {
@@ -165,7 +168,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     //region INIT
 
     private void init() {
-        searchBar.setVisibility(View.VISIBLE);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.addDrawerListener(this);
@@ -292,8 +294,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                     @Override
                     public void run() {
                         dock.setVisibility(View.INVISIBLE);
-                        if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar)
+                        if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+                            searchBar.setVisibility(View.VISIBLE);
+                        } else {
                             searchBar.setVisibility(View.INVISIBLE);
+                        }
                     }
                 }, 100);
             }
@@ -312,8 +317,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                         desktopEditOptionView.setVisibility(View.INVISIBLE);
 
                         dock.setVisibility(View.VISIBLE);
-                        if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar)
+                        if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
                             searchBar.setVisibility(View.VISIBLE);
+                        } else {
+                            searchBar.setVisibility(View.INVISIBLE);
+                        }
                     }
                 }, 100);
             }
@@ -352,7 +360,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         });
         btn4.setOnTouchListener(Tool.getBtnColorMaskController());
 
-        desktopIndicator.setViewPager(desktop);
+        if (!LauncherSettings.getInstance(this).generalSettings.hideIndicator) {
+            desktopIndicator.setViewPager(desktop);
+        }
+
         desktop.setPageIndicator(desktopIndicator);
         int iconSize = LauncherSettings.getInstance(this).generalSettings.iconSize;
 
@@ -381,7 +392,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
             @Override
             public void onEnd() {
-                searchBar.setVisibility(View.INVISIBLE);
+                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+                    searchBar.setVisibility(View.VISIBLE);
+                } else {
+                    searchBar.setVisibility(View.INVISIBLE);
+                }
                 dock.setVisibility(View.INVISIBLE);
                 desktopIndicator.setVisibility(View.INVISIBLE);
                 desktop.setVisibility(View.INVISIBLE);
@@ -389,7 +404,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         }, new AppDrawer.CallBack() {
             @Override
             public void onStart() {
-                searchBar.setVisibility(View.VISIBLE);
+                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+                    searchBar.setVisibility(View.VISIBLE);
+                } else {
+                    searchBar.setVisibility(View.INVISIBLE);
+                }
                 dock.setVisibility(View.VISIBLE);
                 desktopIndicator.setVisibility(View.VISIBLE);
                 desktop.setVisibility(View.VISIBLE);
@@ -400,7 +419,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                     appSearchBar.animate().setStartDelay(0).alpha(0).setDuration(100).withEndAction(new Runnable() {
                         @Override
                         public void run() {
-                            appSearchBar.setVisibility(View.INVISIBLE);
+                            if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+                                searchBar.setVisibility(View.VISIBLE);
+                            } else {
+                                searchBar.setVisibility(View.INVISIBLE);
+                            }
                         }
                     });
                 }
@@ -442,8 +465,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
 
     private void initSettings() {
-        if (!LauncherSettings.getInstance(this).generalSettings.desktopSearchBar) {
-            searchBar.setVisibility(View.GONE);
+        if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+            searchBar.setVisibility(View.VISIBLE);
+        } else {
+            searchBar.setVisibility(View.INVISIBLE);
         }
 
         if (LauncherSettings.getInstance(this).generalSettings.fullscreen) {
@@ -452,11 +477,23 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         }
 
+        PackageManager p = getPackageManager();
+        ComponentName componentName = new ComponentName("com.benny.openlauncher","com.benny.openlauncher.Activity_start");
+        if (LauncherSettings.getInstance(this).generalSettings.hideIcon) {
+            p.setComponentEnabledSetting(componentName , PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
+        } else {
+            p.setComponentEnabledSetting(componentName , PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0);
+        }
+
         dock.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.dockColor);
 
         appDrawerOtter.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.drawerColor);
         appDrawerOtter.getBackground().setAlpha(0);
         appDrawerOtter.reloadDrawerCardTheme();
+
+
+
+
     }
 
     public void initMinBar() {
@@ -662,7 +699,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         if (appWidgetHost != null)
             appWidgetHost.startListening();
         handleLauncherPause();
-
         super.onResume();
     }
 

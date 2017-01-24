@@ -96,7 +96,7 @@ public class AppManager {
         }
     }
 
-    public void startPickIconPackIntent(Activity activity) {
+    public void startPickIconPackIntent(final Activity activity) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory("com.anddoes.launcher.THEME");
 
@@ -106,7 +106,7 @@ public class AppManager {
         Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(packageManager));
         final MaterialDialog d = new MaterialDialog.Builder(activity)
                 .adapter(fastItemAdapter, null)
-                .title("Pick icon pack")
+                .title((activity.getString(R.string.settings_iconPack_title)))
                 .build();
 
         fastItemAdapter.add(new IconLabelItem(activity.getResources().getDrawable(R.mipmap.ic_launcher), "Default", new View.OnClickListener() {
@@ -130,7 +130,7 @@ public class AppManager {
                         getAllApps();
                         d.dismiss();
                     } else {
-                        Tool.toast(context, "Unable to grab the icon without Manifest.permission.READ_EXTERNAL_STORAGE granted");
+                        Tool.toast(context, (activity.getString(R.string.settings_iconPack_toast)));
                         ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
                     }
 
@@ -172,6 +172,7 @@ public class AppManager {
                     return Collator.getInstance().compare(p1.loadLabel(packageManager).toString(), p2.loadLabel(packageManager).toString());
                 }
             });
+
             for (ResolveInfo info : activitiesInfo) {
                 apps.add(new App(info, packageManager));
             }
