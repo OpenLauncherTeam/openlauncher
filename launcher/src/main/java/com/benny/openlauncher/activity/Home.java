@@ -2,10 +2,13 @@ package com.benny.openlauncher.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -39,6 +42,7 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.benny.launcheranim.LauncherLoadingIcon;
 import com.benny.openlauncher.R;
@@ -111,6 +115,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //handle uncaught exception
+        Thread.setDefaultUncaughtExceptionHandler (new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException (Thread thread, Throwable e) {
+                handleUncaughtException (thread, e);
+            }
+        });
+
         Tool.print("Activity started : 0");
         long now = System.currentTimeMillis();
         resources = getResources();
@@ -118,16 +131,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         launcher = this;
         AppManager.getInstance(this).clearListener();
 
-        myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, null);
+        myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, myScreen);
         setContentView(myScreen);
+        findViews();
 
         Tool.print("Content View sat: " + String.valueOf(System.currentTimeMillis() - now));
         now = System.currentTimeMillis();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-
-        findViews();
 
         Tool.print("Found views: " + String.valueOf(System.currentTimeMillis() - now));
         now = System.currentTimeMillis();
@@ -165,11 +177,34 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         }
     }
 
+    //handle uncaught exception -> automatically restart launcher
+    public void handleUncaughtException (Thread thread, Throwable e) {
+
+        Toast.makeText(this, getString(R.string.crash), Toast.LENGTH_LONG).show();
+        //not all Android versions will print the stack trace automatically
+        e.printStackTrace();
+
+        android.content.Intent iMain = new android.content.Intent();
+        iMain.setClassName(this, "com.benny.openlauncher.activity.Home");
+        iMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent piMain = PendingIntent.getActivity(this, 2, iMain, 0);
+
+        //Following code will restart your application after 1 second
+        AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000, piMain);
+
+        //This will finish your activity manually
+        finish();
+
+        //This will stop your application and take out from it.
+        System.exit(2); //Prevents app from freezing
+        System.exit(1); // kill off the crashed app
+    }
+
     //region INIT
 
     private void init() {
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.addDrawerListener(this);
 
         appWidgetHost = new WidgetHost(getApplicationContext(), R.id.m_AppWidgetHost);
@@ -239,7 +274,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         desktopEditOptionView = (ViewGroup) findViewById(R.id.desktopeditoptionpanel);
         dragOptionView = (DragOptionView) findViewById(R.id.dragOptionPanel);
         groupPopup = (GroupPopupView) findViewById(R.id.groupPopup);
-
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         minBar = (ListView) findViewById(R.id.minbar);
     }
 
@@ -491,10 +526,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         appDrawerOtter.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.drawerColor);
         appDrawerOtter.getBackground().setAlpha(0);
         appDrawerOtter.reloadDrawerCardTheme();
-
-
-
-
     }
 
     public void initMinBar() {
