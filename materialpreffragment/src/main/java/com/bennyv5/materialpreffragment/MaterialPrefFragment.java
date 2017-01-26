@@ -285,8 +285,8 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
                     new MaterialDialog.Builder(c)
                             .title(title)
                             .customView(layout, false)
-                            .positiveText("ok")
-                            .negativeText("cancel")
+                            .positiveText(R.string.ok)
+                            .negativeText(R.string.cancel)
                             .onPositive(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -325,9 +325,9 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
                     fragment.currentColorPref = ColorPref.this;
                     new ColorChooserDialog.Builder(fragment.activity,R.string.choose_color)
                             .titleSub(R.string.choose_color)
-                            .doneButton(R.string.md_done_label)
-                            .cancelButton(R.string.md_cancel_label)
-                            .backButton(R.string.md_back_label)
+                            .doneButton(R.string.done)
+                            .cancelButton(R.string.cancel)
+                            .backButton(R.string.back)
                             .preselect(selected)
                             .dynamicButtonColor(false)
                             .show();

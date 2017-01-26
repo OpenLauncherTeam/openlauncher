@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:2:1-102:12
+ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:2:1-113:12
 	package
 		ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:3:5-37
 		INJECTED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml
@@ -42,7 +42,7 @@ ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/s
 	android:name
 		ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:11:22-78
 application
-ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:13:5-100:19
+ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:13:5-111:19
 MERGED from [com.github.ozodrukh:CircularReveal:2.0.1] /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.github.ozodrukh/CircularReveal/2.0.1/AndroidManifest.xml:10:5-20
 MERGED from [net.qiujuer.genius:blur:2.0.0] /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/net.qiujuer.genius/blur/2.0.0/AndroidManifest.xml:11:5-13:38
 MERGED from [com.balysv:material-ripple:1.0.2] /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.2/AndroidManifest.xml:12:5-20
@@ -222,6 +222,22 @@ ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/s
 		ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:98:13-66
 	android:name
 		ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:96:13-51
+provider#android.support.v4.content.FileProvider
+ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:101:9-109:20
+	android:authorities
+		ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:103:13-66
+	android:grantUriPermissions
+		ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:105:13-47
+	android:exported
+		ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:104:13-37
+	android:name
+		ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:102:13-67
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:106:13-108:53
+	android:resource
+		ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:108:17-51
+	android:name
+		ADDED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml:107:17-67
 uses-sdk
 INJECTED from /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.mikepenz:fastadapter:1.8.2] /home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.mikepenz/fastadapter/1.8.2/AndroidManifest.xml:8:5-10:41

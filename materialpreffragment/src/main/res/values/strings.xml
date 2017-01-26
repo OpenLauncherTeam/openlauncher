@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MaterialPrefFragment</string>
     <string name="choose_color">Choose Color</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">OK</string>
+    <string name="back">Back</string>
 </resources>

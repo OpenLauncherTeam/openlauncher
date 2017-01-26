@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MaterialPrefFragment</string>
+    <string name="choose_color">Farbe auswählen</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="done">OK</string>
+    <string name="back">Zurück</string>
+</resources>

@@ -72,8 +72,9 @@
     <string name="about_libs">Open Source libraries</string>
     <string name="about_rate">Rate</string>
     <string name="about_dev">Developer</string>
-    <string name="about_credit">Credit</string>
+    <string name="about_credit">Contributors</string>
     <string name="about_credit_text">Helped me a lot with bugs and suggestions.</string>
+    <string name="about_credit_text_2">Added some settings, German translation.</string>
 
 
     // Settings
@@ -149,5 +150,12 @@
     <string name="settings_othersRestart_summary">Restart the launcher in case the launcher behaving weird.</string>
     <string name="settings_othersHide">Hide icon</string>
     <string name="settings_othersHide_summary">Hide the launchers icon in the app drawer.</string>
+
+    <string name="settings_backup">Backup</string>
+    <string name="settings_backup_summary">Backup and restore your settings.</string>
+    <string name="settings_backup_titleBackup">Backup</string>
+    <string name="settings_backup_titleRestore">Restore</string>
+    <string name="settings_backup_success">Successfully done.</string>
+    <string name="settings_backup_success_not">Something went wrong.</string>
 
 </resources>
