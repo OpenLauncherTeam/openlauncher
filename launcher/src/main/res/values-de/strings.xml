@@ -72,8 +72,9 @@
     <string name="about_libs">Open Source Bibliotheken</string>
     <string name="about_rate">Bewerte die App</string>
     <string name="about_dev">Entwickler</string>
-    <string name="about_credit">Dank</string>
+    <string name="about_credit">Beteiligte</string>
     <string name="about_credit_text">Hat mir bei Fehlern geholfen und Vorschläge gemacht.</string>
+    <string name="about_credit_text_2">Hat einige Einstellungen hinzugefügt, Deutsche Übersetzung.</string>
 
 
     // Settings
@@ -150,5 +151,12 @@
     <string name="settings_othersRestart_summary">Starte den Launcher neu, um alle Änderungen zu übernehmen.</string>
     <string name="settings_othersHide">Icon ausblenden</string>
     <string name="settings_othersHide_summary">Blende das Icon des Launchers im App Drawer aus.</string>
+
+    <string name="settings_backup">Sicherung</string>
+    <string name="settings_backup_summary">Sichere deine Einstellungen oder stelle sie wieder her.</string>
+    <string name="settings_backup_titleBackup">Sicherung</string>
+    <string name="settings_backup_titleRestore">Wiederherstellung</string>
+    <string name="settings_backup_success">Erfolgreich ausgeführt.</string>
+    <string name="settings_backup_success_not">Etwas ging schief.</string>
 
 </resources>

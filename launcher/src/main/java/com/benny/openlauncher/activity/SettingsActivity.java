@@ -1,12 +1,18 @@
 package com.benny.openlauncher.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
@@ -16,6 +22,10 @@ import com.bennyv5.materialpreffragment.BaseSettingsActivity;
 import com.bennyv5.materialpreffragment.MaterialPrefFragment;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.LauncherSettings;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class SettingsActivity extends BaseSettingsActivity implements MaterialPrefFragment.OnPrefClickedListener, MaterialPrefFragment.OnPrefChangedListener {
 
@@ -82,9 +92,12 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
 
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_others)))
+                    .add(new MaterialPrefFragment.ButtonPref("backup", (getString(R.string.settings_backup)), (getString(R.string.settings_backup_summary))))
                     .add(new MaterialPrefFragment.TBPref("hideIcon", getString(R.string.settings_othersHide), getString(R.string.settings_othersHide_summary), generalSettings.hideIcon))
                     .add(new MaterialPrefFragment.ButtonPref("restart", getString(R.string.settings_othersRestart), getString(R.string.settings_othersRestart_summary)))
                     .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
+
+
             setSettingsFragment(fragment);
             getSupportFragmentManager().beginTransaction().add(R.id.ll, fragment).commit();
         }
@@ -266,6 +279,95 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 Desktop.startStylePicker(this);
                 prepareRestart();
                 break;
+            case "backup":
+                final CharSequence[] options = {
+                        getString(R.string.settings_backup_titleBackup),
+                        getString(R.string.settings_backup_titleRestore)};
+                new AlertDialog.Builder(this)
+                        .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int item) {
+
+                                PackageManager m = getPackageManager();
+                                String s = getPackageName();
+
+                                if (options[item].equals(getString(R.string.settings_backup_titleBackup))) {
+                                    File directory = new File(Environment.getExternalStorageDirectory() + "/launcher.backup/");
+                                    if (!directory.exists()) {
+                                        //noinspection ResultOfMethodCallIgnored
+                                        directory.mkdirs();
+                                    }
+
+                                    try {
+                                        PackageInfo p = m.getPackageInfo(s, 0);
+                                        s = p.applicationInfo.dataDir;
+                                        copy(s + "/files/desktopData.json", directory + "/desktopData.json");
+                                        copy(s + "/files/dockData.json", directory + "/dockData.json");
+                                        copy(s + "/files/generalSettings.json", directory + "/generalSettings.json");
+                                        Toast.makeText(SettingsActivity.this, R.string.settings_backup_success, Toast.LENGTH_SHORT).show();
+
+                                    } catch (Exception e) {
+                                        Toast.makeText(SettingsActivity.this, R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                if (options[item].equals(getString(R.string.settings_backup_titleRestore))) {
+                                    File directory = new File(Environment.getExternalStorageDirectory() + "/launcher.backup/");
+
+                                    try {
+                                        PackageInfo p = m.getPackageInfo(s, 0);
+                                        s = p.applicationInfo.dataDir;
+                                        copy(directory + "/desktopData.json", s + "/files/desktopData.json");
+                                        copy(directory + "/dockData.json", s + "/files/dockData.json");
+                                        copy(directory + "/generalSettings.json", s + "/files/generalSettings.json");
+                                        Toast.makeText(SettingsActivity.this, R.string.settings_backup_success, Toast.LENGTH_SHORT).show();
+
+                                    } catch (Exception e) {
+                                        Toast.makeText(SettingsActivity.this, R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
+                                    }
+                                    //This will stop your application and take out from it.
+                                    System.exit(1); // kill off the crashed app
+                                }
+                            }
+                        }).show();
+                break;
+        }
+    }
+
+    private void  copy (String stringIn, String stringOut) {
+
+        try {
+            File desktopData = new File(stringOut);
+            desktopData.delete();
+            File dockData = new File(stringOut);
+            dockData.delete();
+            File generalSettings = new File(stringOut);
+            generalSettings.delete();
+            Tool.print("deleted");
+
+
+            FileInputStream in = new FileInputStream(stringIn);
+            FileOutputStream out = new FileOutputStream(stringOut);
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+
+            // write the output file
+            out.flush();
+            out.close();
+            Tool.print("copied");
+
+        } catch (Exception e) {
+            Toast.makeText(SettingsActivity.this, R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
         }
     }
 }

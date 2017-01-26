@@ -39,6 +39,12 @@ public class AboutActivity extends MaterialAboutActivity {
                 .subText(getString(R.string.about_credit_text))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this,Uri.parse("https://plus.google.com/111923938461696019967")))
                 .build());
+        creditCard.addItem(new MaterialAboutActionItem.Builder()
+                .icon(R.drawable.gaukler_faun)
+                .text("Gaukler Faun")
+                .subText(getString(R.string.about_credit_text_2))
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this,Uri.parse("https://github.com/scoute-dich")))
+                .build());
         //authorCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(),"Chris DeBrodie",false, Uri.parse("")));
 
         return new MaterialAboutList.Builder()

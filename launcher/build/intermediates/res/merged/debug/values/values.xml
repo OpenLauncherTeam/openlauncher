@@ -1156,8 +1156,9 @@
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <string name="about">About Open Launcher</string>
-    <string name="about_credit">Credit</string>
+    <string name="about_credit">Contributors</string>
     <string name="about_credit_text">Helped me a lot with bugs and suggestions.</string>
+    <string name="about_credit_text_2">Added some settings, German translation.</string>
     <string name="about_dev">Developer</string>
     <string name="about_libs">Open Source libraries</string>
     <string name="about_rate">Rate</string>
@@ -1165,6 +1166,7 @@
     <string name="allApps">All Apps</string>
     <string name="app_name">OpenLauncher</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="back">Back</string>
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
     <string name="button.finish">Finish</string>
     <string name="button.next">Next</string>
@@ -1175,6 +1177,7 @@
     <string name="crash">Something went wrong … restarting OpenLauncher.</string>
     <string name="define_fastadapter">year;owner</string>
     <string name="define_materialize">year;owner</string>
+    <string name="done">OK</string>
     <string name="info">Info</string>
     <string name="intro1_text">A short intro how to use …</string>
     <string name="intro1_title">OpenLauncher</string>
@@ -1257,6 +1260,12 @@
     <string name="search_menu_title">Search</string>
     <string name="set_as_home">Home</string>
     <string name="settings">Settings</string>
+    <string name="settings_backup">Backup</string>
+    <string name="settings_backup_success">Successfully done.</string>
+    <string name="settings_backup_success_not">Something went wrong.</string>
+    <string name="settings_backup_summary">Backup and restore your settings.</string>
+    <string name="settings_backup_titleBackup">Backup</string>
+    <string name="settings_backup_titleRestore">Restore</string>
     <string name="settings_colorDock">Dock</string>
     <string name="settings_colorDock_summary">Dock background color.</string>
     <string name="settings_colorDrawer">Drawer</string>

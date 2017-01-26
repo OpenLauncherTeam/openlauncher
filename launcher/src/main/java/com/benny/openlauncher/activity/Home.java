@@ -191,7 +191,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
         //Following code will restart your application after 1 second
         AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000, piMain);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 500, piMain);
 
         //This will finish your activity manually
         finish();

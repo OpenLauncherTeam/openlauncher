@@ -104,6 +104,16 @@
             android:label="About"
             android:parentActivityName="com.benny.openlauncher.activity.SettingsActivity"
             android:theme="@style/AppTheme.MaterialAboutActivity" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.benny.openlauncher.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
