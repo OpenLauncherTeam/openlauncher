@@ -4,12 +4,12 @@
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_grouppopup.xml"
     },
     {
-        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_widgetcontainer.xml",
-        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_widgetcontainer.xml"
-    },
-    {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/fragment_onboarder.xml",
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.github.chyrta/AndroidOnboarder/0.6/res/layout/fragment_onboarder.xml"
+    },
+    {
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_widgetcontainer.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_widgetcontainer.xml"
     },
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_navigation_item_header.xml",

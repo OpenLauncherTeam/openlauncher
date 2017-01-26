@@ -8,6 +8,7 @@
     <string name="add_widget">Widget</string>
     <string name="remove">Remove</string>
     <string name="allApps">All Apps</string>
+    <string name="crash">Something went wrong … restarting OpenLauncher.</string>
 
     <string name="toast_rename">Rename</string>
     <string name="toast_notenoughspace">Not enough space</string>
