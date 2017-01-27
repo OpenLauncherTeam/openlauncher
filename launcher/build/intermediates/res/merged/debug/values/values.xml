@@ -1179,7 +1179,8 @@
     <string name="define_materialize">year;owner</string>
     <string name="done">OK</string>
     <string name="info">Info</string>
-    <string name="intro1_text">A short intro how to use …</string>
+    <string name="intro1_text">Thank you for choosing Open Launcher. It\'s fully open source and still in development.
+        Here\'s a short intro how to use …</string>
     <string name="intro1_title">OpenLauncher</string>
     <string name="intro2_text">Swipe right from the left border of your screen, to open the Minibar. There you can find the settings,
     change the wallpaper and do some other stuff.</string>
