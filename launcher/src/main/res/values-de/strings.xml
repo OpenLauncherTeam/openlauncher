@@ -147,11 +147,11 @@
     <string name="settings_iconSize_summary">Größe für alle Anwendungsicons.</string>
     <string name="settings_iconPack">Icon Pack</string>
     <string name="settings_iconPack_summary">Wähle ein installiertes Icon Pack.</string>
+    <string name="settings_iconHide">Anwendungen ausblenden</string>
+    <string name="settings_iconHide_summary">Blende ausgewählte Anwendungen im App Drawer aus.</string>
 
     <string name="settings_othersRestart">Neustart</string>
     <string name="settings_othersRestart_summary">Starte den Launcher neu, um alle Änderungen zu übernehmen.</string>
-    <string name="settings_othersHide">Icon ausblenden</string>
-    <string name="settings_othersHide_summary">Blende das Icon des Launchers im App Drawer aus.</string>
 
     <string name="settings_backup">Sicherung</string>
     <string name="settings_backup_summary">Sichere deine Einstellungen oder stelle sie wieder her.</string>
@@ -159,5 +159,12 @@
     <string name="settings_backup_titleRestore">Wiederherstellung</string>
     <string name="settings_backup_success">Erfolgreich ausgeführt.</string>
     <string name="settings_backup_success_not">Etwas ging schief.</string>
+
+
+    //Icon hide
+
+    <string name="request_dummy_text">Hello world!</string>
+    <string name="request_please_wait2">Suche nach installierten Anwendungen. Bitte warten.</string>
+    <string name="request_toast">Nichts ausgewählt. Alle Anwendungen im Drawer anzeigen?</string>
 
 </resources>

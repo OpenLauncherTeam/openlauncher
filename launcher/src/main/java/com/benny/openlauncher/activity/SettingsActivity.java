@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.benny.openlauncher.hideApps.Activity_hideApps;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppDrawer;
@@ -88,12 +89,12 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_icons)))
                     .add(new MaterialPrefFragment.NUMPref("iconsize", (getString(R.string.settings_iconSize)), (getString(R.string.settings_iconSize_summary)), generalSettings.iconSize, 30, 80))
-                    .add(new MaterialPrefFragment.ButtonPref("iconpack", (getString(R.string.settings_iconPack_summary)), (getString(R.string.settings_iconPack_summary))))
+                    .add(new MaterialPrefFragment.ButtonPref("iconpack", (getString(R.string.settings_iconPack)), (getString(R.string.settings_iconPack_summary))))
+                    .add(new MaterialPrefFragment.ButtonPref("iconHide", (getString(R.string.settings_iconHide)), (getString(R.string.settings_iconHide_summary))))
 
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_others)))
                     .add(new MaterialPrefFragment.ButtonPref("backup", (getString(R.string.settings_backup)), (getString(R.string.settings_backup_summary))))
-                    .add(new MaterialPrefFragment.TBPref("hideIcon", getString(R.string.settings_othersHide), getString(R.string.settings_othersHide_summary), generalSettings.hideIcon))
                     .add(new MaterialPrefFragment.ButtonPref("restart", getString(R.string.settings_othersRestart), getString(R.string.settings_othersRestart_summary)))
                     .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
 
@@ -170,10 +171,6 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "showIndicator":
                 generalSettings.showIndicator = (boolean)p2;
-                prepareRestart();
-                break;
-            case "hideIcon":
-                generalSettings.hideIcon = (boolean)p2;
                 prepareRestart();
                 break;
             case "iconsize":
@@ -277,6 +274,12 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "desktopMode":
                 Desktop.startStylePicker(this);
+                prepareRestart();
+                break;
+            case "iconHide":
+                Intent intent = new Intent(SettingsActivity.this, Activity_hideApps.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
                 prepareRestart();
                 break;
             case "backup":

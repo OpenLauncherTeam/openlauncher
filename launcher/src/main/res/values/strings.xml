@@ -146,11 +146,11 @@
     <string name="settings_iconSize_summary">Size of all app icons.</string>
     <string name="settings_iconPack">Icon pack</string>
     <string name="settings_iconPack_summary">Select an installed icon pack.</string>
+    <string name="settings_iconHide">Hide apps</string>
+    <string name="settings_iconHide_summary">Hide selected apps from launcher.</string>
 
     <string name="settings_othersRestart">Restart</string>
     <string name="settings_othersRestart_summary">Restart the launcher in case it\'s behaving weird.</string>
-    <string name="settings_othersHide">Hide icon</string>
-    <string name="settings_othersHide_summary">Hide the launcher\'s icon in the app drawer.</string>
 
     <string name="settings_backup">Backup</string>
     <string name="settings_backup_summary">Backup and restore your settings.</string>
@@ -158,5 +158,12 @@
     <string name="settings_backup_titleRestore">Restore</string>
     <string name="settings_backup_success">Successfully done.</string>
     <string name="settings_backup_success_not">Something went wrong.</string>
+
+
+    //Icon hide
+
+    <string name="request_dummy_text">Hello world!</string>
+    <string name="request_please_wait2">Searching for installed apps. Please wait.</string>
+    <string name="request_toast">No apps selected. Show all apps in drawer?</string>
 
 </resources>

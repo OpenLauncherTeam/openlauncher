@@ -165,9 +165,9 @@
     <color name="cardview_light_background">#FFFFFFFF</color>
     <color name="cardview_shadow_end_color">#03000000</color>
     <color name="cardview_shadow_start_color">#37000000</color>
-    <color name="colorAccent">#7986cb</color>
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorAccent">#ff9800</color>
+    <color name="colorPrimary">#5c6bc0</color>
+    <color name="colorPrimaryDark">#4254b3</color>
     <color name="colorPrimaryLight">#BBDEFB</color>
     <color name="design_bottom_navigation_shadow_color">#14000000</color>
     <color name="design_fab_shadow_end_color">@android:color/transparent</color>
@@ -987,6 +987,7 @@
     <dimen name="design_tab_text_size_2line">12sp</dimen>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
+    <dimen name="fab_margin">16dp</dimen>
     <item format="float" name="highlight_alpha_material_colored" type="dimen">0.26</item>
     <item format="float" name="highlight_alpha_material_dark" type="dimen">0.20</item>
     <item format="float" name="highlight_alpha_material_light" type="dimen">0.12</item>
@@ -1257,6 +1258,9 @@
     <string name="path_password_eye_mask_visible">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through">M3.27,4.27 L19.74,20.74</string>
     <string name="remove">Remove</string>
+    <string name="request_dummy_text">Hello world!</string>
+    <string name="request_please_wait2">Searching for installed apps. Please wait.</string>
+    <string name="request_toast">No apps selected. Show all apps in drawer?</string>
     <string name="search_apps">Search apps …</string>
     <string name="search_menu_title">Search</string>
     <string name="set_as_home">Home</string>
@@ -1310,14 +1314,14 @@
     <string name="settings_group_drawer">App drawer</string>
     <string name="settings_group_icons">Icons</string>
     <string name="settings_group_others">Others</string>
+    <string name="settings_iconHide">Hide apps</string>
+    <string name="settings_iconHide_summary">Hide selected apps from launcher.</string>
     <string name="settings_iconPack">Icon pack</string>
     <string name="settings_iconPack_summary">Select an installed icon pack.</string>
     <string name="settings_iconPack_title">Pick icon pack</string>
     <string name="settings_iconPack_toast">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
     <string name="settings_iconSize">Size</string>
     <string name="settings_iconSize_summary">Size of all app icons.</string>
-    <string name="settings_othersHide">Hide icon</string>
-    <string name="settings_othersHide_summary">Hide the launcher\'s icon in the app drawer.</string>
     <string name="settings_othersRestart">Restart</string>
     <string name="settings_othersRestart_summary">Restart the launcher in case it\'s behaving weird.</string>
     <string name="settings_row">Rows</string>
