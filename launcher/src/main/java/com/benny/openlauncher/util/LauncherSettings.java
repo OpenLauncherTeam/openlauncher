@@ -222,7 +222,7 @@ public class LauncherSettings {
         public boolean fullscreen = false;
         public boolean swipe = false;
         public boolean clickToOpen = false;
-        public boolean hideIndicator = false;
+        public boolean showIndicator = true;
         public boolean hideIcon = false;
 
         //Drawer
