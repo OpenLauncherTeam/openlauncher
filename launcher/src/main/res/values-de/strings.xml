@@ -114,8 +114,8 @@
     <string name="settings_desktopSwipe_summary">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
     <string name="settings_desktopClick">Drawer: Klicken</string>
     <string name="settings_desktopClick_summary">Klicke auf den Desktop um den App Drawer zu öffnen.</string>
-    <string name="settings_desktopIndicator">Indicator ausblenden</string>
-    <string name="settings_desktopIndicator_summary">Blende den Seitenindikator auf dem Desktop aus.</string>
+    <string name="settings_desktopIndicator">Seitenindikator</string>
+    <string name="settings_desktopIndicator_summary">Zeige den Seitenindikator auf dem Desktop an.</string>
 
     <string name="settings_dockLabel">Beschriftung</string>
     <string name="settings_dockLabel_summary">Zeige Anwendungs- und Ordnernamen im Dock.</string>
