@@ -45,24 +45,24 @@
 
     <string name="intro1_title">OpenLauncher</string>
     <string name="intro1_text">Thank you for choosing Open Launcher. It\'s fully open source and still in development.
-        Here\'s a short intro how to use …</string>
+        Here\'s a short intro on how to use it …</string>
 
     <string name="intro2_title">Minibar</string>
-    <string name="intro2_text">Swipe right from the left border of your screen, to open the Minibar. There you can find the settings,
-    change the wallpaper and do some other stuff.</string>
+    <string name="intro2_text">Swipe right from the left border of your screen to open the Minibar. There you can find the settings,
+    change the wallpaper, and do lots of other stuff.</string>
 
     <string name="intro3_title">Settings</string>
-    <string name="intro3_text">You can configure your desktop, the app drawer, the dock and … Just try it out!</string>
+    <string name="intro3_text">You can configure your desktop, the app drawer, and the dock … Just try it out!</string>
 
 
     // MiniBar
 
     <string name="minibar">Edit items</string>
     <string name="minibar_1">Set the wallpaper or blur it</string>
-    <string name="minibar_2">Lock the screen immediately, require device administration.</string>
+    <string name="minibar_2">Lock the screen immediately, requires device administration.</string>
     <string name="minibar_3">Free the ram, force close other running services.</string>
-    <string name="minibar_4">Shortcut to device/Android settings.</string>
-    <string name="minibar_5">OpenLauncher settings page.</string>
+    <string name="minibar_4">Shortcut to device settings.</string>
+    <string name="minibar_5">Shortcut to OpenLauncher settings.</string>
     <string name="minibar_6">Pick themes.</string>
     <string name="minibar_7">Open the volume dialog.</string>
 
@@ -85,7 +85,7 @@
     <string name="settings_column">Columns</string>
     <string name="settings_row">Rows</string>
     <string name="settings_iconPack_title">Pick icon pack</string>
-    <string name="settings_iconPack_toast">Unable to grab the icon without Manifest.permission.READ_EXTERNAL_STORAGE granted.</string>
+    <string name="settings_iconPack_toast">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
 
     <string name="settings_stylePicker_ex">(experimental)</string>
     <string name="settings_stylePicker_title">Desktop style</string>
@@ -114,8 +114,8 @@
     <string name="settings_desktopSwipe_summary">Swipe on your desktop to open the app drawer.</string>
     <string name="settings_desktopClick">Fast click Drawer</string>
     <string name="settings_desktopClick_summary">Click on your desktop to open the app drawer.</string>
-    <string name="settings_desktopIndicator">Hide indicator</string>
-    <string name="settings_desktopIndicator_summary">Hide the page indicator on the desktop.</string>
+    <string name="settings_desktopIndicator">Desktop indicator</string>
+    <string name="settings_desktopIndicator_summary">Show the page indicator on the desktop.</string>
 
     <string name="settings_dockLabel">Label</string>
     <string name="settings_dockLabel_summary">Show app and folder names in the dock.</string>
@@ -131,7 +131,7 @@
     <string name="settings_drawerSize">Size</string>
     <string name="settings_drawerSize_summary">Set the drawer grid size.</string>
     <string name="settings_drawerPage">Remember last page</string>
-    <string name="settings_drawerPage_summary">The page will not be reset to the first page, when you reopen the app drawer.</string>
+    <string name="settings_drawerPage_summary">The app drawer will save the last opened page.</string>
 
     <string name="settings_colorDock">Dock</string>
     <string name="settings_colorDock_summary">Dock background color.</string>
@@ -148,9 +148,9 @@
     <string name="settings_iconPack_summary">Select an installed icon pack.</string>
 
     <string name="settings_othersRestart">Restart</string>
-    <string name="settings_othersRestart_summary">Restart the launcher in case the launcher behaving weird.</string>
+    <string name="settings_othersRestart_summary">Restart the launcher in case it's behaving weird.</string>
     <string name="settings_othersHide">Hide icon</string>
-    <string name="settings_othersHide_summary">Hide the launchers icon in the app drawer.</string>
+    <string name="settings_othersHide_summary">Hide the launcher's icon in the app drawer.</string>
 
     <string name="settings_backup">Backup</string>
     <string name="settings_backup_summary">Backup and restore your settings.</string>

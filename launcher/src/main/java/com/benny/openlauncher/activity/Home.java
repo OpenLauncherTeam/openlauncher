@@ -395,7 +395,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         });
         btn4.setOnTouchListener(Tool.getBtnColorMaskController());
 
-        if (!LauncherSettings.getInstance(this).generalSettings.hideIndicator) {
+        if (LauncherSettings.getInstance(this).generalSettings.showIndicator) {
             desktopIndicator.setViewPager(desktop);
         }
 
