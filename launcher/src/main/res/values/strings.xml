@@ -114,8 +114,8 @@
     <string name="settings_desktopSwipe_summary">Swipe on your desktop to open the app drawer.</string>
     <string name="settings_desktopClick">Fast click Drawer</string>
     <string name="settings_desktopClick_summary">Click on your desktop to open the app drawer.</string>
-    <string name="settings_desktopIndicator">Hide indicator</string>
-    <string name="settings_desktopIndicator_summary">Hide the page indicator on the desktop.</string>
+    <string name="settings_desktopIndicator">Desktop indicator</string>
+    <string name="settings_desktopIndicator_summary">Show the page indicator on the desktop.</string>
 
     <string name="settings_dockLabel">Label</string>
     <string name="settings_dockLabel_summary">Show app and folder names in the dock.</string>
