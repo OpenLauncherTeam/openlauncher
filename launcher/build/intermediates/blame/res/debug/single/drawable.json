@@ -28,16 +28,16 @@
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/drawable/abc_ratingbar_indicator_material.xml"
     },
     {
-        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/drawable/outlinebg.xml",
-        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/drawable/outlinebg.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/drawable/launcher_loading_2.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/OpenLauncher/launcheranim/unspecified/res/drawable/launcher_loading_2.xml"
     },
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/drawable/abc_btn_radio_material.xml"
     },
     {
-        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/drawable/launcher_loading_2.xml",
-        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/OpenLauncher/launcheranim/unspecified/res/drawable/launcher_loading_2.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/drawable/outlinebg.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/drawable/outlinebg.xml"
     },
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/drawable/md_selector_dark.xml",
@@ -60,12 +60,12 @@
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/drawable/md_btn_selected_dark.xml"
     },
     {
-        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/drawable/md_selector.xml",
-        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/drawable/md_selector.xml"
-    },
-    {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/drawable/list_divider_h.xml",
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/drawable/list_divider_h.xml"
+    },
+    {
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/drawable/md_selector.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/drawable/md_selector.xml"
     },
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/drawable/abc_text_cursor_material.xml",
