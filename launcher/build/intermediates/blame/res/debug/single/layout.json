@@ -24,16 +24,16 @@
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/support_simple_spinner_dropdown_item.xml"
     },
     {
-        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
-        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_action_bar_view_list_nav_layout.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
     },
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_action_bar_up_container.xml"
     },
     {
-        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
-        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_action_bar_view_list_nav_layout.xml"
     },
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
@@ -46,6 +46,10 @@
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_dragoption_horiiconlist.xml",
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_dragoption_horiiconlist.xml"
+    },
+    {
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/request.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/request.xml"
     },
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_searchbar_app.xml",
@@ -264,6 +268,10 @@
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_alert_dialog_button_bar_material.xml"
     },
     {
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/request_item_list.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/request_item_list.xml"
+    },
+    {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_input_check.xml",
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_dialog_input_check.xml"
     },
@@ -426,6 +434,10 @@
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_list_check.xml",
         "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_dialog_list_check.xml"
+    },
+    {
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/activity_appskip.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/activity_appskip.xml"
     },
     {
         "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/item_pref_num_picker.xml",

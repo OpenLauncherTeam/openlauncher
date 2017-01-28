@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@color/colorAccent">
+            android:background="@color/colorPrimary">
 
             <ListView
                 android:id="@+id/minbar"

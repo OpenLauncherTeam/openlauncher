@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:ignore="ContentDescription">
+
+    <CheckBox
+        android:id="@+id/CBappSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:includeFontPadding="false"
+        android:longClickable="false"
+        android:visibility="gone" />
+
+    <ViewSwitcher
+        android:id="@+id/viewSwitcherChecked"
+        android:layout_width="46dp"
+        android:layout_height="46dp" >
+
+        <ImageView
+            android:id="@+id/IVappIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginLeft="12dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/check_dark"
+            android:layout_marginLeft="12dp" />
+    </ViewSwitcher>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/TVappName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            android:layout_marginRight="16dp"
+            android:lines="1"
+            android:layout_marginLeft="16dp"
+            android:text="@string/request_dummy_text" />
+
+        <TextView
+            android:id="@+id/TVappPackage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textSize="12sp"
+            android:layout_marginBottom="16dp"
+            android:typeface="serif"
+            android:lines="1"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/request_dummy_text" />
+    </LinearLayout>
+
+</LinearLayout>

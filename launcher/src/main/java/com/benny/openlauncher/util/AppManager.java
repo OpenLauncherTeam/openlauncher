@@ -8,6 +8,7 @@ import android.graphics.drawable.*;
 import android.os.*;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
@@ -15,6 +16,10 @@ import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.Collator;
 import java.util.*;
 
@@ -174,7 +179,33 @@ public class AppManager {
             });
 
             for (ResolveInfo info : activitiesInfo) {
-                apps.add(new App(info, packageManager));
+
+                File sdcard = Environment.getExternalStorageDirectory();
+                //Get the text file
+                File file = new File(sdcard,"/launcher.backup/appfilter.txt");
+                //Read text from file
+                StringBuilder text = new StringBuilder();
+
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader(file));
+                    String line;
+
+                    while ((line = br.readLine()) != null) {
+                        text.append(line);
+                        text.append('\n');
+                    }
+                    br.close();
+                }
+                catch (IOException e) {
+                    //You'll need to add proper error handling here
+
+                }
+
+                String list = text.toString();
+
+                if (!list.contains(info.activityInfo.name)) {
+                    apps.add(new App(info, packageManager));
+                }
             }
 
             LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(context).generalSettings;
