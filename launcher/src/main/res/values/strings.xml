@@ -148,9 +148,9 @@
     <string name="settings_iconPack_summary">Select an installed icon pack.</string>
 
     <string name="settings_othersRestart">Restart</string>
-    <string name="settings_othersRestart_summary">Restart the launcher in case it's behaving weird.</string>
+    <string name="settings_othersRestart_summary">Restart the launcher in case it\'s behaving weird.</string>
     <string name="settings_othersHide">Hide icon</string>
-    <string name="settings_othersHide_summary">Hide the launcher's icon in the app drawer.</string>
+    <string name="settings_othersHide_summary">Hide the launcher\'s icon in the app drawer.</string>
 
     <string name="settings_backup">Backup</string>
     <string name="settings_backup_summary">Backup and restore your settings.</string>
