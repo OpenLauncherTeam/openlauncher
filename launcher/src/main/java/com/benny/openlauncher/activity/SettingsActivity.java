@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -14,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.hideApps.Activity_hideApps;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
@@ -52,9 +55,9 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                     .add(new MaterialPrefFragment.ButtonPref("desktopMode", (getString(R.string.settings_desktopStyle)), (getString(R.string.settings_desktopStyle_summary))))
                     .add(new MaterialPrefFragment.TBPref("desktopSearchBar", (getString(R.string.settings_desktopSearch)), (getString(R.string.settings_desktopSearch_summary)), generalSettings.desktopSearchBar))
                     // FIXME: 11/25/2016 This will have problem (in allappsmode) as the apps will be cut off when scale down
-                    .add(new MaterialPrefFragment.NUMPref("gridsizedesktop",(getString(R.string.settings_desktopSize)), (getString(R.string.settings_desktopSize_summary)),
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedesktop",(getString(R.string.settings_column)), generalSettings.desktopGridX, 4, 10),
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsizedesktop",(getString(R.string.settings_row)), generalSettings.desktopGridY, 4, 10)
+                    .add(new MaterialPrefFragment.NUMPref("gridSizeDesktop",(getString(R.string.settings_desktopSize)), (getString(R.string.settings_desktopSize_summary)),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDesktop",(getString(R.string.settings_column)), generalSettings.desktopGridX, 4, 10),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vGridSizeDesktop",(getString(R.string.settings_row)), generalSettings.desktopGridY, 4, 10)
                     ))
                     .add(new MaterialPrefFragment.TBPref("fullscreen", (getString(R.string.settings_desktopFull)), (getString(R.string.settings_desktopFull_summary)), generalSettings.fullscreen))
                     .add(new MaterialPrefFragment.TBPref("swipe", (getString(R.string.settings_desktopSwipe)), (getString(R.string.settings_desktopSwipe_summary)), generalSettings.swipe))
@@ -64,18 +67,18 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_dock)))
                     .add(new MaterialPrefFragment.TBPref("dockShowLabel",(getString(R.string.settings_dockLabel)),(getString(R.string.settings_dockLabel_summary)), generalSettings.dockShowLabel))
-                    .add(new MaterialPrefFragment.NUMPref("gridsizedock",(getString(R.string.settings_dockSize)), (getString(R.string.settings_dockSize_summary)),
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsizedock",(getString(R.string.settings_column)), generalSettings.dockGridX, 5, 10)
+                    .add(new MaterialPrefFragment.NUMPref("gridSizeDock",(getString(R.string.settings_dockSize)), (getString(R.string.settings_dockSize_summary)),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDock",(getString(R.string.settings_column)), generalSettings.dockGridX, 5, 10)
                     ))
 
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_drawer)))
-                    .add(new MaterialPrefFragment.ButtonPref("drawerstyle", (getString(R.string.settings_drawerStyle)), (getString(R.string.settings_drawerStyle_summary))))
+                    .add(new MaterialPrefFragment.ButtonPref("drawerStyle", (getString(R.string.settings_drawerStyle)), (getString(R.string.settings_drawerStyle_summary))))
                     .add(new MaterialPrefFragment.TBPref("drawerCard", (getString(R.string.settings_drawerCard)), (getString(R.string.settings_drawerCard_summary)), generalSettings.drawerUseCard))
-                    .add(new MaterialPrefFragment.TBPref("appdrawersearchbar", (getString(R.string.settings_drawerSearch)), (getString(R.string.settings_drawerSearch_summary)), generalSettings.drawerSearchBar))
-                    .add(new MaterialPrefFragment.NUMPref("gridsize",(getString(R.string.settings_drawerSize)), (getString(R.string.settings_drawerSize_summary)),
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("horigridsize",(getString(R.string.settings_column)), generalSettings.drawerGridX, 1, 10),
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vertgridsize",(getString(R.string.settings_row)), generalSettings.drawerGridY, 1, 10)
+                    .add(new MaterialPrefFragment.TBPref("drawerSearchBar", (getString(R.string.settings_drawerSearch)), (getString(R.string.settings_drawerSearch_summary)), generalSettings.drawerSearchBar))
+                    .add(new MaterialPrefFragment.NUMPref("gridSize",(getString(R.string.settings_drawerSize)), (getString(R.string.settings_drawerSize_summary)),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSize",(getString(R.string.settings_column)), generalSettings.drawerGridX, 1, 10),
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("vGridSize",(getString(R.string.settings_row)), generalSettings.drawerGridY, 1, 10)
                     ))
                     .add(new MaterialPrefFragment.TBPref("drawerRememberPage", (getString(R.string.settings_drawerPage)), (getString(R.string.settings_drawerPage_summary)), !generalSettings.drawerRememberPage))
 
@@ -88,8 +91,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
 
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_icons)))
-                    .add(new MaterialPrefFragment.NUMPref("iconsize", (getString(R.string.settings_iconSize)), (getString(R.string.settings_iconSize_summary)), generalSettings.iconSize, 30, 80))
-                    .add(new MaterialPrefFragment.ButtonPref("iconpack", (getString(R.string.settings_iconPack)), (getString(R.string.settings_iconPack_summary))))
+                    .add(new MaterialPrefFragment.NUMPref("iconSize", (getString(R.string.settings_iconSize)), (getString(R.string.settings_iconSize_summary)), generalSettings.iconSize, 30, 80))
+                    .add(new MaterialPrefFragment.ButtonPref("iconPack", (getString(R.string.settings_iconPack)), (getString(R.string.settings_iconPack_summary))))
                     .add(new MaterialPrefFragment.ButtonPref("iconHide", (getString(R.string.settings_iconHide)), (getString(R.string.settings_iconHide_summary))))
 
 
@@ -115,31 +118,9 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.launcherInfo:
-                startActivity(new Intent(this,AboutActivity.class));
-//                new MaterialDialog.Builder(this).title("About")
-//                        .content(R.string.launcherInfo)
-//                        .positiveText("Ok")
-//                        .negativeText("Rate")
-//                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-//                            @Override
-//                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-//                                String url = "https://play.google.com/store/apps/details?id=com.benny.openlauncher";
-//                                Intent i = new Intent(Intent.ACTION_VIEW);
-//                                i.setData(Uri.parse(url));
-//                                startActivity(i);
-//                            }
-//                        })
-//                        .neutralText("GitHub")
-//                        .onNeutral(new MaterialDialog.SingleButtonCallback() {
-//                            @Override
-//                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-//                                String url = "https://github.com/BennyKok/OpenLauncher";
-//                                Intent i = new Intent(Intent.ACTION_VIEW);
-//                                i.setData(Uri.parse(url));
-//                                startActivity(i);
-//                            }
-//                        })
-//                        .show();
+                Intent intent = new Intent(this, AboutActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -173,15 +154,15 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 generalSettings.showIndicator = (boolean)p2;
                 prepareRestart();
                 break;
-            case "iconsize":
+            case "iconSize":
                 generalSettings.iconSize = (int) p2;
                 prepareRestart();
                 break;
-            case "horigridsize":
+            case "hGridSize":
                 generalSettings.drawerGridX = (int) p2;
                 prepareRestart();
                 break;
-            case "vertgridsize":
+            case "vGridSize":
                 generalSettings.drawerGridY = (int) p2;
                 prepareRestart();
                 break;
@@ -189,19 +170,19 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 generalSettings.dockShowLabel = (boolean)p2;
                 prepareRestart();
                 break;
-            case "appdrawersearchbar":
+            case "drawerSearchBar":
                 generalSettings.drawerSearchBar = (boolean)p2;
                 prepareRestart();
                 break;
-            case "horigridsizedesktop":
+            case "hGridSizeDesktop":
                 generalSettings.desktopGridX = (int)p2;
                 prepareRestart();
                 break;
-            case "vertgridsizedesktop":
+            case "vGridSizeDesktop":
                 generalSettings.desktopGridY = (int)p2;
                 prepareRestart();
                 break;
-            case "horigridsizedock":
+            case "hGridSizeDock":
                 generalSettings.dockGridX = (int)p2;
                 prepareRestart();
                 break;
@@ -265,10 +246,10 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 requireLauncherRestart = false;
                 finish();
                 break;
-            case "iconpack":
+            case "iconPack":
                 AppManager.getInstance(this).startPickIconPackIntent(this);
                 break;
-            case "drawerstyle":
+            case "drawerStyle":
                 AppDrawer.startStylePicker(this);
                 prepareRestart();
                 break;
@@ -286,17 +267,14 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 final CharSequence[] options = {
                         getString(R.string.settings_backup_titleBackup),
                         getString(R.string.settings_backup_titleRestore)};
-                new AlertDialog.Builder(this)
-                        .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
 
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                dialog.cancel();
-                            }
-                        })
-                        .setItems(options, new DialogInterface.OnClickListener() {
+                MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
+                builder.title(R.string.settings_backup)
+                        .positiveText(R.string.cancel)
+                        .items(options)
+                        .itemsCallback(new MaterialDialog.ListCallback() {
                             @Override
-                            public void onClick(DialogInterface dialog, int item) {
-
+                            public void onSelection(MaterialDialog dialog, View itemView, int item, CharSequence text) {
                                 PackageManager m = getPackageManager();
                                 String s = getPackageName();
 
@@ -337,7 +315,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                                     System.exit(1); // kill off the crashed app
                                 }
                             }
-                        }).show();
+                        });
+                builder.show();
                 break;
         }
     }
