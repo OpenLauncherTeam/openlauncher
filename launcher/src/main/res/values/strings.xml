@@ -97,10 +97,11 @@
 
     <string name="settings_group_desktop">Desktop</string>
     <string name="settings_group_dock">Dock</string>
-    <string name="settings_group_drawer">App drawer</string>
+    <string name="settings_group_drawer">App Drawer</string>
+    <string name="settings_group_input">Input</string>
     <string name="settings_group_color">Colors</string>
     <string name="settings_group_icons">Icons</string>
-    <string name="settings_group_others">Others</string>
+    <string name="settings_group_other">Other</string>
 
     <string name="settings_desktopStyle">Style</string>
     <string name="settings_desktopStyle_summary">Choose between different styles for your desktop.</string>
@@ -110,10 +111,6 @@
     <string name="settings_desktopSize_summary">Set the desktop grid size.</string>
     <string name="settings_desktopFull">Fullscreen</string>
     <string name="settings_desktopFull_summary">Enable fullscreen for your desktop.</string>
-    <string name="settings_desktopSwipe">Fast swipe Drawer</string>
-    <string name="settings_desktopSwipe_summary">Swipe on your desktop to open the app drawer.</string>
-    <string name="settings_desktopClick">Fast click Drawer</string>
-    <string name="settings_desktopClick_summary">Click on your desktop to open the app drawer.</string>
     <string name="settings_desktopIndicator">Desktop indicator</string>
     <string name="settings_desktopIndicator_summary">Show the page indicator on the desktop.</string>
 
@@ -132,6 +129,13 @@
     <string name="settings_drawerSize_summary">Set the drawer grid size.</string>
     <string name="settings_drawerPage">Remember last page</string>
     <string name="settings_drawerPage_summary">The app drawer will save the last opened page.</string>
+
+    <string name="settings_desktopSwipe">Fast swipe Drawer</string>
+    <string name="settings_desktopSwipe_summary">Swipe up on the drawer app icon to open the app drawer.</string>
+    <string name="settings_desktopClick">Fast click Drawer</string>
+    <string name="settings_desktopClick_summary">Tap your desktop to open the app drawer.</string>
+    <string name="settings_doubleClick">Double click to lock screen</string>
+    <string name="settings_doubleClick_summary">Double tap your desktop to lock the device.</string>
 
     <string name="settings_colorDock">Dock</string>
     <string name="settings_colorDock_summary">Dock background color.</string>
