@@ -41,13 +41,15 @@ public class LauncherAction {
     public static void RunAction(Action act,final Context c,final Activity a){
         switch (act){
             case LockScreen:
-                try{
-                    ((DevicePolicyManager)c.getSystemService(Context.DEVICE_POLICY_SERVICE)).lockNow();
-                }catch (Exception e){
-                    Tool.toast(c,c.getString(R.string.toast_plzenabledeviceadmin));
-                    Intent intent = new Intent();
-                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.DeviceAdminSettings"));
-                    c.startActivity(intent);
+                if(LauncherSettings.getInstance(c).generalSettings.doubleClick) {
+                    try{
+                        ((DevicePolicyManager)c.getSystemService(Context.DEVICE_POLICY_SERVICE)).lockNow();
+                    }catch (Exception e){
+                        Tool.toast(c,c.getString(R.string.toast_plzenabledeviceadmin));
+                        Intent intent = new Intent();
+                        intent.setComponent(new ComponentName("com.android.settings","com.android.settings.DeviceAdminSettings"));
+                        c.startActivity(intent);
+                    }
                 }
                 break;
             case ClearRam:
