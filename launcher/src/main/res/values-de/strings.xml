@@ -101,6 +101,8 @@
     <string name="settings_group_color">Farben</string>
     <string name="settings_group_icons">Icons</string>
     <string name="settings_group_others">Anderes</string>
+    <string name="settings_group_input">Gesten</string>
+    <string name="settings_group_other">Anderes</string>
 
     <string name="settings_desktopStyle">Stil</string>
     <string name="settings_desktopStyle_summary">Wähle zwischen verschiedenen Stilen für deinen Desktop.</string>

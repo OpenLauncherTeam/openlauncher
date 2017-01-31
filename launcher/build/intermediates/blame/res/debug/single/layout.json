@@ -1,922 +1,462 @@
 [
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_bar_title_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_grouppopup.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_grouppopup.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/fragment_onboarder.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.github.chyrta/AndroidOnboarder/0.6/res/layout/fragment_onboarder.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_menu_layout.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_widgetcontainer.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_widgetcontainer.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_layout_snackbar.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_navigation_item_header.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_navigation_item_header.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_alert_dialog_material.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_basic.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_dialog_basic.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_icon.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_layout_tab_icon.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/support_simple_spinner_dropdown_item.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_minbar.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_minbar.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_action_bar_view_list_nav_layout.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_template_part_time.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_action_bar_up_container.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_template_part_time.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_template_media_custom.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_list_menu_item_checkbox.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_progress.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_progress.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_stub_titleframe_lesspadding.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_stub_titleframe_lesspadding.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_activity_chooser_view.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_dragoption_horiiconlist.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_dragoption_horiiconlist.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\activity_settings.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\activity_settings.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/request.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/request.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_dialog_title_material.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_searchbar_app.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_searchbar_app.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/notification_action_tombstone.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/notification_action_tombstone.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\two_line_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.mikepenz\\fastadapter-extensions\\1.8.0\\res\\layout\\two_line_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/notification_template_media.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/notification_template_media.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_listitem.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_listitem.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_screen_toolbar.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_screen_toolbar.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_input.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_input.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/progress_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.mikepenz/fastadapter-extensions/1.8.0/res/layout/progress_item.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_navigation_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_listitem_multichoice.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_listitem_multichoice.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_preference_custom.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\commons\\0.9.1.0\\res\\layout\\md_preference_custom.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_stub_inputpref.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/commons/0.9.1.0/res/layout/md_stub_inputpref.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_list_menu_item_layout.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_searchbar_nougat.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_searchbar_nougat.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\request.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\request.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_stub_titleframe.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_stub_titleframe.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar_include.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_layout_snackbar_include.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/notification_template_lines_media.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/notification_template_lines_media.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_screen_simple.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/notification_template_media_custom.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/notification_template_media_custom.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_stub_colorchooser_grid.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\commons\\0.9.1.0\\res\\layout\\md_stub_colorchooser_grid.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_navigation_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_navigation_item.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/notification_template_part_time.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\activity_home.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\activity_home.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/item_minbar.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/item_minbar.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_app.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_app.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_custom.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_dialog_custom.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/item_appdrawerbtn.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/item_appdrawerbtn.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_navigation_menu_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/mal_material_about_list_card.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.github.daniel-stoneuk/material-about-library/1.4.2/res/layout/mal_material_about_list_card.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\select_dialog_singlechoice_material.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_dialog_title_material.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\select_dialog_item_material.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_bottom_navigation_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_bottom_navigation_item.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_mode_bar.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/item_appdrawer_page.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/item_appdrawer_page.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_navigation_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_action_bar_title_item.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_listitem_multichoice.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_listitem_multichoice.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item_material.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_action_mode_close_item_material.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_note.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_note.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_list_menu_item_layout.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_stub_actionbuttons.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_stub_actionbuttons.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_screen_simple_overlay_action_mode.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_navigation_menu_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_action_menu_layout.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\request.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\request.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_alert_dialog_material.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_alert_dialog_material.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_header.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_navigation_item_header.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_home.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_home.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_searchbar_normal.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_searchbar_normal.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_screen_content_include.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_basic_check.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_basic_check.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_text_input_password_icon.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_text_input_password_icon.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_list_menu_item_icon.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_griddrawer.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_griddrawer.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_header_search.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_header_search.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/item_iconlabel.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/item_iconlabel.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_menu_layout.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_preference_custom.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/commons/0.9.1.0/res/layout/md_preference_custom.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\two_line_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.mikepenz\\fastadapter-extensions\\1.8.0\\res\\layout\\two_line_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/mal_material_about_activity.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.github.daniel-stoneuk/material-about-library/1.4.2/res/layout/mal_material_about_activity.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_drawerindicator.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_drawerindicator.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_layout_tab_icon.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_layout_tab_icon.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_stub_colorchooser_custom.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\commons\\0.9.1.0\\res\\layout\\md_stub_colorchooser_custom.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_progress_indeterminate.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_dialog_progress_indeterminate.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\request_item_list.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\request_item_list.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_navigation_menu.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_navigation_menu.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_popup_menu_item_layout.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_simplelist_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/commons/0.9.1.0/res/layout/md_simplelist_item.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_mode_close_item_material.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_action_mode_bar.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_custom.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_custom.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_list.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_dialog_list.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_stub_actionbuttons.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_stub_actionbuttons.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/three_line_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.mikepenz/fastadapter-extensions/1.8.0/res/layout/three_line_item.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_navigation_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_bottom_navigation_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_list_menu_item_radio.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\activity_onboarder.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.chyrta\\AndroidOnboarder\\0.6\\res\\layout\\activity_onboarder.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_progress_indeterminate_horizontal.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_dialog_progress_indeterminate_horizontal.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_progress_indeterminate_horizontal.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_progress_indeterminate_horizontal.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/item_note.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/item_note.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/activity_home.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/activity_home.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_preference_custom.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\commons\\0.9.1.0\\res\\layout\\md_preference_custom.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_basic_check.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_dialog_basic_check.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\mal_material_about_action_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.daniel-stoneuk\\material-about-library\\1.4.2\\res\\layout\\mal_material_about_action_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_stub_colorchooser_grid.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/commons/0.9.1.0/res/layout/md_stub_colorchooser_grid.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/activity_settings.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/activity_settings.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_minbar.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_minbar.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_navigation_menu_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_navigation_menu_item.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_template_part_chronometer.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/activity_onboarder.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.github.chyrta/AndroidOnboarder/0.6/res/layout/activity_onboarder.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_mode_close_item_material.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_select_dialog_material.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\request_item_list.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\request_item_list.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/mal_material_about_title_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.github.daniel-stoneuk/material-about-library/1.4.2/res/layout/mal_material_about_title_item.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_minbaredit.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_minbaredit.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_listitem_singlechoice.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_listitem_singlechoice.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\mal_material_about_activity.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.daniel-stoneuk\\material-about-library\\1.4.2\\res\\layout\\mal_material_about_activity.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_desktopeditoption.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_desktopeditoption.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_screen_simple.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_alert_dialog_button_bar_material.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_alert_dialog_button_bar_material.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_listitem_singlechoice.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_listitem_singlechoice.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/request_item_list.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/request_item_list.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_simplelist_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\commons\\0.9.1.0\\res\\layout\\md_simplelist_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_input_check.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_dialog_input_check.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_listitem.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_listitem.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/select_dialog_multichoice_material.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/select_dialog_multichoice_material.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_stub_titleframe_lesspadding.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_stub_titleframe_lesspadding.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_expanded_menu_layout.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_action.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_listitem.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_listitem.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_iconlabel.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_iconlabel.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_searchbar_normal.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_searchbar_normal.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_header.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_navigation_item_header.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_menu_item_action_area.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_menu_item_action_area.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\activity_onboarder.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.chyrta\\AndroidOnboarder\\0.6\\res\\layout\\activity_onboarder.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_bottom_sheet_dialog.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_bottom_sheet_dialog.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\progress_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.mikepenz\\fastadapter-extensions\\1.8.0\\res\\layout\\progress_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/mal_material_about_fragment.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.github.daniel-stoneuk/material-about-library/1.4.2/res/layout/mal_material_about_fragment.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\select_dialog_multichoice_material.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_activity_chooser_view_list_item.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\select_dialog_singlechoice_material.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/item_minbaredit.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/item_minbaredit.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_listitem_multichoice.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_listitem_multichoice.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_contact.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_contact.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_pref_num_picker.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\OpenLauncher\\materialpreffragment\\unspecified\\res\\layout\\item_pref_num_picker.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_griddrawerinner.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_griddrawerinner.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\mal_material_about_fragment.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.daniel-stoneuk\\material-about-library\\1.4.2\\res\\layout\\mal_material_about_fragment.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/notification_template_icon_group.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/notification_template_icon_group.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\three_line_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.mikepenz\\fastadapter-extensions\\1.8.0\\res\\layout\\three_line_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_navigation_item_separator.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_navigation_item_separator.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/mal_material_about_action_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.github.daniel-stoneuk/material-about-library/1.4.2/res/layout/mal_material_about_action_item.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_layout_snackbar.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/select_dialog_item_material.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_home.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_home.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_layout_snackbar.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_layout_snackbar.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_subheader.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_navigation_item_subheader.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_stub_colorchooser_custom.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/commons/0.9.1.0/res/layout/md_stub_colorchooser_custom.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_separator.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_navigation_item_separator.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/select_dialog_singlechoice_material.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/select_dialog_singlechoice_material.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_basic_check.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_basic_check.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/materialize.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.mikepenz/materialize/1.0.0/res/layout/materialize.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_searchbar_nougat.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_searchbar_nougat.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_stub_actionbuttons.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_stub_actionbuttons.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_sheet_dialog.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_bottom_sheet_dialog.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_layout_tab_text.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_layout_tab_text.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_basic.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_basic.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_activity_chooser_view.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_stub_colorchooser_custom.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\commons\\0.9.1.0\\res\\layout\\md_stub_colorchooser_custom.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_action_menu_item_layout.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_progress_indeterminate_horizontal.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_progress_indeterminate_horizontal.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_alert_dialog_title_material.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_alert_dialog_title_material.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_note.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_note.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/activity_minbaredit.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/activity_minbaredit.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_template_media.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/two_line_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.mikepenz/fastadapter-extensions/1.8.0/res/layout/two_line_item.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_appdrawerbtn.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_appdrawerbtn.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_navigation_item_subheader.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_navigation_item_subheader.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_minbaredit.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_minbaredit.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_screen_simple.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_screen_simple.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_progress_indeterminate.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_progress_indeterminate.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/single_line_item.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.mikepenz/fastadapter-extensions/1.8.0/res/layout/single_line_item.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_colorchooser.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\commons\\0.9.1.0\\res\\layout\\md_dialog_colorchooser.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_list_menu_item_icon.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\materialize.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.mikepenz\\materialize\\1.0.0\\res\\layout\\materialize.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/item_app.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/item_app.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_menu_item_layout.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_colorchooser.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/commons/0.9.1.0/res/layout/md_dialog_colorchooser.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_navigation_menu.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/notification_template_part_chronometer.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\select_dialog_item_material.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/item_header_search.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/item_header_search.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\materialize.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.mikepenz\\materialize\\1.0.0\\res\\layout\\materialize.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_pageddrawer.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_pageddrawer.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_appdrawerbtn.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_appdrawerbtn.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/notification_action.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/notification_action.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_popup_menu_header_item_layout.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_popup_menu_header_item_layout.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_expanded_menu_layout.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/view_drawerindicator.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/view_drawerindicator.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_searchbar_normal.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_searchbar_normal.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_text.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_layout_tab_text.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_list_check.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_dialog_list_check.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_menu_item_action_area.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_menu_item_action_area.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/activity_appskip.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/src/main/res/layout/activity_appskip.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_drawerindicator.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_drawerindicator.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/item_pref_num_picker.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/OpenLauncher/materialpreffragment/unspecified/res/layout/item_pref_num_picker.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_list.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_list.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_progress.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_dialog_progress.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_navigation_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_bottom_navigation_item.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/design_layout_snackbar_include.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/layout/design_layout_snackbar_include.xml"
     },
     {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_progress.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_progress.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/md_dialog_input.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/res/layout/md_dialog_input.xml"
     },
     {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_select_dialog_material.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_contact.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_contact.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_title_material.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_alert_dialog_title_material.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_pageddrawer.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_pageddrawer.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_listitem_singlechoice.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_listitem_singlechoice.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_action_tombstone.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_expanded_menu_layout.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_menu_item_action_area.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_menu_item_action_area.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_list_menu_item_icon.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\three_line_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.mikepenz\\fastadapter-extensions\\1.8.0\\res\\layout\\three_line_item.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_grouppopup.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_grouppopup.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_bar_up_container.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_list_check.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_list_check.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_basic.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_basic.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_searchbar_app.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_searchbar_app.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\mal_material_about_action_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.daniel-stoneuk\\material-about-library\\1.4.2\\res\\layout\\mal_material_about_action_item.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_activity_chooser_view.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_list_menu_item_layout.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\select_dialog_multichoice_material.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_list_menu_item_checkbox.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_stub_titleframe.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_stub_titleframe.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_contact.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_contact.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_onboarder.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.chyrta\\AndroidOnboarder\\0.6\\res\\layout\\fragment_onboarder.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_popup_menu_item_layout.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\support_simple_spinner_dropdown_item.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_text_input_password_icon.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_text_input_password_icon.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_input.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_input.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_input_check.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_input_check.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\mal_material_about_activity.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.daniel-stoneuk\\material-about-library\\1.4.2\\res\\layout\\mal_material_about_activity.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_bar_title_item.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_stub_titleframe_lesspadding.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_stub_titleframe_lesspadding.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_activity_chooser_view_list_item.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_iconlabel.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_iconlabel.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_appdrawer_page.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_appdrawer_page.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_separator.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_navigation_item_separator.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_stub_titleframe.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_stub_titleframe.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_sheet_dialog.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_bottom_sheet_dialog.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_list_menu_item_checkbox.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_input_check.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_input_check.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_pageddrawer.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_pageddrawer.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_desktopeditoption.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_desktopeditoption.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_template_media_custom.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_griddrawer.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_griddrawer.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_template_part_chronometer.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_home.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_home.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\activity_minbaredit.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\activity_minbaredit.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_template_media.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\progress_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.mikepenz\\fastadapter-extensions\\1.8.0\\res\\layout\\progress_item.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_griddrawerinner.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_griddrawerinner.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_action_tombstone.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_list_menu_item_radio.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_list.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_list.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_onboarder.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.chyrta\\AndroidOnboarder\\0.6\\res\\layout\\fragment_onboarder.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_griddrawer.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_griddrawer.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_searchbar_nougat.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_searchbar_nougat.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_stub_colorchooser_grid.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\commons\\0.9.1.0\\res\\layout\\md_stub_colorchooser_grid.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_dialog_title_material.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_navigation_menu.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_text_input_password_icon.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_text_input_password_icon.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_colorchooser.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\commons\\0.9.1.0\\res\\layout\\md_dialog_colorchooser.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_icon_group.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_template_icon_group.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_screen_content_include.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_alert_dialog_material.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_widgetcontainer.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_widgetcontainer.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_list_menu_item_radio.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_screen_toolbar.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\mal_material_about_list_card.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.daniel-stoneuk\\material-about-library\\1.4.2\\res\\layout\\mal_material_about_list_card.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_app.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_app.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar_include.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_layout_snackbar_include.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_icon_group.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_template_icon_group.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_popup_menu_header_item_layout.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_appdrawer_page.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_appdrawer_page.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\mal_material_about_title_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.daniel-stoneuk\\material-about-library\\1.4.2\\res\\layout\\mal_material_about_title_item.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\single_line_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.mikepenz\\fastadapter-extensions\\1.8.0\\res\\layout\\single_line_item.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_title_material.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_alert_dialog_title_material.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_progress_indeterminate.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_progress_indeterminate.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_grouppopup.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_grouppopup.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_search_view.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_screen_content_include.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_mode_bar.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_bar_up_container.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_select_dialog_material.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_dragoption_horiiconlist.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_dragoption_horiiconlist.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\activity_appskip.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\activity_appskip.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_list_check.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_list_check.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\activity_settings.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\activity_settings.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_template_lines_media.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\mal_material_about_list_card.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.daniel-stoneuk\\material-about-library\\1.4.2\\res\\layout\\mal_material_about_list_card.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_widgetcontainer.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_widgetcontainer.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_search_view.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\activity_minbaredit.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\activity_minbaredit.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_simplelist_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\commons\\0.9.1.0\\res\\layout\\md_simplelist_item.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_template_lines_media.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_text.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_layout_tab_text.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_stub_inputpref.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\commons\\0.9.1.0\\res\\layout\\md_stub_inputpref.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_dragoption_horiiconlist.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_dragoption_horiiconlist.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\notification_action.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_subheader.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_navigation_item_subheader.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\mal_material_about_fragment.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.daniel-stoneuk\\material-about-library\\1.4.2\\res\\layout\\mal_material_about_fragment.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\mal_material_about_title_item.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.github.daniel-stoneuk\\material-about-library\\1.4.2\\res\\layout\\mal_material_about_title_item.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_header_search.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\item_header_search.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_screen_toolbar.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_dialog_custom.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\core\\0.9.1.0\\res\\layout\\md_dialog_custom.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\md_stub_inputpref.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.afollestad.material-dialogs\\commons\\0.9.1.0\\res\\layout\\md_stub_inputpref.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\activity_appskip.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\activity_appskip.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_griddrawerinner.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_griddrawerinner.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\item_pref_num_picker.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\OpenLauncher\\materialpreffragment\\unspecified\\res\\layout\\item_pref_num_picker.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\single_line_item.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.mikepenz\\fastadapter-extensions\\1.8.0\\res\\layout\\single_line_item.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_desktopeditoption.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_desktopeditoption.xml"
-    },
-    {
-        "merged": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\activity_home.xml",
-        "source": "D:\\USER\\ProjectData\\OpenLauncher\\launcher\\src\\main\\res\\layout\\activity_home.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_icon.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\layout\\design_layout_tab_icon.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.0\\res\\layout\\abc_action_menu_item_layout.xml"
-    },
-    {
-        "merged": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\build\\intermediates\\res\\merged\\debug\\layout\\view_searchbar_app.xml",
-        "source": "D:\\home\\juergen\\Projekte\\Android\\Android_Studio\\OpenLauncher\\launcher\\src\\main\\res\\layout\\view_searchbar_app.xml"
+        "merged": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
+        "source": "/home/juergen/Projekte/Android/Android_Studio/OpenLauncher/launcher/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/layout/abc_search_view.xml"
     }
 ]

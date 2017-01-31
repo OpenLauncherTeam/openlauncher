@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.AssetManager;
@@ -63,10 +64,8 @@ public class Fragment_hideApps extends Fragment {
     private static Context context;
     private ViewSwitcher switcherLoad;
     private final Fragment_hideApps.AsyncWorkerList taskList = new AsyncWorkerList();
-    private Typeface tf;
-    private static final String SD = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-    private static final String SAVE_LOC = SD + "/launcher.backup/"; //TODO Set own file path.
+    private String SAVE_LOC;
     private static final String appfilter_path = "empty_appfilter.xml"; //TODO Define path to appfilter.xml in assets folder.
 
     private static final String TAG = "RequestActivity";
@@ -81,6 +80,18 @@ public class Fragment_hideApps extends Fragment {
         final View rootView = inflater.inflate(R.layout.request, container, false);
         switcherLoad = (ViewSwitcher)rootView.findViewById(R.id.viewSwitcherLoadingMain);
         context = getActivity();
+
+        try {
+
+            PackageManager m = getActivity().getPackageManager();
+            String s = getActivity().getPackageName();
+            PackageInfo p = m.getPackageInfo(s, 0);
+            s = p.applicationInfo.dataDir;
+            SAVE_LOC = s;
+
+        } catch (Exception e){
+            Toast.makeText(getActivity(), R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
+        }
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_rq);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -146,9 +157,6 @@ public class Fragment_hideApps extends Fragment {
 
             @Override
             public void run() {
-
-                final File save_loc = new File(SAVE_LOC);
-                save_loc.mkdirs(); // recreates the directory
 
                 ArrayList arrayList = list_activities_final;
                 StringBuilder stringBuilderXML = new StringBuilder();
@@ -411,8 +419,6 @@ public class Fragment_hideApps extends Fragment {
             AppInfo appInfo = appList.get(position);
 
             holder.apkPackage.setText(String.valueOf(appInfo.getCode().split("/")[0]+"/"+appInfo.getCode().split("/")[1]));
-            holder.apkPackage.setTypeface(tf);
-
             holder.apkName.setText(appInfo.getName());
 
             holder.apkIcon.setImageDrawable(appInfo.getImage());

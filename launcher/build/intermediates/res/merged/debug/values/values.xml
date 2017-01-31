@@ -1281,7 +1281,7 @@
     <string name="settings_colorLabel_summary">Label color for folders and the app drawer.</string>
     <string name="settings_column">Columns</string>
     <string name="settings_desktopClick">Fast click Drawer</string>
-    <string name="settings_desktopClick_summary">Click on your desktop to open the app drawer.</string>
+    <string name="settings_desktopClick_summary">Tap your desktop to open the app drawer.</string>
     <string name="settings_desktopFull">Fullscreen</string>
     <string name="settings_desktopFull_summary">Enable fullscreen for your desktop.</string>
     <string name="settings_desktopIndicator">Desktop indicator</string>
@@ -1293,11 +1293,13 @@
     <string name="settings_desktopStyle">Style</string>
     <string name="settings_desktopStyle_summary">Choose between different styles for your desktop.</string>
     <string name="settings_desktopSwipe">Fast swipe Drawer</string>
-    <string name="settings_desktopSwipe_summary">Swipe on your desktop to open the app drawer.</string>
+    <string name="settings_desktopSwipe_summary">Swipe up on the drawer app icon to open the app drawer.</string>
     <string name="settings_dockLabel">Label</string>
     <string name="settings_dockLabel_summary">Show app and folder names in the dock.</string>
     <string name="settings_dockSize">Size</string>
     <string name="settings_dockSize_summary">Set the dock size.</string>
+    <string name="settings_doubleClick">Double click to lock screen</string>
+    <string name="settings_doubleClick_summary">Double tap your desktop to lock the device.</string>
     <string name="settings_drawerCard">Card</string>
     <string name="settings_drawerCard_summary">Use a card as drawer background.</string>
     <string name="settings_drawerPage">Remember last page</string>
@@ -1311,9 +1313,10 @@
     <string name="settings_group_color">Colors</string>
     <string name="settings_group_desktop">Desktop</string>
     <string name="settings_group_dock">Dock</string>
-    <string name="settings_group_drawer">App drawer</string>
+    <string name="settings_group_drawer">App Drawer</string>
     <string name="settings_group_icons">Icons</string>
-    <string name="settings_group_others">Others</string>
+    <string name="settings_group_input">Input</string>
+    <string name="settings_group_other">Other</string>
     <string name="settings_iconHide">Hide apps</string>
     <string name="settings_iconHide_summary">Hide selected apps from launcher.</string>
     <string name="settings_iconPack">Icon pack</string>

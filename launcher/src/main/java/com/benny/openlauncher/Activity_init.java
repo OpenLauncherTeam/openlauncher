@@ -24,12 +24,12 @@ public class Activity_init extends OnboarderActivity {
         OnboarderPage onboarderPage3 = new OnboarderPage(getString(R.string.intro3_title), getString(R.string.intro3_text), R.drawable.screenshot_2);
 
         // You can define title and description colors (by default white)
-        onboarderPage1.setTitleColor(R.color.md_yellow_500);
-        onboarderPage1.setBackgroundColor(R.color.colorPrimary);
-        onboarderPage2.setTitleColor(R.color.md_yellow_500);
-        onboarderPage2.setBackgroundColor(R.color.colorPrimary);
-        onboarderPage3.setTitleColor(R.color.md_yellow_500);
-        onboarderPage3.setBackgroundColor(R.color.colorPrimary);
+        onboarderPage1.setTitleColor(R.color.colorAccent);
+        onboarderPage1.setBackgroundColor(R.color.colorPrimaryDark);
+        onboarderPage2.setTitleColor(R.color.colorAccent);
+        onboarderPage2.setBackgroundColor(R.color.colorPrimaryDark);
+        onboarderPage3.setTitleColor(R.color.colorAccent);
+        onboarderPage3.setBackgroundColor(R.color.colorPrimaryDark);
 
         // Add your pages to the list
         onboarderPages.add(onboarderPage1);
