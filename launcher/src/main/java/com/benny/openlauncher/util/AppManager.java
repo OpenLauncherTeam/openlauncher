@@ -180,31 +180,38 @@ public class AppManager {
 
             for (ResolveInfo info : activitiesInfo) {
 
-                File sdcard = Environment.getExternalStorageDirectory();
-                //Get the text file
-                File file = new File(sdcard,"/launcher.backup/appfilter.txt");
-                //Read text from file
-                StringBuilder text = new StringBuilder();
-
                 try {
-                    BufferedReader br = new BufferedReader(new FileReader(file));
-                    String line;
 
-                    while ((line = br.readLine()) != null) {
-                        text.append(line);
-                        text.append('\n');
+                    PackageManager m = getPackageManager();
+                    String s = context.getPackageName();
+                    PackageInfo p = m.getPackageInfo(s, 0);
+                    s = p.applicationInfo.dataDir;
+
+                    File file = new File(s, "/appfilter.txt");
+                    //Read text from file
+                    StringBuilder text = new StringBuilder();
+
+                    try {
+                        BufferedReader br = new BufferedReader(new FileReader(file));
+                        String line;
+
+                        while ((line = br.readLine()) != null) {
+                            text.append(line);
+                            text.append('\n');
+                        }
+                        br.close();
+                    } catch (IOException e) {
+                        //You'll need to add proper error handling here
                     }
-                    br.close();
-                }
-                catch (IOException e) {
+
+                    String list = text.toString();
+
+                    if (!list.contains(info.activityInfo.name)) {
+                        apps.add(new App(info, packageManager));
+                    }
+
+                } catch (Exception e) {
                     //You'll need to add proper error handling here
-
-                }
-
-                String list = text.toString();
-
-                if (!list.contains(info.activityInfo.name)) {
-                    apps.add(new App(info, packageManager));
                 }
             }
 
