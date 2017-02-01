@@ -258,7 +258,7 @@ public class AppItemView extends View implements Drawable.Callback{
 
         public Builder setAppItem(AppManager.App app){
             view.setIcon(app.icon,true);
-            view.setLabel(app.appName);
+            view.setLabel(app.label);
             return this;
         }
 

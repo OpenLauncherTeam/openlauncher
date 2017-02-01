@@ -12,6 +12,7 @@ import com.google.gson.stream.JsonReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class LauncherSettings {
@@ -238,6 +239,7 @@ public class LauncherSettings {
         public int drawerGridY_L = 3;
         public boolean drawerSearchBar = true;
         public boolean drawerRememberPage = true;
+        public ArrayList<String> hiddenList;
 
         //Dock
         public int dockColor = Color.TRANSPARENT;

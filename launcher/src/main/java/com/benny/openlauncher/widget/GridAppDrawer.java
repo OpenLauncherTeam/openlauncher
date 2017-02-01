@@ -147,7 +147,7 @@ public class GridAppDrawer extends CardView {
             withFilterPredicate(new IItemAdapter.Predicate<AppItem>() {
                 @Override
                 public boolean filter(AppItem item, CharSequence constraint) {
-                    return !item.app.appName.toLowerCase().contains(constraint.toString().toLowerCase());
+                    return !item.app.label.toLowerCase().contains(constraint.toString().toLowerCase());
                 }
             });
         }
@@ -155,7 +155,7 @@ public class GridAppDrawer extends CardView {
         @Override
         public Character getCharacterForElement(int element) {
             if (apps != null)
-                return apps.get(element).appName.charAt(0);
+                return apps.get(element).label.charAt(0);
             else return '#';
         }
     }
