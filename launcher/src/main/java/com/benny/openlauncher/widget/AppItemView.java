@@ -27,7 +27,7 @@ import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
 import static com.benny.openlauncher.activity.Home.resources;
 
 /**
- * Created by BennyKok on 10/23/2016.
+ * Created by BennyKok on 10/23/2016
  */
 
 public class AppItemView extends View implements Drawable.Callback{
@@ -38,8 +38,10 @@ public class AppItemView extends View implements Drawable.Callback{
 
     public void setIcon(Drawable icon, boolean isStatic) {
         this.icon = icon;
-        this.icon.setCallback(this);
-        invalidate();
+        if (icon!=null) {
+            this.icon.setCallback(this);
+            invalidate();
+        }
     }
 
     @Override
