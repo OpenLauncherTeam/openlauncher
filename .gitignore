@@ -58,3 +58,5 @@ proguard/
 materialpreffragment/libs/
 materialpreffragment/src/main/res/drawable/
 .gitignore
+/launcher/build/
+/materialpreffragment/build/
