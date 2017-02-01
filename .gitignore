@@ -2,6 +2,9 @@
 *.bin
 *.lock
 *.class
+*.iml
+/launcheranim/build
+.idea
 
 # Package Files #
 *.jar
