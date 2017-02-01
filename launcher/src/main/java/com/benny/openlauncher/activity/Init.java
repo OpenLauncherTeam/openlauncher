@@ -1,9 +1,9 @@
-package com.benny.openlauncher;
+package com.benny.openlauncher.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.R;
 import com.chyrta.onboarder.OnboarderActivity;
 import com.chyrta.onboarder.OnboarderPage;
 
@@ -11,11 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Activity_init extends OnboarderActivity {
+public class Init extends OnboarderActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!getSharedPreferences("quickSettings",MODE_PRIVATE).getBoolean("firstStart",true)) {
+            RockIt();
+            return;
+        }
+
         List<OnboarderPage> onboarderPages = new ArrayList<>();
 
         // Create your first page
@@ -50,7 +56,13 @@ public class Activity_init extends OnboarderActivity {
         // Optional: by default it skips onboarder to the end
         super.onSkipButtonPressed();
         // Define your actions when the user press 'Skip' button
-        Intent intent = new Intent(Activity_init.this, Home.class);
+        RockIt();
+    }
+
+    private void RockIt() {
+        getSharedPreferences("quickSettings",MODE_PRIVATE).edit().putBoolean("firstStart",false).apply();
+
+        Intent intent = new Intent(Init.this, Home.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
 
@@ -60,10 +72,6 @@ public class Activity_init extends OnboarderActivity {
     @Override
     public void onFinishButtonPressed() {
         // Define your actions when the user press 'Finish' button
-        Intent intent = new Intent(Activity_init.this, Home.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
-
-        finish();
+        RockIt();
     }
 }

@@ -8,11 +8,11 @@ public class AppInfo {
 	private final Drawable icon;
 	private boolean selected = false;
 
-	public AppInfo(String paramString1, String paramString2, Drawable paramDrawable) {
-		code = paramString1;
-		name = paramString2;
-		icon = paramDrawable;
-		selected = false;
+	public AppInfo(String code, String name, Drawable icon,boolean selected) {
+		this.code = code;
+		this.name = name;
+		this.icon = icon;
+		this.selected = selected;
 	}
 
 	public String getCode()

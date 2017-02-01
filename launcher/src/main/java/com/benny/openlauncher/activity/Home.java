@@ -117,12 +117,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         super.onCreate(savedInstanceState);
 
         //handle uncaught exception
-        Thread.setDefaultUncaughtExceptionHandler (new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException (Thread thread, Throwable e) {
-                handleUncaughtException (thread, e);
-            }
-        });
+//        Thread.setDefaultUncaughtExceptionHandler (new Thread.UncaughtExceptionHandler() {
+//            @Override
+//            public void uncaughtException (Thread thread, Throwable e) {
+//                handleUncaughtException (thread, e);
+//            }
+//        });
 
         Tool.print("Activity started : 0");
         long now = System.currentTimeMillis();
@@ -179,7 +179,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     //handle uncaught exception -> automatically restart launcher
     public void handleUncaughtException (Thread thread, Throwable e) {
-
         Toast.makeText(this, getString(R.string.crash), Toast.LENGTH_LONG).show();
         //not all Android versions will print the stack trace automatically
         e.printStackTrace();
@@ -288,22 +287,23 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
         DragNavigationControl.init(this, findViewById(R.id.left), findViewById(R.id.right));
 
-        String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
-                String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
-        String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " +
-                String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.YEAR));
-        searchBarClock.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
-        searchBarClock.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
-                        String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
-                String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " +
-                        String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.YEAR));
-                searchBarClock.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
-                searchBarClock.postDelayed(this, 60000);
-            }
-        }, 60000);
+
+//        String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
+//                String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
+//        String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " +
+//                String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.YEAR));
+//        searchBarClock.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
+//        searchBarClock.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
+//                        String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
+//                String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " +
+//                        String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.YEAR));
+//                searchBarClock.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
+//                searchBarClock.postDelayed(this, 60000);
+//            }
+//        }, 60000);
 
         appDrawerOtter.init();
         appSearchBar = findViewById(R.id.appSearchBar);

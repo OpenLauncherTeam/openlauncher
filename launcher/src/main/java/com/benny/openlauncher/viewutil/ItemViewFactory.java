@@ -58,7 +58,7 @@ public class ItemViewFactory {
                     break;
                 }
 
-                if (app.appName.contains("way")) {
+                if (app.label.contains("way")) {
 
                 } else {
                     view = new AppItemView.Builder(context)

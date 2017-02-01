@@ -262,7 +262,6 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 Intent intent = new Intent(SettingsActivity.this, Activity_hideApps.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
-                prepareRestart();
                 break;
             case "backup":
                 final CharSequence[] options = {

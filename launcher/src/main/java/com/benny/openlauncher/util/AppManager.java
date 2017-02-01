@@ -8,7 +8,6 @@ import android.graphics.drawable.*;
 import android.os.*;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
@@ -16,10 +15,6 @@ import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.Collator;
 import java.util.*;
 
@@ -41,9 +36,10 @@ public class AppManager {
     private PackageManager packageManager;
 
     private List<App> apps = new ArrayList<>();
+    private List<App> nonFilteredApps = new ArrayList<>();
     public List<AppUpdatedListener> updateListeners = new ArrayList<>();
     public List<AppDeletedListener> deleteListeners = new ArrayList<>();
-    private boolean recreateAfterGettingApps;
+    public boolean recreateAfterGettingApps;
 
     private List<AppUpdatedListener> updateListenersToRemove = new ArrayList<>();
     private AsyncTask task;
@@ -68,6 +64,10 @@ public class AppManager {
 
     public List<App> getApps() {
         return apps;
+    }
+
+    public List<App> getNonFilteredApps() {
+        return nonFilteredApps;
     }
 
     public void clearListener() {
@@ -151,23 +151,25 @@ public class AppManager {
     }
 
     private class AsyncGetApps extends AsyncTask {
-        private List<App> tempapps;
+        private List<App> tempApps;
 
         @Override
         protected void onPreExecute() {
-            tempapps = apps;
+            tempApps = apps;
             super.onPreExecute();
         }
 
         @Override
         protected void onCancelled() {
-            tempapps = null;
+            tempApps = null;
             super.onCancelled();
         }
 
         @Override
         protected Object doInBackground(Object[] p1) {
             apps.clear();
+            nonFilteredApps.clear();
+
             Intent intent = new Intent(Intent.ACTION_MAIN, null);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
             List<ResolveInfo> activitiesInfo = packageManager.queryIntentActivities(intent, 0);
@@ -177,41 +179,24 @@ public class AppManager {
                     return Collator.getInstance().compare(p1.loadLabel(packageManager).toString(), p2.loadLabel(packageManager).toString());
                 }
             });
-
             for (ResolveInfo info : activitiesInfo) {
+                App app = new App(info, packageManager);
+                nonFilteredApps.add(app);
+            }
 
-                try {
-
-                    PackageManager m = getPackageManager();
-                    String s = context.getPackageName();
-                    PackageInfo p = m.getPackageInfo(s, 0);
-                    s = p.applicationInfo.dataDir;
-
-                    File file = new File(s, "/appfilter.txt");
-                    //Read text from file
-                    StringBuilder text = new StringBuilder();
-
-                    try {
-                        BufferedReader br = new BufferedReader(new FileReader(file));
-                        String line;
-
-                        while ((line = br.readLine()) != null) {
-                            text.append(line);
-                            text.append('\n');
+            List<String> hiddenList = LauncherSettings.getInstance(getContext()).generalSettings.hiddenList;
+            if (hiddenList != null) {
+                for (int i = 0; i < nonFilteredApps.size(); i++) {
+                    boolean shouldGetAway = false;
+                    for (String hidItemRaw : hiddenList) {
+                        if ((nonFilteredApps.get(i).packageName + "/" + nonFilteredApps.get(i).className).equals(hidItemRaw)) {
+                            shouldGetAway = true;
+                            break;
                         }
-                        br.close();
-                    } catch (IOException e) {
-                        //You'll need to add proper error handling here
                     }
-
-                    String list = text.toString();
-
-                    if (!list.contains(info.activityInfo.name)) {
-                        apps.add(new App(info, packageManager));
+                    if (!shouldGetAway){
+                        apps.add(nonFilteredApps.get(i));
                     }
-
-                } catch (Exception e) {
-                    //You'll need to add proper error handling here
                 }
             }
 
@@ -228,11 +213,11 @@ public class AppManager {
                 listener.onAppUpdated(apps);
             }
 
-            if (tempapps.size() > apps.size()) {
+            if (tempApps.size() > apps.size()) {
                 App temp = null;
-                for (int i = 0; i < tempapps.size(); i++) {
-                    if (!apps.contains(tempapps.get(i))) {
-                        temp = tempapps.get(i);
+                for (int i = 0; i < tempApps.size(); i++) {
+                    if (!apps.contains(tempApps.get(i))) {
+                        temp = tempApps.get(i);
                         break;
                     }
                 }
@@ -258,7 +243,7 @@ public class AppManager {
     }
 
     public static class App {
-        public String appName, packageName, className;
+        public String label, packageName, className;
         public Drawable icon;
         public ResolveInfo info;
 
@@ -266,7 +251,7 @@ public class AppManager {
             this.info = info;
 
             icon = info.loadIcon(pm);
-            appName = info.loadLabel(pm).toString();
+            label = info.loadLabel(pm).toString();
             packageName = info.activityInfo.packageName;
             className = info.activityInfo.name;
         }

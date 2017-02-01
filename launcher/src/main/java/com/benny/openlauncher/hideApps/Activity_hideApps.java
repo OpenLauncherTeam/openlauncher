@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.util.AppManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,6 +48,13 @@ public class Activity_hideApps extends AppCompatActivity {
         if (!directory.exists()) {
             directory.mkdirs();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        AppManager.getInstance(this).recreateAfterGettingApps = true;
+        AppManager.getInstance(this).init();
+        super.onDestroy();
     }
 
     private void setupViewPager(ViewPager viewPager) {
