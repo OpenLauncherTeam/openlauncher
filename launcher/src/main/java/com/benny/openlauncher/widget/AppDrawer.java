@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
@@ -202,7 +203,14 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
         if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar && drawerMode == Vertical) {
             CardView cv = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_searchbar_app, this, false);
             addView(cv);
+            cv.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
+            if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerLight) {
+                ImageView searchIcon = (ImageView) cv.findViewById(R.id.searchIcon);
+                searchIcon.setImageResource(R.drawable.ic_search_light_24dp);
+            }
             searchBar = (EditText) cv.findViewById(R.id.et);
+            searchBar.setHintTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
+            searchBar.setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
             searchBar.clearFocus();
             searchBar.addTextChangedListener(this);
         }

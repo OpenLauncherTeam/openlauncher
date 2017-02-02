@@ -77,8 +77,9 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                     ))
                     .add(new MaterialPrefFragment.TBPref("drawerCard", (getString(R.string.settings_drawerCard)), (getString(R.string.settings_drawerCard_summary)), generalSettings.drawerUseCard))
                     .add(new MaterialPrefFragment.TBPref("drawerSearchBar", (getString(R.string.settings_drawerSearch)), (getString(R.string.settings_drawerSearch_summary)), generalSettings.drawerSearchBar))
+                    .add(new MaterialPrefFragment.TBPref("drawerLight", (getString(R.string.settings_drawerSearchIcon)), (getString(R.string.settings_drawerSearchIcon_summary)), generalSettings.drawerLight))
                     .add(new MaterialPrefFragment.TBPref("drawerRememberPage", (getString(R.string.settings_drawerPage)), (getString(R.string.settings_drawerPage_summary)), !generalSettings.drawerRememberPage))
-                    .add(new MaterialPrefFragment.TBPref("drawerShowIndicator","Show Indicator","Show Indicator",generalSettings.drawerShowIndicator))
+                    .add(new MaterialPrefFragment.TBPref("drawerShowIndicator",(getString(R.string.settings_drawerIndicator)),(getString(R.string.settings_drawerIndicator_summary)),generalSettings.drawerShowIndicator))
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_input)))
                     .add(new MaterialPrefFragment.TBPref("swipe", (getString(R.string.settings_desktopSwipe)), (getString(R.string.settings_desktopSwipe_summary)), generalSettings.swipe))
@@ -177,6 +178,10 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "drawerSearchBar":
                 generalSettings.drawerSearchBar = (boolean)value;
+                prepareRestart();
+                break;
+            case "drawerLight":
+                generalSettings.drawerLight = (boolean)value;
                 prepareRestart();
                 break;
             case "hGridSizeDesktop":
