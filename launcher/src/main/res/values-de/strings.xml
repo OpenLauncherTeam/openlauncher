@@ -112,12 +112,9 @@
     <string name="settings_desktopSize_summary">Bestimme die Gittergröße des Desktops.</string>
     <string name="settings_desktopFull">Vollbild</string>
     <string name="settings_desktopFull_summary">Aktiviere den Vollbildmodus für deinen Desktop.</string>
-    <string name="settings_desktopSwipe">Drawer: wischen</string>
-    <string name="settings_desktopSwipe_summary">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
-    <string name="settings_desktopClick">Drawer: Klicken</string>
-    <string name="settings_desktopClick_summary">Klicke auf den Desktop um den App Drawer zu öffnen.</string>
     <string name="settings_desktopIndicator">Seitenindikator</string>
     <string name="settings_desktopIndicator_summary">Zeige den Seitenindikator auf dem Desktop an.</string>
+    <string name="settings_desktopLabel_summary">Zeige Anwendungs- und Ordnernamen auf dem Desktop.</string>
 
     <string name="settings_dockLabel">Beschriftung</string>
     <string name="settings_dockLabel_summary">Zeige Anwendungs- und Ordnernamen im Dock.</string>
@@ -130,11 +127,22 @@
     <string name="settings_drawerCard_summary">Benutze Karten für den Drawer Hintergrund.</string>
     <string name="settings_drawerSearch">Suchleiste</string>
     <string name="settings_drawerSearch_summary">Kann nur in der vertikalen Ansicht genutzt werden.</string>
+    <string name="settings_drawerSearchIcon">Suchleiste Icon</string>
+    <string name="settings_drawerSearchIcon_summary">Benutze das dunkle Standardicon in der Suchleiste.</string>
     <string name="settings_drawerSize">Größe</string>
     <string name="settings_drawerSize_summary">Bestimme die Gittergröße des App Drawers.</string>
     <string name="settings_drawerPage">Merke letzte Seite</string>
     <string name="settings_drawerPage_summary">Es wird sich nicht automatisch die erste Seite öffnen, wenn du den App Drawer
         erneut öffnest.</string>
+    <string name="settings_drawerIndicator">Seitenindikator/Scrollbar</string>
+    <string name="settings_drawerIndicator_summary">Zeige den Seitenindikator bzw. die Scrollbar im Drawer an.</string>
+
+    <string name="settings_desktopSwipe">Drawer: Wischen</string>
+    <string name="settings_desktopSwipe_summary">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
+    <string name="settings_desktopClick">Drawer: Klicken</string>
+    <string name="settings_desktopClick_summary">Klicke auf den Desktop um den App Drawer zu öffnen.</string>
+    <string name="settings_doubleClick">Doppelklick</string>
+    <string name="settings_doubleClick_summary">Doppelklick auf den Desktop um den Bildschirm zu sperren.</string>
 
     <string name="settings_colorDock">Dock</string>
     <string name="settings_colorDock_summary">Dock Hintergrundfarbe.</string>
