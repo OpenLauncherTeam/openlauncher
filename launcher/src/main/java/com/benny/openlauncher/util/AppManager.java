@@ -198,6 +198,9 @@ public class AppManager {
                         apps.add(nonFilteredApps.get(i));
                     }
                 }
+            }else{
+                for (ResolveInfo info : activitiesInfo)
+                    apps.add(new App(info, packageManager));
             }
 
             LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(context).generalSettings;
