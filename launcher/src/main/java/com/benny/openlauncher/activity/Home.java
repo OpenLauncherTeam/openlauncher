@@ -7,7 +7,6 @@ import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -29,10 +28,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -66,11 +63,7 @@ import com.benny.openlauncher.widget.PagerIndicator;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
-
-import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class Home extends Activity implements DrawerLayout.DrawerListener {
 
@@ -91,7 +84,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     public Dock dock;
     public View searchBar, appDrawer;
     public GroupPopupView groupPopup;
-    public AppDrawer appDrawerOtter;
+    public AppDrawer appDrawerContainer;
     public ArrayList<QuickCenterItem.NoteContent> notes = new ArrayList<>();
     //QuickCenter
     private FastItemAdapter<QuickCenterItem.NoteItem> noteAdapter;
@@ -223,7 +216,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
             dock.setPadding(dock.getPaddingLeft(), dock.getPaddingTop(), dock.getPaddingRight(), dock.getPaddingBottom() + navBarHeight);
 
-            appDrawerOtter.setPadding(0, statusBarHeight, 0, navBarHeight);
+            appDrawerContainer.setPadding(0, statusBarHeight, 0, navBarHeight);
             desktopEditOptionView.setPadding(0, 0, 0, navBarHeight);
         }
 
@@ -265,7 +258,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     private void findViews() {
         searchBarClock = (TextView) findViewById(R.id.searchbarclock);
         baseLayout = (ConstraintLayout) findViewById(R.id.baseLayout);
-        appDrawerOtter = (AppDrawer) findViewById(R.id.appDrawerOtter);
+        appDrawerContainer = (AppDrawer) findViewById(R.id.appDrawerOtter);
         desktop = (Desktop) findViewById(R.id.desktop);
         dock = (Dock) findViewById(R.id.desktopDock);
         desktopIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
@@ -305,12 +298,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 //            }
 //        }, 60000);
 
-        appDrawerOtter.init();
+        appDrawerContainer.init();
         appSearchBar = findViewById(R.id.appSearchBar);
-        appDrawer = appDrawerOtter.getChildAt(0);
+        appDrawer = appDrawerContainer.getChildAt(0);
         appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
 
-        appDrawerOtter.setHome(this);
+        appDrawerContainer.setHome(this);
         dragOptionView.setHome(this);
 
         desktop.init(this);
@@ -412,7 +405,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
         dragOptionView.setAutoHideView(searchBar);
 
-        appDrawerOtter.setCallBack(new AppDrawer.CallBack() {
+        appDrawerContainer.setCallBack(new AppDrawer.CallBack() {
             @Override
             public void onStart() {
                 if (appSearchBar != null) {
@@ -468,7 +461,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             @Override
             public void onEnd() {
                 if (LauncherSettings.getInstance(Home.this).generalSettings.drawerRememberPage)
-                    appDrawerOtter.scrollToStart();
+                    appDrawerContainer.scrollToStart();
 
                 appDrawer.setVisibility(View.INVISIBLE);
                 if (!dragOptionView.dragging && appSearchBar != null)
@@ -515,9 +508,19 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
         dock.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.dockColor);
 
-        appDrawerOtter.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.drawerColor);
-        appDrawerOtter.getBackground().setAlpha(0);
-        appDrawerOtter.reloadDrawerCardTheme();
+        appDrawerContainer.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.drawerColor);
+        appDrawerContainer.getBackground().setAlpha(0);
+        appDrawerContainer.reloadDrawerCardTheme();
+
+        switch (LauncherSettings.getInstance(this).generalSettings.drawerMode) {
+            case Paged:
+                if (!LauncherSettings.getInstance(this).generalSettings.drawerShowIndicator)
+                    appDrawerContainer.getChildAt(1).setVisibility(View.GONE);
+                break;
+            case Vertical:
+                //This were handled at the AppDrawer_Vertical class
+                break;
+        }
     }
 
     public void initMinBar() {
@@ -767,19 +770,19 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             }
             cx -= ((ViewGroup.MarginLayoutParams) appDrawer.getLayoutParams()).leftMargin;
             cy -= ((ViewGroup.MarginLayoutParams) appDrawer.getLayoutParams()).topMargin;
-            cy -= appDrawerOtter.getPaddingTop();
+            cy -= appDrawerContainer.getPaddingTop();
         }else {
             cx = x;
             cy = y;
             rad = 0;
         }
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
-        appDrawerOtter.open(cx, cy, rad, finalRadius);
+        appDrawerContainer.open(cx, cy, rad, finalRadius);
     }
 
     public void closeAppDrawer() {
         int finalRadius = Math.max(appDrawer.getWidth(), appDrawer.getHeight());
-        appDrawerOtter.close(cx, cy, rad, finalRadius);
+        appDrawerContainer.close(cx, cy, rad, finalRadius);
     }
 
     //endregion

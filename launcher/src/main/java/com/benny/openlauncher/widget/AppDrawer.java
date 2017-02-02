@@ -31,8 +31,8 @@ import static com.benny.openlauncher.widget.AppDrawer.DrawerMode.Vertical;
 public class AppDrawer extends RevealFrameLayout implements TextWatcher {
 
     public EditText searchBar;
-    private PagedAppDrawer drawerViewPaged;
-    private GridAppDrawer drawerViewGrid;
+    public AppDrawer_Paged drawerViewPaged;
+    public AppDrawer_Vertical drawerViewGrid;
     private DrawerMode drawerMode;
     private CallBack openCallBack, closeCallBack;
 
@@ -185,14 +185,15 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
         drawerMode = LauncherSettings.getInstance(getContext()).generalSettings.drawerMode;
         switch (drawerMode) {
             case Paged:
-                drawerViewPaged = (PagedAppDrawer) layoutInflater.inflate(R.layout.view_pageddrawer, this, false);
+                drawerViewPaged = (AppDrawer_Paged) layoutInflater.inflate(R.layout.view_pageddrawer, this, false);
 //                if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar)
 //                    ((LayoutParams) drawerViewPaged.getLayoutParams()).topMargin += Tool.dp2px(70, getContext());
                 addView(drawerViewPaged);
-                addView(layoutInflater.inflate(R.layout.view_drawerindicator, this, false));
+                View indicator = layoutInflater.inflate(R.layout.view_drawerindicator, this, false);
+                addView(indicator);
                 break;
             case Vertical:
-                drawerViewGrid = (GridAppDrawer) layoutInflater.inflate(R.layout.view_griddrawer, this, false);
+                drawerViewGrid = (AppDrawer_Vertical) layoutInflater.inflate(R.layout.view_griddrawer, this, false);
                 if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar)
                     ((LayoutParams) drawerViewGrid.getLayoutParams()).topMargin += Tool.dp2px(60, getContext());
                 addView(drawerViewGrid);

@@ -225,6 +225,7 @@ public class LauncherSettings {
         public boolean clickToOpen = false;
         public boolean doubleClick = false;
         public boolean showIndicator = true;
+        public boolean desktopShowLabel = true;
         public boolean hideIcon = false;
 
         //Drawer
@@ -240,6 +241,7 @@ public class LauncherSettings {
         public boolean drawerSearchBar = true;
         public boolean drawerRememberPage = true;
         public ArrayList<String> hiddenList;
+        public boolean drawerShowIndicator = true;
 
         //Dock
         public int dockColor = Color.TRANSPARENT;

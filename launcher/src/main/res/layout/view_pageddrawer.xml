@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.benny.openlauncher.widget.PagedAppDrawer
+<com.benny.openlauncher.widget.AppDrawer_Paged
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="20dp"

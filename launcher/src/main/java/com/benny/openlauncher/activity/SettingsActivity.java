@@ -57,7 +57,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                     .add(new MaterialPrefFragment.TBPref("desktopSearchBar", (getString(R.string.settings_desktopSearch)), (getString(R.string.settings_desktopSearch_summary)), generalSettings.desktopSearchBar))
                     .add(new MaterialPrefFragment.TBPref("fullscreen", (getString(R.string.settings_desktopFull)), (getString(R.string.settings_desktopFull_summary)), generalSettings.fullscreen))
                     .add(new MaterialPrefFragment.TBPref("showIndicator", (getString(R.string.settings_desktopIndicator)), (getString(R.string.settings_desktopIndicator_summary)), generalSettings.showIndicator))
-
+                    .add(new MaterialPrefFragment.TBPref("desktopShowLabel",(getString(R.string.settings_dockLabel)),(getString(R.string.settings_desktopLabel_summary)), generalSettings.desktopShowLabel))
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_dock)))
                     .add(new MaterialPrefFragment.NUMPref("gridSizeDock",(getString(R.string.settings_dockSize)), (getString(R.string.settings_dockSize_summary)),
@@ -75,6 +75,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                     .add(new MaterialPrefFragment.TBPref("drawerCard", (getString(R.string.settings_drawerCard)), (getString(R.string.settings_drawerCard_summary)), generalSettings.drawerUseCard))
                     .add(new MaterialPrefFragment.TBPref("drawerSearchBar", (getString(R.string.settings_drawerSearch)), (getString(R.string.settings_drawerSearch_summary)), generalSettings.drawerSearchBar))
                     .add(new MaterialPrefFragment.TBPref("drawerRememberPage", (getString(R.string.settings_drawerPage)), (getString(R.string.settings_drawerPage_summary)), !generalSettings.drawerRememberPage))
+                    .add(new MaterialPrefFragment.TBPref("drawerShowIndicator","Show Indicator","Show Indicator",generalSettings.drawerShowIndicator))
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_input)))
                     .add(new MaterialPrefFragment.TBPref("swipe", (getString(R.string.settings_desktopSwipe)), (getString(R.string.settings_desktopSwipe_summary)), generalSettings.swipe))
@@ -125,105 +126,113 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
     }
 
     @Override
-    public void onPrefChanged(String id, Object p2) {
+    public void onPrefChanged(String id, Object value) {
         LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(this).generalSettings;
         switch (id) {
             case "drawerRememberPage":
-                generalSettings.drawerRememberPage = !(boolean) p2;
+                generalSettings.drawerRememberPage = !(boolean) value;
                 break;
             case "desktopSearchBar":
-                generalSettings.desktopSearchBar = (boolean) p2;
-                if (!(boolean) p2)
+                generalSettings.desktopSearchBar = (boolean) value;
+                if (!(boolean) value)
                     Home.launcher.searchBar.setVisibility(View.GONE);
                 else
                     Home.launcher.searchBar.setVisibility(View.VISIBLE);
                 break;
             case "fullscreen":
-                generalSettings.fullscreen = (boolean)p2;
+                generalSettings.fullscreen = (boolean)value;
                 prepareRestart();
                 break;
             case "swipe":
-                generalSettings.swipe = (boolean)p2;
+                generalSettings.swipe = (boolean)value;
                 break;
             case "clickToOpen":
-                generalSettings.clickToOpen = (boolean)p2;
+                generalSettings.clickToOpen = (boolean)value;
                 break;
             case "doubleClick":
-                generalSettings.doubleClick = (boolean)p2;
+                generalSettings.doubleClick = (boolean)value;
                 break;
             case "showIndicator":
-                generalSettings.showIndicator = (boolean)p2;
+                generalSettings.showIndicator = (boolean)value;
                 prepareRestart();
                 break;
             case "iconSize":
-                generalSettings.iconSize = (int) p2;
+                generalSettings.iconSize = (int) value;
                 prepareRestart();
                 break;
             case "hGridSize":
-                generalSettings.drawerGridX = (int) p2;
+                generalSettings.drawerGridX = (int) value;
                 prepareRestart();
                 break;
             case "vGridSize":
-                generalSettings.drawerGridY = (int) p2;
+                generalSettings.drawerGridY = (int) value;
                 prepareRestart();
                 break;
             case "dockShowLabel":
-                generalSettings.dockShowLabel = (boolean)p2;
+                generalSettings.dockShowLabel = (boolean)value;
                 prepareRestart();
                 break;
             case "drawerSearchBar":
-                generalSettings.drawerSearchBar = (boolean)p2;
+                generalSettings.drawerSearchBar = (boolean)value;
                 prepareRestart();
                 break;
             case "hGridSizeDesktop":
-                generalSettings.desktopGridX = (int)p2;
+                generalSettings.desktopGridX = (int)value;
                 prepareRestart();
                 break;
             case "vGridSizeDesktop":
-                generalSettings.desktopGridY = (int)p2;
+                generalSettings.desktopGridY = (int)value;
                 prepareRestart();
                 break;
             case "hGridSizeDock":
-                generalSettings.dockGridX = (int)p2;
+                generalSettings.dockGridX = (int)value;
                 prepareRestart();
                 break;
             case "dockBackground":
-                generalSettings.dockColor = (int)p2;
+                generalSettings.dockColor = (int)value;
                 if (Home.launcher != null)
-                    Home.launcher.dock.setBackgroundColor((int)p2);
+                    Home.launcher.dock.setBackgroundColor((int)value);
                 else
                     prepareRestart();
                 break;
             case "drawerBackground":
-                generalSettings.drawerColor = (int)p2;
+                generalSettings.drawerColor = (int)value;
                 if (Home.launcher != null) {
-                    Home.launcher.appDrawerOtter.setBackgroundColor((int) p2);
-                    Home.launcher.appDrawerOtter.getBackground().setAlpha(0);
+                    Home.launcher.appDrawerContainer.setBackgroundColor((int) value);
+                    Home.launcher.appDrawerContainer.getBackground().setAlpha(0);
                 }else
                     prepareRestart();
                 break;
             case "drawerCard":
-                generalSettings.drawerUseCard = (boolean)p2;
+                generalSettings.drawerUseCard = (boolean)value;
                 if (Home.launcher != null) {
-                    Home.launcher.appDrawerOtter.reloadDrawerCardTheme();
+                    Home.launcher.appDrawerContainer.reloadDrawerCardTheme();
                 }else
                     prepareRestart();
                 break;
             case "drawerCardBackground":
-                generalSettings.drawerCardColor = (int)p2;
+                generalSettings.drawerCardColor = (int)value;
                 if (Home.launcher != null) {
-                    Home.launcher.appDrawerOtter.reloadDrawerCardTheme();
+                    Home.launcher.appDrawerContainer.reloadDrawerCardTheme();
                     prepareRestart();
                 }else
                     prepareRestart();
                 break;
             case "drawerLabelColor":
-                generalSettings.drawerLabelColor = (int)p2;
+                generalSettings.drawerLabelColor = (int)value;
                 if (Home.launcher != null) {
-                    Home.launcher.appDrawerOtter.reloadDrawerCardTheme();
+                    Home.launcher.appDrawerContainer.reloadDrawerCardTheme();
                     prepareRestart();
                 }else
                     prepareRestart();
+                break;
+            case "desktopShowLabel":
+                generalSettings.desktopShowLabel = (boolean)value;
+                prepareRestart();
+                break;
+            case "drawerShowIndicator" :
+                generalSettings.drawerShowIndicator = (boolean)value;
+                prepareRestart();
                 break;
         }
     }
