@@ -1,11 +1,14 @@
 package com.benny.openlauncher.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,7 +47,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
 
         if (savedInstanceState == null) {
             LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(this).generalSettings;
-            MaterialPrefFragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this,Color.DKGRAY, getResources().getColor(R.color.Light_TextColor), getResources().getColor(R.color.Light_Background), getResources().getColor(R.color.colorAccent), false)
+            MaterialPrefFragment fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this,Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), false)
 
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_desktop)))
@@ -273,59 +276,64 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 startActivity(intent);
                 break;
             case "backup":
-                final CharSequence[] options = {
-                        getString(R.string.settings_backup_titleBackup),
-                        getString(R.string.settings_backup_titleRestore)};
+                if (ActivityCompat.checkSelfPermission(SettingsActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    final CharSequence[] options = {
+                            getString(R.string.settings_backup_titleBackup),
+                            getString(R.string.settings_backup_titleRestore)};
 
-                MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
-                builder.title(R.string.settings_backup)
-                        .positiveText(R.string.cancel)
-                        .items(options)
-                        .itemsCallback(new MaterialDialog.ListCallback() {
-                            @Override
-                            public void onSelection(MaterialDialog dialog, View itemView, int item, CharSequence text) {
-                                PackageManager m = getPackageManager();
-                                String s = getPackageName();
+                    MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
+                    builder.title(R.string.settings_backup)
+                            .positiveText(R.string.cancel)
+                            .items(options)
+                            .itemsCallback(new MaterialDialog.ListCallback() {
+                                @Override
+                                public void onSelection(MaterialDialog dialog, View itemView, int item, CharSequence text) {
+                                    PackageManager m = getPackageManager();
+                                    String s = getPackageName();
 
-                                if (options[item].equals(getString(R.string.settings_backup_titleBackup))) {
-                                    File directory = new File(Environment.getExternalStorageDirectory() + "/launcher.backup/");
-                                    if (!directory.exists()) {
-                                        //noinspection ResultOfMethodCallIgnored
-                                        directory.mkdirs();
+                                    if (options[item].equals(getString(R.string.settings_backup_titleBackup))) {
+                                        File directory = new File(Environment.getExternalStorageDirectory() + "/launcher.backup/");
+                                        if (!directory.exists()) {
+                                            //noinspection ResultOfMethodCallIgnored
+                                            directory.mkdirs();
+                                        }
+
+                                        try {
+                                            PackageInfo p = m.getPackageInfo(s, 0);
+                                            s = p.applicationInfo.dataDir;
+                                            copy(s + "/files/desktopData.json", directory + "/desktopData.json");
+                                            copy(s + "/files/dockData.json", directory + "/dockData.json");
+                                            copy(s + "/files/generalSettings.json", directory + "/generalSettings.json");
+                                            Toast.makeText(SettingsActivity.this, R.string.settings_backup_success, Toast.LENGTH_SHORT).show();
+
+                                        } catch (Exception e) {
+                                            Toast.makeText(SettingsActivity.this, R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
+                                        }
                                     }
+                                    if (options[item].equals(getString(R.string.settings_backup_titleRestore))) {
+                                        File directory = new File(Environment.getExternalStorageDirectory() + "/launcher.backup/");
 
-                                    try {
-                                        PackageInfo p = m.getPackageInfo(s, 0);
-                                        s = p.applicationInfo.dataDir;
-                                        copy(s + "/files/desktopData.json", directory + "/desktopData.json");
-                                        copy(s + "/files/dockData.json", directory + "/dockData.json");
-                                        copy(s + "/files/generalSettings.json", directory + "/generalSettings.json");
-                                        Toast.makeText(SettingsActivity.this, R.string.settings_backup_success, Toast.LENGTH_SHORT).show();
+                                        try {
+                                            PackageInfo p = m.getPackageInfo(s, 0);
+                                            s = p.applicationInfo.dataDir;
+                                            copy(directory + "/desktopData.json", s + "/files/desktopData.json");
+                                            copy(directory + "/dockData.json", s + "/files/dockData.json");
+                                            copy(directory + "/generalSettings.json", s + "/files/generalSettings.json");
+                                            Toast.makeText(SettingsActivity.this, R.string.settings_backup_success, Toast.LENGTH_SHORT).show();
 
-                                    } catch (Exception e) {
-                                        Toast.makeText(SettingsActivity.this, R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
+                                        } catch (Exception e) {
+                                            Toast.makeText(SettingsActivity.this, R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
+                                        }
+                                        //This will stop your application and take out from it.
+                                        System.exit(1); // kill off the crashed app
                                     }
                                 }
-                                if (options[item].equals(getString(R.string.settings_backup_titleRestore))) {
-                                    File directory = new File(Environment.getExternalStorageDirectory() + "/launcher.backup/");
-
-                                    try {
-                                        PackageInfo p = m.getPackageInfo(s, 0);
-                                        s = p.applicationInfo.dataDir;
-                                        copy(directory + "/desktopData.json", s + "/files/desktopData.json");
-                                        copy(directory + "/dockData.json", s + "/files/dockData.json");
-                                        copy(directory + "/generalSettings.json", s + "/files/generalSettings.json");
-                                        Toast.makeText(SettingsActivity.this, R.string.settings_backup_success, Toast.LENGTH_SHORT).show();
-
-                                    } catch (Exception e) {
-                                        Toast.makeText(SettingsActivity.this, R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
-                                    }
-                                    //This will stop your application and take out from it.
-                                    System.exit(1); // kill off the crashed app
-                                }
-                            }
-                        });
-                builder.show();
+                            });
+                    builder.show();
+                } else {
+                    Tool.toast(this, (getString(R.string.settings_iconPack_toast)));
+                    ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
+                }
                 break;
         }
     }
