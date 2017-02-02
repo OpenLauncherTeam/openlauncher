@@ -28,6 +28,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,7 +64,9 @@ import com.benny.openlauncher.widget.PagerIndicator;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class Home extends Activity implements DrawerLayout.DrawerListener {
 
@@ -281,22 +284,22 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         DragNavigationControl.init(this, findViewById(R.id.left), findViewById(R.id.right));
 
 
-//        String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
-//                String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
-//        String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " +
-//                String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.YEAR));
-//        searchBarClock.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
-//        searchBarClock.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
-//                        String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
-//                String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " +
-//                        String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.YEAR));
-//                searchBarClock.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
-//                searchBarClock.postDelayed(this, 60000);
-//            }
-//        }, 60000);
+        String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
+                String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
+        String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " +
+                String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.YEAR));
+        searchBarClock.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
+        searchBarClock.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
+                        String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
+                String date2 = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " +
+                        String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.YEAR));
+                searchBarClock.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
+                searchBarClock.postDelayed(this, 60000);
+            }
+        }, 60000);
 
         appDrawerContainer.init();
         appSearchBar = findViewById(R.id.appSearchBar);

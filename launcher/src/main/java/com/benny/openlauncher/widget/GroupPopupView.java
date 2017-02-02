@@ -3,7 +3,6 @@ package com.benny.openlauncher.widget;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
@@ -51,7 +50,6 @@ public class GroupPopupView extends FrameLayout {
     private void init() {
         if (isInEditMode()) return;
         init = false;
-        int color;
 
         bringToFront();
         popupParent = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_grouppopup, this, false);
