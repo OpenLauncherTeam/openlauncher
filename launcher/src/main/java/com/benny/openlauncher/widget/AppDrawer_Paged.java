@@ -22,7 +22,7 @@ import com.benny.openlauncher.util.Tool;
 import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
 import com.bennyv5.smoothviewpager.SmoothViewPager;
 
-public class PagedAppDrawer extends SmoothViewPager {
+public class AppDrawer_Paged extends SmoothViewPager {
     private List<AppManager.App> apps;
 
     public List<ViewGroup> pages = new ArrayList<>();
@@ -35,12 +35,12 @@ public class PagedAppDrawer extends SmoothViewPager {
 
     private int pageCount = 0;
 
-    public PagedAppDrawer(Context c, AttributeSet attr) {
+    public AppDrawer_Paged(Context c, AttributeSet attr) {
         super(c, attr);
         init(c);
     }
 
-    public PagedAppDrawer(Context c) {
+    public AppDrawer_Paged(Context c) {
         super(c);
         init(c);
     }
@@ -94,17 +94,17 @@ public class PagedAppDrawer extends SmoothViewPager {
         }
 
         if (AppManager.getInstance(getContext()).getApps().size() != 0){
-            PagedAppDrawer.this.apps = AppManager.getInstance(getContext()).getApps();
+            AppDrawer_Paged.this.apps = AppManager.getInstance(getContext()).getApps();
             calculatePage();
             setAdapter(new Adapter());
         }
         AppManager.getInstance(c).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {
-                PagedAppDrawer.this.apps = apps;
+                AppDrawer_Paged.this.apps = apps;
                 calculatePage();
                 setAdapter(new Adapter());
-                appDrawerIndicator.setViewPager(PagedAppDrawer.this);
+                appDrawerIndicator.setViewPager(AppDrawer_Paged.this);
             }
         });
     }
@@ -113,7 +113,7 @@ public class PagedAppDrawer extends SmoothViewPager {
         this.home = home;
         this.appDrawerIndicator = appDrawerIndicator;
         if (getAdapter() != null)
-            appDrawerIndicator.setViewPager(PagedAppDrawer.this);
+            appDrawerIndicator.setViewPager(AppDrawer_Paged.this);
     }
 
     public void resetAdapter(){

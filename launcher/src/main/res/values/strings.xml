@@ -116,6 +116,7 @@
 
     <string name="settings_dockLabel">Label</string>
     <string name="settings_dockLabel_summary">Show app and folder names in the dock.</string>
+    <string name="settings_desktopLabel_summary">Show app and folder names in the desktop.</string>
     <string name="settings_dockSize">Size</string>
     <string name="settings_dockSize_summary">Set the dock size.</string>
 

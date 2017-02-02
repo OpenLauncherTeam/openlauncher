@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
-import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -266,7 +265,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
     @Override
     public void addItemToPagePosition(final Item item, int page) {
-        View itemView = ItemViewFactory.getItemView(getContext(),this,item,ItemViewFactory.NO_FLAGS);
+        int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+        View itemView = ItemViewFactory.getItemView(getContext(),this,item,flag);
 
         if (itemView == null) {
             LauncherSettings.getInstance(getContext()).desktopData.get(page).remove(item);
@@ -286,7 +286,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).add(item);
             //end
 
-            View itemView = ItemViewFactory.getItemView(getContext(),this,item,ItemViewFactory.NO_FLAGS);
+            int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+            View itemView = ItemViewFactory.getItemView(getContext(),this,item,flag);
 
             if (itemView != null) {
                 itemView.setLayoutParams(positionToLayoutPrams);
@@ -456,7 +457,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                         Tool.print((int)ev.getX(),(int)ev.getY());
                         if (startPosY - ev.getY() > minDist) {
                             if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
-                                Point p = Tool.convertPoint(new Point((int)ev.getX(),(int)ev.getY()),Desktop.this,Home.launcher.appDrawerOtter);
+                                Point p = Tool.convertPoint(new Point((int)ev.getX(),(int)ev.getY()),Desktop.this,Home.launcher.appDrawerContainer);
                                 // FIXME: 1/22/2017 This seem weird, but the extra offset ( Tool.getNavBarHeight(getContext()) ) works on my phone
                                 // FIXME: 1/22/2017 This part of the code is identical as the code in Desktop so will combine them later
                                 Home.launcher.openAppDrawer(Desktop.this,p.x,p.y - Tool.getNavBarHeight(getContext())/2);

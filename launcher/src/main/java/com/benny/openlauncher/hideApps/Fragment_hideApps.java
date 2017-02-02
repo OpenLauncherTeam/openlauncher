@@ -229,7 +229,7 @@ public class Fragment_hideApps extends Fragment {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            AppInfo appInfo = list_activities_final.get(position);
+            AppInfo appInfo = getItem(position);
 
             holder.apkPackage.setText(appInfo.getCode());
             holder.apkPackage.setTypeface(tf);

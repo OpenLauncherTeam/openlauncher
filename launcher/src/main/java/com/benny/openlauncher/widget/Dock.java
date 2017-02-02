@@ -56,25 +56,37 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
+    public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             startPosX = ev.getX();
             startPosY = ev.getY();
-        }
 
+            Tool.print("ActionD");
+        }
+        detectSwipe(ev);
+        super.dispatchTouchEvent(ev);
+        return true;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        return super.onTouchEvent(ev);
+    }
+
+    private void detectSwipe(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_UP) {
+            Tool.print("ActionUP");
             float minDist = 150f;
             Tool.print((int)ev.getX(),(int)ev.getY());
             if (startPosY - ev.getY() > minDist) {
                 if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
-                    Point p = Tool.convertPoint(new Point((int)ev.getX(),(int)ev.getY()),this,Home.launcher.appDrawerOtter);
+                    Point p = Tool.convertPoint(new Point((int)ev.getX(),(int)ev.getY()),this, Home.launcher.appDrawerContainer);
                     // FIXME: 1/22/2017 This seem weird, but the extra offset ( Tool.getNavBarHeight(getContext()) ) works on my phone
                     // FIXME: 1/22/2017 This part of the code is identical as the code in Desktop so will combine them later
                     Home.launcher.openAppDrawer(this,p.x,p.y - Tool.getNavBarHeight(getContext())/2);
                 }
             }
         }
-        return super.onInterceptTouchEvent(ev);
     }
 
     @Override

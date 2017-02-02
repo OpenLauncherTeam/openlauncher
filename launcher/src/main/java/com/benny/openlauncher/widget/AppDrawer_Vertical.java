@@ -32,29 +32,30 @@ import java.util.List;
  * Created by BennyKok on 11/6/2016.
  */
 
-public class GridAppDrawer extends CardView {
+public class AppDrawer_Vertical extends CardView {
 
     private int itemWidth;
     private int itemHeightPadding;
 
     public RecyclerView recyclerView;
     public GridAppDrawerAdapter gridDrawerAdapter;
+    public DragScrollBar scrollBar;
 
     private List<AppManager.App> apps;
     private GridLayoutManager layoutManager;
     private RelativeLayout rl;
 
-    public GridAppDrawer(Context context) {
+    public AppDrawer_Vertical(Context context) {
         super(context);
         preInit();
     }
 
-    public GridAppDrawer(Context context, AttributeSet attrs) {
+    public AppDrawer_Vertical(Context context, AttributeSet attrs) {
         super(context, attrs);
         preInit();
     }
 
-    public GridAppDrawer(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AppDrawer_Vertical(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         preInit();
     }
@@ -65,12 +66,15 @@ public class GridAppDrawer extends CardView {
             public void onGlobalLayout() {
                 getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-                rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_griddrawerinner, GridAppDrawer.this, false);
+                rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_griddrawerinner, AppDrawer_Vertical.this, false);
                 recyclerView = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
                 layoutManager = new GridLayoutManager(getContext(), LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX);
 
                 itemWidth = (getWidth() - recyclerView.getPaddingRight() - recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
                 init();
+
+                if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerShowIndicator)
+                    scrollBar.setVisibility(View.GONE);
             }
         });
     }
@@ -103,8 +107,8 @@ public class GridAppDrawer extends CardView {
     private void init() {
         itemHeightPadding = Tool.dp2px(15, getContext());
 
-        DragScrollBar bar = (DragScrollBar) rl.findViewById(R.id.dragScrollBar);
-        bar.setIndicator(new AlphabetIndicator(getContext()), true);
+        scrollBar = (DragScrollBar) rl.findViewById(R.id.dragScrollBar);
+        scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
 
 
         boolean mPortrait = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
@@ -119,7 +123,7 @@ public class GridAppDrawer extends CardView {
         recyclerView.setLayoutManager(layoutManager);
 
         if (AppManager.getInstance(getContext()).getApps().size() != 0) {
-            GridAppDrawer.this.apps = AppManager.getInstance(getContext()).getApps();
+            AppDrawer_Vertical.this.apps = AppManager.getInstance(getContext()).getApps();
             ArrayList<AppItem> items = new ArrayList<>();
             for (int i = 0; i < apps.size(); i++) {
                 items.add(new AppItem(apps.get(i)));
@@ -129,7 +133,7 @@ public class GridAppDrawer extends CardView {
         AppManager.getInstance(getContext()).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {
-                GridAppDrawer.this.apps = apps;
+                AppDrawer_Vertical.this.apps = apps;
                 ArrayList<AppItem> items = new ArrayList<>();
                 for (int i = 0; i < apps.size(); i++) {
                     items.add(new AppItem(apps.get(i)));
