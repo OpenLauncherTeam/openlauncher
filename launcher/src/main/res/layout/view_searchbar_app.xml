@@ -14,6 +14,7 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/searchIcon"
             android:paddingLeft="18dp"
             android:paddingRight="18dp"
             android:layout_width="wrap_content"

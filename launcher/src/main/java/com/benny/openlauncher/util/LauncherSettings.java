@@ -242,6 +242,7 @@ public class LauncherSettings {
         public boolean drawerRememberPage = true;
         public ArrayList<String> hiddenList;
         public boolean drawerShowIndicator = true;
+        public boolean drawerLight = true;
 
         //Dock
         public int dockColor = Color.TRANSPARENT;

@@ -113,10 +113,10 @@
     <string name="settings_desktopFull_summary">Enable fullscreen for your desktop.</string>
     <string name="settings_desktopIndicator">Desktop indicator</string>
     <string name="settings_desktopIndicator_summary">Show the page indicator on the desktop.</string>
+    <string name="settings_desktopLabel_summary">Show app and folder names in the desktop.</string>
 
     <string name="settings_dockLabel">Label</string>
     <string name="settings_dockLabel_summary">Show app and folder names in the dock.</string>
-    <string name="settings_desktopLabel_summary">Show app and folder names in the desktop.</string>
     <string name="settings_dockSize">Size</string>
     <string name="settings_dockSize_summary">Set the dock size.</string>
 
@@ -126,10 +126,14 @@
     <string name="settings_drawerCard_summary">Use a card as drawer background.</string>
     <string name="settings_drawerSearch">Search bar</string>
     <string name="settings_drawerSearch_summary">Will only appear in vertical view layout.</string>
+    <string name="settings_drawerSearchIcon">Search icon</string>
+    <string name="settings_drawerSearchIcon_summary">Show the default dark search icon in the search bar.</string>
     <string name="settings_drawerSize">Size</string>
     <string name="settings_drawerSize_summary">Set the drawer grid size.</string>
     <string name="settings_drawerPage">Remember last page</string>
     <string name="settings_drawerPage_summary">The app drawer will save the last opened page.</string>
+    <string name="settings_drawerIndicator">Drawer indicator/Scrollbar</string>
+    <string name="settings_drawerIndicator_summary">Show the page indicator btw. the scrollbar in the drawer.</string>
 
     <string name="settings_desktopSwipe">Fast swipe Drawer</string>
     <string name="settings_desktopSwipe_summary">Swipe up on the drawer app icon to open the app drawer.</string>
