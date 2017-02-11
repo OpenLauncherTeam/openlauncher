@@ -174,5 +174,6 @@
     <string name="request_dummy_text">Hello world!</string>
     <string name="request_please_wait2">Searching for installed apps. Please wait.</string>
     <string name="request_toast">No apps selected. Show all apps in drawer?</string>
+    <string name="settings_group_others">Others</string>
 
 </resources>

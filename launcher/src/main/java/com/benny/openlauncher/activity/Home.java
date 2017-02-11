@@ -569,7 +569,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                     startActivityForResult(new Intent(Home.this, MiniBarEditActivity.class), MINIBAR_EDIT);
                 else {
                     LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
-                    LauncherAction.RunAction(action, Home.this, Home.this);
+                    LauncherAction.RunAction(action, Home.this);
                     if (action != LauncherAction.Action.LauncherSettings)
                         drawerLayout.closeDrawers();
                 }
