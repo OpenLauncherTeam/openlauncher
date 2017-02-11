@@ -74,6 +74,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     private void detectSwipe(MotionEvent ev) {
+        if (Home.launcher == null)return;
         if (ev.getAction() == MotionEvent.ACTION_UP) {
             Tool.print("ActionUP");
             float minDist = 150f;
