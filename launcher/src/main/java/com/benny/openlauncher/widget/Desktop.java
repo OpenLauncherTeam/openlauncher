@@ -409,7 +409,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
                 @Override
                 public boolean onDoubleTap(int i) {
-                    LauncherAction.RunAction(LauncherAction.Action.LockScreen,desktop.getContext(), null);
+                    LauncherAction.RunAction(LauncherAction.Action.LockScreen,desktop.getContext());
                     return true;
                 }
             };

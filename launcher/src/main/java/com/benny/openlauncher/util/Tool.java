@@ -311,9 +311,9 @@ public class Tool {
         }
     }
 
-    public static int getNavBarHeight(Context context){
+    public static int getNavBarHeight(Context context) {
         Resources resources = context.getResources();
-        if (!hasNavBar(context))return 0;
+        if (!hasNavBar(context)) return 0;
         int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
         if (resourceId > 0) {
             return resources.getDimensionPixelSize(resourceId);
@@ -331,13 +331,17 @@ public class Tool {
     }
 
     public static void startApp(Context c, AppManager.App app) {
-        try {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setClassName(app.packageName, app.className);
-            c.startActivity(intent);
-        } catch (Exception e) {
-            Tool.toast(c, R.string.toast_appuninstalled);
+        if (app.packageName.equals("com.benny.openlauncher")) {
+            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings,c);
+        } else {
+            try {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setClassName(app.packageName, app.className);
+                c.startActivity(intent);
+            } catch (Exception e) {
+                Tool.toast(c, R.string.toast_appuninstalled);
+            }
         }
     }
 
@@ -392,7 +396,7 @@ public class Tool {
         };
     }
 
-    public static Point convertPoint(Point fromPoint, View fromView, View toView){
+    public static Point convertPoint(Point fromPoint, View fromView, View toView) {
         int[] fromCoord = new int[2];
         int[] toCoord = new int[2];
         fromView.getLocationOnScreen(fromCoord);

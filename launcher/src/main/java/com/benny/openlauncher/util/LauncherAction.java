@@ -38,7 +38,7 @@ public class LauncherAction {
             new ActionItem(Action.VolumeDialog,resources.getString(R.string.minibar_7),R.drawable.ic_volume_up_black_24dp)
     };
 
-    public static void RunAction(Action act,final Context c,final Activity a){
+    public static void RunAction(Action act,final Context c){
         switch (act){
             case LockScreen:
                 if(LauncherSettings.getInstance(c).generalSettings.doubleClick) {
@@ -119,35 +119,12 @@ public class LauncherAction {
             case DeviceSettings:
                 c.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
                 break;
-            case ThemePicker:
-                AlertDialog.Builder b2 = new AlertDialog.Builder(c);
-                b2.setTitle("Theme");
-                b2.setIcon(R.drawable.ic_brush_black_24dp);
-                b2.setItems(Theme.names(),new DialogInterface.OnClickListener(){
-
-                    @Override
-                    public void onClick(DialogInterface p1, int p2){
-                        if (!LauncherSettings.getInstance(c).generalSettings.theme.toString().equals(Theme.names()[p2])){
-                            switch (p2){
-                                case 0 :
-                                    LauncherSettings.getInstance(c).generalSettings.theme = Theme.Dark;
-                                    break;
-                                case 1 :
-                                    LauncherSettings.getInstance(c).generalSettings.theme = Theme.Light;
-                                    break;
-                            }
-                            a.recreate();
-                        }
-                    }
-                });
-                b2.show();
-                break;
             case VolumeDialog:
                 AudioManager audioManager = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
                 audioManager.setStreamVolume(AudioManager.STREAM_RING,audioManager.getStreamVolume(AudioManager.STREAM_RING),AudioManager.FLAG_SHOW_UI);
                 break;
             case LauncherSettings:
-                c.startActivity(new Intent(a, SettingsActivity.class));
+                c.startActivity(new Intent(c, SettingsActivity.class));
                 break;
         }
     }
