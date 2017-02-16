@@ -36,7 +36,7 @@ import java.util.List;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
-public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopCallBack {
+public class Desktop extends SmoothViewPager implements OnDragListener, DesktopCallBack {
     public int pageCount;
 
     public List<CellContainer> pages = new ArrayList<>();
@@ -49,7 +49,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
     public Item previousItem;
     public int previousPage = -1;
 
-    private float startPosX,startPosY;
+    private float startPosX, startPosY;
 
     private Home home;
 
@@ -187,19 +187,19 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                         home.desktop.revertLastItem();
                     }
                 }
-                if (item.type == Desktop.Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type ==  Item.Type.LAUNCHER_APP_DRAWER) {
+                if (item.type == Desktop.Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type == Item.Type.LAUNCHER_APP_DRAWER) {
                     if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
                         home.desktop.consumeRevert();
                         home.dock.consumeRevert();
                     } else {
-                        Point pos = getCurrentPage().touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY,false);
+                        Point pos = getCurrentPage().touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY, false);
                         View itemView = getCurrentPage().coordinateToChildView(pos);
 
                         if (itemView != null)
-                            if (Desktop.handleOnDropOver(home,item, (Item) itemView.getTag(),itemView, getCurrentPage(),getCurrentItem(),this)){
+                            if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, getCurrentPage(), getCurrentItem(), this)) {
                                 home.desktop.consumeRevert();
                                 home.dock.consumeRevert();
-                            }else {
+                            } else {
                                 Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
                                 home.dock.revertLastItem();
                                 home.desktop.revertLastItem();
@@ -227,7 +227,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
      * @param args array storing the item(pos 0) and view ref(pos 1).
      */
     @Override
-    public void setLastItem(Object... args){
+    public void setLastItem(Object... args) {
         View v = (View) args[1];
         Desktop.Item item = (Desktop.Item) args[0];
 
@@ -266,7 +266,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
     @Override
     public void addItemToPagePosition(final Item item, int page) {
         int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
-        View itemView = ItemViewFactory.getItemView(getContext(),this,item,flag);
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
         if (itemView == null) {
             LauncherSettings.getInstance(getContext()).desktopData.get(page).remove(item);
@@ -287,7 +287,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             //end
 
             int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
-            View itemView = ItemViewFactory.getItemView(getContext(),this,item,flag);
+            View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
             if (itemView != null) {
                 itemView.setLayoutParams(positionToLayoutPrams);
@@ -375,7 +375,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             return layout;
         }
 
-        private SimpleFingerGestures.OnFingerGestureListener getGestureListener(){
+        private SimpleFingerGestures.OnFingerGestureListener getGestureListener() {
             return new SimpleFingerGestures.OnFingerGestureListener() {
                 @Override
                 public boolean onSwipeUp(int i, long l, double v) {
@@ -409,13 +409,14 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
                 @Override
                 public boolean onDoubleTap(int i) {
-                    LauncherAction.RunAction(LauncherAction.Action.LockScreen,desktop.getContext());
+                    if (LauncherSettings.getInstance(getContext()).generalSettings.doubleClick)
+                        LauncherAction.RunAction(LauncherAction.Action.LockScreen, desktop.getContext());
                     return true;
                 }
             };
         }
 
-        private Desktop.Item getItemFromCoordinate(Point coordinate){
+        private Desktop.Item getItemFromCoordinate(Point coordinate) {
             List<Item> pageData = LauncherSettings.getInstance(desktop.getContext()).desktopData.get(desktop.getCurrentItem());
             for (int i = 0; i < pageData.size(); i++) {
                 Item item = pageData.get(i);
@@ -436,7 +437,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                 @Override
                 public void onItemRearrange(Point from, Point to) {
                     Item itemFromCoordinate = getItemFromCoordinate(from);
-                    if (itemFromCoordinate == null)return;
+                    if (itemFromCoordinate == null) return;
                     itemFromCoordinate.x = to.x;
                     itemFromCoordinate.y = to.y;
                 }
@@ -454,13 +455,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
 
                     if (ev.getAction() == MotionEvent.ACTION_UP) {
                         float minDist = 150f;
-                        Tool.print((int)ev.getX(),(int)ev.getY());
+                        Tool.print((int) ev.getX(), (int) ev.getY());
                         if (startPosY - ev.getY() > minDist) {
                             if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
-                                Point p = Tool.convertPoint(new Point((int)ev.getX(),(int)ev.getY()),Desktop.this,Home.launcher.appDrawerContainer);
+                                Point p = Tool.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), Desktop.this, Home.launcher.appDrawerContainer);
                                 // FIXME: 1/22/2017 This seem weird, but the extra offset ( Tool.getNavBarHeight(getContext()) ) works on my phone
                                 // FIXME: 1/22/2017 This part of the code is identical as the code in Desktop so will combine them later
-                                Home.launcher.openAppDrawer(Desktop.this,p.x,p.y - Tool.getNavBarHeight(getContext())/2);
+                                Home.launcher.openAppDrawer(Desktop.this, p.x, p.y - Tool.getNavBarHeight(getContext()) / 2);
                             }
                         }
                     }
@@ -471,7 +472,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                 @Override
                 public void onClick(View view) {
                     if (!desktop.inEditMode && LauncherSettings.getInstance(getContext()).generalSettings.clickToOpen) {
-                        Home.launcher.openAppDrawer(desktop,(int)currentEvent.getX(),(int)currentEvent.getY());
+                        Home.launcher.openAppDrawer(desktop, (int) currentEvent.getX(), (int) currentEvent.getY());
                     }
 
                     scaleFactor = 1f;
@@ -494,8 +495,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                 public boolean onLongClick(View view) {
                     scaleFactor = 0.85f;
                     for (CellContainer v : desktop.pages) {
-                        v.setPivotY(v.getHeight()/2 -Tool.dp2px(50,desktop.getContext()));
-                        v.setPivotX(v.getWidth()/2);
+                        v.setPivotY(v.getHeight() / 2 - Tool.dp2px(50, desktop.getContext()));
+                        v.setPivotX(v.getWidth() / 2);
 
                         v.blockTouch = true;
                         v.animateBackgroundShow();
@@ -512,11 +513,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         }
     }
 
-    public static boolean handleOnDropOver(Home home,Item dropItem,Item item,View itemView,ViewGroup parent,int page,DesktopCallBack callBack){
-        if (item == null){
+    public static boolean handleOnDropOver(Home home, Item dropItem, Item item, View itemView, ViewGroup parent, int page, DesktopCallBack callBack) {
+        if (item == null) {
             return false;
         }
-        switch (item.type){
+        switch (item.type) {
             case APP:
             case SHORTCUT:
             case GROUP:
@@ -529,7 +530,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
                         item.name = (home.getString(R.string.unnamed));
                     item.type = Desktop.Item.Type.GROUP;
                     callBack.addItemToSettings(item);
-                    callBack.addItemToPagePosition(item,page);
+                    callBack.addItemToPagePosition(item, page);
 
                     home.desktop.consumeRevert();
                     home.dock.consumeRevert();
@@ -566,8 +567,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
         }
     }
 
-    public enum DesktopMode{
-        Normal,ShowAllApps
+    public enum DesktopMode {
+        Normal, ShowAllApps
     }
 
     public static void startStylePicker(final Context context) {
@@ -688,7 +689,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener ,DesktopC
             return item;
         }
 
-        public static Item newAppDrawerBtn(){
+        public static Item newAppDrawerBtn() {
             Desktop.Item item = new Item();
             item.type = Type.LAUNCHER_APP_DRAWER;
             item.spanX = 1;

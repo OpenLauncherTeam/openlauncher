@@ -155,7 +155,7 @@ public class AppManager {
 
         @Override
         protected void onPreExecute() {
-            tempApps = apps;
+            tempApps = new ArrayList<>(apps);
             super.onPreExecute();
         }
 

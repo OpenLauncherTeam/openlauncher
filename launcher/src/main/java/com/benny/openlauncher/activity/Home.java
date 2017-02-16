@@ -246,6 +246,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 AppManager.getInstance(Home.this).removeAppUpdatedListener(this);
             }
         });
+        AppManager.getInstance(this).addAppDeletedListener(new AppManager.AppDeletedListener() {
+            @Override
+            public void onAppDeleted(AppManager.App app) {
+                desktop.initDesktopItem(Home.this);
+                dock.initDockItem(Home.this);
+            }
+        });
 
         AppManager.getInstance(this).init();
 

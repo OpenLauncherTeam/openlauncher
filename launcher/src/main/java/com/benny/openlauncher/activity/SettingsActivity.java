@@ -64,7 +64,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_dock)))
                     .add(new MaterialPrefFragment.NUMPref("gridSizeDock",(getString(R.string.settings_dockSize)), (getString(R.string.settings_dockSize_summary)),
-                            new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDock",(getString(R.string.settings_column)), generalSettings.dockGridX, 5, 10)
+                            new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDock",(getString(R.string.settings_column)), generalSettings.dockGridX, 4, 10)
                     ))
                     .add(new MaterialPrefFragment.TBPref("dockShowLabel",(getString(R.string.settings_dockLabel)),(getString(R.string.settings_dockLabel_summary)), generalSettings.dockShowLabel))
 
