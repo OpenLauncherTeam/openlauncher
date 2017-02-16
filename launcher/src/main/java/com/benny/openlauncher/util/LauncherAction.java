@@ -29,45 +29,45 @@ public class LauncherAction {
     private static boolean clearingRam = false;
 
     public static ActionItem[] actionItems = new ActionItem[]{
-            new ActionItem(Action.SetWallpaper, resources.getString(R.string.minibar_1),R.drawable.ic_photo_black_24dp),
-            new ActionItem(Action.LockScreen,resources.getString(R.string.minibar_2),R.drawable.ic_lock_black_24dp),
-            new ActionItem(Action.ClearRam,resources.getString(R.string.minibar_3),R.drawable.ic_donut_large_black_24dp),
-            new ActionItem(Action.DeviceSettings,resources.getString(R.string.minibar_4),R.drawable.ic_settings_applications_black_24dp),
-            new ActionItem(Action.LauncherSettings,resources.getString(R.string.minibar_5),R.drawable.ic_settings_black_24dp),
+            new ActionItem(Action.SetWallpaper, resources.getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp),
+            new ActionItem(Action.LockScreen, resources.getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp),
+            new ActionItem(Action.ClearRam, resources.getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp),
+            new ActionItem(Action.DeviceSettings, resources.getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp),
+            new ActionItem(Action.LauncherSettings, resources.getString(R.string.minibar_5), R.drawable.ic_settings_black_24dp),
             //new ActionItem(Action.ThemePicker,resources.getString(R.string.minibar_6),R.drawable.ic_brush_black_24dp),
-            new ActionItem(Action.VolumeDialog,resources.getString(R.string.minibar_7),R.drawable.ic_volume_up_black_24dp)
+            new ActionItem(Action.VolumeDialog, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp)
     };
 
-    public static void RunAction(Action act,final Context c){
-        switch (act){
+    public static void RunAction(Action act, final Context c) {
+        switch (act) {
             case LockScreen:
-                if(LauncherSettings.getInstance(c).generalSettings.doubleClick) {
-                    try{
-                        ((DevicePolicyManager)c.getSystemService(Context.DEVICE_POLICY_SERVICE)).lockNow();
-                    }catch (Exception e){
-                        Tool.toast(c,c.getString(R.string.toast_plzenabledeviceadmin));
-                        Intent intent = new Intent();
-                        intent.setComponent(new ComponentName("com.android.settings","com.android.settings.DeviceAdminSettings"));
-                        c.startActivity(intent);
-                    }
+                try {
+                    ((DevicePolicyManager) c.getSystemService(Context.DEVICE_POLICY_SERVICE)).lockNow();
+                } catch (Exception e) {
+                    Tool.toast(c, c.getString(R.string.toast_plzenabledeviceadmin));
+                    Intent intent = new Intent();
+                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.DeviceAdminSettings"));
+                    c.startActivity(intent);
                 }
                 break;
             case ClearRam:
-                if(clearingRam)
+                if (clearingRam)
                     break;
                 ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
                 final ActivityManager activityManager = (ActivityManager) c.getSystemService(c.ACTIVITY_SERVICE);
                 activityManager.getMemoryInfo(mi);
                 final long pre = mi.availMem / 1048576L;
-                new AsyncTask<Void,Void,Void>(){
+                new AsyncTask<Void, Void, Void>() {
 
                     @Override
-                    protected void onPreExecute(){clearingRam = true;}
+                    protected void onPreExecute() {
+                        clearingRam = true;
+                    }
 
                     @Override
-                    protected Void doInBackground(Void[] p1){
+                    protected Void doInBackground(Void[] p1) {
                         List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfo = activityManager.getRunningAppProcesses();
-                        for (int i = 0; i < runningAppProcessInfo.size(); i++){
+                        for (int i = 0; i < runningAppProcessInfo.size(); i++) {
                             activityManager.killBackgroundProcesses(runningAppProcessInfo.get(i).pkgList[0]);
                         }
                         System.runFinalization();
@@ -77,15 +77,15 @@ public class LauncherAction {
                     }
 
                     @Override
-                    protected void onPostExecute(Void result){
+                    protected void onPostExecute(Void result) {
                         clearingRam = false;
                         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
                         activityManager.getMemoryInfo(mi);
                         long current = mi.availMem / 1048576L;
                         if (current - pre > 10)
-                            Tool.toast(c,c.getResources().getString(R.string.toast_freeram, current,current - pre));
+                            Tool.toast(c, c.getResources().getString(R.string.toast_freeram, current, current - pre));
                         else
-                            Tool.toast(c,c.getResources().getString(R.string.toast_freeallram, current));
+                            Tool.toast(c, c.getResources().getString(R.string.toast_freeallram, current));
                         super.onPostExecute(result);
                     }
                 }.execute();
@@ -94,21 +94,21 @@ public class LauncherAction {
                 MaterialDialog.Builder b = new MaterialDialog.Builder(c);
                 b.title(R.string.wallpaper);
                 b.iconRes(R.drawable.ic_photo_black_24dp);
-                String[] s = new String[]{c.getString(R.string.wallpaper_set),c.getString(R.string.wallpaper_blur)};
+                String[] s = new String[]{c.getString(R.string.wallpaper_set), c.getString(R.string.wallpaper_blur)};
                 b.items(s);
                 b.itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        switch (position){
-                            case 0 :
+                        switch (position) {
+                            case 0:
                                 Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
-                                c.startActivity(Intent.createChooser(intent,c.getString(R.string.wallpaper_pick)));
+                                c.startActivity(Intent.createChooser(intent, c.getString(R.string.wallpaper_pick)));
                                 break;
-                            case 1 :
-                                try{
-                                    WallpaperManager.getInstance(c).setBitmap(StackBlur.blur(Tool.drawableToBitmap(c.getWallpaper()),10,false));
-                                }catch (Exception e){
-                                    Tool.toast(c,c.getString(R.string.wallpaper_unable_to_blur));
+                            case 1:
+                                try {
+                                    WallpaperManager.getInstance(c).setBitmap(StackBlur.blur(Tool.drawableToBitmap(c.getWallpaper()), 10, false));
+                                } catch (Exception e) {
+                                    Tool.toast(c, c.getString(R.string.wallpaper_unable_to_blur));
                                 }
                                 break;
                         }
@@ -121,7 +121,7 @@ public class LauncherAction {
                 break;
             case VolumeDialog:
                 AudioManager audioManager = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
-                audioManager.setStreamVolume(AudioManager.STREAM_RING,audioManager.getStreamVolume(AudioManager.STREAM_RING),AudioManager.FLAG_SHOW_UI);
+                audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamVolume(AudioManager.STREAM_RING), AudioManager.FLAG_SHOW_UI);
                 break;
             case LauncherSettings:
                 c.startActivity(new Intent(c, SettingsActivity.class));
@@ -129,28 +129,28 @@ public class LauncherAction {
         }
     }
 
-    public static class ActionItem{
+    public static class ActionItem {
         public Action label;
         public String des;
         public int icon;
 
-        public ActionItem(Action label,String des,int icon){
+        public ActionItem(Action label, String des, int icon) {
             this.label = label;
             this.des = des;
             this.icon = icon;
         }
     }
 
-    public static ActionItem getActionItemFromString(String string){
-        for(ActionItem item : actionItems){
+    public static ActionItem getActionItemFromString(String string) {
+        for (ActionItem item : actionItems) {
             if (item.label.toString().equals(string))
                 return item;
         }
         return null;
     }
 
-    public enum Theme{
-        Dark,Light;
+    public enum Theme {
+        Dark, Light;
 
         public static String[] names() {
             Theme[] states = values();
@@ -164,7 +164,7 @@ public class LauncherAction {
         }
     }
 
-    public enum Action{
-        LockScreen, ClearRam,SetWallpaper,DeviceSettings,LauncherSettings,ThemePicker,VolumeDialog
+    public enum Action {
+        LockScreen, ClearRam, SetWallpaper, DeviceSettings, LauncherSettings, ThemePicker, VolumeDialog
     }
 }

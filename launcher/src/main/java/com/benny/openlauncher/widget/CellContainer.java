@@ -97,6 +97,7 @@ public class CellContainer extends ViewGroup {
     public void peekItemAndSwap(DragEvent event) {
         Point coordinate = touchPosToCoordinate((int) event.getX(), (int) event.getY(), 1, 1, false);
 
+        if (coordinate == null) return;
         if (!preCoordinate.equals(coordinate)){
             peekDirection = getPeekDirectionFromCoordinate(preCoordinate,coordinate);
             peekDownTime = -1L;
