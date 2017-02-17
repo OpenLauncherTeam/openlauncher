@@ -7,7 +7,7 @@
 
     <TextView
         android:gravity="center"
-        android:layout_width="55dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:id="@+id/itemTitle"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,7 +25,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="55dp" />
+        android:layout_width="60dp" />
 
     <SeekBar
         android:layout_width="0dp"
