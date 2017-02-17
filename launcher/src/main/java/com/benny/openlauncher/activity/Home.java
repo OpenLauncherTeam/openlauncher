@@ -577,8 +577,16 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 else {
                     LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
                     LauncherAction.RunAction(action, Home.this);
-                    if (action != LauncherAction.Action.LauncherSettings)
+                    if (action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.DeviceSettings) {
+                        (new Handler()).postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                drawerLayout.closeDrawers();
+                            }
+                        }, 500);
+                    } else {
                         drawerLayout.closeDrawers();
+                    }
                 }
             }
         });
