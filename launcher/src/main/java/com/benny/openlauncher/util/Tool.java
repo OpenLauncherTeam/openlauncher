@@ -1,6 +1,7 @@
 package com.benny.openlauncher.util;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.*;
 import android.content.pm.PackageManager;
 import android.content.res.*;
@@ -15,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.StatFs;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.support.annotation.ColorInt;
@@ -43,9 +45,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.RandomAccessFile;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+
+import static android.content.Context.ACTIVITY_SERVICE;
 
 public class Tool {
     private Tool() {
@@ -486,5 +492,42 @@ public class Tool {
 
     public interface OnTextGotListener {
         void hereIsTheText(String str);
+    }
+
+    public static String getFreeRAM(Context context) {
+        ActivityManager actManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+        ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
+        actManager.getMemoryInfo(memInfo);
+
+        long totalMemory = memInfo.availMem;
+        long mb = totalMemory / 1048576L;
+        long gb = totalMemory / 1073741824L;
+
+        DecimalFormat twoDecimalForm = new DecimalFormat("#.##");
+        if (gb > 1) {
+            return twoDecimalForm.format(gb).concat(" GB");
+        } else if (mb > 1) {
+            return twoDecimalForm.format(mb).concat(" MB");
+        } else {
+            return twoDecimalForm.format(totalMemory).concat(" KB");
+        }
+    }
+
+    public static String getFreeMemory()
+    {
+        StatFs statFs = new StatFs(Environment.getRootDirectory().getAbsolutePath());
+        long   free   = (statFs.getAvailableBlocks() * (long) statFs.getBlockSize());
+
+        long mb = free / 1048576L;
+        long gb = free / 1073741824L;
+
+        DecimalFormat twoDecimalForm = new DecimalFormat("#.##");
+        if (gb > 1) {
+            return twoDecimalForm.format(gb).concat(" GB");
+        } else if (mb > 1) {
+            return twoDecimalForm.format(mb).concat(" MB");
+        } else {
+            return twoDecimalForm.format(free).concat(" KB");
+        }
     }
 }

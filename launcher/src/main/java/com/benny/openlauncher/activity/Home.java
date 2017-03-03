@@ -60,7 +60,9 @@ import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.Dock;
 import com.benny.openlauncher.widget.DragOptionView;
 import com.benny.openlauncher.widget.GroupPopupView;
+import com.benny.openlauncher.widget.MiniPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
+import com.benny.openlauncher.widget.SwipeListView;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
 import java.util.ArrayList;
@@ -88,6 +90,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     public View searchBar, appDrawer;
     public GroupPopupView groupPopup;
     public AppDrawer appDrawerContainer;
+    public MiniPopupView miniPopup;
+    public View shortcutLayout;
     public ArrayList<QuickCenterItem.NoteContent> notes = new ArrayList<>();
     //QuickCenter
     private FastItemAdapter<QuickCenterItem.NoteItem> noteAdapter;
@@ -99,7 +103,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     private ViewGroup desktopEditOptionView;
     private BroadcastReceiver appUpdateReceiver, shortcutReceiver;
     private TextView searchBarClock;
-    private ListView minBar;
+    private SwipeListView minBar;
     private DrawerLayout drawerLayout;
     private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
@@ -112,6 +116,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //This will be optimised late.
         //handle uncaught exception
 //        Thread.setDefaultUncaughtExceptionHandler (new Thread.UncaughtExceptionHandler() {
 //            @Override
@@ -199,7 +204,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     //region INIT
 
     private void init() {
-
         drawerLayout.addDrawerListener(this);
 
         appWidgetHost = new WidgetHost(getApplicationContext(), R.id.m_AppWidgetHost);
@@ -277,7 +281,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         dragOptionView = (DragOptionView) findViewById(R.id.dragOptionPanel);
         groupPopup = (GroupPopupView) findViewById(R.id.groupPopup);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        minBar = (ListView) findViewById(R.id.minbar);
+        minBar = (SwipeListView) findViewById(R.id.minbar);
+        miniPopup = (MiniPopupView) findViewById(R.id.miniPopup);
     }
 
     /**
@@ -290,6 +295,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
         DragNavigationControl.init(this, findViewById(R.id.left), findViewById(R.id.right));
 
+        shortcutLayout = findViewById(R.id.shortcutLayout);
 
         String date = Calendar.getInstance(Locale.getDefault()).getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " +
                 String.valueOf(Calendar.getInstance(Locale.getDefault()).get(Calendar.DAY_OF_MONTH));
@@ -535,7 +541,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     public void initMinBar() {
         final ArrayList<String> labels = new ArrayList<>();
-        labels.add("Edit");
+        labels.add(getString(R.string.edit));
 
         ArrayList<Integer> icons = new ArrayList<>();
         icons.add(R.drawable.ic_mode_edit_black_24dp);
@@ -569,6 +575,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
 
         minBar.setAdapter(new IconListAdapter(this, labels, icons));
+        minBar.setOnSwipeRight(new SwipeListView.OnSwipeRight() {
+            @Override
+            public void onSwipe(int pos,float x,float y) {
+                miniPopup.showActionWindow(LauncherAction.Action.valueOf(labels.get(pos)),x,y + (shortcutLayout.getHeight() - minBar.getHeight()) / 2 - Tool.getNavBarHeight(Home.this));
+            }
+        });
         minBar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -854,23 +866,22 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     @Override
     public void onDrawerStateChanged(int newState) {
-        final View target = findViewById(R.id.shortcutLayout);
         switch (newState) {
             case DrawerLayout.STATE_DRAGGING:
             case DrawerLayout.STATE_SETTLING:
-                if (target.getAlpha() == 1)
-                    target.animate().setDuration(180L).alpha(0).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                if (shortcutLayout.getAlpha() == 1)
+                    shortcutLayout.animate().setDuration(180L).alpha(0).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                         @Override
                         public void run() {
-                            target.setVisibility(View.INVISIBLE);
+                            shortcutLayout.setVisibility(View.INVISIBLE);
                         }
                     });
                 break;
             case DrawerLayout.STATE_IDLE:
                 if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                    target.setVisibility(View.VISIBLE);
-                    target.setAlpha(0);
-                    target.animate().setDuration(180L).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+                    shortcutLayout.setVisibility(View.VISIBLE);
+                    shortcutLayout.setAlpha(0);
+                    shortcutLayout.animate().setDuration(180L).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
                 }
                 break;
         }
