@@ -17,7 +17,7 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.Tool;
-import com.mikepenz.fastadapter.adapters.FastItemAdapter;
+import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
@@ -29,7 +29,7 @@ public class QuickCenterItem{
     public static class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
         public String date;
         public String description;
-        private FastItemAdapter<QuickCenterItem.NoteItem> adapter;
+        private FastItemAdapter<NoteItem> adapter;
 
         public NoteItem(String date, String description, FastItemAdapter<QuickCenterItem.NoteItem> adapter){
             this.date = date;

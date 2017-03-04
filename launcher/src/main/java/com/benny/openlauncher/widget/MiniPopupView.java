@@ -58,7 +58,7 @@ public class MiniPopupView extends RevealFrameLayout {
                 window = LayoutInflater.from(getContext()).inflate(R.layout.window_clearam, this, false);
                 ClearRamViewHolder clearRamViewHolder = new ClearRamViewHolder(window);
                 clearRamViewHolder.availableRam.setText(clearRamViewHolder.availableRam.getText() + Tool.getFreeRAM(getContext()));
-                clearRamViewHolder.availableStorage.setText(clearRamViewHolder.availableStorage.getText() + Tool.getFreeMemory());
+                clearRamViewHolder.availableStorage.setText(clearRamViewHolder.availableStorage.getText() + Tool.getFreeMemory(getContext()));
                 break;
             case SetWallpaper:
                 break;
@@ -82,10 +82,10 @@ public class MiniPopupView extends RevealFrameLayout {
                 volumeDialogViewHolder.sbSystem.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM));
                 volumeDialogViewHolder.sbMedia.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
 
-                volumeDialogViewHolder.sbRingtone.setOnSeekBarChangeListener(VolumeDialogViewHolder.getSoundChangeListener(audioManager, AudioManager.STREAM_RING));
-                volumeDialogViewHolder.sbNotification.setOnSeekBarChangeListener(VolumeDialogViewHolder.getSoundChangeListener(audioManager, AudioManager.STREAM_NOTIFICATION));
-                volumeDialogViewHolder.sbSystem.setOnSeekBarChangeListener(VolumeDialogViewHolder.getSoundChangeListener(audioManager, AudioManager.STREAM_SYSTEM));
-                volumeDialogViewHolder.sbMedia.setOnSeekBarChangeListener(VolumeDialogViewHolder.getSoundChangeListener(audioManager, AudioManager.STREAM_MUSIC));
+                volumeDialogViewHolder.sbRingtone.setOnSeekBarChangeListener(volumeDialogViewHolder.getSoundChangeListener(audioManager, AudioManager.STREAM_RING));
+                volumeDialogViewHolder.sbNotification.setOnSeekBarChangeListener(volumeDialogViewHolder.getSoundChangeListener(audioManager, AudioManager.STREAM_NOTIFICATION));
+                volumeDialogViewHolder.sbSystem.setOnSeekBarChangeListener(volumeDialogViewHolder.getSoundChangeListener(audioManager, AudioManager.STREAM_SYSTEM));
+                volumeDialogViewHolder.sbMedia.setOnSeekBarChangeListener(volumeDialogViewHolder.getSoundChangeListener(audioManager, AudioManager.STREAM_MUSIC));
                 break;
         }
         displayWindow(window, x, y);
@@ -135,11 +135,16 @@ public class MiniPopupView extends RevealFrameLayout {
             ButterKnife.inject(this, view);
         }
 
-        private static SeekBar.OnSeekBarChangeListener getSoundChangeListener(final AudioManager audioManager, final int type) {
+        private SeekBar.OnSeekBarChangeListener getSoundChangeListener(final AudioManager audioManager, final int type) {
             return new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    audioManager.setStreamVolume(type, progress, AudioManager.FLAG_PLAY_SOUND);
+                    audioManager.setStreamVolume(type, progress, 0);
+
+                    sbRingtone.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_RING));
+                    sbNotification.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+                    sbSystem.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM));
+                    sbMedia.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
                 }
 
                 @Override

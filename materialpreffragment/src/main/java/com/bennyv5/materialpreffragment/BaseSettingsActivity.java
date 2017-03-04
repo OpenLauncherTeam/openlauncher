@@ -20,6 +20,11 @@ public class BaseSettingsActivity extends AppCompatActivity implements ColorChoo
         fragment.listener2.onPrefChanged(fragment.currentColorPref.id,selectedColor);
     }
 
+    @Override
+    public void onColorChooserDismissed(@NonNull ColorChooserDialog dialog) {
+
+    }
+
     public void setSettingsFragment(MaterialPrefFragment fragment){
         this.fragment = fragment;
     }
