@@ -21,6 +21,7 @@ import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.text.format.Formatter;
 import android.util.*;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
@@ -500,34 +501,17 @@ public class Tool {
         actManager.getMemoryInfo(memInfo);
 
         long totalMemory = memInfo.availMem;
-        long mb = totalMemory / 1048576L;
-        long gb = totalMemory / 1073741824L;
 
-        DecimalFormat twoDecimalForm = new DecimalFormat("#.##");
-        if (gb > 1) {
-            return twoDecimalForm.format(gb).concat(" GB");
-        } else if (mb > 1) {
-            return twoDecimalForm.format(mb).concat(" MB");
-        } else {
-            return twoDecimalForm.format(totalMemory).concat(" KB");
-        }
+        return Formatter.formatFileSize(context,totalMemory);
     }
 
-    public static String getFreeMemory()
+    public static String getFreeMemory(Context context)
     {
-        StatFs statFs = new StatFs(Environment.getRootDirectory().getAbsolutePath());
-        long   free   = (statFs.getAvailableBlocks() * (long) statFs.getBlockSize());
-
-        long mb = free / 1048576L;
-        long gb = free / 1073741824L;
-
-        DecimalFormat twoDecimalForm = new DecimalFormat("#.##");
-        if (gb > 1) {
-            return twoDecimalForm.format(gb).concat(" GB");
-        } else if (mb > 1) {
-            return twoDecimalForm.format(mb).concat(" MB");
-        } else {
-            return twoDecimalForm.format(free).concat(" KB");
+        File externalFilesDir = context.getExternalFilesDir(null);
+        if (externalFilesDir != null) {
+            long bytesAvailable = new File(externalFilesDir.toString()).getFreeSpace();
+            return Formatter.formatFileSize(context, bytesAvailable);
         }
+        return "";
     }
 }
