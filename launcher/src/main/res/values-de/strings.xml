@@ -176,5 +176,6 @@
     <string name="request_dummy_text">Hello world!</string>
     <string name="request_please_wait2">Suche nach installierten Anwendungen. Bitte warten.</string>
     <string name="request_toast">Nichts ausgewählt. Alle Anwendungen im Drawer anzeigen?</string>
+    <string name="edit">Edit</string>
 
 </resources>
