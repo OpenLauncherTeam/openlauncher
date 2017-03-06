@@ -83,8 +83,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_input)))
                     .add(new MaterialPrefFragment.TBPref("swipe", (getString(R.string.settings_desktopSwipe)), (getString(R.string.settings_desktopSwipe_summary)), generalSettings.swipe))
-                    .add(new MaterialPrefFragment.TBPref("clickToOpen", (getString(R.string.settings_desktopClick)), (getString(R.string.settings_desktopClick_summary)), generalSettings.clickToOpen))
-                    .add(new MaterialPrefFragment.TBPref("doubleClick", (getString(R.string.settings_doubleClick)), (getString(R.string.settings_doubleClick_summary)), generalSettings.doubleClick))
+                    .add(new MaterialPrefFragment.ButtonPref("singleClick", (getString(R.string.settings_singleClick)), (getString(R.string.settings_singleClick_summary))))
+                    .add(new MaterialPrefFragment.ButtonPref("doubleClick", (getString(R.string.settings_doubleClick)), (getString(R.string.settings_doubleClick_summary))))
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_color)))
                     .add(new MaterialPrefFragment.ColorPref("dockBackground",(getString(R.string.settings_colorDock)),(getString(R.string.settings_colorDock_summary)),generalSettings.dockColor))
@@ -150,11 +150,11 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             case "swipe":
                 generalSettings.swipe = (boolean)value;
                 break;
-            case "clickToOpen":
-                generalSettings.clickToOpen = (boolean)value;
+            case "singleClick":
+                generalSettings.singleClick = (int)value;
                 break;
             case "doubleClick":
-                generalSettings.doubleClick = (boolean)value;
+                generalSettings.doubleClick = (int)value;
                 break;
             case "showIndicator":
                 generalSettings.showIndicator = (boolean)value;
@@ -273,6 +273,14 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "desktopMode":
                 Desktop.startStylePicker(this);
+                prepareRestart();
+                break;
+            case "singleClick":
+                Desktop.startSingleClickPicker(this);
+                prepareRestart();
+                break;
+            case "doubleClick":
+                Desktop.startDoubleClickPicker(this);
                 prepareRestart();
                 break;
             case "iconHide":
