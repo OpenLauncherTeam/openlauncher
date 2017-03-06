@@ -15,6 +15,7 @@ import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.activity.SettingsActivity;
 
 import net.qiujuer.genius.blur.StackBlur;
@@ -35,7 +36,8 @@ public class LauncherAction {
             new ActionItem(Action.DeviceSettings, resources.getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp),
             new ActionItem(Action.LauncherSettings, resources.getString(R.string.minibar_5), R.drawable.ic_settings_black_24dp),
             //new ActionItem(Action.ThemePicker,resources.getString(R.string.minibar_6),R.drawable.ic_brush_black_24dp),
-            new ActionItem(Action.VolumeDialog, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp)
+            new ActionItem(Action.VolumeDialog, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp),
+            new ActionItem(Action.OpenAppDrawer, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp)
     };
 
     public static void RunAction(Action act, final Context c) {
@@ -126,6 +128,9 @@ public class LauncherAction {
             case LauncherSettings:
                 c.startActivity(new Intent(c, SettingsActivity.class));
                 break;
+            case OpenAppDrawer:
+                Home.launcher.openAppDrawer();
+                break;
         }
     }
 
@@ -165,6 +170,6 @@ public class LauncherAction {
     }
 
     public enum Action {
-        LockScreen, ClearRam, SetWallpaper, DeviceSettings, LauncherSettings, ThemePicker, VolumeDialog
+        LockScreen, ClearRam, SetWallpaper, DeviceSettings, LauncherSettings, ThemePicker, VolumeDialog, OpenAppDrawer
     }
 }

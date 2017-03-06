@@ -779,6 +779,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     /**
      * Call this to open the app drawer with animation
      */
+    public void openAppDrawer() {
+        openAppDrawer(desktop,-1,-1);
+    }
     public void openAppDrawer(View view) {
         openAppDrawer(view,-1,-1);
     }

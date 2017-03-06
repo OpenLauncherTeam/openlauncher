@@ -129,6 +129,14 @@ public class LauncherSettings {
         readDesktopData(gson, generalSettings.desktopMode);
     }
 
+    public void setSingleClickGesture(int value) {
+        generalSettings.singleClick = value;
+    }
+
+    public void setDoubleClickGesture(int value) {
+        generalSettings.doubleClick = value;
+    }
+
     public void switchDesktopMode(Desktop.DesktopMode mode) {
         writeSettings();
 
@@ -222,8 +230,8 @@ public class LauncherSettings {
         public boolean desktopSearchBar = true;
         public boolean fullscreen = false;
         public boolean swipe = false;
-        public boolean clickToOpen = false;
-        public boolean doubleClick = false;
+        public int singleClick = 0;
+        public int doubleClick = 0;
         public boolean showIndicator = true;
         public boolean desktopShowLabel = true;
         public boolean hideIcon = false;
