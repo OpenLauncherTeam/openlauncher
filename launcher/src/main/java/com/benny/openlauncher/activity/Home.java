@@ -549,7 +549,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.miniBarArrangement;
         if (minBarArrangement == null) {
             LauncherSettings.getInstance(this).generalSettings.miniBarArrangement = new ArrayList<>();
-            for (LauncherAction.ActionItem item : LauncherAction.actionItems) {
+            for (int i = 0; i < 6; i++) {
+                LauncherAction.ActionItem item = LauncherAction.actionItems[i];
                 LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("0" + item.label.toString());
                 labels.add(item.label.toString());
                 icons.add(item.icon);
