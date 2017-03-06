@@ -94,6 +94,17 @@
     <string name="settings_stylePicker_vertical">Vertical</string>
     <string name="settings_stylePicker_normal">Normal</string>
     <string name="settings_stylePicker_allApps">Show all apps (Experimental)</string>
+    <string name="settings_single_click_title">Single click action</string>
+    <string name="settings_double_click_title">Double click action</string>
+    <string name="settings_gesture_none">None</string>
+    <string name="settings_gesture_zero">Minbar Settings</string>
+    <string name="settings_gesture_one">Set wallpaper</string>
+    <string name="settings_gesture_two">Lock screen</string>
+    <string name="settings_gesture_three">Clear RAM</string>
+    <string name="settings_gesture_four">Device settings</string>
+    <string name="settings_gesture_five">Launcher Settings</string>
+    <string name="settings_gesture_six">Volume Dialog</string>
+    <string name="settings_gesture_seven">Open app drawer</string>
 
     <string name="settings_group_desktop">Desktop</string>
     <string name="settings_group_dock">Dock</string>
@@ -137,10 +148,10 @@
 
     <string name="settings_desktopSwipe">Fast swipe drawer</string>
     <string name="settings_desktopSwipe_summary">Swipe up on the drawer app icon to open the app drawer.</string>
-    <string name="settings_desktopClick">Fast click drawer</string>
-    <string name="settings_desktopClick_summary">Tap your desktop to open the app drawer.</string>
-    <string name="settings_doubleClick">Double click to lock screen</string>
-    <string name="settings_doubleClick_summary">Double tap your desktop to lock the device.</string>
+    <string name="settings_singleClick">Single click</string>
+    <string name="settings_singleClick_summary">Single click action.</string>
+    <string name="settings_doubleClick">Double click</string>
+    <string name="settings_doubleClick_summary">Double click action.</string>
 
     <string name="settings_colorDock">Dock</string>
     <string name="settings_colorDock_summary">Dock background color.</string>
@@ -175,6 +186,6 @@
     <string name="request_please_wait2">Searching for installed apps. Please wait.</string>
     <string name="request_toast">No apps selected. Show all apps in drawer?</string>
     <string name="settings_group_others">Others</string>
-    <string name="edit">Edit</string>
+    <string name="edit">EditMinBar</string>
 
 </resources>

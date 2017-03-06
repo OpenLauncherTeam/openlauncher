@@ -15,6 +15,8 @@ import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.MiniBarEditActivity;
 import com.benny.openlauncher.activity.SettingsActivity;
 
 import net.qiujuer.genius.blur.StackBlur;
@@ -22,6 +24,7 @@ import net.qiujuer.genius.blur.StackBlur;
 import java.io.IOException;
 import java.util.List;
 
+import static com.benny.openlauncher.activity.Home.launcher;
 import static com.benny.openlauncher.activity.Home.resources;
 
 public class LauncherAction {
@@ -29,17 +32,24 @@ public class LauncherAction {
     private static boolean clearingRam = false;
 
     public static ActionItem[] actionItems = new ActionItem[]{
+            new ActionItem(Action.EditMinBar, resources.getString(R.string.edit), R.drawable.ic_mode_edit_black_24dp),
             new ActionItem(Action.SetWallpaper, resources.getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp),
             new ActionItem(Action.LockScreen, resources.getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp),
             new ActionItem(Action.ClearRam, resources.getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp),
             new ActionItem(Action.DeviceSettings, resources.getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp),
             new ActionItem(Action.LauncherSettings, resources.getString(R.string.minibar_5), R.drawable.ic_settings_black_24dp),
             //new ActionItem(Action.ThemePicker,resources.getString(R.string.minibar_6),R.drawable.ic_brush_black_24dp),
-            new ActionItem(Action.VolumeDialog, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp)
+            new ActionItem(Action.VolumeDialog, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp),
+            new ActionItem(Action.OpenAppDrawer, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp)
     };
 
     public static void RunAction(Action act, final Context c) {
         switch (act) {
+            case EditMinBar:
+                Intent minbar = new Intent(c, MiniBarEditActivity.class);
+                c.startActivity(minbar);
+                launcher.initMinBar();
+                break;
             case LockScreen:
                 try {
                     ((DevicePolicyManager) c.getSystemService(Context.DEVICE_POLICY_SERVICE)).lockNow();
@@ -126,6 +136,9 @@ public class LauncherAction {
             case LauncherSettings:
                 c.startActivity(new Intent(c, SettingsActivity.class));
                 break;
+            case OpenAppDrawer:
+                Home.launcher.openAppDrawer();
+                break;
         }
     }
 
@@ -165,6 +178,6 @@ public class LauncherAction {
     }
 
     public enum Action {
-        LockScreen, ClearRam, SetWallpaper, DeviceSettings, LauncherSettings, ThemePicker, VolumeDialog
+        EditMinBar, LockScreen, ClearRam, SetWallpaper, DeviceSettings, LauncherSettings, ThemePicker, VolumeDialog, OpenAppDrawer
     }
 }
