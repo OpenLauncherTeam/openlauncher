@@ -541,15 +541,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
     public void initMinBar() {
         final ArrayList<String> labels = new ArrayList<>();
-        labels.add(getString(R.string.edit));
-
-        ArrayList<Integer> icons = new ArrayList<>();
-        icons.add(R.drawable.ic_mode_edit_black_24dp);
-
+        final ArrayList<Integer> icons = new ArrayList<>();
         final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.miniBarArrangement;
+
         if (minBarArrangement == null) {
             LauncherSettings.getInstance(this).generalSettings.miniBarArrangement = new ArrayList<>();
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 7; i++) {
                 LauncherAction.ActionItem item = LauncherAction.actionItems[i];
                 LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("0" + item.label.toString());
                 labels.add(item.label.toString());
@@ -585,21 +582,17 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         minBar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 0)
-                    startActivityForResult(new Intent(Home.this, MiniBarEditActivity.class), MINIBAR_EDIT);
-                else {
-                    LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
-                    LauncherAction.RunAction(action, Home.this);
-                    if (action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.DeviceSettings) {
-                        (new Handler()).postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                drawerLayout.closeDrawers();
-                            }
-                        }, 500);
-                    } else {
-                        drawerLayout.closeDrawers();
-                    }
+                LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
+                LauncherAction.RunAction(action, Home.this);
+                if (action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.DeviceSettings) {
+                    (new Handler()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            drawerLayout.closeDrawers();
+                        }
+                    }, 500);
+                } else {
+                    drawerLayout.closeDrawers();
                 }
             }
         });
@@ -719,8 +712,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 configureWidget(data);
             } else if (requestCode == REQUEST_CREATE_APPWIDGET) {
                 createWidget(data);
-            } else if (requestCode == MINIBAR_EDIT) {
-                initMinBar();
             }
         } else if (resultCode == RESULT_CANCELED && data != null) {
             int appWidgetId =

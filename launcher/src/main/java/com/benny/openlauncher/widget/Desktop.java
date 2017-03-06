@@ -414,22 +414,28 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                         case 0:
                             break;
                         case 1:
-                            LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
+                            LauncherAction.RunAction(LauncherAction.Action.EditMinBar, desktop.getContext());
                             break;
                         case 2:
-                            LauncherAction.RunAction(LauncherAction.Action.LockScreen, desktop.getContext());
+                            LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
                             break;
                         case 3:
-                            LauncherAction.RunAction(LauncherAction.Action.ClearRam, desktop.getContext());
+                            LauncherAction.RunAction(LauncherAction.Action.LockScreen, desktop.getContext());
                             break;
                         case 4:
-                            LauncherAction.RunAction(LauncherAction.Action.DeviceSettings, desktop.getContext());
+                            LauncherAction.RunAction(LauncherAction.Action.ClearRam, desktop.getContext());
                             break;
                         case 5:
-                            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, desktop.getContext());
+                            LauncherAction.RunAction(LauncherAction.Action.DeviceSettings, desktop.getContext());
                             break;
                         case 6:
+                            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, desktop.getContext());
+                            break;
+                        case 7:
                             LauncherAction.RunAction(LauncherAction.Action.VolumeDialog, desktop.getContext());
+                            break;
+                        case 8:
+                            LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, desktop.getContext());
                             break;
                         default:
                             break;
@@ -642,6 +648,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(context.getString(R.string.settings_single_click_title))
             .items(context.getString(R.string.settings_gesture_none),
+                context.getString(R.string.settings_gesture_zero),
                 context.getString(R.string.settings_gesture_one),
                 context.getString(R.string.settings_gesture_two),
                 context.getString(R.string.settings_gesture_three),

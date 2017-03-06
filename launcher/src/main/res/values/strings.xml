@@ -97,6 +97,7 @@
     <string name="settings_single_click_title">Single click action</string>
     <string name="settings_double_click_title">Double click action</string>
     <string name="settings_gesture_none">None</string>
+    <string name="settings_gesture_zero">Minbar Settings</string>
     <string name="settings_gesture_one">Set wallpaper</string>
     <string name="settings_gesture_two">Lock screen</string>
     <string name="settings_gesture_three">Clear RAM</string>
@@ -185,6 +186,6 @@
     <string name="request_please_wait2">Searching for installed apps. Please wait.</string>
     <string name="request_toast">No apps selected. Show all apps in drawer?</string>
     <string name="settings_group_others">Others</string>
-    <string name="edit">Edit</string>
+    <string name="edit">EditMinBar</string>
 
 </resources>
