@@ -1,16 +1,13 @@
 package com.benny.openlauncher.util;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -21,7 +18,6 @@ import com.benny.openlauncher.activity.SettingsActivity;
 
 import net.qiujuer.genius.blur.StackBlur;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.benny.openlauncher.activity.Home.launcher;
@@ -32,7 +28,7 @@ public class LauncherAction {
     private static boolean clearingRam = false;
 
     public static ActionItem[] actionItems = new ActionItem[]{
-            new ActionItem(Action.EditMinBar, resources.getString(R.string.edit), R.drawable.ic_mode_edit_black_24dp),
+            new ActionItem(Action.MinibarSettings, resources.getString(R.string.edit), R.drawable.ic_mode_edit_black_24dp),
             new ActionItem(Action.SetWallpaper, resources.getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp),
             new ActionItem(Action.LockScreen, resources.getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp),
             new ActionItem(Action.ClearRam, resources.getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp),
@@ -45,7 +41,7 @@ public class LauncherAction {
 
     public static void RunAction(Action act, final Context c) {
         switch (act) {
-            case EditMinBar:
+            case MinibarSettings:
                 Intent minbar = new Intent(c, MiniBarEditActivity.class);
                 c.startActivity(minbar);
                 launcher.initMinBar();
@@ -178,6 +174,6 @@ public class LauncherAction {
     }
 
     public enum Action {
-        EditMinBar, LockScreen, ClearRam, SetWallpaper, DeviceSettings, LauncherSettings, ThemePicker, VolumeDialog, OpenAppDrawer
+        MinibarSettings, LockScreen, ClearRam, SetWallpaper, DeviceSettings, LauncherSettings, ThemePicker, VolumeDialog, OpenAppDrawer
     }
 }

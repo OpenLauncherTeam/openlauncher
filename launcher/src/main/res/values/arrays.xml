@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/tools">
+    <string-array name="singleClickEntries">
+        <item>None</item>
+        <item>Open App Drawer</item>
+    </string-array>
+    <integer-array name="singleClickValues" translatable="false">
+        <item>0</item>
+        <item>8</item>
+    </integer-array>
+    <string-array name="doubleClickEntries">
+        <item>None</item>
+        <item>Minibar Settings</item>
+        <item>Set Wallpaper</item>
+        <item>Lock Screen</item>
+        <item>Clear RAM</item>
+        <item>Device Settings</item>
+        <item>Launcher Settings</item>
+        <item>Volume Dialog</item>
+        <item>Open App Drawer</item>
+    </string-array>
+    <integer-array name="doubleClickValues" translatable="false">
+      <item>0</item>
+      <item>1</item>
+      <item>2</item>
+      <item>3</item>
+      <item>4</item>
+      <item>5</item>
+      <item>6</item>
+      <item>7</item>
+      <item>8</item>
+    </integer-array>
+</resources>
