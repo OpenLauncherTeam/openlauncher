@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
-import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -36,6 +35,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
+
+import static com.benny.openlauncher.activity.Home.launcher;
 
 public class Desktop extends SmoothViewPager implements OnDragListener, DesktopCallBack {
     public int pageCount;
@@ -410,11 +411,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                 @Override
                 public boolean onDoubleTap(int i) {
-                    switch (LauncherSettings.getInstance(getContext()).generalSettings.doubleClick) {
+                    switch (getResources().getIntArray(R.array.doubleClickValues)[LauncherSettings.getInstance(getContext()).generalSettings.doubleClick]) {
                         case 0:
                             break;
                         case 1:
-                            LauncherAction.RunAction(LauncherAction.Action.EditMinBar, desktop.getContext());
+                            LauncherAction.RunAction(LauncherAction.Action.MinibarSettings, desktop.getContext());
                             break;
                         case 2:
                             LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
@@ -501,10 +502,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 @Override
                 public void onClick(View view) {
                     if (!desktop.inEditMode) {
-                        switch (LauncherSettings.getInstance(getContext()).generalSettings.singleClick) {
-                            case 0:
+                        switch (getResources().getIntArray(R.array.singleClickValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick]) {
+                            default:
                                 break;
-                            case 1:
+                            case 8:
                                 LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, desktop.getContext());
                                 break;
                         }
@@ -624,43 +625,31 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     public static void startSingleClickPicker(final Context context) {
-        final String[] items = new String[LauncherAction.actionItems.length];
-        for (int i = 0; i < LauncherAction.actionItems.length; i++) {
-            items[i] = LauncherAction.actionItems[i].toString();
-        }
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_double_click_title))
-            .items(context.getString(R.string.settings_gesture_none),
-                context.getString(R.string.settings_gesture_seven))
-            .itemsCallback(new MaterialDialog.ListCallback() {
+        builder.title(context.getString(R.string.settings_single_click_title))
+            .items(R.array.singleClickEntries)
+            .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.singleClick, new MaterialDialog.ListCallbackSingleChoice() {
                 @Override
-                public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                    LauncherSettings.getInstance(context).setDoubleClickGesture(position);
+                public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                    LauncherSettings.getInstance(context).setSingleClickGesture(position);
+                    return true;
                 }
-            }).show();
+            })
+            .show();
     }
 
     public static void startDoubleClickPicker(final Context context) {
-        final String[] items = new String[LauncherAction.actionItems.length];
-        for (int i = 0; i < LauncherAction.actionItems.length; i++) {
-            items[i] = LauncherAction.actionItems[i].toString();
-        }
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_single_click_title))
-            .items(context.getString(R.string.settings_gesture_none),
-                context.getString(R.string.settings_gesture_zero),
-                context.getString(R.string.settings_gesture_one),
-                context.getString(R.string.settings_gesture_two),
-                context.getString(R.string.settings_gesture_three),
-                context.getString(R.string.settings_gesture_four),
-                context.getString(R.string.settings_gesture_five),
-                context.getString(R.string.settings_gesture_six))
-            .itemsCallback(new MaterialDialog.ListCallback() {
+        builder.title(context.getString(R.string.settings_double_click_title))
+            .items(R.array.doubleClickEntries)
+            .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.doubleClick, new MaterialDialog.ListCallbackSingleChoice() {
                 @Override
-                public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                    LauncherSettings.getInstance(context).setSingleClickGesture(position);
+                public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                    LauncherSettings.getInstance(context).setDoubleClickGesture(position);
+                    return true;
                 }
-            }).show();
+            })
+            .show();
     }
 
     public static class Item implements Parcelable {
