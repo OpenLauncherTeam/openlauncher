@@ -36,8 +36,6 @@ import java.util.List;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
-import static com.benny.openlauncher.activity.Home.launcher;
-
 public class Desktop extends SmoothViewPager implements OnDragListener, DesktopCallBack {
     public int pageCount;
 
@@ -415,7 +413,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                         case 0:
                             break;
                         case 1:
-                            LauncherAction.RunAction(LauncherAction.Action.MinibarSettings, desktop.getContext());
+                            LauncherAction.RunAction(LauncherAction.Action.EditMinBar, desktop.getContext());
                             break;
                         case 2:
                             LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
