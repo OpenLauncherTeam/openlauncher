@@ -53,9 +53,9 @@ public class Init extends OnboarderActivity {
 
     @Override
     public void onSkipButtonPressed() {
-        // Optional: by default it skips onboarder to the end
-        super.onSkipButtonPressed();
-        // Define your actions when the user press 'Skip' button
+        // skips onboarder to the last page
+        // super.onSkipButtonPressed();
+        // defines the skip button behavior
         RockIt();
     }
 
