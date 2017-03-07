@@ -28,7 +28,7 @@ public class LauncherAction {
     private static boolean clearingRam = false;
 
     public static ActionItem[] actionItems = new ActionItem[]{
-            new ActionItem(Action.MinibarSettings, resources.getString(R.string.edit), R.drawable.ic_mode_edit_black_24dp),
+            new ActionItem(Action.EditMinBar, resources.getString(R.string.edit), R.drawable.ic_mode_edit_black_24dp),
             new ActionItem(Action.SetWallpaper, resources.getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp),
             new ActionItem(Action.LockScreen, resources.getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp),
             new ActionItem(Action.ClearRam, resources.getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp),
@@ -41,7 +41,7 @@ public class LauncherAction {
 
     public static void RunAction(Action act, final Context c) {
         switch (act) {
-            case MinibarSettings:
+            case EditMinBar:
                 Intent minbar = new Intent(c, MiniBarEditActivity.class);
                 c.startActivity(minbar);
                 launcher.initMinBar();
@@ -174,6 +174,6 @@ public class LauncherAction {
     }
 
     public enum Action {
-        MinibarSettings, LockScreen, ClearRam, SetWallpaper, DeviceSettings, LauncherSettings, ThemePicker, VolumeDialog, OpenAppDrawer
+        EditMinBar, LockScreen, ClearRam, SetWallpaper, DeviceSettings, LauncherSettings, ThemePicker, VolumeDialog, OpenAppDrawer
     }
 }
