@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.hideApps.Activity_hideApps;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.DialogUtils;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppDrawer;
 import com.benny.openlauncher.widget.Desktop;
@@ -85,6 +86,10 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                     .add(new MaterialPrefFragment.TBPref("swipe", (getString(R.string.settings_desktopSwipe)), (getString(R.string.settings_desktopSwipe_summary)), generalSettings.swipe))
                     .add(new MaterialPrefFragment.ButtonPref("singleClick", (getString(R.string.settings_singleClick)), (getString(R.string.settings_singleClick_summary))))
                     .add(new MaterialPrefFragment.ButtonPref("doubleClick", (getString(R.string.settings_doubleClick)), (getString(R.string.settings_doubleClick_summary))))
+                    .add(new MaterialPrefFragment.ButtonPref("pinch", (getString(R.string.settings_pinch)), (getString(R.string.settings_pinch_summary))))
+                    .add(new MaterialPrefFragment.ButtonPref("unpinch", (getString(R.string.settings_unpinch)), (getString(R.string.settings_unpinch_summary))))
+                    .add(new MaterialPrefFragment.ButtonPref("swipeDown", (getString(R.string.settings_swipeDown)), (getString(R.string.settings_swipeDown_summary))))
+                    .add(new MaterialPrefFragment.ButtonPref("swipeUp", (getString(R.string.settings_swipeUp)), (getString(R.string.settings_swipeUp_summary))))
 
                     .add(new MaterialPrefFragment.GroupTitle(getString(R.string.settings_group_color)))
                     .add(new MaterialPrefFragment.ColorPref("dockBackground",(getString(R.string.settings_colorDock)),(getString(R.string.settings_colorDock_summary)),generalSettings.dockColor))
@@ -276,11 +281,27 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 prepareRestart();
                 break;
             case "singleClick":
-                Desktop.startSingleClickPicker(this);
+                DialogUtils.startSingleClickPicker(this);
                 prepareRestart();
                 break;
             case "doubleClick":
-                Desktop.startDoubleClickPicker(this);
+                DialogUtils.startDoubleClickPicker(this);
+                prepareRestart();
+                break;
+            case "pinch":
+                DialogUtils.startPinchPicker(this);
+                prepareRestart();
+                break;
+            case "unpinch":
+                DialogUtils.startUnpinchPicker(this);
+                prepareRestart();
+                break;
+            case "swipeDown":
+                DialogUtils.startSwipeDownPicker(this);
+                prepareRestart();
+                break;
+            case "swipeUp":
+                DialogUtils.startSwipeUpPicker(this);
                 prepareRestart();
                 break;
             case "iconHide":
