@@ -8,7 +8,7 @@
         <item>0</item>
         <item>8</item>
     </integer-array>
-    <string-array name="doubleClickEntries">
+    <string-array name="gestureEntries">
         <item>None</item>
         <item>Minibar Settings</item>
         <item>Set Wallpaper</item>
@@ -19,7 +19,7 @@
         <item>Volume Dialog</item>
         <item>Open App Drawer</item>
     </string-array>
-    <integer-array name="doubleClickValues" translatable="false">
+    <integer-array name="gestureValues" translatable="false">
       <item>0</item>
       <item>1</item>
       <item>2</item>

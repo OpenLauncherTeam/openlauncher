@@ -46,6 +46,32 @@ public class LauncherAction {
                 c.startActivity(minbar);
                 launcher.initMinBar();
                 break;
+            case SetWallpaper:
+                MaterialDialog.Builder b = new MaterialDialog.Builder(c);
+                b.title(R.string.wallpaper);
+                b.iconRes(R.drawable.ic_photo_black_24dp);
+                String[] s = new String[]{c.getString(R.string.wallpaper_set), c.getString(R.string.wallpaper_blur)};
+                b.items(s);
+                b.itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                        switch (position) {
+                            case 0:
+                                Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
+                                c.startActivity(Intent.createChooser(intent, c.getString(R.string.wallpaper_pick)));
+                                break;
+                            case 1:
+                                try {
+                                    WallpaperManager.getInstance(c).setBitmap(StackBlur.blur(Tool.drawableToBitmap(c.getWallpaper()), 10, false));
+                                } catch (Exception e) {
+                                    Tool.toast(c, c.getString(R.string.wallpaper_unable_to_blur));
+                                }
+                                break;
+                        }
+                    }
+                });
+                b.show();
+                break;
             case LockScreen:
                 try {
                     ((DevicePolicyManager) c.getSystemService(Context.DEVICE_POLICY_SERVICE)).lockNow();
@@ -96,41 +122,15 @@ public class LauncherAction {
                     }
                 }.execute();
                 break;
-            case SetWallpaper:
-                MaterialDialog.Builder b = new MaterialDialog.Builder(c);
-                b.title(R.string.wallpaper);
-                b.iconRes(R.drawable.ic_photo_black_24dp);
-                String[] s = new String[]{c.getString(R.string.wallpaper_set), c.getString(R.string.wallpaper_blur)};
-                b.items(s);
-                b.itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        switch (position) {
-                            case 0:
-                                Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
-                                c.startActivity(Intent.createChooser(intent, c.getString(R.string.wallpaper_pick)));
-                                break;
-                            case 1:
-                                try {
-                                    WallpaperManager.getInstance(c).setBitmap(StackBlur.blur(Tool.drawableToBitmap(c.getWallpaper()), 10, false));
-                                } catch (Exception e) {
-                                    Tool.toast(c, c.getString(R.string.wallpaper_unable_to_blur));
-                                }
-                                break;
-                        }
-                    }
-                });
-                b.show();
-                break;
             case DeviceSettings:
                 c.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
+                break;
+            case LauncherSettings:
+                c.startActivity(new Intent(c, SettingsActivity.class));
                 break;
             case VolumeDialog:
                 AudioManager audioManager = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
                 audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamVolume(AudioManager.STREAM_RING), AudioManager.FLAG_SHOW_UI);
-                break;
-            case LauncherSettings:
-                c.startActivity(new Intent(c, SettingsActivity.class));
                 break;
             case OpenAppDrawer:
                 Home.launcher.openAppDrawer();
@@ -174,6 +174,6 @@ public class LauncherAction {
     }
 
     public enum Action {
-        EditMinBar, LockScreen, ClearRam, SetWallpaper, DeviceSettings, LauncherSettings, ThemePicker, VolumeDialog, OpenAppDrawer
+        EditMinBar, SetWallpaper, LockScreen, ClearRam, DeviceSettings, LauncherSettings, ThemePicker, VolumeDialog, OpenAppDrawer
     }
 }

@@ -379,12 +379,72 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             return new SimpleFingerGestures.OnFingerGestureListener() {
                 @Override
                 public boolean onSwipeUp(int i, long l, double v) {
-                    return false;
+                    switch (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeUp]) {
+                        case 0:
+                            break;
+                        case 1:
+                            LauncherAction.RunAction(LauncherAction.Action.EditMinBar, desktop.getContext());
+                            break;
+                        case 2:
+                            LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
+                            break;
+                        case 3:
+                            LauncherAction.RunAction(LauncherAction.Action.LockScreen, desktop.getContext());
+                            break;
+                        case 4:
+                            LauncherAction.RunAction(LauncherAction.Action.ClearRam, desktop.getContext());
+                            break;
+                        case 5:
+                            LauncherAction.RunAction(LauncherAction.Action.DeviceSettings, desktop.getContext());
+                            break;
+                        case 6:
+                            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, desktop.getContext());
+                            break;
+                        case 7:
+                            LauncherAction.RunAction(LauncherAction.Action.VolumeDialog, desktop.getContext());
+                            break;
+                        case 8:
+                            LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, desktop.getContext());
+                            break;
+                        default:
+                            break;
+                    }
+                    return true;
                 }
 
                 @Override
                 public boolean onSwipeDown(int i, long l, double v) {
-                    return false;
+                    switch (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeDown]) {
+                        case 0:
+                            break;
+                        case 1:
+                            LauncherAction.RunAction(LauncherAction.Action.EditMinBar, desktop.getContext());
+                            break;
+                        case 2:
+                            LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
+                            break;
+                        case 3:
+                            LauncherAction.RunAction(LauncherAction.Action.LockScreen, desktop.getContext());
+                            break;
+                        case 4:
+                            LauncherAction.RunAction(LauncherAction.Action.ClearRam, desktop.getContext());
+                            break;
+                        case 5:
+                            LauncherAction.RunAction(LauncherAction.Action.DeviceSettings, desktop.getContext());
+                            break;
+                        case 6:
+                            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, desktop.getContext());
+                            break;
+                        case 7:
+                            LauncherAction.RunAction(LauncherAction.Action.VolumeDialog, desktop.getContext());
+                            break;
+                        case 8:
+                            LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, desktop.getContext());
+                            break;
+                        default:
+                            break;
+                    }
+                    return true;
                 }
 
                 @Override
@@ -399,17 +459,77 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                 @Override
                 public boolean onPinch(int i, long l, double v) {
-                    return false;
+                    switch (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.pinch]) {
+                        case 0:
+                            break;
+                        case 1:
+                            LauncherAction.RunAction(LauncherAction.Action.EditMinBar, desktop.getContext());
+                            break;
+                        case 2:
+                            LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
+                            break;
+                        case 3:
+                            LauncherAction.RunAction(LauncherAction.Action.LockScreen, desktop.getContext());
+                            break;
+                        case 4:
+                            LauncherAction.RunAction(LauncherAction.Action.ClearRam, desktop.getContext());
+                            break;
+                        case 5:
+                            LauncherAction.RunAction(LauncherAction.Action.DeviceSettings, desktop.getContext());
+                            break;
+                        case 6:
+                            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, desktop.getContext());
+                            break;
+                        case 7:
+                            LauncherAction.RunAction(LauncherAction.Action.VolumeDialog, desktop.getContext());
+                            break;
+                        case 8:
+                            LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, desktop.getContext());
+                            break;
+                        default:
+                            break;
+                    }
+                    return true;
                 }
 
                 @Override
                 public boolean onUnpinch(int i, long l, double v) {
-                    return false;
+                    switch (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.unpinch]) {
+                        case 0:
+                            break;
+                        case 1:
+                            LauncherAction.RunAction(LauncherAction.Action.EditMinBar, desktop.getContext());
+                            break;
+                        case 2:
+                            LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
+                            break;
+                        case 3:
+                            LauncherAction.RunAction(LauncherAction.Action.LockScreen, desktop.getContext());
+                            break;
+                        case 4:
+                            LauncherAction.RunAction(LauncherAction.Action.ClearRam, desktop.getContext());
+                            break;
+                        case 5:
+                            LauncherAction.RunAction(LauncherAction.Action.DeviceSettings, desktop.getContext());
+                            break;
+                        case 6:
+                            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, desktop.getContext());
+                            break;
+                        case 7:
+                            LauncherAction.RunAction(LauncherAction.Action.VolumeDialog, desktop.getContext());
+                            break;
+                        case 8:
+                            LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, desktop.getContext());
+                            break;
+                        default:
+                            break;
+                    }
+                    return true;
                 }
 
                 @Override
                 public boolean onDoubleTap(int i) {
-                    switch (getResources().getIntArray(R.array.doubleClickValues)[LauncherSettings.getInstance(getContext()).generalSettings.doubleClick]) {
+                    switch (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.doubleClick]) {
                         case 0:
                             break;
                         case 1:
@@ -620,34 +740,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                         LauncherSettings.getInstance(context).switchDesktopMode(DesktopMode.values()[position]);
                     }
                 }).show();
-    }
-
-    public static void startSingleClickPicker(final Context context) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_single_click_title))
-            .items(R.array.singleClickEntries)
-            .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.singleClick, new MaterialDialog.ListCallbackSingleChoice() {
-                @Override
-                public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                    LauncherSettings.getInstance(context).setSingleClickGesture(position);
-                    return true;
-                }
-            })
-            .show();
-    }
-
-    public static void startDoubleClickPicker(final Context context) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_double_click_title))
-            .items(R.array.doubleClickEntries)
-            .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.doubleClick, new MaterialDialog.ListCallbackSingleChoice() {
-                @Override
-                public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                    LauncherSettings.getInstance(context).setDoubleClickGesture(position);
-                    return true;
-                }
-            })
-            .show();
     }
 
     public static class Item implements Parcelable {

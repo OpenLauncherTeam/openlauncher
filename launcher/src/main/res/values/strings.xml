@@ -96,6 +96,10 @@
     <string name="settings_stylePicker_allApps">Show all apps (Experimental)</string>
     <string name="settings_single_click_title">Single click action</string>
     <string name="settings_double_click_title">Double click action</string>
+    <string name="settings_pinch_title">Pinch action</string>
+    <string name="settings_unpinch_title">Unpinch action</string>
+    <string name="settings_swipe_down_title">Swipe down action</string>
+    <string name="settings_swipe_up_title">Swipe up action</string>
     <string name="settings_gesture_none">None</string>
     <string name="settings_gesture_zero">Minbar Settings</string>
     <string name="settings_gesture_one">Set wallpaper</string>
@@ -109,7 +113,7 @@
     <string name="settings_group_desktop">Desktop</string>
     <string name="settings_group_dock">Dock</string>
     <string name="settings_group_drawer">App Drawer</string>
-    <string name="settings_group_input">Input</string>
+    <string name="settings_group_input">Gestures</string>
     <string name="settings_group_color">Colors</string>
     <string name="settings_group_icons">Icons</string>
     <string name="settings_group_other">Other</string>
@@ -152,6 +156,14 @@
     <string name="settings_singleClick_summary">Single click action.</string>
     <string name="settings_doubleClick">Double click</string>
     <string name="settings_doubleClick_summary">Double click action.</string>
+    <string name="settings_pinch">Pinch</string>
+    <string name="settings_pinch_summary">Pinch action.</string>
+    <string name="settings_unpinch">Unpinch</string>
+    <string name="settings_unpinch_summary">Unpinch action.</string>
+    <string name="settings_swipeDown">Swipe Down</string>
+    <string name="settings_swipeDown_summary">Swipe down action.</string>
+    <string name="settings_swipeUp">Swipe up</string>
+    <string name="settings_swipeUp_summary">Swipe up action.</string>
 
     <string name="settings_colorDock">Dock</string>
     <string name="settings_colorDock_summary">Dock background color.</string>

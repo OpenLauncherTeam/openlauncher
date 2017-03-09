@@ -137,6 +137,22 @@ public class LauncherSettings {
         generalSettings.doubleClick = value;
     }
 
+    public void setPinchGesture(int value) {
+        generalSettings.pinch = value;
+    }
+
+    public void setUnpinchGesture(int value) {
+        generalSettings.unpinch = value;
+    }
+
+    public void setSwipeDownGesture(int value) {
+        generalSettings.swipeDown = value;
+    }
+
+    public void setSwipeUpGesture(int value) {
+        generalSettings.swipeUp = value;
+    }
+
     public void switchDesktopMode(Desktop.DesktopMode mode) {
         writeSettings();
 
@@ -232,6 +248,10 @@ public class LauncherSettings {
         public boolean swipe = false;
         public int singleClick = 0;
         public int doubleClick = 0;
+        public int pinch = 0;
+        public int unpinch = 0;
+        public int swipeDown = 0;
+        public int swipeUp = 0;
         public boolean showIndicator = true;
         public boolean desktopShowLabel = true;
         public boolean hideIcon = false;
