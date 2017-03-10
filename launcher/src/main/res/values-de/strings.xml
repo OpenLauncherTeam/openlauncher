@@ -94,6 +94,21 @@
     <string name="settings_stylePicker_vertical">Vertikal</string>
     <string name="settings_stylePicker_normal">Normal</string>
     <string name="settings_stylePicker_allApps">Zeige alle Apps (Experimentell)</string>
+    <string name="settings_single_click_title">Klick Aktion</string>
+    <string name="settings_double_click_title">Doppelklick Aktion</string>
+    <string name="settings_pinch_title">Zusammenkneifen Aktion</string>
+    <string name="settings_unpinch_title">Auseinander Ziehen Aktion</string>
+    <string name="settings_swipe_down_title">Nach unten Wischen Aktion</string>
+    <string name="settings_swipe_up_title">Nach oben Wischen Aktion</string>
+    <string name="settings_gesture_none">Nichts</string>
+    <string name="settings_gesture_zero">Minbar Einstellungen</string>
+    <string name="settings_gesture_one">Wallpaper aussuchen</string>
+    <string name="settings_gesture_two">Bildschirm sperren</string>
+    <string name="settings_gesture_three">RAM freigeben</string>
+    <string name="settings_gesture_four">Geräteeinstellungen</string>
+    <string name="settings_gesture_five">Launcher Einstellungen</string>
+    <string name="settings_gesture_six">Lautstärke</string>
+    <string name="settings_gesture_seven">App Drawer öffnen</string>
 
     <string name="settings_group_desktop">Desktop</string>
     <string name="settings_group_dock">Dock</string>
@@ -137,12 +152,20 @@
     <string name="settings_drawerIndicator">Seitenindikator/Scrollbar</string>
     <string name="settings_drawerIndicator_summary">Zeige den Seitenindikator bzw. die Scrollbar im Drawer an.</string>
 
+    <string name="settings_singleClick">Einfacher Klick</string>
+    <string name="settings_singleClick_summary">Einfacher Klick Aktion.</string>
+    <string name="settings_doubleClick">Doppelklick</string>
+    <string name="settings_doubleClick_summary">Doppelklick Aktion.</string>
+    <string name="settings_pinch">Zusammenkneifen</string>
+    <string name="settings_pinch_summary">Zusammenkneifen Aktion.</string>
+    <string name="settings_unpinch">Auseinander Ziehen</string>
+    <string name="settings_unpinch_summary">Auseinander Ziehen Aktion.</string>
+    <string name="settings_swipeDown">Nach unten Wischen</string>
+    <string name="settings_swipeDown_summary">Nach unten Wischen Aktion.</string>
+    <string name="settings_swipeUp">Nach oben Wischen</string>
+    <string name="settings_swipeUp_summary">Nach oben Wischen Aktion.</string>
     <string name="settings_desktopSwipe">Drawer: Wischen</string>
     <string name="settings_desktopSwipe_summary">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
-    <string name="settings_desktopClick">Drawer: Klicken</string>
-    <string name="settings_desktopClick_summary">Klicke auf den Desktop um den App Drawer zu öffnen.</string>
-    <string name="settings_doubleClick">Doppelklick</string>
-    <string name="settings_doubleClick_summary">Doppelklick auf den Desktop um den Bildschirm zu sperren.</string>
 
     <string name="settings_colorDock">Dock</string>
     <string name="settings_colorDock_summary">Dock Hintergrundfarbe.</string>
