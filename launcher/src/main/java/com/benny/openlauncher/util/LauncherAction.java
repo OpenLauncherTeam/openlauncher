@@ -42,9 +42,8 @@ public class LauncherAction {
     public static void RunAction(Action act, final Context c) {
         switch (act) {
             case EditMinBar:
-                Intent minbar = new Intent(c, MiniBarEditActivity.class);
-                c.startActivity(minbar);
-                launcher.initMinBar();
+                Intent intent1 = new Intent(c, MiniBarEditActivity.class);
+                c.startActivity(intent1);
                 break;
             case SetWallpaper:
                 MaterialDialog.Builder b = new MaterialDialog.Builder(c);
