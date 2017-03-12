@@ -1,40 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
+        android:layout_marginLeft="14dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="Title"
         android:gravity="center"
-        android:layout_width="60dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:id="@+id/itemTitle"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="24dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="5"
         android:gravity="center"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/valueTitle"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="60dp" />
+        android:layout_width="wrap_content"
+        android:layout_alignRight="@+id/itemTitle"
+        android:layout_alignEnd="@+id/itemTitle"
+        android:layout_below="@+id/itemTitle"
+        android:layout_alignLeft="@+id/itemTitle"
+        android:layout_alignStart="@+id/itemTitle" />
 
     <SeekBar
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/valueBar"
-        app:layout_constraintBottom_toBottomOf="@+id/valueTitle"
-        app:layout_constraintTop_toTopOf="@+id/valueTitle"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintLeft_toRightOf="@+id/valueTitle" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_toRightOf="@+id/valueTitle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/valueTitle"
+        android:layout_below="@+id/itemTitle" />
+</RelativeLayout>

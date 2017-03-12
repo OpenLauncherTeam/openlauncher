@@ -42,6 +42,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.launcheranim.LauncherLoadingIcon;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
@@ -63,6 +64,7 @@ import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.MiniPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
 import com.benny.openlauncher.widget.SwipeListView;
+import com.google.gson.JsonSyntaxException;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.util.ArrayList;
@@ -155,16 +157,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             now = System.currentTimeMillis();
 
             loadingIcon.setLoading(true);
-            new AsyncTask<Void, Void, Void>() {
+            new AsyncTask<Void, Void, Boolean>() {
                 @Override
-                protected Void doInBackground(Void... voids) {
+                protected Boolean doInBackground(Void... voids) {
                     //We read all the settings from the file through Gson, it is slow on low end devices.
-                    LauncherSettings.getInstance(Home.this).readSettings();
-                    return null;
+                    return LauncherSettings.getInstance(Home.this).readSettings();
                 }
 
                 @Override
-                protected void onPostExecute(Void aVoid) {
+                protected void onPostExecute(Boolean result) {
                     loadingIcon.setLoading(false);
                     loadingSplash.animate().alpha(0).withEndAction(new Runnable() {
                         @Override
@@ -173,6 +174,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                         }
                     });
                     init();
+                    if (!result){
+                        if (Home.launcher != null)
+                        Tool.DialogHelper.alert(Home.launcher,"Some settings can't be read","Developer's mistake, hope you understand! Some of the settings will be reset to default value.").show();
+                    }
                 }
             }.execute();
         }
@@ -571,6 +576,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         }
 
 
+        minBar.setPadding(0,Tool.getStatusBarHeight(this),0,Tool.getNavBarHeight(this));
         minBar.setAdapter(new IconListAdapter(this, labels, icons));
         minBar.setOnSwipeRight(new SwipeListView.OnSwipeRight() {
             @Override

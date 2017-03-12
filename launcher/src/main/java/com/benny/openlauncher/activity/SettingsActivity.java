@@ -52,7 +52,18 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle(R.string.settings);
 
-        SettingsFragment settings = new SettingsFragment();
+        //SettingsFragment settings = new SettingsFragment();
+
+        MaterialPrefFragment settings = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this,Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), false)
+                .add(new MaterialPrefFragment.ButtonPref("desktopSettings", getResources().getDrawable(R.drawable.ic_desktop_windows_black_24dp),getString(R.string.settings_group_desktop),null))
+                .add(new MaterialPrefFragment.ButtonPref("dockSettings", getResources().getDrawable(R.drawable.ic_dock_black_24dp),getString(R.string.settings_group_dock),null))
+                .add(new MaterialPrefFragment.ButtonPref("drawerSettings", getResources().getDrawable(R.drawable.ic_apps_black_24dp),getString(R.string.settings_group_drawer),null))
+                .add(new MaterialPrefFragment.ButtonPref("inputSettings", getResources().getDrawable(R.drawable.ic_gesture_black_24dp),getString(R.string.settings_group_input),null))
+                .add(new MaterialPrefFragment.ButtonPref("colorsSettings", getResources().getDrawable(R.drawable.ic_color_lens_black_24dp),getString(R.string.settings_group_color),null))
+                .add(new MaterialPrefFragment.ButtonPref("iconsSettings", getResources().getDrawable(R.drawable.ic_android_black_24dp),getString(R.string.settings_group_icons),null))
+                .add(new MaterialPrefFragment.ButtonPref("otherSettings", getResources().getDrawable(R.drawable.ic_more_horiz_black_24dp),getString(R.string.settings_group_other),null))
+                .setOnPrefClickedListener(this));
+
         getSupportFragmentManager().beginTransaction().add(R.id.ll, settings).commit();
     }
 
@@ -154,6 +165,9 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 Intent intent = new Intent(this, AboutActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                break;
+            case android.R.id.home:
+                onBackPressed();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -288,6 +302,27 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
     @Override
     public void onPrefClicked(String id) {
         switch (id) {
+            case "desktopSettings":
+                onSettingsSelected(0);
+                break;
+            case "dockSettings":
+                onSettingsSelected(1);
+                break;
+            case "drawerSettings":
+                onSettingsSelected(2);
+                break;
+            case "inputSettings":
+                onSettingsSelected(3);
+                break;
+            case "colorsSettings":
+                onSettingsSelected(4);
+                break;
+            case "iconsSettings":
+                onSettingsSelected(5);
+                break;
+            case "otherSettings":
+                onSettingsSelected(6);
+                break;
             case "restart":
                 if (Home.launcher != null)
                     Home.launcher.recreate();
