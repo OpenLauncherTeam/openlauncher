@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.benny.openlauncher.activity.Home.launcher;
+
 public class MiniBarEditActivity extends AppCompatActivity implements ItemTouchCallback {
     RecyclerView recyclerView;
     private FastItemAdapter<Item> adapter;
@@ -57,7 +59,7 @@ public class MiniBarEditActivity extends AppCompatActivity implements ItemTouchC
         final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.miniBarArrangement;
         for (String act : minBarArrangement) {
             LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act.substring(1));
-            adapter.add(new Item(i,item,act.charAt(0) == '0'));
+            adapter.add(new Item(i, item, act.charAt(0) == '0'));
             i++;
         }
 
@@ -77,21 +79,26 @@ public class MiniBarEditActivity extends AppCompatActivity implements ItemTouchC
     }
 
     @Override
-    public boolean itemTouchOnMove(int oldPosition, int newPosition) {
-        setResult(RESULT_OK);
+    protected void onStop() {
+        if (launcher != null)
+            launcher.initMinBar();
+        super.onStop();
+    }
 
+    @Override
+    public boolean itemTouchOnMove(int oldPosition, int newPosition) {
         Collections.swap(adapter.getAdapterItems(), oldPosition, newPosition);
         adapter.notifyAdapterDataSetChanged();
         return false;
     }
 
-    public static class Item extends AbstractItem<Item,Item.ViewHolder>{
+    public static class Item extends AbstractItem<Item, Item.ViewHolder> {
         public final long id;
         public final LauncherAction.ActionItem item;
         public boolean enable;
         public boolean edited;
 
-        public Item(long id, LauncherAction.ActionItem item,boolean enable) {
+        public Item(long id, LauncherAction.ActionItem item, boolean enable) {
             this.id = id;
             this.item = item;
             this.enable = enable;
@@ -136,13 +143,13 @@ public class MiniBarEditActivity extends AppCompatActivity implements ItemTouchC
             super.bindView(holder, payloads);
         }
 
-        public static class ViewHolder extends RecyclerView.ViewHolder{
+        public static class ViewHolder extends RecyclerView.ViewHolder {
             TextView tv;
             TextView tv2;
             ImageView iv;
             CheckBox cb;
 
-            public  ViewHolder(View itemView) {
+            public ViewHolder(View itemView) {
                 super(itemView);
                 tv = (TextView) itemView.findViewById(R.id.tv);
                 tv2 = (TextView) itemView.findViewById(R.id.tv2);
