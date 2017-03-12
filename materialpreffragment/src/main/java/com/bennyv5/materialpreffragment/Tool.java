@@ -1,13 +1,14 @@
 package com.bennyv5.materialpreffragment;
 
 import android.content.*;
+import android.content.res.Resources;
 import android.util.*;
 import java.util.*;
 import android.view.*;
 import android.widget.*;
 import android.support.v7.app.*;
 
-public class CommonUtility
+public class Tool
 {
 	public static int pixelToDp(Context ctx,int in){
 		int out = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,in,ctx.getResources().getDisplayMetrics());
@@ -24,5 +25,10 @@ public class CommonUtility
 	
 	public static ViewGroup.LayoutParams matchParentWidthLayoutParams(){
 		return new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+	}
+
+	public static int dp2px(float dp, Context context) {
+		Resources resources = context.getResources();
+		return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
 	}
 }

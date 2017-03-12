@@ -7,6 +7,7 @@ import android.graphics.Color;
 import com.benny.openlauncher.widget.AppDrawer;
 import com.benny.openlauncher.widget.Desktop;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
 
 import java.io.IOException;
@@ -112,7 +113,8 @@ public class LauncherSettings {
         }
     }
 
-    public void readSettings() {
+    public boolean readSettings() {
+        boolean noError = true;
         pref = context.getSharedPreferences("LauncherSettings", Context.MODE_PRIVATE);
         iconCacheIDs.clear();
         init = true;
@@ -123,10 +125,24 @@ public class LauncherSettings {
         if (raw == null)
             generalSettings = new GeneralSettings();
         else
-            generalSettings = gson.fromJson(raw, GeneralSettings.class);
+            try {
+                generalSettings = gson.fromJson(raw, GeneralSettings.class);
+            } catch (JsonSyntaxException error) {
+                generalSettings = new GeneralSettings();
+                noError = false;
+            }
 
-        readDockData(gson, generalSettings.desktopMode);
-        readDesktopData(gson, generalSettings.desktopMode);
+        try {
+            readDockData(gson, generalSettings.desktopMode);
+        } catch (JsonSyntaxException error) {
+            noError = false;
+        }
+        try {
+            readDesktopData(gson, generalSettings.desktopMode);
+        } catch (JsonSyntaxException error) {
+            noError = false;
+        }
+        return noError;
     }
 
     public void setSingleClickGesture(int value) {
@@ -201,7 +217,7 @@ public class LauncherSettings {
     }
 
     public Gson writeSettings() {
-        if (generalSettings == null)return null;
+        if (generalSettings == null) return null;
 
         Gson gson = new Gson();
 
@@ -233,6 +249,7 @@ public class LauncherSettings {
         return gson;
     }
 
+    //Edit this more carefully as changing the type of a field will cause an parsing error when the launcher start.
     public static class GeneralSettings {
         //Icon
         public int iconSize = 58;

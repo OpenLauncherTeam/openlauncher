@@ -14,10 +14,7 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Handler;
-import android.os.StatFs;
-import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
@@ -36,7 +33,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -46,10 +42,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.RandomAccessFile;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 
 import static android.content.Context.ACTIVITY_SERVICE;
@@ -339,7 +332,7 @@ public class Tool {
 
     public static void startApp(Context c, AppManager.App app) {
         if (app.packageName.equals("com.benny.openlauncher")) {
-            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings,c);
+            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, c);
         } else {
             try {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -463,18 +456,32 @@ public class Tool {
         return "<font color='" + String.format("#%06X", 0xFFFFFF & color) + "'>" + str + "</font>";
     }
 
-    public static void askForText(String title, String defaultText, Context c, final OnTextGotListener listener) {
-        new MaterialDialog.Builder(c)
-                .title(title)
-                .input(null, defaultText, new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                        listener.hereIsTheText(input.toString());
-                    }
-                })
-                .positiveText(R.string.ok)
-                .negativeText(R.string.cancel)
-                .show();
+    public static class DialogHelper {
+        public static MaterialDialog.Builder promptInputText(String title, String defaultText, Context c, final OnTextResultListener listener) {
+            MaterialDialog.Builder b = new MaterialDialog.Builder(c);
+            b.title(title);
+            b.input(null, defaultText, new MaterialDialog.InputCallback() {
+                @Override
+                public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                    listener.hereIsTheText(input.toString());
+                }
+            });
+            b.positiveText(R.string.ok);
+            b.negativeText(R.string.cancel);
+            return b;
+        }
+
+        public interface OnTextResultListener {
+            void hereIsTheText(String str);
+        }
+
+        public static MaterialDialog.Builder alert(Context context, String title, String msg) {
+            MaterialDialog.Builder b = new MaterialDialog.Builder(context);
+            b.title(title);
+            b.content(msg);
+            b.positiveText(R.string.ok);
+            return b;
+        }
     }
 
     public static void createScaleInScaleOutAnim(final View view, final Runnable endAction) {
@@ -491,10 +498,6 @@ public class Tool {
         }, 80);
     }
 
-    public interface OnTextGotListener {
-        void hereIsTheText(String str);
-    }
-
     public static String getFreeRAM(Context context) {
         ActivityManager actManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
@@ -502,11 +505,10 @@ public class Tool {
 
         long totalMemory = memInfo.availMem;
 
-        return Formatter.formatFileSize(context,totalMemory);
+        return Formatter.formatFileSize(context, totalMemory);
     }
 
-    public static String getFreeMemory(Context context)
-    {
+    public static String getFreeMemory(Context context) {
         File externalFilesDir = context.getExternalFilesDir(null);
         if (externalFilesDir != null) {
             long bytesAvailable = new File(externalFilesDir.toString()).getFreeSpace();

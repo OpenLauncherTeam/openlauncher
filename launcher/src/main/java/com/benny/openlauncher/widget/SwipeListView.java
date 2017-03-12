@@ -44,18 +44,24 @@ public class SwipeListView extends ListView {
     private void init(){
         if (isInEditMode())return;
 
-        final float dis = Tool.dp2px(10,getContext());
-
+        final float dis = Tool.dp2px(70,getContext());
+        final float hdis = Tool.dp2px(20,getContext());
+        Tool.print(dis);
         mGestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                 if (e1 == null) return true;
                 int dx = (int) (e2.getX() - e1.getX());
-                if (Math.abs(dx) > dis){
+                int dy = (int) (e2.getY() - e1.getY());
+                Tool.print(dx);
+                if (Math.abs(dx) > dis && Math.abs(dy) < hdis){
+                    Tool.print("ok");
                     if (velocityX > 0) {
+                        Tool.print("ok2");
                         try {
                             int pos = pointToPosition( (int) e1.getX(), (int)e1.getY() );
                             if (pos != -1 && onSwipeRight != null)
                                 onSwipeRight.onSwipe(pos,e1.getX(),e1.getY() );
+                            Tool.print("ok3");
                         } catch( Exception ignored) {
 
                         }

@@ -187,7 +187,7 @@ public class GroupPopupView extends FrameLayout {
         title.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Tool.askForText(resources.getString(R.string.toast_rename), item.name, getContext(), new Tool.OnTextGotListener() {
+                Tool.DialogHelper.promptInputText(resources.getString(R.string.toast_rename), item.name, getContext(), new Tool.DialogHelper.OnTextResultListener() {
                     @Override
                     public void hereIsTheText(String str) {
                         if (str.isEmpty()) return;

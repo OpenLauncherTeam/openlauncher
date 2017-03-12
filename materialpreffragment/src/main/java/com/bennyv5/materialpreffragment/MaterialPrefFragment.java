@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -94,7 +95,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
         layout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
         layout.setDividerDrawable(getContext().getResources().getDrawable(android.R.drawable.divider_horizontal_dark));
         layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setPadding(0, 0, 0, CommonUtility.pixelToDp(getContext(), 6));
+        layout.setPadding(0, 0, 0, Tool.pixelToDp(getContext(), 6));
 
         for (Pref pref : prefs) {
             layout.addView(pref.onCreateView(getContext(), this, sharedPrefs));
@@ -131,7 +132,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
             setStyle(b, fragment);
 
             b.setText(title);
-            b.setPadding(CommonUtility.pixelToDp(b.getContext(), fragment.pad), CommonUtility.pixelToDp(b.getContext(), 12), CommonUtility.pixelToDp(b.getContext(), fragment.pad), CommonUtility.pixelToDp(b.getContext(), 12));
+            b.setPadding(Tool.pixelToDp(b.getContext(), fragment.pad), Tool.pixelToDp(b.getContext(), 12), Tool.pixelToDp(b.getContext(), fragment.pad), Tool.pixelToDp(b.getContext(), 12));
             b.setTypeface(Typeface.DEFAULT_BOLD);
             b.setBackgroundColor(Color.TRANSPARENT);
             b.setTextColor(fragment.accentColor);
@@ -218,7 +219,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
             }
 
             public View getItemView(ViewGroup parent, final MaterialPrefFragment fragment, SharedPreferences sharedPrefs) {
-                ConstraintLayout layout = (ConstraintLayout) LayoutInflater.from(fragment.getContext()).inflate(R.layout.item_pref_num_picker, parent, false);
+                View layout = LayoutInflater.from(fragment.getContext()).inflate(R.layout.item_pref_num_picker, parent, false);
                 valueBar = (SeekBar) layout.findViewById(R.id.valueBar);
                 valueTitle = (TextView) layout.findViewById(R.id.valueTitle);
                 itemTitle = (TextView) layout.findViewById(R.id.itemTitle);
@@ -228,7 +229,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
                     itemTitle.setText(title);
                 else {
                     itemTitle.setVisibility(View.GONE);
-                    ((ViewGroup.MarginLayoutParams) valueTitle.getLayoutParams()).topMargin = CommonUtility.pixelToDp(fragment.getContext(),8);
+                    ((ViewGroup.MarginLayoutParams) valueTitle.getLayoutParams()).topMargin = Tool.pixelToDp(fragment.getContext(), 8);
                 }
                 valueTitle.setTextColor(fragment.textColor);
                 valueBar.setMax(end);
@@ -306,7 +307,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
         String id, title, summary;
         int selected;
 
-        public ColorPref(String id, String title, String summary,int selected) {
+        public ColorPref(String id, String title, String summary, int selected) {
             this.id = id;
             this.title = title;
             this.summary = summary;
@@ -323,7 +324,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
                 @Override
                 public void onClick(View view) {
                     fragment.currentColorPref = ColorPref.this;
-                    new ColorChooserDialog.Builder(fragment.activity,R.string.choose_color)
+                    new ColorChooserDialog.Builder(fragment.activity, R.string.choose_color)
                             .titleSub(R.string.choose_color)
                             .doneButton(R.string.done)
                             .cancelButton(R.string.cancel)
@@ -340,11 +341,19 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
 
     public static class ButtonPref implements Pref {
         String id, title, summary;
+        Drawable icon = null;
 
         public ButtonPref(String id, String title, String summary) {
             this.id = id;
             this.title = title;
             this.summary = summary;
+        }
+
+        public ButtonPref(String id, Drawable icon, String title, String summary) {
+            this.id = id;
+            this.title = title;
+            this.summary = summary;
+            this.icon = icon;
         }
 
         @Override
@@ -353,6 +362,10 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
             setStyle(b, fragment);
 
             b.setTag(fragment.TAG_ID, id);
+            if (icon != null) {
+                b.setCompoundDrawablePadding(Tool.dp2px(20,c));
+                b.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+            }
             b.setOnClickListener(fragment);
             b.setText(warpText(summary, title, fragment));
             return warpCardView(b, fragment);
@@ -365,7 +378,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
 
     private static View warpCardView(View v, MaterialPrefFragment fragment) {
         CardView cv = new CardView(v.getContext());
-        cv.setLayoutParams(CommonUtility.matchParentWidthLayoutParams());
+        cv.setLayoutParams(Tool.matchParentWidthLayoutParams());
         cv.setCardBackgroundColor(fragment.cardColor);
         cv.setCardElevation(4);
         cv.setRadius(0);
@@ -374,7 +387,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
     }
 
     private static Spanned warpText(String summary, String title, MaterialPrefFragment fragment) {
-        return summary == null ? new SpannableString(title) : Html.fromHtml(title + "<br>" + "<small>" + CommonUtility.warpColorTag(summary, fragment.textColorSec) + "</small>");
+        return summary == null ? new SpannableString(title) : Html.fromHtml(title + "<br>" + "<small>" + Tool.warpColorTag(summary, fragment.textColorSec) + "</small>");
     }
 
     private static void setStyle(TextView textView, MaterialPrefFragment fragment) {
@@ -386,12 +399,12 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
         }
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
         textView.setTypeface(Typeface.DEFAULT);
-        textView.setPadding(CommonUtility.pixelToDp(textView.getContext(), fragment.pad), CommonUtility.pixelToDp(textView.getContext(), fragment.pad), CommonUtility.pixelToDp(textView.getContext(), fragment.pad), CommonUtility.pixelToDp(textView.getContext(), fragment.pad));
+        textView.setPadding(Tool.pixelToDp(textView.getContext(), fragment.pad), Tool.pixelToDp(textView.getContext(), fragment.pad), Tool.pixelToDp(textView.getContext(), fragment.pad), Tool.pixelToDp(textView.getContext(), fragment.pad));
         if (fragment.cardColor == Color.WHITE)
             textView.setBackgroundResource(R.drawable.selector_dark);
         else
             textView.setBackgroundResource(R.drawable.selector);
-        textView.setLayoutParams(CommonUtility.matchParentWidthLayoutParams());
+        textView.setLayoutParams(Tool.matchParentWidthLayoutParams());
     }
 
     public static class Builder {
@@ -413,7 +426,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
 
         private boolean useSystemPref;
 
-        public Builder(BaseSettingsActivity activity,int textColor, int textColorSec, int cardColor, int accentColor, boolean useSystemPref) {
+        public Builder(BaseSettingsActivity activity, int textColor, int textColorSec, int cardColor, int accentColor, boolean useSystemPref) {
             this.activity = activity;
             this.textColorSec = textColorSec;
             this.textColor = textColor;
