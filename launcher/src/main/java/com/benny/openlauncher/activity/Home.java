@@ -546,18 +546,26 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
         if (minBarArrangement == null) {
             LauncherSettings.getInstance(this).generalSettings.miniBarArrangement = new ArrayList<>();
-            for (int i = 0; i < 7; i++) {
-                LauncherAction.ActionItem item = LauncherAction.actionItems[i];
+            for (LauncherAction.ActionItem item : LauncherAction.actionItems) {
                 LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("0" + item.label.toString());
                 labels.add(item.label.toString());
                 icons.add(item.icon);
             }
         } else {
-            for (String act : minBarArrangement) {
-                if (act.charAt(0) == '0') {
-                    LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act.substring(1));
-                    labels.add(item.label.toString());
-                    icons.add(item.icon);
+            if (minBarArrangement.size() == LauncherAction.actionItems.length) {
+                for (String act : minBarArrangement) {
+                    if (act.charAt(0) == '0') {
+                        LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act.substring(1));
+                        labels.add(item.label.toString());
+                        icons.add(item.icon);
+                    }
+                }
+            } else {
+                LauncherSettings.getInstance(this).generalSettings.miniBarArrangement = new ArrayList<>();
+                for (LauncherAction.ActionItem item : LauncherAction.actionItems) {
+                        LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("0" + item.label.toString());
+                        labels.add(item.label.toString());
+                        icons.add(item.icon);
                 }
             }
         }
@@ -575,7 +583,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
                 LauncherAction.RunAction(action, Home.this);
-                if (action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.DeviceSettings) {
+                if (action == LauncherAction.Action.EditMinBar || action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.DeviceSettings) {
                     (new Handler()).postDelayed(new Runnable() {
                         @Override
                         public void run() {
