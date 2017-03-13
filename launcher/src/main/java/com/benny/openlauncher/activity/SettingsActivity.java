@@ -113,7 +113,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                         .add(new MaterialPrefFragment.ButtonPref("singleClick", (getString(R.string.settings_singleClick)), (getString(R.string.settings_singleClick_summary))))
                         .add(new MaterialPrefFragment.ButtonPref("doubleClick", (getString(R.string.settings_doubleClick)), (getString(R.string.settings_doubleClick_summary))))
                         .add(new MaterialPrefFragment.ButtonPref("pinch", (getString(R.string.settings_pinch)), (getString(R.string.settings_pinch_summary))))
-                        .add(new MaterialPrefFragment.ButtonPref("unpinch", (getString(R.string.settings_unpinch)), (getString(R.string.settings_unpinch_summary))))
+                        .add(new MaterialPrefFragment.ButtonPref("unPinch", (getString(R.string.settings_unpinch)), (getString(R.string.settings_unpinch_summary))))
                         .add(new MaterialPrefFragment.ButtonPref("swipeDown", (getString(R.string.settings_swipeDown)), (getString(R.string.settings_swipeDown_summary))))
                         .add(new MaterialPrefFragment.ButtonPref("swipeUp", (getString(R.string.settings_swipeUp)), (getString(R.string.settings_swipeUp_summary))))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
@@ -360,7 +360,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 DialogUtils.startPinchPicker(this);
                 prepareRestart();
                 break;
-            case "unpinch":
+            case "unPinch":
                 DialogUtils.startUnpinchPicker(this);
                 prepareRestart();
                 break;

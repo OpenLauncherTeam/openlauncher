@@ -76,11 +76,22 @@ public class CellContainer extends ViewGroup {
         invalidate();
     }
 
-    private Point preCoordinate = new Point(-1,-1);
+    public void resetOccupiedSpace() {
+        if (cellSpanH > 0 && cellSpanH > 0)
+            occupied = new boolean[cellSpanH][cellSpanV];
+    }
+
+    @Override
+    public void removeAllViews() {
+        resetOccupiedSpace();
+        super.removeAllViews();
+    }
+
+    private Point preCoordinate = new Point(-1, -1);
     private Long peekDownTime = -1L;
     private PeekDirection peekDirection;
 
-    private PeekDirection getPeekDirectionFromCoordinate(Point from,Point to){
+    private PeekDirection getPeekDirectionFromCoordinate(Point from, Point to) {
         if (from.y - to.y > 0)
             return PeekDirection.T;
         else if (from.y - to.y < 0)
@@ -98,8 +109,8 @@ public class CellContainer extends ViewGroup {
         Point coordinate = touchPosToCoordinate((int) event.getX(), (int) event.getY(), 1, 1, false);
 
         if (coordinate == null) return;
-        if (!preCoordinate.equals(coordinate)){
-            peekDirection = getPeekDirectionFromCoordinate(preCoordinate,coordinate);
+        if (!preCoordinate.equals(coordinate)) {
+            peekDirection = getPeekDirectionFromCoordinate(preCoordinate, coordinate);
             peekDownTime = -1L;
         }
         if (peekDownTime == -1L) {
@@ -118,7 +129,7 @@ public class CellContainer extends ViewGroup {
         if (targetParams.xSpan > 1 || targetParams.ySpan > 1)
             return;
         occupied[targetParams.x][targetParams.y] = false;
-        Point targetPoint = findFreeSpace(targetParams.x, targetParams.y,peekDirection);
+        Point targetPoint = findFreeSpace(targetParams.x, targetParams.y, peekDirection);
         Tool.print(targetPoint);
         onItemRearrange(new Point(targetParams.x, targetParams.y), targetPoint);
         targetParams.x = targetPoint.x;
@@ -148,7 +159,8 @@ public class CellContainer extends ViewGroup {
         if (gestures != null)
             try {
                 gestures.onTouch(this, event);
-            } catch (Exception ignore) {}
+            } catch (Exception ignore) {
+            }
         return super.onTouchEvent(event);
     }
 
@@ -191,7 +203,7 @@ public class CellContainer extends ViewGroup {
                     return new Point(x, y);
             }
         }
-        return new Point(0,0);
+        return new Point(0, 0);
     }
 
     public boolean isValid(int x, int y) {
@@ -199,28 +211,28 @@ public class CellContainer extends ViewGroup {
 
     }
 
-    public Point findFreeSpace(int cx, int cy,PeekDirection peekDirection) {
+    public Point findFreeSpace(int cx, int cy, PeekDirection peekDirection) {
         if (peekDirection != null) {
             Point target;
             switch (peekDirection) {
                 case B:
-                    target = new Point(cx,cy - 1);
-                    if (isValid(target.x,target.y) && !occupied[target.x][target.y])
+                    target = new Point(cx, cy - 1);
+                    if (isValid(target.x, target.y) && !occupied[target.x][target.y])
                         return target;
                     break;
                 case L:
-                    target = new Point(cx + 1,cy);
-                    if (isValid(target.x,target.y) && !occupied[target.x][target.y])
+                    target = new Point(cx + 1, cy);
+                    if (isValid(target.x, target.y) && !occupied[target.x][target.y])
                         return target;
                     break;
                 case R:
-                    target = new Point(cx - 1,cy);
-                    if (isValid(target.x,target.y) && !occupied[target.x][target.y])
+                    target = new Point(cx - 1, cy);
+                    if (isValid(target.x, target.y) && !occupied[target.x][target.y])
                         return target;
                     break;
                 case T:
-                    target = new Point(cx,cy + 1);
-                    if (isValid(target.x,target.y) && !occupied[target.x][target.y])
+                    target = new Point(cx, cy + 1);
+                    if (isValid(target.x, target.y) && !occupied[target.x][target.y])
                         return target;
                     break;
             }
@@ -555,8 +567,8 @@ public class CellContainer extends ViewGroup {
         }
     }
 
-    private enum PeekDirection{
-        T,L,R,B
+    private enum PeekDirection {
+        T, L, R, B
     }
 
     public interface OnItemRearrangeListener {

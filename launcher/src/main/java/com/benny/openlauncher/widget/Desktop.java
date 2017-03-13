@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
@@ -84,8 +83,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         for (int i = 0; i < LauncherSettings.getInstance(getContext()).desktopData.size(); i++) {
             if (pages.size() <= i) break;
             pages.get(i).removeAllViews();
-            for (int j = 0; j < LauncherSettings.getInstance(getContext()).desktopData.get(i).size(); j++) {
-                addItemToPagePosition(LauncherSettings.getInstance(getContext()).desktopData.get(i).get(j), i);
+            List<Item> items = LauncherSettings.getInstance(getContext()).desktopData.get(i);
+            for (int j = 0; j < items.size(); j++) {
+                addItemToPagePosition(items.get(j), i);
             }
         }
     }
@@ -268,9 +268,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
-        if (itemView == null) {
+        if (itemView == null)
             LauncherSettings.getInstance(getContext()).desktopData.get(page).remove(item);
-        } else
+         else
             pages.get(page).addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
     }
 
@@ -494,7 +494,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                 @Override
                 public boolean onUnpinch(int i, long l, double v) {
-                    switch (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.unpinch]) {
+                    switch (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.unPinch]) {
                         case 0:
                             break;
                         case 1:
@@ -753,11 +753,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         @Override
         public boolean equals(Object obj) {
-            return obj instanceof Item
-                    && ((Item) obj).type == this.type
-                    && Arrays.equals(((Item) obj).actions, this.actions)
-                    && ((Item) obj).x == this.x
-                    && ((Item) obj).y == this.y
+            Item obj1 = (Item) obj;
+            return obj != null
+                    && obj1.type == this.type
+                    && Arrays.equals(obj1.actions, this.actions)
+                    && obj1.x == this.x
+                    && obj1.y == this.y
                     ;
         }
 

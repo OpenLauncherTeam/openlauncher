@@ -13,7 +13,6 @@ import com.google.gson.stream.JsonReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class LauncherSettings {
@@ -158,7 +157,7 @@ public class LauncherSettings {
     }
 
     public void setUnpinchGesture(int value) {
-        generalSettings.unpinch = value;
+        generalSettings.unPinch = value;
     }
 
     public void setSwipeDownGesture(int value) {
@@ -268,12 +267,11 @@ public class LauncherSettings {
         public int singleClick = 0;
         public int doubleClick = 0;
         public int pinch = 0;
-        public int unpinch = 0;
+        public int unPinch = 0;
         public int swipeDown = 0;
         public int swipeUp = 0;
         public boolean showIndicator = true;
         public boolean desktopShowLabel = true;
-        public boolean hideIcon = false;
 
         //Drawer
         public int drawerColor = Color.TRANSPARENT;

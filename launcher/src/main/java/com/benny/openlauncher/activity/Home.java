@@ -118,7 +118,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //This will be optimised late.
+        //This will be optimised later.
         //handle uncaught exception
 //        Thread.setDefaultUncaughtExceptionHandler (new Thread.UncaughtExceptionHandler() {
 //            @Override
@@ -174,9 +174,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                         }
                     });
                     init();
-                    if (!result){
+                    if (!result) {
                         if (Home.launcher != null)
-                        Tool.DialogHelper.alert(Home.launcher,"Some settings can't be read","Developer's mistake, hope you understand! Some of the settings will be reset to default value.").show();
+                            Tool.DialogHelper.alert(Home.launcher, "Some settings can't be read", "Developer's mistake, hope you understand! Some of the settings will be reset to default value.").show();
                     }
                 }
             }.execute();
@@ -184,7 +184,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
 
     //handle uncaught exception -> automatically restart launcher
-    public void handleUncaughtException (Thread thread, Throwable e) {
+    public void handleUncaughtException(Thread thread, Throwable e) {
         Toast.makeText(this, getString(R.string.crash), Toast.LENGTH_LONG).show();
         //not all Android versions will print the stack trace automatically
         e.printStackTrace();
@@ -421,7 +421,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             dock.getLayoutParams().height = Tool.dp2px(36 + iconSize + 14, this);
             if (LauncherSettings.getInstance(this).generalSettings.drawerMode == AppDrawer.DrawerMode.Paged)
                 dock.setPadding(dock.getPaddingLeft(), dock.getPaddingTop(), dock.getPaddingRight(), dock.getPaddingBottom() + Tool.dp2px(9, this));
-        }else
+        } else
             dock.getLayoutParams().height = Tool.dp2px(36 + iconSize, this);
 
         dragOptionView.setAutoHideView(searchBar);
@@ -568,20 +568,20 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             } else {
                 LauncherSettings.getInstance(this).generalSettings.miniBarArrangement = new ArrayList<>();
                 for (LauncherAction.ActionItem item : LauncherAction.actionItems) {
-                        LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("0" + item.label.toString());
-                        labels.add(item.label.toString());
-                        icons.add(item.icon);
+                    LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("0" + item.label.toString());
+                    labels.add(item.label.toString());
+                    icons.add(item.icon);
                 }
             }
         }
 
 
-        minBar.setPadding(0,Tool.getStatusBarHeight(this),0,Tool.getNavBarHeight(this));
+        minBar.setPadding(0, Tool.getStatusBarHeight(this), 0, Tool.getNavBarHeight(this));
         minBar.setAdapter(new IconListAdapter(this, labels, icons));
         minBar.setOnSwipeRight(new SwipeListView.OnSwipeRight() {
             @Override
-            public void onSwipe(int pos,float x,float y) {
-                miniPopup.showActionWindow(LauncherAction.Action.valueOf(labels.get(pos)),x,y + (shortcutLayout.getHeight() - minBar.getHeight()) / 2 - Tool.getNavBarHeight(Home.this));
+            public void onSwipe(int pos, float x, float y) {
+                miniPopup.showActionWindow(LauncherAction.Action.valueOf(labels.get(pos)), x, y + (shortcutLayout.getHeight() - minBar.getHeight()) / 2 - Tool.getNavBarHeight(Home.this));
             }
         });
         minBar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -760,9 +760,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         if (desktop != null)
             if (!desktop.inEditMode) {
                 if (appDrawer != null && appDrawer.getVisibility() == View.VISIBLE)
-                        closeAppDrawer();
+                    closeAppDrawer();
                 else if (LauncherSettings.getInstance(Home.this).generalSettings != null && !groupPopup.isShowing)
-                        desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
+                    desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
             } else {
                 desktop.pages.get(desktop.getCurrentItem()).performClick();
             }
@@ -777,12 +777,14 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
      * Call this to open the app drawer with animation
      */
     public void openAppDrawer() {
-        openAppDrawer(desktop,-1,-1);
+        openAppDrawer(desktop, -1, -1);
     }
+
     public void openAppDrawer(View view) {
-        openAppDrawer(view,-1,-1);
+        openAppDrawer(view, -1, -1);
     }
-    public void openAppDrawer(View view,int x,int y) {
+
+    public void openAppDrawer(View view, int x, int y) {
         if (!(x > 0 && y > 0)) {
             int[] pos = new int[2];
             view.getLocationInWindow(pos);
@@ -801,7 +803,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             cx -= ((ViewGroup.MarginLayoutParams) appDrawer.getLayoutParams()).leftMargin;
             cy -= ((ViewGroup.MarginLayoutParams) appDrawer.getLayoutParams()).topMargin;
             cy -= appDrawerContainer.getPaddingTop();
-        }else {
+        } else {
             cx = x;
             cy = y;
             rad = 0;
@@ -819,6 +821,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
 
     //region VIEW_ONCLICK
+
     /**
      * When the search button of the search bar clicked
      * However the search bar is removed out for now
