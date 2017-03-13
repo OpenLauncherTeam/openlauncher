@@ -217,7 +217,7 @@ public class ItemViewFactory {
 
                 view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
-                ((AppItemView) view).setIcon(getGroupIconDrawable(context, item), false);
+                ((AppItemView) view).setIcon(getGroupIconDrawable(context, item));
                 ((AppItemView) view).setLabel((item.name));
 
                 view.setOnClickListener(new View.OnClickListener() {

@@ -6,7 +6,6 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.widget.AppDrawer;
-import com.benny.openlauncher.widget.Desktop;
 
 public class DialogUtils {
   public static void desktopStylePicker(final Context context) {
@@ -86,7 +85,7 @@ public class DialogUtils {
     MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
     builder.title(context.getString(R.string.settings_unpinch_title))
         .items(R.array.gestureEntries)
-        .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.unpinch, new MaterialDialog.ListCallbackSingleChoice() {
+        .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.unPinch, new MaterialDialog.ListCallbackSingleChoice() {
           @Override
           public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
             LauncherSettings.getInstance(context).setUnpinchGesture(position);
