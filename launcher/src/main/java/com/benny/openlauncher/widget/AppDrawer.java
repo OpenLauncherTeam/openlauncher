@@ -52,22 +52,6 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
         super(context, attrs, defStyle);
     }
 
-    public static void startStylePicker(final Context context) {
-        final String[] items = new String[DrawerMode.values().length];
-        for (int i = 0; i < DrawerMode.values().length; i++) {
-            items[i] = DrawerMode.values()[i].name();
-        }
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_stylePicker_title_drawer))
-                .items(context.getString(R.string.settings_stylePicker_paged), context.getString(R.string.settings_stylePicker_vertical))
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).generalSettings.drawerMode = DrawerMode.valueOf(items[position]);
-                    }
-                }).show();
-    }
-
     public void setCallBack(CallBack openCallBack, CallBack closeCallBack) {
         this.openCallBack = openCallBack;
         this.closeCallBack = closeCallBack;

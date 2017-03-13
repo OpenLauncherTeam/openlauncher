@@ -1,7 +1,6 @@
 package com.benny.openlauncher.activity;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -9,14 +8,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -27,12 +23,10 @@ import com.benny.openlauncher.util.DialogUtils;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppDrawer;
-import com.benny.openlauncher.widget.Desktop;
 import com.bennyv5.materialpreffragment.BaseSettingsActivity;
 import com.bennyv5.materialpreffragment.MaterialPrefFragment;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.LauncherSettings;
-import com.mikepenz.materialize.color.Material;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -130,6 +124,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                         .add(new MaterialPrefFragment.ColorPref("dockBackground", (getString(R.string.settings_colorDock)), (getString(R.string.settings_colorDock_summary)), generalSettings.dockColor))
                         .add(new MaterialPrefFragment.ColorPref("drawerBackground", (getString(R.string.settings_colorDrawer)), (getString(R.string.settings_colorDrawer_summary)), generalSettings.drawerColor))
                         .add(new MaterialPrefFragment.ColorPref("drawerCardBackground", (getString(R.string.settings_colorFolder)), (getString(R.string.settings_colorFolder_summary)), generalSettings.drawerCardColor))
+                        .add(new MaterialPrefFragment.ColorPref("folderColor", (getString(R.string.settings_colorAppFolder)), (getString(R.string.settings_colorAppFolder_summary)), generalSettings.folderColor))
                         .add(new MaterialPrefFragment.ColorPref("drawerLabelColor", (getString(R.string.settings_colorLabel)), (getString(R.string.settings_colorLabel_summary)), generalSettings.drawerLabelColor))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_color);
@@ -280,6 +275,14 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 } else
                     prepareRestart();
                 break;
+          case "folderColor":
+            generalSettings.folderColor = (int) value;
+            if (Home.launcher != null) {
+              Home.launcher.appDrawerContainer.reloadDrawerCardTheme();
+              prepareRestart();
+            } else
+              prepareRestart();
+            break;
             case "desktopShowLabel":
                 generalSettings.desktopShowLabel = (boolean) value;
                 prepareRestart();
@@ -338,11 +341,11 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 AppManager.getInstance(this).startPickIconPackIntent(this);
                 break;
             case "drawerStyle":
-                AppDrawer.startStylePicker(this);
+                DialogUtils.appDrawerStylePicker(this);
                 prepareRestart();
                 break;
             case "desktopMode":
-                Desktop.startStylePicker(this);
+                DialogUtils.desktopStylePicker(this);
                 prepareRestart();
                 break;
             case "singleClick":
