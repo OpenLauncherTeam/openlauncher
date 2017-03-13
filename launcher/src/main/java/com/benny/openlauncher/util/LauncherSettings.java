@@ -169,7 +169,8 @@ public class LauncherSettings {
         generalSettings.swipeUp = value;
     }
 
-    public void switchDesktopMode(Desktop.DesktopMode mode) {
+    public void switchDesktopMode(int position) {
+        Desktop.DesktopMode mode = Desktop.DesktopMode.values()[position];
         writeSettings();
 
         iconCacheIDs.clear();
@@ -184,6 +185,7 @@ public class LauncherSettings {
 
         Gson gson = new Gson();
         generalSettings.desktopMode = mode;
+        generalSettings.desktopHomePage = position;
         readDesktopData(gson, mode);
         readDockData(gson, mode);
 
@@ -277,6 +279,7 @@ public class LauncherSettings {
         public int drawerColor = Color.TRANSPARENT;
         public boolean drawerUseCard = true;
         public int drawerCardColor = Color.WHITE;
+        public int folderColor = Color.WHITE;
         public int drawerLabelColor = Color.DKGRAY;
         public AppDrawer.DrawerMode drawerMode = AppDrawer.DrawerMode.Paged;
         public int drawerGridX = 4;
@@ -303,5 +306,4 @@ public class LauncherSettings {
         //Others
         public boolean firstLauncher = true;
     }
-
 }

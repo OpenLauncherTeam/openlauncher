@@ -61,7 +61,7 @@ public class GroupPopupView extends FrameLayout {
             @Override
             public void run() {
                 title.setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
-                popupParent.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
+                popupParent.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.folderColor);
             }
         }, 2000);
 

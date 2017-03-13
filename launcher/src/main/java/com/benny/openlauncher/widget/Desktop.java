@@ -725,23 +725,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         Normal, ShowAllApps
     }
 
-    public static void startStylePicker(final Context context) {
-        final String[] items = new String[DesktopMode.values().length];
-        for (int i = 0; i < DesktopMode.values().length; i++) {
-            items[i] = DesktopMode.values()[i].name();
-        }
-        items[1] += (context.getString(R.string.settings_stylePicker_ex));
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_stylePicker_title))
-                .items(context.getString(R.string.settings_stylePicker_normal), context.getString(R.string.settings_stylePicker_allApps))
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).switchDesktopMode(DesktopMode.values()[position]);
-                    }
-                }).show();
-    }
-
     public static class Item implements Parcelable {
         public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>() {
 
