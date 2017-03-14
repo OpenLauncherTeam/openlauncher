@@ -4,7 +4,7 @@
 
 <a href='https://play.google.com/store/apps/details?id=com.benny.openlauncher&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width=200/></a>
 
-###Status>>
+# Status
 OnGoing: 
 
 Fix all the issue
@@ -21,7 +21,7 @@ Debugging multiple errors that lead to crashes on Android api level lower that 2
 
 After looking in the errors, it turns out that the attr refering to the color is not support on Android api level lower that 21 and I will remove the light - dark theme stuff and re-theme tha app, ah so many bugs....
 
-###About>>
+# About
 
 This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven Android launcher.
 
@@ -46,7 +46,7 @@ Gesture | Yes
 
 Please go to the OpenLauncher [Wiki](https://github.com/Benny-Kok/OpenLauncher/wiki) for more information.
 
-###Todo list>>
+# Todo list
 
 Desktop clock customization
 
@@ -58,7 +58,8 @@ Support landscape orientation
 
 Add more customization settings
 
-###Some screenshots>>
+# Some screenshots
+
 <img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/p2.jpg" width="300">
 <img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/p1.jpg" width="300">
 <img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/p3.jpg" width="300">
