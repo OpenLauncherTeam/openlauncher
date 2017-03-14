@@ -5,13 +5,13 @@
 <a href='https://play.google.com/store/apps/details?id=com.benny.openlauncher&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width=200/></a>
 
 # Status
-###OnGoing: 
+### OnGoing: 
 
 Fix all the issue
 
 Add aniamtion to drag and drop
 
-###Finished:
+### Finished:
 
 Add an ios like easy-to-arrange desktop option (feature request).
 
@@ -58,7 +58,7 @@ Support landscape orientation
 
 Add more customization settings
 
-# Some screenshots
+# Screenshots
 
 <img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/p2.jpg" width="300">    <img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/p1.jpg" width="300">
 <img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/p3.jpg" width="300">    <img src="https://github.com/Benny-Kok/OpenLauncher/blob/master/DisplayPictures/p4.jpg" width="300">
