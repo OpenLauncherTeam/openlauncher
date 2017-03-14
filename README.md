@@ -1,17 +1,21 @@
+<img src='https://github.com/BennyKok/OpenLauncher/blob/master/DisplayPictures/Cover.png'/>
 
-<p align="center"><img src="https://github.com/BennyKok/OpenLauncher/blob/master/launcher/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="200"></p>
-<p align="center"><b>OpenLauncher</b> <br> The ideal home screen for Android</p>
+# OpenLauncher
 
-Get it on: [Play Store](https://play.google.com/store/apps/details?id=com.benny.openlauncher)
+<a href='https://play.google.com/store/apps/details?id=com.benny.openlauncher&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width=200/></a>
 
 ###Status>>
 OnGoing: 
 
+Fix all the issue
+
+Add aniamtion to drag and drop
+
+Finished:
+
 Add an ios like easy-to-arrange desktop option (feature request).
 
 Support hide apps function
-
-Finished:
 
 Debugging multiple errors that lead to crashes on Android api level lower that 21.
 
@@ -34,14 +38,19 @@ Scrollable background | Yes
 Drag n drop | Yes
 Paged app drawer | Yes
 Vertical app drawer | Yes
-Hide apps | No
+Hide apps | Yes
 Search bar | Yes
 Iocn packs | Yes
-
+Widget | Yes
+Gesture | Yes
 
 Please go to the OpenLauncher [Wiki](https://github.com/Benny-Kok/OpenLauncher/wiki) for more information.
 
 ###Todo list>>
+
+Desktop clock customization
+
+More action for the mini bar (later to support expanable mini bar)
 
 Code refactoring
 
