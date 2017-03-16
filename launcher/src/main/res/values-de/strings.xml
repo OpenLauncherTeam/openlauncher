@@ -60,11 +60,12 @@
     <string name="minibar">Einträge auswählen</string>
     <string name="minibar_1">Wallpaper aussuchen oder unscharf machen</string>
     <string name="minibar_2">Sperre sofort den Bildschirm, braucht die Berechtigung \"Geräteadministrator\".</string>
-    <string name="minibar_3">Setze Ram frei, beende andere laufende Prozesse.</string>
+    <string name="minibar_3">Setze Ram frei, beende laufende Prozesse.</string>
     <string name="minibar_4">Verknüpfung zu den Systemeinstellungen.</string>
     <string name="minibar_5">OpenLauncher Einstellungsseite.</string>
     <string name="minibar_6">Wähle ein Theme aus.</string>
     <string name="minibar_7">Öffne den Lautstärkedialog.</string>
+    <string name="minibar_8">Öffne den App Drawer.</string>
 
 
     // About
@@ -171,10 +172,12 @@
     <string name="settings_colorDock_summary">Dock Hintergrundfarbe.</string>
     <string name="settings_colorDrawer">Drawer</string>
     <string name="settings_colorDrawer_summary">Drawer Hintergrundfarbe.</string>
-    <string name="settings_colorFolder">Ordner und Karten</string>
-    <string name="settings_colorFolder_summary">Hintergrundfarbe für Ordner und die App Drawer Karten.</string>
+    <string name="settings_colorFolder">Karten</string>
+    <string name="settings_colorFolder_summary">Hintergrundfarbe für die App Drawer Karten.</string>
     <string name="settings_colorLabel">Beschriftung</string>
     <string name="settings_colorLabel_summary">Farbe für die Beschriftungen in den Ordnern und im App Drawer.</string>
+    <string name="settings_colorAppFolder">Ordner</string>
+    <string name="settings_colorAppFolder_summary">Hintergrundfarbe für die Ordner auf dem Desktop.</string>
 
     <string name="settings_iconSize">Größe</string>
     <string name="settings_iconSize_summary">Größe für alle Anwendungsicons.</string>
