@@ -9,8 +9,8 @@ android {
         applicationId "com.benny.openlauncher"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 7
-        versionName "alpha2_patch2"
+        versionCode 8
+        versionName "alpha3"
     }
     buildTypes {
         release {

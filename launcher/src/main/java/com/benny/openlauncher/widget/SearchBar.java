@@ -12,7 +12,7 @@ import android.widget.EditText;
  * Created by BennyKok on 11/16/2016.
  */
 
-public class SearchBar extends EditText implements View.OnClickListener{
+public class SearchBar extends android.support.v7.widget.AppCompatEditText implements View.OnClickListener{
 
     public SearchBar(Context context) {
         super(context);

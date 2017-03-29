@@ -97,12 +97,13 @@ public class AppItemView extends View implements Drawable.Callback {
     private float iconSizeSmall;
 
     private Drawable icon;
+
     private String label;
 
     public boolean isShortcut;
 
     public Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG), bgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    ;
+
     private Rect mTextBound = new Rect();
 
     private boolean noLabel = false;
