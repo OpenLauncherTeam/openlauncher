@@ -379,70 +379,16 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             return new SimpleFingerGestures.OnFingerGestureListener() {
                 @Override
                 public boolean onSwipeUp(int i, long l, double v) {
-                    switch (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeUp]) {
-                        case 0:
-                            break;
-                        case 1:
-                            LauncherAction.RunAction(LauncherAction.Action.EditMinBar, desktop.getContext());
-                            break;
-                        case 2:
-                            LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
-                            break;
-                        case 3:
-                            LauncherAction.RunAction(LauncherAction.Action.LockScreen, desktop.getContext());
-                            break;
-                        case 4:
-                            LauncherAction.RunAction(LauncherAction.Action.ClearRam, desktop.getContext());
-                            break;
-                        case 5:
-                            LauncherAction.RunAction(LauncherAction.Action.DeviceSettings, desktop.getContext());
-                            break;
-                        case 6:
-                            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, desktop.getContext());
-                            break;
-                        case 7:
-                            LauncherAction.RunAction(LauncherAction.Action.VolumeDialog, desktop.getContext());
-                            break;
-                        case 8:
-                            LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, desktop.getContext());
-                            break;
-                        default:
-                            break;
+                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeUp] != -1) {
+                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeUp]].label, desktop.getContext());
                     }
                     return true;
                 }
 
                 @Override
                 public boolean onSwipeDown(int i, long l, double v) {
-                    switch (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeDown]) {
-                        case 0:
-                            break;
-                        case 1:
-                            LauncherAction.RunAction(LauncherAction.Action.EditMinBar, desktop.getContext());
-                            break;
-                        case 2:
-                            LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
-                            break;
-                        case 3:
-                            LauncherAction.RunAction(LauncherAction.Action.LockScreen, desktop.getContext());
-                            break;
-                        case 4:
-                            LauncherAction.RunAction(LauncherAction.Action.ClearRam, desktop.getContext());
-                            break;
-                        case 5:
-                            LauncherAction.RunAction(LauncherAction.Action.DeviceSettings, desktop.getContext());
-                            break;
-                        case 6:
-                            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, desktop.getContext());
-                            break;
-                        case 7:
-                            LauncherAction.RunAction(LauncherAction.Action.VolumeDialog, desktop.getContext());
-                            break;
-                        case 8:
-                            LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, desktop.getContext());
-                            break;
-                        default:
-                            break;
+                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeDown] != -1) {
+                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeDown]].label, desktop.getContext());
                     }
                     return true;
                 }
@@ -459,105 +405,24 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                 @Override
                 public boolean onPinch(int i, long l, double v) {
-                    switch (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.pinch]) {
-                        case 0:
-                            break;
-                        case 1:
-                            LauncherAction.RunAction(LauncherAction.Action.EditMinBar, desktop.getContext());
-                            break;
-                        case 2:
-                            LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
-                            break;
-                        case 3:
-                            LauncherAction.RunAction(LauncherAction.Action.LockScreen, desktop.getContext());
-                            break;
-                        case 4:
-                            LauncherAction.RunAction(LauncherAction.Action.ClearRam, desktop.getContext());
-                            break;
-                        case 5:
-                            LauncherAction.RunAction(LauncherAction.Action.DeviceSettings, desktop.getContext());
-                            break;
-                        case 6:
-                            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, desktop.getContext());
-                            break;
-                        case 7:
-                            LauncherAction.RunAction(LauncherAction.Action.VolumeDialog, desktop.getContext());
-                            break;
-                        case 8:
-                            LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, desktop.getContext());
-                            break;
-                        default:
-                            break;
+                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.pinch] != -1) {
+                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.pinch]].label, desktop.getContext());
                     }
                     return true;
                 }
 
                 @Override
                 public boolean onUnpinch(int i, long l, double v) {
-                    switch (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.unPinch]) {
-                        case 0:
-                            break;
-                        case 1:
-                            LauncherAction.RunAction(LauncherAction.Action.EditMinBar, desktop.getContext());
-                            break;
-                        case 2:
-                            LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
-                            break;
-                        case 3:
-                            LauncherAction.RunAction(LauncherAction.Action.LockScreen, desktop.getContext());
-                            break;
-                        case 4:
-                            LauncherAction.RunAction(LauncherAction.Action.ClearRam, desktop.getContext());
-                            break;
-                        case 5:
-                            LauncherAction.RunAction(LauncherAction.Action.DeviceSettings, desktop.getContext());
-                            break;
-                        case 6:
-                            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, desktop.getContext());
-                            break;
-                        case 7:
-                            LauncherAction.RunAction(LauncherAction.Action.VolumeDialog, desktop.getContext());
-                            break;
-                        case 8:
-                            LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, desktop.getContext());
-                            break;
-                        default:
-                            break;
+                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.unPinch] != -1) {
+                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.unPinch]].label, desktop.getContext());
                     }
                     return true;
                 }
 
                 @Override
                 public boolean onDoubleTap(int i) {
-                    switch (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.doubleClick]) {
-                        case 0:
-                            break;
-                        case 1:
-                            LauncherAction.RunAction(LauncherAction.Action.EditMinBar, desktop.getContext());
-                            break;
-                        case 2:
-                            LauncherAction.RunAction(LauncherAction.Action.SetWallpaper, desktop.getContext());
-                            break;
-                        case 3:
-                            LauncherAction.RunAction(LauncherAction.Action.LockScreen, desktop.getContext());
-                            break;
-                        case 4:
-                            LauncherAction.RunAction(LauncherAction.Action.ClearRam, desktop.getContext());
-                            break;
-                        case 5:
-                            LauncherAction.RunAction(LauncherAction.Action.DeviceSettings, desktop.getContext());
-                            break;
-                        case 6:
-                            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, desktop.getContext());
-                            break;
-                        case 7:
-                            LauncherAction.RunAction(LauncherAction.Action.VolumeDialog, desktop.getContext());
-                            break;
-                        case 8:
-                            LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, desktop.getContext());
-                            break;
-                        default:
-                            break;
+                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.doubleClick] != -1) {
+                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.doubleClick]].label, desktop.getContext());
                     }
                     return true;
                 }
@@ -619,14 +484,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             layout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (!desktop.inEditMode) {
-                        switch (getResources().getIntArray(R.array.singleClickValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick]) {
-                            default:
-                                break;
-                            case 8:
-                                LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, desktop.getContext());
-                                break;
-                        }
+                    if (!desktop.inEditMode && getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick] != -1) {
+                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick]].label, desktop.getContext());
                     }
 
                     scaleFactor = 1f;

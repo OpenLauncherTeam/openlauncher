@@ -2,14 +2,17 @@
 
 # OpenLauncher
 
-<a href='https://play.google.com/store/apps/details?id=com.benny.openlauncher&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width=200/></a>
+<a href="https://play.google.com/store/apps/details?id=com.benny.openlauncher" target="_blank">
+<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="80"/></a>
+<a href="https://f-droid.org/repository/browse/?fdid=com.benny.openlauncher" target="_blank">
+<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/></a>
 
 # Status
 ### OnGoing: 
 
 Fix all the issue
 
-Add aniamtion to drag and drop
+Add animation to drag and drop
 
 ### Finished:
 
