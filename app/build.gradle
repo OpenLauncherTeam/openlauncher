@@ -6,9 +6,10 @@ android {
 
     defaultConfig {
         multiDexEnabled false
-        applicationId "com.benny.openlauncher"
         minSdkVersion 16
         targetSdkVersion 25
+
+        applicationId "com.benny.openlauncher"
         versionCode 8
         versionName "alpha3"
     }
@@ -17,6 +18,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
+	disable 'ExtraTranslation'
     }
 }
 
@@ -59,7 +65,8 @@ dependencies {
 
     compile 'com.github.florent37:expectanim:1.0.1'
 
-    compile project(':smoothviewpager')
-    compile project(':materialpreffragment')
-    compile project(path: ':launcheranim')
+    // Compile libs included into project
+    compile project(':app:libs:smoothviewpager')
+    compile project(':app:libs:materialpreffragment')
+    compile project(path: ':app:libs:launcheranim')
 }
