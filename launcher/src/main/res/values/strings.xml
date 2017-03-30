@@ -168,12 +168,12 @@
 
     <string name="settings_colorDock">Dock</string>
     <string name="settings_colorDock_summary">Dock background color.</string>
-    <string name="settings_colorDrawer">Drawer</string>
+    <string name="settings_colorDrawer">Drawer Background</string>
     <string name="settings_colorDrawer_summary">Drawer background color.</string>
-    <string name="settings_colorFolder">Card</string>
-    <string name="settings_colorFolder_summary">Background color for the app drawer card.</string>
-    <string name="settings_colorAppFolder">Folder</string>
-    <string name="settings_colorAppFolder_summary">Background color for folders on the desktop.</string>
+    <string name="settings_colorCard">Drawer Card</string>
+    <string name="settings_colorCard_summary">Color for the app drawer card.</string>
+    <string name="settings_colorFolder">Folder</string>
+    <string name="settings_colorFolder_summary">Background color for folders on the desktop.</string>
     <string name="settings_colorLabel">Label</string>
     <string name="settings_colorLabel_summary">Label color for folders and the app drawer.</string>
 

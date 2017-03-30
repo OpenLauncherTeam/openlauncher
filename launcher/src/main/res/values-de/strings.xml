@@ -172,12 +172,12 @@
     <string name="settings_colorDock_summary">Dock Hintergrundfarbe.</string>
     <string name="settings_colorDrawer">Drawer</string>
     <string name="settings_colorDrawer_summary">Drawer Hintergrundfarbe.</string>
-    <string name="settings_colorFolder">Karten</string>
-    <string name="settings_colorFolder_summary">Hintergrundfarbe für die App Drawer Karten.</string>
+    <string name="settings_colorCard">Karten</string>
+    <string name="settings_colorCard_summary">Hintergrundfarbe für die App Drawer Karten.</string>
     <string name="settings_colorLabel">Beschriftung</string>
     <string name="settings_colorLabel_summary">Farbe für die Beschriftungen in den Ordnern und im App Drawer.</string>
-    <string name="settings_colorAppFolder">Ordner</string>
-    <string name="settings_colorAppFolder_summary">Hintergrundfarbe für die Ordner auf dem Desktop.</string>
+    <string name="settings_colorFolder">Ordner</string>
+    <string name="settings_colorFolder_summary">Hintergrundfarbe für die Ordner auf dem Desktop.</string>
 
     <string name="settings_iconSize">Größe</string>
     <string name="settings_iconSize_summary">Größe für alle Anwendungsicons.</string>

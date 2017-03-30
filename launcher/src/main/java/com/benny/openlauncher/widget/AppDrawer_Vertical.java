@@ -227,5 +227,4 @@ public class AppDrawer_Vertical extends CardView {
             }
         }
     }
-
 }

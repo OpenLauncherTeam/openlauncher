@@ -481,12 +481,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
             @Override
             public void onEnd() {
-                if (LauncherSettings.getInstance(Home.this).generalSettings.drawerRememberPage)
+                if (!LauncherSettings.getInstance(Home.this).generalSettings.drawerRememberPage) {
                     appDrawerContainer.scrollToStart();
-
+                }
                 appDrawer.setVisibility(View.INVISIBLE);
-                if (!dragOptionView.dragging && appSearchBar != null)
+                if (!dragOptionView.dragging && appSearchBar != null) {
                     searchBar.animate().alpha(1);
+                }
             }
         });
     }

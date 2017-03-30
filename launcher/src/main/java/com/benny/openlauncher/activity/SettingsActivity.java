@@ -22,7 +22,6 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DialogUtils;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.widget.AppDrawer;
 import com.bennyv5.materialpreffragment.BaseSettingsActivity;
 import com.bennyv5.materialpreffragment.MaterialPrefFragment;
 import com.benny.openlauncher.R;
@@ -102,7 +101,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                         .add(new MaterialPrefFragment.TBPref("drawerCard", (getString(R.string.settings_drawerCard)), (getString(R.string.settings_drawerCard_summary)), generalSettings.drawerUseCard))
                         .add(new MaterialPrefFragment.TBPref("drawerSearchBar", (getString(R.string.settings_drawerSearch)), (getString(R.string.settings_drawerSearch_summary)), generalSettings.drawerSearchBar))
                         .add(new MaterialPrefFragment.TBPref("drawerLight", (getString(R.string.settings_drawerSearchIcon)), (getString(R.string.settings_drawerSearchIcon_summary)), generalSettings.drawerLight))
-                        .add(new MaterialPrefFragment.TBPref("drawerRememberPage", (getString(R.string.settings_drawerPage)), (getString(R.string.settings_drawerPage_summary)), !generalSettings.drawerRememberPage))
+                        .add(new MaterialPrefFragment.TBPref("drawerRememberPage", (getString(R.string.settings_drawerPage)), (getString(R.string.settings_drawerPage_summary)), generalSettings.drawerRememberPage))
                         .add(new MaterialPrefFragment.TBPref("drawerShowIndicator", (getString(R.string.settings_drawerIndicator)), (getString(R.string.settings_drawerIndicator_summary)), generalSettings.drawerShowIndicator))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_drawer);
@@ -123,8 +122,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
                         .add(new MaterialPrefFragment.ColorPref("dockBackground", (getString(R.string.settings_colorDock)), (getString(R.string.settings_colorDock_summary)), generalSettings.dockColor))
                         .add(new MaterialPrefFragment.ColorPref("drawerBackground", (getString(R.string.settings_colorDrawer)), (getString(R.string.settings_colorDrawer_summary)), generalSettings.drawerColor))
-                        .add(new MaterialPrefFragment.ColorPref("drawerCardBackground", (getString(R.string.settings_colorFolder)), (getString(R.string.settings_colorFolder_summary)), generalSettings.drawerCardColor))
-                        .add(new MaterialPrefFragment.ColorPref("folderColor", (getString(R.string.settings_colorAppFolder)), (getString(R.string.settings_colorAppFolder_summary)), generalSettings.folderColor))
+                        .add(new MaterialPrefFragment.ColorPref("drawerCardBackground", (getString(R.string.settings_colorCard)), (getString(R.string.settings_colorCard_summary)), generalSettings.drawerCardColor))
+                        .add(new MaterialPrefFragment.ColorPref("folderColor", (getString(R.string.settings_colorFolder)), (getString(R.string.settings_colorFolder_summary)), generalSettings.folderColor))
                         .add(new MaterialPrefFragment.ColorPref("drawerLabelColor", (getString(R.string.settings_colorLabel)), (getString(R.string.settings_colorLabel_summary)), generalSettings.drawerLabelColor))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_color);
@@ -175,14 +174,15 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
         LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(this).generalSettings;
         switch (id) {
             case "drawerRememberPage":
-                generalSettings.drawerRememberPage = !(boolean) value;
+                generalSettings.drawerRememberPage = (boolean) value;
                 break;
             case "desktopSearchBar":
                 generalSettings.desktopSearchBar = (boolean) value;
                 if (!(boolean) value)
                     Home.launcher.searchBar.setVisibility(View.GONE);
-                else
+                else {
                     Home.launcher.searchBar.setVisibility(View.VISIBLE);
+                }
                 break;
             case "fullscreen":
                 generalSettings.fullscreen = (boolean) value;
@@ -241,31 +241,35 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 generalSettings.dockColor = (int) value;
                 if (Home.launcher != null)
                     Home.launcher.dock.setBackgroundColor((int) value);
-                else
+                else {
                     prepareRestart();
+                }
                 break;
             case "drawerBackground":
                 generalSettings.drawerColor = (int) value;
                 if (Home.launcher != null) {
                     Home.launcher.appDrawerContainer.setBackgroundColor((int) value);
                     Home.launcher.appDrawerContainer.getBackground().setAlpha(0);
-                } else
+                } else {
                     prepareRestart();
+                }
                 break;
             case "drawerCard":
                 generalSettings.drawerUseCard = (boolean) value;
                 if (Home.launcher != null) {
                     Home.launcher.appDrawerContainer.reloadDrawerCardTheme();
-                } else
+                } else {
                     prepareRestart();
+                }
                 break;
             case "drawerCardBackground":
                 generalSettings.drawerCardColor = (int) value;
                 if (Home.launcher != null) {
                     Home.launcher.appDrawerContainer.reloadDrawerCardTheme();
                     prepareRestart();
-                } else
+                } else {
                     prepareRestart();
+                }
                 break;
             case "drawerLabelColor":
                 generalSettings.drawerLabelColor = (int) value;
@@ -275,14 +279,15 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 } else
                     prepareRestart();
                 break;
-          case "folderColor":
-            generalSettings.folderColor = (int) value;
-            if (Home.launcher != null) {
-              Home.launcher.appDrawerContainer.reloadDrawerCardTheme();
-              prepareRestart();
-            } else
-              prepareRestart();
-            break;
+            case "folderColor":
+                generalSettings.folderColor = (int) value;
+                if (Home.launcher != null) {
+                    Home.launcher.appDrawerContainer.reloadDrawerCardTheme();
+                    prepareRestart();
+                } else {
+                    prepareRestart();
+                }
+                break;
             case "desktopShowLabel":
                 generalSettings.desktopShowLabel = (boolean) value;
                 prepareRestart();
