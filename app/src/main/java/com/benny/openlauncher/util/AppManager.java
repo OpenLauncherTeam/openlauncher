@@ -257,6 +257,10 @@ public class AppManager {
             label = info.loadLabel(pm).toString();
             packageName = info.activityInfo.packageName;
             className = info.activityInfo.name;
+
+            if (packageName.equals("com.benny.openlauncher")){
+                label = "OLSettings";
+            }
         }
 
         @Override

@@ -156,7 +156,7 @@ public class LauncherSettings {
         generalSettings.pinch = value;
     }
 
-    public void setUnpinchGesture(int value) {
+    public void setUnPinchGesture(int value) {
         generalSettings.unPinch = value;
     }
 
@@ -295,7 +295,8 @@ public class LauncherSettings {
         public int dockGridX = 5;
         public boolean dockShowLabel = true;
 
-        //MiniBar Arrangement
+        //MiniBar
+        public boolean minBarEnable = true;
         public ArrayList<String> miniBarArrangement;
 
         //Not used

@@ -265,12 +265,15 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     @Override
     public void addItemToPagePosition(final Item item, int page) {
+        if (item.isInvalidate) return;
+
         int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
         if (itemView == null)
-            LauncherSettings.getInstance(getContext()).desktopData.get(page).remove(item);
-         else
+            item.invalidate();
+            //LauncherSettings.getInstance(getContext()).desktopData.get(page).remove(item);
+        else
             pages.get(page).addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
     }
 
@@ -564,6 +567,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         public int widgetID;
         public int spanX = 1;
         public int spanY = 1;
+        public boolean isInvalidate;
 
         public SimpleItem() {
         }
@@ -577,6 +581,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             this.spanX = in.spanX;
             this.spanY = in.spanY;
             this.widgetID = in.widgetID;
+            this.isInvalidate = in.isInvalidate;
         }
     }
 
@@ -597,6 +602,16 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 return new Item[size];
             }
         };
+
+        //Call to set the object to unusable
+        public void invalidate() {
+            isInvalidate = true;
+            actions = null;
+            type = null;
+            name = null;
+        }
+
+        public boolean isInvalidate = false;
 
         public Type type;
 
@@ -622,6 +637,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
 
         public void addActions(Intent act) {
+            if (isInvalidate) return;
             Intent[] newAct = new Intent[actions.length + 1];
             for (int i = 0; i < actions.length; i++) {
                 newAct[i] = actions[i];
@@ -631,6 +647,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
 
         public void removeActions(Intent act) {
+            if (isInvalidate) return;
             Intent[] newAct = new Intent[actions.length - 1];
             boolean removed = false;
             for (int i = 0; i < actions.length; i++) {
@@ -654,6 +671,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             this.spanX = in.spanX;
             this.spanY = in.spanY;
             this.widgetID = in.widgetID;
+            this.isInvalidate = in.isInvalidate;
         }
 
         public static Item newAppItem(AppManager.App app) {
@@ -730,6 +748,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     break;
             }
             name = in.readString();
+            isInvalidate = in.readByte() != 0;
         }
 
         private static Intent toIntent(AppManager.App app) {
@@ -798,6 +817,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     break;
             }
             out.writeString(name);
+            out.writeByte((byte) (isInvalidate ? 1 : 0));
         }
 
         public enum Type {

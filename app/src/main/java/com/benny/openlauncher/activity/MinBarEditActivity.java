@@ -1,9 +1,11 @@
 package com.benny.openlauncher.activity;
 
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
@@ -26,10 +28,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 import static com.benny.openlauncher.activity.Home.launcher;
 
-public class MiniBarEditActivity extends AppCompatActivity implements ItemTouchCallback {
-    RecyclerView recyclerView;
+public class MinBarEditActivity extends AppCompatActivity implements ItemTouchCallback {
+    @InjectView(R.id.tb)
+    Toolbar tb;
+    @InjectView(R.id.enableSwitch)
+    SwitchCompat enableSwitch;
+    @InjectView(R.id.rv)
+    RecyclerView rv;
     private FastItemAdapter<Item> adapter;
 
     @Override
@@ -38,22 +48,21 @@ public class MiniBarEditActivity extends AppCompatActivity implements ItemTouchC
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_minbaredit);
-        setSupportActionBar((Toolbar) findViewById(R.id.tb));
+        ButterKnife.inject(this);
+        setSupportActionBar(tb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle(R.string.minibar);
-
-        recyclerView = (RecyclerView) findViewById(R.id.quickCenter);
+        setTitle(R.string.minbar);
 
         adapter = new FastItemAdapter<>();
 
         SimpleDragCallback touchCallback = new SimpleDragCallback(this);
         ItemTouchHelper touchHelper = new ItemTouchHelper(touchCallback);
-        touchHelper.attachToRecyclerView(recyclerView);
+        touchHelper.attachToRecyclerView(rv);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        rv.setLayoutManager(new LinearLayoutManager(this));
 
-        recyclerView.setAdapter(adapter);
+        rv.setAdapter(adapter);
 
         int i = 0;
         final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.miniBarArrangement;
@@ -62,6 +71,21 @@ public class MiniBarEditActivity extends AppCompatActivity implements ItemTouchC
             adapter.add(new Item(i, item, act.charAt(0) == '0'));
             i++;
         }
+
+        boolean minBarEnable = LauncherSettings.getInstance(MinBarEditActivity.this).generalSettings.minBarEnable;
+        enableSwitch.setChecked(minBarEnable);
+        enableSwitch.setText(minBarEnable ? R.string.on : R.string.off);
+        enableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                buttonView.setText(isChecked ? R.string.on : R.string.off);
+                LauncherSettings.getInstance(MinBarEditActivity.this).generalSettings.minBarEnable = isChecked;
+                if (Home.launcher != null) {
+                    Home.launcher.drawerLayout.closeDrawers();
+                    Home.launcher.drawerLayout.setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                }
+            }
+        });
 
         setResult(RESULT_OK);
     }
@@ -128,7 +152,7 @@ public class MiniBarEditActivity extends AppCompatActivity implements ItemTouchC
         }
 
         @Override
-        public void bindView(Item.ViewHolder holder, List payloads) {
+        public void bindView(ViewHolder holder, List payloads) {
             holder.tv.setText(item.label.toString());
             holder.tv2.setText(item.des);
             holder.iv.setImageResource(item.icon);

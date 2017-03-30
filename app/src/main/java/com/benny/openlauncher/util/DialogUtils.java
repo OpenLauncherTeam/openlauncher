@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.SettingsActivity;
 import com.benny.openlauncher.widget.AppDrawer;
 
 import java.io.File;
@@ -97,7 +96,7 @@ public class DialogUtils {
         .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.unPinch, new MaterialDialog.ListCallbackSingleChoice() {
           @Override
           public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-            LauncherSettings.getInstance(context).setUnpinchGesture(position);
+            LauncherSettings.getInstance(context).setUnPinchGesture(position);
             return true;
           }
         }).show();

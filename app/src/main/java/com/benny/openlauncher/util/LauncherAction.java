@@ -13,14 +13,13 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.activity.MiniBarEditActivity;
+import com.benny.openlauncher.activity.MinBarEditActivity;
 import com.benny.openlauncher.activity.SettingsActivity;
 
 import net.qiujuer.genius.blur.StackBlur;
 
 import java.util.List;
 
-import static com.benny.openlauncher.activity.Home.launcher;
 import static com.benny.openlauncher.activity.Home.resources;
 
 public class LauncherAction {
@@ -33,7 +32,7 @@ public class LauncherAction {
             new ActionItem(Action.LockScreen, resources.getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp),
             new ActionItem(Action.ClearRam, resources.getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp),
             new ActionItem(Action.DeviceSettings, resources.getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp),
-            new ActionItem(Action.LauncherSettings, resources.getString(R.string.minibar_5), R.drawable.ic_settings_black_24dp),
+            new ActionItem(Action.LauncherSettings, resources.getString(R.string.minibar_5), R.drawable.ic_settings_36dp),
             //new ActionItem(Action.ThemePicker,resources.getString(R.string.minibar_6),R.drawable.ic_brush_black_24dp),
             new ActionItem(Action.VolumeDialog, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp),
             new ActionItem(Action.OpenAppDrawer, resources.getString(R.string.minibar_8), R.drawable.ic_apps_black_24dp)
@@ -42,7 +41,7 @@ public class LauncherAction {
     public static void RunAction(Action act, final Context c) {
         switch (act) {
             case EditMinBar:
-                Intent intent1 = new Intent(c, MiniBarEditActivity.class);
+                Intent intent1 = new Intent(c, MinBarEditActivity.class);
                 c.startActivity(intent1);
                 break;
             case SetWallpaper:

@@ -3,6 +3,7 @@ package com.benny.openlauncher.activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.view.MenuItem;
 
 import com.benny.openlauncher.R;
 import com.danielstone.materialaboutlibrary.ConvenienceBuilder;
@@ -16,6 +17,8 @@ public class AboutActivity extends MaterialAboutActivity {
 
     @Override
     protected MaterialAboutList getMaterialAboutList(Context context) {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         MaterialAboutCard.Builder titleCard = new MaterialAboutCard.Builder();
         titleCard.addItem(new MaterialAboutTitleItem(R.string.app_name,R.mipmap.ic_launcher));
         try {
@@ -52,6 +55,13 @@ public class AboutActivity extends MaterialAboutActivity {
                 .addCard(authorCard.build())
                 .addCard(creditCard.build())
                 .build();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            onBackPressed();
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

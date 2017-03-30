@@ -38,11 +38,9 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.launcheranim.LauncherLoadingIcon;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
@@ -64,13 +62,16 @@ import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.MiniPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
 import com.benny.openlauncher.widget.SwipeListView;
-import com.google.gson.JsonSyntaxException;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class Home extends Activity implements DrawerLayout.DrawerListener {
 
@@ -94,7 +95,18 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     public AppDrawer appDrawerContainer;
     public MiniPopupView miniPopup;
     public View shortcutLayout;
+    public DrawerLayout drawerLayout;
     public ArrayList<QuickCenterItem.NoteContent> notes = new ArrayList<>();
+    @InjectView(R.id.removepage)
+    TextView removepage;
+    @InjectView(R.id.setashomepage)
+    TextView setashomepage;
+    @InjectView(R.id.addwidgetbtn)
+    TextView addwidgetbtn;
+    @InjectView(R.id.addLauncherAction)
+    TextView addLauncherAction;
+    @InjectView(R.id.openSettings)
+    TextView openSettings;
     //QuickCenter
     private FastItemAdapter<QuickCenterItem.NoteItem> noteAdapter;
     //normal members, currently not necessary to access from elsewhere.
@@ -106,7 +118,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     private BroadcastReceiver appUpdateReceiver, shortcutReceiver;
     private TextView searchBarClock;
     private SwipeListView minBar;
-    private DrawerLayout drawerLayout;
     private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
     private CallLogObserver callLogObserver;
@@ -136,6 +147,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
         myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, myScreen);
         setContentView(myScreen);
+        ButterKnife.inject(this);
         findViews();
 
         Tool.print("Content View sat: " + String.valueOf(System.currentTimeMillis() - now));
@@ -189,7 +201,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         //not all Android versions will print the stack trace automatically
         e.printStackTrace();
 
-        android.content.Intent iMain = new android.content.Intent();
+        Intent iMain = new Intent();
         iMain.setClassName(this, "com.benny.openlauncher.activity.Home");
         iMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent piMain = PendingIntent.getActivity(this, 2, iMain, 0);
@@ -376,38 +388,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
             }
         };
 
-        View btn1 = desktopEditOptionView.findViewById(R.id.removepage);
-        btn1.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                desktop.removeCurrentPage();
-            }
-        });
-        btn1.setOnTouchListener(Tool.getBtnColorMaskController());
-        View btn2 = desktopEditOptionView.findViewById(R.id.setashomepage);
-        btn2.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage = desktop.getCurrentItem();
-            }
-        });
-        btn2.setOnTouchListener(Tool.getBtnColorMaskController());
-        View btn3 = desktopEditOptionView.findViewById(R.id.addwidgetbtn);
-        btn3.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickWidget(view);
-            }
-        });
-        btn3.setOnTouchListener(Tool.getBtnColorMaskController());
-        View btn4 = desktopEditOptionView.findViewById(R.id.addLauncherAction);
-        btn4.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addLauncherAction(view);
-            }
-        });
-        btn4.setOnTouchListener(Tool.getBtnColorMaskController());
+        removepage.setOnTouchListener(Tool.getBtnColorMaskController());
+        setashomepage.setOnTouchListener(Tool.getBtnColorMaskController());
+        addwidgetbtn.setOnTouchListener(Tool.getBtnColorMaskController());
+        addLauncherAction.setOnTouchListener(Tool.getBtnColorMaskController());
+        openSettings.setOnTouchListener(Tool.getBtnColorMaskController());
 
         if (LauncherSettings.getInstance(this).generalSettings.showIndicator) {
             desktopIndicator.setViewPager(desktop);
@@ -492,6 +477,27 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         });
     }
 
+    @OnClick({R.id.removepage, R.id.setashomepage, R.id.addwidgetbtn, R.id.addLauncherAction, R.id.openSettings})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.removepage:
+                desktop.removeCurrentPage();
+                break;
+            case R.id.setashomepage:
+                LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage = desktop.getCurrentItem();
+                break;
+            case R.id.addwidgetbtn:
+                pickWidget(view);
+                break;
+            case R.id.addLauncherAction:
+                addLauncherAction(view);
+                break;
+            case R.id.openSettings:
+                LauncherAction.RunAction(LauncherAction.Action.LauncherSettings,this);
+                break;
+        }
+    }
+
     private void addLauncherAction(View view) {
         PopupMenu pm = new PopupMenu(this, view);
         pm.inflate(R.menu.launcher_action);
@@ -516,33 +522,36 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     }
 
     private void initSettings() {
-        if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+        LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(Home.this).generalSettings;
+        if (generalSettings.desktopSearchBar) {
             searchBar.setVisibility(View.VISIBLE);
         } else {
             searchBar.setVisibility(View.GONE);
         }
 
-        if (LauncherSettings.getInstance(this).generalSettings.fullscreen) {
+        if (generalSettings.fullscreen) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         }
 
-        dock.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.dockColor);
+        dock.setBackgroundColor(generalSettings.dockColor);
 
-        appDrawerContainer.setBackgroundColor(LauncherSettings.getInstance(this).generalSettings.drawerColor);
+        appDrawerContainer.setBackgroundColor(generalSettings.drawerColor);
         appDrawerContainer.getBackground().setAlpha(0);
         appDrawerContainer.reloadDrawerCardTheme();
 
-        switch (LauncherSettings.getInstance(this).generalSettings.drawerMode) {
+        switch (generalSettings.drawerMode) {
             case Paged:
-                if (!LauncherSettings.getInstance(this).generalSettings.drawerShowIndicator)
+                if (generalSettings.drawerShowIndicator)
                     appDrawerContainer.getChildAt(1).setVisibility(View.GONE);
                 break;
             case Vertical:
                 //This were handled at the AppDrawer_Vertical class
                 break;
         }
+
+        drawerLayout.setDrawerLockMode(generalSettings.minBarEnable ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     public void initMinBar() {
@@ -613,7 +622,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
         if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED) {
             callLogObserver = new CallLogObserver(new Handler());
-            getApplicationContext().getContentResolver().registerContentObserver(android.provider.CallLog.Calls.CONTENT_URI, true, callLogObserver);
+            getApplicationContext().getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI, true, callLogObserver);
             //First call get the call history for the adapter
             callLogObserver.onChange(true);
         } else {
@@ -626,7 +635,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         if (requestCode == REQUEST_PERMISSION_READ_CALL_LOG && callLogObserver != null) {
             //Read call log permitted
             callLogObserver = new CallLogObserver(new Handler());
-            getApplicationContext().getContentResolver().registerContentObserver(android.provider.CallLog.Calls.CONTENT_URI, true, callLogObserver);
+            getApplicationContext().getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI, true, callLogObserver);
             //First call get the call history for the adapter
             callLogObserver.onChange(true);
         }

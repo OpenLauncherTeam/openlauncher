@@ -57,7 +57,7 @@
 
     // MiniBar
 
-    <string name="minibar">Edit items</string>
+    <string name="minbar">Minbar</string>
     <string name="minibar_1">Set the wallpaper or blur it</string>
     <string name="minibar_2">Lock the screen immediately, requires device administration.</string>
     <string name="minibar_3">Free the ram, force close other running services.</string>
@@ -202,5 +202,7 @@
     <string name="request_toast">No apps selected. Show all apps in drawer?</string>
     <string name="settings_group_others">Others</string>
     <string name="edit">Minibar Settings</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
 
 </resources>

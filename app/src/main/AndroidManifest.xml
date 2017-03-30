@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.benny.openlauncher">
-
     <!--
     TODO activate later again
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
 -->
-
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -43,6 +41,7 @@
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -59,7 +58,7 @@
             android:name=".activity.AutoFinishActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <activity
-            android:name=".activity.MiniBarEditActivity"
+            android:name=".activity.MinBarEditActivity"
             android:label="Edit Item"
             android:parentActivityName=".activity.Home"
             android:theme="@style/NormalActivity.Light" />
@@ -71,10 +70,9 @@
 
         <activity
             android:name=".hideApps.Activity_hideApps"
-            android:theme="@style/NormalActivity.Light"
             android:enabled="true"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"
+            android:theme="@style/NormalActivity.Light"></activity>
 
 
         <receiver
@@ -96,8 +94,7 @@
         <activity
             android:name=".activity.AboutActivity"
             android:label="About"
-            android:theme="@style/AppTheme.MaterialAboutActivity"
-            android:parentActivityName=".activity.SettingsActivity"/>
+            android:theme="@style/AppTheme.MaterialAboutActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -106,7 +103,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
 
     </application>

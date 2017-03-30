@@ -181,11 +181,14 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public void addItemToPagePosition(final Item item, int page) {
+        if (item.isInvalidate)return;
+
         int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
         if (itemView == null) {
-            LauncherSettings.getInstance(getContext()).dockData.remove(item);
+            item.invalidate();
+            //LauncherSettings.getInstance(getContext()).dockData.remove(item);
         } else
             addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
     }

@@ -70,7 +70,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             default:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
                         .add(new MaterialPrefFragment.ButtonPref("desktopMode", (getString(R.string.settings_desktopStyle)), (getString(R.string.settings_desktopStyle_summary))))
-                        .add(new MaterialPrefFragment.ButtonPref("editMiniBar", "MiniBar arrangement", "Rearrange minibar item"))
+                        .add(new MaterialPrefFragment.ButtonPref("editMiniBar", "MinBar", "Configure MinBar and MinaBar items."))
                         // FIXME: 11/25/2016 This will have problem (in allappsmode) as the apps will be cut off when scale down
                         .add(new MaterialPrefFragment.NUMPref("gridSizeDesktop", (getString(R.string.settings_desktopSize)), (getString(R.string.settings_desktopSize_summary)),
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDesktop", (getString(R.string.settings_column)), generalSettings.desktopGridX, 4, 10),
