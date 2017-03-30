@@ -1,1 +1,1 @@
-include ':launcher', ':smoothviewpager', ':materialpreffragment', ':launcheranim'
+include ':app', ':app:libs:smoothviewpager', ':app:libs:materialpreffragment', ':app:libs:launcheranim'
