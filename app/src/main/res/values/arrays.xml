@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/tools">
+<resources>
     <string-array name="singleClickEntries">
         <item>None</item>
         <item>Open App Drawer</item>
     </string-array>
-    <integer-array name="singleClickValues" translatable="false">
-        <item>-1</item>
-        <item>7</item>
-    </integer-array>
     <string-array name="gestureEntries">
         <item>None</item>
         <item>Minibar Settings</item>
@@ -34,16 +30,4 @@
         <item>Normal</item>
         <item>Show All Apps (Experimental)</item>
     </string-array>
-    <integer-array name="desktopStyleValues" translatable="false">
-        <item>0</item>
-        <item>1</item>
-    </integer-array>
-    <string-array name="appDrawerStyleEntries">
-        <item>Normal</item>
-        <item>Show All Apps (Experimental)</item>
-    </string-array>
-    <integer-array name="appDrawerStyleValues" translatable="false">
-        <item>0</item>
-        <item>1</item>
-    </integer-array>
 </resources>

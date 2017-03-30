@@ -20,15 +20,7 @@
     <string name="ok">OK</string>
     <string name="set_as_home">Home</string>
     <string name="search_apps">Suche Anwendungen …</string>
-    <string name="launcherInfo"><![CDATA[
-                                    Open Source Project<br>
-                                    Copyright <a href="http://bennykok.weebly.com/projects.html">BennyKok</a> @2016-2017<br><br>
 
-                                    <a href="https://github.com/BennyKok/OpenLauncher/wiki/Open-Source-libraries">Open Source Bibliotheken</a><br><br>
-
-                                    Dank:<br>
-                                    Chris DeBrodie
-                                ]]></string>
     <string name="wallpaper">Wallpaper</string>
     <string name="wallpaper_set">Bestimme Wallpaper</string>
     <string name="wallpaper_blur">Wallpaper verwischen</string>
@@ -63,7 +55,6 @@
     <string name="minibar_3">Setze Ram frei, beende laufende Prozesse.</string>
     <string name="minibar_4">Verknüpfung zu den Systemeinstellungen.</string>
     <string name="minibar_5">OpenLauncher Einstellungsseite.</string>
-    <string name="minibar_6">Wähle ein Theme aus.</string>
     <string name="minibar_7">Öffne den Lautstärkedialog.</string>
     <string name="minibar_8">Öffne den App Drawer.</string>
 
@@ -88,35 +79,22 @@
     <string name="settings_iconPack_title">Wähle ein Icon Pack aus</string>
     <string name="settings_iconPack_toast">Du must zuerst die Berechtigung \"Manifest.permission.READ_EXTERNAL_STORAGE\" gewähren.</string>
 
-    <string name="settings_stylePicker_ex">(experimentell)</string>
-    <string name="settings_stylePicker_title">Desktop Stil</string>
     <string name="settings_stylePicker_title_drawer">Drawer Stil</string>
     <string name="settings_stylePicker_paged">Karten</string>
     <string name="settings_stylePicker_vertical">Vertikal</string>
     <string name="settings_stylePicker_normal">Normal</string>
-    <string name="settings_stylePicker_allApps">Zeige alle Apps (Experimentell)</string>
     <string name="settings_single_click_title">Klick Aktion</string>
     <string name="settings_double_click_title">Doppelklick Aktion</string>
     <string name="settings_pinch_title">Zusammenkneifen Aktion</string>
     <string name="settings_unpinch_title">Auseinander Ziehen Aktion</string>
     <string name="settings_swipe_down_title">Nach unten Wischen Aktion</string>
     <string name="settings_swipe_up_title">Nach oben Wischen Aktion</string>
-    <string name="settings_gesture_none">Nichts</string>
-    <string name="settings_gesture_zero">Minbar Einstellungen</string>
-    <string name="settings_gesture_one">Wallpaper aussuchen</string>
-    <string name="settings_gesture_two">Bildschirm sperren</string>
-    <string name="settings_gesture_three">RAM freigeben</string>
-    <string name="settings_gesture_four">Geräteeinstellungen</string>
-    <string name="settings_gesture_five">Launcher Einstellungen</string>
-    <string name="settings_gesture_six">Lautstärke</string>
-    <string name="settings_gesture_seven">App Drawer öffnen</string>
 
     <string name="settings_group_desktop">Desktop</string>
     <string name="settings_group_dock">Dock</string>
     <string name="settings_group_drawer">App Drawer</string>
     <string name="settings_group_color">Farben</string>
     <string name="settings_group_icons">Icons</string>
-    <string name="settings_group_others">Anderes</string>
     <string name="settings_group_input">Gesten</string>
     <string name="settings_group_other">Anderes</string>
 

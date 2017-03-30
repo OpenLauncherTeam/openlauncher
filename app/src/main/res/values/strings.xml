@@ -20,15 +20,6 @@
     <string name="ok">OK</string>
     <string name="set_as_home">Home</string>
     <string name="search_apps">Search apps …</string>
-    <string name="launcherInfo"><![CDATA[
-                                    Open source project<br>
-                                    Copyright <a href="http://bennykok.weebly.com/projects.html">BennyKok</a> @2016-2017<br><br>
-
-                                    <a href="https://github.com/BennyKok/OpenLauncher/wiki/Open-Source-libraries">Open Source libraries</a><br><br>
-
-                                    Credit:<br>
-                                    Chris DeBrodie
-                                ]]></string>
     <string name="wallpaper">Wallpaper</string>
     <string name="wallpaper_set">Set Wallpaper</string>
     <string name="wallpaper_blur">Blur Wallpaper</string>
@@ -38,7 +29,7 @@
     <string name="unnamed">Unnamed</string>
 
 
-    // Intro
+    <!-- Intro -->
 
     <string name="intro_skip">Skip</string>
     <string name="intro_finish">Let\'s start.</string>
@@ -55,7 +46,7 @@
     <string name="intro3_text">You can configure your desktop, the app drawer, and the dock … Just try it out!</string>
 
 
-    // MiniBar
+    <!-- MiniBar -->
 
     <string name="minbar">Minbar</string>
     <string name="minibar_1">Set the wallpaper or blur it</string>
@@ -63,12 +54,11 @@
     <string name="minibar_3">Free the ram, force close other running services.</string>
     <string name="minibar_4">Shortcut to device settings.</string>
     <string name="minibar_5">Shortcut to OpenLauncher settings.</string>
-    <string name="minibar_6">Pick themes.</string>
     <string name="minibar_7">Open the volume dialog.</string>
     <string name="minibar_8">Open the app drawer.</string>
 
 
-    // About
+    <!-- About -->
 
     <string name="about">About Open Launcher</string>
     <string name="about_libs">Open Source libraries</string>
@@ -79,7 +69,7 @@
     <string name="about_credit_text_2">Added some settings, German translation.</string>
 
 
-    // Settings
+    <!-- Settings -->
 
     <string name="settings">Settings</string>
 
@@ -88,28 +78,16 @@
     <string name="settings_iconPack_title">Pick icon pack</string>
     <string name="settings_iconPack_toast">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
 
-    <string name="settings_stylePicker_ex">(experimental)</string>
-    <string name="settings_stylePicker_title">Desktop style</string>
     <string name="settings_stylePicker_title_drawer">Drawer style</string>
     <string name="settings_stylePicker_paged">Paged</string>
     <string name="settings_stylePicker_vertical">Vertical</string>
     <string name="settings_stylePicker_normal">Normal</string>
-    <string name="settings_stylePicker_allApps">Show all apps (Experimental)</string>
     <string name="settings_single_click_title">Single click action</string>
     <string name="settings_double_click_title">Double click action</string>
     <string name="settings_pinch_title">Pinch action</string>
     <string name="settings_unpinch_title">Unpinch action</string>
     <string name="settings_swipe_down_title">Swipe down action</string>
     <string name="settings_swipe_up_title">Swipe up action</string>
-    <string name="settings_gesture_none">None</string>
-    <string name="settings_gesture_zero">Minbar Settings</string>
-    <string name="settings_gesture_one">Set wallpaper</string>
-    <string name="settings_gesture_two">Lock screen</string>
-    <string name="settings_gesture_three">Clear RAM</string>
-    <string name="settings_gesture_four">Device settings</string>
-    <string name="settings_gesture_five">Launcher Settings</string>
-    <string name="settings_gesture_six">Volume Dialog</string>
-    <string name="settings_gesture_seven">Open app drawer</string>
 
     <string name="settings_group_desktop">Desktop</string>
     <string name="settings_group_dock">Dock</string>
@@ -195,12 +173,11 @@
     <string name="settings_backup_success_not">Something went wrong.</string>
 
 
-    //Icon hide
+    <!-- Icon hide -->
 
     <string name="request_dummy_text">Hello world!</string>
     <string name="request_please_wait2">Searching for installed apps. Please wait.</string>
     <string name="request_toast">No apps selected. Show all apps in drawer?</string>
-    <string name="settings_group_others">Others</string>
     <string name="edit">Minibar Settings</string>
     <string name="on">On</string>
     <string name="off">Off</string>

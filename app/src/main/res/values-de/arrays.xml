@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/tools">
+<resources>
     <string-array name="singleClickEntries">
         <item>Nichts</item>
         <item>App Drawer öffnen</item>
     </string-array>
-    <integer-array name="singleClickValues" translatable="false">
-        <item>0</item>
-        <item>8</item>
-    </integer-array>
     <string-array name="gestureEntries">
         <item>Nichts</item>
         <item>Minibar Einstellungen</item>
@@ -19,31 +15,8 @@
         <item>Lautstärke Dialog</item>
         <item>Öffne App Drawer</item>
     </string-array>
-    <integer-array name="gestureValues" translatable="false">
-      <item>0</item>
-      <item>1</item>
-      <item>2</item>
-      <item>3</item>
-      <item>4</item>
-      <item>5</item>
-      <item>6</item>
-      <item>7</item>
-      <item>8</item>
-    </integer-array>
     <string-array name="desktopStyleEntries">
         <item>Normal</item>
         <item>Alle Apps zeigen (Experimentell)</item>
     </string-array>
-    <integer-array name="desktopStyleValues" translatable="false">
-        <item>0</item>
-        <item>1</item>
-    </integer-array>
-    <string-array name="appDrawerStyleEntries">
-        <item>Normal</item>
-        <item>Alle Apps zeigen (Experimentell)</item>
-    </string-array>
-    <integer-array name="appDrawerStyleValues" translatable="false">
-        <item>0</item>
-        <item>1</item>
-    </integer-array>
 </resources>
