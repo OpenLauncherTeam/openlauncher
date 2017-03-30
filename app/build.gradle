@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 25
@@ -58,15 +59,17 @@ dependencies {
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'com.github.daniel-stoneuk:material-about-library:1.4.2'
     compile 'com.github.chyrta:AndroidOnboarder:0.6'
-    compile 'com.jakewharton:butterknife:5.1.1'
+    compile 'com.jakewharton:butterknife:8.0.1'
 
     compile 'com.afollestad.material-dialogs:core:0.9.3.0'
     compile 'com.android.support:support-v13:25.2.0'
-
     compile 'com.github.florent37:expectanim:1.0.1'
+
 
     // Compile libs included into project
     compile project(':app:libs:smoothviewpager')
     compile project(':app:libs:materialpreffragment')
     compile project(path: ':app:libs:launcheranim')
+
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
 }

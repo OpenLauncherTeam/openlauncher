@@ -69,7 +69,7 @@ import java.util.List;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class Home extends Activity implements DrawerLayout.DrawerListener {
@@ -96,15 +96,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
     public View shortcutLayout;
     public DrawerLayout drawerLayout;
     public ArrayList<QuickCenterItem.NoteContent> notes = new ArrayList<>();
-    @InjectView(R.id.removepage)
+    @BindView(R.id.removepage)
     TextView removepage;
-    @InjectView(R.id.setashomepage)
+    @BindView(R.id.setashomepage)
     TextView setashomepage;
-    @InjectView(R.id.addwidgetbtn)
+    @BindView(R.id.addwidgetbtn)
     TextView addwidgetbtn;
-    @InjectView(R.id.addLauncherAction)
+    @BindView(R.id.addLauncherAction)
     TextView addLauncherAction;
-    @InjectView(R.id.openSettings)
+    @BindView(R.id.openSettings)
     TextView openSettings;
     //QuickCenter
     private FastItemAdapter<QuickCenterItem.NoteItem> noteAdapter;
@@ -146,7 +146,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
 
         myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, myScreen);
         setContentView(myScreen);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         findViews();
 
         Tool.print("Content View sat: " + String.valueOf(System.currentTimeMillis() - now));

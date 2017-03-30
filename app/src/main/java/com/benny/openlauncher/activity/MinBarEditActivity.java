@@ -29,16 +29,16 @@ import java.util.Collections;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 import static com.benny.openlauncher.activity.Home.launcher;
 
 public class MinBarEditActivity extends AppCompatActivity implements ItemTouchCallback {
-    @InjectView(R.id.tb)
+    @BindView(R.id.tb)
     Toolbar tb;
-    @InjectView(R.id.enableSwitch)
+    @BindView(R.id.enableSwitch)
     SwitchCompat enableSwitch;
-    @InjectView(R.id.rv)
+    @BindView(R.id.rv)
     RecyclerView rv;
     private FastItemAdapter<Item> adapter;
 
@@ -48,7 +48,7 @@ public class MinBarEditActivity extends AppCompatActivity implements ItemTouchCa
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_minbaredit);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         setSupportActionBar(tb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

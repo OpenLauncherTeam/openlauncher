@@ -15,7 +15,7 @@ import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import io.codetail.widget.RevealFrameLayout;
 
 /**
@@ -122,17 +122,17 @@ public class MiniPopupView extends RevealFrameLayout {
     }
 
     static class VolumeDialogViewHolder {
-        @InjectView(R.id.sb_ringtone)
+        @BindView(R.id.sb_ringtone)
         SeekBar sbRingtone;
-        @InjectView(R.id.sb_notification)
+        @BindView(R.id.sb_notification)
         SeekBar sbNotification;
-        @InjectView(R.id.sb_system)
+        @BindView(R.id.sb_system)
         SeekBar sbSystem;
-        @InjectView(R.id.sb_media)
+        @BindView(R.id.sb_media)
         SeekBar sbMedia;
 
         VolumeDialogViewHolder(View view) {
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
         }
 
         private SeekBar.OnSeekBarChangeListener getSoundChangeListener(final AudioManager audioManager, final int type) {
@@ -161,13 +161,13 @@ public class MiniPopupView extends RevealFrameLayout {
     }
 
     static class ClearRamViewHolder {
-        @InjectView(R.id.available_ram)
+        @BindView(R.id.available_ram)
         TextView availableRam;
-        @InjectView(R.id.available_storage)
+        @BindView(R.id.available_storage)
         TextView availableStorage;
 
         ClearRamViewHolder(View view) {
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
         }
     }
 }
