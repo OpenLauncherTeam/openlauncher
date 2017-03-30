@@ -5,7 +5,6 @@ import android.graphics.Point;
 import android.view.View;
 
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.widget.AppItemView;
 
 public class GoodDragShadowBuilder extends View.DragShadowBuilder {
     int x;

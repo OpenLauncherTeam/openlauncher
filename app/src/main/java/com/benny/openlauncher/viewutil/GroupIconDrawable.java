@@ -14,7 +14,7 @@ import android.graphics.drawable.Drawable;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.Tool;
 
-public class GroupIconDrawable extends Drawable{
+public class GroupIconDrawable extends Drawable {
 
     private int outlinepad;
     Bitmap[] icons;
@@ -30,17 +30,17 @@ public class GroupIconDrawable extends Drawable{
     private boolean needAnimate, needAnimateScale;
 
     private float sx = 1;
-    private float sy = 1 ;
+    private float sy = 1;
 
-    public GroupIconDrawable(Bitmap[] icons,float size){
-        init(icons,size);
+    public GroupIconDrawable(Bitmap[] icons, float size) {
+        init(icons, size);
     }
 
-    private void init(Bitmap[] icons,float size){
+    private void init(Bitmap[] icons, float size) {
         this.icons = icons;
         this.iconSize = size;
         iconSizeDiv2 = Math.round(iconSize / 2f);
-        padding = iconSize /25f;
+        padding = iconSize / 25f;
 
         this.paint = new Paint();
         paint.setColor(Color.WHITE);
@@ -60,7 +60,7 @@ public class GroupIconDrawable extends Drawable{
         paint2.setFilterBitmap(true);
     }
 
-    public void popUp(){
+    public void popUp() {
         sy = 1;
         sx = 1;
         needAnimate = true;
@@ -68,7 +68,7 @@ public class GroupIconDrawable extends Drawable{
         invalidateSelf();
     }
 
-    public void popBack(){
+    public void popBack() {
         needAnimate = false;
         needAnimateScale = false;
         invalidateSelf();
@@ -78,45 +78,49 @@ public class GroupIconDrawable extends Drawable{
     public void draw(Canvas canvas) {
         canvas.save();
 
-        if (needAnimateScale){
-            scaleFactor = Tool.clampFloat(scaleFactor-0.09f,0.5f,1f);
-        }else {
-            scaleFactor = Tool.clampFloat(scaleFactor+0.09f,0.5f,1f);
+        if (needAnimateScale) {
+            scaleFactor = Tool.clampFloat(scaleFactor - 0.09f, 0.5f, 1f);
+        } else {
+            scaleFactor = Tool.clampFloat(scaleFactor + 0.09f, 0.5f, 1f);
         }
 
-        canvas.scale(scaleFactor,scaleFactor,iconSize/2,iconSize/2);
+        canvas.scale(scaleFactor, scaleFactor, iconSize / 2, iconSize / 2);
 
         Path clipp = new Path();
-        clipp.addCircle(iconSize / 2,iconSize / 2,iconSize / 2-outlinepad, Path.Direction.CW);
+        clipp.addCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, Path.Direction.CW);
         canvas.clipPath(clipp, Region.Op.REPLACE);
 
-        canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2-outlinepad,paint);
+        canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, paint);
 
-        canvas.drawBitmap(icons[0],null,new RectF(padding,padding, iconSizeDiv2-padding, iconSizeDiv2-padding),paint2);
-        canvas.drawBitmap(icons[1],null,new RectF(iconSizeDiv2+padding,padding,iconSize-padding, iconSizeDiv2-padding),paint2);
-        canvas.drawBitmap(icons[2],null,new RectF(padding, iconSizeDiv2+padding, iconSizeDiv2-padding,iconSize-padding),paint2);
-        canvas.drawBitmap(icons[3],null,new RectF(iconSizeDiv2+padding, iconSizeDiv2+padding,iconSize-padding,iconSize-padding),paint2);
+        canvas.drawBitmap(icons[0], null, new RectF(padding, padding, iconSizeDiv2 - padding, iconSizeDiv2 - padding), paint2);
+        canvas.drawBitmap(icons[1], null, new RectF(iconSizeDiv2 + padding, padding, iconSize - padding, iconSizeDiv2 - padding), paint2);
+        canvas.drawBitmap(icons[2], null, new RectF(padding, iconSizeDiv2 + padding, iconSizeDiv2 - padding, iconSize - padding), paint2);
+        canvas.drawBitmap(icons[3], null, new RectF(iconSizeDiv2 + padding, iconSizeDiv2 + padding, iconSize - padding, iconSize - padding), paint2);
 
-        canvas.clipRect(0,0,iconSize,iconSize, Region.Op.REPLACE);
+        canvas.clipRect(0, 0, iconSize, iconSize, Region.Op.REPLACE);
 
-        canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize/2-outlinepad,paint4);
+        canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, paint4);
         canvas.restore();
 
-        if (needAnimate){
-            paint2.setAlpha(Tool.clampInt(paint2.getAlpha()-25,0,255));
+        if (needAnimate) {
+            paint2.setAlpha(Tool.clampInt(paint2.getAlpha() - 25, 0, 255));
             invalidateSelf();
-        }else if (paint2.getAlpha() != 255){
-            paint2.setAlpha(Tool.clampInt(paint2.getAlpha()+25,0,255));
+        } else if (paint2.getAlpha() != 255) {
+            paint2.setAlpha(Tool.clampInt(paint2.getAlpha() + 25, 0, 255));
             invalidateSelf();
         }
     }
 
     @Override
-    public void setAlpha(int i) {}
+    public void setAlpha(int i) {
+    }
 
     @Override
-    public void setColorFilter(ColorFilter colorFilter) {}
+    public void setColorFilter(ColorFilter colorFilter) {
+    }
 
     @Override
-    public int getOpacity() {return PixelFormat.TRANSPARENT;}
+    public int getOpacity() {
+        return PixelFormat.TRANSPARENT;
+    }
 }

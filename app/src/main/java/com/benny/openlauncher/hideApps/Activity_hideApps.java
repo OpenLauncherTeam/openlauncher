@@ -1,6 +1,5 @@
 package com.benny.openlauncher.hideApps;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,7 +14,6 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.AboutActivity;
 import com.benny.openlauncher.util.AppManager;
 
 import java.io.File;
@@ -46,7 +44,7 @@ public class Activity_hideApps extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        File directory = new File(Environment.getExternalStorageDirectory()  + "/launcher.backup/");
+        File directory = new File(Environment.getExternalStorageDirectory() + "/launcher.backup/");
         if (!directory.exists()) {
             directory.mkdirs();
         }
@@ -106,7 +104,7 @@ public class Activity_hideApps extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 break;

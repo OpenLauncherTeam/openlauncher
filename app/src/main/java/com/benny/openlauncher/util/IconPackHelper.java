@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 public class IconPackHelper {
-    public static void themePacs(AppManager appManager,final int iconSize, String resPacName, List<AppManager.App> apps) {
+    public static void themePacs(AppManager appManager, final int iconSize, String resPacName, List<AppManager.App> apps) {
         //theming vars-----------------------------------------------
         Resources themeRes = null;
         String iconResource;
@@ -45,7 +45,8 @@ public class IconPackHelper {
         if (resPacName.compareTo("") != 0) {
             try {
                 themeRes = appManager.getPackageManager().getResourcesForApplication(resPacName);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
             if (themeRes != null) {
                 String[] backAndMaskAndFront = getIconBackAndMaskResourceName(themeRes, resPacName);
                 if (backAndMaskAndFront[0] != null)
@@ -138,7 +139,7 @@ public class IconPackHelper {
                     if (front != null)
                         canvas.drawBitmap(front, getResizedMatrix(front, iconSize, iconSize), p);
 
-                    apps.get(I).icon = new BitmapDrawable(appManager.getContext().getResources(),scaledBitmap);
+                    apps.get(I).icon = new BitmapDrawable(appManager.getContext().getResources(), scaledBitmap);
                 }
             }
         }

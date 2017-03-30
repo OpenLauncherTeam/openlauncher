@@ -17,7 +17,7 @@ public class Init extends OnboarderActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!getSharedPreferences("quickSettings",MODE_PRIVATE).getBoolean("firstStart",true)) {
+        if (!getSharedPreferences("quickSettings", MODE_PRIVATE).getBoolean("firstStart", true)) {
             RockIt();
             return;
         }
@@ -60,7 +60,7 @@ public class Init extends OnboarderActivity {
     }
 
     private void RockIt() {
-        getSharedPreferences("quickSettings",MODE_PRIVATE).edit().putBoolean("firstStart",false).apply();
+        getSharedPreferences("quickSettings", MODE_PRIVATE).edit().putBoolean("firstStart", false).apply();
 
         Intent intent = new Intent(Init.this, Home.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

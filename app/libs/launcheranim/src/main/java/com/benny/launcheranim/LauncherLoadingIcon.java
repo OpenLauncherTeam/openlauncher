@@ -2,11 +2,8 @@ package com.benny.launcheranim;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -14,9 +11,9 @@ import android.widget.ImageView;
  * Created by BennyKok on 12/9/2016.
  */
 
-public class LauncherLoadingIcon extends FrameLayout{
+public class LauncherLoadingIcon extends FrameLayout {
 
-    private ImageView iv1,iv2,iv3;
+    private ImageView iv1, iv2, iv3;
 
     private static final Long ANIM_DURATION = 250L;
 
@@ -25,7 +22,7 @@ public class LauncherLoadingIcon extends FrameLayout{
     private final Runnable ANIM_1 = new Runnable() {
         @Override
         public void run() {
-            if (iv1 != null){
+            if (iv1 != null) {
                 iv1.setScaleX(0);
                 iv2.setScaleY(0);
                 iv3.setScaleX(0);
@@ -37,7 +34,7 @@ public class LauncherLoadingIcon extends FrameLayout{
     private final Runnable ANIM_2 = new Runnable() {
         @Override
         public void run() {
-            if (iv2 != null){
+            if (iv2 != null) {
                 iv2.animate().setDuration(ANIM_DURATION).scaleY(1).alpha(1).withEndAction(ANIM_3).setInterpolator(interpolator);
             }
         }
@@ -46,7 +43,7 @@ public class LauncherLoadingIcon extends FrameLayout{
     private final Runnable ANIM_3 = new Runnable() {
         @Override
         public void run() {
-            if (iv3 != null){
+            if (iv3 != null) {
                 iv3.animate().setDuration(ANIM_DURATION).scaleX(1).alpha(1).withEndAction(ANIM_4).setInterpolator(interpolator);
             }
         }
@@ -69,7 +66,7 @@ public class LauncherLoadingIcon extends FrameLayout{
     }
 
     public void setLoading(boolean loading) {
-        if (loading != this.loading && loading){
+        if (loading != this.loading && loading) {
             removeCallbacks(null);
             post(ANIM_1);
         }
@@ -92,7 +89,7 @@ public class LauncherLoadingIcon extends FrameLayout{
 
     private static final LayoutParams matchParentLp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-    public void init(){
+    public void init() {
         iv1 = new ImageView(getContext());
         iv2 = new ImageView(getContext());
         iv3 = new ImageView(getContext());

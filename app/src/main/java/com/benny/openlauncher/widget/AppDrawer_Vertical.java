@@ -60,7 +60,7 @@ public class AppDrawer_Vertical extends CardView {
         preInit();
     }
 
-    public void preInit(){
+    public void preInit() {
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {

@@ -15,11 +15,11 @@ import android.graphics.drawable.Drawable;
  * Created by BennyKok on 11/28/2016.
  */
 
-public class RoundDrawable extends Drawable{
+public class RoundDrawable extends Drawable {
 
     Bitmap bmp;
 
-    public RoundDrawable (Bitmap bmp){
+    public RoundDrawable(Bitmap bmp) {
         this.bmp = bmp;
     }
 

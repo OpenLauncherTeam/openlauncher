@@ -1,7 +1,7 @@
 package com.benny.openlauncher.widget;
 
 import android.content.Context;
-import android.content.res.*;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
@@ -9,18 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
 import com.bennyv5.smoothviewpager.SmoothViewPager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AppDrawer_Paged extends SmoothViewPager {
     private List<AppManager.App> apps;
@@ -93,7 +92,7 @@ public class AppDrawer_Paged extends SmoothViewPager {
             setLandscapeValue();
         }
 
-        if (AppManager.getInstance(getContext()).getApps().size() != 0){
+        if (AppManager.getInstance(getContext()).getApps().size() != 0) {
             AppDrawer_Paged.this.apps = AppManager.getInstance(getContext()).getApps();
             calculatePage();
             setAdapter(new Adapter());
@@ -116,7 +115,7 @@ public class AppDrawer_Paged extends SmoothViewPager {
             appDrawerIndicator.setViewPager(AppDrawer_Paged.this);
     }
 
-    public void resetAdapter(){
+    public void resetAdapter() {
         setAdapter(null);
         setAdapter(new Adapter());
     }
@@ -155,12 +154,12 @@ public class AppDrawer_Paged extends SmoothViewPager {
             pages.clear();
             for (int i = 0; i < getCount(); i++) {
                 ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_appdrawer_page, null);
-                if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerUseCard){
-                    ((CardView)layout.getChildAt(0)).setCardBackgroundColor(Color.TRANSPARENT);
-                    ((CardView)layout.getChildAt(0)).setCardElevation(0);
-                }else {
-                    ((CardView)layout.getChildAt(0)).setCardBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
-                    ((CardView)layout.getChildAt(0)).setCardElevation(Tool.dp2px(4,getContext()));
+                if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerUseCard) {
+                    ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Color.TRANSPARENT);
+                    ((CardView) layout.getChildAt(0)).setCardElevation(0);
+                } else {
+                    ((CardView) layout.getChildAt(0)).setCardBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
+                    ((CardView) layout.getChildAt(0)).setCardElevation(Tool.dp2px(4, getContext()));
                 }
                 CellContainer cc = (CellContainer) layout.findViewById(R.id.cc);
                 cc.setGridSize(hCellCount, vCellCount);

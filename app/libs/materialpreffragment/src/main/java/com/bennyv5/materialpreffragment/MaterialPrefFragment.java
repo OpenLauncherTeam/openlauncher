@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.text.Html;
@@ -363,7 +362,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
 
             b.setTag(fragment.TAG_ID, id);
             if (icon != null) {
-                b.setCompoundDrawablePadding(Tool.dp2px(20,c));
+                b.setCompoundDrawablePadding(Tool.dp2px(20, c));
                 b.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
             }
             b.setOnClickListener(fragment);

@@ -15,7 +15,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.LauncherSettings;
@@ -200,18 +199,18 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
         }
     }
 
-    public void reloadDrawerCardTheme(){
+    public void reloadDrawerCardTheme() {
         switch (drawerMode) {
             case Paged:
                 drawerViewPaged.resetAdapter();
                 break;
             case Vertical:
-                if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerUseCard){
+                if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerUseCard) {
                     drawerViewGrid.setCardBackgroundColor(Color.TRANSPARENT);
                     drawerViewGrid.setCardElevation(0);
-                }else {
+                } else {
                     drawerViewGrid.setCardBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
-                    drawerViewGrid.setCardElevation(Tool.dp2px(4,getContext()));
+                    drawerViewGrid.setCardElevation(Tool.dp2px(4, getContext()));
                 }
                 if (drawerViewGrid.gridDrawerAdapter != null)
                     drawerViewGrid.gridDrawerAdapter.notifyDataSetChanged();

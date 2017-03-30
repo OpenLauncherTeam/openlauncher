@@ -6,10 +6,10 @@
     android:paddingBottom="24dp"
     android:paddingTop="24dp"
     app:mrl_rippleColor="?android:textColorPrimaryInverse"
+    app:mrl_rippleDimension="40dp"
     app:mrl_rippleDuration="250"
     app:mrl_rippleFadeDuration="150"
     app:mrl_rippleOverlay="true"
-    app:mrl_rippleDimension="40dp"
     app:mrl_rippleRoundedCorners="40dp">
 
     <LinearLayout

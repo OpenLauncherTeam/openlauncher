@@ -3,56 +3,56 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:alpha="0"
+    android:dividerPadding="2dp"
     android:orientation="horizontal"
-    android:visibility="invisible"
-    android:dividerPadding="2dp">
+    android:visibility="invisible">
 
     <TextView
-        android:fontFamily="sans-serif-condensed"
         android:id="@+id/removepage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableTop="@drawable/ic_clear_black_24dp"
+        android:fontFamily="sans-serif-condensed"
         android:padding="5dp"
         android:text="@string/remove"
         android:textColor="?android:textColorPrimaryInverse" />
 
     <TextView
-        android:fontFamily="sans-serif-condensed"
         android:id="@+id/setashomepage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableTop="@drawable/ic_star_black_24dp"
+        android:fontFamily="sans-serif-condensed"
         android:padding="5dp"
         android:text="@string/set_as_home"
         android:textColor="?android:textColorPrimaryInverse" />
 
     <TextView
-        android:fontFamily="sans-serif-condensed"
         android:id="@+id/addwidgetbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableTop="@drawable/ic_dashboard_black_24dp"
+        android:fontFamily="sans-serif-condensed"
         android:padding="5dp"
         android:text="@string/add_widget"
         android:textColor="?android:textColorPrimaryInverse" />
 
     <TextView
-        android:fontFamily="sans-serif-condensed"
         android:id="@+id/addLauncherAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableTop="@drawable/ic_launch_black_24dp"
+        android:fontFamily="sans-serif-condensed"
         android:padding="5dp"
         android:text="Action"
         android:textColor="?android:textColorPrimaryInverse" />
 
     <TextView
-        android:fontFamily="sans-serif-condensed"
         android:id="@+id/openSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableTop="@drawable/ic_settings_36dp"
+        android:fontFamily="sans-serif-condensed"
         android:padding="5dp"
         android:text="Settings"
         android:textColor="?android:textColorPrimaryInverse" />

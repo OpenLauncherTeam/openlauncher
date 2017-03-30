@@ -32,15 +32,15 @@ public class WidgetView extends AppWidgetHostView {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Home.touchX = getWidth()/2;//(int) ev.getX();
-        Home.touchY = getHeight()/2;//(int) ev.getY();
-        switch(MotionEventCompat.getActionMasked( ev ) ) {
+        Home.touchX = getWidth() / 2;//(int) ev.getX();
+        Home.touchY = getHeight() / 2;//(int) ev.getY();
+        switch (MotionEventCompat.getActionMasked(ev)) {
             case MotionEvent.ACTION_DOWN:
                 down = System.currentTimeMillis();
                 break;
             case MotionEvent.ACTION_MOVE:
                 boolean upVal = System.currentTimeMillis() - down > 500L;
-                if( upVal ) {
+                if (upVal) {
                     longClick.onLongClick(WidgetView.this);
                     down = 0;
                 }

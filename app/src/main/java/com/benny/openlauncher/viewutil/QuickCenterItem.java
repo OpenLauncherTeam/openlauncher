@@ -24,14 +24,14 @@ import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 import java.util.List;
 
 //Concept idea of adding a place that enable user to take notes, suggest apps and contacts;
-public class QuickCenterItem{
+public class QuickCenterItem {
 
     public static class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
         public String date;
         public String description;
         private FastItemAdapter<NoteItem> adapter;
 
-        public NoteItem(String date, String description, FastItemAdapter<QuickCenterItem.NoteItem> adapter){
+        public NoteItem(String date, String description, FastItemAdapter<QuickCenterItem.NoteItem> adapter) {
             this.date = date;
             this.description = description;
             this.adapter = adapter;
@@ -51,18 +51,18 @@ public class QuickCenterItem{
         public void bindView(final ViewHolder viewHolder, List payloads) {
             super.bindView(viewHolder, payloads);
 
-            viewHolder.date.setText(Html.fromHtml("<b><big>Note</big></b><br><small>"+date+"</small>"));
+            viewHolder.date.setText(Html.fromHtml("<b><big>Note</big></b><br><small>" + date + "</small>"));
             viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    if (view.getContext() instanceof Home){
-                        ((Home)view.getContext()).launcher.notes.remove(viewHolder.getAdapterPosition());
+                    if (view.getContext() instanceof Home) {
+                        ((Home) view.getContext()).launcher.notes.remove(viewHolder.getAdapterPosition());
                         adapter.remove(viewHolder.getAdapterPosition());
                     }
                     return true;
                 }
             });
-            viewHolder.description.setText(Html.fromHtml("<big>"+description+"</big>"));
+            viewHolder.description.setText(Html.fromHtml("<big>" + description + "</big>"));
         }
 
         private final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
@@ -90,25 +90,25 @@ public class QuickCenterItem{
         }
     }
 
-    public static class NoteContent{
+    public static class NoteContent {
         public String content;
         public String date;
 
-        public NoteContent(String date,String content){
+        public NoteContent(String date, String content) {
             this.content = content;
             this.date = date;
         }
 
         @Override
         public boolean equals(Object obj) {
-            return obj instanceof NoteContent && this.content.equals(((NoteContent)obj).content) && this.date.equals(((NoteContent)obj).date);
+            return obj instanceof NoteContent && this.content.equals(((NoteContent) obj).content) && this.date.equals(((NoteContent) obj).date);
         }
     }
 
     public static class ContactItem extends AbstractItem<ContactItem, ContactItem.ViewHolder> {
         private ContactContent info;
 
-        public ContactItem(ContactContent info){
+        public ContactItem(ContactContent info) {
             this.info = info;
         }
 
@@ -133,7 +133,7 @@ public class QuickCenterItem{
                 int color1 = generator.getRandomColor();
                 TextDrawable.IBuilder builder = TextDrawable.builder().round();
                 String name = info.name == null || info.name.isEmpty() ? info.number : info.name;
-                TextDrawable ic1 = builder.build(name.substring(0,1), color1);
+                TextDrawable ic1 = builder.build(name.substring(0, 1), color1);
                 viewHolder.imageView.setImageDrawable(ic1);
             }
 
@@ -141,12 +141,12 @@ public class QuickCenterItem{
                 @Override
                 public void onClick(View view) {
                     if (Home.launcher != null) {
-                            if (ActivityCompat.checkSelfPermission(view.getContext(),Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
-                                Home.launcher.startActivity(info.data);
-                            else {
-                                Tool.toast(view.getContext(),"Unable to call the person without Manifest.permission.CALL_PHONE granted");
-                                ActivityCompat.requestPermissions(Home.launcher,new String[]{Manifest.permission.CALL_PHONE},Home.REQUEST_PERMISSION_CALL);
-                            }
+                        if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
+                            Home.launcher.startActivity(info.data);
+                        else {
+                            Tool.toast(view.getContext(), "Unable to call the person without Manifest.permission.CALL_PHONE granted");
+                            ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.CALL_PHONE}, Home.REQUEST_PERMISSION_CALL);
+                        }
                     }
                 }
             });
@@ -175,13 +175,13 @@ public class QuickCenterItem{
         }
     }
 
-    public static class ContactContent{
+    public static class ContactContent {
         public String name;
         public Intent data;
         public Bitmap icon;
         public String number;
 
-        public ContactContent(String name,String number,Intent data,Bitmap icon){
+        public ContactContent(String name, String number, Intent data, Bitmap icon) {
             this.name = name;
             this.data = data;
             this.icon = icon;
@@ -190,13 +190,14 @@ public class QuickCenterItem{
 
         @Override
         public boolean equals(Object obj) {
-            return obj instanceof ContactContent && this.data.equals(((ContactContent)obj).data);
+            return obj instanceof ContactContent && this.data.equals(((ContactContent) obj).data);
         }
     }
 
     public static class SearchHeader extends AbstractItem<SearchHeader, SearchHeader.ViewHolder> {
 
-        public SearchHeader(){}
+        public SearchHeader() {
+        }
 
         @Override
         public int getType() {

@@ -2,9 +2,11 @@ package com.benny.openlauncher.util;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.content.*;
+import android.content.ContentUris;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.*;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,7 +21,8 @@ import android.provider.ContactsContract;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.text.format.Formatter;
-import android.util.*;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -30,8 +33,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.Home;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

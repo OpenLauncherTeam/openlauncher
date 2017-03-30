@@ -9,7 +9,10 @@ import com.benny.openlauncher.widget.Desktop;
 
 public interface DesktopCallBack extends RevertibleAction {
     void removeItemFromSettings(Desktop.Item item);
+
     void addItemToSettings(Desktop.Item item);
+
     boolean addItemToPosition(Desktop.Item item, int x, int y);
-    void addItemToPagePosition(Desktop.Item item,int page);
+
+    void addItemToPagePosition(Desktop.Item item, int page);
 }

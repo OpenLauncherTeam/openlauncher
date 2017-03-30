@@ -4,39 +4,39 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_marginLeft="14dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:text="Title"
-        android:gravity="center"
+        android:id="@+id/itemTitle"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:id="@+id/itemTitle"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="14dp"
+        android:gravity="center"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:text="Title" />
 
     <TextView
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:text="5"
-        android:gravity="center"
-        android:layout_height="wrap_content"
         android:id="@+id/valueTitle"
         android:layout_width="wrap_content"
-        android:layout_alignRight="@+id/itemTitle"
+        android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/itemTitle"
-        android:layout_below="@+id/itemTitle"
         android:layout_alignLeft="@+id/itemTitle"
-        android:layout_alignStart="@+id/itemTitle" />
+        android:layout_alignRight="@+id/itemTitle"
+        android:layout_alignStart="@+id/itemTitle"
+        android:layout_below="@+id/itemTitle"
+        android:gravity="center"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:text="5" />
 
     <SeekBar
+        android:id="@+id/valueBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/valueBar"
-        android:layout_toRightOf="@+id/valueTitle"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignBottom="@+id/valueTitle"
-        android:layout_below="@+id/itemTitle" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/itemTitle"
+        android:layout_toRightOf="@+id/valueTitle" />
 </RelativeLayout>

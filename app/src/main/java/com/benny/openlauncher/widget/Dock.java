@@ -9,15 +9,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.util.DragAction;
+import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
-import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
-import com.benny.openlauncher.util.LauncherSettings;
 
-import static com.benny.openlauncher.widget.Desktop.*;
+import static com.benny.openlauncher.widget.Desktop.Item;
 
 public class Dock extends CellContainer implements View.OnDragListener, DesktopCallBack {
 
@@ -74,17 +74,17 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     private void detectSwipe(MotionEvent ev) {
-        if (Home.launcher == null)return;
+        if (Home.launcher == null) return;
         if (ev.getAction() == MotionEvent.ACTION_UP) {
             Tool.print("ActionUP");
             float minDist = 150f;
-            Tool.print((int)ev.getX(),(int)ev.getY());
+            Tool.print((int) ev.getX(), (int) ev.getY());
             if (startPosY - ev.getY() > minDist) {
                 if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
-                    Point p = Tool.convertPoint(new Point((int)ev.getX(),(int)ev.getY()),this, Home.launcher.appDrawerContainer);
+                    Point p = Tool.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), this, Home.launcher.appDrawerContainer);
                     // FIXME: 1/22/2017 This seem weird, but the extra offset ( Tool.getNavBarHeight(getContext()) ) works on my phone
                     // FIXME: 1/22/2017 This part of the code is identical as the code in Desktop so will combine them later
-                    Home.launcher.openAppDrawer(this,p.x,p.y - Tool.getNavBarHeight(getContext())/2);
+                    Home.launcher.openAppDrawer(this, p.x, p.y - Tool.getNavBarHeight(getContext()) / 2);
                 }
             }
         }
@@ -181,7 +181,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public void addItemToPagePosition(final Item item, int page) {
-        if (item.isInvalidate)return;
+        if (item.isInvalidate) return;
 
         int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);

@@ -32,7 +32,6 @@ import android.text.Html;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -493,7 +492,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 addLauncherAction(view);
                 break;
             case R.id.openSettings:
-                LauncherAction.RunAction(LauncherAction.Action.LauncherSettings,this);
+                LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, this);
                 break;
         }
     }

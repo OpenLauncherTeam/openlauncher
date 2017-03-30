@@ -1,41 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_gravity="center"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/deleteIcon"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:tint="?android:textColorPrimary"
-        android:padding="10dp"
         android:drawableLeft="@drawable/ic_delete_black_24dp"
+        android:gravity="center"
+        android:padding="10dp"
         android:text="@string/uninstall"
-        />
+        android:tint="?android:textColorPrimary" />
 
     <TextView
         android:id="@+id/infoIcon"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:tint="?android:textColorPrimary"
-        android:padding="10dp"
         android:drawableLeft="@drawable/ic_info_outline_black_24dp"
+        android:gravity="center"
+        android:padding="10dp"
         android:text="@string/info"
-        />
+        android:tint="?android:textColorPrimary" />
 
     <TextView
         android:id="@+id/removeIcon"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:tint="?android:textColorPrimary"
-        android:padding="10dp"
         android:drawableLeft="@drawable/ic_close_black_24dp"
+        android:gravity="center"
+        android:padding="10dp"
         android:text="@string/remove"
-        />
+        android:tint="?android:textColorPrimary" />
 
 </LinearLayout>

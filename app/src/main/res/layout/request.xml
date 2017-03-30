@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,38 +26,37 @@
                     android:id="@+id/textview_request"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/request_please_wait2"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textStyle="bold"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:layout_marginRight="@dimen/fab_margin"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="@dimen/fab_margin"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_marginRight="@dimen/fab_margin"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/request_please_wait2"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
 
                 <ProgressBar
+                    android:id="@+id/progressBar"
                     style="?android:attr/progressBarStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/fab_margin"
-                    android:id="@+id/progressBar"
                     android:layout_below="@+id/textview_request"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/fab_margin" />
 
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <ListView
                     android:id="@+id/appgrid"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
-                    android:fitsSystemWindows="true" >
-                </ListView>
+                    android:fitsSystemWindows="true"></ListView>
 
             </LinearLayout>
 
@@ -69,15 +68,15 @@
         android:id="@+id/fab_rq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginLeft="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="false"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_alignParentRight="true"
         android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="false"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
         android:src="@drawable/check" />
 
 </android.support.design.widget.CoordinatorLayout>

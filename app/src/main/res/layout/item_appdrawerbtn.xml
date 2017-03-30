@@ -5,17 +5,17 @@
 
     <FrameLayout
         android:id="@+id/card"
-        android:background="@drawable/appdrawerbg"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:background="@drawable/appdrawerbg">
 
         <ImageView
-            android:tint="?android:textColorPrimary"
             android:id="@+id/iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:tint="?android:textColorPrimary" />
 
     </FrameLayout>
 

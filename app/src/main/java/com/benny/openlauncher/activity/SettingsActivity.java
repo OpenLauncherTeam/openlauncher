@@ -2,35 +2,26 @@ package com.benny.openlauncher.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import com.benny.openlauncher.R;
 import com.benny.openlauncher.fragment.SettingsFragment;
 import com.benny.openlauncher.hideApps.Activity_hideApps;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DialogUtils;
 import com.benny.openlauncher.util.LauncherAction;
+import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.bennyv5.materialpreffragment.BaseSettingsActivity;
 import com.bennyv5.materialpreffragment.MaterialPrefFragment;
-import com.benny.openlauncher.R;
-import com.benny.openlauncher.util.LauncherSettings;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 
 public class SettingsActivity extends BaseSettingsActivity implements MaterialPrefFragment.OnPrefClickedListener, MaterialPrefFragment.OnPrefChangedListener, SettingsFragment.OnSettingsSelectedInterface {
 

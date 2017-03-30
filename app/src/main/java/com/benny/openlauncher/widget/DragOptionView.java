@@ -15,8 +15,8 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
@@ -70,7 +70,7 @@ public class DragOptionView extends CardView {
 
     private ViewPropertyAnimator show() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            return animate().y(((ConstraintLayout.LayoutParams) getLayoutParams()).topMargin  + Tool.getStatusBarHeight(getContext())).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
+            return animate().y(((ConstraintLayout.LayoutParams) getLayoutParams()).topMargin + Tool.getStatusBarHeight(getContext())).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
         else
             return animate().y(((ConstraintLayout.LayoutParams) getLayoutParams()).topMargin).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
     }

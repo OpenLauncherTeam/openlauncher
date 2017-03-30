@@ -15,7 +15,7 @@ import java.util.List;
  * Created by BennyKok on 10/25/2016
  */
 
-public class IconLabelItem extends AbstractItem<IconLabelItem,IconLabelItem.ViewHolder> {
+public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> {
     Drawable icon;
     String label;
     View.OnClickListener listener;
@@ -52,15 +52,15 @@ public class IconLabelItem extends AbstractItem<IconLabelItem,IconLabelItem.View
     @Override
     public void bindView(IconLabelItem.ViewHolder holder, List payloads) {
         holder.ib.setText(label);
-        holder.ib.setCompoundDrawablesWithIntrinsicBounds(icon,null,null,null);
+        holder.ib.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
         holder.itemView.setOnClickListener(listener);
         super.bindView(holder, payloads);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView ib;
 
-        public  ViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
             ib = (TextView) itemView;
         }

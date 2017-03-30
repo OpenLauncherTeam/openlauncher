@@ -4,48 +4,48 @@
     android:layout_height="wrap_content">
 
     <ImageButton
-        android:scaleX="0"
-        android:scaleY="0"
         android:id="@+id/vertexpand"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="bottom"
-        android:src="@drawable/ic_expand_more_black_24dp"
-        android:tint="?android:textColorPrimary"
-        android:background="@drawable/roundbg"/>
-
-    <ImageButton
+        android:background="@drawable/roundbg"
         android:scaleX="0"
         android:scaleY="0"
+        android:src="@drawable/ic_expand_more_black_24dp"
+        android:tint="?android:textColorPrimary" />
+
+    <ImageButton
         android:id="@+id/horiexpand"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="top"
-        android:src="@drawable/ic_chevron_right_black_24dp"
-        android:tint="?android:textColorPrimary"
-        android:background="@drawable/roundbg"/>
-
-    <ImageButton
+        android:background="@drawable/roundbg"
         android:scaleX="0"
         android:scaleY="0"
+        android:src="@drawable/ic_chevron_right_black_24dp"
+        android:tint="?android:textColorPrimary" />
+
+    <ImageButton
         android:id="@+id/vertless"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="right|bottom"
-        android:src="@drawable/ic_expand_less_black_24dp"
-        android:tint="?android:textColorPrimary"
-        android:background="@drawable/roundbg"/>
-
-    <ImageButton
+        android:background="@drawable/roundbg"
         android:scaleX="0"
         android:scaleY="0"
+        android:src="@drawable/ic_expand_less_black_24dp"
+        android:tint="?android:textColorPrimary" />
+
+    <ImageButton
         android:id="@+id/horiless"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="right|top"
+        android:background="@drawable/roundbg"
+        android:scaleX="0"
+        android:scaleY="0"
         android:src="@drawable/ic_chevron_left_black_24dp"
-        android:tint="?android:textColorPrimary"
-        android:background="@drawable/roundbg"/>
+        android:tint="?android:textColorPrimary" />
 
 
 </FrameLayout>

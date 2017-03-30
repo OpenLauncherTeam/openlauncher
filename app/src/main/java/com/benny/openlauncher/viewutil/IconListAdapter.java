@@ -40,11 +40,10 @@ public class IconListAdapter extends BaseAdapter {
         View view;
         TextView tv;
         ImageView iv;
-        if(convertView == null) {
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(c);
             view = inflater.inflate(R.layout.item_minbar, parent, false);
-        }
-        else {
+        } else {
             view = convertView;
         }
 

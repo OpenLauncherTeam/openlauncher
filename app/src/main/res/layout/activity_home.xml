@@ -19,11 +19,11 @@
             android:background="@color/colorPrimary">
 
             <com.benny.openlauncher.widget.SwipeListView
-                android:clipToPadding="true"
                 android:id="@+id/minbar"
                 android:layout_width="74dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|start"
+                android:clipToPadding="true"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="0dp"
                 android:listSelector="@android:color/transparent"

@@ -11,14 +11,14 @@ public class DragNavigationControl {
 
     private static boolean leftok = true, rightok = true;
 
-    public static void init(final Home home,final View leftView,final View rightView) {
+    public static void init(final Home home, final View leftView, final View rightView) {
         final Handler l = new Handler();
         final Runnable right = new Runnable() {
             @Override
             public void run() {
-                if (home.desktop.getCurrentItem() < home.desktop.pageCount-1)
+                if (home.desktop.getCurrentItem() < home.desktop.pageCount - 1)
                     home.desktop.setCurrentItem(home.desktop.getCurrentItem() + 1);
-                else if (home.desktop.getCurrentItem() == home.desktop.pageCount-1)
+                else if (home.desktop.getCurrentItem() == home.desktop.pageCount - 1)
                     home.desktop.addPageRight();
                 l.postDelayed(this, 1000);
             }
@@ -39,7 +39,7 @@ public class DragNavigationControl {
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
-                        switch (((DragAction)dragEvent.getLocalState()).action) {
+                        switch (((DragAction) dragEvent.getLocalState()).action) {
                             case ACTION_APP:
                             case ACTION_WIDGET:
                             case ACTION_APP_DRAWER:
@@ -80,7 +80,7 @@ public class DragNavigationControl {
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
-                        switch (((DragAction)dragEvent.getLocalState()).action) {
+                        switch (((DragAction) dragEvent.getLocalState()).action) {
                             case ACTION_APP:
                             case ACTION_WIDGET:
                             case ACTION_APP_DRAWER:

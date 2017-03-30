@@ -15,15 +15,15 @@
         android:paddingBottom="30dp" />
 
     <TextView
-        android:textStyle="bold"
-        android:paddingBottom="6dp"
         android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
         android:gravity="center"
+        android:paddingBottom="6dp"
         android:singleLine="true"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
 
 </android.support.v7.widget.CardView>

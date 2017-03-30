@@ -38,7 +38,7 @@ public class ItemViewFactory {
 
     public static View getItemView(final Context context, final DesktopCallBack callBack, final Desktop.Item item, int flags) {
         View view = null;
-        if (item.type == null)return null;
+        if (item.type == null) return null;
         switch (item.type) {
             case LAUNCHER_APP_DRAWER:
                 view = new AppItemView.Builder(context).vibrateWhenLongPress().setLauncherAction(item.type).setTextColor(Color.WHITE).withOnTouchGetPosition().withOnLongPressDrag(item, DragAction.Action.ACTION_LAUNCHER, new AppItemView.Builder.LongPressCallBack() {

@@ -20,19 +20,19 @@ public class AboutActivity extends MaterialAboutActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         MaterialAboutCard.Builder titleCard = new MaterialAboutCard.Builder();
-        titleCard.addItem(new MaterialAboutTitleItem(R.string.app_name,R.mipmap.ic_launcher));
+        titleCard.addItem(new MaterialAboutTitleItem(R.string.app_name, R.mipmap.ic_launcher));
         try {
-            titleCard.addItem(ConvenienceBuilder.createVersionActionItem(this,getResources().getDrawable(R.drawable.ic_info_outline_24dp),"Version",true));
+            titleCard.addItem(ConvenienceBuilder.createVersionActionItem(this, getResources().getDrawable(R.drawable.ic_info_outline_24dp), "Version", true));
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(R.drawable.ic_github),"GitHub",false, Uri.parse("https://github.com/BennyKok/OpenLauncher")));
-        titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(R.drawable.ic_github),getString(R.string.about_libs),false, Uri.parse("https://github.com/BennyKok/OpenLauncher/wiki/Open-Source-libraries")));
-        titleCard.addItem(ConvenienceBuilder.createRateActionItem(this,getResources().getDrawable(R.drawable.ic_thumb_up_24dp),getString(R.string.about_rate),null));
+        titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, getResources().getDrawable(R.drawable.ic_github), "GitHub", false, Uri.parse("https://github.com/BennyKok/OpenLauncher")));
+        titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, getResources().getDrawable(R.drawable.ic_github), getString(R.string.about_libs), false, Uri.parse("https://github.com/BennyKok/OpenLauncher/wiki/Open-Source-libraries")));
+        titleCard.addItem(ConvenienceBuilder.createRateActionItem(this, getResources().getDrawable(R.drawable.ic_thumb_up_24dp), getString(R.string.about_rate), null));
 
         MaterialAboutCard.Builder authorCard = new MaterialAboutCard.Builder();
         authorCard.title(getString(R.string.about_dev));
-        authorCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(R.drawable.ic_benny),"BennyKok",false, Uri.parse("http://bennykok.weebly.com/contact.html")));
+        authorCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, getResources().getDrawable(R.drawable.ic_benny), "BennyKok", false, Uri.parse("http://bennykok.weebly.com/contact.html")));
 
         MaterialAboutCard.Builder creditCard = new MaterialAboutCard.Builder();
         creditCard.title(getString(R.string.about_credit));
@@ -40,13 +40,13 @@ public class AboutActivity extends MaterialAboutActivity {
                 .icon(R.mipmap.ic_chris)
                 .text("Chris DeBrodie")
                 .subText(getString(R.string.about_credit_text))
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this,Uri.parse("https://plus.google.com/111923938461696019967")))
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://plus.google.com/111923938461696019967")))
                 .build());
         creditCard.addItem(new MaterialAboutActionItem.Builder()
                 .icon(R.drawable.gaukler_faun)
                 .text("Gaukler Faun")
                 .subText(getString(R.string.about_credit_text_2))
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this,Uri.parse("https://github.com/scoute-dich")))
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))
                 .build());
         //authorCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(),"Chris DeBrodie",false, Uri.parse("")));
 

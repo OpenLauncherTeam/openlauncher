@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/appSearchBar"
+    android:layout_width="match_parent"
+    android:layout_height="54dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginTop="16dp"
-    android:visibility="invisible"
-    android:layout_width="match_parent"
-    android:layout_height="54dp">
+    android:visibility="invisible">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/searchIcon"
-            android:paddingLeft="18dp"
-            android:paddingRight="18dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_search_black_24dp"/>
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:src="@drawable/ic_search_black_24dp" />
 
         <com.benny.openlauncher.widget.SearchBar
-            android:fontFamily="sans-serif-condensed"
-            android:gravity="center_vertical"
-            android:background="@android:color/transparent"
-            android:hint="@string/search_apps"
             android:id="@+id/et"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center_vertical"
+            android:hint="@string/search_apps" />
 
     </LinearLayout>
 

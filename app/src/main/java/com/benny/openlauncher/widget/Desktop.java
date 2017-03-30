@@ -16,15 +16,15 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
-import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.viewutil.DesktopCallBack;
+import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
 import com.bennyv5.smoothviewpager.SmoothViewPager;
 

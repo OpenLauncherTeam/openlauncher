@@ -17,7 +17,8 @@ import java.util.ArrayList;
 
 public class ShortcutReceiver extends BroadcastReceiver {
 
-    public ShortcutReceiver() {}
+    public ShortcutReceiver() {
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -39,7 +40,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
         } catch (Exception ignore) {
         } finally {
             if (shortcutIconDrawable == null)
-                shortcutIconDrawable = new BitmapDrawable(context.getResources(),(Bitmap) intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON));
+                shortcutIconDrawable = new BitmapDrawable(context.getResources(), (Bitmap) intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON));
         }
 
         Desktop.Item item = Desktop.Item.newShortcutItem(context, name, newIntent, Tool.drawableToBitmap(shortcutIconDrawable));
@@ -49,17 +50,17 @@ public class ShortcutReceiver extends BroadcastReceiver {
 //            Home.desktop.setCurrentItem(Home.desktop.getCurrentItem() + 1);
 //            perferedPos = Home.desktop.pages.get(Home.desktop.getCurrentItem()).findFreeSpace();
 //        }
-        if (perferedPos == null){
+        if (perferedPos == null) {
             //Home.desktop.addPageRight(true);
             item.x = 0;
             item.y = 0;
-        }else {
+        } else {
             item.x = perferedPos.x;
             item.y = perferedPos.y;
         }
-        if (LauncherSettings.getInstance(context).desktopData.size() <  Home.launcher.desktop.getCurrentItem() + 1)
-            LauncherSettings.getInstance(context).desktopData.add( Home.launcher.desktop.getCurrentItem(), new ArrayList<Desktop.Item>());
-        LauncherSettings.getInstance(context).desktopData.get( Home.launcher.desktop.getCurrentItem()).add(item);
-        Home.launcher.desktop.addItemToPagePosition(item,Home.launcher.desktop.getCurrentItem());
+        if (LauncherSettings.getInstance(context).desktopData.size() < Home.launcher.desktop.getCurrentItem() + 1)
+            LauncherSettings.getInstance(context).desktopData.add(Home.launcher.desktop.getCurrentItem(), new ArrayList<Desktop.Item>());
+        LauncherSettings.getInstance(context).desktopData.get(Home.launcher.desktop.getCurrentItem()).add(item);
+        Home.launcher.desktop.addItemToPagePosition(item, Home.launcher.desktop.getCurrentItem());
     }
 }

@@ -2,10 +2,12 @@ package com.benny.openlauncher.util;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.*;
-import android.content.pm.*;
-import android.graphics.drawable.*;
-import android.os.*;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
@@ -16,7 +18,11 @@ import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.text.Collator;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.UUID;
 
 public class AppManager {
     private static AppManager ref;
@@ -194,11 +200,11 @@ public class AppManager {
                             break;
                         }
                     }
-                    if (!shouldGetAway){
+                    if (!shouldGetAway) {
                         apps.add(nonFilteredApps.get(i));
                     }
                 }
-            }else{
+            } else {
                 for (ResolveInfo info : activitiesInfo)
                     apps.add(new App(info, packageManager));
             }
@@ -258,7 +264,7 @@ public class AppManager {
             packageName = info.activityInfo.packageName;
             className = info.activityInfo.name;
 
-            if (packageName.equals("com.benny.openlauncher")){
+            if (packageName.equals("com.benny.openlauncher")) {
                 label = "OLSettings";
             }
         }
