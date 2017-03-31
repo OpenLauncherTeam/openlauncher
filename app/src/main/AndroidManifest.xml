@@ -58,7 +58,7 @@
             android:name=".activity.AutoFinishActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <activity
-            android:name=".activity.MinBarEditActivity"
+            android:name=".activity.MinibarEditActivity"
             android:label="Edit Item"
             android:parentActivityName=".activity.Home"
             android:theme="@style/NormalActivity.Light" />

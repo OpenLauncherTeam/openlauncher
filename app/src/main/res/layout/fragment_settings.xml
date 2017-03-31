@@ -15,7 +15,7 @@
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
-            android:drawable="@drawable/ic_settings_36dp"
+            android:drawable="@drawable/ic_settings_24dp"
             android:padding="16dp" />
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
-            android:drawable="@drawable/ic_settings_36dp"
+            android:drawable="@drawable/ic_settings_24dp"
             android:padding="16dp" />
 
         <TextView
@@ -61,7 +61,7 @@
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
-            android:drawable="@drawable/ic_settings_36dp"
+            android:drawable="@drawable/ic_settings_24dp"
             android:padding="16dp" />
 
         <TextView
@@ -84,7 +84,7 @@
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
-            android:drawable="@drawable/ic_settings_36dp"
+            android:drawable="@drawable/ic_settings_24dp"
             android:padding="16dp" />
 
         <TextView
@@ -107,7 +107,7 @@
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
-            android:drawable="@drawable/ic_settings_36dp"
+            android:drawable="@drawable/ic_settings_24dp"
             android:padding="16dp" />
 
         <TextView
@@ -130,7 +130,7 @@
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
-            android:drawable="@drawable/ic_settings_36dp"
+            android:drawable="@drawable/ic_settings_24dp"
             android:padding="16dp" />
 
         <TextView
@@ -153,7 +153,7 @@
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
-            android:drawable="@drawable/ic_settings_36dp"
+            android:drawable="@drawable/ic_settings_24dp"
             android:padding="16dp" />
 
         <TextView

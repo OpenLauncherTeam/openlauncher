@@ -18,7 +18,7 @@ import java.io.FileOutputStream;
 public class DialogUtils {
     public static void desktopStylePicker(final Context context) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_stylePicker_normal))
+        builder.title(context.getString(R.string.settings_desktopStyle))
                 .items(R.array.desktopStyleEntries)
                 .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.desktopHomePage, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
@@ -39,8 +39,8 @@ public class DialogUtils {
             }
         }
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_stylePicker_title_drawer))
-                .items(context.getString(R.string.settings_stylePicker_paged), context.getString(R.string.settings_stylePicker_vertical))
+        builder.title(context.getString(R.string.settings_drawerStyle))
+                .items(context.getString(R.string.settings_drawer_style_paged), context.getString(R.string.settings_drawer_style_vertical))
                 .itemsCallbackSingleChoice(enabled, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {

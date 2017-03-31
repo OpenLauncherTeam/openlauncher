@@ -33,7 +33,7 @@ import butterknife.BindView;
 
 import static com.benny.openlauncher.activity.Home.launcher;
 
-public class MinBarEditActivity extends AppCompatActivity implements ItemTouchCallback {
+public class MinibarEditActivity extends AppCompatActivity implements ItemTouchCallback {
     @BindView(R.id.tb)
     Toolbar tb;
     @BindView(R.id.enableSwitch)
@@ -52,7 +52,7 @@ public class MinBarEditActivity extends AppCompatActivity implements ItemTouchCa
         setSupportActionBar(tb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle(R.string.minbar);
+        setTitle(R.string.minibar);
 
         adapter = new FastItemAdapter<>();
 
@@ -72,14 +72,14 @@ public class MinBarEditActivity extends AppCompatActivity implements ItemTouchCa
             i++;
         }
 
-        boolean minBarEnable = LauncherSettings.getInstance(MinBarEditActivity.this).generalSettings.minBarEnable;
+        boolean minBarEnable = LauncherSettings.getInstance(MinibarEditActivity.this).generalSettings.minBarEnable;
         enableSwitch.setChecked(minBarEnable);
         enableSwitch.setText(minBarEnable ? R.string.on : R.string.off);
         enableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 buttonView.setText(isChecked ? R.string.on : R.string.off);
-                LauncherSettings.getInstance(MinBarEditActivity.this).generalSettings.minBarEnable = isChecked;
+                LauncherSettings.getInstance(MinibarEditActivity.this).generalSettings.minBarEnable = isChecked;
                 if (Home.launcher != null) {
                     Home.launcher.drawerLayout.closeDrawers();
                     Home.launcher.drawerLayout.setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);

@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Titles -->
+
     <string name="app_name">OpenLauncher</string>
+    <string name="settings">Settings</string>
+    <string name="minibar">Minibar</string>
+    <string name="about">About</string>
+
+    <!-- Edit Mode -->
 
     <string name="info">Info</string>
     <string name="uninstall">Uninstall</string>
     <string name="add_widget">Widget</string>
     <string name="remove">Remove</string>
-    <string name="allApps">All Apps</string>
-    <string name="crash">Something went wrong … restarting OpenLauncher.</string>
+
+    <!-- Toasts -->
 
     <string name="toast_rename">Rename</string>
     <string name="toast_notenoughspace">Not enough space</string>
@@ -16,51 +23,33 @@
     <string name="toast_freeram" formatted="false">Free Memory: %d mb saved %d mb</string>
     <string name="toast_freeallram" formatted="false">Free Memory: %d mb Your ram is in best state</string>
     <string name="toast_plzenabledeviceadmin">Please enable device administration</string>
-    <string name="cancel">Cancel</string>
-    <string name="ok">OK</string>
-    <string name="set_as_home">Home</string>
-    <string name="search_apps">Search apps …</string>
-    <string name="wallpaper">Wallpaper</string>
-    <string name="wallpaper_set">Set Wallpaper</string>
-    <string name="wallpaper_blur">Blur Wallpaper</string>
-    <string name="wallpaper_pick">Pick Wallpaper</string>
-    <string name="wallpaper_unable_to_blur">Unable to blur</string>
-
-    <string name="unnamed">Unnamed</string>
-
 
     <!-- Intro -->
 
     <string name="intro_skip">Skip</string>
     <string name="intro_finish">Let\'s start.</string>
-
     <string name="intro1_title">OpenLauncher</string>
-    <string name="intro1_text">Thank you for choosing Open Launcher. It\'s fully open source and still in development.
+    <string name="intro1_text">Thank you for choosing OpenLauncher. It\'s fully open source and still in development.
         Here\'s a short intro on how to use it …</string>
-
     <string name="intro2_title">Minibar</string>
     <string name="intro2_text">Swipe right from the left border of your screen to open the Minibar. There you can find the settings,
-    change the wallpaper, and do lots of other stuff.</string>
-
+        change the wallpaper, and do lots of other stuff.</string>
     <string name="intro3_title">Settings</string>
     <string name="intro3_text">You can configure your desktop, the app drawer, and the dock … Just try it out!</string>
 
-
     <!-- MiniBar -->
 
-    <string name="minbar">Minbar</string>
-    <string name="minibar_1">Set the wallpaper or blur it</string>
+    <string name="minibar_0">Change the layout of the minibar.</string>
+    <string name="minibar_1">Set and blur the wallpaper.</string>
     <string name="minibar_2">Lock the screen immediately, requires device administration.</string>
-    <string name="minibar_3">Free the ram, force close other running services.</string>
-    <string name="minibar_4">Shortcut to device settings.</string>
-    <string name="minibar_5">Shortcut to OpenLauncher settings.</string>
+    <string name="minibar_3">Free the RAM by force close other running services.</string>
+    <string name="minibar_4">Shortcut for the device settings.</string>
+    <string name="minibar_5">Shortcut for the OpenLauncher settings.</string>
     <string name="minibar_7">Open the volume dialog.</string>
     <string name="minibar_8">Open the app drawer.</string>
 
-
     <!-- About -->
 
-    <string name="about">About Open Launcher</string>
     <string name="about_libs">Open Source libraries</string>
     <string name="about_rate">Rate</string>
     <string name="about_dev">Developer</string>
@@ -68,26 +57,26 @@
     <string name="about_credit_text">Helped me a lot with bugs and suggestions.</string>
     <string name="about_credit_text_2">Added some settings, German translation.</string>
 
-
-    <!-- Settings -->
-
-    <string name="settings">Settings</string>
+    <!-- Dialogs -->
 
     <string name="settings_column">Columns</string>
     <string name="settings_row">Rows</string>
     <string name="settings_iconPack_title">Pick icon pack</string>
     <string name="settings_iconPack_toast">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
-
-    <string name="settings_stylePicker_title_drawer">Drawer style</string>
-    <string name="settings_stylePicker_paged">Paged</string>
-    <string name="settings_stylePicker_vertical">Vertical</string>
-    <string name="settings_stylePicker_normal">Normal</string>
+    <string name="settings_backup_titleBackup">Backup</string>
+    <string name="settings_backup_titleRestore">Restore</string>
+    <string name="settings_backup_success">Successfully done.</string>
+    <string name="settings_backup_success_not">Something went wrong.</string>
+    <string name="settings_drawer_style_paged">Paged</string>
+    <string name="settings_drawer_style_vertical">Vertical</string>
     <string name="settings_single_click_title">Single click action</string>
     <string name="settings_double_click_title">Double click action</string>
     <string name="settings_pinch_title">Pinch action</string>
     <string name="settings_unpinch_title">Unpinch action</string>
     <string name="settings_swipe_down_title">Swipe down action</string>
     <string name="settings_swipe_up_title">Swipe up action</string>
+
+    <!-- Settings -->
 
     <string name="settings_group_desktop">Desktop</string>
     <string name="settings_group_dock">Dock</string>
@@ -97,37 +86,40 @@
     <string name="settings_group_icons">Icons</string>
     <string name="settings_group_other">Other</string>
 
+    <string name="settings_desktopMinibar">Minibar</string>
+    <string name="settings_desktopMinibar_summary">Configure minibar items.</string>
     <string name="settings_desktopStyle">Style</string>
     <string name="settings_desktopStyle_summary">Choose between different styles for your desktop.</string>
-    <string name="settings_desktopSearch">Search bar</string>
-    <string name="settings_desktopSearch_summary">Display a search bar on top of the desktop.</string>
     <string name="settings_desktopSize">Size</string>
     <string name="settings_desktopSize_summary">Set the desktop grid size.</string>
+    <string name="settings_desktopSearch">Search bar</string>
+    <string name="settings_desktopSearch_summary">Display a search bar on top of the desktop.</string>
     <string name="settings_desktopFull">Fullscreen</string>
     <string name="settings_desktopFull_summary">Enable fullscreen for your desktop.</string>
     <string name="settings_desktopIndicator">Desktop indicator</string>
     <string name="settings_desktopIndicator_summary">Show the page indicator on the desktop.</string>
+    <string name="settings_desktopLabel">Label</string>
     <string name="settings_desktopLabel_summary">Show app and folder names in the desktop.</string>
 
-    <string name="settings_dockLabel">Label</string>
-    <string name="settings_dockLabel_summary">Show app and folder names in the dock.</string>
     <string name="settings_dockSize">Size</string>
     <string name="settings_dockSize_summary">Set the dock size.</string>
+    <string name="settings_dockLabel">Label</string>
+    <string name="settings_dockLabel_summary">Show app and folder names in the dock.</string>
 
     <string name="settings_drawerStyle">Style</string>
     <string name="settings_drawerStyle_summary">Choose between paged and vertical view for the app drawer.</string>
+    <string name="settings_drawerSize">Size</string>
+    <string name="settings_drawerSize_summary">Set the drawer grid size.</string>
     <string name="settings_drawerCard">Card</string>
     <string name="settings_drawerCard_summary">Use a card as drawer background.</string>
     <string name="settings_drawerSearch">Search bar</string>
     <string name="settings_drawerSearch_summary">Will only appear in vertical view layout.</string>
     <string name="settings_drawerSearchIcon">Search icon</string>
     <string name="settings_drawerSearchIcon_summary">Show the default dark search icon in the search bar.</string>
-    <string name="settings_drawerSize">Size</string>
-    <string name="settings_drawerSize_summary">Set the drawer grid size.</string>
     <string name="settings_drawerPage">Remember last page</string>
     <string name="settings_drawerPage_summary">The app drawer will save the last opened page.</string>
     <string name="settings_drawerIndicator">Drawer scrollbar</string>
-    <string name="settings_drawerIndicator_summary">Show the page indicator btw. the scrollbar in the drawer.</string>
+    <string name="settings_drawerIndicator_summary">Show the page indicator in the drawer.</string>
 
     <string name="settings_desktopSwipe">Fast swipe drawer</string>
     <string name="settings_desktopSwipe_summary">Swipe up on the drawer app icon to open the app drawer.</string>
@@ -162,24 +154,29 @@
     <string name="settings_iconHide">Hide apps</string>
     <string name="settings_iconHide_summary">Hide selected apps from launcher.</string>
 
+    <string name="settings_backup">Backup</string>
+    <string name="settings_backup_summary">Backup and restore your settings.</string>
     <string name="settings_othersRestart">Restart</string>
     <string name="settings_othersRestart_summary">Restart the launcher in case it\'s behaving weird.</string>
 
-    <string name="settings_backup">Backup</string>
-    <string name="settings_backup_summary">Backup and restore your settings.</string>
-    <string name="settings_backup_titleBackup">Backup</string>
-    <string name="settings_backup_titleRestore">Restore</string>
-    <string name="settings_backup_success">Successfully done.</string>
-    <string name="settings_backup_success_not">Something went wrong.</string>
-
-
-    <!-- Icon hide -->
+    <!-- Other -->
 
     <string name="request_dummy_text">Hello world!</string>
     <string name="request_please_wait2">Searching for installed apps. Please wait.</string>
     <string name="request_toast">No apps selected. Show all apps in drawer?</string>
-    <string name="edit">Minibar Settings</string>
     <string name="on">On</string>
     <string name="off">Off</string>
+    <string name="allApps">All Apps</string>
+    <string name="crash">Something went wrong … restarting OpenLauncher.</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="set_as_home">Home</string>
+    <string name="search_apps">Search apps …</string>
+    <string name="wallpaper">Wallpaper</string>
+    <string name="wallpaper_set">Set Wallpaper</string>
+    <string name="wallpaper_blur">Blur Wallpaper</string>
+    <string name="wallpaper_pick">Pick Wallpaper</string>
+    <string name="wallpaper_unable_to_blur">Unable to blur</string>
+    <string name="unnamed">Unnamed</string>
 
 </resources>

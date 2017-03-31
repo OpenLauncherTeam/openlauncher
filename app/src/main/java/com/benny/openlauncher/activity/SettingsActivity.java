@@ -60,8 +60,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
         switch (settingsCategory) {
             default:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
+                        .add(new MaterialPrefFragment.ButtonPref("editMiniBar", getString(R.string.settings_desktopMinibar), getString(R.string.settings_desktopMinibar_summary)))
                         .add(new MaterialPrefFragment.ButtonPref("desktopMode", (getString(R.string.settings_desktopStyle)), (getString(R.string.settings_desktopStyle_summary))))
-                        .add(new MaterialPrefFragment.ButtonPref("editMiniBar", "MinBar", "Configure MinBar and MinaBar items."))
                         // FIXME: 11/25/2016 This will have problem (in allappsmode) as the apps will be cut off when scale down
                         .add(new MaterialPrefFragment.NUMPref("gridSizeDesktop", (getString(R.string.settings_desktopSize)), (getString(R.string.settings_desktopSize_summary)),
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDesktop", (getString(R.string.settings_column)), generalSettings.desktopGridX, 4, 10),
@@ -70,7 +70,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                         .add(new MaterialPrefFragment.TBPref("desktopSearchBar", (getString(R.string.settings_desktopSearch)), (getString(R.string.settings_desktopSearch_summary)), generalSettings.desktopSearchBar))
                         .add(new MaterialPrefFragment.TBPref("fullscreen", (getString(R.string.settings_desktopFull)), (getString(R.string.settings_desktopFull_summary)), generalSettings.fullscreen))
                         .add(new MaterialPrefFragment.TBPref("showIndicator", (getString(R.string.settings_desktopIndicator)), (getString(R.string.settings_desktopIndicator_summary)), generalSettings.showIndicator))
-                        .add(new MaterialPrefFragment.TBPref("desktopShowLabel", (getString(R.string.settings_dockLabel)), (getString(R.string.settings_desktopLabel_summary)), generalSettings.desktopShowLabel))
+                        .add(new MaterialPrefFragment.TBPref("desktopShowLabel", (getString(R.string.settings_desktopLabel)), (getString(R.string.settings_desktopLabel_summary)), generalSettings.desktopShowLabel))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_desktop);
                 break;
