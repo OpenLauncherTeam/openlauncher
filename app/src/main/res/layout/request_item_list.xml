@@ -37,7 +37,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             android:scaleType="centerInside"
-            android:src="@drawable/check_dark" />
+            android:src="@drawable/ic_check_dark_24dp" />
     </ViewSwitcher>
 
     <LinearLayout

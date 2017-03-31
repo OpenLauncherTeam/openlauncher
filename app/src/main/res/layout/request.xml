@@ -77,6 +77,6 @@
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
-        android:src="@drawable/check" />
+        android:src="@drawable/ic_check_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
