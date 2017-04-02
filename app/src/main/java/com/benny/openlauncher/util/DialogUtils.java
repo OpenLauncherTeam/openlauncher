@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.widget.AppDrawer;
+import com.benny.openlauncher.widget.AppDrawerController;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,11 +30,11 @@ public class DialogUtils {
     }
 
     public static void appDrawerStylePicker(final Context context) {
-        final String[] items = new String[AppDrawer.DrawerMode.values().length];
+        final String[] items = new String[AppDrawerController.DrawerMode.values().length];
         int enabled = 0;
-        for (int i = 0; i < AppDrawer.DrawerMode.values().length; i++) {
-            items[i] = AppDrawer.DrawerMode.values()[i].name();
-            if (LauncherSettings.getInstance(context).generalSettings.drawerMode == AppDrawer.DrawerMode.values()[i]) {
+        for (int i = 0; i < AppDrawerController.DrawerMode.values().length; i++) {
+            items[i] = AppDrawerController.DrawerMode.values()[i].name();
+            if (LauncherSettings.getInstance(context).generalSettings.drawerMode == AppDrawerController.DrawerMode.values()[i]) {
                 enabled = i;
             }
         }
@@ -44,7 +44,7 @@ public class DialogUtils {
                 .itemsCallbackSingleChoice(enabled, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).generalSettings.drawerMode = AppDrawer.DrawerMode.valueOf(items[position]);
+                        LauncherSettings.getInstance(context).generalSettings.drawerMode = AppDrawerController.DrawerMode.valueOf(items[position]);
                         return true;
                     }
                 }).show();

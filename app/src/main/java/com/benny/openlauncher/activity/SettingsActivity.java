@@ -232,7 +232,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             case "dockBackground":
                 generalSettings.dockColor = (int) value;
                 if (Home.launcher != null)
-                    Home.launcher.dock.setBackgroundColor((int) value);
+                    Home.launcher.desktopDock.setBackgroundColor((int) value);
                 else {
                     prepareRestart();
                 }
@@ -240,8 +240,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             case "drawerBackground":
                 generalSettings.drawerColor = (int) value;
                 if (Home.launcher != null) {
-                    Home.launcher.appDrawerContainer.setBackgroundColor((int) value);
-                    Home.launcher.appDrawerContainer.getBackground().setAlpha(0);
+                    Home.launcher.appDrawerController.setBackgroundColor((int) value);
+                    Home.launcher.appDrawerController.getBackground().setAlpha(0);
                 } else {
                     prepareRestart();
                 }
@@ -249,7 +249,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             case "drawerCard":
                 generalSettings.drawerUseCard = (boolean) value;
                 if (Home.launcher != null) {
-                    Home.launcher.appDrawerContainer.reloadDrawerCardTheme();
+                    Home.launcher.appDrawerController.reloadDrawerCardTheme();
                 } else {
                     prepareRestart();
                 }
@@ -257,7 +257,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             case "drawerCardBackground":
                 generalSettings.drawerCardColor = (int) value;
                 if (Home.launcher != null) {
-                    Home.launcher.appDrawerContainer.reloadDrawerCardTheme();
+                    Home.launcher.appDrawerController.reloadDrawerCardTheme();
                     prepareRestart();
                 } else {
                     prepareRestart();
@@ -266,7 +266,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             case "drawerLabelColor":
                 generalSettings.drawerLabelColor = (int) value;
                 if (Home.launcher != null) {
-                    Home.launcher.appDrawerContainer.reloadDrawerCardTheme();
+                    Home.launcher.appDrawerController.reloadDrawerCardTheme();
                     prepareRestart();
                 } else
                     prepareRestart();
@@ -274,7 +274,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             case "folderColor":
                 generalSettings.folderColor = (int) value;
                 if (Home.launcher != null) {
-                    Home.launcher.appDrawerContainer.reloadDrawerCardTheme();
+                    Home.launcher.appDrawerController.reloadDrawerCardTheme();
                     prepareRestart();
                 } else {
                     prepareRestart();

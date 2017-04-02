@@ -18,10 +18,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="false"
+        android:launchMode="singleTask"
+        android:stateNotNeeded="true"
+        android:taskAffinity=""
         android:theme="@style/Home.Light">
 
         <activity
             android:name=".activity.Init"
+            android:clearTaskOnLaunch="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -72,7 +76,7 @@
             android:name=".hideApps.Activity_hideApps"
             android:enabled="true"
             android:label="@string/app_name"
-            android:theme="@style/NormalActivity.Light"></activity>
+            android:theme="@style/NormalActivity.Light" />
 
 
         <receiver

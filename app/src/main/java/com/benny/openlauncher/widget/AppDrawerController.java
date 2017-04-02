@@ -22,38 +22,42 @@ import com.benny.openlauncher.util.Tool;
 
 import io.codetail.widget.RevealFrameLayout;
 
-import static com.benny.openlauncher.widget.AppDrawer.DrawerMode.Vertical;
+import static com.benny.openlauncher.widget.AppDrawerController.DrawerMode.Vertical;
 
 /**
  * Created by BennyKok on 11/5/2016.
  */
 
-public class AppDrawer extends RevealFrameLayout implements TextWatcher {
+public class AppDrawerController extends RevealFrameLayout implements TextWatcher {
 
     public EditText searchBar;
     public AppDrawer_Paged drawerViewPaged;
     public AppDrawer_Vertical drawerViewGrid;
-    private DrawerMode drawerMode;
+    public DrawerMode drawerMode;
     private CallBack openCallBack, closeCallBack;
 
     private Animator appDrawerAnimator;
     private Long drawerAnimationTime = 200L;
 
-    public AppDrawer(Context context, AttributeSet attrs) {
+    public AppDrawerController(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public AppDrawer(Context context) {
+    public AppDrawerController(Context context) {
         super(context);
     }
 
-    public AppDrawer(Context context, AttributeSet attrs, int defStyle) {
+    public AppDrawerController(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
     public void setCallBack(CallBack openCallBack, CallBack closeCallBack) {
         this.openCallBack = openCallBack;
         this.closeCallBack = closeCallBack;
+    }
+
+    public View getDrawer(){
+        return getChildAt(0);
     }
 
     public void open(int cx, int cy, int startRadius, int finalRadius) {
@@ -170,8 +174,6 @@ public class AppDrawer extends RevealFrameLayout implements TextWatcher {
         switch (drawerMode) {
             case Paged:
                 drawerViewPaged = (AppDrawer_Paged) layoutInflater.inflate(R.layout.view_pageddrawer, this, false);
-//                if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar)
-//                    ((LayoutParams) drawerViewPaged.getLayoutParams()).topMargin += Tool.dp2px(70, getContext());
                 addView(drawerViewPaged);
                 View indicator = layoutInflater.inflate(R.layout.view_drawerindicator, this, false);
                 addView(indicator);

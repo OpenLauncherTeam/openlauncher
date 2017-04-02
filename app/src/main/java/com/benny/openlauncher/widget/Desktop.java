@@ -180,17 +180,17 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 if (item.type == Item.Type.WIDGET) {
                     if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
                         home.desktop.consumeRevert();
-                        home.dock.consumeRevert();
+                        home.desktopDock.consumeRevert();
                     } else {
                         Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                        home.dock.revertLastItem();
+                        home.desktopDock.revertLastItem();
                         home.desktop.revertLastItem();
                     }
                 }
                 if (item.type == Desktop.Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type == Item.Type.LAUNCHER_APP_DRAWER) {
                     if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
                         home.desktop.consumeRevert();
-                        home.dock.consumeRevert();
+                        home.desktopDock.consumeRevert();
                     } else {
                         Point pos = getCurrentPage().touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY, false);
                         View itemView = getCurrentPage().coordinateToChildView(pos);
@@ -198,15 +198,15 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                         if (itemView != null)
                             if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, getCurrentPage(), getCurrentItem(), this)) {
                                 home.desktop.consumeRevert();
-                                home.dock.consumeRevert();
+                                home.desktopDock.consumeRevert();
                             } else {
                                 Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                                home.dock.revertLastItem();
+                                home.desktopDock.revertLastItem();
                                 home.desktop.revertLastItem();
                             }
                         else {
                             Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                            home.dock.revertLastItem();
+                            home.desktopDock.revertLastItem();
                             home.desktop.revertLastItem();
                         }
                     }
@@ -474,7 +474,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                         Tool.print((int) ev.getX(), (int) ev.getY());
                         if (startPosY - ev.getY() > minDist) {
                             if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
-                                Point p = Tool.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), Desktop.this, Home.launcher.appDrawerContainer);
+                                Point p = Tool.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), Desktop.this, Home.launcher.appDrawerController);
                                 // FIXME: 1/22/2017 This seem weird, but the extra offset ( Tool.getNavBarHeight(getContext()) ) works on my phone
                                 // FIXME: 1/22/2017 This part of the code is identical as the code in Desktop so will combine them later
                                 Home.launcher.openAppDrawer(Desktop.this, p.x, p.y - Tool.getNavBarHeight(getContext()) / 2);
@@ -549,7 +549,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     callBack.addItemToPagePosition(item, page);
 
                     home.desktop.consumeRevert();
-                    home.dock.consumeRevert();
+                    home.desktopDock.consumeRevert();
                     return true;
                 }
                 break;

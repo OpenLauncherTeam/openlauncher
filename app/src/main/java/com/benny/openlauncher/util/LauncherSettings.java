@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 
-import com.benny.openlauncher.widget.AppDrawer;
+import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.Desktop;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -279,7 +279,7 @@ public class LauncherSettings {
         public int drawerCardColor = Color.WHITE;
         public int folderColor = Color.WHITE;
         public int drawerLabelColor = Color.DKGRAY;
-        public AppDrawer.DrawerMode drawerMode = AppDrawer.DrawerMode.Paged;
+        public AppDrawerController.DrawerMode drawerMode = AppDrawerController.DrawerMode.Paged;
         public int drawerGridX = 4;
         public int drawerGridY = 5;
         public int drawerGridX_L = 5;
