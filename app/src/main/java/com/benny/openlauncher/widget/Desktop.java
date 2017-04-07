@@ -32,6 +32,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
@@ -611,19 +612,33 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             name = null;
         }
 
-        public boolean isInvalidate = false;
-
         public Type type;
-
-        public Intent[] actions;
-
+        public String name;
         public int x = 0, y = 0;
 
+        // these can be replaced once database is implemented
+        public Intent[] actions;
+        public boolean isInvalidate = false;
+
+        // widget specific values
         public int widgetID;
-
-        public String name;
-
         public int spanX = 1, spanY = 1;
+
+        // new values to be tracked
+
+        // every item is assigned an ID number
+        // initialize this to the time at creation
+        public int idValue;
+
+        // intent for shortcuts and apps
+        // this replaces actions array
+        public Intent appIntent;
+
+        // list of items for groups
+        public Set<Item> items;
+
+        // int value for launcher action
+        public int actionValue;
 
         @Override
         public boolean equals(Object obj) {
