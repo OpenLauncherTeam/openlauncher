@@ -1,27 +1,25 @@
-package com.benny.openlauncher.hideApps;
+package com.benny.openlauncher.activity;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.fragment.HideAppsFragment;
 import com.benny.openlauncher.util.AppManager;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
-public class Activity_hideApps extends AppCompatActivity {
+public class HideAppsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +49,7 @@ public class Activity_hideApps extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Fragment_hideApps(), String.valueOf("Skip"));
+        adapter.addFragment(new HideAppsFragment(), String.valueOf("Skip"));
         viewPager.setAdapter(adapter);
     }
 

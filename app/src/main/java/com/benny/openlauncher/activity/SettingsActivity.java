@@ -14,7 +14,6 @@ import android.view.View;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.fragment.SettingsFragment;
-import com.benny.openlauncher.hideApps.Activity_hideApps;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DialogUtils;
 import com.benny.openlauncher.util.LauncherAction;
@@ -370,7 +369,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 prepareRestart();
                 break;
             case "iconHide":
-                Intent intent = new Intent(SettingsActivity.this, Activity_hideApps.class);
+                Intent intent = new Intent(SettingsActivity.this, HideAppsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 break;

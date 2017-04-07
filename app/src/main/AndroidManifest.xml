@@ -73,7 +73,7 @@
             android:theme="@style/NormalActivity.Light" />
 
         <activity
-            android:name=".hideApps.Activity_hideApps"
+            android:name=".activity.HideAppsActivity"
             android:enabled="true"
             android:label="@string/app_name"
             android:theme="@style/NormalActivity.Light" />

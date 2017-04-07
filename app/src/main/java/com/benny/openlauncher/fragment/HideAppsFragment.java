@@ -1,4 +1,4 @@
-package com.benny.openlauncher.hideApps;
+package com.benny.openlauncher.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.model.AppInfo;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.LauncherSettings;
 
@@ -30,7 +31,7 @@ import java.util.List;
 
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
-public class Fragment_hideApps extends Fragment {
+public class HideAppsFragment extends Fragment {
 
     @SuppressWarnings("unchecked")
     private ArrayList<String> list_activities = new ArrayList();

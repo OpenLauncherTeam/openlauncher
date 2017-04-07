@@ -1,4 +1,4 @@
-package com.benny.openlauncher.hideApps;
+package com.benny.openlauncher.model;
 
 import android.graphics.drawable.Drawable;
 
