@@ -14,12 +14,16 @@ Currently there are a lot of issues and we are not able to fix all at a time, so
 # OPTeam
 [BennyKok](https://github.com/BennyKok) | [Dkanada](https://github.com/dkanada) | [Gsantner](https://github.com/gsantner) | [GauklerFaun](https://github.com/scoute-dich)
 
+We will be happy if you want to be a part of this game.
+
 # Translation
 German : [GauklerFaun](https://github.com/scoute-dich) | 
 Japanese : [Naofum](https://github.com/naofum)
 
+We will be even happy if you help with translation.
+
 # Special Thanks
-[TeamBrainStorm](https://github.com/TeamBrainStorm) : a lot of bug reports and ideas.
+[TeamBrainStorm](https://github.com/TeamBrainStorm) very supportive when the project first started.
 
 # Status
 ### OnGoing: 
@@ -31,8 +35,6 @@ Add animation to drag and drop
 # About
 
 This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven Android launcher.
-
-Grab the [APKs](https://drive.google.com/folderview?id=0Bzv4cvBCpP9SMjdlREprdU13U1k&usp=sharing) here to test it and you can also help by reporting bugs.
 
 Features | Supported
 ------------ | -------------
@@ -53,7 +55,7 @@ Gesture | Yes
 
 Please go to the OpenLauncher [Wiki](https://github.com/Benny-Kok/OpenLauncher/wiki) for more information.
 
-# Todo list
+# ToDo list
 
 Desktop clock customization
 
@@ -67,9 +69,5 @@ Add more customization settings
 
 # Screenshots
 
-<img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p2.jpg" width="300">    <img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p1.jpg" width="300">
-<img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p3.jpg" width="300">    <img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p4.jpg" width="300">
-
-These are the older version.
-
-<img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/Screenshot_2016-08-03-20-57-15.png" width="200">    <img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/Screenshot_2016-08-03-20-57-26.png" width="200">
+<img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p2.jpg" width="200">    <img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p1.jpg" width="200">
+<img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p3.jpg" width="200">    <img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p4.jpg" width="200">
