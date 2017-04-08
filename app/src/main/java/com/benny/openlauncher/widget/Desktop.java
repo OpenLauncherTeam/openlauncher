@@ -388,7 +388,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 @Override
                 public boolean onSwipeUp(int i, long l, double v) {
                     if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeUp] != 0) {
-                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeUp]].label, desktop.getContext());
+                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeUp] - 1].label, desktop.getContext());
                     }
                     return true;
                 }
@@ -396,7 +396,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 @Override
                 public boolean onSwipeDown(int i, long l, double v) {
                     if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeDown] != 0) {
-                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeDown]].label, desktop.getContext());
+                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeDown] - 1].label, desktop.getContext());
                     }
                     return true;
                 }
@@ -414,7 +414,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 @Override
                 public boolean onPinch(int i, long l, double v) {
                     if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.pinch] != 0) {
-                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.pinch]].label, desktop.getContext());
+                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.pinch] - 1].label, desktop.getContext());
                     }
                     return true;
                 }
@@ -422,7 +422,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 @Override
                 public boolean onUnpinch(int i, long l, double v) {
                     if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.unPinch] != 0) {
-                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.unPinch]].label, desktop.getContext());
+                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.unPinch] - 1].label, desktop.getContext());
                     }
                     return true;
                 }
@@ -430,7 +430,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 @Override
                 public boolean onDoubleTap(int i) {
                     if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.doubleClick] != 0) {
-                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.doubleClick]].label, desktop.getContext());
+                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.doubleClick] - 1].label, desktop.getContext());
                     }
                     return true;
                 }
@@ -493,7 +493,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 @Override
                 public void onClick(View view) {
                     if (!desktop.inEditMode && getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick] != 0) {
-                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick]].label, desktop.getContext());
+                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick] - 1].label, desktop.getContext());
                     }
 
                     scaleFactor = 1f;
