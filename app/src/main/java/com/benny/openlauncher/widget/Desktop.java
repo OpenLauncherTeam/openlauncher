@@ -41,7 +41,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public List<CellContainer> pages = new ArrayList<>();
 
-    public OnDesktopEditListener listener;
+    public void setDesktopEditListener(OnDesktopEditListener desktopEditListener) {
+        this.desktopEditListener = desktopEditListener;
+    }
+
+    public OnDesktopEditListener desktopEditListener;
 
     public boolean inEditMode;
 
@@ -383,7 +387,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             return new SimpleFingerGestures.OnFingerGestureListener() {
                 @Override
                 public boolean onSwipeUp(int i, long l, double v) {
-                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeUp] != -1) {
+                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeUp] != 0) {
                         LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeUp]].label, desktop.getContext());
                     }
                     return true;
@@ -391,7 +395,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                 @Override
                 public boolean onSwipeDown(int i, long l, double v) {
-                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeDown] != -1) {
+                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeDown] != 0) {
                         LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.swipeDown]].label, desktop.getContext());
                     }
                     return true;
@@ -409,7 +413,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                 @Override
                 public boolean onPinch(int i, long l, double v) {
-                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.pinch] != -1) {
+                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.pinch] != 0) {
                         LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.pinch]].label, desktop.getContext());
                     }
                     return true;
@@ -417,7 +421,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                 @Override
                 public boolean onUnpinch(int i, long l, double v) {
-                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.unPinch] != -1) {
+                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.unPinch] != 0) {
                         LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.unPinch]].label, desktop.getContext());
                     }
                     return true;
@@ -425,7 +429,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                 @Override
                 public boolean onDoubleTap(int i) {
-                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.doubleClick] != -1) {
+                    if (getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.doubleClick] != 0) {
                         LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.doubleClick]].label, desktop.getContext());
                     }
                     return true;
@@ -488,7 +492,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             layout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (!desktop.inEditMode && getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick] != -1) {
+                    if (!desktop.inEditMode && getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick] != 0) {
                         LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick]].label, desktop.getContext());
                     }
 
@@ -503,8 +507,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                             WallpaperManager.getInstance(view.getContext()).sendWallpaperCommand(view.getWindowToken(), WallpaperManager.COMMAND_TAP, (int) currentEvent.getX(), (int) currentEvent.getY(), 0, null);
 
                     desktop.inEditMode = false;
-                    if (desktop.listener != null)
-                        desktop.listener.onFinished();
+                    if (desktop.desktopEditListener != null)
+                        desktop.desktopEditListener.onFinishDesktopEdit();
                 }
             });
             layout.setOnLongClickListener(new OnLongClickListener() {
@@ -520,8 +524,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                         v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
                     }
                     desktop.inEditMode = true;
-                    if (desktop.listener != null)
-                        desktop.listener.onStart();
+                    if (desktop.desktopEditListener != null)
+                        desktop.desktopEditListener.onDesktopEdit();
                     return true;
                 }
             });
@@ -845,9 +849,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     public interface OnDesktopEditListener {
-        void onStart();
-
-        void onFinished();
+        void onDesktopEdit();
+        void onFinishDesktopEdit();
     }
 
 }

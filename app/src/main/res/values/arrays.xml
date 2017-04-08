@@ -16,7 +16,6 @@
         <item>Open App Drawer</item>
     </string-array>
     <integer-array name="gestureValues" translatable="false">
-        <item>-1</item>
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -25,6 +24,7 @@
         <item>5</item>
         <item>6</item>
         <item>7</item>
+        <item>8</item>
     </integer-array>
     <string-array name="desktopStyleEntries">
         <item>Normal</item>

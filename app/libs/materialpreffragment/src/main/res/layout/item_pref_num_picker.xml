@@ -17,18 +17,19 @@
         android:text="Title" />
 
     <TextView
+        android:layout_marginLeft="14dp"
         android:id="@+id/valueTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/itemTitle"
-        android:layout_alignLeft="@+id/itemTitle"
         android:layout_alignRight="@+id/itemTitle"
-        android:layout_alignStart="@+id/itemTitle"
         android:layout_below="@+id/itemTitle"
         android:gravity="center"
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
-        android:text="5" />
+        android:text="5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <SeekBar
         android:id="@+id/valueBar"

@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.fragment.SettingsFragment;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DialogUtils;
 import com.benny.openlauncher.util.LauncherAction;
@@ -22,7 +21,7 @@ import com.benny.openlauncher.util.Tool;
 import com.bennyv5.materialpreffragment.BaseSettingsActivity;
 import com.bennyv5.materialpreffragment.MaterialPrefFragment;
 
-public class SettingsActivity extends BaseSettingsActivity implements MaterialPrefFragment.OnPrefClickedListener, MaterialPrefFragment.OnPrefChangedListener, SettingsFragment.OnSettingsSelectedInterface {
+public class SettingsActivity extends BaseSettingsActivity implements MaterialPrefFragment.OnPrefClickedListener, MaterialPrefFragment.OnPrefChangedListener{
 
     private boolean requireLauncherRestart = false;
 
@@ -52,7 +51,6 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
         getSupportFragmentManager().beginTransaction().add(R.id.ll, settings).commit();
     }
 
-    @Override
     public void onSettingsSelected(int settingsCategory) {
         LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(this).generalSettings;
         MaterialPrefFragment fragment;
@@ -61,7 +59,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
                         .add(new MaterialPrefFragment.ButtonPref("editMiniBar", getString(R.string.settings_desktopMinibar), getString(R.string.settings_desktopMinibar_summary)))
                         .add(new MaterialPrefFragment.ButtonPref("desktopMode", (getString(R.string.settings_desktopStyle)), (getString(R.string.settings_desktopStyle_summary))))
-                        // FIXME: 11/25/2016 This will have problem (in allappsmode) as the apps will be cut off when scale down
+                        // FIXME: 11/25/2016 This will have problem (in allAppsMode) as the apps will be cut off when scale down
                         .add(new MaterialPrefFragment.NUMPref("gridSizeDesktop", (getString(R.string.settings_desktopSize)), (getString(R.string.settings_desktopSize_summary)),
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDesktop", (getString(R.string.settings_column)), generalSettings.desktopGridX, 4, 10),
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("vGridSizeDesktop", (getString(R.string.settings_row)), generalSettings.desktopGridY, 4, 10)
@@ -346,27 +344,21 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "singleClick":
                 DialogUtils.startSingleClickPicker(this);
-                prepareRestart();
                 break;
             case "doubleClick":
                 DialogUtils.startDoubleClickPicker(this);
-                prepareRestart();
                 break;
             case "pinch":
                 DialogUtils.startPinchPicker(this);
-                prepareRestart();
                 break;
             case "unPinch":
                 DialogUtils.startUnpinchPicker(this);
-                prepareRestart();
                 break;
             case "swipeDown":
                 DialogUtils.startSwipeDownPicker(this);
-                prepareRestart();
                 break;
             case "swipeUp":
                 DialogUtils.startSwipeUpPicker(this);
-                prepareRestart();
                 break;
             case "iconHide":
                 Intent intent = new Intent(SettingsActivity.this, HideAppsActivity.class);

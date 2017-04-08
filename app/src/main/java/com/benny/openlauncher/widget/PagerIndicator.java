@@ -10,7 +10,7 @@ import android.view.View;
 import com.benny.openlauncher.util.Tool;
 import com.bennyv5.smoothviewpager.SmoothViewPager;
 
-public class PagerIndicator extends View {
+public class PagerIndicator extends View implements SmoothViewPager.OnPageChangeListener {
 
     private SmoothViewPager pager;
 
@@ -62,30 +62,38 @@ public class PagerIndicator extends View {
     public int prePageCount;
 
     public void setViewPager(final SmoothViewPager pager) {
-        if (pager == null) return;
-        this.pager = pager;
-        prePageCount = pager.getAdapter().getCount();
-        pager.addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (prePageCount != pager.getAdapter().getCount()) {
-                    getLayoutParams().width = Math.round(pager.getAdapter().getCount() * (dotSize + pad * 2));
-                    prePageCount = pager.getAdapter().getCount();
-                }
+        if (pager == null) {
+            if (this.pager != null) {
+                this.pager.removeOnPageChangeListener(this);
+                this.pager = null;
+                getLayoutParams().width = 0;
                 invalidate();
             }
-
-            @Override
-            public void onPageSelected(int position) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
+            return;
+        }
+        this.pager = pager;
+        prePageCount = pager.getAdapter().getCount();
+        pager.addOnPageChangeListener(this);
         Tool.print(pager.getAdapter().getCount());
         getLayoutParams().width = Math.round(this.pager.getAdapter().getCount() * (dotSize + pad * 2));
         invalidate();
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        if (prePageCount != pager.getAdapter().getCount()) {
+            getLayoutParams().width = Math.round(pager.getAdapter().getCount() * (dotSize + pad * 2));
+            prePageCount = pager.getAdapter().getCount();
+        }
+        invalidate();
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
     }
 
     @Override

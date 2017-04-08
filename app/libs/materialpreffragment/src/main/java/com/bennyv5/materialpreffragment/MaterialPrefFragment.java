@@ -228,7 +228,9 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
                     itemTitle.setText(title);
                 else {
                     itemTitle.setVisibility(View.GONE);
-                    ((ViewGroup.MarginLayoutParams) valueTitle.getLayoutParams()).topMargin = Tool.pixelToDp(fragment.getContext(), 8);
+                    ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) valueTitle.getLayoutParams();
+                    layoutParams.topMargin = Tool.pixelToDp(fragment.getContext(), 8);
+                    layoutParams.leftMargin = Tool.pixelToDp(fragment.getContext(), 24);
                 }
                 valueTitle.setTextColor(fragment.textColor);
                 valueBar.setMax(end);

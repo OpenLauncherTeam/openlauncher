@@ -60,7 +60,6 @@ import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.MiniPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
 import com.benny.openlauncher.widget.SwipeListView;
-import com.bennyv5.smoothviewpager.SmoothViewPager;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.util.ArrayList;
@@ -73,7 +72,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 
-public class Home extends Activity implements DrawerLayout.DrawerListener {
+public class Home extends Activity implements DrawerLayout.DrawerListener, Desktop.OnDesktopEditListener {
 
     public static final int REQUEST_PICK_APPWIDGET = 0x6475;
     public static final int REQUEST_CREATE_APPWIDGET = 0x3648;
@@ -298,8 +297,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
      */
     private void initViews() {
         initMinBar();
-        // TODO: 1/16/2017 enable this later
-        //initQuickCenter();
+        initQuickCenter();
 
         DragNavigationControl.init(this, findViewById(R.id.left), findViewById(R.id.right));
 
@@ -313,74 +311,14 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         dragOptionPanel.setHome(this);
 
         desktop.init(this);
-        desktop.listener = new Desktop.OnDesktopEditListener() {
-            @Override
-            public void onStart() {
-                desktopEditOptionPanel.setVisibility(View.VISIBLE);
+        desktop.setDesktopEditListener(this);
 
-                dragOptionPanel.setAutoHideView(null);
-                desktopIndicator.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-                desktopEditOptionPanel.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-                searchBar.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-                desktopDock.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+        initDesktopEditViews();
 
-                desktopEditOptionPanel.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        desktopDock.setVisibility(View.INVISIBLE);
-                        if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
-                            searchBar.setVisibility(View.VISIBLE);
-                        } else {
-                            searchBar.setVisibility(View.GONE);
-                        }
-                    }
-                }, 100);
-            }
-
-            @Override
-            public void onFinished() {
-                dragOptionPanel.setAutoHideView(searchBar);
-                desktopIndicator.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-                desktopEditOptionPanel.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-                searchBar.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-                desktopDock.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-
-                desktopEditOptionPanel.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        desktopEditOptionPanel.setVisibility(View.INVISIBLE);
-
-                        desktopDock.setVisibility(View.VISIBLE);
-                        if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
-                            searchBar.setVisibility(View.VISIBLE);
-                        } else {
-                            searchBar.setVisibility(View.GONE);
-                        }
-                    }
-                }, 100);
-            }
-        };
-
-        removepage.setOnTouchListener(Tool.getBtnColorMaskController());
-        setashomepage.setOnTouchListener(Tool.getBtnColorMaskController());
-        addwidgetbtn.setOnTouchListener(Tool.getBtnColorMaskController());
-        addLauncherAction.setOnTouchListener(Tool.getBtnColorMaskController());
-        openSettings.setOnTouchListener(Tool.getBtnColorMaskController());
-
-        if (LauncherSettings.getInstance(this).generalSettings.showIndicator) {
-            desktopIndicator.setViewPager(desktop);
-        }
-
+        desktopIndicator.setViewPager(desktop);
         desktop.setPageIndicator(desktopIndicator);
-        int iconSize = LauncherSettings.getInstance(this).generalSettings.iconSize;
 
-        desktopDock.init();
-        if (LauncherSettings.getInstance(this).generalSettings.dockShowLabel) {
-            desktopDock.getLayoutParams().height = Tool.dp2px(36 + iconSize + 14, this);
-            if (LauncherSettings.getInstance(this).generalSettings.drawerMode == AppDrawerController.DrawerMode.Paged)
-                desktopDock.setPadding(desktopDock.getPaddingLeft(), desktopDock.getPaddingTop(), desktopDock.getPaddingRight(), desktopDock.getPaddingBottom() + Tool.dp2px(9, this));
-        } else
-            desktopDock.getLayoutParams().height = Tool.dp2px(36 + iconSize, this);
+        initDock();
 
         dragOptionPanel.setAutoHideView(searchBar);
 
@@ -394,8 +332,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                     appSearchBar.setVisibility(View.VISIBLE);
                     appSearchBar.animate().setStartDelay(100).alpha(1).setDuration(100);
                 }
-                if (appDrawerIndicator != null)
+                if (appDrawerIndicator != null) {
+                    appDrawerIndicator.setVisibility(View.VISIBLE);
                     appDrawerIndicator.animate().alpha(1).setDuration(100);
+                }
             }
 
             @Override
@@ -451,6 +391,71 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
                 }
             }
         });
+    }
+
+    private void initDesktopEditViews() {
+        removepage.setOnTouchListener(Tool.getBtnColorMaskController());
+        setashomepage.setOnTouchListener(Tool.getBtnColorMaskController());
+        addwidgetbtn.setOnTouchListener(Tool.getBtnColorMaskController());
+        addLauncherAction.setOnTouchListener(Tool.getBtnColorMaskController());
+        openSettings.setOnTouchListener(Tool.getBtnColorMaskController());
+    }
+
+    private void initDock() {
+        int iconSize = LauncherSettings.getInstance(this).generalSettings.iconSize;
+        desktopDock.init();
+        if (LauncherSettings.getInstance(this).generalSettings.dockShowLabel) {
+            desktopDock.getLayoutParams().height = Tool.dp2px(36 + iconSize + 14, this);
+            if (LauncherSettings.getInstance(this).generalSettings.drawerMode == AppDrawerController.DrawerMode.Paged)
+                desktopDock.setPadding(desktopDock.getPaddingLeft(), desktopDock.getPaddingTop(), desktopDock.getPaddingRight(), desktopDock.getPaddingBottom() + Tool.dp2px(9, this));
+        } else
+            desktopDock.getLayoutParams().height = Tool.dp2px(36 + iconSize, this);
+    }
+
+    @Override
+    public void onDesktopEdit() {
+        desktopEditOptionPanel.setVisibility(View.VISIBLE);
+
+        dragOptionPanel.setAutoHideView(null);
+        desktopIndicator.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+        desktopEditOptionPanel.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+        searchBar.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+        desktopDock.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+
+        desktopEditOptionPanel.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                desktopDock.setVisibility(View.INVISIBLE);
+                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+                    searchBar.setVisibility(View.VISIBLE);
+                } else {
+                    searchBar.setVisibility(View.GONE);
+                }
+            }
+        }, 100);
+    }
+
+    @Override
+    public void onFinishDesktopEdit() {
+        dragOptionPanel.setAutoHideView(searchBar);
+        desktopIndicator.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+        desktopEditOptionPanel.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+        searchBar.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+        desktopDock.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+
+        desktopEditOptionPanel.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                desktopEditOptionPanel.setVisibility(View.INVISIBLE);
+
+                desktopDock.setVisibility(View.VISIBLE);
+                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+                    searchBar.setVisibility(View.VISIBLE);
+                } else {
+                    searchBar.setVisibility(View.GONE);
+                }
+            }
+        }, 100);
     }
 
     private void updateDesktopClock() {
@@ -537,6 +542,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener {
         }
 
         drawerLayout.setDrawerLockMode(generalSettings.minBarEnable ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+        if (!LauncherSettings.getInstance(this).generalSettings.showIndicator) {
+            desktopIndicator.setViewPager(null);
+        }
     }
 
     public void initMinBar() {

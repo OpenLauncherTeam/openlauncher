@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.benny.openlauncher.R;
 
+@Deprecated
 public class SettingsFragment extends Fragment {
     OnSettingsSelectedInterface mListener;
 

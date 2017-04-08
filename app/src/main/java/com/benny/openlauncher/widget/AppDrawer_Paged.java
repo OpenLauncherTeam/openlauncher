@@ -96,7 +96,8 @@ public class AppDrawer_Paged extends SmoothViewPager {
             AppDrawer_Paged.this.apps = AppManager.getInstance(getContext()).getApps();
             calculatePage();
             setAdapter(new Adapter());
-            appDrawerIndicator.setViewPager(AppDrawer_Paged.this);
+            if (appDrawerIndicator != null)
+                appDrawerIndicator.setViewPager(AppDrawer_Paged.this);
         }
         AppManager.getInstance(c).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             @Override
@@ -104,7 +105,8 @@ public class AppDrawer_Paged extends SmoothViewPager {
                 AppDrawer_Paged.this.apps = apps;
                 calculatePage();
                 setAdapter(new Adapter());
-                appDrawerIndicator.setViewPager(AppDrawer_Paged.this);
+                if (appDrawerIndicator != null)
+                    appDrawerIndicator.setViewPager(AppDrawer_Paged.this);
             }
         });
     }

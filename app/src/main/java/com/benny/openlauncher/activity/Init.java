@@ -22,25 +22,25 @@ public class Init extends OnboarderActivity {
             return;
         }
 
-        List<OnboarderPage> onboarderPages = new ArrayList<>();
+        List<OnboarderPage> onBoarderPages = new ArrayList<>();
 
         // Create your first page
-        OnboarderPage onboarderPage1 = new OnboarderPage(getString(R.string.intro1_title), getString(R.string.intro1_text), R.drawable.ic_launcher_intro);
-        OnboarderPage onboarderPage2 = new OnboarderPage(getString(R.string.intro2_title), getString(R.string.intro2_text), R.drawable.screenshot_1);
-        OnboarderPage onboarderPage3 = new OnboarderPage(getString(R.string.intro3_title), getString(R.string.intro3_text), R.drawable.screenshot_2);
+        OnboarderPage onBoarderPage1 = new OnboarderPage(getString(R.string.intro1_title), getString(R.string.intro1_text), R.drawable.ic_launcher_intro);
+        OnboarderPage onBoarderPage2 = new OnboarderPage(getString(R.string.intro2_title), getString(R.string.intro2_text), R.drawable.screenshot_1);
+        OnboarderPage onBoarderPage3 = new OnboarderPage(getString(R.string.intro3_title), getString(R.string.intro3_text), R.drawable.screenshot_2);
 
         // You can define title and description colors (by default white)
-        onboarderPage1.setTitleColor(R.color.colorAccent);
-        onboarderPage1.setBackgroundColor(R.color.colorPrimaryDark);
-        onboarderPage2.setTitleColor(R.color.colorAccent);
-        onboarderPage2.setBackgroundColor(R.color.colorPrimaryDark);
-        onboarderPage3.setTitleColor(R.color.colorAccent);
-        onboarderPage3.setBackgroundColor(R.color.colorPrimaryDark);
+        onBoarderPage1.setTitleColor(R.color.colorAccent);
+        onBoarderPage1.setBackgroundColor(R.color.colorPrimaryDark);
+        onBoarderPage2.setTitleColor(R.color.colorAccent);
+        onBoarderPage2.setBackgroundColor(R.color.colorPrimaryDark);
+        onBoarderPage3.setTitleColor(R.color.colorAccent);
+        onBoarderPage3.setBackgroundColor(R.color.colorPrimaryDark);
 
         // Add your pages to the list
-        onboarderPages.add(onboarderPage1);
-        onboarderPages.add(onboarderPage2);
-        onboarderPages.add(onboarderPage3);
+        onBoarderPages.add(onBoarderPage1);
+        onBoarderPages.add(onBoarderPage2);
+        onBoarderPages.add(onBoarderPage3);
 
         // And pass your pages to 'setOnboardPagesReady' method
         setActiveIndicatorColor(android.R.color.white);
@@ -48,7 +48,7 @@ public class Init extends OnboarderActivity {
         shouldDarkenButtonsLayout(true);
         setSkipButtonTitle(getString(R.string.intro_skip));
         setFinishButtonTitle(getString(R.string.intro_finish));
-        setOnboardPagesReady(onboarderPages);
+        setOnboardPagesReady(onBoarderPages);
     }
 
     @Override

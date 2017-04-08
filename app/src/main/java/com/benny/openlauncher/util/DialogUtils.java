@@ -53,7 +53,7 @@ public class DialogUtils {
     public static void startSingleClickPicker(final Context context) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(context.getString(R.string.settings_single_click_title))
-                .items(R.array.singleClickEntries)
+                .items(R.array.gestureEntries)
                 .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.singleClick, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
