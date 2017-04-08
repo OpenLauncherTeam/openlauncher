@@ -11,6 +11,16 @@
 
 Currently there are a lot of issues and we are not able to fix all at a time, so please be patient if the issue is still opening. And I and the team are going to review the structure of the launcher as it is very bad as I wrote them a long time ago, so there won't be any UI redesing and new feature coming so certainly. Thanks for heading over and your support.
 
+# OPTeam
+[BennyKok](https://github.com/BennyKok) | [Dkanada](https://github.com/dkanada) | [Gsantner](https://github.com/gsantner) | [GauklerFaun](https://github.com/scoute-dich)
+
+# Translation
+German : [GauklerFaun](https://github.com/scoute-dich) | 
+Japanese : [Naofum](https://github.com/naofum)
+
+# Special Thanks
+[TeamBrainStorm](https://github.com/TeamBrainStorm) : a lot of bug reports and ideas.
+
 # Status
 ### OnGoing: 
 
