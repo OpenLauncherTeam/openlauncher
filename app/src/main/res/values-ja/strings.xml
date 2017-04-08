@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Titles -->
+
+    <string name="app_name">OpenLauncher</string>
+    <string name="settings">設定</string>
+    <string name="minibar">ミニバー</string>
+    <string name="about">アプリについて</string>
+
+    <!-- Edit Mode -->
+
+    <string name="info">情報</string>
+    <string name="uninstall">アンインストール</string>
+    <string name="add_widget">ウィジェット</string>
+    <string name="remove">削除</string>
+
+    <!-- Toasts -->
+
+    <string name="toast_rename">名前を変更</string>
+    <string name="toast_notenoughspace">容量が不足しています</string>
+    <string name="toast_appuninstalled">このアプリはアンインストールされました。</string>
+    <string name="toast_freeram" formatted="false">空きメモリ: %d mb 節約 %d mb</string>
+    <string name="toast_freeallram" formatted="false">空きメモリ: %d mb RAM は最高の状態です</string>
+    <string name="toast_plzenabledeviceadmin">デバイス管理を有効にしてください</string>
+
+    <!-- Intro -->
+
+    <string name="intro_skip">スキップ</string>
+    <string name="intro_finish">始めましょう。</string>
+    <string name="intro1_title">OpenLauncher</string>
+    <string name="intro1_text">OpenLauncher を選んでいただきありがとうございます。 これは完全にオープンソースで、今も開発中です。
+        これは簡単な使い方の紹介です …</string>
+    <string name="intro2_title">ミニバー</string>
+    <string name="intro2_text">画面の左端から右にスワイプするとミニバーが開きます。 設定や、
+        壁紙の変更、他にも多くのことができます。</string>
+    <string name="intro3_title">設定</string>
+    <string name="intro3_text">デスクトップ、アプリケーションドロワー、ドックを設定することができます … 試してみてください!</string>
+
+    <!-- MiniBar -->
+
+    <string name="minibar_0">ミニバーのレイアウトを変更。</string>
+    <string name="minibar_1">壁紙の設定と、ぼかし。</string>
+    <string name="minibar_2">画面をすぐにロック。 デバイス管理が必要です。</string>
+    <string name="minibar_3">強制的に他の実行中のサービスを閉じて RAM を解放。</string>
+    <string name="minibar_4">デバイス設定のショートカット。</string>
+    <string name="minibar_5">OpenLauncher 設定のショートカット。</string>
+    <string name="minibar_7">ボリュームダイアログを開く。</string>
+    <string name="minibar_8">アプリドロワーを開く。</string>
+
+    <!-- About -->
+
+    <string name="about_libs">オープンソース ライブラリー</string>
+    <string name="about_rate">評価</string>
+    <string name="about_dev">開発者</string>
+    <string name="about_credit">貢献者</string>
+    <string name="about_credit_text">バグや提案で私を助けてくれました。</string>
+    <string name="about_credit_text_2">いくつかの設定を追加、ドイツ語翻訳。</string>
+
+    <!-- Dialogs -->
+
+    <string name="settings_column">列</string>
+    <string name="settings_row">行</string>
+    <string name="settings_iconPack_title">アイコンパックの選択</string>
+    <string name="settings_iconPack_toast">READ_EXTERNAL_STORAGE アクセス許可がないとアイコンを取得できません。</string>
+    <string name="settings_backup_titleBackup">バックアップ</string>
+    <string name="settings_backup_titleRestore">復元</string>
+    <string name="settings_backup_success">完了しました。</string>
+    <string name="settings_backup_success_not">問題が発生しました。</string>
+    <string name="settings_drawer_style_paged">ページ</string>
+    <string name="settings_drawer_style_vertical">縦</string>
+    <string name="settings_single_click_title">シングルクリック操作</string>
+    <string name="settings_double_click_title">ダブルクリック操作</string>
+    <string name="settings_pinch_title">ピンチ操作</string>
+    <string name="settings_unpinch_title">逆ピンチ操作</string>
+    <string name="settings_swipe_down_title">下にスワイプ操作</string>
+    <string name="settings_swipe_up_title">上にスワイプ操作</string>
+
+    <!-- Settings -->
+
+    <string name="settings_group_desktop">デスクトップ</string>
+    <string name="settings_group_dock">ドック</string>
+    <string name="settings_group_drawer">アプリドロワー</string>
+    <string name="settings_group_input">ジェスチャー</string>
+    <string name="settings_group_color">色</string>
+    <string name="settings_group_icons">アイコン</string>
+    <string name="settings_group_other">その他</string>
+
+    <string name="settings_desktopMinibar">ミニバー</string>
+    <string name="settings_desktopMinibar_summary">ミニバーのアイテムを設定します。</string>
+    <string name="settings_desktopStyle">スタイル</string>
+    <string name="settings_desktopStyle_summary">異なるデスクトップのスタイルを選択します。</string>
+    <string name="settings_desktopSize">サイズ</string>
+    <string name="settings_desktopSize_summary">デスクトップのグリッドサイズを設定します。</string>
+    <string name="settings_desktopSearch">検索バー</string>
+    <string name="settings_desktopSearch_summary">デスクトップの上部に検索バーを表示します。</string>
+    <string name="settings_desktopFull">全画面</string>
+    <string name="settings_desktopFull_summary">デスクトップの全画面を有効にします。</string>
+    <string name="settings_desktopIndicator">デスクトップ インジケーター</string>
+    <string name="settings_desktopIndicator_summary">デスクトップにページインジケーターを表示します。</string>
+    <string name="settings_desktopLabel">ラベル</string>
+    <string name="settings_desktopLabel_summary">デスクトップにアプリとフォルダー名を表示します。</string>
+
+    <string name="settings_dockSize">サイズ</string>
+    <string name="settings_dockSize_summary">ドックサイズを設定します。</string>
+    <string name="settings_dockLabel">ラベル</string>
+    <string name="settings_dockLabel_summary">ドックにアプリとフォルダー名を表示します。</string>
+
+    <string name="settings_drawerStyle">スタイル</string>
+    <string name="settings_drawerStyle_summary">アプリドロワーのページと縦表示を選択します。</string>
+    <string name="settings_drawerSize">サイズ</string>
+    <string name="settings_drawerSize_summary">ドロワーのグリッドサイズを設定します。</string>
+    <string name="settings_drawerCard">カード</string>
+    <string name="settings_drawerCard_summary">ドロワーの背景としてカードを使用します。</string>
+    <string name="settings_drawerSearch">検索バー</string>
+    <string name="settings_drawerSearch_summary">縦表示レイアウトでのみ表示します。</string>
+    <string name="settings_drawerSearchIcon">検索アイコン</string>
+    <string name="settings_drawerSearchIcon_summary">検索バーにデフォルトのダーク検索アイコンを表示します。</string>
+    <string name="settings_drawerPage">最後のページを記憶</string>
+    <string name="settings_drawerPage_summary">アプリドロワーが最後に開いたページを保存します。</string>
+    <string name="settings_drawerIndicator">ドロワーのスクロールバー</string>
+    <string name="settings_drawerIndicator_summary">ドロワーにページインジケーターを表示します。</string>
+
+    <string name="settings_desktopSwipe">ドロワーの高速スワイプ</string>
+    <string name="settings_desktopSwipe_summary">ドロワーのアプリアイコンを上にスワイプして、アプリドロワーを開きます。</string>
+    <string name="settings_singleClick">シングルクリック</string>
+    <string name="settings_singleClick_summary">シングルクリック操作。</string>
+    <string name="settings_doubleClick">ダブルクリック</string>
+    <string name="settings_doubleClick_summary">ダブルクリック操作。</string>
+    <string name="settings_pinch">ピンチ</string>
+    <string name="settings_pinch_summary">ピンチ操作。</string>
+    <string name="settings_unpinch">アンピンチ</string>
+    <string name="settings_unpinch_summary">逆ピンチ操作。</string>
+    <string name="settings_swipeDown">下にスワイプ</string>
+    <string name="settings_swipeDown_summary">下にスワイプ操作。</string>
+    <string name="settings_swipeUp">上にスワイプ</string>
+    <string name="settings_swipeUp_summary">上にスワイプ操作。</string>
+
+    <string name="settings_colorDock">ドック</string>
+    <string name="settings_colorDock_summary">ドックの背景色。</string>
+    <string name="settings_colorDrawer">ドロワーの背景</string>
+    <string name="settings_colorDrawer_summary">ドロワーの背景色。</string>
+    <string name="settings_colorCard">ドロワーカード</string>
+    <string name="settings_colorCard_summary">アプリドロワーカードの色。</string>
+    <string name="settings_colorFolder">フォルダー</string>
+    <string name="settings_colorFolder_summary">デスクトップのフォルダーの背景色。</string>
+    <string name="settings_colorLabel">ラベル</string>
+    <string name="settings_colorLabel_summary">フォルダーとアプリドロワーのラベル色。</string>
+
+    <string name="settings_iconSize">サイズ</string>
+    <string name="settings_iconSize_summary">すべてのアプリアイコンのサイズ。</string>
+    <string name="settings_iconPack">アイコンパック</string>
+    <string name="settings_iconPack_summary">インストールしたアイコンパックの選択。</string>
+    <string name="settings_iconHide">アプリの非表示</string>
+    <string name="settings_iconHide_summary">ランチャーから選択したアプリを非表示にします。</string>
+
+    <string name="settings_backup">バックアップ</string>
+    <string name="settings_backup_summary">設定をバックアップおよび復元します。</string>
+    <string name="settings_othersRestart">再起動</string>
+    <string name="settings_othersRestart_summary">動作がおかしい場合に、ランチャーを再起動します。</string>
+
+    <!-- Other -->
+
+    <string name="request_dummy_text">Hello world!</string>
+    <string name="request_please_wait2">インストールされたアプリを検索中。しばらくお待ちください。</string>
+    <string name="request_toast">アプリが選択されていません。 ドロワーにすべてのアプリを表示しますか?</string>
+    <string name="on">オン</string>
+    <string name="off">オフ</string>
+    <string name="allApps">すべてのアプリ</string>
+    <string name="crash">問題が発生しました … OpenLauncher を再起動します。</string>
+    <string name="cancel">キャンセル</string>
+    <string name="ok">OK</string>
+    <string name="set_as_home">ホーム</string>
+    <string name="search_apps">アプリの検索 …</string>
+    <string name="wallpaper">壁紙</string>
+    <string name="wallpaper_set">壁紙を設定</string>
+    <string name="wallpaper_blur">壁紙をぼかす</string>
+    <string name="wallpaper_pick">壁紙の選択</string>
+    <string name="wallpaper_unable_to_blur">ぼかすことができません</string>
+    <string name="unnamed">名前なし</string>
+
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="singleClickEntries">
+        <item>なし</item>
+        <item>アプリドロワーを開く</item>
+    </string-array>
+    <string-array name="gestureEntries">
+        <item>なし</item>
+        <item>ミニバーの設定</item>
+        <item>壁紙の設定</item>
+        <item>画面のロック</item>
+        <item>RAM のクリア</item>
+        <item>デバイスの設定</item>
+        <item>ランチャーの設定</item>
+        <item>ボリュームダイアログ</item>
+        <item>アプリドロワーを開く</item>
+    </string-array>
+    <string-array name="desktopStyleEntries">
+        <item>標準</item>
+        <item>すべてのアプリを表示 (実験的)</item>
+    </string-array>
+</resources>
