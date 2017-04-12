@@ -2,10 +2,13 @@ package com.benny.openlauncher.util;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.benny.openlauncher.widget.Desktop;
+
+import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
   private static final String TABLE_DESKTOP = "desktop";
@@ -80,7 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         values.put(COLUMN_Y_POS, concat);
         break;
-      case LAUNCHER_APP_DRAWER:
+      case ACTION:
         values.put(COLUMN_Y_POS, item.actionValue);
         break;
       case WIDGET:
@@ -91,5 +94,51 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         break;
     }
     db.insert(TABLE_ITEM, null, values);
+  }
+
+  public void removeItem(Desktop.Item item) {
+    SQLiteDatabase db = getWritableDatabase();
+    db.delete(TABLE_ITEM, COLUMN_ID + " = ?", new String[]{String.valueOf(item.idValue)});
+    db.close();
+  }
+
+  public ArrayList<Desktop.Item> getDesktop() {
+    SQLiteDatabase db = getWritableDatabase();
+    ArrayList<Desktop.Item> desktop = new ArrayList<>();
+    String SQL_QUERY_ALL = SQL_QUERY + TABLE_DESKTOP;
+    Cursor cursor = db.rawQuery(SQL_QUERY_ALL, null);
+    if (cursor.getCount() != 0) {
+      cursor.moveToFirst();
+      do {
+        int id = Integer.parseInt(cursor.getString(0));
+        String typeString = cursor.getString(1);
+        String label = cursor.getString(2);
+        int x = Integer.parseInt(cursor.getString(3));
+        int y = Integer.parseInt(cursor.getString(4));
+        String data = cursor.getString(5);
+
+        Desktop.Item tmp = new Desktop.Item();
+        tmp.idValue = id;
+        tmp.name = label;
+        tmp.x = x;
+        tmp.y = y;
+
+        switch (typeString) {
+          case "SHORTCUT":
+            tmp.type = Desktop.Item.Type.SHORTCUT;
+            break;
+          case "GROUP":
+            tmp.type = Desktop.Item.Type.GROUP;
+            break;
+          case "ACTION":
+            tmp.type = Desktop.Item.Type.ACTION;
+            break;
+          case "WIDGET":
+            tmp.type = Desktop.Item.Type.WIDGET;
+            break;
+        }
+      } while (cursor.moveToNext());
+    }
+    return desktop;
   }
 }

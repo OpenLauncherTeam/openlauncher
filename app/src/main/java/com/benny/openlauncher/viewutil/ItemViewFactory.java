@@ -40,7 +40,7 @@ public class ItemViewFactory {
         View view = null;
         if (item.type == null) return null;
         switch (item.type) {
-            case LAUNCHER_APP_DRAWER:
+            case ACTION:
                 view = new AppItemView.Builder(context).vibrateWhenLongPress().setLauncherAction(item.type).setTextColor(Color.WHITE).withOnTouchGetPosition().withOnLongPressDrag(item, DragAction.Action.ACTION_LAUNCHER, new AppItemView.Builder.LongPressCallBack() {
                     @Override
                     public boolean readyForDrag(View view) {

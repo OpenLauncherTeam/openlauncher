@@ -269,7 +269,7 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder setLauncherAction(Desktop.Item.Type type) {
             switch (type) {
-                case LAUNCHER_APP_DRAWER:
+                case ACTION:
                     int iconSize = LauncherSettings.getInstance(view.getContext()).generalSettings.iconSize;
 
                     TypedValue typedValue = new TypedValue();

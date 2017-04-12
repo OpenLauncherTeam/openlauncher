@@ -192,7 +192,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                         home.desktop.revertLastItem();
                     }
                 }
-                if (item.type == Desktop.Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type == Item.Type.LAUNCHER_APP_DRAWER) {
+                if (item.type == Desktop.Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type == Item.Type.ACTION) {
                     if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
                         home.desktop.consumeRevert();
                         home.desktopDock.consumeRevert();
@@ -725,7 +725,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         public static Item newAppDrawerBtn() {
             Desktop.Item item = new Item();
-            item.type = Type.LAUNCHER_APP_DRAWER;
+            item.type = Type.ACTION;
             item.spanX = 1;
             item.spanY = 1;
 
@@ -841,10 +841,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         public enum Type {
             APP,
-            WIDGET,
             SHORTCUT,
             GROUP,
-            LAUNCHER_APP_DRAWER
+            ACTION,
+            WIDGET
         }
     }
 
@@ -852,5 +852,4 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         void onDesktopEdit();
         void onFinishDesktopEdit();
     }
-
 }

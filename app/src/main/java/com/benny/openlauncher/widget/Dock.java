@@ -113,7 +113,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(Item.class.getClassLoader());
                 Item item = intent.getParcelableExtra("mDragData");
-                if (item.type == Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type == Item.Type.LAUNCHER_APP_DRAWER) {
+                if (item.type == Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type == Item.Type.ACTION) {
                     if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
                         home.desktop.consumeRevert();
                         home.desktopDock.consumeRevert();
