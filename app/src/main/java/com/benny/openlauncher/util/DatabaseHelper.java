@@ -38,9 +38,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
           DatabaseHelper.COLUMN_DATA + " TEXT PRIMARY KEY";
   private static final String SQL_DELETE = "DROP TABLE IF EXISTS ";
   private static final String SQL_QUERY = "SELECT * FROM ";
+  private SQLiteDatabase db;
 
   public DatabaseHelper(Context context) {
-    super(context, "openlauncher.db", null, 1);
+    super(context, "launcher.db", null, 1);
+    db = getWritableDatabase();
   }
 
   public void onCreate(SQLiteDatabase db) {
@@ -65,7 +67,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
   public void addItem(Desktop.Item item) {
     ContentValues values = new ContentValues();
-    SQLiteDatabase db = getWritableDatabase();
     values.put(COLUMN_ID, item.idValue);
     values.put(COLUMN_TYPE, item.type.toString());
     values.put(COLUMN_LABEL, item.name);
@@ -75,35 +76,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     String concat = "";
     switch (item.type) {
       case SHORTCUT:
-        values.put(COLUMN_Y_POS, item.appIntent.toString());
+        values.put(COLUMN_DATA, item.appIntent.toString());
         break;
       case GROUP:
         for (Desktop.Item tmp : item.items) {
           concat += tmp.idValue + "#";
         }
-        values.put(COLUMN_Y_POS, concat);
+        values.put(COLUMN_DATA, concat);
         break;
       case ACTION:
-        values.put(COLUMN_Y_POS, item.actionValue);
+        values.put(COLUMN_DATA, item.actionValue);
         break;
       case WIDGET:
         concat = Integer.toString(item.widgetID) + "#"
             + Integer.toString(item.spanX) + "#"
             + Integer.toString(item.spanY);
-        values.put(COLUMN_Y_POS, concat);
+        values.put(COLUMN_DATA, concat);
         break;
     }
     db.insert(TABLE_ITEM, null, values);
   }
 
   public void removeItem(Desktop.Item item) {
-    SQLiteDatabase db = getWritableDatabase();
+    db.delete(TABLE_ITEM, COLUMN_ID + " = ?", new String[]{String.valueOf(item.idValue)});
+    db.close();
+  }
+
+  public void updateItem(Desktop.Item item) {
     db.delete(TABLE_ITEM, COLUMN_ID + " = ?", new String[]{String.valueOf(item.idValue)});
     db.close();
   }
 
   public ArrayList<Desktop.Item> getDesktop() {
-    SQLiteDatabase db = getWritableDatabase();
     ArrayList<Desktop.Item> desktop = new ArrayList<>();
     String SQL_QUERY_ALL = SQL_QUERY + TABLE_DESKTOP;
     Cursor cursor = db.rawQuery(SQL_QUERY_ALL, null);
