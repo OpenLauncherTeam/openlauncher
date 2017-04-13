@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
@@ -639,7 +640,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         public Intent appIntent;
 
         // list of items for groups
-        public Set<Item> items;
+        public Set<String> items;
 
         // int value for launcher action
         public int actionValue;
