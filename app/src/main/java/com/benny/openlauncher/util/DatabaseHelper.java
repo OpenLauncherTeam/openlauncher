@@ -24,19 +24,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
   private static final String COLUMN_DATA = "data";
 
   private static final String SQL_CREATE_DESKTOP =
-      "CREATE TABLE " + DatabaseHelper.TABLE_DESKTOP + " (" +
-          DatabaseHelper.COLUMN_ID + " INTEGER PRIMARY KEY)";
+      "CREATE TABLE " + TABLE_DESKTOP + " (" +
+          COLUMN_ID + " INTEGER PRIMARY KEY)";
   private static final String SQL_CREATE_DOCK =
-      "CREATE TABLE " + DatabaseHelper.TABLE_DOCK + " (" +
-          DatabaseHelper.COLUMN_ID + " INTEGER PRIMARY KEY)";
+      "CREATE TABLE " + TABLE_DOCK + " (" +
+          COLUMN_ID + " INTEGER PRIMARY KEY)";
   private static final String SQL_CREATE_ITEM =
-      "CREATE TABLE " + DatabaseHelper.TABLE_ITEM + " (" +
-          DatabaseHelper.COLUMN_ID + " INTEGER PRIMARY KEY" +
-          DatabaseHelper.COLUMN_TYPE + " TEXT PRIMARY KEY" +
-          DatabaseHelper.COLUMN_LABEL + " TEXT PRIMARY KEY" +
-          DatabaseHelper.COLUMN_X_POS + " INTEGER PRIMARY KEY" +
-          DatabaseHelper.COLUMN_Y_POS + " INTEGER PRIMARY KEY" +
-          DatabaseHelper.COLUMN_DATA + " TEXT PRIMARY KEY";
+      "CREATE TABLE " + TABLE_DESKTOP + " (" +
+          COLUMN_ID + " INTEGER PRIMARY KEY," +
+          COLUMN_TYPE + " TEXT," +
+          COLUMN_LABEL + " TEXT," +
+          COLUMN_X_POS + " INTEGER," +
+          COLUMN_Y_POS + " INTEGER," +
+          COLUMN_DATA + " TEXT)";
   private static final String SQL_DELETE = "DROP TABLE IF EXISTS ";
   private static final String SQL_QUERY = "SELECT * FROM ";
   private SQLiteDatabase db;
@@ -69,23 +69,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
   public void addItem(boolean desktop, Desktop.Item item) {
     ContentValues itemValues = new ContentValues();
     itemValues.put(COLUMN_ID, item.idValue);
-    itemValues.put(COLUMN_TYPE, item.type.toString());
+    if (item.type != Desktop.Item.Type.APP) {
+      itemValues.put(COLUMN_TYPE, item.type.toString());
+    } else {
+      itemValues.put(COLUMN_TYPE, Desktop.Item.Type.SHORTCUT.toString());
+    }
     itemValues.put(COLUMN_LABEL, item.name);
     itemValues.put(COLUMN_X_POS, item.x);
     itemValues.put(COLUMN_Y_POS, item.y);
 
     String concat = "";
     switch (item.type) {
-      case SHORTCUT:
-        // TODO: might need to fix this - need testing
+      case APP:
         itemValues.put(COLUMN_DATA, item.appIntent.toString());
         break;
       case GROUP:
+        // update individual items in group
+        String[] array = item.items.toArray(new String[0]);
+        removeItem(array);
         for (String tmp : item.items) {
           concat += tmp + "#";
         }
         itemValues.put(COLUMN_DATA, concat);
-        // TODO: update individual items in group
         break;
       case ACTION:
         itemValues.put(COLUMN_DATA, item.actionValue);
@@ -99,9 +104,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     db.insert(TABLE_ITEM, null, itemValues);
 
-    // adds reference to home
+    // add reference to home
     ContentValues homeValues = new ContentValues();
-    itemValues.put(COLUMN_ID, item.idValue);
+    homeValues.put(COLUMN_ID, item.idValue);
     if (desktop) {
       db.insert(TABLE_DESKTOP, null, homeValues);
     } {
@@ -109,75 +114,88 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
   }
 
-  public void removeItem(Desktop.Item item) {
+  public void removeItem(String[] item) {
+    db.delete(TABLE_DESKTOP, COLUMN_ID + " = ?", item);
+    db.delete(TABLE_DOCK, COLUMN_ID + " = ?", item);
+    db.close();
+  }
+
+  public void deleteItem(Desktop.Item item) {
     db.delete(TABLE_ITEM, COLUMN_ID + " = ?", new String[]{String.valueOf(item.idValue)});
     db.delete(TABLE_DESKTOP, COLUMN_ID + " = ?", new String[]{String.valueOf(item.idValue)});
     db.delete(TABLE_DOCK, COLUMN_ID + " = ?", new String[]{String.valueOf(item.idValue)});
-    db.close();
-  }
-
-  public void updateItem(Desktop.Item item) {
-    // removes the item and creates a new one in the database
-    // TODO: finish this
-    removeItem(item);
-    db.close();
   }
 
   public ArrayList<Desktop.Item> getDesktop(PackageManager pm) {
-    ArrayList<Desktop.Item> desktop = new ArrayList<>();
-    String SQL_QUERY_ALL = SQL_QUERY + TABLE_DESKTOP;
-    Cursor cursorOne = db.rawQuery(SQL_QUERY_ALL, null);
-    if (cursorOne.getCount() != 0) {
-      cursorOne.moveToFirst();
+    String SQL_QUERY_DESKTOP = SQL_QUERY + TABLE_DESKTOP;
+    Cursor cursor = db.rawQuery(SQL_QUERY_DESKTOP, null);
+    return getSelection(cursor, pm);
+  }
+
+  public ArrayList<Desktop.Item> getDock(PackageManager pm) {
+    String SQL_QUERY_DESKTOP = SQL_QUERY + TABLE_DOCK;
+    Cursor cursor = db.rawQuery(SQL_QUERY_DESKTOP, null);
+    return getSelection(cursor, pm);
+  }
+
+  public ArrayList<Desktop.Item> getSelection(Cursor cursorSelection, PackageManager pm) {
+    ArrayList<Desktop.Item> selection = new ArrayList<>();
+    if (cursorSelection.getCount() != 0) {
+      cursorSelection.moveToFirst();
       do {
-        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_ITEM + " WHERE " + COLUMN_ID + " = " + cursorOne.getString(0);
-        Cursor cursorTwo = db.rawQuery(SQL_QUERY_SPECIFIC, null);
-        int id = Integer.parseInt(cursorTwo.getString(0));
-        String type = cursorTwo.getString(1);
-        String label = cursorTwo.getString(2);
-        int x = Integer.parseInt(cursorTwo.getString(3));
-        int y = Integer.parseInt(cursorTwo.getString(4));
-        String data = cursorTwo.getString(5);
-        cursorTwo.close();
-
-        Desktop.Item tmp = new Desktop.Item();
-        tmp.idValue = id;
-        tmp.name = label;
-        tmp.x = x;
-        tmp.y = y;
-
-        // TODO: add data to item
-        String[] dataSplit;
-        switch (type) {
-          case "SHORTCUT":
-            tmp.type = Desktop.Item.Type.SHORTCUT;
-            tmp.appIntent = pm.getLaunchIntentForPackage(data);
-            break;
-          case "GROUP":
-            tmp.type = Desktop.Item.Type.GROUP;
-            dataSplit = data.split("#");
-            for (String tmpString : dataSplit) {
-              tmp.items.add(tmpString);
-            }
-            break;
-          case "ACTION":
-            tmp.type = Desktop.Item.Type.ACTION;
-            // grab the action value
-            tmp.actionValue = Integer.parseInt(data);
-            break;
-          case "WIDGET":
-            tmp.type = Desktop.Item.Type.WIDGET;
-            // split the data into widgetID, spanX, and spanY
-            dataSplit = data.split("#");
-            tmp.widgetID = Integer.parseInt(dataSplit[0]);
-            tmp.spanX = Integer.parseInt(dataSplit[1]);
-            tmp.spanY = Integer.parseInt(dataSplit[2]);
-            break;
-        }
-        desktop.add(tmp);
-      } while (cursorOne.moveToNext());
-      cursorOne.close();
+        selection.add(getItem(cursorSelection.getString(0), pm));
+      } while (cursorSelection.moveToNext());
+      cursorSelection.close();
     }
-    return desktop;
+    return selection;
+  }
+
+  public Desktop.Item getItem(String itemID, PackageManager pm) {
+    String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_ITEM + " WHERE " + COLUMN_ID + " = " + itemID;
+    Cursor cursorItem = db.rawQuery(SQL_QUERY_SPECIFIC, null);
+
+    int id = Integer.parseInt(cursorItem.getString(0));
+    String type = cursorItem.getString(1);
+    String label = cursorItem.getString(2);
+    int x = Integer.parseInt(cursorItem.getString(3));
+    int y = Integer.parseInt(cursorItem.getString(4));
+    String data = cursorItem.getString(5);
+    cursorItem.close();
+
+    Desktop.Item tmp = new Desktop.Item();
+    tmp.idValue = id;
+    tmp.name = label;
+    tmp.x = x;
+    tmp.y = y;
+
+    // TODO: add data to item
+    String[] dataSplit;
+    switch (type) {
+      case "SHORTCUT":
+        tmp.type = Desktop.Item.Type.SHORTCUT;
+        tmp.appIntent = pm.getLaunchIntentForPackage(data);
+        break;
+      case "GROUP":
+        tmp.type = Desktop.Item.Type.GROUP;
+        dataSplit = data.split("#");
+        for (String tmpString : dataSplit) {
+          tmp.items.add(tmpString);
+        }
+        break;
+      case "ACTION":
+        tmp.type = Desktop.Item.Type.ACTION;
+        // grab the action value
+        tmp.actionValue = Integer.parseInt(data);
+        break;
+      case "WIDGET":
+        tmp.type = Desktop.Item.Type.WIDGET;
+        // split the data into widgetID, spanX, and spanY
+        dataSplit = data.split("#");
+        tmp.widgetID = Integer.parseInt(dataSplit[0]);
+        tmp.spanX = Integer.parseInt(dataSplit[1]);
+        tmp.spanY = Integer.parseInt(dataSplit[2]);
+        break;
+    }
+    return tmp;
   }
 }
