@@ -15,7 +15,7 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="${appIcon}"
         android:label="@string/app_name"
         android:largeHeap="false"
         android:launchMode="singleTask"
@@ -26,7 +26,7 @@
         <meta-data android:name="android.max_aspect" android:value="2.1" />
 
         <activity
-            android:name=".activity.Init"
+            android:name="com.benny.openlauncher.activity.Init"
             android:clearTaskOnLaunch="true"
             android:label="@string/app_name">
             <intent-filter>
@@ -36,7 +36,7 @@
         </activity>
 
         <activity
-            android:name=".activity.Home"
+            android:name="com.benny.openlauncher.activity.Home"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|keyboard|screenSize"
             android:label="@string/app_name"
@@ -54,35 +54,35 @@
         </activity>
 
         <provider
-            android:name=".util.FiveSecsDelayContentProvider"
-            android:authorities="com.benny.openlauncher.util.FiveSecsDelayContentProvider"
+            android:name="com.benny.openlauncher.util.FiveSecsDelayContentProvider"
+            android:authorities="${applicationId}.util.FiveSecsDelayContentProvider"
             android:enabled="true"
             android:exported="true"
             android:grantUriPermissions="true" />
 
         <activity
-            android:name=".activity.AutoFinishActivity"
+            android:name="com.benny.openlauncher.activity.AutoFinishActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <activity
-            android:name=".activity.MinibarEditActivity"
+            android:name="com.benny.openlauncher.activity.MinibarEditActivity"
             android:label="Edit Item"
-            android:parentActivityName=".activity.Home"
+            android:parentActivityName="com.benny.openlauncher.activity.Home"
             android:theme="@style/NormalActivity.Light" />
         <activity
-            android:name=".activity.SettingsActivity"
+            android:name="com.benny.openlauncher.activity.SettingsActivity"
             android:configChanges="orientation|keyboard|screenSize"
             android:label="Settings"
             android:theme="@style/NormalActivity.Light" />
 
         <activity
-            android:name=".activity.HideAppsActivity"
+            android:name="com.benny.openlauncher.activity.HideAppsActivity"
             android:enabled="true"
             android:label="@string/app_name"
             android:theme="@style/NormalActivity.Light" />
 
 
         <receiver
-            android:name=".util.DeviceAdminReceiver"
+            android:name="com.benny.openlauncher.util.DeviceAdminReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
@@ -93,18 +93,18 @@
                 android:resource="@xml/device_admin" />
         </receiver>
         <receiver
-            android:name=".util.ShortcutReceiver"
+            android:name="com.benny.openlauncher.util.ShortcutReceiver"
             android:enabled="true"
             android:exported="true" />
 
         <activity
-            android:name=".activity.AboutActivity"
+            android:name="com.benny.openlauncher.activity.AboutActivity"
             android:label="About"
             android:theme="@style/AppTheme.MaterialAboutActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.benny.openlauncher.provider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

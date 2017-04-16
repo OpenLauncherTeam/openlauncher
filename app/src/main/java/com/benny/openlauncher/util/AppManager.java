@@ -120,7 +120,7 @@ public class AppManager {
                 .title((activity.getString(R.string.settings_iconPack_title)))
                 .build();
 
-        fastItemAdapter.add(new IconLabelItem(activity.getResources().getDrawable(R.mipmap.ic_launcher), "Default", new View.OnClickListener() {
+        fastItemAdapter.add(new IconLabelItem(activity.getResources().getDrawable(R.drawable.ic_launcher), "Default", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recreateAfterGettingApps = true;

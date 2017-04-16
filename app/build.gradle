@@ -5,19 +5,44 @@ android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
 
+    def VERSION_CODE = 9
+    def VERSION_NAME = "0.3.1"
+    def APP_NAME = 'OpenLauncher'
+    def APP_PACKAGE = "com.benny.openlauncher"
+    def APP_ICON ="@drawable/ic_launcher"
+
     defaultConfig {
-        multiDexEnabled false
         minSdkVersion 16
         targetSdkVersion 25
+        multiDexEnabled false
 
-        applicationId "com.benny.openlauncher"
-        versionCode 9
-        versionName "alpha3.1"
+        buildConfigField "boolean", "IS_TEST_BUILD", "false"
+        buildConfigField "boolean", "IS_GPLAY_BUILD", "false"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+    productFlavors {
+        flavorDefault {
+            applicationId APP_PACKAGE
+            resValue 'string', 'app_name', APP_NAME
+            manifestPlaceholders = [appIcon: APP_ICON]
+            versionCode VERSION_CODE ; versionName VERSION_NAME
+        }
+
+        flavorTest {
+            applicationId APP_PACKAGE + ".test"
+            resValue 'string', 'app_name', '"OL Nightly"'
+            manifestPlaceholders = [appIcon: APP_ICON + "_test"]
+            versionCode = Integer.parseInt(new Date().format('yyMMdd'))
+            versionName = new Date().format('yyMMdd')
+            buildConfigField "boolean", "IS_TEST_BUILD", "true"
+        }
+
+        flavorGplay {
+            applicationId APP_PACKAGE
+            resValue 'string', 'app_name', APP_NAME
+            manifestPlaceholders = [appIcon: APP_ICON]
+            versionCode VERSION_CODE ; versionName VERSION_NAME
+            buildConfigField "boolean", "IS_GPLAY_BUILD", "true"
         }
     }
 
@@ -25,12 +50,17 @@ android {
         disable 'MissingTranslation'
         disable 'ExtraTranslation'
     }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 }
 
 repositories {
-    maven {
-        url "https://jitpack.io"
-    }
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {

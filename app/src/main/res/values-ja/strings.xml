@@ -2,8 +2,6 @@
 <resources>
 
     <!-- Titles -->
-
-    <string name="app_name">OpenLauncher</string>
     <string name="settings">設定</string>
     <string name="minibar">ミニバー</string>
     <string name="about">アプリについて</string>

@@ -29,7 +29,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/ic_launcher" />
 
         <ImageView
             android:layout_width="match_parent"

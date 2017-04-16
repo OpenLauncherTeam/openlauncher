@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">OpenLauncher</string>
 
     <string name="info">Info</string>
     <string name="uninstall">Deinstallieren</string>

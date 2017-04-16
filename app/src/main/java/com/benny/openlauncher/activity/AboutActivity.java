@@ -20,7 +20,7 @@ public class AboutActivity extends MaterialAboutActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         MaterialAboutCard.Builder titleCard = new MaterialAboutCard.Builder();
-        titleCard.addItem(new MaterialAboutTitleItem(R.string.app_name, R.mipmap.ic_launcher));
+        titleCard.addItem(new MaterialAboutTitleItem(R.string.app_name, R.drawable.ic_launcher));
         try {
             titleCard.addItem(ConvenienceBuilder.createVersionActionItem(this, getResources().getDrawable(R.drawable.ic_info_outline_24dp), "Version", true));
         } catch (PackageManager.NameNotFoundException e) {
@@ -37,7 +37,7 @@ public class AboutActivity extends MaterialAboutActivity {
         MaterialAboutCard.Builder creditCard = new MaterialAboutCard.Builder();
         creditCard.title(getString(R.string.about_credit));
         creditCard.addItem(new MaterialAboutActionItem.Builder()
-                .icon(R.mipmap.ic_chris)
+                .icon(R.drawable.ic_chris)
                 .text("Chris DeBrodie")
                 .subText(getString(R.string.about_credit_text))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://plus.google.com/111923938461696019967")))
