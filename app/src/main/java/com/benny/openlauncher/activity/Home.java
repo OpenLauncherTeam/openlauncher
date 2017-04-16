@@ -729,9 +729,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     protected void onStop() {
-        //We write and save the settings here to the device
+        // save the settings when the launcher is stopped
         LauncherSettings.getInstance(this).writeSettings();
-        //Tool.writeToFile("noteData.json", gson.toJson(notes), Home.this);
         super.onStop();
     }
 

@@ -2,6 +2,7 @@ package com.benny.openlauncher.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 
 import com.benny.openlauncher.widget.AppDrawerController;
@@ -69,6 +70,11 @@ public class LauncherSettings {
 
     private void readDesktopData(Gson gson, Desktop.DesktopMode mode) {
         desktopData.clear();
+
+        // DatabaseHelper db = new DatabaseHelper(context);
+        // TODO
+        //desktopData = db.getDesktop(pm);
+
         String dataName = null;
         switch (mode) {
             case Normal:
@@ -190,7 +196,7 @@ public class LauncherSettings {
 
         Tool.checkForUnusedIconAndDelete(context, iconCacheIDs);
 
-        //We init all the apps to the desktop for the first time.
+        // init all the apps to the desktop for the first time.
         if (mode == Desktop.DesktopMode.ShowAllApps && desktopData.size() == 0) {
             int pageCount = 0;
             List<AppManager.App> apps = AppManager.getInstance(context).getApps();
@@ -218,10 +224,11 @@ public class LauncherSettings {
     }
 
     public Gson writeSettings() {
-        if (generalSettings == null) return null;
+        if (generalSettings == null) {
+            return null;
+        }
 
         Gson gson = new Gson();
-
         List<List<Desktop.SimpleItem>> simpleDesktopData = new ArrayList<>();
         List<Desktop.SimpleItem> simpleDockData = new ArrayList<>();
 
@@ -245,12 +252,12 @@ public class LauncherSettings {
                 Tool.writeToFile(DockData2FileName, gson.toJson(simpleDockData), context);
                 break;
         }
-        Tool.writeToFile(GeneralSettingsFileName, gson.toJson(generalSettings), context);
 
+        Tool.writeToFile(GeneralSettingsFileName, gson.toJson(generalSettings), context);
         return gson;
     }
 
-    //Edit this more carefully as changing the type of a field will cause an parsing error when the launcher start.
+    // edit this carefully as changing the type of a field will cause a parsing error when the launcher starts
     public static class GeneralSettings {
         //Icon
         public int iconSize = 58;

@@ -2,6 +2,7 @@ package com.benny.openlauncher.util;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,7 +10,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.benny.openlauncher.widget.Desktop;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
   private static final String TABLE_DESKTOP = "desktop";
@@ -50,6 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // create tables for desktop and dock
     db.execSQL(SQL_CREATE_DESKTOP);
     db.execSQL(SQL_CREATE_DOCK);
+
     // create table for all items
     db.execSQL(SQL_CREATE_ITEM);
   }
@@ -66,7 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     onUpgrade(db, oldVersion, newVersion);
   }
 
-  public void addItem(boolean desktop, Desktop.Item item) {
+  public void createItem(boolean desktop, Desktop.Item item) {
     ContentValues itemValues = new ContentValues();
     itemValues.put(COLUMN_ID, item.idValue);
     if (item.type != Desktop.Item.Type.APP) {
@@ -84,9 +90,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         itemValues.put(COLUMN_DATA, item.appIntent.toString());
         break;
       case GROUP:
-        // update individual items in group
         String[] array = item.items.toArray(new String[0]);
+
+        // update individual items in group
         removeItem(array);
+
         for (String tmp : item.items) {
           concat += tmp + "#";
         }
@@ -102,22 +110,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         itemValues.put(COLUMN_DATA, concat);
         break;
     }
+
+    // insert into database
     db.insert(TABLE_ITEM, null, itemValues);
 
     // add reference to home
-    ContentValues homeValues = new ContentValues();
-    homeValues.put(COLUMN_ID, item.idValue);
-    if (desktop) {
-      db.insert(TABLE_DESKTOP, null, homeValues);
-    } {
-      db.insert(TABLE_DOCK, null, homeValues);
-    }
-  }
-
-  public void removeItem(String[] item) {
-    db.delete(TABLE_DESKTOP, COLUMN_ID + " = ?", item);
-    db.delete(TABLE_DOCK, COLUMN_ID + " = ?", item);
-    db.close();
+    addItem(new String[]{Integer.toString(item.idValue)}, desktop);
   }
 
   public void deleteItem(Desktop.Item item) {
@@ -126,31 +124,58 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     db.delete(TABLE_DOCK, COLUMN_ID + " = ?", new String[]{String.valueOf(item.idValue)});
   }
 
-  public ArrayList<Desktop.Item> getDesktop(PackageManager pm) {
+  public void addItem(String[] item, boolean desktop) {
+    for (String string : item) {
+      ContentValues homeValues = new ContentValues();
+      homeValues.put(COLUMN_ID, string);
+      if (desktop) {
+        db.insert(TABLE_DESKTOP, null, homeValues);
+      } {
+        db.insert(TABLE_DOCK, null, homeValues);
+      }
+    }
+  }
+
+  public void removeItem(String[] item) {
+    db.delete(TABLE_DESKTOP, COLUMN_ID + " = ?", item);
+    db.delete(TABLE_DOCK, COLUMN_ID + " = ?", item);
+  }
+
+  public List<List<Desktop.Item>> getDesktop() {
     String SQL_QUERY_DESKTOP = SQL_QUERY + TABLE_DESKTOP;
     Cursor cursor = db.rawQuery(SQL_QUERY_DESKTOP, null);
-    return getSelection(cursor, pm);
+
+    List<List<Desktop.Item>> desktop = new ArrayList<>();
+    // TODO
+
+    cursor.close();
+    return desktop;
   }
 
-  public ArrayList<Desktop.Item> getDock(PackageManager pm) {
+  public List<List<Desktop.Item>> getDock() {
     String SQL_QUERY_DESKTOP = SQL_QUERY + TABLE_DOCK;
     Cursor cursor = db.rawQuery(SQL_QUERY_DESKTOP, null);
-    return getSelection(cursor, pm);
+
+    List<List<Desktop.Item>> dock = new ArrayList<>();
+    // TODO
+
+    cursor.close();
+    return dock;
   }
 
-  public ArrayList<Desktop.Item> getSelection(Cursor cursorSelection, PackageManager pm) {
-    ArrayList<Desktop.Item> selection = new ArrayList<>();
+  public List<Desktop.Item> getSelection(Cursor cursorSelection) {
+    List<Desktop.Item> selection = new ArrayList<>();
     if (cursorSelection.getCount() != 0) {
       cursorSelection.moveToFirst();
       do {
-        selection.add(getItem(cursorSelection.getString(0), pm));
+        selection.add(getItem(cursorSelection.getString(0)));
       } while (cursorSelection.moveToNext());
       cursorSelection.close();
     }
     return selection;
   }
 
-  public Desktop.Item getItem(String itemID, PackageManager pm) {
+  public Desktop.Item getItem(String itemID) {
     String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_ITEM + " WHERE " + COLUMN_ID + " = " + itemID;
     Cursor cursorItem = db.rawQuery(SQL_QUERY_SPECIFIC, null);
 
@@ -168,27 +193,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     tmp.x = x;
     tmp.y = y;
 
-    // TODO: add data to item
     String[] dataSplit;
     switch (type) {
       case "SHORTCUT":
         tmp.type = Desktop.Item.Type.SHORTCUT;
-        tmp.appIntent = pm.getLaunchIntentForPackage(data);
+        tmp.appIntent = getIntentFromString(data);
         break;
       case "GROUP":
         tmp.type = Desktop.Item.Type.GROUP;
         dataSplit = data.split("#");
-        for (String tmpString : dataSplit) {
-          tmp.items.add(tmpString);
-        }
+        tmp.items = new HashSet<>(Arrays.asList(dataSplit));
         break;
       case "ACTION":
         tmp.type = Desktop.Item.Type.ACTION;
+
         // grab the action value
         tmp.actionValue = Integer.parseInt(data);
         break;
       case "WIDGET":
         tmp.type = Desktop.Item.Type.WIDGET;
+
         // split the data into widgetID, spanX, and spanY
         dataSplit = data.split("#");
         tmp.widgetID = Integer.parseInt(dataSplit[0]);
@@ -197,5 +221,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         break;
     }
     return tmp;
+  }
+
+  private String getIntentAsString(Intent intent) {
+    return intent.toUri(0);
+  }
+
+  private static Intent getIntentFromString(String string) {
+    if (string == null || string.isEmpty()) {
+      return new Intent();
+    } else {
+      try {
+        return new Intent().parseUri(string, 0);
+      } catch (URISyntaxException e) {
+        return new Intent();
+      }
+    }
   }
 }
