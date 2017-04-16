@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.StreamHandler;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
   private static final String TABLE_DESKTOP = "desktop";
@@ -27,6 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
   private static final String COLUMN_X_POS = "xPosition";
   private static final String COLUMN_Y_POS = "yPosition";
   private static final String COLUMN_DATA = "data";
+  private static final String COLUMN_PAGE = "page";
 
   private static final String SQL_CREATE_DESKTOP =
       "CREATE TABLE " + TABLE_DESKTOP + " (" +
@@ -41,7 +43,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
           COLUMN_LABEL + " TEXT," +
           COLUMN_X_POS + " INTEGER," +
           COLUMN_Y_POS + " INTEGER," +
-          COLUMN_DATA + " TEXT)";
+          COLUMN_DATA + " TEXT," +
+          COLUMN_PAGE + " INTEGER)";
   private static final String SQL_DELETE = "DROP TABLE IF EXISTS ";
   private static final String SQL_QUERY = "SELECT * FROM ";
   private SQLiteDatabase db;
@@ -72,7 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     onUpgrade(db, oldVersion, newVersion);
   }
 
-  public void createItem(boolean desktop, Desktop.Item item) {
+  public void createItem(Desktop.Item item, int page, boolean desktop) {
     ContentValues itemValues = new ContentValues();
     itemValues.put(COLUMN_ID, item.idValue);
     if (item.type != Desktop.Item.Type.APP) {
@@ -87,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     String concat = "";
     switch (item.type) {
       case APP:
-        itemValues.put(COLUMN_DATA, item.appIntent.toString());
+        itemValues.put(COLUMN_DATA, getIntentAsString(item.appIntent));
         break;
       case GROUP:
         String[] array = item.items.toArray(new String[0]);
@@ -110,6 +113,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         itemValues.put(COLUMN_DATA, concat);
         break;
     }
+    itemValues.put(COLUMN_PAGE, page);
 
     // insert into database
     db.insert(TABLE_ITEM, null, itemValues);
@@ -146,21 +150,63 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     Cursor cursor = db.rawQuery(SQL_QUERY_DESKTOP, null);
 
     List<List<Desktop.Item>> desktop = new ArrayList<>();
-    // TODO
+    if (cursor.getCount() != 0) {
+      cursor.moveToFirst();
+      do {
+        String SQL_QUERY_PAGE = SQL_QUERY + TABLE_ITEM + " where " + COLUMN_ID + " = " + cursor.getString(0);
+        Cursor cursorPage = db.rawQuery(SQL_QUERY_PAGE, null);
+        int page = Integer.parseInt(cursorPage.getString(6));
+        if (page != desktop.size()) {
+          desktop.add(new ArrayList<Desktop.Item>());
+        }
+        desktop.get(page).add(getItem(cursor.getString(0)));
+      } while (cursor.moveToNext());
+      cursor.close();
+    }
 
     cursor.close();
     return desktop;
   }
 
-  public List<List<Desktop.Item>> getDock() {
+  public List<Desktop.Item> getDock() {
     String SQL_QUERY_DESKTOP = SQL_QUERY + TABLE_DOCK;
     Cursor cursor = db.rawQuery(SQL_QUERY_DESKTOP, null);
 
-    List<List<Desktop.Item>> dock = new ArrayList<>();
-    // TODO
+    List<Desktop.Item> dock = new ArrayList<>();
+    if (cursor.getCount() != 0) {
+      cursor.moveToFirst();
+      do {
+        dock.add(getItem(cursor.getString(0)));
+      } while (cursor.moveToNext());
+      cursor.close();
+    }
 
     cursor.close();
     return dock;
+  }
+
+  public void setDesktop(List<List<Desktop.Item>> desktop) {
+    for (List<Desktop.Item> page : desktop) {
+      int pageCounter = 0;
+      for (Desktop.Item item : page) {
+        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_ITEM + " WHERE " + COLUMN_ID + " = " + item.idValue;
+        Cursor cursorItem = db.rawQuery(SQL_QUERY_SPECIFIC, null);
+        if (cursorItem.getCount() == 0) {
+          createItem(item, pageCounter, true);
+        }
+      }
+      pageCounter++;
+    }
+  }
+
+  public void setDock(List<Desktop.Item> dock) {
+    for (Desktop.Item item : dock) {
+      String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_ITEM + " WHERE " + COLUMN_ID + " = " + item.idValue;
+      Cursor cursorItem = db.rawQuery(SQL_QUERY_SPECIFIC, null);
+      if (cursorItem.getCount() == 0) {
+        createItem(item, 0, false);
+      }
+    }
   }
 
   public List<Desktop.Item> getSelection(Cursor cursorSelection) {
@@ -202,6 +248,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
       case "GROUP":
         tmp.type = Desktop.Item.Type.GROUP;
         dataSplit = data.split("#");
+
+        // add items back to home
+        for (String s : dataSplit) {
+          String SQL_QUERY_DESKTOP = SQL_QUERY + TABLE_DESKTOP;
+          Cursor cursor = db.rawQuery(SQL_QUERY_DESKTOP, null);
+          if (cursor.getCount() != 0) {
+            addItem(new String[]{cursor.getString(0)}, true);
+          } else {
+            addItem(new String[]{cursor.getString(0)}, false);
+          }
+        }
         tmp.items = new HashSet<>(Arrays.asList(dataSplit));
         break;
       case "ACTION":

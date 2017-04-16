@@ -44,6 +44,11 @@ public class LauncherSettings {
 
     private void readDockData(Gson gson, Desktop.DesktopMode mode) {
         dockData.clear();
+
+        // TODO
+        // DatabaseHelper db = new DatabaseHelper(context);
+        // dockData = db.getDock();
+
         String dataName = null;
         switch (mode) {
             case Normal:
@@ -71,9 +76,9 @@ public class LauncherSettings {
     private void readDesktopData(Gson gson, Desktop.DesktopMode mode) {
         desktopData.clear();
 
-        // DatabaseHelper db = new DatabaseHelper(context);
         // TODO
-        //desktopData = db.getDesktop(pm);
+        // DatabaseHelper db = new DatabaseHelper(context);
+        // desktopData = db.getDesktop();
 
         String dataName = null;
         switch (mode) {
@@ -227,6 +232,11 @@ public class LauncherSettings {
         if (generalSettings == null) {
             return null;
         }
+
+        // TODO
+        // DatabaseHelper db = new DatabaseHelper(context);
+        // db.setDesktop(desktopData);
+        // db.setDock(dockData);
 
         Gson gson = new Gson();
         List<List<Desktop.SimpleItem>> simpleDesktopData = new ArrayList<>();

@@ -32,6 +32,7 @@ import com.bennyv5.smoothviewpager.SmoothViewPager;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -684,6 +685,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
 
         public Item() {
+            idValue = (int) new Date().getTime();
         }
 
         public Item(SimpleItem in) {
@@ -773,6 +775,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             }
             name = in.readString();
             isInvalidate = in.readByte() != 0;
+            idValue = (int) new Date().getTime();
         }
 
         private static Intent toIntent(AppManager.App app) {
