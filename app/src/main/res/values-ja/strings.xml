@@ -50,10 +50,7 @@
 
     <string name="about_libs">オープンソース ライブラリー</string>
     <string name="about_rate">評価</string>
-    <string name="about_dev">開発者</string>
     <string name="about_credit">貢献者</string>
-    <string name="about_credit_text">バグや提案で私を助けてくれました。</string>
-    <string name="about_credit_text_2">いくつかの設定を追加、ドイツ語翻訳。</string>
 
     <!-- Dialogs -->
 

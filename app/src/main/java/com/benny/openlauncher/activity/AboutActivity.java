@@ -30,30 +30,49 @@ public class AboutActivity extends MaterialAboutActivity {
         titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, getResources().getDrawable(R.drawable.ic_github), getString(R.string.about_libs), false, Uri.parse("https://github.com/BennyKok/OpenLauncher/wiki/Open-Source-libraries")));
         titleCard.addItem(ConvenienceBuilder.createRateActionItem(this, getResources().getDrawable(R.drawable.ic_thumb_up_24dp), getString(R.string.about_rate), null));
 
-        MaterialAboutCard.Builder authorCard = new MaterialAboutCard.Builder();
-        authorCard.title(getString(R.string.about_dev));
-        authorCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, getResources().getDrawable(R.drawable.ic_benny), "BennyKok", false, Uri.parse("http://bennykok.weebly.com/contact.html")));
+        MaterialAboutCard.Builder opTeamCard = new MaterialAboutCard.Builder();
+        opTeamCard.title(getString(R.string.about_team));
 
-        MaterialAboutCard.Builder creditCard = new MaterialAboutCard.Builder();
-        creditCard.title(getString(R.string.about_credit));
-        creditCard.addItem(new MaterialAboutActionItem.Builder()
-                .icon(R.drawable.ic_chris)
-                .text("Chris DeBrodie")
-                .subText(getString(R.string.about_credit_text))
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://plus.google.com/111923938461696019967")))
+        opTeamCard.addItem(new MaterialAboutActionItem.Builder()
+                .icon(R.drawable.person__bennykok)
+                .text("BennyKok")
+                .subText(getString(R.string.about_credit_text__bennykok))
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("http://bennykok.weebly.com/contact.html")))
                 .build());
-        creditCard.addItem(new MaterialAboutActionItem.Builder()
-                .icon(R.drawable.gaukler_faun)
+        opTeamCard.addItem(new MaterialAboutActionItem.Builder()
+                .icon(R.drawable.person__gsantner)
+                .text("Gregor Santner")
+                .subText(getString(R.string.about_credit_text__gsantner))
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://gsantner.github.io/")))
+                .build());
+        opTeamCard.addItem(new MaterialAboutActionItem.Builder()
+                .icon(R.drawable.person__gaukler_faun)
                 .text("Gaukler Faun")
-                .subText(getString(R.string.about_credit_text_2))
+                .subText(getString(R.string.about_credit_text__gaukler_faun))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))
                 .build());
+        opTeamCard.addItem(new MaterialAboutActionItem.Builder()
+                .icon(R.drawable.person__dkanada)
+                .text("dkanada")
+                .subText(getString(R.string.about_credit_text__dkanada))
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/dkanada")))
+                .build());
+
+        MaterialAboutCard.Builder contributorsCard = new MaterialAboutCard.Builder();
+        contributorsCard.title(getString(R.string.about_credit));
+        contributorsCard.addItem(new MaterialAboutActionItem.Builder()
+                .icon(R.drawable.person__chris_debrodie)
+                .text("Chris DeBrodie")
+                .subText(getString(R.string.about_credit_text__chris_debrodie))
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://plus.google.com/111923938461696019967")))
+                .build());
+
         //authorCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(),"Chris DeBrodie",false, Uri.parse("")));
 
         return new MaterialAboutList.Builder()
                 .addCard(titleCard.build())
-                .addCard(authorCard.build())
-                .addCard(creditCard.build())
+                .addCard(opTeamCard.build())
+                .addCard(contributorsCard.build())
                 .build();
     }
 

@@ -50,10 +50,13 @@
 
     <string name="about_libs">Open Source libraries</string>
     <string name="about_rate">Rate</string>
-    <string name="about_dev">Developer</string>
+    <string name="about_team" translatable="false">Open Launcher Team</string>
     <string name="about_credit">Contributors</string>
-    <string name="about_credit_text">Helped me a lot with bugs and suggestions.</string>
-    <string name="about_credit_text_2">Added some settings, German translation.</string>
+    <string name="about_credit_text__chris_debrodie" translatable="false">Helped a lot with bugs and suggestions</string>
+    <string name="about_credit_text__bennykok" translatable="false">Project starter</string>
+    <string name="about_credit_text__gaukler_faun" translatable="false">Added some settings, German translation</string>
+    <string name="about_credit_text__gsantner" translatable="false">Maintainer, German translations</string>
+    <string name="about_credit_text__dkanada" translatable="false">Maintainer, Database</string>
 
     <!-- Dialogs -->
 

@@ -7,6 +7,8 @@
 <a href="https://f-droid.org/repository/browse/?fdid=com.benny.openlauncher" target="_blank">
 <img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/></a>
 
+[![CircleCI](https://circleci.com/gh/OpenLauncherTeam/openlauncher.svg?style=shield)](https://circleci.com/gh/OpenLauncherTeam/openlauncher)
+
 # Notice
 
 Currently there are a lot of issues and we are not able to fix all at a time, so please be patient if the issue is still opening. And I and the team are going to review the structure of the launcher as it is very bad as I wrote them a long time ago, so there won't be any UI redesing and new feature coming so certainly. Thanks for heading over and your support.

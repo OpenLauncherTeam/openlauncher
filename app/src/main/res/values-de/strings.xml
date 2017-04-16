@@ -63,10 +63,7 @@
     <string name="about">Über Open Launcher</string>
     <string name="about_libs">Open Source Bibliotheken</string>
     <string name="about_rate">Bewerte die App</string>
-    <string name="about_dev">Entwickler</string>
     <string name="about_credit">Beteiligte</string>
-    <string name="about_credit_text">Hat mir bei Fehlern geholfen und Vorschläge gemacht.</string>
-    <string name="about_credit_text_2">Hat einige Einstellungen hinzugefügt, Deutsche Übersetzung.</string>
 
 
     // Settings
