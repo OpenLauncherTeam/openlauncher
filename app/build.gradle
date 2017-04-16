@@ -11,8 +11,8 @@ android {
         targetSdkVersion 25
 
         applicationId "com.benny.openlauncher"
-        versionCode 8
-        versionName "alpha3"
+        versionCode 9
+        versionName "alpha3.1"
     }
     buildTypes {
         release {
