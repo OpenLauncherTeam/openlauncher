@@ -5,8 +5,8 @@
     TODO activate later again
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_CALL_LOG" />
--->
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />-->
+
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -22,6 +22,8 @@
         android:stateNotNeeded="true"
         android:taskAffinity=""
         android:theme="@style/Home.Light">
+
+        <meta-data android:name="android.max_aspect" android:value="2.1" />
 
         <activity
             android:name=".activity.Init"

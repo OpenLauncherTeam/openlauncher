@@ -86,12 +86,16 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public void initDesktopItem(Home home) {
         this.home = home;
+        int column = LauncherSettings.getInstance(getContext()).generalSettings.desktopGridX;
+        int row = LauncherSettings.getInstance(getContext()).generalSettings.desktopGridY;
         for (int i = 0; i < LauncherSettings.getInstance(getContext()).desktopData.size(); i++) {
             if (pages.size() <= i) break;
             pages.get(i).removeAllViews();
             List<Item> items = LauncherSettings.getInstance(getContext()).desktopData.get(i);
             for (int j = 0; j < items.size(); j++) {
-                addItemToPagePosition(items.get(j), i);
+                Desktop.Item item = items.get(j);
+                if (item.x < column && item.y < row)
+                    addItemToPagePosition(item, i);
             }
         }
     }
@@ -851,6 +855,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public interface OnDesktopEditListener {
         void onDesktopEdit();
+
         void onFinishDesktopEdit();
     }
 }

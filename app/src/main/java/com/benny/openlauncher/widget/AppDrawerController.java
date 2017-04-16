@@ -82,9 +82,11 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
                         for (int i = 0; i < drawerViewPaged.pages.size(); i++) {
                             drawerViewPaged.pages.get(i).findViewById(R.id.cc).setAlpha(1);
                         }
-                        View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
-                        mGrid.setAlpha(0);
-                        mGrid.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime - 50).setInterpolator(new AccelerateDecelerateInterpolator());
+                        if (drawerViewPaged.pages.size() > 0) {
+                            View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
+                            mGrid.setAlpha(0);
+                            mGrid.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime - 50).setInterpolator(new AccelerateDecelerateInterpolator());
+                        }
                         break;
                     case Vertical:
                         drawerViewGrid.recyclerView.setAlpha(0);
@@ -145,14 +147,15 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
 
         switch (drawerMode) {
             case Paged:
-                View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
-                mGrid.animate().setStartDelay(0).alpha(0).setDuration(60L).withEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        appDrawerAnimator.start();
-
-                    }
-                });
+                if (drawerViewPaged.pages.size() > 0) {
+                    View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
+                    mGrid.animate().setStartDelay(0).alpha(0).setDuration(60L).withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            appDrawerAnimator.start();
+                        }
+                    });
+                }
                 break;
             case Vertical:
                 drawerViewGrid.recyclerView.animate().setStartDelay(0).alpha(0).setDuration(60L).withEndAction(new Runnable() {

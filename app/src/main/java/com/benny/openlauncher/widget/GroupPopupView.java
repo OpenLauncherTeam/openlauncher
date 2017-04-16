@@ -56,8 +56,7 @@ public class GroupPopupView extends FrameLayout {
         cellContainer = (CellContainer) popupParent.findViewById(R.id.cc);
         title = (TextView) popupParent.findViewById(R.id.tv);
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        postDelayed(new Runnable() {
             @Override
             public void run() {
                 title.setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
