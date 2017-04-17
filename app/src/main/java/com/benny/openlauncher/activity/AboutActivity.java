@@ -40,22 +40,16 @@ public class AboutActivity extends MaterialAboutActivity {
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("http://bennykok.weebly.com/contact.html")))
                 .build());
         opTeamCard.addItem(new MaterialAboutActionItem.Builder()
-                .icon(R.drawable.person__gsantner)
-                .text("Gregor Santner")
-                .subText(getString(R.string.about_credit_text__gsantner))
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://gsantner.github.io/")))
-                .build());
-        opTeamCard.addItem(new MaterialAboutActionItem.Builder()
-                .icon(R.drawable.person__gaukler_faun)
-                .text("Gaukler Faun")
-                .subText(getString(R.string.about_credit_text__gaukler_faun))
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))
-                .build());
-        opTeamCard.addItem(new MaterialAboutActionItem.Builder()
                 .icon(R.drawable.person__dkanada)
                 .text("dkanada")
                 .subText(getString(R.string.about_credit_text__dkanada))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/dkanada")))
+                .build());
+        opTeamCard.addItem(new MaterialAboutActionItem.Builder()
+                .icon(R.drawable.person__gsantner)
+                .text("Gregor Santner")
+                .subText(getString(R.string.about_credit_text__gsantner))
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://gsantner.github.io/")))
                 .build());
 
         MaterialAboutCard.Builder contributorsCard = new MaterialAboutCard.Builder();
@@ -66,6 +60,13 @@ public class AboutActivity extends MaterialAboutActivity {
                 .subText(getString(R.string.about_credit_text__chris_debrodie))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://plus.google.com/111923938461696019967")))
                 .build());
+        contributorsCard.addItem(new MaterialAboutActionItem.Builder()
+                .icon(R.drawable.person__gaukler_faun)
+                .text("Gaukler Faun")
+                .subText(getString(R.string.about_credit_text__gaukler_faun))
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))
+                .build());
+
 
         //authorCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(),"Chris DeBrodie",false, Uri.parse("")));
 
