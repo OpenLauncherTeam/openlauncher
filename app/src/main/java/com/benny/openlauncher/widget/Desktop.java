@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
@@ -568,34 +567,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         return false;
     }
 
-    //Used for saving
-    public static class SimpleItem {
-        public Item.Type type;
-        public String actions;
-        public int x = 0;
-        public int y = 0;
-        public String name;
-        public int widgetID;
-        public int spanX = 1;
-        public int spanY = 1;
-        public boolean isInvalidate;
-
-        public SimpleItem() {
-        }
-
-        public SimpleItem(Item in) {
-            this.name = in.name;
-            this.type = in.type;
-            this.actions = in.getActionsAsString();
-            this.x = in.x;
-            this.y = in.y;
-            this.spanX = in.spanX;
-            this.spanY = in.spanY;
-            this.widgetID = in.widgetID;
-            this.isInvalidate = in.isInvalidate;
-        }
-    }
-
     public enum DesktopMode {
         Normal, ShowAllApps
     }
@@ -614,7 +585,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             }
         };
 
-        //Call to set the object to unusable
+        // hide the item
         public void invalidate() {
             isInvalidate = true;
             actions = null;
@@ -622,26 +593,39 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             name = null;
         }
 
-        public Type type;
-        public String name;
-        public int x = 0, y = 0;
+        public Item(Parcel in) {
+            type = Type.valueOf(in.readString());
+            switch (type) {
+                case SHORTCUT:
+                case GROUP:
+                case APP:
+                    appIntent = getIntentFromString(in.readString());
+                    break;
+                case WIDGET:
+                    widgetID = in.readInt();
+                    spanX = in.readInt();
+                    spanY = in.readInt();
+                    break;
+            }
+            name = in.readString();
+            isInvalidate = in.readByte() != 0;
+            idValue = (int) new Date().getTime();
+        }
 
-        // these can be replaced once database is implemented
+        // TODO: remove from codebase
+        // replace actions with appIntent
+        // remove isInvalidate entirely since the database should fix this in the future
         public Intent[] actions;
         public boolean isInvalidate = false;
 
-        // widget specific values
-        public int widgetID;
-        public int spanX = 1, spanY = 1;
-
-        // new values to be tracked
-
-        // every item is assigned an ID number
-        // initialize this to the time at creation
+        // all items need these values
         public int idValue;
+        public Type type;
+        public String name;
+        public int x = 0;
+        public int y = 0;
 
         // intent for shortcuts and apps
-        // this replaces actions array
         public Intent appIntent;
 
         // list of items for groups
@@ -650,15 +634,19 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         // int value for launcher action
         public int actionValue;
 
+        // widget specific values
+        public int widgetID;
+        public int spanX = 1;
+        public int spanY = 1;
+
         @Override
-        public boolean equals(Object obj) {
-            Item obj1 = (Item) obj;
-            return obj != null
-                    && obj1.type == this.type
-                    && Arrays.equals(obj1.actions, this.actions)
-                    && obj1.x == this.x
-                    && obj1.y == this.y
-                    ;
+        public boolean equals(Object object) {
+            Item itemObject = (Item) object;
+            return object != null &&
+                itemObject.type == this.type &&
+                itemObject.x == this.x &&
+                itemObject.y == this.y &&
+                Arrays.equals(itemObject.actions, this.actions);
         }
 
         public void addActions(Intent act) {
@@ -671,39 +659,28 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             actions = newAct;
         }
 
-        public void removeActions(Intent act) {
+        public void removeActions(Intent action) {
             if (isInvalidate) return;
-            Intent[] newAct = new Intent[actions.length - 1];
+            Intent[] newActions = new Intent[this.actions.length - 1];
             boolean removed = false;
-            for (int i = 0; i < actions.length; i++) {
-                if (!act.equals(actions[i]))
-                    newAct[removed ? i - 1 : i] = actions[i];
-                else
+            for (int i = 0; i < this.actions.length; i++) {
+                if (!action.equals(this.actions[i])) {
+                    newActions[removed ? i - 1 : i] = this.actions[i];
+                } else {
                     removed = true;
+                }
             }
-            actions = newAct;
+            this.actions = newActions;
         }
 
         public Item() {
             idValue = (int) new Date().getTime();
         }
 
-        public Item(SimpleItem in) {
-            this.type = in.type;
-            this.name = in.name;
-            this.actions = getActionsFromString(in.actions);
-            this.x = in.x;
-            this.y = in.y;
-            this.spanX = in.spanX;
-            this.spanY = in.spanY;
-            this.widgetID = in.widgetID;
-            this.isInvalidate = in.isInvalidate;
-        }
-
         public static Item newAppItem(AppManager.App app) {
             Desktop.Item item = new Item();
             item.type = Type.APP;
-            item.actions = new Intent[]{toIntent(app)};
+            item.appIntent = toIntent(app);
             return item;
         }
 
@@ -721,20 +698,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             item.type = Type.SHORTCUT;
             item.spanX = 1;
             item.spanY = 1;
+            item.appIntent = intent;
 
             String iconID = Tool.saveIconAndReturnID(context, icon);
             intent.putExtra("shortCutIconID", iconID);
             intent.putExtra("shortCutName", name);
-
-            item.actions = new Intent[]{intent};
-            return item;
-        }
-
-        public static Item newAppDrawerBtn() {
-            Desktop.Item item = new Item();
-            item.type = Type.ACTION;
-            item.spanX = 1;
-            item.spanY = 1;
 
             return item;
         }
@@ -744,83 +712,26 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             item.type = Type.SHORTCUT;
             item.spanX = 1;
             item.spanY = 1;
-
-            item.actions = new Intent[]{intent};
+            item.appIntent = intent;
             return item;
         }
 
-        public static Item fromGroupItem(Item gItem) {
+        public static Item newActionItem(int action) {
+            Desktop.Item item = new Item();
+            item.type = Type.ACTION;
+            item.spanX = 1;
+            item.spanY = 1;
+            item.actionValue = action;
+            return item;
+        }
+
+        public static Item newGroupItem(Set<String> items) {
             Desktop.Item item = new Item();
             item.type = Type.GROUP;
             item.spanX = 1;
             item.spanY = 1;
-            item.actions = gItem.actions.clone();
+            item.items = items;
             return item;
-        }
-
-
-        public Item(Parcel in) {
-            type = Type.valueOf(in.readString());
-            switch (type) {
-                case SHORTCUT:
-                case GROUP:
-                case APP:
-                    actions = in.createTypedArray(Intent.CREATOR);
-                    break;
-                case WIDGET:
-                    widgetID = in.readInt();
-                    spanX = in.readInt();
-                    spanY = in.readInt();
-                    break;
-            }
-            name = in.readString();
-            isInvalidate = in.readByte() != 0;
-            idValue = (int) new Date().getTime();
-        }
-
-        private static Intent toIntent(AppManager.App app) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setClassName(app.packageName, app.className);
-            return intent;
-        }
-
-        public String getActionsAsString() {
-            if (actions == null || actions.length == 0) {
-                return "";
-            } else {
-                StringBuilder str = new StringBuilder();
-                for (int i = 0; i < actions.length; i++) {
-                    str.append(actions[i].toUri(0));
-                    if (i != actions.length - 1)
-                        str.append("[MyActs]");
-                }
-                return str.toString();
-            }
-        }
-
-        public static Intent[] getActionsFromString(String str) {
-            if (str == null || str.isEmpty()) {
-                return new Intent[0];
-            } else {
-                if (!str.contains("[MyActs]")) {
-                    try {
-                        return new Intent[]{Intent.parseUri(str, 0)};
-                    } catch (URISyntaxException e) {
-                        return new Intent[0];
-                    }
-                }
-                String[] raw = Tool.split(str, "[MyActs]");
-                Intent[] acts = new Intent[raw.length];
-                for (int i = 0; i < acts.length; i++) {
-                    try {
-                        acts[i] = Intent.parseUri(raw[i], 0);
-                    } catch (URISyntaxException e) {
-                        return new Intent[0];
-                    }
-                }
-                return acts;
-            }
         }
 
         @Override
@@ -835,7 +746,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 case SHORTCUT:
                 case GROUP:
                 case APP:
-                    out.writeTypedArray(actions, 0);
+                    out.writeString(getIntentAsString());
                     break;
                 case WIDGET:
                     out.writeInt(widgetID);
@@ -847,6 +758,26 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             out.writeByte((byte) (isInvalidate ? 1 : 0));
         }
 
+        public String getIntentAsString() {
+            if (appIntent == null) {
+                return "";
+            } else {
+                return appIntent.toUri(0);
+            }
+        }
+
+        public static Intent getIntentFromString(String str) {
+            if (str == null || str.isEmpty()) {
+                return new Intent();
+            } else {
+              try {
+                return new Intent().parseUri(str, 0);
+              } catch (URISyntaxException e) {
+                return new Intent();
+              }
+            }
+        }
+
         public enum Type {
             APP,
             SHORTCUT,
@@ -854,11 +785,17 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             ACTION,
             WIDGET
         }
+
+        private static Intent toIntent(AppManager.App app) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setClassName(app.packageName, app.className);
+            return intent;
+        }
     }
 
     public interface OnDesktopEditListener {
         void onDesktopEdit();
-
         void onFinishDesktopEdit();
     }
 }

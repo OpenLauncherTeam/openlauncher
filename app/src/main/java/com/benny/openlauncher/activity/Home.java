@@ -220,16 +220,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                         }
                     });
                     init();
-                    if (!result) {
-                        if (Home.launcher != null)
-                            Tool.DialogHelper.alert(Home.launcher, "Some settings can't be read", "Developer's mistake, hope you understand! Some of the settings will be reset to default value.").show();
+                    if (!result && Home.launcher != null) {
+                        Tool.DialogHelper.alert(Home.launcher, "Some settings can't be read.", "Developer's mistake, hope you understand! Some of the settings will be reset to their default value.").show();
                     }
                 }
             }.execute();
         }
     }
-
-    //region INIT
 
     private void init() {
         drawerLayout.addDrawerListener(this);
@@ -264,8 +261,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 if (launcherSettings.generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps) {
                     if (launcherSettings.generalSettings.firstLauncher) {
                         launcherSettings.generalSettings.firstLauncher = false;
-                        Desktop.Item appDrawerBtnItem = Desktop.Item.newAppDrawerBtn();
-                        //We center it
+
+                        // create a new app drawer button
+                        Desktop.Item appDrawerBtnItem = Desktop.Item.newActionItem(8);
+
+                        // center the button
                         appDrawerBtnItem.x = 2;
                         launcherSettings.dockData.add(appDrawerBtnItem);
                     }
@@ -505,7 +505,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         switch (item.getItemId()) {
             case R.id.appDrawer:
                 Point pos = desktop.getCurrentPage().findFreeSpace();
-                desktop.addItemToPosition(Desktop.Item.newAppDrawerBtn(), pos.x, pos.y);
+                desktop.addItemToPosition(Desktop.Item.newActionItem(8), pos.x, pos.y);
                 break;
         }
         return super.onOptionsItemSelected(item);

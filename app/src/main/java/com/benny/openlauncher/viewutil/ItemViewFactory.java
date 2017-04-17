@@ -54,7 +54,7 @@ public class ItemViewFactory {
                 }).setLabelVisibility((flags & NO_LABEL) != NO_LABEL).getView();
                 break;
             case APP:
-                final AppManager.App app = AppManager.getInstance(context).findApp(item.actions[0].getComponent().getPackageName(), item.actions[0].getComponent().getClassName());
+                final AppManager.App app = AppManager.getInstance(context).findApp(item.appIntent.getComponent().getPackageName(), item.appIntent.getComponent().getClassName());
                 if (app == null) {
                     break;
                 }
@@ -178,10 +178,9 @@ public class ItemViewFactory {
                 break;
             case SHORTCUT:
                 view = new AppItemView.Builder(context)
-                        .setShortcutItem(item.actions[0])
+                        .setShortcutItem(item.appIntent)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-
                         .withOnLongPressDrag(item, DragAction.Action.ACTION_SHORTCUT, new AppItemView.Builder.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
