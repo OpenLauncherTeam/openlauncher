@@ -1,3 +1,6 @@
+### vNext
+* Move launcheranim & smootviewpager to app
+
 ### v0.3.1
 * Update build scheme
 * Added nightly icons

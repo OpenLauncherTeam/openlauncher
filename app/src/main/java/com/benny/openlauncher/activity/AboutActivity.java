@@ -51,6 +51,13 @@ public class AboutActivity extends MaterialAboutActivity {
                 .subText(getString(R.string.about_credit_text__gsantner))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://gsantner.github.io/")))
                 .build());
+        opTeamCard.addItem(new MaterialAboutActionItem.Builder()
+                .icon(R.drawable.person__gaukler_faun)
+                .text("Gaukler Faun")
+                .subText(getString(R.string.about_credit_text__gaukler_faun))
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))
+                .build());
+
 
         MaterialAboutCard.Builder contributorsCard = new MaterialAboutCard.Builder();
         contributorsCard.title(getString(R.string.about_credit));
@@ -59,12 +66,6 @@ public class AboutActivity extends MaterialAboutActivity {
                 .text("Chris DeBrodie")
                 .subText(getString(R.string.about_credit_text__chris_debrodie))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://plus.google.com/111923938461696019967")))
-                .build());
-        contributorsCard.addItem(new MaterialAboutActionItem.Builder()
-                .icon(R.drawable.person__gaukler_faun)
-                .text("Gaukler Faun")
-                .subText(getString(R.string.about_credit_text__gaukler_faun))
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))
                 .build());
 
 

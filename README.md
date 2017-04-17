@@ -14,18 +14,14 @@
 Currently there are a lot of issues and we are not able to fix all at a time, so please be patient if the issue is still opening. And I and the team are going to review the structure of the launcher as it is very bad as I wrote them a long time ago, so there won't be any UI redesing and new feature coming so certainly. Thanks for heading over and your support.
 
 # OPTeam
-[BennyKok](https://github.com/BennyKok) | [Dkanada](https://github.com/dkanada) | [Gsantner](https://github.com/gsantner) | [GauklerFaun](https://github.com/scoute-dich)
+[BennyKok](https://github.com/BennyKok) | [Dkanada](https://github.com/dkanada) | [gsantner](https://github.com/gsantner) | [GauklerFaun](https://github.com/scoute-dich)
 
 We will be happy if you want to be a part of this game.
 
-# Translation
-German : [GauklerFaun](https://github.com/scoute-dich) | 
-Japanese : [Naofum](https://github.com/naofum)
-
-We will be even happy if you help with translation.
-
-# Special Thanks
-[TeamBrainStorm](https://github.com/TeamBrainStorm) very supportive when the project first started.
+# Contributors
+* [TeamBrainStorm](https://github.com/TeamBrainStorm) very supportive when the project first started.
+* German translation: [GauklerFaun](https://github.com/scoute-dich) 
+* Japanese translation: [Naofum](https://github.com/naofum)
 
 # Status
 ### OnGoing: 

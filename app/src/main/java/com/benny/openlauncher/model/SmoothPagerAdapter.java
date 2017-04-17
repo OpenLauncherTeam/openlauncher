@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.bennyv5.smoothviewpager;
+package com.benny.openlauncher.model;
 
 import android.database.DataSetObservable;
 import android.database.DataSetObserver;
 import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.benny.openlauncher.widget.SmoothViewPager;
 
 /**
  * Base class providing the adapter to populate pages inside of
@@ -299,7 +301,7 @@ public abstract class SmoothPagerAdapter {
         mObservable.unregisterObserver(observer);
     }
 
-    void setViewPagerObserver(DataSetObserver observer) {
+    public void setViewPagerObserver(DataSetObserver observer) {
         synchronized (this) {
             mViewPagerObserver = observer;
         }

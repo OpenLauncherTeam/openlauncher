@@ -25,8 +25,7 @@ import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
-import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
-import com.bennyv5.smoothviewpager.SmoothViewPager;
+import com.benny.openlauncher.model.SmoothPagerAdapter;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;

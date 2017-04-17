@@ -39,7 +39,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.benny.launcheranim.LauncherLoadingIcon;
+import com.benny.openlauncher.widget.LauncherLoadingIcon;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppUpdateReceiver;

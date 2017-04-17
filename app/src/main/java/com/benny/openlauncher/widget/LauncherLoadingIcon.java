@@ -1,4 +1,4 @@
-package com.benny.launcheranim;
+package com.benny.openlauncher.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,25 +7,25 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.benny.openlauncher.R;
+
 /**
  * Created by BennyKok on 12/9/2016.
  */
 
 public class LauncherLoadingIcon extends FrameLayout {
-
-    private ImageView[] iv;
-
-    private static final Long ANIM_DURATION = 250L;
-
     private static final AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
+    private static final Long ANIM_DURATION = 250L;
+    private ImageView[] iv;
+    private boolean loading = false;
 
     private final Runnable ANIM_1 = new Runnable() {
         @Override
         public void run() {
             if (iv != null && iv[0] != null) {
-                for (ImageView i : iv) {
-                    i.setScaleX(0);
-                }
+                iv[0].setScaleX(0);
+                iv[1].setScaleY(0);
+                iv[2].setScaleX(0);
                 iv[0].animate().setDuration(ANIM_DURATION).scaleX(1).alpha(1).withEndAction(ANIM_2).setInterpolator(interpolator);
             }
         }
@@ -73,7 +73,6 @@ public class LauncherLoadingIcon extends FrameLayout {
         this.loading = loading;
     }
 
-    private boolean loading = false;
 
     public LauncherLoadingIcon(Context context) {
         this(context, null);
@@ -88,12 +87,13 @@ public class LauncherLoadingIcon extends FrameLayout {
             iv[i] = new ImageView(getContext());
             iv[i].setImageResource(res[i]);
             addView(iv[i]);
-            iv[i].setLayoutParams(matchParentLp);
-            iv[i].setScaleX(0);
+            iv[i].setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            iv[i].setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
+        iv[0].setScaleX(0);
+        iv[1].setScaleY(0);
+        iv[2].setScaleX(0);
     }
-
-    private static final LayoutParams matchParentLp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {

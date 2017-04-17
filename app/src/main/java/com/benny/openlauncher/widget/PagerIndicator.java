@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.benny.openlauncher.util.Tool;
-import com.bennyv5.smoothviewpager.SmoothViewPager;
 
 public class PagerIndicator extends View implements SmoothViewPager.OnPageChangeListener {
 

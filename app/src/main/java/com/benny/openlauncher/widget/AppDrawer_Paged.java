@@ -15,8 +15,7 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
-import com.bennyv5.smoothviewpager.SmoothPagerAdapter;
-import com.bennyv5.smoothviewpager.SmoothViewPager;
+import com.benny.openlauncher.model.SmoothPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bennyv5.smoothviewpager;
+package com.benny.openlauncher.widget;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -58,6 +58,8 @@ import android.view.ViewParent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
+
+import com.benny.openlauncher.model.SmoothPagerAdapter;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

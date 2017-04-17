@@ -93,9 +93,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
 
     // Compile project libraries
-    compile project(':app:libs:smoothviewpager')
     compile project(':app:libs:materialpreffragment')
-    compile project(path: ':app:libs:launcheranim')
 
     // Android-Apt
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
