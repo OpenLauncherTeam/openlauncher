@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
@@ -545,18 +546,31 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         switch (item.type) {
             case APP:
             case SHORTCUT:
-            case GROUP:
-                if ((dropItem.type == Desktop.Item.Type.APP || dropItem.type == Desktop.Item.Type.SHORTCUT) && item.actions.length < GroupPopupView.GroupDef.maxItem) {
+                if (dropItem.type == Desktop.Item.Type.APP || dropItem.type == Desktop.Item.Type.SHORTCUT) {
                     callBack.removeItemFromSettings(item);
                     parent.removeView(itemView);
 
-                    item.addActions(dropItem.actions[0]);
-                    if (item.name == null || item.name.isEmpty())
-                        item.name = (home.getString(R.string.unnamed));
+                    Desktop.Item group = Desktop.Item.newGroupItem(item, dropItem);
+
+                    group.name = (home.getString(R.string.unnamed));
                     item.type = Desktop.Item.Type.GROUP;
+
+                    callBack.addItemToSettings(group);
+                    callBack.addItemToPagePosition(group, page);
+                    home.desktop.consumeRevert();
+                    home.desktopDock.consumeRevert();
+                    return true;
+                }
+                break;
+            case GROUP:
+                if ((dropItem.type == Desktop.Item.Type.APP || dropItem.type == Desktop.Item.Type.SHORTCUT) && item.items.size() < GroupPopupView.GroupDef.maxItem) {
+                    callBack.removeItemFromSettings(item);
+                    parent.removeView(itemView);
+
+                    item.addActions(dropItem.appIntent);
+
                     callBack.addItemToSettings(item);
                     callBack.addItemToPagePosition(item, page);
-
                     home.desktop.consumeRevert();
                     home.desktopDock.consumeRevert();
                     return true;
@@ -574,8 +588,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>() {
 
             @Override
-            public Item createFromParcel(Parcel in) {
-                return new Item(in);
+            public Item createFromParcel(Parcel parcel) {
+                return new Item(parcel);
             }
 
             @Override
@@ -593,12 +607,20 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
 
         public Item(Parcel in) {
+            idValue = in.readInt();
             type = Type.valueOf(in.readString());
             switch (type) {
-                case SHORTCUT:
-                case GROUP:
                 case APP:
+                case SHORTCUT:
                     appIntent = getIntentFromString(in.readString());
+                    break;
+                case GROUP:
+                    List<String> labels = new ArrayList<>();
+                    in.readStringList(labels);
+                    for (String s : labels) {
+                        DatabaseHelper db = new DatabaseHelper(Home.launcher);
+                        items.add(db.getItem(s));
+                    }
                     break;
                 case WIDGET:
                     widgetID = in.readInt();
@@ -608,7 +630,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             }
             name = in.readString();
             isInvalidate = in.readByte() != 0;
-            idValue = (int) new Date().getTime();
         }
 
         // TODO: remove from codebase
@@ -628,7 +649,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         public Intent appIntent;
 
         // list of items for groups
-        public Set<String> items;
+        public List<Desktop.Item> items;
 
         // int value for launcher action
         public int actionValue;
@@ -641,11 +662,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         @Override
         public boolean equals(Object object) {
             Item itemObject = (Item) object;
-            return object != null &&
-                itemObject.type == this.type &&
-                itemObject.x == this.x &&
-                itemObject.y == this.y &&
-                Arrays.equals(itemObject.actions, this.actions);
+            return object != null
+                && itemObject.type == this.type
+                && itemObject.x == this.x
+                && itemObject.y == this.y
+                && Arrays.equals(itemObject.actions, this.actions);
         }
 
         public void addActions(Intent act) {
@@ -702,7 +723,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             String iconID = Tool.saveIconAndReturnID(context, icon);
             intent.putExtra("shortCutIconID", iconID);
             intent.putExtra("shortCutName", name);
-
             return item;
         }
 
@@ -724,28 +744,31 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             return item;
         }
 
-        public static Item newGroupItem(Set<String> items) {
+        public static Item newGroupItem(Item itemOne, Item itemTwo) {
             Desktop.Item item = new Item();
             item.type = Type.GROUP;
             item.spanX = 1;
             item.spanY = 1;
-            item.items = items;
+            item.items.add(itemOne);
+            item.items.add(itemTwo);
             return item;
         }
 
         @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
         public void writeToParcel(Parcel out, int flags) {
+            out.writeInt(idValue);
             out.writeString(type.toString());
             switch (type) {
-                case SHORTCUT:
-                case GROUP:
                 case APP:
+                case SHORTCUT:
                     out.writeString(getIntentAsString());
+                    break;
+                case GROUP:
+                    List<String> labels = new ArrayList<>();
+                    for (int i = 0; i < items.size(); i++) {
+                        labels.add(items.get(i).name);
+                    }
+                    out.writeStringList(labels);
                     break;
                 case WIDGET:
                     out.writeInt(widgetID);
@@ -755,6 +778,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             }
             out.writeString(name);
             out.writeByte((byte) (isInvalidate ? 1 : 0));
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
         }
 
         public String getIntentAsString() {
@@ -777,19 +805,19 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             }
         }
 
+        private static Intent toIntent(AppManager.App app) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setClassName(app.packageName, app.className);
+            return intent;
+        }
+
         public enum Type {
             APP,
             SHORTCUT,
             GROUP,
             ACTION,
             WIDGET
-        }
-
-        private static Intent toIntent(AppManager.App app) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setClassName(app.packageName, app.className);
-            return intent;
         }
     }
 

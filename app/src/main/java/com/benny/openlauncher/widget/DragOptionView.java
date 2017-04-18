@@ -127,7 +127,7 @@ public class DragOptionView extends CardView {
                         Desktop.Item item = intent.getParcelableExtra("mDragData");
                         if (item.type == Desktop.Item.Type.APP) {
                             try {
-                                getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.actions[0].getComponent().getPackageName())));
+                                getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.appIntent.getComponent().getPackageName())));
                             } catch (Exception e) {
                                 Tool.toast(getContext(), R.string.toast_appuninstalled);
                             }
@@ -184,7 +184,7 @@ public class DragOptionView extends CardView {
         Desktop.Item item = intent.getParcelableExtra("mDragData");
         if (item.type == Desktop.Item.Type.APP) {
             try {
-                Uri packageURI = Uri.parse("package:" + item.actions[0].getComponent().getPackageName());
+                Uri packageURI = Uri.parse("package:" + item.appIntent.getComponent().getPackageName());
                 Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
                 getContext().startActivity(uninstallIntent);
             } catch (Exception e) {

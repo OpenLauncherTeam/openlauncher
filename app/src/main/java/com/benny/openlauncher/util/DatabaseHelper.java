@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.Desktop.Item;
 
 import java.net.URISyntaxException;
@@ -108,8 +109,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             case GROUP:
                 String[] array = item.items.toArray(new String[0]);
                 hideItem(array);
-                for (String tmp : item.items) {
-                    concat += tmp + "#";
+                for (Desktop.Item tmp : item.items) {
+                    concat += tmp.idValue + "#";
                 }
                 itemValues.put(COLUMN_DATA, concat);
                 break;
@@ -213,7 +214,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Item getSelectionItem(Cursor cursor) {
+    private Item getSelectionItem(Cursor cursor) {
         Item selectionItem = new Item();
         int id = Integer.parseInt(cursor.getString(0));
         Item.Type type = Item.Type.valueOf(cursor.getString(1));
@@ -236,7 +237,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 break;
             case GROUP:
                 dataSplit = data.split("#");
-                selectionItem.items = new HashSet<>(Arrays.asList(dataSplit));
+                for (String s : dataSplit) {
+                    selectionItem.items.add(getItem(s));
+                }
                 break;
             case ACTION:
                 selectionItem.actionValue = Integer.parseInt(data);

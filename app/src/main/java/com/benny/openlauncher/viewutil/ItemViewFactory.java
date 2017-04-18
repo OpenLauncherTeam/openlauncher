@@ -38,20 +38,29 @@ public class ItemViewFactory {
 
     public static View getItemView(final Context context, final DesktopCallBack callBack, final Desktop.Item item, int flags) {
         View view = null;
-        if (item.type == null) return null;
+        if (item.type == null) {
+            return null;
+        }
         switch (item.type) {
             case ACTION:
-                view = new AppItemView.Builder(context).vibrateWhenLongPress().setLauncherAction(item.type).setTextColor(Color.WHITE).withOnTouchGetPosition().withOnLongPressDrag(item, DragAction.Action.ACTION_LAUNCHER, new AppItemView.Builder.LongPressCallBack() {
-                    @Override
-                    public boolean readyForDrag(View view) {
-                        return true;
-                    }
+                view = new AppItemView.Builder(context)
+                        .setLauncherAction(item.type)
+                        .withOnTouchGetPosition()
+                        .vibrateWhenLongPress()
+                        .withOnLongPressDrag(item, DragAction.Action.ACTION_LAUNCHER, new AppItemView.Builder.LongPressCallBack() {
+                            @Override
+                            public boolean readyForDrag(View view) {
+                                return true;
+                            }
 
-                    @Override
-                    public void afterDrag(View view) {
-                        callBack.setLastItem(item, view);
-                    }
-                }).setLabelVisibility((flags & NO_LABEL) != NO_LABEL).getView();
+                            @Override
+                            public void afterDrag(View view) {
+                                callBack.setLastItem(item, view);
+                            }
+                        })
+                        .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
+                        .setTextColor(Color.WHITE)
+                        .getView();
                 break;
             case APP:
                 final AppManager.App app = AppManager.getInstance(context).findApp(item.appIntent.getComponent().getPackageName(), item.appIntent.getComponent().getClassName());
@@ -230,8 +239,9 @@ public class ItemViewFactory {
                 });
                 break;
         }
-        if (view != null)
+        if (view != null) {
             view.setTag(item);
+        }
         return view;
     }
 
@@ -242,19 +252,16 @@ public class ItemViewFactory {
         item.spanY = Math.max(item.spanY, 1);
 
         CellContainer.LayoutParams cellPositionToLayoutPrams = Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellPositionToLayoutPrams(item.x, item.y, item.spanX, item.spanY, (CellContainer.LayoutParams) view.getLayoutParams());
-        if (cellPositionToLayoutPrams == null)
+        if (cellPositionToLayoutPrams == null) {
             Toast.makeText(Home.launcher.desktop.getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-        else {
+        } else {
             LauncherSettings.getInstance(Home.launcher.desktop.getContext()).desktopData.get(Home.launcher.desktop.getCurrentItem()).remove(item);
             item.x = cellPositionToLayoutPrams.x;
             item.y = cellPositionToLayoutPrams.y;
             LauncherSettings.getInstance(Home.launcher.desktop.getContext()).desktopData.get(Home.launcher.desktop.getCurrentItem()).add(item);
             view.setLayoutParams(cellPositionToLayoutPrams);
-
             updateWidgetOption(item);
-
         }
-
     }
 
     private static void updateWidgetOption(Desktop.Item item) {
@@ -266,20 +273,20 @@ public class ItemViewFactory {
         Home.appWidgetManager.updateAppWidgetOptions(item.widgetID, newOps);
     }
 
-    //Common methods
     public static Drawable getGroupIconDrawable(Context context, Desktop.Item item) {
         final float iconSize = Tool.dp2px(LauncherSettings.getInstance(context).generalSettings.iconSize, context);
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {
             if (i < item.actions.length) {
-                if (item.actions[i].getStringExtra("shortCutIconID") != null)
+                if (item.actions[i].getStringExtra("shortCutIconID") != null) {
                     icons[i] = Tool.drawableToBitmap(Tool.getIconFromID(context, item.actions[i].getStringExtra("shortCutIconID")));
-                else {
+                } else {
                     AppManager.App app = AppManager.getInstance(context).findApp(item.actions[i].getComponent().getPackageName(), item.actions[i].getComponent().getClassName());
-                    if (app != null)
+                    if (app != null) {
                         icons[i] = Tool.drawableToBitmap(app.icon);
-                    else
+                    } else {
                         icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
+                    }
                 }
             } else {
                 icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));

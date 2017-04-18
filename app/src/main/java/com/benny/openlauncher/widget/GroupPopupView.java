@@ -263,7 +263,6 @@ public class GroupPopupView extends FrameLayout {
         if (currentItem.actions.length == 1) {
             currentItem.type = Desktop.Item.Type.APP;
 
-
             AppItemView.Builder builder = new AppItemView.Builder(currentView);
             final AppManager.App app = AppManager.getInstance(currentView.getContext()).findApp(currentItem.actions[0].getComponent().getPackageName(), currentItem.actions[0].getComponent().getClassName());
 
@@ -281,8 +280,9 @@ public class GroupPopupView extends FrameLayout {
                     }
                 });
             }
-            if (Home.launcher != null)
+            if (Home.launcher != null) {
                 Home.launcher.desktop.requestLayout();
+            }
         } else {
             currentView.setIcon(ItemViewFactory.getGroupIconDrawable(context, currentItem));
         }

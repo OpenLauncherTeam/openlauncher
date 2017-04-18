@@ -320,18 +320,19 @@ public class AppItemView extends View implements Drawable.Callback {
             view.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (eventAction != null) {
-                        if (!eventAction.readyForDrag(v)) return false;
+                    if (eventAction != null && !eventAction.readyForDrag(v)) {
+                        return false;
                     }
-
-                    if (view.vibrateWhenLongPress)
+                    if (view.vibrateWhenLongPress) {
                         v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                    }
                     Intent i = new Intent();
                     i.putExtra("mDragData", item);
                     ClipData data = ClipData.newIntent("mDragIntent", i);
                     v.startDrag(data, new GoodDragShadowBuilder(v), new DragAction(action), 0);
-                    if (eventAction != null)
+                    if (eventAction != null) {
                         eventAction.afterDrag(v);
+                    }
                     return true;
                 }
             });
@@ -340,7 +341,6 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public interface LongPressCallBack {
             boolean readyForDrag(View view);
-
             void afterDrag(View view);
         }
 
