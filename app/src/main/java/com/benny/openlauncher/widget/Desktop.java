@@ -319,9 +319,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     @Override
     protected void onPageScrolled(int position, float offset, int offsetPixels) {
-        if (isInEditMode()) return;
-
-        WallpaperManager.getInstance(getContext()).setWallpaperOffsets(getWindowToken(), (float) (position + offset) / (pageCount - 1), 0);
+        if (isInEditMode()) {
+            return;
+        }
+        WallpaperManager.getInstance(getContext()).setWallpaperOffsets(getWindowToken(), (position + offset) / (pageCount - 1), 0);
         super.onPageScrolled(position, offset, offsetPixels);
     }
 
@@ -336,12 +337,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     public class DesktopAdapter extends SmoothPagerAdapter {
-
-        float scaleFactor = 1f;
-
         private MotionEvent currentEvent;
-
         private Desktop desktop;
+        float scaleFactor = 1f;
 
         public DesktopAdapter(Desktop desktop) {
             this.desktop = desktop;
@@ -572,10 +570,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     callBack.removeItemFromSettings(item);
                     parent.removeView(itemView);
 
-                    item.addActions(dropItem.appIntent);
+                    item.items.add(dropItem);
 
                     callBack.addItemToSettings(item);
                     callBack.addItemToPagePosition(item, page);
+
                     home.desktop.consumeRevert();
                     home.desktopDock.consumeRevert();
                     return true;
@@ -672,16 +671,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 && itemObject.x == this.x
                 && itemObject.y == this.y
                 && Arrays.equals(itemObject.actions, this.actions);
-        }
-
-        public void addActions(Intent act) {
-            if (isInvalidate) return;
-            Intent[] newAct = new Intent[actions.length + 1];
-            for (int i = 0; i < actions.length; i++) {
-                newAct[i] = actions[i];
-            }
-            newAct[actions.length] = act;
-            actions = newAct;
         }
 
         public void removeActions(Intent action) {
