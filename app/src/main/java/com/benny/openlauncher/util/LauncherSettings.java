@@ -33,11 +33,11 @@ public class LauncherSettings {
 
     private void checkIconCacheIDs(Desktop.Item item) {
         if (item.type == Desktop.Item.Type.SHORTCUT) {
-            iconCacheIDs.add(item.actions[0].getStringExtra("shortCutIconID"));
+            iconCacheIDs.add(item.appIntent.getStringExtra("shortCutIconID"));
         } else if (item.type == Desktop.Item.Type.GROUP) {
-            for (int i = 0; i < item.actions.length; i++) {
+            for (int i = 0; i < item.items.size(); i++) {
                 String ID;
-                if ((ID = item.actions[i].getStringExtra("shortCutIconID")) != null) {
+                if ((ID = item.items.get(i).appIntent.getStringExtra("shortCutIconID")) != null) {
                     iconCacheIDs.add(ID);
                 }
             }

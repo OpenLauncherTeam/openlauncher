@@ -313,6 +313,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     @Override
+    public boolean removeItemFromPosition(Desktop.Item item) {
+        return true;
+    }
+
+    @Override
     protected void onPageScrolled(int position, float offset, int offsetPixels) {
         if (isInEditMode()) return;
 

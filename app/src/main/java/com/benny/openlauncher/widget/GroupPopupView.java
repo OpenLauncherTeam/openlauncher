@@ -260,33 +260,23 @@ public class GroupPopupView extends FrameLayout {
     private void removeItem(Context context, final DesktopCallBack callBack, final Desktop.Item currentItem, Intent dragOutItem, AppItemView currentView) {
         callBack.removeItemFromSettings(currentItem);
         currentItem.removeActions(dragOutItem);
-        if (currentItem.actions.length == 1) {
-            currentItem.type = Desktop.Item.Type.APP;
 
-            AppItemView.Builder builder = new AppItemView.Builder(currentView);
+        if (currentItem.items.size() == 1) {
             final AppManager.App app = AppManager.getInstance(currentView.getContext()).findApp(currentItem.actions[0].getComponent().getPackageName(), currentItem.actions[0].getComponent().getClassName());
-
             if (app != null) {
-                currentItem.name = app.label;
-                builder.setAppItem(app).withOnClickLaunchApp(app).withOnLongPressDrag(currentItem, DragAction.Action.ACTION_APP, new AppItemView.Builder.LongPressCallBack() {
-                    @Override
-                    public boolean readyForDrag(View view) {
-                        return true;
-                    }
-
-                    @Override
-                    public void afterDrag(View view) {
-                        callBack.setLastItem(currentItem, view);
-                    }
-                });
+                Desktop.Item item = Desktop.Item.newAppItem(app);
+                item.x = currentItem.x;
+                item.y = currentItem.y;
+                callBack.addItemToPosition(item, item.x, item.y);
+                callBack.addItemToSettings(item);
             }
             if (Home.launcher != null) {
                 Home.launcher.desktop.requestLayout();
             }
         } else {
             currentView.setIcon(ItemViewFactory.getGroupIconDrawable(context, currentItem));
+            callBack.addItemToSettings(currentItem);
         }
-        callBack.addItemToSettings(currentItem);
     }
 
     static class GroupDef {

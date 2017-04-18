@@ -277,11 +277,11 @@ public class ItemViewFactory {
         final float iconSize = Tool.dp2px(LauncherSettings.getInstance(context).generalSettings.iconSize, context);
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {
-            if (i < item.actions.length) {
-                if (item.actions[i].getStringExtra("shortCutIconID") != null) {
-                    icons[i] = Tool.drawableToBitmap(Tool.getIconFromID(context, item.actions[i].getStringExtra("shortCutIconID")));
+            if (i < item.items.size()) {
+                if (item.items.get(i).appIntent.getStringExtra("shortCutIconID") != null) {
+                    icons[i] = Tool.drawableToBitmap(Tool.getIconFromID(context, item.items.get(i).appIntent.getStringExtra("shortCutIconID")));
                 } else {
-                    AppManager.App app = AppManager.getInstance(context).findApp(item.actions[i].getComponent().getPackageName(), item.actions[i].getComponent().getClassName());
+                    AppManager.App app = AppManager.getInstance(context).findApp(item.items.get(i).appIntent.getComponent().getPackageName(), item.items.get(i).appIntent.getComponent().getClassName());
                     if (app != null) {
                         icons[i] = Tool.drawableToBitmap(app.icon);
                     } else {

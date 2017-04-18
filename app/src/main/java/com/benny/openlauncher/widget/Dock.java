@@ -220,6 +220,11 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     @Override
+    public boolean removeItemFromPosition(Desktop.Item item) {
+        return true;
+    }
+
+    @Override
     public void removeItemFromSettings(Item item) {
         LauncherSettings.getInstance(getContext()).dockData.remove(item);
     }
