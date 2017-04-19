@@ -39,6 +39,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.widget.LauncherLoadingIcon;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
@@ -73,21 +74,23 @@ import butterknife.OnClick;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 
 public class Home extends Activity implements DrawerLayout.DrawerListener, Desktop.OnDesktopEditListener {
-
     public static final int REQUEST_PICK_APPWIDGET = 0x6475;
     public static final int REQUEST_CREATE_APPWIDGET = 0x3648;
-    public static final int MINIBAR_EDIT = 0x2873;
     public static final int REQUEST_PERMISSION_READ_CALL_LOG = 0x981294;
     public static final int REQUEST_PERMISSION_CALL = 0x981295;
     public static final int REQUEST_PERMISSION_STORAGE = 0x981296;
-    //static members, easier to access from any activity and class.
+
+    // static members, easier to access from any activity and class
     @Nullable
     public static Home launcher;
+    public static DatabaseHelper db;
     public static WidgetHost appWidgetHost;
     public static AppWidgetManager appWidgetManager;
     public static Resources resources;
-    //This two integer is used for the drag shadow builder to get the touch point of users' finger.
-    public static int touchX = 0, touchY = 0;
+
+    // used for the drag shadow builder
+    public static int touchX = 0;
+    public static int touchY = 0;
 
     @BindView(R.id.removepage)
     TextView removepage;
@@ -135,14 +138,14 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     @BindView(R.id.searchBar)
     public FrameLayout searchBar;
 
-    //normal members, currently not necessary to access from elsewhere.
+    // not necessary to access from elsewhere
     private View appSearchBar;
     private PagerIndicator appDrawerIndicator;
     private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
     private CallLogObserver callLogObserver;
 
-    //region APP_DRAWER_ANIMATION
+    // region APP_DRAWER_ANIMATION
     private int cx, cy, rad;
 
     private static final IntentFilter timeChangesIntentFilter;
@@ -189,6 +192,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         resources = getResources();
 
         launcher = this;
+        db = new DatabaseHelper(this);
         AppManager.getInstance(this).clearListener();
 
         myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, myScreen);
@@ -253,7 +257,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         registerBroadcastReceiver();
 
-        //We init all the desktop and desktopDock app data
+        // add all of the data for the desktop and dock
         AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {

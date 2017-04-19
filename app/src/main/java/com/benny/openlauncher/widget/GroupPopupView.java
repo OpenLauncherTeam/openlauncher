@@ -87,8 +87,9 @@ public class GroupPopupView extends FrameLayout {
     public void dismissPopup() {
         isShowing = false;
         removeAllViews();
-        if (dismissListener != null)
+        if (dismissListener != null) {
             dismissListener.onDismiss();
+        }
         cellContainer.removeAllViews();
         setVisibility(View.INVISIBLE);
     }
@@ -102,7 +103,7 @@ public class GroupPopupView extends FrameLayout {
         popupParent.setVisibility(View.VISIBLE);
         final Context c = itemView.getContext();
 
-        int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.actions.length);
+        int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.items.size());
         cellContainer.setGridSize(cellSize[0], cellSize[1]);
 
         int iconSize = Tool.dp2px(LauncherSettings.getInstance(c).generalSettings.iconSize, c);
@@ -112,23 +113,27 @@ public class GroupPopupView extends FrameLayout {
 
         for (int x2 = 0; x2 < cellSize[0]; x2++) {
             for (int y2 = 0; y2 < cellSize[1]; y2++) {
-                if (y2 * cellSize[0] + x2 > item.actions.length - 1) continue;
-                final Intent act = item.actions[y2 * cellSize[0] + x2];
+                if (y2 * cellSize[0] + x2 > item.items.size() - 1) {
+                    continue;
+                }
+                final Desktop.Item dropItem = item.items.get(y2 * cellSize[0] + x2);
+                final Intent act = dropItem.appIntent;
                 AppItemView.Builder b = new AppItemView.Builder(getContext()).withOnTouchGetPosition();
                 b.setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
                 if (act.getStringExtra("shortCutIconID") != null) {
                     b.setShortcutItem(act);
                 } else {
                     AppManager.App app = AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
-                    if (app != null)
+                    if (app != null) {
                         b.setAppItem(app);
+                    }
                 }
                 final AppItemView view = b.getView();
 
                 view.setOnLongClickListener(new OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view2) {
-                        removeItem(c, callBack, item, act, (AppItemView) itemView);
+                        removeItem(c, callBack, item, dropItem, (AppItemView) itemView);
 
                         itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                         Intent i = new Intent();
@@ -149,7 +154,7 @@ public class GroupPopupView extends FrameLayout {
                 if (!view.isShortcut) {
                     final AppManager.App app = AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
                     if (app == null) {
-                        removeItem(c, callBack, item, act, (AppItemView) itemView);
+                        removeItem(c, callBack, item, dropItem, (AppItemView) itemView);
                     } else {
                         view.setOnClickListener(new OnClickListener() {
                             @Override
@@ -257,12 +262,12 @@ public class GroupPopupView extends FrameLayout {
         return true;
     }
 
-    private void removeItem(Context context, final DesktopCallBack callBack, final Desktop.Item currentItem, Intent dragOutItem, AppItemView currentView) {
+    private void removeItem(Context context, final DesktopCallBack callBack, final Desktop.Item currentItem, Desktop.Item dragOutItem, AppItemView currentView) {
         callBack.removeItemFromSettings(currentItem);
-        currentItem.removeActions(dragOutItem);
+        currentItem.items.remove(dragOutItem);
 
         if (currentItem.items.size() == 1) {
-            final AppManager.App app = AppManager.getInstance(currentView.getContext()).findApp(currentItem.actions[0].getComponent().getPackageName(), currentItem.actions[0].getComponent().getClassName());
+            final AppManager.App app = AppManager.getInstance(currentView.getContext()).findApp(currentItem.items.get(0).appIntent.getComponent().getPackageName(), currentItem.items.get(0).appIntent.getComponent().getClassName());
             if (app != null) {
                 Desktop.Item item = Desktop.Item.newAppItem(app);
                 item.x = currentItem.x;

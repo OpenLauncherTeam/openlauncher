@@ -12,8 +12,6 @@ import com.benny.openlauncher.widget.Desktop.Item;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -89,14 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void createItem(Item item, int page, boolean desktop) {
         ContentValues itemValues = new ContentValues();
         itemValues.put(COLUMN_ID, item.idValue);
-        switch (item.type) {
-            case APP:
-                itemValues.put(COLUMN_TYPE, "SHORTCUT");
-                break;
-            default:
-                itemValues.put(COLUMN_TYPE, item.type.toString());
-                break;
-        }
+        itemValues.put(COLUMN_TYPE, item.type.toString());
         itemValues.put(COLUMN_LABEL, item.name);
         itemValues.put(COLUMN_X_POS, item.x);
         itemValues.put(COLUMN_Y_POS, item.y);
@@ -107,8 +98,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 itemValues.put(COLUMN_DATA, getIntentAsString(item.appIntent));
                 break;
             case GROUP:
-                String[] array = item.items.toArray(new String[0]);
-                hideItem(array);
+                String[] array = new String[item.items.size()];
+                for (int i = 0; i < item.items.size(); i++) {
+                    array[i] = Integer.toString(item.items.get(i).idValue);
+                }
+                storeItem(array);
                 for (Desktop.Item tmp : item.items) {
                     concat += tmp.idValue + "#";
                 }
@@ -154,7 +148,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // TODO
-    public void hideItem(String[] item) {
+    public void storeItem(String[] item) {
         db.delete(TABLE_DESKTOP, COLUMN_ID + " = ?", item);
         db.delete(TABLE_DOCK, COLUMN_ID + " = ?", item);
     }

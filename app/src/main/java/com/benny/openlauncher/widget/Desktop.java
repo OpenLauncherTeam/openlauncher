@@ -112,9 +112,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         ((DesktopAdapter) getAdapter()).addPageRight();
         setCurrentItem(previousPage + 1);
 
-        for (CellContainer cellContainer : pages)
+        for (CellContainer cellContainer : pages) {
             cellContainer.setHideGrid(false);
-
+        }
         pageIndicator.invalidate();
     }
 
@@ -126,9 +126,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         ((DesktopAdapter) getAdapter()).addPageLeft();
         setCurrentItem(previousPage - 1);
 
-        for (CellContainer cellContainer : pages)
+        for (CellContainer cellContainer : pages) {
             cellContainer.setHideGrid(false);
-
+        }
         pageIndicator.invalidate();
     }
 
@@ -233,17 +233,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         return pages.get(getCurrentItem());
     }
 
-    /**
-     * @param args array storing the item(pos 0) and view ref(pos 1).
-     */
     @Override
     public void setLastItem(Object... args) {
-        View v = (View) args[1];
+        // args stores the item in [0] and the view reference in [1]
         Desktop.Item item = (Desktop.Item) args[0];
+        View v = (View) args[1];
 
-        //Remove the item from settings
         removeItemFromSettings(item);
-        //end
 
         previousPage = getCurrentItem();
         previousItemView = v;
@@ -275,23 +271,21 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     @Override
     public void addItemToPagePosition(final Item item, int page) {
-        if (item.isInvalidate) return;
-
         int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
-        if (itemView == null)
-            item.invalidate();
-            //LauncherSettings.getInstance(getContext()).desktopData.get(page).remove(item);
-        else
+        if (itemView == null) {
+            home.db.deleteItem(item);
+        } else {
             pages.get(page).addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
+        }
     }
 
     @Override
     public boolean addItemToPosition(final Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().positionToLayoutPrams(x, y, item.spanX, item.spanY);
         if (positionToLayoutPrams != null) {
-            //Add the item to settings
+            // add the item to settings
             item.x = positionToLayoutPrams.x;
             item.y = positionToLayoutPrams.y;
             if (LauncherSettings.getInstance(getContext()).desktopData.size() < getCurrentItem() + 1)
@@ -310,11 +304,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         } else {
             return false;
         }
-    }
-
-    @Override
-    public boolean removeItemFromPosition(Desktop.Item item) {
-        return true;
     }
 
     @Override
@@ -515,8 +504,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                             WallpaperManager.getInstance(view.getContext()).sendWallpaperCommand(view.getWindowToken(), WallpaperManager.COMMAND_TAP, (int) currentEvent.getX(), (int) currentEvent.getY(), 0, null);
 
                     desktop.inEditMode = false;
-                    if (desktop.desktopEditListener != null)
+                    if (desktop.desktopEditListener != null) {
                         desktop.desktopEditListener.onFinishDesktopEdit();
+                    }
                 }
             });
             layout.setOnLongClickListener(new OnLongClickListener() {
@@ -532,8 +522,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                         v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
                     }
                     desktop.inEditMode = true;
-                    if (desktop.desktopEditListener != null)
+                    if (desktop.desktopEditListener != null) {
                         desktop.desktopEditListener.onDesktopEdit();
+                    }
                     return true;
                 }
             });
@@ -602,12 +593,29 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             }
         };
 
-        // hide the item
-        public void invalidate() {
-            isInvalidate = true;
-            actions = null;
-            type = null;
-            name = null;
+        // all items need these values
+        public int idValue;
+        public Type type;
+        public String name;
+        public int x = 0;
+        public int y = 0;
+
+        // intent for shortcuts and apps
+        public Intent appIntent;
+
+        // list of items for groups
+        public List<Desktop.Item> items;
+
+        // int value for launcher action
+        public int actionValue;
+
+        // widget specific values
+        public int widgetID;
+        public int spanX = 1;
+        public int spanY = 1;
+
+        public Item() {
+            idValue = (int) new Date().getTime();
         }
 
         public Item(Parcel in) {
@@ -633,62 +641,16 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     break;
             }
             name = in.readString();
-            isInvalidate = in.readByte() != 0;
         }
-
-        // TODO: remove from codebase
-        // replace actions with appIntent
-        // remove isInvalidate entirely since the database should fix this in the future
-        public Intent[] actions;
-        public boolean isInvalidate = false;
-
-        // all items need these values
-        public int idValue;
-        public Type type;
-        public String name;
-        public int x = 0;
-        public int y = 0;
-
-        // intent for shortcuts and apps
-        public Intent appIntent;
-
-        // list of items for groups
-        public List<Desktop.Item> items;
-
-        // int value for launcher action
-        public int actionValue;
-
-        // widget specific values
-        public int widgetID;
-        public int spanX = 1;
-        public int spanY = 1;
 
         @Override
         public boolean equals(Object object) {
             Item itemObject = (Item) object;
             return object != null
-                && itemObject.type == this.type
-                && itemObject.x == this.x
-                && itemObject.y == this.y
-                && Arrays.equals(itemObject.actions, this.actions);
-        }
-
-        public void removeActions(Intent action) {
-            if (isInvalidate) return;
-            Intent[] newActions = new Intent[this.actions.length - 1];
-            boolean removed = false;
-            for (int i = 0; i < this.actions.length; i++) {
-                if (!action.equals(this.actions[i])) {
-                    newActions[removed ? i - 1 : i] = this.actions[i];
-                } else {
-                    removed = true;
-                }
-            }
-            this.actions = newActions;
-        }
-
-        public Item() {
-            idValue = (int) new Date().getTime();
+                    && itemObject.type == this.type
+                    && itemObject.x == this.x
+                    && itemObject.y == this.y
+                    && this.idValue == itemObject.idValue;
         }
 
         public static Item newAppItem(AppManager.App app) {
@@ -771,7 +733,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     break;
             }
             out.writeString(name);
-            out.writeByte((byte) (isInvalidate ? 1 : 0));
         }
 
         @Override

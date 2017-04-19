@@ -146,17 +146,13 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         return false;
     }
 
-    /**
-     * @param args array storing the item(pos 0) and view ref(pos 1).
-     */
     @Override
     public void setLastItem(Object... args) {
+        // args stores the item in [0] and the view reference in [1]
         View v = (View) args[1];
         Item item = (Item) args[0];
 
-        //Remove the item from settings
         removeItemFromSettings(item);
-        //end
 
         previousItemView = v;
         previousItem = item;
@@ -183,16 +179,14 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public void addItemToPagePosition(final Item item, int page) {
-        if (item.isInvalidate) return;
-
         int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
         if (itemView == null) {
-            item.invalidate();
-            //LauncherSettings.getInstance(getContext()).dockData.remove(item);
-        } else
+            home.db.deleteItem(item);
+        } else {
             addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
+        }
     }
 
     @Override
@@ -212,16 +206,10 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                 itemView.setLayoutParams(positionToLayoutPrams);
                 addView(itemView);
             }
-
             return true;
         } else {
             return false;
         }
-    }
-
-    @Override
-    public boolean removeItemFromPosition(Desktop.Item item) {
-        return true;
     }
 
     @Override
