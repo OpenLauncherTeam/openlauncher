@@ -285,13 +285,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     public boolean addItemToPosition(final Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().positionToLayoutPrams(x, y, item.spanX, item.spanY);
         if (positionToLayoutPrams != null) {
-            // add the item to settings
             item.x = positionToLayoutPrams.x;
             item.y = positionToLayoutPrams.y;
-            if (LauncherSettings.getInstance(getContext()).desktopData.size() < getCurrentItem() + 1)
+            if (LauncherSettings.getInstance(getContext()).desktopData.size() < getCurrentItem() + 1) {
                 LauncherSettings.getInstance(getContext()).desktopData.add(getCurrentItem(), new ArrayList<Item>());
+            }
             LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).add(item);
-            //end
 
             int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
             View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
@@ -624,7 +623,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             switch (type) {
                 case APP:
                 case SHORTCUT:
-                    appIntent = getIntentFromString(in.readString());
+                    appIntent = Tool.getIntentFromString(in.readString());
                     break;
                 case GROUP:
                     List<String> labels = new ArrayList<>();
@@ -711,13 +710,18 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
 
         @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
         public void writeToParcel(Parcel out, int flags) {
             out.writeInt(idValue);
             out.writeString(type.toString());
             switch (type) {
                 case APP:
                 case SHORTCUT:
-                    out.writeString(getIntentAsString());
+                    out.writeString(Tool.getIntentAsString(this.appIntent));
                     break;
                 case GROUP:
                     List<String> labels = new ArrayList<>();
@@ -733,31 +737,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     break;
             }
             out.writeString(name);
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        public String getIntentAsString() {
-            if (appIntent == null) {
-                return "";
-            } else {
-                return appIntent.toUri(0);
-            }
-        }
-
-        public static Intent getIntentFromString(String str) {
-            if (str == null || str.isEmpty()) {
-                return new Intent();
-            } else {
-              try {
-                return new Intent().parseUri(str, 0);
-              } catch (URISyntaxException e) {
-                return new Intent();
-              }
-            }
         }
 
         private static Intent toIntent(AppManager.App app) {

@@ -45,12 +45,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Random;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 
 public class Tool {
+    // ensure that tool cannot be instantiated
     private Tool() {
     }
 
@@ -73,8 +75,9 @@ public class Tool {
     }
 
     public static void print(Object o) {
-        if (o != null)
+        if (o != null) {
             Log.d("Hey", o.toString());
+        }
     }
 
     public static void print(Object... o) {
@@ -129,7 +132,6 @@ public class Tool {
             phoneContactID = contactLookupCursor.getLong(contactLookupCursor.getColumnIndexOrThrow(ContactsContract.PhoneLookup._ID));
         }
         contactLookupCursor.close();
-
         return phoneContactID;
     }
 
@@ -152,8 +154,9 @@ public class Tool {
     public static Bitmap fetchThumbnail(Context context, String phoneNumber) {
         Tool.print(phoneNumber);
         Integer thumbnailId = fetchThumbnailId(context, phoneNumber);
-        if (thumbnailId == null)
+        if (thumbnailId == null) {
             return null;
+        }
         final Uri uri = ContentUris.withAppendedId(ContactsContract.Data.CONTENT_URI, thumbnailId);
         final Cursor cursor = context.getContentResolver().query(uri, new String[]{ContactsContract.CommonDataKinds.Photo.PHOTO}, null, null, null);
 
@@ -227,8 +230,9 @@ public class Tool {
     }
 
     public static Drawable getIconFromID(Context context, String ID) {
-        if (ID == null)
+        if (ID == null) {
             return null;
+        }
         Drawable icon = null;
         Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/iconCache/" + ID);
         if (bitmap != null) {
@@ -242,8 +246,9 @@ public class Tool {
         String filename = Integer.toString(i);
 
         File dir = new File(context.getFilesDir() + "/iconCache");
-        if (!dir.exists())
+        if (!dir.exists()) {
             dir.mkdirs();
+        }
 
         File f = new File(context.getFilesDir() + "/iconCache/" + filename);
 
@@ -267,8 +272,9 @@ public class Tool {
             e.printStackTrace();
         } finally {
             try {
-                if (out != null)
+                if (out != null) {
                     out.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -277,11 +283,9 @@ public class Tool {
     }
 
     public static Bitmap drawableToBitmap(Drawable drawable) {
-        if (drawable == null)
+        if (drawable == null) {
             return null;
-
-        Bitmap bitmap = null;
-
+        }
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
             if (bitmapDrawable.getBitmap() != null) {
@@ -289,6 +293,7 @@ public class Tool {
             }
         }
 
+        Bitmap bitmap;
         if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
             bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
         } else {
@@ -306,7 +311,8 @@ public class Tool {
         int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
         if (id > 0) {
             return resources.getBoolean(id);
-        } else {    // Check for keys
+        } else {
+            // check for keys
             boolean hasMenuKey = ViewConfiguration.get(context).hasPermanentMenuKey();
             boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
             return !hasMenuKey && !hasBackKey;
@@ -376,12 +382,10 @@ public class Tool {
 
     public static void writeToFile(String name, String data, Context context) {
         try {
-
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(name, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
         } catch (IOException ignore) {
-
         }
     }
 
@@ -391,6 +395,7 @@ public class Tool {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 Home.touchX = (int) motionEvent.getX();
                 Home.touchY = (int) motionEvent.getY();
+                // use this to debug the on touch listener
                 //Tool.print(Home.touchX);
                 //Tool.print(Home.touchY);
                 return false;
@@ -517,5 +522,25 @@ public class Tool {
             return Formatter.formatFileSize(context, bytesAvailable);
         }
         return "";
+    }
+
+    public static String getIntentAsString(Intent intent) {
+        if (intent == null) {
+            return "";
+        } else {
+            return intent.toUri(0);
+        }
+    }
+
+    public static Intent getIntentFromString(String string) {
+        if (string == null || string.isEmpty()) {
+            return new Intent();
+        } else {
+            try {
+                return new Intent().parseUri(string, 0);
+            } catch (URISyntaxException e) {
+                return new Intent();
+            }
+        }
     }
 }

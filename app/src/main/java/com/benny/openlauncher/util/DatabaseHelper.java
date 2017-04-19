@@ -2,7 +2,6 @@ package com.benny.openlauncher.util;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,8 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.Desktop.Item;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -95,14 +94,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String concat = "";
         switch (item.type) {
             case APP:
-                itemValues.put(COLUMN_DATA, getIntentAsString(item.appIntent));
+                itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.appIntent));
                 break;
             case GROUP:
                 String[] array = new String[item.items.size()];
                 for (int i = 0; i < item.items.size(); i++) {
                     array[i] = Integer.toString(item.items.get(i).idValue);
                 }
-                storeItem(array);
+                hideItem(array);
                 for (Desktop.Item tmp : item.items) {
                     concat += tmp.idValue + "#";
                 }
@@ -134,7 +133,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_ITEM, COLUMN_ID + " = ?", new String[]{String.valueOf(item.idValue)});
     }
 
-    // TODO
     public void showItem(String[] item, boolean desktop) {
         for (String string : item) {
             ContentValues homeValues = new ContentValues();
@@ -147,8 +145,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    // TODO
-    public void storeItem(String[] item) {
+    public void hideItem(String[] item) {
         db.delete(TABLE_DESKTOP, COLUMN_ID + " = ?", item);
         db.delete(TABLE_DOCK, COLUMN_ID + " = ?", item);
     }
@@ -192,6 +189,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
                 if (cursor.getCount() == 0) {
                     createItem(item, pageCounter, true);
+                } else if (cursor.getCount() == 1) {
+                    deleteItem(item);
+                    item.idValue = (int) new Date().getTime();
+                    createItem(item, pageCounter, true);
                 }
             }
             pageCounter++;
@@ -203,6 +204,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_DOCK + " WHERE " + COLUMN_ID + " = " + item.idValue;
             Cursor cursorItem = db.rawQuery(SQL_QUERY_SPECIFIC, null);
             if (cursorItem.getCount() == 0) {
+                createItem(item, 0, false);
+            } else if (cursorItem.getCount() == 1) {
+                deleteItem(item);
+                item.idValue = (int) new Date().getTime();
                 createItem(item, 0, false);
             }
         }
@@ -227,7 +232,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         switch (type) {
             case APP:
             case SHORTCUT:
-                selectionItem.appIntent = getIntentFromString(data);
+                selectionItem.appIntent = Tool.getIntentFromString(data);
                 break;
             case GROUP:
                 dataSplit = data.split("#");
@@ -254,21 +259,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Item item = getSelectionItem(cursor);
         cursor.close();
         return item;
-    }
-
-    private String getIntentAsString(Intent intent) {
-        return intent.toUri(0);
-    }
-
-    private static Intent getIntentFromString(String string) {
-        if (string == null || string.isEmpty()) {
-            return new Intent();
-        } else {
-            try {
-                return new Intent().parseUri(string, 0);
-            } catch (URISyntaxException e) {
-                return new Intent();
-            }
-        }
     }
 }
