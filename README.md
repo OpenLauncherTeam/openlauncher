@@ -18,6 +18,12 @@ Currently there are a lot of issues and we are not able to fix all at a time, so
 
 We will be happy if you want to be a part of this game.
 
+# Donation
+
+You can support us, buy us some coffee .
+
+[BennyKok](https://www.paypal.me/BennyKok) | [gsantner](https://gsantner.github.io/#donate)
+
 # Contributors
 * [TeamBrainStorm](https://github.com/TeamBrainStorm) very supportive when the project first started.
 * German translation: [GauklerFaun](https://github.com/scoute-dich) 
