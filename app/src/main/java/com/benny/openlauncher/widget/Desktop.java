@@ -259,8 +259,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         if (previousItemView != null && getAdapter().getCount() >= previousPage && previousPage > -1) {
             getCurrentPage().addViewToGrid(previousItemView);
 
-            if (LauncherSettings.getInstance(getContext()).desktopData.size() < getCurrentItem() + 1)
+            if (LauncherSettings.getInstance(getContext()).desktopData.size() < getCurrentItem() + 1) {
                 LauncherSettings.getInstance(getContext()).desktopData.add(previousPage, new ArrayList<Item>());
+            }
             LauncherSettings.getInstance(getContext()).desktopData.get(previousPage).add(previousItem);
 
             previousItem = null;
@@ -437,8 +438,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             List<Item> pageData = LauncherSettings.getInstance(desktop.getContext()).desktopData.get(desktop.getCurrentItem());
             for (int i = 0; i < pageData.size(); i++) {
                 Item item = pageData.get(i);
-                if (item.x == coordinate.x && item.y == coordinate.y && item.spanX == 1 && item.spanY == 1)
+                if (item.x == coordinate.x && item.y == coordinate.y && item.spanX == 1 && item.spanY == 1) {
                     return pageData.get(i);
+                }
             }
             return null;
         }
@@ -491,17 +493,15 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     if (!desktop.inEditMode && getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick] != 0) {
                         LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick] - 1].label, desktop.getContext());
                     }
-
                     scaleFactor = 1f;
                     for (final CellContainer v : desktop.pages) {
                         v.blockTouch = false;
                         v.animateBackgroundHide();
                         v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
                     }
-                    if (!desktop.inEditMode)
-                        if (currentEvent != null)
-                            WallpaperManager.getInstance(view.getContext()).sendWallpaperCommand(view.getWindowToken(), WallpaperManager.COMMAND_TAP, (int) currentEvent.getX(), (int) currentEvent.getY(), 0, null);
-
+                    if (!desktop.inEditMode && currentEvent != null) {
+                        WallpaperManager.getInstance(view.getContext()).sendWallpaperCommand(view.getWindowToken(), WallpaperManager.COMMAND_TAP, (int) currentEvent.getX(), (int) currentEvent.getY(), 0, null);
+                    }
                     desktop.inEditMode = false;
                     if (desktop.desktopEditListener != null) {
                         desktop.desktopEditListener.onFinishDesktopEdit();
@@ -543,10 +543,14 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     callBack.removeItemFromSettings(item);
                     parent.removeView(itemView);
 
-                    Desktop.Item group = Desktop.Item.newGroupItem(item, dropItem);
+                    Desktop.Item group = Desktop.Item.newGroupItem();
+                    group.items.add(item);
+                    group.items.add(dropItem);
 
                     group.name = (home.getString(R.string.unnamed));
                     item.type = Desktop.Item.Type.GROUP;
+                    group.x = item.x;
+                    group.y = item.y;
 
                     callBack.addItemToSettings(group);
                     callBack.addItemToPagePosition(group, page);
@@ -617,29 +621,30 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             idValue = (int) new Date().getTime();
         }
 
-        public Item(Parcel in) {
-            idValue = in.readInt();
-            type = Type.valueOf(in.readString());
+        public Item(Parcel parcel) {
+            idValue = parcel.readInt();
+            type = Type.valueOf(parcel.readString());
             switch (type) {
                 case APP:
                 case SHORTCUT:
-                    appIntent = Tool.getIntentFromString(in.readString());
+                    appIntent = Tool.getIntentFromString(parcel.readString());
                     break;
                 case GROUP:
                     List<String> labels = new ArrayList<>();
-                    in.readStringList(labels);
+                    parcel.readStringList(labels);
+                    items = new ArrayList<>();
                     for (String s : labels) {
                         DatabaseHelper db = new DatabaseHelper(Home.launcher);
                         items.add(db.getItem(s));
                     }
                     break;
                 case WIDGET:
-                    widgetID = in.readInt();
-                    spanX = in.readInt();
-                    spanY = in.readInt();
+                    widgetID = parcel.readInt();
+                    spanX = parcel.readInt();
+                    spanY = parcel.readInt();
                     break;
             }
-            name = in.readString();
+            name = parcel.readString();
         }
 
         @Override
@@ -699,13 +704,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             return item;
         }
 
-        public static Item newGroupItem(Item itemOne, Item itemTwo) {
+        public static Item newGroupItem() {
             Desktop.Item item = new Item();
             item.type = Type.GROUP;
             item.spanX = 1;
             item.spanY = 1;
-            item.items.add(itemOne);
-            item.items.add(itemTwo);
+            item.items = new ArrayList<>();
             return item;
         }
 
@@ -725,8 +729,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     break;
                 case GROUP:
                     List<String> labels = new ArrayList<>();
-                    for (int i = 0; i < items.size(); i++) {
-                        labels.add(items.get(i).name);
+                    for (Item i : items) {
+                        labels.add(Integer.toString(i.idValue));
                     }
                     out.writeStringList(labels);
                     break;

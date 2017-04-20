@@ -190,6 +190,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 selectionItem.appIntent = Tool.getIntentFromString(data);
                 break;
             case GROUP:
+                selectionItem.items = new ArrayList<>();
                 dataSplit = data.split("#");
                 for (String s : dataSplit) {
                     selectionItem.items.add(getItem(s));
@@ -209,16 +210,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // the methods below are used for updating app states for groups
-    public void showItem(String string) {
+    public void showItem(String itemString) {
     }
 
-    public void hideItem(String string) {
+    public void hideItem(String itemString) {
     }
 
-    public Item getItem(String itemID) {
-        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + itemID;
+    public Item getItem(String itemString) {
+        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + itemString;
         Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
-        Item item = getSelectionItem(cursor);
+        Item item = new Desktop.Item();
+        if (cursor.moveToFirst()) {
+            item = getSelectionItem(cursor);
+        }
         cursor.close();
         return item;
     }

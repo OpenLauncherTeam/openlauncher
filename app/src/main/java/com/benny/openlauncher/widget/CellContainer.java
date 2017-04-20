@@ -379,11 +379,13 @@ public class CellContainer extends ViewGroup {
 
         int dx;
         int dy;
+
         dx = cellx + xSpan - 1;
         if (dx >= cellSpanH - 1) {
             dx = cellSpanH - 1;
             cellx = dx + 1 - xSpan;
         }
+
         dy = celly + ySpan - 1;
         if (dy >= cellSpanV - 1) {
             dy = cellSpanV - 1;
@@ -533,7 +535,6 @@ public class CellContainer extends ViewGroup {
                 child.layout(upRect.left, upRect.top, downRect.right, upRect.bottom);
             else if (lp.ySpan > 1)
                 child.layout(upRect.left, upRect.top, upRect.right, downRect.bottom);
-
         }
     }
 
@@ -591,7 +592,6 @@ public class CellContainer extends ViewGroup {
             this.xSpan = xSpan;
             this.ySpan = ySpan;
         }
-
         public LayoutParams(int w, int h) {
             super(w, h);
         }
