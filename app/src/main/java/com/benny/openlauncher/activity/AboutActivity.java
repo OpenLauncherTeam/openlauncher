@@ -17,7 +17,12 @@ public class AboutActivity extends MaterialAboutActivity {
 
     @Override
     protected MaterialAboutList getMaterialAboutList(Context context) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        });
 
         MaterialAboutCard.Builder titleCard = new MaterialAboutCard.Builder();
         titleCard.addItem(new MaterialAboutTitleItem(R.string.app_name, R.drawable.ic_launcher));
