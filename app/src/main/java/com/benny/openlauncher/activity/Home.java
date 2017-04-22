@@ -930,6 +930,5 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         public void onChange(boolean selfChange, Uri uri) {
             logCallLog();
         }
-
     }
 }

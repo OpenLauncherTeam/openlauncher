@@ -24,6 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_Y_POS = "y";
     private static final String COLUMN_DATA = "data";
     private static final String COLUMN_PAGE = "page";
+    private static final String COLUMN_DESKTOP = "desktop";
     private static final String COLUMN_STATE = "state";
 
     private static final String SQL_CREATE_DESKTOP =
@@ -35,6 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     COLUMN_Y_POS + " INTEGER," +
                     COLUMN_DATA + " VARCHAR," +
                     COLUMN_PAGE + " INTEGER," +
+                    COLUMN_DESKTOP + " INTEGER," +
                     COLUMN_STATE + " INTEGER)";
     private static final String SQL_DELETE = "DROP TABLE IF EXISTS ";
     private static final String SQL_QUERY = "SELECT * FROM ";
@@ -59,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void createItem(Item item, int page, int state) {
+    public void createItem(Item item, int page, int desktop, int state) {
         ContentValues itemValues = new ContentValues();
         itemValues.put(COLUMN_TIME, item.idValue);
         itemValues.put(COLUMN_TYPE, item.type.toString());
@@ -89,18 +91,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 break;
         }
         itemValues.put(COLUMN_PAGE, page);
+        itemValues.put(COLUMN_DESKTOP, desktop);
         itemValues.put(COLUMN_STATE, state);
         db.insert(TABLE_HOME, null, itemValues);
     }
 
     public void deleteItem(Item item) {
         db.delete(TABLE_HOME, COLUMN_TIME + " = ?", new String[]{String.valueOf(item.idValue)});
-    }
-
-    public void updateItem(Item item, int page, int state) {
-        deleteItem(item);
-        item.idValue = (int) new Date().getTime();
-        createItem(item, page, state);
     }
 
     public List<List<Item>> getDesktop() {
@@ -110,11 +107,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int page = Integer.parseInt(cursor.getString(6));
-                int state = Integer.parseInt(cursor.getString(7));
+                int desktopVar = Integer.parseInt(cursor.getString(7));
+                int stateVar = Integer.parseInt(cursor.getString(8));
                 if (page >= desktop.size()) {
                     desktop.add(new ArrayList<Item>());
                 }
-                if (state == 0) {
+                if (desktopVar == 1 && stateVar == 1) {
                     desktop.get(page).add(getSelectionItem(cursor));
                 }
             } while (cursor.moveToNext());
@@ -129,8 +127,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Item> dock = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
-                int state = Integer.parseInt(cursor.getString(7));
-                if (state == 1) {
+                int desktopVar = Integer.parseInt(cursor.getString(7));
+                int stateVar = Integer.parseInt(cursor.getString(8));
+                if (desktopVar == 0 && stateVar == 1) {
                     dock.add(getSelectionItem(cursor));
                 }
             } while (cursor.moveToNext());
@@ -140,6 +139,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return dock;
     }
 
+    public Item getItem(int id) {
+        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + id;
+        Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
+        Item item = new Desktop.Item();
+        if (cursor.moveToFirst()) {
+            item = getSelectionItem(cursor);
+        }
+        cursor.close();
+        return item;
+    }
+
     public void setDesktop(List<List<Item>> desktop) {
         for (List<Item> page : desktop) {
             int pageCounter = 0;
@@ -147,9 +157,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
                 Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
                 if (cursor.getCount() == 0) {
-                    createItem(item, pageCounter, 0);
+                    createItem(item, pageCounter, 1, 1);
                 } else if (cursor.getCount() == 1) {
-                    updateItem(item, pageCounter, 0);
+                    updateItem(item, pageCounter, 1, 1);
                 }
             }
             pageCounter++;
@@ -161,15 +171,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
             Cursor cursorItem = db.rawQuery(SQL_QUERY_SPECIFIC, null);
             if (cursorItem.getCount() == 0) {
-                createItem(item, 0, 1);
+                createItem(item, 0, 0, 1);
             } else if (cursorItem.getCount() == 1) {
-                updateItem(item, 0, 1);
+                updateItem(item, 0, 0, 1);
             }
         }
     }
 
+    public void updateItem(Item item) {
+        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
+        Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
+        if (cursor.getCount() == 0) {
+            createItem(item, 0, 0, 1);
+        } else if (cursor.getCount() == 1) {
+            updateItem(item, 0, 0, 1);
+        }
+    }
+
+    // update the state of an item
+    public void updateItem(Item item, int state) {
+        ContentValues itemValues = new ContentValues();
+        itemValues.put(COLUMN_STATE, state);
+        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.idValue, null);
+    }
+
+    // update the position of an item
+    public void updateItem(Item item, int x, int y) {
+        ContentValues itemValues = new ContentValues();
+        itemValues.put(COLUMN_X_POS, x);
+        itemValues.put(COLUMN_Y_POS, y);
+        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.idValue, null);
+    }
+
+    // update the fields in an item only used by the database
+    public void updateItem(Item item, int page, int desktop, int state) {
+        deleteItem(item);
+        createItem(item, page, desktop, state);
+    }
+
     private Item getSelectionItem(Cursor cursor) {
-        Item selectionItem = new Item();
+        Item item = new Item();
         int id = Integer.parseInt(cursor.getString(0));
         Item.Type type = Item.Type.valueOf(cursor.getString(1));
         String label = cursor.getString(2);
@@ -177,53 +218,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int y = Integer.parseInt(cursor.getString(4));
         String data = cursor.getString(5);
 
-        selectionItem.idValue = id;
-        selectionItem.name = label;
-        selectionItem.x = x;
-        selectionItem.y = y;
-        selectionItem.type = type;
+        item.idValue = id;
+        item.name = label;
+        item.x = x;
+        item.y = y;
+        item.type = type;
 
         String[] dataSplit;
         switch (type) {
             case APP:
             case SHORTCUT:
-                selectionItem.appIntent = Tool.getIntentFromString(data);
+                item.appIntent = Tool.getIntentFromString(data);
                 break;
             case GROUP:
-                selectionItem.items = new ArrayList<>();
+                item.items = new ArrayList<>();
                 dataSplit = data.split("#");
                 for (String s : dataSplit) {
-                    selectionItem.items.add(getItem(s));
+                    item.items.add(getItem(Integer.parseInt(s)));
                 }
                 break;
             case ACTION:
-                selectionItem.actionValue = Integer.parseInt(data);
+                item.actionValue = Integer.parseInt(data);
                 break;
             case WIDGET:
                 dataSplit = data.split("#");
-                selectionItem.widgetID = Integer.parseInt(dataSplit[0]);
-                selectionItem.spanX = Integer.parseInt(dataSplit[1]);
-                selectionItem.spanY = Integer.parseInt(dataSplit[2]);
+                item.widgetID = Integer.parseInt(dataSplit[0]);
+                item.spanX = Integer.parseInt(dataSplit[1]);
+                item.spanY = Integer.parseInt(dataSplit[2]);
                 break;
         }
-        return selectionItem;
-    }
-
-    // the methods below are used for updating app states for groups
-    public void showItem(String itemString) {
-    }
-
-    public void hideItem(String itemString) {
-    }
-
-    public Item getItem(String itemString) {
-        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + itemString;
-        Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
-        Item item = new Desktop.Item();
-        if (cursor.moveToFirst()) {
-            item = getSelectionItem(cursor);
-        }
-        cursor.close();
         return item;
     }
 }

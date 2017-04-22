@@ -24,6 +24,7 @@ import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
 
+import static com.benny.openlauncher.activity.Home.db;
 import static com.benny.openlauncher.activity.Home.resources;
 
 public class GroupPopupView extends FrameLayout {
@@ -269,9 +270,15 @@ public class GroupPopupView extends FrameLayout {
         if (currentItem.items.size() == 1) {
             final AppManager.App app = AppManager.getInstance(currentView.getContext()).findApp(currentItem.items.get(0).appIntent.getComponent().getPackageName(), currentItem.items.get(0).appIntent.getComponent().getClassName());
             if (app != null) {
-                Desktop.Item item = Desktop.Item.newAppItem(app);
+                Desktop.Item item = db.getItem(currentItem.items.get(0).idValue);
                 item.x = currentItem.x;
                 item.y = currentItem.y;
+                db.updateItem(item, item.x, item.y);
+                db.updateItem(item, 1);
+
+                removeView(currentView);
+                db.deleteItem(currentItem);
+
                 callBack.addItemToPosition(item, item.x, item.y);
                 callBack.addItemToSettings(item);
             }

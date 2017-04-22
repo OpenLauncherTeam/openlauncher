@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
@@ -28,12 +27,9 @@ import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.model.SmoothPagerAdapter;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
+import java.util.Random;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
@@ -187,38 +183,29 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(Item.class.getClassLoader());
                 Item item = intent.getParcelableExtra("mDragData");
-                if (item.type == Item.Type.WIDGET) {
-                    if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
-                        home.desktop.consumeRevert();
-                        home.desktopDock.consumeRevert();
-                    } else {
-                        Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                        home.desktopDock.revertLastItem();
-                        home.desktop.revertLastItem();
-                    }
-                }
-                if (item.type == Desktop.Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type == Item.Type.ACTION) {
-                    if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
-                        home.desktop.consumeRevert();
-                        home.desktopDock.consumeRevert();
-                    } else {
-                        Point pos = getCurrentPage().touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY, false);
-                        View itemView = getCurrentPage().coordinateToChildView(pos);
 
-                        if (itemView != null)
-                            if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, getCurrentPage(), getCurrentItem(), this)) {
-                                home.desktop.consumeRevert();
-                                home.desktopDock.consumeRevert();
-                            } else {
-                                Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                                home.desktopDock.revertLastItem();
-                                home.desktop.revertLastItem();
-                            }
-                        else {
+                if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
+                    home.desktop.consumeRevert();
+                    home.desktopDock.consumeRevert();
+
+                    // add the item to the database
+                    home.db.updateItem(item);
+                } else {
+                    Point pos = getCurrentPage().touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY, false);
+                    View itemView = getCurrentPage().coordinateToChildView(pos);
+                    if (itemView != null) {
+                        if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, getCurrentPage(), getCurrentItem(), this)) {
+                            home.desktop.consumeRevert();
+                            home.desktopDock.consumeRevert();
+                        } else {
                             Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
                             home.desktopDock.revertLastItem();
                             home.desktop.revertLastItem();
                         }
+                    } else {
+                        Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
+                        home.desktopDock.revertLastItem();
+                        home.desktop.revertLastItem();
                     }
                 }
                 return true;
@@ -304,6 +291,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         } else {
             return false;
         }
+    }
+
+    @Override
+    public void removeItem(View itemView) {
+        getCurrentPage().removeViewInLayout(itemView);
     }
 
     @Override
@@ -533,9 +525,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     public static boolean handleOnDropOver(Home home, Item dropItem, Item item, View itemView, ViewGroup parent, int page, DesktopCallBack callBack) {
-        if (item == null) {
+        if (item == null || dropItem == null) {
             return false;
         }
+
         switch (item.type) {
             case APP:
             case SHORTCUT:
@@ -546,14 +539,19 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     Desktop.Item group = Desktop.Item.newGroupItem();
                     group.items.add(item);
                     group.items.add(dropItem);
-
                     group.name = (home.getString(R.string.unnamed));
-                    item.type = Desktop.Item.Type.GROUP;
                     group.x = item.x;
                     group.y = item.y;
 
+                    home.db.updateItem(item, 0);
+                    home.db.updateItem(dropItem, 0);
+
+                    // add the item to the database
+                    home.db.updateItem(item);
+
                     callBack.addItemToSettings(group);
                     callBack.addItemToPagePosition(group, page);
+
                     home.desktop.consumeRevert();
                     home.desktopDock.consumeRevert();
                     return true;
@@ -565,6 +563,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     parent.removeView(itemView);
 
                     item.items.add(dropItem);
+
+                    home.db.updateItem(dropItem, 0);
+
+                    // add the item to the database
+                    home.db.updateItem(item);
 
                     callBack.addItemToSettings(item);
                     callBack.addItemToPagePosition(item, page);
@@ -618,7 +621,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         public int spanY = 1;
 
         public Item() {
-            idValue = (int) new Date().getTime();
+            Random random = new Random();
+            idValue = random.nextInt();
         }
 
         public Item(Parcel parcel) {
@@ -634,8 +638,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     parcel.readStringList(labels);
                     items = new ArrayList<>();
                     for (String s : labels) {
-                        DatabaseHelper db = new DatabaseHelper(Home.launcher);
-                        items.add(db.getItem(s));
+                        items.add(Home.launcher.db.getItem(Integer.parseInt(s)));
                     }
                     break;
                 case WIDGET:

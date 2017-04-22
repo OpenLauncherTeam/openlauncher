@@ -115,28 +115,29 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(Item.class.getClassLoader());
                 Item item = intent.getParcelableExtra("mDragData");
-                if (item.type == Item.Type.APP || item.type == Item.Type.GROUP || item.type == Item.Type.SHORTCUT || item.type == Item.Type.ACTION) {
-                    if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
-                        home.desktop.consumeRevert();
-                        home.desktopDock.consumeRevert();
-                    } else {
-                        Point pos = touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY, false);
-                        View itemView = coordinateToChildView(pos);
 
-                        if (itemView != null)
-                            if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, this, 0, this)) {
-                                home.desktop.consumeRevert();
-                                home.desktopDock.consumeRevert();
-                            } else {
-                                Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                                home.desktopDock.revertLastItem();
-                                home.desktop.revertLastItem();
-                            }
-                        else {
+                if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
+                    home.desktop.consumeRevert();
+                    home.desktopDock.consumeRevert();
+
+                    // add the item to the database
+                    home.db.updateItem(item);
+                } else {
+                    Point pos = touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY, false);
+                    View itemView = coordinateToChildView(pos);
+                    if (itemView != null) {
+                        if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, this, 0, this)) {
+                            home.desktop.consumeRevert();
+                            home.desktopDock.consumeRevert();
+                        } else {
                             Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
                             home.desktopDock.revertLastItem();
                             home.desktop.revertLastItem();
                         }
+                    } else {
+                        Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
+                        home.desktopDock.revertLastItem();
+                        home.desktop.revertLastItem();
                     }
                 }
                 return true;
@@ -193,11 +194,9 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     public boolean addItemToPosition(final Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = positionToLayoutPrams(x, y, item.spanX, item.spanY);
         if (positionToLayoutPrams != null) {
-            //Add the item to settings
             item.x = positionToLayoutPrams.x;
             item.y = positionToLayoutPrams.y;
             LauncherSettings.getInstance(getContext()).dockData.add(item);
-            //end
 
             int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
             View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
@@ -210,6 +209,11 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         } else {
             return false;
         }
+    }
+
+    @Override
+    public void removeItem(View itemView) {
+        removeViewInLayout(itemView);
     }
 
     @Override
