@@ -296,6 +296,6 @@ public class AppManager {
     }
 
     public interface AppDeletedListener {
-        public void onAppDeleted(App app);
+        void onAppDeleted(App app);
     }
 }

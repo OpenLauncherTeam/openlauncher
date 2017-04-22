@@ -71,9 +71,7 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
             public void onAnimationStart(Animator p1) {
                 getChildAt(0).setVisibility(View.VISIBLE);
 
-                ObjectAnimator animator = ObjectAnimator
-                        .ofPropertyValuesHolder(getBackground(),
-                                PropertyValuesHolder.ofInt("alpha", 0, 255));
+                ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(getBackground(), PropertyValuesHolder.ofInt("alpha", 0, 255));
                 animator.setDuration(200);
                 animator.start();
 
@@ -124,9 +122,7 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
             public void onAnimationStart(Animator p1) {
                 closeCallBack.onStart();
 
-                ObjectAnimator animator = ObjectAnimator
-                        .ofPropertyValuesHolder(getBackground(),
-                                PropertyValuesHolder.ofInt("alpha", 255, 0));
+                ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(getBackground(), PropertyValuesHolder.ofInt("alpha", 255, 0));
                 animator.setDuration(200);
                 animator.start();
             }
@@ -162,7 +158,6 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
                     @Override
                     public void run() {
                         appDrawerAnimator.start();
-
                     }
                 });
                 break;
@@ -246,7 +241,6 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
     }
 
     @Override
@@ -263,7 +257,6 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
 
     @Override
     public void afterTextChanged(Editable editable) {
-
     }
 
     public enum DrawerMode {
@@ -272,7 +265,6 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
 
     public interface CallBack {
         void onStart();
-
         void onEnd();
     }
 }

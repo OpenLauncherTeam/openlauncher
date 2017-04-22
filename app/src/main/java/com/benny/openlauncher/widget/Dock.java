@@ -121,7 +121,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                     home.desktopDock.consumeRevert();
 
                     // add the item to the database
-                    home.db.updateItem(item);
+                    home.db.setItem(item);
                 } else {
                     Point pos = touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY, false);
                     View itemView = coordinateToChildView(pos);

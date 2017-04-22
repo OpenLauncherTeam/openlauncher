@@ -178,7 +178,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void updateItem(Item item) {
+    public void setItem(Item item) {
         String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
         Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
         if (cursor.getCount() == 0) {

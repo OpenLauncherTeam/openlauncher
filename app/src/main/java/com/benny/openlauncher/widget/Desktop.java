@@ -189,7 +189,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     home.desktopDock.consumeRevert();
 
                     // add the item to the database
-                    home.db.updateItem(item);
+                    home.db.setItem(item);
                 } else {
                     Point pos = getCurrentPage().touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY, false);
                     View itemView = getCurrentPage().coordinateToChildView(pos);
@@ -547,7 +547,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     home.db.updateItem(dropItem, 0);
 
                     // add the item to the database
-                    home.db.updateItem(item);
+                    home.db.setItem(item);
 
                     callBack.addItemToSettings(group);
                     callBack.addItemToPagePosition(group, page);
@@ -567,7 +567,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     home.db.updateItem(dropItem, 0);
 
                     // add the item to the database
-                    home.db.updateItem(item);
+                    home.db.setItem(item);
 
                     callBack.addItemToSettings(item);
                     callBack.addItemToPagePosition(item, page);
