@@ -314,8 +314,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     @Override
-    public void removeItemFromPage(View itemView, int page) {
-        getCurrentPage().removeViewInLayout(itemView);
+    public void removeItem(AppItemView view) {
+        getCurrentPage().removeViewInLayout(view);
     }
 
     @Override

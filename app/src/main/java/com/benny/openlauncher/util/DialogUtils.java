@@ -153,8 +153,7 @@ public class DialogUtils {
                             try {
                                 PackageInfo p = m.getPackageInfo(s, 0);
                                 s = p.applicationInfo.dataDir;
-                                copy(context, s + "/files/desktopData.json", directory + "/desktopData.json");
-                                copy(context, s + "/files/dockData.json", directory + "/dockData.json");
+                                copy(context, s + "/databases/home.db", directory + "/home.db");
                                 copy(context, s + "/files/generalSettings.json", directory + "/generalSettings.json");
                                 Toast.makeText(context, R.string.settings_backup_success, Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
@@ -167,8 +166,7 @@ public class DialogUtils {
                             try {
                                 PackageInfo p = m.getPackageInfo(s, 0);
                                 s = p.applicationInfo.dataDir;
-                                copy(context, directory + "/desktopData.json", s + "/files/desktopData.json");
-                                copy(context, directory + "/dockData.json", s + "/files/dockData.json");
+                                copy(context, directory + "/home.db", s + "/databases/home.db");
                                 copy(context, directory + "/generalSettings.json", s + "/files/generalSettings.json");
                                 Toast.makeText(context, R.string.settings_backup_success, Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {

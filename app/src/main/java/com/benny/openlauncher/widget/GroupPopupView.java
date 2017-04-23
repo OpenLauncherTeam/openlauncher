@@ -274,13 +274,9 @@ public class GroupPopupView extends FrameLayout {
                 item.y = currentItem.y;
                 db.updateItem(item, item.x, item.y);
                 db.updateItem(item, 1);
-
-                // DesktopCallback is not implemented here so I cant use this interface at the moment
-                // also the last item in the group gets set to a position of 0,0 for some reason
-                //removeItemView(currentView);
                 db.deleteItem(currentItem);
 
-                callBack.addItemToPoint(item, item.x, item.y);
+                callBack.addItemToCell(item, item.x, item.y);
                 callBack.addItemToSettings(item);
             }
             if (Home.launcher != null) {

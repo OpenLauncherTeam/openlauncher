@@ -231,8 +231,8 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     @Override
-    public void removeItemFromPage(View itemView, int page) {
-        removeViewInLayout(itemView);
+    public void removeItem(AppItemView view) {
+        removeViewInLayout(view);
     }
 
     @Override

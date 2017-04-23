@@ -3,6 +3,7 @@ package com.benny.openlauncher.viewutil;
 import android.view.View;
 
 import com.benny.openlauncher.util.RevertibleAction;
+import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.widget.Desktop;
 
 /**
@@ -20,5 +21,5 @@ public interface DesktopCallBack extends RevertibleAction {
 
     boolean addItemToCell(Desktop.Item item, int x, int y);
 
-    void removeItemFromPage(View itemView, int page);
+    void removeItem(AppItemView view);
 }
