@@ -116,9 +116,8 @@ public class LauncherSettings {
         generalSettings.swipeUp = value;
     }
 
-    public void switchDesktopMode(int position) {
+    public void setDesktopMode(int position) {
         Desktop.DesktopMode mode = Desktop.DesktopMode.values()[position];
-        writeSettings();
 
         // check icon cache for all items
         iconCacheIDs.clear();
@@ -134,36 +133,9 @@ public class LauncherSettings {
         generalSettings.desktopMode = mode;
         generalSettings.desktopHomePage = position;
 
-        readDesktopData();
-        readDockData();
-
         Tool.checkForUnusedIconAndDelete(context, iconCacheIDs);
 
-        // add all the apps to the desktop for the first time
-        if (mode == Desktop.DesktopMode.ShowAllApps && desktopData.size() == 0) {
-            int pageCount = 0;
-            List<AppManager.App> apps = AppManager.getInstance(context).getApps();
-            int appsSize = apps.size();
-            while ((appsSize = appsSize - (generalSettings.desktopGridY * generalSettings.desktopGridX)) >= (generalSettings.desktopGridY * generalSettings.desktopGridX) || (appsSize > -(generalSettings.desktopGridY * generalSettings.desktopGridX))) {
-                pageCount++;
-            }
-            for (int i = 0; i < pageCount; i++) {
-                ArrayList<Desktop.Item> items = new ArrayList<>();
-                for (int x = 0; x < generalSettings.desktopGridX; x++) {
-                    for (int y = 0; y < generalSettings.desktopGridY; y++) {
-                        int pagePos = y * generalSettings.desktopGridY + x;
-                        final int pos = generalSettings.desktopGridY * generalSettings.desktopGridX * i + pagePos;
-                        if (!(pos >= apps.size())) {
-                            Desktop.Item appItem = Desktop.Item.newAppItem(apps.get(pos));
-                            appItem.x = x;
-                            appItem.y = y;
-                            items.add(appItem);
-                        }
-                    }
-                }
-                desktopData.add(items);
-            }
-        }
+        Home.launcher.desktop.initShowAllApps(context);
     }
 
     // edit this carefully as changing the type of a field will cause a parsing error when the launcher starts

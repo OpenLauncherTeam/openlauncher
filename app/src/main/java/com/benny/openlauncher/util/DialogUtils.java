@@ -23,7 +23,7 @@ public class DialogUtils {
                 .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.desktopHomePage, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).switchDesktopMode(position);
+                        LauncherSettings.getInstance(context).setDesktopMode(position);
                         return true;
                     }
                 }).show();

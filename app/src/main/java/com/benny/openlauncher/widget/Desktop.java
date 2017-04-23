@@ -34,31 +34,18 @@ import java.util.Random;
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class Desktop extends SmoothViewPager implements OnDragListener, DesktopCallBack {
-    public int pageCount;
-
     public List<CellContainer> pages = new ArrayList<>();
-
-    public void setDesktopEditListener(OnDesktopEditListener desktopEditListener) {
-        this.desktopEditListener = desktopEditListener;
-    }
-
     public OnDesktopEditListener desktopEditListener;
-
-    public boolean inEditMode;
-
     public View previousItemView;
     public Item previousItem;
+    public boolean inEditMode;
     public int previousPage = -1;
+    public int pageCount;
 
-    private float startPosX, startPosY;
-
+    private float startPosX;
+    private float startPosY;
     private Home home;
-
     private PagerIndicator pageIndicator;
-
-    public void setPageIndicator(PagerIndicator pageIndicator) {
-        this.pageIndicator = pageIndicator;
-    }
 
     public Desktop(Context c, AttributeSet attr) {
         super(c, attr);
@@ -68,16 +55,58 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         super(c);
     }
 
+    public void setDesktopEditListener(OnDesktopEditListener desktopEditListener) {
+        this.desktopEditListener = desktopEditListener;
+    }
+
+    public void setPageIndicator(PagerIndicator pageIndicator) {
+        this.pageIndicator = pageIndicator;
+    }
+
     public void init(Context c) {
-        if (isInEditMode()) return;
+        if (isInEditMode()) {
+            return;
+        }
+
+        if (LauncherSettings.getInstance(c).generalSettings.desktopMode == DesktopMode.ShowAllApps) {
+            initShowAllApps(c);
+        }
 
         pageCount = LauncherSettings.getInstance(c).desktopData.size();
-        if (pageCount == 0)
+        if (pageCount == 0) {
             pageCount = 1;
+        }
+
         setAdapter(new DesktopAdapter(this));
         setOnDragListener(this);
-
         setCurrentItem(LauncherSettings.getInstance(c).generalSettings.desktopHomePage);
+    }
+
+    public void initShowAllApps(Context c) {
+        LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(c).generalSettings;
+        LauncherSettings.getInstance(c).desktopData.clear();
+        int pageCount = 0;
+        List<AppManager.App> apps = AppManager.getInstance(c).getApps();
+        int appsSize = apps.size();
+        while ((appsSize = appsSize - (generalSettings.desktopGridY * generalSettings.desktopGridX)) >= (generalSettings.desktopGridY * generalSettings.desktopGridX) || (appsSize > -(generalSettings.desktopGridY * generalSettings.desktopGridX))) {
+            pageCount++;
+        }
+        for (int i = 0; i < pageCount; i++) {
+            ArrayList<Desktop.Item> items = new ArrayList<>();
+            for (int x = 0; x < generalSettings.desktopGridX; x++) {
+                for (int y = 0; y < generalSettings.desktopGridY; y++) {
+                    int pagePos = y * generalSettings.desktopGridY + x;
+                    final int pos = generalSettings.desktopGridY * generalSettings.desktopGridX * i + pagePos;
+                    if (!(pos >= apps.size())) {
+                        Desktop.Item appItem = Desktop.Item.newAppItem(apps.get(pos));
+                        appItem.x = x;
+                        appItem.y = y;
+                        items.add(appItem);
+                    }
+                }
+            }
+            LauncherSettings.getInstance(c).desktopData.add(items);
+        }
     }
 
     public void initDesktopItem(Home home) {
