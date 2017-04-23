@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.Desktop;
 import com.google.gson.Gson;
@@ -75,9 +76,8 @@ public class LauncherSettings {
             return null;
         }
 
-        DatabaseHelper db = new DatabaseHelper(context);
-        db.setDesktop(desktopData);
-        db.setDock(dockData);
+        Home.launcher.db.setDesktop(desktopData);
+        Home.launcher.db.setDock(dockData);
 
         Gson gson = new Gson();
         Tool.writeToFile(settingsFilename, gson.toJson(generalSettings), context);
@@ -85,13 +85,11 @@ public class LauncherSettings {
     }
 
     private void readDockData() {
-        DatabaseHelper db = new DatabaseHelper(context);
-        dockData = db.getDock();
+        dockData = Home.launcher.db.getDock();
     }
 
     private void readDesktopData() {
-        DatabaseHelper db = new DatabaseHelper(context);
-        desktopData = db.getDesktop();
+        desktopData = Home.launcher.db.getDesktop();
     }
 
     public void setSingleClickGesture(int value) {

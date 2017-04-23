@@ -34,5 +34,4 @@ public class AppInfo {
     public void setSelected(boolean paramBoolean) {
         selected = paramBoolean;
     }
-
 }

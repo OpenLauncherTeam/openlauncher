@@ -156,15 +156,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         switch (p2.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
                 Tool.print("ACTION_DRAG_STARTED");
-                switch (((DragAction) p2.getLocalState()).action) {
-                    case ACTION_APP:
-                    case ACTION_GROUP:
-                    case ACTION_APP_DRAWER:
-                    case ACTION_WIDGET:
-                    case ACTION_SHORTCUT:
-                    case ACTION_LAUNCHER:
-                        return true;
-                }
                 return true;
             case DragEvent.ACTION_DRAG_ENTERED:
                 Tool.print("ACTION_DRAG_ENTERED");
@@ -175,6 +166,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 return true;
 
             case DragEvent.ACTION_DRAG_LOCATION:
+                Tool.print("ACTION_DRAG_LOCATION");
                 getCurrentPage().peekItemAndSwap(p2);
                 return true;
 
@@ -183,6 +175,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(Item.class.getClassLoader());
                 Item item = intent.getParcelableExtra("mDragData");
+
+                // this statement makes sure that adding an app multiple times from the app drawer works
+                // the app will get a new id every time
+                if (((DragAction) p2.getLocalState()).action == DragAction.Action.ACTION_APP_DRAWER) {
+                    item.resetID();
+                }
 
                 if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
                     home.desktop.consumeRevert();
@@ -621,6 +619,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         public int spanY = 1;
 
         public Item() {
+            Random random = new Random();
+            idValue = random.nextInt();
+        }
+
+        public void resetID() {
             Random random = new Random();
             idValue = random.nextInt();
         }

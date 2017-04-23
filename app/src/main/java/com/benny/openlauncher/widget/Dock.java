@@ -96,13 +96,8 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     public boolean onDrag(View p1, DragEvent p2) {
         switch (p2.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
-                switch (((DragAction) p2.getLocalState()).action) {
-                    case ACTION_APP:
-                    case ACTION_GROUP:
-                    case ACTION_APP_DRAWER:
-                    case ACTION_SHORTCUT:
-                    case ACTION_LAUNCHER:
-                        return true;
+                if (((DragAction) p2.getLocalState()).action != DragAction.Action.ACTION_WIDGET) {
+                    return true;
                 }
                 return false;
             case DragEvent.ACTION_DRAG_ENTERED:
@@ -115,6 +110,12 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(Item.class.getClassLoader());
                 Item item = intent.getParcelableExtra("mDragData");
+
+                // this statement makes sure that adding an app multiple times from the app drawer works
+                // the app will get a new id every time
+                if (((DragAction) p2.getLocalState()).action == DragAction.Action.ACTION_APP_DRAWER) {
+                    item.resetID();
+                }
 
                 if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
                     home.desktop.consumeRevert();

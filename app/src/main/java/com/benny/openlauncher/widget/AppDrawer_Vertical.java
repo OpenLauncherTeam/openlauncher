@@ -210,7 +210,6 @@ public class AppDrawer_Vertical extends CardView {
                         @Override
                         public void afterDrag(View view) {
                             Home.launcher.closeAppDrawer();
-
                         }
                     });
             super.bindView(holder, payloads);
