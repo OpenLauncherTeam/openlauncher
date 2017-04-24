@@ -91,7 +91,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             for (int j = 0; j < items.size(); j++) {
                 Desktop.Item item = items.get(j);
                 if (item.x < column && item.y < row)
-                    addItemToPagePosition(item, i);
+                    addItemToPage(item, i);
             }
         }
     }
@@ -182,7 +182,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     item.resetID();
                 }
 
-                if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
+                if (addItemToPoint(item, (int) p2.getX(), (int) p2.getY())) {
                     home.desktop.consumeRevert();
                     home.desktopDock.consumeRevert();
 
@@ -256,19 +256,21 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     @Override
-    public void addItemToPagePosition(final Item item, int page) {
+    public boolean addItemToPage(final Item item, int page) {
         int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
         if (itemView == null) {
             home.db.deleteItem(item);
+            return false;
         } else {
             pages.get(page).addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
+            return true;
         }
     }
 
     @Override
-    public boolean addItemToPosition(final Item item, int x, int y) {
+    public boolean addItemToPoint(final Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().positionToLayoutPrams(x, y, item.spanX, item.spanY);
         if (positionToLayoutPrams != null) {
             item.x = positionToLayoutPrams.x;
@@ -292,7 +294,27 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     @Override
-    public void removeItem(View itemView) {
+    public boolean addItemToCell(final Item item, int x, int y) {
+        item.x = x;
+        item.y = y;
+        if (LauncherSettings.getInstance(getContext()).desktopData.size() < getCurrentItem() + 1) {
+            LauncherSettings.getInstance(getContext()).desktopData.add(getCurrentItem(), new ArrayList<Item>());
+        }
+        LauncherSettings.getInstance(getContext()).desktopData.get(getCurrentItem()).add(item);
+
+        int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
+
+        if (itemView != null) {
+            getCurrentPage().addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void removeItemFromPage(View itemView, int page) {
         getCurrentPage().removeViewInLayout(itemView);
     }
 
@@ -534,6 +556,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     callBack.removeItemFromSettings(item);
                     parent.removeView(itemView);
 
+                    // all of the code to create a new group item
                     Desktop.Item group = Desktop.Item.newGroupItem();
                     group.items.add(item);
                     group.items.add(dropItem);
@@ -541,6 +564,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     group.x = item.x;
                     group.y = item.y;
 
+                    // hide the apps added to the group
                     home.db.updateItem(item, 0);
                     home.db.updateItem(dropItem, 0);
 
@@ -548,7 +572,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     home.db.setItem(item);
 
                     callBack.addItemToSettings(group);
-                    callBack.addItemToPagePosition(group, page);
+                    callBack.addItemToPage(group, page);
 
                     home.desktop.consumeRevert();
                     home.desktopDock.consumeRevert();
@@ -562,13 +586,14 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                     item.items.add(dropItem);
 
+                    // hide the new app in thr group
                     home.db.updateItem(dropItem, 0);
 
                     // add the item to the database
                     home.db.setItem(item);
 
                     callBack.addItemToSettings(item);
-                    callBack.addItemToPagePosition(item, page);
+                    callBack.addItemToPage(item, page);
 
                     home.desktop.consumeRevert();
                     home.desktopDock.consumeRevert();

@@ -509,7 +509,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         switch (item.getItemId()) {
             case R.id.appDrawer:
                 Point pos = desktop.getCurrentPage().findFreeSpace();
-                desktop.addItemToPosition(Desktop.Item.newActionItem(8), pos.x, pos.y);
+                desktop.addItemToCell(Desktop.Item.newActionItem(8), pos.x, pos.y);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -682,7 +682,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             LauncherSettings.getInstance(this).desktopData.add(desktop.getCurrentItem(), new ArrayList<Desktop.Item>());
         LauncherSettings.getInstance(this).desktopData.get(desktop.getCurrentItem()).add(item);
         //end
-        desktop.addItemToPagePosition(item, desktop.getCurrentItem());
+        desktop.addItemToPage(item, desktop.getCurrentItem());
     }
     //endregion
 

@@ -44,14 +44,9 @@ public class ShortcutReceiver extends BroadcastReceiver {
         }
 
         Desktop.Item item = Desktop.Item.newShortcutItem(context, name, newIntent, Tool.drawableToBitmap(shortcutIconDrawable));
-
         Point perferedPos = Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).findFreeSpace();
-//        while (perferedPos == null && Home.desktop.getCurrentItem() != Home.desktop.pages.size()-2){
-//            Home.desktop.setCurrentItem(Home.desktop.getCurrentItem() + 1);
-//            perferedPos = Home.desktop.pages.get(Home.desktop.getCurrentItem()).findFreeSpace();
-//        }
+
         if (perferedPos == null) {
-            //Home.desktop.addPageRight(true);
             item.x = 0;
             item.y = 0;
         } else {
@@ -62,6 +57,6 @@ public class ShortcutReceiver extends BroadcastReceiver {
             LauncherSettings.getInstance(context).desktopData.add(Home.launcher.desktop.getCurrentItem(), new ArrayList<Desktop.Item>());
         }
         LauncherSettings.getInstance(context).desktopData.get(Home.launcher.desktop.getCurrentItem()).add(item);
-        Home.launcher.desktop.addItemToPagePosition(item, Home.launcher.desktop.getCurrentItem());
+        Home.launcher.desktop.addItemToPage(item, Home.launcher.desktop.getCurrentItem());
     }
 }

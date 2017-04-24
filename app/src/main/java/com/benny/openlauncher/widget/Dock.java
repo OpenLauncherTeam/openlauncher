@@ -53,7 +53,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         int column = LauncherSettings.getInstance(getContext()).generalSettings.dockGridX;
         for (Item item : LauncherSettings.getInstance(getContext()).dockData) {
             if (item.x < column)
-                addItemToPagePosition(item, 0);
+                addItemToPage(item, 0);
         }
     }
 
@@ -117,7 +117,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                     item.resetID();
                 }
 
-                if (addItemToPosition(item, (int) p2.getX(), (int) p2.getY())) {
+                if (addItemToPoint(item, (int) p2.getX(), (int) p2.getY())) {
                     home.desktop.consumeRevert();
                     home.desktopDock.consumeRevert();
 
@@ -180,19 +180,21 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     @Override
-    public void addItemToPagePosition(final Item item, int page) {
+    public boolean addItemToPage(final Item item, int page) {
         int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
         if (itemView == null) {
             home.db.deleteItem(item);
+            return false;
         } else {
             addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
+            return true;
         }
     }
 
     @Override
-    public boolean addItemToPosition(final Item item, int x, int y) {
+    public boolean addItemToPoint(final Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = positionToLayoutPrams(x, y, item.spanX, item.spanY);
         if (positionToLayoutPrams != null) {
             item.x = positionToLayoutPrams.x;
@@ -213,7 +215,23 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     @Override
-    public void removeItem(View itemView) {
+    public boolean addItemToCell(final Item item, int x, int y) {
+        item.x = x;
+        item.y = y;
+        LauncherSettings.getInstance(getContext()).dockData.add(item);
+        int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
+
+        if (itemView != null) {
+            addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void removeItemFromPage(View itemView, int page) {
         removeViewInLayout(itemView);
     }
 

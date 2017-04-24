@@ -3,7 +3,6 @@ package com.benny.openlauncher.widget;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
@@ -276,10 +275,12 @@ public class GroupPopupView extends FrameLayout {
                 db.updateItem(item, item.x, item.y);
                 db.updateItem(item, 1);
 
-                removeView(currentView);
+                // DesktopCallback is not implemented here so I cant use this interface at the moment
+                // also the last item in the group gets set to a position of 0,0 for some reason
+                //removeItemView(currentView);
                 db.deleteItem(currentItem);
 
-                callBack.addItemToPosition(item, item.x, item.y);
+                callBack.addItemToPoint(item, item.x, item.y);
                 callBack.addItemToSettings(item);
             }
             if (Home.launcher != null) {

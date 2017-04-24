@@ -14,9 +14,11 @@ public interface DesktopCallBack extends RevertibleAction {
 
     void addItemToSettings(Desktop.Item item);
 
-    boolean addItemToPosition(Desktop.Item item, int x, int y);
+    boolean addItemToPoint(Desktop.Item item, int x, int y);
 
-    void addItemToPagePosition(Desktop.Item item, int page);
+    boolean addItemToPage(Desktop.Item item, int page);
 
-    void removeItem(View itemView);
+    boolean addItemToCell(Desktop.Item item, int x, int y);
+
+    void removeItemFromPage(View itemView, int page);
 }
