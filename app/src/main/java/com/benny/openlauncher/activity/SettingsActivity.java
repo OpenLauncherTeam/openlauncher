@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DialogUtils;
@@ -300,6 +301,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
 
     @Override
     public void onPrefClicked(String id) {
+        final LauncherSettings launcherSettings = LauncherSettings.getInstance(this);
+        LauncherSettings.GeneralSettings generalSettings = launcherSettings.generalSettings;
         switch (id) {
             case "desktopSettings":
                 onSettingsSelected(0);
@@ -343,22 +346,58 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 prepareRestart();
                 break;
             case "singleClick":
-                DialogUtils.startSingleClickPicker(this);
+                DialogUtils.startGesturePicker(this,R.string.settings_single_click_title, generalSettings.singleClick, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        launcherSettings.setSingleClickGesture(which);
+                        return true;
+                    }
+                });
                 break;
             case "doubleClick":
-                DialogUtils.startDoubleClickPicker(this);
+                DialogUtils.startGesturePicker(this,R.string.settings_double_click_title, generalSettings.singleClick, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        launcherSettings.setDoubleClickGesture(which);
+                        return true;
+                    }
+                });
                 break;
             case "pinch":
-                DialogUtils.startPinchPicker(this);
+                DialogUtils.startGesturePicker(this,R.string.settings_double_click_title, generalSettings.doubleClick, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        launcherSettings.setDoubleClickGesture(which);
+                        return true;
+                    }
+                });
                 break;
             case "unPinch":
-                DialogUtils.startUnpinchPicker(this);
+                DialogUtils.startGesturePicker(this,R.string.settings_unpinch_title, generalSettings.unPinch, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        launcherSettings.setUnPinchGesture(which);
+                        return true;
+                    }
+                });
                 break;
             case "swipeDown":
-                DialogUtils.startSwipeDownPicker(this);
+                DialogUtils.startGesturePicker(this,R.string.settings_swipe_down_title, generalSettings.swipeDown, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        launcherSettings.setSwipeDownGesture(which);
+                        return true;
+                    }
+                });
                 break;
             case "swipeUp":
-                DialogUtils.startSwipeUpPicker(this);
+                DialogUtils.startGesturePicker(this,R.string.settings_swipe_up_title, generalSettings.swipeUp, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        launcherSettings.setSwipeUpGesture(which);
+                        return true;
+                    }
+                });
                 break;
             case "iconHide":
                 Intent intent = new Intent(SettingsActivity.this, HideAppsActivity.class);

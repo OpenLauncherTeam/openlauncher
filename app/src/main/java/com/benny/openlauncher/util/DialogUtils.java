@@ -50,82 +50,13 @@ public class DialogUtils {
                 }).show();
     }
 
-    public static void startSingleClickPicker(final Context context) {
+    public static void startGesturePicker(final Context context,int titleId,int selected, MaterialDialog.ListCallbackSingleChoice onSingleChoise) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_single_click_title))
+        builder.title(context.getString(titleId))
+                .negativeText(R.string.cancel)
                 .items(R.array.gestureEntries)
-                .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.singleClick, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).setSingleClickGesture(position);
-                        return true;
-                    }
-                }).show();
-    }
-
-    public static void startDoubleClickPicker(final Context context) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_double_click_title))
-                .items(R.array.gestureEntries)
-                .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.doubleClick, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).setDoubleClickGesture(position);
-                        return true;
-                    }
-                }).show();
-    }
-
-    public static void startPinchPicker(final Context context) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_pinch_title))
-                .items(R.array.gestureEntries)
-                .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.pinch, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).setPinchGesture(position);
-                        return true;
-                    }
-                }).show();
-    }
-
-    public static void startUnpinchPicker(final Context context) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_unpinch_title))
-                .items(R.array.gestureEntries)
-                .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.unPinch, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).setUnPinchGesture(position);
-                        return true;
-                    }
-                }).show();
-    }
-
-    public static void startSwipeDownPicker(final Context context) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_swipe_down_title))
-                .items(R.array.gestureEntries)
-                .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.swipeDown, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).setSwipeDownGesture(position);
-                        return true;
-                    }
-                }).show();
-    }
-
-    public static void startSwipeUpPicker(final Context context) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_swipe_up_title))
-                .items(R.array.gestureEntries)
-                .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.swipeUp, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).setSwipeUpGesture(position);
-                        return true;
-                    }
-                }).show();
+                .itemsCallbackSingleChoice(selected,onSingleChoise)
+                .show();
     }
 
     public static void backupDialog(final Context context) {
