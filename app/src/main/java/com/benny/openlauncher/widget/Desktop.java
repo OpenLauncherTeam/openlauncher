@@ -77,7 +77,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             pageCount = 1;
         }
 
-        setAdapter(new DesktopAdapter(this));
+//        setAdapter(new DesktopAdapter(this));
         setOnDragListener(this);
         setCurrentItem(LauncherSettings.getInstance(c).generalSettings.desktopHomePage);
     }
@@ -110,6 +110,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     public void initDesktopItem(Home home) {
+        setAdapter(new DesktopAdapter(this));
+        if (pageIndicator != null)
+            pageIndicator.setViewPager(this);
         this.home = home;
         int column = LauncherSettings.getInstance(getContext()).generalSettings.desktopGridX;
         int row = LauncherSettings.getInstance(getContext()).generalSettings.desktopGridY;
@@ -149,6 +152,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         final int previousPage = getCurrentItem();
         ((DesktopAdapter) getAdapter()).addPageLeft();
+        setCurrentItem(previousPage + 1,false);
         setCurrentItem(previousPage - 1);
 
         for (CellContainer cellContainer : pages) {
@@ -821,6 +825,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public interface OnDesktopEditListener {
         void onDesktopEdit();
+
         void onFinishDesktopEdit();
     }
 }

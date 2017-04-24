@@ -184,10 +184,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        CustomActivityOnCrash.setShowErrorDetails(true);
-        CustomActivityOnCrash.setEnableAppRestart(false);
-        CustomActivityOnCrash.setDefaultErrorActivityDrawable(R.drawable.rip);
-        CustomActivityOnCrash.install(this);
+//        CustomActivityOnCrash.setShowErrorDetails(true);
+//        CustomActivityOnCrash.setEnableAppRestart(false);
+//        CustomActivityOnCrash.setDefaultErrorActivityDrawable(R.drawable.rip);
+//        CustomActivityOnCrash.install(this);
 
         resources = getResources();
 
@@ -319,7 +319,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         initDesktopEditViews();
 
-        desktopIndicator.setViewPager(desktop);
+
         desktop.setPageIndicator(desktopIndicator);
 
         initDock();

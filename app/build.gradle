@@ -87,7 +87,6 @@ dependencies {
     compile 'com.github.chyrta:AndroidOnboarder:0.6'
     compile 'cat.ereza:customactivityoncrash:1.5.0'
 
-
     // Tools
     compile 'com.jakewharton:butterknife:8.0.1'
     compile 'com.google.code.gson:gson:2.8.0'

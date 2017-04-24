@@ -329,10 +329,16 @@ public class AppItemView extends View implements Drawable.Callback {
                     Intent i = new Intent();
                     i.putExtra("mDragData", item);
                     ClipData data = ClipData.newIntent("mDragIntent", i);
-                    v.startDrag(data, new GoodDragShadowBuilder(v), new DragAction(action), 0);
-                    if (eventAction != null) {
-                        eventAction.afterDrag(v);
+
+                    try {
+                        v.startDrag(data, new GoodDragShadowBuilder(v), new DragAction(action), 0);
+                        if (eventAction != null) {
+                            eventAction.afterDrag(v);
+                        }
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
                     }
+
                     return true;
                 }
             });
@@ -341,6 +347,7 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public interface LongPressCallBack {
             boolean readyForDrag(View view);
+
             void afterDrag(View view);
         }
 

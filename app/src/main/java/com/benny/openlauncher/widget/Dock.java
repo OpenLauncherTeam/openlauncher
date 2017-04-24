@@ -40,19 +40,21 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     public void init() {
         if (isInEditMode()) return;
 
-        if (LauncherSettings.getInstance(getContext()).generalSettings != null)
-            setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.dockGridX, 1);
+//        if (LauncherSettings.getInstance(getContext()).generalSettings != null)
+//            setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.dockGridX, 1);
         setOnDragListener(this);
 
         super.init();
     }
 
     public void initDockItem(Home home) {
+        setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.dockGridX, 1);
+
         this.home = home;
         removeAllViews();
         int column = LauncherSettings.getInstance(getContext()).generalSettings.dockGridX;
         for (Item item : LauncherSettings.getInstance(getContext()).dockData) {
-            if (item.x < column)
+            if (item.x < column && item.y == 0)
                 addItemToPage(item, 0);
         }
     }
