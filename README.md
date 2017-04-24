@@ -22,7 +22,7 @@ We will be happy if you want to be a part of this game.
 
 You can support us, buy us some coffee .
 
-[BennyKok](https://www.paypal.me/BennyKok) | [gsantner](https://gsantner.github.io/#donate)
+[BennyKok](https://www.paypal.me/BennyKok) | [Gsantner](https://gsantner.github.io/#donate)
 
 # Contributors
 * [TeamBrainStorm](https://github.com/TeamBrainStorm) very supportive when the project first started.
