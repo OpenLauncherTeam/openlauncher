@@ -22,7 +22,7 @@
         android:id="@+id/setashomepage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/ic_star_black_36dp"
+        android:drawableTop="@drawable/ic_star_yellow_36dp"
         android:fontFamily="sans-serif-condensed"
         android:padding="5dp"
         android:text="@string/set_as_home"
@@ -45,7 +45,7 @@
         android:drawableTop="@drawable/ic_launch_black_24dp"
         android:fontFamily="sans-serif-condensed"
         android:padding="5dp"
-        android:text="Action"
+        android:text="@string/action"
         android:textColor="?android:textColorPrimaryInverse" />
 
     <TextView
@@ -55,7 +55,7 @@
         android:drawableTop="@drawable/ic_settings_launcher_36dp"
         android:fontFamily="sans-serif-condensed"
         android:padding="5dp"
-        android:text="Settings"
+        android:text="@string/settings"
         android:textColor="?android:textColorPrimaryInverse" />
 
 </LinearLayout>

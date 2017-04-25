@@ -47,6 +47,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 import static android.content.Context.ACTIVITY_SERVICE;
@@ -341,12 +342,15 @@ public class Tool {
     public static void startApp(Context c, AppManager.App app) {
         if (app.packageName.equals("com.benny.openlauncher")) {
             LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, c);
+            Home.consumeNextResume = true;
         } else {
             try {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setClassName(app.packageName, app.className);
                 c.startActivity(intent);
+
+                Home.consumeNextResume = true;
             } catch (Exception e) {
                 Tool.toast(c, R.string.toast_appuninstalled);
             }

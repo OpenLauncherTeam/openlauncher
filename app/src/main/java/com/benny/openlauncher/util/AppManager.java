@@ -120,7 +120,7 @@ public class AppManager {
                 .title((activity.getString(R.string.settings_iconPack_title)))
                 .build();
 
-        fastItemAdapter.add(new IconLabelItem(activity.getResources().getDrawable(R.drawable.ic_launcher), "Default", new View.OnClickListener() {
+        fastItemAdapter.add(new IconLabelItem(activity,activity.getResources().getDrawable(R.drawable.ic_launcher), "Default", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recreateAfterGettingApps = true;
@@ -132,7 +132,7 @@ public class AppManager {
 
         for (int i = 0; i < resolveInfos.size(); i++) {
             final int mI = i;
-            fastItemAdapter.add(new IconLabelItem(resolveInfos.get(i).loadIcon(packageManager), resolveInfos.get(i).loadLabel(packageManager).toString(), new View.OnClickListener() {
+            fastItemAdapter.add(new IconLabelItem(activity,resolveInfos.get(i).loadIcon(packageManager), resolveInfos.get(i).loadLabel(packageManager).toString(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {

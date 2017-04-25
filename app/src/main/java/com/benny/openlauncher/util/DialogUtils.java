@@ -29,6 +29,13 @@ public class DialogUtils {
                 }).show();
     }
 
+    public static void desktopActionPicker(final Context context, MaterialDialog.ListCallbackSingleChoice callback) {
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        builder.title("Desktop Action")
+                .items(R.array.desktopActionEntries)
+                .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.desktopHomePage, callback).show();
+    }
+
     public static void appDrawerStylePicker(final Context context) {
         final String[] items = new String[AppDrawerController.DrawerMode.values().length];
         int enabled = 0;
@@ -50,12 +57,12 @@ public class DialogUtils {
                 }).show();
     }
 
-    public static void startGesturePicker(final Context context,int titleId,int selected, MaterialDialog.ListCallbackSingleChoice onSingleChoise) {
+    public static void startGesturePicker(final Context context, int titleId, int selected, MaterialDialog.ListCallbackSingleChoice onSingleChoise) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(context.getString(titleId))
                 .negativeText(R.string.cancel)
                 .items(R.array.gestureEntries)
-                .itemsCallbackSingleChoice(selected,onSingleChoise)
+                .itemsCallbackSingleChoice(selected, onSingleChoise)
                 .show();
     }
 

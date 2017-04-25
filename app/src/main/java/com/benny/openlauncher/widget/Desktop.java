@@ -129,10 +129,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     public void addPageRight() {
-        addPageRight(false);
-    }
-
-    public void addPageRight(boolean hideGrid) {
         LauncherSettings.getInstance(getContext()).desktopData.add(new ArrayList<Item>());
         pageCount++;
 

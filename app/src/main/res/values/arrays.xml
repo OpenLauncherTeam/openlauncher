@@ -4,6 +4,7 @@
         <item>None</item>
         <item>Open App Drawer</item>
     </string-array>
+
     <string-array name="gestureEntries">
         <item>None</item>
         <item>Minibar Settings</item>
@@ -15,6 +16,7 @@
         <item>Volume Dialog</item>
         <item>Open App Drawer</item>
     </string-array>
+
     <integer-array name="gestureValues" translatable="false">
         <item>0</item>
         <item>1</item>
@@ -26,8 +28,13 @@
         <item>7</item>
         <item>8</item>
     </integer-array>
+
     <string-array name="desktopStyleEntries">
         <item>Normal</item>
         <item>Show All Apps (Experimental)</item>
+    </string-array>
+
+    <string-array name="desktopActionEntries">
+        <item>App Drawer</item>
     </string-array>
 </resources>

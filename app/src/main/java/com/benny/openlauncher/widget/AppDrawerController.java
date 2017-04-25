@@ -173,7 +173,7 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
             case Paged:
                 drawerViewPaged = (AppDrawer_Paged) layoutInflater.inflate(R.layout.view_pageddrawer, this, false);
                 addView(drawerViewPaged);
-                View indicator = layoutInflater.inflate(R.layout.view_drawerindicator, this, false);
+                PagerIndicator indicator = (PagerIndicator) layoutInflater.inflate(R.layout.view_drawerindicator, this, false);
                 addView(indicator);
                 break;
             case Vertical:

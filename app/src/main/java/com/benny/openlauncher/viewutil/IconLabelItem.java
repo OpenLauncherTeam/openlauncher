@@ -1,11 +1,17 @@
 package com.benny.openlauncher.viewutil;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
@@ -16,14 +22,43 @@ import java.util.List;
  */
 
 public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> {
-    Drawable icon;
-    String label;
-    View.OnClickListener listener;
+    private static final ViewHolderFactory<? extends IconLabelItem.ViewHolder> FACTORY = new ItemFactory();
+    private Drawable icon;
+    private String label;
+    private View.OnClickListener listener;
+    private int iconGravity;
+    private int textColor = Color.DKGRAY;
+    private int gravity = android.view.Gravity.CENTER_VERTICAL;
+    private float drawablePadding;
+    private Typeface typeface;
 
-    public IconLabelItem(Drawable icon, String label, View.OnClickListener listener) {
+    public IconLabelItem(Context context,Drawable icon, String label, @Nullable View.OnClickListener listener, int iconGravity) {
         this.label = label;
         this.icon = icon;
         this.listener = listener;
+        this.iconGravity = iconGravity;
+
+        this.drawablePadding = Tool.dp2px(drawablePadding, context);
+    }
+
+    public IconLabelItem(Context context,Drawable icon, String label, @Nullable View.OnClickListener listener) {
+        this(context,icon, label, listener, Gravity.START);
+    }
+
+    public IconLabelItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, int iconGravity, int textColor, int gravity, int drawablePadding,Typeface typeface) {
+        this(context,context.getResources().getDrawable(icon), context.getResources().getString(label), listener, iconGravity);
+        this.textColor = textColor;
+        this.gravity = gravity;
+        this.drawablePadding = Tool.dp2px(drawablePadding, context);
+        this.typeface = typeface;
+    }
+
+    public void setGravity(int gravity) {
+        this.gravity = gravity;
+    }
+
+    public void setTextColor(int textColor) {
+        this.textColor = textColor;
     }
 
     @Override
@@ -33,15 +68,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     @Override
     public int getLayoutRes() {
-        return R.layout.item_iconlabel;
-    }
-
-    private static final ViewHolderFactory<? extends IconLabelItem.ViewHolder> FACTORY = new ItemFactory();
-
-    static class ItemFactory implements ViewHolderFactory<IconLabelItem.ViewHolder> {
-        public IconLabelItem.ViewHolder create(View v) {
-            return new IconLabelItem.ViewHolder(v);
-        }
+        return R.layout.item_icon_label;
     }
 
     @Override
@@ -51,18 +78,42 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     @Override
     public void bindView(IconLabelItem.ViewHolder holder, List payloads) {
-        holder.ib.setText(label);
-        holder.ib.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-        holder.itemView.setOnClickListener(listener);
+        holder.textView.setText(label);
+        holder.textView.setGravity(gravity);
+        holder.textView.setTypeface(typeface);
+        holder.textView.setCompoundDrawablePadding((int) drawablePadding);
+        switch (iconGravity) {
+            case Gravity.START:
+                holder.textView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+                break;
+            case Gravity.TOP:
+                holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, icon, null, null);
+                break;
+            case Gravity.END:
+                holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
+                break;
+            case Gravity.BOTTOM:
+                holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, icon);
+                break;
+        }
+        holder.textView.setTextColor(textColor);
+        if (listener != null)
+            holder.itemView.setOnClickListener(listener);
         super.bindView(holder, payloads);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView ib;
+    private static class ItemFactory implements ViewHolderFactory<IconLabelItem.ViewHolder> {
+        public IconLabelItem.ViewHolder create(View v) {
+            return new IconLabelItem.ViewHolder(v);
+        }
+    }
 
-        public ViewHolder(View itemView) {
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView textView;
+
+        ViewHolder(View itemView) {
             super(itemView);
-            ib = (TextView) itemView;
+            textView = (TextView) itemView;
         }
     }
 }

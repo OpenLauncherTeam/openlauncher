@@ -189,6 +189,8 @@ public class LauncherSettings {
 
         // other
         public LauncherAction.Theme theme = LauncherAction.Theme.Light;
+
+        //This is a typo, should be firstLaunch...
         public boolean firstLauncher = true;
     }
 }

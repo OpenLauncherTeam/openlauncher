@@ -39,7 +39,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.util.DatabaseHelper;
+import com.benny.openlauncher.util.DialogUtils;
+import com.benny.openlauncher.widget.DesktopOptionView;
 import com.benny.openlauncher.widget.LauncherLoadingIcon;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
@@ -60,6 +63,7 @@ import com.benny.openlauncher.widget.DragOptionView;
 import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.MiniPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
+import com.benny.openlauncher.widget.SmoothViewPager;
 import com.benny.openlauncher.widget.SwipeListView;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
@@ -70,16 +74,17 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 
-public class Home extends Activity implements DrawerLayout.DrawerListener, Desktop.OnDesktopEditListener {
+public class Home extends Activity implements DrawerLayout.DrawerListener, Desktop.OnDesktopEditListener, DesktopOptionView.DesktopOptionViewListener {
     public static final int REQUEST_PICK_APPWIDGET = 0x6475;
     public static final int REQUEST_CREATE_APPWIDGET = 0x3648;
     public static final int REQUEST_PERMISSION_READ_CALL_LOG = 0x981294;
     public static final int REQUEST_PERMISSION_CALL = 0x981295;
     public static final int REQUEST_PERMISSION_STORAGE = 0x981296;
-
+    private static final IntentFilter timeChangesIntentFilter;
+    private static final IntentFilter appUpdateIntentFilter;
+    private static final IntentFilter shortcutIntentFilter;
     // static members, easier to access from any activity and class
     @Nullable
     public static Home launcher;
@@ -87,26 +92,44 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public static WidgetHost appWidgetHost;
     public static AppWidgetManager appWidgetManager;
     public static Resources resources;
-
     // used for the drag shadow builder
     public static int touchX = 0;
     public static int touchY = 0;
 
-    @BindView(R.id.removepage)
-    TextView removepage;
-    @BindView(R.id.setashomepage)
-    TextView setashomepage;
-    @BindView(R.id.addwidgetbtn)
-    TextView addwidgetbtn;
-    @BindView(R.id.addLauncherAction)
-    TextView addLauncherAction;
-    @BindView(R.id.openSettings)
-    TextView openSettings;
+    static {
+        timeChangesIntentFilter = new IntentFilter();
+        timeChangesIntentFilter.addAction(Intent.ACTION_TIME_TICK);
+        timeChangesIntentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
+        timeChangesIntentFilter.addAction(Intent.ACTION_TIME_CHANGED);
 
+        appUpdateIntentFilter = new IntentFilter();
+        appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
+        appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_CHANGED);
+        appUpdateIntentFilter.addDataScheme("package");
+
+        shortcutIntentFilter = new IntentFilter();
+        shortcutIntentFilter.addAction("com.android.launcher.action.INSTALL_SHORTCUT");
+    }
+
+    public static boolean consumeNextResume;
+
+    private final BroadcastReceiver shortcutReceiver = new ShortcutReceiver();
+    private final BroadcastReceiver appUpdateReceiver = new AppUpdateReceiver();
     @BindView(R.id.desktop)
     public Desktop desktop;
     @BindView(R.id.searchBarClock)
     public TextView searchBarClock;
+    private final BroadcastReceiver timeChangedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+
+            if (action.equals(Intent.ACTION_TIME_CHANGED) || action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
+                updateDesktopClock();
+            }
+        }
+    };
     @BindView(R.id.desktopIndicator)
     public PagerIndicator desktopIndicator;
     @BindView(R.id.desktopDock)
@@ -134,60 +157,27 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     @BindView(R.id.loadingSplash)
     public FrameLayout loadingSplash;
     @BindView(R.id.desktopEditOptionPanel)
-    public LinearLayout desktopEditOptionPanel;
+    public DesktopOptionView desktopEditOptionPanel;
     @BindView(R.id.searchBar)
     public FrameLayout searchBar;
-
+    private LauncherSettings.GeneralSettings generalSettings;
     // not necessary to access from elsewhere
     private View appSearchBar;
     private PagerIndicator appDrawerIndicator;
     private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
     private CallLogObserver callLogObserver;
-
     // region APP_DRAWER_ANIMATION
     private int cx, cy, rad;
-
-    private static final IntentFilter timeChangesIntentFilter;
-    private static final IntentFilter appUpdateIntentFilter;
-    private static final IntentFilter shortcutIntentFilter;
-    private final BroadcastReceiver shortcutReceiver = new ShortcutReceiver();
-    private final BroadcastReceiver appUpdateReceiver = new AppUpdateReceiver();
-    private final BroadcastReceiver timeChangedReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-
-            if (action.equals(Intent.ACTION_TIME_CHANGED) || action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-                updateDesktopClock();
-            }
-        }
-    };
-
-    static {
-        timeChangesIntentFilter = new IntentFilter();
-        timeChangesIntentFilter.addAction(Intent.ACTION_TIME_TICK);
-        timeChangesIntentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-        timeChangesIntentFilter.addAction(Intent.ACTION_TIME_CHANGED);
-
-        appUpdateIntentFilter = new IntentFilter();
-        appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
-        appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_REMOVED);
-        appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_CHANGED);
-        appUpdateIntentFilter.addDataScheme("package");
-
-        shortcutIntentFilter = new IntentFilter();
-        shortcutIntentFilter.addAction("com.android.launcher.action.INSTALL_SHORTCUT");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        CustomActivityOnCrash.setShowErrorDetails(true);
-//        CustomActivityOnCrash.setEnableAppRestart(false);
-//        CustomActivityOnCrash.setDefaultErrorActivityDrawable(R.drawable.rip);
-//        CustomActivityOnCrash.install(this);
+        CustomActivityOnCrash.setShowErrorDetails(true);
+        CustomActivityOnCrash.setEnableAppRestart(false);
+        CustomActivityOnCrash.setDefaultErrorActivityDrawable(R.drawable.rip);
+        CustomActivityOnCrash.install(this);
 
         resources = getResources();
 
@@ -211,7 +201,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             new AsyncTask<Void, Void, Boolean>() {
                 @Override
                 protected Boolean doInBackground(Void... voids) {
-                    return LauncherSettings.getInstance(Home.this).readSettings();
+                    boolean ok = LauncherSettings.getInstance(Home.this).readSettings();
+                    generalSettings = LauncherSettings.getInstance(Home.this).generalSettings;
+                    return ok;
                 }
 
                 @Override
@@ -317,8 +309,23 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         desktop.init(this);
         desktop.setDesktopEditListener(this);
 
-        initDesktopEditViews();
+        desktopEditOptionPanel.setDesktopOptionViewListener(this);
+        desktop.addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                desktopEditOptionPanel.setStarButtonColored(generalSettings.desktopHomePage == position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         desktop.setPageIndicator(desktopIndicator);
 
@@ -330,7 +337,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             @Override
             public void onStart() {
                 if (appSearchBar != null) {
-                    if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar)
+                    if (generalSettings.desktopSearchBar)
                         searchBar.animate().alpha(0).setDuration(100);
                     appSearchBar.setAlpha(0);
                     appSearchBar.setVisibility(View.VISIBLE);
@@ -344,7 +351,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onEnd() {
-                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+                if (generalSettings.desktopSearchBar) {
                     searchBar.setVisibility(View.INVISIBLE);
                 } else {
                     searchBar.setVisibility(View.GONE);
@@ -356,7 +363,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         }, new AppDrawerController.CallBack() {
             @Override
             public void onStart() {
-                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+                if (generalSettings.desktopSearchBar) {
                     searchBar.setVisibility(View.VISIBLE);
                 } else {
                     searchBar.setVisibility(View.GONE);
@@ -371,7 +378,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     appSearchBar.animate().setStartDelay(0).alpha(0).setDuration(100).withEndAction(new Runnable() {
                         @Override
                         public void run() {
-                            if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+                            if (generalSettings.desktopSearchBar) {
                                 searchBar.setVisibility(View.VISIBLE);
                             } else {
                                 searchBar.setVisibility(View.GONE);
@@ -383,7 +390,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onEnd() {
-                if (!LauncherSettings.getInstance(Home.this).generalSettings.drawerRememberPage) {
+                if (!generalSettings.drawerRememberPage) {
                     appDrawerController.scrollToStart();
                 }
                 appDrawerController.getDrawer().setVisibility(View.INVISIBLE);
@@ -397,20 +404,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         });
     }
 
-    private void initDesktopEditViews() {
-        removepage.setOnTouchListener(Tool.getBtnColorMaskController());
-        setashomepage.setOnTouchListener(Tool.getBtnColorMaskController());
-        addwidgetbtn.setOnTouchListener(Tool.getBtnColorMaskController());
-        addLauncherAction.setOnTouchListener(Tool.getBtnColorMaskController());
-        openSettings.setOnTouchListener(Tool.getBtnColorMaskController());
-    }
-
     private void initDock() {
-        int iconSize = LauncherSettings.getInstance(this).generalSettings.iconSize;
+        int iconSize = generalSettings.iconSize;
         desktopDock.init();
-        if (LauncherSettings.getInstance(this).generalSettings.dockShowLabel) {
+        if (generalSettings.dockShowLabel) {
             desktopDock.getLayoutParams().height = Tool.dp2px(36 + iconSize + 14, this);
-            if (LauncherSettings.getInstance(this).generalSettings.drawerMode == AppDrawerController.DrawerMode.Paged)
+            if (generalSettings.drawerMode == AppDrawerController.DrawerMode.Paged)
                 desktopDock.setPadding(desktopDock.getPaddingLeft(), desktopDock.getPaddingTop(), desktopDock.getPaddingRight(), desktopDock.getPaddingBottom() + Tool.dp2px(9, this));
         } else
             desktopDock.getLayoutParams().height = Tool.dp2px(36 + iconSize, this);
@@ -430,7 +429,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             @Override
             public void run() {
                 desktopDock.setVisibility(View.INVISIBLE);
-                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+                if (generalSettings.desktopSearchBar) {
                     searchBar.setVisibility(View.VISIBLE);
                 } else {
                     searchBar.setVisibility(View.GONE);
@@ -453,7 +452,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 desktopEditOptionPanel.setVisibility(View.INVISIBLE);
 
                 desktopDock.setVisibility(View.VISIBLE);
-                if (LauncherSettings.getInstance(Home.this).generalSettings.desktopSearchBar) {
+                if (generalSettings.desktopSearchBar) {
                     searchBar.setVisibility(View.VISIBLE);
                 } else {
                     searchBar.setVisibility(View.GONE);
@@ -471,52 +470,50 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         }
     }
 
-    @OnClick({R.id.removepage, R.id.setashomepage, R.id.addwidgetbtn, R.id.addLauncherAction, R.id.openSettings})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.removepage:
-                desktop.removeCurrentPage();
-                break;
-            case R.id.setashomepage:
-                LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage = desktop.getCurrentItem();
-                break;
-            case R.id.addwidgetbtn:
-                pickWidget(view);
-                break;
-            case R.id.addLauncherAction:
-                addLauncherAction(view);
-                break;
-            case R.id.openSettings:
-                LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, this);
-                break;
-        }
+    @Override
+    public void onRemovePage() {
+        desktop.removeCurrentPage();
     }
 
-    private void addLauncherAction(View view) {
-        PopupMenu pm = new PopupMenu(this, view);
-        pm.inflate(R.menu.launcher_action);
-        pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+    @Override
+    public void onSetPageAsHome() {
+        generalSettings.desktopHomePage = desktop.getCurrentItem();
+    }
+
+    @Override
+    public void onLaunchSettings() {
+        consumeNextResume = true;
+
+        LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, this);
+    }
+
+    @Override
+    public void onPickDesktopAction() {
+        DialogUtils.desktopActionPicker(this, new MaterialDialog.ListCallbackSingleChoice() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                return onOptionsItemSelected(item);
+            public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                switch (which) {
+                    case 0:
+                        Point pos = desktop.getCurrentPage().findFreeSpace();
+                        desktop.addItemToCell(Desktop.Item.newActionItem(8), pos.x, pos.y);
+                        break;
+                }
+                return true;
             }
         });
-        pm.show();
+    }
+
+    @Override
+    public void onPickWidget() {
+        pickWidget();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.appDrawer:
-                Point pos = desktop.getCurrentPage().findFreeSpace();
-                desktop.addItemToCell(Desktop.Item.newActionItem(8), pos.x, pos.y);
-                break;
-        }
         return super.onOptionsItemSelected(item);
     }
 
     private void initSettings() {
-        LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(Home.this).generalSettings;
         if (generalSettings.desktopSearchBar) {
             searchBar.setVisibility(View.VISIBLE);
         } else {
@@ -547,7 +544,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         drawerLayout.setDrawerLockMode(generalSettings.minBarEnable ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
-        if (!LauncherSettings.getInstance(this).generalSettings.showIndicator) {
+        if (!generalSettings.showIndicator) {
             desktopIndicator.setViewPager(null);
         }
     }
@@ -555,12 +552,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public void initMinBar() {
         final ArrayList<String> labels = new ArrayList<>();
         final ArrayList<Integer> icons = new ArrayList<>();
-        final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.miniBarArrangement;
+        final ArrayList<String> minBarArrangement = generalSettings.miniBarArrangement;
 
         if (minBarArrangement == null) {
-            LauncherSettings.getInstance(this).generalSettings.miniBarArrangement = new ArrayList<>();
+            generalSettings.miniBarArrangement = new ArrayList<>();
             for (LauncherAction.ActionItem item : LauncherAction.actionItems) {
-                LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("0" + item.label.toString());
+                generalSettings.miniBarArrangement.add("0" + item.label.toString());
                 labels.add(item.label.toString());
                 icons.add(item.icon);
             }
@@ -574,9 +571,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     }
                 }
             } else {
-                LauncherSettings.getInstance(this).generalSettings.miniBarArrangement = new ArrayList<>();
+                generalSettings.miniBarArrangement = new ArrayList<>();
                 for (LauncherAction.ActionItem item : LauncherAction.actionItems) {
-                    LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("0" + item.label.toString());
+                    generalSettings.miniBarArrangement.add("0" + item.label.toString());
                     labels.add(item.label.toString());
                     icons.add(item.icon);
                 }
@@ -648,7 +645,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     //endregion
 
     //region WIDGET
-    public void pickWidget(View view) {
+    public void pickWidget() {
+        consumeNextResume = true;
+
         int appWidgetId = appWidgetHost.allocateAppWidgetId();
         Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
         pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -753,12 +752,17 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     private void handleLauncherPause() {
+        if (consumeNextResume) {
+            consumeNextResume = false;
+            return;
+        }
+
         if (desktop != null)
             if (!desktop.inEditMode) {
                 if (appDrawerController.getDrawer() != null && appDrawerController.getDrawer().getVisibility() == View.VISIBLE)
                     closeAppDrawer();
-                else if (LauncherSettings.getInstance(Home.this).generalSettings != null && !groupPopup.isShowing)
-                    desktop.setCurrentItem(LauncherSettings.getInstance(Home.this).generalSettings.desktopHomePage);
+                else if (generalSettings != null && !groupPopup.isShowing)
+                    desktop.setCurrentItem(generalSettings.desktopHomePage);
             } else {
                 desktop.pages.get(desktop.getCurrentItem()).performClick();
             }

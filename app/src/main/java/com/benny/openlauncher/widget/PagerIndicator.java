@@ -65,7 +65,7 @@ public class PagerIndicator extends View implements SmoothViewPager.OnPageChange
             if (this.pager != null) {
                 this.pager.removeOnPageChangeListener(this);
                 this.pager = null;
-                getLayoutParams().width = 0;
+                //getLayoutParams().width = 0;
                 invalidate();
             }
             return;
@@ -74,14 +74,14 @@ public class PagerIndicator extends View implements SmoothViewPager.OnPageChange
         prePageCount = pager.getAdapter().getCount();
         pager.addOnPageChangeListener(this);
         Tool.print(pager.getAdapter().getCount());
-        getLayoutParams().width = Math.round(this.pager.getAdapter().getCount() * (dotSize + pad * 2));
+        //getLayoutParams().width = Math.round(this.pager.getAdapter().getCount() * (dotSize + pad * 2));
         invalidate();
     }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         if (prePageCount != pager.getAdapter().getCount()) {
-            getLayoutParams().width = Math.round(pager.getAdapter().getCount() * (dotSize + pad * 2));
+            //getLayoutParams().width = Math.round(pager.getAdapter().getCount() * (dotSize + pad * 2));
             prePageCount = pager.getAdapter().getCount();
         }
         invalidate();
@@ -98,8 +98,8 @@ public class PagerIndicator extends View implements SmoothViewPager.OnPageChange
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         dotSize = getHeight() - pad * 1.25f;
-        if (pager != null)
-            getLayoutParams().width = Math.round(this.pager.getAdapter().getCount() * (dotSize + pad * 2));
+        //if (pager != null)
+        //getLayoutParams().width = Math.round(this.pager.getAdapter().getCount() * (dotSize + pad * 2));
         super.onLayout(changed, left, top, right, bottom);
     }
 
@@ -107,7 +107,10 @@ public class PagerIndicator extends View implements SmoothViewPager.OnPageChange
     protected void onDraw(Canvas canvas) {
         dotSize = getHeight() - pad * 1.25f;
         if (pager != null) {
-            getLayoutParams().width = Math.round(pager.getAdapter().getCount() * (dotSize + pad * 2));
+            //getLayoutParams().width = Math.round(pager.getAdapter().getCount() * (dotSize + pad * 2));
+            float circlesWidth = pager.getAdapter().getCount() * (dotSize + pad * 2);
+            canvas.translate(getWidth() / 2 - circlesWidth / 2, 0);
+            getWidth();
             if (realPreviousPage != pager.getCurrentItem()) {
                 scaleFactor = 1;
                 realPreviousPage = pager.getCurrentItem();
