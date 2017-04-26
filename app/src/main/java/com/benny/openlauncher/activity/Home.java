@@ -35,7 +35,6 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -194,7 +193,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
         if (LauncherSettings.getInstance(Home.this).init) {
-            myScreen.removeView(loadingSplash);
+            generalSettings = LauncherSettings.getInstance(Home.this).generalSettings;
+            loadingSplash.animate().alpha(0).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    myScreen.removeView(loadingSplash);
+                }
+            });
             init();
         } else {
             loadingIcon.setLoading(true);
@@ -544,9 +549,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         drawerLayout.setDrawerLockMode(generalSettings.minBarEnable ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
-        if (!generalSettings.showIndicator) {
-            desktopIndicator.setViewPager(null);
-        }
+
     }
 
     public void initMinBar() {
@@ -593,14 +596,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
+                if (action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings)
+                    consumeNextResume = true;
                 LauncherAction.RunAction(action, Home.this);
                 if (action == LauncherAction.Action.EditMinBar || action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.DeviceSettings) {
-//                    (new Handler()).postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            drawerLayout.closeDrawers();
-//                        }
-//                    }, 500);
+
                 } else {
                     drawerLayout.closeDrawers();
                 }

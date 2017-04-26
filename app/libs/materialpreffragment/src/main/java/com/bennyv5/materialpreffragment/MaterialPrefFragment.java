@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.SwitchCompat;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -154,7 +155,7 @@ public class MaterialPrefFragment extends Fragment implements OnClickListener {
 
         @Override
         public View onCreateView(Context c, final MaterialPrefFragment fragment, final SharedPreferences sharedPrefs) {
-            Switch s = new Switch(c);
+            SwitchCompat s = new SwitchCompat(c);
             setStyle(s, fragment);
 
             s.setTag(fragment.TAG_ID, id);

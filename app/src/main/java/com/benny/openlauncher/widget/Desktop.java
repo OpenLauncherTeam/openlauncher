@@ -111,7 +111,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public void initDesktopItem(Home home) {
         setAdapter(new DesktopAdapter(this));
-        if (pageIndicator != null)
+        if (LauncherSettings.getInstance(getContext()).generalSettings.showIndicator && pageIndicator != null)
             pageIndicator.setViewPager(this);
         this.home = home;
         int column = LauncherSettings.getInstance(getContext()).generalSettings.desktopGridX;
