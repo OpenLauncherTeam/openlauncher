@@ -32,7 +32,7 @@ import java.util.List;
  * Created by BennyKok on 11/6/2016.
  */
 
-public class AppDrawer_Vertical extends CardView {
+public class AppDrawerVertical extends CardView {
 
     private int itemWidth;
     private int itemHeightPadding;
@@ -45,17 +45,17 @@ public class AppDrawer_Vertical extends CardView {
     private GridLayoutManager layoutManager;
     private RelativeLayout rl;
 
-    public AppDrawer_Vertical(Context context) {
+    public AppDrawerVertical(Context context) {
         super(context);
         preInit();
     }
 
-    public AppDrawer_Vertical(Context context, AttributeSet attrs) {
+    public AppDrawerVertical(Context context, AttributeSet attrs) {
         super(context, attrs);
         preInit();
     }
 
-    public AppDrawer_Vertical(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AppDrawerVertical(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         preInit();
     }
@@ -66,7 +66,7 @@ public class AppDrawer_Vertical extends CardView {
             public void onGlobalLayout() {
                 getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-                rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_griddrawerinner, AppDrawer_Vertical.this, false);
+                rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_griddrawerinner, AppDrawerVertical.this, false);
                 recyclerView = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
                 layoutManager = new GridLayoutManager(getContext(), LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX);
 
@@ -123,7 +123,7 @@ public class AppDrawer_Vertical extends CardView {
         recyclerView.setLayoutManager(layoutManager);
 
         if (AppManager.getInstance(getContext()).getApps().size() != 0) {
-            AppDrawer_Vertical.this.apps = AppManager.getInstance(getContext()).getApps();
+            AppDrawerVertical.this.apps = AppManager.getInstance(getContext()).getApps();
             ArrayList<AppItem> items = new ArrayList<>();
             for (int i = 0; i < apps.size(); i++) {
                 items.add(new AppItem(apps.get(i)));
@@ -133,7 +133,7 @@ public class AppDrawer_Vertical extends CardView {
         AppManager.getInstance(getContext()).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {
-                AppDrawer_Vertical.this.apps = apps;
+                AppDrawerVertical.this.apps = apps;
                 ArrayList<AppItem> items = new ArrayList<>();
                 for (int i = 0; i < apps.size(); i++) {
                     items.add(new AppItem(apps.get(i)));

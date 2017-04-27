@@ -84,6 +84,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     private static final IntentFilter timeChangesIntentFilter;
     private static final IntentFilter appUpdateIntentFilter;
     private static final IntentFilter shortcutIntentFilter;
+
     // static members, easier to access from any activity and class
     @Nullable
     public static Home launcher;
@@ -91,6 +92,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public static WidgetHost appWidgetHost;
     public static AppWidgetManager appWidgetManager;
     public static Resources resources;
+
     // used for the drag shadow builder
     public static int touchX = 0;
     public static int touchY = 0;
@@ -123,7 +125,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-
             if (action.equals(Intent.ACTION_TIME_CHANGED) || action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
                 updateDesktopClock();
             }
@@ -159,14 +160,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public DesktopOptionView desktopEditOptionPanel;
     @BindView(R.id.searchBar)
     public FrameLayout searchBar;
+
     private LauncherSettings.GeneralSettings generalSettings;
-    // not necessary to access from elsewhere
     private View appSearchBar;
     private PagerIndicator appDrawerIndicator;
     private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
     private CallLogObserver callLogObserver;
-    // region APP_DRAWER_ANIMATION
+
+    // region for the APP_DRAWER_ANIMATION
     private int cx, cy, rad;
 
     @Override
@@ -293,9 +295,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         System.gc();
     }
 
-    /**
-     * This should be only called to init the view at Activity start up
-     */
+    // called to initialize the view on creation
     private void initViews() {
         initMinBar();
         initQuickCenter();
@@ -543,7 +543,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     appDrawerController.getChildAt(1).setVisibility(View.GONE);
                 break;
             case Vertical:
-                //This were handled at the AppDrawer_Vertical class
+                // handled in the AppDrawerVertical class
                 break;
         }
 
@@ -596,12 +596,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
-                if (action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings)
+                if (action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings) {
                     consumeNextResume = true;
+                }
                 LauncherAction.RunAction(action, Home.this);
-                if (action == LauncherAction.Action.EditMinBar || action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.DeviceSettings) {
-
-                } else {
+                if (action != LauncherAction.Action.DeviceSettings && action != LauncherAction.Action.LauncherSettings) {
                     drawerLayout.closeDrawers();
                 }
             }
@@ -609,7 +608,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     private void initQuickCenter() {
-        ////////////////////////////////////Quick Contact///////////////////////////////////////////
         RecyclerView quickContact = (RecyclerView) findViewById(R.id.quickContactRv);
         quickContact.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         quickContactFA = new FastItemAdapter<>();
@@ -618,7 +616,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED) {
             callLogObserver = new CallLogObserver(new Handler());
             getApplicationContext().getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI, true, callLogObserver);
-            //First call get the call history for the adapter
+            // get the call history for the adapter
             callLogObserver.onChange(true);
         } else {
             ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.READ_CALL_LOG}, REQUEST_PERMISSION_READ_CALL_LOG);
@@ -628,10 +626,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == REQUEST_PERMISSION_READ_CALL_LOG && callLogObserver != null) {
-            //Read call log permitted
+            // run if read call log permitted
             callLogObserver = new CallLogObserver(new Handler());
             getApplicationContext().getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI, true, callLogObserver);
-            //First call get the call history for the adapter
+            // get the call history for the adapter
             callLogObserver.onChange(true);
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -642,9 +640,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         registerReceiver(timeChangedReceiver, timeChangesIntentFilter);
         registerReceiver(shortcutReceiver, shortcutIntentFilter);
     }
-    //endregion
 
-    //region WIDGET
     public void pickWidget() {
         consumeNextResume = true;
 
@@ -674,18 +670,14 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         Desktop.Item item = Desktop.Item.newWidgetItem(appWidgetId);
         item.spanX = 4;
         item.spanY = 1;
-        //Add the item to settings
         item.x = 0;
         item.y = 0;
         if (LauncherSettings.getInstance(this).desktopData.size() < desktop.getCurrentItem() + 1)
             LauncherSettings.getInstance(this).desktopData.add(desktop.getCurrentItem(), new ArrayList<Desktop.Item>());
         LauncherSettings.getInstance(this).desktopData.get(desktop.getCurrentItem()).add(item);
-        //end
         desktop.addItemToPage(item, desktop.getCurrentItem());
     }
-    //endregion
 
-    //region ACTIVITYLIFECYCLE
     @Override
     protected void onDestroy() {
         if (appWidgetHost != null)
@@ -771,11 +763,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             groupPopup.dismissPopup();
         }
     }
-    //endregion
 
-    /**
-     * Call this to open the app drawer with animation
-     */
+    // open the app drawer with animation
     public void openAppDrawer() {
         openAppDrawer(desktop, -1, -1);
     }
@@ -817,10 +806,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         appDrawerController.close(cx, cy, rad, finalRadius);
     }
 
-    /**
-     * When the search button of the search bar clicked
-     * However the search bar is removed out for now
-     */
+    // search button in the search bar is clicked
     public void onSearch(View view) {
 
         Intent i;
@@ -831,15 +817,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         } catch (Exception e) {
             i = new Intent(Intent.ACTION_WEB_SEARCH);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //i.putExtra(SearchManager.QUERY,"");
         }
         Home.this.startActivity(i);
     }
 
-    /**
-     * When the voice button of the search bar clicked
-     * However the search bar is removed out for now
-     */
+    // voice button in the search bar clicked
     public void onVoiceSearch(View view) {
         try {
             Intent i = new Intent(Intent.ACTION_MAIN);

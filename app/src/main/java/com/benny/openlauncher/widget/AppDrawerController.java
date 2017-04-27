@@ -31,8 +31,8 @@ import static com.benny.openlauncher.widget.AppDrawerController.DrawerMode.Verti
 public class AppDrawerController extends RevealFrameLayout implements TextWatcher {
 
     public EditText searchBar;
-    public AppDrawer_Paged drawerViewPaged;
-    public AppDrawer_Vertical drawerViewGrid;
+    public AppDrawerPaged drawerViewPaged;
+    public AppDrawerVertical drawerViewGrid;
     public DrawerMode drawerMode;
     private CallBack openCallBack, closeCallBack;
 
@@ -171,13 +171,13 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
         drawerMode = LauncherSettings.getInstance(getContext()).generalSettings.drawerMode;
         switch (drawerMode) {
             case Paged:
-                drawerViewPaged = (AppDrawer_Paged) layoutInflater.inflate(R.layout.view_pageddrawer, this, false);
+                drawerViewPaged = (AppDrawerPaged) layoutInflater.inflate(R.layout.view_pageddrawer, this, false);
                 addView(drawerViewPaged);
                 PagerIndicator indicator = (PagerIndicator) layoutInflater.inflate(R.layout.view_drawerindicator, this, false);
                 addView(indicator);
                 break;
             case Vertical:
-                drawerViewGrid = (AppDrawer_Vertical) layoutInflater.inflate(R.layout.view_griddrawer, this, false);
+                drawerViewGrid = (AppDrawerVertical) layoutInflater.inflate(R.layout.view_griddrawer, this, false);
                 if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar)
                     ((LayoutParams) drawerViewGrid.getLayoutParams()).topMargin += Tool.dp2px(60, getContext());
                 addView(drawerViewGrid);

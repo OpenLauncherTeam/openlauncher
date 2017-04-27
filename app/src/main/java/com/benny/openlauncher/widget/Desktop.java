@@ -77,7 +77,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             pageCount = 1;
         }
 
-//        setAdapter(new DesktopAdapter(this));
         setOnDragListener(this);
         setCurrentItem(LauncherSettings.getInstance(c).generalSettings.desktopHomePage);
     }
@@ -122,8 +121,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             List<Item> items = LauncherSettings.getInstance(getContext()).desktopData.get(i);
             for (int j = 0; j < items.size(); j++) {
                 Desktop.Item item = items.get(j);
-                if (item.x < column && item.y < row)
+                if (item.x < column && item.y < row) {
                     addItemToPage(item, i);
+                }
             }
         }
     }
@@ -175,8 +175,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             v.setScaleY(0.85f);
             v.animateBackgroundShow();
         }
-        setCurrentItem(previousPage);
 
+        setCurrentItem(previousPage);
         pageIndicator.invalidate();
     }
 
@@ -189,16 +189,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             case DragEvent.ACTION_DRAG_ENTERED:
                 Tool.print("ACTION_DRAG_ENTERED");
                 return true;
-
             case DragEvent.ACTION_DRAG_EXITED:
                 Tool.print("ACTION_DRAG_EXITED");
                 return true;
-
             case DragEvent.ACTION_DRAG_LOCATION:
                 Tool.print("ACTION_DRAG_LOCATION");
                 getCurrentPage().peekItemAndSwap(p2);
                 return true;
-
             case DragEvent.ACTION_DROP:
                 Tool.print("ACTION_DROP");
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
