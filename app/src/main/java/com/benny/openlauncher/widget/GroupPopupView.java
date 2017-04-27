@@ -29,13 +29,12 @@ import static com.benny.openlauncher.activity.Home.resources;
 public class GroupPopupView extends FrameLayout {
 
     public boolean isShowing = false;
+
     private CardView popupParent;
     private CellContainer cellContainer;
     private TextView title;
-
-    private boolean init = false;
-
     private PopupWindow.OnDismissListener dismissListener;
+    private boolean init = false;
 
     public GroupPopupView(Context context) {
         super(context);
@@ -148,6 +147,7 @@ public class GroupPopupView extends FrameLayout {
                             itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.ACTION_SHORTCUT), 0);
                         }
                         dismissPopup();
+                        updateItem(c, callBack, item, dropItem, (AppItemView) itemView);
                         return true;
                     }
                 });
@@ -265,7 +265,13 @@ public class GroupPopupView extends FrameLayout {
     private void removeItem(Context context, final DesktopCallBack callBack, final Desktop.Item currentItem, Desktop.Item dragOutItem, AppItemView currentView) {
         callBack.removeItemFromSettings(currentItem);
         currentItem.items.remove(dragOutItem);
+        db.setItem(currentItem);
 
+        currentView.setIcon(ItemViewFactory.getGroupIconDrawable(context, currentItem));
+        callBack.addItemToSettings(currentItem);
+    }
+
+    public void updateItem(Context context, final DesktopCallBack callBack, final Desktop.Item currentItem, Desktop.Item dragOutItem, AppItemView currentView) {
         if (currentItem.items.size() == 1) {
             final AppManager.App app = AppManager.getInstance(currentView.getContext()).findApp(currentItem.items.get(0).appIntent.getComponent().getPackageName(), currentItem.items.get(0).appIntent.getComponent().getClassName());
             if (app != null) {
@@ -277,14 +283,12 @@ public class GroupPopupView extends FrameLayout {
                 db.deleteItem(currentItem);
 
                 callBack.addItemToCell(item, item.x, item.y);
+                callBack.removeItem(currentView);
                 callBack.addItemToSettings(item);
             }
             if (Home.launcher != null) {
                 Home.launcher.desktop.requestLayout();
             }
-        } else {
-            currentView.setIcon(ItemViewFactory.getGroupIconDrawable(context, currentItem));
-            callBack.addItemToSettings(currentItem);
         }
     }
 
