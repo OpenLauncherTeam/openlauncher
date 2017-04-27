@@ -162,7 +162,14 @@ public class DragOptionView extends CardView {
                         Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
                         intent.setExtrasClassLoader(Desktop.Item.class.getClassLoader());
                         Desktop.Item item = intent.getParcelableExtra("mDragData");
+
+                        // remove all items from the database
                         Home.launcher.db.deleteItem(item);
+                        if (item.type == Desktop.Item.Type.GROUP) {
+                            for (Desktop.Item i : item.items) {
+                                Home.launcher.db.deleteItem(i);
+                            }
+                        }
 
                         home.desktop.consumeRevert();
                         home.desktopDock.consumeRevert();

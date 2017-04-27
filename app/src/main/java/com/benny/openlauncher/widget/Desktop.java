@@ -595,7 +595,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     home.db.updateItem(dropItem, 0);
 
                     // add the item to the database
-                    home.db.setItem(item);
+                    home.db.setItem(group);
 
                     callBack.addItemToSettings(group);
                     callBack.addItemToPage(group, page);

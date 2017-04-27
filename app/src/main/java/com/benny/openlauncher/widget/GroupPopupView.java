@@ -264,7 +264,10 @@ public class GroupPopupView extends FrameLayout {
 
     private void removeItem(Context context, final DesktopCallBack callBack, final Desktop.Item currentItem, Desktop.Item dragOutItem, AppItemView currentView) {
         callBack.removeItemFromSettings(currentItem);
+
         currentItem.items.remove(dragOutItem);
+
+        db.updateItem(dragOutItem, 1);
         db.setItem(currentItem);
 
         currentView.setIcon(ItemViewFactory.getGroupIconDrawable(context, currentItem));
@@ -282,8 +285,8 @@ public class GroupPopupView extends FrameLayout {
                 db.updateItem(item, 1);
                 db.deleteItem(currentItem);
 
-                callBack.addItemToCell(item, item.x, item.y);
                 callBack.removeItem(currentView);
+                callBack.addItemToCell(item, item.x, item.y);
                 callBack.addItemToSettings(item);
             }
             if (Home.launcher != null) {

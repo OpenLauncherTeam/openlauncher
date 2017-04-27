@@ -182,9 +182,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
         Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
         if (cursor.getCount() == 0) {
-            createItem(item, 0, 0, 1);
+            createItem(item, -1, -1, 1);
         } else if (cursor.getCount() == 1) {
-            updateItem(item, 0, 0, 1);
+            updateItem(item, -1, -1, 1);
         }
     }
 
