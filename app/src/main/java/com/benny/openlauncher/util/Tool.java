@@ -17,6 +17,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.IBinder;
 import android.provider.ContactsContract;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
@@ -29,6 +30,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,6 +89,50 @@ public class Tool {
             sb.append(o[i].toString()).append("  ");
         }
         Log.d("Hey", sb.toString());
+    }
+
+    public static void visibleViews(View... views) {
+        for (View view : views) {
+            view.setVisibility(View.VISIBLE);
+            view.animate().alpha(1).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator());
+        }
+    }
+
+    public static void visibleViews(long duration, View... views) {
+        for (View view : views) {
+            view.setVisibility(View.VISIBLE);
+            view.animate().alpha(1).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator());
+        }
+    }
+
+    public static void invisibleViews(View... views) {
+        for (final View view : views) {
+            view.animate().alpha(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    view.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
+    }
+
+    public static void invisibleViews(long duration, View... views) {
+        for (final View view : views) {
+            view.animate().alpha(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    view.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
+    }
+
+    public static void hideKeyboard(Context context, IBinder windowToken) {
+        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(windowToken, InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    public static void showKeyboard(Context context, View view) {
+        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
     }
 
     public static String[] split(String string, String delem) {
@@ -320,6 +366,8 @@ public class Tool {
         }
     }
 
+    @Deprecated
+    //Not getting the right value on all device
     public static int getNavBarHeight(Context context) {
         Resources resources = context.getResources();
         if (!hasNavBar(context)) return 0;
@@ -467,34 +515,6 @@ public class Tool {
         return "<font color='" + String.format("#%06X", 0xFFFFFF & color) + "'>" + str + "</font>";
     }
 
-    public static class DialogHelper {
-        public static MaterialDialog.Builder promptInputText(String title, String defaultText, Context c, final OnTextResultListener listener) {
-            MaterialDialog.Builder b = new MaterialDialog.Builder(c);
-            b.title(title);
-            b.input(null, defaultText, new MaterialDialog.InputCallback() {
-                @Override
-                public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                    listener.hereIsTheText(input.toString());
-                }
-            });
-            b.positiveText(R.string.ok);
-            b.negativeText(R.string.cancel);
-            return b;
-        }
-
-        public interface OnTextResultListener {
-            void hereIsTheText(String str);
-        }
-
-        public static MaterialDialog.Builder alert(Context context, String title, String msg) {
-            MaterialDialog.Builder b = new MaterialDialog.Builder(context);
-            b.title(title);
-            b.content(msg);
-            b.positiveText(R.string.ok);
-            return b;
-        }
-    }
-
     public static void createScaleInScaleOutAnim(final View view, final Runnable endAction) {
         view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(80).setInterpolator(new AccelerateDecelerateInterpolator());
         new Handler().postDelayed(new Runnable() {
@@ -545,6 +565,34 @@ public class Tool {
             } catch (URISyntaxException e) {
                 return new Intent();
             }
+        }
+    }
+
+    public static class DialogHelper {
+        public static MaterialDialog.Builder promptInputText(String title, String defaultText, Context c, final OnTextResultListener listener) {
+            MaterialDialog.Builder b = new MaterialDialog.Builder(c);
+            b.title(title);
+            b.input(null, defaultText, new MaterialDialog.InputCallback() {
+                @Override
+                public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                    listener.hereIsTheText(input.toString());
+                }
+            });
+            b.positiveText(R.string.ok);
+            b.negativeText(R.string.cancel);
+            return b;
+        }
+
+        public static MaterialDialog.Builder alert(Context context, String title, String msg) {
+            MaterialDialog.Builder b = new MaterialDialog.Builder(context);
+            b.title(title);
+            b.content(msg);
+            b.positiveText(R.string.ok);
+            return b;
+        }
+
+        public interface OnTextResultListener {
+            void hereIsTheText(String str);
         }
     }
 }

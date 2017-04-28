@@ -3,6 +3,7 @@ package com.benny.openlauncher.widget;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.widget.FrameLayout;
 
 import com.benny.openlauncher.R;
@@ -59,10 +61,19 @@ public class DesktopOptionView extends FrameLayout {
 
     public void setStarButtonColored(boolean colored) {
         if (colored) {
-            setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_yellow_36dp),null,null,null);
+            setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_yellow_36dp), null, null, null);
         } else {
-            setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_border_black_36dp),null,null,null);
+            setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_border_black_36dp), null, null, null);
         }
+    }
+
+    @Override
+    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            setPadding(0, insets.getSystemWindowInsetTop(), 0, insets.getSystemWindowInsetBottom());
+            return insets;
+        }
+        return insets;
     }
 
     private void init() {
@@ -73,8 +84,8 @@ public class DesktopOptionView extends FrameLayout {
         setAsHomeButton.setTypeface(typeface);
         setAsHomeButton.setGravity(Gravity.CENTER);
         setAsHomeButton.setTextColor(Color.WHITE);
-        setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_yellow_36dp),null,null,null);
-        setAsHomeButton.setCompoundDrawablePadding(Tool.dp2px(4,getContext()));
+        setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_yellow_36dp), null, null, null);
+        setAsHomeButton.setCompoundDrawablePadding(Tool.dp2px(4, getContext()));
         setAsHomeButton.setBackgroundColor(Color.TRANSPARENT);
         LayoutParams setAsHomeButtonLP = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         setAsHomeButtonLP.gravity = Gravity.CENTER_HORIZONTAL;
@@ -99,10 +110,10 @@ public class DesktopOptionView extends FrameLayout {
         addView(actionRecyclerView, actionRecyclerViewLP);
 
         List<IconLabelItem> items = new ArrayList<>();
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_clear_black_24dp, R.string.remove, null, Gravity.TOP,Color.WHITE,Gravity.CENTER,0, typeface));
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_dashboard_black_24dp, R.string.add_widget, null, Gravity.TOP,Color.WHITE,Gravity.CENTER,0,typeface));
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_launch_black_24dp, R.string.action, null, Gravity.TOP,Color.WHITE,Gravity.CENTER,0,typeface));
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_settings_launcher_36dp, R.string.settings, null, Gravity.TOP,Color.WHITE,Gravity.CENTER,0,typeface));
+        items.add(new IconLabelItem(getContext(), R.drawable.ic_clear_black_24dp, R.string.remove, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
+        items.add(new IconLabelItem(getContext(), R.drawable.ic_dashboard_black_24dp, R.string.add_widget, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
+        items.add(new IconLabelItem(getContext(), R.drawable.ic_launch_black_24dp, R.string.action, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
+        items.add(new IconLabelItem(getContext(), R.drawable.ic_settings_launcher_36dp, R.string.settings, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         actionAdapter.set(items);
 
         actionAdapter.withOnClickListener(new FastAdapter.OnClickListener<IconLabelItem>() {

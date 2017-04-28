@@ -34,6 +34,7 @@
     </android.support.v4.widget.DrawerLayout>
 
     <RelativeLayout
+        android:fitsSystemWindows="true"
         android:id="@+id/shortcutLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

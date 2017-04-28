@@ -24,28 +24,27 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.benny.openlauncher.util.DatabaseHelper;
-import com.benny.openlauncher.util.DialogUtils;
-import com.benny.openlauncher.widget.DesktopOptionView;
-import com.benny.openlauncher.widget.LauncherLoadingIcon;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppUpdateReceiver;
+import com.benny.openlauncher.util.DatabaseHelper;
+import com.benny.openlauncher.util.DialogUtils;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.ShortcutReceiver;
@@ -54,12 +53,15 @@ import com.benny.openlauncher.viewutil.DragNavigationControl;
 import com.benny.openlauncher.viewutil.IconListAdapter;
 import com.benny.openlauncher.viewutil.QuickCenterItem;
 import com.benny.openlauncher.viewutil.WidgetHost;
+import com.benny.openlauncher.widget.ASearchBar;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.widget.Desktop;
+import com.benny.openlauncher.widget.DesktopOptionView;
 import com.benny.openlauncher.widget.Dock;
 import com.benny.openlauncher.widget.DragOptionView;
 import com.benny.openlauncher.widget.GroupPopupView;
+import com.benny.openlauncher.widget.LauncherLoadingIcon;
 import com.benny.openlauncher.widget.MiniPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
 import com.benny.openlauncher.widget.SmoothViewPager;
@@ -96,6 +98,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     // used for the drag shadow builder
     public static int touchX = 0;
     public static int touchY = 0;
+    public static boolean consumeNextResume;
 
     static {
         timeChangesIntentFilter = new IntentFilter();
@@ -112,8 +115,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         shortcutIntentFilter = new IntentFilter();
         shortcutIntentFilter.addAction("com.android.launcher.action.INSTALL_SHORTCUT");
     }
-
-    public static boolean consumeNextResume;
 
     private final BroadcastReceiver shortcutReceiver = new ShortcutReceiver();
     private final BroadcastReceiver appUpdateReceiver = new AppUpdateReceiver();
@@ -158,8 +159,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public FrameLayout loadingSplash;
     @BindView(R.id.desktopEditOptionPanel)
     public DesktopOptionView desktopEditOptionPanel;
+    @BindView(R.id.searchClock)
+    public FrameLayout searchClock;
     @BindView(R.id.searchBar)
-    public FrameLayout searchBar;
+    public ASearchBar searchBar;
+    @BindView(R.id.background)
+    public View background;
 
     private LauncherSettings.GeneralSettings generalSettings;
     private View appSearchBar;
@@ -241,17 +246,14 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         initViews();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            int navBarHeight = Tool.getNavBarHeight(this);
             int statusBarHeight = Tool.getStatusBarHeight(this);
-
-            findViewById(R.id.shortcutLayout).setPadding(0, statusBarHeight, 0, navBarHeight);
-            searchBar.setPadding(0, statusBarHeight, 0, 0);
-
-            desktopDock.getLayoutParams().height += navBarHeight;
-            desktopDock.setPadding(desktopDock.getPaddingLeft(), desktopDock.getPaddingTop(), desktopDock.getPaddingRight(), desktopDock.getPaddingBottom() + navBarHeight);
-
-            appDrawerController.setPadding(0, statusBarHeight, 0, navBarHeight);
-            desktopEditOptionPanel.setPadding(0, 0, 0, navBarHeight);
+            searchClock.setPadding(0, statusBarHeight, 0, 0);
+            shortcutLayout.setPadding(0, statusBarHeight, 0, 0);
+            //desktopEditOptionPanel.setPadding(0, 0, 0, navBarHeight);
+            //searchBar.setPadding(0, statusBarHeight, 0, 0);
+            //desktopDock.getLayoutParams().height += navBarHeight;
+            //desktopDock.setPadding(desktopDock.getPaddingLeft(), desktopDock.getPaddingTop(), desktopDock.getPaddingRight(), desktopDock.getPaddingBottom() + navBarHeight);
+            //appDrawerController.setPadding(0, statusBarHeight, 0, navBarHeight);
         }
 
         registerBroadcastReceiver();
@@ -304,6 +306,27 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         updateDesktopClock();
 
+        searchBar.setCallBack(new ASearchBar.CallBack() {
+            @Override
+            public void onInternetSearch(String string) {
+
+            }
+
+            @Override
+            public void onExpand() {
+                Tool.invisibleViews(desktopIndicator, searchBarClock, desktopDock, desktop);
+                Tool.visibleViews(background);
+            }
+
+            @Override
+            public void onCollapse() {
+                Tool.visibleViews(desktopIndicator, searchBarClock, desktopDock, desktop);
+                Tool.invisibleViews(background);
+
+                Tool.hideKeyboard(Home.this, searchBar.searchBox.getWindowToken());
+            }
+        });
+
         appDrawerController.init();
         appSearchBar = findViewById(R.id.appSearchBar);
         appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
@@ -318,7 +341,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         desktop.addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -328,7 +350,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
 
@@ -336,14 +357,16 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         initDock();
 
-        dragOptionPanel.setAutoHideView(searchBar);
+        dragOptionPanel.setAutoHideView(searchClock, searchBar);
 
         appDrawerController.setCallBack(new AppDrawerController.CallBack() {
             @Override
             public void onStart() {
                 if (appSearchBar != null) {
-                    if (generalSettings.desktopSearchBar)
+                    if (generalSettings.desktopSearchBar) {
+                        searchClock.animate().alpha(0).setDuration(100);
                         searchBar.animate().alpha(0).setDuration(100);
+                    }
                     appSearchBar.setAlpha(0);
                     appSearchBar.setVisibility(View.VISIBLE);
                     appSearchBar.animate().setStartDelay(100).alpha(1).setDuration(100);
@@ -352,30 +375,23 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     appDrawerIndicator.setVisibility(View.VISIBLE);
                     appDrawerIndicator.animate().alpha(1).setDuration(100);
                 }
+                Tool.invisibleViews(desktopDock, desktopIndicator, desktop);
             }
 
             @Override
             public void onEnd() {
                 if (generalSettings.desktopSearchBar) {
+                    searchClock.setVisibility(View.INVISIBLE);
                     searchBar.setVisibility(View.INVISIBLE);
                 } else {
+                    searchClock.setVisibility(View.GONE);
                     searchBar.setVisibility(View.GONE);
                 }
-                desktopDock.setVisibility(View.INVISIBLE);
-                desktopIndicator.setVisibility(View.INVISIBLE);
-                desktop.setVisibility(View.INVISIBLE);
             }
         }, new AppDrawerController.CallBack() {
             @Override
             public void onStart() {
-                if (generalSettings.desktopSearchBar) {
-                    searchBar.setVisibility(View.VISIBLE);
-                } else {
-                    searchBar.setVisibility(View.GONE);
-                }
-                desktopDock.setVisibility(View.VISIBLE);
-                desktopIndicator.setVisibility(View.VISIBLE);
-                desktop.setVisibility(View.VISIBLE);
+                updateSearchBarVisibility();
 
                 if (appDrawerIndicator != null)
                     appDrawerIndicator.animate().alpha(0).setDuration(100);
@@ -383,14 +399,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     appSearchBar.animate().setStartDelay(0).alpha(0).setDuration(100).withEndAction(new Runnable() {
                         @Override
                         public void run() {
-                            if (generalSettings.desktopSearchBar) {
-                                searchBar.setVisibility(View.VISIBLE);
-                            } else {
-                                searchBar.setVisibility(View.GONE);
-                            }
+                            updateSearchBarVisibility();
                         }
                     });
                 }
+
+                Tool.visibleViews(desktopDock, desktopIndicator, desktop);
             }
 
             @Override
@@ -400,7 +414,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 }
                 appDrawerController.getDrawer().setVisibility(View.INVISIBLE);
                 if (!dragOptionPanel.dragging && appSearchBar != null) {
-                    searchBar.animate().alpha(1);
+                    searchClock.animate().alpha(1);
                 }
                 if (appSearchBar != null) {
                     appSearchBar.setVisibility(View.INVISIBLE);
@@ -413,57 +427,36 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         int iconSize = generalSettings.iconSize;
         desktopDock.init();
         if (generalSettings.dockShowLabel) {
-            desktopDock.getLayoutParams().height = Tool.dp2px(36 + iconSize + 14, this);
-            if (generalSettings.drawerMode == AppDrawerController.DrawerMode.Paged)
-                desktopDock.setPadding(desktopDock.getPaddingLeft(), desktopDock.getPaddingTop(), desktopDock.getPaddingRight(), desktopDock.getPaddingBottom() + Tool.dp2px(9, this));
+            desktopDock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;
+//            if (generalSettings.drawerMode == AppDrawerController.DrawerMode.Paged)
+//                desktopDock.setPadding(desktopDock.getPaddingLeft(), desktopDock.getPaddingTop(), desktopDock.getPaddingRight(), desktopDock.getPaddingBottom() + Tool.dp2px(10, this));
         } else
-            desktopDock.getLayoutParams().height = Tool.dp2px(36 + iconSize, this);
+            desktopDock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, this) + Dock.bottomInset;
     }
 
     @Override
     public void onDesktopEdit() {
-        desktopEditOptionPanel.setVisibility(View.VISIBLE);
-
         dragOptionPanel.setAutoHideView(null);
-        desktopIndicator.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-        desktopEditOptionPanel.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-        searchBar.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-        desktopDock.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-
-        desktopEditOptionPanel.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                desktopDock.setVisibility(View.INVISIBLE);
-                if (generalSettings.desktopSearchBar) {
-                    searchBar.setVisibility(View.VISIBLE);
-                } else {
-                    searchBar.setVisibility(View.GONE);
-                }
-            }
-        }, 100);
+        Tool.visibleViews(100, desktopEditOptionPanel);
+        Tool.invisibleViews(100, desktopIndicator, searchClock, searchBar, desktopDock);
     }
 
     @Override
     public void onFinishDesktopEdit() {
-        dragOptionPanel.setAutoHideView(searchBar);
-        desktopIndicator.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-        desktopEditOptionPanel.animate().alpha(0).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-        searchBar.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
-        desktopDock.animate().alpha(1).setDuration(100).setInterpolator(new AccelerateDecelerateInterpolator());
+        dragOptionPanel.setAutoHideView(searchClock, searchBar);
 
-        desktopEditOptionPanel.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                desktopEditOptionPanel.setVisibility(View.INVISIBLE);
+        Tool.visibleViews(100, desktopIndicator, searchClock, searchBar, desktopDock);
+        Tool.invisibleViews(100, desktopEditOptionPanel);
+    }
 
-                desktopDock.setVisibility(View.VISIBLE);
-                if (generalSettings.desktopSearchBar) {
-                    searchBar.setVisibility(View.VISIBLE);
-                } else {
-                    searchBar.setVisibility(View.GONE);
-                }
-            }
-        }, 100);
+    private void updateSearchBarVisibility() {
+        if (generalSettings.desktopSearchBar) {
+            searchClock.setVisibility(View.VISIBLE);
+            searchBar.setVisibility(View.VISIBLE);
+        } else {
+            searchClock.setVisibility(View.GONE);
+            searchBar.setVisibility(View.GONE);
+        }
     }
 
     private void updateDesktopClock() {
@@ -520,9 +513,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     private void initSettings() {
         if (generalSettings.desktopSearchBar) {
-            searchBar.setVisibility(View.VISIBLE);
+            searchClock.setVisibility(View.VISIBLE);
         } else {
-            searchBar.setVisibility(View.GONE);
+            searchClock.setVisibility(View.GONE);
         }
 
         if (generalSettings.fullscreen) {
@@ -539,17 +532,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         switch (generalSettings.drawerMode) {
             case Paged:
-                if (generalSettings.drawerShowIndicator)
+                if (!generalSettings.drawerShowIndicator) {
                     appDrawerController.getChildAt(1).setVisibility(View.GONE);
+                }
                 break;
             case Vertical:
                 // handled in the AppDrawerVertical class
                 break;
         }
-
         drawerLayout.setDrawerLockMode(generalSettings.minBarEnable ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-
-
     }
 
     public void initMinBar() {
@@ -808,7 +799,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     // search button in the search bar is clicked
     public void onSearch(View view) {
-
         Intent i;
         try {
             i = new Intent(Intent.ACTION_MAIN);

@@ -3,10 +3,12 @@ package com.benny.openlauncher.widget;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowInsets;
 import android.widget.Toast;
 
 import com.benny.openlauncher.R;
@@ -21,11 +23,10 @@ import static com.benny.openlauncher.widget.Desktop.Item;
 
 public class Dock extends CellContainer implements View.OnDragListener, DesktopCallBack {
 
+    public static int bottomInset;
     public View previousItemView;
     public Item previousItem;
-
     private float startPosX, startPosY;
-
     private Home home;
 
     public Dock(Context c) {
@@ -161,6 +162,17 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         previousItemView = v;
         previousItem = item;
         removeView(v);
+    }
+
+    @Override
+    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            bottomInset = insets.getSystemWindowInsetBottom();
+            setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), bottomInset + Tool.dp2px(10, getContext()));
+            //getLayoutParams().height += insets.getSystemWindowInsetBottom();
+            return insets;
+        }
+        return insets;
     }
 
     @Override

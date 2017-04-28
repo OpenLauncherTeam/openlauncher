@@ -5,12 +5,14 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowInsets;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -56,7 +58,7 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
         this.closeCallBack = closeCallBack;
     }
 
-    public View getDrawer(){
+    public View getDrawer() {
         return getChildAt(0);
     }
 
@@ -199,6 +201,15 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
         }
     }
 
+    @Override
+    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            setPadding(0, insets.getSystemWindowInsetTop(), 0, insets.getSystemWindowInsetBottom());
+            return insets;
+        }
+        return insets;
+    }
+
     public void reloadDrawerCardTheme() {
         switch (drawerMode) {
             case Paged:
@@ -265,6 +276,7 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
 
     public interface CallBack {
         void onStart();
+
         void onEnd();
     }
 }

@@ -221,10 +221,11 @@ public class AppItemView extends View implements Drawable.Callback {
             if (x < 0)
                 x = 0;
 
-            if (mTextBound.width() + horizontalPadding > getWidth())
+            if (mTextBound.width() + horizontalPadding > getWidth() && label.length() - 3 - charToTruncate > 0) {
                 canvas.drawText(label.substring(0, label.length() - 3 - charToTruncate) + "..", x + horizontalPadding, getHeight() - heightPadding, textPaint);
-            else
+            } else {
                 canvas.drawText(label, x, getHeight() - heightPadding, textPaint);
+            }
         }
 
         if (icon != null) {

@@ -23,7 +23,7 @@ import com.benny.openlauncher.util.Tool;
 
 public class DragOptionView extends CardView {
 
-    private View hideView;
+    private View[] hideViews;
     private LinearLayout horiIconList;
     public boolean dragging = false;
 
@@ -51,8 +51,8 @@ public class DragOptionView extends CardView {
         init();
     }
 
-    public void setAutoHideView(View v) {
-        hideView = v;
+    public void setAutoHideView(View... v) {
+        hideViews = v;
     }
 
     @Override
@@ -214,19 +214,30 @@ public class DragOptionView extends CardView {
             // onDragEvent wasn't called by ViewGroup.dispatchDragEvent
             // So we do it here.
             onDragEvent(ev);
-            super.dispatchDragEvent(ev);
+
+            //Crash on low api device emulator e.g. 4.1
+            try {
+                super.dispatchDragEvent(ev);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+
         }
         return r;
     }
 
     private void animShowView() {
-        if (hideView != null)
-            hideView.animate().alpha(0).setDuration(Math.round(animSpeed / 1.3f)).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+        if (hideViews != null) {
+            for (View view : hideViews) {
+                view.animate().alpha(0).setDuration(Math.round(animSpeed / 1.3f)).setInterpolator(new AccelerateDecelerateInterpolator());
+            }
+            postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     show();
                 }
-            });
+            }, Math.round(animSpeed / 1.3f));
+        }
     }
 
     @Override
@@ -309,8 +320,11 @@ public class DragOptionView extends CardView {
                         infoIcon.setVisibility(View.GONE);
                         deleteIcon.setVisibility(View.GONE);
 
-                        if (hideView != null)
-                            hideView.animate().alpha(1).setDuration(Math.round(animSpeed / 1.3f)).setInterpolator(new AccelerateDecelerateInterpolator());
+                        if (hideViews != null) {
+                            for (View view : hideViews) {
+                                view.animate().alpha(1).setDuration(Math.round(animSpeed / 1.3f)).setInterpolator(new AccelerateDecelerateInterpolator());
+                            }
+                        }
                     }
                 });
 
