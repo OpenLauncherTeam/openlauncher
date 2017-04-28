@@ -56,6 +56,7 @@ Search bar | Yes
 Iocn packs | Yes
 Widget | Yes
 Gesture | Yes
+AIO Search Bar | Coming
 
 Please go to the OpenLauncher [Wiki](https://github.com/Benny-Kok/OpenLauncher/wiki) for more information.
 
