@@ -333,7 +333,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onCollapse() {
-                Tool.visibleViews(desktopIndicator, searchBarClock, desktopDock, desktop);
+                Tool.visibleViews(desktopIndicator, desktop);
+                updateSearchBarVisibility();
                 Tool.invisibleViews(background);
 
                 searchBar.searchBox.clearFocus();
@@ -459,7 +460,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public void onFinishDesktopEdit() {
         dragOptionPanel.setAutoHideView(searchClock, searchBar);
 
-        Tool.visibleViews(100, desktopIndicator, searchClock, searchBar, desktopDock);
+        Tool.visibleViews(100, desktopIndicator, desktopDock);
+        updateSearchBarVisibility();
         Tool.invisibleViews(100, desktopEditOptionPanel);
     }
 
@@ -526,11 +528,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     private void initSettings() {
-        if (generalSettings.desktopSearchBar) {
-            searchClock.setVisibility(View.VISIBLE);
-        } else {
-            searchClock.setVisibility(View.GONE);
-        }
+        updateSearchBarVisibility();
 
         if (generalSettings.fullscreen) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
