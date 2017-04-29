@@ -121,7 +121,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             List<Item> items = desktopItems.get(i);
             for (int j = 0; j < items.size(); j++) {
                 Desktop.Item item = items.get(j);
-                if (item.x < column && item.y < row) {
+                if (((item.x + item.spanX) <= column) && ((item.y + item.spanY) <= row)) {
                     addItemToPage(item, i);
                 }
             }
