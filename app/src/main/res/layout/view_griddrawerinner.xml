@@ -20,6 +20,7 @@
         android:layout_alignParentEnd="false"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:fitsSystemWindows="true"
         app:msb_handleColour="@color/colorAccent"
         app:msb_lightOnTouch="false"
         app:msb_recyclerView="@id/vDrawerRV" />

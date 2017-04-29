@@ -30,9 +30,9 @@ import static com.benny.openlauncher.widget.AppDrawerController.DrawerMode.Verti
  * Created by BennyKok on 11/5/2016.
  */
 
-public class AppDrawerController extends RevealFrameLayout implements TextWatcher {
+public class AppDrawerController extends RevealFrameLayout {
 
-    public EditText searchBar;
+    //    public EditText searchBar;
     public AppDrawerPaged drawerViewPaged;
     public AppDrawerVertical drawerViewGrid;
     public DrawerMode drawerMode;
@@ -180,25 +180,25 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
                 break;
             case Vertical:
                 drawerViewGrid = (AppDrawerVertical) layoutInflater.inflate(R.layout.view_griddrawer, this, false);
-                if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar)
-                    ((LayoutParams) drawerViewGrid.getLayoutParams()).topMargin += Tool.dp2px(60, getContext());
+//                if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar)
+//                    ((LayoutParams) drawerViewGrid.getLayoutParams()).topMargin += Tool.dp2px(60, getContext());
                 addView(drawerViewGrid);
                 break;
         }
-        if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar && drawerMode == Vertical) {
-            CardView cv = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_searchbar_app, this, false);
-            addView(cv);
-            cv.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
-            if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerLight) {
-                ImageView searchIcon = (ImageView) cv.findViewById(R.id.searchIcon);
-                searchIcon.setImageResource(R.drawable.ic_search_light_24dp);
-            }
-            searchBar = (EditText) cv.findViewById(R.id.et);
-            searchBar.setHintTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
-            searchBar.setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
-            searchBar.clearFocus();
-            searchBar.addTextChangedListener(this);
-        }
+//        if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar && drawerMode == Vertical) {
+//            CardView cv = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_searchbar_app, this, false);
+//            addView(cv);
+//            cv.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
+//            if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerLight) {
+//                ImageView searchIcon = (ImageView) cv.findViewById(R.id.searchIcon);
+//                searchIcon.setImageResource(R.drawable.ic_search_light_24dp);
+//            }
+//            searchBar = (EditText) cv.findViewById(R.id.et);
+//            searchBar.setHintTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
+//            searchBar.setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
+//            searchBar.clearFocus();
+//            searchBar.addTextChangedListener(this);
+//        }
     }
 
     @Override
@@ -250,25 +250,25 @@ public class AppDrawerController extends RevealFrameLayout implements TextWatche
         }
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-    }
-
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        switch (drawerMode) {
-            case Paged:
-                break;
-            case Vertical:
-                if (drawerViewGrid.gridDrawerAdapter != null)
-                    drawerViewGrid.gridDrawerAdapter.filter(charSequence);
-                break;
-        }
-    }
-
-    @Override
-    public void afterTextChanged(Editable editable) {
-    }
+//    @Override
+//    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//    }
+//
+//    @Override
+//    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//        switch (drawerMode) {
+//            case Paged:
+//                break;
+//            case Vertical:
+//                if (drawerViewGrid.gridDrawerAdapter != null)
+//                    drawerViewGrid.gridDrawerAdapter.filter(charSequence);
+//                break;
+//        }
+//    }
+//
+//    @Override
+//    public void afterTextChanged(Editable editable) {
+//    }
 
     public enum DrawerMode {
         Paged, Vertical

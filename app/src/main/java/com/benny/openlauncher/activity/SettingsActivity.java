@@ -89,8 +89,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("vGridSize", (getString(R.string.settings_row)), generalSettings.drawerGridY, 1, 10)
                         ))
                         .add(new MaterialPrefFragment.TBPref("drawerCard", (getString(R.string.settings_drawerCard)), (getString(R.string.settings_drawerCard_summary)), generalSettings.drawerUseCard))
-                        .add(new MaterialPrefFragment.TBPref("drawerSearchBar", (getString(R.string.settings_drawerSearch)), (getString(R.string.settings_drawerSearch_summary)), generalSettings.drawerSearchBar))
-                        .add(new MaterialPrefFragment.TBPref("drawerLight", (getString(R.string.settings_drawerSearchIcon)), (getString(R.string.settings_drawerSearchIcon_summary)), generalSettings.drawerLight))
+                        //.add(new MaterialPrefFragment.TBPref("drawerSearchBar", (getString(R.string.settings_drawerSearch)), (getString(R.string.settings_drawerSearch_summary)), generalSettings.drawerSearchBar))
+                        //.add(new MaterialPrefFragment.TBPref("drawerLight", (getString(R.string.settings_drawerSearchIcon)), (getString(R.string.settings_drawerSearchIcon_summary)), generalSettings.drawerLight))
                         .add(new MaterialPrefFragment.TBPref("drawerRememberPage", (getString(R.string.settings_drawerPage)), (getString(R.string.settings_drawerPage_summary)), generalSettings.drawerRememberPage))
                         .add(new MaterialPrefFragment.TBPref("drawerShowIndicator", (getString(R.string.settings_drawerIndicator)), (getString(R.string.settings_drawerIndicator_summary)), generalSettings.drawerShowIndicator))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
@@ -209,14 +209,6 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "dockShowLabel":
                 generalSettings.dockShowLabel = (boolean) value;
-                prepareRestart();
-                break;
-            case "drawerSearchBar":
-                generalSettings.drawerSearchBar = (boolean) value;
-                prepareRestart();
-                break;
-            case "drawerLight":
-                generalSettings.drawerLight = (boolean) value;
                 prepareRestart();
                 break;
             case "hGridSizeDesktop":

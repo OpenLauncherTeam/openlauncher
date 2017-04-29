@@ -34,14 +34,14 @@ import java.util.List;
 
 public class AppDrawerVertical extends CardView {
 
-    private int itemWidth;
-    private int itemHeightPadding;
+    private static int itemWidth;
+    private static int itemHeightPadding;
 
     public RecyclerView recyclerView;
     public GridAppDrawerAdapter gridDrawerAdapter;
     public DragScrollBar scrollBar;
 
-    private List<AppManager.App> apps;
+    private static List<AppManager.App> apps;
     private GridLayoutManager layoutManager;
     private RelativeLayout rl;
 
@@ -109,7 +109,8 @@ public class AppDrawerVertical extends CardView {
 
         scrollBar = (DragScrollBar) rl.findViewById(R.id.dragScrollBar);
         scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
-
+        scrollBar.setClipToPadding(true);
+        scrollBar.setDraggableFromAnywhere(true);
 
         boolean mPortrait = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
         gridDrawerAdapter = new GridAppDrawerAdapter();
@@ -121,6 +122,7 @@ public class AppDrawerVertical extends CardView {
             setLandscapeValue();
         }
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setDrawingCacheEnabled(true);
 
         if (AppManager.getInstance(getContext()).getApps().size() != 0) {
             AppDrawerVertical.this.apps = AppManager.getInstance(getContext()).getApps();
@@ -145,9 +147,9 @@ public class AppDrawerVertical extends CardView {
         addView(rl);
     }
 
-    public class GridAppDrawerAdapter extends FastItemAdapter<AppItem> implements INameableAdapter {
+    public static class GridAppDrawerAdapter extends FastItemAdapter<AppItem> implements INameableAdapter {
 
-        public GridAppDrawerAdapter() {
+        GridAppDrawerAdapter() {
             withFilterPredicate(new IItemAdapter.Predicate<AppItem>() {
                 @Override
                 public boolean filter(AppItem item, CharSequence constraint) {
@@ -158,16 +160,16 @@ public class AppDrawerVertical extends CardView {
 
         @Override
         public Character getCharacterForElement(int element) {
-            if (apps != null)
+            if (apps != null && apps.get(element) != null && apps.get(element).label.length() > 0)
                 return apps.get(element).label.charAt(0);
             else return '#';
         }
     }
 
-    public class AppItem extends AbstractItem<AppItem, AppItem.ViewHolder> {
+    static class AppItem extends AbstractItem<AppItem, AppItem.ViewHolder> {
         public AppManager.App app;
 
-        public AppItem(AppManager.App app) {
+        AppItem(AppManager.App app) {
             this.app = app;
         }
 
@@ -215,10 +217,10 @@ public class AppDrawerVertical extends CardView {
             super.bindView(holder, payloads);
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
+        class ViewHolder extends RecyclerView.ViewHolder {
             AppItemView appItemView;
 
-            public ViewHolder(View itemView) {
+            ViewHolder(View itemView) {
                 super(itemView);
                 appItemView = (AppItemView) itemView;
                 appItemView.setTargetedWidth(itemWidth);

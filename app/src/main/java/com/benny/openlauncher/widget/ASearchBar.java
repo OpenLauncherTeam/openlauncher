@@ -66,6 +66,12 @@ public class ASearchBar extends FrameLayout {
         this.callBack = callBack;
     }
 
+    public boolean collapse() {
+        if (!expanded) return false;
+        searchButton.callOnClick();
+        return !expanded;
+    }
+
     private void init() {
         searchButton = new AppCompatImageView(getContext());
         final CircleColorable imageDrawable = new CircleColorable(getContext(), getResources().getDrawable(R.drawable.ic_search_light_24dp), Color.BLACK);
@@ -121,7 +127,7 @@ public class ASearchBar extends FrameLayout {
             }
         });
         LayoutParams sboxlp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        sboxlp.setMargins(Tool.dp2px(8, getContext()), Tool.dp2px(10, getContext()), 0, 0);
+        sboxlp.setMargins(Tool.dp2px(8, getContext()), Tool.dp2px(12, getContext()), 0, 0);
 
 
         searchItemRecycler = new RecyclerView(getContext());
@@ -172,7 +178,7 @@ public class ASearchBar extends FrameLayout {
             public void onGlobalLayout() {
                 searchBox.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-                sirlp.setMargins(0, Tool.dp2px(8, getContext()) + searchBox.getHeight(), 0, 0);
+                sirlp.setMargins(0, Tool.dp2px(12, getContext()) + searchBox.getHeight(), 0, 0);
             }
         });
     }

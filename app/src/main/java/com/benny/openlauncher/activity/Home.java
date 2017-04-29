@@ -324,6 +324,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             public void onExpand() {
                 Tool.invisibleViews(desktopIndicator, searchBarClock, desktopDock, desktop);
                 Tool.visibleViews(background);
+
+                searchBar.searchBox.setFocusable(true);
+                searchBar.searchBox.setFocusableInTouchMode(true);
+                searchBar.searchBox.requestFocus();
+                Tool.showKeyboard(Home.this, searchBar.searchBox);
             }
 
             @Override
@@ -331,7 +336,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 Tool.visibleViews(desktopIndicator, searchBarClock, desktopDock, desktop);
                 Tool.invisibleViews(background);
 
-                Tool.hideKeyboard(Home.this, searchBar.searchBox.getWindowToken());
+                searchBar.searchBox.clearFocus();
+                Tool.hideKeyboard(Home.this, searchBar.searchBox);
             }
         });
 
@@ -744,6 +750,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             consumeNextResume = false;
             return;
         }
+
+        searchBar.collapse();
 
         if (desktop != null)
             if (!desktop.inEditMode) {
