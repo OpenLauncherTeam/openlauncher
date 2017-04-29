@@ -646,7 +646,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     public void pickWidget() {
         consumeNextResume = true;
-
         int appWidgetId = appWidgetHost.allocateAppWidgetId();
         Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
         pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -707,8 +706,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 createWidget(data);
             }
         } else if (resultCode == RESULT_CANCELED && data != null) {
-            int appWidgetId =
-                    data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
+            int appWidgetId = data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
             if (appWidgetId != -1) {
                 appWidgetHost.deleteAppWidgetId(appWidgetId);
             }
