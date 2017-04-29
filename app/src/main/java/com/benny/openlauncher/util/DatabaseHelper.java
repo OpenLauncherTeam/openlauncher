@@ -178,14 +178,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void setItem(Item item) {
+    public void setItem(Item item, int page, int desktop) {
         String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
         Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
         if (cursor.getCount() == 0) {
-            createItem(item, -1, -1, 1);
+            createItem(item, page, desktop, 1);
         } else if (cursor.getCount() == 1) {
-            updateItem(item, -1, -1, 1);
+            updateItem(item, page, desktop, 1);
         }
+    }
+
+    // update the data
+    public void updateItem(Item item) {
+        ContentValues itemValues = new ContentValues();
+        String concat = "";
+        switch (item.type) {
+            case APP:
+                itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.appIntent));
+                break;
+            case GROUP:
+                for (Desktop.Item tmp : item.items) {
+                    concat += tmp.idValue + "#";
+                }
+                itemValues.put(COLUMN_DATA, concat);
+                break;
+            case ACTION:
+                itemValues.put(COLUMN_DATA, item.actionValue);
+                break;
+            case WIDGET:
+                concat = Integer.toString(item.widgetID) + "#"
+                        + Integer.toString(item.spanX) + "#"
+                        + Integer.toString(item.spanY);
+                itemValues.put(COLUMN_DATA, concat);
+                break;
+        }
+        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.idValue, null);
     }
 
     // update the state of an item

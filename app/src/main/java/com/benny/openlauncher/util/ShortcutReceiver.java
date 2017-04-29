@@ -64,10 +64,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
             item.x = perferedPos.x;
             item.y = perferedPos.y;
         }
-        if (LauncherSettings.getInstance(context).desktopData.size() < Home.launcher.desktop.getCurrentItem() + 1) {
-            LauncherSettings.getInstance(context).desktopData.add(Home.launcher.desktop.getCurrentItem(), new ArrayList<Desktop.Item>());
-        }
-        LauncherSettings.getInstance(context).desktopData.get(Home.launcher.desktop.getCurrentItem()).add(item);
+        Home.db.setItem(item, Home.launcher.desktop.getCurrentItem(), 0);
         Home.launcher.desktop.addItemToPage(item, Home.launcher.desktop.getCurrentItem());
     }
 }

@@ -16,8 +16,6 @@ import java.util.List;
 public class LauncherSettings {
     private static final String settingsFilename = "generalSettings.json";
     private static LauncherSettings ourInstance;
-    public List<List<Desktop.Item>> desktopData = new ArrayList<>();
-    public List<Desktop.Item> dockData = new ArrayList<>();
     public GeneralSettings generalSettings;
     public SharedPreferences pref;
     public Context context;
@@ -64,10 +62,6 @@ public class LauncherSettings {
                 noError = false;
             }
         }
-
-        readDesktopData();
-        readDockData();
-
         return noError;
     }
 
@@ -75,21 +69,9 @@ public class LauncherSettings {
         if (generalSettings == null) {
             return null;
         }
-
-        Home.launcher.db.setDesktop(desktopData);
-        Home.launcher.db.setDock(dockData);
-
         Gson gson = new Gson();
         Tool.writeToFile(settingsFilename, gson.toJson(generalSettings), context);
         return gson;
-    }
-
-    private void readDockData() {
-        dockData = Home.launcher.db.getDock();
-    }
-
-    private void readDesktopData() {
-        desktopData = Home.launcher.db.getDesktop();
     }
 
     public void setSingleClickGesture(int value) {
@@ -120,14 +102,16 @@ public class LauncherSettings {
         Desktop.DesktopMode mode = Desktop.DesktopMode.values()[position];
 
         // check icon cache for all items
+        List<List<Desktop.Item>> desktop = Home.launcher.db.getDesktop();
+        List<Desktop.Item> dock = Home.launcher.db.getDock();
         iconCacheIDs.clear();
-        for (int i = 0; i < desktopData.size(); i++) {
-            for (int l = 0; l < desktopData.get(i).size(); l++) {
-                checkIconCacheIDs(desktopData.get(i).get(l));
+        for (int i = 0; i < desktop.size(); i++) {
+            for (int l = 0; l < desktop.get(i).size(); l++) {
+                checkIconCacheIDs(desktop.get(i).get(l));
             }
         }
-        for (int i = 0; i < dockData.size(); i++) {
-            checkIconCacheIDs(dockData.get(i));
+        for (int i = 0; i < dock.size(); i++) {
+            checkIconCacheIDs(dock.get(i));
         }
 
         generalSettings.desktopMode = mode;
@@ -135,7 +119,7 @@ public class LauncherSettings {
 
         Tool.checkForUnusedIconAndDelete(context, iconCacheIDs);
 
-        Home.launcher.desktop.initShowAllApps(context);
+        Home.launcher.desktop.initDesktopShowAll(context);
     }
 
     // edit this carefully as changing the type of a field will cause a parsing error when the launcher starts

@@ -268,7 +268,7 @@ public class GroupPopupView extends FrameLayout {
         currentItem.items.remove(dragOutItem);
 
         db.updateItem(dragOutItem, 1);
-        db.setItem(currentItem);
+        db.updateItem(currentItem);
 
         currentView.setIcon(ItemViewFactory.getGroupIconDrawable(context, currentItem));
         callBack.addItemToSettings(currentItem);

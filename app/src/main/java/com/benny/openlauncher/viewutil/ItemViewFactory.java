@@ -255,10 +255,8 @@ public class ItemViewFactory {
         if (cellPositionToLayoutPrams == null) {
             Toast.makeText(Home.launcher.desktop.getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
         } else {
-            LauncherSettings.getInstance(Home.launcher.desktop.getContext()).desktopData.get(Home.launcher.desktop.getCurrentItem()).remove(item);
             item.x = cellPositionToLayoutPrams.x;
             item.y = cellPositionToLayoutPrams.y;
-            LauncherSettings.getInstance(Home.launcher.desktop.getContext()).desktopData.get(Home.launcher.desktop.getCurrentItem()).add(item);
             view.setLayoutParams(cellPositionToLayoutPrams);
             updateWidgetOption(item);
         }

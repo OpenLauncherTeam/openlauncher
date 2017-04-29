@@ -272,10 +272,14 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
                         // center the button
                         appDrawerBtnItem.x = 2;
-                        launcherSettings.dockData.add(appDrawerBtnItem);
+                        db.setItem(appDrawerBtnItem, 0, 0);
                     }
                 }
-                desktop.initDesktopItem(Home.this);
+                if (launcherSettings.generalSettings.desktopMode == Desktop.DesktopMode.Normal) {
+                    desktop.initDesktopNormal(Home.this);
+                } else {
+                    desktop.initDesktopShowAll(Home.this);
+                }
                 desktopDock.initDockItem(Home.this);
 
                 AppManager.getInstance(Home.this).removeAppUpdatedListener(this);
@@ -284,7 +288,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         AppManager.getInstance(this).addAppDeletedListener(new AppManager.AppDeletedListener() {
             @Override
             public void onAppDeleted(AppManager.App app) {
-                desktop.initDesktopItem(Home.this);
+                if (generalSettings.desktopMode == Desktop.DesktopMode.Normal) {
+                    desktop.initDesktopNormal(Home.this);
+                } else {
+                    desktop.initDesktopShowAll(Home.this);
+                }
                 desktopDock.initDockItem(Home.this);
             }
         });
@@ -663,9 +671,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         item.spanY = 1;
         item.x = 0;
         item.y = 0;
-        if (LauncherSettings.getInstance(this).desktopData.size() < desktop.getCurrentItem() + 1)
-            LauncherSettings.getInstance(this).desktopData.add(desktop.getCurrentItem(), new ArrayList<Desktop.Item>());
-        LauncherSettings.getInstance(this).desktopData.get(desktop.getCurrentItem()).add(item);
         desktop.addItemToPage(item, desktop.getCurrentItem());
     }
 
