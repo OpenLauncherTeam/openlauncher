@@ -299,22 +299,22 @@ public class CellContainer extends ViewGroup {
                 Rect cell = cells[x][y];
 
                 canvas.save();
-                canvas.rotate(45, cell.left, cell.top);
+                canvas.rotate(45, cell.left, cell.top + 3);
                 canvas.drawRect(cell.left - s, cell.top - s, cell.left + s, cell.top + s, mPaint);
                 canvas.restore();
 
                 canvas.save();
-                canvas.rotate(45, cell.left, cell.bottom);
+                canvas.rotate(45, cell.left, cell.bottom + 3);
                 canvas.drawRect(cell.left - s, cell.bottom - s, cell.left + s, cell.bottom + s, mPaint);
                 canvas.restore();
 
                 canvas.save();
-                canvas.rotate(45, cell.right, cell.top);
+                canvas.rotate(45, cell.right, cell.top + 3);
                 canvas.drawRect(cell.right - s, cell.top - s, cell.right + s, cell.top + s, mPaint);
                 canvas.restore();
 
                 canvas.save();
-                canvas.rotate(45, cell.right, cell.bottom);
+                canvas.rotate(45, cell.right, cell.bottom + 3);
                 canvas.drawRect(cell.right - s, cell.bottom - s, cell.right + s, cell.bottom + s, mPaint);
                 canvas.restore();
             }

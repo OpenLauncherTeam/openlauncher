@@ -169,13 +169,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             case "desktopSearchBar":
                 generalSettings.desktopSearchBar = (boolean) value;
                 if (Home.launcher != null) {
-                    if (!(boolean) value) {
-                        Home.launcher.searchClock.setVisibility(View.GONE);
-                        Home.launcher.searchBar.setVisibility(View.GONE);
-                    } else {
-                        Home.launcher.searchClock.setVisibility(View.VISIBLE);
-                        Home.launcher.searchBar.setVisibility(View.VISIBLE);
-                    }
+                    Home.launcher.updateSearchBarVisibility();
                 }
                 break;
             case "fullscreen":
@@ -283,7 +277,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 prepareRestart();
                 break;
         }
-
+        if (Home.launcher != null)
+            Home.launcher.generalSettings = generalSettings;
     }
 
     private void prepareRestart() {

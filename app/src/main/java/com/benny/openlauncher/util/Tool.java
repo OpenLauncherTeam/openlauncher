@@ -93,6 +93,7 @@ public class Tool {
 
     public static void visibleViews(View... views) {
         for (View view : views) {
+            if (view == null)continue;
             view.setVisibility(View.VISIBLE);
             view.animate().alpha(1).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator());
         }
@@ -100,6 +101,7 @@ public class Tool {
 
     public static void visibleViews(long duration, View... views) {
         for (View view : views) {
+            if (view == null)continue;
             view.setVisibility(View.VISIBLE);
             view.animate().alpha(1).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator());
         }
@@ -107,6 +109,7 @@ public class Tool {
 
     public static void invisibleViews(View... views) {
         for (final View view : views) {
+            if (view == null)continue;
             view.animate().alpha(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                 @Override
                 public void run() {
@@ -118,6 +121,7 @@ public class Tool {
 
     public static void invisibleViews(long duration, View... views) {
         for (final View view : views) {
+            if (view == null)continue;
             view.animate().alpha(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                 @Override
                 public void run() {

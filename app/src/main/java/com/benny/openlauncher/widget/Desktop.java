@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
@@ -46,6 +48,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     private float startPosY;
     private Home home;
     private PagerIndicator pageIndicator;
+
+    public static int topInsert;
 
     public Desktop(Context c, AttributeSet attr) {
         super(c, attr);
@@ -146,7 +150,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         final int previousPage = getCurrentItem();
         ((DesktopAdapter) getAdapter()).addPageLeft();
-        setCurrentItem(previousPage + 1,false);
+        setCurrentItem(previousPage + 1, false);
         setCurrentItem(previousPage - 1);
 
         for (CellContainer cellContainer : pages) {
@@ -157,7 +161,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public void removeCurrentPage() {
         if (pageCount == 1) return;
-        if (LauncherSettings.getInstance(getContext()).generalSettings.desktopMode == DesktopMode.ShowAllApps) return;
+        if (LauncherSettings.getInstance(getContext()).generalSettings.desktopMode == DesktopMode.ShowAllApps)
+            return;
         pageCount--;
 
         int previousPage = getCurrentItem();
@@ -284,9 +289,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     /**
      * Add an item to the specified position on the current page
+     *
      * @param item - the item to add
-     * @param x - x position in screen coordinates of the centre of the item
-     * @param y - y position in screen coordinates of the centre of the item
+     * @param x    - x position in screen coordinates of the centre of the item
+     * @param y    - y position in screen coordinates of the centre of the item
      * @return - true if the item was added, false if not enough space
      */
     @Override
@@ -528,8 +534,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 public boolean onLongClick(View view) {
                     scaleFactor = 0.85f;
                     for (CellContainer v : desktop.pages) {
-                        v.setPivotY(v.getHeight() / 2 - Tool.dp2px(50, desktop.getContext()));
-                        v.setPivotX(v.getWidth() / 2);
+                        //v.setPivotY(v.getHeight() / 2 - Tool.dp2px(50, desktop.getContext()));
+                        //v.setPivotX(v.getWidth() / 2);
 
                         v.blockTouch = true;
                         v.animateBackgroundShow();
@@ -545,6 +551,15 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
             return layout;
         }
+    }
+
+    @Override
+    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            topInsert = insets.getSystemWindowInsetTop();
+            return insets;
+        }
+        return insets;
     }
 
     public static boolean handleOnDropOver(Home home, Item dropItem, Item item, View itemView, ViewGroup parent, int page, int desktop, DesktopCallBack callBack) {

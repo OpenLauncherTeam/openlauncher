@@ -30,10 +30,8 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
@@ -166,7 +164,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     @BindView(R.id.background)
     public View background;
 
-    private LauncherSettings.GeneralSettings generalSettings;
+    public LauncherSettings.GeneralSettings generalSettings;
+    @BindView(R.id.left)
+    public View dragLeft;
+    @BindView(R.id.right)
+    public View dragRight;
     private View appSearchBar;
     private PagerIndicator appDrawerIndicator;
     private ViewGroup myScreen;
@@ -310,7 +312,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         initMinBar();
         initQuickCenter();
 
-        DragNavigationControl.init(this, findViewById(R.id.left), findViewById(R.id.right));
+        DragNavigationControl.init(this, dragLeft, dragRight);
 
         updateDesktopClock();
 
@@ -333,8 +335,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onCollapse() {
-                Tool.visibleViews(desktopIndicator, desktop);
-                updateSearchBarVisibility();
+                Tool.visibleViews(generalSettings.desktopSearchBar ? searchBarClock : null, desktopDock, desktopIndicator, desktop);
                 Tool.invisibleViews(background);
 
                 searchBar.searchBox.clearFocus();
@@ -453,7 +454,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public void onDesktopEdit() {
         dragOptionPanel.setAutoHideView(null);
         Tool.visibleViews(100, desktopEditOptionPanel);
-        Tool.invisibleViews(100, desktopIndicator, searchClock, searchBar, desktopDock);
+        Tool.invisibleViews(100, desktopIndicator,generalSettings.desktopSearchBar ? searchClock : null,generalSettings.desktopSearchBar ?  searchBar : null, desktopDock);
     }
 
     @Override
@@ -465,13 +466,23 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         Tool.invisibleViews(100, desktopEditOptionPanel);
     }
 
-    private void updateSearchBarVisibility() {
+    public void updateSearchBarVisibility() {
         if (generalSettings.desktopSearchBar) {
             searchClock.setVisibility(View.VISIBLE);
+            searchClock.setAlpha(1);
             searchBar.setVisibility(View.VISIBLE);
+            searchBar.setAlpha(1);
+
+            desktop.setPadding(0, 0, 0, 0);
+            ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = 0;
+            ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = 0;
         } else {
             searchClock.setVisibility(View.GONE);
             searchBar.setVisibility(View.GONE);
+
+            desktop.setPadding(0, Desktop.topInsert, 0, 0);
+            ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInsert;
+            ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = Desktop.topInsert;
         }
     }
 
