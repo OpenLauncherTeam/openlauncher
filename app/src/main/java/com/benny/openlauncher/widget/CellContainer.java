@@ -441,7 +441,20 @@ public class CellContainer extends ViewGroup {
         return null;
     }
 
+    /**
+     * Convert a position in screen coordinates for the centre of an object to a Point in cell
+     * coordinates representing the top left cell that the object must occupy for the centre to
+     * be as close as possible to the supplied position
+     * @param mX - X position of centre in screen coordinates
+     * @param mY - Y position of centre in screen coordinates
+     * @param xSpan - The width of the object in cells, must be >= 1
+     * @param ySpan - The height of the object in cells, must be >= 1
+     * @param checkAvailability - this parameter probably doesn't make any difference any more
+     * @return - a point representing the ideal x,y position or null
+     */
     public Point touchPosToCoordinate(int mX, int mY, int xSpan, int ySpan, boolean checkAvailability) {
+        mX = mX - (xSpan-1)*cellWidth/2;
+        mY = mY - (ySpan-1)*cellHeight/2;
         for (int x = 0; x < cellSpanH; x++) {
             for (int y = 0; y < cellSpanV; y++) {
                 Rect cell = cells[x][y];
