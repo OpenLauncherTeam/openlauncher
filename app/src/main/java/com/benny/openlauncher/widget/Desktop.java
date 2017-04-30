@@ -245,8 +245,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         Desktop.Item item = (Desktop.Item) args[0];
         View v = (View) args[1];
 
-        removeItemFromSettings(item);
-
         previousPage = getCurrentItem();
         previousItemView = v;
         previousItem = item;
@@ -332,14 +330,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
         WallpaperManager.getInstance(getContext()).setWallpaperOffsets(getWindowToken(), (position + offset) / (pageCount - 1), 0);
         super.onPageScrolled(position, offset, offsetPixels);
-    }
-
-    @Override
-    public void removeItemFromSettings(Item item) {
-    }
-
-    @Override
-    public void addItemToSettings(Item item) {
     }
 
     public class DesktopAdapter extends SmoothPagerAdapter {
@@ -559,7 +549,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             case APP:
             case SHORTCUT:
                 if (dropItem.type == Desktop.Item.Type.APP || dropItem.type == Desktop.Item.Type.SHORTCUT) {
-                    callBack.removeItemFromSettings(item);
                     parent.removeView(itemView);
 
                     // all of the code to create a new group item
@@ -577,7 +566,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     // add the item to the database
                     home.db.setItem(group, page, desktop);
 
-                    callBack.addItemToSettings(group);
                     callBack.addItemToPage(group, page);
 
                     home.desktop.consumeRevert();
@@ -587,7 +575,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 break;
             case GROUP:
                 if ((dropItem.type == Desktop.Item.Type.APP || dropItem.type == Desktop.Item.Type.SHORTCUT) && item.items.size() < GroupPopupView.GroupDef.maxItem) {
-                    callBack.removeItemFromSettings(item);
                     parent.removeView(itemView);
 
                     item.items.add(dropItem);
@@ -598,7 +585,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     // add the item to the database
                     home.db.setItem(item, page, desktop);
 
-                    callBack.addItemToSettings(item);
                     callBack.addItemToPage(item, page);
 
                     home.desktop.consumeRevert();

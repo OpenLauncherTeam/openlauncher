@@ -135,17 +135,17 @@ public class GroupPopupView extends FrameLayout {
                         removeItem(c, callBack, item, dropItem, (AppItemView) itemView);
 
                         itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                        Intent i = new Intent();
 
+                        // start the drag action
+                        Intent i = new Intent();
+                        i.putExtra("mDragData", dropItem);
+                        ClipData data = ClipData.newIntent("mDragIntent", i);
                         if (act.getStringExtra("shortCutIconID") == null) {
-                            i.putExtra("mDragData", Desktop.Item.newAppItem(AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName())));
-                            ClipData data = ClipData.newIntent("mDragIntent", i);
                             itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.ACTION_APP), 0);
                         } else {
-                            i.putExtra("mDragData", Desktop.Item.newShortcutItem(act));
-                            ClipData data = ClipData.newIntent("mDragIntent", i);
                             itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.ACTION_SHORTCUT), 0);
                         }
+
                         dismissPopup();
                         updateItem(c, callBack, item, dropItem, (AppItemView) itemView);
                         return true;
@@ -188,6 +188,7 @@ public class GroupPopupView extends FrameLayout {
                 cellContainer.addViewToGrid(view, x2, y2, 1, 1);
             }
         }
+
         title.setText(item.name);
         title.setOnClickListener(new OnClickListener() {
             @Override
@@ -195,12 +196,12 @@ public class GroupPopupView extends FrameLayout {
                 Tool.DialogHelper.promptInputText(resources.getString(R.string.toast_rename), item.name, getContext(), new Tool.DialogHelper.OnTextResultListener() {
                     @Override
                     public void hereIsTheText(String str) {
-                        if (str.isEmpty()) return;
-                        callBack.removeItemFromSettings(item);
-                        item.name = str;
-                        callBack.addItemToSettings(item);
+                        if (str.isEmpty()) {
+                            return;
+                        }
 
                         title.setText(str);
+                        item.name = str;
                     }
                 }).show();
             }
@@ -263,15 +264,12 @@ public class GroupPopupView extends FrameLayout {
     }
 
     private void removeItem(Context context, final DesktopCallBack callBack, final Desktop.Item currentItem, Desktop.Item dragOutItem, AppItemView currentView) {
-        callBack.removeItemFromSettings(currentItem);
-
         currentItem.items.remove(dragOutItem);
 
         db.updateItem(dragOutItem, 1);
         db.updateItem(currentItem);
 
         currentView.setIcon(ItemViewFactory.getGroupIconDrawable(context, currentItem));
-        callBack.addItemToSettings(currentItem);
     }
 
     public void updateItem(Context context, final DesktopCallBack callBack, final Desktop.Item currentItem, Desktop.Item dragOutItem, AppItemView currentView) {
@@ -281,13 +279,13 @@ public class GroupPopupView extends FrameLayout {
                 Desktop.Item item = db.getItem(currentItem.items.get(0).idValue);
                 item.x = currentItem.x;
                 item.y = currentItem.y;
+
                 db.updateItem(item, item.x, item.y);
                 db.updateItem(item, 1);
                 db.deleteItem(currentItem);
 
                 callBack.removeItem(currentView);
                 callBack.addItemToCell(item, item.x, item.y);
-                callBack.addItemToSettings(item);
             }
             if (Home.launcher != null) {
                 Home.launcher.desktop.requestLayout();

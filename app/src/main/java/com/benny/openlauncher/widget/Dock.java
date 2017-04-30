@@ -161,8 +161,6 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         View v = (View) args[1];
         Item item = (Item) args[0];
 
-        removeItemFromSettings(item);
-
         previousItemView = v;
         previousItem = item;
         removeView(v);
@@ -247,13 +245,5 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     @Override
     public void removeItem(AppItemView view) {
         removeViewInLayout(view);
-    }
-
-    @Override
-    public void removeItemFromSettings(Item item) {
-    }
-
-    @Override
-    public void addItemToSettings(Item item) {
     }
 }
