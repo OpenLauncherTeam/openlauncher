@@ -5,8 +5,8 @@ android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
 
-    def VERSION_CODE = 10
-    def VERSION_NAME = "0.3.2"
+    def VERSION_CODE = 11
+    def VERSION_NAME = "0.3.2.1"
     def APP_NAME = 'OpenLauncher'
     def APP_PACKAGE = "com.benny.openlauncher"
     def APP_ICON ="@drawable/ic_launcher"
