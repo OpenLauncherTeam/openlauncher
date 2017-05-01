@@ -47,7 +47,7 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
         Tool.setTheme(this);
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_minbaredit);
+        setContentView(R.layout.activity_minibar_edit);
         ButterKnife.bind(this);
         setSupportActionBar(tb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -135,7 +135,7 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
 
         @Override
         public int getLayoutRes() {
-            return R.layout.item_minbaredit;
+            return R.layout.item_minibar_edit;
         }
 
         private static final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();

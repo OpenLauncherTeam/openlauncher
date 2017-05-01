@@ -42,7 +42,7 @@ public class IconListAdapter extends BaseAdapter {
         ImageView iv;
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(c);
-            view = inflater.inflate(R.layout.item_minbar, parent, false);
+            view = inflater.inflate(R.layout.item_minibar, parent, false);
         } else {
             view = convertView;
         }

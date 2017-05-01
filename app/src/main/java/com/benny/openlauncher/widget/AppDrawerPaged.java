@@ -155,7 +155,7 @@ public class AppDrawerPaged extends SmoothViewPager {
         public Adapter() {
             pages.clear();
             for (int i = 0; i < getCount(); i++) {
-                ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.item_appdrawer_page, null);
+                ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_paged_inner, null);
                 if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerUseCard) {
                     ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Color.TRANSPARENT);
                     ((CardView) layout.getChildAt(0)).setCardElevation(0);

@@ -50,7 +50,7 @@ import com.benny.openlauncher.viewutil.DragNavigationControl;
 import com.benny.openlauncher.viewutil.IconListAdapter;
 import com.benny.openlauncher.viewutil.QuickCenterItem;
 import com.benny.openlauncher.viewutil.WidgetHost;
-import com.benny.openlauncher.widget.ASearchBar;
+import com.benny.openlauncher.widget.SearchBar;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.widget.Desktop;
@@ -159,7 +159,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     @BindView(R.id.searchClock)
     public FrameLayout searchClock;
     @BindView(R.id.searchBar)
-    public ASearchBar searchBar;
+    public SearchBar searchBar;
     @BindView(R.id.background)
     public View background;
 
@@ -168,7 +168,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public View dragLeft;
     @BindView(R.id.right)
     public View dragRight;
-    private View appSearchBar;
     private PagerIndicator appDrawerIndicator;
     private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
@@ -315,7 +314,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         updateDesktopClock();
 
-        searchBar.setCallBack(new ASearchBar.CallBack() {
+        searchBar.setCallBack(new SearchBar.CallBack() {
             @Override
             public void onInternetSearch(String string) {
 
@@ -343,7 +342,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         });
 
         appDrawerController.init();
-        appSearchBar = findViewById(R.id.appSearchBar);
         appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
 
         appDrawerController.setHome(this);
@@ -377,19 +375,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         appDrawerController.setCallBack(new AppDrawerController.CallBack() {
             @Override
             public void onStart() {
-                if (appSearchBar != null) {
-                    if (generalSettings.desktopSearchBar) {
-                        searchClock.animate().alpha(0).setDuration(100);
-                        searchBar.animate().alpha(0).setDuration(100);
-                    }
-                    appSearchBar.setAlpha(0);
-                    appSearchBar.setVisibility(View.VISIBLE);
-                    appSearchBar.animate().setStartDelay(100).alpha(1).setDuration(100);
-                }
                 if (appDrawerIndicator != null) {
                     appDrawerIndicator.setVisibility(View.VISIBLE);
                     appDrawerIndicator.animate().alpha(1).setDuration(100);
                 }
+
                 Tool.invisibleViews(dock, desktopIndicator, desktop);
             }
 
@@ -410,14 +400,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
                 if (appDrawerIndicator != null)
                     appDrawerIndicator.animate().alpha(0).setDuration(100);
-                if (appSearchBar != null) {
-                    appSearchBar.animate().setStartDelay(0).alpha(0).setDuration(100).withEndAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            updateSearchBarVisibility();
-                        }
-                    });
-                }
 
                 Tool.visibleViews(dock, desktopIndicator, desktop);
             }
@@ -428,12 +410,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     appDrawerController.scrollToStart();
                 }
                 appDrawerController.getDrawer().setVisibility(View.INVISIBLE);
-                if (!dragOptionPanel.dragging && appSearchBar != null) {
-                    searchClock.animate().alpha(1);
-                }
-                if (appSearchBar != null) {
-                    appSearchBar.setVisibility(View.INVISIBLE);
-                }
             }
         });
     }

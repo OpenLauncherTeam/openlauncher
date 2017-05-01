@@ -88,7 +88,7 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_minbaredit, container, false);
+        return inflater.inflate(R.layout.activity_minibar_edit, container, false);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
 
         @Override
         public int getLayoutRes() {
-            return R.layout.item_minbaredit;
+            return R.layout.item_minibar_edit;
         }
 
         private static final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();

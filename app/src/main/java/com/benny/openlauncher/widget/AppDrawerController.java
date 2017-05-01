@@ -6,16 +6,11 @@ import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v7.widget.CardView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowInsets;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
@@ -24,15 +19,12 @@ import com.benny.openlauncher.util.Tool;
 
 import io.codetail.widget.RevealFrameLayout;
 
-import static com.benny.openlauncher.widget.AppDrawerController.DrawerMode.Vertical;
-
 /**
  * Created by BennyKok on 11/5/2016.
  */
 
 public class AppDrawerController extends RevealFrameLayout {
 
-    //    public EditText searchBar;
     public AppDrawerPaged drawerViewPaged;
     public AppDrawerVertical drawerViewGrid;
     public DrawerMode drawerMode;
@@ -167,38 +159,21 @@ public class AppDrawerController extends RevealFrameLayout {
     }
 
     public void init() {
-        if (isInEditMode())
-            return;
+        if (isInEditMode()) return;
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
         drawerMode = LauncherSettings.getInstance(getContext()).generalSettings.drawerMode;
         switch (drawerMode) {
             case Paged:
-                drawerViewPaged = (AppDrawerPaged) layoutInflater.inflate(R.layout.view_pageddrawer, this, false);
+                drawerViewPaged = (AppDrawerPaged) layoutInflater.inflate(R.layout.view_app_drawer_paged, this, false);
                 addView(drawerViewPaged);
-                PagerIndicator indicator = (PagerIndicator) layoutInflater.inflate(R.layout.view_drawerindicator, this, false);
+                PagerIndicator indicator = (PagerIndicator) layoutInflater.inflate(R.layout.view_drawer_indicator, this, false);
                 addView(indicator);
                 break;
             case Vertical:
-                drawerViewGrid = (AppDrawerVertical) layoutInflater.inflate(R.layout.view_griddrawer, this, false);
-//                if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar)
-//                    ((LayoutParams) drawerViewGrid.getLayoutParams()).topMargin += Tool.dp2px(60, getContext());
+                drawerViewGrid = (AppDrawerVertical) layoutInflater.inflate(R.layout.view_app_drawer_vertical, this, false);
                 addView(drawerViewGrid);
                 break;
         }
-//        if (LauncherSettings.getInstance(getContext()).generalSettings.drawerSearchBar && drawerMode == Vertical) {
-//            CardView cv = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_searchbar_app, this, false);
-//            addView(cv);
-//            cv.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
-//            if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerLight) {
-//                ImageView searchIcon = (ImageView) cv.findViewById(R.id.searchIcon);
-//                searchIcon.setImageResource(R.drawable.ic_search_light_24dp);
-//            }
-//            searchBar = (EditText) cv.findViewById(R.id.et);
-//            searchBar.setHintTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
-//            searchBar.setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
-//            searchBar.clearFocus();
-//            searchBar.addTextChangedListener(this);
-//        }
     }
 
     @Override
@@ -223,8 +198,9 @@ public class AppDrawerController extends RevealFrameLayout {
                     drawerViewGrid.setCardBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
                     drawerViewGrid.setCardElevation(Tool.dp2px(4, getContext()));
                 }
-                if (drawerViewGrid.gridDrawerAdapter != null)
+                if (drawerViewGrid.gridDrawerAdapter != null) {
                     drawerViewGrid.gridDrawerAdapter.notifyDataSetChanged();
+                }
                 break;
         }
     }
@@ -249,26 +225,6 @@ public class AppDrawerController extends RevealFrameLayout {
                 break;
         }
     }
-
-//    @Override
-//    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//    }
-//
-//    @Override
-//    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//        switch (drawerMode) {
-//            case Paged:
-//                break;
-//            case Vertical:
-//                if (drawerViewGrid.gridDrawerAdapter != null)
-//                    drawerViewGrid.gridDrawerAdapter.filter(charSequence);
-//                break;
-//        }
-//    }
-//
-//    @Override
-//    public void afterTextChanged(Editable editable) {
-//    }
 
     public enum DrawerMode {
         Paged, Vertical

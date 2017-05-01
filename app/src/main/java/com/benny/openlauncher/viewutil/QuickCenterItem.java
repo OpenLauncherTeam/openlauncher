@@ -194,49 +194,4 @@ public class QuickCenterItem {
             return obj instanceof ContactContent && this.data.equals(((ContactContent) obj).data);
         }
     }
-
-    public static class SearchHeader extends AbstractItem<SearchHeader, SearchHeader.ViewHolder> {
-
-        public SearchHeader() {
-        }
-
-        @Override
-        public int getType() {
-            return R.id.item_header_search;
-        }
-
-        @Override
-        public int getLayoutRes() {
-            return R.layout.item_header_search;
-        }
-
-        @Override
-        public void bindView(ViewHolder viewHolder, List payloads) {
-            super.bindView(viewHolder, payloads);
-        }
-
-        private final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
-
-        protected class ItemFactory implements ViewHolderFactory<ViewHolder> {
-            public ViewHolder create(View v) {
-                return new ViewHolder(v);
-            }
-        }
-
-        @Override
-        public ViewHolderFactory<? extends ViewHolder> getFactory() {
-            return FACTORY;
-        }
-
-        protected class ViewHolder extends RecyclerView.ViewHolder {
-            protected EditText et;
-
-            public ViewHolder(View view) {
-                super(view);
-                this.et = (EditText) view.findViewById(R.id.et);
-            }
-        }
-    }
-
-
 }
