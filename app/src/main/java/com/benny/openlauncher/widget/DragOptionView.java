@@ -172,7 +172,7 @@ public class DragOptionView extends CardView {
                         }
 
                         home.desktop.consumeRevert();
-                        home.desktopDock.consumeRevert();
+                        home.dock.consumeRevert();
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;
@@ -250,7 +250,7 @@ public class DragOptionView extends CardView {
                         removeIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
-                        home.desktopDock.setHideGrid(false);
+                        home.dock.setHideGrid(false);
                         for (CellContainer cellContainer : home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
@@ -261,7 +261,7 @@ public class DragOptionView extends CardView {
                         infoIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
-                        home.desktopDock.setHideGrid(false);
+                        home.dock.setHideGrid(false);
                         for (CellContainer cellContainer : home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
@@ -270,7 +270,7 @@ public class DragOptionView extends CardView {
                         infoIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
-                        home.desktopDock.setHideGrid(false);
+                        home.dock.setHideGrid(false);
                         for (CellContainer cellContainer : home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
@@ -285,7 +285,7 @@ public class DragOptionView extends CardView {
                         removeIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
-                        home.desktopDock.setHideGrid(false);
+                        home.dock.setHideGrid(false);
                         for (CellContainer cellContainer : home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
@@ -293,7 +293,7 @@ public class DragOptionView extends CardView {
                         removeIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
-                        home.desktopDock.setHideGrid(false);
+                        home.dock.setHideGrid(false);
                         for (CellContainer cellContainer : home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
@@ -308,7 +308,7 @@ public class DragOptionView extends CardView {
                 return true;
 
             case DragEvent.ACTION_DRAG_ENDED:
-                home.desktopDock.setHideGrid(true);
+                home.dock.setHideGrid(true);
                 for (CellContainer cellContainer : home.desktop.pages)
                     cellContainer.setHideGrid(true);
 
@@ -328,7 +328,7 @@ public class DragOptionView extends CardView {
                     }
                 });
 
-                home.desktopDock.revertLastItem();
+                home.dock.revertLastItem();
                 home.desktop.revertLastItem();
                 return true;
         }

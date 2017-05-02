@@ -27,7 +27,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -132,7 +131,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     @BindView(R.id.desktopIndicator)
     public PagerIndicator desktopIndicator;
     @BindView(R.id.desktopDock)
-    public Dock desktopDock;
+    public Dock dock;
     @BindView(R.id.appDrawerController)
     public AppDrawerController appDrawerController;
     @BindView(R.id.dragOptionPanel)
@@ -142,7 +141,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     @BindView(R.id.baseLayout)
     public ConstraintLayout baseLayout;
     @BindView(R.id.minBar)
-    public SwipeListView minBar;
+    public SwipeListView minibar;
     @BindView(R.id.drawer_layout)
     public DrawerLayout drawerLayout;
     @BindView(R.id.quickContactRv)
@@ -253,8 +252,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             shortcutLayout.setPadding(0, statusBarHeight, 0, 0);
             //desktopEditOptionPanel.setPadding(0, 0, 0, navBarHeight);
             //searchBar.setPadding(0, statusBarHeight, 0, 0);
-            //desktopDock.getLayoutParams().height += navBarHeight;
-            //desktopDock.setPadding(desktopDock.getPaddingLeft(), desktopDock.getPaddingTop(), desktopDock.getPaddingRight(), desktopDock.getPaddingBottom() + navBarHeight);
+            //dock.getLayoutParams().height += navBarHeight;
+            //dock.setPadding(dock.getPaddingLeft(), dock.getPaddingTop(), dock.getPaddingRight(), dock.getPaddingBottom() + navBarHeight);
             //appDrawerController.setPadding(0, statusBarHeight, 0, navBarHeight);
         }
 
@@ -282,7 +281,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 } else {
                     desktop.initDesktopShowAll(Home.this);
                 }
-                desktopDock.initDockItem(Home.this);
+                dock.initDockItem(Home.this);
 
                 AppManager.getInstance(Home.this).removeAppUpdatedListener(this);
             }
@@ -295,7 +294,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 } else {
                     desktop.initDesktopShowAll(Home.this);
                 }
-                desktopDock.initDockItem(Home.this);
+                dock.initDockItem(Home.this);
             }
         });
 
@@ -309,7 +308,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     // called to initialize the view on creation
     private void initViews() {
-        initMinBar();
+        initMinibar();
         initQuickCenter();
 
         DragNavigationControl.init(this, dragLeft, dragRight);
@@ -324,7 +323,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onExpand() {
-                Tool.invisibleViews(desktopIndicator, searchBarClock, desktopDock, desktop);
+                Tool.invisibleViews(desktopIndicator, searchBarClock, dock, desktop);
                 Tool.visibleViews(background);
 
                 searchBar.searchBox.setFocusable(true);
@@ -335,7 +334,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onCollapse() {
-                Tool.visibleViews(generalSettings.desktopSearchBar ? searchBarClock : null, desktopDock, desktopIndicator, desktop);
+                Tool.visibleViews(generalSettings.desktopSearchBar ? searchBarClock : null, dock, desktopIndicator, desktop);
                 Tool.invisibleViews(background);
 
                 searchBar.searchBox.clearFocus();
@@ -391,7 +390,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     appDrawerIndicator.setVisibility(View.VISIBLE);
                     appDrawerIndicator.animate().alpha(1).setDuration(100);
                 }
-                Tool.invisibleViews(desktopDock, desktopIndicator, desktop);
+                Tool.invisibleViews(dock, desktopIndicator, desktop);
             }
 
             @Override
@@ -420,7 +419,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     });
                 }
 
-                Tool.visibleViews(desktopDock, desktopIndicator, desktop);
+                Tool.visibleViews(dock, desktopIndicator, desktop);
             }
 
             @Override
@@ -441,29 +440,32 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     private void initDock() {
         int iconSize = generalSettings.iconSize;
-        desktopDock.init();
+        dock.init();
         if (generalSettings.dockShowLabel) {
-            desktopDock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;
-//            if (generalSettings.drawerMode == AppDrawerController.DrawerMode.Paged)
-//                desktopDock.setPadding(desktopDock.getPaddingLeft(), desktopDock.getPaddingTop(), desktopDock.getPaddingRight(), desktopDock.getPaddingBottom() + Tool.dp2px(10, this));
-        } else
-            desktopDock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, this) + Dock.bottomInset;
+            dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;
+        } else {
+            dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, this) + Dock.bottomInset;
+        }
     }
 
     @Override
     public void onDesktopEdit() {
         dragOptionPanel.setAutoHideView(null);
+
         Tool.visibleViews(100, desktopEditOptionPanel);
-        Tool.invisibleViews(100, desktopIndicator,generalSettings.desktopSearchBar ? searchClock : null,generalSettings.desktopSearchBar ?  searchBar : null, desktopDock);
+        Tool.invisibleViews(100, desktopIndicator,generalSettings.desktopSearchBar ? searchClock : null,generalSettings.desktopSearchBar ?  searchBar : null, dock);
+
+        updateSearchBarVisibility();
     }
 
     @Override
     public void onFinishDesktopEdit() {
         dragOptionPanel.setAutoHideView(searchClock, searchBar);
 
-        Tool.visibleViews(100, desktopIndicator, desktopDock);
-        updateSearchBarVisibility();
+        Tool.visibleViews(100, desktopIndicator, dock);
         Tool.invisibleViews(100, desktopEditOptionPanel);
+
+        updateSearchBarVisibility();
     }
 
     public void updateSearchBarVisibility() {
@@ -508,7 +510,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     @Override
     public void onLaunchSettings() {
         consumeNextResume = true;
-
         LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, this);
     }
 
@@ -533,11 +534,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         pickWidget();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
     private void initSettings() {
         updateSearchBarVisibility();
 
@@ -547,7 +543,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         }
 
-        desktopDock.setBackgroundColor(generalSettings.dockColor);
+        dock.setBackgroundColor(generalSettings.dockColor);
 
         appDrawerController.setBackgroundColor(generalSettings.drawerColor);
         appDrawerController.getBackground().setAlpha(0);
@@ -566,7 +562,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         drawerLayout.setDrawerLockMode(generalSettings.minBarEnable ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
-    public void initMinBar() {
+    public void initMinibar() {
         final ArrayList<String> labels = new ArrayList<>();
         final ArrayList<Integer> icons = new ArrayList<>();
         final ArrayList<String> minBarArrangement = generalSettings.miniBarArrangement;
@@ -598,15 +594,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         }
 
 
-        minBar.setPadding(0, Tool.getStatusBarHeight(this), 0, Tool.getNavBarHeight(this));
-        minBar.setAdapter(new IconListAdapter(this, labels, icons));
-        minBar.setOnSwipeRight(new SwipeListView.OnSwipeRight() {
+        minibar.setPadding(0, Tool.getStatusBarHeight(this), 0, Tool.getNavBarHeight(this));
+        minibar.setAdapter(new IconListAdapter(this, labels, icons));
+        minibar.setOnSwipeRight(new SwipeListView.OnSwipeRight() {
             @Override
             public void onSwipe(int pos, float x, float y) {
-                miniPopup.showActionWindow(LauncherAction.Action.valueOf(labels.get(pos)), x, y + (shortcutLayout.getHeight() - minBar.getHeight()) / 2 - Tool.getNavBarHeight(Home.this));
+                miniPopup.showActionWindow(LauncherAction.Action.valueOf(labels.get(pos)), x, y + (shortcutLayout.getHeight() - minibar.getHeight()) / 2 - Tool.getNavBarHeight(Home.this));
             }
         });
-        minBar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        minibar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
@@ -726,8 +722,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     protected void onStart() {
-        if (appWidgetHost != null)
+        if (appWidgetHost != null) {
             appWidgetHost.startListening();
+        }
         super.onStart();
     }
 
@@ -746,8 +743,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     protected void onResume() {
-        if (appWidgetHost != null)
+        if (appWidgetHost != null) {
             appWidgetHost.startListening();
+        }
         handleLauncherPause();
         super.onResume();
     }
@@ -760,7 +758,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         searchBar.collapse();
 
-        if (desktop != null)
+        if (desktop != null) {
             if (!desktop.inEditMode) {
                 if (appDrawerController.getDrawer() != null && appDrawerController.getDrawer().getVisibility() == View.VISIBLE)
                     closeAppDrawer();
@@ -769,6 +767,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             } else {
                 desktop.pages.get(desktop.getCurrentItem()).performClick();
             }
+        }
+
 
         if (groupPopup != null) {
             groupPopup.dismissPopup();

@@ -19,7 +19,6 @@ import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.benny.openlauncher.widget.Desktop.Item;
@@ -126,7 +125,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
                 if (addItemToPoint(item, (int) p2.getX(), (int) p2.getY())) {
                     home.desktop.consumeRevert();
-                    home.desktopDock.consumeRevert();
+                    home.dock.consumeRevert();
 
                     // add the item to the database
                     home.db.setItem(item, 0, 0);
@@ -136,15 +135,15 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                     if (itemView != null) {
                         if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, this, 0, 0, this)) {
                             home.desktop.consumeRevert();
-                            home.desktopDock.consumeRevert();
+                            home.dock.consumeRevert();
                         } else {
                             Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                            home.desktopDock.revertLastItem();
+                            home.dock.revertLastItem();
                             home.desktop.revertLastItem();
                         }
                     } else {
                         Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                        home.desktopDock.revertLastItem();
+                        home.dock.revertLastItem();
                         home.desktop.revertLastItem();
                     }
                 }

@@ -220,7 +220,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             case "dockBackground":
                 generalSettings.dockColor = (int) value;
                 if (Home.launcher != null)
-                    Home.launcher.desktopDock.setBackgroundColor((int) value);
+                    Home.launcher.dock.setBackgroundColor((int) value);
                 else {
                     prepareRestart();
                 }

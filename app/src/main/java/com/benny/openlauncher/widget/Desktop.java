@@ -210,7 +210,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                 if (addItemToPoint(item, (int) p2.getX(), (int) p2.getY())) {
                     home.desktop.consumeRevert();
-                    home.desktopDock.consumeRevert();
+                    home.dock.consumeRevert();
 
                     // add the item to the database
                     home.db.setItem(item, getCurrentItem(), 1);
@@ -220,15 +220,15 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     if (itemView != null) {
                         if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, getCurrentPage(), getCurrentItem(), 1, this)) {
                             home.desktop.consumeRevert();
-                            home.desktopDock.consumeRevert();
+                            home.dock.consumeRevert();
                         } else {
                             Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                            home.desktopDock.revertLastItem();
+                            home.dock.revertLastItem();
                             home.desktop.revertLastItem();
                         }
                     } else {
                         Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
-                        home.desktopDock.revertLastItem();
+                        home.dock.revertLastItem();
                         home.desktop.revertLastItem();
                     }
                 }
@@ -591,7 +591,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     callBack.addItemToPage(group, page);
 
                     home.desktop.consumeRevert();
-                    home.desktopDock.consumeRevert();
+                    home.dock.consumeRevert();
                     return true;
                 }
                 break;
@@ -610,7 +610,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     callBack.addItemToPage(item, page);
 
                     home.desktop.consumeRevert();
-                    home.desktopDock.consumeRevert();
+                    home.dock.consumeRevert();
                     return true;
                 }
                 break;
