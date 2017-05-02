@@ -113,7 +113,7 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
     @Override
     public void onStop() {
         if (launcher != null) {
-            launcher.initMinBar();
+            launcher.initMinibar();
         }
         super.onStop();
     }

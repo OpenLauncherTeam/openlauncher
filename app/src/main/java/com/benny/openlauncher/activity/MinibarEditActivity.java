@@ -105,7 +105,7 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
     @Override
     protected void onStop() {
         if (launcher != null)
-            launcher.initMinBar();
+            launcher.initMinibar();
         super.onStop();
     }
 
