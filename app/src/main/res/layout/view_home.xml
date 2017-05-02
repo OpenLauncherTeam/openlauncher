@@ -83,12 +83,12 @@
         android:layout_width="0dp"
         android:layout_height="10dp"
         android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/desktopDock"
-        app:layout_constraintLeft_toLeftOf="@+id/desktopDock"
-        app:layout_constraintRight_toRightOf="@+id/desktopDock" />
+        app:layout_constraintBottom_toTopOf="@+id/dock"
+        app:layout_constraintLeft_toLeftOf="@+id/dock"
+        app:layout_constraintRight_toRightOf="@+id/dock" />
 
     <com.benny.openlauncher.widget.Dock
-        android:id="@+id/desktopDock"
+        android:id="@+id/dock"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:fitsSystemWindows="true"

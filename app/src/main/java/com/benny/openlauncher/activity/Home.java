@@ -113,12 +113,61 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         shortcutIntentFilter.addAction("com.android.launcher.action.INSTALL_SHORTCUT");
     }
 
-    private final BroadcastReceiver shortcutReceiver = new ShortcutReceiver();
-    private final BroadcastReceiver appUpdateReceiver = new AppUpdateReceiver();
     @BindView(R.id.desktop)
     public Desktop desktop;
+    @BindView(R.id.searchClock)
+    public FrameLayout searchClock;
     @BindView(R.id.searchBarClock)
     public TextView searchBarClock;
+    @BindView(R.id.searchBar)
+    public SearchBar searchBar;
+    @BindView(R.id.background)
+    public View background;
+    @BindView(R.id.left)
+    public View dragLeft;
+    @BindView(R.id.right)
+    public View dragRight;
+    @BindView(R.id.desktopIndicator)
+    public PagerIndicator desktopIndicator;
+    @BindView(R.id.dock)
+    public Dock dock;
+    @BindView(R.id.appDrawerController)
+    public AppDrawerController appDrawerController;
+    @BindView(R.id.groupPopup)
+    public GroupPopupView groupPopup;
+    @BindView(R.id.baseLayout)
+    public ConstraintLayout baseLayout;
+    @BindView(R.id.minibar)
+    public SwipeListView minibar;
+    @BindView(R.id.drawer_layout)
+    public DrawerLayout drawerLayout;
+    @BindView(R.id.miniPopup)
+    public MiniPopupView miniPopup;
+    @BindView(R.id.shortcutLayout)
+    public RelativeLayout shortcutLayout;
+    @BindView(R.id.loadingIcon)
+    public LauncherLoadingIcon loadingIcon;
+    @BindView(R.id.loadingSplash)
+    public FrameLayout loadingSplash;
+    @BindView(R.id.dragOptionPanel)
+    public DragOptionView dragOptionPanel;
+    @BindView(R.id.desktopEditOptionPanel)
+    public DesktopOptionView desktopEditOptionPanel;
+
+    public LauncherSettings.GeneralSettings generalSettings;
+
+    private PagerIndicator appDrawerIndicator;
+    private ViewGroup myScreen;
+    private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
+    private CallLogObserver callLogObserver;
+
+    // region for the APP_DRAWER_ANIMATION
+    private int cx;
+    private int cy;
+    private int rad;
+
+    private final BroadcastReceiver shortcutReceiver = new ShortcutReceiver();
+    private final BroadcastReceiver appUpdateReceiver = new AppUpdateReceiver();
     private final BroadcastReceiver timeChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -128,53 +177,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             }
         }
     };
-    @BindView(R.id.desktopIndicator)
-    public PagerIndicator desktopIndicator;
-    @BindView(R.id.desktopDock)
-    public Dock dock;
-    @BindView(R.id.appDrawerController)
-    public AppDrawerController appDrawerController;
-    @BindView(R.id.dragOptionPanel)
-    public DragOptionView dragOptionPanel;
-    @BindView(R.id.groupPopup)
-    public GroupPopupView groupPopup;
-    @BindView(R.id.baseLayout)
-    public ConstraintLayout baseLayout;
-    @BindView(R.id.minBar)
-    public SwipeListView minibar;
-    @BindView(R.id.drawer_layout)
-    public DrawerLayout drawerLayout;
-    @BindView(R.id.quickContactRv)
-    public RecyclerView quickContactRv;
-    @BindView(R.id.miniPopup)
-    public MiniPopupView miniPopup;
-    @BindView(R.id.shortcutLayout)
-    public RelativeLayout shortcutLayout;
-    @BindView(R.id.loadingIcon)
-    public LauncherLoadingIcon loadingIcon;
-    @BindView(R.id.loadingSplash)
-    public FrameLayout loadingSplash;
-    @BindView(R.id.desktopEditOptionPanel)
-    public DesktopOptionView desktopEditOptionPanel;
-    @BindView(R.id.searchClock)
-    public FrameLayout searchClock;
-    @BindView(R.id.searchBar)
-    public SearchBar searchBar;
-    @BindView(R.id.background)
-    public View background;
-
-    public LauncherSettings.GeneralSettings generalSettings;
-    @BindView(R.id.left)
-    public View dragLeft;
-    @BindView(R.id.right)
-    public View dragRight;
-    private PagerIndicator appDrawerIndicator;
-    private ViewGroup myScreen;
-    private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
-    private CallLogObserver callLogObserver;
-
-    // region for the APP_DRAWER_ANIMATION
-    private int cx, cy, rad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -305,41 +307,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         System.gc();
     }
 
-    // called to initialize the view on creation
+    // called to initialize the views
     private void initViews() {
         initMinibar();
         initQuickCenter();
+        initSearchBar();
 
         DragNavigationControl.init(this, dragLeft, dragRight);
-
-        updateDesktopClock();
-
-        searchBar.setCallBack(new SearchBar.CallBack() {
-            @Override
-            public void onInternetSearch(String string) {
-
-            }
-
-            @Override
-            public void onExpand() {
-                Tool.invisibleViews(desktopIndicator, searchBarClock, dock, desktop);
-                Tool.visibleViews(background);
-
-                searchBar.searchBox.setFocusable(true);
-                searchBar.searchBox.setFocusableInTouchMode(true);
-                searchBar.searchBox.requestFocus();
-                Tool.showKeyboard(Home.this, searchBar.searchBox);
-            }
-
-            @Override
-            public void onCollapse() {
-                Tool.visibleViews(generalSettings.desktopSearchBar ? searchBarClock : null, dock, desktopIndicator, desktop);
-                Tool.invisibleViews(background);
-
-                searchBar.searchBox.clearFocus();
-                Tool.hideKeyboard(Home.this, searchBar.searchBox);
-            }
-        });
 
         appDrawerController.init();
         appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
@@ -375,33 +349,24 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         appDrawerController.setCallBack(new AppDrawerController.CallBack() {
             @Override
             public void onStart() {
-                if (appDrawerIndicator != null) {
-                    appDrawerIndicator.setVisibility(View.VISIBLE);
-                    appDrawerIndicator.animate().alpha(1).setDuration(100);
-                }
-
+                Tool.visibleViews(appDrawerIndicator);
                 Tool.invisibleViews(dock, desktopIndicator, desktop);
             }
 
             @Override
             public void onEnd() {
-                if (generalSettings.desktopSearchBar) {
-                    searchClock.setVisibility(View.INVISIBLE);
-                    searchBar.setVisibility(View.INVISIBLE);
-                } else {
-                    searchClock.setVisibility(View.GONE);
-                    searchBar.setVisibility(View.GONE);
-                }
+                Tool.invisibleViews(searchClock, searchBar);
             }
         }, new AppDrawerController.CallBack() {
             @Override
             public void onStart() {
                 updateSearchBarVisibility();
 
-                if (appDrawerIndicator != null)
+                if (appDrawerIndicator != null) {
                     appDrawerIndicator.animate().alpha(0).setDuration(100);
+                }
 
-                Tool.visibleViews(dock, desktopIndicator, desktop);
+                Tool.visibleViews(dock, desktop, desktopIndicator);
             }
 
             @Override
@@ -429,7 +394,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         dragOptionPanel.setAutoHideView(null);
 
         Tool.visibleViews(100, desktopEditOptionPanel);
-        Tool.invisibleViews(100, desktopIndicator,generalSettings.desktopSearchBar ? searchClock : null,generalSettings.desktopSearchBar ?  searchBar : null, dock);
+        Tool.invisibleViews(100, generalSettings.desktopSearchBar ? searchClock : null, generalSettings.desktopSearchBar ?  searchBar : null, dock, desktopIndicator);
 
         updateSearchBarVisibility();
     }
@@ -602,6 +567,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED) {
             callLogObserver = new CallLogObserver(new Handler());
             getApplicationContext().getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI, true, callLogObserver);
+
             // get the call history for the adapter
             callLogObserver.onChange(true);
         } else {
@@ -609,12 +575,47 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         }
     }
 
+    private void initSearchBar() {
+        searchBar.setCallBack(new SearchBar.CallBack() {
+            @Override
+            public void onInternetSearch(String string) {
+
+            }
+
+            @Override
+            public void onExpand() {
+                Tool.invisibleViews(searchBarClock, dock, desktop, desktopIndicator);
+                Tool.visibleViews(background);
+
+                searchBar.searchBox.setFocusable(true);
+                searchBar.searchBox.setFocusableInTouchMode(true);
+                searchBar.searchBox.requestFocus();
+
+                Tool.showKeyboard(Home.this, searchBar.searchBox);
+            }
+
+            @Override
+            public void onCollapse() {
+                Tool.visibleViews(generalSettings.desktopSearchBar ? searchBarClock : null, dock, desktop, desktopIndicator);
+                Tool.invisibleViews(background);
+
+                searchBar.searchBox.clearFocus();
+
+                Tool.hideKeyboard(Home.this, searchBar.searchBox);
+            }
+        });
+
+        // this view is just a text view of the current date
+        updateDesktopClock();
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        // check if reading the call log is permitted
         if (requestCode == REQUEST_PERMISSION_READ_CALL_LOG && callLogObserver != null) {
-            // run if read call log permitted
             callLogObserver = new CallLogObserver(new Handler());
             getApplicationContext().getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI, true, callLogObserver);
+
             // get the call history for the adapter
             callLogObserver.onChange(true);
         }
@@ -706,7 +707,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     protected void onStop() {
-        // save the settings when the launcher is stopped
+        // save the settings in json
         LauncherSettings.getInstance(this).writeSettings();
         super.onStop();
     }

@@ -19,7 +19,7 @@
             android:background="@color/colorPrimary">
 
             <com.benny.openlauncher.widget.SwipeListView
-                android:id="@+id/minBar"
+                android:id="@+id/minibar"
                 android:layout_width="74dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|start"

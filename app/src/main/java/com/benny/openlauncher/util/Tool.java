@@ -223,7 +223,6 @@ public class Tool {
         } finally {
             cursor.close();
         }
-
     }
 
     public static Bitmap openPhoto(Context context, String number) {
