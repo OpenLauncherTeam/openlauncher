@@ -41,12 +41,10 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public void init() {
-        if (isInEditMode()) return;
-
-//        if (LauncherSettings.getInstance(getContext()).generalSettings != null)
-//            setGridSize(LauncherSettings.getInstance(getContext()).generalSettings.dockGridX, 1);
+        if (isInEditMode()) {
+            return;
+        }
         setOnDragListener(this);
-
         super.init();
     }
 
@@ -58,22 +56,10 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         removeAllViews();
         int column = LauncherSettings.getInstance(getContext()).generalSettings.dockGridX;
         for (Item item : dockItems) {
-            if (item.x < column && item.y == 0)
+            if (item.x < column && item.y == 0) {
                 addItemToPage(item, 0);
+            }
         }
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            startPosX = ev.getX();
-            startPosY = ev.getY();
-
-            Tool.print("ActionD");
-        }
-        detectSwipe(ev);
-        super.dispatchTouchEvent(ev);
-        return true;
     }
 
     @Override
@@ -81,20 +67,34 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         return super.onTouchEvent(ev);
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        detectSwipe(ev);
+        super.dispatchTouchEvent(ev);
+        return true;
+    }
+
     private void detectSwipe(MotionEvent ev) {
         if (Home.launcher == null) return;
-        if (ev.getAction() == MotionEvent.ACTION_UP) {
-            Tool.print("ActionUP");
-            float minDist = 150f;
-            Tool.print((int) ev.getX(), (int) ev.getY());
-            if (startPosY - ev.getY() > minDist) {
-                if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
-                    Point p = Tool.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), this, Home.launcher.appDrawerController);
-                    // FIXME: 1/22/2017 This seem weird, but the extra offset ( Tool.getNavBarHeight(getContext()) ) works on my phone
-                    // FIXME: 1/22/2017 This part of the code is identical as the code in Desktop so will combine them later
-                    Home.launcher.openAppDrawer(this, p.x, p.y - Tool.getNavBarHeight(getContext()) / 2);
+        switch(ev.getAction()) {
+            case MotionEvent.ACTION_UP:
+                Tool.print("ACTION_UP");
+                float minDist = 150f;
+                Tool.print((int) ev.getX(), (int) ev.getY());
+                if (startPosY - ev.getY() > minDist) {
+                    if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
+                        Point p = Tool.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), this, Home.launcher.appDrawerController);
+                        // FIXME: 1/22/2017 This seem weird, but the extra offset ( Tool.getNavBarHeight(getContext()) ) works on my phone
+                        // FIXME: 1/22/2017 This part of the code is identical as the code in Desktop so will combine them later
+                        Home.launcher.openAppDrawer(this, p.x, p.y - Tool.getNavBarHeight(getContext()) / 2);
+                    }
                 }
-            }
+                break;
+            case MotionEvent.ACTION_DOWN:
+                Tool.print("ACTION_DOWN");
+                startPosX = ev.getX();
+                startPosY = ev.getY();
+                break;
         }
     }
 
@@ -102,16 +102,14 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     public boolean onDrag(View p1, DragEvent p2) {
         switch (p2.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
-                if (((DragAction) p2.getLocalState()).action != DragAction.Action.ACTION_WIDGET) {
-                    return true;
+                if (((DragAction) p2.getLocalState()).action == DragAction.Action.ACTION_WIDGET) {
+                    return false;
                 }
-                return false;
+                return true;
             case DragEvent.ACTION_DRAG_ENTERED:
                 return true;
-
             case DragEvent.ACTION_DRAG_EXITED:
                 return true;
-
             case DragEvent.ACTION_DROP:
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(Item.class.getClassLoader());
@@ -170,8 +168,6 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             bottomInset = insets.getSystemWindowInsetBottom();
             setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), bottomInset + Tool.dp2px(10, getContext()));
-            //getLayoutParams().height += insets.getSystemWindowInsetBottom();
-            return insets;
         }
         return insets;
     }
