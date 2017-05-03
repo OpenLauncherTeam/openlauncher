@@ -296,7 +296,7 @@ public class CellContainer extends ViewGroup {
         float s = 7f;
         for (int x = 0; x < cellSpanH; x++) {
             for (int y = 0; y < cellSpanV; y++) {
-                if (x >= cells.length && y >= cells[0].length) continue;
+                if (x >= cells.length || y >= cells[0].length) continue;
 
                 Rect cell = cells[x][y];
 
