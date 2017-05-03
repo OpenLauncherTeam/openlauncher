@@ -7,7 +7,6 @@ import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -61,7 +60,7 @@ public class DesktopOptionView extends FrameLayout {
 
     public void setStarButtonColored(boolean colored) {
         if (colored) {
-            setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_yellow_36dp), null, null, null);
+            setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_black_36dp), null, null, null);
         } else {
             setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_border_black_36dp), null, null, null);
         }
@@ -80,11 +79,10 @@ public class DesktopOptionView extends FrameLayout {
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
 
         setAsHomeButton = new AppCompatTextView(getContext());
-        setAsHomeButton.setText("Home");
         setAsHomeButton.setTypeface(typeface);
         setAsHomeButton.setGravity(Gravity.CENTER);
         setAsHomeButton.setTextColor(Color.WHITE);
-        setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_yellow_36dp), null, null, null);
+        setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_black_36dp), null, null, null);
         setAsHomeButton.setCompoundDrawablePadding(Tool.dp2px(4, getContext()));
         setAsHomeButton.setBackgroundColor(Color.TRANSPARENT);
         LayoutParams setAsHomeButtonLP = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -110,9 +108,10 @@ public class DesktopOptionView extends FrameLayout {
         addView(actionRecyclerView, actionRecyclerViewLP);
 
         List<IconLabelItem> items = new ArrayList<>();
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_clear_black_24dp, R.string.remove, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_dashboard_black_24dp, R.string.add_widget, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_launch_black_24dp, R.string.action, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
+        items.add(new IconLabelItem(getContext(), R.drawable.ic_star_black_36dp, R.string.set_as_home, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
+        items.add(new IconLabelItem(getContext(), R.drawable.ic_clear_black_36dp, R.string.remove, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
+        items.add(new IconLabelItem(getContext(), R.drawable.ic_dashboard_black_36dp, R.string.add_widget, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
+        items.add(new IconLabelItem(getContext(), R.drawable.ic_launch_black_36dp, R.string.action, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         items.add(new IconLabelItem(getContext(), R.drawable.ic_settings_launcher_36dp, R.string.settings, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         actionAdapter.set(items);
 
@@ -122,15 +121,18 @@ public class DesktopOptionView extends FrameLayout {
                 if (desktopOptionViewListener != null) {
                     switch (position) {
                         case 0:
-                            desktopOptionViewListener.onRemovePage();
+                            desktopOptionViewListener.onSetPageAsHome();
                             break;
                         case 1:
-                            desktopOptionViewListener.onPickWidget();
+                            desktopOptionViewListener.onRemovePage();
                             break;
                         case 2:
-                            desktopOptionViewListener.onPickDesktopAction();
+                            desktopOptionViewListener.onPickWidget();
                             break;
                         case 3:
+                            desktopOptionViewListener.onPickDesktopAction();
+                            break;
+                        case 4:
                             desktopOptionViewListener.onLaunchSettings();
                             break;
                     }

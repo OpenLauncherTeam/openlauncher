@@ -474,10 +474,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         private CellContainer getItemLayout() {
             CellContainer layout = new CellContainer(desktop.getContext());
-
             layout.setSoundEffectsEnabled(false);
+
             SimpleFingerGestures mySfg = new SimpleFingerGestures();
             mySfg.setOnFingerGestureListener(getGestureListener());
+
             layout.gestures = mySfg;
             layout.onItemRearrangeListener = new CellContainer.OnItemRearrangeListener() {
                 @Override
@@ -540,9 +541,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 public boolean onLongClick(View view) {
                     scaleFactor = 0.85f;
                     for (CellContainer v : desktop.pages) {
-                        //v.setPivotY(v.getHeight() / 2 - Tool.dp2px(50, desktop.getContext()));
-                        //v.setPivotX(v.getWidth() / 2);
-
                         v.blockTouch = true;
                         v.animateBackgroundShow();
                         v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
@@ -607,7 +605,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                     item.items.add(dropItem);
 
-                    // hide the new app in thr group
+                    // hide the new app in the group
                     home.db.updateItem(dropItem, 0);
 
                     // add the item to the database

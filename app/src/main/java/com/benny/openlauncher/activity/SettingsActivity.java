@@ -330,15 +330,15 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 AppManager.getInstance(this).startPickIconPackIntent(this);
                 break;
             case "drawerStyle":
-                DialogUtils.appDrawerStylePicker(this);
+                DialogUtils.appDrawerStyleDialog(this);
                 prepareRestart();
                 break;
             case "desktopMode":
-                DialogUtils.desktopStylePicker(this);
+                DialogUtils.desktopStyleDialog(this);
                 prepareRestart();
                 break;
             case "singleClick":
-                DialogUtils.startGesturePicker(this, R.string.settings_single_click_title, generalSettings.singleClick, new MaterialDialog.ListCallbackSingleChoice() {
+                DialogUtils.selectActionDialog(this, R.string.settings_single_click_title, generalSettings.singleClick, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                         launcherSettings.setSingleClickGesture(which);
@@ -347,7 +347,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 });
                 break;
             case "doubleClick":
-                DialogUtils.startGesturePicker(this, R.string.settings_double_click_title, generalSettings.singleClick, new MaterialDialog.ListCallbackSingleChoice() {
+                DialogUtils.selectActionDialog(this, R.string.settings_double_click_title, generalSettings.singleClick, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                         launcherSettings.setDoubleClickGesture(which);
@@ -356,7 +356,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 });
                 break;
             case "pinch":
-                DialogUtils.startGesturePicker(this, R.string.settings_double_click_title, generalSettings.doubleClick, new MaterialDialog.ListCallbackSingleChoice() {
+                DialogUtils.selectActionDialog(this, R.string.settings_double_click_title, generalSettings.doubleClick, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                         launcherSettings.setDoubleClickGesture(which);
@@ -365,7 +365,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 });
                 break;
             case "unPinch":
-                DialogUtils.startGesturePicker(this, R.string.settings_unpinch_title, generalSettings.unPinch, new MaterialDialog.ListCallbackSingleChoice() {
+                DialogUtils.selectActionDialog(this, R.string.settings_unpinch_title, generalSettings.unPinch, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                         launcherSettings.setUnPinchGesture(which);
@@ -374,7 +374,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 });
                 break;
             case "swipeDown":
-                DialogUtils.startGesturePicker(this, R.string.settings_swipe_down_title, generalSettings.swipeDown, new MaterialDialog.ListCallbackSingleChoice() {
+                DialogUtils.selectActionDialog(this, R.string.settings_swipe_down_title, generalSettings.swipeDown, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                         launcherSettings.setSwipeDownGesture(which);
@@ -383,7 +383,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 });
                 break;
             case "swipeUp":
-                DialogUtils.startGesturePicker(this, R.string.settings_swipe_up_title, generalSettings.swipeUp, new MaterialDialog.ListCallbackSingleChoice() {
+                DialogUtils.selectActionDialog(this, R.string.settings_swipe_up_title, generalSettings.swipeUp, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                         launcherSettings.setSwipeUpGesture(which);

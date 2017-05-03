@@ -20,7 +20,15 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 public class DialogUtils {
-    public static void desktopStylePicker(final Context context) {
+    public static void addActionItemDialog(final Context context, MaterialDialog.ListCallback callback) {
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        builder.title("Desktop Action")
+                .items(R.array.desktopActionEntries)
+                .itemsCallback(callback)
+                .show();
+    }
+
+    public static void desktopStyleDialog(final Context context) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(context.getString(R.string.settings_desktopStyle))
                 .items(R.array.desktopStyleEntries)
@@ -33,40 +41,25 @@ public class DialogUtils {
                 }).show();
     }
 
-    public static void desktopActionPicker(final Context context, MaterialDialog.ListCallbackSingleChoice callback) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title("Desktop Action")
-                .items(R.array.desktopActionEntries)
-                .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.desktopHomePage, callback).show();
-    }
-
-    public static void appDrawerStylePicker(final Context context) {
-        final String[] items = new String[AppDrawerController.DrawerMode.values().length];
-        int enabled = 0;
-        for (int i = 0; i < AppDrawerController.DrawerMode.values().length; i++) {
-            items[i] = AppDrawerController.DrawerMode.values()[i].name();
-            if (LauncherSettings.getInstance(context).generalSettings.drawerMode == AppDrawerController.DrawerMode.values()[i]) {
-                enabled = i;
-            }
-        }
+    public static void appDrawerStyleDialog(final Context context) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(context.getString(R.string.settings_drawerStyle))
-                .items(context.getString(R.string.settings_drawer_style_paged), context.getString(R.string.settings_drawer_style_vertical))
-                .itemsCallbackSingleChoice(enabled, new MaterialDialog.ListCallbackSingleChoice() {
+                .items(R.array.appDrawerStyleEntries)
+                .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.desktopHomePage, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).generalSettings.drawerMode = AppDrawerController.DrawerMode.valueOf(items[position]);
+                        LauncherSettings.getInstance(context).generalSettings.drawerMode = AppDrawerController.DrawerMode.values()[position];
                         return true;
                     }
                 }).show();
     }
 
-    public static void startGesturePicker(final Context context, int titleId, int selected, MaterialDialog.ListCallbackSingleChoice onSingleChoise) {
+    public static void selectActionDialog(final Context context, int titleId, int selected, MaterialDialog.ListCallbackSingleChoice onSingleChoice) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(context.getString(titleId))
                 .negativeText(R.string.cancel)
                 .items(R.array.gestureEntries)
-                .itemsCallbackSingleChoice(selected, onSingleChoise)
+                .itemsCallbackSingleChoice(selected, onSingleChoice)
                 .show();
     }
 

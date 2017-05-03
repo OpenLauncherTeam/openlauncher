@@ -456,16 +456,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     public void onPickDesktopAction() {
-        DialogUtils.desktopActionPicker(this, new MaterialDialog.ListCallbackSingleChoice() {
+        DialogUtils.addActionItemDialog(this, new MaterialDialog.ListCallback() {
             @Override
-            public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+            public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                 switch (which) {
                     case 0:
                         Point pos = desktop.getCurrentPage().findFreeSpace();
                         desktop.addItemToCell(Desktop.Item.newActionItem(8), pos.x, pos.y);
                         break;
                 }
-                return true;
             }
         });
     }
