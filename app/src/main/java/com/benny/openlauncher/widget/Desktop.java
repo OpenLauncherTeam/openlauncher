@@ -88,23 +88,27 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     public void initDesktopShowAll(Context c) {
         LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(c).generalSettings;
         List<AppManager.App> apps = AppManager.getInstance(c).getApps();
-        int pageCount = 0;
         int appsSize = apps.size();
 
+
+        // reset page count
+        pageCount = 0;
         while ((appsSize = appsSize - (generalSettings.desktopGridY * generalSettings.desktopGridX)) >= (generalSettings.desktopGridY * generalSettings.desktopGridX) || (appsSize > -(generalSettings.desktopGridY * generalSettings.desktopGridX))) {
             pageCount++;
         }
 
+        // fill the desktop adapter
         for (int i = 0; i < pageCount; i++) {
+            if (pages.size() <= pageCount) break;
             for (int x = 0; x < generalSettings.desktopGridX; x++) {
                 for (int y = 0; y < generalSettings.desktopGridY; y++) {
                     int pagePos = y * generalSettings.desktopGridY + x;
-                    final int pos = generalSettings.desktopGridY * generalSettings.desktopGridX * i + pagePos;
+                    int pos = generalSettings.desktopGridY * generalSettings.desktopGridX * i + pagePos;
                     if (!(pos >= apps.size())) {
                         Desktop.Item appItem = Desktop.Item.newAppItem(apps.get(pos));
                         appItem.x = x;
                         appItem.y = y;
-                        addItemToPage(appItem, pageCount);
+                        addItemToPage(appItem, i);
                     }
                 }
             }
@@ -113,20 +117,22 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public void initDesktopNormal(Home home) {
         setAdapter(new DesktopAdapter(this));
-        if (LauncherSettings.getInstance(getContext()).generalSettings.showIndicator && pageIndicator != null)
+        if (LauncherSettings.getInstance(getContext()).generalSettings.showIndicator && pageIndicator != null) {
             pageIndicator.setViewPager(this);
+        }
         this.home = home;
+
         int column = LauncherSettings.getInstance(getContext()).generalSettings.desktopGridX;
         int row = LauncherSettings.getInstance(getContext()).generalSettings.desktopGridY;
         List<List<Desktop.Item>> desktopItems = Home.launcher.db.getDesktop();
-        for (int i = 0; i < desktopItems.size(); i++) {
-            if (pages.size() <= i) break;
-            pages.get(i).removeAllViews();
-            List<Item> items = desktopItems.get(i);
+        for (int pageCount = 0; pageCount < desktopItems.size(); pageCount++) {
+            if (pages.size() <= pageCount) break;
+            pages.get(pageCount).removeAllViews();
+            List<Item> items = desktopItems.get(pageCount);
             for (int j = 0; j < items.size(); j++) {
                 Desktop.Item item = items.get(j);
                 if (((item.x + item.spanX) <= column) && ((item.y + item.spanY) <= row)) {
-                    addItemToPage(item, i);
+                    addItemToPage(item, pageCount);
                 }
             }
         }
