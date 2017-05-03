@@ -20,6 +20,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
+import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
@@ -268,11 +269,10 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder setLauncherAction(Desktop.Item.Type type) {
-            switch (type) {
-                case ACTION:
+        public Builder setLauncherAction(final Context context, int action) {
+            switch (action) {
+                case 8:
                     int iconSize = LauncherSettings.getInstance(view.getContext()).generalSettings.iconSize;
-
                     TypedValue typedValue = new TypedValue();
                     view.getContext().getTheme().resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
 
@@ -281,15 +281,13 @@ public class AppItemView extends View implements Drawable.Callback {
                     view.setBgColor(Color.WHITE);
                     view.setRoundBg(true);
                     view.setIconSizeSmall(Tool.dp2px(iconSize / 2 - 8, view.getContext()));
-                    view.setLabel(resources.getString(R.string.allApps));
 
+                    view.setLabel(resources.getString(R.string.allApps));
                     view.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                            if (Home.launcher != null) {
-                                Home.launcher.openAppDrawer(view);
-                            }
+                            LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, context);
                         }
                     });
                     break;
@@ -339,17 +337,10 @@ public class AppItemView extends View implements Drawable.Callback {
                     } catch (IllegalStateException e) {
                         e.printStackTrace();
                     }
-
                     return true;
                 }
             });
             return this;
-        }
-
-        public interface LongPressCallBack {
-            boolean readyForDrag(View view);
-
-            void afterDrag(View view);
         }
 
         public Builder withOnTouchGetPosition() {
@@ -388,6 +379,12 @@ public class AppItemView extends View implements Drawable.Callback {
             view.setIcon(Tool.getIconFromID(view.getContext(), intent.getStringExtra("shortCutIconID")));
             view.setLabel(intent.getStringExtra("shortCutName"));
             return this;
+        }
+
+        public interface LongPressCallBack {
+            boolean readyForDrag(View view);
+
+            void afterDrag(View view);
         }
     }
 }

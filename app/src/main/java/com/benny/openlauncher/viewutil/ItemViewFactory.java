@@ -44,7 +44,7 @@ public class ItemViewFactory {
         switch (item.type) {
             case ACTION:
                 view = new AppItemView.Builder(context)
-                        .setLauncherAction(item.type)
+                        .setLauncherAction(context, item.actionValue)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
                         .withOnLongPressDrag(item, DragAction.Action.ACTION_LAUNCHER, new AppItemView.Builder.LongPressCallBack() {
@@ -86,13 +86,12 @@ public class ItemViewFactory {
                         .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
                         .setTextColor(Color.WHITE)
                         .getView();
-
                 break;
             case WIDGET:
                 AppWidgetProviderInfo appWidgetInfo = Home.appWidgetManager.getAppWidgetInfo(item.widgetID);
                 final WidgetView widgetView = (WidgetView) Home.appWidgetHost.createView(context, item.widgetID, appWidgetInfo);
-                widgetView.setAppWidget(item.widgetID, appWidgetInfo);
 
+                widgetView.setAppWidget(item.widgetID, appWidgetInfo);
                 widgetView.post(new Runnable() {
                     @Override
                     public void run() {
@@ -141,7 +140,6 @@ public class ItemViewFactory {
                         return true;
                     }
                 });
-
                 ve.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

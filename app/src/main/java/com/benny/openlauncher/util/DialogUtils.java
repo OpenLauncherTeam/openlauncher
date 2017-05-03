@@ -1,6 +1,8 @@
 package com.benny.openlauncher.util;
 
+import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
@@ -10,6 +12,8 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.widget.AppDrawerController;
+
+import net.qiujuer.genius.blur.StackBlur;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -66,11 +70,34 @@ public class DialogUtils {
                 .show();
     }
 
-    public static void backupDialog(final Context context) {
-        final CharSequence[] options = {
-                context.getResources().getString(R.string.settings_backup_titleBackup),
-                context.getResources().getString(R.string.settings_backup_titleRestore)};
+    public static void setWallpaperDialog(final Context context) {
+        String[] s = new String[]{context.getString(R.string.wallpaper_set), context.getString(R.string.wallpaper_blur)};
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        builder.title(R.string.wallpaper)
+                .iconRes(R.drawable.ic_photo_black_24dp)
+                .items(s)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                        switch (position) {
+                            case 0:
+                                Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
+                                context.startActivity(Intent.createChooser(intent, context.getString(R.string.wallpaper_pick)));
+                                break;
+                            case 1:
+                                try {
+                                    WallpaperManager.getInstance(context).setBitmap(StackBlur.blur(Tool.drawableToBitmap(context.getWallpaper()), 10, false));
+                                } catch (Exception e) {
+                                    Tool.toast(context, context.getString(R.string.wallpaper_unable_to_blur));
+                                }
+                                break;
+                        }
+                    }
+                }).show();
+    }
 
+    public static void backupDialog(final Context context) {
+        final CharSequence[] options = {context.getResources().getString(R.string.settings_backup_titleBackup), context.getResources().getString(R.string.settings_backup_titleRestore)};
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(R.string.settings_backup)
                 .positiveText(R.string.cancel)
@@ -115,8 +142,7 @@ public class DialogUtils {
                             System.exit(1);
                         }
                     }
-                });
-        builder.show();
+                }).show();
     }
 
     private static void copy(Context context, String stringIn, String stringOut) {

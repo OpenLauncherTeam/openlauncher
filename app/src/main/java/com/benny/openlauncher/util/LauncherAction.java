@@ -41,34 +41,10 @@ public class LauncherAction {
     public static void RunAction(Action action, final Context context) {
         switch (action) {
             case EditMinBar:
-                Intent intent1 = new Intent(context, MinibarEditActivity.class);
-                context.startActivity(intent1);
+                context.startActivity(new Intent(context, MinibarEditActivity.class));
                 break;
             case SetWallpaper:
-                MaterialDialog.Builder b = new MaterialDialog.Builder(context);
-                b.title(R.string.wallpaper);
-                b.iconRes(R.drawable.ic_photo_black_24dp);
-                String[] s = new String[]{context.getString(R.string.wallpaper_set), context.getString(R.string.wallpaper_blur)};
-                b.items(s);
-                b.itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        switch (position) {
-                            case 0:
-                                Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
-                                context.startActivity(Intent.createChooser(intent, context.getString(R.string.wallpaper_pick)));
-                                break;
-                            case 1:
-                                try {
-                                    WallpaperManager.getInstance(context).setBitmap(StackBlur.blur(Tool.drawableToBitmap(context.getWallpaper()), 10, false));
-                                } catch (Exception e) {
-                                    Tool.toast(context, context.getString(R.string.wallpaper_unable_to_blur));
-                                }
-                                break;
-                        }
-                    }
-                });
-                b.show();
+                DialogUtils.setWallpaperDialog(context);
                 break;
             case LockScreen:
                 try {
@@ -81,14 +57,14 @@ public class LauncherAction {
                 }
                 break;
             case ClearRam:
-                if (clearingRam)
+                if (clearingRam) {
                     break;
+                }
                 ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
                 final ActivityManager activityManager = (ActivityManager) context.getSystemService(context.ACTIVITY_SERVICE);
                 activityManager.getMemoryInfo(mi);
                 final long pre = mi.availMem / 1048576L;
                 new AsyncTask<Void, Void, Void>() {
-
                     @Override
                     protected void onPreExecute() {
                         clearingRam = true;
@@ -138,12 +114,12 @@ public class LauncherAction {
 
     public static class ActionItem {
         public Action label;
-        public String des;
+        public String description;
         public int icon;
 
-        public ActionItem(Action label, String des, int icon) {
+        public ActionItem(Action label, String description, int icon) {
             this.label = label;
-            this.des = des;
+            this.description = description;
             this.icon = icon;
         }
     }
@@ -159,17 +135,6 @@ public class LauncherAction {
 
     public enum Theme {
         Dark, Light;
-
-        public static String[] names() {
-            Theme[] states = values();
-            String[] names = new String[states.length];
-
-            for (int i = 0; i < states.length; i++) {
-                names[i] = states[i].name();
-            }
-
-            return names;
-        }
     }
 
     public enum Action {

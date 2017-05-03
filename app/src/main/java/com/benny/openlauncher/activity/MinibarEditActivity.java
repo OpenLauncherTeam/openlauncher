@@ -154,7 +154,7 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
         @Override
         public void bindView(ViewHolder holder, List payloads) {
             holder.tv.setText(item.label.toString());
-            holder.tv2.setText(item.des);
+            holder.tv2.setText(item.description);
             holder.iv.setImageResource(item.icon);
             holder.cb.setChecked(enable);
             holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

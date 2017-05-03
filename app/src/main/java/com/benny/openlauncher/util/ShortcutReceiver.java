@@ -27,17 +27,8 @@ public class ShortcutReceiver extends BroadcastReceiver {
 
         String name = intent.getExtras().getString(Intent.EXTRA_SHORTCUT_NAME);
         Intent newIntent = (Intent) intent.getExtras().get(Intent.EXTRA_SHORTCUT_INTENT);
-
-//        if (newIntent != null && name != null){
-//            List<AppManager.App> apps = AppManager.getInstance(context).getApps();
-//            for (int i = 0; i < apps.size(); i++) {
-//                AppManager.App app = apps.get(i);
-//                if (app.className.equals(newIntent.getCl))
-//                    Tool.startApp();
-//            }
-//        }
-
         Drawable shortcutIconDrawable = null;
+
         try {
             Parcelable iconResourceParcelable = intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
             if (iconResourceParcelable != null && iconResourceParcelable instanceof Intent.ShortcutIconResource) {

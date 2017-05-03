@@ -27,8 +27,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchClock" />
 
-    <!--<include layout="@layout/view_searchbar_normal" />-->
-
     <include
         layout="@layout/view_search_bar_nougat"
         android:layout_width="0dp"

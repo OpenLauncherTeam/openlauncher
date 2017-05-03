@@ -163,7 +163,7 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
         @Override
         public void bindView(ViewHolder holder, List payloads) {
             holder.label.setText(item.label.toString());
-            holder.description.setText(item.des);
+            holder.description.setText(item.description);
             holder.icon.setImageResource(item.icon);
             holder.checkbox.setChecked(enable);
             holder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
