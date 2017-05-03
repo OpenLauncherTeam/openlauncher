@@ -577,7 +577,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 if (dropItem.type == Desktop.Item.Type.APP || dropItem.type == Desktop.Item.Type.SHORTCUT) {
                     parent.removeView(itemView);
 
-                    // all of the code to create a new group item
+                    // create a new group item
                     Desktop.Item group = Desktop.Item.newGroupItem();
                     group.items.add(item);
                     group.items.add(dropItem);
@@ -687,6 +687,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                         items.add(Home.launcher.db.getItem(Integer.parseInt(s)));
                     }
                     break;
+                case ACTION:
+                    actionValue = parcel.readInt();
+                    break;
                 case WIDGET:
                     widgetID = parcel.readInt();
                     spanX = parcel.readInt();
@@ -782,6 +785,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                         labels.add(Integer.toString(i.idValue));
                     }
                     out.writeStringList(labels);
+                    break;
+                case ACTION:
+                    out.writeInt(actionValue);
                     break;
                 case WIDGET:
                     out.writeInt(widgetID);
