@@ -82,6 +82,7 @@ dependencies {
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'com.github.chyrta:AndroidOnboarder:0.6'
     compile 'cat.ereza:customactivityoncrash:1.5.0'
+    compile 'de.psdev.licensesdialog:licensesdialog:1.8.2'
 
     // Tools
     compile 'com.jakewharton:butterknife:8.0.1'

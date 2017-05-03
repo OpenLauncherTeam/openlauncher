@@ -26,6 +26,11 @@ import java.util.List;
 public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> {
 
     private static final ViewHolderFactory<? extends IconLabelItem.ViewHolder> FACTORY = new ItemFactory();
+
+    public void setIcon(Drawable icon) {
+        this.icon = icon;
+    }
+
     private Drawable icon;
     public String label;
     private View.OnClickListener listener;

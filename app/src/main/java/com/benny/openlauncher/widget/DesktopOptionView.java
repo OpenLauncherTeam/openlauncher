@@ -33,7 +33,7 @@ import java.util.List;
 
 public class DesktopOptionView extends FrameLayout {
 
-    private AppCompatTextView setAsHomeButton;
+    //    private AppCompatTextView setAsHomeButton;
     private RecyclerView actionRecyclerView;
 
     private FastItemAdapter<IconLabelItem> actionAdapter = new FastItemAdapter<>();
@@ -60,10 +60,11 @@ public class DesktopOptionView extends FrameLayout {
 
     public void setStarButtonColored(boolean colored) {
         if (colored) {
-            setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_black_36dp), null, null, null);
+            actionAdapter.getAdapterItem(0).setIcon(getContext().getResources().getDrawable(R.drawable.ic_star_black_36dp));
         } else {
-            setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_border_black_36dp), null, null, null);
+            actionAdapter.getAdapterItem(0).setIcon(getContext().getResources().getDrawable(R.drawable.ic_star_border_black_36dp));
         }
+        actionAdapter.notifyAdapterItemChanged(0);
     }
 
     @Override
@@ -78,26 +79,26 @@ public class DesktopOptionView extends FrameLayout {
     private void init() {
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
 
-        setAsHomeButton = new AppCompatTextView(getContext());
-        setAsHomeButton.setTypeface(typeface);
-        setAsHomeButton.setGravity(Gravity.CENTER);
-        setAsHomeButton.setTextColor(Color.WHITE);
-        setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_black_36dp), null, null, null);
-        setAsHomeButton.setCompoundDrawablePadding(Tool.dp2px(4, getContext()));
-        setAsHomeButton.setBackgroundColor(Color.TRANSPARENT);
-        LayoutParams setAsHomeButtonLP = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        setAsHomeButtonLP.gravity = Gravity.CENTER_HORIZONTAL;
-        addView(setAsHomeButton, setAsHomeButtonLP);
-
-        setAsHomeButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (desktopOptionViewListener != null) {
-                    desktopOptionViewListener.onSetPageAsHome();
-                    setStarButtonColored(true);
-                }
-            }
-        });
+//        setAsHomeButton = new AppCompatTextView(getContext());
+//        setAsHomeButton.setTypeface(typeface);
+//        setAsHomeButton.setGravity(Gravity.CENTER);
+//        setAsHomeButton.setTextColor(Color.WHITE);
+//        setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_black_36dp), null, null, null);
+//        setAsHomeButton.setCompoundDrawablePadding(Tool.dp2px(4, getContext()));
+//        setAsHomeButton.setBackgroundColor(Color.TRANSPARENT);
+//        LayoutParams setAsHomeButtonLP = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        setAsHomeButtonLP.gravity = Gravity.CENTER_HORIZONTAL;
+//        addView(setAsHomeButton, setAsHomeButtonLP);
+//
+//        setAsHomeButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (desktopOptionViewListener != null) {
+//                    desktopOptionViewListener.onSetPageAsHome();
+//                    setStarButtonColored(true);
+//                }
+//            }
+//        });
 
         actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -121,6 +122,7 @@ public class DesktopOptionView extends FrameLayout {
                 if (desktopOptionViewListener != null) {
                     switch (position) {
                         case 0:
+                            setStarButtonColored(true);
                             desktopOptionViewListener.onSetPageAsHome();
                             break;
                         case 1:
