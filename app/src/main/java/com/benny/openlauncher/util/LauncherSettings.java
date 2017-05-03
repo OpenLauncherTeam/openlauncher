@@ -74,10 +74,6 @@ public class LauncherSettings {
         return gson;
     }
 
-    public void setSingleClickGesture(int value) {
-        generalSettings.singleClick = value;
-    }
-
     public void setDoubleClickGesture(int value) {
         generalSettings.doubleClick = value;
     }
@@ -136,7 +132,6 @@ public class LauncherSettings {
         public boolean desktopSearchBar = true;
         public boolean fullscreen = false;
         public boolean swipe = false;
-        public int singleClick = 0;
         public int doubleClick = 0;
         public int pinch = 0;
         public int unPinch = 0;

@@ -493,9 +493,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             layout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (!desktop.inEditMode && getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick] != 0) {
-                        LauncherAction.RunAction(LauncherAction.actionItems[getResources().getIntArray(R.array.gestureValues)[LauncherSettings.getInstance(getContext()).generalSettings.singleClick] - 1].label, desktop.getContext());
-                    }
                     scaleFactor = 1f;
                     for (final CellContainer v : desktop.pages) {
                         v.blockTouch = false;

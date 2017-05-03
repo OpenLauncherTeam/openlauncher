@@ -99,7 +99,6 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             case 3:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
                         .add(new MaterialPrefFragment.TBPref("swipe", (getString(R.string.settings_desktopSwipe)), (getString(R.string.settings_desktopSwipe_summary)), generalSettings.swipe))
-                        .add(new MaterialPrefFragment.ButtonPref("singleClick", (getString(R.string.settings_singleClick)), (getString(R.string.settings_singleClick_summary))))
                         .add(new MaterialPrefFragment.ButtonPref("doubleClick", (getString(R.string.settings_doubleClick)), (getString(R.string.settings_doubleClick_summary))))
                         .add(new MaterialPrefFragment.ButtonPref("pinch", (getString(R.string.settings_pinch)), (getString(R.string.settings_pinch_summary))))
                         .add(new MaterialPrefFragment.ButtonPref("unPinch", (getString(R.string.settings_unpinch)), (getString(R.string.settings_unpinch_summary))))
@@ -178,9 +177,6 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "swipe":
                 generalSettings.swipe = (boolean) value;
-                break;
-            case "singleClick":
-                generalSettings.singleClick = (int) value;
                 break;
             case "doubleClick":
                 generalSettings.doubleClick = (int) value;
@@ -337,17 +333,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 DialogUtils.desktopStyleDialog(this);
                 prepareRestart();
                 break;
-            case "singleClick":
-                DialogUtils.selectActionDialog(this, R.string.settings_single_click_title, generalSettings.singleClick, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                        launcherSettings.setSingleClickGesture(which);
-                        return true;
-                    }
-                });
-                break;
             case "doubleClick":
-                DialogUtils.selectActionDialog(this, R.string.settings_double_click_title, generalSettings.singleClick, new MaterialDialog.ListCallbackSingleChoice() {
+                DialogUtils.selectActionDialog(this, R.string.settings_double_click_title, generalSettings.doubleClick, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                         launcherSettings.setDoubleClickGesture(which);
@@ -356,10 +343,10 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 });
                 break;
             case "pinch":
-                DialogUtils.selectActionDialog(this, R.string.settings_double_click_title, generalSettings.doubleClick, new MaterialDialog.ListCallbackSingleChoice() {
+                DialogUtils.selectActionDialog(this, R.string.settings_double_click_title, generalSettings.pinch, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                        launcherSettings.setDoubleClickGesture(which);
+                        launcherSettings.setPinchGesture(which);
                         return true;
                     }
                 });
