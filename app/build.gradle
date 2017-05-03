@@ -3,46 +3,39 @@ apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.2'
-
-    def VERSION_CODE = 11
-    def VERSION_NAME = "0.3.2.1"
-    def APP_NAME = 'OpenLauncher'
-    def APP_PACKAGE = "com.benny.openlauncher"
-    def APP_ICON ="@drawable/ic_launcher"
+    buildToolsVersion '25.0.3'
 
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 25
-        multiDexEnabled false
+
+        versionCode 12
+        versionName "0.3.4"
+
+        applicationId "com.benny.openlauncher"
+        resValue 'string', 'app_name', "OpenLauncher"
+        manifestPlaceholders = [appIcon: "@drawable/ic_launcher"]
 
         buildConfigField "boolean", "IS_TEST_BUILD", "false"
         buildConfigField "boolean", "IS_GPLAY_BUILD", "false"
+        multiDexEnabled false
     }
 
     productFlavors {
         flavorDefault {
-            applicationId APP_PACKAGE
-            resValue 'string', 'app_name', APP_NAME
-            manifestPlaceholders = [appIcon: APP_ICON]
-            versionCode VERSION_CODE ; versionName VERSION_NAME
-        }
-
-        flavorTest {
-            applicationId APP_PACKAGE + ".test"
-            resValue 'string', 'app_name', '"OL Nightly"'
-            manifestPlaceholders = [appIcon: APP_ICON + "_test"]
-            versionCode = Integer.parseInt(new Date().format('yyMMdd'))
-            versionName = new Date().format('yyMMdd')
-            buildConfigField "boolean", "IS_TEST_BUILD", "true"
         }
 
         flavorGplay {
-            applicationId APP_PACKAGE
-            resValue 'string', 'app_name', APP_NAME
-            manifestPlaceholders = [appIcon: APP_ICON]
-            versionCode VERSION_CODE ; versionName VERSION_NAME
             buildConfigField "boolean", "IS_GPLAY_BUILD", "true"
+        }
+
+        flavorTest {
+            applicationId "io.github.openlauncherteam.openlauncher.test"
+            resValue 'string', 'app_name', "OL Nightly"
+            manifestPlaceholders = [appIcon: "@drawable/ic_launcher_test"]
+            versionCode = Integer.parseInt(new Date().format('yyMMdd'))
+            versionName = new Date().format('yyMMdd')
+            buildConfigField "boolean", "IS_TEST_BUILD", "true"
         }
     }
 

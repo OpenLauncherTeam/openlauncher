@@ -1,4 +1,4 @@
-### vNext
+### v0.3.4
 * Move launcheranim & smootviewpager to app
 
 ### v0.3.1
