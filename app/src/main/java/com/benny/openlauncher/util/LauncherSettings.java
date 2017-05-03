@@ -139,6 +139,7 @@ public class LauncherSettings {
         public int swipeUp = 0;
         public boolean showIndicator = true;
         public boolean desktopShowLabel = true;
+        public boolean desktopLock;
 
         // app drawer
         public int drawerColor = Color.TRANSPARENT;

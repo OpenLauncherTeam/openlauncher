@@ -319,6 +319,9 @@ public class AppItemView extends View implements Drawable.Callback {
             view.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    if (LauncherSettings.getInstance(v.getContext()).generalSettings.desktopLock)
+                        return false;
+
                     if (eventAction != null && !eventAction.readyForDrag(v)) {
                         return false;
                     }

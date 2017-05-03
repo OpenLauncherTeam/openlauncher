@@ -325,6 +325,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         desktop.setDesktopEditListener(this);
 
         desktopEditOptionPanel.setDesktopOptionViewListener(this);
+        desktopEditOptionPanel.setDesktopLocked(generalSettings.desktopLock);
         desktop.addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

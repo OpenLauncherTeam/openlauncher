@@ -130,6 +130,9 @@ public class ItemViewFactory {
                 widgetView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
+                        if (LauncherSettings.getInstance(view.getContext()).generalSettings.desktopLock)
+                            return false;
+
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                         Intent i = new Intent();
                         i.putExtra("mDragData", item);

@@ -180,5 +180,6 @@
     <string name="wallpaper_unable_to_blur">Unable to blur</string>
     <string name="unnamed">Unnamed</string>
     <string name="action">Action</string>
+    <string name="lock">Lock</string>
 
 </resources>

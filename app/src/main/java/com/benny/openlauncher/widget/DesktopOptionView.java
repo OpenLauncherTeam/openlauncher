@@ -7,7 +7,6 @@ import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -18,6 +17,7 @@ import android.view.WindowInsets;
 import android.widget.FrameLayout;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.FastAdapter;
@@ -33,7 +33,6 @@ import java.util.List;
 
 public class DesktopOptionView extends FrameLayout {
 
-    //    private AppCompatTextView setAsHomeButton;
     private RecyclerView actionRecyclerView;
 
     private FastItemAdapter<IconLabelItem> actionAdapter = new FastItemAdapter<>();
@@ -67,6 +66,15 @@ public class DesktopOptionView extends FrameLayout {
         actionAdapter.notifyAdapterItemChanged(0);
     }
 
+    public void setDesktopLocked(boolean locked) {
+        if (locked) {
+            actionAdapter.getAdapterItem(4).setIcon(getContext().getResources().getDrawable(R.drawable.ic_lock_white_36dp));
+        } else {
+            actionAdapter.getAdapterItem(4).setIcon(getContext().getResources().getDrawable(R.drawable.ic_lock_open_white_36dp));
+        }
+        actionAdapter.notifyAdapterItemChanged(4);
+    }
+
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
@@ -78,27 +86,6 @@ public class DesktopOptionView extends FrameLayout {
 
     private void init() {
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
-
-//        setAsHomeButton = new AppCompatTextView(getContext());
-//        setAsHomeButton.setTypeface(typeface);
-//        setAsHomeButton.setGravity(Gravity.CENTER);
-//        setAsHomeButton.setTextColor(Color.WHITE);
-//        setAsHomeButton.setCompoundDrawablesWithIntrinsicBounds(getContext().getResources().getDrawable(R.drawable.ic_star_black_36dp), null, null, null);
-//        setAsHomeButton.setCompoundDrawablePadding(Tool.dp2px(4, getContext()));
-//        setAsHomeButton.setBackgroundColor(Color.TRANSPARENT);
-//        LayoutParams setAsHomeButtonLP = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//        setAsHomeButtonLP.gravity = Gravity.CENTER_HORIZONTAL;
-//        addView(setAsHomeButton, setAsHomeButtonLP);
-//
-//        setAsHomeButton.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (desktopOptionViewListener != null) {
-//                    desktopOptionViewListener.onSetPageAsHome();
-//                    setStarButtonColored(true);
-//                }
-//            }
-//        });
 
         actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -113,9 +100,9 @@ public class DesktopOptionView extends FrameLayout {
         items.add(new IconLabelItem(getContext(), R.drawable.ic_clear_black_36dp, R.string.remove, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         items.add(new IconLabelItem(getContext(), R.drawable.ic_dashboard_black_36dp, R.string.add_widget, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         items.add(new IconLabelItem(getContext(), R.drawable.ic_launch_black_36dp, R.string.action, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
+        items.add(new IconLabelItem(getContext(), R.drawable.ic_lock_open_white_36dp, R.string.lock, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         items.add(new IconLabelItem(getContext(), R.drawable.ic_settings_launcher_36dp, R.string.settings, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         actionAdapter.set(items);
-
         actionAdapter.withOnClickListener(new FastAdapter.OnClickListener<IconLabelItem>() {
             @Override
             public boolean onClick(View v, IAdapter<IconLabelItem> adapter, IconLabelItem item, int position) {
@@ -126,15 +113,31 @@ public class DesktopOptionView extends FrameLayout {
                             desktopOptionViewListener.onSetPageAsHome();
                             break;
                         case 1:
-                            desktopOptionViewListener.onRemovePage();
+                            if (!LauncherSettings.getInstance(v.getContext()).generalSettings.desktopLock) {
+                                desktopOptionViewListener.onRemovePage();
+                            }else {
+                                Tool.toast(getContext(),"Desktop is locked.");
+                            }
                             break;
                         case 2:
-                            desktopOptionViewListener.onPickWidget();
+                            if (!LauncherSettings.getInstance(v.getContext()).generalSettings.desktopLock) {
+                                desktopOptionViewListener.onPickWidget();
+                            }else {
+                                Tool.toast(getContext(),"Desktop is locked.");
+                            }
                             break;
                         case 3:
-                            desktopOptionViewListener.onPickDesktopAction();
+                            if (!LauncherSettings.getInstance(v.getContext()).generalSettings.desktopLock) {
+                                desktopOptionViewListener.onPickDesktopAction();
+                            }else {
+                                Tool.toast(getContext(),"Desktop is locked.");
+                            }
                             break;
                         case 4:
+                            LauncherSettings.getInstance(getContext()).generalSettings.desktopLock = !LauncherSettings.getInstance(getContext()).generalSettings.desktopLock;
+                            setDesktopLocked(LauncherSettings.getInstance(getContext()).generalSettings.desktopLock);
+                            break;
+                        case 5:
                             desktopOptionViewListener.onLaunchSettings();
                             break;
                     }

@@ -147,7 +147,6 @@ public class AppDrawerPaged extends SmoothViewPager {
                         @Override
                         public void afterDrag(View view) {
                             home.closeAppDrawer();
-
                         }
                     }).getView();
         }
