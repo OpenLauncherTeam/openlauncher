@@ -652,9 +652,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public void createWidget(Intent data) {
         Bundle extras = data.getExtras();
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
+        AppWidgetProviderInfo appWidgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId);
         Item item = Item.newWidgetItem(appWidgetId);
-        item.spanX = 4;
-        item.spanY = 1;
+        item.spanX = appWidgetInfo.minWidth / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth;
+        item.spanY = appWidgetInfo.minHeight / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight;
         item.x = 0;
         item.y = 0;
         desktop.addItemToPage(item, desktop.getCurrentItem());
