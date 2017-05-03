@@ -89,8 +89,11 @@ public class DesktopOptionView extends FrameLayout {
 
         actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        actionRecyclerView.setClipToPadding(false);
+        actionRecyclerView.setPadding(Tool.dp2px(20,getContext()),0,Tool.dp2px(20,getContext()),0);
         actionRecyclerView.setLayoutManager(linearLayoutManager);
         actionRecyclerView.setAdapter(actionAdapter);
+        actionRecyclerView.setOverScrollMode(OVER_SCROLL_ALWAYS);
         LayoutParams actionRecyclerViewLP = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         actionRecyclerViewLP.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
         addView(actionRecyclerView, actionRecyclerViewLP);

@@ -76,7 +76,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     private void detectSwipe(MotionEvent ev) {
         if (Home.launcher == null) return;
-        switch(ev.getAction()) {
+        switch (ev.getAction()) {
             case MotionEvent.ACTION_UP:
                 Tool.print("ACTION_UP");
                 float minDist = 150f;
@@ -170,6 +170,24 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), bottomInset + Tool.dp2px(10, getContext()));
         }
         return insets;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
+
+        if (LauncherSettings.getInstance(getContext()).generalSettings != null) {
+            int iconSize = LauncherSettings.getInstance(getContext()).generalSettings.iconSize;
+            if (LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel) {
+                height = Tool.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
+            } else {
+                height = getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, getContext()) + Dock.bottomInset;
+            }
+        }
+
+        setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec), height);
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override

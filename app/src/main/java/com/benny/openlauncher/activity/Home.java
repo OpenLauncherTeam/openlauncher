@@ -85,7 +85,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     private static final IntentFilter shortcutIntentFilter;
 
     // static members, easier to access from any activity and class
-    @Nullable
     public static Home launcher;
     public static DatabaseHelper db;
     public static WidgetHost appWidgetHost;
@@ -547,11 +546,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
-                if (action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings) {
+                if (action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.EditMinBar) {
                     consumeNextResume = true;
                 }
                 LauncherAction.RunAction(action, Home.this);
-                if (action != LauncherAction.Action.DeviceSettings && action != LauncherAction.Action.LauncherSettings) {
+                if (action != LauncherAction.Action.DeviceSettings && action != LauncherAction.Action.LauncherSettings && action != LauncherAction.Action.EditMinBar) {
                     drawerLayout.closeDrawers();
                 }
             }
@@ -699,6 +698,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     protected void onStart() {
+        launcher = this;
         if (appWidgetHost != null) {
             appWidgetHost.startListening();
         }
@@ -720,6 +720,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     protected void onResume() {
+        launcher = this;
         if (appWidgetHost != null) {
             appWidgetHost.startListening();
         }

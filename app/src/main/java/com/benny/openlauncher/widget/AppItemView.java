@@ -287,7 +287,8 @@ public class AppItemView extends View implements Drawable.Callback {
                         @Override
                         public void onClick(View view) {
                             view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                            LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, context);
+                            Home.launcher.openAppDrawer(view);
+                            //LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, context);
                         }
                     });
                     break;
