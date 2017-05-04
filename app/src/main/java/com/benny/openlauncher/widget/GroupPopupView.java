@@ -142,9 +142,9 @@ public class GroupPopupView extends FrameLayout {
                         i.putExtra("mDragData", dropItem);
                         ClipData data = ClipData.newIntent("mDragIntent", i);
                         if (act.getStringExtra("shortCutIconID") == null) {
-                            itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.ACTION_APP), 0);
+                            itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.APP), 0);
                         } else {
-                            itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.ACTION_SHORTCUT), 0);
+                            itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.SHORTCUT), 0);
                         }
 
                         dismissPopup();

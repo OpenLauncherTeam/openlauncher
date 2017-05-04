@@ -8,6 +8,7 @@
 
     <!-- Edit Mode -->
 
+    <string name="edit">Edit</string>
     <string name="info">Info</string>
     <string name="uninstall">Uninstall</string>
     <string name="add_widget">Widget</string>

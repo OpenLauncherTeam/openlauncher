@@ -8,6 +8,6 @@ public class DragAction {
     }
 
     public enum Action {
-        ACTION_GROUP, ACTION_APP, ACTION_APP_DRAWER, ACTION_WIDGET, ACTION_SHORTCUT, ACTION_LAUNCHER
+        APP_DRAWER, APP, SHORTCUT, GROUP, ACTION, WIDGET
     }
 }

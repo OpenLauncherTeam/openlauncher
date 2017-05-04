@@ -138,7 +138,7 @@ public class AppDrawerPaged extends SmoothViewPager {
                     .withOnClickLaunchApp(app)
                     .setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor)
                     .withOnTouchGetPosition()
-                    .withOnLongPressDrag(app, DragAction.Action.ACTION_APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
+                    .withOnLongPressDrag(app, DragAction.Action.APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                         @Override
                         public boolean readyForDrag(View view) {
                             return LauncherSettings.getInstance(view.getContext()).generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps;

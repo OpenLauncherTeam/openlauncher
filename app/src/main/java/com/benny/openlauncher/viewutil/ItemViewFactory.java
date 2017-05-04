@@ -47,7 +47,7 @@ public class ItemViewFactory {
                         .setLauncherAction(context, item.actionValue)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongPressDrag(item, DragAction.Action.ACTION_LAUNCHER, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongPressDrag(item, DragAction.Action.ACTION, new AppItemView.Builder.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -72,7 +72,7 @@ public class ItemViewFactory {
                         .withOnClickLaunchApp(app)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongPressDrag(item, DragAction.Action.ACTION_APP, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongPressDrag(item, DragAction.Action.APP, new AppItemView.Builder.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -137,7 +137,7 @@ public class ItemViewFactory {
                         Intent i = new Intent();
                         i.putExtra("mDragData", item);
                         ClipData data = ClipData.newIntent("mDragIntent", i);
-                        view.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.ACTION_WIDGET), 0);
+                        view.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.WIDGET), 0);
 
                         callBack.setLastItem(item, widgetContainer);
                         return true;
@@ -191,7 +191,7 @@ public class ItemViewFactory {
                         .setShortcutItem(item.appIntent)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongPressDrag(item, DragAction.Action.ACTION_SHORTCUT, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongPressDrag(item, DragAction.Action.SHORTCUT, new AppItemView.Builder.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -208,7 +208,7 @@ public class ItemViewFactory {
                 break;
             case GROUP:
                 view = new AppItemView.Builder(context)
-                        .withOnLongPressDrag(item, DragAction.Action.ACTION_GROUP, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongPressDrag(item, DragAction.Action.GROUP, new AppItemView.Builder.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;

@@ -23,24 +23,22 @@ import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 
 public class DragOptionView extends CardView {
-
     private View[] hideViews;
-    private LinearLayout horiIconList;
-    public boolean dragging = false;
+    private LinearLayout dragOptions;
 
+    private TextView editIcon;
     private TextView removeIcon;
     private TextView infoIcon;
     private TextView deleteIcon;
 
-    private boolean inited = false;
+    private Home home;
+    private Long animSpeed = 120L;
+    private boolean init = false;
+    public boolean dragging = false;
 
     public void setHome(Home home) {
         this.home = home;
     }
-
-    private Home home;
-
-    final Long animSpeed = 120L;
 
     public DragOptionView(Context context) {
         super(context);
@@ -58,8 +56,8 @@ public class DragOptionView extends CardView {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        if (!inited) {
-            inited = true;
+        if (!init) {
+            init = true;
             setY(-getHeight() - getCardElevation());
         }
         super.onLayout(changed, left, top, right, bottom);
@@ -70,28 +68,49 @@ public class DragOptionView extends CardView {
     }
 
     private ViewPropertyAnimator show() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return animate().y(((ConstraintLayout.LayoutParams) getLayoutParams()).topMargin + Tool.getStatusBarHeight(getContext())).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
-        else
+        } else {
             return animate().y(((ConstraintLayout.LayoutParams) getLayoutParams()).topMargin).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
+        }
     }
 
     private void init() {
-        inited = false;
+        init = false;
         setCardElevation(Tool.dp2px(4, getContext()));
         setRadius(Tool.dp2px(2, getContext()));
-        horiIconList = (LinearLayout) ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_dragoption_horiiconlist, this, false);
-        addView(horiIconList);
 
-        deleteIcon = (TextView) horiIconList.findViewById(R.id.deleteIcon);
+        dragOptions = (LinearLayout) ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_drag_options, this, false);
+        addView(dragOptions);
+
+        editIcon = (TextView) dragOptions.findViewById(R.id.editIcon);
+        editIcon.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                switch (dragEvent.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        return true;
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        return true;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        return true;
+                    case DragEvent.ACTION_DROP:
+                        return true;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        return true;
+                }
+                return false;
+            }
+        });
+        deleteIcon = (TextView) dragOptions.findViewById(R.id.deleteIcon);
         deleteIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
                         switch (((DragAction) dragEvent.getLocalState()).action) {
-                            case ACTION_APP_DRAWER:
-                            case ACTION_APP:
+                            case APP_DRAWER:
+                            case APP:
                                 return true;
                         }
                     case DragEvent.ACTION_DRAG_ENTERED:
@@ -107,15 +126,15 @@ public class DragOptionView extends CardView {
                 return false;
             }
         });
-        infoIcon = (TextView) horiIconList.findViewById(R.id.infoIcon);
+        infoIcon = (TextView) dragOptions.findViewById(R.id.infoIcon);
         infoIcon.setOnDragListener(new OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
                         switch (((DragAction) dragEvent.getLocalState()).action) {
-                            case ACTION_APP:
-                            case ACTION_APP_DRAWER:
+                            case APP_DRAWER:
+                            case APP:
                                 return true;
                         }
                     case DragEvent.ACTION_DRAG_ENTERED:
@@ -140,19 +159,19 @@ public class DragOptionView extends CardView {
                 return false;
             }
         });
-        removeIcon = (TextView) horiIconList.findViewById(R.id.removeIcon);
+        removeIcon = (TextView) dragOptions.findViewById(R.id.removeIcon);
         removeIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
                         switch (((DragAction) dragEvent.getLocalState()).action) {
-                            case ACTION_GROUP:
-                            case ACTION_APP:
-                            case ACTION_WIDGET:
-                            case ACTION_SHORTCUT:
-                            case ACTION_APP_DRAWER:
-                            case ACTION_LAUNCHER:
+                            case GROUP:
+                            case APP:
+                            case WIDGET:
+                            case SHORTCUT:
+                            case APP_DRAWER:
+                            case ACTION:
                                 return true;
                         }
                     case DragEvent.ACTION_DRAG_ENTERED:
@@ -186,8 +205,8 @@ public class DragOptionView extends CardView {
         infoIcon.setText(infoIcon.getText(), TextView.BufferType.SPANNABLE);
         deleteIcon.setText(deleteIcon.getText(), TextView.BufferType.SPANNABLE);
 
-        for (int i = 0; i < horiIconList.getChildCount(); i++) {
-            horiIconList.getChildAt(i).setVisibility(View.GONE);
+        for (int i = 0; i < dragOptions.getChildCount(); i++) {
+            dragOptions.getChildAt(i).setVisibility(View.GONE);
         }
     }
 
@@ -209,20 +228,18 @@ public class DragOptionView extends CardView {
     @Override
     public boolean dispatchDragEvent(DragEvent ev) {
         boolean r = super.dispatchDragEvent(ev);
-        if (r && (ev.getAction() == DragEvent.ACTION_DRAG_STARTED
-                || ev.getAction() == DragEvent.ACTION_DRAG_ENDED)) {
+        if (r && (ev.getAction() == DragEvent.ACTION_DRAG_STARTED || ev.getAction() == DragEvent.ACTION_DRAG_ENDED)) {
             // If we got a start or end and the return value is true, our
             // onDragEvent wasn't called by ViewGroup.dispatchDragEvent
             // So we do it here.
             onDragEvent(ev);
 
-            //Crash on low api device emulator e.g. 4.1
+            // fix crash on older versions of android
             try {
                 super.dispatchDragEvent(ev);
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
-
         }
         return r;
     }
@@ -247,7 +264,7 @@ public class DragOptionView extends CardView {
             case DragEvent.ACTION_DRAG_STARTED:
                 dragging = true;
                 switch (((DragAction) event.getLocalState()).action) {
-                    case ACTION_LAUNCHER:
+                    case ACTION:
                         removeIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
@@ -255,7 +272,7 @@ public class DragOptionView extends CardView {
                         for (CellContainer cellContainer : home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
-                    case ACTION_APP:
+                    case APP:
                         deleteIcon.setVisibility(View.VISIBLE);
                         if (LauncherSettings.getInstance(getContext()).generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps)
                             removeIcon.setVisibility(View.VISIBLE);
@@ -266,7 +283,7 @@ public class DragOptionView extends CardView {
                         for (CellContainer cellContainer : home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
-                    case ACTION_APP_DRAWER:
+                    case APP_DRAWER:
                         deleteIcon.setVisibility(View.VISIBLE);
                         infoIcon.setVisibility(View.VISIBLE);
                         animShowView();
@@ -275,14 +292,14 @@ public class DragOptionView extends CardView {
                         for (CellContainer cellContainer : home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
-                    case ACTION_WIDGET:
+                    case WIDGET:
                         removeIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
                         for (CellContainer cellContainer : home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
-                    case ACTION_GROUP:
+                    case GROUP:
                         removeIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
@@ -290,7 +307,7 @@ public class DragOptionView extends CardView {
                         for (CellContainer cellContainer : home.desktop.pages)
                             cellContainer.setHideGrid(false);
                         return true;
-                    case ACTION_SHORTCUT:
+                    case SHORTCUT:
                         removeIcon.setVisibility(View.VISIBLE);
                         animShowView();
 
@@ -301,18 +318,15 @@ public class DragOptionView extends CardView {
                 }
             case DragEvent.ACTION_DRAG_ENTERED:
                 return true;
-
             case DragEvent.ACTION_DRAG_EXITED:
                 return true;
-
             case DragEvent.ACTION_DROP:
                 return true;
-
             case DragEvent.ACTION_DRAG_ENDED:
                 home.dock.setHideGrid(true);
-                for (CellContainer cellContainer : home.desktop.pages)
+                for (CellContainer cellContainer : home.desktop.pages) {
                     cellContainer.setHideGrid(true);
-
+                }
                 dragging = false;
                 hide().withEndAction(new Runnable() {
                     @Override
@@ -320,7 +334,6 @@ public class DragOptionView extends CardView {
                         removeIcon.setVisibility(View.GONE);
                         infoIcon.setVisibility(View.GONE);
                         deleteIcon.setVisibility(View.GONE);
-
                         if (hideViews != null) {
                             for (View view : hideViews) {
                                 view.animate().alpha(1).setDuration(Math.round(animSpeed / 1.3f)).setInterpolator(new AccelerateDecelerateInterpolator());

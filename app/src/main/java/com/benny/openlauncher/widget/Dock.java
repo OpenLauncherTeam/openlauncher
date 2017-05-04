@@ -102,7 +102,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     public boolean onDrag(View p1, DragEvent p2) {
         switch (p2.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
-                if (((DragAction) p2.getLocalState()).action == DragAction.Action.ACTION_WIDGET) {
+                if (((DragAction) p2.getLocalState()).action == DragAction.Action.WIDGET) {
                     return false;
                 }
                 return true;
@@ -117,7 +117,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
-                if (((DragAction) p2.getLocalState()).action == DragAction.Action.ACTION_APP_DRAWER) {
+                if (((DragAction) p2.getLocalState()).action == DragAction.Action.APP_DRAWER) {
                     item.resetID();
                 }
 
