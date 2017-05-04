@@ -1,5 +1,6 @@
-### v0.3.4
+### v0.4.0
 * Move launcheranim & smootviewpager to app
+* Lots of bug fixes
 
 ### v0.3.1
 * Update build scheme
