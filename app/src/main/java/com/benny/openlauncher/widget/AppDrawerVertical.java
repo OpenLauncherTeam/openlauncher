@@ -160,7 +160,7 @@ public class AppDrawerVertical extends CardView {
 
         @Override
         public Character getCharacterForElement(int element) {
-            if (apps != null && apps.get(element) != null && apps.get(element).label.length() > 0)
+            if (apps != null && element < apps.size() && apps.get(element) != null && apps.get(element).label.length() > 0)
                 return apps.get(element).label.charAt(0);
             else return '#';
         }

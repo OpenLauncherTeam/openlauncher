@@ -87,7 +87,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         List<AppManager.App> apps = AppManager.getInstance(c).getApps();
         int appsSize = apps.size();
 
-
         // reset page count
         pageCount = 0;
         while ((appsSize = appsSize - (generalSettings.desktopGridY * generalSettings.desktopGridX)) >= (generalSettings.desktopGridY * generalSettings.desktopGridX) || (appsSize > -(generalSettings.desktopGridY * generalSettings.desktopGridX))) {
@@ -486,6 +485,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     itemFromCoordinate.y = to.y;
                 }
             };
+            layout.setOnTouchListener(new OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    currentEvent = event;
+                    return false;
+                }
+            });
             layout.setGridSize(LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridX, LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridY);
             layout.setOnClickListener(new OnClickListener() {
                 @Override
