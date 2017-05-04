@@ -11,10 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
 
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.widget.Desktop;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.benny.openlauncher.model.Item;
 
 public class ShortcutReceiver extends BroadcastReceiver {
 
@@ -45,7 +42,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
                 shortcutIconDrawable = new BitmapDrawable(context.getResources(), (Bitmap) intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON));
         }
 
-        Desktop.Item item = Desktop.Item.newShortcutItem(context, name, newIntent, Tool.drawableToBitmap(shortcutIconDrawable));
+        Item item = Item.newShortcutItem(context, name, newIntent, Tool.drawableToBitmap(shortcutIconDrawable));
         Point perferedPos = Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).findFreeSpace();
 
         if (perferedPos == null) {

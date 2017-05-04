@@ -18,13 +18,13 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.widget.CellContainer;
-import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.WidgetView;
 
 /**
@@ -36,7 +36,7 @@ public class ItemViewFactory {
     public static final int NO_FLAGS = 0x01;
     public static final int NO_LABEL = 0x02;
 
-    public static View getItemView(final Context context, final DesktopCallBack callBack, final Desktop.Item item, int flags) {
+    public static View getItemView(final Context context, final DesktopCallBack callBack, final Item item, int flags) {
         View view = null;
         if (item.type == null) {
             return null;
@@ -246,7 +246,7 @@ public class ItemViewFactory {
         return view;
     }
 
-    private static void scaleWidget(View view, Desktop.Item item) {
+    private static void scaleWidget(View view, Item item) {
         item.spanX = Math.min(item.spanX, 4);
         item.spanX = Math.max(item.spanX, 1);
         item.spanY = Math.min(item.spanY, 4);
@@ -263,7 +263,7 @@ public class ItemViewFactory {
         }
     }
 
-    private static void updateWidgetOption(Desktop.Item item) {
+    private static void updateWidgetOption(Item item) {
         Bundle newOps = new Bundle();
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, item.spanX * Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth);
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.spanX * Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth);
@@ -272,7 +272,7 @@ public class ItemViewFactory {
         Home.appWidgetManager.updateAppWidgetOptions(item.widgetID, newOps);
     }
 
-    public static Drawable getGroupIconDrawable(Context context, Desktop.Item item) {
+    public static Drawable getGroupIconDrawable(Context context, Item item) {
         final float iconSize = Tool.dp2px(LauncherSettings.getInstance(context).generalSettings.iconSize, context);
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {

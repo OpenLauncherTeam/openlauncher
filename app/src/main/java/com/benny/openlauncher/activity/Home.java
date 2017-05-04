@@ -19,7 +19,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
-import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -38,6 +37,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppUpdateReceiver;
 import com.benny.openlauncher.util.DatabaseHelper;
@@ -269,7 +269,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                         launcherSettings.generalSettings.firstLauncher = false;
 
                         // create a new app drawer button
-                        Desktop.Item appDrawerBtnItem = Desktop.Item.newActionItem(8);
+                        Item appDrawerBtnItem = Item.newActionItem(8);
 
                         // center the button
                         appDrawerBtnItem.x = 2;
@@ -462,7 +462,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 switch (which) {
                     case 0:
                         Point pos = desktop.getCurrentPage().findFreeSpace();
-                        desktop.addItemToCell(Desktop.Item.newActionItem(8), pos.x, pos.y);
+                        desktop.addItemToCell(Item.newActionItem(8), pos.x, pos.y);
                         break;
                 }
             }
@@ -652,7 +652,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public void createWidget(Intent data) {
         Bundle extras = data.getExtras();
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
-        Desktop.Item item = Desktop.Item.newWidgetItem(appWidgetId);
+        Item item = Item.newWidgetItem(appWidgetId);
         item.spanX = 4;
         item.spanY = 1;
         item.x = 0;

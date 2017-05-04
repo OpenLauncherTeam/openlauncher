@@ -18,9 +18,9 @@ import android.view.View;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
@@ -312,11 +312,11 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder withOnLongPressDrag(final AppManager.App app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
-            withOnLongPressDrag(Desktop.Item.newAppItem(app), action, eventAction);
+            withOnLongPressDrag(Item.newAppItem(app), action, eventAction);
             return this;
         }
 
-        public Builder withOnLongPressDrag(final Desktop.Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
+        public Builder withOnLongPressDrag(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
             view.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {

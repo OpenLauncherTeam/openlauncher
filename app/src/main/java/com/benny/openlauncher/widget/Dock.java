@@ -21,7 +21,7 @@ import com.benny.openlauncher.viewutil.ItemViewFactory;
 
 import java.util.List;
 
-import static com.benny.openlauncher.widget.Desktop.Item;
+import com.benny.openlauncher.model.Item;
 
 public class Dock extends CellContainer implements View.OnDragListener, DesktopCallBack {
 

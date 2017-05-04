@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.Desktop;
 import com.google.gson.Gson;
@@ -30,10 +31,10 @@ public class LauncherSettings {
         return ourInstance == null ? ourInstance = new LauncherSettings(c) : ourInstance;
     }
 
-    private void checkIconCacheIDs(Desktop.Item item) {
-        if (item.type == Desktop.Item.Type.SHORTCUT) {
+    private void checkIconCacheIDs(Item item) {
+        if (item.type == Item.Type.SHORTCUT) {
             iconCacheIDs.add(item.appIntent.getStringExtra("shortCutIconID"));
-        } else if (item.type == Desktop.Item.Type.GROUP) {
+        } else if (item.type == Item.Type.GROUP) {
             for (int i = 0; i < item.items.size(); i++) {
                 String ID;
                 if ((ID = item.items.get(i).appIntent.getStringExtra("shortCutIconID")) != null) {
@@ -98,8 +99,8 @@ public class LauncherSettings {
         Desktop.DesktopMode mode = Desktop.DesktopMode.values()[position];
 
         // check icon cache for all items
-        List<List<Desktop.Item>> desktop = Home.launcher.db.getDesktop();
-        List<Desktop.Item> dock = Home.launcher.db.getDock();
+        List<List<Item>> desktop = Home.launcher.db.getDesktop();
+        List<Item> dock = Home.launcher.db.getDock();
         iconCacheIDs.clear();
         for (int i = 0; i < desktop.size(); i++) {
             for (int l = 0; l < desktop.get(i).size(); l++) {

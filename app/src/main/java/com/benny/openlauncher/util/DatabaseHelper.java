@@ -6,11 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.benny.openlauncher.widget.Desktop;
-import com.benny.openlauncher.widget.Desktop.Item;
+import com.benny.openlauncher.model.Item;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -75,7 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.appIntent));
                 break;
             case GROUP:
-                for (Desktop.Item tmp : item.items) {
+                for (Item tmp : item.items) {
                     concat += tmp.idValue + "#";
                 }
                 itemValues.put(COLUMN_DATA, concat);
@@ -142,7 +140,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Item getItem(int id) {
         String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + id;
         Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
-        Item item = new Desktop.Item();
+        Item item = new Item();
         if (cursor.moveToFirst()) {
             item = getSelectionItem(cursor);
         }
@@ -197,7 +195,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.appIntent));
                 break;
             case GROUP:
-                for (Desktop.Item tmp : item.items) {
+                for (Item tmp : item.items) {
                     concat += tmp.idValue + "#";
                 }
                 itemValues.put(COLUMN_DATA, concat);

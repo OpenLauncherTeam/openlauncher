@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
@@ -93,7 +94,7 @@ public class GroupPopupView extends FrameLayout {
         setVisibility(View.INVISIBLE);
     }
 
-    public boolean showWindowV(final Desktop.Item item, final View itemView, final DesktopCallBack callBack) {
+    public boolean showWindowV(final Item item, final View itemView, final DesktopCallBack callBack) {
         if (getVisibility() == View.VISIBLE) return false;
 
         isShowing = true;
@@ -115,7 +116,7 @@ public class GroupPopupView extends FrameLayout {
                 if (y2 * cellSize[0] + x2 > item.items.size() - 1) {
                     continue;
                 }
-                final Desktop.Item dropItem = item.items.get(y2 * cellSize[0] + x2);
+                final Item dropItem = item.items.get(y2 * cellSize[0] + x2);
                 final Intent act = dropItem.appIntent;
                 AppItemView.Builder b = new AppItemView.Builder(getContext()).withOnTouchGetPosition();
                 b.setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
@@ -263,7 +264,7 @@ public class GroupPopupView extends FrameLayout {
         return true;
     }
 
-    private void removeItem(Context context, final DesktopCallBack callBack, final Desktop.Item currentItem, Desktop.Item dragOutItem, AppItemView currentView) {
+    private void removeItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, AppItemView currentView) {
         currentItem.items.remove(dragOutItem);
 
         db.updateItem(dragOutItem, 1);
@@ -272,11 +273,11 @@ public class GroupPopupView extends FrameLayout {
         currentView.setIcon(ItemViewFactory.getGroupIconDrawable(context, currentItem));
     }
 
-    public void updateItem(Context context, final DesktopCallBack callBack, final Desktop.Item currentItem, Desktop.Item dragOutItem, AppItemView currentView) {
+    public void updateItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, AppItemView currentView) {
         if (currentItem.items.size() == 1) {
             final AppManager.App app = AppManager.getInstance(currentView.getContext()).findApp(currentItem.items.get(0).appIntent.getComponent().getPackageName(), currentItem.items.get(0).appIntent.getComponent().getClassName());
             if (app != null) {
-                Desktop.Item item = db.getItem(currentItem.items.get(0).idValue);
+                Item item = db.getItem(currentItem.items.get(0).idValue);
                 item.x = currentItem.x;
                 item.y = currentItem.y;
 

@@ -3,11 +3,8 @@ package com.benny.openlauncher.widget;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Build;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.DragEvent;
 import android.view.MotionEvent;
@@ -20,6 +17,7 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherAction;
@@ -31,7 +29,6 @@ import com.benny.openlauncher.model.SmoothPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
@@ -105,7 +102,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     int pagePos = y * generalSettings.desktopGridY + x;
                     int pos = generalSettings.desktopGridY * generalSettings.desktopGridX * i + pagePos;
                     if (!(pos >= apps.size())) {
-                        Desktop.Item appItem = Desktop.Item.newAppItem(apps.get(pos));
+                        Item appItem = Item.newAppItem(apps.get(pos));
                         appItem.x = x;
                         appItem.y = y;
                         addItemToPage(appItem, i);
@@ -124,13 +121,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         int column = LauncherSettings.getInstance(getContext()).generalSettings.desktopGridX;
         int row = LauncherSettings.getInstance(getContext()).generalSettings.desktopGridY;
-        List<List<Desktop.Item>> desktopItems = Home.launcher.db.getDesktop();
+        List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
         for (int pageCount = 0; pageCount < desktopItems.size(); pageCount++) {
             if (pages.size() <= pageCount) break;
             pages.get(pageCount).removeAllViews();
             List<Item> items = desktopItems.get(pageCount);
             for (int j = 0; j < items.size(); j++) {
-                Desktop.Item item = items.get(j);
+                Item item = items.get(j);
                 if (((item.x + item.spanX) <= column) && ((item.y + item.spanY) <= row)) {
                     addItemToPage(item, pageCount);
                 }
@@ -253,7 +250,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     @Override
     public void setLastItem(Object... args) {
         // args stores the item in [0] and the view reference in [1]
-        Desktop.Item item = (Desktop.Item) args[0];
+        Item item = (Item) args[0];
         View v = (View) args[1];
 
         previousPage = getCurrentItem();
@@ -460,8 +457,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             };
         }
 
-        private Desktop.Item getItemFromCoordinate(Point coordinate) {
-            List<List<Desktop.Item>> desktopItems = Home.launcher.db.getDesktop();
+        private Item getItemFromCoordinate(Point coordinate) {
+            List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
             List<Item> pageData = desktopItems.get(desktop.getCurrentItem());
             for (int i = 0; i < pageData.size(); i++) {
                 Item item = pageData.get(i);
@@ -546,11 +543,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         switch (item.type) {
             case APP:
             case SHORTCUT:
-                if (dropItem.type == Desktop.Item.Type.APP || dropItem.type == Desktop.Item.Type.SHORTCUT) {
+                if (dropItem.type == Item.Type.APP || dropItem.type == Item.Type.SHORTCUT) {
                     parent.removeView(itemView);
 
                     // create a new group item
-                    Desktop.Item group = Desktop.Item.newGroupItem();
+                    Item group = Item.newGroupItem();
                     group.items.add(item);
                     group.items.add(dropItem);
                     group.name = (home.getString(R.string.unnamed));
@@ -572,7 +569,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 }
                 break;
             case GROUP:
-                if ((dropItem.type == Desktop.Item.Type.APP || dropItem.type == Desktop.Item.Type.SHORTCUT) && item.items.size() < GroupPopupView.GroupDef.maxItem) {
+                if ((dropItem.type == Item.Type.APP || dropItem.type == Item.Type.SHORTCUT) && item.items.size() < GroupPopupView.GroupDef.maxItem) {
                     parent.removeView(itemView);
 
                     item.items.add(dropItem);
@@ -596,194 +593,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public enum DesktopMode {
         Normal, ShowAllApps
-    }
-
-    public static class Item implements Parcelable {
-        public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>() {
-
-            @Override
-            public Item createFromParcel(Parcel parcel) {
-                return new Item(parcel);
-            }
-
-            @Override
-            public Item[] newArray(int size) {
-                return new Item[size];
-            }
-        };
-
-        // all items need these values
-        public int idValue;
-        public Type type;
-        public String name;
-        public int x = 0;
-        public int y = 0;
-
-        // intent for shortcuts and apps
-        public Intent appIntent;
-
-        // list of items for groups
-        public List<Desktop.Item> items;
-
-        // int value for launcher action
-        public int actionValue;
-
-        // widget specific values
-        public int widgetID;
-        public int spanX = 1;
-        public int spanY = 1;
-
-        public Item() {
-            Random random = new Random();
-            idValue = random.nextInt();
-        }
-
-        public void resetID() {
-            Random random = new Random();
-            idValue = random.nextInt();
-        }
-
-        public Item(Parcel parcel) {
-            idValue = parcel.readInt();
-            type = Type.valueOf(parcel.readString());
-            switch (type) {
-                case APP:
-                case SHORTCUT:
-                    appIntent = Tool.getIntentFromString(parcel.readString());
-                    break;
-                case GROUP:
-                    List<String> labels = new ArrayList<>();
-                    parcel.readStringList(labels);
-                    items = new ArrayList<>();
-                    for (String s : labels) {
-                        items.add(Home.launcher.db.getItem(Integer.parseInt(s)));
-                    }
-                    break;
-                case ACTION:
-                    actionValue = parcel.readInt();
-                    break;
-                case WIDGET:
-                    widgetID = parcel.readInt();
-                    spanX = parcel.readInt();
-                    spanY = parcel.readInt();
-                    break;
-            }
-            name = parcel.readString();
-        }
-
-        @Override
-        public boolean equals(Object object) {
-            Item itemObject = (Item) object;
-            return object != null
-                    && itemObject.type == this.type
-                    && itemObject.x == this.x
-                    && itemObject.y == this.y
-                    && this.idValue == itemObject.idValue;
-        }
-
-        public static Item newAppItem(AppManager.App app) {
-            Desktop.Item item = new Item();
-            item.type = Type.APP;
-            item.appIntent = toIntent(app);
-            return item;
-        }
-
-        public static Item newWidgetItem(int widgetID) {
-            Desktop.Item item = new Item();
-            item.type = Type.WIDGET;
-            item.widgetID = widgetID;
-            item.spanX = 1;
-            item.spanY = 1;
-            return item;
-        }
-
-        public static Item newShortcutItem(Context context, String name, Intent intent, Bitmap icon) {
-            Desktop.Item item = new Item();
-            item.type = Type.SHORTCUT;
-            item.spanX = 1;
-            item.spanY = 1;
-            item.appIntent = intent;
-
-            String iconID = Tool.saveIconAndReturnID(context, icon);
-            intent.putExtra("shortCutIconID", iconID);
-            intent.putExtra("shortCutName", name);
-            return item;
-        }
-
-        public static Item newShortcutItem(Intent intent) {
-            Desktop.Item item = new Item();
-            item.type = Type.SHORTCUT;
-            item.spanX = 1;
-            item.spanY = 1;
-            item.appIntent = intent;
-            return item;
-        }
-
-        public static Item newActionItem(int action) {
-            Desktop.Item item = new Item();
-            item.type = Type.ACTION;
-            item.spanX = 1;
-            item.spanY = 1;
-            item.actionValue = action;
-            return item;
-        }
-
-        public static Item newGroupItem() {
-            Desktop.Item item = new Item();
-            item.type = Type.GROUP;
-            item.spanX = 1;
-            item.spanY = 1;
-            item.items = new ArrayList<>();
-            return item;
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel out, int flags) {
-            out.writeInt(idValue);
-            out.writeString(type.toString());
-            switch (type) {
-                case APP:
-                case SHORTCUT:
-                    out.writeString(Tool.getIntentAsString(this.appIntent));
-                    break;
-                case GROUP:
-                    List<String> labels = new ArrayList<>();
-                    for (Item i : items) {
-                        labels.add(Integer.toString(i.idValue));
-                    }
-                    out.writeStringList(labels);
-                    break;
-                case ACTION:
-                    out.writeInt(actionValue);
-                    break;
-                case WIDGET:
-                    out.writeInt(widgetID);
-                    out.writeInt(spanX);
-                    out.writeInt(spanY);
-                    break;
-            }
-            out.writeString(name);
-        }
-
-        private static Intent toIntent(AppManager.App app) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setClassName(app.packageName, app.className);
-            return intent;
-        }
-
-        public enum Type {
-            APP,
-            SHORTCUT,
-            GROUP,
-            ACTION,
-            WIDGET
-        }
     }
 
     public interface OnDesktopEditListener {
