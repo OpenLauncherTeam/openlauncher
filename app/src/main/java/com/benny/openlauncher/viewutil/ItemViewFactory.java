@@ -88,7 +88,7 @@ public class ItemViewFactory {
                         .getView();
                 break;
             case WIDGET:
-                AppWidgetProviderInfo appWidgetInfo = Home.appWidgetManager.getAppWidgetInfo(item.widgetID);
+                final AppWidgetProviderInfo appWidgetInfo = Home.appWidgetManager.getAppWidgetInfo(item.widgetID);
                 final WidgetView widgetView = (WidgetView) Home.appWidgetHost.createView(context, item.widgetID, appWidgetInfo);
 
                 widgetView.setAppWidget(item.widgetID, appWidgetInfo);
@@ -168,6 +168,8 @@ public class ItemViewFactory {
                     public void onClick(View view) {
                         if (view.getScaleX() < 1) return;
                         item.spanY--;
+                        int minY = appWidgetInfo.minResizeHeight / Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight;
+                        item.spanY = Math.max(item.spanY, minY);
                         scaleWidget(widgetContainer, item);
                         widgetContainer.removeCallbacks(action);
                         widgetContainer.postDelayed(action, 2000);
@@ -178,6 +180,8 @@ public class ItemViewFactory {
                     public void onClick(View view) {
                         if (view.getScaleX() < 1) return;
                         item.spanX--;
+                        int minX = appWidgetInfo.minResizeWidth / Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth;
+                        item.spanX = Math.max(item.spanX, minX);
                         scaleWidget(widgetContainer, item);
                         widgetContainer.removeCallbacks(action);
                         widgetContainer.postDelayed(action, 2000);
