@@ -13,7 +13,7 @@
         app:contentPadding="10dp">
 
         <com.benny.openlauncher.widget.CellContainer
-            android:id="@+id/cc"
+            android:id="@+id/group"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center" />

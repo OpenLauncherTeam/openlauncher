@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,6 +21,28 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 public class DialogUtils {
+    public static MaterialDialog.Builder editItem(String title, String defaultText, Context c, final EditItemListener listener) {
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(c);
+        builder.title(title)
+                .input(null, defaultText, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                        listener.itemLabel(input.toString());
+                    }
+                })
+                .positiveText(R.string.ok)
+                .negativeText(R.string.cancel);
+        return builder;
+    }
+
+    public static MaterialDialog.Builder alert(Context context, String title, String msg) {
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        builder.title(title)
+                .content(msg)
+                .positiveText(R.string.ok);
+        return builder;
+    }
+
     public static void addActionItemDialog(final Context context, MaterialDialog.ListCallback callback) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title("Desktop Action")
@@ -166,5 +189,9 @@ public class DialogUtils {
         } catch (Exception e) {
             Toast.makeText(context, R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public interface EditItemListener {
+        void itemLabel(String str);
     }
 }

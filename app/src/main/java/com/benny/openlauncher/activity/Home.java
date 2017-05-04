@@ -230,7 +230,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     });
                     init();
                     if (!result && Home.launcher != null) {
-                        Tool.DialogHelper.alert(Home.launcher, "Some settings can't be read.", "Developer's mistake, hope you understand! Some of the settings will be reset to their default value.").show();
+                        DialogUtils.alert(Home.launcher, "Some settings can't be read.", "Developer's mistake, hope you understand! Some of the settings will be reset to their default value.").show();
                     }
                 }
             }.execute();

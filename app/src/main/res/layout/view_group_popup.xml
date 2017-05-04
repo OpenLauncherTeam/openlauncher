@@ -5,25 +5,12 @@
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/Light.Background"
     app:cardElevation="4dp"
-    app:contentPadding="5dp">
-
+    app:contentPadding="4dp">
 
     <com.benny.openlauncher.widget.CellContainer
-        android:id="@+id/cc"
+        android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="30dp" />
-
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"
-        android:gravity="center"
-        android:paddingBottom="6dp"
-        android:singleLine="true"
-        android:textSize="14sp"
-        android:textStyle="bold" />
-
 
 </android.support.v7.widget.CardView>

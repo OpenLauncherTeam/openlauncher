@@ -15,7 +15,7 @@
 
     <!-- Toasts -->
 
-    <string name="toast_rename">名前を変更</string>
+    <string name="edit_item">名前を変更</string>
     <string name="toast_notenoughspace">容量が不足しています</string>
     <string name="toast_appuninstalled">このアプリはアンインストールされました。</string>
     <string name="toast_freeram" formatted="false">空きメモリ: %d mb 節約 %d mb</string>

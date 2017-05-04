@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
@@ -25,7 +24,6 @@ import com.benny.openlauncher.viewutil.GroupIconDrawable;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
 
 import static com.benny.openlauncher.activity.Home.db;
-import static com.benny.openlauncher.activity.Home.resources;
 
 public class GroupPopupView extends FrameLayout {
 
@@ -33,7 +31,6 @@ public class GroupPopupView extends FrameLayout {
 
     private CardView popupParent;
     private CellContainer cellContainer;
-    private TextView title;
     private PopupWindow.OnDismissListener dismissListener;
     private boolean init = false;
 
@@ -52,14 +49,12 @@ public class GroupPopupView extends FrameLayout {
         init = false;
 
         bringToFront();
-        popupParent = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_grouppopup, this, false);
-        cellContainer = (CellContainer) popupParent.findViewById(R.id.cc);
-        title = (TextView) popupParent.findViewById(R.id.tv);
+        popupParent = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_group_popup, this, false);
+        cellContainer = (CellContainer) popupParent.findViewById(R.id.group);
 
         postDelayed(new Runnable() {
             @Override
             public void run() {
-                title.setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
                 popupParent.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.folderColor);
             }
         }, 2000);
@@ -190,39 +185,19 @@ public class GroupPopupView extends FrameLayout {
             }
         }
 
-        title.setText(item.name);
-        title.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Tool.DialogHelper.promptInputText(resources.getString(R.string.toast_rename), item.name, getContext(), new Tool.DialogHelper.OnTextResultListener() {
-                    @Override
-                    public void hereIsTheText(String str) {
-                        if (str.isEmpty()) {
-                            return;
-                        }
-
-                        title.setText(str);
-                        item.name = str;
-                    }
-                }).show();
-            }
-        });
-
         dismissListener = new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                AppItemView otv = ((AppItemView) itemView);
-                if (!otv.getLabel().isEmpty())
-                    otv.setLabel(title.getText().toString());
-                if (((AppItemView) itemView).getIcon() instanceof GroupIconDrawable)
+                if (((AppItemView) itemView).getIcon() instanceof GroupIconDrawable) {
                     ((GroupIconDrawable) ((AppItemView) itemView).getIcon()).popBack();
+                }
             }
         };
 
         int popupWidth = contentPadding * 8 + popupParent.getContentPaddingLeft() + popupParent.getContentPaddingRight() + (iconSize) * cellSize[0];
         popupParent.getLayoutParams().width = popupWidth;
-        int popupHeight = contentPadding * 2 + popupParent.getContentPaddingTop() + popupParent.getContentPaddingBottom() + Tool.dp2px(30, c)
-                + (iconSize + textHeight) * cellSize[1];
+
+        int popupHeight = contentPadding * 2 + popupParent.getContentPaddingTop() + popupParent.getContentPaddingBottom() + Tool.dp2px(30, c) + (iconSize + textHeight) * cellSize[1];
         popupParent.getLayoutParams().height = popupHeight;
 
         int[] coordinates = new int[2];
@@ -310,7 +285,6 @@ public class GroupPopupView extends FrameLayout {
                 return new int[]{3, 3};
             if (count <= 12)
                 return new int[]{4, 3};
-
             return new int[]{0, 0};
         }
     }

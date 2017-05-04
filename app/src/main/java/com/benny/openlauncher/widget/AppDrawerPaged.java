@@ -162,7 +162,7 @@ public class AppDrawerPaged extends SmoothViewPager {
                     ((CardView) layout.getChildAt(0)).setCardBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
                     ((CardView) layout.getChildAt(0)).setCardElevation(Tool.dp2px(4, getContext()));
                 }
-                CellContainer cc = (CellContainer) layout.findViewById(R.id.cc);
+                CellContainer cc = (CellContainer) layout.findViewById(R.id.group);
                 cc.setGridSize(hCellCount, vCellCount);
 
                 for (int x = 0; x < hCellCount; x++) {

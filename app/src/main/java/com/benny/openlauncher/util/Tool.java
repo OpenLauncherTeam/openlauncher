@@ -570,32 +570,4 @@ public class Tool {
             }
         }
     }
-
-    public static class DialogHelper {
-        public static MaterialDialog.Builder promptInputText(String title, String defaultText, Context c, final OnTextResultListener listener) {
-            MaterialDialog.Builder b = new MaterialDialog.Builder(c);
-            b.title(title);
-            b.input(null, defaultText, new MaterialDialog.InputCallback() {
-                @Override
-                public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                    listener.hereIsTheText(input.toString());
-                }
-            });
-            b.positiveText(R.string.ok);
-            b.negativeText(R.string.cancel);
-            return b;
-        }
-
-        public static MaterialDialog.Builder alert(Context context, String title, String msg) {
-            MaterialDialog.Builder b = new MaterialDialog.Builder(context);
-            b.title(title);
-            b.content(msg);
-            b.positiveText(R.string.ok);
-            return b;
-        }
-
-        public interface OnTextResultListener {
-            void hereIsTheText(String str);
-        }
-    }
 }

@@ -72,10 +72,10 @@ public class AppDrawerController extends RevealFrameLayout {
                 switch (drawerMode) {
                     case Paged:
                         for (int i = 0; i < drawerViewPaged.pages.size(); i++) {
-                            drawerViewPaged.pages.get(i).findViewById(R.id.cc).setAlpha(1);
+                            drawerViewPaged.pages.get(i).findViewById(R.id.group).setAlpha(1);
                         }
                         if (drawerViewPaged.pages.size() > 0) {
-                            View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
+                            View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.group);
                             mGrid.setAlpha(0);
                             mGrid.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime - 50).setInterpolator(new AccelerateDecelerateInterpolator());
                         }
@@ -138,7 +138,7 @@ public class AppDrawerController extends RevealFrameLayout {
         switch (drawerMode) {
             case Paged:
                 if (drawerViewPaged.pages.size() > 0) {
-                    View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.cc);
+                    View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.group);
                     mGrid.animate().setStartDelay(0).alpha(0).setDuration(60L).withEndAction(new Runnable() {
                         @Override
                         public void run() {

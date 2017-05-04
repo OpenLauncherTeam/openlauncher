@@ -9,7 +9,7 @@
     <string name="allApps">Alle Apps</string>
     <string name="crash">Etwas ging schief … starte OpenLauncher neu.</string>
 
-    <string name="toast_rename">Umbenennen</string>
+    <string name="edit_item">Umbenennen</string>
     <string name="toast_notenoughspace">Nicht genügend Platz</string>
     <string name="toast_appuninstalled">Die App wurde deinstalliert.</string>
     <string name="toast_freeram" formatted="false">Freier Speicher: %d mb frei gegeben %d mb</string>
