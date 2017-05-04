@@ -26,10 +26,10 @@ You can support us, buy us some coffee .
 
 # Contributors
 * [TeamBrainStorm](https://github.com/TeamBrainStorm) very supportive when the project first started.
-* Also to all those people who has contributed to this project, thank you.
-
 * German translation: [GauklerFaun](https://github.com/scoute-dich) 
 * Japanese translation: [Naofum](https://github.com/naofum)
+
+Also to all those people who has contributed to this project, thank you.
 
 # Status
 ### OnGoing: 
