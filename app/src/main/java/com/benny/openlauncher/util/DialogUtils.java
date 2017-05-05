@@ -7,18 +7,26 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.benny.openlauncher.widget.AppDrawerController;
+import com.mikepenz.fastadapter.FastAdapter;
+import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import net.qiujuer.genius.blur.StackBlur;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DialogUtils {
     public static MaterialDialog.Builder editItem(String title, String defaultText, Context c, final EditItemListener listener) {
@@ -77,12 +85,64 @@ public class DialogUtils {
                 }).show();
     }
 
-    public static void selectActionDialog(final Context context, int titleId, int selected, MaterialDialog.ListCallbackSingleChoice onSingleChoice) {
+    public static void selectAppDialog(final Context context, final OnAppSelectedListener onAppSelectedListener) {
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        FastItemAdapter<IconLabelItem> fastItemAdapter = new FastItemAdapter<>();
+        builder.title("Select App")
+                .adapter(fastItemAdapter, new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
+                .negativeText(R.string.cancel);
+
+        final MaterialDialog dialog = builder.build();
+        List<IconLabelItem> items = new ArrayList<>();
+        final List<AppManager.App> apps = AppManager.getInstance(context).getApps();
+        int size = Tool.dp2px(46, context);
+        int sizePad = Tool.dp2px(8, context);
+        for (int i = 0; i < apps.size(); i++) {
+            items.add(new IconLabelItem(context, apps.get(i).icon, apps.get(i).label, null, sizePad, size));
+        }
+        fastItemAdapter.set(items);
+        fastItemAdapter.withOnClickListener(new FastAdapter.OnClickListener<IconLabelItem>() {
+            @Override
+            public boolean onClick(View v, IAdapter<IconLabelItem> adapter, IconLabelItem item, int position) {
+                if (onAppSelectedListener != null)
+                    onAppSelectedListener.onAppSelected(apps.get(position));
+
+                dialog.dismiss();
+                return true;
+            }
+        });
+        dialog.show();
+    }
+
+    public static void selectActionDialog(final Context context, int titleId, LauncherAction.ActionItem selected, final OnActionSelectedListener onActionSelectedListener) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(context.getString(titleId))
                 .negativeText(R.string.cancel)
                 .items(R.array.gestureEntries)
-                .itemsCallbackSingleChoice(selected, onSingleChoice)
+                .itemsCallbackSingleChoice(LauncherAction.getActionItemIndex(selected) + 1, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        LauncherAction.ActionItem item = null;
+                        if (which > 0)
+                            item = LauncherAction.getActionItem(which - 1);
+
+
+                        if (item != null && item.action == LauncherAction.Action.LaunchApp) {
+                            final LauncherAction.ActionItem finalItem = item;
+                            selectAppDialog(context, new OnAppSelectedListener() {
+                                @Override
+                                public void onAppSelected(AppManager.App app) {
+                                    finalItem.extraData = Tool.getStartAppIntent(app);
+                                    onActionSelectedListener.onActionSelected(finalItem);
+                                }
+                            });
+                        } else if (onActionSelectedListener != null) {
+                            onActionSelectedListener.onActionSelected(item);
+                        }
+
+                        return true;
+                    }
+                })
                 .show();
     }
 
@@ -189,6 +249,14 @@ public class DialogUtils {
         } catch (Exception e) {
             Toast.makeText(context, R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public interface OnAppSelectedListener {
+        void onAppSelected(AppManager.App app);
+    }
+
+    public interface OnActionSelectedListener {
+        void onActionSelected(LauncherAction.ActionItem item);
     }
 
     public interface EditItemListener {

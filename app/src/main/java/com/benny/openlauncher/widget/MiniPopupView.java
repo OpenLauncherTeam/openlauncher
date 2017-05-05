@@ -66,8 +66,6 @@ public class MiniPopupView extends RevealFrameLayout {
                 break;
             case LauncherSettings:
                 break;
-            case ThemePicker:
-                break;
             case VolumeDialog:
                 AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
                 window = LayoutInflater.from(getContext()).inflate(R.layout.widow_volume, this, false);

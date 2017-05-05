@@ -520,23 +520,23 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         if (minBarArrangement == null) {
             generalSettings.miniBarArrangement = new ArrayList<>();
-            for (LauncherAction.ActionItem item : LauncherAction.actionItems) {
+            for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
                 generalSettings.miniBarArrangement.add("0" + item.label.toString());
                 labels.add(item.label.toString());
                 icons.add(item.icon);
             }
         } else {
-            if (minBarArrangement.size() == LauncherAction.actionItems.length) {
+            if (minBarArrangement.size() == LauncherAction.actionDisplayItems.length) {
                 for (String act : minBarArrangement) {
                     if (act.charAt(0) == '0') {
-                        LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act.substring(1));
+                        LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
                         labels.add(item.label.toString());
                         icons.add(item.icon);
                     }
                 }
             } else {
                 generalSettings.miniBarArrangement = new ArrayList<>();
-                for (LauncherAction.ActionItem item : LauncherAction.actionItems) {
+                for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
                     generalSettings.miniBarArrangement.add("0" + item.label.toString());
                     labels.add(item.label.toString());
                     icons.add(item.icon);

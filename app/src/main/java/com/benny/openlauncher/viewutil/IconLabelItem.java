@@ -26,13 +26,8 @@ import java.util.List;
 public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> {
 
     private static final ViewHolderFactory<? extends IconLabelItem.ViewHolder> FACTORY = new ItemFactory();
-
-    public void setIcon(Drawable icon) {
-        this.icon = icon;
-    }
-
-    private Drawable icon;
     public String label;
+    private Drawable icon;
     private View.OnClickListener listener;
     private int iconGravity;
     private int textColor = Color.DKGRAY;
@@ -41,7 +36,6 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private Typeface typeface;
     private boolean matchParent = true;
     private int forceSize = -1;
-
     public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int iconGravity) {
         this.label = label;
         this.icon = icon;
@@ -53,6 +47,14 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener) {
         this(context, icon, label, listener, Gravity.START);
+    }
+
+    public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int drawablePadding, int forceSize) {
+        this(context, icon, label, listener, Gravity.START);
+        this.drawablePadding = drawablePadding;
+        if (forceSize != -1) {
+            this.icon = new BitmapDrawable(context.getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(icon), forceSize, forceSize, true));
+        }
     }
 
     public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int textColor, int drawablePadding, int forceSize) {
@@ -76,6 +78,10 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     public IconLabelItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, int iconGravity, int textColor, int gravity, int drawablePadding, Typeface typeface, boolean matchParent) {
         this(context, icon, label, listener, iconGravity, textColor, gravity, Tool.dp2px(drawablePadding, context), typeface);
         this.matchParent = matchParent;
+    }
+
+    public void setIcon(Drawable icon) {
+        this.icon = icon;
     }
 
     public void setGravity(int gravity) {

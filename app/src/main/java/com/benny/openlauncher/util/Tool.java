@@ -155,12 +155,12 @@ public class Tool {
         }
     }
 
-    public static void hideKeyboard(Context context,  View view) {
+    public static void hideKeyboard(Context context, View view) {
         ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     public static void showKeyboard(Context context, View view) {
-        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(view.getWindowToken(), InputMethodManager.SHOW_IMPLICIT,InputMethodManager.HIDE_NOT_ALWAYS);
+        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(view.getWindowToken(), InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     public static String[] split(String string, String delem) {
@@ -414,22 +414,44 @@ public class Tool {
         return result;
     }
 
-    public static void startApp(Context c, AppManager.App app) {
+    public static void startApp(Context context, AppManager.App app) {
         if (app.packageName.equals("com.benny.openlauncher")) {
-            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, c);
+            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, context);
             Home.consumeNextResume = true;
         } else {
             try {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setClassName(app.packageName, app.className);
-                c.startActivity(intent);
+                context.startActivity(intent);
 
                 Home.consumeNextResume = true;
             } catch (Exception e) {
-                Tool.toast(c, R.string.toast_appuninstalled);
+                Tool.toast(context, R.string.toast_appuninstalled);
             }
         }
+    }
+
+    public static void startApp(Context context, Intent intent) {
+        if (intent.getComponent().getPackageName().equals("com.benny.openlauncher")) {
+            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, context);
+            Home.consumeNextResume = true;
+        } else {
+            try {
+                context.startActivity(intent);
+
+                Home.consumeNextResume = true;
+            } catch (Exception e) {
+                Tool.toast(context, R.string.toast_appuninstalled);
+            }
+        }
+    }
+
+    public static Intent getStartAppIntent(AppManager.App app) {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setClassName(app.packageName, app.className);
+        return intent;
     }
 
     public static int clampInt(int target, int min, int max) {

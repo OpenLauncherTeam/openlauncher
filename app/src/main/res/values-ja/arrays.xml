@@ -14,6 +14,7 @@
         <item>ランチャーの設定</item>
         <item>ボリュームダイアログ</item>
         <item>アプリドロワーを開く</item>
+        <item>Launch App</item>
     </string-array>
     <string-array name="desktopStyleEntries">
         <item>標準</item>

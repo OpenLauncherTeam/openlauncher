@@ -67,7 +67,7 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
         int i = 0;
         final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.miniBarArrangement;
         for (String act : minBarArrangement) {
-            LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act.substring(1));
+            LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
             adapter.add(new Item(i, item, act.charAt(0) == '0'));
             i++;
         }
@@ -118,11 +118,11 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
 
     public static class Item extends AbstractItem<Item, Item.ViewHolder> {
         public final long id;
-        public final LauncherAction.ActionItem item;
+        public final LauncherAction.ActionDisplayItem item;
         public boolean enable;
         public boolean edited;
 
-        public Item(long id, LauncherAction.ActionItem item, boolean enable) {
+        public Item(long id, LauncherAction.ActionDisplayItem item, boolean enable) {
             this.id = id;
             this.item = item;
             this.enable = enable;

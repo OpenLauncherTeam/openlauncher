@@ -1,22 +1,18 @@
 package com.benny.openlauncher.util;
 
 import android.app.ActivityManager;
-import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.AsyncTask;
-import android.view.View;
+import android.support.annotation.Nullable;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.activity.MinibarEditActivity;
 import com.benny.openlauncher.activity.SettingsActivity;
-
-import net.qiujuer.genius.blur.StackBlur;
 
 import java.util.List;
 
@@ -24,19 +20,29 @@ import static com.benny.openlauncher.activity.Home.resources;
 
 public class LauncherAction {
 
+    public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
+            new ActionDisplayItem(Action.EditMinBar, resources.getString(R.string.minibar_0), R.drawable.ic_mode_edit_black_24dp),
+            new ActionDisplayItem(Action.SetWallpaper, resources.getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp),
+            new ActionDisplayItem(Action.LockScreen, resources.getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp),
+            new ActionDisplayItem(Action.ClearRam, resources.getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp),
+            new ActionDisplayItem(Action.DeviceSettings, resources.getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp),
+            new ActionDisplayItem(Action.LauncherSettings, resources.getString(R.string.minibar_5), R.drawable.ic_settings_launcher_24dp),
+            new ActionDisplayItem(Action.VolumeDialog, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp),
+            new ActionDisplayItem(Action.OpenAppDrawer, resources.getString(R.string.minibar_8), R.drawable.ic_apps_black_24dp)
+    };
     private static boolean clearingRam = false;
 
-    public static ActionItem[] actionItems = new ActionItem[]{
-            new ActionItem(Action.EditMinBar, resources.getString(R.string.minibar_0), R.drawable.ic_mode_edit_black_24dp),
-            new ActionItem(Action.SetWallpaper, resources.getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp),
-            new ActionItem(Action.LockScreen, resources.getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp),
-            new ActionItem(Action.ClearRam, resources.getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp),
-            new ActionItem(Action.DeviceSettings, resources.getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp),
-            new ActionItem(Action.LauncherSettings, resources.getString(R.string.minibar_5), R.drawable.ic_settings_launcher_24dp),
-            //new ActionItem(Action.ThemePicker,resources.getString(R.string.minibar_6),R.drawable.ic_brush_black_24dp),
-            new ActionItem(Action.VolumeDialog, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp),
-            new ActionItem(Action.OpenAppDrawer, resources.getString(R.string.minibar_8), R.drawable.ic_apps_black_24dp)
-    };
+    public static void RunAction(@Nullable ActionItem actionItem, final Context context) {
+        if (actionItem != null)
+            switch (actionItem.action) {
+                case LaunchApp:
+                    Tool.startApp(context,actionItem.extraData);
+                    break;
+
+                default:
+                    RunAction(actionItem.action, context);
+            }
+    }
 
     public static void RunAction(Action action, final Context context) {
         switch (action) {
@@ -112,20 +118,8 @@ public class LauncherAction {
         }
     }
 
-    public static class ActionItem {
-        public Action label;
-        public String description;
-        public int icon;
-
-        public ActionItem(Action label, String description, int icon) {
-            this.label = label;
-            this.description = description;
-            this.icon = icon;
-        }
-    }
-
-    public static ActionItem getActionItemFromString(String string) {
-        for (ActionItem item : actionItems) {
+    public static ActionDisplayItem getActionItemFromString(String string) {
+        for (ActionDisplayItem item : actionDisplayItems) {
             if (item.label.toString().equals(string)) {
                 return item;
             }
@@ -133,11 +127,46 @@ public class LauncherAction {
         return null;
     }
 
+    public static ActionItem getActionItem(int position) {
+        return new ActionItem(Action.values()[position], null);
+    }
+
+    public static int getActionItemIndex(ActionItem item) {
+        if (item == null) return -1;
+        for (int i = 0; i < Action.values().length; i++) {
+            if (item.action == Action.values()[i])
+                return i;
+        }
+        return -1;
+    }
+
     public enum Theme {
-        Dark, Light;
+        Dark, Light
     }
 
     public enum Action {
-        EditMinBar, SetWallpaper, LockScreen, ClearRam, DeviceSettings, LauncherSettings, ThemePicker, VolumeDialog, OpenAppDrawer
+        EditMinBar, SetWallpaper, LockScreen, ClearRam, DeviceSettings, LauncherSettings, VolumeDialog, OpenAppDrawer, LaunchApp
+    }
+
+    public static class ActionItem {
+        public Action action;
+        public Intent extraData;
+
+        public ActionItem(Action action, Intent extraData) {
+            this.action = action;
+            this.extraData = extraData;
+        }
+    }
+
+    public static class ActionDisplayItem {
+        public Action label;
+        public String description;
+        public int icon;
+
+        public ActionDisplayItem(Action label, String description, int icon) {
+            this.label = label;
+            this.description = description;
+            this.icon = icon;
+        }
     }
 }

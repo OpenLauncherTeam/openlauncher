@@ -65,7 +65,7 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
         int i = 0;
         final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(context).generalSettings.miniBarArrangement;
         for (String act : minBarArrangement) {
-            LauncherAction.ActionItem item = LauncherAction.getActionItemFromString(act.substring(1));
+            LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
             adapter.add(new AppItem(i, item, act.charAt(0) == '0'));
             i++;
         }
@@ -127,11 +127,11 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
 
     public static class AppItem extends AbstractItem<AppItem, AppItem.ViewHolder> {
         public final long id;
-        public final LauncherAction.ActionItem item;
+        public final LauncherAction.ActionDisplayItem item;
         public boolean enable;
         public boolean edited;
 
-        public AppItem(long id, LauncherAction.ActionItem item, boolean enable) {
+        public AppItem(long id, LauncherAction.ActionDisplayItem item, boolean enable) {
             this.id = id;
             this.item = item;
             this.enable = enable;

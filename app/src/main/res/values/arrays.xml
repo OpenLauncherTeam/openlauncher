@@ -15,6 +15,7 @@
         <item>Launcher Settings</item>
         <item>Volume Dialog</item>
         <item>Open App Drawer</item>
+        <item>Launch App</item>
     </string-array>
 
     <integer-array name="gestureValues" translatable="false">

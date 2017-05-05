@@ -6,6 +6,7 @@ import android.graphics.Color;
 
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.util.LauncherAction.ActionItem;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.Desktop;
 import com.google.gson.Gson;
@@ -75,26 +76,6 @@ public class LauncherSettings {
         return gson;
     }
 
-    public void setDoubleClickGesture(int value) {
-        generalSettings.doubleClick = value;
-    }
-
-    public void setPinchGesture(int value) {
-        generalSettings.pinch = value;
-    }
-
-    public void setUnPinchGesture(int value) {
-        generalSettings.unPinch = value;
-    }
-
-    public void setSwipeDownGesture(int value) {
-        generalSettings.swipeDown = value;
-    }
-
-    public void setSwipeUpGesture(int value) {
-        generalSettings.swipeUp = value;
-    }
-
     public void setDesktopMode(int position) {
         Desktop.DesktopMode mode = Desktop.DesktopMode.values()[position];
 
@@ -132,15 +113,25 @@ public class LauncherSettings {
         public int desktopGridY = 4;
         public boolean desktopSearchBar = true;
         public boolean fullscreen = false;
-        public boolean swipe = false;
-        public int doubleClick = 0;
-        public int pinch = 0;
-        public int unPinch = 0;
-        public int swipeDown = 0;
-        public int swipeUp = 0;
         public boolean showIndicator = true;
         public boolean desktopShowLabel = true;
         public boolean desktopLock;
+
+        //Dock Gesture
+        public boolean swipe = false;
+
+        //Desktop Gesture
+//        public int doubleClick = 0;
+//        public int pinch = 0;
+//        public int unPinch = 0;
+//        public int swipeDown = 0;
+//        public int swipeUp = 0;
+
+        public ActionItem doubleTapAction = null;
+        public ActionItem pinchAction = null;
+        public ActionItem unPinchAction = null;
+        public ActionItem swipeDownAction = null;
+        public ActionItem swipeUpAction = null;
 
         // app drawer
         public int drawerColor = Color.TRANSPARENT;
