@@ -131,6 +131,30 @@ public class Tool {
         }
     }
 
+    public static void goneViews(View... views) {
+        for (final View view : views) {
+            if (view == null) continue;
+            view.animate().alpha(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    view.setVisibility(View.GONE);
+                }
+            });
+        }
+    }
+
+    public static void goneViews(long duration, View... views) {
+        for (final View view : views) {
+            if (view == null) continue;
+            view.animate().alpha(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    view.setVisibility(View.GONE);
+                }
+            });
+        }
+    }
+
     public static void hideKeyboard(Context context,  View view) {
         ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }

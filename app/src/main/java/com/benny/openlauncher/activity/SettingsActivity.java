@@ -166,9 +166,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "desktopSearchBar":
                 generalSettings.desktopSearchBar = (boolean) value;
-                if (Home.launcher != null) {
-                    Home.launcher.updateSearchBarVisibility();
-                }
+                prepareRestart();
                 break;
             case "fullscreen":
                 generalSettings.fullscreen = (boolean) value;

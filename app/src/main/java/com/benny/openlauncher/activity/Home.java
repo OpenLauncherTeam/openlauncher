@@ -114,10 +114,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @BindView(R.id.desktop)
     public Desktop desktop;
-    @BindView(R.id.searchClock)
-    public FrameLayout searchClock;
-    @BindView(R.id.searchBarClock)
-    public TextView searchBarClock;
+    @BindView(R.id.clockFrame)
+    public FrameLayout clockFrame;
+    @BindView(R.id.clockText)
+    public TextView clockText;
     @BindView(R.id.searchBar)
     public SearchBar searchBar;
     @BindView(R.id.background)
@@ -248,7 +248,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             int statusBarHeight = Tool.getStatusBarHeight(this);
-            searchClock.setPadding(0, statusBarHeight, 0, 0);
+            clockFrame.setPadding(0, statusBarHeight, 0, 0);
             shortcutLayout.setPadding(0, statusBarHeight, 0, 0);
             //desktopEditOptionPanel.setPadding(0, 0, 0, navBarHeight);
             //searchBar.setPadding(0, statusBarHeight, 0, 0);
@@ -344,29 +344,28 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         initDock();
 
-        dragOptionPanel.setAutoHideView(searchClock, searchBar);
+        dragOptionPanel.setAutoHideView(clockFrame, searchBar);
 
         appDrawerController.setCallBack(new AppDrawerController.CallBack() {
             @Override
             public void onStart() {
                 Tool.visibleViews(appDrawerIndicator);
                 Tool.invisibleViews(dock, desktopIndicator, desktop);
+                updateSearchView(false);
             }
 
             @Override
             public void onEnd() {
-                Tool.invisibleViews(searchClock, searchBar);
             }
         }, new AppDrawerController.CallBack() {
             @Override
             public void onStart() {
-                updateSearchBarVisibility();
-
                 if (appDrawerIndicator != null) {
                     appDrawerIndicator.animate().alpha(0).setDuration(100);
                 }
 
                 Tool.visibleViews(dock, desktop, desktopIndicator);
+                updateSearchView(true);
             }
 
             @Override
@@ -394,47 +393,49 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         dragOptionPanel.setAutoHideView(null);
 
         Tool.visibleViews(100, desktopEditOptionPanel);
-        Tool.invisibleViews(100, generalSettings.desktopSearchBar ? searchClock : null, generalSettings.desktopSearchBar ?  searchBar : null, dock, desktopIndicator);
-
-        updateSearchBarVisibility();
+        Tool.invisibleViews(100, dock, desktopIndicator);
+        updateSearchView(false);
     }
 
     @Override
     public void onFinishDesktopEdit() {
-        dragOptionPanel.setAutoHideView(searchClock, searchBar);
+        dragOptionPanel.setAutoHideView(clockFrame, searchBar);
 
         Tool.visibleViews(100, desktopIndicator, dock);
         Tool.invisibleViews(100, desktopEditOptionPanel);
-
-        updateSearchBarVisibility();
+        updateSearchView(true);
     }
 
-    public void updateSearchBarVisibility() {
+    public void updateSearchView(boolean show) {
         if (generalSettings.desktopSearchBar) {
-            searchClock.setVisibility(View.VISIBLE);
-            searchClock.setAlpha(1);
-            searchBar.setVisibility(View.VISIBLE);
-            searchBar.setAlpha(1);
+            if (show) {
+                Tool.visibleViews(clockFrame, searchBar);
+            } else {
+                Tool.invisibleViews(clockFrame, searchBar);
+            }
+        }
+    }
 
-            desktop.setPadding(0, 0, 0, 0);
-            ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = 0;
-            ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = 0;
-        } else {
-            searchClock.setVisibility(View.GONE);
-            searchBar.setVisibility(View.GONE);
-
+    public void updateHomeLayout() {
+        // set the padding for the search bar, desktop, and dock
+        // update the drag option page indicator height
+        if (generalSettings.desktopSearchBar) {
             desktop.setPadding(0, Desktop.topInsert, 0, 0);
             ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInsert;
             ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = Desktop.topInsert;
+        } else {
+            desktop.setPadding(0, 0, 0, 0);
+            ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = 0;
+            ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = 0;
         }
     }
 
     private void updateDesktopClock() {
-        if (searchBarClock != null) {
+        if (clockText != null) {
             Calendar calendar = Calendar.getInstance(Locale.getDefault());
             String date = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
             String date2 = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
-            searchBarClock.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
+            clockText.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
         }
     }
 
@@ -475,7 +476,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     private void initSettings() {
-        updateSearchBarVisibility();
+        if (!generalSettings.desktopSearchBar) {
+            Tool.goneViews(clockFrame, searchBar);
+        }
+        updateHomeLayout();
 
         if (generalSettings.fullscreen) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -578,12 +582,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         searchBar.setCallBack(new SearchBar.CallBack() {
             @Override
             public void onInternetSearch(String string) {
-
             }
 
             @Override
             public void onExpand() {
-                Tool.invisibleViews(searchBarClock, dock, desktop, desktopIndicator);
+                Tool.invisibleViews(clockFrame, dock, desktop, desktopIndicator);
                 Tool.visibleViews(background);
 
                 searchBar.searchBox.setFocusable(true);
@@ -595,7 +598,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onCollapse() {
-                Tool.visibleViews(generalSettings.desktopSearchBar ? searchBarClock : null, dock, desktop, desktopIndicator);
+                Tool.visibleViews(generalSettings.desktopSearchBar ? clockFrame : null);
+                Tool.visibleViews(dock, desktop, desktopIndicator);
                 Tool.invisibleViews(background);
 
                 searchBar.searchBox.clearFocus();
