@@ -411,7 +411,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             if (show) {
                 Tool.visibleViews(clockFrame, searchBar);
             } else {
-                Tool.invisibleViews(clockFrame, searchBar);
+                Tool.goneViews(clockFrame, searchBar);
             }
         }
     }
