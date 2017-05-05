@@ -394,7 +394,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         Tool.visibleViews(100, desktopEditOptionPanel);
         Tool.invisibleViews(100, dock, desktopIndicator);
-        updateSearchView(false);
+        updateSearchView(false,false);
     }
 
     @Override
@@ -407,11 +407,18 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     public void updateSearchView(boolean show) {
+        updateSearchView(show, true);
+    }
+
+    public void updateSearchView(boolean show, boolean gone) {
         if (generalSettings.desktopSearchBar) {
             if (show) {
-                Tool.visibleViews(clockFrame, searchBar);
+                Tool.visibleViews(100,clockFrame, searchBar);
             } else {
-                Tool.goneViews(clockFrame, searchBar);
+                if (gone)
+                    Tool.goneViews(clockFrame, searchBar);
+                else
+                    Tool.invisibleViews(100,clockFrame, searchBar);
             }
         }
     }
