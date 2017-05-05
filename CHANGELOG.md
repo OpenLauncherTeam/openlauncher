@@ -1,3 +1,10 @@
+### v0.4.1 (Unreleased)
+* Added : launch app through gestures
+* Added : Search bar
+* Added : desktop lock
+* Lots of bug fixes
+* Layout fixes
+
 ### v0.4.0
 * Move launcheranim & smootviewpager to app
 * Lots of bug fixes
