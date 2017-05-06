@@ -43,4 +43,9 @@
         <item>Paged</item>
         <item>Vertical</item>
     </string-array>
+
+    <string-array name="wallpaperOptionEntries">
+        <item>Set Wallpaper</item>
+        <item>Blur Wallpaper</item>
+    </string-array>
 </resources>

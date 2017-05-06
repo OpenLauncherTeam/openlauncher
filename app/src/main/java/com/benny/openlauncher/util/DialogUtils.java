@@ -147,11 +147,10 @@ public class DialogUtils {
     }
 
     public static void setWallpaperDialog(final Context context) {
-        String[] s = new String[]{context.getString(R.string.wallpaper_set), context.getString(R.string.wallpaper_blur)};
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(R.string.wallpaper)
                 .iconRes(R.drawable.ic_photo_black_24dp)
-                .items(s)
+                .items(R.array.wallpaperOptionEntries)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {

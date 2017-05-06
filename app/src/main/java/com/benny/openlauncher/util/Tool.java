@@ -17,10 +17,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.IBinder;
 import android.provider.ContactsContract;
 import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.util.TypedValue;
@@ -34,7 +32,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 
@@ -49,7 +46,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
 
 import static android.content.Context.ACTIVITY_SERVICE;
@@ -427,7 +423,7 @@ public class Tool {
 
                 Home.consumeNextResume = true;
             } catch (Exception e) {
-                Tool.toast(context, R.string.toast_appuninstalled);
+                Tool.toast(context, R.string.toast_app_uninstalled);
             }
         }
     }
@@ -442,7 +438,7 @@ public class Tool {
 
                 Home.consumeNextResume = true;
             } catch (Exception e) {
-                Tool.toast(context, R.string.toast_appuninstalled);
+                Tool.toast(context, R.string.toast_app_uninstalled);
             }
         }
     }

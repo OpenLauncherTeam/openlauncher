@@ -10,17 +10,16 @@
 
     <string name="info">情報</string>
     <string name="uninstall">アンインストール</string>
-    <string name="add_widget">ウィジェット</string>
+    <string name="widget">ウィジェット</string>
     <string name="remove">削除</string>
 
     <!-- Toasts -->
 
-    <string name="edit_item">名前を変更</string>
-    <string name="toast_notenoughspace">容量が不足しています</string>
-    <string name="toast_appuninstalled">このアプリはアンインストールされました。</string>
-    <string name="toast_freeram" formatted="false">空きメモリ: %d mb 節約 %d mb</string>
-    <string name="toast_freeallram" formatted="false">空きメモリ: %d mb RAM は最高の状態です</string>
-    <string name="toast_plzenabledeviceadmin">デバイス管理を有効にしてください</string>
+    <string name="toast_not_enough_space">容量が不足しています</string>
+    <string name="toast_app_uninstalled">このアプリはアンインストールされました。</string>
+    <string name="toast_free_ram" formatted="false">空きメモリ: %d mb 節約 %d mb</string>
+    <string name="toast_free_all_ram" formatted="false">空きメモリ: %d mb RAM は最高の状態です</string>
+    <string name="toast_device_admin_required">デバイス管理を有効にしてください</string>
 
     <!-- Intro -->
 
@@ -161,17 +160,15 @@
     <string name="request_toast">アプリが選択されていません。 ドロワーにすべてのアプリを表示しますか?</string>
     <string name="on">オン</string>
     <string name="off">オフ</string>
-    <string name="allApps">すべてのアプリ</string>
+    <string name="app_drawer">すべてのアプリ</string>
     <string name="crash">問題が発生しました … OpenLauncher を再起動します。</string>
     <string name="cancel">キャンセル</string>
     <string name="ok">OK</string>
-    <string name="set_as_home">ホーム</string>
+    <string name="home">ホーム</string>
     <string name="search_apps">アプリの検索 …</string>
     <string name="wallpaper">壁紙</string>
-    <string name="wallpaper_set">壁紙を設定</string>
-    <string name="wallpaper_blur">壁紙をぼかす</string>
     <string name="wallpaper_pick">壁紙の選択</string>
     <string name="wallpaper_unable_to_blur">ぼかすことができません</string>
-    <string name="unnamed">名前なし</string>
+    <string name="group">名前なし</string>
 
 </resources>

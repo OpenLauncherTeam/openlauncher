@@ -99,9 +99,9 @@ public class DesktopOptionView extends FrameLayout {
         addView(actionRecyclerView, actionRecyclerViewLP);
 
         List<IconLabelItem> items = new ArrayList<>();
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_star_black_36dp, R.string.set_as_home, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
+        items.add(new IconLabelItem(getContext(), R.drawable.ic_star_black_36dp, R.string.home, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         items.add(new IconLabelItem(getContext(), R.drawable.ic_clear_black_36dp, R.string.remove, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_dashboard_black_36dp, R.string.add_widget, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
+        items.add(new IconLabelItem(getContext(), R.drawable.ic_dashboard_black_36dp, R.string.widget, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         items.add(new IconLabelItem(getContext(), R.drawable.ic_launch_black_36dp, R.string.action, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         items.add(new IconLabelItem(getContext(), R.drawable.ic_lock_open_white_36dp, R.string.lock, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         items.add(new IconLabelItem(getContext(), R.drawable.ic_settings_launcher_36dp, R.string.settings, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));

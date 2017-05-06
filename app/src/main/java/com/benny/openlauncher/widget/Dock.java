@@ -135,12 +135,12 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                             home.desktop.consumeRevert();
                             home.dock.consumeRevert();
                         } else {
-                            Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
                             home.dock.revertLastItem();
                             home.desktop.revertLastItem();
                         }
                     } else {
-                        Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
                         home.dock.revertLastItem();
                         home.desktop.revertLastItem();
                     }

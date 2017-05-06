@@ -25,7 +25,7 @@
         android:drawableTop="@drawable/ic_star_black_36dp"
         android:fontFamily="sans-serif-condensed"
         android:padding="5dp"
-        android:text="@string/set_as_home"
+        android:text="@string/home"
         android:textColor="?android:textColorPrimaryInverse" />
 
     <TextView
@@ -35,7 +35,7 @@
         android:drawableTop="@drawable/ic_dashboard_black_36dp"
         android:fontFamily="sans-serif-condensed"
         android:padding="5dp"
-        android:text="@string/add_widget"
+        android:text="@string/widget"
         android:textColor="?android:textColorPrimaryInverse" />
 
     <TextView

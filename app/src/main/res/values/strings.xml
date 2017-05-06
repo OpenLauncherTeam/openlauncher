@@ -2,26 +2,32 @@
 <resources>
 
     <!-- Titles -->
+
     <string name="settings">Settings</string>
     <string name="minibar">Minibar</string>
     <string name="about">About</string>
 
-    <!-- Edit Mode -->
+    <!-- Drag Option View -->
 
     <string name="edit">Edit</string>
     <string name="info">Info</string>
     <string name="uninstall">Uninstall</string>
-    <string name="add_widget">Widget</string>
     <string name="remove">Remove</string>
+
+    <!-- Desktop Option View -->
+
+    <string name="home">Home</string>
+    <string name="action">Action</string>
+    <string name="lock">Lock</string>
+    <string name="widget">Widget</string>
 
     <!-- Toasts -->
 
-    <string name="edit_item">Edit Item</string>
-    <string name="toast_notenoughspace">Not enough space</string>
-    <string name="toast_appuninstalled">This app has uninstalled.</string>
-    <string name="toast_freeram" formatted="false">Free Memory: %d mb saved %d mb</string>
-    <string name="toast_freeallram" formatted="false">Free Memory: %d mb Your ram is in best state</string>
-    <string name="toast_plzenabledeviceadmin">Please enable device administration</string>
+    <string name="toast_not_enough_space">Not enough space</string>
+    <string name="toast_app_uninstalled">This app has uninstalled.</string>
+    <string name="toast_free_ram" formatted="false">Free Memory: %d mb saved %d mb</string>
+    <string name="toast_free_all_ram" formatted="false">Free Memory: %d mb Your ram is in best state</string>
+    <string name="toast_device_admin_required">Please enable device administration</string>
 
     <!-- Intro -->
 
@@ -31,12 +37,12 @@
     <string name="intro1_text">Thank you for choosing OpenLauncher. It\'s fully open source and still in development.
         Here\'s a short intro on how to use it …</string>
     <string name="intro2_title">Minibar</string>
-    <string name="intro2_text">Swipe right from the left border of your screen to open the Minibar. There you can find the settings,
+    <string name="intro2_text">Swipe right from the left border of your screen to open the minibar. There you can find the settings,
         change the wallpaper, and do lots of other stuff.</string>
     <string name="intro3_title">Settings</string>
     <string name="intro3_text">You can configure your desktop, the app drawer, and the dock … Just try it out!</string>
 
-    <!-- MiniBar -->
+    <!-- Minibar -->
 
     <string name="minibar_0">Change the layout of the minibar.</string>
     <string name="minibar_1">Set and blur the wallpaper.</string>
@@ -49,34 +55,15 @@
 
     <!-- About -->
 
-    <string name="about_libs">Open Source libraries</string>
+    <string name="about_libs">Open Source Libraries</string>
     <string name="about_rate">Rate</string>
     <string name="about_team" translatable="false">Open Launcher Team</string>
     <string name="about_credit">Contributors</string>
-    <string name="about_credit_text__chris_debrodie" translatable="false">Helped a lot with bugs and suggestions</string>
-    <string name="about_credit_text__bennykok" translatable="false">Project starter</string>
-    <string name="about_credit_text__gaukler_faun" translatable="false">Added some settings, German translation</string>
-    <string name="about_credit_text__gsantner" translatable="false">Maintainer, German translations</string>
-    <string name="about_credit_text__dkanada" translatable="false">Maintainer, Database</string>
-
-    <!-- Dialogs -->
-
-    <string name="settings_column">Columns</string>
-    <string name="settings_row">Rows</string>
-    <string name="settings_iconPack_title">Pick icon pack</string>
-    <string name="settings_iconPack_toast">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
-    <string name="settings_backup_titleBackup">Backup</string>
-    <string name="settings_backup_titleRestore">Restore</string>
-    <string name="settings_backup_success">Successfully done.</string>
-    <string name="settings_backup_success_not">Something went wrong.</string>
-    <string name="settings_drawer_style_paged">Paged</string>
-    <string name="settings_drawer_style_vertical">Vertical</string>
-    <string name="settings_single_click_title">Single click action</string>
-    <string name="settings_double_click_title">Double click action</string>
-    <string name="settings_pinch_title">Pinch action</string>
-    <string name="settings_unpinch_title">Unpinch action</string>
-    <string name="settings_swipe_down_title">Swipe down action</string>
-    <string name="settings_swipe_up_title">Swipe up action</string>
+    <string name="about_credit_text_bennykok" translatable="false">Project starter</string>
+    <string name="about_credit_text_chris_debrodie" translatable="false">Helped a lot with bugs and suggestions</string>
+    <string name="about_credit_text_gaukler_faun" translatable="false">Added some settings, German translation</string>
+    <string name="about_credit_text_gsantner" translatable="false">Maintainer, German translations</string>
+    <string name="about_credit_text_dkanada" translatable="false">Maintainer, Database</string>
 
     <!-- Settings -->
 
@@ -161,6 +148,11 @@
     <string name="settings_othersRestart">Restart</string>
     <string name="settings_othersRestart_summary">Restart the launcher in case it\'s behaving weird.</string>
 
+    <!-- Item Labels -->
+
+    <string name="group">Unnamed</string>
+    <string name="app_drawer">All Apps</string>
+
     <!-- Other -->
 
     <string name="request_dummy_text">Hello world!</string>
@@ -168,19 +160,28 @@
     <string name="request_toast">No apps selected. Show all apps in drawer?</string>
     <string name="on">On</string>
     <string name="off">Off</string>
-    <string name="allApps">All Apps</string>
     <string name="crash">Something went wrong … restarting OpenLauncher.</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
-    <string name="set_as_home">Home</string>
     <string name="search_apps">Search apps …</string>
     <string name="wallpaper">Wallpaper</string>
-    <string name="wallpaper_set">Set Wallpaper</string>
-    <string name="wallpaper_blur">Blur Wallpaper</string>
     <string name="wallpaper_pick">Pick Wallpaper</string>
     <string name="wallpaper_unable_to_blur">Unable to blur</string>
-    <string name="unnamed">Unnamed</string>
-    <string name="action">Action</string>
-    <string name="lock">Lock</string>
+    <string name="settings_column">Columns</string>
+    <string name="settings_row">Rows</string>
+    <string name="settings_iconPack_title">Pick icon pack</string>
+    <string name="settings_iconPack_toast">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
+    <string name="settings_backup_titleBackup">Backup</string>
+    <string name="settings_backup_titleRestore">Restore</string>
+    <string name="settings_backup_success">Successfully done.</string>
+    <string name="settings_backup_success_not">Something went wrong.</string>
+    <string name="settings_drawer_style_paged">Paged</string>
+    <string name="settings_drawer_style_vertical">Vertical</string>
+    <string name="settings_single_click_title">Single click action</string>
+    <string name="settings_double_click_title">Double click action</string>
+    <string name="settings_pinch_title">Pinch action</string>
+    <string name="settings_unpinch_title">Unpinch action</string>
+    <string name="settings_swipe_down_title">Swipe down action</string>
+    <string name="settings_swipe_up_title">Swipe up action</string>
 
 </resources>

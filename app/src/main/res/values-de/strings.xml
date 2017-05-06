@@ -1,33 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
     <string name="info">Info</string>
     <string name="uninstall">Deinstallieren</string>
-    <string name="add_widget">Widget</string>
+    <string name="widget">Widget</string>
     <string name="remove">Entfernen</string>
-    <string name="allApps">Alle Apps</string>
+    <string name="app_drawer">Alle Apps</string>
     <string name="crash">Etwas ging schief … starte OpenLauncher neu.</string>
 
-    <string name="edit_item">Umbenennen</string>
-    <string name="toast_notenoughspace">Nicht genügend Platz</string>
-    <string name="toast_appuninstalled">Die App wurde deinstalliert.</string>
-    <string name="toast_freeram" formatted="false">Freier Speicher: %d mb frei gegeben %d mb</string>
-    <string name="toast_freeallram" formatted="false">Freier Speicher: %d mb dein Ram ist in einem guten Zustand</string>
-    <string name="toast_plzenabledeviceadmin">Bitte \"Geräteadministrator\" aktivieren.</string>
+    <string name="toast_not_enough_space">Nicht genügend Platz</string>
+    <string name="toast_app_uninstalled">Die App wurde deinstalliert.</string>
+    <string name="toast_free_ram" formatted="false">Freier Speicher: %d mb frei gegeben %d mb</string>
+    <string name="toast_free_all_ram" formatted="false">Freier Speicher: %d mb dein Ram ist in einem guten Zustand</string>
+    <string name="toast_device_admin_required">Bitte \"Geräteadministrator\" aktivieren.</string>
     <string name="cancel">Abbrechen</string>
     <string name="ok">OK</string>
-    <string name="set_as_home">Home</string>
+    <string name="home">Home</string>
     <string name="search_apps">Suche Anwendungen …</string>
 
     <string name="wallpaper">Wallpaper</string>
-    <string name="wallpaper_set">Bestimme Wallpaper</string>
-    <string name="wallpaper_blur">Wallpaper verwischen</string>
     <string name="wallpaper_pick">Suche Wallpaper aus</string>
     <string name="wallpaper_unable_to_blur">Kann Blureffekt nicht anwenden.</string>
 
-    <string name="unnamed">Ohne Namen : - (</string>
-
+    <string name="group">Ohne Namen : - (</string>
 
     // Intro
 
@@ -45,10 +40,8 @@
     <string name="intro3_title">Einstellungen</string>
     <string name="intro3_text">Hier kannst du deinen Desktop, den App Drawer, das Dock und … Probier\'s einfach aus!</string>
 
-
     // MiniBar
 
-    <string name="minibar"></string>
     <string name="minibar_1">Wallpaper aussuchen oder unscharf machen</string>
     <string name="minibar_2">Sperre sofort den Bildschirm, braucht die Berechtigung \"Geräteadministrator\".</string>
     <string name="minibar_3">Setze Ram frei, beende laufende Prozesse.</string>
@@ -57,14 +50,12 @@
     <string name="minibar_7">Öffne den Lautstärkedialog.</string>
     <string name="minibar_8">Öffne den App Drawer.</string>
 
-
     // About
 
     <string name="about">Über Open Launcher</string>
     <string name="about_libs">Open Source Bibliotheken</string>
     <string name="about_rate">Bewerte die App</string>
     <string name="about_credit">Beteiligte</string>
-
 
     // Settings
 
@@ -167,7 +158,6 @@
     <string name="settings_backup_titleRestore">Wiederherstellung</string>
     <string name="settings_backup_success">Erfolgreich ausgeführt.</string>
     <string name="settings_backup_success_not">Etwas ging schief.</string>
-
 
     //Icon hide
 

@@ -224,12 +224,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                             home.desktop.consumeRevert();
                             home.dock.consumeRevert();
                         } else {
-                            Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
                             home.dock.revertLastItem();
                             home.desktop.revertLastItem();
                         }
                     } else {
-                        Toast.makeText(getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
                         home.dock.revertLastItem();
                         home.desktop.revertLastItem();
                     }
@@ -546,7 +546,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     Item group = Item.newGroupItem();
                     group.items.add(item);
                     group.items.add(dropItem);
-                    group.name = (home.getString(R.string.unnamed));
+                    group.name = (home.getString(R.string.group));
                     group.x = item.x;
                     group.y = item.y;
 

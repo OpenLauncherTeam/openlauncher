@@ -56,7 +56,7 @@ public class LauncherAction {
                 try {
                     ((DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE)).lockNow();
                 } catch (Exception e) {
-                    Tool.toast(context, context.getString(R.string.toast_plzenabledeviceadmin));
+                    Tool.toast(context, context.getString(R.string.toast_device_admin_required));
                     Intent intent = new Intent();
                     intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.DeviceAdminSettings"));
                     context.startActivity(intent);
@@ -95,9 +95,9 @@ public class LauncherAction {
                         activityManager.getMemoryInfo(mi);
                         long current = mi.availMem / 1048576L;
                         if (current - pre > 10)
-                            Tool.toast(context, context.getResources().getString(R.string.toast_freeram, current, current - pre));
+                            Tool.toast(context, context.getResources().getString(R.string.toast_free_ram, current, current - pre));
                         else
-                            Tool.toast(context, context.getResources().getString(R.string.toast_freeallram, current));
+                            Tool.toast(context, context.getResources().getString(R.string.toast_free_all_ram, current));
                         super.onPostExecute(result);
                     }
                 }.execute();

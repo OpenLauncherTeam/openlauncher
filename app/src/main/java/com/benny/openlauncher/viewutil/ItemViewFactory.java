@@ -258,7 +258,7 @@ public class ItemViewFactory {
 
         CellContainer.LayoutParams cellPositionToLayoutPrams = Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellPositionToLayoutPrams(item.x, item.y, item.spanX, item.spanY, (CellContainer.LayoutParams) view.getLayoutParams());
         if (cellPositionToLayoutPrams == null) {
-            Toast.makeText(Home.launcher.desktop.getContext(), R.string.toast_notenoughspace, Toast.LENGTH_SHORT).show();
+            Toast.makeText(Home.launcher.desktop.getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
         } else {
             item.x = cellPositionToLayoutPrams.x;
             item.y = cellPositionToLayoutPrams.y;

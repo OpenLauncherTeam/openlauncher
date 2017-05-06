@@ -15,7 +15,6 @@ import com.danielstone.materialaboutlibrary.model.MaterialAboutTitleItem;
 
 import de.psdev.licensesdialog.LicensesDialog;
 import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20;
-import de.psdev.licensesdialog.licenses.GnuLesserGeneralPublicLicense21;
 import de.psdev.licensesdialog.licenses.MITLicense;
 import de.psdev.licensesdialog.model.Notice;
 import de.psdev.licensesdialog.model.Notices;
@@ -72,25 +71,25 @@ public class AboutActivity extends MaterialAboutActivity {
         opTeamCard.addItem(new MaterialAboutActionItem.Builder()
                 .icon(R.drawable.person__bennykok)
                 .text("BennyKok")
-                .subText(getString(R.string.about_credit_text__bennykok))
+                .subText(getString(R.string.about_credit_text_bennykok))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("http://bennykok.weebly.com/contact.html")))
                 .build());
         opTeamCard.addItem(new MaterialAboutActionItem.Builder()
                 .icon(R.drawable.person__dkanada)
                 .text("dkanada")
-                .subText(getString(R.string.about_credit_text__dkanada))
+                .subText(getString(R.string.about_credit_text_dkanada))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/dkanada")))
                 .build());
         opTeamCard.addItem(new MaterialAboutActionItem.Builder()
                 .icon(R.drawable.person__gsantner)
                 .text("Gregor Santner")
-                .subText(getString(R.string.about_credit_text__gsantner))
+                .subText(getString(R.string.about_credit_text_gsantner))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://gsantner.github.io/")))
                 .build());
         opTeamCard.addItem(new MaterialAboutActionItem.Builder()
                 .icon(R.drawable.person__gaukler_faun)
                 .text("Gaukler Faun")
-                .subText(getString(R.string.about_credit_text__gaukler_faun))
+                .subText(getString(R.string.about_credit_text_gaukler_faun))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))
                 .build());
 
@@ -100,7 +99,7 @@ public class AboutActivity extends MaterialAboutActivity {
         contributorsCard.addItem(new MaterialAboutActionItem.Builder()
                 .icon(R.drawable.person__chris_debrodie)
                 .text("Chris DeBrodie")
-                .subText(getString(R.string.about_credit_text__chris_debrodie))
+                .subText(getString(R.string.about_credit_text_chris_debrodie))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://plus.google.com/111923938461696019967")))
                 .build());
 

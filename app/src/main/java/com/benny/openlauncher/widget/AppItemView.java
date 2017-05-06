@@ -282,7 +282,7 @@ public class AppItemView extends View implements Drawable.Callback {
                     view.setRoundBg(true);
                     view.setIconSizeSmall(Tool.dp2px(iconSize / 2 - 8, view.getContext()));
 
-                    view.setLabel(resources.getString(R.string.allApps));
+                    view.setLabel(resources.getString(R.string.app_drawer));
                     view.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
