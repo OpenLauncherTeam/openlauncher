@@ -102,7 +102,7 @@
         android:id="@+id/desktopEditOptionPanel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="20dp"
         android:fitsSystemWindows="true"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -264,6 +264,9 @@ public class ItemViewFactory {
             item.y = cellPositionToLayoutPrams.y;
             view.setLayoutParams(cellPositionToLayoutPrams);
             updateWidgetOption(item);
+
+            // update the widget size in the database
+            Home.db.updateItem(item);
         }
     }
 
