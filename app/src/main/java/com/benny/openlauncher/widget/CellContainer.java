@@ -22,27 +22,20 @@ import java.util.Queue;
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class CellContainer extends ViewGroup {
-    private boolean[][] occupied;
-
-    private Rect[][] cells;
-
     public int cellWidth, cellHeight, cellSpanV = 0, cellSpanH = 0;
-
-    private Paint mPaint;
-
-    private Paint bgPaint;
-
-    private boolean hideGrid = true;
-
     public boolean blockTouch = false;
-
-    private Long down = 0L;
-
     public SimpleFingerGestures gestures;
-
-    private boolean animateBackground;
-
     public OnItemRearrangeListener onItemRearrangeListener;
+    private boolean[][] occupied;
+    private Rect[][] cells;
+    private Paint mPaint;
+    private Paint bgPaint;
+    private boolean hideGrid = true;
+    private Long down = 0L;
+    private boolean animateBackground;
+    private Point preCoordinate = new Point(-1, -1);
+    private Long peekDownTime = -1L;
+    private PeekDirection peekDirection;
 
     public CellContainer(Context c) {
         super(c);
@@ -83,10 +76,6 @@ public class CellContainer extends ViewGroup {
         resetOccupiedSpace();
         super.removeAllViews();
     }
-
-    private Point preCoordinate = new Point(-1, -1);
-    private Long peekDownTime = -1L;
-    private PeekDirection peekDirection;
 
     private PeekDirection getPeekDirectionFromCoordinate(Point from, Point to) {
         if (from.y - to.y > 0)
@@ -301,22 +290,22 @@ public class CellContainer extends ViewGroup {
                 Rect cell = cells[x][y];
 
                 canvas.save();
-                canvas.rotate(45, cell.left, cell.top + 3);
+                canvas.rotate(45, cell.left, cell.top);
                 canvas.drawRect(cell.left - s, cell.top - s, cell.left + s, cell.top + s, mPaint);
                 canvas.restore();
 
                 canvas.save();
-                canvas.rotate(45, cell.left, cell.bottom + 3);
+                canvas.rotate(45, cell.left, cell.bottom);
                 canvas.drawRect(cell.left - s, cell.bottom - s, cell.left + s, cell.bottom + s, mPaint);
                 canvas.restore();
 
                 canvas.save();
-                canvas.rotate(45, cell.right, cell.top + 3);
+                canvas.rotate(45, cell.right, cell.top);
                 canvas.drawRect(cell.right - s, cell.top - s, cell.right + s, cell.top + s, mPaint);
                 canvas.restore();
 
                 canvas.save();
-                canvas.rotate(45, cell.right, cell.bottom + 3);
+                canvas.rotate(45, cell.right, cell.bottom);
                 canvas.drawRect(cell.right - s, cell.bottom - s, cell.right + s, cell.bottom + s, mPaint);
                 canvas.restore();
             }
@@ -447,16 +436,17 @@ public class CellContainer extends ViewGroup {
      * Convert a position in screen coordinates for the centre of an object to a Point in cell
      * coordinates representing the top left cell that the object must occupy for the centre to
      * be as close as possible to the supplied position
-     * @param mX - X position of centre in screen coordinates
-     * @param mY - Y position of centre in screen coordinates
-     * @param xSpan - The width of the object in cells, must be >= 1
-     * @param ySpan - The height of the object in cells, must be >= 1
+     *
+     * @param mX                - X position of centre in screen coordinates
+     * @param mY                - Y position of centre in screen coordinates
+     * @param xSpan             - The width of the object in cells, must be >= 1
+     * @param ySpan             - The height of the object in cells, must be >= 1
      * @param checkAvailability - this parameter probably doesn't make any difference any more
      * @return - a point representing the ideal x,y position or null
      */
     public Point touchPosToCoordinate(int mX, int mY, int xSpan, int ySpan, boolean checkAvailability) {
-        mX = mX - (xSpan-1)*cellWidth/2;
-        mY = mY - (ySpan-1)*cellHeight/2;
+        mX = mX - (xSpan - 1) * cellWidth / 2;
+        mY = mY - (ySpan - 1) * cellHeight / 2;
         for (int x = 0; x < cellSpanH; x++) {
             for (int y = 0; y < cellSpanV; y++) {
                 Rect cell = cells[x][y];
@@ -559,7 +549,8 @@ public class CellContainer extends ViewGroup {
         int curLeft = l;
         int curTop = t;
         int curRight = l + cellWidth;
-        int curBottom = t + cellHeight;
+        //Applying offset to fix display issue
+        int curBottom = t + cellHeight + 1;
 
         for (int i = 0; i < cellSpanH; i++) {
             if (i != 0) {
@@ -569,7 +560,7 @@ public class CellContainer extends ViewGroup {
             for (int j = 0; j < cellSpanV; j++) {
                 if (j != 0) {
                     curTop += cellHeight;
-                    curBottom += cellHeight;
+                    curBottom += cellHeight + 1;
                 }
 
                 Rect rect = new Rect(curLeft, curTop, curRight, curBottom);
@@ -607,6 +598,7 @@ public class CellContainer extends ViewGroup {
             this.xSpan = xSpan;
             this.ySpan = ySpan;
         }
+
         public LayoutParams(int w, int h) {
             super(w, h);
         }
