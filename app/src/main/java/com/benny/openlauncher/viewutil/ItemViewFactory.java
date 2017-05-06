@@ -44,7 +44,7 @@ public class ItemViewFactory {
         switch (item.type) {
             case ACTION:
                 view = new AppItemView.Builder(context)
-                        .setLauncherAction(item.actionValue)
+                        .setActionItem(item.actionValue)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
                         .withOnLongPressDrag(item, DragAction.Action.ACTION, new AppItemView.Builder.LongPressCallBack() {
@@ -125,8 +125,8 @@ public class ItemViewFactory {
                         hl.animate().scaleY(0).scaleX(0);
                     }
                 };
-                widgetContainer.postDelayed(action, 2000);
 
+                widgetContainer.postDelayed(action, 2000);
                 widgetView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {

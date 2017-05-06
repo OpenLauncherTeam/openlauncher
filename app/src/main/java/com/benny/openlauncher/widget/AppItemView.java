@@ -150,13 +150,11 @@ public class AppItemView extends View implements Drawable.Callback {
 
     public AppItemView(Context context) {
         super(context);
-
         init();
     }
 
     public AppItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         init();
     }
 
@@ -210,7 +208,7 @@ public class AppItemView extends View implements Drawable.Callback {
             textPaint.getTextBounds(label, 0, label.length(), mTextBound);
         }
 
-        //The height should be the same as they have the same text size.
+        // height should be the same as they have the same text size
         float mHeight = iconSize + (noLabel ? 0 : labelHeight);
         heightPadding = (getHeight() - mHeight) / 2f;
 
@@ -269,19 +267,35 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder setLauncherAction(int action) {
+        public Builder setShortcutItem(final Intent intent) {
+            view.isShortcut = true;
+            view.setIcon(Tool.getIconFromID(view.getContext(), intent.getStringExtra("shortCutIconID")));
+            view.setLabel(intent.getStringExtra("shortCutName"));
+            view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                        @Override
+                        public void run() {
+                            view.getContext().startActivity(intent);
+                        }
+                    });
+                }
+            });
+            return this;
+        }
+
+        public Builder setActionItem(int action) {
+            int iconSize = LauncherSettings.getInstance(view.getContext()).generalSettings.iconSize;
+            TypedValue typedValue = new TypedValue();
             switch (action) {
                 case 8:
-                    int iconSize = LauncherSettings.getInstance(view.getContext()).generalSettings.iconSize;
-                    TypedValue typedValue = new TypedValue();
                     view.getContext().getTheme().resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
-
                     view.setIconPadding(Tool.dp2px(4, view.getContext()));
                     view.setIcon(view.getResources().getDrawable(R.drawable.ic_apps_black_24dp));
                     view.setBgColor(Color.WHITE);
                     view.setRoundBg(true);
                     view.setIconSizeSmall(Tool.dp2px(iconSize / 2 - 8, view.getContext()));
-
                     view.setLabel(resources.getString(R.string.app_drawer));
                     view.setOnClickListener(new OnClickListener() {
                         @Override
@@ -363,24 +377,6 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder vibrateWhenLongPress() {
             view.vibrateWhenLongPress = true;
-            return this;
-        }
-
-        public Builder setShortcutItem(final Intent intent) {
-            view.isShortcut = true;
-            view.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
-                        @Override
-                        public void run() {
-                            view.getContext().startActivity(intent);
-                        }
-                    });
-                }
-            });
-            view.setIcon(Tool.getIconFromID(view.getContext(), intent.getStringExtra("shortCutIconID")));
-            view.setLabel(intent.getStringExtra("shortCutName"));
             return this;
         }
 

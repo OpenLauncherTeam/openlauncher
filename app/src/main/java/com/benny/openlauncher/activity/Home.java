@@ -751,15 +751,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         if (desktop != null) {
             if (!desktop.inEditMode) {
-                if (appDrawerController.getDrawer() != null && appDrawerController.getDrawer().getVisibility() == View.VISIBLE)
+                if (appDrawerController.getDrawer() != null && appDrawerController.getDrawer().getVisibility() == View.VISIBLE) {
                     closeAppDrawer();
-                else if (generalSettings != null && !groupPopup.isShowing)
+                } else if (generalSettings != null) {
                     desktop.setCurrentItem(generalSettings.desktopHomePage);
+                }
             } else {
                 desktop.pages.get(desktop.getCurrentItem()).performClick();
             }
         }
-
 
         if (groupPopup != null) {
             groupPopup.dismissPopup();

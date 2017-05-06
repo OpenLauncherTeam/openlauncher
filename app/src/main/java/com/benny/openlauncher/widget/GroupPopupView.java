@@ -45,46 +45,32 @@ public class GroupPopupView extends FrameLayout {
     }
 
     private void init() {
-        if (isInEditMode()) return;
-        init = false;
-
-        bringToFront();
+        if (isInEditMode()) {
+            return;
+        }
         popupParent = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_group_popup, this, false);
         cellContainer = (CellContainer) popupParent.findViewById(R.id.group);
 
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                popupParent.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.folderColor);
-            }
-        }, 2000);
+        bringToFront();
 
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (dismissListener != null)
+                if (dismissListener != null) {
                     dismissListener.onDismiss();
-                setVisibility(View.INVISIBLE);
+                }
                 dismissPopup();
             }
         });
     }
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-        if (!init) {
-            init = true;
-            setVisibility(View.INVISIBLE);
-        }
-    }
-
     public void dismissPopup() {
-        isShowing = false;
         removeAllViews();
+
         if (dismissListener != null) {
             dismissListener.onDismiss();
         }
+
         cellContainer.removeAllViews();
         setVisibility(View.INVISIBLE);
     }
@@ -92,18 +78,17 @@ public class GroupPopupView extends FrameLayout {
     public boolean showWindowV(final Item item, final View itemView, final DesktopCallBack callBack) {
         if (getVisibility() == View.VISIBLE) return false;
 
-        isShowing = true;
+        //popupParent.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.folderColor);
 
         setVisibility(View.VISIBLE);
         popupParent.setVisibility(View.VISIBLE);
-        final Context c = itemView.getContext();
 
+        final Context c = itemView.getContext();
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.items.size());
         cellContainer.setGridSize(cellSize[0], cellSize[1]);
 
         int iconSize = Tool.dp2px(LauncherSettings.getInstance(c).generalSettings.iconSize, c);
-        int textHeight = Tool.dp2px(22, c);
-
+        int textSize = Tool.dp2px(22, c);
         int contentPadding = Tool.dp2px(5, c);
 
         for (int x2 = 0; x2 < cellSize[0]; x2++) {
@@ -147,25 +132,9 @@ public class GroupPopupView extends FrameLayout {
                         return true;
                     }
                 });
-                if (!view.isShortcut) {
-                    final AppManager.App app = AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
-                    if (app == null) {
-                        removeItem(c, callBack, item, dropItem, (AppItemView) itemView);
-                    } else {
-                        view.setOnClickListener(new OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Tool.createScaleInScaleOutAnim(view, new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        dismissPopup();
-                                        setVisibility(View.INVISIBLE);
-                                        Tool.startApp(c, app);
-                                    }
-                                });
-                            }
-                        });
-                    }
+                final AppManager.App app = AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
+                if (app == null) {
+                    removeItem(c, callBack, item, dropItem, (AppItemView) itemView);
                 } else {
                     view.setOnClickListener(new OnClickListener() {
                         @Override
@@ -197,7 +166,7 @@ public class GroupPopupView extends FrameLayout {
         int popupWidth = contentPadding * 8 + popupParent.getContentPaddingLeft() + popupParent.getContentPaddingRight() + (iconSize) * cellSize[0];
         popupParent.getLayoutParams().width = popupWidth;
 
-        int popupHeight = contentPadding * 2 + popupParent.getContentPaddingTop() + popupParent.getContentPaddingBottom() + Tool.dp2px(30, c) + (iconSize + textHeight) * cellSize[1];
+        int popupHeight = contentPadding * 2 + popupParent.getContentPaddingTop() + popupParent.getContentPaddingBottom() + Tool.dp2px(30, c) + (iconSize + textSize) * cellSize[1];
         popupParent.getLayoutParams().height = popupHeight;
 
         int[] coordinates = new int[2];
@@ -271,7 +240,6 @@ public class GroupPopupView extends FrameLayout {
 
     static class GroupDef {
         static int maxItem = 12;
-
         static int[] getCellSize(int count) {
             if (count <= 1)
                 return new int[]{1, 1};
