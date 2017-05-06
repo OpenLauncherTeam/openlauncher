@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name="com.benny.openlauncher.App"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="${appIcon}"

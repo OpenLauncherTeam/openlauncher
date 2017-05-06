@@ -19,6 +19,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
@@ -69,7 +70,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             return;
         }
 
-        if (LauncherSettings.getInstance(c).generalSettings.desktopMode == DesktopMode.ShowAllApps) {
+        if (AppSettings.get().getDesktopMode() == DesktopMode.SHOW_ALL_APPS) {
             initDesktopShowAll(c);
         }
 
@@ -163,7 +164,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public void removeCurrentPage() {
         if (pageCount == 1) return;
-        if (LauncherSettings.getInstance(getContext()).generalSettings.desktopMode == DesktopMode.ShowAllApps)
+        if (AppSettings.get().getDesktopMode() == DesktopMode.SHOW_ALL_APPS)
             return;
         pageCount--;
 
@@ -587,8 +588,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         return false;
     }
 
-    public enum DesktopMode {
-        Normal, ShowAllApps
+    public static class DesktopMode {
+        public static final int NORMAL = 0;
+        public static final int SHOW_ALL_APPS = 1;
     }
 
     public interface OnDesktopEditListener {

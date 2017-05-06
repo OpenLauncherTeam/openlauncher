@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
@@ -177,7 +178,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         int height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
 
         if (LauncherSettings.getInstance(getContext()).generalSettings != null) {
-            int iconSize = LauncherSettings.getInstance(getContext()).generalSettings.iconSize;
+            int iconSize = AppSettings.get().getIconsizeGlobal();
             if (LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel) {
                 height = Tool.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
             } else {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_key__iconsize_global" translatable="false">pref_key__iconsize_global</string>
+    <string name="pref_key__is_app_first_start" translatable="false">pref_key__is_app_first_start</string>
+    <string name="pref_key__desktop_mode" />
+    <string name="pref_key__is_desktop_locked" />
+    <string name="pref_key__drawer_mode" />
+
+</resources>

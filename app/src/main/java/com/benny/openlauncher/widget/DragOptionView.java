@@ -18,9 +18,9 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DialogUtils;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 
 public class DragOptionView extends CardView {
@@ -280,7 +280,7 @@ public class DragOptionView extends CardView {
                         return true;
                     case APP:
                         deleteIcon.setVisibility(View.VISIBLE);
-                        if (LauncherSettings.getInstance(getContext()).generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps)
+                        if (AppSettings.get().getDesktopMode() != Desktop.DesktopMode.SHOW_ALL_APPS)
                             removeIcon.setVisibility(View.VISIBLE);
                         infoIcon.setVisibility(View.VISIBLE);
                         animShowView();

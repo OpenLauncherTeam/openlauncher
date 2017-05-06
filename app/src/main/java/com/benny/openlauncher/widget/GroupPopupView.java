@@ -15,6 +15,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
@@ -87,7 +88,7 @@ public class GroupPopupView extends FrameLayout {
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.items.size());
         cellContainer.setGridSize(cellSize[0], cellSize[1]);
 
-        int iconSize = Tool.dp2px(LauncherSettings.getInstance(c).generalSettings.iconSize, c);
+        int iconSize = Tool.dp2px(AppSettings.get().getIconsizeGlobal(), c);
         int textSize = Tool.dp2px(22, c);
         int contentPadding = Tool.dp2px(5, c);
 

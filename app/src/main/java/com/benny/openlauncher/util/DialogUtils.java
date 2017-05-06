@@ -79,7 +79,8 @@ public class DialogUtils {
                 .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.desktopHomePage, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).generalSettings.drawerMode = AppDrawerController.DrawerMode.values()[position];
+                       // LauncherSettings.getInstance(context).generalSettings.drawerMode = AppDrawerController.DrawerMode.values()[position];
+                       // SETTER for it
                         return true;
                     }
                 }).show();

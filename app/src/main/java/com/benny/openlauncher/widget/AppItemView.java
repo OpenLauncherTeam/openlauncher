@@ -20,6 +20,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
@@ -149,13 +150,24 @@ public class AppItemView extends View implements Drawable.Callback {
     private float horizontalPadding = 8; // In dp
 
     public AppItemView(Context context) {
-        super(context);
-        init();
+        this(context, null);
     }
 
     public AppItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+
+        if (myType == null)
+            myType = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
+        setWillNotDraw(false);
+        setDrawingCacheEnabled(true);
+        setWillNotCacheDrawing(false);
+
+        labelHeight = Tool.dp2px(14, getContext());
+        horizontalPadding = Tool.dp2px(horizontalPadding, getContext());
+
+        textPaint.setTextSize(sp2px(getContext(), 14));
+        textPaint.setColor(Color.DKGRAY);
+        textPaint.setTypeface(myType);
     }
 
     public void setTargetedWidth(int width) {
@@ -173,21 +185,6 @@ public class AppItemView extends View implements Drawable.Callback {
         if (targetedWidth != 0)
             mWidth = targetedWidth;
         setMeasuredDimension((int) Math.ceil(mWidth), (int) Math.ceil((int) mHeight) + Tool.dp2px(2, getContext()) + targetedHeightPadding * 2);
-    }
-
-    private void init() {
-        if (myType == null)
-            myType = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
-        setWillNotDraw(false);
-        setDrawingCacheEnabled(true);
-        setWillNotCacheDrawing(false);
-
-        labelHeight = Tool.dp2px(14, getContext());
-        horizontalPadding = Tool.dp2px(horizontalPadding, getContext());
-
-        textPaint.setTextSize(sp2px(getContext(), 14));
-        textPaint.setColor(Color.DKGRAY);
-        textPaint.setTypeface(myType);
     }
 
     public static int sp2px(Context context, float spValue) {
@@ -247,13 +244,13 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder(Context context) {
             view = new AppItemView(context);
-            float iconSize = Tool.dp2px(LauncherSettings.getInstance(context).generalSettings.iconSize, view.getContext());
+            float iconSize = Tool.dp2px(AppSettings.get().getIconsizeGlobal(), view.getContext());
             view.setIconSize(iconSize);
         }
 
         public Builder(AppItemView view) {
             this.view = view;
-            float iconSize = Tool.dp2px(LauncherSettings.getInstance(view.getContext()).generalSettings.iconSize, view.getContext());
+            float iconSize = Tool.dp2px(AppSettings.get().getIconsizeGlobal(), view.getContext());
             view.setIconSize(iconSize);
         }
 
@@ -286,7 +283,7 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setActionItem(int action) {
-            int iconSize = LauncherSettings.getInstance(view.getContext()).generalSettings.iconSize;
+            int iconSize = AppSettings.get().getIconsizeGlobal();
             TypedValue typedValue = new TypedValue();
             switch (action) {
                 case 8:
@@ -333,7 +330,7 @@ public class AppItemView extends View implements Drawable.Callback {
             view.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (LauncherSettings.getInstance(v.getContext()).generalSettings.desktopLock)
+                    if (AppSettings.get().isDesktopLocked())
                         return false;
 
                     if (eventAction != null && !eventAction.readyForDrag(v)) {

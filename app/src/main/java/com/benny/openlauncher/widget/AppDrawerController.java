@@ -14,6 +14,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 
@@ -27,7 +28,7 @@ public class AppDrawerController extends RevealFrameLayout {
 
     public AppDrawerPaged drawerViewPaged;
     public AppDrawerVertical drawerViewGrid;
-    public DrawerMode drawerMode;
+    public int drawerMode;
     private CallBack openCallBack, closeCallBack;
 
     private Animator appDrawerAnimator;
@@ -70,7 +71,7 @@ public class AppDrawerController extends RevealFrameLayout {
                 animator.start();
 
                 switch (drawerMode) {
-                    case Paged:
+                    case DrawerMode.PAGED:
                         for (int i = 0; i < drawerViewPaged.pages.size(); i++) {
                             drawerViewPaged.pages.get(i).findViewById(R.id.group).setAlpha(1);
                         }
@@ -80,7 +81,7 @@ public class AppDrawerController extends RevealFrameLayout {
                             mGrid.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime - 50).setInterpolator(new AccelerateDecelerateInterpolator());
                         }
                         break;
-                    case Vertical:
+                    case DrawerMode.VERTICAL:
                         drawerViewGrid.recyclerView.setAlpha(0);
                         drawerViewGrid.recyclerView.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime - 50).setInterpolator(new AccelerateDecelerateInterpolator());
                         break;
@@ -136,7 +137,7 @@ public class AppDrawerController extends RevealFrameLayout {
         });
 
         switch (drawerMode) {
-            case Paged:
+            case DrawerMode.PAGED:
                 if (drawerViewPaged.pages.size() > 0) {
                     View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.group);
                     mGrid.animate().setStartDelay(0).alpha(0).setDuration(60L).withEndAction(new Runnable() {
@@ -147,7 +148,7 @@ public class AppDrawerController extends RevealFrameLayout {
                     });
                 }
                 break;
-            case Vertical:
+            case DrawerMode.VERTICAL:
                 drawerViewGrid.recyclerView.animate().setStartDelay(0).alpha(0).setDuration(60L).withEndAction(new Runnable() {
                     @Override
                     public void run() {
@@ -161,15 +162,15 @@ public class AppDrawerController extends RevealFrameLayout {
     public void init() {
         if (isInEditMode()) return;
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-        drawerMode = LauncherSettings.getInstance(getContext()).generalSettings.drawerMode;
+        drawerMode = AppSettings.get().getDrawerMode();
         switch (drawerMode) {
-            case Paged:
+            case DrawerMode.PAGED:
                 drawerViewPaged = (AppDrawerPaged) layoutInflater.inflate(R.layout.view_app_drawer_paged, this, false);
                 addView(drawerViewPaged);
                 PagerIndicator indicator = (PagerIndicator) layoutInflater.inflate(R.layout.view_drawer_indicator, this, false);
                 addView(indicator);
                 break;
-            case Vertical:
+            case DrawerMode.VERTICAL:
                 drawerViewGrid = (AppDrawerVertical) layoutInflater.inflate(R.layout.view_app_drawer_vertical, this, false);
                 addView(drawerViewGrid);
                 break;
@@ -187,10 +188,10 @@ public class AppDrawerController extends RevealFrameLayout {
 
     public void reloadDrawerCardTheme() {
         switch (drawerMode) {
-            case Paged:
+            case DrawerMode.PAGED:
                 drawerViewPaged.resetAdapter();
                 break;
-            case Vertical:
+            case DrawerMode.VERTICAL:
                 if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerUseCard) {
                     drawerViewGrid.setCardBackgroundColor(Color.TRANSPARENT);
                     drawerViewGrid.setCardElevation(0);
@@ -207,10 +208,10 @@ public class AppDrawerController extends RevealFrameLayout {
 
     public void scrollToStart() {
         switch (drawerMode) {
-            case Paged:
+            case DrawerMode.PAGED:
                 drawerViewPaged.setCurrentItem(0, false);
                 break;
-            case Vertical:
+            case DrawerMode.VERTICAL:
                 drawerViewGrid.recyclerView.scrollToPosition(0);
                 break;
         }
@@ -218,16 +219,17 @@ public class AppDrawerController extends RevealFrameLayout {
 
     public void setHome(Home home) {
         switch (drawerMode) {
-            case Paged:
+            case DrawerMode.PAGED:
                 drawerViewPaged.withHome(home, (PagerIndicator) findViewById(R.id.appDrawerIndicator));
                 break;
-            case Vertical:
+            case DrawerMode.VERTICAL:
                 break;
         }
     }
 
-    public enum DrawerMode {
-        Paged, Vertical
+    public static class DrawerMode {
+        public static final int PAGED = 0;
+        public static final int VERTICAL = 1;
     }
 
     public interface CallBack {

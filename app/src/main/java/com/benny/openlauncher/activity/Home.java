@@ -39,6 +39,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.AppUpdateReceiver;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.DialogUtils;
@@ -159,6 +160,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
     private CallLogObserver callLogObserver;
+    private AppSettings appSettings;
 
     // region for the APP_DRAWER_ANIMATION
     private int cx;
@@ -185,6 +187,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         CustomActivityOnCrash.setEnableAppRestart(false);
         CustomActivityOnCrash.setDefaultErrorActivityDrawable(R.drawable.rip);
         CustomActivityOnCrash.install(this);
+
+        appSettings = AppSettings.get();
 
         resources = getResources();
 
@@ -264,9 +268,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {
                 LauncherSettings launcherSettings = LauncherSettings.getInstance(Home.this);
-                if (launcherSettings.generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps) {
-                    if (launcherSettings.generalSettings.firstLauncher) {
-                        launcherSettings.generalSettings.firstLauncher = false;
+                if (appSettings.getDesktopMode() != Desktop.DesktopMode.SHOW_ALL_APPS) {
+                    if (AppSettings.get().isAppFirstLaunch()) {
+                        AppSettings.get().setAppFirstLaunch(false);
 
                         // create a new app drawer button
                         Item appDrawerBtnItem = Item.newActionItem(8);
@@ -276,9 +280,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                         db.setItem(appDrawerBtnItem, 0, 0);
                     }
                 }
-                if (launcherSettings.generalSettings.desktopMode == Desktop.DesktopMode.Normal) {
+                if (appSettings.getDesktopMode() == Desktop.DesktopMode.NORMAL) {
                     desktop.initDesktopNormal(Home.this);
-                } else {
+                } else if (appSettings.getDesktopMode() == Desktop.DesktopMode.SHOW_ALL_APPS){
                     desktop.initDesktopShowAll(Home.this);
                 }
                 dock.initDockItem(Home.this);
@@ -289,9 +293,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         AppManager.getInstance(this).addAppDeletedListener(new AppManager.AppDeletedListener() {
             @Override
             public void onAppDeleted(AppManager.App app) {
-                if (generalSettings.desktopMode == Desktop.DesktopMode.Normal) {
+                if (appSettings.getDesktopMode() == Desktop.DesktopMode.NORMAL) {
                     desktop.initDesktopNormal(Home.this);
-                } else {
+                } else if (appSettings.getDesktopMode() == Desktop.DesktopMode.SHOW_ALL_APPS) {
                     desktop.initDesktopShowAll(Home.this);
                 }
                 dock.initDockItem(Home.this);
@@ -324,7 +328,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         desktop.setDesktopEditListener(this);
 
         desktopEditOptionPanel.setDesktopOptionViewListener(this);
-        desktopEditOptionPanel.updateLockIcon(generalSettings.desktopLock);
+        desktopEditOptionPanel.updateLockIcon(appSettings.isDesktopLocked());
         desktop.addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -379,7 +383,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     private void initDock() {
-        int iconSize = generalSettings.iconSize;
+        int iconSize = AppSettings.get().getIconsizeGlobal();
         dock.init();
         if (generalSettings.dockShowLabel) {
             dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;
@@ -497,12 +501,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         appDrawerController.reloadDrawerCardTheme();
 
         switch (generalSettings.drawerMode) {
-            case Paged:
+            case AppDrawerController.DrawerMode.PAGED:
                 if (!generalSettings.drawerShowIndicator) {
                     appDrawerController.getChildAt(1).setVisibility(View.GONE);
                 }
                 break;
-            case Vertical:
+            case AppDrawerController.DrawerMode.VERTICAL:
                 // handled in the AppDrawerVertical class
                 break;
         }

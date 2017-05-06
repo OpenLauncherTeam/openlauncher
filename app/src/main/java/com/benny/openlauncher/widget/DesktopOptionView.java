@@ -17,6 +17,7 @@ import android.view.WindowInsets;
 import android.widget.FrameLayout;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.IconLabelItem;
@@ -32,7 +33,7 @@ import java.util.List;
  */
 
 public class DesktopOptionView extends FrameLayout {
-
+    private AppSettings appSettings;
     private RecyclerView actionRecyclerView;
 
     private FastItemAdapter<IconLabelItem> actionAdapter = new FastItemAdapter<>();
@@ -85,6 +86,7 @@ public class DesktopOptionView extends FrameLayout {
     }
 
     private void init() {
+        appSettings = AppSettings.get();
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
         actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -116,29 +118,29 @@ public class DesktopOptionView extends FrameLayout {
                             desktopOptionViewListener.onSetPageAsHome();
                             break;
                         case 1:
-                            if (!LauncherSettings.getInstance(v.getContext()).generalSettings.desktopLock) {
+                            if (!appSettings.isDesktopLocked()) {
                                 desktopOptionViewListener.onRemovePage();
                             } else {
                                 Tool.toast(getContext(),"Desktop is locked.");
                             }
                             break;
                         case 2:
-                            if (!LauncherSettings.getInstance(v.getContext()).generalSettings.desktopLock) {
+                            if (!appSettings.isDesktopLocked()) {
                                 desktopOptionViewListener.onPickWidget();
                             } else {
                                 Tool.toast(getContext(),"Desktop is locked.");
                             }
                             break;
                         case 3:
-                            if (!LauncherSettings.getInstance(v.getContext()).generalSettings.desktopLock) {
+                            if (!appSettings.isDesktopLocked()) {
                                 desktopOptionViewListener.onPickDesktopAction();
                             } else {
                                 Tool.toast(getContext(),"Desktop is locked.");
                             }
                             break;
                         case 4:
-                            LauncherSettings.getInstance(getContext()).generalSettings.desktopLock = !LauncherSettings.getInstance(getContext()).generalSettings.desktopLock;
-                            updateLockIcon(LauncherSettings.getInstance(getContext()).generalSettings.desktopLock);
+                            //LauncherSettings.getInstance(getContext()).generalSettings.desktopLock = !LauncherSettings.getInstance(getContext()).generalSettings.desktopLock;
+                            updateLockIcon(appSettings.isDesktopLocked());
                             break;
                         case 5:
                             desktopOptionViewListener.onLaunchSettings();

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
@@ -141,7 +142,7 @@ public class AppDrawerPaged extends SmoothViewPager {
                     .withOnLongPressDrag(app, DragAction.Action.APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                         @Override
                         public boolean readyForDrag(View view) {
-                            return LauncherSettings.getInstance(view.getContext()).generalSettings.desktopMode != Desktop.DesktopMode.ShowAllApps;
+                            return AppSettings.get().getDesktopMode() != Desktop.DesktopMode.SHOW_ALL_APPS;
                         }
 
                         @Override

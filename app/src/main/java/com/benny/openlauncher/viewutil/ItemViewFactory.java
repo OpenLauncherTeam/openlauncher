@@ -20,6 +20,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
@@ -130,7 +131,7 @@ public class ItemViewFactory {
                 widgetView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
-                        if (LauncherSettings.getInstance(view.getContext()).generalSettings.desktopLock)
+                        if (AppSettings.get().isDesktopLocked())
                             return false;
 
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
@@ -280,7 +281,7 @@ public class ItemViewFactory {
     }
 
     public static Drawable getGroupIconDrawable(Context context, Item item) {
-        final float iconSize = Tool.dp2px(LauncherSettings.getInstance(context).generalSettings.iconSize, context);
+        final float iconSize = Tool.dp2px(AppSettings.get().getIconsizeGlobal(), context);
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {
             if (i < item.items.size()) {
