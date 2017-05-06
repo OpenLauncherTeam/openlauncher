@@ -269,7 +269,7 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder setLauncherAction(final Context context, int action) {
+        public Builder setLauncherAction(int action) {
             switch (action) {
                 case 8:
                     int iconSize = LauncherSettings.getInstance(view.getContext()).generalSettings.iconSize;
@@ -288,7 +288,6 @@ public class AppItemView extends View implements Drawable.Callback {
                         public void onClick(View view) {
                             view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                             Home.launcher.openAppDrawer(view);
-                            //LauncherAction.RunAction(LauncherAction.Action.OpenAppDrawer, context);
                         }
                     });
                     break;

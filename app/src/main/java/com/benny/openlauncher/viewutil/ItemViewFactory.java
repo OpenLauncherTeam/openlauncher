@@ -44,7 +44,7 @@ public class ItemViewFactory {
         switch (item.type) {
             case ACTION:
                 view = new AppItemView.Builder(context)
-                        .setLauncherAction(context, item.actionValue)
+                        .setLauncherAction(item.actionValue)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
                         .withOnLongPressDrag(item, DragAction.Action.ACTION, new AppItemView.Builder.LongPressCallBack() {
@@ -99,7 +99,7 @@ public class ItemViewFactory {
                     }
                 });
 
-                final FrameLayout widgetContainer = (FrameLayout) LayoutInflater.from(context).inflate(R.layout.view_widgetcontainer, null);
+                final FrameLayout widgetContainer = (FrameLayout) LayoutInflater.from(context).inflate(R.layout.view_widget_container, null);
                 widgetContainer.addView(widgetView);
 
                 final View ve = widgetContainer.findViewById(R.id.vertexpand);

@@ -324,7 +324,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         desktop.setDesktopEditListener(this);
 
         desktopEditOptionPanel.setDesktopOptionViewListener(this);
-        desktopEditOptionPanel.setDesktopLocked(generalSettings.desktopLock);
+        desktopEditOptionPanel.updateLockIcon(generalSettings.desktopLock);
         desktop.addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -332,7 +332,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onPageSelected(int position) {
-                desktopEditOptionPanel.setStarButtonColored(generalSettings.desktopHomePage == position);
+                desktopEditOptionPanel.updateHomeIcon(generalSettings.desktopHomePage == position);
             }
 
             @Override
@@ -394,7 +394,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         Tool.visibleViews(100, desktopEditOptionPanel);
         Tool.invisibleViews(100, dock, desktopIndicator);
-        updateSearchView(false,false);
+        updateSearchView(false, false);
     }
 
     @Override
@@ -413,12 +413,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public void updateSearchView(boolean show, boolean gone) {
         if (generalSettings.desktopSearchBar) {
             if (show) {
-                Tool.visibleViews(100,clockFrame, searchBar);
+                Tool.visibleViews(100, clockFrame, searchBar);
             } else {
-                if (gone)
+                if (gone) {
                     Tool.goneViews(clockFrame, searchBar);
-                else
-                    Tool.invisibleViews(100,clockFrame, searchBar);
+                } else {
+                    Tool.invisibleViews(100, clockFrame, searchBar);
+                }
             }
         }
     }

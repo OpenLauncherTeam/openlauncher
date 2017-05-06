@@ -57,8 +57,8 @@ public class DesktopOptionView extends FrameLayout {
         this.desktopOptionViewListener = desktopOptionViewListener;
     }
 
-    public void setStarButtonColored(boolean colored) {
-        if (colored) {
+    public void updateHomeIcon(boolean home) {
+        if (home) {
             actionAdapter.getAdapterItem(0).setIcon(getContext().getResources().getDrawable(R.drawable.ic_star_black_36dp));
         } else {
             actionAdapter.getAdapterItem(0).setIcon(getContext().getResources().getDrawable(R.drawable.ic_star_border_black_36dp));
@@ -66,8 +66,8 @@ public class DesktopOptionView extends FrameLayout {
         actionAdapter.notifyAdapterItemChanged(0);
     }
 
-    public void setDesktopLocked(boolean locked) {
-        if (locked) {
+    public void updateLockIcon(boolean lock) {
+        if (lock) {
             actionAdapter.getAdapterItem(4).setIcon(getContext().getResources().getDrawable(R.drawable.ic_lock_white_36dp));
         } else {
             actionAdapter.getAdapterItem(4).setIcon(getContext().getResources().getDrawable(R.drawable.ic_lock_open_white_36dp));
@@ -86,11 +86,10 @@ public class DesktopOptionView extends FrameLayout {
 
     private void init() {
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
-
         actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         actionRecyclerView.setClipToPadding(false);
-        actionRecyclerView.setPadding(Tool.dp2px(20,getContext()),0,Tool.dp2px(20,getContext()),0);
+        actionRecyclerView.setPadding(Tool.dp2px(20, getContext()), 0, Tool.dp2px(20, getContext()), 0);
         actionRecyclerView.setLayoutManager(linearLayoutManager);
         actionRecyclerView.setAdapter(actionAdapter);
         actionRecyclerView.setOverScrollMode(OVER_SCROLL_ALWAYS);
@@ -105,6 +104,7 @@ public class DesktopOptionView extends FrameLayout {
         items.add(new IconLabelItem(getContext(), R.drawable.ic_launch_black_36dp, R.string.action, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         items.add(new IconLabelItem(getContext(), R.drawable.ic_lock_open_white_36dp, R.string.lock, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
         items.add(new IconLabelItem(getContext(), R.drawable.ic_settings_launcher_36dp, R.string.settings, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false));
+
         actionAdapter.set(items);
         actionAdapter.withOnClickListener(new FastAdapter.OnClickListener<IconLabelItem>() {
             @Override
@@ -112,33 +112,33 @@ public class DesktopOptionView extends FrameLayout {
                 if (desktopOptionViewListener != null) {
                     switch (position) {
                         case 0:
-                            setStarButtonColored(true);
+                            updateHomeIcon(true);
                             desktopOptionViewListener.onSetPageAsHome();
                             break;
                         case 1:
                             if (!LauncherSettings.getInstance(v.getContext()).generalSettings.desktopLock) {
                                 desktopOptionViewListener.onRemovePage();
-                            }else {
+                            } else {
                                 Tool.toast(getContext(),"Desktop is locked.");
                             }
                             break;
                         case 2:
                             if (!LauncherSettings.getInstance(v.getContext()).generalSettings.desktopLock) {
                                 desktopOptionViewListener.onPickWidget();
-                            }else {
+                            } else {
                                 Tool.toast(getContext(),"Desktop is locked.");
                             }
                             break;
                         case 3:
                             if (!LauncherSettings.getInstance(v.getContext()).generalSettings.desktopLock) {
                                 desktopOptionViewListener.onPickDesktopAction();
-                            }else {
+                            } else {
                                 Tool.toast(getContext(),"Desktop is locked.");
                             }
                             break;
                         case 4:
                             LauncherSettings.getInstance(getContext()).generalSettings.desktopLock = !LauncherSettings.getInstance(getContext()).generalSettings.desktopLock;
-                            setDesktopLocked(LauncherSettings.getInstance(getContext()).generalSettings.desktopLock);
+                            updateLockIcon(LauncherSettings.getInstance(getContext()).generalSettings.desktopLock);
                             break;
                         case 5:
                             desktopOptionViewListener.onLaunchSettings();
