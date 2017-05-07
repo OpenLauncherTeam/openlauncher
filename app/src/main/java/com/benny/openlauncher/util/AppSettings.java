@@ -324,7 +324,7 @@ public class AppSettings {
     }
 
     public int getDockColor() {
-        return getInt(R.string.pref_key__docker_color, Color.TRANSPARENT);
+        return getInt(R.string.pref_key__dock_background_color, Color.TRANSPARENT);
     }
 
     public ArrayList<String> getHiddenAppsList() {

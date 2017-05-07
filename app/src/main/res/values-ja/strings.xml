@@ -95,10 +95,10 @@
     <string name="pref_title__is_desktop_show_label">ラベル</string>
     <string name="pref_summary__is_desktop_show_label">デスクトップにアプリとフォルダー名を表示します。</string>
 
-    <string name="settings_dockSize">サイズ</string>
-    <string name="settings_dockSize_summary">ドックサイズを設定します。</string>
-    <string name="settings_dockLabel">ラベル</string>
-    <string name="settings_dockLabel_summary">ドックにアプリとフォルダー名を表示します。</string>
+    <string name="pref_title__dock_item_count_horizontal">サイズ</string>
+    <string name="pref_summary__dock_item_count_horizontal">ドックサイズを設定します。</string>
+    <string name="pref_title__is_dock_show_label">ラベル</string>
+    <string name="pref_summary__is_dock_show_label">ドックにアプリとフォルダー名を表示します。</string>
 
     <string name="pref_title__style">スタイル</string>
     <string name="pref_summary__drawer_mode">アプリドロワーのページと縦表示を選択します。</string>
@@ -130,8 +130,8 @@
     <string name="settings_swipeUp">上にスワイプ</string>
     <string name="settings_swipeUp_summary">上にスワイプ操作。</string>
 
-    <string name="pref_title__docker_color">ドック</string>
-    <string name="pref_summary__docker_color">ドックの背景色。</string>
+    <string name="pref_title__dock_background_color">ドック</string>
+    <string name="pref_summary__dock_background_color">ドックの背景色。</string>
     <string name="pref_title__drawer_background_color">ドロワーの背景</string>
     <string name="pref_summary__drawer_background_color">ドロワーの背景色。</string>
     <string name="pref_title__drawer_card_color">ドロワーカード</string>

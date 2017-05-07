@@ -95,10 +95,10 @@
     <string name="pref_summary__is_desktop_show_page_indicator">Zeige den Seitenindikator auf dem Desktop an.</string>
     <string name="pref_summary__is_desktop_show_label">Zeige Anwendungs- und Ordnernamen auf dem Desktop.</string>
 
-    <string name="settings_dockLabel">Beschriftung</string>
-    <string name="settings_dockLabel_summary">Zeige Anwendungs- und Ordnernamen im Dock.</string>
-    <string name="settings_dockSize">Größe</string>
-    <string name="settings_dockSize_summary">Bestimme die Größe des Docks.</string>
+    <string name="pref_title__is_dock_show_label">Beschriftung</string>
+    <string name="pref_summary__is_dock_show_label">Zeige Anwendungs- und Ordnernamen im Dock.</string>
+    <string name="pref_title__dock_item_count_horizontal">Größe</string>
+    <string name="pref_summary__dock_item_count_horizontal">Bestimme die Größe des Docks.</string>
 
     <string name="pref_title__style">Stil</string>
     <string name="pref_summary__drawer_mode">Wähle zwischen einer Karten- oder einer vertikalen Ansicht.</string>
@@ -131,8 +131,8 @@
     <string name="settings_desktopSwipe">Drawer: Wischen</string>
     <string name="settings_desktopSwipe_summary">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
 
-    <string name="pref_title__docker_color">Dock</string>
-    <string name="pref_summary__docker_color">Dock Hintergrundfarbe.</string>
+    <string name="pref_title__dock_background_color">Dock Hintergundfarbe</string>
+    <string name="pref_summary__dock_background_color">Hintergrundfarbe des Docks</string>
     <string name="pref_title__drawer_background_color">Drawer Hintergrund</string>
     <string name="pref_summary__drawer_background_color">Drawer Hintergrundfarbe.</string>
     <string name="pref_title__drawer_card_color">Karten</string>

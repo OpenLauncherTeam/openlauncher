@@ -90,10 +90,10 @@
     <string name="pref_title__is_desktop_show_label">Label</string>
     <string name="pref_summary__is_desktop_show_label">Show app and folder names in the desktop.</string>
 
-    <string name="settings_dockSize">Size</string>
-    <string name="settings_dockSize_summary">Set the dock size.</string>
-    <string name="settings_dockLabel">Label</string>
-    <string name="settings_dockLabel_summary">Show app and folder names in the dock.</string>
+    <string name="pref_title__dock_item_count_horizontal">Size</string>
+    <string name="pref_summary__dock_item_count_horizontal">Set the dock size.</string>
+    <string name="pref_title__is_dock_show_label">Label</string>
+    <string name="pref_summary__is_dock_show_label">Show app and folder names in the dock.</string>
 
     <string name="pref_title__style">Style</string>
     <string name="pref_summary__drawer_mode">Choose between paged and vertical view for the app drawer.</string>
@@ -124,8 +124,8 @@
     <string name="settings_swipeUp">Swipe up</string>
     <string name="settings_swipeUp_summary">Swipe up action.</string>
 
-    <string name="pref_title__docker_color">Dock</string>
-    <string name="pref_summary__docker_color">Dock background color.</string>
+    <string name="pref_title__dock_background_color">Dock background color</string>
+    <string name="pref_summary__dock_background_color">Background color of the dock</string>
     <string name="pref_title__drawer_background_color">Drawer Background</string>
     <string name="pref_summary__drawer_background_color">Drawer background color.</string>
     <string name="pref_title__drawer_card_color">Drawer Card</string>

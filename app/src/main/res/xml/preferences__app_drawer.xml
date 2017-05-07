@@ -66,7 +66,7 @@
     <PreferenceCategory android:title="@string/pref_title__color">
 
         <com.jaredrummler.android.colorpicker.ColorPreference
-            android:defaultValue="@color/white"
+            android:defaultValue="@color/transparent"
             android:key="@string/pref_key__drawer_background_color"
             android:summary="@string/pref_summary__drawer_background_color"
             android:title="@string/pref_title__drawer_background_color"
@@ -82,7 +82,7 @@
             app:cpv_showAlphaSlider="true" />
 
         <com.jaredrummler.android.colorpicker.ColorPreference
-            android:defaultValue="@color/white"
+            android:defaultValue="@color/dark_grey"
             android:key="@string/pref_key__drawer_label_color"
             android:summary="@string/pref_summary__drawer_label_color"
             android:title="@string/pref_title__drawer_label_color"

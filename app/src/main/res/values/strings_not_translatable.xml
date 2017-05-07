@@ -31,7 +31,7 @@
     <string name="pref_key__drawer_card_color" translatable="false">pref_key__drawer_card_color</string>
     <string name="pref_key__drawer_label_color" translatable="false">pref_key___label_color</string>
     <string name="pref_key__desktop_folder_color" translatable="false">pref_key__folder_color</string>
-    <string name="pref_key__docker_color" translatable="false">pref_key__docker_color</string>
+    <string name="pref_key__dock_background_color" translatable="false">pref_key__dock_background_color</string>
     <string name="pref_key__hidden_apps_list" translatable="false">pref_key__hidden_apps_list</string>
 
 

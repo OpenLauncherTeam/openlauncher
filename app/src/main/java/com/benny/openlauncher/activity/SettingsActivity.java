@@ -65,6 +65,10 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     fragment = new SettingsFragmentAppDrawer();
                     toolbar.setTitle(R.string.pref_title__app_drawer);
                     break;
+                case SettingsFragmentDock.TAG:
+                    fragment = new SettingsFragmentDock();
+                    toolbar.setTitle(R.string.pref_title__dock);
+                    break;
                 case SettingsFragmentMaster.TAG:
                 default:
                     fragment = new SettingsFragmentMaster();
@@ -111,10 +115,10 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 } else if (settings.isKeyEqual(key, R.string.pref_key__cat_app_drawer)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentAppDrawer.TAG, true);
                     return true;
-                } /*else if (settings.isKeyEqual(key, R.string.pref_key__cat_dock)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_dock)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentDock.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_gestures)) {
+                } /*else if (settings.isKeyEqual(key, R.string.pref_key__cat_gestures)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentGestures.TAG, true);
                     return true;
                 } else if (settings.isKeyEqual(key, R.string.pref_key__cat_icons)) {
@@ -131,7 +135,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         @Override
         public void onResume() {
             super.onResume();
-            ((SettingsActivity)getActivity()).toolbar.setTitle(R.string.settings);
+            ((SettingsActivity) getActivity()).toolbar.setTitle(R.string.settings);
         }
     }
 
@@ -168,10 +172,15 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             getPreferenceManager().setSharedPreferencesName("app");
             addPreferencesFromResource(R.xml.preferences__app_drawer);
         }
+    }
 
-        @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
-            return super.onPreferenceTreeClick(screen, preference);
+    public static class SettingsFragmentDock extends PreferenceFragment {
+        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentDock";
+
+        public void onCreate(Bundle savedInstances) {
+            super.onCreate(savedInstances);
+            getPreferenceManager().setSharedPreferencesName("app");
+            addPreferencesFromResource(R.xml.preferences__dock);
         }
     }
 }
