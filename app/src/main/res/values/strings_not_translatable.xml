@@ -8,6 +8,10 @@
     <string name="about_credit_text_gsantner" translatable="false">Maintainer, German translations</string>
     <string name="about_credit_text_dkanada" translatable="false">Maintainer, Database</string>
 
+    <!-- Just refs -->
+    <string name="intro2_title" translatable="false">@string/minibar</string>
+    <string name="pref_title__minibar__arrangement__show_screen" translatable="false">@string/minibar</string>
+
     <!-- Preference Keys -->
     <string name="pref_key__iconsize_global" translatable="false">pref_key__iconsize_global</string>
     <string name="pref_key__is_app_first_start" translatable="false">pref_key__is_app_first_start</string>

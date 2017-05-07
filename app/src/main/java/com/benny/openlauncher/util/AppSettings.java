@@ -183,7 +183,7 @@ public class AppSettings {
     //##
     //#################################
     public int getIconsizeGlobal() {
-        return getInt(R.string.pref_key__iconsize_global, 58);
+        return getInt(R.string.pref_key__iconsize_global, 52);
     }
 
     public boolean isAppFirstLaunch() {
