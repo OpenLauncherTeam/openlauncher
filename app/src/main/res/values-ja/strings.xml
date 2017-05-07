@@ -72,12 +72,8 @@
 
     <!-- Settings -->
 
-    <string name="settings_group_desktop">デスクトップ</string>
-    <string name="settings_group_dock">ドック</string>
-    <string name="settings_group_drawer">アプリドロワー</string>
     <string name="pref_title__gestures">ジェスチャー</string>
     <string name="pref_title__color">色</string>
-    <string name="settings_group_icons">アイコン</string>
     <string name="pref_title__miscellaneous">その他</string>
 
     <string name="pref_title__minibar__arrangement__show_screen">ミニバー</string>
@@ -85,7 +81,6 @@
     <string name="pref_title__desktop_mode">スタイル</string>
     <string name="pref_summary__desktop_mode">異なるデスクトップのスタイルを選択します。</string>
     <string name="pref_title__size">サイズ</string>
-    <string name="settings_desktopSize_summary">デスクトップのグリッドサイズを設定します。</string>
     <string name="pref_title__is_desktop_searchbar_enabled">検索バー</string>
     <string name="pref_summary__is_desktop_searchbar_enabled">デスクトップの上部に検索バーを表示します。</string>
     <string name="pref_title__is_desktop_fullscreen">全画面</string>
@@ -102,16 +97,9 @@
 
     <string name="pref_title__style">スタイル</string>
     <string name="pref_summary__drawer_mode">アプリドロワーのページと縦表示を選択します。</string>
-    <string name="settings_drawerSize">サイズ</string>
-    <string name="settings_drawerSize_summary">ドロワーのグリッドサイズを設定します。</string>
     <string name="pref_title__is_drawer_use_card">カード</string>
     <string name="pref_summary__is_drawer_use_card">ドロワーの背景としてカードを使用します。</string>
-    <string name="settings_drawerSearch">検索バー</string>
-    <string name="settings_drawerSearch_summary">縦表示レイアウトでのみ表示します。</string>
-    <string name="settings_drawerSearchIcon">検索アイコン</string>
-    <string name="settings_drawerSearchIcon_summary">検索バーにデフォルトのダーク検索アイコンを表示します。</string>
-    <string name="pref_title__is_drawer_remember_page">最後のページを記憶</string>
-    <string name="wrong2">アプリドロワーが最後に開いたページを保存します。</string>
+    <string name="pref_title__is_drawer_remember_position">最後のページを記憶</string>
     <string name="pref_title__is_drawer_show_indicator">ドロワーのスクロールバー</string>
     <string name="pref_summary__is_drawer_show_indicator">ドロワーにページインジケーターを表示します。</string>
 

@@ -26,7 +26,7 @@
     <string name="pref_key__is_open_app_drawer_on_swipe" translatable="false">pref_key__is_open_app_drawer_on_swipe</string>
     <string name="pref_key__is_drawer_use_card" translatable="false">pref_key__is_drawer_use_card</string>
     <string name="pref_key__is_drawer_show_indicator" translatable="false">pref_key__is__show_indicator</string>
-    <string name="pref_key__is_drawer_remember_page" translatable="false">pref_key__is__remember_page</string>
+    <string name="pref_key__is_drawer_remember_position" translatable="false">pref_key__is__remember_page</string>
     <string name="pref_key__drawer_background_color" translatable="false">pref_key__drawer_background_color</string>
     <string name="pref_key__drawer_card_color" translatable="false">pref_key__drawer_card_color</string>
     <string name="pref_key__drawer_label_color" translatable="false">pref_key___label_color</string>

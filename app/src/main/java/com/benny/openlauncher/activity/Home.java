@@ -518,26 +518,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public void initMinibar() {
         final ArrayList<String> labels = new ArrayList<>();
         final ArrayList<Integer> icons = new ArrayList<>();
-        ArrayList<String> miniBarArrangement = appSettings.getMinibarArrangement();
 
-        if (miniBarArrangement.isEmpty()) {
-            for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
-                miniBarArrangement.add("0" + item.label.toString());
-                labels.add(item.label.toString());
-                icons.add(item.icon);
-            }
-        } else {
-            if (miniBarArrangement.size() == LauncherAction.actionDisplayItems.length) {
-                for (String act : miniBarArrangement) {
-                    if (act.charAt(0) == '0') {
-                        LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
-                        labels.add(item.label.toString());
-                        icons.add(item.icon);
-                    }
-                }
-            } else {
-                for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
-                    miniBarArrangement.add("0" + item.label.toString());
+        for (String act : appSettings.getMinibarArrangement()) {
+            if (act.length() > 1 && act.charAt(0) == '0') {
+                LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
+                if (item != null) {
                     labels.add(item.label.toString());
                     icons.add(item.icon);
                 }

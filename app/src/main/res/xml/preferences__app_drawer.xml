@@ -56,9 +56,9 @@
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_key__is_drawer_remember_page"
-            android:summary="@string/pref_summary__is_drawer_remember_page"
-            android:title="@string/pref_title__is_drawer_remember_page" />
+            android:key="@string/pref_key__is_drawer_remember_position"
+            android:summary="@string/pref_summary__is_drawer_remember_position"
+            android:title="@string/pref_title__is_drawer_remember_position" />
 
         <CheckBoxPreference
             android:defaultValue="true"

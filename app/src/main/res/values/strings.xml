@@ -99,7 +99,7 @@
     <string name="pref_summary__drawer_mode">Choose between paged and vertical view for the app drawer.</string>
     <string name="pref_title__is_drawer_use_card">Card</string>
     <string name="pref_summary__is_drawer_use_card">Use a card as drawer background.</string>
-    <string name="pref_title__is_drawer_remember_page">Remember last page</string>
+    <string name="pref_title__is_drawer_remember_position">Remember last page</string>
     <string name="pref_title__is_drawer_show_indicator">Drawer scrollbar</string>
     <string name="pref_summary__is_drawer_show_indicator">Show the page indicator in the drawer.</string>
 
@@ -180,4 +180,5 @@
     <string name="item_count_vertical">Vertical count of items</string>
     <string name="item_count_horizontal_landscape">Horizontal count of items (Landscape)</string>
     <string name="item_count_vertical_landscape">Vertical count of items (Landscape)</string>
+    <string name="pref_summary__is_drawer_remember_position">Automatically save and restore position of app drawer</string>
 </resources>

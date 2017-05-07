@@ -260,7 +260,14 @@ public class AppSettings {
     }
 
     public ArrayList<String> getMinibarArrangement() {
-        return new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key__minibar__arrangement__tmp)));
+        ArrayList<String> ret = new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key__minibar__arrangement__tmp)));
+        if (ret.isEmpty()){
+            for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
+                ret.add("0" + item.label.toString());
+            }
+            setMinibarArrangement(ret);
+        }
+        return ret;
     }
 
     public void setMinibarArrangement(ArrayList<String> value) {
@@ -300,7 +307,7 @@ public class AppSettings {
     }
 
     public boolean isDrawerRememberPage() {
-        return getBool(R.string.pref_key__is_drawer_remember_page, true);
+        return getBool(R.string.pref_key__is_drawer_remember_position, true);
     }
 
     public boolean isDrawerShowIndicator() {
