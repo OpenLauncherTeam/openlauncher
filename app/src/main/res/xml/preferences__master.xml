@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:icon="@drawable/ic_desktop_windows_black_24dp"
+        android:key="@string/pref_key__cat_desktop"
+        android:title="@string/pref_title__desktop" />
+
+    <Preference
+        android:icon="@drawable/ic_apps_black_24dp"
+        android:key="@string/pref_key__cat_app_drawer"
+        android:title="@string/pref_title__app_drawer" />
+
+    <Preference
+        android:icon="@drawable/ic_dock_black_24dp"
+        android:key="@string/pref_key__cat_dock"
+        android:title="@string/pref_title__dock" />
+
+    <Preference
+        android:icon="@drawable/ic_gesture_black_24dp"
+        android:key="@string/pref_key__cat_gestures"
+        android:title="@string/pref_title__gestures" />
+
+    <Preference
+        android:icon="@drawable/ic_android_black_24dp"
+        android:key="@string/pref_key__cat_icons"
+        android:title="@string/pref_title__icons" />
+
+    <Preference
+        android:icon="@drawable/ic_color_lens_black_24dp"
+        android:key="@string/pref_key__cat_various"
+        android:title="@string/pref_title__various" />
+
+</PreferenceScreen>

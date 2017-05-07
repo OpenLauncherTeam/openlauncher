@@ -1,271 +1,144 @@
 package com.benny.openlauncher.activity;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
+import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.preference.Preference;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
+import android.support.design.widget.AppBarLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.util.DialogUtils;
-import com.benny.openlauncher.util.LauncherAction;
-import com.benny.openlauncher.util.LauncherSettings;
-import com.benny.openlauncher.util.Tool;
-import com.bennyv5.materialpreffragment.BaseSettingsActivity;
-import com.bennyv5.materialpreffragment.MaterialPrefFragment;
+import com.benny.openlauncher.util.AppSettings;
 
-public class SettingsActivity extends BaseSettingsActivity implements MaterialPrefFragment.OnPrefClickedListener, MaterialPrefFragment.OnPrefChangedListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private boolean requireLauncherRestart = false;
+/**
+ * SettingsActivity
+ * Created by vanitas on 24.10.16.
+ */
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        Tool.setTheme(this);
-        super.onCreate(savedInstanceState);
+public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
+    //Toolbar
+    @BindView(R.id.settings__appbar)
+    protected AppBarLayout appBarLayout;
+
+    @BindView(R.id.settings__toolbar)
+    protected Toolbar toolbar;
+
+    private AppSettings appSettings;
+
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
         setContentView(R.layout.activity_settings);
-        setSupportActionBar((Toolbar) findViewById(R.id.tb));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle(R.string.settings);
+        ButterKnife.bind(this);
+        toolbar.setTitle(R.string.settings);
+        setSupportActionBar(toolbar);
+        appSettings = AppSettings.get();
 
-        //SettingsFragment settings = new SettingsFragment();
-
-        MaterialPrefFragment settings = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), false)
-                .add(new MaterialPrefFragment.ButtonPref("desktopSettings", getResources().getDrawable(R.drawable.ic_desktop_windows_black_24dp), getString(R.string.settings_group_desktop), null))
-                .add(new MaterialPrefFragment.ButtonPref("dockSettings", getResources().getDrawable(R.drawable.ic_dock_black_24dp), getString(R.string.settings_group_dock), null))
-                .add(new MaterialPrefFragment.ButtonPref("drawerSettings", getResources().getDrawable(R.drawable.ic_apps_black_24dp), getString(R.string.settings_group_drawer), null))
-                .add(new MaterialPrefFragment.ButtonPref("inputSettings", getResources().getDrawable(R.drawable.ic_gesture_black_24dp), getString(R.string.settings_group_input), null))
-                .add(new MaterialPrefFragment.ButtonPref("colorsSettings", getResources().getDrawable(R.drawable.ic_color_lens_black_24dp), getString(R.string.settings_group_color), null))
-                .add(new MaterialPrefFragment.ButtonPref("iconsSettings", getResources().getDrawable(R.drawable.ic_android_black_24dp), getString(R.string.settings_group_icons), null))
-                .add(new MaterialPrefFragment.ButtonPref("otherSettings", getResources().getDrawable(R.drawable.ic_more_horiz_black_24dp), getString(R.string.settings_group_other), null))
-                .setOnPrefClickedListener(this));
-
-        getSupportFragmentManager().beginTransaction().add(R.id.ll, settings).commit();
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_chevron_left_black_24dp));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                SettingsActivity.this.onBackPressed();
+            }
+        });
+        appSettings.registerPreferenceChangedListener(this);
+        showFragment(SettingsFragmentMaster.TAG, false);
     }
 
-    public void onSettingsSelected(int settingsCategory) {
-        LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(this).generalSettings;
-        MaterialPrefFragment fragment;
-        switch (settingsCategory) {
-            default:
-                fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        .add(new MaterialPrefFragment.ButtonPref("editMiniBar", getString(R.string.settings_desktopMinibar), getString(R.string.settings_desktopMinibar_summary)))
-                        //.add(new MaterialPrefFragment.ButtonPref("desktopMode", (getString(R.string.settings_desktopStyle)), (getString(R.string.settings_desktopStyle_summary))))
-                        /*.add(new MaterialPrefFragment.NUMPref("gridSizeDesktop", (getString(R.string.settings_desktopSize)), (getString(R.string.settings_desktopSize_summary)),
-                                new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDesktop", (getString(R.string.settings_column)), generalSettings.desktopGridX, 4, 10),
-                                new MaterialPrefFragment.NUMPref.NUMPrefItem("vGridSizeDesktop", (getString(R.string.settings_row)), generalSettings.desktopGridY, 4, 10)
-                        ))*/
-                        /*.add(new MaterialPrefFragment.TBPref("desktopSearchBar", (getString(R.string.settings_desktopSearch)), (getString(R.string.settings_desktopSearch_summary)), generalSettings.desktopSearchBar))
-                        .add(new MaterialPrefFragment.TBPref("fullscreen", (getString(R.string.settings_desktopFull)), (getString(R.string.settings_desktopFull_summary)), generalSettings.fullscreen))
-                        .add(new MaterialPrefFragment.TBPref("showIndicator", (getString(R.string.settings_desktopIndicator)), (getString(R.string.settings_desktopIndicator_summary)), generalSettings.showIndicator))
-                        .add(new MaterialPrefFragment.TBPref("desktopShowLabel", (getString(R.string.settings_desktopLabel)), (getString(R.string.settings_desktopLabel_summary)), generalSettings.desktopShowLabel))
-                        */.setOnPrefChangedListener(this).setOnPrefClickedListener(this));
-                getSupportActionBar().setTitle(R.string.settings_group_desktop);
-                break;
-            case 1:
-                fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        /*.add(new MaterialPrefFragment.NUMPref("gridSizeDock", (getString(R.string.settings_dockSize)), (getString(R.string.settings_dockSize_summary)),
-                                new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDock", (getString(R.string.settings_column)), generalSettings.dockGridX, 4, 10)
-                        ))*/
-                        /*.add(new MaterialPrefFragment.TBPref("dockShowLabel", (getString(R.string.settings_dockLabel)), (getString(R.string.settings_dockLabel_summary)), generalSettings.dockShowLabel))
-                        */.setOnPrefChangedListener(this).setOnPrefClickedListener(this));
-                getSupportActionBar().setTitle(R.string.settings_group_dock);
-                break;
-            case 2:
-                fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        .add(new MaterialPrefFragment.ButtonPref("drawerStyle", (getString(R.string.settings_drawerStyle)), (getString(R.string.settings_drawerStyle_summary))))
-                        .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
-                getSupportActionBar().setTitle(R.string.settings_group_drawer);
-                break;
-            case 3:
-                fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
-                getSupportActionBar().setTitle(R.string.settings_group_input);
-                break;
-            case 4:
-                fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        /*.add(new MaterialPrefFragment.ColorPref("dockBackground", (getString(R.string.settings_colorDock)), (getString(R.string.settings_colorDock_summary)), generalSettings.dockColor))
-                        .add(new MaterialPrefFragment.ColorPref("drawerBackground", (getString(R.string.settings_colorDrawer)), (getString(R.string.settings_colorDrawer_summary)), generalSettings.drawerColor))
-                        .add(new MaterialPrefFragment.ColorPref("drawerCardBackground", (getString(R.string.settings_colorCard)), (getString(R.string.settings_colorCard_summary)), generalSettings.drawerCardColor))
-                        .add(new MaterialPrefFragment.ColorPref("folderColor", (getString(R.string.settings_colorFolder)), (getString(R.string.settings_colorFolder_summary)), generalSettings.folderColor))
-                        .add(new MaterialPrefFragment.ColorPref("drawerLabelColor", (getString(R.string.settings_colorLabel)), (getString(R.string.settings_colorLabel_summary)), generalSettings.drawerLabelColor))
-                        */.setOnPrefChangedListener(this).setOnPrefClickedListener(this));
-                getSupportActionBar().setTitle(R.string.settings_group_color);
-                break;
-            case 5:
-                fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        //.add(new MaterialPrefFragment.NUMPref("iconSize", (getString(R.string.settings_iconSize)), (getString(R.string.settings_iconSize_summary)), generalSettings.iconSize, 30, 80))
-                        //.add(new MaterialPrefFragment.ButtonPref("iconPack", (getString(R.string.settings_iconPack)), (getString(R.string.settings_iconPack_summary))))
-                        .add(new MaterialPrefFragment.ButtonPref("iconHide", (getString(R.string.settings_iconHide)), (getString(R.string.settings_iconHide_summary))))
-                        .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
-                getSupportActionBar().setTitle(R.string.settings_group_icons);
-                break;
-            case 6:
-                fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        .add(new MaterialPrefFragment.ButtonPref("backup", (getString(R.string.settings_backup)), (getString(R.string.settings_backup_summary))))
-                        .add(new MaterialPrefFragment.ButtonPref("restart", getString(R.string.settings_othersRestart), getString(R.string.settings_othersRestart_summary)))
-                        .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
-                getSupportActionBar().setTitle(R.string.settings_group_other);
-                break;
+    protected void showFragment(String tag, boolean addToBackStack) {
+        PreferenceFragment fragment = (PreferenceFragment) getFragmentManager().findFragmentByTag(tag);
+        if (fragment == null) {
+            switch (tag) {
+                case SettingsFragmentDesktop.TAG:
+                    fragment = new SettingsFragmentDesktop();
+                    break;
+                case SettingsFragmentMaster.TAG:
+                default:
+                    fragment = new SettingsFragmentMaster();
+                    break;
+            }
         }
-        setSettingsFragment(fragment);
-        getSupportFragmentManager().beginTransaction().replace(R.id.ll, fragment).addToBackStack("notMenu").commit();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.settings_options, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.launcherInfo:
-                Intent intent = new Intent(this, AboutActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
-                break;
-            case android.R.id.home:
-                onBackPressed();
-                break;
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        if (addToBackStack) {
+            t.addToBackStack(tag);
         }
-        return super.onOptionsItemSelected(item);
+        t.replace(R.id.settings__fragment_container, fragment, tag).commit();
     }
 
     @Override
-    public void onPrefChanged(String id, Object value) {
-        LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(this).generalSettings;
-        switch (id) {
-       /*     case "dockBackground":
-                generalSettings.dockColor = (int) value;
-                if (Home.launcher != null)
-                    Home.launcher.dock.setBackgroundColor((int) value);
-                else {
-                    prepareRestart();
-                }
-                break;
-            case "drawerBackground":
-                generalSettings.drawerColor = (int) value;
-                if (Home.launcher != null) {
-                    Home.launcher.appDrawerController.setBackgroundColor((int) value);
-                    Home.launcher.appDrawerController.getBackground().setAlpha(0);
-                } else {
-                    prepareRestart();
-                }
-                break;
-            case "drawerCardBackground":
-                generalSettings.drawerCardColor = (int) value;
-                if (Home.launcher != null) {
-                    Home.launcher.appDrawerController.reloadDrawerCardTheme();
-                    prepareRestart();
-                } else {
-                    prepareRestart();
-                }
-                break;
-            case "drawerLabelColor":
-                generalSettings.drawerLabelColor = (int) value;
-                if (Home.launcher != null) {
-                    Home.launcher.appDrawerController.reloadDrawerCardTheme();
-                    prepareRestart();
-                } else
-                    prepareRestart();
-                break;
-            case "folderColor":
-                generalSettings.folderColor = (int) value;
-                if (Home.launcher != null) {
-                    Home.launcher.appDrawerController.reloadDrawerCardTheme();
-                    prepareRestart();
-                } else {
-                    prepareRestart();
-                }
-                break;*/
+    protected void onStop() {
+        appSettings.unregisterPreferenceChangedListener(this);
+        super.onStop();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+    }
+
+
+    public static class SettingsFragmentMaster extends PreferenceFragment {
+        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentMaster";
+
+        public void onCreate(Bundle savedInstances) {
+            super.onCreate(savedInstances);
+            getPreferenceManager().setSharedPreferencesName("app");
+            addPreferencesFromResource(R.xml.preferences__master);
         }
-        if (Home.launcher != null)
-            Home.launcher.generalSettings = generalSettings;
-    }
 
-    private void prepareRestart() {
-        requireLauncherRestart = true;
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (requireLauncherRestart && Home.launcher != null) Home.launcher.recreate();
-        super.onDestroy();
-    }
-
-    @Override
-    public void onPrefClicked(String id) {
-        final LauncherSettings launcherSettings = LauncherSettings.getInstance(this);
-        LauncherSettings.GeneralSettings generalSettings = launcherSettings.generalSettings;
-        switch (id) {
-            case "desktopSettings":
-                onSettingsSelected(0);
-                break;
-            case "dockSettings":
-                onSettingsSelected(1);
-                break;
-            case "drawerSettings":
-                onSettingsSelected(2);
-                break;
-            case "inputSettings":
-                onSettingsSelected(3);
-                break;
-            case "colorsSettings":
-                onSettingsSelected(4);
-                break;
-            case "iconsSettings":
-                onSettingsSelected(5);
-                break;
-            case "otherSettings":
-                onSettingsSelected(6);
-                break;
-            case "restart":
-                if (Home.launcher != null)
-                    Home.launcher.recreate();
-                requireLauncherRestart = false;
-                finish();
-                break;
-            case "editMiniBar":
-                LauncherAction.RunAction(LauncherAction.Action.EditMinBar, this);
-                break;
-            case "iconPack":
-                AppManager.getInstance(this).startPickIconPackIntent(this);
-                break;
-            case "drawerStyle":
-                DialogUtils.appDrawerStyleDialog(this);
-                prepareRestart();
-                break;
-            case "desktopMode":
-                DialogUtils.desktopStyleDialog(this);
-                prepareRestart();
-                break;
-            case "iconHide":
-                Intent intent = new Intent(SettingsActivity.this, HideAppsSelectionActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
-                break;
-            case "backup":
-                if (ActivityCompat.checkSelfPermission(SettingsActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    DialogUtils.backupDialog(this);
-                } else {
-                    ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
-                }
-                break;
+        @Override
+        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+            if (isAdded() && preference.hasKey()) {
+                AppSettings settings = AppSettings.get();
+                String key = preference.getKey();
+                if (settings.isKeyEqual(key, R.string.pref_key__cat_desktop)) {
+                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentDesktop.TAG, true);
+                    return true;
+                } /*else if (settings.isKeyEqual(key, R.string.pref_key__cat_app_drawer)) {
+                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentAppDrawer.TAG, true);
+                    return true;
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_dock)) {
+                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentDock.TAG, true);
+                    return true;
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_gestures)) {
+                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentGestures.TAG, true);
+                    return true;
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_icons)) {
+                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentIcons.TAG, true);
+                    return true;
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_various)) {
+                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentVarious.TAG, true);
+                    return true;
+                }*/
+            }
+            return super.onPreferenceTreeClick(screen, preference);
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        getSupportActionBar().setTitle(getString(R.string.settings));
+
+
+    public static class SettingsFragmentDesktop extends PreferenceFragment {
+        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentDesktop";
+
+        public void onCreate(Bundle savedInstances) {
+            super.onCreate(savedInstances);
+            getPreferenceManager().setSharedPreferencesName("app");
+            addPreferencesFromResource(R.xml.preferences__desktop);
+        }
+
+        @Override
+        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+            if (isAdded() && preference.hasKey()) {
+                AppSettings settings = AppSettings.get();
+                String key = preference.getKey();
+            }
+            return super.onPreferenceTreeClick(screen, preference);
+        }
     }
 }

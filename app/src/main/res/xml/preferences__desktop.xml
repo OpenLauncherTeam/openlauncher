@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="@string/pref_key__title__grid"
+        android:title="@string/pref_title_grid">
+
+        <EditTextPreference
+            android:defaultValue="4"
+            android:inputType="number"
+            android:key="@string/pref_key__desktop_item_count_horizontal"
+            android:title="@string/pref_title__desktop_item_count_horizontal" />
+
+        <EditTextPreference
+            android:defaultValue="5"
+            android:inputType="number"
+            android:key="@string/pref_key__desktop_item_count_vertical"
+            android:title="@string/pref_title__desktop_item_count_vertical" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

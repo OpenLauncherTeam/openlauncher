@@ -59,6 +59,13 @@ public class AppSettings {
         prefApp.edit().clear().commit();
     }
 
+    public void registerPreferenceChangedListener(SharedPreferences.OnSharedPreferenceChangeListener value) {
+        prefApp.registerOnSharedPreferenceChangeListener(value);
+    }
+
+    public void unregisterPreferenceChangedListener(SharedPreferences.OnSharedPreferenceChangeListener value) {
+        prefApp.unregisterOnSharedPreferenceChangeListener(value);
+    }
     //###########################################
     //## Helpers for setting/getting based on
     //## type; Key based on resources
@@ -68,7 +75,7 @@ public class AppSettings {
         return context.getString(stringKeyResourceId);
     }
 
-    private boolean isKeyEqual(String key, int stringKeyRessourceId) {
+    public boolean isKeyEqual(String key, int stringKeyRessourceId) {
         return key.equals(getKey(stringKeyRessourceId));
     }
 
