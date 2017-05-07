@@ -10,9 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DialogUtils;
@@ -93,12 +91,12 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case 4:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        .add(new MaterialPrefFragment.ColorPref("dockBackground", (getString(R.string.settings_colorDock)), (getString(R.string.settings_colorDock_summary)), generalSettings.dockColor))
+                        /*.add(new MaterialPrefFragment.ColorPref("dockBackground", (getString(R.string.settings_colorDock)), (getString(R.string.settings_colorDock_summary)), generalSettings.dockColor))
                         .add(new MaterialPrefFragment.ColorPref("drawerBackground", (getString(R.string.settings_colorDrawer)), (getString(R.string.settings_colorDrawer_summary)), generalSettings.drawerColor))
                         .add(new MaterialPrefFragment.ColorPref("drawerCardBackground", (getString(R.string.settings_colorCard)), (getString(R.string.settings_colorCard_summary)), generalSettings.drawerCardColor))
                         .add(new MaterialPrefFragment.ColorPref("folderColor", (getString(R.string.settings_colorFolder)), (getString(R.string.settings_colorFolder_summary)), generalSettings.folderColor))
                         .add(new MaterialPrefFragment.ColorPref("drawerLabelColor", (getString(R.string.settings_colorLabel)), (getString(R.string.settings_colorLabel_summary)), generalSettings.drawerLabelColor))
-                        .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
+                        */.setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_color);
                 break;
             case 5:
@@ -146,7 +144,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
     public void onPrefChanged(String id, Object value) {
         LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(this).generalSettings;
         switch (id) {
-            case "dockBackground":
+       /*     case "dockBackground":
                 generalSettings.dockColor = (int) value;
                 if (Home.launcher != null)
                     Home.launcher.dock.setBackgroundColor((int) value);
@@ -188,7 +186,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 } else {
                     prepareRestart();
                 }
-                break;
+                break;*/
         }
         if (Home.launcher != null)
             Home.launcher.generalSettings = generalSettings;
@@ -251,7 +249,7 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 prepareRestart();
                 break;
             case "iconHide":
-                Intent intent = new Intent(SettingsActivity.this, HideAppsActivity.class);
+                Intent intent = new Intent(SettingsActivity.this, HideAppsSelectionActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 break;

@@ -100,7 +100,7 @@ public class GroupPopupView extends FrameLayout {
                 final Item dropItem = item.items.get(y2 * cellSize[0] + x2);
                 final Intent act = dropItem.appIntent;
                 AppItemView.Builder b = new AppItemView.Builder(getContext()).withOnTouchGetPosition();
-                b.setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor);
+                b.setTextColor(AppSettings.get().getDrawerLabelColor());
                 if (act.getStringExtra("shortCutIconID") != null) {
                     b.setShortcutItem(act);
                 } else {

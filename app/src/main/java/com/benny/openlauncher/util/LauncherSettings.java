@@ -100,11 +100,6 @@ public class LauncherSettings {
     // edit this carefully as changing the type of a field will cause a parsing error when the launcher starts
     public static class GeneralSettings {
         // app drawer
-        public int drawerColor = Color.TRANSPARENT;
-        public int drawerCardColor = Color.WHITE;
-        public int folderColor = Color.WHITE;
-        public int drawerLabelColor = Color.DKGRAY;
         public ArrayList<String> hiddenList;
-        public int dockColor = Color.TRANSPARENT;
     }
 }

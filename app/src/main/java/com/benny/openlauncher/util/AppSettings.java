@@ -3,6 +3,7 @@ package com.benny.openlauncher.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
 
@@ -201,9 +202,10 @@ public class AppSettings {
         return getString(R.string.pref_key__icon_pack_name, "");
     }
 
-    public void setIconpackPackage(String value){
+    public void setIconpackPackage(String value) {
         setString(R.string.pref_key__icon_pack_name, value);
     }
+
     public boolean isDockShowLabel() {
         return getBool(R.string.pref_key__is_dock_show_label, false);
     }
@@ -232,7 +234,7 @@ public class AppSettings {
         return getInt(R.string.pref_key__desktop_item_count_vertical, 6);
     }
 
-    public int getDockItemCountHorizontal(){
+    public int getDockItemCountHorizontal() {
         return getInt(R.string.pref_key__dock_item_count_horizontal, 5);
     }
 
@@ -252,24 +254,30 @@ public class AppSettings {
         setStringArray(R.string.pref_key__minibar__arrangement__tmp, value.toArray(new String[value.size()]));
     }
 
-    public boolean isDesktopSearchbarEnabled(){
+    public boolean isDesktopSearchbarEnabled() {
         return getBool(R.string.pref_key__is_desktop_searchbar_enabled, true);
     }
-    public boolean isDesktopFullscreen(){
+
+    public boolean isDesktopFullscreen() {
         return getBool(R.string.pref_key__is_desktop_fullscreen, false);
     }
-    public boolean isDesktopShowPageIndicator(){
+
+    public boolean isDesktopShowPageIndicator() {
         return getBool(R.string.pref_key__is_desktop_show_page_indicator, true);
     }
-    public boolean isDesktopShowLabel(){
+
+    public boolean isDesktopShowLabel() {
         return getBool(R.string.pref_key__is_desktop_show_label, true);
     }
-    public int getDesktopPageCurrent(){
+
+    public int getDesktopPageCurrent() {
         return getInt(R.string.pref_key__desktop_page_current, 0);
     }
-    public void setDesktopPageCurrent(int value){
+
+    public void setDesktopPageCurrent(int value) {
         setInt(R.string.pref_key__desktop_page_current, value);
     }
+
     public boolean isOpenAppDrawerOnSwipe() {
         return getBool(R.string.pref_key__is_open_app_drawer_on_swipe, true);
     }
@@ -284,5 +292,33 @@ public class AppSettings {
 
     public boolean isDrawerShowIndicator() {
         return getBool(R.string.pref_key__is_drawer_show_indicator, true);
+    }
+
+    public int getDrawerBackgroundColor() {
+        return getInt(R.string.pref_key__drawer_background_color, Color.TRANSPARENT);
+    }
+
+    public int getDrawerCardColor() {
+        return getInt(R.string.pref_key__drawer_card_color, Color.WHITE);
+    }
+
+    public int getDrawerLabelColor() {
+        return getInt(R.string.pref_key__drawer_label_color, Color.DKGRAY);
+    }
+
+    public int getFolderColor() {
+        return getInt(R.string.pref_key__folder_color, Color.WHITE);
+    }
+
+    public int getDockColor() {
+        return getInt(R.string.pref_key__docker_color, Color.TRANSPARENT);
+    }
+
+    public ArrayList<String> getHiddenAppsList() {
+        return new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key__hidden_apps_list)));
+    }
+
+    public void setHiddenAppsList(ArrayList<String> value) {
+        setStringArray(R.string.pref_key__hidden_apps_list, value.toArray(new String[value.size()]));
     }
 }

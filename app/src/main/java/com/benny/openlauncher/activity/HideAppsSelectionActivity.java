@@ -12,14 +12,14 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.fragment.HideAppsFragment;
+import com.benny.openlauncher.fragment.HideAppsSelectionFragment;
 import com.benny.openlauncher.util.AppManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
-public class HideAppsActivity extends AppCompatActivity {
+public class HideAppsSelectionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class HideAppsActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new HideAppsFragment(), String.valueOf("Skip"));
+        adapter.addFragment(new HideAppsSelectionFragment(), String.valueOf("Skip"));
         viewPager.setAdapter(adapter);
     }
 

@@ -76,7 +76,7 @@
             android:theme="@style/NormalActivity.Light" />
 
         <activity
-            android:name="com.benny.openlauncher.activity.HideAppsActivity"
+            android:name="com.benny.openlauncher.activity.HideAppsSelectionActivity"
             android:enabled="true"
             android:label="@string/app_name"
             android:theme="@style/NormalActivity.Light" />

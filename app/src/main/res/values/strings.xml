@@ -208,5 +208,11 @@
     <string name="pref_key__is_drawer_use_card">pref_key__is_drawer_use_card</string>
     <string name="pref_key__is_drawer_show_indicator">pref_key__is_drawer_show_indicator</string>
     <string name="pref_key__is_drawer_remember_page">pref_key__is_drawer_remember_page</string>
+    <string name="pref_key__drawer_background_color">pref_key__drawer_background_color</string>
+    <string name="pref_key__drawer_card_color">pref_key__drawer_card_color</string>
+    <string name="pref_key__drawer_label_color">pref_key__drawer_label_color</string>
+    <string name="pref_key__folder_color">pref_key__folder_color</string>
+    <string name="pref_key__docker_color">pref_key__docker_color</string>
+    <string name="pref_key__hidden_apps_list">pref_key__hidden_apps_list</string>
 
 </resources>

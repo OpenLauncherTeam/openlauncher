@@ -137,7 +137,7 @@ public class AppDrawerPaged extends SmoothViewPager {
             return new AppItemView.Builder(getContext())
                     .setAppItem(app)
                     .withOnClickLaunchApp(app)
-                    .setTextColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerLabelColor)
+                    .setTextColor(AppSettings.get().getDrawerLabelColor())
                     .withOnTouchGetPosition()
                     .withOnLongPressDrag(app, DragAction.Action.APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                         @Override
@@ -160,7 +160,7 @@ public class AppDrawerPaged extends SmoothViewPager {
                     ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Color.TRANSPARENT);
                     ((CardView) layout.getChildAt(0)).setCardElevation(0);
                 } else {
-                    ((CardView) layout.getChildAt(0)).setCardBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
+                    ((CardView) layout.getChildAt(0)).setCardBackgroundColor(AppSettings.get().getDrawerCardColor());
                     ((CardView) layout.getChildAt(0)).setCardElevation(Tool.dp2px(4, getContext()));
                 }
                 CellContainer cc = (CellContainer) layout.findViewById(R.id.group);

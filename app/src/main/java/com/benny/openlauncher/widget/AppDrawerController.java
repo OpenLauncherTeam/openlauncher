@@ -196,7 +196,7 @@ public class AppDrawerController extends RevealFrameLayout {
                     drawerViewGrid.setCardBackgroundColor(Color.TRANSPARENT);
                     drawerViewGrid.setCardElevation(0);
                 } else {
-                    drawerViewGrid.setCardBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.drawerCardColor);
+                    drawerViewGrid.setCardBackgroundColor(AppSettings.get().getDrawerCardColor());
                     drawerViewGrid.setCardElevation(Tool.dp2px(4, getContext()));
                 }
                 if (drawerViewGrid.gridDrawerAdapter != null) {

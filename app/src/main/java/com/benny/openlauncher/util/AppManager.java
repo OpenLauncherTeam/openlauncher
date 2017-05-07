@@ -190,7 +190,7 @@ public class AppManager {
                 nonFilteredApps.add(app);
             }
 
-            List<String> hiddenList = LauncherSettings.getInstance(getContext()).generalSettings.hiddenList;
+            List<String> hiddenList = AppSettings.get().getHiddenAppsList();
             if (hiddenList != null) {
                 for (int i = 0; i < nonFilteredApps.size(); i++) {
                     boolean shouldGetAway = false;
@@ -210,7 +210,6 @@ public class AppManager {
             }
 
             AppSettings appSettings = AppSettings.get();
-            LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(context).generalSettings;
             if (!appSettings.getIconpackPackage().isEmpty() && Tool.isPackageInstalled(appSettings.getIconpackPackage(), packageManager)) {
                 IconPackHelper.themePacs(AppManager.this, Tool.dp2px(appSettings.getIconsizeGlobal(), context), appSettings.getIconpackPackage(), apps);
             }

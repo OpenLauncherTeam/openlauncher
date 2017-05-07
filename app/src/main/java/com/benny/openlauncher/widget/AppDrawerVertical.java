@@ -203,7 +203,7 @@ public class AppDrawerVertical extends CardView {
                     .setAppItem(app)
                     .withOnClickLaunchApp(app)
                     .withOnTouchGetPosition()
-                    .setTextColor(LauncherSettings.getInstance(holder.appItemView.getContext()).generalSettings.drawerLabelColor)
+                    .setTextColor(AppSettings.get().getDrawerLabelColor())
                     .withOnLongPressDrag(app, DragAction.Action.APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                         @Override
                         public boolean readyForDrag(View view) {

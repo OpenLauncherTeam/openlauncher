@@ -24,6 +24,7 @@ import android.widget.ViewSwitcher;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.model.AppInfo;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherSettings;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ import java.util.List;
 
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
-public class HideAppsFragment extends Fragment {
+public class HideAppsSelectionFragment extends Fragment {
 
     @SuppressWarnings("unchecked")
     private ArrayList<String> list_activities = new ArrayList();
@@ -83,11 +84,8 @@ public class HideAppsFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            List<String> hiddenList = LauncherSettings.getInstance(getContext()).generalSettings.hiddenList;
-            if (hiddenList != null)
-                list_activities.addAll(hiddenList);
-            else
-                LauncherSettings.getInstance(getContext()).generalSettings.hiddenList = new ArrayList<>();
+            List<String> hiddenList = AppSettings.get().getHiddenAppsList();
+            list_activities.addAll(hiddenList);
 
             super.onPreExecute();
         }
@@ -126,13 +124,12 @@ public class HideAppsFragment extends Fragment {
             @Override
             public void run() {
                 int selected = 0;
-
-                LauncherSettings.getInstance(getContext()).generalSettings.hiddenList.clear();
+                ArrayList<String> hiddenList = new ArrayList<>();
 
                 // Get all selected apps
                 for (int i = 0; i < list_activities_final.size(); i++) {
                     if ((list_activities_final.get(i)).isSelected()) {
-                        LauncherSettings.getInstance(getContext()).generalSettings.hiddenList.add((list_activities_final.get(i)).getCode());
+                        hiddenList.add((list_activities_final.get(i)).getCode());
                         selected++;
                     }
                 }
@@ -148,6 +145,7 @@ public class HideAppsFragment extends Fragment {
                     snackbar.show();
 
                 } else {
+                    AppSettings.get().setHiddenAppsList(hiddenList);
                     getActivity().finish();
                 }
             }
