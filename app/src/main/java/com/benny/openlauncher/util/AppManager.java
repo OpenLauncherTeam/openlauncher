@@ -124,7 +124,7 @@ public class AppManager {
             @Override
             public void onClick(View v) {
                 recreateAfterGettingApps = true;
-                LauncherSettings.getInstance(context).generalSettings.iconPackName = "";
+                AppSettings.get().setIconpackPackage("");
                 getAllApps();
                 d.dismiss();
             }
@@ -137,7 +137,7 @@ public class AppManager {
                 public void onClick(View v) {
                     if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         recreateAfterGettingApps = true;
-                        LauncherSettings.getInstance(context).generalSettings.iconPackName = resolveInfos.get(mI).activityInfo.packageName;
+                        AppSettings.get().setIconpackPackage(resolveInfos.get(mI).activityInfo.packageName);
                         getAllApps();
                         d.dismiss();
                     } else {

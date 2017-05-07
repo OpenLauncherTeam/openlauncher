@@ -72,14 +72,14 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
             i++;
         }
 
-        boolean minBarEnable = LauncherSettings.getInstance(context).generalSettings.minBarEnable;
+        boolean minBarEnable = AppSettings.get().isMinibarEnabled();
         enableSwitch.setChecked(minBarEnable);
         enableSwitch.setText(minBarEnable ? R.string.on : R.string.off);
         enableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 buttonView.setText(isChecked ? R.string.on : R.string.off);
-                LauncherSettings.getInstance(context).generalSettings.minBarEnable = isChecked;
+                AppSettings.get().setMinibarEnabled(isChecked);
                 if (Home.launcher != null) {
                     Home.launcher.drawerLayout.closeDrawers();
                     Home.launcher.drawerLayout.setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);

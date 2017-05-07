@@ -201,6 +201,9 @@ public class AppSettings {
         return getString(R.string.pref_key__icon_pack_name, "");
     }
 
+    public void setIconpackPackage(String value){
+        setString(R.string.pref_key__icon_pack_name, value);
+    }
     public boolean isDockShowLabel() {
         return getBool(R.string.pref_key__is_dock_show_label, false);
     }
@@ -221,20 +224,16 @@ public class AppSettings {
         return getInt(R.string.pref_key__drawer_item_count_vertical__landscape, 3);
     }
 
-    public int getDesktopItemCountHorizontal_Portrait() {
-        return getInt(R.string.pref_key__desktop_item_count_horizontal__portrait, 5);
+    public int getDesktopItemCountHorizontal() {
+        return getInt(R.string.pref_key__desktop_item_count_horizontal, 5);
     }
 
-    public int getDesktopItemCountVertical_Portrait() {
-        return getInt(R.string.pref_key__desktop_item_count_vertical__portrait, 6);
+    public int getDesktopItemCountVertical() {
+        return getInt(R.string.pref_key__desktop_item_count_vertical, 6);
     }
 
-    public int getDesktopItemCountHorizontal_Landscape() {
-        return getInt(R.string.pref_key__desktop_item_count_horizontal__landscape, 5);
-    }
-
-    public int getDesktopItemCountVertical_Landscape() {
-        return getInt(R.string.pref_key__desktop_item_count_vertical__landscape, 3);
+    public int getDockItemCountHorizontal(){
+        return getInt(R.string.pref_key__dock_item_count_horizontal, 5);
     }
 
     public boolean isMinibarEnabled() {
@@ -246,10 +245,29 @@ public class AppSettings {
     }
 
     public ArrayList<String> getMinibarArrangement() {
-        return new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key__minibar__arangement__tmp)));
+        return new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key__minibar__arrangement__tmp)));
     }
 
     public void setMinibarArrangement(ArrayList<String> value) {
-        setStringArray(R.string.pref_key__minibar__arangement__tmp, value.toArray(new String[value.size()]));
+        setStringArray(R.string.pref_key__minibar__arrangement__tmp, value.toArray(new String[value.size()]));
+    }
+
+    public boolean isDesktopSearchbarEnabled(){
+        return getBool(R.string.pref_key__is_desktop_searchbar_enabled, true);
+    }
+    public boolean isDesktopFullscreen(){
+        return getBool(R.string.pref_key__is_desktop_fullscreen, false);
+    }
+    public boolean isDesktopShowPageIndicator(){
+        return getBool(R.string.pref_key__is_desktop_show_page_indicator, true);
+    }
+    public boolean isDesktopShowLabel(){
+        return getBool(R.string.pref_key__is_desktop_show_label, true);
+    }
+    public int getDesktopPageCurrent(){
+        return getInt(R.string.pref_key__desktop_page_current, 0);
+    }
+    public void setDesktopPageCurrent(int value){
+        setInt(R.string.pref_key__desktop_page_current, value);
     }
 }

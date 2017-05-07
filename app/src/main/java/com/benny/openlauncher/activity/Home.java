@@ -336,7 +336,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onPageSelected(int position) {
-                desktopEditOptionPanel.updateHomeIcon(generalSettings.desktopHomePage == position);
+                desktopEditOptionPanel.updateHomeIcon(appSettings.getDesktopPageCurrent() == position);
             }
 
             @Override
@@ -453,7 +453,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     public void onSetPageAsHome() {
-        generalSettings.desktopHomePage = desktop.getCurrentItem();
+        appSettings.setDesktopPageCurrent(desktop.getCurrentItem());
     }
 
     @Override
@@ -500,7 +500,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         appDrawerController.getBackground().setAlpha(0);
         appDrawerController.reloadDrawerCardTheme();
 
-        switch (generalSettings.drawerMode) {
+        switch (appSettings.getDrawerMode()) {
             case AppDrawerController.DrawerMode.PAGED:
                 if (!generalSettings.drawerShowIndicator) {
                     appDrawerController.getChildAt(1).setVisibility(View.GONE);
@@ -510,7 +510,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 // handled in the AppDrawerVertical class
                 break;
         }
-        drawerLayout.setDrawerLockMode(generalSettings.minBarEnable ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        drawerLayout.setDrawerLockMode(appSettings.isMinibarEnabled() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     public void initMinibar() {
@@ -751,7 +751,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 if (appDrawerController.getDrawer() != null && appDrawerController.getDrawer().getVisibility() == View.VISIBLE) {
                     closeAppDrawer();
                 } else if (generalSettings != null) {
-                    desktop.setCurrentItem(generalSettings.desktopHomePage);
+                    desktop.setCurrentItem(appSettings.getDesktopPageCurrent());
                 }
             } else {
                 desktop.pages.get(desktop.getCurrentItem()).performClick();

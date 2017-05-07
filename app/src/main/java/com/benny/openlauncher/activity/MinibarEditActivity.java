@@ -74,14 +74,14 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
             i++;
         }
 
-        boolean minBarEnable = LauncherSettings.getInstance(MinibarEditActivity.this).generalSettings.minBarEnable;
+        boolean minBarEnable = AppSettings.get().isMinibarEnabled();
         enableSwitch.setChecked(minBarEnable);
         enableSwitch.setText(minBarEnable ? R.string.on : R.string.off);
         enableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 buttonView.setText(isChecked ? R.string.on : R.string.off);
-                LauncherSettings.getInstance(MinibarEditActivity.this).generalSettings.minBarEnable = isChecked;
+                AppSettings.get().setMinibarEnabled(isChecked);
                 if (Home.launcher != null) {
                     Home.launcher.drawerLayout.closeDrawers();
                     Home.launcher.drawerLayout.setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);

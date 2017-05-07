@@ -194,11 +194,15 @@
     <string name="pref_key__drawer_item_count_vertical__portrait">pref_key__drawer_item_count_vertical__portrait</string>
     <string name="pref_key__drawer_item_count_horizontal__landscape">pref_key__drawer_item_count_horizontal__landscape</string>
     <string name="pref_key__drawer_item_count_vertical__landscape">pref_key__drawer_item_count_vertical__landscape</string>
-    <string name="pref_key__desktop_item_count_vertical__landscape">pref_key__desktop_item_count_vertical__landscape</string>
-    <string name="pref_key__desktop_item_count_horizontal__landscape">pref_key__desktop_item_count_horizontal__landscape</string>
-    <string name="pref_key__desktop_item_count_vertical__portrait">pref_key__desktop_item_count_vertical__portrait</string>
-    <string name="pref_key__desktop_item_count_horizontal__portrait">pref_key__desktop_item_count_horizontal__portrait</string>
+    <string name="pref_key__desktop_item_count_vertical">pref_key__desktop_item_count_vertical</string>
+    <string name="pref_key__desktop_item_count_horizontal">pref_key__desktop_item_count_horizontal</string>
     <string name="pref_key__is_minibar_enabled">pref_key__is_minibar_enabled</string>
-    <string name="pref_key__minibar__arangement__tmp">pref_key__minibar__arangement__tmp</string>
+    <string name="pref_key__minibar__arrangement__tmp">pref_key__minibar__arrangement__tmp</string>
+    <string name="pref_key__dock_item_count_horizontal">pref_key__dock_item_count_horizontal</string>
+    <string name="pref_key__is_desktop_searchbar_enabled">pref_key__is_desktop_searchbar_enabled</string>
+    <string name="pref_key__is_desktop_show_label">pref_key__is_desktop_show_label</string>
+    <string name="pref_key__is_desktop_show_page_indicator">pref_key__is_desktop_show_page_indicator</string>
+    <string name="pref_key__is_desktop_fullscreen">pref_key__is_desktop_fullscreen</string>
+    <string name="pref_key__desktop_page_current">pref_key__desktop_page_current</string>
 
 </resources>

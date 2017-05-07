@@ -80,7 +80,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
 
         setOnDragListener(this);
-        setCurrentItem(LauncherSettings.getInstance(c).generalSettings.desktopHomePage);
+        setCurrentItem(AppSettings.get().getDesktopPageCurrent());
     }
 
     public void initDesktopShowAll(Context c) {
@@ -90,8 +90,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         // reset page count
         pageCount = 0;
-        int horizontalCount = AppSettings.get().getDesktopItemCountHorizontal_Portrait();
-        int verticalCount = AppSettings.get().getDesktopItemCountVertical_Portrait();
+        int horizontalCount = AppSettings.get().getDesktopItemCountHorizontal();
+        int verticalCount = AppSettings.get().getDesktopItemCountVertical();
         while ((appsSize = appsSize - (horizontalCount * verticalCount)) >= (horizontalCount * verticalCount) || (appsSize > -(horizontalCount * verticalCount))) {
             pageCount++;
         }
@@ -121,8 +121,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
         this.home = home;
 
-        int column = AppSettings.get().getDesktopItemCountHorizontal_Portrait();
-        int row = AppSettings.get().getDesktopItemCountVertical_Portrait();
+        int column = AppSettings.get().getDesktopItemCountHorizontal();
+        int row = AppSettings.get().getDesktopItemCountVertical();
         List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
         for (int pageCount = 0; pageCount < desktopItems.size(); pageCount++) {
             if (pages.size() <= pageCount) break;
@@ -485,7 +485,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     return false;
                 }
             });
-            layout.setGridSize(AppSettings.get().getDesktopItemCountHorizontal_Portrait(), AppSettings.get().getDesktopItemCountVertical_Portrait());
+            layout.setGridSize(AppSettings.get().getDesktopItemCountHorizontal(), AppSettings.get().getDesktopItemCountVertical());
             layout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -73,9 +73,9 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case 1:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        .add(new MaterialPrefFragment.NUMPref("gridSizeDock", (getString(R.string.settings_dockSize)), (getString(R.string.settings_dockSize_summary)),
+                        /*.add(new MaterialPrefFragment.NUMPref("gridSizeDock", (getString(R.string.settings_dockSize)), (getString(R.string.settings_dockSize_summary)),
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDock", (getString(R.string.settings_column)), generalSettings.dockGridX, 4, 10)
-                        ))
+                        ))*/
                         /*.add(new MaterialPrefFragment.TBPref("dockShowLabel", (getString(R.string.settings_dockLabel)), (getString(R.string.settings_dockLabel_summary)), generalSettings.dockShowLabel))
                         */.setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_dock);
@@ -118,8 +118,8 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case 5:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        .add(new MaterialPrefFragment.NUMPref("iconSize", (getString(R.string.settings_iconSize)), (getString(R.string.settings_iconSize_summary)), generalSettings.iconSize, 30, 80))
-                        .add(new MaterialPrefFragment.ButtonPref("iconPack", (getString(R.string.settings_iconPack)), (getString(R.string.settings_iconPack_summary))))
+                        //.add(new MaterialPrefFragment.NUMPref("iconSize", (getString(R.string.settings_iconSize)), (getString(R.string.settings_iconSize_summary)), generalSettings.iconSize, 30, 80))
+                        //.add(new MaterialPrefFragment.ButtonPref("iconPack", (getString(R.string.settings_iconPack)), (getString(R.string.settings_iconPack_summary))))
                         .add(new MaterialPrefFragment.ButtonPref("iconHide", (getString(R.string.settings_iconHide)), (getString(R.string.settings_iconHide_summary))))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_icons);
@@ -177,26 +177,6 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "showIndicator":
                 generalSettings.showIndicator = (boolean) value;
-                prepareRestart();
-                break;
-            case "iconSize":
-                generalSettings.iconSize = (int) value;
-                prepareRestart();
-                break;
-            case "dockShowLabel":
-                generalSettings.dockShowLabel = (boolean) value;
-                prepareRestart();
-                break;
-            case "hGridSizeDesktop":
-                generalSettings.desktopGridX = (int) value;
-                prepareRestart();
-                break;
-            case "vGridSizeDesktop":
-                generalSettings.desktopGridY = (int) value;
-                prepareRestart();
-                break;
-            case "hGridSizeDock":
-                generalSettings.dockGridX = (int) value;
                 prepareRestart();
                 break;
             case "dockBackground":

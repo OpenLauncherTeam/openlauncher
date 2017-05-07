@@ -90,7 +90,7 @@ public class LauncherSettings {
             checkIconCacheIDs(dock.get(i));
         }
 
-        generalSettings.desktopHomePage = position;
+        AppSettings.get().setDesktopPageCurrent(position);
 
         Tool.checkForUnusedIconAndDelete(context, iconCacheIDs);
 
@@ -100,7 +100,6 @@ public class LauncherSettings {
     // edit this carefully as changing the type of a field will cause a parsing error when the launcher starts
     public static class GeneralSettings {
         // desktop
-        public int desktopHomePage;
         public boolean desktopSearchBar = true;
         public boolean fullscreen = false;
         public boolean showIndicator = true;
@@ -108,13 +107,6 @@ public class LauncherSettings {
 
         //Dock Gesture
         public boolean swipe = false;
-
-        //Desktop Gesture
-//        public int doubleClick = 0;
-//        public int pinch = 0;
-//        public int unPinch = 0;
-//        public int swipeDown = 0;
-//        public int swipeUp = 0;
 
         public ActionItem doubleTapAction = null;
         public ActionItem pinchAction = null;
@@ -128,41 +120,14 @@ public class LauncherSettings {
         public int drawerCardColor = Color.WHITE;
         public int folderColor = Color.WHITE;
         public int drawerLabelColor = Color.DKGRAY;
-        public boolean drawerSearchBar = true;
         public boolean drawerRememberPage = true;
         public ArrayList<String> hiddenList;
         public boolean drawerShowIndicator = true;
-        public boolean drawerLight = true;
 
         // dock
         public int dockColor = Color.TRANSPARENT;
-        public int dockGridX = 5;
 
         // other
         public LauncherAction.Theme theme = LauncherAction.Theme.Light;
-
-
-
-
-        //################
-        // DONE
-        public int iconSize = 58;
-        //This is a typo, should be firstLaunch...
-        public boolean firstLauncher = true;
-        public int desktopMode = Desktop.DesktopMode.NORMAL;
-        public boolean desktopLock;
-        public int drawerMode = AppDrawerController.DrawerMode.PAGED;
-        public String iconPackName = "";
-        public boolean dockShowLabel = false;
-
-        public int drawerGridX = 4;
-        public int drawerGridY = 5;
-        public int drawerGridX_L = 5;
-        public int drawerGridY_L = 3;
-        public int desktopGridX = 4;
-        public int desktopGridY = 4;
-
-        public boolean minBarEnable = true;
-        public ArrayList<String> miniBarArrangement;
     }
 }

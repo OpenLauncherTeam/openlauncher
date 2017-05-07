@@ -63,7 +63,7 @@ public class DialogUtils {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(context.getString(R.string.settings_desktopStyle))
                 .items(R.array.desktopStyleEntries)
-                .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.desktopHomePage, new MaterialDialog.ListCallbackSingleChoice() {
+                .itemsCallbackSingleChoice(AppSettings.get().getDesktopPageCurrent(), new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                         LauncherSettings.getInstance(context).setDesktopMode(position);
@@ -76,7 +76,7 @@ public class DialogUtils {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(context.getString(R.string.settings_drawerStyle))
                 .items(R.array.appDrawerStyleEntries)
-                .itemsCallbackSingleChoice(LauncherSettings.getInstance(context).generalSettings.desktopHomePage, new MaterialDialog.ListCallbackSingleChoice() {
+                .itemsCallbackSingleChoice(AppSettings.get().getDesktopPageCurrent(), new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                        // LauncherSettings.getInstance(context).generalSettings.drawerMode = AppDrawerController.DrawerMode.values()[position];
