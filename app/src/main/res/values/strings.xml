@@ -204,5 +204,9 @@
     <string name="pref_key__is_desktop_show_page_indicator">pref_key__is_desktop_show_page_indicator</string>
     <string name="pref_key__is_desktop_fullscreen">pref_key__is_desktop_fullscreen</string>
     <string name="pref_key__desktop_page_current">pref_key__desktop_page_current</string>
+    <string name="pref_key__is_open_app_drawer_on_swipe">pref_key__is_open_app_drawer_on_swipe</string>
+    <string name="pref_key__is_drawer_use_card">pref_key__is_drawer_use_card</string>
+    <string name="pref_key__is_drawer_show_indicator">pref_key__is_drawer_show_indicator</string>
+    <string name="pref_key__is_drawer_remember_page">pref_key__is_drawer_remember_page</string>
 
 </resources>

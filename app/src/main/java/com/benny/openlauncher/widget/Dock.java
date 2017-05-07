@@ -84,7 +84,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                 float minDist = 150f;
                 Tool.print((int) ev.getX(), (int) ev.getY());
                 if (startPosY - ev.getY() > minDist) {
-                    if (LauncherSettings.getInstance(getContext()).generalSettings.swipe) {
+                    if (appSettings.isOpenAppDrawerOnSwipe()) {
                         Point p = Tool.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), this, Home.launcher.appDrawerController);
                         // FIXME: 1/22/2017 This seem weird, but the extra offset ( Tool.getNavBarHeight(getContext()) ) works on my phone
                         // FIXME: 1/22/2017 This part of the code is identical as the code in Desktop so will combine them later

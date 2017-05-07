@@ -192,7 +192,7 @@ public class AppDrawerController extends RevealFrameLayout {
                 drawerViewPaged.resetAdapter();
                 break;
             case DrawerMode.VERTICAL:
-                if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerUseCard) {
+                if (!AppSettings.get().isDrawerUseCard()) {
                     drawerViewGrid.setCardBackgroundColor(Color.TRANSPARENT);
                     drawerViewGrid.setCardElevation(0);
                 } else {

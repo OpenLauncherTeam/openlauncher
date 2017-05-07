@@ -64,11 +64,11 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDesktop", (getString(R.string.settings_column)), generalSettings.desktopGridX, 4, 10),
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("vGridSizeDesktop", (getString(R.string.settings_row)), generalSettings.desktopGridY, 4, 10)
                         ))*/
-                        .add(new MaterialPrefFragment.TBPref("desktopSearchBar", (getString(R.string.settings_desktopSearch)), (getString(R.string.settings_desktopSearch_summary)), generalSettings.desktopSearchBar))
+                        /*.add(new MaterialPrefFragment.TBPref("desktopSearchBar", (getString(R.string.settings_desktopSearch)), (getString(R.string.settings_desktopSearch_summary)), generalSettings.desktopSearchBar))
                         .add(new MaterialPrefFragment.TBPref("fullscreen", (getString(R.string.settings_desktopFull)), (getString(R.string.settings_desktopFull_summary)), generalSettings.fullscreen))
                         .add(new MaterialPrefFragment.TBPref("showIndicator", (getString(R.string.settings_desktopIndicator)), (getString(R.string.settings_desktopIndicator_summary)), generalSettings.showIndicator))
                         .add(new MaterialPrefFragment.TBPref("desktopShowLabel", (getString(R.string.settings_desktopLabel)), (getString(R.string.settings_desktopLabel_summary)), generalSettings.desktopShowLabel))
-                        .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
+                        */.setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_desktop);
                 break;
             case 1:
@@ -83,26 +83,11 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             case 2:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
                         .add(new MaterialPrefFragment.ButtonPref("drawerStyle", (getString(R.string.settings_drawerStyle)), (getString(R.string.settings_drawerStyle_summary))))
-                        /*.add(new MaterialPrefFragment.NUMPref("gridSize", (getString(R.string.settings_drawerSize)), (getString(R.string.settings_drawerSize_summary)),
-                                new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSize", (getString(R.string.settings_column)), generalSettings.drawerGridX, 1, 10),
-                                new MaterialPrefFragment.NUMPref.NUMPrefItem("vGridSize", (getString(R.string.settings_row)), generalSettings.drawerGridY, 1, 10)
-                        ))*/
-                        .add(new MaterialPrefFragment.TBPref("drawerCard", (getString(R.string.settings_drawerCard)), (getString(R.string.settings_drawerCard_summary)), generalSettings.drawerUseCard))
-                        //.add(new MaterialPrefFragment.TBPref("drawerSearchBar", (getString(R.string.settings_drawerSearch)), (getString(R.string.settings_drawerSearch_summary)), generalSettings.drawerSearchBar))
-                        //.add(new MaterialPrefFragment.TBPref("drawerLight", (getString(R.string.settings_drawerSearchIcon)), (getString(R.string.settings_drawerSearchIcon_summary)), generalSettings.drawerLight))
-                        .add(new MaterialPrefFragment.TBPref("drawerRememberPage", (getString(R.string.settings_drawerPage)), (getString(R.string.settings_drawerPage_summary)), generalSettings.drawerRememberPage))
-                        .add(new MaterialPrefFragment.TBPref("drawerShowIndicator", (getString(R.string.settings_drawerIndicator)), (getString(R.string.settings_drawerIndicator_summary)), generalSettings.drawerShowIndicator))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_drawer);
                 break;
             case 3:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        .add(new MaterialPrefFragment.TBPref("swipe", (getString(R.string.settings_desktopSwipe)), (getString(R.string.settings_desktopSwipe_summary)), generalSettings.swipe))
-                        .add(new MaterialPrefFragment.ButtonPref("doubleClick", (getString(R.string.settings_doubleClick)), (getString(R.string.settings_doubleClick_summary))))
-                        .add(new MaterialPrefFragment.ButtonPref("pinch", (getString(R.string.settings_pinch)), (getString(R.string.settings_pinch_summary))))
-                        .add(new MaterialPrefFragment.ButtonPref("unPinch", (getString(R.string.settings_unpinch)), (getString(R.string.settings_unpinch_summary))))
-                        .add(new MaterialPrefFragment.ButtonPref("swipeDown", (getString(R.string.settings_swipeDown)), (getString(R.string.settings_swipeDown_summary))))
-                        .add(new MaterialPrefFragment.ButtonPref("swipeUp", (getString(R.string.settings_swipeUp)), (getString(R.string.settings_swipeUp_summary))))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_input);
                 break;
@@ -161,24 +146,6 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
     public void onPrefChanged(String id, Object value) {
         LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(this).generalSettings;
         switch (id) {
-            case "drawerRememberPage":
-                generalSettings.drawerRememberPage = (boolean) value;
-                break;
-            case "desktopSearchBar":
-                generalSettings.desktopSearchBar = (boolean) value;
-                prepareRestart();
-                break;
-            case "fullscreen":
-                generalSettings.fullscreen = (boolean) value;
-                prepareRestart();
-                break;
-            case "swipe":
-                generalSettings.swipe = (boolean) value;
-                break;
-            case "showIndicator":
-                generalSettings.showIndicator = (boolean) value;
-                prepareRestart();
-                break;
             case "dockBackground":
                 generalSettings.dockColor = (int) value;
                 if (Home.launcher != null)
@@ -192,14 +159,6 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 if (Home.launcher != null) {
                     Home.launcher.appDrawerController.setBackgroundColor((int) value);
                     Home.launcher.appDrawerController.getBackground().setAlpha(0);
-                } else {
-                    prepareRestart();
-                }
-                break;
-            case "drawerCard":
-                generalSettings.drawerUseCard = (boolean) value;
-                if (Home.launcher != null) {
-                    Home.launcher.appDrawerController.reloadDrawerCardTheme();
                 } else {
                     prepareRestart();
                 }
@@ -229,14 +188,6 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 } else {
                     prepareRestart();
                 }
-                break;
-            case "desktopShowLabel":
-                generalSettings.desktopShowLabel = (boolean) value;
-                prepareRestart();
-                break;
-            case "drawerShowIndicator":
-                generalSettings.drawerShowIndicator = (boolean) value;
-                prepareRestart();
                 break;
         }
         if (Home.launcher != null)
@@ -298,46 +249,6 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
             case "desktopMode":
                 DialogUtils.desktopStyleDialog(this);
                 prepareRestart();
-                break;
-            case "doubleClick":
-                DialogUtils.selectActionDialog(this, R.string.settings_double_click_title, generalSettings.doubleTapAction, new DialogUtils.OnActionSelectedListener() {
-                    @Override
-                    public void onActionSelected(LauncherAction.ActionItem item) {
-                        launcherSettings.generalSettings.doubleTapAction = item;
-                    }
-                });
-                break;
-            case "pinch":
-                DialogUtils.selectActionDialog(this, R.string.settings_double_click_title, generalSettings.pinchAction, new DialogUtils.OnActionSelectedListener() {
-                    @Override
-                    public void onActionSelected(LauncherAction.ActionItem item) {
-                        launcherSettings.generalSettings.pinchAction = item;
-                    }
-                });
-                break;
-            case "unPinch":
-                DialogUtils.selectActionDialog(this, R.string.settings_unpinch_title, generalSettings.unPinchAction,  new DialogUtils.OnActionSelectedListener() {
-                    @Override
-                    public void onActionSelected(LauncherAction.ActionItem item) {
-                        launcherSettings.generalSettings.unPinchAction = item;
-                    }
-                });
-                break;
-            case "swipeDown":
-                DialogUtils.selectActionDialog(this, R.string.settings_swipe_down_title, generalSettings.swipeDownAction,  new DialogUtils.OnActionSelectedListener() {
-                    @Override
-                    public void onActionSelected(LauncherAction.ActionItem item) {
-                        launcherSettings.generalSettings.swipeDownAction = item;
-                    }
-                });
-                break;
-            case "swipeUp":
-                DialogUtils.selectActionDialog(this, R.string.settings_swipe_up_title, generalSettings.swipeUpAction, new DialogUtils.OnActionSelectedListener() {
-                    @Override
-                    public void onActionSelected(LauncherAction.ActionItem item) {
-                        launcherSettings.generalSettings.swipeUpAction = item;
-                    }
-                });
                 break;
             case "iconHide":
                 Intent intent = new Intent(SettingsActivity.this, HideAppsActivity.class);

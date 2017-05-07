@@ -270,4 +270,19 @@ public class AppSettings {
     public void setDesktopPageCurrent(int value){
         setInt(R.string.pref_key__desktop_page_current, value);
     }
+    public boolean isOpenAppDrawerOnSwipe() {
+        return getBool(R.string.pref_key__is_open_app_drawer_on_swipe, true);
+    }
+
+    public boolean isDrawerUseCard() {
+        return getBool(R.string.pref_key__is_drawer_use_card, true);
+    }
+
+    public boolean isDrawerRememberPage() {
+        return getBool(R.string.pref_key__is_drawer_remember_page, true);
+    }
+
+    public boolean isDrawerShowIndicator() {
+        return getBool(R.string.pref_key__is_drawer_show_indicator, true);
+    }
 }

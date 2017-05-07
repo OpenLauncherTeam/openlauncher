@@ -74,7 +74,7 @@ public class AppDrawerVertical extends CardView {
                 itemWidth = (getWidth() - recyclerView.getPaddingRight() - recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
                 init();
 
-                if (!LauncherSettings.getInstance(getContext()).generalSettings.drawerShowIndicator)
+                if (!AppSettings.get().isDrawerShowIndicator())
                     scrollBar.setVisibility(View.GONE);
             }
         });

@@ -99,35 +99,12 @@ public class LauncherSettings {
 
     // edit this carefully as changing the type of a field will cause a parsing error when the launcher starts
     public static class GeneralSettings {
-        // desktop
-        public boolean desktopSearchBar = true;
-        public boolean fullscreen = false;
-        public boolean showIndicator = true;
-        public boolean desktopShowLabel = true;
-
-        //Dock Gesture
-        public boolean swipe = false;
-
-        public ActionItem doubleTapAction = null;
-        public ActionItem pinchAction = null;
-        public ActionItem unPinchAction = null;
-        public ActionItem swipeDownAction = null;
-        public ActionItem swipeUpAction = null;
-
         // app drawer
         public int drawerColor = Color.TRANSPARENT;
-        public boolean drawerUseCard = true;
         public int drawerCardColor = Color.WHITE;
         public int folderColor = Color.WHITE;
         public int drawerLabelColor = Color.DKGRAY;
-        public boolean drawerRememberPage = true;
         public ArrayList<String> hiddenList;
-        public boolean drawerShowIndicator = true;
-
-        // dock
         public int dockColor = Color.TRANSPARENT;
-
-        // other
-        public LauncherAction.Theme theme = LauncherAction.Theme.Light;
     }
 }

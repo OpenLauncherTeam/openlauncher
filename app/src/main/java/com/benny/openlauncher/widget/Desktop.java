@@ -42,6 +42,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     public int previousPage = -1;
     public int pageCount;
 
+    private AppSettings appSettings;
     private float startPosX;
     private float startPosY;
     private Home home;
@@ -49,12 +50,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public static int topInsert;
 
+    public Desktop(Context c) {
+        this(c, null);
+    }
     public Desktop(Context c, AttributeSet attr) {
         super(c, attr);
-    }
-
-    public Desktop(Context c) {
-        super(c);
+        appSettings = AppSettings.get();
     }
 
     public void setDesktopEditListener(OnDesktopEditListener desktopEditListener) {
@@ -116,7 +117,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public void initDesktopNormal(Home home) {
         setAdapter(new DesktopAdapter(this));
-        if (LauncherSettings.getInstance(getContext()).generalSettings.showIndicator && pageIndicator != null) {
+        if (appSettings.isDesktopShowPageIndicator() && pageIndicator != null) {
             pageIndicator.setViewPager(this);
         }
         this.home = home;
@@ -280,7 +281,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     @Override
     public boolean addItemToPage(final Item item, int page) {
-        int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+        int flag = appSettings.isDesktopShowLabel() ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
         if (itemView == null) {
@@ -307,7 +308,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             item.x = positionToLayoutPrams.x;
             item.y = positionToLayoutPrams.y;
 
-            int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+            int flag = appSettings.isDesktopShowLabel() ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
             View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
             if (itemView != null) {
@@ -325,7 +326,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         item.x = x;
         item.y = y;
 
-        int flag = LauncherSettings.getInstance(getContext()).generalSettings.desktopShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+        int flag = appSettings.isDesktopShowLabel() ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
         if (itemView != null) {
@@ -409,13 +410,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             return new SimpleFingerGestures.OnFingerGestureListener() {
                 @Override
                 public boolean onSwipeUp(int i, long l, double v) {
-                    LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.swipeUpAction, desktop.getContext());
+                    //LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.swipeUpAction, desktop.getContext());
                     return true;
                 }
 
                 @Override
                 public boolean onSwipeDown(int i, long l, double v) {
-                    LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.swipeDownAction, desktop.getContext());
+                    //LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.swipeDownAction, desktop.getContext());
                     return true;
                 }
 
@@ -431,19 +432,19 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                 @Override
                 public boolean onPinch(int i, long l, double v) {
-                    LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.pinchAction, desktop.getContext());
+                    //LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.pinchAction, desktop.getContext());
                     return true;
                 }
 
                 @Override
                 public boolean onUnpinch(int i, long l, double v) {
-                    LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.unPinchAction, desktop.getContext());
+                    //LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.unPinchAction, desktop.getContext());
                     return true;
                 }
 
                 @Override
                 public boolean onDoubleTap(int i) {
-                    LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.doubleTapAction, desktop.getContext());
+                    //LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.doubleTapAction, desktop.getContext());
                     return true;
                 }
             };

@@ -374,7 +374,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onEnd() {
-                if (!generalSettings.drawerRememberPage) {
+                if (!AppSettings.get().isDrawerRememberPage()) {
                     appDrawerController.scrollToStart();
                 }
                 appDrawerController.getDrawer().setVisibility(View.INVISIBLE);
@@ -412,10 +412,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
 
     public void updateSearchView(boolean show) {
-        if (generalSettings.desktopSearchBar && show) {
+        if (appSettings.isDesktopSearchbarEnabled() && show) {
             Tool.visibleViews(100, clockFrame, searchBar);
         } else {
-            if (generalSettings.desktopSearchBar) {
+            if (appSettings.isDesktopSearchbarEnabled()) {
                 Tool.invisibleViews(100, clockFrame, searchBar);
             } else {
                 Tool.goneViews(clockFrame, searchBar);
@@ -426,7 +426,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public void updateHomeLayout() {
         // set the padding for the search bar, desktop, and dock
         // update the drag option page indicator height
-        if (generalSettings.desktopSearchBar) {
+        if (appSettings.isDesktopSearchbarEnabled()) {
             desktop.setPadding(0, Desktop.topInsert, 0, 0);
             ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInsert;
             ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = Desktop.topInsert;
@@ -483,12 +483,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     private void initSettings() {
-        if (!generalSettings.desktopSearchBar) {
+        if (!appSettings.isDesktopSearchbarEnabled()) {
             Tool.goneViews(clockFrame, searchBar);
         }
         updateHomeLayout();
 
-        if (generalSettings.fullscreen) {
+        if (appSettings.isDesktopFullscreen()) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
@@ -502,7 +502,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         switch (appSettings.getDrawerMode()) {
             case AppDrawerController.DrawerMode.PAGED:
-                if (!generalSettings.drawerShowIndicator) {
+                if (!AppSettings.get().isDrawerShowIndicator()) {
                     appDrawerController.getChildAt(1).setVisibility(View.GONE);
                 }
                 break;
@@ -603,7 +603,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onCollapse() {
-                Tool.visibleViews(generalSettings.desktopSearchBar ? clockFrame : null);
+                Tool.visibleViews(appSettings.isDesktopSearchbarEnabled() ? clockFrame : null);
                 Tool.visibleViews(dock, desktop, desktopIndicator);
                 Tool.invisibleViews(background);
 
