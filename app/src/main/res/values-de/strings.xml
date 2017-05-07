@@ -6,7 +6,6 @@
     <string name="widget">Widget</string>
     <string name="remove">Entfernen</string>
     <string name="app_drawer">Alle Apps</string>
-    <string name="crash">Etwas ging schief … starte OpenLauncher neu.</string>
 
     <string name="toast_not_enough_space">Nicht genügend Platz</string>
     <string name="toast_app_uninstalled">Die App wurde deinstalliert.</string>
@@ -16,7 +15,6 @@
     <string name="cancel">Abbrechen</string>
     <string name="ok">OK</string>
     <string name="home">Home</string>
-    <string name="search_apps">Suche Anwendungen …</string>
 
     <string name="wallpaper">Wallpaper</string>
     <string name="wallpaper_pick">Suche Wallpaper aus</string>
@@ -52,7 +50,7 @@
 
     // About
 
-    <string name="about">Über Open Launcher</string>
+    <string name="pref_title__about">Über Open Launcher</string>
     <string name="about_libs">Open Source Bibliotheken</string>
     <string name="about_rate">Bewerte die App</string>
     <string name="about_credit">Beteiligte</string>
@@ -61,26 +59,12 @@
 
     <string name="settings">Einstellungen</string>
 
-    <string name="columns">Spalten</string>
-    <string name="rows">Reihen</string>
     <string name="dialog__iconpack_title">Wähle ein Icon Pack aus</string>
     <string name="dialog__icon_pack_info_toast">Du must zuerst die Berechtigung \"Manifest.permission.READ_EXTERNAL_STORAGE\" gewähren.</string>
 
-    <string name="settings_drawer_style_paged">Karten</string>
-    <string name="settings_drawer_style_vertical">Vertikal</string>
-    <string name="settings_single_click_title">Klick Aktion</string>
-    <string name="settings_double_click_title">Doppelklick Aktion</string>
-    <string name="settings_pinch_title">Zusammenkneifen Aktion</string>
-    <string name="settings_unpinch_title">Auseinander Ziehen Aktion</string>
-    <string name="settings_swipe_down_title">Nach unten Wischen Aktion</string>
-    <string name="settings_swipe_up_title">Nach oben Wischen Aktion</string>
-
     <string name="pref_title__color">Farben</string>
-    <string name="pref_title__gestures">Gesten</string>
     <string name="pref_title__miscellaneous">Anderes</string>
 
-    <string name="pref_title__desktop_mode">Stil</string>
-    <string name="pref_summary__desktop_mode">Wähle zwischen verschiedenen Stilen für deinen Desktop.</string>
     <string name="pref_title__is_desktop_searchbar_enabled">Suchleiste</string>
     <string name="pref_summary__is_desktop_searchbar_enabled">Zeige eine Suchleiste am oberen Desktoprand.</string>
     <string name="pref_title__size">Größe</string>
@@ -103,18 +87,6 @@
     <string name="pref_title__is_drawer_show_indicator">Seitenindikator/Scrollbar</string>
     <string name="pref_summary__is_drawer_show_indicator">Zeige den Seitenindikator bzw. die Scrollbar im Drawer an.</string>
 
-    <string name="settings_singleClick">Einfacher Klick</string>
-    <string name="settings_singleClick_summary">Einfacher Klick Aktion.</string>
-    <string name="settings_doubleClick">Doppelklick</string>
-    <string name="settings_doubleClick_summary">Doppelklick Aktion.</string>
-    <string name="settings_pinch">Zusammenkneifen</string>
-    <string name="settings_pinch_summary">Zusammenkneifen Aktion.</string>
-    <string name="settings_unpinch">Auseinander Ziehen</string>
-    <string name="settings_unpinch_summary">Auseinander Ziehen Aktion.</string>
-    <string name="settings_swipeDown">Nach unten Wischen</string>
-    <string name="settings_swipeDown_summary">Nach unten Wischen Aktion.</string>
-    <string name="settings_swipeUp">Nach oben Wischen</string>
-    <string name="settings_swipeUp_summary">Nach oben Wischen Aktion.</string>
     <string name="pref_title__is_open_app_drawer_on_swipe">Drawer: Wischen</string>
     <string name="pref_summary__is_open_app_drawer_on_swipe">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
 

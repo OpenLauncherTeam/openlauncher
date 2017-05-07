@@ -14,8 +14,8 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
 
-import butterknife.ButterKnife;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.codetail.widget.RevealFrameLayout;
 
 /**

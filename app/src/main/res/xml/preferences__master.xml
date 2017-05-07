@@ -4,7 +4,6 @@
         android:icon="@drawable/ic_desktop_windows_black_24dp"
         android:key="@string/pref_key__cat_desktop"
         android:title="@string/pref_title__desktop" />
-
     <Preference
         android:icon="@drawable/ic_apps_black_24dp"
         android:key="@string/pref_key__cat_app_drawer"
@@ -24,5 +23,10 @@
         android:icon="@drawable/ic_color_lens_black_24dp"
         android:key="@string/pref_key__cat_miscellaneous"
         android:title="@string/pref_title__miscellaneous" />
+
+    <Preference
+        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:key="@string/pref_key__about"
+        android:title="@string/pref_title__about" />
 
 </PreferenceScreen>

@@ -3,7 +3,6 @@ package com.benny.openlauncher.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -144,6 +143,9 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     return true;
                 } else if (settings.isKeyEqual(key, R.string.pref_key__cat_miscellaneous)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentMiscellaneous.TAG, true);
+                    return true;
+                } else if (settings.isKeyEqual(key, R.string.pref_key__about)) {
+                    startActivity(new Intent(getActivity(), AboutActivity.class));
                     return true;
                 }
             }

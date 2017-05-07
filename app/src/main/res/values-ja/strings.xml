@@ -4,7 +4,7 @@
     <!-- Titles -->
     <string name="settings">設定</string>
     <string name="minibar">ミニバー</string>
-    <string name="about">アプリについて</string>
+    <string name="pref_title__about">アプリについて</string>
 
     <!-- Edit Mode -->
 
@@ -53,33 +53,20 @@
 
     <!-- Dialogs -->
 
-    <string name="columns">列</string>
-    <string name="rows">行</string>
     <string name="dialog__iconpack_title">アイコンパックの選択</string>
     <string name="dialog__icon_pack_info_toast">READ_EXTERNAL_STORAGE アクセス許可がないとアイコンを取得できません。</string>
     <string name="dialog__backup_app_settings__backup">バックアップ</string>
     <string name="dialog__backup_app_settings__restore">復元</string>
     <string name="dialog__backup_app_settings__success">完了しました。</string>
     <string name="dialog__backup_app_settings__error">問題が発生しました。</string>
-    <string name="settings_drawer_style_paged">ページ</string>
-    <string name="settings_drawer_style_vertical">縦</string>
-    <string name="settings_single_click_title">シングルクリック操作</string>
-    <string name="settings_double_click_title">ダブルクリック操作</string>
-    <string name="settings_pinch_title">ピンチ操作</string>
-    <string name="settings_unpinch_title">逆ピンチ操作</string>
-    <string name="settings_swipe_down_title">下にスワイプ操作</string>
-    <string name="settings_swipe_up_title">上にスワイプ操作</string>
 
     <!-- Settings -->
 
-    <string name="pref_title__gestures">ジェスチャー</string>
     <string name="pref_title__color">色</string>
     <string name="pref_title__miscellaneous">その他</string>
 
     <string name="pref_title__minibar__arrangement__show_screen">ミニバー</string>
     <string name="pref_summary__minibar__arrangement__show_screen">ミニバーのアイテムを設定します。</string>
-    <string name="pref_title__desktop_mode">スタイル</string>
-    <string name="pref_summary__desktop_mode">異なるデスクトップのスタイルを選択します。</string>
     <string name="pref_title__size">サイズ</string>
     <string name="pref_title__is_desktop_searchbar_enabled">検索バー</string>
     <string name="pref_summary__is_desktop_searchbar_enabled">デスクトップの上部に検索バーを表示します。</string>
@@ -105,18 +92,6 @@
 
     <string name="pref_title__is_open_app_drawer_on_swipe">ドロワーの高速スワイプ</string>
     <string name="pref_summary__is_open_app_drawer_on_swipe">ドロワーのアプリアイコンを上にスワイプして、アプリドロワーを開きます。</string>
-    <string name="settings_singleClick">シングルクリック</string>
-    <string name="settings_singleClick_summary">シングルクリック操作。</string>
-    <string name="settings_doubleClick">ダブルクリック</string>
-    <string name="settings_doubleClick_summary">ダブルクリック操作。</string>
-    <string name="settings_pinch">ピンチ</string>
-    <string name="settings_pinch_summary">ピンチ操作。</string>
-    <string name="settings_unpinch">アンピンチ</string>
-    <string name="settings_unpinch_summary">逆ピンチ操作。</string>
-    <string name="settings_swipeDown">下にスワイプ</string>
-    <string name="settings_swipeDown_summary">下にスワイプ操作。</string>
-    <string name="settings_swipeUp">上にスワイプ</string>
-    <string name="settings_swipeUp_summary">上にスワイプ操作。</string>
 
     <string name="pref_title__dock_background_color">ドック</string>
     <string name="pref_summary__dock_background_color">ドックの背景色。</string>
@@ -149,11 +124,9 @@
     <string name="on">オン</string>
     <string name="off">オフ</string>
     <string name="app_drawer">すべてのアプリ</string>
-    <string name="crash">問題が発生しました … OpenLauncher を再起動します。</string>
     <string name="cancel">キャンセル</string>
     <string name="ok">OK</string>
     <string name="home">ホーム</string>
-    <string name="search_apps">アプリの検索 …</string>
     <string name="wallpaper">壁紙</string>
     <string name="wallpaper_pick">壁紙の選択</string>
     <string name="wallpaper_unable_to_blur">ぼかすことができません</string>

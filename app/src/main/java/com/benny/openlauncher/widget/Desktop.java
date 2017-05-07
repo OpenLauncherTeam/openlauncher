@@ -18,15 +18,14 @@ import android.widget.Toast;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.model.SmoothPagerAdapter;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
-import com.benny.openlauncher.model.SmoothPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +52,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     public Desktop(Context c) {
         this(c, null);
     }
+
     public Desktop(Context c, AttributeSet attr) {
         super(c, attr);
         appSettings = AppSettings.get();

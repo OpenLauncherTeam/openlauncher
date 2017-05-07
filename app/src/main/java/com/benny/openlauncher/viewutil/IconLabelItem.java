@@ -36,6 +36,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private Typeface typeface;
     private boolean matchParent = true;
     private int forceSize = -1;
+
     public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int iconGravity) {
         this.label = label;
         this.icon = icon;

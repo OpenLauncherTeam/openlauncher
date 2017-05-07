@@ -36,7 +36,7 @@ public class LauncherAction {
         if (actionItem != null)
             switch (actionItem.action) {
                 case LaunchApp:
-                    Tool.startApp(context,actionItem.extraData);
+                    Tool.startApp(context, actionItem.extraData);
                     break;
 
                 default:

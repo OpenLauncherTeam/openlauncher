@@ -38,7 +38,7 @@ public class AboutActivity extends MaterialAboutActivity {
             e.printStackTrace();
         }
         titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, getResources().getDrawable(R.drawable.ic_github), "GitHub", false, Uri.parse("https://github.com/BennyKok/OpenLauncher")));
-        titleCard.addItem(new MaterialAboutActionItem(getString(R.string.about_libs),null, getResources().getDrawable(R.drawable.ic_github), new MaterialAboutActionItem.OnClickListener() {
+        titleCard.addItem(new MaterialAboutActionItem(getString(R.string.about_libs), null, getResources().getDrawable(R.drawable.ic_github), new MaterialAboutActionItem.OnClickListener() {
             @Override
             public void onClick() {
                 final Notices notices = new Notices();
@@ -86,12 +86,6 @@ public class AboutActivity extends MaterialAboutActivity {
                 .subText(getString(R.string.about_credit_text_gsantner))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://gsantner.github.io/")))
                 .build());
-        opTeamCard.addItem(new MaterialAboutActionItem.Builder()
-                .icon(R.drawable.person__gaukler_faun)
-                .text("Gaukler Faun")
-                .subText(getString(R.string.about_credit_text_gaukler_faun))
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))
-                .build());
 
 
         MaterialAboutCard.Builder contributorsCard = new MaterialAboutCard.Builder();
@@ -101,6 +95,12 @@ public class AboutActivity extends MaterialAboutActivity {
                 .text("Chris DeBrodie")
                 .subText(getString(R.string.about_credit_text_chris_debrodie))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://plus.google.com/111923938461696019967")))
+                .build());
+        contributorsCard.addItem(new MaterialAboutActionItem.Builder()
+                .icon(R.drawable.person__gaukler_faun)
+                .text("Gaukler Faun")
+                .subText(getString(R.string.about_credit_text_gaukler_faun))
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))
                 .build());
 
 
@@ -122,6 +122,6 @@ public class AboutActivity extends MaterialAboutActivity {
 
     @Override
     protected CharSequence getActivityTitle() {
-        return getString(R.string.about);
+        return getString(R.string.pref_title__about);
     }
 }

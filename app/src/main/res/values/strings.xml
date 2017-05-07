@@ -5,7 +5,7 @@
 
     <string name="settings">Settings</string>
     <string name="minibar">Minibar</string>
-    <string name="about">About</string>
+    <string name="pref_title__about">About</string>
 
     <!-- Drag Option View -->
 
@@ -57,13 +57,7 @@
 
     <string name="about_libs">Open Source Libraries</string>
     <string name="about_rate">Rate</string>
-    <string name="about_team" translatable="false">Open Launcher Team</string>
     <string name="about_credit">Contributors</string>
-    <string name="about_credit_text_bennykok" translatable="false">Project starter</string>
-    <string name="about_credit_text_chris_debrodie" translatable="false">Helped a lot with bugs and suggestions</string>
-    <string name="about_credit_text_gaukler_faun" translatable="false">Added some settings, German translation</string>
-    <string name="about_credit_text_gsantner" translatable="false">Maintainer, German translations</string>
-    <string name="about_credit_text_dkanada" translatable="false">Maintainer, Database</string>
 
     <!-- Settings -->
 
@@ -73,13 +67,10 @@
     <string name="pref_title__color">Colors</string>
     <string name="pref_title__icons">Icons</string>
     <string name="pref_title__miscellaneous">Miscellaneous</string>
-    <string name="pref_title__gestures">Gestures</string>
     <string name="pref_title__appearance">Appearance</string>
 
     <string name="pref_title__minibar__arrangement__show_screen">Minibar</string>
     <string name="pref_summary__minibar__arrangement__show_screen">Configure minibar items.</string>
-    <string name="pref_title__desktop_mode">Style</string>
-    <string name="pref_summary__desktop_mode">Choose between different styles for your desktop.</string>
     <string name="pref_title__size">Size</string>
     <string name="pref_title__is_desktop_searchbar_enabled">Search bar</string>
     <string name="pref_summary__is_desktop_searchbar_enabled">Display a search bar on top of the desktop.</string>
@@ -105,18 +96,6 @@
 
     <string name="pref_title__is_open_app_drawer_on_swipe">Fast swipe drawer</string>
     <string name="pref_summary__is_open_app_drawer_on_swipe">Swipe up on the drawer app icon to open the app drawer.</string>
-    <string name="settings_singleClick">Single click</string>
-    <string name="settings_singleClick_summary">Single click action.</string>
-    <string name="settings_doubleClick">Double click</string>
-    <string name="settings_doubleClick_summary">Double click action.</string>
-    <string name="settings_pinch">Pinch</string>
-    <string name="settings_pinch_summary">Pinch action.</string>
-    <string name="settings_unpinch">Unpinch</string>
-    <string name="settings_unpinch_summary">Unpinch action.</string>
-    <string name="settings_swipeDown">Swipe Down</string>
-    <string name="settings_swipeDown_summary">Swipe down action.</string>
-    <string name="settings_swipeUp">Swipe up</string>
-    <string name="settings_swipeUp_summary">Swipe up action.</string>
 
     <string name="pref_title__dock_background_color">Dock background color</string>
     <string name="pref_summary__dock_background_color">Background color of the dock</string>
@@ -153,29 +132,17 @@
     <string name="request_toast">No apps selected. Show all apps in drawer?</string>
     <string name="on">On</string>
     <string name="off">Off</string>
-    <string name="crash">Something went wrong … restarting OpenLauncher.</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
-    <string name="search_apps">Search apps …</string>
     <string name="wallpaper">Wallpaper</string>
     <string name="wallpaper_pick">Pick Wallpaper</string>
     <string name="wallpaper_unable_to_blur">Unable to blur</string>
-    <string name="columns">Columns</string>
-    <string name="rows">Rows</string>
     <string name="dialog__iconpack_title">Pick icon pack</string>
     <string name="dialog__icon_pack_info_toast">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
     <string name="dialog__backup_app_settings__backup">Backup</string>
     <string name="dialog__backup_app_settings__restore">Restore</string>
     <string name="dialog__backup_app_settings__success">Successfully done.</string>
     <string name="dialog__backup_app_settings__error">Something went wrong.</string>
-    <string name="settings_drawer_style_paged">Paged</string>
-    <string name="settings_drawer_style_vertical">Vertical</string>
-    <string name="settings_single_click_title">Single click action</string>
-    <string name="settings_double_click_title">Double click action</string>
-    <string name="settings_pinch_title">Pinch action</string>
-    <string name="settings_unpinch_title">Unpinch action</string>
-    <string name="settings_swipe_down_title">Swipe down action</string>
-    <string name="settings_swipe_up_title">Swipe up action</string>
     <string name="item_count_horizontal">Horizontal count of items</string>
     <string name="item_count_vertical">Vertical count of items</string>
     <string name="item_count_horizontal_landscape">Horizontal count of items (Landscape)</string>

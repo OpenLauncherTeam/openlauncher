@@ -25,7 +25,6 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.model.AppInfo;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.LauncherSettings;
 
 import java.util.ArrayList;
 import java.util.List;

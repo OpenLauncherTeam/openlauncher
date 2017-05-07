@@ -2,7 +2,6 @@ package com.benny.openlauncher.widget;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ScaleDrawable;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowInsets;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 
 import com.benny.openlauncher.R;

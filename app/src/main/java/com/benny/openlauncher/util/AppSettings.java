@@ -261,7 +261,7 @@ public class AppSettings {
 
     public ArrayList<String> getMinibarArrangement() {
         ArrayList<String> ret = new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key__minibar__arrangement__tmp)));
-        if (ret.isEmpty()){
+        if (ret.isEmpty()) {
             for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
                 ret.add("0" + item.label.toString());
             }

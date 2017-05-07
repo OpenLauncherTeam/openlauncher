@@ -1,1 +1,1 @@
-include ':app', ':app:libs:materialpreffragment'
+include ':app'

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.LauncherSettings;
@@ -21,8 +22,6 @@ import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
 
 import java.util.List;
-
-import com.benny.openlauncher.model.Item;
 
 public class Dock extends CellContainer implements View.OnDragListener, DesktopCallBack {
     private AppSettings appSettings;
@@ -51,7 +50,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     public void initDockItem(Home home) {
-        int column =AppSettings.get().getDockItemCountHorizontal();
+        int column = AppSettings.get().getDockItemCountHorizontal();
         setGridSize(column, 1);
         List<Item> dockItems = Home.db.getDock();
 

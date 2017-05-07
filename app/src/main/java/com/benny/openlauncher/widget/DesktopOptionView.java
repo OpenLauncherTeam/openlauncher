@@ -18,7 +18,6 @@ import android.widget.FrameLayout;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.FastAdapter;
@@ -121,21 +120,21 @@ public class DesktopOptionView extends FrameLayout {
                             if (!appSettings.isDesktopLocked()) {
                                 desktopOptionViewListener.onRemovePage();
                             } else {
-                                Tool.toast(getContext(),"Desktop is locked.");
+                                Tool.toast(getContext(), "Desktop is locked.");
                             }
                             break;
                         case 2:
                             if (!appSettings.isDesktopLocked()) {
                                 desktopOptionViewListener.onPickWidget();
                             } else {
-                                Tool.toast(getContext(),"Desktop is locked.");
+                                Tool.toast(getContext(), "Desktop is locked.");
                             }
                             break;
                         case 3:
                             if (!appSettings.isDesktopLocked()) {
                                 desktopOptionViewListener.onPickDesktopAction();
                             } else {
-                                Tool.toast(getContext(),"Desktop is locked.");
+                                Tool.toast(getContext(), "Desktop is locked.");
                             }
                             break;
                         case 4:

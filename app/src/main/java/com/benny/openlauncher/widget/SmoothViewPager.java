@@ -1938,7 +1938,7 @@ public class SmoothViewPager extends ViewGroup {
         switch (action) {
             case MotionEvent.ACTION_MOVE: {
                     /*
-					 * mIsBeingDragged == false, otherwise the shortcut would have caught it. Check
+                     * mIsBeingDragged == false, otherwise the shortcut would have caught it. Check
 					 * whether the user has moved far enough from his original down touch.
 					 */
 

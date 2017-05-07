@@ -17,7 +17,6 @@ import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
@@ -241,6 +240,7 @@ public class GroupPopupView extends FrameLayout {
 
     static class GroupDef {
         static int maxItem = 12;
+
         static int[] getCellSize(int count) {
             if (count <= 1)
                 return new int[]{1, 1};

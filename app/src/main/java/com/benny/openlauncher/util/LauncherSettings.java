@@ -2,13 +2,9 @@ package com.benny.openlauncher.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.util.LauncherAction.ActionItem;
-import com.benny.openlauncher.widget.AppDrawerController;
-import com.benny.openlauncher.widget.Desktop;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 

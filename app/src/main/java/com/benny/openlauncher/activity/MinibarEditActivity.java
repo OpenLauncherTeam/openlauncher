@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherAction;
-import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
@@ -25,13 +24,12 @@ import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 import com.mikepenz.fastadapter_extensions.drag.ItemTouchCallback;
 import com.mikepenz.fastadapter_extensions.drag.SimpleDragCallback;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static com.benny.openlauncher.activity.Home.launcher;
 

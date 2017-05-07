@@ -9,7 +9,6 @@ import android.os.Parcelable;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.widget.Desktop;
 
 import java.util.ArrayList;
 import java.util.List;

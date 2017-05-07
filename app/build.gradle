@@ -82,9 +82,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.0.1'
     compile 'com.google.code.gson:gson:2.8.0'
 
-    // Compile project libraries
-    compile project(':app:libs:materialpreffragment')
-
     // Android-Apt
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
 }
