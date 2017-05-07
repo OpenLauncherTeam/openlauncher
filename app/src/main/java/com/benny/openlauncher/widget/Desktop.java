@@ -508,7 +508,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             layout.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    scaleFactor = 0.85f;
+                    scaleFactor = 0.75f;
                     for (CellContainer v : desktop.pages) {
                         v.blockTouch = true;
                         v.animateBackgroundShow();
@@ -521,7 +521,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     return true;
                 }
             });
-
             return layout;
         }
     }
