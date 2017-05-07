@@ -22,7 +22,7 @@ import com.benny.openlauncher.model.SmoothPagerAdapter;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.LauncherSettings;
+
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
@@ -85,7 +85,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     public void initDesktopShowAll(Context c) {
-        LauncherSettings.GeneralSettings generalSettings = LauncherSettings.getInstance(c).generalSettings;
         List<AppManager.App> apps = AppManager.getInstance(c).getApps();
         int appsSize = apps.size();
 

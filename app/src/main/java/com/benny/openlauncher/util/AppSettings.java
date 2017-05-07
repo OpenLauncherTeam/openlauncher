@@ -190,8 +190,11 @@ public class AppSettings {
         return getBool(R.string.pref_key__is_app_first_start, true);
     }
 
+    @SuppressLint("ApplySharedPref")
     public void setAppFirstLaunch(boolean value) {
-        setBool(R.string.pref_key__is_app_first_start, value);
+        // MUST be committed
+        prefApp.edit().putBoolean(context.getString
+                (R.string.pref_key__is_app_first_start), value).commit();
     }
 
     public int getDesktopMode() {

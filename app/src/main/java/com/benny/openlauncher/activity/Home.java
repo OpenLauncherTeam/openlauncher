@@ -16,7 +16,6 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Point;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,7 +45,6 @@ import com.benny.openlauncher.util.AppUpdateReceiver;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.DialogUtils;
 import com.benny.openlauncher.util.LauncherAction;
-import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DragNavigationControl;
@@ -156,8 +154,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     @BindView(R.id.desktopEditOptionPanel)
     public DesktopOptionView desktopEditOptionPanel;
 
-    public LauncherSettings.GeneralSettings generalSettings;
-
     private PagerIndicator appDrawerIndicator;
     private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
@@ -206,41 +202,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
-        if (LauncherSettings.getInstance(Home.this).init) {
-            generalSettings = LauncherSettings.getInstance(Home.this).generalSettings;
-            loadingSplash.animate().alpha(0).withEndAction(new Runnable() {
-                @Override
-                public void run() {
-                    myScreen.removeView(loadingSplash);
-                }
-            });
-            init();
-        } else {
-            loadingIcon.setLoading(true);
-            new AsyncTask<Void, Void, Boolean>() {
-                @Override
-                protected Boolean doInBackground(Void... voids) {
-                    boolean ok = LauncherSettings.getInstance(Home.this).readSettings();
-                    generalSettings = LauncherSettings.getInstance(Home.this).generalSettings;
-                    return ok;
-                }
-
-                @Override
-                protected void onPostExecute(Boolean result) {
-                    loadingIcon.setLoading(false);
-                    loadingSplash.animate().alpha(0).withEndAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            myScreen.removeView(loadingSplash);
-                        }
-                    });
-                    init();
-                    if (!result && Home.launcher != null) {
-                        DialogUtils.alert(Home.launcher, "Some settings can't be read.", "Developer's mistake, hope you understand! Some of the settings will be reset to their default value.").show();
-                    }
-                }
-            }.execute();
-        }
+        loadingSplash.animate().alpha(0).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                myScreen.removeView(loadingSplash);
+            }
+        });
+        init();
     }
 
     private void init() {
@@ -269,7 +237,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {
-                LauncherSettings launcherSettings = LauncherSettings.getInstance(Home.this);
                 if (appSettings.getDesktopMode() != Desktop.DesktopMode.SHOW_ALL_APPS) {
                     if (AppSettings.get().isAppFirstLaunch()) {
                         AppSettings.get().setAppFirstLaunch(false);
@@ -703,13 +670,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     @Override
-    protected void onStop() {
-        // save the settings in json
-        LauncherSettings.getInstance(this).writeSettings();
-        super.onStop();
-    }
-
-    @Override
     public void onBackPressed() {
         drawerLayout.closeDrawers();
         handleLauncherPause();
@@ -751,7 +711,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             if (!desktop.inEditMode) {
                 if (appDrawerController.getDrawer() != null && appDrawerController.getDrawer().getVisibility() == View.VISIBLE) {
                     closeAppDrawer();
-                } else if (generalSettings != null) {
+                } else {
                     desktop.setCurrentItem(appSettings.getDesktopPageCurrent());
                 }
             } else {

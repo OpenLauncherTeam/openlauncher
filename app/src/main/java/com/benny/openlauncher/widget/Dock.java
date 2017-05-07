@@ -16,7 +16,6 @@ import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
@@ -177,13 +176,11 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
 
-        if (LauncherSettings.getInstance(getContext()).generalSettings != null) {
-            int iconSize = AppSettings.get().getIconsizeGlobal();
-            if (appSettings.isDockShowLabel()) {
-                height = Tool.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
-            } else {
-                height = getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, getContext()) + Dock.bottomInset;
-            }
+        int iconSize = AppSettings.get().getIconsizeGlobal();
+        if (appSettings.isDockShowLabel()) {
+            height = Tool.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
+        } else {
+            height = getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, getContext()) + Dock.bottomInset;
         }
 
         setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec), height);

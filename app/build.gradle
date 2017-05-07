@@ -80,7 +80,6 @@ dependencies {
 
     // Tools
     compile 'com.jakewharton:butterknife:8.0.1'
-    compile 'com.google.code.gson:gson:2.8.0'
 
     // Android-Apt
     apt 'com.jakewharton:butterknife-compiler:8.0.1'

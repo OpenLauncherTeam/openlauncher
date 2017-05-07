@@ -54,7 +54,7 @@ public class AboutActivity extends MaterialAboutActivity {
                 notices.addNotice(new Notice("AndroidOnboarder", "https://github.com/chyrta/AndroidOnboarder", "Dzmitry Chyrta, Daniel Morales", new ApacheSoftwareLicense20()));
                 notices.addNotice(new Notice("CustomActivityOnCrash", "https://github.com/Ereza/CustomActivityOnCrash", "Eduard Ereza Martínez", new ApacheSoftwareLicense20()));
                 notices.addNotice(new Notice("Butter Knife", "https://github.com/JakeWharton/butterknife", "Jake Wharton", new ApacheSoftwareLicense20()));
-                notices.addNotice(new Notice("Gson", "url", "Google Inc.", new ApacheSoftwareLicense20()));
+                notices.addNotice(new Notice("jaredrummler colorpicker", "https://github.com/jaredrummler/ColorPicker", " jaredrummler", new ApacheSoftwareLicense20()));
                 notices.addNotice(new Notice("Android Support Library", "https://developer.android.com/topic/libraries/support-library/revisions.html", "The Android Open Source Project", new ApacheSoftwareLicense20()));
                 new LicensesDialog.Builder(AboutActivity.this)
                         .setNotices(notices)
