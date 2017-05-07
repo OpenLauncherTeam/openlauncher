@@ -60,10 +60,10 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
                         .add(new MaterialPrefFragment.ButtonPref("editMiniBar", getString(R.string.settings_desktopMinibar), getString(R.string.settings_desktopMinibar_summary)))
                         //.add(new MaterialPrefFragment.ButtonPref("desktopMode", (getString(R.string.settings_desktopStyle)), (getString(R.string.settings_desktopStyle_summary))))
-                        .add(new MaterialPrefFragment.NUMPref("gridSizeDesktop", (getString(R.string.settings_desktopSize)), (getString(R.string.settings_desktopSize_summary)),
+                        /*.add(new MaterialPrefFragment.NUMPref("gridSizeDesktop", (getString(R.string.settings_desktopSize)), (getString(R.string.settings_desktopSize_summary)),
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDesktop", (getString(R.string.settings_column)), generalSettings.desktopGridX, 4, 10),
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("vGridSizeDesktop", (getString(R.string.settings_row)), generalSettings.desktopGridY, 4, 10)
-                        ))
+                        ))*/
                         .add(new MaterialPrefFragment.TBPref("desktopSearchBar", (getString(R.string.settings_desktopSearch)), (getString(R.string.settings_desktopSearch_summary)), generalSettings.desktopSearchBar))
                         .add(new MaterialPrefFragment.TBPref("fullscreen", (getString(R.string.settings_desktopFull)), (getString(R.string.settings_desktopFull_summary)), generalSettings.fullscreen))
                         .add(new MaterialPrefFragment.TBPref("showIndicator", (getString(R.string.settings_desktopIndicator)), (getString(R.string.settings_desktopIndicator_summary)), generalSettings.showIndicator))
@@ -76,17 +76,17 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                         .add(new MaterialPrefFragment.NUMPref("gridSizeDock", (getString(R.string.settings_dockSize)), (getString(R.string.settings_dockSize_summary)),
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDock", (getString(R.string.settings_column)), generalSettings.dockGridX, 4, 10)
                         ))
-                        .add(new MaterialPrefFragment.TBPref("dockShowLabel", (getString(R.string.settings_dockLabel)), (getString(R.string.settings_dockLabel_summary)), generalSettings.dockShowLabel))
-                        .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
+                        /*.add(new MaterialPrefFragment.TBPref("dockShowLabel", (getString(R.string.settings_dockLabel)), (getString(R.string.settings_dockLabel_summary)), generalSettings.dockShowLabel))
+                        */.setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_dock);
                 break;
             case 2:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
                         .add(new MaterialPrefFragment.ButtonPref("drawerStyle", (getString(R.string.settings_drawerStyle)), (getString(R.string.settings_drawerStyle_summary))))
-                        .add(new MaterialPrefFragment.NUMPref("gridSize", (getString(R.string.settings_drawerSize)), (getString(R.string.settings_drawerSize_summary)),
+                        /*.add(new MaterialPrefFragment.NUMPref("gridSize", (getString(R.string.settings_drawerSize)), (getString(R.string.settings_drawerSize_summary)),
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSize", (getString(R.string.settings_column)), generalSettings.drawerGridX, 1, 10),
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("vGridSize", (getString(R.string.settings_row)), generalSettings.drawerGridY, 1, 10)
-                        ))
+                        ))*/
                         .add(new MaterialPrefFragment.TBPref("drawerCard", (getString(R.string.settings_drawerCard)), (getString(R.string.settings_drawerCard_summary)), generalSettings.drawerUseCard))
                         //.add(new MaterialPrefFragment.TBPref("drawerSearchBar", (getString(R.string.settings_drawerSearch)), (getString(R.string.settings_drawerSearch_summary)), generalSettings.drawerSearchBar))
                         //.add(new MaterialPrefFragment.TBPref("drawerLight", (getString(R.string.settings_drawerSearchIcon)), (getString(R.string.settings_drawerSearchIcon_summary)), generalSettings.drawerLight))
@@ -181,14 +181,6 @@ public class SettingsActivity extends BaseSettingsActivity implements MaterialPr
                 break;
             case "iconSize":
                 generalSettings.iconSize = (int) value;
-                prepareRestart();
-                break;
-            case "hGridSize":
-                generalSettings.drawerGridX = (int) value;
-                prepareRestart();
-                break;
-            case "vGridSize":
-                generalSettings.drawerGridY = (int) value;
                 prepareRestart();
                 break;
             case "dockShowLabel":

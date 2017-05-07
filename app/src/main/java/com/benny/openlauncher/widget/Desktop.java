@@ -90,17 +90,19 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         // reset page count
         pageCount = 0;
-        while ((appsSize = appsSize - (generalSettings.desktopGridY * generalSettings.desktopGridX)) >= (generalSettings.desktopGridY * generalSettings.desktopGridX) || (appsSize > -(generalSettings.desktopGridY * generalSettings.desktopGridX))) {
+        int horizontalCount = AppSettings.get().getDesktopItemCountHorizontal_Portrait();
+        int verticalCount = AppSettings.get().getDesktopItemCountVertical_Portrait();
+        while ((appsSize = appsSize - (horizontalCount * verticalCount)) >= (horizontalCount * verticalCount) || (appsSize > -(horizontalCount * verticalCount))) {
             pageCount++;
         }
 
         // fill the desktop adapter
         for (int i = 0; i < pageCount; i++) {
             if (pages.size() <= pageCount) break;
-            for (int x = 0; x < generalSettings.desktopGridX; x++) {
-                for (int y = 0; y < generalSettings.desktopGridY; y++) {
-                    int pagePos = y * generalSettings.desktopGridY + x;
-                    int pos = generalSettings.desktopGridY * generalSettings.desktopGridX * i + pagePos;
+            for (int x = 0; x < horizontalCount; x++) {
+                for (int y = 0; y < verticalCount; y++) {
+                    int pagePos = y * verticalCount + x;
+                    int pos = horizontalCount * verticalCount * i + pagePos;
                     if (!(pos >= apps.size())) {
                         Item appItem = Item.newAppItem(apps.get(pos));
                         appItem.x = x;
@@ -119,8 +121,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
         this.home = home;
 
-        int column = LauncherSettings.getInstance(getContext()).generalSettings.desktopGridX;
-        int row = LauncherSettings.getInstance(getContext()).generalSettings.desktopGridY;
+        int column = AppSettings.get().getDesktopItemCountHorizontal_Portrait();
+        int row = AppSettings.get().getDesktopItemCountVertical_Portrait();
         List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
         for (int pageCount = 0; pageCount < desktopItems.size(); pageCount++) {
             if (pages.size() <= pageCount) break;
@@ -483,7 +485,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     return false;
                 }
             });
-            layout.setGridSize(LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridX, LauncherSettings.getInstance(desktop.getContext()).generalSettings.desktopGridY);
+            layout.setGridSize(AppSettings.get().getDesktopItemCountHorizontal_Portrait(), AppSettings.get().getDesktopItemCountVertical_Portrait());
             layout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {

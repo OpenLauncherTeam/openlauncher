@@ -64,13 +64,13 @@ public class AppDrawerPaged extends SmoothViewPager {
     }
 
     private void setPortraitValue() {
-        hCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX;
-        vCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridY;
+        hCellCount = AppSettings.get().getDrawerItemCountHorizontal_Portrait();
+        vCellCount = AppSettings.get().getDrawerItemCountVertical_Portrait();
     }
 
     private void setLandscapeValue() {
-        hCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridX_L;
-        vCellCount = LauncherSettings.getInstance(getContext()).generalSettings.drawerGridY_L;
+        hCellCount = AppSettings.get().getDrawerItemCountHorizontal_Landscape();
+        vCellCount = AppSettings.get().getDrawerItemCountVertical_Landscape();
     }
 
     private void calculatePage() {

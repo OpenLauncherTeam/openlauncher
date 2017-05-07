@@ -12,6 +12,7 @@ import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.Desktop;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by gregor on 07.05.17.
@@ -172,26 +173,83 @@ public class AppSettings {
         return getInt(R.string.pref_key__iconsize_global, 58);
     }
 
-    public boolean isAppFirstLaunch(){
+    public boolean isAppFirstLaunch() {
         return getBool(R.string.pref_key__is_app_first_start, true);
     }
 
-    public void setAppFirstLaunch(boolean value){
+    public void setAppFirstLaunch(boolean value) {
         setBool(R.string.pref_key__is_app_first_start, value);
     }
 
-    public int getDesktopMode(){
+    public int getDesktopMode() {
         return getInt(R.string.pref_key__desktop_mode, Desktop.DesktopMode.NORMAL);
     }
 
-    public boolean isDesktopLocked(){
+    public boolean isDesktopLocked() {
         return getBool(R.string.pref_key__is_desktop_locked, false);
     }
-    public void setDesktopLocked(boolean value){
+
+    public void setDesktopLocked(boolean value) {
         setBool(R.string.pref_key__is_desktop_locked, value);
     }
 
     public int getDrawerMode() {
-        return getInt(R.string.pref_key__drawer_mode, AppDrawerController.DrawerMode.PAGED);
+        return getInt(R.string.pref_key__drawer_mode, AppDrawerController.DrawerMode.VERTICAL);
+    }
+
+    public String getIconpackPackage() {
+        return getString(R.string.pref_key__icon_pack_name, "");
+    }
+
+    public boolean isDockShowLabel() {
+        return getBool(R.string.pref_key__is_dock_show_label, false);
+    }
+
+    public int getDrawerItemCountHorizontal_Portrait() {
+        return getInt(R.string.pref_key__drawer_item_count_horizontal__portrait, 5);
+    }
+
+    public int getDrawerItemCountVertical_Portrait() {
+        return getInt(R.string.pref_key__drawer_item_count_vertical__portrait, 6);
+    }
+
+    public int getDrawerItemCountHorizontal_Landscape() {
+        return getInt(R.string.pref_key__drawer_item_count_horizontal__landscape, 5);
+    }
+
+    public int getDrawerItemCountVertical_Landscape() {
+        return getInt(R.string.pref_key__drawer_item_count_vertical__landscape, 3);
+    }
+
+    public int getDesktopItemCountHorizontal_Portrait() {
+        return getInt(R.string.pref_key__desktop_item_count_horizontal__portrait, 5);
+    }
+
+    public int getDesktopItemCountVertical_Portrait() {
+        return getInt(R.string.pref_key__desktop_item_count_vertical__portrait, 6);
+    }
+
+    public int getDesktopItemCountHorizontal_Landscape() {
+        return getInt(R.string.pref_key__desktop_item_count_horizontal__landscape, 5);
+    }
+
+    public int getDesktopItemCountVertical_Landscape() {
+        return getInt(R.string.pref_key__desktop_item_count_vertical__landscape, 3);
+    }
+
+    public boolean isMinibarEnabled() {
+        return getBool(R.string.pref_key__is_minibar_enabled, true);
+    }
+
+    public void setMinibarEnabled(boolean value) {
+        setBool(R.string.pref_key__is_minibar_enabled, value);
+    }
+
+    public ArrayList<String> getMinibarArrangement() {
+        return new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key__minibar__arangement__tmp)));
+    }
+
+    public void setMinibarArrangement(ArrayList<String> value) {
+        setStringArray(R.string.pref_key__minibar__arangement__tmp, value.toArray(new String[value.size()]));
     }
 }

@@ -99,14 +99,8 @@ public class LauncherSettings {
 
     // edit this carefully as changing the type of a field will cause a parsing error when the launcher starts
     public static class GeneralSettings {
-
-        // icons
-        public String iconPackName = "";
-
         // desktop
         public int desktopHomePage;
-        public int desktopGridX = 4;
-        public int desktopGridY = 4;
         public boolean desktopSearchBar = true;
         public boolean fullscreen = false;
         public boolean showIndicator = true;
@@ -134,10 +128,6 @@ public class LauncherSettings {
         public int drawerCardColor = Color.WHITE;
         public int folderColor = Color.WHITE;
         public int drawerLabelColor = Color.DKGRAY;
-        public int drawerGridX = 4;
-        public int drawerGridY = 5;
-        public int drawerGridX_L = 5;
-        public int drawerGridY_L = 3;
         public boolean drawerSearchBar = true;
         public boolean drawerRememberPage = true;
         public ArrayList<String> hiddenList;
@@ -147,11 +137,6 @@ public class LauncherSettings {
         // dock
         public int dockColor = Color.TRANSPARENT;
         public int dockGridX = 5;
-        public boolean dockShowLabel = true;
-
-        // minibar
-        public boolean minBarEnable = true;
-        public ArrayList<String> miniBarArrangement;
 
         // other
         public LauncherAction.Theme theme = LauncherAction.Theme.Light;
@@ -167,5 +152,17 @@ public class LauncherSettings {
         public int desktopMode = Desktop.DesktopMode.NORMAL;
         public boolean desktopLock;
         public int drawerMode = AppDrawerController.DrawerMode.PAGED;
+        public String iconPackName = "";
+        public boolean dockShowLabel = false;
+
+        public int drawerGridX = 4;
+        public int drawerGridY = 5;
+        public int drawerGridX_L = 5;
+        public int drawerGridY_L = 3;
+        public int desktopGridX = 4;
+        public int desktopGridY = 4;
+
+        public boolean minBarEnable = true;
+        public ArrayList<String> miniBarArrangement;
     }
 }

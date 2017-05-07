@@ -25,7 +25,7 @@ import java.util.List;
 import com.benny.openlauncher.model.Item;
 
 public class Dock extends CellContainer implements View.OnDragListener, DesktopCallBack {
-
+    private AppSettings appSettings;
     public static int bottomInset;
     public View previousItemView;
     public Item previousItem;
@@ -33,7 +33,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     private Home home;
 
     public Dock(Context c) {
-        super(c);
+        this(c, null);
     }
 
     public Dock(Context c, AttributeSet attr) {
@@ -42,6 +42,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public void init() {
+        appSettings = AppSettings.get();
         if (isInEditMode()) {
             return;
         }
@@ -179,7 +180,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
         if (LauncherSettings.getInstance(getContext()).generalSettings != null) {
             int iconSize = AppSettings.get().getIconsizeGlobal();
-            if (LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel) {
+            if (appSettings.isDockShowLabel()) {
                 height = Tool.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
             } else {
                 height = getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, getContext()) + Dock.bottomInset;
@@ -208,7 +209,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public boolean addItemToPage(final Item item, int page) {
-        int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+        int flag = appSettings.isDockShowLabel() ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
         if (itemView == null) {
@@ -227,7 +228,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             item.x = positionToLayoutPrams.x;
             item.y = positionToLayoutPrams.y;
 
-            int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+            int flag = appSettings.isDockShowLabel() ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
             View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
             if (itemView != null) {
@@ -245,7 +246,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         item.x = x;
         item.y = y;
 
-        int flag = LauncherSettings.getInstance(getContext()).generalSettings.dockShowLabel ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+        int flag = appSettings.isDockShowLabel() ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         View itemView = ItemViewFactory.getItemView(getContext(), this, item, flag);
 
         if (itemView != null) {

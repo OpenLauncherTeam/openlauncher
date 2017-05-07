@@ -17,8 +17,10 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.benny.openlauncher.App;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
@@ -63,7 +65,7 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
         rv.setAdapter(adapter);
 
         int i = 0;
-        final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(context).generalSettings.miniBarArrangement;
+        final ArrayList<String> minBarArrangement = AppSettings.get().getMinibarArrangement();
         for (String act : minBarArrangement) {
             LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
             adapter.add(new AppItem(i, item, act.charAt(0) == '0'));
@@ -99,14 +101,15 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
 
     @Override
     public void onPause() {
-        LauncherSettings.getInstance(context).generalSettings.miniBarArrangement.clear();
+        ArrayList<String> minibarArrangement = new ArrayList<>();
         for (AppItem item : adapter.getAdapterItems()) {
             if (item.enable) {
-                LauncherSettings.getInstance(context).generalSettings.miniBarArrangement.add("0" + item.item.label.toString());
+                minibarArrangement.add("0" + item.item.label.toString());
             } else {
-                LauncherSettings.getInstance(context).generalSettings.miniBarArrangement.add("1" + item.item.label.toString());
+                minibarArrangement.add("1" + item.item.label.toString());
             }
         }
+        AppSettings.get().setMinibarArrangement(minibarArrangement);
         super.onPause();
     }
 

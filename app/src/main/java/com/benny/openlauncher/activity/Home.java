@@ -385,7 +385,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     private void initDock() {
         int iconSize = AppSettings.get().getIconsizeGlobal();
         dock.init();
-        if (generalSettings.dockShowLabel) {
+        if (appSettings.isDockShowLabel()) {
             dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;
         } else {
             dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, this) + Dock.bottomInset;
@@ -516,18 +516,17 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public void initMinibar() {
         final ArrayList<String> labels = new ArrayList<>();
         final ArrayList<Integer> icons = new ArrayList<>();
-        final ArrayList<String> minBarArrangement = generalSettings.miniBarArrangement;
+        ArrayList<String> miniBarArrangement = appSettings.getMinibarArrangement();
 
-        if (minBarArrangement == null) {
-            generalSettings.miniBarArrangement = new ArrayList<>();
+        if (miniBarArrangement.isEmpty()) {
             for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
-                generalSettings.miniBarArrangement.add("0" + item.label.toString());
+                miniBarArrangement.add("0" + item.label.toString());
                 labels.add(item.label.toString());
                 icons.add(item.icon);
             }
         } else {
-            if (minBarArrangement.size() == LauncherAction.actionDisplayItems.length) {
-                for (String act : minBarArrangement) {
+            if (miniBarArrangement.size() == LauncherAction.actionDisplayItems.length) {
+                for (String act : miniBarArrangement) {
                     if (act.charAt(0) == '0') {
                         LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
                         labels.add(item.label.toString());
@@ -535,9 +534,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     }
                 }
             } else {
-                generalSettings.miniBarArrangement = new ArrayList<>();
                 for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
-                    generalSettings.miniBarArrangement.add("0" + item.label.toString());
+                    miniBarArrangement.add("0" + item.label.toString());
                     labels.add(item.label.toString());
                     icons.add(item.icon);
                 }

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherSettings;
 import com.benny.openlauncher.util.Tool;
@@ -24,6 +25,7 @@ import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 import com.mikepenz.fastadapter_extensions.drag.ItemTouchCallback;
 import com.mikepenz.fastadapter_extensions.drag.SimpleDragCallback;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +67,7 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
         rv.setAdapter(adapter);
 
         int i = 0;
-        final ArrayList<String> minBarArrangement = LauncherSettings.getInstance(this).generalSettings.miniBarArrangement;
+        final ArrayList<String> minBarArrangement = AppSettings.get().getMinibarArrangement();
         for (String act : minBarArrangement) {
             LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
             adapter.add(new Item(i, item, act.charAt(0) == '0'));
@@ -92,13 +94,14 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
 
     @Override
     protected void onPause() {
-        LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.clear();
+        ArrayList<String> minibarArrangement = new ArrayList<>();
         for (Item item : adapter.getAdapterItems()) {
             if (item.enable) {
-                LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("0" + item.item.label.toString());
+                minibarArrangement.add("0" + item.item.label.toString());
             } else
-                LauncherSettings.getInstance(this).generalSettings.miniBarArrangement.add("1" + item.item.label.toString());
+                minibarArrangement.add("1" + item.item.label.toString());
         }
+        AppSettings.get().setMinibarArrangement(minibarArrangement);
         super.onPause();
     }
 
