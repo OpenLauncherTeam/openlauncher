@@ -1,6 +1,7 @@
 package com.benny.openlauncher.activity;
 
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -13,6 +14,7 @@ import android.view.View;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppSettings;
+import com.benny.openlauncher.util.LauncherAction;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +43,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         setSupportActionBar(toolbar);
         appSettings = AppSettings.get();
 
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_chevron_left_black_24dp));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24px));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 SettingsActivity.this.onBackPressed();
@@ -57,10 +59,16 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             switch (tag) {
                 case SettingsFragmentDesktop.TAG:
                     fragment = new SettingsFragmentDesktop();
+                    toolbar.setTitle(R.string.pref_title__desktop);
+                    break;
+                case SettingsFragmentAppDrawer.TAG:
+                    fragment = new SettingsFragmentAppDrawer();
+                    toolbar.setTitle(R.string.pref_title__app_drawer);
                     break;
                 case SettingsFragmentMaster.TAG:
                 default:
                     fragment = new SettingsFragmentMaster();
+                    toolbar.setTitle(R.string.settings);
                     break;
             }
         }
@@ -100,10 +108,10 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 if (settings.isKeyEqual(key, R.string.pref_key__cat_desktop)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentDesktop.TAG, true);
                     return true;
-                } /*else if (settings.isKeyEqual(key, R.string.pref_key__cat_app_drawer)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_app_drawer)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentAppDrawer.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_dock)) {
+                } /*else if (settings.isKeyEqual(key, R.string.pref_key__cat_dock)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentDock.TAG, true);
                     return true;
                 } else if (settings.isKeyEqual(key, R.string.pref_key__cat_gestures)) {
@@ -119,8 +127,13 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             }
             return super.onPreferenceTreeClick(screen, preference);
         }
-    }
 
+        @Override
+        public void onResume() {
+            super.onResume();
+            ((SettingsActivity)getActivity()).toolbar.setTitle(R.string.settings);
+        }
+    }
 
 
     public static class SettingsFragmentDesktop extends PreferenceFragment {
@@ -137,7 +150,27 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             if (isAdded() && preference.hasKey()) {
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
+
+                if (key.equals(getString(R.string.pref_key__minibar__arrangement__show_screen))) {
+                    LauncherAction.RunAction(LauncherAction.Action.EditMinBar, getActivity().getApplicationContext());
+                    return true;
+                }
             }
+            return super.onPreferenceTreeClick(screen, preference);
+        }
+    }
+
+    public static class SettingsFragmentAppDrawer extends PreferenceFragment {
+        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentAppDrawer";
+
+        public void onCreate(Bundle savedInstances) {
+            super.onCreate(savedInstances);
+            getPreferenceManager().setSharedPreferencesName("app");
+            addPreferencesFromResource(R.xml.preferences__app_drawer);
+        }
+
+        @Override
+        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
             return super.onPreferenceTreeClick(screen, preference);
         }
     }

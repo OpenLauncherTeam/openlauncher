@@ -9,15 +9,15 @@
     <string name="pref_key__drawer_mode" translatable="false">pref_key__drawer_mode</string>
     <string name="pref_key__icon_pack_name" translatable="false">pref_key__icon_pack_name</string>
     <string name="pref_key__is_dock_show_label" translatable="false">pref_key__is_dock_show_label</string>
-    <string name="pref_key__drawer_item_count_horizontal__portrait" translatable="false">pref_key__drawer_item_count_horizontal__portrait</string>
-    <string name="pref_key__drawer_item_count_vertical__portrait" translatable="false">pref_key__drawer_item_count_vertical__portrait</string>
-    <string name="pref_key__drawer_item_count_horizontal__landscape" translatable="false">pref_key__drawer_item_count_horizontal__landscape</string>
-    <string name="pref_key__drawer_item_count_vertical__landscape" translatable="false">pref_key__drawer_item_count_vertical__landscape</string>
-    <string name="pref_key__desktop_item_count_vertical" translatable="false">pref_key__desktop_item_count_vertical</string>
-    <string name="pref_key__desktop_item_count_horizontal" translatable="false">pref_key__desktop_item_count_horizontal</string>
+    <string name="pref_key___item_count_horizontal__portrait" translatable="false">pref_key___item_count_horizontal__portrait</string>
+    <string name="pref_key___item_count_vertical__portrait" translatable="false">pref_key___item_count_vertical__portrait</string>
+    <string name="pref_key___item_count_horizontal__landscape" translatable="false">pref_key___item_count_horizontal__landscape</string>
+    <string name="pref_key___item_count_vertical__landscape" translatable="false">pref_key___item_count_vertical__landscape</string>
     <string name="pref_key__is_minibar_enabled" translatable="false">pref_key__is_minibar_enabled</string>
     <string name="pref_key__minibar__arrangement__tmp" translatable="false">pref_key__minibar__arrangement__tmp</string>
     <string name="pref_key__dock_item_count_horizontal" translatable="false">pref_key__dock_item_count_horizontal</string>
+    <string name="pref_key__desktop_item_count_vertical" translatable="false">pref_key__desktop_item_count_vertical</string>
+    <string name="pref_key__desktop_item_count_horizontal" translatable="false">pref_key__desktop_item_count_horizontal</string>
     <string name="pref_key__is_desktop_searchbar_enabled" translatable="false">pref_key__is_desktop_searchbar_enabled</string>
     <string name="pref_key__is_desktop_show_label" translatable="false">pref_key__is_desktop_show_label</string>
     <string name="pref_key__is_desktop_show_page_indicator" translatable="false">pref_key__is_desktop_show_page_indicator</string>
@@ -25,14 +25,28 @@
     <string name="pref_key__desktop_page_current" translatable="false">pref_key__desktop_page_current</string>
     <string name="pref_key__is_open_app_drawer_on_swipe" translatable="false">pref_key__is_open_app_drawer_on_swipe</string>
     <string name="pref_key__is_drawer_use_card" translatable="false">pref_key__is_drawer_use_card</string>
-    <string name="pref_key__is_drawer_show_indicator" translatable="false">pref_key__is_drawer_show_indicator</string>
-    <string name="pref_key__is_drawer_remember_page" translatable="false">pref_key__is_drawer_remember_page</string>
+    <string name="pref_key__is_drawer_show_indicator" translatable="false">pref_key__is__show_indicator</string>
+    <string name="pref_key__is_drawer_remember_page" translatable="false">pref_key__is__remember_page</string>
     <string name="pref_key__drawer_background_color" translatable="false">pref_key__drawer_background_color</string>
     <string name="pref_key__drawer_card_color" translatable="false">pref_key__drawer_card_color</string>
-    <string name="pref_key__drawer_label_color" translatable="false">pref_key__drawer_label_color</string>
-    <string name="pref_key__folder_color" translatable="false">pref_key__folder_color</string>
+    <string name="pref_key__drawer_label_color" translatable="false">pref_key___label_color</string>
+    <string name="pref_key__desktop_folder_color" translatable="false">pref_key__folder_color</string>
     <string name="pref_key__docker_color" translatable="false">pref_key__docker_color</string>
     <string name="pref_key__hidden_apps_list" translatable="false">pref_key__hidden_apps_list</string>
+
+
+    <string name="pref_key__cat_desktop">pref_key__cat_desktop</string>
+    <string name="pref_key__cat_dock">pref_key__cat_dock</string>
+    <string name="pref_key__cat_app_drawer">pref_key__cat_app_drawer</string>
+    <string name="pref_key__cat_gestures">pref_key__cat_gestures</string>
+    <string name="pref_key__cat_icons">pref_key__cat_icons</string>
+    <string name="pref_key__cat_miscellaneous">pref_key__cat_various</string>
+    <string name="pref_key__title__grid">pref_key__title__grid</string>
+    <string name="pref_key__minibar__arrangement__show_screen">pref_key__minibar__arrangement__show_screen</string>
+    <string name="pref_key__drawer_item_count_horizontal__portrait">pref_key__drawer_item_count_horizontal__portrait</string>
+    <string name="pref_key__drawer_item_count_vertical__portrait">pref_key__drawer_item_count_vertical__portrait</string>
+    <string name="pref_key__drawer_item_count_horizontal__landscape">pref_key__drawer_item_count_horizontal__landscape</string>
+    <string name="pref_key__drawer_item_count_vertical__landscape">pref_key__drawer_item_count_vertical__landscape</string>
 
 
 </resources>

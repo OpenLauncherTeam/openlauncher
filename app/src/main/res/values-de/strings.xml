@@ -78,43 +78,43 @@
     <string name="settings_group_desktop">Desktop</string>
     <string name="settings_group_dock">Dock</string>
     <string name="settings_group_drawer">App Drawer</string>
-    <string name="settings_group_color">Farben</string>
+    <string name="pref_title__color">Farben</string>
     <string name="settings_group_icons">Icons</string>
     <string name="settings_group_input">Gesten</string>
-    <string name="settings_group_other">Anderes</string>
+    <string name="pref_title__miscellaneous">Anderes</string>
 
-    <string name="settings_desktopStyle">Stil</string>
-    <string name="settings_desktopStyle_summary">Wähle zwischen verschiedenen Stilen für deinen Desktop.</string>
-    <string name="settings_desktopSearch">Suchleiste</string>
-    <string name="settings_desktopSearch_summary">Zeige eine Suchleiste am oberen Desktoprand.</string>
-    <string name="settings_desktopSize">Größe</string>
+    <string name="pref_title__desktop_mode">Stil</string>
+    <string name="pref_summary__desktop_mode">Wähle zwischen verschiedenen Stilen für deinen Desktop.</string>
+    <string name="pref_title__is_desktop_searchbar_enabled">Suchleiste</string>
+    <string name="pref_summary__is_desktop_searchbar_enabled">Zeige eine Suchleiste am oberen Desktoprand.</string>
+    <string name="pref_title__size">Größe</string>
     <string name="settings_desktopSize_summary">Bestimme die Gittergröße des Desktops.</string>
-    <string name="settings_desktopFull">Vollbild</string>
-    <string name="settings_desktopFull_summary">Aktiviere den Vollbildmodus für deinen Desktop.</string>
-    <string name="settings_desktopIndicator">Seitenindikator</string>
-    <string name="settings_desktopIndicator_summary">Zeige den Seitenindikator auf dem Desktop an.</string>
-    <string name="settings_desktopLabel_summary">Zeige Anwendungs- und Ordnernamen auf dem Desktop.</string>
+    <string name="pref_title__is_desktop_fullscreen">Vollbild</string>
+    <string name="pref_summary__is_desktop_fullscreen">Aktiviere den Vollbildmodus für deinen Desktop.</string>
+    <string name="pref_title__is_desktop_show_page_indicator">Seitenindikator</string>
+    <string name="pref_summary__is_desktop_show_page_indicator">Zeige den Seitenindikator auf dem Desktop an.</string>
+    <string name="pref_summary__is_desktop_show_label">Zeige Anwendungs- und Ordnernamen auf dem Desktop.</string>
 
     <string name="settings_dockLabel">Beschriftung</string>
     <string name="settings_dockLabel_summary">Zeige Anwendungs- und Ordnernamen im Dock.</string>
     <string name="settings_dockSize">Größe</string>
     <string name="settings_dockSize_summary">Bestimme die Größe des Docks.</string>
 
-    <string name="settings_drawerStyle">Stil</string>
-    <string name="settings_drawerStyle_summary">Wähle zwischen einer Karten- oder einer vertikalen Ansicht.</string>
-    <string name="settings_drawerCard">Karten</string>
-    <string name="settings_drawerCard_summary">Benutze Karten für den Drawer Hintergrund.</string>
+    <string name="pref_title__style">Stil</string>
+    <string name="pref_summary__drawer_mode">Wähle zwischen einer Karten- oder einer vertikalen Ansicht.</string>
+    <string name="pref_title__is_drawer_use_card">Karten</string>
+    <string name="pref_summary__is_drawer_use_card">Benutze Karten für den Drawer Hintergrund.</string>
     <string name="settings_drawerSearch">Suchleiste</string>
     <string name="settings_drawerSearch_summary">Kann nur in der vertikalen Ansicht genutzt werden.</string>
     <string name="settings_drawerSearchIcon">Suchleiste Icon</string>
     <string name="settings_drawerSearchIcon_summary">Benutze das dunkle Standardicon in der Suchleiste.</string>
     <string name="settings_drawerSize">Größe</string>
     <string name="settings_drawerSize_summary">Bestimme die Gittergröße des App Drawers.</string>
-    <string name="settings_drawerPage">Merke letzte Seite</string>
-    <string name="settings_drawerPage_summary">Es wird sich nicht automatisch die erste Seite öffnen, wenn du den App Drawer
+    <string name="pref_title__is_drawer_remember_page">Merke letzte Seite</string>
+    <string name="pref_summary__is_drawer_remember_page">Es wird sich nicht automatisch die erste Seite öffnen, wenn du den App Drawer
         erneut öffnest.</string>
-    <string name="settings_drawerIndicator">Seitenindikator/Scrollbar</string>
-    <string name="settings_drawerIndicator_summary">Zeige den Seitenindikator bzw. die Scrollbar im Drawer an.</string>
+    <string name="pref_title__is_drawer_show_indicator">Seitenindikator/Scrollbar</string>
+    <string name="pref_summary__is_drawer_show_indicator">Zeige den Seitenindikator bzw. die Scrollbar im Drawer an.</string>
 
     <string name="settings_singleClick">Einfacher Klick</string>
     <string name="settings_singleClick_summary">Einfacher Klick Aktion.</string>
@@ -131,16 +131,16 @@
     <string name="settings_desktopSwipe">Drawer: Wischen</string>
     <string name="settings_desktopSwipe_summary">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
 
-    <string name="settings_colorDock">Dock</string>
-    <string name="settings_colorDock_summary">Dock Hintergrundfarbe.</string>
-    <string name="settings_colorDrawer">Drawer</string>
-    <string name="settings_colorDrawer_summary">Drawer Hintergrundfarbe.</string>
-    <string name="settings_colorCard">Karten</string>
-    <string name="settings_colorCard_summary">Hintergrundfarbe für die App Drawer Karten.</string>
-    <string name="settings_colorLabel">Beschriftung</string>
-    <string name="settings_colorLabel_summary">Farbe für die Beschriftungen in den Ordnern und im App Drawer.</string>
-    <string name="settings_colorFolder">Ordner</string>
-    <string name="settings_colorFolder_summary">Hintergrundfarbe für die Ordner auf dem Desktop.</string>
+    <string name="pref_title__docker_color">Dock</string>
+    <string name="pref_summary__docker_color">Dock Hintergrundfarbe.</string>
+    <string name="pref_title__drawer_background_color">Drawer Hintergrund</string>
+    <string name="pref_summary__drawer_background_color">Drawer Hintergrundfarbe.</string>
+    <string name="pref_title__drawer_card_color">Karten</string>
+    <string name="pref_summary__drawer_card_color">Hintergrundfarbe für die App Drawer Karten.</string>
+    <string name="pref_title__drawer_label_color">Beschriftung</string>
+    <string name="pref_summary__drawer_label_color">Farbe für die Beschriftungen in den Ordnern und im App Drawer.</string>
+    <string name="pref_title__desktop_folder_color">Ordner</string>
+    <string name="pref_summary__desktop_folder_color">Hintergrundfarbe für die Ordner auf dem Desktop.</string>
 
     <string name="settings_iconSize">Größe</string>
     <string name="settings_iconSize_summary">Größe für alle Anwendungsicons.</string>

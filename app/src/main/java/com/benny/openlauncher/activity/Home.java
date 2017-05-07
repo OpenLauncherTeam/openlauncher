@@ -500,8 +500,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         appDrawerController.getBackground().setAlpha(0);
         appDrawerController.reloadDrawerCardTheme();
 
-        switch (appSettings.getDrawerMode()) {
-            case AppDrawerController.DrawerMode.PAGED:
+        switch (appSettings.getAppDrawerMode()) {
+            case AppDrawerController.DrawerMode.HORIZONTAL_PAGED:
                 if (!AppSettings.get().isDrawerShowIndicator()) {
                     appDrawerController.getChildAt(1).setVisibility(View.GONE);
                 }

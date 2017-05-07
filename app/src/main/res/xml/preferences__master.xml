@@ -27,7 +27,7 @@
 
     <Preference
         android:icon="@drawable/ic_color_lens_black_24dp"
-        android:key="@string/pref_key__cat_various"
-        android:title="@string/pref_title__various" />
+        android:key="@string/pref_key__cat_miscellaneous"
+        android:title="@string/pref_title__miscellaneous" />
 
 </PreferenceScreen>

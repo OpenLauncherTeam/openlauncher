@@ -128,6 +128,11 @@ public class AppSettings {
         return prefApp.getInt(context.getString(ressourceId), defaultValue);
     }
 
+    private int getIntOfStringPref(int ressourceId, int defaultValue) {
+        String strNum = prefApp.getString(context.getString(ressourceId), Integer.toString(defaultValue));
+        return Integer.valueOf(strNum);
+    }
+
     private long getLong(int ressourceId, long defaultValue) {
         return prefApp.getLong(context.getString(ressourceId), defaultValue);
     }
@@ -190,7 +195,7 @@ public class AppSettings {
     }
 
     public int getDesktopMode() {
-        return getInt(R.string.pref_key__desktop_mode, Desktop.DesktopMode.NORMAL);
+        return getIntOfStringPref(R.string.pref_key__desktop_mode, Desktop.DesktopMode.NORMAL);
     }
 
     public boolean isDesktopLocked() {
@@ -201,8 +206,9 @@ public class AppSettings {
         setBool(R.string.pref_key__is_desktop_locked, value);
     }
 
-    public int getDrawerMode() {
-        return getInt(R.string.pref_key__drawer_mode, AppDrawerController.DrawerMode.VERTICAL);
+    // Is saved by ListPreference as string
+    public int getAppDrawerMode() {
+        return getIntOfStringPref(R.string.pref_key__drawer_mode, AppDrawerController.DrawerMode.VERTICAL);
     }
 
     public String getIconpackPackage() {
@@ -313,8 +319,8 @@ public class AppSettings {
         return getInt(R.string.pref_key__drawer_label_color, Color.DKGRAY);
     }
 
-    public int getFolderColor() {
-        return getInt(R.string.pref_key__folder_color, Color.WHITE);
+    public int getDestkopFolderColor() {
+        return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
     }
 
     public int getDockColor() {

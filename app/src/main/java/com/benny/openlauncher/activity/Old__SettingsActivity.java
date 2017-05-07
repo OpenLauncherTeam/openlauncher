@@ -42,9 +42,9 @@ public class Old__SettingsActivity extends BaseSettingsActivity implements Mater
                 .add(new MaterialPrefFragment.ButtonPref("dockSettings", getResources().getDrawable(R.drawable.ic_dock_black_24dp), getString(R.string.settings_group_dock), null))
                 .add(new MaterialPrefFragment.ButtonPref("drawerSettings", getResources().getDrawable(R.drawable.ic_apps_black_24dp), getString(R.string.settings_group_drawer), null))
                 .add(new MaterialPrefFragment.ButtonPref("inputSettings", getResources().getDrawable(R.drawable.ic_gesture_black_24dp), getString(R.string.settings_group_input), null))
-                .add(new MaterialPrefFragment.ButtonPref("colorsSettings", getResources().getDrawable(R.drawable.ic_color_lens_black_24dp), getString(R.string.settings_group_color), null))
+                .add(new MaterialPrefFragment.ButtonPref("colorsSettings", getResources().getDrawable(R.drawable.ic_color_lens_black_24dp), getString(R.string.pref_title__color), null))
                 .add(new MaterialPrefFragment.ButtonPref("iconsSettings", getResources().getDrawable(R.drawable.ic_android_black_24dp), getString(R.string.settings_group_icons), null))
-                .add(new MaterialPrefFragment.ButtonPref("otherSettings", getResources().getDrawable(R.drawable.ic_more_horiz_black_24dp), getString(R.string.settings_group_other), null))
+                .add(new MaterialPrefFragment.ButtonPref("otherSettings", getResources().getDrawable(R.drawable.ic_more_horiz_black_24dp), getString(R.string.pref_title__miscellaneous), null))
                 .setOnPrefClickedListener(this));
 
         getSupportFragmentManager().beginTransaction().add(R.id.ll, settings).commit();
@@ -56,7 +56,7 @@ public class Old__SettingsActivity extends BaseSettingsActivity implements Mater
         switch (settingsCategory) {
             default:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        .add(new MaterialPrefFragment.ButtonPref("editMiniBar", getString(R.string.settings_desktopMinibar), getString(R.string.settings_desktopMinibar_summary)))
+                        .add(new MaterialPrefFragment.ButtonPref("editMiniBar", getString(R.string.pref_title__minibar__arrangement__show_screen), getString(R.string.pref_summary__minibar__arrangement__show_screen)))
                         //.add(new MaterialPrefFragment.ButtonPref("desktopMode", (getString(R.string.settings_desktopStyle)), (getString(R.string.settings_desktopStyle_summary))))
                         /*.add(new MaterialPrefFragment.NUMPref("gridSizeDesktop", (getString(R.string.settings_desktopSize)), (getString(R.string.settings_desktopSize_summary)),
                                 new MaterialPrefFragment.NUMPref.NUMPrefItem("hGridSizeDesktop", (getString(R.string.settings_column)), generalSettings.desktopGridX, 4, 10),
@@ -80,7 +80,7 @@ public class Old__SettingsActivity extends BaseSettingsActivity implements Mater
                 break;
             case 2:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        .add(new MaterialPrefFragment.ButtonPref("drawerStyle", (getString(R.string.settings_drawerStyle)), (getString(R.string.settings_drawerStyle_summary))))
+                        .add(new MaterialPrefFragment.ButtonPref("drawerStyle", (getString(R.string.pref_title__style)), (getString(R.string.pref_summary__drawer_mode))))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_drawer);
                 break;
@@ -97,7 +97,7 @@ public class Old__SettingsActivity extends BaseSettingsActivity implements Mater
                         .add(new MaterialPrefFragment.ColorPref("folderColor", (getString(R.string.settings_colorFolder)), (getString(R.string.settings_colorFolder_summary)), generalSettings.folderColor))
                         .add(new MaterialPrefFragment.ColorPref("drawerLabelColor", (getString(R.string.settings_colorLabel)), (getString(R.string.settings_colorLabel_summary)), generalSettings.drawerLabelColor))
                         */.setOnPrefChangedListener(this).setOnPrefClickedListener(this));
-                getSupportActionBar().setTitle(R.string.settings_group_color);
+                getSupportActionBar().setTitle(R.string.pref_title__color);
                 break;
             case 5:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
@@ -112,7 +112,7 @@ public class Old__SettingsActivity extends BaseSettingsActivity implements Mater
                         .add(new MaterialPrefFragment.ButtonPref("backup", (getString(R.string.settings_backup)), (getString(R.string.settings_backup_summary))))
                         .add(new MaterialPrefFragment.ButtonPref("restart", getString(R.string.settings_othersRestart), getString(R.string.settings_othersRestart_summary)))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
-                getSupportActionBar().setTitle(R.string.settings_group_other);
+                getSupportActionBar().setTitle(R.string.pref_title__miscellaneous);
                 break;
         }
         setSettingsFragment(fragment);

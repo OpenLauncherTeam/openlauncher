@@ -76,6 +76,7 @@ dependencies {
     compile 'com.github.chyrta:AndroidOnboarder:0.6'
     compile 'cat.ereza:customactivityoncrash:1.5.0'
     compile 'de.psdev.licensesdialog:licensesdialog:1.8.2'
+    compile 'com.jaredrummler:colorpicker:1.0.0'
 
     // Tools
     compile 'com.jakewharton:butterknife:8.0.1'

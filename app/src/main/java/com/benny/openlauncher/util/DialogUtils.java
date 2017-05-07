@@ -8,14 +8,12 @@ import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.viewutil.IconLabelItem;
-import com.benny.openlauncher.widget.AppDrawerController;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -61,8 +59,8 @@ public class DialogUtils {
 
     public static void desktopStyleDialog(final Context context) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_desktopStyle))
-                .items(R.array.desktopStyleEntries)
+        builder.title(context.getString(R.string.pref_title__desktop_mode))
+                .items(R.array.entries__desktop_modes)
                 .itemsCallbackSingleChoice(AppSettings.get().getDesktopPageCurrent(), new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
@@ -74,8 +72,8 @@ public class DialogUtils {
 
     public static void appDrawerStyleDialog(final Context context) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.settings_drawerStyle))
-                .items(R.array.appDrawerStyleEntries)
+        builder.title(context.getString(R.string.pref_title__style))
+                .items(R.array.entries__drawer_modes)
                 .itemsCallbackSingleChoice(AppSettings.get().getDesktopPageCurrent(), new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
@@ -119,7 +117,7 @@ public class DialogUtils {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(context.getString(titleId))
                 .negativeText(R.string.cancel)
-                .items(R.array.gestureEntries)
+                .items(R.array.entries__gestures)
                 .itemsCallbackSingleChoice(LauncherAction.getActionItemIndex(selected) + 1, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {

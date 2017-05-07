@@ -5,7 +5,7 @@
         <item>Open App Drawer</item>
     </string-array>
 
-    <string-array name="gestureEntries">
+    <string-array name="entries__gestures">
         <item>None</item>
         <item>Minibar Settings</item>
         <item>Set Wallpaper</item>
@@ -18,7 +18,7 @@
         <item>Launch App</item>
     </string-array>
 
-    <integer-array name="gestureValues" translatable="false">
+    <integer-array name="values__gestures" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -30,7 +30,7 @@
         <item>8</item>
     </integer-array>
 
-    <string-array name="desktopStyleEntries">
+    <string-array name="entries__desktop_modes">
         <item>Normal</item>
         <item>Show All Apps (Experimental)</item>
     </string-array>
@@ -39,13 +39,17 @@
         <item>App Drawer</item>
     </string-array>
 
-    <string-array name="appDrawerStyleEntries">
-        <item>Paged</item>
+    <string-array name="entries__drawer_modes">
+        <item>Horizontal (Paged)</item>
         <item>Vertical</item>
     </string-array>
 
     <string-array name="wallpaperOptionEntries">
         <item>Set Wallpaper</item>
         <item>Blur Wallpaper</item>
+    </string-array>
+    <string-array name="values__from_zero__to__one">
+        <item>0</item>
+        <item>1</item>
     </string-array>
 </resources>
