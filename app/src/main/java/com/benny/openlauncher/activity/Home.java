@@ -2,6 +2,8 @@ package com.benny.openlauncher.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
@@ -282,7 +284,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 }
                 if (appSettings.getDesktopMode() == Desktop.DesktopMode.NORMAL) {
                     desktop.initDesktopNormal(Home.this);
-                } else if (appSettings.getDesktopMode() == Desktop.DesktopMode.SHOW_ALL_APPS){
+                } else if (appSettings.getDesktopMode() == Desktop.DesktopMode.SHOW_ALL_APPS) {
                     desktop.initDesktopShowAll(Home.this);
                 }
                 dock.initDockItem(Home.this);
@@ -730,10 +732,24 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     protected void onResume() {
+        // Restart if requested
+        if (appSettings.isAppRestartRequired()) {
+            appSettings.setAppRestartRequired(false);
+
+            Intent restartIntent = new Intent(this, Home.class);
+            PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556,
+                    restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+            AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, restartIntentP);
+            System.exit(0);
+            return;
+        }
+
         launcher = this;
         if (appWidgetHost != null) {
             appWidgetHost.startListening();
         }
+
         handleLauncherPause();
         super.onResume();
     }

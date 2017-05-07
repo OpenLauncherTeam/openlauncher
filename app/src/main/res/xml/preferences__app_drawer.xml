@@ -60,6 +60,16 @@
             android:summary="@string/pref_summary__is_drawer_remember_page"
             android:title="@string/pref_title__is_drawer_remember_page" />
 
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__is_open_app_drawer_on_swipe"
+            android:summary="@string/pref_summary__is_open_app_drawer_on_swipe"
+            android:title="@string/pref_title__is_open_app_drawer_on_swipe" />
+
+        <Preference
+            android:key="@string/pref_key__hidden_apps_list"
+            android:summary="@string/pref_summary__hidden_apps_list"
+            android:title="@string/pref_title__hidden_apps_list" />
 
     </PreferenceCategory>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory android:title="@string/pref_title_grid">
+    <PreferenceCategory android:title="@string/pref_title__size">
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="4"

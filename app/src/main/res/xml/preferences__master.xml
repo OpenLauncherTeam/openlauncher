@@ -16,11 +16,6 @@
         android:title="@string/pref_title__dock" />
 
     <Preference
-        android:icon="@drawable/ic_gesture_black_24dp"
-        android:key="@string/pref_key__cat_gestures"
-        android:title="@string/pref_title__gestures" />
-
-    <Preference
         android:icon="@drawable/ic_android_black_24dp"
         android:key="@string/pref_key__cat_icons"
         android:title="@string/pref_title__icons" />

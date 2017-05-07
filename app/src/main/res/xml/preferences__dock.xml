@@ -20,7 +20,6 @@
             android:summary="@string/pref_summary__is_dock_show_label"
             android:title="@string/pref_title__is_dock_show_label" />
 
-
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title__color">

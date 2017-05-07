@@ -57,33 +57,6 @@ public class DialogUtils {
                 .show();
     }
 
-    public static void desktopStyleDialog(final Context context) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.pref_title__desktop_mode))
-                .items(R.array.entries__desktop_modes)
-                .itemsCallbackSingleChoice(AppSettings.get().getDesktopPageCurrent(), new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        LauncherSettings.getInstance(context).setDesktopMode(position);
-                        return true;
-                    }
-                }).show();
-    }
-
-    public static void appDrawerStyleDialog(final Context context) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(R.string.pref_title__style))
-                .items(R.array.entries__drawer_modes)
-                .itemsCallbackSingleChoice(AppSettings.get().getDesktopPageCurrent(), new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                       // LauncherSettings.getInstance(context).generalSettings.drawerMode = AppDrawerController.DrawerMode.values()[position];
-                       // SETTER for it
-                        return true;
-                    }
-                }).show();
-    }
-
     public static void selectAppDialog(final Context context, final OnAppSelectedListener onAppSelectedListener) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         FastItemAdapter<IconLabelItem> fastItemAdapter = new FastItemAdapter<>();
@@ -171,9 +144,9 @@ public class DialogUtils {
     }
 
     public static void backupDialog(final Context context) {
-        final CharSequence[] options = {context.getResources().getString(R.string.settings_backup_titleBackup), context.getResources().getString(R.string.settings_backup_titleRestore)};
+        final CharSequence[] options = {context.getResources().getString(R.string.dialog__backup_app_settings__backup), context.getResources().getString(R.string.dialog__backup_app_settings__restore)};
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(R.string.settings_backup)
+        builder.title(R.string.pref_title__backup_app_settings)
                 .positiveText(R.string.cancel)
                 .items(options)
                 .itemsCallback(new MaterialDialog.ListCallback() {
@@ -182,7 +155,7 @@ public class DialogUtils {
                         PackageManager m = context.getPackageManager();
                         String s = context.getPackageName();
 
-                        if (options[item].equals(context.getResources().getString(R.string.settings_backup_titleBackup))) {
+                        if (options[item].equals(context.getResources().getString(R.string.dialog__backup_app_settings__backup))) {
                             File directory = new File(Environment.getExternalStorageDirectory() + "/OpenLauncher/");
                             if (!directory.exists()) {
                                 // noinspection ResultOfMethodCallIgnored
@@ -194,12 +167,12 @@ public class DialogUtils {
                                 s = p.applicationInfo.dataDir;
                                 copy(context, s + "/databases/home.db", directory + "/home.db");
                                 copy(context, s + "/files/generalSettings.json", directory + "/generalSettings.json");
-                                Toast.makeText(context, R.string.settings_backup_success, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, R.string.dialog__backup_app_settings__success, Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
-                                Toast.makeText(context, R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
                             }
                         }
-                        if (options[item].equals(context.getResources().getString(R.string.settings_backup_titleRestore))) {
+                        if (options[item].equals(context.getResources().getString(R.string.dialog__backup_app_settings__restore))) {
                             File directory = new File(Environment.getExternalStorageDirectory() + "/OpenLauncher/");
 
                             try {
@@ -207,9 +180,9 @@ public class DialogUtils {
                                 s = p.applicationInfo.dataDir;
                                 copy(context, directory + "/home.db", s + "/databases/home.db");
                                 copy(context, directory + "/generalSettings.json", s + "/files/generalSettings.json");
-                                Toast.makeText(context, R.string.settings_backup_success, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, R.string.dialog__backup_app_settings__success, Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
-                                Toast.makeText(context, R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
                             }
                             // this will stop your application and take out from it
                             // kill off the crashed app
@@ -245,7 +218,7 @@ public class DialogUtils {
             Tool.print("copied");
 
         } catch (Exception e) {
-            Toast.makeText(context, R.string.settings_backup_success_not, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
         }
     }
 

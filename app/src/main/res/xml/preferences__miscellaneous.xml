@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_title__miscellaneous">
+
+        <Preference
+            android:enabled="false"
+            android:key="@string/pref_key__backup_app_settings"
+            android:summary="@string/pref_summary__backup_app_settings"
+            android:title="@string/pref_title__backup_app_settings" />
+
+        <Preference
+            android:key="@string/pref_key__restart_launcher"
+            android:summary="@string/pref_summary__restart_launcher"
+            android:title="@string/pref_title__restart_launcher" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

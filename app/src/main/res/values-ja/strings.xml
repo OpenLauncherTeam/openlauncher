@@ -53,14 +53,14 @@
 
     <!-- Dialogs -->
 
-    <string name="settings_column">列</string>
-    <string name="settings_row">行</string>
-    <string name="settings_iconPack_title">アイコンパックの選択</string>
-    <string name="settings_iconPack_toast">READ_EXTERNAL_STORAGE アクセス許可がないとアイコンを取得できません。</string>
-    <string name="settings_backup_titleBackup">バックアップ</string>
-    <string name="settings_backup_titleRestore">復元</string>
-    <string name="settings_backup_success">完了しました。</string>
-    <string name="settings_backup_success_not">問題が発生しました。</string>
+    <string name="columns">列</string>
+    <string name="rows">行</string>
+    <string name="dialog__iconpack_title">アイコンパックの選択</string>
+    <string name="dialog__icon_pack_info_toast">READ_EXTERNAL_STORAGE アクセス許可がないとアイコンを取得できません。</string>
+    <string name="dialog__backup_app_settings__backup">バックアップ</string>
+    <string name="dialog__backup_app_settings__restore">復元</string>
+    <string name="dialog__backup_app_settings__success">完了しました。</string>
+    <string name="dialog__backup_app_settings__error">問題が発生しました。</string>
     <string name="settings_drawer_style_paged">ページ</string>
     <string name="settings_drawer_style_vertical">縦</string>
     <string name="settings_single_click_title">シングルクリック操作</string>
@@ -75,7 +75,7 @@
     <string name="settings_group_desktop">デスクトップ</string>
     <string name="settings_group_dock">ドック</string>
     <string name="settings_group_drawer">アプリドロワー</string>
-    <string name="settings_group_input">ジェスチャー</string>
+    <string name="pref_title__gestures">ジェスチャー</string>
     <string name="pref_title__color">色</string>
     <string name="settings_group_icons">アイコン</string>
     <string name="pref_title__miscellaneous">その他</string>
@@ -115,8 +115,8 @@
     <string name="pref_title__is_drawer_show_indicator">ドロワーのスクロールバー</string>
     <string name="pref_summary__is_drawer_show_indicator">ドロワーにページインジケーターを表示します。</string>
 
-    <string name="settings_desktopSwipe">ドロワーの高速スワイプ</string>
-    <string name="settings_desktopSwipe_summary">ドロワーのアプリアイコンを上にスワイプして、アプリドロワーを開きます。</string>
+    <string name="pref_title__is_open_app_drawer_on_swipe">ドロワーの高速スワイプ</string>
+    <string name="pref_summary__is_open_app_drawer_on_swipe">ドロワーのアプリアイコンを上にスワイプして、アプリドロワーを開きます。</string>
     <string name="settings_singleClick">シングルクリック</string>
     <string name="settings_singleClick_summary">シングルクリック操作。</string>
     <string name="settings_doubleClick">ダブルクリック</string>
@@ -141,17 +141,17 @@
     <string name="pref_title__drawer_label_color">ラベル</string>
     <string name="pref_summary__drawer_label_color">フォルダーとアプリドロワーのラベル色。</string>
 
-    <string name="settings_iconSize">サイズ</string>
-    <string name="settings_iconSize_summary">すべてのアプリアイコンのサイズ。</string>
-    <string name="settings_iconPack">アイコンパック</string>
-    <string name="settings_iconPack_summary">インストールしたアイコンパックの選択。</string>
-    <string name="settings_iconHide">アプリの非表示</string>
-    <string name="settings_iconHide_summary">ランチャーから選択したアプリを非表示にします。</string>
+    <string name="pref_title__iconsize_global">サイズ</string>
+    <string name="pref_summary__iconsize_global">すべてのアプリアイコンのサイズ。</string>
+    <string name="pref_title__icon_pack_name">アイコンパック</string>
+    <string name="pref_summary__icon_pack_name">インストールしたアイコンパックの選択。</string>
+    <string name="pref_title__hidden_apps_list">アプリの非表示</string>
+    <string name="pref_summary__hidden_apps_list">ランチャーから選択したアプリを非表示にします。</string>
 
-    <string name="settings_backup">バックアップ</string>
-    <string name="settings_backup_summary">設定をバックアップおよび復元します。</string>
-    <string name="settings_othersRestart">再起動</string>
-    <string name="settings_othersRestart_summary">動作がおかしい場合に、ランチャーを再起動します。</string>
+    <string name="pref_title__backup_app_settings">バックアップ</string>
+    <string name="pref_summary__backup_app_settings">設定をバックアップおよび復元します。</string>
+    <string name="pref_title__restart_launcher">再起動</string>
+    <string name="pref_summary__restart_launcher">動作がおかしい場合に、ランチャーを再起動します。</string>
 
     <!-- Other -->
 

@@ -334,4 +334,15 @@ public class AppSettings {
     public void setHiddenAppsList(ArrayList<String> value) {
         setStringArray(R.string.pref_key__hidden_apps_list, value.toArray(new String[value.size()]));
     }
+
+    public boolean isAppRestartRequired() {
+        return getBool(R.string.pref_key__is_app_restart_required, false);
+    }
+
+    @SuppressLint("ApplySharedPref")
+    public void setAppRestartRequired(boolean value) {
+        // MUST be committed
+        prefApp.edit().putBoolean(context.getString
+                (R.string.pref_key__is_app_restart_required), value).commit();
+    }
 }

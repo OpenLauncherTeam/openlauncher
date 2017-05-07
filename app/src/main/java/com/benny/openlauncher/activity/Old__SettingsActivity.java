@@ -41,7 +41,7 @@ public class Old__SettingsActivity extends BaseSettingsActivity implements Mater
                 .add(new MaterialPrefFragment.ButtonPref("desktopSettings", getResources().getDrawable(R.drawable.ic_desktop_windows_black_24dp), getString(R.string.settings_group_desktop), null))
                 .add(new MaterialPrefFragment.ButtonPref("dockSettings", getResources().getDrawable(R.drawable.ic_dock_black_24dp), getString(R.string.settings_group_dock), null))
                 .add(new MaterialPrefFragment.ButtonPref("drawerSettings", getResources().getDrawable(R.drawable.ic_apps_black_24dp), getString(R.string.settings_group_drawer), null))
-                .add(new MaterialPrefFragment.ButtonPref("inputSettings", getResources().getDrawable(R.drawable.ic_gesture_black_24dp), getString(R.string.settings_group_input), null))
+                .add(new MaterialPrefFragment.ButtonPref("inputSettings", getResources().getDrawable(R.drawable.ic_gesture_black_24dp), getString(R.string.pref_title__gestures), null))
                 .add(new MaterialPrefFragment.ButtonPref("colorsSettings", getResources().getDrawable(R.drawable.ic_color_lens_black_24dp), getString(R.string.pref_title__color), null))
                 .add(new MaterialPrefFragment.ButtonPref("iconsSettings", getResources().getDrawable(R.drawable.ic_android_black_24dp), getString(R.string.settings_group_icons), null))
                 .add(new MaterialPrefFragment.ButtonPref("otherSettings", getResources().getDrawable(R.drawable.ic_more_horiz_black_24dp), getString(R.string.pref_title__miscellaneous), null))
@@ -87,7 +87,7 @@ public class Old__SettingsActivity extends BaseSettingsActivity implements Mater
             case 3:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
-                getSupportActionBar().setTitle(R.string.settings_group_input);
+                getSupportActionBar().setTitle(R.string.pref_title__gestures);
                 break;
             case 4:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
@@ -103,14 +103,14 @@ public class Old__SettingsActivity extends BaseSettingsActivity implements Mater
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
                         //.add(new MaterialPrefFragment.NUMPref("iconSize", (getString(R.string.settings_iconSize)), (getString(R.string.settings_iconSize_summary)), generalSettings.iconSize, 30, 80))
                         //.add(new MaterialPrefFragment.ButtonPref("iconPack", (getString(R.string.settings_iconPack)), (getString(R.string.settings_iconPack_summary))))
-                        .add(new MaterialPrefFragment.ButtonPref("iconHide", (getString(R.string.settings_iconHide)), (getString(R.string.settings_iconHide_summary))))
+                        .add(new MaterialPrefFragment.ButtonPref("iconHide", (getString(R.string.pref_title__hidden_apps_list)), (getString(R.string.pref_summary__hidden_apps_list))))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.settings_group_icons);
                 break;
             case 6:
                 fragment = MaterialPrefFragment.newInstance(new MaterialPrefFragment.Builder(this, Color.DKGRAY, ContextCompat.getColor(this, R.color.Light_TextColor), ContextCompat.getColor(this, R.color.Light_Background), ContextCompat.getColor(this, R.color.colorAccent), true)
-                        .add(new MaterialPrefFragment.ButtonPref("backup", (getString(R.string.settings_backup)), (getString(R.string.settings_backup_summary))))
-                        .add(new MaterialPrefFragment.ButtonPref("restart", getString(R.string.settings_othersRestart), getString(R.string.settings_othersRestart_summary)))
+                        .add(new MaterialPrefFragment.ButtonPref("backup", (getString(R.string.pref_title__backup_app_settings)), (getString(R.string.pref_summary__backup_app_settings))))
+                        .add(new MaterialPrefFragment.ButtonPref("restart", getString(R.string.pref_title__restart_launcher), getString(R.string.pref_summary__restart_launcher)))
                         .setOnPrefChangedListener(this).setOnPrefClickedListener(this));
                 getSupportActionBar().setTitle(R.string.pref_title__miscellaneous);
                 break;
@@ -204,63 +204,6 @@ public class Old__SettingsActivity extends BaseSettingsActivity implements Mater
 
     @Override
     public void onPrefClicked(String id) {
-        final LauncherSettings launcherSettings = LauncherSettings.getInstance(this);
-        LauncherSettings.GeneralSettings generalSettings = launcherSettings.generalSettings;
-        switch (id) {
-            case "desktopSettings":
-                onSettingsSelected(0);
-                break;
-            case "dockSettings":
-                onSettingsSelected(1);
-                break;
-            case "drawerSettings":
-                onSettingsSelected(2);
-                break;
-            case "inputSettings":
-                onSettingsSelected(3);
-                break;
-            case "colorsSettings":
-                onSettingsSelected(4);
-                break;
-            case "iconsSettings":
-                onSettingsSelected(5);
-                break;
-            case "otherSettings":
-                onSettingsSelected(6);
-                break;
-            case "restart":
-                if (Home.launcher != null)
-                    Home.launcher.recreate();
-                requireLauncherRestart = false;
-                finish();
-                break;
-            case "editMiniBar":
-                LauncherAction.RunAction(LauncherAction.Action.EditMinBar, this);
-                break;
-            case "iconPack":
-                AppManager.getInstance(this).startPickIconPackIntent(this);
-                break;
-            case "drawerStyle":
-                DialogUtils.appDrawerStyleDialog(this);
-                prepareRestart();
-                break;
-            case "desktopMode":
-                DialogUtils.desktopStyleDialog(this);
-                prepareRestart();
-                break;
-            case "iconHide":
-                Intent intent = new Intent(Old__SettingsActivity.this, HideAppsSelectionActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
-                break;
-            case "backup":
-                if (ActivityCompat.checkSelfPermission(Old__SettingsActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    DialogUtils.backupDialog(this);
-                } else {
-                    ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
-                }
-                break;
-        }
     }
 
     @Override

@@ -61,10 +61,10 @@
 
     <string name="settings">Einstellungen</string>
 
-    <string name="settings_column">Spalten</string>
-    <string name="settings_row">Reihen</string>
-    <string name="settings_iconPack_title">Wähle ein Icon Pack aus</string>
-    <string name="settings_iconPack_toast">Du must zuerst die Berechtigung \"Manifest.permission.READ_EXTERNAL_STORAGE\" gewähren.</string>
+    <string name="columns">Spalten</string>
+    <string name="rows">Reihen</string>
+    <string name="dialog__iconpack_title">Wähle ein Icon Pack aus</string>
+    <string name="dialog__icon_pack_info_toast">Du must zuerst die Berechtigung \"Manifest.permission.READ_EXTERNAL_STORAGE\" gewähren.</string>
 
     <string name="settings_drawer_style_paged">Karten</string>
     <string name="settings_drawer_style_vertical">Vertikal</string>
@@ -80,7 +80,7 @@
     <string name="settings_group_drawer">App Drawer</string>
     <string name="pref_title__color">Farben</string>
     <string name="settings_group_icons">Icons</string>
-    <string name="settings_group_input">Gesten</string>
+    <string name="pref_title__gestures">Gesten</string>
     <string name="pref_title__miscellaneous">Anderes</string>
 
     <string name="pref_title__desktop_mode">Stil</string>
@@ -128,8 +128,8 @@
     <string name="settings_swipeDown_summary">Nach unten Wischen Aktion.</string>
     <string name="settings_swipeUp">Nach oben Wischen</string>
     <string name="settings_swipeUp_summary">Nach oben Wischen Aktion.</string>
-    <string name="settings_desktopSwipe">Drawer: Wischen</string>
-    <string name="settings_desktopSwipe_summary">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
+    <string name="pref_title__is_open_app_drawer_on_swipe">Drawer: Wischen</string>
+    <string name="pref_summary__is_open_app_drawer_on_swipe">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
 
     <string name="pref_title__dock_background_color">Dock Hintergundfarbe</string>
     <string name="pref_summary__dock_background_color">Hintergrundfarbe des Docks</string>
@@ -142,22 +142,22 @@
     <string name="pref_title__desktop_folder_color">Ordner</string>
     <string name="pref_summary__desktop_folder_color">Hintergrundfarbe für die Ordner auf dem Desktop.</string>
 
-    <string name="settings_iconSize">Größe</string>
-    <string name="settings_iconSize_summary">Größe für alle Anwendungsicons.</string>
-    <string name="settings_iconPack">Icon Pack</string>
-    <string name="settings_iconPack_summary">Wähle ein installiertes Icon Pack.</string>
-    <string name="settings_iconHide">Anwendungen ausblenden</string>
-    <string name="settings_iconHide_summary">Blende ausgewählte Anwendungen im App Drawer aus.</string>
+    <string name="pref_title__iconsize_global">Größe</string>
+    <string name="pref_summary__iconsize_global">Größe für alle Anwendungsicons.</string>
+    <string name="pref_title__icon_pack_name">Icon Pack</string>
+    <string name="pref_summary__icon_pack_name">Wähle ein installiertes Icon Pack.</string>
+    <string name="pref_title__hidden_apps_list">Anwendungen ausblenden</string>
+    <string name="pref_summary__hidden_apps_list">Blende ausgewählte Anwendungen im App Drawer aus.</string>
 
-    <string name="settings_othersRestart">Neustart</string>
-    <string name="settings_othersRestart_summary">Starte den Launcher neu, um alle Änderungen zu übernehmen.</string>
+    <string name="pref_title__restart_launcher">Neustart</string>
+    <string name="pref_summary__restart_launcher">Starte den Launcher neu, um alle Änderungen zu übernehmen.</string>
 
-    <string name="settings_backup">Sicherung</string>
-    <string name="settings_backup_summary">Sichere deine Einstellungen oder stelle sie wieder her.</string>
-    <string name="settings_backup_titleBackup">Sicherung</string>
-    <string name="settings_backup_titleRestore">Wiederherstellung</string>
-    <string name="settings_backup_success">Erfolgreich ausgeführt.</string>
-    <string name="settings_backup_success_not">Etwas ging schief.</string>
+    <string name="pref_title__backup_app_settings">Sicherung</string>
+    <string name="pref_summary__backup_app_settings">Sichere deine Einstellungen oder stelle sie wieder her.</string>
+    <string name="dialog__backup_app_settings__backup">Sicherung</string>
+    <string name="dialog__backup_app_settings__restore">Wiederherstellung</string>
+    <string name="dialog__backup_app_settings__success">Erfolgreich ausgeführt.</string>
+    <string name="dialog__backup_app_settings__error">Etwas ging schief.</string>
 
     //Icon hide
 
