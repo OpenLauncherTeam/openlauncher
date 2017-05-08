@@ -24,22 +24,17 @@ import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.Tool;
 
 public class DragOptionView extends CardView {
+    public boolean isDraggedFromDrawer = false;
+    public boolean dragging = false;
     private View[] hideViews;
     private LinearLayout dragOptions;
-
     private TextView editIcon;
     private TextView removeIcon;
     private TextView infoIcon;
     private TextView deleteIcon;
-
     private Home home;
     private Long animSpeed = 120L;
     private boolean init = false;
-    public boolean dragging = false;
-
-    public void setHome(Home home) {
-        this.home = home;
-    }
 
     public DragOptionView(Context context) {
         super(context);
@@ -49,6 +44,10 @@ public class DragOptionView extends CardView {
     public DragOptionView(Context context, AttributeSet attr) {
         super(context, attr);
         init();
+    }
+
+    public void setHome(Home home) {
+        this.home = home;
     }
 
     public void setAutoHideView(View... v) {
@@ -252,9 +251,8 @@ public class DragOptionView extends CardView {
 
     private void animShowView() {
         if (hideViews != null) {
-            for (View view : hideViews) {
-                view.animate().alpha(0).setDuration(Math.round(animSpeed / 1.3f)).setInterpolator(new AccelerateDecelerateInterpolator());
-            }
+            isDraggedFromDrawer = true;
+            Tool.invisibleViews(Math.round(animSpeed / 1.3f),hideViews);
             postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -340,13 +338,10 @@ public class DragOptionView extends CardView {
                         removeIcon.setVisibility(View.GONE);
                         infoIcon.setVisibility(View.GONE);
                         deleteIcon.setVisibility(View.GONE);
-                        if (hideViews != null) {
-                            for (View view : hideViews) {
-                                view.animate().alpha(1).setDuration(Math.round(animSpeed / 1.3f)).setInterpolator(new AccelerateDecelerateInterpolator());
-                            }
-                        }
+                        Tool.visibleViews(Math.round(animSpeed / 1.3f), hideViews);
                     }
                 });
+                isDraggedFromDrawer = false;
 
                 home.dock.revertLastItem();
                 home.desktop.revertLastItem();

@@ -549,8 +549,7 @@ public class CellContainer extends ViewGroup {
         int curLeft = l;
         int curTop = t;
         int curRight = l + cellWidth;
-        //Applying offset to fix display issue
-        int curBottom = t + cellHeight + 1;
+        int curBottom = t + cellHeight;
 
         for (int i = 0; i < cellSpanH; i++) {
             if (i != 0) {
@@ -560,7 +559,7 @@ public class CellContainer extends ViewGroup {
             for (int j = 0; j < cellSpanV; j++) {
                 if (j != 0) {
                     curTop += cellHeight;
-                    curBottom += cellHeight + 1;
+                    curBottom += cellHeight;
                 }
 
                 Rect rect = new Rect(curLeft, curTop, curRight, curBottom);

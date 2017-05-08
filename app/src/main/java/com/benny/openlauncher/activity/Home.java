@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.SearchManager;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
@@ -113,12 +114,23 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         shortcutIntentFilter.addAction("com.android.launcher.action.INSTALL_SHORTCUT");
     }
 
+    private final BroadcastReceiver shortcutReceiver = new ShortcutReceiver();
+    private final BroadcastReceiver appUpdateReceiver = new AppUpdateReceiver();
     @BindView(R.id.desktop)
     public Desktop desktop;
     @BindView(R.id.clockFrame)
     public FrameLayout clockFrame;
     @BindView(R.id.clockText)
     public TextView clockText;
+    private final BroadcastReceiver timeChangedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (action.equals(Intent.ACTION_TIME_CHANGED) || action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
+                updateDesktopClock();
+            }
+        }
+    };
     @BindView(R.id.searchBar)
     public SearchBar searchBar;
     @BindView(R.id.background)
@@ -153,29 +165,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public DragOptionView dragOptionPanel;
     @BindView(R.id.desktopEditOptionPanel)
     public DesktopOptionView desktopEditOptionPanel;
-
     private PagerIndicator appDrawerIndicator;
     private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
     private CallLogObserver callLogObserver;
     private AppSettings appSettings;
-
     // region for the APP_DRAWER_ANIMATION
     private int cx;
     private int cy;
     private int rad;
-
-    private final BroadcastReceiver shortcutReceiver = new ShortcutReceiver();
-    private final BroadcastReceiver appUpdateReceiver = new AppUpdateReceiver();
-    private final BroadcastReceiver timeChangedReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (action.equals(Intent.ACTION_TIME_CHANGED) || action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-                updateDesktopClock();
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -338,7 +336,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 }
 
                 Tool.visibleViews(dock, desktop, desktopIndicator);
-                updateSearchView(true);
+                updateSearchView(!dragOptionPanel.isDraggedFromDrawer);
+                dragOptionPanel.isDraggedFromDrawer = false;
             }
 
             @Override
@@ -541,6 +540,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         searchBar.setCallBack(new SearchBar.CallBack() {
             @Override
             public void onInternetSearch(String string) {
+                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+                intent.putExtra(SearchManager.QUERY, string);
+                try {
+                    startActivity(intent);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
 
             @Override

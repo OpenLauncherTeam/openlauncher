@@ -53,7 +53,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int drawablePadding, int forceSize) {
         this(context, icon, label, listener, Gravity.START);
         this.drawablePadding = drawablePadding;
-        if (forceSize != -1) {
+        if (forceSize != -1 && icon != null) {
             this.icon = new BitmapDrawable(context.getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(icon), forceSize, forceSize, true));
         }
     }
@@ -63,7 +63,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         this.textColor = textColor;
         this.drawablePadding = drawablePadding;
         this.forceSize = forceSize;
-        if (forceSize != -1) {
+        if (forceSize != -1 && icon != null) {
             this.icon = new BitmapDrawable(context.getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(icon), forceSize, forceSize, true));
         }
     }
