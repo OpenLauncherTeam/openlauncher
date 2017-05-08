@@ -180,8 +180,9 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         if (appSettings.isDockShowLabel()) {
             height = Tool.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
         } else {
-            height = getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, getContext()) + Dock.bottomInset;
+            height = Tool.dp2px(16 + iconSize + 10, getContext()) + Dock.bottomInset;
         }
+        getLayoutParams().height = height;
 
         setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec), height);
 
