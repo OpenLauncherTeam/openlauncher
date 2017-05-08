@@ -27,7 +27,7 @@ public class AppDrawerPaged extends SmoothViewPager {
 
     private Home home;
 
-    private static int vCellCount, hCellCount;
+    private static int rowCellCount, columnCellCount;
 
     private PagerIndicator appDrawerIndicator;
 
@@ -63,19 +63,19 @@ public class AppDrawerPaged extends SmoothViewPager {
     }
 
     private void setPortraitValue() {
-        hCellCount = AppSettings.get().getDrawerItemCountHorizontal_Portrait();
-        vCellCount = AppSettings.get().getDrawerItemCountVertical_Portrait();
+        columnCellCount = AppSettings.get().getDrawerColumnCount_Portrait();
+        rowCellCount = AppSettings.get().getDrawerRowCount_Portrait();
     }
 
     private void setLandscapeValue() {
-        hCellCount = AppSettings.get().getDrawerItemCountHorizontal_Landscape();
-        vCellCount = AppSettings.get().getDrawerItemCountVertical_Landscape();
+        columnCellCount = AppSettings.get().getDrawerColumnCount_Landscape();
+        rowCellCount = AppSettings.get().getDrawerRowCount_Landscape();
     }
 
     private void calculatePage() {
         pageCount = 0;
         int appsSize = apps.size();
-        while ((appsSize = appsSize - (vCellCount * hCellCount)) >= (vCellCount * hCellCount) || (appsSize > -(vCellCount * hCellCount))) {
+        while ((appsSize = appsSize - (rowCellCount * columnCellCount)) >= (rowCellCount * columnCellCount) || (appsSize > -(rowCellCount * columnCellCount))) {
             pageCount++;
         }
     }
@@ -125,8 +125,8 @@ public class AppDrawerPaged extends SmoothViewPager {
     public class Adapter extends SmoothPagerAdapter {
 
         private View getItemView(int page, int x, int y) {
-            int pagePos = y * hCellCount + x;
-            final int pos = vCellCount * hCellCount * page + pagePos;
+            int pagePos = y * columnCellCount + x;
+            final int pos = rowCellCount * columnCellCount * page + pagePos;
 
             if (pos >= apps.size())
                 return null;
@@ -163,10 +163,10 @@ public class AppDrawerPaged extends SmoothViewPager {
                     ((CardView) layout.getChildAt(0)).setCardElevation(Tool.dp2px(4, getContext()));
                 }
                 CellContainer cc = (CellContainer) layout.findViewById(R.id.group);
-                cc.setGridSize(hCellCount, vCellCount);
+                cc.setGridSize(columnCellCount, rowCellCount);
 
-                for (int x = 0; x < hCellCount; x++) {
-                    for (int y = 0; y < vCellCount; y++) {
+                for (int x = 0; x < columnCellCount; x++) {
+                    for (int y = 0; y < rowCellCount; y++) {
                         View view = getItemView(i, x, y);
                         if (view != null) {
                             CellContainer.LayoutParams lp = new CellContainer.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, x, y, 1, 1);

@@ -5,29 +5,29 @@
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="4"
-            android:key="@string/pref_key__drawer_item_count_horizontal__portrait"
-            android:title="@string/item_count_horizontal"
+            android:key="@string/pref_key__drawer_column_count__portrait"
+            android:title="@string/columns"
             app:maxValue="10"
             app:minValue="2" />
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="5"
-            android:key="@string/pref_key__drawer_item_count_vertical__portrait"
-            android:title="@string/item_count_vertical"
+            android:key="@string/pref_key__drawer_row_count__portrait"
+            android:title="@string/rows"
             app:maxValue="10"
             app:minValue="2" />
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="4"
-            android:key="@string/pref_key__drawer_item_count_horizontal__landscape"
-            android:title="@string/item_count_horizontal_landscape"
+            android:key="@string/pref_key__drawer_column_count__landscape"
+            android:title="@string/columns_landscape"
             app:maxValue="10"
             app:minValue="2" />
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="5"
-            android:key="@string/pref_key__drawer_item_count_vertical__landscape"
-            android:title="@string/item_count_vertical_landscape"
+            android:key="@string/pref_key__drawer_row_count__landscape"
+            android:title="@string/rows_landscape"
             app:maxValue="10"
             app:minValue="2" />
 

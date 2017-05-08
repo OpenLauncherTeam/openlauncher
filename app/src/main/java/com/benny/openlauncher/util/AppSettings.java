@@ -210,32 +210,32 @@ public class AppSettings {
         return getBool(R.string.pref_key__is_drawer_show_label, true);
     }
 
-    public int getDrawerItemCountHorizontal_Portrait() {
-        return getInt(R.string.pref_key__drawer_item_count_horizontal__portrait, 5);
+    public int getDrawerColumnCount_Portrait() {
+        return getInt(R.string.pref_key__drawer_column_count__portrait, 5);
     }
 
-    public int getDrawerItemCountVertical_Portrait() {
-        return getInt(R.string.pref_key__drawer_item_count_vertical__portrait, 6);
+    public int getDrawerRowCount_Portrait() {
+        return getInt(R.string.pref_key__drawer_row_count__portrait, 6);
     }
 
-    public int getDrawerItemCountHorizontal_Landscape() {
-        return getInt(R.string.pref_key__drawer_item_count_horizontal__landscape, 5);
+    public int getDrawerColumnCount_Landscape() {
+        return getInt(R.string.pref_key__drawer_column_count__landscape, 5);
     }
 
-    public int getDrawerItemCountVertical_Landscape() {
-        return getInt(R.string.pref_key__drawer_item_count_vertical__landscape, 3);
+    public int getDrawerRowCount_Landscape() {
+        return getInt(R.string.pref_key__drawer_row_count__landscape, 3);
     }
 
-    public int getDesktopItemCountHorizontal() {
-        return getInt(R.string.pref_key__desktop_item_count_horizontal, 5);
+    public int getDesktopColumnCount() {
+        return getInt(R.string.pref_key__desktop_column_count, 5);
     }
 
-    public int getDesktopItemCountVertical() {
-        return getInt(R.string.pref_key__desktop_item_count_vertical, 6);
+    public int getDesktopRowCount() {
+        return getInt(R.string.pref_key__desktop_row_count, 6);
     }
 
-    public int getDockItemCountHorizontal() {
-        return getInt(R.string.pref_key__dock_item_count_horizontal, 5);
+    public int getDockColumnCount() {
+        return getInt(R.string.pref_key__dock_column_count, 5);
     }
 
     public boolean isMinibarEnabled() {

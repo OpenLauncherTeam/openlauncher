@@ -83,8 +83,8 @@
 
     <!-- Dock -->
 
-    <string name="pref_title__dock_item_count_horizontal">Size</string>
-    <string name="pref_summary__dock_item_count_horizontal">Set the dock size.</string>
+    <string name="pref_title__dock_column_count">Size</string>
+    <string name="pref_summary__dock_column_count">Set the dock size.</string>
     <string name="pref_title__is_dock_show_label">Label</string>
     <string name="pref_summary__is_dock_show_label">Show app and folder names in the dock.</string>
 
@@ -157,10 +157,10 @@
     <string name="dialog__backup_app_settings__restore">Restore</string>
     <string name="dialog__backup_app_settings__success">Successfully done.</string>
     <string name="dialog__backup_app_settings__error">Something went wrong.</string>
-    <string name="item_count_horizontal">Horizontal count of items</string>
-    <string name="item_count_vertical">Vertical count of items</string>
-    <string name="item_count_horizontal_landscape">Horizontal count of items (Landscape)</string>
-    <string name="item_count_vertical_landscape">Vertical count of items (Landscape)</string>
+    <string name="columns">Columns</string>
+    <string name="rows">Rows</string>
+    <string name="columns_landscape">Columns (Landscape)</string>
+    <string name="rows_landscape">Rows (Landscape)</string>
     <string name="pref_summary__is_drawer_remember_position">Automatically save and restore position of app drawer</string>
     <string name="search_online">Search Online…</string>
 </resources>

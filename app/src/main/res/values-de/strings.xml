@@ -76,8 +76,8 @@
 
     <string name="pref_title__is_dock_show_label">Beschriftung</string>
     <string name="pref_summary__is_dock_show_label">Zeige Anwendungs- und Ordnernamen im Dock.</string>
-    <string name="pref_title__dock_item_count_horizontal">Größe</string>
-    <string name="pref_summary__dock_item_count_horizontal">Bestimme die Größe des Docks.</string>
+    <string name="pref_title__dock_column_count">Größe</string>
+    <string name="pref_summary__dock_column_count">Bestimme die Größe des Docks.</string>
 
     <string name="pref_title__style">Stil</string>
     <string name="pref_summary__drawer_mode">Wähle zwischen einer Karten- oder einer vertikalen Ansicht.</string>

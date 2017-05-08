@@ -5,9 +5,9 @@
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="5"
-            android:key="@string/pref_key__dock_item_count_horizontal"
-            android:title="@string/pref_title__dock_item_count_horizontal"
-            android:summary="@string/pref_summary__dock_item_count_horizontal"
+            android:key="@string/pref_key__dock_column_count"
+            android:title="@string/pref_title__dock_column_count"
+            android:summary="@string/pref_summary__dock_column_count"
             app:maxValue="10"
             app:minValue="2" />
 

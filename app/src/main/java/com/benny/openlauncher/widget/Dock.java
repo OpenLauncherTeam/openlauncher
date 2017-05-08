@@ -49,14 +49,14 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     public void initDockItem(Home home) {
-        int column = AppSettings.get().getDockItemCountHorizontal();
-        setGridSize(column, 1);
+        int columns = AppSettings.get().getDockColumnCount();
+        setGridSize(columns, 1);
         List<Item> dockItems = Home.db.getDock();
 
         this.home = home;
         removeAllViews();
         for (Item item : dockItems) {
-            if (item.x < column && item.y == 0) {
+            if (item.x < columns && item.y == 0) {
                 addItemToPage(item, 0);
             }
         }

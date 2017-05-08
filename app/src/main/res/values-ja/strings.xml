@@ -77,8 +77,8 @@
     <string name="pref_title__is_desktop_show_label">ラベル</string>
     <string name="pref_summary__is_desktop_show_label">デスクトップにアプリとフォルダー名を表示します。</string>
 
-    <string name="pref_title__dock_item_count_horizontal">サイズ</string>
-    <string name="pref_summary__dock_item_count_horizontal">ドックサイズを設定します。</string>
+    <string name="pref_title__dock_column_count">サイズ</string>
+    <string name="pref_summary__dock_column_count">ドックサイズを設定します。</string>
     <string name="pref_title__is_dock_show_label">ラベル</string>
     <string name="pref_summary__is_dock_show_label">ドックにアプリとフォルダー名を表示します。</string>
 

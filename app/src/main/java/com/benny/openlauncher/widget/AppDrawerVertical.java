@@ -68,7 +68,7 @@ public class AppDrawerVertical extends CardView {
 
                 rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_vertical_inner, AppDrawerVertical.this, false);
                 recyclerView = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
-                layoutManager = new GridLayoutManager(getContext(), AppSettings.get().getDrawerItemCountHorizontal_Portrait());
+                layoutManager = new GridLayoutManager(getContext(), AppSettings.get().getDrawerColumnCount_Portrait());
 
                 itemWidth = (getWidth() - recyclerView.getPaddingRight() - recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
                 init();
@@ -95,12 +95,12 @@ public class AppDrawerVertical extends CardView {
     }
 
     private void setPortraitValue() {
-        layoutManager.setSpanCount(AppSettings.get().getDrawerItemCountHorizontal_Portrait());
+        layoutManager.setSpanCount(AppSettings.get().getDrawerColumnCount_Portrait());
         gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
     private void setLandscapeValue() {
-        layoutManager.setSpanCount(AppSettings.get().getDrawerItemCountHorizontal_Landscape());
+        layoutManager.setSpanCount(AppSettings.get().getDrawerColumnCount_Landscape());
         gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
