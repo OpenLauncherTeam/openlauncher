@@ -214,7 +214,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     private void init() {
         drawerLayout.addDrawerListener(this);
 
-        appWidgetHost = new WidgetHost(getApplicationContext(), R.id.m_AppWidgetHost);
+        appWidgetHost = new WidgetHost(getApplicationContext(), R.id.app_widget_host);
         appWidgetManager = AppWidgetManager.getInstance(this);
         appWidgetHost.startListening();
 

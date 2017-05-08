@@ -55,7 +55,7 @@ public class MiniPopupView extends RevealFrameLayout {
             case LockScreen:
                 break;
             case ClearRam:
-                window = LayoutInflater.from(getContext()).inflate(R.layout.window_clearam, this, false);
+                window = LayoutInflater.from(getContext()).inflate(R.layout.window_clear_ram, this, false);
                 ClearRamViewHolder clearRamViewHolder = new ClearRamViewHolder(window);
                 clearRamViewHolder.availableRam.setText(clearRamViewHolder.availableRam.getText() + Tool.getFreeRAM(getContext()));
                 clearRamViewHolder.availableStorage.setText(clearRamViewHolder.availableStorage.getText() + Tool.getFreeMemory(getContext()));

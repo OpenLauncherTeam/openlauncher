@@ -31,11 +31,9 @@ import butterknife.ButterKnife;
  */
 
 public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-    //Toolbar
-    @BindView(R.id.settings__appbar)
+    @BindView(R.id.settings_appbar)
     protected AppBarLayout appBarLayout;
-
-    @BindView(R.id.settings__toolbar)
+    @BindView(R.id.settings_toolbar)
     protected Toolbar toolbar;
 
     private AppSettings appSettings;
@@ -48,7 +46,6 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         toolbar.setTitle(R.string.settings);
         setSupportActionBar(toolbar);
         appSettings = AppSettings.get();
-
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24px));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -93,7 +90,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         if (addToBackStack) {
             t.addToBackStack(tag);
         }
-        t.replace(R.id.settings__fragment_container, fragment, tag).commit();
+        t.replace(R.id.settings_fragment_container, fragment, tag).commit();
     }
 
     @Override
@@ -121,7 +118,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         public void onCreate(Bundle savedInstances) {
             super.onCreate(savedInstances);
             getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences__master);
+            addPreferencesFromResource(R.xml.preferences_master);
         }
 
         @Override
@@ -166,7 +163,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         public void onCreate(Bundle savedInstances) {
             super.onCreate(savedInstances);
             getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences__desktop);
+            addPreferencesFromResource(R.xml.preferences_desktop);
         }
 
         @Override
@@ -190,7 +187,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         public void onCreate(Bundle savedInstances) {
             super.onCreate(savedInstances);
             getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences__app_drawer);
+            addPreferencesFromResource(R.xml.preferences_app_drawer);
         }
 
         @Override
@@ -218,7 +215,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         public void onCreate(Bundle savedInstances) {
             super.onCreate(savedInstances);
             getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences__dock);
+            addPreferencesFromResource(R.xml.preferences_dock);
         }
     }
 
@@ -228,7 +225,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         public void onCreate(Bundle savedInstances) {
             super.onCreate(savedInstances);
             getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences__icons);
+            addPreferencesFromResource(R.xml.preferences_icons);
         }
 
         @Override
@@ -253,7 +250,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         public void onCreate(Bundle savedInstances) {
             super.onCreate(savedInstances);
             getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences__miscellaneous);
+            addPreferencesFromResource(R.xml.preferences_miscellaneous);
         }
 
         @Override
@@ -272,12 +269,10 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 }
 
                 if (key.equals(getString(R.string.pref_key__backup_app_settings))) {
-                    if (ActivityCompat.checkSelfPermission(activity,
-                            Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         DialogUtils.backupDialog(activity);
                     } else {
-                        ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                                Home.REQUEST_PERMISSION_STORAGE);
+                        ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
                     }
                 }
 

@@ -20,6 +20,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title__appearance">
+
         <Preference
             android:key="@string/pref_key__minibar__arrangement__show_screen"
             android:summary="@string/pref_summary__minibar__arrangement__show_screen"
@@ -33,12 +34,6 @@
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_key__is_desktop_show_label"
-            android:summary="@string/pref_summary__is_desktop_show_label"
-            android:title="@string/pref_title__is_desktop_show_label" />
-
-        <CheckBoxPreference
-            android:defaultValue="true"
             android:key="@string/pref_key__is_desktop_show_page_indicator"
             android:summary="@string/pref_summary__is_desktop_show_page_indicator"
             android:title="@string/pref_title__is_desktop_show_page_indicator" />
@@ -49,15 +44,12 @@
             android:summary="@string/pref_summary__is_desktop_fullscreen"
             android:title="@string/pref_title__is_desktop_fullscreen" />
 
-        <!--
-        <ListPreference
-            android:defaultValue="0"
-            android:entries="@array/desktop_modes"
-            android:entryValues="@array/values_zero__two"
-            android:key="@string/pref_key__desktop_mode"
-            android:summary="@string/pref_summary__desktop_mode"
-            android:title="@string/pref_title__desktop_mode" />
-            -->
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__is_desktop_show_label"
+            android:summary="@string/pref_summary__is_desktop_show_label"
+            android:title="@string/pref_title__is_desktop_show_label" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title__color">

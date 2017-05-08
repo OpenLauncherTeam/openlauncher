@@ -124,7 +124,7 @@ public class AppManager {
             @Override
             public void onClick(View v) {
                 recreateAfterGettingApps = true;
-                AppSettings.get().setIconpackPackage("");
+                AppSettings.get().setIconPack("");
                 getAllApps();
                 d.dismiss();
             }
@@ -137,7 +137,7 @@ public class AppManager {
                 public void onClick(View v) {
                     if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         recreateAfterGettingApps = true;
-                        AppSettings.get().setIconpackPackage(resolveInfos.get(mI).activityInfo.packageName);
+                        AppSettings.get().setIconPack(resolveInfos.get(mI).activityInfo.packageName);
                         getAllApps();
                         d.dismiss();
                     } else {
@@ -210,8 +210,8 @@ public class AppManager {
             }
 
             AppSettings appSettings = AppSettings.get();
-            if (!appSettings.getIconpackPackage().isEmpty() && Tool.isPackageInstalled(appSettings.getIconpackPackage(), packageManager)) {
-                IconPackHelper.themePacs(AppManager.this, Tool.dp2px(appSettings.getIconsizeGlobal(), context), appSettings.getIconpackPackage(), apps);
+            if (!appSettings.getIconPack().isEmpty() && Tool.isPackageInstalled(appSettings.getIconPack(), packageManager)) {
+                IconPackHelper.themePacs(AppManager.this, Tool.dp2px(appSettings.getIconsizeGlobal(), context), appSettings.getIconPack(), apps);
             }
             return null;
         }

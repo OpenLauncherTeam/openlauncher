@@ -18,27 +18,15 @@ import java.util.Arrays;
 /**
  * Created by gregor on 07.05.17.
  */
+
 public class AppSettings {
     private static final String ARRAY_SEPERATOR = "%%";
     private static final String SHARED_PREF_APP = "app";
-
-    //#####################
-    //## Members
-    //#####################
     private final SharedPreferences prefApp;
     private final Context context;
 
-    //#####################
-    //## Methods
-    //#####################
-
-    /**
-     * Constructor
-     *
-     * @param _context Android _context
-     */
-    private AppSettings(Context _context) {
-        context = _context.getApplicationContext();
+    private AppSettings(Context context) {
+        this.context = context.getApplicationContext();
         prefApp = context.getSharedPreferences(SHARED_PREF_APP, Context.MODE_PRIVATE);
     }
 
@@ -66,11 +54,8 @@ public class AppSettings {
     public void unregisterPreferenceChangedListener(SharedPreferences.OnSharedPreferenceChangeListener value) {
         prefApp.unregisterOnSharedPreferenceChangeListener(value);
     }
-    //###########################################
-    //## Helpers for setting/getting based on
-    //## type; Key based on resources
-    //############################################
 
+    // helpers for modifying preferences based on type
     private String getKey(int stringKeyResourceId) {
         return context.getString(stringKeyResourceId);
     }
@@ -177,11 +162,7 @@ public class AppSettings {
         return ret;
     }
 
-    //#################################
-    //##
-    //## Getter & Setter for settings
-    //##
-    //#################################
+    // methods that actually modify the preferences
     public int getIconsizeGlobal() {
         return getInt(R.string.pref_key__iconsize_global, 52);
     }
@@ -209,21 +190,24 @@ public class AppSettings {
         setBool(R.string.pref_key__is_desktop_locked, value);
     }
 
-    // Is saved by ListPreference as string
     public int getAppDrawerMode() {
         return getIntOfStringPref(R.string.pref_key__drawer_mode, AppDrawerController.DrawerMode.VERTICAL);
     }
 
-    public String getIconpackPackage() {
+    public String getIconPack() {
         return getString(R.string.pref_key__icon_pack_name, "");
     }
 
-    public void setIconpackPackage(String value) {
+    public void setIconPack(String value) {
         setString(R.string.pref_key__icon_pack_name, value);
     }
 
     public boolean isDockShowLabel() {
         return getBool(R.string.pref_key__is_dock_show_label, false);
+    }
+
+    public boolean isDrawerShowLabel() {
+        return getBool(R.string.pref_key__is_drawer_show_label, true);
     }
 
     public int getDrawerItemCountHorizontal_Portrait() {

@@ -31,9 +31,10 @@
 
     <string name="intro_skip">Skip</string>
     <string name="intro_finish">Let\'s start.</string>
-    <string name="intro1_title">OpenLauncher</string>
+    <string name="intro1_title" translatable="false">OpenLauncher</string>
     <string name="intro1_text">Thank you for choosing OpenLauncher. It\'s fully open source and still in development.
         Here\'s a short intro on how to use it …</string>
+    <string name="intro2_title" translatable="false">Minibar</string>
     <string name="intro2_text">Swipe right from the left border of your screen to open the minibar. There you can find the settings,
         change the wallpaper, and do lots of other stuff.</string>
     <string name="intro3_title">Settings</string>
@@ -67,6 +68,9 @@
     <string name="pref_title__appearance">Appearance</string>
     <string name="pref_title__size">Size</string>
 
+    <!-- Desktop -->
+
+    <string name="pref_title__minibar__arrangement__show_screen" translatable="false">Minibar</string>
     <string name="pref_summary__minibar__arrangement__show_screen">Configure minibar items.</string>
     <string name="pref_title__is_desktop_searchbar_enabled">Search bar</string>
     <string name="pref_summary__is_desktop_searchbar_enabled">Display a search bar on top of the desktop.</string>
@@ -77,10 +81,14 @@
     <string name="pref_title__is_desktop_show_label">Label</string>
     <string name="pref_summary__is_desktop_show_label">Show app and folder names in the desktop.</string>
 
+    <!-- Dock -->
+
     <string name="pref_title__dock_item_count_horizontal">Size</string>
     <string name="pref_summary__dock_item_count_horizontal">Set the dock size.</string>
     <string name="pref_title__is_dock_show_label">Label</string>
     <string name="pref_summary__is_dock_show_label">Show app and folder names in the dock.</string>
+
+    <!-- App Drawer -->
 
     <string name="pref_title__style">Style</string>
     <string name="pref_summary__drawer_mode">Choose between paged and vertical view for the app drawer.</string>
@@ -89,9 +97,15 @@
     <string name="pref_title__is_drawer_remember_position">Remember last page</string>
     <string name="pref_title__is_drawer_show_indicator">Drawer scrollbar</string>
     <string name="pref_summary__is_drawer_show_indicator">Show the page indicator in the drawer.</string>
+    <string name="pref_title__is_drawer_show_label">Label</string>
+    <string name="pref_summary__is_drawer_show_label">Show app and folder names in the app drawer.</string>
+
+    <!-- Gestures -->
 
     <string name="pref_title__is_open_app_drawer_on_swipe">Fast swipe drawer</string>
     <string name="pref_summary__is_open_app_drawer_on_swipe">Swipe up on the drawer app icon to open the app drawer.</string>
+
+    <!-- Colors -->
 
     <string name="pref_title__dock_background_color">Dock background color</string>
     <string name="pref_summary__dock_background_color">Background color of the dock</string>
@@ -104,12 +118,16 @@
     <string name="pref_title__drawer_label_color">Label</string>
     <string name="pref_summary__drawer_label_color">Label color for folders and the app drawer.</string>
 
+    <!-- Icons -->
+
     <string name="pref_title__iconsize_global">Size</string>
     <string name="pref_summary__iconsize_global">Size of all app icons.</string>
     <string name="pref_title__icon_pack_name">Icon pack</string>
     <string name="pref_summary__icon_pack_name">Select an installed icon pack.</string>
     <string name="pref_title__hidden_apps_list">Hide apps</string>
     <string name="pref_summary__hidden_apps_list">Hide selected apps from launcher.</string>
+
+    <!-- Other -->
 
     <string name="pref_title__backup_app_settings">Backup</string>
     <string name="pref_summary__backup_app_settings">Backup and restore your settings.</string>
@@ -121,7 +139,7 @@
     <string name="group">Unnamed</string>
     <string name="app_drawer">All Apps</string>
 
-    <!-- Other -->
+    <!-- Dialogs -->
 
     <string name="request_dummy_text">Hello world!</string>
     <string name="request_please_wait2">Searching for installed apps. Please wait.</string>

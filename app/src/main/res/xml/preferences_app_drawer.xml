@@ -42,6 +42,11 @@
             android:summary="@string/pref_summary__drawer_mode"
             android:title="@string/pref_title__style" />
 
+        <Preference
+            android:key="@string/pref_key__hidden_apps_list"
+            android:summary="@string/pref_summary__hidden_apps_list"
+            android:title="@string/pref_title__hidden_apps_list" />
+
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__is_drawer_use_card"
@@ -66,10 +71,11 @@
             android:summary="@string/pref_summary__is_open_app_drawer_on_swipe"
             android:title="@string/pref_title__is_open_app_drawer_on_swipe" />
 
-        <Preference
-            android:key="@string/pref_key__hidden_apps_list"
-            android:summary="@string/pref_summary__hidden_apps_list"
-            android:title="@string/pref_title__hidden_apps_list" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__is_drawer_show_label"
+            android:summary="@string/pref_summary__is_drawer_show_label"
+            android:title="@string/pref_title__is_drawer_show_label" />
 
     </PreferenceCategory>
 

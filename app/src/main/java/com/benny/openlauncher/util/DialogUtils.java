@@ -158,15 +158,14 @@ public class DialogUtils {
                         if (options[item].equals(context.getResources().getString(R.string.dialog__backup_app_settings__backup))) {
                             File directory = new File(Environment.getExternalStorageDirectory() + "/OpenLauncher/");
                             if (!directory.exists()) {
-                                // noinspection ResultOfMethodCallIgnored
-                                directory.mkdirs();
+                                directory.mkdir();
                             }
-
                             try {
                                 PackageInfo p = m.getPackageInfo(s, 0);
                                 s = p.applicationInfo.dataDir;
                                 copy(context, s + "/databases/home.db", directory + "/home.db");
-                                copy(context, s + "/files/generalSettings.json", directory + "/generalSettings.json");
+                                copy(context, s + "/shared_prefs/app.xml", directory + "/app.xml");
+                                copy(context, s + "/shared_prefs/quickSettings.xml", directory + "/quickSettings.xml");
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__success, Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
@@ -174,18 +173,16 @@ public class DialogUtils {
                         }
                         if (options[item].equals(context.getResources().getString(R.string.dialog__backup_app_settings__restore))) {
                             File directory = new File(Environment.getExternalStorageDirectory() + "/OpenLauncher/");
-
                             try {
                                 PackageInfo p = m.getPackageInfo(s, 0);
                                 s = p.applicationInfo.dataDir;
                                 copy(context, directory + "/home.db", s + "/databases/home.db");
-                                copy(context, directory + "/generalSettings.json", s + "/files/generalSettings.json");
+                                copy(context, directory + "/app.xml", s + "/shared_prefs/app.xml");
+                                copy(context, s + "/quickSettings.xml", directory + "/shared_prefs/quickSettings.xml");
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__success, Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
                             }
-                            // this will stop your application and take out from it
-                            // kill off the crashed app
                             System.exit(1);
                         }
                     }
