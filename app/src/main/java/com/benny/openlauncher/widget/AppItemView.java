@@ -288,7 +288,7 @@ public class AppItemView extends View implements Drawable.Callback {
                 case 8:
                     view.getContext().getTheme().resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
                     view.setIconPadding(Tool.dp2px(4, view.getContext()));
-                    view.setIcon(view.getResources().getDrawable(R.drawable.ic_apps_black_24dp));
+                    view.setIcon(view.getResources().getDrawable(R.drawable.ic_apps_dark_24dp));
                     view.setBgColor(Color.WHITE);
                     view.setRoundBg(true);
                     view.setIconSizeSmall(Tool.dp2px(iconSize / 2 - 8, view.getContext()));

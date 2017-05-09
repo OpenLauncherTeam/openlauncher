@@ -26,9 +26,9 @@ public class LauncherAction {
             new ActionDisplayItem(Action.LockScreen, resources.getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp),
             new ActionDisplayItem(Action.ClearRam, resources.getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp),
             new ActionDisplayItem(Action.DeviceSettings, resources.getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp),
-            new ActionDisplayItem(Action.LauncherSettings, resources.getString(R.string.minibar_5), R.drawable.ic_settings_launcher_24dp),
+            new ActionDisplayItem(Action.LauncherSettings, resources.getString(R.string.minibar_5), R.drawable.ic_settings_launcher_black_24dp),
             new ActionDisplayItem(Action.VolumeDialog, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp),
-            new ActionDisplayItem(Action.OpenAppDrawer, resources.getString(R.string.minibar_8), R.drawable.ic_apps_black_24dp)
+            new ActionDisplayItem(Action.OpenAppDrawer, resources.getString(R.string.minibar_8), R.drawable.ic_apps_dark_24dp)
     };
     private static boolean clearingRam = false;
 

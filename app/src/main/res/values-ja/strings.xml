@@ -53,7 +53,7 @@
 
     <!-- Dialogs -->
 
-    <string name="dialog__iconpack_title">アイコンパックの選択</string>
+    <string name="dialog__icon_pack_title">アイコンパックの選択</string>
     <string name="dialog__icon_pack_info_toast">READ_EXTERNAL_STORAGE アクセス許可がないとアイコンを取得できません。</string>
     <string name="dialog__backup_app_settings__backup">バックアップ</string>
     <string name="dialog__backup_app_settings__restore">復元</string>
@@ -82,8 +82,8 @@
     <string name="pref_title__is_dock_show_label">ラベル</string>
     <string name="pref_summary__is_dock_show_label">ドックにアプリとフォルダー名を表示します。</string>
 
-    <string name="pref_title__style">スタイル</string>
-    <string name="pref_summary__drawer_mode">アプリドロワーのページと縦表示を選択します。</string>
+    <string name="pref_title__drawer_style">スタイル</string>
+    <string name="pref_summary__drawer_style">アプリドロワーのページと縦表示を選択します。</string>
     <string name="pref_title__is_drawer_use_card">カード</string>
     <string name="pref_summary__is_drawer_use_card">ドロワーの背景としてカードを使用します。</string>
     <string name="pref_title__is_drawer_remember_position">最後のページを記憶</string>

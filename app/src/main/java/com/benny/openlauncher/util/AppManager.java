@@ -117,7 +117,7 @@ public class AppManager {
         Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(packageManager));
         final MaterialDialog d = new MaterialDialog.Builder(activity)
                 .adapter(fastItemAdapter, null)
-                .title((activity.getString(R.string.dialog__iconpack_title)))
+                .title((activity.getString(R.string.dialog__icon_pack_title)))
                 .build();
 
         fastItemAdapter.add(new IconLabelItem(activity, activity.getResources().getDrawable(R.drawable.ic_launcher), "Default", new View.OnClickListener() {

@@ -25,9 +25,9 @@ public class InitActivity extends OnboarderActivity {
         List<OnboarderPage> onBoarderPages = new ArrayList<>();
 
         // these are the pages in the start activity
-        OnboarderPage onBoarderPage1 = new OnboarderPage(getString(R.string.intro1_title), getString(R.string.intro1_text), R.drawable.ic_launcher_intro);
-        OnboarderPage onBoarderPage2 = new OnboarderPage(getString(R.string.intro2_title), getString(R.string.intro2_text), R.drawable.screenshot_1);
-        OnboarderPage onBoarderPage3 = new OnboarderPage(getString(R.string.intro3_title), getString(R.string.intro3_text), R.drawable.screenshot_2);
+        OnboarderPage onBoarderPage1 = new OnboarderPage(getString(R.string.intro1_title), getString(R.string.intro1_text), R.drawable.intro_1);
+        OnboarderPage onBoarderPage2 = new OnboarderPage(getString(R.string.intro2_title), getString(R.string.intro2_text), R.drawable.intro_2);
+        OnboarderPage onBoarderPage3 = new OnboarderPage(getString(R.string.intro3_title), getString(R.string.intro3_text), R.drawable.intro_3);
 
         // title and description colors for the pages
         onBoarderPage1.setTitleColor(R.color.colorAccent);

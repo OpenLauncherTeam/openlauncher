@@ -14,6 +14,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title__appearance">
+
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__is_dock_show_label"

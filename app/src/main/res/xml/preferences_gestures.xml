@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_title__gestures">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__is_open_app_drawer_on_swipe"
+            android:summary="@string/pref_summary__is_open_app_drawer_on_swipe"
+            android:title="@string/pref_title__is_open_app_drawer_on_swipe" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

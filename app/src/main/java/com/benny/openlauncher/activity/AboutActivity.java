@@ -63,7 +63,7 @@ public class AboutActivity extends MaterialAboutActivity {
                         .show();
             }
         }));
-        titleCard.addItem(ConvenienceBuilder.createRateActionItem(this, getResources().getDrawable(R.drawable.ic_thumb_up_24dp), getString(R.string.about_rate), null));
+        titleCard.addItem(ConvenienceBuilder.createRateActionItem(this, getResources().getDrawable(R.drawable.ic_thumb_up_dark_24dp), getString(R.string.about_rate), null));
 
         MaterialAboutCard.Builder opTeamCard = new MaterialAboutCard.Builder();
         opTeamCard.title(getString(R.string.about_team));

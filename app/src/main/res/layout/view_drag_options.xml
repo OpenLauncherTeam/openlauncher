@@ -39,7 +39,7 @@
         android:id="@+id/removeIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_close_black_24dp"
+        android:drawableLeft="@drawable/ic_close_dark_24dp"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/remove"

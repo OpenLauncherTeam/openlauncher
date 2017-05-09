@@ -71,6 +71,10 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     fragment = new SettingsFragmentDock();
                     toolbar.setTitle(R.string.pref_title__dock);
                     break;
+                case SettingsFragmentGestures.TAG:
+                    fragment = new SettingsFragmentGestures();
+                    toolbar.setTitle(R.string.pref_title__gestures);
+                    break;
                 case SettingsFragmentIcons.TAG:
                     fragment = new SettingsFragmentIcons();
                     toolbar.setTitle(R.string.pref_title__icons);
@@ -134,6 +138,9 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     return true;
                 } else if (settings.isKeyEqual(key, R.string.pref_key__cat_dock)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentDock.TAG, true);
+                    return true;
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_gestures)) {
+                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentGestures.TAG, true);
                     return true;
                 } else if (settings.isKeyEqual(key, R.string.pref_key__cat_icons)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentIcons.TAG, true);
@@ -216,6 +223,16 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             super.onCreate(savedInstances);
             getPreferenceManager().setSharedPreferencesName("app");
             addPreferencesFromResource(R.xml.preferences_dock);
+        }
+    }
+
+    public static class SettingsFragmentGestures extends PreferenceFragment {
+        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentGestures";
+
+        public void onCreate(Bundle savedInstances) {
+            super.onCreate(savedInstances);
+            getPreferenceManager().setSharedPreferencesName("app");
+            addPreferencesFromResource(R.xml.preferences_gestures);
         }
     }
 

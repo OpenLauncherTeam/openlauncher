@@ -5,7 +5,7 @@
         android:key="@string/pref_key__cat_desktop"
         android:title="@string/pref_title__desktop" />
     <Preference
-        android:icon="@drawable/ic_apps_black_24dp"
+        android:icon="@drawable/ic_apps_dark_24dp"
         android:key="@string/pref_key__cat_app_drawer"
         android:title="@string/pref_title__app_drawer" />
 
@@ -15,12 +15,17 @@
         android:title="@string/pref_title__dock" />
 
     <Preference
-        android:icon="@drawable/ic_android_black_24dp"
+        android:icon="@drawable/cpv_ic_arrow_right_black_24dp"
+        android:key="@string/pref_key__cat_gestures"
+        android:title="@string/pref_title__gestures" />
+
+    <Preference
+        android:icon="@drawable/ic_android_dark_24dp"
         android:key="@string/pref_key__cat_icons"
         android:title="@string/pref_title__icons" />
 
     <Preference
-        android:icon="@drawable/ic_color_lens_black_24dp"
+        android:icon="@drawable/ic_color_lens_dark_24dp"
         android:key="@string/pref_key__cat_miscellaneous"
         android:title="@string/pref_title__miscellaneous" />
 

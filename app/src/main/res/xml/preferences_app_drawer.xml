@@ -39,8 +39,8 @@
             android:entries="@array/entries__drawer_modes"
             android:entryValues="@array/values__from_zero__to__one"
             android:key="@string/pref_key__drawer_mode"
-            android:summary="@string/pref_summary__drawer_mode"
-            android:title="@string/pref_title__style" />
+            android:summary="@string/pref_summary__drawer_style"
+            android:title="@string/pref_title__drawer_style" />
 
         <Preference
             android:key="@string/pref_key__hidden_apps_list"
@@ -64,12 +64,6 @@
             android:key="@string/pref_key__is_drawer_remember_position"
             android:summary="@string/pref_summary__is_drawer_remember_position"
             android:title="@string/pref_title__is_drawer_remember_position" />
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="@string/pref_key__is_open_app_drawer_on_swipe"
-            android:summary="@string/pref_summary__is_open_app_drawer_on_swipe"
-            android:title="@string/pref_title__is_open_app_drawer_on_swipe" />
 
         <CheckBoxPreference
             android:defaultValue="true"
