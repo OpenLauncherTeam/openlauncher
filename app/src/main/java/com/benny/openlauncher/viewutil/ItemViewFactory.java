@@ -168,7 +168,7 @@ public class ItemViewFactory {
                     public void onClick(View view) {
                         if (view.getScaleX() < 1) return;
                         item.spanY--;
-                        int minY = appWidgetInfo.minResizeHeight / Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight;
+                        int minY = ((appWidgetInfo.minResizeHeight - 1) / Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight) + 1;
                         item.spanY = Math.max(item.spanY, minY);
                         scaleWidget(widgetContainer, item);
                         widgetContainer.removeCallbacks(action);
@@ -180,7 +180,7 @@ public class ItemViewFactory {
                     public void onClick(View view) {
                         if (view.getScaleX() < 1) return;
                         item.spanX--;
-                        int minX = appWidgetInfo.minResizeWidth / Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth;
+                        int minX = ((appWidgetInfo.minResizeWidth - 1) / Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth) + 1;
                         item.spanX = Math.max(item.spanX, minX);
                         scaleWidget(widgetContainer, item);
                         widgetContainer.removeCallbacks(action);

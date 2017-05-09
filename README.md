@@ -25,11 +25,14 @@ You can support us, buy us some coffee .
 [BennyKok](https://www.paypal.me/BennyKok) | [gsantner](https://gsantner.github.io/#donate)
 
 # Contributors
+* [Aabaker](https://github.com/aabaker)
 * [TeamBrainStorm](https://github.com/TeamBrainStorm) very supportive when the project first started.
 * German translation: [GauklerFaun](https://github.com/scoute-dich) 
 * Japanese translation: [Naofum](https://github.com/naofum)
 
-Also to all those people who has contributed to this project, thank you.
+There are so many more contributors to list, check them out too.
+
+Also to all those people who has helped this project, thank you.
 
 # Status
 ### OnGoing: 
