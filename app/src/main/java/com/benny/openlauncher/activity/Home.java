@@ -162,9 +162,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     @BindView(R.id.loadingSplash)
     public FrameLayout loadingSplash;
     @BindView(R.id.dragOptionPanel)
-    public DragOptionView dragOptionPanel;
+    public DragOptionView dragOptionView;
     @BindView(R.id.desktopEditOptionPanel)
-    public DesktopOptionView desktopEditOptionPanel;
+    public DesktopOptionView desktopEditOptionView;
     private PagerIndicator appDrawerIndicator;
     private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
@@ -222,7 +222,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             int statusBarHeight = Tool.getStatusBarHeight(this);
             clockFrame.setPadding(0, statusBarHeight, 0, 0);
             shortcutLayout.setPadding(0, statusBarHeight, 0, 0);
-            //desktopEditOptionPanel.setPadding(0, 0, 0, navBarHeight);
+            //desktopEditOptionView.setPadding(0, 0, 0, navBarHeight);
             //searchBar.setPadding(0, statusBarHeight, 0, 0);
             //dock.getLayoutParams().height += navBarHeight;
             //dock.setPadding(dock.getPaddingLeft(), dock.getPaddingTop(), dock.getPaddingRight(), dock.getPaddingBottom() + navBarHeight);
@@ -289,13 +289,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
 
         appDrawerController.setHome(this);
-        dragOptionPanel.setHome(this);
+        dragOptionView.setHome(this);
 
         desktop.init(this);
         desktop.setDesktopEditListener(this);
 
-        desktopEditOptionPanel.setDesktopOptionViewListener(this);
-        desktopEditOptionPanel.updateLockIcon(appSettings.isDesktopLocked());
+        desktopEditOptionView.setDesktopOptionViewListener(this);
+        desktopEditOptionView.updateLockIcon(appSettings.isDesktopLocked());
         desktop.addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -303,7 +303,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onPageSelected(int position) {
-                desktopEditOptionPanel.updateHomeIcon(appSettings.getDesktopPageCurrent() == position);
+                desktopEditOptionView.updateHomeIcon(appSettings.getDesktopPageCurrent() == position);
             }
 
             @Override
@@ -315,7 +315,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         initDock();
 
-        dragOptionPanel.setAutoHideView(clockFrame, searchBar);
+        dragOptionView.setAutoHideView(clockFrame, searchBar);
 
         appDrawerController.setCallBack(new AppDrawerController.CallBack() {
             @Override
@@ -336,8 +336,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 }
 
                 Tool.visibleViews(dock, desktop, desktopIndicator);
-                updateSearchView(!dragOptionPanel.isDraggedFromDrawer);
-                dragOptionPanel.isDraggedFromDrawer = false;
+                updateSearchView(!dragOptionView.isDraggedFromDrawer);
+                dragOptionView.isDraggedFromDrawer = false;
             }
 
             @Override
@@ -362,19 +362,19 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     public void onDesktopEdit() {
-        dragOptionPanel.setAutoHideView(null);
+        dragOptionView.setAutoHideView(null);
 
-        Tool.visibleViews(100, desktopEditOptionPanel);
+        Tool.visibleViews(100, desktopEditOptionView);
         Tool.invisibleViews(100, dock, desktopIndicator);
         updateSearchView(false);
     }
 
     @Override
     public void onFinishDesktopEdit() {
-        dragOptionPanel.setAutoHideView(clockFrame, searchBar);
+        dragOptionView.setAutoHideView(clockFrame, searchBar);
 
         Tool.visibleViews(100, desktopIndicator, dock);
-        Tool.invisibleViews(100, desktopEditOptionPanel);
+        Tool.invisibleViews(100, desktopEditOptionView);
         updateSearchView(true);
     }
 
