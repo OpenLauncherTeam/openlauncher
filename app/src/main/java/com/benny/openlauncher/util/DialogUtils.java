@@ -165,7 +165,6 @@ public class DialogUtils {
                                 s = p.applicationInfo.dataDir;
                                 copy(context, s + "/databases/home.db", directory + "/home.db");
                                 copy(context, s + "/shared_prefs/app.xml", directory + "/app.xml");
-                                copy(context, s + "/shared_prefs/quickSettings.xml", directory + "/quickSettings.xml");
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__success, Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
@@ -178,7 +177,6 @@ public class DialogUtils {
                                 s = p.applicationInfo.dataDir;
                                 copy(context, directory + "/home.db", s + "/databases/home.db");
                                 copy(context, directory + "/app.xml", s + "/shared_prefs/app.xml");
-                                copy(context, s + "/quickSettings.xml", directory + "/shared_prefs/quickSettings.xml");
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__success, Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();

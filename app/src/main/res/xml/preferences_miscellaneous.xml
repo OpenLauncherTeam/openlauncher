@@ -3,7 +3,6 @@
     <PreferenceCategory android:title="@string/pref_title__miscellaneous">
 
         <Preference
-            android:enabled="false"
             android:key="@string/pref_key__backup_app_settings"
             android:summary="@string/pref_summary__backup_app_settings"
             android:title="@string/pref_title__backup_app_settings" />
