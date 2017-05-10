@@ -30,13 +30,13 @@ public class AppSettings {
         prefApp = context.getSharedPreferences(SHARED_PREF_APP, Context.MODE_PRIVATE);
     }
 
+    public static AppSettings get() {
+        return new AppSettings(App.get());
+    }
+
     @SuppressLint("ApplySharedPref")
     public void resetSettings() {
         prefApp.edit().clear().commit();
-    }
-
-    public static AppSettings get() {
-        return new AppSettings(App.get());
     }
 
     public Context getApplicationContext() {
@@ -319,6 +319,14 @@ public class AppSettings {
 
     public int getDockColor() {
         return getInt(R.string.pref_key__dock_background_color, Color.TRANSPARENT);
+    }
+
+    public boolean isDockEnable() {
+        return getBool(R.string.pref_key__is_dock_enable, true);
+    }
+
+    public void setDockEnable(boolean enable) {
+        setBool(R.string.pref_key__is_dock_enable, enable);
     }
 
     public ArrayList<String> getHiddenAppsList() {

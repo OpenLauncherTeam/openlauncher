@@ -224,6 +224,21 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             getPreferenceManager().setSharedPreferencesName("app");
             addPreferencesFromResource(R.xml.preferences_dock);
         }
+
+        @Override
+        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+            if (isAdded() && preference.hasKey()) {
+                AppSettings settings = AppSettings.get();
+                String key = preference.getKey();
+
+                if (key.equals(getString(R.string.pref_key__is_dock_enable))) {
+                    Home.launcher.updateDock(true);
+                    ((SettingsActivity) getActivity()).shouldLauncherRestart = false;
+                    return true;
+                }
+            }
+            return super.onPreferenceTreeClick(screen, preference);
+        }
     }
 
     public static class SettingsFragmentGestures extends PreferenceFragment {

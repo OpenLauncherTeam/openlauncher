@@ -222,11 +222,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             int statusBarHeight = Tool.getStatusBarHeight(this);
             clockFrame.setPadding(0, statusBarHeight, 0, 0);
             shortcutLayout.setPadding(0, statusBarHeight, 0, 0);
-            //desktopEditOptionView.setPadding(0, 0, 0, navBarHeight);
-            //searchBar.setPadding(0, statusBarHeight, 0, 0);
-            //dock.getLayoutParams().height += navBarHeight;
-            //dock.setPadding(dock.getPaddingLeft(), dock.getPaddingTop(), dock.getPaddingRight(), dock.getPaddingBottom() + navBarHeight);
-            //appDrawerController.setPadding(0, statusBarHeight, 0, navBarHeight);
         }
 
         registerBroadcastReceiver();
@@ -321,7 +316,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             @Override
             public void onStart() {
                 Tool.visibleViews(appDrawerIndicator);
-                Tool.invisibleViews(dock, desktopIndicator, desktop);
+                Tool.invisibleViews(desktopIndicator, desktop);
+                updateDock(false);
                 updateSearchView(false);
             }
 
@@ -335,7 +331,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     appDrawerIndicator.animate().alpha(0).setDuration(100);
                 }
 
-                Tool.visibleViews(dock, desktop, desktopIndicator);
+                Tool.visibleViews(desktop, desktopIndicator);
+                updateDock(true);
                 updateSearchView(!dragOptionView.isDraggedFromDrawer);
                 dragOptionView.isDraggedFromDrawer = false;
             }
@@ -360,12 +357,29 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         }
     }
 
+    public void updateDock(boolean show) {
+        if (appSettings.isDockEnable() && show) {
+            Tool.visibleViews(100,dock);
+            ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4,this);
+            ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Tool.dp2px(4,this);
+        } else {
+            if (appSettings.isDockEnable()) {
+                Tool.invisibleViews(100,dock);
+            } else {
+                Tool.goneViews(dock);
+                ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Desktop.bottomInsert + Tool.dp2px(4,this);
+                ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4,this);
+            }
+        }
+    }
+
     @Override
     public void onDesktopEdit() {
         dragOptionView.setAutoHideView(null);
 
         Tool.visibleViews(100, desktopEditOptionView);
-        Tool.invisibleViews(100, dock, desktopIndicator);
+        Tool.invisibleViews(100,desktopIndicator);
+        updateDock(false);
         updateSearchView(false);
     }
 
@@ -373,8 +387,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public void onFinishDesktopEdit() {
         dragOptionView.setAutoHideView(clockFrame, searchBar);
 
-        Tool.visibleViews(100, desktopIndicator, dock);
+        Tool.visibleViews(100, desktopIndicator);
         Tool.invisibleViews(100, desktopEditOptionView);
+        updateDock(true);
         updateSearchView(true);
     }
 
@@ -403,6 +418,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = 0;
             ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = 0;
         }
+
+        dock.post(new Runnable() {
+            @Override
+            public void run() {
+                updateDock(true);
+            }
+        });
     }
 
     private void updateDesktopClock() {
@@ -481,6 +503,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         drawerLayout.setDrawerLockMode(appSettings.isMinibarEnabled() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
+
     public void initMinibar() {
         final ArrayList<String> labels = new ArrayList<>();
         final ArrayList<Integer> icons = new ArrayList<>();
@@ -544,7 +567,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 intent.putExtra(SearchManager.QUERY, string);
                 try {
                     startActivity(intent);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

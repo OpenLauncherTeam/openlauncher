@@ -42,23 +42,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:translationX="-6dp"
         android:id="@+id/left"
         android:layout_width="20dp"
         android:layout_height="0dp"
         android:alpha="0"
         android:background="@drawable/outlinebg"
+        android:translationX="-6dp"
         app:layout_constraintBottom_toBottomOf="@+id/desktop"
         app:layout_constraintLeft_toLeftOf="@+id/desktop"
         app:layout_constraintTop_toTopOf="@+id/desktop" />
 
     <View
-        android:translationX="6dp"
         android:id="@+id/right"
         android:layout_width="20dp"
         android:layout_height="0dp"
         android:alpha="0"
         android:background="@drawable/outlinebg"
+        android:translationX="6dp"
         app:layout_constraintBottom_toBottomOf="@+id/desktop"
         app:layout_constraintRight_toRightOf="@+id/desktop"
         app:layout_constraintTop_toTopOf="@+id/desktop" />
@@ -69,8 +69,8 @@
         android:layout_height="10dp"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@+id/dock"
-        app:layout_constraintLeft_toLeftOf="@+id/dock"
-        app:layout_constraintRight_toRightOf="@+id/dock" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <com.benny.openlauncher.widget.Dock
         android:id="@+id/dock"
@@ -121,7 +121,6 @@
 
 
     <com.benny.openlauncher.widget.DragOptionView
-        android:fitsSystemWindows="true"
         android:id="@+id/dragOptionPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -129,6 +128,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:fitsSystemWindows="true"
         app:cardBackgroundColor="@color/Light.Background"
         app:cardCornerRadius="2dp"
         app:layout_constraintLeft_toLeftOf="parent"

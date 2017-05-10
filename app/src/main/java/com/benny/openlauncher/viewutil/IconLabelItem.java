@@ -70,7 +70,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         }
     }
 
-    public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int textColor, int drawablePadding, int forceSize, boolean bold,int textGravity) {
+    public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int textColor, int drawablePadding, int forceSize, boolean bold, int textGravity) {
         this(context, icon, label, listener, Gravity.START);
         this.textColor = textColor;
         this.drawablePadding = drawablePadding;
@@ -90,9 +90,10 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         this.typeface = typeface;
     }
 
-    public IconLabelItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, int iconGravity, int textColor, int gravity, int drawablePadding, Typeface typeface, boolean matchParent) {
+    public IconLabelItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, int iconGravity, int textColor, int gravity, int drawablePadding, Typeface typeface, boolean matchParent, int textGravity) {
         this(context, icon, label, listener, iconGravity, textColor, gravity, Tool.dp2px(drawablePadding, context), typeface);
         this.matchParent = matchParent;
+        this.textGravity = textGravity;
     }
 
     public void setIcon(Drawable icon) {
