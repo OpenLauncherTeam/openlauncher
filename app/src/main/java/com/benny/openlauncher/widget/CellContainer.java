@@ -185,16 +185,37 @@ public class CellContainer extends ViewGroup {
     public Point findFreeSpace() {
         for (int y = 0; y < occupied[0].length; y++) {
             for (int x = 0; x < occupied.length; x++) {
-                if (!occupied[x][y])
+                if (!occupied[x][y]) {
                     return new Point(x, y);
+                }
             }
         }
         return new Point(0, 0);
     }
 
-    public boolean isValid(int x, int y) {
-        return (x >= 0 && x <= occupied.length - 1 && y >= 0 && y <= occupied[0].length - 1);
+    public Point findFreeSpace(int spanX, int spanY) {
+        for (int y = 0; y < occupied[0].length; y++) {
+            for (int x = 0; x < occupied.length; x++) {
+                if (!occupied[x][y] && checkFreeSpace(new Point(x, y), spanX, spanY)) {
+                    return new Point(x, y);
+                }
+            }
+        }
+        return new Point(0, 0);
+    }
 
+    public boolean checkFreeSpace(Point start, int spanX, int spanY) {
+        if (start.x + spanX >= occupied.length || start.y + spanY >= occupied[0].length) {
+            return false;
+        }
+        for (int y = start.y; y < spanY; y++) {
+            for (int x = start.x; y < spanX; x++) {
+                if (!occupied[x][y]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public Point findFreeSpace(int cx, int cy, PeekDirection peekDirection) {
@@ -274,6 +295,11 @@ public class CellContainer extends ViewGroup {
             }
         }
         return null;
+    }
+
+    public boolean isValid(int x, int y) {
+        return (x >= 0 && x <= occupied.length - 1 && y >= 0 && y <= occupied[0].length - 1);
+
     }
 
     @Override
