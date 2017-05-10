@@ -140,13 +140,13 @@ public class SearchBar extends FrameLayout {
             public void onAppUpdated(List<AppManager.App> apps) {
                 adapter.clear();
                 List<IconLabelItem> items = new ArrayList<>();
-                items.add(new IconLabelItem(getContext(),null, getContext().getString(R.string.search_online), new OnClickListener() {
+                items.add(new IconLabelItem(getContext(), null, getContext().getString(R.string.search_online), new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         callBack.onInternetSearch(searchBox.getText().toString());
                         searchBox.getText().clear();
                     }
-                }, Color.WHITE, dp8, dp36));
+                }, Color.WHITE, dp8, dp36, true,Gravity.END));
                 for (int i = 0; i < apps.size(); i++) {
                     final AppManager.App app = apps.get(i);
                     items.add(new IconLabelItem(getContext(), app.icon, app.label, new OnClickListener() {

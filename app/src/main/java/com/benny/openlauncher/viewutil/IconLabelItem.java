@@ -36,6 +36,8 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private Typeface typeface;
     private boolean matchParent = true;
     private int forceSize = -1;
+    private boolean bold = false;
+    private int textGravity = Gravity.CENTER_VERTICAL;
 
     public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int iconGravity) {
         this.label = label;
@@ -66,6 +68,18 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         if (forceSize != -1 && icon != null) {
             this.icon = new BitmapDrawable(context.getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(icon), forceSize, forceSize, true));
         }
+    }
+
+    public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int textColor, int drawablePadding, int forceSize, boolean bold,int textGravity) {
+        this(context, icon, label, listener, Gravity.START);
+        this.textColor = textColor;
+        this.drawablePadding = drawablePadding;
+        this.forceSize = forceSize;
+        if (forceSize != -1 && icon != null) {
+            this.icon = new BitmapDrawable(context.getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(icon), forceSize, forceSize, true));
+        }
+        this.bold = bold;
+        this.textGravity = textGravity;
     }
 
     public IconLabelItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, int iconGravity, int textColor, int gravity, int drawablePadding, Typeface typeface) {
@@ -116,6 +130,9 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         holder.textView.setGravity(gravity);
         holder.textView.setTypeface(typeface);
         holder.textView.setCompoundDrawablePadding((int) drawablePadding);
+        holder.textView.setGravity(textGravity);
+        if (bold)
+            holder.textView.setTypeface(Typeface.DEFAULT_BOLD);
         switch (iconGravity) {
             case Gravity.START:
                 holder.textView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
