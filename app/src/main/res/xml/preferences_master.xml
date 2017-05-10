@@ -15,7 +15,7 @@
         android:title="@string/pref_title__dock" />
 
     <Preference
-        android:icon="@drawable/cpv_ic_arrow_right_black_24dp"
+        android:icon="@drawable/ic_gesture_dark_24dp"
         android:key="@string/pref_key__cat_gestures"
         android:title="@string/pref_title__gestures" />
 
