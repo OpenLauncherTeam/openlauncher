@@ -574,8 +574,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onExpand() {
-                Tool.invisibleViews(clockFrame, dock, desktop, desktopIndicator);
+                Tool.invisibleViews(clockFrame, desktop, desktopIndicator);
                 Tool.visibleViews(background);
+
+                updateDock(false);
 
                 searchBar.searchBox.setFocusable(true);
                 searchBar.searchBox.setFocusableInTouchMode(true);
@@ -587,8 +589,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             @Override
             public void onCollapse() {
                 Tool.visibleViews(appSettings.isDesktopSearchbarEnabled() ? clockFrame : null);
-                Tool.visibleViews(dock, desktop, desktopIndicator);
+                Tool.visibleViews(desktop, desktopIndicator);
                 Tool.invisibleViews(background);
+
+                updateDock(true);
 
                 searchBar.searchBox.clearFocus();
 
