@@ -11,6 +11,7 @@ import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
+import android.view.WindowInsets;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,7 +35,6 @@ public class DragOptionView extends CardView {
     private TextView deleteIcon;
     private Home home;
     private Long animSpeed = 120L;
-    private boolean init = false;
 
     public DragOptionView(Context context) {
         super(context);
@@ -55,28 +55,14 @@ public class DragOptionView extends CardView {
     }
 
     @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        if (!init) {
-            init = true;
-            setY(-getHeight() - getCardElevation());
+    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            ((MarginLayoutParams) getLayoutParams()).topMargin = insets.getSystemWindowInsetTop() + Tool.dp2px(14,getContext());
         }
-        super.onLayout(changed, left, top, right, bottom);
-    }
-
-    private ViewPropertyAnimator hide() {
-        return animate().y(-getHeight() - getCardElevation()).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
-    }
-
-    private ViewPropertyAnimator show() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return animate().y(((ConstraintLayout.LayoutParams) getLayoutParams()).topMargin + Tool.getStatusBarHeight(getContext())).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
-        } else {
-            return animate().y(((ConstraintLayout.LayoutParams) getLayoutParams()).topMargin).setDuration(animSpeed).setInterpolator(new AccelerateDecelerateInterpolator());
-        }
+        return insets;
     }
 
     private void init() {
-        init = false;
         setCardElevation(Tool.dp2px(4, getContext()));
         setRadius(Tool.dp2px(2, getContext()));
 
@@ -253,12 +239,7 @@ public class DragOptionView extends CardView {
         if (hideViews != null) {
             isDraggedFromDrawer = true;
             Tool.invisibleViews(Math.round(animSpeed / 1.3f),hideViews);
-            postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    show();
-                }
-            }, Math.round(animSpeed / 1.3f));
+            animate().alpha(1);
         }
     }
 
@@ -332,15 +313,14 @@ public class DragOptionView extends CardView {
                     cellContainer.setHideGrid(true);
                 }
                 dragging = false;
-                hide().withEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        removeIcon.setVisibility(View.GONE);
-                        infoIcon.setVisibility(View.GONE);
-                        deleteIcon.setVisibility(View.GONE);
-                        Tool.visibleViews(Math.round(animSpeed / 1.3f), hideViews);
-                    }
-                });
+
+                animate().alpha(0);
+                removeIcon.setVisibility(View.GONE);
+                infoIcon.setVisibility(View.GONE);
+                deleteIcon.setVisibility(View.GONE);
+                Tool.visibleViews(Math.round(animSpeed / 1.3f), hideViews);
+
+
                 isDraggedFromDrawer = false;
 
                 home.dock.revertLastItem();

@@ -121,6 +121,7 @@
 
 
     <com.benny.openlauncher.widget.DragOptionView
+        android:fitsSystemWindows="true"
         android:id="@+id/dragOptionPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -128,7 +129,6 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:cardBackgroundColor="@color/Light.Background"
         app:cardCornerRadius="2dp"
         app:layout_constraintLeft_toLeftOf="parent"
