@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <Preference
-        android:icon="@drawable/ic_desktop_windows_black_24dp"
+        android:icon="@drawable/ic_desktop_windows_dark_24dp"
         android:key="@string/pref_key__cat_desktop"
         android:title="@string/pref_title__desktop" />
     <Preference
@@ -10,7 +10,7 @@
         android:title="@string/pref_title__app_drawer" />
 
     <Preference
-        android:icon="@drawable/ic_dock_black_24dp"
+        android:icon="@drawable/ic_dock_dark_24dp"
         android:key="@string/pref_key__cat_dock"
         android:title="@string/pref_title__dock" />
 
@@ -30,7 +30,7 @@
         android:title="@string/pref_title__miscellaneous" />
 
     <Preference
-        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:icon="@drawable/ic_info_outline_dark_24dp"
         android:key="@string/pref_key__about"
         android:title="@string/pref_title__about" />
 

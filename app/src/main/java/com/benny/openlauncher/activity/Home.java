@@ -44,7 +44,7 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.AppUpdateReceiver;
 import com.benny.openlauncher.util.DatabaseHelper;
-import com.benny.openlauncher.util.DialogUtils;
+import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
@@ -432,7 +432,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     public void onPickDesktopAction() {
-        DialogUtils.addActionItemDialog(this, new MaterialDialog.ListCallback() {
+        DialogHelper.addActionItemDialog(this, new MaterialDialog.ListCallback() {
             @Override
             public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                 switch (which) {

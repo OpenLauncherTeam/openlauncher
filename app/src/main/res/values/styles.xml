@@ -4,8 +4,8 @@
         <item name="android:navigationBarColor" tools:targetApi="21">@android:color/transparent</item>
         <item name="android:colorPrimaryDark"  tools:targetApi="21">@android:color/transparent</item>
 
-		    <item name="android:windowNoTitle">true</item>
-		    <item name="android:windowShowWallpaper">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowShowWallpaper">true</item>
 
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorPrimary">@color/Light.Primary</item>
@@ -15,7 +15,7 @@
         <item name="android:textColorPrimary">@color/Light.TextColor</item>
         <item name="android:textColor">@color/Light.TextColor</item>
         <item name="android:textColorSecondary">@color/Light.TextColorSec</item>
-	  </style>
+    </style>
 
     <style name="AppTheme.MaterialAboutActivity" parent="Theme.Mal" >
         <item name="colorPrimaryDark">@color/Light.PrimaryDark</item>

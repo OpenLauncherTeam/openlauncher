@@ -13,6 +13,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.activity.MinibarEditActivity;
 import com.benny.openlauncher.activity.SettingsActivity;
+import com.benny.openlauncher.viewutil.DialogHelper;
 
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class LauncherAction {
                 context.startActivity(new Intent(context, MinibarEditActivity.class));
                 break;
             case SetWallpaper:
-                DialogUtils.setWallpaperDialog(context);
+                DialogHelper.setWallpaperDialog(context);
                 break;
             case LockScreen:
                 try {

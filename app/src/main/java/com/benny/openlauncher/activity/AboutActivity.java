@@ -33,12 +33,12 @@ public class AboutActivity extends MaterialAboutActivity {
         MaterialAboutCard.Builder titleCard = new MaterialAboutCard.Builder();
         titleCard.addItem(new MaterialAboutTitleItem(R.string.app_name, R.drawable.ic_launcher));
         try {
-            titleCard.addItem(ConvenienceBuilder.createVersionActionItem(this, getResources().getDrawable(R.drawable.ic_info_outline_24dp), "Version", true));
+            titleCard.addItem(ConvenienceBuilder.createVersionActionItem(this, getResources().getDrawable(R.drawable.ic_info_outline_dark_24dp), "Version", true));
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, getResources().getDrawable(R.drawable.ic_github), "GitHub", false, Uri.parse("https://github.com/BennyKok/OpenLauncher")));
-        titleCard.addItem(new MaterialAboutActionItem(getString(R.string.about_libs), null, getResources().getDrawable(R.drawable.ic_github), new MaterialAboutActionItem.OnClickListener() {
+        titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, getResources().getDrawable(R.drawable.ic_github_dark_24dp), "GitHub", false, Uri.parse("https://github.com/BennyKok/OpenLauncher")));
+        titleCard.addItem(new MaterialAboutActionItem(getString(R.string.about_libs), null, getResources().getDrawable(R.drawable.ic_github_dark_24dp), new MaterialAboutActionItem.OnClickListener() {
             @Override
             public void onClick() {
                 final Notices notices = new Notices();
@@ -69,19 +69,19 @@ public class AboutActivity extends MaterialAboutActivity {
         opTeamCard.title(getString(R.string.about_team));
 
         opTeamCard.addItem(new MaterialAboutActionItem.Builder()
-                .icon(R.drawable.person__bennykok)
+                .icon(R.drawable.person_bennykok)
                 .text("BennyKok")
                 .subText(getString(R.string.about_credit_text_bennykok))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("http://bennykok.weebly.com/contact.html")))
                 .build());
         opTeamCard.addItem(new MaterialAboutActionItem.Builder()
-                .icon(R.drawable.person__dkanada)
+                .icon(R.drawable.person_dkanada)
                 .text("dkanada")
                 .subText(getString(R.string.about_credit_text_dkanada))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/dkanada")))
                 .build());
         opTeamCard.addItem(new MaterialAboutActionItem.Builder()
-                .icon(R.drawable.person__gsantner)
+                .icon(R.drawable.person_gsantner)
                 .text("Gregor Santner")
                 .subText(getString(R.string.about_credit_text_gsantner))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://gsantner.github.io/")))
@@ -91,13 +91,13 @@ public class AboutActivity extends MaterialAboutActivity {
         MaterialAboutCard.Builder contributorsCard = new MaterialAboutCard.Builder();
         contributorsCard.title(getString(R.string.about_credit));
         contributorsCard.addItem(new MaterialAboutActionItem.Builder()
-                .icon(R.drawable.person__chris_debrodie)
+                .icon(R.drawable.person_chris_debrodie)
                 .text("Chris DeBrodie")
                 .subText(getString(R.string.about_credit_text_chris_debrodie))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://plus.google.com/111923938461696019967")))
                 .build());
         contributorsCard.addItem(new MaterialAboutActionItem.Builder()
-                .icon(R.drawable.person__gaukler_faun)
+                .icon(R.drawable.person_gaukler_faun)
                 .text("Gaukler Faun")
                 .subText(getString(R.string.about_credit_text_gaukler_faun))
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))

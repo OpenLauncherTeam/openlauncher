@@ -19,7 +19,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.DialogUtils;
+import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.Tool;
 
@@ -98,7 +98,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        DialogUtils.alert(getContext(), "Not implemented", "Not implemented");
+                        DialogHelper.alert(getContext(), "Not implemented", "Not implemented");
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;

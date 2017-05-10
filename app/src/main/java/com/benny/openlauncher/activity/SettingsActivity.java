@@ -19,7 +19,7 @@ import android.view.View;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.DialogUtils;
+import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.util.LauncherAction;
 
 import butterknife.BindView;
@@ -287,7 +287,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
 
                 if (key.equals(getString(R.string.pref_key__backup_app_settings))) {
                     if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                        DialogUtils.backupDialog(activity);
+                        DialogHelper.backupDialog(activity);
                     } else {
                         ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
                     }

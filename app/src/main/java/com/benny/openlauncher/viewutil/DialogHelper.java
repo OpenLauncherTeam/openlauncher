@@ -1,4 +1,4 @@
-package com.benny.openlauncher.util;
+package com.benny.openlauncher.viewutil;
 
 import android.app.WallpaperManager;
 import android.content.Context;
@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.LauncherAction;
+import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
@@ -26,7 +29,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogUtils {
+public class DialogHelper {
     public static MaterialDialog.Builder editItem(String title, String defaultText, Context c, final EditItemListener listener) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(c);
         builder.title(title)

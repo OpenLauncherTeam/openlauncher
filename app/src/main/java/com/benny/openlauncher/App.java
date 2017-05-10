@@ -5,6 +5,7 @@ import android.app.Application;
 /**
  * Created by gregor on 07.05.17.
  */
+
 public class App extends Application {
     private static App instance;
 
