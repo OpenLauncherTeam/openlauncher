@@ -42,12 +42,17 @@ public class ItemViewFactory {
             return null;
         }
         switch (item.type) {
-            case ACTION:
+            case APP:
+                final AppManager.App app = AppManager.getInstance(context).findApp(item.appIntent.getComponent().getPackageName(), item.appIntent.getComponent().getClassName());
+                if (app == null) {
+                    break;
+                }
                 view = new AppItemView.Builder(context)
-                        .setActionItem(item.actionValue)
+                        .setAppItem(app)
+                        .withOnClickLaunchApp(app)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongPressDrag(item, DragAction.Action.ACTION, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongPressDrag(item, DragAction.Action.APP, new AppItemView.Builder.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -62,17 +67,63 @@ public class ItemViewFactory {
                         .setTextColor(Color.WHITE)
                         .getView();
                 break;
-            case APP:
-                final AppManager.App app = AppManager.getInstance(context).findApp(item.appIntent.getComponent().getPackageName(), item.appIntent.getComponent().getClassName());
-                if (app == null) {
-                    break;
-                }
+            case SHORTCUT:
                 view = new AppItemView.Builder(context)
-                        .setAppItem(app)
-                        .withOnClickLaunchApp(app)
+                        .setShortcutItem(item.appIntent)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongPressDrag(item, DragAction.Action.APP, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongPressDrag(item, DragAction.Action.SHORTCUT, new AppItemView.Builder.LongPressCallBack() {
+                            @Override
+                            public boolean readyForDrag(View view) {
+                                return true;
+                            }
+
+                            @Override
+                            public void afterDrag(View view) {
+                                callBack.setLastItem(item, view);
+                            }
+                        })
+                        .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
+                        .setTextColor(Color.WHITE)
+                        .getView();
+                break;
+            case GROUP:
+                view = new AppItemView.Builder(context)
+                        .withOnTouchGetPosition()
+                        .vibrateWhenLongPress()
+                        .withOnLongPressDrag(item, DragAction.Action.GROUP, new AppItemView.Builder.LongPressCallBack() {
+                            @Override
+                            public boolean readyForDrag(View view) {
+                                return true;
+                            }
+
+                            @Override
+                            public void afterDrag(View view) {
+                                callBack.setLastItem(item, view);
+                            }
+                        })
+                        .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
+                        .setTextColor(Color.WHITE)
+                        .getView();
+                view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+
+                ((AppItemView) view).setIcon(getGroupIconDrawable(context, item));
+                ((AppItemView) view).setLabel((item.name));
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (Home.launcher != null && Home.launcher.groupPopup.showWindowV(item, v, callBack)) {
+                            ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
+                        }
+                    }
+                });
+                break;
+            case ACTION:
+                view = new AppItemView.Builder(context)
+                        .setActionItem(item)
+                        .withOnTouchGetPosition()
+                        .vibrateWhenLongPress()
+                        .withOnLongPressDrag(item, DragAction.Action.ACTION, new AppItemView.Builder.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -143,6 +194,7 @@ public class ItemViewFactory {
                         return true;
                     }
                 });
+
                 ve.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -187,61 +239,7 @@ public class ItemViewFactory {
                         widgetContainer.postDelayed(action, 2000);
                     }
                 });
-
                 view = widgetContainer;
-                break;
-            case SHORTCUT:
-                view = new AppItemView.Builder(context)
-                        .setShortcutItem(item.appIntent)
-                        .withOnTouchGetPosition()
-                        .vibrateWhenLongPress()
-                        .withOnLongPressDrag(item, DragAction.Action.SHORTCUT, new AppItemView.Builder.LongPressCallBack() {
-                            @Override
-                            public boolean readyForDrag(View view) {
-                                return true;
-                            }
-
-                            @Override
-                            public void afterDrag(View view) {
-                                callBack.setLastItem(item, view);
-                            }
-                        })
-                        .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
-                        .setTextColor(Color.WHITE)
-                        .getView();
-                break;
-            case GROUP:
-                view = new AppItemView.Builder(context)
-                        .withOnLongPressDrag(item, DragAction.Action.GROUP, new AppItemView.Builder.LongPressCallBack() {
-                            @Override
-                            public boolean readyForDrag(View view) {
-                                return true;
-                            }
-
-                            @Override
-                            public void afterDrag(View view) {
-                                callBack.setLastItem(item, view);
-                            }
-                        })
-                        .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
-                        .vibrateWhenLongPress()
-                        .setTextColor(Color.WHITE)
-                        .withOnTouchGetPosition()
-                        .getView();
-
-                view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-
-                ((AppItemView) view).setIcon(getGroupIconDrawable(context, item));
-                ((AppItemView) view).setLabel((item.name));
-
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (Home.launcher != null && Home.launcher.groupPopup.showWindowV(item, v, callBack)) {
-                            ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
-                        }
-                    }
-                });
                 break;
         }
         if (view != null) {

@@ -101,8 +101,6 @@ public class AppItemView extends View implements Drawable.Callback {
 
     private String label;
 
-    public boolean isShortcut;
-
     public Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG), bgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     private Rect mTextBound = new Rect();
@@ -264,9 +262,8 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setShortcutItem(final Intent intent) {
-            view.isShortcut = true;
-            view.setIcon(Tool.getIconFromID(view.getContext(), intent.getStringExtra("shortCutIconID")));
             view.setLabel(intent.getStringExtra("shortCutName"));
+            view.setIcon(Tool.getIconFromID(view.getContext(), intent.getStringExtra("shortCutIconID")));
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -281,10 +278,10 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder setActionItem(int action) {
+        public Builder setActionItem(Item item) {
             int iconSize = AppSettings.get().getIconsizeGlobal();
             TypedValue typedValue = new TypedValue();
-            switch (action) {
+            switch (item.actionValue) {
                 case 8:
                     view.getContext().getTheme().resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
                     view.setIconPadding(Tool.dp2px(4, view.getContext()));

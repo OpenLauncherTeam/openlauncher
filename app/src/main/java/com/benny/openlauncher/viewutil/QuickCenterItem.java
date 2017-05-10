@@ -22,8 +22,6 @@ import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
 import java.util.List;
 
-//Concept idea of adding a place that enable user to take notes, suggest apps and contacts;
-@Deprecated
 public class QuickCenterItem {
 
     public static class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
