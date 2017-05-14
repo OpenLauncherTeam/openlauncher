@@ -94,15 +94,10 @@
     <string name="pref_summary__is_open_app_drawer_on_swipe">ドロワーのアプリアイコンを上にスワイプして、アプリドロワーを開きます。</string>
 
     <string name="pref_title__dock_background_color">ドック</string>
-    <string name="pref_summary__dock_background_color">ドックの背景色。</string>
     <string name="pref_title__drawer_background_color">ドロワーの背景</string>
-    <string name="pref_summary__drawer_background_color">ドロワーの背景色。</string>
     <string name="pref_title__drawer_card_color">ドロワーカード</string>
-    <string name="pref_summary__drawer_card_color">アプリドロワーカードの色。</string>
     <string name="pref_title__desktop_folder_color">フォルダー</string>
-    <string name="pref_summary__desktop_folder_color">デスクトップのフォルダーの背景色。</string>
     <string name="pref_title__drawer_label_color">ラベル</string>
-    <string name="pref_summary__drawer_label_color">フォルダーとアプリドロワーのラベル色。</string>
 
     <string name="pref_title__iconsize_global">サイズ</string>
     <string name="pref_summary__iconsize_global">すべてのアプリアイコンのサイズ。</string>

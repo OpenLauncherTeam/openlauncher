@@ -68,53 +68,49 @@
     <string name="pref_title__desktop">Desktop</string>
     <string name="pref_title__dock">Dock</string>
     <string name="pref_title__app_drawer">App Drawer</string>
-    <string name="pref_title__color">Colors</string>
     <string name="pref_title__gestures">Gestures</string>
     <string name="pref_title__icons">Icons</string>
     <string name="pref_title__miscellaneous">Miscellaneous</string>
-    <string name="pref_title__appearance">Appearance</string>
+
     <string name="pref_title__size">Size</string>
+    <string name="pref_title__appearance">Appearance</string>
+    <string name="pref_title__color">Colors</string>
 
     <string name="pref_title__minibar__arrangement__show_screen" translatable="false">Minibar</string>
-    <string name="pref_summary__minibar__arrangement__show_screen">Configure minibar items.</string>
+    <string name="pref_summary__minibar__arrangement__show_screen">Configure the order and visibility of minibar items.</string>
     <string name="pref_title__is_desktop_searchbar_enabled">Search bar</string>
     <string name="pref_summary__is_desktop_searchbar_enabled">Display a search bar on top of the desktop.</string>
     <string name="pref_title__is_desktop_fullscreen">Fullscreen</string>
     <string name="pref_summary__is_desktop_fullscreen">Enable fullscreen for your desktop.</string>
-    <string name="pref_title__is_desktop_show_page_indicator">Desktop indicator</string>
-    <string name="pref_summary__is_desktop_show_page_indicator">Show the page indicator on the desktop.</string>
+    <string name="pref_title__is_desktop_show_page_indicator">Position indicator</string>
+    <string name="pref_summary__is_desktop_show_page_indicator">Show the page indicator below the desktop.</string>
     <string name="pref_title__is_desktop_show_label">Label</string>
-    <string name="pref_summary__is_desktop_show_label">Show app and folder names in the desktop.</string>
+    <string name="pref_summary__is_desktop_show_label">Show app and folder names below their icons.</string>
+    <string name="pref_title__desktop_background_color">Background</string>
+    <string name="pref_title__desktop_folder_color">Folder</string>
 
     <string name="pref_title__dock_column_count">Size</string>
     <string name="pref_summary__dock_column_count">Set the dock size.</string>
     <string name="pref_title__is_dock_show_label">Label</string>
-    <string name="pref_summary__is_dock_show_label">Show app and folder names in the dock.</string>
+    <string name="pref_summary__is_dock_show_label">Show app and folder names below their icons.</string>
+    <string name="pref_title__dock_background_color">Background</string>
 
     <string name="pref_title__drawer_style">Style</string>
-    <string name="pref_summary__drawer_style">Choose between paged and vertical view for the app drawer.</string>
+    <string name="pref_summary__drawer_style">Choose between a paged and vertical app drawer.</string>
     <string name="pref_title__is_drawer_use_card">Card</string>
-    <string name="pref_summary__is_drawer_use_card">Use a card as drawer background.</string>
+    <string name="pref_summary__is_drawer_use_card">Show a card view above the drawer background.</string>
     <string name="pref_title__is_drawer_remember_position">Remember last page</string>
-    <string name="pref_summary__is_drawer_remember_position">Automatically save and restore position of app drawer.</string>
-    <string name="pref_title__is_drawer_show_indicator">Drawer scrollbar</string>
-    <string name="pref_summary__is_drawer_show_indicator">Show the page indicator in the drawer.</string>
+    <string name="pref_summary__is_drawer_remember_position">Keep track of the current page in the app drawer.</string>
+    <string name="pref_title__is_drawer_show_indicator">Position indicator</string>
+    <string name="pref_summary__is_drawer_show_indicator">Show the page indicator or scrollbar depending on the style.</string>
     <string name="pref_title__is_drawer_show_label">Label</string>
-    <string name="pref_summary__is_drawer_show_label">Show app and folder names in the app drawer.</string>
+    <string name="pref_summary__is_drawer_show_label">Show app labels below their icons.</string>
+    <string name="pref_title__drawer_background_color">Background</string>
+    <string name="pref_title__drawer_card_color">Card View</string>
+    <string name="pref_title__drawer_label_color">Label</string>
 
     <string name="pref_title__is_open_app_drawer_on_swipe">Fast swipe drawer</string>
-    <string name="pref_summary__is_open_app_drawer_on_swipe">Swipe up on the drawer app icon to open the app drawer.</string>
-
-    <string name="pref_title__dock_background_color">Dock background color</string>
-    <string name="pref_summary__dock_background_color">Background color of the dock</string>
-    <string name="pref_title__drawer_background_color">Drawer Background</string>
-    <string name="pref_summary__drawer_background_color">Drawer background color.</string>
-    <string name="pref_title__drawer_card_color">Drawer Card</string>
-    <string name="pref_summary__drawer_card_color">Color for the app drawer card.</string>
-    <string name="pref_title__desktop_folder_color">Folder</string>
-    <string name="pref_summary__desktop_folder_color">Background color for folders on the desktop.</string>
-    <string name="pref_title__drawer_label_color">Label</string>
-    <string name="pref_summary__drawer_label_color">Label color for folders and the app drawer.</string>
+    <string name="pref_summary__is_open_app_drawer_on_swipe">Swipe up on the dock to open the app drawer.</string>
 
     <string name="pref_title__iconsize_global">Size</string>
     <string name="pref_summary__iconsize_global">Size of all app icons.</string>
@@ -125,55 +121,68 @@
 
     <string name="pref_title__backup_app_settings">Backup</string>
     <string name="pref_summary__backup_app_settings">Backup and restore your settings.</string>
+    <string name="pref_title__clear_database">Clear Database</string>
+    <string name="pref_summary__clear_database">Delete the data for the dock and desktop to fix issues.</string>
     <string name="pref_title__restart_launcher">Restart</string>
     <string name="pref_summary__restart_launcher">Restart the launcher in case it\'s behaving weird.</string>
 
     <!-- Preference Keys -->
 
-    <string name="pref_key__iconsize_global" translatable="false">pref_key__iconsize_global</string>
-    <string name="pref_key__is_app_first_start" translatable="false">pref_key__is_app_first_start</string>
-    <string name="pref_key__desktop_mode" translatable="false">pref_key__desktop_mode</string>
-    <string name="pref_key__is_desktop_locked" translatable="false">pref_key__is_desktop_locked</string>
-    <string name="pref_key__drawer_mode" translatable="false">pref_key__drawer_mode</string>
-    <string name="pref_key__icon_pack_name" translatable="false">pref_key__icon_pack_name</string>
-    <string name="pref_key__is_dock_show_label" translatable="false">pref_key__is_dock_show_label</string>
-    <string name="pref_key__is_minibar_enabled" translatable="false">pref_key__is_minibar_enabled</string>
-    <string name="pref_key__minibar__arrangement__tmp" translatable="false">pref_key__minibar__arrangement__tmp</string>
-    <string name="pref_key__dock_column_count" translatable="false">pref_key__dock_column_count</string>
     <string name="pref_key__desktop_row_count" translatable="false">pref_key__desktop_row_count</string>
     <string name="pref_key__desktop_column_count" translatable="false">pref_key__desktop_item_count_horizontal</string>
+    <string name="pref_key__desktop_mode" translatable="false">pref_key__desktop_mode</string>
+    <string name="pref_key__is_minibar_enabled" translatable="false">pref_key__is_minibar_enabled</string>
+    <string name="pref_key__minibar__arrangement__tmp" translatable="false">pref_key__minibar__arrangement__tmp</string>
+    <string name="pref_key__minibar__arrangement__show_screen" translatable="false">pref_key__minibar__arrangement__show_screen</string>
     <string name="pref_key__is_desktop_searchbar_enabled" translatable="false">pref_key__is_desktop_searchbar_enabled</string>
-    <string name="pref_key__is_desktop_show_label" translatable="false">pref_key__is_desktop_show_label</string>
-    <string name="pref_key__is_desktop_show_page_indicator" translatable="false">pref_key__is_desktop_show_page_indicator</string>
     <string name="pref_key__is_desktop_fullscreen" translatable="false">pref_key__is_desktop_fullscreen</string>
-    <string name="pref_key__desktop_page_current" translatable="false">pref_key__desktop_page_current</string>
-    <string name="pref_key__is_open_app_drawer_on_swipe" translatable="false">pref_key__is_open_app_drawer_on_swipe</string>
+    <string name="pref_key__is_desktop_show_page_indicator" translatable="false">pref_key__is_desktop_show_page_indicator</string>
+    <string name="pref_key__is_desktop_show_label" translatable="false">pref_key__is_desktop_show_label</string>
+    <string name="pref_key__desktop_background_color" translatable="false">pref_key__desktop_background_color</string>
+    <string name="pref_key__desktop_folder_color" translatable="false">pref_key__folder_color</string>
+
+    <string name="pref_key__is_dock_enable" translatable="false">pref_key__is_dock_enable</string>
+    <string name="pref_key__dock_column_count" translatable="false">pref_key__dock_column_count</string>
+    <string name="pref_key__is_dock_show_label" translatable="false">pref_key__is_dock_show_label</string>
+    <string name="pref_key__dock_background_color" translatable="false">pref_key__dock_background_color</string>
+
+    <string name="pref_key__drawer_column_count__portrait" translatable="false">pref_key__drawer_column_count__portrait</string>
+    <string name="pref_key__drawer_row_count__portrait" translatable="false">pref_key__drawer_row_count__portrait</string>
+    <string name="pref_key__drawer_column_count__landscape" translatable="false">pref_key__drawer_column_count__landscape</string>
+    <string name="pref_key__drawer_row_count__landscape" translatable="false">pref_key__drawer_row_count__landscape</string>
+    <string name="pref_key__drawer_mode" translatable="false">pref_key__drawer_mode</string>
+    <string name="pref_key__hidden_apps_list" translatable="false">pref_key__hidden_apps_list</string>
     <string name="pref_key__is_drawer_use_card" translatable="false">pref_key__is_drawer_use_card</string>
-    <string name="pref_key__is_drawer_show_indicator" translatable="false">pref_key__is__show_indicator</string>
     <string name="pref_key__is_drawer_remember_position" translatable="false">pref_key__is__remember_page</string>
+    <string name="pref_key__is_drawer_show_indicator" translatable="false">pref_key__is__show_indicator</string>
+    <string name="pref_key__is_drawer_show_label" translatable="false">pref_key__is_drawer_show_label</string>
     <string name="pref_key__drawer_background_color" translatable="false">pref_key__drawer_background_color</string>
     <string name="pref_key__drawer_card_color" translatable="false">pref_key__drawer_card_color</string>
     <string name="pref_key__drawer_label_color" translatable="false">pref_key___label_color</string>
-    <string name="pref_key__desktop_folder_color" translatable="false">pref_key__folder_color</string>
-    <string name="pref_key__dock_background_color" translatable="false">pref_key__dock_background_color</string>
-    <string name="pref_key__hidden_apps_list" translatable="false">pref_key__hidden_apps_list</string>
-    <string name="pref_key__is_app_restart_required" translatable="false">pref_key__is_app_restart_required</string>
-    <string name="pref_key__about">pref_key__about</string>
+
+    <string name="pref_key__is_open_app_drawer_on_swipe" translatable="false">pref_key__is_open_app_drawer_on_swipe</string>
+
+    <string name="pref_key__iconsize_global" translatable="false">pref_key__iconsize_global</string>
+    <string name="pref_key__icon_pack_name" translatable="false">pref_key__icon_pack_name</string>
+
+    <string name="pref_key__backup_app_settings" translatable="false">pref_key__backup_app_settings</string>
+    <string name="pref_key__clear_database" translatable="false">pref_key__clear database</string>
+    <string name="pref_key__restart_launcher" translatable="false">pref_key__restart_launcher</string>
+
     <string name="pref_key__cat_desktop" translatable="false">pref_key__cat_desktop</string>
     <string name="pref_key__cat_dock" translatable="false">pref_key__cat_dock</string>
     <string name="pref_key__cat_app_drawer" translatable="false">pref_key__cat_app_drawer</string>
     <string name="pref_key__cat_gestures" translatable="false">pref_key__cat_gestures</string>
     <string name="pref_key__cat_icons" translatable="false">pref_key__cat_icons</string>
     <string name="pref_key__cat_miscellaneous" translatable="false">pref_key__cat_various</string>
-    <string name="pref_key__minibar__arrangement__show_screen" translatable="false">pref_key__minibar__arrangement__show_screen</string>
-    <string name="pref_key__drawer_column_count__portrait" translatable="false">pref_key__drawer_column_count__portrait</string>
-    <string name="pref_key__drawer_row_count__portrait" translatable="false">pref_key__drawer_row_count__portrait</string>
-    <string name="pref_key__drawer_column_count__landscape" translatable="false">pref_key__drawer_column_count__landscape</string>
-    <string name="pref_key__drawer_row_count__landscape" translatable="false">pref_key__drawer_row_count__landscape</string>
-    <string name="pref_key__backup_app_settings" translatable="false">pref_key__backup_app_settings</string>
-    <string name="pref_key__restart_launcher" translatable="false">pref_key__restart_launcher</string>
-    <string name="pref_key__is_drawer_show_label" translatable="false">pref_key__is_drawer_show_label</string>
-    <string name="pref_key__is_dock_enable" translatable="false">pref_key__is_dock_enable</string>
+    <string name="pref_key__about">pref_key__about</string>
+
+    <!-- Internal Keys -->
+
+    <string name="pref_key__is_app_first_start" translatable="false">pref_key__is_app_first_start</string>
+    <string name="pref_key__is_desktop_locked" translatable="false">pref_key__is_desktop_locked</string>
+    <string name="pref_key__desktop_page_current" translatable="false">pref_key__desktop_page_current</string>
+    <string name="pref_key__is_app_restart_required" translatable="false">pref_key__is_app_restart_required</string>
 
     <!-- Item Labels -->
 

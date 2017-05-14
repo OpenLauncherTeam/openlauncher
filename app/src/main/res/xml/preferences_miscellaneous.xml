@@ -8,6 +8,11 @@
             android:title="@string/pref_title__backup_app_settings" />
 
         <Preference
+                android:key="@string/pref_key__clear_database"
+                android:summary="@string/pref_summary__clear_database"
+                android:title="@string/pref_title__clear_database" />
+
+        <Preference
             android:key="@string/pref_key__restart_launcher"
             android:summary="@string/pref_summary__restart_launcher"
             android:title="@string/pref_title__restart_launcher" />

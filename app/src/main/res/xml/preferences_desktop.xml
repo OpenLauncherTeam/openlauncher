@@ -33,16 +33,16 @@
             android:title="@string/pref_title__is_desktop_searchbar_enabled" />
 
         <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="@string/pref_key__is_desktop_show_page_indicator"
-            android:summary="@string/pref_summary__is_desktop_show_page_indicator"
-            android:title="@string/pref_title__is_desktop_show_page_indicator" />
-
-        <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_key__is_desktop_fullscreen"
             android:summary="@string/pref_summary__is_desktop_fullscreen"
             android:title="@string/pref_title__is_desktop_fullscreen" />
+
+        <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="@string/pref_key__is_desktop_show_page_indicator"
+                android:summary="@string/pref_summary__is_desktop_show_page_indicator"
+                android:title="@string/pref_title__is_desktop_show_page_indicator" />
 
         <CheckBoxPreference
             android:defaultValue="true"
@@ -55,11 +55,17 @@
     <PreferenceCategory android:title="@string/pref_title__color">
 
         <com.jaredrummler.android.colorpicker.ColorPreference
+                android:defaultValue="@color/transparent"
+                android:key="@string/pref_key__desktop_background_color"
+                android:title="@string/pref_title__desktop_background_color"
+                app:cpv_dialogTitle="@string/pref_title__desktop_background_color"
+                app:cpv_showAlphaSlider="true" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreference
             android:defaultValue="@color/white"
             android:key="@string/pref_key__desktop_folder_color"
-            android:summary="@string/pref_summary__desktop_folder_color"
             android:title="@string/pref_title__desktop_folder_color"
-            app:cpv_dialogTitle="@string/pref_summary__desktop_folder_color"
+            app:cpv_dialogTitle="@string/pref_title__desktop_folder_color"
             app:cpv_showAlphaSlider="true" />
 
     </PreferenceCategory>

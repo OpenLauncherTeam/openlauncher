@@ -317,6 +317,10 @@ public class AppSettings {
         return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
     }
 
+    public int getDesktopColor() {
+        return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
+    }
+
     public int getDockColor() {
         return getInt(R.string.pref_key__dock_background_color, Color.TRANSPARENT);
     }

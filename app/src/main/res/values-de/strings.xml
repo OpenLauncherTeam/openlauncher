@@ -91,15 +91,10 @@
     <string name="pref_summary__is_open_app_drawer_on_swipe">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
 
     <string name="pref_title__dock_background_color">Dock Hintergundfarbe</string>
-    <string name="pref_summary__dock_background_color">Hintergrundfarbe des Docks</string>
     <string name="pref_title__drawer_background_color">Drawer Hintergrund</string>
-    <string name="pref_summary__drawer_background_color">Drawer Hintergrundfarbe.</string>
     <string name="pref_title__drawer_card_color">Karten</string>
-    <string name="pref_summary__drawer_card_color">Hintergrundfarbe für die App Drawer Karten.</string>
     <string name="pref_title__drawer_label_color">Beschriftung</string>
-    <string name="pref_summary__drawer_label_color">Farbe für die Beschriftungen in den Ordnern und im App Drawer.</string>
     <string name="pref_title__desktop_folder_color">Ordner</string>
-    <string name="pref_summary__desktop_folder_color">Hintergrundfarbe für die Ordner auf dem Desktop.</string>
 
     <string name="pref_title__iconsize_global">Größe</string>
     <string name="pref_summary__iconsize_global">Größe für alle Anwendungsicons.</string>

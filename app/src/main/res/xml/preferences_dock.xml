@@ -34,7 +34,6 @@
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:defaultValue="@color/transparent"
             android:key="@string/pref_key__dock_background_color"
-            android:summary="@string/pref_summary__dock_background_color"
             android:title="@string/pref_title__dock_background_color"
             app:cpv_dialogTitle="@string/pref_title__dock_background_color"
             app:cpv_showAlphaSlider="true" />

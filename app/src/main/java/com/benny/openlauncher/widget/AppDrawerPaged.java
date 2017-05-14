@@ -136,7 +136,6 @@ public class AppDrawerPaged extends SmoothViewPager {
             return new AppItemView.Builder(getContext())
                     .setAppItem(app)
                     .withOnClickLaunchApp(app)
-                    .setTextColor(AppSettings.get().getDrawerLabelColor())
                     .withOnTouchGetPosition()
                     .withOnLongPressDrag(app, DragAction.Action.APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                         @Override
@@ -148,7 +147,10 @@ public class AppDrawerPaged extends SmoothViewPager {
                         public void afterDrag(View view) {
                             home.closeAppDrawer();
                         }
-                    }).getView();
+                    })
+                    .setLabelVisibility(AppSettings.get().isDrawerShowLabel())
+                    .setTextColor(AppSettings.get().getDrawerLabelColor())
+                    .getView();
         }
 
         public Adapter() {

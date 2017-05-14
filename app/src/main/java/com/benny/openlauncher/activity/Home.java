@@ -484,6 +484,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         }
 
+        desktop.setBackgroundColor(appSettings.getDesktopColor());
         dock.setBackgroundColor(appSettings.getDockColor());
 
         appDrawerController.setBackgroundColor(appSettings.getDrawerBackgroundColor());

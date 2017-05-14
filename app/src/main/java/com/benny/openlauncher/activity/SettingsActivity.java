@@ -292,14 +292,6 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 String key = preference.getKey();
                 Activity activity = getActivity();
 
-                if (key.equals(getString(R.string.pref_key__restart_launcher))) {
-                    if (Home.launcher != null)
-                        Home.launcher.recreate();
-                    ((SettingsActivity) activity).shouldLauncherRestart = true;
-                    getActivity().finish();
-                    return true;
-                }
-
                 if (key.equals(getString(R.string.pref_key__backup_app_settings))) {
                     if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         DialogHelper.backupDialog(activity);
@@ -308,6 +300,21 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     }
                 }
 
+                if (key.equals(getString(R.string.pref_key__clear_database))) {
+                    if (Home.launcher != null)
+                        Home.launcher.recreate();
+                    Home.db.onUpgrade(Home.db.getWritableDatabase(), 1, 1);
+                    getActivity().finish();
+                    return true;
+                }
+
+                if (key.equals(getString(R.string.pref_key__restart_launcher))) {
+                    if (Home.launcher != null)
+                        Home.launcher.recreate();
+                    ((SettingsActivity) activity).shouldLauncherRestart = true;
+                    getActivity().finish();
+                    return true;
+                }
             }
             return super.onPreferenceTreeClick(screen, preference);
         }
