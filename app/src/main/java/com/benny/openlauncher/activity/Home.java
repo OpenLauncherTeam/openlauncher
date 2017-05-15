@@ -653,8 +653,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         Item item = Item.newWidgetItem(appWidgetId);
         item.spanX = ((appWidgetInfo.minWidth - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth) + 1;
         item.spanY = ((appWidgetInfo.minHeight - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight) + 1;
-        item.x = 0;
-        item.y = 0;
+        Point point = desktop.getCurrentPage().findFreeSpace(item.spanX, item.spanY);
+        item.x = point.x;
+        item.y = point.y;
         desktop.addItemToPage(item, desktop.getCurrentItem());
     }
 

@@ -140,7 +140,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Item getItem(int id) {
         String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + id;
         Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
-        Item item = new Item();
+        Item item = null;
         if (cursor.moveToFirst()) {
             item = getSelectionItem(cursor);
         }

@@ -223,15 +223,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 } else {
                     Point pos = getCurrentPage().touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.spanX, item.spanY, false);
                     View itemView = getCurrentPage().coordinateToChildView(pos);
-                    if (itemView != null) {
-                        if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, getCurrentPage(), getCurrentItem(), 1, this)) {
-                            home.desktop.consumeRevert();
-                            home.dock.consumeRevert();
-                        } else {
-                            Toast.makeText(getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
-                            home.dock.revertLastItem();
-                            home.desktop.revertLastItem();
-                        }
+                    if (itemView != null && Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, getCurrentPage(), getCurrentItem(), 1, this)) {
+                        home.desktop.consumeRevert();
+                        home.dock.consumeRevert();
                     } else {
                         Toast.makeText(getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
                         home.dock.revertLastItem();
@@ -553,6 +547,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     group.name = (home.getString(R.string.group));
                     group.x = item.x;
                     group.y = item.y;
+
+                    // add the drop item just in case it is coming from the app drawer
+                    home.db.setItem(dropItem, page, desktop);
 
                     // hide the apps added to the group
                     home.db.updateItem(item, 0);
