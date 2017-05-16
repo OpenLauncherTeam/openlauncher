@@ -1,28 +1,27 @@
-### v0.4.1 (Unreleased)
-* Added : launch app through gestures
-* Added : Search bar
-* Added : desktop lock
+### v0.5.0
+* Settings have been redesigned and will be reset
+* Add ability launch app with gesture
+* Custom search bar layout without requiring google services
+* Option to lock the desktop from changes
 * Lots of bug fixes
 * Layout fixes
 
 ### v0.4.0
-* Move launcheranim & smootviewpager to app
+* Desktop is now saved in database and will be reset
+* Move launcheranim and smoothviewpager to app
 * Lots of bug fixes
 
 ### v0.3.1
 * Update build scheme
-* Added nightly icons
-* Added CircleCI
+* Add nightly icons
+* Add CircleCI
 * Update library strings
 * Optimize icons
-* Started with new database format
-* fixed #55 and added 'android.max_aspect' mete data for the application
 * Refactor activities
-* add minibar edit fragment
+* Add minibar edit fragment
 * Using ButterKnife in the Home activity, using CustomOnCrash.. lib to catch any error. #36 (quick fix)
 * Remove unused resources, extra translations
-* added settings button in desktop preview (after long pressing the desktop) 
-* OLSettings #34 added switch to disable the MinBar in the MinBar activity
-* move backup dialog to dialog utils and rename backup folder
-* fix issue #31
+* Add settings button in desktop preview (when long pressing the desktop)
+* Add a switch to disable the minibar
+* Move backup dialog to dialog utils and rename backup folder
 * Refactor project to use default android gradle project layout
