@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory android:title="@string/pref_title__size">
+    <PreferenceCategory android:title="@string/pref_title_size">
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="4"
-            android:key="@string/pref_key__desktop_column_count"
+            android:key="@string/pref_key_desktop_columns"
             android:title="@string/columns"
             app:maxValue="10"
             app:minValue="2" />
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="5"
-            android:key="@string/pref_key__desktop_row_count"
+            android:key="@string/pref_key_desktop_rows"
             android:title="@string/rows"
             app:maxValue="10"
             app:minValue="2" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__appearance">
+    <PreferenceCategory android:title="@string/pref_title_appearance">
 
         <Preference
-            android:key="@string/pref_key__minibar__arrangement__show_screen"
-            android:summary="@string/pref_summary__minibar__arrangement__show_screen"
-            android:title="@string/pref_title__minibar__arrangement__show_screen" />
+            android:key="@string/pref_key_minibar"
+            android:summary="@string/pref_summary_minibar"
+            android:title="@string/pref_title_minibar" />
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_key__is_desktop_searchbar_enabled"
-            android:summary="@string/pref_summary__is_desktop_searchbar_enabled"
-            android:title="@string/pref_title__is_desktop_searchbar_enabled" />
+            android:key="@string/pref_key_search_bar_enable"
+            android:summary="@string/pref_summary_search_bar_enable"
+            android:title="@string/pref_title_search_bar_enable" />
 
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="@string/pref_key__is_desktop_fullscreen"
-            android:summary="@string/pref_summary__is_desktop_fullscreen"
-            android:title="@string/pref_title__is_desktop_fullscreen" />
+            android:key="@string/pref_key_desktop_fullscreen"
+            android:summary="@string/pref_summary_desktop_fullscreen"
+            android:title="@string/pref_title_desktop_fullscreen" />
 
         <CheckBoxPreference
                 android:defaultValue="true"
-                android:key="@string/pref_key__is_desktop_show_page_indicator"
-                android:summary="@string/pref_summary__is_desktop_show_page_indicator"
-                android:title="@string/pref_title__is_desktop_show_page_indicator" />
+                android:key="@string/pref_key_desktop_show_position_indicator"
+                android:summary="@string/pref_summary_desktop_show_position_indicator"
+                android:title="@string/pref_title_desktop_show_position_indicator" />
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_key__is_desktop_show_label"
-            android:summary="@string/pref_summary__is_desktop_show_label"
-            android:title="@string/pref_title__is_desktop_show_label" />
+            android:key="@string/pref_key_desktop_show_label"
+            android:summary="@string/pref_summary_desktop_show_label"
+            android:title="@string/pref_title_desktop_show_label" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__color">
+    <PreferenceCategory android:title="@string/pref_title_color">
 
         <com.jaredrummler.android.colorpicker.ColorPreference
                 android:defaultValue="@color/transparent"
-                android:key="@string/pref_key__desktop_background_color"
-                android:title="@string/pref_title__desktop_background_color"
-                app:cpv_dialogTitle="@string/pref_title__desktop_background_color"
+                android:key="@string/pref_key_desktop_background_color"
+                android:title="@string/pref_title_desktop_background_color"
+                app:cpv_dialogTitle="@string/pref_title_desktop_background_color"
                 app:cpv_showAlphaSlider="true" />
 
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:defaultValue="@color/white"
-            android:key="@string/pref_key__desktop_folder_color"
-            android:title="@string/pref_title__desktop_folder_color"
-            app:cpv_dialogTitle="@string/pref_title__desktop_folder_color"
+            android:key="@string/pref_key_desktop_folder_color"
+            android:title="@string/pref_title_desktop_folder_color"
+            app:cpv_dialogTitle="@string/pref_title_desktop_folder_color"
             app:cpv_showAlphaSlider="true" />
 
     </PreferenceCategory>

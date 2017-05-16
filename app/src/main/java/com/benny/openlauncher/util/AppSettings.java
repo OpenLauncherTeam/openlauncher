@@ -163,91 +163,91 @@ public class AppSettings {
     }
 
     // methods that actually modify the preferences
-    public int getIconsizeGlobal() {
-        return getInt(R.string.pref_key__iconsize_global, 52);
+    public int getIconSize() {
+        return getInt(R.string.pref_key_icon_size, 52);
     }
 
     public boolean isAppFirstLaunch() {
-        return getBool(R.string.pref_key__is_app_first_start, true);
+        return getBool(R.string.pref_key_first_start, true);
     }
 
     @SuppressLint("ApplySharedPref")
     public void setAppFirstLaunch(boolean value) {
         // MUST be committed
         prefApp.edit().putBoolean(context.getString
-                (R.string.pref_key__is_app_first_start), value).commit();
+                (R.string.pref_key_first_start), value).commit();
     }
 
     public int getDesktopMode() {
-        return getIntOfStringPref(R.string.pref_key__desktop_mode, Desktop.DesktopMode.NORMAL);
+        return getIntOfStringPref(R.string.pref_key_desktop_style, Desktop.DesktopMode.NORMAL);
     }
 
     public boolean isDesktopLocked() {
-        return getBool(R.string.pref_key__is_desktop_locked, false);
+        return getBool(R.string.pref_key_desktop_lock, false);
     }
 
     public void setDesktopLocked(boolean value) {
-        setBool(R.string.pref_key__is_desktop_locked, value);
+        setBool(R.string.pref_key_desktop_lock, value);
     }
 
     public int getAppDrawerMode() {
-        return getIntOfStringPref(R.string.pref_key__drawer_mode, AppDrawerController.DrawerMode.VERTICAL);
+        return getIntOfStringPref(R.string.pref_key_drawer_style, AppDrawerController.DrawerMode.VERTICAL);
     }
 
     public String getIconPack() {
-        return getString(R.string.pref_key__icon_pack_name, "");
+        return getString(R.string.pref_key_icon_pack, "");
     }
 
     public void setIconPack(String value) {
-        setString(R.string.pref_key__icon_pack_name, value);
+        setString(R.string.pref_key_icon_pack, value);
     }
 
     public boolean isDockShowLabel() {
-        return getBool(R.string.pref_key__is_dock_show_label, false);
+        return getBool(R.string.pref_key_dock_show_label, false);
     }
 
     public boolean isDrawerShowLabel() {
-        return getBool(R.string.pref_key__is_drawer_show_label, true);
+        return getBool(R.string.pref_key_drawer_show_label, true);
     }
 
     public int getDrawerColumnCount_Portrait() {
-        return getInt(R.string.pref_key__drawer_column_count__portrait, 5);
+        return getInt(R.string.pref_key_drawer_columns, 5);
     }
 
     public int getDrawerRowCount_Portrait() {
-        return getInt(R.string.pref_key__drawer_row_count__portrait, 6);
+        return getInt(R.string.pref_key_drawer_rows, 6);
     }
 
     public int getDrawerColumnCount_Landscape() {
-        return getInt(R.string.pref_key__drawer_column_count__landscape, 5);
+        return getInt(R.string.pref_key_drawer_columns_landscape, 5);
     }
 
     public int getDrawerRowCount_Landscape() {
-        return getInt(R.string.pref_key__drawer_row_count__landscape, 3);
+        return getInt(R.string.pref_key_drawer_rows_landscape, 3);
     }
 
     public int getDesktopColumnCount() {
-        return getInt(R.string.pref_key__desktop_column_count, 5);
+        return getInt(R.string.pref_key_desktop_columns, 5);
     }
 
     public int getDesktopRowCount() {
-        return getInt(R.string.pref_key__desktop_row_count, 6);
+        return getInt(R.string.pref_key_desktop_rows, 6);
     }
 
-    public int getDockColumnCount() {
-        return getInt(R.string.pref_key__dock_column_count, 5);
+    public int getDockSize() {
+        return getInt(R.string.pref_key_dock_size, 5);
     }
 
     public boolean isMinibarEnabled() {
-        return getBool(R.string.pref_key__is_minibar_enabled, true);
+        return getBool(R.string.pref_key_minibar_enable, true);
     }
 
     public void setMinibarEnabled(boolean value) {
-        setBool(R.string.pref_key__is_minibar_enabled, value);
+        setBool(R.string.pref_key_minibar_enable, value);
     }
 
     public ArrayList<String> getMinibarArrangement() {
-        ArrayList<String> ret = new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key__minibar__arrangement__tmp)));
+        ArrayList<String> ret = new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key_minibar_data)));
         if (ret.isEmpty()) {
             for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
                 ret.add("0" + item.label.toString());
@@ -258,97 +258,97 @@ public class AppSettings {
     }
 
     public void setMinibarArrangement(ArrayList<String> value) {
-        setStringArray(R.string.pref_key__minibar__arrangement__tmp, value.toArray(new String[value.size()]));
+        setStringArray(R.string.pref_key_minibar_data, value.toArray(new String[value.size()]));
     }
 
     public boolean isDesktopSearchbarEnabled() {
-        return getBool(R.string.pref_key__is_desktop_searchbar_enabled, true);
+        return getBool(R.string.pref_key_search_bar_enable, true);
     }
 
     public boolean isDesktopFullscreen() {
-        return getBool(R.string.pref_key__is_desktop_fullscreen, false);
+        return getBool(R.string.pref_key_desktop_fullscreen, false);
     }
 
     public boolean isDesktopShowPageIndicator() {
-        return getBool(R.string.pref_key__is_desktop_show_page_indicator, true);
+        return getBool(R.string.pref_key_desktop_show_position_indicator, true);
     }
 
     public boolean isDesktopShowLabel() {
-        return getBool(R.string.pref_key__is_desktop_show_label, true);
+        return getBool(R.string.pref_key_desktop_show_label, true);
     }
 
     public int getDesktopPageCurrent() {
-        return getInt(R.string.pref_key__desktop_page_current, 0);
+        return getInt(R.string.pref_key_desktop_current_position, 0);
     }
 
     public void setDesktopPageCurrent(int value) {
-        setInt(R.string.pref_key__desktop_page_current, value);
+        setInt(R.string.pref_key_desktop_current_position, value);
     }
 
     public boolean isOpenAppDrawerOnSwipe() {
-        return getBool(R.string.pref_key__is_open_app_drawer_on_swipe, true);
+        return getBool(R.string.pref_key_dock_swipe_up, true);
     }
 
     public boolean isDrawerUseCard() {
-        return getBool(R.string.pref_key__is_drawer_use_card, true);
+        return getBool(R.string.pref_key_drawer_show_card_view, true);
     }
 
     public boolean isDrawerRememberPage() {
-        return getBool(R.string.pref_key__is_drawer_remember_position, true);
+        return getBool(R.string.pref_key_drawer_remember_position, true);
     }
 
     public boolean isDrawerShowIndicator() {
-        return getBool(R.string.pref_key__is_drawer_show_indicator, true);
+        return getBool(R.string.pref_key_drawer_show_position_indicator, true);
     }
 
     public int getDrawerBackgroundColor() {
-        return getInt(R.string.pref_key__drawer_background_color, Color.TRANSPARENT);
+        return getInt(R.string.pref_key_drawer_background_color, Color.TRANSPARENT);
     }
 
     public int getDrawerCardColor() {
-        return getInt(R.string.pref_key__drawer_card_color, Color.WHITE);
+        return getInt(R.string.pref_key_drawer_card_color, Color.WHITE);
     }
 
     public int getDrawerLabelColor() {
-        return getInt(R.string.pref_key__drawer_label_color, Color.DKGRAY);
+        return getInt(R.string.pref_key_drawer_label_color, Color.DKGRAY);
     }
 
     public int getDestkopFolderColor() {
-        return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
+        return getInt(R.string.pref_key_desktop_folder_color, Color.WHITE);
     }
 
     public int getDesktopColor() {
-        return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
+        return getInt(R.string.pref_key_desktop_background_color, Color.TRANSPARENT);
     }
 
     public int getDockColor() {
-        return getInt(R.string.pref_key__dock_background_color, Color.TRANSPARENT);
+        return getInt(R.string.pref_key_dock_background_color, Color.TRANSPARENT);
     }
 
     public boolean isDockEnable() {
-        return getBool(R.string.pref_key__is_dock_enable, true);
+        return getBool(R.string.pref_key_dock_enable, true);
     }
 
     public void setDockEnable(boolean enable) {
-        setBool(R.string.pref_key__is_dock_enable, enable);
+        setBool(R.string.pref_key_dock_enable, enable);
     }
 
     public ArrayList<String> getHiddenAppsList() {
-        return new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key__hidden_apps_list)));
+        return new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key_hide_apps)));
     }
 
     public void setHiddenAppsList(ArrayList<String> value) {
-        setStringArray(R.string.pref_key__hidden_apps_list, value.toArray(new String[value.size()]));
+        setStringArray(R.string.pref_key_hide_apps, value.toArray(new String[value.size()]));
     }
 
     public boolean isAppRestartRequired() {
-        return getBool(R.string.pref_key__is_app_restart_required, false);
+        return getBool(R.string.pref_key_queue_restart, false);
     }
 
     @SuppressLint("ApplySharedPref")
     public void setAppRestartRequired(boolean value) {
         // MUST be committed
         prefApp.edit().putBoolean(context.getString
-                (R.string.pref_key__is_app_restart_required), value).commit();
+                (R.string.pref_key_queue_restart), value).commit();
     }
 }

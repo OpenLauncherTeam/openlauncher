@@ -241,13 +241,13 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder(Context context) {
             view = new AppItemView(context);
-            float iconSize = Tool.dp2px(AppSettings.get().getIconsizeGlobal(), view.getContext());
+            float iconSize = Tool.dp2px(AppSettings.get().getIconSize(), view.getContext());
             view.setIconSize(iconSize);
         }
 
         public Builder(AppItemView view) {
             this.view = view;
-            float iconSize = Tool.dp2px(AppSettings.get().getIconsizeGlobal(), view.getContext());
+            float iconSize = Tool.dp2px(AppSettings.get().getIconSize(), view.getContext());
             view.setIconSize(iconSize);
         }
 
@@ -279,7 +279,7 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setActionItem(Item item) {
-            int iconSize = AppSettings.get().getIconsizeGlobal();
+            int iconSize = AppSettings.get().getIconSize();
             TypedValue typedValue = new TypedValue();
             switch (item.actionValue) {
                 case 8:

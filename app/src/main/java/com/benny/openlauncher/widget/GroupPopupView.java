@@ -87,7 +87,7 @@ public class GroupPopupView extends FrameLayout {
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.items.size());
         cellContainer.setGridSize(cellSize[0], cellSize[1]);
 
-        int iconSize = Tool.dp2px(AppSettings.get().getIconsizeGlobal(), c);
+        int iconSize = Tool.dp2px(AppSettings.get().getIconSize(), c);
         int textSize = Tool.dp2px(22, c);
         int contentPadding = Tool.dp2px(5, c);
 

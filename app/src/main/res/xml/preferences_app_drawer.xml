@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory android:title="@string/pref_title__size">
+    <PreferenceCategory android:title="@string/pref_title_size">
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="4"
-            android:key="@string/pref_key__drawer_column_count__portrait"
+            android:key="@string/pref_key_drawer_columns"
             android:title="@string/columns"
             app:maxValue="10"
             app:minValue="2" />
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="5"
-            android:key="@string/pref_key__drawer_row_count__portrait"
+            android:key="@string/pref_key_drawer_rows"
             android:title="@string/rows"
             app:maxValue="10"
             app:minValue="2" />
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="4"
-            android:key="@string/pref_key__drawer_column_count__landscape"
+            android:key="@string/pref_key_drawer_columns_landscape"
             android:title="@string/columns_landscape"
             app:maxValue="10"
             app:minValue="2" />
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="5"
-            android:key="@string/pref_key__drawer_row_count__landscape"
+            android:key="@string/pref_key_drawer_rows_landscape"
             android:title="@string/rows_landscape"
             app:maxValue="10"
             app:minValue="2" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__appearance">
+    <PreferenceCategory android:title="@string/pref_title_appearance">
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/entries__drawer_modes"
             android:entryValues="@array/values__from_zero__to__one"
-            android:key="@string/pref_key__drawer_mode"
-            android:summary="@string/pref_summary__drawer_style"
-            android:title="@string/pref_title__drawer_style" />
+            android:key="@string/pref_key_drawer_style"
+            android:summary="@string/pref_summary_drawer_style"
+            android:title="@string/pref_title_drawer_style" />
 
         <Preference
-            android:key="@string/pref_key__hidden_apps_list"
-            android:summary="@string/pref_summary__hidden_apps_list"
-            android:title="@string/pref_title__hidden_apps_list" />
+            android:key="@string/pref_key_hide_apps"
+            android:summary="@string/pref_summary_hide_apps"
+            android:title="@string/pref_title_hide_apps" />
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_key__is_drawer_use_card"
-            android:summary="@string/pref_summary__is_drawer_use_card"
-            android:title="@string/pref_title__is_drawer_use_card" />
+            android:key="@string/pref_key_drawer_show_card_view"
+            android:summary="@string/pref_summary_drawer_show_card_view"
+            android:title="@string/pref_title_drawer_show_card_view" />
 
         <CheckBoxPreference
                 android:defaultValue="true"
-                android:key="@string/pref_key__is_drawer_remember_position"
-                android:summary="@string/pref_summary__is_drawer_remember_position"
-                android:title="@string/pref_title__is_drawer_remember_position" />
+                android:key="@string/pref_key_drawer_remember_position"
+                android:summary="@string/pref_summary_drawer_remember_position"
+                android:title="@string/pref_title_drawer_remember_position" />
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_key__is_drawer_show_indicator"
-            android:summary="@string/pref_summary__is_drawer_show_indicator"
-            android:title="@string/pref_title__is_drawer_show_indicator" />
+            android:key="@string/pref_key_drawer_show_position_indicator"
+            android:summary="@string/pref_summary_drawer_show_position_indicator"
+            android:title="@string/pref_title_drawer_show_position_indicator" />
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_key__is_drawer_show_label"
-            android:summary="@string/pref_summary__is_drawer_show_label"
-            android:title="@string/pref_title__is_drawer_show_label" />
+            android:key="@string/pref_key_drawer_show_label"
+            android:summary="@string/pref_summary_drawer_show_label"
+            android:title="@string/pref_title_drawer_show_label" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__color">
+    <PreferenceCategory android:title="@string/pref_title_color">
 
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:defaultValue="@color/transparent"
-            android:key="@string/pref_key__drawer_background_color"
-            android:title="@string/pref_title__drawer_background_color"
-            app:cpv_dialogTitle="@string/pref_title__drawer_background_color"
+            android:key="@string/pref_key_drawer_background_color"
+            android:title="@string/pref_title_drawer_background_color"
+            app:cpv_dialogTitle="@string/pref_title_drawer_background_color"
             app:cpv_showAlphaSlider="true" />
 
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:defaultValue="@color/white"
-            android:key="@string/pref_key__drawer_card_color"
-            android:title="@string/pref_title__drawer_card_color"
-            app:cpv_dialogTitle="@string/pref_title__drawer_card_color"
+            android:key="@string/pref_key_drawer_card_color"
+            android:title="@string/pref_title_drawer_card_color"
+            app:cpv_dialogTitle="@string/pref_title_drawer_card_color"
             app:cpv_showAlphaSlider="true" />
 
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:defaultValue="@color/dark_grey"
-            android:key="@string/pref_key__drawer_label_color"
-            android:title="@string/pref_title__drawer_label_color"
-            app:cpv_dialogTitle="@string/pref_title__drawer_label_color"
+            android:key="@string/pref_key_drawer_label_color"
+            android:title="@string/pref_title_drawer_label_color"
+            app:cpv_dialogTitle="@string/pref_title_drawer_label_color"
             app:cpv_showAlphaSlider="true" />
 
     </PreferenceCategory>

@@ -348,7 +348,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     private void initDock() {
-        int iconSize = AppSettings.get().getIconsizeGlobal();
+        int iconSize = AppSettings.get().getIconSize();
         dock.init();
         if (appSettings.isDockShowLabel()) {
             dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;

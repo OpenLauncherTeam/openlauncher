@@ -49,7 +49,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     public void initDockItem(Home home) {
-        int columns = AppSettings.get().getDockColumnCount();
+        int columns = AppSettings.get().getDockSize();
         setGridSize(columns, 1);
         List<Item> dockItems = Home.db.getDock();
 
@@ -176,7 +176,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
 
-        int iconSize = AppSettings.get().getIconsizeGlobal();
+        int iconSize = AppSettings.get().getIconSize();
         if (appSettings.isDockShowLabel()) {
             height = Tool.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
         } else {

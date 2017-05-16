@@ -278,7 +278,7 @@ public class ItemViewFactory {
     }
 
     public static Drawable getGroupIconDrawable(Context context, Item item) {
-        final float iconSize = Tool.dp2px(AppSettings.get().getIconsizeGlobal(), context);
+        final float iconSize = Tool.dp2px(AppSettings.get().getIconSize(), context);
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {
             if (i < item.items.size()) {

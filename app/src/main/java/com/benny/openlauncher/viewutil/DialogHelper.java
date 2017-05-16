@@ -13,10 +13,10 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -89,7 +89,7 @@ public class DialogHelper {
         dialog.show();
     }
 
-    public static void selectActionDialog(final Context context, int titleId, LauncherAction.ActionItem selected, final OnActionSelectedListener onActionSelectedListener) {
+    public static void selectActionDialog(final Context context, int titleId, LauncherAction.ActionItem selected, final int id, final OnActionSelectedListener onActionSelectedListener) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(context.getString(titleId))
                 .negativeText(R.string.cancel)
@@ -98,23 +98,25 @@ public class DialogHelper {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                         LauncherAction.ActionItem item = null;
-                        if (which > 0)
+                        if (which > 0) {
                             item = LauncherAction.getActionItem(which - 1);
-
-
-                        if (item != null && item.action == LauncherAction.Action.LaunchApp) {
-                            final LauncherAction.ActionItem finalItem = item;
-                            selectAppDialog(context, new OnAppSelectedListener() {
-                                @Override
-                                public void onAppSelected(AppManager.App app) {
-                                    finalItem.extraData = Tool.getStartAppIntent(app);
-                                    onActionSelectedListener.onActionSelected(finalItem);
-                                }
-                            });
-                        } else if (onActionSelectedListener != null) {
-                            onActionSelectedListener.onActionSelected(item);
+                            if (item != null && item.action == LauncherAction.Action.LaunchApp) {
+                                final LauncherAction.ActionItem finalItem = item;
+                                selectAppDialog(context, new OnAppSelectedListener() {
+                                    @Override
+                                    public void onAppSelected(AppManager.App app) {
+                                        finalItem.extraData = Tool.getStartAppIntent(app);
+                                        onActionSelectedListener.onActionSelected(finalItem);
+                                        Home.launcher.db.setGesture(id, finalItem);
+                                    }
+                                });
+                            } else if (onActionSelectedListener != null) {
+                                onActionSelectedListener.onActionSelected(item);
+                                Home.launcher.db.setGesture(id, item);
+                            }
+                        } else {
+                            Home.launcher.db.deleteGesture(id);
                         }
-
                         return true;
                     }
                 })
@@ -149,7 +151,7 @@ public class DialogHelper {
     public static void backupDialog(final Context context) {
         final CharSequence[] options = {context.getResources().getString(R.string.dialog__backup_app_settings__backup), context.getResources().getString(R.string.dialog__backup_app_settings__restore)};
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(R.string.pref_title__backup_app_settings)
+        builder.title(R.string.pref_title_backup)
                 .positiveText(R.string.cancel)
                 .items(options)
                 .itemsCallback(new MaterialDialog.ListCallback() {

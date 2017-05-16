@@ -3,6 +3,7 @@ package com.benny.openlauncher.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -35,6 +36,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
     protected AppBarLayout appBarLayout;
     @BindView(R.id.settings_toolbar)
     protected Toolbar toolbar;
+    protected static Context context;
 
     private AppSettings appSettings;
     private boolean shouldLauncherRestart = false;
@@ -43,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         super.onCreate(b);
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
+        context = this;
         toolbar.setTitle(R.string.settings);
         setSupportActionBar(toolbar);
         appSettings = AppSettings.get();
@@ -61,27 +64,27 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             switch (tag) {
                 case SettingsFragmentDesktop.TAG:
                     fragment = new SettingsFragmentDesktop();
-                    toolbar.setTitle(R.string.pref_title__desktop);
+                    toolbar.setTitle(R.string.pref_title_desktop);
                     break;
                 case SettingsFragmentAppDrawer.TAG:
                     fragment = new SettingsFragmentAppDrawer();
-                    toolbar.setTitle(R.string.pref_title__app_drawer);
+                    toolbar.setTitle(R.string.pref_title_app_drawer);
                     break;
                 case SettingsFragmentDock.TAG:
                     fragment = new SettingsFragmentDock();
-                    toolbar.setTitle(R.string.pref_title__dock);
+                    toolbar.setTitle(R.string.pref_title_dock);
                     break;
                 case SettingsFragmentGestures.TAG:
                     fragment = new SettingsFragmentGestures();
-                    toolbar.setTitle(R.string.pref_title__gestures);
+                    toolbar.setTitle(R.string.pref_title_gestures);
                     break;
                 case SettingsFragmentIcons.TAG:
                     fragment = new SettingsFragmentIcons();
-                    toolbar.setTitle(R.string.pref_title__icons);
+                    toolbar.setTitle(R.string.pref_title_icons);
                     break;
                 case SettingsFragmentMiscellaneous.TAG:
                     fragment = new SettingsFragmentMiscellaneous();
-                    toolbar.setTitle(R.string.pref_title__miscellaneous);
+                    toolbar.setTitle(R.string.pref_title_miscellaneous);
                     break;
                 case SettingsFragmentMaster.TAG:
                 default:
@@ -130,25 +133,25 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             if (isAdded() && preference.hasKey()) {
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
-                if (settings.isKeyEqual(key, R.string.pref_key__cat_desktop)) {
+                if (settings.isKeyEqual(key, R.string.pref_key_cat_desktop)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentDesktop.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_app_drawer)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key_cat_app_drawer)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentAppDrawer.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_dock)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key_cat_dock)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentDock.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_gestures)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key_cat_gestures)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentGestures.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_icons)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key_cat_icons)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentIcons.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_miscellaneous)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key_cat_miscellaneous)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentMiscellaneous.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__about)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key_about)) {
                     startActivity(new Intent(getActivity(), AboutActivity.class));
                     return true;
                 }
@@ -179,7 +182,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
-                if (key.equals(getString(R.string.pref_key__minibar__arrangement__show_screen))) {
+                if (key.equals(getString(R.string.pref_key_minibar))) {
                     LauncherAction.RunAction(LauncherAction.Action.EditMinBar, getActivity().getApplicationContext());
                     return true;
                 }
@@ -203,7 +206,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
-                if (key.equals(getString(R.string.pref_key__hidden_apps_list))) {
+                if (key.equals(getString(R.string.pref_key_hide_apps))) {
                     Intent intent = new Intent(getActivity(), HideAppsSelectionActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
@@ -231,7 +234,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
-                if (key.equals(getString(R.string.pref_key__is_dock_enable))) {
+                if (key.equals(getString(R.string.pref_key_dock_enable))) {
                     Home.launcher.updateDock(true);
                     ((SettingsActivity) getActivity()).shouldLauncherRestart = false;
                     return true;
@@ -248,6 +251,65 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             super.onCreate(savedInstances);
             getPreferenceManager().setSharedPreferencesName("app");
             addPreferencesFromResource(R.xml.preferences_gestures);
+        }
+
+        @Override
+        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+            if (isAdded() && preference.hasKey()) {
+                AppSettings settings = AppSettings.get();
+                String key = preference.getKey();
+
+                if (key.equals(getString(R.string.pref_key_desktop_double_tap))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title_desktop_double_tap, Home.launcher.db.getGesture(0), 0, new DialogHelper.OnActionSelectedListener() {
+                        @Override
+                        public void onActionSelected(LauncherAction.ActionItem item) {
+                            // do nothing
+                        }
+                    });
+                    return true;
+                }
+
+                if (key.equals(getString(R.string.pref_key_desktop_swipe_up))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title_desktop_double_tap, Home.launcher.db.getGesture(1), 1, new DialogHelper.OnActionSelectedListener() {
+                        @Override
+                        public void onActionSelected(LauncherAction.ActionItem item) {
+                            // do nothing
+                        }
+                    });
+                    return true;
+                }
+
+                if (key.equals(getString(R.string.pref_key_desktop_swipe_down))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title_desktop_double_tap, Home.launcher.db.getGesture(2), 2, new DialogHelper.OnActionSelectedListener() {
+                        @Override
+                        public void onActionSelected(LauncherAction.ActionItem item) {
+                            // do nothing
+                        }
+                    });
+                    return true;
+                }
+
+                if (key.equals(getString(R.string.pref_key_desktop_pinch))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title_desktop_double_tap, Home.launcher.db.getGesture(3), 3, new DialogHelper.OnActionSelectedListener() {
+                        @Override
+                        public void onActionSelected(LauncherAction.ActionItem item) {
+                            // do nothing
+                        }
+                    });
+                    return true;
+                }
+
+                if (key.equals(getString(R.string.pref_key_desktop_unpinch))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title_desktop_double_tap, Home.launcher.db.getGesture(4), 4, new DialogHelper.OnActionSelectedListener() {
+                        @Override
+                        public void onActionSelected(LauncherAction.ActionItem item) {
+                            // do nothing
+                        }
+                    });
+                    return true;
+                }
+            }
+            return super.onPreferenceTreeClick(screen, preference);
         }
     }
 
@@ -266,7 +328,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
-                if (key.equals(getString(R.string.pref_key__icon_pack_name))) {
+                if (key.equals(getString(R.string.pref_key_icon_pack))) {
                     AppManager.getInstance(getActivity()).startPickIconPackIntent(getActivity());
                     ((SettingsActivity) getActivity()).shouldLauncherRestart = true;
                     return true;
@@ -292,7 +354,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 String key = preference.getKey();
                 Activity activity = getActivity();
 
-                if (key.equals(getString(R.string.pref_key__backup_app_settings))) {
+                if (key.equals(getString(R.string.pref_key_backup))) {
                     if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         DialogHelper.backupDialog(activity);
                     } else {
@@ -300,7 +362,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     }
                 }
 
-                if (key.equals(getString(R.string.pref_key__clear_database))) {
+                if (key.equals(getString(R.string.pref_key_clear_database))) {
                     if (Home.launcher != null)
                         Home.launcher.recreate();
                     Home.db.onUpgrade(Home.db.getWritableDatabase(), 1, 1);
@@ -308,7 +370,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     return true;
                 }
 
-                if (key.equals(getString(R.string.pref_key__restart_launcher))) {
+                if (key.equals(getString(R.string.pref_key_restart))) {
                     if (Home.launcher != null)
                         Home.launcher.recreate();
                     ((SettingsActivity) activity).shouldLauncherRestart = true;

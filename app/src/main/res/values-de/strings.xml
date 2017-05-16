@@ -62,52 +62,52 @@
     <string name="dialog__icon_pack_title">Wähle ein Icon Pack aus</string>
     <string name="dialog__icon_pack_info_toast">Du must zuerst die Berechtigung \"Manifest.permission.READ_EXTERNAL_STORAGE\" gewähren.</string>
 
-    <string name="pref_title__color">Farben</string>
-    <string name="pref_title__miscellaneous">Anderes</string>
+    <string name="pref_title_color">Farben</string>
+    <string name="pref_title_miscellaneous">Anderes</string>
 
-    <string name="pref_title__is_desktop_searchbar_enabled">Suchleiste</string>
-    <string name="pref_summary__is_desktop_searchbar_enabled">Zeige eine Suchleiste am oberen Desktoprand.</string>
-    <string name="pref_title__size">Größe</string>
-    <string name="pref_title__is_desktop_fullscreen">Vollbild</string>
-    <string name="pref_summary__is_desktop_fullscreen">Aktiviere den Vollbildmodus für deinen Desktop.</string>
-    <string name="pref_title__is_desktop_show_page_indicator">Seitenindikator</string>
-    <string name="pref_summary__is_desktop_show_page_indicator">Zeige den Seitenindikator auf dem Desktop an.</string>
-    <string name="pref_summary__is_desktop_show_label">Zeige Anwendungs- und Ordnernamen auf dem Desktop.</string>
+    <string name="pref_title_search_bar_enable">Suchleiste</string>
+    <string name="pref_summary_search_bar_enable">Zeige eine Suchleiste am oberen Desktoprand.</string>
+    <string name="pref_title_size">Größe</string>
+    <string name="pref_title_desktop_fullscreen">Vollbild</string>
+    <string name="pref_summary_desktop_fullscreen">Aktiviere den Vollbildmodus für deinen Desktop.</string>
+    <string name="pref_title_desktop_show_position_indicator">Seitenindikator</string>
+    <string name="pref_summary_desktop_show_position_indicator">Zeige den Seitenindikator auf dem Desktop an.</string>
+    <string name="pref_summary_desktop_show_label">Zeige Anwendungs- und Ordnernamen auf dem Desktop.</string>
 
-    <string name="pref_title__is_dock_show_label">Beschriftung</string>
-    <string name="pref_summary__is_dock_show_label">Zeige Anwendungs- und Ordnernamen im Dock.</string>
-    <string name="pref_title__dock_column_count">Größe</string>
-    <string name="pref_summary__dock_column_count">Bestimme die Größe des Docks.</string>
+    <string name="pref_title_dock_show_label">Beschriftung</string>
+    <string name="pref_summary_dock_show_label">Zeige Anwendungs- und Ordnernamen im Dock.</string>
+    <string name="pref_title_dock_size">Größe</string>
+    <string name="pref_summary_dock_size">Bestimme die Größe des Docks.</string>
 
-    <string name="pref_title__drawer_style">Stil</string>
-    <string name="pref_summary__drawer_style">Wähle zwischen einer Karten- oder einer vertikalen Ansicht.</string>
-    <string name="pref_title__is_drawer_use_card">Karten</string>
-    <string name="pref_summary__is_drawer_use_card">Benutze Karten für den Drawer Hintergrund.</string>
-    <string name="pref_title__is_drawer_remember_position">Merke letzte Seite</string>
-    <string name="pref_title__is_drawer_show_indicator">Seitenindikator/Scrollbar</string>
-    <string name="pref_summary__is_drawer_show_indicator">Zeige den Seitenindikator bzw. die Scrollbar im Drawer an.</string>
+    <string name="pref_title_drawer_style">Stil</string>
+    <string name="pref_summary_drawer_style">Wähle zwischen einer Karten- oder einer vertikalen Ansicht.</string>
+    <string name="pref_title_drawer_show_card_view">Karten</string>
+    <string name="pref_summary_drawer_show_card_view">Benutze Karten für den Drawer Hintergrund.</string>
+    <string name="pref_title_drawer_remember_position">Merke letzte Seite</string>
+    <string name="pref_title_drawer_show_position_indicator">Seitenindikator/Scrollbar</string>
+    <string name="pref_summary_drawer_show_position_indicator">Zeige den Seitenindikator bzw. die Scrollbar im Drawer an.</string>
 
-    <string name="pref_title__is_open_app_drawer_on_swipe">Drawer: Wischen</string>
-    <string name="pref_summary__is_open_app_drawer_on_swipe">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
+    <string name="pref_title_dock_swipe_up">Drawer: Wischen</string>
+    <string name="pref_summary_dock_swipe_up">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
 
-    <string name="pref_title__dock_background_color">Dock Hintergundfarbe</string>
-    <string name="pref_title__drawer_background_color">Drawer Hintergrund</string>
-    <string name="pref_title__drawer_card_color">Karten</string>
-    <string name="pref_title__drawer_label_color">Beschriftung</string>
-    <string name="pref_title__desktop_folder_color">Ordner</string>
+    <string name="pref_title_dock_background_color">Dock Hintergundfarbe</string>
+    <string name="pref_title_drawer_background_color">Drawer Hintergrund</string>
+    <string name="pref_title_drawer_card_color">Karten</string>
+    <string name="pref_title_drawer_label_color">Beschriftung</string>
+    <string name="pref_title_desktop_folder_color">Ordner</string>
 
-    <string name="pref_title__iconsize_global">Größe</string>
-    <string name="pref_summary__iconsize_global">Größe für alle Anwendungsicons.</string>
-    <string name="pref_title__icon_pack_name">Icon Pack</string>
-    <string name="pref_summary__icon_pack_name">Wähle ein installiertes Icon Pack.</string>
-    <string name="pref_title__hidden_apps_list">Anwendungen ausblenden</string>
-    <string name="pref_summary__hidden_apps_list">Blende ausgewählte Anwendungen im App Drawer aus.</string>
+    <string name="pref_title_icon_size">Größe</string>
+    <string name="pref_summary_icon_size">Größe für alle Anwendungsicons.</string>
+    <string name="pref_title_icon_pack">Icon Pack</string>
+    <string name="pref_summary_icon_pack">Wähle ein installiertes Icon Pack.</string>
+    <string name="pref_title_hide_apps">Anwendungen ausblenden</string>
+    <string name="pref_summary_hide_apps">Blende ausgewählte Anwendungen im App Drawer aus.</string>
 
-    <string name="pref_title__restart_launcher">Neustart</string>
-    <string name="pref_summary__restart_launcher">Starte den Launcher neu, um alle Änderungen zu übernehmen.</string>
+    <string name="pref_title_restart">Neustart</string>
+    <string name="pref_summary_restart">Starte den Launcher neu, um alle Änderungen zu übernehmen.</string>
 
-    <string name="pref_title__backup_app_settings">Sicherung</string>
-    <string name="pref_summary__backup_app_settings">Sichere deine Einstellungen oder stelle sie wieder her.</string>
+    <string name="pref_title_backup">Sicherung</string>
+    <string name="pref_summary_backup">Sichere deine Einstellungen oder stelle sie wieder her.</string>
     <string name="dialog__backup_app_settings__backup">Sicherung</string>
     <string name="dialog__backup_app_settings__restore">Wiederherstellung</string>
     <string name="dialog__backup_app_settings__success">Erfolgreich ausgeführt.</string>
@@ -123,12 +123,12 @@
     <string name="edit">Bearbeiten</string>
     <string name="action">Aktion</string>
     <string name="lock">Sperren</string>
-    <string name="pref_title__desktop">Desktop</string>
-    <string name="pref_title__dock">Dock</string>
-    <string name="pref_title__app_drawer">App Drawer</string>
-    <string name="pref_title__icons">Icons</string>
-    <string name="pref_title__appearance">Erscheinungsbild</string>
-    <string name="pref_title__is_desktop_show_label">Beschriftung</string>
+    <string name="pref_title_desktop">Desktop</string>
+    <string name="pref_title_dock">Dock</string>
+    <string name="pref_title_app_drawer">App Drawer</string>
+    <string name="pref_title_icons">Icons</string>
+    <string name="pref_title_appearance">Erscheinungsbild</string>
+    <string name="pref_title_desktop_show_label">Beschriftung</string>
     <string name="on">Ein</string>
     <string name="off">Aus</string>
 

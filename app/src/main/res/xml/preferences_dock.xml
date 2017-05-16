@@ -4,38 +4,38 @@
 
     <SwitchPreference
         android:defaultValue="true"
-        android:key="@string/pref_key__is_dock_enable"
+        android:key="@string/pref_key_dock_enable"
         android:title="Enable dock" />
 
-    <PreferenceCategory android:title="@string/pref_title__size">
+    <PreferenceCategory android:title="@string/pref_title_size">
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="5"
-            android:key="@string/pref_key__dock_column_count"
-            android:summary="@string/pref_summary__dock_column_count"
-            android:title="@string/pref_title__dock_column_count"
+            android:key="@string/pref_key_dock_size"
+            android:summary="@string/pref_summary_dock_size"
+            android:title="@string/pref_title_dock_size"
             app:maxValue="10"
             app:minValue="2" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__appearance">
+    <PreferenceCategory android:title="@string/pref_title_appearance">
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_key__is_dock_show_label"
-            android:summary="@string/pref_summary__is_dock_show_label"
-            android:title="@string/pref_title__is_dock_show_label" />
+            android:key="@string/pref_key_dock_show_label"
+            android:summary="@string/pref_summary_dock_show_label"
+            android:title="@string/pref_title_dock_show_label" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__color">
+    <PreferenceCategory android:title="@string/pref_title_color">
 
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:defaultValue="@color/transparent"
-            android:key="@string/pref_key__dock_background_color"
-            android:title="@string/pref_title__dock_background_color"
-            app:cpv_dialogTitle="@string/pref_title__dock_background_color"
+            android:key="@string/pref_key_dock_background_color"
+            android:title="@string/pref_title_dock_background_color"
+            app:cpv_dialogTitle="@string/pref_title_dock_background_color"
             app:cpv_showAlphaSlider="true" />
 
     </PreferenceCategory>

@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory android:title="@string/pref_title__size">
+    <PreferenceCategory android:title="@string/pref_title_size">
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="52"
-            android:key="@string/pref_key__iconsize_global"
-            android:summary="@string/pref_summary__iconsize_global"
-            android:title="@string/pref_title__iconsize_global"
+            android:key="@string/pref_key_icon_size"
+            android:summary="@string/pref_summary_icon_size"
+            android:title="@string/pref_title_icon_size"
             app:maxValue="110"
             app:minValue="25" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__appearance">
+    <PreferenceCategory android:title="@string/pref_title_appearance">
         <Preference
-            android:key="@string/pref_key__icon_pack_name"
-            android:summary="@string/pref_summary__icon_pack_name"
-            android:title="@string/pref_title__icon_pack_name" />
+            android:key="@string/pref_key_icon_pack"
+            android:summary="@string/pref_summary_icon_pack"
+            android:title="@string/pref_title_icon_pack" />
 
     </PreferenceCategory>
 </PreferenceScreen>

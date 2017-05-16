@@ -2,6 +2,7 @@ package com.benny.openlauncher.util;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,6 +15,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_HOME = "home.db";
     private static final String TABLE_HOME = "home";
+    private static final String TABLE_GESTURE = "gesture";
 
     private static final String COLUMN_TIME = "time";
     private static final String COLUMN_TYPE = "type";
@@ -25,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_DESKTOP = "desktop";
     private static final String COLUMN_STATE = "state";
 
-    private static final String SQL_CREATE_DESKTOP =
+    private static final String SQL_CREATE_HOME =
             "CREATE TABLE " + TABLE_HOME + " (" +
                     COLUMN_TIME + " INTEGER PRIMARY KEY," +
                     COLUMN_TYPE + " VARCHAR," +
@@ -36,6 +38,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     COLUMN_PAGE + " INTEGER," +
                     COLUMN_DESKTOP + " INTEGER," +
                     COLUMN_STATE + " INTEGER)";
+    private static final String SQL_CREATE_GESTURE =
+            "CREATE TABLE " + TABLE_GESTURE + " (" +
+                    COLUMN_TIME + " INTEGER PRIMARY KEY," +
+                    COLUMN_TYPE + " VARCHAR," +
+                    COLUMN_DATA + " VARCHAR)";
     private static final String SQL_DELETE = "DROP TABLE IF EXISTS ";
     private static final String SQL_QUERY = "SELECT * FROM ";
     private SQLiteDatabase db;
@@ -46,12 +53,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CREATE_DESKTOP);
+        db.execSQL(SQL_CREATE_HOME);
+        db.execSQL(SQL_CREATE_GESTURE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // discard the data and start over
         db.execSQL(SQL_DELETE + TABLE_HOME);
+        db.execSQL(SQL_DELETE + TABLE_GESTURE);
         onCreate(db);
     }
 
@@ -273,5 +282,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 break;
         }
         return item;
+    }
+
+    public LauncherAction.ActionItem getGesture(int value) {
+        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_GESTURE + " WHERE " + COLUMN_TIME + " = " + value;
+        Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
+        LauncherAction.ActionItem item = null;
+        if (cursor.moveToFirst()) {
+            LauncherAction.Action type = LauncherAction.Action.valueOf(cursor.getString(1));
+            Intent intent = Tool.getIntentFromString(cursor.getString(2));
+            item = new LauncherAction.ActionItem(type, intent);
+        }
+        cursor.close();
+        return item;
+    }
+
+    public void setGesture(int id, LauncherAction.ActionItem actionItem) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TIME, id);
+        values.put(COLUMN_TYPE, actionItem.action.toString());
+        values.put(COLUMN_DATA, Tool.getIntentAsString(actionItem.extraData));
+
+        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_GESTURE + " WHERE " + COLUMN_TIME + " = " + id;
+        Cursor cursorItem = db.rawQuery(SQL_QUERY_SPECIFIC, null);
+        if (cursorItem.getCount() == 0) {
+            db.insert(TABLE_GESTURE, null, values);
+        } else if (cursorItem.getCount() == 1) {
+            db.update(TABLE_GESTURE, values, COLUMN_TIME + " = " + id, null);
+        }
+    }
+
+    public void deleteGesture(int id) {
+        db.delete(TABLE_GESTURE, COLUMN_TIME + " = ?", new String[]{String.valueOf(id)});
     }
 }

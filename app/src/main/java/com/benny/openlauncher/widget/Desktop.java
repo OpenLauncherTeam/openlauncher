@@ -23,6 +23,7 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
 
+import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
@@ -404,13 +405,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             return new SimpleFingerGestures.OnFingerGestureListener() {
                 @Override
                 public boolean onSwipeUp(int i, long l, double v) {
-                    //LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.swipeUpAction, desktop.getContext());
+                    LauncherAction.RunAction(Home.launcher.db.getGesture(1), desktop.getContext());
                     return true;
                 }
 
                 @Override
                 public boolean onSwipeDown(int i, long l, double v) {
-                    //LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.swipeDownAction, desktop.getContext());
+                    LauncherAction.RunAction(Home.launcher.db.getGesture(2), desktop.getContext());
                     return true;
                 }
 
@@ -426,19 +427,19 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                 @Override
                 public boolean onPinch(int i, long l, double v) {
-                    //LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.pinchAction, desktop.getContext());
+                    LauncherAction.RunAction(Home.launcher.db.getGesture(3), desktop.getContext());
                     return true;
                 }
 
                 @Override
                 public boolean onUnpinch(int i, long l, double v) {
-                    //LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.unPinchAction, desktop.getContext());
+                    LauncherAction.RunAction(Home.launcher.db.getGesture(4), desktop.getContext());
                     return true;
                 }
 
                 @Override
                 public boolean onDoubleTap(int i) {
-                    //LauncherAction.RunAction(LauncherSettings.getInstance(getContext()).generalSettings.doubleTapAction, desktop.getContext());
+                    LauncherAction.RunAction(Home.launcher.db.getGesture(0), desktop.getContext());
                     return true;
                 }
             };
