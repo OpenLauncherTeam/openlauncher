@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/pref_title_miscellaneous">
+    <PreferenceCategory android:title="@string/pref_title__miscellaneous">
 
         <Preference
-            android:key="@string/pref_key_backup"
-            android:summary="@string/pref_summary_backup"
-            android:title="@string/pref_title_backup" />
+            android:key="@string/pref_key__backup"
+            android:summary="@string/pref_summary__backup"
+            android:title="@string/pref_title__backup" />
 
         <Preference
-                android:key="@string/pref_key_clear_database"
-                android:summary="@string/pref_summary_clear_database"
-                android:title="@string/pref_title_clear_database" />
+                android:key="@string/pref_key__clear_database"
+                android:summary="@string/pref_summary__clear_database"
+                android:title="@string/pref_title__clear_database" />
 
         <Preference
-            android:key="@string/pref_key_restart"
-            android:summary="@string/pref_summary_restart"
-            android:title="@string/pref_title_restart" />
+            android:key="@string/pref_key__restart"
+            android:summary="@string/pref_summary__restart"
+            android:title="@string/pref_title__restart" />
 
     </PreferenceCategory>
 </PreferenceScreen>

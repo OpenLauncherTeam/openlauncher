@@ -2,37 +2,37 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <Preference
         android:icon="@drawable/ic_desktop_windows_dark_24dp"
-        android:key="@string/pref_key_cat_desktop"
-        android:title="@string/pref_title_desktop" />
+        android:key="@string/pref_key__cat_desktop"
+        android:title="@string/pref_title__desktop" />
 
     <Preference
             android:icon="@drawable/ic_dock_dark_24dp"
-            android:key="@string/pref_key_cat_dock"
-            android:title="@string/pref_title_dock" />
+            android:key="@string/pref_key__cat_dock"
+            android:title="@string/pref_title__dock" />
 
     <Preference
         android:icon="@drawable/ic_apps_dark_24dp"
-        android:key="@string/pref_key_cat_app_drawer"
-        android:title="@string/pref_title_app_drawer" />
+        android:key="@string/pref_key__cat_app_drawer"
+        android:title="@string/pref_title__app_drawer" />
 
     <Preference
         android:icon="@drawable/ic_gesture_dark_24dp"
-        android:key="@string/pref_key_cat_gestures"
-        android:title="@string/pref_title_gestures" />
+        android:key="@string/pref_key__cat_gestures"
+        android:title="@string/pref_title__gestures" />
 
     <Preference
         android:icon="@drawable/ic_android_dark_24dp"
-        android:key="@string/pref_key_cat_icons"
-        android:title="@string/pref_title_icons" />
+        android:key="@string/pref_key__cat_icons"
+        android:title="@string/pref_title__icons" />
 
     <Preference
         android:icon="@drawable/ic_color_lens_dark_24dp"
-        android:key="@string/pref_key_cat_miscellaneous"
-        android:title="@string/pref_title_miscellaneous" />
+        android:key="@string/pref_key__cat_miscellaneous"
+        android:title="@string/pref_title__miscellaneous" />
 
     <Preference
         android:icon="@drawable/ic_info_outline_dark_24dp"
-        android:key="@string/pref_key_about"
+        android:key="@string/pref_key__about"
         android:title="@string/pref_title__about" />
 
 </PreferenceScreen>

@@ -11,20 +11,22 @@
 
 # Notice
 
-Currently there are a lot of issues and we are not able to fix all at a time, so please be patient if the issue is still opening. And I and the team are going to review the structure of the launcher as it is very bad as I wrote them a long time ago, so there won't be any UI redesing and new feature coming so certainly. Thanks for heading over and your support.
+Currently there are a lot of issues and we are all working on this app in our spare time so please be patient if your issue is not immediately resolved. We are going to review the structure of the launcher since I wrote this app a long time ago so we might break functionality at times. Thanks for your support.
 
 # OPTeam
-[BennyKok](https://github.com/BennyKok) | [Dkanada](https://github.com/dkanada) | [gsantner](https://github.com/gsantner)
 
-We will be happy if you want to be a part of this game.
+[BennyKok](https://github.com/BennyKok) | [dkanada](https://github.com/dkanada) | [gsantner](https://github.com/gsantner)
+
+We would be happy if you want to be part of this game.
 
 # Donation
 
-You can support us, buy us some coffee .
+You can support us and buy us some coffee.
 
 [BennyKok](https://www.paypal.me/BennyKok) | [gsantner](https://gsantner.github.io/#donate)
 
 # Contributors
+
 * [Aabaker](https://github.com/aabaker)
 * [TeamBrainStorm](https://github.com/TeamBrainStorm) very supportive when the project first started.
 * German translation: [GauklerFaun](https://github.com/scoute-dich) 
@@ -32,52 +34,52 @@ You can support us, buy us some coffee .
 
 There are so many more contributors to list, check them out too.
 
-Also to all those people who has helped this project, thank you.
+Also, to all those people who have helped this project, thank you.
 
-# Status
-### OnGoing: 
+# To Do List
 
-Fix all the issue
+Desktop clock customization
 
-Add animation to drag and drop
+More actions for the minibar (later to support expandable minibar)
+
+Code refactoring
+
+Support landscape orientation
+
+Add more options in the settings
+
+Better support for gestures
+
+Item customization on the desktop
 
 # About
 
-This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven Android launcher.
+This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven launcher for Android.
 
 Features | Supported
 ------------ | -------------
 Paged desktop | Yes
 Dock | Yes
 Scrollable dock | No
-Double tab to sleep | Yes
+Double tap to sleep | Yes
 Dock | Yes
 Scrollable background | Yes
-Drag n drop | Yes
+Drag and drop | Yes
 Paged app drawer | Yes
 Vertical app drawer | Yes
 Hide apps | Yes
 Search bar | Yes
-Iocn packs | Yes
+Icon packs | Yes
 Widget | Yes
 Gesture | Yes
-AIO Search Bar | Coming
+AIO Search Bar | Yes
+Gesture support | Yes
 
-Please go to the OpenLauncher [Wiki](https://github.com/Benny-Kok/OpenLauncher/wiki) for more information.
-
-# ToDo list
-
-Desktop clock customization
-
-More action for the mini bar (later to support expanable mini bar)
-
-Code refactoring
-
-Support landscape orientation
-
-Add more customization settings
+Please go to the [OpenLauncher Wiki](https://github.com/Benny-Kok/OpenLauncher/wiki) for more information.
 
 # Screenshots
 
-<img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p2.jpg" width="200">    <img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p1.jpg" width="200">
-<img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p3.jpg" width="200">    <img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p4.jpg" width="200">
+<img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p2.jpg" width="200">
+<img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p1.jpg" width="200">
+<img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p3.jpg" width="200">
+<img src="https://github.com/Benny-Kok/OpenLauncher/blob/alpha2/DisplayPictures/p4.jpg" width="200">

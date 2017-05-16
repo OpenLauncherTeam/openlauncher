@@ -56,65 +56,65 @@
 
     <!-- Settings -->
 
-    <string name="pref_title_desktop">Bureau</string>
-    <string name="pref_title_dock">Dock</string>
-    <string name="pref_title_app_drawer">Titroir Applis</string>
-    <string name="pref_title_gestures">Gestes</string>
-    <string name="pref_title_icons">Icônes</string>
-    <string name="pref_title_miscellaneous">Divers</string>
+    <string name="pref_title__desktop">Bureau</string>
+    <string name="pref_title__dock">Dock</string>
+    <string name="pref_title__app_drawer">Titroir Applis</string>
+    <string name="pref_title__gestures">Gestes</string>
+    <string name="pref_title__icons">Icônes</string>
+    <string name="pref_title__miscellaneous">Divers</string>
 
-    <string name="pref_title_size">Taille</string>
-    <string name="pref_title_appearance">Apparence</string>
-    <string name="pref_title_color">Couleurs</string>
+    <string name="pref_title__size">Taille</string>
+    <string name="pref_title__appearance">Apparence</string>
+    <string name="pref_title__color">Couleurs</string>
 
-    <string name="pref_summary_minibar">Configurer l\'ordre et la visibilité des éléments de la Minibar.</string>
-    <string name="pref_title_search_bar_enable">Barre de recherche</string>
-    <string name="pref_summary_search_bar_enable">Afficher une barre de recherche par-dessus le bureau.</string>
-    <string name="pref_title_desktop_fullscreen">Plein écran</string>
-    <string name="pref_summary_desktop_fullscreen">Activer le plein écran pour votre bureau.</string>
-    <string name="pref_title_desktop_show_position_indicator">Position indicateur</string>
-    <string name="pref_summary_desktop_show_position_indicator">Afficher l\'indicateur de la page en bas du bureau.</string>
-    <string name="pref_title_desktop_show_label">Libellé</string>
-    <string name="pref_summary_desktop_show_label">Afficher les noms des applis et dossiers sous leurs icônes.</string>
-    <string name="pref_title_desktop_background_color">Arrière-plan</string>
-    <string name="pref_title_desktop_folder_color">Dossier</string>
+    <string name="pref_summary__minibar">Configurer l\'ordre et la visibilité des éléments de la Minibar.</string>
+    <string name="pref_title__search_bar_enable">Barre de recherche</string>
+    <string name="pref_summary__search_bar_enable">Afficher une barre de recherche par-dessus le bureau.</string>
+    <string name="pref_title__desktop_fullscreen">Plein écran</string>
+    <string name="pref_summary__desktop_fullscreen">Activer le plein écran pour votre bureau.</string>
+    <string name="pref_title__desktop_show_position_indicator">Position indicateur</string>
+    <string name="pref_summary__desktop_show_position_indicator">Afficher l\'indicateur de la page en bas du bureau.</string>
+    <string name="pref_title__desktop_show_label">Libellé</string>
+    <string name="pref_summary__desktop_show_label">Afficher les noms des applis et dossiers sous leurs icônes.</string>
+    <string name="pref_title__desktop_background_color">Arrière-plan</string>
+    <string name="pref_title__desktop_folder_color">Dossier</string>
 
-    <string name="pref_title_dock_size">Taille</string>
-    <string name="pref_summary_dock_size">Définir la taille du dock.</string>
-    <string name="pref_title_dock_show_label">Liebllé</string>
-    <string name="pref_summary_dock_show_label">Afficher les noms des applis et dossiers sous leurs icônes.</string>
-    <string name="pref_title_dock_background_color">Arrière-plan</string>
+    <string name="pref_title__dock_size">Taille</string>
+    <string name="pref_summary__dock_size">Définir la taille du dock.</string>
+    <string name="pref_title__dock_show_label">Liebllé</string>
+    <string name="pref_summary__dock_show_label">Afficher les noms des applis et dossiers sous leurs icônes.</string>
+    <string name="pref_title__dock_background_color">Arrière-plan</string>
 
-    <string name="pref_title_drawer_style">Style</string>
-    <string name="pref_summary_drawer_style">Choisir entre un tiroir d\'applis horizontal ou vertical.</string>
-    <string name="pref_title_drawer_show_card_view">Carte</string>
-    <string name="pref_summary_drawer_show_card_view">Afficher une vue Carte par-dessus l\'arrière-plan du tiroir.</string>
-    <string name="pref_title_drawer_remember_position">Se rappeler de la dernière page</string>
-    <string name="pref_summary_drawer_remember_position">Garder trace de la page actuelle du tiroir d\'applis.</string>
-    <string name="pref_title_drawer_show_position_indicator">Position indicateur</string>
-    <string name="pref_summary_drawer_show_position_indicator">Afficher l\'indicateur de page ou la barre de défilement selon le style.</string>
-    <string name="pref_title_drawer_show_label">Libellé</string>
-    <string name="pref_summary_drawer_show_label">Afficher les libellés des applis sous leur icône.</string>
-    <string name="pref_title_drawer_background_color">Arrière-plan</string>
-    <string name="pref_title_drawer_card_color">Affichage carte</string>
-    <string name="pref_title_drawer_label_color">Libellé</string>
+    <string name="pref_title__drawer_style">Style</string>
+    <string name="pref_summary__drawer_style">Choisir entre un tiroir d\'applis horizontal ou vertical.</string>
+    <string name="pref_title__drawer_show_card_view">Carte</string>
+    <string name="pref_summary__drawer_show_card_view">Afficher une vue Carte par-dessus l\'arrière-plan du tiroir.</string>
+    <string name="pref_title__drawer_remember_position">Se rappeler de la dernière page</string>
+    <string name="pref_summary__drawer_remember_position">Garder trace de la page actuelle du tiroir d\'applis.</string>
+    <string name="pref_title__drawer_show_position_indicator">Position indicateur</string>
+    <string name="pref_summary__drawer_show_position_indicator">Afficher l\'indicateur de page ou la barre de défilement selon le style.</string>
+    <string name="pref_title__drawer_show_label">Libellé</string>
+    <string name="pref_summary__drawer_show_label">Afficher les libellés des applis sous leur icône.</string>
+    <string name="pref_title__drawer_background_color">Arrière-plan</string>
+    <string name="pref_title__drawer_card_color">Affichage carte</string>
+    <string name="pref_title__drawer_label_color">Libellé</string>
 
-    <string name="pref_title_dock_swipe_up">Glisser pour ouvrir</string>
-    <string name="pref_summary_dock_swipe_up">Glisser vers le haut sur le dock pour ouvrir le tiroir.</string>
+    <string name="pref_title__dock_swipe_up">Glisser pour ouvrir</string>
+    <string name="pref_summary__dock_swipe_up">Glisser vers le haut sur le dock pour ouvrir le tiroir.</string>
 
-    <string name="pref_title_icon_size">Taille</string>
-    <string name="pref_summary_icon_size">Taille de tous les icônes d\'applis.</string>
-    <string name="pref_title_icon_pack">Pack d\'icônes</string>
-    <string name="pref_summary_icon_pack">Sélectionner un pack d\'icônes installé.</string>
-    <string name="pref_title_hide_apps">Masquer des applis</string>
-    <string name="pref_summary_hide_apps">Masquer les applis sélectionnées du launcher.</string>
+    <string name="pref_title__icon_size">Taille</string>
+    <string name="pref_summary__icon_size">Taille de tous les icônes d\'applis.</string>
+    <string name="pref_title__icon_pack">Pack d\'icônes</string>
+    <string name="pref_summary__icon_pack">Sélectionner un pack d\'icônes installé.</string>
+    <string name="pref_title__hide_apps">Masquer des applis</string>
+    <string name="pref_summary__hide_apps">Masquer les applis sélectionnées du launcher.</string>
 
-    <string name="pref_title_backup">Sauvegarde</string>
-    <string name="pref_summary_backup">Sauvegarder et restaurer vos paramètres.</string>
-    <string name="pref_title_clear_database">Vider la base de données</string>
-    <string name="pref_summary_clear_database">Supprimer les données de votre dock et bureau pour corriger des problèmes.</string>
-    <string name="pref_title_restart">Redémarrer</string>
-    <string name="pref_summary_restart">Redémarrer le launcher en cas de comportement étrange.</string>
+    <string name="pref_title__backup">Sauvegarde</string>
+    <string name="pref_summary__backup">Sauvegarder et restaurer vos paramètres.</string>
+    <string name="pref_title__clear_database">Vider la base de données</string>
+    <string name="pref_summary__clear_database">Supprimer les données de votre dock et bureau pour corriger des problèmes.</string>
+    <string name="pref_title__restart">Redémarrer</string>
+    <string name="pref_summary__restart">Redémarrer le launcher en cas de comportement étrange.</string>
 
     <!-- Item Labels -->
 

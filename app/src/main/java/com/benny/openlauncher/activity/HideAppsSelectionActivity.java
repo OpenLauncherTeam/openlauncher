@@ -33,7 +33,7 @@ public class HideAppsSelectionActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        setTitle(getString(R.string.pref_title_hide_apps));
+        setTitle(getString(R.string.pref_title__hide_apps));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

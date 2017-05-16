@@ -64,27 +64,27 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             switch (tag) {
                 case SettingsFragmentDesktop.TAG:
                     fragment = new SettingsFragmentDesktop();
-                    toolbar.setTitle(R.string.pref_title_desktop);
+                    toolbar.setTitle(R.string.pref_title__desktop);
                     break;
                 case SettingsFragmentAppDrawer.TAG:
                     fragment = new SettingsFragmentAppDrawer();
-                    toolbar.setTitle(R.string.pref_title_app_drawer);
+                    toolbar.setTitle(R.string.pref_title__app_drawer);
                     break;
                 case SettingsFragmentDock.TAG:
                     fragment = new SettingsFragmentDock();
-                    toolbar.setTitle(R.string.pref_title_dock);
+                    toolbar.setTitle(R.string.pref_title__dock);
                     break;
                 case SettingsFragmentGestures.TAG:
                     fragment = new SettingsFragmentGestures();
-                    toolbar.setTitle(R.string.pref_title_gestures);
+                    toolbar.setTitle(R.string.pref_title__gestures);
                     break;
                 case SettingsFragmentIcons.TAG:
                     fragment = new SettingsFragmentIcons();
-                    toolbar.setTitle(R.string.pref_title_icons);
+                    toolbar.setTitle(R.string.pref_title__icons);
                     break;
                 case SettingsFragmentMiscellaneous.TAG:
                     fragment = new SettingsFragmentMiscellaneous();
-                    toolbar.setTitle(R.string.pref_title_miscellaneous);
+                    toolbar.setTitle(R.string.pref_title__miscellaneous);
                     break;
                 case SettingsFragmentMaster.TAG:
                 default:
@@ -133,25 +133,25 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             if (isAdded() && preference.hasKey()) {
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
-                if (settings.isKeyEqual(key, R.string.pref_key_cat_desktop)) {
+                if (settings.isKeyEqual(key, R.string.pref_key__cat_desktop)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentDesktop.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key_cat_app_drawer)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_app_drawer)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentAppDrawer.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key_cat_dock)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_dock)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentDock.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key_cat_gestures)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_gestures)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentGestures.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key_cat_icons)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_icons)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentIcons.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key_cat_miscellaneous)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_miscellaneous)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentMiscellaneous.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key_about)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key__about)) {
                     startActivity(new Intent(getActivity(), AboutActivity.class));
                     return true;
                 }
@@ -182,7 +182,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
-                if (key.equals(getString(R.string.pref_key_minibar))) {
+                if (key.equals(getString(R.string.pref_key__minibar))) {
                     LauncherAction.RunAction(LauncherAction.Action.EditMinBar, getActivity().getApplicationContext());
                     return true;
                 }
@@ -206,7 +206,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
-                if (key.equals(getString(R.string.pref_key_hide_apps))) {
+                if (key.equals(getString(R.string.pref_key__hide_apps))) {
                     Intent intent = new Intent(getActivity(), HideAppsSelectionActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
@@ -234,7 +234,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
-                if (key.equals(getString(R.string.pref_key_dock_enable))) {
+                if (key.equals(getString(R.string.pref_key__dock_enable))) {
                     Home.launcher.updateDock(true);
                     ((SettingsActivity) getActivity()).shouldLauncherRestart = false;
                     return true;
@@ -259,8 +259,8 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
-                if (key.equals(getString(R.string.pref_key_desktop_double_tap))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title_desktop_double_tap, Home.launcher.db.getGesture(0), 0, new DialogHelper.OnActionSelectedListener() {
+                if (key.equals(getString(R.string.pref_key__desktop_double_tap))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, Home.launcher.db.getGesture(0), 0, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -269,8 +269,8 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     return true;
                 }
 
-                if (key.equals(getString(R.string.pref_key_desktop_swipe_up))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title_desktop_double_tap, Home.launcher.db.getGesture(1), 1, new DialogHelper.OnActionSelectedListener() {
+                if (key.equals(getString(R.string.pref_key__desktop_swipe_up))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, Home.launcher.db.getGesture(1), 1, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -279,8 +279,8 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     return true;
                 }
 
-                if (key.equals(getString(R.string.pref_key_desktop_swipe_down))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title_desktop_double_tap, Home.launcher.db.getGesture(2), 2, new DialogHelper.OnActionSelectedListener() {
+                if (key.equals(getString(R.string.pref_key__desktop_swipe_down))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, Home.launcher.db.getGesture(2), 2, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -289,8 +289,8 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     return true;
                 }
 
-                if (key.equals(getString(R.string.pref_key_desktop_pinch))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title_desktop_double_tap, Home.launcher.db.getGesture(3), 3, new DialogHelper.OnActionSelectedListener() {
+                if (key.equals(getString(R.string.pref_key__desktop_pinch))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, Home.launcher.db.getGesture(3), 3, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -299,8 +299,8 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     return true;
                 }
 
-                if (key.equals(getString(R.string.pref_key_desktop_unpinch))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title_desktop_double_tap, Home.launcher.db.getGesture(4), 4, new DialogHelper.OnActionSelectedListener() {
+                if (key.equals(getString(R.string.pref_key__desktop_unpinch))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, Home.launcher.db.getGesture(4), 4, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -328,7 +328,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
-                if (key.equals(getString(R.string.pref_key_icon_pack))) {
+                if (key.equals(getString(R.string.pref_key__icon_pack))) {
                     AppManager.getInstance(getActivity()).startPickIconPackIntent(getActivity());
                     ((SettingsActivity) getActivity()).shouldLauncherRestart = true;
                     return true;
@@ -354,7 +354,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 String key = preference.getKey();
                 Activity activity = getActivity();
 
-                if (key.equals(getString(R.string.pref_key_backup))) {
+                if (key.equals(getString(R.string.pref_key__backup))) {
                     if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         DialogHelper.backupDialog(activity);
                     } else {
@@ -362,7 +362,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     }
                 }
 
-                if (key.equals(getString(R.string.pref_key_clear_database))) {
+                if (key.equals(getString(R.string.pref_key__clear_database))) {
                     if (Home.launcher != null)
                         Home.launcher.recreate();
                     Home.db.onUpgrade(Home.db.getWritableDatabase(), 1, 1);
@@ -370,7 +370,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     return true;
                 }
 
-                if (key.equals(getString(R.string.pref_key_restart))) {
+                if (key.equals(getString(R.string.pref_key__restart))) {
                     if (Home.launcher != null)
                         Home.launcher.recreate();
                     ((SettingsActivity) activity).shouldLauncherRestart = true;

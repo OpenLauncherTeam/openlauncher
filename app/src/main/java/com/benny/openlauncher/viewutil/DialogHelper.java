@@ -151,7 +151,7 @@ public class DialogHelper {
     public static void backupDialog(final Context context) {
         final CharSequence[] options = {context.getResources().getString(R.string.dialog__backup_app_settings__backup), context.getResources().getString(R.string.dialog__backup_app_settings__restore)};
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(R.string.pref_title_backup)
+        builder.title(R.string.pref_title__backup)
                 .positiveText(R.string.cancel)
                 .items(options)
                 .itemsCallback(new MaterialDialog.ListCallback() {
