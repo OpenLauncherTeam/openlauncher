@@ -2,6 +2,8 @@
 
 # OpenLauncher
 
+This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven launcher for Android. Please go to the [OpenLauncher Wiki](https://github.com/Benny-Kok/OpenLauncher/wiki) for more information.
+
 <a href="https://play.google.com/store/apps/details?id=com.benny.openlauncher" target="_blank">
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="80"/></a>
 <a href="https://f-droid.org/repository/browse/?fdid=com.benny.openlauncher" target="_blank">
@@ -9,7 +11,9 @@
 
 [![CircleCI](https://circleci.com/gh/OpenLauncherTeam/openlauncher.svg?style=shield)](https://circleci.com/gh/OpenLauncherTeam/openlauncher)
 
-# Notice
+# Notices
+
+If your instance is crashing frequently please make sure you update to version 0.5.0 and reset the app data before creating an issue. We made a lot of changes that broke compatibility in the previous versions.
 
 Currently there are a lot of issues and we are all working on this app in our spare time so please be patient if your issue is not immediately resolved. We are going to review the structure of the launcher since I wrote this app a long time ago so we might break functionality at times. Thanks for your support.
 
@@ -52,10 +56,6 @@ Better support for gestures
 
 Item customization on the desktop
 
-# About
-
-This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven launcher for Android.
-
 Features | Supported
 ------------ | -------------
 Paged desktop | Yes
@@ -74,8 +74,6 @@ Widget | Yes
 Gesture | Yes
 AIO Search Bar | Yes
 Gesture support | Yes
-
-Please go to the [OpenLauncher Wiki](https://github.com/Benny-Kok/OpenLauncher/wiki) for more information.
 
 # Screenshots
 

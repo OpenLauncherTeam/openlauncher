@@ -359,12 +359,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     public void updateDock(boolean show) {
         if (appSettings.isDockEnable() && show) {
-            Tool.visibleViews(100,dock);
+            Tool.visibleViews(100, dock);
             ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4,this);
             ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Tool.dp2px(4,this);
         } else {
             if (appSettings.isDockEnable()) {
-                Tool.invisibleViews(100,dock);
+                Tool.invisibleViews(100, dock);
             } else {
                 Tool.goneViews(dock);
                 ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Desktop.bottomInsert + Tool.dp2px(4,this);

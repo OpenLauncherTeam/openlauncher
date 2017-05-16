@@ -238,7 +238,7 @@ public class DragOptionView extends CardView {
     private void animShowView() {
         if (hideViews != null) {
             isDraggedFromDrawer = true;
-            Tool.invisibleViews(Math.round(animSpeed / 1.3f),hideViews);
+            Tool.invisibleViews(Math.round(animSpeed / 1.3f), hideViews);
             animate().alpha(1);
         }
     }
@@ -318,8 +318,11 @@ public class DragOptionView extends CardView {
                 removeIcon.setVisibility(View.GONE);
                 infoIcon.setVisibility(View.GONE);
                 deleteIcon.setVisibility(View.GONE);
+
                 Tool.visibleViews(Math.round(animSpeed / 1.3f), hideViews);
 
+                // the search view might be disabled
+                Home.launcher.updateSearchView(true);
 
                 isDraggedFromDrawer = false;
 
