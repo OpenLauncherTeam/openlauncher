@@ -2,10 +2,7 @@ package com.benny.openlauncher.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.support.annotation.ColorRes;
-import android.support.v4.content.ContextCompat;
 
 import com.benny.openlauncher.App;
 import com.benny.openlauncher.R;
@@ -15,151 +12,19 @@ import com.benny.openlauncher.widget.Desktop;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import io.github.gsantner.opoc.util.AppSettingsBase;
+
 /**
  * Created by gregor on 07.05.17.
  */
 
-public class AppSettings {
-    private static final String ARRAY_SEPERATOR = "%%";
-    private static final String SHARED_PREF_APP = "app";
-    private final SharedPreferences prefApp;
-    private final Context context;
-
+public class AppSettings extends AppSettingsBase {
     private AppSettings(Context context) {
-        this.context = context.getApplicationContext();
-        prefApp = context.getSharedPreferences(SHARED_PREF_APP, Context.MODE_PRIVATE);
+        super(context);
     }
 
     public static AppSettings get() {
         return new AppSettings(App.get());
-    }
-
-    @SuppressLint("ApplySharedPref")
-    public void resetSettings() {
-        prefApp.edit().clear().commit();
-    }
-
-    public Context getApplicationContext() {
-        return context;
-    }
-
-    public void clearAppSettings() {
-        prefApp.edit().clear().commit();
-    }
-
-    public void registerPreferenceChangedListener(SharedPreferences.OnSharedPreferenceChangeListener value) {
-        prefApp.registerOnSharedPreferenceChangeListener(value);
-    }
-
-    public void unregisterPreferenceChangedListener(SharedPreferences.OnSharedPreferenceChangeListener value) {
-        prefApp.unregisterOnSharedPreferenceChangeListener(value);
-    }
-
-    // helpers for modifying preferences based on type
-    private String getKey(int stringKeyResourceId) {
-        return context.getString(stringKeyResourceId);
-    }
-
-    public boolean isKeyEqual(String key, int stringKeyRessourceId) {
-        return key.equals(getKey(stringKeyRessourceId));
-    }
-
-    private void setString(int keyRessourceId, String value) {
-        prefApp.edit().putString(context.getString(keyRessourceId), value).apply();
-    }
-
-    private void setInt(int keyRessourceId, int value) {
-        prefApp.edit().putInt(context.getString(keyRessourceId), value).apply();
-    }
-
-    private void setLong(int keyRessourceId, long value) {
-        prefApp.edit().putLong(context.getString(keyRessourceId), value).apply();
-    }
-
-    private void setBool(int keyRessourceId, boolean value) {
-        prefApp.edit().putBoolean(context.getString(keyRessourceId), value).apply();
-    }
-
-    private void setStringArray(int keyRessourceId, Object[] values) {
-        StringBuilder sb = new StringBuilder();
-        for (Object value : values) {
-            sb.append("%%%");
-            sb.append(value.toString());
-        }
-        setString(keyRessourceId, sb.toString().replaceFirst("%%%", ""));
-    }
-
-    private String[] getStringArray(int keyRessourceId) {
-        String value = prefApp.getString(context.getString(keyRessourceId), "%%%");
-        if (value.equals("%%%")) {
-            return new String[0];
-        }
-        return value.split("%%%");
-    }
-
-    private String getString(int ressourceId, String defaultValue) {
-        return prefApp.getString(context.getString(ressourceId), defaultValue);
-    }
-
-    private String getString(int ressourceId, int ressourceIdDefaultValue) {
-        return prefApp.getString(context.getString(ressourceId), context.getString(ressourceIdDefaultValue));
-    }
-
-    private boolean getBool(int ressourceId, boolean defaultValue) {
-        return prefApp.getBoolean(context.getString(ressourceId), defaultValue);
-    }
-
-    private int getInt(int ressourceId, int defaultValue) {
-        return prefApp.getInt(context.getString(ressourceId), defaultValue);
-    }
-
-    private int getIntOfStringPref(int ressourceId, int defaultValue) {
-        String strNum = prefApp.getString(context.getString(ressourceId), Integer.toString(defaultValue));
-        return Integer.valueOf(strNum);
-    }
-
-    private long getLong(int ressourceId, long defaultValue) {
-        return prefApp.getLong(context.getString(ressourceId), defaultValue);
-    }
-
-    private int getColor(String key, int defaultColor) {
-        return prefApp.getInt(key, defaultColor);
-    }
-
-    private int getColorRes(@ColorRes int resColorId) {
-        return ContextCompat.getColor(context, resColorId);
-    }
-
-    private void setDouble(int keyResId, double value) {
-        prefApp.edit().putLong(context.getString(keyResId), Double.doubleToRawLongBits(value)).apply();
-    }
-
-    private double getDouble(int keyResId, double defaultValue) {
-        if (!prefApp.contains(context.getString(keyResId))) {
-            return defaultValue;
-        }
-        return Double.longBitsToDouble(prefApp.getLong(context.getString(keyResId), 0));
-    }
-
-    private void setIntList(int keyResId, ArrayList<Integer> values) {
-        StringBuilder sb = new StringBuilder();
-        for (int value : values) {
-            sb.append(ARRAY_SEPERATOR);
-            sb.append(Integer.toString(value));
-        }
-        setString(keyResId, sb.toString().replaceFirst(ARRAY_SEPERATOR, ""));
-    }
-
-    private ArrayList<Integer> getIntList(int keyResId) {
-        ArrayList<Integer> ret = new ArrayList<>();
-        String value = getString(keyResId, ARRAY_SEPERATOR);
-        if (value.equals(ARRAY_SEPERATOR)) {
-            return ret;
-        }
-        for (String s : value.split(ARRAY_SEPERATOR)) {
-            ret.add(Integer.parseInt(s));
-        }
-        return ret;
     }
 
     // methods that actually modify the preferences
