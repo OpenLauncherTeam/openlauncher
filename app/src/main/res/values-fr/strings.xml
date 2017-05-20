@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- Titles -->
@@ -58,7 +58,7 @@
 
     <string name="pref_title__desktop">Bureau</string>
     <string name="pref_title__dock">Dock</string>
-    <string name="pref_title__app_drawer">Titroir Applis</string>
+    <string name="pref_title__app_drawer">Tiroir Applis</string>
     <string name="pref_title__gestures">Gestes</string>
     <string name="pref_title__icons">Icônes</string>
     <string name="pref_title__miscellaneous">Divers</string>
@@ -81,7 +81,7 @@
 
     <string name="pref_title__dock_size">Taille</string>
     <string name="pref_summary__dock_size">Définir la taille du dock.</string>
-    <string name="pref_title__dock_show_label">Liebllé</string>
+    <string name="pref_title__dock_show_label">Libellé</string>
     <string name="pref_summary__dock_show_label">Afficher les noms des applis et dossiers sous leurs icônes.</string>
     <string name="pref_title__dock_background_color">Arrière-plan</string>
 
@@ -101,6 +101,11 @@
 
     <string name="pref_title__dock_swipe_up">Glisser pour ouvrir</string>
     <string name="pref_summary__dock_swipe_up">Glisser vers le haut sur le dock pour ouvrir le tiroir.</string>
+    <string name="pref_title__desktop_double_tap">Appui double</string>
+    <string name="pref_title__desktop_swipe_up">Glisser vers le haut</string>
+    <string name="pref_title__desktop_swipe_down">Glisser vers le bas</string>
+    <string name="pref_title__desktop_pinch">Pincement</string>
+	<string name="pref_title__desktop_unpinch">Écartement</string>
 
     <string name="pref_title__icon_size">Taille</string>
     <string name="pref_summary__icon_size">Taille de tous les icônes d\'applis.</string>
