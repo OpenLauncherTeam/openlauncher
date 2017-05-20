@@ -4,22 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewPropertyAnimator;
 import android.view.WindowInsets;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.Tool;
@@ -66,7 +62,7 @@ public class DragOptionView extends CardView {
         setCardElevation(Tool.dp2px(4, getContext()));
         setRadius(Tool.dp2px(2, getContext()));
 
-        dragOptions = (LinearLayout) ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_drag_options, this, false);
+        dragOptions = (LinearLayout) ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_drag_option, this, false);
         addView(dragOptions);
 
         editIcon = (TextView) dragOptions.findViewById(R.id.editIcon);
@@ -84,64 +80,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        DialogHelper.alert(getContext(), "Not implemented", "Not implemented");
-                        return true;
-                    case DragEvent.ACTION_DRAG_ENDED:
-                        return true;
-                }
-                return false;
-            }
-        });
-        deleteIcon = (TextView) dragOptions.findViewById(R.id.deleteIcon);
-        deleteIcon.setOnDragListener(new View.OnDragListener() {
-            @Override
-            public boolean onDrag(View view, DragEvent dragEvent) {
-                switch (dragEvent.getAction()) {
-                    case DragEvent.ACTION_DRAG_STARTED:
-                        switch (((DragAction) dragEvent.getLocalState()).action) {
-                            case APP_DRAWER:
-                            case APP:
-                                return true;
-                        }
-                    case DragEvent.ACTION_DRAG_ENTERED:
-                        return true;
-                    case DragEvent.ACTION_DRAG_EXITED:
-                        return true;
-                    case DragEvent.ACTION_DROP:
-                        startDeletePackageDialog(dragEvent);
-                        return true;
-                    case DragEvent.ACTION_DRAG_ENDED:
-                        return true;
-                }
-                return false;
-            }
-        });
-        infoIcon = (TextView) dragOptions.findViewById(R.id.infoIcon);
-        infoIcon.setOnDragListener(new OnDragListener() {
-            @Override
-            public boolean onDrag(View view, DragEvent dragEvent) {
-                switch (dragEvent.getAction()) {
-                    case DragEvent.ACTION_DRAG_STARTED:
-                        switch (((DragAction) dragEvent.getLocalState()).action) {
-                            case APP_DRAWER:
-                            case APP:
-                                return true;
-                        }
-                    case DragEvent.ACTION_DRAG_ENTERED:
-                        return true;
-                    case DragEvent.ACTION_DRAG_EXITED:
-                        return true;
-                    case DragEvent.ACTION_DROP:
-                        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
-                        intent.setExtrasClassLoader(Item.class.getClassLoader());
-                        Item item = intent.getParcelableExtra("mDragData");
-                        if (item.type == Item.Type.APP) {
-                            try {
-                                getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.appIntent.getComponent().getPackageName())));
-                            } catch (Exception e) {
-                                Tool.toast(getContext(), R.string.toast_app_uninstalled);
-                            }
-                        }
+                        DialogHelper.alertDialog(getContext(), "not implemented", "yet...");
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;
@@ -190,29 +129,71 @@ public class DragOptionView extends CardView {
                 return false;
             }
         });
+        infoIcon = (TextView) dragOptions.findViewById(R.id.infoIcon);
+        infoIcon.setOnDragListener(new OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                switch (dragEvent.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        switch (((DragAction) dragEvent.getLocalState()).action) {
+                            case APP_DRAWER:
+                            case APP:
+                                return true;
+                        }
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        return true;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        return true;
+                    case DragEvent.ACTION_DROP:
+                        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
+                        intent.setExtrasClassLoader(Item.class.getClassLoader());
+                        Item item = intent.getParcelableExtra("mDragData");
+                        if (item.type == Item.Type.APP) {
+                            try {
+                                getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.appIntent.getComponent().getPackageName())));
+                            } catch (Exception e) {
+                                Tool.toast(getContext(), R.string.toast_app_uninstalled);
+                            }
+                        }
+                        return true;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        return true;
+                }
+                return false;
+            }
+        });
+        deleteIcon = (TextView) dragOptions.findViewById(R.id.deleteIcon);
+        deleteIcon.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                switch (dragEvent.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        switch (((DragAction) dragEvent.getLocalState()).action) {
+                            case APP_DRAWER:
+                            case APP:
+                                return true;
+                        }
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        return true;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        return true;
+                    case DragEvent.ACTION_DROP:
+                        DialogHelper.deletePackageDialog(getContext(), dragEvent);
+                        return true;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        return true;
+                }
+                return false;
+            }
+        });
 
-        editIcon.setText(removeIcon.getText(), TextView.BufferType.SPANNABLE);
+        editIcon.setText(editIcon.getText(), TextView.BufferType.SPANNABLE);
         removeIcon.setText(removeIcon.getText(), TextView.BufferType.SPANNABLE);
         infoIcon.setText(infoIcon.getText(), TextView.BufferType.SPANNABLE);
         deleteIcon.setText(deleteIcon.getText(), TextView.BufferType.SPANNABLE);
 
         for (int i = 0; i < dragOptions.getChildCount(); i++) {
             dragOptions.getChildAt(i).setVisibility(View.GONE);
-        }
-    }
-
-    private void startDeletePackageDialog(DragEvent dragEvent) {
-        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
-        intent.setExtrasClassLoader(Item.class.getClassLoader());
-        Item item = intent.getParcelableExtra("mDragData");
-        if (item.type == Item.Type.APP) {
-            try {
-                Uri packageURI = Uri.parse("package:" + item.appIntent.getComponent().getPackageName());
-                Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
-                getContext().startActivity(uninstallIntent);
-            } catch (Exception e) {
-
-            }
         }
     }
 
@@ -248,57 +229,35 @@ public class DragOptionView extends CardView {
         switch (event.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
                 dragging = true;
+                animShowView();
+                home.dock.setHideGrid(false);
+                for (CellContainer cellContainer : home.desktop.pages) {
+                    cellContainer.setHideGrid(false);
+                }
                 switch (((DragAction) event.getLocalState()).action) {
                     case ACTION:
+                        editIcon.setVisibility(View.VISIBLE);
                         removeIcon.setVisibility(View.VISIBLE);
-                        animShowView();
-
-                        home.dock.setHideGrid(false);
-                        for (CellContainer cellContainer : home.desktop.pages)
-                            cellContainer.setHideGrid(false);
                         return true;
                     case APP:
-                        deleteIcon.setVisibility(View.VISIBLE);
-                        if (AppSettings.get().getDesktopMode() != Desktop.DesktopMode.SHOW_ALL_APPS)
-                            removeIcon.setVisibility(View.VISIBLE);
+                        editIcon.setVisibility(View.VISIBLE);
+                        removeIcon.setVisibility(View.VISIBLE);
                         infoIcon.setVisibility(View.VISIBLE);
-                        animShowView();
-
-                        home.dock.setHideGrid(false);
-                        for (CellContainer cellContainer : home.desktop.pages)
-                            cellContainer.setHideGrid(false);
-                        return true;
+                        deleteIcon.setVisibility(View.VISIBLE);
                     case APP_DRAWER:
-                        deleteIcon.setVisibility(View.VISIBLE);
+                        removeIcon.setVisibility(View.VISIBLE);
                         infoIcon.setVisibility(View.VISIBLE);
-                        animShowView();
-
-                        home.dock.setHideGrid(false);
-                        for (CellContainer cellContainer : home.desktop.pages)
-                            cellContainer.setHideGrid(false);
+                        deleteIcon.setVisibility(View.VISIBLE);
                         return true;
                     case WIDGET:
                         removeIcon.setVisibility(View.VISIBLE);
-                        animShowView();
-
-                        for (CellContainer cellContainer : home.desktop.pages)
-                            cellContainer.setHideGrid(false);
                         return true;
                     case GROUP:
+                        editIcon.setVisibility(View.VISIBLE);
                         removeIcon.setVisibility(View.VISIBLE);
-                        animShowView();
-
-                        home.dock.setHideGrid(false);
-                        for (CellContainer cellContainer : home.desktop.pages)
-                            cellContainer.setHideGrid(false);
                         return true;
                     case SHORTCUT:
                         removeIcon.setVisibility(View.VISIBLE);
-                        animShowView();
-
-                        home.dock.setHideGrid(false);
-                        for (CellContainer cellContainer : home.desktop.pages)
-                            cellContainer.setHideGrid(false);
                         return true;
                 }
             case DragEvent.ACTION_DRAG_ENTERED:
@@ -308,13 +267,14 @@ public class DragOptionView extends CardView {
             case DragEvent.ACTION_DROP:
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
+                dragging = false;
                 home.dock.setHideGrid(true);
                 for (CellContainer cellContainer : home.desktop.pages) {
                     cellContainer.setHideGrid(true);
                 }
-                dragging = false;
 
                 animate().alpha(0);
+                infoIcon.setVisibility(View.GONE);
                 removeIcon.setVisibility(View.GONE);
                 infoIcon.setVisibility(View.GONE);
                 deleteIcon.setVisibility(View.GONE);

@@ -230,7 +230,7 @@ public class CellContainer extends ViewGroup {
     /**
      * Locate the first 1x1 empty space near but not equal to the supplied starting position.
      *
-     * TODO: check this won't return the starting point if the strating point is surrounded by two occupied cells in each direction
+     * TODO: check this won't return the starting point if the starting point is surrounded by two occupied cells in each direction
      *
      * @param cx - starting x coordinate
      * @param cy - starting y coordinate

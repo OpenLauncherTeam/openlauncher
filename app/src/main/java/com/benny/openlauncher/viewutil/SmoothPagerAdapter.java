@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.benny.openlauncher.model;
+package com.benny.openlauncher.viewutil;
 
 import android.database.DataSetObservable;
 import android.database.DataSetObserver;

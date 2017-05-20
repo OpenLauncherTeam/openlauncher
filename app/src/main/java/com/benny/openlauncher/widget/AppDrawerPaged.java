@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.model.SmoothPagerAdapter;
+import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;

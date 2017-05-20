@@ -5,15 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.DragEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
@@ -30,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DialogHelper {
-    public static MaterialDialog.Builder editItem(String title, String defaultText, Context c, final EditItemListener listener) {
+    public static void editItemDialog(String title, String defaultText, Context c, final onItemEditListener listener) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(c);
         builder.title(title)
                 .input(null, defaultText, new MaterialDialog.InputCallback() {
@@ -40,16 +44,16 @@ public class DialogHelper {
                     }
                 })
                 .positiveText(R.string.ok)
-                .negativeText(R.string.cancel);
-        return builder;
+                .negativeText(R.string.cancel)
+                .show();
     }
 
-    public static MaterialDialog.Builder alert(Context context, String title, String msg) {
+    public static void alertDialog(Context context, String title, String msg) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(title)
                 .content(msg)
-                .positiveText(R.string.ok);
-        return builder;
+                .positiveText(R.string.ok)
+                .show();
     }
 
     public static void addActionItemDialog(final Context context, MaterialDialog.ListCallback callback) {
@@ -148,6 +152,21 @@ public class DialogHelper {
                 }).show();
     }
 
+    public static void deletePackageDialog(Context context, DragEvent dragEvent) {
+        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
+        intent.setExtrasClassLoader(Item.class.getClassLoader());
+        Item item = intent.getParcelableExtra("mDragData");
+        if (item.type == Item.Type.APP) {
+            try {
+                Uri packageURI = Uri.parse("package:" + item.appIntent.getComponent().getPackageName());
+                Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
+                context.startActivity(uninstallIntent);
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
     public static void backupDialog(final Context context) {
         final CharSequence[] options = {context.getResources().getString(R.string.dialog__backup_app_settings__backup), context.getResources().getString(R.string.dialog__backup_app_settings__restore)};
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
@@ -230,7 +249,7 @@ public class DialogHelper {
         void onActionSelected(LauncherAction.ActionItem item);
     }
 
-    public interface EditItemListener {
-        void itemLabel(String str);
+    public interface onItemEditListener {
+        void itemLabel(String label);
     }
 }

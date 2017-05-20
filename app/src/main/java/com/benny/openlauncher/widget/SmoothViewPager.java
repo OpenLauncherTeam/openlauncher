@@ -59,7 +59,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
-import com.benny.openlauncher.model.SmoothPagerAdapter;
+import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
