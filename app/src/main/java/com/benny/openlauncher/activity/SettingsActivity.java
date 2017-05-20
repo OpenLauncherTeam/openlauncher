@@ -206,7 +206,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
-                if (key.equals(getString(R.string.pref_key__hide_apps))) {
+                if (key.equals(getString(R.string.pref_key__hidden_apps))) {
                     Intent intent = new Intent(getActivity(), HideAppsSelectionActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);

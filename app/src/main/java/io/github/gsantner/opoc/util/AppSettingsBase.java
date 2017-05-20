@@ -51,6 +51,8 @@ import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -59,7 +61,8 @@ import java.util.ArrayList;
  */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class AppSettingsBase {
-    protected static final String ARRAY_SEPERATOR = "%%";
+    protected static final String ARRAY_SEPARATOR = "%%%";
+    protected static final String ARRAY_SEPARATOR_SUBSTITUTE = "§§§";
     public static final String SHARED_PREF_APP = "app";
 
     //#####################
@@ -92,11 +95,6 @@ public class AppSettingsBase {
         resetSettings(prefApp);
     }
 
-    /**
-     * Clear all settings in prefApp (related to the App itself)
-     * This uses commit instead of apply, since this should be
-     * applied immediately.
-     */
     @SuppressLint("ApplySharedPref")
     public void resetSettings(SharedPreferences pref) {
         pref.edit().clear().commit();
@@ -127,7 +125,7 @@ public class AppSettingsBase {
     }
 
     //#################################
-    //## Getter & Setter for resources
+    //## Getter for resources
     //#################################
     public String rstr(@StringRes int stringKeyResourceId) {
         return context.getString(stringKeyResourceId);
@@ -148,20 +146,20 @@ public class AppSettingsBase {
         pref.edit().putString(rstr(keyResourceId), value).apply();
     }
 
-    public String getString(@StringRes int ressourceId, String defaultValue) {
-        return getString(prefApp, ressourceId, defaultValue);
+    public String getString(@StringRes int keyResourceId, String defaultValue) {
+        return getString(prefApp, keyResourceId, defaultValue);
     }
 
-    public String getString(SharedPreferences pref, @StringRes int ressourceId, String defaultValue) {
-        return pref.getString(rstr(ressourceId), defaultValue);
+    public String getString(SharedPreferences pref, @StringRes int keyResourceId, String defaultValue) {
+        return pref.getString(rstr(keyResourceId), defaultValue);
     }
 
-    public String getString(@StringRes int ressourceId, @StringRes int ressourceIdDefaultValue) {
-        return getString(prefApp, ressourceId, ressourceIdDefaultValue);
+    public String getString(@StringRes int keyResourceId, @StringRes int keyResourceIdDefaultValue) {
+        return getString(prefApp, keyResourceId, keyResourceIdDefaultValue);
     }
 
-    public String getString(SharedPreferences pref, @StringRes int ressourceId, @StringRes int ressourceIdDefaultValue) {
-        return pref.getString(rstr(ressourceId), rstr(ressourceIdDefaultValue));
+    public String getString(SharedPreferences pref, @StringRes int keyResourceId, @StringRes int keyResourceIdDefaultValue) {
+        return pref.getString(rstr(keyResourceId), rstr(keyResourceIdDefaultValue));
     }
 
     public void setStringArray(@StringRes int keyResourceId, Object[] values) {
@@ -171,10 +169,10 @@ public class AppSettingsBase {
     public void setStringArray(SharedPreferences pref, @StringRes int keyResourceId, Object[] values) {
         StringBuilder sb = new StringBuilder();
         for (Object value : values) {
-            sb.append("%%%");
-            sb.append(value.toString());
+            sb.append(ARRAY_SEPARATOR);
+            sb.append(value.toString().replace(ARRAY_SEPARATOR, ARRAY_SEPARATOR_SUBSTITUTE));
         }
-        setString(pref, keyResourceId, sb.toString().replaceFirst("%%%", ""));
+        setString(pref, keyResourceId, sb.toString().replaceFirst(ARRAY_SEPARATOR, ""));
     }
 
     @NonNull
@@ -184,11 +182,27 @@ public class AppSettingsBase {
 
     @NonNull
     public String[] getStringArray(SharedPreferences pref, @StringRes int keyResourceId) {
-        String value = pref.getString(rstr(keyResourceId), "%%%");
-        if (value.equals("%%%")) {
+        String value = pref.getString(rstr(keyResourceId), ARRAY_SEPARATOR);
+        if (value.equals(ARRAY_SEPARATOR)) {
             return new String[0];
         }
-        return value.split("%%%");
+        return value.split(ARRAY_SEPARATOR);
+    }
+
+    public void setStringList(@StringRes int keyResourceId, List<String> values) {
+        setStringList(prefApp, keyResourceId, values);
+    }
+
+    public void setStringList(SharedPreferences pref, @StringRes int keyResourceId, List<String> values) {
+        setStringArray(pref, keyResourceId, values.toArray(new String[values.size()]));
+    }
+
+    public ArrayList<String> getStringList(@StringRes int keyResourceId) {
+        return getStringList(prefApp, keyResourceId);
+    }
+
+    public ArrayList<String> getStringList(SharedPreferences pref, @StringRes int keyResourceId) {
+        return new ArrayList<>(Arrays.asList(getStringArray(pref, keyResourceId)));
     }
 
     public void setLong(@StringRes int keyResourceId, long value) {
@@ -199,12 +213,12 @@ public class AppSettingsBase {
         pref.edit().putLong(rstr(keyResourceId), value).apply();
     }
 
-    public long getLong(@StringRes int ressourceId, long defaultValue) {
-        return getLong(prefApp, ressourceId, defaultValue);
+    public long getLong(@StringRes int keyResourceId, long defaultValue) {
+        return getLong(prefApp, keyResourceId, defaultValue);
     }
 
-    public long getLong(SharedPreferences pref, @StringRes int ressourceId, long defaultValue) {
-        return pref.getLong(rstr(ressourceId), defaultValue);
+    public long getLong(SharedPreferences pref, @StringRes int keyResourceId, long defaultValue) {
+        return pref.getLong(rstr(keyResourceId), defaultValue);
     }
 
     public void setBool(@StringRes int keyResourceId, boolean value) {
@@ -215,12 +229,12 @@ public class AppSettingsBase {
         pref.edit().putBoolean(rstr(keyResourceId), value).apply();
     }
 
-    public boolean getBool(@StringRes int ressourceId, boolean defaultValue) {
-        return getBool(prefApp, ressourceId, defaultValue);
+    public boolean getBool(@StringRes int keyResourceId, boolean defaultValue) {
+        return getBool(prefApp, keyResourceId, defaultValue);
     }
 
-    public boolean getBool(SharedPreferences pref, @StringRes int ressourceId, boolean defaultValue) {
-        return pref.getBoolean(rstr(ressourceId), defaultValue);
+    public boolean getBool(SharedPreferences pref, @StringRes int keyResourceId, boolean defaultValue) {
+        return pref.getBoolean(rstr(keyResourceId), defaultValue);
     }
 
     public int getColor(String key, int defaultColor) {
@@ -231,12 +245,12 @@ public class AppSettingsBase {
         return pref.getInt(key, defaultColor);
     }
 
-    public int getColor(@StringRes int ressourceId, int defaultColor) {
-        return getColor(prefApp, ressourceId, defaultColor);
+    public int getColor(@StringRes int keyResourceId, int defaultColor) {
+        return getColor(prefApp, keyResourceId, defaultColor);
     }
 
-    public int getColor(SharedPreferences pref, @StringRes int ressourceId, int defaultColor) {
-        return pref.getInt(rstr(ressourceId), defaultColor);
+    public int getColor(SharedPreferences pref, @StringRes int keyResourceId, int defaultColor) {
+        return pref.getInt(rstr(keyResourceId), defaultColor);
     }
 
     public void setDouble(@StringRes int keyResId, double value) {
@@ -255,6 +269,11 @@ public class AppSettingsBase {
         return Double.longBitsToDouble(prefApp.getLong(rstr(keyResId), Double.doubleToLongBits(defaultValue)));
     }
 
+    public int getIntOfStringPref(@StringRes int keyResId, int defaultValue) {
+        String strNum = prefApp.getString(context.getString(keyResId), Integer.toString(defaultValue));
+        return Integer.valueOf(strNum);
+    }
+
     public void setInt(@StringRes int keyResourceId, int value) {
         setInt(prefApp, keyResourceId, value);
     }
@@ -263,30 +282,25 @@ public class AppSettingsBase {
         pref.edit().putInt(rstr(keyResourceId), value).apply();
     }
 
-    public int getInt(@StringRes int ressourceId, int defaultValue) {
-        return getInt(prefApp, ressourceId, defaultValue);
+    public int getInt(@StringRes int keyResourceId, int defaultValue) {
+        return getInt(prefApp, keyResourceId, defaultValue);
     }
 
-    public int getInt(SharedPreferences pref, @StringRes int ressourceId, int defaultValue) {
-        return pref.getInt(rstr(ressourceId), defaultValue);
+    public int getInt(SharedPreferences pref, @StringRes int keyResourceId, int defaultValue) {
+        return pref.getInt(rstr(keyResourceId), defaultValue);
     }
 
-    public void setIntList(@StringRes int keyResId, ArrayList<Integer> values) {
+    public void setIntList(@StringRes int keyResId, List<Integer> values) {
         setIntList(prefApp, keyResId, values);
     }
 
-    public int getIntOfStringPref(@StringRes int keyResId, int defaultValue) {
-        String strNum = prefApp.getString(context.getString(keyResId), Integer.toString(defaultValue));
-        return Integer.valueOf(strNum);
-    }
-
-    public void setIntList(SharedPreferences pref, @StringRes int keyResId, ArrayList<Integer> values) {
+    public void setIntList(SharedPreferences pref, @StringRes int keyResId, List<Integer> values) {
         StringBuilder sb = new StringBuilder();
         for (int value : values) {
-            sb.append(ARRAY_SEPERATOR);
+            sb.append(ARRAY_SEPARATOR);
             sb.append(Integer.toString(value));
         }
-        setString(prefApp, keyResId, sb.toString().replaceFirst(ARRAY_SEPERATOR, ""));
+        setString(prefApp, keyResId, sb.toString().replaceFirst(ARRAY_SEPARATOR, ""));
     }
 
     @NonNull
@@ -297,11 +311,11 @@ public class AppSettingsBase {
     @NonNull
     public ArrayList<Integer> getIntList(SharedPreferences pref, @StringRes int keyResId) {
         ArrayList<Integer> ret = new ArrayList<>();
-        String value = getString(prefApp, keyResId, ARRAY_SEPERATOR);
-        if (value.equals(ARRAY_SEPERATOR)) {
+        String value = getString(prefApp, keyResId, ARRAY_SEPARATOR);
+        if (value.equals(ARRAY_SEPARATOR)) {
             return ret;
         }
-        for (String s : value.split(ARRAY_SEPERATOR)) {
+        for (String s : value.split(ARRAY_SEPARATOR)) {
             ret.add(Integer.parseInt(s));
         }
         return ret;

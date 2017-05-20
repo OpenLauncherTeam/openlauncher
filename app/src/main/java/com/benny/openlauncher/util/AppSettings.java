@@ -10,7 +10,6 @@ import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.Desktop;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import io.github.gsantner.opoc.util.AppSettingsBase;
 
@@ -112,7 +111,7 @@ public class AppSettings extends AppSettingsBase {
     }
 
     public ArrayList<String> getMinibarArrangement() {
-        ArrayList<String> ret = new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key__minibar_data)));
+        ArrayList<String> ret = getStringList(R.string.pref_key__minibar_arrangement);
         if (ret.isEmpty()) {
             for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
                 ret.add("0" + item.label.toString());
@@ -123,7 +122,7 @@ public class AppSettings extends AppSettingsBase {
     }
 
     public void setMinibarArrangement(ArrayList<String> value) {
-        setStringArray(R.string.pref_key__minibar_data, value.toArray(new String[value.size()]));
+        setStringList(R.string.pref_key__minibar_arrangement, value);
     }
 
     public boolean isDesktopSearchbarEnabled() {
@@ -199,11 +198,11 @@ public class AppSettings extends AppSettingsBase {
     }
 
     public ArrayList<String> getHiddenAppsList() {
-        return new ArrayList<>(Arrays.asList(getStringArray(R.string.pref_key__hide_apps)));
+        return getStringList(R.string.pref_key__hidden_apps);
     }
 
     public void setHiddenAppsList(ArrayList<String> value) {
-        setStringArray(R.string.pref_key__hide_apps, value.toArray(new String[value.size()]));
+        setStringList(R.string.pref_key__hidden_apps, value);
     }
 
     public boolean isAppRestartRequired() {

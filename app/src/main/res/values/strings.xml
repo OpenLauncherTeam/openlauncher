@@ -31,10 +31,10 @@
 
     <string name="intro_skip">Skip</string>
     <string name="intro_finish">Let\'s start.</string>
-    <string name="intro1_title" translatable="false">OpenLauncher</string>
+    <string name="intro1_title" translatable="false">@string/app_name</string>
     <string name="intro1_text">Thank you for choosing OpenLauncher. It\'s fully open source and still in development.
         Here\'s a short intro on how to use it …</string>
-    <string name="intro2_title" translatable="false">Minibar</string>
+    <string name="intro2_title" translatable="false">@string/minibar</string>
     <string name="intro2_text">Swipe right from the left border of your screen to open the minibar. There you can find the settings,
         change the wallpaper, and do lots of other stuff.</string>
     <string name="intro3_title">Settings</string>
@@ -76,7 +76,7 @@
     <string name="pref_title__appearance">Appearance</string>
     <string name="pref_title__color">Colors</string>
 
-    <string name="pref_title__minibar" translatable="false">Minibar</string>
+    <string name="pref_title__minibar" translatable="false">@string/minibar</string>
     <string name="pref_summary__minibar">Configure the order and visibility of minibar items.</string>
     <string name="pref_title__search_bar_enable">Search Bar</string>
     <string name="pref_summary__search_bar_enable">Display a search bar on top of the desktop.</string>
@@ -138,7 +138,7 @@
     <string name="pref_key__desktop_style" translatable="false">pref_key__desktop_style</string>
     <string name="pref_key__minibar" translatable="false">pref_key__minibar</string>
     <string name="pref_key__minibar_enable" translatable="false">pref_key__minibar_enable</string>
-    <string name="pref_key__minibar_data" translatable="false">pref_key__minibar_data</string>
+    <string name="pref_key__minibar_arrangement" translatable="false">pref_key__minibar_arrangement</string>
     <string name="pref_key__search_bar_enable" translatable="false">pref_key__search_bar_enable</string>
     <string name="pref_key__desktop_fullscreen" translatable="false">pref_key__desktop_fullscreen</string>
     <string name="pref_key__desktop_show_position_indicator" translatable="false">pref_key__desktop_show_position_indicator</string>
@@ -156,7 +156,7 @@
     <string name="pref_key__drawer_columns_landscape" translatable="false">pref_key__drawer_columns_landscape</string>
     <string name="pref_key__drawer_rows_landscape" translatable="false">pref_key__drawer_rows_landscape</string>
     <string name="pref_key__drawer_style" translatable="false">pref_key__drawer_style</string>
-    <string name="pref_key__hide_apps" translatable="false">pref_key__hide_apps</string>
+    <string name="pref_key__hidden_apps" translatable="false">pref_key__hidden_apps</string>
     <string name="pref_key__drawer_show_card_view" translatable="false">pref_key__drawer_show_card_view</string>
     <string name="pref_key__drawer_remember_position" translatable="false">pref_key__drawer_remember_position</string>
     <string name="pref_key__drawer_show_position_indicator" translatable="false">pref_key__drawer_show_position_indicator</string>
@@ -185,7 +185,7 @@
     <string name="pref_key__cat_gestures" translatable="false">pref_key__cat_gestures</string>
     <string name="pref_key__cat_icons" translatable="false">pref_key__cat_icons</string>
     <string name="pref_key__cat_miscellaneous" translatable="false">pref_key__cat_miscellaneous</string>
-    <string name="pref_key__about">pref_key__about</string>
+    <string name="pref_key__about" translatable="false">pref_key__about</string>
 
     <!-- Internal Keys -->
 

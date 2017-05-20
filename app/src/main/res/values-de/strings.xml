@@ -27,11 +27,9 @@
     <string name="intro_skip">Überspringen</string>
     <string name="intro_finish">Los geht\'s!</string>
 
-    <string name="intro1_title">OpenLauncher</string>
     <string name="intro1_text">Danke, dass du dich für Open Launcher entschieden hast. Er ist komplett quelloffen und wird ständig
         weiter entwickelt. Hier eine kurze Einführung …</string>
 
-    <string name="intro2_title">Minibar</string>
     <string name="intro2_text">Wische vom linken Bildschirmrand nach rechts, um die Minibar zu öffnen. Dort gelangst du zu den
         Einstellungen, kannst das Wallpaper ändern und weitere Dinge machen …</string>
 
@@ -131,5 +129,23 @@
     <string name="pref_title__desktop_show_label">Beschriftung</string>
     <string name="on">Ein</string>
     <string name="off">Aus</string>
+    <string name="pref_title__gestures">Gesten</string>
+    <string name="pref_summary__minibar">Konfiguration der Anordnung und Sichtbarkeing von Minibar Einträgen.</string>
+    <string name="pref_title__desktop_background_color">Hintergrund</string>
+    <string name="pref_title__drawer_show_label">Beschriftungen anzeigen</string>
+    <string name="pref_summary__drawer_show_label">App Beschriftungen unter den Icons anzeigen</string>
+    <string name="pref_title__clear_database">Datenbank zurücksetzen</string>
+    <string name="columns">Spalten</string>
+    <string name="rows">Zeilen</string>
+    <string name="columns_landscape">Spalten (Quer)</string>
+    <string name="rows_landscape">Zeilen (Quer)</string>
+    <string name="search_online">ONLINE SUCHEN</string>
+    <string name="pref_summary__drawer_remember_position">Die aktuelle Position im App Drawer merken</string>
+    <string name="pref_summary__clear_database">Die Daten von Desktop und Dock zurücksetzen um Probleme zu beheben</string>
+    <string name="pref_title__desktop_double_tap">Doppelt antippen</string>
+    <string name="pref_title__desktop_swipe_up">Swipe nach oben</string>
+    <string name="pref_title__desktop_swipe_down">Swipe nach unten</string>
+    <string name="pref_title__desktop_pinch">Pinch</string>
+    <string name="pref_title__desktop_unpinch">Unpinch</string>
 
 </resources>
