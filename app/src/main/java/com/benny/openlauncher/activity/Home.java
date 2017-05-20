@@ -460,7 +460,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 switch (which) {
                     case 0:
                         Point pos = desktop.getCurrentPage().findFreeSpace();
-                        desktop.addItemToCell(Item.newActionItem(8), pos.x, pos.y);
+                        if (pos != null)
+                            desktop.addItemToCell(Item.newActionItem(8), pos.x, pos.y);
+                        else
+                            Tool.toast(Home.this, R.string.toast_not_enough_space);
                         break;
                 }
             }
@@ -654,9 +657,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         item.spanX = ((appWidgetInfo.minWidth - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth) + 1;
         item.spanY = ((appWidgetInfo.minHeight - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight) + 1;
         Point point = desktop.getCurrentPage().findFreeSpace(item.spanX, item.spanY);
-        item.x = point.x;
-        item.y = point.y;
-        desktop.addItemToPage(item, desktop.getCurrentItem());
+        if (point != null) {
+            item.x = point.x;
+            item.y = point.y;
+            desktop.addItemToPage(item, desktop.getCurrentItem());
+        } else {
+            Tool.toast(Home.this, R.string.toast_not_enough_space);
+        }
     }
 
     @Override

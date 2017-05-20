@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
 
+import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
 
@@ -43,16 +44,16 @@ public class ShortcutReceiver extends BroadcastReceiver {
         }
 
         Item item = Item.newShortcutItem(context, name, newIntent, Tool.drawableToBitmap(shortcutIconDrawable));
-        Point perferedPos = Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).findFreeSpace();
+        Point preferredPos = Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).findFreeSpace();
 
-        if (perferedPos == null) {
-            item.x = 0;
-            item.y = 0;
+        // TODO: is it better to create a new page if there is not enough space
+        if (preferredPos == null) {
+            Tool.toast(Home.launcher, R.string.toast_not_enough_space);
         } else {
-            item.x = perferedPos.x;
-            item.y = perferedPos.y;
+            item.x = preferredPos.x;
+            item.y = preferredPos.y;
+            Home.db.setItem(item, Home.launcher.desktop.getCurrentItem(), 0);
+            Home.launcher.desktop.addItemToPage(item, Home.launcher.desktop.getCurrentItem());
         }
-        Home.db.setItem(item, Home.launcher.desktop.getCurrentItem(), 0);
-        Home.launcher.desktop.addItemToPage(item, Home.launcher.desktop.getCurrentItem());
     }
 }
