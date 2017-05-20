@@ -33,6 +33,25 @@ import static com.benny.openlauncher.activity.Home.resources;
 
 public class AppItemView extends View implements Drawable.Callback {
 
+    private Drawable icon;
+    private String label;
+    public Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    public Paint bgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Rect mTextBound = new Rect();
+    private static Typeface myType;
+    private float iconSize;
+    private float iconPadding;
+    private float iconSizeSmall;
+    private boolean noLabel = false;
+    private boolean vibrateWhenLongPress;
+    private boolean roundBg;
+    private int bgColor;
+    private float labelHeight;
+    private int targetedWidth;
+    private int targetedHeightPadding;
+    private float heightPadding;
+    private float horizontalPadding = 8;
+
     public Drawable getIcon() {
         return icon;
     }
@@ -43,19 +62,6 @@ public class AppItemView extends View implements Drawable.Callback {
             this.icon.setCallback(this);
             invalidate();
         }
-    }
-
-    @Override
-    public void refreshDrawableState() {
-        invalidateDrawable(icon);
-        super.refreshDrawableState();
-    }
-
-    private static Typeface myType;
-
-    @Override
-    public void invalidateDrawable(Drawable drawable) {
-        invalidate();
     }
 
     public String getLabel() {
@@ -75,8 +81,6 @@ public class AppItemView extends View implements Drawable.Callback {
         this.iconSize = iconSize;
     }
 
-    private float iconSize;
-
     public float getIconPadding() {
         return iconPadding;
     }
@@ -84,8 +88,6 @@ public class AppItemView extends View implements Drawable.Callback {
     public void setIconPadding(float iconPadding) {
         this.iconPadding = iconPadding;
     }
-
-    private float iconPadding;
 
     public float getIconSizeSmall() {
         return iconSizeSmall;
@@ -95,23 +97,9 @@ public class AppItemView extends View implements Drawable.Callback {
         this.iconSizeSmall = iconSizeSmall;
     }
 
-    private float iconSizeSmall;
-
-    private Drawable icon;
-
-    private String label;
-
-    public Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG), bgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-    private Rect mTextBound = new Rect();
-
-    private boolean noLabel = false;
-
     public boolean isNoLabel() {
         return noLabel;
     }
-
-    private boolean vibrateWhenLongPress;
 
     public boolean isRoundBg() {
         return roundBg;
@@ -130,21 +118,20 @@ public class AppItemView extends View implements Drawable.Callback {
         bgPaint.setColor(bgColor);
     }
 
-    private boolean roundBg;
-
-    private int bgColor;
-
-    private float labelHeight;
-
-    private int targetedWidth, targetedHeightPadding;
-
     public float getHeightPadding() {
         return heightPadding;
     }
 
-    private float heightPadding;
+    @Override
+    public void refreshDrawableState() {
+        invalidateDrawable(icon);
+        super.refreshDrawableState();
+    }
 
-    private float horizontalPadding = 8; // In dp
+    @Override
+    public void invalidateDrawable(Drawable drawable) {
+        invalidate();
+    }
 
     public AppItemView(Context context) {
         this(context, null);
