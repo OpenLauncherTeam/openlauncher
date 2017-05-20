@@ -91,6 +91,16 @@ public class CellContainer extends ViewGroup {
         return null;
     }
 
+    /**
+     * Test whether a moved Item is being moved over an existing Item and if so move the
+     * existing Item out of the way. <P>
+     *
+     * TODO: Need to handle the dragged item having a size greater than 1x1
+     *
+     * TODO: Need to handle moving the target back if the final drop location is not where the Item was moved from
+     *
+     * @param event - the drag event that contains the current x,y position
+     */
     public void peekItemAndSwap(DragEvent event) {
         Point coordinate = touchPosToCoordinate((int) event.getX(), (int) event.getY(), 1, 1, false);
 
@@ -183,6 +193,11 @@ public class CellContainer extends ViewGroup {
         invalidate();
     }
 
+    /**
+     * Optimised version of findFreeSpace(1,1)
+     *
+     * @return the first empty space or null if no free space found
+     */
     public Point findFreeSpace() {
         for (int y = 0; y < occupied[0].length; y++) {
             for (int x = 0; x < occupied.length; x++) {
@@ -191,9 +206,16 @@ public class CellContainer extends ViewGroup {
                 }
             }
         }
-        return new Point(0, 0);
+        return null;
     }
 
+    /**
+     * Locate the first empty space large enough for the supplied dimensions
+     *
+     * @param spanX - the width of the required space
+     * @param spanY - the heigt of the required space
+     * @return the first empty space or null if no free space found
+     */
     public Point findFreeSpace(int spanX, int spanY) {
         for (int y = 0; y < occupied[0].length; y++) {
             for (int x = 0; x < occupied.length; x++) {
@@ -202,9 +224,19 @@ public class CellContainer extends ViewGroup {
                 }
             }
         }
-        return new Point(0, 0);
+        return null;
     }
 
+    /**
+     * Locate the first 1x1 empty space near but not equal to the supplied starting position.
+     *
+     * TODO: check this won't return the starting point if the strating point is surrounded by two occupied cells in each direction
+     *
+     * @param cx - starting x coordinate
+     * @param cy - starting y coordinate
+     * @param peekDirection - direction to look first or null
+     * @return the first empty space or null if no free space found
+     */
     public Point findFreeSpace(int cx, int cy, PeekDirection peekDirection) {
         if (peekDirection != null) {
             Point target;
@@ -373,13 +405,22 @@ public class CellContainer extends ViewGroup {
         }
     }
 
+    /**
+     * Check if there is sufficient unoccupied space to accept an Item with the given span with it's
+     * top left corner at the given starting point
+     *
+     * @param start - The top left corner of the proposed Item location
+     * @param spanX - The Item width in cells
+     * @param spanY - The Item height in cells
+     * @return - true if there is sufficient space, false if any of the space is occupied or the item exceeds the container dimensions
+     */
     public boolean checkOccupied(Point start, int spanX, int spanY) {
-        if (start.x + spanX >= occupied.length || start.y + spanY >= occupied[0].length) {
+        if ((start.x + spanX > occupied.length) || (start.y + spanY > occupied[0].length)) {
             return false;
         }
-        for (int y = start.y; y < spanY; y++) {
-            for (int x = start.x; y < spanX; x++) {
-                if (!occupied[x][y]) {
+        for (int y = start.y; y < start.y+spanY; y++) {
+            for (int x = start.x; x < start.x+spanX; x++) {
+                if (occupied[x][y]) {
                     return false;
                 }
             }
