@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
@@ -22,6 +23,7 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.util.LauncherAction;
+import com.benny.openlauncher.widget.AppDrawerController;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -163,6 +165,28 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         public void onResume() {
             super.onResume();
             ((SettingsActivity) getActivity()).toolbar.setTitle(R.string.settings);
+
+            AppSettings settings = AppSettings.get();
+
+            String desktopSummary = "Size : " + String.valueOf(settings.getDesktopColumnCount()) + " x " + String.valueOf(settings.getDesktopRowCount());
+            findPreference(getString(R.string.pref_key__cat_desktop)).setSummary(desktopSummary);
+
+            String dockSummary = "Size : " + String.valueOf(settings.getDockSize());
+            findPreference(getString(R.string.pref_key__cat_dock)).setSummary(dockSummary);
+
+            String drawerSummary = "";
+            switch (settings.getAppDrawerMode()){
+                case AppDrawerController.DrawerMode.HORIZONTAL_PAGED:
+                    drawerSummary = "Horizontal paged drawer";
+                    break;
+                case AppDrawerController.DrawerMode.VERTICAL:
+                    drawerSummary = "Vertical scroll drawer";
+                    break;
+            }
+            findPreference(getString(R.string.pref_key__cat_app_drawer)).setSummary(drawerSummary);
+
+            String iconsSummary = "Size : " + String.valueOf(settings.getIconSize()) + " dp";
+            findPreference(getString(R.string.pref_key__cat_icons)).setSummary(iconsSummary);
         }
     }
 

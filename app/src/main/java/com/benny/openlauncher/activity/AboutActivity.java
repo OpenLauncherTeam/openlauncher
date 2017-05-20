@@ -21,6 +21,24 @@ import de.psdev.licensesdialog.model.Notices;
 
 public class AboutActivity extends MaterialAboutActivity {
 
+    private static final Notices notices = new Notices();
+    static {
+        notices.addNotice(new Notice("FastAdapter", "https://github.com/mikepenz/FastAdapter", "Mike Penz", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("CircularReveal", "https://github.com/ozodrukh/CircularReveal", "Abdullaev Ozodrukh", new MITLicense()));
+        notices.addNotice(new Notice("MaterialScrollBar", "https://github.com/turing-tech/MaterialScrollBar", "Turing Technologies", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("Material About Library", "https://github.com/daniel-stoneuk/material-about-library", "Daniel Stone", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("Material Dialogs", "https://github.com/afollestad/material-dialogs", "Aidan Follestad", new MITLicense()));
+        notices.addNotice(new Notice("Material Ripple Layout", "https://github.com/balysv/material-ripple", "Balys Valentukevicius", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("ImageBlurring ", "https://github.com/qiujuer/ImageBlurring", "Qiujuer", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("SimpleFingerGestures", "https://github.com/championswimmer/SimpleFingerGestures_Android_Library", "Arnav Gupta", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("TextDrawable", "https://github.com/amulyakhare/TextDrawable", "Amulya Khare", new MITLicense()));
+        notices.addNotice(new Notice("AndroidOnboarder", "https://github.com/chyrta/AndroidOnboarder", "Dzmitry Chyrta, Daniel Morales", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("CustomActivityOnCrash", "https://github.com/Ereza/CustomActivityOnCrash", "Eduard Ereza Martínez", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("Butter Knife", "https://github.com/JakeWharton/butterknife", "Jake Wharton", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("jaredrummler colorpicker", "https://github.com/jaredrummler/ColorPicker", " jaredrummler", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice("Android Support Library", "https://developer.android.com/topic/libraries/support-library/revisions.html", "The Android Open Source Project", new ApacheSoftwareLicense20()));
+    }
+
     @Override
     protected MaterialAboutList getMaterialAboutList(Context context) {
         runOnUiThread(new Runnable() {
@@ -38,24 +56,9 @@ public class AboutActivity extends MaterialAboutActivity {
             e.printStackTrace();
         }
         titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, getResources().getDrawable(R.drawable.ic_github_dark_24dp), "GitHub", false, Uri.parse("https://github.com/BennyKok/OpenLauncher")));
-        titleCard.addItem(new MaterialAboutActionItem(getString(R.string.about_libs), null, getResources().getDrawable(R.drawable.ic_github_dark_24dp), new MaterialAboutActionItem.OnClickListener() {
+        titleCard.addItem(new MaterialAboutActionItem(getString(R.string.about_libs), null, getResources().getDrawable(R.drawable.ic_library_gray_24dp), new MaterialAboutActionItem.OnClickListener() {
             @Override
             public void onClick() {
-                final Notices notices = new Notices();
-                notices.addNotice(new Notice("FastAdapter", "https://github.com/mikepenz/FastAdapter", "Mike Penz", new ApacheSoftwareLicense20()));
-                notices.addNotice(new Notice("CircularReveal", "https://github.com/ozodrukh/CircularReveal", "Abdullaev Ozodrukh", new MITLicense()));
-                notices.addNotice(new Notice("MaterialScrollBar", "https://github.com/turing-tech/MaterialScrollBar", "Turing Technologies", new ApacheSoftwareLicense20()));
-                notices.addNotice(new Notice("Material About Library", "https://github.com/daniel-stoneuk/material-about-library", "Daniel Stone", new ApacheSoftwareLicense20()));
-                notices.addNotice(new Notice("Material Dialogs", "https://github.com/afollestad/material-dialogs", "Aidan Follestad", new MITLicense()));
-                notices.addNotice(new Notice("Material Ripple Layout", "https://github.com/balysv/material-ripple", "Balys Valentukevicius", new ApacheSoftwareLicense20()));
-                notices.addNotice(new Notice("ImageBlurring ", "https://github.com/qiujuer/ImageBlurring", "Qiujuer", new ApacheSoftwareLicense20()));
-                notices.addNotice(new Notice("SimpleFingerGestures", "https://github.com/championswimmer/SimpleFingerGestures_Android_Library", "Arnav Gupta", new ApacheSoftwareLicense20()));
-                notices.addNotice(new Notice("TextDrawable", "https://github.com/amulyakhare/TextDrawable", "Amulya Khare", new MITLicense()));
-                notices.addNotice(new Notice("AndroidOnboarder", "https://github.com/chyrta/AndroidOnboarder", "Dzmitry Chyrta, Daniel Morales", new ApacheSoftwareLicense20()));
-                notices.addNotice(new Notice("CustomActivityOnCrash", "https://github.com/Ereza/CustomActivityOnCrash", "Eduard Ereza Martínez", new ApacheSoftwareLicense20()));
-                notices.addNotice(new Notice("Butter Knife", "https://github.com/JakeWharton/butterknife", "Jake Wharton", new ApacheSoftwareLicense20()));
-                notices.addNotice(new Notice("jaredrummler colorpicker", "https://github.com/jaredrummler/ColorPicker", " jaredrummler", new ApacheSoftwareLicense20()));
-                notices.addNotice(new Notice("Android Support Library", "https://developer.android.com/topic/libraries/support-library/revisions.html", "The Android Open Source Project", new ApacheSoftwareLicense20()));
                 new LicensesDialog.Builder(AboutActivity.this)
                         .setNotices(notices)
                         .setIncludeOwnLicense(true)
@@ -93,14 +96,18 @@ public class AboutActivity extends MaterialAboutActivity {
         contributorsCard.addItem(new MaterialAboutActionItem.Builder()
                 .icon(R.drawable.person_chris_debrodie)
                 .text("Chris DeBrodie")
-                .subText(getString(R.string.about_credit_text_chris_debrodie))
+                .subText(R.string.about_credit_text_chris_debrodie)
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://plus.google.com/111923938461696019967")))
                 .build());
         contributorsCard.addItem(new MaterialAboutActionItem.Builder()
                 .icon(R.drawable.person_gaukler_faun)
                 .text("Gaukler Faun")
-                .subText(getString(R.string.about_credit_text_gaukler_faun))
+                .subText(R.string.about_credit_text_gaukler_faun)
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))
+                .build());
+        contributorsCard.addItem(new MaterialAboutActionItem.Builder()
+                .text(R.string.about_credit_text_all_contributors)
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/OpenLauncherTeam/openlauncher/graphs/contributors")))
                 .build());
 
 
