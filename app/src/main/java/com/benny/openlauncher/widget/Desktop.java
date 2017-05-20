@@ -288,17 +288,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
     }
 
-    /**
-     * Add an item to the specified position on the current page
-     *
-     * @param item - the item to add
-     * @param x    - x position in screen coordinates of the centre of the item
-     * @param y    - y position in screen coordinates of the centre of the item
-     * @return - true if the item was added, false if not enough space
-     */
+    // add an item to the specified position on the current page
     @Override
     public boolean addItemToPoint(final Item item, int x, int y) {
-        CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().positionToLayoutPrams(x, y, item.spanX, item.spanY);
+        CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().touchPosToLayoutParams(x, y, item.spanX, item.spanY);
         if (positionToLayoutPrams != null) {
             item.x = positionToLayoutPrams.x;
             item.y = positionToLayoutPrams.y;

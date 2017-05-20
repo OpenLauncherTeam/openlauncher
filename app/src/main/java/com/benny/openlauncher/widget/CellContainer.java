@@ -79,14 +79,14 @@ public class CellContainer extends ViewGroup {
 
     private PeekDirection getPeekDirectionFromCoordinate(Point from, Point to) {
         if (from.y - to.y > 0)
-            return PeekDirection.T;
+            return PeekDirection.UP;
         else if (from.y - to.y < 0)
-            return PeekDirection.B;
+            return PeekDirection.DOWN;
 
         if (from.x - to.x > 0)
-            return PeekDirection.L;
+            return PeekDirection.LEFT;
         else if (from.x - to.x < 0)
-            return PeekDirection.R;
+            return PeekDirection.RIGHT;
 
         return null;
     }
@@ -152,8 +152,9 @@ public class CellContainer extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (blockTouch)
+        if (blockTouch) {
             return true;
+        }
         return super.onInterceptTouchEvent(ev);
     }
 
@@ -196,7 +197,7 @@ public class CellContainer extends ViewGroup {
     public Point findFreeSpace(int spanX, int spanY) {
         for (int y = 0; y < occupied[0].length; y++) {
             for (int x = 0; x < occupied.length; x++) {
-                if (!occupied[x][y] && checkFreeSpace(new Point(x, y), spanX, spanY)) {
+                if (!occupied[x][y] && checkOccupied(new Point(x, y), spanX, spanY)) {
                     return new Point(x, y);
                 }
             }
@@ -204,40 +205,26 @@ public class CellContainer extends ViewGroup {
         return new Point(0, 0);
     }
 
-    public boolean checkFreeSpace(Point start, int spanX, int spanY) {
-        if (start.x + spanX >= occupied.length || start.y + spanY >= occupied[0].length) {
-            return false;
-        }
-        for (int y = start.y; y < spanY; y++) {
-            for (int x = start.x; y < spanX; x++) {
-                if (!occupied[x][y]) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     public Point findFreeSpace(int cx, int cy, PeekDirection peekDirection) {
         if (peekDirection != null) {
             Point target;
             switch (peekDirection) {
-                case B:
+                case DOWN:
                     target = new Point(cx, cy - 1);
                     if (isValid(target.x, target.y) && !occupied[target.x][target.y])
                         return target;
                     break;
-                case L:
+                case LEFT:
                     target = new Point(cx + 1, cy);
                     if (isValid(target.x, target.y) && !occupied[target.x][target.y])
                         return target;
                     break;
-                case R:
+                case RIGHT:
                     target = new Point(cx - 1, cy);
                     if (isValid(target.x, target.y) && !occupied[target.x][target.y])
                         return target;
                     break;
-                case T:
+                case UP:
                     target = new Point(cx, cy + 1);
                     if (isValid(target.x, target.y) && !occupied[target.x][target.y])
                         return target;
@@ -299,7 +286,6 @@ public class CellContainer extends ViewGroup {
 
     public boolean isValid(int x, int y) {
         return (x >= 0 && x <= occupied.length - 1 && y >= 0 && y <= occupied[0].length - 1);
-
     }
 
     @Override
@@ -369,14 +355,6 @@ public class CellContainer extends ViewGroup {
         super.removeView(view);
     }
 
-    private void setOccupied(boolean b, LayoutParams lp) {
-        for (int x = lp.x; x < lp.x + lp.xSpan; x++) {
-            for (int y = lp.y; y < lp.y + lp.ySpan; y++) {
-                occupied[x][y] = b;
-            }
-        }
-    }
-
     public void addViewToGrid(View view, int x, int y, int xSpan, int ySpan) {
         LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, x, y, xSpan, ySpan);
         view.setLayoutParams(lp);
@@ -387,65 +365,59 @@ public class CellContainer extends ViewGroup {
         addView(view);
     }
 
-    public LayoutParams cellPositionToLayoutPrams(int cellx, int celly, int xSpan, int ySpan, LayoutParams current) {
-        setOccupied(false, current);
-        if (occupied[cellx][celly]) {
-            setOccupied(true, current);
-            return null;
-        }
-
-        int dx;
-        int dy;
-
-        dx = cellx + xSpan - 1;
-        if (dx >= cellSpanH - 1) {
-            dx = cellSpanH - 1;
-            cellx = dx + 1 - xSpan;
-        }
-
-        dy = celly + ySpan - 1;
-        if (dy >= cellSpanV - 1) {
-            dy = cellSpanV - 1;
-            celly = dy + 1 - ySpan;
-        }
-
-        for (int x2 = cellx; x2 < cellx + xSpan; x2++) {
-            for (int y2 = celly; y2 < celly + ySpan; y2++) {
-                if (occupied[x2][y2]) {
-                    setOccupied(true, current);
-                    return null;
-                }
+    private void setOccupied(boolean b, LayoutParams lp) {
+        for (int x = lp.x; x < lp.x + lp.xSpan; x++) {
+            for (int y = lp.y; y < lp.y + lp.ySpan; y++) {
+                occupied[x][y] = b;
             }
         }
-        return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, cellx, celly, xSpan, ySpan);
     }
 
-    public LayoutParams cellPositionToLayoutPrams(int cellx, int celly, int xSpan, int ySpan) {
-        if (occupied[cellx][celly]) {
-            return null;
+    public boolean checkOccupied(Point start, int spanX, int spanY) {
+        if (start.x + spanX >= occupied.length || start.y + spanY >= occupied[0].length) {
+            return false;
+        }
+        for (int y = start.y; y < spanY; y++) {
+            for (int x = start.x; y < spanX; x++) {
+                if (!occupied[x][y]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean checkOccupied(int xCell, int yCell, int xSpan, int ySpan, LayoutParams current) {
+        setOccupied(false, current);
+        if (occupied[xCell][yCell]) {
+            setOccupied(true, current);
+            return false;
         }
 
         int dx;
         int dy;
-        dx = cellx + xSpan - 1;
+
+        dx = xCell + xSpan - 1;
         if (dx >= cellSpanH - 1) {
             dx = cellSpanH - 1;
-            cellx = dx + 1 - xSpan;
-        }
-        dy = celly + ySpan - 1;
-        if (dy >= cellSpanV - 1) {
-            dy = cellSpanV - 1;
-            celly = dy + 1 - ySpan;
+            xCell = dx + 1 - xSpan;
         }
 
-        for (int x2 = cellx; x2 < cellx + xSpan; x2++) {
-            for (int y2 = celly; y2 < celly + ySpan; y2++) {
+        dy = yCell + ySpan - 1;
+        if (dy >= cellSpanV - 1) {
+            dy = cellSpanV - 1;
+            yCell = dy + 1 - ySpan;
+        }
+
+        for (int x2 = xCell; x2 < xCell + xSpan; x2++) {
+            for (int y2 = yCell; y2 < yCell + ySpan; y2++) {
                 if (occupied[x2][y2]) {
-                    return null;
+                    setOccupied(true, current);
+                    return false;
                 }
             }
         }
-        return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, cellx, celly, xSpan, ySpan);
+        return true;
     }
 
     public View coordinateToChildView(Point pos) {
@@ -459,18 +431,7 @@ public class CellContainer extends ViewGroup {
         return null;
     }
 
-    /**
-     * Convert a position in screen coordinates for the centre of an object to a Point in cell
-     * coordinates representing the top left cell that the object must occupy for the centre to
-     * be as close as possible to the supplied position
-     *
-     * @param mX                - X position of centre in screen coordinates
-     * @param mY                - Y position of centre in screen coordinates
-     * @param xSpan             - The width of the object in cells, must be >= 1
-     * @param ySpan             - The height of the object in cells, must be >= 1
-     * @param checkAvailability - this parameter probably doesn't make any difference any more
-     * @return - a point representing the ideal x,y position or null
-     */
+    // convert a touch event to a coordinate in the cell container
     public Point touchPosToCoordinate(int mX, int mY, int xSpan, int ySpan, boolean checkAvailability) {
         mX = mX - (xSpan - 1) * cellWidth / 2;
         mY = mY - (ySpan - 1) * cellHeight / 2;
@@ -504,7 +465,6 @@ public class CellContainer extends ViewGroup {
                             }
                         }
                     }
-
                     return new Point(x, y);
                 }
             }
@@ -512,17 +472,12 @@ public class CellContainer extends ViewGroup {
         return null;
     }
 
-    public LayoutParams positionToLayoutPrams(int mX, int mY, int xSpan, int ySpan) {
+    public LayoutParams touchPosToLayoutParams(int mX, int mY, int xSpan, int ySpan) {
         Point pos = touchPosToCoordinate(mX, mY, xSpan, ySpan, true);
-        if (pos != null)
+        if (pos != null) {
             return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, pos.x, pos.y, xSpan, ySpan);
-        else return null;
-    }
-
-    public LayoutParams positionToLayoutPrams(Point pos, int xSpan, int ySpan) {
-        if (pos != null)
-            return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, pos.x, pos.y, xSpan, ySpan);
-        else return null;
+        }
+        return null;
     }
 
     @Override
@@ -598,7 +553,7 @@ public class CellContainer extends ViewGroup {
     }
 
     private enum PeekDirection {
-        T, L, R, B
+        UP, LEFT, RIGHT, DOWN
     }
 
     public interface OnItemRearrangeListener {
@@ -606,7 +561,10 @@ public class CellContainer extends ViewGroup {
     }
 
     public static class LayoutParams extends ViewGroup.LayoutParams {
-        public int x, y, xSpan = 1, ySpan = 1;
+        public int x;
+        public int y;
+        public int xSpan = 1;
+        public int ySpan = 1;
 
         public LayoutParams(int w, int h, int x, int y) {
             super(w, h);

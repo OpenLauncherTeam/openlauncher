@@ -254,13 +254,17 @@ public class ItemViewFactory {
         item.spanY = Math.min(item.spanY, 4);
         item.spanY = Math.max(item.spanY, 1);
 
-        CellContainer.LayoutParams cellPositionToLayoutPrams = Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellPositionToLayoutPrams(item.x, item.y, item.spanX, item.spanY, (CellContainer.LayoutParams) view.getLayoutParams());
-        if (cellPositionToLayoutPrams == null) {
+        CellContainer.LayoutParams cellPositionToLayoutParams = null;
+        if (Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).checkOccupied(item.x, item.y, item.spanX, item.spanY, (CellContainer.LayoutParams) view.getLayoutParams())) {
+            cellPositionToLayoutParams = new CellContainer.LayoutParams(CellContainer.LayoutParams.WRAP_CONTENT, CellContainer.LayoutParams.WRAP_CONTENT, item.x, item.y, item.spanX, item.spanY);
+        }
+
+        if (cellPositionToLayoutParams == null) {
             Toast.makeText(Home.launcher.desktop.getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
         } else {
-            item.x = cellPositionToLayoutPrams.x;
-            item.y = cellPositionToLayoutPrams.y;
-            view.setLayoutParams(cellPositionToLayoutPrams);
+            item.x = cellPositionToLayoutParams.x;
+            item.y = cellPositionToLayoutParams.y;
+            view.setLayoutParams(cellPositionToLayoutParams);
             updateWidgetOption(item);
 
             // update the widget size in the database
