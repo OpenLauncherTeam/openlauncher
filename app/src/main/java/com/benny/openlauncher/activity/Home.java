@@ -779,7 +779,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             cy += view.getHeight() / 2;
             if (view instanceof AppItemView) {
                 AppItemView appItemView = (AppItemView) view;
-                if (!appItemView.isNoLabel()) {
+                if (!appItemView.getShowLabel()) {
                     cy -= Tool.dp2px(14, this) / 2;
                 }
                 rad = (int) (appItemView.getIconSize() / 2 - Tool.dp2px(4, view.getContext()));

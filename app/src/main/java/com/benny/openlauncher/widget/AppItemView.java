@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 
@@ -35,22 +34,16 @@ public class AppItemView extends View implements Drawable.Callback {
 
     private Drawable icon;
     private String label;
-    public Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    public Paint bgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Rect mTextBound = new Rect();
-    private static Typeface myType;
+    private Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Rect textContainer = new Rect();
+    private Typeface typeface;
     private float iconSize;
-    private float iconPadding;
-    private float iconSizeSmall;
-    private boolean noLabel = false;
+    private boolean showLabel = false;
     private boolean vibrateWhenLongPress;
-    private boolean roundBg;
-    private int bgColor;
     private float labelHeight;
     private int targetedWidth;
     private int targetedHeightPadding;
     private float heightPadding;
-    private float horizontalPadding = 8;
 
     public Drawable getIcon() {
         return icon;
@@ -58,10 +51,6 @@ public class AppItemView extends View implements Drawable.Callback {
 
     public void setIcon(Drawable icon) {
         this.icon = icon;
-        if (icon != null) {
-            this.icon.setCallback(this);
-            invalidate();
-        }
     }
 
     public String getLabel() {
@@ -70,7 +59,6 @@ public class AppItemView extends View implements Drawable.Callback {
 
     public void setLabel(String label) {
         this.label = label;
-        invalidate();
     }
 
     public float getIconSize() {
@@ -81,77 +69,8 @@ public class AppItemView extends View implements Drawable.Callback {
         this.iconSize = iconSize;
     }
 
-    public float getIconPadding() {
-        return iconPadding;
-    }
-
-    public void setIconPadding(float iconPadding) {
-        this.iconPadding = iconPadding;
-    }
-
-    public float getIconSizeSmall() {
-        return iconSizeSmall;
-    }
-
-    public void setIconSizeSmall(float iconSizeSmall) {
-        this.iconSizeSmall = iconSizeSmall;
-    }
-
-    public boolean isNoLabel() {
-        return noLabel;
-    }
-
-    public boolean isRoundBg() {
-        return roundBg;
-    }
-
-    public void setRoundBg(boolean roundBg) {
-        this.roundBg = roundBg;
-    }
-
-    public int getBgColor() {
-        return bgColor;
-    }
-
-    public void setBgColor(int bgColor) {
-        this.bgColor = bgColor;
-        bgPaint.setColor(bgColor);
-    }
-
-    public float getHeightPadding() {
-        return heightPadding;
-    }
-
-    @Override
-    public void refreshDrawableState() {
-        invalidateDrawable(icon);
-        super.refreshDrawableState();
-    }
-
-    @Override
-    public void invalidateDrawable(Drawable drawable) {
-        invalidate();
-    }
-
-    public AppItemView(Context context) {
-        this(context, null);
-    }
-
-    public AppItemView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-
-        if (myType == null)
-            myType = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
-        setWillNotDraw(false);
-        setDrawingCacheEnabled(true);
-        setWillNotCacheDrawing(false);
-
-        labelHeight = Tool.dp2px(14, getContext());
-        horizontalPadding = Tool.dp2px(horizontalPadding, getContext());
-
-        textPaint.setTextSize(sp2px(getContext(), 14));
-        textPaint.setColor(Color.DKGRAY);
-        textPaint.setTypeface(myType);
+    public boolean getShowLabel() {
+        return showLabel;
     }
 
     public void setTargetedWidth(int width) {
@@ -162,12 +81,35 @@ public class AppItemView extends View implements Drawable.Callback {
         targetedHeightPadding = padding;
     }
 
+    public AppItemView(Context context) {
+        this(context, null);
+    }
+
+    public AppItemView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+        if (typeface == null) {
+            typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
+        }
+
+        setWillNotDraw(false);
+        setDrawingCacheEnabled(true);
+        setWillNotCacheDrawing(false);
+
+        labelHeight = Tool.dp2px(14, getContext());
+
+        textPaint.setTextSize(sp2px(getContext(), 14));
+        textPaint.setColor(Color.DKGRAY);
+        textPaint.setTypeface(typeface);
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         float mWidth = iconSize;
-        float mHeight = iconSize + (noLabel ? 0 : labelHeight);
-        if (targetedWidth != 0)
+        float mHeight = iconSize + (showLabel ? 0 : labelHeight);
+        if (targetedWidth != 0) {
             mWidth = targetedWidth;
+        }
         setMeasuredDimension((int) Math.ceil(mWidth), (int) Math.ceil((int) mHeight) + Tool.dp2px(2, getContext()) + targetedHeightPadding * 2);
     }
 
@@ -185,39 +127,31 @@ public class AppItemView extends View implements Drawable.Callback {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        if (label != null && !noLabel) {
-            textPaint.getTextBounds(label, 0, label.length(), mTextBound);
+        heightPadding = (getHeight() - iconSize - (showLabel ? 0 : labelHeight)) / 2f;
+        if (label != null && !showLabel) {
+            textPaint.getTextBounds(label, 0, label.length(), textContainer);
         }
 
-        // height should be the same as they have the same text size
-        float mHeight = iconSize + (noLabel ? 0 : labelHeight);
-        heightPadding = (getHeight() - mHeight) / 2f;
+        // use ellipsis if the label is too long
+        if (label != null && !showLabel) {
+            float characterSize = textContainer.width() / label.length();
+            int charToTruncate = (int) Math.ceil(((label.length() * characterSize) - getWidth()) / characterSize);
 
-        if (label != null && !noLabel) {
-            float eachTextSize = mTextBound.width() / label.length();
-            int charToTruncate = (int) Math.ceil(horizontalPadding / eachTextSize);
-            float x = (getWidth() - mTextBound.width()) / 2f;
+            // set start position manually if text container is too large
+            float x = Math.max(8, (getWidth() - textContainer.width()) / 2f);
 
-            if (x < 0)
-                x = 0;
-
-            if (mTextBound.width() + horizontalPadding > getWidth() && label.length() - 3 - charToTruncate > 0) {
-                canvas.drawText(label.substring(0, label.length() - 3 - charToTruncate) + "..", x + horizontalPadding, getHeight() - heightPadding, textPaint);
+            if (textContainer.width() > getWidth() && label.length() - 3 - charToTruncate > 0) {
+                canvas.drawText(label.substring(0, label.length() - 3 - charToTruncate) + "...", x, getHeight() - heightPadding, textPaint);
             } else {
                 canvas.drawText(label, x, getHeight() - heightPadding, textPaint);
             }
         }
 
+        // center the icon
         if (icon != null) {
             canvas.save();
-            canvas.translate((getWidth() - iconSize + iconPadding * 2) / 2, heightPadding + iconPadding);
-            if (roundBg) {
-                canvas.drawCircle((iconSize - iconPadding * 2) / 2, (iconSize - iconPadding * 2) / 2, (iconSize - iconPadding * 2) / 2, bgPaint);
-                canvas.translate((iconSize - iconSizeSmall - iconPadding * 2) / 2, (iconSize - iconSizeSmall - iconPadding * 2) / 2);
-                icon.setBounds(0, 0, (int) iconSizeSmall, (int) iconSizeSmall);
-            } else {
-                icon.setBounds(0, 0, (int) iconSize - (int) (iconPadding * 2), (int) iconSize - (int) (iconPadding * 2));
-            }
+            canvas.translate((getWidth() - iconSize) / 2, heightPadding);
+            icon.setBounds(0, 0, (int) iconSize, (int) iconSize);
             icon.draw(canvas);
             canvas.restore();
         }
@@ -266,16 +200,9 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setActionItem(Item item) {
-            int iconSize = AppSettings.get().getIconSize();
-            TypedValue typedValue = new TypedValue();
             switch (item.actionValue) {
                 case 8:
-                    view.getContext().getTheme().resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
-                    view.setIconPadding(Tool.dp2px(4, view.getContext()));
-                    view.setIcon(view.getResources().getDrawable(R.drawable.ic_apps_dark_24dp));
-                    view.setBgColor(Color.WHITE);
-                    view.setRoundBg(true);
-                    view.setIconSizeSmall(Tool.dp2px(iconSize / 2 - 8, view.getContext()));
+                    view.setIcon(view.getResources().getDrawable(R.drawable.ic_app_drawer_24dp));
                     view.setLabel(resources.getString(R.string.app_drawer));
                     view.setOnClickListener(new OnClickListener() {
                         @Override
@@ -351,7 +278,7 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setLabelVisibility(boolean visible) {
-            view.noLabel = !visible;
+            view.showLabel = !visible;
             return this;
         }
 
