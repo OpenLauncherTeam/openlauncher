@@ -397,7 +397,7 @@ public class CellContainer extends ViewGroup {
         addView(view);
     }
 
-    private void setOccupied(boolean b, LayoutParams lp) {
+    public void setOccupied(boolean b, LayoutParams lp) {
         for (int x = lp.x; x < lp.x + lp.xSpan; x++) {
             for (int y = lp.y; y < lp.y + lp.ySpan; y++) {
                 occupied[x][y] = b;
@@ -428,10 +428,8 @@ public class CellContainer extends ViewGroup {
         return true;
     }
 
-    public boolean checkOccupied(int xCell, int yCell, int xSpan, int ySpan, LayoutParams current) {
-        setOccupied(false, current);
+    public boolean checkOccupied(int xCell, int yCell, int xSpan, int ySpan) {
         if (occupied[xCell][yCell]) {
-            setOccupied(true, current);
             return false;
         }
 
@@ -453,7 +451,6 @@ public class CellContainer extends ViewGroup {
         for (int x2 = xCell; x2 < xCell + xSpan; x2++) {
             for (int y2 = yCell; y2 < yCell + ySpan; y2++) {
                 if (occupied[x2][y2]) {
-                    setOccupied(true, current);
                     return false;
                 }
             }
@@ -485,14 +482,13 @@ public class CellContainer extends ViewGroup {
                             return null;
                         }
 
-                        int dx;
-                        int dy;
-                        dx = x + xSpan - 1;
+                        int dx = x + xSpan - 1;
+                        int dy = y + ySpan - 1;
+
                         if (dx >= cellSpanH - 1) {
                             dx = cellSpanH - 1;
                             x = dx + 1 - xSpan;
                         }
-                        dy = y + ySpan - 1;
                         if (dy >= cellSpanV - 1) {
                             dy = cellSpanV - 1;
                             y = dy + 1 - ySpan;

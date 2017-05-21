@@ -249,35 +249,38 @@ public class ItemViewFactory {
     }
 
     private static void scaleWidget(View view, Item item) {
-        item.spanX = Math.min(item.spanX, 4);
+        item.spanX = Math.min(item.spanX, Home.launcher.desktop.getCurrentPage().cellSpanH);
         item.spanX = Math.max(item.spanX, 1);
-        item.spanY = Math.min(item.spanY, 4);
+        item.spanY = Math.min(item.spanY, Home.launcher.desktop.getCurrentPage().cellSpanV);
         item.spanY = Math.max(item.spanY, 1);
 
-        CellContainer.LayoutParams cellPositionToLayoutParams = null;
-        if (Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).checkOccupied(item.x, item.y, item.spanX, item.spanY, (CellContainer.LayoutParams) view.getLayoutParams())) {
-            cellPositionToLayoutParams = new CellContainer.LayoutParams(CellContainer.LayoutParams.WRAP_CONTENT, CellContainer.LayoutParams.WRAP_CONTENT, item.x, item.y, item.spanX, item.spanY);
-        }
+        Home.launcher.desktop.getCurrentPage().setOccupied(false, (CellContainer.LayoutParams) view.getLayoutParams());
+        if (Home.launcher.desktop.getCurrentPage().checkOccupied(item.x, item.y, item.spanX, item.spanY)) {
+            CellContainer.LayoutParams newWidgetLayoutParams = new CellContainer.LayoutParams(CellContainer.LayoutParams.WRAP_CONTENT, CellContainer.LayoutParams.WRAP_CONTENT, item.x, item.y, item.spanX, item.spanY);
 
-        if (cellPositionToLayoutParams == null) {
-            Toast.makeText(Home.launcher.desktop.getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
-        } else {
-            item.x = cellPositionToLayoutParams.x;
-            item.y = cellPositionToLayoutParams.y;
-            view.setLayoutParams(cellPositionToLayoutParams);
+            // update occupied array
+            Home.launcher.desktop.getCurrentPage().setOccupied(true, newWidgetLayoutParams);
+
+            // update the view
+            view.setLayoutParams(newWidgetLayoutParams);
             updateWidgetOption(item);
 
             // update the widget size in the database
             Home.db.updateItem(item);
+        } else {
+            Toast.makeText(Home.launcher.desktop.getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
+
+            // add the old layout params to the occupied array
+            Home.launcher.desktop.getCurrentPage().setOccupied(true, (CellContainer.LayoutParams) view.getLayoutParams());
         }
     }
 
     private static void updateWidgetOption(Item item) {
         Bundle newOps = new Bundle();
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, item.spanX * Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth);
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.spanX * Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth);
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.spanX * Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth);
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.spanY * Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, item.spanX * Home.launcher.desktop.getCurrentPage().cellWidth);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.spanX * Home.launcher.desktop.getCurrentPage().cellWidth);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.spanY * Home.launcher.desktop.getCurrentPage().cellHeight);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.spanY * Home.launcher.desktop.getCurrentPage().cellHeight);
         Home.appWidgetManager.updateAppWidgetOptions(item.widgetID, newOps);
     }
 
