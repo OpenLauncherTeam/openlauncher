@@ -14,7 +14,7 @@
             android:key="@string/pref_key__dock_size"
             android:summary="@string/pref_summary__dock_size"
             android:title="@string/pref_title__dock_size"
-            app:maxValue="10"
+            app:maxValue="20"
             app:minValue="2" />
 
     </PreferenceCategory>
