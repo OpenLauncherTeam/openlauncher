@@ -44,7 +44,6 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Tool.setTheme(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_minibar_edit);

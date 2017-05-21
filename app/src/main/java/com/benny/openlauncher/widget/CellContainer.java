@@ -219,7 +219,7 @@ public class CellContainer extends ViewGroup {
     public Point findFreeSpace(int spanX, int spanY) {
         for (int y = 0; y < occupied[0].length; y++) {
             for (int x = 0; x < occupied.length; x++) {
-                if (!occupied[x][y] && checkOccupied(new Point(x, y), spanX, spanY)) {
+                if (!occupied[x][y] && !checkOccupied(new Point(x, y), spanX, spanY)) {
                     return new Point(x, y);
                 }
             }
@@ -412,50 +412,20 @@ public class CellContainer extends ViewGroup {
      * @param start - The top left corner of the proposed Item location
      * @param spanX - The Item width in cells
      * @param spanY - The Item height in cells
-     * @return - true if there is sufficient space, false if any of the space is occupied or the item exceeds the container dimensions
+     * @return - true if occupied, false if not
      */
     public boolean checkOccupied(Point start, int spanX, int spanY) {
         if ((start.x + spanX > occupied.length) || (start.y + spanY > occupied[0].length)) {
-            return false;
+            return true;
         }
-        for (int y = start.y; y < start.y+spanY; y++) {
-            for (int x = start.x; x < start.x+spanX; x++) {
+        for (int y = start.y; y < start.y + spanY; y++) {
+            for (int x = start.x; x < start.x + spanX; x++) {
                 if (occupied[x][y]) {
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
-    }
-
-    public boolean checkOccupied(int xCell, int yCell, int xSpan, int ySpan) {
-        if (occupied[xCell][yCell]) {
-            return false;
-        }
-
-        int dx;
-        int dy;
-
-        dx = xCell + xSpan - 1;
-        if (dx >= cellSpanH - 1) {
-            dx = cellSpanH - 1;
-            xCell = dx + 1 - xSpan;
-        }
-
-        dy = yCell + ySpan - 1;
-        if (dy >= cellSpanV - 1) {
-            dy = cellSpanV - 1;
-            yCell = dy + 1 - ySpan;
-        }
-
-        for (int x2 = xCell; x2 < xCell + xSpan; x2++) {
-            for (int y2 = yCell; y2 < yCell + ySpan; y2++) {
-                if (occupied[x2][y2]) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return false;
     }
 
     public View coordinateToChildView(Point pos) {

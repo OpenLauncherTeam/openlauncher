@@ -187,8 +187,8 @@ public class DialogHelper {
                             try {
                                 PackageInfo p = m.getPackageInfo(s, 0);
                                 s = p.applicationInfo.dataDir;
-                                copy(context, s + "/databases/home.db", directory + "/home.db");
-                                copy(context, s + "/shared_prefs/app.xml", directory + "/app.xml");
+                                Tool.copy(context, s + "/databases/home.db", directory + "/home.db");
+                                Tool.copy(context, s + "/shared_prefs/app.xml", directory + "/app.xml");
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__success, Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
@@ -199,8 +199,8 @@ public class DialogHelper {
                             try {
                                 PackageInfo p = m.getPackageInfo(s, 0);
                                 s = p.applicationInfo.dataDir;
-                                copy(context, directory + "/home.db", s + "/databases/home.db");
-                                copy(context, directory + "/app.xml", s + "/shared_prefs/app.xml");
+                                Tool.copy(context, directory + "/home.db", s + "/databases/home.db");
+                                Tool.copy(context, directory + "/app.xml", s + "/shared_prefs/app.xml");
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__success, Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
@@ -209,36 +209,6 @@ public class DialogHelper {
                         }
                     }
                 }).show();
-    }
-
-    private static void copy(Context context, String stringIn, String stringOut) {
-        try {
-            File desktopData = new File(stringOut);
-            desktopData.delete();
-            File dockData = new File(stringOut);
-            dockData.delete();
-            File generalSettings = new File(stringOut);
-            generalSettings.delete();
-            Tool.print("deleted");
-
-            FileInputStream in = new FileInputStream(stringIn);
-            FileOutputStream out = new FileOutputStream(stringOut);
-
-            byte[] buffer = new byte[1024];
-            int read;
-            while ((read = in.read(buffer)) != -1) {
-                out.write(buffer, 0, read);
-            }
-            in.close();
-
-            // write the output file
-            out.flush();
-            out.close();
-            Tool.print("copied");
-
-        } catch (Exception e) {
-            Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
-        }
     }
 
     public interface OnAppSelectedListener {

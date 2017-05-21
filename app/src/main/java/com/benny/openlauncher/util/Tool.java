@@ -1,6 +1,5 @@
 package com.benny.openlauncher.util;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ContentUris;
 import android.content.Context;
@@ -165,21 +164,21 @@ public class Tool {
         ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(view.getWindowToken(), InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
-    public static String[] split(String string, String delem) {
+    public static String[] split(String string, String delim) {
         ArrayList<String> list = new ArrayList<String>();
         char[] charArr = string.toCharArray();
-        char[] delemArr = delem.toCharArray();
+        char[] delimArr = delim.toCharArray();
         int counter = 0;
         for (int i = 0; i < charArr.length; i++) {
             int k = 0;
-            for (int j = 0; j < delemArr.length; j++) {
-                if (charArr[i + j] == delemArr[j]) {
+            for (int j = 0; j < delimArr.length; j++) {
+                if (charArr[i + j] == delimArr[j]) {
                     k++;
                 } else {
                     break;
                 }
             }
-            if (k == delemArr.length) {
+            if (k == delimArr.length) {
                 String s = "";
                 while (counter < i) {
                     s += charArr[counter];
@@ -225,7 +224,6 @@ public class Tool {
         } finally {
             cursor.close();
         }
-
     }
 
     public static Bitmap fetchThumbnail(Context context, String phoneNumber) {
@@ -371,7 +369,8 @@ public class Tool {
 
         Bitmap bitmap;
         if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+            // single color bitmap will be created of 1x1 pixel
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
         } else {
             bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         }
@@ -396,7 +395,7 @@ public class Tool {
     }
 
     @Deprecated
-    //Not getting the right value on all device
+    // not getting the right value on all devices
     public static int getNavBarHeight(Context context) {
         Resources resources = context.getResources();
         if (!hasNavBar(context)) return 0;
@@ -407,6 +406,8 @@ public class Tool {
         return 0;
     }
 
+    @Deprecated
+    // not getting the right value on all devices
     public static int getStatusBarHeight(Context context) {
         int result = 0;
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -441,7 +442,6 @@ public class Tool {
         } else {
             try {
                 context.startActivity(intent);
-
                 Home.consumeNextResume = true;
             } catch (Exception e) {
                 Tool.toast(context, R.string.toast_app_uninstalled);
@@ -489,6 +489,7 @@ public class Tool {
             outputStreamWriter.write(data);
             outputStreamWriter.close();
         } catch (IOException ignore) {
+            // do nothing
         }
     }
 
@@ -521,7 +522,7 @@ public class Tool {
     private static String convertStreamToString(InputStream is) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
-        String line = null;
+        String line;
         while ((line = reader.readLine()) != null) {
             sb.append(line).append("\n");
         }
@@ -538,28 +539,6 @@ public class Tool {
         } catch (Exception e) {
             return null;
         }
-    }
-
-    public static void setTheme(Activity act) {
-//        switch (LauncherSettings.getInstance(act).generalSettings.theme){
-//            case Light:
-//                act.setTheme(R.style.NormalActivity_Light);
-//                break;
-//            case Dark:
-//                act.setTheme(R.style.NormalActivity_Dark);
-//                break;
-//        }
-    }
-
-    public static void setHomeTheme(Activity act) {
-//        switch (LauncherSettings.getInstance(act).generalSettings.theme){
-//            case Light:
-//                act.setTheme(R.style.Home_Light);
-//                break;
-//            case Dark:
-//                act.setTheme(R.style.Home_Dark);
-//                break;
-//        }
     }
 
     public static String wrapColorTag(String str, @ColorInt int color) {
@@ -616,6 +595,36 @@ public class Tool {
             } catch (URISyntaxException e) {
                 return new Intent();
             }
+        }
+    }
+
+    public static void copy(Context context, String stringIn, String stringOut) {
+        try {
+            File desktopData = new File(stringOut);
+            desktopData.delete();
+            File dockData = new File(stringOut);
+            dockData.delete();
+            File generalSettings = new File(stringOut);
+            generalSettings.delete();
+            Tool.print("deleted");
+
+            FileInputStream in = new FileInputStream(stringIn);
+            FileOutputStream out = new FileOutputStream(stringOut);
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+
+            // write the output file
+            out.flush();
+            out.close();
+            Tool.print("copied");
+
+        } catch (Exception e) {
+            Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
         }
     }
 }

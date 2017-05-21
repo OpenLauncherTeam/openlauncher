@@ -47,7 +47,6 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Tool.setTheme((Activity) context);
         super.onCreate(savedInstanceState);
 
         ButterKnife.bind((Activity) context);

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -220,8 +221,6 @@ public class ItemViewFactory {
                     public void onClick(View view) {
                         if (view.getScaleX() < 1) return;
                         item.spanY--;
-                        int minY = ((appWidgetInfo.minResizeHeight - 1) / Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight) + 1;
-                        item.spanY = Math.max(item.spanY, minY);
                         scaleWidget(widgetContainer, item);
                         widgetContainer.removeCallbacks(action);
                         widgetContainer.postDelayed(action, 2000);
@@ -232,8 +231,6 @@ public class ItemViewFactory {
                     public void onClick(View view) {
                         if (view.getScaleX() < 1) return;
                         item.spanX--;
-                        int minX = ((appWidgetInfo.minResizeWidth - 1) / Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth) + 1;
-                        item.spanX = Math.max(item.spanX, minX);
                         scaleWidget(widgetContainer, item);
                         widgetContainer.removeCallbacks(action);
                         widgetContainer.postDelayed(action, 2000);
@@ -255,7 +252,7 @@ public class ItemViewFactory {
         item.spanY = Math.max(item.spanY, 1);
 
         Home.launcher.desktop.getCurrentPage().setOccupied(false, (CellContainer.LayoutParams) view.getLayoutParams());
-        if (Home.launcher.desktop.getCurrentPage().checkOccupied(item.x, item.y, item.spanX, item.spanY)) {
+        if (!Home.launcher.desktop.getCurrentPage().checkOccupied(new Point(item.x, item.y), item.spanX, item.spanY)) {
             CellContainer.LayoutParams newWidgetLayoutParams = new CellContainer.LayoutParams(CellContainer.LayoutParams.WRAP_CONTENT, CellContainer.LayoutParams.WRAP_CONTENT, item.x, item.y, item.spanX, item.spanY);
 
             // update occupied array
