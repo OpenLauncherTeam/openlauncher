@@ -7,28 +7,28 @@
             android:defaultValue="4"
             android:key="@string/pref_key__drawer_columns"
             android:title="@string/columns"
-            app:maxValue="10"
+            app:maxValue="20"
             app:minValue="2" />
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="5"
             android:key="@string/pref_key__drawer_rows"
             android:title="@string/rows"
-            app:maxValue="10"
+            app:maxValue="20"
             app:minValue="2" />
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="4"
             android:key="@string/pref_key__drawer_columns_landscape"
             android:title="@string/columns_landscape"
-            app:maxValue="10"
+            app:maxValue="20"
             app:minValue="2" />
 
         <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="5"
             android:key="@string/pref_key__drawer_rows_landscape"
             android:title="@string/rows_landscape"
-            app:maxValue="10"
+            app:maxValue="20"
             app:minValue="2" />
 
     </PreferenceCategory>
