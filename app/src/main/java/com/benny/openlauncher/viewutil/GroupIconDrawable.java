@@ -43,14 +43,16 @@ public class GroupIconDrawable extends Drawable {
         for (int i = 0; i < 4; i++) {
             if (i < item.items.size()) {
                 if (item.type == Item.Type.SHORTCUT) {
-                    icons[i] = Tool.drawableToBitmap(Tool.getIconFromID(context, item.items.get(i).appIntent.getStringExtra("shortCutIconID")));
+                    if (item.items.get(i) != null)
+                        icons[i] = Tool.drawableToBitmap(Tool.getIconFromID(context, item.items.get(i).appIntent.getStringExtra("shortCutIconID")));
+                    else
+                        icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
                 } else {
                     AppManager.App app = AppManager.getInstance(context).findApp(item.items.get(i));
-                    if (app != null) {
+                    if (app != null)
                         icons[i] = Tool.drawableToBitmap(app.icon);
-                    } else {
+                    else
                         icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
-                    }
                 }
             } else {
                 icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
