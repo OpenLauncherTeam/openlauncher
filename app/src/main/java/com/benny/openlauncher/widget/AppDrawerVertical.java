@@ -200,7 +200,6 @@ public class AppDrawerVertical extends CardView {
         public void bindView(AppItem.ViewHolder holder, List payloads) {
             new AppItemView.Builder(holder.appItemView)
                     .setAppItem(app)
-                    .withOnClickLaunchApp(app)
                     .withOnTouchGetPosition()
                     .withOnLongPressDrag(app, DragAction.Action.APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                         @Override

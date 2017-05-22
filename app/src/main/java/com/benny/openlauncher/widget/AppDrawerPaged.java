@@ -135,7 +135,6 @@ public class AppDrawerPaged extends SmoothViewPager {
 
             return new AppItemView.Builder(getContext())
                     .setAppItem(app)
-                    .withOnClickLaunchApp(app)
                     .withOnTouchGetPosition()
                     .withOnLongPressDrag(app, DragAction.Action.APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                         @Override

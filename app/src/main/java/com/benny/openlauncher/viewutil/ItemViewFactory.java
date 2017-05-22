@@ -50,7 +50,6 @@ public class ItemViewFactory {
                 }
                 view = new AppItemView.Builder(context)
                         .setAppItem(app)
-                        .withOnClickLaunchApp(app)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
                         .withOnLongPressDrag(item, DragAction.Action.APP, new AppItemView.Builder.LongPressCallBack() {
@@ -90,6 +89,7 @@ public class ItemViewFactory {
                 break;
             case GROUP:
                 view = new AppItemView.Builder(context)
+                        .setGroupItem(context, item, callBack)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
                         .withOnLongPressDrag(item, DragAction.Action.GROUP, new AppItemView.Builder.LongPressCallBack() {
@@ -107,17 +107,6 @@ public class ItemViewFactory {
                         .setTextColor(Color.WHITE)
                         .getView();
                 view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-
-                ((AppItemView) view).setIcon(getGroupIconDrawable(context, item));
-                ((AppItemView) view).setLabel((item.name));
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (Home.launcher != null && Home.launcher.groupPopup.showWindowV(item, v, callBack)) {
-                            ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
-                        }
-                    }
-                });
                 break;
             case ACTION:
                 view = new AppItemView.Builder(context)
@@ -182,9 +171,9 @@ public class ItemViewFactory {
                 widgetView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
-                        if (AppSettings.get().isDesktopLocked())
+                        if (AppSettings.get().isDesktopLocked()) {
                             return false;
-
+                        }
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                         Intent i = new Intent();
                         i.putExtra("mDragData", item);
@@ -279,27 +268,5 @@ public class ItemViewFactory {
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.spanY * Home.launcher.desktop.getCurrentPage().cellHeight);
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.spanY * Home.launcher.desktop.getCurrentPage().cellHeight);
         Home.appWidgetManager.updateAppWidgetOptions(item.widgetID, newOps);
-    }
-
-    public static Drawable getGroupIconDrawable(Context context, Item item) {
-        final float iconSize = Tool.dp2px(AppSettings.get().getIconSize(), context);
-        final Bitmap[] icons = new Bitmap[4];
-        for (int i = 0; i < 4; i++) {
-            if (i < item.items.size()) {
-                if (item.items.get(i).appIntent.getStringExtra("shortCutIconID") != null) {
-                    icons[i] = Tool.drawableToBitmap(Tool.getIconFromID(context, item.items.get(i).appIntent.getStringExtra("shortCutIconID")));
-                } else {
-                    AppManager.App app = AppManager.getInstance(context).findApp(item.items.get(i));
-                    if (app != null) {
-                        icons[i] = Tool.drawableToBitmap(app.icon);
-                    } else {
-                        icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
-                    }
-                }
-            } else {
-                icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
-            }
-        }
-        return new GroupIconDrawable(icons, iconSize);
     }
 }

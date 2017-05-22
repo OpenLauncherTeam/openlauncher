@@ -22,7 +22,9 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
+import com.benny.openlauncher.viewutil.GroupIconDrawable;
 
 import static com.benny.openlauncher.activity.Home.resources;
 
@@ -176,9 +178,20 @@ public class AppItemView extends View implements Drawable.Callback {
             return view;
         }
 
-        public Builder setAppItem(AppManager.App app) {
+        public Builder setAppItem(final AppManager.App app) {
             view.setLabel(app.label);
             view.setIcon(app.icon);
+            view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                        @Override
+                        public void run() {
+                            Tool.startApp(view.getContext(), app);
+                        }
+                    });
+                }
+            });
             return this;
         }
 
@@ -199,6 +212,20 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
+        public Builder setGroupItem(Context context, final Item item, final DesktopCallBack callBack) {
+            view.setIcon(new GroupIconDrawable(context, item));
+            view.setLabel((item.name));
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Home.launcher != null && Home.launcher.groupPopup.showWindowV(item, v, callBack)) {
+                        ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
+                    }
+                }
+            });
+            return this;
+        }
+
         public Builder setActionItem(Item item) {
             switch (item.actionValue) {
                 case 8:
@@ -213,21 +240,6 @@ public class AppItemView extends View implements Drawable.Callback {
                     });
                     break;
             }
-            return this;
-        }
-
-        public Builder withOnClickLaunchApp(final AppManager.App app) {
-            view.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
-                        @Override
-                        public void run() {
-                            Tool.startApp(view.getContext(), app);
-                        }
-                    });
-                }
-            });
             return this;
         }
 

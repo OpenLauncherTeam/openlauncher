@@ -565,6 +565,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                     item.items.add(dropItem);
 
+                    // add the drop item just in case it is coming from the app drawer
+                    home.db.setItem(dropItem, page, desktop);
+
                     // hide the new app in the group
                     home.db.updateItem(dropItem, 0);
 
