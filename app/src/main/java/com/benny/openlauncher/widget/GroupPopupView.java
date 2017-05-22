@@ -105,7 +105,7 @@ public class GroupPopupView extends FrameLayout {
                 } else {
                     AppManager.App app = AppManager.getInstance(c).findApp(act);
                     if (app != null) {
-                        b.setAppItem(app);
+                        b.setAppItem(item, app);
                     }
                 }
                 final AppItemView view = b.getView();

@@ -68,7 +68,7 @@ public class DragOptionView extends CardView {
         editIcon = (TextView) dragOptions.findViewById(R.id.editIcon);
         editIcon.setOnDragListener(new View.OnDragListener() {
             @Override
-            public boolean onDrag(View view, DragEvent dragEvent) {
+            public boolean onDrag(final View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
                         if (((DragAction) dragEvent.getLocalState()).action == DragAction.Action.APP_DRAWER) {

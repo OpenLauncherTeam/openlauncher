@@ -178,6 +178,23 @@ public class AppItemView extends View implements Drawable.Callback {
             return view;
         }
 
+        public Builder setAppItem(final Item item, final AppManager.App app) {
+            view.setLabel(item.name);
+            view.setIcon(app.icon);
+            view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                        @Override
+                        public void run() {
+                            Tool.startApp(view.getContext(), item.appIntent);
+                        }
+                    });
+                }
+            });
+            return this;
+        }
+
         public Builder setAppItem(final AppManager.App app) {
             view.setLabel(app.label);
             view.setIcon(app.icon);
@@ -213,8 +230,8 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setGroupItem(Context context, final Item item, final DesktopCallBack callBack) {
+            view.setLabel(item.name);
             view.setIcon(new GroupIconDrawable(context, item));
-            view.setLabel((item.name));
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -229,8 +246,8 @@ public class AppItemView extends View implements Drawable.Callback {
         public Builder setActionItem(Item item) {
             switch (item.actionValue) {
                 case 8:
-                    view.setIcon(view.getResources().getDrawable(R.drawable.ic_app_drawer_24dp));
                     view.setLabel(resources.getString(R.string.app_drawer));
+                    view.setIcon(view.getResources().getDrawable(R.drawable.ic_app_drawer_24dp));
                     view.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {

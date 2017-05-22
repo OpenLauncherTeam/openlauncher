@@ -49,7 +49,7 @@ public class ItemViewFactory {
                     break;
                 }
                 view = new AppItemView.Builder(context)
-                        .setAppItem(app)
+                        .setAppItem(item, app)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
                         .withOnLongPressDrag(item, DragAction.Action.APP, new AppItemView.Builder.LongPressCallBack() {
