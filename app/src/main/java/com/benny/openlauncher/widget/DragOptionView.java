@@ -80,7 +80,17 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        DialogHelper.alertDialog(getContext(), "not implemented", "yet...");
+                        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
+                        intent.setExtrasClassLoader(Item.class.getClassLoader());
+                        final Item item = intent.getParcelableExtra("mDragData");
+
+                        DialogHelper.editItemDialog("Edit Item", item.name, getContext(), new DialogHelper.onItemEditListener() {
+                            @Override
+                            public void itemLabel(String label) {
+                                item.name = label;
+                                Home.db.updateItem(item);
+                            }
+                        });
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;

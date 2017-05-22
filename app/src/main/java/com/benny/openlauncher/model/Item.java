@@ -66,6 +66,7 @@ public class Item implements Parcelable {
     public Item(Parcel parcel) {
         idValue = parcel.readInt();
         type = Type.valueOf(parcel.readString());
+        name = parcel.readString();
         switch (type) {
             case APP:
             case SHORTCUT:
@@ -88,7 +89,6 @@ public class Item implements Parcelable {
                 spanY = parcel.readInt();
                 break;
         }
-        name = parcel.readString();
     }
 
     @Override
@@ -100,6 +100,7 @@ public class Item implements Parcelable {
     public static Item newAppItem(AppManager.App app) {
         Item item = new Item();
         item.type = Type.APP;
+        item.name = app.label;
         item.appIntent = toIntent(app);
         return item;
     }
@@ -162,6 +163,7 @@ public class Item implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeInt(idValue);
         out.writeString(type.toString());
+        out.writeString(name);
         switch (type) {
             case APP:
             case SHORTCUT:
@@ -183,7 +185,6 @@ public class Item implements Parcelable {
                 out.writeInt(spanY);
                 break;
         }
-        out.writeString(name);
     }
 
     private static Intent toIntent(AppManager.App app) {

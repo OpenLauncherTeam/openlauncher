@@ -195,9 +195,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    // update the data
+    // update name and data
     public void updateItem(Item item) {
         ContentValues itemValues = new ContentValues();
+        itemValues.put(COLUMN_LABEL, item.name);
         String concat = "";
         switch (item.type) {
             case APP:

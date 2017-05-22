@@ -103,7 +103,7 @@ public class GroupPopupView extends FrameLayout {
                 if (act.getStringExtra("shortCutIconID") != null) {
                     b.setShortcutItem(act);
                 } else {
-                    AppManager.App app = AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
+                    AppManager.App app = AppManager.getInstance(c).findApp(act);
                     if (app != null) {
                         b.setAppItem(app);
                     }
@@ -132,7 +132,7 @@ public class GroupPopupView extends FrameLayout {
                         return true;
                     }
                 });
-                final AppManager.App app = AppManager.getInstance(c).findApp(act.getComponent().getPackageName(), act.getComponent().getClassName());
+                final AppManager.App app = AppManager.getInstance(c).findApp(act);
                 if (app == null) {
                     removeItem(c, callBack, item, dropItem, (AppItemView) itemView);
                 } else {
@@ -219,7 +219,7 @@ public class GroupPopupView extends FrameLayout {
 
     public void updateItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, AppItemView currentView) {
         if (currentItem.items.size() == 1) {
-            final AppManager.App app = AppManager.getInstance(currentView.getContext()).findApp(currentItem.items.get(0).appIntent.getComponent().getPackageName(), currentItem.items.get(0).appIntent.getComponent().getClassName());
+            final AppManager.App app = AppManager.getInstance(currentView.getContext()).findApp(currentItem.items.get(0));
             if (app != null) {
                 Item item = db.getItem(currentItem.items.get(0).idValue);
                 item.x = currentItem.x;

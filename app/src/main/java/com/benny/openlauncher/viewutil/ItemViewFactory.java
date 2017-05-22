@@ -44,7 +44,7 @@ public class ItemViewFactory {
         }
         switch (item.type) {
             case APP:
-                final AppManager.App app = AppManager.getInstance(context).findApp(item.appIntent.getComponent().getPackageName(), item.appIntent.getComponent().getClassName());
+                final AppManager.App app = AppManager.getInstance(context).findApp(item);
                 if (app == null) {
                     break;
                 }
@@ -289,7 +289,7 @@ public class ItemViewFactory {
                 if (item.items.get(i).appIntent.getStringExtra("shortCutIconID") != null) {
                     icons[i] = Tool.drawableToBitmap(Tool.getIconFromID(context, item.items.get(i).appIntent.getStringExtra("shortCutIconID")));
                 } else {
-                    AppManager.App app = AppManager.getInstance(context).findApp(item.items.get(i).appIntent.getComponent().getPackageName(), item.items.get(i).appIntent.getComponent().getClassName());
+                    AppManager.App app = AppManager.getInstance(context).findApp(item.items.get(i));
                     if (app != null) {
                         icons[i] = Tool.drawableToBitmap(app.icon);
                     } else {

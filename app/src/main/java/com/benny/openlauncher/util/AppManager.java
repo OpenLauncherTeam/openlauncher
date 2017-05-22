@@ -14,6 +14,7 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
@@ -59,7 +60,20 @@ public class AppManager {
         this.packageManager = c.getPackageManager();
     }
 
-    public App findApp(String packageName, String className) {
+    public App findApp(Item item) {
+        String packageName = item.appIntent.getComponent().getPackageName();
+        String className = item.appIntent.getComponent().getClassName();
+        for (App app : apps) {
+            if (app.className.equals(className) && app.packageName.equals(packageName)) {
+                return app;
+            }
+        }
+        return null;
+    }
+
+    public App findApp(Intent intent) {
+        String packageName = intent.getComponent().getPackageName();
+        String className = intent.getComponent().getClassName();
         for (App app : apps) {
             if (app.className.equals(className) && app.packageName.equals(packageName)) {
                 return app;
@@ -144,11 +158,9 @@ public class AppManager {
                         Tool.toast(context, (activity.getString(R.string.dialog__icon_pack_info_toast)));
                         ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
                     }
-
                 }
             }));
         }
-
         d.show();
     }
 
@@ -185,6 +197,7 @@ public class AppManager {
                     return Collator.getInstance().compare(p1.loadLabel(packageManager).toString(), p2.loadLabel(packageManager).toString());
                 }
             });
+
             for (ResolveInfo info : activitiesInfo) {
                 App app = new App(info, packageManager);
                 nonFilteredApps.add(app);
