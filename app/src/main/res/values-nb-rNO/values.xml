@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Titles -->
+    <string name="settings">Innstillinger</string>
+    <string name="minibar">Sidepanel</string>
+    <string name="pref_title__about">Om</string>
+
+    <!-- Drag Option View -->
+
+    <string name="edit">Rediger</string>
+    <string name="info">Info</string>
+    <string name="uninstall">Avinstaller</string>
+    <string name="remove">Fjern</string>
+
+    <!-- Desktop Option View -->
+    <string name="home">Hjem</string>
+    <string name="action">Handling</string>
+    <string name="lock">Lås</string>
+    <string name="widget">Miniprogram</string>
+
+    <!-- Toasts -->
+
+    <string name="toast_not_enough_space">Ikke nok plass</string>
+    <string name="toast_app_uninstalled">Program avinstallert.</string>
+    <string name="toast_free_ram" formatted="false">Ledig minne: %d MB frigjorde %d MB</string>
+    <string name="toast_free_all_ram" formatted="false">Ledig minne: %d MB All RAM i beste velstand</string>
+    <string name="toast_device_admin_required">Skru på enhetsadministrasjon</string>
+
+    <!-- Intro -->
+
+    <string name="intro_skip">Hopp over</string>
+    <string name="intro_finish">La oss komme igang.</string>
+    <string name="intro1_text">Takk for at du valgte OpenLauncher. Det er fri programvare og i utvikling.
+        Her er en kort introduksjon av bruken.</string>
+    <string name="intro2_text">Dra venstre skjermkant innover for å åpne sidepanelet, der finner du innstillingene,
+        bakgrunnsbildemeny, og mye annet.</string>
+    <string name="intro3_title">Innstillinger</string>
+    <string name="intro3_text">Du kan sette opp skrivebordet, programskuffen, og samlevinduet. Prøv det.</string>
+
+    <!-- Minibar -->
+
+    <string name="minibar_0">Endre utformingen på sidepanelet.</string>
+    <string name="minibar_1">Velg og tilslør bakgrunnsbildet.</string>
+    <string name="minibar_2">Lås skjermen umiddelbart. Krever enhetsadministrasjon.</string>
+    <string name="minibar_3">Frigjør RAM ved å tvinge lukking av andre kjørende tjenester.</string>
+    <string name="minibar_4">Snarvei til enhetsinnstillingene.</string>
+    <string name="minibar_5">Snarvei til OpenLauncher-innstillingene.</string>
+    <string name="minibar_7">Åpne lydstyrkejustering.</string>
+    <string name="minibar_8">Åpne programskuffen.</string>
+
+    <!-- About -->
+
+    <string name="about_libs">Friprogbibliotek</string>
+    <string name="about_rate">Gi omtale</string>
+    <string name="about_credit">Bidragsytere</string>
+    <string name="about_credit_text_all_contributors">Alle bidragsytere</string>
+
+    <!-- Settings -->
+
+    <string name="pref_title__desktop">Skrivebord</string>
+    <string name="pref_title__dock">Samlevindu</string>
+    <string name="pref_title__app_drawer">Programskuff</string>
+    <string name="pref_title__gestures">Berøringsbevegelser</string>
+    <string name="pref_title__icons">Ikoner</string>
+    <string name="pref_title__miscellaneous">Ymse</string>
+
+    <string name="pref_title__size">Størrelse</string>
+    <string name="pref_title__appearance">Utseende</string>
+    <string name="pref_title__color">Farger</string>
+
+    <string name="pref_summary__minibar">Sett opp rekkefølgen og synligheten for sidefeltselementene.</string>
+    <string name="pref_title__search_bar_enable">Søkefelt</string>
+    <string name="pref_summary__search_bar_enable">Vis et søkefelt på toppen av skrivebordet.</string>
+    <string name="pref_title__desktop_fullscreen">Fullskjermsvisning</string>
+    <string name="pref_summary__desktop_fullscreen">Skru på fullskjermsvisning for skrivebordet.</string>
+    <string name="pref_title__desktop_show_position_indicator">Posisjonsindikator</string>
+    <string name="pref_summary__desktop_show_position_indicator">Vis sidehenvisning under skrivebordet.</string>
+    <string name="pref_title__desktop_show_label">Vis etiketter</string>
+    <string name="pref_summary__desktop_show_label">Vis program og mappenavn under deres respektive ikoner.</string>
+    <string name="pref_title__desktop_background_color">Bakgrunn</string>
+    <string name="pref_title__desktop_folder_color">Mappe</string>
+
+    <string name="pref_title__dock_size">Størrelse</string>
+    <string name="pref_summary__dock_size">Vis samlevindusstørrelse.</string>
+    <string name="pref_title__dock_show_label">Vis etiketter</string>
+    <string name="pref_summary__dock_show_label">Vis program- og mappe-navn under deres respektive ikoner.</string>
+    <string name="pref_title__dock_background_color">Bakgrunn</string>
+
+    <string name="pref_title__drawer_style">Stil</string>
+    <string name="pref_summary__drawer_style">Velg mellom en sidevis og vannrett programskuff.</string>
+    <string name="pref_title__hide_apps">Skjul programmer</string>
+    <string name="pref_summary__hide_apps">Skjul valgte programmer fra oppstarteren.</string>
+    <string name="pref_title__drawer_show_card_view">Kortvisning</string>
+    <string name="pref_summary__drawer_show_card_view">Vis et kort over skuffebakgrunnen.</string>
+    <string name="pref_title__drawer_remember_position">Husk siste side</string>
+    <string name="pref_summary__drawer_remember_position">Hold øye med gjeldene side i programskuffen.</string>
+    <string name="pref_title__drawer_show_position_indicator">Posisjonsindikator</string>
+    <string name="pref_summary__drawer_show_position_indicator">Vis sidehenvisning eller rullefelt avhengig av stil.</string>
+    <string name="pref_title__drawer_show_label">Vis etiketter</string>
+    <string name="pref_summary__drawer_show_label">Vis programetiketter under deres respektive ikoner.</string>
+    <string name="pref_title__drawer_background_color">Bakgrunn</string>
+    <string name="pref_title__drawer_card_color">Kortvisning</string>
+    <string name="pref_title__drawer_label_color">Etikett</string>
+
+    <string name="pref_title__dock_swipe_up">Dra skuff raskt</string>
+    <string name="pref_summary__dock_swipe_up">Dra oppover på samlevinduet for å åpne programskuffen.</string>
+    <string name="pref_title__desktop_double_tap">Dobbelttrykk</string>
+    <string name="pref_title__desktop_swipe_up">Dra oppover</string>
+    <string name="pref_title__desktop_swipe_down">Dra nedover</string>
+    <string name="pref_title__desktop_pinch">Knip</string>
+    <string name="pref_title__desktop_unpinch">Utvid knipetak</string>
+
+    <string name="pref_title__icon_size">Størrelse</string>
+    <string name="pref_summary__icon_size">Størrelse for alle programikoner.</string>
+    <string name="pref_title__icon_pack">Ikonpakke</string>
+    <string name="pref_summary__icon_pack">Velg en installert ikonpakke.</string>
+
+    <string name="pref_title__backup">Sikkerhetskopier</string>
+    <string name="pref_summary__backup">Sikkerhetskopier og gjenopprett dine innstillinger.</string>
+    <string name="pref_title__clear_database">Tøm database</string>
+    <string name="pref_summary__clear_database">Slatt dataen for samleområdet og skrivebordet for å ordne opp i problemer.</string>
+    <string name="pref_title__restart">Omstart</string>
+    <string name="pref_summary__restart">Start oppstarteren på nytt hvis den oppfører seg rart.</string>
+
+    <!-- Preference Keys -->
+
+    <string name="pref_key__outer_cat_interfaces">Grensesnitt</string>
+    <string name="pref_key__outer_cat_inputs">Inndata</string>
+    <string name="pref_key__outer_cat_feels">Føles</string>
+    <string name="pref_key__outer_cat_others">Annet</string>
+
+    <!-- Item Labels -->
+
+    <string name="group">Uten navn</string>
+    <string name="app_drawer">Alle programmer</string>
+
+    <!-- Dialogs -->
+
+    <string name="request_dummy_text">Hei verden!</string>
+    <string name="request_please_wait2">Søker etter installerte programmer. Vent.</string>
+    <string name="request_toast">Ingen programmer installert. Vis alle programmer i skuff?</string>
+    <string name="on">På</string>
+    <string name="off">Av</string>
+    <string name="cancel">Avbryt</string>
+    <string name="ok">OK</string>
+    <string name="wallpaper">Bakgrunnsbilde</string>
+    <string name="wallpaper_pick">Velg bakgrunnsbilde</string>
+    <string name="wallpaper_unable_to_blur">Klarte ikke å tilsløre</string>
+    <string name="dialog__icon_pack_title">Velg ikonpakke</string>
+    <string name="dialog__icon_pack_info_toast">Klarte ikke å hente ikon uten READ_EXTERNAL_STORAGE-tilgang.</string>
+    <string name="dialog__backup_app_settings__backup">Sikkerhetskopier</string>
+    <string name="dialog__backup_app_settings__restore">Gjenopprett</string>
+    <string name="dialog__backup_app_settings__success">Utført.</string>
+    <string name="dialog__backup_app_settings__error">Noe gikk galt.</string>
+    <string name="columns">Kolonner</string>
+    <string name="rows">Rader</string>
+    <string name="columns_landscape">Kolonner (Liggende sideretning)</string>
+    <string name="rows_landscape">Rader (Liggende sideretning)</string>
+    <string name="search_online">SØK PÅ NETT</string>
+</resources>
