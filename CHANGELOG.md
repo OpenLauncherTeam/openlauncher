@@ -1,3 +1,11 @@
+### v0.5.1
+* fix incorrect label clipping
+* improve free space calculation for widgets
+* slight changes to settings page
+* fix crash related to group items
+* maximum grid size set to twenty
+* labels can be edited from the drag menu
+
 ### v0.5.0
 * Settings have been redesigned and will be reset
 * Add ability launch app with gesture
