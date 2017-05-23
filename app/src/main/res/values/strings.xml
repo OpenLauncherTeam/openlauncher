@@ -22,9 +22,9 @@
     <!-- Toasts -->
 
     <string name="toast_not_enough_space">Not enough space</string>
-    <string name="toast_app_uninstalled">This app has uninstalled.</string>
-    <string name="toast_free_ram" formatted="false">Free Memory: %d mb saved %d mb</string>
-    <string name="toast_free_all_ram" formatted="false">Free Memory: %d mb Your ram is in best state</string>
+    <string name="toast_app_uninstalled">App uninstalled.</string>
+    <string name="toast_free_ram" formatted="false">Free Memory: %d MB saved %d MB</string>
+    <string name="toast_free_all_ram" formatted="false">Free Memory: %d MB Your RAM is in best state</string>
     <string name="toast_device_admin_required">Please enable device administration</string>
 
     <!-- Intro -->
@@ -35,7 +35,7 @@
     <string name="intro1_text">Thank you for choosing OpenLauncher. It\'s fully open source and still in development.
         Here\'s a short intro on how to use it …</string>
     <string name="intro2_title" translatable="false">@string/minibar</string>
-    <string name="intro2_text">Swipe right from the left border of your screen to open the minibar. There you can find the settings,
+    <string name="intro2_text">Swipe inwards from the left border of your homescreen to open the minibar. There you can find the settings,
         change the wallpaper, and do lots of other stuff.</string>
     <string name="intro3_title">Settings</string>
     <string name="intro3_text">You can configure your desktop, the app drawer, and the dock … Just try it out!</string>
@@ -45,11 +45,11 @@
     <string name="minibar_0">Change the layout of the minibar.</string>
     <string name="minibar_1">Set and blur the wallpaper.</string>
     <string name="minibar_2">Lock the screen immediately, requires device administration.</string>
-    <string name="minibar_3">Free the RAM by force close other running services.</string>
-    <string name="minibar_4">Shortcut for the device settings.</string>
-    <string name="minibar_5">Shortcut for the OpenLauncher settings.</string>
-    <string name="minibar_7">Open the volume dialog.</string>
-    <string name="minibar_8">Open the app drawer.</string>
+    <string name="minibar_3">Free the RAM by forcibly closing other running services.</string>
+    <string name="minibar_4">Shortcut to device settings.</string>
+    <string name="minibar_5">Shortcut to OpenLauncher settings.</string>
+    <string name="minibar_7">Displays volume sliders.</string>
+    <string name="minibar_8">Opens app drawer.</string>
 
     <!-- About -->
 
@@ -80,20 +80,20 @@
     <string name="pref_title__minibar" translatable="false">@string/minibar</string>
     <string name="pref_summary__minibar">Configure the order and visibility of minibar items.</string>
     <string name="pref_title__search_bar_enable">Search Bar</string>
-    <string name="pref_summary__search_bar_enable">Display a search bar on top of the desktop.</string>
+    <string name="pref_summary__search_bar_enable">Display a search bar atop the desktop.</string>
     <string name="pref_title__desktop_fullscreen">Fullscreen</string>
     <string name="pref_summary__desktop_fullscreen">Enable fullscreen for your desktop.</string>
     <string name="pref_title__desktop_show_position_indicator">Position Indicator</string>
     <string name="pref_summary__desktop_show_position_indicator">Show the page indicator below the desktop.</string>
     <string name="pref_title__desktop_show_label">Show Labels</string>
-    <string name="pref_summary__desktop_show_label">Show app and folder names below their icons.</string>
+    <string name="pref_summary__desktop_show_label">Named apps and folders.</string>
     <string name="pref_title__desktop_background_color">Background</string>
     <string name="pref_title__desktop_folder_color">Folder</string>
 
     <string name="pref_title__dock_size">Size</string>
     <string name="pref_summary__dock_size">Set the dock size.</string>
     <string name="pref_title__dock_show_label">Show Labels</string>
-    <string name="pref_summary__dock_show_label">Show app and folder names below their icons.</string>
+    <string name="pref_summary__dock_show_label">Named apps and folders.</string>
     <string name="pref_title__dock_background_color">Background</string>
 
     <string name="pref_title__drawer_style">Style</string>
@@ -103,20 +103,20 @@
     <string name="pref_title__drawer_show_card_view">Card View</string>
     <string name="pref_summary__drawer_show_card_view">Show a card view above the drawer background.</string>
     <string name="pref_title__drawer_remember_position">Remember Last Page</string>
-    <string name="pref_summary__drawer_remember_position">Keep track of the current page in the app drawer.</string>
+    <string name="pref_summary__drawer_remember_position">Keep track of the current app drawer page.</string>
     <string name="pref_title__drawer_show_position_indicator">Position Indicator</string>
     <string name="pref_summary__drawer_show_position_indicator">Show the page indicator or scrollbar depending on the style.</string>
     <string name="pref_title__drawer_show_label">Show Labels</string>
-    <string name="pref_summary__drawer_show_label">Show app labels below their icons.</string>
+    <string name="pref_summary__drawer_show_label">Named app icons.</string>
     <string name="pref_title__drawer_background_color">Background</string>
     <string name="pref_title__drawer_card_color">Card View</string>
     <string name="pref_title__drawer_label_color">Label</string>
 
-    <string name="pref_title__dock_swipe_up">Fast Swipe Drawer</string>
-    <string name="pref_summary__dock_swipe_up">Swipe up on the dock to open the app drawer.</string>
+    <string name="pref_title__dock_swipe_up">Swipe Drawer Quickly</string>
+    <string name="pref_summary__dock_swipe_up">Swipe upwards on the dock to open the app drawer.</string>
     <string name="pref_title__desktop_double_tap">Double Tap</string>
-    <string name="pref_title__desktop_swipe_up">Swipe Up</string>
-    <string name="pref_title__desktop_swipe_down">Swipe Down</string>
+    <string name="pref_title__desktop_swipe_up">Swipe Upwards</string>
+    <string name="pref_title__desktop_swipe_down">Swipe Downwards</string>
     <string name="pref_title__desktop_pinch">Pinch</string>
     <string name="pref_title__desktop_unpinch">Unpinch</string>
 
@@ -130,7 +130,7 @@
     <string name="pref_title__clear_database">Clear Database</string>
     <string name="pref_summary__clear_database">Delete the data for the dock and desktop to fix issues.</string>
     <string name="pref_title__restart">Restart</string>
-    <string name="pref_summary__restart">Restart the launcher in case it\'s behaving weird.</string>
+    <string name="pref_summary__restart">Restart the launcher in case it\'s misbehaving.</string>
 
     <!-- Preference Keys -->
 
@@ -222,7 +222,7 @@
     <string name="dialog__icon_pack_info_toast">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
     <string name="dialog__backup_app_settings__backup">Backup</string>
     <string name="dialog__backup_app_settings__restore">Restore</string>
-    <string name="dialog__backup_app_settings__success">Successfully done.</string>
+    <string name="dialog__backup_app_settings__success">Done.</string>
     <string name="dialog__backup_app_settings__error">Something went wrong.</string>
     <string name="columns">Columns</string>
     <string name="rows">Rows</string>
