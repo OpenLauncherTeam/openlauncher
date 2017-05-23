@@ -225,7 +225,7 @@ public class GroupPopupView extends FrameLayout {
                 item.x = currentItem.x;
                 item.y = currentItem.y;
 
-                db.updateItem(item, item.x, item.y);
+                db.updateItem(item);
                 db.updateItem(item, 1);
                 db.deleteItem(currentItem);
 
