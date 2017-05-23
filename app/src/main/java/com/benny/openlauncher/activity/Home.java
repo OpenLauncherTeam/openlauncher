@@ -125,7 +125,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     private final BroadcastReceiver timeChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateDesktopClock();
+            final String action = intent.getAction();
+            if (action.equals(Intent.ACTION_TIME_TICK)) {
+                updateDesktopClock();
+            }
         }
     };
     @BindView(R.id.searchBar)
@@ -657,6 +660,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         if (point != null) {
             item.x = point.x;
             item.y = point.y;
+
+            // add item to database
+            db.setItem(item, desktop.getCurrentItem(), 1);
             desktop.addItemToPage(item, desktop.getCurrentItem());
         } else {
             Tool.toast(Home.this, R.string.toast_not_enough_space);

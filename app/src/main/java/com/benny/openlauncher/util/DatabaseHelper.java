@@ -68,7 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void createItem(Item item, int page, int desktop, int state) {
+    public void createItem(Item item, int page, int desktop) {
         ContentValues itemValues = new ContentValues();
         itemValues.put(COLUMN_TIME, item.idValue);
         itemValues.put(COLUMN_TYPE, item.type.toString());
@@ -99,7 +99,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         itemValues.put(COLUMN_PAGE, page);
         itemValues.put(COLUMN_DESKTOP, desktop);
-        itemValues.put(COLUMN_STATE, state);
+
+        // item will always be visible when first added
+        itemValues.put(COLUMN_STATE, 1);
         db.insert(TABLE_HOME, null, itemValues);
     }
 
@@ -158,15 +160,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void setDesktop(List<List<Item>> desktop) {
+        int pageCounter = 0;
         for (List<Item> page : desktop) {
-            int pageCounter = 0;
             for (Item item : page) {
                 String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
                 Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
                 if (cursor.getCount() == 0) {
-                    createItem(item, pageCounter, 1, 1);
+                    createItem(item, pageCounter, 1);
                 } else if (cursor.getCount() == 1) {
-                    updateItem(item, pageCounter, 1, 1);
+                    updateItem(item, pageCounter, 1);
                 }
             }
             pageCounter++;
@@ -178,9 +180,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
             Cursor cursorItem = db.rawQuery(SQL_QUERY_SPECIFIC, null);
             if (cursorItem.getCount() == 0) {
-                createItem(item, 0, 0, 1);
+                createItem(item, 0, 0);
             } else if (cursorItem.getCount() == 1) {
-                updateItem(item, 0, 0, 1);
+                updateItem(item, 0, 0);
             }
         }
     }
@@ -189,16 +191,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
         Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
         if (cursor.getCount() == 0) {
-            createItem(item, page, desktop, 1);
+            createItem(item, page, desktop);
         } else if (cursor.getCount() == 1) {
-            updateItem(item, page, desktop, 1);
+            updateItem(item, page, desktop);
         }
     }
 
-    // update name and data
+    // update data attributes for an item
     public void updateItem(Item item) {
         ContentValues itemValues = new ContentValues();
         itemValues.put(COLUMN_LABEL, item.name);
+        itemValues.put(COLUMN_X_POS, item.x);
+        itemValues.put(COLUMN_Y_POS, item.y);
         String concat = "";
         switch (item.type) {
             case APP:
@@ -230,18 +234,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.idValue, null);
     }
 
-    // update the position of an item
-    public void updateItem(Item item, int x, int y) {
-        ContentValues itemValues = new ContentValues();
-        itemValues.put(COLUMN_X_POS, x);
-        itemValues.put(COLUMN_Y_POS, y);
-        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.idValue, null);
-    }
-
-    // update the fields in an item only used by the database
-    public void updateItem(Item item, int page, int desktop, int state) {
+    // update the fields only used by the database
+    public void updateItem(Item item, int page, int desktop) {
         deleteItem(item);
-        createItem(item, page, desktop, state);
+        createItem(item, page, desktop);
     }
 
     private Item getSelectionItem(Cursor cursor) {
