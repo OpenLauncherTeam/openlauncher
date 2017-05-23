@@ -160,8 +160,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void setDesktop(List<List<Item>> desktop) {
+        int pageCounter = 0;
         for (List<Item> page : desktop) {
-            int pageCounter = 0;
             for (Item item : page) {
                 String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
                 Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
