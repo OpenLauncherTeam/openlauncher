@@ -209,12 +209,19 @@ public class DragOptionView extends CardView {
 
     @Override
     public boolean dispatchDragEvent(DragEvent ev) {
+        final DragEvent event=ev;
         boolean r = super.dispatchDragEvent(ev);
         if (r && (ev.getAction() == DragEvent.ACTION_DRAG_STARTED || ev.getAction() == DragEvent.ACTION_DRAG_ENDED)) {
             // If we got a start or end and the return value is true, our
             // onDragEvent wasn't called by ViewGroup.dispatchDragEvent
             // So we do it here.
-            onDragEvent(ev);
+            this.post(new Runnable() {
+                @Override
+                public void run() {
+                    onDragEvent(event);
+                }
+            });
+
 
             // fix crash on older versions of android
             try {

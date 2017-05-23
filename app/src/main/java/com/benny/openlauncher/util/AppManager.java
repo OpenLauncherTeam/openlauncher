@@ -60,7 +60,15 @@ public class AppManager {
         this.packageManager = c.getPackageManager();
     }
 
+    /**
+     * Find the App corresponding to the supplied Item based on package and class names
+     *
+     * @param item - the Item for which the corresponding App is required
+     * @return the corresponding app or null
+     */
     public App findApp(Item item) {
+        if (item == null)
+            return null;
         String packageName = item.appIntent.getComponent().getPackageName();
         String className = item.appIntent.getComponent().getClassName();
         for (App app : apps) {

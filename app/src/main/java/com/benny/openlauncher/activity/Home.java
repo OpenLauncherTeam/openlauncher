@@ -125,10 +125,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     private final BroadcastReceiver timeChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (action.equals(Intent.ACTION_TIME_CHANGED) || action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-                updateDesktopClock();
-            }
+            updateDesktopClock();
         }
     };
     @BindView(R.id.searchBar)
