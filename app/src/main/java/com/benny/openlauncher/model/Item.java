@@ -105,15 +105,6 @@ public class Item implements Parcelable {
         return item;
     }
 
-    public static Item newWidgetItem(int widgetID) {
-        Item item = new Item();
-        item.type = Type.WIDGET;
-        item.widgetID = widgetID;
-        item.spanX = 1;
-        item.spanY = 1;
-        return item;
-    }
-
     public static Item newShortcutItem(Context context, String name, Intent intent, Bitmap icon) {
         Item item = new Item();
         item.type = Type.SHORTCUT;
@@ -136,6 +127,15 @@ public class Item implements Parcelable {
         return item;
     }
 
+    public static Item newGroupItem() {
+        Item item = new Item();
+        item.type = Type.GROUP;
+        item.spanX = 1;
+        item.spanY = 1;
+        item.items = new ArrayList<>();
+        return item;
+    }
+
     public static Item newActionItem(int action) {
         Item item = new Item();
         item.type = Type.ACTION;
@@ -145,12 +145,12 @@ public class Item implements Parcelable {
         return item;
     }
 
-    public static Item newGroupItem() {
+    public static Item newWidgetItem(int widgetID) {
         Item item = new Item();
-        item.type = Type.GROUP;
+        item.type = Type.WIDGET;
+        item.widgetID = widgetID;
         item.spanX = 1;
         item.spanY = 1;
-        item.items = new ArrayList<>();
         return item;
     }
 

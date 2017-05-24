@@ -179,7 +179,11 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setAppItem(final Item item, final AppManager.App app) {
-            view.setLabel(item.name);
+            if (item.name == null) {
+                view.setLabel(app.label);
+            } else {
+                view.setLabel(item.name);
+            }
             view.setIcon(app.icon);
             view.setOnClickListener(new OnClickListener() {
                 @Override

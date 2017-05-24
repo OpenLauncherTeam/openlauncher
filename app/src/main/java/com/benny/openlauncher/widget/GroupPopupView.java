@@ -96,8 +96,8 @@ public class GroupPopupView extends FrameLayout {
                 if (y2 * cellSize[0] + x2 > item.items.size() - 1) {
                     continue;
                 }
-                final Item dropItem = item.items.get(y2 * cellSize[0] + x2);
-                final Intent act = dropItem.appIntent;
+                final Item groupItem = item.items.get(y2 * cellSize[0] + x2);
+                final Intent act = groupItem.appIntent;
                 AppItemView.Builder b = new AppItemView.Builder(getContext()).withOnTouchGetPosition();
                 b.setTextColor(AppSettings.get().getDrawerLabelColor());
                 if (act.getStringExtra("shortCutIconID") != null) {
@@ -105,7 +105,7 @@ public class GroupPopupView extends FrameLayout {
                 } else {
                     AppManager.App app = AppManager.getInstance(c).findApp(act);
                     if (app != null) {
-                        b.setAppItem(item, app);
+                        b.setAppItem(groupItem, app);
                     }
                 }
                 final AppItemView view = b.getView();
@@ -113,13 +113,13 @@ public class GroupPopupView extends FrameLayout {
                 view.setOnLongClickListener(new OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view2) {
-                        removeItem(c, callBack, item, dropItem, (AppItemView) itemView);
+                        removeItem(c, callBack, item, groupItem, (AppItemView) itemView);
 
                         itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
 
                         // start the drag action
                         Intent i = new Intent();
-                        i.putExtra("mDragData", dropItem);
+                        i.putExtra("mDragData", groupItem);
                         ClipData data = ClipData.newIntent("mDragIntent", i);
                         if (act.getStringExtra("shortCutIconID") == null) {
                             itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.APP), 0);
@@ -128,13 +128,13 @@ public class GroupPopupView extends FrameLayout {
                         }
 
                         dismissPopup();
-                        updateItem(c, callBack, item, dropItem, (AppItemView) itemView);
+                        updateItem(c, callBack, item, groupItem, (AppItemView) itemView);
                         return true;
                     }
                 });
                 final AppManager.App app = AppManager.getInstance(c).findApp(act);
                 if (app == null) {
-                    removeItem(c, callBack, item, dropItem, (AppItemView) itemView);
+                    removeItem(c, callBack, item, groupItem, (AppItemView) itemView);
                 } else {
                     view.setOnClickListener(new OnClickListener() {
                         @Override
