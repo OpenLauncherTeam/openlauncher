@@ -432,7 +432,7 @@ public class CellContainer extends ViewGroup {
         if (pos == null) return null;
         for (int i = 0; i < getChildCount(); i++) {
             LayoutParams lp = (LayoutParams) getChildAt(i).getLayoutParams();
-            if (pos.x >= lp.x && pos.y >= lp.y && pos.x <= lp.x + lp.xSpan && pos.y <= lp.y + lp.ySpan) {
+            if (pos.x >= lp.x && pos.y >= lp.y && pos.x < lp.x + lp.xSpan && pos.y < lp.y + lp.ySpan) {
                 return getChildAt(i);
             }
         }
