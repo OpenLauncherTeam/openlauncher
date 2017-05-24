@@ -160,7 +160,7 @@ public class DragOptionView extends CardView {
                         Item item = intent.getParcelableExtra("mDragData");
                         if (item.type == Item.Type.APP) {
                             try {
-                                getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.appIntent.getComponent().getPackageName())));
+                                getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.intent.getComponent().getPackageName())));
                             } catch (Exception e) {
                                 Tool.toast(getContext(), R.string.toast_app_uninstalled);
                             }

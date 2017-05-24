@@ -79,7 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String concat = "";
         switch (item.type) {
             case APP:
-                itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.appIntent));
+                itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.intent));
                 break;
             case GROUP:
                 for (Item tmp : item.items) {
@@ -91,7 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 itemValues.put(COLUMN_DATA, item.actionValue);
                 break;
             case WIDGET:
-                concat = Integer.toString(item.widgetID) + "#"
+                concat = Integer.toString(item.widgetValue) + "#"
                         + Integer.toString(item.spanX) + "#"
                         + Integer.toString(item.spanY);
                 itemValues.put(COLUMN_DATA, concat);
@@ -206,7 +206,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String concat = "";
         switch (item.type) {
             case APP:
-                itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.appIntent));
+                itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.intent));
                 break;
             case GROUP:
                 for (Item tmp : item.items) {
@@ -218,7 +218,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 itemValues.put(COLUMN_DATA, item.actionValue);
                 break;
             case WIDGET:
-                concat = Integer.toString(item.widgetID) + "#"
+                concat = Integer.toString(item.widgetValue) + "#"
                         + Integer.toString(item.spanX) + "#"
                         + Integer.toString(item.spanY);
                 itemValues.put(COLUMN_DATA, concat);
@@ -259,7 +259,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         switch (type) {
             case APP:
             case SHORTCUT:
-                item.appIntent = Tool.getIntentFromString(data);
+                item.intent = Tool.getIntentFromString(data);
                 break;
             case GROUP:
                 item.items = new ArrayList<>();
@@ -273,7 +273,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 break;
             case WIDGET:
                 dataSplit = data.split("#");
-                item.widgetID = Integer.parseInt(dataSplit[0]);
+                item.widgetValue = Integer.parseInt(dataSplit[0]);
                 item.spanX = Integer.parseInt(dataSplit[1]);
                 item.spanY = Integer.parseInt(dataSplit[2]);
                 break;

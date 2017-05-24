@@ -64,6 +64,11 @@ public class Tool {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics()));
     }
 
+    public static int sp2px(Context context, float spValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    }
+
     public static void toast(Context context, String str) {
         Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
     }
@@ -283,65 +288,38 @@ public class Tool {
         }
     }
 
-    public static void checkForUnusedIconAndDelete(Context context, ArrayList<String> IDs) {
-        File dir = new File(context.getFilesDir() + "/iconCache");
-        if (dir.exists()) {
-            ArrayList<String> availableIDs = new ArrayList<>();
-            File[] iconCaches = dir.listFiles();
-            for (int i = 0; i < iconCaches.length; i++) {
-                availableIDs.add(iconCaches[i].getName());
-            }
-            availableIDs.removeAll(IDs);
-            for (int i = 0; i < availableIDs.size(); i++) {
-                for (int j = 0; j < iconCaches.length; j++) {
-                    if (iconCaches[j].getName().equals(availableIDs.get(i))) {
-                        iconCaches[j].delete();
-                        continue;
-                    }
-                }
-            }
-        }
-    }
-
-    public static Drawable getIconFromID(Context context, String ID) {
-        if (ID == null) {
+    public static Drawable getIcon(Context context, String filename) {
+        if (filename == null) {
             return null;
         }
         Drawable icon = null;
-        Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/iconCache/" + ID);
+        Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/icons/" + filename);
         if (bitmap != null) {
             icon = new BitmapDrawable(context.getResources(), bitmap);
         }
         return icon;
     }
 
-    public static String saveIconAndReturnID(Context context, Bitmap bitmap) {
-        int i = 0;
-        String filename = Integer.toString(i);
-
-        File dir = new File(context.getFilesDir() + "/iconCache");
-        if (!dir.exists()) {
-            dir.mkdirs();
+    public static void saveIcon(Context context, Bitmap icon, String filename) {
+        File directory = new File(context.getFilesDir() + "/icons");
+        if (!directory.exists()) {
+            directory.mkdir();
         }
 
-        File f = new File(context.getFilesDir() + "/iconCache/" + filename);
-
-        while (f.exists()) {
-            i++;
-            filename = Integer.toString(i);
-            f = new File(context.getFilesDir() + "/iconCache/" + filename);
+        File file = new File(context.getFilesDir() + "/icons/" + filename);
+        if (file.exists()) {
+            removeIcon(context, filename);
         }
-
         try {
-            f.createNewFile();
+            file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         FileOutputStream out = null;
         try {
-            out = new FileOutputStream(f);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out = new FileOutputStream(file);
+            icon.compress(Bitmap.CompressFormat.PNG, 100, out);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -353,7 +331,17 @@ public class Tool {
                 e.printStackTrace();
             }
         }
-        return String.valueOf(i);
+    }
+
+    public static void removeIcon(Context context, String filename) {
+        File file = new File(context.getFilesDir() + "/icons/" + filename);
+        if (file.exists()) {
+            try {
+                file.delete();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static Bitmap drawableToBitmap(Drawable drawable) {

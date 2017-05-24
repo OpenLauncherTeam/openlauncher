@@ -26,14 +26,11 @@ import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 
-import static com.benny.openlauncher.activity.Home.resources;
-
 /**
  * Created by BennyKok on 10/23/2016
  */
 
 public class AppItemView extends View implements Drawable.Callback {
-
     private Drawable icon;
     private String label;
     private Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -100,7 +97,7 @@ public class AppItemView extends View implements Drawable.Callback {
 
         labelHeight = Tool.dp2px(14, getContext());
 
-        textPaint.setTextSize(sp2px(getContext(), 14));
+        textPaint.setTextSize(Tool.sp2px(getContext(), 14));
         textPaint.setColor(Color.DKGRAY);
         textPaint.setTypeface(typeface);
     }
@@ -113,11 +110,6 @@ public class AppItemView extends View implements Drawable.Callback {
             mWidth = targetedWidth;
         }
         setMeasuredDimension((int) Math.ceil(mWidth), (int) Math.ceil((int) mHeight) + Tool.dp2px(2, getContext()) + targetedHeightPadding * 2);
-    }
-
-    public static int sp2px(Context context, float spValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (spValue * fontScale + 0.5f);
     }
 
     @Override
@@ -179,19 +171,13 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setAppItem(final Item item, final AppManager.App app) {
-            if (item.name == null) {
-                view.setLabel(app.label);
-            } else {
-                view.setLabel(item.name);
-            }
-            view.setIcon(app.icon);
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Tool.createScaleInScaleOutAnim(view, new Runnable() {
                         @Override
                         public void run() {
-                            Tool.startApp(view.getContext(), item.appIntent);
+                            Tool.startApp(view.getContext(), item.intent);
                         }
                     });
                 }
@@ -216,16 +202,14 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder setShortcutItem(final Intent intent) {
-            view.setLabel(intent.getStringExtra("shortCutName"));
-            view.setIcon(Tool.getIconFromID(view.getContext(), intent.getStringExtra("shortCutIconID")));
+        public Builder setShortcutItem(final Item item) {
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Tool.createScaleInScaleOutAnim(view, new Runnable() {
                         @Override
                         public void run() {
-                            view.getContext().startActivity(intent);
+                            view.getContext().startActivity(item.intent);
                         }
                     });
                 }
@@ -233,13 +217,11 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder setGroupItem(Context context, final Item item, final DesktopCallBack callBack) {
-            view.setLabel(item.name);
-            view.setIcon(new GroupIconDrawable(context, item));
+        public Builder setGroupItem(Context context, final DesktopCallBack callback, final Item item) {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Home.launcher != null && Home.launcher.groupPopup.showWindowV(item, v, callBack)) {
+                    if (Home.launcher != null && Home.launcher.groupPopup.showWindowV(item, v, callback)) {
                         ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
                     }
                 }
@@ -250,8 +232,6 @@ public class AppItemView extends View implements Drawable.Callback {
         public Builder setActionItem(Item item) {
             switch (item.actionValue) {
                 case 8:
-                    view.setLabel(resources.getString(R.string.app_drawer));
-                    view.setIcon(view.getResources().getDrawable(R.drawable.ic_app_drawer_24dp));
                     view.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -264,18 +244,53 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder withOnLongPressDrag(final AppManager.App app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
-            withOnLongPressDrag(Item.newAppItem(app), action, eventAction);
+        public Builder setIcon(Context context, Item item) {
+            Drawable icon = null;
+            switch (item.type) {
+                case APP:
+                case SHORTCUT:
+                    icon = Tool.getIcon(view.getContext(), Integer.toString(item.idValue));
+                    if (icon == null) {
+                        AppManager.App app = AppManager.getInstance(context).findApp(item.intent);
+                        icon = app.icon;
+                    }
+                    break;
+                case GROUP:
+                    icon = new GroupIconDrawable(context, item);
+                    break;
+                case ACTION:
+                    switch (item.actionValue) {
+                        case 8:
+                            icon = view.getResources().getDrawable(R.drawable.ic_app_drawer_24dp);
+                            break;
+                    }
+            }
+            view.setIcon(icon);
             return this;
         }
 
-        public Builder withOnLongPressDrag(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
+        public Builder setLabel(Context context, Item item) {
+            String label = item.name;
+            if (label == null && (item.type == Item.Type.APP || item.type == Item.Type.SHORTCUT)) {
+                AppManager.App app = AppManager.getInstance(context).findApp(item.intent);
+                label = app.label;
+            }
+            view.label = label;
+            return this;
+        }
+
+        public Builder withOnLongClick(final AppManager.App app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
+            withOnLongClick(Item.newAppItem(app), action, eventAction);
+            return this;
+        }
+
+        public Builder withOnLongClick(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
             view.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (AppSettings.get().isDesktopLocked())
+                    if (AppSettings.get().isDesktopLocked()) {
                         return false;
-
+                    }
                     if (eventAction != null && !eventAction.readyForDrag(v)) {
                         return false;
                     }

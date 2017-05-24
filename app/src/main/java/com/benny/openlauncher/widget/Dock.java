@@ -118,7 +118,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
                 if (((DragAction) p2.getLocalState()).action == DragAction.Action.APP_DRAWER) {
-                    item.resetID();
+                    item.reset();
                 }
 
                 if (addItemToPoint(item, (int) p2.getX(), (int) p2.getY())) {

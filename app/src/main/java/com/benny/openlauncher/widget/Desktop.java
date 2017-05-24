@@ -212,7 +212,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
                 if (((DragAction) p2.getLocalState()).action == DragAction.Action.APP_DRAWER) {
-                    item.resetID();
+                    item.reset();
                 }
 
                 if (addItemToPoint(item, (int) p2.getX(), (int) p2.getY())) {
@@ -538,7 +538,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     Item group = Item.newGroupItem();
                     group.items.add(item);
                     group.items.add(dropItem);
-                    group.name = (home.getString(R.string.group));
                     group.x = item.x;
                     group.y = item.y;
 

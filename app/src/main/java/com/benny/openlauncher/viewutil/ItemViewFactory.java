@@ -5,11 +5,8 @@ import android.appwidget.AppWidgetProviderInfo;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
@@ -23,7 +20,6 @@ import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.widget.CellContainer;
 import com.benny.openlauncher.widget.WidgetView;
@@ -39,20 +35,19 @@ public class ItemViewFactory {
 
     public static View getItemView(final Context context, final DesktopCallBack callBack, final Item item, int flags) {
         View view = null;
-        if (item.type == null) {
-            return null;
-        }
         switch (item.type) {
             case APP:
-                final AppManager.App app = AppManager.getInstance(context).findApp(item);
+                final AppManager.App app = AppManager.getInstance(context).findApp(item.intent);
                 if (app == null) {
                     break;
                 }
                 view = new AppItemView.Builder(context)
                         .setAppItem(item, app)
+                        .setIcon(context, item)
+                        .setLabel(context, item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongPressDrag(item, DragAction.Action.APP, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongClick(item, DragAction.Action.APP, new AppItemView.Builder.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -69,10 +64,12 @@ public class ItemViewFactory {
                 break;
             case SHORTCUT:
                 view = new AppItemView.Builder(context)
-                        .setShortcutItem(item.appIntent)
+                        .setShortcutItem(item)
+                        .setIcon(context, item)
+                        .setLabel(context, item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongPressDrag(item, DragAction.Action.SHORTCUT, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongClick(item, DragAction.Action.SHORTCUT, new AppItemView.Builder.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -89,10 +86,12 @@ public class ItemViewFactory {
                 break;
             case GROUP:
                 view = new AppItemView.Builder(context)
-                        .setGroupItem(context, item, callBack)
+                        .setGroupItem(context, callBack, item)
+                        .setIcon(context, item)
+                        .setLabel(context, item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongPressDrag(item, DragAction.Action.GROUP, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongClick(item, DragAction.Action.GROUP, new AppItemView.Builder.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -111,9 +110,11 @@ public class ItemViewFactory {
             case ACTION:
                 view = new AppItemView.Builder(context)
                         .setActionItem(item)
+                        .setIcon(context, item)
+                        .setLabel(context, item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongPressDrag(item, DragAction.Action.ACTION, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongClick(item, DragAction.Action.ACTION, new AppItemView.Builder.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -129,10 +130,10 @@ public class ItemViewFactory {
                         .getView();
                 break;
             case WIDGET:
-                final AppWidgetProviderInfo appWidgetInfo = Home.appWidgetManager.getAppWidgetInfo(item.widgetID);
-                final WidgetView widgetView = (WidgetView) Home.appWidgetHost.createView(context, item.widgetID, appWidgetInfo);
+                final AppWidgetProviderInfo appWidgetInfo = Home.appWidgetManager.getAppWidgetInfo(item.widgetValue);
+                final WidgetView widgetView = (WidgetView) Home.appWidgetHost.createView(context, item.widgetValue, appWidgetInfo);
 
-                widgetView.setAppWidget(item.widgetID, appWidgetInfo);
+                widgetView.setAppWidget(item.widgetValue, appWidgetInfo);
                 widgetView.post(new Runnable() {
                     @Override
                     public void run() {
@@ -267,6 +268,6 @@ public class ItemViewFactory {
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.spanX * Home.launcher.desktop.getCurrentPage().cellWidth);
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.spanY * Home.launcher.desktop.getCurrentPage().cellHeight);
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.spanY * Home.launcher.desktop.getCurrentPage().cellHeight);
-        Home.appWidgetManager.updateAppWidgetOptions(item.widgetID, newOps);
+        Home.appWidgetManager.updateAppWidgetOptions(item.widgetValue, newOps);
     }
 }

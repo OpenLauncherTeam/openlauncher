@@ -21,7 +21,6 @@ import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
-import com.benny.openlauncher.viewutil.ItemViewFactory;
 
 import static com.benny.openlauncher.activity.Home.db;
 
@@ -97,13 +96,12 @@ public class GroupPopupView extends FrameLayout {
                     continue;
                 }
                 final Item groupItem = item.items.get(y2 * cellSize[0] + x2);
-                final Intent act = groupItem.appIntent;
                 AppItemView.Builder b = new AppItemView.Builder(getContext()).withOnTouchGetPosition();
                 b.setTextColor(AppSettings.get().getDrawerLabelColor());
-                if (act.getStringExtra("shortCutIconID") != null) {
-                    b.setShortcutItem(act);
+                if (groupItem.type == Item.Type.SHORTCUT) {
+                    b.setShortcutItem(groupItem);
                 } else {
-                    AppManager.App app = AppManager.getInstance(c).findApp(act);
+                    AppManager.App app = AppManager.getInstance(c).findApp(groupItem.intent);
                     if (app != null) {
                         b.setAppItem(groupItem, app);
                     }
@@ -121,7 +119,7 @@ public class GroupPopupView extends FrameLayout {
                         Intent i = new Intent();
                         i.putExtra("mDragData", groupItem);
                         ClipData data = ClipData.newIntent("mDragIntent", i);
-                        if (act.getStringExtra("shortCutIconID") == null) {
+                        if (groupItem.type == Item.Type.SHORTCUT) {
                             itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.APP), 0);
                         } else {
                             itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.SHORTCUT), 0);
@@ -132,7 +130,7 @@ public class GroupPopupView extends FrameLayout {
                         return true;
                     }
                 });
-                final AppManager.App app = AppManager.getInstance(c).findApp(act);
+                final AppManager.App app = AppManager.getInstance(c).findApp(groupItem.intent);
                 if (app == null) {
                     removeItem(c, callBack, item, groupItem, (AppItemView) itemView);
                 } else {
@@ -144,7 +142,7 @@ public class GroupPopupView extends FrameLayout {
                                 public void run() {
                                     dismissPopup();
                                     setVisibility(View.INVISIBLE);
-                                    view.getContext().startActivity(act);
+                                    view.getContext().startActivity(groupItem.intent);
                                 }
                             });
                         }
@@ -219,7 +217,7 @@ public class GroupPopupView extends FrameLayout {
 
     public void updateItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, AppItemView currentView) {
         if (currentItem.items.size() == 1) {
-            final AppManager.App app = AppManager.getInstance(currentView.getContext()).findApp(currentItem.items.get(0));
+            final AppManager.App app = AppManager.getInstance(currentView.getContext()).findApp(currentItem.items.get(0).intent);
             if (app != null) {
                 Item item = db.getItem(currentItem.items.get(0).idValue);
                 item.x = currentItem.x;

@@ -43,10 +43,8 @@ public class ShortcutReceiver extends BroadcastReceiver {
                 shortcutIconDrawable = new BitmapDrawable(context.getResources(), (Bitmap) intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON));
         }
 
-        Item item = Item.newShortcutItem(context, name, newIntent, Tool.drawableToBitmap(shortcutIconDrawable));
+        Item item = Item.newShortcutItem(context, newIntent, Tool.drawableToBitmap(shortcutIconDrawable), name);
         Point preferredPos = Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).findFreeSpace();
-
-        // TODO: is it better to create a new page if there is not enough space
         if (preferredPos == null) {
             Tool.toast(Home.launcher, R.string.toast_not_enough_space);
         } else {

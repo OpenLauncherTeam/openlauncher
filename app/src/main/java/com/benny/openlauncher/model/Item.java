@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
@@ -40,7 +41,7 @@ public class Item implements Parcelable {
     public int y = 0;
 
     // intent for shortcuts and apps
-    public Intent appIntent;
+    public Intent intent;
 
     // list of items for groups
     public List<Item> items;
@@ -49,16 +50,11 @@ public class Item implements Parcelable {
     public int actionValue;
 
     // widget specific values
-    public int widgetID;
+    public int widgetValue;
     public int spanX = 1;
     public int spanY = 1;
 
     public Item() {
-        Random random = new Random();
-        idValue = random.nextInt();
-    }
-
-    public void resetID() {
         Random random = new Random();
         idValue = random.nextInt();
     }
@@ -70,7 +66,7 @@ public class Item implements Parcelable {
         switch (type) {
             case APP:
             case SHORTCUT:
-                appIntent = Tool.getIntentFromString(parcel.readString());
+                intent = Tool.getIntentFromString(parcel.readString());
                 break;
             case GROUP:
                 List<String> labels = new ArrayList<>();
@@ -84,7 +80,7 @@ public class Item implements Parcelable {
                 actionValue = parcel.readInt();
                 break;
             case WIDGET:
-                widgetID = parcel.readInt();
+                widgetValue = parcel.readInt();
                 spanX = parcel.readInt();
                 spanY = parcel.readInt();
                 break;
@@ -101,35 +97,26 @@ public class Item implements Parcelable {
         Item item = new Item();
         item.type = Type.APP;
         item.name = app.label;
-        item.appIntent = toIntent(app);
+        item.intent = toIntent(app);
         return item;
     }
 
-    public static Item newShortcutItem(Context context, String name, Intent intent, Bitmap icon) {
+    public static Item newShortcutItem(Context context, Intent intent, Bitmap icon, String name) {
         Item item = new Item();
         item.type = Type.SHORTCUT;
+        item.name = name;
         item.spanX = 1;
         item.spanY = 1;
-        item.appIntent = intent;
+        item.intent = intent;
 
-        String iconID = Tool.saveIconAndReturnID(context, icon);
-        intent.putExtra("shortCutIconID", iconID);
-        intent.putExtra("shortCutName", name);
-        return item;
-    }
-
-    public static Item newShortcutItem(Intent intent) {
-        Item item = new Item();
-        item.type = Type.SHORTCUT;
-        item.spanX = 1;
-        item.spanY = 1;
-        item.appIntent = intent;
+        Tool.saveIcon(context, icon, name);
         return item;
     }
 
     public static Item newGroupItem() {
         Item item = new Item();
         item.type = Type.GROUP;
+        item.name = (Home.launcher.getString(R.string.group));
         item.spanX = 1;
         item.spanY = 1;
         item.items = new ArrayList<>();
@@ -145,10 +132,10 @@ public class Item implements Parcelable {
         return item;
     }
 
-    public static Item newWidgetItem(int widgetID) {
+    public static Item newWidgetItem(int widgetValue) {
         Item item = new Item();
         item.type = Type.WIDGET;
-        item.widgetID = widgetID;
+        item.widgetValue = widgetValue;
         item.spanX = 1;
         item.spanY = 1;
         return item;
@@ -167,7 +154,7 @@ public class Item implements Parcelable {
         switch (type) {
             case APP:
             case SHORTCUT:
-                out.writeString(Tool.getIntentAsString(this.appIntent));
+                out.writeString(Tool.getIntentAsString(this.intent));
                 break;
             case GROUP:
                 List<String> labels = new ArrayList<>();
@@ -180,11 +167,16 @@ public class Item implements Parcelable {
                 out.writeInt(actionValue);
                 break;
             case WIDGET:
-                out.writeInt(widgetID);
+                out.writeInt(widgetValue);
                 out.writeInt(spanX);
                 out.writeInt(spanY);
                 break;
         }
+    }
+
+    public void reset() {
+        Random random = new Random();
+        idValue = random.nextInt();
     }
 
     private static Intent toIntent(AppManager.App app) {

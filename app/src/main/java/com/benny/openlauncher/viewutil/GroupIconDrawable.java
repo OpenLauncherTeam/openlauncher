@@ -12,6 +12,7 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.IntegerRes;
 
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
@@ -41,19 +42,8 @@ public class GroupIconDrawable extends Drawable {
         final float size = Tool.dp2px(AppSettings.get().getIconSize(), context);
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {
-            if (i < item.items.size()) {
-                if (item.type == Item.Type.SHORTCUT) {
-                    if (item.items.get(i) != null)
-                        icons[i] = Tool.drawableToBitmap(Tool.getIconFromID(context, item.items.get(i).appIntent.getStringExtra("shortCutIconID")));
-                    else
-                        icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
-                } else {
-                    AppManager.App app = AppManager.getInstance(context).findApp(item.items.get(i));
-                    if (app != null)
-                        icons[i] = Tool.drawableToBitmap(app.icon);
-                    else
-                        icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
-                }
+            if (i < item.items.size() && item.items.get(i) != null) {
+                icons[i] = Tool.drawableToBitmap(Tool.getIcon(context, Integer.toString(item.items.get(i).idValue)));
             } else {
                 icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
             }

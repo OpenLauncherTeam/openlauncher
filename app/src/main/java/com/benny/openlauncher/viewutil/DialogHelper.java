@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -28,8 +27,6 @@ import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import net.qiujuer.genius.blur.StackBlur;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,7 +155,7 @@ public class DialogHelper {
         Item item = intent.getParcelableExtra("mDragData");
         if (item.type == Item.Type.APP) {
             try {
-                Uri packageURI = Uri.parse("package:" + item.appIntent.getComponent().getPackageName());
+                Uri packageURI = Uri.parse("package:" + item.intent.getComponent().getPackageName());
                 Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
                 context.startActivity(uninstallIntent);
             } catch (Exception e) {

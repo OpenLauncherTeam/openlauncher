@@ -201,7 +201,7 @@ public class AppDrawerVertical extends CardView {
             new AppItemView.Builder(holder.appItemView)
                     .setAppItem(app)
                     .withOnTouchGetPosition()
-                    .withOnLongPressDrag(app, DragAction.Action.APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
+                    .withOnLongClick(app, DragAction.Action.APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                         @Override
                         public boolean readyForDrag(View view) {
                             return AppSettings.get().getDesktopMode() != Desktop.DesktopMode.SHOW_ALL_APPS;

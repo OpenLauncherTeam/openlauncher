@@ -38,10 +38,7 @@ public class AppManager {
         return packageManager;
     }
 
-    public static final int ICONPACKREQUESTCODE = 321;
-
     private PackageManager packageManager;
-
     private List<App> apps = new ArrayList<>();
     private List<App> nonFilteredApps = new ArrayList<>();
     public List<AppUpdatedListener> updateListeners = new ArrayList<>();
@@ -58,25 +55,6 @@ public class AppManager {
     public AppManager(Context c) {
         this.context = c;
         this.packageManager = c.getPackageManager();
-    }
-
-    /**
-     * Find the App corresponding to the supplied Item based on package and class names
-     *
-     * @param item - the Item for which the corresponding App is required
-     * @return the corresponding app or null
-     */
-    public App findApp(Item item) {
-        if (item == null)
-            return null;
-        String packageName = item.appIntent.getComponent().getPackageName();
-        String className = item.appIntent.getComponent().getClassName();
-        for (App app : apps) {
-            if (app.className.equals(className) && app.packageName.equals(packageName)) {
-                return app;
-            }
-        }
-        return null;
     }
 
     public App findApp(Intent intent) {

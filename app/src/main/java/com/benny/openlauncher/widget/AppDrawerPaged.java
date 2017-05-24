@@ -136,7 +136,7 @@ public class AppDrawerPaged extends SmoothViewPager {
             return new AppItemView.Builder(getContext())
                     .setAppItem(app)
                     .withOnTouchGetPosition()
-                    .withOnLongPressDrag(app, DragAction.Action.APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
+                    .withOnLongClick(app, DragAction.Action.APP_DRAWER, new AppItemView.Builder.LongPressCallBack() {
                         @Override
                         public boolean readyForDrag(View view) {
                             return AppSettings.get().getDesktopMode() != Desktop.DesktopMode.SHOW_ALL_APPS;
