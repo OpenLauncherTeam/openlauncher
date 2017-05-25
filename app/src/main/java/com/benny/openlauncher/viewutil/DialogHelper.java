@@ -56,7 +56,7 @@ public class DialogHelper {
     public static void addActionItemDialog(final Context context, MaterialDialog.ListCallback callback) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title("Desktop Action")
-                .items(R.array.desktopActionEntries)
+                .items(R.array.desktop_action_entries)
                 .itemsCallback(callback)
                 .show();
     }

@@ -557,7 +557,7 @@ public class Tool {
         return Formatter.formatFileSize(context, totalMemory);
     }
 
-    public static String getFreeMemory(Context context) {
+    public static String getFreeStorage(Context context) {
         File externalFilesDir = context.getExternalFilesDir(null);
         if (externalFilesDir != null) {
             long bytesAvailable = new File(externalFilesDir.toString()).getFreeSpace();

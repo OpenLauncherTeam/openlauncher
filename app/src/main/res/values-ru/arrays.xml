@@ -13,15 +13,6 @@
         <item>Запустить приложение</item>
     </string-array>
 
-    <string-array name="desktopActionEntries">
-        <item>Меню приложений</item>
-    </string-array>
-
-    <string-array name="entries__drawer_modes">
-        <item>Горизонтальный (постраничный)</item>
-        <item>Вертикальный</item>
-    </string-array>
-
     <string-array name="wallpaperOptionEntries">
         <item>Установить обои</item>
         <item>Размыть обои</item>

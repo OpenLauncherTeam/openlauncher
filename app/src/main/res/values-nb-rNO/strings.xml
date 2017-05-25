@@ -23,8 +23,8 @@
 
     <string name="toast_not_enough_space">Ikke nok plass</string>
     <string name="toast_app_uninstalled">Program avinstallert.</string>
-    <string name="toast_free_ram" formatted="false">Ledig minne: %d MB frigjorde %d MB</string>
-    <string name="toast_free_all_ram" formatted="false">Ledig minne: %d MB All RAM i beste velstand</string>
+    <string name="toast_free_ram">Ledig minne: %1$d MB frigjorde %2$d MB</string>
+    <string name="toast_free_all_ram">Ledig minne: %1$d MB All RAM i beste velstand</string>
     <string name="toast_device_admin_required">Skru på enhetsadministrasjon</string>
 
     <!-- Intro -->
@@ -81,7 +81,6 @@
     <string name="pref_title__desktop_background_color">Bakgrunn</string>
     <string name="pref_title__desktop_folder_color">Mappe</string>
 
-    <string name="pref_title__dock_size">Størrelse</string>
     <string name="pref_summary__dock_size">Vis samlevindusstørrelse.</string>
     <string name="pref_title__dock_show_label">Vis etiketter</string>
     <string name="pref_summary__dock_show_label">Vis program- og mappe-navn under deres respektive ikoner.</string>
@@ -111,7 +110,6 @@
     <string name="pref_title__desktop_pinch">Knip</string>
     <string name="pref_title__desktop_unpinch">Utvid knipetak</string>
 
-    <string name="pref_title__icon_size">Størrelse</string>
     <string name="pref_summary__icon_size">Størrelse for alle programikoner.</string>
     <string name="pref_title__icon_pack">Ikonpakke</string>
     <string name="pref_summary__icon_pack">Velg en installert ikonpakke.</string>

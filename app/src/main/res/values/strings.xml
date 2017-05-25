@@ -23,8 +23,8 @@
 
     <string name="toast_not_enough_space">Not enough space</string>
     <string name="toast_app_uninstalled">App uninstalled.</string>
-    <string name="toast_free_ram" formatted="false">Free Memory: %d MB saved %d MB</string>
-    <string name="toast_free_all_ram" formatted="false">Free Memory: %d MB Your RAM is in best state</string>
+    <string name="toast_free_ram">Free Memory: %1$d MB saved %2$d MB</string>
+    <string name="toast_free_all_ram">Free Memory: %1$d MB Your RAM is in best state</string>
     <string name="toast_device_admin_required">Please enable device administration</string>
 
     <!-- Intro -->
@@ -132,6 +132,9 @@
     <string name="pref_title__restart">Restart</string>
     <string name="pref_summary__restart">Restart the launcher in case it\'s misbehaving.</string>
 
+    <string name="horizontal_paged_drawer">Horizontal paged drawer</string>
+    <string name="vertical_scroll_drawer">Vertical scroll drawer</string>
+
     <!-- Preference Keys -->
 
     <string name="pref_key__desktop_columns" translatable="false">pref_key__desktop_columns</string>
@@ -226,4 +229,11 @@
     <string name="columns">Columns</string>
     <string name="rows">Rows</string>
     <string name="search_online">SEARCH ONLINE</string>
+
+    <string name="available_memory">Available memory: %1$s</string>
+    <string name="available_storage">Available storage: %1$s</string>
+    <string name="volume_level_ringtone">Ringtone</string>
+    <string name="volume_level_notification">Notification</string>
+    <string name="volume_level_system">System</string>
+    <string name="volume_level_media">Media</string>
 </resources>

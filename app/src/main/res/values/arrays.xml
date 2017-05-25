@@ -14,19 +14,20 @@
         <item>Launch App</item>
     </string-array>
 
-    <string-array name="desktopActionEntries">
+    <string-array name="desktop_action_entries">
         <item>App Drawer</item>
     </string-array>
 
-    <string-array name="entries__drawer_modes">
-        <item>Paged</item>
-        <item>Vertical</item>
+    <string-array name="entries__drawer_modes" translatable="false">
+        <item>@string/horizontal_paged_drawer</item>
+        <item>@string/vertical_scroll_drawer</item>
     </string-array>
 
     <string-array name="wallpaperOptionEntries">
         <item>Set Wallpaper</item>
         <item>Blur Wallpaper</item>
     </string-array>
+
     <string-array name="values__from_zero__to__one" translatable="false">
         <item>0</item>
         <item>1</item>

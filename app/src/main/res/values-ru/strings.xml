@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="settings">Настройки</string>
+<resources>
+    <string name="settings">Настройки</string>
     <string name="pref_title__about">О программе</string>
 
     <string name="info">Информация</string>
@@ -30,15 +31,13 @@
     <string name="pref_title__desktop_background_color">Фон</string>
     <string name="pref_title__desktop_folder_color">Папка</string>
 
-    <string name="pref_title__dock_size">Размер</string>
     <string name="pref_title__dock_background_color">Фон</string>
 
     <string name="pref_title__drawer_style">Стиль</string>
     <string name="pref_title__drawer_background_color">Фон</string>
-    <string name="pref_title__desktop_pinch"/>
-    <string name="pref_title__desktop_unpinch"/>
+    <string name="pref_title__desktop_pinch" />
+    <string name="pref_title__desktop_unpinch" />
 
-    <string name="pref_title__icon_size">Размер</string>
     <string name="pref_title__backup">Резервное копирование</string>
     <string name="pref_summary__backup">Резервное копирование и восстановление настроек.</string>
     <string name="pref_title__clear_database">Очистить базу данных</string>
@@ -89,7 +88,7 @@
     <string name="on">Вкл</string>
     <string name="off">Выкл</string>
     <string name="search_online">ПОИСК В СЕТИ</string>
-<string name="minibar_2">Заблокировать экран, требует прав администратора устройства.</string>
+    <string name="minibar_2">Заблокировать экран, требует прав администратора устройства.</string>
     <string name="minibar_3">Освободить оперативную память, принудительно завершив другие запущенные службы.</string>
     <string name="pref_key__outer_cat_inputs">Ввод</string>
     <string name="edit">Изменить</string>
@@ -101,8 +100,8 @@
     <string name="app_drawer">Все приложения</string>
 
     <string name="group">Без имени</string>
-    <string name="toast_free_ram" formatted="false">Свободной памяти: %d МБ, освобождено %d МБ</string>
-    <string name="toast_free_all_ram" formatted="false">Свободной памяти: %d МБ, состояние наилучшее</string>
+    <string name="toast_free_ram">Свободной памяти: %1$d МБ, освобождено %2$d МБ</string>
+    <string name="toast_free_all_ram">Свободной памяти: %1$d МБ, состояние наилучшее</string>
     <string name="intro3_text">Вы можете настроить рабочий стол, меню приложений и док… Просто попробуйте!</string>
 
     <string name="intro1_text">Спасибо, что выбрали OpenLauncher. Это приложение с полностью открытым исходным кодом, пока находящееся в разработке.
@@ -119,4 +118,7 @@
     <string name="request_please_wait">Поиск установленных приложений. Подождите.</string>
     <string name="request_toast">Приложения не выбраны. Показать в меню все приложения?</string>
     <string name="dialog__icon_pack_info_toast">Не удалось захватить значок без разрешения READ_EXTERNAL_STORAGE.</string>
-    </resources>
+
+    <string name="horizontal_paged_drawer">Горизонтальный (постраничный)</string>
+    <string name="vertical_scroll_drawer">Вертикальный</string>
+</resources>

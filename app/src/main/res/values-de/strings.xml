@@ -9,8 +9,8 @@
 
     <string name="toast_not_enough_space">Nicht genügend Platz</string>
     <string name="toast_app_uninstalled">Die App wurde deinstalliert.</string>
-    <string name="toast_free_ram" formatted="false">Freier Speicher: %d mb frei gegeben %d mb</string>
-    <string name="toast_free_all_ram" formatted="false">Freier Speicher: %d mb dein Ram ist in einem guten Zustand</string>
+    <string name="toast_free_ram">Freier Speicher: %1$d mb frei gegeben %2$d mb</string>
+    <string name="toast_free_all_ram">Freier Speicher: %1$d mb dein Ram ist in einem guten Zustand</string>
     <string name="toast_device_admin_required">Bitte \"Geräteadministrator\" aktivieren.</string>
     <string name="cancel">Abbrechen</string>
     <string name="ok">OK</string>
@@ -74,7 +74,6 @@
 
     <string name="pref_title__dock_show_label">Beschriftung</string>
     <string name="pref_summary__dock_show_label">Zeige Anwendungs- und Ordnernamen im Dock.</string>
-    <string name="pref_title__dock_size">Größe</string>
     <string name="pref_summary__dock_size">Bestimme die Größe des Docks.</string>
 
     <string name="pref_title__drawer_style">Stil</string>
@@ -94,7 +93,6 @@
     <string name="pref_title__drawer_label_color">Beschriftung</string>
     <string name="pref_title__desktop_folder_color">Ordner</string>
 
-    <string name="pref_title__icon_size">Größe</string>
     <string name="pref_summary__icon_size">Größe für alle Anwendungsicons.</string>
     <string name="pref_title__icon_pack">Icon Pack</string>
     <string name="pref_summary__icon_pack">Wähle ein installiertes Icon Pack.</string>
@@ -150,5 +148,14 @@
     <string name="pref_key__outer_cat_inputs">Eingaben</string>
     <string name="pref_key__outer_cat_feels">Erscheinungsbild</string>
     <string name="pref_key__outer_cat_others">Anderes</string>
+    <string name="version">Version</string>
+    <string name="vertical_scroll_drawer">Vertikaler scrollbarer Drawer</string>
+    <string name="horizontal_paged_drawer">Horizontaler Drawer (Paged)</string>
+    <string name="available_memory">Verfügbarer Speicher: %1$s</string>
+    <string name="available_storage">Verfügbarerer Speicherplatz: %1$s</string>
+    <string name="volume_level_ringtone">Klingelton</string>
+    <string name="volume_level_notification">Benachrichtigung</string>
+    <string name="volume_level_system">System</string>
+    <string name="volume_level_media">Medien</string>
 
 </resources>

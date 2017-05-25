@@ -375,7 +375,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     public void onDesktopEdit() {
-        dragOptionView.setAutoHideView(null);
+        dragOptionView.resetAutoHideView();
 
         Tool.visibleViews(100, desktopEditOptionView);
         Tool.invisibleViews(100,desktopIndicator);

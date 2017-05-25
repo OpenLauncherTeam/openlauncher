@@ -1,6 +1,7 @@
 package com.benny.openlauncher.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -20,8 +21,8 @@ import android.view.View;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.util.LauncherAction;
+import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.widget.AppDrawerController;
 
 import butterknife.BindView;
@@ -161,30 +162,31 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         }
 
         @Override
+        @SuppressLint("DefaultLocale")
         public void onResume() {
             super.onResume();
             ((SettingsActivity) getActivity()).toolbar.setTitle(R.string.settings);
 
             AppSettings settings = AppSettings.get();
 
-            String desktopSummary = "Size : " + String.valueOf(settings.getDesktopColumnCount()) + " x " + String.valueOf(settings.getDesktopRowCount());
+            String desktopSummary = String.format("%s: %d x %d", getString(R.string.pref_title__size), settings.getDesktopColumnCount(), (settings.getDesktopRowCount()));
             findPreference(getString(R.string.pref_key__cat_desktop)).setSummary(desktopSummary);
 
-            String dockSummary = "Size : " + String.valueOf(settings.getDockSize());
+            String dockSummary = String.format("%s: %d", getString(R.string.pref_title__size), settings.getDockSize());
             findPreference(getString(R.string.pref_key__cat_dock)).setSummary(dockSummary);
 
             String drawerSummary = "";
-            switch (settings.getDrawerStyle()){
+            switch (settings.getDrawerStyle()) {
                 case AppDrawerController.DrawerMode.HORIZONTAL_PAGED:
-                    drawerSummary = "Horizontal paged drawer";
+                    drawerSummary = getString(R.string.horizontal_paged_drawer);
                     break;
                 case AppDrawerController.DrawerMode.VERTICAL:
-                    drawerSummary = "Vertical scroll drawer";
+                    drawerSummary = getString(R.string.vertical_scroll_drawer);
                     break;
             }
             findPreference(getString(R.string.pref_key__cat_app_drawer)).setSummary(drawerSummary);
 
-            String iconsSummary = "Size : " + String.valueOf(settings.getIconSize()) + " dp";
+            String iconsSummary = String.format("%s: %ddp", getString(R.string.pref_title__size), settings.getIconSize());
             findPreference(getString(R.string.pref_key__cat_icons)).setSummary(iconsSummary);
         }
     }

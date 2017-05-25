@@ -23,8 +23,8 @@
 
     <string name="toast_not_enough_space">Espace insuffisant</string>
     <string name="toast_app_uninstalled">Cette appli a été désinstallée.</string>
-    <string name="toast_free_ram" formatted="false">Mémoire disponible : %d mb %d mb économisé</string>
-    <string name="toast_free_all_ram" formatted="false">Mémoire disponible : %d mb Votre RAM est en pleine forme</string>
+    <string name="toast_free_ram">Mémoire disponible : %1$d mb %2$d mb économisé</string>
+    <string name="toast_free_all_ram">Mémoire disponible : %1$d mb Votre RAM est en pleine forme</string>
     <string name="toast_device_admin_required">Veuillez activer l\administration de l\'appareil</string>
 
     <!-- Intro -->
@@ -79,7 +79,6 @@
     <string name="pref_title__desktop_background_color">Arrière-plan</string>
     <string name="pref_title__desktop_folder_color">Dossier</string>
 
-    <string name="pref_title__dock_size">Taille</string>
     <string name="pref_summary__dock_size">Définir la taille du dock.</string>
     <string name="pref_title__dock_show_label">Libellé</string>
     <string name="pref_summary__dock_show_label">Afficher les noms des applis et dossiers sous leurs icônes.</string>
@@ -107,7 +106,6 @@
     <string name="pref_title__desktop_pinch">Pincement</string>
 	<string name="pref_title__desktop_unpinch">Écartement</string>
 
-    <string name="pref_title__icon_size">Taille</string>
     <string name="pref_summary__icon_size">Taille de tous les icônes d\'applis.</string>
     <string name="pref_title__icon_pack">Pack d\'icônes</string>
     <string name="pref_summary__icon_pack">Sélectionner un pack d\'icônes installé.</string>

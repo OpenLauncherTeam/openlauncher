@@ -17,8 +17,8 @@
 
     <string name="toast_not_enough_space">容量が不足しています</string>
     <string name="toast_app_uninstalled">このアプリはアンインストールされました。</string>
-    <string name="toast_free_ram" formatted="false">空きメモリ: %d mb 節約 %d mb</string>
-    <string name="toast_free_all_ram" formatted="false">空きメモリ: %d mb RAM は最高の状態です</string>
+    <string name="toast_free_ram">空きメモリ: %1$d mb 節約 %2$d mb</string>
+    <string name="toast_free_all_ram">空きメモリ: %1$d mb RAM は最高の状態です</string>
     <string name="toast_device_admin_required">デバイス管理を有効にしてください</string>
 
     <!-- Intro -->
@@ -74,7 +74,6 @@
     <string name="pref_title__desktop_show_label">ラベル</string>
     <string name="pref_summary__desktop_show_label">デスクトップにアプリとフォルダー名を表示します。</string>
 
-    <string name="pref_title__dock_size">サイズ</string>
     <string name="pref_summary__dock_size">ドックサイズを設定します。</string>
     <string name="pref_title__dock_show_label">ラベル</string>
     <string name="pref_summary__dock_show_label">ドックにアプリとフォルダー名を表示します。</string>
@@ -96,7 +95,6 @@
     <string name="pref_title__desktop_folder_color">フォルダー</string>
     <string name="pref_title__drawer_label_color">ラベル</string>
 
-    <string name="pref_title__icon_size">サイズ</string>
     <string name="pref_summary__icon_size">すべてのアプリアイコンのサイズ。</string>
     <string name="pref_title__icon_pack">アイコンパック</string>
     <string name="pref_summary__icon_pack">インストールしたアイコンパックの選択。</string>

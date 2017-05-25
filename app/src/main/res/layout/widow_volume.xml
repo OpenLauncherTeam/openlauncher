@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
             android:paddingTop="8dp"
-            android:text="Ringtone"
+            android:text="@string/volume_level_ringtone"
             android:textStyle="normal|bold" />
 
         <SeekBar
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
-            android:text="Notification"
+            android:text="@string/volume_level_notification"
             android:textStyle="normal|bold" />
 
         <SeekBar
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
-            android:text="System"
+            android:text="@string/volume_level_system"
             android:textStyle="normal|bold" />
 
         <SeekBar
@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
-            android:text="Media"
+            android:text="@string/volume_level_media"
             android:textStyle="normal|bold" />
 
         <SeekBar
