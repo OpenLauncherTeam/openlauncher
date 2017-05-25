@@ -90,7 +90,7 @@
     <string name="pref_title__desktop_background_color">Background</string>
     <string name="pref_title__desktop_folder_color">Folder</string>
 
-    <string name="pref_title__dock_size">Size</string>
+    <string name="pref_title__dock_size" translatable="false">@string/pref_title__size</string>
     <string name="pref_summary__dock_size">Set the dock size.</string>
     <string name="pref_title__dock_show_label">Show Labels</string>
     <string name="pref_summary__dock_show_label">Named apps and folders.</string>
@@ -120,7 +120,7 @@
     <string name="pref_title__desktop_pinch">Pinch</string>
     <string name="pref_title__desktop_unpinch">Unpinch</string>
 
-    <string name="pref_title__icon_size">Size</string>
+    <string name="pref_title__icon_size" translatable="false">@string/pref_title__size</string>
     <string name="pref_summary__icon_size">Size of all app icons.</string>
     <string name="pref_title__icon_pack">Icon Pack</string>
     <string name="pref_summary__icon_pack">Select an installed icon pack.</string>

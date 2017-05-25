@@ -41,7 +41,7 @@ android {
 
     lintOptions {
         disable 'MissingTranslation'
-        disable 'ExtraTranslation'
+        //disable 'ExtraTranslation'
     }
 
     buildTypes {
