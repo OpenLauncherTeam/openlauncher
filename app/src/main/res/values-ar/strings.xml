@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Titles -->
+    <string name="settings">الإعدادات</string>
+    <string name="minibar">الشريط المصغر</string>
+    <string name="pref_title__about">حول</string>
+
+    <!-- Drag Option View -->
+
+    <string name="edit">تعديل</string>
+    <string name="info">معلومات</string>
+    <string name="uninstall">إلغاء التثبيت</string>
+    <string name="remove">إزالة</string>
+
+    <!-- Desktop Option View -->
+    <string name="home">الرئيسية</string>
+    <string name="action">عمل</string>
+    <string name="lock">قفل</string>
+    <string name="widget">أداة</string>
+
+    <!-- Toasts -->
+
+    <string name="toast_not_enough_space">المساحة غير كافية</string>
+    <string name="toast_app_uninstalled">تم إلغاء تثبيت التطبيق</string>
+    <string name="toast_free_ram">الرام الفارغ: %2$d ميجا بايت، تم تحرير %1$d ميجا بايت</string>
+    <string name="toast_free_all_ram">الرام الفارغ: %1$d ميجا بايت، الرام في أفضل حالة.</string>
+    <string name="toast_device_admin_required">من فضلك، قم بتفعيل صلاحية مدير الجهاز.</string>
+
+    <!-- Intro -->
+
+    <string name="intro_skip">تخطي</string>
+    <string name="intro_finish">هيا نبدأ</string>
+    <string name="intro1_text">شكرا على اختيارك أوبن لانشر، إنه مفتوح المصدر بشكل كامل ولا زال قيد التطوير حاليا. \n
+ هذه مقدمة بسيطة لكيفية استخدامه.</string>
+    <string name="intro2_text">المس الشاشة من اليسار لليمين في الصفحة الرئيسية لعرض الشريط المصغر. حيث تجد الإعدادات، يمكنك تغيير صورة الخلفية، وفعل الكثير من الأشياء.</string>
+    <string name="intro3_title">الإعدادات</string>
+    <string name="intro3_text">تستطيع ضبط سطح المكتب، درج التطبيقات، وشريط التطبيقات. جرب الآن!</string>
+
+    <!-- Minibar -->
+
+    <string name="minibar_0">تغيير تخطيط الشريط المصغر</string>
+    <string name="minibar_1">تعيين صورة الخلفية وإضافة تأثير الضبابية</string>
+    <string name="minibar_2">إغلاق الشاشة فورا، صلاحية مدير الجهاز مطلوبة</string>
+    <string name="minibar_3">تنظيف الرام عن طريق الإغلاق الإجباري للتطبيقات التي تعمل</string>
+    <string name="minibar_4">اختصار لإعدادات الجهاز</string>
+    <string name="minibar_5">اختصار لإعدادات أوبن لانشر</string>
+    <string name="minibar_7">عرض صندوق التحكم بالصوت</string>
+    <string name="minibar_8">فتح درج التطبيقات</string>
+
+    <!-- About -->
+
+    <string name="about_libs">المكتبات مفتوحة المصدر</string>
+    <string name="about_rate">تقييم</string>
+    <string name="about_credit">المساهمون</string>
+    <string name="about_credit_text_all_contributors">كل المساهمين</string>
+
+    <!-- Settings -->
+
+    <string name="pref_title__desktop">سطح المكتب</string>
+    <string name="pref_title__dock">شريط التطبيقات</string>
+    <string name="pref_title__app_drawer">درج التطبيقات</string>
+    <string name="pref_title__gestures">الإيماءات</string>
+    <string name="pref_title__icons">أيقونات</string>
+    <string name="pref_title__miscellaneous">متنوعة</string>
+
+    <string name="pref_title__size">الحجم</string>
+    <string name="pref_title__appearance">المظهر</string>
+    <string name="pref_title__color">الألوان</string>
+
+    <string name="pref_summary__minibar">ضبط ترتيب ورؤية عناصر الشريط المصغر</string>
+    <string name="pref_title__search_bar_enable">شريط البحث</string>
+    <string name="pref_summary__search_bar_enable">إظهار شريط البحث أعلى سطح المكتب</string>
+    <string name="pref_title__desktop_fullscreen">ملء الشاشة</string>
+    <string name="pref_summary__desktop_fullscreen">تفعيل وضع ملء الشاشة لسطح المكتب</string>
+    <string name="pref_title__desktop_show_position_indicator">مؤشر المكان</string>
+    <string name="pref_summary__desktop_show_position_indicator">عرض مؤشر الصفحة أسفل سطح المكتب</string>
+    <string name="pref_title__desktop_show_label">إظهار التصنيفات</string>
+    <string name="pref_summary__desktop_show_label">التطبيقات والمجلدات المسماة</string>
+    <string name="pref_title__desktop_background_color">الخلفية</string>
+    <string name="pref_title__desktop_folder_color">مجلد</string>
+
+    <string name="pref_title__dock_show_label">إظهار التصنيفات</string>
+    <string name="pref_summary__dock_show_label">التطبيقات والمجلدات المسماة</string>
+    <string name="pref_title__dock_background_color">الخلفية</string>
+
+    <string name="pref_title__drawer_style">التصميم</string>
+    <string name="pref_summary__drawer_style">الاختيار بين درج التطبيق المقسم إلى صفحات وبين المقسم إلى أعمدة.</string>
+    <string name="pref_title__hide_apps">إخفاء التطبيقات</string>
+    <string name="pref_summary__hide_apps">إخفاء التطبيقات المحددة من المشغل.</string>
+    <string name="pref_title__drawer_show_card_view">عرض البطاقة</string>
+    <string name="pref_summary__drawer_show_card_view">إظهار طريقة عرض البطاقة أعلى درج التطبيقات .</string>
+    <string name="pref_title__drawer_remember_position">تذكر آخر صفحة</string>
+    <string name="pref_summary__drawer_remember_position">احتفظ بمكان الصفحة الحالية في درج التطبيقات</string>
+    <string name="pref_title__drawer_show_position_indicator">مؤشر المكان</string>
+    <string name="pref_summary__drawer_show_position_indicator">عرض مؤشر الصفحة أو شريط التمرير حسب النمط.</string>
+    <string name="pref_title__drawer_show_label">إظهار التصنيفات</string>
+    <string name="pref_summary__drawer_show_label">أيقونات التطبيقات المسماة</string>
+    <string name="pref_title__drawer_background_color">الخلفية</string>
+    <string name="pref_title__drawer_card_color">عرض البطاقة</string>
+    <string name="pref_title__drawer_label_color">التصنيف</string>
+
+    <string name="pref_title__dock_swipe_up">اسحب الدرج بسرعة</string>
+    <string name="pref_summary__dock_swipe_up">اسحب شريط التطبيقات لأعلى لكي تفتح درج التطبيقات</string>
+    <string name="pref_title__desktop_double_tap">اللمس المزدوج</string>
+    <string name="pref_title__desktop_swipe_up">اسحب لأعلى</string>
+    <string name="pref_title__desktop_swipe_down">اسحب لأسفل</string>
+    <string name="pref_title__desktop_pinch">سحب بإصبعين للداخل</string>
+    <string name="pref_title__desktop_unpinch">اسحب بإصبعين للخارج</string>
+
+    <string name="pref_title__icon_pack">حزمة أيقونات</string>
+    <string name="pref_summary__icon_pack">اختر حزمة أيقونات مثبتة</string>
+
+    <string name="pref_title__backup">نسخ احتياطي</string>
+    <string name="pref_summary__backup">النسخ الاحتياطي والاسترجاع</string>
+    <string name="pref_title__clear_database">حذف قاعدة البيانات</string>
+    <string name="pref_summary__clear_database">حذف بيانات شريط التطبيقات وسطح المكتب لإصلاح الأخطاء</string>
+    <string name="pref_title__restart">إعادة التشغيل</string>
+    <string name="pref_summary__restart">إعادة تشغيل اللانشر في حالة إظهار أخطاء</string>
+
+    <!-- Preference Keys -->
+    <string name="pref_key__outer_cat_interfaces">الواجهات</string>
+    <string name="pref_key__outer_cat_inputs">المدخلات</string>
+    <string name="pref_key__outer_cat_feels">الشعور</string>
+    <string name="pref_key__outer_cat_others">أخرى</string>
+    <string name="vertical_scroll_drawer">أفقي (متعدد الصفحات)</string>
+    <string name="horizontal_paged_drawer">رأسي</string>
+
+
+    <!-- Internal Keys -->
+
+
+    <!-- Item Labels -->
+
+    <string name="group">غير مسمى</string>
+    <string name="app_drawer">كل التطبيقات</string>
+
+    <!-- Dialogs -->
+
+    <string name="request_dummy_text">مرحبا بالعالم!</string>
+    <string name="request_toast">لم يتم اختيار تطبيقات، هل تود إظهار كافة التطبيقات في الدرج؟</string>
+    <string name="on">تشغيل</string>
+    <string name="off">إيقاف</string>
+    <string name="cancel">إلغاء الأمر</string>
+    <string name="ok">حسنا</string>
+    <string name="wallpaper">صورة الخلفية</string>
+    <string name="wallpaper_pick">اختر صورة الخلفية</string>
+    <string name="wallpaper_unable_to_blur">لا يمكن التعتيم</string>
+    <string name="dialog__icon_pack_title">اختر حزمة الأيقونات</string>
+    <string name="dialog__icon_pack_info_toast">تعذر جلب صورة الأيقونة بدون صلاحية قراءة الذاكرة</string>
+    <string name="dialog__backup_app_settings__backup">نسخة احتياطية</string>
+    <string name="dialog__backup_app_settings__restore">استعادة</string>
+    <string name="dialog__backup_app_settings__success">تم</string>
+    <string name="dialog__backup_app_settings__error">هناك خطأ ما.</string>
+    <string name="columns">الأعمدة</string>
+    <string name="rows">صفوف</string>
+    <string name="search_online">البحث عبر الإنترنت</string>
+</resources>
