@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entries__gestures">
+        <item>Нет</item>
+        <item>Настройки мини-бара</item>
+        <item>Установить обои</item>
+        <item>Заблокировать экран</item>
+        <item>Очистить оперативную память</item>
+        <item>Настройки устройства</item>
+        <item>Настройки лаунчера</item>
+        <item>Настройки громкости</item>
+        <item>Открыть меню приложений</item>
+        <item>Запустить приложение</item>
+    </string-array>
+
+    <string-array name="desktopActionEntries">
+        <item>Меню приложений</item>
+    </string-array>
+
+    <string-array name="entries__drawer_modes">
+        <item>Горизонтальный (постраничный)</item>
+        <item>Вертикальный</item>
+    </string-array>
+
+    <string-array name="wallpaperOptionEntries">
+        <item>Установить обои</item>
+        <item>Размыть обои</item>
+    </string-array>
+</resources>

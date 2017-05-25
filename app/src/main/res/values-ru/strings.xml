@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="settings">Настройки</string>
+    <string name="pref_title__about">О программе</string>
+
+    <string name="info">Информация</string>
+    <string name="action">Действие</string>
+    <string name="widget">Виджет</string>
+
+    <string name="toast_not_enough_space">Недостаточно места</string>
+    <string name="intro_skip">Пропустить</string>
+    <string name="intro_finish">Давайте начнём.</string>
+    <string name="intro3_title">Настройки</string>
+    <string name="minibar_7">Отображает регуляторы громкости.</string>
+    <string name="minibar_8">Открывает меню приложений.</string>
+
+    <string name="about_libs">Библиотеки с открытым исходным кодом</string>
+    <string name="about_credit">Участники</string>
+    <string name="about_credit_text_all_contributors">Все участники</string>
+    <string name="pref_title__desktop">Рабочий стол</string>
+    <string name="pref_title__app_drawer">Меню приложений</string>
+    <string name="pref_title__gestures">Жесты</string>
+    <string name="pref_title__icons">Значки</string>
+    <string name="pref_title__miscellaneous">Разное</string>
+
+    <string name="pref_title__size">Размер</string>
+    <string name="pref_title__appearance">Внешний вид</string>
+    <string name="pref_title__color">Цвета</string>
+
+    <string name="pref_title__search_bar_enable">Строка поиска</string>
+    <string name="pref_title__desktop_background_color">Фон</string>
+    <string name="pref_title__desktop_folder_color">Папка</string>
+
+    <string name="pref_title__dock_size">Размер</string>
+    <string name="pref_title__dock_background_color">Фон</string>
+
+    <string name="pref_title__drawer_style">Стиль</string>
+    <string name="pref_title__drawer_background_color">Фон</string>
+    <string name="pref_title__desktop_pinch"/>
+    <string name="pref_title__desktop_unpinch"/>
+
+    <string name="pref_title__icon_size">Размер</string>
+    <string name="pref_title__backup">Резервное копирование</string>
+    <string name="pref_summary__backup">Резервное копирование и восстановление настроек.</string>
+    <string name="pref_title__clear_database">Очистить базу данных</string>
+    <string name="pref_title__restart">Перезапустить</string>
+    <string name="pref_key__outer_cat_interfaces">Интерфейсы</string>
+    <string name="pref_key__outer_cat_others">Другое</string>
+
+
+    <string name="cancel">Отмена</string>
+    <string name="ok">OK</string>
+    <string name="wallpaper">Обои</string>
+    <string name="wallpaper_unable_to_blur">Не удалось размыть</string>
+    <string name="dialog__backup_app_settings__restore">Восстановить</string>
+    <string name="dialog__backup_app_settings__success">Готово.</string>
+    <string name="dialog__backup_app_settings__error">Что-то пошло не так.</string>
+    <string name="columns">Столбцы</string>
+    <string name="rows">Строки</string>
+    <string name="pref_summary__search_bar_enable">Показывать строку поиска на рабочем столе.</string>
+    <string name="pref_title__dock">Док</string>
+    <string name="pref_summary__dock_size">Установить размер дока.</string>
+    <string name="pref_summary__clear_database">Удалить данные дока и рабочего стола, чтобы исправить проблемы.</string>
+    <string name="pref_summary__restart">Перезапустить лаунчер, если он странно себя ведёт.</string>
+
+    <string name="dialog__backup_app_settings__backup">Создать резервную копию</string>
+    <string name="about_rate">Оценить</string>
+    <string name="pref_summary__icon_size">Размер всех значков приложений.</string>
+    <string name="pref_title__icon_pack">Набор значков</string>
+    <string name="dialog__icon_pack_title">Выберите набор значков</string>
+    <string name="pref_summary__desktop_show_position_indicator">Показать индикатор страниц внизу рабочего стола.</string>
+    <string name="pref_summary__drawer_show_position_indicator">Показывать индикатор страниц или полосу прокрутки в зависимости от стиля.</string>
+    <string name="pref_summary__icon_pack">Выбрать установленный набор значков.</string>
+
+    <string name="columns_landscape">Столбцы (в альбомной ориентации)</string>
+    <string name="rows_landscape">Строки (в альбомной ориентации)</string>
+    <string name="pref_title__drawer_show_position_indicator">Индикатор страниц</string>
+    <string name="pref_title__desktop_show_position_indicator">Индикатор страниц</string>
+    <string name="remove">Убрать</string>
+
+    <string name="uninstall">Удалить</string>
+    <string name="toast_app_uninstalled">Приложение удалено.</string>
+    <string name="pref_title__hide_apps">Скрыть приложения</string>
+    <string name="pref_summary__hide_apps">Скрыть выбранные приложения из лаунчера.</string>
+    <string name="pref_summary__drawer_style">Выбрать между постраничным и вертикальным меню приложений.</string>
+    <string name="pref_title__drawer_remember_position">Запоминать последнюю страницу</string>
+    <string name="pref_summary__drawer_remember_position">Отслеживать текущую страницу в меню приложений.</string>
+    <string name="pref_title__desktop_fullscreen">Полноэкранный режим</string>
+    <string name="pref_summary__desktop_fullscreen">Использовать полноэкранный режим для рабочего стола.</string>
+    <string name="minibar_4">Быстрый доступ к настройкам устройства.</string>
+    <string name="minibar_5">Быстрый доступ к настройкам OpenLauncher.</string>
+    <string name="on">Вкл</string>
+    <string name="off">Выкл</string>
+    <string name="search_online">ПОИСК В СЕТИ</string>
+<string name="minibar_2">Заблокировать экран, требует прав администратора устройства.</string>
+    <string name="minibar_3">Освободить оперативную память, принудительно завершив другие запущенные службы.</string>
+    <string name="pref_key__outer_cat_inputs">Ввод</string>
+    <string name="edit">Изменить</string>
+    <string name="pref_title__desktop_show_label">Показывать подписи</string>
+    <string name="pref_title__dock_show_label">Показывать подписи</string>
+    <string name="pref_title__drawer_show_label">Показывать подписи</string>
+    <string name="pref_title__drawer_label_color">Подпись</string>
+
+    <string name="app_drawer">Все приложения</string>
+
+    <string name="group">Без имени</string>
+    <string name="toast_free_ram" formatted="false">Свободной памяти: %d МБ, освобождено %d МБ</string>
+    <string name="toast_free_all_ram" formatted="false">Свободной памяти: %d МБ, состояние наилучшее</string>
+    <string name="intro3_text">Вы можете настроить рабочий стол, меню приложений и док… Просто попробуйте!</string>
+
+    <string name="intro1_text">Спасибо, что выбрали OpenLauncher. Это приложение с полностью открытым исходным кодом, пока находящееся в разработке.
+ Вот несколько слов об его использовании…</string>
+    <string name="intro2_text">Проведите пальцем слева направо от левой границы рабочего стола, чтобы открыть мини-бар. Там можно найти настройки,
+ сменить обои и сделать много других вещей.</string>
+    <string name="minibar">Мини-бар</string>
+    <string name="minibar_1">Установить и размыть обои</string>
+    <string name="pref_summary__minibar">Изменить порядок и видимость элементов мини-бара.</string>
+    <string name="wallpaper_pick">Выберите обои</string>
+    <string name="pref_summary__dock_swipe_up">Проведите пальцем вверх из дока, чтобы открыть меню приложений.</string>
+    <string name="pref_title__dock_swipe_up">Открывать меню жестом</string>
+    <string name="pref_title__desktop_double_tap">Двойное нажатие</string>
+    <string name="request_please_wait2">Поиск установленных приложений. Подождите.</string>
+    <string name="request_toast">Приложения не выбраны. Показать в меню все приложения?</string>
+    <string name="dialog__icon_pack_info_toast">Не удалось захватить значок без разрешения READ_EXTERNAL_STORAGE.</string>
+    </resources>
