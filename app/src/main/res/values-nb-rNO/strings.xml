@@ -138,7 +138,7 @@
     <!-- Dialogs -->
 
     <string name="request_dummy_text">Hei verden!</string>
-    <string name="request_please_wait2">Søker etter installerte programmer. Vent.</string>
+    <string name="request_please_wait">Søker etter installerte programmer. Vent.</string>
     <string name="request_toast">Ingen programmer installert. Vis alle programmer i skuff?</string>
     <string name="on">På</string>
     <string name="off">Av</string>
@@ -155,7 +155,5 @@
     <string name="dialog__backup_app_settings__error">Noe gikk galt.</string>
     <string name="columns">Kolonner</string>
     <string name="rows">Rader</string>
-    <string name="columns_landscape">Kolonner (Liggende sideretning)</string>
-    <string name="rows_landscape">Rader (Liggende sideretning)</string>
     <string name="search_online">SØK PÅ NETT</string>
 </resources>

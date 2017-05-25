@@ -43,13 +43,13 @@
     <!-- Minibar -->
 
     <string name="minibar_0">Change the layout of the minibar.</string>
-    <string name="minibar_1">Set and blur the wallpaper.</string>
+    <string name="minibar_1">Set or blur the wallpaper.</string>
     <string name="minibar_2">Lock the screen immediately, requires device administration.</string>
     <string name="minibar_3">Free the RAM by forcibly closing other running services.</string>
     <string name="minibar_4">Shortcut to device settings.</string>
     <string name="minibar_5">Shortcut to OpenLauncher settings.</string>
-    <string name="minibar_7">Displays volume sliders.</string>
-    <string name="minibar_8">Opens app drawer.</string>
+    <string name="minibar_7">Display volume sliders.</string>
+    <string name="minibar_8">Open app drawer.</string>
 
     <!-- About -->
 
@@ -80,20 +80,20 @@
     <string name="pref_title__minibar" translatable="false">@string/minibar</string>
     <string name="pref_summary__minibar">Configure the order and visibility of minibar items.</string>
     <string name="pref_title__search_bar_enable">Search Bar</string>
-    <string name="pref_summary__search_bar_enable">Display a search bar atop the desktop.</string>
+    <string name="pref_summary__search_bar_enable">Display a search bar above the desktop.</string>
     <string name="pref_title__desktop_fullscreen">Fullscreen</string>
-    <string name="pref_summary__desktop_fullscreen">Enable fullscreen for your desktop.</string>
+    <string name="pref_summary__desktop_fullscreen">Enable fullscreen for the desktop.</string>
     <string name="pref_title__desktop_show_position_indicator">Position Indicator</string>
     <string name="pref_summary__desktop_show_position_indicator">Show the page indicator below the desktop.</string>
     <string name="pref_title__desktop_show_label">Show Labels</string>
-    <string name="pref_summary__desktop_show_label">Named apps and folders.</string>
+    <string name="pref_summary__desktop_show_label">Show item labels below their icons.</string>
     <string name="pref_title__desktop_background_color">Background</string>
     <string name="pref_title__desktop_folder_color">Folder</string>
 
     <string name="pref_title__dock_size" translatable="false">@string/pref_title__size</string>
     <string name="pref_summary__dock_size">Set the dock size.</string>
     <string name="pref_title__dock_show_label">Show Labels</string>
-    <string name="pref_summary__dock_show_label">Named apps and folders.</string>
+    <string name="pref_summary__dock_show_label">Show item labels below their icons.</string>
     <string name="pref_title__dock_background_color">Background</string>
 
     <string name="pref_title__drawer_style">Style</string>
@@ -107,7 +107,7 @@
     <string name="pref_title__drawer_show_position_indicator">Position Indicator</string>
     <string name="pref_summary__drawer_show_position_indicator">Show the page indicator or scrollbar depending on the style.</string>
     <string name="pref_title__drawer_show_label">Show Labels</string>
-    <string name="pref_summary__drawer_show_label">Named app icons.</string>
+    <string name="pref_summary__drawer_show_label">Show item labels below their icons.</string>
     <string name="pref_title__drawer_background_color">Background</string>
     <string name="pref_title__drawer_card_color">Card View</string>
     <string name="pref_title__drawer_label_color">Label</string>
@@ -207,7 +207,7 @@
     <!-- Dialogs -->
 
     <string name="request_dummy_text">Hello world!</string>
-    <string name="request_please_wait2">Searching for installed apps. Please wait.</string>
+    <string name="request_please_wait">Searching for installed apps. Please wait.</string>
     <string name="request_toast">No apps selected. Show all apps in drawer?</string>
     <string name="on">On</string>
     <string name="off">Off</string>
@@ -225,7 +225,5 @@
     <string name="dialog__backup_app_settings__error">Something went wrong.</string>
     <string name="columns">Columns</string>
     <string name="rows">Rows</string>
-    <string name="columns_landscape">Columns (Landscape)</string>
-    <string name="rows_landscape">Rows (Landscape)</string>
     <string name="search_online">SEARCH ONLINE</string>
 </resources>

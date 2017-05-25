@@ -71,8 +71,6 @@
     <string name="pref_summary__drawer_show_position_indicator">Показывать индикатор страниц или полосу прокрутки в зависимости от стиля.</string>
     <string name="pref_summary__icon_pack">Выбрать установленный набор значков.</string>
 
-    <string name="columns_landscape">Столбцы (в альбомной ориентации)</string>
-    <string name="rows_landscape">Строки (в альбомной ориентации)</string>
     <string name="pref_title__drawer_show_position_indicator">Индикатор страниц</string>
     <string name="pref_title__desktop_show_position_indicator">Индикатор страниц</string>
     <string name="remove">Убрать</string>
@@ -118,7 +116,7 @@
     <string name="pref_summary__dock_swipe_up">Проведите пальцем вверх из дока, чтобы открыть меню приложений.</string>
     <string name="pref_title__dock_swipe_up">Открывать меню жестом</string>
     <string name="pref_title__desktop_double_tap">Двойное нажатие</string>
-    <string name="request_please_wait2">Поиск установленных приложений. Подождите.</string>
+    <string name="request_please_wait">Поиск установленных приложений. Подождите.</string>
     <string name="request_toast">Приложения не выбраны. Показать в меню все приложения?</string>
     <string name="dialog__icon_pack_info_toast">Не удалось захватить значок без разрешения READ_EXTERNAL_STORAGE.</string>
     </resources>

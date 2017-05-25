@@ -111,7 +111,7 @@
     <!-- Other -->
 
     <string name="request_dummy_text">Hello world!</string>
-    <string name="request_please_wait2">インストールされたアプリを検索中。しばらくお待ちください。</string>
+    <string name="request_please_wait">インストールされたアプリを検索中。しばらくお待ちください。</string>
     <string name="request_toast">アプリが選択されていません。 ドロワーにすべてのアプリを表示しますか?</string>
     <string name="on">オン</string>
     <string name="off">オフ</string>

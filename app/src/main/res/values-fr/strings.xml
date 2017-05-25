@@ -129,7 +129,7 @@
     <!-- Dialogs -->
 
     <string name="request_dummy_text">Bonjour !</string>
-    <string name="request_please_wait2">Recherche des applis installées. Veuillez patienter.</string>
+    <string name="request_please_wait">Recherche des applis installées. Veuillez patienter.</string>
     <string name="request_toast">Aucune appli sélectionnée. Afficher toutes les applis dans le tiroir ?</string>
     <string name="on">Activé</string>
     <string name="off">Désactivé</string>
@@ -146,7 +146,5 @@
     <string name="dialog__backup_app_settings__error">Une erreur est survenue.</string>
     <string name="columns">Colonnes</string>
     <string name="rows">Lignes</string>
-    <string name="columns_landscape">Colonnes (Paysage)</string>
-    <string name="rows_landscape">Lignes (Paysage)</string>
     <string name="search_online">RECHERCHE EN LIGNE</string>
 </resources>

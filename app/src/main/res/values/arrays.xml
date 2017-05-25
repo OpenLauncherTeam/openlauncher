@@ -19,7 +19,7 @@
     </string-array>
 
     <string-array name="entries__drawer_modes">
-        <item>Horizontal (Paged)</item>
+        <item>Paged</item>
         <item>Vertical</item>
     </string-array>
 

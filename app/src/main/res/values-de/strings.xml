@@ -114,7 +114,7 @@
     //Icon hide
 
     <string name="request_dummy_text">Hello world!</string>
-    <string name="request_please_wait2">Suche nach installierten Anwendungen. Bitte warten.</string>
+    <string name="request_please_wait">Suche nach installierten Anwendungen. Bitte warten.</string>
     <string name="request_toast">Nichts ausgewählt. Alle Anwendungen im Drawer anzeigen?</string>
     <string name="minibar_0">Edit</string>
     <string name="minibar">Minibar</string>
@@ -137,8 +137,6 @@
     <string name="pref_title__clear_database">Datenbank zurücksetzen</string>
     <string name="columns">Spalten</string>
     <string name="rows">Zeilen</string>
-    <string name="columns_landscape">Spalten (Quer)</string>
-    <string name="rows_landscape">Zeilen (Quer)</string>
     <string name="search_online">ONLINE SUCHEN</string>
     <string name="pref_summary__drawer_remember_position">Die aktuelle Position im App Drawer merken</string>
     <string name="pref_summary__clear_database">Die Daten von Desktop und Dock zurücksetzen um Probleme zu beheben</string>

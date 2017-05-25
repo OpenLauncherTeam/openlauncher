@@ -31,7 +31,7 @@
                     android:layout_marginRight="@dimen/fab_margin"
                     android:fontFamily="sans-serif-condensed"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="@string/request_please_wait2"
+                    android:text="@string/request_please_wait"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
 
