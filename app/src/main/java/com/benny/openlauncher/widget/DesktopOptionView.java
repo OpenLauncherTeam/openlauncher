@@ -117,30 +117,30 @@ public class DesktopOptionView extends FrameLayout {
                             desktopOptionViewListener.onSetPageAsHome();
                             break;
                         case 1:
-                            if (!appSettings.isDesktopLocked()) {
+                            if (!appSettings.isDesktopLock()) {
                                 desktopOptionViewListener.onRemovePage();
                             } else {
                                 Tool.toast(getContext(), "Desktop is locked.");
                             }
                             break;
                         case 2:
-                            if (!appSettings.isDesktopLocked()) {
+                            if (!appSettings.isDesktopLock()) {
                                 desktopOptionViewListener.onPickWidget();
                             } else {
                                 Tool.toast(getContext(), "Desktop is locked.");
                             }
                             break;
                         case 3:
-                            if (!appSettings.isDesktopLocked()) {
+                            if (!appSettings.isDesktopLock()) {
                                 desktopOptionViewListener.onPickDesktopAction();
                             } else {
                                 Tool.toast(getContext(), "Desktop is locked.");
                             }
                             break;
                         case 4:
-                            appSettings.setDesktopLocked(!appSettings.isDesktopLocked());
+                            appSettings.setDesktopLock(!appSettings.isDesktopLock());
                             //LauncherSettings.getInstance(getContext()).generalSettings.desktopLock = !LauncherSettings.getInstance(getContext()).generalSettings.desktopLock;
-                            updateLockIcon(appSettings.isDesktopLocked());
+                            updateLockIcon(appSettings.isDesktopLock());
                             break;
                         case 5:
                             desktopOptionViewListener.onLaunchSettings();

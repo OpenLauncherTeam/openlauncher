@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherAction;
-import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
@@ -71,14 +70,14 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
             i++;
         }
 
-        boolean minBarEnable = AppSettings.get().isMinibarEnabled();
+        boolean minBarEnable = AppSettings.get().getMinibarEnable();
         enableSwitch.setChecked(minBarEnable);
         enableSwitch.setText(minBarEnable ? R.string.on : R.string.off);
         enableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 buttonView.setText(isChecked ? R.string.on : R.string.off);
-                AppSettings.get().setMinibarEnabled(isChecked);
+                AppSettings.get().setMinibarEnable(isChecked);
                 if (Home.launcher != null) {
                     Home.launcher.drawerLayout.closeDrawers();
                     Home.launcher.drawerLayout.setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);

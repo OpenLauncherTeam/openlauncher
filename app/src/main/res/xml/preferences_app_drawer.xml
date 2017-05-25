@@ -17,20 +17,6 @@
             app:maxValue="20"
             app:minValue="2" />
 
-        <com.benny.openlauncher.widget.NumberPickerPreference
-            android:defaultValue="4"
-            android:key="@string/pref_key__drawer_columns_landscape"
-            android:title="@string/columns_landscape"
-            app:maxValue="20"
-            app:minValue="2" />
-
-        <com.benny.openlauncher.widget.NumberPickerPreference
-            android:defaultValue="5"
-            android:key="@string/pref_key__drawer_rows_landscape"
-            android:title="@string/rows_landscape"
-            app:maxValue="20"
-            app:minValue="2" />
-
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title__appearance">
@@ -54,10 +40,10 @@
             android:title="@string/pref_title__drawer_show_card_view" />
 
         <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="@string/pref_key__drawer_remember_position"
-                android:summary="@string/pref_summary__drawer_remember_position"
-                android:title="@string/pref_title__drawer_remember_position" />
+            android:defaultValue="true"
+            android:key="@string/pref_key__drawer_remember_position"
+            android:summary="@string/pref_summary__drawer_remember_position"
+            android:title="@string/pref_title__drawer_remember_position" />
 
         <CheckBoxPreference
             android:defaultValue="true"

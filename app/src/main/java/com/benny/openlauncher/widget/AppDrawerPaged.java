@@ -63,13 +63,13 @@ public class AppDrawerPaged extends SmoothViewPager {
     }
 
     private void setPortraitValue() {
-        columnCellCount = AppSettings.get().getDrawerColumnCount_Portrait();
-        rowCellCount = AppSettings.get().getDrawerRowCount_Portrait();
+        columnCellCount = AppSettings.get().getDrawerColumnCount();
+        rowCellCount = AppSettings.get().getDrawerRowCount();
     }
 
     private void setLandscapeValue() {
-        columnCellCount = AppSettings.get().getDrawerColumnCount_Landscape();
-        rowCellCount = AppSettings.get().getDrawerRowCount_Landscape();
+        columnCellCount = AppSettings.get().getDrawerRowCount();
+        rowCellCount = AppSettings.get().getDrawerColumnCount();
     }
 
     private void calculatePage() {
@@ -156,7 +156,7 @@ public class AppDrawerPaged extends SmoothViewPager {
             pages.clear();
             for (int i = 0; i < getCount(); i++) {
                 ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_paged_inner, null);
-                if (!AppSettings.get().isDrawerUseCard()) {
+                if (!AppSettings.get().isDrawerShowCardView()) {
                     ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Color.TRANSPARENT);
                     ((CardView) layout.getChildAt(0)).setCardElevation(0);
                 } else {

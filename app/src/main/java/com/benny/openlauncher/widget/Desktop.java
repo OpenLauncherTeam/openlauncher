@@ -118,7 +118,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public void initDesktopNormal(Home home) {
         setAdapter(new DesktopAdapter(this));
-        if (appSettings.isDesktopShowPageIndicator() && pageIndicator != null) {
+        if (appSettings.isDesktopShowIndicator() && pageIndicator != null) {
             pageIndicator.setViewPager(this);
         }
         this.home = home;

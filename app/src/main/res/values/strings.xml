@@ -154,8 +154,6 @@
 
     <string name="pref_key__drawer_columns" translatable="false">pref_key__drawer_columns</string>
     <string name="pref_key__drawer_rows" translatable="false">pref_key__drawer_rows</string>
-    <string name="pref_key__drawer_columns_landscape" translatable="false">pref_key__drawer_columns_landscape</string>
-    <string name="pref_key__drawer_rows_landscape" translatable="false">pref_key__drawer_rows_landscape</string>
     <string name="pref_key__drawer_style" translatable="false">pref_key__drawer_style</string>
     <string name="pref_key__hidden_apps" translatable="false">pref_key__hidden_apps</string>
     <string name="pref_key__drawer_show_card_view" translatable="false">pref_key__drawer_show_card_view</string>

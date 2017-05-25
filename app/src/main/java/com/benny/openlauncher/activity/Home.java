@@ -290,7 +290,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         desktop.setDesktopEditListener(this);
 
         desktopEditOptionView.setDesktopOptionViewListener(this);
-        desktopEditOptionView.updateLockIcon(appSettings.isDesktopLocked());
+        desktopEditOptionView.updateLockIcon(appSettings.isDesktopLock());
         desktop.addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -339,7 +339,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onEnd() {
-                if (!AppSettings.get().isDrawerRememberPage()) {
+                if (!AppSettings.get().isDrawerRememberPosition()) {
                     appDrawerController.scrollToStart();
                 }
                 appDrawerController.getDrawer().setVisibility(View.INVISIBLE);
@@ -358,12 +358,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     public void updateDock(boolean show) {
-        if (appSettings.isDockEnable() && show) {
+        if (appSettings.getDockEnable() && show) {
             Tool.visibleViews(100, dock);
             ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4,this);
             ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Tool.dp2px(4,this);
         } else {
-            if (appSettings.isDockEnable()) {
+            if (appSettings.getDockEnable()) {
                 Tool.invisibleViews(100, dock);
             } else {
                 Tool.goneViews(dock);
@@ -395,10 +395,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
 
     public void updateSearchView(boolean show) {
-        if (appSettings.isDesktopSearchbarEnabled() && show) {
+        if (appSettings.getSearchBarEnable() && show) {
             Tool.visibleViews(100, clockFrame, searchBar);
         } else {
-            if (appSettings.isDesktopSearchbarEnabled()) {
+            if (appSettings.getSearchBarEnable()) {
                 Tool.invisibleViews(100, clockFrame, searchBar);
             } else {
                 Tool.goneViews(clockFrame, searchBar);
@@ -409,7 +409,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public void updateHomeLayout() {
         // set the padding for the search bar, desktop, and dock
         // update the drag option page indicator height
-        if (appSettings.isDesktopSearchbarEnabled()) {
+        if (appSettings.getSearchBarEnable()) {
             desktop.setPadding(0, Desktop.topInsert, 0, 0);
             ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInsert;
             ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = Desktop.topInsert;
@@ -476,7 +476,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     private void initSettings() {
-        if (!appSettings.isDesktopSearchbarEnabled()) {
+        if (!appSettings.getSearchBarEnable()) {
             Tool.goneViews(clockFrame, searchBar);
         }
         updateHomeLayout();
@@ -494,7 +494,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         appDrawerController.getBackground().setAlpha(0);
         appDrawerController.reloadDrawerCardTheme();
 
-        switch (appSettings.getAppDrawerMode()) {
+        switch (appSettings.getDrawerStyle()) {
             case AppDrawerController.DrawerMode.HORIZONTAL_PAGED:
                 if (!AppSettings.get().isDrawerShowIndicator()) {
                     appDrawerController.getChildAt(1).setVisibility(View.GONE);
@@ -504,7 +504,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 // handled in the AppDrawerVertical class
                 break;
         }
-        drawerLayout.setDrawerLockMode(appSettings.isMinibarEnabled() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        drawerLayout.setDrawerLockMode(appSettings.getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
 
@@ -592,7 +592,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onCollapse() {
-                Tool.visibleViews(appSettings.isDesktopSearchbarEnabled() ? clockFrame : null);
+                Tool.visibleViews(appSettings.getSearchBarEnable() ? clockFrame : null);
                 Tool.visibleViews(desktop, desktopIndicator);
                 Tool.invisibleViews(background);
 
@@ -723,7 +723,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     @Override
     protected void onResume() {
         // Restart if requested
-        if (appSettings.isAppRestartRequired()) {
+        if (appSettings.getAppRestartRequired()) {
             appSettings.setAppRestartRequired(false);
 
             Intent restartIntent = new Intent(this, Home.class);

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
@@ -175,7 +174,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             findPreference(getString(R.string.pref_key__cat_dock)).setSummary(dockSummary);
 
             String drawerSummary = "";
-            switch (settings.getAppDrawerMode()){
+            switch (settings.getDrawerStyle()){
                 case AppDrawerController.DrawerMode.HORIZONTAL_PAGED:
                     drawerSummary = "Horizontal paged drawer";
                     break;

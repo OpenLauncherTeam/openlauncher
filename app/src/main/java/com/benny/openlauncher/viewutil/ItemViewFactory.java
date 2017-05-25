@@ -172,7 +172,7 @@ public class ItemViewFactory {
                 widgetView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
-                        if (AppSettings.get().isDesktopLocked()) {
+                        if (AppSettings.get().isDesktopLock()) {
                             return false;
                         }
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);

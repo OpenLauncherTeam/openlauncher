@@ -161,7 +161,7 @@ public class AppDrawerController extends RevealFrameLayout {
     public void init() {
         if (isInEditMode()) return;
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-        drawerMode = AppSettings.get().getAppDrawerMode();
+        drawerMode = AppSettings.get().getDrawerStyle();
         switch (drawerMode) {
             case DrawerMode.HORIZONTAL_PAGED:
                 drawerViewPaged = (AppDrawerPaged) layoutInflater.inflate(R.layout.view_app_drawer_paged, this, false);
@@ -191,7 +191,7 @@ public class AppDrawerController extends RevealFrameLayout {
                 drawerViewPaged.resetAdapter();
                 break;
             case DrawerMode.VERTICAL:
-                if (!AppSettings.get().isDrawerUseCard()) {
+                if (!AppSettings.get().isDrawerShowCardView()) {
                     drawerViewGrid.setCardBackgroundColor(Color.TRANSPARENT);
                     drawerViewGrid.setCardElevation(0);
                 } else {
