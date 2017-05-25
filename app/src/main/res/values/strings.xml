@@ -213,6 +213,7 @@
     <string name="off">Off</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="version">Version</string>
     <string name="wallpaper">Wallpaper</string>
     <string name="wallpaper_pick">Pick Wallpaper</string>
     <string name="wallpaper_unable_to_blur">Unable to blur</string>

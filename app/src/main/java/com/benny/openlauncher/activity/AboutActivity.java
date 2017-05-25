@@ -51,11 +51,11 @@ public class AboutActivity extends MaterialAboutActivity {
         MaterialAboutCard.Builder titleCard = new MaterialAboutCard.Builder();
         titleCard.addItem(new MaterialAboutTitleItem(R.string.app_name, R.drawable.ic_launcher));
         try {
-            titleCard.addItem(ConvenienceBuilder.createVersionActionItem(this, getResources().getDrawable(R.drawable.ic_info_outline_dark_24dp), "Version", true));
+            titleCard.addItem(ConvenienceBuilder.createVersionActionItem(this, getResources().getDrawable(R.drawable.ic_info_outline_dark_24dp), getString(R.string.version), true));
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, getResources().getDrawable(R.drawable.ic_github_dark_24dp), "GitHub", false, Uri.parse("https://github.com/BennyKok/OpenLauncher")));
+        titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, getResources().getDrawable(R.drawable.ic_github_dark_24dp), "GitHub", false, Uri.parse("https://github.com/OpenLauncherTeam/openlauncher")));
         titleCard.addItem(new MaterialAboutActionItem(getString(R.string.about_libs), null, getResources().getDrawable(R.drawable.ic_library_gray_24dp), new MaterialAboutActionItem.OnClickListener() {
             @Override
             public void onClick() {
