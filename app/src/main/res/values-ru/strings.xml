@@ -11,8 +11,8 @@
     <string name="intro_skip">Пропустить</string>
     <string name="intro_finish">Давайте начнём.</string>
     <string name="intro3_title">Настройки</string>
-    <string name="minibar_7">Отображает регуляторы громкости.</string>
-    <string name="minibar_8">Открывает меню приложений.</string>
+    <string name="minibar_7">Отобразить регуляторы громкости.</string>
+    <string name="minibar_8">Открыть меню приложений.</string>
 
     <string name="about_libs">Библиотеки с открытым исходным кодом</string>
     <string name="about_credit">Участники</string>
@@ -35,8 +35,6 @@
 
     <string name="pref_title__drawer_style">Стиль</string>
     <string name="pref_title__drawer_background_color">Фон</string>
-    <string name="pref_title__desktop_pinch" />
-    <string name="pref_title__desktop_unpinch" />
 
     <string name="pref_title__backup">Резервное копирование</string>
     <string name="pref_summary__backup">Резервное копирование и восстановление настроек.</string>
@@ -44,7 +42,6 @@
     <string name="pref_title__restart">Перезапустить</string>
     <string name="pref_key__outer_cat_interfaces">Интерфейсы</string>
     <string name="pref_key__outer_cat_others">Другое</string>
-
 
     <string name="cancel">Отмена</string>
     <string name="ok">OK</string>
@@ -109,7 +106,7 @@
     <string name="intro2_text">Проведите пальцем слева направо от левой границы рабочего стола, чтобы открыть мини-бар. Там можно найти настройки,
  сменить обои и сделать много других вещей.</string>
     <string name="minibar">Мини-бар</string>
-    <string name="minibar_1">Установить и размыть обои</string>
+    <string name="minibar_1">Установить или размыть обои.</string>
     <string name="pref_summary__minibar">Изменить порядок и видимость элементов мини-бара.</string>
     <string name="wallpaper_pick">Выберите обои</string>
     <string name="pref_summary__dock_swipe_up">Проведите пальцем вверх из дока, чтобы открыть меню приложений.</string>
@@ -121,4 +118,18 @@
 
     <string name="horizontal_paged_drawer">Горизонтальный (постраничный)</string>
     <string name="vertical_scroll_drawer">Вертикальный</string>
+    <string name="toast_device_admin_required">Пожалуйста, разрешите администрирование устройства</string>
+
+    <string name="minibar_0">Изменить вид мини-бара.</string>
+    <string name="version">Версия</string>
+    <string name="volume_level_ringtone">Рингтон</string>
+    <string name="volume_level_notification">Уведомление</string>
+    <string name="volume_level_system">Система</string>
+    <string name="volume_level_media">Медиа</string>
+    <string name="pref_title__drawer_show_card_view">Карточка</string>
+    <string name="pref_title__drawer_card_color">Карточка</string>
+    <string name="pref_summary__drawer_show_card_view">Показывать карточку поверх фона меню.</string>
+    <string name="pref_summary__desktop_show_label">Показывать подписи под значками.</string>
+    <string name="pref_summary__dock_show_label">Показывать подписи под значками.</string>
+    <string name="pref_summary__drawer_show_label">Показывать подписи под значками.</string>
 </resources>
