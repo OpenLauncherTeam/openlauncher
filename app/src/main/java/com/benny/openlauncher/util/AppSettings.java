@@ -3,6 +3,7 @@ package com.benny.openlauncher.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 
 import com.benny.openlauncher.App;
 import com.benny.openlauncher.R;
@@ -122,6 +123,10 @@ public class AppSettings extends AppSettingsBase {
         return getInt(R.string.pref_key__drawer_label_color, Color.DKGRAY);
     }
 
+    public int getMinibarBackgroundColor() {
+        return getInt(R.string.pref_key__minibar_background_color, ContextCompat.getColor(context, R.color.colorPrimaryDark));
+    }
+
     public boolean getGestureDockSwipeUp() {
         return getBool(R.string.pref_key__dock_swipe_up, true);
     }
@@ -148,6 +153,7 @@ public class AppSettings extends AppSettingsBase {
         // MUST be committed
         prefApp.edit().putBoolean(context.getString(R.string.pref_key__first_start), value).commit();
     }
+
     public boolean isDesktopLock() {
         return getBool(R.string.pref_key__desktop_lock, false);
     }

@@ -92,7 +92,7 @@ public class Tool {
     }
 
     public static void visibleViews(View... views) {
-        if (views == null)return;
+        if (views == null) return;
         for (View view : views) {
             if (view == null) continue;
             view.setVisibility(View.VISIBLE);
@@ -101,7 +101,7 @@ public class Tool {
     }
 
     public static void visibleViews(long duration, View... views) {
-        if (views == null)return;
+        if (views == null) return;
         for (View view : views) {
             if (view == null) continue;
             view.setVisibility(View.VISIBLE);
@@ -110,7 +110,7 @@ public class Tool {
     }
 
     public static void invisibleViews(View... views) {
-        if (views == null)return;
+        if (views == null) return;
         for (final View view : views) {
             if (view == null) continue;
             view.animate().alpha(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
@@ -123,7 +123,7 @@ public class Tool {
     }
 
     public static void invisibleViews(long duration, View... views) {
-        if (views == null)return;
+        if (views == null) return;
         for (final View view : views) {
             if (view == null) continue;
             view.animate().alpha(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
@@ -136,7 +136,7 @@ public class Tool {
     }
 
     public static void goneViews(View... views) {
-        if (views == null)return;
+        if (views == null) return;
         for (final View view : views) {
             if (view == null) continue;
             view.animate().alpha(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
@@ -149,7 +149,7 @@ public class Tool {
     }
 
     public static void goneViews(long duration, View... views) {
-        if (views == null)return;
+        if (views == null) return;
         for (final View view : views) {
             if (view == null) continue;
             view.animate().alpha(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
@@ -214,6 +214,15 @@ public class Tool {
         }
         contactLookupCursor.close();
         return phoneContactID;
+    }
+
+    public static int factorColorBrightness(int color, int brightnessFactorPercent) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+        hsv[2] *= brightnessFactorPercent / 100.0;
+        hsv[2] = (hsv[2]) > 255 ? 255 : hsv[2];
+        color = Color.HSVToColor(hsv);
+        return color;
     }
 
     public static Integer fetchThumbnailId(Context context, String phoneNumber) {

@@ -42,10 +42,10 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.AppUpdateReceiver;
 import com.benny.openlauncher.util.DatabaseHelper;
-import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.viewutil.DragNavigationControl;
 import com.benny.openlauncher.viewutil.IconListAdapter;
 import com.benny.openlauncher.viewutil.QuickCenterItem;
@@ -145,6 +145,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public ConstraintLayout baseLayout;
     @BindView(R.id.minibar)
     public SwipeListView minibar;
+    @BindView(R.id.minibar_background)
+    public FrameLayout minibarBackground;
     @BindView(R.id.drawer_layout)
     public DrawerLayout drawerLayout;
     @BindView(R.id.miniPopup)
@@ -353,15 +355,15 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public void updateDock(boolean show) {
         if (appSettings.getDockEnable() && show) {
             Tool.visibleViews(100, dock);
-            ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4,this);
-            ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Tool.dp2px(4,this);
+            ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
+            ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
         } else {
             if (appSettings.getDockEnable()) {
                 Tool.invisibleViews(100, dock);
             } else {
                 Tool.goneViews(dock);
-                ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Desktop.bottomInset + Tool.dp2px(4,this);
-                ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4,this);
+                ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Desktop.bottomInset + Tool.dp2px(4, this);
+                ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
             }
         }
     }
@@ -371,7 +373,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         dragOptionView.resetAutoHideView();
 
         Tool.visibleViews(100, desktopEditOptionView);
-        Tool.invisibleViews(100,desktopIndicator);
+        Tool.invisibleViews(100, desktopIndicator);
         updateDock(false);
         updateSearchView(false);
     }
@@ -537,6 +539,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 }
             }
         });
+        minibar.setBackgroundColor(appSettings.getMinibarBackgroundColor());
+        minibarBackground.setBackgroundColor(Tool.factorColorBrightness(appSettings.getMinibarBackgroundColor(), 115));
     }
 
     private void initQuickCenter() {
