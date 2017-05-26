@@ -208,7 +208,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 String key = preference.getKey();
 
                 if (key.equals(getString(R.string.pref_key__minibar))) {
-                    LauncherAction.RunAction(LauncherAction.Action.EditMinBar, getActivity().getApplicationContext());
+                    LauncherAction.RunAction(LauncherAction.Action.EditMinBar, getActivity());
                     return true;
                 }
             }
