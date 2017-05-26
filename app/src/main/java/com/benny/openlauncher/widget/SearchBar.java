@@ -23,7 +23,7 @@ import android.widget.FrameLayout;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.viewutil.CircleColorable;
+import com.benny.openlauncher.viewutil.CircleDrawable;
 import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -39,8 +39,8 @@ public class SearchBar extends FrameLayout {
 
     private static final long ANIM_TIME = 200;
     public AppCompatImageView searchButton;
-    public AppCompatEditText searchBox;
-    public RecyclerView searchItemRecycler;
+    public AppCompatEditText searchInput;
+    public RecyclerView searchRecycler;
     private FastItemAdapter<IconLabelItem> adapter = new FastItemAdapter<>();
     private boolean expanded;
     private CallBack callBack;
@@ -71,48 +71,43 @@ public class SearchBar extends FrameLayout {
     }
 
     private void init() {
+        final CircleDrawable icon = new CircleDrawable(getContext(), getResources().getDrawable(R.drawable.ic_search_light_24dp), Color.BLACK);
         searchButton = new AppCompatImageView(getContext());
-        final CircleColorable imageDrawable = new CircleColorable(getContext(), getResources().getDrawable(R.drawable.ic_search_light_24dp), Color.BLACK);
-        searchButton.setImageDrawable(imageDrawable);
+        searchButton.setImageDrawable(icon);
         searchButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 expanded = !expanded;
-
                 if (expanded) {
-                    if (callBack != null)
+                    if (callBack != null) {
                         callBack.onExpand();
-
-                    imageDrawable.setIcon(getResources().getDrawable(R.drawable.ic_clear_white_24dp));
-
-                    Tool.visibleViews(ANIM_TIME, searchBox, searchItemRecycler);
+                    }
+                    icon.setIcon(getResources().getDrawable(R.drawable.ic_clear_white_24dp));
+                    Tool.visibleViews(ANIM_TIME, searchInput, searchRecycler);
                 } else {
-                    if (callBack != null)
+                    if (callBack != null) {
                         callBack.onCollapse();
-
-                    imageDrawable.setIcon(getResources().getDrawable(R.drawable.ic_search_light_24dp));
-
-                    searchBox.getText().clear();
-                    Tool.invisibleViews(ANIM_TIME, searchBox, searchItemRecycler);
+                    }
+                    icon.setIcon(getResources().getDrawable(R.drawable.ic_search_light_24dp));
+                    Tool.invisibleViews(ANIM_TIME, searchInput, searchRecycler);
+                    searchInput.getText().clear();
                 }
             }
         });
-        LayoutParams sblp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        sblp.setMargins(0, Tool.dp2px(16, getContext()), Tool.dp2px(4, getContext()), 0);
-        sblp.gravity = Gravity.END;
+        LayoutParams buttonParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        buttonParams.setMargins(0, Tool.dp2px(16, getContext()), Tool.dp2px(4, getContext()), 0);
+        buttonParams.gravity = Gravity.END;
 
-
-        searchBox = new AppCompatEditText(getContext());
-        searchBox.setVisibility(View.INVISIBLE);
-        searchBox.setBackground(null);
-        searchBox.setHint("Search...");
-        searchBox.setHintTextColor(Color.WHITE);
-        searchBox.setTextColor(Color.WHITE);
-        searchBox.setSingleLine();
-        searchBox.addTextChangedListener(new TextWatcher() {
+        searchInput = new AppCompatEditText(getContext());
+        searchInput.setVisibility(View.INVISIBLE);
+        searchInput.setBackground(null);
+        searchInput.setHint("Search...");
+        searchInput.setHintTextColor(Color.WHITE);
+        searchInput.setTextColor(Color.WHITE);
+        searchInput.setSingleLine();
+        searchInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -124,15 +119,14 @@ public class SearchBar extends FrameLayout {
             public void afterTextChanged(Editable s) {
             }
         });
-        LayoutParams sboxlp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        sboxlp.setMargins(Tool.dp2px(8, getContext()), Tool.dp2px(12, getContext()), 0, 0);
+        LayoutParams inputParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        inputParams.setMargins(Tool.dp2px(8, getContext()), Tool.dp2px(12, getContext()), 0, 0);
 
-
-        searchItemRecycler = new RecyclerView(getContext());
-        searchItemRecycler.setVisibility(INVISIBLE);
-        searchItemRecycler.setAdapter(adapter);
-        searchItemRecycler.setClipToPadding(false);
-        searchItemRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        searchRecycler = new RecyclerView(getContext());
+        searchRecycler.setVisibility(View.INVISIBLE);
+        searchRecycler.setAdapter(adapter);
+        searchRecycler.setClipToPadding(false);
+        searchRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         final int dp8 = Tool.dp2px(8, getContext());
         final int dp36 = Tool.dp2px(36, getContext());
         AppManager.getInstance(getContext()).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
@@ -143,8 +137,8 @@ public class SearchBar extends FrameLayout {
                 items.add(new IconLabelItem(getContext(), null, getContext().getString(R.string.search_online), new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        callBack.onInternetSearch(searchBox.getText().toString());
-                        searchBox.getText().clear();
+                        callBack.onInternetSearch(searchInput.getText().toString());
+                        searchInput.getText().clear();
                     }
                 }, Color.WHITE, dp8, dp36, true,Gravity.END));
                 for (int i = 0; i < apps.size(); i++) {
@@ -173,19 +167,17 @@ public class SearchBar extends FrameLayout {
                     return true;
             }
         });
-        final LayoutParams sirlp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final LayoutParams recyclerParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        addView(searchItemRecycler, sirlp);
-        addView(searchBox, sboxlp);
-        addView(searchButton, sblp);
+        addView(searchButton, buttonParams);
+        addView(searchInput, inputParams);
+        addView(searchRecycler, recyclerParams);
 
-
-        searchBox.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        searchInput.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                searchBox.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
-                sirlp.setMargins(0, Tool.dp2px(12, getContext()) + searchBox.getHeight(), 0, 0);
+                searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                recyclerParams.setMargins(0, Tool.dp2px(12, getContext()) + searchInput.getHeight(), 0, 0);
             }
         });
     }
@@ -193,11 +185,9 @@ public class SearchBar extends FrameLayout {
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            setPadding(0, insets.getSystemWindowInsetTop(), 0, 0);
-            searchItemRecycler.setPadding(searchItemRecycler.getPaddingLeft(), searchItemRecycler.getPaddingTop(), searchItemRecycler.getPaddingRight(), searchItemRecycler.getPaddingBottom() + insets.getSystemWindowInsetBottom());
-            return insets;
+            setPadding(0, insets.getSystemWindowInsetTop(), 0, insets.getSystemWindowInsetBottom());
         }
-        return super.onApplyWindowInsets(insets);
+        return insets;
     }
 
     public interface CallBack {
@@ -207,5 +197,4 @@ public class SearchBar extends FrameLayout {
 
         void onCollapse();
     }
-
 }

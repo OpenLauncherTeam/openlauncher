@@ -10,7 +10,7 @@ import android.graphics.drawable.Drawable;
 
 import com.benny.openlauncher.util.Tool;
 
-public class CircleColorable extends Drawable {
+public class CircleDrawable extends Drawable {
 
     private int iconSize;
     private int iconSizeReal;
@@ -24,7 +24,7 @@ public class CircleColorable extends Drawable {
     private float currentScale = 1f;
     private boolean hidingOldIcon;
 
-    public CircleColorable(Context context, Drawable icon, int color) {
+    public CircleDrawable(Context context, Drawable icon, int color) {
         this.icon = Tool.drawableToBitmap(icon);
 
         iconPadding = Tool.dp2px(6, context);

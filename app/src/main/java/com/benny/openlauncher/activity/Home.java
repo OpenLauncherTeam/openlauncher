@@ -367,7 +367,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 Tool.invisibleViews(100, dock);
             } else {
                 Tool.goneViews(dock);
-                ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Desktop.bottomInsert + Tool.dp2px(4,this);
+                ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Desktop.bottomInset + Tool.dp2px(4,this);
                 ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4,this);
             }
         }
@@ -410,9 +410,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         // set the padding for the search bar, desktop, and dock
         // update the drag option page indicator height
         if (appSettings.getSearchBarEnable()) {
-            desktop.setPadding(0, Desktop.topInsert, 0, 0);
-            ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInsert;
-            ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = Desktop.topInsert;
+            desktop.setPadding(0, Desktop.topInset, 0, 0);
+            ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInset;
+            ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = Desktop.topInset;
         } else {
             desktop.setPadding(0, 0, 0, 0);
             ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = 0;
@@ -583,11 +583,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
                 updateDock(false);
 
-                searchBar.searchBox.setFocusable(true);
-                searchBar.searchBox.setFocusableInTouchMode(true);
-                searchBar.searchBox.requestFocus();
+                searchBar.searchInput.setFocusable(true);
+                searchBar.searchInput.setFocusableInTouchMode(true);
+                searchBar.searchInput.requestFocus();
 
-                Tool.showKeyboard(Home.this, searchBar.searchBox);
+                Tool.showKeyboard(Home.this, searchBar.searchInput);
             }
 
             @Override
@@ -598,9 +598,9 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
                 updateDock(true);
 
-                searchBar.searchBox.clearFocus();
+                searchBar.searchInput.clearFocus();
 
-                Tool.hideKeyboard(Home.this, searchBar.searchBox);
+                Tool.hideKeyboard(Home.this, searchBar.searchInput);
             }
         });
 

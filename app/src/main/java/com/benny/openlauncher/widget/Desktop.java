@@ -48,8 +48,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     private Home home;
     private PagerIndicator pageIndicator;
 
-    public static int topInsert;
-    public static int bottomInsert;
+    public static int topInset;
+    public static int bottomInset;
 
     public Desktop(Context c) {
         this(c, null);
@@ -516,9 +516,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            topInsert = insets.getSystemWindowInsetTop();
-            bottomInsert = insets.getSystemWindowInsetBottom();
-            return insets;
+            topInset = insets.getSystemWindowInsetTop();
+            bottomInset = insets.getSystemWindowInsetBottom();
+            setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), getPaddingBottom());
         }
         return insets;
     }
@@ -527,7 +527,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         if (item == null || dropItem == null) {
             return false;
         }
-
         switch (item.type) {
             case APP:
             case SHORTCUT:
