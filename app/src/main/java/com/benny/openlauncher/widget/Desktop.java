@@ -519,6 +519,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             topInset = insets.getSystemWindowInsetTop();
             bottomInset = insets.getSystemWindowInsetBottom();
             setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), getPaddingBottom());
+            Home.launcher.updateHomeLayout();
         }
         return insets;
     }

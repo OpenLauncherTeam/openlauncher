@@ -69,7 +69,7 @@ public class MiniPopupView extends RevealFrameLayout {
                 break;
             case VolumeDialog:
                 AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
-                window = LayoutInflater.from(getContext()).inflate(R.layout.widow_volume, this, false);
+                window = LayoutInflater.from(getContext()).inflate(R.layout.window_volume, this, false);
                 VolumeDialogViewHolder volumeDialogViewHolder = new VolumeDialogViewHolder(window);
                 volumeDialogViewHolder.sbRingtone.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_RING));
                 volumeDialogViewHolder.sbNotification.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION));

@@ -167,7 +167,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             bottomInset = insets.getSystemWindowInsetBottom();
-            setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), bottomInset + Tool.dp2px(10, getContext()));
+            setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), getPaddingBottom() + bottomInset);
         }
         return insets;
     }

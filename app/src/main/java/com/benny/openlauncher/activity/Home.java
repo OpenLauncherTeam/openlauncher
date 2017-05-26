@@ -26,7 +26,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
@@ -118,16 +116,12 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     private final BroadcastReceiver appUpdateReceiver = new AppUpdateReceiver();
     @BindView(R.id.desktop)
     public Desktop desktop;
-    @BindView(R.id.clockFrame)
-    public FrameLayout clockFrame;
-    @BindView(R.id.clockText)
-    public TextView clockText;
     private final BroadcastReceiver timeChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (action.equals(Intent.ACTION_TIME_TICK)) {
-                updateDesktopClock();
+                updateSearchClock();
             }
         }
     };
@@ -220,7 +214,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             int statusBarHeight = Tool.getStatusBarHeight(this);
-            clockFrame.setPadding(0, statusBarHeight, 0, 0);
             shortcutLayout.setPadding(0, statusBarHeight, 0, 0);
         }
 
@@ -310,7 +303,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         initDock();
 
-        dragOptionView.setAutoHideView(clockFrame, searchBar);
+        dragOptionView.setAutoHideView(searchBar);
 
         appDrawerController.setCallBack(new AppDrawerController.CallBack() {
             @Override
@@ -385,7 +378,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     public void onFinishDesktopEdit() {
-        dragOptionView.setAutoHideView(clockFrame, searchBar);
+        dragOptionView.setAutoHideView(searchBar);
 
         Tool.visibleViews(100, desktopIndicator);
         Tool.invisibleViews(100, desktopEditOptionView);
@@ -396,27 +389,26 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     public void updateSearchView(boolean show) {
         if (appSettings.getSearchBarEnable() && show) {
-            Tool.visibleViews(100, clockFrame, searchBar);
+            Tool.visibleViews(100, searchBar);
         } else {
             if (appSettings.getSearchBarEnable()) {
-                Tool.invisibleViews(100, clockFrame, searchBar);
+                Tool.invisibleViews(100, searchBar);
             } else {
-                Tool.goneViews(clockFrame, searchBar);
+                Tool.goneViews(searchBar);
             }
         }
     }
 
     public void updateHomeLayout() {
-        // set the padding for the search bar, desktop, and dock
-        // update the drag option page indicator height
         if (appSettings.getSearchBarEnable()) {
-            desktop.setPadding(0, Desktop.topInset, 0, 0);
             ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInset;
             ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = Desktop.topInset;
         } else {
-            desktop.setPadding(0, 0, 0, 0);
-            ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = 0;
-            ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = 0;
+            desktop.setPadding(0, Desktop.topInset, 0, 0);
+        }
+
+        if (!appSettings.getDockEnable()) {
+            desktop.setPadding(0, 0, 0, Desktop.bottomInset);
         }
 
         dock.post(new Runnable() {
@@ -427,12 +419,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         });
     }
 
-    private void updateDesktopClock() {
-        if (clockText != null) {
+    private void updateSearchClock() {
+        if (searchBar.searchClockOne.getText() != null) {
             Calendar calendar = Calendar.getInstance(Locale.getDefault());
-            String date = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-            String date2 = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
-            clockText.setText(Html.fromHtml(date + "<br><small><small><small><small><small>" + date2 + "</small></small></small></small></small>"));
+            String timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+            String timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
+            searchBar.searchClockOne.setText(timeOne);
+            searchBar.searchClockTwo.setText(timeTwo);
         }
     }
 
@@ -477,7 +470,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     private void initSettings() {
         if (!appSettings.getSearchBarEnable()) {
-            Tool.goneViews(clockFrame, searchBar);
+            Tool.goneViews(searchBar);
         }
         updateHomeLayout();
 
@@ -578,7 +571,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onExpand() {
-                Tool.invisibleViews(clockFrame, desktop, desktopIndicator);
+                Tool.invisibleViews(desktop, desktopIndicator);
                 Tool.visibleViews(background);
 
                 updateDock(false);
@@ -592,7 +585,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
             @Override
             public void onCollapse() {
-                Tool.visibleViews(appSettings.getSearchBarEnable() ? clockFrame : null);
                 Tool.visibleViews(desktop, desktopIndicator);
                 Tool.invisibleViews(background);
 
@@ -605,7 +597,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         });
 
         // this view is just a text view of the current date
-        updateDesktopClock();
+        updateSearchClock();
     }
 
     @Override

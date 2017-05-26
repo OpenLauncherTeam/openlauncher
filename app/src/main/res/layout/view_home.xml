@@ -19,22 +19,7 @@
     <com.benny.openlauncher.widget.SearchBar
         android:id="@+id/searchBar"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <include
-        android:id="@+id/clockFrame"
-        layout="@layout/view_search_bar"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +32,7 @@
         app:layout_constraintBottom_toTopOf="@+id/desktopIndicator"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clockFrame" />
+        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
     <com.benny.openlauncher.widget.PagerIndicator
         android:id="@+id/desktopIndicator"
@@ -61,7 +46,7 @@
     <com.benny.openlauncher.widget.Dock
         android:id="@+id/dock"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
