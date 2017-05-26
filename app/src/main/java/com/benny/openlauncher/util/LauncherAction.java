@@ -1,6 +1,7 @@
 package com.benny.openlauncher.util;
 
 import android.app.ActivityManager;
+import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -109,12 +110,25 @@ public class LauncherAction {
             case LauncherSettings:
                 context.startActivity(new Intent(context, SettingsActivity.class));
                 break;
-            case VolumeDialog:
-                AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-                audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamVolume(AudioManager.STREAM_RING), AudioManager.FLAG_SHOW_UI);
-                break;
             case OpenAppDrawer:
                 Home.launcher.openAppDrawer();
+                break;
+            case VolumeDialog:
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    try {
+                        AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+                        audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamVolume(AudioManager.STREAM_RING), AudioManager.FLAG_SHOW_UI);
+                    } catch (Exception e) {
+                        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                        if (!mNotificationManager.isNotificationPolicyAccessGranted()) {
+                            Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                            context.startActivity(intent);
+                        }
+                    }
+                } else {
+                    AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+                    audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamVolume(AudioManager.STREAM_RING), AudioManager.FLAG_SHOW_UI);
+                }
                 break;
         }
     }
