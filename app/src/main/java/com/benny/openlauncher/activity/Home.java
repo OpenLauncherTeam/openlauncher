@@ -540,7 +540,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             }
         });
         minibar.setBackgroundColor(appSettings.getMinibarBackgroundColor());
-        minibarBackground.setBackgroundColor(Tool.factorColorBrightness(appSettings.getMinibarBackgroundColor(), 115));
+        minibarBackground.setBackgroundColor(appSettings.getMinibarBackgroundColor());
     }
 
     private void initQuickCenter() {
