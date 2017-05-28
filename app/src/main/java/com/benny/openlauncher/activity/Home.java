@@ -423,11 +423,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     private void updateSearchClock() {
-        if (searchBar.searchClockOne.getText() != null) {
+        if (searchBar.searchClock.getText() != null) {
             Calendar calendar = Calendar.getInstance(Locale.getDefault());
             String timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
             String timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
-            searchBar.searchClockOne.setText(Html.fromHtml(timeOne + "<br><small><small><small><small><small>" + timeTwo + "</small></small></small></small></small>"));
+            searchBar.searchClock.setText(Html.fromHtml(timeOne + "<br><small><small><small><small><small>" + timeTwo + "</small></small></small></small></small>"));
         }
     }
 
@@ -561,7 +561,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     private void initSearchBar() {
-        searchBar.setCallBack(new SearchBar.CallBack() {
+        searchBar.setCallback(new SearchBar.CallBack() {
             @Override
             public void onInternetSearch(String string) {
                 Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
