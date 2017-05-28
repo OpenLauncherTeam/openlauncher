@@ -56,7 +56,7 @@ public class DialogHelper {
     public static void addActionItemDialog(final Context context, MaterialDialog.ListCallback callback) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title("Desktop Action")
-                .items(R.array.desktop_action_entries)
+                .items(R.array.entries__desktop_actions)
                 .itemsCallback(callback)
                 .show();
     }
@@ -128,7 +128,7 @@ public class DialogHelper {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(R.string.wallpaper)
                 .iconRes(R.drawable.ic_photo_black_24dp)
-                .items(R.array.wallpaperOptionEntries)
+                .items(R.array.entries__wallpaper_options)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {

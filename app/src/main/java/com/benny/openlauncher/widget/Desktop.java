@@ -73,10 +73,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             return;
         }
 
-        if (AppSettings.get().getDesktopMode() == DesktopMode.SHOW_ALL_APPS) {
-            initDesktopShowAll(c);
-        }
-
         pageCount = Home.launcher.db.getDesktop().size();
         if (pageCount == 0) {
             pageCount = 1;
@@ -86,7 +82,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         setCurrentItem(AppSettings.get().getDesktopPageCurrent());
     }
 
-    public void initDesktopShowAll(Context c) {
+    public void initDesktopShowAll(Context c, Home home) {
         List<AppManager.App> apps = AppManager.getInstance(c).getApps();
         int appsSize = apps.size();
 
@@ -98,9 +94,14 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             pageCount++;
         }
 
+        setAdapter(new DesktopAdapter(this));
+        if (appSettings.isDesktopShowIndicator() && pageIndicator != null) {
+            pageIndicator.setViewPager(this);
+        }
+        this.home = home;
+
         // fill the desktop adapter
         for (int i = 0; i < pageCount; i++) {
-            if (pages.size() <= pageCount) break;
             for (int x = 0; x < columns; x++) {
                 for (int y = 0; y < rows; y++) {
                     int pagePos = y * rows + x;
@@ -168,7 +169,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public void removeCurrentPage() {
         if (pageCount == 1) return;
-        if (AppSettings.get().getDesktopMode() == DesktopMode.SHOW_ALL_APPS)
+        if (AppSettings.get().getDesktopStyle() == DesktopMode.SHOW_ALL_APPS)
             return;
         pageCount--;
 

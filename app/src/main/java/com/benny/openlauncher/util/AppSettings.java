@@ -35,8 +35,12 @@ public class AppSettings extends AppSettingsBase {
         return getInt(R.string.pref_key__desktop_rows, 6);
     }
 
-    public int getDesktopMode() {
+    public int getDesktopStyle() {
         return getIntOfStringPref(R.string.pref_key__desktop_style, Desktop.DesktopMode.NORMAL);
+    }
+
+    public void setDesktopStyle(int style) {
+        setInt(R.string.pref_key__desktop_style, style);
     }
 
     public boolean getSearchBarEnable() {

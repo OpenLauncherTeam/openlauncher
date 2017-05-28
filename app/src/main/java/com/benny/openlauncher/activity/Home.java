@@ -226,7 +226,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
             @Override
             public void onAppUpdated(List<AppManager.App> apps) {
-                if (appSettings.getDesktopMode() != Desktop.DesktopMode.SHOW_ALL_APPS) {
+                if (appSettings.getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS) {
                     if (AppSettings.get().isAppFirstLaunch()) {
                         AppSettings.get().setAppFirstLaunch(false);
 
@@ -238,10 +238,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                         db.setItem(appDrawerBtnItem, 0, 0);
                     }
                 }
-                if (appSettings.getDesktopMode() == Desktop.DesktopMode.NORMAL) {
+                if (appSettings.getDesktopStyle() == Desktop.DesktopMode.NORMAL) {
                     desktop.initDesktopNormal(Home.this);
-                } else if (appSettings.getDesktopMode() == Desktop.DesktopMode.SHOW_ALL_APPS) {
-                    desktop.initDesktopShowAll(Home.this);
+                } else if (appSettings.getDesktopStyle() == Desktop.DesktopMode.SHOW_ALL_APPS) {
+                    desktop.initDesktopShowAll(Home.this, Home.this);
                 }
                 dock.initDockItem(Home.this);
 
@@ -251,10 +251,10 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         AppManager.getInstance(this).addAppDeletedListener(new AppManager.AppDeletedListener() {
             @Override
             public void onAppDeleted(AppManager.App app) {
-                if (appSettings.getDesktopMode() == Desktop.DesktopMode.NORMAL) {
+                if (appSettings.getDesktopStyle() == Desktop.DesktopMode.NORMAL) {
                     desktop.initDesktopNormal(Home.this);
-                } else if (appSettings.getDesktopMode() == Desktop.DesktopMode.SHOW_ALL_APPS) {
-                    desktop.initDesktopShowAll(Home.this);
+                } else if (appSettings.getDesktopStyle() == Desktop.DesktopMode.SHOW_ALL_APPS) {
+                    desktop.initDesktopShowAll(Home.this, Home.this);
                 }
                 dock.initDockItem(Home.this);
             }

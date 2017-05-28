@@ -20,6 +20,13 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title__appearance">
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/entries__desktop_styles"
+            android:entryValues="@array/values__zero_to_one"
+            android:key="@string/pref_key__desktop_style"
+            android:summary="@string/pref_summary__desktop_style"
+            android:title="@string/pref_title__desktop_style" />
 
         <Preference
             android:key="@string/pref_key__minibar"

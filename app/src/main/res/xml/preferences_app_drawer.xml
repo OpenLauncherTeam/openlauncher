@@ -22,8 +22,8 @@
     <PreferenceCategory android:title="@string/pref_title__appearance">
         <ListPreference
             android:defaultValue="1"
-            android:entries="@array/entries__drawer_modes"
-            android:entryValues="@array/values__from_zero__to__one"
+            android:entries="@array/entries__drawer_styles"
+            android:entryValues="@array/values__zero_to_one"
             android:key="@string/pref_key__drawer_style"
             android:summary="@string/pref_summary__drawer_style"
             android:title="@string/pref_title__drawer_style" />

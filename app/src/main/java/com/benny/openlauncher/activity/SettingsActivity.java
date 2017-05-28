@@ -207,8 +207,38 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
+                if (key.equals(getString(R.string.pref_key__desktop_style))) {
+                    ((SettingsActivity) getActivity()).shouldLauncherRestart = true;
+                    return true;
+                }
+
                 if (key.equals(getString(R.string.pref_key__minibar))) {
                     LauncherAction.RunAction(LauncherAction.Action.EditMinBar, getActivity());
+                    return true;
+                }
+            }
+            return super.onPreferenceTreeClick(screen, preference);
+        }
+    }
+
+    public static class SettingsFragmentDock extends PreferenceFragment {
+        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentDock";
+
+        public void onCreate(Bundle savedInstances) {
+            super.onCreate(savedInstances);
+            getPreferenceManager().setSharedPreferencesName("app");
+            addPreferencesFromResource(R.xml.preferences_dock);
+        }
+
+        @Override
+        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+            if (isAdded() && preference.hasKey()) {
+                AppSettings settings = AppSettings.get();
+                String key = preference.getKey();
+
+                if (key.equals(getString(R.string.pref_key__dock_enable))) {
+                    Home.launcher.updateDock(true);
+                    ((SettingsActivity) getActivity()).shouldLauncherRestart = false;
                     return true;
                 }
             }
@@ -239,31 +269,6 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     return true;
                 }
 
-            }
-            return super.onPreferenceTreeClick(screen, preference);
-        }
-    }
-
-    public static class SettingsFragmentDock extends PreferenceFragment {
-        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentDock";
-
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
-            getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences_dock);
-        }
-
-        @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
-            if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
-                String key = preference.getKey();
-
-                if (key.equals(getString(R.string.pref_key__dock_enable))) {
-                    Home.launcher.updateDock(true);
-                    ((SettingsActivity) getActivity()).shouldLauncherRestart = false;
-                    return true;
-                }
             }
             return super.onPreferenceTreeClick(screen, preference);
         }
