@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -43,7 +44,6 @@ public class SearchBar extends FrameLayout {
     public AppCompatEditText searchInput;
     public RecyclerView searchRecycler;
     public TextView searchClockOne;
-    public TextView searchClockTwo;
     private FastItemAdapter<IconLabelItem> adapter = new FastItemAdapter<>();
     private boolean expanded;
     private CallBack callBack;
@@ -74,19 +74,10 @@ public class SearchBar extends FrameLayout {
     }
 
     private void init() {
-        searchClockOne = new TextView(getContext());
-        searchClockOne.setTextSize(Tool.dp2px(12, getContext()));
-        searchClockOne.setTextColor(Color.WHITE);
+        searchClockOne = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.view_search_bar,this,false);
         LayoutParams clockOneParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         clockOneParams.setMargins(Tool.dp2px(16, getContext()), 0, 0, 0);
         clockOneParams.gravity = Gravity.START;
-
-        searchClockTwo = new TextView(getContext());
-        searchClockTwo.setTextSize(Tool.dp2px(4, getContext()));
-        searchClockTwo.setTextColor(Color.WHITE);
-        LayoutParams clockTwoParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        clockTwoParams.setMargins(Tool.dp2px(16, getContext()), Tool.dp2px(46, getContext()), 0, 0);
-        clockTwoParams.gravity = Gravity.START;
 
         final CircleDrawable icon = new CircleDrawable(getContext(), getResources().getDrawable(R.drawable.ic_search_light_24dp), Color.BLACK);
         searchButton = new AppCompatImageView(getContext());
@@ -101,20 +92,20 @@ public class SearchBar extends FrameLayout {
                     }
                     icon.setIcon(getResources().getDrawable(R.drawable.ic_clear_white_24dp));
                     Tool.visibleViews(ANIM_TIME, searchInput, searchRecycler);
-                    Tool.goneViews(ANIM_TIME, searchClockOne, searchClockTwo);
+                    Tool.goneViews(ANIM_TIME, searchClockOne);
                 } else {
                     if (callBack != null) {
                         callBack.onCollapse();
                     }
                     icon.setIcon(getResources().getDrawable(R.drawable.ic_search_light_24dp));
-                    Tool.visibleViews(ANIM_TIME, searchClockOne, searchClockTwo);
+                    Tool.visibleViews(ANIM_TIME, searchClockOne);
                     Tool.goneViews(ANIM_TIME, searchInput, searchRecycler);
                     searchInput.getText().clear();
                 }
             }
         });
         LayoutParams buttonParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        buttonParams.setMargins(0, Tool.dp2px(16, getContext()), Tool.dp2px(16, getContext()), 0);
+        buttonParams.setMargins(0, Tool.dp2px(10, getContext()), Tool.dp2px(16, getContext()), 0);
         buttonParams.gravity = Gravity.END;
 
         searchInput = new AppCompatEditText(getContext());
@@ -139,7 +130,7 @@ public class SearchBar extends FrameLayout {
             }
         });
         LayoutParams inputParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        inputParams.setMargins(Tool.dp2px(8, getContext()), Tool.dp2px(12, getContext()), 0, 0);
+        inputParams.setMargins(Tool.dp2px(8, getContext()),Tool.dp2px(8, getContext()), 0, 0);
 
         searchRecycler = new RecyclerView(getContext());
         searchRecycler.setVisibility(View.GONE);
@@ -189,16 +180,15 @@ public class SearchBar extends FrameLayout {
         final LayoutParams recyclerParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         addView(searchClockOne, clockOneParams);
-        addView(searchClockTwo, clockTwoParams);
-        addView(searchButton, buttonParams);
         addView(searchInput, inputParams);
+        addView(searchButton, buttonParams);
         addView(searchRecycler, recyclerParams);
 
         searchInput.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                recyclerParams.setMargins(0, Tool.dp2px(12, getContext()) + searchInput.getHeight(), 0, 0);
+                recyclerParams.setMargins(0, Tool.dp2px(50, getContext()) + searchInput.getHeight(), 0, 0);
             }
         });
     }
@@ -207,7 +197,7 @@ public class SearchBar extends FrameLayout {
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             int topInset = insets.getSystemWindowInsetTop();
-            setPadding(getPaddingLeft(), getPaddingTop() + topInset, getPaddingRight(), getPaddingBottom());
+            setPadding(getPaddingLeft(), topInset +  Tool.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom());
         }
         return insets;
     }

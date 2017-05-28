@@ -518,7 +518,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             topInset = insets.getSystemWindowInsetTop();
             bottomInset = insets.getSystemWindowInsetBottom();
-            setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), getPaddingBottom());
+            //setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), getPaddingBottom());
             Home.launcher.updateHomeLayout();
         }
         return insets;

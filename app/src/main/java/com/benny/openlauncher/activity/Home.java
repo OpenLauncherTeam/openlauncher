@@ -26,6 +26,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -426,8 +427,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             Calendar calendar = Calendar.getInstance(Locale.getDefault());
             String timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
             String timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
-            searchBar.searchClockOne.setText(timeOne);
-            searchBar.searchClockTwo.setText(timeTwo);
+            searchBar.searchClockOne.setText(Html.fromHtml(timeOne + "<br><small><small><small><small><small>" + timeTwo + "</small></small></small></small></small>"));
         }
     }
 
