@@ -13,11 +13,11 @@
         <item>Запустить приложение</item>
     </string-array>
 
-    <string-array name="desktop_action_entries">
+    <string-array name="entries__desktop_actions">
         <item>Меню приложений</item>
     </string-array>
 
-    <string-array name="wallpaperOptionEntries">
+    <string-array name="entries__wallpaper_options">
         <item>Установить обои</item>
         <item>Размыть обои</item>
     </string-array>
