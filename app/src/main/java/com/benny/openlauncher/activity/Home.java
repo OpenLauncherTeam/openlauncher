@@ -273,6 +273,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         initMinibar();
         initQuickCenter();
         initSearchBar();
+        initDock();
 
         DragNavigationControl.init(this, dragLeft, dragRight);
 
@@ -304,8 +305,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         desktop.setPageIndicator(desktopIndicator);
 
-        initDock();
-
         dragOptionView.setAutoHideView(searchBar);
 
         appDrawerController.setCallBack(new AppDrawerController.CallBack() {
@@ -314,7 +313,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 Tool.visibleViews(appDrawerIndicator);
                 Tool.invisibleViews(desktopIndicator, desktop);
                 updateDock(false);
-                updateSearchView(false);
+                updateSearchBar(false);
             }
 
             @Override
@@ -329,7 +328,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
                 Tool.visibleViews(desktop, desktopIndicator);
                 updateDock(true);
-                updateSearchView(!dragOptionView.isDraggedFromDrawer);
+                updateSearchBar(!dragOptionView.isDraggedFromDrawer);
                 dragOptionView.isDraggedFromDrawer = false;
             }
 
@@ -343,32 +342,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         });
     }
 
-    private void initDock() {
-        int iconSize = AppSettings.get().getIconSize();
-        dock.init();
-        if (appSettings.isDockShowLabel()) {
-            dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;
-        } else {
-            dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, this) + Dock.bottomInset;
-        }
-    }
-
-    public void updateDock(boolean show) {
-        if (appSettings.getDockEnable() && show) {
-            Tool.visibleViews(100, dock);
-            ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
-            ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
-        } else {
-            if (appSettings.getDockEnable()) {
-                Tool.invisibleViews(100, dock);
-            } else {
-                Tool.goneViews(dock);
-                ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Desktop.bottomInset + Tool.dp2px(4, this);
-                ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
-            }
-        }
-    }
-
     @Override
     public void onDesktopEdit() {
         dragOptionView.resetAutoHideView();
@@ -376,7 +349,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         Tool.visibleViews(100, desktopEditOptionView);
         Tool.invisibleViews(100, desktopIndicator);
         updateDock(false);
-        updateSearchView(false);
+        updateSearchBar(false);
     }
 
     @Override
@@ -386,49 +359,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         Tool.visibleViews(100, desktopIndicator);
         Tool.invisibleViews(100, desktopEditOptionView);
         updateDock(true);
-        updateSearchView(true);
-    }
-
-
-    public void updateSearchView(boolean show) {
-        if (appSettings.getSearchBarEnable() && show) {
-            Tool.visibleViews(100, searchBar);
-        } else {
-            if (appSettings.getSearchBarEnable()) {
-                Tool.invisibleViews(100, searchBar);
-            } else {
-                Tool.goneViews(searchBar);
-            }
-        }
-    }
-
-    public void updateHomeLayout() {
-        if (appSettings.getSearchBarEnable()) {
-            ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInset;
-            ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = Desktop.topInset;
-        } else {
-            desktop.setPadding(0, Desktop.topInset, 0, 0);
-        }
-
-        if (!appSettings.getDockEnable()) {
-            desktop.setPadding(0, 0, 0, Desktop.bottomInset);
-        }
-
-        dock.post(new Runnable() {
-            @Override
-            public void run() {
-                updateDock(true);
-            }
-        });
-    }
-
-    private void updateSearchClock() {
-        if (searchBar.searchClock.getText() != null) {
-            Calendar calendar = Calendar.getInstance(Locale.getDefault());
-            String timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-            String timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
-            searchBar.searchClock.setText(Html.fromHtml(timeOne + "<br><small><small><small><small><small>" + timeTwo + "</small></small></small></small></small>"));
-        }
+        updateSearchBar(true);
     }
 
     @Override
@@ -471,9 +402,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     }
 
     private void initSettings() {
-        if (!appSettings.getSearchBarEnable()) {
-            Tool.goneViews(searchBar);
-        }
         updateHomeLayout();
 
         if (appSettings.isDesktopFullscreen()) {
@@ -501,7 +429,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         }
         drawerLayout.setDrawerLockMode(appSettings.getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
-
 
     public void initMinibar() {
         final ArrayList<String> labels = new ArrayList<>();
@@ -560,6 +487,16 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         }
     }
 
+    private void initDock() {
+        int iconSize = AppSettings.get().getIconSize();
+        dock.init();
+        if (appSettings.isDockShowLabel()) {
+            dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;
+        } else {
+            dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, this) + Dock.bottomInset;
+        }
+    }
+
     private void initSearchBar() {
         searchBar.setCallback(new SearchBar.CallBack() {
             @Override
@@ -602,6 +539,63 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         // this view is just a text view of the current date
         updateSearchClock();
+    }
+
+    public void updateDock(boolean show) {
+        if (appSettings.getDockEnable() && show) {
+            Tool.visibleViews(100, dock);
+            ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
+            ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
+        } else {
+            if (appSettings.getDockEnable()) {
+                Tool.invisibleViews(100, dock);
+            } else {
+                Tool.goneViews(100, dock);
+                ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Desktop.bottomInset + Tool.dp2px(4, this);
+                ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
+            }
+        }
+    }
+
+    public void updateSearchBar(boolean show) {
+        if (appSettings.getSearchBarEnable() && show) {
+            Tool.visibleViews(100, searchBar);
+        } else {
+            if (appSettings.getSearchBarEnable()) {
+                Tool.invisibleViews(100, searchBar);
+            } else {
+                Tool.goneViews(searchBar);
+            }
+        }
+    }
+
+    private void updateSearchClock() {
+        if (searchBar.searchClock.getText() != null) {
+            Calendar calendar = Calendar.getInstance(Locale.getDefault());
+            String timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+            String timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
+            searchBar.searchClock.setText(Html.fromHtml(timeOne + "<br><small><small><small><small><small>" + timeTwo + "</small></small></small></small></small>"));
+        }
+    }
+
+    public void updateHomeLayout() {
+        updateSearchBar(true);
+        updateDock(true);
+
+        if (!appSettings.isDesktopShowIndicator()) {
+            Tool.goneViews(100, desktopIndicator);
+        }
+
+        if (appSettings.getSearchBarEnable()) {
+            ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInset;
+            ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = Desktop.topInset;
+        } else {
+            desktop.setPadding(0, Desktop.topInset, 0, 0);
+        }
+
+        if (!appSettings.getDockEnable()) {
+            desktop.setPadding(0, 0, 0, Desktop.bottomInset);
+        }
     }
 
     @Override
@@ -718,7 +712,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
     @Override
     protected void onResume() {
-        // Restart if requested
         if (appSettings.getAppRestartRequired()) {
             appSettings.setAppRestartRequired(false);
 

@@ -295,7 +295,7 @@ public class DragOptionView extends CardView {
                 }
 
                 animate().alpha(0);
-                infoIcon.setVisibility(View.GONE);
+                editIcon.setVisibility(View.GONE);
                 removeIcon.setVisibility(View.GONE);
                 infoIcon.setVisibility(View.GONE);
                 deleteIcon.setVisibility(View.GONE);
@@ -303,7 +303,7 @@ public class DragOptionView extends CardView {
                 Tool.visibleViews(Math.round(animSpeed / 1.3f), hideViews);
 
                 // the search view might be disabled
-                Home.launcher.updateSearchView(true);
+                Home.launcher.updateSearchBar(true);
 
                 isDraggedFromDrawer = false;
 
