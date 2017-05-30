@@ -19,7 +19,7 @@ Currently there are a lot of issues and we are all working on this app in our sp
 
 # OPTeam
 
-[BennyKok](https://github.com/BennyKok) | [dkanada](https://github.com/dkanada) | [gsantner](https://github.com/gsantner)
+[bennykok](https://github.com/BennyKok) | [dkanada](https://github.com/dkanada) | [gsantner](https://github.com/gsantner)
 
 We would be happy if you want to be part of this game.
 
@@ -27,7 +27,7 @@ We would be happy if you want to be part of this game.
 
 You can support us and buy us some coffee.
 
-[BennyKok](https://www.paypal.me/BennyKok) | [gsantner](https://gsantner.github.io/#donate)
+[bennykok](https://www.paypal.me/BennyKok) | [gsantner](https://gsantner.github.io/#donate)
 
 # Contributors
 
