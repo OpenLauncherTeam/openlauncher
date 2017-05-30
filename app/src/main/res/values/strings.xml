@@ -2,6 +2,7 @@
 <resources>
 
     <!-- Titles -->
+
     <string name="settings">Settings</string>
     <string name="minibar">Minibar</string>
 
@@ -13,6 +14,7 @@
     <string name="remove">Remove</string>
 
     <!-- Desktop Option View -->
+
     <string name="home">Home</string>
     <string name="action">Action</string>
     <string name="lock">Lock</string>
@@ -20,11 +22,11 @@
 
     <!-- Toasts -->
 
-    <string name="toast_not_enough_space">Not enough space</string>
+    <string name="toast_not_enough_space">Not enough space.</string>
     <string name="toast_app_uninstalled">App uninstalled.</string>
-    <string name="toast_free_ram">Free Memory: %1$d MB saved %2$d MB</string>
-    <string name="toast_free_all_ram">Free Memory: %1$d MB Your RAM is in best state</string>
-    <string name="toast_device_admin_required">Please enable device administration</string>
+    <string name="toast_free_ram">Free Memory: %1$d MB. Saved %2$d MB.</string>
+    <string name="toast_free_all_ram">Free Memory: %1$d MB. Your RAM is in best state.</string>
+    <string name="toast_device_admin_required">Please enable device administration.</string>
 
     <!-- Intro -->
 
@@ -32,12 +34,12 @@
     <string name="intro_finish">Let\'s start.</string>
     <string name="intro1_title" translatable="false">@string/app_name</string>
     <string name="intro1_text">Thank you for choosing OpenLauncher. It\'s fully open source and still in development.
-        Here\'s a short intro on how to use it …</string>
+        Here\'s a short intro on how to use it&#8230;</string>
     <string name="intro2_title" translatable="false">@string/minibar</string>
     <string name="intro2_text">Swipe inwards from the left border of your homescreen to open the minibar. There you can find the settings,
         change the wallpaper, and do lots of other stuff.</string>
     <string name="intro3_title">Settings</string>
-    <string name="intro3_text">You can configure your desktop, the app drawer, and the dock … Just try it out!</string>
+    <string name="intro3_text">You can configure your desktop, the app drawer, and the dock, try it out!</string>
 
     <!-- Minibar -->
 
@@ -78,7 +80,7 @@
     <string name="pref_title__color">Colors</string>
 
     <string name="pref_title__desktop_style">Style</string>
-    <string name="pref_summary__desktop_style">Choose between a normal desktop or showing all the apps in a paged view.</string>
+    <string name="pref_summary__desktop_style">Choose between a normal desktop and showing all installed apps.</string>
     <string name="pref_title__minibar" translatable="false">@string/minibar</string>
     <string name="pref_summary__minibar">Configure the order and visibility of minibar items.</string>
     <string name="pref_title__search_bar_enable">Search Bar</string>
@@ -234,8 +236,7 @@
     <string name="dialog__backup_app_settings__error">Something went wrong.</string>
     <string name="columns">Columns</string>
     <string name="rows">Rows</string>
-    <string name="search_online">Search online...</string>
-
+    <string name="search_online">Search online&#8230;</string>
     <string name="available_memory">Available memory: %1$s</string>
     <string name="available_storage">Available storage: %1$s</string>
     <string name="volume_level_ringtone">Ringtone</string>

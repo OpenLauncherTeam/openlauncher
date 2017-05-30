@@ -283,7 +283,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         appDrawerController.setHome(this);
         dragOptionView.setHome(this);
 
-        desktop.init(this);
+        desktop.init();
         desktop.setDesktopEditListener(this);
 
         desktopEditOptionView.setDesktopOptionViewListener(this);

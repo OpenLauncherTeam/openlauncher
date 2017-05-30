@@ -170,21 +170,6 @@ public class AppItemView extends View implements Drawable.Callback {
             return view;
         }
 
-        public Builder setAppItem(final Item item, final AppManager.App app) {
-            view.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
-                        @Override
-                        public void run() {
-                            Tool.startApp(view.getContext(), item.intent);
-                        }
-                    });
-                }
-            });
-            return this;
-        }
-
         public Builder setAppItem(final AppManager.App app) {
             view.setLabel(app.label);
             view.setIcon(app.icon);
@@ -202,7 +187,26 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
+        public Builder setAppItem(final Item item, final AppManager.App app) {
+            view.setLabel(item.name);
+            view.setIcon(app.icon);
+            view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                        @Override
+                        public void run() {
+                            Tool.startApp(view.getContext(), item.intent);
+                        }
+                    });
+                }
+            });
+            return this;
+        }
+
         public Builder setShortcutItem(final Item item) {
+            view.setLabel(item.name);
+            view.setIcon(item.icon);
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -218,6 +222,8 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setGroupItem(Context context, final DesktopCallBack callback, final Item item) {
+            view.setLabel(item.name);
+            view.setIcon(new GroupIconDrawable(context, item));
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -230,6 +236,8 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setActionItem(Item item) {
+            view.setLabel(item.name);
+            view.setIcon(Home.launcher.getResources().getDrawable(R.drawable.ic_app_drawer_24dp));
             switch (item.actionValue) {
                 case 8:
                     view.setOnClickListener(new OnClickListener() {
@@ -244,43 +252,8 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder setIcon(Context context, Item item) {
-            Drawable icon = null;
-            switch (item.type) {
-                case APP:
-                case SHORTCUT:
-                    icon = Tool.getIcon(view.getContext(), Integer.toString(item.idValue));
-                    if (icon == null) {
-                        AppManager.App app = AppManager.getInstance(context).findApp(item.intent);
-                        icon = app.icon;
-                    }
-                    break;
-                case GROUP:
-                    icon = new GroupIconDrawable(context, item);
-                    break;
-                case ACTION:
-                    switch (item.actionValue) {
-                        case 8:
-                            icon = view.getResources().getDrawable(R.drawable.ic_app_drawer_24dp);
-                            break;
-                    }
-            }
-            view.setIcon(icon);
-            return this;
-        }
-
-        public Builder setLabel(Context context, Item item) {
-            String label = item.name;
-            if (label == null && (item.type == Item.Type.APP || item.type == Item.Type.SHORTCUT)) {
-                AppManager.App app = AppManager.getInstance(context).findApp(item.intent);
-                label = app.label;
-            }
-            view.label = label;
-            return this;
-        }
-
         public Builder withOnLongClick(final AppManager.App app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
-            withOnLongClick(Item.newAppItem(app), action, eventAction);
+            withOnLongClick(Item.newAppItem(Home.launcher, app), action, eventAction);
             return this;
         }
 

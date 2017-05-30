@@ -43,8 +43,6 @@ public class ItemViewFactory {
                 }
                 view = new AppItemView.Builder(context)
                         .setAppItem(item, app)
-                        .setIcon(context, item)
-                        .setLabel(context, item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.APP, new AppItemView.Builder.LongPressCallBack() {
@@ -65,8 +63,6 @@ public class ItemViewFactory {
             case SHORTCUT:
                 view = new AppItemView.Builder(context)
                         .setShortcutItem(item)
-                        .setIcon(context, item)
-                        .setLabel(context, item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.SHORTCUT, new AppItemView.Builder.LongPressCallBack() {
@@ -87,8 +83,6 @@ public class ItemViewFactory {
             case GROUP:
                 view = new AppItemView.Builder(context)
                         .setGroupItem(context, callBack, item)
-                        .setIcon(context, item)
-                        .setLabel(context, item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.GROUP, new AppItemView.Builder.LongPressCallBack() {
@@ -110,8 +104,6 @@ public class ItemViewFactory {
             case ACTION:
                 view = new AppItemView.Builder(context)
                         .setActionItem(item)
-                        .setIcon(context, item)
-                        .setLabel(context, item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.ACTION, new AppItemView.Builder.LongPressCallBack() {

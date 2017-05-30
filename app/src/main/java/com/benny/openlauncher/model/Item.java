@@ -3,6 +3,8 @@ package com.benny.openlauncher.model;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -36,7 +38,8 @@ public class Item implements Parcelable {
     // all items need these values
     public int idValue;
     public Type type;
-    public String name;
+    public String name = Home.launcher.getString(R.string.request_dummy_text);
+    public Drawable icon = Home.launcher.getResources().getDrawable(R.drawable.rip);
     public int x = 0;
     public int y = 0;
 
@@ -85,6 +88,7 @@ public class Item implements Parcelable {
                 spanY = parcel.readInt();
                 break;
         }
+        icon = Tool.getIcon(Home.launcher, Integer.toString(idValue));
     }
 
     @Override
@@ -93,11 +97,14 @@ public class Item implements Parcelable {
         return object != null && this.idValue == itemObject.idValue;
     }
 
-    public static Item newAppItem(AppManager.App app) {
+    public static Item newAppItem(Context context, AppManager.App app) {
         Item item = new Item();
         item.type = Type.APP;
         item.name = app.label;
+        item.icon = app.icon;
         item.intent = toIntent(app);
+
+        Tool.saveIcon(context, Tool.drawableToBitmap(app.icon), Integer.toString(item.idValue));
         return item;
     }
 
@@ -109,7 +116,8 @@ public class Item implements Parcelable {
         item.spanY = 1;
         item.intent = intent;
 
-        Tool.saveIcon(context, icon, name);
+        Tool.saveIcon(context, icon, Integer.toString(item.idValue));
+        item.icon = Tool.getIcon(Home.launcher, Integer.toString(item.idValue));
         return item;
     }
 

@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
 
 import java.util.ArrayList;

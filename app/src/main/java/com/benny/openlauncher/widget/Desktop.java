@@ -68,7 +68,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         this.pageIndicator = pageIndicator;
     }
 
-    public void init(Context c) {
+    public void init() {
         if (isInEditMode()) {
             return;
         }
@@ -80,6 +80,29 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         setOnDragListener(this);
         setCurrentItem(AppSettings.get().getDesktopPageCurrent());
+    }
+
+    public void initDesktopNormal(Home home) {
+        setAdapter(new DesktopAdapter(this));
+        if (appSettings.isDesktopShowIndicator() && pageIndicator != null) {
+            pageIndicator.setViewPager(this);
+        }
+        this.home = home;
+
+        int columns = AppSettings.get().getDesktopColumnCount();
+        int rows = AppSettings.get().getDesktopRowCount();
+        List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
+        for (int pageCount = 0; pageCount < desktopItems.size(); pageCount++) {
+            if (pages.size() <= pageCount) break;
+            pages.get(pageCount).removeAllViews();
+            List<Item> items = desktopItems.get(pageCount);
+            for (int j = 0; j < items.size(); j++) {
+                Item item = items.get(j);
+                if (((item.x + item.spanX) <= columns) && ((item.y + item.spanY) <= rows)) {
+                    addItemToPage(item, pageCount);
+                }
+            }
+        }
     }
 
     public void initDesktopShowAll(Context c, Home home) {
@@ -107,34 +130,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     int pagePos = y * rows + x;
                     int pos = columns * rows * i + pagePos;
                     if (!(pos >= apps.size())) {
-                        Item appItem = Item.newAppItem(apps.get(pos));
+                        Item appItem = Item.newAppItem(getContext(), apps.get(pos));
                         appItem.x = x;
                         appItem.y = y;
                         addItemToPage(appItem, i);
                     }
-                }
-            }
-        }
-    }
-
-    public void initDesktopNormal(Home home) {
-        setAdapter(new DesktopAdapter(this));
-        if (appSettings.isDesktopShowIndicator() && pageIndicator != null) {
-            pageIndicator.setViewPager(this);
-        }
-        this.home = home;
-
-        int columns = AppSettings.get().getDesktopColumnCount();
-        int rows = AppSettings.get().getDesktopRowCount();
-        List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
-        for (int pageCount = 0; pageCount < desktopItems.size(); pageCount++) {
-            if (pages.size() <= pageCount) break;
-            pages.get(pageCount).removeAllViews();
-            List<Item> items = desktopItems.get(pageCount);
-            for (int j = 0; j < items.size(); j++) {
-                Item item = items.get(j);
-                if (((item.x + item.spanX) <= columns) && ((item.y + item.spanY) <= rows)) {
-                    addItemToPage(item, pageCount);
                 }
             }
         }
@@ -259,13 +259,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     @Override
-    public void consumeRevert() {
-        previousItem = null;
-        previousItemView = null;
-        previousPage = -1;
-    }
-
-    @Override
     public void revertLastItem() {
         if (previousItemView != null && getAdapter().getCount() >= previousPage && previousPage > -1) {
             getCurrentPage().addViewToGrid(previousItemView);
@@ -273,6 +266,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             previousItemView = null;
             previousPage = -1;
         }
+    }
+
+    @Override
+    public void consumeRevert() {
+        previousItem = null;
+        previousItemView = null;
+        previousPage = -1;
     }
 
     @Override
@@ -289,7 +289,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
     }
 
-    // add an item to the specified position on the current page
     @Override
     public boolean addItemToPoint(final Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().touchPosToLayoutParams(x, y, item.spanX, item.spanY);
