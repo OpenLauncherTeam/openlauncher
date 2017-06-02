@@ -2,6 +2,7 @@ package com.benny.openlauncher.widget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v7.widget.CardView;
@@ -93,6 +94,9 @@ public class DragOptionView extends CardView {
                             public void itemLabel(String label) {
                                 item.name = label;
                                 Home.db.updateItem(item);
+
+                                // TODO: still need to remove old view
+                                Home.launcher.desktop.addItemToCell(item, item.x, item.y);
                             }
                         });
                         return true;

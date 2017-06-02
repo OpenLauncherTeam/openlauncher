@@ -291,7 +291,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     @Override
     public boolean addItemToPoint(final Item item, int x, int y) {
-        CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().touchPosToLayoutParams(x, y, item.spanX, item.spanY);
+        CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().coordinateToLayoutParams(x, y, item.spanX, item.spanY);
         if (positionToLayoutPrams != null) {
             item.x = positionToLayoutPrams.x;
             item.y = positionToLayoutPrams.y;
@@ -438,18 +438,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             };
         }
 
-        private Item getItemFromCoordinate(Point coordinate) {
-            List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
-            List<Item> pageData = desktopItems.get(desktop.getCurrentItem());
-            for (int i = 0; i < pageData.size(); i++) {
-                Item item = pageData.get(i);
-                if (item.x == coordinate.x && item.y == coordinate.y && item.spanX == 1 && item.spanY == 1) {
-                    return pageData.get(i);
-                }
-            }
-            return null;
-        }
-
         private CellContainer getItemLayout() {
             CellContainer layout = new CellContainer(desktop.getContext());
             layout.setSoundEffectsEnabled(false);
@@ -461,7 +449,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             layout.onItemRearrangeListener = new CellContainer.OnItemRearrangeListener() {
                 @Override
                 public void onItemRearrange(Point from, Point to) {
-                    Item itemFromCoordinate = getItemFromCoordinate(from);
+                    Item itemFromCoordinate = Desktop.getItemFromCoordinate(from, getCurrentItem());
                     if (itemFromCoordinate == null) return;
                     itemFromCoordinate.x = to.x;
                     itemFromCoordinate.y = to.y;
@@ -523,7 +511,19 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         return insets;
     }
 
-    public static boolean handleOnDropOver(Home home, Item dropItem, Item item, View itemView, ViewGroup parent, int page, int desktop, DesktopCallBack callBack) {
+    public static Item getItemFromCoordinate(Point point, int page) {
+        List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
+        List<Item> pageData = desktopItems.get(page);
+        for (int i = 0; i < pageData.size(); i++) {
+            Item item = pageData.get(i);
+            if (item.x == point.x && item.y == point.y && item.spanX == 1 && item.spanY == 1) {
+                return pageData.get(i);
+            }
+        }
+        return null;
+    }
+
+    public static boolean handleOnDropOver(Home home, Item dropItem, Item item, View itemView, ViewGroup parent, int page, int desktop, DesktopCallBack callback) {
         if (item == null || dropItem == null) {
             return false;
         }
@@ -550,7 +550,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     // add the item to the database
                     home.db.setItem(group, page, desktop);
 
-                    callBack.addItemToPage(group, page);
+                    callback.addItemToPage(group, page);
 
                     home.desktop.consumeRevert();
                     home.dock.consumeRevert();
@@ -572,7 +572,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     // add the item to the database
                     home.db.setItem(item, page, desktop);
 
-                    callBack.addItemToPage(item, page);
+                    callback.addItemToPage(item, page);
 
                     home.desktop.consumeRevert();
                     home.dock.consumeRevert();

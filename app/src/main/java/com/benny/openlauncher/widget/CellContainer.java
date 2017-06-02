@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.Tool;
 
 import java.util.HashSet;
@@ -439,6 +440,14 @@ public class CellContainer extends ViewGroup {
         return null;
     }
 
+    public LayoutParams coordinateToLayoutParams(int mX, int mY, int xSpan, int ySpan) {
+        Point pos = touchPosToCoordinate(mX, mY, xSpan, ySpan, true);
+        if (pos != null) {
+            return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, pos.x, pos.y, xSpan, ySpan);
+        }
+        return null;
+    }
+
     // convert a touch event to a coordinate in the cell container
     public Point touchPosToCoordinate(int mX, int mY, int xSpan, int ySpan, boolean checkAvailability) {
         mX = mX - (xSpan - 1) * cellWidth / 2;
@@ -475,14 +484,6 @@ public class CellContainer extends ViewGroup {
                     return new Point(x, y);
                 }
             }
-        }
-        return null;
-    }
-
-    public LayoutParams touchPosToLayoutParams(int mX, int mY, int xSpan, int ySpan) {
-        Point pos = touchPosToCoordinate(mX, mY, xSpan, ySpan, true);
-        if (pos != null) {
-            return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, pos.x, pos.y, xSpan, ySpan);
         }
         return null;
     }

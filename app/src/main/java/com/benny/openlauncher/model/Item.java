@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by kanadill on 5/3/2017.
+ * Created by dkanada on 5/3/2017.
  */
 
 public class Item implements Parcelable {
@@ -103,21 +103,17 @@ public class Item implements Parcelable {
         item.name = app.label;
         item.icon = app.icon;
         item.intent = toIntent(app);
-
-        Tool.saveIcon(context, Tool.drawableToBitmap(app.icon), Integer.toString(item.idValue));
         return item;
     }
 
-    public static Item newShortcutItem(Context context, Intent intent, Bitmap icon, String name) {
+    public static Item newShortcutItem(Context context, Intent intent, Drawable icon, String name) {
         Item item = new Item();
         item.type = Type.SHORTCUT;
         item.name = name;
+        item.icon = icon;
         item.spanX = 1;
         item.spanY = 1;
         item.intent = intent;
-
-        Tool.saveIcon(context, icon, Integer.toString(item.idValue));
-        item.icon = Tool.getIcon(Home.launcher, Integer.toString(item.idValue));
         return item;
     }
 

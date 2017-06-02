@@ -302,7 +302,7 @@ public class Tool {
             return null;
         }
         Drawable icon = null;
-        Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/icons/" + filename);
+        Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/icons/" + filename + ".png");
         if (bitmap != null) {
             icon = new BitmapDrawable(context.getResources(), bitmap);
         }
@@ -315,35 +315,25 @@ public class Tool {
             directory.mkdir();
         }
 
-        File file = new File(context.getFilesDir() + "/icons/" + filename);
-        if (file.exists()) {
-            removeIcon(context, filename);
-        }
+        File file = new File(context.getFilesDir() + "/icons/" + filename + ".png");
+        removeIcon(context, filename);
         try {
             file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        FileOutputStream out = null;
         try {
-            out = new FileOutputStream(file);
+            FileOutputStream out = new FileOutputStream(file);
             icon.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.close();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
     public static void removeIcon(Context context, String filename) {
-        File file = new File(context.getFilesDir() + "/icons/" + filename);
+        File file = new File(context.getFilesDir() + "/icons/" + filename + ".png");
         if (file.exists()) {
             try {
                 file.delete();
@@ -357,6 +347,7 @@ public class Tool {
         if (drawable == null) {
             return null;
         }
+
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
             if (bitmapDrawable.getBitmap() != null) {

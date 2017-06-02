@@ -47,10 +47,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE = "DROP TABLE IF EXISTS ";
     private static final String SQL_QUERY = "SELECT * FROM ";
     private SQLiteDatabase db;
+    private Context context;
 
-    public DatabaseHelper(Context context) {
-        super(context, DATABASE_HOME, null, 1);
+    public DatabaseHelper(Context c) {
+        super(c, DATABASE_HOME, null, 1);
         db = getWritableDatabase();
+        context = c;
     }
 
     public void onCreate(SQLiteDatabase db) {
@@ -80,6 +82,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String concat = "";
         switch (item.type) {
             case APP:
+                Tool.saveIcon(context, Tool.drawableToBitmap(item.icon), Integer.toString(item.idValue));
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.intent));
                 break;
             case GROUP:
@@ -207,6 +210,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String concat = "";
         switch (item.type) {
             case APP:
+                Tool.saveIcon(context, Tool.drawableToBitmap(item.icon), Integer.toString(item.idValue));
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.intent));
                 break;
             case GROUP:
@@ -260,6 +264,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         switch (type) {
             case APP:
             case SHORTCUT:
+                item.icon = Tool.getIcon(Home.launcher, Integer.toString(item.idValue));
                 item.intent = Tool.getIntentFromString(data);
                 break;
             case GROUP:

@@ -220,7 +220,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public boolean addItemToPoint(final Item item, int x, int y) {
-        CellContainer.LayoutParams positionToLayoutPrams = touchPosToLayoutParams(x, y, item.spanX, item.spanY);
+        CellContainer.LayoutParams positionToLayoutPrams = coordinateToLayoutParams(x, y, item.spanX, item.spanY);
         if (positionToLayoutPrams != null) {
             item.x = positionToLayoutPrams.x;
             item.y = positionToLayoutPrams.y;
