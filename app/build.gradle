@@ -31,6 +31,7 @@ android {
 
         flavorTest {
             applicationId "io.github.openlauncherteam.openlauncher.test"
+            manifestPlaceholders = [appIcon: "@drawable/ic_launcher_nightly"]
             resValue 'string', 'app_name', "OL Nightly"
             versionCode = Integer.parseInt(new Date().format('yyMMdd'))
             versionName = new Date().format('yyMMdd')
