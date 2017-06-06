@@ -66,6 +66,8 @@ public class Item implements Parcelable {
         idValue = parcel.readInt();
         type = Type.valueOf(parcel.readString());
         name = parcel.readString();
+        x = parcel.readInt();
+        y = parcel.readInt();
         switch (type) {
             case APP:
             case SHORTCUT:
@@ -97,7 +99,7 @@ public class Item implements Parcelable {
         return object != null && this.idValue == itemObject.idValue;
     }
 
-    public static Item newAppItem(Context context, AppManager.App app) {
+    public static Item newAppItem(AppManager.App app) {
         Item item = new Item();
         item.type = Type.APP;
         item.name = app.label;
@@ -106,7 +108,7 @@ public class Item implements Parcelable {
         return item;
     }
 
-    public static Item newShortcutItem(Context context, Intent intent, Drawable icon, String name) {
+    public static Item newShortcutItem(Intent intent, Drawable icon, String name) {
         Item item = new Item();
         item.type = Type.SHORTCUT;
         item.name = name;
@@ -155,6 +157,8 @@ public class Item implements Parcelable {
         out.writeInt(idValue);
         out.writeString(type.toString());
         out.writeString(name);
+        out.writeInt(x);
+        out.writeInt(y);
         switch (type) {
             case APP:
             case SHORTCUT:

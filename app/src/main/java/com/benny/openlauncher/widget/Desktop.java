@@ -130,7 +130,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     int pagePos = y * rows + x;
                     int pos = columns * rows * i + pagePos;
                     if (!(pos >= apps.size())) {
-                        Item appItem = Item.newAppItem(getContext(), apps.get(pos));
+                        Item appItem = Item.newAppItem(apps.get(pos));
                         appItem.x = x;
                         appItem.y = y;
                         addItemToPage(appItem, i);

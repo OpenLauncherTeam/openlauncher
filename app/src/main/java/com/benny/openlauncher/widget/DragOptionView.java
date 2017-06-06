@@ -95,8 +95,8 @@ public class DragOptionView extends CardView {
                                 item.name = label;
                                 Home.db.updateItem(item);
 
-                                // TODO: still need to remove old view
                                 Home.launcher.desktop.addItemToCell(item, item.x, item.y);
+                                Home.launcher.desktop.removeItem((AppItemView) Home.launcher.desktop.getCurrentPage().coordinateToChildView(new Point(item.x, item.y)));
                             }
                         });
                         return true;

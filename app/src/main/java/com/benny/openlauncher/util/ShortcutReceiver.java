@@ -43,7 +43,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
                 shortcutIconDrawable = new BitmapDrawable(context.getResources(), (Bitmap) intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON));
         }
 
-        Item item = Item.newShortcutItem(context, newIntent, shortcutIconDrawable, name);
+        Item item = Item.newShortcutItem(newIntent, shortcutIconDrawable, name);
         Point preferredPos = Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).findFreeSpace();
         if (preferredPos == null) {
             Tool.toast(Home.launcher, R.string.toast_not_enough_space);

@@ -253,7 +253,7 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder withOnLongClick(final AppManager.App app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
-            withOnLongClick(Item.newAppItem(Home.launcher, app), action, eventAction);
+            withOnLongClick(Item.newAppItem(app), action, eventAction);
             return this;
         }
 
