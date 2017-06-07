@@ -507,8 +507,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     intent.setAction(Intent.ACTION_WEB_SEARCH);
                     intent.putExtra(SearchManager.QUERY, string);
                 } else {
+                    String baseUri = appSettings.getSearchBarBaseURI();
+                    String searchUri = baseUri.contains("{query}") ? baseUri.replace("{query}", string) : (baseUri + string);
+
                     intent.setAction(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(appSettings.getSearchBarBaseURI()+string));
+                    intent.setData(Uri.parse(searchUri));
                 }
 
                 try {

@@ -93,8 +93,10 @@
     <string name="pref_title__desktop_show_label">Show Labels</string>
     <string name="pref_summary__desktop_show_label">Show item labels below their icons.</string>
     <string name="pref_title__search_bar_base_uri">Search URI</string>
-    <string name="pref_summary__search_bar_base_uri">Base URI for web searches (the search term will be appended at the end).</string>
-    <string name="pref_default__search_bar_base_uri" translatable="false">https://google.com/search?q=</string>
+    <string name="pref_summary__search_bar_base_uri">Set the URI used for web searches.</string>
+    <string name="pref_dialog__search_bar_base_uri">Enter the URI that should be used for web searches. The tag {query} can be used as
+      placeholder for the search query, in case no placeholder is used the search query will be appended at the end of the URI.</string>
+    <string name="pref_default__search_bar_base_uri" translatable="false">https://google.com/search?q={query}</string>
     <string name="pref_title__desktop_background_color">Background</string>
     <string name="pref_title__desktop_folder_color">Folder</string>
     <string name="pref_title__minibar_background_color" translatable="false">@string/minibar</string>
