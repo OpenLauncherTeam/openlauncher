@@ -134,7 +134,6 @@
     <!-- Item Labels -->
 
     <string name="group">Без имени</string>
-    <string name="app_drawer">Все приложения</string>
 
     <!-- Dialogs -->
 
@@ -157,8 +156,6 @@
     <string name="columns">Столбцы</string>
     <string name="rows">Строки</string>
     <string name="search_online">Поиск в сети…</string>
-    <string name="available_memory">Доступная память: %1$s</string>
-    <string name="available_storage">Доступное место: %1$s</string>
     <string name="volume_level_ringtone">Рингтон</string>
     <string name="volume_level_notification">Уведомление</string>
     <string name="volume_level_system">Система</string>

@@ -1,7 +1,9 @@
 package com.benny.openlauncher.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.AudioManager;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -49,6 +51,7 @@ public class MiniPopupView extends RevealFrameLayout {
         return super.onTouchEvent(event);
     }
 
+    @SuppressLint("DefaultLocale")
     public void showActionWindow(LauncherAction.Action action, float x, float y) {
         View window = null;
         Context context = getContext();
@@ -56,10 +59,10 @@ public class MiniPopupView extends RevealFrameLayout {
             case LockScreen:
                 break;
             case ClearRam:
-                window = LayoutInflater.from(getContext()).inflate(R.layout.window_clear_ram, this, false);
+                window = LayoutInflater.from(getContext()).inflate(R.layout.window_storage_info, this, false);
                 ClearRamViewHolder clearRamViewHolder = new ClearRamViewHolder(window);
-                clearRamViewHolder.availableRam.setText(context.getString(R.string.available_memory, Tool.getFreeRAM(getContext())));
-                clearRamViewHolder.availableStorage.setText(context.getString(R.string.available_storage, Tool.getFreeStorage(getContext())));
+                clearRamViewHolder.availableRam.setText(Html.fromHtml(Tool.getRAM_Info(context)));
+                clearRamViewHolder.availableStorage.setText(Html.fromHtml(Tool.getStorage_Info(context)));
                 break;
             case SetWallpaper:
                 break;

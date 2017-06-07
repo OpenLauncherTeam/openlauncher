@@ -5,7 +5,6 @@
     <string name="uninstall">Deinstallieren</string>
     <string name="widget">Widget</string>
     <string name="remove">Entfernen</string>
-    <string name="app_drawer">Alle Apps</string>
 
     <string name="toast_not_enough_space">Nicht genügend Platz</string>
     <string name="toast_app_uninstalled">Die App wurde deinstalliert.</string>
@@ -151,11 +150,19 @@
     <string name="version">Version</string>
     <string name="vertical_scroll_drawer">Vertikaler scrollbarer Drawer</string>
     <string name="horizontal_paged_drawer">Horizontaler Drawer (Paged)</string>
-    <string name="available_memory">Verfügbarer Speicher: %1$s</string>
-    <string name="available_storage">Verfügbarerer Speicherplatz: %1$s</string>
     <string name="volume_level_ringtone">Klingelton</string>
     <string name="volume_level_notification">Benachrichtigung</string>
     <string name="volume_level_system">System</string>
     <string name="volume_level_media">Medien</string>
+    <string name="memory">Arbeitsspeicher</string>
+    <string name="storage">Datenspeicher</string>
+    <string name="pref_title__search_bar">Suchleiste</string>
+    <string name="pref_title__desktop_style">Style</string>
+    <string name="desktop_mode_normal">Normal</string>
+    <string name="desktop_mode_show_all_apps">Alle Apps anzeigen</string>
+    <string name="pref_title__search_bar_base_uri">Such-Adresse</string>
+    <string name="pref_summary__search_bar_base_uri">Konfiguration der URI für die Web-Suche</string>
+    <string name="pref_dialog__search_bar_base_uri">Gib die URI an die benutzt werden soll für die Websuche. Das Token {query} kann benutzt werden als Platzhalter für den eingegbenen Text</string>
+    <string name="pref_summary__desktop_style">Auswählen zwischen normalen und Alle Apps-Modus</string>
 
 </resources>

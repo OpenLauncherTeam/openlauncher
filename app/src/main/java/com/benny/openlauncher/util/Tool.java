@@ -1,5 +1,6 @@
 package com.benny.openlauncher.util;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.ContentUris;
 import android.content.Context;
@@ -15,9 +16,13 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
+import android.os.StatFs;
 import android.provider.ContactsContract;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.util.TypedValue;
@@ -31,6 +36,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.benny.openlauncher.BuildConfig;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 
@@ -548,23 +554,32 @@ public class Tool {
         }, 80);
     }
 
-    public static String getFreeRAM(Context context) {
+    @SuppressLint("DefaultLocale")
+    public static String getRAM_Info(Context context) {
         ActivityManager actManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
         actManager.getMemoryInfo(memInfo);
 
-        long totalMemory = memInfo.availMem;
-
-        return Formatter.formatFileSize(context, totalMemory);
+        return String.format("<big><big><b>%s</b></big></big><br\\>%s / %s",
+                context.getString(R.string.memory),
+                Formatter.formatFileSize(context, memInfo.availMem),
+                Formatter.formatFileSize(context, memInfo.totalMem)
+        );
     }
 
-    public static String getFreeStorage(Context context) {
-        File externalFilesDir = context.getExternalFilesDir(null);
-        if (externalFilesDir != null) {
-            long bytesAvailable = new File(externalFilesDir.toString()).getFreeSpace();
-            return Formatter.formatFileSize(context, bytesAvailable);
+    @SuppressLint("DefaultLocale")
+    public static String getStorage_Info(Context context) {
+        File externalFilesDir = Environment.getExternalStorageDirectory();
+        if (externalFilesDir == null) {
+            return "?";
         }
-        return "";
+        StatFs stat = new StatFs(externalFilesDir.getPath());
+        long blockSize = stat.getBlockSize();
+        return String.format("<big><big><b>%s</b></big></big><br\\>%s / %s",
+                context.getString(R.string.storage),
+                Formatter.formatFileSize(context, blockSize * stat.getAvailableBlocks()),
+                Formatter.formatFileSize(context, blockSize * (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ? stat.getBlockCountLong() : stat.getBlockCount()))
+        );
     }
 
     public static String getIntentAsString(Intent intent) {
@@ -585,6 +600,12 @@ public class Tool {
                 return new Intent();
             }
         }
+    }
+
+    @DrawableRes
+    @SuppressWarnings("ConstantConditions")
+    public static int getOL_LauncherIcon() {
+        return BuildConfig.IS_TEST_BUILD ? R.drawable.ic_launcher_nightly : R.drawable.ic_launcher;
     }
 
     public static void copy(Context context, String stringIn, String stringOut) {
@@ -617,7 +638,7 @@ public class Tool {
         }
     }
 
-    public static boolean isIntentAvailable(Context context, String action) {
+    public static boolean isIntentActionAvailable(Context context, String action) {
         final PackageManager packageManager = context.getPackageManager();
         final Intent intent = new Intent(action);
         List resolveInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);

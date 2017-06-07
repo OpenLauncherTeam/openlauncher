@@ -503,7 +503,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             public void onInternetSearch(String string) {
                 Intent intent = new Intent();
 
-                if (Tool.isIntentAvailable(getApplicationContext(), Intent.ACTION_WEB_SEARCH)) {
+                if (Tool.isIntentActionAvailable(getApplicationContext(), Intent.ACTION_WEB_SEARCH)) {
                     intent.setAction(Intent.ACTION_WEB_SEARCH);
                     intent.putExtra(SearchManager.QUERY, string);
                 } else {

@@ -34,12 +34,6 @@
             android:title="@string/pref_title__minibar" />
 
         <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="@string/pref_key__search_bar_enable"
-            android:summary="@string/pref_summary__search_bar_enable"
-            android:title="@string/pref_title__search_bar_enable" />
-
-        <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_key__desktop_fullscreen"
             android:summary="@string/pref_summary__desktop_fullscreen"
@@ -60,8 +54,14 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title__search_bar">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__search_bar_enable"
+            android:summary="@string/pref_summary__search_bar_enable"
+            android:title="@string/pref_title__search_bar_enable" />
 
         <EditTextPreference
+            android:dependency="@string/pref_key__search_bar_enable"
             android:defaultValue="@string/pref_default__search_bar_base_uri"
             android:key="@string/pref_key__search_bar_base_uri"
             android:summary="@string/pref_summary__search_bar_base_uri"

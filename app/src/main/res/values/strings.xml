@@ -96,7 +96,7 @@
     <string name="pref_summary__search_bar_base_uri">Set the URI used for web searches.</string>
     <string name="pref_dialog__search_bar_base_uri">Enter the URI that should be used for web searches. The tag {query} can be used as
       placeholder for the search query, in case no placeholder is used the search query will be appended at the end of the URI.</string>
-    <string name="pref_default__search_bar_base_uri" translatable="false">https://google.com/search?q={query}</string>
+    <string name="pref_default__search_bar_base_uri" translatable="false">https://www.startpage.com/do/search?query={query}</string>
     <string name="pref_title__desktop_background_color">Background</string>
     <string name="pref_title__desktop_folder_color">Folder</string>
     <string name="pref_title__minibar_background_color" translatable="false">@string/minibar</string>
@@ -220,7 +220,6 @@
     <!-- Item Labels -->
 
     <string name="group">Unnamed</string>
-    <string name="app_drawer">All Apps</string>
 
     <!-- Dialogs -->
 
@@ -244,8 +243,8 @@
     <string name="columns">Columns</string>
     <string name="rows">Rows</string>
     <string name="search_online">Search online&#8230;</string>
-    <string name="available_memory">Available memory: %1$s</string>
-    <string name="available_storage">Available storage: %1$s</string>
+    <string name="memory">Memory</string>
+    <string name="storage">Storage</string>
     <string name="volume_level_ringtone">Ringtone</string>
     <string name="volume_level_notification">Notification</string>
     <string name="volume_level_system">System</string>

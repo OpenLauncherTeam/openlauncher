@@ -113,7 +113,6 @@
     <string name="request_toast">アプリが選択されていません。 ドロワーにすべてのアプリを表示しますか?</string>
     <string name="on">オン</string>
     <string name="off">オフ</string>
-    <string name="app_drawer">すべてのアプリ</string>
     <string name="cancel">キャンセル</string>
     <string name="ok">OK</string>
     <string name="home">ホーム</string>
