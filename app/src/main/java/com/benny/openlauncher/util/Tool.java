@@ -621,10 +621,6 @@ public class Tool {
         final PackageManager packageManager = context.getPackageManager();
         final Intent intent = new Intent(action);
         List resolveInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-        if (resolveInfo.size() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return resolveInfo.size() > 0;
     }
 }
