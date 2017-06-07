@@ -59,6 +59,10 @@ public class AppSettings extends AppSettingsBase {
         return getBool(R.string.pref_key__desktop_show_label, true);
     }
 
+    public String getSearchBarBaseURI() {
+        return getString(R.string.pref_key__search_bar_base_uri, R.string.pref_default__search_bar_base_uri);
+    }
+
     public int getDesktopColor() {
         return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
     }

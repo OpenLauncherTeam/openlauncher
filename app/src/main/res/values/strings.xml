@@ -78,6 +78,7 @@
     <string name="pref_title__size">Size</string>
     <string name="pref_title__appearance">Appearance</string>
     <string name="pref_title__color">Colors</string>
+    <string name="pref_title__search_bar">Search Bar</string>
 
     <string name="pref_title__desktop_style">Style</string>
     <string name="pref_summary__desktop_style">Choose between a normal desktop and showing all installed apps.</string>
@@ -91,6 +92,11 @@
     <string name="pref_summary__desktop_show_position_indicator">Show the page indicator below the desktop.</string>
     <string name="pref_title__desktop_show_label">Show Labels</string>
     <string name="pref_summary__desktop_show_label">Show item labels below their icons.</string>
+    <string name="pref_title__search_bar_base_uri">Search URI</string>
+    <string name="pref_summary__search_bar_base_uri">Set the URI used for web searches.</string>
+    <string name="pref_dialog__search_bar_base_uri">Enter the URI that should be used for web searches. The tag {query} can be used as
+      placeholder for the search query, in case no placeholder is used the search query will be appended at the end of the URI.</string>
+    <string name="pref_default__search_bar_base_uri" translatable="false">https://google.com/search?q={query}</string>
     <string name="pref_title__desktop_background_color">Background</string>
     <string name="pref_title__desktop_folder_color">Folder</string>
     <string name="pref_title__minibar_background_color" translatable="false">@string/minibar</string>
@@ -155,6 +161,7 @@
     <string name="pref_key__desktop_fullscreen" translatable="false">pref_key__desktop_fullscreen</string>
     <string name="pref_key__desktop_show_position_indicator" translatable="false">pref_key__desktop_show_position_indicator</string>
     <string name="pref_key__desktop_show_label" translatable="false">pref_key__desktop_show_label</string>
+    <string name="pref_key__search_bar_base_uri" translatable="false">pref_key__search_bar_base_uri</string>
     <string name="pref_key__desktop_background_color" translatable="false">pref_key__desktop_background_color</string>
     <string name="pref_key__desktop_folder_color" translatable="false">pref_key__desktop_folder_color</string>
     <string name="pref_key__minibar_background_color" translatable="false">pref_key__minibar_background_color</string>
