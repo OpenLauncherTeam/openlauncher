@@ -501,8 +501,16 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         searchBar.setCallback(new SearchBar.CallBack() {
             @Override
             public void onInternetSearch(String string) {
-                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                intent.putExtra(SearchManager.QUERY, string);
+                Intent intent = null;
+
+                if (Tool.isIntentAvailable(getApplicationContext(), Intent.ACTION_WEB_SEARCH)) {
+                    intent = new Intent(Intent.ACTION_WEB_SEARCH);
+                    intent.putExtra(SearchManager.QUERY, string);
+                } else {
+                    intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(appSettings.getSearchBarBaseURI()+string));
+                }
+
                 try {
                     startActivity(intent);
                 } catch (Exception e) {

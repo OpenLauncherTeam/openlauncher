@@ -59,6 +59,17 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/pref_title__search_bar">
+
+        <EditTextPreference
+            android:defaultValue="@string/pref_default__search_bar_base_uri"
+            android:key="@string/pref_key__search_bar_base_uri"
+            android:summary="@string/pref_summary__search_bar_base_uri"
+            android:title="@string/pref_title__search_bar_base_uri"
+            android:inputType="textUri" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/pref_title__color">
 
         <com.jaredrummler.android.colorpicker.ColorPreference
