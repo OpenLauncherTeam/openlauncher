@@ -175,13 +175,13 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             String dockSummary = String.format("%s: %d", getString(R.string.pref_title__size), settings.getDockSize());
             findPreference(getString(R.string.pref_key__cat_dock)).setSummary(dockSummary);
 
-            String drawerSummary = "";
+            String drawerSummary = String.format("%s: ", getString(R.string.pref_title__style));
             switch (settings.getDrawerStyle()) {
                 case AppDrawerController.DrawerMode.HORIZONTAL_PAGED:
-                    drawerSummary = getString(R.string.horizontal_paged_drawer);
+                    drawerSummary += getString(R.string.horizontal_paged_drawer);
                     break;
                 case AppDrawerController.DrawerMode.VERTICAL:
-                    drawerSummary = getString(R.string.vertical_scroll_drawer);
+                    drawerSummary += getString(R.string.vertical_scroll_drawer);
                     break;
             }
             findPreference(getString(R.string.pref_key__cat_app_drawer)).setSummary(drawerSummary);

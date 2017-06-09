@@ -215,11 +215,6 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
         initViews();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            int statusBarHeight = Tool.getStatusBarHeight(this);
-            shortcutLayout.setPadding(0, statusBarHeight, 0, 0);
-        }
-
         registerBroadcastReceiver();
 
         // add all of the data for the desktop and dock
@@ -444,13 +439,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             }
         }
 
-
-        minibar.setPadding(0, Tool.getStatusBarHeight(this), 0, Tool.getNavBarHeight(this));
         minibar.setAdapter(new IconListAdapter(this, labels, icons));
         minibar.setOnSwipeRight(new SwipeListView.OnSwipeRight() {
             @Override
             public void onSwipe(int pos, float x, float y) {
-                miniPopup.showActionWindow(LauncherAction.Action.valueOf(labels.get(pos)), x, y + (shortcutLayout.getHeight() - minibar.getHeight()) / 2 - Tool.getNavBarHeight(Home.this));
+                miniPopup.showActionWindow(LauncherAction.Action.valueOf(labels.get(pos)), x, y + (shortcutLayout.getHeight() - minibar.getHeight()) / 2);
             }
         });
         minibar.setOnItemClickListener(new AdapterView.OnItemClickListener() {

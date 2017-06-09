@@ -34,15 +34,14 @@ public class DialogHelper {
     public static void editItemDialog(String title, String defaultText, Context c, final onItemEditListener listener) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(c);
         builder.title(title)
+                .positiveText(R.string.ok)
+                .negativeText(R.string.cancel)
                 .input(null, defaultText, new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
                         listener.itemLabel(input.toString());
                     }
-                })
-                .positiveText(R.string.ok)
-                .negativeText(R.string.cancel)
-                .show();
+                }).show();
     }
 
     public static void alertDialog(Context context, String title, String msg) {
@@ -55,7 +54,7 @@ public class DialogHelper {
 
     public static void addActionItemDialog(final Context context, MaterialDialog.ListCallback callback) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title("Desktop Action")
+        builder.title(R.string.desktop_action)
                 .items(R.array.entries__desktop_actions)
                 .itemsCallback(callback)
                 .show();
@@ -64,7 +63,7 @@ public class DialogHelper {
     public static void selectAppDialog(final Context context, final OnAppSelectedListener onAppSelectedListener) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         FastItemAdapter<IconLabelItem> fastItemAdapter = new FastItemAdapter<>();
-        builder.title("Select App")
+        builder.title(R.string.select_app)
                 .adapter(fastItemAdapter, new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
                 .negativeText(R.string.cancel);
 
@@ -80,9 +79,9 @@ public class DialogHelper {
         fastItemAdapter.withOnClickListener(new FastAdapter.OnClickListener<IconLabelItem>() {
             @Override
             public boolean onClick(View v, IAdapter<IconLabelItem> adapter, IconLabelItem item, int position) {
-                if (onAppSelectedListener != null)
+                if (onAppSelectedListener != null) {
                     onAppSelectedListener.onAppSelected(apps.get(position));
-
+                }
                 dialog.dismiss();
                 return true;
             }
@@ -91,8 +90,8 @@ public class DialogHelper {
     }
 
     public static void selectActionDialog(final Context context, int titleId, LauncherAction.ActionItem selected, final int id, final OnActionSelectedListener onActionSelectedListener) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(context.getString(titleId))
+        new MaterialDialog.Builder(context)
+                .title(context.getString(titleId))
                 .negativeText(R.string.cancel)
                 .items(R.array.entries__gestures)
                 .itemsCallbackSingleChoice(LauncherAction.getActionItemIndex(selected) + 1, new MaterialDialog.ListCallbackSingleChoice() {
@@ -120,13 +119,12 @@ public class DialogHelper {
                         }
                         return true;
                     }
-                })
-                .show();
+                }).show();
     }
 
     public static void setWallpaperDialog(final Context context) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(R.string.wallpaper)
+        new MaterialDialog.Builder(context)
+                .title(R.string.wallpaper)
                 .iconRes(R.drawable.ic_photo_black_24dp)
                 .items(R.array.entries__wallpaper_options)
                 .itemsCallback(new MaterialDialog.ListCallback() {
@@ -165,18 +163,17 @@ public class DialogHelper {
     }
 
     public static void backupDialog(final Context context) {
-        final CharSequence[] options = {context.getResources().getString(R.string.dialog__backup_app_settings__backup), context.getResources().getString(R.string.dialog__backup_app_settings__restore)};
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(R.string.pref_title__backup)
+        new MaterialDialog.Builder(context)
+                .title(R.string.pref_title__backup)
                 .positiveText(R.string.cancel)
-                .items(options)
+                .items(R.array.entries__backup_options)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int item, CharSequence text) {
                         PackageManager m = context.getPackageManager();
                         String s = context.getPackageName();
 
-                        if (options[item].equals(context.getResources().getString(R.string.dialog__backup_app_settings__backup))) {
+                        if (context.getResources().getStringArray(R.array.entries__backup_options)[item].equals(context.getResources().getString(R.string.dialog__backup_app_settings__backup))) {
                             File directory = new File(Environment.getExternalStorageDirectory() + "/OpenLauncher/");
                             if (!directory.exists()) {
                                 directory.mkdir();
@@ -191,7 +188,7 @@ public class DialogHelper {
                                 Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
                             }
                         }
-                        if (options[item].equals(context.getResources().getString(R.string.dialog__backup_app_settings__restore))) {
+                        if (context.getResources().getStringArray(R.array.entries__backup_options)[item].equals(context.getResources().getString(R.string.dialog__backup_app_settings__restore))) {
                             File directory = new File(Environment.getExternalStorageDirectory() + "/OpenLauncher/");
                             try {
                                 PackageInfo p = m.getPackageInfo(s, 0);

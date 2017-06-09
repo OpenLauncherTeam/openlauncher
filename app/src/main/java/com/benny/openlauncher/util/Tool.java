@@ -376,42 +376,6 @@ public class Tool {
         return bitmap;
     }
 
-    public static boolean hasNavBar(Context context) {
-        Resources resources = context.getResources();
-        int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
-        if (id > 0) {
-            return resources.getBoolean(id);
-        } else {
-            // check for keys
-            boolean hasMenuKey = ViewConfiguration.get(context).hasPermanentMenuKey();
-            boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
-            return !hasMenuKey && !hasBackKey;
-        }
-    }
-
-    @Deprecated
-    // not getting the right value on all devices
-    public static int getNavBarHeight(Context context) {
-        Resources resources = context.getResources();
-        if (!hasNavBar(context)) return 0;
-        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            return resources.getDimensionPixelSize(resourceId);
-        }
-        return 0;
-    }
-
-    @Deprecated
-    // not getting the right value on all devices
-    public static int getStatusBarHeight(Context context) {
-        int result = 0;
-        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = context.getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }
-
     public static void startApp(Context context, AppManager.App app) {
         if (app.packageName.equals("com.benny.openlauncher")) {
             LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, context);

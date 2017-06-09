@@ -28,6 +28,11 @@
         <item>@string/vertical_scroll_drawer</item>
     </string-array>
 
+    <string-array name="entries__backup_options">
+        <item>@string/dialog__backup_app_settings__backup</item>
+        <item>@string/dialog__backup_app_settings__restore</item>
+    </string-array>
+
     <string-array name="entries__wallpaper_options">
         <item>Set Wallpaper</item>
         <item>Blur Wallpaper</item>
@@ -37,4 +42,5 @@
         <item>0</item>
         <item>1</item>
     </string-array>
+
 </resources>

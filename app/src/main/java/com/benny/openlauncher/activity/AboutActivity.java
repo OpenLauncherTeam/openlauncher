@@ -90,7 +90,6 @@ public class AboutActivity extends MaterialAboutActivity {
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://gsantner.github.io/")))
                 .build());
 
-
         MaterialAboutCard.Builder contributorsCard = new MaterialAboutCard.Builder();
         contributorsCard.title(getString(R.string.about_credit));
         contributorsCard.addItem(new MaterialAboutActionItem.Builder()
@@ -109,9 +108,6 @@ public class AboutActivity extends MaterialAboutActivity {
                 .text(R.string.about_credit_text_all_contributors)
                 .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/OpenLauncherTeam/openlauncher/graphs/contributors")))
                 .build());
-
-
-        //authorCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this,getResources().getDrawable(),"Chris DeBrodie",false, Uri.parse("")));
 
         return new MaterialAboutList.Builder()
                 .addCard(titleCard.build())
