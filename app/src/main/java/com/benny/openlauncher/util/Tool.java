@@ -1,7 +1,10 @@
 package com.benny.openlauncher.util;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Service;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -20,12 +23,15 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.StatFs;
+import android.os.Vibrator;
 import android.provider.ContactsContract;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
+import android.support.v4.app.ActivityCompat;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.HapticFeedbackConstants;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -565,6 +571,12 @@ public class Tool {
             }
         }
     }
+
+    //
+    public static void vibrate(View view) {
+        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+    }
+    //
 
     @DrawableRes
     @SuppressWarnings("ConstantConditions")

@@ -139,6 +139,10 @@ public class AppSettings extends AppSettingsBase {
         return getBool(R.string.pref_key__dock_swipe_up, true);
     }
 
+    public boolean isGestureFeedback() {
+        return getBool(R.string.pref_key__desktop_gesture_feedback, false);
+    }
+
     public int getIconSize() {
         return getInt(R.string.pref_key__icon_size, 52);
     }

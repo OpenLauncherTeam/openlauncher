@@ -720,8 +720,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
             appSettings.setAppRestartRequired(false);
 
             Intent restartIntent = new Intent(this, Home.class);
-            PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556,
-                    restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+            PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556,restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
             AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, restartIntentP);
             System.exit(0);

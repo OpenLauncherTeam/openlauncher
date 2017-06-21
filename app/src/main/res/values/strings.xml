@@ -131,6 +131,7 @@
     <string name="pref_title__desktop_swipe_down">Swipe Downwards</string>
     <string name="pref_title__desktop_pinch">Pinch</string>
     <string name="pref_title__desktop_unpinch">Unpinch</string>
+    <string name="pref_title__desktop_gesture_feedback">Feedback</string>
 
     <string name="pref_title__icon_size" translatable="false">@string/pref_title__size</string>
     <string name="pref_summary__icon_size">Size of all app icons.</string>
@@ -190,6 +191,7 @@
     <string name="pref_key__desktop_swipe_down" translatable="false">pref_key__desktop_swipe_down</string>
     <string name="pref_key__desktop_pinch" translatable="false">pref_key__desktop_pinch</string>
     <string name="pref_key__desktop_unpinch" translatable="false">pref_key__desktop_unpinch</string>
+    <string name="pref_key__desktop_gesture_feedback" translatable="false">pref_key__desktop_gesture_feedback</string>
 
     <string name="pref_key__icon_size" translatable="false">pref_key__icon_size</string>
     <string name="pref_key__icon_pack" translatable="false">pref_key__icon_pack</string>

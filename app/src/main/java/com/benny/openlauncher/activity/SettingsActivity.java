@@ -22,6 +22,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherAction;
+import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.widget.AppDrawerController;
 

@@ -84,6 +84,8 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                 if (startPosY - ev.getY() > minDist) {
                     if (appSettings.getGestureDockSwipeUp()) {
                         Point p = Tool.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), this, Home.launcher.appDrawerController);
+                        if (AppSettings.get().isGestureFeedback())
+                            Tool.vibrate(this);
                         Home.launcher.openAppDrawer(this, p.x, p.y);
                     }
                 }

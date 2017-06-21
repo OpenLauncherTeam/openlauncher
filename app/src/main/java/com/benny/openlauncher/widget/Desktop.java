@@ -398,13 +398,19 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             return new SimpleFingerGestures.OnFingerGestureListener() {
                 @Override
                 public boolean onSwipeUp(int i, long l, double v) {
-                    LauncherAction.RunAction(Home.launcher.db.getGesture(1), desktop.getContext());
+                    LauncherAction.ActionItem gesture = Home.db.getGesture(1);
+                    if (gesture != null && AppSettings.get().isGestureFeedback())
+                        Tool.vibrate(desktop);
+                    LauncherAction.RunAction(gesture, desktop.getContext());
                     return true;
                 }
 
                 @Override
                 public boolean onSwipeDown(int i, long l, double v) {
-                    LauncherAction.RunAction(Home.launcher.db.getGesture(2), desktop.getContext());
+                    LauncherAction.ActionItem gesture = Home.db.getGesture(2);
+                    if (gesture != null && AppSettings.get().isGestureFeedback())
+                        Tool.vibrate(desktop);
+                    LauncherAction.RunAction(gesture, desktop.getContext());
                     return true;
                 }
 
@@ -420,19 +426,28 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
                 @Override
                 public boolean onPinch(int i, long l, double v) {
-                    LauncherAction.RunAction(Home.launcher.db.getGesture(3), desktop.getContext());
+                    LauncherAction.ActionItem gesture = Home.db.getGesture(3);
+                    if (gesture != null && AppSettings.get().isGestureFeedback())
+                        Tool.vibrate(desktop);
+                    LauncherAction.RunAction(gesture, desktop.getContext());
                     return true;
                 }
 
                 @Override
                 public boolean onUnpinch(int i, long l, double v) {
-                    LauncherAction.RunAction(Home.launcher.db.getGesture(4), desktop.getContext());
+                    LauncherAction.ActionItem gesture = Home.db.getGesture(4);
+                    if (gesture != null && AppSettings.get().isGestureFeedback())
+                        Tool.vibrate(desktop);
+                    LauncherAction.RunAction(gesture, desktop.getContext());
                     return true;
                 }
 
                 @Override
                 public boolean onDoubleTap(int i) {
-                    LauncherAction.RunAction(Home.launcher.db.getGesture(0), desktop.getContext());
+                    LauncherAction.ActionItem gesture = Home.db.getGesture(0);
+                    if (gesture != null && AppSettings.get().isGestureFeedback())
+                        Tool.vibrate(desktop);
+                    LauncherAction.RunAction(gesture, desktop.getContext());
                     return true;
                 }
             };
