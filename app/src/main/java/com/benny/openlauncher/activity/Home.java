@@ -2,10 +2,13 @@ package com.benny.openlauncher.activity;
 
 import android.Manifest;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +27,29 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.core.interfaces.AppDeleteListener;
+import com.benny.openlauncher.core.interfaces.AppItemView;
+import com.benny.openlauncher.core.interfaces.AppUpdateListener;
+import com.benny.openlauncher.core.interfaces.DatabaseHelper;
+import com.benny.openlauncher.core.interfaces.DialogHandler;
+import com.benny.openlauncher.core.interfaces.Item;
+import com.benny.openlauncher.core.interfaces.SettingsManager;
+import com.benny.openlauncher.core.manager.StaticSetup;
+import com.benny.openlauncher.core.util.DragAction;
+import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.widget.Desktop;
 import com.benny.openlauncher.core.widget.GroupPopupView;
+import com.benny.openlauncher.model.AppItem;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.viewutil.DialogHelper;
+import com.benny.openlauncher.viewutil.GroupIconDrawable;
 import com.benny.openlauncher.viewutil.IconListAdapter;
+import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.viewutil.QuickCenterItem;
 import com.benny.openlauncher.widget.MiniPopupView;
 import com.benny.openlauncher.widget.SearchBar;
@@ -38,11 +57,13 @@ import com.benny.openlauncher.widget.SwipeListView;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
+import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class Home extends com.benny.openlauncher.core.activity.Home implements DrawerLayout.DrawerListener
 {
@@ -341,6 +362,252 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     {
         ((SearchBar)searchBar).collapse();
         super.onHandleLauncherPause();
+    }
+
+    @Override
+    protected void initStaticHelper()
+    {
+        final DialogHandler dialogHandler = new DialogHandler() {
+            @Override
+            public void showPickAction(Context context, final IOnAddAppDrawerItem resultHandler) {
+                DialogHelper.addActionItemDialog(context, new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+
+                        switch (which) {
+                            case 0:
+                                resultHandler.onAdd();
+                                break;
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void showEditDialog(Context context, final Item item, IOnEditDialog resultHandler) {
+                DialogHelper.editItemDialog("Edit Item", item.getLabel(), context, new DialogHelper.onItemEditListener() {
+                    @Override
+                    public void itemLabel(String label) {
+                        item.setLabel(label);
+                        Home.db.updateItem(item);
+
+                        Home.launcher.desktop.addItemToCell(item, item.getX(), item.getY());
+                        Home.launcher.desktop.removeItem(Home.launcher.desktop.getCurrentPage().coordinateToChildView(new Point(item.getX(), item.getY())));
+                    }
+                });
+            }
+
+            @Override
+            public void showDeletePackageDialog(Context context, DragEvent dragEvent) {
+                DialogHelper.deletePackageDialog(context, dragEvent);
+            }
+        };
+        StaticSetup.init(new StaticSetup<Home, AppManager.App, com.benny.openlauncher.model.Item, AppItem, com.benny.openlauncher.widget.AppItemView>() {
+            @Override
+            public Class getItemClass() {
+                return com.benny.openlauncher.model.Item.class;
+            }
+
+            @Override
+            public SettingsManager getAppSettings() {
+                return AppSettings.get();
+            }
+
+            @Override
+            public DatabaseHelper createDatabaseHelper(Context context) {
+                return new com.benny.openlauncher.util.DatabaseHelper(context);
+            }
+
+            @Override
+            public List<AppManager.App> getAllApps(Context context) {
+                return AppManager.getInstance(context).getApps();
+            }
+
+            @Override
+            public List<AppItem> createAllAppItems(Context context) {
+                List<AppItem> items = new ArrayList<AppItem>();
+                List<AppManager.App> apps = getAllApps(context);
+                for (AppManager.App app : apps)
+                    items.add(createAppItem(app));
+                return items;
+            }
+
+            @Override
+            public AppItem createAppItem(AppManager.App app) {
+                return new AppItem(app);
+            }
+
+            @Override
+            public View createAppItemView(Context context, final Home home, AppManager.App app, AppItemView.LongPressCallBack longPressCallBack) {
+                return new com.benny.openlauncher.widget.AppItemView.Builder(context)
+                        .setAppItem(app)
+                        .withOnTouchGetPosition()
+                        .withOnLongClick(app, DragAction.Action.APP_DRAWER, new AppItemView.LongPressCallBack() {
+                            @Override
+                            public boolean readyForDrag(View view) {
+                                return AppSettings.get().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
+                            }
+
+                            @Override
+                            public void afterDrag(View view) {
+                                home.closeAppDrawer();
+                            }
+                        })
+                        .setLabelVisibility(AppSettings.get().isDrawerShowLabel())
+                        .setTextColor(AppSettings.get().getDrawerLabelColor())
+                        .getView();
+            }
+
+            @Override
+            public AppItemView createAppItemViewPopup(Context context, com.benny.openlauncher.model.Item groupItem, AppManager.App item) {
+                com.benny.openlauncher.widget.AppItemView.Builder b = new com.benny.openlauncher.widget.AppItemView.Builder(context).withOnTouchGetPosition();
+                b.setTextColor(AppSettings.get().getDrawerLabelColor());
+                if (groupItem.type == com.benny.openlauncher.model.Item.Type.SHORTCUT) {
+                    b.setShortcutItem(groupItem);
+                } else {
+                    AppManager.App app = AppManager.getInstance(context).findApp(groupItem.intent);
+                    if (app != null) {
+                        b.setAppItem(groupItem, app);
+                    }
+                }
+                final com.benny.openlauncher.widget.AppItemView view = b.getView();
+                return view;
+            }
+
+            @Override
+            public com.benny.openlauncher.model.Item newGroupItem() {
+                return com.benny.openlauncher.model.Item.newGroupItem();
+            }
+
+            @Override
+            public com.benny.openlauncher.model.Item newWidgetItem(int appWidgetId) {
+                return com.benny.openlauncher.model.Item.newWidgetItem(appWidgetId);
+            }
+
+            @Override
+            public com.benny.openlauncher.model.Item newActionItem(int action) {
+                return com.benny.openlauncher.model.Item.newActionItem(action);
+            }
+
+            @Override
+            public View getItemView(Context context, SettingsManager appSettings, com.benny.openlauncher.model.Item item, DesktopCallBack callBack) {
+                int flag = appSettings.isDesktopShowLabel() ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+                View itemView = ItemViewFactory.getItemView(context, callBack, item, flag);
+                return itemView;
+            }
+
+            @Override
+            public SimpleFingerGestures.OnFingerGestureListener getDesktopGestureListener(final Desktop desktop) {
+                return new SimpleFingerGestures.OnFingerGestureListener() {
+                    @Override
+                    public boolean onSwipeUp(int i, long l, double v) {
+                        LauncherAction.ActionItem gesture = ((com.benny.openlauncher.util.DatabaseHelper)Home.db).getGesture(1);
+                        if (gesture != null && AppSettings.get().isGestureFeedback())
+                            Tool.vibrate(desktop);
+                        LauncherAction.RunAction(gesture, desktop.getContext());
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onSwipeDown(int i, long l, double v) {
+                        LauncherAction.ActionItem gesture = ((com.benny.openlauncher.util.DatabaseHelper)Home.db).getGesture(2);
+                        if (gesture != null && AppSettings.get().isGestureFeedback())
+                            Tool.vibrate(desktop);
+                        LauncherAction.RunAction(gesture, desktop.getContext());
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onSwipeLeft(int i, long l, double v) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onSwipeRight(int i, long l, double v) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onPinch(int i, long l, double v) {
+                        LauncherAction.ActionItem gesture = ((com.benny.openlauncher.util.DatabaseHelper)Home.db).getGesture(3);
+                        if (gesture != null && AppSettings.get().isGestureFeedback())
+                            Tool.vibrate(desktop);
+                        LauncherAction.RunAction(gesture, desktop.getContext());
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onUnpinch(int i, long l, double v) {
+                        LauncherAction.ActionItem gesture = ((com.benny.openlauncher.util.DatabaseHelper)Home.db).getGesture(4);
+                        if (gesture != null && AppSettings.get().isGestureFeedback())
+                            Tool.vibrate(desktop);
+                        LauncherAction.RunAction(gesture, desktop.getContext());
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onDoubleTap(int i) {
+                        LauncherAction.ActionItem gesture = ((com.benny.openlauncher.util.DatabaseHelper)Home.db).getGesture(0);
+                        if (gesture != null && AppSettings.get().isGestureFeedback())
+                            Tool.vibrate(desktop);
+                        LauncherAction.RunAction(gesture, desktop.getContext());
+                        return true;
+                    }
+                };
+            }
+
+            @Override
+            public com.benny.openlauncher.model.Item createShortcut(Intent intent, Drawable icon, String name) {
+                return com.benny.openlauncher.model.Item.newShortcutItem(intent, icon, name);
+            }
+
+            @Override
+            public void showLauncherSettings(Context context) {
+                LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, context);
+            }
+
+            @Override
+            public DialogHandler getDialogHandler() {
+                return dialogHandler;
+            }
+
+            @Override
+            public void addAppUpdatedListener(Context c, AppUpdateListener listener) {
+                AppManager.getInstance(c).addAppUpdatedListener(listener);
+            }
+
+            @Override
+            public void removeAppUpdatedListener(Context c, AppUpdateListener<AppManager.App> listener) {
+                AppManager.getInstance(c).removeAppUpdatedListener(listener);
+            }
+
+            @Override
+            public void addAppDeletedListener(Context c, AppDeleteListener<AppManager.App> listener) {
+                AppManager.getInstance(c).addAppDeletedListener(listener);
+            }
+
+            @Override
+            public void onAppUpdated(Context p1, Intent p2) {
+                AppManager.getInstance(p1).onReceive(p1, p2);
+            }
+
+            @Override
+            public AppManager.App findApp(Context c, Intent intent) {
+                return AppManager.getInstance(c).findApp(intent);
+            }
+
+            @Override
+            public void updateIcon(Context context, com.benny.openlauncher.widget.AppItemView currentView, com.benny.openlauncher.model.Item currentItem) {
+                currentView.setIcon(new GroupIconDrawable(context, currentItem));
+            }
+
+            @Override
+            public void onItemViewDismissed(AppItemView itemView) {
+                if (itemView.getIcon() instanceof GroupIconDrawable) {
+                    ((GroupIconDrawable) itemView.getIcon()).popBack();
+                }
+            }
+        });
     }
 
     public class CallLogObserver extends ContentObserver {

@@ -17,9 +17,8 @@ import android.widget.TextView;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.IAppItemView;
-import com.benny.openlauncher.core.interfaces.IDialogHandler;
-import com.benny.openlauncher.core.interfaces.IItem;
+import com.benny.openlauncher.core.interfaces.DialogHandler;
+import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.manager.StaticSetup;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.Tool;
@@ -90,9 +89,9 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DROP:
                         Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
                         intent.setExtrasClassLoader(StaticSetup.get().getItemClass().getClassLoader());
-                        final IItem item = intent.getParcelableExtra("mDragData");
+                        final Item item = intent.getParcelableExtra("mDragData");
 
-                        StaticSetup.get().getDialogHandler().showEditDialog(getContext(), item, new IDialogHandler.IOnEditDialog() {
+                        StaticSetup.get().getDialogHandler().showEditDialog(getContext(), item, new DialogHandler.IOnEditDialog() {
                             @Override
                             public void onRename(String name) {
                                 item.setLabel(name);
@@ -131,12 +130,12 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DROP:
                         Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
                         intent.setExtrasClassLoader(StaticSetup.get().getItemClass().getClassLoader());
-                        IItem<IItem> item = intent.getParcelableExtra("mDragData");
+                        Item<Item> item = intent.getParcelableExtra("mDragData");
 
                         // remove all items from the database
                         Home.launcher.db.deleteItem(item);
-                        if (item.getType() == IItem.Type.GROUP) {
-                            for (IItem i : item.getGroupItems()) {
+                        if (item.getType() == Item.Type.GROUP) {
+                            for (Item i : item.getGroupItems()) {
                                 Home.launcher.db.deleteItem(i);
                             }
                         }
@@ -168,8 +167,8 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DROP:
                         Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
                         intent.setExtrasClassLoader(StaticSetup.get().getItemClass().getClassLoader());
-                        IItem item = intent.getParcelableExtra("mDragData");
-                        if (item.getType() == IItem.Type.APP) {
+                        Item item = intent.getParcelableExtra("mDragData");
+                        if (item.getType() == Item.Type.APP) {
                             try {
                                 getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.getIntent().getComponent().getPackageName())));
                             } catch (Exception e) {

@@ -7,7 +7,7 @@ import android.view.View;
  * Created by Michael on 25.06.2017.
  */
 
-public interface IAppItemView {
+public interface AppItemView {
     View getView();
     Drawable getIcon();
     void setIcon(Drawable icon);

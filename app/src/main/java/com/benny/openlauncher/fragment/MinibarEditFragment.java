@@ -23,7 +23,6 @@ import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherAction;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
-import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 import com.mikepenz.fastadapter_extensions.drag.ItemTouchCallback;
 import com.mikepenz.fastadapter_extensions.drag.SimpleDragCallback;
 
@@ -124,6 +123,11 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
         return false;
     }
 
+    @Override
+    public void itemTouchDropped(int i, int i1) {
+
+    }
+
     public static class AppItem extends AbstractItem<AppItem, AppItem.ViewHolder> {
         public final long id;
         public final LauncherAction.ActionDisplayItem item;
@@ -146,17 +150,9 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
             return R.layout.item_minibar_edit;
         }
 
-        private static final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
-
-        static class ItemFactory implements ViewHolderFactory<ViewHolder> {
-            public ViewHolder create(View v) {
-                return new ViewHolder(v);
-            }
-        }
-
         @Override
-        public ViewHolderFactory<? extends ViewHolder> getFactory() {
-            return FACTORY;
+        public ViewHolder getViewHolder(View v) {
+            return new ViewHolder(v);
         }
 
         @Override

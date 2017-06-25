@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.util.Tool;
 import com.mikepenz.fastadapter.items.AbstractItem;
-import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
 import java.util.List;
 
@@ -25,7 +24,11 @@ import java.util.List;
 
 public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> {
 
-    private static final ViewHolderFactory<? extends IconLabelItem.ViewHolder> FACTORY = new ItemFactory();
+    @Override
+    public ViewHolder getViewHolder(View v) {
+        return new ViewHolder(v);
+    }
+
     public String label;
     private Drawable icon;
     private View.OnClickListener listener;
@@ -119,11 +122,6 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     @Override
-    public ViewHolderFactory<? extends IconLabelItem.ViewHolder> getFactory() {
-        return FACTORY;
-    }
-
-    @Override
     public void bindView(IconLabelItem.ViewHolder holder, List payloads) {
         if (matchParent)
             holder.itemView.getLayoutParams().width = RecyclerView.LayoutParams.MATCH_PARENT;
@@ -152,12 +150,6 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         if (listener != null)
             holder.itemView.setOnClickListener(listener);
         super.bindView(holder, payloads);
-    }
-
-    private static class ItemFactory implements ViewHolderFactory<IconLabelItem.ViewHolder> {
-        public IconLabelItem.ViewHolder create(View v) {
-            return new IconLabelItem.ViewHolder(v);
-        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

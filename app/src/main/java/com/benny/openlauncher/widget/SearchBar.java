@@ -167,7 +167,7 @@ public class SearchBar extends FrameLayout {
                 adapter.set(items);
             }
         });
-        adapter.withFilterPredicate(new IItemAdapter.Predicate<IconLabelItem>() {
+        adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<IconLabelItem>() {
             @Override
             public boolean filter(IconLabelItem item, CharSequence constraint) {
                 if (item.label.equals(getContext().getString(R.string.search_online)))

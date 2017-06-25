@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.IItem;
-import com.benny.openlauncher.core.interfaces.ISettingsManager;
+import com.benny.openlauncher.core.interfaces.Item;
+import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.StaticSetup;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.Tool;
@@ -23,10 +23,10 @@ import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import java.util.List;
 
 public class Dock extends CellContainer implements View.OnDragListener, DesktopCallBack {
-    private ISettingsManager appSettings;
+    private SettingsManager appSettings;
     public static int bottomInset;
     public View previousItemView;
-    public IItem previousItem;
+    public Item previousItem;
     private float startPosX, startPosY;
     private Home home;
 
@@ -51,11 +51,11 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     public void initDockItem(Home home) {
         int columns = StaticSetup.get().getAppSettings().getDockSize();
         setGridSize(columns, 1);
-        List<IItem> dockItems = home.db.getDock();
+        List<Item> dockItems = home.db.getDock();
 
         this.home = home;
         removeAllViews();
-        for (IItem item : dockItems) {
+        for (Item item : dockItems) {
             if (item.getX() < columns && item.getY() == 0) {
                 addItemToPage(item, 0);
             }
@@ -113,7 +113,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             case DragEvent.ACTION_DROP:
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(StaticSetup.get().getItemClass().getClassLoader());
-                IItem item = intent.getParcelableExtra("mDragData");
+                Item item = intent.getParcelableExtra("mDragData");
 
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
@@ -131,7 +131,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                     Point pos = touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.getSpanX(), item.getSpanY(), false);
                     View itemView = coordinateToChildView(pos);
                     if (itemView != null) {
-                        if (Desktop.handleOnDropOver(home, item, (IItem) itemView.getTag(), itemView, this, 0, 0, this)) {
+                        if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, this, 0, 0, this)) {
                             home.desktop.consumeRevert();
                             home.dock.consumeRevert();
                         } else {
@@ -156,7 +156,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     public void setLastItem(Object... args) {
         // args stores the item in [0] and the view reference in [1]
         View v = (View) args[1];
-        IItem item = (IItem) args[0];
+        Item item = (Item) args[0];
 
         previousItemView = v;
         previousItem = item;
@@ -205,7 +205,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     @Override
-    public boolean addItemToPage(final IItem item, int page) {
+    public boolean addItemToPage(final Item item, int page) {
         View itemView = StaticSetup.get().getItemView(getContext(), appSettings, item, this);
 
         if (itemView == null) {
@@ -218,7 +218,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     @Override
-    public boolean addItemToPoint(final IItem item, int x, int y) {
+    public boolean addItemToPoint(final Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = coordinateToLayoutParams(x, y, item.getSpanX(), item.getSpanY());
         if (positionToLayoutPrams != null) {
             item.setX(positionToLayoutPrams.x);
@@ -237,7 +237,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     @Override
-    public boolean addItemToCell(final IItem item, int x, int y) {
+    public boolean addItemToCell(final Item item, int x, int y) {
         item.setX(x);
         item.setY(y);
 

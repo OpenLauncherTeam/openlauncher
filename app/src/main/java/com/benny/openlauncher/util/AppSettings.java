@@ -7,7 +7,7 @@ import android.support.v4.content.ContextCompat;
 
 import com.benny.openlauncher.App;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.core.interfaces.ISettingsManager;
+import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.core.widget.Desktop;
 
@@ -19,7 +19,7 @@ import io.github.gsantner.opoc.util.AppSettingsBase;
  * Created by gregor on 07.05.17.
  */
 
-public class AppSettings extends AppSettingsBase implements ISettingsManager {
+public class AppSettings extends AppSettingsBase implements SettingsManager {
     private AppSettings(Context context) {
         super(context);
     }

@@ -3,11 +3,9 @@ package com.benny.openlauncher.model;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
-import android.os.Parcelable;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.core.interfaces.IItem;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
 
@@ -19,7 +17,7 @@ import java.util.Random;
  * Created by dkanada on 5/3/2017.
  */
 
-public class Item implements IItem<Item> {
+public class Item implements com.benny.openlauncher.core.interfaces.Item<Item> {
     public static final Creator<Item> CREATOR = new Creator<Item>() {
 
         @Override

@@ -13,10 +13,9 @@ import android.widget.RelativeLayout;
 
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.interfaces.IApp;
-import com.benny.openlauncher.core.interfaces.IAppItem;
-import com.benny.openlauncher.core.interfaces.IAppUpdateListener;
-import com.benny.openlauncher.core.interfaces.IItem;
+import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.AppItem;
+import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.manager.StaticSetup;
 import com.benny.openlauncher.core.util.Tool;
 import com.mikepenz.fastadapter.IItemAdapter;
@@ -41,7 +40,7 @@ public class AppDrawerVertical extends CardView {
     public GridAppDrawerAdapter gridDrawerAdapter;
     public DragScrollBar scrollBar;
 
-    private static List<IApp> apps;
+    private static List<App> apps;
     private GridLayoutManager layoutManager;
     private RelativeLayout rl;
 
@@ -124,20 +123,20 @@ public class AppDrawerVertical extends CardView {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setDrawingCacheEnabled(true);
 
-        List<IApp> allApps = StaticSetup.get().getAllApps(getContext());
+        List<App> allApps = StaticSetup.get().getAllApps(getContext());
         if (allApps.size() != 0) {
             AppDrawerVertical.this.apps = allApps;
-            ArrayList<IAppItem> items = new ArrayList<>();
+            ArrayList<AppItem> items = new ArrayList<>();
             for (int i = 0; i < apps.size(); i++) {
                 items.add(StaticSetup.get().createAppItem(apps.get(i)));
             }
             gridDrawerAdapter.set(items);
         }
-        StaticSetup.get().addAppUpdatedListener(getContext(), new IAppUpdateListener<IApp>() {
+        StaticSetup.get().addAppUpdatedListener(getContext(), new AppUpdateListener<App>() {
             @Override
-            public void onAppUpdated(List<IApp> apps) {
+            public void onAppUpdated(List<App> apps) {
                 AppDrawerVertical.this.apps = apps;
-                ArrayList<IAppItem> items = new ArrayList<>();
+                ArrayList<AppItem> items = new ArrayList<>();
                 for (int i = 0; i < apps.size(); i++) {
                     items.add(StaticSetup.get().createAppItem(apps.get(i)));
                 }
@@ -148,12 +147,12 @@ public class AppDrawerVertical extends CardView {
         addView(rl);
     }
 
-    public static class GridAppDrawerAdapter extends FastItemAdapter<IAppItem> implements INameableAdapter {
+    public static class GridAppDrawerAdapter extends FastItemAdapter<AppItem> implements INameableAdapter {
 
         GridAppDrawerAdapter() {
-            withFilterPredicate(new IItemAdapter.Predicate<IAppItem>() {
+            getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<AppItem>() {
                 @Override
-                public boolean filter(IAppItem item, CharSequence constraint) {
+                public boolean filter(AppItem item, CharSequence constraint) {
                     return !item.getApp().getLabel().toLowerCase().contains(constraint.toString().toLowerCase());
                 }
             });

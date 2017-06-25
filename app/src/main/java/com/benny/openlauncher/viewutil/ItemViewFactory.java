@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.core.interfaces.IAppItemView;
+import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder;
 import com.benny.openlauncher.core.widget.CellContainer;
@@ -24,7 +24,6 @@ import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.core.util.DragAction;
-import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.core.widget.WidgetView;
 
 /**
@@ -44,11 +43,11 @@ public class ItemViewFactory {
                 if (app == null) {
                     break;
                 }
-                view = new AppItemView.Builder(context)
+                view = new com.benny.openlauncher.widget.AppItemView.Builder(context)
                         .setAppItem(item, app)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongClick(item, DragAction.Action.APP, new IAppItemView.LongPressCallBack() {
+                        .withOnLongClick(item, DragAction.Action.APP, new AppItemView.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -64,11 +63,11 @@ public class ItemViewFactory {
                         .getView();
                 break;
             case SHORTCUT:
-                view = new AppItemView.Builder(context)
+                view = new com.benny.openlauncher.widget.AppItemView.Builder(context)
                         .setShortcutItem(item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongClick(item, DragAction.Action.SHORTCUT, new IAppItemView.LongPressCallBack() {
+                        .withOnLongClick(item, DragAction.Action.SHORTCUT, new AppItemView.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -84,11 +83,11 @@ public class ItemViewFactory {
                         .getView();
                 break;
             case GROUP:
-                view = new AppItemView.Builder(context)
+                view = new com.benny.openlauncher.widget.AppItemView.Builder(context)
                         .setGroupItem(context, callBack, item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongClick(item, DragAction.Action.GROUP, new IAppItemView.LongPressCallBack() {
+                        .withOnLongClick(item, DragAction.Action.GROUP, new AppItemView.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -105,11 +104,11 @@ public class ItemViewFactory {
                 view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
                 break;
             case ACTION:
-                view = new AppItemView.Builder(context)
+                view = new com.benny.openlauncher.widget.AppItemView.Builder(context)
                         .setActionItem(item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongClick(item, DragAction.Action.ACTION, new IAppItemView.LongPressCallBack() {
+                        .withOnLongClick(item, DragAction.Action.ACTION, new AppItemView.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;

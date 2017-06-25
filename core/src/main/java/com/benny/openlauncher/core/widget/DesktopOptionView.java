@@ -17,7 +17,7 @@ import android.view.WindowInsets;
 import android.widget.FrameLayout;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.interfaces.ISettingsManager;
+import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.StaticSetup;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.IconLabelItem;
@@ -33,7 +33,7 @@ import java.util.List;
  */
 
 public class DesktopOptionView extends FrameLayout {
-    private ISettingsManager appSettings;
+    private SettingsManager appSettings;
     private RecyclerView actionRecyclerView;
 
     private FastItemAdapter<IconLabelItem> actionAdapter = new FastItemAdapter<>();

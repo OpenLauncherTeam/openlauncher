@@ -17,7 +17,6 @@ import android.view.View;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.core.interfaces.IAppItemView;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
@@ -31,7 +30,7 @@ import com.benny.openlauncher.viewutil.GroupIconDrawable;
  * Created by BennyKok on 10/23/2016
  */
 
-public class AppItemView extends View implements Drawable.Callback, IAppItemView {
+public class AppItemView extends View implements Drawable.Callback, com.benny.openlauncher.core.interfaces.AppItemView {
     private Drawable icon;
     private String label;
     private Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);

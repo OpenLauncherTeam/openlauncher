@@ -3,7 +3,6 @@ package com.benny.openlauncher.core.activity;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.SearchManager;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
@@ -12,29 +11,25 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.CallLog;
 import android.support.constraint.ConstraintLayout;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.interfaces.IApp;
-import com.benny.openlauncher.core.interfaces.IAppDeleteListener;
-import com.benny.openlauncher.core.interfaces.IAppItemView;
-import com.benny.openlauncher.core.interfaces.IAppUpdateListener;
-import com.benny.openlauncher.core.interfaces.IDatabaseHelper;
-import com.benny.openlauncher.core.interfaces.IDialogHandler;
-import com.benny.openlauncher.core.interfaces.IItem;
-import com.benny.openlauncher.core.interfaces.ISettingsManager;
+import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.AppDeleteListener;
+import com.benny.openlauncher.core.interfaces.AppItemView;
+import com.benny.openlauncher.core.interfaces.AppUpdateListener;
+import com.benny.openlauncher.core.interfaces.DatabaseHelper;
+import com.benny.openlauncher.core.interfaces.DialogHandler;
+import com.benny.openlauncher.core.interfaces.Item;
+import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.StaticSetup;
 import com.benny.openlauncher.core.util.AppUpdateReceiver;
 import com.benny.openlauncher.core.util.ShortcutReceiver;
@@ -66,7 +61,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     // static members, easier to access from any activity and class
     public static Home launcher;
-    public static IDatabaseHelper db;
+    public static DatabaseHelper db;
     public static WidgetHost appWidgetHost;
     public static AppWidgetManager appWidgetManager;
     public static Resources resources;
@@ -116,8 +111,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     public DragOptionView dragOptionView;
     public DesktopOptionView desktopEditOptionView;
     private PagerIndicator appDrawerIndicator;
-    private ViewGroup myScreen;
-    protected ISettingsManager appSettings;
+    protected ViewGroup myScreen;
+    protected SettingsManager appSettings;
     protected View searchBar;
     private TextView searchClock;
     // region for the APP_DRAWER_ANIMATION
@@ -128,6 +123,9 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState == null && !StaticSetup.wasInitialised())
+            initStaticHelper();
 
         appSettings = StaticSetup.get().getAppSettings();
 
@@ -152,6 +150,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         });
         init();
     }
+
+    protected abstract void initStaticHelper();
 
     protected void bindViews()
     {
@@ -282,15 +282,15 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     protected void initAppManager() {
 
-        StaticSetup.get().addAppUpdatedListener(this, new IAppUpdateListener<IApp>() {
+        StaticSetup.get().addAppUpdatedListener(this, new AppUpdateListener<App>() {
             @Override
-            public void onAppUpdated(List<IApp> apps) {
+            public void onAppUpdated(List<App> apps) {
                 if (appSettings.getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS) {
                     if (StaticSetup.get().getAppSettings().isAppFirstLaunch()) {
                         StaticSetup.get().getAppSettings().setAppFirstLaunch(false);
 
                         // create a new app drawer button
-                        IItem appDrawerBtnItem = StaticSetup.get().newActionItem(8);
+                        Item appDrawerBtnItem = StaticSetup.get().newActionItem(8);
 
                         // center the button
                         appDrawerBtnItem.setX(2);
@@ -307,10 +307,10 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
                 StaticSetup.get().removeAppUpdatedListener(Home.this, this);
             }
         });
-        StaticSetup.get().addAppDeletedListener(this, new IAppDeleteListener<IApp>() {
+        StaticSetup.get().addAppDeletedListener(this, new AppDeleteListener<App>() {
 
             @Override
-            public void onAppDeleted(IApp app) {
+            public void onAppDeleted(App app) {
                 if (appSettings.getDesktopStyle() == Desktop.DesktopMode.NORMAL) {
                     desktop.initDesktopNormal(Home.this);
                 } else if (appSettings.getDesktopStyle() == Desktop.DesktopMode.SHOW_ALL_APPS) {
@@ -359,7 +359,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     @Override
     public void onPickDesktopAction() {
-        StaticSetup.get().getDialogHandler().showPickAction(this, new IDialogHandler.IOnAddAppDrawerItem() {
+        StaticSetup.get().getDialogHandler().showPickAction(this, new DialogHandler.IOnAddAppDrawerItem() {
             @Override
             public void onAdd() {
                 Point pos = desktop.getCurrentPage().findFreeSpace();
@@ -508,7 +508,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         Bundle extras = data.getExtras();
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
         AppWidgetProviderInfo appWidgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId);
-        IItem item = StaticSetup.get().newWidgetItem(appWidgetId);
+        Item item = StaticSetup.get().newWidgetItem(appWidgetId);
         item.setSpanX(((appWidgetInfo.minWidth - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth) + 1);
         item.setSpanY(((appWidgetInfo.minHeight - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight) + 1);
         Point point = desktop.getCurrentPage().findFreeSpace(item.getSpanX(), item.getSpanY());
@@ -639,8 +639,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
             cx += view.getWidth() / 2;
             cy += view.getHeight() / 2;
-            if (view instanceof IAppItemView) {
-                IAppItemView appItemView = (IAppItemView) view;
+            if (view instanceof AppItemView) {
+                AppItemView appItemView = (AppItemView) view;
                 if (!appItemView.getShowLabel()) {
                     cy -= Tool.dp2px(14, this) / 2;
                 }

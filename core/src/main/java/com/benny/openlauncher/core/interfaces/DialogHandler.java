@@ -7,10 +7,10 @@ import android.view.DragEvent;
  * Created by Michael on 25.06.2017.
  */
 
-public interface IDialogHandler {
+public interface DialogHandler {
 
     void showPickAction(Context context, IOnAddAppDrawerItem resultHandler);
-    void showEditDialog(Context context, IItem item, IOnEditDialog resultHandler);
+    void showEditDialog(Context context, Item item, IOnEditDialog resultHandler);
     void showDeletePackageDialog(Context context, DragEvent dragEvent);
 
     interface IOnAddAppDrawerItem

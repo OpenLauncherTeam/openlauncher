@@ -13,9 +13,9 @@ import android.widget.PopupWindow;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.IApp;
-import com.benny.openlauncher.core.interfaces.IAppItemView;
-import com.benny.openlauncher.core.interfaces.IItem;
+import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.AppItemView;
+import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.manager.StaticSetup;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.Tool;
@@ -72,7 +72,7 @@ public class GroupPopupView extends FrameLayout {
         setVisibility(View.INVISIBLE);
     }
 
-    public <T extends IItem, V extends View & IAppItemView> boolean showWindowV(final T item, final View itemView, final DesktopCallBack callBack) {
+    public <T extends Item, V extends View & AppItemView> boolean showWindowV(final T item, final View itemView, final DesktopCallBack callBack) {
         if (getVisibility() == View.VISIBLE) return false;
 
         //popupParent.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.folderColor);
@@ -93,12 +93,12 @@ public class GroupPopupView extends FrameLayout {
                 if (y2 * cellSize[0] + x2 > item.getGroupItems().size() - 1) {
                     continue;
                 }
-                final IItem groupItem = (IItem) item.getGroupItems().get(y2 * cellSize[0] + x2);
-                IApp groupApp = null;
-                if (groupItem.getType() != IItem.Type.SHORTCUT) {
+                final Item groupItem = (Item) item.getGroupItems().get(y2 * cellSize[0] + x2);
+                App groupApp = null;
+                if (groupItem.getType() != Item.Type.SHORTCUT) {
                     groupApp = StaticSetup.get().findApp(c, groupItem.getIntent());
                 }
-                IAppItemView appItemView = StaticSetup.get().createAppItemViewPopup(getContext(), groupItem, groupApp);
+                AppItemView appItemView = StaticSetup.get().createAppItemViewPopup(getContext(), groupItem, groupApp);
                 final View view = appItemView.getView();
 
                 view.setOnLongClickListener(new OnLongClickListener() {
@@ -112,7 +112,7 @@ public class GroupPopupView extends FrameLayout {
                         Intent i = new Intent();
                         i.putExtra("mDragData", groupItem);
                         ClipData data = ClipData.newIntent("mDragIntent", i);
-                        if (groupItem.getType() == IItem.Type.SHORTCUT) {
+                        if (groupItem.getType() == Item.Type.SHORTCUT) {
                             itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.APP), 0);
                         } else {
                             itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.SHORTCUT), 0);
@@ -123,7 +123,7 @@ public class GroupPopupView extends FrameLayout {
                         return true;
                     }
                 });
-                final IApp app = StaticSetup.get().findApp(c, groupItem.getIntent());
+                final App app = StaticSetup.get().findApp(c, groupItem.getIntent());
                 if (app == null) {
                     removeItem(c, callBack, item, groupItem, (V)itemView);
                 } else {
@@ -148,7 +148,7 @@ public class GroupPopupView extends FrameLayout {
         dismissListener = new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                StaticSetup.get().onItemViewDismissed((IAppItemView)itemView);
+                StaticSetup.get().onItemViewDismissed((AppItemView)itemView);
             }
         };
 
@@ -197,7 +197,7 @@ public class GroupPopupView extends FrameLayout {
         return true;
     }
 
-    private <V extends View & IAppItemView> void removeItem(Context context, final DesktopCallBack callBack, final IItem currentItem, IItem dragOutItem, V currentView) {
+    private <V extends View & AppItemView> void removeItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, V currentView) {
         currentItem.getGroupItems().remove(dragOutItem);
 
         Home.db.updateItem(dragOutItem, 1);
@@ -206,11 +206,11 @@ public class GroupPopupView extends FrameLayout {
         StaticSetup.get().updateIcon(context, currentView, currentItem);
     }
 
-    public void updateItem(Context context, final DesktopCallBack callBack, final IItem<IItem> currentItem, IItem dragOutItem, View currentView) {
+    public void updateItem(Context context, final DesktopCallBack callBack, final Item<Item> currentItem, Item dragOutItem, View currentView) {
         if (currentItem.getGroupItems().size() == 1) {
-            final IApp app = StaticSetup.get().findApp(context, currentItem.getGroupItems().get(0).getIntent());
+            final App app = StaticSetup.get().findApp(context, currentItem.getGroupItems().get(0).getIntent());
             if (app != null) {
-                IItem item = Home.db.getItem(currentItem.getGroupItems().get(0).getId());
+                Item item = Home.db.getItem(currentItem.getGroupItems().get(0).getId());
                 item.setX(currentItem.getX());
                 item.setY(currentItem.getY());
 

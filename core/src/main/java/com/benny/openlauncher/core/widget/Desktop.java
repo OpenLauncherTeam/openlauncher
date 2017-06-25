@@ -17,8 +17,8 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.IItem;
-import com.benny.openlauncher.core.interfaces.ISettingsManager;
+import com.benny.openlauncher.core.interfaces.Item;
+import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.StaticSetup;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.Tool;
@@ -34,12 +34,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     public List<CellContainer> pages = new ArrayList<>();
     public OnDesktopEditListener desktopEditListener;
     public View previousItemView;
-    public IItem previousItem;
+    public Item previousItem;
     public boolean inEditMode;
     public int previousPage = -1;
     public int pageCount;
 
-    private ISettingsManager appSettings;
+    private SettingsManager appSettings;
     private float startPosX;
     private float startPosY;
     private Home home;
@@ -88,13 +88,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         int columns = StaticSetup.get().getAppSettings().getDesktopColumnCount();
         int rows = StaticSetup.get().getAppSettings().getDesktopRowCount();
-        List<List<IItem>> desktopItems = Home.launcher.db.getDesktop();
+        List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
         for (int pageCount = 0; pageCount < desktopItems.size(); pageCount++) {
             if (pages.size() <= pageCount) break;
             pages.get(pageCount).removeAllViews();
-            List<IItem> items = desktopItems.get(pageCount);
+            List<Item> items = desktopItems.get(pageCount);
             for (int j = 0; j < items.size(); j++) {
-                IItem item = items.get(j);
+                Item item = items.get(j);
                 if (((item.getX() + item.getSpanX()) <= columns) && ((item.getY() + item.getSpanY()) <= rows)) {
                     addItemToPage(item, pageCount);
                 }
@@ -103,7 +103,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     public void initDesktopShowAll(Context c, Home home) {
-        List<IItem> apps = StaticSetup.get().createAllAppItems(c);
+        List<Item> apps = StaticSetup.get().createAllAppItems(c);
 //        List<AppManager.App> apps = AppManager.getInstance(c).getApps();
         int appsSize = apps.size();
 
@@ -128,7 +128,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     int pagePos = y * rows + x;
                     int pos = columns * rows * i + pagePos;
                     if (!(pos >= apps.size())) {
-                        IItem appItem = apps.get(pos);
+                        Item appItem = apps.get(pos);
                         appItem.setX(x);
                         appItem.setY(y);
                         addItemToPage(appItem, i);
@@ -206,7 +206,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 Tool.print("ACTION_DROP");
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
                 intent.setExtrasClassLoader(StaticSetup.get().getItemClass().getClassLoader());
-                IItem item = intent.getParcelableExtra("mDragData");
+                Item item = intent.getParcelableExtra("mDragData");
 
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
@@ -223,7 +223,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 } else {
                     Point pos = getCurrentPage().touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.getSpanX(), item.getSpanY(), false);
                     View itemView = getCurrentPage().coordinateToChildView(pos);
-                    if (itemView != null && Desktop.handleOnDropOver(home, item, (IItem) itemView.getTag(), itemView, getCurrentPage(), getCurrentItem(), 1, this)) {
+                    if (itemView != null && Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, getCurrentPage(), getCurrentItem(), 1, this)) {
                         home.desktop.consumeRevert();
                         home.dock.consumeRevert();
                     } else {
@@ -247,7 +247,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     @Override
     public void setLastItem(Object... args) {
         // args stores the item in [0] and the view reference in [1]
-        IItem item = (IItem) args[0];
+        Item item = (Item) args[0];
         View v = (View) args[1];
 
         previousPage = getCurrentItem();
@@ -274,7 +274,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     @Override
-    public boolean addItemToPage(final IItem item, int page) {
+    public boolean addItemToPage(final Item item, int page) {
         View itemView = StaticSetup.get().getItemView(getContext(), appSettings, item, this);
 
         if (itemView == null) {
@@ -287,7 +287,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     @Override
-    public boolean addItemToPoint(final IItem item, int x, int y) {
+    public boolean addItemToPoint(final Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().coordinateToLayoutParams(x, y, item.getSpanX(), item.getSpanY());
         if (positionToLayoutPrams != null) {
             item.setX(positionToLayoutPrams.x);
@@ -306,7 +306,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     @Override
-    public boolean addItemToCell(final IItem item, int x, int y) {
+    public boolean addItemToCell(final Item item, int x, int y) {
         item.setX(x);
         item.setY(y);
 
@@ -404,7 +404,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             layout.onItemRearrangeListener = new CellContainer.OnItemRearrangeListener() {
                 @Override
                 public void onItemRearrange(Point from, Point to) {
-                    IItem itemFromCoordinate = Desktop.getItemFromCoordinate(from, getCurrentItem());
+                    Item itemFromCoordinate = Desktop.getItemFromCoordinate(from, getCurrentItem());
                     if (itemFromCoordinate == null) return;
                     itemFromCoordinate.setX(to.x);
                     itemFromCoordinate.setY(to.y);
@@ -466,11 +466,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         return insets;
     }
 
-    public static IItem getItemFromCoordinate(Point point, int page) {
-        List<List<IItem>> desktopItems = Home.launcher.db.getDesktop();
-        List<IItem> pageData = desktopItems.get(page);
+    public static Item getItemFromCoordinate(Point point, int page) {
+        List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
+        List<Item> pageData = desktopItems.get(page);
         for (int i = 0; i < pageData.size(); i++) {
-            IItem item = pageData.get(i);
+            Item item = pageData.get(i);
             if (item.getX() == point.x && item.getY() == point.y && item.getSpanX() == 1 && item.getSpanY() == 1) {
                 return pageData.get(i);
             }
@@ -478,7 +478,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         return null;
     }
 
-    public static boolean handleOnDropOver(Home home, IItem dropItem, IItem item, View itemView, ViewGroup parent, int page, int desktop, DesktopCallBack callback) {
+    public static boolean handleOnDropOver(Home home, Item dropItem, Item item, View itemView, ViewGroup parent, int page, int desktop, DesktopCallBack callback) {
         if (item == null || dropItem == null) {
             return false;
         }
@@ -486,11 +486,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         switch (item.getType()) {
             case APP:
             case SHORTCUT:
-                if (dropItem.getType() == IItem.Type.APP || dropItem.getType() == IItem.Type.SHORTCUT) {
+                if (dropItem.getType() == Item.Type.APP || dropItem.getType() == Item.Type.SHORTCUT) {
                     parent.removeView(itemView);
 
                     // create a new group item
-                    IItem group = StaticSetup.get().newGroupItem();
+                    Item group = StaticSetup.get().newGroupItem();
                     group.getGroupItems().add(item);
                     group.getGroupItems().add(dropItem);
                     group.setX(item.getX());
@@ -514,7 +514,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 }
                 break;
             case GROUP:
-                if ((dropItem.getType() == IItem.Type.APP || dropItem.getType() == IItem.Type.SHORTCUT) && item.getGroupItems().size() < GroupPopupView.GroupDef.maxItem) {
+                if ((dropItem.getType() == Item.Type.APP || dropItem.getType() == Item.Type.SHORTCUT) && item.getGroupItems().size() < GroupPopupView.GroupDef.maxItem) {
                     parent.removeView(itemView);
 
                     item.getGroupItems().add(dropItem);

@@ -14,9 +14,8 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.core.interfaces.IApp;
-import com.benny.openlauncher.core.interfaces.IAppDeleteListener;
-import com.benny.openlauncher.core.interfaces.IAppUpdateListener;
+import com.benny.openlauncher.core.interfaces.AppDeleteListener;
+import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
@@ -43,11 +42,11 @@ public class AppManager {
     private PackageManager packageManager;
     private List<App> apps = new ArrayList<>();
     private List<App> nonFilteredApps = new ArrayList<>();
-    public List<IAppUpdateListener<App>> updateListeners = new ArrayList<>();
-    public List<IAppDeleteListener<App>> deleteListeners = new ArrayList<>();
+    public List<AppUpdateListener<App>> updateListeners = new ArrayList<>();
+    public List<AppDeleteListener<App>> deleteListeners = new ArrayList<>();
     public boolean recreateAfterGettingApps;
 
-    private List<IAppUpdateListener<App>> updateListenersToRemove = new ArrayList<>();
+    private List<AppUpdateListener<App>> updateListenersToRemove = new ArrayList<>();
     private AsyncTask task;
 
     public static AppManager getInstance(Context context) {
@@ -88,15 +87,15 @@ public class AppManager {
         getAllApps();
     }
 
-    public void addAppUpdatedListener(IAppUpdateListener<App> listener) {
+    public void addAppUpdatedListener(AppUpdateListener<App> listener) {
         updateListeners.add(listener);
     }
 
-    public void removeAppUpdatedListener(IAppUpdateListener<App> listener) {
+    public void removeAppUpdatedListener(AppUpdateListener<App> listener) {
         updateListenersToRemove.add(listener);
     }
 
-    public void addAppDeletedListener(IAppDeleteListener listener) {
+    public void addAppDeletedListener(AppDeleteListener listener) {
         deleteListeners.add(listener);
     }
 
@@ -219,7 +218,7 @@ public class AppManager {
 
         @Override
         protected void onPostExecute(Object result) {
-            for (IAppUpdateListener<App> listener : updateListeners) {
+            for (AppUpdateListener<App> listener : updateListeners) {
                 listener.onAppUpdated(apps);
             }
 
@@ -231,13 +230,13 @@ public class AppManager {
                         break;
                     }
                 }
-                for (IAppDeleteListener<App> listener : deleteListeners) {
+                for (AppDeleteListener<App> listener : deleteListeners) {
                     listener.onAppDeleted(temp);
                 }
             }
 
 
-            for (IAppUpdateListener<App> listener : updateListenersToRemove) {
+            for (AppUpdateListener<App> listener : updateListenersToRemove) {
                 updateListeners.remove(listener);
             }
             updateListenersToRemove.clear();
@@ -252,7 +251,7 @@ public class AppManager {
         }
     }
 
-    public static class App implements IApp {
+    public static class App implements com.benny.openlauncher.core.interfaces.App {
         public String label, packageName, className;
         public Drawable icon;
         public ResolveInfo info;
@@ -273,7 +272,7 @@ public class AppManager {
         @Override
         public boolean equals(Object o) {
             if (o instanceof App) {
-                AppManager.App temp = (App) o;
+                App temp = (App) o;
                 return this.packageName.equals(temp.packageName);
             } else {
                 return false;
@@ -286,7 +285,7 @@ public class AppManager {
         }
     }
 
-    public static abstract class AppUpdatedListener implements IAppUpdateListener<App>{
+    public static abstract class AppUpdatedListener implements AppUpdateListener<App> {
         private String listenerID;
 
         public AppUpdatedListener() {

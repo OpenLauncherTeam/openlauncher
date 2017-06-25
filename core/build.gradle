@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 25
@@ -32,9 +31,10 @@ dependencies {
     compile 'com.android.support:support-v13:25.3.1'
 
     // UI Libs
-    compile 'com.mikepenz:fastadapter-commons:2.1.0@aar'
-    compile 'com.mikepenz:fastadapter-extensions:2.1.7@aar'
-    compile('com.mikepenz:fastadapter:2.1.7@aar') { transitive = true }
+    compile 'com.mikepenz:fastadapter-commons:2.6.0@aar'
+    compile('com.mikepenz:fastadapter:2.6.2@aar') {
+        transitive = true
+    }
     compile 'com.github.turing-tech:MaterialScrollBar:12.3.5'
     compile 'in.championswimmer:SimpleFingerGestures_Android_Library:1.2'
     compile('com.github.ozodrukh:CircularReveal:2.0.1@aar') { transitive = true; }

@@ -11,11 +11,10 @@ import android.view.ViewGroup;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.IApp;
-import com.benny.openlauncher.core.interfaces.IAppItemView;
-import com.benny.openlauncher.core.interfaces.IAppUpdateListener;
+import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.AppItemView;
+import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.manager.StaticSetup;
-import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.SmoothPagerAdapter;
 
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppDrawerPaged extends SmoothViewPager {
-    private List<IApp> apps;
+    private List<App> apps;
 
     public List<ViewGroup> pages = new ArrayList<>();
 
@@ -93,7 +92,7 @@ public class AppDrawerPaged extends SmoothViewPager {
             setLandscapeValue();
         }
 
-        List<IApp> allApps = StaticSetup.get().getAllApps(c);
+        List<App> allApps = StaticSetup.get().getAllApps(c);
         if (allApps.size() != 0) {
             AppDrawerPaged.this.apps = allApps;
             calculatePage();
@@ -101,9 +100,9 @@ public class AppDrawerPaged extends SmoothViewPager {
             if (appDrawerIndicator != null)
                 appDrawerIndicator.setViewPager(AppDrawerPaged.this);
         }
-        StaticSetup.get().addAppUpdatedListener(c, new IAppUpdateListener<IApp>() {
+        StaticSetup.get().addAppUpdatedListener(c, new AppUpdateListener<App>() {
             @Override
-            public void onAppUpdated(List<IApp> apps) {
+            public void onAppUpdated(List<App> apps) {
                 AppDrawerPaged.this.apps = apps;
                 calculatePage();
                 setAdapter(new Adapter());
@@ -134,14 +133,14 @@ public class AppDrawerPaged extends SmoothViewPager {
             if (pos >= apps.size())
                 return null;
 
-            final IApp app = apps.get(pos);
+            final App app = apps.get(pos);
 
             return StaticSetup.get()
                     .createAppItemView(
                         getContext(),
                         home,
                         app,
-                        new IAppItemView.LongPressCallBack() {
+                        new AppItemView.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return StaticSetup.get().getAppSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
