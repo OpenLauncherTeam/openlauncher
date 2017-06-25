@@ -135,6 +135,7 @@
     <string name="columns">Spalten</string>
     <string name="rows">Zeilen</string>
     <string name="search_online">ONLINE SUCHEN</string>
+    <string name="search_hint">Suchen...</string>
     <string name="pref_summary__drawer_remember_position">Die aktuelle Position im App Drawer merken</string>
     <string name="pref_summary__clear_database">Die Daten von Desktop und Dock zurücksetzen um Probleme zu beheben</string>
     <string name="pref_title__desktop_double_tap">Doppelt antippen</string>

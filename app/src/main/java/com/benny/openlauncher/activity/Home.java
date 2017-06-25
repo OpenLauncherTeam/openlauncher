@@ -1,76 +1,43 @@
 package com.benny.openlauncher.activity;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.SearchManager;
-import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProviderInfo;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.graphics.Point;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.core.widget.SmoothViewPager;
-import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.core.widget.Desktop;
+import com.benny.openlauncher.core.widget.GroupPopupView;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.core.util.AppUpdateReceiver;
-import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
-import com.benny.openlauncher.core.util.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.viewutil.DialogHelper;
-import com.benny.openlauncher.core.viewutil.DragNavigationControl;
 import com.benny.openlauncher.viewutil.IconListAdapter;
 import com.benny.openlauncher.viewutil.QuickCenterItem;
-import com.benny.openlauncher.core.viewutil.WidgetHost;
-import com.benny.openlauncher.core.widget.AppDrawerController;
-import com.benny.openlauncher.widget.AppItemView;
-import com.benny.openlauncher.core.widget.Desktop;
-import com.benny.openlauncher.core.widget.DesktopOptionView;
-import com.benny.openlauncher.core.widget.Dock;
-import com.benny.openlauncher.core.widget.DragOptionView;
-import com.benny.openlauncher.core.widget.GroupPopupView;
-import com.benny.openlauncher.core.widget.LauncherLoadingIcon;
 import com.benny.openlauncher.widget.MiniPopupView;
-import com.benny.openlauncher.core.widget.PagerIndicator;
 import com.benny.openlauncher.widget.SearchBar;
 import com.benny.openlauncher.widget.SwipeListView;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -143,7 +110,6 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     private AppSettings getAppSettings() {
         return (AppSettings)appSettings;
     }
-
 
     protected void initSettings() {
         super.initSettings();
@@ -238,7 +204,12 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
 
                 ((SearchBar)searchBar).searchInput.setFocusable(true);
                 ((SearchBar)searchBar).searchInput.setFocusableInTouchMode(true);
-                ((SearchBar)searchBar).searchInput.requestFocus();
+                ((SearchBar)searchBar).searchInput.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((SearchBar)searchBar).searchInput.requestFocus();
+                    }
+                });
 
                 Tool.showKeyboard(Home.this, ((SearchBar)searchBar).searchInput);
             }
@@ -363,6 +334,13 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                 }
                 break;
         }
+    }
+
+    @Override
+    protected void onHandleLauncherPause()
+    {
+        ((SearchBar)searchBar).collapse();
+        super.onHandleLauncherPause();
     }
 
     public class CallLogObserver extends ContentObserver {

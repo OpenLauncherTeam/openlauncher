@@ -85,6 +85,10 @@ public class SearchBar extends FrameLayout {
         searchButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (expanded && searchInput.getText().length() > 0) {
+                    searchInput.getText().clear();
+                    return;
+                }
                 expanded = !expanded;
                 if (expanded) {
                     if (callback != null) {
@@ -111,7 +115,7 @@ public class SearchBar extends FrameLayout {
         searchInput = new AppCompatEditText(getContext());
         searchInput.setVisibility(View.GONE);
         searchInput.setBackground(null);
-        searchInput.setHint("Search...");
+        searchInput.setHint(R.string.search_hint);
         searchInput.setHintTextColor(Color.WHITE);
         searchInput.setTextColor(Color.WHITE);
         searchInput.setSingleLine();
@@ -180,8 +184,8 @@ public class SearchBar extends FrameLayout {
         final LayoutParams recyclerParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         addView(searchClock, clockParams);
-        addView(searchButton, buttonParams);
         addView(searchInput, inputParams);
+        addView(searchButton, buttonParams);
         addView(searchRecycler, recyclerParams);
 
         searchInput.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

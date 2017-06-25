@@ -597,12 +597,17 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         super.onResume();
     }
 
-    protected void handleLauncherPause() {
+    private void handleLauncherPause() {
         if (consumeNextResume) {
             consumeNextResume = false;
             return;
         }
 
+        onHandleLauncherPause();
+    }
+
+    protected void onHandleLauncherPause()
+    {
         if (desktop != null) {
             if (!desktop.inEditMode) {
                 if (appDrawerController.getDrawer() != null && appDrawerController.getDrawer().getVisibility() == View.VISIBLE) {
