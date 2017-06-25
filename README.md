@@ -1,6 +1,7 @@
 <img src='https://cloud.githubusercontent.com/assets/6735650/24475361/e3ad04ca-14cf-11e7-86fa-28ec0c114cae.png'/>
 
 # OpenLauncher
+This branch is for extracting the base class in this launcher.
 
 This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven launcher for Android. Please go to the [OpenLauncher Wiki](https://github.com/Benny-Kok/OpenLauncher/wiki) for more information.
 
