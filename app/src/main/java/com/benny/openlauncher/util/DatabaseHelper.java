@@ -8,12 +8,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.interfaces.IDatabaseHelper;
 import com.benny.openlauncher.model.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper<Item> {
     private static final String DATABASE_HOME = "home.db";
     private static final String TABLE_HOME = "home";
     private static final String TABLE_GESTURE = "gesture";

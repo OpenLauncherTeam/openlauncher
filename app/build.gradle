@@ -83,4 +83,6 @@ dependencies {
 
     // Android-Apt
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
+
+    compile project (':core')
 }

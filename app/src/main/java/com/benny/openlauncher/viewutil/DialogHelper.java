@@ -16,8 +16,10 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.viewutil.IconLabelItem;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.FastAdapter;
@@ -107,15 +109,15 @@ public class DialogHelper {
                                     public void onAppSelected(AppManager.App app) {
                                         finalItem.extraData = Tool.getStartAppIntent(app);
                                         onActionSelectedListener.onActionSelected(finalItem);
-                                        Home.launcher.db.setGesture(id, finalItem);
+                                        ((DatabaseHelper)Home.launcher.db).setGesture(id, finalItem);
                                     }
                                 });
                             } else if (onActionSelectedListener != null) {
                                 onActionSelectedListener.onActionSelected(item);
-                                Home.launcher.db.setGesture(id, item);
+                                ((DatabaseHelper)Home.launcher.db).setGesture(id, item);
                             }
                         } else {
-                            Home.launcher.db.deleteGesture(id);
+                            ((DatabaseHelper)Home.launcher.db).deleteGesture(id);
                         }
                         return true;
                     }

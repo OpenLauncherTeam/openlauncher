@@ -35,34 +35,35 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.core.widget.SmoothViewPager;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.AppUpdateReceiver;
+import com.benny.openlauncher.core.util.AppUpdateReceiver;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
-import com.benny.openlauncher.util.ShortcutReceiver;
+import com.benny.openlauncher.core.util.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
-import com.benny.openlauncher.viewutil.DragNavigationControl;
+import com.benny.openlauncher.core.viewutil.DragNavigationControl;
 import com.benny.openlauncher.viewutil.IconListAdapter;
 import com.benny.openlauncher.viewutil.QuickCenterItem;
-import com.benny.openlauncher.viewutil.WidgetHost;
-import com.benny.openlauncher.widget.AppDrawerController;
+import com.benny.openlauncher.core.viewutil.WidgetHost;
+import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.widget.AppItemView;
-import com.benny.openlauncher.widget.Desktop;
-import com.benny.openlauncher.widget.DesktopOptionView;
-import com.benny.openlauncher.widget.Dock;
-import com.benny.openlauncher.widget.DragOptionView;
-import com.benny.openlauncher.widget.GroupPopupView;
-import com.benny.openlauncher.widget.LauncherLoadingIcon;
+import com.benny.openlauncher.core.widget.Desktop;
+import com.benny.openlauncher.core.widget.DesktopOptionView;
+import com.benny.openlauncher.core.widget.Dock;
+import com.benny.openlauncher.core.widget.DragOptionView;
+import com.benny.openlauncher.core.widget.GroupPopupView;
+import com.benny.openlauncher.core.widget.LauncherLoadingIcon;
 import com.benny.openlauncher.widget.MiniPopupView;
-import com.benny.openlauncher.widget.PagerIndicator;
+import com.benny.openlauncher.core.widget.PagerIndicator;
 import com.benny.openlauncher.widget.SearchBar;
-import com.benny.openlauncher.widget.SmoothViewPager;
 import com.benny.openlauncher.widget.SwipeListView;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
@@ -73,77 +74,15 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 
-public class Home extends Activity implements DrawerLayout.DrawerListener, Desktop.OnDesktopEditListener, DesktopOptionView.DesktopOptionViewListener {
-    public static final int REQUEST_PICK_APPWIDGET = 0x6475;
-    public static final int REQUEST_CREATE_APPWIDGET = 0x3648;
-    public static final int REQUEST_PERMISSION_READ_CALL_LOG = 0x981294;
-    public static final int REQUEST_PERMISSION_CALL = 0x981295;
-    public static final int REQUEST_PERMISSION_STORAGE = 0x981296;
-    private static final IntentFilter timeChangesIntentFilter;
-    private static final IntentFilter appUpdateIntentFilter;
-    private static final IntentFilter shortcutIntentFilter;
+public class Home extends com.benny.openlauncher.core.activity.Home implements DrawerLayout.DrawerListener
+{
+    private Unbinder unbinder;
 
-    // static members, easier to access from any activity and class
-    public static Home launcher;
-    public static DatabaseHelper db;
-    public static WidgetHost appWidgetHost;
-    public static AppWidgetManager appWidgetManager;
-    public static Resources resources;
-
-    // used for the drag shadow builder
-    public static int touchX = 0;
-    public static int touchY = 0;
-    public static boolean consumeNextResume;
-
-    static {
-        timeChangesIntentFilter = new IntentFilter();
-        timeChangesIntentFilter.addAction(Intent.ACTION_TIME_TICK);
-        timeChangesIntentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-        timeChangesIntentFilter.addAction(Intent.ACTION_TIME_CHANGED);
-
-        appUpdateIntentFilter = new IntentFilter();
-        appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
-        appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_REMOVED);
-        appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_CHANGED);
-        appUpdateIntentFilter.addDataScheme("package");
-
-        shortcutIntentFilter = new IntentFilter();
-        shortcutIntentFilter.addAction("com.android.launcher.action.INSTALL_SHORTCUT");
-    }
-
-    private final BroadcastReceiver shortcutReceiver = new ShortcutReceiver();
-    private final BroadcastReceiver appUpdateReceiver = new AppUpdateReceiver();
-    @BindView(R.id.desktop)
-    public Desktop desktop;
-    private final BroadcastReceiver timeChangedReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (action.equals(Intent.ACTION_TIME_TICK)) {
-                updateSearchClock();
-            }
-        }
-    };
-    @BindView(R.id.searchBar)
-    public SearchBar searchBar;
-    @BindView(R.id.background)
-    public View background;
-    @BindView(R.id.left)
-    public View dragLeft;
-    @BindView(R.id.right)
-    public View dragRight;
-    @BindView(R.id.desktopIndicator)
-    public PagerIndicator desktopIndicator;
-    @BindView(R.id.dock)
-    public Dock dock;
-    @BindView(R.id.appDrawerController)
-    public AppDrawerController appDrawerController;
     @BindView(R.id.groupPopup)
     public GroupPopupView groupPopup;
-    @BindView(R.id.baseLayout)
-    public ConstraintLayout baseLayout;
     @BindView(R.id.minibar)
     public SwipeListView minibar;
     @BindView(R.id.minibar_background)
@@ -154,23 +93,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
     public MiniPopupView miniPopup;
     @BindView(R.id.shortcutLayout)
     public RelativeLayout shortcutLayout;
-    @BindView(R.id.loadingIcon)
-    public LauncherLoadingIcon loadingIcon;
-    @BindView(R.id.loadingSplash)
-    public FrameLayout loadingSplash;
-    @BindView(R.id.dragOptionPanel)
-    public DragOptionView dragOptionView;
-    @BindView(R.id.desktopEditOptionPanel)
-    public DesktopOptionView desktopEditOptionView;
-    private PagerIndicator appDrawerIndicator;
-    private ViewGroup myScreen;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
     private CallLogObserver callLogObserver;
-    private AppSettings appSettings;
-    // region for the APP_DRAWER_ANIMATION
-    private int cx;
-    private int cy;
-    private int rad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,256 +104,57 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         CustomActivityOnCrash.setEnableAppRestart(false);
         CustomActivityOnCrash.setDefaultErrorActivityDrawable(R.drawable.rip);
         CustomActivityOnCrash.install(this);
-
-        appSettings = AppSettings.get();
-
-        resources = getResources();
-
-        launcher = this;
-        db = new DatabaseHelper(this);
-        AppManager.getInstance(this).clearListener();
-
-        myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, myScreen);
-        setContentView(myScreen);
-
-        ButterKnife.bind(this);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-
-        loadingSplash.animate().alpha(0).withEndAction(new Runnable() {
-            @Override
-            public void run() {
-                myScreen.removeView(loadingSplash);
-            }
-        });
-        init();
     }
 
-    private void init() {
-        drawerLayout.addDrawerListener(this);
+    @Override
+    protected void bindViews()
+    {
+        super.bindViews();
+        unbinder = ButterKnife.bind(this);
+    }
 
-        appWidgetHost = new WidgetHost(getApplicationContext(), R.id.app_widget_host);
-        appWidgetManager = AppWidgetManager.getInstance(this);
-        appWidgetHost.startListening();
+    @Override
+    protected void unbindViews()
+    {
+        super.unbindViews();
+        if (unbinder != null)
+            unbinder.unbind();
+    }
 
-        initViews();
-
-        registerBroadcastReceiver();
-
-        // add all of the data for the desktop and dock
-        AppManager.getInstance(this).addAppUpdatedListener(new AppManager.AppUpdatedListener() {
-            @Override
-            public void onAppUpdated(List<AppManager.App> apps) {
-                if (appSettings.getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS) {
-                    if (AppSettings.get().isAppFirstLaunch()) {
-                        AppSettings.get().setAppFirstLaunch(false);
-
-                        // create a new app drawer button
-                        Item appDrawerBtnItem = Item.newActionItem(8);
-
-                        // center the button
-                        appDrawerBtnItem.x = 2;
-                        db.setItem(appDrawerBtnItem, 0, 0);
-                    }
-                }
-                if (appSettings.getDesktopStyle() == Desktop.DesktopMode.NORMAL) {
-                    desktop.initDesktopNormal(Home.this);
-                } else if (appSettings.getDesktopStyle() == Desktop.DesktopMode.SHOW_ALL_APPS) {
-                    desktop.initDesktopShowAll(Home.this, Home.this);
-                }
-                dock.initDockItem(Home.this);
-
-                AppManager.getInstance(Home.this).removeAppUpdatedListener(this);
-            }
-        });
-        AppManager.getInstance(this).addAppDeletedListener(new AppManager.AppDeletedListener() {
-            @Override
-            public void onAppDeleted(AppManager.App app) {
-                if (appSettings.getDesktopStyle() == Desktop.DesktopMode.NORMAL) {
-                    desktop.initDesktopNormal(Home.this);
-                } else if (appSettings.getDesktopStyle() == Desktop.DesktopMode.SHOW_ALL_APPS) {
-                    desktop.initDesktopShowAll(Home.this, Home.this);
-                }
-                dock.initDockItem(Home.this);
-            }
-        });
-
+    @Override
+    protected void initAppManager() {
+        super.initAppManager();
         AppManager.getInstance(this).init();
-
-        initSettings();
-
-        System.runFinalization();
-        System.gc();
     }
 
-    // called to initialize the views
-    private void initViews() {
+    @Override
+    protected void initViews() {
+        super.initViews();
+
         initMinibar();
         initQuickCenter();
-        initSearchBar();
-        initDock();
-
-        DragNavigationControl.init(this, dragLeft, dragRight);
-
-        appDrawerController.init();
-        appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
-
-        appDrawerController.setHome(this);
-        dragOptionView.setHome(this);
-
-        desktop.init();
-        desktop.setDesktopEditListener(this);
-
-        desktopEditOptionView.setDesktopOptionViewListener(this);
-        desktopEditOptionView.updateLockIcon(appSettings.isDesktopLock());
-        desktop.addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                desktopEditOptionView.updateHomeIcon(appSettings.getDesktopPageCurrent() == position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-
-        desktop.setPageIndicator(desktopIndicator);
-
-        dragOptionView.setAutoHideView(searchBar);
-
-        appDrawerController.setCallBack(new AppDrawerController.CallBack() {
-            @Override
-            public void onStart() {
-                Tool.visibleViews(appDrawerIndicator);
-                Tool.invisibleViews(desktopIndicator, desktop);
-                updateDock(false);
-                updateSearchBar(false);
-            }
-
-            @Override
-            public void onEnd() {
-            }
-        }, new AppDrawerController.CallBack() {
-            @Override
-            public void onStart() {
-                if (appDrawerIndicator != null) {
-                    appDrawerIndicator.animate().alpha(0).setDuration(100);
-                }
-
-                Tool.visibleViews(desktop, desktopIndicator);
-                updateDock(true);
-                updateSearchBar(!dragOptionView.isDraggedFromDrawer);
-                dragOptionView.isDraggedFromDrawer = false;
-            }
-
-            @Override
-            public void onEnd() {
-                if (!AppSettings.get().isDrawerRememberPosition()) {
-                    appDrawerController.scrollToStart();
-                }
-                appDrawerController.getDrawer().setVisibility(View.INVISIBLE);
-            }
-        });
     }
 
     @Override
-    public void onDesktopEdit() {
-        dragOptionView.resetAutoHideView();
-
-        Tool.visibleViews(100, desktopEditOptionView);
-        Tool.invisibleViews(100, desktopIndicator);
-        updateDock(false);
-        updateSearchBar(false);
+    protected TextView getSearchClock() {
+        return ((SearchBar)searchBar).searchClock;
     }
 
-    @Override
-    public void onFinishDesktopEdit() {
-        dragOptionView.setAutoHideView(searchBar);
-
-        Tool.visibleViews(100, desktopIndicator);
-        Tool.invisibleViews(100, desktopEditOptionView);
-        updateDock(true);
-        updateSearchBar(true);
+    private AppSettings getAppSettings() {
+        return (AppSettings)appSettings;
     }
 
-    @Override
-    public void onRemovePage() {
-        desktop.removeCurrentPage();
-    }
 
-    @Override
-    public void onSetPageAsHome() {
-        appSettings.setDesktopPageCurrent(desktop.getCurrentItem());
-    }
-
-    @Override
-    public void onLaunchSettings() {
-        consumeNextResume = true;
-        LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, this);
-    }
-
-    @Override
-    public void onPickDesktopAction() {
-        DialogHelper.addActionItemDialog(this, new MaterialDialog.ListCallback() {
-            @Override
-            public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                switch (which) {
-                    case 0:
-                        Point pos = desktop.getCurrentPage().findFreeSpace();
-                        if (pos != null)
-                            desktop.addItemToCell(Item.newActionItem(8), pos.x, pos.y);
-                        else
-                            Tool.toast(Home.this, R.string.toast_not_enough_space);
-                        break;
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onPickWidget() {
-        pickWidget();
-    }
-
-    private void initSettings() {
-        updateHomeLayout();
-
-        if (appSettings.isDesktopFullscreen()) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        } else {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-        }
-
-        desktop.setBackgroundColor(appSettings.getDesktopColor());
-        dock.setBackgroundColor(appSettings.getDockColor());
-
-        appDrawerController.setBackgroundColor(appSettings.getDrawerBackgroundColor());
-        appDrawerController.getBackground().setAlpha(0);
-        appDrawerController.reloadDrawerCardTheme();
-
-        switch (appSettings.getDrawerStyle()) {
-            case AppDrawerController.DrawerMode.HORIZONTAL_PAGED:
-                if (!AppSettings.get().isDrawerShowIndicator()) {
-                    appDrawerController.getChildAt(1).setVisibility(View.GONE);
-                }
-                break;
-            case AppDrawerController.DrawerMode.VERTICAL:
-                // handled in the AppDrawerVertical class
-                break;
-        }
-        drawerLayout.setDrawerLockMode(appSettings.getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+    protected void initSettings() {
+        super.initSettings();
+        drawerLayout.setDrawerLockMode(getAppSettings().getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     public void initMinibar() {
         final ArrayList<String> labels = new ArrayList<>();
         final ArrayList<Integer> icons = new ArrayList<>();
 
-        for (String act : appSettings.getMinibarArrangement()) {
+        for (String act : getAppSettings().getMinibarArrangement()) {
             if (act.length() > 1 && act.charAt(0) == '0') {
                 LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
                 if (item != null) {
@@ -459,8 +184,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                 }
             }
         });
-        minibar.setBackgroundColor(appSettings.getMinibarBackgroundColor());
-        minibarBackground.setBackgroundColor(appSettings.getMinibarBackgroundColor());
+        minibar.setBackgroundColor(getAppSettings().getMinibarBackgroundColor());
+        minibarBackground.setBackgroundColor(getAppSettings().getMinibarBackgroundColor());
     }
 
     private void initQuickCenter() {
@@ -480,18 +205,8 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         }
     }
 
-    private void initDock() {
-        int iconSize = AppSettings.get().getIconSize();
-        dock.init();
-        if (appSettings.isDockShowLabel()) {
-            dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;
-        } else {
-            dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, this) + Dock.bottomInset;
-        }
-    }
-
-    private void initSearchBar() {
-        searchBar.setCallback(new SearchBar.CallBack() {
+    protected void initSearchBar() {
+        ((SearchBar)searchBar).setCallback(new SearchBar.CallBack() {
             @Override
             public void onInternetSearch(String string) {
                 Intent intent = new Intent();
@@ -500,7 +215,7 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
                     intent.setAction(Intent.ACTION_WEB_SEARCH);
                     intent.putExtra(SearchManager.QUERY, string);
                 } else {
-                    String baseUri = appSettings.getSearchBarBaseURI();
+                    String baseUri = getAppSettings().getSearchBarBaseURI();
                     String searchUri = baseUri.contains("{query}") ? baseUri.replace("{query}", string) : (baseUri + string);
 
                     intent.setAction(Intent.ACTION_VIEW);
@@ -521,11 +236,11 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
                 updateDock(false);
 
-                searchBar.searchInput.setFocusable(true);
-                searchBar.searchInput.setFocusableInTouchMode(true);
-                searchBar.searchInput.requestFocus();
+                ((SearchBar)searchBar).searchInput.setFocusable(true);
+                ((SearchBar)searchBar).searchInput.setFocusableInTouchMode(true);
+                ((SearchBar)searchBar).searchInput.requestFocus();
 
-                Tool.showKeyboard(Home.this, searchBar.searchInput);
+                Tool.showKeyboard(Home.this, ((SearchBar)searchBar).searchInput);
             }
 
             @Override
@@ -535,51 +250,13 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
 
                 updateDock(true);
 
-                searchBar.searchInput.clearFocus();
+                ((SearchBar)searchBar).searchInput.clearFocus();
 
-                Tool.hideKeyboard(Home.this, searchBar.searchInput);
+                Tool.hideKeyboard(Home.this, ((SearchBar)searchBar).searchInput);
             }
         });
 
-        // this view is just a text view of the current date
-        updateSearchClock();
-    }
-
-    public void updateDock(boolean show) {
-        if (appSettings.getDockEnable() && show) {
-            Tool.visibleViews(100, dock);
-            ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
-            ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
-        } else {
-            if (appSettings.getDockEnable()) {
-                Tool.invisibleViews(100, dock);
-            } else {
-                Tool.goneViews(100, dock);
-                ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Desktop.bottomInset + Tool.dp2px(4, this);
-                ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
-            }
-        }
-    }
-
-    public void updateSearchBar(boolean show) {
-        if (appSettings.getSearchBarEnable() && show) {
-            Tool.visibleViews(100, searchBar);
-        } else {
-            if (appSettings.getSearchBarEnable()) {
-                Tool.invisibleViews(100, searchBar);
-            } else {
-                Tool.goneViews(searchBar);
-            }
-        }
-    }
-
-    private void updateSearchClock() {
-        if (searchBar.searchClock.getText() != null) {
-            Calendar calendar = Calendar.getInstance(Locale.getDefault());
-            String timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-            String timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
-            searchBar.searchClock.setText(Html.fromHtml(timeOne + "<br><small><small><small><small><small>" + timeTwo + "</small></small></small></small></small>"));
-        }
+        super.initSearchBar();
     }
 
     public void updateHomeLayout() {
@@ -615,192 +292,17 @@ public class Home extends Activity implements DrawerLayout.DrawerListener, Deskt
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    private void registerBroadcastReceiver() {
-        registerReceiver(appUpdateReceiver, appUpdateIntentFilter);
-        registerReceiver(timeChangedReceiver, timeChangesIntentFilter);
-        registerReceiver(shortcutReceiver, shortcutIntentFilter);
-    }
-
-    public void pickWidget() {
-        consumeNextResume = true;
-        int appWidgetId = appWidgetHost.allocateAppWidgetId();
-        Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
-        pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        startActivityForResult(pickIntent, REQUEST_PICK_APPWIDGET);
-    }
-
-    private void configureWidget(Intent data) {
-        Bundle extras = data.getExtras();
-        int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
-        AppWidgetProviderInfo appWidgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId);
-        if (appWidgetInfo.configure != null) {
-            Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
-            intent.setComponent(appWidgetInfo.configure);
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-            startActivityForResult(intent, REQUEST_CREATE_APPWIDGET);
-        } else {
-            createWidget(data);
-        }
-    }
-
-    public void createWidget(Intent data) {
-        Bundle extras = data.getExtras();
-        int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
-        AppWidgetProviderInfo appWidgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId);
-        Item item = Item.newWidgetItem(appWidgetId);
-        item.spanX = ((appWidgetInfo.minWidth - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth) + 1;
-        item.spanY = ((appWidgetInfo.minHeight - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight) + 1;
-        Point point = desktop.getCurrentPage().findFreeSpace(item.spanX, item.spanY);
-        if (point != null) {
-            item.x = point.x;
-            item.y = point.y;
-
-            // add item to database
-            db.setItem(item, desktop.getCurrentItem(), 1);
-            desktop.addItemToPage(item, desktop.getCurrentItem());
-        } else {
-            Tool.toast(Home.this, R.string.toast_not_enough_space);
-        }
-    }
-
     @Override
     protected void onDestroy() {
-        if (appWidgetHost != null)
-            appWidgetHost.stopListening();
-        appWidgetHost = null;
-        unregisterReceiver(appUpdateReceiver);
-        unregisterReceiver(shortcutReceiver);
         if (callLogObserver != null)
             getApplicationContext().getContentResolver().unregisterContentObserver(callLogObserver);
-        launcher = null;
         super.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        System.runFinalization();
-        System.gc();
-        super.onLowMemory();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_PICK_APPWIDGET) {
-                configureWidget(data);
-            } else if (requestCode == REQUEST_CREATE_APPWIDGET) {
-                createWidget(data);
-            }
-        } else if (resultCode == RESULT_CANCELED && data != null) {
-            int appWidgetId = data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
-            if (appWidgetId != -1) {
-                appWidgetHost.deleteAppWidgetId(appWidgetId);
-            }
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        launcher = this;
-        if (appWidgetHost != null) {
-            appWidgetHost.startListening();
-        }
-        super.onStart();
     }
 
     @Override
     public void onBackPressed() {
         drawerLayout.closeDrawers();
-        handleLauncherPause();
-    }
-
-    @Override
-    protected void onResume() {
-        if (appSettings.getAppRestartRequired()) {
-            appSettings.setAppRestartRequired(false);
-
-            Intent restartIntent = new Intent(this, Home.class);
-            PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556,restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-            AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, restartIntentP);
-            System.exit(0);
-            return;
-        }
-
-        launcher = this;
-        if (appWidgetHost != null) {
-            appWidgetHost.startListening();
-        }
-
-        handleLauncherPause();
-        super.onResume();
-    }
-
-    private void handleLauncherPause() {
-        if (consumeNextResume) {
-            consumeNextResume = false;
-            return;
-        }
-
-        searchBar.collapse();
-
-        if (desktop != null) {
-            if (!desktop.inEditMode) {
-                if (appDrawerController.getDrawer() != null && appDrawerController.getDrawer().getVisibility() == View.VISIBLE) {
-                    closeAppDrawer();
-                } else {
-                    desktop.setCurrentItem(appSettings.getDesktopPageCurrent());
-                }
-            } else {
-                desktop.pages.get(desktop.getCurrentItem()).performClick();
-            }
-        }
-
-        if (groupPopup != null) {
-            groupPopup.dismissPopup();
-        }
-    }
-
-    // open the app drawer with animation
-    public void openAppDrawer() {
-        openAppDrawer(desktop, -1, -1);
-    }
-
-    public void openAppDrawer(View view) {
-        openAppDrawer(view, -1, -1);
-    }
-
-    public void openAppDrawer(View view, int x, int y) {
-        if (!(x > 0 && y > 0)) {
-            int[] pos = new int[2];
-            view.getLocationInWindow(pos);
-            cx = pos[0];
-            cy = pos[1];
-
-            cx += view.getWidth() / 2;
-            cy += view.getHeight() / 2;
-            if (view instanceof AppItemView) {
-                AppItemView appItemView = (AppItemView) view;
-                if (!appItemView.getShowLabel()) {
-                    cy -= Tool.dp2px(14, this) / 2;
-                }
-                rad = (int) (appItemView.getIconSize() / 2 - Tool.dp2px(4, view.getContext()));
-            }
-            cx -= ((ViewGroup.MarginLayoutParams) appDrawerController.getDrawer().getLayoutParams()).leftMargin;
-            cy -= ((ViewGroup.MarginLayoutParams) appDrawerController.getDrawer().getLayoutParams()).topMargin;
-            cy -= appDrawerController.getPaddingTop();
-        } else {
-            cx = x;
-            cy = y;
-            rad = 0;
-        }
-        int finalRadius = Math.max(appDrawerController.getDrawer().getWidth(), appDrawerController.getDrawer().getHeight());
-        appDrawerController.open(cx, cy, rad, finalRadius);
-    }
-
-    public void closeAppDrawer() {
-        int finalRadius = Math.max(appDrawerController.getDrawer().getWidth(), appDrawerController.getDrawer().getHeight());
-        appDrawerController.close(cx, cy, rad, finalRadius);
+        super.onBackPressed();
     }
 
     // search button in the search bar is clicked

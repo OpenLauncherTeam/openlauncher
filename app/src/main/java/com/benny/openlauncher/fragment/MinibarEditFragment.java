@@ -77,8 +77,8 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
                 buttonView.setText(isChecked ? R.string.on : R.string.off);
                 AppSettings.get().setMinibarEnable(isChecked);
                 if (Home.launcher != null) {
-                    Home.launcher.drawerLayout.closeDrawers();
-                    Home.launcher.drawerLayout.setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    ((Home) Home.launcher).drawerLayout.closeDrawers();
+                    ((Home) Home.launcher).drawerLayout.setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 }
             }
         });
@@ -112,7 +112,7 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
     @Override
     public void onStop() {
         if (launcher != null) {
-            launcher.initMinibar();
+            ((Home) Home.launcher).initMinibar();
         }
         super.onStop();
     }

@@ -1,15 +1,13 @@
 package com.benny.openlauncher.model;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.interfaces.IItem;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
 
@@ -21,7 +19,7 @@ import java.util.Random;
  * Created by dkanada on 5/3/2017.
  */
 
-public class Item implements Parcelable {
+public class Item implements IItem<Item> {
     public static final Creator<Item> CREATOR = new Creator<Item>() {
 
         @Override
@@ -38,7 +36,7 @@ public class Item implements Parcelable {
     // all items need these values
     public int idValue;
     public Type type;
-    public String name = Home.launcher.getString(R.string.request_dummy_text);
+    public String name = "";
     public Drawable icon = Home.launcher.getResources().getDrawable(R.drawable.rip);
     public int x = 0;
     public int y = 0;
@@ -78,7 +76,7 @@ public class Item implements Parcelable {
                 parcel.readStringList(labels);
                 items = new ArrayList<>();
                 for (String s : labels) {
-                    items.add(Home.launcher.db.getItem(Integer.parseInt(s)));
+                    items.add((Item)Home.launcher.db.getItem(Integer.parseInt(s)));
                 }
                 break;
             case ACTION:
@@ -182,9 +180,80 @@ public class Item implements Parcelable {
         }
     }
 
+    @Override
     public void reset() {
         Random random = new Random();
         idValue = random.nextInt();
+    }
+
+    @Override
+    public int getId() {
+        return idValue;
+    }
+
+    @Override
+    public Intent getIntent() {
+        return intent;
+    }
+
+    @Override
+    public String getLabel() {
+        return name;
+    }
+
+    @Override
+    public void setLabel(String label) {
+        this.name = label;
+    }
+
+    @Override
+    public Type getType() {
+        return type;
+    }
+
+    @Override
+    public List<Item> getGroupItems() {
+        return items;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public int getSpanX() {
+        return spanX;
+    }
+
+    @Override
+    public int getSpanY() {
+        return spanY;
+    }
+
+    @Override
+    public void setSpanX(int x) {
+        spanX = x;
+    }
+
+    @Override
+    public void setSpanY(int y) {
+        spanY = y;
+    }
+
+    @Override
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
     }
 
     private static Intent toIntent(AppManager.App app) {
@@ -192,13 +261,5 @@ public class Item implements Parcelable {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setClassName(app.packageName, app.className);
         return intent;
-    }
-
-    public enum Type {
-        APP,
-        SHORTCUT,
-        GROUP,
-        ACTION,
-        WIDGET
     }
 }

@@ -26,7 +26,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.CircleDrawable;
-import com.benny.openlauncher.viewutil.IconLabelItem;
+import com.benny.openlauncher.core.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 

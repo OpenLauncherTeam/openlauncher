@@ -24,7 +24,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.benny.openlauncher.widget.Desktop
+    <com.benny.openlauncher.core.widget.Desktop
         android:id="@+id/desktop"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -33,7 +33,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
-    <com.benny.openlauncher.widget.PagerIndicator
+    <com.benny.openlauncher.core.widget.PagerIndicator
         android:id="@+id/desktopIndicator"
         android:layout_width="0dp"
         android:layout_height="10dp"
@@ -42,7 +42,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <com.benny.openlauncher.widget.Dock
+    <com.benny.openlauncher.core.widget.Dock
         android:id="@+id/dock"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -50,7 +50,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <com.benny.openlauncher.widget.AppDrawerController
+    <com.benny.openlauncher.core.widget.AppDrawerController
         android:id="@+id/appDrawerController"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -59,7 +59,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.benny.openlauncher.widget.DesktopOptionView
+    <com.benny.openlauncher.core.widget.DesktopOptionView
         android:id="@+id/desktopEditOptionPanel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <com.benny.openlauncher.widget.DragOptionView
+    <com.benny.openlauncher.core.widget.DragOptionView
         android:id="@+id/dragOptionPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.benny.openlauncher.widget.GroupPopupView
+    <com.benny.openlauncher.core.widget.GroupPopupView
         android:id="@+id/groupPopup"
         android:layout_width="0dp"
         android:layout_height="0dp"

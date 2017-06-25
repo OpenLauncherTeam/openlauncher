@@ -17,20 +17,21 @@ import android.view.View;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.interfaces.IAppItemView;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.DragAction;
+import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.viewutil.DesktopCallBack;
-import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
+import com.benny.openlauncher.core.viewutil.DesktopCallBack;
+import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 
 /**
  * Created by BennyKok on 10/23/2016
  */
 
-public class AppItemView extends View implements Drawable.Callback {
+public class AppItemView extends View implements Drawable.Callback, IAppItemView {
     private Drawable icon;
     private String label;
     private Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -43,6 +44,10 @@ public class AppItemView extends View implements Drawable.Callback {
     private int targetedWidth;
     private int targetedHeightPadding;
     private float heightPadding;
+
+    public View getView() {
+        return this;
+    }
 
     public Drawable getIcon() {
         return icon;
@@ -227,7 +232,7 @@ public class AppItemView extends View implements Drawable.Callback {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Home.launcher != null && Home.launcher.groupPopup.showWindowV(item, v, callback)) {
+                    if (Home.launcher != null && ((Home)Home.launcher).groupPopup.showWindowV(item, v, callback)) {
                         ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
                     }
                 }
@@ -306,12 +311,6 @@ public class AppItemView extends View implements Drawable.Callback {
         public Builder vibrateWhenLongPress() {
             view.vibrateWhenLongPress = true;
             return this;
-        }
-
-        public interface LongPressCallBack {
-            boolean readyForDrag(View view);
-
-            void afterDrag(View view);
         }
     }
 }

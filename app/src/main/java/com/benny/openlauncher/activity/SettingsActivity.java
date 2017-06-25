@@ -21,10 +21,10 @@ import android.view.View;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
+import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
-import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
-import com.benny.openlauncher.widget.AppDrawerController;
+import com.benny.openlauncher.core.widget.AppDrawerController;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -291,7 +291,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 String key = preference.getKey();
 
                 if (key.equals(getString(R.string.pref_key__desktop_double_tap))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, Home.launcher.db.getGesture(0), 0, new DialogHelper.OnActionSelectedListener() {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper)Home.launcher.db).getGesture(0), 0, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -301,7 +301,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 }
 
                 if (key.equals(getString(R.string.pref_key__desktop_swipe_up))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, Home.launcher.db.getGesture(1), 1, new DialogHelper.OnActionSelectedListener() {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper)Home.launcher.db).getGesture(1), 1, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -311,7 +311,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 }
 
                 if (key.equals(getString(R.string.pref_key__desktop_swipe_down))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, Home.launcher.db.getGesture(2), 2, new DialogHelper.OnActionSelectedListener() {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper)Home.launcher.db).getGesture(2), 2, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -321,7 +321,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 }
 
                 if (key.equals(getString(R.string.pref_key__desktop_pinch))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, Home.launcher.db.getGesture(3), 3, new DialogHelper.OnActionSelectedListener() {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper)Home.launcher.db).getGesture(3), 3, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -331,7 +331,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 }
 
                 if (key.equals(getString(R.string.pref_key__desktop_unpinch))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, Home.launcher.db.getGesture(4), 4, new DialogHelper.OnActionSelectedListener() {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper)Home.launcher.db).getGesture(4), 4, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -396,7 +396,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 if (key.equals(getString(R.string.pref_key__clear_database))) {
                     if (Home.launcher != null)
                         Home.launcher.recreate();
-                    Home.db.onUpgrade(Home.db.getWritableDatabase(), 1, 1);
+                    ((DatabaseHelper)Home.launcher.db).onUpgrade(((DatabaseHelper)Home.launcher.db).getWritableDatabase(), 1, 1);
                     getActivity().finish();
                     return true;
                 }

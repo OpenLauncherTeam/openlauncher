@@ -79,8 +79,8 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
                 buttonView.setText(isChecked ? R.string.on : R.string.off);
                 AppSettings.get().setMinibarEnable(isChecked);
                 if (Home.launcher != null) {
-                    Home.launcher.drawerLayout.closeDrawers();
-                    Home.launcher.drawerLayout.setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    ((Home) Home.launcher).drawerLayout.closeDrawers();
+                    ((Home) Home.launcher).drawerLayout.setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 }
             }
         });
@@ -104,7 +104,7 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
     @Override
     protected void onStop() {
         if (launcher != null)
-            launcher.initMinibar();
+            ((Home) Home.launcher).initMinibar();
         super.onStop();
     }
 

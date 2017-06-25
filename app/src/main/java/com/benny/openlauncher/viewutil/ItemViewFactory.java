@@ -16,13 +16,16 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.interfaces.IAppItemView;
+import com.benny.openlauncher.core.viewutil.DesktopCallBack;
+import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder;
+import com.benny.openlauncher.core.widget.CellContainer;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.DragAction;
+import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.widget.AppItemView;
-import com.benny.openlauncher.widget.CellContainer;
-import com.benny.openlauncher.widget.WidgetView;
+import com.benny.openlauncher.core.widget.WidgetView;
 
 /**
  * Created by BennyKok on 10/24/2016.
@@ -45,7 +48,7 @@ public class ItemViewFactory {
                         .setAppItem(item, app)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongClick(item, DragAction.Action.APP, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongClick(item, DragAction.Action.APP, new IAppItemView.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -65,7 +68,7 @@ public class ItemViewFactory {
                         .setShortcutItem(item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongClick(item, DragAction.Action.SHORTCUT, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongClick(item, DragAction.Action.SHORTCUT, new IAppItemView.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -85,7 +88,7 @@ public class ItemViewFactory {
                         .setGroupItem(context, callBack, item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongClick(item, DragAction.Action.GROUP, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongClick(item, DragAction.Action.GROUP, new IAppItemView.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;
@@ -106,7 +109,7 @@ public class ItemViewFactory {
                         .setActionItem(item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
-                        .withOnLongClick(item, DragAction.Action.ACTION, new AppItemView.Builder.LongPressCallBack() {
+                        .withOnLongClick(item, DragAction.Action.ACTION, new IAppItemView.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
                                 return true;

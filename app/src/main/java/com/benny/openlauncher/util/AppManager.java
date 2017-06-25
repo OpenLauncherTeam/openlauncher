@@ -14,8 +14,10 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.viewutil.IconLabelItem;
+import com.benny.openlauncher.core.interfaces.IApp;
+import com.benny.openlauncher.core.interfaces.IAppDeleteListener;
+import com.benny.openlauncher.core.interfaces.IAppUpdateListener;
+import com.benny.openlauncher.core.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.text.Collator;
@@ -41,11 +43,11 @@ public class AppManager {
     private PackageManager packageManager;
     private List<App> apps = new ArrayList<>();
     private List<App> nonFilteredApps = new ArrayList<>();
-    public List<AppUpdatedListener> updateListeners = new ArrayList<>();
-    public List<AppDeletedListener> deleteListeners = new ArrayList<>();
+    public List<IAppUpdateListener<App>> updateListeners = new ArrayList<>();
+    public List<IAppDeleteListener<App>> deleteListeners = new ArrayList<>();
     public boolean recreateAfterGettingApps;
 
-    private List<AppUpdatedListener> updateListenersToRemove = new ArrayList<>();
+    private List<IAppUpdateListener<App>> updateListenersToRemove = new ArrayList<>();
     private AsyncTask task;
 
     public static AppManager getInstance(Context context) {
@@ -86,15 +88,15 @@ public class AppManager {
         getAllApps();
     }
 
-    public void addAppUpdatedListener(AppUpdatedListener listener) {
+    public void addAppUpdatedListener(IAppUpdateListener<App> listener) {
         updateListeners.add(listener);
     }
 
-    public void removeAppUpdatedListener(AppUpdatedListener listener) {
+    public void removeAppUpdatedListener(IAppUpdateListener<App> listener) {
         updateListenersToRemove.add(listener);
     }
 
-    public void addAppDeletedListener(AppDeletedListener listener) {
+    public void addAppDeletedListener(IAppDeleteListener listener) {
         deleteListeners.add(listener);
     }
 
@@ -217,7 +219,7 @@ public class AppManager {
 
         @Override
         protected void onPostExecute(Object result) {
-            for (AppUpdatedListener listener : updateListeners) {
+            for (IAppUpdateListener<App> listener : updateListeners) {
                 listener.onAppUpdated(apps);
             }
 
@@ -229,13 +231,13 @@ public class AppManager {
                         break;
                     }
                 }
-                for (AppDeletedListener listener : deleteListeners) {
+                for (IAppDeleteListener<App> listener : deleteListeners) {
                     listener.onAppDeleted(temp);
                 }
             }
 
 
-            for (AppUpdatedListener listener : updateListenersToRemove) {
+            for (IAppUpdateListener<App> listener : updateListenersToRemove) {
                 updateListeners.remove(listener);
             }
             updateListenersToRemove.clear();
@@ -250,7 +252,7 @@ public class AppManager {
         }
     }
 
-    public static class App {
+    public static class App implements IApp {
         public String label, packageName, className;
         public Drawable icon;
         public ResolveInfo info;
@@ -277,9 +279,14 @@ public class AppManager {
                 return false;
             }
         }
+
+        @Override
+        public String getLabel() {
+            return label;
+        }
     }
 
-    public static abstract class AppUpdatedListener {
+    public static abstract class AppUpdatedListener implements IAppUpdateListener<App>{
         private String listenerID;
 
         public AppUpdatedListener() {
@@ -290,11 +297,5 @@ public class AppManager {
         public boolean equals(Object obj) {
             return obj instanceof AppUpdatedListener && ((AppUpdatedListener) obj).listenerID.equals(this.listenerID);
         }
-
-        public abstract void onAppUpdated(List<App> apps);
-    }
-
-    public interface AppDeletedListener {
-        void onAppDeleted(App app);
     }
 }
