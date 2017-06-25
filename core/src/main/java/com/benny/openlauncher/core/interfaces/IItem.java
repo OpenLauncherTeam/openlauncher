@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface IItem<T extends IItem> extends Parcelable {
 
-    public enum Type {
+    enum Type {
         APP,
         SHORTCUT,
         GROUP,
