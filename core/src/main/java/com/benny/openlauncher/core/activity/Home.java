@@ -499,10 +499,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     private void updateSearchClock() {
         if (searchBar.searchClock.getText() != null) {
-            Calendar calendar = Calendar.getInstance(Locale.getDefault());
-            String timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-            String timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
-            searchBar.searchClock.setText(Html.fromHtml(timeOne + "<br><small><small><small><small><small>" + timeTwo + "</small></small></small></small></small>"));
+            searchBar.updateClock();
         }
     }
 

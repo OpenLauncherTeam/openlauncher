@@ -14,16 +14,14 @@ import com.benny.openlauncher.core.interfaces.AppItem;
 import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.DatabaseHelper;
+import com.benny.openlauncher.core.interfaces.DesktopGestureListener;
 import com.benny.openlauncher.core.interfaces.IconLabelItem;
 import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.interfaces.DialogHandler;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
-import com.benny.openlauncher.core.widget.Desktop;
 
 import java.util.List;
-
-import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 /*
  * just a fast first helper class;
@@ -82,25 +80,34 @@ public abstract class Setup<H extends Home, A extends App, T extends Item, U ext
     public abstract List<AppDeleteListener<A>> getAppDeletedListener(Context c);
 
     // ----------------
-    // Unstructured...
+    // Helper class - Dialogs, Database, Drag&Drop Helper
+    // ----------------
+
+    public abstract DatabaseHelper<T> createDatabaseHelper(Context context);
+    public abstract DialogHandler getDialogHandler();
+    public abstract DesktopGestureListener.DesktopGestureCallback getDrawerGestureCallback();
+
+    // ----------------
+    // Item
     // ----------------
 
     public abstract Class<T> getItemClass();
-    public abstract DatabaseHelper<T> createDatabaseHelper(Context context);
-    public abstract List<A> getAllApps(Context context);
     public abstract List<T> createAllAppItems(Context context);
-    public abstract U createDrawerAppItem(A app);
-    public abstract View createDrawerAppItemView(Context context, H home, A app, AppItemView.LongPressCallBack longPressCallBack);
-    public abstract AppItemView createAppItemViewPopup(Context context, T groupItem, A item);
     public abstract T newGroupItem();
     public abstract T newWidgetItem(int appWidgetId);
     public abstract T newActionItem(int action);
-    public abstract View getItemView(Context context, T item, boolean labelsEnabled, DesktopCallBack callBack);
-    public abstract SimpleFingerGestures.OnFingerGestureListener getDesktopGestureListener(Desktop desktop);
     public abstract T createShortcut(Intent intent, Drawable icon, String name);
-    public abstract void showLauncherSettings(Context context);
-    public abstract DialogHandler getDialogHandler();
 
+    // ----------------
+    // Unstructured...
+    // ----------------
+
+    public abstract List<A> getAllApps(Context context);
+    public abstract U createDrawerAppItem(A app);
+    public abstract View createDrawerAppItemView(Context context, H home, A app, AppItemView.LongPressCallBack longPressCallBack);
+    public abstract AppItemView createAppItemViewPopup(Context context, T groupItem, A item);
+    public abstract View getItemView(Context context, T item, boolean labelsEnabled, DesktopCallBack callBack);
+    public abstract void showLauncherSettings(Context context);
     public abstract void onAppUpdated(Context p1, Intent p2);
     public abstract A findApp(Context c, Intent intent);
     public abstract void updateIcon(Context context, V appItemView, T currentItem);

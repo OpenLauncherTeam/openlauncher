@@ -2,7 +2,6 @@ package com.benny.openlauncher.core.widget;
 
 import android.app.WallpaperManager;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -17,9 +16,11 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
+import com.benny.openlauncher.core.interfaces.DesktopGestureListener;
 import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.DragAction;
+import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.viewutil.SmoothPagerAdapter;
@@ -201,9 +202,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 return true;
             case DragEvent.ACTION_DROP:
                 Tool.print("ACTION_DROP");
-                Intent intent = p2.getClipData().getItemAt(0).getIntent();
-                intent.setExtrasClassLoader(Setup.get().getItemClass().getClassLoader());
-                Item item = intent.getParcelableExtra("mDragData");
+                Item item = DragDropHandler.getDraggedObject(p2);
 
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
@@ -387,7 +386,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
 
         private SimpleFingerGestures.OnFingerGestureListener getGestureListener() {
-            return Setup.get().getDesktopGestureListener(desktop);
+            return new DesktopGestureListener(desktop, Setup.get().getDrawerGestureCallback());
         }
 
         private CellContainer getItemLayout() {

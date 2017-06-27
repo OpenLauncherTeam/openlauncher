@@ -23,7 +23,6 @@ public abstract class DefaultSetup<H extends Home, A extends App, T extends Item
     private final List<AppUpdateListener<A>> updateListener = new ArrayList<>();
     private final List<AppDeleteListener<A>> deleteListeners = new ArrayList<>();
 
-
     public DefaultSetup(Context context) {
         appContext = context.getApplicationContext();
         settingsManager = new DefaultSettings(context);

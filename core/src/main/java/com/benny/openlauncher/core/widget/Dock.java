@@ -1,7 +1,6 @@
 package com.benny.openlauncher.core.widget;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -16,6 +15,7 @@ import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.DragAction;
+import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 
@@ -108,9 +108,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             case DragEvent.ACTION_DRAG_EXITED:
                 return true;
             case DragEvent.ACTION_DROP:
-                Intent intent = p2.getClipData().getItemAt(0).getIntent();
-                intent.setExtrasClassLoader(Setup.get().getItemClass().getClassLoader());
-                Item item = intent.getParcelableExtra("mDragData");
+                Item item = DragDropHandler.getDraggedObject(p2);
 
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time

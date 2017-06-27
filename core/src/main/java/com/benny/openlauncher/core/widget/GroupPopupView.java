@@ -1,8 +1,6 @@
 package com.benny.openlauncher.core.widget;
 
-import android.content.ClipData;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
@@ -18,9 +16,9 @@ import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.DragAction;
+import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
-import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder;
 
 public class GroupPopupView extends FrameLayout {
 
@@ -108,15 +106,10 @@ public class GroupPopupView extends FrameLayout {
 
                         itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
 
+                        DragAction.Action action = groupItem.getType() == Item.Type.SHORTCUT ? DragAction.Action.SHORTCUT : DragAction.Action.APP;
+
                         // start the drag action
-                        Intent i = new Intent();
-                        i.putExtra("mDragData", groupItem);
-                        ClipData data = ClipData.newIntent("mDragIntent", i);
-                        if (groupItem.getType() == Item.Type.SHORTCUT) {
-                            itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.APP), 0);
-                        } else {
-                            itemView.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.SHORTCUT), 0);
-                        }
+                        DragDropHandler.startDrag(itemView, groupItem, action, null);
 
                         dismissPopup();
                         updateItem(c, callBack, item, groupItem, itemView);

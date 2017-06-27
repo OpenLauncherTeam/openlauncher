@@ -31,9 +31,11 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
+import com.benny.openlauncher.core.interfaces.DesktopGestureListener;
 import com.benny.openlauncher.core.interfaces.DialogHandler;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.widget.Desktop;
@@ -317,11 +319,6 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
         Setup.init(new Setup<Home, AppManager.App, Item, DrawerAppItem, AppItemView>() {
 
             @Override
-            public Class getItemClass() {
-                return Item.class;
-            }
-
-            @Override
             public SettingsManager getAppSettings() {
                 return AppSettings.get();
             }
@@ -425,66 +422,6 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public SimpleFingerGestures.OnFingerGestureListener getDesktopGestureListener(final Desktop desktop) {
-                return new SimpleFingerGestures.OnFingerGestureListener() {
-                    @Override
-                    public boolean onSwipeUp(int i, long l, double v) {
-                        LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(1);
-                        if (gesture != null && AppSettings.get().isGestureFeedback())
-                            Tool.vibrate(desktop);
-                        LauncherAction.RunAction(gesture, desktop.getContext());
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onSwipeDown(int i, long l, double v) {
-                        LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(2);
-                        if (gesture != null && AppSettings.get().isGestureFeedback())
-                            Tool.vibrate(desktop);
-                        LauncherAction.RunAction(gesture, desktop.getContext());
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onSwipeLeft(int i, long l, double v) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onSwipeRight(int i, long l, double v) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onPinch(int i, long l, double v) {
-                        LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(3);
-                        if (gesture != null && AppSettings.get().isGestureFeedback())
-                            Tool.vibrate(desktop);
-                        LauncherAction.RunAction(gesture, desktop.getContext());
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onUnpinch(int i, long l, double v) {
-                        LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(4);
-                        if (gesture != null && AppSettings.get().isGestureFeedback())
-                            Tool.vibrate(desktop);
-                        LauncherAction.RunAction(gesture, desktop.getContext());
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onDoubleTap(int i) {
-                        LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(0);
-                        if (gesture != null && AppSettings.get().isGestureFeedback())
-                            Tool.vibrate(desktop);
-                        LauncherAction.RunAction(gesture, desktop.getContext());
-                        return true;
-                    }
-                };
-            }
-
-            @Override
             public Item createShortcut(Intent intent, Drawable icon, String name) {
                 return Item.newShortcutItem(intent, icon, name);
             }
@@ -497,6 +434,68 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             @Override
             public DialogHandler<Item> getDialogHandler() {
                 return dialogHandler;
+            }
+
+            @Override
+            public DesktopGestureListener.DesktopGestureCallback getDrawerGestureCallback() {
+                return new DesktopGestureListener.DesktopGestureCallback() {
+                    @Override
+                    public boolean onDrawerGesture(Desktop desktop, DesktopGestureListener.Type event) {
+                        switch (event) {
+                            case SwipeUp: {
+                                LauncherAction.ActionItem gesture = ((DatabaseHelper) Home.db).getGesture(1);
+                                if (gesture != null && AppSettings.get().isGestureFeedback()) {
+                                    Tool.vibrate(desktop);
+                                }
+                                LauncherAction.RunAction(gesture, desktop.getContext());
+                                return true;
+                            }
+                            case SwipeDown: {
+                                LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(2);
+                                if (gesture != null && AppSettings.get().isGestureFeedback()) {
+                                    Tool.vibrate(desktop);
+                                }
+                                LauncherAction.RunAction(gesture, desktop.getContext());
+                                return true;
+                            }
+                            case SwipeLeft:
+                            case SwipeRight:
+                                return false;
+                            case Pinch: {
+                                LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(3);
+                                if (gesture != null && AppSettings.get().isGestureFeedback()) {
+                                    Tool.vibrate(desktop);
+                                }
+                                LauncherAction.RunAction(gesture, desktop.getContext());
+                                return true;
+                            }
+                            case Unpinch: {
+                                LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(4);
+                                if (gesture != null && AppSettings.get().isGestureFeedback()) {
+                                    Tool.vibrate(desktop);
+                                }
+                                LauncherAction.RunAction(gesture, desktop.getContext());
+                                return true;
+                            }
+                            case DoubleTap: {
+                                LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(0);
+                                if (gesture != null && AppSettings.get().isGestureFeedback())  {
+                                    Tool.vibrate(desktop);
+                                }
+                                LauncherAction.RunAction(gesture, desktop.getContext());
+                                return true;
+                            }
+                            default: {
+                                throw new RuntimeException("Type not handled!");
+                            }
+                        }
+                    }
+                };
+            }
+
+            @Override
+            public Class<Item> getItemClass() {
+                return Item.class;
             }
 
             public List<AppUpdateListener<AppManager.App>> getAppUpdatedListener(Context c) {

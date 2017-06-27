@@ -21,6 +21,7 @@ import com.benny.openlauncher.core.interfaces.DialogHandler;
 import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.DragAction;
+import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 
 public class DragOptionView extends CardView {
@@ -87,9 +88,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
-                        intent.setExtrasClassLoader(Setup.get().getItemClass().getClassLoader());
-                        final Item item = intent.getParcelableExtra("mDragData");
+                        final Item item = DragDropHandler.getDraggedObject(dragEvent);
 
                         Setup.get().getDialogHandler().showEditDialog(getContext(), item, new DialogHandler.OnEditDialogListener() {
                             @Override
@@ -128,9 +127,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
-                        intent.setExtrasClassLoader(Setup.get().getItemClass().getClassLoader());
-                        Item<Item> item = intent.getParcelableExtra("mDragData");
+                        Item<?> item = DragDropHandler.getDraggedObject(dragEvent);
 
                         // remove all items from the database
                         Home.launcher.db.deleteItem(item);
@@ -165,9 +162,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
-                        intent.setExtrasClassLoader(Setup.get().getItemClass().getClassLoader());
-                        Item item = intent.getParcelableExtra("mDragData");
+                        Item item = DragDropHandler.getDraggedObject(dragEvent);
                         if (item.getType() == Item.Type.APP) {
                             try {
                                 getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.getIntent().getComponent().getPackageName())));

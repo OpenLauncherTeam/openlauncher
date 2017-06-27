@@ -1,8 +1,6 @@
 package com.benny.openlauncher.widget;
 
-import android.content.ClipData;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,13 +15,14 @@ import android.view.View;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
-import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 
 public class AppItemView extends View implements Drawable.Callback, com.benny.openlauncher.core.interfaces.AppItemView {
@@ -270,18 +269,7 @@ public class AppItemView extends View implements Drawable.Callback, com.benny.op
                     if (view.vibrateWhenLongPress) {
                         v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                     }
-                    Intent i = new Intent();
-                    i.putExtra("mDragData", item);
-                    ClipData data = ClipData.newIntent("mDragIntent", i);
-
-                    try {
-                        v.startDrag(data, new GoodDragShadowBuilder(v), new DragAction(action), 0);
-                        if (eventAction != null) {
-                            eventAction.afterDrag(v);
-                        }
-                    } catch (IllegalStateException e) {
-                        e.printStackTrace();
-                    }
+                    DragDropHandler.startDrag(v, item, action, eventAction);
                     return true;
                 }
             });

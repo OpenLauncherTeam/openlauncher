@@ -11,7 +11,11 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,7 +37,9 @@ import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class BaseSearchBar extends FrameLayout {
     public TextView searchClock;
@@ -47,6 +53,7 @@ public class BaseSearchBar extends FrameLayout {
     private boolean expanded;
 
     private boolean searchInternetEnabled = true;
+    private float searchClockSubTextFactor = 0.5f;
 
     public BaseSearchBar(@NonNull Context context) {
         super(context);
@@ -65,6 +72,10 @@ public class BaseSearchBar extends FrameLayout {
 
     public void setSearchInternetEnabled(boolean enabled) {
         searchInternetEnabled = enabled;
+    }
+
+    public void setSearchClockSubTextFactor(float factor) {
+        searchClockSubTextFactor = factor;
     }
 
     public void setCallback(CallBack callback) {
@@ -207,6 +218,15 @@ public class BaseSearchBar extends FrameLayout {
 
     protected void startApp(Context context, App app) {
         Tool.startApp(context, app);
+    }
+
+    public void updateClock() {
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
+        String timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+        String timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
+        Spannable span = new SpannableString(timeOne + "\n" + timeTwo);
+        span.setSpan(new RelativeSizeSpan(searchClockSubTextFactor), timeOne.length() + 1, timeOne.length() + 1 + timeTwo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        searchClock.setText(span);
     }
 
     @Override
