@@ -30,7 +30,7 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item> {
     // all items need these values
     private int idValue;
     public Type type;
-    public String name = "";
+    private String name = "";
     public Drawable icon = Home.launcher.getResources().getDrawable(R.drawable.rip);
     public int x = 0;
     public int y = 0;

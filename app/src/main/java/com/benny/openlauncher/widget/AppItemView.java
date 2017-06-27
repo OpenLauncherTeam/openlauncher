@@ -188,7 +188,7 @@ public class AppItemView extends View implements Drawable.Callback, com.benny.op
         }
 
         public Builder setAppItem(final Item item, final AppManager.App app) {
-            view.setLabel(item.name);
+            view.setLabel(item.getLabel());
             view.setIcon(app.icon);
             view.setOnClickListener(new OnClickListener() {
                 @Override
@@ -205,7 +205,7 @@ public class AppItemView extends View implements Drawable.Callback, com.benny.op
         }
 
         public Builder setShortcutItem(final Item item) {
-            view.setLabel(item.name);
+            view.setLabel(item.getLabel());
             view.setIcon(item.icon);
             view.setOnClickListener(new OnClickListener() {
                 @Override
@@ -222,7 +222,7 @@ public class AppItemView extends View implements Drawable.Callback, com.benny.op
         }
 
         public Builder setGroupItem(Context context, final DesktopCallBack callback, final Item item) {
-            view.setLabel(item.name);
+            view.setLabel(item.getLabel());
             view.setIcon(new GroupIconDrawable(context, item));
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -236,7 +236,7 @@ public class AppItemView extends View implements Drawable.Callback, com.benny.op
         }
 
         public Builder setActionItem(Item item) {
-            view.setLabel(item.name);
+            view.setLabel(item.getLabel());
             view.setIcon(Home.launcher.getResources().getDrawable(R.drawable.ic_app_drawer_24dp));
             switch (item.actionValue) {
                 case 8:

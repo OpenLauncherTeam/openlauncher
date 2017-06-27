@@ -75,7 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
         ContentValues itemValues = new ContentValues();
         itemValues.put(COLUMN_TIME, item.getId());
         itemValues.put(COLUMN_TYPE, item.type.toString());
-        itemValues.put(COLUMN_LABEL, item.name);
+        itemValues.put(COLUMN_LABEL, item.getLabel());
         itemValues.put(COLUMN_X_POS, item.x);
         itemValues.put(COLUMN_Y_POS, item.y);
 
@@ -204,7 +204,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
     // update data attributes for an item
     public void updateItem(Item item) {
         ContentValues itemValues = new ContentValues();
-        itemValues.put(COLUMN_LABEL, item.name);
+        itemValues.put(COLUMN_LABEL, item.getLabel());
         itemValues.put(COLUMN_X_POS, item.x);
         itemValues.put(COLUMN_Y_POS, item.y);
         String concat = "";
@@ -255,7 +255,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
         String data = cursor.getString(5);
 
         item.setId(id);
-        item.name = label;
+        item.setLabel(label);
         item.x = x;
         item.y = y;
         item.type = type;

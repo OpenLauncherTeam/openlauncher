@@ -41,8 +41,7 @@ public abstract class Setup<H extends Home, A extends App, T extends Item, U ext
         return setup != null;
     }
 
-    public static void init(Setup setup)
-    {
+    public static void init(Setup setup) {
         Setup.setup = setup;
     }
 

@@ -205,8 +205,7 @@ public class BaseSearchBar extends FrameLayout {
         });
     }
 
-    protected void startApp(Context context, App app)
-    {
+    protected void startApp(Context context, App app) {
         Tool.startApp(context, app);
     }
 

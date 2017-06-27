@@ -16,8 +16,7 @@ import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.widget.BaseSearchBar;
 import com.benny.openlauncher.util.Tool;
 
-public class SearchBar extends BaseSearchBar
-{
+public class SearchBar extends BaseSearchBar {
     public SearchBar(@NonNull Context context) {
         super(context);
     }

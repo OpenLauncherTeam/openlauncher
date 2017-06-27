@@ -64,7 +64,7 @@ public class AppItem extends AbstractItem<AppItem, AppItem.ViewHolder> implement
         super.bindView(holder, payloads);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         com.benny.openlauncher.widget.AppItemView appItemView;
 
         ViewHolder(View itemView) {
