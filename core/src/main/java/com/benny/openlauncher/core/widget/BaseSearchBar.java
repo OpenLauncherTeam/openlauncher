@@ -42,6 +42,13 @@ import java.util.List;
 import java.util.Locale;
 
 public class BaseSearchBar extends FrameLayout {
+
+    public enum Mode {
+        DateAll,
+        DateNoYearAndTime,
+        DateAllAndTime,
+        TimeAndDateAll
+    }
     public TextView searchClock;
     public AppCompatImageView searchButton;
     public AppCompatEditText searchInput;
@@ -53,7 +60,9 @@ public class BaseSearchBar extends FrameLayout {
     private boolean expanded;
 
     private boolean searchInternetEnabled = true;
+    private Mode mode = Mode.DateAll;
     private float searchClockSubTextFactor = 0.5f;
+    private float searchClockSubTextFactor2 = 0.7f;
 
     public BaseSearchBar(@NonNull Context context) {
         super(context);
@@ -70,12 +79,24 @@ public class BaseSearchBar extends FrameLayout {
         init();
     }
 
-    public void setSearchInternetEnabled(boolean enabled) {
+    public BaseSearchBar setSearchInternetEnabled(boolean enabled) {
         searchInternetEnabled = enabled;
+        return this;
     }
 
-    public void setSearchClockSubTextFactor(float factor) {
+    public BaseSearchBar setSearchClockSubTextFactor(float factor) {
         searchClockSubTextFactor = factor;
+        return this;
+    }
+
+    public BaseSearchBar setSearchClockSubTextFactor2(float factor) {
+        searchClockSubTextFactor2 = factor;
+        return this;
+    }
+
+    public BaseSearchBar setMode(Mode mode) {
+        this.mode = mode;
+        return this;
     }
 
     public void setCallback(CallBack callback) {
@@ -222,8 +243,31 @@ public class BaseSearchBar extends FrameLayout {
 
     public void updateClock() {
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
-        String timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-        String timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
+        String timeOne = "";
+        String timeTwo = "";
+        switch (mode) {
+            case DateAll: {
+                timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+                timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
+                break;
+            }
+            case DateNoYearAndTime: {
+                timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+                timeTwo = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(calendar.get(Calendar.MINUTE));
+                break;
+            }
+            case DateAllAndTime:
+            case TimeAndDateAll: {
+                timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH) + ", " + String.valueOf(calendar.get(Calendar.YEAR)));
+                timeTwo = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(calendar.get(Calendar.MINUTE));
+                if (mode == Mode.TimeAndDateAll) {
+                    String tmp = timeOne;
+                    timeOne = timeTwo;
+                    timeTwo = tmp;
+                }
+                break;
+            }
+        }
         Spannable span = new SpannableString(timeOne + "\n" + timeTwo);
         span.setSpan(new RelativeSizeSpan(searchClockSubTextFactor), timeOne.length() + 1, timeOne.length() + 1 + timeTwo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         searchClock.setText(span);
