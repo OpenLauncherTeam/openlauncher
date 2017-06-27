@@ -296,7 +296,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public void showEditDialog(Context context, final Item item, OnEditDialog resultHandler) {
+            public void showEditDialog(Context context, final Item item, OnEditDialogListener listener) {
                 DialogHelper.editItemDialog("Edit Item", item.getLabel(), context, new DialogHelper.onItemEditListener() {
                     @Override
                     public void itemLabel(String label) {
