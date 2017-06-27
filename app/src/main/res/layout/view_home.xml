@@ -16,7 +16,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.benny.openlauncher.widget.SearchBar
+    <com.benny.openlauncher.core.widget.BaseSearchBar
         android:id="@+id/searchBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

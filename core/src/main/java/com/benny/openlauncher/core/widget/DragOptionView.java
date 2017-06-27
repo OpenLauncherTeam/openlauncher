@@ -19,7 +19,7 @@ import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.DialogHandler;
 import com.benny.openlauncher.core.interfaces.Item;
-import com.benny.openlauncher.core.manager.StaticSetup;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.Tool;
 
@@ -88,10 +88,10 @@ public class DragOptionView extends CardView {
                         return true;
                     case DragEvent.ACTION_DROP:
                         Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
-                        intent.setExtrasClassLoader(StaticSetup.get().getItemClass().getClassLoader());
+                        intent.setExtrasClassLoader(Setup.get().getItemClass().getClassLoader());
                         final Item item = intent.getParcelableExtra("mDragData");
 
-                        StaticSetup.get().getDialogHandler().showEditDialog(getContext(), item, new DialogHandler.IOnEditDialog() {
+                        Setup.get().getDialogHandler().showEditDialog(getContext(), item, new DialogHandler.IOnEditDialog() {
                             @Override
                             public void onRename(String name) {
                                 item.setLabel(name);
@@ -129,7 +129,7 @@ public class DragOptionView extends CardView {
                         return true;
                     case DragEvent.ACTION_DROP:
                         Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
-                        intent.setExtrasClassLoader(StaticSetup.get().getItemClass().getClassLoader());
+                        intent.setExtrasClassLoader(Setup.get().getItemClass().getClassLoader());
                         Item<Item> item = intent.getParcelableExtra("mDragData");
 
                         // remove all items from the database
@@ -166,7 +166,7 @@ public class DragOptionView extends CardView {
                         return true;
                     case DragEvent.ACTION_DROP:
                         Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
-                        intent.setExtrasClassLoader(StaticSetup.get().getItemClass().getClassLoader());
+                        intent.setExtrasClassLoader(Setup.get().getItemClass().getClassLoader());
                         Item item = intent.getParcelableExtra("mDragData");
                         if (item.getType() == Item.Type.APP) {
                             try {
@@ -198,7 +198,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        StaticSetup.get().getDialogHandler().showDeletePackageDialog(getContext(), dragEvent);
+                        Setup.get().getDialogHandler().showDeletePackageDialog(getContext(), dragEvent);
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;

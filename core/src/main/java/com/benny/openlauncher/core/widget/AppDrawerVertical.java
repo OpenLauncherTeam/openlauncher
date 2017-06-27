@@ -16,7 +16,7 @@ import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppItem;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.core.manager.StaticSetup;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.Tool;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -67,12 +67,12 @@ public class AppDrawerVertical extends CardView {
 
                 rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_vertical_inner, AppDrawerVertical.this, false);
                 recyclerView = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
-                layoutManager = new GridLayoutManager(getContext(), StaticSetup.get().getAppSettings().getDrawerColumnCount());
+                layoutManager = new GridLayoutManager(getContext(), Setup.appSettings().getDrawerColumnCount());
 
                 itemWidth = (getWidth() - recyclerView.getPaddingRight() - recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
                 init();
 
-                if (!StaticSetup.get().getAppSettings().isDrawerShowIndicator())
+                if (!Setup.appSettings().isDrawerShowIndicator())
                     scrollBar.setVisibility(View.GONE);
             }
         });
@@ -94,12 +94,12 @@ public class AppDrawerVertical extends CardView {
     }
 
     private void setPortraitValue() {
-        layoutManager.setSpanCount(StaticSetup.get().getAppSettings().getDrawerColumnCount());
+        layoutManager.setSpanCount(Setup.appSettings().getDrawerColumnCount());
         gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
     private void setLandscapeValue() {
-        layoutManager.setSpanCount(StaticSetup.get().getAppSettings().getDrawerRowCount());
+        layoutManager.setSpanCount(Setup.appSettings().getDrawerRowCount());
         gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
@@ -123,24 +123,26 @@ public class AppDrawerVertical extends CardView {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setDrawingCacheEnabled(true);
 
-        List<App> allApps = StaticSetup.get().getAllApps(getContext());
+        List<App> allApps = Setup.get().getAllApps(getContext());
         if (allApps.size() != 0) {
             AppDrawerVertical.this.apps = allApps;
             ArrayList<AppItem> items = new ArrayList<>();
             for (int i = 0; i < apps.size(); i++) {
-                items.add(StaticSetup.get().createAppItem(apps.get(i)));
+                items.add(Setup.get().createDrawerAppItem(apps.get(i)));
             }
             gridDrawerAdapter.set(items);
         }
-        StaticSetup.get().addAppUpdatedListener(getContext(), new AppUpdateListener<App>() {
+        Setup.get().getAppUpdatedListener(getContext()).add(new AppUpdateListener<App>() {
             @Override
-            public void onAppUpdated(List<App> apps) {
+            public boolean onAppUpdated(List<App> apps) {
                 AppDrawerVertical.this.apps = apps;
                 ArrayList<AppItem> items = new ArrayList<>();
                 for (int i = 0; i < apps.size(); i++) {
-                    items.add(StaticSetup.get().createAppItem(apps.get(i)));
+                    items.add(Setup.get().createDrawerAppItem(apps.get(i)));
                 }
                 gridDrawerAdapter.set(items);
+
+                return false;
             }
         });
 

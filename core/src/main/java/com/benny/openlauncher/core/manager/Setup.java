@@ -2,7 +2,9 @@ package com.benny.openlauncher.core.manager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.benny.openlauncher.core.activity.Home;
@@ -12,6 +14,7 @@ import com.benny.openlauncher.core.interfaces.AppItem;
 import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.DatabaseHelper;
+import com.benny.openlauncher.core.interfaces.IconLabelItem;
 import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.interfaces.DialogHandler;
@@ -30,48 +33,81 @@ import in.championswimmer.sfg.lib.SimpleFingerGestures;
  * just a fast first helper class;
  * should be removed in the end, so we don't care to keep it clean
  */
-public abstract class StaticSetup<H extends Home, A extends App, T extends Item, U extends AppItem, V extends View & AppItemView> {
+public abstract class Setup<H extends Home, A extends App, T extends Item, U extends AppItem, V extends View & AppItemView> {
 
-    private static StaticSetup mSetup = null;
+    // ----------------
+    // Class and singleton
+    // ----------------
+
+    private static Setup mSetup = null;
 
     public static boolean wasInitialised()
     {
         return mSetup != null;
     }
 
-    public static void init(StaticSetup setup)
+    public static void init(Setup setup)
     {
         mSetup = setup;
     }
 
-    public static StaticSetup get()
-    {
+    public static Setup get() {
         if (mSetup == null)
-            throw new RuntimeException("StaticSetup has not been initialised!");
+            throw new RuntimeException("Setup has not been initialised!");
         return mSetup;
     }
 
-    public abstract Class<T> getItemClass();
+    // ----------------
+    // Methods for convenience and shorter code
+    // ----------------
+
+    public static SettingsManager appSettings() {
+        return get().getAppSettings();
+    }
+
+    // ----------------
+    // Settings
+    // ----------------
+
     public abstract SettingsManager getAppSettings();
+
+    // ----------------
+    // FastAdapter Items
+    // ----------------
+
+    public abstract IconLabelItem createSearchBarInternetItem(Context context, int label, @Nullable View.OnClickListener listener);
+    public abstract IconLabelItem createSearchBarItem(Context context, A app, @Nullable View.OnClickListener listener);
+    public abstract IconLabelItem createDesktopOptionsViewItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, Typeface typeface);
+
+    // ----------------
+    // Listeners
+    // ----------------
+
+    public abstract List<AppUpdateListener<A>> getAppUpdatedListener(Context c);
+    public abstract List<AppDeleteListener<A>> getAppDeletedListener(Context c);
+
+    // ----------------
+    // Unstructured...
+    // ----------------
+
+    public abstract Class<T> getItemClass();
     public abstract DatabaseHelper<T> createDatabaseHelper(Context context);
     public abstract List<A> getAllApps(Context context);
-    public abstract List<U> createAllAppItems(Context context);
-    public abstract U createAppItem(A app);
-    public abstract View createAppItemView(Context context, H home, A app, AppItemView.LongPressCallBack longPressCallBack);
+    public abstract List<T> createAllAppItems(Context context);
+    public abstract U createDrawerAppItem(A app);
+    public abstract View createDrawerAppItemView(Context context, H home, A app, AppItemView.LongPressCallBack longPressCallBack);
     public abstract AppItemView createAppItemViewPopup(Context context, T groupItem, A item);
     public abstract T newGroupItem();
     public abstract T newWidgetItem(int appWidgetId);
     public abstract T newActionItem(int action);
-    public abstract View getItemView(Context context, SettingsManager appSettings, T item, DesktopCallBack callBack);
+    public abstract View getItemView(Context context, T item, boolean labelsEnabled, DesktopCallBack callBack);
     public abstract SimpleFingerGestures.OnFingerGestureListener getDesktopGestureListener(Desktop desktop);
     public abstract T createShortcut(Intent intent, Drawable icon, String name);
     public abstract void showLauncherSettings(Context context);
     public abstract DialogHandler getDialogHandler();
-    public abstract void addAppUpdatedListener(Context c, AppUpdateListener<A> listener);
-    public abstract void removeAppUpdatedListener(Context c, AppUpdateListener<A> listener);
-    public abstract void addAppDeletedListener(Context c, AppDeleteListener<A> listener);
+
     public abstract void onAppUpdated(Context p1, Intent p2);
     public abstract A findApp(Context c, Intent intent);
     public abstract void updateIcon(Context context, V appItemView, T currentItem);
-    public abstract void onItemViewDismissed(AppItemView itemView);
+    public abstract void onItemViewDismissed(V itemView);
 }

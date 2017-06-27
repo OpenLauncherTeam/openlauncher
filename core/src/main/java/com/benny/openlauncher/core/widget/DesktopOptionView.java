@@ -1,7 +1,6 @@
 package com.benny.openlauncher.core.widget;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.annotation.AttrRes;
@@ -17,10 +16,9 @@ import android.view.WindowInsets;
 import android.widget.FrameLayout;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.interfaces.SettingsManager;
-import com.benny.openlauncher.core.manager.StaticSetup;
+import com.benny.openlauncher.core.interfaces.IconLabelItem;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.Tool;
-import com.benny.openlauncher.core.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -33,7 +31,6 @@ import java.util.List;
  */
 
 public class DesktopOptionView extends FrameLayout {
-    private SettingsManager appSettings;
     private RecyclerView actionRecyclerView;
 
     private FastItemAdapter<IconLabelItem> actionAdapter = new FastItemAdapter<>();
@@ -60,18 +57,18 @@ public class DesktopOptionView extends FrameLayout {
 
     public void updateHomeIcon(boolean home) {
         if (home) {
-            actionAdapter.getAdapterItem(0).setIcon(getContext().getResources().getDrawable(R.drawable.ic_star_white_36dp));
+            actionAdapter.getAdapterItem(0).setIcon(getContext(), R.drawable.ic_star_white_36dp);
         } else {
-            actionAdapter.getAdapterItem(0).setIcon(getContext().getResources().getDrawable(R.drawable.ic_star_border_white_36dp));
+            actionAdapter.getAdapterItem(0).setIcon(getContext(), R.drawable.ic_star_border_white_36dp);
         }
         actionAdapter.notifyAdapterItemChanged(0);
     }
 
     public void updateLockIcon(boolean lock) {
         if (lock) {
-            actionAdapter.getAdapterItem(4).setIcon(getContext().getResources().getDrawable(R.drawable.ic_lock_white_36dp));
+            actionAdapter.getAdapterItem(4).setIcon(getContext(), R.drawable.ic_lock_white_36dp);
         } else {
-            actionAdapter.getAdapterItem(4).setIcon(getContext().getResources().getDrawable(R.drawable.ic_lock_open_white_36dp));
+            actionAdapter.getAdapterItem(4).setIcon(getContext(), R.drawable.ic_lock_open_white_36dp);
         }
         actionAdapter.notifyAdapterItemChanged(4);
     }
@@ -86,7 +83,9 @@ public class DesktopOptionView extends FrameLayout {
     }
 
     private void init() {
-        appSettings = StaticSetup.get().getAppSettings();
+        if (isInEditMode()) {
+            return;
+        }
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
         actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -100,12 +99,12 @@ public class DesktopOptionView extends FrameLayout {
         addView(actionRecyclerView, actionRecyclerViewLP);
 
         List<IconLabelItem> items = new ArrayList<>();
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_star_white_36dp, R.string.home, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false, Gravity.CENTER));
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_clear_white_36dp, R.string.remove, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false, Gravity.CENTER));
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_dashboard_white_36dp, R.string.widget, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false, Gravity.CENTER));
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_launch_white_36dp, R.string.action, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false, Gravity.CENTER));
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_lock_open_white_36dp, R.string.lock, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false, Gravity.CENTER));
-        items.add(new IconLabelItem(getContext(), R.drawable.ic_settings_launcher_white_36dp, R.string.settings, null, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false, Gravity.CENTER));
+        items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_star_white_36dp, R.string.home, null, typeface));
+        items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_clear_white_36dp, R.string.remove, null, typeface));
+        items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_dashboard_white_36dp, R.string.widget, null, typeface));
+        items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_launch_white_36dp, R.string.action, null, typeface));
+        items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_lock_open_white_36dp, R.string.lock, null, typeface));
+        items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_settings_launcher_white_36dp, R.string.settings, null, typeface));
 
         actionAdapter.set(items);
         actionAdapter.withOnClickListener(new FastAdapter.OnClickListener<IconLabelItem>() {
@@ -118,30 +117,30 @@ public class DesktopOptionView extends FrameLayout {
                             desktopOptionViewListener.onSetPageAsHome();
                             break;
                         case 1:
-                            if (!appSettings.isDesktopLock()) {
+                            if (!Setup.appSettings().isDesktopLock()) {
                                 desktopOptionViewListener.onRemovePage();
                             } else {
                                 Tool.toast(getContext(), "Desktop is locked.");
                             }
                             break;
                         case 2:
-                            if (!appSettings.isDesktopLock()) {
+                            if (!Setup.appSettings().isDesktopLock()) {
                                 desktopOptionViewListener.onPickWidget();
                             } else {
                                 Tool.toast(getContext(), "Desktop is locked.");
                             }
                             break;
                         case 3:
-                            if (!appSettings.isDesktopLock()) {
+                            if (!Setup.appSettings().isDesktopLock()) {
                                 desktopOptionViewListener.onPickDesktopAction();
                             } else {
                                 Tool.toast(getContext(), "Desktop is locked.");
                             }
                             break;
                         case 4:
-                            appSettings.setDesktopLock(!appSettings.isDesktopLock());
+                            Setup.appSettings().setDesktopLock(!Setup.appSettings().isDesktopLock());
                             //LauncherSettings.getInstance(getContext()).generalSettings.desktopLock = !LauncherSettings.getInstance(getContext()).generalSettings.desktopLock;
-                            updateLockIcon(appSettings.isDesktopLock());
+                            updateLockIcon(Setup.appSettings().isDesktopLock());
                             break;
                         case 5:
                             desktopOptionViewListener.onLaunchSettings();

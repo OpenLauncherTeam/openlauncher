@@ -14,15 +14,17 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.core.viewutil.IconLabelItem;
+import com.benny.openlauncher.model.IconLabelItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,7 +48,6 @@ public class AppManager {
     public List<AppDeleteListener<App>> deleteListeners = new ArrayList<>();
     public boolean recreateAfterGettingApps;
 
-    private List<AppUpdateListener<App>> updateListenersToRemove = new ArrayList<>();
     private AsyncTask task;
 
     public static AppManager getInstance(Context context) {
@@ -80,23 +81,10 @@ public class AppManager {
     public void clearListener() {
         updateListeners.clear();
         deleteListeners.clear();
-        updateListenersToRemove.clear();
     }
 
     public void init() {
         getAllApps();
-    }
-
-    public void addAppUpdatedListener(AppUpdateListener<App> listener) {
-        updateListeners.add(listener);
-    }
-
-    public void removeAppUpdatedListener(AppUpdateListener<App> listener) {
-        updateListenersToRemove.add(listener);
-    }
-
-    public void addAppDeletedListener(AppDeleteListener listener) {
-        deleteListeners.add(listener);
     }
 
     private void getAllApps() {
@@ -186,7 +174,7 @@ public class AppManager {
             });
 
             for (ResolveInfo info : activitiesInfo) {
-                App app = new App(info, packageManager);
+                App app = new App(context, info, packageManager);
                 nonFilteredApps.add(app);
             }
 
@@ -206,7 +194,7 @@ public class AppManager {
                 }
             } else {
                 for (ResolveInfo info : activitiesInfo)
-                    apps.add(new App(info, packageManager));
+                    apps.add(new App(context, info, packageManager));
             }
 
             AppSettings appSettings = AppSettings.get();
@@ -218,8 +206,12 @@ public class AppManager {
 
         @Override
         protected void onPostExecute(Object result) {
-            for (AppUpdateListener<App> listener : updateListeners) {
-                listener.onAppUpdated(apps);
+
+            Iterator<AppUpdateListener<App>> iter = updateListeners.iterator();
+            while (iter.hasNext()) {
+                if (iter.next().onAppUpdated(apps)) {
+                    iter.remove();
+                }
             }
 
             if (tempApps.size() > apps.size()) {
@@ -234,12 +226,6 @@ public class AppManager {
                     listener.onAppDeleted(temp);
                 }
             }
-
-
-            for (AppUpdateListener<App> listener : updateListenersToRemove) {
-                updateListeners.remove(listener);
-            }
-            updateListenersToRemove.clear();
 
             if (recreateAfterGettingApps) {
                 recreateAfterGettingApps = false;
@@ -256,7 +242,7 @@ public class AppManager {
         public Drawable icon;
         public ResolveInfo info;
 
-        public App(ResolveInfo info, PackageManager pm) {
+        public App(Context context, ResolveInfo info, PackageManager pm) {
             this.info = info;
 
             icon = info.loadIcon(pm);
@@ -265,7 +251,7 @@ public class AppManager {
             className = info.activityInfo.name;
 
             if (packageName.equals("com.benny.openlauncher")) {
-                label = "OLSettings";
+                label = context.getString(R.string.ol_settings);
             }
         }
 
@@ -282,6 +268,21 @@ public class AppManager {
         @Override
         public String getLabel() {
             return label;
+        }
+
+        @Override
+        public String getPackageName() {
+            return packageName;
+        }
+
+        @Override
+        public String getClassName() {
+            return className;
+        }
+
+        @Override
+        public Drawable getIcon() {
+            return icon;
         }
     }
 

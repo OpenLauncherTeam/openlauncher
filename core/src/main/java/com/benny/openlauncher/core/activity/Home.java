@@ -3,6 +3,7 @@ package com.benny.openlauncher.core.activity;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.SearchManager;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -19,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.interfaces.App;
@@ -29,14 +30,14 @@ import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.DatabaseHelper;
 import com.benny.openlauncher.core.interfaces.DialogHandler;
 import com.benny.openlauncher.core.interfaces.Item;
-import com.benny.openlauncher.core.interfaces.SettingsManager;
-import com.benny.openlauncher.core.manager.StaticSetup;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.AppUpdateReceiver;
 import com.benny.openlauncher.core.util.ShortcutReceiver;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DragNavigationControl;
 import com.benny.openlauncher.core.viewutil.WidgetHost;
 import com.benny.openlauncher.core.widget.AppDrawerController;
+import com.benny.openlauncher.core.widget.BaseSearchBar;
 import com.benny.openlauncher.core.widget.Desktop;
 import com.benny.openlauncher.core.widget.DesktopOptionView;
 import com.benny.openlauncher.core.widget.Dock;
@@ -112,9 +113,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     public DesktopOptionView desktopEditOptionView;
     private PagerIndicator appDrawerIndicator;
     protected ViewGroup myScreen;
-    protected SettingsManager appSettings;
-    protected View searchBar;
-    private TextView searchClock;
+    protected BaseSearchBar searchBar;
     // region for the APP_DRAWER_ANIMATION
     private int cx;
     private int cy;
@@ -124,15 +123,13 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState == null && !StaticSetup.wasInitialised())
+        if (!Setup.wasInitialised())
             initStaticHelper();
-
-        appSettings = StaticSetup.get().getAppSettings();
-
+        
         resources = getResources();
 
         launcher = this;
-        db = StaticSetup.get().createDatabaseHelper(this);
+        db = Setup.get().createDatabaseHelper(this);
 
         myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, myScreen);
         setContentView(myScreen);
@@ -167,8 +164,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         loadingSplash = (FrameLayout)findViewById(R.id.loadingSplash);
         dragOptionView = (DragOptionView)findViewById(R.id.dragOptionPanel);
         desktopEditOptionView = (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel);
-        searchBar = findViewById(R.id.searchBar);
-        searchClock = getSearchClock();
+        searchBar = (BaseSearchBar)findViewById(R.id.searchBar);
     }
 
     protected void unbindViews()
@@ -186,7 +182,6 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         dragOptionView = null;
         desktopEditOptionView = null;
         searchBar = null;
-        searchClock = null;
     }
 
     private void init() {
@@ -225,7 +220,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         desktop.setDesktopEditListener(this);
 
         desktopEditOptionView.setDesktopOptionViewListener(this);
-        desktopEditOptionView.updateLockIcon(appSettings.isDesktopLock());
+        desktopEditOptionView.updateLockIcon(Setup.appSettings().isDesktopLock());
         desktop.addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -233,7 +228,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
             @Override
             public void onPageSelected(int position) {
-                desktopEditOptionView.updateHomeIcon(appSettings.getDesktopPageCurrent() == position);
+                desktopEditOptionView.updateHomeIcon(Setup.appSettings().getDesktopPageCurrent() == position);
             }
 
             @Override
@@ -272,7 +267,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
             @Override
             public void onEnd() {
-                if (!StaticSetup.get().getAppSettings().isDrawerRememberPosition()) {
+                if (!Setup.appSettings().isDrawerRememberPosition()) {
                     appDrawerController.scrollToStart();
                 }
                 appDrawerController.getDrawer().setVisibility(View.INVISIBLE);
@@ -282,38 +277,39 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     protected void initAppManager() {
 
-        StaticSetup.get().addAppUpdatedListener(this, new AppUpdateListener<App>() {
+        Setup.get().getAppUpdatedListener(this).add(new AppUpdateListener<App>() {
             @Override
-            public void onAppUpdated(List<App> apps) {
-                if (appSettings.getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS) {
-                    if (StaticSetup.get().getAppSettings().isAppFirstLaunch()) {
-                        StaticSetup.get().getAppSettings().setAppFirstLaunch(false);
+            public boolean onAppUpdated(List<App> apps) {
+                if (Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS) {
+                    if (Setup.appSettings().isAppFirstLaunch()) {
+                        Setup.appSettings().setAppFirstLaunch(false);
 
                         // create a new app drawer button
-                        Item appDrawerBtnItem = StaticSetup.get().newActionItem(8);
+                        Item appDrawerBtnItem = Setup.get().newActionItem(8);
 
                         // center the button
                         appDrawerBtnItem.setX(2);
                         db.setItem(appDrawerBtnItem, 0, 0);
                     }
                 }
-                if (appSettings.getDesktopStyle() == Desktop.DesktopMode.NORMAL) {
+                if (Setup.appSettings().getDesktopStyle() == Desktop.DesktopMode.NORMAL) {
                     desktop.initDesktopNormal(Home.this);
-                } else if (appSettings.getDesktopStyle() == Desktop.DesktopMode.SHOW_ALL_APPS) {
+                } else if (Setup.appSettings().getDesktopStyle() == Desktop.DesktopMode.SHOW_ALL_APPS) {
                     desktop.initDesktopShowAll(Home.this, Home.this);
                 }
                 dock.initDockItem(Home.this);
 
-                StaticSetup.get().removeAppUpdatedListener(Home.this, this);
+                // remove this listener
+                return true;
             }
         });
-        StaticSetup.get().addAppDeletedListener(this, new AppDeleteListener<App>() {
+        Setup.get().getAppDeletedListener(Home.this).add(new AppDeleteListener<App>() {
 
             @Override
             public void onAppDeleted(App app) {
-                if (appSettings.getDesktopStyle() == Desktop.DesktopMode.NORMAL) {
+                if (Setup.appSettings().getDesktopStyle() == Desktop.DesktopMode.NORMAL) {
                     desktop.initDesktopNormal(Home.this);
-                } else if (appSettings.getDesktopStyle() == Desktop.DesktopMode.SHOW_ALL_APPS) {
+                } else if (Setup.appSettings().getDesktopStyle() == Desktop.DesktopMode.SHOW_ALL_APPS) {
                     desktop.initDesktopShowAll(Home.this, Home.this);
                 }
                 dock.initDockItem(Home.this);
@@ -348,23 +344,23 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     @Override
     public void onSetPageAsHome() {
-        appSettings.setDesktopPageCurrent(desktop.getCurrentItem());
+        Setup.appSettings().setDesktopPageCurrent(desktop.getCurrentItem());
     }
 
     @Override
     public void onLaunchSettings() {
         consumeNextResume = true;
-        StaticSetup.get().showLauncherSettings(this);
+        Setup.get().showLauncherSettings(this);
     }
 
     @Override
     public void onPickDesktopAction() {
-        StaticSetup.get().getDialogHandler().showPickAction(this, new DialogHandler.IOnAddAppDrawerItem() {
+        Setup.get().getDialogHandler().showPickAction(this, new DialogHandler.IOnAddAppDrawerItem() {
             @Override
             public void onAdd() {
                 Point pos = desktop.getCurrentPage().findFreeSpace();
                 if (pos != null)
-                    desktop.addItemToCell(StaticSetup.get().newActionItem(8), pos.x, pos.y);
+                    desktop.addItemToCell(Setup.get().newActionItem(8), pos.x, pos.y);
                 else
                     Tool.toast(Home.this, R.string.toast_not_enough_space);
             }
@@ -379,22 +375,22 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     protected void initSettings() {
         updateHomeLayout();
 
-        if (appSettings.isDesktopFullscreen()) {
+        if (Setup.appSettings().isDesktopFullscreen()) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         }
 
-        desktop.setBackgroundColor(appSettings.getDesktopColor());
-        dock.setBackgroundColor(appSettings.getDockColor());
+        desktop.setBackgroundColor(Setup.appSettings().getDesktopColor());
+        dock.setBackgroundColor(Setup.appSettings().getDockColor());
 
-        appDrawerController.setBackgroundColor(appSettings.getDrawerBackgroundColor());
+        appDrawerController.setBackgroundColor(Setup.appSettings().getDrawerBackgroundColor());
         appDrawerController.getBackground().setAlpha(0);
         appDrawerController.reloadDrawerCardTheme();
 
-        switch (appSettings.getDrawerStyle()) {
+        switch (Setup.appSettings().getDrawerStyle()) {
             case AppDrawerController.DrawerMode.HORIZONTAL_PAGED:
-                if (!StaticSetup.get().getAppSettings().isDrawerShowIndicator()) {
+                if (!Setup.appSettings().isDrawerShowIndicator()) {
                     appDrawerController.getChildAt(1).setVisibility(View.GONE);
                 }
                 break;
@@ -405,9 +401,9 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     }
 
     private void initDock() {
-        int iconSize = StaticSetup.get().getAppSettings().getIconSize();
+        int iconSize = Setup.appSettings().getIconSize();
         dock.init();
-        if (appSettings.isDockShowLabel()) {
+        if (Setup.appSettings().isDockShowLabel()) {
             dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;
         } else {
             dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, this) + Dock.bottomInset;
@@ -415,17 +411,71 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     }
 
     protected void initSearchBar() {
+        searchBar.setCallback(new BaseSearchBar.CallBack() {
+            @Override
+            public void onInternetSearch(String string) {
+                Intent intent = new Intent();
+
+                if (Tool.isIntentActionAvailable(getApplicationContext(), Intent.ACTION_WEB_SEARCH)) {
+                    intent.setAction(Intent.ACTION_WEB_SEARCH);
+                    intent.putExtra(SearchManager.QUERY, string);
+                } else {
+                    String baseUri = Setup.appSettings().getSearchBarBaseURI();
+                    String searchUri = baseUri.contains("{query}") ? baseUri.replace("{query}", string) : (baseUri + string);
+
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(searchUri));
+                }
+
+                try {
+                    startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onExpand() {
+                Tool.invisibleViews(desktop, desktopIndicator);
+                Tool.visibleViews(background);
+
+                updateDock(false);
+
+                searchBar.searchInput.setFocusable(true);
+                searchBar.searchInput.setFocusableInTouchMode(true);
+                searchBar.searchInput.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        searchBar.searchInput.requestFocus();
+                    }
+                });
+
+                Tool.showKeyboard(Home.this, searchBar.searchInput);
+            }
+
+            @Override
+            public void onCollapse() {
+                Tool.visibleViews(desktop, desktopIndicator);
+                Tool.invisibleViews(background);
+
+                updateDock(true);
+
+                searchBar.searchInput.clearFocus();
+
+                Tool.hideKeyboard(Home.this, searchBar.searchInput);
+            }
+        });
         // this view is just a text view of the current date
         updateSearchClock();
     }
 
     public void updateDock(boolean show) {
-        if (appSettings.getDockEnable() && show) {
+        if (Setup.appSettings().getDockEnable() && show) {
             Tool.visibleViews(100, dock);
             ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
             ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
         } else {
-            if (appSettings.getDockEnable()) {
+            if (Setup.appSettings().getDockEnable()) {
                 Tool.invisibleViews(100, dock);
             } else {
                 Tool.goneViews(100, dock);
@@ -436,10 +486,10 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     }
 
     public void updateSearchBar(boolean show) {
-        if (appSettings.getSearchBarEnable() && show) {
+        if (Setup.appSettings().getSearchBarEnable() && show) {
             Tool.visibleViews(100, searchBar);
         } else {
-            if (appSettings.getSearchBarEnable()) {
+            if (Setup.appSettings().getSearchBarEnable()) {
                 Tool.invisibleViews(100, searchBar);
             } else {
                 Tool.goneViews(searchBar);
@@ -448,11 +498,11 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     }
 
     private void updateSearchClock() {
-        if (getSearchClock().getText() != null) {
+        if (searchBar.searchClock.getText() != null) {
             Calendar calendar = Calendar.getInstance(Locale.getDefault());
             String timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
             String timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
-            getSearchClock().setText(Html.fromHtml(timeOne + "<br><small><small><small><small><small>" + timeTwo + "</small></small></small></small></small>"));
+            searchBar.searchClock.setText(Html.fromHtml(timeOne + "<br><small><small><small><small><small>" + timeTwo + "</small></small></small></small></small>"));
         }
     }
 
@@ -460,18 +510,18 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         updateSearchBar(true);
         updateDock(true);
 
-        if (!appSettings.isDesktopShowIndicator()) {
+        if (!Setup.appSettings().isDesktopShowIndicator()) {
             Tool.goneViews(100, desktopIndicator);
         }
 
-        if (appSettings.getSearchBarEnable()) {
+        if (Setup.appSettings().getSearchBarEnable()) {
             ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInset;
             ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = Desktop.topInset;
         } else {
             desktop.setPadding(0, Desktop.topInset, 0, 0);
         }
 
-        if (!appSettings.getDockEnable()) {
+        if (!Setup.appSettings().getDockEnable()) {
             desktop.setPadding(0, 0, 0, Desktop.bottomInset);
         }
     }
@@ -508,7 +558,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         Bundle extras = data.getExtras();
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
         AppWidgetProviderInfo appWidgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId);
-        Item item = StaticSetup.get().newWidgetItem(appWidgetId);
+        Item item = Setup.get().newWidgetItem(appWidgetId);
         item.setSpanX(((appWidgetInfo.minWidth - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth) + 1);
         item.setSpanY(((appWidgetInfo.minHeight - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight) + 1);
         Point point = desktop.getCurrentPage().findFreeSpace(item.getSpanX(), item.getSpanY());
@@ -577,8 +627,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     @Override
     protected void onResume() {
-        if (appSettings.getAppRestartRequired()) {
-            appSettings.setAppRestartRequired(false);
+        if (Setup.appSettings().getAppRestartRequired()) {
+            Setup.appSettings().setAppRestartRequired(false);
 
             Intent restartIntent = new Intent(this, Home.class);
             PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556,restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -608,12 +658,14 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     protected void onHandleLauncherPause()
     {
+        searchBar.collapse();
+
         if (desktop != null) {
             if (!desktop.inEditMode) {
                 if (appDrawerController.getDrawer() != null && appDrawerController.getDrawer().getVisibility() == View.VISIBLE) {
                     closeAppDrawer();
                 } else {
-                    desktop.setCurrentItem(appSettings.getDesktopPageCurrent());
+                    desktop.setCurrentItem(Setup.appSettings().getDesktopPageCurrent());
                 }
             } else {
                 desktop.pages.get(desktop.getCurrentItem()).performClick();
@@ -661,12 +713,5 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     public void closeAppDrawer() {
         int finalRadius = Math.max(appDrawerController.getDrawer().getWidth(), appDrawerController.getDrawer().getHeight());
         appDrawerController.close(cx, cy, rad, finalRadius);
-    }
-
-    protected TextView getSearchClock()
-    {
-        if (searchClock == null)
-            searchClock = (TextView)findViewById(R.id.searchClock);
-        return searchClock;
     }
 }

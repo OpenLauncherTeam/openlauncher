@@ -14,7 +14,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.manager.StaticSetup;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.Tool;
 
 import io.codetail.widget.RevealFrameLayout;
@@ -161,7 +161,7 @@ public class AppDrawerController extends RevealFrameLayout {
     public void init() {
         if (isInEditMode()) return;
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-        drawerMode = StaticSetup.get().getAppSettings().getDrawerStyle();
+        drawerMode = Setup.appSettings().getDrawerStyle();
         switch (drawerMode) {
             case DrawerMode.HORIZONTAL_PAGED:
                 drawerViewPaged = (AppDrawerPaged) layoutInflater.inflate(R.layout.view_app_drawer_paged, this, false);
@@ -191,11 +191,11 @@ public class AppDrawerController extends RevealFrameLayout {
                 drawerViewPaged.resetAdapter();
                 break;
             case DrawerMode.VERTICAL:
-                if (!StaticSetup.get().getAppSettings().isDrawerShowCardView()) {
+                if (!Setup.appSettings().isDrawerShowCardView()) {
                     drawerViewGrid.setCardBackgroundColor(Color.TRANSPARENT);
                     drawerViewGrid.setCardElevation(0);
                 } else {
-                    drawerViewGrid.setCardBackgroundColor(StaticSetup.get().getAppSettings().getDrawerCardColor());
+                    drawerViewGrid.setCardBackgroundColor(Setup.appSettings().getDrawerCardColor());
                     drawerViewGrid.setCardElevation(Tool.dp2px(4, getContext()));
                 }
                 if (drawerViewGrid.gridDrawerAdapter != null) {

@@ -37,5 +37,7 @@ dependencies {
     }
     compile 'com.github.turing-tech:MaterialScrollBar:12.3.5'
     compile 'in.championswimmer:SimpleFingerGestures_Android_Library:1.2'
-    compile('com.github.ozodrukh:CircularReveal:2.0.1@aar') { transitive = true; }
+    compile('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
+        transitive = true;
+    }
 }

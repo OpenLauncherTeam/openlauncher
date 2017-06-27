@@ -224,6 +224,7 @@
     <string name="columns">Columns</string>
     <string name="rows">Rows</string>
     <string name="search_online">Search online&#8230;</string>
+    <string name="search_hint">Search...</string>
     <string name="memory">Memory</string>
     <string name="storage">Storage</string>
     <string name="volume_level_ringtone">Ringtone</string>

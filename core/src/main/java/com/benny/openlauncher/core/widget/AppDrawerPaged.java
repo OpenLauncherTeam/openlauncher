@@ -14,7 +14,7 @@ import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.core.manager.StaticSetup;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.SmoothPagerAdapter;
 
@@ -64,13 +64,13 @@ public class AppDrawerPaged extends SmoothViewPager {
     }
 
     private void setPortraitValue() {
-        columnCellCount = StaticSetup.get().getAppSettings().getDrawerColumnCount();
-        rowCellCount = StaticSetup.get().getAppSettings().getDrawerRowCount();
+        columnCellCount = Setup.appSettings().getDrawerColumnCount();
+        rowCellCount = Setup.appSettings().getDrawerRowCount();
     }
 
     private void setLandscapeValue() {
-        columnCellCount = StaticSetup.get().getAppSettings().getDrawerRowCount();
-        rowCellCount = StaticSetup.get().getAppSettings().getDrawerColumnCount();
+        columnCellCount = Setup.appSettings().getDrawerRowCount();
+        rowCellCount = Setup.appSettings().getDrawerColumnCount();
     }
 
     private void calculatePage() {
@@ -92,7 +92,7 @@ public class AppDrawerPaged extends SmoothViewPager {
             setLandscapeValue();
         }
 
-        List<App> allApps = StaticSetup.get().getAllApps(c);
+        List<App> allApps = Setup.get().getAllApps(c);
         if (allApps.size() != 0) {
             AppDrawerPaged.this.apps = allApps;
             calculatePage();
@@ -100,14 +100,16 @@ public class AppDrawerPaged extends SmoothViewPager {
             if (appDrawerIndicator != null)
                 appDrawerIndicator.setViewPager(AppDrawerPaged.this);
         }
-        StaticSetup.get().addAppUpdatedListener(c, new AppUpdateListener<App>() {
+        Setup.get().getAppUpdatedListener(c).add(new AppUpdateListener<App>() {
             @Override
-            public void onAppUpdated(List<App> apps) {
+            public boolean onAppUpdated(List<App> apps) {
                 AppDrawerPaged.this.apps = apps;
                 calculatePage();
                 setAdapter(new Adapter());
                 if (appDrawerIndicator != null)
                     appDrawerIndicator.setViewPager(AppDrawerPaged.this);
+
+                return false;
             }
         });
     }
@@ -135,15 +137,15 @@ public class AppDrawerPaged extends SmoothViewPager {
 
             final App app = apps.get(pos);
 
-            return StaticSetup.get()
-                    .createAppItemView(
+            return Setup.get()
+                    .createDrawerAppItemView(
                         getContext(),
                         home,
                         app,
                         new AppItemView.LongPressCallBack() {
                             @Override
                             public boolean readyForDrag(View view) {
-                                return StaticSetup.get().getAppSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
+                                return Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
                             }
 
                             @Override
@@ -157,11 +159,11 @@ public class AppDrawerPaged extends SmoothViewPager {
             pages.clear();
             for (int i = 0; i < getCount(); i++) {
                 ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_paged_inner, null);
-                if (!StaticSetup.get().getAppSettings().isDrawerShowCardView()) {
+                if (!Setup.appSettings().isDrawerShowCardView()) {
                     ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Color.TRANSPARENT);
                     ((CardView) layout.getChildAt(0)).setCardElevation(0);
                 } else {
-                    ((CardView) layout.getChildAt(0)).setCardBackgroundColor(StaticSetup.get().getAppSettings().getDrawerCardColor());
+                    ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Setup.appSettings().getDrawerCardColor());
                     ((CardView) layout.getChildAt(0)).setCardElevation(Tool.dp2px(4, getContext()));
                 }
                 CellContainer cc = (CellContainer) layout.findViewById(R.id.group);

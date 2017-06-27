@@ -118,7 +118,7 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item> {
     public static Item newGroupItem() {
         Item item = new Item();
         item.type = Type.GROUP;
-        item.name = (Home.launcher.getString(R.string.group));
+        item.name = Home.launcher.getString(R.string.group);
         item.spanX = 1;
         item.spanY = 1;
         item.items = new ArrayList<>();

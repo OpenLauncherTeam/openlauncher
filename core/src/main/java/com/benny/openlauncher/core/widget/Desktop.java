@@ -18,8 +18,7 @@ import android.widget.Toast;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.Item;
-import com.benny.openlauncher.core.interfaces.SettingsManager;
-import com.benny.openlauncher.core.manager.StaticSetup;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
@@ -39,7 +38,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     public int previousPage = -1;
     public int pageCount;
 
-    private SettingsManager appSettings;
     private float startPosX;
     private float startPosY;
     private Home home;
@@ -54,7 +52,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public Desktop(Context c, AttributeSet attr) {
         super(c, attr);
-        appSettings = StaticSetup.get().getAppSettings();
     }
 
     public void setDesktopEditListener(OnDesktopEditListener desktopEditListener) {
@@ -76,18 +73,18 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
 
         setOnDragListener(this);
-        setCurrentItem(StaticSetup.get().getAppSettings().getDesktopPageCurrent());
+        setCurrentItem(Setup.appSettings().getDesktopPageCurrent());
     }
 
     public void initDesktopNormal(Home home) {
         setAdapter(new DesktopAdapter(this));
-        if (appSettings.isDesktopShowIndicator() && pageIndicator != null) {
+        if (Setup.appSettings().isDesktopShowIndicator() && pageIndicator != null) {
             pageIndicator.setViewPager(this);
         }
         this.home = home;
 
-        int columns = StaticSetup.get().getAppSettings().getDesktopColumnCount();
-        int rows = StaticSetup.get().getAppSettings().getDesktopRowCount();
+        int columns = Setup.appSettings().getDesktopColumnCount();
+        int rows = Setup.appSettings().getDesktopRowCount();
         List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
         for (int pageCount = 0; pageCount < desktopItems.size(); pageCount++) {
             if (pages.size() <= pageCount) break;
@@ -103,20 +100,20 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     public void initDesktopShowAll(Context c, Home home) {
-        List<Item> apps = StaticSetup.get().createAllAppItems(c);
+        List<Item> apps = Setup.get().createAllAppItems(c);
 //        List<AppManager.App> apps = AppManager.getInstance(c).getApps();
         int appsSize = apps.size();
 
         // reset page count
         pageCount = 0;
-        int columns = StaticSetup.get().getAppSettings().getDesktopColumnCount();
-        int rows = StaticSetup.get().getAppSettings().getDesktopRowCount();
+        int columns = Setup.appSettings().getDesktopColumnCount();
+        int rows = Setup.appSettings().getDesktopRowCount();
         while ((appsSize = appsSize - (columns * rows)) >= (columns * rows) || (appsSize > -(columns * rows))) {
             pageCount++;
         }
 
         setAdapter(new DesktopAdapter(this));
-        if (appSettings.isDesktopShowIndicator() && pageIndicator != null) {
+        if (Setup.appSettings().isDesktopShowIndicator() && pageIndicator != null) {
             pageIndicator.setViewPager(this);
         }
         this.home = home;
@@ -167,7 +164,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public void removeCurrentPage() {
         if (pageCount == 1) return;
-        if (StaticSetup.get().getAppSettings().getDesktopStyle() == DesktopMode.SHOW_ALL_APPS)
+        if (Setup.appSettings().getDesktopStyle() == DesktopMode.SHOW_ALL_APPS)
             return;
         pageCount--;
 
@@ -205,7 +202,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             case DragEvent.ACTION_DROP:
                 Tool.print("ACTION_DROP");
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
-                intent.setExtrasClassLoader(StaticSetup.get().getItemClass().getClassLoader());
+                intent.setExtrasClassLoader(Setup.get().getItemClass().getClassLoader());
                 Item item = intent.getParcelableExtra("mDragData");
 
                 // this statement makes sure that adding an app multiple times from the app drawer works
@@ -275,7 +272,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     @Override
     public boolean addItemToPage(final Item item, int page) {
-        View itemView = StaticSetup.get().getItemView(getContext(), appSettings, item, this);
+        View itemView = Setup.get().getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this);
 
         if (itemView == null) {
             home.db.deleteItem(item);
@@ -293,7 +290,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             item.setX(positionToLayoutPrams.x);
             item.setY(positionToLayoutPrams.y);
 
-            View itemView = StaticSetup.get().getItemView(getContext(), appSettings, item, this);
+            View itemView = Setup.get().getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this);
 
             if (itemView != null) {
                 itemView.setLayoutParams(positionToLayoutPrams);
@@ -310,7 +307,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         item.setX(x);
         item.setY(y);
 
-        View itemView = StaticSetup.get().getItemView(getContext(), appSettings, item, this);
+        View itemView = Setup.get().getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this);
 
         if (itemView != null) {
             getCurrentPage().addViewToGrid(itemView, item.getX(), item.getY(), item.getSpanX(), item.getSpanY());
@@ -390,7 +387,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
 
         private SimpleFingerGestures.OnFingerGestureListener getGestureListener() {
-            return StaticSetup.get().getDesktopGestureListener(desktop);
+            return Setup.get().getDesktopGestureListener(desktop);
         }
 
         private CellContainer getItemLayout() {
@@ -417,7 +414,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     return false;
                 }
             });
-            layout.setGridSize(StaticSetup.get().getAppSettings().getDesktopColumnCount(), StaticSetup.get().getAppSettings().getDesktopRowCount());
+            layout.setGridSize(Setup.appSettings().getDesktopColumnCount(), Setup.appSettings().getDesktopRowCount());
             layout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -490,7 +487,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     parent.removeView(itemView);
 
                     // create a new group item
-                    Item group = StaticSetup.get().newGroupItem();
+                    Item group = Setup.get().newGroupItem();
                     group.getGroupItems().add(item);
                     group.getGroupItems().add(dropItem);
                     group.setX(item.getX());

@@ -43,7 +43,8 @@ public class GroupIconDrawable extends Drawable {
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {
             if (i < item.items.size() && item.items.get(i) != null) {
-                icons[i] = Tool.drawableToBitmap(Tool.getIcon(context, Integer.toString(item.items.get(i).idValue)));
+//                icons[i] = Tool.drawableToBitmap(Tool.getIcon(context, Integer.toString(item.items.get(i).idValue)));
+                icons[i] = Tool.drawableToBitmap(Tool.getIcon(context, item.items.get(i)));
             } else {
                 icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
             }
@@ -107,10 +108,14 @@ public class GroupIconDrawable extends Drawable {
 
         canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, paint);
 
-        canvas.drawBitmap(icons[0], null, new RectF(padding, padding, iconSizeDiv2 - padding, iconSizeDiv2 - padding), paint2);
-        canvas.drawBitmap(icons[1], null, new RectF(iconSizeDiv2 + padding, padding, iconSize - padding, iconSizeDiv2 - padding), paint2);
-        canvas.drawBitmap(icons[2], null, new RectF(padding, iconSizeDiv2 + padding, iconSizeDiv2 - padding, iconSize - padding), paint2);
-        canvas.drawBitmap(icons[3], null, new RectF(iconSizeDiv2 + padding, iconSizeDiv2 + padding, iconSize - padding, iconSize - padding), paint2);
+        if (icons[0] != null)
+            canvas.drawBitmap(icons[0], null, new RectF(padding, padding, iconSizeDiv2 - padding, iconSizeDiv2 - padding), paint2);
+        if (icons[1] != null)
+            canvas.drawBitmap(icons[1], null, new RectF(iconSizeDiv2 + padding, padding, iconSize - padding, iconSizeDiv2 - padding), paint2);
+        if (icons[2] != null)
+            canvas.drawBitmap(icons[2], null, new RectF(padding, iconSizeDiv2 + padding, iconSizeDiv2 - padding, iconSize - padding), paint2);
+        if (icons[3] != null)
+            canvas.drawBitmap(icons[3], null, new RectF(iconSizeDiv2 + padding, iconSizeDiv2 + padding, iconSize - padding, iconSize - padding), paint2);
 
         canvas.clipRect(0, 0, iconSize, iconSize, Region.Op.REPLACE);
 

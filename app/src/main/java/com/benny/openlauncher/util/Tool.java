@@ -45,6 +45,7 @@ import android.widget.Toast;
 import com.benny.openlauncher.BuildConfig;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.model.Item;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -65,14 +66,6 @@ import static android.content.Context.ACTIVITY_SERVICE;
 public class Tool extends com.benny.openlauncher.core.util.Tool {
     // ensure that tool cannot be instantiated
     private Tool() {
-    }
-
-    public static void hideKeyboard(Context context, View view) {
-        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-    }
-
-    public static void showKeyboard(Context context, View view) {
-        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(view.getWindowToken(), InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     public static String[] split(String string, String delim) {
@@ -203,6 +196,21 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
         }
     }
 
+    public static Drawable getIcon(Context context, Item item) {
+        if (item == null) {
+            return null;
+        }
+        if (item.type == Item.Type.SHORTCUT) {
+            return item.icon;
+        }
+        else {
+            AppManager.App app = AppManager.getInstance(context).findApp(item.intent);
+            if (app != null)
+                return app.icon;
+        }
+        return null;
+    }
+
     public static Drawable getIcon(Context context, String filename) {
         if (filename == null) {
             return null;
@@ -248,8 +256,6 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
             }
         }
     }
-
-
 
     public static void startApp(Context context, AppManager.App app) {
         if (app.packageName.equals("com.benny.openlauncher")) {
@@ -441,12 +447,5 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
         } catch (Exception e) {
             Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public static boolean isIntentActionAvailable(Context context, String action) {
-        final PackageManager packageManager = context.getPackageManager();
-        final Intent intent = new Intent(action);
-        List resolveInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-        return resolveInfo.size() > 0;
     }
 }

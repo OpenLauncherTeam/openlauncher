@@ -1,18 +1,20 @@
 package com.benny.openlauncher.activity;
 
 import android.Manifest;
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,30 +22,28 @@ import android.support.v7.widget.RecyclerView;
 import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
-import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.core.interfaces.DatabaseHelper;
 import com.benny.openlauncher.core.interfaces.DialogHandler;
-import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
-import com.benny.openlauncher.core.manager.StaticSetup;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.widget.Desktop;
 import com.benny.openlauncher.core.widget.GroupPopupView;
-import com.benny.openlauncher.model.AppItem;
+import com.benny.openlauncher.model.DrawerAppItem;
+import com.benny.openlauncher.model.IconLabelItem;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
+import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
@@ -51,8 +51,8 @@ import com.benny.openlauncher.viewutil.GroupIconDrawable;
 import com.benny.openlauncher.viewutil.IconListAdapter;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.viewutil.QuickCenterItem;
+import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.widget.MiniPopupView;
-import com.benny.openlauncher.widget.SearchBar;
 import com.benny.openlauncher.widget.SwipeListView;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
@@ -124,24 +124,16 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     }
 
     @Override
-    protected TextView getSearchClock() {
-        return ((SearchBar)searchBar).searchClock;
-    }
-
-    private AppSettings getAppSettings() {
-        return (AppSettings)appSettings;
-    }
-
     protected void initSettings() {
         super.initSettings();
-        drawerLayout.setDrawerLockMode(getAppSettings().getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        drawerLayout.setDrawerLockMode(AppSettings.get().getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     public void initMinibar() {
         final ArrayList<String> labels = new ArrayList<>();
         final ArrayList<Integer> icons = new ArrayList<>();
 
-        for (String act : getAppSettings().getMinibarArrangement()) {
+        for (String act : AppSettings.get().getMinibarArrangement()) {
             if (act.length() > 1 && act.charAt(0) == '0') {
                 LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
                 if (item != null) {
@@ -171,8 +163,8 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                 }
             }
         });
-        minibar.setBackgroundColor(getAppSettings().getMinibarBackgroundColor());
-        minibarBackground.setBackgroundColor(getAppSettings().getMinibarBackgroundColor());
+        minibar.setBackgroundColor(AppSettings.get().getMinibarBackgroundColor());
+        minibarBackground.setBackgroundColor(AppSettings.get().getMinibarBackgroundColor());
     }
 
     private void initQuickCenter() {
@@ -189,85 +181,6 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             callLogObserver.onChange(true);
         } else {
             ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.READ_CALL_LOG}, REQUEST_PERMISSION_READ_CALL_LOG);
-        }
-    }
-
-    protected void initSearchBar() {
-        ((SearchBar)searchBar).setCallback(new SearchBar.CallBack() {
-            @Override
-            public void onInternetSearch(String string) {
-                Intent intent = new Intent();
-
-                if (Tool.isIntentActionAvailable(getApplicationContext(), Intent.ACTION_WEB_SEARCH)) {
-                    intent.setAction(Intent.ACTION_WEB_SEARCH);
-                    intent.putExtra(SearchManager.QUERY, string);
-                } else {
-                    String baseUri = getAppSettings().getSearchBarBaseURI();
-                    String searchUri = baseUri.contains("{query}") ? baseUri.replace("{query}", string) : (baseUri + string);
-
-                    intent.setAction(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(searchUri));
-                }
-
-                try {
-                    startActivity(intent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onExpand() {
-                Tool.invisibleViews(desktop, desktopIndicator);
-                Tool.visibleViews(background);
-
-                updateDock(false);
-
-                ((SearchBar)searchBar).searchInput.setFocusable(true);
-                ((SearchBar)searchBar).searchInput.setFocusableInTouchMode(true);
-                ((SearchBar)searchBar).searchInput.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((SearchBar)searchBar).searchInput.requestFocus();
-                    }
-                });
-
-                Tool.showKeyboard(Home.this, ((SearchBar)searchBar).searchInput);
-            }
-
-            @Override
-            public void onCollapse() {
-                Tool.visibleViews(desktop, desktopIndicator);
-                Tool.invisibleViews(background);
-
-                updateDock(true);
-
-                ((SearchBar)searchBar).searchInput.clearFocus();
-
-                Tool.hideKeyboard(Home.this, ((SearchBar)searchBar).searchInput);
-            }
-        });
-
-        super.initSearchBar();
-    }
-
-    public void updateHomeLayout() {
-        updateSearchBar(true);
-        updateDock(true);
-
-        if (!appSettings.isDesktopShowIndicator()) {
-            Tool.goneViews(100, desktopIndicator);
-        }
-
-        if (appSettings.getSearchBarEnable()) {
-            ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInset;
-            ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = Desktop.topInset;
-        } else {
-            desktop.setPadding(0, Desktop.topInset, 0, 0);
-        }
-
-        if (!appSettings.getDockEnable()) {
-            desktop.setPadding(0, 0, 0, Desktop.bottomInset);
         }
     }
 
@@ -360,14 +273,13 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     @Override
     protected void onHandleLauncherPause()
     {
-        ((SearchBar)searchBar).collapse();
         super.onHandleLauncherPause();
     }
 
     @Override
     protected void initStaticHelper()
     {
-        final DialogHandler dialogHandler = new DialogHandler() {
+        final DialogHandler<Item> dialogHandler = new DialogHandler<Item>() {
             @Override
             public void showPickAction(Context context, final IOnAddAppDrawerItem resultHandler) {
                 DialogHelper.addActionItemDialog(context, new MaterialDialog.ListCallback() {
@@ -402,10 +314,11 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                 DialogHelper.deletePackageDialog(context, dragEvent);
             }
         };
-        StaticSetup.init(new StaticSetup<Home, AppManager.App, com.benny.openlauncher.model.Item, AppItem, com.benny.openlauncher.widget.AppItemView>() {
+        Setup.init(new Setup<Home, AppManager.App, Item, DrawerAppItem, AppItemView>() {
+
             @Override
             public Class getItemClass() {
-                return com.benny.openlauncher.model.Item.class;
+                return Item.class;
             }
 
             @Override
@@ -414,8 +327,23 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
+            public IconLabelItem createSearchBarInternetItem(Context context, int label, @Nullable View.OnClickListener listener) {
+                return new IconLabelItem(context, null, context.getString(label), listener, Color.WHITE, Tool.dp2px(8, context), Tool.dp2px(36, context), true, Gravity.END);
+            }
+
+            @Override
+            public IconLabelItem createSearchBarItem(Context context, AppManager.App app, @Nullable View.OnClickListener listener) {
+                return new IconLabelItem(context, app.getIcon(), app.getLabel(), listener, Color.WHITE, Tool.dp2px(8, context), Tool.dp2px(36, context));
+            }
+
+            @Override
+            public IconLabelItem createDesktopOptionsViewItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, Typeface typeface) {
+                return new IconLabelItem(context, icon, label, listener, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false, Gravity.CENTER);
+            }
+
+            @Override
             public DatabaseHelper createDatabaseHelper(Context context) {
-                return new com.benny.openlauncher.util.DatabaseHelper(context);
+                return new DatabaseHelper(context);
             }
 
             @Override
@@ -424,22 +352,22 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public List<AppItem> createAllAppItems(Context context) {
-                List<AppItem> items = new ArrayList<AppItem>();
+            public List<Item> createAllAppItems(Context context) {
+                List<Item> items = new ArrayList<>();
                 List<AppManager.App> apps = getAllApps(context);
                 for (AppManager.App app : apps)
-                    items.add(createAppItem(app));
+                    items.add(Item.newAppItem(app));
                 return items;
             }
 
             @Override
-            public AppItem createAppItem(AppManager.App app) {
-                return new AppItem(app);
+            public DrawerAppItem createDrawerAppItem(AppManager.App app) {
+                return new DrawerAppItem(app);
             }
 
             @Override
-            public View createAppItemView(Context context, final Home home, AppManager.App app, AppItemView.LongPressCallBack longPressCallBack) {
-                return new com.benny.openlauncher.widget.AppItemView.Builder(context)
+            public View createDrawerAppItemView(Context context, final Home home, AppManager.App app, AppItemView.LongPressCallBack longPressCallBack) {
+                return new AppItemView.Builder(context)
                         .setAppItem(app)
                         .withOnTouchGetPosition()
                         .withOnLongClick(app, DragAction.Action.APP_DRAWER, new AppItemView.LongPressCallBack() {
@@ -459,10 +387,11 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public AppItemView createAppItemViewPopup(Context context, com.benny.openlauncher.model.Item groupItem, AppManager.App item) {
-                com.benny.openlauncher.widget.AppItemView.Builder b = new com.benny.openlauncher.widget.AppItemView.Builder(context).withOnTouchGetPosition();
-                b.setTextColor(AppSettings.get().getDrawerLabelColor());
-                if (groupItem.type == com.benny.openlauncher.model.Item.Type.SHORTCUT) {
+            public AppItemView createAppItemViewPopup(Context context, Item groupItem, AppManager.App item) {
+                AppItemView.Builder b = new AppItemView.Builder(context)
+                        .withOnTouchGetPosition()
+                        .setTextColor(AppSettings.get().getDrawerLabelColor());
+                if (groupItem.type == Item.Type.SHORTCUT) {
                     b.setShortcutItem(groupItem);
                 } else {
                     AppManager.App app = AppManager.getInstance(context).findApp(groupItem.intent);
@@ -470,28 +399,27 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                         b.setAppItem(groupItem, app);
                     }
                 }
-                final com.benny.openlauncher.widget.AppItemView view = b.getView();
-                return view;
+                return b.getView();
             }
 
             @Override
-            public com.benny.openlauncher.model.Item newGroupItem() {
-                return com.benny.openlauncher.model.Item.newGroupItem();
+            public Item newGroupItem() {
+                return Item.newGroupItem();
             }
 
             @Override
-            public com.benny.openlauncher.model.Item newWidgetItem(int appWidgetId) {
-                return com.benny.openlauncher.model.Item.newWidgetItem(appWidgetId);
+            public Item newWidgetItem(int appWidgetId) {
+                return Item.newWidgetItem(appWidgetId);
             }
 
             @Override
-            public com.benny.openlauncher.model.Item newActionItem(int action) {
-                return com.benny.openlauncher.model.Item.newActionItem(action);
+            public Item newActionItem(int action) {
+                return Item.newActionItem(action);
             }
 
             @Override
-            public View getItemView(Context context, SettingsManager appSettings, com.benny.openlauncher.model.Item item, DesktopCallBack callBack) {
-                int flag = appSettings.isDesktopShowLabel() ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+            public View getItemView(Context context, Item item, boolean showLabels, DesktopCallBack callBack) {
+                int flag = showLabels ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
                 View itemView = ItemViewFactory.getItemView(context, callBack, item, flag);
                 return itemView;
             }
@@ -501,7 +429,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                 return new SimpleFingerGestures.OnFingerGestureListener() {
                     @Override
                     public boolean onSwipeUp(int i, long l, double v) {
-                        LauncherAction.ActionItem gesture = ((com.benny.openlauncher.util.DatabaseHelper)Home.db).getGesture(1);
+                        LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(1);
                         if (gesture != null && AppSettings.get().isGestureFeedback())
                             Tool.vibrate(desktop);
                         LauncherAction.RunAction(gesture, desktop.getContext());
@@ -510,7 +438,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
 
                     @Override
                     public boolean onSwipeDown(int i, long l, double v) {
-                        LauncherAction.ActionItem gesture = ((com.benny.openlauncher.util.DatabaseHelper)Home.db).getGesture(2);
+                        LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(2);
                         if (gesture != null && AppSettings.get().isGestureFeedback())
                             Tool.vibrate(desktop);
                         LauncherAction.RunAction(gesture, desktop.getContext());
@@ -529,7 +457,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
 
                     @Override
                     public boolean onPinch(int i, long l, double v) {
-                        LauncherAction.ActionItem gesture = ((com.benny.openlauncher.util.DatabaseHelper)Home.db).getGesture(3);
+                        LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(3);
                         if (gesture != null && AppSettings.get().isGestureFeedback())
                             Tool.vibrate(desktop);
                         LauncherAction.RunAction(gesture, desktop.getContext());
@@ -538,7 +466,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
 
                     @Override
                     public boolean onUnpinch(int i, long l, double v) {
-                        LauncherAction.ActionItem gesture = ((com.benny.openlauncher.util.DatabaseHelper)Home.db).getGesture(4);
+                        LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(4);
                         if (gesture != null && AppSettings.get().isGestureFeedback())
                             Tool.vibrate(desktop);
                         LauncherAction.RunAction(gesture, desktop.getContext());
@@ -547,7 +475,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
 
                     @Override
                     public boolean onDoubleTap(int i) {
-                        LauncherAction.ActionItem gesture = ((com.benny.openlauncher.util.DatabaseHelper)Home.db).getGesture(0);
+                        LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(0);
                         if (gesture != null && AppSettings.get().isGestureFeedback())
                             Tool.vibrate(desktop);
                         LauncherAction.RunAction(gesture, desktop.getContext());
@@ -557,8 +485,8 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public com.benny.openlauncher.model.Item createShortcut(Intent intent, Drawable icon, String name) {
-                return com.benny.openlauncher.model.Item.newShortcutItem(intent, icon, name);
+            public Item createShortcut(Intent intent, Drawable icon, String name) {
+                return Item.newShortcutItem(intent, icon, name);
             }
 
             @Override
@@ -567,23 +495,15 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public DialogHandler getDialogHandler() {
+            public DialogHandler<Item> getDialogHandler() {
                 return dialogHandler;
             }
 
-            @Override
-            public void addAppUpdatedListener(Context c, AppUpdateListener listener) {
-                AppManager.getInstance(c).addAppUpdatedListener(listener);
+            public List<AppUpdateListener<AppManager.App>> getAppUpdatedListener(Context c) {
+                return AppManager.getInstance(c).updateListeners;
             }
-
-            @Override
-            public void removeAppUpdatedListener(Context c, AppUpdateListener<AppManager.App> listener) {
-                AppManager.getInstance(c).removeAppUpdatedListener(listener);
-            }
-
-            @Override
-            public void addAppDeletedListener(Context c, AppDeleteListener<AppManager.App> listener) {
-                AppManager.getInstance(c).addAppDeletedListener(listener);
+            public List<AppDeleteListener<AppManager.App>> getAppDeletedListener(Context c) {
+                return AppManager.getInstance(c).deleteListeners;
             }
 
             @Override
@@ -597,7 +517,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public void updateIcon(Context context, com.benny.openlauncher.widget.AppItemView currentView, com.benny.openlauncher.model.Item currentItem) {
+            public void updateIcon(Context context, AppItemView currentView, Item currentItem) {
                 currentView.setIcon(new GroupIconDrawable(context, currentItem));
             }
 

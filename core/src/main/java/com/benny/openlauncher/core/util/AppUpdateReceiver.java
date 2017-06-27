@@ -4,12 +4,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.benny.openlauncher.core.manager.StaticSetup;
+import com.benny.openlauncher.core.manager.Setup;
 
 public class AppUpdateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context p1, Intent p2) {
-        StaticSetup.get().onAppUpdated(p1, p2);
+        Setup.get().onAppUpdated(p1, p2);
     }
 }
 

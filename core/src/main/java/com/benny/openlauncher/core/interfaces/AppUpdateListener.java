@@ -7,5 +7,10 @@ import java.util.List;
  */
 
 public interface AppUpdateListener<T extends App> {
-    void onAppUpdated(List<T> apps);
+
+    /**
+     * @param apps list of apps
+     * @return true, if the listener should be removed
+     */
+    boolean onAppUpdated(List<T> apps);
 }

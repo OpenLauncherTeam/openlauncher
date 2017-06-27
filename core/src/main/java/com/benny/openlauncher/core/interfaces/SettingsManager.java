@@ -40,4 +40,5 @@ public interface SettingsManager {
     void setAppRestartRequired(boolean required);
     boolean isAppFirstLaunch();
     void setAppFirstLaunch(boolean isAppFirstLaunch);
+    String getSearchBarBaseURI();
 }

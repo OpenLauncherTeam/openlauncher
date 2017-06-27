@@ -1,6 +1,8 @@
 package com.benny.openlauncher.core.util;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -13,13 +15,28 @@ import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+
+import com.benny.openlauncher.core.R;
+import com.benny.openlauncher.core.activity.Home;
+import com.benny.openlauncher.core.interfaces.App;
+
+import java.util.List;
 
 /**
  * Created by Michael on 25.06.2017.
  */
 
 public class Tool {
+
+    public static void hideKeyboard(Context context, View view) {
+        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    public static void showKeyboard(Context context, View view) {
+        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(view.getWindowToken(), InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
+    }
 
     public static void visibleViews(View... views) {
         if (views == null) return;
@@ -136,6 +153,28 @@ public class Tool {
         return Math.max(min, Math.min(max, target));
     }
 
+    public static void startApp(Context context, App app) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setClassName(app.getPackageName(), app.getClassName());
+            context.startActivity(intent);
+
+            Home.consumeNextResume = true;
+        } catch (Exception e) {
+            Tool.toast(context, R.string.toast_app_uninstalled);
+        }
+    }
+
+    public static void startApp(Context context, Intent intent) {
+        try {
+            context.startActivity(intent);
+            Home.consumeNextResume = true;
+        } catch (Exception e) {
+            Tool.toast(context, R.string.toast_app_uninstalled);
+        }
+    }
+
     public static Bitmap drawableToBitmap(Drawable drawable) {
         if (drawable == null) {
             return null;
@@ -192,5 +231,12 @@ public class Tool {
             sb.append(o[i].toString()).append("  ");
         }
         Log.d("Hey", sb.toString());
+    }
+
+    public static boolean isIntentActionAvailable(Context context, String action) {
+        final PackageManager packageManager = context.getPackageManager();
+        final Intent intent = new Intent(action);
+        List resolveInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        return resolveInfo.size() > 0;
     }
 }

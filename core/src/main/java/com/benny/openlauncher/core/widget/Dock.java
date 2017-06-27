@@ -14,8 +14,7 @@ import android.widget.Toast;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.Item;
-import com.benny.openlauncher.core.interfaces.SettingsManager;
-import com.benny.openlauncher.core.manager.StaticSetup;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
@@ -23,7 +22,6 @@ import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import java.util.List;
 
 public class Dock extends CellContainer implements View.OnDragListener, DesktopCallBack {
-    private SettingsManager appSettings;
     public static int bottomInset;
     public View previousItemView;
     public Item previousItem;
@@ -40,7 +38,6 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public void init() {
-        appSettings = StaticSetup.get().getAppSettings();
         if (isInEditMode()) {
             return;
         }
@@ -49,7 +46,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     public void initDockItem(Home home) {
-        int columns = StaticSetup.get().getAppSettings().getDockSize();
+        int columns = Setup.appSettings().getDockSize();
         setGridSize(columns, 1);
         List<Item> dockItems = home.db.getDock();
 
@@ -82,9 +79,9 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                 float minDist = 150f;
                 Tool.print((int) ev.getX(), (int) ev.getY());
                 if (startPosY - ev.getY() > minDist) {
-                    if (appSettings.getGestureDockSwipeUp()) {
+                    if (Setup.appSettings().getGestureDockSwipeUp()) {
                         Point p = Tool.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), this, Home.launcher.appDrawerController);
-                        if (StaticSetup.get().getAppSettings().isGestureFeedback())
+                        if (Setup.appSettings().isGestureFeedback())
                             Tool.vibrate(this);
                         Home.launcher.openAppDrawer(this, p.x, p.y);
                     }
@@ -112,7 +109,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                 return true;
             case DragEvent.ACTION_DROP:
                 Intent intent = p2.getClipData().getItemAt(0).getIntent();
-                intent.setExtrasClassLoader(StaticSetup.get().getItemClass().getClassLoader());
+                intent.setExtrasClassLoader(Setup.get().getItemClass().getClassLoader());
                 Item item = intent.getParcelableExtra("mDragData");
 
                 // this statement makes sure that adding an app multiple times from the app drawer works
@@ -176,8 +173,8 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
 
-        int iconSize =StaticSetup.get().getAppSettings().getIconSize();
-        if (appSettings.isDockShowLabel()) {
+        int iconSize = Setup.appSettings().getIconSize();
+        if (Setup.appSettings().isDockShowLabel()) {
             height = Tool.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
         } else {
             height = Tool.dp2px(16 + iconSize + 10, getContext()) + Dock.bottomInset;
@@ -206,7 +203,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public boolean addItemToPage(final Item item, int page) {
-        View itemView = StaticSetup.get().getItemView(getContext(), appSettings, item, this);
+        View itemView = Setup.get().getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this);
 
         if (itemView == null) {
             home.db.deleteItem(item);
@@ -224,7 +221,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             item.setX(positionToLayoutPrams.x);
             item.setY(positionToLayoutPrams.y);
 
-            View itemView = StaticSetup.get().getItemView(getContext(), appSettings, item, this);
+            View itemView = Setup.get().getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this);
 
             if (itemView != null) {
                 itemView.setLayoutParams(positionToLayoutPrams);
@@ -241,7 +238,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         item.setX(x);
         item.setY(y);
 
-        View itemView = StaticSetup.get().getItemView(getContext(), appSettings, item, this);
+        View itemView = Setup.get().getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this);
 
         if (itemView != null) {
             addViewToGrid(itemView, item.getX(), item.getY(), item.getSpanX(), item.getSpanY());

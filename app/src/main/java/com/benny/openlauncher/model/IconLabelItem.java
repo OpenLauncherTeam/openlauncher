@@ -1,4 +1,4 @@
-package com.benny.openlauncher.core.viewutil;
+package com.benny.openlauncher.model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,7 +12,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.benny.openlauncher.core.R;
+import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.util.Tool;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
@@ -22,7 +22,7 @@ import java.util.List;
  * Created by BennyKok on 10/25/2016
  */
 
-public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> {
+public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> implements com.benny.openlauncher.core.interfaces.IconLabelItem<IconLabelItem, IconLabelItem.ViewHolder> {
 
     @Override
     public ViewHolder getViewHolder(View v) {
@@ -112,8 +112,18 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     @Override
+    public void setIcon(Context context, int resId) {
+        this.icon = context.getResources().getDrawable(resId);
+    }
+
+    @Override
+    public String getLabel() {
+        return label;
+    }
+
+    @Override
     public int getType() {
-        return 0;
+        return R.id.id_adapter_icon_label_item;
     }
 
     @Override

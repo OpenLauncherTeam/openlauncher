@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder;
 import com.benny.openlauncher.core.widget.CellContainer;
@@ -25,6 +24,7 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.widget.WidgetView;
+import com.benny.openlauncher.widget.AppItemView;
 
 /**
  * Created by BennyKok on 10/24/2016.
@@ -43,7 +43,7 @@ public class ItemViewFactory {
                 if (app == null) {
                     break;
                 }
-                view = new com.benny.openlauncher.widget.AppItemView.Builder(context)
+                view = new AppItemView.Builder(context)
                         .setAppItem(item, app)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
@@ -63,7 +63,7 @@ public class ItemViewFactory {
                         .getView();
                 break;
             case SHORTCUT:
-                view = new com.benny.openlauncher.widget.AppItemView.Builder(context)
+                view = new AppItemView.Builder(context)
                         .setShortcutItem(item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
@@ -83,7 +83,7 @@ public class ItemViewFactory {
                         .getView();
                 break;
             case GROUP:
-                view = new com.benny.openlauncher.widget.AppItemView.Builder(context)
+                view = new AppItemView.Builder(context)
                         .setGroupItem(context, callBack, item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
@@ -104,7 +104,7 @@ public class ItemViewFactory {
                 view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
                 break;
             case ACTION:
-                view = new com.benny.openlauncher.widget.AppItemView.Builder(context)
+                view = new AppItemView.Builder(context)
                         .setActionItem(item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
