@@ -16,13 +16,8 @@ import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
 
-/**
- * Created by Michael on 25.06.2017.
- */
-
-public class AppItem extends AbstractItem<AppItem, AppItem.ViewHolder> implements com.benny.openlauncher.core.interfaces.AppItem<AppItem, AppItem.ViewHolder>
-{
-    public AppManager.App app;
+public class AppItem extends AbstractItem<AppItem, AppItem.ViewHolder> implements com.benny.openlauncher.core.interfaces.AppItem<AppItem, AppItem.ViewHolder> {
+    private AppManager.App app;
 
     public AppItem(AppManager.App app) {
         this.app = app;

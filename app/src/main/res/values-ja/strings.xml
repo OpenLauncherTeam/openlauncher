@@ -119,6 +119,6 @@
     <string name="wallpaper">壁紙</string>
     <string name="wallpaper_pick">壁紙の選択</string>
     <string name="wallpaper_unable_to_blur">ぼかすことができません</string>
-    <string name="group">名前なし</string>
+    <string name="folder">名前なし</string>
 
 </resources>

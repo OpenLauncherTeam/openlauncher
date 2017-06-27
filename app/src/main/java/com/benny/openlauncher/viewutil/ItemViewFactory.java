@@ -26,10 +26,6 @@ import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.widget.WidgetView;
 import com.benny.openlauncher.widget.AppItemView;
 
-/**
- * Created by BennyKok on 10/24/2016.
- */
-
 public class ItemViewFactory {
 
     public static final int NO_FLAGS = 0x01;

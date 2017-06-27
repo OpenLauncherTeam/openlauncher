@@ -26,10 +26,6 @@ import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by BennyKok on 4/25/2017.
- */
-
 public class DesktopOptionView extends FrameLayout {
     private RecyclerView actionRecyclerView;
 
@@ -90,7 +86,8 @@ public class DesktopOptionView extends FrameLayout {
         actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         actionRecyclerView.setClipToPadding(false);
-        actionRecyclerView.setPadding(Tool.dp2px(42, getContext()), 0, Tool.dp2px(42, getContext()), 0);
+        int paddingHorizontal = Tool.dp2px(42, getContext());
+        actionRecyclerView.setPadding(paddingHorizontal, 0, paddingHorizontal, 0);
         actionRecyclerView.setLayoutManager(linearLayoutManager);
         actionRecyclerView.setAdapter(actionAdapter);
         actionRecyclerView.setOverScrollMode(OVER_SCROLL_ALWAYS);

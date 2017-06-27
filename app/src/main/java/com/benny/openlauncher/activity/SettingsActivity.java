@@ -29,11 +29,6 @@ import com.benny.openlauncher.core.widget.AppDrawerController;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * SettingsActivity
- * Created by vanitas on 24.10.16.
- */
-
 public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     @BindView(R.id.settings_appbar)
     protected AppBarLayout appBarLayout;

@@ -1,9 +1,5 @@
 package com.benny.openlauncher.core.util;
 
-/**
- * Created by BennyKok on 11/3/2016.
- */
-
 public interface RevertibleAction {
     void revertLastItem();
 

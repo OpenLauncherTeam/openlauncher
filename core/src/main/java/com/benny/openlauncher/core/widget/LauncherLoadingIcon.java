@@ -9,10 +9,6 @@ import android.widget.ImageView;
 
 import com.benny.openlauncher.core.R;
 
-/**
- * Created by BennyKok on 12/9/2016.
- */
-
 public class LauncherLoadingIcon extends FrameLayout {
     private static final AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
     private static final Long ANIM_DURATION = 250L;

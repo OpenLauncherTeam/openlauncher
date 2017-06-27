@@ -355,7 +355,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     @Override
     public void onPickDesktopAction() {
-        Setup.get().getDialogHandler().showPickAction(this, new DialogHandler.IOnAddAppDrawerItem() {
+        Setup.get().getDialogHandler().showPickAction(this, new DialogHandler.OnAddAppDrawerItemListener() {
             @Override
             public void onAdd() {
                 Point pos = desktop.getCurrentPage().findFreeSpace();

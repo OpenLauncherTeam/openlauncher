@@ -17,10 +17,6 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.InputStream;
 import java.util.List;
 
-/**
- * Created by BennyKok on 10/25/2016.
- */
-
 public class IconPackHelper {
     public static void themePacs(AppManager appManager, final int iconSize, String resPacName, List<AppManager.App> apps) {
         //theming vars-----------------------------------------------

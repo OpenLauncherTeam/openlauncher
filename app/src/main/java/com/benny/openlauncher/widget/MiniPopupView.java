@@ -20,10 +20,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.codetail.widget.RevealFrameLayout;
 
-/**
- * Created by BennyKok on 3/3/2017.
- */
-
 public class MiniPopupView extends RevealFrameLayout {
     private boolean haveWidowDisplayed;
 

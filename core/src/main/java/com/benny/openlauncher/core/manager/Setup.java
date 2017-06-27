@@ -25,10 +25,6 @@ import java.util.List;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
-/**
- * Created by Michael on 25.06.2017.
- */
-
 /*
  * just a fast first helper class;
  * should be removed in the end, so we don't care to keep it clean
@@ -39,22 +35,22 @@ public abstract class Setup<H extends Home, A extends App, T extends Item, U ext
     // Class and singleton
     // ----------------
 
-    private static Setup mSetup = null;
+    private static Setup setup = null;
 
-    public static boolean wasInitialised()
-    {
-        return mSetup != null;
+    public static boolean wasInitialised() {
+        return setup != null;
     }
 
     public static void init(Setup setup)
     {
-        mSetup = setup;
+        Setup.setup = setup;
     }
 
     public static Setup get() {
-        if (mSetup == null)
+        if (setup == null) {
             throw new RuntimeException("Setup has not been initialised!");
-        return mSetup;
+        }
+        return setup;
     }
 
     // ----------------

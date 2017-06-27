@@ -35,10 +35,6 @@ import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by BennyKok on 4/27/2017.
- */
-
 public class BaseSearchBar extends FrameLayout {
     public TextView searchClock;
     public AppCompatImageView searchButton;

@@ -13,10 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by dkanada on 5/3/2017.
- */
-
 public class Item implements com.benny.openlauncher.core.interfaces.Item<Item> {
     public static final Creator<Item> CREATOR = new Creator<Item>() {
 
@@ -32,7 +28,7 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item> {
     };
 
     // all items need these values
-    public int idValue;
+    private int idValue;
     public Type type;
     public String name = "";
     public Drawable icon = Home.launcher.getResources().getDrawable(R.drawable.rip);
@@ -118,7 +114,7 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item> {
     public static Item newGroupItem() {
         Item item = new Item();
         item.type = Type.GROUP;
-        item.name = Home.launcher.getString(R.string.group);
+        item.name = Home.launcher.getString(R.string.folder);
         item.spanX = 1;
         item.spanY = 1;
         item.items = new ArrayList<>();
@@ -187,6 +183,10 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item> {
     @Override
     public int getId() {
         return idValue;
+    }
+
+    public void setId(int id) {
+        idValue = id;
     }
 
     @Override

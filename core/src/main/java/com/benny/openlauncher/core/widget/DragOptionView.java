@@ -91,7 +91,7 @@ public class DragOptionView extends CardView {
                         intent.setExtrasClassLoader(Setup.get().getItemClass().getClassLoader());
                         final Item item = intent.getParcelableExtra("mDragData");
 
-                        Setup.get().getDialogHandler().showEditDialog(getContext(), item, new DialogHandler.IOnEditDialog() {
+                        Setup.get().getDialogHandler().showEditDialog(getContext(), item, new DialogHandler.OnEditDialog() {
                             @Override
                             public void onRename(String name) {
                                 item.setLabel(name);

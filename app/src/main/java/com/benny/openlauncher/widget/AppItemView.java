@@ -26,10 +26,6 @@ import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 
-/**
- * Created by BennyKok on 10/23/2016
- */
-
 public class AppItemView extends View implements Drawable.Callback, com.benny.openlauncher.core.interfaces.AppItemView {
     private Drawable icon;
     private String label;

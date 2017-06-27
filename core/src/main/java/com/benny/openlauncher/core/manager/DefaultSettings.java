@@ -8,10 +8,6 @@ import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.core.widget.Desktop;
 
-/**
- * Created by flisar on 27.06.2017.
- */
-
 public class DefaultSettings implements SettingsManager {
 
     private final Context appContext;

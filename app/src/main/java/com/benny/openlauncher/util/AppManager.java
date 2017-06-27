@@ -44,8 +44,8 @@ public class AppManager {
     private PackageManager packageManager;
     private List<App> apps = new ArrayList<>();
     private List<App> nonFilteredApps = new ArrayList<>();
-    public List<AppUpdateListener<App>> updateListeners = new ArrayList<>();
-    public List<AppDeleteListener<App>> deleteListeners = new ArrayList<>();
+    public final List<AppUpdateListener<App>> updateListeners = new ArrayList<>();
+    public final List<AppDeleteListener<App>> deleteListeners = new ArrayList<>();
     public boolean recreateAfterGettingApps;
 
     private AsyncTask task;

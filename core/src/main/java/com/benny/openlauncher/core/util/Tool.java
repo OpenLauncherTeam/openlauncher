@@ -24,10 +24,6 @@ import com.benny.openlauncher.core.interfaces.App;
 
 import java.util.List;
 
-/**
- * Created by Michael on 25.06.2017.
- */
-
 public class Tool {
 
     public static void hideKeyboard(Context context, View view) {

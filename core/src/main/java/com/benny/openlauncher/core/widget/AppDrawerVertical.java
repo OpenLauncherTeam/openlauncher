@@ -27,10 +27,6 @@ import com.turingtechnologies.materialscrollbar.INameableAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by BennyKok on 11/6/2016.
- */
-
 public class AppDrawerVertical extends CardView {
 
     public static int itemWidth;

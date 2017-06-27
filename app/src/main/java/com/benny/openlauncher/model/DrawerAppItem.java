@@ -17,13 +17,8 @@ import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
 
-/**
- * Created by Michael on 25.06.2017.
- */
-
-public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.ViewHolder> implements AppItem<DrawerAppItem, DrawerAppItem.ViewHolder>
-{
-    public AppManager.App app;
+public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.ViewHolder> implements AppItem<DrawerAppItem, DrawerAppItem.ViewHolder> {
+    private AppManager.App app;
 
     public DrawerAppItem(AppManager.App app) {
         this.app = app;

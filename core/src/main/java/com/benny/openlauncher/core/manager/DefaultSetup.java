@@ -16,10 +16,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by flisar on 27.06.2017.
- */
-
 public abstract class DefaultSetup<H extends Home, A extends App, T extends Item, U extends AppItem, V extends View & AppItemView> extends Setup<H, A, T, U, V> {
 
     private final Context appContext;

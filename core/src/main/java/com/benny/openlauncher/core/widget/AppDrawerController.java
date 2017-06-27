@@ -19,10 +19,6 @@ import com.benny.openlauncher.core.util.Tool;
 
 import io.codetail.widget.RevealFrameLayout;
 
-/**
- * Created by BennyKok on 11/5/2016.
- */
-
 public class AppDrawerController extends RevealFrameLayout {
 
     public AppDrawerPaged drawerViewPaged;

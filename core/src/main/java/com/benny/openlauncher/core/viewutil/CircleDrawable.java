@@ -55,20 +55,23 @@ public class CircleDrawable extends Drawable {
 
         if (iconToFade != null) {
             canvas.save();
-            if (hidingOldIcon)
+            if (hidingOldIcon) {
                 currentScale -= scaleStep;
-            else
+            } else {
                 currentScale += scaleStep;
+            }
             currentScale = Tool.clampFloat(currentScale, 0, 1);
             canvas.scale(currentScale, currentScale, iconSize / 2, iconSize / 2);
             canvas.drawBitmap(hidingOldIcon ? iconToFade : icon, iconSize / 2 - iconSizeReal / 2, iconSize / 2 - iconSizeReal / 2, paint2);
             canvas.restore();
 
-            if (currentScale == 0)
+            if (currentScale == 0) {
                 hidingOldIcon = false;
+            }
 
-            if (!hidingOldIcon && scaleStep == 1)
+            if (!hidingOldIcon && scaleStep == 1) {
                 iconToFade = null;
+            }
 
             invalidateSelf();
         } else {

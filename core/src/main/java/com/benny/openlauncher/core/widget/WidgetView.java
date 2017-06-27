@@ -2,11 +2,9 @@ package com.benny.openlauncher.core.widget;
 
 import android.appwidget.AppWidgetHostView;
 import android.content.Context;
-import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 
-import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.util.Tool;
 
 public class WidgetView extends AppWidgetHostView {
@@ -16,11 +14,11 @@ public class WidgetView extends AppWidgetHostView {
     private final int THRESHOLD;
     private OnLongClickListener longClick;
 
-    private boolean mHasPerformedLongPress;
-    private float mLongPressDownX;
-    private float mLongPressDownY;
-    private CheckForLongPress mPendingCheckForLongPress;
-    private OnTouchListener mOnTouchListener = null;
+    private boolean hasPerformedLongPress;
+    private float longPressDownX;
+    private float longPressDownY;
+    private CheckForLongPress pendingCheckForLongPress;
+    private OnTouchListener onTouchListener = null;
 
     public WidgetView(Context context) {
         super(context);
@@ -35,12 +33,13 @@ public class WidgetView extends AppWidgetHostView {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
 
-        if (mOnTouchListener != null && mOnTouchListener.onTouch(this, ev))
+        if (onTouchListener != null && onTouchListener.onTouch(this, ev)) {
             return true;
+        }
 
         // Consume any touch events for ourselves after longpress is triggered
-        if (mHasPerformedLongPress) {
-            mHasPerformedLongPress = false;
+        if (hasPerformedLongPress) {
+            hasPerformedLongPress = false;
             return true;
         }
 
@@ -50,29 +49,28 @@ public class WidgetView extends AppWidgetHostView {
         // users can always pick up this widget
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN: {
-                mLongPressDownX = ev.getX();
-                mLongPressDownY = ev.getY();
+                longPressDownX = ev.getX();
+                longPressDownY = ev.getY();
                 postCheckForLongClick();
                 break;
             }
 
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-                mHasPerformedLongPress = false;
-                if (mPendingCheckForLongPress != null) {
-                    removeCallbacks(mPendingCheckForLongPress);
+                hasPerformedLongPress = false;
+                if (pendingCheckForLongPress != null) {
+                    removeCallbacks(pendingCheckForLongPress);
                 }
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                float diffX = Math.abs(mLongPressDownX - ev.getX());
-                float diffY = Math.abs(mLongPressDownY - ev.getY());
+                float diffX = Math.abs(longPressDownX - ev.getX());
+                float diffY = Math.abs(longPressDownY - ev.getY());
                 //L.d("onInterceptTouchEvent: diffX = %f | diffY = %f | THRESHOLD = %d", diffX, diffY, THRESHOLD);
-                if (diffX >= THRESHOLD || diffY >= THRESHOLD)
-                {
-                    mHasPerformedLongPress = false;
-                    if (mPendingCheckForLongPress != null) {
-                        removeCallbacks(mPendingCheckForLongPress);
+                if (diffX >= THRESHOLD || diffY >= THRESHOLD) {
+                    hasPerformedLongPress = false;
+                    if (pendingCheckForLongPress != null) {
+                        removeCallbacks(pendingCheckForLongPress);
                     }
                 }
                 break;
@@ -86,9 +84,9 @@ public class WidgetView extends AppWidgetHostView {
     public void cancelLongPress() {
         super.cancelLongPress();
 
-        mHasPerformedLongPress = false;
-        if (mPendingCheckForLongPress != null) {
-            removeCallbacks(mPendingCheckForLongPress);
+        hasPerformedLongPress = false;
+        if (pendingCheckForLongPress != null) {
+            removeCallbacks(pendingCheckForLongPress);
         }
     }
 
@@ -102,20 +100,20 @@ public class WidgetView extends AppWidgetHostView {
     }
 
     public void setCustomOnTouchListener(OnTouchListener onTouchListener) {
-        mOnTouchListener = onTouchListener;
+        this.onTouchListener = onTouchListener;
     }
 
     public OnTouchListener getCustomOnTouchListener() {
-        return mOnTouchListener;
+        return onTouchListener;
     }
 
     private void postCheckForLongClick() {
-        mHasPerformedLongPress = false;
-        if (mPendingCheckForLongPress == null) {
-            mPendingCheckForLongPress = new CheckForLongPress();
+        hasPerformedLongPress = false;
+        if (pendingCheckForLongPress == null) {
+            pendingCheckForLongPress = new CheckForLongPress();
         }
-        mPendingCheckForLongPress.rememberWindowAttachCount();
-        postDelayed(mPendingCheckForLongPress, LONG_PRESS_TIMEOUT);
+        pendingCheckForLongPress.rememberWindowAttachCount();
+        postDelayed(pendingCheckForLongPress, LONG_PRESS_TIMEOUT);
     }
 
     class CheckForLongPress implements Runnable {
@@ -125,10 +123,10 @@ public class WidgetView extends AppWidgetHostView {
             if (getParent() != null
                     //    hasWindowFocus()
                     && mOriginalWindowAttachCount == getWindowAttachCount()
-                    && !mHasPerformedLongPress)
+                    && !hasPerformedLongPress)
             {
                 if (onLongPress()) {
-                    mHasPerformedLongPress = true;
+                    hasPerformedLongPress = true;
                 }
             }
         }

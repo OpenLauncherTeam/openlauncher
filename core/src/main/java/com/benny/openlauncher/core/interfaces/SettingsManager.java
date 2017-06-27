@@ -1,11 +1,5 @@
 package com.benny.openlauncher.core.interfaces;
 
-import com.benny.openlauncher.core.widget.Desktop;
-
-/**
- * Created by Michael on 25.06.2017.
- */
-
 public interface SettingsManager {
     int getDesktopPageCurrent();
     void setDesktopPageCurrent(int page);

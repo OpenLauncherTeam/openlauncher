@@ -281,14 +281,14 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     {
         final DialogHandler<Item> dialogHandler = new DialogHandler<Item>() {
             @Override
-            public void showPickAction(Context context, final IOnAddAppDrawerItem resultHandler) {
+            public void showPickAction(Context context, final OnAddAppDrawerItemListener listener) {
                 DialogHelper.addActionItemDialog(context, new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
 
                         switch (which) {
                             case 0:
-                                resultHandler.onAdd();
+                                listener.onAdd();
                                 break;
                         }
                     }
@@ -296,7 +296,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public void showEditDialog(Context context, final Item item, IOnEditDialog resultHandler) {
+            public void showEditDialog(Context context, final Item item, OnEditDialog resultHandler) {
                 DialogHelper.editItemDialog("Edit Item", item.getLabel(), context, new DialogHelper.onItemEditListener() {
                     @Override
                     public void itemLabel(String label) {

@@ -3,10 +3,6 @@ package com.benny.openlauncher.core.interfaces;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-/**
- * Created by Michael on 25.06.2017.
- */
-
 public interface AppItemView {
     View getView();
     Drawable getIcon();

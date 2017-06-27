@@ -108,15 +108,18 @@ public class GroupIconDrawable extends Drawable {
 
         canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, paint);
 
-        if (icons[0] != null)
+        if (icons[0] != null) {
             canvas.drawBitmap(icons[0], null, new RectF(padding, padding, iconSizeDiv2 - padding, iconSizeDiv2 - padding), paint2);
-        if (icons[1] != null)
+        }
+        if (icons[1] != null) {
             canvas.drawBitmap(icons[1], null, new RectF(iconSizeDiv2 + padding, padding, iconSize - padding, iconSizeDiv2 - padding), paint2);
-        if (icons[2] != null)
+        }
+        if (icons[2] != null) {
             canvas.drawBitmap(icons[2], null, new RectF(padding, iconSizeDiv2 + padding, iconSizeDiv2 - padding, iconSize - padding), paint2);
-        if (icons[3] != null)
+        }
+        if (icons[3] != null) {
             canvas.drawBitmap(icons[3], null, new RectF(iconSizeDiv2 + padding, iconSizeDiv2 + padding, iconSize - padding, iconSize - padding), paint2);
-
+        }
         canvas.clipRect(0, 0, iconSize, iconSize, Region.Op.REPLACE);
 
         canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, paint4);

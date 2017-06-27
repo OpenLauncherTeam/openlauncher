@@ -5,10 +5,6 @@ import android.view.View;
 import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.util.RevertibleAction;
 
-/**
- * Created by BennyKok on 11/3/2016.
- */
-
 public interface DesktopCallBack<T extends Item, V extends View> extends RevertibleAction {
     boolean addItemToPoint(T item, int x, int y);
 
