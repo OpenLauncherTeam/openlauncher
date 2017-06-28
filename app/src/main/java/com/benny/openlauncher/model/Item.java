@@ -6,6 +6,8 @@ import android.os.Parcel;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.interfaces.FastItem;
+import com.benny.openlauncher.core.interfaces.LabelProvider;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
 
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Item implements com.benny.openlauncher.core.interfaces.Item<Item> {
+public class Item implements com.benny.openlauncher.core.interfaces.Item<Item>, LabelProvider {
     public static final Creator<Item> CREATOR = new Creator<Item>() {
 
         @Override

@@ -14,8 +14,8 @@ import android.widget.RelativeLayout;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.interfaces.App;
-import com.benny.openlauncher.core.interfaces.AppItem;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
+import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.Tool;
 import com.mikepenz.fastadapter.IItemAdapter;
@@ -122,7 +122,7 @@ public class AppDrawerVertical extends CardView {
         List<App> allApps = Setup.get().getAllApps(getContext());
         if (allApps.size() != 0) {
             AppDrawerVertical.this.apps = allApps;
-            ArrayList<AppItem> items = new ArrayList<>();
+            ArrayList<FastItem.AppItem> items = new ArrayList<>();
             for (int i = 0; i < apps.size(); i++) {
                 items.add(Setup.get().createDrawerAppItem(apps.get(i)));
             }
@@ -132,7 +132,7 @@ public class AppDrawerVertical extends CardView {
             @Override
             public boolean onAppUpdated(List<App> apps) {
                 AppDrawerVertical.this.apps = apps;
-                ArrayList<AppItem> items = new ArrayList<>();
+                ArrayList<FastItem.AppItem> items = new ArrayList<>();
                 for (int i = 0; i < apps.size(); i++) {
                     items.add(Setup.get().createDrawerAppItem(apps.get(i)));
                 }
@@ -145,12 +145,12 @@ public class AppDrawerVertical extends CardView {
         addView(rl);
     }
 
-    public static class GridAppDrawerAdapter extends FastItemAdapter<AppItem> implements INameableAdapter {
+    public static class GridAppDrawerAdapter extends FastItemAdapter<FastItem.AppItem> implements INameableAdapter {
 
         GridAppDrawerAdapter() {
-            getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<AppItem>() {
+            getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<FastItem.AppItem>() {
                 @Override
-                public boolean filter(AppItem item, CharSequence constraint) {
+                public boolean filter(FastItem.AppItem item, CharSequence constraint) {
                     return !item.getApp().getLabel().toLowerCase().contains(constraint.toString().toLowerCase());
                 }
             });

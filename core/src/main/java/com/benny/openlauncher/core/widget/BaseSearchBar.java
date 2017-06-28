@@ -2,18 +2,15 @@ package com.benny.openlauncher.core.widget;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
@@ -21,20 +18,18 @@ import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowInsets;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
+import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.manager.Setup;
-import com.benny.openlauncher.core.model.BaseIconLabelItem;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.CircleDrawable;
 import com.mikepenz.fastadapter.IItemAdapter;
@@ -50,9 +45,9 @@ public class BaseSearchBar extends FrameLayout {
 
     public enum Mode {
         DateAll(new SimpleDateFormat("MMMM dd\nEEEE, YYYY", Locale.getDefault())),
-        DateNoYearAndTime(new SimpleDateFormat("MMMM dd\nhh:mm", Locale.getDefault())),
-        DateAllAndTime(new SimpleDateFormat("MMMM dd, YYYY\nhh:mm", Locale.getDefault())),
-        TimeAndDateAll(new SimpleDateFormat("hh:mm\nMMMM dd, YYYY", Locale.getDefault())),
+        DateNoYearAndTime(new SimpleDateFormat("MMMM dd\nHH:mm", Locale.getDefault())),
+        DateAllAndTime(new SimpleDateFormat("MMMM dd, YYYY\nHH:mm", Locale.getDefault())),
+        TimeAndDateAll(new SimpleDateFormat("HH:mm\nMMMM dd, YYYY", Locale.getDefault())),
         Custom(null);
 
         SimpleDateFormat sdf;
@@ -67,7 +62,7 @@ public class BaseSearchBar extends FrameLayout {
     public RecyclerView searchRecycler;
 
     private static final long ANIM_TIME = 200;
-    private FastItemAdapter<BaseIconLabelItem> adapter = new FastItemAdapter<>();
+    private FastItemAdapter<FastItem.LabelItem> adapter = new FastItemAdapter<>();
     private CallBack callback;
     private boolean expanded;
 
@@ -197,7 +192,7 @@ public class BaseSearchBar extends FrameLayout {
             @Override
             public boolean onAppUpdated(List<App> apps) {
                 adapter.clear();
-                List<BaseIconLabelItem> items = new ArrayList<>();
+                List<FastItem.LabelItem> items = new ArrayList<>();
                 if (searchInternetEnabled) {
                     items.add(Setup.get().createSearchBarInternetItem(getContext(), R.string.search_online, new OnClickListener() {
                         @Override
@@ -221,9 +216,9 @@ public class BaseSearchBar extends FrameLayout {
                 return false;
             }
         });
-        adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<BaseIconLabelItem>() {
+        adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<FastItem.LabelItem>() {
             @Override
-            public boolean filter(BaseIconLabelItem item, CharSequence constraint) {
+            public boolean filter(FastItem.LabelItem item, CharSequence constraint) {
                 if (item.getLabel().equals(getContext().getString(R.string.search_online)))
                     return false;
                 String s = constraint.toString();

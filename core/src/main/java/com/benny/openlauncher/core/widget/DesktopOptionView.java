@@ -16,8 +16,8 @@ import android.view.WindowInsets;
 import android.widget.FrameLayout;
 
 import com.benny.openlauncher.core.R;
+import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.manager.Setup;
-import com.benny.openlauncher.core.model.BaseIconLabelItem;
 import com.benny.openlauncher.core.util.Tool;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
@@ -29,7 +29,7 @@ import java.util.List;
 public class DesktopOptionView extends FrameLayout {
     private RecyclerView actionRecyclerView;
 
-    private FastItemAdapter<BaseIconLabelItem> actionAdapter = new FastItemAdapter<>();
+    private FastItemAdapter<FastItem.DesktopOptionsItem> actionAdapter = new FastItemAdapter<>();
     private DesktopOptionViewListener desktopOptionViewListener;
 
     public DesktopOptionView(@NonNull Context context) {
@@ -95,7 +95,7 @@ public class DesktopOptionView extends FrameLayout {
         actionRecyclerViewLP.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
         addView(actionRecyclerView, actionRecyclerViewLP);
 
-        List<BaseIconLabelItem> items = new ArrayList<>();
+        List<FastItem.DesktopOptionsItem> items = new ArrayList<>();
         items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_star_white_36dp, R.string.home, null, typeface));
         items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_clear_white_36dp, R.string.remove, null, typeface));
         items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_dashboard_white_36dp, R.string.widget, null, typeface));
@@ -104,9 +104,9 @@ public class DesktopOptionView extends FrameLayout {
         items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_settings_launcher_white_36dp, R.string.settings, null, typeface));
 
         actionAdapter.set(items);
-        actionAdapter.withOnClickListener(new FastAdapter.OnClickListener<BaseIconLabelItem>() {
+        actionAdapter.withOnClickListener(new FastAdapter.OnClickListener<FastItem.DesktopOptionsItem>() {
             @Override
-            public boolean onClick(View v, IAdapter<BaseIconLabelItem> adapter, BaseIconLabelItem item, int position) {
+            public boolean onClick(View v, IAdapter<FastItem.DesktopOptionsItem> adapter, FastItem.DesktopOptionsItem item, int position) {
                 if (desktopOptionViewListener != null) {
                     switch (position) {
                         case 0:

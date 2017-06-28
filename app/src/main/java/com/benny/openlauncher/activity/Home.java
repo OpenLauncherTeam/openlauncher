@@ -31,11 +31,11 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.core.interfaces.DesktopGestureListener;
+import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.core.interfaces.DialogHandler;
+import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.Setup;
-import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.widget.Desktop;
@@ -66,7 +66,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
-import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class Home extends com.benny.openlauncher.core.activity.Home implements DrawerLayout.DrawerListener
 {
@@ -328,7 +327,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                 DialogHelper.deletePackageDialog(context, dragEvent);
             }
         };
-        Setup.init(new Setup<Home, AppManager.App, IconLabelItem, Item, DrawerAppItem, AppItemView>() {
+        Setup.init(new Setup<Home, AppManager.App, Item, DrawerAppItem, AppItemView>() {
 
             @Override
             public SettingsManager getAppSettings() {
@@ -336,7 +335,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public IconLabelItem createSearchBarInternetItem(Context context, int label, @Nullable View.OnClickListener listener) {
+            public FastItem.LabelItem createSearchBarInternetItem(Context context, int label, @Nullable View.OnClickListener listener) {
                 return new IconLabelItem(context, label)
                         .withIconGravity(Gravity.START)
                         .withOnClickListener(listener)
@@ -347,7 +346,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public IconLabelItem createSearchBarItem(Context context, AppManager.App app, @Nullable View.OnClickListener listener) {
+            public FastItem.LabelItem createSearchBarItem(Context context, AppManager.App app, @Nullable View.OnClickListener listener) {
                 return new IconLabelItem(context, app.getIcon(), app.getLabel(), 36)
                         .withIconGravity(Gravity.START)
                         .withOnClickListener(listener)
@@ -356,7 +355,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public IconLabelItem createDesktopOptionsViewItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, Typeface typeface) {
+            public FastItem.DesktopOptionsItem createDesktopOptionsViewItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, Typeface typeface) {
                 return new IconLabelItem(context, icon, context.getString(label), -1)
                         .withOnClickListener(listener)
                         .withTextColor(Color.WHITE)

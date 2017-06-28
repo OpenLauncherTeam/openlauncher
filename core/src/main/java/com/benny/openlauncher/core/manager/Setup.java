@@ -10,15 +10,14 @@ import android.view.View;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
-import com.benny.openlauncher.core.interfaces.AppItem;
 import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.DatabaseHelper;
-import com.benny.openlauncher.core.interfaces.DesktopGestureListener;
+import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.core.interfaces.DialogHandler;
+import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
-import com.benny.openlauncher.core.model.BaseIconLabelItem;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 
 import java.util.List;
@@ -27,7 +26,7 @@ import java.util.List;
  * just a fast first helper class;
  * should be removed in the end, so we don't care to keep it clean
  */
-public abstract class Setup<H extends Home, A extends App, IconLabelItem extends BaseIconLabelItem, LauncherItem extends Item, DrawerAppItem extends AppItem, V extends View & AppItemView> {
+public abstract class Setup<H extends Home, A extends App, LauncherItem extends Item, DrawerAppItem extends FastItem.AppItem, V extends View & AppItemView> {
 
     // ----------------
     // Class and singleton
@@ -68,9 +67,9 @@ public abstract class Setup<H extends Home, A extends App, IconLabelItem extends
     // FastAdapter Items
     // ----------------
 
-    public abstract IconLabelItem createSearchBarInternetItem(Context context, int label, @Nullable View.OnClickListener listener);
-    public abstract IconLabelItem createSearchBarItem(Context context, A app, @Nullable View.OnClickListener listener);
-    public abstract IconLabelItem createDesktopOptionsViewItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, Typeface typeface);
+    public abstract FastItem.LabelItem createSearchBarInternetItem(Context context, int label, @Nullable View.OnClickListener listener);
+    public abstract FastItem.LabelItem createSearchBarItem(Context context, A app, @Nullable View.OnClickListener listener);
+    public abstract FastItem.DesktopOptionsItem createDesktopOptionsViewItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, Typeface typeface);
 
     // ----------------
     // Listeners

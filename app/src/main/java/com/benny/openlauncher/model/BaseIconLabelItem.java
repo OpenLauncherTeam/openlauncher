@@ -1,4 +1,4 @@
-package com.benny.openlauncher.core.model;
+package com.benny.openlauncher.model;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -6,15 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.interfaces.App;
-import com.benny.openlauncher.core.interfaces.Item;
+import com.benny.openlauncher.core.interfaces.FastItem;
+import com.benny.openlauncher.core.interfaces.LabelProvider;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
 /**
  * Created by flisar on 28.06.2017.
  */
 
-public abstract class BaseIconLabelItem<I extends Item, IconLabelItem extends BaseIconLabelItem, VH extends RecyclerView.ViewHolder> extends AbstractItem<IconLabelItem, VH>  {
+public abstract class BaseIconLabelItem<I extends LabelProvider, IconLabelItem extends BaseIconLabelItem, VH extends RecyclerView.ViewHolder> extends AbstractItem<IconLabelItem, VH> implements FastItem.LabelItem<IconLabelItem, VH>, FastItem.DesktopOptionsItem<IconLabelItem, VH> {
 
     // Data
     protected I item = null;
@@ -38,10 +38,12 @@ public abstract class BaseIconLabelItem<I extends Item, IconLabelItem extends Ba
         return (IconLabelItem)this;
     }
 
+    @Override
     public void setIcon(int resId) {
         this.icon = resId;
     }
 
+    @Override
     public String getLabel() {
         if (item != null) {
             return item.getLabel();

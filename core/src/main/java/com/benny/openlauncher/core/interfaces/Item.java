@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-public interface Item<T extends Item> extends Parcelable {
+public interface Item<T extends Item> extends LabelProvider, Parcelable {
 
     enum Type {
         APP,
@@ -14,9 +14,9 @@ public interface Item<T extends Item> extends Parcelable {
         ACTION,
         WIDGET
     }
+
     int getId();
     Intent getIntent();
-    String getLabel();
     void setLabel(String label);
     Type getType();
     List<T> getGroupItems();

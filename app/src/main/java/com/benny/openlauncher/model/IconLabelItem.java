@@ -6,17 +6,13 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.core.interfaces.*;
-import com.benny.openlauncher.core.model.BaseIconLabelItem;
 import com.benny.openlauncher.core.util.Tool;
-import com.benny.openlauncher.util.AppManager;
 
 import java.util.List;
 
