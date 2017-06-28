@@ -46,9 +46,9 @@ public class BaseSearchBar extends FrameLayout {
 
     public enum Mode {
         DateAll(new SimpleDateFormat("MMMM dd\nEEEE, YYYY", Locale.getDefault())),
-        DateNoYearAndTime(new SimpleDateFormat("MMMM dd\nHH:mm", Locale.getDefault())),
-        DateAllAndTime(new SimpleDateFormat("MMMM dd, YYYY\nHH:mm", Locale.getDefault())),
-        TimeAndDateAll(new SimpleDateFormat("HH:mm\nMMMM dd, YYYY", Locale.getDefault())),
+        DateNoYearAndTime(new SimpleDateFormat("MMMM dd\nhh:mm", Locale.getDefault())),
+        DateAllAndTime(new SimpleDateFormat("MMMM dd, YYYY\nhh:mm", Locale.getDefault())),
+        TimeAndDateAll(new SimpleDateFormat("hh:mm\nMMMM dd, YYYY", Locale.getDefault())),
         Custom(null);
 
         SimpleDateFormat sdf;
