@@ -3,6 +3,6 @@
     android:layout_height="match_parent">
 
     <!-- The main content view -->
-    <merge layout="@layout/view_home" />
+    <include layout="@layout/view_home" />
 
 </FrameLayout>
