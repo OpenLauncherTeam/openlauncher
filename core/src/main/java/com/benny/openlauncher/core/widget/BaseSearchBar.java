@@ -250,7 +250,8 @@ public class BaseSearchBar extends FrameLayout {
     }
 
     public void updateClock() {
-        if (mode == null) {
+        if (!Setup.appSettings().searchBarTimeEnabled()) {
+            searchClock.setText("");
             return;
         }
 
@@ -258,10 +259,6 @@ public class BaseSearchBar extends FrameLayout {
         SimpleDateFormat sdf = mode.sdf;
         if (sdf == null) {
             sdf = Setup.appSettings().getUserDateFormat();
-        }
-        if (sdf == null) {
-            // select a default one...
-            sdf = Mode.DateAllAndTime.sdf;
         }
         String text = sdf.format(calendar.getTime());
         String[] lines = text.split("\n");
