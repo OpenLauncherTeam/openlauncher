@@ -209,6 +209,8 @@
 
     <!-- Item Labels -->
 
+    <string name="label_default">Default</string>
+
     <!-- Dialogs -->
 
     <string name="request_dummy_text">Hello world!</string>

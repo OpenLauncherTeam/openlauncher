@@ -2,10 +2,12 @@ package com.benny.openlauncher.core.widget;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,18 +21,20 @@ import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowInsets;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.core.interfaces.IconLabelItem;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.BaseIconLabelItem;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.CircleDrawable;
 import com.mikepenz.fastadapter.IItemAdapter;
@@ -63,7 +67,7 @@ public class BaseSearchBar extends FrameLayout {
     public RecyclerView searchRecycler;
 
     private static final long ANIM_TIME = 200;
-    private FastItemAdapter<IconLabelItem> adapter = new FastItemAdapter<>();
+    private FastItemAdapter<BaseIconLabelItem> adapter = new FastItemAdapter<>();
     private CallBack callback;
     private boolean expanded;
 
@@ -112,7 +116,9 @@ public class BaseSearchBar extends FrameLayout {
     }
 
     public boolean collapse() {
-        if (!expanded) return false;
+        if (!expanded) {
+            return false;
+        }
         searchButton.callOnClick();
         return !expanded;
     }
@@ -191,7 +197,7 @@ public class BaseSearchBar extends FrameLayout {
             @Override
             public boolean onAppUpdated(List<App> apps) {
                 adapter.clear();
-                List<IconLabelItem> items = new ArrayList<>();
+                List<BaseIconLabelItem> items = new ArrayList<>();
                 if (searchInternetEnabled) {
                     items.add(Setup.get().createSearchBarInternetItem(getContext(), R.string.search_online, new OnClickListener() {
                         @Override
@@ -215,9 +221,9 @@ public class BaseSearchBar extends FrameLayout {
                 return false;
             }
         });
-        adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<IconLabelItem>() {
+        adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<BaseIconLabelItem>() {
             @Override
-            public boolean filter(IconLabelItem item, CharSequence constraint) {
+            public boolean filter(BaseIconLabelItem item, CharSequence constraint) {
                 if (item.getLabel().equals(getContext().getString(R.string.search_online)))
                     return false;
                 String s = constraint.toString();
@@ -229,6 +235,7 @@ public class BaseSearchBar extends FrameLayout {
                     return true;
             }
         });
+
         final LayoutParams recyclerParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         addView(searchClock, clockParams);
@@ -241,6 +248,7 @@ public class BaseSearchBar extends FrameLayout {
             public void onGlobalLayout() {
                 searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 recyclerParams.setMargins(0, Tool.dp2px(50, getContext()) + searchInput.getHeight(), 0, 0);
+                searchRecycler.getLayoutParams().height = ((View)getParent()).getHeight() - searchInput.getHeight();
             }
         });
     }

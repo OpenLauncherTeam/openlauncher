@@ -11,12 +11,13 @@ import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
+import com.benny.openlauncher.core.model.BaseIconLabelItem;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class DefaultSetup<H extends Home, A extends App, T extends Item, U extends AppItem, V extends View & AppItemView> extends Setup<H, A, T, U, V> {
+public abstract class DefaultSetup<H extends Home, A extends App, IconLabelItem extends BaseIconLabelItem, LauncherItem extends Item, DrawerAppItem extends AppItem, V extends View & AppItemView> extends Setup<H, A, IconLabelItem, LauncherItem, DrawerAppItem, V> {
 
     private final Context appContext;
     private final SettingsManager settingsManager;

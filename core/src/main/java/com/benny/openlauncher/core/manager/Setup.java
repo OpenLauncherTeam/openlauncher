@@ -15,10 +15,10 @@ import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.DatabaseHelper;
 import com.benny.openlauncher.core.interfaces.DesktopGestureListener;
-import com.benny.openlauncher.core.interfaces.IconLabelItem;
+import com.benny.openlauncher.core.interfaces.DialogHandler;
 import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
-import com.benny.openlauncher.core.interfaces.DialogHandler;
+import com.benny.openlauncher.core.model.BaseIconLabelItem;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
  * just a fast first helper class;
  * should be removed in the end, so we don't care to keep it clean
  */
-public abstract class Setup<H extends Home, A extends App, T extends Item, U extends AppItem, V extends View & AppItemView> {
+public abstract class Setup<H extends Home, A extends App, IconLabelItem extends BaseIconLabelItem, LauncherItem extends Item, DrawerAppItem extends AppItem, V extends View & AppItemView> {
 
     // ----------------
     // Class and singleton
@@ -83,7 +83,7 @@ public abstract class Setup<H extends Home, A extends App, T extends Item, U ext
     // Helper class - Dialogs, Database, Drag&Drop Helper
     // ----------------
 
-    public abstract DatabaseHelper<T> createDatabaseHelper(Context context);
+    public abstract DatabaseHelper<LauncherItem> createDatabaseHelper(Context context);
     public abstract DialogHandler getDialogHandler();
     public abstract DesktopGestureListener.DesktopGestureCallback getDrawerGestureCallback();
 
@@ -91,25 +91,25 @@ public abstract class Setup<H extends Home, A extends App, T extends Item, U ext
     // Item
     // ----------------
 
-    public abstract Class<T> getItemClass();
-    public abstract List<T> createAllAppItems(Context context);
-    public abstract T newGroupItem();
-    public abstract T newWidgetItem(int appWidgetId);
-    public abstract T newActionItem(int action);
-    public abstract T createShortcut(Intent intent, Drawable icon, String name);
+    public abstract Class<LauncherItem> getItemClass();
+    public abstract List<LauncherItem> createAllAppItems(Context context);
+    public abstract LauncherItem newGroupItem();
+    public abstract LauncherItem newWidgetItem(int appWidgetId);
+    public abstract LauncherItem newActionItem(int action);
+    public abstract LauncherItem createShortcut(Intent intent, Drawable icon, String name);
 
     // ----------------
     // Unstructured...
     // ----------------
 
     public abstract List<A> getAllApps(Context context);
-    public abstract U createDrawerAppItem(A app);
+    public abstract DrawerAppItem createDrawerAppItem(A app);
     public abstract View createDrawerAppItemView(Context context, H home, A app, AppItemView.LongPressCallBack longPressCallBack);
-    public abstract AppItemView createAppItemViewPopup(Context context, T groupItem, A item);
-    public abstract View getItemView(Context context, T item, boolean labelsEnabled, DesktopCallBack callBack);
+    public abstract AppItemView createAppItemViewPopup(Context context, LauncherItem groupItem, A item);
+    public abstract View getItemView(Context context, LauncherItem item, boolean labelsEnabled, DesktopCallBack callBack);
     public abstract void showLauncherSettings(Context context);
     public abstract void onAppUpdated(Context p1, Intent p2);
     public abstract A findApp(Context c, Intent intent);
-    public abstract void updateIcon(Context context, V appItemView, T currentItem);
+    public abstract void updateIcon(Context context, V appItemView, LauncherItem currentItem);
     public abstract void onItemViewDismissed(V itemView);
 }

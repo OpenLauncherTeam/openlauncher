@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.DragEvent;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -76,7 +77,9 @@ public class DialogHelper {
         int size = Tool.dp2px(46, context);
         int sizePad = Tool.dp2px(8, context);
         for (int i = 0; i < apps.size(); i++) {
-            items.add(new IconLabelItem(context, apps.get(i).icon, apps.get(i).label, null, sizePad, size));
+            items.add(new IconLabelItem(context, apps.get(i).icon, apps.get(i).label, size)
+                    .withIconGravity(Gravity.START)
+                    .withDrawablePadding(context, sizePad));
         }
         fastItemAdapter.set(items);
         fastItemAdapter.withOnClickListener(new FastAdapter.OnClickListener<IconLabelItem>() {

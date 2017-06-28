@@ -328,7 +328,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                 DialogHelper.deletePackageDialog(context, dragEvent);
             }
         };
-        Setup.init(new Setup<Home, AppManager.App, Item, DrawerAppItem, AppItemView>() {
+        Setup.init(new Setup<Home, AppManager.App, IconLabelItem, Item, DrawerAppItem, AppItemView>() {
 
             @Override
             public SettingsManager getAppSettings() {
@@ -337,17 +337,36 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
 
             @Override
             public IconLabelItem createSearchBarInternetItem(Context context, int label, @Nullable View.OnClickListener listener) {
-                return new IconLabelItem(context, null, context.getString(label), listener, Color.WHITE, Tool.dp2px(8, context), Tool.dp2px(36, context), true, Gravity.END);
+                return new IconLabelItem(context, label)
+                        .withIconGravity(Gravity.START)
+                        .withOnClickListener(listener)
+                        .withTextColor(Color.WHITE)
+                        .withDrawablePadding(context, 8)
+                        .withBold(true)
+                        .withTextGravity(Gravity.END);
             }
 
             @Override
             public IconLabelItem createSearchBarItem(Context context, AppManager.App app, @Nullable View.OnClickListener listener) {
-                return new IconLabelItem(context, app.getIcon(), app.getLabel(), listener, Color.WHITE, Tool.dp2px(8, context), Tool.dp2px(36, context));
+                return new IconLabelItem(context, app.getIcon(), app.getLabel(), 36)
+                        .withIconGravity(Gravity.START)
+                        .withOnClickListener(listener)
+                        .withTextColor(Color.WHITE)
+                        .withDrawablePadding(context, 8);
             }
 
             @Override
             public IconLabelItem createDesktopOptionsViewItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, Typeface typeface) {
-                return new IconLabelItem(context, icon, label, listener, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false, Gravity.CENTER);
+                return new IconLabelItem(context, icon, context.getString(label), -1)
+                        .withOnClickListener(listener)
+                        .withTextColor(Color.WHITE)
+                        .withDrawablePadding(context, 8)
+                        .withIconGravity(Gravity.TOP)
+                        .withGravity(Gravity.CENTER)
+                        .withMatchParent(false)
+                        .withTypeface(typeface)
+                        .withDrawablePadding(context, 0)
+                        .withTextGravity(Gravity.CENTER);
             }
 
             @Override
