@@ -36,6 +36,7 @@ import com.benny.openlauncher.core.viewutil.CircleDrawable;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -44,10 +45,17 @@ import java.util.Locale;
 public class BaseSearchBar extends FrameLayout {
 
     public enum Mode {
-        DateAll,
-        DateNoYearAndTime,
-        DateAllAndTime,
-        TimeAndDateAll
+        DateAll(new SimpleDateFormat("MMMM dd\nEEEE, YYYY", Locale.getDefault())),
+        DateNoYearAndTime(new SimpleDateFormat("MMMM dd\nHH:mm", Locale.getDefault())),
+        DateAllAndTime(new SimpleDateFormat("MMMM dd, YYYY\nHH:mm", Locale.getDefault())),
+        TimeAndDateAll(new SimpleDateFormat("HH:mm\nMMMM dd, YYYY", Locale.getDefault())),
+        Custom(null);
+
+        SimpleDateFormat sdf;
+
+        Mode(SimpleDateFormat sdf) {
+            this.sdf = sdf;
+        }
     }
     public TextView searchClock;
     public AppCompatImageView searchButton;
@@ -243,33 +251,18 @@ public class BaseSearchBar extends FrameLayout {
 
     public void updateClock() {
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
-        String timeOne = "";
-        String timeTwo = "";
-        switch (mode) {
-            case DateAll: {
-                timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-                timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
-                break;
-            }
-            case DateNoYearAndTime: {
-                timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-                timeTwo = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(calendar.get(Calendar.MINUTE));
-                break;
-            }
-            case DateAllAndTime:
-            case TimeAndDateAll: {
-                timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH) + ", " + String.valueOf(calendar.get(Calendar.YEAR)));
-                timeTwo = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(calendar.get(Calendar.MINUTE));
-                if (mode == Mode.TimeAndDateAll) {
-                    String tmp = timeOne;
-                    timeOne = timeTwo;
-                    timeTwo = tmp;
-                }
-                break;
-            }
+        SimpleDateFormat sdf = mode.sdf;
+        if (sdf == null) {
+            sdf = Setup.appSettings().getUserDateFormat();
         }
-        Spannable span = new SpannableString(timeOne + "\n" + timeTwo);
-        span.setSpan(new RelativeSizeSpan(searchClockSubTextFactor), timeOne.length() + 1, timeOne.length() + 1 + timeTwo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        if (sdf == null) {
+            // select a default one...
+            sdf = Mode.DateAllAndTime.sdf;
+        }
+        String text = sdf.format(calendar.getTime());
+        String[] lines = text.split("\n");
+        Spannable span = new SpannableString(lines[0] + "\n" + lines[1]);
+        span.setSpan(new RelativeSizeSpan(searchClockSubTextFactor), lines[0].length() + 1, lines[0].length() + 1 + lines[1].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         searchClock.setText(span);
     }
 

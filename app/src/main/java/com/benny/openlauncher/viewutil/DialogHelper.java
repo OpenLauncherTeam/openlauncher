@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.model.IconLabelItem;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
@@ -150,9 +151,7 @@ public class DialogHelper {
     }
 
     public static void deletePackageDialog(Context context, DragEvent dragEvent) {
-        Intent intent = dragEvent.getClipData().getItemAt(0).getIntent();
-        intent.setExtrasClassLoader(Item.class.getClassLoader());
-        Item item = intent.getParcelableExtra("mDragData");
+        Item item = DragDropHandler.getDraggedObject(dragEvent);
         if (item.type == Item.Type.APP) {
             try {
                 Uri packageURI = Uri.parse("package:" + item.intent.getComponent().getPackageName());

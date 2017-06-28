@@ -1,5 +1,7 @@
 package com.benny.openlauncher.core.interfaces;
 
+import java.text.SimpleDateFormat;
+
 public interface SettingsManager {
     int getDesktopPageCurrent();
     void setDesktopPageCurrent(int page);
@@ -35,4 +37,5 @@ public interface SettingsManager {
     boolean isAppFirstLaunch();
     void setAppFirstLaunch(boolean isAppFirstLaunch);
     String getSearchBarBaseURI();
+    SimpleDateFormat getUserDateFormat();
 }
