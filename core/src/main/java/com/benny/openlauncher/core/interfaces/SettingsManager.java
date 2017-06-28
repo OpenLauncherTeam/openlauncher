@@ -37,5 +37,6 @@ public interface SettingsManager {
     boolean isAppFirstLaunch();
     void setAppFirstLaunch(boolean isAppFirstLaunch);
     String getSearchBarBaseURI();
+    boolean searchBarTimeEnabled();
     SimpleDateFormat getUserDateFormat();
 }

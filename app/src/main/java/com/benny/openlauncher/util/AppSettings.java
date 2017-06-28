@@ -62,6 +62,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     @Override
+    public boolean searchBarTimeEnabled() {
+        return true;
+    }
+
+    @Override
     public SimpleDateFormat getUserDateFormat() {
         // TODO: offer some setup for a custom format and save and retrieve it in the database
         return null;

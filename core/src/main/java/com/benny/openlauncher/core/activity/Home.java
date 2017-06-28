@@ -91,15 +91,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     private final BroadcastReceiver shortcutReceiver = new ShortcutReceiver();
     private final BroadcastReceiver appUpdateReceiver = new AppUpdateReceiver();
     public Desktop desktop;
-    private final BroadcastReceiver timeChangedReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (action.equals(Intent.ACTION_TIME_TICK)) {
-                updateSearchClock();
-            }
-        }
-    };
+    private BroadcastReceiver timeChangedReceiver = null;
     public View background;
     public View dragLeft;
     public View dragRight;
@@ -125,6 +117,18 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
         if (!Setup.wasInitialised())
             initStaticHelper();
+
+        if (Setup.appSettings().searchBarTimeEnabled()) {
+            timeChangedReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    final String action = intent.getAction();
+                    if (action.equals(Intent.ACTION_TIME_TICK)) {
+                        updateSearchClock();
+                    }
+                }
+            };
+        }
         
         resources = getResources();
 
@@ -525,7 +529,9 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     private void registerBroadcastReceiver() {
         registerReceiver(appUpdateReceiver, appUpdateIntentFilter);
-        registerReceiver(timeChangedReceiver, timeChangesIntentFilter);
+        if (timeChangedReceiver != null) {
+            registerReceiver(timeChangedReceiver, timeChangesIntentFilter);
+        }
         registerReceiver(shortcutReceiver, shortcutIntentFilter);
     }
 

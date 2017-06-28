@@ -193,6 +193,11 @@ public class DefaultSettings implements SettingsManager {
     }
 
     @Override
+    public boolean searchBarTimeEnabled() {
+        return true;
+    }
+
+    @Override
     public SimpleDateFormat getUserDateFormat() {
         return null;
     }

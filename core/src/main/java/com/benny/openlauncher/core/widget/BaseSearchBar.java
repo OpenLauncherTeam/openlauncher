@@ -250,6 +250,10 @@ public class BaseSearchBar extends FrameLayout {
     }
 
     public void updateClock() {
+        if (mode == null) {
+            return;
+        }
+
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
         SimpleDateFormat sdf = mode.sdf;
         if (sdf == null) {

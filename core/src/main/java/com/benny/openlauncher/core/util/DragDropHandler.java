@@ -2,6 +2,7 @@ package com.benny.openlauncher.core.util;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.view.DragEvent;
 import android.view.View;
@@ -21,7 +22,13 @@ public class DragDropHandler {
         ClipData data = ClipData.newIntent(DRAG_DROP_INTENT, i);
 
         try {
-            v.startDrag(data, new GoodDragShadowBuilder(v), new DragAction(action), 0);
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                v.startDragAndDrop(data, new GoodDragShadowBuilder(v), new DragAction(action), 0);
+            } else {
+                //noinspection deprecation
+                v.startDrag(data, new GoodDragShadowBuilder(v), new DragAction(action), 0);
+            }
+
             if (eventAction != null) {
                 eventAction.afterDrag(v);
             }
