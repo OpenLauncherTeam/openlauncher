@@ -19,7 +19,6 @@ import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherAction;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
-import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 import com.mikepenz.fastadapter_extensions.drag.ItemTouchCallback;
 import com.mikepenz.fastadapter_extensions.drag.SimpleDragCallback;
 
@@ -79,8 +78,8 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
                 buttonView.setText(isChecked ? R.string.on : R.string.off);
                 AppSettings.get().setMinibarEnable(isChecked);
                 if (Home.launcher != null) {
-                    Home.launcher.drawerLayout.closeDrawers();
-                    Home.launcher.drawerLayout.setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    ((Home) Home.launcher).drawerLayout.closeDrawers();
+                    ((Home) Home.launcher).drawerLayout.setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 }
             }
         });
@@ -104,7 +103,7 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
     @Override
     protected void onStop() {
         if (launcher != null)
-            launcher.initMinibar();
+            ((Home) Home.launcher).initMinibar();
         super.onStop();
     }
 
@@ -113,6 +112,10 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
         Collections.swap(adapter.getAdapterItems(), oldPosition, newPosition);
         adapter.notifyAdapterDataSetChanged();
         return false;
+    }
+
+    @Override
+    public void itemTouchDropped(int i, int i1) {
     }
 
     public static class Item extends AbstractItem<Item, Item.ViewHolder> {
@@ -137,17 +140,9 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
             return R.layout.item_minibar_edit;
         }
 
-        private static final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
-
-        static class ItemFactory implements ViewHolderFactory<ViewHolder> {
-            public ViewHolder create(View v) {
-                return new ViewHolder(v);
-            }
-        }
-
         @Override
-        public ViewHolderFactory<? extends ViewHolder> getFactory() {
-            return FACTORY;
+        public ViewHolder getViewHolder(View v) {
+            return new ViewHolder(v);
         }
 
         @Override

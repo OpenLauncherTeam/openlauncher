@@ -8,10 +8,6 @@ import android.widget.ListView;
 
 import com.benny.openlauncher.util.Tool;
 
-/**
- * Created by BennyKok on 3/3/2017.
- */
-
 public class SwipeListView extends ListView {
     private GestureDetector mGestureDetector;
 

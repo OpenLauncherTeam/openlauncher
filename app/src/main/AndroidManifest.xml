@@ -95,7 +95,7 @@
                 android:resource="@xml/device_admin" />
         </receiver>
         <receiver
-            android:name="com.benny.openlauncher.util.ShortcutReceiver"
+            android:name="com.benny.openlauncher.core.util.ShortcutReceiver"
             android:enabled="true"
             android:exported="true" />
 

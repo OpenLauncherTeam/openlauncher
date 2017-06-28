@@ -14,14 +14,17 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.viewutil.IconLabelItem;
+import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.AppDeleteListener;
+import com.benny.openlauncher.core.interfaces.AppUpdateListener;
+import com.benny.openlauncher.model.IconLabelItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,11 +44,10 @@ public class AppManager {
     private PackageManager packageManager;
     private List<App> apps = new ArrayList<>();
     private List<App> nonFilteredApps = new ArrayList<>();
-    public List<AppUpdatedListener> updateListeners = new ArrayList<>();
-    public List<AppDeletedListener> deleteListeners = new ArrayList<>();
+    public final List<AppUpdateListener<App>> updateListeners = new ArrayList<>();
+    public final List<AppDeleteListener<App>> deleteListeners = new ArrayList<>();
     public boolean recreateAfterGettingApps;
 
-    private List<AppUpdatedListener> updateListenersToRemove = new ArrayList<>();
     private AsyncTask task;
 
     public static AppManager getInstance(Context context) {
@@ -79,23 +81,10 @@ public class AppManager {
     public void clearListener() {
         updateListeners.clear();
         deleteListeners.clear();
-        updateListenersToRemove.clear();
     }
 
     public void init() {
         getAllApps();
-    }
-
-    public void addAppUpdatedListener(AppUpdatedListener listener) {
-        updateListeners.add(listener);
-    }
-
-    public void removeAppUpdatedListener(AppUpdatedListener listener) {
-        updateListenersToRemove.add(listener);
-    }
-
-    public void addAppDeletedListener(AppDeletedListener listener) {
-        deleteListeners.add(listener);
     }
 
     private void getAllApps() {
@@ -185,7 +174,7 @@ public class AppManager {
             });
 
             for (ResolveInfo info : activitiesInfo) {
-                App app = new App(info, packageManager);
+                App app = new App(context, info, packageManager);
                 nonFilteredApps.add(app);
             }
 
@@ -205,7 +194,7 @@ public class AppManager {
                 }
             } else {
                 for (ResolveInfo info : activitiesInfo)
-                    apps.add(new App(info, packageManager));
+                    apps.add(new App(context, info, packageManager));
             }
 
             AppSettings appSettings = AppSettings.get();
@@ -217,8 +206,12 @@ public class AppManager {
 
         @Override
         protected void onPostExecute(Object result) {
-            for (AppUpdatedListener listener : updateListeners) {
-                listener.onAppUpdated(apps);
+
+            Iterator<AppUpdateListener<App>> iter = updateListeners.iterator();
+            while (iter.hasNext()) {
+                if (iter.next().onAppUpdated(apps)) {
+                    iter.remove();
+                }
             }
 
             if (tempApps.size() > apps.size()) {
@@ -229,16 +222,10 @@ public class AppManager {
                         break;
                     }
                 }
-                for (AppDeletedListener listener : deleteListeners) {
+                for (AppDeleteListener<App> listener : deleteListeners) {
                     listener.onAppDeleted(temp);
                 }
             }
-
-
-            for (AppUpdatedListener listener : updateListenersToRemove) {
-                updateListeners.remove(listener);
-            }
-            updateListenersToRemove.clear();
 
             if (recreateAfterGettingApps) {
                 recreateAfterGettingApps = false;
@@ -250,12 +237,12 @@ public class AppManager {
         }
     }
 
-    public static class App {
+    public static class App implements com.benny.openlauncher.core.interfaces.App {
         public String label, packageName, className;
         public Drawable icon;
         public ResolveInfo info;
 
-        public App(ResolveInfo info, PackageManager pm) {
+        public App(Context context, ResolveInfo info, PackageManager pm) {
             this.info = info;
 
             icon = info.loadIcon(pm);
@@ -264,22 +251,42 @@ public class AppManager {
             className = info.activityInfo.name;
 
             if (packageName.equals("com.benny.openlauncher")) {
-                label = "OLSettings";
+                label = context.getString(R.string.ol_settings);
             }
         }
 
         @Override
         public boolean equals(Object o) {
             if (o instanceof App) {
-                AppManager.App temp = (App) o;
+                App temp = (App) o;
                 return this.packageName.equals(temp.packageName);
             } else {
                 return false;
             }
         }
+
+        @Override
+        public String getLabel() {
+            return label;
+        }
+
+        @Override
+        public String getPackageName() {
+            return packageName;
+        }
+
+        @Override
+        public String getClassName() {
+            return className;
+        }
+
+        @Override
+        public Drawable getIcon() {
+            return icon;
+        }
     }
 
-    public static abstract class AppUpdatedListener {
+    public static abstract class AppUpdatedListener implements AppUpdateListener<App> {
         private String listenerID;
 
         public AppUpdatedListener() {
@@ -290,11 +297,5 @@ public class AppManager {
         public boolean equals(Object obj) {
             return obj instanceof AppUpdatedListener && ((AppUpdatedListener) obj).listenerID.equals(this.listenerID);
         }
-
-        public abstract void onAppUpdated(List<App> apps);
-    }
-
-    public interface AppDeletedListener {
-        void onAppDeleted(App app);
     }
 }

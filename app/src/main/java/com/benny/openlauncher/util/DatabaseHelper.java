@@ -13,7 +13,7 @@ import com.benny.openlauncher.model.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openlauncher.core.interfaces.DatabaseHelper<Item> {
     private static final String DATABASE_HOME = "home.db";
     private static final String TABLE_HOME = "home";
     private static final String TABLE_GESTURE = "gesture";
@@ -73,21 +73,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void createItem(Item item, int page, int desktop) {
         ContentValues itemValues = new ContentValues();
-        itemValues.put(COLUMN_TIME, item.idValue);
+        itemValues.put(COLUMN_TIME, item.getId());
         itemValues.put(COLUMN_TYPE, item.type.toString());
-        itemValues.put(COLUMN_LABEL, item.name);
+        itemValues.put(COLUMN_LABEL, item.getLabel());
         itemValues.put(COLUMN_X_POS, item.x);
         itemValues.put(COLUMN_Y_POS, item.y);
 
         String concat = "";
         switch (item.type) {
             case APP:
-                Tool.saveIcon(context, Tool.drawableToBitmap(item.icon), Integer.toString(item.idValue));
+                Tool.saveIcon(context, Tool.drawableToBitmap(item.icon), Integer.toString(item.getId()));
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.intent));
                 break;
             case GROUP:
                 for (Item tmp : item.items) {
-                    concat += tmp.idValue + "#";
+                    concat += tmp.getId() + "#";
                 }
                 itemValues.put(COLUMN_DATA, concat);
                 break;
@@ -110,7 +110,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void deleteItem(Item item) {
-        db.delete(TABLE_HOME, COLUMN_TIME + " = ?", new String[]{String.valueOf(item.idValue)});
+        db.delete(TABLE_HOME, COLUMN_TIME + " = ?", new String[]{String.valueOf(item.getId())});
     }
 
     public List<List<Item>> getDesktop() {
@@ -167,7 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int pageCounter = 0;
         for (List<Item> page : desktop) {
             for (Item item : page) {
-                String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
+                String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
                 Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
                 if (cursor.getCount() == 0) {
                     createItem(item, pageCounter, 1);
@@ -181,7 +181,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void setDock(List<Item> dock) {
         for (Item item : dock) {
-            String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
+            String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
             Cursor cursorItem = db.rawQuery(SQL_QUERY_SPECIFIC, null);
             if (cursorItem.getCount() == 0) {
                 createItem(item, 0, 0);
@@ -192,7 +192,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void setItem(Item item, int page, int desktop) {
-        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.idValue;
+        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
         Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
         if (cursor.getCount() == 0) {
             createItem(item, page, desktop);
@@ -204,18 +204,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // update data attributes for an item
     public void updateItem(Item item) {
         ContentValues itemValues = new ContentValues();
-        itemValues.put(COLUMN_LABEL, item.name);
+        itemValues.put(COLUMN_LABEL, item.getLabel());
         itemValues.put(COLUMN_X_POS, item.x);
         itemValues.put(COLUMN_Y_POS, item.y);
         String concat = "";
         switch (item.type) {
             case APP:
-                Tool.saveIcon(context, Tool.drawableToBitmap(item.icon), Integer.toString(item.idValue));
+                Tool.saveIcon(context, Tool.drawableToBitmap(item.icon), Integer.toString(item.getId()));
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.intent));
                 break;
             case GROUP:
                 for (Item tmp : item.items) {
-                    concat += tmp.idValue + "#";
+                    concat += tmp.getId() + "#";
                 }
                 itemValues.put(COLUMN_DATA, concat);
                 break;
@@ -229,14 +229,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 itemValues.put(COLUMN_DATA, concat);
                 break;
         }
-        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.idValue, null);
+        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
     }
 
     // update the state of an item
     public void updateItem(Item item, int state) {
         ContentValues itemValues = new ContentValues();
         itemValues.put(COLUMN_STATE, state);
-        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.idValue, null);
+        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
     }
 
     // update the fields only used by the database
@@ -254,8 +254,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int y = Integer.parseInt(cursor.getString(4));
         String data = cursor.getString(5);
 
-        item.idValue = id;
-        item.name = label;
+        item.setId(id);
+        item.setLabel(label);
         item.x = x;
         item.y = y;
         item.type = type;
@@ -264,7 +264,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         switch (type) {
             case APP:
             case SHORTCUT:
-                item.icon = Tool.getIcon(Home.launcher, Integer.toString(item.idValue));
+                item.icon = Tool.getIcon(Home.launcher, Integer.toString(item.getId()));
                 item.intent = Tool.getIntentFromString(data);
                 break;
             case GROUP:

@@ -11,10 +11,6 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
-/**
- * Created by BennyKok on 11/28/2016.
- */
-
 public class RoundDrawable extends Drawable {
 
     Bitmap bmp;

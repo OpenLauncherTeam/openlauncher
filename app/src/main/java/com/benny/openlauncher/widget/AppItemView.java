@@ -1,8 +1,6 @@
 package com.benny.openlauncher.widget;
 
-import android.content.ClipData;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,20 +15,17 @@ import android.view.View;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.DragAction;
+import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.viewutil.DesktopCallBack;
-import com.benny.openlauncher.viewutil.GoodDragShadowBuilder;
+import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 
-/**
- * Created by BennyKok on 10/23/2016
- */
-
-public class AppItemView extends View implements Drawable.Callback {
+public class AppItemView extends View implements Drawable.Callback, com.benny.openlauncher.core.interfaces.AppItemView {
     private Drawable icon;
     private String label;
     private Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -43,6 +38,10 @@ public class AppItemView extends View implements Drawable.Callback {
     private int targetedWidth;
     private int targetedHeightPadding;
     private float heightPadding;
+
+    public View getView() {
+        return this;
+    }
 
     public Drawable getIcon() {
         return icon;
@@ -188,7 +187,7 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setAppItem(final Item item, final AppManager.App app) {
-            view.setLabel(item.name);
+            view.setLabel(item.getLabel());
             view.setIcon(app.icon);
             view.setOnClickListener(new OnClickListener() {
                 @Override
@@ -205,7 +204,7 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setShortcutItem(final Item item) {
-            view.setLabel(item.name);
+            view.setLabel(item.getLabel());
             view.setIcon(item.icon);
             view.setOnClickListener(new OnClickListener() {
                 @Override
@@ -222,12 +221,12 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setGroupItem(Context context, final DesktopCallBack callback, final Item item) {
-            view.setLabel(item.name);
+            view.setLabel(item.getLabel());
             view.setIcon(new GroupIconDrawable(context, item));
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Home.launcher != null && Home.launcher.groupPopup.showWindowV(item, v, callback)) {
+                    if (Home.launcher != null && ((Home)Home.launcher).groupPopup.showWindowV(item, v, callback)) {
                         ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
                     }
                 }
@@ -236,7 +235,7 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         public Builder setActionItem(Item item) {
-            view.setLabel(item.name);
+            view.setLabel(item.getLabel());
             view.setIcon(Home.launcher.getResources().getDrawable(R.drawable.ic_app_drawer_24dp));
             switch (item.actionValue) {
                 case 8:
@@ -270,18 +269,7 @@ public class AppItemView extends View implements Drawable.Callback {
                     if (view.vibrateWhenLongPress) {
                         v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                     }
-                    Intent i = new Intent();
-                    i.putExtra("mDragData", item);
-                    ClipData data = ClipData.newIntent("mDragIntent", i);
-
-                    try {
-                        v.startDrag(data, new GoodDragShadowBuilder(v), new DragAction(action), 0);
-                        if (eventAction != null) {
-                            eventAction.afterDrag(v);
-                        }
-                    } catch (IllegalStateException e) {
-                        e.printStackTrace();
-                    }
+                    DragDropHandler.startDrag(v, item, action, eventAction);
                     return true;
                 }
             });
@@ -306,12 +294,6 @@ public class AppItemView extends View implements Drawable.Callback {
         public Builder vibrateWhenLongPress() {
             view.vibrateWhenLongPress = true;
             return this;
-        }
-
-        public interface LongPressCallBack {
-            boolean readyForDrag(View view);
-
-            void afterDrag(View view);
         }
     }
 }
