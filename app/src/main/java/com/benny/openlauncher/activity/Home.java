@@ -54,6 +54,7 @@ import com.benny.openlauncher.viewutil.IconListAdapter;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.viewutil.QuickCenterItem;
 import com.benny.openlauncher.widget.AppItemView;
+import com.benny.openlauncher.widget.LauncherLoadingIcon;
 import com.benny.openlauncher.widget.MiniPopupView;
 import com.benny.openlauncher.widget.SwipeListView;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -83,6 +84,10 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     public MiniPopupView miniPopup;
     @BindView(R.id.shortcutLayout)
     public RelativeLayout shortcutLayout;
+    @BindView(R.id.loadingIcon)
+    public LauncherLoadingIcon loadingIcon;
+    @BindView(R.id.loadingSplash)
+    public FrameLayout loadingSplash;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
     private CallLogObserver callLogObserver;
 
@@ -101,6 +106,13 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     {
         super.bindViews();
         unbinder = ButterKnife.bind(this);
+
+        loadingSplash.animate().alpha(0).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                myScreen.removeView(loadingSplash);
+            }
+        });
     }
 
     @Override

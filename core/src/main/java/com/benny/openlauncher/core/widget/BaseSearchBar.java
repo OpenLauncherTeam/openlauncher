@@ -262,7 +262,7 @@ public class BaseSearchBar extends FrameLayout {
         }
         String text = sdf.format(calendar.getTime());
         String[] lines = text.split("\n");
-        Spannable span = new SpannableString(lines[0] + "\n" + lines[1]);
+        Spannable span = new SpannableString(text);
         span.setSpan(new RelativeSizeSpan(searchClockSubTextFactor), lines[0].length() + 1, lines[0].length() + 1 + lines[1].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         searchClock.setText(span);
     }

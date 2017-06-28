@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="info">Info</string>
-    <string name="uninstall">Deinstallieren</string>
-    <string name="widget">Widget</string>
-    <string name="remove">Entfernen</string>
-
-    <string name="toast_not_enough_space">Nicht genügend Platz</string>
-    <string name="toast_app_uninstalled">Die App wurde deinstalliert.</string>
     <string name="toast_free_ram">Freier Speicher: %1$d mb frei gegeben %2$d mb</string>
     <string name="toast_free_all_ram">Freier Speicher: %1$d mb dein Ram ist in einem guten Zustand</string>
     <string name="toast_device_admin_required">Bitte \"Geräteadministrator\" aktivieren.</string>
@@ -18,8 +11,6 @@
     <string name="wallpaper">Wallpaper</string>
     <string name="wallpaper_pick">Suche Wallpaper aus</string>
     <string name="wallpaper_unable_to_blur">Kann Blureffekt nicht anwenden.</string>
-
-    <string name="folder">Ordner</string>
 
     // Intro
 
@@ -53,8 +44,6 @@
     <string name="about_credit">Beteiligte</string>
 
     // Settings
-
-    <string name="settings">Einstellungen</string>
 
     <string name="dialog__icon_pack_title">Wähle ein Icon Pack aus</string>
     <string name="dialog__icon_pack_info_toast">Du must zuerst die Berechtigung \"Manifest.permission.READ_EXTERNAL_STORAGE\" gewähren.</string>
@@ -115,9 +104,7 @@
     <string name="request_toast">Nichts ausgewählt. Alle Anwendungen im Drawer anzeigen?</string>
     <string name="minibar_0">Edit</string>
     <string name="minibar">Minibar</string>
-    <string name="edit">Bearbeiten</string>
     <string name="action">Aktion</string>
-    <string name="lock">Sperren</string>
     <string name="pref_title__desktop">Desktop</string>
     <string name="pref_title__dock">Dock</string>
     <string name="pref_title__app_drawer">App Drawer</string>
@@ -134,8 +121,6 @@
     <string name="pref_title__clear_database">Datenbank zurücksetzen</string>
     <string name="columns">Spalten</string>
     <string name="rows">Zeilen</string>
-    <string name="search_online">ONLINE SUCHEN</string>
-    <string name="search_hint">Suchen...</string>
     <string name="pref_summary__drawer_remember_position">Die aktuelle Position im App Drawer merken</string>
     <string name="pref_summary__clear_database">Die Daten von Desktop und Dock zurücksetzen um Probleme zu beheben</string>
     <string name="pref_title__desktop_double_tap">Doppelt antippen</string>

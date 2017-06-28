@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="info">Info</string>
+    <string name="uninstall">Deinstallieren</string>
+    <string name="widget">Widget</string>
+    <string name="remove">Entfernen</string>
+
+    <string name="toast_not_enough_space">Nicht genügend Platz</string>
+    <string name="toast_app_uninstalled">Die App wurde deinstalliert.</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="home">Home</string>
+
+    <string name="folder">Ordner</string>
+
+    // Intro
+
+    // MiniBar
+
+    // About
+
+    // Settings
+
+    <string name="settings">Einstellungen</string>
+
+    //Icon hide
+
+    <string name="edit">Bearbeiten</string>
+    <string name="lock">Sperren</string>
+    <string name="search_hint">Suchen...</string>
+    <string name="search_online">ONLINE SUCHEN</string>
+    <string name="action">Aktion</string>
+
+</resources>

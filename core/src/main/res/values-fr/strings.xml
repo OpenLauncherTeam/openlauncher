@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Titles -->
+    <string name="settings">Paramètres</string>
+
+    <!-- Drag Option View -->
+
+    <string name="edit">Modifier</string>
+    <string name="info">Info</string>
+    <string name="uninstall">Désinstaller</string>
+    <string name="remove">Supprimer</string>
+
+    <!-- Desktop Option View -->
+    <string name="home">Accueil</string>
+    <string name="action">Action</string>
+    <string name="lock">Verrouiller</string>
+    <string name="widget">Widget</string>
+
+    <!-- Toasts -->
+
+    <string name="toast_not_enough_space">Espace insuffisant</string>
+    <string name="toast_app_uninstalled">Cette appli a été désinstallée.</string>
+
+    <!-- Intro -->
+
+    <!-- Minibar -->
+
+    <!-- About -->
+
+    <!-- Settings -->
+
+    <!-- Item Labels -->
+
+    <string name="folder">Aucun nom</string>
+
+    <!-- Dialogs -->
+
+    <string name="cancel">Annuler</string>
+    <string name="search_online">RECHERCHE EN LIGNE</string>
+</resources>

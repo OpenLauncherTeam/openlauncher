@@ -3,28 +3,15 @@
 
     <!-- Titles -->
 
-    <string name="settings">Settings</string>
     <string name="minibar">Minibar</string>
     <string name="ol_settings">OLSettings</string>
 
     <!-- Drag Option View -->
 
-    <string name="edit">Edit</string>
-    <string name="info">Info</string>
-    <string name="uninstall">Uninstall</string>
-    <string name="remove">Remove</string>
-
     <!-- Desktop Option View -->
-
-    <string name="home">Home</string>
-    <string name="action">Action</string>
-    <string name="lock">Lock</string>
-    <string name="widget">Widget</string>
 
     <!-- Toasts -->
 
-    <string name="toast_not_enough_space">Not enough space.</string>
-    <string name="toast_app_uninstalled">App uninstalled.</string>
     <string name="toast_free_ram">Free Memory: %1$d MB. Saved %2$d MB.</string>
     <string name="toast_free_all_ram">Free Memory: %1$d MB. Your RAM is in best state.</string>
     <string name="toast_device_admin_required">Please enable device administration.</string>
@@ -98,7 +85,6 @@
     <string name="pref_summary__search_bar_base_uri">Set the URI used for web searches.</string>
     <string name="pref_dialog__search_bar_base_uri">Enter the URI that should be used for web searches. The tag {query} can be used as
       placeholder for the search query, in case no placeholder is used the search query will be appended at the end of the URI.</string>
-    <string name="pref_default__search_bar_base_uri" translatable="false">https://www.startpage.com/do/search?query={query}</string>
     <string name="pref_title__desktop_background_color">Background</string>
     <string name="pref_title__desktop_folder_color">Folder</string>
     <string name="pref_title__minibar_background_color" translatable="false">@string/minibar</string>
@@ -223,8 +209,6 @@
 
     <!-- Item Labels -->
 
-    <string name="folder">Unnamed</string>
-
     <!-- Dialogs -->
 
     <string name="request_dummy_text">Hello world!</string>
@@ -234,7 +218,6 @@
     <string name="desktop_action">Desktop Action</string>
     <string name="select_app">Select App</string>
     <string name="off">Off</string>
-    <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="version">Version</string>
     <string name="wallpaper">Wallpaper</string>
@@ -248,8 +231,6 @@
     <string name="dialog__backup_app_settings__error">Something went wrong.</string>
     <string name="columns">Columns</string>
     <string name="rows">Rows</string>
-    <string name="search_online">Search online&#8230;</string>
-    <string name="search_hint">Search...</string>
     <string name="memory">Memory</string>
     <string name="storage">Storage</string>
     <string name="volume_level_ringtone">Ringtone</string>

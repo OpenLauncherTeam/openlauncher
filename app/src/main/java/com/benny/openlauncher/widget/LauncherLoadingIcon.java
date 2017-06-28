@@ -1,4 +1,4 @@
-package com.benny.openlauncher.core.widget;
+package com.benny.openlauncher.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,7 +7,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.benny.openlauncher.core.R;
+import com.benny.openlauncher.R;
 
 public class LauncherLoadingIcon extends FrameLayout {
     private static final AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();

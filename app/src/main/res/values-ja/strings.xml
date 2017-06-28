@@ -2,21 +2,13 @@
 <resources>
 
     <!-- Titles -->
-    <string name="settings">設定</string>
     <string name="minibar">ミニバー</string>
     <string name="pref_title__about">アプリについて</string>
 
     <!-- Edit Mode -->
 
-    <string name="info">情報</string>
-    <string name="uninstall">アンインストール</string>
-    <string name="widget">ウィジェット</string>
-    <string name="remove">削除</string>
-
     <!-- Toasts -->
 
-    <string name="toast_not_enough_space">容量が不足しています</string>
-    <string name="toast_app_uninstalled">このアプリはアンインストールされました。</string>
     <string name="toast_free_ram">空きメモリ: %1$d mb 節約 %2$d mb</string>
     <string name="toast_free_all_ram">空きメモリ: %1$d mb RAM は最高の状態です</string>
     <string name="toast_device_admin_required">デバイス管理を有効にしてください</string>
@@ -113,12 +105,9 @@
     <string name="request_toast">アプリが選択されていません。 ドロワーにすべてのアプリを表示しますか?</string>
     <string name="on">オン</string>
     <string name="off">オフ</string>
-    <string name="cancel">キャンセル</string>
     <string name="ok">OK</string>
-    <string name="home">ホーム</string>
     <string name="wallpaper">壁紙</string>
     <string name="wallpaper_pick">壁紙の選択</string>
     <string name="wallpaper_unable_to_blur">ぼかすことができません</string>
-    <string name="folder">名前なし</string>
 
 </resources>

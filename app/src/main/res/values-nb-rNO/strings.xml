@@ -2,27 +2,15 @@
 <resources>
 
     <!-- Titles -->
-    <string name="settings">Innstillinger</string>
     <string name="minibar">Sidepanel</string>
     <string name="pref_title__about">Om</string>
 
     <!-- Drag Option View -->
 
-    <string name="edit">Rediger</string>
-    <string name="info">Info</string>
-    <string name="uninstall">Avinstaller</string>
-    <string name="remove">Fjern</string>
-
     <!-- Desktop Option View -->
-    <string name="home">Hjem</string>
-    <string name="action">Handling</string>
-    <string name="lock">Lås</string>
-    <string name="widget">Miniprogram</string>
 
     <!-- Toasts -->
 
-    <string name="toast_not_enough_space">Ikke nok plass</string>
-    <string name="toast_app_uninstalled">Program avinstallert.</string>
     <string name="toast_free_ram">Ledig minne: %1$d MB frigjorde %2$d MB</string>
     <string name="toast_free_all_ram">Ledig minne: %1$d MB All RAM i beste velstand</string>
     <string name="toast_device_admin_required">Skru på enhetsadministrasjon</string>
@@ -130,8 +118,6 @@
 
     <!-- Item Labels -->
 
-    <string name="folder">Uten navn</string>
-
     <!-- Dialogs -->
 
     <string name="request_dummy_text">Hei verden!</string>
@@ -139,7 +125,6 @@
     <string name="request_toast">Ingen programmer installert. Vis alle programmer i skuff?</string>
     <string name="on">På</string>
     <string name="off">Av</string>
-    <string name="cancel">Avbryt</string>
     <string name="ok">OK</string>
     <string name="wallpaper">Bakgrunnsbilde</string>
     <string name="wallpaper_pick">Velg bakgrunnsbilde</string>
@@ -152,5 +137,4 @@
     <string name="dialog__backup_app_settings__error">Noe gikk galt.</string>
     <string name="columns">Kolonner</string>
     <string name="rows">Rader</string>
-    <string name="search_online">SØK PÅ NETT</string>
 </resources>
