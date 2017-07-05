@@ -43,8 +43,7 @@ public class GroupIconDrawable extends Drawable {
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {
             if (i < item.items.size() && item.items.get(i) != null) {
-//                icons[i] = Tool.drawableToBitmap(Tool.getIcon(context, Integer.toString(item.items.get(i).idValue)));
-                icons[i] = Tool.drawableToBitmap(Tool.getIcon(context, item.items.get(i)));
+                icons[i] = Tool.drawableToBitmap(AppManager.getInstance(context).findApp(item.items.get(i).intent).icon);
             } else {
                 icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
             }

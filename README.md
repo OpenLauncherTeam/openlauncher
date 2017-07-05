@@ -36,6 +36,7 @@ You can support us and buy us some coffee.
 * [TeamBrainStorm](https://github.com/TeamBrainStorm) very supportive when the project first started.
 * German translation: [GauklerFaun](https://github.com/scoute-dich) 
 * Japanese translation: [Naofum](https://github.com/naofum)
+* Extraction of core: [MFlisar](https://github.com/MFlisar)
 
 There are so many more contributors to list, check them out too.
 
