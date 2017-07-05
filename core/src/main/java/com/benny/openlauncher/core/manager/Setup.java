@@ -13,12 +13,12 @@ import com.benny.openlauncher.core.interfaces.AppDeleteListener;
 import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.DatabaseHelper;
-import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.core.interfaces.DialogHandler;
 import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
+import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 
 import java.util.List;
 
@@ -68,7 +68,9 @@ public abstract class Setup<H extends Home, A extends App, LauncherItem extends 
     // ----------------
 
     public abstract FastItem.LabelItem createSearchBarInternetItem(Context context, int label, @Nullable View.OnClickListener listener);
+
     public abstract FastItem.LabelItem createSearchBarItem(Context context, A app, @Nullable View.OnClickListener listener);
+
     public abstract FastItem.DesktopOptionsItem createDesktopOptionsViewItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, Typeface typeface);
 
     // ----------------
@@ -76,6 +78,7 @@ public abstract class Setup<H extends Home, A extends App, LauncherItem extends 
     // ----------------
 
     public abstract List<AppUpdateListener<A>> getAppUpdatedListener(Context c);
+
     public abstract List<AppDeleteListener<A>> getAppDeletedListener(Context c);
 
     // ----------------
@@ -83,7 +86,9 @@ public abstract class Setup<H extends Home, A extends App, LauncherItem extends 
     // ----------------
 
     public abstract DatabaseHelper<LauncherItem> createDatabaseHelper(Context context);
+
     public abstract DialogHandler getDialogHandler();
+
     public abstract DesktopGestureListener.DesktopGestureCallback getDrawerGestureCallback();
 
     // ----------------
@@ -91,10 +96,15 @@ public abstract class Setup<H extends Home, A extends App, LauncherItem extends 
     // ----------------
 
     public abstract Class<LauncherItem> getItemClass();
+
     public abstract List<LauncherItem> createAllAppItems(Context context);
+
     public abstract LauncherItem newGroupItem();
+
     public abstract LauncherItem newWidgetItem(int appWidgetId);
+
     public abstract LauncherItem newActionItem(int action);
+
     public abstract LauncherItem createShortcut(Intent intent, Drawable icon, String name);
 
     // ----------------
@@ -102,13 +112,22 @@ public abstract class Setup<H extends Home, A extends App, LauncherItem extends 
     // ----------------
 
     public abstract List<A> getAllApps(Context context);
+
     public abstract DrawerAppItem createDrawerAppItem(A app);
+
     public abstract View createDrawerAppItemView(Context context, H home, A app, AppItemView.LongPressCallBack longPressCallBack);
+
     public abstract AppItemView createAppItemViewPopup(Context context, LauncherItem groupItem, A item);
+
     public abstract View getItemView(Context context, LauncherItem item, boolean labelsEnabled, DesktopCallBack callBack);
+
     public abstract void showLauncherSettings(Context context);
+
     public abstract void onAppUpdated(Context p1, Intent p2);
+
     public abstract A findApp(Context c, Intent intent);
+
     public abstract void updateIcon(Context context, V appItemView, LauncherItem currentItem);
+
     public abstract void onItemViewDismissed(V itemView);
 }

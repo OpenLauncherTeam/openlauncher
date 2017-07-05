@@ -61,7 +61,7 @@ public class DragOptionView extends CardView {
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            ((ViewGroup.MarginLayoutParams) getLayoutParams()).topMargin = insets.getSystemWindowInsetTop() + Tool.dp2px(14,getContext());
+            ((ViewGroup.MarginLayoutParams) getLayoutParams()).topMargin = insets.getSystemWindowInsetTop() + Tool.dp2px(14, getContext());
         }
         return insets;
     }
@@ -214,7 +214,7 @@ public class DragOptionView extends CardView {
 
     @Override
     public boolean dispatchDragEvent(DragEvent ev) {
-        final DragEvent event=ev;
+        final DragEvent event = ev;
         boolean r = super.dispatchDragEvent(ev);
         if (r && (ev.getAction() == DragEvent.ACTION_DRAG_STARTED || ev.getAction() == DragEvent.ACTION_DRAG_ENDED)) {
             // If we got a start or end and the return value is true, our

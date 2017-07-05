@@ -59,8 +59,7 @@ public class DesktopGestureListener implements SimpleFingerGestures.OnFingerGest
         return callback.onDrawerGesture(desktop, Type.DoubleTap);
     }
 
-    public interface DesktopGestureCallback
-    {
+    public interface DesktopGestureCallback {
         boolean onDrawerGesture(Desktop desktop, Type event);
     }
 }

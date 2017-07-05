@@ -94,9 +94,9 @@ public class CellContainer extends ViewGroup {
     /**
      * Test whether a moved Item is being moved over an existing Item and if so move the
      * existing Item out of the way. <P>
-     *
+     * <p>
      * TODO: Need to handle the dragged item having a size greater than 1x1
-     *
+     * <p>
      * TODO: Need to handle moving the target back if the final drop location is not where the Item was moved from
      *
      * @param event - the drag event that contains the current x,y position
@@ -229,11 +229,11 @@ public class CellContainer extends ViewGroup {
 
     /**
      * Locate the first 1x1 empty space near but not equal to the supplied starting position.
-     *
+     * <p>
      * TODO: check this won't return the starting point if the starting point is surrounded by two occupied cells in each direction
      *
-     * @param cx - starting x coordinate
-     * @param cy - starting y coordinate
+     * @param cx            - starting x coordinate
+     * @param cy            - starting y coordinate
      * @param peekDirection - direction to look first or null
      * @return the first empty space or null if no free space found
      */

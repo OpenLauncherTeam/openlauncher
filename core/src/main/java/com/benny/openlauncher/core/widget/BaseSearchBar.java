@@ -56,6 +56,7 @@ public class BaseSearchBar extends FrameLayout {
             this.sdf = sdf;
         }
     }
+
     public TextView searchClock;
     public AppCompatImageView searchButton;
     public AppCompatEditText searchInput;
@@ -119,7 +120,7 @@ public class BaseSearchBar extends FrameLayout {
     }
 
     private void init() {
-        searchClock = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.view_search_clock,this,false);
+        searchClock = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.view_search_clock, this, false);
         LayoutParams clockParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         clockParams.setMargins(Tool.dp2px(16, getContext()), 0, 0, 0);
         clockParams.gravity = Gravity.START;
@@ -243,7 +244,7 @@ public class BaseSearchBar extends FrameLayout {
             public void onGlobalLayout() {
                 searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 recyclerParams.setMargins(0, Tool.dp2px(50, getContext()) + searchInput.getHeight(), 0, 0);
-                searchRecycler.getLayoutParams().height = ((View)getParent()).getHeight() - searchInput.getHeight();
+                searchRecycler.getLayoutParams().height = ((View) getParent()).getHeight() - searchInput.getHeight();
             }
         });
     }
@@ -274,7 +275,7 @@ public class BaseSearchBar extends FrameLayout {
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             int topInset = insets.getSystemWindowInsetTop();
-            setPadding(getPaddingLeft(), topInset +  Tool.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom());
+            setPadding(getPaddingLeft(), topInset + Tool.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom());
         }
         return insets;
     }

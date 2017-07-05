@@ -118,7 +118,7 @@ public class GroupPopupView extends FrameLayout {
                 });
                 final App app = Setup.get().findApp(c, groupItem.getIntent());
                 if (app == null) {
-                    removeItem(c, callBack, item, groupItem, (V)itemView);
+                    removeItem(c, callBack, item, groupItem, (V) itemView);
                 } else {
                     view.setOnClickListener(new OnClickListener() {
                         @Override

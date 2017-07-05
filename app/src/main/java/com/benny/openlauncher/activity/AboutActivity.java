@@ -22,6 +22,7 @@ import de.psdev.licensesdialog.model.Notices;
 public class AboutActivity extends MaterialAboutActivity {
 
     private static final Notices notices = new Notices();
+
     static {
         notices.addNotice(new Notice("FastAdapter", "https://github.com/mikepenz/FastAdapter", "Mike Penz", new ApacheSoftwareLicense20()));
         notices.addNotice(new Notice("CircularReveal", "https://github.com/ozodrukh/CircularReveal", "Abdullaev Ozodrukh", new MITLicense()));

@@ -2,9 +2,7 @@ package com.benny.openlauncher.viewutil;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
-import android.content.ClipData;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -16,15 +14,14 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
-import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder;
 import com.benny.openlauncher.core.widget.CellContainer;
+import com.benny.openlauncher.core.widget.WidgetView;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.core.util.DragAction;
-import com.benny.openlauncher.core.widget.WidgetView;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppItemView;
 

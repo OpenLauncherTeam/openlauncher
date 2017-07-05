@@ -76,7 +76,7 @@ public class IconLabelItem extends BaseIconLabelItem<Item, IconLabelItem, IconLa
     }
 
     public IconLabelItem withIconGravity(int iconGravity) {
-       this.iconGravity = iconGravity;
+        this.iconGravity = iconGravity;
         return this;
     }
 

@@ -6,9 +6,9 @@ import android.view.View;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
-import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
+import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 
@@ -43,8 +43,7 @@ public abstract class DefaultSetup<H extends Home, A extends App, LauncherItem e
         return deleteListeners;
     }
 
-    public void notifyUpdateListeners(List<A> apps)
-    {
+    public void notifyUpdateListeners(List<A> apps) {
         Iterator<AppUpdateListener<A>> iter = updateListener.iterator();
         while (iter.hasNext()) {
             if (iter.next().onAppUpdated(apps)) {

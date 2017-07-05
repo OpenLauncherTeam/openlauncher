@@ -31,13 +31,13 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.core.interfaces.DialogHandler;
 import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
+import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.core.widget.Desktop;
 import com.benny.openlauncher.core.widget.GroupPopupView;
 import com.benny.openlauncher.model.DrawerAppItem;
@@ -67,8 +67,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 
-public class Home extends com.benny.openlauncher.core.activity.Home implements DrawerLayout.DrawerListener
-{
+public class Home extends com.benny.openlauncher.core.activity.Home implements DrawerLayout.DrawerListener {
     private Unbinder unbinder;
 
     @BindView(R.id.groupPopup)
@@ -101,8 +100,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     }
 
     @Override
-    protected void bindViews()
-    {
+    protected void bindViews() {
         super.bindViews();
         unbinder = ButterKnife.bind(this);
 
@@ -115,8 +113,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     }
 
     @Override
-    protected void unbindViews()
-    {
+    protected void unbindViews() {
         super.unbindViews();
         if (unbinder != null)
             unbinder.unbind();
@@ -284,14 +281,12 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     }
 
     @Override
-    protected void onHandleLauncherPause()
-    {
+    protected void onHandleLauncherPause() {
         super.onHandleLauncherPause();
     }
 
     @Override
-    protected void initStaticHelper()
-    {
+    protected void initStaticHelper() {
         final DialogHandler<Item> dialogHandler = new DialogHandler<Item>() {
             @Override
             public void showPickAction(Context context, final OnAddAppDrawerItemListener listener) {
@@ -481,7 +476,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                                 return true;
                             }
                             case SwipeDown: {
-                                LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(2);
+                                LauncherAction.ActionItem gesture = ((DatabaseHelper) Home.db).getGesture(2);
                                 if (gesture != null && AppSettings.get().isGestureFeedback()) {
                                     Tool.vibrate(desktop);
                                 }
@@ -492,7 +487,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                             case SwipeRight:
                                 return false;
                             case Pinch: {
-                                LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(3);
+                                LauncherAction.ActionItem gesture = ((DatabaseHelper) Home.db).getGesture(3);
                                 if (gesture != null && AppSettings.get().isGestureFeedback()) {
                                     Tool.vibrate(desktop);
                                 }
@@ -500,7 +495,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                                 return true;
                             }
                             case Unpinch: {
-                                LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(4);
+                                LauncherAction.ActionItem gesture = ((DatabaseHelper) Home.db).getGesture(4);
                                 if (gesture != null && AppSettings.get().isGestureFeedback()) {
                                     Tool.vibrate(desktop);
                                 }
@@ -508,8 +503,8 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                                 return true;
                             }
                             case DoubleTap: {
-                                LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(0);
-                                if (gesture != null && AppSettings.get().isGestureFeedback())  {
+                                LauncherAction.ActionItem gesture = ((DatabaseHelper) Home.db).getGesture(0);
+                                if (gesture != null && AppSettings.get().isGestureFeedback()) {
                                     Tool.vibrate(desktop);
                                 }
                                 LauncherAction.RunAction(gesture, desktop.getContext());
@@ -531,6 +526,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             public List<AppUpdateListener<AppManager.App>> getAppUpdatedListener(Context c) {
                 return AppManager.getInstance(c).updateListeners;
             }
+
             public List<AppDeleteListener<AppManager.App>> getAppDeletedListener(Context c) {
                 return AppManager.getInstance(c).deleteListeners;
             }

@@ -31,7 +31,7 @@ public abstract class BaseIconLabelItem<I extends LabelProvider, IconLabelItem e
 
     public IconLabelItem withOnClickListener(@Nullable View.OnClickListener listener) {
         this.listener = listener;
-        return (IconLabelItem)this;
+        return (IconLabelItem) this;
     }
 
     @Override

@@ -1,44 +1,27 @@
 package com.benny.openlauncher.util;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.Service;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.StatFs;
-import android.os.Vibrator;
 import android.provider.ContactsContract;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
-import android.support.v4.app.ActivityCompat;
 import android.text.format.Formatter;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.HapticFeedbackConstants;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,7 +41,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import static android.content.Context.ACTIVITY_SERVICE;
@@ -202,8 +184,7 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
         }
         if (item.type == Item.Type.SHORTCUT) {
             return item.icon;
-        }
-        else {
+        } else {
             AppManager.App app = AppManager.getInstance(context).findApp(item.intent);
             if (app != null)
                 return app.icon;

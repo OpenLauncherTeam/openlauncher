@@ -139,20 +139,20 @@ public class AppDrawerPaged extends SmoothViewPager {
 
             return Setup.get()
                     .createDrawerAppItemView(
-                        getContext(),
-                        home,
-                        app,
-                        new AppItemView.LongPressCallBack() {
-                            @Override
-                            public boolean readyForDrag(View view) {
-                                return Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
-                            }
+                            getContext(),
+                            home,
+                            app,
+                            new AppItemView.LongPressCallBack() {
+                                @Override
+                                public boolean readyForDrag(View view) {
+                                    return Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
+                                }
 
-                            @Override
-                            public void afterDrag(View view) {
-                                home.closeAppDrawer();
-                            }
-                        });
+                                @Override
+                                public void afterDrag(View view) {
+                                    home.closeAppDrawer();
+                                }
+                            });
         }
 
         public Adapter() {

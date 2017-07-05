@@ -113,15 +113,15 @@ public class DialogHelper {
                                     public void onAppSelected(AppManager.App app) {
                                         finalItem.extraData = Tool.getStartAppIntent(app);
                                         onActionSelectedListener.onActionSelected(finalItem);
-                                        ((DatabaseHelper)Home.launcher.db).setGesture(id, finalItem);
+                                        ((DatabaseHelper) Home.launcher.db).setGesture(id, finalItem);
                                     }
                                 });
                             } else if (onActionSelectedListener != null) {
                                 onActionSelectedListener.onActionSelected(item);
-                                ((DatabaseHelper)Home.launcher.db).setGesture(id, item);
+                                ((DatabaseHelper) Home.launcher.db).setGesture(id, item);
                             }
                         } else {
-                            ((DatabaseHelper)Home.launcher.db).deleteGesture(id);
+                            ((DatabaseHelper) Home.launcher.db).deleteGesture(id);
                         }
                         return true;
                     }

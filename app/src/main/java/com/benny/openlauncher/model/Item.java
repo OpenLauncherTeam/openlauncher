@@ -6,7 +6,6 @@ import android.os.Parcel;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.interfaces.LabelProvider;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Tool;
@@ -72,7 +71,7 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item>, 
                 parcel.readStringList(labels);
                 items = new ArrayList<>();
                 for (String s : labels) {
-                    items.add((Item)Home.launcher.db.getItem(Integer.parseInt(s)));
+                    items.add((Item) Home.launcher.db.getItem(Integer.parseInt(s)));
                 }
                 break;
             case ACTION:

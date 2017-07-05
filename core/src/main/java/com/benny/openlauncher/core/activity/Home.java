@@ -19,7 +19,6 @@ import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.interfaces.App;
@@ -123,7 +122,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
                 }
             };
         }
-        
+
         resources = getResources();
 
         launcher = this;
@@ -142,23 +141,21 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     protected abstract void initStaticHelper();
 
-    protected void bindViews()
-    {
+    protected void bindViews() {
         desktop = (Desktop) findViewById(R.id.desktop);
         background = findViewById(R.id.background);
         dragLeft = findViewById(R.id.left);
         dragRight = findViewById(R.id.right);
-        desktopIndicator = (PagerIndicator)findViewById(R.id.desktopIndicator);
-        dock = (Dock)findViewById(R.id.dock);
-        appDrawerController = (AppDrawerController)findViewById(R.id.appDrawerController);
-        baseLayout = (ConstraintLayout)findViewById(R.id.baseLayout);
-        dragOptionView = (DragOptionView)findViewById(R.id.dragOptionPanel);
+        desktopIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
+        dock = (Dock) findViewById(R.id.dock);
+        appDrawerController = (AppDrawerController) findViewById(R.id.appDrawerController);
+        baseLayout = (ConstraintLayout) findViewById(R.id.baseLayout);
+        dragOptionView = (DragOptionView) findViewById(R.id.dragOptionPanel);
         desktopEditOptionView = (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel);
-        searchBar = (BaseSearchBar)findViewById(R.id.searchBar);
+        searchBar = (BaseSearchBar) findViewById(R.id.searchBar);
     }
 
-    protected void unbindViews()
-    {
+    protected void unbindViews() {
         desktop = null;
         background = null;
         dragLeft = null;
@@ -619,7 +616,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
             Setup.appSettings().setAppRestartRequired(false);
 
             Intent restartIntent = new Intent(this, Home.class);
-            PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556,restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+            PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556, restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
             AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, restartIntentP);
             System.exit(0);
@@ -644,8 +641,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         onHandleLauncherPause();
     }
 
-    protected void onHandleLauncherPause()
-    {
+    protected void onHandleLauncherPause() {
         searchBar.collapse();
 
         if (desktop != null) {

@@ -12,7 +12,6 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.IntegerRes;
 
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;

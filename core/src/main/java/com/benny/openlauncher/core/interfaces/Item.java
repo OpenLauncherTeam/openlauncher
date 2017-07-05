@@ -16,17 +16,30 @@ public interface Item<T extends Item> extends LabelProvider, Parcelable {
     }
 
     int getId();
+
     Intent getIntent();
+
     void setLabel(String label);
+
     Type getType();
+
     List<T> getGroupItems();
+
     int getX();
+
     int getY();
+
     void setX(int x);
+
     void setY(int y);
+
     int getSpanX();
+
     int getSpanY();
+
     void setSpanX(int x);
+
     void setSpanY(int y);
+
     void reset();
 }

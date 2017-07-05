@@ -1943,7 +1943,7 @@ public class SmoothViewPager extends ViewGroup {
 					 */
 
 					/*
-					 * Locally do absolute value. mLastMotionY is set to the y value
+                     * Locally do absolute value. mLastMotionY is set to the y value
 					 * of the down event.
 					 */
                 final int activePointerId = mActivePointerId;

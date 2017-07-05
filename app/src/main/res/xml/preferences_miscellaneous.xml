@@ -8,9 +8,9 @@
             android:title="@string/pref_title__backup" />
 
         <Preference
-                android:key="@string/pref_key__clear_database"
-                android:summary="@string/pref_summary__clear_database"
-                android:title="@string/pref_title__clear_database" />
+            android:key="@string/pref_key__clear_database"
+            android:summary="@string/pref_summary__clear_database"
+            android:title="@string/pref_title__clear_database" />
 
         <Preference
             android:key="@string/pref_key__restart"

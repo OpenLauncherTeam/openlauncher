@@ -120,8 +120,7 @@ public class WidgetView extends AppWidgetHostView {
             if (getParent() != null
                     //    hasWindowFocus()
                     && mOriginalWindowAttachCount == getWindowAttachCount()
-                    && !hasPerformedLongPress)
-            {
+                    && !hasPerformedLongPress) {
                 if (onLongPress()) {
                     hasPerformedLongPress = true;
                 }

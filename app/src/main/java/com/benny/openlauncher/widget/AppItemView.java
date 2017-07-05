@@ -15,14 +15,13 @@ import android.view.View;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.DragDropHandler;
+import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 
 public class AppItemView extends View implements Drawable.Callback, com.benny.openlauncher.core.interfaces.AppItemView {
@@ -226,7 +225,7 @@ public class AppItemView extends View implements Drawable.Callback, com.benny.op
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Home.launcher != null && ((Home)Home.launcher).groupPopup.showWindowV(item, v, callback)) {
+                    if (Home.launcher != null && ((Home) Home.launcher).groupPopup.showWindowV(item, v, callback)) {
                         ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
                     }
                 }

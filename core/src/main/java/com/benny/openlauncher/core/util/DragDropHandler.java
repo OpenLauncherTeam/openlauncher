@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.view.DragEvent;
 import android.view.View;
 
-import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder;
 
