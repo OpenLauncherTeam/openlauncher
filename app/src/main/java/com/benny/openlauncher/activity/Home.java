@@ -31,11 +31,11 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.core.interfaces.DesktopGestureListener;
+import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.core.interfaces.DialogHandler;
+import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.Setup;
-import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.widget.Desktop;
@@ -54,6 +54,7 @@ import com.benny.openlauncher.viewutil.IconListAdapter;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.viewutil.QuickCenterItem;
 import com.benny.openlauncher.widget.AppItemView;
+import com.benny.openlauncher.widget.LauncherLoadingIcon;
 import com.benny.openlauncher.widget.MiniPopupView;
 import com.benny.openlauncher.widget.SwipeListView;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -65,7 +66,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
-import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class Home extends com.benny.openlauncher.core.activity.Home implements DrawerLayout.DrawerListener
 {
@@ -83,6 +83,10 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     public MiniPopupView miniPopup;
     @BindView(R.id.shortcutLayout)
     public RelativeLayout shortcutLayout;
+    @BindView(R.id.loadingIcon)
+    public LauncherLoadingIcon loadingIcon;
+    @BindView(R.id.loadingSplash)
+    public FrameLayout loadingSplash;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
     private CallLogObserver callLogObserver;
 
@@ -101,6 +105,13 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     {
         super.bindViews();
         unbinder = ButterKnife.bind(this);
+
+        loadingSplash.animate().alpha(0).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                myScreen.removeView(loadingSplash);
+            }
+        });
     }
 
     @Override
@@ -324,18 +335,37 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public IconLabelItem createSearchBarInternetItem(Context context, int label, @Nullable View.OnClickListener listener) {
-                return new IconLabelItem(context, null, context.getString(label), listener, Color.WHITE, Tool.dp2px(8, context), Tool.dp2px(36, context), true, Gravity.END);
+            public FastItem.LabelItem createSearchBarInternetItem(Context context, int label, @Nullable View.OnClickListener listener) {
+                return new IconLabelItem(context, label)
+                        .withIconGravity(Gravity.START)
+                        .withOnClickListener(listener)
+                        .withTextColor(Color.WHITE)
+                        .withDrawablePadding(context, 8)
+                        .withBold(true)
+                        .withTextGravity(Gravity.END);
             }
 
             @Override
-            public IconLabelItem createSearchBarItem(Context context, AppManager.App app, @Nullable View.OnClickListener listener) {
-                return new IconLabelItem(context, app.getIcon(), app.getLabel(), listener, Color.WHITE, Tool.dp2px(8, context), Tool.dp2px(36, context));
+            public FastItem.LabelItem createSearchBarItem(Context context, AppManager.App app, @Nullable View.OnClickListener listener) {
+                return new IconLabelItem(context, app.getIcon(), app.getLabel(), 36)
+                        .withIconGravity(Gravity.START)
+                        .withOnClickListener(listener)
+                        .withTextColor(Color.WHITE)
+                        .withDrawablePadding(context, 8);
             }
 
             @Override
-            public IconLabelItem createDesktopOptionsViewItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, Typeface typeface) {
-                return new IconLabelItem(context, icon, label, listener, Gravity.TOP, Color.WHITE, Gravity.CENTER, 0, typeface, false, Gravity.CENTER);
+            public FastItem.DesktopOptionsItem createDesktopOptionsViewItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, Typeface typeface) {
+                return new IconLabelItem(context, icon, context.getString(label), -1)
+                        .withOnClickListener(listener)
+                        .withTextColor(Color.WHITE)
+                        .withDrawablePadding(context, 8)
+                        .withIconGravity(Gravity.TOP)
+                        .withGravity(Gravity.CENTER)
+                        .withMatchParent(false)
+                        .withTypeface(typeface)
+                        .withDrawablePadding(context, 0)
+                        .withTextGravity(Gravity.CENTER);
             }
 
             @Override

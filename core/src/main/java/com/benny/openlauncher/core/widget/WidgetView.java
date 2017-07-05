@@ -99,12 +99,9 @@ public class WidgetView extends AppWidgetHostView {
         return longClick.onLongClick(WidgetView.this);
     }
 
-    public void setCustomOnTouchListener(OnTouchListener onTouchListener) {
+    @Override
+    public final void setOnTouchListener(OnTouchListener onTouchListener) {
         this.onTouchListener = onTouchListener;
-    }
-
-    public OnTouchListener getCustomOnTouchListener() {
-        return onTouchListener;
     }
 
     private void postCheckForLongClick() {

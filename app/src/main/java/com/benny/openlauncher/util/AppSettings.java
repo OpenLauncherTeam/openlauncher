@@ -11,6 +11,7 @@ import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.core.widget.Desktop;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import io.github.gsantner.opoc.util.AppSettingsBase;
@@ -58,6 +59,17 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     public String getSearchBarBaseURI() {
         return getString(R.string.pref_key__search_bar_base_uri, R.string.pref_default__search_bar_base_uri);
+    }
+
+    @Override
+    public boolean searchBarTimeEnabled() {
+        return true;
+    }
+
+    @Override
+    public SimpleDateFormat getUserDateFormat() {
+        // TODO: offer some setup for a custom format and save and retrieve it in the database
+        return null;
     }
 
     public int getDesktopColor() {

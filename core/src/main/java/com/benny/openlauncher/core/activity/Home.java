@@ -16,7 +16,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -42,13 +41,10 @@ import com.benny.openlauncher.core.widget.Desktop;
 import com.benny.openlauncher.core.widget.DesktopOptionView;
 import com.benny.openlauncher.core.widget.Dock;
 import com.benny.openlauncher.core.widget.DragOptionView;
-import com.benny.openlauncher.core.widget.LauncherLoadingIcon;
 import com.benny.openlauncher.core.widget.PagerIndicator;
 import com.benny.openlauncher.core.widget.SmoothViewPager;
 
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public abstract class Home extends Activity implements Desktop.OnDesktopEditListener, DesktopOptionView.DesktopOptionViewListener {
     public static final int REQUEST_PICK_APPWIDGET = 0x6475;
@@ -91,15 +87,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     private final BroadcastReceiver shortcutReceiver = new ShortcutReceiver();
     private final BroadcastReceiver appUpdateReceiver = new AppUpdateReceiver();
     public Desktop desktop;
-    private final BroadcastReceiver timeChangedReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (action.equals(Intent.ACTION_TIME_TICK)) {
-                updateSearchClock();
-            }
-        }
-    };
+    private BroadcastReceiver timeChangedReceiver = null;
     public View background;
     public View dragLeft;
     public View dragRight;
@@ -107,8 +95,6 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     public Dock dock;
     public AppDrawerController appDrawerController;
     public ConstraintLayout baseLayout;
-    public LauncherLoadingIcon loadingIcon;
-    public FrameLayout loadingSplash;
     public DragOptionView dragOptionView;
     public DesktopOptionView desktopEditOptionView;
     private PagerIndicator appDrawerIndicator;
@@ -125,6 +111,18 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
         if (!Setup.wasInitialised())
             initStaticHelper();
+
+        if (Setup.appSettings().searchBarTimeEnabled()) {
+            timeChangedReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    final String action = intent.getAction();
+                    if (action.equals(Intent.ACTION_TIME_TICK)) {
+                        updateSearchClock();
+                    }
+                }
+            };
+        }
         
         resources = getResources();
 
@@ -139,12 +137,6 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
-        loadingSplash.animate().alpha(0).withEndAction(new Runnable() {
-            @Override
-            public void run() {
-                myScreen.removeView(loadingSplash);
-            }
-        });
         init();
     }
 
@@ -160,8 +152,6 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         dock = (Dock)findViewById(R.id.dock);
         appDrawerController = (AppDrawerController)findViewById(R.id.appDrawerController);
         baseLayout = (ConstraintLayout)findViewById(R.id.baseLayout);
-        loadingIcon = (LauncherLoadingIcon)findViewById(R.id.loadingIcon);
-        loadingSplash = (FrameLayout)findViewById(R.id.loadingSplash);
         dragOptionView = (DragOptionView)findViewById(R.id.dragOptionPanel);
         desktopEditOptionView = (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel);
         searchBar = (BaseSearchBar)findViewById(R.id.searchBar);
@@ -177,8 +167,6 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         dock = null;
         appDrawerController = null;
         baseLayout = null;
-        loadingIcon = null;
-        loadingSplash = null;
         dragOptionView = null;
         desktopEditOptionView = null;
         searchBar = null;
@@ -525,7 +513,9 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     private void registerBroadcastReceiver() {
         registerReceiver(appUpdateReceiver, appUpdateIntentFilter);
-        registerReceiver(timeChangedReceiver, timeChangesIntentFilter);
+        if (timeChangedReceiver != null) {
+            registerReceiver(timeChangedReceiver, timeChangesIntentFilter);
+        }
         registerReceiver(shortcutReceiver, shortcutIntentFilter);
     }
 

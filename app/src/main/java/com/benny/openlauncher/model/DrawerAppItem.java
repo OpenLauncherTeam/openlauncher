@@ -6,7 +6,7 @@ import android.view.View;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
-import com.benny.openlauncher.core.interfaces.AppItem;
+import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.widget.AppDrawerVertical;
 import com.benny.openlauncher.core.widget.Desktop;
@@ -17,7 +17,7 @@ import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
 
-public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.ViewHolder> implements AppItem<DrawerAppItem, DrawerAppItem.ViewHolder> {
+public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.ViewHolder> implements FastItem.AppItem<DrawerAppItem, DrawerAppItem.ViewHolder> {
     private AppManager.App app;
 
     public DrawerAppItem(AppManager.App app) {

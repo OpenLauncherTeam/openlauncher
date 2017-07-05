@@ -3,25 +3,14 @@
 
     <!-- Titles -->
 
-    <string name="settings">Настройки</string>
     <string name="minibar">Мини-бар</string>
 
     <!-- Drag Option View -->
 
-    <string name="edit">Изменить</string>
-    <string name="info">Информация</string>
-    <string name="uninstall">Удалить</string>
-    <string name="remove">Убрать</string>
-
     <!-- Desktop Option View -->
-
-    <string name="action">Действие</string>
-    <string name="widget">Виджет</string>
 
     <!-- Toasts -->
 
-    <string name="toast_not_enough_space">Недостаточно места.</string>
-    <string name="toast_app_uninstalled">Приложение удалено.</string>
     <string name="toast_free_ram">Свободной памяти: %1$d МБ. Освобождено %2$d МБ.</string>
     <string name="toast_free_all_ram">Свободной памяти: %1$d МБ. Состояние памяти наилучшее.</string>
     <string name="toast_device_admin_required">Пожалуйста, разрешите администрирование устройства.</string>
@@ -133,15 +122,12 @@
 
     <!-- Item Labels -->
 
-    <string name="folder">Без имени</string>
-
     <!-- Dialogs -->
 
     <string name="request_please_wait">Поиск установленных приложений. Подождите.</string>
     <string name="request_toast">Приложения не выбраны. Показать в меню все приложения?</string>
     <string name="on">Вкл</string>
     <string name="off">Выкл</string>
-    <string name="cancel">Отмена</string>
     <string name="ok">OK</string>
     <string name="version">Версия</string>
     <string name="wallpaper">Обои</string>
@@ -155,7 +141,6 @@
     <string name="dialog__backup_app_settings__error">Что-то пошло не так.</string>
     <string name="columns">Столбцы</string>
     <string name="rows">Строки</string>
-    <string name="search_online">Поиск в сети…</string>
     <string name="volume_level_ringtone">Рингтон</string>
     <string name="volume_level_notification">Уведомление</string>
     <string name="volume_level_system">Система</string>

@@ -11,7 +11,6 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
@@ -29,13 +28,14 @@ import android.widget.TextView;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.core.interfaces.IconLabelItem;
+import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.CircleDrawable;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -44,10 +44,17 @@ import java.util.Locale;
 public class BaseSearchBar extends FrameLayout {
 
     public enum Mode {
-        DateAll,
-        DateNoYearAndTime,
-        DateAllAndTime,
-        TimeAndDateAll
+        DateAll(new SimpleDateFormat("MMMM dd\nEEEE, YYYY", Locale.getDefault())),
+        DateNoYearAndTime(new SimpleDateFormat("MMMM dd\nHH:mm", Locale.getDefault())),
+        DateAllAndTime(new SimpleDateFormat("MMMM dd, YYYY\nHH:mm", Locale.getDefault())),
+        TimeAndDateAll(new SimpleDateFormat("HH:mm\nMMMM dd, YYYY", Locale.getDefault())),
+        Custom(null);
+
+        SimpleDateFormat sdf;
+
+        Mode(SimpleDateFormat sdf) {
+            this.sdf = sdf;
+        }
     }
     public TextView searchClock;
     public AppCompatImageView searchButton;
@@ -55,7 +62,7 @@ public class BaseSearchBar extends FrameLayout {
     public RecyclerView searchRecycler;
 
     private static final long ANIM_TIME = 200;
-    private FastItemAdapter<IconLabelItem> adapter = new FastItemAdapter<>();
+    private FastItemAdapter<FastItem.LabelItem> adapter = new FastItemAdapter<>();
     private CallBack callback;
     private boolean expanded;
 
@@ -104,7 +111,9 @@ public class BaseSearchBar extends FrameLayout {
     }
 
     public boolean collapse() {
-        if (!expanded) return false;
+        if (!expanded) {
+            return false;
+        }
         searchButton.callOnClick();
         return !expanded;
     }
@@ -183,7 +192,7 @@ public class BaseSearchBar extends FrameLayout {
             @Override
             public boolean onAppUpdated(List<App> apps) {
                 adapter.clear();
-                List<IconLabelItem> items = new ArrayList<>();
+                List<FastItem.LabelItem> items = new ArrayList<>();
                 if (searchInternetEnabled) {
                     items.add(Setup.get().createSearchBarInternetItem(getContext(), R.string.search_online, new OnClickListener() {
                         @Override
@@ -207,9 +216,9 @@ public class BaseSearchBar extends FrameLayout {
                 return false;
             }
         });
-        adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<IconLabelItem>() {
+        adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<FastItem.LabelItem>() {
             @Override
-            public boolean filter(IconLabelItem item, CharSequence constraint) {
+            public boolean filter(FastItem.LabelItem item, CharSequence constraint) {
                 if (item.getLabel().equals(getContext().getString(R.string.search_online)))
                     return false;
                 String s = constraint.toString();
@@ -221,6 +230,7 @@ public class BaseSearchBar extends FrameLayout {
                     return true;
             }
         });
+
         final LayoutParams recyclerParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         addView(searchClock, clockParams);
@@ -233,6 +243,7 @@ public class BaseSearchBar extends FrameLayout {
             public void onGlobalLayout() {
                 searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 recyclerParams.setMargins(0, Tool.dp2px(50, getContext()) + searchInput.getHeight(), 0, 0);
+                searchRecycler.getLayoutParams().height = ((View)getParent()).getHeight() - searchInput.getHeight();
             }
         });
     }
@@ -242,34 +253,20 @@ public class BaseSearchBar extends FrameLayout {
     }
 
     public void updateClock() {
-        Calendar calendar = Calendar.getInstance(Locale.getDefault());
-        String timeOne = "";
-        String timeTwo = "";
-        switch (mode) {
-            case DateAll: {
-                timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-                timeTwo = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", " + String.valueOf(calendar.get(Calendar.YEAR));
-                break;
-            }
-            case DateNoYearAndTime: {
-                timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-                timeTwo = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(calendar.get(Calendar.MINUTE));
-                break;
-            }
-            case DateAllAndTime:
-            case TimeAndDateAll: {
-                timeOne = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH) + ", " + String.valueOf(calendar.get(Calendar.YEAR)));
-                timeTwo = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(calendar.get(Calendar.MINUTE));
-                if (mode == Mode.TimeAndDateAll) {
-                    String tmp = timeOne;
-                    timeOne = timeTwo;
-                    timeTwo = tmp;
-                }
-                break;
-            }
+        if (!Setup.appSettings().searchBarTimeEnabled()) {
+            searchClock.setText("");
+            return;
         }
-        Spannable span = new SpannableString(timeOne + "\n" + timeTwo);
-        span.setSpan(new RelativeSizeSpan(searchClockSubTextFactor), timeOne.length() + 1, timeOne.length() + 1 + timeTwo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
+        SimpleDateFormat sdf = mode.sdf;
+        if (sdf == null) {
+            sdf = Setup.appSettings().getUserDateFormat();
+        }
+        String text = sdf.format(calendar.getTime());
+        String[] lines = text.split("\n");
+        Spannable span = new SpannableString(text);
+        span.setSpan(new RelativeSizeSpan(searchClockSubTextFactor), lines[0].length() + 1, lines[0].length() + 1 + lines[1].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         searchClock.setText(span);
     }
 

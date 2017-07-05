@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder;
 import com.benny.openlauncher.core.widget.CellContainer;
@@ -24,6 +25,7 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.widget.WidgetView;
+import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppItemView;
 
 public class ItemViewFactory {
@@ -159,6 +161,7 @@ public class ItemViewFactory {
                 };
 
                 widgetContainer.postDelayed(action, 2000);
+                widgetView.setOnTouchListener(Tool.getItemOnTouchListener());
                 widgetView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
@@ -166,10 +169,7 @@ public class ItemViewFactory {
                             return false;
                         }
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                        Intent i = new Intent();
-                        i.putExtra("mDragData", item);
-                        ClipData data = ClipData.newIntent("mDragIntent", i);
-                        view.startDrag(data, new GoodDragShadowBuilder(view), new DragAction(DragAction.Action.WIDGET), 0);
+                        DragDropHandler.startDrag(view, item, DragAction.Action.WIDGET, null);
 
                         callBack.setLastItem(item, widgetContainer);
                         return true;

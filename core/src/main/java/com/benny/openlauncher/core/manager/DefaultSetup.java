@@ -6,7 +6,7 @@ import android.view.View;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
-import com.benny.openlauncher.core.interfaces.AppItem;
+import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.Item;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class DefaultSetup<H extends Home, A extends App, T extends Item, U extends AppItem, V extends View & AppItemView> extends Setup<H, A, T, U, V> {
+public abstract class DefaultSetup<H extends Home, A extends App, LauncherItem extends Item, DrawerAppItem extends FastItem.AppItem, V extends View & AppItemView> extends Setup<H, A, LauncherItem, DrawerAppItem, V> {
 
     private final Context appContext;
     private final SettingsManager settingsManager;

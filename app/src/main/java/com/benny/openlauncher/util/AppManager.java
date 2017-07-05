@@ -9,6 +9,7 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
+import android.view.Gravity;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -109,32 +110,36 @@ public class AppManager {
                 .title((activity.getString(R.string.dialog__icon_pack_title)))
                 .build();
 
-        fastItemAdapter.add(new IconLabelItem(activity, activity.getResources().getDrawable(R.drawable.ic_launcher), "Default", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recreateAfterGettingApps = true;
-                AppSettings.get().setIconPack("");
-                getAllApps();
-                d.dismiss();
-            }
-        }));
+        fastItemAdapter.add(new IconLabelItem(activity, R.drawable.ic_launcher, R.string.label_default, -1)
+                .withIconGravity(Gravity.START)
+                .withOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        recreateAfterGettingApps = true;
+                        AppSettings.get().setIconPack("");
+                        getAllApps();
+                        d.dismiss();
+                    }
+                }));
 
         for (int i = 0; i < resolveInfos.size(); i++) {
             final int mI = i;
-            fastItemAdapter.add(new IconLabelItem(activity, resolveInfos.get(i).loadIcon(packageManager), resolveInfos.get(i).loadLabel(packageManager).toString(), new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                        recreateAfterGettingApps = true;
-                        AppSettings.get().setIconPack(resolveInfos.get(mI).activityInfo.packageName);
-                        getAllApps();
-                        d.dismiss();
-                    } else {
-                        Tool.toast(context, (activity.getString(R.string.dialog__icon_pack_info_toast)));
-                        ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
-                    }
-                }
-            }));
+            fastItemAdapter.add(new IconLabelItem(activity, resolveInfos.get(i).loadIcon(packageManager), resolveInfos.get(i).loadLabel(packageManager).toString(), -1)
+                    .withIconGravity(Gravity.START)
+                    .withOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                                recreateAfterGettingApps = true;
+                                AppSettings.get().setIconPack(resolveInfos.get(mI).activityInfo.packageName);
+                                getAllApps();
+                                d.dismiss();
+                            } else {
+                                Tool.toast(context, (activity.getString(R.string.dialog__icon_pack_info_toast)));
+                                ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
+                            }
+                        }
+                    }));
         }
         d.show();
     }

@@ -2,27 +2,15 @@
 <resources>
 
     <!-- Titles -->
-    <string name="settings">Paramètres</string>
     <string name="minibar">Minibar</string>
     <string name="pref_title__about">À propos</string>
 
     <!-- Drag Option View -->
 
-    <string name="edit">Modifier</string>
-    <string name="info">Info</string>
-    <string name="uninstall">Désinstaller</string>
-    <string name="remove">Supprimer</string>
-
     <!-- Desktop Option View -->
-    <string name="home">Accueil</string>
-    <string name="action">Action</string>
-    <string name="lock">Verrouiller</string>
-    <string name="widget">Widget</string>
 
     <!-- Toasts -->
 
-    <string name="toast_not_enough_space">Espace insuffisant</string>
-    <string name="toast_app_uninstalled">Cette appli a été désinstallée.</string>
     <string name="toast_free_ram">Mémoire disponible : %1$d mb %2$d mb économisé</string>
     <string name="toast_free_all_ram">Mémoire disponible : %1$d mb Votre RAM est en pleine forme</string>
     <string name="toast_device_admin_required">Veuillez activer l\administration de l\'appareil</string>
@@ -121,8 +109,6 @@
 
     <!-- Item Labels -->
 
-    <string name="folder">Aucun nom</string>
-
     <!-- Dialogs -->
 
     <string name="request_dummy_text">Bonjour !</string>
@@ -130,7 +116,6 @@
     <string name="request_toast">Aucune appli sélectionnée. Afficher toutes les applis dans le tiroir ?</string>
     <string name="on">Activé</string>
     <string name="off">Désactivé</string>
-    <string name="cancel">Annuler</string>
     <string name="ok">OK</string>
     <string name="wallpaper">Fond d\'écran</string>
     <string name="wallpaper_pick">Sélectionner un fond d\'écran</string>
@@ -143,5 +128,4 @@
     <string name="dialog__backup_app_settings__error">Une erreur est survenue.</string>
     <string name="columns">Colonnes</string>
     <string name="rows">Lignes</string>
-    <string name="search_online">RECHERCHE EN LIGNE</string>
 </resources>

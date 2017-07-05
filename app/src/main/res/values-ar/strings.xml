@@ -2,27 +2,15 @@
 <resources>
 
     <!-- Titles -->
-    <string name="settings">الإعدادات</string>
     <string name="minibar">الشريط المصغر</string>
     <string name="pref_title__about">حول</string>
 
     <!-- Drag Option View -->
 
-    <string name="edit">تعديل</string>
-    <string name="info">معلومات</string>
-    <string name="uninstall">إلغاء التثبيت</string>
-    <string name="remove">إزالة</string>
-
     <!-- Desktop Option View -->
-    <string name="home">الرئيسية</string>
-    <string name="action">عمل</string>
-    <string name="lock">قفل</string>
-    <string name="widget">أداة</string>
 
     <!-- Toasts -->
 
-    <string name="toast_not_enough_space">المساحة غير كافية</string>
-    <string name="toast_app_uninstalled">تم إلغاء تثبيت التطبيق</string>
     <string name="toast_free_ram">الرام الفارغ: %2$d ميجا بايت، تم تحرير %1$d ميجا بايت</string>
     <string name="toast_free_all_ram">الرام الفارغ: %1$d ميجا بايت، الرام في أفضل حالة.</string>
     <string name="toast_device_admin_required">من فضلك، قم بتفعيل صلاحية مدير الجهاز.</string>
@@ -132,15 +120,12 @@
 
     <!-- Item Labels -->
 
-    <string name="folder">غير مسمى</string>
-
     <!-- Dialogs -->
 
     <string name="request_dummy_text">مرحبا بالعالم!</string>
     <string name="request_toast">لم يتم اختيار تطبيقات، هل تود إظهار كافة التطبيقات في الدرج؟</string>
     <string name="on">تشغيل</string>
     <string name="off">إيقاف</string>
-    <string name="cancel">إلغاء الأمر</string>
     <string name="ok">حسنا</string>
     <string name="wallpaper">صورة الخلفية</string>
     <string name="wallpaper_pick">اختر صورة الخلفية</string>
@@ -153,5 +138,4 @@
     <string name="dialog__backup_app_settings__error">هناك خطأ ما.</string>
     <string name="columns">الأعمدة</string>
     <string name="rows">صفوف</string>
-    <string name="search_online">البحث عبر الإنترنت</string>
 </resources>

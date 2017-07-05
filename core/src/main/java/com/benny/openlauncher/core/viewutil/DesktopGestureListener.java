@@ -1,4 +1,4 @@
-package com.benny.openlauncher.core.interfaces;
+package com.benny.openlauncher.core.viewutil;
 
 import com.benny.openlauncher.core.widget.Desktop;
 

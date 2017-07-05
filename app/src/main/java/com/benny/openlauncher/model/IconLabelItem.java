@@ -6,120 +6,113 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.core.model.BaseIconLabelItem;
 import com.benny.openlauncher.core.util.Tool;
-import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
 
-public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> implements com.benny.openlauncher.core.interfaces.IconLabelItem<IconLabelItem, IconLabelItem.ViewHolder> {
+public class IconLabelItem extends BaseIconLabelItem<Item, IconLabelItem, IconLabelItem.ViewHolder> {
 
     @Override
     public ViewHolder getViewHolder(View v) {
         return new ViewHolder(v);
     }
 
-    public String label;
-    private Drawable icon;
-    private View.OnClickListener listener;
+    private Drawable drawable = null;
+
     private int iconGravity;
     private int textColor = Color.DKGRAY;
     private int gravity = android.view.Gravity.CENTER_VERTICAL;
     private float drawablePadding;
     private Typeface typeface;
     private boolean matchParent = true;
-    private int forceSize = -1;
     private boolean bold = false;
     private int textGravity = Gravity.CENTER_VERTICAL;
 
-    public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int iconGravity) {
+    public IconLabelItem(Context context, int label) {
+        super(context, 0, label);
+    }
+
+    public IconLabelItem(Context context, int icon, String label, int forceSize) {
+        super(null);
         this.label = label;
-        this.icon = icon;
-        this.listener = listener;
-        this.iconGravity = iconGravity;
+        this.drawable = context.getResources().getDrawable(icon);
+        scaleDrawable(context, forceSize);
+    }
 
+    public IconLabelItem(Context context, int icon, int label, int forceSize) {
+        super(null);
+        this.label = context.getString(label);
+        this.drawable = context.getResources().getDrawable(icon);
+        scaleDrawable(context, forceSize);
+    }
+
+    public IconLabelItem(Context context, Drawable icon, String label, int forceSize) {
+        super(null);
+        this.label = label;
+        this.drawable = icon;
+        scaleDrawable(context, forceSize);
+    }
+
+    public IconLabelItem(Context context, Drawable icon, int label, int forceSize) {
+        super(null);
+        this.label = context.getString(label);
+        this.drawable = icon;
+        scaleDrawable(context, forceSize);
+    }
+
+    private void scaleDrawable(Context context, int forceSize) {
+        if (drawable != null && forceSize != -1) {
+            forceSize = Tool.dp2px(forceSize, context);
+
+            this.drawable = new BitmapDrawable(context.getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(drawable), forceSize, forceSize, true));
+        }
+    }
+
+    public IconLabelItem withIconGravity(int iconGravity) {
+       this.iconGravity = iconGravity;
+        return this;
+    }
+
+    public IconLabelItem withDrawablePadding(Context context, int drawablePadding) {
         this.drawablePadding = Tool.dp2px(drawablePadding, context);
+        return this;
     }
 
-    public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener) {
-        this(context, icon, label, listener, Gravity.START);
-    }
-
-    public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int drawablePadding, int forceSize) {
-        this(context, icon, label, listener, Gravity.START);
-        this.drawablePadding = drawablePadding;
-        if (forceSize != -1 && icon != null) {
-            this.icon = new BitmapDrawable(context.getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(icon), forceSize, forceSize, true));
-        }
-    }
-
-    public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int textColor, int drawablePadding, int forceSize) {
-        this(context, icon, label, listener, Gravity.START);
+    public IconLabelItem withTextColor(int textColor) {
         this.textColor = textColor;
-        this.drawablePadding = drawablePadding;
-        this.forceSize = forceSize;
-        if (forceSize != -1 && icon != null) {
-            this.icon = new BitmapDrawable(context.getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(icon), forceSize, forceSize, true));
-        }
+        return this;
     }
 
-    public IconLabelItem(Context context, Drawable icon, String label, @Nullable View.OnClickListener listener, int textColor, int drawablePadding, int forceSize, boolean bold, int textGravity) {
-        this(context, icon, label, listener, Gravity.START);
-        this.textColor = textColor;
-        this.drawablePadding = drawablePadding;
-        this.forceSize = forceSize;
-        if (forceSize != -1 && icon != null) {
-            this.icon = new BitmapDrawable(context.getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(icon), forceSize, forceSize, true));
-        }
+    public IconLabelItem withBold(boolean bold) {
         this.bold = bold;
-        this.textGravity = textGravity;
+        return this;
     }
 
-    public IconLabelItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, int iconGravity, int textColor, int gravity, int drawablePadding, Typeface typeface) {
-        this(context, context.getResources().getDrawable(icon), context.getResources().getString(label), listener, iconGravity);
-        this.textColor = textColor;
-        this.gravity = gravity;
-        this.drawablePadding = Tool.dp2px(drawablePadding, context);
+    public IconLabelItem withTypeface(Typeface typeface) {
         this.typeface = typeface;
+        return this;
     }
 
-    public IconLabelItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, int iconGravity, int textColor, int gravity, int drawablePadding, Typeface typeface, boolean matchParent, int textGravity) {
-        this(context, icon, label, listener, iconGravity, textColor, gravity, Tool.dp2px(drawablePadding, context), typeface);
-        this.matchParent = matchParent;
-        this.textGravity = textGravity;
-    }
-
-    public void setIcon(Drawable icon) {
-        this.icon = icon;
-    }
-
-    public void setGravity(int gravity) {
+    public IconLabelItem withGravity(int gravity) {
         this.gravity = gravity;
+        return this;
     }
 
-    public void setTextColor(int textColor) {
-        this.textColor = textColor;
+    public IconLabelItem withTextGravity(int textGravity) {
+        this.textGravity = textGravity;
+        return this;
     }
 
-    @Override
-    public void setIcon(Context context, int resId) {
-        this.icon = context.getResources().getDrawable(resId);
-    }
-
-    @Override
-    public String getLabel() {
-        return label;
-    }
-
-    @Override
-    public int getType() {
-        return R.id.id_adapter_icon_label_item;
+    public IconLabelItem withMatchParent(boolean matchParent) {
+        this.matchParent = matchParent;
+        return this;
     }
 
     @Override
@@ -131,27 +124,31 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     public void bindView(IconLabelItem.ViewHolder holder, List payloads) {
         if (matchParent)
             holder.itemView.getLayoutParams().width = RecyclerView.LayoutParams.MATCH_PARENT;
-        holder.textView.setText(label);
+        holder.textView.setText(getLabel());
         holder.textView.setGravity(gravity);
         holder.textView.setTypeface(typeface);
         holder.textView.setCompoundDrawablePadding((int) drawablePadding);
         holder.textView.setGravity(textGravity);
         if (bold)
             holder.textView.setTypeface(Typeface.DEFAULT_BOLD);
+
+        Drawable dl = null, dt = null, dr = null, db = null;
         switch (iconGravity) {
             case Gravity.START:
-                holder.textView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+                dl = drawable;
                 break;
             case Gravity.TOP:
-                holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, icon, null, null);
+                dt = drawable;
                 break;
             case Gravity.END:
-                holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
+                dr = drawable;
                 break;
             case Gravity.BOTTOM:
-                holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, icon);
+                db = drawable;
                 break;
         }
+        holder.textView.setCompoundDrawablesWithIntrinsicBounds(dl, dt, dr, db);
+
         holder.textView.setTextColor(textColor);
         if (listener != null)
             holder.itemView.setOnClickListener(listener);
