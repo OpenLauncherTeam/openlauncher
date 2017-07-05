@@ -568,6 +568,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         appWidgetHost = null;
         unregisterReceiver(appUpdateReceiver);
         unregisterReceiver(shortcutReceiver);
+        unregisterReceiver(timeChangedReceiver);
         launcher = null;
 
         unbindViews();

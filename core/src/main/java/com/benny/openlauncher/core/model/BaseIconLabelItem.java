@@ -10,10 +10,6 @@ import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.interfaces.LabelProvider;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
-/**
- * Created by flisar on 28.06.2017.
- */
-
 public abstract class BaseIconLabelItem<I extends LabelProvider, IconLabelItem extends BaseIconLabelItem, VH extends RecyclerView.ViewHolder> extends AbstractItem<IconLabelItem, VH> implements FastItem.LabelItem<IconLabelItem, VH>, FastItem.DesktopOptionsItem<IconLabelItem, VH> {
 
     // Data
