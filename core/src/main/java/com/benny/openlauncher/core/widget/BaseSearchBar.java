@@ -183,11 +183,7 @@ public class BaseSearchBar extends FrameLayout {
         LayoutParams inputParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         inputParams.setMargins(dp8, dp8, 0, 0);
 
-        searchRecycler = new RecyclerView(getContext());
-        searchRecycler.setVisibility(View.GONE);
-        searchRecycler.setAdapter(adapter);
-        searchRecycler.setClipToPadding(false);
-        searchRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        initRecyclerView();
 
         Setup.get().getAppUpdatedListener(getContext()).add(new AppUpdateListener<App>() {
             @Override
@@ -247,6 +243,16 @@ public class BaseSearchBar extends FrameLayout {
                 searchRecycler.getLayoutParams().height = ((View) getParent()).getHeight() - searchInput.getHeight();
             }
         });
+    }
+
+    protected void initRecyclerView() {
+        searchRecycler = new RecyclerView(getContext());
+        searchRecycler.setVisibility(View.GONE);
+        searchRecycler.setAdapter(adapter);
+        searchRecycler.setClipToPadding(false);
+        searchRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        searchRecycler.getLayoutManager().setAutoMeasureEnabled(false);
+        searchRecycler.setHasFixedSize(true);
     }
 
     protected void startApp(Context context, App app) {
