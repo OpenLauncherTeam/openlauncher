@@ -199,11 +199,11 @@ public class GroupPopupView extends FrameLayout {
         Setup.get().updateIcon(context, currentView, currentItem);
     }
 
-    public void updateItem(Context context, final DesktopCallBack callBack, final Item<Item> currentItem, Item dragOutItem, View currentView) {
+    public void updateItem(Context context, final DesktopCallBack callBack, final Item<Item, Integer> currentItem, Item dragOutItem, View currentView) {
         if (currentItem.getGroupItems().size() == 1) {
             final App app = Setup.get().findApp(context, currentItem.getGroupItems().get(0).getIntent());
             if (app != null) {
-                Item item = Home.db.getItem(currentItem.getGroupItems().get(0).getId());
+                Item item = Home.db.getItem(currentItem.getGroupItems().get(0).getItemId());
                 item.setX(currentItem.getX());
                 item.setY(currentItem.getY());
 

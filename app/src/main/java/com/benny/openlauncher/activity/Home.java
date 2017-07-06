@@ -322,7 +322,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                 DialogHelper.deletePackageDialog(context, dragEvent);
             }
         };
-        Setup.init(new Setup<Home, AppManager.App, Item, DrawerAppItem, AppItemView>() {
+        Setup.init(new Setup<Integer, Home, AppManager.App, Item, DrawerAppItem, AppItemView>() {
 
             @Override
             public SettingsManager getAppSettings() {

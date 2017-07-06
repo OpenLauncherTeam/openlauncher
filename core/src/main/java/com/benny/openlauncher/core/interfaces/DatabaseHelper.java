@@ -2,7 +2,7 @@ package com.benny.openlauncher.core.interfaces;
 
 import java.util.List;
 
-public interface DatabaseHelper<T extends Item> {
+public interface DatabaseHelper<ID extends Number, T extends Item<?, ID>> {
     void deleteItem(T item);
 
     void setItem(T item, int page, int desktop);
@@ -11,7 +11,7 @@ public interface DatabaseHelper<T extends Item> {
 
     void updateItem(T item);
 
-    T getItem(int id);
+    T getItem(ID id);
 
     List<List<T>> getDesktop();
 

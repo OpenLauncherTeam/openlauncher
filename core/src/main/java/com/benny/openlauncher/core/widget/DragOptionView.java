@@ -127,7 +127,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Item<?> item = DragDropHandler.getDraggedObject(dragEvent);
+                        Item<?, ?> item = DragDropHandler.getDraggedObject(dragEvent);
 
                         // remove all items from the database
                         Home.launcher.db.deleteItem(item);

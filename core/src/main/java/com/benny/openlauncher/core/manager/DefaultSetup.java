@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class DefaultSetup<H extends Home, A extends App, LauncherItem extends Item, DrawerAppItem extends FastItem.AppItem, V extends View & AppItemView> extends Setup<H, A, LauncherItem, DrawerAppItem, V> {
+public abstract class DefaultSetup<ID extends Number, H extends Home, A extends App, LauncherItem extends Item<LauncherItem, ID>, DrawerAppItem extends FastItem.AppItem, V extends View & AppItemView> extends Setup<ID, H, A, LauncherItem, DrawerAppItem, V> {
 
     private final Context appContext;
     private final SettingsManager settingsManager;

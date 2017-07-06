@@ -26,7 +26,7 @@ import java.util.List;
  * just a fast first helper class;
  * should be removed in the end, so we don't care to keep it clean
  */
-public abstract class Setup<H extends Home, A extends App, LauncherItem extends Item, DrawerAppItem extends FastItem.AppItem, V extends View & AppItemView> {
+public abstract class Setup<ID extends Number, H extends Home, A extends App, LauncherItem extends Item<LauncherItem, ID>, DrawerAppItem extends FastItem.AppItem, V extends View & AppItemView> {
 
     // ----------------
     // Class and singleton
@@ -85,7 +85,7 @@ public abstract class Setup<H extends Home, A extends App, LauncherItem extends 
     // Helper class - Dialogs, Database, Drag&Drop Helper
     // ----------------
 
-    public abstract DatabaseHelper<LauncherItem> createDatabaseHelper(Context context);
+    public abstract DatabaseHelper<ID, LauncherItem> createDatabaseHelper(Context context);
 
     public abstract DialogHandler getDialogHandler();
 

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Item implements com.benny.openlauncher.core.interfaces.Item<Item>, LabelProvider {
+public class Item implements com.benny.openlauncher.core.interfaces.Item<Item, Integer>, LabelProvider {
     public static final Creator<Item> CREATOR = new Creator<Item>() {
 
         @Override
@@ -182,11 +182,11 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item>, 
     }
 
     @Override
-    public int getId() {
+    public Integer getItemId() {
         return idValue;
     }
 
-    public void setId(int id) {
+    public void setItemId(int id) {
         idValue = id;
     }
 
