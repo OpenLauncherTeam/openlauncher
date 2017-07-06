@@ -78,6 +78,10 @@ public class BaseSearchBar extends FrameLayout {
             this.id = id;
             this.sdf = sdf;
         }
+
+        public int getId(){
+            return id;
+        }
     }
 
     public TextView searchClock;
