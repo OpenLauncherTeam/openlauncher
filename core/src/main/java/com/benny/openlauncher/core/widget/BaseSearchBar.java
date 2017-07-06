@@ -44,15 +44,38 @@ import java.util.Locale;
 public class BaseSearchBar extends FrameLayout {
 
     public enum Mode {
-        DateAll(new SimpleDateFormat("MMMM dd\nEEEE, YYYY", Locale.getDefault())),
-        DateNoYearAndTime(new SimpleDateFormat("MMMM dd\nHH:mm", Locale.getDefault())),
-        DateAllAndTime(new SimpleDateFormat("MMMM dd, YYYY\nHH:mm", Locale.getDefault())),
-        TimeAndDateAll(new SimpleDateFormat("HH:mm\nMMMM dd, YYYY", Locale.getDefault())),
-        Custom(null);
+        DateAll(1, new SimpleDateFormat("MMMM dd\nEEEE, YYYY", Locale.getDefault())),
+        DateNoYearAndTime(2, new SimpleDateFormat("MMMM dd\nHH:mm", Locale.getDefault())),
+        DateAllAndTime(3, new SimpleDateFormat("MMMM dd, YYYY\nHH:mm", Locale.getDefault())),
+        TimeAndDateAll(4, new SimpleDateFormat("HH:mm\nMMMM dd, YYYY", Locale.getDefault())),
+        Custom(0, null);
 
         SimpleDateFormat sdf;
+        int id;
 
-        Mode(SimpleDateFormat sdf) {
+        public static Mode getById(int id) {
+            for (int i = 0; i < values().length; i++) {
+                if (values()[i].getId() == id)
+                    return values()[i];
+            }
+            throw new RuntimeException("ID not found!");
+        }
+
+        public static Mode getByIndex(int index) {
+            return values()[index];
+        }
+
+        public static int getIndex(int id) {
+            for (int i = 0; i < values().length; i++) {
+                if (values()[i].getId() == id) {
+                    return i;
+                }
+            }
+            throw new RuntimeException("ID not found!");
+        }
+
+        Mode(int id, SimpleDateFormat sdf) {
+            this.id = id;
             this.sdf = sdf;
         }
     }
