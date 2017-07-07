@@ -1,26 +1,25 @@
-package com.benny.openlauncher.model;
+package com.benny.openlauncher.core.model;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.benny.openlauncher.R;
+import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.FastItem;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.widget.AppDrawerVertical;
+import com.benny.openlauncher.core.widget.AppItemView;
 import com.benny.openlauncher.core.widget.Desktop;
-import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.widget.AppItemView;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
 
 public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.ViewHolder> implements FastItem.AppItem<DrawerAppItem, DrawerAppItem.ViewHolder> {
-    private AppManager.App app;
+    private App app;
 
-    public DrawerAppItem(AppManager.App app) {
+    public DrawerAppItem(App app) {
         this.app = app;
     }
 
@@ -52,7 +51,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
                 .withOnLongClick(app, DragAction.Action.APP_DRAWER, new AppItemView.LongPressCallBack() {
                     @Override
                     public boolean readyForDrag(View view) {
-                        return AppSettings.get().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
+                        return Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
                     }
 
                     @Override
@@ -60,8 +59,8 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
                         Home.launcher.closeAppDrawer();
                     }
                 })
-                .setLabelVisibility(AppSettings.get().isDrawerShowLabel())
-                .setTextColor(AppSettings.get().getDrawerLabelColor());
+                .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
+                .setTextColor(Setup.appSettings().getDrawerLabelColor());
         super.bindView(holder, payloads);
     }
 

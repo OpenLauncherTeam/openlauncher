@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,6 +14,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
@@ -21,7 +23,14 @@ import android.widget.Toast;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.IconProvider;
+import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.Item;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public class Tool {
@@ -234,5 +243,99 @@ public class Tool {
         final Intent intent = new Intent(action);
         List resolveInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         return resolveInfo.size() > 0;
+    }
+
+    public static String getIntentAsString(Intent intent) {
+        if (intent == null) {
+            return "";
+        } else {
+            return intent.toUri(0);
+        }
+    }
+
+    public static Intent getIntentFromString(String string) {
+        if (string == null || string.isEmpty()) {
+            return new Intent();
+        } else {
+            try {
+                return new Intent().parseUri(string, 0);
+            } catch (URISyntaxException e) {
+                return new Intent();
+            }
+        }
+    }
+
+    public static IconProvider getIcon(Context context, Item item) {
+        if (item == null) {
+            return null;
+        }
+        if (item.type == Item.Type.SHORTCUT) {
+            return item.iconProvider;
+        } else {
+            App app = Setup.appLoader().findItemApp(item);
+            if (app != null)
+                return app;
+        }
+        return null;
+    }
+
+    public static Drawable getIcon(Context context, String filename) {
+        if (filename == null) {
+            return null;
+        }
+        Drawable icon = null;
+        Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/icons/" + filename + ".png");
+        if (bitmap != null) {
+            icon = new BitmapDrawable(context.getResources(), bitmap);
+        }
+        return icon;
+    }
+
+    public static void saveIcon(Context context, Bitmap icon, String filename) {
+        File directory = new File(context.getFilesDir() + "/icons");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        File file = new File(context.getFilesDir() + "/icons/" + filename + ".png");
+        removeIcon(context, filename);
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            icon.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeIcon(Context context, String filename) {
+        File file = new File(context.getFilesDir() + "/icons/" + filename + ".png");
+        if (file.exists()) {
+            try {
+                file.delete();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static View.OnTouchListener getItemOnTouchListener() {
+        return new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Home.touchX = (int) motionEvent.getX();
+                Home.touchY = (int) motionEvent.getY();
+                // use this to debug the on touch listener
+                //Tool.print(Home.touchX);
+                //Tool.print(Home.touchY);
+                return false;
+            }
+        };
     }
 }

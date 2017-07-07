@@ -6,18 +6,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.model.IconLabelItem;
+import com.benny.openlauncher.core.interfaces.IconProvider;
+import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.IconLabelItem;
+import com.benny.openlauncher.core.model.Item;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.text.Collator;
@@ -28,7 +35,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-public class AppManager {
+public class AppManager implements Setup.AppLoader<AppManager.App> {
     private static AppManager ref;
 
     public Context getContext() {
@@ -147,6 +154,50 @@ public class AppManager {
         getAllApps();
     }
 
+    // -----------------------
+    // AppLoader interface
+    // -----------------------
+
+    @Override
+    public void loadItems() {
+        getAllApps();
+    }
+
+    @Override
+    public List<App> getAllApps(Context context) {
+        return getApps();
+    }
+
+    @Override
+    public App findItemApp(Item item) {
+        return findApp(item.getIntent());
+    }
+
+    @Override
+    public void onAppUpdated(Context p1, Intent p2) {
+        onReceive(p1, p2);
+    }
+
+    @Override
+    public void addUpdateListener(AppUpdateListener updateListener) {
+        updateListeners.add(updateListener);
+    }
+
+    @Override
+    public void removeUpdateListener(AppUpdateListener updateListener) {
+        updateListeners.remove(updateListener);
+    }
+
+    @Override
+    public void addDeleteListener(AppDeleteListener deleteListener) {
+        deleteListeners.add(deleteListener);
+    }
+
+    @Override
+    public void removeDeleteListener(AppDeleteListener deleteListener) {
+        deleteListeners.remove(deleteListener);
+    }
+
     private class AsyncGetApps extends AsyncTask {
         private List<App> tempApps;
 
@@ -243,13 +294,13 @@ public class AppManager {
 
     public static class App implements com.benny.openlauncher.core.interfaces.App {
         public String label, packageName, className;
-        public Drawable icon;
+        public IconProvider iconProvider;
         public ResolveInfo info;
 
         public App(Context context, ResolveInfo info, PackageManager pm) {
             this.info = info;
 
-            icon = info.loadIcon(pm);
+            iconProvider = Setup.imageLoader().createIconProvider(info.loadIcon(pm));
             label = info.loadLabel(pm).toString();
             packageName = info.activityInfo.packageName;
             className = info.activityInfo.name;
@@ -285,8 +336,28 @@ public class AppManager {
         }
 
         @Override
-        public Drawable getIcon() {
-            return icon;
+        public void displayIcon(ImageView iv, int forceSize) {
+            iconProvider.displayIcon(iv, forceSize);
+        }
+
+        @Override
+        public void displayCompoundIcon(TextView tv, int gravity, int forceSize) {
+            iconProvider.displayCompoundIcon(tv, gravity, forceSize);
+        }
+
+        @Override
+        public Drawable getDrawable(int forceSize) {
+            return iconProvider.getDrawable(forceSize);
+        }
+
+        @Override
+        public Bitmap getBitmap(int forceSize) {
+            return iconProvider.getBitmap(forceSize);
+        }
+
+        @Override
+        public boolean isGroupIconDrawable() {
+            return iconProvider.isGroupIconDrawable();
         }
     }
 

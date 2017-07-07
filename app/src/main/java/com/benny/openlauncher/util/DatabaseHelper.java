@@ -8,12 +8,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.Item;
+import com.benny.openlauncher.core.util.Definitions;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openlauncher.core.interfaces.DatabaseHelper<Integer, Item> {
+public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManager {
     private static final String DATABASE_HOME = "home.db";
     private static final String TABLE_HOME = "home";
     private static final String TABLE_GESTURE = "gesture";
@@ -71,9 +73,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void createItem(Item item, int page, int desktop) {
+    public void createItem(Item item, int page, Definitions.ItemPosition itemPosition) {
         ContentValues itemValues = new ContentValues();
-        itemValues.put(COLUMN_TIME, item.getItemId());
+        itemValues.put(COLUMN_TIME, item.getId());
         itemValues.put(COLUMN_TYPE, item.type.toString());
         itemValues.put(COLUMN_LABEL, item.getLabel());
         itemValues.put(COLUMN_X_POS, item.x);
@@ -82,12 +84,12 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
         String concat = "";
         switch (item.type) {
             case APP:
-                Tool.saveIcon(context, Tool.drawableToBitmap(item.icon), Integer.toString((int)item.getItemId()));
+                Tool.saveIcon(context, item.getBitmap(-1), Integer.toString(item.getId()));
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.intent));
                 break;
             case GROUP:
                 for (Item tmp : item.items) {
-                    concat += tmp.getItemId() + "#";
+                    concat += tmp.getId() + Definitions.INT_SEP;
                 }
                 itemValues.put(COLUMN_DATA, concat);
                 break;
@@ -95,24 +97,47 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
                 itemValues.put(COLUMN_DATA, item.actionValue);
                 break;
             case WIDGET:
-                concat = Integer.toString(item.widgetValue) + "#"
-                        + Integer.toString(item.spanX) + "#"
+                concat = Integer.toString(item.widgetValue) + Definitions.INT_SEP
+                        + Integer.toString(item.spanX) + Definitions.INT_SEP
                         + Integer.toString(item.spanY);
                 itemValues.put(COLUMN_DATA, concat);
                 break;
         }
         itemValues.put(COLUMN_PAGE, page);
-        itemValues.put(COLUMN_DESKTOP, desktop);
+        itemValues.put(COLUMN_DESKTOP, itemPosition.ordinal());
 
         // item will always be visible when first added
         itemValues.put(COLUMN_STATE, 1);
         db.insert(TABLE_HOME, null, itemValues);
     }
 
-    public void deleteItem(Item item) {
-        db.delete(TABLE_HOME, COLUMN_TIME + " = ?", new String[]{String.valueOf(item.getItemId())});
+    @Override
+    public void saveItem(Item item) {
+        updateItem(item);
     }
 
+    @Override
+    public void saveItem(Item item, int page, Definitions.ItemPosition itemPosition) {
+        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
+        Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
+        if (cursor.getCount() == 0) {
+            createItem(item, page, itemPosition);
+        } else if (cursor.getCount() == 1) {
+            updateItem(item, page, Definitions.ItemPosition.Desktop);
+        }
+    }
+
+    @Override
+    public void updateSate(Item item, Definitions.ItemState state) {
+        updateItem(item, state);
+    }
+
+    @Override
+    public void deleteItem(Item item) {
+        db.delete(TABLE_HOME, COLUMN_TIME + " = ?", new String[]{String.valueOf(item.getId())});
+    }
+
+    @Override
     public List<List<Item>> getDesktop() {
         String SQL_QUERY_DESKTOP = SQL_QUERY + TABLE_HOME;
         Cursor cursor = db.rawQuery(SQL_QUERY_DESKTOP, null);
@@ -134,6 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
         return desktop;
     }
 
+    @Override
     public List<Item> getDock() {
         String SQL_QUERY_DESKTOP = SQL_QUERY + TABLE_HOME;
         Cursor cursor = db.rawQuery(SQL_QUERY_DESKTOP, null);
@@ -152,7 +178,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
         return dock;
     }
 
-    public Item getItem(Integer id) {
+    @Override
+    public Item getItem(int id) {
         String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + id;
         Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
         Item item = null;
@@ -167,12 +194,12 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
         int pageCounter = 0;
         for (List<Item> page : desktop) {
             for (Item item : page) {
-                String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getItemId();
+                String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
                 Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
                 if (cursor.getCount() == 0) {
-                    createItem(item, pageCounter, 1);
+                    createItem(item, pageCounter, Definitions.ItemPosition.Desktop);
                 } else if (cursor.getCount() == 1) {
-                    updateItem(item, pageCounter, 1);
+                    updateItem(item, pageCounter, Definitions.ItemPosition.Desktop);
                 }
             }
             pageCounter++;
@@ -181,23 +208,23 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
 
     public void setDock(List<Item> dock) {
         for (Item item : dock) {
-            String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getItemId();
+            String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
             Cursor cursorItem = db.rawQuery(SQL_QUERY_SPECIFIC, null);
             if (cursorItem.getCount() == 0) {
-                createItem(item, 0, 0);
+                createItem(item, 0, Definitions.ItemPosition.Dock);
             } else if (cursorItem.getCount() == 1) {
-                updateItem(item, 0, 0);
+                updateItem(item, 0, Definitions.ItemPosition.Dock);
             }
         }
     }
 
-    public void setItem(Item item, int page, int desktop) {
-        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getItemId();
+    public void setItem(Item item, int page, Definitions.ItemPosition itemPosition) {
+        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
         Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
         if (cursor.getCount() == 0) {
-            createItem(item, page, desktop);
+            createItem(item, page, itemPosition);
         } else if (cursor.getCount() == 1) {
-            updateItem(item, page, desktop);
+            updateItem(item, page, itemPosition);
         }
     }
 
@@ -210,12 +237,12 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
         String concat = "";
         switch (item.type) {
             case APP:
-                Tool.saveIcon(context, Tool.drawableToBitmap(item.icon), Integer.toString((int)item.getItemId()));
+                Tool.saveIcon(context, item.getBitmap(Definitions.NO_SCALE), Integer.toString(item.getId()));
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.intent));
                 break;
             case GROUP:
                 for (Item tmp : item.items) {
-                    concat += tmp.getItemId() + "#";
+                    concat += tmp.getId() + Definitions.INT_SEP;
                 }
                 itemValues.put(COLUMN_DATA, concat);
                 break;
@@ -223,26 +250,26 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
                 itemValues.put(COLUMN_DATA, item.actionValue);
                 break;
             case WIDGET:
-                concat = Integer.toString(item.widgetValue) + "#"
-                        + Integer.toString(item.spanX) + "#"
+                concat = Integer.toString(item.widgetValue) + Definitions.INT_SEP
+                        + Integer.toString(item.spanX) + Definitions.INT_SEP
                         + Integer.toString(item.spanY);
                 itemValues.put(COLUMN_DATA, concat);
                 break;
         }
-        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getItemId(), null);
+        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
     }
 
     // update the state of an item
-    public void updateItem(Item item, int state) {
+    public void updateItem(Item item, Definitions.ItemState state) {
         ContentValues itemValues = new ContentValues();
-        itemValues.put(COLUMN_STATE, state);
-        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getItemId(), null);
+        itemValues.put(COLUMN_STATE, state.ordinal());
+        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
     }
 
     // update the fields only used by the database
-    public void updateItem(Item item, int page, int desktop) {
+    public void updateItem(Item item, int page, Definitions.ItemPosition itemPosition) {
         deleteItem(item);
-        createItem(item, page, desktop);
+        createItem(item, page, itemPosition);
     }
 
     private Item getSelectionItem(Cursor cursor) {
@@ -264,12 +291,12 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
         switch (type) {
             case APP:
             case SHORTCUT:
-                item.icon = Tool.getIcon(Home.launcher, Integer.toString((int)item.getItemId()));
+                item.iconProvider = Setup.imageLoader().createIconProvider(Tool.getIcon(Home.launcher, Integer.toString(item.getId())));
                 item.intent = Tool.getIntentFromString(data);
                 break;
             case GROUP:
                 item.items = new ArrayList<>();
-                dataSplit = data.split("#");
+                dataSplit = data.split(Definitions.INT_SEP);
                 for (String s : dataSplit) {
                     item.items.add(getItem(Integer.parseInt(s)));
                 }
@@ -278,7 +305,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements com.benny.openla
                 item.actionValue = Integer.parseInt(data);
                 break;
             case WIDGET:
-                dataSplit = data.split("#");
+                dataSplit = data.split(Definitions.INT_SEP);
                 item.widgetValue = Integer.parseInt(dataSplit[0]);
                 item.spanX = Integer.parseInt(dataSplit[1]);
                 item.spanY = Integer.parseInt(dataSplit[2]);

@@ -30,6 +30,7 @@ import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.IconLabelItem;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.CircleDrawable;
 import com.mikepenz.fastadapter.IItemAdapter;
@@ -41,7 +42,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class BaseSearchBar extends FrameLayout {
+public class SearchBar extends FrameLayout {
 
     public enum Mode {
         DateAll(1, new SimpleDateFormat("MMMM dd\nEEEE, YYYY", Locale.getDefault())),
@@ -99,37 +100,37 @@ public class BaseSearchBar extends FrameLayout {
     private float searchClockSubTextFactor = 0.5f;
     private float searchClockSubTextFactor2 = 0.7f;
 
-    public BaseSearchBar(@NonNull Context context) {
+    public SearchBar(@NonNull Context context) {
         super(context);
         init();
     }
 
-    public BaseSearchBar(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public SearchBar(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public BaseSearchBar(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public SearchBar(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-    public BaseSearchBar setSearchInternetEnabled(boolean enabled) {
+    public SearchBar setSearchInternetEnabled(boolean enabled) {
         searchInternetEnabled = enabled;
         return this;
     }
 
-    public BaseSearchBar setSearchClockSubTextFactor(float factor) {
+    public SearchBar setSearchClockSubTextFactor(float factor) {
         searchClockSubTextFactor = factor;
         return this;
     }
 
-    public BaseSearchBar setSearchClockSubTextFactor2(float factor) {
+    public SearchBar setSearchClockSubTextFactor2(float factor) {
         searchClockSubTextFactor2 = factor;
         return this;
     }
 
-    public BaseSearchBar setMode(Mode mode) {
+    public SearchBar setMode(Mode mode) {
         this.mode = mode;
         return this;
     }
@@ -212,28 +213,38 @@ public class BaseSearchBar extends FrameLayout {
 
         initRecyclerView();
 
-        Setup.get().getAppUpdatedListener(getContext()).add(new AppUpdateListener<App>() {
+        Setup.appLoader().addUpdateListener(new AppUpdateListener<App>() {
             @Override
             public boolean onAppUpdated(List<App> apps) {
                 adapter.clear();
                 List<FastItem.LabelItem> items = new ArrayList<>();
                 if (searchInternetEnabled) {
-                    items.add(Setup.get().createSearchBarInternetItem(getContext(), R.string.search_online, new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            callback.onInternetSearch(searchInput.getText().toString());
-                            searchInput.getText().clear();
-                        }
-                    }));
+                    items.add(new IconLabelItem(getContext(), R.string.search_online)
+                                    .withIconGravity(Gravity.START)
+                                    .withOnClickListener(new OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            callback.onInternetSearch(searchInput.getText().toString());
+                                            searchInput.getText().clear();
+                                        }
+                                    })
+                                    .withTextColor(Color.WHITE)
+                                    .withDrawablePadding(getContext(), 8)
+                                    .withBold(true)
+                                    .withTextGravity(Gravity.END));
                 }
                 for (int i = 0; i < apps.size(); i++) {
                     final App app = apps.get(i);
-                    items.add(Setup.get().createSearchBarItem(getContext(), app, new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startApp(v.getContext(), app);
-                        }
-                    }));
+                    items.add( new IconLabelItem(getContext(), app, app.getLabel(), 36)
+                            .withIconGravity(Gravity.START)
+                            .withOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startApp(v.getContext(), app);
+                                }
+                            })
+                            .withTextColor(Color.WHITE)
+                            .withDrawablePadding(getContext(), 8));
                 }
                 adapter.set(items);
 

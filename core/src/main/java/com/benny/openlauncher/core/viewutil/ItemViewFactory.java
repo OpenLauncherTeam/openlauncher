@@ -1,4 +1,4 @@
-package com.benny.openlauncher.viewutil;
+package com.benny.openlauncher.core.viewutil;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
@@ -12,29 +12,34 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.R;
+import com.benny.openlauncher.core.activity.Home;
+import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.DragDropHandler;
-import com.benny.openlauncher.core.viewutil.DesktopCallBack;
+import com.benny.openlauncher.core.util.Tool;
+import com.benny.openlauncher.core.widget.AppItemView;
 import com.benny.openlauncher.core.widget.CellContainer;
 import com.benny.openlauncher.core.widget.WidgetView;
-import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.widget.AppItemView;
+import com.benny.openlauncher.core.model.Item;
 
 public class ItemViewFactory {
 
     public static final int NO_FLAGS = 0x01;
     public static final int NO_LABEL = 0x02;
 
+    public static View getItemView(Context context, Item item, boolean showLabels, DesktopCallBack callBack) {
+        int flag = showLabels ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
+        View itemView = getItemView(context, callBack, item, flag);
+        return itemView;
+    }
+
     public static View getItemView(final Context context, final DesktopCallBack callBack, final Item item, int flags) {
         View view = null;
         switch (item.type) {
             case APP:
-                final AppManager.App app = AppManager.getInstance(context).findApp(item.intent);
+                final App app = Setup.appLoader().findItemApp(item);
                 if (app == null) {
                     break;
                 }
@@ -162,7 +167,7 @@ public class ItemViewFactory {
                 widgetView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
-                        if (AppSettings.get().isDesktopLock()) {
+                        if (Setup.appSettings().isDesktopLock()) {
                             return false;
                         }
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
@@ -240,7 +245,7 @@ public class ItemViewFactory {
             updateWidgetOption(item);
 
             // update the widget size in the database
-            Home.db.updateItem(item);
+            Home.db.saveItem(item);
         } else {
             Toast.makeText(Home.launcher.desktop.getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
 

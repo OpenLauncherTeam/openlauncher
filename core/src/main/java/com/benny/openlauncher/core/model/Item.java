@@ -1,20 +1,35 @@
-package com.benny.openlauncher.model;
+package com.benny.openlauncher.core.model;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
+import android.os.Parcelable;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.core.R;
+import com.benny.openlauncher.core.activity.Home;
+import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.interfaces.LabelProvider;
-import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.core.util.SimpleIconProvider;
+import com.benny.openlauncher.core.util.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Item implements com.benny.openlauncher.core.interfaces.Item<Item, Integer>, LabelProvider {
+public class Item implements LabelProvider, IconProvider, Parcelable {
+
+    public enum Type {
+        APP,
+        SHORTCUT,
+        GROUP,
+        ACTION,
+        WIDGET
+    }
+
     public static final Creator<Item> CREATOR = new Creator<Item>() {
 
         @Override
@@ -32,7 +47,7 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item, I
     private int idValue;
     public Type type;
     private String name = "";
-    public Drawable icon = Home.launcher.getResources().getDrawable(R.drawable.rip);
+    public IconProvider iconProvider = null;
     public int x = 0;
     public int y = 0;
 
@@ -71,7 +86,7 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item, I
                 parcel.readStringList(labels);
                 items = new ArrayList<>();
                 for (String s : labels) {
-                    items.add((Item) Home.launcher.db.getItem(Integer.parseInt(s)));
+                    items.add(Home.launcher.db.getItem(Integer.parseInt(s)));
                 }
                 break;
             case ACTION:
@@ -83,7 +98,7 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item, I
                 spanY = parcel.readInt();
                 break;
         }
-        icon = Tool.getIcon(Home.launcher, Integer.toString(idValue));
+        iconProvider = new SimpleIconProvider(Tool.getIcon(Home.launcher, Integer.toString(idValue)));
     }
 
     @Override
@@ -92,11 +107,11 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item, I
         return object != null && this.idValue == itemObject.idValue;
     }
 
-    public static Item newAppItem(AppManager.App app) {
+    public static Item newAppItem(App app) {
         Item item = new Item();
         item.type = Type.APP;
-        item.name = app.label;
-        item.icon = app.icon;
+        item.name = app.getLabel();
+        item.iconProvider = app;
         item.intent = toIntent(app);
         return item;
     }
@@ -105,7 +120,7 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item, I
         Item item = new Item();
         item.type = Type.SHORTCUT;
         item.name = name;
-        item.icon = icon;
+        item.iconProvider = new SimpleIconProvider(icon);
         item.spanX = 1;
         item.spanY = 1;
         item.intent = intent;
@@ -175,14 +190,12 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item, I
         }
     }
 
-    @Override
     public void reset() {
         Random random = new Random();
         idValue = random.nextInt();
     }
 
-    @Override
-    public Integer getItemId() {
+    public Integer getId() {
         return idValue;
     }
 
@@ -190,7 +203,6 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item, I
         idValue = id;
     }
 
-    @Override
     public Intent getIntent() {
         return intent;
     }
@@ -200,65 +212,92 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item, I
         return name;
     }
 
-    @Override
     public void setLabel(String label) {
         this.name = label;
     }
 
-    @Override
     public Type getType() {
         return type;
     }
 
-    @Override
     public List<Item> getGroupItems() {
         return items;
     }
 
-    @Override
     public int getX() {
         return x;
     }
 
-    @Override
     public int getY() {
         return y;
     }
 
-    @Override
     public int getSpanX() {
         return spanX;
     }
 
-    @Override
     public int getSpanY() {
         return spanY;
     }
 
-    @Override
     public void setSpanX(int x) {
         spanX = x;
     }
 
-    @Override
     public void setSpanY(int y) {
         spanY = y;
     }
 
-    @Override
     public void setX(int x) {
         this.x = x;
     }
 
-    @Override
     public void setY(int y) {
         this.y = y;
     }
 
-    private static Intent toIntent(AppManager.App app) {
+    private static Intent toIntent(App app) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setClassName(app.packageName, app.className);
+        intent.setClassName(app.getPackageName(), app.getClassName());
         return intent;
+    }
+
+    @Override
+    public void displayIcon(ImageView iv, int forceSize) {
+        if (iconProvider != null) {
+            iconProvider.displayIcon(iv, forceSize);
+        }
+    }
+
+    @Override
+    public void displayCompoundIcon(TextView tv, int gravity, int forceSize) {
+        if (iconProvider != null) {
+            iconProvider.displayCompoundIcon(tv, gravity, forceSize);
+        }
+    }
+
+    @Override
+    public Drawable getDrawable(int forceSize) {
+        if (iconProvider != null) {
+            return iconProvider.getDrawable(forceSize);
+        }
+        return null;
+    }
+
+    @Override
+    public Bitmap getBitmap(int forceSize) {
+        if (iconProvider != null) {
+            return iconProvider.getBitmap(forceSize);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isGroupIconDrawable() {
+        if (iconProvider != null) {
+            return iconProvider.isGroupIconDrawable();
+        }
+        return false;
     }
 }

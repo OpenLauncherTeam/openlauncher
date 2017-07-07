@@ -23,23 +23,24 @@ import android.view.WindowManager;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
-import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.core.interfaces.DatabaseHelper;
-import com.benny.openlauncher.core.interfaces.DialogHandler;
-import com.benny.openlauncher.core.interfaces.Item;
+import com.benny.openlauncher.core.interfaces.DialogListener;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.AppUpdateReceiver;
+import com.benny.openlauncher.core.util.Definitions;
 import com.benny.openlauncher.core.util.ShortcutReceiver;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DragNavigationControl;
 import com.benny.openlauncher.core.viewutil.WidgetHost;
 import com.benny.openlauncher.core.widget.AppDrawerController;
-import com.benny.openlauncher.core.widget.BaseSearchBar;
+import com.benny.openlauncher.core.widget.AppItemView;
+import com.benny.openlauncher.core.widget.SearchBar;
 import com.benny.openlauncher.core.widget.Desktop;
 import com.benny.openlauncher.core.widget.DesktopOptionView;
 import com.benny.openlauncher.core.widget.Dock;
 import com.benny.openlauncher.core.widget.DragOptionView;
+import com.benny.openlauncher.core.widget.GroupPopupView;
 import com.benny.openlauncher.core.widget.PagerIndicator;
 import com.benny.openlauncher.core.widget.SmoothViewPager;
 
@@ -57,7 +58,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     // static members, easier to access from any activity and class
     public static Home launcher;
-    public static DatabaseHelper db;
+    public static Setup.DataManager db;
     public static WidgetHost appWidgetHost;
     public static AppWidgetManager appWidgetManager;
     public static Resources resources;
@@ -98,7 +99,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     public DesktopOptionView desktopEditOptionView;
     private PagerIndicator appDrawerIndicator;
     protected ViewGroup myScreen;
-    protected BaseSearchBar searchBar;
+    protected SearchBar searchBar;
+    public GroupPopupView groupPopup;
     // region for the APP_DRAWER_ANIMATION
     private int cx;
     private int cy;
@@ -126,7 +128,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         resources = getResources();
 
         launcher = this;
-        db = Setup.get().createDatabaseHelper(this);
+        db = Setup.dataManager();
 
         myScreen = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_home, myScreen);
         setContentView(myScreen);
@@ -152,7 +154,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         baseLayout = (ConstraintLayout) findViewById(R.id.baseLayout);
         dragOptionView = (DragOptionView) findViewById(R.id.dragOptionPanel);
         desktopEditOptionView = (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel);
-        searchBar = (BaseSearchBar) findViewById(R.id.searchBar);
+        searchBar = (SearchBar) findViewById(R.id.searchBar);
+        groupPopup = (GroupPopupView) findViewById(R.id.groupPopup);
     }
 
     protected void unbindViews() {
@@ -167,6 +170,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         dragOptionView = null;
         desktopEditOptionView = null;
         searchBar = null;
+        groupPopup = null;
     }
 
     private void init() {
@@ -262,7 +266,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     protected void initAppManager() {
 
-        Setup.get().getAppUpdatedListener(this).add(new AppUpdateListener<App>() {
+        Setup.appLoader().addUpdateListener(new AppUpdateListener<App>() {
             @Override
             public boolean onAppUpdated(List<App> apps) {
                 if (Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS) {
@@ -270,11 +274,11 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
                         Setup.appSettings().setAppFirstLaunch(false);
 
                         // create a new app drawer button
-                        Item appDrawerBtnItem = Setup.get().newActionItem(8);
+                        Item appDrawerBtnItem = Item.newActionItem(Definitions.ACTION_LAUNCHER);
 
                         // center the button
-                        appDrawerBtnItem.setX(2);
-                        db.setItem(appDrawerBtnItem, 0, 0);
+                        appDrawerBtnItem.setX(Definitions.DOCK_DEFAULT_CENTER_ITEM_INDEX_X);
+                        db.saveItem(appDrawerBtnItem, 0, Definitions.ItemPosition.Dock);
                     }
                 }
                 if (Setup.appSettings().getDesktopStyle() == Desktop.DesktopMode.NORMAL) {
@@ -288,7 +292,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
                 return true;
             }
         });
-        Setup.get().getAppDeletedListener(Home.this).add(new AppDeleteListener<App>() {
+        Setup.appLoader().addDeleteListener(new AppDeleteListener<App>() {
 
             @Override
             public void onAppDeleted(App app) {
@@ -335,17 +339,17 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     @Override
     public void onLaunchSettings() {
         consumeNextResume = true;
-        Setup.get().showLauncherSettings(this);
+        Setup.eventHandler().showLauncherSettings(this);
     }
 
     @Override
     public void onPickDesktopAction() {
-        Setup.get().getDialogHandler().showPickAction(this, new DialogHandler.OnAddAppDrawerItemListener() {
+        Setup.eventHandler().showPickAction(this, new DialogListener.OnAddAppDrawerItemListener() {
             @Override
             public void onAdd() {
                 Point pos = desktop.getCurrentPage().findFreeSpace();
                 if (pos != null)
-                    desktop.addItemToCell(Setup.get().newActionItem(8), pos.x, pos.y);
+                    desktop.addItemToCell(Item.newActionItem(Definitions.ACTION_LAUNCHER), pos.x, pos.y);
                 else
                     Tool.toast(Home.this, R.string.toast_not_enough_space);
             }
@@ -396,7 +400,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     }
 
     protected void initSearchBar() {
-        searchBar.setCallback(new BaseSearchBar.CallBack() {
+        searchBar.setCallback(new SearchBar.CallBack() {
             @Override
             public void onInternetSearch(String string) {
                 Intent intent = new Intent();
@@ -542,7 +546,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         Bundle extras = data.getExtras();
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
         AppWidgetProviderInfo appWidgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId);
-        Item item = Setup.get().newWidgetItem(appWidgetId);
+        Item item = Item.newWidgetItem(appWidgetId);
         item.setSpanX(((appWidgetInfo.minWidth - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth) + 1);
         item.setSpanY(((appWidgetInfo.minHeight - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight) + 1);
         Point point = desktop.getCurrentPage().findFreeSpace(item.getSpanX(), item.getSpanY());
@@ -551,7 +555,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
             item.setY(point.y);
 
             // add item to database
-            db.setItem(item, desktop.getCurrentItem(), 1);
+            db.saveItem(item, desktop.getCurrentItem(), Definitions.ItemPosition.Desktop);
             desktop.addItemToPage(item, desktop.getCurrentItem());
         } else {
             Tool.toast(Home.this, R.string.toast_not_enough_space);

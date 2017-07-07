@@ -1,4 +1,4 @@
-package com.benny.openlauncher.model;
+package com.benny.openlauncher.core.model;
 
 import android.graphics.drawable.Drawable;
 

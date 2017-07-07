@@ -1,13 +1,9 @@
 package com.benny.openlauncher.core.interfaces;
 
-import android.graphics.drawable.Drawable;
-
-public interface App {
+public interface App extends IconProvider {
     String getLabel();
 
     String getPackageName();
 
     String getClassName();
-
-    Drawable getIcon();
 }

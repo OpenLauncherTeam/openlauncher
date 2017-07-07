@@ -12,12 +12,14 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.Item;
+import com.benny.openlauncher.core.util.Definitions;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
+import com.benny.openlauncher.core.viewutil.ItemViewFactory;
 
 import java.util.List;
 
@@ -121,12 +123,12 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                     home.dock.consumeRevert();
 
                     // add the item to the database
-                    home.db.setItem(item, 0, 0);
+                    home.db.saveItem(item, 0, Definitions.ItemPosition.Dock);
                 } else {
                     Point pos = touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.getSpanX(), item.getSpanY(), false);
                     View itemView = coordinateToChildView(pos);
                     if (itemView != null) {
-                        if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, this, 0, 0, this)) {
+                        if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, this, 0, Definitions.ItemPosition.Dock, this)) {
                             home.desktop.consumeRevert();
                             home.dock.consumeRevert();
                         } else {
@@ -201,7 +203,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public boolean addItemToPage(final Item item, int page) {
-        View itemView = Setup.get().getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this);
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this);
 
         if (itemView == null) {
             home.db.deleteItem(item);
@@ -219,7 +221,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             item.setX(positionToLayoutPrams.x);
             item.setY(positionToLayoutPrams.y);
 
-            View itemView = Setup.get().getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this);
+            View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this);
 
             if (itemView != null) {
                 itemView.setLayoutParams(positionToLayoutPrams);
@@ -236,7 +238,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         item.setX(x);
         item.setY(y);
 
-        View itemView = Setup.get().getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this);
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this);
 
         if (itemView != null) {
             addViewToGrid(itemView, item.getX(), item.getY(), item.getSpanX(), item.getSpanY());

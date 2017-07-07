@@ -22,7 +22,8 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.model.AppInfo;
+import com.benny.openlauncher.core.model.AppInfo;
+import com.benny.openlauncher.core.util.Definitions;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 
@@ -162,7 +163,7 @@ public class HideAppsSelectionFragment extends Fragment {
             AppInfo tempAppInfo = new AppInfo(
                     app.packageName + "/" + app.className,
                     app.label,
-                    app.icon,
+                    app.iconProvider.getDrawable(Definitions.NO_SCALE),
                     list_activities.contains(app.packageName + "/" + app.className)
             );
             list_activities_final.add(tempAppInfo);

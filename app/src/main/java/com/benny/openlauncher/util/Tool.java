@@ -28,7 +28,7 @@ import android.widget.Toast;
 import com.benny.openlauncher.BuildConfig;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.core.model.Item;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -178,66 +178,6 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
         }
     }
 
-    public static Drawable getIcon(Context context, Item item) {
-        if (item == null) {
-            return null;
-        }
-        if (item.type == Item.Type.SHORTCUT) {
-            return item.icon;
-        } else {
-            AppManager.App app = AppManager.getInstance(context).findApp(item.intent);
-            if (app != null)
-                return app.icon;
-        }
-        return null;
-    }
-
-    public static Drawable getIcon(Context context, String filename) {
-        if (filename == null) {
-            return null;
-        }
-        Drawable icon = null;
-        Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/icons/" + filename + ".png");
-        if (bitmap != null) {
-            icon = new BitmapDrawable(context.getResources(), bitmap);
-        }
-        return icon;
-    }
-
-    public static void saveIcon(Context context, Bitmap icon, String filename) {
-        File directory = new File(context.getFilesDir() + "/icons");
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-
-        File file = new File(context.getFilesDir() + "/icons/" + filename + ".png");
-        removeIcon(context, filename);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            icon.compress(Bitmap.CompressFormat.PNG, 100, out);
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void removeIcon(Context context, String filename) {
-        File file = new File(context.getFilesDir() + "/icons/" + filename + ".png");
-        if (file.exists()) {
-            try {
-                file.delete();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public static void startApp(Context context, AppManager.App app) {
         if (app.packageName.equals("com.benny.openlauncher")) {
             LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, context);
@@ -306,20 +246,6 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
         }
     }
 
-    public static View.OnTouchListener getItemOnTouchListener() {
-        return new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                Home.touchX = (int) motionEvent.getX();
-                Home.touchY = (int) motionEvent.getY();
-                // use this to debug the on touch listener
-                //Tool.print(Home.touchX);
-                //Tool.print(Home.touchY);
-                return false;
-            }
-        };
-    }
-
     private static String convertStreamToString(InputStream is) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
@@ -372,26 +298,6 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
                 Formatter.formatFileSize(context, blockSize * stat.getAvailableBlocks()),
                 Formatter.formatFileSize(context, blockSize * (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ? stat.getBlockCountLong() : stat.getBlockCount()))
         );
-    }
-
-    public static String getIntentAsString(Intent intent) {
-        if (intent == null) {
-            return "";
-        } else {
-            return intent.toUri(0);
-        }
-    }
-
-    public static Intent getIntentFromString(String string) {
-        if (string == null || string.isEmpty()) {
-            return new Intent();
-        } else {
-            try {
-                return new Intent().parseUri(string, 0);
-            } catch (URISyntaxException e) {
-                return new Intent();
-            }
-        }
     }
 
     @DrawableRes

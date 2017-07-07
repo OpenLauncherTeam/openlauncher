@@ -1,31 +1,34 @@
-package com.benny.openlauncher.model;
+package com.benny.openlauncher.core.model;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.benny.openlauncher.R;
-import com.benny.openlauncher.core.model.BaseIconLabelItem;
+import com.benny.openlauncher.core.R;
+import com.benny.openlauncher.core.interfaces.FastItem;
+import com.benny.openlauncher.core.interfaces.IconProvider;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.Tool;
+import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
 
-public class IconLabelItem extends BaseIconLabelItem<Item, IconLabelItem, IconLabelItem.ViewHolder> {
+public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> implements FastItem.LabelItem<IconLabelItem, IconLabelItem.ViewHolder>, FastItem.DesktopOptionsItem<IconLabelItem, IconLabelItem.ViewHolder> {
 
-    @Override
-    public ViewHolder getViewHolder(View v) {
-        return new ViewHolder(v);
-    }
+    // Data
+    protected IconProvider iconProvider = null;
+    protected String label = null;
 
-    private Drawable drawable = null;
+    // Others
+    protected View.OnClickListener listener;
 
+    private int forceSize = -1;
     private int iconGravity;
     private int textColor = Color.DKGRAY;
     private int gravity = android.view.Gravity.CENTER_VERTICAL;
@@ -35,44 +38,53 @@ public class IconLabelItem extends BaseIconLabelItem<Item, IconLabelItem, IconLa
     private boolean bold = false;
     private int textGravity = Gravity.CENTER_VERTICAL;
 
+    public IconLabelItem(Item item) {
+        this.iconProvider = item;
+        this.label = item != null ? item.getLabel() : null;
+    }
+
+    public IconLabelItem(Context context, int icon, int label) {
+        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this.label = context.getString(label);
+    }
+
     public IconLabelItem(Context context, int label) {
-        super(context, 0, label);
+        this(context, 0, label);
     }
 
     public IconLabelItem(Context context, int icon, String label, int forceSize) {
-        super(null);
+        this(null);
         this.label = label;
-        this.drawable = context.getResources().getDrawable(icon);
-        scaleDrawable(context, forceSize);
+        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this.forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, int icon, int label, int forceSize) {
-        super(null);
+        this(null);
         this.label = context.getString(label);
-        this.drawable = context.getResources().getDrawable(icon);
-        scaleDrawable(context, forceSize);
+        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this.forceSize = forceSize;
+    }
+
+    public IconLabelItem(Context context, IconProvider iconProvider, String label, int forceSize) {
+        this(null);
+        this.label = label;
+        this.iconProvider = iconProvider;
+        this.forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, Drawable icon, String label, int forceSize) {
-        super(null);
+        this(null);
         this.label = label;
-        this.drawable = icon;
-        scaleDrawable(context, forceSize);
+        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this.forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, Drawable icon, int label, int forceSize) {
-        super(null);
+        this(null);
         this.label = context.getString(label);
-        this.drawable = icon;
-        scaleDrawable(context, forceSize);
-    }
-
-    private void scaleDrawable(Context context, int forceSize) {
-        if (drawable != null && forceSize != -1) {
-            forceSize = Tool.dp2px(forceSize, context);
-
-            this.drawable = new BitmapDrawable(context.getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(drawable), forceSize, forceSize, true));
-        }
+        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this.forceSize = forceSize;
     }
 
     public IconLabelItem withIconGravity(int iconGravity) {
@@ -115,9 +127,34 @@ public class IconLabelItem extends BaseIconLabelItem<Item, IconLabelItem, IconLa
         return this;
     }
 
+    public IconLabelItem withOnClickListener(@Nullable View.OnClickListener listener) {
+        this.listener = listener;
+        return (IconLabelItem) this;
+    }
+
+    @Override
+    public void setIcon(int resId) {
+        this.iconProvider = Setup.imageLoader().createIconProvider(resId);
+    }
+
+    @Override
+    public String getLabel() {
+        return label;
+    }
+
+    @Override
+    public ViewHolder getViewHolder(View v) {
+        return new ViewHolder(v);
+    }
+
     @Override
     public int getLayoutRes() {
         return R.layout.item_icon_label;
+    }
+
+    @Override
+    public int getType() {
+        return R.id.id_adapter_icon_label_item;
     }
 
     @Override
@@ -132,22 +169,7 @@ public class IconLabelItem extends BaseIconLabelItem<Item, IconLabelItem, IconLa
         if (bold)
             holder.textView.setTypeface(Typeface.DEFAULT_BOLD);
 
-        Drawable dl = null, dt = null, dr = null, db = null;
-        switch (iconGravity) {
-            case Gravity.START:
-                dl = drawable;
-                break;
-            case Gravity.TOP:
-                dt = drawable;
-                break;
-            case Gravity.END:
-                dr = drawable;
-                break;
-            case Gravity.BOTTOM:
-                db = drawable;
-                break;
-        }
-        holder.textView.setCompoundDrawablesWithIntrinsicBounds(dl, dt, dr, db);
+        iconProvider.displayCompoundIcon(holder.textView, iconGravity, forceSize);
 
         holder.textView.setTextColor(textColor);
         if (listener != null)

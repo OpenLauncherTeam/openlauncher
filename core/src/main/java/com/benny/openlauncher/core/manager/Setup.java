@@ -2,31 +2,23 @@ package com.benny.openlauncher.core.manager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
-import android.view.View;
+import android.view.DragEvent;
 
-import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
-import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.core.interfaces.DatabaseHelper;
-import com.benny.openlauncher.core.interfaces.DialogHandler;
-import com.benny.openlauncher.core.interfaces.FastItem;
-import com.benny.openlauncher.core.interfaces.Item;
+import com.benny.openlauncher.core.interfaces.DialogListener;
+import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
-import com.benny.openlauncher.core.viewutil.DesktopCallBack;
+import com.benny.openlauncher.core.model.Item;
+import com.benny.openlauncher.core.util.Definitions;
+import com.benny.openlauncher.core.util.SimpleIconProvider;
 import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 
 import java.util.List;
 
-/*
- * just a fast first helper class;
- * should be removed in the end, so we don't care to keep it clean
- */
-public abstract class Setup<ID extends Number, H extends Home, A extends App, LauncherItem extends Item<LauncherItem, ID>, DrawerAppItem extends FastItem.AppItem, V extends View & AppItemView> {
+public abstract class Setup<A extends App> {
 
     // ----------------
     // Class and singleton
@@ -53,81 +45,107 @@ public abstract class Setup<ID extends Number, H extends Home, A extends App, La
     // Methods for convenience and shorter code
     // ----------------
 
+    public static Context appContext() {
+        return get().getAppContext();
+    }
+
     public static SettingsManager appSettings() {
         return get().getAppSettings();
+    }
+
+    public static DesktopGestureListener.DesktopGestureCallback desktopGestureCallback() {
+        return get().getDesktopGestureCallback();
+    }
+
+    public static ImageLoader imageLoader() {
+        return get().getImageLoader();
+    }
+
+    public static DataManager dataManager() {
+        return get().getDataManager();
+    }
+
+    public static <A extends App> AppLoader<A> appLoader() {
+        return get().getAppLoader();
+    }
+
+    public static EventHandler eventHandler() {
+        return get().getEventHandler();
     }
 
     // ----------------
     // Settings
     // ----------------
 
+    public abstract Context getAppContext();
+
     public abstract SettingsManager getAppSettings();
 
-    // ----------------
-    // FastAdapter Items
-    // ----------------
+    public abstract DesktopGestureListener.DesktopGestureCallback getDesktopGestureCallback();
 
-    public abstract FastItem.LabelItem createSearchBarInternetItem(Context context, int label, @Nullable View.OnClickListener listener);
+    public abstract ImageLoader getImageLoader();
 
-    public abstract FastItem.LabelItem createSearchBarItem(Context context, A app, @Nullable View.OnClickListener listener);
+    public abstract DataManager getDataManager();
 
-    public abstract FastItem.DesktopOptionsItem createDesktopOptionsViewItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, Typeface typeface);
+    public abstract AppLoader<A> getAppLoader();
 
-    // ----------------
-    // Listeners
-    // ----------------
+    public abstract EventHandler getEventHandler();
 
-    public abstract List<AppUpdateListener<A>> getAppUpdatedListener(Context c);
+    // TEMP
 
-    public abstract List<AppDeleteListener<A>> getAppDeletedListener(Context c);
+    public class DefaultImageLoader implements ImageLoader {
 
-    // ----------------
-    // Helper class - Dialogs, Database, Drag&Drop Helper
-    // ----------------
+        @Override
+        public IconProvider createIconProvider(Drawable drawable) {
+            return new SimpleIconProvider(drawable);
+        }
 
-    public abstract DatabaseHelper<ID, LauncherItem> createDatabaseHelper(Context context);
+        @Override
+        public IconProvider createIconProvider(int icon) {
+            return new SimpleIconProvider(icon);
+        }
 
-    public abstract DialogHandler getDialogHandler();
-
-    public abstract DesktopGestureListener.DesktopGestureCallback getDrawerGestureCallback();
-
-    // ----------------
-    // Item
-    // ----------------
-
-    public abstract Class<LauncherItem> getItemClass();
-
-    public abstract List<LauncherItem> createAllAppItems(Context context);
-
-    public abstract LauncherItem newGroupItem();
-
-    public abstract LauncherItem newWidgetItem(int appWidgetId);
-
-    public abstract LauncherItem newActionItem(int action);
-
-    public abstract LauncherItem createShortcut(Intent intent, Drawable icon, String name);
+        @Override
+        public IconProvider createIconProvider(Item item) {
+            return null;
+        }
+    }
 
     // ----------------
-    // Unstructured...
+    // Interfaces
     // ----------------
 
-    public abstract List<A> getAllApps(Context context);
+    public interface ImageLoader {
+        IconProvider createIconProvider(Drawable drawable);
+        IconProvider createIconProvider(int icon);
+        IconProvider createIconProvider(Item item);
+    }
 
-    public abstract DrawerAppItem createDrawerAppItem(A app);
+    public interface DataManager {
+        void saveItem(Item item);
+        void saveItem(Item item, int page, Definitions.ItemPosition desktop);
+        void updateSate(Item item, Definitions.ItemState state);
+        void deleteItem(Item item);
+        Item getItem(int id);
+        List<List<Item>> getDesktop();
+        List<Item> getDock();
+    }
 
-    public abstract View createDrawerAppItemView(Context context, H home, A app, AppItemView.LongPressCallBack longPressCallBack);
+    public interface AppLoader<A extends App> {
+        void loadItems();
+        List<A> getAllApps(Context context);
+        A findItemApp(Item item);
+        void onAppUpdated(Context p1, Intent p2);
+        void addUpdateListener(AppUpdateListener<A> updateListener);
+        void removeUpdateListener(AppUpdateListener<A> updateListener);
+        void addDeleteListener(AppDeleteListener<A> deleteListener);
+        void removeDeleteListener(AppDeleteListener<A> deleteListener);
+    }
 
-    public abstract AppItemView createAppItemViewPopup(Context context, LauncherItem groupItem, A item);
-
-    public abstract View getItemView(Context context, LauncherItem item, boolean labelsEnabled, DesktopCallBack callBack);
-
-    public abstract void showLauncherSettings(Context context);
-
-    public abstract void onAppUpdated(Context p1, Intent p2);
-
-    public abstract A findApp(Context c, Intent intent);
-
-    public abstract void updateIcon(Context context, V appItemView, LauncherItem currentItem);
-
-    public abstract void onItemViewDismissed(V itemView);
+    public interface EventHandler {
+        void showLauncherSettings(Context context);
+        void showPickAction(Context context, DialogListener.OnAddAppDrawerItemListener listener);
+        void showEditDialog(Context context, Item item, DialogListener.OnEditDialogListener listener);
+        void showDeletePackageDialog(Context context, DragEvent dragEvent);
+    }
 }

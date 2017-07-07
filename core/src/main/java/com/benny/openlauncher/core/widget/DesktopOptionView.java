@@ -1,6 +1,7 @@
 package com.benny.openlauncher.core.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.annotation.AttrRes;
@@ -18,6 +19,7 @@ import android.widget.FrameLayout;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.IconLabelItem;
 import com.benny.openlauncher.core.util.Tool;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
@@ -96,12 +98,12 @@ public class DesktopOptionView extends FrameLayout {
         addView(actionRecyclerView, actionRecyclerViewLP);
 
         List<FastItem.DesktopOptionsItem> items = new ArrayList<>();
-        items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_star_white_36dp, R.string.home, null, typeface));
-        items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_clear_white_36dp, R.string.remove, null, typeface));
-        items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_dashboard_white_36dp, R.string.widget, null, typeface));
-        items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_launch_white_36dp, R.string.action, null, typeface));
-        items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_lock_open_white_36dp, R.string.lock, null, typeface));
-        items.add(Setup.get().createDesktopOptionsViewItem(getContext(), R.drawable.ic_settings_launcher_white_36dp, R.string.settings, null, typeface));
+        items.add(createItem(R.drawable.ic_star_white_36dp, R.string.home, typeface));
+        items.add(createItem(R.drawable.ic_clear_white_36dp, R.string.remove, typeface));
+        items.add(createItem(R.drawable.ic_dashboard_white_36dp, R.string.widget, typeface));
+        items.add(createItem(R.drawable.ic_launch_white_36dp, R.string.action, typeface));
+        items.add(createItem(R.drawable.ic_lock_open_white_36dp, R.string.lock, typeface));
+        items.add(createItem(R.drawable.ic_settings_launcher_white_36dp, R.string.settings, typeface));
 
         actionAdapter.set(items);
         actionAdapter.withOnClickListener(new FastAdapter.OnClickListener<FastItem.DesktopOptionsItem>() {
@@ -148,6 +150,19 @@ public class DesktopOptionView extends FrameLayout {
                 return false;
             }
         });
+    }
+
+    private FastItem.DesktopOptionsItem createItem(int icon, int label, Typeface typeface) {
+        return new IconLabelItem(getContext(), icon, getContext().getString(label), -1)
+                .withOnClickListener(null)
+                .withTextColor(Color.WHITE)
+                .withDrawablePadding(getContext(), 8)
+                .withIconGravity(Gravity.TOP)
+                .withGravity(Gravity.CENTER)
+                .withMatchParent(false)
+                .withTypeface(typeface)
+                .withDrawablePadding(getContext(), 0)
+                .withTextGravity(Gravity.CENTER);
     }
 
     public interface DesktopOptionViewListener {
