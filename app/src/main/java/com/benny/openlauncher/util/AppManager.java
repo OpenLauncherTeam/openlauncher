@@ -21,6 +21,7 @@ import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
+import com.benny.openlauncher.core.interfaces.IconDrawer;
 import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.IconLabelItem;
@@ -176,6 +177,16 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
     @Override
     public void onAppUpdated(Context p1, Intent p2) {
         onReceive(p1, p2);
+    }
+
+    @Override
+    public void notifyUpdateListeners(List<App> apps) {
+        Iterator<AppUpdateListener<App>> iter = updateListeners.iterator();
+        while (iter.hasNext()) {
+            if (iter.next().onAppUpdated(apps)) {
+                iter.remove();
+            }
+        }
     }
 
     @Override
@@ -336,28 +347,8 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
         }
 
         @Override
-        public void displayIcon(ImageView iv, int forceSize) {
-            iconProvider.displayIcon(iv, forceSize);
-        }
-
-        @Override
-        public void displayCompoundIcon(TextView tv, int gravity, int forceSize) {
-            iconProvider.displayCompoundIcon(tv, gravity, forceSize);
-        }
-
-        @Override
-        public Drawable getDrawable(int forceSize) {
-            return iconProvider.getDrawable(forceSize);
-        }
-
-        @Override
-        public Bitmap getBitmap(int forceSize) {
-            return iconProvider.getBitmap(forceSize);
-        }
-
-        @Override
-        public boolean isGroupIconDrawable() {
-            return iconProvider.isGroupIconDrawable();
+        public IconProvider getIconProvider() {
+            return iconProvider;
         }
     }
 

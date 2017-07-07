@@ -74,4 +74,6 @@ public interface SettingsManager {
     boolean searchBarTimeEnabled();
 
     SimpleDateFormat getUserDateFormat();
+
+    boolean enableImageCaching();
 }

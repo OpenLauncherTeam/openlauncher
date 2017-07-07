@@ -11,8 +11,10 @@ import android.widget.TextView;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.IconDrawer;
 import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.interfaces.LabelProvider;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.SimpleIconProvider;
 import com.benny.openlauncher.core.util.Tool;
 
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Item implements LabelProvider, IconProvider, Parcelable {
+public class Item implements LabelProvider, Parcelable {
 
     public enum Type {
         APP,
@@ -98,7 +100,19 @@ public class Item implements LabelProvider, IconProvider, Parcelable {
                 spanY = parcel.readInt();
                 break;
         }
-        iconProvider = new SimpleIconProvider(Tool.getIcon(Home.launcher, Integer.toString(idValue)));
+        if (Setup.appSettings().enableImageCaching()) {
+            Setup.imageLoader().createIconProvider(Tool.getIcon(Home.launcher, Integer.toString(idValue)));
+        } else {
+            switch (type) {
+                case APP:
+                    App app = Setup.appLoader().findItemApp(this);
+                    iconProvider = app != null ? app.getIconProvider() : null;
+                    break;
+                default:
+                    // TODO...
+                    break;
+            }
+        }
     }
 
     @Override
@@ -111,7 +125,7 @@ public class Item implements LabelProvider, IconProvider, Parcelable {
         Item item = new Item();
         item.type = Type.APP;
         item.name = app.getLabel();
-        item.iconProvider = app;
+        item.iconProvider = app.getIconProvider();
         item.intent = toIntent(app);
         return item;
     }
@@ -120,7 +134,7 @@ public class Item implements LabelProvider, IconProvider, Parcelable {
         Item item = new Item();
         item.type = Type.SHORTCUT;
         item.name = name;
-        item.iconProvider = new SimpleIconProvider(icon);
+        item.iconProvider = Setup.imageLoader().createIconProvider(icon);
         item.spanX = 1;
         item.spanY = 1;
         item.intent = intent;
@@ -263,41 +277,7 @@ public class Item implements LabelProvider, IconProvider, Parcelable {
         return intent;
     }
 
-    @Override
-    public void displayIcon(ImageView iv, int forceSize) {
-        if (iconProvider != null) {
-            iconProvider.displayIcon(iv, forceSize);
-        }
-    }
-
-    @Override
-    public void displayCompoundIcon(TextView tv, int gravity, int forceSize) {
-        if (iconProvider != null) {
-            iconProvider.displayCompoundIcon(tv, gravity, forceSize);
-        }
-    }
-
-    @Override
-    public Drawable getDrawable(int forceSize) {
-        if (iconProvider != null) {
-            return iconProvider.getDrawable(forceSize);
-        }
-        return null;
-    }
-
-    @Override
-    public Bitmap getBitmap(int forceSize) {
-        if (iconProvider != null) {
-            return iconProvider.getBitmap(forceSize);
-        }
-        return null;
-    }
-
-    @Override
-    public boolean isGroupIconDrawable() {
-        if (iconProvider != null) {
-            return iconProvider.isGroupIconDrawable();
-        }
-        return false;
+    public IconProvider getIconProvider() {
+        return iconProvider;
     }
 }

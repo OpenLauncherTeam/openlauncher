@@ -18,7 +18,7 @@ import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 
 import java.util.List;
 
-public abstract class Setup<A extends App> {
+public abstract class Setup<A extends App, AL extends Setup.AppLoader<A>> {
 
     // ----------------
     // Class and singleton
@@ -65,8 +65,8 @@ public abstract class Setup<A extends App> {
         return get().getDataManager();
     }
 
-    public static <A extends App> AppLoader<A> appLoader() {
-        return get().getAppLoader();
+    public static <A extends App, AL extends AppLoader<A>> AL appLoader() {
+        return (AL)get().getAppLoader();
     }
 
     public static EventHandler eventHandler() {
@@ -87,29 +87,9 @@ public abstract class Setup<A extends App> {
 
     public abstract DataManager getDataManager();
 
-    public abstract AppLoader<A> getAppLoader();
+    public abstract AL getAppLoader();
 
     public abstract EventHandler getEventHandler();
-
-    // TEMP
-
-    public class DefaultImageLoader implements ImageLoader {
-
-        @Override
-        public IconProvider createIconProvider(Drawable drawable) {
-            return new SimpleIconProvider(drawable);
-        }
-
-        @Override
-        public IconProvider createIconProvider(int icon) {
-            return new SimpleIconProvider(icon);
-        }
-
-        @Override
-        public IconProvider createIconProvider(Item item) {
-            return null;
-        }
-    }
 
     // ----------------
     // Interfaces
@@ -118,7 +98,6 @@ public abstract class Setup<A extends App> {
     public interface ImageLoader {
         IconProvider createIconProvider(Drawable drawable);
         IconProvider createIconProvider(int icon);
-        IconProvider createIconProvider(Item item);
     }
 
     public interface DataManager {
@@ -140,6 +119,7 @@ public abstract class Setup<A extends App> {
         void removeUpdateListener(AppUpdateListener<A> updateListener);
         void addDeleteListener(AppDeleteListener<A> deleteListener);
         void removeDeleteListener(AppDeleteListener<A> deleteListener);
+        void notifyUpdateListeners(List<A> apps);
     }
 
     public interface EventHandler {

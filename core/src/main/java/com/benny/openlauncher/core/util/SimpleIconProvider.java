@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.benny.openlauncher.core.interfaces.IconDrawer;
 import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
@@ -14,26 +15,17 @@ import com.benny.openlauncher.core.viewutil.GroupIconDrawable;
 
 public class SimpleIconProvider implements IconProvider {
 
-    private Item item;
-    private Drawable drawable;
-    private int drawableResource;
+    protected Drawable drawable;
+    protected int drawableResource;
 
     public SimpleIconProvider(Drawable drawable) {
-        this.item = null;
         this.drawable = drawable;
         this.drawableResource = -1;
     }
 
     public SimpleIconProvider(int drawableResource) {
-        this.item = null;
         this.drawable = null;
         this.drawableResource = drawableResource;
-    }
-
-    public SimpleIconProvider(Item item) {
-        this.item = item;
-        this.drawable = null;
-        this.drawableResource = -1;
     }
 
     private Drawable getDrawable() {
@@ -41,13 +33,8 @@ public class SimpleIconProvider implements IconProvider {
             return drawable;
         } else if (drawableResource > 0) {
             return Setup.appContext().getResources().getDrawable(drawableResource);
-        } else {
-            if (item != null && item.iconProvider != null) {
-                return item.iconProvider.getDrawable(Definitions.NO_SCALE);
-            } else {
-                return null;
-            }
         }
+        return null;
     }
 
     @Override
@@ -74,15 +61,31 @@ public class SimpleIconProvider implements IconProvider {
     }
 
     @Override
-    public Drawable getDrawable(int forceSize) {
-        Drawable d = getDrawable();
-        d = scaleDrawable(d, forceSize);
-        return d;
+    public void cancelLoad(ImageView iv) {
+        // nothing to load...
     }
 
     @Override
-    public Bitmap getBitmap(int forceSize) {
-        return Tool.drawableToBitmap(getDrawable(forceSize));
+    public void cancelLoad(TextView tv) {
+        // nothing to load...
+    }
+
+    @Override
+    public void cancelLoadDrawable() {
+        // nothing to load...
+    }
+
+    @Override
+    public void loadDrawable(IconDrawer iconDrawer, int forceSize) {
+        // we simply load the drawable in a synchronise way
+        iconDrawer.onIconAvailable(getDrawable());
+    }
+
+    @Override
+    public Drawable getDrawableSynchronously(int forceSize) {
+        Drawable d = getDrawable();
+        d = scaleDrawable(d, forceSize);
+        return d;
     }
 
     @Override

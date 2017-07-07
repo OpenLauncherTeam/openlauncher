@@ -22,6 +22,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
+import com.benny.openlauncher.core.util.BaseDatabaseHelper;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.viewutil.DialogHelper;
@@ -391,7 +392,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 if (key.equals(getString(R.string.pref_key__clear_database))) {
                     if (Home.launcher != null)
                         Home.launcher.recreate();
-                    ((DatabaseHelper) Home.launcher.db).onUpgrade(((DatabaseHelper) Home.launcher.db).getWritableDatabase(), 1, 1);
+                    ((BaseDatabaseHelper) Home.launcher.db).onUpgrade(((BaseDatabaseHelper) Home.launcher.db).getWritableDatabase(), 1, 1);
                     getActivity().finish();
                     return true;
                 }

@@ -39,7 +39,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private int textGravity = Gravity.CENTER_VERTICAL;
 
     public IconLabelItem(Item item) {
-        this.iconProvider = item;
+        this.iconProvider = item != null ? item.getIconProvider() : null;
         this.label = item != null ? item.getLabel() : null;
     }
 
@@ -175,6 +175,16 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         if (listener != null)
             holder.itemView.setOnClickListener(listener);
         super.bindView(holder, payloads);
+    }
+
+    @Override
+    public void unbindView(ViewHolder holder) {
+        super.unbindView(holder);
+        if (iconProvider != null) {
+            iconProvider.cancelLoad(holder.textView);
+        }
+        holder.textView.setText("");
+        holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

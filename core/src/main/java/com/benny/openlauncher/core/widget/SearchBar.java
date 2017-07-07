@@ -235,7 +235,7 @@ public class SearchBar extends FrameLayout {
                 }
                 for (int i = 0; i < apps.size(); i++) {
                     final App app = apps.get(i);
-                    items.add( new IconLabelItem(getContext(), app, app.getLabel(), 36)
+                    items.add( new IconLabelItem(getContext(), app.getIconProvider(), app.getLabel(), 36)
                             .withIconGravity(Gravity.START)
                             .withOnClickListener(new OnClickListener() {
                                 @Override

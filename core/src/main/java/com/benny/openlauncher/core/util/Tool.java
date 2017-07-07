@@ -269,14 +269,7 @@ public class Tool {
         if (item == null) {
             return null;
         }
-        if (item.type == Item.Type.SHORTCUT) {
-            return item.iconProvider;
-        } else {
-            App app = Setup.appLoader().findItemApp(item);
-            if (app != null)
-                return app;
-        }
-        return null;
+        return item.getIconProvider();
     }
 
     public static Drawable getIcon(Context context, String filename) {

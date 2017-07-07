@@ -64,6 +64,12 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
         super.bindView(holder, payloads);
     }
 
+    @Override
+    public void unbindView(DrawerAppItem.ViewHolder holder) {
+        super.unbindView(holder);
+        holder.appItemView.reset();
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         AppItemView appItemView;
 

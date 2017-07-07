@@ -72,6 +72,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return null;
     }
 
+    @Override
+    public boolean enableImageCaching() {
+        return true;
+    }
+
     public int getDesktopColor() {
         return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
     }

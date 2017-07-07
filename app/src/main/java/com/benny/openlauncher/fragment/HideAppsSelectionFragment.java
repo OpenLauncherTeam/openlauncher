@@ -163,7 +163,7 @@ public class HideAppsSelectionFragment extends Fragment {
             AppInfo tempAppInfo = new AppInfo(
                     app.packageName + "/" + app.className,
                     app.label,
-                    app.iconProvider.getDrawable(Definitions.NO_SCALE),
+                    app.iconProvider.getDrawableSynchronously(Definitions.NO_SCALE),
                     list_activities.contains(app.packageName + "/" + app.className)
             );
             list_activities_final.add(tempAppInfo);

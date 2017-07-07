@@ -6,15 +6,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,40 +27,29 @@ import android.widget.RelativeLayout;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.App;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.core.interfaces.AppDeleteListener;
-import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.DialogListener;
-import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.Setup;
-import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.SimpleIconProvider;
-import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.core.widget.Desktop;
-import com.benny.openlauncher.core.widget.GroupPopupView;
-import com.benny.openlauncher.core.model.DrawerAppItem;
-import com.benny.openlauncher.core.model.IconLabelItem;
 import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
+import com.benny.openlauncher.core.util.BaseDatabaseHelper;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
-import com.benny.openlauncher.core.viewutil.GroupIconDrawable;
 import com.benny.openlauncher.viewutil.IconListAdapter;
-import com.benny.openlauncher.core.viewutil.ItemViewFactory;
 import com.benny.openlauncher.viewutil.QuickCenterItem;
-import com.benny.openlauncher.core.widget.AppItemView;
 import com.benny.openlauncher.widget.LauncherLoadingIcon;
 import com.benny.openlauncher.widget.MiniPopupView;
 import com.benny.openlauncher.widget.SwipeListView;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -300,11 +286,6 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             public IconProvider createIconProvider(int icon) {
                 return new SimpleIconProvider(icon);
             }
-
-            @Override
-            public IconProvider createIconProvider(Item item) {
-                return new SimpleIconProvider(item);
-            }
         };
         final DesktopGestureListener.DesktopGestureCallback desktopGestureCallback = new DesktopGestureListener.DesktopGestureCallback() {
             @Override
@@ -360,7 +341,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
         };
         final Setup.DataManager dataManager = new DatabaseHelper(this);
-        final Setup.AppLoader<AppManager.App> appLoader = AppManager.getInstance(this);
+        final AppManager appLoader = AppManager.getInstance(this);
         final Setup.EventHandler eventHandler = new Setup.EventHandler() {
             @Override
             public void showLauncherSettings(Context context) {
@@ -401,7 +382,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
         };
 
-        Setup.init(new Setup<AppManager.App>() {
+        Setup.init(new Setup<AppManager.App, AppManager>() {
             @Override
             public Context getAppContext() {
                 return App.get();
@@ -428,7 +409,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
 
             @Override
-            public AppLoader<AppManager.App> getAppLoader() {
+            public AppManager getAppLoader() {
                 return appLoader;
             }
 

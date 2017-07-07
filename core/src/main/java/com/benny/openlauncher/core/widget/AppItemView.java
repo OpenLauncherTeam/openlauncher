@@ -16,6 +16,7 @@ import android.view.View;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.IconDrawer;
 import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.Definitions;
@@ -26,7 +27,7 @@ import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.viewutil.GroupIconDrawable;
 
-public class AppItemView extends View implements Drawable.Callback {
+public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
     public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item) {
         AppItemView.Builder b = new AppItemView.Builder(context)
@@ -63,6 +64,7 @@ public class AppItemView extends View implements Drawable.Callback {
                 .getView();
     }
 
+    private Drawable icon = null;
     private IconProvider iconProvider;
     private String label;
     private Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -84,8 +86,15 @@ public class AppItemView extends View implements Drawable.Callback {
         return iconProvider;
     }
 
+    public Drawable getCurrentIcon() {
+        return icon;
+    }
+
     public void setIconProvider(IconProvider iconProvider) {
         this.iconProvider = iconProvider;
+        if (iconProvider != null) {
+            iconProvider.loadDrawable(this, (int)iconSize);
+        }
     }
 
     public String getLabel() {
@@ -102,6 +111,9 @@ public class AppItemView extends View implements Drawable.Callback {
 
     public void setIconSize(float iconSize) {
         this.iconSize = iconSize;
+        if (iconProvider != null) {
+            iconProvider.loadDrawable(this, (int)iconSize);
+        }
     }
 
     public boolean getShowLabel() {
@@ -136,6 +148,15 @@ public class AppItemView extends View implements Drawable.Callback {
         textPaint.setTextSize(Tool.sp2px(getContext(), 14));
         textPaint.setColor(Color.DKGRAY);
         textPaint.setTypeface(typeface);
+    }
+
+    public void reset() {
+        if (iconProvider != null) {
+            iconProvider.cancelLoadDrawable();
+        }
+        label = "";
+        icon = null;
+        invalidate();
     }
 
     @Override
@@ -178,13 +199,36 @@ public class AppItemView extends View implements Drawable.Callback {
         }
 
         // center the icon
-        Drawable icon = iconProvider != null ? iconProvider.getDrawable(Definitions.NO_SCALE) : null;
+        //Drawable icon = iconProvider != null ? iconProvider.getDrawable(Definitions.NO_SCALE) : null;
         if (icon != null) {
             canvas.save();
             canvas.translate((getWidth() - iconSize) / 2, heightPadding);
             icon.setBounds(0, 0, (int) iconSize, (int) iconSize);
             icon.draw(canvas);
             canvas.restore();
+        }
+    }
+
+    @Override
+    public void onIconAvailable(Drawable drawable) {
+        icon = drawable;
+        super.invalidate();
+    }
+
+    @Override
+    public void onDetachedFromWindow() {
+        if (iconProvider != null) {
+            iconProvider.cancelLoadDrawable();
+        }
+        super.onDetachedFromWindow();
+    }
+
+    @Override
+    public void invalidate() {
+        if (iconProvider != null) {
+            iconProvider.loadDrawable(this, (int)iconSize);
+        } else {
+            super.invalidate();
         }
     }
 
@@ -209,7 +253,7 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder setAppItem(final App app) {
             view.setLabel(app.getLabel());
-            view.setIconProvider(app);
+            view.setIconProvider(app.getIconProvider());
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -226,7 +270,7 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder setAppItem(final Item item, final App app) {
             view.setLabel(item.getLabel());
-            view.setIconProvider(app);
+            view.setIconProvider(app.getIconProvider());
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -243,7 +287,7 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder setShortcutItem(final Item item) {
             view.setLabel(item.getLabel());
-            view.setIconProvider(item);
+            view.setIconProvider(item.getIconProvider());
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -265,7 +309,7 @@ public class AppItemView extends View implements Drawable.Callback {
                 @Override
                 public void onClick(View v) {
                     if (Home.launcher != null && (Home.launcher).groupPopup.showWindowV(item, v, callback)) {
-                        ((GroupIconDrawable) ((AppItemView) v).getIconProvider().getDrawable(Definitions.NO_SCALE)).popUp();
+                        ((GroupIconDrawable) ((AppItemView) v).getCurrentIcon()).popUp();
                     }
                 }
             });
