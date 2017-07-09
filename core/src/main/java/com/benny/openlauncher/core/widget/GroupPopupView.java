@@ -45,6 +45,9 @@ public class GroupPopupView extends FrameLayout {
             return;
         }
         popupParent = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_group_popup, this, false);
+        if (Setup.appSettings().getPopupColor() != -1) {
+            popupParent.setCardBackgroundColor(Setup.appSettings().getPopupColor());
+        }
         cellContainer = (CellContainer) popupParent.findViewById(R.id.group);
 
         bringToFront();

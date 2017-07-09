@@ -47,6 +47,14 @@ public interface SettingsManager {
 
     int getDrawerLabelColor();
 
+    /**
+     * @return color of a folder popup's CardView or -1 if xml default color should be used
+     */
+    int getPopupColor();
+
+    /**
+     * @return color of a folder popup's text color for icons
+     */
     int getPopupLabelColor();
 
     boolean isDrawerRememberPosition();
