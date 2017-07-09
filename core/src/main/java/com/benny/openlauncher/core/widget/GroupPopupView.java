@@ -93,10 +93,7 @@ public class GroupPopupView extends FrameLayout {
                     continue;
                 }
                 final Item groupItem = item.getGroupItems().get(y2 * cellSize[0] + x2);
-                App groupApp = null;
-                if (groupItem.getType() != Item.Type.SHORTCUT) {
-                    groupApp = Setup.appLoader().findItemApp(groupItem);
-                }
+                final App groupApp = groupItem.getType() != Item.Type.SHORTCUT ? Setup.appLoader().findItemApp(groupItem) : null;
                 AppItemView appItemView = AppItemView.createAppItemViewPopup(getContext(), groupItem, groupApp);
                 final View view = appItemView.getView();
 
@@ -110,7 +107,7 @@ public class GroupPopupView extends FrameLayout {
                         DragAction.Action action = groupItem.getType() == Item.Type.SHORTCUT ? DragAction.Action.SHORTCUT : DragAction.Action.APP;
 
                         // start the drag action
-                        DragDropHandler.startDrag(itemView, groupItem, action, null);
+                        DragDropHandler.startDrag(view, groupItem, action, null);
 
                         dismissPopup();
                         updateItem(c, callBack, item, groupItem, itemView);
