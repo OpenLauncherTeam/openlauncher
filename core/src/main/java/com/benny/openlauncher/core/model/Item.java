@@ -96,7 +96,7 @@ public class Item implements LabelProvider, Parcelable {
                 break;
         }
         if (Setup.appSettings().enableImageCaching()) {
-            Setup.imageLoader().createIconProvider(Tool.getIcon(Home.launcher, Integer.toString(idValue)));
+            iconProvider = Setup.imageLoader().createIconProvider(Tool.getIcon(Home.launcher, Integer.toString(idValue)));
         } else {
             switch (type) {
                 case APP:

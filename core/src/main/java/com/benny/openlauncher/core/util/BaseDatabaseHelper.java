@@ -297,7 +297,7 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
             case SHORTCUT:
                 item.intent = Tool.getIntentFromString(data);
                 if (Setup.appSettings().enableImageCaching()) {
-                    Setup.imageLoader().createIconProvider(Tool.getIcon(Home.launcher, Integer.toString(id)));
+                    item.iconProvider = Setup.imageLoader().createIconProvider(Tool.getIcon(Home.launcher, Integer.toString(id)));
                 } else {
                     switch (type) {
                         case APP:
