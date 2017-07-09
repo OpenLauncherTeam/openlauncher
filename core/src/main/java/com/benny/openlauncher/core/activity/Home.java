@@ -649,6 +649,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     protected void onHandleLauncherPause() {
         searchBar.collapse();
+        groupPopup.dismissPopup();
 
         if (desktop != null) {
             if (!desktop.inEditMode) {

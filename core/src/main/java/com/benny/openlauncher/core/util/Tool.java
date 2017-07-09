@@ -335,6 +335,10 @@ public class Tool {
 
     public static <A extends App> List<A> getRemovedApps(List<A> oldApps, List<A> newApps) {
         List<A> removed = new ArrayList<>();
+        // if this is the first call to this function and we did not know any app yet, we return an empty list
+        if (oldApps.size() == 0) {
+            return removed;
+        }
         // we can't rely on sizes because apps may have been installed and deinstalled!
         //if (oldApps.size() > newApps.size()) {
             for (int i = 0; i < oldApps.size(); i++) {
