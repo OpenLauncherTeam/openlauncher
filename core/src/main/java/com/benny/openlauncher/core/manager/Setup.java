@@ -73,6 +73,10 @@ public abstract class Setup<A extends App, AL extends Setup.AppLoader<A>> {
         return get().getEventHandler();
     }
 
+    public static Logger logger() {
+        return get().getLogger();
+    }
+
     // ----------------
     // Settings
     // ----------------
@@ -90,6 +94,8 @@ public abstract class Setup<A extends App, AL extends Setup.AppLoader<A>> {
     public abstract AL getAppLoader();
 
     public abstract EventHandler getEventHandler();
+
+    public abstract Logger getLogger();
 
     // ----------------
     // Interfaces
@@ -120,6 +126,7 @@ public abstract class Setup<A extends App, AL extends Setup.AppLoader<A>> {
         void addDeleteListener(AppDeleteListener<A> deleteListener);
         void removeDeleteListener(AppDeleteListener<A> deleteListener);
         void notifyUpdateListeners(List<A> apps);
+        void notifyRemoveListeners(List<A> apps);
     }
 
     public interface EventHandler {
@@ -127,5 +134,9 @@ public abstract class Setup<A extends App, AL extends Setup.AppLoader<A>> {
         void showPickAction(Context context, DialogListener.OnAddAppDrawerItemListener listener);
         void showEditDialog(Context context, Item item, DialogListener.OnEditDialogListener listener);
         void showDeletePackageDialog(Context context, DragEvent dragEvent);
+    }
+
+    public interface Logger {
+        void log(Object source, int priority, String tag, String msg, Object args);
     }
 }

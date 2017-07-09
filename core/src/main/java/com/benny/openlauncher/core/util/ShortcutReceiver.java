@@ -50,7 +50,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
         } else {
             item.setX(preferredPos.x);
             item.setY(preferredPos.y);
-            Home.db.saveItem(item, Home.launcher.desktop.getCurrentItem(), Definitions.ItemPosition.Dock);
+            Home.db.saveItem(item, Home.launcher.desktop.getCurrentItem(), Definitions.ItemPosition.Desktop);
             Home.launcher.desktop.addItemToPage(item, Home.launcher.desktop.getCurrentItem());
         }
     }

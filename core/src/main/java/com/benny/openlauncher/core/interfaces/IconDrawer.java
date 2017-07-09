@@ -6,5 +6,5 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public interface IconDrawer {
-    void onIconAvailable(Drawable drawable);
+    void onIconAvailable(Drawable drawable, int index);
 }

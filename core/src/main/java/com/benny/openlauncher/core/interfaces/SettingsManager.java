@@ -47,6 +47,8 @@ public interface SettingsManager {
 
     int getDrawerLabelColor();
 
+    int getPopupLabelColor();
+
     boolean isDrawerRememberPosition();
 
     boolean isDesktopFullscreen();

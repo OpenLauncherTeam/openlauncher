@@ -32,7 +32,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item) {
         AppItemView.Builder b = new AppItemView.Builder(context)
                 .withOnTouchGetPosition()
-                .setTextColor(Setup.appSettings().getDrawerLabelColor());
+                .setTextColor(Setup.appSettings().getPopupLabelColor());
         if (groupItem.type == Item.Type.SHORTCUT) {
             b.setShortcutItem(groupItem);
         } else {
@@ -93,7 +93,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     public void setIconProvider(IconProvider iconProvider) {
         this.iconProvider = iconProvider;
         if (iconProvider != null) {
-            iconProvider.loadDrawable(this, (int)iconSize);
+            iconProvider.loadDrawable(this, 0, (int)iconSize);
         }
     }
 
@@ -112,7 +112,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     public void setIconSize(float iconSize) {
         this.iconSize = iconSize;
         if (iconProvider != null) {
-            iconProvider.loadDrawable(this, (int)iconSize);
+            iconProvider.loadDrawable(this, 0, (int)iconSize);
         }
     }
 
@@ -210,7 +210,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     }
 
     @Override
-    public void onIconAvailable(Drawable drawable) {
+    public void onIconAvailable(Drawable drawable, int index) {
         icon = drawable;
         super.invalidate();
     }
@@ -219,6 +219,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     public void onDetachedFromWindow() {
         if (iconProvider != null) {
             iconProvider.cancelLoadDrawable();
+            icon = null;
         }
         super.onDetachedFromWindow();
     }
@@ -226,7 +227,8 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     @Override
     public void invalidate() {
         if (iconProvider != null) {
-            iconProvider.loadDrawable(this, (int)iconSize);
+            iconProvider.cancelLoadDrawable();
+            icon = null;
         } else {
             super.invalidate();
         }

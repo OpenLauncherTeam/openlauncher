@@ -92,7 +92,7 @@ public class GroupPopupView extends FrameLayout {
                 if (y2 * cellSize[0] + x2 > item.getGroupItems().size() - 1) {
                     continue;
                 }
-                final Item groupItem = (Item) item.getGroupItems().get(y2 * cellSize[0] + x2);
+                final Item groupItem = item.getGroupItems().get(y2 * cellSize[0] + x2);
                 App groupApp = null;
                 if (groupItem.getType() != Item.Type.SHORTCUT) {
                     groupApp = Setup.appLoader().findItemApp(groupItem);

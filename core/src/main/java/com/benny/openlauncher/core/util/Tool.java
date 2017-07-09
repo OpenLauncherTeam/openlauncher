@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tool {
@@ -330,5 +331,19 @@ public class Tool {
                 return false;
             }
         };
+    }
+
+    public static <A extends App> List<A> getRemovedApps(List<A> oldApps, List<A> newApps) {
+        List<A> removed = new ArrayList<>();
+        // we can't rely on sizes because apps may have been installed and deinstalled!
+        //if (oldApps.size() > newApps.size()) {
+            for (int i = 0; i < oldApps.size(); i++) {
+                if (!newApps.contains(oldApps.get(i))) {
+                    removed.add(oldApps.get(i));
+                    break;
+                }
+            }
+//        }
+        return removed;
     }
 }

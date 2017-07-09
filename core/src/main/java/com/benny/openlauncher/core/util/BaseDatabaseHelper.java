@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.benny.openlauncher.core.activity.Home;
+import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
 
@@ -124,7 +125,7 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
         if (cursor.getCount() == 0) {
             createItem(item, page, itemPosition);
         } else if (cursor.getCount() == 1) {
-            updateItem(item, page, Definitions.ItemPosition.Desktop);
+            updateItem(item, page, itemPosition);
         }
     }
 
@@ -294,8 +295,21 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
         switch (type) {
             case APP:
             case SHORTCUT:
-                item.iconProvider = Setup.imageLoader().createIconProvider(Tool.getIcon(Home.launcher, Integer.toString(item.getId())));
                 item.intent = Tool.getIntentFromString(data);
+                if (Setup.appSettings().enableImageCaching()) {
+                    Setup.imageLoader().createIconProvider(Tool.getIcon(Home.launcher, Integer.toString(id)));
+                } else {
+                    switch (type) {
+                        case APP:
+                        case SHORTCUT:
+                            App app = Setup.appLoader().findItemApp(item);
+                            item.iconProvider = app != null ? app.getIconProvider() : null;
+                            break;
+                        default:
+                            // TODO...
+                            break;
+                    }
+                }
                 break;
             case GROUP:
                 item.items = new ArrayList<>();

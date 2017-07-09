@@ -105,6 +105,7 @@ public class Item implements LabelProvider, Parcelable {
         } else {
             switch (type) {
                 case APP:
+                case SHORTCUT:
                     App app = Setup.appLoader().findItemApp(this);
                     iconProvider = app != null ? app.getIconProvider() : null;
                     break;

@@ -293,15 +293,15 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
             }
         });
         Setup.appLoader().addDeleteListener(new AppDeleteListener<App>() {
-
             @Override
-            public void onAppDeleted(App app) {
+            public boolean onAppDeleted(List<App> app) {
                 if (Setup.appSettings().getDesktopStyle() == Desktop.DesktopMode.NORMAL) {
                     desktop.initDesktopNormal(Home.this);
                 } else if (Setup.appSettings().getDesktopStyle() == Desktop.DesktopMode.SHOW_ALL_APPS) {
                     desktop.initDesktopShowAll(Home.this, Home.this);
                 }
                 dock.initDockItem(Home.this);
+                return false;
             }
         });
     }

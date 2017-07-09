@@ -145,6 +145,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getInt(R.string.pref_key__drawer_label_color, Color.DKGRAY);
     }
 
+    @Override
+    public int getPopupLabelColor() {
+        return getDrawerLabelColor();
+    }
+
     public int getMinibarBackgroundColor() {
         return getInt(R.string.pref_key__minibar_background_color, ContextCompat.getColor(context, R.color.colorPrimaryDark));
     }

@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -169,6 +170,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         if (bold)
             holder.textView.setTypeface(Typeface.DEFAULT_BOLD);
 
+        Setup.logger().log(this, Log.INFO, null, "IconLabelItem - forceSize: %d", forceSize);
         iconProvider.displayCompoundIcon(holder.textView, iconGravity, forceSize);
 
         holder.textView.setTextColor(textColor);

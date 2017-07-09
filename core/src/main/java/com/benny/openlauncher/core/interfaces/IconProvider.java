@@ -9,7 +9,7 @@ import com.benny.openlauncher.core.model.Item;
 public interface IconProvider {
     void displayIcon(ImageView iv, int forceSize);
     void displayCompoundIcon(TextView tv, int gravity, int forceSize);
-    void loadDrawable(IconDrawer iconDrawer, int forceSize);
+    void loadDrawable(IconDrawer iconDrawer, int index, int forceSize);
 
     void cancelLoad(ImageView iv);
     void cancelLoad(TextView tv);

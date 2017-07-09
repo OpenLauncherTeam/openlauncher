@@ -16,6 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
@@ -381,7 +382,12 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                 DialogHelper.deletePackageDialog(context, dragEvent);
             }
         };
-
+        final Setup.Logger logger = new Setup.Logger() {
+            @Override
+            public void log(Object source, int priority, String tag, String msg, Object args) {
+                Log.println(priority, tag, String.format(msg, args));
+            }
+        };
         Setup.init(new Setup<AppManager.App, AppManager>() {
             @Override
             public Context getAppContext() {
@@ -416,6 +422,11 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             @Override
             public EventHandler getEventHandler() {
                 return eventHandler;
+            }
+
+            @Override
+            public Logger getLogger() {
+                return logger;
             }
         });
     }

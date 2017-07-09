@@ -76,9 +76,9 @@ public class SimpleIconProvider implements IconProvider {
     }
 
     @Override
-    public void loadDrawable(IconDrawer iconDrawer, int forceSize) {
+    public void loadDrawable(IconDrawer iconDrawer, int index, int forceSize) {
         // we simply load the drawable in a synchronise way
-        iconDrawer.onIconAvailable(getDrawable());
+        iconDrawer.onIconAvailable(getDrawable(), index);
     }
 
     @Override

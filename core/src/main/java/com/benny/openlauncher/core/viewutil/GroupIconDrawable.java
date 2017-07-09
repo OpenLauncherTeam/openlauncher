@@ -10,16 +10,16 @@ import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.RectF;
 import android.graphics.Region;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
 import com.benny.openlauncher.core.activity.Home;
+import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.IconDrawer;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
-import com.benny.openlauncher.core.util.Definitions;
 import com.benny.openlauncher.core.util.Tool;
 
-public class GroupIconDrawable extends Drawable {
+public class GroupIconDrawable extends Drawable implements IconDrawer {
 
     private int outlinepad;
     Bitmap[] icons;
@@ -41,13 +41,12 @@ public class GroupIconDrawable extends Drawable {
         final float size = Tool.dp2px(Setup.appSettings().getIconSize(), context);
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {
-            if (i < item.items.size() && item.items.get(i) != null) {
-                icons[i] = Tool.drawableToBitmap(Setup.appLoader().findItemApp(item.items.get(i)).getIconProvider().getDrawableSynchronously((int)size));
-            } else {
-                icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
-            }
+            icons[i] = null;
         }
         init(icons, size);
+        for (int i = 0; i < 4 && i < item.items.size(); i++) {
+            Setup.appLoader().findItemApp(item.items.get(i)).getIconProvider().loadDrawable(this, i, (int) size);
+        }
     }
 
     private void init(Bitmap[] icons, float size) {
@@ -143,5 +142,11 @@ public class GroupIconDrawable extends Drawable {
     @Override
     public int getOpacity() {
         return PixelFormat.TRANSPARENT;
+    }
+
+    @Override
+    public void onIconAvailable(Drawable drawable, int index) {
+        icons[index] = Tool.drawableToBitmap(drawable);
+        invalidateSelf();
     }
 }

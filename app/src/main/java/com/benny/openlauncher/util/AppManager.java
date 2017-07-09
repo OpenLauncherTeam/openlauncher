@@ -190,6 +190,16 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
     }
 
     @Override
+    public void notifyRemoveListeners(List<App> apps) {
+        Iterator<AppDeleteListener<App>> iter = deleteListeners.iterator();
+        while (iter.hasNext()) {
+            if (iter.next().onAppDeleted(apps)) {
+                iter.remove();
+            }
+        }
+    }
+
+    @Override
     public void addUpdateListener(AppUpdateListener updateListener) {
         updateListeners.add(updateListener);
     }
@@ -273,24 +283,11 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
         @Override
         protected void onPostExecute(Object result) {
 
-            Iterator<AppUpdateListener<App>> iter = updateListeners.iterator();
-            while (iter.hasNext()) {
-                if (iter.next().onAppUpdated(apps)) {
-                    iter.remove();
-                }
-            }
+            notifyUpdateListeners(apps);
 
-            if (tempApps.size() > apps.size()) {
-                App temp = null;
-                for (int i = 0; i < tempApps.size(); i++) {
-                    if (!apps.contains(tempApps.get(i))) {
-                        temp = tempApps.get(i);
-                        break;
-                    }
-                }
-                for (AppDeleteListener<App> listener : deleteListeners) {
-                    listener.onAppDeleted(temp);
-                }
+            List<App> removed = Tool.getRemovedApps(tempApps, apps);
+            if (removed.size() > 0) {
+                notifyRemoveListeners(removed);
             }
 
             if (recreateAfterGettingApps) {
