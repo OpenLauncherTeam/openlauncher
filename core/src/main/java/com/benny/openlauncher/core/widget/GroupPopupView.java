@@ -143,7 +143,9 @@ public class GroupPopupView extends FrameLayout {
             @Override
             public void onDismiss() {
                 if (((AppItemView)itemView).getIconProvider().isGroupIconDrawable()) {
-                    ((GroupIconDrawable) ((AppItemView)itemView).getCurrentIcon()).popBack();
+                    if (((AppItemView)itemView).getCurrentIcon() != null) {
+                        ((GroupIconDrawable) ((AppItemView) itemView).getCurrentIcon()).popBack();
+                    }
                 }
             }
         };
