@@ -18,7 +18,7 @@ import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 
 import java.util.List;
 
-public abstract class Setup<A extends App, AL extends Setup.AppLoader<A>> {
+public abstract class Setup<A extends App> {
 
     // ----------------
     // Class and singleton
@@ -57,15 +57,15 @@ public abstract class Setup<A extends App, AL extends Setup.AppLoader<A>> {
         return get().getDesktopGestureCallback();
     }
 
-    public static ImageLoader imageLoader() {
-        return get().getImageLoader();
+    public static <IL extends ImageLoader<A>, A extends App> IL imageLoader() {
+        return (IL)get().getImageLoader();
     }
 
     public static DataManager dataManager() {
         return get().getDataManager();
     }
 
-    public static <A extends App, AL extends AppLoader<A>> AL appLoader() {
+    public static <AL extends AppLoader<A>, A extends App> AL appLoader() {
         return (AL)get().getAppLoader();
     }
 
@@ -87,11 +87,11 @@ public abstract class Setup<A extends App, AL extends Setup.AppLoader<A>> {
 
     public abstract DesktopGestureListener.DesktopGestureCallback getDesktopGestureCallback();
 
-    public abstract ImageLoader getImageLoader();
+    public abstract ImageLoader<A> getImageLoader();
 
     public abstract DataManager getDataManager();
 
-    public abstract AL getAppLoader();
+    public abstract AppLoader<A> getAppLoader();
 
     public abstract EventHandler getEventHandler();
 
@@ -101,7 +101,7 @@ public abstract class Setup<A extends App, AL extends Setup.AppLoader<A>> {
     // Interfaces
     // ----------------
 
-    public interface ImageLoader {
+    public interface ImageLoader<A extends App> {
         IconProvider createIconProvider(Drawable drawable);
         IconProvider createIconProvider(int icon);
     }

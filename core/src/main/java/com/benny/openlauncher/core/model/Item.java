@@ -1,21 +1,16 @@
 package com.benny.openlauncher.core.model;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
-import com.benny.openlauncher.core.interfaces.IconDrawer;
 import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.interfaces.LabelProvider;
 import com.benny.openlauncher.core.manager.Setup;
-import com.benny.openlauncher.core.util.SimpleIconProvider;
 import com.benny.openlauncher.core.util.Tool;
 
 import java.util.ArrayList;

@@ -92,9 +92,6 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
     public void setIconProvider(IconProvider iconProvider) {
         this.iconProvider = iconProvider;
-        if (iconProvider != null) {
-            iconProvider.loadDrawable(this, 0, (int)iconSize);
-        }
     }
 
     public String getLabel() {
@@ -111,9 +108,6 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
     public void setIconSize(float iconSize) {
         this.iconSize = iconSize;
-        if (iconProvider != null) {
-            iconProvider.loadDrawable(this, 0, (int)iconSize);
-        }
     }
 
     public boolean getShowLabel() {
@@ -213,6 +207,13 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     public void onIconAvailable(Drawable drawable, int index) {
         icon = drawable;
         super.invalidate();
+    }
+    @Override
+    public void onAttachedToWindow() {
+        if (iconProvider != null) {
+            iconProvider.loadDrawable(this, 0, (int) iconSize);
+        }
+        super.onAttachedToWindow();
     }
 
     @Override

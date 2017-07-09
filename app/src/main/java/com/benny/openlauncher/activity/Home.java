@@ -388,7 +388,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                 Log.println(priority, tag, String.format(msg, args));
             }
         };
-        Setup.init(new Setup<AppManager.App, AppManager>() {
+        Setup.init(new Setup<AppManager.App>() {
             @Override
             public Context getAppContext() {
                 return App.get();
