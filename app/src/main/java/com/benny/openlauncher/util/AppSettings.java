@@ -146,6 +146,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     @Override
+    public int getPopupColor() {
+        return -1;
+    }
+
+    @Override
     public int getPopupLabelColor() {
         return getDrawerLabelColor();
     }
