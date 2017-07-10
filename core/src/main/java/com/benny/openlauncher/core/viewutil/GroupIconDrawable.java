@@ -10,7 +10,9 @@ import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.RectF;
 import android.graphics.Region;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
@@ -45,7 +47,13 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         }
         init(icons, size);
         for (int i = 0; i < 4 && i < item.items.size(); i++) {
-            Setup.appLoader().findItemApp(item.items.get(i)).getIconProvider().loadDrawable(this, i, (int) size);
+            App app = Setup.appLoader().findItemApp(item.items.get(i));
+            if (app == null) {
+                Setup.logger().log(this, Log.DEBUG, null, "Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, item.items.get(i).getIntent());
+                icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
+            } else {
+                app.getIconProvider().loadDrawable(this, i, (int) size);
+            }
         }
     }
 

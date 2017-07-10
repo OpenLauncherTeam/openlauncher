@@ -137,6 +137,6 @@ public abstract class Setup<A extends App> {
     }
 
     public interface Logger {
-        void log(Object source, int priority, String tag, String msg, Object args);
+        void log(Object source, int priority, String tag, String msg, Object... args);
     }
 }
