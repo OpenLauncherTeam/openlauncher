@@ -13,7 +13,7 @@ import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.viewutil.GroupIconDrawable;
 
-public class SimpleIconProvider implements IconProvider {
+public class SimpleIconProvider extends BaseIconProvider {
 
     protected Drawable drawable;
     protected int drawableResource;
@@ -38,47 +38,44 @@ public class SimpleIconProvider implements IconProvider {
     }
 
     @Override
-    public void displayIcon(ImageView iv, int forceSize) {
-        Drawable d = getDrawable();
-        d = scaleDrawable(d, forceSize);
-        iv.setImageDrawable(d);
-    }
-
-    @Override
-    public void displayCompoundIcon(TextView tv, int gravity, int forceSize) {
-        Drawable d = getDrawable();
-        d = scaleDrawable(d, forceSize);
-
-        if (gravity == Gravity.LEFT || gravity == Gravity.START) {
-            tv.setCompoundDrawablesWithIntrinsicBounds(d, null, null, null);
-        } else if (gravity == Gravity.RIGHT || gravity == Gravity.END) {
-            tv.setCompoundDrawablesWithIntrinsicBounds(null, null, d, null);
-        } else if (gravity == Gravity.TOP) {
-            tv.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else if (gravity == Gravity.BOTTOM) {
-            tv.setCompoundDrawablesWithIntrinsicBounds(null, null, null, d);
+    public void loadIcon(IconTargetType type, int forceSize, Object target, Object... args) {
+        switch (type) {
+            case ImageView: {
+                ImageView iv = (ImageView) target;
+                Drawable d = getDrawable();
+                d = scaleDrawable(d, forceSize);
+                iv.setImageDrawable(d);
+                break;
+            }
+            case TextView: {
+                TextView tv = (TextView) target;
+                int gravity = (Integer) args[0];
+                Drawable d = getDrawable();
+                d = scaleDrawable(d, forceSize);
+                if (gravity == Gravity.LEFT || gravity == Gravity.START) {
+                    tv.setCompoundDrawablesWithIntrinsicBounds(d, null, null, null);
+                } else if (gravity == Gravity.RIGHT || gravity == Gravity.END) {
+                    tv.setCompoundDrawablesWithIntrinsicBounds(null, null, d, null);
+                } else if (gravity == Gravity.TOP) {
+                    tv.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
+                } else if (gravity == Gravity.BOTTOM) {
+                    tv.setCompoundDrawablesWithIntrinsicBounds(null, null, null, d);
+                }
+                break;
+            }
+            case IconDrawer: {
+                IconDrawer iconDrawer = (IconDrawer) target;
+                int index = (Integer) args[0];
+                // we simply load the drawable in a synchronised way
+                iconDrawer.onIconAvailable(getDrawable(), index);
+                break;
+            }
         }
     }
 
     @Override
-    public void cancelLoad(ImageView iv) {
-        // nothing to load...
-    }
-
-    @Override
-    public void cancelLoad(TextView tv) {
-        // nothing to load...
-    }
-
-    @Override
-    public void cancelLoadDrawable() {
-        // nothing to load...
-    }
-
-    @Override
-    public void loadDrawable(IconDrawer iconDrawer, int index, int forceSize) {
-        // we simply load the drawable in a synchronise way
-        iconDrawer.onIconAvailable(getDrawable(), index);
+    public void cancelLoad(IconTargetType type, Object target) {
+        // nothing to cancel... we load everything in an synchronous way
     }
 
     @Override

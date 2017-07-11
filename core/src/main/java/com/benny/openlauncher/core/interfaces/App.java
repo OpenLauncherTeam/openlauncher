@@ -1,5 +1,7 @@
 package com.benny.openlauncher.core.interfaces;
 
+import com.benny.openlauncher.core.util.BaseIconProvider;
+
 public interface App {
     String getLabel();
 
@@ -7,5 +9,5 @@ public interface App {
 
     String getClassName();
 
-    IconProvider getIconProvider();
+    <T extends BaseIconProvider> T getIconProvider();
 }

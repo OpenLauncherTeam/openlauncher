@@ -15,6 +15,7 @@ import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.util.BaseIconProvider;
 import com.benny.openlauncher.core.util.Tool;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
@@ -23,7 +24,7 @@ import java.util.List;
 public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> implements FastItem.LabelItem<IconLabelItem, IconLabelItem.ViewHolder>, FastItem.DesktopOptionsItem<IconLabelItem, IconLabelItem.ViewHolder> {
 
     // Data
-    protected IconProvider iconProvider = null;
+    protected BaseIconProvider iconProvider = null;
     protected String label = null;
 
     // Others
@@ -67,7 +68,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         this.forceSize = forceSize;
     }
 
-    public IconLabelItem(Context context, IconProvider iconProvider, String label, int forceSize) {
+    public IconLabelItem(Context context, BaseIconProvider iconProvider, String label, int forceSize) {
         this(null);
         this.label = label;
         this.iconProvider = iconProvider;
@@ -171,7 +172,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
             holder.textView.setTypeface(Typeface.DEFAULT_BOLD);
 
         Setup.logger().log(this, Log.INFO, null, "IconLabelItem - forceSize: %d", forceSize);
-        iconProvider.displayCompoundIcon(holder.textView, iconGravity, forceSize);
+        iconProvider.loadIconIntoTextView(holder.textView, forceSize, iconGravity);
 
         holder.textView.setTextColor(textColor);
         if (listener != null)

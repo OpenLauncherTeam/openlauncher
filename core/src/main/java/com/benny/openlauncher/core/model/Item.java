@@ -8,9 +8,9 @@ import android.os.Parcelable;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
-import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.interfaces.LabelProvider;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.util.BaseIconProvider;
 import com.benny.openlauncher.core.util.Tool;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class Item implements LabelProvider, Parcelable {
     private int idValue;
     public Type type;
     private String name = "";
-    public IconProvider iconProvider = null;
+    public BaseIconProvider iconProvider = null;
     public int x = 0;
     public int y = 0;
 
@@ -273,7 +273,7 @@ public class Item implements LabelProvider, Parcelable {
         return intent;
     }
 
-    public IconProvider getIconProvider() {
+    public BaseIconProvider getIconProvider() {
         return iconProvider;
     }
 }

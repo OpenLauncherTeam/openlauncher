@@ -26,6 +26,7 @@ import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.IconLabelItem;
 import com.benny.openlauncher.core.model.Item;
+import com.benny.openlauncher.core.util.BaseIconProvider;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.text.Collator;
@@ -302,7 +303,7 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
 
     public static class App implements com.benny.openlauncher.core.interfaces.App {
         public String label, packageName, className;
-        public IconProvider iconProvider;
+        public BaseIconProvider iconProvider;
         public ResolveInfo info;
 
         public App(Context context, ResolveInfo info, PackageManager pm) {
@@ -344,7 +345,7 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
         }
 
         @Override
-        public IconProvider getIconProvider() {
+        public BaseIconProvider getIconProvider() {
             return iconProvider;
         }
     }

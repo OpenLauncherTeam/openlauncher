@@ -7,4 +7,5 @@ import android.widget.TextView;
 
 public interface IconDrawer {
     void onIconAvailable(Drawable drawable, int index);
+    void onIconCleared(Drawable placeholder, int index);
 }

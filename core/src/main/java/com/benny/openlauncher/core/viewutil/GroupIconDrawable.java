@@ -52,7 +52,7 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
                 Setup.logger().log(this, Log.DEBUG, null, "Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, item.items.get(i).getIntent());
                 icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
             } else {
-                app.getIconProvider().loadDrawable(this, i, (int) size);
+                app.getIconProvider().loadIconIntoIconDrawer(this, (int) size, i);
             }
         }
     }
@@ -155,6 +155,12 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
     @Override
     public void onIconAvailable(Drawable drawable, int index) {
         icons[index] = Tool.drawableToBitmap(drawable);
+        invalidateSelf();
+    }
+
+    @Override
+    public void onIconCleared(Drawable placeholder, int index) {
+        icons[index] = placeholder == null ? Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT)) : Tool.drawableToBitmap(placeholder);
         invalidateSelf();
     }
 }

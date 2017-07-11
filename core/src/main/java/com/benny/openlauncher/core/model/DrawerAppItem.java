@@ -1,6 +1,7 @@
 package com.benny.openlauncher.core.model;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.benny.openlauncher.core.R;
@@ -18,9 +19,21 @@ import java.util.List;
 
 public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.ViewHolder> implements FastItem.AppItem<DrawerAppItem, DrawerAppItem.ViewHolder> {
     private App app;
+    private AppItemView.LongPressCallBack onLongClickCallback;
 
     public DrawerAppItem(App app) {
         this.app = app;
+        onLongClickCallback = new AppItemView.LongPressCallBack() {
+            @Override
+            public boolean readyForDrag(View view) {
+                return Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
+            }
+
+            @Override
+            public void afterDrag(View view) {
+                Home.launcher.closeAppDrawer();
+            }
+        };
     }
 
     @Override
@@ -45,22 +58,10 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
 
     @Override
     public void bindView(DrawerAppItem.ViewHolder holder, List payloads) {
-        new AppItemView.Builder(holder.appItemView)
+        holder.builder
                 .setAppItem(app)
-                .withOnTouchGetPosition()
-                .withOnLongClick(app, DragAction.Action.APP_DRAWER, new AppItemView.LongPressCallBack() {
-                    @Override
-                    public boolean readyForDrag(View view) {
-                        return Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
-                    }
-
-                    @Override
-                    public void afterDrag(View view) {
-                        Home.launcher.closeAppDrawer();
-                    }
-                })
-                .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
-                .setTextColor(Setup.appSettings().getDrawerLabelColor());
+                .withOnLongClick(app, DragAction.Action.APP_DRAWER, onLongClickCallback);
+        holder.appItemView.load();
         super.bindView(holder, payloads);
     }
 
@@ -72,12 +73,19 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         AppItemView appItemView;
+        AppItemView.Builder builder;
 
         ViewHolder(View itemView) {
             super(itemView);
             appItemView = (AppItemView) itemView;
             appItemView.setTargetedWidth(AppDrawerVertical.itemWidth);
             appItemView.setTargetedHeightPadding(AppDrawerVertical.itemHeightPadding);
+
+            builder = new AppItemView.Builder(appItemView)
+                    .withOnTouchGetPosition()
+                    .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
+                    .setTextColor(Setup.appSettings().getDrawerLabelColor())
+                    .setFastAdapterItem();
         }
     }
 }

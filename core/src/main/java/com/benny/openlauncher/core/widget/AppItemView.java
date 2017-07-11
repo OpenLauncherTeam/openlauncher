@@ -19,12 +19,13 @@ import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.IconDrawer;
 import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.Item;
+import com.benny.openlauncher.core.util.BaseIconProvider;
 import com.benny.openlauncher.core.util.Definitions;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
-import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.viewutil.GroupIconDrawable;
 
 public class AppItemView extends View implements Drawable.Callback, IconDrawer {
@@ -65,7 +66,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     }
 
     private Drawable icon = null;
-    private IconProvider iconProvider;
+    private BaseIconProvider iconProvider;
     private String label;
     private Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Rect textContainer = new Rect();
@@ -77,6 +78,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     private int targetedWidth;
     private int targetedHeightPadding;
     private float heightPadding;
+    private boolean fastAdapterItem;
 
     public View getView() {
         return this;
@@ -90,7 +92,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         return icon;
     }
 
-    public void setIconProvider(IconProvider iconProvider) {
+    public void setIconProvider(BaseIconProvider iconProvider) {
         this.iconProvider = iconProvider;
     }
 
@@ -144,9 +146,15 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         textPaint.setTypeface(typeface);
     }
 
+    public void load() {
+        if (iconProvider != null) {
+            iconProvider.loadIconIntoIconDrawer(this, (int)iconSize, 0);
+        }
+    }
+
     public void reset() {
         if (iconProvider != null) {
-            iconProvider.cancelLoadDrawable();
+            iconProvider.cancelLoad(this);
         }
         label = "";
         icon = null;
@@ -193,7 +201,6 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         // center the icon
-        //Drawable icon = iconProvider != null ? iconProvider.getDrawable(Definitions.NO_SCALE) : null;
         if (icon != null) {
             canvas.save();
             canvas.translate((getWidth() - iconSize) / 2, heightPadding);
@@ -208,18 +215,25 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         icon = drawable;
         super.invalidate();
     }
+
+    @Override
+    public void onIconCleared(Drawable placeholder, int index) {
+        icon = placeholder;
+        super.invalidate();
+    }
+
     @Override
     public void onAttachedToWindow() {
-        if (iconProvider != null) {
-            iconProvider.loadDrawable(this, 0, (int) iconSize);
+        if (!fastAdapterItem && iconProvider != null) {
+            iconProvider.loadIconIntoIconDrawer(this, (int) iconSize, 0);
         }
         super.onAttachedToWindow();
     }
 
     @Override
     public void onDetachedFromWindow() {
-        if (iconProvider != null) {
-            iconProvider.cancelLoadDrawable();
+        if (!fastAdapterItem && iconProvider != null) {
+            iconProvider.cancelLoad(this);
             icon = null;
         }
         super.onDetachedFromWindow();
@@ -227,8 +241,8 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
     @Override
     public void invalidate() {
-        if (iconProvider != null) {
-            iconProvider.cancelLoadDrawable();
+        if (!fastAdapterItem && iconProvider != null) {
+            iconProvider.cancelLoad(this);
             icon = null;
         } else {
             super.invalidate();
@@ -378,6 +392,11 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder vibrateWhenLongPress() {
             view.vibrateWhenLongPress = true;
+            return this;
+        }
+
+        public Builder setFastAdapterItem() {
+            view.fastAdapterItem = true;
             return this;
         }
     }

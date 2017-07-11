@@ -4,16 +4,18 @@ import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.benny.openlauncher.core.model.Item;
+import com.benny.openlauncher.core.util.Definitions;
 
 public interface IconProvider {
-    void displayIcon(ImageView iv, int forceSize);
-    void displayCompoundIcon(TextView tv, int gravity, int forceSize);
-    void loadDrawable(IconDrawer iconDrawer, int index, int forceSize);
 
-    void cancelLoad(ImageView iv);
-    void cancelLoad(TextView tv);
-    void cancelLoadDrawable();
+    enum IconTargetType {
+        ImageView,
+        TextView,
+        IconDrawer
+    }
+
+    void loadIcon(IconTargetType type, int forceSize, Object target, Object... args);
+    void cancelLoad(IconTargetType type, Object target);
 
     // temp. function, GroupIconDrawable will be optimised to support image loading via any external library like glide soon
     // otherwise, those two functions are in here for simple synchronous loading and app code compatibility

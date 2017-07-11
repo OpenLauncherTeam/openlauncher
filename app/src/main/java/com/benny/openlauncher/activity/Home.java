@@ -32,6 +32,7 @@ import com.benny.openlauncher.core.interfaces.DialogListener;
 import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.util.BaseIconProvider;
 import com.benny.openlauncher.core.util.SimpleIconProvider;
 import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.core.widget.Desktop;
@@ -279,12 +280,12 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
         final SettingsManager settingsManager = AppSettings.get();
         final Setup.ImageLoader imageLoader = new Setup.ImageLoader() {
             @Override
-            public IconProvider createIconProvider(Drawable drawable) {
+            public BaseIconProvider createIconProvider(Drawable drawable) {
                 return new SimpleIconProvider(drawable);
             }
 
             @Override
-            public IconProvider createIconProvider(int icon) {
+            public BaseIconProvider createIconProvider(int icon) {
                 return new SimpleIconProvider(icon);
             }
         };
@@ -384,7 +385,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
         };
         final Setup.Logger logger = new Setup.Logger() {
             @Override
-            public void log(Object source, int priority, String tag, String msg, Object args) {
+            public void log(Object source, int priority, String tag, String msg, Object... args) {
                 Log.println(priority, tag, String.format(msg, args));
             }
         };
