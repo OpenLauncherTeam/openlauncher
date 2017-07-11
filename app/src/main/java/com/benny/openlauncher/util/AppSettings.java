@@ -73,6 +73,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     @Override
+    public boolean isResetSearchBarOnOpen() {
+        return false;
+    }
+
+    @Override
     public boolean enableImageCaching() {
         return true;
     }

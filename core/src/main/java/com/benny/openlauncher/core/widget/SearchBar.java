@@ -162,6 +162,9 @@ public class SearchBar extends FrameLayout {
                     if (callback != null) {
                         callback.onExpand();
                     }
+                    if (Setup.appSettings().isResetSearchBarOnOpen()) {
+                        ((LinearLayoutManager)searchRecycler.getLayoutManager()).scrollToPositionWithOffset(0, 0);
+                    }
                     icon.setIcon(getResources().getDrawable(R.drawable.ic_clear_white_24dp));
                     Tool.visibleViews(ANIM_TIME, searchInput, searchRecycler);
                     Tool.goneViews(ANIM_TIME, searchClock);

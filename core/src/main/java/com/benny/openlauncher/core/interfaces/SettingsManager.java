@@ -51,6 +51,7 @@ public interface SettingsManager {
     String getSearchBarBaseURI();
     boolean searchBarTimeEnabled();
     SimpleDateFormat getUserDateFormat();
+    boolean isResetSearchBarOnOpen();
 
     // Others
     boolean getAppRestartRequired();
