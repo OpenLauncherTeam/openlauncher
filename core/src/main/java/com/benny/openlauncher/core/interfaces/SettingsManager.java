@@ -46,8 +46,6 @@ public interface SettingsManager {
     int getVerticalDrawerVerticalMargin();
     int getDrawerIconSize();
 
-    // Desktop + Dock + Drawer
-
     // SearchBar
     boolean getSearchBarEnable();
     String getSearchBarBaseURI();

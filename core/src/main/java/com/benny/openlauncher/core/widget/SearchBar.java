@@ -271,9 +271,11 @@ public class SearchBar extends FrameLayout {
             @Override
             public void onGlobalLayout() {
                 searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int marginTop = Tool.dp2px(50, getContext()) +  + searchInput.getHeight();
+                int marginTop = Tool.dp2px(50, getContext()) + searchInput.getHeight();
                 recyclerParams.setMargins(0, marginTop, 0, 0);
-                searchRecycler.getLayoutParams().height = ((View) getParent()).getHeight() - marginTop;
+                // TODO: if we don't subtract the margin twice the last item is cut off...
+                recyclerParams.height = ((View)getParent()).getHeight() - 2 * marginTop;
+                searchRecycler.setLayoutParams(recyclerParams);
             }
         });
     }
