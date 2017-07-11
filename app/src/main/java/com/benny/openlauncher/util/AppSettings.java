@@ -137,6 +137,16 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getInt(R.string.pref_key__drawer_background_color, Color.TRANSPARENT);
     }
 
+    @Override
+    public int getVerticalDrawerHorizontalMargin() {
+        return 8;
+    }
+
+    @Override
+    public int getVerticalDrawerVerticalMargin() {
+        return 16;
+    }
+
     public int getDrawerCardColor() {
         return getInt(R.string.pref_key__drawer_card_color, Color.WHITE);
     }

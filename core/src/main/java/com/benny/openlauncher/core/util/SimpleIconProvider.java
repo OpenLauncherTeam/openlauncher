@@ -52,9 +52,6 @@ public class SimpleIconProvider extends BaseIconProvider {
                 int gravity = (Integer) args[0];
                 Drawable d = getDrawable();
                 d = scaleDrawable(d, forceSize);
-                if (forceSize != Definitions.NO_SCALE) {
-                    d.setBounds(0, 0, forceSize, forceSize);
-                }
                 if (gravity == Gravity.LEFT || gravity == Gravity.START) {
                     tv.setCompoundDrawablesWithIntrinsicBounds(d, null, null, null);
                 } else if (gravity == Gravity.RIGHT || gravity == Gravity.END) {

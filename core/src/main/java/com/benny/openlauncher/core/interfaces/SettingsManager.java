@@ -40,6 +40,8 @@ public interface SettingsManager {
     int getDrawerLabelColor();
     boolean isDrawerRememberPosition();
     int getDrawerBackgroundColor();
+    int getVerticalDrawerHorizontalMargin();
+    int getVerticalDrawerVerticalMargin();
 
     // Desktop + Dock + Drawer
     int getIconSize();

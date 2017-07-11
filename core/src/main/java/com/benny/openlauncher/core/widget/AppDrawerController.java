@@ -167,7 +167,14 @@ public class AppDrawerController extends RevealFrameLayout {
                 break;
             case DrawerMode.VERTICAL:
                 drawerViewGrid = (AppDrawerVertical) layoutInflater.inflate(R.layout.view_app_drawer_vertical, this, false);
-                addView(drawerViewGrid);
+                int marginHorizontal = Tool.dp2px(Setup.appSettings().getVerticalDrawerHorizontalMargin(), getContext());
+                int marginVertical = Tool.dp2px(Setup.appSettings().getVerticalDrawerVerticalMargin(), getContext());
+                RevealFrameLayout.LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+                lp.leftMargin = marginHorizontal;
+                lp.rightMargin = marginHorizontal;
+                lp.topMargin = marginVertical;
+                lp.bottomMargin = marginVertical;
+                addView(drawerViewGrid, lp);
                 break;
         }
     }
