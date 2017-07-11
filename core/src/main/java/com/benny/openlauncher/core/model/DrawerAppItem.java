@@ -81,7 +81,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
             appItemView.setTargetedWidth(AppDrawerVertical.itemWidth);
             appItemView.setTargetedHeightPadding(AppDrawerVertical.itemHeightPadding);
 
-            builder = new AppItemView.Builder(appItemView)
+            builder = new AppItemView.Builder(appItemView, Setup.appSettings().getDrawerIconSize())
                     .withOnTouchGetPosition()
                     .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
                     .setTextColor(Setup.appSettings().getDrawerLabelColor())

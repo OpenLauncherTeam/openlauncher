@@ -17,6 +17,7 @@ public interface SettingsManager {
     boolean isGestureFeedback();
     boolean isDesktopFullscreen();
     int getDesktopColor();
+    int getDesktopIconSize();
 
     // Desktop Folder Popup
     int getPopupColor();
@@ -28,6 +29,7 @@ public interface SettingsManager {
     boolean isDockShowLabel();
     int getDockColor();
     boolean getDockEnable();
+    int getDockIconSize();
 
     // Drawer
     int getDrawerColumnCount();
@@ -42,9 +44,9 @@ public interface SettingsManager {
     int getDrawerBackgroundColor();
     int getVerticalDrawerHorizontalMargin();
     int getVerticalDrawerVerticalMargin();
+    int getDrawerIconSize();
 
     // Desktop + Dock + Drawer
-    int getIconSize();
 
     // SearchBar
     boolean getSearchBarEnable();

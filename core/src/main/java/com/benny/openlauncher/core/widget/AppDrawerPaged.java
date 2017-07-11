@@ -141,6 +141,7 @@ public class AppDrawerPaged extends SmoothViewPager {
                             getContext(),
                             home,
                             app,
+                            Setup.appSettings().getDrawerIconSize(),
                             new AppItemView.LongPressCallBack() {
                                 @Override
                                 public boolean readyForDrag(View view) {

@@ -278,7 +278,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     @Override
     public boolean addItemToPage(final Item item, int page) {
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this);
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this, Setup.appSettings().getDesktopIconSize());
 
         if (itemView == null) {
             home.db.deleteItem(item);
@@ -296,7 +296,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             item.setX(positionToLayoutPrams.x);
             item.setY(positionToLayoutPrams.y);
 
-            View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this);
+            View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this, Setup.appSettings().getDesktopIconSize());
 
             if (itemView != null) {
                 itemView.setLayoutParams(positionToLayoutPrams);
@@ -313,7 +313,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         item.setX(x);
         item.setY(y);
 
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this);
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this, Setup.appSettings().getDesktopIconSize());
 
         if (itemView != null) {
             getCurrentPage().addViewToGrid(itemView, item.getX(), item.getY(), item.getSpanX(), item.getSpanY());

@@ -390,7 +390,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     }
 
     private void initDock() {
-        int iconSize = Setup.appSettings().getIconSize();
+        int iconSize = Setup.appSettings().getDockIconSize();
         dock.init();
         if (Setup.appSettings().isDockShowLabel()) {
             dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;

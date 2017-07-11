@@ -29,13 +29,13 @@ public class ItemViewFactory {
     public static final int NO_FLAGS = 0x01;
     public static final int NO_LABEL = 0x02;
 
-    public static View getItemView(Context context, Item item, boolean showLabels, DesktopCallBack callBack) {
+    public static View getItemView(Context context, Item item, boolean showLabels, DesktopCallBack callBack, int iconSize) {
         int flag = showLabels ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
-        View itemView = getItemView(context, callBack, item, flag);
+        View itemView = getItemView(context, callBack, item, iconSize, flag);
         return itemView;
     }
 
-    public static View getItemView(final Context context, final DesktopCallBack callBack, final Item item, int flags) {
+    public static View getItemView(final Context context, final DesktopCallBack callBack, final Item item, int iconSize, int flags) {
         View view = null;
         switch (item.type) {
             case APP:
@@ -43,7 +43,7 @@ public class ItemViewFactory {
                 if (app == null) {
                     break;
                 }
-                view = new AppItemView.Builder(context)
+                view = new AppItemView.Builder(context, iconSize)
                         .setAppItem(item, app)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
@@ -63,7 +63,7 @@ public class ItemViewFactory {
                         .getView();
                 break;
             case SHORTCUT:
-                view = new AppItemView.Builder(context)
+                view = new AppItemView.Builder(context, iconSize)
                         .setShortcutItem(item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
@@ -83,8 +83,8 @@ public class ItemViewFactory {
                         .getView();
                 break;
             case GROUP:
-                view = new AppItemView.Builder(context)
-                        .setGroupItem(context, callBack, item)
+                view = new AppItemView.Builder(context, iconSize)
+                        .setGroupItem(context, callBack, item, iconSize)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.GROUP, new AppItemView.LongPressCallBack() {
@@ -104,7 +104,7 @@ public class ItemViewFactory {
                 view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
                 break;
             case ACTION:
-                view = new AppItemView.Builder(context)
+                view = new AppItemView.Builder(context, iconSize)
                         .setActionItem(item)
                         .withOnTouchGetPosition()
                         .vibrateWhenLongPress()

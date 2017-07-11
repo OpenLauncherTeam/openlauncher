@@ -173,7 +173,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
 
-        int iconSize = Setup.appSettings().getIconSize();
+        int iconSize = Setup.appSettings().getDockIconSize();
         if (Setup.appSettings().isDockShowLabel()) {
             height = Tool.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
         } else {
@@ -203,7 +203,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public boolean addItemToPage(final Item item, int page) {
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this);
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this, Setup.appSettings().getDockIconSize());
 
         if (itemView == null) {
             home.db.deleteItem(item);
@@ -221,7 +221,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             item.setX(positionToLayoutPrams.x);
             item.setY(positionToLayoutPrams.y);
 
-            View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this);
+            View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this, Setup.appSettings().getDockIconSize());
 
             if (itemView != null) {
                 itemView.setLayoutParams(positionToLayoutPrams);
@@ -238,7 +238,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         item.setX(x);
         item.setY(y);
 
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this);
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this, Setup.appSettings().getDockIconSize());
 
         if (itemView != null) {
             addViewToGrid(itemView, item.getX(), item.getY(), item.getSpanX(), item.getSpanY());

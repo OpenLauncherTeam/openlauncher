@@ -30,8 +30,8 @@ import com.benny.openlauncher.core.viewutil.GroupIconDrawable;
 
 public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
-    public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item) {
-        AppItemView.Builder b = new AppItemView.Builder(context)
+    public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item, int iconSize) {
+        AppItemView.Builder b = new AppItemView.Builder(context, iconSize)
                 .withOnTouchGetPosition()
                 .setTextColor(Setup.appSettings().getPopupLabelColor());
         if (groupItem.type == Item.Type.SHORTCUT) {
@@ -45,8 +45,8 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         return b.getView();
     }
 
-    public static View createDrawerAppItemView(Context context, final Home home, App app, AppItemView.LongPressCallBack longPressCallBack) {
-        return new AppItemView.Builder(context)
+    public static View createDrawerAppItemView(Context context, final Home home, App app, int iconSize, AppItemView.LongPressCallBack longPressCallBack) {
+        return new AppItemView.Builder(context, iconSize)
                 .setAppItem(app)
                 .withOnTouchGetPosition()
                 .withOnLongClick(app, DragAction.Action.APP_DRAWER, new AppItemView.LongPressCallBack() {
@@ -252,16 +252,14 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     public static class Builder {
         AppItemView view;
 
-        public Builder(Context context) {
+        public Builder(Context context, int iconSize) {
             view = new AppItemView(context);
-            float iconSize = Tool.dp2px(Setup.appSettings().getIconSize(), view.getContext());
-            view.setIconSize(iconSize);
+            view.setIconSize(Tool.dp2px(iconSize, view.getContext()));
         }
 
-        public Builder(AppItemView view) {
+        public Builder(AppItemView view, int iconSize) {
             this.view = view;
-            float iconSize = Tool.dp2px(Setup.appSettings().getIconSize(), view.getContext());
-            view.setIconSize(iconSize);
+            view.setIconSize(Tool.dp2px(iconSize, view.getContext()));
         }
 
         public AppItemView getView() {
@@ -319,9 +317,9 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             return this;
         }
 
-        public Builder setGroupItem(Context context, final DesktopCallBack callback, final Item item) {
+        public Builder setGroupItem(Context context, final DesktopCallBack callback, final Item item, int iconSize) {
             view.setLabel(item.getLabel());
-            view.setIconProvider(Setup.imageLoader().createIconProvider(new GroupIconDrawable(context, item)));
+            view.setIconProvider(Setup.imageLoader().createIconProvider(new GroupIconDrawable(context, item, iconSize)));
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

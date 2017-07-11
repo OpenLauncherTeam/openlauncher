@@ -81,12 +81,22 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
     }
 
+    @Override
+    public int getDesktopIconSize() {
+        return getIconSize();
+    }
+
     public int getDesktopFolderColor() {
         return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
     }
 
     public boolean getDockEnable() {
         return getBool(R.string.pref_key__dock_enable, true);
+    }
+
+    @Override
+    public int getDockIconSize() {
+        return getIconSize();
     }
 
     public void setDockEnable(boolean enable) {
@@ -145,6 +155,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     @Override
     public int getVerticalDrawerVerticalMargin() {
         return 16;
+    }
+
+    @Override
+    public int getDrawerIconSize() {
+        return getIconSize();
     }
 
     public int getDrawerCardColor() {

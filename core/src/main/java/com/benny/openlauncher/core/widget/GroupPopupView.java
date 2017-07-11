@@ -93,7 +93,7 @@ public class GroupPopupView extends FrameLayout {
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.getGroupItems().size());
         cellContainer.setGridSize(cellSize[0], cellSize[1]);
 
-        int iconSize = Tool.dp2px(Setup.appSettings().getIconSize(), c);
+        int iconSize = Tool.dp2px(Setup.appSettings().getDesktopIconSize(), c);
         int textSize = Tool.dp2px(22, c);
         int contentPadding = Tool.dp2px(5, c);
 
@@ -104,7 +104,7 @@ public class GroupPopupView extends FrameLayout {
                 }
                 final Item groupItem = item.getGroupItems().get(y2 * cellSize[0] + x2);
                 final App groupApp = groupItem.getType() != Item.Type.SHORTCUT ? Setup.appLoader().findItemApp(groupItem) : null;
-                AppItemView appItemView = AppItemView.createAppItemViewPopup(getContext(), groupItem, groupApp);
+                AppItemView appItemView = AppItemView.createAppItemViewPopup(getContext(), groupItem, groupApp, Setup.appSettings().getDesktopIconSize());
                 final View view = appItemView.getView();
 
                 view.setOnLongClickListener(new OnLongClickListener() {
@@ -208,7 +208,7 @@ public class GroupPopupView extends FrameLayout {
         Home.db.updateSate(dragOutItem, Definitions.ItemState.Visible);
         Home.db.saveItem(currentItem);
 
-        currentView.setIconProvider(Setup.imageLoader().createIconProvider(new GroupIconDrawable(context, currentItem)));
+        currentView.setIconProvider(Setup.imageLoader().createIconProvider(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize())));
     }
 
     public void updateItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, View currentView) {

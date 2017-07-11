@@ -39,8 +39,8 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
     private float sx = 1;
     private float sy = 1;
 
-    public GroupIconDrawable(Context context, Item item) {
-        final float size = Tool.dp2px(Setup.appSettings().getIconSize(), context);
+    public GroupIconDrawable(Context context, Item item, int iconSize) {
+        final float size = Tool.dp2px(iconSize, context);
         final Bitmap[] icons = new Bitmap[4];
         for (int i = 0; i < 4; i++) {
             icons[i] = null;
