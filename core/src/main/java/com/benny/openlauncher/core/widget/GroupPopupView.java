@@ -1,6 +1,7 @@
 package com.benny.openlauncher.core.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
@@ -46,7 +47,13 @@ public class GroupPopupView extends FrameLayout {
         }
         popupParent = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_group_popup, this, false);
         if (Setup.appSettings().getPopupColor() != -1) {
-            popupParent.setCardBackgroundColor(Setup.appSettings().getPopupColor());
+            int color = Setup.appSettings().getPopupColor();
+            int alpha = Color.alpha(color);
+            popupParent.setCardBackgroundColor(color);
+            // remove elevation if CardView's background is transparent to avoid weird shadows because CardView does not support transparent backgrounds
+            if (alpha != 0) {
+                popupParent.setCardElevation(0f);
+            }
         }
         cellContainer = (CellContainer) popupParent.findViewById(R.id.group);
 
