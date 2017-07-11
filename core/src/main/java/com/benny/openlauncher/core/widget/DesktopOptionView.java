@@ -96,13 +96,14 @@ public class DesktopOptionView extends FrameLayout {
             return;
         }
 
+        final int paddingHorizontal = Tool.dp2px(42, getContext());
         final Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
 
         actionAdapters[0] = new FastItemAdapter<>();
         actionAdapters[1] = new FastItemAdapter<>();
 
-        actionRecyclerViews[0] = createRecyclerView(actionAdapters[0], Gravity.TOP | Gravity.CENTER_HORIZONTAL);
-        actionRecyclerViews[1] = createRecyclerView(actionAdapters[1], Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
+        actionRecyclerViews[0] = createRecyclerView(actionAdapters[0], Gravity.TOP | Gravity.CENTER_HORIZONTAL, paddingHorizontal);
+        actionRecyclerViews[1] = createRecyclerView(actionAdapters[1], Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, paddingHorizontal);
 
         final FastAdapter.OnClickListener<FastItem.DesktopOptionsItem> clickListener = new FastAdapter.OnClickListener<FastItem.DesktopOptionsItem>() {
             @Override
@@ -149,7 +150,7 @@ public class DesktopOptionView extends FrameLayout {
             @Override
             public void onGlobalLayout() {
                 getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int itemWidth = getWidth() / 3;
+                int itemWidth = (getWidth() - 2 * paddingHorizontal) / 3;
                 initItems(typeface, clickListener, itemWidth);
             }
         });
@@ -171,11 +172,10 @@ public class DesktopOptionView extends FrameLayout {
         actionAdapters[1].withOnClickListener(clickListener);
     }
 
-    private RecyclerView createRecyclerView(FastAdapter adapter, int gravity){
+    private RecyclerView createRecyclerView(FastAdapter adapter, int gravity, int paddingHorizontal){
         RecyclerView actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         actionRecyclerView.setClipToPadding(false);
-        int paddingHorizontal = 0;//Tool.dp2px(42, getContext());
         actionRecyclerView.setPadding(paddingHorizontal, 0, paddingHorizontal, 0);
         actionRecyclerView.setLayoutManager(linearLayoutManager);
         actionRecyclerView.setAdapter(adapter);
