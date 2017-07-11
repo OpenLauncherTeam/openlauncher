@@ -37,6 +37,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private float drawablePadding;
     private Typeface typeface;
     private boolean matchParent = true;
+    private int width;
     private boolean bold = false;
     private int textGravity = Gravity.CENTER_VERTICAL;
 
@@ -129,6 +130,11 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
+    public IconLabelItem withWidth(int width) {
+        this.width = width;
+        return this;
+    }
+
     public IconLabelItem withOnClickListener(@Nullable View.OnClickListener listener) {
         this.listener = listener;
         return (IconLabelItem) this;
@@ -163,6 +169,8 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     public void bindView(IconLabelItem.ViewHolder holder, List payloads) {
         if (matchParent)
             holder.itemView.getLayoutParams().width = RecyclerView.LayoutParams.MATCH_PARENT;
+        if (width != -1)
+            holder.itemView.getLayoutParams().width = width;
         holder.textView.setText(getLabel());
         holder.textView.setGravity(gravity);
         holder.textView.setTypeface(typeface);

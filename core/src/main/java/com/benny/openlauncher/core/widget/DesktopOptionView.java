@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowInsets;
 import android.widget.FrameLayout;
 
@@ -53,22 +54,32 @@ public class DesktopOptionView extends FrameLayout {
         this.desktopOptionViewListener = desktopOptionViewListener;
     }
 
-    public void updateHomeIcon(boolean home) {
-        if (home) {
-            actionAdapters[0].getAdapterItem(1).setIcon(R.drawable.ic_star_white_36dp);
-        } else {
-            actionAdapters[0].getAdapterItem(1).setIcon(R.drawable.ic_star_border_white_36dp);
-        }
-        actionAdapters[0].notifyAdapterItemChanged(1);
+    public void updateHomeIcon(final boolean home) {
+        post(new Runnable() {
+            @Override
+            public void run() {
+                if (home) {
+                    actionAdapters[0].getAdapterItem(1).setIcon(R.drawable.ic_star_white_36dp);
+                } else {
+                    actionAdapters[0].getAdapterItem(1).setIcon(R.drawable.ic_star_border_white_36dp);
+                }
+                actionAdapters[0].notifyAdapterItemChanged(1);
+            }
+        });
     }
 
-    public void updateLockIcon(boolean lock) {
-        if (lock) {
-            actionAdapters[0].getAdapterItem(2).setIcon(R.drawable.ic_lock_white_36dp);
-        } else {
-            actionAdapters[0].getAdapterItem(2).setIcon(R.drawable.ic_lock_open_white_36dp);
-        }
-        actionAdapters[0].notifyAdapterItemChanged(2);
+    public void updateLockIcon(final boolean lock) {
+        post(new Runnable() {
+            @Override
+            public void run() {
+                if (lock) {
+                    actionAdapters[0].getAdapterItem(2).setIcon(R.drawable.ic_lock_white_36dp);
+                } else {
+                    actionAdapters[0].getAdapterItem(2).setIcon(R.drawable.ic_lock_open_white_36dp);
+                }
+                actionAdapters[0].notifyAdapterItemChanged(2);
+            }
+        });
     }
 
     @Override
@@ -85,7 +96,7 @@ public class DesktopOptionView extends FrameLayout {
             return;
         }
 
-        Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
+        final Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
 
         actionAdapters[0] = new FastItemAdapter<>();
         actionAdapters[1] = new FastItemAdapter<>();
@@ -93,7 +104,7 @@ public class DesktopOptionView extends FrameLayout {
         actionRecyclerViews[0] = createRecyclerView(actionAdapters[0], Gravity.TOP | Gravity.CENTER_HORIZONTAL);
         actionRecyclerViews[1] = createRecyclerView(actionAdapters[1], Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
 
-        FastAdapter.OnClickListener<FastItem.DesktopOptionsItem> clickListener = new FastAdapter.OnClickListener<FastItem.DesktopOptionsItem>() {
+        final FastAdapter.OnClickListener<FastItem.DesktopOptionsItem> clickListener = new FastAdapter.OnClickListener<FastItem.DesktopOptionsItem>() {
             @Override
             public boolean onClick(View v, IAdapter<FastItem.DesktopOptionsItem> adapter, FastItem.DesktopOptionsItem item, int position) {
                 if (desktopOptionViewListener != null) {
@@ -134,17 +145,28 @@ public class DesktopOptionView extends FrameLayout {
             }
         };
 
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                int itemWidth = getWidth() / 3;
+                initItems(typeface, clickListener, itemWidth);
+            }
+        });
+    }
+
+    private void initItems(final Typeface typeface, final FastAdapter.OnClickListener<FastItem.DesktopOptionsItem> clickListener, int itemWidth) {
         List<FastItem.DesktopOptionsItem> itemsTop = new ArrayList<>();
-        itemsTop.add(createItem(R.drawable.ic_delete_white_36dp, R.string.remove, typeface));
-        itemsTop.add(createItem(R.drawable.ic_star_white_36dp, R.string.home, typeface));
-        itemsTop.add(createItem(R.drawable.ic_lock_open_white_36dp, R.string.lock, typeface));
+        itemsTop.add(createItem(R.drawable.ic_delete_white_36dp, R.string.remove, typeface, itemWidth));
+        itemsTop.add(createItem(R.drawable.ic_star_white_36dp, R.string.home, typeface, itemWidth));
+        itemsTop.add(createItem(R.drawable.ic_lock_open_white_36dp, R.string.lock, typeface, itemWidth));
         actionAdapters[0].set(itemsTop);
         actionAdapters[0].withOnClickListener(clickListener);
 
         List<FastItem.DesktopOptionsItem> itemsBottom = new ArrayList<>();
-        itemsBottom.add(createItem(R.drawable.ic_dashboard_white_36dp, R.string.widget, typeface));
-        itemsBottom.add(createItem(R.drawable.ic_launch_white_36dp, R.string.action, typeface));
-        itemsBottom.add(createItem(R.drawable.ic_settings_launcher_white_36dp, R.string.settings, typeface));
+        itemsBottom.add(createItem(R.drawable.ic_dashboard_white_36dp, R.string.widget, typeface, itemWidth));
+        itemsBottom.add(createItem(R.drawable.ic_launch_white_36dp, R.string.action, typeface, itemWidth));
+        itemsBottom.add(createItem(R.drawable.ic_settings_launcher_white_36dp, R.string.settings, typeface, itemWidth));
         actionAdapters[1].set(itemsBottom);
         actionAdapters[1].withOnClickListener(clickListener);
     }
@@ -153,28 +175,28 @@ public class DesktopOptionView extends FrameLayout {
         RecyclerView actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         actionRecyclerView.setClipToPadding(false);
-        int paddingHorizontal = Tool.dp2px(42, getContext());
+        int paddingHorizontal = 0;//Tool.dp2px(42, getContext());
         actionRecyclerView.setPadding(paddingHorizontal, 0, paddingHorizontal, 0);
         actionRecyclerView.setLayoutManager(linearLayoutManager);
         actionRecyclerView.setAdapter(adapter);
         actionRecyclerView.setOverScrollMode(OVER_SCROLL_ALWAYS);
-        LayoutParams actionRecyclerViewLP = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LayoutParams actionRecyclerViewLP = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         actionRecyclerViewLP.gravity = gravity;
         addView(actionRecyclerView, actionRecyclerViewLP);
         return actionRecyclerView;
     }
 
-    private FastItem.DesktopOptionsItem createItem(int icon, int label, Typeface typeface) {
+    private FastItem.DesktopOptionsItem createItem(int icon, int label, Typeface typeface, int width) {
         return new IconLabelItem(getContext(), icon, getContext().getString(label), -1)
                 .withIdentifier(label)
                 .withOnClickListener(null)
                 .withTextColor(Color.WHITE)
-                .withDrawablePadding(getContext(), 8)
+                .withDrawablePadding(getContext(), 0)
                 .withIconGravity(Gravity.TOP)
                 .withGravity(Gravity.CENTER)
                 .withMatchParent(false)
+                .withWidth(width)
                 .withTypeface(typeface)
-                .withDrawablePadding(getContext(), 0)
                 .withTextGravity(Gravity.CENTER);
     }
 
