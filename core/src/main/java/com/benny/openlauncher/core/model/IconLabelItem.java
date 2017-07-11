@@ -137,7 +137,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     public IconLabelItem withOnClickListener(@Nullable View.OnClickListener listener) {
         this.listener = listener;
-        return (IconLabelItem) this;
+        return this;
     }
 
     @Override

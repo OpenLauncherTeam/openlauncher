@@ -228,6 +228,7 @@ public class SearchBar extends FrameLayout {
                                     .withTextColor(Color.WHITE)
                                     .withDrawablePadding(getContext(), 8)
                                     .withBold(true)
+                                    .withMatchParent(true)
                                     .withTextGravity(Gravity.END));
                 }
                 for (int i = 0; i < apps.size(); i++) {
@@ -241,6 +242,7 @@ public class SearchBar extends FrameLayout {
                                 }
                             })
                             .withTextColor(Color.WHITE)
+                            .withMatchParent(true)
                             .withDrawablePadding(getContext(), 8));
                 }
                 adapter.set(items);
@@ -266,18 +268,17 @@ public class SearchBar extends FrameLayout {
         final LayoutParams recyclerParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         addView(searchClock, clockParams);
+        addView(searchRecycler, recyclerParams);
         addView(searchInput, inputParams);
         addView(searchButton, buttonParams);
-        addView(searchRecycler, recyclerParams);
 
         searchInput.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 int marginTop = Tool.dp2px(50, getContext()) + searchInput.getHeight();
-                recyclerParams.setMargins(0, marginTop, 0, 0);
-                // TODO: if we don't subtract the margin twice the last item is cut off...
-                recyclerParams.height = ((View)getParent()).getHeight() - 2 * marginTop;
+                searchRecycler.setPadding(0, marginTop, 0, 0);
+                recyclerParams.height = ((View)getParent()).getHeight() - marginTop;
                 searchRecycler.setLayoutParams(recyclerParams);
             }
         });
@@ -287,7 +288,7 @@ public class SearchBar extends FrameLayout {
         searchRecycler = new RecyclerView(getContext());
         searchRecycler.setVisibility(View.GONE);
         searchRecycler.setAdapter(adapter);
-        searchRecycler.setClipToPadding(false);
+        searchRecycler.setClipToPadding(true);
         searchRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         searchRecycler.getLayoutManager().setAutoMeasureEnabled(false);
         searchRecycler.setHasFixedSize(true);
