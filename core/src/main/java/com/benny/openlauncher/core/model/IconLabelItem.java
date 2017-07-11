@@ -37,7 +37,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private float drawablePadding;
     private Typeface typeface;
     private boolean matchParent = true;
-    private int width;
+    private int width = -1;
     private boolean bold = false;
     private int textGravity = Gravity.CENTER_VERTICAL;
 

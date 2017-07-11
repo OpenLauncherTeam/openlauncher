@@ -98,7 +98,6 @@ public class SearchBar extends FrameLayout {
     private boolean searchInternetEnabled = true;
     private Mode mode = Mode.DateAll;
     private float searchClockSubTextFactor = 0.5f;
-    private float searchClockSubTextFactor2 = 0.7f;
 
     public SearchBar(@NonNull Context context) {
         super(context);
@@ -122,11 +121,6 @@ public class SearchBar extends FrameLayout {
 
     public SearchBar setSearchClockSubTextFactor(float factor) {
         searchClockSubTextFactor = factor;
-        return this;
-    }
-
-    public SearchBar setSearchClockSubTextFactor2(float factor) {
-        searchClockSubTextFactor2 = factor;
         return this;
     }
 
@@ -277,8 +271,9 @@ public class SearchBar extends FrameLayout {
             @Override
             public void onGlobalLayout() {
                 searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                recyclerParams.setMargins(0, Tool.dp2px(50, getContext()) + searchInput.getHeight(), 0, 0);
-                searchRecycler.getLayoutParams().height = ((View) getParent()).getHeight() - searchInput.getHeight();
+                int marginTop = Tool.dp2px(50, getContext()) +  + searchInput.getHeight();
+                recyclerParams.setMargins(0, marginTop, 0, 0);
+                searchRecycler.getLayoutParams().height = ((View) getParent()).getHeight() - marginTop;
             }
         });
     }
