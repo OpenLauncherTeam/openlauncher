@@ -277,8 +277,9 @@ public class SearchBar extends FrameLayout {
             public void onGlobalLayout() {
                 searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 int marginTop = Tool.dp2px(50, getContext()) + searchInput.getHeight();
-                searchRecycler.setPadding(0, marginTop, 0, 0);
-                recyclerParams.height = ((View)getParent()).getHeight() - marginTop;
+                int marginBottom = Desktop.bottomInset;
+                recyclerParams.setMargins(0, marginTop, 0, marginBottom);
+                recyclerParams.height = ((View)getParent()).getHeight() - 2 * marginTop;
                 searchRecycler.setLayoutParams(recyclerParams);
             }
         });
@@ -288,7 +289,7 @@ public class SearchBar extends FrameLayout {
         searchRecycler = new RecyclerView(getContext());
         searchRecycler.setVisibility(View.GONE);
         searchRecycler.setAdapter(adapter);
-        searchRecycler.setClipToPadding(true);
+        searchRecycler.setClipToPadding(false);
         searchRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         searchRecycler.getLayoutManager().setAutoMeasureEnabled(false);
         searchRecycler.setHasFixedSize(true);

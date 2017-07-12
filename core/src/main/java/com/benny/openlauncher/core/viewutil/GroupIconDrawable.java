@@ -8,6 +8,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.drawable.ColorDrawable;
@@ -24,7 +25,7 @@ import com.benny.openlauncher.core.util.Tool;
 public class GroupIconDrawable extends Drawable implements IconDrawer {
 
     private int outlinepad;
-    Bitmap[] icons;
+    Drawable[] icons;
     public float iconSize;
     Paint paint;
     Paint paint2;
@@ -41,7 +42,7 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
 
     public GroupIconDrawable(Context context, Item item, int iconSize) {
         final float size = Tool.dp2px(iconSize, context);
-        final Bitmap[] icons = new Bitmap[4];
+        final Drawable[] icons = new Drawable[4];
         for (int i = 0; i < 4; i++) {
             icons[i] = null;
         }
@@ -50,14 +51,14 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
             App app = Setup.appLoader().findItemApp(item.items.get(i));
             if (app == null) {
                 Setup.logger().log(this, Log.DEBUG, null, "Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, item.items.get(i).getIntent());
-                icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
+                icons[i] = new ColorDrawable(Color.TRANSPARENT);
             } else {
                 app.getIconProvider().loadIconIntoIconDrawer(this, (int) size, i);
             }
         }
     }
 
-    private void init(Bitmap[] icons, float size) {
+    private void init(Drawable[] icons, float size) {
         this.icons = icons;
         this.iconSize = size;
         iconSizeDiv2 = Math.round(iconSize / 2f);
@@ -114,16 +115,16 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, paint);
 
         if (icons[0] != null) {
-            canvas.drawBitmap(icons[0], null, new RectF(padding, padding, iconSizeDiv2 - padding, iconSizeDiv2 - padding), paint2);
+            drawIcon(canvas, icons[0], padding, padding, iconSizeDiv2 - padding, iconSizeDiv2 - padding, paint2);
         }
         if (icons[1] != null) {
-            canvas.drawBitmap(icons[1], null, new RectF(iconSizeDiv2 + padding, padding, iconSize - padding, iconSizeDiv2 - padding), paint2);
+            drawIcon(canvas, icons[1], iconSizeDiv2 + padding, padding, iconSize - padding, iconSizeDiv2 - padding, paint2);
         }
         if (icons[2] != null) {
-            canvas.drawBitmap(icons[2], null, new RectF(padding, iconSizeDiv2 + padding, iconSizeDiv2 - padding, iconSize - padding), paint2);
+            drawIcon(canvas, icons[2], padding, iconSizeDiv2 + padding, iconSizeDiv2 - padding, iconSize - padding, paint2);
         }
         if (icons[3] != null) {
-            canvas.drawBitmap(icons[3], null, new RectF(iconSizeDiv2 + padding, iconSizeDiv2 + padding, iconSize - padding, iconSize - padding), paint2);
+            drawIcon(canvas, icons[3], iconSizeDiv2 + padding, iconSizeDiv2 + padding, iconSize - padding, iconSize - padding, paint2);
         }
         canvas.clipRect(0, 0, iconSize, iconSize, Region.Op.REPLACE);
 
@@ -137,6 +138,14 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
             paint2.setAlpha(Tool.clampInt(paint2.getAlpha() + 25, 0, 255));
             invalidateSelf();
         }
+    }
+
+    private void drawIcon(Canvas canvas, Drawable icon, float l, float t, float r, float b, Paint paint) {
+        icon.setBounds((int)l, (int)t, (int)r, (int)b);
+        icon.setFilterBitmap(true);
+        icon.setAlpha(paint.getAlpha());
+        icon.draw(canvas);
+//        canvas.drawBitmap(icon, null, new RectF(l, t, r, b), paint);
     }
 
     @Override
@@ -154,13 +163,13 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
 
     @Override
     public void onIconAvailable(Drawable drawable, int index) {
-        icons[index] = Tool.drawableToBitmap(drawable);
+        icons[index] = drawable;
         invalidateSelf();
     }
 
     @Override
     public void onIconCleared(Drawable placeholder, int index) {
-        icons[index] = placeholder == null ? Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT)) : Tool.drawableToBitmap(placeholder);
+        icons[index] = placeholder == null ? new ColorDrawable(Color.TRANSPARENT) : placeholder;
         invalidateSelf();
     }
 }
