@@ -22,4 +22,11 @@ public class Definitions {
         Hidden,
         Visible
     }
+
+    // -----------------
+    // Beta functions
+    // -----------------
+
+    // does not work reliably yet... maybe bc of Desktop gesture listener?
+    public static final boolean ENABLE_ITEM_TOUCH_LISTENER = false;
 }

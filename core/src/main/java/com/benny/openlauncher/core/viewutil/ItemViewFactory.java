@@ -35,7 +35,7 @@ public class ItemViewFactory {
         return itemView;
     }
 
-    public static View getItemView(final Context context, final DesktopCallBack callBack, final Item item, int iconSize, int flags) {
+    private static View getItemView(final Context context, final DesktopCallBack callBack, final Item item, int iconSize, int flags) {
         View view = null;
         switch (item.type) {
             case APP:
@@ -45,7 +45,7 @@ public class ItemViewFactory {
                 }
                 view = new AppItemView.Builder(context, iconSize)
                         .setAppItem(item, app)
-                        .withOnTouchGetPosition()
+                        .withOnTouchGetPosition(item, Setup.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.APP, new AppItemView.LongPressCallBack() {
                             @Override
@@ -65,7 +65,7 @@ public class ItemViewFactory {
             case SHORTCUT:
                 view = new AppItemView.Builder(context, iconSize)
                         .setShortcutItem(item)
-                        .withOnTouchGetPosition()
+                        .withOnTouchGetPosition(item, Setup.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.SHORTCUT, new AppItemView.LongPressCallBack() {
                             @Override
@@ -85,7 +85,7 @@ public class ItemViewFactory {
             case GROUP:
                 view = new AppItemView.Builder(context, iconSize)
                         .setGroupItem(context, callBack, item, iconSize)
-                        .withOnTouchGetPosition()
+                        .withOnTouchGetPosition(item, Setup.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.GROUP, new AppItemView.LongPressCallBack() {
                             @Override
@@ -106,7 +106,7 @@ public class ItemViewFactory {
             case ACTION:
                 view = new AppItemView.Builder(context, iconSize)
                         .setActionItem(item)
-                        .withOnTouchGetPosition()
+                        .withOnTouchGetPosition(item, Setup.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.ACTION, new AppItemView.LongPressCallBack() {
                             @Override
@@ -163,7 +163,7 @@ public class ItemViewFactory {
                 };
 
                 widgetContainer.postDelayed(action, 2000);
-                widgetView.setOnTouchListener(Tool.getItemOnTouchListener());
+                widgetView.setOnTouchListener(Tool.getItemOnTouchListener(item, Setup.itemGestureCallback()));
                 widgetView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {

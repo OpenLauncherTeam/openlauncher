@@ -82,7 +82,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
             appItemView.setTargetedHeightPadding(AppDrawerVertical.itemHeightPadding);
 
             builder = new AppItemView.Builder(appItemView, Setup.appSettings().getDrawerIconSize())
-                    .withOnTouchGetPosition()
+                    .withOnTouchGetPosition(null, null)
                     .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
                     .setTextColor(Setup.appSettings().getDrawerLabelColor())
                     .setFastAdapterItem();

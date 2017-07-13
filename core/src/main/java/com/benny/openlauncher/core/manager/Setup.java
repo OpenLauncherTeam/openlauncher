@@ -3,6 +3,7 @@ package com.benny.openlauncher.core.manager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v4.view.GestureDetectorCompat;
 import android.view.DragEvent;
 
 import com.benny.openlauncher.core.interfaces.App;
@@ -16,6 +17,7 @@ import com.benny.openlauncher.core.util.BaseIconProvider;
 import com.benny.openlauncher.core.util.Definitions;
 import com.benny.openlauncher.core.util.SimpleIconProvider;
 import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
+import com.benny.openlauncher.core.viewutil.ItemGestureListener;
 
 import java.util.List;
 
@@ -58,6 +60,10 @@ public abstract class Setup<A extends App> {
         return get().getDesktopGestureCallback();
     }
 
+    public static ItemGestureListener.ItemGestureCallback itemGestureCallback() {
+        return get().getItemGestureCallback();
+    }
+
     public static <IL extends ImageLoader<A>, A extends App> IL imageLoader() {
         return (IL)get().getImageLoader();
     }
@@ -87,6 +93,8 @@ public abstract class Setup<A extends App> {
     public abstract SettingsManager getAppSettings();
 
     public abstract DesktopGestureListener.DesktopGestureCallback getDesktopGestureCallback();
+
+    public abstract ItemGestureListener.ItemGestureCallback getItemGestureCallback();
 
     public abstract ImageLoader<A> getImageLoader();
 

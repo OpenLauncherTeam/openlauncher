@@ -10,7 +10,8 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingTop="10dp"
-    android:textAllCaps="false">
+    android:textAllCaps="false"
+    android:ellipsize="end">
 
 </TextView>
 

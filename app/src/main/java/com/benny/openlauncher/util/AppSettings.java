@@ -62,7 +62,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     @Override
-    public boolean searchBarTimeEnabled() {
+    public boolean isSearchBarTimeEnabled() {
         return true;
     }
 
@@ -75,6 +75,31 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     @Override
     public boolean isResetSearchBarOnOpen() {
         return false;
+    }
+
+    @Override
+    public boolean isSearchGridListSwitchEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean isSearchUseGrid() {
+        return false;
+    }
+
+    @Override
+    public void setSearchUseGrid(boolean enabled) {
+
+    }
+
+    @Override
+    public int getSearchGridSize() {
+        return 1;
+    }
+
+    @Override
+    public int getSearchLabelLines() {
+        return Integer.MAX_VALUE;
     }
 
     @Override

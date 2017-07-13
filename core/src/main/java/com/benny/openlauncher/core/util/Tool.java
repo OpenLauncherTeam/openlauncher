@@ -26,6 +26,7 @@ import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
+import com.benny.openlauncher.core.viewutil.ItemGestureListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -319,7 +320,8 @@ public class Tool {
         }
     }
 
-    public static View.OnTouchListener getItemOnTouchListener() {
+    public static View.OnTouchListener getItemOnTouchListener(Item item, final ItemGestureListener.ItemGestureCallback itemGestureCallback) {
+        final ItemGestureListener itemGestureListener = Definitions.ENABLE_ITEM_TOUCH_LISTENER && itemGestureCallback != null ? new ItemGestureListener(Setup.appContext(), item, itemGestureCallback) : null;
         return new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -328,6 +330,9 @@ public class Tool {
                 // use this to debug the on touch listener
                 //Tool.print(Home.touchX);
                 //Tool.print(Home.touchY);
+                if (itemGestureListener != null) {
+                    return itemGestureListener.onTouchEvent(motionEvent);
+                }
                 return false;
             }
         };

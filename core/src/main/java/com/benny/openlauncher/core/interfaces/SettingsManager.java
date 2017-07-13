@@ -49,9 +49,14 @@ public interface SettingsManager {
     // SearchBar
     boolean getSearchBarEnable();
     String getSearchBarBaseURI();
-    boolean searchBarTimeEnabled();
+    boolean isSearchBarTimeEnabled();
     SimpleDateFormat getUserDateFormat();
     boolean isResetSearchBarOnOpen();
+    boolean isSearchGridListSwitchEnabled();
+    boolean isSearchUseGrid();
+    void setSearchUseGrid(boolean enabled);
+    int getSearchGridSize();
+    int getSearchLabelLines();
 
     // Others
     boolean getAppRestartRequired();

@@ -113,7 +113,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         if (!Setup.wasInitialised())
             initStaticHelper();
 
-        if (Setup.appSettings().searchBarTimeEnabled()) {
+        if (Setup.appSettings().isSearchBarTimeEnabled()) {
             timeChangedReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {

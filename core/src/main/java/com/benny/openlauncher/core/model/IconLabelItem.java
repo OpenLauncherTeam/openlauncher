@@ -40,6 +40,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private int width = -1;
     private boolean bold = false;
     private int textGravity = Gravity.CENTER_VERTICAL;
+    private int maxTextLines = Integer.MAX_VALUE;
 
     public IconLabelItem(Item item) {
         this.iconProvider = item != null ? item.getIconProvider() : null;
@@ -140,6 +141,11 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
+    public IconLabelItem withMaxTextLines(int maxTextLines) {
+        this.maxTextLines = maxTextLines;
+        return this;
+    }
+
     @Override
     public void setIcon(int resId) {
         this.iconProvider = Setup.imageLoader().createIconProvider(resId);
@@ -171,7 +177,8 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
             holder.itemView.getLayoutParams().width = RecyclerView.LayoutParams.MATCH_PARENT;
         if (width != -1)
             holder.itemView.getLayoutParams().width = width;
-        holder.textView.setText(getLabel());
+        holder.textView.setMaxLines(maxTextLines);
+        holder.textView.setText(maxTextLines != 0 ? getLabel() : "");
         holder.textView.setGravity(gravity);
         holder.textView.setTypeface(typeface);
         holder.textView.setCompoundDrawablePadding((int) drawablePadding);

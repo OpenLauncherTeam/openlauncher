@@ -27,12 +27,13 @@ import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.viewutil.GroupIconDrawable;
+import com.benny.openlauncher.core.viewutil.ItemGestureListener;
 
 public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
     public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item, int iconSize) {
         AppItemView.Builder b = new AppItemView.Builder(context, iconSize)
-                .withOnTouchGetPosition()
+                .withOnTouchGetPosition(groupItem, Setup.itemGestureCallback())
                 .setTextColor(Setup.appSettings().getPopupLabelColor());
         if (groupItem.type == Item.Type.SHORTCUT) {
             b.setShortcutItem(groupItem);
@@ -48,18 +49,8 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     public static View createDrawerAppItemView(Context context, final Home home, App app, int iconSize, AppItemView.LongPressCallBack longPressCallBack) {
         return new AppItemView.Builder(context, iconSize)
                 .setAppItem(app)
-                .withOnTouchGetPosition()
-                .withOnLongClick(app, DragAction.Action.APP_DRAWER, new AppItemView.LongPressCallBack() {
-                    @Override
-                    public boolean readyForDrag(View view) {
-                        return Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
-                    }
-
-                    @Override
-                    public void afterDrag(View view) {
-                        home.closeAppDrawer();
-                    }
-                })
+                .withOnTouchGetPosition(null, null)
+                .withOnLongClick(app, DragAction.Action.APP_DRAWER, longPressCallBack)
                 .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
                 .setTextColor(Setup.appSettings().getDrawerLabelColor())
                 .getView();
@@ -373,8 +364,8 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             return this;
         }
 
-        public Builder withOnTouchGetPosition() {
-            view.setOnTouchListener(Tool.getItemOnTouchListener());
+        public Builder withOnTouchGetPosition(Item item, ItemGestureListener.ItemGestureCallback itemGestureCallback) {
+            view.setOnTouchListener(Tool.getItemOnTouchListener(item, itemGestureCallback));
             return this;
         }
 
