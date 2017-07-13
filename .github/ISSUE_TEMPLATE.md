@@ -1,31 +1,29 @@
-<!--  
-  Check if all requirements below are fulfilled, otherwise this issue will be closed without any comment.
-  * Fill out details listed below
-  * Check if the issue is already reported before creating a new one.
+Check if all requirements are fulfilled otherwise the issue will be closed without any comment
+
+  * Add details to fields  below
+  * Use search. Check if the issue is already reported before creating a new one. 
     https://github.com/OpenLauncherTeam/openlauncher/issues
--->
+  * Don't report update problems. Note that the OL Team is working on the core features and breaking changes may occur. We try to keep the amount of legacy code low. Try to reset app before posting.
+  * Delete this info block
+-----------------------------
 
 #### General information
 
-* **Device:**   <!-- eg Nexus 5 -->
-* **Android Version:**  <!--eg Android 6.0.1 -->
-* **App version:**  <!-- See in About - e.g. v0.5.1 -->
-
-#### Steps to reproduce
-
-1. …
-2. …
-3. …
-
+* **App version:**
+* **Android Version:**
 
 #### Expected result
-**What is the expected output?** 
+**What is expected?** 
 
-**What do you see instead?**
+**What does happen instead?**
 
 <!--
-Upload screenshots via drag&drop if needed and apply resizing:
+Screenshots can be uploaded by drag&drop. Apply resizing:
 `<img width="30%" height="30%" src="https://cloud.githubusercontent.com/assets/67..b55.jpg">`
 
 Logcat: `adb logcat -s com.benny.openlauncher`
 -->
+
+
+#### Steps to reproduce
+*
