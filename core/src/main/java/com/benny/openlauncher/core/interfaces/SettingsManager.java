@@ -45,6 +45,7 @@ public interface SettingsManager {
     int getVerticalDrawerHorizontalMargin();
     int getVerticalDrawerVerticalMargin();
     int getDrawerIconSize();
+    int getDrawerFastScrollerColor();
 
     // SearchBar
     boolean getSearchBarEnable();

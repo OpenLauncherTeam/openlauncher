@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import com.benny.openlauncher.App;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.core.widget.Desktop;
 
@@ -190,6 +191,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     @Override
     public int getDrawerIconSize() {
         return getIconSize();
+    }
+
+    @Override
+    public int getDrawerFastScrollerColor() {
+        return ContextCompat.getColor(Setup.appContext(), R.color.colorAccent);
     }
 
     public int getDrawerCardColor() {
