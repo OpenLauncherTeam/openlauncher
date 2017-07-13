@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    compileSdkVersion setup.compileSdk
+    buildToolsVersion setup.buildTools
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 25
+        minSdkVersion setup.minSdk
+        targetSdkVersion setup.targetSdk
 
         versionCode 24
         versionName "0.5.3"

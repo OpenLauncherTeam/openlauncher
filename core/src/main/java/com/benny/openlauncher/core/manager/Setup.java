@@ -119,7 +119,7 @@ public abstract class Setup<A extends App> {
         void saveItem(Item item);
         void saveItem(Item item, int page, Definitions.ItemPosition desktop);
         void updateSate(Item item, Definitions.ItemState state);
-        void deleteItem(Item item);
+        void deleteItem(Item item, boolean deleteSubItems);
         Item getItem(int id);
         List<List<Item>> getDesktop();
         List<Item> getDock();

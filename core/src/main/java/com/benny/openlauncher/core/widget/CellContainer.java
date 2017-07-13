@@ -15,8 +15,10 @@ import android.view.ViewGroup;
 
 import com.benny.openlauncher.core.util.Tool;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
@@ -395,6 +397,14 @@ public class CellContainer extends ViewGroup {
 
     public void addViewToGrid(View view) {
         addView(view);
+    }
+
+    public List<View> getAllCells() {
+        ArrayList<View> views = new ArrayList<>();
+        for (int i = 0; i < getChildCount(); i++) {
+            views.add(getChildAt(i));
+        }
+        return views;
     }
 
     public void setOccupied(boolean b, LayoutParams lp) {

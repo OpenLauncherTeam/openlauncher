@@ -206,7 +206,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this, Setup.appSettings().getDockIconSize());
 
         if (itemView == null) {
-            home.db.deleteItem(item);
+            home.db.deleteItem(item, true);
             return false;
         } else {
             addViewToGrid(itemView, item.getX(), item.getY(), item.getSpanX(), item.getSpanY());

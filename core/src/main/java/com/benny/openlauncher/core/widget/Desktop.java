@@ -177,7 +177,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         pageCount--;
 
         int previousPage = getCurrentItem();
-        ((DesktopAdapter) getAdapter()).removePage(getCurrentItem());
+        ((DesktopAdapter) getAdapter()).removePage(getCurrentItem(), true);
 
         for (CellContainer v : pages) {
             v.setAlpha(0);
@@ -281,7 +281,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this, Setup.appSettings().getDesktopIconSize());
 
         if (itemView == null) {
-            home.db.deleteItem(item);
+            home.db.deleteItem(item, true);
             return false;
         } else {
             pages.get(page).addViewToGrid(itemView, item.getX(), item.getY(), item.getSpanX(), item.getSpanY());
@@ -360,7 +360,18 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             notifyDataSetChanged();
         }
 
-        public void removePage(int position) {
+        public void removePage(int position, boolean deleteItems) {
+            if (deleteItems) {
+                List<View> views = desktop.pages.get(position).getAllCells();
+                for (View v : views) {
+                    if (v != null) {
+                        Object item = v.getTag();
+                        if (item instanceof Item) {
+                            Home.launcher.db.deleteItem((Item)item, true);
+                        }
+                    }
+                }
+            }
             desktop.pages.remove(position);
             notifyDataSetChanged();
         }

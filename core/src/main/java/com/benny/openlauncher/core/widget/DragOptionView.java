@@ -130,12 +130,7 @@ public class DragOptionView extends CardView {
                         Item item = DragDropHandler.getDraggedObject(dragEvent);
 
                         // remove all items from the database
-                        Home.launcher.db.deleteItem(item);
-                        if (item.getType() == Item.Type.GROUP) {
-                            for (Item i : item.getGroupItems()) {
-                                Home.launcher.db.deleteItem(i);
-                            }
-                        }
+                        Home.launcher.db.deleteItem(item, true);
 
                         home.desktop.consumeRevert();
                         home.dock.consumeRevert();

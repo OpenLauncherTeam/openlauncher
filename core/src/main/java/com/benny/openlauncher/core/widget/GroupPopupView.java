@@ -221,7 +221,7 @@ public class GroupPopupView extends FrameLayout {
 
                 Home.db.saveItem(item);
                 Home.db.updateSate(item, Definitions.ItemState.Visible);
-                Home.db.deleteItem(currentItem);
+                Home.db.deleteItem(currentItem, true);
 
                 callBack.removeItem(currentView);
                 callBack.addItemToCell(item, item.getX(), item.getY());

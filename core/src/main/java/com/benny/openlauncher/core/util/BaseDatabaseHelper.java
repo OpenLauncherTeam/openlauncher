@@ -135,7 +135,14 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
     }
 
     @Override
-    public void deleteItem(Item item) {
+    public void deleteItem(Item item, boolean deleteSubItems) {
+        // 1) if item is a folder => delete all sub items
+        if (deleteSubItems && item.getType() == Item.Type.GROUP) {
+            for (Item i : item.getGroupItems()) {
+                deleteItem(i, deleteSubItems);
+            }
+        }
+        // 2) delete the item itself
         db.delete(TABLE_HOME, COLUMN_TIME + " = ?", new String[]{String.valueOf(item.getId())});
     }
 
@@ -272,7 +279,7 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
 
     // update the fields only used by the database
     public void updateItem(Item item, int page, Definitions.ItemPosition itemPosition) {
-        deleteItem(item);
+        deleteItem(item, false);
         createItem(item, page, itemPosition);
     }
 
