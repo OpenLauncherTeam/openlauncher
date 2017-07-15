@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.interfaces.LabelProvider;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.BaseIconProvider;

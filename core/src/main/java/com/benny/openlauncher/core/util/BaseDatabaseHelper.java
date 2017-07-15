@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
@@ -80,6 +81,8 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
         itemValues.put(COLUMN_LABEL, item.getLabel());
         itemValues.put(COLUMN_X_POS, item.x);
         itemValues.put(COLUMN_Y_POS, item.y);
+
+        Setup.logger().log(this, Log.INFO, null, "createItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
 
         String concat = "";
         switch (item.type) {
@@ -243,6 +246,9 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
         itemValues.put(COLUMN_LABEL, item.getLabel());
         itemValues.put(COLUMN_X_POS, item.x);
         itemValues.put(COLUMN_Y_POS, item.y);
+
+        Setup.logger().log(this, Log.INFO, null, "updateItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+
         String concat = "";
         switch (item.type) {
             case APP:
@@ -273,12 +279,14 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
     // update the state of an item
     public void updateItem(Item item, Definitions.ItemState state) {
         ContentValues itemValues = new ContentValues();
+        Setup.logger().log(this, Log.INFO, null, "updateItem (state): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
         itemValues.put(COLUMN_STATE, state.ordinal());
         db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
     }
 
     // update the fields only used by the database
     public void updateItem(Item item, int page, Definitions.ItemPosition itemPosition) {
+        Setup.logger().log(this, Log.INFO, null, "updateItem (delete + create): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
         deleteItem(item, false);
         createItem(item, page, itemPosition);
     }

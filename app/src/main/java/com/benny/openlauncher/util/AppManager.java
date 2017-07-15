@@ -176,6 +176,19 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
     }
 
     @Override
+    public App createApp(Intent intent) {
+        try {
+            ResolveInfo info = packageManager.resolveActivity(intent, 0);
+            App app = new App(getContext(), info, packageManager);
+            if (apps != null && !apps.contains(app))
+                apps.add(app);
+            return app;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
     public void onAppUpdated(Context p1, Intent p2) {
         onReceive(p1, p2);
     }

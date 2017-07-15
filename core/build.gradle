@@ -36,9 +36,12 @@ dependencies {
         transitive = true
         exclude group: 'com.android.support'
     }
-    compile('com.github.turing-tech:MaterialScrollBar:12.4.0') {
+    compile (project(':MaterialScrollBar')){
         exclude group: 'com.android.support'
     }
+//    compile('com.github.turing-tech:MaterialScrollBar:12.4.0') {
+//        exclude group: 'com.android.support'
+//    }
     compile 'in.championswimmer:SimpleFingerGestures_Android_Library:1.2'
     compile('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
         transitive = true;
