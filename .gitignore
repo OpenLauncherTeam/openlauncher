@@ -57,7 +57,6 @@ gradle-app.setting
 .texlipse
 
 # Java
-*.class
 .mtj.tmp/
 *.jar
 *.war

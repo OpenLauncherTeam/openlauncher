@@ -86,7 +86,7 @@ public class DesktopOptionView extends FrameLayout {
 
     private void init() {
         appSettings = AppSettings.get();
-        Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
+        Typeface typeface = Typeface.create(getContext().getResources().getString(R.string.roboto_regular), Typeface.NORMAL);
         actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         actionRecyclerView.setClipToPadding(false);

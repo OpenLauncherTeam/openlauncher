@@ -88,7 +88,7 @@ public class AppItemView extends View implements Drawable.Callback {
         super(context, attrs);
 
         if (typeface == null) {
-            typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
+            typeface = Typeface.create(getContext().getResources().getString(R.string.roboto_regular), Typeface.NORMAL);
         }
 
         setWillNotDraw(false);

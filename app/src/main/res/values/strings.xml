@@ -250,4 +250,11 @@
     <string name="volume_level_system">System</string>
     <string name="volume_level_media">Media</string>
 
+    <!-- Font Roboto start -->
+    <string name="roboto_condensed">sans-serif-condensed</string> <!-- roboto condensed (from android 4.1) -->
+    <string name="roboto_regular">sans-serif</string> <!-- roboto regular (from android 4.1) -->
+    <string name="roboto_light">sans-serif-light</string> <!-- roboto light (from android 4.1) -->
+    <string name="roboto_thin">sans-serif-thin </string> <!-- roboto thin (from android 4.2) -->
+    <string name="roboto_medium">sans-serif-medium</string> <!-- roboto medium (from android 5.0) -->
+    <!-- Font Roboto end -->
 </resources>
