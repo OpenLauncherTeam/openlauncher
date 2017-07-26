@@ -9,11 +9,13 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.Item;
+import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.Item;
 
 public class ShortcutReceiver extends BroadcastReceiver {
 
@@ -44,15 +46,23 @@ public class ShortcutReceiver extends BroadcastReceiver {
                 shortcutIconDrawable = new BitmapDrawable(context.getResources(), (Bitmap) intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON));
         }
 
-        Item item = Setup.get().createShortcut(newIntent, shortcutIconDrawable, name);
+        App app = Setup.appLoader().createApp(newIntent);
+        Item item;
+        if (app != null) {
+            item = Item.newAppItem(app);
+        } else {
+            item = Item.newShortcutItem(newIntent, shortcutIconDrawable, name);
+        }
         Point preferredPos = Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).findFreeSpace();
         if (preferredPos == null) {
             Tool.toast(Home.launcher, R.string.toast_not_enough_space);
         } else {
             item.setX(preferredPos.x);
             item.setY(preferredPos.y);
-            Home.db.setItem(item, Home.launcher.desktop.getCurrentItem(), 0);
-            Home.launcher.desktop.addItemToPage(item, Home.launcher.desktop.getCurrentItem());
+            Home.db.saveItem(item, Home.launcher.desktop.getCurrentItem(), Definitions.ItemPosition.Desktop);
+            boolean added = Home.launcher.desktop.addItemToPage(item, Home.launcher.desktop.getCurrentItem());
+
+            Setup.logger().log(this, Log.INFO, null, "Shortcut installed - %s => Intent: %s (Item type: %s; x = %d, y = %d, added = %b)", name, newIntent, item.getType(), item.getX(), item.getY(), added);
         }
     }
 }

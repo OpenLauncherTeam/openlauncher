@@ -18,9 +18,10 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.core.util.DragDropHandler;
-import com.benny.openlauncher.model.IconLabelItem;
-import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.core.model.IconLabelItem;
+import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.core.util.BaseDatabaseHelper;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
@@ -77,7 +78,7 @@ public class DialogHelper {
         int size = Tool.dp2px(46, context);
         int sizePad = Tool.dp2px(8, context);
         for (int i = 0; i < apps.size(); i++) {
-            items.add(new IconLabelItem(context, apps.get(i).icon, apps.get(i).label, size)
+            items.add(new IconLabelItem(context, apps.get(i).getIconProvider(), apps.get(i).label, size)
                     .withIconGravity(Gravity.START)
                     .withDrawablePadding(context, sizePad));
         }

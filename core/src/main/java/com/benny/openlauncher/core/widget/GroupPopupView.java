@@ -1,6 +1,7 @@
 package com.benny.openlauncher.core.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
@@ -12,13 +13,14 @@ import android.widget.PopupWindow;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
-import com.benny.openlauncher.core.interfaces.AppItemView;
-import com.benny.openlauncher.core.interfaces.Item;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.Item;
+import com.benny.openlauncher.core.util.Definitions;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
+import com.benny.openlauncher.core.viewutil.GroupIconDrawable;
 
 public class GroupPopupView extends FrameLayout {
 
@@ -44,6 +46,15 @@ public class GroupPopupView extends FrameLayout {
             return;
         }
         popupParent = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_group_popup, this, false);
+        if (Setup.appSettings().getPopupColor() != -1) {
+            int color = Setup.appSettings().getPopupColor();
+            int alpha = Color.alpha(color);
+            popupParent.setCardBackgroundColor(color);
+            // remove elevation if CardView's background is transparent to avoid weird shadows because CardView does not support transparent backgrounds
+            if (alpha != 0) {
+                popupParent.setCardElevation(0f);
+            }
+        }
         cellContainer = (CellContainer) popupParent.findViewById(R.id.group);
 
         bringToFront();
@@ -70,7 +81,7 @@ public class GroupPopupView extends FrameLayout {
         setVisibility(View.INVISIBLE);
     }
 
-    public <T extends Item, V extends View & AppItemView> boolean showWindowV(final T item, final View itemView, final DesktopCallBack callBack) {
+    public boolean showWindowV(final Item item, final View itemView, final DesktopCallBack callBack) {
         if (getVisibility() == View.VISIBLE) return false;
 
         //popupParent.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.folderColor);
@@ -82,7 +93,7 @@ public class GroupPopupView extends FrameLayout {
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.getGroupItems().size());
         cellContainer.setGridSize(cellSize[0], cellSize[1]);
 
-        int iconSize = Tool.dp2px(Setup.appSettings().getIconSize(), c);
+        int iconSize = Tool.dp2px(Setup.appSettings().getDesktopIconSize(), c);
         int textSize = Tool.dp2px(22, c);
         int contentPadding = Tool.dp2px(5, c);
 
@@ -91,34 +102,31 @@ public class GroupPopupView extends FrameLayout {
                 if (y2 * cellSize[0] + x2 > item.getGroupItems().size() - 1) {
                     continue;
                 }
-                final Item groupItem = (Item) item.getGroupItems().get(y2 * cellSize[0] + x2);
-                App groupApp = null;
-                if (groupItem.getType() != Item.Type.SHORTCUT) {
-                    groupApp = Setup.get().findApp(c, groupItem.getIntent());
-                }
-                AppItemView appItemView = Setup.get().createAppItemViewPopup(getContext(), groupItem, groupApp);
+                final Item groupItem = item.getGroupItems().get(y2 * cellSize[0] + x2);
+                final App groupApp = groupItem.getType() != Item.Type.SHORTCUT ? Setup.appLoader().findItemApp(groupItem) : null;
+                AppItemView appItemView = AppItemView.createAppItemViewPopup(getContext(), groupItem, groupApp, Setup.appSettings().getDesktopIconSize());
                 final View view = appItemView.getView();
 
                 view.setOnLongClickListener(new OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view2) {
-                        removeItem(c, callBack, item, groupItem, (V) itemView);
+                        removeItem(c, callBack, item, groupItem, (AppItemView)itemView);
 
                         itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
 
                         DragAction.Action action = groupItem.getType() == Item.Type.SHORTCUT ? DragAction.Action.SHORTCUT : DragAction.Action.APP;
 
                         // start the drag action
-                        DragDropHandler.startDrag(itemView, groupItem, action, null);
+                        DragDropHandler.startDrag(view, groupItem, action, null);
 
                         dismissPopup();
                         updateItem(c, callBack, item, groupItem, itemView);
                         return true;
                     }
                 });
-                final App app = Setup.get().findApp(c, groupItem.getIntent());
+                final App app = Setup.appLoader().findItemApp(groupItem);
                 if (app == null) {
-                    removeItem(c, callBack, item, groupItem, (V) itemView);
+                    removeItem(c, callBack, item, groupItem, (AppItemView) itemView);
                 } else {
                     view.setOnClickListener(new OnClickListener() {
                         @Override
@@ -141,7 +149,11 @@ public class GroupPopupView extends FrameLayout {
         dismissListener = new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                Setup.get().onItemViewDismissed(itemView);
+                if (((AppItemView)itemView).getIconProvider().isGroupIconDrawable()) {
+                    if (((AppItemView)itemView).getCurrentIcon() != null) {
+                        ((GroupIconDrawable) ((AppItemView) itemView).getCurrentIcon()).popBack();
+                    }
+                }
             }
         };
 
@@ -190,26 +202,26 @@ public class GroupPopupView extends FrameLayout {
         return true;
     }
 
-    private <V extends View & AppItemView> void removeItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, V currentView) {
+    private void removeItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, AppItemView currentView) {
         currentItem.getGroupItems().remove(dragOutItem);
 
-        Home.db.updateItem(dragOutItem, 1);
-        Home.db.updateItem(currentItem);
+        Home.db.updateSate(dragOutItem, Definitions.ItemState.Visible);
+        Home.db.saveItem(currentItem);
 
-        Setup.get().updateIcon(context, currentView, currentItem);
+        currentView.setIconProvider(Setup.imageLoader().createIconProvider(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize())));
     }
 
-    public void updateItem(Context context, final DesktopCallBack callBack, final Item<Item> currentItem, Item dragOutItem, View currentView) {
+    public void updateItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, View currentView) {
         if (currentItem.getGroupItems().size() == 1) {
-            final App app = Setup.get().findApp(context, currentItem.getGroupItems().get(0).getIntent());
+            final App app = Setup.appLoader().findItemApp(currentItem.getGroupItems().get(0));
             if (app != null) {
                 Item item = Home.db.getItem(currentItem.getGroupItems().get(0).getId());
                 item.setX(currentItem.getX());
                 item.setY(currentItem.getY());
 
-                Home.db.updateItem(item);
-                Home.db.updateItem(item, 1);
-                Home.db.deleteItem(currentItem);
+                Home.db.saveItem(item);
+                Home.db.updateSate(item, Definitions.ItemState.Visible);
+                Home.db.deleteItem(currentItem, true);
 
                 callBack.removeItem(currentView);
                 callBack.addItemToCell(item, item.getX(), item.getY());

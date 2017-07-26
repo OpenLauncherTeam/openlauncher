@@ -4,6 +4,5 @@
     <item name="item_header_search" type="id"/>
 
     <item type="id" name="id_adapter_app_item" />
-    <item type="id" name="id_adapter_drawer_app_item" />
 
 </resources>

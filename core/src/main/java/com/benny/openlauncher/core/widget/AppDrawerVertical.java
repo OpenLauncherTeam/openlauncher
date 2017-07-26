@@ -16,6 +16,7 @@ import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.DrawerAppItem;
 import com.benny.openlauncher.core.util.Tool;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -105,6 +106,12 @@ public class AppDrawerVertical extends CardView {
         scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
         scrollBar.setClipToPadding(true);
         scrollBar.setDraggableFromAnywhere(true);
+        scrollBar.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollerColor());
+            }
+        });
 
         boolean mPortrait = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
         gridDrawerAdapter = new GridAppDrawerAdapter();
@@ -118,22 +125,22 @@ public class AppDrawerVertical extends CardView {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setDrawingCacheEnabled(true);
 
-        List<App> allApps = Setup.get().getAllApps(getContext());
+        List<App> allApps = Setup.appLoader().getAllApps(getContext());
         if (allApps.size() != 0) {
             AppDrawerVertical.this.apps = allApps;
             ArrayList<FastItem.AppItem> items = new ArrayList<>();
             for (int i = 0; i < apps.size(); i++) {
-                items.add(Setup.get().createDrawerAppItem(apps.get(i)));
+                items.add(new DrawerAppItem(apps.get(i)));
             }
             gridDrawerAdapter.set(items);
         }
-        Setup.get().getAppUpdatedListener(getContext()).add(new AppUpdateListener<App>() {
+        Setup.appLoader().addUpdateListener(new AppUpdateListener<App>() {
             @Override
             public boolean onAppUpdated(List<App> apps) {
                 AppDrawerVertical.this.apps = apps;
                 ArrayList<FastItem.AppItem> items = new ArrayList<>();
                 for (int i = 0; i < apps.size(); i++) {
-                    items.add(Setup.get().createDrawerAppItem(apps.get(i)));
+                    items.add(new DrawerAppItem(apps.get(i)));
                 }
                 gridDrawerAdapter.set(items);
 

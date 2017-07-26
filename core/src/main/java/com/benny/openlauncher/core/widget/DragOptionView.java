@@ -17,9 +17,9 @@ import android.widget.TextView;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.DialogHandler;
-import com.benny.openlauncher.core.interfaces.Item;
+import com.benny.openlauncher.core.interfaces.DialogListener;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.Tool;
@@ -90,11 +90,11 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DROP:
                         final Item item = DragDropHandler.getDraggedObject(dragEvent);
 
-                        Setup.get().getDialogHandler().showEditDialog(getContext(), item, new DialogHandler.OnEditDialogListener() {
+                        Setup.eventHandler().showEditDialog(getContext(), item, new DialogListener.OnEditDialogListener() {
                             @Override
                             public void onRename(String name) {
                                 item.setLabel(name);
-                                Home.db.updateItem(item);
+                                Home.db.saveItem(item);
 
                                 Home.launcher.desktop.addItemToCell(item, item.getX(), item.getY());
                                 Home.launcher.desktop.removeItem(Home.launcher.desktop.getCurrentPage().coordinateToChildView(new Point(item.getX(), item.getY())));
@@ -127,15 +127,10 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Item<?> item = DragDropHandler.getDraggedObject(dragEvent);
+                        Item item = DragDropHandler.getDraggedObject(dragEvent);
 
                         // remove all items from the database
-                        Home.launcher.db.deleteItem(item);
-                        if (item.getType() == Item.Type.GROUP) {
-                            for (Item i : item.getGroupItems()) {
-                                Home.launcher.db.deleteItem(i);
-                            }
-                        }
+                        Home.launcher.db.deleteItem(item, true);
 
                         home.desktop.consumeRevert();
                         home.dock.consumeRevert();
@@ -193,7 +188,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Setup.get().getDialogHandler().showDeletePackageDialog(getContext(), dragEvent);
+                        Setup.eventHandler().showDeletePackageDialog(getContext(), dragEvent);
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;

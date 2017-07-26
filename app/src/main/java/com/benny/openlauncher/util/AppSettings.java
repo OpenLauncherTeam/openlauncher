@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import com.benny.openlauncher.App;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.core.widget.Desktop;
 
@@ -62,7 +63,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     @Override
-    public boolean searchBarTimeEnabled() {
+    public boolean isSearchBarTimeEnabled() {
         return true;
     }
 
@@ -72,8 +73,48 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return null;
     }
 
+    @Override
+    public boolean isResetSearchBarOnOpen() {
+        return false;
+    }
+
+    @Override
+    public boolean isSearchGridListSwitchEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean isSearchUseGrid() {
+        return false;
+    }
+
+    @Override
+    public void setSearchUseGrid(boolean enabled) {
+
+    }
+
+    @Override
+    public int getSearchGridSize() {
+        return 1;
+    }
+
+    @Override
+    public int getSearchLabelLines() {
+        return Integer.MAX_VALUE;
+    }
+
+    @Override
+    public boolean enableImageCaching() {
+        return true;
+    }
+
     public int getDesktopColor() {
         return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
+    }
+
+    @Override
+    public int getDesktopIconSize() {
+        return getIconSize();
     }
 
     public int getDesktopFolderColor() {
@@ -82,6 +123,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     public boolean getDockEnable() {
         return getBool(R.string.pref_key__dock_enable, true);
+    }
+
+    @Override
+    public int getDockIconSize() {
+        return getIconSize();
     }
 
     public void setDockEnable(boolean enable) {
@@ -132,12 +178,42 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getInt(R.string.pref_key__drawer_background_color, Color.TRANSPARENT);
     }
 
+    @Override
+    public int getVerticalDrawerHorizontalMargin() {
+        return 8;
+    }
+
+    @Override
+    public int getVerticalDrawerVerticalMargin() {
+        return 16;
+    }
+
+    @Override
+    public int getDrawerIconSize() {
+        return getIconSize();
+    }
+
+    @Override
+    public int getDrawerFastScrollerColor() {
+        return ContextCompat.getColor(Setup.appContext(), R.color.colorAccent);
+    }
+
     public int getDrawerCardColor() {
         return getInt(R.string.pref_key__drawer_card_color, Color.WHITE);
     }
 
     public int getDrawerLabelColor() {
         return getInt(R.string.pref_key__drawer_label_color, Color.DKGRAY);
+    }
+
+    @Override
+    public int getPopupColor() {
+        return -1;
+    }
+
+    @Override
+    public int getPopupLabelColor() {
+        return getDrawerLabelColor();
     }
 
     public int getMinibarBackgroundColor() {

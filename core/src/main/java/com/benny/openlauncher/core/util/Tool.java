@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,6 +14,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
@@ -21,7 +23,16 @@ import android.widget.Toast;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.IconProvider;
+import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.Item;
+import com.benny.openlauncher.core.viewutil.ItemGestureListener;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tool {
@@ -234,5 +245,114 @@ public class Tool {
         final Intent intent = new Intent(action);
         List resolveInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         return resolveInfo.size() > 0;
+    }
+
+    public static String getIntentAsString(Intent intent) {
+        if (intent == null) {
+            return "";
+        } else {
+            return intent.toUri(0);
+        }
+    }
+
+    public static Intent getIntentFromString(String string) {
+        if (string == null || string.isEmpty()) {
+            return new Intent();
+        } else {
+            try {
+                return new Intent().parseUri(string, 0);
+            } catch (URISyntaxException e) {
+                return new Intent();
+            }
+        }
+    }
+
+    public static IconProvider getIcon(Context context, Item item) {
+        if (item == null) {
+            return null;
+        }
+        return item.getIconProvider();
+    }
+
+    public static Drawable getIcon(Context context, String filename) {
+        if (filename == null) {
+            return null;
+        }
+        Drawable icon = null;
+        Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/icons/" + filename + ".png");
+        if (bitmap != null) {
+            icon = new BitmapDrawable(context.getResources(), bitmap);
+        }
+        return icon;
+    }
+
+    public static void saveIcon(Context context, Bitmap icon, String filename) {
+        File directory = new File(context.getFilesDir() + "/icons");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        File file = new File(context.getFilesDir() + "/icons/" + filename + ".png");
+        removeIcon(context, filename);
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            icon.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeIcon(Context context, String filename) {
+        File file = new File(context.getFilesDir() + "/icons/" + filename + ".png");
+        if (file.exists()) {
+            try {
+                file.delete();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static View.OnTouchListener getItemOnTouchListener(Item item, final ItemGestureListener.ItemGestureCallback itemGestureCallback) {
+        final ItemGestureListener itemGestureListener = Definitions.ENABLE_ITEM_TOUCH_LISTENER && itemGestureCallback != null ? new ItemGestureListener(Setup.appContext(), item, itemGestureCallback) : null;
+        return new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Home.touchX = (int) motionEvent.getX();
+                Home.touchY = (int) motionEvent.getY();
+                // use this to debug the on touch listener
+                //Tool.print(Home.touchX);
+                //Tool.print(Home.touchY);
+                if (itemGestureListener != null) {
+                    return itemGestureListener.onTouchEvent(motionEvent);
+                }
+                return false;
+            }
+        };
+    }
+
+    public static <A extends App> List<A> getRemovedApps(List<A> oldApps, List<A> newApps) {
+        List<A> removed = new ArrayList<>();
+        // if this is the first call to this function and we did not know any app yet, we return an empty list
+        if (oldApps.size() == 0) {
+            return removed;
+        }
+        // we can't rely on sizes because apps may have been installed and deinstalled!
+        //if (oldApps.size() > newApps.size()) {
+            for (int i = 0; i < oldApps.size(); i++) {
+                if (!newApps.contains(oldApps.get(i))) {
+                    removed.add(oldApps.get(i));
+                    break;
+                }
+            }
+//        }
+        return removed;
     }
 }

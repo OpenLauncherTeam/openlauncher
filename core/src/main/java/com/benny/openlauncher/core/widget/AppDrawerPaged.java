@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
-import com.benny.openlauncher.core.interfaces.AppItemView;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.Tool;
@@ -92,7 +91,7 @@ public class AppDrawerPaged extends SmoothViewPager {
             setLandscapeValue();
         }
 
-        List<App> allApps = Setup.get().getAllApps(c);
+        List<App> allApps = Setup.appLoader().getAllApps(c);
         if (allApps.size() != 0) {
             AppDrawerPaged.this.apps = allApps;
             calculatePage();
@@ -100,7 +99,7 @@ public class AppDrawerPaged extends SmoothViewPager {
             if (appDrawerIndicator != null)
                 appDrawerIndicator.setViewPager(AppDrawerPaged.this);
         }
-        Setup.get().getAppUpdatedListener(c).add(new AppUpdateListener<App>() {
+        Setup.appLoader().addUpdateListener(new AppUpdateListener<App>() {
             @Override
             public boolean onAppUpdated(List<App> apps) {
                 AppDrawerPaged.this.apps = apps;
@@ -137,11 +136,12 @@ public class AppDrawerPaged extends SmoothViewPager {
 
             final App app = apps.get(pos);
 
-            return Setup.get()
+            return AppItemView
                     .createDrawerAppItemView(
                             getContext(),
                             home,
                             app,
+                            Setup.appSettings().getDrawerIconSize(),
                             new AppItemView.LongPressCallBack() {
                                 @Override
                                 public boolean readyForDrag(View view) {
