@@ -100,7 +100,7 @@ public class SearchBar extends FrameLayout {
 
     private boolean searchInternetEnabled = true;
     private Mode mode = Mode.DateAll;
-    private int searchClockTextSize = 32;
+    private int searchClockTextSize = 28;
     private float searchClockSubTextFactor = 0.5f;
 
     public SearchBar(@NonNull Context context) {
@@ -332,8 +332,9 @@ public class SearchBar extends FrameLayout {
                 int marginTop = Tool.dp2px(50, getContext()) + searchInput.getHeight();
                 int marginBottom = Desktop.bottomInset;
                 recyclerParams.setMargins(0, marginTop, 0, marginBottom);
-                recyclerParams.height = ((View)getParent()).getHeight() - 2 * marginTop;
+                recyclerParams.height = ((View)getParent()).getHeight() - marginTop;
                 searchRecycler.setLayoutParams(recyclerParams);
+                searchRecycler.setPadding(0,0,0,marginBottom*2);
             }
         });
     }

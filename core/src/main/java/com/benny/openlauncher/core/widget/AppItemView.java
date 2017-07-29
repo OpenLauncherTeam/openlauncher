@@ -177,7 +177,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         // use ellipsis if the label is too long
-        if (label != null && !showLabel && textContainer.width() > 0) {
+        if (label != null && !showLabel && textContainer.width() > 0 && label.length() != 0) {
             float characterSize = textContainer.width() / label.length();
             int charToTruncate = (int) Math.ceil(((label.length() * characterSize) - getWidth()) / characterSize);
 
