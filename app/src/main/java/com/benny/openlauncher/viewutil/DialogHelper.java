@@ -53,6 +53,17 @@ public class DialogHelper {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(title)
                 .content(msg)
+                .negativeText(R.string.cancel)
+                .positiveText(R.string.ok)
+                .show();
+    }
+
+    public static void alertDialog(Context context, String title, String msg, MaterialDialog.SingleButtonCallback onPositive) {
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        builder.title(title)
+                .onPositive(onPositive)
+                .content(msg)
+                .negativeText(R.string.cancel)
                 .positiveText(R.string.ok)
                 .show();
     }

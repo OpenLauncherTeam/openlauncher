@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,22 +26,22 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.util.DialogUtils;
 import com.benny.openlauncher.App;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.interfaces.DialogListener;
-import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.BaseIconProvider;
 import com.benny.openlauncher.core.util.SimpleIconProvider;
 import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.core.viewutil.ItemGestureListener;
 import com.benny.openlauncher.core.widget.Desktop;
-import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.core.util.BaseDatabaseHelper;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
@@ -127,6 +128,21 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     protected void initSettings() {
         super.initSettings();
         drawerLayout.setDrawerLockMode(AppSettings.get().getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+    }
+
+    @Override
+    public void onRemovePage() {
+        if (desktop.pageCount == 1) return;
+
+        if (!desktop.isCurrentPageEmpty())
+            DialogHelper.alertDialog(this, getString(R.string.remove), "This page is not empty. Those item will also be removed.", new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    Home.super.onRemovePage();
+                }
+            });
+        else
+            Home.super.onRemovePage();
     }
 
     public void initMinibar() {

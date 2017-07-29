@@ -171,7 +171,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     public void removeCurrentPage() {
-        if (pageCount == 1) return;
+        if (pageCount == 1){
+            return;
+        }
         if (Setup.appSettings().getDesktopStyle() == DesktopMode.SHOW_ALL_APPS)
             return;
         pageCount--;
@@ -241,6 +243,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 return true;
         }
         return false;
+    }
+
+    public boolean isCurrentPageEmpty(){
+        return getCurrentPage().getChildCount() == 0;
     }
 
     public CellContainer getCurrentPage() {

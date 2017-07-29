@@ -69,6 +69,8 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
     }
 
     public App findApp(Intent intent) {
+        if (intent == null || intent.getComponent() == null) return null;
+
         String packageName = intent.getComponent().getPackageName();
         String className = intent.getComponent().getClassName();
         for (App app : apps) {

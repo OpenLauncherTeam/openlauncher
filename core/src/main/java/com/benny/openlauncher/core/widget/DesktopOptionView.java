@@ -172,7 +172,7 @@ public class DesktopOptionView extends FrameLayout {
         actionAdapters[1].withOnClickListener(clickListener);
     }
 
-    private RecyclerView createRecyclerView(FastAdapter adapter, int gravity, int paddingHorizontal){
+    private RecyclerView createRecyclerView(FastAdapter adapter, int gravity, int paddingHorizontal) {
         RecyclerView actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         actionRecyclerView.setClipToPadding(false);
