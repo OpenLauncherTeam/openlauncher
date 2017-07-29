@@ -8,7 +8,7 @@ android {
         minSdkVersion setup.minSdk
         targetSdkVersion setup.targetSdk
 
-        versionCode 24
+        versionCode 25
         versionName "0.5.3"
 
         applicationId "com.benny.openlauncher"
@@ -40,7 +40,8 @@ android {
 
     lintOptions {
         disable 'MissingTranslation'
-        //disable 'ExtraTranslation'
+        disable 'ExtraTranslation'
+        abortOnError false
     }
 
     buildTypes {
