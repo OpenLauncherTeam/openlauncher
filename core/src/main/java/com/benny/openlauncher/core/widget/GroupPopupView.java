@@ -110,6 +110,8 @@ public class GroupPopupView extends FrameLayout {
                 view.setOnLongClickListener(new OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view2) {
+                        if (Setup.appSettings().isDesktopLock()) return false;
+
                         removeItem(c, callBack, item, groupItem, (AppItemView)itemView);
 
                         itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
