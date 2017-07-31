@@ -19,7 +19,7 @@ public class DragNavigationControl {
                 if (home.desktop.getCurrentItem() < home.desktop.pageCount - 1)
                     home.desktop.setCurrentItem(home.desktop.getCurrentItem() + 1);
                 else if (home.desktop.getCurrentItem() == home.desktop.pageCount - 1)
-                    home.desktop.addPageRight();
+                    home.desktop.addPageRight(true);
                 l.postDelayed(this, 1000);
             }
         };
@@ -29,7 +29,7 @@ public class DragNavigationControl {
                 if (home.desktop.getCurrentItem() > 0)
                     home.desktop.setCurrentItem(home.desktop.getCurrentItem() - 1);
                 else if (home.desktop.getCurrentItem() == 0)
-                    home.desktop.addPageLeft();
+                    home.desktop.addPageLeft(true);
                 l.postDelayed(this, 1000);
             }
         };

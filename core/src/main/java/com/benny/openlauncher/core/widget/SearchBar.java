@@ -82,7 +82,7 @@ public class SearchBar extends FrameLayout {
             this.sdf = sdf;
         }
 
-        public int getId(){
+        public int getId() {
             return id;
         }
     }
@@ -154,7 +154,6 @@ public class SearchBar extends FrameLayout {
     }
 
     private void init() {
-
         int dp1 = Tool.dp2px(1, getContext());
         int iconMarginOutside = dp1 * 16;
         int iconMarginTop = dp1 * 10;
@@ -170,7 +169,7 @@ public class SearchBar extends FrameLayout {
         clockParams.gravity = Gravity.START;
 
         LayoutParams switchButtonParams = null;
-        if (Setup.appSettings().isSearchGridListSwitchEnabled()) {
+        if (!isInEditMode() && Setup.appSettings().isSearchGridListSwitchEnabled()) {
             switchButton = new AppCompatImageView(getContext());
             updateSwitchIcon();
             switchButton.setOnClickListener(new OnClickListener() {
@@ -188,6 +187,8 @@ public class SearchBar extends FrameLayout {
             switchButtonParams.setMargins(iconMarginOutside, iconMarginTop, 0, 0);
             switchButtonParams.gravity = Gravity.START;
         }
+
+        if (isInEditMode()) return;
 
         final CircleDrawable icon = new CircleDrawable(getContext(), getResources().getDrawable(R.drawable.ic_search_light_24dp), Color.BLACK);
         searchButton = new AppCompatImageView(getContext());
@@ -266,23 +267,23 @@ public class SearchBar extends FrameLayout {
                 List<FastItem.LabelItem> items = new ArrayList<>();
                 if (searchInternetEnabled) {
                     items.add(new IconLabelItem(getContext(), R.string.search_online)
-                                    .withIconGravity(Gravity.START)
-                                    .withOnClickListener(new OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            callback.onInternetSearch(searchInput.getText().toString());
-                                            searchInput.getText().clear();
-                                        }
-                                    })
-                                    .withTextColor(Color.WHITE)
-                                    .withDrawablePadding(getContext(), 8)
-                                    .withBold(true)
-                                    .withMatchParent(true)
-                                    .withTextGravity(Gravity.END));
+                            .withIconGravity(Gravity.START)
+                            .withOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    callback.onInternetSearch(searchInput.getText().toString());
+                                    searchInput.getText().clear();
+                                }
+                            })
+                            .withTextColor(Color.WHITE)
+                            .withDrawablePadding(getContext(), 8)
+                            .withBold(true)
+                            .withMatchParent(true)
+                            .withTextGravity(Gravity.END));
                 }
                 for (int i = 0; i < apps.size(); i++) {
                     final App app = apps.get(i);
-                    items.add( new IconLabelItem(getContext(), app.getIconProvider(), app.getLabel(), 36)
+                    items.add(new IconLabelItem(getContext(), app.getIconProvider(), app.getLabel(), 36)
                             .withIconGravity(Setup.appSettings().getSearchGridSize() > 1 && Setup.appSettings().getSearchLabelLines() == 0 ? Gravity.TOP : Gravity.START)
                             .withOnClickListener(new OnClickListener() {
                                 @Override
@@ -332,9 +333,9 @@ public class SearchBar extends FrameLayout {
                 int marginTop = Tool.dp2px(50, getContext()) + searchInput.getHeight();
                 int marginBottom = Desktop.bottomInset;
                 recyclerParams.setMargins(0, marginTop, 0, marginBottom);
-                recyclerParams.height = ((View)getParent()).getHeight() - marginTop;
+                recyclerParams.height = ((View) getParent()).getHeight() - marginTop;
                 searchRecycler.setLayoutParams(recyclerParams);
-                searchRecycler.setPadding(0,0,0,marginBottom*2);
+                searchRecycler.setPadding(0, 0, 0, marginBottom * 2);
             }
         });
     }

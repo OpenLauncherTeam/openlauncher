@@ -132,8 +132,6 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
 
     @Override
     public void onRemovePage() {
-        if (desktop.pageCount == 1) return;
-
         if (!desktop.isCurrentPageEmpty())
             DialogHelper.alertDialog(this, getString(R.string.remove), "This page is not empty. Those item will also be removed.", new MaterialDialog.SingleButtonCallback() {
                 @Override

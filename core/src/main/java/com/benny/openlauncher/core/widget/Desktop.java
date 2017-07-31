@@ -143,7 +143,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
     }
 
-    public void addPageRight() {
+    public void addPageRight(boolean showGrid) {
         pageCount++;
 
         final int previousPage = getCurrentItem();
@@ -151,12 +151,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         setCurrentItem(previousPage + 1);
 
         for (CellContainer cellContainer : pages) {
-            cellContainer.setHideGrid(false);
+            cellContainer.setHideGrid(!showGrid);
         }
         pageIndicator.invalidate();
     }
 
-    public void addPageLeft() {
+    public void addPageLeft(boolean showGrid) {
         pageCount++;
 
         final int previousPage = getCurrentItem();
@@ -165,17 +165,15 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         setCurrentItem(previousPage - 1);
 
         for (CellContainer cellContainer : pages) {
-            cellContainer.setHideGrid(false);
+            cellContainer.setHideGrid(!showGrid);
         }
         pageIndicator.invalidate();
     }
 
     public void removeCurrentPage() {
-        if (pageCount == 1){
-            return;
-        }
         if (Setup.appSettings().getDesktopStyle() == DesktopMode.SHOW_ALL_APPS)
             return;
+
         pageCount--;
 
         int previousPage = getCurrentItem();
@@ -189,8 +187,13 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             v.animateBackgroundShow();
         }
 
-        setCurrentItem(previousPage);
-        pageIndicator.invalidate();
+        if (pageCount == 0){
+            addPageRight(false);
+            ((DesktopAdapter) getAdapter()).exitDesktopEditMode();
+        }else{
+            setCurrentItem(previousPage);
+            pageIndicator.invalidate();
+        }
     }
 
     @Override
@@ -441,38 +444,47 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             layout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    scaleFactor = 1f;
-                    for (final CellContainer v : desktop.pages) {
-                        v.blockTouch = false;
-                        v.animateBackgroundHide();
-                        v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
-                    }
                     if (!desktop.inEditMode && currentEvent != null) {
                         WallpaperManager.getInstance(view.getContext()).sendWallpaperCommand(view.getWindowToken(), WallpaperManager.COMMAND_TAP, (int) currentEvent.getX(), (int) currentEvent.getY(), 0, null);
                     }
-                    desktop.inEditMode = false;
-                    if (desktop.desktopEditListener != null) {
-                        desktop.desktopEditListener.onFinishDesktopEdit();
-                    }
+
+                    exitDesktopEditMode();
                 }
             });
             layout.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    scaleFactor = 0.75f;
-                    for (CellContainer v : desktop.pages) {
-                        v.blockTouch = true;
-                        v.animateBackgroundShow();
-                        v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
-                    }
-                    desktop.inEditMode = true;
-                    if (desktop.desktopEditListener != null) {
-                        desktop.desktopEditListener.onDesktopEdit();
-                    }
+                    enterDesktopEditMode();
                     return true;
                 }
             });
             return layout;
+        }
+
+        public void enterDesktopEditMode() {
+            scaleFactor = 0.75f;
+            for (CellContainer v : desktop.pages) {
+                v.blockTouch = true;
+                v.animateBackgroundShow();
+                v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
+            }
+            desktop.inEditMode = true;
+            if (desktop.desktopEditListener != null) {
+                desktop.desktopEditListener.onDesktopEdit();
+            }
+        }
+
+        public void exitDesktopEditMode() {
+            scaleFactor = 1f;
+            for (final CellContainer v : desktop.pages) {
+                v.blockTouch = false;
+                v.animateBackgroundHide();
+                v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
+            }
+            desktop.inEditMode = false;
+            if (desktop.desktopEditListener != null) {
+                desktop.desktopEditListener.onFinishDesktopEdit();
+            }
         }
     }
 

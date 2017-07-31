@@ -318,12 +318,12 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     @Override
     public void onFinishDesktopEdit() {
-        dragOptionView.setAutoHideView(searchBar);
-
         Tool.visibleViews(100, desktopIndicator);
         Tool.invisibleViews(100, desktopEditOptionView);
         updateDock(true);
         updateSearchBar(true);
+
+        dragOptionView.setAutoHideView(searchBar);
     }
 
     @Override
@@ -500,10 +500,9 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
             Tool.goneViews(100, desktopIndicator);
         }
 
-        if (Setup.appSettings().getSearchBarEnable()) {
+        if (!Setup.appSettings().getSearchBarEnable()) {
             ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInset;
             ((ViewGroup.MarginLayoutParams) dragRight.getLayoutParams()).topMargin = Desktop.topInset;
-        } else {
             desktop.setPadding(0, Desktop.topInset, 0, 0);
         }
 
