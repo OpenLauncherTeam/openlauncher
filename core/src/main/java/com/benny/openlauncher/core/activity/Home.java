@@ -265,7 +265,6 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     }
 
     protected void initAppManager() {
-
         Setup.appLoader().addUpdateListener(new AppUpdateListener<App>() {
             @Override
             public boolean onAppUpdated(List<App> apps) {
@@ -308,7 +307,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     @Override
     public void onDesktopEdit() {
-        dragOptionView.resetAutoHideView();
+        //dragOptionView.resetAutoHideView();
 
         Tool.visibleViews(100, desktopEditOptionView);
         Tool.invisibleViews(100, desktopIndicator);
@@ -323,7 +322,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         updateDock(true);
         updateSearchBar(true);
 
-        dragOptionView.setAutoHideView(searchBar);
+        //dragOptionView.setAutoHideView(searchBar);
     }
 
     @Override
