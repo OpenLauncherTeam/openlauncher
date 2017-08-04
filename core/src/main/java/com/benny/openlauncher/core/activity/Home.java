@@ -404,7 +404,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
             public void onInternetSearch(String string) {
                 Intent intent = new Intent();
 
-                if (Tool.isIntentActionAvailable(getApplicationContext(), Intent.ACTION_WEB_SEARCH)) {
+                if (Tool.isIntentActionAvailable(getApplicationContext(), Intent.ACTION_WEB_SEARCH) && ! Setup.appSettings().getSearchBarForceBrowser()) {
                     intent.setAction(Intent.ACTION_WEB_SEARCH);
                     intent.putExtra(SearchManager.QUERY, string);
                 } else {

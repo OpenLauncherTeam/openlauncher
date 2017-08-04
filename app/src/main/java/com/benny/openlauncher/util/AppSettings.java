@@ -62,6 +62,10 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getString(R.string.pref_key__search_bar_base_uri, R.string.pref_default__search_bar_base_uri);
     }
 
+    public boolean getSearchBarForceBrowser() {
+        return getBool(R.string.pref_key__search_bar_force_browser, false);
+    }
+
     @Override
     public boolean isSearchBarTimeEnabled() {
         return true;

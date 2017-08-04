@@ -70,6 +70,13 @@
             android:summary="@string/pref_summary__search_bar_base_uri"
             android:title="@string/pref_title__search_bar_base_uri" />
 
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="@string/pref_key__search_bar_enable"
+            android:key="@string/pref_key__search_bar_force_browser"
+            android:summary="@string/pref_summary__search_bar_force_browser"
+            android:title="@string/pref_title__search_bar_force_browser" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title__color">

@@ -83,6 +83,8 @@
     <string name="pref_summary__desktop_show_label">Show item labels below their icons.</string>
     <string name="pref_title__search_bar_base_uri">Search URI</string>
     <string name="pref_summary__search_bar_base_uri">Set the URI used for web searches.</string>
+    <string name="pref_title__search_bar_force_browser">Force browser search</string>
+    <string name="pref_summary__search_bar_force_browser">Always use the browser for online searches.</string>
     <string name="pref_dialog__search_bar_base_uri">Enter the URI that should be used for web searches. The tag {query} can be used as
       placeholder for the search query, in case no placeholder is used the search query will be appended at the end of the URI.</string>
     <string name="pref_title__desktop_background_color">Background</string>
@@ -151,6 +153,7 @@
     <string name="pref_key__desktop_show_position_indicator" translatable="false">pref_key__desktop_show_position_indicator</string>
     <string name="pref_key__desktop_show_label" translatable="false">pref_key__desktop_show_label</string>
     <string name="pref_key__search_bar_base_uri" translatable="false">pref_key__search_bar_base_uri</string>
+    <string name="pref_key__search_bar_force_browser" translatable="false">pref_key__search_bar_force_browser</string>
     <string name="pref_key__desktop_background_color" translatable="false">pref_key__desktop_background_color</string>
     <string name="pref_key__desktop_folder_color" translatable="false">pref_key__desktop_folder_color</string>
     <string name="pref_key__minibar_background_color" translatable="false">pref_key__minibar_background_color</string>
