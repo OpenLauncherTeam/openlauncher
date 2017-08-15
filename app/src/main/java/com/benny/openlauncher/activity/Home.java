@@ -28,7 +28,6 @@ import android.widget.RelativeLayout;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.util.DialogUtils;
 import com.benny.openlauncher.App;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.interfaces.DialogListener;

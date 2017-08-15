@@ -68,6 +68,16 @@ public class DialogHelper {
                 .show();
     }
 
+    public static void alertDialog(Context context, String title, String msg,String positive, MaterialDialog.SingleButtonCallback onPositive) {
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        builder.title(title)
+                .onPositive(onPositive)
+                .content(msg)
+                .negativeText(R.string.cancel)
+                .positiveText(positive)
+                .show();
+    }
+
     public static void addActionItemDialog(final Context context, MaterialDialog.ListCallback callback) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(R.string.desktop_action)
