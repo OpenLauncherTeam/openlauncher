@@ -346,12 +346,12 @@ public class Tool {
         }
         // we can't rely on sizes because apps may have been installed and deinstalled!
         //if (oldApps.size() > newApps.size()) {
-            for (int i = 0; i < oldApps.size(); i++) {
-                if (!newApps.contains(oldApps.get(i))) {
-                    removed.add(oldApps.get(i));
-                    break;
-                }
+        for (int i = 0; i < oldApps.size(); i++) {
+            if (!newApps.contains(oldApps.get(i))) {
+                removed.add(oldApps.get(i));
+                break;
             }
+        }
 //        }
         return removed;
     }

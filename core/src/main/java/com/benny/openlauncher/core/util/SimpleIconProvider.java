@@ -8,9 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.benny.openlauncher.core.interfaces.IconDrawer;
-import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.manager.Setup;
-import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.viewutil.GroupIconDrawable;
 
 public class SimpleIconProvider extends BaseIconProvider {

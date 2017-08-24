@@ -17,11 +17,10 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.model.IconLabelItem;
 import com.benny.openlauncher.core.model.Item;
+import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.core.util.BaseDatabaseHelper;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
@@ -68,7 +67,7 @@ public class DialogHelper {
                 .show();
     }
 
-    public static void alertDialog(Context context, String title, String msg,String positive, MaterialDialog.SingleButtonCallback onPositive) {
+    public static void alertDialog(Context context, String title, String msg, String positive, MaterialDialog.SingleButtonCallback onPositive) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(title)
                 .onPositive(onPositive)

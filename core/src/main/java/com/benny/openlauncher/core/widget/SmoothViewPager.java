@@ -1997,7 +1997,7 @@ public class SmoothViewPager extends ViewGroup {
             }
 
             case MotionEvent.ACTION_DOWN: {
-					/*
+                    /*
 					 * Remember location of down touch.
 					 * ACTION_DOWN always refers to pointer index 0.
 					 */

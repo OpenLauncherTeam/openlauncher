@@ -187,10 +187,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             v.animateBackgroundShow();
         }
 
-        if (pageCount == 0){
+        if (pageCount == 0) {
             addPageRight(false);
             ((DesktopAdapter) getAdapter()).exitDesktopEditMode();
-        }else{
+        } else {
             setCurrentItem(previousPage);
             pageIndicator.invalidate();
         }
@@ -248,7 +248,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         return false;
     }
 
-    public boolean isCurrentPageEmpty(){
+    public boolean isCurrentPageEmpty() {
         return getCurrentPage().getChildCount() == 0;
     }
 
@@ -376,7 +376,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     if (v != null) {
                         Object item = v.getTag();
                         if (item instanceof Item) {
-                            Home.launcher.db.deleteItem((Item)item, true);
+                            Home.launcher.db.deleteItem((Item) item, true);
                         }
                     }
                 }

@@ -1,15 +1,12 @@
 package com.benny.openlauncher.core.viewutil;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -145,7 +142,7 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
     }
 
     private void drawIcon(Canvas canvas, Drawable icon, float l, float t, float r, float b, Paint paint) {
-        icon.setBounds((int)l, (int)t, (int)r, (int)b);
+        icon.setBounds((int) l, (int) t, (int) r, (int) b);
         icon.setFilterBitmap(true);
         icon.setAlpha(paint.getAlpha());
         icon.draw(canvas);

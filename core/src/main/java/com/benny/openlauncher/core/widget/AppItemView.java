@@ -139,7 +139,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
     public void load() {
         if (iconProvider != null) {
-            iconProvider.loadIconIntoIconDrawer(this, (int)iconSize, 0);
+            iconProvider.loadIconIntoIconDrawer(this, (int) iconSize, 0);
         }
     }
 

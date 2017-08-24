@@ -35,13 +35,13 @@ import com.benny.openlauncher.core.viewutil.DragNavigationControl;
 import com.benny.openlauncher.core.viewutil.WidgetHost;
 import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.core.widget.AppItemView;
-import com.benny.openlauncher.core.widget.SearchBar;
 import com.benny.openlauncher.core.widget.Desktop;
 import com.benny.openlauncher.core.widget.DesktopOptionView;
 import com.benny.openlauncher.core.widget.Dock;
 import com.benny.openlauncher.core.widget.DragOptionView;
 import com.benny.openlauncher.core.widget.GroupPopupView;
 import com.benny.openlauncher.core.widget.PagerIndicator;
+import com.benny.openlauncher.core.widget.SearchBar;
 import com.benny.openlauncher.core.widget.SmoothViewPager;
 
 import java.util.List;
@@ -404,7 +404,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
             public void onInternetSearch(String string) {
                 Intent intent = new Intent();
 
-                if (Tool.isIntentActionAvailable(getApplicationContext(), Intent.ACTION_WEB_SEARCH) && ! Setup.appSettings().getSearchBarForceBrowser()) {
+                if (Tool.isIntentActionAvailable(getApplicationContext(), Intent.ACTION_WEB_SEARCH) && !Setup.appSettings().getSearchBarForceBrowser()) {
                     intent.setAction(Intent.ACTION_WEB_SEARCH);
                     intent.putExtra(SearchManager.QUERY, string);
                 } else {

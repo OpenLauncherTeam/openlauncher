@@ -8,9 +8,6 @@ import android.view.MotionEvent;
 
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
-import com.benny.openlauncher.core.widget.Desktop;
-
-import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class ItemGestureListener extends GestureDetector.SimpleOnGestureListener implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
 
@@ -26,7 +23,7 @@ public class ItemGestureListener extends GestureDetector.SimpleOnGestureListener
 
     private static final int SWIPE_THRESHOLD = 30;
     private static final int SWIPE_VELOCITY_THRESHOLD = 20;
-    
+
     private final ItemGestureCallback callback;
     private final Item item;
     private GestureDetectorCompat detector;
@@ -38,7 +35,7 @@ public class ItemGestureListener extends GestureDetector.SimpleOnGestureListener
         this.callback = callback;
     }
 
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         return detector.onTouchEvent(event);
     }
 

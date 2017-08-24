@@ -3,19 +3,16 @@ package com.benny.openlauncher.core.manager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.v4.view.GestureDetectorCompat;
 import android.view.DragEvent;
 
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.interfaces.AppDeleteListener;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.DialogListener;
-import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.BaseIconProvider;
 import com.benny.openlauncher.core.util.Definitions;
-import com.benny.openlauncher.core.util.SimpleIconProvider;
 import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.core.viewutil.ItemGestureListener;
 
@@ -65,7 +62,7 @@ public abstract class Setup<A extends App> {
     }
 
     public static <IL extends ImageLoader<A>, A extends App> IL imageLoader() {
-        return (IL)get().getImageLoader();
+        return (IL) get().getImageLoader();
     }
 
     public static DataManager dataManager() {
@@ -73,7 +70,7 @@ public abstract class Setup<A extends App> {
     }
 
     public static <AL extends AppLoader<A>, A extends App> AL appLoader() {
-        return (AL)get().getAppLoader();
+        return (AL) get().getAppLoader();
     }
 
     public static EventHandler eventHandler() {
@@ -112,37 +109,57 @@ public abstract class Setup<A extends App> {
 
     public interface ImageLoader<A extends App> {
         BaseIconProvider createIconProvider(Drawable drawable);
+
         BaseIconProvider createIconProvider(int icon);
     }
 
     public interface DataManager {
         void saveItem(Item item);
+
         void saveItem(Item item, int page, Definitions.ItemPosition desktop);
+
         void updateSate(Item item, Definitions.ItemState state);
+
         void deleteItem(Item item, boolean deleteSubItems);
+
         Item getItem(int id);
+
         List<List<Item>> getDesktop();
+
         List<Item> getDock();
     }
 
     public interface AppLoader<A extends App> {
         void loadItems();
+
         List<A> getAllApps(Context context);
+
         A createApp(Intent intent);
+
         A findItemApp(Item item);
+
         void onAppUpdated(Context p1, Intent p2);
+
         void addUpdateListener(AppUpdateListener<A> updateListener);
+
         void removeUpdateListener(AppUpdateListener<A> updateListener);
+
         void addDeleteListener(AppDeleteListener<A> deleteListener);
+
         void removeDeleteListener(AppDeleteListener<A> deleteListener);
+
         void notifyUpdateListeners(List<A> apps);
+
         void notifyRemoveListeners(List<A> apps);
     }
 
     public interface EventHandler {
         void showLauncherSettings(Context context);
+
         void showPickAction(Context context, DialogListener.OnAddAppDrawerItemListener listener);
+
         void showEditDialog(Context context, Item item, DialogListener.OnEditDialogListener listener);
+
         void showDeletePackageDialog(Context context, DragEvent dragEvent);
     }
 

@@ -112,7 +112,7 @@ public class GroupPopupView extends FrameLayout {
                     public boolean onLongClick(View view2) {
                         if (Setup.appSettings().isDesktopLock()) return false;
 
-                        removeItem(c, callBack, item, groupItem, (AppItemView)itemView);
+                        removeItem(c, callBack, item, groupItem, (AppItemView) itemView);
 
                         itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
 
@@ -151,8 +151,8 @@ public class GroupPopupView extends FrameLayout {
         dismissListener = new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                if (((AppItemView)itemView).getIconProvider().isGroupIconDrawable()) {
-                    if (((AppItemView)itemView).getCurrentIcon() != null) {
+                if (((AppItemView) itemView).getIconProvider().isGroupIconDrawable()) {
+                    if (((AppItemView) itemView).getCurrentIcon() != null) {
                         ((GroupIconDrawable) ((AppItemView) itemView).getCurrentIcon()).popBack();
                     }
                 }

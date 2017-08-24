@@ -1,7 +1,6 @@
 package com.benny.openlauncher.core.model;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.benny.openlauncher.core.R;

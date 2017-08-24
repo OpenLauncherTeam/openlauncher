@@ -10,8 +10,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -28,7 +26,6 @@ import android.widget.Toast;
 import com.benny.openlauncher.BuildConfig;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.core.model.Item;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -39,7 +36,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Random;
 

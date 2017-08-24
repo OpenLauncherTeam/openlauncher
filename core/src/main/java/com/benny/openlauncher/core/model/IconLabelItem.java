@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.interfaces.FastItem;
-import com.benny.openlauncher.core.interfaces.IconProvider;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.BaseIconProvider;
 import com.benny.openlauncher.core.util.Tool;

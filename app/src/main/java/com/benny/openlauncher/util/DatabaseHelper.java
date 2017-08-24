@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 
-import com.benny.openlauncher.core.util.*;
+import com.benny.openlauncher.core.util.BaseDatabaseHelper;
 
 public class DatabaseHelper extends BaseDatabaseHelper {
 

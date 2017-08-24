@@ -16,13 +16,13 @@ import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
 import com.benny.openlauncher.core.interfaces.App;
 import com.benny.openlauncher.core.manager.Setup;
+import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.widget.AppItemView;
 import com.benny.openlauncher.core.widget.CellContainer;
 import com.benny.openlauncher.core.widget.WidgetView;
-import com.benny.openlauncher.core.model.Item;
 
 public class ItemViewFactory {
 
