@@ -8,14 +8,14 @@
         <item>Bloquejar pantalla</item>
         <item>Lliberar memòria RAM</item>
         <item>Paràmetres del Dispositiu</item>
-        <item>Paràmetres d'inici</item>
+        <item>Paràmetres d\'inici</item>
         <item>Quadre de diàleg de volum</item>
-        <item>Obrir calaix d'Apps</item>
+        <item>Obrir calaix d\'Apps</item>
         <item>Obrir aplicació</item>
     </string-array>
 
     <string-array name="desktopActionEntries">
-        <item>Calaix d'Apps</item>
+        <item>Calaix d\'Apps</item>
     </string-array>
 
     <string-array name="entries__drawer_modes">

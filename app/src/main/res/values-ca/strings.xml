@@ -14,7 +14,7 @@
 
     <string name="toast_free_ram">Memòria lliure: %1$d MB. Estalviats %2$d MB.</string>
     <string name="toast_free_all_ram">Memòria lliure: %1$d MB. La teva RAM està en millor estat.</string>
-    <string name="toast_device_admin_required">Si us plau, habilita l\'opció d'administració de dispositiu.</string>
+    <string name="toast_device_admin_required">Si us plau, habilita l\'opció d\'administració de dispositiu.</string>
 
     <!-- Intro -->
 
@@ -32,7 +32,7 @@
     <string name="minibar_0">Canvia el diseny de la minibar.</string>
     <string name="minibar_1">Estableix o difumina el fons de pantalla.</string>
     <string name="minibar_2">Bloqueja la pantalla inmediatament, requereix ser administrador del dispositiu.</string>
-    <string name="minibar_3">Allibera memòria RAM forçant el tancament d'altres procesos en execució.</string>
+    <string name="minibar_3">Allibera memòria RAM forçant el tancament d\'altres procesos en execució.</string>
     <string name="minibar_4">Drecera als paràmetres del dispositiu.</string>
     <string name="minibar_5">Drecera als paràmetres de OpenLauncher.</string>
     <string name="minibar_7">Desplegar el panell de volum.</string>
@@ -54,7 +54,7 @@
 
     <string name="pref_title__desktop">Escriptori</string>
     <string name="pref_title__dock">Acoblador</string>
-    <string name="pref_title__app_drawer">Calaix d'apps</string>
+    <string name="pref_title__app_drawer">Calaix d\'apps</string>
     <string name="pref_title__gestures">Gestos</string>
     <string name="pref_title__icons">Icones</string>
     <string name="pref_title__miscellaneous">Miscel·lanània</string>
@@ -70,17 +70,17 @@
     <string name="pref_summary__desktop_style">Tria entre l\'escriptori normal o un que mostri totes les apliccions instal·lades</string>
     <string name="pref_summary__minibar">Configura l\'ordre i la visibilitat dels items de la minibar.</string>
     <string name="pref_title__search_bar_enable">Barra de cerca</string>
-    <string name="pref_summary__search_bar_enable">Mostra una barra de cerca a sobre de l'escriptori.</string>
+    <string name="pref_summary__search_bar_enable">Mostra una barra de cerca a sobre de l\'escriptori.</string>
     <string name="pref_title__desktop_fullscreen">Pantalla complerta</string>
-    <string name="pref_summary__desktop_fullscreen">Habilita la pantalla complerta per l'escriptori.</string>
+    <string name="pref_summary__desktop_fullscreen">Habilita la pantalla complerta per l\'escriptori.</string>
     <string name="pref_title__desktop_show_position_indicator">Indicador de desplaçament</string>
-    <string name="pref_summary__desktop_show_position_indicator">Mostra l'indicador de la pàgina sota de l'escriptori.</string>
+    <string name="pref_summary__desktop_show_position_indicator">Mostra l\'indicador de la pàgina sota de l\'escriptori.</string>
     <string name="pref_title__desktop_show_label">Mostrar les etiquetes</string>
     <string name="pref_summary__desktop_show_label">Mostra les etiquetes dels items sota de les seves icones.</string>
     <string name="pref_title__search_bar_base_uri">Motor de cerca</string>
     <string name="pref_summary__search_bar_base_uri">Estableix el motor de cerca utilitzat per les cerces en la web.</string>
     <string name="pref_dialog__search_bar_base_uri">Afegeix el motor de cerca (URI) que vol utilitzar en les cerques de la web. L\'etiqueta {query} es pot utilitzar com
-	marcador de la posició per les cerces, en cas de que no s'utilitzi un marcador de posició la consulta de cerca s\'annexarà al final del URI.</string>
+	marcador de la posició per les cerces, en cas de que no s\'utilitzi un marcador de posició la consulta de cerca s\'annexarà al final del URI.</string>
     <string name="pref_title__desktop_background_color">Fons</string>
     <string name="pref_title__desktop_folder_color">Carpeta</string>
 
@@ -93,9 +93,9 @@
     <string name="pref_summary__drawer_style">Tria entre un calaix d\'aplicacions paginat o vertical.</string>
     <string name="pref_title__hide_apps">Amaga aplicacions</string>
     <string name="pref_summary__hide_apps">Amaga les aplicacions seleccionades des de el llançador.</string>
-    <string name="pref_title__drawer_show_card_view">Vista de la targeta<view/string>
+    <string name="pref_title__drawer_show_card_view">Vista de la targeta</string>
     <string name="pref_summary__drawer_show_card_view">Mostra la targeta sobre el fons del calaix.</string>
-    <string name="pref_title__drawer_remember_position">Recorda l'\última pàgina</string>
+    <string name="pref_title__drawer_remember_position">Recorda l\'última pàgina</string>
     <string name="pref_summary__drawer_remember_position">Recorda l\'actual pàgina del calaix d\'aplicacions.</string>
     <string name="pref_title__drawer_show_position_indicator">Indicador de desplaçament</string>
     <string name="pref_summary__drawer_show_position_indicator">Mostra l\'indicador de la pàgina o de la barra de desplaçament depenent de l\'estil.</string>
