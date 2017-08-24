@@ -17,7 +17,7 @@
         android:name="com.benny.openlauncher.App"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="${appIcon}"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="false"
         android:launchMode="singleTask"

@@ -2,6 +2,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/pref_title__miscellaneous">
 
+        <!--suppress AndroidDomInspection -->
+        <io.github.gsantner.opoc.ui.LanguagePreference
+            android:defaultValue=""
+            android:key="@string/pref_key__language"
+            android:summary="@string/pref_desc__language"
+            android:title="@string/pref_title__language"/>
+
         <Preference
             android:key="@string/pref_key__backup"
             android:summary="@string/pref_summary__backup"

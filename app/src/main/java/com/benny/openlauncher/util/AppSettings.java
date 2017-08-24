@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import io.github.gsantner.opoc.util.AppSettingsBase;
 
 public class AppSettings extends AppSettingsBase implements SettingsManager {
-    private AppSettings(Context context) {
-        super(context);
+    private AppSettings(Context _context) {
+        super(_context);
     }
 
     public static AppSettings get() {
@@ -221,7 +221,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     public int getMinibarBackgroundColor() {
-        return getInt(R.string.pref_key__minibar_background_color, ContextCompat.getColor(context, R.color.colorPrimaryDark));
+        return getInt(R.string.pref_key__minibar_background_color, ContextCompat.getColor(_context, R.color.colorPrimaryDark));
     }
 
     public boolean getGestureDockSwipeUp() {
@@ -252,7 +252,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     @SuppressLint("ApplySharedPref")
     public void setAppFirstLaunch(boolean value) {
         // MUST be committed
-        prefApp.edit().putBoolean(context.getString(R.string.pref_key__first_start), value).commit();
+        _prefApp.edit().putBoolean(_context.getString(R.string.pref_key__first_start), value).commit();
     }
 
     public boolean isDesktopLock() {
@@ -309,7 +309,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     @SuppressLint("ApplySharedPref")
     public void setAppRestartRequired(boolean value) {
         // MUST be committed
-        prefApp.edit().putBoolean(context.getString
+        _prefApp.edit().putBoolean(_context.getString
                 (R.string.pref_key__queue_restart), value).commit();
+    }
+
+    public String getLanguage() {
+        return getString(R.string.pref_key__language, "");
     }
 }

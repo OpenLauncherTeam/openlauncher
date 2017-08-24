@@ -58,6 +58,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
+import io.github.gsantner.opoc.util.Helpers;
 
 public class Home extends com.benny.openlauncher.core.activity.Home implements DrawerLayout.DrawerListener {
     private Unbinder unbinder;
@@ -81,6 +82,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new Helpers(getApplicationContext()).setAppLanguage(AppSettings.get().getLanguage()); // before setContentView
         super.onCreate(savedInstanceState);
 
         CustomActivityOnCrash.setShowErrorDetails(true);

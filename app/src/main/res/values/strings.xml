@@ -243,4 +243,8 @@
     <string name="volume_level_system">System</string>
     <string name="volume_level_media">Media</string>
 
+    <string name="pref_key__language" translatable="false" >pref_key__language</string>
+    <string name="pref_desc__language">Change language of this app. Restart app for changes to take effect</string>
+    <string name="pref_title__language">Language</string>
+
 </resources>

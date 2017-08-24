@@ -13,10 +13,10 @@ android {
 
         applicationId "com.benny.openlauncher"
         resValue 'string', 'app_name', "OpenLauncher"
-        manifestPlaceholders = [appIcon: "@drawable/ic_launcher"]
 
         buildConfigField "boolean", "IS_TEST_BUILD", "false"
         buildConfigField "boolean", "IS_GPLAY_BUILD", "false"
+        buildConfigField("String[]", "APPLICATION_LANGUAGES", '{' + getUsedAndroidLanguages().collect {"\"${it}\""}.join(",")  + '}')
         multiDexEnabled false
     }
 
@@ -30,7 +30,6 @@ android {
 
         flavorTest {
             applicationId "io.github.openlauncherteam.openlauncher.test"
-            manifestPlaceholders = [appIcon: "@drawable/ic_launcher_nightly"]
             resValue 'string', 'app_name', "OL Nightly"
             versionCode = Integer.parseInt(new Date().format('yyMMdd'))
             versionName = new Date().format('yyMMdd')
@@ -73,3 +72,22 @@ dependencies {
 
     compile project (':core')
 }
+
+
+static String[] getUsedAndroidLanguages(){
+    Set<String> langs = new HashSet<>();
+    String[] resFolders = new File("app/src/main/res").list()
+    for(resFolder in resFolders){
+        if (resFolder.startsWith("values-")){
+            String[] files = new File("app/src/main/res/"+resFolder).list();
+            for (file in files){
+                if (file.startsWith("strings") && file.endsWith(".xml")){
+                    langs.add(resFolder.replace("values-",""))
+                    break;
+                }
+            }
+        }
+    }
+    return langs.toArray(new String[langs.size()])
+}
+
