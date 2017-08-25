@@ -17,24 +17,26 @@
  *     opoc/Helpers
  * BuildConfig field can be defined by using the method below
 
-    buildConfigField("String[]", "APPLICATION_LANGUAGES", '{' + getUsedAndroidLanguages().collect {"\"${it}\""}.join(",")  + '}')
+buildConfigField("String[]", "APPLICATION_LANGUAGES", '{' + getUsedAndroidLanguages().collect {"\"${it}\""}.join(",")  + '}')
 
-    String[] getUsedAndroidLanguages(){
-        Set<String> langs = new HashSet<>();
-        String[] resFolders = new File("app/src/main/res").list()
-        for(resFolder in resFolders){
-            if (resFolder.startsWith("values-")){
-                String[] files = new File("app/src/main/res/"+resFolder).list();
-                for (file in files){
-                    if (file.startsWith("strings") && file.endsWith(".xml")){
-                        langs.add(resFolder.replace("values-",""))
-                        break;
-                    }
+@SuppressWarnings(["UnnecessaryQualifiedReference", "SpellCheckingInspection"])
+static String[] getUsedAndroidLanguages() {
+    Set<String> langs = new HashSet<>()
+    new File('.').eachFileRecurse(groovy.io.FileType.DIRECTORIES) {
+        final foldername = it.name
+        if (foldername.startsWith('values-') && !it.canonicalPath.contains("build" + File.separator + "intermediates")) {
+            new File(it.toString()).eachFileRecurse(groovy.io.FileType.FILES) {
+                if (it.name.toLowerCase().endsWith(".xml") && it.getCanonicalFile().getText('UTF-8').contains("<string")) {
+                    langs.add(foldername.replace("values-", ""))
+
                 }
             }
         }
-        return langs.toArray(new String[langs.size()])
     }
+    return langs.toArray(new String[langs.size()])
+}
+
+ * Summary: Change language of this app. Restart app for changes to take effect
 
  * Define element in Preferences-XML:
     <!--suppress AndroidDomInspection -->
