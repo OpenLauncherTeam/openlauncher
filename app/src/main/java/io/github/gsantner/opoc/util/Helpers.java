@@ -59,13 +59,13 @@ public class Helpers {
         _context = context;
     }
 
-    //########################
-    //##     Methods
-    //########################
-    public String str(@StringRes int strResId) {
-        return _context.getString(strResId);
+    public Context context() {
+        return _context;
     }
 
+    //########################
+    //##    Resources
+    //########################
     static class ResType {
         public static final String DRAWABLE = "drawable";
         public static final String STRING = "string";
@@ -78,6 +78,10 @@ public class Helpers {
         public static final String RAW = "raw";
     }
 
+    public String str(@StringRes int strResId) {
+        return _context.getString(strResId);
+    }
+
     public Drawable drawable(@DrawableRes int resId) {
         return ContextCompat.getDrawable(_context, resId);
     }
@@ -86,9 +90,22 @@ public class Helpers {
         return ContextCompat.getColor(_context, resId);
     }
 
-    public Context context() {
-        return _context;
+    public int getResId(final String type, final String name) {
+        return _context.getResources().getIdentifier(name, type, _context.getPackageName());
     }
+
+    public boolean areResIdsAvailable(final String type, final String... names) {
+        for (String name : names) {
+            if (getResId(type, name) == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //########################
+    //##    Methods
+    //########################
 
     public String colorToHexString(int intColor) {
         return String.format("#%06X", 0xFFFFFF & intColor);
@@ -103,19 +120,6 @@ public class Helpers {
             e.printStackTrace();
             return "?";
         }
-    }
-
-    public int getResId(final String type, final String name) {
-        return _context.getResources().getIdentifier(name, type, _context.getPackageName());
-    }
-
-    public boolean areResIdsAvailable(final String type, final String... names) {
-        for (String name : names) {
-            if (getResId(type, name) == 0) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public void openWebpageInExternalBrowser(final String url) {
@@ -250,14 +254,8 @@ public class Helpers {
     }
 
     public void setHtmlToTextView(TextView textView, String html) {
-        Spanned spanned;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            spanned = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
-        } else {
-            spanned = Html.fromHtml(html);
-        }
         textView.setMovementMethod(LinkMovementMethod.getInstance());
-        textView.setText(new SpannableString(spanned));
+        textView.setText(new SpannableString(htmlToSpanned(html)));
     }
 
     public double getEstimatedScreenSizeInches() {
@@ -301,6 +299,16 @@ public class Helpers {
                 + (0.114 * Color.blue(colorOnBottomInt)))));
     }
 
+    @SuppressWarnings("deprecation")
+    public Spanned htmlToSpanned(String html) {
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html);
+        }
+        return result;
+    }
 
     public float px2dp(final float px) {
         return px / _context.getResources().getDisplayMetrics().density;

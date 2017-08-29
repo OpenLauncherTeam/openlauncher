@@ -53,6 +53,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,8 +61,8 @@ import java.util.List;
 
 
 /**
- * Wrapper for settings based on SharedPreferences
- * with keys in resources
+ * Wrapper for settings based on SharedPreferences with keys in resources
+ * Default SharedPreference (_prefApp) will be taken if no SP is specified, else the first one
  */
 @SuppressWarnings({"WeakerAccess", "unused", "SpellCheckingInspection", "SameParameterValue"})
 public class AppSettingsBase {
@@ -72,8 +73,9 @@ public class AppSettingsBase {
     //########################
     //## Members, Constructors
     //########################
-    protected final SharedPreferences _prefApp;
     protected final Context _context;
+    protected final SharedPreferences _prefApp;
+    protected final String _prefAppName;
 
     public AppSettingsBase(final Context context) {
         this(context, SHARED_PREF_APP);
@@ -81,7 +83,9 @@ public class AppSettingsBase {
 
     public AppSettingsBase(final Context context, final String prefAppName) {
         _context = context.getApplicationContext();
-        _prefApp = _context.getSharedPreferences(prefAppName, Context.MODE_PRIVATE);
+        _prefAppName = TextUtils.isEmpty(prefAppName) ?
+                _context.getPackageName() + "_preferences" : prefAppName;
+        _prefApp = _context.getSharedPreferences(_prefAppName, Context.MODE_PRIVATE);
     }
 
     //#####################
@@ -128,6 +132,23 @@ public class AppSettingsBase {
         pref.unregisterOnSharedPreferenceChangeListener(value);
     }
 
+    public SharedPreferences getDefaultPreferences() {
+        return _prefApp;
+    }
+
+    public SharedPreferences.Editor getDefaultPreferencesEditor() {
+        return _prefApp.edit();
+    }
+
+    public String getDefaultPreferencesName() {
+        return _prefAppName;
+    }
+
+
+    private SharedPreferences gp(final SharedPreferences... pref) {
+        return (pref != null && pref.length > 0 ? pref[0] : _prefApp);
+    }
+
     //#################################
     //## Getter for resources
     //#################################
@@ -139,189 +160,251 @@ public class AppSettingsBase {
         return ContextCompat.getColor(_context, resColorId);
     }
 
+
     //#################################
-    //## Getter & Setter for settings
+    //## Getter & Setter for String
     //#################################
-    public void setString(@StringRes int keyResourceId, String value) {
-        setString(_prefApp, keyResourceId, value);
+    public void setString(@StringRes int keyResourceId, String value, final SharedPreferences... pref) {
+        gp(pref).edit().putString(rstr(keyResourceId), value).apply();
     }
 
-    public void setString(final SharedPreferences pref, @StringRes int keyResourceId, String value) {
-        pref.edit().putString(rstr(keyResourceId), value).apply();
+    public void setString(String key, String value, final SharedPreferences... pref) {
+        gp(pref).edit().putString(key, value).apply();
     }
 
-    public String getString(@StringRes int keyResourceId, String defaultValue) {
-        return getString(_prefApp, keyResourceId, defaultValue);
+    public void setString(@StringRes int keyResourceId, @StringRes int defaultValueResourceId, final SharedPreferences... pref) {
+        gp(pref).edit().putString(rstr(keyResourceId), rstr(defaultValueResourceId)).apply();
     }
 
-    public String getString(final SharedPreferences pref, @StringRes int keyResourceId, String defaultValue) {
-        return pref.getString(rstr(keyResourceId), defaultValue);
+    public String getString(@StringRes int keyResourceId, String defaultValue, final SharedPreferences... pref) {
+        return gp(pref).getString(rstr(keyResourceId), defaultValue);
     }
 
-    public String getString(@StringRes int keyResourceId, @StringRes int keyResourceIdDefaultValue) {
-        return getString(_prefApp, keyResourceId, keyResourceIdDefaultValue);
+    public String getString(@StringRes int keyResourceId, @StringRes int defaultValueResourceId, final SharedPreferences... pref) {
+        return gp(pref).getString(rstr(keyResourceId), rstr(defaultValueResourceId));
     }
 
-    public String getString(final SharedPreferences pref, @StringRes int keyResourceId, @StringRes int keyResourceIdDefaultValue) {
-        return pref.getString(rstr(keyResourceId), rstr(keyResourceIdDefaultValue));
+    public String getString(String key, String defaultValue, final SharedPreferences... pref) {
+        return gp(pref).getString(key, defaultValue);
     }
 
-    public void setStringArray(@StringRes int keyResourceId, Object[] values) {
-        setStringArray(_prefApp, keyResourceId, values);
+    public String getString(@StringRes int keyResourceId, String defaultValue, @StringRes int keyResourceIdDefaultValue, final SharedPreferences... pref) {
+        return gp(pref).getString(rstr(keyResourceId), rstr(keyResourceIdDefaultValue));
     }
 
-    public void setStringArray(final SharedPreferences pref, @StringRes int keyResourceId, Object[] values) {
+    public void setStringArray(@StringRes int keyResourceId, Object[] values, final SharedPreferences... pref) {
+        setStringArray(rstr(keyResourceId), values, gp(pref));
+    }
+
+    public void setStringArray(String key, Object[] values, final SharedPreferences... pref) {
+        setStringArray(key, values, gp(pref));
+    }
+
+    private void setStringArray(String key, Object[] values, final SharedPreferences pref) {
         StringBuilder sb = new StringBuilder();
         for (Object value : values) {
             sb.append(ARRAY_SEPARATOR);
             sb.append(value.toString().replace(ARRAY_SEPARATOR, ARRAY_SEPARATOR_SUBSTITUTE));
         }
-        setString(pref, keyResourceId, sb.toString().replaceFirst(ARRAY_SEPARATOR, ""));
+        setString(key, sb.toString().replaceFirst(ARRAY_SEPARATOR, ""), pref);
     }
 
     @NonNull
-    public String[] getStringArray(@StringRes int keyResourceId) {
-        return getStringArray(_prefApp, keyResourceId);
+    public String[] getStringArray(@StringRes int keyResourceId, final SharedPreferences... pref) {
+        return getStringArray(rstr(keyResourceId), gp(pref));
     }
 
-    @NonNull
-    public String[] getStringArray(final SharedPreferences pref, @StringRes int keyResourceId) {
-        String value = pref.getString(rstr(keyResourceId), ARRAY_SEPARATOR).replace(ARRAY_SEPARATOR_SUBSTITUTE, ARRAY_SEPARATOR);
+    private String[] getStringArray(String key, final SharedPreferences... pref) {
+        String value = gp(pref)
+                .getString(key, ARRAY_SEPARATOR)
+                .replace(ARRAY_SEPARATOR_SUBSTITUTE, ARRAY_SEPARATOR);
         if (value.equals(ARRAY_SEPARATOR)) {
             return new String[0];
         }
         return value.split(ARRAY_SEPARATOR);
     }
 
-    public void setStringList(@StringRes int keyResourceId, List<String> values) {
-        setStringList(_prefApp, keyResourceId, values);
+    public void setStringList(@StringRes int keyResourceId, List<String> values, final SharedPreferences... pref) {
+        setStringArray(rstr(keyResourceId), values.toArray(new String[values.size()]), pref);
     }
 
-    public void setStringList(final SharedPreferences pref, @StringRes int keyResourceId, List<String> values) {
-        setStringArray(pref, keyResourceId, values.toArray(new String[values.size()]));
+    public void setStringList(String key, List<String> values, final SharedPreferences... pref) {
+        setStringArray(key, values.toArray(new String[values.size()]), pref);
     }
 
-    public ArrayList<String> getStringList(@StringRes int keyResourceId) {
-        return getStringList(_prefApp, keyResourceId);
+    public ArrayList<String> getStringList(@StringRes int keyResourceId, final SharedPreferences... pref) {
+        return new ArrayList<>(Arrays.asList(getStringArray(rstr(keyResourceId), gp(pref))));
     }
 
-    public ArrayList<String> getStringList(final SharedPreferences pref, @StringRes int keyResourceId) {
-        return new ArrayList<>(Arrays.asList(getStringArray(pref, keyResourceId)));
+    public ArrayList<String> getStringList(String key, final SharedPreferences... pref) {
+        return new ArrayList<>(Arrays.asList(getStringArray(key, gp(pref))));
     }
 
-    public void setLong(@StringRes int keyResourceId, long value) {
-        setLong(_prefApp, keyResourceId, value);
+    //#################################
+    //## Getter & Setter for integer
+    //#################################
+    public void setInt(@StringRes int keyResourceId, int value, final SharedPreferences... pref) {
+        gp(pref).edit().putInt(rstr(keyResourceId), value).apply();
     }
 
-    public void setLong(final SharedPreferences pref, @StringRes int keyResourceId, long value) {
-        pref.edit().putLong(rstr(keyResourceId), value).apply();
+    public void setInt(String key, int value, final SharedPreferences... pref) {
+        gp(pref).edit().putInt(key, value).apply();
     }
 
-    public long getLong(@StringRes int keyResourceId, long defaultValue) {
-        return getLong(_prefApp, keyResourceId, defaultValue);
+    public int getInt(@StringRes int keyResourceId, int defaultValue, final SharedPreferences... pref) {
+        return gp(pref).getInt(rstr(keyResourceId), defaultValue);
     }
 
-    public long getLong(final SharedPreferences pref, @StringRes int keyResourceId, long defaultValue) {
-        return pref.getLong(rstr(keyResourceId), defaultValue);
+    public int getInt(String key, int defaultValue, final SharedPreferences... pref) {
+        return gp(pref).getInt(key, defaultValue);
     }
 
-    public void setBool(@StringRes int keyResourceId, boolean value) {
-        setBool(_prefApp, keyResourceId, value);
+    public int getIntOfStringPref(@StringRes int keyResId, int defaultValue, final SharedPreferences... pref) {
+        return getIntOfStringPref(rstr(keyResId), defaultValue, gp(pref));
     }
 
-    public void setBool(final SharedPreferences pref, @StringRes int keyResourceId, boolean value) {
-        pref.edit().putBoolean(rstr(keyResourceId), value).apply();
-    }
-
-    public boolean getBool(@StringRes int keyResourceId, boolean defaultValue) {
-        return getBool(_prefApp, keyResourceId, defaultValue);
-    }
-
-    public boolean getBool(final SharedPreferences pref, @StringRes int keyResourceId, boolean defaultValue) {
-        return pref.getBoolean(rstr(keyResourceId), defaultValue);
-    }
-
-    public int getColor(String key, int defaultColor) {
-        return getColor(_prefApp, key, defaultColor);
-    }
-
-    public int getColor(final SharedPreferences pref, String key, int defaultColor) {
-        return pref.getInt(key, defaultColor);
-    }
-
-    public int getColor(@StringRes int keyResourceId, int defaultColor) {
-        return getColor(_prefApp, keyResourceId, defaultColor);
-    }
-
-    public int getColor(final SharedPreferences pref, @StringRes int keyResourceId, int defaultColor) {
-        return pref.getInt(rstr(keyResourceId), defaultColor);
-    }
-
-    public void setDouble(@StringRes int keyResId, double value) {
-        setDouble(_prefApp, keyResId, value);
-    }
-
-    public void setDouble(final SharedPreferences pref, @StringRes int keyResId, double value) {
-        _prefApp.edit().putLong(rstr(keyResId), Double.doubleToRawLongBits(value)).apply();
-    }
-
-    public double getDouble(@StringRes int keyResId, double defaultValue) {
-        return getDouble(_prefApp, keyResId, defaultValue);
-    }
-
-    public double getDouble(final SharedPreferences pref, @StringRes int keyResId, double defaultValue) {
-        return Double.longBitsToDouble(_prefApp.getLong(rstr(keyResId), Double.doubleToLongBits(defaultValue)));
-    }
-
-    public int getIntOfStringPref(@StringRes int keyResId, int defaultValue) {
-        String strNum = _prefApp.getString(_context.getString(keyResId), Integer.toString(defaultValue));
+    public int getIntOfStringPref(String key, int defaultValue, final SharedPreferences... pref) {
+        String strNum = getString(key, Integer.toString(defaultValue), gp(pref));
         return Integer.valueOf(strNum);
     }
 
-    public void setInt(@StringRes int keyResourceId, int value) {
-        setInt(_prefApp, keyResourceId, value);
+
+    public void setIntArray(@StringRes int keyResourceId, Object[] values, final SharedPreferences... pref) {
+        setIntArray(rstr(keyResourceId), values, gp(pref));
     }
 
-    public void setInt(final SharedPreferences pref, @StringRes int keyResourceId, int value) {
-        pref.edit().putInt(rstr(keyResourceId), value).apply();
+    public void setIntArray(String key, Object[] values, final SharedPreferences... pref) {
+        setIntArray(key, values, gp(pref));
     }
 
-    public int getInt(@StringRes int keyResourceId, int defaultValue) {
-        return getInt(_prefApp, keyResourceId, defaultValue);
-    }
-
-    public int getInt(final SharedPreferences pref, @StringRes int keyResourceId, int defaultValue) {
-        return pref.getInt(rstr(keyResourceId), defaultValue);
-    }
-
-    public void setIntList(@StringRes int keyResId, List<Integer> values) {
-        setIntList(_prefApp, keyResId, values);
-    }
-
-    public void setIntList(final SharedPreferences pref, @StringRes int keyResId, List<Integer> values) {
+    private void setIntArray(String key, Object[] values, final SharedPreferences pref) {
         StringBuilder sb = new StringBuilder();
-        for (int value : values) {
+        for (Object value : values) {
             sb.append(ARRAY_SEPARATOR);
-            sb.append(Integer.toString(value));
+            sb.append(value.toString());
         }
-        setString(_prefApp, keyResId, sb.toString().replaceFirst(ARRAY_SEPARATOR, ""));
+        setString(key, sb.toString().replaceFirst(ARRAY_SEPARATOR, ""), pref);
     }
 
     @NonNull
-    public ArrayList<Integer> getIntList(@StringRes int keyResId) {
-        return getIntList(_prefApp, keyResId);
+    public Integer[] getIntArray(@StringRes int keyResourceId, final SharedPreferences... pref) {
+        return getIntArray(rstr(keyResourceId), gp(pref));
     }
 
-    @NonNull
-    public ArrayList<Integer> getIntList(final SharedPreferences pref, @StringRes int keyResId) {
-        final ArrayList<Integer> ret = new ArrayList<>();
-        final String value = getString(_prefApp, keyResId, ARRAY_SEPARATOR);
+    private Integer[] getIntArray(String key, final SharedPreferences... pref) {
+        String value = gp(pref).getString(key, ARRAY_SEPARATOR);
         if (value.equals(ARRAY_SEPARATOR)) {
-            return ret;
+            return new Integer[0];
         }
-        for (String intstr : value.split(ARRAY_SEPARATOR)) {
-            ret.add(Integer.parseInt(intstr));
+        String[] split = value.split(ARRAY_SEPARATOR);
+        Integer[] ret = new Integer[split.length];
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = Integer.parseInt(split[i]);
         }
         return ret;
+    }
+
+    public void setIntList(@StringRes int keyResourceId, List<Integer> values, final SharedPreferences... pref) {
+        setIntArray(rstr(keyResourceId), values.toArray(new Integer[values.size()]), pref);
+    }
+
+    public void setIntList(String key, List<Integer> values, final SharedPreferences... pref) {
+        setIntArray(key, values.toArray(new Integer[values.size()]), pref);
+    }
+
+    public ArrayList<Integer> getIntList(@StringRes int keyResourceId, final SharedPreferences... pref) {
+        return new ArrayList<>(Arrays.asList(getIntArray(rstr(keyResourceId), gp(pref))));
+    }
+
+    public ArrayList<Integer> getIntList(String key, final SharedPreferences... pref) {
+        return new ArrayList<>(Arrays.asList(getIntArray(key, gp(pref))));
+    }
+
+
+    //#################################
+    //## Getter & Setter for Long
+    //#################################
+    public void setLong(@StringRes int keyResourceId, long value, final SharedPreferences... pref) {
+        gp(pref).edit().putLong(rstr(keyResourceId), value).apply();
+    }
+
+    public void setLong(String key, long value, final SharedPreferences... pref) {
+        gp(pref).edit().putLong(key, value).apply();
+    }
+
+    public long getLong(@StringRes int keyResourceId, long defaultValue, final SharedPreferences... pref) {
+        return gp(pref).getLong(rstr(keyResourceId), defaultValue);
+    }
+
+    public long getLong(String key, long defaultValue, final SharedPreferences... pref) {
+        return gp(pref).getLong(key, defaultValue);
+    }
+
+    //#################################
+    //## Getter & Setter for Float
+    //#################################
+    public void setFloat(@StringRes int keyResourceId, float value, final SharedPreferences... pref) {
+        gp(pref).edit().putFloat(rstr(keyResourceId), value).apply();
+    }
+
+    public void setFloat(String key, float value, final SharedPreferences... pref) {
+        gp(pref).edit().putFloat(key, value).apply();
+    }
+
+    public float getFloat(@StringRes int keyResourceId, float defaultValue, final SharedPreferences... pref) {
+        return gp(pref).getFloat(rstr(keyResourceId), defaultValue);
+    }
+
+    public float getFloat(String key, float defaultValue, final SharedPreferences... pref) {
+        return gp(pref).getFloat(key, defaultValue);
+    }
+
+    //#################################
+    //## Getter & Setter for Double
+    //#################################
+    public void setDouble(@StringRes int keyResourceId, double value, final SharedPreferences... pref) {
+        setLong(rstr(keyResourceId), Double.doubleToRawLongBits(value));
+    }
+
+    public void setDouble(String key, double value, final SharedPreferences... pref) {
+        setLong(key, Double.doubleToRawLongBits(value));
+    }
+
+    public double getDouble(@StringRes int keyResourceId, double defaultValue, final SharedPreferences... pref) {
+        return getDouble(rstr(keyResourceId), defaultValue, gp(pref));
+    }
+
+    public double getDouble(String key, double defaultValue, final SharedPreferences... pref) {
+        return Double.longBitsToDouble(getLong(key, Double.doubleToRawLongBits(defaultValue), gp(pref)));
+    }
+
+    //#################################
+    //## Getter & Setter for boolean
+    //#################################
+    public void setBool(@StringRes int keyResourceId, boolean value, final SharedPreferences... pref) {
+        gp(pref).edit().putBoolean(rstr(keyResourceId), value).apply();
+    }
+
+    public void setBool(String key, boolean value, final SharedPreferences... pref) {
+        gp(pref).edit().putBoolean(key, value).apply();
+    }
+
+    public boolean getBool(@StringRes int keyResourceId, boolean defaultValue, final SharedPreferences... pref) {
+        return gp(pref).getBoolean(rstr(keyResourceId), defaultValue);
+    }
+
+    public boolean getBool(String key, boolean defaultValue, final SharedPreferences... pref) {
+        return gp(pref).getBoolean(key, defaultValue);
+    }
+
+    //#################################
+    //## Getter & Setter for Color
+    //#################################
+    public int getColor(String key, @ColorRes int defaultColor, final SharedPreferences... pref) {
+        return gp(pref).getInt(key, rcolor(defaultColor));
+    }
+
+    public int getColor(@StringRes int keyResourceId, @ColorRes int defaultColor, final SharedPreferences... pref) {
+        return gp(pref).getInt(rstr(keyResourceId), rcolor(defaultColor));
     }
 }
