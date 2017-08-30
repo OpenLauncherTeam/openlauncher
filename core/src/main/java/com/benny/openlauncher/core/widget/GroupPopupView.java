@@ -1,5 +1,6 @@
 package com.benny.openlauncher.core.widget;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
@@ -7,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.PopupWindow;
 
 import com.benny.openlauncher.core.R;
@@ -22,14 +23,19 @@ import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.viewutil.GroupIconDrawable;
 
-public class GroupPopupView extends FrameLayout {
+import io.codetail.animation.ViewAnimationUtils;
+import io.codetail.widget.RevealFrameLayout;
 
-    public boolean isShowing = false;
+public class GroupPopupView extends RevealFrameLayout {
 
-    private CardView popupParent;
+    private boolean isShowing;
+    private CardView popupCard;
     private CellContainer cellContainer;
     private PopupWindow.OnDismissListener dismissListener;
-    private boolean init = false;
+    private Animator folderAnimator;
+    private static final Long folderAnimationTime = 200L;
+    private int cx;
+    private int cy;
 
     public GroupPopupView(Context context) {
         super(context);
@@ -45,17 +51,17 @@ public class GroupPopupView extends FrameLayout {
         if (isInEditMode()) {
             return;
         }
-        popupParent = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_group_popup, this, false);
+        popupCard = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_group_popup, this, false);
         if (Setup.appSettings().getPopupColor() != -1) {
             int color = Setup.appSettings().getPopupColor();
             int alpha = Color.alpha(color);
-            popupParent.setCardBackgroundColor(color);
+            popupCard.setCardBackgroundColor(color);
             // remove elevation if CardView's background is transparent to avoid weird shadows because CardView does not support transparent backgrounds
             if (alpha != 0) {
-                popupParent.setCardElevation(0f);
+                popupCard.setCardElevation(0f);
             }
         }
-        cellContainer = (CellContainer) popupParent.findViewById(R.id.group);
+        cellContainer = popupCard.findViewById(R.id.group);
 
         bringToFront();
 
@@ -68,26 +74,16 @@ public class GroupPopupView extends FrameLayout {
                 dismissPopup();
             }
         });
-    }
 
-    public void dismissPopup() {
-        removeAllViews();
-
-        if (dismissListener != null) {
-            dismissListener.onDismiss();
-        }
-
-        cellContainer.removeAllViews();
+        addView(popupCard);
+        popupCard.setVisibility(View.INVISIBLE);
         setVisibility(View.INVISIBLE);
     }
 
+
     public boolean showWindowV(final Item item, final View itemView, final DesktopCallBack callBack) {
-        if (getVisibility() == View.VISIBLE) return false;
-
-        //popupParent.setBackgroundColor(LauncherSettings.getInstance(getContext()).generalSettings.folderColor);
-
-        setVisibility(View.VISIBLE);
-        popupParent.setVisibility(View.VISIBLE);
+        if (isShowing || getVisibility() == View.VISIBLE) return false;
+        isShowing = true;
 
         final Context c = itemView.getContext();
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.getGroupItems().size());
@@ -159,11 +155,14 @@ public class GroupPopupView extends FrameLayout {
             }
         };
 
-        int popupWidth = contentPadding * 8 + popupParent.getContentPaddingLeft() + popupParent.getContentPaddingRight() + (iconSize) * cellSize[0];
-        popupParent.getLayoutParams().width = popupWidth;
+        int popupWidth = contentPadding * 8 + popupCard.getContentPaddingLeft() + popupCard.getContentPaddingRight() + (iconSize) * cellSize[0];
+        popupCard.getLayoutParams().width = popupWidth;
 
-        int popupHeight = contentPadding * 2 + popupParent.getContentPaddingTop() + popupParent.getContentPaddingBottom() + Tool.dp2px(30, c) + (iconSize + textSize) * cellSize[1];
-        popupParent.getLayoutParams().height = popupHeight;
+        int popupHeight = contentPadding * 2 + popupCard.getContentPaddingTop() + popupCard.getContentPaddingBottom() + Tool.dp2px(30, c) + (iconSize + textSize) * cellSize[1];
+        popupCard.getLayoutParams().height = popupHeight;
+
+        cx = popupWidth / 2;
+        cy = popupHeight / 2;
 
         int[] coordinates = new int[2];
         itemView.getLocationInWindow(coordinates);
@@ -195,13 +194,62 @@ public class GroupPopupView extends FrameLayout {
         int x = coordinates[0];
         int y = coordinates[1];
 
-        popupParent.setPivotX(0);
-        popupParent.setPivotX(0);
-        popupParent.setX(x);
-        popupParent.setY(y - 200);
+        popupCard.setPivotX(0);
+        popupCard.setPivotX(0);
+        popupCard.setX(x);
+        popupCard.setY(y - 200);
 
-        addView(popupParent);
+        setVisibility(View.VISIBLE);
+        popupCard.setVisibility(View.VISIBLE);
+        animateFolderOpen(itemView);
+
         return true;
+    }
+
+    private void animateFolderOpen(View itemView) {
+        int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());
+        folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, 0, finalRadius);
+        folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        folderAnimator.setDuration(folderAnimationTime);
+        folderAnimator.start();
+    }
+
+    public void dismissPopup() {
+        if (!isShowing) return;
+        if (folderAnimator == null || folderAnimator.isRunning())
+            return;
+
+        int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());
+        folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, finalRadius, 0);
+        folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        folderAnimator.setDuration(folderAnimationTime);
+        folderAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator p1) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animator p1) {
+                popupCard.setVisibility(View.INVISIBLE);
+                isShowing = false;
+
+                if (dismissListener != null) {
+                    dismissListener.onDismiss();
+                }
+
+                cellContainer.removeAllViews();
+                setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator p1) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator p1) {
+            }
+        });
+        folderAnimator.start();
     }
 
     private void removeItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, AppItemView currentView) {

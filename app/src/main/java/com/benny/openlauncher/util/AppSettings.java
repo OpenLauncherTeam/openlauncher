@@ -121,10 +121,6 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getIconSize();
     }
 
-    public int getDesktopFolderColor() {
-        return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
-    }
-
     public boolean getDockEnable() {
         return getBool(R.string.pref_key__dock_enable, true);
     }
@@ -212,7 +208,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     @Override
     public int getPopupColor() {
-        return -1;
+        return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
     }
 
     @Override
