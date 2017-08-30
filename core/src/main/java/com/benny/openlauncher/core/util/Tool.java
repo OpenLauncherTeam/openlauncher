@@ -161,25 +161,13 @@ public class Tool {
     }
 
     public static void startApp(Context context, App app) {
-        try {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setClassName(app.getPackageName(), app.getClassName());
-            context.startActivity(intent);
-
-            Home.consumeNextResume = true;
-        } catch (Exception e) {
-            Tool.toast(context, R.string.toast_app_uninstalled);
-        }
+        if (Home.launcher != null)
+            Home.launcher.onStartApp(context, app);
     }
 
     public static void startApp(Context context, Intent intent) {
-        try {
-            context.startActivity(intent);
-            Home.consumeNextResume = true;
-        } catch (Exception e) {
-            Tool.toast(context, R.string.toast_app_uninstalled);
-        }
+        if (Home.launcher != null)
+            Home.launcher.onStartApp(context, intent);
     }
 
     public static Bitmap drawableToBitmap(Drawable drawable) {

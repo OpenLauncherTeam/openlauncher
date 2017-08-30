@@ -264,6 +264,28 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         });
     }
 
+    public void onStartApp(Context context, Intent intent) {
+        try {
+            context.startActivity(intent);
+            Home.consumeNextResume = true;
+        } catch (Exception e) {
+            Tool.toast(context, R.string.toast_app_uninstalled);
+        }
+    }
+
+    public void onStartApp(Context context, App app) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setClassName(app.getPackageName(), app.getClassName());
+            context.startActivity(intent);
+
+            Home.consumeNextResume = true;
+        } catch (Exception e) {
+            Tool.toast(context, R.string.toast_app_uninstalled);
+        }
+    }
+
     protected void initAppManager() {
         Setup.appLoader().addUpdateListener(new AppUpdateListener<App>() {
             @Override

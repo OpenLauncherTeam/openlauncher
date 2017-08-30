@@ -61,8 +61,6 @@ import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import io.github.gsantner.opoc.util.Helpers;
 
 public class Home extends com.benny.openlauncher.core.activity.Home implements DrawerLayout.DrawerListener {
-    private Unbinder unbinder;
-
     @BindView(R.id.minibar)
     public SwipeListView minibar;
     @BindView(R.id.minibar_background)
@@ -77,6 +75,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
     public LauncherLoadingIcon loadingIcon;
     @BindView(R.id.loadingSplash)
     public FrameLayout loadingSplash;
+    private Unbinder unbinder;
     private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
     private CallLogObserver callLogObserver;
 
@@ -89,6 +88,24 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
         CustomActivityOnCrash.setEnableAppRestart(false);
         CustomActivityOnCrash.setDefaultErrorActivityDrawable(R.drawable.rip);
         CustomActivityOnCrash.install(this);
+    }
+
+    @Override
+    public void onStartApp(Context context, Intent intent) {
+        if (intent.getComponent().getPackageName().equals("com.benny.openlauncher")) {
+            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, context);
+            consumeNextResume = true;
+        } else
+            super.onStartApp(context, intent);
+    }
+
+    @Override
+    public void onStartApp(Context context, com.benny.openlauncher.core.interfaces.App app) {
+        if (app.getPackageName().equals("com.benny.openlauncher")) {
+            LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, context);
+            consumeNextResume = true;
+        } else
+            super.onStartApp(context, app);
     }
 
     @Override
