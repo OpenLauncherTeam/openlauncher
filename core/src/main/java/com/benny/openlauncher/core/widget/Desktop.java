@@ -349,7 +349,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     public class DesktopAdapter extends SmoothPagerAdapter {
         private MotionEvent currentEvent;
         private Desktop desktop;
-        float scaleFactor = 1f;
+        float scaleFactor = 1.0f;
+        float translateFactor = 0.0f;
 
         public DesktopAdapter(Desktop desktop) {
             this.desktop = desktop;
@@ -462,11 +463,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
 
         public void enterDesktopEditMode() {
-            scaleFactor = 0.75f;
+            scaleFactor = 0.7f;
+            translateFactor = 180f;
             for (CellContainer v : desktop.pages) {
                 v.blockTouch = true;
                 v.animateBackgroundShow();
-                v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
+                v.animate().scaleX(scaleFactor).scaleY(scaleFactor).translationY(translateFactor).setInterpolator(new AccelerateDecelerateInterpolator());
             }
             desktop.inEditMode = true;
             if (desktop.desktopEditListener != null) {
@@ -475,11 +477,12 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
 
         public void exitDesktopEditMode() {
-            scaleFactor = 1f;
+            scaleFactor = 1.0f;
+            translateFactor = 0.0f;
             for (final CellContainer v : desktop.pages) {
                 v.blockTouch = false;
                 v.animateBackgroundHide();
-                v.animate().scaleX(scaleFactor).scaleY(scaleFactor).setInterpolator(new AccelerateDecelerateInterpolator());
+                v.animate().scaleX(scaleFactor).scaleY(scaleFactor).translationY(translateFactor).setInterpolator(new AccelerateDecelerateInterpolator());
             }
             desktop.inEditMode = false;
             if (desktop.desktopEditListener != null) {
