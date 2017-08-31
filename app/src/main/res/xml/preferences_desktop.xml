@@ -5,14 +5,14 @@
 
     <PreferenceCategory android:title="@string/pref_title__size">
 
-        <com.benny.openlauncher.widget.NumberPickerPreference
+        <com.benny.openlauncher.widget.Preference.NumberPickerPreference
             android:defaultValue="4"
             android:key="@string/pref_key__desktop_columns"
             android:title="@string/columns"
             app:maxValue="20"
             app:minValue="2" />
 
-        <com.benny.openlauncher.widget.NumberPickerPreference
+        <com.benny.openlauncher.widget.Preference.NumberPickerPreference
             android:defaultValue="5"
             android:key="@string/pref_key__desktop_rows"
             android:title="@string/rows"
@@ -30,6 +30,13 @@
             android:key="@string/pref_key__desktop_style"
             android:summary="@string/pref_summary__desktop_style"
             android:title="@string/pref_title__desktop_style" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/entries__desktop_indicator_mode"
+            android:entryValues="@array/values__zero_to_one"
+            android:key="@string/pref_key__desktop_indicator_style"
+            android:title="@string/pref_title__desktop_indicator_style" />
 
         <Preference
             android:key="@string/pref_key__minibar"

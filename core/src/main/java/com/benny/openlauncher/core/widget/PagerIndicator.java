@@ -4,14 +4,21 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.Tool;
+
+import static com.benny.openlauncher.core.widget.PagerIndicator.Mode.ARROW;
+import static com.benny.openlauncher.core.widget.PagerIndicator.Mode.NORMAL;
 
 public class PagerIndicator extends View implements SmoothViewPager.OnPageChangeListener {
 
     private SmoothViewPager pager;
+
+    private int mode = Mode.NORMAL;
 
     private static float pad;
 
@@ -25,6 +32,9 @@ public class PagerIndicator extends View implements SmoothViewPager.OnPageChange
 
     private int realPreviousPage;
 
+    private Path arrowPath;
+    private Paint arrowPaint;
+
     public PagerIndicator(Context context) {
         super(context);
         init();
@@ -37,10 +47,27 @@ public class PagerIndicator extends View implements SmoothViewPager.OnPageChange
 
     private void init() {
         pad = Tool.dp2px(3, getContext());
+
         setWillNotDraw(false);
         dotPaint = new Paint();
         dotPaint.setColor(Color.WHITE);
         dotPaint.setAntiAlias(true);
+
+        arrowPaint = new Paint();
+        arrowPaint.setColor(Color.WHITE);
+        arrowPaint.setAntiAlias(true);
+        arrowPaint.setStyle(Paint.Style.STROKE);
+        arrowPaint.setStrokeWidth(pad / 1.5f);
+        arrowPaint.setStrokeJoin(Paint.Join.ROUND);
+
+        arrowPath = new Path();
+
+        mode = Setup.appSettings().getDesktopIndicatorMode();
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
+        invalidate();
     }
 
     public void setOutlinePaint() {
@@ -106,40 +133,58 @@ public class PagerIndicator extends View implements SmoothViewPager.OnPageChange
     @Override
     protected void onDraw(Canvas canvas) {
         dotSize = getHeight() - pad * 1.25f;
-        if (pager != null) {
-            //getLayoutParams().width = Math.round(pager.getAdapter().getCount() * (dotSize + pad * 2));
-            float circlesWidth = pager.getAdapter().getCount() * (dotSize + pad * 2);
-            canvas.translate(getWidth() / 2 - circlesWidth / 2, 0);
-            getWidth();
-            if (realPreviousPage != pager.getCurrentItem()) {
-                scaleFactor = 1;
-                realPreviousPage = pager.getCurrentItem();
-            }
-            for (int i = 0; i < pager.getAdapter().getCount(); i++) {
-                float targetFactor = 1.5f;
-                float targetFactor2 = 1f;
-                float increFactor = 0.05f;
-                if (i == previousPage && i != pager.getCurrentItem()) {
-                    scaleFactor2 = Tool.clampFloat(scaleFactor2 - increFactor, targetFactor2, targetFactor);
-                    Tool.print(scaleFactor2);
-                    canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, getHeight() / 2, (scaleFactor2 * dotSize) / 2, dotPaint);
-                    if (scaleFactor2 != targetFactor2)
-                        invalidate();
-                    else {
-                        scaleFactor2 = 1.5f;
-                        previousPage = -1;
+
+        switch (mode) {
+            case NORMAL:
+                if (pager != null) {
+                    //getLayoutParams().width = Math.round(pager.getAdapter().getCount() * (dotSize + pad * 2));
+                    float circlesWidth = pager.getAdapter().getCount() * (dotSize + pad * 2);
+                    canvas.translate(getWidth() / 2 - circlesWidth / 2, 0);
+                    getWidth();
+                    if (realPreviousPage != pager.getCurrentItem()) {
+                        scaleFactor = 1;
+                        realPreviousPage = pager.getCurrentItem();
                     }
-                } else if (pager.getCurrentItem() == i) {
-                    if (previousPage == -1)
-                        previousPage = i;
-                    scaleFactor = Tool.clampFloat(scaleFactor + increFactor, targetFactor2, targetFactor);
-                    canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, getHeight() / 2, (scaleFactor * dotSize) / 2, dotPaint);
-                    if (scaleFactor != targetFactor)
-                        invalidate();
-                } else {
-                    canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, getHeight() / 2, dotSize / 2, dotPaint);
+                    for (int i = 0; i < pager.getAdapter().getCount(); i++) {
+                        float targetFactor = 1.5f;
+                        float targetFactor2 = 1f;
+                        float increaseFactor = 0.05f;
+                        if (i == previousPage && i != pager.getCurrentItem()) {
+                            scaleFactor2 = Tool.clampFloat(scaleFactor2 - increaseFactor, targetFactor2, targetFactor);
+                            Tool.print(scaleFactor2);
+                            canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, getHeight() / 2, (scaleFactor2 * dotSize) / 2, dotPaint);
+                            if (scaleFactor2 != targetFactor2)
+                                invalidate();
+                            else {
+                                scaleFactor2 = 1.5f;
+                                previousPage = -1;
+                            }
+                        } else if (pager.getCurrentItem() == i) {
+                            if (previousPage == -1)
+                                previousPage = i;
+                            scaleFactor = Tool.clampFloat(scaleFactor + increaseFactor, targetFactor2, targetFactor);
+                            canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, getHeight() / 2, (scaleFactor * dotSize) / 2, dotPaint);
+                            if (scaleFactor != targetFactor)
+                                invalidate();
+                        } else {
+                            canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, getHeight() / 2, dotSize / 2, dotPaint);
+                        }
+                    }
                 }
-            }
+                break;
+            case ARROW:
+                arrowPath.reset();
+                arrowPath.moveTo(getWidth() / 2 - dotSize, getHeight());
+                arrowPath.lineTo(getWidth() / 2, pad);
+                arrowPath.lineTo(getWidth() / 2 + dotSize, getHeight());
+
+                canvas.drawPath(arrowPath, arrowPaint);
+                break;
         }
+    }
+
+    public static class Mode {
+        public static final int NORMAL = 0;
+        public static final int ARROW = 1;
     }
 }
