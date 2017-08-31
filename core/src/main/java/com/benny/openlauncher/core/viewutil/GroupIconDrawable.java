@@ -20,20 +20,17 @@ import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.Tool;
 
 public class GroupIconDrawable extends Drawable implements IconDrawer {
-    Drawable[] icons;
-    Paint paintInnerCircle;
-    Paint paintIcon;
-    Paint paintOuterCircle;
+    private Drawable[] icons;
+    private Paint paintInnerCircle;
+    private Paint paintOuterCircle;
+    private Paint paintIcon;
     private boolean needAnimate;
     private boolean needAnimateScale;
     private float scaleFactor = 1;
-    public float iconSize;
+    private float iconSize;
     private float padding;
     private int outline;
     private int iconSizeDiv2;
-
-    private float sx = 1;
-    private float sy = 1;
 
     public GroupIconDrawable(Context context, Item item, int iconSize) {
         final float size = Tool.dp2px(iconSize, context);
@@ -82,8 +79,6 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
     }
 
     public void popUp() {
-        sy = 1;
-        sx = 1;
         needAnimate = true;
         needAnimateScale = true;
         invalidateSelf();
@@ -144,7 +139,6 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         icon.setFilterBitmap(true);
         icon.setAlpha(paint.getAlpha());
         icon.draw(canvas);
-        //canvas.drawBitmap(icon, null, new RectF(l, t, r, b), paintInnerCircle);
     }
 
     @Override
