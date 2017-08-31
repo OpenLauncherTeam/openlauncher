@@ -79,7 +79,7 @@
             app:cpv_showAlphaSlider="true" />
 
         <com.jaredrummler.android.colorpicker.ColorPreference
-            android:defaultValue="@color/dark_grey"
+            android:defaultValue="@color/darkGrey"
             android:key="@string/pref_key__drawer_label_color"
             android:title="@string/pref_title__drawer_label_color"
             app:cpv_dialogTitle="@string/pref_title__drawer_label_color"

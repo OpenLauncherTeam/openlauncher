@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="8dp"
-        app:cardBackgroundColor="@color/Light.Background"
+        app:cardBackgroundColor="@color/white"
         app:cardElevation="4dp"
         app:contentPadding="10dp">
 

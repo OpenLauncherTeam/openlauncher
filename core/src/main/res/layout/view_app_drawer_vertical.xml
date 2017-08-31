@@ -4,5 +4,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="invisible"
-    app:cardBackgroundColor="@color/Light.Background"
+    app:cardBackgroundColor="@color/white"
     app:cardElevation="4dp" />

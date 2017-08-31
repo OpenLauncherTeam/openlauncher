@@ -7,42 +7,48 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowShowWallpaper">true</item>
 
-        <item name="colorPrimary">@color/Light.Primary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:textColorPrimary">@color/Light.TextColor</item>
         <item name="android:textColor">@color/Light.TextColor</item>
-        <item name="android:textColorSecondary">@color/Light.TextColorSec</item>
+        <item name="android:textColorSecondary">@color/Light.TextColorSecondary</item>
     </style>
 
     <style name="NormalActivity.Light" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/Light.Primary</item>
-        <item name="colorPrimaryDark">@color/Light.PrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="android:windowBackground">@color/Light.GreyBackground</item>
+        <item name="android:windowBackground">@color/Light.Background</item>
         <item name="android:textColorPrimary">@color/Light.TextColor</item>
         <item name="android:textColor">@color/Light.TextColor</item>
-        <item name="android:textColorSecondary">@color/Light.TextColorSec</item>
+        <item name="android:textColorSecondary">@color/Light.TextColorSecondary</item>
     </style>
 
     <style name="NormalActivity.Dark" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/Light.Primary</item>
-        <item name="colorPrimaryDark">@color/Light.PrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowBackground">@color/Dark.Background</item>
+        <item name="android:textColorPrimary">@color/Dark.TextColor</item>
+        <item name="android:textColor">@color/Dark.TextColor</item>
+        <item name="android:textColorSecondary">@color/Dark.TextColorSecondary</item>
     </style>
 
     <style name="AppTheme.MaterialAboutActivity" parent="Theme.Mal" >
-        <item name="colorPrimary">@color/Light.Primary</item>
-        <item name="colorPrimaryDark">@color/Light.PrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="titleTextColor">@color/white</item>
         <item name="colorControlNormal">@color/white</item>
-        <item name="background">@color/Light.Primary</item>
+        <item name="background">@color/colorPrimary</item>
     </style>
 
 </resources>
