@@ -233,7 +233,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
             @Override
             public void onStart() {
                 Tool.visibleViews(appDrawerIndicator);
-                Tool.invisibleViews(desktopIndicator, desktop);
+                Tool.invisibleViews(desktop);
+                hideDesktopIndicator();
                 updateDock(false);
                 updateSearchBar(false);
             }
@@ -244,11 +245,9 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         }, new AppDrawerController.CallBack() {
             @Override
             public void onStart() {
-                if (appDrawerIndicator != null) {
-                    appDrawerIndicator.animate().alpha(0).setDuration(100);
-                }
-
-                Tool.visibleViews(desktop, desktopIndicator);
+                Tool.invisibleViews(appDrawerIndicator);
+                Tool.visibleViews(desktop);
+                showDesktopIndicator();
                 updateDock(true);
                 updateSearchBar(!dragOptionView.isDraggedFromDrawer);
                 dragOptionView.isDraggedFromDrawer = false;
@@ -332,14 +331,15 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         //dragOptionView.resetAutoHideView();
 
         Tool.visibleViews(100, desktopEditOptionView);
-        Tool.invisibleViews(100, desktopIndicator);
+
+        hideDesktopIndicator();
         updateDock(false);
         updateSearchBar(false);
     }
 
     @Override
     public void onFinishDesktopEdit() {
-        Tool.visibleViews(100, desktopIndicator);
+        showDesktopIndicator();
         Tool.invisibleViews(100, desktopEditOptionView);
         updateDock(true);
         updateSearchBar(true);
@@ -446,7 +446,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
             @Override
             public void onExpand() {
-                Tool.invisibleViews(desktop, desktopIndicator);
+                Tool.invisibleViews(desktop);
+                hideDesktopIndicator();
                 Tool.visibleViews(background);
 
                 updateDock(false);
@@ -465,7 +466,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
             @Override
             public void onCollapse() {
-                Tool.visibleViews(desktop, desktopIndicator);
+                Tool.visibleViews(desktop);
+                showDesktopIndicator();
                 Tool.invisibleViews(background);
 
                 updateDock(true);
@@ -507,6 +509,24 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         }
     }
 
+    public void updateDesktopIndicatorVisibility() {
+        if (Setup.appSettings().isDesktopShowIndicator()) {
+            Tool.visibleViews(100, desktopIndicator);
+        } else {
+            Tool.goneViews(100, desktopIndicator);
+        }
+    }
+
+    public void hideDesktopIndicator() {
+        if (Setup.appSettings().isDesktopShowIndicator())
+            Tool.invisibleViews(100, desktopIndicator);
+    }
+
+    public void showDesktopIndicator() {
+        if (Setup.appSettings().isDesktopShowIndicator())
+            Tool.visibleViews(100, desktopIndicator);
+    }
+
     private void updateSearchClock() {
         if (searchBar.searchClock.getText() != null) {
             searchBar.updateClock();
@@ -517,9 +537,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         updateSearchBar(true);
         updateDock(true);
 
-        if (!Setup.appSettings().isDesktopShowIndicator()) {
-            Tool.goneViews(100, desktopIndicator);
-        }
+        updateDesktopIndicatorVisibility();
 
         if (!Setup.appSettings().getSearchBarEnable()) {
             ((ViewGroup.MarginLayoutParams) dragLeft.getLayoutParams()).topMargin = Desktop.topInset;

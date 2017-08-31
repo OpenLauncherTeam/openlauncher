@@ -104,7 +104,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     public void initDesktopShowAll(Context c, Home home) {
-
         List<Item> apps = new ArrayList<>();
         List<App> allApps = Setup.appLoader().getAllApps(c);
         for (App app : allApps)

@@ -111,9 +111,9 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        shouldLauncherRestart = true;
+        //this will be handled by each SettingsFragment cat
+        //shouldLauncherRestart = true;
     }
-
 
     public static class SettingsFragmentMaster extends PreferenceFragment {
         public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentMaster";
@@ -186,8 +186,21 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
     }
 
 
-    public static class SettingsFragmentDesktop extends PreferenceFragment {
+    public static class SettingsFragmentDesktop extends BasePreferenceFragment {
         public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentDesktop";
+
+        private static final int[] requireRestartPreferenceIds = new int[]{
+                R.string.pref_key__desktop_columns,
+                R.string.pref_key__desktop_rows,
+                R.string.pref_key__desktop_style,
+                R.string.pref_key__desktop_fullscreen,
+                R.string.pref_key__desktop_show_label,
+
+                R.string.pref_key__search_bar_enable,
+
+                R.string.pref_key__desktop_background_color,
+                R.string.pref_key__minibar_background_color,
+        };
 
         public void onCreate(Bundle savedInstances) {
             super.onCreate(savedInstances);
@@ -199,10 +212,18 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
         public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
             if (isAdded() && preference.hasKey()) {
                 AppSettings settings = AppSettings.get();
+
                 String key = preference.getKey();
 
-                if (key.equals(getString(R.string.pref_key__desktop_style))) {
-                    ((SettingsActivity) getActivity()).shouldLauncherRestart = true;
+                checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
+
+                if (key.equals(getString(R.string.pref_key__desktop_indicator_style))) {
+                    Home.launcher.desktopIndicator.setMode(settings.getDesktopIndicatorMode());
+                    return true;
+                }
+
+                if (key.equals(getString(R.string.pref_title__desktop_show_position_indicator))) {
+                    Home.launcher.updateDesktopIndicatorVisibility();
                     return true;
                 }
 
@@ -215,8 +236,15 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
         }
     }
 
-    public static class SettingsFragmentDock extends PreferenceFragment {
+    public static class SettingsFragmentDock extends BasePreferenceFragment {
         public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentDock";
+
+        private static final int[] requireRestartPreferenceIds = new int[]{
+                R.string.pref_key__dock_enable,
+                R.string.pref_key__dock_size,
+                R.string.pref_key__dock_show_label,
+                R.string.pref_key__dock_background_color
+        };
 
         public void onCreate(Bundle savedInstances) {
             super.onCreate(savedInstances);
@@ -230,9 +258,10 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
+                checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
+
                 if (key.equals(getString(R.string.pref_key__dock_enable))) {
                     Home.launcher.updateDock(true);
-                    ((SettingsActivity) getActivity()).shouldLauncherRestart = false;
                     return true;
                 }
             }
@@ -240,8 +269,21 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
         }
     }
 
-    public static class SettingsFragmentAppDrawer extends PreferenceFragment {
+    public static class SettingsFragmentAppDrawer extends BasePreferenceFragment {
         public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentAppDrawer";
+
+        private static final int[] requireRestartPreferenceIds = new int[]{
+                R.string.pref_key__drawer_columns,
+                R.string.pref_key__drawer_rows,
+                R.string.pref_key__drawer_style,
+                R.string.pref_key__drawer_show_card_view,
+                R.string.pref_key__drawer_show_position_indicator,
+                R.string.pref_key__drawer_show_label,
+                R.string.pref_key__drawer_background_color,
+                R.string.pref_key__drawer_card_color,
+                R.string.pref_key__drawer_label_color,
+                R.string.pref_key__drawer_fast_scroll_color
+        };
 
         public void onCreate(Bundle savedInstances) {
             super.onCreate(savedInstances);
@@ -254,6 +296,8 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
             if (isAdded() && preference.hasKey()) {
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
+
+                checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
 
                 if (key.equals(getString(R.string.pref_key__hidden_apps))) {
                     Intent intent = new Intent(getActivity(), HideAppsActivity.class);
@@ -268,8 +312,12 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
         }
     }
 
-    public static class SettingsFragmentGestures extends PreferenceFragment {
+    public static class SettingsFragmentGestures extends BasePreferenceFragment {
         public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentGestures";
+
+        private static final int[] requireRestartPreferenceIds = new int[]{
+
+        };
 
         public void onCreate(Bundle savedInstances) {
             super.onCreate(savedInstances);
@@ -282,6 +330,8 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
             if (isAdded() && preference.hasKey()) {
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
+
+                checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
 
                 if (key.equals(getString(R.string.pref_key__desktop_double_tap))) {
                     DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper) Home.launcher.db).getGesture(0), 0, new DialogHelper.OnActionSelectedListener() {
@@ -337,8 +387,13 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
         }
     }
 
-    public static class SettingsFragmentIcons extends PreferenceFragment {
+    public static class SettingsFragmentIcons extends BasePreferenceFragment {
         public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentIcons";
+
+        private static final int[] requireRestartPreferenceIds = new int[]{
+                R.string.pref_key__icon_size,
+                R.string.pref_key__icon_pack
+        };
 
         public void onCreate(Bundle savedInstances) {
             super.onCreate(savedInstances);
@@ -352,9 +407,10 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
 
+                checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
+
                 if (key.equals(getString(R.string.pref_key__icon_pack))) {
                     AppManager.getInstance(getActivity()).startPickIconPackIntent(getActivity());
-                    ((SettingsActivity) getActivity()).shouldLauncherRestart = true;
                     return true;
                 }
             }
@@ -362,8 +418,14 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
         }
     }
 
-    public static class SettingsFragmentMiscellaneous extends PreferenceFragment {
+    public static class SettingsFragmentMiscellaneous extends BasePreferenceFragment {
         public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentMiscellaneous";
+
+        private static final int[] requireRestartPreferenceIds = new int[]{
+                R.string.pref_summary__backup,
+                R.string.pref_title__clear_database,
+                R.string.pref_summary__theme
+        };
 
         public void onCreate(Bundle savedInstances) {
             super.onCreate(savedInstances);
@@ -377,6 +439,8 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
                 Activity activity = getActivity();
+
+                checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
 
                 if (key.equals(getString(R.string.pref_key__backup))) {
                     if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -397,12 +461,27 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
                 if (key.equals(getString(R.string.pref_key__restart))) {
                     if (Home.launcher != null)
                         Home.launcher.recreate();
-                    ((SettingsActivity) activity).shouldLauncherRestart = true;
                     getActivity().finish();
                     return true;
                 }
             }
             return super.onPreferenceTreeClick(screen, preference);
         }
+    }
+
+    public static class BasePreferenceFragment extends PreferenceFragment {
+
+        public void checkIfPreferenceChangedRequireRestart(int[] ids, String key) {
+            SettingsActivity settingsActivity = (SettingsActivity) getActivity();
+
+            if (settingsActivity.shouldLauncherRestart) return;
+            for (int id : ids) {
+                if (getString(id).equals(key)) {
+                    settingsActivity.shouldLauncherRestart = true;
+                    return;
+                }
+            }
+        }
+
     }
 }
