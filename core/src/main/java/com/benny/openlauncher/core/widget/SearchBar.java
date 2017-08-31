@@ -33,6 +33,8 @@ import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.IconLabelItem;
+import com.benny.openlauncher.core.model.Item;
+import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.CircleDrawable;
 import com.mikepenz.fastadapter.IItemAdapter;
@@ -45,6 +47,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class SearchBar extends FrameLayout {
+
+    private CircleDrawable icon;
 
     public enum Mode {
         DateAll(1, new SimpleDateFormat("MMMM dd'\n'EEEE',' yyyy", Locale.getDefault())),
@@ -189,8 +193,7 @@ public class SearchBar extends FrameLayout {
         }
 
         if (isInEditMode()) return;
-
-        final CircleDrawable icon = new CircleDrawable(getContext(), getResources().getDrawable(R.drawable.ic_search_light_24dp), Color.BLACK);
+        icon = new CircleDrawable(getContext(), getResources().getDrawable(R.drawable.ic_search_light_24dp), Color.BLACK);
         searchButton = new AppCompatImageView(getContext());
         searchButton.setImageDrawable(icon);
         searchButton.setOnClickListener(new OnClickListener() {
@@ -202,28 +205,9 @@ public class SearchBar extends FrameLayout {
                 }
                 expanded = !expanded;
                 if (expanded) {
-                    if (callback != null) {
-                        callback.onExpand();
-                    }
-                    if (Setup.appSettings().isResetSearchBarOnOpen()) {
-                        RecyclerView.LayoutManager lm = searchRecycler.getLayoutManager();
-                        if (lm instanceof LinearLayoutManager) {
-                            ((LinearLayoutManager) searchRecycler.getLayoutManager()).scrollToPositionWithOffset(0, 0);
-                        } else if (lm instanceof GridLayoutManager) {
-                            ((GridLayoutManager) searchRecycler.getLayoutManager()).scrollToPositionWithOffset(0, 0);
-                        }
-                    }
-                    icon.setIcon(getResources().getDrawable(R.drawable.ic_clear_white_24dp));
-                    Tool.visibleViews(ANIM_TIME, searchInput, searchRecycler, switchButton);
-                    Tool.goneViews(ANIM_TIME, searchClock);
+                    expandInternal();
                 } else {
-                    if (callback != null) {
-                        callback.onCollapse();
-                    }
-                    icon.setIcon(getResources().getDrawable(R.drawable.ic_search_light_24dp));
-                    Tool.visibleViews(ANIM_TIME, searchClock);
-                    Tool.goneViews(ANIM_TIME, searchInput, searchRecycler, switchButton);
-                    searchInput.getText().clear();
+                    collapseInternal();
                 }
             }
         });
@@ -291,6 +275,18 @@ public class SearchBar extends FrameLayout {
                                     startApp(v.getContext(), app);
                                 }
                             })
+                            .withOnLongClickListener(AppItemView.Builder.getLongClickDragAppListener(Item.newAppItem(app), DragAction.Action.APP, new AppItemView.LongPressCallBack() {
+                                @Override
+                                public boolean readyForDrag(View view) {
+                                    expanded = !expanded;
+                                    collapseInternal();
+                                    return true;
+                                }
+
+                                @Override
+                                public void afterDrag(View view) {
+                                }
+                            }))
                             .withTextColor(Color.WHITE)
                             .withMatchParent(true)
                             .withDrawablePadding(getContext(), 8)
@@ -338,6 +334,33 @@ public class SearchBar extends FrameLayout {
                 searchRecycler.setPadding(0, 0, 0, marginBottom * 2);
             }
         });
+    }
+
+    private void collapseInternal() {
+        if (callback != null) {
+            callback.onCollapse();
+        }
+        icon.setIcon(getResources().getDrawable(R.drawable.ic_search_light_24dp));
+        Tool.visibleViews(ANIM_TIME, searchClock);
+        Tool.goneViews(ANIM_TIME, searchInput, searchRecycler, switchButton);
+        searchInput.getText().clear();
+    }
+
+    private void expandInternal() {
+        if (callback != null) {
+            callback.onExpand();
+        }
+        if (Setup.appSettings().isResetSearchBarOnOpen()) {
+            RecyclerView.LayoutManager lm = searchRecycler.getLayoutManager();
+            if (lm instanceof LinearLayoutManager) {
+                ((LinearLayoutManager) searchRecycler.getLayoutManager()).scrollToPositionWithOffset(0, 0);
+            } else if (lm instanceof GridLayoutManager) {
+                ((GridLayoutManager) searchRecycler.getLayoutManager()).scrollToPositionWithOffset(0, 0);
+            }
+        }
+        icon.setIcon(getResources().getDrawable(R.drawable.ic_clear_white_24dp));
+        Tool.visibleViews(ANIM_TIME, searchInput, searchRecycler, switchButton);
+        Tool.goneViews(ANIM_TIME, searchClock);
     }
 
     private void updateSwitchIcon() {
