@@ -20,19 +20,17 @@ import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.Tool;
 
 public class GroupIconDrawable extends Drawable implements IconDrawer {
-
-    private int outlinepad;
     Drawable[] icons;
-    public float iconSize;
-    Paint paint;
-    Paint paint2;
-    Paint paint4;
-    private int iconSizeDiv2;
-    private float padding;
-
+    Paint paintInnerCircle;
+    Paint paintIcon;
+    Paint paintOuterCircle;
+    private boolean needAnimate;
+    private boolean needAnimateScale;
     private float scaleFactor = 1;
-
-    private boolean needAnimate, needAnimateScale;
+    public float iconSize;
+    private float padding;
+    private int outline;
+    private int iconSizeDiv2;
 
     private float sx = 1;
     private float sy = 1;
@@ -65,22 +63,22 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         iconSizeDiv2 = Math.round(iconSize / 2f);
         padding = iconSize / 25f;
 
-        this.paint = new Paint();
-        paint.setColor(Color.WHITE);
-        paint.setAlpha(150);
-        paint.setAntiAlias(true);
+        this.paintInnerCircle = new Paint();
+        paintInnerCircle.setColor(Color.WHITE);
+        paintInnerCircle.setAlpha(150);
+        paintInnerCircle.setAntiAlias(true);
 
-        this.paint4 = new Paint();
-        paint4.setColor(Color.WHITE);
-        paint4.setAntiAlias(true);
-        paint4.setFlags(Paint.ANTI_ALIAS_FLAG);
-        paint4.setStyle(Paint.Style.STROKE);
-        outlinepad = Tool.dp2px(2, Home.launcher);
-        paint4.setStrokeWidth(outlinepad);
+        this.paintOuterCircle = new Paint();
+        paintOuterCircle.setColor(Color.WHITE);
+        paintOuterCircle.setAntiAlias(true);
+        paintOuterCircle.setFlags(Paint.ANTI_ALIAS_FLAG);
+        paintOuterCircle.setStyle(Paint.Style.STROKE);
+        outline = Tool.dp2px(2, Home.launcher);
+        paintOuterCircle.setStrokeWidth(outline);
 
-        this.paint2 = new Paint();
-        paint2.setAntiAlias(true);
-        paint2.setFilterBitmap(true);
+        this.paintIcon = new Paint();
+        paintIcon.setAntiAlias(true);
+        paintIcon.setFilterBitmap(true);
     }
 
     public void popUp() {
@@ -109,34 +107,34 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
 
         canvas.scale(scaleFactor, scaleFactor, iconSize / 2, iconSize / 2);
 
-        Path clipp = new Path();
-        clipp.addCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, Path.Direction.CW);
-        canvas.clipPath(clipp, Region.Op.REPLACE);
+        Path clip = new Path();
+        clip.addCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outline, Path.Direction.CW);
+        canvas.clipPath(clip, Region.Op.REPLACE);
 
-        canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, paint);
+        canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outline, paintInnerCircle);
 
         if (icons[0] != null) {
-            drawIcon(canvas, icons[0], padding, padding, iconSizeDiv2 - padding, iconSizeDiv2 - padding, paint2);
+            drawIcon(canvas, icons[0], padding, padding, iconSizeDiv2 - padding, iconSizeDiv2 - padding, paintIcon);
         }
         if (icons[1] != null) {
-            drawIcon(canvas, icons[1], iconSizeDiv2 + padding, padding, iconSize - padding, iconSizeDiv2 - padding, paint2);
+            drawIcon(canvas, icons[1], iconSizeDiv2 + padding, padding, iconSize - padding, iconSizeDiv2 - padding, paintIcon);
         }
         if (icons[2] != null) {
-            drawIcon(canvas, icons[2], padding, iconSizeDiv2 + padding, iconSizeDiv2 - padding, iconSize - padding, paint2);
+            drawIcon(canvas, icons[2], padding, iconSizeDiv2 + padding, iconSizeDiv2 - padding, iconSize - padding, paintIcon);
         }
         if (icons[3] != null) {
-            drawIcon(canvas, icons[3], iconSizeDiv2 + padding, iconSizeDiv2 + padding, iconSize - padding, iconSize - padding, paint2);
+            drawIcon(canvas, icons[3], iconSizeDiv2 + padding, iconSizeDiv2 + padding, iconSize - padding, iconSize - padding, paintIcon);
         }
         canvas.clipRect(0, 0, iconSize, iconSize, Region.Op.REPLACE);
 
-        canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, paint4);
+        canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outline, paintOuterCircle);
         canvas.restore();
 
         if (needAnimate) {
-            paint2.setAlpha(Tool.clampInt(paint2.getAlpha() - 25, 0, 255));
+            paintIcon.setAlpha(Tool.clampInt(paintIcon.getAlpha() - 25, 0, 255));
             invalidateSelf();
-        } else if (paint2.getAlpha() != 255) {
-            paint2.setAlpha(Tool.clampInt(paint2.getAlpha() + 25, 0, 255));
+        } else if (paintIcon.getAlpha() != 255) {
+            paintIcon.setAlpha(Tool.clampInt(paintIcon.getAlpha() + 25, 0, 255));
             invalidateSelf();
         }
     }
@@ -146,7 +144,7 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         icon.setFilterBitmap(true);
         icon.setAlpha(paint.getAlpha());
         icon.draw(canvas);
-//        canvas.drawBitmap(icon, null, new RectF(l, t, r, b), paint);
+        //canvas.drawBitmap(icon, null, new RectF(l, t, r, b), paintInnerCircle);
     }
 
     @Override

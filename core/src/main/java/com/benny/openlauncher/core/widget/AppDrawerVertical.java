@@ -109,7 +109,7 @@ public class AppDrawerVertical extends CardView {
         scrollBar.post(new Runnable() {
             @Override
             public void run() {
-                scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollerColor());
+                scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
             }
         });
 

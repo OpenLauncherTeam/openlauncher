@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress AndroidElementNotAllowed -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
     <PreferenceCategory android:title="@string/pref_title__miscellaneous">
 
         <!--suppress AndroidDomInspection -->
@@ -25,4 +27,5 @@
             android:title="@string/pref_title__restart" />
 
     </PreferenceCategory>
+
 </PreferenceScreen>

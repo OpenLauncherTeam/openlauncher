@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress AndroidElementNotAllowed -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <PreferenceCategory android:title="@string/pref_title__size">
 
         <com.benny.openlauncher.widget.NumberPickerPreference
@@ -20,6 +22,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title__appearance">
+
         <ListPreference
             android:defaultValue="0"
             android:entries="@array/entries__desktop_styles"
@@ -54,6 +57,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title__search_bar">
+
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__search_bar_enable"
@@ -103,4 +107,5 @@
             app:cpv_showAlphaSlider="true" />
 
     </PreferenceCategory>
+
 </PreferenceScreen>

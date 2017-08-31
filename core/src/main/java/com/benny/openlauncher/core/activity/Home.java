@@ -391,7 +391,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         }
 
-        desktop.setBackgroundColor(Setup.appSettings().getDesktopColor());
+        desktop.setBackgroundColor(Setup.appSettings().getDesktopBackgroundColor());
         dock.setBackgroundColor(Setup.appSettings().getDockColor());
 
         appDrawerController.setBackgroundColor(Setup.appSettings().getDrawerBackgroundColor());

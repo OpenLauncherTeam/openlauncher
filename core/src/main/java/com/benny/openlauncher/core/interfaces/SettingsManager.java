@@ -4,111 +4,126 @@ import java.text.SimpleDateFormat;
 
 public interface SettingsManager {
 
-    // Desktop
-    int getDesktopPageCurrent();
-
-    void setDesktopPageCurrent(int page);
-
-    boolean isDesktopShowIndicator();
-
+    // desktop
     int getDesktopColumnCount();
 
     int getDesktopRowCount();
 
     int getDesktopStyle();
 
-    boolean isDesktopShowLabel();
-
-    boolean isDesktopLock();
-
-    void setDesktopLock(boolean locked);
-
-    boolean isGestureFeedback();
-
     boolean isDesktopFullscreen();
 
-    int getDesktopColor();
+    boolean isDesktopShowIndicator();
 
+    boolean isDesktopShowLabel();
+
+    int getDesktopBackgroundColor();
+
+    int getDesktopFolderColor();
+
+    // not in app settings yet
+    int getFolderLabelColor();
+
+    // not in app settings yet
     int getDesktopIconSize();
 
-    // Desktop Folder Popup
-    int getPopupColor();
+    // dock
+    boolean getDockEnable();
 
-    int getPopupLabelColor();
-
-    // Dock
     int getDockSize();
-
-    boolean getGestureDockSwipeUp();
 
     boolean isDockShowLabel();
 
     int getDockColor();
 
-    boolean getDockEnable();
-
+    // not in app settings yet
     int getDockIconSize();
 
-    // Drawer
+    // app drawer
     int getDrawerColumnCount();
 
     int getDrawerRowCount();
-
-    boolean isDrawerShowIndicator();
 
     int getDrawerStyle();
 
     boolean isDrawerShowCardView();
 
-    int getDrawerCardColor();
+    boolean isDrawerRememberPosition();
+
+    boolean isDrawerShowIndicator();
 
     boolean isDrawerShowLabel();
 
-    int getDrawerLabelColor();
-
-    boolean isDrawerRememberPosition();
-
     int getDrawerBackgroundColor();
 
+    int getDrawerCardColor();
+
+    int getDrawerLabelColor();
+
+    // not in app settings yet
+    int getDrawerFastScrollColor();
+
+    // not in app settings yet
     int getVerticalDrawerHorizontalMargin();
 
+    // not in app settings yet
     int getVerticalDrawerVerticalMargin();
 
+    // not in app settings yet
     int getDrawerIconSize();
 
-    int getDrawerFastScrollerColor();
-
-    // SearchBar
+    // search bar
     boolean getSearchBarEnable();
 
     String getSearchBarBaseURI();
 
     boolean getSearchBarForceBrowser();
 
+    // not in app settings yet
     boolean isSearchBarTimeEnabled();
 
+    // not in app settings yet
     SimpleDateFormat getUserDateFormat();
 
+    // not in app settings yet
     boolean isResetSearchBarOnOpen();
 
+    // not in app settings yet
     boolean isSearchGridListSwitchEnabled();
 
+    // not in app settings yet
     boolean isSearchUseGrid();
 
+    // not in app settings yet
     void setSearchUseGrid(boolean enabled);
 
+    // not in app settings yet
     int getSearchGridSize();
 
+    // not in app settings yet
     int getSearchLabelLines();
 
-    // Others
+    // gestures
+    boolean getGestureDockSwipeUp();
+
+    boolean isGestureFeedback();
+
+    // internal
+    int getDesktopPageCurrent();
+
+    void setDesktopPageCurrent(int page);
+
+    boolean isDesktopLock();
+
+    void setDesktopLock(boolean locked);
+
     boolean getAppRestartRequired();
 
-    void setAppRestartRequired(boolean required);
+    void setAppRestartRequired(boolean value);
 
     boolean isAppFirstLaunch();
 
-    void setAppFirstLaunch(boolean isAppFirstLaunch);
+    void setAppFirstLaunch(boolean value);
 
     boolean enableImageCaching();
 }

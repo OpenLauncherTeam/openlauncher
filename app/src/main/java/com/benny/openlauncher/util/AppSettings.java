@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import io.github.gsantner.opoc.util.AppSettingsBase;
 
 public class AppSettings extends AppSettingsBase implements SettingsManager {
-    private AppSettings(Context _context) {
-        super(_context);
+    private AppSettings(Context context) {
+        super(context);
     }
 
     public static AppSettings get() {
@@ -42,10 +42,6 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         setInt(R.string.pref_key__desktop_style, style);
     }
 
-    public boolean getSearchBarEnable() {
-        return getBool(R.string.pref_key__search_bar_enable, true);
-    }
-
     public boolean isDesktopFullscreen() {
         return getBool(R.string.pref_key__desktop_fullscreen, false);
     }
@@ -56,6 +52,10 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     public boolean isDesktopShowLabel() {
         return getBool(R.string.pref_key__desktop_show_label, true);
+    }
+
+    public boolean getSearchBarEnable() {
+        return getBool(R.string.pref_key__search_bar_enable, true);
     }
 
     public String getSearchBarBaseURI() {
@@ -73,7 +73,6 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     @Override
     public SimpleDateFormat getUserDateFormat() {
-        // TODO: offer some setup for a custom format and save and retrieve it in the database
         return null;
     }
 
@@ -94,7 +93,6 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     @Override
     public void setSearchUseGrid(boolean enabled) {
-
     }
 
     @Override
@@ -107,13 +105,22 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return Integer.MAX_VALUE;
     }
 
-    @Override
-    public boolean enableImageCaching() {
-        return true;
+    public int getDesktopBackgroundColor() {
+        return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
     }
 
-    public int getDesktopColor() {
-        return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
+    @Override
+    public int getDesktopFolderColor() {
+        return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
+    }
+
+    public int getMinibarBackgroundColor() {
+        return getInt(R.string.pref_key__minibar_background_color, ContextCompat.getColor(_context, R.color.colorPrimary));
+    }
+
+    @Override
+    public int getFolderLabelColor() {
+        return getDrawerLabelColor();
     }
 
     @Override
@@ -123,11 +130,6 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     public boolean getDockEnable() {
         return getBool(R.string.pref_key__dock_enable, true);
-    }
-
-    @Override
-    public int getDockIconSize() {
-        return getIconSize();
     }
 
     public void setDockEnable(boolean enable) {
@@ -144,6 +146,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     public int getDockColor() {
         return getInt(R.string.pref_key__dock_background_color, Color.TRANSPARENT);
+    }
+
+    @Override
+    public int getDockIconSize() {
+        return getIconSize();
     }
 
     public int getDrawerColumnCount() {
@@ -178,6 +185,19 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getInt(R.string.pref_key__drawer_background_color, Color.TRANSPARENT);
     }
 
+    public int getDrawerCardColor() {
+        return getInt(R.string.pref_key__drawer_card_color, Color.WHITE);
+    }
+
+    public int getDrawerLabelColor() {
+        return getInt(R.string.pref_key__drawer_label_color, Color.DKGRAY);
+    }
+
+    @Override
+    public int getDrawerFastScrollColor() {
+        return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.appContext(), R.color.colorAccent));
+    }
+
     @Override
     public int getVerticalDrawerHorizontalMargin() {
         return 8;
@@ -191,33 +211,6 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     @Override
     public int getDrawerIconSize() {
         return getIconSize();
-    }
-
-    @Override
-    public int getDrawerFastScrollerColor() {
-        return ContextCompat.getColor(Setup.appContext(), R.color.colorAccent);
-    }
-
-    public int getDrawerCardColor() {
-        return getInt(R.string.pref_key__drawer_card_color, Color.WHITE);
-    }
-
-    public int getDrawerLabelColor() {
-        return getInt(R.string.pref_key__drawer_label_color, Color.DKGRAY);
-    }
-
-    @Override
-    public int getPopupColor() {
-        return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
-    }
-
-    @Override
-    public int getPopupLabelColor() {
-        return getDrawerLabelColor();
-    }
-
-    public int getMinibarBackgroundColor() {
-        return getInt(R.string.pref_key__minibar_background_color, ContextCompat.getColor(_context, R.color.colorPrimaryDark));
     }
 
     public boolean getGestureDockSwipeUp() {
@@ -240,33 +233,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         setString(R.string.pref_key__icon_pack, value);
     }
 
+    public String getLanguage() {
+        return getString(R.string.pref_key__language, "");
+    }
+
     // internal preferences below here
-    public boolean isAppFirstLaunch() {
-        return getBool(R.string.pref_key__first_start, true);
-    }
-
-    @SuppressLint("ApplySharedPref")
-    public void setAppFirstLaunch(boolean value) {
-        // MUST be committed
-        _prefApp.edit().putBoolean(_context.getString(R.string.pref_key__first_start), value).commit();
-    }
-
-    public boolean isDesktopLock() {
-        return getBool(R.string.pref_key__desktop_lock, false);
-    }
-
-    public void setDesktopLock(boolean value) {
-        setBool(R.string.pref_key__desktop_lock, value);
-    }
-
-    public int getDesktopPageCurrent() {
-        return getInt(R.string.pref_key__desktop_current_position, 0);
-    }
-
-    public void setDesktopPageCurrent(int value) {
-        setInt(R.string.pref_key__desktop_current_position, value);
-    }
-
     public boolean getMinibarEnable() {
         return getBool(R.string.pref_key__minibar_enable, true);
     }
@@ -298,6 +269,22 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         setStringList(R.string.pref_key__hidden_apps, value);
     }
 
+    public int getDesktopPageCurrent() {
+        return getInt(R.string.pref_key__desktop_current_position, 0);
+    }
+
+    public void setDesktopPageCurrent(int value) {
+        setInt(R.string.pref_key__desktop_current_position, value);
+    }
+
+    public boolean isDesktopLock() {
+        return getBool(R.string.pref_key__desktop_lock, false);
+    }
+
+    public void setDesktopLock(boolean value) {
+        setBool(R.string.pref_key__desktop_lock, value);
+    }
+
     public boolean getAppRestartRequired() {
         return getBool(R.string.pref_key__queue_restart, false);
     }
@@ -309,7 +296,18 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
                 (R.string.pref_key__queue_restart), value).commit();
     }
 
-    public String getLanguage() {
-        return getString(R.string.pref_key__language, "");
+    public boolean isAppFirstLaunch() {
+        return getBool(R.string.pref_key__first_start, true);
+    }
+
+    @SuppressLint("ApplySharedPref")
+    public void setAppFirstLaunch(boolean value) {
+        // MUST be committed
+        _prefApp.edit().putBoolean(_context.getString(R.string.pref_key__first_start), value).commit();
+    }
+
+    @Override
+    public boolean enableImageCaching() {
+        return true;
     }
 }

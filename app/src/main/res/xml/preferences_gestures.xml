@@ -3,6 +3,12 @@
     <PreferenceCategory android:title="@string/pref_title__gestures">
 
         <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key__desktop_gesture_feedback"
+            android:title="@string/pref_title__desktop_gesture_feedback"
+            android:summary="@string/pref_summary__desktop_gesture_feedback"/>
+
+        <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__dock_swipe_up"
             android:summary="@string/pref_summary__dock_swipe_up"
@@ -27,15 +33,6 @@
         <Preference
             android:key="@string/pref_key__desktop_unpinch"
             android:title="@string/pref_title__desktop_unpinch" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="Feedback">
-
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_key__desktop_gesture_feedback"
-            android:title="@string/pref_title__desktop_gesture_feedback" />
 
     </PreferenceCategory>
 

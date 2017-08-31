@@ -83,10 +83,10 @@
     <string name="pref_summary__desktop_show_label">Show item labels below their icons.</string>
     <string name="pref_title__search_bar_base_uri">Search URI</string>
     <string name="pref_summary__search_bar_base_uri">Set the URI used for web searches.</string>
-    <string name="pref_title__search_bar_force_browser">Force browser search</string>
-    <string name="pref_summary__search_bar_force_browser">Always use the browser for online searches.</string>
     <string name="pref_dialog__search_bar_base_uri">Enter the URI that should be used for web searches. The tag {query} can be used as
       placeholder for the search query, in case no placeholder is used the search query will be appended at the end of the URI.</string>
+    <string name="pref_title__search_bar_force_browser">Force browser search</string>
+    <string name="pref_summary__search_bar_force_browser">Always use the browser for online searches.</string>
     <string name="pref_title__desktop_background_color">Background</string>
     <string name="pref_title__desktop_folder_color">Folder</string>
     <string name="pref_title__minibar_background_color" translatable="false">@string/minibar</string>
@@ -112,15 +112,17 @@
     <string name="pref_title__drawer_background_color">Background</string>
     <string name="pref_title__drawer_card_color">Card View</string>
     <string name="pref_title__drawer_label_color">Label</string>
+    <string name="pref_title__drawer_fast_scroll_color">Fast Scroll</string>
 
-    <string name="pref_title__dock_swipe_up">Swipe Drawer Quickly</string>
+    <string name="pref_title__desktop_gesture_feedback">Gesture Feedback</string>
+    <string name="pref_summary__desktop_gesture_feedback">Get feedback when long pressing an item on the desktop.</string>
+    <string name="pref_title__dock_swipe_up">Quick Swipe Drawer</string>
     <string name="pref_summary__dock_swipe_up">Swipe upwards on the dock to open the app drawer.</string>
     <string name="pref_title__desktop_double_tap">Double Tap</string>
     <string name="pref_title__desktop_swipe_up">Swipe Upwards</string>
     <string name="pref_title__desktop_swipe_down">Swipe Downwards</string>
     <string name="pref_title__desktop_pinch">Pinch</string>
     <string name="pref_title__desktop_unpinch">Unpinch</string>
-    <string name="pref_title__desktop_gesture_feedback">Feedback</string>
 
     <string name="pref_title__icon_size" translatable="false">@string/pref_title__size</string>
     <string name="pref_summary__icon_size">Size of all app icons.</string>
@@ -174,6 +176,7 @@
     <string name="pref_key__drawer_background_color" translatable="false">pref_key__drawer_background_color</string>
     <string name="pref_key__drawer_card_color" translatable="false">pref_key__drawer_card_color</string>
     <string name="pref_key__drawer_label_color" translatable="false">pref_key__drawer_label_color</string>
+    <string name="pref_key__drawer_fast_scroll_color" translatable="false">pref_key__drawer_fast_scroll_color</string>
 
     <string name="pref_key__dock_swipe_up" translatable="false">pref_key__dock_swipe_up</string>
     <string name="pref_key__desktop_double_tap" translatable="false">pref_key__desktop_double_tap</string>

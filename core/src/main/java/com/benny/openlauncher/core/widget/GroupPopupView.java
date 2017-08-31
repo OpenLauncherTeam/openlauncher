@@ -52,14 +52,13 @@ public class GroupPopupView extends RevealFrameLayout {
             return;
         }
         popupCard = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_group_popup, this, false);
-        if (Setup.appSettings().getPopupColor() != -1) {
-            int color = Setup.appSettings().getPopupColor();
-            int alpha = Color.alpha(color);
-            popupCard.setCardBackgroundColor(color);
-            // remove elevation if CardView's background is transparent to avoid weird shadows because CardView does not support transparent backgrounds
-            if (alpha != 0) {
-                popupCard.setCardElevation(0f);
-            }
+        // set the CardView color
+        int color = Setup.appSettings().getDesktopFolderColor();
+        int alpha = Color.alpha(color);
+        popupCard.setCardBackgroundColor(color);
+        // remove elevation if CardView's background is transparent to avoid weird shadows because CardView does not support transparent backgrounds
+        if (alpha != 0) {
+            popupCard.setCardElevation(0f);
         }
         cellContainer = popupCard.findViewById(R.id.group);
 

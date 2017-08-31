@@ -34,7 +34,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item, int iconSize) {
         AppItemView.Builder b = new AppItemView.Builder(context, iconSize)
                 .withOnTouchGetPosition(groupItem, Setup.itemGestureCallback())
-                .setTextColor(Setup.appSettings().getPopupLabelColor());
+                .setTextColor(Setup.appSettings().getFolderLabelColor());
         if (groupItem.type == Item.Type.SHORTCUT) {
             b.setShortcutItem(groupItem);
         } else {
