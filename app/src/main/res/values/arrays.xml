@@ -33,6 +33,11 @@
         <item>@string/dialog__backup_app_settings__restore</item>
     </string-array>
 
+    <string-array name="entries__themes" translatable="false">
+        <item>@string/theme_light</item>
+        <item>@string/theme_dark</item>
+    </string-array>
+
     <string-array name="entries__wallpaper_options">
         <item>Set Wallpaper</item>
         <item>Blur Wallpaper</item>

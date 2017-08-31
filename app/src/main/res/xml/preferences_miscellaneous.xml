@@ -8,7 +8,7 @@
         <io.github.gsantner.opoc.ui.LanguagePreference
             android:defaultValue=""
             android:key="@string/pref_key__language"
-            android:summary="@string/pref_desc__language"
+            android:summary="@string/pref_summary__language"
             android:title="@string/pref_title__language"/>
 
         <Preference
@@ -25,6 +25,14 @@
             android:key="@string/pref_key__restart"
             android:summary="@string/pref_summary__restart"
             android:title="@string/pref_title__restart" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/entries__themes"
+            android:entryValues="@array/values__zero_to_one"
+            android:key="@string/pref_key__theme"
+            android:summary="@string/pref_summary__theme"
+            android:title="@string/pref_title__theme" />
 
     </PreferenceCategory>
 

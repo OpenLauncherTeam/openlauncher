@@ -142,6 +142,13 @@
     <string name="desktop_mode_normal">Normal</string>
     <string name="desktop_mode_show_all_apps">Show All Apps</string>
 
+    <string name="pref_key__language" translatable="false" >pref_key__language</string>
+    <string name="pref_summary__language">Change language of this app. Restart app for changes to take effect</string>
+    <string name="pref_title__language">Language</string>
+    <string name="pref_key__theme" translatable="false" >pref_key__theme</string>
+    <string name="pref_summary__theme">Set the theme for the entire app.</string>
+    <string name="pref_title__theme">Theme</string>
+
     <!-- Preference Keys -->
 
     <string name="pref_key__desktop_columns" translatable="false">pref_key__desktop_columns</string>
@@ -245,9 +252,7 @@
     <string name="volume_level_notification">Notification</string>
     <string name="volume_level_system">System</string>
     <string name="volume_level_media">Media</string>
-
-    <string name="pref_key__language" translatable="false" >pref_key__language</string>
-    <string name="pref_desc__language">Change language of this app. Restart app for changes to take effect</string>
-    <string name="pref_title__language">Language</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
 
 </resources>

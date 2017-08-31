@@ -14,7 +14,6 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -30,10 +29,8 @@ import com.benny.openlauncher.viewutil.DialogHelper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-    @BindView(R.id.settings_appbar)
-    protected AppBarLayout appBarLayout;
-    @BindView(R.id.settings_toolbar)
+public class SettingsActivity extends ThemeActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
     protected static Context context;
 
@@ -259,7 +256,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 String key = preference.getKey();
 
                 if (key.equals(getString(R.string.pref_key__hidden_apps))) {
-                    Intent intent = new Intent(getActivity(), HideAppsSelectionActivity.class);
+                    Intent intent = new Intent(getActivity(), HideAppsActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                     ((SettingsActivity) getActivity()).shouldLauncherRestart = true;

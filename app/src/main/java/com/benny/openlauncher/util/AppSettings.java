@@ -237,6 +237,10 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getString(R.string.pref_key__language, "");
     }
 
+    public String getTheme() {
+        return getString(R.string.pref_key__theme, "0");
+    }
+
     // internal preferences below here
     public boolean getMinibarEnable() {
         return getBool(R.string.pref_key__minibar_enable, true);

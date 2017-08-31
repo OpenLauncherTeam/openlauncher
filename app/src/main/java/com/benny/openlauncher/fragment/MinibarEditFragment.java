@@ -38,7 +38,7 @@ import static com.benny.openlauncher.activity.Home.launcher;
 public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
     @BindView(R.id.enableSwitch)
     SwitchCompat enableSwitch;
-    @BindView(R.id.rv)
+    @BindView(R.id.recyclerView)
     RecyclerView rv;
     private FastItemAdapter<AppItem> adapter;
     private Context context;

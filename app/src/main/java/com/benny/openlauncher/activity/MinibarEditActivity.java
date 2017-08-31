@@ -2,7 +2,6 @@ package com.benny.openlauncher.activity;
 
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
@@ -31,13 +30,13 @@ import butterknife.ButterKnife;
 
 import static com.benny.openlauncher.activity.Home.launcher;
 
-public class MinibarEditActivity extends AppCompatActivity implements ItemTouchCallback {
-    @BindView(R.id.tb)
-    Toolbar tb;
+public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallback {
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @BindView(R.id.enableSwitch)
     SwitchCompat enableSwitch;
-    @BindView(R.id.rv)
-    RecyclerView rv;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
     private FastItemAdapter<Item> adapter;
 
     @Override
@@ -46,7 +45,7 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
 
         setContentView(R.layout.activity_minibar_edit);
         ButterKnife.bind(this);
-        setSupportActionBar(tb);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle(R.string.minibar);
@@ -55,15 +54,15 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
 
         SimpleDragCallback touchCallback = new SimpleDragCallback(this);
         ItemTouchHelper touchHelper = new ItemTouchHelper(touchCallback);
-        touchHelper.attachToRecyclerView(rv);
+        touchHelper.attachToRecyclerView(recyclerView);
 
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        rv.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
 
         int i = 0;
-        final ArrayList<String> minBarArrangement = AppSettings.get().getMinibarArrangement();
-        for (String act : minBarArrangement) {
+        final ArrayList<String> minibarArrangement = AppSettings.get().getMinibarArrangement();
+        for (String act : minibarArrangement) {
             LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
             adapter.add(new Item(i, item, act.charAt(0) == '0'));
             i++;
@@ -102,8 +101,9 @@ public class MinibarEditActivity extends AppCompatActivity implements ItemTouchC
 
     @Override
     protected void onStop() {
-        if (launcher != null)
+        if (launcher != null) {
             ((Home) Home.launcher).initMinibar();
+        }
         super.onStop();
     }
 
