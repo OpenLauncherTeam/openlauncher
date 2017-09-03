@@ -1,11 +1,11 @@
 package com.benny.openlauncher.activity;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.view.MenuItem;
 
+import com.benny.openlauncher.BuildConfig;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.util.AppSettings;
 import com.danielstone.materialaboutlibrary.ConvenienceBuilder;
 import com.danielstone.materialaboutlibrary.MaterialAboutActivity;
 import com.danielstone.materialaboutlibrary.model.MaterialAboutActionItem;
@@ -22,7 +22,6 @@ import de.psdev.licensesdialog.model.Notices;
 public class AboutActivity extends MaterialAboutActivity {
 
     private static final Notices notices = new Notices();
-
     static {
         notices.addNotice(new Notice("FastAdapter", "https://github.com/mikepenz/FastAdapter", "Mike Penz", new ApacheSoftwareLicense20()));
         notices.addNotice(new Notice("CircularReveal", "https://github.com/ozodrukh/CircularReveal", "Abdullaev Ozodrukh", new MITLicense()));
@@ -46,16 +45,16 @@ public class AboutActivity extends MaterialAboutActivity {
             @Override
             public void run() {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
             }
         });
 
         MaterialAboutCard.Builder titleCard = new MaterialAboutCard.Builder();
         titleCard.addItem(new MaterialAboutTitleItem(R.string.app_name, R.drawable.ic_launcher));
-        try {
-            titleCard.addItem(ConvenienceBuilder.createVersionActionItem(this, getResources().getDrawable(R.drawable.ic_info_outline_dark_24dp), getString(R.string.version), true));
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
+        titleCard.addItem(new MaterialAboutActionItem.Builder()
+                .icon(R.drawable.ic_info_outline_dark_24dp)
+                .text(getString(R.string.version) + " " + BuildConfig.VERSION_NAME)
+                .build());
         titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, getResources().getDrawable(R.drawable.ic_github_dark_24dp), "GitHub", false, Uri.parse("https://github.com/OpenLauncherTeam/openlauncher")));
         titleCard.addItem(new MaterialAboutActionItem(getString(R.string.about_libs), null, getResources().getDrawable(R.drawable.ic_library_gray_24dp), new MaterialAboutActionItem.OnClickListener() {
             @Override
@@ -71,7 +70,6 @@ public class AboutActivity extends MaterialAboutActivity {
 
         MaterialAboutCard.Builder opTeamCard = new MaterialAboutCard.Builder();
         opTeamCard.title(getString(R.string.about_team));
-
         opTeamCard.addItem(new MaterialAboutActionItem.Builder()
                 .icon(R.drawable.person_bennykok)
                 .text("BennyKok")
@@ -115,13 +113,6 @@ public class AboutActivity extends MaterialAboutActivity {
                 .addCard(opTeamCard.build())
                 .addCard(contributorsCard.build())
                 .build();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home)
-            onBackPressed();
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
