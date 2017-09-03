@@ -23,6 +23,11 @@
         <item>@string/desktop_mode_show_all_apps</item>
     </string-array>
 
+    <string-array name="entries__desktop_indicator_mode" translatable="false">
+        <item>@string/desktop_indicator_mode_normal</item>
+        <item>@string/desktop_indicator_mode_arrow</item>
+    </string-array>
+
     <string-array name="entries__drawer_styles" translatable="false">
         <item>@string/horizontal_paged_drawer</item>
         <item>@string/vertical_scroll_drawer</item>

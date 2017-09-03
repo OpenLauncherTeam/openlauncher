@@ -11,6 +11,7 @@ import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.core.widget.Desktop;
+import com.benny.openlauncher.core.widget.PagerIndicator;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -287,6 +288,16 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     public void setDesktopLock(boolean value) {
         setBool(R.string.pref_key__desktop_lock, value);
+    }
+
+    @Override
+    public void setDesktopIndicatorMode(int mode) {
+        setInt(R.string.pref_key__desktop_indicator_style, mode);
+    }
+
+    @Override
+    public int getDesktopIndicatorMode() {
+        return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.NORMAL);
     }
 
     public boolean getAppRestartRequired() {

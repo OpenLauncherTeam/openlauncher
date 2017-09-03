@@ -364,6 +364,23 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             return this;
         }
 
+        public static OnLongClickListener getLongClickDragAppListener(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
+            return new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (Setup.appSettings().isDesktopLock()) {
+                        return false;
+                    }
+                    if (eventAction != null && !eventAction.readyForDrag(v)) {
+                        return false;
+                    }
+                    v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                    DragDropHandler.startDrag(v, item, action, eventAction);
+                    return true;
+                }
+            };
+        }
+
         public Builder withOnTouchGetPosition(Item item, ItemGestureListener.ItemGestureCallback itemGestureCallback) {
             view.setOnTouchListener(Tool.getItemOnTouchListener(item, itemGestureCallback));
             return this;

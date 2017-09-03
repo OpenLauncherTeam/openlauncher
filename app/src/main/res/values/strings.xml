@@ -70,6 +70,7 @@
     <string name="pref_title__search_bar">Search Bar</string>
 
     <string name="pref_title__desktop_style">Style</string>
+    <string name="pref_title__desktop_indicator_style">Indicator Style</string>
     <string name="pref_summary__desktop_style">Choose between a normal desktop and showing all installed apps.</string>
     <string name="pref_title__minibar" translatable="false">@string/minibar</string>
     <string name="pref_summary__minibar">Configure the order and visibility of minibar items.</string>
@@ -142,6 +143,9 @@
     <string name="desktop_mode_normal">Normal</string>
     <string name="desktop_mode_show_all_apps">Show All Apps</string>
 
+    <string name="desktop_indicator_mode_normal">Normal</string>
+    <string name="desktop_indicator_mode_arrow">Arrow</string>
+
     <string name="pref_key__language" translatable="false" >pref_key__language</string>
     <string name="pref_summary__language">Change language of this app. Restart app for changes to take effect</string>
     <string name="pref_title__language">Language</string>
@@ -154,6 +158,7 @@
     <string name="pref_key__desktop_columns" translatable="false">pref_key__desktop_columns</string>
     <string name="pref_key__desktop_rows" translatable="false">pref_key__desktop_rows</string>
     <string name="pref_key__desktop_style" translatable="false">pref_key__desktop_style</string>
+    <string name="pref_key__desktop_indicator_style" translatable="false">pref_key__desktop_indicator_style</string>
     <string name="pref_key__minibar" translatable="false">pref_key__minibar</string>
     <string name="pref_key__minibar_enable" translatable="false">pref_key__minibar_enable</string>
     <string name="pref_key__minibar_arrangement" translatable="false">pref_key__minibar_arrangement</string>

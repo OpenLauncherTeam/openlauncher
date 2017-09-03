@@ -85,7 +85,7 @@ public class DesktopOptionView extends FrameLayout {
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            setPadding(0, insets.getSystemWindowInsetTop(), 0, insets.getSystemWindowInsetBottom());
+            setPadding(0, insets.getSystemWindowInsetTop() + getPaddingTop(), 0, insets.getSystemWindowInsetBottom() + getPaddingBottom());
             return insets;
         }
         return insets;

@@ -1,5 +1,7 @@
 package com.benny.openlauncher.core.interfaces;
 
+import com.benny.openlauncher.core.widget.PagerIndicator;
+
 import java.text.SimpleDateFormat;
 
 public interface SettingsManager {
@@ -116,6 +118,10 @@ public interface SettingsManager {
     boolean isDesktopLock();
 
     void setDesktopLock(boolean locked);
+
+    void setDesktopIndicatorMode(int mode);
+
+    int getDesktopIndicatorMode();
 
     boolean getAppRestartRequired();
 

@@ -28,6 +28,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     // Others
     protected View.OnClickListener listener;
+    protected View.OnLongClickListener onLongClickListener;
 
     private int forceSize = -1;
     private int iconGravity;
@@ -145,6 +146,11 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
+    public IconLabelItem withOnLongClickListener(@Nullable View.OnLongClickListener onLongClickListener) {
+        this.onLongClickListener = onLongClickListener;
+        return this;
+    }
+
     @Override
     public void setIcon(int resId) {
         this.iconProvider = Setup.imageLoader().createIconProvider(resId);
@@ -191,6 +197,8 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         holder.textView.setTextColor(textColor);
         if (listener != null)
             holder.itemView.setOnClickListener(listener);
+        if (onLongClickListener != null)
+            holder.itemView.setOnLongClickListener(onLongClickListener);
         super.bindView(holder, payloads);
     }
 
