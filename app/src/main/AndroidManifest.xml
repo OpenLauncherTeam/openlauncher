@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.benny.openlauncher">
-    <!--
-    TODO activate later again
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_CALL_LOG" />-->
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
@@ -36,7 +31,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.benny.openlauncher.activity.Home"
             android:clearTaskOnLaunch="true"
@@ -49,39 +43,31 @@
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <provider
-            android:name="com.benny.openlauncher.util.FiveSecsDelayContentProvider"
-            android:authorities="${applicationId}.util.FiveSecsDelayContentProvider"
-            android:enabled="true"
-            android:exported="true"
-            android:grantUriPermissions="true" />
-
         <activity
             android:name="com.benny.openlauncher.activity.AutoFinishActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.benny.openlauncher.activity.MinibarEditActivity"
             android:label="Edit Item"
-            android:parentActivityName="com.benny.openlauncher.activity.Home"
-            android:theme="@style/NormalActivity.Light" />
+            android:theme="@style/NormalActivity.Light"
+            android:parentActivityName="com.benny.openlauncher.activity.Home" />
         <activity
             android:name="com.benny.openlauncher.activity.SettingsActivity"
-            android:configChanges="orientation|keyboard|screenSize"
             android:label="Settings"
-            android:theme="@style/NormalActivity.Light" />
-
+            android:theme="@style/NormalActivity.Light"
+            android:configChanges="orientation|keyboard|screenSize" />
         <activity
             android:name="com.benny.openlauncher.activity.HideAppsActivity"
-            android:enabled="true"
             android:label="@string/app_name"
             android:theme="@style/NormalActivity.Light" />
-
+        <activity
+            android:name="com.benny.openlauncher.activity.AboutActivity"
+            android:label="About"
+            android:theme="@style/NormalActivity.Light" />
 
         <receiver
             android:name="com.benny.openlauncher.util.DeviceAdminReceiver"
@@ -89,20 +75,15 @@
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/device_admin" />
         </receiver>
+
         <receiver
             android:name="com.benny.openlauncher.core.util.ShortcutReceiver"
             android:enabled="true"
             android:exported="true" />
-
-        <activity
-            android:name="com.benny.openlauncher.activity.AboutActivity"
-            android:label="About"
-            android:theme="@style/AppTheme.MaterialAboutActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -113,6 +94,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <provider
+            android:name="com.benny.openlauncher.util.FiveSecsDelayContentProvider"
+            android:authorities="${applicationId}.util.FiveSecsDelayContentProvider"
+            android:enabled="true"
+            android:exported="true"
+            android:grantUriPermissions="true" />
 
     </application>
 

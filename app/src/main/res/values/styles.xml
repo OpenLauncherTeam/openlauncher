@@ -39,15 +39,9 @@
         <item name="android:textColorSecondary">@color/Dark.TextColorSecondary</item>
     </style>
 
-    <style name="AppTheme.MaterialAboutActivity" parent="Theme.Mal" >
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="titleTextColor">@color/white</item>
         <item name="colorControlNormal">@color/white</item>
+        <item name="titleTextColor">@color/white</item>
         <item name="background">@color/colorPrimary</item>
     </style>
 

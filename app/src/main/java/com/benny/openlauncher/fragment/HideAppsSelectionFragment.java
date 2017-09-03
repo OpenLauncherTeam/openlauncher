@@ -44,7 +44,7 @@ public class HideAppsSelectionFragment extends Fragment {
     private Typeface tf;
 
     private static final String TAG = "RequestActivity";
-    private static final boolean DEBUG = true; //TODO Set to false for PlayStore Release
+    private static final boolean DEBUG = true;
 
     @SuppressWarnings("unused")
     private ViewSwitcher viewSwitcher;
@@ -172,7 +172,7 @@ public class HideAppsSelectionFragment extends Fragment {
 
     @SuppressWarnings("unchecked")
     private void populateView() {
-        grid = (ListView) getActivity().findViewById(R.id.appgrid);
+        grid = (ListView) getActivity().findViewById(R.id.app_grid);
 
         assert grid != null;
         grid.setFastScrollEnabled(true);
