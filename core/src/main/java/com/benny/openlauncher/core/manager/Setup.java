@@ -118,7 +118,7 @@ public abstract class Setup<A extends App> {
 
         void saveItem(Item item, int page, Definitions.ItemPosition desktop);
 
-        void updateSate(Item item, Definitions.ItemState state);
+        void updateState(Item item, Definitions.ItemState state);
 
         void deleteItem(Item item, boolean deleteSubItems);
 

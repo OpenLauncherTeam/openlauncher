@@ -534,8 +534,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     home.db.saveItem(dropItem, page, itemPosition);
 
                     // hide the apps added to the group
-                    home.db.updateSate(item, Definitions.ItemState.Hidden);
-                    home.db.updateSate(dropItem, Definitions.ItemState.Hidden);
+                    home.db.updateState(item, Definitions.ItemState.Hidden);
+                    home.db.updateState(dropItem, Definitions.ItemState.Hidden);
 
                     // add the item to the database
                     home.db.saveItem(group, page, itemPosition);
@@ -557,7 +557,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     home.db.saveItem(dropItem, page, itemPosition);
 
                     // hide the new app in the group
-                    home.db.updateSate(dropItem, Definitions.ItemState.Hidden);
+                    home.db.updateState(dropItem, Definitions.ItemState.Hidden);
 
                     // add the item to the database
                     home.db.saveItem(item, page, itemPosition);

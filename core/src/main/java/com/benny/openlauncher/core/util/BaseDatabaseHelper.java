@@ -132,7 +132,7 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
     }
 
     @Override
-    public void updateSate(Item item, Definitions.ItemState state) {
+    public void updateState(Item item, Definitions.ItemState state) {
         updateItem(item, state);
     }
 
