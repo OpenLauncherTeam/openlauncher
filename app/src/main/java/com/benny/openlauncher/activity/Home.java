@@ -195,7 +195,6 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                 }
             }
         });
-        minibar.setBackgroundColor(AppSettings.get().getMinibarBackgroundColor());
         minibarBackground.setBackgroundColor(AppSettings.get().getMinibarBackgroundColor());
     }
 
