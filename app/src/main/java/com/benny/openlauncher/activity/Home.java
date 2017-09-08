@@ -195,6 +195,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                 }
             }
         });
+        // frame layout spans the entire side while the minibar container has gaps at the top and bottom
         minibarBackground.setBackgroundColor(AppSettings.get().getMinibarBackgroundColor());
     }
 
