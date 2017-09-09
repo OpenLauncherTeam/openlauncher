@@ -35,6 +35,7 @@ import com.benny.openlauncher.core.viewutil.DragNavigationControl;
 import com.benny.openlauncher.core.viewutil.WidgetHost;
 import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.core.widget.AppItemView;
+import com.benny.openlauncher.core.widget.CalendarDropDownView;
 import com.benny.openlauncher.core.widget.Desktop;
 import com.benny.openlauncher.core.widget.DesktopOptionView;
 import com.benny.openlauncher.core.widget.Dock;
@@ -43,6 +44,7 @@ import com.benny.openlauncher.core.widget.GroupPopupView;
 import com.benny.openlauncher.core.widget.PagerIndicator;
 import com.benny.openlauncher.core.widget.SearchBar;
 import com.benny.openlauncher.core.widget.SmoothViewPager;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.util.List;
 
@@ -97,9 +99,10 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     public ConstraintLayout baseLayout;
     public DragOptionView dragOptionView;
     public DesktopOptionView desktopEditOptionView;
+    public CalendarDropDownView calendarDropDownView;
     private PagerIndicator appDrawerIndicator;
     protected ViewGroup myScreen;
-    protected SearchBar searchBar;
+    public SearchBar searchBar;
     public GroupPopupView groupPopup;
     // region for the APP_DRAWER_ANIMATION
     private int cx;
@@ -144,18 +147,19 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     protected abstract void initStaticHelper();
 
     protected void bindViews() {
-        desktop = (Desktop) findViewById(R.id.desktop);
+        desktop = findViewById(R.id.desktop);
         background = findViewById(R.id.background);
         dragLeft = findViewById(R.id.left);
         dragRight = findViewById(R.id.right);
-        desktopIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
-        dock = (Dock) findViewById(R.id.dock);
-        appDrawerController = (AppDrawerController) findViewById(R.id.appDrawerController);
-        baseLayout = (ConstraintLayout) findViewById(R.id.baseLayout);
-        dragOptionView = (DragOptionView) findViewById(R.id.dragOptionPanel);
-        desktopEditOptionView = (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel);
-        searchBar = (SearchBar) findViewById(R.id.searchBar);
-        groupPopup = (GroupPopupView) findViewById(R.id.groupPopup);
+        desktopIndicator = findViewById(R.id.desktopIndicator);
+        dock = findViewById(R.id.dock);
+        appDrawerController = findViewById(R.id.appDrawerController);
+        calendarDropDownView = findViewById(R.id.calendarDropDownView);
+        baseLayout = findViewById(R.id.baseLayout);
+        dragOptionView = findViewById(R.id.dragOptionPanel);
+        desktopEditOptionView = findViewById(R.id.desktopEditOptionPanel);
+        searchBar = findViewById(R.id.searchBar);
+        groupPopup = findViewById(R.id.groupPopup);
     }
 
     protected void unbindViews() {
@@ -166,6 +170,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         desktopIndicator = null;
         dock = null;
         appDrawerController = null;
+        calendarDropDownView = null;
         baseLayout = null;
         dragOptionView = null;
         desktopEditOptionView = null;
@@ -174,7 +179,6 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     }
 
     private void init() {
-
         appWidgetHost = new WidgetHost(getApplicationContext(), R.id.app_widget_host);
         appWidgetManager = AppWidgetManager.getInstance(this);
         appWidgetHost.startListening();
@@ -200,7 +204,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         DragNavigationControl.init(this, dragLeft, dragRight);
 
         appDrawerController.init();
-        appDrawerIndicator = (PagerIndicator) findViewById(R.id.appDrawerIndicator);
+        appDrawerIndicator = findViewById(R.id.appDrawerIndicator);
 
         appDrawerController.setHome(this);
         dragOptionView.setHome(this);
@@ -420,6 +424,26 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         }
     }
 
+    public void dimBackground() {
+        Tool.visibleViews(background);
+    }
+
+    public void unDimBackground() {
+        Tool.invisibleViews(background);
+    }
+
+    public void clearRoomForPopUp() {
+        Tool.invisibleViews(desktop);
+        hideDesktopIndicator();
+        updateDock(false);
+    }
+
+    public void unClearRoomForPopUp() {
+        Tool.visibleViews(desktop);
+        showDesktopIndicator();
+        updateDock(true);
+    }
+
     protected void initSearchBar() {
         searchBar.setCallback(new SearchBar.CallBack() {
             @Override
@@ -446,11 +470,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
             @Override
             public void onExpand() {
-                Tool.invisibleViews(desktop);
-                hideDesktopIndicator();
-                Tool.visibleViews(background);
-
-                updateDock(false);
+                clearRoomForPopUp();
+                dimBackground();
 
                 searchBar.searchInput.setFocusable(true);
                 searchBar.searchInput.setFocusableInTouchMode(true);
@@ -466,17 +487,21 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
             @Override
             public void onCollapse() {
-                Tool.visibleViews(desktop);
-                showDesktopIndicator();
-                Tool.invisibleViews(background);
-
-                updateDock(true);
+                unClearRoomForPopUp();
+                unDimBackground();
 
                 searchBar.searchInput.clearFocus();
 
                 Tool.hideKeyboard(Home.this, searchBar.searchInput);
             }
         });
+        searchBar.searchClock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendarDropDownView.animateShow();
+            }
+        });
+
         // this view is just a text view of the current date
         updateSearchClock();
     }
@@ -688,6 +713,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     protected void onHandleLauncherPause() {
         searchBar.collapse();
         groupPopup.dismissPopup();
+        calendarDropDownView.animateHide();
 
         if (desktop != null) {
             if (!desktop.inEditMode) {
