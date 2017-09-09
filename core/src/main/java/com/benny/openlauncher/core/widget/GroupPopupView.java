@@ -3,6 +3,7 @@ package com.benny.openlauncher.core.widget;
 import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
@@ -57,7 +58,7 @@ public class GroupPopupView extends RevealFrameLayout {
         int alpha = Color.alpha(color);
         popupCard.setCardBackgroundColor(color);
         // remove elevation if CardView's background is transparent to avoid weird shadows because CardView does not support transparent backgrounds
-        if (alpha != 0) {
+        if (alpha == 0) {
             popupCard.setCardElevation(0f);
         }
         cellContainer = popupCard.findViewById(R.id.group);
@@ -90,7 +91,7 @@ public class GroupPopupView extends RevealFrameLayout {
 
         int iconSize = Tool.dp2px(Setup.appSettings().getDesktopIconSize(), c);
         int textSize = Tool.dp2px(22, c);
-        int contentPadding = Tool.dp2px(5, c);
+        int contentPadding = Tool.dp2px(6, c);
 
         for (int x2 = 0; x2 < cellSize[0]; x2++) {
             for (int y2 = 0; y2 < cellSize[1]; y2++) {
@@ -161,7 +162,7 @@ public class GroupPopupView extends RevealFrameLayout {
         popupCard.getLayoutParams().height = popupHeight;
 
         cx = popupWidth / 2;
-        cy = popupHeight / 2;
+        cy = popupHeight / 2 - (Setup.appSettings().isDesktopShowLabel() ? Tool.dp2px(10, getContext()) : 0);
 
         int[] coordinates = new int[2];
         itemView.getLocationInWindow(coordinates);
@@ -176,7 +177,9 @@ public class GroupPopupView extends RevealFrameLayout {
         int height = getHeight();
 
         if (coordinates[0] + popupWidth > width) {
-            coordinates[0] += width - (coordinates[0] + popupWidth);
+            int v = width - (coordinates[0] + popupWidth);
+            coordinates[0] += v;
+            cx -= v;
         }
         if (coordinates[1] + popupHeight > height) {
             coordinates[1] += height - (coordinates[1] + popupHeight);
@@ -184,6 +187,8 @@ public class GroupPopupView extends RevealFrameLayout {
         if (coordinates[0] < 0) {
             coordinates[0] -= itemView.getWidth() / 2;
             coordinates[0] += popupWidth / 2;
+            cx += itemView.getWidth() / 2;
+            cx -= popupWidth / 2;
         }
         if (coordinates[1] < 0) {
             coordinates[1] -= itemView.getHeight() / 2;
@@ -196,21 +201,26 @@ public class GroupPopupView extends RevealFrameLayout {
         popupCard.setPivotX(0);
         popupCard.setPivotX(0);
         popupCard.setX(x);
-        popupCard.setY(y - 200);
+        popupCard.setY(y);
 
         setVisibility(View.VISIBLE);
         popupCard.setVisibility(View.VISIBLE);
-        animateFolderOpen(itemView);
+        animateFolderOpen();
 
         return true;
     }
 
-    private void animateFolderOpen(View itemView) {
+    private void animateFolderOpen() {
+        cellContainer.setAlpha(0);
+
         int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());
-        folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, 0, finalRadius);
+        int startRadius = Tool.dp2px(Setup.appSettings().getDesktopIconSize() / 2, getContext());
+
+        folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, startRadius, finalRadius);
         folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         folderAnimator.setDuration(folderAnimationTime);
         folderAnimator.start();
+        Tool.visibleViews(100, 100, cellContainer);
     }
 
     public void dismissPopup() {
@@ -218,8 +228,12 @@ public class GroupPopupView extends RevealFrameLayout {
         if (folderAnimator == null || folderAnimator.isRunning())
             return;
 
+        Tool.invisibleViews(200, cellContainer);
+
+        int startRadius = Tool.dp2px(Setup.appSettings().getDesktopIconSize() / 2, getContext());
         int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());
-        folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, finalRadius, 0);
+        folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, finalRadius, startRadius);
+        folderAnimator.setStartDelay(100);
         folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         folderAnimator.setDuration(folderAnimationTime);
         folderAnimator.addListener(new Animator.AnimatorListener() {

@@ -252,7 +252,10 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
                 Tool.invisibleViews(appDrawerIndicator);
                 Tool.visibleViews(desktop);
                 showDesktopIndicator();
-                updateDock(true, 200);
+                if (Setup.appSettings().getDrawerStyle() == AppDrawerController.DrawerMode.HORIZONTAL_PAGED)
+                    updateDock(true, 200);
+                else
+                    updateDock(true);
                 updateSearchBar(!dragOptionView.isDraggedFromDrawer);
                 dragOptionView.isDraggedFromDrawer = false;
             }
