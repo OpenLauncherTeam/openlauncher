@@ -5,7 +5,7 @@
     <PreferenceCategory android:title="@string/pref_title__miscellaneous">
 
         <!--suppress AndroidDomInspection -->
-        <io.github.gsantner.opoc.ui.LanguagePreference
+        <net.gsantner.opoc.ui.LanguagePreference
             android:defaultValue=""
             android:key="@string/pref_key__language"
             android:summary="@string/pref_summary__language"

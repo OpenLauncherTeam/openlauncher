@@ -16,7 +16,7 @@ import com.benny.openlauncher.core.widget.PagerIndicator;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import io.github.gsantner.opoc.util.AppSettingsBase;
+import net.gsantner.opoc.util.AppSettingsBase;
 
 public class AppSettings extends AppSettingsBase implements SettingsManager {
     private AppSettings(Context context) {
