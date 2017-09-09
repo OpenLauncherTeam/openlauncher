@@ -162,8 +162,7 @@ public class AppDrawerController extends RevealFrameLayout {
             case DrawerMode.HORIZONTAL_PAGED:
                 drawerViewPaged = (AppDrawerPaged) layoutInflater.inflate(R.layout.view_app_drawer_paged, this, false);
                 addView(drawerViewPaged);
-                PagerIndicator indicator = (PagerIndicator) layoutInflater.inflate(R.layout.view_drawer_indicator, this, false);
-                addView(indicator);
+                layoutInflater.inflate(R.layout.view_drawer_indicator, this, true);
                 break;
             case DrawerMode.VERTICAL:
                 drawerViewGrid = (AppDrawerVertical) layoutInflater.inflate(R.layout.view_app_drawer_vertical, this, false);

@@ -5,6 +5,7 @@ import android.graphics.Point;
 import android.view.View;
 
 import com.benny.openlauncher.core.activity.Home;
+import com.benny.openlauncher.core.util.Tool;
 
 public class GoodDragShadowBuilder extends View.DragShadowBuilder {
     int x;
@@ -19,7 +20,10 @@ public class GoodDragShadowBuilder extends View.DragShadowBuilder {
     @Override
     public void onProvideShadowMetrics(Point shadowSize, Point shadowTouchPoint) {
         shadowSize.set(getView().getWidth(), getView().getHeight());
-        shadowTouchPoint.set(x, y);
+        if (x < 0 || y < 0)
+            shadowTouchPoint.set(shadowSize.x / 2, shadowSize.y / 2);
+        else
+            shadowTouchPoint.set(x, y);
     }
 
     @Override

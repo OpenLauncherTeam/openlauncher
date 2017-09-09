@@ -50,7 +50,7 @@ public class Tool {
         for (View view : views) {
             if (view == null) continue;
             view.setVisibility(View.VISIBLE);
-            view.animate().alpha(1).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator());
+            view.animate().alpha(1).setStartDelay(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator());
         }
     }
 
@@ -59,7 +59,16 @@ public class Tool {
         for (View view : views) {
             if (view == null) continue;
             view.setVisibility(View.VISIBLE);
-            view.animate().alpha(1).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator());
+            view.animate().alpha(1).setStartDelay(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator());
+        }
+    }
+
+    public static void visibleViews(long duration ,long delay , View... views) {
+        if (views == null) return;
+        for (View view : views) {
+            if (view == null) continue;
+            view.setVisibility(View.VISIBLE);
+            view.animate().alpha(1).setStartDelay(delay).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator());
         }
     }
 
@@ -67,7 +76,7 @@ public class Tool {
         if (views == null) return;
         for (final View view : views) {
             if (view == null) continue;
-            view.animate().alpha(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+            view.animate().alpha(0).setStartDelay(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                 @Override
                 public void run() {
                     view.setVisibility(View.INVISIBLE);
@@ -80,7 +89,7 @@ public class Tool {
         if (views == null) return;
         for (final View view : views) {
             if (view == null) continue;
-            view.animate().alpha(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+            view.animate().alpha(0).setStartDelay(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                 @Override
                 public void run() {
                     view.setVisibility(View.INVISIBLE);
@@ -93,7 +102,7 @@ public class Tool {
         if (views == null) return;
         for (final View view : views) {
             if (view == null) continue;
-            view.animate().alpha(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+            view.animate().alpha(0).setStartDelay(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                 @Override
                 public void run() {
                     view.setVisibility(View.GONE);
@@ -106,7 +115,7 @@ public class Tool {
         if (views == null) return;
         for (final View view : views) {
             if (view == null) continue;
-            view.animate().alpha(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+            view.animate().alpha(0).setStartDelay(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                 @Override
                 public void run() {
                     view.setVisibility(View.GONE);
@@ -216,7 +225,7 @@ public class Tool {
 
     public static void print(Object o) {
         if (o != null) {
-            Log.d("Hey", o.toString());
+            Log.e("Hey", o.toString());
         }
     }
 
@@ -225,7 +234,7 @@ public class Tool {
         for (int i = 0; i < o.length; i++) {
             sb.append(o[i].toString()).append("  ");
         }
-        Log.d("Hey", sb.toString());
+        Log.e("Hey", sb.toString());
     }
 
     public static boolean isIntentActionAvailable(Context context, String action) {

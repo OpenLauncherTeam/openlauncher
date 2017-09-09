@@ -412,7 +412,7 @@ public class SearchBar extends FrameLayout {
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             int topInset = insets.getSystemWindowInsetTop();
-            setPadding(getPaddingLeft(), topInset + Tool.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom());
+            setPadding(getPaddingLeft(), topInset + Tool.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom() + insets.getSystemWindowInsetBottom());
         }
         return insets;
     }

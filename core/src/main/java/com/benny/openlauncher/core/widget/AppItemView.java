@@ -357,7 +357,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                     if (view.vibrateWhenLongPress) {
                         v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                     }
-                    DragDropHandler.startDrag(v, item, action, eventAction);
+                    DragDropHandler.startDrag(view, item, action, eventAction);
                     return true;
                 }
             });

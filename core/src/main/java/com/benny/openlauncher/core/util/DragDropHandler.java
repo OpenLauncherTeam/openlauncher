@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 

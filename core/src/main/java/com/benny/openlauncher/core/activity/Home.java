@@ -252,7 +252,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
                 Tool.invisibleViews(appDrawerIndicator);
                 Tool.visibleViews(desktop);
                 showDesktopIndicator();
-                updateDock(true);
+                updateDock(true, 200);
                 updateSearchBar(!dragOptionView.isDraggedFromDrawer);
                 dragOptionView.isDraggedFromDrawer = false;
             }
@@ -507,8 +507,12 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     }
 
     public void updateDock(boolean show) {
+        updateDock(show, 0);
+    }
+
+    public void updateDock(boolean show, long delay) {
         if (Setup.appSettings().getDockEnable() && show) {
-            Tool.visibleViews(100, dock);
+            Tool.visibleViews(100, delay, dock);
             ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
             ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
         } else {

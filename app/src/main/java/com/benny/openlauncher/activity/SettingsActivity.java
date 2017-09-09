@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
@@ -29,7 +30,7 @@ import com.benny.openlauncher.viewutil.DialogHelper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsActivity extends ThemeActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsActivity extends ThemeActivity{
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
     protected static Context context;
@@ -98,21 +99,13 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
 
     @Override
     protected void onResume() {
-        appSettings.registerPreferenceChangedListener(this);
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        appSettings.unregisterPreferenceChangedListener(this);
         appSettings.setAppRestartRequired(shouldLauncherRestart);
         super.onPause();
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        //this will be handled by each SettingsFragment cat
-        //shouldLauncherRestart = true;
     }
 
     public static class SettingsFragmentMaster extends PreferenceFragment {
@@ -211,21 +204,7 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
         @Override
         public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
             if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
-
                 String key = preference.getKey();
-
-                checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
-
-                if (key.equals(getString(R.string.pref_key__desktop_indicator_style))) {
-                    Home.launcher.desktopIndicator.setMode(settings.getDesktopIndicatorMode());
-                    return true;
-                }
-
-                if (key.equals(getString(R.string.pref_title__desktop_show_position_indicator))) {
-                    Home.launcher.updateDesktopIndicatorVisibility();
-                    return true;
-                }
 
                 if (key.equals(getString(R.string.pref_key__minibar))) {
                     LauncherAction.RunAction(LauncherAction.Action.EditMinBar, getActivity());
@@ -233,6 +212,29 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
                 }
             }
             return super.onPreferenceTreeClick(screen, preference);
+        }
+
+        @Override
+        public void onPause() {
+            appSettings.unregisterPreferenceChangedListener(this);
+            super.onPause();
+        }
+
+        @Override
+        public void onResume() {
+            appSettings.registerPreferenceChangedListener(this);
+            super.onResume();
+        }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
+            if (key.equals(getString(R.string.pref_key__desktop_indicator_style))) {
+                Home.launcher.desktopIndicator.setMode(appSettings.getDesktopIndicatorMode());
+            }
+            if (key.equals(getString(R.string.pref_title__desktop_show_position_indicator))) {
+                Home.launcher.updateDesktopIndicatorVisibility();
+            }
         }
     }
 
@@ -257,15 +259,28 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
             if (isAdded() && preference.hasKey()) {
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
-
-                checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
-
-                if (key.equals(getString(R.string.pref_key__dock_enable))) {
-                    Home.launcher.updateDock(true);
-                    return true;
-                }
             }
             return super.onPreferenceTreeClick(screen, preference);
+        }
+
+        @Override
+        public void onPause() {
+            appSettings.unregisterPreferenceChangedListener(this);
+            super.onPause();
+        }
+
+        @Override
+        public void onResume() {
+            appSettings.registerPreferenceChangedListener(this);
+            super.onResume();
+        }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
+            if (key.equals(getString(R.string.pref_key__dock_enable))) {
+                Home.launcher.updateDock(true);
+            }
         }
     }
 
@@ -294,10 +309,7 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
         @Override
         public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
             if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
-
-                checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
 
                 if (key.equals(getString(R.string.pref_key__hidden_apps))) {
                     Intent intent = new Intent(getActivity(), HideAppsActivity.class);
@@ -309,6 +321,23 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
 
             }
             return super.onPreferenceTreeClick(screen, preference);
+        }
+
+        @Override
+        public void onPause() {
+            appSettings.unregisterPreferenceChangedListener(this);
+            super.onPause();
+        }
+
+        @Override
+        public void onResume() {
+            appSettings.registerPreferenceChangedListener(this);
+            super.onResume();
+        }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
         }
     }
 
@@ -328,10 +357,7 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
         @Override
         public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
             if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
-
-                checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
 
                 if (key.equals(getString(R.string.pref_key__desktop_double_tap))) {
                     DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper) Home.launcher.db).getGesture(0), 0, new DialogHelper.OnActionSelectedListener() {
@@ -385,6 +411,23 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
             }
             return super.onPreferenceTreeClick(screen, preference);
         }
+
+        @Override
+        public void onPause() {
+            appSettings.unregisterPreferenceChangedListener(this);
+            super.onPause();
+        }
+
+        @Override
+        public void onResume() {
+            appSettings.registerPreferenceChangedListener(this);
+            super.onResume();
+        }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
+        }
     }
 
     public static class SettingsFragmentIcons extends BasePreferenceFragment {
@@ -404,10 +447,7 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
         @Override
         public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
             if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
-
-                checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
 
                 if (key.equals(getString(R.string.pref_key__icon_pack))) {
                     AppManager.getInstance(getActivity()).startPickIconPackIntent(getActivity());
@@ -415,6 +455,23 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
                 }
             }
             return super.onPreferenceTreeClick(screen, preference);
+        }
+
+        @Override
+        public void onPause() {
+            appSettings.unregisterPreferenceChangedListener(this);
+            super.onPause();
+        }
+
+        @Override
+        public void onResume() {
+            appSettings.registerPreferenceChangedListener(this);
+            super.onResume();
+        }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
         }
     }
 
@@ -436,11 +493,8 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
         @Override
         public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
             if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
                 Activity activity = getActivity();
-
-                checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
 
                 if (key.equals(getString(R.string.pref_key__backup))) {
                     if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -467,9 +521,34 @@ public class SettingsActivity extends ThemeActivity implements SharedPreferences
             }
             return super.onPreferenceTreeClick(screen, preference);
         }
+
+        @Override
+        public void onPause() {
+            appSettings.unregisterPreferenceChangedListener(this);
+            super.onPause();
+        }
+
+        @Override
+        public void onResume() {
+            appSettings.registerPreferenceChangedListener(this);
+            super.onResume();
+        }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key);
+        }
     }
 
-    public static class BasePreferenceFragment extends PreferenceFragment {
+    public static abstract class BasePreferenceFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+
+        public AppSettings appSettings;
+
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            appSettings = AppSettings.get();
+        }
 
         public void checkIfPreferenceChangedRequireRestart(int[] ids, String key) {
             SettingsActivity settingsActivity = (SettingsActivity) getActivity();
