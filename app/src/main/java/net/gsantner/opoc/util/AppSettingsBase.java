@@ -11,8 +11,6 @@
  */
 
 /*
- * Get updates:
- *  https://github.com/gsantner/onePieceOfCode/blob/master/java/AppSettingsBase.java
  * This is a wrapper for settings based on SharedPreferences
  * with keys in resources. Extend from this class and add
  * getters/setters for the app's settings.
@@ -44,7 +42,7 @@
     }
  */
 
-package io.github.gsantner.opoc.util;
+package net.gsantner.opoc.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -73,9 +71,9 @@ public class AppSettingsBase {
     //########################
     //## Members, Constructors
     //########################
-    protected final Context _context;
     protected final SharedPreferences _prefApp;
     protected final String _prefAppName;
+    protected final Context _context;
 
     public AppSettingsBase(final Context context) {
         this(context, SHARED_PREF_APP);
