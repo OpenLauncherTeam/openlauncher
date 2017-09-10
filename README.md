@@ -56,7 +56,8 @@ We would be happy if you want to be part of this game.
 
 **Donation**  
 You can support us and buy us some coffee.  
-[bennykok](https://www.paypal.me/BennyKok) | [gsantner](https://gsantner.github.io/#donate)
+[bennykok](https://www.paypal.me/BennyKok) or
+<noscript><a href="https://liberapay.com/BennyKok/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript> | [gsantner](https://gsantner.github.io/#donate)
  
 ## Licensing
 The app is licensed Apache 2.0. 
