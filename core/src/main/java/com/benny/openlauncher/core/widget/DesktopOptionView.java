@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -34,6 +35,16 @@ public class DesktopOptionView extends FrameLayout {
     private RecyclerView[] actionRecyclerViews = new RecyclerView[2];
     private FastItemAdapter<FastItem.DesktopOptionsItem>[] actionAdapters = new FastItemAdapter[2];
     private DesktopOptionViewListener desktopOptionViewListener;
+
+    public void animateOpen() {
+        ((View) actionRecyclerViews[0].getParent()).animate().scaleY(1).setDuration(200);
+        Tool.visibleViews(100, 200, actionRecyclerViews[0]);
+    }
+
+    public void animateClose() {
+        ((View) actionRecyclerViews[0].getParent()).animate().scaleY(0).setDuration(100).setStartDelay(40);
+        Tool.invisibleViews(50, actionRecyclerViews[0]);
+    }
 
     public DesktopOptionView(@NonNull Context context) {
         super(context);
@@ -102,8 +113,8 @@ public class DesktopOptionView extends FrameLayout {
         actionAdapters[0] = new FastItemAdapter<>();
         actionAdapters[1] = new FastItemAdapter<>();
 
-        actionRecyclerViews[0] = createRecyclerView(actionAdapters[0], Gravity.TOP | Gravity.CENTER_HORIZONTAL, paddingHorizontal);
-        actionRecyclerViews[1] = createRecyclerView(actionAdapters[1], Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, paddingHorizontal);
+        actionRecyclerViews[0] = createRecyclerView(actionAdapters[0], Gravity.TOP | Gravity.CENTER_HORIZONTAL, true, paddingHorizontal);
+        actionRecyclerViews[1] = createRecyclerView(actionAdapters[1], Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, false, paddingHorizontal);
 
         final FastAdapter.OnClickListener<FastItem.DesktopOptionsItem> clickListener = new FastAdapter.OnClickListener<FastItem.DesktopOptionsItem>() {
             @Override
@@ -170,9 +181,14 @@ public class DesktopOptionView extends FrameLayout {
         itemsBottom.add(createItem(R.drawable.ic_settings_launcher_white_36dp, R.string.settings, typeface, itemWidth));
         actionAdapters[1].set(itemsBottom);
         actionAdapters[1].withOnClickListener(clickListener);
+
+        actionRecyclerViews[0].setAlpha(0);
+        ((MarginLayoutParams) ((View) actionRecyclerViews[0].getParent()).getLayoutParams()).topMargin = Tool.dp2px(4, getContext());
+        ((View) actionRecyclerViews[0].getParent()).setPivotY(0);
+        ((View) actionRecyclerViews[0].getParent()).setScaleY(0);
     }
 
-    private RecyclerView createRecyclerView(FastAdapter adapter, int gravity, int paddingHorizontal) {
+    private RecyclerView createRecyclerView(FastAdapter adapter, int gravity, boolean warpCard, int paddingHorizontal) {
         RecyclerView actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         actionRecyclerView.setClipToPadding(false);
@@ -182,7 +198,15 @@ public class DesktopOptionView extends FrameLayout {
         actionRecyclerView.setOverScrollMode(OVER_SCROLL_ALWAYS);
         LayoutParams actionRecyclerViewLP = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         actionRecyclerViewLP.gravity = gravity;
-        addView(actionRecyclerView, actionRecyclerViewLP);
+        if (warpCard) {
+            CardView cardView = new CardView(getContext());
+            cardView.setRadius(0);
+            cardView.setCardElevation(Tool.dp2px(6, getContext()));
+            cardView.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorPrimary));
+            cardView.addView(actionRecyclerView);
+            addView(cardView, actionRecyclerViewLP);
+        } else
+            addView(actionRecyclerView, actionRecyclerViewLP);
         return actionRecyclerView;
     }
 

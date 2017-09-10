@@ -183,7 +183,8 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         if (width != -1)
             holder.itemView.getLayoutParams().width = width;
         holder.textView.setMaxLines(maxTextLines);
-        holder.textView.setText(maxTextLines != 0 ? getLabel() : "");
+        if (getLabel() != null)
+            holder.textView.setText(maxTextLines != 0 ? getLabel() : "");
         holder.textView.setGravity(gravity);
         holder.textView.setTypeface(typeface);
         holder.textView.setCompoundDrawablePadding((int) drawablePadding);

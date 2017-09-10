@@ -2,6 +2,10 @@ package com.benny.openlauncher.activity;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.benny.openlauncher.BuildConfig;
 import com.benny.openlauncher.R;

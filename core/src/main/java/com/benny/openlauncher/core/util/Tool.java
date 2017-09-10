@@ -63,7 +63,7 @@ public class Tool {
         }
     }
 
-    public static void visibleViews(long duration ,long delay , View... views) {
+    public static void visibleViews(long duration, long delay, View... views) {
         if (views == null) return;
         for (View view : views) {
             if (view == null) continue;
@@ -90,6 +90,19 @@ public class Tool {
         for (final View view : views) {
             if (view == null) continue;
             view.animate().alpha(0).setStartDelay(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    view.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
+    }
+
+    public static void invisibleViews(long duration, long delay, View... views) {
+        if (views == null) return;
+        for (final View view : views) {
+            if (view == null) continue;
+            view.animate().alpha(0).setStartDelay(delay).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                 @Override
                 public void run() {
                     view.setVisibility(View.INVISIBLE);

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--suppress AndroidElementNotAllowed -->
+<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -42,6 +41,12 @@
             android:key="@string/pref_key__minibar"
             android:summary="@string/pref_summary__minibar"
             android:title="@string/pref_title__minibar" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__desktop_hide_grid"
+            android:summary="@string/pref_summary__desktop_hide_grid"
+            android:title="@string/pref_title__desktop_hide_grid" />
 
         <CheckBoxPreference
             android:defaultValue="false"

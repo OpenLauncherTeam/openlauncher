@@ -110,6 +110,10 @@ public interface SettingsManager {
 
     boolean isGestureFeedback();
 
+    boolean isDesktopHideGrid();
+
+    void setDesktopHideGrid(boolean hideGrid);
+
     // internal
     int getDesktopPageCurrent();
 

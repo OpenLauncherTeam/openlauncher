@@ -149,9 +149,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         ((DesktopAdapter) getAdapter()).addPageRight();
         setCurrentItem(previousPage + 1);
 
-        for (CellContainer cellContainer : pages) {
-            cellContainer.setHideGrid(!showGrid);
-        }
+        if (!Setup.appSettings().isDesktopHideGrid())
+            for (CellContainer cellContainer : pages) {
+                cellContainer.setHideGrid(!showGrid);
+            }
         pageIndicator.invalidate();
     }
 
@@ -163,9 +164,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         setCurrentItem(previousPage + 1, false);
         setCurrentItem(previousPage - 1);
 
-        for (CellContainer cellContainer : pages) {
-            cellContainer.setHideGrid(!showGrid);
-        }
+        if (!Setup.appSettings().isDesktopHideGrid())
+            for (CellContainer cellContainer : pages) {
+                cellContainer.setHideGrid(!showGrid);
+            }
         pageIndicator.invalidate();
     }
 
@@ -462,8 +464,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         }
 
         public void enterDesktopEditMode() {
-            scaleFactor = 0.7f;
-            translateFactor = 180f;
+            scaleFactor = 0.8f;
+            translateFactor = Tool.dp2px(40, getContext());
             for (CellContainer v : desktop.pages) {
                 v.blockTouch = true;
                 v.animateBackgroundShow();
@@ -477,7 +479,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         public void exitDesktopEditMode() {
             scaleFactor = 1.0f;
-            translateFactor = 0.0f;
+            translateFactor = 0;
             for (final CellContainer v : desktop.pages) {
                 v.blockTouch = false;
                 v.animateBackgroundHide();

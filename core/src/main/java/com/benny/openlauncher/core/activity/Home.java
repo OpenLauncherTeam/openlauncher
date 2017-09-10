@@ -337,7 +337,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     public void onDesktopEdit() {
         //dragOptionView.resetAutoHideView();
 
-        Tool.visibleViews(100, desktopEditOptionView);
+        desktopEditOptionView.animateOpen();
+        Tool.visibleViews(100, 20, desktopEditOptionView);
 
         hideDesktopIndicator();
         updateDock(false);
@@ -346,12 +347,12 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     @Override
     public void onFinishDesktopEdit() {
+        desktopEditOptionView.animateClose();
+        Tool.invisibleViews(100, 20, desktopEditOptionView);
+
         showDesktopIndicator();
-        Tool.invisibleViews(100, desktopEditOptionView);
         updateDock(true);
         updateSearchBar(true);
-
-        //dragOptionView.setAutoHideView(searchBar);
     }
 
     @Override

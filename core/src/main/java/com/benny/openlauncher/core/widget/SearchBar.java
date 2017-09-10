@@ -329,9 +329,9 @@ public class SearchBar extends FrameLayout {
                 int marginTop = Tool.dp2px(50, getContext()) + searchInput.getHeight();
                 int marginBottom = Desktop.bottomInset;
                 recyclerParams.setMargins(0, marginTop, 0, marginBottom);
-                recyclerParams.height = ((View) getParent()).getHeight() - marginTop;
+                recyclerParams.height = ((View) getParent()).getHeight() - marginTop - marginBottom / 2;
                 searchRecycler.setLayoutParams(recyclerParams);
-                searchRecycler.setPadding(0, 0, 0, marginBottom * 2);
+                searchRecycler.setPadding(0, 0, 0, (int) (marginBottom * 1.5f));
             }
         });
     }
@@ -412,7 +412,8 @@ public class SearchBar extends FrameLayout {
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             int topInset = insets.getSystemWindowInsetTop();
-            setPadding(getPaddingLeft(), topInset + Tool.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom() + insets.getSystemWindowInsetBottom());
+            setPadding(getPaddingLeft(), topInset + Tool.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom());
+            //searchRecycler.setPadding(searchRecycler.getPaddingLeft(), searchRecycler.getPaddingTop(), searchRecycler.getPaddingRight(), searchRecycler.getPaddingBottom() + insets.getSystemWindowInsetBottom());
         }
         return insets;
     }

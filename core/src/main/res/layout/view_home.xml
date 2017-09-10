@@ -76,7 +76,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="6dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -106,7 +106,7 @@
 
     <View
         android:id="@+id/left"
-        android:layout_width="20dp"
+        android:layout_width="25dp"
         android:layout_height="0dp"
         android:alpha="0"
         android:background="@drawable/action_new_page"
@@ -117,7 +117,7 @@
 
     <View
         android:id="@+id/right"
-        android:layout_width="20dp"
+        android:layout_width="25dp"
         android:layout_height="0dp"
         android:alpha="0"
         android:background="@drawable/action_new_page"

@@ -222,6 +222,16 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getBool(R.string.pref_key__desktop_gesture_feedback, false);
     }
 
+    @Override
+    public boolean isDesktopHideGrid() {
+        return getBool(R.string.pref_key__desktop_hide_grid, true);
+    }
+
+    @Override
+    public void setDesktopHideGrid(boolean hideGrid) {
+        setBool(R.string.pref_key__desktop_hide_grid, hideGrid);
+    }
+
     public int getIconSize() {
         return getInt(R.string.pref_key__icon_size, 52);
     }
@@ -295,13 +305,13 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     @Override
-    public void setDesktopIndicatorMode(int mode) {
-        setInt(R.string.pref_key__desktop_indicator_style, mode);
+    public int getDesktopIndicatorMode() {
+        return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.NORMAL);
     }
 
     @Override
-    public int getDesktopIndicatorMode() {
-        return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.NORMAL);
+    public void setDesktopIndicatorMode(int mode) {
+        setInt(R.string.pref_key__desktop_indicator_style, mode);
     }
 
     public boolean getAppRestartRequired() {

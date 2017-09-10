@@ -250,9 +250,10 @@ public class DragOptionView extends CardView {
             case DragEvent.ACTION_DRAG_STARTED:
                 dragging = true;
                 animShowView();
-                home.dock.setHideGrid(false);
+                boolean desktopHideGrid = Setup.appSettings().isDesktopHideGrid();
+                home.dock.setHideGrid(desktopHideGrid);
                 for (CellContainer cellContainer : home.desktop.pages) {
-                    cellContainer.setHideGrid(false);
+                    cellContainer.setHideGrid(desktopHideGrid);
                 }
                 switch (((DragAction) event.getLocalState()).action) {
                     case ACTION:

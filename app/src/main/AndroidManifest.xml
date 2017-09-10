@@ -65,6 +65,7 @@
             android:label="@string/app_name"
             android:theme="@style/NormalActivity.Light" />
         <activity
+            android:parentActivityName=".activity.SettingsActivity"
             android:name="com.benny.openlauncher.activity.AboutActivity"
             android:label="About"
             android:theme="@style/NormalActivity.Light" />
