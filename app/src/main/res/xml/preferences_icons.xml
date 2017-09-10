@@ -5,7 +5,7 @@
 
     <PreferenceCategory android:title="@string/pref_title__size">
 
-        <com.benny.openlauncher.widget.Preference.NumberPickerPreference
+        <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="52"
             android:key="@string/pref_key__icon_size"
             android:summary="@string/pref_summary__icon_size"

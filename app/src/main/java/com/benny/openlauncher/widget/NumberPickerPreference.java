@@ -1,4 +1,4 @@
-package com.benny.openlauncher.widget.Preference;
+package com.benny.openlauncher.widget;
 
 // MIT Licensed, taken from
 // https://github.com/Alobar/AndroidPreferenceTest/blob/master/alobar-preference/src/main/java/alobar/preference/NumberPickerPreference.java

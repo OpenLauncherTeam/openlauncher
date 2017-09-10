@@ -242,6 +242,10 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getString(R.string.pref_key__theme, "0");
     }
 
+    public String getPrimaryColor() {
+        return getString(R.string.pref_key__theme, "0");
+    }
+
     // internal preferences below here
     public boolean getMinibarEnable() {
         return getBool(R.string.pref_key__minibar_enable, true);

@@ -9,6 +9,7 @@
     <color name="Light.TextColor">#616161</color>
     <color name="Light.TextColorSecondary">#9e9e9e</color>
 
+    <color name="Dark.Background">#424242</color>
     <color name="Dark.TextColor">#ffffff</color>
     <color name="Dark.TextColorSecondary">#9e9e9e</color>
 

@@ -5,14 +5,14 @@
 
     <PreferenceCategory android:title="@string/pref_title__size">
 
-        <com.benny.openlauncher.widget.Preference.NumberPickerPreference
+        <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="4"
             android:key="@string/pref_key__drawer_columns"
             android:title="@string/columns"
             app:maxValue="20"
             app:minValue="2" />
 
-        <com.benny.openlauncher.widget.Preference.NumberPickerPreference
+        <com.benny.openlauncher.widget.NumberPickerPreference
             android:defaultValue="5"
             android:key="@string/pref_key__drawer_rows"
             android:title="@string/rows"

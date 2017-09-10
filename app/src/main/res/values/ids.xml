@@ -2,7 +2,5 @@
 <resources>
     <item name="item_note" type="id"/>
     <item name="item_header_search" type="id"/>
-
     <item type="id" name="id_adapter_app_item" />
-
 </resources>
