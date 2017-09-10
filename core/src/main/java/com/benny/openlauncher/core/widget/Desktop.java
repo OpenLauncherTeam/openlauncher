@@ -199,20 +199,20 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     public boolean onDrag(View p1, DragEvent p2) {
         switch (p2.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
-                Tool.print("ACTION_DRAG_STARTED");
+                //Tool.print("ACTION_DRAG_STARTED");
                 return true;
             case DragEvent.ACTION_DRAG_ENTERED:
-                Tool.print("ACTION_DRAG_ENTERED");
+                //Tool.print("ACTION_DRAG_ENTERED");
                 return true;
             case DragEvent.ACTION_DRAG_EXITED:
-                Tool.print("ACTION_DRAG_EXITED");
+                //Tool.print("ACTION_DRAG_EXITED");
                 return true;
             case DragEvent.ACTION_DRAG_LOCATION:
-                Tool.print("ACTION_DRAG_LOCATION");
+                //Tool.print("ACTION_DRAG_LOCATION");
                 getCurrentPage().peekItemAndSwap(p2);
                 return true;
             case DragEvent.ACTION_DROP:
-                Tool.print("ACTION_DROP");
+                //Tool.print("ACTION_DROP");
                 Item item = DragDropHandler.getDraggedObject(p2);
 
                 // this statement makes sure that adding an app multiple times from the app drawer works

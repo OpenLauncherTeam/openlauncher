@@ -36,6 +36,7 @@ public class CellContainer extends ViewGroup {
     private Long down = 0L;
     private boolean animateBackground;
     private Point preCoordinate = new Point(-1, -1);
+    private Point startCoordinate = null;
     private Long peekDownTime = -1L;
     private PeekDirection peekDirection;
 
@@ -104,18 +105,23 @@ public class CellContainer extends ViewGroup {
      * @param event - the drag event that contains the current x,y position
      */
     public void peekItemAndSwap(DragEvent event) {
-        Point coordinate = touchPosToCoordinate((int) event.getX(), (int) event.getY(), 1, 1, false);
+        Point coordinate = touchPosToCoordinate((int) event.getX(), (int) event.getY(), 1, 1, false, true);
 
-        if (coordinate == null) return;
-        if (!preCoordinate.equals(coordinate)) {
-            peekDirection = getPeekDirectionFromCoordinate(preCoordinate, coordinate);
+        if (coordinate == null) {
+            return;
+        }
+        if (startCoordinate == null){
+            startCoordinate = coordinate;
+        }
+        if (!preCoordinate.equals(coordinate)){
             peekDownTime = -1L;
         }
         if (peekDownTime == -1L) {
+            peekDirection = getPeekDirectionFromCoordinate(startCoordinate, coordinate);
             peekDownTime = System.currentTimeMillis();
             preCoordinate = coordinate;
         }
-        if (!(System.currentTimeMillis() - peekDownTime > 600L)) {
+        if (!(System.currentTimeMillis() - peekDownTime > 1000L)) {
             preCoordinate = coordinate;
             return;
         }
@@ -128,7 +134,11 @@ public class CellContainer extends ViewGroup {
             return;
         occupied[targetParams.x][targetParams.y] = false;
         Point targetPoint = findFreeSpace(targetParams.x, targetParams.y, peekDirection);
-        Tool.print(targetPoint);
+
+        startCoordinate = null;
+        peekDownTime = -1L;
+        preCoordinate.set(-1,-1);
+
         onItemRearrange(new Point(targetParams.x, targetParams.y), targetPoint);
         targetParams.x = targetPoint.x;
         targetParams.y = targetPoint.y;
@@ -457,10 +467,17 @@ public class CellContainer extends ViewGroup {
         return null;
     }
 
+
     // convert a touch event to a coordinate in the cell container
     public Point touchPosToCoordinate(int mX, int mY, int xSpan, int ySpan, boolean checkAvailability) {
+        return touchPosToCoordinate(mX, mY, xSpan, ySpan, checkAvailability, false);
+    }
+
+    // convert a touch event to a coordinate in the cell container
+    public Point touchPosToCoordinate(int mX, int mY, int xSpan, int ySpan, boolean checkAvailability, boolean checkBoundary) {
         mX = mX - (xSpan - 1) * cellWidth / 2;
         mY = mY - (ySpan - 1) * cellHeight / 2;
+
         for (int x = 0; x < cellSpanH; x++) {
             for (int y = 0; y < cellSpanV; y++) {
                 Rect cell = cells[x][y];
@@ -488,6 +505,14 @@ public class CellContainer extends ViewGroup {
                                     return null;
                                 }
                             }
+                        }
+                    }
+                    if (checkBoundary) {
+                        Rect offsetCell = new Rect(cell);
+                        int dp2 = Tool.dp2px(6, getContext());
+                        offsetCell.inset(dp2, dp2);
+                        if (mY >= offsetCell.top && mY <= offsetCell.bottom && mX >= offsetCell.left && mX <= offsetCell.right) {
+                            return null;
                         }
                     }
                     return new Point(x, y);

@@ -85,6 +85,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
     public void setIconProvider(BaseIconProvider iconProvider) {
         this.iconProvider = iconProvider;
+        iconProvider.loadIconIntoIconDrawer(this, (int) iconSize, 0);
     }
 
     public String getLabel() {
