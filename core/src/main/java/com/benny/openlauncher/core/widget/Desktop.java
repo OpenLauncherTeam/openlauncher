@@ -44,8 +44,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     public boolean inEditMode;
     public int previousPage = -1;
     public int pageCount;
-    private float startPosX;
-    private float startPosY;
+
     private Home home;
     private PagerIndicator pageIndicator;
     private Point coordinate = new Point();
@@ -275,9 +274,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         CellContainer currentPage = getCurrentPage();
         switch (p2.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
-                for (CellContainer page : pages)
+                for (CellContainer page : pages) {
                     page.clearCachedOutlineBitmap();
-
+                }
                 //Tool.print("ACTION_DRAG_STARTED");
                 return true;
             case DragEvent.ACTION_DRAG_ENTERED:
@@ -296,8 +295,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 switch (state) {
                     case CurrentNotOccupied:
                         currentPage.invalidate();
-                        if (currentPage.hasCachedOutlineBitmap() || coordinate.x == -1 || coordinate.y == -1)
+                        if (currentPage.hasCachedOutlineBitmap() || coordinate.x == -1 || coordinate.y == -1) {
                             break;
+                        }
                         currentPage.projectImageOutlineAt(coordinate, DragDropHandler.cachedDragBitmap);
                         break;
                     case OutOffRange:
@@ -305,8 +305,9 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     case ItemViewNotFound:
                         break;
                     case CurrentOccupied:
-                        for (CellContainer page : pages)
+                        for (CellContainer page : pages) {
                             page.clearCachedOutlineBitmap();
+                        }
                         break;
                 }
 

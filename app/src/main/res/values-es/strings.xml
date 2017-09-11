@@ -133,10 +133,10 @@
 
     <!-- Preference Keys -->
 
-    <string name="pref_key__outer_cat_interfaces">Interfaces</string>
-    <string name="pref_key__outer_cat_inputs">Entradas</string>
-    <string name="pref_key__outer_cat_feels">Feels</string>
-    <string name="pref_key__outer_cat_others">Otros</string>
+    <string name="pref_key__interfaces">Interfaces</string>
+    <string name="pref_key__inputs">Entradas</string>
+    <string name="pref_key__feels">Feels</string>
+    <string name="pref_key__others">Otros</string>
 
     <!-- Item Labels -->
 

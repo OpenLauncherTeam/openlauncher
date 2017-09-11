@@ -252,8 +252,8 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getString(R.string.pref_key__theme, "0");
     }
 
-    public String getPrimaryColor() {
-        return getString(R.string.pref_key__theme, "0");
+    public int getPrimaryColor() {
+        return getInt(R.string.pref_key__primary_color, _context.getResources().getColor(R.color.colorPrimary));
     }
 
     // internal preferences below here

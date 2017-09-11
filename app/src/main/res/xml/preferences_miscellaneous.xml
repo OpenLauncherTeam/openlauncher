@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress AndroidElementNotAllowed -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory android:title="@string/pref_title__miscellaneous">
 
@@ -33,6 +34,13 @@
             android:key="@string/pref_key__theme"
             android:summary="@string/pref_summary__theme"
             android:title="@string/pref_title__theme" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreference
+            android:defaultValue="@color/colorPrimary"
+            android:key="@string/pref_key__primary_color"
+            android:title="@string/pref_title__primary_color"
+            app:cpv_dialogTitle="@string/pref_title__primary_color"
+            app:cpv_showAlphaSlider="true" />
 
     </PreferenceCategory>
 

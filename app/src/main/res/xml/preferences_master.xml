@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/pref_key__outer_cat_interfaces">
+    <PreferenceCategory android:title="@string/pref_key__interfaces">
 
         <Preference
             android:icon="@drawable/ic_desktop_windows_dark_24dp"
@@ -20,7 +20,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_key__outer_cat_inputs">
+    <PreferenceCategory android:title="@string/pref_key__inputs">
 
         <Preference
             android:icon="@drawable/ic_gesture_dark_24dp"
@@ -29,7 +29,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_key__outer_cat_feels">
+    <PreferenceCategory android:title="@string/pref_key__feels">
 
         <Preference
             android:icon="@drawable/ic_android_dark_24dp"
@@ -38,7 +38,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_key__outer_cat_others">
+    <PreferenceCategory android:title="@string/pref_key__others">
 
         <Preference
             android:icon="@drawable/ic_more_horiz_black_24dp"

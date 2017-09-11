@@ -114,9 +114,9 @@
 
     <!-- Preference Keys -->
 
-    <string name="pref_key__outer_cat_interfaces">Интерфейсы</string>
-    <string name="pref_key__outer_cat_inputs">Ввод</string>
-    <string name="pref_key__outer_cat_others">Другое</string>
+    <string name="pref_key__interfaces">Интерфейсы</string>
+    <string name="pref_key__inputs">Ввод</string>
+    <string name="pref_key__others">Другое</string>
 
     <!-- Internal Keys -->
 

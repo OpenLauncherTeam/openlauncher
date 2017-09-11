@@ -109,10 +109,10 @@
     <string name="pref_summary__drawer_remember_position">Pamatovat si pozici.</string>
     <string name="pref_summary__dock_swipe_up">Táhněte nahoru k otevření menu aplikací.</string>
     <string name="pref_summary__desktop_gesture_feedback">Reakce při přidržení ikony na ploše.</string>
-    <string name="pref_key__outer_cat_others">Jiné</string>
-    <string name="pref_key__outer_cat_interfaces">Rozhraní</string>
-    <string name="pref_key__outer_cat_inputs">Ovládání</string>
-    <string name="pref_key__outer_cat_feels">Chování</string>
+    <string name="pref_key__others">Jiné</string>
+    <string name="pref_key__interfaces">Rozhraní</string>
+    <string name="pref_key__inputs">Ovládání</string>
+    <string name="pref_key__feels">Chování</string>
     <string name="on">Zapnout</string>
     <string name="ok">OK</string>
     <string name="off">Vypnout</string>

@@ -138,6 +138,8 @@
     <string name="pref_summary__clear_database">Delete the data for the dock and desktop to fix issues.</string>
     <string name="pref_title__restart">Restart</string>
     <string name="pref_summary__restart">Restart the launcher in case it\'s misbehaving.</string>
+    <string name="pref_title__primary_color">Primary Color</string>
+    <string name="pref_summary__primary_color">Set the primary color for the app.</string>
 
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paged</string>
@@ -207,6 +209,7 @@
     <string name="pref_key__backup" translatable="false">pref_key__backup</string>
     <string name="pref_key__clear_database" translatable="false">pref_key__clear_database</string>
     <string name="pref_key__restart" translatable="false">pref_key__restart</string>
+    <string name="pref_key__primary_color" translatable="false">pref_key__primary_color</string>
 
     <string name="pref_key__cat_desktop" translatable="false">pref_key__cat_desktop</string>
     <string name="pref_key__cat_dock" translatable="false">pref_key__cat_dock</string>
@@ -214,12 +217,12 @@
     <string name="pref_key__cat_gestures" translatable="false">pref_key__cat_gestures</string>
     <string name="pref_key__cat_icons" translatable="false">pref_key__cat_icons</string>
     <string name="pref_key__cat_miscellaneous" translatable="false">pref_key__cat_miscellaneous</string>
-    <string name="pref_key__about" translatable="false">pref_key__about</string>
 
-    <string name="pref_key__outer_cat_interfaces">Interfaces</string>
-    <string name="pref_key__outer_cat_inputs">Inputs</string>
-    <string name="pref_key__outer_cat_feels">Feels</string>
-    <string name="pref_key__outer_cat_others">Others</string>
+    <string name="pref_key__about" translatable="false">pref_key__about</string>
+    <string name="pref_key__interfaces">Interfaces</string>
+    <string name="pref_key__inputs">Inputs</string>
+    <string name="pref_key__feels">Feels</string>
+    <string name="pref_key__others">Others</string>
 
     <!-- Internal Keys -->
 

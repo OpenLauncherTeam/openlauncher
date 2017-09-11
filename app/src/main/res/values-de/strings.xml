@@ -129,10 +129,10 @@
     <string name="pref_title__desktop_pinch">Pinch</string>
     <string name="pref_title__desktop_unpinch">Unpinch</string>
     <string name="about_credit_text_all_contributors">Alle Beitragenden</string>
-    <string name="pref_key__outer_cat_interfaces">Benutzerschnittstellen</string>
-    <string name="pref_key__outer_cat_inputs">Eingaben</string>
-    <string name="pref_key__outer_cat_feels">Erscheinungsbild</string>
-    <string name="pref_key__outer_cat_others">Anderes</string>
+    <string name="pref_key__interfaces">Benutzerschnittstellen</string>
+    <string name="pref_key__inputs">Eingaben</string>
+    <string name="pref_key__feels">Erscheinungsbild</string>
+    <string name="pref_key__others">Anderes</string>
     <string name="version">Version</string>
     <string name="vertical_scroll_drawer">Vertikaler scrollbarer Drawer</string>
     <string name="horizontal_paged_drawer">Horizontaler Drawer (Paged)</string>
