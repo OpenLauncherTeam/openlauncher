@@ -105,14 +105,14 @@
     <string name="pref_title__drawer_card_color">Vista de tarjeta</string>
     <string name="pref_title__drawer_label_color">Etiqueta</string>
 
-    <string name="pref_title__dock_swipe_up">Deslizamiento rápido del cajón</string>
-    <string name="pref_summary__dock_swipe_up">Desliza hacia arriba en el dock para abrir el cajón de aplicaciones.</string>
-    <string name="pref_title__desktop_double_tap">Doble toque</string>
-    <string name="pref_title__desktop_swipe_up">Deslizamiento hacia arriba</string>
-    <string name="pref_title__desktop_swipe_down">Deslizamiento hacia abajo</string>
-    <string name="pref_title__desktop_pinch">Pellizco</string>
-    <string name="pref_title__desktop_unpinch">Pellizco inverso</string>
-    <string name="pref_title__desktop_gesture_feedback">Reacción</string>
+    <string name="pref_title__gesture_quick_swipe">Deslizamiento rápido del cajón</string>
+    <string name="pref_summary__gesture_quick_swipe">Desliza hacia arriba en el dock para abrir el cajón de aplicaciones.</string>
+    <string name="pref_title__gesture_double_tap">Doble toque</string>
+    <string name="pref_title__gesture_swipe_up">Deslizamiento hacia arriba</string>
+    <string name="pref_title__gesture_swipe_down">Deslizamiento hacia abajo</string>
+    <string name="pref_title__gesture_pinch">Pellizco</string>
+    <string name="pref_title__gesture_unpinch">Pellizco inverso</string>
+    <string name="pref_title__gesture_feedback">Reacción</string>
 
     <string name="pref_summary__icon_size">Tamaño de los íconos de todas las aplicaciones.</string>
     <string name="pref_title__icon_pack">Paquete de íconos</string>

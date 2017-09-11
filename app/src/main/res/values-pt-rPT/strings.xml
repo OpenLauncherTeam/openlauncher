@@ -97,14 +97,14 @@
 <string name="pref_title__drawer_card_color">Cartões</string>
 <string name="pref_title__drawer_label_color">Etiqueta</string>
 
-<string name="pref_title__dock_swipe_up">Deslize a Lista Rapidamente</string>
-<string name="pref_summary__dock_swipe_up">Deslize para cima na dock para abrir a lista de aplicações.</string>
-<string name="pref_title__desktop_double_tap">Toque Duplo</string>
-<string name="pref_title__desktop_swipe_up">Deslize Para Cima</string>
-<string name="pref_title__desktop_swipe_down">Deslize Para Baixo</string>
-<string name="pref_title__desktop_pinch">Gesto de Aperto</string>
-<string name="pref_title__desktop_unpinch">Gesto Afastar</string>
-<string name="pref_title__desktop_gesture_feedback">Feedback</string>
+<string name="pref_title__gesture_quick_swipe">Deslize a Lista Rapidamente</string>
+<string name="pref_summary__gesture_quick_swipe">Deslize para cima na dock para abrir a lista de aplicações.</string>
+<string name="pref_title__gesture_double_tap">Toque Duplo</string>
+<string name="pref_title__gesture_swipe_up">Deslize Para Cima</string>
+<string name="pref_title__gesture_swipe_down">Deslize Para Baixo</string>
+<string name="pref_title__gesture_pinch">Gesto de Aperto</string>
+<string name="pref_title__gesture_unpinch">Gesto Afastar</string>
+<string name="pref_title__gesture_feedback">Feedback</string>
 
 <string name="pref_summary__icon_size">Tamanho de todos ícones das aplicações.</string>
 <string name="pref_title__icon_pack">Pacote de Ícones</string>

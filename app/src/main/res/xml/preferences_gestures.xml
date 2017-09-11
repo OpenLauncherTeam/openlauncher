@@ -4,35 +4,35 @@
 
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="@string/pref_key__desktop_gesture_feedback"
-            android:title="@string/pref_title__desktop_gesture_feedback"
-            android:summary="@string/pref_summary__desktop_gesture_feedback"/>
+            android:key="@string/pref_key__gesture_feedback"
+            android:title="@string/pref_title__gesture_feedback"
+            android:summary="@string/pref_summary__gesture_feedback"/>
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_key__dock_swipe_up"
-            android:summary="@string/pref_summary__dock_swipe_up"
-            android:title="@string/pref_title__dock_swipe_up" />
+            android:key="@string/pref_key__gesture_quick_swipe"
+            android:summary="@string/pref_summary__gesture_quick_swipe"
+            android:title="@string/pref_title__gesture_quick_swipe" />
 
         <Preference
-            android:key="@string/pref_key__desktop_double_tap"
-            android:title="@string/pref_title__desktop_double_tap" />
+            android:key="@string/pref_key__gesture_double_tap"
+            android:title="@string/pref_title__gesture_double_tap" />
 
         <Preference
-            android:key="@string/pref_key__desktop_swipe_up"
-            android:title="@string/pref_title__desktop_swipe_up" />
+            android:key="@string/pref_key__gesture_swipe_up"
+            android:title="@string/pref_title__gesture_swipe_up" />
 
         <Preference
-            android:key="@string/pref_key__desktop_swipe_down"
-            android:title="@string/pref_title__desktop_swipe_down" />
+            android:key="@string/pref_key__gesture_swipe_down"
+            android:title="@string/pref_title__gesture_swipe_down" />
 
         <Preference
-            android:key="@string/pref_key__desktop_pinch"
-            android:title="@string/pref_title__desktop_pinch" />
+            android:key="@string/pref_key__gesture_pinch"
+            android:title="@string/pref_title__gesture_pinch" />
 
         <Preference
-            android:key="@string/pref_key__desktop_unpinch"
-            android:title="@string/pref_title__desktop_unpinch" />
+            android:key="@string/pref_key__gesture_unpinch"
+            android:title="@string/pref_title__gesture_unpinch" />
 
     </PreferenceCategory>
 

@@ -92,9 +92,9 @@
     <string name="pref_title__drawer_card_color">Карточка</string>
     <string name="pref_title__drawer_label_color">Подпись</string>
 
-    <string name="pref_title__dock_swipe_up">Открывать меню жестом</string>
-    <string name="pref_summary__dock_swipe_up">Проведите пальцем вверх из дока, чтобы открыть меню приложений.</string>
-    <string name="pref_title__desktop_double_tap">Двойное нажатие</string>
+    <string name="pref_title__gesture_quick_swipe">Открывать меню жестом</string>
+    <string name="pref_summary__gesture_quick_swipe">Проведите пальцем вверх из дока, чтобы открыть меню приложений.</string>
+    <string name="pref_title__gesture_double_tap">Двойное нажатие</string>
     <string name="pref_summary__icon_size">Размер всех значков приложений.</string>
     <string name="pref_title__icon_pack">Набор значков</string>
     <string name="pref_summary__icon_pack">Выбрать установленный набор значков.</string>

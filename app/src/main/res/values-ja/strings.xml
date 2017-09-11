@@ -78,8 +78,8 @@
     <string name="pref_title__drawer_show_position_indicator">ドロワーのスクロールバー</string>
     <string name="pref_summary__drawer_show_position_indicator">ドロワーにページインジケーターを表示します。</string>
 
-    <string name="pref_title__dock_swipe_up">ドロワーの高速スワイプ</string>
-    <string name="pref_summary__dock_swipe_up">ドロワーのアプリアイコンを上にスワイプして、アプリドロワーを開きます。</string>
+    <string name="pref_title__gesture_quick_swipe">ドロワーの高速スワイプ</string>
+    <string name="pref_summary__gesture_quick_swipe">ドロワーのアプリアイコンを上にスワイプして、アプリドロワーを開きます。</string>
 
     <string name="pref_title__dock_background_color">ドック</string>
     <string name="pref_title__drawer_background_color">ドロワーの背景</string>

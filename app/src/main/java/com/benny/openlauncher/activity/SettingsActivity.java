@@ -358,8 +358,8 @@ public class SettingsActivity extends ThemeActivity{
             if (isAdded() && preference.hasKey()) {
                 String key = preference.getKey();
 
-                if (key.equals(getString(R.string.pref_key__desktop_double_tap))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper) Home.launcher.db).getGesture(0), 0, new DialogHelper.OnActionSelectedListener() {
+                if (key.equals(getString(R.string.pref_key__gesture_double_tap))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__gesture_double_tap, ((DatabaseHelper) Home.launcher.db).getGesture(0), 0, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -368,8 +368,8 @@ public class SettingsActivity extends ThemeActivity{
                     return true;
                 }
 
-                if (key.equals(getString(R.string.pref_key__desktop_swipe_up))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_swipe_up, ((DatabaseHelper) Home.launcher.db).getGesture(1), 1, new DialogHelper.OnActionSelectedListener() {
+                if (key.equals(getString(R.string.pref_key__gesture_swipe_up))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__gesture_swipe_up, ((DatabaseHelper) Home.launcher.db).getGesture(1), 1, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -378,8 +378,8 @@ public class SettingsActivity extends ThemeActivity{
                     return true;
                 }
 
-                if (key.equals(getString(R.string.pref_key__desktop_swipe_down))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_swipe_down, ((DatabaseHelper) Home.launcher.db).getGesture(2), 2, new DialogHelper.OnActionSelectedListener() {
+                if (key.equals(getString(R.string.pref_key__gesture_swipe_down))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__gesture_swipe_down, ((DatabaseHelper) Home.launcher.db).getGesture(2), 2, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -388,8 +388,8 @@ public class SettingsActivity extends ThemeActivity{
                     return true;
                 }
 
-                if (key.equals(getString(R.string.pref_key__desktop_pinch))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_pinch, ((DatabaseHelper) Home.launcher.db).getGesture(3), 3, new DialogHelper.OnActionSelectedListener() {
+                if (key.equals(getString(R.string.pref_key__gesture_pinch))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__gesture_pinch, ((DatabaseHelper) Home.launcher.db).getGesture(3), 3, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing
@@ -398,8 +398,8 @@ public class SettingsActivity extends ThemeActivity{
                     return true;
                 }
 
-                if (key.equals(getString(R.string.pref_key__desktop_unpinch))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_unpinch, ((DatabaseHelper) Home.launcher.db).getGesture(4), 4, new DialogHelper.OnActionSelectedListener() {
+                if (key.equals(getString(R.string.pref_key__gesture_unpinch))) {
+                    DialogHelper.selectActionDialog(context, R.string.pref_title__gesture_unpinch, ((DatabaseHelper) Home.launcher.db).getGesture(4), 4, new DialogHelper.OnActionSelectedListener() {
                         @Override
                         public void onActionSelected(LauncherAction.ActionItem item) {
                             // do nothing

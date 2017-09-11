@@ -105,14 +105,14 @@
     <string name="pref_title__drawer_card_color">Vista de la targeta</string>
     <string name="pref_title__drawer_label_color">Etiqueta</string>
 
-    <string name="pref_title__dock_swipe_up">Desplaçament ràpid del calaix</string>
-    <string name="pref_summary__dock_swipe_up">Llisca cap amunt en en acoblament per obrir el calaix d\'aplicacions.</string>
-    <string name="pref_title__desktop_double_tap">Fer dos tocs</string>
-    <string name="pref_title__desktop_swipe_up">Desplaçament cap amunt</string>
-    <string name="pref_title__desktop_swipe_down">Desplaçament cap avall</string>
-    <string name="pref_title__desktop_pinch">Pessigar</string>
-    <string name="pref_title__desktop_unpinch">Pessigar invers</string>
-    <string name="pref_title__desktop_gesture_feedback">Reacció</string>
+    <string name="pref_title__gesture_quick_swipe">Desplaçament ràpid del calaix</string>
+    <string name="pref_summary__gesture_quick_swipe">Llisca cap amunt en en acoblament per obrir el calaix d\'aplicacions.</string>
+    <string name="pref_title__gesture_double_tap">Fer dos tocs</string>
+    <string name="pref_title__gesture_swipe_up">Desplaçament cap amunt</string>
+    <string name="pref_title__gesture_swipe_down">Desplaçament cap avall</string>
+    <string name="pref_title__gesture_pinch">Pessigar</string>
+    <string name="pref_title__gesture_unpinch">Pessigar invers</string>
+    <string name="pref_title__gesture_feedback">Reacció</string>
 
     <string name="pref_summary__icon_size">Mida de les icones de totes les aplicacions.</string>
     <string name="pref_title__icon_pack">Tema d\'icones</string>

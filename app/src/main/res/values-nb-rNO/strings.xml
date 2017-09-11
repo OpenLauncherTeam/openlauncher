@@ -90,13 +90,13 @@
     <string name="pref_title__drawer_card_color">Kortvisning</string>
     <string name="pref_title__drawer_label_color">Etikett</string>
 
-    <string name="pref_title__dock_swipe_up">Dra skuff raskt</string>
-    <string name="pref_summary__dock_swipe_up">Dra oppover på samlevinduet for å åpne programskuffen.</string>
-    <string name="pref_title__desktop_double_tap">Dobbelttrykk</string>
-    <string name="pref_title__desktop_swipe_up">Dra oppover</string>
-    <string name="pref_title__desktop_swipe_down">Dra nedover</string>
-    <string name="pref_title__desktop_pinch">Knip</string>
-    <string name="pref_title__desktop_unpinch">Utvid knipetak</string>
+    <string name="pref_title__gesture_quick_swipe">Dra skuff raskt</string>
+    <string name="pref_summary__gesture_quick_swipe">Dra oppover på samlevinduet for å åpne programskuffen.</string>
+    <string name="pref_title__gesture_double_tap">Dobbelttrykk</string>
+    <string name="pref_title__gesture_swipe_up">Dra oppover</string>
+    <string name="pref_title__gesture_swipe_down">Dra nedover</string>
+    <string name="pref_title__gesture_pinch">Knip</string>
+    <string name="pref_title__gesture_unpinch">Utvid knipetak</string>
 
     <string name="pref_summary__icon_size">Størrelse for alle programikoner.</string>
     <string name="pref_title__icon_pack">Ikonpakke</string>

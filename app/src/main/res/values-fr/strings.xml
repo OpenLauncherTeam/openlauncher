@@ -86,13 +86,13 @@
     <string name="pref_title__drawer_card_color">Affichage carte</string>
     <string name="pref_title__drawer_label_color">Libellé</string>
 
-    <string name="pref_title__dock_swipe_up">Glisser pour ouvrir</string>
-    <string name="pref_summary__dock_swipe_up">Glisser vers le haut sur le dock pour ouvrir le tiroir.</string>
-    <string name="pref_title__desktop_double_tap">Appui double</string>
-    <string name="pref_title__desktop_swipe_up">Glisser vers le haut</string>
-    <string name="pref_title__desktop_swipe_down">Glisser vers le bas</string>
-    <string name="pref_title__desktop_pinch">Pincement</string>
-	<string name="pref_title__desktop_unpinch">Écartement</string>
+    <string name="pref_title__gesture_quick_swipe">Glisser pour ouvrir</string>
+    <string name="pref_summary__gesture_quick_swipe">Glisser vers le haut sur le dock pour ouvrir le tiroir.</string>
+    <string name="pref_title__gesture_double_tap">Appui double</string>
+    <string name="pref_title__gesture_swipe_up">Glisser vers le haut</string>
+    <string name="pref_title__gesture_swipe_down">Glisser vers le bas</string>
+    <string name="pref_title__gesture_pinch">Pincement</string>
+	<string name="pref_title__gesture_unpinch">Écartement</string>
 
     <string name="pref_summary__icon_size">Taille de tous les icônes d\'applis.</string>
     <string name="pref_title__icon_pack">Pack d\'icônes</string>

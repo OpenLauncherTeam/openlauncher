@@ -72,8 +72,8 @@
     <string name="pref_title__drawer_show_position_indicator">Seitenindikator/Scrollbar</string>
     <string name="pref_summary__drawer_show_position_indicator">Zeige den Seitenindikator bzw. die Scrollbar im Drawer an.</string>
 
-    <string name="pref_title__dock_swipe_up">Drawer: Wischen</string>
-    <string name="pref_summary__dock_swipe_up">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
+    <string name="pref_title__gesture_quick_swipe">Drawer: Wischen</string>
+    <string name="pref_summary__gesture_quick_swipe">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
 
     <string name="pref_title__dock_background_color">Dock Hintergundfarbe</string>
     <string name="pref_title__drawer_background_color">Drawer Hintergrund</string>
@@ -123,11 +123,11 @@
     <string name="rows">Zeilen</string>
     <string name="pref_summary__drawer_remember_position">Die aktuelle Position im App Drawer merken</string>
     <string name="pref_summary__clear_database">Die Daten von Desktop und Dock zurücksetzen um Probleme zu beheben</string>
-    <string name="pref_title__desktop_double_tap">Doppelt antippen</string>
-    <string name="pref_title__desktop_swipe_up">Swipe nach oben</string>
-    <string name="pref_title__desktop_swipe_down">Swipe nach unten</string>
-    <string name="pref_title__desktop_pinch">Pinch</string>
-    <string name="pref_title__desktop_unpinch">Unpinch</string>
+    <string name="pref_title__gesture_double_tap">Doppelt antippen</string>
+    <string name="pref_title__gesture_swipe_up">Swipe nach oben</string>
+    <string name="pref_title__gesture_swipe_down">Swipe nach unten</string>
+    <string name="pref_title__gesture_pinch">Pinch</string>
+    <string name="pref_title__gesture_unpinch">Unpinch</string>
     <string name="about_credit_text_all_contributors">Alle Beitragenden</string>
     <string name="pref_key__interfaces">Benutzerschnittstellen</string>
     <string name="pref_key__inputs">Eingaben</string>

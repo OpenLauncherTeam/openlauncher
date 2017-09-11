@@ -215,11 +215,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     public boolean getGestureDockSwipeUp() {
-        return getBool(R.string.pref_key__dock_swipe_up, true);
+        return getBool(R.string.pref_key__gesture_quick_swipe, true);
     }
 
     public boolean isGestureFeedback() {
-        return getBool(R.string.pref_key__desktop_gesture_feedback, false);
+        return getBool(R.string.pref_key__gesture_feedback, false);
     }
 
     @Override
