@@ -2,6 +2,7 @@ package com.benny.openlauncher.core.widget;
 
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -34,6 +35,8 @@ import java.util.List;
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 
 public class Desktop extends SmoothViewPager implements OnDragListener, DesktopCallBack {
+    public static int topInset;
+    public static int bottomInset;
     public List<CellContainer> pages = new ArrayList<>();
     public OnDesktopEditListener desktopEditListener;
     public View previousItemView;
@@ -41,14 +44,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     public boolean inEditMode;
     public int previousPage = -1;
     public int pageCount;
-
     private float startPosX;
     private float startPosY;
     private Home home;
     private PagerIndicator pageIndicator;
-
-    public static int topInset;
-    public static int bottomInset;
+    private Point coordinate = new Point();
 
     public Desktop(Context c) {
         this(c, null);
@@ -56,6 +56,79 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     public Desktop(Context c, AttributeSet attr) {
         super(c, attr);
+    }
+
+    public static Item getItemFromCoordinate(Point point, int page) {
+        List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
+        List<Item> pageData = desktopItems.get(page);
+        for (int i = 0; i < pageData.size(); i++) {
+            Item item = pageData.get(i);
+            if (item.getX() == point.x && item.getY() == point.y && item.getSpanX() == 1 && item.getSpanY() == 1) {
+                return pageData.get(i);
+            }
+        }
+        return null;
+    }
+
+    public static boolean handleOnDropOver(Home home, Item dropItem, Item item, View itemView, ViewGroup parent, int page, Definitions.ItemPosition itemPosition, DesktopCallBack callback) {
+        if (item == null || dropItem == null) {
+            return false;
+        }
+
+        switch (item.getType()) {
+            case APP:
+            case SHORTCUT:
+                if (dropItem.getType() == Item.Type.APP || dropItem.getType() == Item.Type.SHORTCUT) {
+                    parent.removeView(itemView);
+
+                    // create a new group item
+                    Item group = Item.newGroupItem();
+                    group.getGroupItems().add(item);
+                    group.getGroupItems().add(dropItem);
+                    group.setX(item.getX());
+                    group.setY(item.getY());
+
+                    // add the drop item just in case it is coming from the app drawer
+                    home.db.saveItem(dropItem, page, itemPosition);
+
+                    // hide the apps added to the group
+                    home.db.updateState(item, Definitions.ItemState.Hidden);
+                    home.db.updateState(dropItem, Definitions.ItemState.Hidden);
+
+                    // add the item to the database
+                    home.db.saveItem(group, page, itemPosition);
+
+                    callback.addItemToPage(group, page);
+
+                    home.desktop.consumeRevert();
+                    home.dock.consumeRevert();
+                    return true;
+                }
+                break;
+            case GROUP:
+                if ((dropItem.getType() == Item.Type.APP || dropItem.getType() == Item.Type.SHORTCUT) && item.getGroupItems().size() < GroupPopupView.GroupDef.maxItem) {
+                    parent.removeView(itemView);
+
+                    item.getGroupItems().add(dropItem);
+
+                    // add the drop item just in case it is coming from the app drawer
+                    home.db.saveItem(dropItem, page, itemPosition);
+
+                    // hide the new app in the group
+                    home.db.updateState(dropItem, Definitions.ItemState.Hidden);
+
+                    // add the item to the database
+                    home.db.saveItem(item, page, itemPosition);
+
+                    callback.addItemToPage(item, page);
+
+                    home.desktop.consumeRevert();
+                    home.dock.consumeRevert();
+                    return true;
+                }
+                break;
+        }
+        return false;
     }
 
     public void setDesktopEditListener(OnDesktopEditListener desktopEditListener) {
@@ -199,21 +272,49 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     @Override
     public boolean onDrag(View p1, DragEvent p2) {
+        CellContainer currentPage = getCurrentPage();
         switch (p2.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
+                for (CellContainer page : pages)
+                    page.clearCachedOutlineBitmap();
+
                 //Tool.print("ACTION_DRAG_STARTED");
                 return true;
             case DragEvent.ACTION_DRAG_ENTERED:
                 //Tool.print("ACTION_DRAG_ENTERED");
                 return true;
             case DragEvent.ACTION_DRAG_EXITED:
+                for (CellContainer page : pages)
+                    page.clearCachedOutlineBitmap();
                 //Tool.print("ACTION_DRAG_EXITED");
                 return true;
             case DragEvent.ACTION_DRAG_LOCATION:
                 //Tool.print("ACTION_DRAG_LOCATION");
-                getCurrentPage().peekItemAndSwap(p2);
+                CellContainer.DragState state = currentPage.peekItemAndSwap(p2, coordinate);
+                if (state == null) return true;
+
+                switch (state) {
+                    case CurrentNotOccupied:
+                        currentPage.invalidate();
+                        if (currentPage.hasCachedOutlineBitmap() || coordinate.x == -1 || coordinate.y == -1)
+                            break;
+                        currentPage.projectImageOutlineAt(coordinate, DragDropHandler.cachedDragBitmap);
+                        break;
+                    case OutOffRange:
+                        break;
+                    case ItemViewNotFound:
+                        break;
+                    case CurrentOccupied:
+                        for (CellContainer page : pages)
+                            page.clearCachedOutlineBitmap();
+                        break;
+                }
+
                 return true;
             case DragEvent.ACTION_DROP:
+                for (CellContainer page : pages)
+                    page.clearCachedOutlineBitmap();
+
                 //Tool.print("ACTION_DROP");
                 Item item = DragDropHandler.getDraggedObject(p2);
 
@@ -230,9 +331,10 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     // add the item to the database
                     home.db.saveItem(item, getCurrentItem(), Definitions.ItemPosition.Desktop);
                 } else {
-                    Point pos = getCurrentPage().touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.getSpanX(), item.getSpanY(), false);
-                    View itemView = getCurrentPage().coordinateToChildView(pos);
-                    if (itemView != null && Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, getCurrentPage(), getCurrentItem(), Definitions.ItemPosition.Desktop, this)) {
+                    Point pos = new Point();
+                    currentPage.touchPosToCoordinate(pos, (int) p2.getX(), (int) p2.getY(), item.getSpanX(), item.getSpanY(), false);
+                    View itemView = currentPage.coordinateToChildView(pos);
+                    if (itemView != null && Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, currentPage, getCurrentItem(), Definitions.ItemPosition.Desktop, this)) {
                         home.desktop.consumeRevert();
                         home.dock.consumeRevert();
                     } else {
@@ -246,6 +348,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 Tool.print("ACTION_DRAG_ENDED");
                 return true;
         }
+
+        currentPage.invalidate();
         return false;
     }
 
@@ -294,6 +398,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             home.db.deleteItem(item, true);
             return false;
         } else {
+            item.locationInLauncher = Item.LOCATION_DESKTOP;
             pages.get(page).addViewToGrid(itemView, item.getX(), item.getY(), item.getSpanX(), item.getSpanY());
             return true;
         }
@@ -303,6 +408,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     public boolean addItemToPoint(final Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().coordinateToLayoutParams(x, y, item.getSpanX(), item.getSpanY());
         if (positionToLayoutPrams != null) {
+            item.locationInLauncher = Item.LOCATION_DESKTOP;
+
             item.setX(positionToLayoutPrams.x);
             item.setY(positionToLayoutPrams.y);
 
@@ -320,6 +427,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     @Override
     public boolean addItemToCell(final Item item, int x, int y) {
+        item.locationInLauncher = Item.LOCATION_DESKTOP;
+
         item.setX(x);
         item.setY(y);
 
@@ -347,11 +456,32 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         super.onPageScrolled(position, offset, offsetPixels);
     }
 
+    @Override
+    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            topInset = insets.getSystemWindowInsetTop();
+            bottomInset = insets.getSystemWindowInsetBottom();
+            Home.launcher.updateHomeLayout();
+        }
+        return insets;
+    }
+
+    public interface OnDesktopEditListener {
+        void onDesktopEdit();
+
+        void onFinishDesktopEdit();
+    }
+
+    public static class DesktopMode {
+        public static final int NORMAL = 0;
+        public static final int SHOW_ALL_APPS = 1;
+    }
+
     public class DesktopAdapter extends SmoothPagerAdapter {
-        private MotionEvent currentEvent;
-        private Desktop desktop;
         float scaleFactor = 1.0f;
         float translateFactor = 0.0f;
+        private MotionEvent currentEvent;
+        private Desktop desktop;
 
         public DesktopAdapter(Desktop desktop) {
             this.desktop = desktop;
@@ -465,7 +595,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         public void enterDesktopEditMode() {
             scaleFactor = 0.8f;
-            translateFactor = Tool.dp2px(40, getContext());
+            translateFactor = Tool.dp2px(Setup.appSettings().getSearchBarEnable() ? 20 : 40, getContext());
             for (CellContainer v : desktop.pages) {
                 v.blockTouch = true;
                 v.animateBackgroundShow();
@@ -490,99 +620,5 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 desktop.desktopEditListener.onFinishDesktopEdit();
             }
         }
-    }
-
-    @Override
-    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            topInset = insets.getSystemWindowInsetTop();
-            bottomInset = insets.getSystemWindowInsetBottom();
-            Home.launcher.updateHomeLayout();
-        }
-        return insets;
-    }
-
-    public static Item getItemFromCoordinate(Point point, int page) {
-        List<List<Item>> desktopItems = Home.launcher.db.getDesktop();
-        List<Item> pageData = desktopItems.get(page);
-        for (int i = 0; i < pageData.size(); i++) {
-            Item item = pageData.get(i);
-            if (item.getX() == point.x && item.getY() == point.y && item.getSpanX() == 1 && item.getSpanY() == 1) {
-                return pageData.get(i);
-            }
-        }
-        return null;
-    }
-
-    public static boolean handleOnDropOver(Home home, Item dropItem, Item item, View itemView, ViewGroup parent, int page, Definitions.ItemPosition itemPosition, DesktopCallBack callback) {
-        if (item == null || dropItem == null) {
-            return false;
-        }
-
-        switch (item.getType()) {
-            case APP:
-            case SHORTCUT:
-                if (dropItem.getType() == Item.Type.APP || dropItem.getType() == Item.Type.SHORTCUT) {
-                    parent.removeView(itemView);
-
-                    // create a new group item
-                    Item group = Item.newGroupItem();
-                    group.getGroupItems().add(item);
-                    group.getGroupItems().add(dropItem);
-                    group.setX(item.getX());
-                    group.setY(item.getY());
-
-                    // add the drop item just in case it is coming from the app drawer
-                    home.db.saveItem(dropItem, page, itemPosition);
-
-                    // hide the apps added to the group
-                    home.db.updateState(item, Definitions.ItemState.Hidden);
-                    home.db.updateState(dropItem, Definitions.ItemState.Hidden);
-
-                    // add the item to the database
-                    home.db.saveItem(group, page, itemPosition);
-
-                    callback.addItemToPage(group, page);
-
-                    home.desktop.consumeRevert();
-                    home.dock.consumeRevert();
-                    return true;
-                }
-                break;
-            case GROUP:
-                if ((dropItem.getType() == Item.Type.APP || dropItem.getType() == Item.Type.SHORTCUT) && item.getGroupItems().size() < GroupPopupView.GroupDef.maxItem) {
-                    parent.removeView(itemView);
-
-                    item.getGroupItems().add(dropItem);
-
-                    // add the drop item just in case it is coming from the app drawer
-                    home.db.saveItem(dropItem, page, itemPosition);
-
-                    // hide the new app in the group
-                    home.db.updateState(dropItem, Definitions.ItemState.Hidden);
-
-                    // add the item to the database
-                    home.db.saveItem(item, page, itemPosition);
-
-                    callback.addItemToPage(item, page);
-
-                    home.desktop.consumeRevert();
-                    home.dock.consumeRevert();
-                    return true;
-                }
-                break;
-        }
-        return false;
-    }
-
-    public static class DesktopMode {
-        public static final int NORMAL = 0;
-        public static final int SHOW_ALL_APPS = 1;
-    }
-
-    public interface OnDesktopEditListener {
-        void onDesktopEdit();
-
-        void onFinishDesktopEdit();
     }
 }

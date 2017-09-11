@@ -29,6 +29,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     public Item previousItem;
     private float startPosX, startPosY;
     private Home home;
+    private Point coordinate = new Point();
 
     public Dock(Context c) {
         this(c, null);
@@ -101,15 +102,39 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     public boolean onDrag(View p1, DragEvent p2) {
         switch (p2.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
+                clearCachedOutlineBitmap();
                 if (((DragAction) p2.getLocalState()).action == DragAction.Action.WIDGET) {
                     return false;
+                }
+                return true;
+            case DragEvent.ACTION_DRAG_LOCATION:
+                CellContainer.DragState state = peekItemAndSwap(p2, coordinate);
+                if (state == null) return true;
+
+                switch (state) {
+                    case CurrentNotOccupied:
+                        invalidate();
+                        if (hasCachedOutlineBitmap() || coordinate.x == -1 || coordinate.y == -1)
+                            break;
+                        projectImageOutlineAt(coordinate, DragDropHandler.cachedDragBitmap);
+                        break;
+                    case OutOffRange:
+                        break;
+                    case ItemViewNotFound:
+                        break;
+                    case CurrentOccupied:
+                        clearCachedOutlineBitmap();
+                        break;
                 }
                 return true;
             case DragEvent.ACTION_DRAG_ENTERED:
                 return true;
             case DragEvent.ACTION_DRAG_EXITED:
+                clearCachedOutlineBitmap();
                 return true;
             case DragEvent.ACTION_DROP:
+                clearCachedOutlineBitmap();
+
                 Item item = DragDropHandler.getDraggedObject(p2);
 
                 // this statement makes sure that adding an app multiple times from the app drawer works
@@ -125,7 +150,8 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                     // add the item to the database
                     home.db.saveItem(item, 0, Definitions.ItemPosition.Dock);
                 } else {
-                    Point pos = touchPosToCoordinate((int) p2.getX(), (int) p2.getY(), item.getSpanX(), item.getSpanY(), false);
+                    Point pos = new Point();
+                    touchPosToCoordinate(pos, (int) p2.getX(), (int) p2.getY(), item.getSpanX(), item.getSpanY(), false);
                     View itemView = coordinateToChildView(pos);
                     if (itemView != null) {
                         if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, this, 0, Definitions.ItemPosition.Dock, this)) {
@@ -146,6 +172,8 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             case DragEvent.ACTION_DRAG_ENDED:
                 return true;
         }
+
+        invalidate();
         return false;
     }
 
@@ -209,6 +237,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             home.db.deleteItem(item, true);
             return false;
         } else {
+            item.locationInLauncher = Item.LOCATION_DOCK;
             addViewToGrid(itemView, item.getX(), item.getY(), item.getSpanX(), item.getSpanY());
             return true;
         }
@@ -218,6 +247,8 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     public boolean addItemToPoint(final Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = coordinateToLayoutParams(x, y, item.getSpanX(), item.getSpanY());
         if (positionToLayoutPrams != null) {
+            item.locationInLauncher = Item.LOCATION_DOCK;
+
             item.setX(positionToLayoutPrams.x);
             item.setY(positionToLayoutPrams.y);
 
@@ -235,6 +266,8 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public boolean addItemToCell(final Item item, int x, int y) {
+        item.locationInLauncher = Item.LOCATION_DOCK;
+
         item.setX(x);
         item.setY(y);
 

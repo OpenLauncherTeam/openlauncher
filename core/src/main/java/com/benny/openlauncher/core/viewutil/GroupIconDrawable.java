@@ -54,6 +54,16 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         }
     }
 
+    @Override
+    public int getIntrinsicHeight() {
+        return (int) iconSize;
+    }
+
+    @Override
+    public int getIntrinsicWidth() {
+        return (int) iconSize;
+    }
+
     private void init(Drawable[] icons, float size) {
         this.icons = icons;
         this.iconSize = size;

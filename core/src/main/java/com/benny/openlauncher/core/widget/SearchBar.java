@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,60 +49,17 @@ import java.util.Locale;
 
 public class SearchBar extends FrameLayout {
 
-    private CircleDrawable icon;
-
-    public enum Mode {
-        DateAll(1, new SimpleDateFormat("MMMM dd'\n'EEEE',' yyyy", Locale.getDefault())),
-        DateNoYearAndTime(2, new SimpleDateFormat("MMMM dd'\n'HH':'mm", Locale.getDefault())),
-        DateAllAndTime(3, new SimpleDateFormat("MMMM dd',' yyyy'\n'HH':'mm", Locale.getDefault())),
-        TimeAndDateAll(4, new SimpleDateFormat("HH':'mm'\n'MMMM dd',' yyyy", Locale.getDefault())),
-        Custom(0, null);
-
-        SimpleDateFormat sdf;
-        int id;
-
-        public static Mode getById(int id) {
-            for (int i = 0; i < values().length; i++) {
-                if (values()[i].getId() == id)
-                    return values()[i];
-            }
-            throw new RuntimeException("ID not found!");
-        }
-
-        public static Mode getByIndex(int index) {
-            return values()[index];
-        }
-
-        public static int getIndex(int id) {
-            for (int i = 0; i < values().length; i++) {
-                if (values()[i].getId() == id) {
-                    return i;
-                }
-            }
-            throw new RuntimeException("ID not found!");
-        }
-
-        Mode(int id, SimpleDateFormat sdf) {
-            this.id = id;
-            this.sdf = sdf;
-        }
-
-        public int getId() {
-            return id;
-        }
-    }
-
+    private static final long ANIM_TIME = 200;
     public TextView searchClock;
     public AppCompatImageView switchButton;
     public AppCompatImageView searchButton;
     public AppCompatEditText searchInput;
     public RecyclerView searchRecycler;
-
-    private static final long ANIM_TIME = 200;
+    private CircleDrawable icon;
+    private CardView searchCardContainer;
     private FastItemAdapter<FastItem.LabelItem> adapter = new FastItemAdapter<>();
     private CallBack callback;
     private boolean expanded;
-
     private boolean searchInternetEnabled = true;
     private Mode mode = Mode.DateAll;
     private int searchClockTextSize = 28;
@@ -160,9 +118,9 @@ public class SearchBar extends FrameLayout {
     private void init() {
         int dp1 = Tool.dp2px(1, getContext());
         int iconMarginOutside = dp1 * 16;
-        int iconMarginTop = dp1 * 10;
+        int iconMarginTop = dp1 * 13;
         int searchTextHorizontalMargin = dp1 * 8;
-        int searchTextMarginTop = dp1 * 8;
+        int searchTextMarginTop = dp1 * 4;
         int iconSize = dp1 * 24;
         int iconPadding = dp1 * 6; // CircleDrawable uses 6dp as well!!
 
@@ -173,24 +131,24 @@ public class SearchBar extends FrameLayout {
         clockParams.gravity = Gravity.START;
 
         LayoutParams switchButtonParams = null;
-        if (!isInEditMode() && Setup.appSettings().isSearchGridListSwitchEnabled()) {
-            switchButton = new AppCompatImageView(getContext());
-            updateSwitchIcon();
-            switchButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Setup.appSettings().setSearchUseGrid(!Setup.appSettings().isSearchUseGrid());
-                    updateSwitchIcon();
-                    updateRecyclerViewLayoutManager();
-                }
-            });
-            switchButton.setVisibility(View.GONE);
-            switchButton.setPadding(0, iconPadding, 0, iconPadding);
+        // && Setup.appSettings().isSearchGridListSwitchEnabled()
 
-            switchButtonParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            switchButtonParams.setMargins(iconMarginOutside, iconMarginTop, 0, 0);
-            switchButtonParams.gravity = Gravity.START;
-        }
+        switchButton = new AppCompatImageView(getContext());
+        updateSwitchIcon();
+        switchButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Setup.appSettings().setSearchUseGrid(!Setup.appSettings().isSearchUseGrid());
+                updateSwitchIcon();
+                updateRecyclerViewLayoutManager();
+            }
+        });
+        switchButton.setVisibility(View.GONE);
+        switchButton.setPadding(0, iconPadding, 0, iconPadding);
+
+        switchButtonParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        switchButtonParams.setMargins(iconMarginOutside / 2, 0, 0, 0);
+        switchButtonParams.gravity = Gravity.START | Gravity.CENTER_VERTICAL;
 
         if (isInEditMode()) return;
         icon = new CircleDrawable(getContext(), getResources().getDrawable(R.drawable.ic_search_light_24dp), Color.BLACK);
@@ -215,8 +173,14 @@ public class SearchBar extends FrameLayout {
         buttonParams.setMargins(0, iconMarginTop, iconMarginOutside, 0);
         buttonParams.gravity = Gravity.END;
 
+        searchCardContainer = new CardView(getContext());
+        searchCardContainer.setCardBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        searchCardContainer.setVisibility(View.GONE);
+        searchCardContainer.setRadius(0);
+        searchCardContainer.setCardElevation(0);
+        searchCardContainer.setContentPadding(dp1 * 4, dp1 * 4, dp1 * 4, dp1 * 4);
+
         searchInput = new AppCompatEditText(getContext());
-        searchInput.setVisibility(View.GONE);
         searchInput.setBackground(null);
         searchInput.setHint(R.string.search_hint);
         searchInput.setHintTextColor(Color.WHITE);
@@ -236,12 +200,18 @@ public class SearchBar extends FrameLayout {
             public void afterTextChanged(Editable s) {
             }
         });
+        LayoutParams inputCardParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        //(switchButton != null ? iconMarginOutside + iconSize : 0) + searchTextHorizontalMargin
+        //iconMarginOutside + iconSize + searchTextHorizontalMargin
+        inputCardParams.setMargins(0, searchTextMarginTop, 0, 0);
+
         LayoutParams inputParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        inputParams.setMargins(
-                (switchButton != null ? iconMarginOutside + iconSize : 0) + searchTextHorizontalMargin,
-                searchTextMarginTop,
-                iconMarginOutside + iconSize + searchTextHorizontalMargin,
-                0);
+        inputParams.setMargins(iconMarginOutside + iconSize, 0, 0, 0);
+
+
+        searchCardContainer.addView(switchButton, switchButtonParams);
+        searchCardContainer.addView(searchInput, inputParams);
+
         initRecyclerView();
 
         Setup.appLoader().addUpdateListener(new AppUpdateListener<App>() {
@@ -267,6 +237,7 @@ public class SearchBar extends FrameLayout {
                 }
                 for (int i = 0; i < apps.size(); i++) {
                     final App app = apps.get(i);
+                    final int finalI = i;
                     items.add(new IconLabelItem(getContext(), app.getIconProvider(), app.getLabel(), 36)
                             .withIconGravity(Setup.appSettings().getSearchGridSize() > 1 && Setup.appSettings().getSearchLabelLines() == 0 ? Gravity.TOP : Gravity.START)
                             .withOnClickListener(new OnClickListener() {
@@ -278,6 +249,8 @@ public class SearchBar extends FrameLayout {
                             .withOnLongClickListener(AppItemView.Builder.getLongClickDragAppListener(Item.newAppItem(app), DragAction.Action.APP, new AppItemView.LongPressCallBack() {
                                 @Override
                                 public boolean readyForDrag(View view) {
+                                    if (finalI == 0) return false;
+
                                     expanded = !expanded;
                                     collapseInternal();
                                     return true;
@@ -316,17 +289,14 @@ public class SearchBar extends FrameLayout {
 
         addView(searchClock, clockParams);
         addView(searchRecycler, recyclerParams);
-        addView(searchInput, inputParams);
+        addView(searchCardContainer, inputCardParams);
         addView(searchButton, buttonParams);
-        if (switchButton != null) {
-            addView(switchButton, switchButtonParams);
-        }
 
         searchInput.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int marginTop = Tool.dp2px(50, getContext()) + searchInput.getHeight();
+                int marginTop = Tool.dp2px(56, getContext()) + searchInput.getHeight();
                 int marginBottom = Desktop.bottomInset;
                 recyclerParams.setMargins(0, marginTop, 0, marginBottom);
                 recyclerParams.height = ((View) getParent()).getHeight() - marginTop - marginBottom / 2;
@@ -342,7 +312,7 @@ public class SearchBar extends FrameLayout {
         }
         icon.setIcon(getResources().getDrawable(R.drawable.ic_search_light_24dp));
         Tool.visibleViews(ANIM_TIME, searchClock);
-        Tool.goneViews(ANIM_TIME, searchInput, searchRecycler, switchButton);
+        Tool.goneViews(ANIM_TIME, searchCardContainer, searchRecycler, switchButton);
         searchInput.getText().clear();
     }
 
@@ -359,7 +329,7 @@ public class SearchBar extends FrameLayout {
             }
         }
         icon.setIcon(getResources().getDrawable(R.drawable.ic_clear_white_24dp));
-        Tool.visibleViews(ANIM_TIME, searchInput, searchRecycler, switchButton);
+        Tool.visibleViews(ANIM_TIME, searchCardContainer, searchRecycler, switchButton);
         Tool.goneViews(ANIM_TIME, searchClock);
     }
 
@@ -416,6 +386,47 @@ public class SearchBar extends FrameLayout {
             //searchRecycler.setPadding(searchRecycler.getPaddingLeft(), searchRecycler.getPaddingTop(), searchRecycler.getPaddingRight(), searchRecycler.getPaddingBottom() + insets.getSystemWindowInsetBottom());
         }
         return insets;
+    }
+
+    public enum Mode {
+        DateAll(1, new SimpleDateFormat("MMMM dd'\n'EEEE',' yyyy", Locale.getDefault())),
+        DateNoYearAndTime(2, new SimpleDateFormat("MMMM dd'\n'HH':'mm", Locale.getDefault())),
+        DateAllAndTime(3, new SimpleDateFormat("MMMM dd',' yyyy'\n'HH':'mm", Locale.getDefault())),
+        TimeAndDateAll(4, new SimpleDateFormat("HH':'mm'\n'MMMM dd',' yyyy", Locale.getDefault())),
+        Custom(0, null);
+
+        SimpleDateFormat sdf;
+        int id;
+
+        Mode(int id, SimpleDateFormat sdf) {
+            this.id = id;
+            this.sdf = sdf;
+        }
+
+        public static Mode getById(int id) {
+            for (int i = 0; i < values().length; i++) {
+                if (values()[i].getId() == id)
+                    return values()[i];
+            }
+            throw new RuntimeException("ID not found!");
+        }
+
+        public static Mode getByIndex(int index) {
+            return values()[index];
+        }
+
+        public static int getIndex(int id) {
+            for (int i = 0; i < values().length; i++) {
+                if (values()[i].getId() == id) {
+                    return i;
+                }
+            }
+            throw new RuntimeException("ID not found!");
+        }
+
+        public int getId() {
+            return id;
+        }
     }
 
     public interface CallBack {

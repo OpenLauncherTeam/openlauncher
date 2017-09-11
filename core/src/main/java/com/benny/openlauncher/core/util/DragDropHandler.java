@@ -2,6 +2,7 @@ package com.benny.openlauncher.core.util;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -18,10 +19,14 @@ public class DragDropHandler {
     private static final String DRAG_DROP_EXTRA = "DRAG_DROP_EXTRA";
     private static final String DRAG_DROP_INTENT = "DRAG_DROP_INTENT";
 
+    public static Bitmap cachedDragBitmap;
+
     public static <T extends Parcelable> void startDrag(View v, T item, DragAction.Action action, @Nullable final AppItemView.LongPressCallBack eventAction) {
         Intent i = new Intent();
         i.putExtra(DRAG_DROP_EXTRA, item);
         ClipData data = ClipData.newIntent(DRAG_DROP_INTENT, i);
+
+        cachedDragBitmap = v.getDrawingCache();
 
         try {
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -30,12 +35,12 @@ public class DragDropHandler {
                 //noinspection deprecation
                 v.startDrag(data, new GoodDragShadowBuilder(v), new DragAction(action), 0);
             }
-
-            if (eventAction != null) {
-                eventAction.afterDrag(v);
-            }
         } catch (IllegalStateException e) {
             e.printStackTrace();
+        }
+
+        if (eventAction != null) {
+            eventAction.afterDrag(v);
         }
     }
 

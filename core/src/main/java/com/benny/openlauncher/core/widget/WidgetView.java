@@ -96,7 +96,7 @@ public class WidgetView extends AppWidgetHostView {
     }
 
     private boolean onLongPress() {
-        return longClick.onLongClick(WidgetView.this);
+        return longClick.onLongClick(this);
     }
 
     @Override

@@ -29,12 +29,12 @@ import io.codetail.widget.RevealFrameLayout;
 
 public class GroupPopupView extends RevealFrameLayout {
 
+    private static final Long folderAnimationTime = 200L;
     private boolean isShowing;
     private CardView popupCard;
     private CellContainer cellContainer;
     private PopupWindow.OnDismissListener dismissListener;
     private Animator folderAnimator;
-    private static final Long folderAnimationTime = 200L;
     private int cx;
     private int cy;
 
@@ -179,7 +179,9 @@ public class GroupPopupView extends RevealFrameLayout {
         if (coordinates[0] + popupWidth > width) {
             int v = width - (coordinates[0] + popupWidth);
             coordinates[0] += v;
+            coordinates[0] -= contentPadding;
             cx -= v;
+            cx += contentPadding;
         }
         if (coordinates[1] + popupHeight > height) {
             coordinates[1] += height - (coordinates[1] + popupHeight);
@@ -187,12 +189,19 @@ public class GroupPopupView extends RevealFrameLayout {
         if (coordinates[0] < 0) {
             coordinates[0] -= itemView.getWidth() / 2;
             coordinates[0] += popupWidth / 2;
+            coordinates[0] += contentPadding;
             cx += itemView.getWidth() / 2;
             cx -= popupWidth / 2;
+            cx -= contentPadding;
         }
         if (coordinates[1] < 0) {
             coordinates[1] -= itemView.getHeight() / 2;
             coordinates[1] += popupHeight / 2;
+        }
+
+        if (item.locationInLauncher == Item.LOCATION_DOCK) {
+            coordinates[1] -= iconSize;
+            cy += iconSize + (Setup.appSettings().isDockShowLabel() ? 0 : textSize);
         }
 
         int x = coordinates[0];
@@ -217,6 +226,7 @@ public class GroupPopupView extends RevealFrameLayout {
         int startRadius = Tool.dp2px(Setup.appSettings().getDesktopIconSize() / 2, getContext());
 
         folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, startRadius, finalRadius);
+        folderAnimator.setStartDelay(0);
         folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         folderAnimator.setDuration(folderAnimationTime);
         folderAnimator.start();

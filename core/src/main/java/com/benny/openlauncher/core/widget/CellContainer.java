@@ -1,6 +1,7 @@
 package com.benny.openlauncher.core.widget;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -32,6 +33,7 @@ public class CellContainer extends ViewGroup {
     private Rect[][] cells;
     private Paint mPaint;
     private Paint bgPaint;
+    private Paint outlinePaint;
     private boolean hideGrid = true;
     private Long down = 0L;
     private boolean animateBackground;
@@ -39,6 +41,8 @@ public class CellContainer extends ViewGroup {
     private Point startCoordinate = null;
     private Long peekDownTime = -1L;
     private PeekDirection peekDirection;
+    private Bitmap cachedOutlineBitmap;
+    private Point outlineCoordinate;
 
     public CellContainer(Context c) {
         super(c);
@@ -94,6 +98,29 @@ public class CellContainer extends ViewGroup {
         return null;
     }
 
+    public void projectImageOutlineAt(Point coordinate, Bitmap bitmap) {
+        if (cachedOutlineBitmap == null)
+            cachedOutlineBitmap = bitmap;
+        if (outlineCoordinate == null)
+            outlineCoordinate = coordinate;
+
+        invalidate();
+    }
+
+    public boolean hasCachedOutlineBitmap() {
+        return cachedOutlineBitmap != null;
+    }
+
+    private void drawCachedOutlineBitmap(Canvas canvas, Rect cell) {
+        canvas.drawBitmap(cachedOutlineBitmap, cell.centerX() - cachedOutlineBitmap.getWidth() / 2, cell.centerY() - cachedOutlineBitmap.getHeight() / 2, outlinePaint);
+    }
+
+    public void clearCachedOutlineBitmap() {
+        cachedOutlineBitmap = null;
+        outlineCoordinate = null;
+        invalidate();
+    }
+
     /**
      * Test whether a moved Item is being moved over an existing Item and if so move the
      * existing Item out of the way. <P>
@@ -104,16 +131,17 @@ public class CellContainer extends ViewGroup {
      *
      * @param event - the drag event that contains the current x,y position
      */
-    public void peekItemAndSwap(DragEvent event) {
-        Point coordinate = touchPosToCoordinate((int) event.getX(), (int) event.getY(), 1, 1, false, true);
+    public DragState peekItemAndSwap(DragEvent event, Point coordinate) {
+        touchPosToCoordinate(coordinate, (int) event.getX(), (int) event.getY(), 1, 1, false, true);
 
-        if (coordinate == null) {
-            return;
+        if (coordinate.x == -1 || coordinate.y == -1) {
+            return DragState.OutOffRange;
         }
-        if (startCoordinate == null){
+
+        if (startCoordinate == null) {
             startCoordinate = coordinate;
         }
-        if (!preCoordinate.equals(coordinate)){
+        if (!preCoordinate.equals(coordinate)) {
             peekDownTime = -1L;
         }
         if (peekDownTime == -1L) {
@@ -121,29 +149,36 @@ public class CellContainer extends ViewGroup {
             peekDownTime = System.currentTimeMillis();
             preCoordinate = coordinate;
         }
-        if (!(System.currentTimeMillis() - peekDownTime > 1000L)) {
-            preCoordinate = coordinate;
-            return;
-        }
 
-        if (!occupied[coordinate.x][coordinate.y]) return;
-        View targetView = coordinateToChildView(coordinate);
-        if (targetView == null) return;
-        LayoutParams targetParams = (LayoutParams) targetView.getLayoutParams();
-        if (targetParams.xSpan > 1 || targetParams.ySpan > 1)
-            return;
-        occupied[targetParams.x][targetParams.y] = false;
-        Point targetPoint = findFreeSpace(targetParams.x, targetParams.y, peekDirection);
+        if (!occupied[coordinate.x][coordinate.y])
+            return DragState.CurrentNotOccupied;
+        else
+            return DragState.CurrentOccupied;
 
-        startCoordinate = null;
-        peekDownTime = -1L;
-        preCoordinate.set(-1,-1);
+//        if (!(System.currentTimeMillis() - peekDownTime > 1000L)) {
+//            preCoordinate = coordinate;
+//            return null;
+//        }
 
-        onItemRearrange(new Point(targetParams.x, targetParams.y), targetPoint);
-        targetParams.x = targetPoint.x;
-        targetParams.y = targetPoint.y;
-        occupied[targetPoint.x][targetPoint.y] = true;
-        requestLayout();
+//        View targetView = coordinateToChildView(coordinate);
+//        if (targetView == null) return DragState.ItemViewNotFound;
+//        LayoutParams targetParams = (LayoutParams) targetView.getLayoutParams();
+//        if (targetParams.xSpan > 1 || targetParams.ySpan > 1)
+//            return null;
+//        occupied[targetParams.x][targetParams.y] = false;
+//        Point targetPoint = findFreeSpace(targetParams.x, targetParams.y, peekDirection);
+//
+//        startCoordinate = null;
+//        peekDownTime = -1L;
+//        preCoordinate.set(-1, -1);
+//
+//        onItemRearrange(new Point(targetParams.x, targetParams.y), targetPoint);
+//        targetParams.x = targetPoint.x;
+//        targetParams.y = targetPoint.y;
+//        occupied[targetPoint.x][targetPoint.y] = true;
+//        requestLayout();
+
+//        return null;
     }
 
     public void onItemRearrange(Point from, Point to) {
@@ -193,6 +228,11 @@ public class CellContainer extends ViewGroup {
         bgPaint.setStyle(Paint.Style.FILL);
         bgPaint.setColor(Color.WHITE);
         bgPaint.setAlpha(0);
+
+        outlinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        outlinePaint.setColor(Color.WHITE);
+        //outlinePaint.setFilterBitmap(true);
+        outlinePaint.setAlpha(160);
     }
 
     public void animateBackgroundShow() {
@@ -364,9 +404,13 @@ public class CellContainer extends ViewGroup {
                 canvas.rotate(45, cell.right, cell.bottom);
                 canvas.drawRect(cell.right - s, cell.bottom - s, cell.right + s, cell.bottom + s, mPaint);
                 canvas.restore();
+
+
             }
         }
 
+        if (cachedOutlineBitmap != null && outlineCoordinate != null && outlineCoordinate.x != -1 && outlineCoordinate.y != -1)
+            drawCachedOutlineBitmap(canvas, cells[outlineCoordinate.x][outlineCoordinate.y]);
 
         if (hideGrid && mPaint.getAlpha() != 0) {
             mPaint.setAlpha(Math.max(mPaint.getAlpha() - 20, 0));
@@ -460,21 +504,21 @@ public class CellContainer extends ViewGroup {
     }
 
     public LayoutParams coordinateToLayoutParams(int mX, int mY, int xSpan, int ySpan) {
-        Point pos = touchPosToCoordinate(mX, mY, xSpan, ySpan, true);
-        if (pos != null) {
+        Point pos = new Point();
+        touchPosToCoordinate(pos, mX, mY, xSpan, ySpan, true);
+        if (!pos.equals(-1, -1)) {
             return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, pos.x, pos.y, xSpan, ySpan);
         }
         return null;
     }
 
-
     // convert a touch event to a coordinate in the cell container
-    public Point touchPosToCoordinate(int mX, int mY, int xSpan, int ySpan, boolean checkAvailability) {
-        return touchPosToCoordinate(mX, mY, xSpan, ySpan, checkAvailability, false);
+    public void touchPosToCoordinate(Point coordinate, int mX, int mY, int xSpan, int ySpan, boolean checkAvailability) {
+        touchPosToCoordinate(coordinate, mX, mY, xSpan, ySpan, checkAvailability, false);
     }
 
     // convert a touch event to a coordinate in the cell container
-    public Point touchPosToCoordinate(int mX, int mY, int xSpan, int ySpan, boolean checkAvailability, boolean checkBoundary) {
+    public void touchPosToCoordinate(Point coordinate, int mX, int mY, int xSpan, int ySpan, boolean checkAvailability, boolean checkBoundary) {
         mX = mX - (xSpan - 1) * cellWidth / 2;
         mY = mY - (ySpan - 1) * cellHeight / 2;
 
@@ -484,7 +528,8 @@ public class CellContainer extends ViewGroup {
                 if (mY >= cell.top && mY <= cell.bottom && mX >= cell.left && mX <= cell.right) {
                     if (checkAvailability) {
                         if (occupied[x][y]) {
-                            return null;
+                            coordinate.set(-1, -1);
+                            return;
                         }
 
                         int dx = x + xSpan - 1;
@@ -502,7 +547,8 @@ public class CellContainer extends ViewGroup {
                         for (int x2 = x; x2 < x + xSpan; x2++) {
                             for (int y2 = y; y2 < y + ySpan; y2++) {
                                 if (occupied[x2][y2]) {
-                                    return null;
+                                    coordinate.set(-1, -1);
+                                    return;
                                 }
                             }
                         }
@@ -512,14 +558,15 @@ public class CellContainer extends ViewGroup {
                         int dp2 = Tool.dp2px(6, getContext());
                         offsetCell.inset(dp2, dp2);
                         if (mY >= offsetCell.top && mY <= offsetCell.bottom && mX >= offsetCell.left && mX <= offsetCell.right) {
-                            return null;
+                            coordinate.set(-1, -1);
+                            return;
                         }
                     }
-                    return new Point(x, y);
+                    coordinate.set(x, y);
+                    return;
                 }
             }
         }
-        return null;
     }
 
     @Override
@@ -592,6 +639,10 @@ public class CellContainer extends ViewGroup {
             curTop = t;
             curBottom = t + cellHeight;
         }
+    }
+
+    public enum DragState {
+        CurrentNotOccupied, OutOffRange, ItemViewNotFound, CurrentOccupied
     }
 
     private enum PeekDirection {

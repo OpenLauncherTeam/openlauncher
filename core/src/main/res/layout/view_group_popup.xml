@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="4dp"
-    app:cardElevation="4dp"
+    app:cardElevation="8dp"
     app:contentPadding="4dp">
 
     <com.benny.openlauncher.core.widget.CellContainer

@@ -19,14 +19,8 @@ import java.util.Random;
 
 public class Item implements LabelProvider, Parcelable {
 
-    public enum Type {
-        APP,
-        SHORTCUT,
-        GROUP,
-        ACTION,
-        WIDGET
-    }
-
+    public static final int LOCATION_DESKTOP = 0;
+    public static final int LOCATION_DOCK = 1;
     public static final Creator<Item> CREATOR = new Creator<Item>() {
 
         @Override
@@ -39,28 +33,25 @@ public class Item implements LabelProvider, Parcelable {
             return new Item[size];
         }
     };
-
-    // all items need these values
-    private int idValue;
     public Type type;
-    private String name = "";
     public BaseIconProvider iconProvider = null;
     public int x = 0;
     public int y = 0;
-
+    //Needed for folder to optimize the folder open position
+    public int locationInLauncher;
     // intent for shortcuts and apps
     public Intent intent;
-
     // list of items for groups
     public List<Item> items;
-
     // int value for launcher action
     public int actionValue;
-
     // widget specific values
     public int widgetValue;
     public int spanX = 1;
     public int spanY = 1;
+    // all items need these values
+    private int idValue;
+    private String name = "";
 
     public Item() {
         Random random = new Random();
@@ -95,6 +86,8 @@ public class Item implements LabelProvider, Parcelable {
                 spanY = parcel.readInt();
                 break;
         }
+        locationInLauncher = parcel.readInt();
+
         if (Setup.appSettings().enableImageCaching()) {
             iconProvider = Setup.imageLoader().createIconProvider(Tool.getIcon(Home.launcher, Integer.toString(idValue)));
         } else {
@@ -109,12 +102,6 @@ public class Item implements LabelProvider, Parcelable {
                     break;
             }
         }
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        Item itemObject = (Item) object;
-        return object != null && this.idValue == itemObject.idValue;
     }
 
     public static Item newAppItem(App app) {
@@ -165,6 +152,19 @@ public class Item implements LabelProvider, Parcelable {
         return item;
     }
 
+    private static Intent toIntent(App app) {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setClassName(app.getPackageName(), app.getClassName());
+        return intent;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        Item itemObject = (Item) object;
+        return object != null && this.idValue == itemObject.idValue;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -198,6 +198,7 @@ public class Item implements LabelProvider, Parcelable {
                 out.writeInt(spanY);
                 break;
         }
+        out.writeInt(locationInLauncher);
     }
 
     public void reset() {
@@ -238,42 +239,43 @@ public class Item implements LabelProvider, Parcelable {
         return x;
     }
 
-    public int getY() {
-        return y;
-    }
-
-    public int getSpanX() {
-        return spanX;
-    }
-
-    public int getSpanY() {
-        return spanY;
-    }
-
-    public void setSpanX(int x) {
-        spanX = x;
-    }
-
-    public void setSpanY(int y) {
-        spanY = y;
-    }
-
     public void setX(int x) {
         this.x = x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public void setY(int y) {
         this.y = y;
     }
 
-    private static Intent toIntent(App app) {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setClassName(app.getPackageName(), app.getClassName());
-        return intent;
+    public int getSpanX() {
+        return spanX;
+    }
+
+    public void setSpanX(int x) {
+        spanX = x;
+    }
+
+    public int getSpanY() {
+        return spanY;
+    }
+
+    public void setSpanY(int y) {
+        spanY = y;
     }
 
     public BaseIconProvider getIconProvider() {
         return iconProvider;
+    }
+
+    public enum Type {
+        APP,
+        SHORTCUT,
+        GROUP,
+        ACTION,
+        WIDGET
     }
 }
