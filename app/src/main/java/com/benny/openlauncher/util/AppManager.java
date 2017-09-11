@@ -321,10 +321,6 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
             label = info.loadLabel(pm).toString();
             packageName = info.activityInfo.packageName;
             className = info.activityInfo.name;
-
-            if (packageName.equals("com.benny.openlauncher")) {
-                label = context.getString(R.string.ol_settings);
-            }
         }
 
         @Override
