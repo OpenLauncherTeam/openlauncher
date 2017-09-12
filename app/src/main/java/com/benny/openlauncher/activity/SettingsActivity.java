@@ -139,7 +139,7 @@ public class SettingsActivity extends ThemeActivity{
                 } else if (settings.isKeyEqual(key, R.string.pref_key__cat_miscellaneous)) {
                     ((SettingsActivity) getActivity()).showFragment(SettingsFragmentMiscellaneous.TAG, true);
                     return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__about)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_about)) {
                     startActivity(new Intent(getActivity(), AboutActivity.class));
                     return true;
                 }
@@ -357,56 +357,6 @@ public class SettingsActivity extends ThemeActivity{
         public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
             if (isAdded() && preference.hasKey()) {
                 String key = preference.getKey();
-
-                if (key.equals(getString(R.string.pref_key__gesture_double_tap))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__gesture_double_tap, ((DatabaseHelper) Home.launcher.db).getGesture(0), 0, new DialogHelper.OnActionSelectedListener() {
-                        @Override
-                        public void onActionSelected(LauncherAction.ActionItem item) {
-                            // do nothing
-                        }
-                    });
-                    return true;
-                }
-
-                if (key.equals(getString(R.string.pref_key__gesture_swipe_up))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__gesture_swipe_up, ((DatabaseHelper) Home.launcher.db).getGesture(1), 1, new DialogHelper.OnActionSelectedListener() {
-                        @Override
-                        public void onActionSelected(LauncherAction.ActionItem item) {
-                            // do nothing
-                        }
-                    });
-                    return true;
-                }
-
-                if (key.equals(getString(R.string.pref_key__gesture_swipe_down))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__gesture_swipe_down, ((DatabaseHelper) Home.launcher.db).getGesture(2), 2, new DialogHelper.OnActionSelectedListener() {
-                        @Override
-                        public void onActionSelected(LauncherAction.ActionItem item) {
-                            // do nothing
-                        }
-                    });
-                    return true;
-                }
-
-                if (key.equals(getString(R.string.pref_key__gesture_pinch))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__gesture_pinch, ((DatabaseHelper) Home.launcher.db).getGesture(3), 3, new DialogHelper.OnActionSelectedListener() {
-                        @Override
-                        public void onActionSelected(LauncherAction.ActionItem item) {
-                            // do nothing
-                        }
-                    });
-                    return true;
-                }
-
-                if (key.equals(getString(R.string.pref_key__gesture_unpinch))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__gesture_unpinch, ((DatabaseHelper) Home.launcher.db).getGesture(4), 4, new DialogHelper.OnActionSelectedListener() {
-                        @Override
-                        public void onActionSelected(LauncherAction.ActionItem item) {
-                            // do nothing
-                        }
-                    });
-                    return true;
-                }
             }
             return super.onPreferenceTreeClick(screen, preference);
         }

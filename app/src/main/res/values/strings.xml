@@ -67,6 +67,10 @@
     <string name="pref_title__appearance">Appearance</string>
     <string name="pref_title__color">Colors</string>
     <string name="pref_title__search_bar">Search Bar</string>
+    <string name="pref_title__interfaces">Interfaces</string>
+    <string name="pref_title__inputs">Inputs</string>
+    <string name="pref_title__feels">Feels</string>
+    <string name="pref_title__others">Others</string>
 
     <string name="pref_title__desktop_style">Style</string>
     <string name="pref_title__desktop_indicator_style">Indicator Style</string>
@@ -191,13 +195,13 @@
     <string name="pref_key__drawer_label_color" translatable="false">pref_key__drawer_label_color</string>
     <string name="pref_key__drawer_fast_scroll_color" translatable="false">pref_key__drawer_fast_scroll_color</string>
 
-    <string name="pref_key__gesture_feedback" translatable="false">pref_key__desktop_gesture_feedback</string>
-    <string name="pref_key__gesture_quick_swipe" translatable="false">pref_key__dock_swipe_up</string>
-    <string name="pref_key__gesture_double_tap" translatable="false">pref_key__desktop_double_tap</string>
-    <string name="pref_key__gesture_swipe_up" translatable="false">pref_key__desktop_swipe_up</string>
-    <string name="pref_key__gesture_swipe_down" translatable="false">pref_key__desktop_swipe_down</string>
-    <string name="pref_key__gesture_pinch" translatable="false">pref_key__desktop_pinch</string>
-    <string name="pref_key__gesture_unpinch" translatable="false">pref_key__desktop_unpinch</string>
+    <string name="pref_key__gesture_feedback" translatable="false">pref_key__gesture_feedback</string>
+    <string name="pref_key__gesture_quick_swipe" translatable="false">pref_key__gesture_quick_swipe</string>
+    <string name="pref_key__gesture_double_tap" translatable="false">pref_key__gesture_double_tap</string>
+    <string name="pref_key__gesture_swipe_up" translatable="false">pref_key__gesture_swipe_up</string>
+    <string name="pref_key__gesture_swipe_down" translatable="false">pref_key__gesture_swipe_down</string>
+    <string name="pref_key__gesture_pinch" translatable="false">pref_key__gesture_pinch</string>
+    <string name="pref_key__gesture_unpinch" translatable="false">pref_key__gesture_unpinch</string>
 
     <string name="pref_key__icon_size" translatable="false">pref_key__icon_size</string>
     <string name="pref_key__icon_pack" translatable="false">pref_key__icon_pack</string>
@@ -215,12 +219,7 @@
     <string name="pref_key__cat_gestures" translatable="false">pref_key__cat_gestures</string>
     <string name="pref_key__cat_icons" translatable="false">pref_key__cat_icons</string>
     <string name="pref_key__cat_miscellaneous" translatable="false">pref_key__cat_miscellaneous</string>
-
-    <string name="pref_key__about" translatable="false">pref_key__about</string>
-    <string name="pref_key__interfaces">Interfaces</string>
-    <string name="pref_key__inputs">Inputs</string>
-    <string name="pref_key__feels">Feels</string>
-    <string name="pref_key__others">Others</string>
+    <string name="pref_key__cat_about" translatable="false">pref_key__cat_about</string>
 
     <!-- Internal Keys -->
 

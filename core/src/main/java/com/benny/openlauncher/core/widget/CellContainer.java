@@ -199,11 +199,7 @@ public class CellContainer extends ViewGroup {
                 break;
         }
         if (blockTouch) return true;
-        if (gestures != null)
-            try {
-                gestures.onTouch(this, event);
-            } catch (Exception ignore) {
-            }
+        gestures.onTouch(this, event);
         return super.onTouchEvent(event);
     }
 

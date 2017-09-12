@@ -6,13 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.fragment.HideAppsSelectionFragment;
+import com.benny.openlauncher.fragment.HideAppsFragment;
 import com.benny.openlauncher.util.AppManager;
 
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class HideAppsActivity extends ThemeActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new HideAppsSelectionFragment(), String.valueOf("Skip"));
+        adapter.addFragment(new HideAppsFragment(), String.valueOf("Skip"));
         viewPager.setAdapter(adapter);
     }
 

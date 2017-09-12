@@ -132,10 +132,10 @@
 
     <!-- Preference Keys -->
 
-    <string name="pref_key__interfaces">Interfaces</string>
-    <string name="pref_key__inputs">Entradas</string>
-    <string name="pref_key__feels">Feels</string>
-    <string name="pref_key__others">Otros</string>
+    <string name="pref_title__interfaces">Interfaces</string>
+    <string name="pref_title__inputs">Entradas</string>
+    <string name="pref_title__feels">Feels</string>
+    <string name="pref_title__others">Otros</string>
 
     <!-- Item Labels -->
 

@@ -214,12 +214,32 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getIconSize();
     }
 
+    public boolean isGestureFeedback() {
+        return getBool(R.string.pref_key__gesture_feedback, false);
+    }
+
     public boolean getGestureDockSwipeUp() {
         return getBool(R.string.pref_key__gesture_quick_swipe, true);
     }
 
-    public boolean isGestureFeedback() {
-        return getBool(R.string.pref_key__gesture_feedback, false);
+    public String getGestureDoubleTap() {
+        return getString(R.string.pref_key__gesture_double_tap, "0");
+    }
+
+    public String getGestureSwipeUp() {
+        return getString(R.string.pref_key__gesture_swipe_up, "0");
+    }
+
+    public String getGestureSwipeDown() {
+        return getString(R.string.pref_key__gesture_swipe_down, "0");
+    }
+
+    public String getGesturePinch() {
+        return getString(R.string.pref_key__gesture_pinch, "0");
+    }
+
+    public String getGestureUnpinch() {
+        return getString(R.string.pref_key__gesture_unpinch, "0");
     }
 
     @Override

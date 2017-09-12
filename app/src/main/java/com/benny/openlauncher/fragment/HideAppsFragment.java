@@ -32,7 +32,7 @@ import java.util.List;
 
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
-public class HideAppsSelectionFragment extends Fragment {
+public class HideAppsFragment extends Fragment {
 
     @SuppressWarnings("unchecked")
     private ArrayList<String> list_activities = new ArrayList();

@@ -327,46 +327,57 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             public boolean onDrawerGesture(Desktop desktop, DesktopGestureListener.Type event) {
                 switch (event) {
                     case SwipeUp: {
-                        LauncherAction.ActionItem gesture = ((DatabaseHelper) Home.db).getGesture(1);
-                        if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                            Tool.vibrate(desktop);
+                        if (Integer.parseInt(AppSettings.get().getGestureSwipeUp()) != 0) {
+                            LauncherAction.ActionItem gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().getGestureSwipeUp()) - 1);
+                            if (gesture != null && AppSettings.get().isGestureFeedback()) {
+                                Tool.vibrate(desktop);
+                            }
+                            LauncherAction.RunAction(gesture, desktop.getContext());
                         }
-                        LauncherAction.RunAction(gesture, desktop.getContext());
                         return true;
                     }
                     case SwipeDown: {
-                        LauncherAction.ActionItem gesture = ((DatabaseHelper) Home.db).getGesture(2);
-                        if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                            Tool.vibrate(desktop);
+                        if (Integer.parseInt(AppSettings.get().getGestureSwipeDown()) != 0) {
+                            LauncherAction.ActionItem gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().getGestureSwipeDown()) - 1);
+                            if (gesture != null && AppSettings.get().isGestureFeedback()) {
+                                Tool.vibrate(desktop);
+                            }
+                            LauncherAction.RunAction(gesture, desktop.getContext());
                         }
-                        LauncherAction.RunAction(gesture, desktop.getContext());
                         return true;
                     }
                     case SwipeLeft:
+                        return false;
                     case SwipeRight:
                         return false;
                     case Pinch: {
-                        LauncherAction.ActionItem gesture = ((DatabaseHelper) Home.db).getGesture(3);
-                        if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                            Tool.vibrate(desktop);
+                        if (Integer.parseInt(AppSettings.get().getGesturePinch()) != 0) {
+                            LauncherAction.ActionItem gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().getGesturePinch()) - 1);
+                            if (gesture != null && AppSettings.get().isGestureFeedback()) {
+                                Tool.vibrate(desktop);
+                            }
+                            LauncherAction.RunAction(gesture, desktop.getContext());
                         }
-                        LauncherAction.RunAction(gesture, desktop.getContext());
                         return true;
                     }
                     case Unpinch: {
-                        LauncherAction.ActionItem gesture = ((DatabaseHelper) Home.db).getGesture(4);
-                        if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                            Tool.vibrate(desktop);
+                        if (Integer.parseInt(AppSettings.get().getGestureUnpinch()) != 0) {
+                            LauncherAction.ActionItem gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().getGestureUnpinch()) - 1);
+                            if (gesture != null && AppSettings.get().isGestureFeedback()) {
+                                Tool.vibrate(desktop);
+                            }
+                            LauncherAction.RunAction(gesture, desktop.getContext());
                         }
-                        LauncherAction.RunAction(gesture, desktop.getContext());
                         return true;
                     }
                     case DoubleTap: {
-                        LauncherAction.ActionItem gesture = ((DatabaseHelper) Home.db).getGesture(0);
-                        if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                            Tool.vibrate(desktop);
+                        if (Integer.parseInt(AppSettings.get().getGestureDoubleTap()) != 0) {
+                            LauncherAction.ActionItem gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().getGestureDoubleTap()) - 1);
+                            if (gesture != null && AppSettings.get().isGestureFeedback()) {
+                                Tool.vibrate(desktop);
+                            }
+                            LauncherAction.RunAction(gesture, desktop.getContext());
                         }
-                        LauncherAction.RunAction(gesture, desktop.getContext());
                         return true;
                     }
                     default: {

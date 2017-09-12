@@ -14,23 +14,38 @@
             android:summary="@string/pref_summary__gesture_quick_swipe"
             android:title="@string/pref_title__gesture_quick_swipe" />
 
-        <Preference
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/entries__gestures"
+            android:entryValues="@array/values__zero_to_nine"
             android:key="@string/pref_key__gesture_double_tap"
             android:title="@string/pref_title__gesture_double_tap" />
 
-        <Preference
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/entries__gestures"
+            android:entryValues="@array/values__zero_to_nine"
             android:key="@string/pref_key__gesture_swipe_up"
             android:title="@string/pref_title__gesture_swipe_up" />
 
-        <Preference
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/entries__gestures"
+            android:entryValues="@array/values__zero_to_nine"
             android:key="@string/pref_key__gesture_swipe_down"
             android:title="@string/pref_title__gesture_swipe_down" />
 
-        <Preference
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/entries__gestures"
+            android:entryValues="@array/values__zero_to_nine"
             android:key="@string/pref_key__gesture_pinch"
             android:title="@string/pref_title__gesture_pinch" />
 
-        <Preference
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/entries__gestures"
+            android:entryValues="@array/values__zero_to_nine"
             android:key="@string/pref_key__gesture_unpinch"
             android:title="@string/pref_title__gesture_unpinch" />
 

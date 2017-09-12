@@ -107,10 +107,10 @@
     <string name="pref_summary__restart">إعادة تشغيل اللانشر في حالة إظهار أخطاء</string>
 
     <!-- Preference Keys -->
-    <string name="pref_key__interfaces">الواجهات</string>
-    <string name="pref_key__inputs">المدخلات</string>
-    <string name="pref_key__feels">الشعور</string>
-    <string name="pref_key__others">أخرى</string>
+    <string name="pref_title__interfaces">الواجهات</string>
+    <string name="pref_title__inputs">المدخلات</string>
+    <string name="pref_title__feels">الشعور</string>
+    <string name="pref_title__others">أخرى</string>
     <string name="vertical_scroll_drawer">أفقي (متعدد الصفحات)</string>
     <string name="horizontal_paged_drawer">رأسي</string>
 

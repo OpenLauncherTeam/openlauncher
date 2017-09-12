@@ -111,10 +111,10 @@
 
     <!-- Preference Keys -->
 
-    <string name="pref_key__interfaces">Grensesnitt</string>
-    <string name="pref_key__inputs">Inndata</string>
-    <string name="pref_key__feels">Føles</string>
-    <string name="pref_key__others">Annet</string>
+    <string name="pref_title__interfaces">Grensesnitt</string>
+    <string name="pref_title__inputs">Inndata</string>
+    <string name="pref_title__feels">Føles</string>
+    <string name="pref_title__others">Annet</string>
 
     <!-- Item Labels -->
 

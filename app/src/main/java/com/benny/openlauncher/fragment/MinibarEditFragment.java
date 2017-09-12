@@ -39,7 +39,8 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
     @BindView(R.id.enableSwitch)
     SwitchCompat enableSwitch;
     @BindView(R.id.recyclerView)
-    RecyclerView rv;
+    RecyclerView recyclerView;
+
     private FastItemAdapter<AppItem> adapter;
     private Context context;
 
@@ -53,11 +54,10 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
 
         SimpleDragCallback touchCallback = new SimpleDragCallback(this);
         ItemTouchHelper touchHelper = new ItemTouchHelper(touchCallback);
-        touchHelper.attachToRecyclerView(rv);
+        touchHelper.attachToRecyclerView(recyclerView);
 
-        rv.setLayoutManager(new LinearLayoutManager(context));
-
-        rv.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(adapter);
 
         int i = 0;
         final ArrayList<String> minBarArrangement = AppSettings.get().getMinibarArrangement();
@@ -67,9 +67,9 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
             i++;
         }
 
-        boolean minBarEnable = AppSettings.get().getMinibarEnable();
-        enableSwitch.setChecked(minBarEnable);
-        enableSwitch.setText(minBarEnable ? R.string.on : R.string.off);
+        boolean minibarEnable = AppSettings.get().getMinibarEnable();
+        enableSwitch.setChecked(minibarEnable);
+        enableSwitch.setText(minibarEnable ? R.string.on : R.string.off);
         enableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
