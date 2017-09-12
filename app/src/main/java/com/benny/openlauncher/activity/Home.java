@@ -34,6 +34,7 @@ import com.benny.openlauncher.core.interfaces.DialogListener;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
+import com.benny.openlauncher.core.util.BaseDatabaseHelper;
 import com.benny.openlauncher.core.util.BaseIconProvider;
 import com.benny.openlauncher.core.util.SimpleIconProvider;
 import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
@@ -41,7 +42,6 @@ import com.benny.openlauncher.core.viewutil.ItemGestureListener;
 import com.benny.openlauncher.core.widget.Desktop;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
@@ -387,7 +387,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             }
         };
         final ItemGestureListener.ItemGestureCallback itemGestureCallback = null;
-        final Setup.DataManager dataManager = new DatabaseHelper(this);
+        final Setup.DataManager dataManager = new BaseDatabaseHelper(this);
         final AppManager appLoader = AppManager.getInstance(this);
         final Setup.EventHandler eventHandler = new Setup.EventHandler() {
             @Override

@@ -22,7 +22,6 @@ import com.benny.openlauncher.core.util.BaseDatabaseHelper;
 import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.viewutil.DialogHelper;
 

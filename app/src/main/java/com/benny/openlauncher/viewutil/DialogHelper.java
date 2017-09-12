@@ -16,12 +16,10 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.core.model.IconLabelItem;
 import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.DragDropHandler;
 import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.FastAdapter;
@@ -116,9 +114,9 @@ public class DialogHelper {
         dialog.show();
     }
 
-    public static void selectActionDialog(final Context context, int titleId, LauncherAction.ActionItem selected, final int id, final OnActionSelectedListener onActionSelectedListener) {
+    public static void selectActionDialog(final Context context, String title, LauncherAction.ActionItem selected, final OnActionSelectedListener onActionSelectedListener) {
         new MaterialDialog.Builder(context)
-                .title(context.getString(titleId))
+                .title(title)
                 .negativeText(R.string.cancel)
                 .items(R.array.entries__gestures)
                 .itemsCallbackSingleChoice(LauncherAction.getActionItemIndex(selected) + 1, new MaterialDialog.ListCallbackSingleChoice() {
@@ -134,15 +132,11 @@ public class DialogHelper {
                                     public void onAppSelected(AppManager.App app) {
                                         finalItem.extraData = Tool.getStartAppIntent(app);
                                         onActionSelectedListener.onActionSelected(finalItem);
-                                        ((DatabaseHelper) Home.launcher.db).setGesture(id, finalItem);
                                     }
                                 });
                             } else if (onActionSelectedListener != null) {
                                 onActionSelectedListener.onActionSelected(item);
-                                ((DatabaseHelper) Home.launcher.db).setGesture(id, item);
                             }
-                        } else {
-                            ((DatabaseHelper) Home.launcher.db).deleteGesture(id);
                         }
                         return true;
                     }

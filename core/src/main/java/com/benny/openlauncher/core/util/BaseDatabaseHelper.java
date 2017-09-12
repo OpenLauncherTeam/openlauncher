@@ -18,7 +18,6 @@ import java.util.List;
 public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataManager {
     protected static final String DATABASE_HOME = "home.db";
     protected static final String TABLE_HOME = "home";
-    protected static final String TABLE_GESTURE = "gesture";
 
     protected static final String COLUMN_TIME = "time";
     protected static final String COLUMN_TYPE = "type";
@@ -41,11 +40,6 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
                     COLUMN_PAGE + " INTEGER," +
                     COLUMN_DESKTOP + " INTEGER," +
                     COLUMN_STATE + " INTEGER)";
-    protected static final String SQL_CREATE_GESTURE =
-            "CREATE TABLE " + TABLE_GESTURE + " (" +
-                    COLUMN_TIME + " INTEGER PRIMARY KEY," +
-                    COLUMN_TYPE + " VARCHAR," +
-                    COLUMN_DATA + " VARCHAR)";
     protected static final String SQL_DELETE = "DROP TABLE IF EXISTS ";
     protected static final String SQL_QUERY = "SELECT * FROM ";
     protected SQLiteDatabase db;
@@ -59,13 +53,11 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
 
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_HOME);
-        db.execSQL(SQL_CREATE_GESTURE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // discard the data and start over
         db.execSQL(SQL_DELETE + TABLE_HOME);
-        db.execSQL(SQL_DELETE + TABLE_GESTURE);
         onCreate(db);
     }
 
@@ -138,13 +130,13 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
 
     @Override
     public void deleteItem(Item item, boolean deleteSubItems) {
-        // 1) if item is a folder => delete all sub items
+        // if the item is a group then remove all entries
         if (deleteSubItems && item.getType() == Item.Type.GROUP) {
             for (Item i : item.getGroupItems()) {
                 deleteItem(i, deleteSubItems);
             }
         }
-        // 2) delete the item itself
+        // delete the item itself
         db.delete(TABLE_HOME, COLUMN_TIME + " = ?", new String[]{String.valueOf(item.getId())});
     }
 
@@ -343,9 +335,5 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
                 break;
         }
         return item;
-    }
-
-    public void deleteGesture(int id) {
-        db.delete(TABLE_GESTURE, COLUMN_TIME + " = ?", new String[]{String.valueOf(id)});
     }
 }
