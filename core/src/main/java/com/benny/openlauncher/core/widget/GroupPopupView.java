@@ -3,7 +3,6 @@ package com.benny.openlauncher.core.widget;
 import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
@@ -278,7 +277,7 @@ public class GroupPopupView extends RevealFrameLayout {
     private void removeItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, AppItemView currentView) {
         currentItem.getGroupItems().remove(dragOutItem);
 
-        Home.db.updateState(dragOutItem, Definitions.ItemState.Visible);
+        Home.db.saveItem(dragOutItem, Definitions.ItemState.Visible);
         Home.db.saveItem(currentItem);
 
         currentView.setIconProvider(Setup.imageLoader().createIconProvider(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize())));
@@ -293,7 +292,7 @@ public class GroupPopupView extends RevealFrameLayout {
                 item.setY(currentItem.getY());
 
                 Home.db.saveItem(item);
-                Home.db.updateState(item, Definitions.ItemState.Visible);
+                Home.db.saveItem(item, Definitions.ItemState.Visible);
                 Home.db.deleteItem(currentItem, true);
 
                 callBack.removeItem(currentView);

@@ -15,10 +15,9 @@ import com.benny.openlauncher.core.model.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataManager {
+public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManager {
     protected static final String DATABASE_HOME = "home.db";
     protected static final String TABLE_HOME = "home";
-
     protected static final String COLUMN_TIME = "time";
     protected static final String COLUMN_TYPE = "type";
     protected static final String COLUMN_LABEL = "label";
@@ -45,7 +44,7 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
     protected SQLiteDatabase db;
     protected Context context;
 
-    public BaseDatabaseHelper(Context c) {
+    public DatabaseHelper(Context c) {
         super(c, DATABASE_HOME, null, 1);
         db = getWritableDatabase();
         context = c;
@@ -113,6 +112,11 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
     }
 
     @Override
+    public void saveItem(Item item, Definitions.ItemState state) {
+        updateItem(item, state);
+    }
+
+    @Override
     public void saveItem(Item item, int page, Definitions.ItemPosition itemPosition) {
         String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
         Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
@@ -121,11 +125,6 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
         } else if (cursor.getCount() == 1) {
             updateItem(item, page, itemPosition);
         }
-    }
-
-    @Override
-    public void updateState(Item item, Definitions.ItemState state) {
-        updateItem(item, state);
     }
 
     @Override
@@ -154,7 +153,7 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
                     desktop.add(new ArrayList<Item>());
                 }
                 if (desktopVar == 1 && stateVar == 1) {
-                    desktop.get(page).add(getSelectionItem(cursor));
+                    desktop.get(page).add(getSelection(cursor));
                 }
             } while (cursor.moveToNext());
         }
@@ -172,7 +171,7 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
                 int desktopVar = Integer.parseInt(cursor.getString(7));
                 int stateVar = Integer.parseInt(cursor.getString(8));
                 if (desktopVar == 0 && stateVar == 1) {
-                    dock.add(getSelectionItem(cursor));
+                    dock.add(getSelection(cursor));
                 }
             } while (cursor.moveToNext());
         }
@@ -187,51 +186,13 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
         Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
         Item item = null;
         if (cursor.moveToFirst()) {
-            item = getSelectionItem(cursor);
+            item = getSelection(cursor);
         }
         cursor.close();
         return item;
     }
 
-    public void setDesktop(List<List<Item>> desktop) {
-        int pageCounter = 0;
-        for (List<Item> page : desktop) {
-            for (Item item : page) {
-                String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
-                Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
-                if (cursor.getCount() == 0) {
-                    createItem(item, pageCounter, Definitions.ItemPosition.Desktop);
-                } else if (cursor.getCount() == 1) {
-                    updateItem(item, pageCounter, Definitions.ItemPosition.Desktop);
-                }
-            }
-            pageCounter++;
-        }
-    }
-
-    public void setDock(List<Item> dock) {
-        for (Item item : dock) {
-            String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
-            Cursor cursorItem = db.rawQuery(SQL_QUERY_SPECIFIC, null);
-            if (cursorItem.getCount() == 0) {
-                createItem(item, 0, Definitions.ItemPosition.Dock);
-            } else if (cursorItem.getCount() == 1) {
-                updateItem(item, 0, Definitions.ItemPosition.Dock);
-            }
-        }
-    }
-
-    public void setItem(Item item, int page, Definitions.ItemPosition itemPosition) {
-        String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
-        Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
-        if (cursor.getCount() == 0) {
-            createItem(item, page, itemPosition);
-        } else if (cursor.getCount() == 1) {
-            updateItem(item, page, itemPosition);
-        }
-    }
-
-    // update data attributes for an item
+    // update data attribute for an item
     public void updateItem(Item item) {
         ContentValues itemValues = new ContentValues();
         itemValues.put(COLUMN_LABEL, item.getLabel());
@@ -282,7 +243,7 @@ public class BaseDatabaseHelper extends SQLiteOpenHelper implements Setup.DataMa
         createItem(item, page, itemPosition);
     }
 
-    private Item getSelectionItem(Cursor cursor) {
+    private Item getSelection(Cursor cursor) {
         Item item = new Item();
         int id = Integer.parseInt(cursor.getString(0));
         Item.Type type = Item.Type.valueOf(cursor.getString(1));

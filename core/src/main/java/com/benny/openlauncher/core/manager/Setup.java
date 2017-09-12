@@ -116,17 +116,17 @@ public abstract class Setup<A extends App> {
     public interface DataManager {
         void saveItem(Item item);
 
+        void saveItem(Item item, Definitions.ItemState state);
+
         void saveItem(Item item, int page, Definitions.ItemPosition desktop);
 
-        void updateState(Item item, Definitions.ItemState state);
-
         void deleteItem(Item item, boolean deleteSubItems);
-
-        Item getItem(int id);
 
         List<List<Item>> getDesktop();
 
         List<Item> getDock();
+
+        Item getItem(int id);
     }
 
     public interface AppLoader<A extends App> {

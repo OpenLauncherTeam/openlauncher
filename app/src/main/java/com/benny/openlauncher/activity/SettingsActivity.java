@@ -18,7 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.core.util.BaseDatabaseHelper;
+import com.benny.openlauncher.core.util.DatabaseHelper;
 import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
@@ -455,7 +455,7 @@ public class SettingsActivity extends ThemeActivity{
                 if (key.equals(getString(R.string.pref_key__clear_database))) {
                     if (Home.launcher != null)
                         Home.launcher.recreate();
-                    ((BaseDatabaseHelper) Home.launcher.db).onUpgrade(((BaseDatabaseHelper) Home.launcher.db).getWritableDatabase(), 1, 1);
+                    ((DatabaseHelper) Home.launcher.db).onUpgrade(((DatabaseHelper) Home.launcher.db).getWritableDatabase(), 1, 1);
                     getActivity().finish();
                     return true;
                 }

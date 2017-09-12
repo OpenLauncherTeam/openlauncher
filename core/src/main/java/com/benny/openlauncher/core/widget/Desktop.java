@@ -2,7 +2,6 @@ package com.benny.openlauncher.core.widget;
 
 import android.app.WallpaperManager;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -91,8 +90,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     home.db.saveItem(dropItem, page, itemPosition);
 
                     // hide the apps added to the group
-                    home.db.updateState(item, Definitions.ItemState.Hidden);
-                    home.db.updateState(dropItem, Definitions.ItemState.Hidden);
+                    home.db.saveItem(item, Definitions.ItemState.Hidden);
+                    home.db.saveItem(dropItem, Definitions.ItemState.Hidden);
 
                     // add the item to the database
                     home.db.saveItem(group, page, itemPosition);
@@ -114,7 +113,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     home.db.saveItem(dropItem, page, itemPosition);
 
                     // hide the new app in the group
-                    home.db.updateState(dropItem, Definitions.ItemState.Hidden);
+                    home.db.saveItem(dropItem, Definitions.ItemState.Hidden);
 
                     // add the item to the database
                     home.db.saveItem(item, page, itemPosition);
