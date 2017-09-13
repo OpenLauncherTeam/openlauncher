@@ -201,8 +201,8 @@ public class DesktopOptionView extends FrameLayout {
         if (warpCard) {
             CardView cardView = new CardView(getContext());
             cardView.setRadius(0);
-            cardView.setCardElevation(Tool.dp2px(6, getContext()));
-            cardView.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorPrimary));
+            cardView.setCardElevation(0);
+            cardView.setCardBackgroundColor(getContext().getResources().getColor(R.color.transparent));
             cardView.addView(actionRecyclerView);
             addView(cardView, actionRecyclerViewLP);
         } else
