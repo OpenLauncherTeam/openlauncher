@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
     <!-- Titles -->
+
     <string name="settings">Paramètres</string>
 
     <!-- Drag Option View -->
@@ -12,6 +14,7 @@
     <string name="remove">Supprimer</string>
 
     <!-- Desktop Option View -->
+
     <string name="home">Accueil</string>
     <string name="action">Action</string>
     <string name="lock">Verrouiller</string>
@@ -19,8 +22,8 @@
 
     <!-- Toasts -->
 
-    <string name="toast_not_enough_space">Espace insuffisant</string>
-    <string name="toast_app_uninstalled">Cette appli a été désinstallée.</string>
+    <string name="toast_not_enough_space">Espace insuffisant.</string>
+    <string name="toast_app_uninstalled">Cette application a été désinstallée.</string>
 
     <!-- Intro -->
 
@@ -30,6 +33,11 @@
 
     <!-- Settings -->
 
+
+    <!-- Preference Keys -->
+
+    <!-- Internal Keys -->
+
     <!-- Item Labels -->
 
     <string name="folder">Aucun nom</string>
@@ -37,5 +45,7 @@
     <!-- Dialogs -->
 
     <string name="cancel">Annuler</string>
-    <string name="search_online">RECHERCHE EN LIGNE</string>
+    <string name="search_hint">Chercher…</string>
+    <string name="search_online">Rechercher sur internet…</string>
+
 </resources>
