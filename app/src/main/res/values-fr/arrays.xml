@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="entries__gestures">
+        <item>Ne rien faire</item>
+        <item>Paramètres de la minibarre</item>
+        <item>T</item>
+        <item>Verrouiller l\'écran</item>
+        <item>Vider la RAM</item>
+        <item>Paramètres de l\'appareil</item>
+        <item>Paramètres d\'OpenLauncher</item>
+        <item>Fenêtre de volume</item>
+        <item>Ouvrir le volet des applications</item>
+        <item>Lancer une application</item>
+    </string-array>
+
+    <string-array name="entries__desktop_actions">
+        <item>Volet des applications</item>
+    </string-array>
+
+
+
+
+
+
+    <string-array name="entries__wallpaper_options">
+        <item>Changer le fond d\'écran</item>
+        <item>Flouter le fond d\'écran</item>
+    </string-array>
+
+
+
+</resources>
