@@ -8,8 +8,8 @@ android {
         minSdkVersion setup.minSdk
         targetSdkVersion setup.targetSdk
 
-        versionCode 26
-        versionName "0.5.4"
+        versionCode 27
+        versionName "0.5.5"
 
         applicationId "com.benny.openlauncher"
         resValue 'string', 'app_name', "OpenLauncher"

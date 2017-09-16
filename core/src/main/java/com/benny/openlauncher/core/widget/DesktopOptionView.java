@@ -36,16 +36,6 @@ public class DesktopOptionView extends FrameLayout {
     private FastItemAdapter<FastItem.DesktopOptionsItem>[] actionAdapters = new FastItemAdapter[2];
     private DesktopOptionViewListener desktopOptionViewListener;
 
-    public void animateOpen() {
-        ((View) actionRecyclerViews[0].getParent()).animate().scaleY(1).setDuration(200);
-        Tool.visibleViews(100, 200, actionRecyclerViews[0]);
-    }
-
-    public void animateClose() {
-        ((View) actionRecyclerViews[0].getParent()).animate().scaleY(0).setDuration(100).setStartDelay(40);
-        Tool.invisibleViews(50, actionRecyclerViews[0]);
-    }
-
     public DesktopOptionView(@NonNull Context context) {
         super(context);
         init();
@@ -59,6 +49,16 @@ public class DesktopOptionView extends FrameLayout {
     public DesktopOptionView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
+    }
+
+    public void animateOpen() {
+        ((View) actionRecyclerViews[0].getParent()).animate().scaleY(1).setDuration(200);
+        Tool.visibleViews(100, 200, actionRecyclerViews[0]);
+    }
+
+    public void animateClose() {
+        ((View) actionRecyclerViews[0].getParent()).animate().scaleY(0).setDuration(100).setStartDelay(40);
+        Tool.invisibleViews(50, actionRecyclerViews[0]);
     }
 
     public void setDesktopOptionViewListener(DesktopOptionViewListener desktopOptionViewListener) {
@@ -80,6 +80,8 @@ public class DesktopOptionView extends FrameLayout {
     }
 
     public void updateLockIcon(final boolean lock) {
+        if (actionAdapters.length == 0) return;
+        if (actionAdapters[0].getAdapterItemCount() == 0) return;
         post(new Runnable() {
             @Override
             public void run() {
@@ -96,7 +98,7 @@ public class DesktopOptionView extends FrameLayout {
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            setPadding(0, insets.getSystemWindowInsetTop() + getPaddingTop(), 0, insets.getSystemWindowInsetBottom() + getPaddingBottom());
+            setPadding(0, insets.getSystemWindowInsetTop(), 0, insets.getSystemWindowInsetBottom());
             return insets;
         }
         return insets;

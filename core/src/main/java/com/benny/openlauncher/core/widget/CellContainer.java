@@ -199,6 +199,11 @@ public class CellContainer extends ViewGroup {
                 break;
         }
         if (blockTouch) return true;
+        if (gestures == null){
+            Tool.print("gestures is null");
+            return super.onTouchEvent(event);
+        }
+
         gestures.onTouch(this, event);
         return super.onTouchEvent(event);
     }
