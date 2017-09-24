@@ -51,7 +51,6 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -372,13 +371,13 @@ public class ContextUtils {
         return bitmap;
     }
 
-    public Bitmap loadImageFromFilesystem(String imagePath, int maxDimen) {
+    public Bitmap loadImageFromFilesystem(File imagePath, int maxDimen) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(imagePath, options);
+        BitmapFactory.decodeFile(imagePath.getAbsolutePath(), options);
         options.inSampleSize = calculateInSampleSize(options, maxDimen);
         options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(imagePath, options);
+        return BitmapFactory.decodeFile(imagePath.getAbsolutePath(), options);
     }
 
     /**
@@ -389,7 +388,7 @@ public class ContextUtils {
      * @return the scaling factor that needs to be applied to the bitmap
      */
     public int calculateInSampleSize(BitmapFactory.Options options, int maxDimen) {
-        // Raw height and width of image
+        // Raw height and width of conf
         int height = options.outHeight;
         int width = options.outWidth;
         int inSampleSize = 1;
@@ -408,18 +407,29 @@ public class ContextUtils {
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
 
-    public File writeImageToFileJpeg(String path, String filename, Bitmap image) {
-        return writeImageToFile(path, filename, image, Bitmap.CompressFormat.JPEG, 95);
+    public File writeImageToFileJpeg(File imageFile, Bitmap image) {
+        return writeImageToFile(imageFile, image, Bitmap.CompressFormat.JPEG, 95);
     }
 
-    public File writeImageToFile(String path, String filename, Bitmap image, CompressFormat format, int quality) {
-        File imageFile = new File(path);
-        if (imageFile.exists() || imageFile.mkdirs()) {
-            imageFile = new File(path, filename);
 
+    public File writeImageToFileDetectFormat(File imageFile, Bitmap image, int quality) {
+        CompressFormat format = CompressFormat.JPEG;
+        String lc = imageFile.getAbsolutePath().toLowerCase();
+        if (lc.endsWith(".png")) {
+            format = CompressFormat.PNG;
+        }
+        if (lc.endsWith(".webp")) {
+            format = CompressFormat.WEBP;
+        }
+        return writeImageToFile(imageFile, image, format, quality);
+    }
+
+    public File writeImageToFile(File imageFile, Bitmap image, CompressFormat format, int quality) {
+        File folder = new File(imageFile.getParent());
+        if (folder.exists() || folder.mkdirs()) {
             FileOutputStream stream = null;
             try {
-                stream = new FileOutputStream(imageFile); // overwrites this image every time
+                stream = new FileOutputStream(imageFile); // overwrites this conf every time
                 image.compress(format, quality, stream);
                 return imageFile;
             } catch (FileNotFoundException ignored) {
