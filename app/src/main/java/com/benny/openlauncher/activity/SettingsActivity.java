@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.support.annotation.Nullable;
@@ -28,7 +29,7 @@ import com.benny.openlauncher.viewutil.DialogHelper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsActivity extends ThemeActivity{
+public class SettingsActivity extends ThemeActivity {
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
     protected static Context context;
@@ -436,6 +437,12 @@ public class SettingsActivity extends ThemeActivity{
             super.onCreate(savedInstances);
             getPreferenceManager().setSharedPreferencesName("app");
             addPreferencesFromResource(R.xml.preferences_miscellaneous);
+
+            if (getResources().getBoolean(R.bool.isTablet)) {
+                PreferenceCategory c = (PreferenceCategory) findPreference(getString(R.string.pref_key__cat_miscellaneous));
+                Preference p = c.findPreference(getString(R.string.pref_key__desktop_rotate));
+                c.removePreference(p);
+            }
         }
 
         @Override

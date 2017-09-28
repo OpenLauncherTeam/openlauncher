@@ -3,7 +3,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="@string/pref_title__miscellaneous">
+    <PreferenceCategory android:title="@string/pref_title__miscellaneous" android:key="@string/pref_key__cat_miscellaneous">
 
         <!--suppress AndroidDomInspection -->
         <net.gsantner.opoc.ui.LanguagePreference
@@ -34,6 +34,12 @@
             android:key="@string/pref_key__theme"
             android:summary="@string/pref_summary__theme"
             android:title="@string/pref_title__theme" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key__desktop_rotate"
+            android:summary="@string/pref_summary__desktop_rotate"
+            android:title="@string/pref_title__desktop_rotate" />
 
         <com.jaredrummler.android.colorpicker.ColorPreference
             android:defaultValue="@color/colorPrimary"
