@@ -63,6 +63,7 @@ You can support us and buy us some coffee.
 The app is licensed Apache 2.0. 
 
 ## Screenshots
+Most of these were out of date.
 <div style="display:flex;" >
 	<img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/phoneScreenshots/01.png" width="24%" >
 	<img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/phoneScreenshots/02.png" width="24%" style="margin-left:10px;" >
