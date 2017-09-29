@@ -55,20 +55,34 @@
     <string name="pref_title__about">О программе</string>
 
     <string name="pref_title__size">Размер</string>
+    <string name="pref_title__style">Стиль</string>
     <string name="pref_title__appearance">Внешний вид</string>
     <string name="pref_title__color">Цвета</string>
+    <string name="pref_title__search_bar">Строка поиска</string>
+    <string name="pref_title__interfaces">Интерфейсы</string>
+    <string name="pref_title__inputs">Ввод</string>
+    <string name="pref_title__feels">Ощущения</string>
+    <string name="pref_title__others">Другое</string>
 
     <string name="pref_title__desktop_style">Стиль</string>
+    <string name="pref_title__desktop_indicator_style">Стиль индикатора</string>
     <string name="pref_summary__desktop_style">Выбрать между обычным рабочим столом и показом всех установленных приложений.</string>
     <string name="pref_summary__minibar">Изменить порядок и видимость элементов мини-бара.</string>
     <string name="pref_title__search_bar_enable">Строка поиска</string>
     <string name="pref_summary__search_bar_enable">Показывать строку поиска на рабочем столе.</string>
     <string name="pref_title__desktop_fullscreen">Полноэкранный режим</string>
+    <string name="pref_title__desktop_hide_grid">Скрыть сетку</string>
     <string name="pref_summary__desktop_fullscreen">Использовать полноэкранный режим для рабочего стола.</string>
+    <string name="pref_summary__desktop_hide_grid">Скрыть направляющую сетку.</string>
     <string name="pref_title__desktop_show_position_indicator">Индикатор страниц</string>
-    <string name="pref_summary__desktop_show_position_indicator">Показать индикатор страниц внизу рабочего стола.</string>
+    <string name="pref_summary__desktop_show_position_indicator">Показывать индикатор страниц внизу рабочего стола.</string>
     <string name="pref_title__desktop_show_label">Показывать подписи</string>
     <string name="pref_summary__desktop_show_label">Показывать подписи под значками.</string>
+    <string name="pref_title__search_bar_base_uri">URI поиска</string>
+    <string name="pref_summary__search_bar_base_uri">Установить URI поисковой системы.</string>
+    
+    <string name="pref_title__search_bar_force_browser">Всегда искать в браузере</string>
+    <string name="pref_summary__search_bar_force_browser">Всегда использовать браузер для онлайн-поиска.</string>
     <string name="pref_title__desktop_background_color">Фон</string>
     <string name="pref_title__desktop_folder_color">Папка</string>
     <string name="pref_summary__dock_size">Установить размер дока.</string>
@@ -91,42 +105,53 @@
     <string name="pref_title__drawer_background_color">Фон</string>
     <string name="pref_title__drawer_card_color">Карточка</string>
     <string name="pref_title__drawer_label_color">Подпись</string>
+    
 
     <string name="pref_title__gesture_quick_swipe">Открывать меню жестом</string>
     <string name="pref_summary__gesture_quick_swipe">Проведите пальцем вверх из дока, чтобы открыть меню приложений.</string>
     <string name="pref_title__gesture_double_tap">Двойное нажатие</string>
+    
     <string name="pref_summary__icon_size">Размер всех значков приложений.</string>
     <string name="pref_title__icon_pack">Набор значков</string>
     <string name="pref_summary__icon_pack">Выбрать установленный набор значков.</string>
 
+    <string name="pref_summary__language">Изменить язык приложения. После изменения требуется перезапуск.</string>
+    <string name="pref_title__language">Язык</string>
     <string name="pref_title__backup">Резервное копирование</string>
     <string name="pref_summary__backup">Резервное копирование и восстановление настроек.</string>
     <string name="pref_title__clear_database">Очистить базу данных</string>
     <string name="pref_summary__clear_database">Удалить данные дока и рабочего стола, чтобы исправить проблемы.</string>
     <string name="pref_title__restart">Перезапустить</string>
     <string name="pref_summary__restart">Перезапустить лаунчер, если он странно себя ведёт.</string>
+    <string name="pref_summary__theme">Установить тему для всего приложения.</string>
+    <string name="pref_title__theme">Тема</string>
+    <string name="pref_title__primary_color">Основной цвет</string>
+    <string name="pref_summary__primary_color">Установить основной цвет приложения.</string>
 
-    <string name="horizontal_paged_drawer">Горизонтальный (постраничный)</string>
     <string name="vertical_scroll_drawer">Вертикальный</string>
+    <string name="horizontal_paged_drawer">Постраничный</string>
 
     <string name="desktop_mode_normal">Обычный</string>
     <string name="desktop_mode_show_all_apps">Все приложения</string>
 
-    <!-- Preference Keys -->
+    <string name="desktop_indicator_mode_normal">Обычный</string>
+    <string name="desktop_indicator_mode_arrow">Стрелка</string>
 
-    <string name="pref_title__interfaces">Интерфейсы</string>
-    <string name="pref_title__inputs">Ввод</string>
-    <string name="pref_title__others">Другое</string>
+    <!-- Preference Keys -->
 
     <!-- Internal Keys -->
 
     <!-- Item Labels -->
 
+    <string name="label_default">По умолчанию</string>
+
     <!-- Dialogs -->
 
+    
     <string name="request_please_wait">Поиск установленных приложений. Подождите.</string>
     <string name="request_toast">Приложения не выбраны. Показать в меню все приложения?</string>
     <string name="on">Вкл</string>
+    
     <string name="off">Выкл</string>
     <string name="ok">OK</string>
     <string name="version">Версия</string>
@@ -141,9 +166,13 @@
     <string name="dialog__backup_app_settings__error">Что-то пошло не так.</string>
     <string name="columns">Столбцы</string>
     <string name="rows">Строки</string>
+    <string name="memory">Память</string>
+    <string name="storage">Накопитель</string>
     <string name="volume_level_ringtone">Рингтон</string>
     <string name="volume_level_notification">Уведомление</string>
     <string name="volume_level_system">Система</string>
     <string name="volume_level_media">Медиа</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
 
 </resources>
