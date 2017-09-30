@@ -57,9 +57,9 @@
     <string name="pref_title__appearance">Apparence</string>
     <string name="pref_title__color">Couleurs</string>
     <string name="pref_title__search_bar">Barre de recherche</string>
-    <string name="pref_title__interfaces">Interfaces</string>
-    <string name="pref_title__inputs">Chaînes</string>
-    <string name="pref_title__feels">Ressentis</string>
+    <string name="pref_title__interfaces">Préférences</string>
+    <string name="pref_title__inputs">Interactions</string>
+    <string name="pref_title__feels">Ambiance</string>
     <string name="pref_title__others">Autres</string>
 
     <string name="pref_title__desktop_style">Style</string>

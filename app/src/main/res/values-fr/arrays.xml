@@ -4,7 +4,7 @@
     <string-array name="entries__gestures">
         <item>Ne rien faire</item>
         <item>Paramètres de la minibarre</item>
-        <item>T</item>
+        <item>Modifier le fond d\'écran</item>
         <item>Verrouiller l\'écran</item>
         <item>Vider la RAM</item>
         <item>Paramètres de l\'appareil</item>
@@ -24,7 +24,7 @@
 
 
     <string-array name="entries__wallpaper_options">
-        <item>Changer le fond d\'écran</item>
+        <item>Modifier le fond d\'écran</item>
         <item>Flouter le fond d\'écran</item>
     </string-array>
 
