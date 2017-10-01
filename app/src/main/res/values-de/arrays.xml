@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string-array name="entries__gestures">
         <item>Nichts</item>
         <item>Minibar Einstellungen</item>
@@ -12,4 +13,21 @@
         <item>Öffne App Drawer</item>
         <item>Launch App</item>
     </string-array>
+
+    <string-array name="entries__desktop_actions">
+        <item>App Drawer</item>
+    </string-array>
+
+
+
+
+
+
+    <string-array name="entries__wallpaper_options">
+        <item>Hintergrund ändern</item>
+        <item>Hintergrund verwischen</item>
+    </string-array>
+
+
+
 </resources>
