@@ -99,7 +99,7 @@
     <string name="pref_title__drawer_show_position_indicator">Indicador de posición</string>
     <string name="pref_summary__drawer_show_position_indicator">Muestra el indicador de página o la barra de desplazamiento dependiendo del estilo.</string>
     <string name="pref_title__drawer_show_label">Muestra las etiquetas</string>
-    <string name="pref_summary__drawer_show_label">Muestra las etiquetas de los ítems debajo de sus íconos.</string>
+    <string name="pref_summary__drawer_show_label">Muestra las etiquetas de los ítems debajo de sus iconos.</string>
     <string name="pref_title__drawer_background_color">Fondo</string>
     <string name="pref_title__drawer_card_color">Vista de tarjeta</string>
     <string name="pref_title__drawer_label_color">Etiqueta</string>
@@ -109,20 +109,20 @@
     <string name="pref_title__gesture_double_tap">Doble toque</string>
     <string name="pref_title__gesture_swipe_up">Deslizamiento hacia arriba</string>
     <string name="pref_title__gesture_swipe_down">Deslizamiento hacia abajo</string>
-    <string name="pref_title__gesture_pinch">Pellizco</string>
-    <string name="pref_title__gesture_unpinch">Pellizco inverso</string>
+    <string name="pref_title__gesture_pinch">Ampliación</string>
+    <string name="pref_title__gesture_unpinch">Reducción</string>
     <string name="pref_title__gesture_feedback">Reacción</string>
 
-    <string name="pref_summary__icon_size">Tamaño de los íconos de todas las aplicaciones.</string>
-    <string name="pref_title__icon_pack">Paquete de íconos</string>
-    <string name="pref_summary__icon_pack">Selecciona un paquete de íconos instalado.</string>
+    <string name="pref_summary__icon_size">Tamaño de los iconos de todas las aplicaciones.</string>
+    <string name="pref_title__icon_pack">Paquete de iconos</string>
+    <string name="pref_summary__icon_pack">Selecciona un paquete de iconos instalado.</string>
 
     <string name="pref_title__backup">Copia de seguridad</string>
     <string name="pref_summary__backup">Resguarda y restaura tus ajustes.</string>
     <string name="pref_title__clear_database">Limpia la base de datos</string>
     <string name="pref_summary__clear_database">Elimina los datos del dock y el escritorio para solucionar problemas.</string>
     <string name="pref_title__restart">Reinicio</string>
-    <string name="pref_summary__restart">Reinicia el launche en caso de tener un comportamiento erroneo.</string>
+    <string name="pref_summary__restart">Reinicia el launcher en caso de tener un comportamiento erróneo.</string>
 
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paginado</string>
