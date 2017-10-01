@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Toasts -->
+    <string name="toast_free_ram">Wolna pamięć: %1$d MB. Oszczędzono %2$d MB.</string>
+    <string name="toast_free_all_ram">Wolna pamięć: %1$d MB. Twój RAM jest w najlepszym stanie.</string>
+    <string name="toast_device_admin_required">Proszę zezwól na administracje urządzenia.</string>
+
+    <!-- Intro -->
+    <string name="intro_skip">Pomiń</string>
+    <string name="intro_finish">Zaczynajmy.</string>
+    <string name="intro1_text">Dziękuje za wybranie OpenLauncher. Jest w pełni otwarty i ciągle w rozwoju.
+        Tutaj małe pokazanie jak z tego korzystać&#8230;</string>
+    <string name="intro3_title">Ustawienia</string>
+    <string name="intro3_text">Możesz konfigurować swój pulpit, menu, oraz dock, wypróbuj!</string>
+
+    <!-- Minibar -->
+    <string name="minibar_4">Skrót do ustawień urządzenia.</string>
+    <string name="minibar_5">Skrót do ustawień OpenLauncher.</string>
+    <string name="minibar_7">Display volume sliders.</string>
+    <string name="minibar_8">Pokaż menu.</string>
+
+    <!-- About -->
+    <string name="about_libs">Otware Źródłowo Bibloteki</string>
+    <string name="about_rate">Oceń</string>
+    <string name="about_credit">Współpracownicy</string>
+    <string name="about_credit_text_all_contributors">Wszyscy współpracownicy</string>
+
+    <!-- Settings -->
+
+    <string name="pref_title__desktop">Pulpit</string>
+    <string name="pref_title__dock">Dock</string>
+    <string name="pref_title__app_drawer">Menu</string>
+    <string name="pref_title__gestures">Gesty</string>
+    <string name="pref_title__icons">Ikony</string>
+    <string name="pref_title__miscellaneous">Różne</string>
+    <string name="pref_title__about">O OpenLauncher</string>
+
+    <string name="pref_title__size">Wielkość</string>
+    <string name="pref_title__style">Styl</string>
+    <string name="pref_title__appearance">Wygląd</string>
+    <string name="pref_title__color">Kolory</string>
+    <string name="pref_title__search_bar">Search Bar</string>
+    <string name="pref_title__interfaces">Interfejs</string>
+    <string name="pref_title__inputs">Inputs</string>
+    <string name="pref_title__others">Inne</string>
+
+    <string name="pref_title__desktop_style">Styl</string>
+    <string name="pref_title__desktop_rotate">Obróć</string>
+
+    <string name="pref_title__desktop_background_color">Tło</string>
+
+    <string name="pref_title__dock_background_color">Tło</string>
+
+    <string name="pref_title__drawer_style">Styl</string>
+    <string name="pref_title__hide_apps">Ukryj aplikacje</string>
+    <string name="pref_summary__hide_apps">Ukryj wybrane aplikację z launchera.</string>
+    <string name="pref_title__drawer_show_card_view">Widok Kart</string>
+    <string name="pref_title__drawer_remember_position">Pamiętaj ostatnią stronę</string>
+    <string name="pref_title__drawer_show_label">Pokaż etykietę</string>
+    <string name="pref_title__drawer_background_color">Tło</string>
+    <string name="pref_title__drawer_card_color">Widok Kart</string>
+    <string name="pref_title__drawer_label_color">Etykieta</string>
+    <string name="pref_title__drawer_fast_scroll_color">Szybki Scroll</string>
+
+    <string name="pref_title__gesture_double_tap">Podwójne dotknięcie</string>
+
+    <string name="pref_title__icon_pack">Icon Pack</string>
+
+    <string name="pref_summary__language">Zmień język aplikacji. Zrestartuj aplikację, żeby zobaczyć efekty</string>
+    <string name="pref_title__language">Język</string>
+    <string name="pref_summary__theme">Ustaw motyw dla całej aplikacji.</string>
+    <string name="pref_title__theme">Motyw</string>
+    <string name="pref_title__primary_color">Główny kolor</string>
+    <string name="pref_summary__primary_color">Ustaw główny kolor aplikacji.</string>
+
+    <string name="desktop_mode_show_all_apps">Pokasz Wszystkie Aplikacje</string>
+
+    <!-- Item Labels -->
+    <string name="label_default">Domyślne</string>
+
+    <!-- Dialogs -->
+    <string name="request_dummy_text">Witaj Świecie!</string>
+    <string name="request_please_wait">Szukanie zainstalowanych aplikacji. Proszę czekaj.</string>
+    <string name="request_toast">Nie wybrano aplikacji. Pokazać wszysktie w Szufladzie?</string>
+    <string name="desktop_action">Akcje Pulpitu</string>
+    <string name="select_app">Wybierz Aplikacje</string>
+    <string name="version">Wersja</string>
+    <string name="wallpaper">Tapeta</string>
+    <string name="wallpaper_pick">Wybierz Tapetę</string>
+    <string name="wallpaper_unable_to_blur">Nie można rozmazać</string>
+    <string name="dialog__icon_pack_title">Wybierz paczkę ikon</string>
+    <string name="dialog__backup_app_settings__restore">Przywróć</string>
+    <string name="dialog__backup_app_settings__success">Gotowe.</string>
+    <string name="dialog__backup_app_settings__error">Coś poszło nie tak.</string>
+    <string name="columns">Kolumny</string>
+    <string name="rows">Rzędy</string>
+    <string name="memory">Pamięć</string>
+    <string name="volume_level_ringtone">Dzwonek</string>
+    <string name="volume_level_notification">Powiadomienia</string>
+    <string name="theme_light">Jasny</string>
+    <string name="theme_dark">Ciemny</string>
+</resources>
