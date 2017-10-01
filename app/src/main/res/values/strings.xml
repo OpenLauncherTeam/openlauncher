@@ -87,6 +87,8 @@
     <string name="pref_summary__desktop_show_position_indicator">Show the page indicator below the desktop.</string>
     <string name="pref_title__desktop_show_label">Show Labels</string>
     <string name="pref_summary__desktop_show_label">Show item labels below their icons.</string>
+    <string name="pref_title__desktop_rotate">Roate</string>
+    <string name="pref_summary__desktop_rotate">Allow screen rotate.</string>
     <string name="pref_title__search_bar_base_uri">Search URI</string>
     <string name="pref_summary__search_bar_base_uri">Set the URI used for web searches.</string>
     <string name="pref_dialog__search_bar_base_uri">Enter the URI that should be used for web searches. The tag {query} can be used as
@@ -171,6 +173,7 @@
     <string name="pref_key__desktop_hide_grid" translatable="false">pref_key__hide_grid</string>
     <string name="pref_key__desktop_show_position_indicator" translatable="false">pref_key__desktop_show_position_indicator</string>
     <string name="pref_key__desktop_show_label" translatable="false">pref_key__desktop_show_label</string>
+    <string name="pref_key__desktop_rotate" translatable="false">pref_key__desktop_rotate</string>
     <string name="pref_key__search_bar_base_uri" translatable="false">pref_key__search_bar_base_uri</string>
     <string name="pref_key__search_bar_force_browser" translatable="false">pref_key__search_bar_force_browser</string>
     <string name="pref_key__desktop_background_color" translatable="false">pref_key__desktop_background_color</string>

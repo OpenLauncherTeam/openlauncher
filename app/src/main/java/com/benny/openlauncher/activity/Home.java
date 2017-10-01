@@ -3,6 +3,8 @@ package com.benny.openlauncher.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -11,7 +13,10 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.provider.CallLog;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -58,6 +63,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
+
 import net.gsantner.opoc.util.ContextUtils;
 
 public class Home extends com.benny.openlauncher.core.activity.Home implements DrawerLayout.DrawerListener {
@@ -532,5 +538,28 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
         public void onChange(boolean selfChange, Uri uri) {
             logCallLog();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        boolean user = AppSettings.get().getBool(R.string.pref_key__desktop_rotate, false);
+        boolean system = false;
+        try {
+            system = Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION) == 1;
+        } catch (Settings.SettingNotFoundException e) {
+            Log.d(Home.class.getSimpleName(), "Unable to read settings", e);
+        }
+        boolean rotate;
+        if (getResources().getBoolean(R.bool.isTablet)) { // tables has no user option to disable rotate
+            rotate = system;
+        } else {
+            rotate = user && system;
+        }
+        if (rotate)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 }
