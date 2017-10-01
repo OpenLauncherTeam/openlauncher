@@ -1,53 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name" translatable="false">APP NAME</string>
-
     <!-- Titles -->
-
     <string name="settings">Settings</string>
 
     <!-- Drag Option View -->
-
     <string name="edit">Edit</string>
     <string name="info">Info</string>
     <string name="uninstall">Uninstall</string>
     <string name="remove">Remove</string>
 
     <!-- Desktop Option View -->
-
     <string name="home">Home</string>
     <string name="action">Action</string>
     <string name="lock">Lock</string>
     <string name="widget">Widget</string>
 
     <!-- Toasts -->
-
     <string name="toast_not_enough_space">Not enough space.</string>
     <string name="toast_app_uninstalled">App uninstalled.</string>
 
-    <!-- Intro -->
-
-    <!-- Minibar -->
-
-    <!-- About -->
-
-    <!-- Settings -->
-
-    <string name="pref_default__search_bar_base_uri" translatable="false">https://www.startpage.com/do/search?query={query}</string>
-
-    <!-- Preference Keys -->
-
-    <!-- Internal Keys -->
-
     <!-- Item Labels -->
-
     <string name="folder">Unnamed</string>
 
     <!-- Dialogs -->
-
     <string name="cancel">Cancel</string>
-    <string name="search_hint">Search...</string>
+    <string name="search_hint">Search…</string>
     <string name="search_online">Search online&#8230;</string>
 
 </resources>
