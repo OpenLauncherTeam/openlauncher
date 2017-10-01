@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.Home;
@@ -36,6 +37,7 @@ public class GroupPopupView extends RevealFrameLayout {
     private Animator folderAnimator;
     private int cx;
     private int cy;
+    private TextView textView;
 
     public GroupPopupView(Context context) {
         super(context);
@@ -77,12 +79,19 @@ public class GroupPopupView extends RevealFrameLayout {
         addView(popupCard);
         popupCard.setVisibility(View.INVISIBLE);
         setVisibility(View.INVISIBLE);
+
+        textView = popupCard.findViewById(R.id.group_popup_label);
     }
 
 
     public boolean showWindowV(final Item item, final View itemView, final DesktopCallBack callBack) {
         if (isShowing || getVisibility() == View.VISIBLE) return false;
         isShowing = true;
+
+        String label = item.getLabel();
+        if (label.isEmpty())
+            label = getContext().getString(R.string.folder);
+        textView.setText(label);
 
         final Context c = itemView.getContext();
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.getGroupItems().size());

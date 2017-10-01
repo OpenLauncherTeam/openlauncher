@@ -8,9 +8,22 @@
     app:cardElevation="8dp"
     app:contentPadding="4dp">
 
-    <com.benny.openlauncher.core.widget.CellContainer
-        android:id="@+id/group"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/group_popup_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Text" />
+
+        <com.benny.openlauncher.core.widget.CellContainer
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>

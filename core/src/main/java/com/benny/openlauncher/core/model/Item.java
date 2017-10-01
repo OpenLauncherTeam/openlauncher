@@ -127,7 +127,7 @@ public class Item implements LabelProvider, Parcelable {
     public static Item newGroupItem() {
         Item item = new Item();
         item.type = Type.GROUP;
-        item.name = Home.launcher.getString(R.string.folder);
+        item.name = "";
         item.spanX = 1;
         item.spanY = 1;
         item.items = new ArrayList<>();
