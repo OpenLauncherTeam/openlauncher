@@ -296,6 +296,9 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         Setup.appLoader().addUpdateListener(new AppUpdateListener<App>() {
             @Override
             public boolean onAppUpdated(List<App> apps) {
+                if (desktop == null)
+                    return false;
+
                 if (Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS) {
                     if (Setup.appSettings().isAppFirstLaunch()) {
                         Setup.appSettings().setAppFirstLaunch(false);

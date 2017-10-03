@@ -76,7 +76,7 @@ public class AppDrawerVertical extends CardView {
 
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
-        if (apps == null) {
+        if (apps == null || layoutManager == null) {
             super.onConfigurationChanged(newConfig);
             return;
         }
