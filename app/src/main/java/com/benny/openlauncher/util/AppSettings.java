@@ -68,6 +68,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     @Override
+    public boolean getSearchBarShouldShowHiddenApps() {
+        return getBool(R.string.pref_key__search_bar_show_hidden_apps, false);
+    }
+
+    @Override
     public boolean isSearchBarTimeEnabled() {
         return true;
     }

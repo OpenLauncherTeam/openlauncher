@@ -81,6 +81,8 @@ public interface SettingsManager {
 
     boolean getSearchBarForceBrowser();
 
+    boolean getSearchBarShouldShowHiddenApps();
+
     // not in app settings yet
     boolean isSearchBarTimeEnabled();
 

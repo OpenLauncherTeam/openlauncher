@@ -218,6 +218,9 @@ public class SearchBar extends FrameLayout {
             @Override
             public boolean onAppUpdated(List<App> apps) {
                 adapter.clear();
+                if (Setup.appSettings().getSearchBarShouldShowHiddenApps()) {
+                    apps = Setup.appLoader().getAllApps(getContext(), true);
+                }
                 List<FastItem.LabelItem> items = new ArrayList<>();
                 if (searchInternetEnabled) {
                     items.add(new IconLabelItem(getContext(), R.string.search_online)

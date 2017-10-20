@@ -161,8 +161,8 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
     }
 
     @Override
-    public List<App> getAllApps(Context context) {
-        return getApps();
+    public List<App> getAllApps(Context context, boolean includeHidden) {
+        return includeHidden ? getNonFilteredApps() : getApps();
     }
 
     @Override
