@@ -191,8 +191,13 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             // set start position manually if text container is too large
             float x = Math.max(8, (getWidth() - textContainer.width()) / 2f);
 
-            if (textContainer.width() > getWidth() && label.length() - 3 - charToTruncate > 0) {
-                canvas.drawText(label.substring(0, label.length() - 3 - charToTruncate) + "...", x, getHeight() - heightPadding, textPaint);
+            if (textContainer.width() + 8 > getWidth() && label.length() - charToTruncate > 0) {
+                String showLabel = label.substring(0, label.length() - charToTruncate);
+                do{
+                    textPaint.getTextBounds(showLabel + "...", 0, label.length() - charToTruncate + 3, textContainer);
+                }while(textContainer.width() + 8 > getWidth() && label.length() - (++charToTruncate) > 0);
+
+                canvas.drawText(label.substring(0, label.length() - charToTruncate) + "...", x, getHeight() - heightPadding, textPaint);
             } else {
                 canvas.drawText(label, x, getHeight() - heightPadding, textPaint);
             }
