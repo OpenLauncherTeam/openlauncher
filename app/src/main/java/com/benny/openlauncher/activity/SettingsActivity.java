@@ -189,6 +189,7 @@ public class SettingsActivity extends ThemeActivity {
                 R.string.pref_key__desktop_show_label,
 
                 R.string.pref_key__search_bar_enable,
+                R.string.pref_key__search_bar_show_hidden_apps,
 
                 R.string.pref_key__desktop_background_color,
                 R.string.pref_key__minibar_background_color,

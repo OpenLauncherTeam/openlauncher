@@ -125,7 +125,7 @@ public class AppDrawerVertical extends CardView {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setDrawingCacheEnabled(true);
 
-        List<App> allApps = Setup.appLoader().getAllApps(getContext());
+        List<App> allApps = Setup.appLoader().getAllApps(getContext(), false);
         if (allApps.size() != 0) {
             AppDrawerVertical.this.apps = allApps;
             ArrayList<FastItem.AppItem> items = new ArrayList<>();

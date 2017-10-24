@@ -77,6 +77,8 @@
     <string name="pref_summary__search_bar_force_browser">Always use the browser for online searches.</string>
     <string name="pref_title__desktop_background_color">Background</string>
     <string name="pref_title__desktop_folder_color">Folder</string>
+    <string name="pref_title__search_bar_show_hidden_apps">Show hidden apps</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Include hidden apps in the search results.</string>
 
     <string name="pref_summary__dock_size">Set the dock size.</string>
     <string name="pref_title__dock_show_label">Show Labels</string>

@@ -132,7 +132,7 @@ public abstract class Setup<A extends App> {
     public interface AppLoader<A extends App> {
         void loadItems();
 
-        List<A> getAllApps(Context context);
+        List<A> getAllApps(Context context, boolean includeHidden);
 
         A createApp(Intent intent);
 
