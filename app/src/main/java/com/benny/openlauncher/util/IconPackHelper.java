@@ -118,22 +118,18 @@ public class IconPackHelper {
                     scaledOrig = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
                     scaledBitmap = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
                     canvas = new Canvas(scaledBitmap);
-                    if (back != null) {
+                    
+                    if (back != null)
                         canvas.drawBitmap(back, getResizedMatrix(back, iconSize, iconSize), p);
-                    }
 
                     origCanv = new Canvas(scaledOrig);
                     orig = getResizedBitmap(orig, ((int) (iconSize * scaleFactor)), ((int) (iconSize * scaleFactor)));
                     origCanv.drawBitmap(orig, scaledOrig.getWidth() - (orig.getWidth() / 2) - scaledOrig.getWidth() / 2, scaledOrig.getWidth() - (orig.getWidth() / 2) - scaledOrig.getWidth() / 2, origP);
 
-                    if (mask != null) {
+                    if (mask != null)
                         origCanv.drawBitmap(mask, getResizedMatrix(mask, iconSize, iconSize), maskp);
-                    }
 
-                    if (back != null) {
-                        canvas.drawBitmap(getResizedBitmap(scaledOrig, iconSize, iconSize), 0, 0, p);
-                    } else
-                        canvas.drawBitmap(getResizedBitmap(scaledOrig, iconSize, iconSize), 0, 0, p);
+                    canvas.drawBitmap(getResizedBitmap(scaledOrig, iconSize, iconSize), 0, 0, p);
 
                     if (front != null)
                         canvas.drawBitmap(front, getResizedMatrix(front, iconSize, iconSize), p);
