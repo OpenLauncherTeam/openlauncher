@@ -208,8 +208,8 @@ public class GroupPopupView extends RevealFrameLayout {
         }
 
         if (item.locationInLauncher == Item.LOCATION_DOCK) {
-            coordinates[1] -= iconSize;
-            cy += iconSize + (Setup.appSettings().isDockShowLabel() ? 0 : textSize);
+            coordinates[1] -= iconSize/2;
+            cy += iconSize/2 + (Setup.appSettings().isDockShowLabel() ? 0 : Tool.dp2px(10, getContext()));
         }
 
         int x = coordinates[0];

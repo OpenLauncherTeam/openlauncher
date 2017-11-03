@@ -19,6 +19,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '26.0.2'
 }
 
 dependencies {
@@ -31,7 +32,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // UI Libs
-    compile 'com.mikepenz:fastadapter-commons:2.6.0@aar'
+    compile 'com.mikepenz:fastadapter-commons:2.6.3@aar'
     compile('com.mikepenz:fastadapter:2.6.2@aar') {
         transitive = true
         exclude group: 'com.android.support'

@@ -174,7 +174,7 @@ public class SearchBar extends FrameLayout {
         buttonParams.gravity = Gravity.END;
 
         searchCardContainer = new CardView(getContext());
-        searchCardContainer.setCardBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        searchCardContainer.setCardBackgroundColor(Color.TRANSPARENT);
         searchCardContainer.setVisibility(View.GONE);
         searchCardContainer.setRadius(0);
         searchCardContainer.setCardElevation(0);
