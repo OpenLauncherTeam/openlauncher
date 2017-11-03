@@ -90,7 +90,7 @@ public class AboutActivity extends MaterialAboutActivity {
                 .icon(R.drawable.person_gsantner)
                 .text("Gregor Santner")
                 .subText(getString(R.string.about_credit_text_gsantner))
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://gsantner.github.io/")))
+                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("http://gsantner.net/")))
                 .build());
 
         MaterialAboutCard.Builder contributorsCard = new MaterialAboutCard.Builder();
