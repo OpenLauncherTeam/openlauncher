@@ -25,6 +25,7 @@ import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+import com.mikepenz.fastadapter.listeners.OnClickListener;
 
 import net.qiujuer.genius.blur.StackBlur;
 
@@ -101,7 +102,7 @@ public class DialogHelper {
                     .withDrawablePadding(context, sizePad));
         }
         fastItemAdapter.set(items);
-        fastItemAdapter.withOnClickListener(new FastAdapter.OnClickListener<IconLabelItem>() {
+        fastItemAdapter.withOnClickListener(new OnClickListener<IconLabelItem>() {
             @Override
             public boolean onClick(View v, IAdapter<IconLabelItem> adapter, IconLabelItem item, int position) {
                 if (onAppSelectedListener != null) {
@@ -169,7 +170,7 @@ public class DialogHelper {
     }
 
     public static void deletePackageDialog(Context context, DragEvent dragEvent) {
-        Item item = DragDropHandler.getDraggedObject(dragEvent);
+        Item item = DragDropHandler.INSTANCE.getDraggedObject(dragEvent);
         if (item.type == Item.Type.APP) {
             try {
                 Uri packageURI = Uri.parse("package:" + item.intent.getComponent().getPackageName());

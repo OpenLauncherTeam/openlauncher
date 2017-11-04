@@ -2,6 +2,7 @@ package com.benny.openlauncher.core.widget;
 
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -47,6 +48,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     private Home home;
     private PagerIndicator pageIndicator;
     private Point coordinate = new Point();
+    private boolean dragging = false;
 
     public Desktop(Context c) {
         this(c, null);
@@ -269,13 +271,15 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     }
 
     @Override
-    public boolean onDrag(View p1, DragEvent p2) {
+    public boolean onDrag(View p1, DragEvent event) {
         CellContainer currentPage = getCurrentPage();
-        switch (p2.getAction()) {
+        if (dragging)
+            updateIconProjection(((int) event.getX()), ((int) event.getY()), currentPage);
+        switch (event.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
-                for (CellContainer page : pages) {
+                dragging = true;
+                for (CellContainer page : pages)
                     page.clearCachedOutlineBitmap();
-                }
                 //Tool.print("ACTION_DRAG_STARTED");
                 return true;
             case DragEvent.ACTION_DRAG_ENTERED:
@@ -287,44 +291,21 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 //Tool.print("ACTION_DRAG_EXITED");
                 return true;
             case DragEvent.ACTION_DRAG_LOCATION:
-                //Tool.print("ACTION_DRAG_LOCATION");
-                CellContainer.DragState state = currentPage.peekItemAndSwap(p2, coordinate);
-                if (state == null) return true;
-
-                switch (state) {
-                    case CurrentNotOccupied:
-                        currentPage.invalidate();
-                        if (currentPage.hasCachedOutlineBitmap() || coordinate.x == -1 || coordinate.y == -1) {
-                            break;
-                        }
-                        currentPage.projectImageOutlineAt(coordinate, DragDropHandler.cachedDragBitmap);
-                        break;
-                    case OutOffRange:
-                        break;
-                    case ItemViewNotFound:
-                        break;
-                    case CurrentOccupied:
-                        for (CellContainer page : pages) {
-                            page.clearCachedOutlineBitmap();
-                        }
-                        break;
-                }
-
+                //updateIconProjection(((int) event.getX()), ((int) event.getY()), currentPage);
                 return true;
             case DragEvent.ACTION_DROP:
                 for (CellContainer page : pages)
                     page.clearCachedOutlineBitmap();
 
                 //Tool.print("ACTION_DROP");
-                Item item = DragDropHandler.getDraggedObject(p2);
-
+                Item item = DragDropHandler.INSTANCE.getDraggedObject(event);
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
-                if (((DragAction) p2.getLocalState()).action == DragAction.Action.APP_DRAWER) {
+                if (((DragAction) event.getLocalState()).action == DragAction.Action.APP_DRAWER) {
                     item.reset();
                 }
 
-                if (addItemToPoint(item, (int) p2.getX(), (int) p2.getY())) {
+                if (addItemToPoint(item, (int) event.getX(), (int) event.getY())) {
                     home.desktop.consumeRevert();
                     home.dock.consumeRevert();
 
@@ -332,7 +313,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     home.db.saveItem(item, getCurrentItem(), Definitions.ItemPosition.Desktop);
                 } else {
                     Point pos = new Point();
-                    currentPage.touchPosToCoordinate(pos, (int) p2.getX(), (int) p2.getY(), item.getSpanX(), item.getSpanY(), false);
+                    currentPage.touchPosToCoordinate(pos, (int) event.getX(), (int) event.getY(), item.getSpanX(), item.getSpanY(), false);
                     View itemView = currentPage.coordinateToChildView(pos);
                     if (itemView != null && Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, currentPage, getCurrentItem(), Definitions.ItemPosition.Desktop, this)) {
                         home.desktop.consumeRevert();
@@ -345,12 +326,37 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 }
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
+                dragging = false;
                 Tool.print("ACTION_DRAG_ENDED");
+                for (CellContainer page : pages)
+                    page.clearCachedOutlineBitmap();
                 return true;
         }
 
         currentPage.invalidate();
         return false;
+    }
+
+    private void updateIconProjection(int x, int y, CellContainer currentPage) {
+        CellContainer.DragState state = currentPage.peekItemAndSwap(x, y, coordinate);
+        switch (state) {
+            case CurrentNotOccupied:
+                currentPage.invalidate();
+                if (currentPage.hasCachedOutlineBitmap() || coordinate.x == -1 || coordinate.y == -1) {
+                    break;
+                }
+                currentPage.projectImageOutlineAt(coordinate, DragDropHandler.INSTANCE.getCachedDragBitmap());
+                break;
+            case OutOffRange:
+                break;
+            case ItemViewNotFound:
+                break;
+            case CurrentOccupied:
+                for (CellContainer page : pages) {
+                    page.clearCachedOutlineBitmap();
+                }
+                break;
+        }
     }
 
     public boolean isCurrentPageEmpty() {
@@ -410,8 +416,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         if (positionToLayoutPrams != null) {
             item.locationInLauncher = Item.LOCATION_DESKTOP;
 
-            item.setX(positionToLayoutPrams.x);
-            item.setY(positionToLayoutPrams.y);
+            item.setX(positionToLayoutPrams.getX());
+            item.setY(positionToLayoutPrams.getY());
 
             View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this, Setup.appSettings().getDesktopIconSize());
 
@@ -555,8 +561,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             SimpleFingerGestures mySfg = new SimpleFingerGestures();
             mySfg.setOnFingerGestureListener(getGestureListener());
 
-            layout.gestures = mySfg;
-            layout.onItemRearrangeListener = new CellContainer.OnItemRearrangeListener() {
+            layout.setGestures(mySfg);
+            layout.setOnItemRearrangeListener(new CellContainer.OnItemRearrangeListener() {
                 @Override
                 public void onItemRearrange(Point from, Point to) {
                     Item itemFromCoordinate = Desktop.getItemFromCoordinate(from, getCurrentItem());
@@ -564,7 +570,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                     itemFromCoordinate.setX(to.x);
                     itemFromCoordinate.setY(to.y);
                 }
-            };
+            });
             layout.setOnTouchListener(new OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -597,7 +603,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             scaleFactor = 0.8f;
             translateFactor = Tool.dp2px(Setup.appSettings().getSearchBarEnable() ? 20 : 40, getContext());
             for (CellContainer v : desktop.pages) {
-                v.blockTouch = true;
+                v.setBlockTouch(true);
                 v.animateBackgroundShow();
                 v.animate().scaleX(scaleFactor).scaleY(scaleFactor).translationY(translateFactor).setInterpolator(new AccelerateDecelerateInterpolator());
             }
@@ -611,7 +617,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             scaleFactor = 1.0f;
             translateFactor = 0;
             for (final CellContainer v : desktop.pages) {
-                v.blockTouch = false;
+                v.setBlockTouch(false);
                 v.animateBackgroundHide();
                 v.animate().scaleX(scaleFactor).scaleY(scaleFactor).translationY(translateFactor).setInterpolator(new AccelerateDecelerateInterpolator());
             }

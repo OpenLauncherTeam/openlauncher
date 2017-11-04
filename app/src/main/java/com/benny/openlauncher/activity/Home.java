@@ -443,7 +443,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
         Setup.init(new Setup<AppManager.App>() {
             @Override
             public Context getAppContext() {
-                return App.get();
+                return App.Companion.get();
             }
 
             @Override
@@ -486,6 +486,29 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                 return logger;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        boolean user = AppSettings.get().getBool(R.string.pref_key__desktop_rotate, false);
+        boolean system = false;
+        try {
+            system = Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION) == 1;
+        } catch (Settings.SettingNotFoundException e) {
+            Log.d(Home.class.getSimpleName(), "Unable to read settings", e);
+        }
+        boolean rotate;
+        if (getResources().getBoolean(R.bool.isTablet)) { // tables has no user option to disable rotate
+            rotate = system;
+        } else {
+            rotate = user && system;
+        }
+        if (rotate)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     //This was originally used for a quick recent contact shortcut view, but now the view is removed from the main layout
@@ -538,28 +561,5 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
         public void onChange(boolean selfChange, Uri uri) {
             logCallLog();
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        boolean user = AppSettings.get().getBool(R.string.pref_key__desktop_rotate, false);
-        boolean system = false;
-        try {
-            system = Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION) == 1;
-        } catch (Settings.SettingNotFoundException e) {
-            Log.d(Home.class.getSimpleName(), "Unable to read settings", e);
-        }
-        boolean rotate;
-        if (getResources().getBoolean(R.bool.isTablet)) { // tables has no user option to disable rotate
-            rotate = system;
-        } else {
-            rotate = user && system;
-        }
-        if (rotate)
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-        else
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 }

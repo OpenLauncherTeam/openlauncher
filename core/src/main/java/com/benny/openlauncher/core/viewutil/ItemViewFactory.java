@@ -171,7 +171,7 @@ public class ItemViewFactory {
                             return false;
                         }
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                        DragDropHandler.startDrag(view, item, DragAction.Action.WIDGET, null);
+                        DragDropHandler.INSTANCE.startDrag(view, item, DragAction.Action.WIDGET, null);
 
                         callBack.setLastItem(item, widgetContainer);
                         return true;
@@ -228,9 +228,9 @@ public class ItemViewFactory {
     }
 
     private static void scaleWidget(View view, Item item) {
-        item.spanX = Math.min(item.spanX, Home.launcher.desktop.getCurrentPage().cellSpanH);
+        item.spanX = Math.min(item.spanX, Home.launcher.desktop.getCurrentPage().getCellSpanH());
         item.spanX = Math.max(item.spanX, 1);
-        item.spanY = Math.min(item.spanY, Home.launcher.desktop.getCurrentPage().cellSpanV);
+        item.spanY = Math.min(item.spanY, Home.launcher.desktop.getCurrentPage().getCellSpanV());
         item.spanY = Math.max(item.spanY, 1);
 
         Home.launcher.desktop.getCurrentPage().setOccupied(false, (CellContainer.LayoutParams) view.getLayoutParams());
@@ -256,10 +256,10 @@ public class ItemViewFactory {
 
     private static void updateWidgetOption(Item item) {
         Bundle newOps = new Bundle();
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, item.spanX * Home.launcher.desktop.getCurrentPage().cellWidth);
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.spanX * Home.launcher.desktop.getCurrentPage().cellWidth);
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.spanY * Home.launcher.desktop.getCurrentPage().cellHeight);
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.spanY * Home.launcher.desktop.getCurrentPage().cellHeight);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, item.spanX * Home.launcher.desktop.getCurrentPage().getCellWidth());
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.spanX * Home.launcher.desktop.getCurrentPage().getCellWidth());
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.spanY * Home.launcher.desktop.getCurrentPage().getCellHeight());
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.spanY * Home.launcher.desktop.getCurrentPage().getCellHeight());
         Home.appWidgetManager.updateAppWidgetOptions(item.widgetValue, newOps);
     }
 }

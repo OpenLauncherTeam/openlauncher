@@ -73,7 +73,7 @@ public class DragOptionView extends CardView {
         dragOptions = (LinearLayout) ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_drag_option, this, false);
         addView(dragOptions);
 
-        editIcon = (TextView) dragOptions.findViewById(R.id.editIcon);
+        editIcon = dragOptions.findViewById(R.id.editIcon);
         editIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(final View view, DragEvent dragEvent) {
@@ -88,7 +88,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        final Item item = DragDropHandler.getDraggedObject(dragEvent);
+                        final Item item = DragDropHandler.INSTANCE.getDraggedObject(dragEvent);
 
                         Setup.eventHandler().showEditDialog(getContext(), item, new DialogListener.OnEditDialogListener() {
                             @Override
@@ -127,7 +127,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Item item = DragDropHandler.getDraggedObject(dragEvent);
+                        Item item = DragDropHandler.INSTANCE.getDraggedObject(dragEvent);
 
                         // remove all items from the database
                         Home.launcher.db.deleteItem(item, true);
@@ -157,7 +157,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Item item = DragDropHandler.getDraggedObject(dragEvent);
+                        Item item = DragDropHandler.INSTANCE.getDraggedObject(dragEvent);
                         if (item.getType() == Item.Type.APP) {
                             try {
                                 getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.getIntent().getComponent().getPackageName())));

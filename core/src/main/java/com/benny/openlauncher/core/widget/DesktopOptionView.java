@@ -118,7 +118,7 @@ public class DesktopOptionView extends FrameLayout {
         actionRecyclerViews[0] = createRecyclerView(actionAdapters[0], Gravity.TOP | Gravity.CENTER_HORIZONTAL, true, paddingHorizontal);
         actionRecyclerViews[1] = createRecyclerView(actionAdapters[1], Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, false, paddingHorizontal);
 
-        final FastAdapter.OnClickListener<FastItem.DesktopOptionsItem> clickListener = new FastAdapter.OnClickListener<FastItem.DesktopOptionsItem>() {
+        final com.mikepenz.fastadapter.listeners.OnClickListener<FastItem.DesktopOptionsItem> clickListener = new com.mikepenz.fastadapter.listeners.OnClickListener<FastItem.DesktopOptionsItem>() {
             @Override
             public boolean onClick(View v, IAdapter<FastItem.DesktopOptionsItem> adapter, FastItem.DesktopOptionsItem item, int position) {
                 if (desktopOptionViewListener != null) {
@@ -169,7 +169,7 @@ public class DesktopOptionView extends FrameLayout {
         });
     }
 
-    private void initItems(final Typeface typeface, final FastAdapter.OnClickListener<FastItem.DesktopOptionsItem> clickListener, int itemWidth) {
+    private void initItems(final Typeface typeface, final com.mikepenz.fastadapter.listeners.OnClickListener<FastItem.DesktopOptionsItem> clickListener, int itemWidth) {
         List<FastItem.DesktopOptionsItem> itemsTop = new ArrayList<>();
         itemsTop.add(createItem(R.drawable.ic_delete_white_36dp, R.string.remove, typeface, itemWidth));
         itemsTop.add(createItem(R.drawable.ic_star_white_36dp, R.string.home, typeface, itemWidth));

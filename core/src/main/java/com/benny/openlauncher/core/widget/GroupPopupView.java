@@ -123,7 +123,7 @@ public class GroupPopupView extends RevealFrameLayout {
                         DragAction.Action action = groupItem.getType() == Item.Type.SHORTCUT ? DragAction.Action.SHORTCUT : DragAction.Action.APP;
 
                         // start the drag action
-                        DragDropHandler.startDrag(view, groupItem, action, null);
+                        DragDropHandler.INSTANCE.startDrag(view, groupItem, action, null);
 
                         dismissPopup();
                         updateItem(c, callBack, item, groupItem, itemView);

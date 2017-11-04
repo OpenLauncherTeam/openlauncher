@@ -24,7 +24,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     public static AppSettings get() {
-        return new AppSettings(App.get());
+        return new AppSettings(App.Companion.get());
     }
 
     public int getDesktopColumnCount() {

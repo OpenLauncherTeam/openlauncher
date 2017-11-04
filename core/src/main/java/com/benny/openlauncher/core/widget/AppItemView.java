@@ -282,7 +282,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                         return false;
                     }
                     v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                    DragDropHandler.startDrag(v, item, action, eventAction);
+                    DragDropHandler.INSTANCE.startDrag(v, item, action, eventAction);
                     return true;
                 }
             };
@@ -392,7 +392,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                     if (view.vibrateWhenLongPress) {
                         v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                     }
-                    DragDropHandler.startDrag(view, item, action, eventAction);
+                    DragDropHandler.INSTANCE.startDrag(view, item, action, eventAction);
                     return true;
                 }
             });

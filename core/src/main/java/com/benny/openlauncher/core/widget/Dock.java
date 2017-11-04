@@ -116,7 +116,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                         invalidate();
                         if (hasCachedOutlineBitmap() || coordinate.x == -1 || coordinate.y == -1)
                             break;
-                        projectImageOutlineAt(coordinate, DragDropHandler.cachedDragBitmap);
+                        projectImageOutlineAt(coordinate, DragDropHandler.INSTANCE.getCachedDragBitmap());
                         break;
                     case OutOffRange:
                         break;
@@ -135,7 +135,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             case DragEvent.ACTION_DROP:
                 clearCachedOutlineBitmap();
 
-                Item item = DragDropHandler.getDraggedObject(p2);
+                Item item = DragDropHandler.INSTANCE.getDraggedObject(p2);
 
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
@@ -249,8 +249,8 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         if (positionToLayoutPrams != null) {
             item.locationInLauncher = Item.LOCATION_DOCK;
 
-            item.setX(positionToLayoutPrams.x);
-            item.setY(positionToLayoutPrams.y);
+            item.setX(positionToLayoutPrams.getX());
+            item.setY(positionToLayoutPrams.getY());
 
             View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this, Setup.appSettings().getDockIconSize());
 

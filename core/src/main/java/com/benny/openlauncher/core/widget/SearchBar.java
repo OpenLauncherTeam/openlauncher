@@ -252,7 +252,7 @@ public class SearchBar extends FrameLayout {
                             .withOnLongClickListener(AppItemView.Builder.getLongClickDragAppListener(Item.newAppItem(app), DragAction.Action.APP, new AppItemView.LongPressCallBack() {
                                 @Override
                                 public boolean readyForDrag(View view) {
-                                    if (finalI == 0) return false;
+                                    if (finalI == -1) return false;
 
                                     expanded = !expanded;
                                     collapseInternal();
@@ -352,6 +352,7 @@ public class SearchBar extends FrameLayout {
 
     protected void initRecyclerView() {
         searchRecycler = new RecyclerView(getContext());
+        searchRecycler.setItemAnimator(null);
         searchRecycler.setVisibility(View.GONE);
         searchRecycler.setAdapter(adapter);
         searchRecycler.setClipToPadding(false);
@@ -386,7 +387,6 @@ public class SearchBar extends FrameLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             int topInset = insets.getSystemWindowInsetTop();
             setPadding(getPaddingLeft(), topInset + Tool.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom());
-            //searchRecycler.setPadding(searchRecycler.getPaddingLeft(), searchRecycler.getPaddingTop(), searchRecycler.getPaddingRight(), searchRecycler.getPaddingBottom() + insets.getSystemWindowInsetBottom());
         }
         return insets;
     }

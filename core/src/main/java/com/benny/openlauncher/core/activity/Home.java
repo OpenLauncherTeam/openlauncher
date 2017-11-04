@@ -621,8 +621,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
         AppWidgetProviderInfo appWidgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId);
         Item item = Item.newWidgetItem(appWidgetId);
-        item.setSpanX(((appWidgetInfo.minWidth - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellWidth) + 1);
-        item.setSpanY(((appWidgetInfo.minHeight - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).cellHeight) + 1);
+        item.setSpanX(((appWidgetInfo.minWidth - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).getCellWidth()) + 1);
+        item.setSpanY(((appWidgetInfo.minHeight - 1) / desktop.pages.get(Home.launcher.desktop.getCurrentItem()).getCellHeight()) + 1);
         Point point = desktop.getCurrentPage().findFreeSpace(item.getSpanX(), item.getSpanY());
         if (point != null) {
             item.setX(point.x);

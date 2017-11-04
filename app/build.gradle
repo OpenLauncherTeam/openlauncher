@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion setup.compileSdk
@@ -56,24 +58,33 @@ android {
 
 dependencies {
     // UI Libs
-    compile 'com.mikepenz:fastadapter-extensions:2.6.3@aar'
-    compile 'com.github.daniel-stoneuk:material-about-library:1.4.2'
-    compile 'com.afollestad.material-dialogs:core:0.9.4.5'
-    compile 'com.balysv:material-ripple:1.0.2'
-    compile 'net.qiujuer.genius:blur:2.0.0'
-    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
-    compile 'com.github.chyrta:AndroidOnboarder:0.6'
-    compile 'cat.ereza:customactivityoncrash:1.5.0'
-    compile 'de.psdev.licensesdialog:licensesdialog:1.8.2'
-    compile 'com.jaredrummler:colorpicker:1.0.0'
+    implementation 'com.mikepenz:fastadapter:3.0.0@aar'
+    implementation 'com.mikepenz:fastadapter-commons:3.0.0@aar'
+    implementation 'com.mikepenz:fastadapter-extensions:3.0.0@aar'
 
+    implementation ('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
+        transitive = true
+    }
+
+    implementation 'com.github.daniel-stoneuk:material-about-library:1.4.2'
+    implementation 'com.afollestad.material-dialogs:core:0.9.4.5'
+    implementation 'com.balysv:material-ripple:1.0.2'
+    implementation 'net.qiujuer.genius:blur:2.0.0'
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    implementation 'com.github.chyrta:AndroidOnboarder:0.6'
+    implementation 'cat.ereza:customactivityoncrash:1.5.0'
+    implementation 'de.psdev.licensesdialog:licensesdialog:1.8.2'
+    implementation 'com.jaredrummler:colorpicker:1.0.0'
+    implementation 'in.championswimmer:SimpleFingerGestures_Android_Library:1.2'
     // Tools
-    compile "com.jakewharton:butterknife:${versions.butterknife}"
-
+    implementation "com.jakewharton:butterknife:${versions.butterknife}"
     // Android-Apt
     annotationProcessor "com.jakewharton:butterknife-compiler:${versions.butterknife}"
-
-    compile project (':core')
+    compile project(':core')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
 
 @SuppressWarnings(["UnnecessaryQualifiedReference", "SpellCheckingInspection"])
