@@ -127,7 +127,7 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
 
         for (int i = 0; i < resolveInfos.size(); i++) {
             final int mI = i;
-            fastItemAdapter.add(new IconLabelItem(activity, resolveInfos.get(i).loadIcon(packageManager), resolveInfos.get(i).loadLabel(packageManager).toString(), -1)
+            fastItemAdapter.add(new IconLabelItem(activity, resolveInfos.get(i).loadIcon(packageManager), " " + resolveInfos.get(i).loadLabel(packageManager).toString(), -1)
                     .withIconGravity(Gravity.START)
                     .withOnClickListener(new View.OnClickListener() {
                         @Override

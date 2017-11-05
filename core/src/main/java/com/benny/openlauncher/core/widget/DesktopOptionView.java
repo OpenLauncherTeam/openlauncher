@@ -51,16 +51,6 @@ public class DesktopOptionView extends FrameLayout {
         init();
     }
 
-    public void animateOpen() {
-        ((View) actionRecyclerViews[0].getParent()).animate().scaleY(1).setDuration(200);
-        Tool.Companion.visibleViews(100, 200, actionRecyclerViews[0]);
-    }
-
-    public void animateClose() {
-        ((View) actionRecyclerViews[0].getParent()).animate().scaleY(0).setDuration(100).setStartDelay(40);
-        Tool.Companion.invisibleViews(50, actionRecyclerViews[0]);
-    }
-
     public void setDesktopOptionViewListener(DesktopOptionViewListener desktopOptionViewListener) {
         this.desktopOptionViewListener = desktopOptionViewListener;
     }
@@ -115,8 +105,8 @@ public class DesktopOptionView extends FrameLayout {
         actionAdapters[0] = new FastItemAdapter<>();
         actionAdapters[1] = new FastItemAdapter<>();
 
-        actionRecyclerViews[0] = createRecyclerView(actionAdapters[0], Gravity.TOP | Gravity.CENTER_HORIZONTAL, true, paddingHorizontal);
-        actionRecyclerViews[1] = createRecyclerView(actionAdapters[1], Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, false, paddingHorizontal);
+        actionRecyclerViews[0] = createRecyclerView(actionAdapters[0], Gravity.TOP | Gravity.CENTER_HORIZONTAL, paddingHorizontal);
+        actionRecyclerViews[1] = createRecyclerView(actionAdapters[1], Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, paddingHorizontal);
 
         final com.mikepenz.fastadapter.listeners.OnClickListener<FastItem.DesktopOptionsItem> clickListener = new com.mikepenz.fastadapter.listeners.OnClickListener<FastItem.DesktopOptionsItem>() {
             @Override
@@ -184,13 +174,10 @@ public class DesktopOptionView extends FrameLayout {
         actionAdapters[1].set(itemsBottom);
         actionAdapters[1].withOnClickListener(clickListener);
 
-        actionRecyclerViews[0].setAlpha(0);
-        ((MarginLayoutParams) ((View) actionRecyclerViews[0].getParent()).getLayoutParams()).topMargin = Tool.Companion.dp2px(4, getContext());
-        ((View) actionRecyclerViews[0].getParent()).setPivotY(0);
-        ((View) actionRecyclerViews[0].getParent()).setScaleY(0);
+        ((MarginLayoutParams) ((View) actionRecyclerViews[0].getParent()).getLayoutParams()).topMargin = Tool.Companion.dp2px(Setup.appSettings().getSearchBarEnable() ? 36 : 4, getContext());
     }
 
-    private RecyclerView createRecyclerView(FastAdapter adapter, int gravity, boolean warpCard, int paddingHorizontal) {
+    private RecyclerView createRecyclerView(FastAdapter adapter, int gravity, int paddingHorizontal) {
         RecyclerView actionRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         actionRecyclerView.setClipToPadding(false);
@@ -200,15 +187,8 @@ public class DesktopOptionView extends FrameLayout {
         actionRecyclerView.setOverScrollMode(OVER_SCROLL_ALWAYS);
         LayoutParams actionRecyclerViewLP = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         actionRecyclerViewLP.gravity = gravity;
-        if (warpCard) {
-            CardView cardView = new CardView(getContext());
-            cardView.setRadius(0);
-            cardView.setCardElevation(0);
-            cardView.setCardBackgroundColor(getContext().getResources().getColor(R.color.transparent));
-            cardView.addView(actionRecyclerView);
-            addView(cardView, actionRecyclerViewLP);
-        } else
-            addView(actionRecyclerView, actionRecyclerViewLP);
+
+        addView(actionRecyclerView, actionRecyclerViewLP);
         return actionRecyclerView;
     }
 

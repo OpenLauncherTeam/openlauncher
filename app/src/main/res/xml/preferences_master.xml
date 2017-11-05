@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/pref_title__interfaces">
+    <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__interfaces">
 
-        <Preference
+        <android.support.v7.preference.Preference
             android:icon="@drawable/ic_desktop_windows_dark_24dp"
             android:key="@string/pref_key__cat_desktop"
             android:title="@string/pref_title__desktop" />
 
-        <Preference
+        <android.support.v7.preference.Preference
             android:icon="@drawable/ic_dock_dark_24dp"
             android:key="@string/pref_key__cat_dock"
             android:title="@string/pref_title__dock" />
 
-        <Preference
+        <android.support.v7.preference.Preference
             android:icon="@drawable/ic_apps_dark_24dp"
             android:key="@string/pref_key__cat_app_drawer"
             android:title="@string/pref_title__app_drawer" />
 
-    </PreferenceCategory>
+    </android.support.v7.preference.PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__inputs">
+    <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__inputs">
 
-        <Preference
+        <android.support.v7.preference.Preference
             android:icon="@drawable/ic_gesture_dark_24dp"
             android:key="@string/pref_key__cat_gestures"
             android:title="@string/pref_title__gestures" />
 
-    </PreferenceCategory>
+    </android.support.v7.preference.PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__feels">
+    <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__feels">
 
-        <Preference
+        <android.support.v7.preference.Preference
             android:icon="@drawable/ic_android_dark_24dp"
             android:key="@string/pref_key__cat_icons"
             android:title="@string/pref_title__icons" />
 
-    </PreferenceCategory>
+    </android.support.v7.preference.PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__others">
+    <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__others">
 
-        <Preference
+        <android.support.v7.preference.Preference
             android:icon="@drawable/ic_more_horiz_black_24dp"
             android:key="@string/pref_key__cat_miscellaneous"
             android:title="@string/pref_title__miscellaneous" />
 
-        <Preference
+        <android.support.v7.preference.Preference
             android:icon="@drawable/ic_info_outline_dark_24dp"
             android:key="@string/pref_key__cat_about"
             android:title="@string/pref_title__about" />
 
-    </PreferenceCategory>
+    </android.support.v7.preference.PreferenceCategory>
 
-</PreferenceScreen>
+</android.support.v7.preference.PreferenceScreen>

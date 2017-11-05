@@ -12,8 +12,8 @@ android {
 
         flavorDimensions "versionCode"
 
-        versionCode 27
-        versionName "0.5.5"
+        versionCode 28
+        versionName "0.5.6(pre-alpha)"
 
         applicationId "com.benny.openlauncher"
         resValue 'string', 'app_name', "OpenLauncher"
@@ -29,6 +29,10 @@ android {
         }
 
         flavorGplay {
+            buildConfigField "boolean", "IS_GPLAY_BUILD", "true"
+        }
+
+        flavorGplayPreAlpha {
             buildConfigField "boolean", "IS_GPLAY_BUILD", "true"
         }
 
@@ -66,6 +70,7 @@ dependencies {
         transitive = true
     }
 
+    implementation 'com.github.kizitonwose.colorpreference:support:1.0.4'
     implementation 'com.github.daniel-stoneuk:material-about-library:1.4.2'
     implementation 'com.afollestad.material-dialogs:core:0.9.4.5'
     implementation 'com.balysv:material-ripple:1.0.2'

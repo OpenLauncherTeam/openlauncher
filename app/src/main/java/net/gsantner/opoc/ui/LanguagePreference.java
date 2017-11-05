@@ -49,8 +49,8 @@ package net.gsantner.opoc.ui;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.preference.ListPreference;
 import android.support.annotation.Nullable;
+import android.support.v7.preference.ListPreference;
 import android.util.AttributeSet;
 
 import net.gsantner.opoc.util.ContextUtils;
@@ -94,7 +94,7 @@ public class LanguagePreference extends ListPreference {
     }
 
     @Override
-    protected boolean callChangeListener(Object newValue) {
+    public boolean callChangeListener(Object newValue) {
         if (newValue instanceof String) {
             // Does not apply to existing UI, use recreate()
             new ContextUtils(getContext()).setAppLanguage((String) newValue);

@@ -1,82 +1,82 @@
-<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="@string/pref_title__size">
+    <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__size">
 
-        <com.benny.openlauncher.widget.NumberPickerPreference
+        <com.benny.openlauncher.preference.NumberPickerPreference
             android:defaultValue="4"
             android:key="@string/pref_key__desktop_columns"
             android:title="@string/columns"
             app:maxValue="20"
             app:minValue="2" />
 
-        <com.benny.openlauncher.widget.NumberPickerPreference
+        <com.benny.openlauncher.preference.NumberPickerPreference
             android:defaultValue="5"
             android:key="@string/pref_key__desktop_rows"
             android:title="@string/rows"
             app:maxValue="20"
             app:minValue="2" />
 
-    </PreferenceCategory>
+    </android.support.v7.preference.PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__appearance">
+    <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__appearance">
 
-        <ListPreference
-            android:defaultValue="0"
-            android:entries="@array/entries__desktop_styles"
-            android:entryValues="@array/values__zero_to_one"
-            android:key="@string/pref_key__desktop_style"
-            android:summary="@string/pref_summary__desktop_style"
-            android:title="@string/pref_title__desktop_style" />
+        <!--<android.support.v7.preference.ListPreference-->
+            <!--android:defaultValue="0"-->
+            <!--android:entries="@array/entries__desktop_styles"-->
+            <!--android:entryValues="@array/values__zero_to_one"-->
+            <!--android:key="@string/pref_key__desktop_style"-->
+            <!--android:summary="@string/pref_summary__desktop_style"-->
+            <!--android:title="@string/pref_title__desktop_style" />-->
 
-        <ListPreference
+        <android.support.v7.preference.ListPreference
             android:defaultValue="0"
             android:entries="@array/entries__desktop_indicator_mode"
             android:entryValues="@array/values__zero_to_one"
             android:key="@string/pref_key__desktop_indicator_style"
             android:title="@string/pref_title__desktop_indicator_style" />
 
-        <Preference
+        <android.support.v7.preference.Preference
             android:key="@string/pref_key__minibar"
             android:summary="@string/pref_summary__minibar"
             android:title="@string/pref_title__minibar" />
 
-        <CheckBoxPreference
+        <android.support.v7.preference.CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__desktop_hide_grid"
             android:summary="@string/pref_summary__desktop_hide_grid"
             android:title="@string/pref_title__desktop_hide_grid" />
 
-        <CheckBoxPreference
+        <android.support.v7.preference.CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_key__desktop_fullscreen"
             android:summary="@string/pref_summary__desktop_fullscreen"
             android:title="@string/pref_title__desktop_fullscreen" />
 
-        <CheckBoxPreference
+        <android.support.v7.preference.CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__desktop_show_position_indicator"
             android:summary="@string/pref_summary__desktop_show_position_indicator"
             android:title="@string/pref_title__desktop_show_position_indicator" />
 
-        <CheckBoxPreference
+        <android.support.v7.preference.CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__desktop_show_label"
             android:summary="@string/pref_summary__desktop_show_label"
             android:title="@string/pref_title__desktop_show_label" />
 
-    </PreferenceCategory>
+    </android.support.v7.preference.PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__search_bar">
+    <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__search_bar">
 
-        <CheckBoxPreference
+        <android.support.v7.preference.CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__search_bar_enable"
             android:summary="@string/pref_summary__search_bar_enable"
             android:title="@string/pref_title__search_bar_enable" />
 
-        <EditTextPreference
+        <android.support.v7.preference.EditTextPreference
             android:defaultValue="@string/pref_default__search_bar_base_uri"
             android:dependency="@string/pref_key__search_bar_enable"
             android:dialogMessage="@string/pref_dialog__search_bar_base_uri"
@@ -86,45 +86,45 @@
             android:summary="@string/pref_summary__search_bar_base_uri"
             android:title="@string/pref_title__search_bar_base_uri" />
 
-        <CheckBoxPreference
+        <android.support.v7.preference.CheckBoxPreference
             android:defaultValue="false"
             android:dependency="@string/pref_key__search_bar_enable"
             android:key="@string/pref_key__search_bar_force_browser"
             android:summary="@string/pref_summary__search_bar_force_browser"
             android:title="@string/pref_title__search_bar_force_browser" />
 
-        <CheckBoxPreference
+        <android.support.v7.preference.CheckBoxPreference
             android:defaultValue="false"
             android:dependency="@string/pref_key__search_bar_enable"
             android:key="@string/pref_key__search_bar_show_hidden_apps"
             android:summary="@string/pref_summary__search_bar_show_hidden_apps"
             android:title="@string/pref_title__search_bar_show_hidden_apps" />
 
-    </PreferenceCategory>
+    </android.support.v7.preference.PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__color">
+    <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__color">
 
-        <com.jaredrummler.android.colorpicker.ColorPreference
+        <com.benny.openlauncher.preference.ColorPreferenceSupport
             android:defaultValue="@color/transparent"
             android:key="@string/pref_key__desktop_background_color"
             android:title="@string/pref_title__desktop_background_color"
             app:cpv_dialogTitle="@string/pref_title__desktop_background_color"
-            app:cpv_showAlphaSlider="true" />
+            app:cpv_showAlphaSlider="true"/>
 
-        <com.jaredrummler.android.colorpicker.ColorPreference
+        <com.benny.openlauncher.preference.ColorPreferenceSupport
             android:defaultValue="@color/white"
             android:key="@string/pref_key__desktop_folder_color"
             android:title="@string/pref_title__desktop_folder_color"
             app:cpv_dialogTitle="@string/pref_title__desktop_folder_color"
-            app:cpv_showAlphaSlider="true" />
+            app:cpv_showAlphaSlider="true"/>
 
-        <com.jaredrummler.android.colorpicker.ColorPreference
+        <com.benny.openlauncher.preference.ColorPreferenceSupport
             android:defaultValue="@color/colorPrimaryDark"
             android:key="@string/pref_key__minibar_background_color"
             android:title="@string/pref_title__minibar_background_color"
             app:cpv_dialogTitle="@string/pref_title__minibar_background_color"
-            app:cpv_showAlphaSlider="true" />
+            app:cpv_showAlphaSlider="true"/>
 
-    </PreferenceCategory>
+    </android.support.v7.preference.PreferenceCategory>
 
-</PreferenceScreen>
+</android.support.v7.preference.PreferenceScreen>

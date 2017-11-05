@@ -3,18 +3,16 @@ package com.benny.openlauncher.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -30,10 +28,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SettingsActivity extends ThemeActivity {
+    protected static Context context;
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
-    protected static Context context;
-
     private AppSettings appSettings;
     private boolean shouldLauncherRestart = false;
 
@@ -51,11 +48,12 @@ public class SettingsActivity extends ThemeActivity {
                 SettingsActivity.this.onBackPressed();
             }
         });
+        toolbar.setBackgroundColor(AppSettings.get().getPrimaryColor());
         showFragment(SettingsFragmentMaster.TAG, false);
     }
 
     protected void showFragment(String tag, boolean addToBackStack) {
-        PreferenceFragment fragment = (PreferenceFragment) getFragmentManager().findFragmentByTag(tag);
+        PreferenceFragmentCompat fragment = (PreferenceFragmentCompat) getSupportFragmentManager().findFragmentByTag(tag);
         if (fragment == null) {
             switch (tag) {
                 case SettingsFragmentDesktop.TAG:
@@ -89,7 +87,9 @@ public class SettingsActivity extends ThemeActivity {
                     break;
             }
         }
-        FragmentTransaction t = getFragmentManager().beginTransaction();
+        android.support.v4.app.FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+        t.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+
         if (addToBackStack) {
             t.addToBackStack(tag);
         }
@@ -107,17 +107,17 @@ public class SettingsActivity extends ThemeActivity {
         super.onPause();
     }
 
-    public static class SettingsFragmentMaster extends PreferenceFragment {
+    public static class SettingsFragmentMaster extends PreferenceFragmentCompat {
         public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentMaster";
 
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setSharedPreferencesName("app");
             addPreferencesFromResource(R.xml.preferences_master);
         }
 
         @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+        public boolean onPreferenceTreeClick(android.support.v7.preference.Preference preference) {
             if (isAdded() && preference.hasKey()) {
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
@@ -144,7 +144,7 @@ public class SettingsActivity extends ThemeActivity {
                     return true;
                 }
             }
-            return super.onPreferenceTreeClick(screen, preference);
+            return super.onPreferenceTreeClick(preference);
         }
 
         @Override
@@ -177,7 +177,6 @@ public class SettingsActivity extends ThemeActivity {
         }
     }
 
-
     public static class SettingsFragmentDesktop extends BasePreferenceFragment {
         public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentDesktop";
 
@@ -195,14 +194,14 @@ public class SettingsActivity extends ThemeActivity {
                 R.string.pref_key__minibar_background_color,
         };
 
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setSharedPreferencesName("app");
             addPreferencesFromResource(R.xml.preferences_desktop);
         }
 
         @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+        public boolean onPreferenceTreeClick(android.support.v7.preference.Preference preference) {
             if (isAdded() && preference.hasKey()) {
                 String key = preference.getKey();
 
@@ -211,7 +210,7 @@ public class SettingsActivity extends ThemeActivity {
                     return true;
                 }
             }
-            return super.onPreferenceTreeClick(screen, preference);
+            return super.onPreferenceTreeClick(preference);
         }
 
         @Override
@@ -248,19 +247,19 @@ public class SettingsActivity extends ThemeActivity {
                 R.string.pref_key__dock_background_color
         };
 
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setSharedPreferencesName("app");
             addPreferencesFromResource(R.xml.preferences_dock);
         }
 
         @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+        public boolean onPreferenceTreeClick(android.support.v7.preference.Preference preference) {
             if (isAdded() && preference.hasKey()) {
                 AppSettings settings = AppSettings.get();
                 String key = preference.getKey();
             }
-            return super.onPreferenceTreeClick(screen, preference);
+            return super.onPreferenceTreeClick(preference);
         }
 
         @Override
@@ -300,14 +299,14 @@ public class SettingsActivity extends ThemeActivity {
                 R.string.pref_key__drawer_fast_scroll_color
         };
 
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setSharedPreferencesName("app");
             addPreferencesFromResource(R.xml.preferences_app_drawer);
         }
 
         @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+        public boolean onPreferenceTreeClick(android.support.v7.preference.Preference preference) {
             if (isAdded() && preference.hasKey()) {
                 String key = preference.getKey();
 
@@ -320,7 +319,7 @@ public class SettingsActivity extends ThemeActivity {
                 }
 
             }
-            return super.onPreferenceTreeClick(screen, preference);
+            return super.onPreferenceTreeClick(preference);
         }
 
         @Override
@@ -348,18 +347,18 @@ public class SettingsActivity extends ThemeActivity {
 
         };
 
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setSharedPreferencesName("app");
             addPreferencesFromResource(R.xml.preferences_gestures);
         }
 
         @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+        public boolean onPreferenceTreeClick(android.support.v7.preference.Preference preference) {
             if (isAdded() && preference.hasKey()) {
                 String key = preference.getKey();
             }
-            return super.onPreferenceTreeClick(screen, preference);
+            return super.onPreferenceTreeClick(preference);
         }
 
         @Override
@@ -388,14 +387,14 @@ public class SettingsActivity extends ThemeActivity {
                 R.string.pref_key__icon_pack
         };
 
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setSharedPreferencesName("app");
             addPreferencesFromResource(R.xml.preferences_icons);
         }
 
         @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+        public boolean onPreferenceTreeClick(android.support.v7.preference.Preference preference) {
             if (isAdded() && preference.hasKey()) {
                 String key = preference.getKey();
 
@@ -404,7 +403,7 @@ public class SettingsActivity extends ThemeActivity {
                     return true;
                 }
             }
-            return super.onPreferenceTreeClick(screen, preference);
+            return super.onPreferenceTreeClick(preference);
         }
 
         @Override
@@ -434,8 +433,8 @@ public class SettingsActivity extends ThemeActivity {
                 R.string.pref_summary__theme
         };
 
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setSharedPreferencesName("app");
             addPreferencesFromResource(R.xml.preferences_miscellaneous);
 
@@ -447,7 +446,7 @@ public class SettingsActivity extends ThemeActivity {
         }
 
         @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+        public boolean onPreferenceTreeClick(android.support.v7.preference.Preference preference) {
             if (isAdded() && preference.hasKey()) {
                 String key = preference.getKey();
                 Activity activity = getActivity();
@@ -475,7 +474,7 @@ public class SettingsActivity extends ThemeActivity {
                     return true;
                 }
             }
-            return super.onPreferenceTreeClick(screen, preference);
+            return super.onPreferenceTreeClick(preference);
         }
 
         @Override
@@ -496,7 +495,7 @@ public class SettingsActivity extends ThemeActivity {
         }
     }
 
-    public static abstract class BasePreferenceFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+    public static abstract class BasePreferenceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
         public AppSettings appSettings;
 

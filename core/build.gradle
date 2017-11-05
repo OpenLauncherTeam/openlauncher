@@ -31,6 +31,8 @@ dependencies {
     compile "com.android.support:cardview-v7:${versions.supportLib}"
     compile "com.android.support:design:${versions.supportLib}"
     compile "com.android.support:support-v13:${versions.supportLib}"
+    compile "com.android.support:preference-v7:${versions.supportLib}"
+    compile "com.android.support:preference-v14:${versions.supportLib}"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     // UI Libs
     implementation 'com.mikepenz:fastadapter:3.0.0@aar'

@@ -25,7 +25,6 @@ import de.psdev.licensesdialog.model.Notices
 class AboutActivity : MaterialAboutActivity() {
 
     companion object {
-
         private val notices = Notices()
 
         init {
@@ -115,7 +114,5 @@ class AboutActivity : MaterialAboutActivity() {
                 .build()
     }
 
-    override fun getActivityTitle(): CharSequence {
-        return getString(R.string.pref_title__about)
-    }
+    override fun getActivityTitle(): CharSequence = getString(R.string.pref_title__about)
 }

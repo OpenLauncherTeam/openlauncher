@@ -277,14 +277,14 @@ public class SearchBar extends FrameLayout {
             @Override
             public boolean filter(FastItem.LabelItem item, CharSequence constraint) {
                 if (item.getLabel().equals(getContext().getString(R.string.search_online)))
-                    return false;
+                    return true;
                 String s = constraint.toString();
                 if (s.isEmpty())
-                    return true;
-                else if (item.getLabel().toLowerCase().contains(s.toLowerCase()))
                     return false;
-                else
+                else if (item.getLabel().toLowerCase().contains(s.toLowerCase()))
                     return true;
+                else
+                    return false;
             }
         });
 
