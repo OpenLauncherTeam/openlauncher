@@ -236,8 +236,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         appDrawerController.setCallBack(new AppDrawerController.CallBack() {
             @Override
             public void onStart() {
-                Tool.visibleViews(appDrawerIndicator);
-                Tool.invisibleViews(desktop);
+                Tool.Companion.visibleViews(appDrawerIndicator);
+                Tool.Companion.invisibleViews(desktop);
                 hideDesktopIndicator();
                 updateDock(false);
                 updateSearchBar(false);
@@ -249,8 +249,8 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         }, new AppDrawerController.CallBack() {
             @Override
             public void onStart() {
-                Tool.invisibleViews(appDrawerIndicator);
-                Tool.visibleViews(desktop);
+                Tool.Companion.invisibleViews(appDrawerIndicator);
+                Tool.Companion.visibleViews(desktop);
                 showDesktopIndicator();
                 if (Setup.appSettings().getDrawerStyle() == AppDrawerController.DrawerMode.HORIZONTAL_PAGED)
                     updateDock(true, 200);
@@ -275,7 +275,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
             context.startActivity(intent);
             Home.consumeNextResume = true;
         } catch (Exception e) {
-            Tool.toast(context, R.string.toast_app_uninstalled);
+            Tool.Companion.toast(context, R.string.toast_app_uninstalled);
         }
     }
 
@@ -288,7 +288,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
             Home.consumeNextResume = true;
         } catch (Exception e) {
-            Tool.toast(context, R.string.toast_app_uninstalled);
+            Tool.Companion.toast(context, R.string.toast_app_uninstalled);
         }
     }
 
@@ -341,7 +341,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         //dragOptionView.resetAutoHideView();
 
         desktopEditOptionView.animateOpen();
-        Tool.visibleViews(100, 20, desktopEditOptionView);
+        Tool.Companion.visibleViews(100, 20, desktopEditOptionView);
 
         hideDesktopIndicator();
         updateDock(false);
@@ -351,7 +351,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
     @Override
     public void onFinishDesktopEdit() {
         desktopEditOptionView.animateClose();
-        Tool.invisibleViews(100, 20, desktopEditOptionView);
+        Tool.Companion.invisibleViews(100, 20, desktopEditOptionView);
 
         showDesktopIndicator();
         updateDock(true);
@@ -383,7 +383,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
                 if (pos != null)
                     desktop.addItemToCell(Item.newActionItem(Definitions.ACTION_LAUNCHER), pos.x, pos.y);
                 else
-                    Tool.toast(Home.this, R.string.toast_not_enough_space);
+                    Tool.Companion.toast(Home.this, R.string.toast_not_enough_space);
             }
         });
     }
@@ -425,28 +425,28 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
         int iconSize = Setup.appSettings().getDockIconSize();
         dock.init();
         if (Setup.appSettings().isDockShowLabel()) {
-            dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;
+            dock.getLayoutParams().height = Tool.Companion.dp2px(16 + iconSize + 14 + 10, this) + Dock.bottomInset;
         } else {
-            dock.getLayoutParams().height = Tool.dp2px(16 + iconSize + 10, this) + Dock.bottomInset;
+            dock.getLayoutParams().height = Tool.Companion.dp2px(16 + iconSize + 10, this) + Dock.bottomInset;
         }
     }
 
     public void dimBackground() {
-        Tool.visibleViews(background);
+        Tool.Companion.visibleViews(background);
     }
 
     public void unDimBackground() {
-        Tool.invisibleViews(background);
+        Tool.Companion.invisibleViews(background);
     }
 
     public void clearRoomForPopUp() {
-        Tool.invisibleViews(desktop);
+        Tool.Companion.invisibleViews(desktop);
         hideDesktopIndicator();
         updateDock(false);
     }
 
     public void unClearRoomForPopUp() {
-        Tool.visibleViews(desktop);
+        Tool.Companion.visibleViews(desktop);
         showDesktopIndicator();
         updateDock(true);
     }
@@ -457,7 +457,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
             public void onInternetSearch(String string) {
                 Intent intent = new Intent();
 
-                if (Tool.isIntentActionAvailable(getApplicationContext(), Intent.ACTION_WEB_SEARCH) && !Setup.appSettings().getSearchBarForceBrowser()) {
+                if (Tool.Companion.isIntentActionAvailable(getApplicationContext(), Intent.ACTION_WEB_SEARCH) && !Setup.appSettings().getSearchBarForceBrowser()) {
                     intent.setAction(Intent.ACTION_WEB_SEARCH);
                     intent.putExtra(SearchManager.QUERY, string);
                 } else {
@@ -489,7 +489,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
                     }
                 });
 
-                Tool.showKeyboard(Home.this, searchBar.searchInput);
+                Tool.Companion.showKeyboard(Home.this, searchBar.searchInput);
             }
 
             @Override
@@ -499,7 +499,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
                 searchBar.searchInput.clearFocus();
 
-                Tool.hideKeyboard(Home.this, searchBar.searchInput);
+                Tool.Companion.hideKeyboard(Home.this, searchBar.searchInput);
             }
         });
         searchBar.searchClock.setOnClickListener(new View.OnClickListener() {
@@ -519,48 +519,48 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
 
     public void updateDock(boolean show, long delay) {
         if (Setup.appSettings().getDockEnable() && show) {
-            Tool.visibleViews(100, delay, dock);
-            ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
-            ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
+            Tool.Companion.visibleViews(100, delay, dock);
+            ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.Companion.dp2px(4, this);
+            ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Tool.Companion.dp2px(4, this);
         } else {
             if (Setup.appSettings().getDockEnable()) {
-                Tool.invisibleViews(100, dock);
+                Tool.Companion.invisibleViews(100, dock);
             } else {
-                Tool.goneViews(100, dock);
-                ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Desktop.bottomInset + Tool.dp2px(4, this);
-                ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.dp2px(4, this);
+                Tool.Companion.goneViews(100, dock);
+                ((ViewGroup.MarginLayoutParams) desktopIndicator.getLayoutParams()).bottomMargin = Desktop.bottomInset + Tool.Companion.dp2px(4, this);
+                ((ViewGroup.MarginLayoutParams) desktop.getLayoutParams()).bottomMargin = Tool.Companion.dp2px(4, this);
             }
         }
     }
 
     public void updateSearchBar(boolean show) {
         if (Setup.appSettings().getSearchBarEnable() && show) {
-            Tool.visibleViews(100, searchBar);
+            Tool.Companion.visibleViews(100, searchBar);
         } else {
             if (Setup.appSettings().getSearchBarEnable()) {
-                Tool.invisibleViews(100, searchBar);
+                Tool.Companion.invisibleViews(100, searchBar);
             } else {
-                Tool.goneViews(searchBar);
+                Tool.Companion.goneViews(searchBar);
             }
         }
     }
 
     public void updateDesktopIndicatorVisibility() {
         if (Setup.appSettings().isDesktopShowIndicator()) {
-            Tool.visibleViews(100, desktopIndicator);
+            Tool.Companion.visibleViews(100, desktopIndicator);
         } else {
-            Tool.goneViews(100, desktopIndicator);
+            Tool.Companion.goneViews(100, desktopIndicator);
         }
     }
 
     public void hideDesktopIndicator() {
         if (Setup.appSettings().isDesktopShowIndicator())
-            Tool.invisibleViews(100, desktopIndicator);
+            Tool.Companion.invisibleViews(100, desktopIndicator);
     }
 
     public void showDesktopIndicator() {
         if (Setup.appSettings().isDesktopShowIndicator())
-            Tool.visibleViews(100, desktopIndicator);
+            Tool.Companion.visibleViews(100, desktopIndicator);
     }
 
     private void updateSearchClock() {
@@ -632,7 +632,7 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
             db.saveItem(item, desktop.getCurrentItem(), Definitions.ItemPosition.Desktop);
             desktop.addItemToPage(item, desktop.getCurrentItem());
         } else {
-            Tool.toast(Home.this, R.string.toast_not_enough_space);
+            Tool.Companion.toast(Home.this, R.string.toast_not_enough_space);
         }
     }
 
@@ -760,9 +760,9 @@ public abstract class Home extends Activity implements Desktop.OnDesktopEditList
             if (view instanceof AppItemView) {
                 AppItemView appItemView = (AppItemView) view;
                 if (!appItemView.getShowLabel()) {
-                    cy -= Tool.dp2px(14, this) / 2;
+                    cy -= Tool.Companion.dp2px(14, this) / 2;
                 }
-                rad = (int) (appItemView.getIconSize() / 2 - Tool.dp2px(4, view.getContext()));
+                rad = (int) (appItemView.getIconSize() / 2 - Tool.Companion.dp2px(4, view.getContext()));
             }
             cx -= ((ViewGroup.MarginLayoutParams) appDrawerController.getDrawer().getLayoutParams()).leftMargin;
             cy -= ((ViewGroup.MarginLayoutParams) appDrawerController.getDrawer().getLayoutParams()).topMargin;

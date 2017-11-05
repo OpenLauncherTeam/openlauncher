@@ -166,8 +166,8 @@ public class AppDrawerController extends RevealFrameLayout {
                 break;
             case DrawerMode.VERTICAL:
                 drawerViewGrid = (AppDrawerVertical) layoutInflater.inflate(R.layout.view_app_drawer_vertical, this, false);
-                int marginHorizontal = Tool.dp2px(Setup.appSettings().getVerticalDrawerHorizontalMargin(), getContext());
-                int marginVertical = Tool.dp2px(Setup.appSettings().getVerticalDrawerVerticalMargin(), getContext());
+                int marginHorizontal = Tool.Companion.dp2px(Setup.appSettings().getVerticalDrawerHorizontalMargin(), getContext());
+                int marginVertical = Tool.Companion.dp2px(Setup.appSettings().getVerticalDrawerVerticalMargin(), getContext());
                 RevealFrameLayout.LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
                 lp.leftMargin = marginHorizontal;
                 lp.rightMargin = marginHorizontal;
@@ -198,7 +198,7 @@ public class AppDrawerController extends RevealFrameLayout {
                     drawerViewGrid.setCardElevation(0);
                 } else {
                     drawerViewGrid.setCardBackgroundColor(Setup.appSettings().getDrawerCardColor());
-                    drawerViewGrid.setCardElevation(Tool.dp2px(4, getContext()));
+                    drawerViewGrid.setCardElevation(Tool.Companion.dp2px(4, getContext()));
                 }
                 if (drawerViewGrid.gridDrawerAdapter != null) {
                     drawerViewGrid.gridDrawerAdapter.notifyDataSetChanged();

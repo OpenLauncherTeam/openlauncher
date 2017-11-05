@@ -100,7 +100,7 @@ public class AppDrawerVertical extends CardView {
     }
 
     private void init() {
-        itemHeightPadding = Tool.dp2px(15, getContext());
+        itemHeightPadding = Tool.Companion.dp2px(15, getContext());
 
         scrollBar = rl.findViewById(R.id.dragScrollBar);
         scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);

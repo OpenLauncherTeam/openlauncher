@@ -25,9 +25,9 @@ public class CircleDrawable extends Drawable {
     private boolean hidingOldIcon;
 
     public CircleDrawable(Context context, Drawable icon, int color) {
-        this.icon = Tool.drawableToBitmap(icon);
+        this.icon = Tool.Companion.drawableToBitmap(icon);
 
-        iconPadding = Tool.dp2px(6, context);
+        iconPadding = Tool.Companion.dp2px(6, context);
 
         iconSizeReal = icon.getIntrinsicHeight();
         iconSize = icon.getIntrinsicHeight() + iconPadding * 2;
@@ -45,7 +45,7 @@ public class CircleDrawable extends Drawable {
         iconToFade = this.icon;
         hidingOldIcon = true;
 
-        this.icon = Tool.drawableToBitmap(icon);
+        this.icon = Tool.Companion.drawableToBitmap(icon);
         invalidateSelf();
     }
 
@@ -60,7 +60,7 @@ public class CircleDrawable extends Drawable {
             } else {
                 currentScale += scaleStep;
             }
-            currentScale = Tool.clampFloat(currentScale, 0, 1);
+            currentScale = Tool.Companion.clampFloat(currentScale, 0, 1);
             canvas.scale(currentScale, currentScale, iconSize / 2, iconSize / 2);
             canvas.drawBitmap(hidingOldIcon ? iconToFade : icon, iconSize / 2 - iconSizeReal / 2, iconSize / 2 - iconSizeReal / 2, paint2);
             canvas.restore();

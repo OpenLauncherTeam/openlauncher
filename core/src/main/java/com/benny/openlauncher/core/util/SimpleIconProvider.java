@@ -90,8 +90,8 @@ public class SimpleIconProvider extends BaseIconProvider {
 
     private Drawable scaleDrawable(Drawable drawable, int forceSize) {
         if (drawable != null && forceSize != Definitions.NO_SCALE) {
-            forceSize = Tool.dp2px(forceSize, Setup.appContext());
-            drawable = new BitmapDrawable(Setup.appContext().getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(drawable), forceSize, forceSize, true));
+            forceSize = Tool.Companion.dp2px(forceSize, Setup.appContext());
+            drawable = new BitmapDrawable(Setup.appContext().getResources(), Bitmap.createScaledBitmap(Tool.Companion.drawableToBitmap(drawable), forceSize, forceSize, true));
         }
         return drawable;
     }

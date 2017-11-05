@@ -55,7 +55,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
         }
         Point preferredPos = Home.launcher.desktop.pages.get(Home.launcher.desktop.getCurrentItem()).findFreeSpace();
         if (preferredPos == null) {
-            Tool.toast(Home.launcher, R.string.toast_not_enough_space);
+            Tool.Companion.toast(Home.launcher, R.string.toast_not_enough_space);
         } else {
             item.setX(preferredPos.x);
             item.setY(preferredPos.y);

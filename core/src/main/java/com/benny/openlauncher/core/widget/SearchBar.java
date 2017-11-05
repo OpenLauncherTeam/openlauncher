@@ -116,7 +116,7 @@ public class SearchBar extends FrameLayout {
     }
 
     private void init() {
-        int dp1 = Tool.dp2px(1, getContext());
+        int dp1 = Tool.Companion.dp2px(1, getContext());
         int iconMarginOutside = dp1 * 16;
         int iconMarginTop = dp1 * 13;
         int searchTextHorizontalMargin = dp1 * 8;
@@ -299,7 +299,7 @@ public class SearchBar extends FrameLayout {
             @Override
             public void onGlobalLayout() {
                 searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int marginTop = Tool.dp2px(56, getContext()) + searchInput.getHeight();
+                int marginTop = Tool.Companion.dp2px(56, getContext()) + searchInput.getHeight();
                 int marginBottom = Desktop.bottomInset;
                 recyclerParams.setMargins(0, marginTop, 0, marginBottom);
                 recyclerParams.height = ((View) getParent()).getHeight() - marginTop - marginBottom / 2;
@@ -314,8 +314,8 @@ public class SearchBar extends FrameLayout {
             callback.onCollapse();
         }
         icon.setIcon(getResources().getDrawable(R.drawable.ic_search_light_24dp));
-        Tool.visibleViews(ANIM_TIME, searchClock);
-        Tool.goneViews(ANIM_TIME, searchCardContainer, searchRecycler, switchButton);
+        Tool.Companion.visibleViews(ANIM_TIME, searchClock);
+        Tool.Companion.goneViews(ANIM_TIME, searchCardContainer, searchRecycler, switchButton);
         searchInput.getText().clear();
     }
 
@@ -332,8 +332,8 @@ public class SearchBar extends FrameLayout {
             }
         }
         icon.setIcon(getResources().getDrawable(R.drawable.ic_clear_white_24dp));
-        Tool.visibleViews(ANIM_TIME, searchCardContainer, searchRecycler, switchButton);
-        Tool.goneViews(ANIM_TIME, searchClock);
+        Tool.Companion.visibleViews(ANIM_TIME, searchCardContainer, searchRecycler, switchButton);
+        Tool.Companion.goneViews(ANIM_TIME, searchClock);
     }
 
     private void updateSwitchIcon() {
@@ -361,7 +361,7 @@ public class SearchBar extends FrameLayout {
     }
 
     protected void startApp(Context context, App app) {
-        Tool.startApp(context, app);
+        Tool.Companion.startApp(context, app);
     }
 
     public void updateClock() {
@@ -386,7 +386,7 @@ public class SearchBar extends FrameLayout {
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             int topInset = insets.getSystemWindowInsetTop();
-            setPadding(getPaddingLeft(), topInset + Tool.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom());
+            setPadding(getPaddingLeft(), topInset + Tool.Companion.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom());
         }
         return insets;
     }

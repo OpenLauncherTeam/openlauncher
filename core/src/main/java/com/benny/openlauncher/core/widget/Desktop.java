@@ -47,8 +47,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
     private Home home;
     private PagerIndicator pageIndicator;
-    private Point coordinate = new Point();
-    private boolean dragging = false;
+    private Point coordinate = new Point(-1, -1);
 
     public Desktop(Context c) {
         this(c, null);
@@ -273,31 +272,24 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
     @Override
     public boolean onDrag(View p1, DragEvent event) {
         CellContainer currentPage = getCurrentPage();
-        if (dragging)
-            updateIconProjection(((int) event.getX()), ((int) event.getY()), currentPage);
         switch (event.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
-                dragging = true;
+                coordinate.set(-1, -1);
                 for (CellContainer page : pages)
                     page.clearCachedOutlineBitmap();
-                //Tool.print("ACTION_DRAG_STARTED");
                 return true;
             case DragEvent.ACTION_DRAG_ENTERED:
-                //Tool.print("ACTION_DRAG_ENTERED");
                 return true;
             case DragEvent.ACTION_DRAG_EXITED:
                 for (CellContainer page : pages)
                     page.clearCachedOutlineBitmap();
-                //Tool.print("ACTION_DRAG_EXITED");
                 return true;
             case DragEvent.ACTION_DRAG_LOCATION:
-                //updateIconProjection(((int) event.getX()), ((int) event.getY()), currentPage);
+                updateIconProjection(((int) event.getX()), ((int) event.getY()));
                 return true;
             case DragEvent.ACTION_DROP:
                 for (CellContainer page : pages)
                     page.clearCachedOutlineBitmap();
-
-                //Tool.print("ACTION_DROP");
                 Item item = DragDropHandler.INSTANCE.getDraggedObject(event);
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
@@ -308,9 +300,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 if (addItemToPoint(item, (int) event.getX(), (int) event.getY())) {
                     home.desktop.consumeRevert();
                     home.dock.consumeRevert();
-
                     // add the item to the database
-                    home.db.saveItem(item, getCurrentItem(), Definitions.ItemPosition.Desktop);
+                    Home.db.saveItem(item, getCurrentItem(), Definitions.ItemPosition.Desktop);
                 } else {
                     Point pos = new Point();
                     currentPage.touchPosToCoordinate(pos, (int) event.getX(), (int) event.getY(), item.getSpanX(), item.getSpanY(), false);
@@ -326,8 +317,6 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
                 }
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
-                dragging = false;
-                Tool.print("ACTION_DRAG_ENDED");
                 for (CellContainer page : pages)
                     page.clearCachedOutlineBitmap();
                 return true;
@@ -337,14 +326,11 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
         return false;
     }
 
-    private void updateIconProjection(int x, int y, CellContainer currentPage) {
+    private void updateIconProjection(int x, int y) {
+        CellContainer currentPage = getCurrentPage();
         CellContainer.DragState state = currentPage.peekItemAndSwap(x, y, coordinate);
         switch (state) {
             case CurrentNotOccupied:
-                currentPage.invalidate();
-                if (currentPage.hasCachedOutlineBitmap() || coordinate.x == -1 || coordinate.y == -1) {
-                    break;
-                }
                 currentPage.projectImageOutlineAt(coordinate, DragDropHandler.INSTANCE.getCachedDragBitmap());
                 break;
             case OutOffRange:
@@ -352,9 +338,8 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
             case ItemViewNotFound:
                 break;
             case CurrentOccupied:
-                for (CellContainer page : pages) {
+                for (CellContainer page : pages)
                     page.clearCachedOutlineBitmap();
-                }
                 break;
         }
     }
@@ -601,7 +586,7 @@ public class Desktop extends SmoothViewPager implements OnDragListener, DesktopC
 
         public void enterDesktopEditMode() {
             scaleFactor = 0.8f;
-            translateFactor = Tool.dp2px(Setup.appSettings().getSearchBarEnable() ? 20 : 40, getContext());
+            translateFactor = Tool.Companion.dp2px(Setup.appSettings().getSearchBarEnable() ? 20 : 40, getContext());
             for (CellContainer v : desktop.pages) {
                 v.setBlockTouch(true);
                 v.animateBackgroundShow();

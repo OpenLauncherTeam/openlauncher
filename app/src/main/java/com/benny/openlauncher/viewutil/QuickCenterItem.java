@@ -114,7 +114,7 @@ public class QuickCenterItem {
         @Override
         public void bindView(final ViewHolder viewHolder, List payloads) {
             super.bindView(viewHolder, payloads);
-            Tool.print(info.icon == null);
+            Tool.Companion.print(info.icon == null);
             if (info.icon != null)
                 viewHolder.imageView.setImageDrawable(new RoundDrawable(info.icon));
             else {
@@ -133,7 +133,7 @@ public class QuickCenterItem {
                         if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
                             Home.launcher.startActivity(info.data);
                         else {
-                            Tool.toast(view.getContext(), "Unable to call the person without Manifest.permission.CALL_PHONE granted");
+                            Tool.Companion.toast(view.getContext(), "Unable to call the person without Manifest.permission.CALL_PHONE granted");
                             ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.CALL_PHONE}, Home.REQUEST_PERMISSION_CALL);
                         }
                     }

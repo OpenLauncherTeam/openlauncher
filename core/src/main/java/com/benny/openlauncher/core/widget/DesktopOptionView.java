@@ -53,12 +53,12 @@ public class DesktopOptionView extends FrameLayout {
 
     public void animateOpen() {
         ((View) actionRecyclerViews[0].getParent()).animate().scaleY(1).setDuration(200);
-        Tool.visibleViews(100, 200, actionRecyclerViews[0]);
+        Tool.Companion.visibleViews(100, 200, actionRecyclerViews[0]);
     }
 
     public void animateClose() {
         ((View) actionRecyclerViews[0].getParent()).animate().scaleY(0).setDuration(100).setStartDelay(40);
-        Tool.invisibleViews(50, actionRecyclerViews[0]);
+        Tool.Companion.invisibleViews(50, actionRecyclerViews[0]);
     }
 
     public void setDesktopOptionViewListener(DesktopOptionViewListener desktopOptionViewListener) {
@@ -109,7 +109,7 @@ public class DesktopOptionView extends FrameLayout {
             return;
         }
 
-        final int paddingHorizontal = Tool.dp2px(42, getContext());
+        final int paddingHorizontal = Tool.Companion.dp2px(42, getContext());
         final Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
 
         actionAdapters[0] = new FastItemAdapter<>();
@@ -130,19 +130,19 @@ public class DesktopOptionView extends FrameLayout {
                         if (!Setup.appSettings().isDesktopLock()) {
                             desktopOptionViewListener.onRemovePage();
                         } else {
-                            Tool.toast(getContext(), "Desktop is locked.");
+                            Tool.Companion.toast(getContext(), "Desktop is locked.");
                         }
                     } else if (id == R.string.widget) {
                         if (!Setup.appSettings().isDesktopLock()) {
                             desktopOptionViewListener.onPickWidget();
                         } else {
-                            Tool.toast(getContext(), "Desktop is locked.");
+                            Tool.Companion.toast(getContext(), "Desktop is locked.");
                         }
                     } else if (id == R.string.action) {
                         if (!Setup.appSettings().isDesktopLock()) {
                             desktopOptionViewListener.onPickDesktopAction();
                         } else {
-                            Tool.toast(getContext(), "Desktop is locked.");
+                            Tool.Companion.toast(getContext(), "Desktop is locked.");
                         }
                     } else if (id == R.string.lock) {
                         Setup.appSettings().setDesktopLock(!Setup.appSettings().isDesktopLock());
@@ -185,7 +185,7 @@ public class DesktopOptionView extends FrameLayout {
         actionAdapters[1].withOnClickListener(clickListener);
 
         actionRecyclerViews[0].setAlpha(0);
-        ((MarginLayoutParams) ((View) actionRecyclerViews[0].getParent()).getLayoutParams()).topMargin = Tool.dp2px(4, getContext());
+        ((MarginLayoutParams) ((View) actionRecyclerViews[0].getParent()).getLayoutParams()).topMargin = Tool.Companion.dp2px(4, getContext());
         ((View) actionRecyclerViews[0].getParent()).setPivotY(0);
         ((View) actionRecyclerViews[0].getParent()).setScaleY(0);
     }

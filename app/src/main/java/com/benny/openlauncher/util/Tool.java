@@ -118,7 +118,7 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
     }
 
     public static Bitmap fetchThumbnail(Context context, String phoneNumber) {
-        Tool.print(phoneNumber);
+        Tool.Companion.print(phoneNumber);
         Integer thumbnailId = fetchThumbnailId(context, phoneNumber);
         if (thumbnailId == null) {
             return null;
@@ -141,7 +141,7 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
     }
 
     public static Bitmap openPhoto(Context context, String number) {
-        Tool.print(number);
+        Tool.Companion.print(number);
         long contactId = Tool.getContactIDFromNumber(context, number);
         Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
         Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
@@ -187,7 +187,7 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
 
                 Home.consumeNextResume = true;
             } catch (Exception e) {
-                Tool.toast(context, R.string.toast_app_uninstalled);
+                Tool.Companion.toast(context, R.string.toast_app_uninstalled);
             }
         }
     }
@@ -201,7 +201,7 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
                 context.startActivity(intent);
                 Home.consumeNextResume = true;
             } catch (Exception e) {
-                Tool.toast(context, R.string.toast_app_uninstalled);
+                Tool.Companion.toast(context, R.string.toast_app_uninstalled);
             }
         }
     }
@@ -310,7 +310,7 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
             dockData.delete();
             File generalSettings = new File(stringOut);
             generalSettings.delete();
-            Tool.print("deleted");
+            Tool.Companion.print("deleted");
 
             FileInputStream in = new FileInputStream(stringIn);
             FileOutputStream out = new FileOutputStream(stringOut);
@@ -325,7 +325,7 @@ public class Tool extends com.benny.openlauncher.core.util.Tool {
             // write the output file
             out.flush();
             out.close();
-            Tool.print("copied");
+            Tool.Companion.print("copied");
 
         } catch (Exception e) {
             Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();

@@ -61,14 +61,14 @@ public class DragOptionView extends CardView {
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            ((ViewGroup.MarginLayoutParams) getLayoutParams()).topMargin = insets.getSystemWindowInsetTop() + Tool.dp2px(14, getContext());
+            ((ViewGroup.MarginLayoutParams) getLayoutParams()).topMargin = insets.getSystemWindowInsetTop() + Tool.Companion.dp2px(14, getContext());
         }
         return insets;
     }
 
     private void init() {
-        setCardElevation(Tool.dp2px(4, getContext()));
-        setRadius(Tool.dp2px(2, getContext()));
+        setCardElevation(Tool.Companion.dp2px(4, getContext()));
+        setRadius(Tool.Companion.dp2px(2, getContext()));
 
         dragOptions = (LinearLayout) ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_drag_option, this, false);
         addView(dragOptions);
@@ -162,7 +162,7 @@ public class DragOptionView extends CardView {
                             try {
                                 getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.getIntent().getComponent().getPackageName())));
                             } catch (Exception e) {
-                                Tool.toast(getContext(), R.string.toast_app_uninstalled);
+                                Tool.Companion.toast(getContext(), R.string.toast_app_uninstalled);
                             }
                         }
                         return true;
@@ -238,7 +238,7 @@ public class DragOptionView extends CardView {
             isDraggedFromDrawer = true;
 
             if (Setup.get().getAppSettings().getSearchBarEnable())
-                Tool.invisibleViews(Math.round(animSpeed / 1.3f), hideViews);
+                Tool.Companion.invisibleViews(Math.round(animSpeed / 1.3f), hideViews);
 
             animate().alpha(1);
         }
@@ -301,7 +301,7 @@ public class DragOptionView extends CardView {
                 deleteIcon.setVisibility(View.GONE);
 
                 if (Setup.get().getAppSettings().getSearchBarEnable())
-                    Tool.visibleViews(Math.round(animSpeed / 1.3f), hideViews);
+                    Tool.Companion.visibleViews(Math.round(animSpeed / 1.3f), hideViews);
 
                 // the search view might be disabled
                 Home.launcher.updateSearchBar(true);

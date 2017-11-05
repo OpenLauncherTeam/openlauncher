@@ -38,8 +38,8 @@ public class SwipeListView extends ListView {
     private void init() {
         if (isInEditMode()) return;
 
-        final float dis = Tool.dp2px(10, getContext());
-        final float vDis = Tool.dp2px(30, getContext());
+        final float dis = Tool.Companion.dp2px(10, getContext());
+        final float vDis = Tool.Companion.dp2px(30, getContext());
         mGestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                 if (e1 == null) return true;

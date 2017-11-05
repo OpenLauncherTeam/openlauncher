@@ -138,7 +138,7 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
                                 getAllApps();
                                 d.dismiss();
                             } else {
-                                Tool.toast(context, (activity.getString(R.string.dialog__icon_pack_info_toast)));
+                                Tool.Companion.toast(context, (activity.getString(R.string.dialog__icon_pack_info_toast)));
                                 ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
                             }
                         }
@@ -284,7 +284,7 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
 
             AppSettings appSettings = AppSettings.get();
             if (!appSettings.getIconPack().isEmpty() && Tool.isPackageInstalled(appSettings.getIconPack(), packageManager)) {
-                IconPackHelper.themePacs(AppManager.this, Tool.dp2px(appSettings.getIconSize(), context), appSettings.getIconPack(), apps);
+                IconPackHelper.themePacs(AppManager.this, Tool.Companion.dp2px(appSettings.getIconSize(), context), appSettings.getIconPack(), apps);
             }
             return null;
         }
@@ -294,7 +294,7 @@ public class AppManager implements Setup.AppLoader<AppManager.App> {
 
             notifyUpdateListeners(apps);
 
-            List<App> removed = Tool.getRemovedApps(tempApps, apps);
+            List<App> removed = Tool.Companion.getRemovedApps(tempApps, apps);
             if (removed.size() > 0) {
                 notifyRemoveListeners(removed);
             }

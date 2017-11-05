@@ -67,7 +67,7 @@ public class Item implements LabelProvider, Parcelable {
         switch (type) {
             case APP:
             case SHORTCUT:
-                intent = Tool.getIntentFromString(parcel.readString());
+                intent = Tool.Companion.getIntentFromString(parcel.readString());
                 break;
             case GROUP:
                 List<String> labels = new ArrayList<>();
@@ -89,7 +89,7 @@ public class Item implements LabelProvider, Parcelable {
         locationInLauncher = parcel.readInt();
 
         if (Setup.appSettings().enableImageCaching()) {
-            iconProvider = Setup.imageLoader().createIconProvider(Tool.getIcon(Home.launcher, Integer.toString(idValue)));
+            iconProvider = Setup.imageLoader().createIconProvider(Tool.Companion.getIcon(Home.launcher, Integer.toString(idValue)));
         } else {
             switch (type) {
                 case APP:
@@ -180,7 +180,7 @@ public class Item implements LabelProvider, Parcelable {
         switch (type) {
             case APP:
             case SHORTCUT:
-                out.writeString(Tool.getIntentAsString(this.intent));
+                out.writeString(Tool.Companion.getIntentAsString(this.intent));
                 break;
             case GROUP:
                 List<String> labels = new ArrayList<>();

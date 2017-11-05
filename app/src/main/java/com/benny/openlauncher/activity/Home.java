@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.Preference;
@@ -34,6 +35,7 @@ import android.widget.RelativeLayout;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.App;
+import com.benny.openlauncher.BuildConfig;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.core.interfaces.DialogListener;
 import com.benny.openlauncher.core.interfaces.SettingsManager;
@@ -90,10 +92,12 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
         new ContextUtils(getApplicationContext()).setAppLanguage(AppSettings.get().getLanguage()); // before setContentView
         super.onCreate(savedInstanceState);
 
-        CustomActivityOnCrash.setShowErrorDetails(true);
-        CustomActivityOnCrash.setEnableAppRestart(false);
-        CustomActivityOnCrash.setDefaultErrorActivityDrawable(R.drawable.rip);
-        CustomActivityOnCrash.install(this);
+        if (BuildConfig.IS_GPLAY_BUILD) {
+            CustomActivityOnCrash.setShowErrorDetails(true);
+            CustomActivityOnCrash.setEnableAppRestart(false);
+            CustomActivityOnCrash.setDefaultErrorActivityDrawable(R.drawable.rip);
+            CustomActivityOnCrash.install(this);
+        }
     }
 
     @Override
@@ -269,7 +273,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
             i.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.VoiceSearchActivity");
             Home.this.startActivity(i);
         } catch (Exception e) {
-            Tool.toast(Home.this, "Can not find google search app");
+            Tool.Companion.toast(Home.this, "Can not find google search app");
         }
     }
 
@@ -336,7 +340,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                         if (Integer.parseInt(AppSettings.get().getGestureSwipeUp()) != 0) {
                             LauncherAction.ActionItem gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().getGestureSwipeUp()) - 1);
                             if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                                Tool.vibrate(desktop);
+                                Tool.Companion.vibrate(desktop);
                             }
                             LauncherAction.RunAction(gesture, desktop.getContext());
                         }
@@ -346,7 +350,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                         if (Integer.parseInt(AppSettings.get().getGestureSwipeDown()) != 0) {
                             LauncherAction.ActionItem gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().getGestureSwipeDown()) - 1);
                             if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                                Tool.vibrate(desktop);
+                                Tool.Companion.vibrate(desktop);
                             }
                             LauncherAction.RunAction(gesture, desktop.getContext());
                         }
@@ -360,7 +364,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                         if (Integer.parseInt(AppSettings.get().getGesturePinch()) != 0) {
                             LauncherAction.ActionItem gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().getGesturePinch()) - 1);
                             if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                                Tool.vibrate(desktop);
+                                Tool.Companion.vibrate(desktop);
                             }
                             LauncherAction.RunAction(gesture, desktop.getContext());
                         }
@@ -370,7 +374,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                         if (Integer.parseInt(AppSettings.get().getGestureUnpinch()) != 0) {
                             LauncherAction.ActionItem gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().getGestureUnpinch()) - 1);
                             if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                                Tool.vibrate(desktop);
+                                Tool.Companion.vibrate(desktop);
                             }
                             LauncherAction.RunAction(gesture, desktop.getContext());
                         }
@@ -380,7 +384,7 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
                         if (Integer.parseInt(AppSettings.get().getGestureDoubleTap()) != 0) {
                             LauncherAction.ActionItem gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().getGestureDoubleTap()) - 1);
                             if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                                Tool.vibrate(desktop);
+                                Tool.Companion.vibrate(desktop);
                             }
                             LauncherAction.RunAction(gesture, desktop.getContext());
                         }
@@ -530,14 +534,14 @@ public class Home extends com.benny.openlauncher.core.activity.Home implements D
 
         public void logCallLog() {
             if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
-                Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_DENIED");
+                Tool.Companion.print("Manifest.permission.READ_CALL_LOG : PERMISSION_DENIED");
                 ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.READ_CALL_LOG}, REQUEST_PERMISSION_READ_CALL_LOG);
             } else {
                 Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, columns, null, null, CallLog.Calls.DATE + " DESC LIMIT 15");
                 int number = c.getColumnIndex(CallLog.Calls.NUMBER);
                 int name = c.getColumnIndex(CallLog.Calls.CACHED_NAME);
 
-                Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_GRANTED");
+                Tool.Companion.print("Manifest.permission.READ_CALL_LOG : PERMISSION_GRANTED");
                 quickContactFA.clear();
                 while (c.moveToNext()) {
                     String phone = c.getString(number);

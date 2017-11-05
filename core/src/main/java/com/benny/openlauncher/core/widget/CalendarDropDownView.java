@@ -35,17 +35,17 @@ public class CalendarDropDownView extends CardView implements View.OnClickListen
     private void init() {
         calendarView = new MaterialCalendarView(getContext());
         addView(calendarView);
-        int twoDp = Tool.dp2px(2, getContext());
+        int twoDp = Tool.Companion.dp2px(2, getContext());
         setContentPadding(0, twoDp * 5, 0, 0);
         calendarView.setTileHeightDp(40);
 
-        Tool.invisibleViews(calendarView);
+        Tool.Companion.invisibleViews(calendarView);
         setScaleY(0);
     }
 
     public void animateShow() {
         if (stateOpened) return;
-        Tool.invisibleViews(Home.launcher.searchBar);
+        Tool.Companion.invisibleViews(Home.launcher.searchBar);
         Home.launcher.dimBackground();
         Home.launcher.clearRoomForPopUp();
         Home.launcher.background.setOnClickListener(this);
@@ -54,19 +54,19 @@ public class CalendarDropDownView extends CardView implements View.OnClickListen
         animate().scaleY(1).setDuration(200).withEndAction(new Runnable() {
             @Override
             public void run() {
-                Tool.visibleViews(200, calendarView);
+                Tool.Companion.visibleViews(200, calendarView);
             }
         });
     }
 
     public void animateHide() {
         if (!stateOpened) return;
-        Tool.visibleViews(Home.launcher.searchBar);
+        Tool.Companion.visibleViews(Home.launcher.searchBar);
         Home.launcher.unDimBackground();
         Home.launcher.unClearRoomForPopUp();
         Home.launcher.background.setOnClickListener(null);
         stateOpened = false;
-        Tool.invisibleViews(200, calendarView);
+        Tool.Companion.invisibleViews(200, calendarView);
         animate().scaleY(0).setStartDelay(200).setDuration(200);
     }
 

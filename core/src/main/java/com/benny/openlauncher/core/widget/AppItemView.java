@@ -62,9 +62,9 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         setDrawingCacheEnabled(true);
         setWillNotCacheDrawing(false);
 
-        labelHeight = Tool.dp2px(14, getContext());
+        labelHeight = Tool.Companion.dp2px(14, getContext());
 
-        textPaint.setTextSize(Tool.sp2px(getContext(), 14));
+        textPaint.setTextSize(Tool.Companion.sp2px(getContext(), 14));
         textPaint.setColor(Color.DKGRAY);
         textPaint.setTypeface(typeface);
     }
@@ -96,7 +96,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
     @Override
     public Bitmap getDrawingCache() {
-        return Tool.drawableToBitmap(icon);
+        return Tool.Companion.drawableToBitmap(icon);
     }
 
     public View getView() {
@@ -166,7 +166,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         if (targetedWidth != 0) {
             mWidth = targetedWidth;
         }
-        setMeasuredDimension((int) Math.ceil(mWidth), (int) Math.ceil((int) mHeight) + Tool.dp2px(2, getContext()) + targetedHeightPadding * 2);
+        setMeasuredDimension((int) Math.ceil(mWidth), (int) Math.ceil((int) mHeight) + Tool.Companion.dp2px(2, getContext()) + targetedHeightPadding * 2);
     }
 
     @Override
@@ -263,12 +263,12 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder(Context context, int iconSize) {
             view = new AppItemView(context);
-            view.setIconSize(Tool.dp2px(iconSize, view.getContext()));
+            view.setIconSize(Tool.Companion.dp2px(iconSize, view.getContext()));
         }
 
         public Builder(AppItemView view, int iconSize) {
             this.view = view;
-            view.setIconSize(Tool.dp2px(iconSize, view.getContext()));
+            view.setIconSize(Tool.Companion.dp2px(iconSize, view.getContext()));
         }
 
         public static OnLongClickListener getLongClickDragAppListener(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
@@ -298,10 +298,10 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                    Tool.Companion.createScaleInScaleOutAnim(view, new Runnable() {
                         @Override
                         public void run() {
-                            Tool.startApp(view.getContext(), app);
+                            Tool.Companion.startApp(view.getContext(), app);
                         }
                     });
                 }
@@ -315,10 +315,10 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                    Tool.Companion.createScaleInScaleOutAnim(view, new Runnable() {
                         @Override
                         public void run() {
-                            Tool.startApp(view.getContext(), item.intent);
+                            Tool.Companion.startApp(view.getContext(), item.intent);
                         }
                     });
                 }
@@ -332,7 +332,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                    Tool.Companion.createScaleInScaleOutAnim(view, new Runnable() {
                         @Override
                         public void run() {
                             view.getContext().startActivity(item.intent);
@@ -400,7 +400,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         public Builder withOnTouchGetPosition(Item item, ItemGestureListener.ItemGestureCallback itemGestureCallback) {
-            view.setOnTouchListener(Tool.getItemOnTouchListener(item, itemGestureCallback));
+            view.setOnTouchListener(Tool.Companion.getItemOnTouchListener(item, itemGestureCallback));
             return this;
         }
 

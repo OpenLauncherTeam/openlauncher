@@ -97,7 +97,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     public IconLabelItem withDrawablePadding(Context context, int drawablePadding) {
-        this.drawablePadding = Tool.dp2px(drawablePadding, context);
+        this.drawablePadding = Tool.Companion.dp2px(drawablePadding, context);
         return this;
     }
 

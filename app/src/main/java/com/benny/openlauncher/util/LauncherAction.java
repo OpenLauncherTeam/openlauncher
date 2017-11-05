@@ -64,7 +64,7 @@ public class LauncherAction {
                     DialogHelper.alertDialog(context, "Device Admin Required", "To lock your screen by gesture, OpenLauncher require Device Administration, please enable it in the settings to use this features. The force-lock policy will only be used for locking the screen via gesture.", "Enable", new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            Tool.toast(context, context.getString(R.string.toast_device_admin_required));
+                            Tool.Companion.toast(context, context.getString(R.string.toast_device_admin_required));
                             Intent intent = new Intent();
                             intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.DeviceAdminSettings"));
                             context.startActivity(intent);
@@ -105,9 +105,9 @@ public class LauncherAction {
                         activityManager.getMemoryInfo(mi);
                         long current = mi.availMem / 1048576L;
                         if (current - pre > 10)
-                            Tool.toast(context, context.getResources().getString(R.string.toast_free_ram, current, current - pre));
+                            Tool.Companion.toast(context, context.getResources().getString(R.string.toast_free_ram, current, current - pre));
                         else
-                            Tool.toast(context, context.getResources().getString(R.string.toast_free_all_ram, current));
+                            Tool.Companion.toast(context, context.getResources().getString(R.string.toast_free_all_ram, current));
                         super.onPostExecute(result);
                     }
                 }.execute();

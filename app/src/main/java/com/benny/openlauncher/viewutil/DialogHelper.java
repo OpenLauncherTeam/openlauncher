@@ -94,8 +94,8 @@ public class DialogHelper {
         final MaterialDialog dialog = builder.build();
         List<IconLabelItem> items = new ArrayList<>();
         final List<AppManager.App> apps = AppManager.getInstance(context).getApps();
-        int size = Tool.dp2px(18, context);
-        int sizePad = Tool.dp2px(8, context);
+        int size = Tool.Companion.dp2px(18, context);
+        int sizePad = Tool.Companion.dp2px(8, context);
         for (int i = 0; i < apps.size(); i++) {
             items.add(new IconLabelItem(context, apps.get(i).getIconProvider(), apps.get(i).label, size)
                     .withIconGravity(Gravity.START)
@@ -159,9 +159,9 @@ public class DialogHelper {
                                 break;
                             case 1:
                                 try {
-                                    WallpaperManager.getInstance(context).setBitmap(StackBlur.blur(Tool.drawableToBitmap(context.getWallpaper()), 10, false));
+                                    WallpaperManager.getInstance(context).setBitmap(StackBlur.blur(Tool.Companion.drawableToBitmap(context.getWallpaper()), 10, false));
                                 } catch (Exception e) {
-                                    Tool.toast(context, context.getString(R.string.wallpaper_unable_to_blur));
+                                    Tool.Companion.toast(context, context.getString(R.string.wallpaper_unable_to_blur));
                                 }
                                 break;
                         }

@@ -97,9 +97,9 @@ public class GroupPopupView extends RevealFrameLayout {
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.getGroupItems().size());
         cellContainer.setGridSize(cellSize[0], cellSize[1]);
 
-        int iconSize = Tool.dp2px(Setup.appSettings().getDesktopIconSize(), c);
-        int textSize = Tool.dp2px(22, c);
-        int contentPadding = Tool.dp2px(6, c);
+        int iconSize = Tool.Companion.dp2px(Setup.appSettings().getDesktopIconSize(), c);
+        int textSize = Tool.Companion.dp2px(22, c);
+        int contentPadding = Tool.Companion.dp2px(6, c);
 
         for (int x2 = 0; x2 < cellSize[0]; x2++) {
             for (int y2 = 0; y2 < cellSize[1]; y2++) {
@@ -137,7 +137,7 @@ public class GroupPopupView extends RevealFrameLayout {
                     view.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                            Tool.Companion.createScaleInScaleOutAnim(view, new Runnable() {
                                 @Override
                                 public void run() {
                                     dismissPopup();
@@ -166,11 +166,11 @@ public class GroupPopupView extends RevealFrameLayout {
         int popupWidth = contentPadding * 8 + popupCard.getContentPaddingLeft() + popupCard.getContentPaddingRight() + (iconSize) * cellSize[0];
         popupCard.getLayoutParams().width = popupWidth;
 
-        int popupHeight = contentPadding * 2 + popupCard.getContentPaddingTop() + popupCard.getContentPaddingBottom() + Tool.dp2px(30, c) + (iconSize + textSize) * cellSize[1];
+        int popupHeight = contentPadding * 2 + popupCard.getContentPaddingTop() + popupCard.getContentPaddingBottom() + Tool.Companion.dp2px(30, c) + (iconSize + textSize) * cellSize[1];
         popupCard.getLayoutParams().height = popupHeight;
 
         cx = popupWidth / 2;
-        cy = popupHeight / 2 - (Setup.appSettings().isDesktopShowLabel() ? Tool.dp2px(10, getContext()) : 0);
+        cy = popupHeight / 2 - (Setup.appSettings().isDesktopShowLabel() ? Tool.Companion.dp2px(10, getContext()) : 0);
 
         int[] coordinates = new int[2];
         itemView.getLocationInWindow(coordinates);
@@ -209,7 +209,7 @@ public class GroupPopupView extends RevealFrameLayout {
 
         if (item.locationInLauncher == Item.LOCATION_DOCK) {
             coordinates[1] -= iconSize/2;
-            cy += iconSize/2 + (Setup.appSettings().isDockShowLabel() ? 0 : Tool.dp2px(10, getContext()));
+            cy += iconSize/2 + (Setup.appSettings().isDockShowLabel() ? 0 : Tool.Companion.dp2px(10, getContext()));
         }
 
         int x = coordinates[0];
@@ -231,14 +231,14 @@ public class GroupPopupView extends RevealFrameLayout {
         cellContainer.setAlpha(0);
 
         int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());
-        int startRadius = Tool.dp2px(Setup.appSettings().getDesktopIconSize() / 2, getContext());
+        int startRadius = Tool.Companion.dp2px(Setup.appSettings().getDesktopIconSize() / 2, getContext());
 
         folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, startRadius, finalRadius);
         folderAnimator.setStartDelay(0);
         folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         folderAnimator.setDuration(folderAnimationTime);
         folderAnimator.start();
-        Tool.visibleViews(100, 100, cellContainer);
+        Tool.Companion.visibleViews(100, 100, cellContainer);
     }
 
     public void dismissPopup() {
@@ -246,9 +246,9 @@ public class GroupPopupView extends RevealFrameLayout {
         if (folderAnimator == null || folderAnimator.isRunning())
             return;
 
-        Tool.invisibleViews(200, cellContainer);
+        Tool.Companion.invisibleViews(200, cellContainer);
 
-        int startRadius = Tool.dp2px(Setup.appSettings().getDesktopIconSize() / 2, getContext());
+        int startRadius = Tool.Companion.dp2px(Setup.appSettings().getDesktopIconSize() / 2, getContext());
         int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());
         folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, finalRadius, startRadius);
         folderAnimator.setStartDelay(100);

@@ -78,20 +78,20 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         if (Home.launcher == null) return;
         switch (ev.getAction()) {
             case MotionEvent.ACTION_UP:
-                Tool.print("ACTION_UP");
+                Tool.Companion.print("ACTION_UP");
                 float minDist = 150f;
-                Tool.print((int) ev.getX(), (int) ev.getY());
+                Tool.Companion.print((int) ev.getX(), (int) ev.getY());
                 if (startPosY - ev.getY() > minDist) {
                     if (Setup.appSettings().getGestureDockSwipeUp()) {
-                        Point p = Tool.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), this, Home.launcher.appDrawerController);
+                        Point p = Tool.Companion.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), this, Home.launcher.appDrawerController);
                         if (Setup.appSettings().isGestureFeedback())
-                            Tool.vibrate(this);
+                            Tool.Companion.vibrate(this);
                         Home.launcher.openAppDrawer(this, p.x, p.y);
                     }
                 }
                 break;
             case MotionEvent.ACTION_DOWN:
-                Tool.print("ACTION_DOWN");
+                Tool.Companion.print("ACTION_DOWN");
                 startPosX = ev.getX();
                 startPosY = ev.getY();
                 break;
@@ -109,13 +109,8 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                 return true;
             case DragEvent.ACTION_DRAG_LOCATION:
                 CellContainer.DragState state = peekItemAndSwap(p2, coordinate);
-                if (state == null) return true;
-
                 switch (state) {
                     case CurrentNotOccupied:
-                        invalidate();
-                        if (hasCachedOutlineBitmap() || coordinate.x == -1 || coordinate.y == -1)
-                            break;
                         projectImageOutlineAt(coordinate, DragDropHandler.INSTANCE.getCachedDragBitmap());
                         break;
                     case OutOffRange:
@@ -203,9 +198,9 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
         int iconSize = Setup.appSettings().getDockIconSize();
         if (Setup.appSettings().isDockShowLabel()) {
-            height = Tool.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
+            height = Tool.Companion.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
         } else {
-            height = Tool.dp2px(16 + iconSize + 10, getContext()) + Dock.bottomInset;
+            height = Tool.Companion.dp2px(16 + iconSize + 10, getContext()) + Dock.bottomInset;
         }
         getLayoutParams().height = height;
 

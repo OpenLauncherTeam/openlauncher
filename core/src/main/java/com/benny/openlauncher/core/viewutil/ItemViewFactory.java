@@ -163,7 +163,7 @@ public class ItemViewFactory {
                 };
 
                 widgetContainer.postDelayed(action, 2000);
-                widgetView.setOnTouchListener(Tool.getItemOnTouchListener(item, Setup.itemGestureCallback()));
+                widgetView.setOnTouchListener(Tool.Companion.getItemOnTouchListener(item, Setup.itemGestureCallback()));
                 widgetView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {

@@ -10,11 +10,14 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import com.benny.openlauncher.core.manager.Setup
 import com.benny.openlauncher.core.util.Tool
 import java.util.*
 
 open class CellContainer : ViewGroup {
+    private val mPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val bgPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val outlinePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
     var cellWidth: Int = 0
     var cellHeight: Int = 0
     var cellSpanV = 0
@@ -24,9 +27,6 @@ open class CellContainer : ViewGroup {
     var onItemRearrangeListener: OnItemRearrangeListener? = null
     private var occupied: Array<BooleanArray>? = null
     private lateinit var cells: Array<Array<Rect?>>
-    private var mPaint: Paint? = null
-    private var bgPaint: Paint? = null
-    private var outlinePaint: Paint? = null
     private var hideGrid = true
     private var down: Long? = 0L
     private var animateBackground: Boolean = false
@@ -35,7 +35,7 @@ open class CellContainer : ViewGroup {
     private var peekDownTime: Long? = -1L
     private var peekDirection: PeekDirection? = null
     private var cachedOutlineBitmap: Bitmap? = null
-    private var outlineCoordinate: Point? = null
+    private var currentOutlineCoordinate: Point = Point(-1, -1)
 
     val allCells: List<View>
         get() {
@@ -97,27 +97,30 @@ open class CellContainer : ViewGroup {
         return null
     }
 
-    fun projectImageOutlineAt(coordinate: Point?, bitmap: Bitmap?) {
-        if (cachedOutlineBitmap == null)
-            cachedOutlineBitmap = bitmap
-        if (outlineCoordinate == null)
-            outlineCoordinate = coordinate
+    private var newImageJustProjected: Boolean = false
+    private var previousProjectedCoordinate: Point? = null
+
+    fun projectImageOutlineAt(newCoordinate: Point, bitmap: Bitmap?) {
+        cachedOutlineBitmap = bitmap
+
+        if (currentOutlineCoordinate != newCoordinate)
+            outlinePaint.alpha = 0
+
+        currentOutlineCoordinate.set(newCoordinate.x, newCoordinate.y)
 
         invalidate()
     }
 
-    fun hasCachedOutlineBitmap(): Boolean {
-        return cachedOutlineBitmap != null
-    }
+    fun hasCachedOutlineBitmap(): Boolean = cachedOutlineBitmap != null
 
     private fun drawCachedOutlineBitmap(canvas: Canvas, cell: Rect) {
-        val iconSize = Tool.dp2px(Setup.appSettings().desktopIconSize, context).toFloat()
-        canvas.drawBitmap(cachedOutlineBitmap!!, cell.centerX() - iconSize / 2, cell.centerY() - iconSize / 2, outlinePaint)
+        if (cachedOutlineBitmap != null)
+            canvas.drawBitmap(cachedOutlineBitmap!!, cell.centerX() - cachedOutlineBitmap!!.width.toFloat() / 2, cell.centerY() - cachedOutlineBitmap!!.width.toFloat() / 2, outlinePaint)
     }
 
     fun clearCachedOutlineBitmap() {
+        outlinePaint.alpha = 0
         cachedOutlineBitmap = null
-        outlineCoordinate = null
         invalidate()
     }
 
@@ -213,24 +216,23 @@ open class CellContainer : ViewGroup {
         } else super.onInterceptTouchEvent(ev)
     }
 
+    init {
+        mPaint.style = Paint.Style.STROKE
+        mPaint.strokeWidth = 2f
+        mPaint.strokeJoin = Paint.Join.ROUND
+        mPaint.color = Color.WHITE
+        mPaint.alpha = 0
+
+        bgPaint.style = Paint.Style.FILL
+        bgPaint.color = Color.WHITE
+        bgPaint.alpha = 0
+
+        outlinePaint.color = Color.WHITE
+        outlinePaint.alpha = 0
+    }
+
     open fun init() {
         setWillNotDraw(false)
-        mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        mPaint!!.style = Paint.Style.STROKE
-        mPaint!!.strokeWidth = 2f
-        mPaint!!.strokeJoin = Paint.Join.ROUND
-        mPaint!!.color = Color.WHITE
-        mPaint!!.alpha = 0
-
-        bgPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        bgPaint!!.style = Paint.Style.FILL
-        bgPaint!!.color = Color.WHITE
-        bgPaint!!.alpha = 0
-
-        outlinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        outlinePaint!!.color = Color.WHITE
-        //outlinePaint.setFilterBitmap(true);
-        outlinePaint!!.alpha = 160
     }
 
     fun animateBackgroundShow() {
@@ -263,7 +265,7 @@ open class CellContainer : ViewGroup {
      * Locate the first empty space large enough for the supplied dimensions
      *
      * @param spanX - the width of the required space
-     * @param spanY - the heigt of the required space
+     * @param spanY - the height of the required space
      * @return the first empty space or null if no free space found
      */
     fun findFreeSpace(spanX: Int, spanY: Int): Point? {
@@ -288,7 +290,7 @@ open class CellContainer : ViewGroup {
      * @param peekDirection - direction to look first or null
      * @return the first empty space or null if no free space found
      */
-    fun findFreeSpace(cx: Int, cy: Int, peekDirection: PeekDirection): Point? {
+    fun findFreeSpace(cx: Int, cy: Int, peekDirection: PeekDirection?): Point? {
         if (peekDirection != null) {
             val target: Point
             when (peekDirection) {
@@ -367,14 +369,12 @@ open class CellContainer : ViewGroup {
         return null
     }
 
-    fun isValid(x: Int, y: Int): Boolean {
-        return x >= 0 && x <= occupied!!.size - 1 && y >= 0 && y <= occupied!![0].size - 1
-    }
+    private fun isValid(x: Int, y: Int): Boolean = x >= 0 && x <= occupied!!.size - 1 && y >= 0 && y <= occupied!![0].size - 1
 
     public override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), bgPaint!!)
+        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), bgPaint)
 
         val s = 7f
         for (x in 0 until cellSpanH) {
@@ -385,42 +385,50 @@ open class CellContainer : ViewGroup {
 
                 canvas.save()
                 canvas.rotate(45f, cell.left.toFloat(), cell.top.toFloat())
-                canvas.drawRect(cell.left - s, cell.top - s, cell.left + s, cell.top + s, mPaint!!)
+                canvas.drawRect(cell.left - s, cell.top - s, cell.left + s, cell.top + s, mPaint)
                 canvas.restore()
 
                 canvas.save()
                 canvas.rotate(45f, cell.left.toFloat(), cell.bottom.toFloat())
-                canvas.drawRect(cell.left - s, cell.bottom - s, cell.left + s, cell.bottom + s, mPaint!!)
+                canvas.drawRect(cell.left - s, cell.bottom - s, cell.left + s, cell.bottom + s, mPaint)
                 canvas.restore()
 
                 canvas.save()
                 canvas.rotate(45f, cell.right.toFloat(), cell.top.toFloat())
-                canvas.drawRect(cell.right - s, cell.top - s, cell.right + s, cell.top + s, mPaint!!)
+                canvas.drawRect(cell.right - s, cell.top - s, cell.right + s, cell.top + s, mPaint)
                 canvas.restore()
 
                 canvas.save()
                 canvas.rotate(45f, cell.right.toFloat(), cell.bottom.toFloat())
-                canvas.drawRect(cell.right - s, cell.bottom - s, cell.right + s, cell.bottom + s, mPaint!!)
+                canvas.drawRect(cell.right - s, cell.bottom - s, cell.right + s, cell.bottom + s, mPaint)
                 canvas.restore()
             }
         }
 
-        if (cachedOutlineBitmap != null && outlineCoordinate != null && outlineCoordinate!!.x != -1 && outlineCoordinate!!.y != -1)
-            drawCachedOutlineBitmap(canvas, cells[outlineCoordinate!!.x][outlineCoordinate!!.y]!!)
+        //Animating alpha and drawing projected image
+        if (currentOutlineCoordinate.x != -1 && currentOutlineCoordinate.y != -1) {
+            if (outlinePaint.alpha != 160)
+                outlinePaint.alpha = Math.min(outlinePaint.alpha + 20, 160)
+            drawCachedOutlineBitmap(canvas, cells[currentOutlineCoordinate.x][currentOutlineCoordinate.y]!!)
+            if (outlinePaint.alpha != 160)
+                invalidate()
+        }
 
-        if (hideGrid && mPaint!!.alpha != 0) {
-            mPaint!!.alpha = Math.max(mPaint!!.alpha - 20, 0)
+        //Animating alpha
+        if (hideGrid && mPaint.alpha != 0) {
+            mPaint.alpha = Math.max(mPaint.alpha - 20, 0)
             invalidate()
-        } else if (!hideGrid && mPaint!!.alpha != 255) {
-            mPaint!!.alpha = Math.min(mPaint!!.alpha + 20, 255)
+        } else if (!hideGrid && mPaint.alpha != 255) {
+            mPaint.alpha = Math.min(mPaint.alpha + 20, 255)
             invalidate()
         }
 
-        if (!animateBackground && bgPaint!!.alpha != 0) {
-            bgPaint!!.alpha = Math.max(bgPaint!!.alpha - 10, 0)
+        //Animating alpha
+        if (!animateBackground && bgPaint.alpha != 0) {
+            bgPaint.alpha = Math.max(bgPaint.alpha - 10, 0)
             invalidate()
-        } else if (animateBackground && bgPaint!!.alpha != 100) {
-            bgPaint!!.alpha = Math.min(bgPaint!!.alpha + 10, 100)
+        } else if (animateBackground && bgPaint.alpha != 100) {
+            bgPaint.alpha = Math.min(bgPaint.alpha + 10, 100)
             invalidate()
         }
     }
