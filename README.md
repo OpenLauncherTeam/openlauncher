@@ -27,6 +27,10 @@ Scrollable background || Drag and drop || Paged app drawer ||
 Vertical app drawer || Hide apps || Search bar || Icon packs || 
 Widget || Gesture || AIO Search Bar || Gesture support
 
+<div style="display:flex;" >
+	<img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/screenshots.png">
+</div>
+
 #### ToDo List
 Desktop clock customization ||  More actions for the minibar (later to support expandable minibar) ||
 Support landscape orientation || Code refactoring || Add more options in the settings ||
@@ -63,19 +67,6 @@ You can support us and buy us some coffee.
  
 ## Licensing
 The app is licensed Apache 2.0. 
-
-## Screenshots
-Most of these were out of date.
-<div style="display:flex;" >
-	<img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/phoneScreenshots/01.png" width="24%" >
-	<img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/phoneScreenshots/02.png" width="24%" style="margin-left:10px;" >
-	<img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/phoneScreenshots/03.png" width="24%" style="margin-left:10px;" >
-	<img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/phoneScreenshots/04.png" width="24%" style="margin-left:10px;" >
-</div>
-<div style="display:flex;" >
-	<img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/phoneScreenshots/05.png" width="24%" >
-	<img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/phoneScreenshots/06.png" width="24%" style="margin-left:10px;" >
-</div>
 
 <!--
 ### Notice
