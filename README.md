@@ -33,6 +33,8 @@ Support landscape orientation || Code refactoring || Add more options in the set
 Better support for gestures || Item customization on the desktop || Scrollable dock
 
 #### Status
+Now we are introducing Kotlin to the launcher, there are more bugs to be expected. But it will be more fun in general.
+
 If your instance is crashing frequently please make sure you update to the latest version (from Github or F-Droid, not the Play store) and reset the app data before creating an issue. We made a lot of changes that broke compatibility in the older versions.
 
 Currently there are a lot of issues and we are all working on this app in our spare time so please be patient if your issue is not immediately resolved. We are going to review the structure of the launcher since I wrote this app a long time ago so we might break functionality at times. Thanks for your support.
@@ -56,7 +58,7 @@ We would be happy if you want to be part of this game.
 
 **Donation**  
 You can support us and buy us some coffee.  
-[bennykok](https://www.paypal.me/BennyKok) or
+[paypal](https://www.paypal.me/BennyKok) or
 <noscript><a href="https://liberapay.com/BennyKok/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript> | [gsantner](http://gsantner.net/#donate) <noscript><a href="https://liberapay.com/gsantner/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript> 
  
 ## Licensing
