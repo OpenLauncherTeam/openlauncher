@@ -1,4 +1,4 @@
-Check if all requirements are fulfilled otherwise the issue will be closed without any comment
+If you are reporting crashes or expected behaviour then please check if all requirements are fulfilled otherwise the issue will be closed without any comment
 
   * Add details to fields  below
   * Use search. Check if the issue is already reported before creating a new one. 

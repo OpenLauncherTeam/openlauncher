@@ -34,6 +34,7 @@ android {
 
         flavorGplayPreAlpha {
             buildConfigField "boolean", "IS_GPLAY_BUILD", "true"
+            applicationId "com.benny.openlauncherprealpha"
         }
 
         flavorTest {
