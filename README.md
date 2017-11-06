@@ -26,7 +26,6 @@ for more information.
 The pre-alpha Play Store verion will be getting updates more frequently than the alpha version. And you can support the development by purchasing the pre-alph version.
 
 You will get the same result if you compile directly from the source, no fancy stuffs.
-
 But it will contiune the development.
 
 <a href="https://play.google.com/store/apps/details?id=com.benny.openlauncherprealpha">
