@@ -75,6 +75,14 @@ Translations can be contributed on GitHub. You can use Stringlate ([![Translate 
 
 We would be happy if you want to be part of this game.
 
+### Special thanks
+First I need to thanks everyone, from the start, sorry if I couldnt list all of your names here.
+* dkanada
+* gsantner
+* Chris
+* MF
+* ...
+
 **Donation**  
 You can support us and buy us some coffee.  
 [paypal](https://www.paypal.me/BennyKok) or
