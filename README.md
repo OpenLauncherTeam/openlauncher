@@ -5,15 +5,30 @@
 [![Translate - with Stringlate](https://img.shields.io/badge/stringlate-translate-green.svg)](https://lonamiwebs.github.io/stringlate/translate?git=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher.git&name=OpenLauncher&web=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher)
 
 # OpenLauncher
+### Aplha
 <img src="/app/src/main/ic_launcher-web.png" align="left" width="100" hspace="10" vspace="10">
 This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven launcher for Android.
-Please go to the <a href="https://github.com/Benny-Kok/OpenLauncher/wiki">OpenLauncher Wiki</a> for more information.
+Please go to the <a href="https://github.com/Benny-Kok/OpenLauncher/wiki">OpenLauncher Wiki</a>
+
+for more information.
 
 <div style="display:flex;" >
 <a href="https://f-droid.org/repository/browse/?fdid=com.benny.openlauncher">
     <img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80">
 </a>
 <a href="https://play.google.com/store/apps/details?id=com.benny.openlauncher">
+    <img alt="Get it on Google Play" height="80" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
+</a>
+</div></br>
+
+### Pre-Alpha
+<img src="/app/src/flavorGplayPreAlpha/ic_launcher-web.png" align="left" width="100" hspace="10" vspace="10">
+The pre-alpha Play Store verion will be getting updates more frequently than the alpha version. And you can support the development by purchasing the pre-alph version.
+
+You will get the same result if you compile directly from the source, no fancy stuffs.
+But it will contiune the development.
+
+<a href="https://play.google.com/store/apps/details?id=com.benny.openlauncherprealpha">
     <img alt="Get it on Google Play" height="80" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
 </a>
 </div></br>
@@ -59,6 +74,14 @@ Translations can be contributed on GitHub. You can use Stringlate ([![Translate 
 [bennykok](https://github.com/BennyKok) | [dkanada](https://github.com/dkanada) | [gsantner](https://github.com/gsantner)
 
 We would be happy if you want to be part of this game.
+
+### Special thanks
+First I need to thanks everyone, from the start to now, sorry if I couldn't list all of your names here.
+* dkanada
+* gsantner
+* Chris
+* MF
+* ...
 
 **Donation**  
 You can support us and buy us some coffee.  
