@@ -99,28 +99,16 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     @Override
-    public boolean onDrag(View p1, DragEvent p2) {
-        switch (p2.getAction()) {
+    public boolean onDrag(View p1, DragEvent event) {
+        switch (event.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
                 clearCachedOutlineBitmap();
-                if (((DragAction) p2.getLocalState()).action == DragAction.Action.WIDGET) {
+                if (((DragAction) event.getLocalState()).action == DragAction.Action.WIDGET) {
                     return false;
                 }
                 return true;
             case DragEvent.ACTION_DRAG_LOCATION:
-                CellContainer.DragState state = peekItemAndSwap(p2, coordinate);
-                switch (state) {
-                    case CurrentNotOccupied:
-                        projectImageOutlineAt(coordinate, DragDropHandler.INSTANCE.getCachedDragBitmap());
-                        break;
-                    case OutOffRange:
-                        break;
-                    case ItemViewNotFound:
-                        break;
-                    case CurrentOccupied:
-                        clearCachedOutlineBitmap();
-                        break;
-                }
+                updateIconProjection(((int) event.getX()), ((int) event.getY()));
                 return true;
             case DragEvent.ACTION_DRAG_ENTERED:
                 return true;
@@ -130,15 +118,15 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             case DragEvent.ACTION_DROP:
                 clearCachedOutlineBitmap();
 
-                Item item = DragDropHandler.INSTANCE.getDraggedObject(p2);
+                Item item = DragDropHandler.INSTANCE.getDraggedObject(event);
 
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
-                if (((DragAction) p2.getLocalState()).action == DragAction.Action.APP_DRAWER) {
+                if (((DragAction) event.getLocalState()).action == DragAction.Action.APP_DRAWER) {
                     item.reset();
                 }
 
-                if (addItemToPoint(item, (int) p2.getX(), (int) p2.getY())) {
+                if (addItemToPoint(item, (int) event.getX(), (int) event.getY())) {
                     home.desktop.consumeRevert();
                     home.dock.consumeRevert();
 
@@ -146,7 +134,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                     home.db.saveItem(item, 0, Definitions.ItemPosition.Dock);
                 } else {
                     Point pos = new Point();
-                    touchPosToCoordinate(pos, (int) p2.getX(), (int) p2.getY(), item.getSpanX(), item.getSpanY(), false);
+                    touchPosToCoordinate(pos, (int) event.getX(), (int) event.getY(), item.getSpanX(), item.getSpanY(), false);
                     View itemView = coordinateToChildView(pos);
                     if (itemView != null) {
                         if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, this, 0, Definitions.ItemPosition.Dock, this)) {
@@ -165,11 +153,28 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                 }
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
+                clearCachedOutlineBitmap();
                 return true;
         }
 
         invalidate();
         return false;
+    }
+
+    private void updateIconProjection(int x, int y) {
+        CellContainer.DragState state = peekItemAndSwap(x, y, coordinate);
+        switch (state) {
+            case CurrentNotOccupied:
+                projectImageOutlineAt(coordinate, DragDropHandler.INSTANCE.getCachedDragBitmap());
+                break;
+            case OutOffRange:
+                break;
+            case ItemViewNotFound:
+                break;
+            case CurrentOccupied:
+                clearCachedOutlineBitmap();
+                break;
+        }
     }
 
     @Override

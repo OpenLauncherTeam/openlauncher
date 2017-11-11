@@ -2,7 +2,6 @@ package com.benny.openlauncher.core.widget;
 
 import android.app.WallpaperManager;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.AttributeSet;

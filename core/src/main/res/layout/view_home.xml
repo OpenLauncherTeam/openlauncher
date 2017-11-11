@@ -38,6 +38,7 @@
         app:layout_constraintWidth_max="400dp" />
 
     <com.benny.openlauncher.core.widget.Desktop
+        android:overScrollMode="never"
         android:id="@+id/desktop"
         android:layout_width="0dp"
         android:layout_height="0dp"

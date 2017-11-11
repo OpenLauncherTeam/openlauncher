@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import com.benny.openlauncher.core.util.Tool
+import com.benny.openlauncher.core.util.toPx
 import java.util.*
 
 open class CellContainer : ViewGroup {
@@ -18,6 +19,7 @@ open class CellContainer : ViewGroup {
     private val bgPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val outlinePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
+    val tempRect = Rect()
     var cellWidth: Int = 0
     var cellHeight: Int = 0
     var cellSpanV = 0
@@ -36,6 +38,7 @@ open class CellContainer : ViewGroup {
     private var peekDirection: PeekDirection? = null
     private var cachedOutlineBitmap: Bitmap? = null
     private var currentOutlineCoordinate: Point = Point(-1, -1)
+    private var tempOutlineCoordinate: Point = Point(-1, -1)
 
     val allCells: List<View>
         get() {
@@ -510,8 +513,8 @@ open class CellContainer : ViewGroup {
     fun touchPosToCoordinate(coordinate: Point, mX: Int, mY: Int, xSpan: Int, ySpan: Int, checkAvailability: Boolean, checkBoundary: Boolean = false) {
         var mX = mX
         var mY = mY
-        mX = mX - (xSpan - 1) * cellWidth / 2
-        mY = mY - (ySpan - 1) * cellHeight / 2
+        mX -= (xSpan - 1) * cellWidth / 2
+        mY -= (ySpan - 1) * cellHeight / 2
 
         var x = 0
         while (x < cellSpanH) {
@@ -548,7 +551,7 @@ open class CellContainer : ViewGroup {
                     }
                     if (checkBoundary) {
                         val offsetCell = Rect(cell)
-                        val dp2 = Tool.dp2px(6, context)
+                        val dp2 = 6.toPx()
                         offsetCell.inset(dp2, dp2)
                         if (mY >= offsetCell.top && mY <= offsetCell.bottom && mX >= offsetCell.left && mX <= offsetCell.right) {
                             coordinate.set(-1, -1)
@@ -593,7 +596,7 @@ open class CellContainer : ViewGroup {
             child.measure(View.MeasureSpec.makeMeasureSpec(childWidth, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(childHeight, View.MeasureSpec.EXACTLY))
 
             val upRect = cells[lp.x][lp.y]!!
-            var downRect = Rect()
+            var downRect = tempRect
             if (lp.x + lp.xSpan - 1 < cellSpanH && lp.y + lp.ySpan - 1 < cellSpanV)
                 downRect = cells[lp.x + lp.xSpan - 1][lp.y + lp.ySpan - 1]!!
 
@@ -654,13 +657,11 @@ open class CellContainer : ViewGroup {
         var ySpan = 1
 
         constructor(w: Int, h: Int, x: Int, y: Int) : super(w, h) {
-
             this.x = x
             this.y = y
         }
 
         constructor(w: Int, h: Int, x: Int, y: Int, xSpan: Int, ySpan: Int) : super(w, h) {
-
             this.x = x
             this.y = y
 
@@ -670,4 +671,4 @@ open class CellContainer : ViewGroup {
 
         constructor(w: Int, h: Int) : super(w, h) {}
     }
-}// convert a touch event to a coordinate in the cell container
+}

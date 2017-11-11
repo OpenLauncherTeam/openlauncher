@@ -14,18 +14,17 @@ import android.os.Handler
 import android.util.Log
 import android.util.TypedValue
 import android.view.HapticFeedbackConstants
-import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 
-import com.benny.openlauncher.core.R
 import com.benny.openlauncher.core.activity.Home
 import com.benny.openlauncher.core.interfaces.App
 import com.benny.openlauncher.core.interfaces.IconProvider
 import com.benny.openlauncher.core.manager.Setup
 import com.benny.openlauncher.core.model.Item
+import com.benny.openlauncher.core.util.Tool.Companion.dp2Px
 import com.benny.openlauncher.core.viewutil.ItemGestureListener
 
 import java.io.File
@@ -33,6 +32,8 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.net.URISyntaxException
 import java.util.ArrayList
+
+fun Int.toPx(): Int = dp2Px(this)
 
 open class Tool {
 
@@ -121,20 +122,15 @@ open class Tool {
             Toast.makeText(context, context.resources.getString(str), Toast.LENGTH_SHORT).show()
         }
 
-        fun dp2px(dp: Float, context: Context): Float {
-            val resources = context.resources
-            return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics)
-        }
+        fun dp2px(dp: Float, context: Context): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
 
-        fun dp2px(dp: Int, context: Context): Int {
-            val resources = context.resources
-            return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics))
-        }
+        fun dp2px(dp: Int, context: Context): Int = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), context.resources.displayMetrics))
 
-        fun sp2px(context: Context, spValue: Float): Int {
-            val fontScale = context.resources.displayMetrics.scaledDensity
-            return (spValue * fontScale + 0.5f).toInt()
-        }
+        fun dp2Px(dp: Int): Int = (dp * Resources.getSystem().displayMetrics.density).toInt()
+
+        fun pxToDp(px: Int): Int = (px / Resources.getSystem().displayMetrics.density).toInt()
+
+        fun sp2px(context: Context, spValue: Float): Int = (spValue * context.resources.displayMetrics.scaledDensity + 0.5f).toInt()
 
         fun clampInt(target: Int, min: Int, max: Int): Int = Math.max(min, Math.min(max, target))
 
@@ -195,16 +191,13 @@ open class Tool {
                     fromCoord[1] - toCoord[1] + fromPoint.y)
         }
 
-        //
         fun vibrate(view: View) {
             view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
         }
-        //
 
         fun print(o: Any?) {
-            if (o != null) {
+            if (o != null)
                 Log.e("Hey", o.toString())
-            }
         }
 
         fun print(vararg o: Any) {
