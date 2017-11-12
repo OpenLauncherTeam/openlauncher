@@ -46,7 +46,7 @@ public class PagerIndicator extends View implements SmoothViewPager.OnPageChange
     }
 
     private void init() {
-        pad = Tool.Companion.dp2px(3, getContext());
+        pad = Tool.INSTANCE.dp2px(3, getContext());
 
         setWillNotDraw(false);
         dotPaint = new Paint();
@@ -62,7 +62,7 @@ public class PagerIndicator extends View implements SmoothViewPager.OnPageChange
 
         arrowPath = new Path();
 
-        mode = Setup.appSettings().getDesktopIndicatorMode();
+        mode = Setup.Companion.appSettings().getDesktopIndicatorMode();
     }
 
     public void setMode(int mode) {
@@ -100,7 +100,7 @@ public class PagerIndicator extends View implements SmoothViewPager.OnPageChange
         this.pager = pager;
         prePageCount = pager.getAdapter().getCount();
         pager.addOnPageChangeListener(this);
-        Tool.Companion.print(pager.getAdapter().getCount());
+        Tool.INSTANCE.print(pager.getAdapter().getCount());
         //getLayoutParams().width = Math.round(this.pager.getAdapter().getCount() * (dotSize + pad * 2));
         invalidate();
     }
@@ -150,8 +150,8 @@ public class PagerIndicator extends View implements SmoothViewPager.OnPageChange
                         float targetFactor2 = 1f;
                         float increaseFactor = 0.05f;
                         if (i == previousPage && i != pager.getCurrentItem()) {
-                            scaleFactor2 = Tool.Companion.clampFloat(scaleFactor2 - increaseFactor, targetFactor2, targetFactor);
-                            Tool.Companion.print(scaleFactor2);
+                            scaleFactor2 = Tool.INSTANCE.clampFloat(scaleFactor2 - increaseFactor, targetFactor2, targetFactor);
+                            Tool.INSTANCE.print(scaleFactor2);
                             canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, getHeight() / 2, (scaleFactor2 * dotSize) / 2, dotPaint);
                             if (scaleFactor2 != targetFactor2)
                                 invalidate();
@@ -162,7 +162,7 @@ public class PagerIndicator extends View implements SmoothViewPager.OnPageChange
                         } else if (pager.getCurrentItem() == i) {
                             if (previousPage == -1)
                                 previousPage = i;
-                            scaleFactor = Tool.Companion.clampFloat(scaleFactor + increaseFactor, targetFactor2, targetFactor);
+                            scaleFactor = Tool.INSTANCE.clampFloat(scaleFactor + increaseFactor, targetFactor2, targetFactor);
                             canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, getHeight() / 2, (scaleFactor * dotSize) / 2, dotPaint);
                             if (scaleFactor != targetFactor)
                                 invalidate();

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -48,7 +49,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     public IconLabelItem(Context context, int icon, int label) {
-        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this.iconProvider = Setup.Companion.imageLoader().createIconProvider(icon);
         this.label = context.getString(label);
     }
 
@@ -59,14 +60,14 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     public IconLabelItem(Context context, int icon, String label, int forceSize) {
         this(null);
         this.label = label;
-        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this.iconProvider = Setup.Companion.imageLoader().createIconProvider(icon);
         this.forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, int icon, int label, int forceSize) {
         this(null);
         this.label = context.getString(label);
-        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this.iconProvider = Setup.Companion.imageLoader().createIconProvider(icon);
         this.forceSize = forceSize;
     }
 
@@ -80,14 +81,14 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     public IconLabelItem(Context context, Drawable icon, String label, int forceSize) {
         this(null);
         this.label = label;
-        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this.iconProvider = Setup.Companion.imageLoader().createIconProvider(icon);
         this.forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, Drawable icon, int label, int forceSize) {
         this(null);
         this.label = context.getString(label);
-        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this.iconProvider = Setup.Companion.imageLoader().createIconProvider(icon);
         this.forceSize = forceSize;
     }
 
@@ -97,7 +98,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     public IconLabelItem withDrawablePadding(Context context, int drawablePadding) {
-        this.drawablePadding = Tool.Companion.dp2px(drawablePadding, context);
+        this.drawablePadding = Tool.INSTANCE.dp2px(drawablePadding, context);
         return this;
     }
 
@@ -153,7 +154,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     @Override
     public void setIcon(int resId) {
-        this.iconProvider = Setup.imageLoader().createIconProvider(resId);
+        this.iconProvider = Setup.Companion.imageLoader().createIconProvider(resId);
     }
 
     @Override
@@ -204,7 +205,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     @Override
-    public void unbindView(ViewHolder holder) {
+    public void unbindView(@NonNull ViewHolder holder) {
         super.unbindView(holder);
         if (iconProvider != null) {
             iconProvider.cancelLoad(holder.textView);

@@ -11,12 +11,12 @@ import android.view.WindowInsets;
 import android.widget.Toast;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.activity.Home;
+import com.benny.openlauncher.core.activity.CoreHome;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.Definitions;
 import com.benny.openlauncher.core.util.DragAction;
-import com.benny.openlauncher.core.util.DragDropHandler;
+import com.benny.openlauncher.core.util.DragNDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.viewutil.ItemViewFactory;
@@ -28,7 +28,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     public View previousItemView;
     public Item previousItem;
     private float startPosX, startPosY;
-    private Home home;
+    private CoreHome home;
     private Point coordinate = new Point();
 
     public Dock(Context c) {
@@ -48,10 +48,10 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         super.init();
     }
 
-    public void initDockItem(Home home) {
-        int columns = Setup.appSettings().getDockSize();
+    public void initDockItem(CoreHome home) {
+        int columns = Setup.Companion.appSettings().getDockSize();
         setGridSize(columns, 1);
-        List<Item> dockItems = home.db.getDock();
+        List<Item> dockItems = home.Companion.getDb().getDock();
 
         this.home = home;
         removeAllViews();
@@ -75,23 +75,23 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     }
 
     private void detectSwipe(MotionEvent ev) {
-        if (Home.launcher == null) return;
+        if (CoreHome.Companion.getLauncher() == null) return;
         switch (ev.getAction()) {
             case MotionEvent.ACTION_UP:
-                Tool.Companion.print("ACTION_UP");
+                Tool.INSTANCE.print("ACTION_UP");
                 float minDist = 150f;
-                Tool.Companion.print((int) ev.getX(), (int) ev.getY());
+                Tool.INSTANCE.print((int) ev.getX(), (int) ev.getY());
                 if (startPosY - ev.getY() > minDist) {
-                    if (Setup.appSettings().getGestureDockSwipeUp()) {
-                        Point p = Tool.Companion.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), this, Home.launcher.appDrawerController);
-                        if (Setup.appSettings().isGestureFeedback())
-                            Tool.Companion.vibrate(this);
-                        Home.launcher.openAppDrawer(this, p.x, p.y);
+                    if (Setup.Companion.appSettings().getGestureDockSwipeUp()) {
+                        Point p = Tool.INSTANCE.convertPoint(new Point((int) ev.getX(), (int) ev.getY()), this, CoreHome.Companion.getLauncher().getAppDrawerController());
+                        if (Setup.Companion.appSettings().isGestureFeedback())
+                            Tool.INSTANCE.vibrate(this);
+                        CoreHome.Companion.getLauncher().openAppDrawer(this, p.x, p.y);
                     }
                 }
                 break;
             case MotionEvent.ACTION_DOWN:
-                Tool.Companion.print("ACTION_DOWN");
+                Tool.INSTANCE.print("ACTION_DOWN");
                 startPosX = ev.getX();
                 startPosY = ev.getY();
                 break;
@@ -118,7 +118,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             case DragEvent.ACTION_DROP:
                 clearCachedOutlineBitmap();
 
-                Item item = DragDropHandler.INSTANCE.getDraggedObject(event);
+                Item item = DragNDropHandler.INSTANCE.getDraggedObject(event);
 
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
@@ -127,28 +127,28 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
                 }
 
                 if (addItemToPoint(item, (int) event.getX(), (int) event.getY())) {
-                    home.desktop.consumeRevert();
-                    home.dock.consumeRevert();
+                    home.getDesktop().consumeRevert();
+                    home.getDock().consumeRevert();
 
                     // add the item to the database
-                    home.db.saveItem(item, 0, Definitions.ItemPosition.Dock);
+                    home.Companion.getDb().saveItem(item, 0, Definitions.ItemPosition.Dock);
                 } else {
                     Point pos = new Point();
                     touchPosToCoordinate(pos, (int) event.getX(), (int) event.getY(), item.getSpanX(), item.getSpanY(), false);
                     View itemView = coordinateToChildView(pos);
                     if (itemView != null) {
-                        if (Desktop.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, this, 0, Definitions.ItemPosition.Dock, this)) {
-                            home.desktop.consumeRevert();
-                            home.dock.consumeRevert();
+                        if (Desktop.Companion.handleOnDropOver(home, item, (Item) itemView.getTag(), itemView, this, 0, Definitions.ItemPosition.Dock, this)) {
+                            home.getDesktop().consumeRevert();
+                            home.getDock().consumeRevert();
                         } else {
                             Toast.makeText(getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
-                            home.dock.revertLastItem();
-                            home.desktop.revertLastItem();
+                            home.getDock().revertLastItem();
+                            home.getDesktop().revertLastItem();
                         }
                     } else {
                         Toast.makeText(getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
-                        home.dock.revertLastItem();
-                        home.desktop.revertLastItem();
+                        home.getDock().revertLastItem();
+                        home.getDesktop().revertLastItem();
                     }
                 }
                 return true;
@@ -165,7 +165,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         CellContainer.DragState state = peekItemAndSwap(x, y, coordinate);
         switch (state) {
             case CurrentNotOccupied:
-                projectImageOutlineAt(coordinate, DragDropHandler.INSTANCE.getCachedDragBitmap());
+                projectImageOutlineAt(coordinate, DragNDropHandler.INSTANCE.getCachedDragBitmap());
                 break;
             case OutOffRange:
                 break;
@@ -201,11 +201,11 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
 
-        int iconSize = Setup.appSettings().getDockIconSize();
-        if (Setup.appSettings().isDockShowLabel()) {
-            height = Tool.Companion.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
+        int iconSize = Setup.Companion.appSettings().getDockIconSize();
+        if (Setup.Companion.appSettings().isDockShowLabel()) {
+            height = Tool.INSTANCE.dp2px(16 + iconSize + 14 + 10, getContext()) + Dock.bottomInset;
         } else {
-            height = Tool.Companion.dp2px(16 + iconSize + 10, getContext()) + Dock.bottomInset;
+            height = Tool.INSTANCE.dp2px(16 + iconSize + 10, getContext()) + Dock.bottomInset;
         }
         getLayoutParams().height = height;
 
@@ -231,10 +231,10 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
 
     @Override
     public boolean addItemToPage(final Item item, int page) {
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this, Setup.appSettings().getDockIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.Companion.appSettings().isDockShowLabel(), this, Setup.Companion.appSettings().getDockIconSize());
 
         if (itemView == null) {
-            home.db.deleteItem(item, true);
+            home.Companion.getDb().deleteItem(item, true);
             return false;
         } else {
             item.locationInLauncher = Item.LOCATION_DOCK;
@@ -252,7 +252,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
             item.setX(positionToLayoutPrams.getX());
             item.setY(positionToLayoutPrams.getY());
 
-            View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this, Setup.appSettings().getDockIconSize());
+            View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.Companion.appSettings().isDockShowLabel(), this, Setup.Companion.appSettings().getDockIconSize());
 
             if (itemView != null) {
                 itemView.setLayoutParams(positionToLayoutPrams);
@@ -271,7 +271,7 @@ public class Dock extends CellContainer implements View.OnDragListener, DesktopC
         item.setX(x);
         item.setY(y);
 
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), this, Setup.appSettings().getDockIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.Companion.appSettings().isDockShowLabel(), this, Setup.Companion.appSettings().getDockIconSize());
 
         if (itemView != null) {
             addViewToGrid(itemView, item.getX(), item.getY(), item.getSpanX(), item.getSpanY());

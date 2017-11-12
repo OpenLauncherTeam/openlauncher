@@ -36,7 +36,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     public int getDesktopStyle() {
-        return getIntOfStringPref(R.string.pref_key__desktop_style, Desktop.DesktopMode.NORMAL);
+        return getIntOfStringPref(R.string.pref_key__desktop_style, Desktop.DesktopMode.INSTANCE.getNORMAL());
     }
 
     public void setDesktopStyle(int style) {
@@ -201,7 +201,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     @Override
     public int getDrawerFastScrollColor() {
-        return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.appContext(), R.color.colorAccent));
+        return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.Companion.appContext(), R.color.colorAccent));
     }
 
     @Override

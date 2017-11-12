@@ -16,12 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.activity.Home;
+import com.benny.openlauncher.core.activity.CoreHome;
 import com.benny.openlauncher.core.interfaces.DialogListener;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.DragAction;
-import com.benny.openlauncher.core.util.DragDropHandler;
+import com.benny.openlauncher.core.util.DragNDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 
 public class DragOptionView extends CardView {
@@ -33,7 +33,7 @@ public class DragOptionView extends CardView {
     private TextView removeIcon;
     private TextView infoIcon;
     private TextView deleteIcon;
-    private Home home;
+    private CoreHome home;
     private Long animSpeed = 120L;
 
     public DragOptionView(Context context) {
@@ -46,7 +46,7 @@ public class DragOptionView extends CardView {
         init();
     }
 
-    public void setHome(Home home) {
+    public void setHome(CoreHome home) {
         this.home = home;
     }
 
@@ -61,14 +61,14 @@ public class DragOptionView extends CardView {
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            ((ViewGroup.MarginLayoutParams) getLayoutParams()).topMargin = insets.getSystemWindowInsetTop() + Tool.Companion.dp2px(14, getContext());
+            ((ViewGroup.MarginLayoutParams) getLayoutParams()).topMargin = insets.getSystemWindowInsetTop() + Tool.INSTANCE.dp2px(14, getContext());
         }
         return insets;
     }
 
     private void init() {
-        setCardElevation(Tool.Companion.dp2px(4, getContext()));
-        setRadius(Tool.Companion.dp2px(2, getContext()));
+        setCardElevation(Tool.INSTANCE.dp2px(4, getContext()));
+        setRadius(Tool.INSTANCE.dp2px(2, getContext()));
 
         dragOptions = (LinearLayout) ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_drag_option, this, false);
         addView(dragOptions);
@@ -88,16 +88,16 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        final Item item = DragDropHandler.INSTANCE.getDraggedObject(dragEvent);
+                        final Item item = DragNDropHandler.INSTANCE.getDraggedObject(dragEvent);
 
-                        Setup.eventHandler().showEditDialog(getContext(), item, new DialogListener.OnEditDialogListener() {
+                        Setup.Companion.eventHandler().showEditDialog(getContext(), item, new DialogListener.OnEditDialogListener() {
                             @Override
                             public void onRename(String name) {
                                 item.setLabel(name);
-                                Home.db.saveItem(item);
+                                CoreHome.Companion.getDb().saveItem(item);
 
-                                Home.launcher.desktop.addItemToCell(item, item.getX(), item.getY());
-                                Home.launcher.desktop.removeItem(Home.launcher.desktop.getCurrentPage().coordinateToChildView(new Point(item.getX(), item.getY())));
+                                CoreHome.Companion.getLauncher().getDesktop().addItemToCell(item, item.getX(), item.getY());
+                                CoreHome.Companion.getLauncher().getDesktop().removeItem(CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().coordinateToChildView(new Point(item.getX(), item.getY())));
                             }
                         });
                         return true;
@@ -127,13 +127,13 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Item item = DragDropHandler.INSTANCE.getDraggedObject(dragEvent);
+                        Item item = DragNDropHandler.INSTANCE.getDraggedObject(dragEvent);
 
                         // remove all items from the database
-                        Home.launcher.db.deleteItem(item, true);
+                        CoreHome.Companion.getLauncher().Companion.getDb().deleteItem(item, true);
 
-                        home.desktop.consumeRevert();
-                        home.dock.consumeRevert();
+                        home.getDesktop().consumeRevert();
+                        home.getDock().consumeRevert();
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;
@@ -157,12 +157,12 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Item item = DragDropHandler.INSTANCE.getDraggedObject(dragEvent);
+                        Item item = DragNDropHandler.INSTANCE.getDraggedObject(dragEvent);
                         if (item.getType() == Item.Type.APP) {
                             try {
                                 getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.getIntent().getComponent().getPackageName())));
                             } catch (Exception e) {
-                                Tool.Companion.toast(getContext(), R.string.toast_app_uninstalled);
+                                Tool.INSTANCE.toast(getContext(), R.string.toast_app_uninstalled);
                             }
                         }
                         return true;
@@ -188,7 +188,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Setup.eventHandler().showDeletePackageDialog(getContext(), dragEvent);
+                        Setup.Companion.eventHandler().showDeletePackageDialog(getContext(), dragEvent);
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;
@@ -237,8 +237,8 @@ public class DragOptionView extends CardView {
         if (hideViews != null) {
             isDraggedFromDrawer = true;
 
-            if (Setup.get().getAppSettings().getSearchBarEnable())
-                Tool.Companion.invisibleViews(Math.round(animSpeed / 1.3f), hideViews);
+            if (Setup.Companion.get().getAppSettings().getSearchBarEnable())
+                Tool.INSTANCE.invisibleViews(Math.round(animSpeed / 1.3f), hideViews);
 
             animate().alpha(1);
         }
@@ -250,9 +250,9 @@ public class DragOptionView extends CardView {
             case DragEvent.ACTION_DRAG_STARTED:
                 dragging = true;
                 animShowView();
-                boolean desktopHideGrid = Setup.appSettings().isDesktopHideGrid();
-                home.dock.setHideGrid(desktopHideGrid);
-                for (CellContainer cellContainer : home.desktop.pages) {
+                boolean desktopHideGrid = Setup.Companion.appSettings().isDesktopHideGrid();
+                home.getDock().setHideGrid(desktopHideGrid);
+                for (CellContainer cellContainer : home.getDesktop().getPages()) {
                     cellContainer.setHideGrid(desktopHideGrid);
                 }
                 switch (((DragAction) event.getLocalState()).action) {
@@ -289,8 +289,8 @@ public class DragOptionView extends CardView {
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
                 dragging = false;
-                home.dock.setHideGrid(true);
-                for (CellContainer cellContainer : home.desktop.pages) {
+                home.getDock().setHideGrid(true);
+                for (CellContainer cellContainer : home.getDesktop().getPages()) {
                     cellContainer.setHideGrid(true);
                 }
 
@@ -300,16 +300,16 @@ public class DragOptionView extends CardView {
                 infoIcon.setVisibility(View.GONE);
                 deleteIcon.setVisibility(View.GONE);
 
-                if (Setup.get().getAppSettings().getSearchBarEnable())
-                    Tool.Companion.visibleViews(Math.round(animSpeed / 1.3f), hideViews);
+                if (Setup.Companion.get().getAppSettings().getSearchBarEnable())
+                    Tool.INSTANCE.visibleViews(Math.round(animSpeed / 1.3f), hideViews);
 
                 // the search view might be disabled
-                Home.launcher.updateSearchBar(true);
+                CoreHome.Companion.getLauncher().updateSearchBar(true);
 
                 isDraggedFromDrawer = false;
 
-                home.dock.revertLastItem();
-                home.desktop.revertLastItem();
+                home.getDock().revertLastItem();
+                home.getDesktop().revertLastItem();
                 return true;
         }
         return false;

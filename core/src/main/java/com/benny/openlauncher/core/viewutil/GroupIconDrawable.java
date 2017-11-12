@@ -12,8 +12,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
-import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.activity.CoreHome;
+import com.benny.openlauncher.core.interfaces.AbstractApp;
 import com.benny.openlauncher.core.interfaces.IconDrawer;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
@@ -33,7 +33,7 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
     private int iconSizeDiv2;
 
     public GroupIconDrawable(Context context, Item item, int iconSize) {
-        final float size = Tool.Companion.dp2px(iconSize, context);
+        final float size = Tool.INSTANCE.dp2px(iconSize, context);
         final Drawable[] icons = new Drawable[4];
         for (int i = 0; i < 4; i++) {
             icons[i] = null;
@@ -41,12 +41,12 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         init(icons, size);
         for (int i = 0; i < 4 && i < item.items.size(); i++) {
             Item temp = item.items.get(i);
-            App app = null;
+            AbstractApp app = null;
             if (temp != null) {
-                app = Setup.appLoader().findItemApp(temp);
+                app = Setup.Companion.appLoader().findItemApp(temp);
             }
             if (app == null) {
-                Setup.logger().log(this, Log.DEBUG, null, "Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, temp == null ? "Item is NULL" : temp.getIntent());
+                Setup.Companion.logger().log(this, Log.DEBUG, null, "Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, temp == null ? "Item is NULL" : temp.getIntent());
                 icons[i] = new ColorDrawable(Color.TRANSPARENT);
             } else {
                 app.getIconProvider().loadIconIntoIconDrawer(this, (int) size, i);
@@ -80,7 +80,7 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         paintOuterCircle.setAntiAlias(true);
         paintOuterCircle.setFlags(Paint.ANTI_ALIAS_FLAG);
         paintOuterCircle.setStyle(Paint.Style.STROKE);
-        outline = Tool.Companion.dp2px(2, Home.launcher);
+        outline = Tool.INSTANCE.dp2px(2, CoreHome.Companion.getLauncher());
         paintOuterCircle.setStrokeWidth(outline);
 
         this.paintIcon = new Paint();
@@ -105,9 +105,9 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         canvas.save();
 
         if (needAnimateScale) {
-            scaleFactor = Tool.Companion.clampFloat(scaleFactor - 0.09f, 0.5f, 1f);
+            scaleFactor = Tool.INSTANCE.clampFloat(scaleFactor - 0.09f, 0.5f, 1f);
         } else {
-            scaleFactor = Tool.Companion.clampFloat(scaleFactor + 0.09f, 0.5f, 1f);
+            scaleFactor = Tool.INSTANCE.clampFloat(scaleFactor + 0.09f, 0.5f, 1f);
         }
 
         canvas.scale(scaleFactor, scaleFactor, iconSize / 2, iconSize / 2);
@@ -136,10 +136,10 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         canvas.restore();
 
         if (needAnimate) {
-            paintIcon.setAlpha(Tool.Companion.clampInt(paintIcon.getAlpha() - 25, 0, 255));
+            paintIcon.setAlpha(Tool.INSTANCE.clampInt(paintIcon.getAlpha() - 25, 0, 255));
             invalidateSelf();
         } else if (paintIcon.getAlpha() != 255) {
-            paintIcon.setAlpha(Tool.Companion.clampInt(paintIcon.getAlpha() + 25, 0, 255));
+            paintIcon.setAlpha(Tool.INSTANCE.clampInt(paintIcon.getAlpha() + 25, 0, 255));
             invalidateSelf();
         }
     }

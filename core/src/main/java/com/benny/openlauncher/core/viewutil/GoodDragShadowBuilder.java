@@ -4,8 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.view.View;
 
-import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.util.Tool;
+import com.benny.openlauncher.core.activity.CoreHome;
 
 public class GoodDragShadowBuilder extends View.DragShadowBuilder {
     int x;
@@ -13,8 +12,8 @@ public class GoodDragShadowBuilder extends View.DragShadowBuilder {
 
     public GoodDragShadowBuilder(View view) {
         super(view);
-        this.x = Home.touchX;
-        this.y = Home.touchY;
+        this.x = CoreHome.Companion.getTouchX();
+        this.y = CoreHome.Companion.getTouchY();
     }
 
     @Override

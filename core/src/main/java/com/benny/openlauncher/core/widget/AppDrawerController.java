@@ -13,7 +13,7 @@ import android.view.WindowInsets;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.activity.Home;
+import com.benny.openlauncher.core.activity.CoreHome;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.Tool;
 
@@ -157,7 +157,7 @@ public class AppDrawerController extends RevealFrameLayout {
     public void init() {
         if (isInEditMode()) return;
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-        drawerMode = Setup.appSettings().getDrawerStyle();
+        drawerMode = Setup.Companion.appSettings().getDrawerStyle();
         switch (drawerMode) {
             case DrawerMode.HORIZONTAL_PAGED:
                 drawerViewPaged = (AppDrawerPaged) layoutInflater.inflate(R.layout.view_app_drawer_paged, this, false);
@@ -166,8 +166,8 @@ public class AppDrawerController extends RevealFrameLayout {
                 break;
             case DrawerMode.VERTICAL:
                 drawerViewGrid = (AppDrawerVertical) layoutInflater.inflate(R.layout.view_app_drawer_vertical, this, false);
-                int marginHorizontal = Tool.Companion.dp2px(Setup.appSettings().getVerticalDrawerHorizontalMargin(), getContext());
-                int marginVertical = Tool.Companion.dp2px(Setup.appSettings().getVerticalDrawerVerticalMargin(), getContext());
+                int marginHorizontal = Tool.INSTANCE.dp2px(Setup.Companion.appSettings().getVerticalDrawerHorizontalMargin(), getContext());
+                int marginVertical = Tool.INSTANCE.dp2px(Setup.Companion.appSettings().getVerticalDrawerVerticalMargin(), getContext());
                 RevealFrameLayout.LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
                 lp.leftMargin = marginHorizontal;
                 lp.rightMargin = marginHorizontal;
@@ -193,12 +193,12 @@ public class AppDrawerController extends RevealFrameLayout {
                 drawerViewPaged.resetAdapter();
                 break;
             case DrawerMode.VERTICAL:
-                if (!Setup.appSettings().isDrawerShowCardView()) {
+                if (!Setup.Companion.appSettings().isDrawerShowCardView()) {
                     drawerViewGrid.setCardBackgroundColor(Color.TRANSPARENT);
                     drawerViewGrid.setCardElevation(0);
                 } else {
-                    drawerViewGrid.setCardBackgroundColor(Setup.appSettings().getDrawerCardColor());
-                    drawerViewGrid.setCardElevation(Tool.Companion.dp2px(4, getContext()));
+                    drawerViewGrid.setCardBackgroundColor(Setup.Companion.appSettings().getDrawerCardColor());
+                    drawerViewGrid.setCardElevation(Tool.INSTANCE.dp2px(4, getContext()));
                 }
                 if (drawerViewGrid.gridDrawerAdapter != null) {
                     drawerViewGrid.gridDrawerAdapter.notifyDataSetChanged();
@@ -218,7 +218,7 @@ public class AppDrawerController extends RevealFrameLayout {
         }
     }
 
-    public void setHome(Home home) {
+    public void setHome(CoreHome home) {
         switch (drawerMode) {
             case DrawerMode.HORIZONTAL_PAGED:
                 drawerViewPaged.withHome(home, (PagerIndicator) findViewById(R.id.appDrawerIndicator));

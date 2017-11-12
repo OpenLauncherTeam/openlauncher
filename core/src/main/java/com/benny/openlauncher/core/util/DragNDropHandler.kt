@@ -5,17 +5,14 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Parcelable
-import android.util.Log
 import android.view.DragEvent
 import android.view.View
-import android.widget.TextView
 
 import com.benny.openlauncher.core.model.Item
-import com.benny.openlauncher.core.util.DragDropHandler.DRAG_DROP_EXTRA
 import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder
 import com.benny.openlauncher.core.widget.AppItemView
 
-object DragDropHandler {
+object DragNDropHandler {
 
     private val DRAG_DROP_EXTRA = "DRAG_DROP_EXTRA"
     private val DRAG_DROP_INTENT = "DRAG_DROP_INTENT"

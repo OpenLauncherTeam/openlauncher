@@ -12,7 +12,7 @@ import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.AbstractApp;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.manager.Setup;
@@ -36,7 +36,7 @@ public class AppDrawerVertical extends CardView {
     public GridAppDrawerAdapter gridDrawerAdapter;
     public DragScrollBar scrollBar;
 
-    private static List<App> apps;
+    private static List<AbstractApp> apps;
     private GridLayoutManager layoutManager;
     private RelativeLayout rl;
 
@@ -63,12 +63,12 @@ public class AppDrawerVertical extends CardView {
 
                 rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_vertical_inner, AppDrawerVertical.this, false);
                 recyclerView = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
-                layoutManager = new GridLayoutManager(getContext(), Setup.appSettings().getDrawerColumnCount());
+                layoutManager = new GridLayoutManager(getContext(), Setup.Companion.appSettings().getDrawerColumnCount());
 
                 itemWidth = (getWidth() - recyclerView.getPaddingRight() - recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
                 init();
 
-                if (!Setup.appSettings().isDrawerShowIndicator())
+                if (!Setup.Companion.appSettings().isDrawerShowIndicator())
                     scrollBar.setVisibility(View.GONE);
             }
         });
@@ -90,17 +90,17 @@ public class AppDrawerVertical extends CardView {
     }
 
     private void setPortraitValue() {
-        layoutManager.setSpanCount(Setup.appSettings().getDrawerColumnCount());
+        layoutManager.setSpanCount(Setup.Companion.appSettings().getDrawerColumnCount());
         gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
     private void setLandscapeValue() {
-        layoutManager.setSpanCount(Setup.appSettings().getDrawerRowCount());
+        layoutManager.setSpanCount(Setup.Companion.appSettings().getDrawerRowCount());
         gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
     private void init() {
-        itemHeightPadding = Tool.Companion.dp2px(15, getContext());
+        itemHeightPadding = Tool.INSTANCE.dp2px(15, getContext());
 
         scrollBar = rl.findViewById(R.id.dragScrollBar);
         scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
@@ -109,7 +109,7 @@ public class AppDrawerVertical extends CardView {
         scrollBar.post(new Runnable() {
             @Override
             public void run() {
-                scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
+                scrollBar.setHandleColour(Setup.Companion.appSettings().getDrawerFastScrollColor());
             }
         });
 
@@ -125,7 +125,7 @@ public class AppDrawerVertical extends CardView {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setDrawingCacheEnabled(true);
 
-        List<App> allApps = Setup.appLoader().getAllApps(getContext(), false);
+        List<AbstractApp> allApps = Setup.Companion.appLoader().getAllApps(getContext(), false);
         if (allApps.size() != 0) {
             AppDrawerVertical.this.apps = allApps;
             ArrayList<FastItem.AppItem> items = new ArrayList<>();
@@ -134,9 +134,9 @@ public class AppDrawerVertical extends CardView {
             }
             gridDrawerAdapter.set(items);
         }
-        Setup.appLoader().addUpdateListener(new AppUpdateListener<App>() {
+        Setup.Companion.appLoader().addUpdateListener(new AppUpdateListener<AbstractApp>() {
             @Override
-            public boolean onAppUpdated(List<App> apps) {
+            public boolean onAppUpdated(List<AbstractApp> apps) {
                 AppDrawerVertical.this.apps = apps;
                 ArrayList<FastItem.AppItem> items = new ArrayList<>();
                 for (int i = 0; i < apps.size(); i++) {

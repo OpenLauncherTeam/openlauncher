@@ -12,12 +12,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.ButterKnife
 import com.benny.openlauncher.R
+import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.util.AppSettings
 import com.benny.openlauncher.util.LauncherAction
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.mikepenz.fastadapter_extensions.drag.ItemTouchCallback
 import com.mikepenz.fastadapter_extensions.drag.SimpleDragCallback
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_minibar_edit.*
 import java.util.*
 
@@ -58,9 +60,9 @@ class MinibarEditActivity : ThemeActivity(), ItemTouchCallback {
         enableSwitch!!.setOnCheckedChangeListener { buttonView, isChecked ->
             buttonView.setText(if (isChecked) R.string.on else R.string.off)
             AppSettings.get().minibarEnable = isChecked
-            if (Home.launcher != null) {
-                (Home.launcher as Home).drawerLayout.closeDrawers()
-                (Home.launcher as Home).drawerLayout.setDrawerLockMode(if (isChecked) DrawerLayout.LOCK_MODE_UNLOCKED else DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            if (CoreHome.launcher != null) {
+                CoreHome.launcher?.drawer_layout?.closeDrawers()
+                CoreHome.launcher?.drawer_layout?.setDrawerLockMode(if (isChecked) DrawerLayout.LOCK_MODE_UNLOCKED else DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
         }
 
@@ -80,9 +82,7 @@ class MinibarEditActivity : ThemeActivity(), ItemTouchCallback {
     }
 
     override fun onStop() {
-        if (Home.launcher != null) {
-            (Home.launcher as Home).initMinibar()
-        }
+        Home.launcher?.initMinibar()
         super.onStop()
     }
 

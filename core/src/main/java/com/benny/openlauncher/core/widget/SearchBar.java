@@ -29,7 +29,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.interfaces.AbstractApp;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.manager.Setup;
@@ -116,7 +116,7 @@ public class SearchBar extends FrameLayout {
     }
 
     private void init() {
-        int dp1 = Tool.Companion.dp2px(1, getContext());
+        int dp1 = Tool.dp2px(1, getContext());
         int iconMarginOutside = dp1 * 16;
         int iconMarginTop = dp1 * 13;
         int searchTextHorizontalMargin = dp1 * 8;
@@ -138,7 +138,7 @@ public class SearchBar extends FrameLayout {
         switchButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Setup.appSettings().setSearchUseGrid(!Setup.appSettings().isSearchUseGrid());
+                Setup.Companion.appSettings().setSearchUseGrid(!Setup.Companion.appSettings().isSearchUseGrid());
                 updateSwitchIcon();
                 updateRecyclerViewLayoutManager();
             }
@@ -214,12 +214,12 @@ public class SearchBar extends FrameLayout {
 
         initRecyclerView();
 
-        Setup.appLoader().addUpdateListener(new AppUpdateListener<App>() {
+        Setup.Companion.appLoader().addUpdateListener(new AppUpdateListener<AbstractApp>() {
             @Override
-            public boolean onAppUpdated(List<App> apps) {
+            public boolean onAppUpdated(List<AbstractApp> apps) {
                 adapter.clear();
-                if (Setup.appSettings().getSearchBarShouldShowHiddenApps()) {
-                    apps = Setup.appLoader().getAllApps(getContext(), true);
+                if (Setup.Companion.appSettings().getSearchBarShouldShowHiddenApps()) {
+                    apps = Setup.Companion.appLoader().getAllApps(getContext(), true);
                 }
                 List<FastItem.LabelItem> items = new ArrayList<>();
                 if (searchInternetEnabled) {
@@ -239,14 +239,14 @@ public class SearchBar extends FrameLayout {
                             .withTextGravity(Gravity.END));
                 }
                 for (int i = 0; i < apps.size(); i++) {
-                    final App app = apps.get(i);
+                    final AbstractApp app = apps.get(i);
                     final int finalI = i;
                     items.add(new IconLabelItem(getContext(), app.getIconProvider(), app.getLabel(), 36)
-                            .withIconGravity(Setup.appSettings().getSearchGridSize() > 1 && Setup.appSettings().getSearchLabelLines() == 0 ? Gravity.TOP : Gravity.START)
+                            .withIconGravity(Setup.Companion.appSettings().getSearchGridSize() > 1 && Setup.Companion.appSettings().getSearchLabelLines() == 0 ? Gravity.TOP : Gravity.START)
                             .withOnClickListener(new OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startApp(v.getContext(), app);
+                                    startApp(v.getContext(), app, v);
                                 }
                             })
                             .withOnLongClickListener(AppItemView.Builder.getLongClickDragAppListener(Item.newAppItem(app), DragAction.Action.APP, new AppItemView.LongPressCallBack() {
@@ -266,7 +266,7 @@ public class SearchBar extends FrameLayout {
                             .withTextColor(Color.WHITE)
                             .withMatchParent(true)
                             .withDrawablePadding(getContext(), 8)
-                            .withMaxTextLines(Setup.appSettings().getSearchLabelLines()));
+                            .withMaxTextLines(Setup.Companion.appSettings().getSearchLabelLines()));
                 }
                 adapter.set(items);
 
@@ -299,8 +299,8 @@ public class SearchBar extends FrameLayout {
             @Override
             public void onGlobalLayout() {
                 searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int marginTop = Tool.Companion.dp2px(56, getContext()) + searchInput.getHeight();
-                int marginBottom = Desktop.bottomInset;
+                int marginTop = Tool.dp2px(56, getContext()) + searchInput.getHeight();
+                int marginBottom = Desktop.Companion.getBottomInset();
                 recyclerParams.setMargins(0, marginTop, 0, marginBottom);
                 recyclerParams.height = ((View) getParent()).getHeight() - marginTop - marginBottom / 2;
                 searchRecycler.setLayoutParams(recyclerParams);
@@ -314,8 +314,8 @@ public class SearchBar extends FrameLayout {
             callback.onCollapse();
         }
         icon.setIcon(getResources().getDrawable(R.drawable.ic_search_light_24dp));
-        Tool.Companion.visibleViews(ANIM_TIME, searchClock);
-        Tool.Companion.goneViews(ANIM_TIME, searchCardContainer, searchRecycler, switchButton);
+        Tool.visibleViews(ANIM_TIME, searchClock);
+        Tool.goneViews(ANIM_TIME, searchCardContainer, searchRecycler, switchButton);
         searchInput.getText().clear();
     }
 
@@ -323,7 +323,7 @@ public class SearchBar extends FrameLayout {
         if (callback != null) {
             callback.onExpand();
         }
-        if (Setup.appSettings().isResetSearchBarOnOpen()) {
+        if (Setup.Companion.appSettings().isResetSearchBarOnOpen()) {
             RecyclerView.LayoutManager lm = searchRecycler.getLayoutManager();
             if (lm instanceof LinearLayoutManager) {
                 ((LinearLayoutManager) searchRecycler.getLayoutManager()).scrollToPositionWithOffset(0, 0);
@@ -332,16 +332,16 @@ public class SearchBar extends FrameLayout {
             }
         }
         icon.setIcon(getResources().getDrawable(R.drawable.ic_clear_white_24dp));
-        Tool.Companion.visibleViews(ANIM_TIME, searchCardContainer, searchRecycler, switchButton);
-        Tool.Companion.goneViews(ANIM_TIME, searchClock);
+        Tool.visibleViews(ANIM_TIME, searchCardContainer, searchRecycler, switchButton);
+        Tool.goneViews(ANIM_TIME, searchClock);
     }
 
     private void updateSwitchIcon() {
-        switchButton.setImageResource(Setup.appSettings().isSearchUseGrid() ? R.drawable.ic_apps_white_24dp : R.drawable.ic_view_list_white_24dp);
+        switchButton.setImageResource(Setup.Companion.appSettings().isSearchUseGrid() ? R.drawable.ic_apps_white_24dp : R.drawable.ic_view_list_white_24dp);
     }
 
     private void updateRecyclerViewLayoutManager() {
-        int gridSize = Setup.appSettings().isSearchUseGrid() ? Setup.appSettings().getSearchGridSize() : 1;
+        int gridSize = Setup.Companion.appSettings().isSearchUseGrid() ? Setup.Companion.appSettings().getSearchGridSize() : 1;
         if (gridSize == 1) {
             searchRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         } else {
@@ -360,12 +360,12 @@ public class SearchBar extends FrameLayout {
         updateRecyclerViewLayoutManager();
     }
 
-    protected void startApp(Context context, App app) {
-        Tool.Companion.startApp(context, app);
+    protected void startApp(Context context, AbstractApp app, View view) {
+        Tool.startApp(context, app,view);
     }
 
     public void updateClock() {
-        if (!Setup.appSettings().isSearchBarTimeEnabled()) {
+        if (!Setup.Companion.appSettings().isSearchBarTimeEnabled()) {
             searchClock.setText("");
             return;
         }
@@ -373,7 +373,7 @@ public class SearchBar extends FrameLayout {
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
         SimpleDateFormat sdf = mode.sdf;
         if (sdf == null) {
-            sdf = Setup.appSettings().getUserDateFormat();
+            sdf = Setup.Companion.appSettings().getUserDateFormat();
         }
         String text = sdf.format(calendar.getTime());
         String[] lines = text.split("\n");
@@ -386,7 +386,7 @@ public class SearchBar extends FrameLayout {
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             int topInset = insets.getSystemWindowInsetTop();
-            setPadding(getPaddingLeft(), topInset + Tool.Companion.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom());
+            setPadding(getPaddingLeft(), topInset + Tool.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom());
         }
         return insets;
     }

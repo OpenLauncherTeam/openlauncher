@@ -13,13 +13,13 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.activity.CoreHome;
+import com.benny.openlauncher.core.interfaces.AbstractApp;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.Definitions;
 import com.benny.openlauncher.core.util.DragAction;
-import com.benny.openlauncher.core.util.DragDropHandler;
+import com.benny.openlauncher.core.util.DragNDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.DesktopCallBack;
 import com.benny.openlauncher.core.viewutil.GroupIconDrawable;
@@ -55,7 +55,7 @@ public class GroupPopupView extends RevealFrameLayout {
         }
         popupCard = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_group_popup, this, false);
         // set the CardView color
-        int color = Setup.appSettings().getDesktopFolderColor();
+        int color = Setup.Companion.appSettings().getDesktopFolderColor();
         int alpha = Color.alpha(color);
         popupCard.setCardBackgroundColor(color);
         // remove elevation if CardView's background is transparent to avoid weird shadows because CardView does not support transparent backgrounds
@@ -97,9 +97,9 @@ public class GroupPopupView extends RevealFrameLayout {
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.getGroupItems().size());
         cellContainer.setGridSize(cellSize[0], cellSize[1]);
 
-        int iconSize = Tool.Companion.dp2px(Setup.appSettings().getDesktopIconSize(), c);
-        int textSize = Tool.Companion.dp2px(22, c);
-        int contentPadding = Tool.Companion.dp2px(6, c);
+        int iconSize = Tool.INSTANCE.dp2px(Setup.Companion.appSettings().getDesktopIconSize(), c);
+        int textSize = Tool.INSTANCE.dp2px(22, c);
+        int contentPadding = Tool.INSTANCE.dp2px(6, c);
 
         for (int x2 = 0; x2 < cellSize[0]; x2++) {
             for (int y2 = 0; y2 < cellSize[1]; y2++) {
@@ -107,14 +107,14 @@ public class GroupPopupView extends RevealFrameLayout {
                     continue;
                 }
                 final Item groupItem = item.getGroupItems().get(y2 * cellSize[0] + x2);
-                final App groupApp = groupItem.getType() != Item.Type.SHORTCUT ? Setup.appLoader().findItemApp(groupItem) : null;
-                AppItemView appItemView = AppItemView.createAppItemViewPopup(getContext(), groupItem, groupApp, Setup.appSettings().getDesktopIconSize());
+                final AbstractApp groupApp = groupItem.getType() != Item.Type.SHORTCUT ? Setup.Companion.appLoader().findItemApp(groupItem) : null;
+                AppItemView appItemView = AppItemView.createAppItemViewPopup(getContext(), groupItem, groupApp, Setup.Companion.appSettings().getDesktopIconSize());
                 final View view = appItemView.getView();
 
                 view.setOnLongClickListener(new OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view2) {
-                        if (Setup.appSettings().isDesktopLock()) return false;
+                        if (Setup.Companion.appSettings().isDesktopLock()) return false;
 
                         removeItem(c, callBack, item, groupItem, (AppItemView) itemView);
 
@@ -123,21 +123,21 @@ public class GroupPopupView extends RevealFrameLayout {
                         DragAction.Action action = groupItem.getType() == Item.Type.SHORTCUT ? DragAction.Action.SHORTCUT : DragAction.Action.APP;
 
                         // start the drag action
-                        DragDropHandler.INSTANCE.startDrag(view, groupItem, action, null);
+                        DragNDropHandler.INSTANCE.startDrag(view, groupItem, action, null);
 
                         dismissPopup();
                         updateItem(c, callBack, item, groupItem, itemView);
                         return true;
                     }
                 });
-                final App app = Setup.appLoader().findItemApp(groupItem);
+                final AbstractApp app = Setup.Companion.appLoader().findItemApp(groupItem);
                 if (app == null) {
                     removeItem(c, callBack, item, groupItem, (AppItemView) itemView);
                 } else {
                     view.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Tool.Companion.createScaleInScaleOutAnim(view, new Runnable() {
+                            Tool.INSTANCE.createScaleInScaleOutAnim(view, new Runnable() {
                                 @Override
                                 public void run() {
                                     dismissPopup();
@@ -166,11 +166,11 @@ public class GroupPopupView extends RevealFrameLayout {
         int popupWidth = contentPadding * 8 + popupCard.getContentPaddingLeft() + popupCard.getContentPaddingRight() + (iconSize) * cellSize[0];
         popupCard.getLayoutParams().width = popupWidth;
 
-        int popupHeight = contentPadding * 2 + popupCard.getContentPaddingTop() + popupCard.getContentPaddingBottom() + Tool.Companion.dp2px(30, c) + (iconSize + textSize) * cellSize[1];
+        int popupHeight = contentPadding * 2 + popupCard.getContentPaddingTop() + popupCard.getContentPaddingBottom() + Tool.INSTANCE.dp2px(30, c) + (iconSize + textSize) * cellSize[1];
         popupCard.getLayoutParams().height = popupHeight;
 
         cx = popupWidth / 2;
-        cy = popupHeight / 2 - (Setup.appSettings().isDesktopShowLabel() ? Tool.Companion.dp2px(10, getContext()) : 0);
+        cy = popupHeight / 2 - (Setup.Companion.appSettings().isDesktopShowLabel() ? Tool.INSTANCE.dp2px(10, getContext()) : 0);
 
         int[] coordinates = new int[2];
         itemView.getLocationInWindow(coordinates);
@@ -209,7 +209,7 @@ public class GroupPopupView extends RevealFrameLayout {
 
         if (item.locationInLauncher == Item.LOCATION_DOCK) {
             coordinates[1] -= iconSize/2;
-            cy += iconSize/2 + (Setup.appSettings().isDockShowLabel() ? 0 : Tool.Companion.dp2px(10, getContext()));
+            cy += iconSize/2 + (Setup.Companion.appSettings().isDockShowLabel() ? 0 : Tool.INSTANCE.dp2px(10, getContext()));
         }
 
         int x = coordinates[0];
@@ -231,14 +231,14 @@ public class GroupPopupView extends RevealFrameLayout {
         cellContainer.setAlpha(0);
 
         int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());
-        int startRadius = Tool.Companion.dp2px(Setup.appSettings().getDesktopIconSize() / 2, getContext());
+        int startRadius = Tool.INSTANCE.dp2px(Setup.Companion.appSettings().getDesktopIconSize() / 2, getContext());
 
         folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, startRadius, finalRadius);
         folderAnimator.setStartDelay(0);
         folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         folderAnimator.setDuration(folderAnimationTime);
         folderAnimator.start();
-        Tool.Companion.visibleViews(100, 100, cellContainer);
+        Tool.INSTANCE.visibleViews(100, 100, cellContainer);
     }
 
     public void dismissPopup() {
@@ -246,9 +246,9 @@ public class GroupPopupView extends RevealFrameLayout {
         if (folderAnimator == null || folderAnimator.isRunning())
             return;
 
-        Tool.Companion.invisibleViews(200, cellContainer);
+        Tool.INSTANCE.invisibleViews(200, cellContainer);
 
-        int startRadius = Tool.Companion.dp2px(Setup.appSettings().getDesktopIconSize() / 2, getContext());
+        int startRadius = Tool.INSTANCE.dp2px(Setup.Companion.appSettings().getDesktopIconSize() / 2, getContext());
         int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());
         folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, finalRadius, startRadius);
         folderAnimator.setStartDelay(100);
@@ -286,29 +286,29 @@ public class GroupPopupView extends RevealFrameLayout {
     private void removeItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, AppItemView currentView) {
         currentItem.getGroupItems().remove(dragOutItem);
 
-        Home.db.saveItem(dragOutItem, Definitions.ItemState.Visible);
-        Home.db.saveItem(currentItem);
+        CoreHome.Companion.getDb().saveItem(dragOutItem, Definitions.ItemState.Visible);
+        CoreHome.Companion.getDb().saveItem(currentItem);
 
-        currentView.setIconProvider(Setup.imageLoader().createIconProvider(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize())));
+        currentView.setIconProvider(Setup.Companion.imageLoader().createIconProvider(new GroupIconDrawable(context, currentItem, Setup.Companion.appSettings().getDesktopIconSize())));
     }
 
     public void updateItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, View currentView) {
         if (currentItem.getGroupItems().size() == 1) {
-            final App app = Setup.appLoader().findItemApp(currentItem.getGroupItems().get(0));
+            final AbstractApp app = Setup.Companion.appLoader().findItemApp(currentItem.getGroupItems().get(0));
             if (app != null) {
-                Item item = Home.db.getItem(currentItem.getGroupItems().get(0).getId());
+                Item item = CoreHome.Companion.getDb().getItem(currentItem.getGroupItems().get(0).getId());
                 item.setX(currentItem.getX());
                 item.setY(currentItem.getY());
 
-                Home.db.saveItem(item);
-                Home.db.saveItem(item, Definitions.ItemState.Visible);
-                Home.db.deleteItem(currentItem, true);
+                CoreHome.Companion.getDb().saveItem(item);
+                CoreHome.Companion.getDb().saveItem(item, Definitions.ItemState.Visible);
+                CoreHome.Companion.getDb().deleteItem(currentItem, true);
 
                 callBack.removeItem(currentView);
                 callBack.addItemToCell(item, item.getX(), item.getY());
             }
-            if (Home.launcher != null) {
-                Home.launcher.desktop.requestLayout();
+            if (CoreHome.Companion.getLauncher() != null) {
+                CoreHome.Companion.getLauncher().getDesktop().requestLayout();
             }
         }
     }

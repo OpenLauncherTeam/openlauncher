@@ -11,6 +11,7 @@ import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceCategory
 import android.support.v7.preference.PreferenceFragmentCompat
 import com.benny.openlauncher.R
+import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.core.util.DatabaseHelper
 import com.benny.openlauncher.core.widget.AppDrawerController
 import com.benny.openlauncher.util.AppManager
@@ -187,10 +188,10 @@ class SettingsActivity : ThemeActivity() {
         override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
             checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key)
             if (key == getString(R.string.pref_key__desktop_indicator_style)) {
-                Home.launcher.desktopIndicator.setMode(appSettings.desktopIndicatorMode)
+                Home.launcher?.getDesktopIndicator()?.setMode(appSettings.desktopIndicatorMode)
             }
             if (key == getString(R.string.pref_title__desktop_show_position_indicator)) {
-                Home.launcher.updateDesktopIndicatorVisibility()
+                Home.launcher?.updateDesktopIndicatorVisibility()
             }
         }
 
@@ -233,7 +234,7 @@ class SettingsActivity : ThemeActivity() {
         override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
             checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key)
             if (key == getString(R.string.pref_key__dock_enable)) {
-                Home.launcher.updateDock(true)
+                Home.launcher?.updateDock(true)
             }
         }
 
@@ -335,7 +336,7 @@ class SettingsActivity : ThemeActivity() {
                 val key = preference.key
 
                 if (key == getString(R.string.pref_key__icon_pack)) {
-                    AppManager.getInstance(activity).startPickIconPackIntent(activity)
+                    AppManager.getInstance(activity!!).startPickIconPackIntent(activity!!)
                     return true
                 }
             }
@@ -385,21 +386,21 @@ class SettingsActivity : ThemeActivity() {
                     if (ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         DialogHelper.backupDialog(activity)
                     } else {
-                        ActivityCompat.requestPermissions(Home.launcher, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), Home.REQUEST_PERMISSION_STORAGE)
+                        ActivityCompat.requestPermissions(Home.launcher!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), CoreHome.REQUEST_PERMISSION_STORAGE)
                     }
                 }
 
                 if (key == getString(R.string.pref_key__clear_database)) {
                     if (Home.launcher != null)
-                        Home.launcher.recreate()
-                    (Home.db as DatabaseHelper).onUpgrade((Home.db as DatabaseHelper).writableDatabase, 1, 1)
+                        Home.launcher?.recreate()
+                    (CoreHome.db as DatabaseHelper).onUpgrade((CoreHome.db as DatabaseHelper).writableDatabase, 1, 1)
                     getActivity()!!.finish()
                     return true
                 }
 
                 if (key == getString(R.string.pref_key__restart)) {
                     if (Home.launcher != null)
-                        Home.launcher.recreate()
+                        Home.launcher?.recreate()
                     getActivity()!!.finish()
                     return true
                 }

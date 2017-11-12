@@ -157,14 +157,14 @@ public class HideAppsFragment extends Fragment {
     }
 
     private void prepareData() {
-        List<AppManager.App> apps = AppManager.getInstance(getContext()).getNonFilteredApps();
+        List<AppManager.App> apps = AppManager.Companion.getInstance(getContext()).getNonFilteredApps();
 
         for (AppManager.App app : apps) {
             AppInfo tempAppInfo = new AppInfo(
-                    app.packageName + "/" + app.className,
-                    app.label,
-                    app.iconProvider.getDrawableSynchronously(Definitions.NO_SCALE),
-                    list_activities.contains(app.packageName + "/" + app.className)
+                    app.getPackageName() + "/" + app.getClassName(),
+                    app.getLabel(),
+                    app.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE),
+                    list_activities.contains(app.getPackageName() + "/" + app.getClassName())
             );
             list_activities_final.add(tempAppInfo);
         }
@@ -191,12 +191,12 @@ public class HideAppsFragment extends Fragment {
                 appInfo.setSelected(checker.isChecked());
 
                 if (appInfo.isSelected()) {
-                    if (DEBUG) Log.v(TAG, "Selected App: " + appInfo.getName());
+                    if (DEBUG) Log.v(TAG, "Selected AbstractApp: " + appInfo.getName());
                     if (icon.getDisplayedChild() == 0) {
                         icon.showNext();
                     }
                 } else {
-                    if (DEBUG) Log.v(TAG, "Deselected App: " + appInfo.getName());
+                    if (DEBUG) Log.v(TAG, "Deselected AbstractApp: " + appInfo.getName());
                     if (icon.getDisplayedChild() == 1) {
                         icon.showPrevious();
                     }

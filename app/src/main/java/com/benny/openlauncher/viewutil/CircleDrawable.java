@@ -8,7 +8,7 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 
-import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.core.util.Tool;
 
 public class CircleDrawable extends Drawable {
 
@@ -25,9 +25,9 @@ public class CircleDrawable extends Drawable {
     private boolean hidingOldIcon;
 
     public CircleDrawable(Context context, Drawable icon, int color) {
-        this.icon = Tool.Companion.drawableToBitmap(icon);
+        this.icon = Tool.INSTANCE.drawableToBitmap(icon);
 
-        iconPadding = Tool.Companion.dp2px(6, context);
+        iconPadding = Tool.INSTANCE.dp2px(6, context);
 
         iconSizeReal = icon.getIntrinsicHeight();
         iconSize = icon.getIntrinsicHeight() + iconPadding * 2;
@@ -45,7 +45,7 @@ public class CircleDrawable extends Drawable {
         iconToFade = this.icon;
         hidingOldIcon = true;
 
-        this.icon = Tool.Companion.drawableToBitmap(icon);
+        this.icon = Tool.INSTANCE.drawableToBitmap(icon);
         invalidateSelf();
     }
 
@@ -59,7 +59,7 @@ public class CircleDrawable extends Drawable {
                 currentScale -= scaleStep;
             else
                 currentScale += scaleStep;
-            currentScale = Tool.Companion.clampFloat(currentScale, 0, 1);
+            currentScale = Tool.INSTANCE.clampFloat(currentScale, 0, 1);
             canvas.scale(currentScale, currentScale, iconSize / 2, iconSize / 2);
             canvas.drawBitmap(hidingOldIcon ? iconToFade : icon, iconSize / 2 - iconSizeReal / 2, iconSize / 2 - iconSizeReal / 2, paint2);
             canvas.restore();

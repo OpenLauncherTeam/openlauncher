@@ -13,12 +13,12 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.activity.CoreHome;
+import com.benny.openlauncher.core.interfaces.AbstractApp;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.DragAction;
-import com.benny.openlauncher.core.util.DragDropHandler;
+import com.benny.openlauncher.core.util.DragNDropHandler;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.widget.AppItemView;
 import com.benny.openlauncher.core.widget.CellContainer;
@@ -39,13 +39,13 @@ public class ItemViewFactory {
         View view = null;
         switch (item.type) {
             case APP:
-                final App app = Setup.appLoader().findItemApp(item);
+                final AbstractApp app = Setup.Companion.appLoader().findItemApp(item);
                 if (app == null) {
                     break;
                 }
                 view = new AppItemView.Builder(context, iconSize)
                         .setAppItem(item, app)
-                        .withOnTouchGetPosition(item, Setup.itemGestureCallback())
+                        .withOnTouchGetPosition(item, Setup.Companion.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.APP, new AppItemView.LongPressCallBack() {
                             @Override
@@ -65,7 +65,7 @@ public class ItemViewFactory {
             case SHORTCUT:
                 view = new AppItemView.Builder(context, iconSize)
                         .setShortcutItem(item)
-                        .withOnTouchGetPosition(item, Setup.itemGestureCallback())
+                        .withOnTouchGetPosition(item, Setup.Companion.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.SHORTCUT, new AppItemView.LongPressCallBack() {
                             @Override
@@ -85,7 +85,7 @@ public class ItemViewFactory {
             case GROUP:
                 view = new AppItemView.Builder(context, iconSize)
                         .setGroupItem(context, callBack, item, iconSize)
-                        .withOnTouchGetPosition(item, Setup.itemGestureCallback())
+                        .withOnTouchGetPosition(item, Setup.Companion.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.GROUP, new AppItemView.LongPressCallBack() {
                             @Override
@@ -106,7 +106,7 @@ public class ItemViewFactory {
             case ACTION:
                 view = new AppItemView.Builder(context, iconSize)
                         .setActionItem(item)
-                        .withOnTouchGetPosition(item, Setup.itemGestureCallback())
+                        .withOnTouchGetPosition(item, Setup.Companion.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.ACTION, new AppItemView.LongPressCallBack() {
                             @Override
@@ -124,8 +124,8 @@ public class ItemViewFactory {
                         .getView();
                 break;
             case WIDGET:
-                final AppWidgetProviderInfo appWidgetInfo = Home.appWidgetManager.getAppWidgetInfo(item.widgetValue);
-                final WidgetView widgetView = (WidgetView) Home.appWidgetHost.createView(context, item.widgetValue, appWidgetInfo);
+                final AppWidgetProviderInfo appWidgetInfo = CoreHome.Companion.getAppWidgetManager().getAppWidgetInfo(item.widgetValue);
+                final WidgetView widgetView = (WidgetView) CoreHome.Companion.getAppWidgetHost().createView(context, item.widgetValue, appWidgetInfo);
 
                 widgetView.setAppWidget(item.widgetValue, appWidgetInfo);
                 widgetView.post(new Runnable() {
@@ -163,15 +163,15 @@ public class ItemViewFactory {
                 };
 
                 widgetContainer.postDelayed(action, 2000);
-                widgetView.setOnTouchListener(Tool.Companion.getItemOnTouchListener(item, Setup.itemGestureCallback()));
+                widgetView.setOnTouchListener(Tool.INSTANCE.getItemOnTouchListener(item, Setup.Companion.itemGestureCallback()));
                 widgetView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
-                        if (Setup.appSettings().isDesktopLock()) {
+                        if (Setup.Companion.appSettings().isDesktopLock()) {
                             return false;
                         }
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                        DragDropHandler.INSTANCE.startDrag(view, item, DragAction.Action.WIDGET, null);
+                        DragNDropHandler.INSTANCE.startDrag(view, item, DragAction.Action.WIDGET, null);
 
                         callBack.setLastItem(item, widgetContainer);
                         return true;
@@ -228,38 +228,38 @@ public class ItemViewFactory {
     }
 
     private static void scaleWidget(View view, Item item) {
-        item.spanX = Math.min(item.spanX, Home.launcher.desktop.getCurrentPage().getCellSpanH());
+        item.spanX = Math.min(item.spanX, CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellSpanH());
         item.spanX = Math.max(item.spanX, 1);
-        item.spanY = Math.min(item.spanY, Home.launcher.desktop.getCurrentPage().getCellSpanV());
+        item.spanY = Math.min(item.spanY, CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellSpanV());
         item.spanY = Math.max(item.spanY, 1);
 
-        Home.launcher.desktop.getCurrentPage().setOccupied(false, (CellContainer.LayoutParams) view.getLayoutParams());
-        if (!Home.launcher.desktop.getCurrentPage().checkOccupied(new Point(item.x, item.y), item.spanX, item.spanY)) {
+        CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().setOccupied(false, (CellContainer.LayoutParams) view.getLayoutParams());
+        if (!CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().checkOccupied(new Point(item.x, item.y), item.spanX, item.spanY)) {
             CellContainer.LayoutParams newWidgetLayoutParams = new CellContainer.LayoutParams(CellContainer.LayoutParams.WRAP_CONTENT, CellContainer.LayoutParams.WRAP_CONTENT, item.x, item.y, item.spanX, item.spanY);
 
             // update occupied array
-            Home.launcher.desktop.getCurrentPage().setOccupied(true, newWidgetLayoutParams);
+            CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().setOccupied(true, newWidgetLayoutParams);
 
             // update the view
             view.setLayoutParams(newWidgetLayoutParams);
             updateWidgetOption(item);
 
             // update the widget size in the database
-            Home.db.saveItem(item);
+            CoreHome.Companion.getDb().saveItem(item);
         } else {
-            Toast.makeText(Home.launcher.desktop.getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
+            Toast.makeText(CoreHome.Companion.getLauncher().getDesktop().getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
 
             // add the old layout params to the occupied array
-            Home.launcher.desktop.getCurrentPage().setOccupied(true, (CellContainer.LayoutParams) view.getLayoutParams());
+            CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().setOccupied(true, (CellContainer.LayoutParams) view.getLayoutParams());
         }
     }
 
     private static void updateWidgetOption(Item item) {
         Bundle newOps = new Bundle();
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, item.spanX * Home.launcher.desktop.getCurrentPage().getCellWidth());
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.spanX * Home.launcher.desktop.getCurrentPage().getCellWidth());
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.spanY * Home.launcher.desktop.getCurrentPage().getCellHeight());
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.spanY * Home.launcher.desktop.getCurrentPage().getCellHeight());
-        Home.appWidgetManager.updateAppWidgetOptions(item.widgetValue, newOps);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, item.spanX * CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellWidth());
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.spanX * CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellWidth());
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.spanY * CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellHeight());
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.spanY * CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellHeight());
+        CoreHome.Companion.getAppWidgetManager().updateAppWidgetOptions(item.widgetValue, newOps);
     }
 }

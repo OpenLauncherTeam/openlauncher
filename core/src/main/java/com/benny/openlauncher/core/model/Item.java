@@ -5,9 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.activity.CoreHome;
+import com.benny.openlauncher.core.interfaces.AbstractApp;
 import com.benny.openlauncher.core.interfaces.LabelProvider;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.BaseIconProvider;
@@ -67,14 +66,14 @@ public class Item implements LabelProvider, Parcelable {
         switch (type) {
             case APP:
             case SHORTCUT:
-                intent = Tool.Companion.getIntentFromString(parcel.readString());
+                intent = Tool.INSTANCE.getIntentFromString(parcel.readString());
                 break;
             case GROUP:
                 List<String> labels = new ArrayList<>();
                 parcel.readStringList(labels);
                 items = new ArrayList<>();
                 for (String s : labels) {
-                    items.add(Home.launcher.db.getItem(Integer.parseInt(s)));
+                    items.add(CoreHome.Companion.getLauncher().Companion.getDb().getItem(Integer.parseInt(s)));
                 }
                 break;
             case ACTION:
@@ -88,13 +87,13 @@ public class Item implements LabelProvider, Parcelable {
         }
         locationInLauncher = parcel.readInt();
 
-        if (Setup.appSettings().enableImageCaching()) {
-            iconProvider = Setup.imageLoader().createIconProvider(Tool.Companion.getIcon(Home.launcher, Integer.toString(idValue)));
+        if (Setup.Companion.appSettings().enableImageCaching()) {
+            iconProvider = Setup.Companion.imageLoader().createIconProvider(Tool.INSTANCE.getIcon(CoreHome.Companion.getLauncher(), Integer.toString(idValue)));
         } else {
             switch (type) {
                 case APP:
                 case SHORTCUT:
-                    App app = Setup.appLoader().findItemApp(this);
+                    AbstractApp app = Setup.Companion.appLoader().findItemApp(this);
                     iconProvider = app != null ? app.getIconProvider() : null;
                     break;
                 default:
@@ -104,7 +103,7 @@ public class Item implements LabelProvider, Parcelable {
         }
     }
 
-    public static Item newAppItem(App app) {
+    public static Item newAppItem(AbstractApp app) {
         Item item = new Item();
         item.type = Type.APP;
         item.name = app.getLabel();
@@ -117,7 +116,7 @@ public class Item implements LabelProvider, Parcelable {
         Item item = new Item();
         item.type = Type.SHORTCUT;
         item.name = name;
-        item.iconProvider = Setup.imageLoader().createIconProvider(icon);
+        item.iconProvider = Setup.Companion.imageLoader().createIconProvider(icon);
         item.spanX = 1;
         item.spanY = 1;
         item.intent = intent;
@@ -152,7 +151,7 @@ public class Item implements LabelProvider, Parcelable {
         return item;
     }
 
-    private static Intent toIntent(App app) {
+    private static Intent toIntent(AbstractApp app) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setClassName(app.getPackageName(), app.getClassName());
@@ -180,7 +179,7 @@ public class Item implements LabelProvider, Parcelable {
         switch (type) {
             case APP:
             case SHORTCUT:
-                out.writeString(Tool.Companion.getIntentAsString(this.intent));
+                out.writeString(Tool.INSTANCE.getIntentAsString(this.intent));
                 break;
             case GROUP:
                 List<String> labels = new ArrayList<>();

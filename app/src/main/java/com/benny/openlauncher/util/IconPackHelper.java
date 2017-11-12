@@ -99,13 +99,13 @@ public class IconPackHelper {
             if (themeRes != null) {
                 iconResource = null;
                 intres = 0;
-                iconResource = getResourceName(themeRes, resPacName, "ComponentInfo{" + apps.get(I).packageName + "/" + apps.get(I).className + "}");
+                iconResource = getResourceName(themeRes, resPacName, "ComponentInfo{" + apps.get(I).getPackageName() + "/" + apps.get(I).getClassName() + "}");
                 if (iconResource != null) {
                     intres = themeRes.getIdentifier(iconResource, "drawable", resPacName);
                 }
 
                 if (intres != 0) {//has single drawable for app
-                    apps.get(I).iconProvider = Setup.imageLoader().createIconProvider(new BitmapDrawable(BitmapFactory.decodeResource(themeRes, intres, uniformOptions)));
+                    apps.get(I).setIconProvider(Setup.Companion.imageLoader().createIconProvider(new BitmapDrawable(BitmapFactory.decodeResource(themeRes, intres, uniformOptions))));
                 } else {
                     try {
                         orig = Bitmap.createBitmap(apps.get(I).getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE).getIntrinsicWidth(), apps.get(I).getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE).getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -134,7 +134,7 @@ public class IconPackHelper {
                     if (front != null)
                         canvas.drawBitmap(front, getResizedMatrix(front, iconSize, iconSize), p);
 
-                    apps.get(I).iconProvider = Setup.imageLoader().createIconProvider(new BitmapDrawable(appManager.getContext().getResources(), scaledBitmap));
+                    apps.get(I).setIconProvider(Setup.Companion.imageLoader().createIconProvider(new BitmapDrawable(appManager.getContext().getResources(), scaledBitmap)));
                 }
             }
         }

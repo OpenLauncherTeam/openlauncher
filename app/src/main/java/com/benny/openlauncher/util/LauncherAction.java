@@ -17,25 +17,25 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.activity.MinibarEditActivity;
 import com.benny.openlauncher.activity.SettingsActivity;
+import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
 
 import java.util.List;
 
-import static com.benny.openlauncher.activity.Home.resources;
-
 public class LauncherAction {
 
-    public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
-            new ActionDisplayItem(Action.EditMinBar, resources.getString(R.string.minibar_0), R.drawable.ic_mode_edit_black_24dp),
-            new ActionDisplayItem(Action.SetWallpaper, resources.getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp),
-            new ActionDisplayItem(Action.LockScreen, resources.getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp),
-            new ActionDisplayItem(Action.ClearRam, resources.getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp),
-            new ActionDisplayItem(Action.DeviceSettings, resources.getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp),
-            new ActionDisplayItem(Action.LauncherSettings, resources.getString(R.string.minibar_5), R.drawable.ic_settings_launcher_black_24dp),
-            new ActionDisplayItem(Action.VolumeDialog, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp),
-            new ActionDisplayItem(Action.OpenAppDrawer, resources.getString(R.string.minibar_8), R.drawable.ic_apps_dark_24dp)
+    static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
+            new ActionDisplayItem(Action.EditMinBar, Home.Companion.get_resources().getString(R.string.minibar_0), R.drawable.ic_mode_edit_black_24dp),
+            new ActionDisplayItem(Action.SetWallpaper, Home.Companion.get_resources().getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp),
+            new ActionDisplayItem(Action.LockScreen, Home.Companion.get_resources().getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp),
+            new ActionDisplayItem(Action.ClearRam, Home.Companion.get_resources().getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp),
+            new ActionDisplayItem(Action.DeviceSettings, Home.Companion.get_resources().getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp),
+            new ActionDisplayItem(Action.LauncherSettings, Home.Companion.get_resources().getString(R.string.minibar_5), R.drawable.ic_settings_launcher_black_24dp),
+            new ActionDisplayItem(Action.VolumeDialog, Home.Companion.get_resources().getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp),
+            new ActionDisplayItem(Action.OpenAppDrawer, Home.Companion.get_resources().getString(R.string.minibar_8), R.drawable.ic_apps_dark_24dp)
     };
-    private static boolean clearingRam = false;
+
+    public static boolean clearingRam = false;
 
     public static void RunAction(@Nullable ActionItem actionItem, final Context context) {
         if (actionItem != null)
@@ -55,16 +55,16 @@ public class LauncherAction {
                 context.startActivity(new Intent(context, MinibarEditActivity.class));
                 break;
             case SetWallpaper:
-                DialogHelper.setWallpaperDialog(context);
+                DialogHelper.INSTANCE.setWallpaperDialog(context);
                 break;
             case LockScreen:
                 try {
                     ((DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE)).lockNow();
                 } catch (Exception e) {
-                    DialogHelper.alertDialog(context, "Device Admin Required", "To lock your screen by gesture, OpenLauncher require Device Administration, please enable it in the settings to use this features. The force-lock policy will only be used for locking the screen via gesture.", "Enable", new MaterialDialog.SingleButtonCallback() {
+                    DialogHelper.INSTANCE.alertDialog(context, "Device Admin Required", "To lock your screen by gesture, OpenLauncher require Device Administration, please enable it in the settings to use this features. The force-lock policy will only be used for locking the screen via gesture.", "Enable", new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            Tool.Companion.toast(context, context.getString(R.string.toast_device_admin_required));
+                            Tool.toast(context, context.getString(R.string.toast_device_admin_required));
                             Intent intent = new Intent();
                             intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.DeviceAdminSettings"));
                             context.startActivity(intent);
@@ -76,41 +76,7 @@ public class LauncherAction {
                 if (clearingRam) {
                     break;
                 }
-                ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-                final ActivityManager activityManager = (ActivityManager) context.getSystemService(context.ACTIVITY_SERVICE);
-                activityManager.getMemoryInfo(mi);
-                final long pre = mi.availMem / 1048576L;
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected void onPreExecute() {
-                        clearingRam = true;
-                    }
-
-                    @Override
-                    protected Void doInBackground(Void[] p1) {
-                        List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfo = activityManager.getRunningAppProcesses();
-                        for (int i = 0; i < runningAppProcessInfo.size(); i++) {
-                            activityManager.killBackgroundProcesses(runningAppProcessInfo.get(i).pkgList[0]);
-                        }
-                        System.runFinalization();
-                        Runtime.getRuntime().gc();
-                        System.gc();
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Void result) {
-                        clearingRam = false;
-                        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-                        activityManager.getMemoryInfo(mi);
-                        long current = mi.availMem / 1048576L;
-                        if (current - pre > 10)
-                            Tool.Companion.toast(context, context.getResources().getString(R.string.toast_free_ram, current, current - pre));
-                        else
-                            Tool.Companion.toast(context, context.getResources().getString(R.string.toast_free_all_ram, current));
-                        super.onPostExecute(result);
-                    }
-                }.execute();
+                new ClearRamAsyncTask().execute();
                 break;
             case DeviceSettings:
                 context.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
@@ -119,7 +85,7 @@ public class LauncherAction {
                 context.startActivity(new Intent(context, SettingsActivity.class));
                 break;
             case OpenAppDrawer:
-                Home.launcher.openAppDrawer();
+                Home.Companion.getLauncher().openAppDrawer();
                 break;
             case VolumeDialog:
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {

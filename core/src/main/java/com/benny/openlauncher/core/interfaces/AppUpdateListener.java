@@ -2,7 +2,7 @@ package com.benny.openlauncher.core.interfaces;
 
 import java.util.List;
 
-public interface AppUpdateListener<A extends App> {
+public interface AppUpdateListener<A extends AbstractApp> {
 
     /**
      * @param apps list of apps

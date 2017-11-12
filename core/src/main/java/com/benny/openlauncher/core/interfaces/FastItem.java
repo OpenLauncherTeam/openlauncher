@@ -6,7 +6,7 @@ import com.mikepenz.fastadapter.IItem;
 
 public interface FastItem {
     interface AppItem<T, VH extends RecyclerView.ViewHolder> extends IItem<T, VH> {
-        App getApp();
+        AbstractApp getApp();
     }
 
     interface DesktopOptionsItem<T, VH extends RecyclerView.ViewHolder> extends IItem<T, VH> {

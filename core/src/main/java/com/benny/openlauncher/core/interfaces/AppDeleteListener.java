@@ -2,7 +2,7 @@ package com.benny.openlauncher.core.interfaces;
 
 import java.util.List;
 
-public interface AppDeleteListener<A extends App> {
+public interface AppDeleteListener<A extends AbstractApp> {
     /**
      * @param apps list of apps
      * @return true, if the listener should be removed

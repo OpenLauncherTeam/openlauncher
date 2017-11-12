@@ -33,8 +33,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.benny.openlauncher.activity.Home.launcher;
-
 public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
     @BindView(R.id.enableSwitch)
     SwitchCompat enableSwitch;
@@ -75,9 +73,9 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 buttonView.setText(isChecked ? R.string.on : R.string.off);
                 AppSettings.get().setMinibarEnable(isChecked);
-                if (Home.launcher != null) {
-                    ((Home) Home.launcher).drawerLayout.closeDrawers();
-                    ((Home) Home.launcher).drawerLayout.setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                if (Home.Companion.getLauncher() != null) {
+                    Home.Companion.getLauncher().getDrawerLayout().closeDrawers();
+                    Home.Companion.getLauncher().getDrawerLayout().setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 }
             }
         });
@@ -110,9 +108,7 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
 
     @Override
     public void onStop() {
-        if (launcher != null) {
-            ((Home) Home.launcher).initMinibar();
-        }
+        Home.Companion.getLauncher().initMinibar();
         super.onStop();
     }
 

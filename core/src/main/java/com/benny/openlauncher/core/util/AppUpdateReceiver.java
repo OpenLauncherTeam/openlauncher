@@ -9,7 +9,7 @@ import com.benny.openlauncher.core.manager.Setup;
 public class AppUpdateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context p1, Intent p2) {
-        Setup.appLoader().onAppUpdated(p1, p2);
+        Setup.Companion.appLoader().onAppUpdated(p1, p2);
     }
 }
 

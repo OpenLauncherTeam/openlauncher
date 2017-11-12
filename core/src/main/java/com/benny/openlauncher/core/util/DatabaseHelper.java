@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.activity.CoreHome;
+import com.benny.openlauncher.core.interfaces.AbstractApp;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
 
@@ -72,15 +72,15 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         itemValues.put(COLUMN_X_POS, item.x);
         itemValues.put(COLUMN_Y_POS, item.y);
 
-        Setup.logger().log(this, Log.INFO, null, "createItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+        Setup.Companion.logger().log(this, Log.INFO, null, "createItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
 
         String concat = "";
         switch (item.type) {
             case APP:
-                if (Setup.appSettings().enableImageCaching()) {
-                    Tool.Companion.saveIcon(context, Tool.Companion.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(-1)), Integer.toString(item.getId()));
+                if (Setup.Companion.appSettings().enableImageCaching()) {
+                    Tool.INSTANCE.saveIcon(context, Tool.INSTANCE.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(-1)), Integer.toString(item.getId()));
                 }
-                itemValues.put(COLUMN_DATA, Tool.Companion.getIntentAsString(item.intent));
+                itemValues.put(COLUMN_DATA, Tool.INSTANCE.getIntentAsString(item.intent));
                 break;
             case GROUP:
                 for (Item tmp : item.items) {
@@ -176,7 +176,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
             } while (cursor.moveToNext());
         }
         cursor.close();
-        Tool.Companion.print("database : dock size is ", dock.size());
+        Tool.INSTANCE.print("database : dock size is ", dock.size());
         return dock;
     }
 
@@ -199,15 +199,15 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         itemValues.put(COLUMN_X_POS, item.x);
         itemValues.put(COLUMN_Y_POS, item.y);
 
-        Setup.logger().log(this, Log.INFO, null, "updateItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+        Setup.Companion.logger().log(this, Log.INFO, null, "updateItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
 
         String concat = "";
         switch (item.type) {
             case APP:
-                if (Setup.appSettings().enableImageCaching()) {
-                    Tool.Companion.saveIcon(context, Tool.Companion.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE)), Integer.toString(item.getId()));
+                if (Setup.Companion.appSettings().enableImageCaching()) {
+                    Tool.INSTANCE.saveIcon(context, Tool.INSTANCE.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE)), Integer.toString(item.getId()));
                 }
-                itemValues.put(COLUMN_DATA, Tool.Companion.getIntentAsString(item.intent));
+                itemValues.put(COLUMN_DATA, Tool.INSTANCE.getIntentAsString(item.intent));
                 break;
             case GROUP:
                 for (Item tmp : item.items) {
@@ -231,14 +231,14 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
     // update the state of an item
     public void updateItem(Item item, Definitions.ItemState state) {
         ContentValues itemValues = new ContentValues();
-        Setup.logger().log(this, Log.INFO, null, "updateItem (state): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+        Setup.Companion.logger().log(this, Log.INFO, null, "updateItem (state): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
         itemValues.put(COLUMN_STATE, state.ordinal());
         db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
     }
 
     // update the fields only used by the database
     public void updateItem(Item item, int page, Definitions.ItemPosition itemPosition) {
-        Setup.logger().log(this, Log.INFO, null, "updateItem (delete + create): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+        Setup.Companion.logger().log(this, Log.INFO, null, "updateItem (delete + create): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
         deleteItem(item, false);
         createItem(item, page, itemPosition);
     }
@@ -262,14 +262,14 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         switch (type) {
             case APP:
             case SHORTCUT:
-                item.intent = Tool.Companion.getIntentFromString(data);
-                if (Setup.appSettings().enableImageCaching()) {
-                    item.iconProvider = Setup.imageLoader().createIconProvider(Tool.Companion.getIcon(Home.launcher, Integer.toString(id)));
+                item.intent = Tool.INSTANCE.getIntentFromString(data);
+                if (Setup.Companion.appSettings().enableImageCaching()) {
+                    item.iconProvider = Setup.get().getImageLoader().createIconProvider(Tool.INSTANCE.getIcon(CoreHome.Companion.getLauncher(), Integer.toString(id)));
                 } else {
                     switch (type) {
                         case APP:
                         case SHORTCUT:
-                            App app = Setup.appLoader().findItemApp(item);
+                            AbstractApp app = Setup.Companion.get().getAppLoader().findItemApp(item);
                             item.iconProvider = app != null ? app.getIconProvider() : null;
                             break;
                         default:

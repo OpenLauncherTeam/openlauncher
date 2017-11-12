@@ -4,32 +4,32 @@ import android.os.Handler;
 import android.view.DragEvent;
 import android.view.View;
 
-import com.benny.openlauncher.core.activity.Home;
+import com.benny.openlauncher.core.activity.CoreHome;
 import com.benny.openlauncher.core.util.DragAction;
 
 public class DragNavigationControl {
 
     private static boolean leftok = true, rightok = true;
 
-    public static void init(final Home home, final View leftView, final View rightView) {
+    public static void init(final CoreHome home, final View leftView, final View rightView) {
         final Handler l = new Handler();
         final Runnable right = new Runnable() {
             @Override
             public void run() {
-                if (home.desktop.getCurrentItem() < home.desktop.pageCount - 1)
-                    home.desktop.setCurrentItem(home.desktop.getCurrentItem() + 1);
-                else if (home.desktop.getCurrentItem() == home.desktop.pageCount - 1)
-                    home.desktop.addPageRight(true);
+                if (home.getDesktop().getCurrentItem() < home.getDesktop().getPageCount() - 1)
+                    home.getDesktop().setCurrentItem(home.getDesktop().getCurrentItem() + 1);
+                else if (home.getDesktop().getCurrentItem() == home.getDesktop().getPageCount() - 1)
+                    home.getDesktop().addPageRight(true);
                 l.postDelayed(this, 1000);
             }
         };
         final Runnable left = new Runnable() {
             @Override
             public void run() {
-                if (home.desktop.getCurrentItem() > 0)
-                    home.desktop.setCurrentItem(home.desktop.getCurrentItem() - 1);
-                else if (home.desktop.getCurrentItem() == 0)
-                    home.desktop.addPageLeft(true);
+                if (home.getDesktop().getCurrentItem() > 0)
+                    home.getDesktop().setCurrentItem(home.getDesktop().getCurrentItem() - 1);
+                else if (home.getDesktop().getCurrentItem() == 0)
+                    home.getDesktop().addPageLeft(true);
                 l.postDelayed(this, 1000);
             }
         };

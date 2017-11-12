@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.benny.openlauncher.activity.AutoFinishActivity;
+import com.benny.openlauncher.core.util.Tool;
 
 public class FiveSecsDelayContentProvider extends ContentProvider {
 
@@ -49,7 +50,7 @@ public class FiveSecsDelayContentProvider extends ContentProvider {
     public int delete(@NonNull Uri uri,
                       String selection,
                       String[] selectionArgs) {
-        Tool.Companion.print("dfshgjsdfdfrghid");
+        Tool.INSTANCE.print("dfshgjsdfdfrghid");
         checkCallingPackage();
         if (PATH_RESET_5SEC_DELAY.equals(uri.getLastPathSegment())) {
             /**

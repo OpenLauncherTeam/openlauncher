@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.activity.Home;
-import com.benny.openlauncher.core.interfaces.App;
+import com.benny.openlauncher.core.activity.CoreHome;
+import com.benny.openlauncher.core.interfaces.AbstractApp;
 import com.benny.openlauncher.core.interfaces.AppUpdateListener;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.util.Tool;
@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppDrawerPaged extends SmoothViewPager {
-    private List<App> apps;
+    private List<AbstractApp> apps;
 
     public List<ViewGroup> pages = new ArrayList<>();
 
-    private Home home;
+    private CoreHome home;
 
     private static int rowCellCount, columnCellCount;
 
@@ -63,13 +63,13 @@ public class AppDrawerPaged extends SmoothViewPager {
     }
 
     private void setPortraitValue() {
-        columnCellCount = Setup.appSettings().getDrawerColumnCount();
-        rowCellCount = Setup.appSettings().getDrawerRowCount();
+        columnCellCount = Setup.Companion.appSettings().getDrawerColumnCount();
+        rowCellCount = Setup.Companion.appSettings().getDrawerRowCount();
     }
 
     private void setLandscapeValue() {
-        columnCellCount = Setup.appSettings().getDrawerRowCount();
-        rowCellCount = Setup.appSettings().getDrawerColumnCount();
+        columnCellCount = Setup.Companion.appSettings().getDrawerRowCount();
+        rowCellCount = Setup.Companion.appSettings().getDrawerColumnCount();
     }
 
     private void calculatePage() {
@@ -91,7 +91,7 @@ public class AppDrawerPaged extends SmoothViewPager {
             setLandscapeValue();
         }
 
-        List<App> allApps = Setup.appLoader().getAllApps(c, false);
+        List<AbstractApp> allApps = Setup.Companion.appLoader().getAllApps(c, false);
         if (allApps.size() != 0) {
             AppDrawerPaged.this.apps = allApps;
             calculatePage();
@@ -99,9 +99,9 @@ public class AppDrawerPaged extends SmoothViewPager {
             if (appDrawerIndicator != null)
                 appDrawerIndicator.setViewPager(AppDrawerPaged.this);
         }
-        Setup.appLoader().addUpdateListener(new AppUpdateListener<App>() {
+        Setup.Companion.appLoader().addUpdateListener(new AppUpdateListener<AbstractApp>() {
             @Override
-            public boolean onAppUpdated(List<App> apps) {
+            public boolean onAppUpdated(List<AbstractApp> apps) {
                 AppDrawerPaged.this.apps = apps;
                 calculatePage();
                 setAdapter(new Adapter());
@@ -113,7 +113,7 @@ public class AppDrawerPaged extends SmoothViewPager {
         });
     }
 
-    public void withHome(Home home, PagerIndicator appDrawerIndicator) {
+    public void withHome(CoreHome home, PagerIndicator appDrawerIndicator) {
         this.home = home;
         this.appDrawerIndicator = appDrawerIndicator;
         appDrawerIndicator.setMode(PagerIndicator.Mode.NORMAL);
@@ -135,18 +135,18 @@ public class AppDrawerPaged extends SmoothViewPager {
             if (pos >= apps.size())
                 return null;
 
-            final App app = apps.get(pos);
+            final AbstractApp app = apps.get(pos);
 
             return AppItemView
                     .createDrawerAppItemView(
                             getContext(),
                             home,
                             app,
-                            Setup.appSettings().getDrawerIconSize(),
+                            Setup.Companion.appSettings().getDrawerIconSize(),
                             new AppItemView.LongPressCallBack() {
                                 @Override
                                 public boolean readyForDrag(View view) {
-                                    return Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
+                                    return Setup.Companion.appSettings().getDesktopStyle() != Desktop.DesktopMode.INSTANCE.getSHOW_ALL_APPS();
                                 }
 
                                 @Override
@@ -160,12 +160,12 @@ public class AppDrawerPaged extends SmoothViewPager {
             pages.clear();
             for (int i = 0; i < getCount(); i++) {
                 ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_paged_inner, null);
-                if (!Setup.appSettings().isDrawerShowCardView()) {
+                if (!Setup.Companion.appSettings().isDrawerShowCardView()) {
                     ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Color.TRANSPARENT);
                     ((CardView) layout.getChildAt(0)).setCardElevation(0);
                 } else {
-                    ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Setup.appSettings().getDrawerCardColor());
-                    ((CardView) layout.getChildAt(0)).setCardElevation(Tool.Companion.dp2px(4, getContext()));
+                    ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Setup.Companion.appSettings().getDrawerCardColor());
+                    ((CardView) layout.getChildAt(0)).setCardElevation(Tool.INSTANCE.dp2px(4, getContext()));
                 }
                 CellContainer cc = (CellContainer) layout.findViewById(R.id.group);
                 cc.setGridSize(columnCellCount, rowCellCount);
