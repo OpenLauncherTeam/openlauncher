@@ -24,12 +24,13 @@ import java.util.List;
 public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> implements FastItem.LabelItem<IconLabelItem, IconLabelItem.ViewHolder>, FastItem.DesktopOptionsItem<IconLabelItem, IconLabelItem.ViewHolder> {
 
     // Data
-    protected BaseIconProvider iconProvider = null;
+    public BaseIconProvider iconProvider = null;
     protected String label = null;
 
     // Others
     protected View.OnClickListener listener;
-    protected View.OnLongClickListener onLongClickListener;
+    public View.OnLongClickListener onLongClickListener;
+    protected View.OnTouchListener onOnTouchListener;
 
     private int forceSize = -1;
     private int iconGravity;
@@ -42,6 +43,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private boolean bold = false;
     private int textGravity = Gravity.CENTER_VERTICAL;
     private int maxTextLines = Integer.MAX_VALUE;
+    private boolean dontSetOnLongClickListener;
 
     public IconLabelItem(Item item) {
         this.iconProvider = item != null ? item.getIconProvider() : null;
@@ -142,12 +144,23 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
+    public IconLabelItem withOnTouchListener(@Nullable View.OnTouchListener listener) {
+        this.onOnTouchListener = listener;
+        return this;
+    }
+
     public IconLabelItem withMaxTextLines(int maxTextLines) {
         this.maxTextLines = maxTextLines;
         return this;
     }
 
     public IconLabelItem withOnLongClickListener(@Nullable View.OnLongClickListener onLongClickListener) {
+        this.onLongClickListener = onLongClickListener;
+        return this;
+    }
+
+    public IconLabelItem withOnLongClickListener(boolean dontSet,@Nullable View.OnLongClickListener onLongClickListener) {
+        this.dontSetOnLongClickListener = dontSet;
         this.onLongClickListener = onLongClickListener;
         return this;
     }
@@ -164,7 +177,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     @Override
     public ViewHolder getViewHolder(View v) {
-        return new ViewHolder(v);
+        return new ViewHolder(v, this);
     }
 
     @Override
@@ -199,8 +212,10 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         holder.textView.setTextColor(textColor);
         if (listener != null)
             holder.itemView.setOnClickListener(listener);
-        if (onLongClickListener != null)
+        if (onLongClickListener != null && !dontSetOnLongClickListener)
             holder.itemView.setOnLongClickListener(onLongClickListener);
+        if (onOnTouchListener != null)
+            holder.itemView.setOnTouchListener(onOnTouchListener);
         super.bindView(holder, payloads);
     }
 
@@ -217,9 +232,10 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
 
-        ViewHolder(View itemView) {
+        ViewHolder(View itemView, IconLabelItem item) {
             super(itemView);
             textView = (TextView) itemView;
+            textView.setTag(item);
         }
     }
 }

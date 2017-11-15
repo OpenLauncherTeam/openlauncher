@@ -31,13 +31,12 @@ public class ItemViewFactory {
 
     public static View getItemView(Context context, Item item, boolean showLabels, DesktopCallBack callBack, int iconSize) {
         int flag = showLabels ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
-        View itemView = getItemView(context, callBack, item, iconSize, flag);
-        return itemView;
+        return getItemView(context, callBack, item, iconSize, flag);
     }
 
     private static View getItemView(final Context context, final DesktopCallBack callBack, final Item item, int iconSize, int flags) {
         View view = null;
-        switch (item.type) {
+        switch (item.getType()) {
             case APP:
                 final AbstractApp app = Setup.Companion.appLoader().findItemApp(item);
                 if (app == null) {
@@ -124,10 +123,11 @@ public class ItemViewFactory {
                         .getView();
                 break;
             case WIDGET:
-                final AppWidgetProviderInfo appWidgetInfo = CoreHome.Companion.getAppWidgetManager().getAppWidgetInfo(item.widgetValue);
-                final WidgetView widgetView = (WidgetView) CoreHome.Companion.getAppWidgetHost().createView(context, item.widgetValue, appWidgetInfo);
+                if (CoreHome.Companion.getAppWidgetHost() == null) break;
+                final AppWidgetProviderInfo appWidgetInfo = CoreHome.Companion.getAppWidgetManager().getAppWidgetInfo(item.getWidgetValue());
+                final WidgetView widgetView = (WidgetView) CoreHome.Companion.getAppWidgetHost().createView(context, item.getWidgetValue(), appWidgetInfo);
 
-                widgetView.setAppWidget(item.widgetValue, appWidgetInfo);
+                widgetView.setAppWidget(item.getWidgetValue(), appWidgetInfo);
                 widgetView.post(new Runnable() {
                     @Override
                     public void run() {
@@ -163,7 +163,7 @@ public class ItemViewFactory {
                 };
 
                 widgetContainer.postDelayed(action, 2000);
-                widgetView.setOnTouchListener(Tool.INSTANCE.getItemOnTouchListener(item, Setup.Companion.itemGestureCallback()));
+                widgetView.setOnTouchListener(Tool.getItemOnTouchListener(item, Setup.Companion.itemGestureCallback()));
                 widgetView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
@@ -171,7 +171,7 @@ public class ItemViewFactory {
                             return false;
                         }
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                        DragNDropHandler.INSTANCE.startDrag(view, item, DragAction.Action.WIDGET, null);
+                        DragNDropHandler.startDrag(view, item, DragAction.Action.WIDGET, null);
 
                         callBack.setLastItem(item, widgetContainer);
                         return true;
@@ -182,7 +182,7 @@ public class ItemViewFactory {
                     @Override
                     public void onClick(View view) {
                         if (view.getScaleX() < 1) return;
-                        item.spanY++;
+                        item.setSpanY(item.getSpanY() + 1);
                         scaleWidget(widgetContainer, item);
                         widgetContainer.removeCallbacks(action);
                         widgetContainer.postDelayed(action, 2000);
@@ -192,7 +192,7 @@ public class ItemViewFactory {
                     @Override
                     public void onClick(View view) {
                         if (view.getScaleX() < 1) return;
-                        item.spanX++;
+                        item.setSpanX(item.getSpanX() + 1);
                         scaleWidget(widgetContainer, item);
                         widgetContainer.removeCallbacks(action);
                         widgetContainer.postDelayed(action, 2000);
@@ -202,7 +202,7 @@ public class ItemViewFactory {
                     @Override
                     public void onClick(View view) {
                         if (view.getScaleX() < 1) return;
-                        item.spanY--;
+                        item.setSpanY(item.getSpanY() - 1);
                         scaleWidget(widgetContainer, item);
                         widgetContainer.removeCallbacks(action);
                         widgetContainer.postDelayed(action, 2000);
@@ -212,7 +212,7 @@ public class ItemViewFactory {
                     @Override
                     public void onClick(View view) {
                         if (view.getScaleX() < 1) return;
-                        item.spanX--;
+                        item.setSpanX(item.getSpanX() - 1);
                         scaleWidget(widgetContainer, item);
                         widgetContainer.removeCallbacks(action);
                         widgetContainer.postDelayed(action, 2000);
@@ -228,14 +228,14 @@ public class ItemViewFactory {
     }
 
     private static void scaleWidget(View view, Item item) {
-        item.spanX = Math.min(item.spanX, CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellSpanH());
-        item.spanX = Math.max(item.spanX, 1);
-        item.spanY = Math.min(item.spanY, CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellSpanV());
-        item.spanY = Math.max(item.spanY, 1);
+        item.setSpanX(Math.min(item.getSpanX(), CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellSpanH()));
+        item.setSpanX(Math.max(item.getSpanX(), 1));
+        item.setSpanY(Math.min(item.getSpanY(), CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellSpanV()));
+        item.setSpanY(Math.max(item.getSpanY(), 1));
 
         CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().setOccupied(false, (CellContainer.LayoutParams) view.getLayoutParams());
-        if (!CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().checkOccupied(new Point(item.x, item.y), item.spanX, item.spanY)) {
-            CellContainer.LayoutParams newWidgetLayoutParams = new CellContainer.LayoutParams(CellContainer.LayoutParams.WRAP_CONTENT, CellContainer.LayoutParams.WRAP_CONTENT, item.x, item.y, item.spanX, item.spanY);
+        if (!CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().checkOccupied(new Point(item.getX(), item.getY()), item.getSpanX(), item.getSpanY())) {
+            CellContainer.LayoutParams newWidgetLayoutParams = new CellContainer.LayoutParams(CellContainer.LayoutParams.WRAP_CONTENT, CellContainer.LayoutParams.WRAP_CONTENT, item.getX(), item.getY(), item.getSpanX(), item.getSpanY());
 
             // update occupied array
             CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().setOccupied(true, newWidgetLayoutParams);
@@ -256,10 +256,10 @@ public class ItemViewFactory {
 
     private static void updateWidgetOption(Item item) {
         Bundle newOps = new Bundle();
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, item.spanX * CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellWidth());
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.spanX * CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellWidth());
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.spanY * CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellHeight());
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.spanY * CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellHeight());
-        CoreHome.Companion.getAppWidgetManager().updateAppWidgetOptions(item.widgetValue, newOps);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, item.getSpanX() * CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellWidth());
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.getSpanX() * CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellWidth());
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.getSpanY() * CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellHeight());
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.getSpanY() * CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().getCellHeight());
+        CoreHome.Companion.getAppWidgetManager().updateAppWidgetOptions(item.getWidgetValue(), newOps);
     }
 }

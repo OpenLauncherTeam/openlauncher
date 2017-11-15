@@ -17,12 +17,11 @@ import java.util.List;
 public class ClearRamAsyncTask extends AsyncTask<Void, Void, Void> {
     private long pre = 0;
     private ActivityManager activityManager;
-    private Context context;
 
     @Override
     protected void onPreExecute() {
         LauncherAction.clearingRam = true;
-        context = App.Companion.get();
+        Context context = App.Companion.get();
 
         if (context == null) {
             cancel(true);
@@ -53,6 +52,11 @@ public class ClearRamAsyncTask extends AsyncTask<Void, Void, Void> {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         activityManager.getMemoryInfo(mi);
         long current = mi.availMem / 1048576L;
+        Context context = App.Companion.get();
+        if (context == null) {
+            super.onPostExecute(result);
+            return;
+        }
         if (current - pre > 10)
             Tool.toast(context, context.getResources().getString(R.string.toast_free_ram, current, current - pre));
         else

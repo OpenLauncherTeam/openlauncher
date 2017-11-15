@@ -118,12 +118,12 @@ public class GroupPopupView extends RevealFrameLayout {
 
                         removeItem(c, callBack, item, groupItem, (AppItemView) itemView);
 
-                        itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                        //itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
 
                         DragAction.Action action = groupItem.getType() == Item.Type.SHORTCUT ? DragAction.Action.SHORTCUT : DragAction.Action.APP;
 
                         // start the drag action
-                        DragNDropHandler.INSTANCE.startDrag(view, groupItem, action, null);
+                        DragNDropHandler.startDrag(view, groupItem, action, null);
 
                         dismissPopup();
                         updateItem(c, callBack, item, groupItem, itemView);
@@ -137,7 +137,7 @@ public class GroupPopupView extends RevealFrameLayout {
                     view.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Tool.INSTANCE.createScaleInScaleOutAnim(view, new Runnable() {
+                            Tool.createScaleInScaleOutAnim(view, new Runnable() {
                                 @Override
                                 public void run() {
                                     dismissPopup();
@@ -207,7 +207,7 @@ public class GroupPopupView extends RevealFrameLayout {
             coordinates[1] += popupHeight / 2;
         }
 
-        if (item.locationInLauncher == Item.LOCATION_DOCK) {
+        if (item.getLocationInLauncher() == Item.Companion.getLOCATION_DOCK()) {
             coordinates[1] -= iconSize/2;
             cy += iconSize/2 + (Setup.Companion.appSettings().isDockShowLabel() ? 0 : Tool.INSTANCE.dp2px(10, getContext()));
         }

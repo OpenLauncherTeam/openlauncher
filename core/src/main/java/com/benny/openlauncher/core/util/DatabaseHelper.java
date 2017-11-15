@@ -67,34 +67,34 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
     public void createItem(Item item, int page, Definitions.ItemPosition itemPosition) {
         ContentValues itemValues = new ContentValues();
         itemValues.put(COLUMN_TIME, item.getId());
-        itemValues.put(COLUMN_TYPE, item.type.toString());
+        itemValues.put(COLUMN_TYPE, item.getType().toString());
         itemValues.put(COLUMN_LABEL, item.getLabel());
-        itemValues.put(COLUMN_X_POS, item.x);
-        itemValues.put(COLUMN_Y_POS, item.y);
+        itemValues.put(COLUMN_X_POS, item.getX());
+        itemValues.put(COLUMN_Y_POS, item.getY());
 
         Setup.Companion.logger().log(this, Log.INFO, null, "createItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
 
         String concat = "";
-        switch (item.type) {
+        switch (item.getType()) {
             case APP:
                 if (Setup.Companion.appSettings().enableImageCaching()) {
                     Tool.INSTANCE.saveIcon(context, Tool.INSTANCE.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(-1)), Integer.toString(item.getId()));
                 }
-                itemValues.put(COLUMN_DATA, Tool.INSTANCE.getIntentAsString(item.intent));
+                itemValues.put(COLUMN_DATA, Tool.INSTANCE.getIntentAsString(item.getIntent()));
                 break;
             case GROUP:
-                for (Item tmp : item.items) {
+                for (Item tmp : item.getItems()) {
                     concat += tmp.getId() + Definitions.INT_SEP;
                 }
                 itemValues.put(COLUMN_DATA, concat);
                 break;
             case ACTION:
-                itemValues.put(COLUMN_DATA, item.actionValue);
+                itemValues.put(COLUMN_DATA, item.getActionValue());
                 break;
             case WIDGET:
-                concat = Integer.toString(item.widgetValue) + Definitions.INT_SEP
-                        + Integer.toString(item.spanX) + Definitions.INT_SEP
-                        + Integer.toString(item.spanY);
+                concat = Integer.toString(item.getWidgetValue()) + Definitions.INT_SEP
+                        + Integer.toString(item.getSpanX()) + Definitions.INT_SEP
+                        + Integer.toString(item.getSpanY());
                 itemValues.put(COLUMN_DATA, concat);
                 break;
         }
@@ -196,32 +196,32 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
     public void updateItem(Item item) {
         ContentValues itemValues = new ContentValues();
         itemValues.put(COLUMN_LABEL, item.getLabel());
-        itemValues.put(COLUMN_X_POS, item.x);
-        itemValues.put(COLUMN_Y_POS, item.y);
+        itemValues.put(COLUMN_X_POS, item.getX());
+        itemValues.put(COLUMN_Y_POS, item.getY());
 
         Setup.Companion.logger().log(this, Log.INFO, null, "updateItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
 
         String concat = "";
-        switch (item.type) {
+        switch (item.getType()) {
             case APP:
                 if (Setup.Companion.appSettings().enableImageCaching()) {
                     Tool.INSTANCE.saveIcon(context, Tool.INSTANCE.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE)), Integer.toString(item.getId()));
                 }
-                itemValues.put(COLUMN_DATA, Tool.INSTANCE.getIntentAsString(item.intent));
+                itemValues.put(COLUMN_DATA, Tool.INSTANCE.getIntentAsString(item.getIntent()));
                 break;
             case GROUP:
-                for (Item tmp : item.items) {
+                for (Item tmp : item.getItems()) {
                     concat += tmp.getId() + Definitions.INT_SEP;
                 }
                 itemValues.put(COLUMN_DATA, concat);
                 break;
             case ACTION:
-                itemValues.put(COLUMN_DATA, item.actionValue);
+                itemValues.put(COLUMN_DATA, item.getActionValue());
                 break;
             case WIDGET:
-                concat = Integer.toString(item.widgetValue) + Definitions.INT_SEP
-                        + Integer.toString(item.spanX) + Definitions.INT_SEP
-                        + Integer.toString(item.spanY);
+                concat = Integer.toString(item.getWidgetValue()) + Definitions.INT_SEP
+                        + Integer.toString(item.getSpanX()) + Definitions.INT_SEP
+                        + Integer.toString(item.getSpanY());
                 itemValues.put(COLUMN_DATA, concat);
                 break;
         }
@@ -254,23 +254,23 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
 
         item.setItemId(id);
         item.setLabel(label);
-        item.x = x;
-        item.y = y;
-        item.type = type;
+        item.setX(x);
+        item.setY(y);
+        item.setType(type);
 
         String[] dataSplit;
         switch (type) {
             case APP:
             case SHORTCUT:
-                item.intent = Tool.INSTANCE.getIntentFromString(data);
+                item.setIntent(Tool.INSTANCE.getIntentFromString(data));
                 if (Setup.Companion.appSettings().enableImageCaching()) {
-                    item.iconProvider = Setup.get().getImageLoader().createIconProvider(Tool.INSTANCE.getIcon(CoreHome.Companion.getLauncher(), Integer.toString(id)));
+                    item.setIconProvider(Setup.get().getImageLoader().createIconProvider(Tool.INSTANCE.getIcon(CoreHome.Companion.getLauncher(), Integer.toString(id))));
                 } else {
                     switch (type) {
                         case APP:
                         case SHORTCUT:
                             AbstractApp app = Setup.Companion.get().getAppLoader().findItemApp(item);
-                            item.iconProvider = app != null ? app.getIconProvider() : null;
+                            item.setIconProvider(app != null ? app.getIconProvider() : null);
                             break;
                         default:
                             // TODO...
@@ -279,20 +279,20 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
                 }
                 break;
             case GROUP:
-                item.items = new ArrayList<>();
+                item.setItems(new ArrayList<Item>());
                 dataSplit = data.split(Definitions.INT_SEP);
                 for (String s : dataSplit) {
-                    item.items.add(getItem(Integer.parseInt(s)));
+                    item.getItems().add(getItem(Integer.parseInt(s)));
                 }
                 break;
             case ACTION:
-                item.actionValue = Integer.parseInt(data);
+                item.setActionValue(Integer.parseInt(data));
                 break;
             case WIDGET:
                 dataSplit = data.split(Definitions.INT_SEP);
-                item.widgetValue = Integer.parseInt(dataSplit[0]);
-                item.spanX = Integer.parseInt(dataSplit[1]);
-                item.spanY = Integer.parseInt(dataSplit[2]);
+                item.setWidgetValue(Integer.parseInt(dataSplit[0]));
+                item.setSpanX(Integer.parseInt(dataSplit[1]));
+                item.setSpanY(Integer.parseInt(dataSplit[2]));
                 break;
         }
         return item;

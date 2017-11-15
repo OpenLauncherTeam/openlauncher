@@ -132,7 +132,7 @@ class AppManager(val context: Context) : Setup.AppLoader<AppManager.App> {
     }
 
     override fun findItemApp(item: Item): App? {
-        return findApp(item.getIntent())
+        return findApp(item.intent)
     }
 
     override fun createApp(intent: Intent): App? {

@@ -20,7 +20,7 @@ public class CircleDrawable extends Drawable {
     private Paint paint;
     private Paint paint2;
 
-    private float scaleStep = 0.08f;
+    private float scaleStep = 0.1f;
     private float currentScale = 1f;
     private boolean hidingOldIcon;
 

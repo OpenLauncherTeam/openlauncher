@@ -3,10 +3,17 @@ package com.benny.openlauncher.core.util
 import android.content.ClipData
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Point
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Parcelable
 import android.view.DragEvent
 import android.view.View
+import com.benny.openlauncher.core.activity.CoreHome
+import com.benny.openlauncher.core.interfaces.AbstractApp
+import com.benny.openlauncher.core.manager.Setup
+import com.benny.openlauncher.core.model.IconLabelItem
 
 import com.benny.openlauncher.core.model.Item
 import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder
@@ -19,35 +26,51 @@ object DragNDropHandler {
 
     var cachedDragBitmap: Bitmap? = null
 
-    private fun loadBitmapFromView(v: AppItemView): Bitmap {
-        val bitmap: Bitmap = Bitmap.createScaledBitmap(v.drawingCache, v.iconSize.toInt(), v.iconSize.toInt(), true)
-        v.isDrawingCacheEnabled = true
-        v.isDrawingCacheEnabled = false
+    private fun loadBitmapFromView(view: View): Bitmap {
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        var tempLabel : String? = null
+        if (view is AppItemView){
+            tempLabel = view.label
+            view.label = " "
+        }
+        view.layout(0, 0, view.width, view.height)
+        view.draw(canvas)
+        if (view is AppItemView){
+            view.label = tempLabel
+        }
+        view.parent.requestLayout()
         return bitmap
     }
 
-    fun <T : Parcelable> startDrag(v: View, item: T, action: DragAction.Action, eventAction: AppItemView.LongPressCallBack?) {
+    @JvmStatic
+    fun startDrag(view: View, item: Item, action: DragAction.Action, eventAction: AppItemView.LongPressCallBack?) {
+        cachedDragBitmap = loadBitmapFromView(view)
+
+        CoreHome.launcher?.getDragNDropView()?.startDragNDropOverlay(view, item, action)
+
+        eventAction?.afterDrag(view)
+    }
+
+    @JvmStatic
+    fun <T : Parcelable> startDrag(view: View, item: T, action: DragAction.Action, eventAction: AppItemView.LongPressCallBack?) {
         val i = Intent()
         i.putExtra(DRAG_DROP_EXTRA, item)
         val data = ClipData.newIntent(DRAG_DROP_INTENT, i)
 
-        cachedDragBitmap = if (v is AppItemView)
-            loadBitmapFromView(v)
-        else
-            null
+        cachedDragBitmap = loadBitmapFromView(view)
 
         try {
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                v.startDragAndDrop(data, GoodDragShadowBuilder(v), DragAction(action), 0)
+                view.startDragAndDrop(data, GoodDragShadowBuilder(view), DragAction(action), 0)
             } else {
-
-                v.startDrag(data, GoodDragShadowBuilder(v), DragAction(action), 0)
+                view.startDrag(data, GoodDragShadowBuilder(view), DragAction(action), 0)
             }
         } catch (e: IllegalStateException) {
             e.printStackTrace()
         }
 
-        eventAction?.afterDrag(v)
+        eventAction?.afterDrag(view)
     }
 
     fun <T : Parcelable> getDraggedObject(dragEvent: DragEvent): T {

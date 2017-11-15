@@ -272,7 +272,7 @@ object Tool {
     }
 
     @JvmStatic
-    fun getIcon(context: Context, item: Item?): IconProvider? = item?.getIconProvider()
+    fun getIcon(context: Context, item: Item?): IconProvider? = item?.iconProvider
 
     @JvmStatic
     fun getIcon(context: Context, filename: String?): Drawable? {
@@ -329,12 +329,11 @@ object Tool {
     @JvmStatic
     fun getItemOnTouchListener(item: Item?, itemGestureCallback: ItemGestureListener.ItemGestureCallback?): View.OnTouchListener {
         val itemGestureListener = if (Definitions.ENABLE_ITEM_TOUCH_LISTENER && itemGestureCallback != null) ItemGestureListener(Setup.appContext(), item, itemGestureCallback) else null
-        return View.OnTouchListener { view, motionEvent ->
-            CoreHome.touchX = motionEvent.x.toInt()
-            CoreHome.touchY = motionEvent.y.toInt()
-            // use this to debug the on touch listener
-            //Tool.print(CoreHome.touchX);
-            //Tool.print(CoreHome.touchY);
+        return View.OnTouchListener { _, motionEvent ->
+            if (CoreHome.launcher != null && !CoreHome.launcher!!.getDragNDropView().dragging) {
+                CoreHome.itemTouchX = motionEvent.x
+                CoreHome.itemTouchY = motionEvent.y
+            }
             itemGestureListener?.onTouchEvent(motionEvent) ?: false
         }
     }

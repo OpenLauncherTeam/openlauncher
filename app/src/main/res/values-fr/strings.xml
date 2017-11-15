@@ -13,7 +13,7 @@
 
     <string name="toast_free_ram">Mémoire disponible : %1$d mb %2$d mb économisé</string>
     <string name="toast_free_all_ram">Mémoire disponible : %1$d MB. Votre RAM est en pleine forme.</string>
-    <string name="toast_device_admin_required">Veuillez autoriser l\'administration de l\'appareil.</string>
+    <string name="toast_device_admin_required">Veuillez autoriser tempArrayOfInt2\'administration de tempArrayOfInt2\'appareil.</string>
 
     <!-- Intro -->
 
@@ -28,9 +28,9 @@
 
     <string name="minibar_0">Modifier la disposition de la Minibarre.</string>
     <string name="minibar_1">Définir et flouter le fond d\'écran.</string>
-    <string name="minibar_2">Verrouiller l\'écran immédiatement, requiert le droit d\'administration de l\'appareil.</string>
+    <string name="minibar_2">Verrouiller tempArrayOfInt2\'écran immédiatement, requiert le droit d\'administration de tempArrayOfInt2\'appareil.</string>
     <string name="minibar_3">Libérer de la RAM en forçant la fermeture d\'autres services en cours.</string>
-    <string name="minibar_4">Raccourci vers les paramètres de l\'appareil.</string>
+    <string name="minibar_4">Raccourci vers les paramètres de tempArrayOfInt2\'appareil.</string>
     <string name="minibar_5">Raccourci vers les paramètres d\'OpenLauncher.</string>
     <string name="minibar_7">Ouvrir la pop-up du volume.</string>
     <string name="minibar_8">Ouvrir le volet des applications.</string>
@@ -63,22 +63,22 @@
     <string name="pref_title__others">Autres</string>
 
     <string name="pref_title__desktop_style">Style</string>
-    <string name="pref_title__desktop_indicator_style">Style de l\'indicateur</string>
+    <string name="pref_title__desktop_indicator_style">Style de tempArrayOfInt2\'indicateur</string>
     <string name="pref_summary__desktop_style">Choisir entre afficher un bureau standard ou montrer toutes les applications installées.</string>
-    <string name="pref_summary__minibar">Configurer l\'ordre et la visibilité des éléments de la Minibarre.</string>
+    <string name="pref_summary__minibar">Configurer tempArrayOfInt2\'ordre et la visibilité des éléments de la Minibarre.</string>
     <string name="pref_title__search_bar_enable">Barre de recherche</string>
     <string name="pref_summary__search_bar_enable">Afficher une barre de recherche sur le bureau.</string>
     <string name="pref_title__desktop_fullscreen">Plein écran</string>
     <string name="pref_title__desktop_hide_grid">Cacher la grille</string>
     <string name="pref_summary__desktop_fullscreen">Activer le plein écran pour votre bureau.</string>
     <string name="pref_summary__desktop_hide_grid">Cacher la grille d\'alignement.</string>
-    <string name="pref_title__desktop_show_position_indicator">Position de l\'indicateur</string>
-    <string name="pref_summary__desktop_show_position_indicator">Afficher l\'indicateur de bureau au bas de l\'écran.</string>
+    <string name="pref_title__desktop_show_position_indicator">Position de tempArrayOfInt2\'indicateur</string>
+    <string name="pref_summary__desktop_show_position_indicator">Afficher tempArrayOfInt2\'indicateur de bureau au bas de tempArrayOfInt2\'écran.</string>
     <string name="pref_title__desktop_show_label">Montrer les noms</string>
     <string name="pref_summary__desktop_show_label">Afficher les noms des applis et dossiers sous leurs icônes.</string>
     <string name="pref_title__search_bar_base_uri">URI de recherche</string>
-    <string name="pref_summary__search_bar_base_uri">Spécifier l\'URI utilisée pour les recherches sur internet.</string>
-    <string name="pref_dialog__search_bar_base_uri">Entrez l\'URI devant être utilisée pour les recherches sur internet. L\'étiquette {query} peut être utilisée en remplacement de la requête. Si cette étiquette n\'est pas présente, la requête sera ajoutée à la fin de l\'URI.</string>
+    <string name="pref_summary__search_bar_base_uri">Spécifier tempArrayOfInt2\'URI utilisée pour les recherches sur internet.</string>
+    <string name="pref_dialog__search_bar_base_uri">Entrez tempArrayOfInt2\'URI devant être utilisée pour les recherches sur internet. L\'étiquette {query} peut être utilisée en remplacement de la requête. Si cette étiquette n\'est pas présente, la requête sera ajoutée à la fin de tempArrayOfInt2\'URI.</string>
     <string name="pref_title__search_bar_force_browser">Forcer la recherche via le navigateur</string>
     <string name="pref_summary__search_bar_force_browser">Toujours utiliser le navigateur pour les recherches sur internet.</string>
     <string name="pref_title__desktop_background_color">Arrière-plan</string>
@@ -97,8 +97,8 @@
     <string name="pref_summary__drawer_show_card_view">Placer un écran de masquage derrière le volet des applications.</string>
     <string name="pref_title__drawer_remember_position">Se rappeler de la dernière page</string>
     <string name="pref_summary__drawer_remember_position">Mémoriser la page courante du volet des applications.</string>
-    <string name="pref_title__drawer_show_position_indicator">Position de l\'indicateur</string>
-    <string name="pref_summary__drawer_show_position_indicator">Afficher l\'indicateur de page ou la barre de défilement selon le style.</string>
+    <string name="pref_title__drawer_show_position_indicator">Position de tempArrayOfInt2\'indicateur</string>
+    <string name="pref_summary__drawer_show_position_indicator">Afficher tempArrayOfInt2\'indicateur de page ou la barre de défilement selon le style.</string>
     <string name="pref_title__drawer_show_label">Montrer les noms</string>
     <string name="pref_summary__drawer_show_label">Afficher le nom des applications sous leur icône.</string>
     <string name="pref_title__drawer_background_color">Arrière-plan</string>
@@ -120,7 +120,7 @@
     <string name="pref_title__icon_pack">Pack d\'icônes</string>
     <string name="pref_summary__icon_pack">Sélectionner un pack d\'icônes installé.</string>
 
-    <string name="pref_summary__language">Changer la langue de l\'application. Vous devez redémarrer l\'application pour que le changement soit pris en compte</string>
+    <string name="pref_summary__language">Changer la langue de tempArrayOfInt2\'application. Vous devez redémarrer tempArrayOfInt2\'application pour que le changement soit pris en compte</string>
     <string name="pref_title__language">Langue</string>
     <string name="pref_title__backup">Sauvegarde</string>
     <string name="pref_summary__backup">Sauvegarder et restaurer vos paramètres.</string>
@@ -128,10 +128,10 @@
     <string name="pref_summary__clear_database">Supprimer les données de votre dock et bureau pour corriger des problèmes.</string>
     <string name="pref_title__restart">Redémarrer</string>
     <string name="pref_summary__restart">Redémarrer le launcher en cas de comportement étrange.</string>
-    <string name="pref_summary__theme">Définir le thème global de l\'application</string>
+    <string name="pref_summary__theme">Définir le thème global de tempArrayOfInt2\'application</string>
     <string name="pref_title__theme">Thème</string>
     <string name="pref_title__primary_color">Couleur primaire</string>
-    <string name="pref_summary__primary_color">Choisir la couleur principale de l\'application.</string>
+    <string name="pref_summary__primary_color">Choisir la couleur principale de tempArrayOfInt2\'application.</string>
 
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paginé</string>
@@ -165,7 +165,7 @@
     <string name="request_toast">Aucune application sélectionnée. Afficher toutes les applications dans le volet ?</string>
     <string name="on">Activé</string>
     <string name="desktop_action">Action du bureau</string>
-    <string name="select_app">Choisir l\'application</string>
+    <string name="select_app">Choisir tempArrayOfInt2\'application</string>
     <string name="off">Désactivé</string>
     <string name="ok">OK</string>
     <string name="version">Version</string>
@@ -173,7 +173,7 @@
     <string name="wallpaper_pick">Sélectionner un fond d\'écran</string>
     <string name="wallpaper_unable_to_blur">Impossible de flouter</string>
     <string name="dialog__icon_pack_title">Sélectionner un pack d\'icônes</string>
-    <string name="dialog__icon_pack_info_toast">Impossible de récupérer l\'icône sans la permission READ_EXTERNAL_STORAGE.</string>
+    <string name="dialog__icon_pack_info_toast">Impossible de récupérer tempArrayOfInt2\'icône sans la permission READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Sauvegarder</string>
     <string name="dialog__backup_app_settings__restore">Restaurer</string>
     <string name="dialog__backup_app_settings__success">Opération réussie.</string>

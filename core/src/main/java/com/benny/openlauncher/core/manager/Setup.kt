@@ -22,7 +22,7 @@ abstract class Setup<A : AbstractApp> {
     // Settings
     // ----------------
 
-    abstract fun getAppContext() : Context
+    abstract fun getAppContext(): Context
 
     abstract fun getAppSettings(): SettingsManager
 
@@ -97,7 +97,7 @@ abstract class Setup<A : AbstractApp> {
 
         fun showEditDialog(context: Context, item: Item, listener: DialogListener.OnEditDialogListener)
 
-        fun showDeletePackageDialog(context: Context, dragEvent: DragEvent)
+        fun showDeletePackageDialog(context: Context, item: Item)
     }
 
     interface Logger {

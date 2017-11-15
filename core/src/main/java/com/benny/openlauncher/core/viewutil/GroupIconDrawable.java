@@ -39,8 +39,8 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
             icons[i] = null;
         }
         init(icons, size);
-        for (int i = 0; i < 4 && i < item.items.size(); i++) {
-            Item temp = item.items.get(i);
+        for (int i = 0; i < 4 && i < item.getItems().size(); i++) {
+            Item temp = item.getItems().get(i);
             AbstractApp app = null;
             if (temp != null) {
                 app = Setup.Companion.appLoader().findItemApp(temp);

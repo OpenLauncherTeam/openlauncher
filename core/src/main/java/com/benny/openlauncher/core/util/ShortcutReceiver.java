@@ -49,9 +49,9 @@ public class ShortcutReceiver extends BroadcastReceiver {
         AbstractApp app = Setup.Companion.appLoader().createApp(newIntent);
         Item item;
         if (app != null) {
-            item = Item.newAppItem(app);
+            item = Item.Companion.newAppItem(app);
         } else {
-            item = Item.newShortcutItem(newIntent, shortcutIconDrawable, name);
+            item = Item.Companion.newShortcutItem(newIntent, shortcutIconDrawable, name);
         }
         Point preferredPos = CoreHome.Companion.getLauncher().getDesktop().getPages().get(CoreHome.Companion.getLauncher().getDesktop().getCurrentItem()).findFreeSpace();
         if (preferredPos == null) {

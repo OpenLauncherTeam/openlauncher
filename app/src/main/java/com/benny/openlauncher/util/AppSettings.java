@@ -94,16 +94,17 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     @Override
     public boolean isSearchUseGrid() {
-        return false;
+        return getBool(R.string.pref_key__desktop_search_use_grid, false);
     }
 
     @Override
     public void setSearchUseGrid(boolean enabled) {
+        setBool(R.string.pref_key__desktop_search_use_grid, enabled);
     }
 
     @Override
     public int getSearchGridSize() {
-        return 1;
+        return 4;
     }
 
     @Override

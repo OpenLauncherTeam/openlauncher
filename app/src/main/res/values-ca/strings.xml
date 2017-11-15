@@ -13,7 +13,7 @@
 
     <string name="toast_free_ram">Memòria lliure: %1$d MB. Estalviats %2$d MB.</string>
     <string name="toast_free_all_ram">Memòria lliure: %1$d MB. La teva RAM està en millor estat.</string>
-    <string name="toast_device_admin_required">Si us plau, habilita l\'opció d\'administració de dispositiu.</string>
+    <string name="toast_device_admin_required">Si us plau, habilita tempArrayOfInt2\'opció d\'administració de dispositiu.</string>
 
     <!-- Intro -->
 
@@ -24,7 +24,7 @@
     <string name="intro2_text">Fes lliscar el dit cap endins des de la vora esquerra de la teva pantalla d\'inici per obrir la minibar. Allà podràs trobar els paràmetres,
 	canviar el fons de pantalla, i fer un munt de coses.</string>
     <string name="intro3_title">Paràmetres</string>
-    <string name="intro3_text">Pots configurar el teu escriptori, el calaix d\'aplicacions i l\'acoblador. Prova-ho!</string>
+    <string name="intro3_text">Pots configurar el teu escriptori, el calaix d\'aplicacions i tempArrayOfInt2\'acoblador. Prova-ho!</string>
 
     <!-- Minibar -->
 
@@ -45,8 +45,8 @@
     <string name="about_credit_text_all_contributors">Tots els contribuïdors</string>
     <string name="about_credit_text_bennykok" translatable="false">Inici del projecte</string>
     <string name="about_credit_text_chris_debrodie" translatable="false">Va ajudar molt amb errors i sugerències</string>
-    <string name="about_credit_text_gaukler_faun" translatable="false">Va afegir alguns paràmetres, traducció a l\'alemany</string>
-    <string name="about_credit_text_gsantner" translatable="false">Encarregat, traducció a l\'alemany</string>
+    <string name="about_credit_text_gaukler_faun" translatable="false">Va afegir alguns paràmetres, traducció a tempArrayOfInt2\'alemany</string>
+    <string name="about_credit_text_gsantner" translatable="false">Encarregat, traducció a tempArrayOfInt2\'alemany</string>
     <string name="about_credit_text_dkanada" translatable="false">Encarregat, base de dades</string>
 
     <!-- Settings -->
@@ -66,14 +66,14 @@
     <string name="pref_title__search_bar">Barra de cerca</string>
 
     <string name="pref_title__desktop_style">Estil</string>
-    <string name="pref_summary__desktop_style">Tria entre l\'escriptori normal o un que mostri totes les apliccions instal·lades</string>
-    <string name="pref_summary__minibar">Configura l\'ordre i la visibilitat dels items de la minibar.</string>
+    <string name="pref_summary__desktop_style">Tria entre tempArrayOfInt2\'escriptori normal o un que mostri totes les apliccions instal·lades</string>
+    <string name="pref_summary__minibar">Configura tempArrayOfInt2\'ordre i la visibilitat dels items de la minibar.</string>
     <string name="pref_title__search_bar_enable">Barra de cerca</string>
-    <string name="pref_summary__search_bar_enable">Mostra una barra de cerca a sobre de l\'escriptori.</string>
+    <string name="pref_summary__search_bar_enable">Mostra una barra de cerca a sobre de tempArrayOfInt2\'escriptori.</string>
     <string name="pref_title__desktop_fullscreen">Pantalla complerta</string>
-    <string name="pref_summary__desktop_fullscreen">Habilita la pantalla complerta per l\'escriptori.</string>
+    <string name="pref_summary__desktop_fullscreen">Habilita la pantalla complerta per tempArrayOfInt2\'escriptori.</string>
     <string name="pref_title__desktop_show_position_indicator">Indicador de desplaçament</string>
-    <string name="pref_summary__desktop_show_position_indicator">Mostra l\'indicador de la pàgina sota de l\'escriptori.</string>
+    <string name="pref_summary__desktop_show_position_indicator">Mostra tempArrayOfInt2\'indicador de la pàgina sota de tempArrayOfInt2\'escriptori.</string>
     <string name="pref_title__desktop_show_label">Mostrar les etiquetes</string>
     <string name="pref_summary__desktop_show_label">Mostra les etiquetes dels items sota de les seves icones.</string>
     <string name="pref_title__search_bar_base_uri">Motor de cerca</string>
@@ -83,7 +83,7 @@
     <string name="pref_title__desktop_background_color">Fons</string>
     <string name="pref_title__desktop_folder_color">Carpeta</string>
 
-    <string name="pref_summary__dock_size">Estableix la mida de l\'acoblador.</string>
+    <string name="pref_summary__dock_size">Estableix la mida de tempArrayOfInt2\'acoblador.</string>
     <string name="pref_title__dock_show_label">Mostrar les etiquetes.</string>
     <string name="pref_summary__dock_show_label">Mostrar les etiquetes dels items sota de les icones.</string>
     <string name="pref_title__dock_background_color">Fons</string>
@@ -94,10 +94,10 @@
     <string name="pref_summary__hide_apps">Amaga les aplicacions seleccionades des de el llançador.</string>
     <string name="pref_title__drawer_show_card_view">Vista de la targeta</string>
     <string name="pref_summary__drawer_show_card_view">Mostra la targeta sobre el fons del calaix.</string>
-    <string name="pref_title__drawer_remember_position">Recorda l\'última pàgina</string>
-    <string name="pref_summary__drawer_remember_position">Recorda l\'actual pàgina del calaix d\'aplicacions.</string>
+    <string name="pref_title__drawer_remember_position">Recorda tempArrayOfInt2\'última pàgina</string>
+    <string name="pref_summary__drawer_remember_position">Recorda tempArrayOfInt2\'actual pàgina del calaix d\'aplicacions.</string>
     <string name="pref_title__drawer_show_position_indicator">Indicador de desplaçament</string>
-    <string name="pref_summary__drawer_show_position_indicator">Mostra l\'indicador de la pàgina o de la barra de desplaçament depenent de l\'estil.</string>
+    <string name="pref_summary__drawer_show_position_indicator">Mostra tempArrayOfInt2\'indicador de la pàgina o de la barra de desplaçament depenent de tempArrayOfInt2\'estil.</string>
     <string name="pref_title__drawer_show_label">Mostra les etiquetes</string>
     <string name="pref_summary__drawer_show_label">Mostra les etiquetes dels items sota de les seves icones.</string>
     <string name="pref_title__drawer_background_color">Fons</string>
@@ -120,7 +120,7 @@
     <string name="pref_title__backup">Còpia de seguretat</string>
     <string name="pref_summary__backup">Importació i còpia de seguretat dels teus ajustos.</string>
     <string name="pref_title__clear_database">Buida la base de dades</string>
-    <string name="pref_summary__clear_database">Esborra les dades del acoblador i de l\'escriptori per solucionar problemes.</string>
+    <string name="pref_summary__clear_database">Esborra les dades del acoblador i de tempArrayOfInt2\'escriptori per solucionar problemes.</string>
     <string name="pref_title__restart">Reiniciar</string>
     <string name="pref_summary__restart">Reiniciar el llançador en cas de tenir un comportamer erroni.</string>
 
@@ -147,7 +147,7 @@
     <string name="request_please_wait">Cercant aplicacions instal·lades. Si us plau, esperi.</string>
     <string name="request_toast">No hi ha aplicacions seleccionades. ¿Vols mostrar-les totes al calaix d\'aplicacions?</string>
     <string name="on">Actiu</string>
-    <string name="desktop_action">Accions de l\'escriptori</string>
+    <string name="desktop_action">Accions de tempArrayOfInt2\'escriptori</string>
     <string name="select_app">Selecciona la aplicació</string>
     <string name="off">Inactiu</string>
     <string name="ok">D\'acord</string>
@@ -156,7 +156,7 @@
     <string name="wallpaper_pick">Tria fons de pantalla</string>
     <string name="wallpaper_unable_to_blur">Incapaç de difuminar</string>
     <string name="dialog__icon_pack_title">Tria tema d\'icones</string>
-    <string name="dialog__icon_pack_info_toast">Incapaç de seleccionar l\'icona sense el permís de LECTURA DEL CONTINGUT A LA TARGETA SD.</string>
+    <string name="dialog__icon_pack_info_toast">Incapaç de seleccionar tempArrayOfInt2\'icona sense el permís de LECTURA DEL CONTINGUT A LA TARGETA SD.</string>
     <string name="dialog__backup_app_settings__backup">Còpia de seguretat</string>
     <string name="dialog__backup_app_settings__restore">Importar</string>
     <string name="dialog__backup_app_settings__success">Fet.</string>

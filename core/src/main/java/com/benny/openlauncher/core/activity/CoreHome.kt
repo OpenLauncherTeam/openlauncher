@@ -6,13 +6,15 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Point
+import android.graphics.PointF
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.TextView
 import com.benny.openlauncher.core.R
 import com.benny.openlauncher.core.interfaces.AbstractApp
 import com.benny.openlauncher.core.interfaces.AppDeleteListener
@@ -20,10 +22,12 @@ import com.benny.openlauncher.core.interfaces.AppUpdateListener
 import com.benny.openlauncher.core.interfaces.DialogListener
 import com.benny.openlauncher.core.manager.Setup
 import com.benny.openlauncher.core.model.Item
+import com.benny.openlauncher.core.model.PopupIconLabelItem
 import com.benny.openlauncher.core.util.*
-import com.benny.openlauncher.core.viewutil.DragNavigationControl
 import com.benny.openlauncher.core.viewutil.WidgetHost
 import com.benny.openlauncher.core.widget.*
+import com.mikepenz.fastadapter.IAdapter
+import com.mikepenz.fastadapter.listeners.OnClickListener
 import kotlinx.android.synthetic.main.view_drawer_indicator.*
 import kotlinx.android.synthetic.main.view_home.*
 
@@ -41,8 +45,8 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
         lateinit var appWidgetManager: AppWidgetManager
 
         // used for the drag shadow builder
-        var touchX = 0
-        var touchY = 0
+        var itemTouchX = 0f
+        var itemTouchY = 0f
         var consumeNextResume: Boolean = false
 
         private val timeChangesIntentFilter: IntentFilter = IntentFilter()
@@ -67,12 +71,19 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
     private val appUpdateReceiver = AppUpdateReceiver()
     private var timeChangedReceiver: BroadcastReceiver? = null
 
-    var myScreen: ViewGroup? = null
-
     // region for the APP_DRAWER_ANIMATION
     private var cx: Int = 0
     private var cy: Int = 0
     private var rad: Int = 0
+
+    fun getDesktop(): Desktop = desktop
+    fun getDock(): Dock = dock
+    fun getAppDrawerController(): AppDrawerController = appDrawerController
+    fun getGroupPopup(): GroupPopupView = groupPopup
+    fun getSearchBar(): SearchBar = searchBar
+    fun getBackground(): View = background
+    fun getDesktopIndicator(): PagerIndicator = desktopIndicator
+    fun getDragNDropView(): DragNDropLayout = dragNDropView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,27 +101,16 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
                 }
             }
         }
-
         launcher = this
         db = Setup.dataManager()
 
-        myScreen = layoutInflater.inflate(R.layout.activity_home, myScreen) as ViewGroup
-        setContentView(myScreen)
-
+        setContentView(layoutInflater.inflate(R.layout.activity_home, null))
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 
         init()
     }
-
-    fun getDesktop(): Desktop = desktop
-    fun getDock(): Dock = dock
-    fun getAppDrawerController(): AppDrawerController = appDrawerController
-    fun getGroupPopup(): GroupPopupView = groupPopup
-    fun getSearchBar(): SearchBar = searchBar
-    fun getBackground(): View = background
-    fun getDesktopIndicator(): PagerIndicator = desktopIndicator
 
     protected abstract fun initStaticHelper()
 
@@ -120,6 +120,8 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
         appWidgetHost!!.startListening()
 
         initViews()
+
+        initDragNDrop()
 
         registerBroadcastReceiver()
 
@@ -132,12 +134,330 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
         System.gc()
     }
 
+    fun onUninstallItem(item: Item) {
+        consumeNextResume = true
+        Setup.eventHandler().showDeletePackageDialog(this, item)
+    }
+
+    fun onRemoveItem(item: Item) {
+        when (item.locationInLauncher) {
+            Item.LOCATION_DESKTOP -> {
+                desktop.removeItem(desktop.currentPage.coordinateToChildView(Point(item.x, item.y))!!)
+            }
+            Item.LOCATION_DOCK -> {
+                dock.removeItem(dock.coordinateToChildView(Point(item.x, item.y))!!)
+            }
+        }
+
+        db.deleteItem(item, true)
+    }
+
+    fun onInfoItem(item: Item) {
+        if (item.type === Item.Type.APP) {
+            try {
+                startActivity(Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.intent!!.component!!.packageName)))
+            } catch (e: Exception) {
+                Tool.toast(this, R.string.toast_app_uninstalled)
+            }
+        }
+    }
+
+    fun onEditItem(item: Item) {
+        Setup.eventHandler().showEditDialog(this, item, DialogListener.OnEditDialogListener { name ->
+            item.label = name
+            db.saveItem(item)
+
+            when (item.locationInLauncher) {
+                Item.LOCATION_DESKTOP -> {
+                    desktop.removeItem(desktop.currentPage.coordinateToChildView(Point(item.x, item.y))!!)
+                    desktop.addItemToCell(item, item.x, item.y)
+                }
+                Item.LOCATION_DOCK -> {
+                    dock.removeItem(dock.coordinateToChildView(Point(item.x, item.y))!!)
+                    dock.addItemToCell(item, item.x, item.y)
+                }
+            }
+        })
+    }
+
+    protected open fun initDragNDrop() {
+        //dragHandle's drag event
+        val dragHandler = Handler()
+        dragNDropView.registerDropTarget(object : DragNDropLayout.DropTargetListener(leftDragHandle) {
+
+            val leftRunnable = object : Runnable {
+                override fun run() {
+                    if (getDesktop().currentItem > 0)
+                        getDesktop().currentItem = getDesktop().currentItem - 1
+                    else if (getDesktop().currentItem == 0)
+                        getDesktop().addPageLeft(true)
+                    dragHandler.postDelayed(this, 1000)
+                }
+            }
+
+            override fun onStart(action: DragAction.Action, location: PointF, isInside: Boolean): Boolean =
+                    when (action) {
+                        DragAction.Action.APP,
+                        DragAction.Action.WIDGET,
+                        DragAction.Action.SEARCH_RESULT,
+                        DragAction.Action.APP_DRAWER,
+                        DragAction.Action.GROUP,
+                        DragAction.Action.SHORTCUT,
+                        DragAction.Action.ACTION -> {
+                            true
+                        }
+                    }
+
+            override fun onStartDrag(action: DragAction.Action, location: PointF) {
+                if (leftDragHandle.alpha == 0f)
+                    leftDragHandle.animate().alpha(0.5f)
+            }
+
+            override fun onEnter(action: DragAction.Action, location: PointF) {
+                dragHandler.post(leftRunnable)
+                leftDragHandle.animate().alpha(0.9f)
+            }
+
+            override fun onExit(action: DragAction.Action, location: PointF) {
+                dragHandler.removeCallbacksAndMessages(null)
+                leftDragHandle.animate().alpha(0.5f)
+            }
+
+            override fun onEnd() {
+                dragHandler.removeCallbacksAndMessages(null)
+                leftDragHandle.animate().alpha(0f)
+            }
+        })
+        dragNDropView.registerDropTarget(object : DragNDropLayout.DropTargetListener(rightDragHandle) {
+
+            val rightRunnable = object : Runnable {
+                override fun run() {
+                    if (getDesktop().currentItem < getDesktop().pageCount - 1)
+                        getDesktop().currentItem = getDesktop().currentItem + 1
+                    else if (getDesktop().currentItem == getDesktop().pageCount - 1)
+                        getDesktop().addPageRight(true)
+                    dragHandler.postDelayed(this, 1000)
+                }
+            }
+
+            override fun onStart(action: DragAction.Action, location: PointF, isInside: Boolean): Boolean =
+                    when (action) {
+                        DragAction.Action.APP,
+                        DragAction.Action.WIDGET,
+                        DragAction.Action.SEARCH_RESULT,
+                        DragAction.Action.APP_DRAWER,
+                        DragAction.Action.GROUP,
+                        DragAction.Action.SHORTCUT,
+                        DragAction.Action.ACTION -> {
+                            true
+                        }
+                    }
+
+            override fun onStartDrag(action: DragAction.Action, location: PointF) {
+                if (rightDragHandle.alpha == 0f)
+                    rightDragHandle.animate().alpha(0.5f)
+            }
+
+            override fun onEnter(action: DragAction.Action, location: PointF) {
+                dragHandler.post(rightRunnable)
+                rightDragHandle.animate().alpha(0.9f)
+            }
+
+            override fun onExit(action: DragAction.Action, location: PointF) {
+                dragHandler.removeCallbacksAndMessages(null)
+                rightDragHandle.animate().alpha(0.5f)
+            }
+
+            override fun onEnd() {
+                dragHandler.removeCallbacksAndMessages(null)
+                rightDragHandle.animate().alpha(0f)
+            }
+        })
+
+        val uninstallItemIdentifier = 83L
+        val infoItemIdentifier = 84L
+        val editItemIdentifier = 85L
+        val removeItemIdentifier = 86L
+
+        val uninstallItem = PopupIconLabelItem(R.string.uninstall, R.drawable.ic_delete_dark_24dp).withIdentifier(uninstallItemIdentifier)
+        val infoItem = PopupIconLabelItem(R.string.info, R.drawable.ic_info_outline_dark_24dp).withIdentifier(infoItemIdentifier)
+        val editItem = PopupIconLabelItem(R.string.edit, R.drawable.ic_edit_black_24dp).withIdentifier(editItemIdentifier)
+        val removeItem = PopupIconLabelItem(R.string.remove, R.drawable.ic_close_dark_24dp).withIdentifier(removeItemIdentifier)
+
+        fun showItemPopup() {
+            val itemList = arrayListOf<PopupIconLabelItem>()
+            when (dragNDropView.dragItem?.type) {
+                Item.Type.APP, Item.Type.SHORTCUT, Item.Type.GROUP -> {
+                    if (dragNDropView.dragAction == DragAction.Action.APP_DRAWER) {
+                        itemList.add(uninstallItem)
+                        itemList.add(infoItem)
+                    } else {
+                        itemList.add(editItem)
+                        itemList.add(removeItem)
+                        itemList.add(infoItem)
+                    }
+                }
+                Item.Type.ACTION -> {
+                    itemList.add(editItem)
+                    itemList.add(removeItem)
+                }
+                Item.Type.WIDGET -> {
+                    itemList.add(removeItem)
+                }
+            }
+
+            var x = dragNDropView.dragLocation.x - CoreHome.itemTouchX + 10.toPx()
+            var y = dragNDropView.dragLocation.y - CoreHome.itemTouchY - (46 * itemList.size).toPx()
+
+            if ((x + 200.toPx()) > dragNDropView.width)
+                x = dragNDropView.dragLocation.x - CoreHome.itemTouchX + desktop.currentPage.cellWidth - 200.toPx().toFloat() - 10.toPx()
+
+            if (y < 0)
+                y = dragNDropView.dragLocation.y - CoreHome.itemTouchY + desktop.currentPage.cellHeight + 4.toPx()
+            else
+                y -= 4.toPx()
+
+            dragNDropView.showPopupMenuForItem(x, y, itemList, OnClickListener { v, adapter, item, position ->
+                when (item.identifier) {
+                    uninstallItemIdentifier -> onUninstallItem(dragNDropView.dragItem!!)
+                    editItemIdentifier -> onEditItem(dragNDropView.dragItem!!)
+                    removeItemIdentifier -> onRemoveItem(dragNDropView.dragItem!!)
+                    infoItemIdentifier -> onInfoItem(dragNDropView.dragItem!!)
+                }
+                dragNDropView.hidePopupMenu()
+                true
+            })
+        }
+
+        //desktop's drag event
+        dragNDropView.registerDropTarget(object : DragNDropLayout.DropTargetListener(desktop) {
+            override fun onStart(action: DragAction.Action, location: PointF, isInside: Boolean): Boolean {
+                if (isInside) {
+                    showItemPopup()
+                }
+                return true
+            }
+
+            override fun onExit(action: DragAction.Action, location: PointF) {
+                for (page in desktop.pages)
+                    page.clearCachedOutlineBitmap()
+                dragNDropView.cancelFolderPreview()
+            }
+
+            override fun onDrop(action: DragAction.Action, location: PointF, item: Item) {
+                // this statement makes sure that adding an app multiple times from the app drawer works
+                // the app will get a new id every time
+                if (action == DragAction.Action.APP_DRAWER) {
+                    if (appDrawerController.isOpen) return
+                    item.reset()
+                }
+
+                val x = location.x.toInt()
+                val y = location.y.toInt()
+                if (desktop.addItemToPoint(item, x, y)) {
+                    desktop.consumeRevert()
+                    dock.consumeRevert()
+                    // add the item to the database
+                    CoreHome.db.saveItem(item, desktop.currentItem, Definitions.ItemPosition.Desktop)
+                } else {
+                    val pos = Point()
+                    desktop.currentPage.touchPosToCoordinate(pos, x, y, item.spanX, item.spanY, false)
+                    val itemView = desktop.currentPage.coordinateToChildView(pos)
+                    if (itemView != null && Desktop.handleOnDropOver(this@CoreHome, item, itemView.tag as Item, itemView, desktop.currentPage, desktop.currentItem, Definitions.ItemPosition.Desktop, desktop)) {
+                        desktop.consumeRevert()
+                        dock.consumeRevert()
+                    } else {
+                        Tool.toast(this@CoreHome, R.string.toast_not_enough_space)
+                        desktop.revertLastItem()
+                        dock.revertLastItem()
+                    }
+                }
+            }
+
+            override fun onStartDrag(action: DragAction.Action, location: PointF) {
+                closeAppDrawer()
+            }
+
+            override fun onEnd() {
+                for (page in desktop.pages)
+                    page.clearCachedOutlineBitmap()
+            }
+
+            override fun onMove(action: DragAction.Action, location: PointF) {
+                if (action != DragAction.Action.SEARCH_RESULT && action != DragAction.Action.WIDGET)
+                    desktop.updateIconProjection(location.x.toInt(), location.y.toInt())
+            }
+        })
+
+        //dock's drag event
+        dragNDropView.registerDropTarget(object : DragNDropLayout.DropTargetListener(dock) {
+            override fun onStart(action: DragAction.Action, location: PointF, isInside: Boolean): Boolean {
+                val ok = (action != DragAction.Action.WIDGET)
+
+                if (ok && isInside) {
+                    showItemPopup()
+                }
+
+                return ok
+            }
+
+            override fun onDrop(action: DragAction.Action, location: PointF, item: Item) {
+                if (action == DragAction.Action.APP_DRAWER) {
+                    if (appDrawerController.isOpen) return
+                    item.reset()
+                }
+
+                val x = location.x.toInt()
+                val y = location.y.toInt()
+                if (dock.addItemToPoint(item, x, y)) {
+                    desktop.consumeRevert()
+                    dock.consumeRevert()
+
+                    // add the item to the database
+                    CoreHome.db.saveItem(item, 0, Definitions.ItemPosition.Dock)
+                } else {
+                    val pos = Point()
+                    dock.touchPosToCoordinate(pos, x, y, item.spanX, item.spanY, false)
+                    val itemView = dock.coordinateToChildView(pos)
+                    if (itemView != null) {
+                        if (Desktop.handleOnDropOver(this@CoreHome, item, itemView.tag as Item, itemView, dock, 0, Definitions.ItemPosition.Dock, dock)) {
+                            desktop.consumeRevert()
+                            dock.consumeRevert()
+                        } else {
+                            Tool.toast(this@CoreHome, R.string.toast_not_enough_space)
+                            desktop.revertLastItem()
+                            dock.revertLastItem()
+                        }
+                    } else {
+                        Tool.toast(this@CoreHome, R.string.toast_not_enough_space)
+                        desktop.revertLastItem()
+                        dock.revertLastItem()
+                    }
+                }
+            }
+
+            override fun onExit(action: DragAction.Action, location: PointF) {
+                dock.clearCachedOutlineBitmap()
+                dragNDropView.cancelFolderPreview()
+            }
+
+            override fun onEnd() {
+                if (dragNDropView.dragAction == DragAction.Action.WIDGET)
+                    desktop.revertLastItem()
+                dock.clearCachedOutlineBitmap()
+            }
+
+            override fun onMove(action: DragAction.Action, location: PointF) {
+                if (action != DragAction.Action.SEARCH_RESULT)
+                    dock.updateIconProjection(location.x.toInt(), location.y.toInt())
+            }
+        })
+    }
+
     // called to initialize the views
     protected open fun initViews() {
         initSearchBar()
         initDock()
-
-        DragNavigationControl.init(this, left, right)
 
         appDrawerController.init()
 
@@ -250,27 +570,28 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
                     val appDrawerBtnItem = Item.newActionItem(Definitions.ACTION_LAUNCHER)
 
                     // center the button
-                    appDrawerBtnItem.setX(Definitions.DOCK_DEFAULT_CENTER_ITEM_INDEX_X)
+                    appDrawerBtnItem.x = Definitions.DOCK_DEFAULT_CENTER_ITEM_INDEX_X
                     db.saveItem(appDrawerBtnItem, 0, Definitions.ItemPosition.Dock)
                 }
             }
             if (Setup.appSettings().desktopStyle == Desktop.DesktopMode.NORMAL) {
-                desktop!!.initDesktopNormal(this@CoreHome)
+                desktop.initDesktopNormal(this@CoreHome)
             } else if (Setup.appSettings().desktopStyle == Desktop.DesktopMode.SHOW_ALL_APPS) {
-                desktop!!.initDesktopShowAll(this@CoreHome, this@CoreHome)
+                desktop.initDesktopShowAll(this@CoreHome, this@CoreHome)
             }
-            dock!!.initDockItem(this@CoreHome)
+            dock.initDockItem(this@CoreHome)
 
             // remove this listener
             true
         })
         Setup.appLoader().addDeleteListener(AppDeleteListener {
             if (Setup.appSettings().desktopStyle == Desktop.DesktopMode.NORMAL) {
-                desktop!!.initDesktopNormal(this@CoreHome)
+                desktop.initDesktopNormal(this@CoreHome)
             } else if (Setup.appSettings().desktopStyle == Desktop.DesktopMode.SHOW_ALL_APPS) {
-                desktop!!.initDesktopShowAll(this@CoreHome, this@CoreHome)
+                desktop.initDesktopShowAll(this@CoreHome, this@CoreHome)
             }
-            dock!!.initDockItem(this@CoreHome)
+            dock.initDockItem(this@CoreHome)
+            setToHomePage()
             false
         })
     }
@@ -374,7 +695,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
     }
 
     private fun initSearchBar() {
-        searchBar!!.setCallback(object : SearchBar.CallBack {
+        searchBar.setCallback(object : SearchBar.CallBack {
             override fun onInternetSearch(string: String) {
                 val intent = Intent()
 
@@ -409,7 +730,9 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
             }
 
             override fun onCollapse() {
-                unClearRoomForPopUp()
+                desktop.postDelayed({
+                    unClearRoomForPopUp()
+                }, 100)
                 unDimBackground()
 
                 searchBar.searchInput.clearFocus()
@@ -424,40 +747,34 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
     }
 
     @JvmOverloads
-    fun updateDock(show: Boolean, delay: Long = 0) {
-        if (Setup.appSettings().dockEnable && show) {
-            Tool.visibleViews(100, delay, dock)
+    fun updateDock(show: Boolean, delay: Long = 0) = if (Setup.appSettings().dockEnable && show) {
+        Tool.visibleViews(100, delay, dock)
+        (desktop!!.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = Tool.dp2px(4, this)
+        (desktopIndicator!!.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = Tool.dp2px(4, this)
+    } else {
+        if (Setup.appSettings().dockEnable) {
+            Tool.invisibleViews(100, dock)
+        } else {
+            Tool.goneViews(100, dock)
+            (desktopIndicator!!.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = Desktop.bottomInset + Tool.dp2px(4, this)
             (desktop!!.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = Tool.dp2px(4, this)
-            (desktopIndicator!!.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = Tool.dp2px(4, this)
-        } else {
-            if (Setup.appSettings().dockEnable) {
-                Tool.invisibleViews(100, dock)
-            } else {
-                Tool.goneViews(100, dock)
-                (desktopIndicator!!.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = Desktop.bottomInset + Tool.dp2px(4, this)
-                (desktop!!.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = Tool.dp2px(4, this)
-            }
         }
     }
 
-    fun updateSearchBar(show: Boolean) {
-        if (Setup.appSettings().searchBarEnable && show) {
-            Tool.visibleViews(100, searchBar)
+    fun updateSearchBar(show: Boolean) = if (Setup.appSettings().searchBarEnable && show) {
+        Tool.visibleViews(100, searchBar)
+    } else {
+        if (Setup.appSettings().searchBarEnable) {
+            Tool.invisibleViews(100, searchBar)
         } else {
-            if (Setup.appSettings().searchBarEnable) {
-                Tool.invisibleViews(100, searchBar)
-            } else {
-                Tool.goneViews(searchBar)
-            }
+            Tool.goneViews(searchBar)
         }
     }
 
-    fun updateDesktopIndicatorVisibility() {
-        if (Setup.appSettings().isDesktopShowIndicator) {
-            Tool.visibleViews(100, desktopIndicator)
-        } else {
-            Tool.goneViews(100, desktopIndicator)
-        }
+    fun updateDesktopIndicatorVisibility() = if (Setup.appSettings().isDesktopShowIndicator) {
+        Tool.visibleViews(100, desktopIndicator)
+    } else {
+        Tool.goneViews(100, desktopIndicator)
     }
 
     fun hideDesktopIndicator() {
@@ -483,8 +800,8 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
         updateDesktopIndicatorVisibility()
 
         if (!Setup.appSettings().searchBarEnable) {
-            (left!!.layoutParams as ViewGroup.MarginLayoutParams).topMargin = Desktop.topInset
-            (right!!.layoutParams as ViewGroup.MarginLayoutParams).topMargin = Desktop.topInset
+            (leftDragHandle!!.layoutParams as ViewGroup.MarginLayoutParams).topMargin = Desktop.topInset
+            (rightDragHandle!!.layoutParams as ViewGroup.MarginLayoutParams).topMargin = Desktop.topInset
             desktop!!.setPadding(0, Desktop.topInset, 0, 0)
         }
 
@@ -528,12 +845,12 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
         val appWidgetId = extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1)
         val appWidgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId)
         val item = Item.newWidgetItem(appWidgetId)
-        item.setSpanX((appWidgetInfo.minWidth - 1) / desktop!!.pages[CoreHome.launcher!!.desktop!!.currentItem].cellWidth + 1)
-        item.setSpanY((appWidgetInfo.minHeight - 1) / desktop!!.pages[CoreHome.launcher!!.desktop!!.currentItem].cellHeight + 1)
-        val point = desktop!!.currentPage.findFreeSpace(item.getSpanX(), item.getSpanY())
+        item.spanX = (appWidgetInfo.minWidth - 1) / desktop!!.pages[CoreHome.launcher!!.desktop!!.currentItem].cellWidth + 1
+        item.spanY = (appWidgetInfo.minHeight - 1) / desktop!!.pages[CoreHome.launcher!!.desktop!!.currentItem].cellHeight + 1
+        val point = desktop!!.currentPage.findFreeSpace(item.spanX, item.spanY)
         if (point != null) {
-            item.setX(point.x)
-            item.setY(point.y)
+            item.x = point.x
+            item.y = point.y
 
             // add item to database
             db.saveItem(item, desktop!!.currentItem, Definitions.ItemPosition.Desktop)
@@ -616,21 +933,26 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
     }
 
     protected open fun onHandleLauncherPause() {
-        searchBar.collapse()
         groupPopup.dismissPopup()
         calendarDropDownView.animateHide()
+        dragNDropView.hidePopupMenu()
+        if (searchBar.collapse()) return
 
         if (desktop != null) {
             if (!desktop.inEditMode) {
                 if (appDrawerController.drawer.visibility == View.VISIBLE) {
                     closeAppDrawer()
                 } else {
-                    desktop.currentItem = Setup.appSettings().desktopPageCurrent
+                    setToHomePage()
                 }
             } else {
                 desktop.pages[desktop.currentItem].performClick()
             }
         }
+    }
+
+    private fun setToHomePage() {
+        desktop.currentItem = Setup.appSettings().desktopPageCurrent
     }
 
     @JvmOverloads

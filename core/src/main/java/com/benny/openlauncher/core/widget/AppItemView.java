@@ -73,7 +73,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         AppItemView.Builder b = new AppItemView.Builder(context, iconSize)
                 .withOnTouchGetPosition(groupItem, Setup.Companion.itemGestureCallback())
                 .setTextColor(Setup.Companion.appSettings().getFolderLabelColor());
-        if (groupItem.type == Item.Type.SHORTCUT) {
+        if (groupItem.getType() == Item.Type.SHORTCUT) {
             b.setShortcutItem(groupItem);
         } else {
             AbstractApp app = Setup.Companion.appLoader().findItemApp(groupItem);
@@ -280,6 +280,10 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             view.setIconSize(Tool.dp2px(iconSize, view.getContext()));
         }
 
+        public static OnTouchListener getOnTouchGetPosition(Item item, ItemGestureListener.ItemGestureCallback itemGestureCallback) {
+            return Tool.getItemOnTouchListener(item, itemGestureCallback);
+        }
+
         public static OnLongClickListener getLongClickDragAppListener(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
             return new OnLongClickListener() {
                 @Override
@@ -291,7 +295,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                         return false;
                     }
                     v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                    DragNDropHandler.INSTANCE.startDrag(v, item, action, eventAction);
+                    DragNDropHandler.startDrag(v, item, action, eventAction);
                     return true;
                 }
             };
@@ -327,7 +331,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                     Tool.createScaleInScaleOutAnim(view, new Runnable() {
                         @Override
                         public void run() {
-                            Tool.startApp(view.getContext(), item.intent, view);
+                            Tool.startApp(view.getContext(), item.getIntent(), view);
                         }
                     });
                 }
@@ -344,7 +348,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                     Tool.createScaleInScaleOutAnim(view, new Runnable() {
                         @Override
                         public void run() {
-                            view.getContext().startActivity(item.intent);
+                            view.getContext().startActivity(item.getIntent());
                         }
                     });
                 }
@@ -369,7 +373,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         public Builder setActionItem(Item item) {
             view.setLabel(item.getLabel());
             view.setIconProvider(Setup.Companion.imageLoader().createIconProvider(R.drawable.ic_app_drawer_24dp));
-            switch (item.actionValue) {
+            switch (item.getActionValue()) {
                 case Definitions.ACTION_LAUNCHER:
                     view.setOnClickListener(new OnClickListener() {
                         @Override
@@ -384,7 +388,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         public Builder withOnLongClick(final AbstractApp app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
-            withOnLongClick(Item.newAppItem(app), action, eventAction);
+            withOnLongClick(Item.Companion.newAppItem(app), action, eventAction);
             return this;
         }
 
@@ -401,7 +405,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                     if (view.vibrateWhenLongPress) {
                         v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                     }
-                    DragNDropHandler.INSTANCE.startDrag(view, item, action, eventAction);
+                    DragNDropHandler.startDrag(view, item, action, eventAction);
                     return true;
                 }
             });

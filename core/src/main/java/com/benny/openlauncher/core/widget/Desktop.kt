@@ -4,6 +4,7 @@ import `in`.championswimmer.sfg.lib.SimpleFingerGestures
 import android.app.WallpaperManager
 import android.content.Context
 import android.graphics.Point
+import android.graphics.PointF
 import android.os.Build
 import android.util.AttributeSet
 import android.view.*
@@ -21,9 +22,9 @@ import com.benny.openlauncher.core.viewutil.ItemViewFactory
 import com.benny.openlauncher.core.viewutil.SmoothPagerAdapter
 import java.util.*
 
-class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) : SmoothViewPager(c, attr), OnDragListener, DesktopCallBack<View> {
+class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) : SmoothViewPager(c, attr), DesktopCallBack<View> {
 
-    val pages: MutableList<CellContainer> = ArrayList()
+    val pages: MutableList<CellContainer> = ArrayList<CellContainer>()
     var desktopEditListener: OnDesktopEditListener? = null
     var previousItemView: View? = null
     var previousItem: Item? = null
@@ -55,7 +56,6 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
             pageCount = 1
         }
 
-        setOnDragListener(this)
         currentItem = Setup.appSettings().desktopPageCurrent
     }
 
@@ -75,7 +75,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
             val items = desktopItems[pageCount]
             for (j in items.indices) {
                 val item = items[j]
-                if (item.getX() + item.getSpanX() <= columns && item.getY() + item.getSpanY() <= rows) {
+                if (item.x + item.spanX <= columns && item.y + item.spanY <= rows) {
                     addItemToPage(item, pageCount)
                 }
             }
@@ -113,8 +113,8 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
                     val pos = columns * rows * i + pagePos
                     if (pos < apps.size) {
                         val appItem = apps[pos]
-                        appItem.setX(x)
-                        appItem.setY(y)
+                        appItem.x = x
+                        appItem.y = y
                         addItemToPage(appItem, i)
                     }
                 }
@@ -177,77 +177,35 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
         }
     }
 
-    override fun onDrag(p1: View, event: DragEvent): Boolean {
-        val currentPage = currentPage
-        when (event.action) {
-            DragEvent.ACTION_DRAG_STARTED -> {
-                coordinate.set(-1, -1)
-                for (page in pages)
-                    page.clearCachedOutlineBitmap()
-                return true
-            }
-            DragEvent.ACTION_DRAG_ENTERED -> return true
-            DragEvent.ACTION_DRAG_EXITED -> {
-                for (page in pages)
-                    page.clearCachedOutlineBitmap()
-                return true
-            }
-            DragEvent.ACTION_DRAG_LOCATION -> {
-                updateIconProjection(event.x.toInt(), event.y.toInt())
-                return true
-            }
-            DragEvent.ACTION_DROP -> {
-                for (page in pages)
-                    page.clearCachedOutlineBitmap()
-                val item = DragNDropHandler.getDraggedObject<Item>(event)
-                // this statement makes sure that adding an app multiple times from the app drawer works
-                // the app will get a new id every time
-                if ((event.localState as DragAction).action == DragAction.Action.APP_DRAWER) {
-                    item.reset()
-                }
+    private val previousDragPoint = Point()
 
-                if (addItemToPoint(item, event.x.toInt(), event.y.toInt())) {
-                    home!!.getDesktop().consumeRevert()
-                    home!!.getDock().consumeRevert()
-                    // add the item to the database
-                    CoreHome.db.saveItem(item, currentItem, Definitions.ItemPosition.Desktop)
-                } else {
-                    val pos = Point()
-                    currentPage.touchPosToCoordinate(pos, event.x.toInt(), event.y.toInt(), item.getSpanX(), item.getSpanY(), false)
-                    val itemView = currentPage.coordinateToChildView(pos)
-                    if (itemView != null && Desktop.handleOnDropOver(home, item, itemView.tag as Item, itemView, currentPage, currentItem, Definitions.ItemPosition.Desktop, this)) {
-                        home!!.getDesktop().consumeRevert()
-                        home!!.getDock().consumeRevert()
-                    } else {
-                        Toast.makeText(context, R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show()
-                        home!!.getDock().revertLastItem()
-                        home!!.getDesktop().revertLastItem()
-                    }
-                }
-                return true
-            }
-            DragEvent.ACTION_DRAG_ENDED -> {
-                for (page in pages)
-                    page.clearCachedOutlineBitmap()
-                return true
-            }
-        }
-
-        currentPage.invalidate()
-        return false
-    }
-
-    private fun updateIconProjection(x: Int, y: Int) {
-        val currentPage = currentPage
+    fun updateIconProjection(x: Int, y: Int) {
         val state = currentPage.peekItemAndSwap(x, y, coordinate)
+
+        if (previousDragPoint != coordinate)
+            CoreHome.launcher?.getDragNDropView()?.cancelFolderPreview()
+        previousDragPoint.set(coordinate.x, coordinate.y)
+
         when (state) {
             CellContainer.DragState.CurrentNotOccupied -> currentPage.projectImageOutlineAt(coordinate, DragNDropHandler.cachedDragBitmap)
             CellContainer.DragState.OutOffRange -> {
+
             }
             CellContainer.DragState.ItemViewNotFound -> {
             }
-            CellContainer.DragState.CurrentOccupied -> for (page in pages)
-                page.clearCachedOutlineBitmap()
+            CellContainer.DragState.CurrentOccupied -> {
+                for (page in pages)
+                    page.clearCachedOutlineBitmap()
+
+                val action = CoreHome.launcher?.getDragNDropView()?.dragAction
+                if (action != DragAction.Action.WIDGET && action != DragAction.Action.ACTION &&
+                        currentPage.coordinateToChildView(coordinate) is AppItemView)
+                    CoreHome.launcher?.getDragNDropView()?.showFolderPreviewAt(
+                            this,
+                            currentPage.cellWidth * (coordinate.x + 0.5f),
+                            currentPage.cellHeight * (coordinate.y + 0.5f) - if (Setup.appSettings().isDesktopShowLabel) 7.toPx() else 0
+                    )
+            }
         }
     }
 
@@ -264,7 +222,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
 
     override fun revertLastItem() {
         if (previousItemView != null && adapter.count >= previousPage && previousPage > -1) {
-            currentPage.addViewToGrid(previousItemView!!)
+            pages[previousPage].addViewToGrid(previousItemView!!)
             previousItem = null
             previousItemView = null
             previousPage = -1
@@ -285,18 +243,18 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
             return false
         } else {
             item.locationInLauncher = Item.LOCATION_DESKTOP
-            pages[page].addViewToGrid(itemView, item.getX(), item.getY(), item.getSpanX(), item.getSpanY())
+            pages[page].addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY)
             return true
         }
     }
 
     override fun addItemToPoint(item: Item, x: Int, y: Int): Boolean {
-        val positionToLayoutPrams = currentPage.coordinateToLayoutParams(x, y, item.getSpanX(), item.getSpanY())
+        val positionToLayoutPrams = currentPage.coordinateToLayoutParams(x, y, item.spanX, item.spanY)
         if (positionToLayoutPrams != null) {
             item.locationInLauncher = Item.LOCATION_DESKTOP
 
-            item.setX(positionToLayoutPrams.x)
-            item.setY(positionToLayoutPrams.y)
+            item.x = positionToLayoutPrams.x
+            item.y = positionToLayoutPrams.y
 
             val itemView = ItemViewFactory.getItemView(context, item, Setup.appSettings().isDesktopShowLabel, this, Setup.appSettings().desktopIconSize)
 
@@ -313,27 +271,31 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
     override fun addItemToCell(item: Item, x: Int, y: Int): Boolean {
         item.locationInLauncher = Item.LOCATION_DESKTOP
 
-        item.setX(x)
-        item.setY(y)
+        item.x = x
+        item.y = y
 
         val itemView = ItemViewFactory.getItemView(context, item, Setup.appSettings().isDesktopShowLabel, this, Setup.appSettings().desktopIconSize)
 
         if (itemView != null) {
-            currentPage.addViewToGrid(itemView, item.getX(), item.getY(), item.getSpanX(), item.getSpanY())
+            currentPage.addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY)
             return true
         } else {
             return false
         }
     }
 
-    override fun removeItem(view: View?) {
-        currentPage.removeViewInLayout(view)
+    override fun removeItem(view: View) {
+        view.animate().setDuration(100L).scaleX(0f).scaleY(0f).withEndAction({
+            if (view.parent == currentPage)
+                currentPage.removeView(view)
+        })
     }
 
     override fun onPageScrolled(position: Int, offset: Float, offsetPixels: Int) {
         if (isInEditMode) {
             return
         }
+        CoreHome.launcher?.getDragNDropView()?.cancelFolderPreview()
         WallpaperManager.getInstance(context).setWallpaperOffsets(windowToken, (position + offset) / (pageCount - 1), 0f)
         super.onPageScrolled(position, offset, offsetPixels)
     }
@@ -378,8 +340,8 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
                 layout.onItemRearrangeListener = object : CellContainer.OnItemRearrangeListener {
                     override fun onItemRearrange(from: Point, to: Point) {
                         val itemFromCoordinate = Desktop.getItemFromCoordinate(from, currentItem) ?: return
-                        itemFromCoordinate.setX(to.x)
-                        itemFromCoordinate.setY(to.y)
+                        itemFromCoordinate.x = to.x
+                        itemFromCoordinate.y = to.y
                     }
                 }
                 layout.setOnTouchListener { _, event ->
@@ -492,7 +454,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
             val pageData = desktopItems[page]
             for (i in pageData.indices) {
                 val item = pageData[i]
-                if (item.getX() == point.x && item.getY() == point.y && item.getSpanX() == 1 && item.getSpanY() == 1) {
+                if (item.x == point.x && item.y == point.y && item.spanX == 1 && item.spanY == 1) {
                     return pageData[i]
                 }
             }
@@ -504,16 +466,16 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
                 return false
             }
 
-            when (item.getType()) {
-                Item.Type.APP, Item.Type.SHORTCUT -> if (dropItem.getType() == Item.Type.APP || dropItem.getType() == Item.Type.SHORTCUT) {
+            when (item.type) {
+                Item.Type.APP, Item.Type.SHORTCUT -> if (dropItem.type == Item.Type.APP || dropItem.type == Item.Type.SHORTCUT) {
                     parent.removeView(itemView)
 
                     // create a new group item
                     val group = Item.newGroupItem()
                     group.groupItems.add(item)
                     group.groupItems.add(dropItem)
-                    group.setX(item.getX())
-                    group.setY(item.getY())
+                    group.x = item.x
+                    group.y = item.y
 
                     // add the drop item just in case it is coming from the app drawer
                     CoreHome.db.saveItem(dropItem, page, itemPosition)
@@ -531,7 +493,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
                     CoreHome.launcher?.getDock()?.consumeRevert()
                     return true
                 }
-                Item.Type.GROUP -> if ((dropItem.getType() == Item.Type.APP || dropItem.getType() == Item.Type.SHORTCUT) && item.groupItems.size < GroupPopupView.GroupDef.maxItem) {
+                Item.Type.GROUP -> if ((dropItem.type == Item.Type.APP || dropItem.type == Item.Type.SHORTCUT) && item.groupItems.size < GroupPopupView.GroupDef.maxItem) {
                     parent.removeView(itemView)
 
                     item.groupItems.add(dropItem)

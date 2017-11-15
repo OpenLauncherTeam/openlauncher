@@ -30,7 +30,8 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
 
             @Override
             public void afterDrag(View view) {
-                CoreHome.Companion.getLauncher().closeAppDrawer();
+                //This will be handled by the Drag N Drop listener in the CoreHome
+                //CoreHome.Companion.getLauncher().closeAppDrawer();
             }
         };
     }
@@ -59,7 +60,8 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
     public void bindView(DrawerAppItem.ViewHolder holder, List payloads) {
         holder.builder
                 .setAppItem(app)
-                .withOnLongClick(app, DragAction.Action.APP_DRAWER, onLongClickCallback);
+                .withOnLongClick(app, DragAction.Action.APP_DRAWER, onLongClickCallback)
+                .withOnTouchGetPosition(null, null);
         holder.appItemView.load();
         super.bindView(holder, payloads);
     }

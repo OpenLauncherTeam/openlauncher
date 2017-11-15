@@ -24,8 +24,8 @@ public class AppDrawerController extends RevealFrameLayout {
     public AppDrawerPaged drawerViewPaged;
     public AppDrawerVertical drawerViewGrid;
     public int drawerMode;
+    public boolean isOpen = false;
     private CallBack openCallBack, closeCallBack;
-
     private Animator appDrawerAnimator;
     private Long drawerAnimationTime = 200L;
 
@@ -51,6 +51,9 @@ public class AppDrawerController extends RevealFrameLayout {
     }
 
     public void open(int cx, int cy, int startRadius, int finalRadius) {
+        if (isOpen) return;
+        isOpen = true;
+
         appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(getChildAt(0), cx, cy, startRadius, finalRadius);
         appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         appDrawerAnimator.setDuration(drawerAnimationTime);
@@ -101,6 +104,9 @@ public class AppDrawerController extends RevealFrameLayout {
     }
 
     public void close(int cx, int cy, int startRadius, int finalRadius) {
+        if (!isOpen) return;
+        isOpen = false;
+
         if (appDrawerAnimator == null || appDrawerAnimator.isRunning())
             return;
 
@@ -228,14 +234,14 @@ public class AppDrawerController extends RevealFrameLayout {
         }
     }
 
-    public static class DrawerMode {
-        public static final int HORIZONTAL_PAGED = 0;
-        public static final int VERTICAL = 1;
-    }
-
     public interface CallBack {
         void onStart();
 
         void onEnd();
+    }
+
+    public static class DrawerMode {
+        public static final int HORIZONTAL_PAGED = 0;
+        public static final int VERTICAL = 1;
     }
 }

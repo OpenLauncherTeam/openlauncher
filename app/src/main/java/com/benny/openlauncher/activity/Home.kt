@@ -260,15 +260,15 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
                         item.label = label
                         db.saveItem(item)
 
-                        getDesktop().addItemToCell(item, item.getX(), item.getY())
-                        getDesktop().removeItem(getDesktop().currentPage.coordinateToChildView(Point(item.getX(), item.getY())))
+                        getDesktop().removeItem(getDesktop().currentPage.coordinateToChildView(Point(item.x, item.y))!!)
+                        getDesktop().addItemToCell(item, item.x, item.y)
                     }
 
                 })
             }
 
-            override fun showDeletePackageDialog(context: Context, dragEvent: DragEvent) {
-                DialogHelper.deletePackageDialog(context, dragEvent)
+            override fun showDeletePackageDialog(context: Context, item: Item) {
+                DialogHelper.deletePackageDialog(context,item)
             }
         }
         val logger = object : Setup.Logger {

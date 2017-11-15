@@ -89,5 +89,6 @@
     <string name="pref_key__desktop_current_position" translatable="false">pref_key__desktop_current_position</string>
     <string name="pref_key__queue_restart" translatable="false">pref_key__queue_restart</string>
 
+    <string name="pref_key__desktop_search_use_grid" translatable="false">pref_key__desktop_search_use_grid</string>
 
 </resources>

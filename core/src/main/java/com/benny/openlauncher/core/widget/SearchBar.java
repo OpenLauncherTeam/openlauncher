@@ -38,8 +38,10 @@ import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.DragAction;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.core.viewutil.CircleDrawable;
+import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+import com.mikepenz.fastadapter.listeners.OnLongClickListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -57,7 +59,7 @@ public class SearchBar extends FrameLayout {
     public RecyclerView searchRecycler;
     private CircleDrawable icon;
     private CardView searchCardContainer;
-    private FastItemAdapter<FastItem.LabelItem> adapter = new FastItemAdapter<>();
+    private FastItemAdapter<IconLabelItem> adapter = new FastItemAdapter<>();
     private CallBack callback;
     private boolean expanded;
     private boolean searchInternetEnabled = true;
@@ -138,7 +140,7 @@ public class SearchBar extends FrameLayout {
         switchButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Setup.Companion.appSettings().setSearchUseGrid(!Setup.Companion.appSettings().isSearchUseGrid());
+                Setup.appSettings().setSearchUseGrid(!Setup.appSettings().isSearchUseGrid());
                 updateSwitchIcon();
                 updateRecyclerViewLayoutManager();
             }
@@ -208,9 +210,8 @@ public class SearchBar extends FrameLayout {
         LayoutParams inputParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         inputParams.setMargins(iconMarginOutside + iconSize, 0, 0, 0);
 
-
-        searchCardContainer.addView(switchButton, switchButtonParams);
         searchCardContainer.addView(searchInput, inputParams);
+        searchCardContainer.addView(switchButton, switchButtonParams);
 
         initRecyclerView();
 
@@ -221,7 +222,7 @@ public class SearchBar extends FrameLayout {
                 if (Setup.Companion.appSettings().getSearchBarShouldShowHiddenApps()) {
                     apps = Setup.Companion.appLoader().getAllApps(getContext(), true);
                 }
-                List<FastItem.LabelItem> items = new ArrayList<>();
+                List<IconLabelItem> items = new ArrayList<>();
                 if (searchInternetEnabled) {
                     items.add(new IconLabelItem(getContext(), R.string.search_online)
                             .withIconGravity(Gravity.START)
@@ -240,7 +241,6 @@ public class SearchBar extends FrameLayout {
                 }
                 for (int i = 0; i < apps.size(); i++) {
                     final AbstractApp app = apps.get(i);
-                    final int finalI = i;
                     items.add(new IconLabelItem(getContext(), app.getIconProvider(), app.getLabel(), 36)
                             .withIconGravity(Setup.Companion.appSettings().getSearchGridSize() > 1 && Setup.Companion.appSettings().getSearchLabelLines() == 0 ? Gravity.TOP : Gravity.START)
                             .withOnClickListener(new OnClickListener() {
@@ -249,11 +249,10 @@ public class SearchBar extends FrameLayout {
                                     startApp(v.getContext(), app, v);
                                 }
                             })
-                            .withOnLongClickListener(AppItemView.Builder.getLongClickDragAppListener(Item.newAppItem(app), DragAction.Action.APP, new AppItemView.LongPressCallBack() {
+                            .withOnTouchListener(AppItemView.Builder.getOnTouchGetPosition(null, null))
+                            .withOnLongClickListener(true, AppItemView.Builder.getLongClickDragAppListener(Item.Companion.newAppItem(app), DragAction.Action.SEARCH_RESULT, new AppItemView.LongPressCallBack() {
                                 @Override
                                 public boolean readyForDrag(View view) {
-                                    if (finalI == -1) return false;
-
                                     expanded = !expanded;
                                     collapseInternal();
                                     return true;
@@ -269,13 +268,23 @@ public class SearchBar extends FrameLayout {
                             .withMaxTextLines(Setup.Companion.appSettings().getSearchLabelLines()));
                 }
                 adapter.set(items);
+                adapter.withOnLongClickListener(new com.mikepenz.fastadapter.listeners.OnLongClickListener<IconLabelItem>() {
+                    @Override
+                    public boolean onLongClick(View v, IAdapter<IconLabelItem> adapter, IconLabelItem item, int position) {
+                        if (!searchInternetEnabled || position != 0) {
+                            item.onLongClickListener.onLongClick(v);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
 
                 return false;
             }
         });
-        adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<FastItem.LabelItem>() {
+        adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<IconLabelItem>() {
             @Override
-            public boolean filter(FastItem.LabelItem item, CharSequence constraint) {
+            public boolean filter(IconLabelItem item, CharSequence constraint) {
                 if (item.getLabel().equals(getContext().getString(R.string.search_online)))
                     return true;
                 String s = constraint.toString();
@@ -341,7 +350,7 @@ public class SearchBar extends FrameLayout {
     }
 
     private void updateRecyclerViewLayoutManager() {
-        int gridSize = Setup.Companion.appSettings().isSearchUseGrid() ? Setup.Companion.appSettings().getSearchGridSize() : 1;
+        int gridSize = Setup.appSettings().isSearchUseGrid() ? Setup.appSettings().getSearchGridSize() : 1;
         if (gridSize == 1) {
             searchRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         } else {
@@ -361,7 +370,7 @@ public class SearchBar extends FrameLayout {
     }
 
     protected void startApp(Context context, AbstractApp app, View view) {
-        Tool.startApp(context, app,view);
+        Tool.startApp(context, app, view);
     }
 
     public void updateClock() {

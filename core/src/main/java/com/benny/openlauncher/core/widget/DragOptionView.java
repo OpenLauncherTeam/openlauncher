@@ -188,7 +188,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Setup.Companion.eventHandler().showDeletePackageDialog(getContext(), dragEvent);
+                        //Setup.Companion.eventHandler().showDeletePackageDialog(getContext(), dragEvent);
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;

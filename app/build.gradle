@@ -13,7 +13,7 @@ android {
         flavorDimensions "versionCode"
 
         versionCode 29
-        versionName "0.5.6(pre-alpha)"
+        versionName "0.5.6(alpha)"
 
         applicationId "com.benny.openlauncher"
         resValue 'string', 'app_name', "OpenLauncher"
@@ -35,6 +35,7 @@ android {
         flavorGplayPreAlpha {
             buildConfigField "boolean", "IS_GPLAY_BUILD", "true"
             buildConfigField "boolean", "IS_GPLAY_PREALPHA_BUILD", "true"
+            versionName = "0.5.6(pre-alpha)"
 
             applicationId "com.benny.openlauncherprealpha"
         }

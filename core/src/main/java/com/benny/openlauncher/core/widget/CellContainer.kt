@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.core.util.Tool
 import com.benny.openlauncher.core.util.toPx
 import java.util.*
@@ -28,7 +29,7 @@ open class CellContainer : ViewGroup {
     var gestures: SimpleFingerGestures? = null
     var onItemRearrangeListener: OnItemRearrangeListener? = null
     private var occupied: Array<BooleanArray>? = null
-    private lateinit var cells: Array<Array<Rect?>>
+    private var cells: Array<Array<Rect?>>? = null
     private var hideGrid = true
     private var down: Long? = 0L
     private var animateBackground: Boolean = false
@@ -38,7 +39,6 @@ open class CellContainer : ViewGroup {
     private var peekDirection: PeekDirection? = null
     private var cachedOutlineBitmap: Bitmap? = null
     private var currentOutlineCoordinate: Point = Point(-1, -1)
-    private var tempOutlineCoordinate: Point = Point(-1, -1)
 
     val allCells: List<View>
         get() {
@@ -53,7 +53,7 @@ open class CellContainer : ViewGroup {
         init()
     }
 
-    constructor(c: Context, attr: AttributeSet) : super(c, attr) {
+    constructor(c: Context, attr: AttributeSet?) : super(c, attr) {
         init()
     }
 
@@ -142,7 +142,8 @@ open class CellContainer : ViewGroup {
      * @param event - the drag event that contains the current x,y position
      */
     fun peekItemAndSwap(x: Int, y: Int, coordinate: Point): DragState {
-        touchPosToCoordinate(coordinate, x, y, 1, 1, false, true)
+        //Currently disabled check boundary.
+        touchPosToCoordinate(coordinate, x, y, 1, 1, false, false)
 
         if (coordinate.x == -1 || coordinate.y == -1) {
             return DragState.OutOffRange
@@ -379,12 +380,14 @@ open class CellContainer : ViewGroup {
 
         canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), bgPaint)
 
+        if (cells == null) return
+
         val s = 7f
         for (x in 0 until cellSpanH) {
             for (y in 0 until cellSpanV) {
-                if (x >= cells.size || y >= cells[0].size) continue
+                if (x >= cells!!.size || y >= cells!![0].size) continue
 
-                val cell = cells[x][y]!!
+                val cell = cells!![x][y]!!
 
                 canvas.save()
                 canvas.rotate(45f, cell.left.toFloat(), cell.top.toFloat())
@@ -409,11 +412,12 @@ open class CellContainer : ViewGroup {
         }
 
         //Animating alpha and drawing projected image
-        if (currentOutlineCoordinate.x != -1 && currentOutlineCoordinate.y != -1) {
+        if (CoreHome.launcher!!.getDragNDropView().dragExceedThreshold && currentOutlineCoordinate.x != -1 && currentOutlineCoordinate.y != -1) {
             if (outlinePaint.alpha != 160)
                 outlinePaint.alpha = Math.min(outlinePaint.alpha + 20, 160)
-            drawCachedOutlineBitmap(canvas, cells[currentOutlineCoordinate.x][currentOutlineCoordinate.y]!!)
-            if (outlinePaint.alpha != 160)
+            drawCachedOutlineBitmap(canvas, cells!![currentOutlineCoordinate.x][currentOutlineCoordinate.y]!!)
+
+            if (outlinePaint.alpha <= 160)
                 invalidate()
         }
 
@@ -511,6 +515,11 @@ open class CellContainer : ViewGroup {
     // convert a touch event to a coordinate in the cell container
     @JvmOverloads
     fun touchPosToCoordinate(coordinate: Point, mX: Int, mY: Int, xSpan: Int, ySpan: Int, checkAvailability: Boolean, checkBoundary: Boolean = false) {
+        if (cells == null) {
+            coordinate.set(-1, -1)
+            return
+        }
+
         var mX = mX
         var mY = mY
         mX -= (xSpan - 1) * cellWidth / 2
@@ -520,7 +529,7 @@ open class CellContainer : ViewGroup {
         while (x < cellSpanH) {
             var y = 0
             while (y < cellSpanV) {
-                val cell = cells[x][y]!!
+                val cell = cells!![x][y]!!
                 if (mY >= cell.top && mY <= cell.bottom && mX >= cell.left && mX <= cell.right) {
                     if (checkAvailability) {
                         if (occupied!![x][y]) {
@@ -583,6 +592,8 @@ open class CellContainer : ViewGroup {
 
         val count = childCount
 
+        if (cells == null) return
+
         for (i in 0 until count) {
             val child = getChildAt(i)
 
@@ -595,10 +606,10 @@ open class CellContainer : ViewGroup {
             val childHeight = lp.ySpan * cellHeight
             child.measure(View.MeasureSpec.makeMeasureSpec(childWidth, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(childHeight, View.MeasureSpec.EXACTLY))
 
-            val upRect = cells[lp.x][lp.y]!!
+            val upRect = cells!![lp.x][lp.y]!!
             var downRect = tempRect
             if (lp.x + lp.xSpan - 1 < cellSpanH && lp.y + lp.ySpan - 1 < cellSpanV)
-                downRect = cells[lp.x + lp.xSpan - 1][lp.y + lp.ySpan - 1]!!
+                downRect = cells!![lp.x + lp.xSpan - 1][lp.y + lp.ySpan - 1]!!
 
             if (lp.xSpan == 1 && lp.ySpan == 1)
                 child.layout(upRect.left, upRect.top, upRect.right, upRect.bottom)

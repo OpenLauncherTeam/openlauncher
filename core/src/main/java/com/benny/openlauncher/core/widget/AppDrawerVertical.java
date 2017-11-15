@@ -62,7 +62,7 @@ public class AppDrawerVertical extends CardView {
                 getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
                 rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_vertical_inner, AppDrawerVertical.this, false);
-                recyclerView = (RecyclerView) rl.findViewById(R.id.vDrawerRV);
+                recyclerView = rl.findViewById(R.id.vDrawerRV);
                 layoutManager = new GridLayoutManager(getContext(), Setup.Companion.appSettings().getDrawerColumnCount());
 
                 itemWidth = (getWidth() - recyclerView.getPaddingRight() - recyclerView.getPaddingRight()) / layoutManager.getSpanCount();

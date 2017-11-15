@@ -151,7 +151,8 @@ public class AppDrawerPaged extends SmoothViewPager {
 
                                 @Override
                                 public void afterDrag(View view) {
-                                    home.closeAppDrawer();
+                                    //This will be handled by the Drag N Drop listener in the CoreHome
+                                    //home.closeAppDrawer();
                                 }
                             });
         }
@@ -165,9 +166,9 @@ public class AppDrawerPaged extends SmoothViewPager {
                     ((CardView) layout.getChildAt(0)).setCardElevation(0);
                 } else {
                     ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Setup.Companion.appSettings().getDrawerCardColor());
-                    ((CardView) layout.getChildAt(0)).setCardElevation(Tool.INSTANCE.dp2px(4, getContext()));
+                    ((CardView) layout.getChildAt(0)).setCardElevation(Tool.dp2px(4, getContext()));
                 }
-                CellContainer cc = (CellContainer) layout.findViewById(R.id.group);
+                CellContainer cc = layout.findViewById(R.id.group);
                 cc.setGridSize(columnCellCount, rowCellCount);
 
                 for (int x = 0; x < columnCellCount; x++) {

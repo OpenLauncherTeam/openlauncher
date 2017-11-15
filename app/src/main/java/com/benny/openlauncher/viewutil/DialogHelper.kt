@@ -143,17 +143,15 @@ object DialogHelper {
                 }.show()
     }
 
-    fun deletePackageDialog(context: Context, dragEvent: DragEvent) {
-        val item = DragNDropHandler.getDraggedObject<Item>(dragEvent)
+    fun deletePackageDialog(context: Context, item: Item) {
         if (item.type == Item.Type.APP) {
             try {
-                val packageURI = Uri.parse("package:" + item.intent.component!!.packageName)
+                val packageURI = Uri.parse("package:" + item.intent?.component!!.packageName)
                 val uninstallIntent = Intent(Intent.ACTION_DELETE, packageURI)
                 context.startActivity(uninstallIntent)
             } catch (e: Exception) {
 
             }
-
         }
     }
 
