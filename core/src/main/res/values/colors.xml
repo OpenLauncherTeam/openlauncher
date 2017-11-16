@@ -17,4 +17,8 @@
     <color name="transparent">#00000000</color>
     <color name="darkGrey">#ff444444</color>
 
+    <color name="op_green">#b4c64a</color>
+    <color name="op_blue">#1892cc</color>
+    <color name="op_red">#d6552e</color>
+
 </resources>

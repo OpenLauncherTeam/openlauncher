@@ -35,17 +35,20 @@ android {
         flavorGplayPreAlpha {
             buildConfigField "boolean", "IS_GPLAY_BUILD", "true"
             buildConfigField "boolean", "IS_GPLAY_PREALPHA_BUILD", "true"
-            versionName = "0.5.6(pre-alpha)"
+            resValue 'string', 'app_name', "OL PreAlpha"
 
+            versionCode = Integer.parseInt(new Date().format('yyMMdd'))
+            versionName = "0.5.7(pre-alpha)"
             applicationId "com.benny.openlauncherprealpha"
         }
 
         flavorTest {
-            applicationId "io.github.openlauncherteam.openlauncher.test"
+            buildConfigField "boolean", "IS_TEST_BUILD", "true"
             resValue 'string', 'app_name', "OL Nightly"
+
             versionCode = Integer.parseInt(new Date().format('yyMMdd'))
             versionName = new Date().format('yyMMdd')
-            buildConfigField "boolean", "IS_TEST_BUILD", "true"
+            applicationId "io.github.openlauncherteam.openlauncher.test"
         }
     }
 
@@ -80,7 +83,7 @@ dependencies {
     implementation 'com.balysv:material-ripple:1.0.2'
     implementation 'net.qiujuer.genius:blur:2.0.0'
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
-    implementation 'com.github.chyrta:AndroidOnboarder:0.6'
+    implementation 'agency.tango.android:material-intro-screen:0.0.5'
     implementation 'cat.ereza:customactivityoncrash:1.5.0'
     implementation 'de.psdev.licensesdialog:licensesdialog:1.8.2'
     implementation 'com.jaredrummler:colorpicker:1.0.0'

@@ -27,7 +27,7 @@
             android:name="com.benny.openlauncher.activity.InitActivity"
             android:clearTaskOnLaunch="true"
             android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/Home.Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

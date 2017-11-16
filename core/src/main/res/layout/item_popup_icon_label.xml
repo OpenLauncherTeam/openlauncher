@@ -4,10 +4,12 @@
     android:layout_width="200dp"
     android:layout_height="46dp"
     android:layout_marginBottom="6dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
     android:foreground="?selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    app:cardCornerRadius="23dp"
+    app:cardCornerRadius="22dp"
     app:cardElevation="4dp">
 
     <ImageView

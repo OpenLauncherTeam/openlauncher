@@ -1,16 +1,18 @@
 package com.benny.openlauncher.activity
 
+import agency.tango.materialintroscreen.MaterialIntroActivity
+import agency.tango.materialintroscreen.SlideFragment
+import agency.tango.materialintroscreen.SlideFragmentBuilder
+import agency.tango.materialintroscreen.widgets.OverScrollViewPager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.benny.openlauncher.R
-import com.chyrta.onboarder.OnboarderActivity
-import com.chyrta.onboarder.OnboarderPage
 
-import java.util.ArrayList
-
-class InitActivity : OnboarderActivity() {
+class InitActivity : MaterialIntroActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,52 +22,62 @@ class InitActivity : OnboarderActivity() {
             return
         }
 
-        val onBoarderPages = ArrayList<OnboarderPage>()
+        val overScrollLayout = findViewById<View>(agency.tango.materialintroscreen.R.id.view_pager_slides) as OverScrollViewPager
+        val viewPager = overScrollLayout.overScrollView
+        viewPager.overScrollMode = View.OVER_SCROLL_NEVER
 
-        // these are the pages in the start activity
-        val onBoarderPage1 = OnboarderPage(getString(R.string.intro1_title), getString(R.string.intro1_text), R.drawable.intro_1)
-        val onBoarderPage2 = OnboarderPage(getString(R.string.intro2_title), getString(R.string.intro2_text), R.drawable.intro_2)
-        val onBoarderPage3 = OnboarderPage(getString(R.string.intro3_title), getString(R.string.intro3_text), R.drawable.intro_3)
+        addSlide(CustomSlide())
 
-        // title and description colors for the pages
-        onBoarderPage1.setTitleColor(R.color.colorAccent)
-        onBoarderPage1.setBackgroundColor(R.color.colorPrimaryDark)
-        onBoarderPage2.setTitleColor(R.color.colorAccent)
-        onBoarderPage2.setBackgroundColor(R.color.colorPrimaryDark)
-        onBoarderPage3.setTitleColor(R.color.colorAccent)
-        onBoarderPage3.setBackgroundColor(R.color.colorPrimaryDark)
+        addSlide(SlideFragmentBuilder()
+                .backgroundColor(R.color.op_red)
+                .buttonsColor(R.color.intro_button_color)
+                .image(R.drawable.intro_2)
+                .description("Just swipe form the left edge.")
+                .build())
 
-        // add pages to the list
-        onBoarderPages.add(onBoarderPage1)
-        onBoarderPages.add(onBoarderPage2)
-        onBoarderPages.add(onBoarderPage3)
+        addSlide(SlideFragmentBuilder()
+                .backgroundColor(R.color.op_green)
+                .buttonsColor(R.color.intro_button_color)
+                .image(R.drawable.intro_3)
+                .description("Classical app drawer!")
+                .build())
 
-        // pass pages to setOnboardPagesReady method
-        setActiveIndicatorColor(android.R.color.white)
-        setInactiveIndicatorColor(android.R.color.darker_gray)
-        shouldDarkenButtonsLayout(true)
-        setSkipButtonTitle(getString(R.string.intro_skip))
-        setFinishButtonTitle(getString(R.string.intro_finish))
-        setOnboardPagesReady(onBoarderPages)
+        addSlide(SlideFragmentBuilder()
+                .backgroundColor(R.color.op_blue)
+                .buttonsColor(R.color.intro_button_color)
+                .image(R.drawable.intro_4)
+                .description("Easy Search!")
+                .build())
     }
 
-    public override fun onSkipButtonPressed() {
-        // skips onboarder to the last page
-        // super.onSkipButtonPressed();
-        skipStart()
+    override fun onFinish() {
+        super.onFinish()
+
+        setState()
     }
 
     private fun skipStart() {
+        setState()
+        finish()
+    }
+
+    private fun setState() {
         getSharedPreferences("quickSettings", Context.MODE_PRIVATE).edit().putBoolean("firstStart", false).apply()
 
         val intent = Intent(this@InitActivity, Home::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
-
-        finish()
     }
 
-    override fun onFinishButtonPressed() {
-        skipStart()
+    class CustomSlide : SlideFragment() {
+        override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
+            val view = inflater.inflate(R.layout.intro_csutom_layout, container, false)
+            return view
+        }
+
+        override fun backgroundColor(): Int = R.color.op_blue
+
+        override fun buttonsColor(): Int = R.color.intro_button_color
     }
+
 }

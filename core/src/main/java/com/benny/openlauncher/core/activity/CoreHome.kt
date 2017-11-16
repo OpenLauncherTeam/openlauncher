@@ -309,8 +309,12 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
             var x = dragNDropView.dragLocation.x - CoreHome.itemTouchX + 10.toPx()
             var y = dragNDropView.dragLocation.y - CoreHome.itemTouchY - (46 * itemList.size).toPx()
 
-            if ((x + 200.toPx()) > dragNDropView.width)
+            if ((x + 200.toPx()) > dragNDropView.width) {
+                dragNDropView.setPopupMenuShowDirection(false)
                 x = dragNDropView.dragLocation.x - CoreHome.itemTouchX + desktop.currentPage.cellWidth - 200.toPx().toFloat() - 10.toPx()
+            }else{
+                dragNDropView.setPopupMenuShowDirection(true)
+            }
 
             if (y < 0)
                 y = dragNDropView.dragLocation.y - CoreHome.itemTouchY + desktop.currentPage.cellHeight + 4.toPx()

@@ -23,6 +23,7 @@ import com.benny.openlauncher.core.util.Tool
 import com.benny.openlauncher.core.util.toPx
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
+import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
 
 
 /**
@@ -71,6 +72,9 @@ class DragNDropLayout @JvmOverloads constructor(context: Context, attrs: Attribu
     private var showFolderPreview = false
     private var previewLocation = PointF()
 
+    private val slideInLeftAnimator = SlideInLeftAnimator(AccelerateDecelerateInterpolator())
+    private val slideInRightAnimator = SlideInRightAnimator(AccelerateDecelerateInterpolator())
+
     init {
         paint.isFilterBitmap = true
         paint.color = Color.WHITE
@@ -82,7 +86,7 @@ class DragNDropLayout @JvmOverloads constructor(context: Context, attrs: Attribu
         overlayPopup.alpha = 0f
         overlayPopup.overScrollMode = View.OVER_SCROLL_NEVER
         overlayPopup.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        overlayPopup.itemAnimator = SlideInLeftAnimator(AccelerateDecelerateInterpolator())
+        overlayPopup.itemAnimator = slideInLeftAnimator
         overlayPopup.adapter = overlayPopupAdapter
 
         addView(overlayView, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
@@ -159,7 +163,7 @@ class DragNDropLayout @JvmOverloads constructor(context: Context, attrs: Attribu
 
             if (dragging) {
                 canvas.save()
-                overlayIconScale = Tool.clampFloat(overlayIconScale +  0.05f, 1f, 1.1f)
+                overlayIconScale = Tool.clampFloat(overlayIconScale + 0.05f, 1f, 1.1f)
                 canvas.scale(overlayIconScale, overlayIconScale, x + DragNDropHandler.cachedDragBitmap!!.width / 2, y + DragNDropHandler.cachedDragBitmap!!.height / 2)
 
                 canvas.drawBitmap(
@@ -199,6 +203,13 @@ class DragNDropLayout @JvmOverloads constructor(context: Context, attrs: Attribu
 
         overlayPopupAdapter.add(popupItem)
         overlayPopupAdapter.withOnClickListener(listener)
+    }
+
+
+    fun setPopupMenuShowDirection(left: Boolean) = if (left) {
+        overlayPopup.itemAnimator = slideInLeftAnimator
+    } else {
+        overlayPopup.itemAnimator = slideInRightAnimator
     }
 
     fun hidePopupMenu() {
