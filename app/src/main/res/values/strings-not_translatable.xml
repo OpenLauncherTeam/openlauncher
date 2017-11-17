@@ -2,6 +2,7 @@
 <resources>
     <string name="intro1_title" translatable="false">@string/app_name</string>
     <string name="intro2_title" translatable="false">@string/minibar</string>
+    <string name="truly_launcher" translatable="false">The truly open source launcher that comes with awesome features!</string>
 
 
     <string name="about_team" translatable="false">Open Launcher Team</string>

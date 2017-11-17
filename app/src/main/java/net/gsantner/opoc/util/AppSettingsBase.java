@@ -32,13 +32,13 @@
     }
 
  * Maybe add a singleton for this:
- * Whereas AbstractApp.get() is returning ApplicationContext
+ * Whereas App.get() is returning ApplicationContext
     private AppSettings(Context _context) {
         super(_context);
     }
 
     public static AppSettings get() {
-        return new AppSettings(AbstractApp.get());
+        return new AppSettings(App.get());
     }
  */
 

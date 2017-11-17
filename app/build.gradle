@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion setup.compileSdk
-    buildToolsVersion setup.buildTools
+    compileSdkVersion version_setup_compileSdk
+    buildToolsVersion version_setup_buildTools
 
     defaultConfig {
-        minSdkVersion setup.minSdk
-        targetSdkVersion setup.targetSdk
+        minSdkVersion version_setup_minSdk
+        targetSdkVersion version_setup_targetSdk
 
         flavorDimensions "versionCode"
 
@@ -64,7 +65,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '26.0.2'
+    configurations.all {
+        resolutionStrategy.force "com.android.support:preference-v7:${version_library_appcompat}"
+        resolutionStrategy.force "com.android.support:design:${version_library_appcompat}"
+        resolutionStrategy.force "com.android.support:cardview-v7:${version_library_appcompat}"
+        resolutionStrategy.force "com.android.support:support-v13:${version_library_appcompat}"
+    }
 }
 
 dependencies {
@@ -78,7 +84,7 @@ dependencies {
     }
 
     implementation 'com.github.kizitonwose.colorpreference:support:1.0.4'
-    implementation 'com.github.daniel-stoneuk:material-about-library:1.4.2'
+    implementation 'com.github.daniel-stoneuk:material-about-library:2.2.3-support26.1.0'
     implementation 'com.afollestad.material-dialogs:core:0.9.4.5'
     implementation 'com.balysv:material-ripple:1.0.2'
     implementation 'net.qiujuer.genius:blur:2.0.0'
@@ -86,14 +92,14 @@ dependencies {
     implementation 'agency.tango.android:material-intro-screen:0.0.5'
     implementation 'cat.ereza:customactivityoncrash:1.5.0'
     implementation 'de.psdev.licensesdialog:licensesdialog:1.8.2'
-    implementation 'com.jaredrummler:colorpicker:1.0.0'
+    implementation 'com.jaredrummler:colorpicker:1.0.1'
     implementation 'in.championswimmer:SimpleFingerGestures_Android_Library:1.2'
     // Tools
-    implementation "com.jakewharton:butterknife:${versions.butterknife}"
+    implementation "com.jakewharton:butterknife:${version_library_butterknife}"
     // Android-Apt
-    annotationProcessor "com.jakewharton:butterknife-compiler:${versions.butterknife}"
-    compile project(':core')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    kapt "com.jakewharton:butterknife-compiler:${version_library_butterknife}"
+    implementation project(':core')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$version_plugin_kotlin"
 }
 repositories {
     mavenCentral()

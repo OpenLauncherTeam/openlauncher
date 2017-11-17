@@ -1,33 +1,34 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-ext {
-    setup = [
-            compileSdk: 27,
-            buildTools: "26.0.1",
-            minSdk    : 16,
-            targetSdk : 27,
-    ]
-
-    versions = [
-            supportLib: "27.0.0",
-            butterknife: "8.7.0",
-    ]
-}
-
 buildscript {
-    ext.kotlin_version = '1.1.51'
+    ext.version_setup_compileSdk = 27
+    ext.version_setup_minSdk = 16
+    ext.version_setup_targetSdk = ext.version_setup_compileSdk
+    ext.version_setup_buildTools = "27.0.1" // Specifying optional
+    ext.version_library_appcompat = "27.0.1"
+    ext.version_library_butterknife = "8.8.1"
+    ext.version_plugin_kotlin = "1.1.51"
+
     repositories {
         jcenter()
+        google()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_plugin_kotlin"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
+/*
+configurations.all {
+    resolutionStrategy {
+        force "com.android.support:preference-v7:${version_library_appcompat}"
+    }
+}*/
 
 allprojects {
     repositories {

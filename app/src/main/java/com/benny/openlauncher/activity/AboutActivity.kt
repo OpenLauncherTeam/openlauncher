@@ -1,21 +1,17 @@
 package com.benny.openlauncher.activity
 
 import android.content.Context
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.View
-
 import com.benny.openlauncher.BuildConfig
 import com.benny.openlauncher.R
-import com.benny.openlauncher.util.AppSettings
 import com.danielstone.materialaboutlibrary.ConvenienceBuilder
 import com.danielstone.materialaboutlibrary.MaterialAboutActivity
-import com.danielstone.materialaboutlibrary.model.MaterialAboutActionItem
+import com.danielstone.materialaboutlibrary.items.MaterialAboutActionItem
+import com.danielstone.materialaboutlibrary.items.MaterialAboutTitleItem
 import com.danielstone.materialaboutlibrary.model.MaterialAboutCard
 import com.danielstone.materialaboutlibrary.model.MaterialAboutList
-import com.danielstone.materialaboutlibrary.model.MaterialAboutTitleItem
-
 import de.psdev.licensesdialog.LicensesDialog
 import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20
 import de.psdev.licensesdialog.licenses.MITLicense
@@ -45,6 +41,11 @@ class AboutActivity : MaterialAboutActivity() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme_MaterialAboutActivity)
+        super.onCreate(savedInstanceState)
+    }
+
     override fun getMaterialAboutList(context: Context): MaterialAboutList {
         runOnUiThread {
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -52,19 +53,23 @@ class AboutActivity : MaterialAboutActivity() {
         }
 
         val titleCard = MaterialAboutCard.Builder()
-        titleCard.addItem(MaterialAboutTitleItem(R.string.app_name, R.drawable.ic_launcher))
+        titleCard.addItem(MaterialAboutTitleItem(R.string.app_name, R.string.truly_launcher, R.drawable.ic_launcher))
         titleCard.addItem(MaterialAboutActionItem.Builder()
                 .icon(R.drawable.ic_info_outline_dark_24dp)
                 .text(getString(R.string.version) + " " + BuildConfig.VERSION_NAME)
                 .build())
         titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, resources.getDrawable(R.drawable.ic_github_dark_24dp), "GitHub", false, Uri.parse("https://github.com/OpenLauncherTeam/openlauncher")))
-        titleCard.addItem(MaterialAboutActionItem(getString(R.string.about_libs), null, resources.getDrawable(R.drawable.ic_library_gray_24dp), MaterialAboutActionItem.OnClickListener {
-            LicensesDialog.Builder(this@AboutActivity)
-                    .setNotices(notices)
-                    .setIncludeOwnLicense(true)
-                    .build()
-                    .show()
-        }))
+        titleCard.addItem(MaterialAboutActionItem.Builder()
+                .icon(R.drawable.ic_library_gray_24dp)
+                .text(R.string.about_libs)
+                .setOnClickAction({
+                    LicensesDialog.Builder(this@AboutActivity)
+                            .setNotices(notices)
+                            .setIncludeOwnLicense(true)
+                            .build()
+                            .show()
+                }).build())
+
         titleCard.addItem(ConvenienceBuilder.createRateActionItem(this, resources.getDrawable(R.drawable.ic_thumb_up_dark_24dp), getString(R.string.about_rate), null))
 
         val opTeamCard = MaterialAboutCard.Builder()
@@ -73,19 +78,19 @@ class AboutActivity : MaterialAboutActivity() {
                 .icon(R.drawable.person_bennykok)
                 .text("BennyKok")
                 .subText(getString(R.string.about_credit_text_bennykok))
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("http://bennykok.weebly.com/contact.html")))
+                .setOnClickAction(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("http://bennykok.weebly.com/contact.html")))
                 .build())
         opTeamCard.addItem(MaterialAboutActionItem.Builder()
                 .icon(R.drawable.person_dkanada)
                 .text("dkanada")
                 .subText(getString(R.string.about_credit_text_dkanada))
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/dkanada")))
+                .setOnClickAction(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/dkanada")))
                 .build())
         opTeamCard.addItem(MaterialAboutActionItem.Builder()
                 .icon(R.drawable.person_gsantner)
                 .text("Gregor Santner")
                 .subText(getString(R.string.about_credit_text_gsantner))
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("http://gsantner.net/")))
+                .setOnClickAction(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("http://gsantner.net/")))
                 .build())
 
         val contributorsCard = MaterialAboutCard.Builder()
@@ -94,17 +99,17 @@ class AboutActivity : MaterialAboutActivity() {
                 .icon(R.drawable.person_chris_debrodie)
                 .text("Chris DeBrodie")
                 .subText(R.string.about_credit_text_chris_debrodie)
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://plus.google.com/111923938461696019967")))
+                .setOnClickAction(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://plus.google.com/111923938461696019967")))
                 .build())
         contributorsCard.addItem(MaterialAboutActionItem.Builder()
                 .icon(R.drawable.person_gaukler_faun)
                 .text("Gaukler Faun")
                 .subText(R.string.about_credit_text_gaukler_faun)
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))
+                .setOnClickAction(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/scoute-dich")))
                 .build())
         contributorsCard.addItem(MaterialAboutActionItem.Builder()
                 .text(R.string.about_credit_text_all_contributors)
-                .setOnClickListener(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/OpenLauncherTeam/openlauncher/graphs/contributors")))
+                .setOnClickAction(ConvenienceBuilder.createWebsiteOnClickAction(this, Uri.parse("https://github.com/OpenLauncherTeam/openlauncher/graphs/contributors")))
                 .build())
 
         return MaterialAboutList.Builder()
@@ -115,4 +120,5 @@ class AboutActivity : MaterialAboutActivity() {
     }
 
     override fun getActivityTitle(): CharSequence = getString(R.string.pref_title__about)
+
 }
