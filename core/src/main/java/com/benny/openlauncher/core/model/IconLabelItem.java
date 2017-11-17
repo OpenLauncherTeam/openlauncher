@@ -25,11 +25,10 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     // Data
     public BaseIconProvider iconProvider = null;
+    public View.OnLongClickListener onLongClickListener;
     protected String label = null;
-
     // Others
     protected View.OnClickListener listener;
-    public View.OnLongClickListener onLongClickListener;
     protected View.OnTouchListener onOnTouchListener;
 
     private int forceSize = -1;
@@ -42,8 +41,9 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private int width = -1;
     private boolean bold = false;
     private int textGravity = Gravity.CENTER_VERTICAL;
-    private int maxTextLines = Integer.MAX_VALUE;
+    private int maxTextLines = 1;
     private boolean dontSetOnLongClickListener;
+    private boolean hideLabel = false;
 
     public IconLabelItem(Item item) {
         this.iconProvider = item != null ? item.getIconProvider() : null;
@@ -104,6 +104,11 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
+    public IconLabelItem withDrawablePadding(float drawablePadding) {
+        this.drawablePadding = drawablePadding;
+        return this;
+    }
+
     public IconLabelItem withTextColor(int textColor) {
         this.textColor = textColor;
         return this;
@@ -154,12 +159,16 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
+    public void setHideLabel(boolean hideLabel){
+        this.hideLabel = hideLabel;
+    }
+
     public IconLabelItem withOnLongClickListener(@Nullable View.OnLongClickListener onLongClickListener) {
         this.onLongClickListener = onLongClickListener;
         return this;
     }
 
-    public IconLabelItem withOnLongClickListener(boolean dontSet,@Nullable View.OnLongClickListener onLongClickListener) {
+    public IconLabelItem withOnLongClickListener(boolean dontSet, @Nullable View.OnLongClickListener onLongClickListener) {
         this.dontSetOnLongClickListener = dontSet;
         this.onLongClickListener = onLongClickListener;
         return this;
@@ -167,7 +176,11 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     @Override
     public void setIcon(int resId) {
-        this.iconProvider = Setup.Companion.imageLoader().createIconProvider(resId);
+        this.iconProvider = Setup.imageLoader().createIconProvider(resId);
+    }
+
+    public void setIconGravity(int gravity){
+        this.iconGravity = gravity;
     }
 
     @Override
@@ -196,18 +209,25 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
             holder.itemView.getLayoutParams().width = RecyclerView.LayoutParams.MATCH_PARENT;
         if (width != -1)
             holder.itemView.getLayoutParams().width = width;
-        holder.textView.setMaxLines(maxTextLines);
+        holder.textView.setMaxLines(1);
         if (getLabel() != null)
             holder.textView.setText(maxTextLines != 0 ? getLabel() : "");
         holder.textView.setGravity(gravity);
-        holder.textView.setTypeface(typeface);
-        holder.textView.setCompoundDrawablePadding((int) drawablePadding);
         holder.textView.setGravity(textGravity);
+        holder.textView.setCompoundDrawablePadding((int) drawablePadding);
+
+        if (hideLabel) {
+            holder.textView.setText(null);
+            iconProvider.loadIconIntoTextView(holder.textView, forceSize, Gravity.TOP);
+        }else {
+            iconProvider.loadIconIntoTextView(holder.textView, forceSize, iconGravity);
+        }
+
+        holder.textView.setTypeface(typeface);
         if (bold)
             holder.textView.setTypeface(Typeface.DEFAULT_BOLD);
 
-        Setup.logger().log(this, Log.INFO, null, "IconLabelItem - forceSize: %d", forceSize);
-        iconProvider.loadIconIntoTextView(holder.textView, forceSize, iconGravity);
+        //Setup.logger().log(this, Log.INFO, null, "IconLabelItem - forceSize: %d", forceSize);
 
         holder.textView.setTextColor(textColor);
         if (listener != null)

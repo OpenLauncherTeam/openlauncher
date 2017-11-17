@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.CoreHome;
+import com.benny.openlauncher.core.drawable.LauncherActionDrawable;
 import com.benny.openlauncher.core.interfaces.AbstractApp;
 import com.benny.openlauncher.core.interfaces.IconDrawer;
 import com.benny.openlauncher.core.interfaces.IconProvider;
@@ -372,7 +373,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder setActionItem(Item item) {
             view.setLabel(item.getLabel());
-            view.setIconProvider(Setup.Companion.imageLoader().createIconProvider(R.drawable.ic_app_drawer_24dp));
+            view.setIconProvider(Setup.imageLoader().createIconProvider(new LauncherActionDrawable(R.drawable.ic_apps_white_24dp)));
             switch (item.getActionValue()) {
                 case Definitions.ACTION_LAUNCHER:
                     view.setOnClickListener(new OnClickListener() {

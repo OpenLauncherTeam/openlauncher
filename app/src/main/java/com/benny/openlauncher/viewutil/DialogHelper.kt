@@ -22,12 +22,11 @@ import com.benny.openlauncher.util.copy
 import com.benny.openlauncher.util.getStartAppIntent
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
 
-import net.qiujuer.genius.blur.StackBlur
-
 import java.io.File
 import java.util.ArrayList
 
 object DialogHelper {
+
     fun editItemDialog(title: String, defaultText: String, c: Context, listener: OnItemEditListener) {
         val builder = MaterialDialog.Builder(c)
         builder.title(title)
@@ -134,7 +133,8 @@ object DialogHelper {
                             context.startActivity(Intent.createChooser(intent, context.getString(R.string.wallpaper_pick)))
                         }
                         1 -> try {
-                            WallpaperManager.getInstance(context).setBitmap(StackBlur.blur(Tool.drawableToBitmap(context.wallpaper), 10, false))
+                            Tool.toast(context, "This is no longer supported, wait for future updates.")
+                            //WallpaperManager.getInstance(context).setBitmap(StackBlur.blur(Tool.drawableToBitmap(context.wallpaper), 10, false))
                         } catch (e: Exception) {
                             Tool.toast(context, context.getString(R.string.wallpaper_unable_to_blur))
                         }

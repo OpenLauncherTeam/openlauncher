@@ -22,6 +22,7 @@ import com.benny.openlauncher.core.model.IconLabelItem
 import com.benny.openlauncher.core.model.Item
 import com.benny.openlauncher.core.util.BaseIconProvider
 import com.benny.openlauncher.core.util.Tool
+import com.benny.openlauncher.core.util.toPx
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
 
 import java.text.Collator
@@ -89,6 +90,7 @@ class AppManager(val context: Context) : Setup.AppLoader<AppManager.App> {
                 .build()
 
         fastItemAdapter.add(IconLabelItem(activity, R.drawable.ic_launcher, R.string.label_default, -1)
+                .withDrawablePadding(8.toPx().toFloat())
                 .withIconGravity(Gravity.START)
                 .withOnClickListener {
                     recreateAfterGettingApps = true

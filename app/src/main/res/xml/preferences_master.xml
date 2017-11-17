@@ -41,6 +41,11 @@
     <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__others">
 
         <android.support.v7.preference.Preference
+            android:icon="@drawable/ic_bug_report_dark_24dp"
+            android:key="@string/pref_key__cat_debug"
+            android:title="@string/debug" />
+
+        <android.support.v7.preference.Preference
             android:icon="@drawable/ic_more_horiz_black_24dp"
             android:key="@string/pref_key__cat_miscellaneous"
             android:title="@string/pref_title__miscellaneous" />

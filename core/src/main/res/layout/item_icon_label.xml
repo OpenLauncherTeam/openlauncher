@@ -11,6 +11,7 @@
     android:paddingRight="10dp"
     android:paddingTop="10dp"
     android:textAllCaps="false"
+    android:maxLines="1"
     android:ellipsize="end">
 
 </TextView>

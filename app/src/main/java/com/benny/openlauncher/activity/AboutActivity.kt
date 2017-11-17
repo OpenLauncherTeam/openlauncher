@@ -2,6 +2,7 @@ package com.benny.openlauncher.activity
 
 import android.content.Context
 import android.content.res.Resources
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.benny.openlauncher.BuildConfig
@@ -9,6 +10,7 @@ import com.benny.openlauncher.R
 import com.danielstone.materialaboutlibrary.ConvenienceBuilder
 import com.danielstone.materialaboutlibrary.MaterialAboutActivity
 import com.danielstone.materialaboutlibrary.items.MaterialAboutActionItem
+import com.danielstone.materialaboutlibrary.items.MaterialAboutItemOnClickAction
 import com.danielstone.materialaboutlibrary.items.MaterialAboutTitleItem
 import com.danielstone.materialaboutlibrary.model.MaterialAboutCard
 import com.danielstone.materialaboutlibrary.model.MaterialAboutList
@@ -57,19 +59,19 @@ class AboutActivity : MaterialAboutActivity() {
         titleCard.addItem(MaterialAboutActionItem.Builder()
                 .icon(R.drawable.ic_info_outline_dark_24dp)
                 .text(getString(R.string.version) + " " + BuildConfig.VERSION_NAME)
+                .setOnClickAction {
+                    getSharedPreferences("quickSettings", Context.MODE_PRIVATE).edit().putBoolean("firstStart", true).apply()
+                    startActivity(Intent(this, InitActivity::class.java))
+                }
                 .build())
         titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, resources.getDrawable(R.drawable.ic_github_dark_24dp), "GitHub", false, Uri.parse("https://github.com/OpenLauncherTeam/openlauncher")))
-        titleCard.addItem(MaterialAboutActionItem.Builder()
-                .icon(R.drawable.ic_library_gray_24dp)
-                .text(R.string.about_libs)
-                .setOnClickAction({
-                    LicensesDialog.Builder(this@AboutActivity)
-                            .setNotices(notices)
-                            .setIncludeOwnLicense(true)
-                            .build()
-                            .show()
-                }).build())
-
+        titleCard.addItem(MaterialAboutActionItem(getString(R.string.about_libs), null, resources.getDrawable(R.drawable.ic_android_dark_24dp), MaterialAboutItemOnClickAction {
+            LicensesDialog.Builder(this@AboutActivity)
+                    .setNotices(notices)
+                    .setIncludeOwnLicense(true)
+                    .build()
+                    .show()
+        }))
         titleCard.addItem(ConvenienceBuilder.createRateActionItem(this, resources.getDrawable(R.drawable.ic_thumb_up_dark_24dp), getString(R.string.about_rate), null))
 
         val opTeamCard = MaterialAboutCard.Builder()

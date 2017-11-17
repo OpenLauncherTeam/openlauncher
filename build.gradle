@@ -2,7 +2,7 @@
 
 buildscript {
     ext.version_setup_compileSdk = 27
-    ext.version_setup_minSdk = 16
+    ext.version_setup_minSdk = 17
     ext.version_setup_targetSdk = ext.version_setup_compileSdk
     ext.version_setup_buildTools = "27.0.1" // Specifying optional
     ext.version_library_appcompat = "27.0.1"

@@ -87,7 +87,6 @@ dependencies {
     implementation 'com.github.daniel-stoneuk:material-about-library:2.2.3-support26.1.0'
     implementation 'com.afollestad.material-dialogs:core:0.9.4.5'
     implementation 'com.balysv:material-ripple:1.0.2'
-    implementation 'net.qiujuer.genius:blur:2.0.0'
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     implementation 'agency.tango.android:material-intro-screen:0.0.5'
     implementation 'cat.ereza:customactivityoncrash:1.5.0'

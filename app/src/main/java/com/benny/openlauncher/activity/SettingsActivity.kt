@@ -10,9 +10,12 @@ import android.support.v4.app.ActivityCompat
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceCategory
 import android.support.v7.preference.PreferenceFragmentCompat
+import com.afollestad.materialdialogs.DialogAction
+import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.R
 import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.core.util.DatabaseHelper
+import com.benny.openlauncher.core.util.Tool
 import com.benny.openlauncher.core.widget.AppDrawerController
 import com.benny.openlauncher.util.AppManager
 import com.benny.openlauncher.util.AppSettings
@@ -30,10 +33,10 @@ class SettingsActivity : ThemeActivity() {
         setContentView(R.layout.activity_settings)
         setSupportActionBar(toolbar)
         appSettings = AppSettings.get()
-        toolbar!!.setTitle(R.string.settings)
-        toolbar!!.navigationIcon = resources.getDrawable(R.drawable.ic_arrow_back_white_24px)
-        toolbar!!.setNavigationOnClickListener { this@SettingsActivity.onBackPressed() }
-        toolbar!!.setBackgroundColor(AppSettings.get().primaryColor)
+        toolbar.setTitle(R.string.settings)
+        toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_arrow_back_white_24px)
+        toolbar.setNavigationOnClickListener { this@SettingsActivity.onBackPressed() }
+        toolbar.setBackgroundColor(AppSettings.get().primaryColor)
 
         showFragment(SettingsFragmentMaster.TAG, false)
     }
@@ -61,6 +64,10 @@ class SettingsActivity : ThemeActivity() {
                 SettingsFragmentIcons.TAG -> {
                     fragment = SettingsFragmentIcons()
                     toolbar.setTitle(R.string.pref_title__icons)
+                }
+                SettingsFragmentDebug.TAG -> {
+                    fragment = SettingsFragmentDebug()
+                    toolbar.setTitle(R.string.debug)
                 }
                 SettingsFragmentMiscellaneous.TAG -> {
                     fragment = SettingsFragmentMiscellaneous()
@@ -115,6 +122,9 @@ class SettingsActivity : ThemeActivity() {
                     return true
                 } else if (settings.isKeyEqual(key, R.string.pref_key__cat_icons)) {
                     (activity as SettingsActivity).showFragment(SettingsFragmentIcons.TAG, true)
+                    return true
+                }else if (settings.isKeyEqual(key, R.string.pref_key__cat_debug)) {
+                    (activity as SettingsActivity).showFragment(SettingsFragmentDebug.TAG, true)
                     return true
                 } else if (settings.isKeyEqual(key, R.string.pref_key__cat_miscellaneous)) {
                     (activity as SettingsActivity).showFragment(SettingsFragmentMiscellaneous.TAG, true)
@@ -364,6 +374,58 @@ class SettingsActivity : ThemeActivity() {
         }
     }
 
+    class SettingsFragmentDebug : BasePreferenceFragment() {
+
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            preferenceManager.sharedPreferencesName = "app"
+            addPreferencesFromResource(R.xml.preference_debug)
+        }
+
+        override fun onPreferenceTreeClick(preference: Preference): Boolean {
+            if (isAdded && preference.hasKey()) {
+                val key = preference.key
+
+                if (key == getString(R.string.pref_key__clear_database)) {
+                    DialogHelper.alertDialog(context!!,"Clear user data","Are you sure, all your shortcuts will be removed.", MaterialDialog.SingleButtonCallback { dialog, which ->
+                        if (Home.launcher != null)
+                            Home.launcher?.recreate()
+                        (CoreHome.db as DatabaseHelper).onUpgrade((CoreHome.db as DatabaseHelper).writableDatabase, 1, 1)
+                        activity!!.finish()
+                    })
+                    return true
+                }
+
+                if (key == getString(R.string.pref_key__restart)) {
+                    if (Home.launcher != null)
+                        Home.launcher?.recreate()
+                    activity!!.finish()
+                    return true
+                }
+            }
+            return super.onPreferenceTreeClick(preference)
+        }
+
+        override fun onPause() {
+            appSettings.unregisterPreferenceChangedListener(this)
+            super.onPause()
+        }
+
+        override fun onResume() {
+            appSettings.registerPreferenceChangedListener(this)
+            super.onResume()
+        }
+
+        override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+            checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key)
+        }
+
+        companion object {
+            val TAG = "com.benny.openlauncher.settings.SettingsFragmentDebug"
+
+            private val requireRestartPreferenceIds = intArrayOf(R.string.pref_title__clear_database)
+        }
+    }
+
     class SettingsFragmentMiscellaneous : BasePreferenceFragment() {
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -373,7 +435,7 @@ class SettingsActivity : ThemeActivity() {
             if (resources.getBoolean(R.bool.isTablet)) {
                 val c = findPreference(getString(R.string.pref_key__cat_miscellaneous)) as PreferenceCategory
                 val p = c.findPreference(getString(R.string.pref_key__desktop_rotate))
-                c.removePreference(p)
+                p.parent?.removePreference(p)
             }
         }
 
@@ -388,21 +450,6 @@ class SettingsActivity : ThemeActivity() {
                     } else {
                         ActivityCompat.requestPermissions(Home.launcher!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), CoreHome.REQUEST_PERMISSION_STORAGE)
                     }
-                }
-
-                if (key == getString(R.string.pref_key__clear_database)) {
-                    if (Home.launcher != null)
-                        Home.launcher?.recreate()
-                    (CoreHome.db as DatabaseHelper).onUpgrade((CoreHome.db as DatabaseHelper).writableDatabase, 1, 1)
-                    getActivity()!!.finish()
-                    return true
-                }
-
-                if (key == getString(R.string.pref_key__restart)) {
-                    if (Home.launcher != null)
-                        Home.launcher?.recreate()
-                    getActivity()!!.finish()
-                    return true
                 }
             }
             return super.onPreferenceTreeClick(preference)
@@ -425,7 +472,7 @@ class SettingsActivity : ThemeActivity() {
         companion object {
             val TAG = "com.benny.openlauncher.settings.SettingsFragmentMiscellaneous"
 
-            private val requireRestartPreferenceIds = intArrayOf(R.string.pref_summary__backup, R.string.pref_title__clear_database, R.string.pref_summary__theme)
+            private val requireRestartPreferenceIds = intArrayOf(R.string.pref_summary__backup, R.string.pref_summary__theme)
         }
     }
 

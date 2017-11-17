@@ -336,9 +336,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
         //desktop's drag event
         dragNDropView.registerDropTarget(object : DragNDropLayout.DropTargetListener(desktop) {
             override fun onStart(action: DragAction.Action, location: PointF, isInside: Boolean): Boolean {
-                if (isInside) {
                     showItemPopup()
-                }
                 return true
             }
 
@@ -399,7 +397,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
                 val ok = (action != DragAction.Action.WIDGET)
 
                 if (ok && isInside) {
-                    showItemPopup()
+                    //showItemPopup()
                 }
 
                 return ok
@@ -974,7 +972,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
                 if (!appItemView!!.showLabel) {
                     cy -= Tool.dp2px(14, this) / 2
                 }
-                rad = (appItemView.iconSize / 2 - Tool.dp2px(4, view.context)).toInt()
+                rad = (appItemView.iconSize / 2 - 4.toPx()).toInt()
             }
             cx -= (appDrawerController!!.drawer.layoutParams as ViewGroup.MarginLayoutParams).leftMargin
             cy -= (appDrawerController!!.drawer.layoutParams as ViewGroup.MarginLayoutParams).topMargin

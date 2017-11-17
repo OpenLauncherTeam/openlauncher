@@ -21,6 +21,7 @@ import com.mikepenz.fastadapter_extensions.drag.ItemTouchCallback
 import com.mikepenz.fastadapter_extensions.drag.SimpleDragCallback
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_minibar_edit.*
+import kotlinx.android.synthetic.main.toolbar.*
 import java.util.*
 
 class MinibarEditActivity : ThemeActivity(), ItemTouchCallback {
@@ -31,8 +32,9 @@ class MinibarEditActivity : ThemeActivity(), ItemTouchCallback {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_minibar_edit)
-        ButterKnife.bind(this)
         setSupportActionBar(toolbar)
+        toolbar.setBackgroundColor(AppSettings.get().primaryColor)
+
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         setTitle(R.string.minibar)

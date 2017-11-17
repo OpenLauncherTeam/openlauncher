@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout
 import android.util.Log
 import android.view.DragEvent
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash
 import com.afollestad.materialdialogs.MaterialDialog
@@ -35,6 +36,7 @@ import com.benny.openlauncher.util.AppSettings
 import com.benny.openlauncher.util.LauncherAction
 import com.benny.openlauncher.viewutil.DialogHelper
 import com.benny.openlauncher.viewutil.IconListAdapter
+import eightbitlab.com.blurview.RenderScriptBlur
 import kotlinx.android.synthetic.main.activity_home.*
 import net.gsantner.opoc.util.ContextUtils
 import java.util.*
@@ -257,18 +259,13 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
             override fun showEditDialog(context: Context, item: Item, listener: DialogListener.OnEditDialogListener) {
                 DialogHelper.editItemDialog("Edit Item", item.label, context, object : DialogHelper.OnItemEditListener {
                     override fun itemLabel(label: String) {
-                        item.label = label
-                        db.saveItem(item)
-
-                        getDesktop().removeItem(getDesktop().currentPage.coordinateToChildView(Point(item.x, item.y))!!)
-                        getDesktop().addItemToCell(item, item.x, item.y)
+                        listener.onRename(label)
                     }
-
                 })
             }
 
             override fun showDeletePackageDialog(context: Context, item: Item) {
-                DialogHelper.deletePackageDialog(context,item)
+                DialogHelper.deletePackageDialog(context, item)
             }
         }
         val logger = object : Setup.Logger {

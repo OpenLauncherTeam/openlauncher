@@ -82,6 +82,7 @@
     <string name="pref_key__cat_app_drawer" translatable="false">pref_key__cat_app_drawer</string>
     <string name="pref_key__cat_gestures" translatable="false">pref_key__cat_gestures</string>
     <string name="pref_key__cat_icons" translatable="false">pref_key__cat_icons</string>
+    <string name="pref_key__cat_debug" translatable="false">pref_key__cat_debug</string>
     <string name="pref_key__cat_miscellaneous" translatable="false">pref_key__cat_miscellaneous</string>
     <string name="pref_key__cat_about" translatable="false">pref_key__cat_about</string>
 

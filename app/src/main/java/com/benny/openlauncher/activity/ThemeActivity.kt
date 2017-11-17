@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 
 import com.benny.openlauncher.R
 import com.benny.openlauncher.util.AppSettings
+import kotlinx.android.synthetic.main.toolbar.*
 
 abstract class ThemeActivity : AppCompatActivity() {
 
