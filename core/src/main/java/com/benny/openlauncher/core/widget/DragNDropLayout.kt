@@ -350,16 +350,15 @@ class DragNDropLayout @JvmOverloads constructor(context: Context, attrs: Attribu
     private fun handleDragFinished() {
         dragging = false
         for (dropTarget in registeredDropTargetEntries) {
-            if (dropTarget.value.shouldIgnore) {
-                dropTarget.key.onEnd()
+            if (dropTarget.value.shouldIgnore)
                 continue
-            }
 
             if (isViewContains(dropTarget.key.view, dragLocation.x.toInt(), dragLocation.y.toInt())) {
                 convertPoint(dropTarget.key.view)
                 dropTarget.key.onDrop(dragAction!!, dragLocationConverted, dragItem!!)
             }
-
+        }
+        for (dropTarget in registeredDropTargetEntries) {
             dropTarget.key.onEnd()
         }
         cancelFolderPreview()
