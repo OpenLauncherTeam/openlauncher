@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+if (enable_plugin_kotlin) {
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
+    apply plugin: 'kotlin-kapt'
+}
 
 android {
     compileSdkVersion version_setup_compileSdk
@@ -19,6 +22,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -26,6 +30,11 @@ android {
         }
     }
 
+    sourceSets {
+        if (enable_plugin_kotlin) {
+            main.java.srcDirs += 'src/main/kotlin'
+        }
+    }
 }
 
 dependencies {
@@ -55,7 +64,9 @@ dependencies {
         transitive = true
     }
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$version_plugin_kotlin"
+    if (enable_plugin_kotlin) {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$version_plugin_kotlin"
+    }
 }
 repositories {
     mavenCentral()

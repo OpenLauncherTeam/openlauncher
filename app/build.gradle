@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+if (enable_plugin_kotlin) {
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
+    apply plugin: 'kotlin-kapt'
+}
 
 android {
     compileSdkVersion version_setup_compileSdk
@@ -21,7 +23,8 @@ android {
 
         buildConfigField "boolean", "IS_TEST_BUILD", "false"
         buildConfigField "boolean", "IS_GPLAY_BUILD", "false"
-        buildConfigField("String[]", "APPLICATION_LANGUAGES", '{' + getUsedAndroidLanguages().collect {"\"${it}\""}.join(",")  + '}')
+        buildConfigField "String[]", "APPLICATION_LANGUAGES", "${getUsedAndroidLanguages()}"
+        buildConfigField "String", "GITHASH", "\"${getGitHash()}\""
         multiDexEnabled false
     }
 
@@ -65,6 +68,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        if (enable_plugin_kotlin) {
+            main.java.srcDirs += 'src/main/kotlin'
+        }
+    }
+
     configurations.all {
         resolutionStrategy.force "com.android.support:preference-v7:${version_library_appcompat}"
         resolutionStrategy.force "com.android.support:design:${version_library_appcompat}"
@@ -74,6 +84,8 @@ android {
 }
 
 dependencies {
+    implementation project(':core')
+
     // UI Libs
     implementation 'com.mikepenz:fastadapter:3.0.0@aar'
     implementation 'com.mikepenz:fastadapter-commons:3.0.0@aar'
@@ -93,31 +105,24 @@ dependencies {
     implementation 'de.psdev.licensesdialog:licensesdialog:1.8.2'
     implementation 'com.jaredrummler:colorpicker:1.0.1'
     implementation 'in.championswimmer:SimpleFingerGestures_Android_Library:1.2'
+
     // Tools
     implementation "com.jakewharton:butterknife:${version_library_butterknife}"
-    // Android-Apt
-    kapt "com.jakewharton:butterknife-compiler:${version_library_butterknife}"
-    implementation project(':core')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$version_plugin_kotlin"
+    if (enable_plugin_kotlin) {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$version_plugin_kotlin"
+    }
+
+    // Processors
+    def anpros = ["com.jakewharton:butterknife-compiler:${version_library_butterknife}"]
+    for (anpro in anpros) {
+        if (enable_plugin_kotlin) {
+            kapt anpro
+        } else {
+            annotationProcessor anpro
+        }
+    }
+
 }
 repositories {
     mavenCentral()
 }
-
-@SuppressWarnings(["UnnecessaryQualifiedReference", "SpellCheckingInspection"])
-static String[] getUsedAndroidLanguages() {
-    Set<String> langs = new HashSet<>()
-    new File('.').eachFileRecurse(groovy.io.FileType.DIRECTORIES) {
-        final foldername = it.name
-        if (foldername.startsWith('values-') && !it.canonicalPath.contains("build" + File.separator + "intermediates")) {
-            new File(it.toString()).eachFileRecurse(groovy.io.FileType.FILES) {
-                if (it.name.toLowerCase().endsWith(".xml") && it.getCanonicalFile().getText('UTF-8').contains("<string")) {
-                    langs.add(foldername.replace("values-", ""))
-
-                }
-            }
-        }
-    }
-    return langs.toArray(new String[langs.size()])
-}
-
