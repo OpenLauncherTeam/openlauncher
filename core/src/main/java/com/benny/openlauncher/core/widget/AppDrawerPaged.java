@@ -116,7 +116,7 @@ public class AppDrawerPaged extends SmoothViewPager {
     public void withHome(CoreHome home, PagerIndicator appDrawerIndicator) {
         this.home = home;
         this.appDrawerIndicator = appDrawerIndicator;
-        appDrawerIndicator.setMode(PagerIndicator.Mode.NORMAL);
+        appDrawerIndicator.setMode(PagerIndicator.Mode.INSTANCE.getNORMAL());
         if (getAdapter() != null)
             appDrawerIndicator.setViewPager(AppDrawerPaged.this);
     }

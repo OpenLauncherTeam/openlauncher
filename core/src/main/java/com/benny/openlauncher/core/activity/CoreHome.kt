@@ -26,7 +26,6 @@ import com.benny.openlauncher.core.model.PopupIconLabelItem
 import com.benny.openlauncher.core.util.*
 import com.benny.openlauncher.core.viewutil.WidgetHost
 import com.benny.openlauncher.core.widget.*
-import com.mikepenz.fastadapter.IAdapter
 import com.mikepenz.fastadapter.listeners.OnClickListener
 import kotlinx.android.synthetic.main.view_drawer_indicator.*
 import kotlinx.android.synthetic.main.view_home.*
@@ -142,10 +141,10 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
     fun onRemoveItem(item: Item) {
         when (item.locationInLauncher) {
             Item.LOCATION_DESKTOP -> {
-                desktop.removeItem(desktop.currentPage.coordinateToChildView(Point(item.x, item.y))!!)
+                desktop.removeItem(desktop.currentPage.coordinateToChildView(Point(item.x, item.y))!!,true)
             }
             Item.LOCATION_DOCK -> {
-                dock.removeItem(dock.coordinateToChildView(Point(item.x, item.y))!!)
+                dock.removeItem(dock.coordinateToChildView(Point(item.x, item.y))!!,true)
             }
         }
 
@@ -169,11 +168,11 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
 
             when (item.locationInLauncher) {
                 Item.LOCATION_DESKTOP -> {
-                    desktop.removeItem(desktop.currentPage.coordinateToChildView(Point(item.x, item.y))!!)
+                    desktop.removeItem(desktop.currentPage.coordinateToChildView(Point(item.x, item.y))!!,false)
                     desktop.addItemToCell(item, item.x, item.y)
                 }
                 Item.LOCATION_DOCK -> {
-                    dock.removeItem(dock.coordinateToChildView(Point(item.x, item.y))!!)
+                    dock.removeItem(dock.coordinateToChildView(Point(item.x, item.y))!!,false)
                     dock.addItemToCell(item, item.x, item.y)
                 }
             }
@@ -312,7 +311,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
             if ((x + 200.toPx()) > dragNDropView.width) {
                 dragNDropView.setPopupMenuShowDirection(false)
                 x = dragNDropView.dragLocation.x - CoreHome.itemTouchX + desktop.currentPage.cellWidth - 200.toPx().toFloat() - 10.toPx()
-            }else{
+            } else {
                 dragNDropView.setPopupMenuShowDirection(true)
             }
 
@@ -336,6 +335,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
         //desktop's drag event
         dragNDropView.registerDropTarget(object : DragNDropLayout.DropTargetListener(desktop) {
             override fun onStart(action: DragAction.Action, location: PointF, isInside: Boolean): Boolean {
+                if (action != DragAction.Action.SEARCH_RESULT)
                     showItemPopup()
                 return true
             }

@@ -97,7 +97,7 @@ public class DragOptionView extends CardView {
                                 CoreHome.Companion.getDb().saveItem(item);
 
                                 CoreHome.Companion.getLauncher().getDesktop().addItemToCell(item, item.getX(), item.getY());
-                                CoreHome.Companion.getLauncher().getDesktop().removeItem(CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().coordinateToChildView(new Point(item.getX(), item.getY())));
+                                CoreHome.Companion.getLauncher().getDesktop().removeItem(CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().coordinateToChildView(new Point(item.getX(), item.getY())),false);
                             }
                         });
                         return true;

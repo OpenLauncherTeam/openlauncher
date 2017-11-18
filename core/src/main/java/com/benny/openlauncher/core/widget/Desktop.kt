@@ -4,14 +4,10 @@ import `in`.championswimmer.sfg.lib.SimpleFingerGestures
 import android.app.WallpaperManager
 import android.content.Context
 import android.graphics.Point
-import android.graphics.PointF
 import android.os.Build
 import android.util.AttributeSet
 import android.view.*
-import android.view.View.OnDragListener
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.Toast
-import com.benny.openlauncher.core.R
 import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.core.manager.Setup
 import com.benny.openlauncher.core.model.Item
@@ -276,19 +272,49 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
 
         val itemView = ItemViewFactory.getItemView(context, item, Setup.appSettings().isDesktopShowLabel, this, Setup.appSettings().desktopIconSize)
 
-        if (itemView != null) {
+        return if (itemView != null) {
             currentPage.addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY)
-            return true
+            true
         } else {
-            return false
+            false
         }
     }
 
-    override fun removeItem(view: View) {
-        view.animate().setDuration(100L).scaleX(0f).scaleY(0f).withEndAction({
+    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+
+        when (ev!!.actionMasked){
+            MotionEvent.ACTION_DOWN -> {
+                CoreHome.launcher?.getDesktopIndicator()?.alphaShow = true
+                CoreHome.launcher?.getDesktopIndicator()?.alphaFade = false
+            }
+        }
+
+        return super.onInterceptTouchEvent(ev)
+    }
+
+    override fun onTouchEvent(ev: MotionEvent?): Boolean {
+
+        when (ev!!.actionMasked){
+            MotionEvent.ACTION_DOWN -> {
+                CoreHome.launcher?.getDesktopIndicator()?.alphaShow = true
+                CoreHome.launcher?.getDesktopIndicator()?.alphaFade = false
+            }
+        }
+
+        return super.onTouchEvent(ev)
+    }
+
+    override fun removeItem(view: View, animate: Boolean) {
+        Tool.print("Start Removing a view from Desktop")
+        if (animate)
+            view.animate().setDuration(100L).scaleX(0f).scaleY(0f).withEndAction({
+                Tool.print("Ok Removing a view from Desktop")
+                if (view.parent == currentPage)
+                    currentPage.removeView(view)
+            })
+        else
             if (view.parent == currentPage)
                 currentPage.removeView(view)
-        })
     }
 
     override fun onPageScrolled(position: Int, offset: Float, offsetPixels: Int) {

@@ -55,6 +55,7 @@ abstract class Setup<A : AbstractApp> {
         val desktop: List<List<Item>>
 
         val dock: List<Item>
+
         fun saveItem(item: Item)
 
         fun saveItem(item: Item, state: Definitions.ItemState)

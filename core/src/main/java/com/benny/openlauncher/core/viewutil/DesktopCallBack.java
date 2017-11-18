@@ -12,5 +12,5 @@ public interface DesktopCallBack<V extends View> extends RevertibleAction {
 
     boolean addItemToCell(Item item, int x, int y);
 
-    void removeItem(V view);
+    void removeItem(V view, boolean animate);
 }

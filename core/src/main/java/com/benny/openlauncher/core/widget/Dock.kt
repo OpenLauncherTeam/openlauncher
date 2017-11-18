@@ -4,13 +4,10 @@ import android.content.Context
 import android.graphics.Point
 import android.os.Build
 import android.util.AttributeSet
-import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowInsets
-import android.widget.Toast
 
-import com.benny.openlauncher.core.R
 import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.core.manager.Setup
 import com.benny.openlauncher.core.model.Item
@@ -208,11 +205,15 @@ class Dock @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) : C
         }
     }
 
-    override fun removeItem(view: View) {
-        view.animate().setDuration(100L).scaleX(0f).scaleY(0f).withEndAction({
+    override fun removeItem(view: View, animate: Boolean) {
+        if (animate)
+            view.animate().setDuration(100L).scaleX(0f).scaleY(0f).withEndAction({
+                if (view.parent == this)
+                    removeView(view)
+            })
+        else
             if (view.parent == this)
                 removeView(view)
-        })
     }
 
     companion object {

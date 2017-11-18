@@ -332,7 +332,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     @Override
     public int getDesktopIndicatorMode() {
-        return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.NORMAL);
+        return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.INSTANCE.getNORMAL());
     }
 
     @Override
