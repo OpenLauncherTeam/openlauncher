@@ -83,6 +83,8 @@ public class AppDrawerPaged extends SmoothViewPager {
     private void init(Context c) {
         if (isInEditMode()) return;
 
+        setOverScrollMode(OVER_SCROLL_NEVER);
+
         boolean mPortrait = c.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 
         if (mPortrait) {

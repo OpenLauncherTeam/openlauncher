@@ -37,12 +37,12 @@ class PagerIndicator : View, SmoothViewPager.OnPageChangeListener {
 
     private var myX = 0f
 
-    var prePageCount: Int = 0
+    private var prePageCount: Int = 0
 
     private var scrollOffset = 0f
     private var scrollPagePosition = 0
-    var alphaFade = false
-    var alphaShow = false
+    private var alphaFade = false
+    private var alphaShow = false
 
     constructor(context: Context) : super(context)
 
@@ -78,12 +78,12 @@ class PagerIndicator : View, SmoothViewPager.OnPageChangeListener {
     }
 
     fun setFillPaint() {
-        dotPaint!!.style = Paint.Style.FILL
+        dotPaint.style = Paint.Style.FILL
         invalidate()
     }
 
     fun setColor(c: Int) {
-        dotPaint!!.color = c
+        dotPaint.color = c
         invalidate()
     }
 
@@ -119,12 +119,27 @@ class PagerIndicator : View, SmoothViewPager.OnPageChangeListener {
         invalidate()
     }
 
-    override fun onPageSelected(position: Int) {
-        alphaFade = true
-        alphaShow = false
+    override fun onPageSelected(position: Int) {}
+
+    fun showNow() {
+        removeCallbacks(delayShow)
+        alphaShow = true
+        alphaFade = false
+        invalidate()
     }
 
-    var mCurrentPagerState : Int = -1
+    private val delayShow = Runnable {
+        alphaFade = true
+        alphaShow = false
+        invalidate()
+    }
+
+    fun hideDelay() {
+        postDelayed(delayShow, 500)
+    }
+
+    var mCurrentPagerState: Int = -1
+
     override fun onPageScrollStateChanged(state: Int) {
         mCurrentPagerState = state
     }
@@ -178,9 +193,9 @@ class PagerIndicator : View, SmoothViewPager.OnPageChangeListener {
             }
             ARROW -> if (pager != null) {
                 arrowPath!!.reset()
-                arrowPath!!.moveTo(width / 2 - dotSize * 1.5f, height.toFloat() - dotSize / 3)
-                arrowPath!!.lineTo((width / 2).toFloat(), pad)
-                arrowPath!!.lineTo(width / 2 + dotSize * 1.5f, height.toFloat() - dotSize / 3)
+                arrowPath!!.moveTo(width / 2 - dotSize * 1.5f, height.toFloat() - dotSize / 3 - pad / 2)
+                arrowPath!!.lineTo((width / 2).toFloat(), pad / 2)
+                arrowPath!!.lineTo(width / 2 + dotSize * 1.5f, height.toFloat() - dotSize / 3 - pad / 2)
 
                 canvas.drawPath(arrowPath!!, arrowPaint)
 

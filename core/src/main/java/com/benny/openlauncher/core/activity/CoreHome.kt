@@ -381,6 +381,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
             }
 
             override fun onEnd() {
+                CoreHome.launcher?.getDesktopIndicator()?.hideDelay()
                 for (page in desktop.pages)
                     page.clearCachedOutlineBitmap()
             }
@@ -609,6 +610,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
     override fun onFinishDesktopEdit() {
         Tool.invisibleViews(100, 20, desktopEditOptionPanel)
 
+        desktopIndicator.hideDelay()
         showDesktopIndicator()
         updateDock(true)
         updateSearchBar(true)

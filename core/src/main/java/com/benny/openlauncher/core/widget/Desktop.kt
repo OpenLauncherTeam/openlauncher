@@ -284,8 +284,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
 
         when (ev!!.actionMasked){
             MotionEvent.ACTION_DOWN -> {
-                CoreHome.launcher?.getDesktopIndicator()?.alphaShow = true
-                CoreHome.launcher?.getDesktopIndicator()?.alphaFade = false
+                CoreHome.launcher?.getDesktopIndicator()?.showNow()
             }
         }
 
@@ -295,9 +294,8 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
     override fun onTouchEvent(ev: MotionEvent?): Boolean {
 
         when (ev!!.actionMasked){
-            MotionEvent.ACTION_DOWN -> {
-                CoreHome.launcher?.getDesktopIndicator()?.alphaShow = true
-                CoreHome.launcher?.getDesktopIndicator()?.alphaFade = false
+            MotionEvent.ACTION_UP -> {
+                CoreHome.launcher?.getDesktopIndicator()?.hideDelay()
             }
         }
 
