@@ -1,6 +1,6 @@
 ![GitHub release](https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/featureGraphic.png)
 
-[![GitHub release](https://img.shields.io/github/tag/OpenLauncherTeam/openlauncher.svg)](https://github.com/OpenLauncherTeam/openlauncher/releases)
+[![GitHub release](https://img.shields.io/badge/release-0.5.8-blue.svg)](https://github.com/OpenLauncherTeam/openlauncher/releases)
 [![CircleCI](https://circleci.com/gh/OpenLauncherTeam/openlauncher.svg?style=shield)](https://circleci.com/gh/OpenLauncherTeam/openlauncher)
 [![Translate - with Stringlate](https://img.shields.io/badge/stringlate-translate-green.svg)](https://lonamiwebs.github.io/stringlate/translate?git=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher.git&name=OpenLauncher&web=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher)
 
