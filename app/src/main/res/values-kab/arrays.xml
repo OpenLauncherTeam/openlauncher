@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="entries__gestures">
+        <item>Ulac</item>
+        <item>Iɣewwaren n ufeggag aemctuḥ</item>
+        <item>Sbadu agilal n ugdil</item>
+        <item>Sewḥel agdil</item>
+        <item>Sfeḍ takatut RAM</item>
+        <item>Iɣewwaṛen n yibenk</item>
+        <item>Iɣewwaṛen n umsenker</item>
+        <item>Asfaylu n ubleɣ</item>
+        <item>Ldi agalis n usnas</item>
+        <item>Senker asnas</item>
+    </string-array>
+
+    <string-array name="entries__desktop_actions">
+        <item>Agalis n usnas</item>
+    </string-array>
+
+    <string-array name="entries__desktop_styles" translatable="false">
+        <item>@string/desktop_mode_normal</item>
+        <item>@string/desktop_mode_show_all_apps</item>
+    </string-array>
+
+    <string-array name="entries__desktop_indicator_mode" translatable="false">
+        <item>@string/desktop_indicator_mode_normal</item>
+        <item>@string/desktop_indicator_mode_arrow</item>
+    </string-array>
+
+    <string-array name="entries__drawer_styles" translatable="false">
+        <item>@string/horizontal_paged_drawer</item>
+        <item>@string/vertical_scroll_drawer</item>
+    </string-array>
+
+    <string-array name="entries__backup_options">
+        <item>@string/dialog__backup_app_settings__backup</item>
+        <item>@string/dialog__backup_app_settings__restore</item>
+    </string-array>
+
+    <string-array name="entries__themes" translatable="false">
+        <item>@string/theme_light</item>
+        <item>@string/theme_dark</item>
+    </string-array>
+
+    <string-array name="entries__wallpaper_options">
+        <item>Sbadu agilal n ugdil</item>
+        <item>Sebrek agilal n ugdil</item>
+    </string-array>
+
+    <string-array name="values__zero_to_one" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="values__zero_to_nine" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+</resources>
