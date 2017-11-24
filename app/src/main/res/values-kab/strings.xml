@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Toasts -->
+    <string name="toast_free_ram">Takatut yellan: %1$d MB. %2$d MB yettwaḥrez.</string>
+    <string name="toast_free_all_ram">Takatut yellan: %1$d MB. Takatut-ik RAM attan di tezmert yelhan.</string>
+    <string name="toast_device_admin_required">Ma ulac aɣilif, rmed tadbelt n yibenk.</string>
+
+    <!-- Intro -->
+    <string name="intro_skip">Zgel</string>
+    <string name="intro_finish">Bdu.</string>
+    <string name="intro1_text">Wagi d OpenLauncher. Amsenker n uɣbalu yeldin. Dagi i kečč.</string>
+    <string name="intro2_text">Zuɣer aḍad-ik si tama tazelmaḍt n ugdil-ik akken ad teldiḍ afeggag amectuḥ. Din-a ad tafeḍ iɣewwaṛen,
+        beddel tugna n ugilal, d ddeqs n tiɣawsiwin nniḍen.</string>
+    <string name="intro3_title">Iɣewwaṛen</string>
+    <string name="intro3_text">Tzemreḍ ad tbeddleḍ tanarit-ik, agalis n yisnasen, dock, ɛreḍ-it tura!</string>
+
+    <!-- Minibar -->
+    <string name="minibar">Afeggag amectuḥ</string>
+    <string name="minibar_0">Beddel taneɣruft n ufeggag amectuḥ.</string>
+    <string name="minibar_1">Sbadu neɣ sibrek agilal n ugdil.</string>
+    <string name="minibar_2">Sekkeṛ agdil tura yakan, yesra tadbelt n yibenk.</string>
+    <string name="minibar_3">Serreḥ takatut RAM s uḥettem n umdal n imeẓla yettwaselkamen.</string>
+    <string name="minibar_4">Anegzum ar iɣewwaṛen n yibenk.</string>
+    <string name="minibar_5">Anegzum ar iɣewwaṛen OpenLauncher.</string>
+    <string name="minibar_7">Sken asfaylu n ubleɣ.</string>
+    <string name="minibar_8">Ldi agalis n yisnasen.</string>
+
+    <!-- About -->
+    <string name="about_libs">Tinedlisin n u qbalu yeldin</string>
+    <string name="about_rate">Rnu tazmilt</string>
+    <string name="about_credit">Iswiziwen</string>
+    <string name="about_credit_text_all_contributors">Akk iiziwen</string>
+
+    <!-- Settings -->
+
+    <string name="pref_title__desktop">Tanarit</string>
+    <string name="pref_title__dock">Dock</string>
+    <string name="pref_title__app_drawer">Agalis n yisnasen</string>
+    <string name="pref_title__gestures">Imussuten</string>
+    <string name="pref_title__icons">Tignitin</string>
+    <string name="pref_title__miscellaneous">Ayen nniḍen</string>
+    <string name="pref_title__about">Ɣef</string>
+
+    <string name="pref_title__size">Teɣzi</string>
+    <string name="pref_title__style">Aɣanib</string>
+    <string name="pref_title__appearance">Udeb</string>
+    <string name="pref_title__color">Initen</string>
+    <string name="pref_title__search_bar">Afegga n unadi</string>
+    <string name="pref_title__interfaces">Igrudmawen</string>
+    <string name="pref_title__inputs">Inekcam</string>
+    <string name="pref_title__feels">Iḥulfan</string>
+    <string name="pref_title__others">Ayen nniḍen</string>
+
+    <string name="pref_title__desktop_style">Aɣanib</string>
+    <string name="pref_title__desktop_indicator_style">Aɣani n unamel</string>
+    <string name="pref_summary__desktop_style">Fren gar tnarit Choose between a normal desktop and showing all installed apps.</string>
+    <string name="pref_summary__minibar">Swel asmizzwer akked tiẓri n iferdisen n ufeggag amectuḥ.</string>
+    <string name="pref_title__search_bar_enable">Afeggag n unadi</string>
+    <string name="pref_summary__search_bar_enable">Sken afeggag n unadi nnig n tnarit.</string>
+    <string name="pref_title__desktop_fullscreen">Agdil aččran</string>
+    <string name="pref_title__desktop_hide_grid">Ffer iẓiki</string>
+    <string name="pref_summary__desktop_fullscreen">Rmed agdil aččuran n tnarit.</string>
+    <string name="pref_summary__desktop_hide_grid">Ffer iẓiki n ureyyec.</string>
+    <string name="pref_title__desktop_show_position_indicator">Adig n unamal</string>
+    <string name="pref_summary__desktop_show_position_indicator">Sken anamal n usebter ddaw n tnarit.</string>
+    <string name="pref_title__desktop_show_label">Sken tibzimin</string>
+    <string name="pref_summary__desktop_show_label">Sken tibzimin n uferdis ddaw n tgnitin-nsen.</string>
+    <string name="pref_title__desktop_rotate">Zzi</string>
+    <string name="pref_summary__desktop_rotate">Sireg tuzya n ugdil.</string>
+
+    <string name="pref_title__search_bar_base_uri">URI n unadi</string>
+    <string name="pref_summary__search_bar_base_uri">Sbadu URI yettwaseqdacen i yinadiyen web.</string>
+    <string name="pref_dialog__search_bar_base_uri">Sekcem URI i yessefk ad tettwaseqdec deg inadiyen web. Tabzimt {query} tezmer ad tettwaseqdec am
+      tallunt yettwaḥ€rzen i tuttra n unadi, ma yella ulac tallunt yettwaḥ€rzen in case no placeholder is used the search query will be appended at the end of the URI.</string>
+    <string name="pref_title__search_bar_force_browser">Ḥettem anadi n iminig</string>
+    <string name="pref_summary__search_bar_force_browser">Seqdac yal tikelt iminig i unadi srid.</string>
+    <string name="pref_title__desktop_background_color">Agilal</string>
+    <string name="pref_title__desktop_folder_color">Akaram</string>
+    <string name="pref_title__search_bar_show_hidden_apps">Sken isnasen yeffren</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Seddu isnasen yeffren deg ugmuḍ n unadi.</string>
+
+    <string name="pref_summary__dock_size">Sbadu teɣzi n dock.</string>
+    <string name="pref_title__dock_show_label">Sken tibzimin</string>
+    <string name="pref_summary__dock_show_label">Sken tibzimin n iferdisen ddaw n tignitin-nsen.</string>
+    <string name="pref_title__dock_background_color">Agilal</string>
+
+    <string name="pref_title__drawer_style">Aɣanib</string>
+    <string name="pref_summary__drawer_style">Fren gar ugalis n usnas s isebtar neɣ ubdid ubdid.</string>
+    <string name="pref_title__hide_apps">Ffer isnasen</string>
+    <string name="pref_summary__hide_apps">Ffer isnasen yettwafernen seg umsenker.</string>
+    <string name="pref_title__drawer_show_card_view">Card View</string>
+    <string name="pref_summary__drawer_show_card_view">Sers agdil n tuffra deffir n ugalis n yisnasen.</string>
+    <string name="pref_title__drawer_remember_position">Cfu ɣef usebter aneggaru</string>
+    <string name="pref_summary__drawer_remember_position">Cfu ɣef usebter amiran n ugalis n yisnasen.</string>
+    <string name="pref_title__drawer_show_position_indicator">Adig n unamal</string>
+    <string name="pref_summary__drawer_show_position_indicator">Sken anamal n usebter neɣ sedrurem akken yella uɣanib.</string>
+    <string name="pref_title__drawer_show_label">Sken tibzimin</string>
+    <string name="pref_summary__drawer_show_label">Sken tibzimin n uferdis ddaw n tignitin-nsent.</string>
+    <string name="pref_title__drawer_background_color">Agilal</string>
+    <string name="pref_title__drawer_card_color">Tagelmust</string>
+    <string name="pref_title__drawer_label_color">Tabzimt</string>
+    <string name="pref_title__drawer_fast_scroll_color">Adrurem ururad</string>
+
+    <string name="pref_title__gesture_feedback">Tikti n imussuten</string>
+    <string name="pref_summary__gesture_feedback">Awi tikti ticki teǧǧiḍ afus-ik ɣef uferdis di tnarit.</string>
+    <string name="pref_title__gesture_quick_swipe">Zuɣer akken ad d-liḍ</string>
+    <string name="pref_summary__gesture_quick_swipe">Zuɣer d akesser ɣef dock akken ad d-liḍ agalis n usnas.</string>
+    <string name="pref_title__gesture_double_tap">Nnal snat tikalt</string>
+    <string name="pref_title__gesture_swipe_up">Zuɣer d aasawen</string>
+    <string name="pref_title__gesture_swipe_down">Zuɣer d akesser</string>
+    <string name="pref_title__gesture_pinch">Aseqreb</string>
+    <string name="pref_title__gesture_unpinch">Asiẓi</string>
+
+    <string name="pref_summary__icon_size">Teɣzi n tignitin n usnas .</string>
+    <string name="pref_title__icon_pack">Tagrumma n tignitin</string>
+    <string name="pref_summary__icon_pack">Fren tagrumma n tignitin ibedden.</string>
+
+    <string name="pref_summary__language">Beddel isem n tutlayt n ugrudem. Yessefk ad talseḍ tanekra n usnas akken teddu tutlaut tamaynut</string>
+    <string name="pref_title__language">Tutlayt</string>
+    <string name="pref_title__backup">Ḥrez</string>
+    <string name="pref_summary__backup">Ḥrez sakin err-d iɣewwaṛen.</string>
+    <string name="pref_title__clear_database">Sfeḍ taffa n isefka</string>
+    <string name="pref_summary__clear_database">Kkes isefka si dock ad tnarit akken ad tefruḍ uguren.</string>
+    <string name="pref_title__restart">Ales tanekra</string>
+    <string name="pref_summary__restart">Ales tanekra n umsenker ma yella ur yeddi ara.</string>
+    <string name="pref_summary__theme">Sbadu asentel i usnas meṛṛa.</string>
+    <string name="pref_title__theme">Asentel</string>
+    <string name="pref_title__primary_color">Ini amezwaru</string>
+    <string name="pref_summary__primary_color">Sbadu ini amezwaru i usnas.</string>
+
+    <string name="vertical_scroll_drawer">Ubdid</string>
+    <string name="horizontal_paged_drawer">S isebtar</string>
+
+    <string name="desktop_mode_normal">Amagnu</string>
+    <string name="desktop_mode_show_all_apps">Sken akk isnasen</string>
+
+    <string name="desktop_indicator_mode_normal">Amagnu</string>
+    <string name="desktop_indicator_mode_arrow">Aneccab</string>
+
+    <!-- Item Labels -->
+    <string name="label_default">Amezwer</string>
+
+    <!-- Dialogs -->
+    <string name="request_dummy_text">Azul i umaḍal!</string>
+    <string name="request_please_wait">Anadi n yisnasen ibedden. Rǧu ma ulac aɣilif.</string>
+    <string name="request_toast">Ulac isnasen yettwafernen. Sken akk isnasen deg ugalis?</string>
+    <string name="on">Irmed</string>
+    <string name="desktop_action">Tigawt n tnarit</string>
+    <string name="select_app">Fren asnas</string>
+    <string name="off">Insa</string>
+    <string name="ok">IH</string>
+    <string name="version">Lqem</string>
+    <string name="wallpaper">Tugna n ugilal</string>
+    <string name="wallpaper_pick">Fren tugna n ugilal</string>
+    <string name="wallpaper_unable_to_blur">Ur izmir ara ad isibrek</string>
+    <string name="dialog__icon_pack_title">Fren tagrumma n tignitin</string>
+    <string name="dialog__icon_pack_info_toast">Ur izmir ara ad d-yerr tignit s war tasiregt READ_EXTERNAL_STORAGE.</string>
+    <string name="dialog__backup_app_settings__backup">Ḥrez</string>
+    <string name="dialog__backup_app_settings__restore">Err-d</string>
+    <string name="dialog__backup_app_settings__success">Immed.</string>
+    <string name="dialog__backup_app_settings__error">Yella wayen yeḍran.</string>
+    <string name="columns">Tigejda</string>
+    <string name="rows">Izirigen</string>
+    <string name="memory">Takatut</string>
+    <string name="storage">Asekles</string>
+    <string name="volume_level_ringtone">Taṭentunt</string>
+    <string name="volume_level_notification">Alɣu</string>
+    <string name="volume_level_system">Anagraw</string>
+    <string name="volume_level_media">Amidya</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Ubrik</string>
+    <string name="debug">Debug</string>
+</resources>
