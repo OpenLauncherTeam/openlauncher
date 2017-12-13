@@ -187,19 +187,20 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         // use ellipsis if the label is too long
         if (label != null && !showLabel && textContainer.width() > 0 && label.length() != 0) {
             float characterSize = textContainer.width() / label.length();
-            int charToTruncate = (int) Math.ceil(((label.length() * characterSize) - getWidth()) / characterSize);
+            int charsToTruncate = (int) Math.ceil(((label.length() * characterSize) - getWidth()) / characterSize);
+            charsToTruncate = Math.max(0, charsToTruncate);
 
             // set start position manually if text container is too large
             float x = Math.max(8, (getWidth() - textContainer.width()) / 2f);
 
-            if (textContainer.width() + 8 > getWidth() && label.length() - charToTruncate > 0) {
-                String showLabel = label.substring(0, label.length() - charToTruncate);
+            if (textContainer.width() + 8 > getWidth() && label.length() - charsToTruncate > 0) {
+                String showLabel = label.substring(0, label.length() - charsToTruncate);
                 do {
-                    textPaint.getTextBounds(showLabel + "...", 0, label.length() - charToTruncate + 3, textContainer);
+                    textPaint.getTextBounds(showLabel + "...", 0, label.length() - charsToTruncate + 3, textContainer);
                 }
-                while (textContainer.width() + 8 > getWidth() && label.length() - (++charToTruncate) > 0);
+                while (textContainer.width() + 8 > getWidth() && label.length() - (++charsToTruncate) > 0);
 
-                canvas.drawText(label.substring(0, label.length() - charToTruncate) + "...", x, getHeight() - heightPadding, textPaint);
+                canvas.drawText(label.substring(0, label.length() - charsToTruncate) + "...", x, getHeight() - heightPadding, textPaint);
             } else {
                 canvas.drawText(label, x, getHeight() - heightPadding, textPaint);
             }
