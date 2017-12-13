@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!-- Titles -->
-
-    <string name="minibar">Minibar</string>
-
-    <!-- Drag Option View -->
-
-    <!-- Desktop Option View -->
-
     <!-- Toasts -->
-
     <string name="toast_free_ram">Memoria libre: %1$d MB. Ahorrados %2$d MB.</string>
     <string name="toast_free_all_ram">Memoria libre: %1$d MB. Tu RAM está en mejor estado.</string>
     <string name="toast_device_admin_required">Por favor, habilita la opción de adminsitración de dispositivo.</string>
 
     <!-- Intro -->
-
     <string name="intro_skip">Omitir</string>
     <string name="intro_finish">Comencemos.</string>
     <string name="intro1_text">Muchas gracias por elegir OpenLaucher. Es completamente de código abierto y aún se encuentra en desarrollo. 
@@ -27,7 +16,7 @@
     <string name="intro3_text">Puedes configurar tu escritorio, el cajón de aplicaciones y el dock, ¡pruébalo!</string>
 
     <!-- Minibar -->
-
+    <string name="minibar">Minibar</string>
     <string name="minibar_0">Cambia el diseño de la minibar.</string>
     <string name="minibar_1">Establece o difumina el fondo de pantalla.</string>
     <string name="minibar_2">Bloquea la pantalla inmediatamente, requiere ser administrador del dispositivo.</string>
@@ -38,16 +27,10 @@
     <string name="minibar_8">Abrir el cajón de aplicaciones.</string>
 
     <!-- About -->
-
     <string name="about_libs">Librerías de Código Abierto</string>
     <string name="about_rate">Califica</string>
     <string name="about_credit">Contribuidores</string>
     <string name="about_credit_text_all_contributors">Todos los contribuidores</string>
-    <string name="about_credit_text_bennykok" translatable="false">Iniciador del proyecto</string>
-    <string name="about_credit_text_chris_debrodie" translatable="false">Ayudó mucho con errores y sugerencias</string>
-    <string name="about_credit_text_gaukler_faun" translatable="false">Agregó algunos ajustes, traducción al alemán</string>
-    <string name="about_credit_text_gsantner" translatable="false">Encargado, traducción al alemán</string>
-    <string name="about_credit_text_dkanada" translatable="false">Encargado, base de datos</string>
 
     <!-- Settings -->
 
@@ -64,6 +47,10 @@
     <string name="pref_title__appearance">Apariencia</string>
     <string name="pref_title__color">Colores</string>
     <string name="pref_title__search_bar">Barra de búsqueda</string>
+    <string name="pref_title__interfaces">Interfaces</string>
+    <string name="pref_title__inputs">Entradas</string>
+    <string name="pref_title__feels">Feels</string>
+    <string name="pref_title__others">Otros</string>
 
     <string name="pref_title__desktop_style">Estilo</string>
     <string name="pref_summary__desktop_style">Elige entre el escritorio normal y uno que muestre todas las aplicaciones instaladas.</string>
@@ -130,19 +117,10 @@
     <string name="desktop_mode_normal">Normal</string>
     <string name="desktop_mode_show_all_apps">Mostrar todas las aplicaciones</string>
 
-    <!-- Preference Keys -->
-
-    <string name="pref_title__interfaces">Interfaces</string>
-    <string name="pref_title__inputs">Entradas</string>
-    <string name="pref_title__feels">Feels</string>
-    <string name="pref_title__others">Otros</string>
-
     <!-- Item Labels -->
-
     <string name="label_default">Por defecto</string>
 
     <!-- Dialogs -->
-
     <string name="request_dummy_text">¡Hola Mundo!</string>
     <string name="request_please_wait">Buscando aplicaciones instaladas. Por favor, espera.</string>
     <string name="request_toast">No hay aplicaciones seleccionadas. ¿Mostrar todas las aplicaciones en el cajón?</string>
