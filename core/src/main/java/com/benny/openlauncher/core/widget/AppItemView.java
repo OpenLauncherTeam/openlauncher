@@ -43,7 +43,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     private Rect textContainer = new Rect(), testTextContainer = new Rect();
     private Typeface typeface;
     private float iconSize;
-    private boolean showLabel = false;
+    private boolean showLabel = true;
     private boolean vibrateWhenLongPress;
     private float labelHeight;
     private int targetedWidth;
@@ -182,9 +182,9 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        heightPadding = (getHeight() - iconSize - (showLabel ? 0 : labelHeight)) / 2f;
+        heightPadding = (getHeight() - iconSize - (showLabel ? labelHeight : 0)) / 2f;
 
-        if (label != null && !showLabel) {
+        if (label != null && showLabel) {
             textPaint.getTextBounds(label, 0, label.length(), textContainer);
             int maxTextWidth = getWidth() - MIN_ICON_TEXT_MARGIN * 2;
 
@@ -423,7 +423,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         public Builder setLabelVisibility(boolean visible) {
-            view.showLabel = !visible;
+            view.showLabel = visible;
             return this;
         }
 
