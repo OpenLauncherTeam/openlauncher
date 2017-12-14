@@ -33,11 +33,14 @@ import com.benny.openlauncher.core.viewutil.ItemGestureListener;
 
 public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
+    private static final int MIN_ICON_TEXT_MARGIN = 8;
+    private static final char ELLIPSIS = '…';
+
     private Drawable icon = null;
     private BaseIconProvider iconProvider;
     private String label;
     private Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Rect textContainer = new Rect();
+    private Rect textContainer = new Rect(), testTextContainer = new Rect();
     private Typeface typeface;
     private float iconSize;
     private boolean showLabel = false;
@@ -180,29 +183,24 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         super.onDraw(canvas);
 
         heightPadding = (getHeight() - iconSize - (showLabel ? 0 : labelHeight)) / 2f;
+
         if (label != null && !showLabel) {
             textPaint.getTextBounds(label, 0, label.length(), textContainer);
-        }
+            int maxTextWidth = getWidth() - MIN_ICON_TEXT_MARGIN * 2;
 
-        // use ellipsis if the label is too long
-        if (label != null && !showLabel && textContainer.width() > 0 && label.length() != 0) {
-            float characterSize = textContainer.width() / label.length();
-            int charsToTruncate = (int) Math.ceil(((label.length() * characterSize) - getWidth()) / characterSize);
-            charsToTruncate = Math.max(0, charsToTruncate);
+            // use ellipsis if the label is too long
+            if (textContainer.width() > maxTextWidth) {
+                String testLabel = label + ELLIPSIS;
+                textPaint.getTextBounds(testLabel, 0, testLabel.length(), testTextContainer);
 
-            // set start position manually if text container is too large
-            float x = Math.max(8, (getWidth() - textContainer.width()) / 2f);
+                //Premeditate to be faster
+                float characterSize = testTextContainer.width() / testLabel.length();
+                int charsToTruncate = (int) ((testTextContainer.width() - maxTextWidth) / characterSize);
 
-            if (textContainer.width() + 8 > getWidth() && label.length() - charsToTruncate > 0) {
-                String showLabel = label.substring(0, label.length() - charsToTruncate);
-                do {
-                    textPaint.getTextBounds(showLabel + "...", 0, label.length() - charsToTruncate + 3, textContainer);
-                }
-                while (textContainer.width() + 8 > getWidth() && label.length() - (++charsToTruncate) > 0);
-
-                canvas.drawText(label.substring(0, label.length() - charsToTruncate) + "...", x, getHeight() - heightPadding, textPaint);
+                canvas.drawText(label.substring(0, label.length() - charsToTruncate) + ELLIPSIS,
+                        MIN_ICON_TEXT_MARGIN, getHeight() - heightPadding, textPaint);
             } else {
-                canvas.drawText(label, x, getHeight() - heightPadding, textPaint);
+                canvas.drawText(label, (getWidth() - textContainer.width()) / 2f, getHeight() - heightPadding, textPaint);
             }
         }
 
