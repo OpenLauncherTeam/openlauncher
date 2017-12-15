@@ -85,8 +85,11 @@
 
         <receiver
             android:name="com.benny.openlauncher.core.util.ShortcutReceiver"
-            android:enabled="true"
-            android:exported="true" />
+            android:permission="com.android.launcher.permission.INSTALL_SHORTCUT">
+            <intent-filter>
+                <action android:name="com.android.launcher.action.INSTALL_SHORTCUT" />
+            </intent-filter>
+        </receiver>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
