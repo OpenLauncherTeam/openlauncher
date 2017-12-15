@@ -11,16 +11,16 @@
  */
 
 /*
- * A ListPreference that displays a list of available languages
  * Requires:
- *     The BuildConfig field "APPLICATION_LANGUAGES" which is a array of all available languages
- *     opoc/ContextUtils
+      The BuildConfig field "APPLICATION_LANGUAGES" which is a array of all available languages
+      opoc/ContextUtils
  * BuildConfig field can be defined by using the method below
 
-buildConfigField("String[]", "APPLICATION_LANGUAGES", '{' + getUsedAndroidLanguages().collect {"\"${it}\""}.join(",")  + '}')
+buildConfigField "String[]", "APPLICATION_LANGUAGES", "${getUsedAndroidLanguages()}"
 
 @SuppressWarnings(["UnnecessaryQualifiedReference", "SpellCheckingInspection", "GroovyUnusedDeclaration"])
-static String[] getUsedAndroidLanguages() {
+// Returns used android languages as a buildConfig array: {'de', 'it', ..}"
+static String getUsedAndroidLanguages() {
     Set<String> langs = new HashSet<>()
     new File('.').eachFileRecurse(groovy.io.FileType.DIRECTORIES) {
         final foldername = it.name
@@ -32,19 +32,19 @@ static String[] getUsedAndroidLanguages() {
             }
         }
     }
-    return langs.toArray(new String[langs.size()])
+    return '{' + langs.collect { "\"${it}\"" }.join(",") + '}'
 }
 
  * Summary: Change language of this app. Restart app for changes to take effect
 
  * Define element in Preferences-XML:
-    <net.gsantner.opoc.ui.LanguagePreference
+    <net.gsantner.opoc.preference.LanguagePreferenceCompat
         android:icon="@drawable/ic_language_black_24dp"
         android:key="@string/pref_key__language"
         android:summary="@string/pref_desc__language"
         android:title="@string/pref_title__language"/>
  */
-package net.gsantner.opoc.ui;
+package net.gsantner.opoc.preference;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -65,31 +65,31 @@ import java.util.Locale;
  * A {@link android.preference.ListPreference} that displays a list of languages to select from
  */
 @SuppressWarnings({"unused", "SpellCheckingInspection", "WeakerAccess"})
-public class LanguagePreference extends ListPreference {
+public class LanguagePreferenceCompat extends ListPreference {
     private static final String SYSTEM_LANGUAGE_CODE = "";
 
     // The language of res/values/ -> (usually English)
     public String _systemLanguageName = "★System★";
     public String _defaultLanguageCode = "en";
 
-    public LanguagePreference(Context context) {
+    public LanguagePreferenceCompat(Context context) {
         super(context);
         loadLangs(context, null);
     }
 
-    public LanguagePreference(Context context, AttributeSet attrs) {
+    public LanguagePreferenceCompat(Context context, AttributeSet attrs) {
         super(context, attrs);
         loadLangs(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public LanguagePreference(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LanguagePreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         loadLangs(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public LanguagePreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public LanguagePreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         loadLangs(context, attrs);
     }
