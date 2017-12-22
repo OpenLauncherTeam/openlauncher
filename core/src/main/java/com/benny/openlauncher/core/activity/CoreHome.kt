@@ -972,7 +972,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
             cy += view.height / 2
             if (view is AppItemView) {
                 val appItemView = view as AppItemView?
-                if (!appItemView!!.showLabel) {
+                if (appItemView!!.showLabel) {
                     cy -= Tool.dp2px(14, this) / 2
                 }
                 rad = (appItemView.iconSize / 2 - 4.toPx()).toInt()
