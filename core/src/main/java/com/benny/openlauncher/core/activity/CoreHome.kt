@@ -905,7 +905,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
     }
 
     override fun onBackPressed() {
-        handleLauncherPause()
+        handleLauncherPause(false)
     }
 
     override fun onResume() {
@@ -923,12 +923,13 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
         launcher = this
         appWidgetHost?.startListening()
 
-        handleLauncherPause()
+        handleLauncherPause(intent.action == Intent.ACTION_MAIN)
+
         super.onResume()
     }
 
-    private fun handleLauncherPause() {
-        if (consumeNextResume) {
+    private fun handleLauncherPause(wasHomePressed: Boolean) {
+        if (consumeNextResume && !wasHomePressed) {
             consumeNextResume = false
             return
         }
