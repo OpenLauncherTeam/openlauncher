@@ -32,7 +32,7 @@ class InitActivity : MaterialIntroActivity() {
                 .backgroundColor(R.color.op_red)
                 .buttonsColor(R.color.intro_button_color)
                 .image(R.drawable.intro_2)
-                .description("Just swipe form the left edge.")
+                .description("Just swipe from the left edge.")
                 .build())
 
         addSlide(SlideFragmentBuilder()
