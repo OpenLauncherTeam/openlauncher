@@ -95,7 +95,7 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:paddingTop="4dp"
-                android:text="The Launcher form the community for the community"
+                android:text="The Launcher from the community for the community"
                 android:textColor="@color/darkGrey"
                 android:textSize="14sp" />
 
