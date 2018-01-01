@@ -32,7 +32,7 @@ class InitActivity : MaterialIntroActivity() {
                 .backgroundColor(R.color.op_red)
                 .buttonsColor(R.color.intro_button_color)
                 .image(R.drawable.intro_2)
-                .description("Just swipe form the left edge.")
+                .description("Just swipe from the left edge.")
                 .build())
 
         addSlide(SlideFragmentBuilder()
@@ -71,7 +71,7 @@ class InitActivity : MaterialIntroActivity() {
 
     class CustomSlide : SlideFragment() {
         override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
-            val view = inflater.inflate(R.layout.intro_csutom_layout, container, false)
+            val view = inflater.inflate(R.layout.intro_custom_layout, container, false)
             return view
         }
 
