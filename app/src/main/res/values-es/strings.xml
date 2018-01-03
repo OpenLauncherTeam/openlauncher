@@ -18,6 +18,9 @@
         cambiar el fondo de pantalla, y hacer un montón de otras cosas.</string>
     <string name="intro3_title">Ajustes</string>
     <string name="intro3_text">Puedes configurar tu escritorio, el cajón de aplicaciones y el dock, ¡pruébalo!</string>
+    <string name="intro4_community">Un lanzador de apps de la comunidad para la comunidad</string>
+    <string name="intro4_features">Con muchas funcionalidades</string>
+    <string name="intro4_customizable">Personalizable</string>
 
     <!-- Minibar -->
     <string name="minibar">Barra lateral</string>
