@@ -32,21 +32,22 @@ class InitActivity : MaterialIntroActivity() {
                 .backgroundColor(R.color.op_red)
                 .buttonsColor(R.color.intro_button_color)
                 .image(R.drawable.intro_2)
-                .description("Just swipe from the left edge.")
+                .description(getString(R.string.intro2_text))
                 .build())
 
         addSlide(SlideFragmentBuilder()
                 .backgroundColor(R.color.op_green)
                 .buttonsColor(R.color.intro_button_color)
                 .image(R.drawable.intro_3)
-                .description("Classical app drawer!")
+                .title(getString(R.string.intro3_title))
+                .description(getString(R.string.intro3_text))
                 .build())
 
         addSlide(SlideFragmentBuilder()
                 .backgroundColor(R.color.op_blue)
                 .buttonsColor(R.color.intro_button_color)
                 .image(R.drawable.intro_4)
-                .description("Easy Search!")
+                .description(getString(R.string.intro_finish))
                 .build())
     }
 
