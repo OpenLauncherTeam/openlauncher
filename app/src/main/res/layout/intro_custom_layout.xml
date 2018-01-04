@@ -95,7 +95,7 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:paddingTop="4dp"
-                android:text="The Launcher form the community for the community"
+                android:text="@string/intro4_community"
                 android:textColor="@color/darkGrey"
                 android:textSize="14sp" />
 
@@ -111,7 +111,7 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:paddingTop="4dp"
-                android:text="Features packed"
+                android:text="@string/intro4_features"
                 android:textColor="@color/darkGrey"
                 android:textSize="14sp" />
 
@@ -127,7 +127,7 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:paddingTop="4dp"
-                android:text="Customizable"
+                android:text="@string/intro4_customizable"
                 android:textColor="@color/darkGrey"
                 android:textSize="14sp" />
 

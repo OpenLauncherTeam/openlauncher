@@ -13,6 +13,9 @@
         change the wallpaper, and do lots of other stuff.</string>
     <string name="intro3_title">Settings</string>
     <string name="intro3_text">You can configure your desktop, the app drawer, and the dock, try it out!</string>
+    <string name="intro4_community">The Launcher from the community for the community</string>
+    <string name="intro4_features">Features packed</string>
+    <string name="intro4_customizable">Customizable</string>
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
