@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- TRANSLATION NOTES: "minibar" is "barra lateral"
+                        "launcher" is "lanzador de apps" on titles and "lanzador de aplicaciones" on longer descriptions
+                        "app" is "app" on titles and "aplicación" on longer descriptions
+                        "dock" is "dock"-->
+<resources>
+    <!-- Toasts -->
+    <string name="toast_free_ram">Libera memorilo: %1$d MB. Ŝparita %2$d MB.</string>
+    <string name="toast_free_all_ram">Libera memorilo: %1$d MB. Via ĉefmemorilo estas plej bona stato.</string>
+    <string name="toast_device_admin_required">Bonvole, ebligi la aparatmastrumadan opcion.</string>
+
+    <!-- Intro -->
+    <string name="intro_skip">Salti</string>
+    <string name="intro_finish">Vi komencu.</string>
+    <string name="intro1_text">Tio estas OpenLauncher. A alpikaĵlanĉilo tute kreita kun malfermitkodo. Ĉi tie por vi.</string>
+    <string name="intro2_text">Ŝovumi ene maldekstrrando de via komencekrano por malfermi la laterbreton. Ĉi tien povas trovi agordilo,
+        ŝanĝi ekranfonon, kaj fari multajn aĵojn.</string>
+    <string name="intro3_title">Agordoj</string>
+    <string name="intro3_text">Vi povas agordi vian labortablon, la aplikaĵujon kaj doko, ¡provu!</string>
+    <string name="intro4_community">Aplikaĵlanĉilo de la komunumo pro la komunumo</string>
+    <string name="intro4_features">Kun multa funkcioj</string>
+    <string name="intro4_customizable">Tajlorebla</string>
+
+    <!-- Minibar -->
+    <string name="minibar">Laterbreto</string>
+    <string name="minibar_0">Ŝangi laterbretan stilon.</string>
+    <string name="minibar_1">Agordi aŭ malklari ekranfonon.</string>
+    <string name="minibar_2">Ŝlosi nun ekranon, estas nepra havi ĉefuzantajn privilegiojn.</string>
+    <string name="minibar_3">Liberi ĉefmemorilon brutfortante fermo de aliaj plenumantaj procezoj.</string>
+    <string name="minibar_4">Mallongindiko al aparata agordoj.</string>
+    <string name="minibar_5">Mallongindiko al OpenLauncher-a agordoj.</string>
+    <string name="minibar_7">Malfermi volumpanelo.</string>
+    <string name="minibar_8">Malfermi aplikaĵujon.</string>
+
+    <!-- About -->
+    <string name="about_libs">Malfermitkoda biblioteko</string>
+    <string name="about_rate">Taksi</string>
+    <string name="about_credit">Kontribuanto</string>
+    <string name="about_credit_text_all_contributors">Ĉiuj kontribuantoj</string>
+
+    <!-- Settings -->
+
+    <string name="pref_title__desktop">Labortablo</string>
+    <string name="pref_title__dock">Doko</string>
+    <string name="pref_title__app_drawer">Aplikaĵujo</string>
+    <string name="pref_title__gestures">Gestoj</string>
+    <string name="pref_title__icons">Piktogramoj</string>
+    <string name="pref_title__miscellaneous">Diversaĵoj</string>
+    <string name="pref_title__about">Pri</string>
+
+    <string name="pref_title__size">Grando</string>
+    <string name="pref_title__style">Stilo</string>
+    <string name="pref_title__appearance">Aspekto</string>
+    <string name="pref_title__color">Koloroj</string>
+    <string name="pref_title__search_bar">Serĉbreto</string>
+    <string name="pref_title__interfaces">Interfacoj</string>
+    <string name="pref_title__inputs">Enigoj</string>
+    <string name="pref_title__feels">Aspektoj</string>
+    <string name="pref_title__others">Aliaj</string>
+
+    <string name="pref_title__desktop_style">Stilo</string>
+    <string name="pref_title__desktop_indicator_style">Indikila stilo</string>
+    <string name="pref_summary__desktop_style">Elekti inter normala labortablo kaj labortablo ke montri ĉiujn instalitajn aplikaĵojn.</string>
+    <string name="pref_summary__minibar">Agordi ordon kaj videblon de minibretaj eroj.</string>
+    <string name="pref_title__search_bar_enable">Ŝercbreto</string>
+    <string name="pref_summary__search_bar_enable">Montri serĉbreton sur labortablo.</string>
+    <string name="pref_title__desktop_fullscreen">Plenekrano</string>
+    <string name="pref_title__desktop_hide_grid">Kaŝi kradon</string>
+    <string name="pref_summary__desktop_fullscreen">Ebligi plenekrana por la labortablo.</string>
+    <string name="pref_summary__desktop_hide_grid">Kaŝi helpanta kradon.</string>
+    <string name="pref_title__desktop_show_position_indicator">Lokokupilo</string>
+    <string name="pref_summary__desktop_show_position_indicator">Montri lokokupilo sub labortablo.</string>
+    <string name="pref_title__desktop_show_label">Montri markon</string>
+    <string name="pref_summary__desktop_show_label">Montri ermarkon sub ĝiaj piktogramoj.</string>
+    <string name="pref_title__desktop_rotate">Turni</string>
+    <string name="pref_summary__desktop_rotate">Permesi turnado de ekrano.</string>
+
+    <string name="pref_title__search_bar_base_uri">URI de serĉilo</string>
+    <string name="pref_summary__search_bar_base_uri">Agordi uzita URI por TTT-serĉoj.</string>
+    <string name="pref_dialog__search_bar_base_uri">Enigi URI ke devas uzi por TTT-serĉoj. La marko {query} povas esti uzita kiel
+      lokokupilo por la serĉoj, en kazo ke lokokupilo ne estas uzata, la serĉinformpeto estos aldonita al la fino de la URI.</string>
+    <string name="pref_title__search_bar_force_browser">Brutforti TTT-serĉoj</string>
+    <string name="pref_summary__search_bar_force_browser">Ĉiam uzi retumilon por TTT-serĉoj.</string>
+    <string name="pref_title__desktop_background_color">Fono</string>
+    <string name="pref_title__desktop_folder_color">Dosierujo</string>
+    <string name="pref_title__search_bar_show_hidden_apps">Montri kaŝitajsn aplikaĵojn</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Montri kaŝitajn aplikaĵojn en la serĉrezultoj.</string>
+
+    <string name="pref_summary__dock_size">Agordi dokgrando.</string>
+    <string name="pref_title__dock_show_label">Montri markojn.</string>
+    <string name="pref_summary__dock_show_label">Montri ermarkon sub ĝiaj piktogramoj.</string>
+    <string name="pref_title__dock_background_color">Fono</string>
+
+    <string name="pref_title__drawer_style">Stilo</string>
+    <string name="pref_summary__drawer_style">Elekti inter vertikala aŭ paĝa aplikaĵujo.</string>
+    <string name="pref_title__hide_apps">Kaŝi aplikaĵon</string>
+    <string name="pref_summary__hide_apps">Kaŝi elektitajn aplikaĵojn el aplikaĵlanĉilo.</string>
+    <string name="pref_title__drawer_show_card_view">Kartvido</string>
+    <string name="pref_summary__drawer_show_card_view">Montri karton sur el ujfono.</string>
+    <string name="pref_title__drawer_remember_position">Memori lastapaĝo.</string>
+    <string name="pref_summary__drawer_remember_position">Memori nuntempan paĝon de aplikaĵujo.</string>
+    <string name="pref_title__drawer_show_position_indicator">Lokokupilo</string>
+    <string name="pref_summary__drawer_show_position_indicator">Montri lokokupilon aŭ ŝovumbreto laŭ stilo.</string>
+    <string name="pref_title__drawer_show_label">Montri markojn</string>
+    <string name="pref_summary__drawer_show_label">Montri ermarkon sub ĝiaj piktogramoj.</string>
+    <string name="pref_title__drawer_background_color">Fono</string>
+    <string name="pref_title__drawer_card_color">Kartvido</string>
+    <string name="pref_title__drawer_label_color">Marko</string>
+    <string name="pref_title__drawer_fast_scroll_color">Rapidigita vertikala ŝovumo</string>
+
+    <string name="pref_title__gesture_feedback">Konduto de frapeto</string>
+    <string name="pref_summary__gesture_feedback">Obtener reacción animada cuando se presiona sobre un ítem en el escritorio.</string>
+    <string name="pref_title__gesture_quick_swipe">Rapidŝovumo de la ujo</string>
+    <string name="pref_summary__gesture_quick_swipe">Ŝovumi supren el doko por malfermi aplikaĵujo.</string>
+    <string name="pref_title__gesture_double_tap">Duobla frapeto</string>
+    <string name="pref_title__gesture_swipe_up">Ŝovumo supren</string>
+    <string name="pref_title__gesture_swipe_down">Ŝovumo malsupren</string>
+    <string name="pref_title__gesture_pinch">Amplifi</string>
+    <string name="pref_title__gesture_unpinch">Malamplifi</string>
+
+    <string name="pref_summary__icon_size">Grando de piktogramoj de ĉiuj aplikaĵoj.</string>
+    <string name="pref_title__icon_pack">Piktogrampakaĵo</string>
+    <string name="pref_summary__icon_pack">Elekti instalitan piktogrampakaĵon.</string>
+
+    <string name="pref_summary__language">Ŝangi lingvon de la aplikaĵo. Rekomenci por apliki la ŝanĝoj.</string>
+    <string name="pref_title__language">Lingvo</string>
+    <string name="pref_title__backup">Savkopio</string>
+    <string name="pref_title__clear_database">Malplenigi datumbazilon</string>
+    <string name="pref_summary__backup">Fari savkopion kaj restaŭri viajn agordojn.</string>
+    <string name="pref_summary__clear_database">Forigi dokdatumojn kaj labortablon por ripari erarojn.</string>
+    <string name="pref_title__restart">Rekomenci</string>
+    <string name="pref_summary__restart">Rekomenci aplikaĵlanĉilos se ĝi havas eraran konduton.</string>
+    <string name="pref_summary__theme">Agordi temon por aplikaĵo.</string>
+    <string name="pref_title__theme">Temo</string>
+    <string name="pref_title__primary_color">Ĉefkoloro</string>
+    <string name="pref_summary__primary_color">Agordi ĉefkoloro por aplikaĵo.</string>
+
+    <string name="vertical_scroll_drawer">Vertikala</string>
+    <string name="horizontal_paged_drawer">Paĝe</string>
+
+    <string name="desktop_mode_normal">Normala</string>
+    <string name="desktop_mode_show_all_apps">Montri ĉiujn aplikaĵojn</string>
+
+    <string name="desktop_indicator_mode_normal">Normala</string>
+    <string name="desktop_indicator_mode_arrow">Sago</string>
+
+    <!-- Item Labels -->
+    <string name="label_default">Defaŭlta</string>
+
+    <!-- Dialogs -->
+    <string name="request_dummy_text">Saluton Mondo!</string>
+    <string name="request_please_wait">Serĉanta instalitajn aplikajojn. Bonvole, atendu.</string>
+    <string name="request_toast">Ne estas elektita aplikaĵo. Montri ĉiun aplikaĵojn en la ujo?</string>
+    <string name="on">Ŝaltita</string>
+    <string name="desktop_action">Labortabla ago</string>
+    <string name="select_app">Elekti aplikaĵon</string>
+    <string name="off">Malŝaltita</string>
+    <string name="ok">OK</string>
+    <string name="version">Versiono</string>
+    <string name="wallpaper">Ekranfono</string>
+    <string name="wallpaper_pick">Elekti ekranfonon</string>
+    <string name="wallpaper_unable_to_blur">Ne povas malklarigi.</string>
+    <string name="dialog__icon_pack_title">Elekti piktogrampakaĵo.</string>
+    <string name="dialog__icon_pack_info_toast">Ne povas elekti piktogramon sen READ_EXTERNAL_STORAGE-a permesilo.</string>
+    <string name="dialog__backup_app_settings__backup">Savkopio</string>
+    <string name="dialog__backup_app_settings__restore">Restaŭri</string>
+    <string name="dialog__backup_app_settings__success">Farita.</string>
+    <string name="dialog__backup_app_settings__error">Io eraris.</string>
+    <string name="columns">Kolumnoj</string>
+    <string name="rows">Vicoj</string>
+    <string name="memory">Memorilo</string>
+    <string name="storage">Memoro</string>
+    <string name="volume_level_ringtone">Vokosono</string>
+    <string name="volume_level_notification">Sciigoj</string>
+    <string name="volume_level_system">Sistemo</string>
+    <string name="volume_level_media">Plurmedio</string>
+    <string name="theme_light">Luma</string>
+    <string name="theme_dark">Malluma</string>
+    <string name="debug">Senerarado</string>
+
+</resources>

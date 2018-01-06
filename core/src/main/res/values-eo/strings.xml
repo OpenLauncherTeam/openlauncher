@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Titles -->
+    <string name="settings">Agordoj</string>
+
+    <!-- Drag Option View -->
+    <string name="edit">Redakti</string>
+    <string name="info">Pri</string>
+    <string name="uninstall">Malinstali</string>
+    <string name="remove">Forigi</string>
+
+    <!-- Desktop Option View -->
+    <string name="home">Ĉefpaĝo</string>
+    <string name="action">Ago</string>
+    <string name="lock">Ŝlosi</string>
+    <string name="widget">Fenestraĵo</string>
+
+    <!-- Toasts -->
+    <string name="toast_not_enough_space">Memorilo ne sufiĉa.</string>
+    <string name="toast_app_uninstalled">Aplikaĵo malistalita.</string>
+
+    <!-- Item Labels -->
+    <string name="folder">Nenomita</string>
+
+    <!-- Dialogs -->
+    <string name="cancel">Nuligi</string>
+    <string name="search_hint">Serĉi…</string>
+    <string name="search_online">TTT-serĉi&#8230;</string>
+
+</resources>
