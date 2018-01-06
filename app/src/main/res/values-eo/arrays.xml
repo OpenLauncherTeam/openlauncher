@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="entries__gestures">
+        <item>Nenio</item>
+        <item>Minibreta agordoj</item>
+        <item>Agordi ekranfonon</item>
+        <item>Ŝlosi ekranon</item>
+        <item>Liberi ĉefmemorilon</item>
+        <item>Aparata agordoj</item>
+        <item>Komenca agordoj</item>
+        <item>Volumpanelo</item>
+        <item>Malfermi aplikaĵujon</item>
+        <item>Malfermi aplikaĵon</item>
+    </string-array>
+
+    <string-array name="desktopActionEntries">
+        <item>Aplikaĵujo</item>
+    </string-array>
+
+    <string-array name="entries__drawer_modes">
+        <item>Horizontale (paĝe)</item>
+        <item>Vertikale</item>
+    </string-array>
+
+    <string-array name="wallpaperOptionEntries">
+        <item>Agordi ekranfonon</item>
+        <item>Malklarigi ekranfonon</item>
+    </string-array>
+</resources>
