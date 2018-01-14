@@ -88,8 +88,7 @@ public class GroupPopupView extends RevealFrameLayout {
         isShowing = true;
 
         String label = item.getLabel();
-        if (label.isEmpty())
-            label = getContext().getString(R.string.folder);
+        textView.setVisibility(label.isEmpty() ? GONE : VISIBLE);
         textView.setText(label);
         textView.setTextColor(Setup.appSettings().getDrawerLabelColor());
 
@@ -206,8 +205,8 @@ public class GroupPopupView extends RevealFrameLayout {
         }
 
         if (item.getLocationInLauncher() == Item.Companion.getLOCATION_DOCK()) {
-            coordinates[1] -= iconSize/2;
-            cy += iconSize/2 + (Setup.Companion.appSettings().isDockShowLabel() ? 0 : Tool.dp2px(10, getContext()));
+            coordinates[1] -= iconSize / 2;
+            cy += iconSize / 2 + (Setup.Companion.appSettings().isDockShowLabel() ? 0 : Tool.dp2px(10, getContext()));
         }
 
         int x = coordinates[0];
@@ -295,7 +294,7 @@ public class GroupPopupView extends RevealFrameLayout {
             final AbstractApp app = Setup.appLoader().findItemApp(currentItem.getGroupItems().get(0));
             if (app != null) {
                 //Creating a new app item fixed the folder crash bug
-                Item item =  Item.newAppItem(app); //CoreHome.Companion.getDb().getItem(currentItem.getGroupItems().get(0).getId());
+                Item item = Item.newAppItem(app); //CoreHome.Companion.getDb().getItem(currentItem.getGroupItems().get(0).getId());
 
                 item.setX(currentItem.getX());
                 item.setY(currentItem.getY());
@@ -304,7 +303,7 @@ public class GroupPopupView extends RevealFrameLayout {
                 CoreHome.Companion.getDb().saveItem(item, Definitions.ItemState.Visible);
                 CoreHome.Companion.getDb().deleteItem(currentItem, true);
 
-                callBack.removeItem(currentView,false);
+                callBack.removeItem(currentView, false);
                 Tool.print("_______________________");
                 callBack.addItemToCell(item, item.getX(), item.getY());
             }
