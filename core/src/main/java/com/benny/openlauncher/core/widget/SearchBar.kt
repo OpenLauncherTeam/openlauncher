@@ -252,7 +252,7 @@ class SearchBar : FrameLayout {
                 return@Predicate true
             val s = constraint!!.toString()
             if (s.isBlank())
-                return@Predicate false
+                return@Predicate true
             else
                 return@Predicate item.label.toLowerCase().contains(s.toLowerCase())
         })
