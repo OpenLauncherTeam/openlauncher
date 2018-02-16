@@ -75,7 +75,7 @@ Translations can be contributed on GitHub. You can use Stringlate ([![Translate 
 * App on F-Droid: [Metadata](https://gitlab.com/fdroid/fdroiddata/blob/master/metadata/com.benny.openlauncher.txt) | [Page](https://f-droid.org/packages/com.benny.openlauncher/) | [Wiki](https://f-droid.org/wiki/page/com.benny.openlauncher) | [Build log](https://f-droid.org/wiki/page/com.benny.openlauncher/lastbuild)
  
 ### Project team
-[bennykok](https://github.com/BennyKok) | [dkanada](https://github.com/dkanada) | [gsantner](https://github.com/gsantner)
+[bennykok](https://github.com/BennyKok) | [dkanada](https://github.com/dkanada) | [gsantner](https://gsantner.net/?ref=readme&project=openlauncher)
 
 We would be happy if you want to be part of this game.
 
@@ -90,7 +90,7 @@ First I need to thanks everyone, from the start to now, sorry if I couldn't list
 **Donation**  
 You can support us and buy us some coffee.  
 [paypal](https://www.paypal.me/BennyKok) or
-<noscript><a href="https://liberapay.com/BennyKok/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript> | [gsantner](http://gsantner.net/#donate) <noscript><a href="https://liberapay.com/gsantner/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript> 
+<noscript><a href="https://liberapay.com/BennyKok/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript> | [gsantner](https://gsantner.net/supportme?ref=readme&project=openlauncher)
  
 ## Licensing
 The app is licensed Apache 2.0. 
