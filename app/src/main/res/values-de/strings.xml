@@ -188,5 +188,17 @@
     <string name="volume_level_media">Medien</string>
     <string name="theme_light">Hell</string>
     <string name="theme_dark">Dunkel</string>
+    <string name="intro4_community">Der Launcher von der Community für die Community</string>
+    <string name="intro4_features">Voller Features</string>
+    <string name="intro4_customizable">Anpassbar</string>
+    <string name="pref_title__desktop_rotate">Drehen</string>
+    <string name="pref_summary__desktop_rotate">Bildschirm-Rotation erlauben</string>
+    <string name="pref_title__search_bar_show_hidden_apps">Versteckte Apps anzeigen</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Versteckte Apps in Suchergebnissen anzeigen</string>
+    <string name="debug">Fehlerbehebung</string>
+    <string name="pref_title__desktop_folder_color_text">Ordner Text</string>
+    <string name="dots">Punkte</string>
+    <string name="settings__pref_drawer_label_font_size">Bezeichnung Text-Größe</string>
+    <string name="pref_title__drawer_animation_speed_modifier">App-Drawer Anmiations-Geschwindigkeit</string>
 
 </resources>

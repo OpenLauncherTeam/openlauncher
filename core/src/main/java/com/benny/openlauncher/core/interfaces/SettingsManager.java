@@ -23,7 +23,6 @@ public interface SettingsManager {
 
     int getDesktopFolderColor();
 
-    // not in app settings yet
     int getFolderLabelColor();
 
     // not in app settings yet
@@ -138,4 +137,8 @@ public interface SettingsManager {
     void setAppFirstLaunch(boolean value);
 
     boolean enableImageCaching();
+
+    float getDrawerLabelFontSize();
+
+    float getDrawerAnimationSpeedModifier();
 }

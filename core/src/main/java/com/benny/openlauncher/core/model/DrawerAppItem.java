@@ -86,6 +86,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
                     .withOnTouchGetPosition(null, null)
                     .setLabelVisibility(Setup.Companion.appSettings().isDrawerShowLabel())
                     .setTextColor(Setup.Companion.appSettings().getDrawerLabelColor())
+                    .setFontSize(appItemView.getContext(),Setup.Companion.appSettings().getDrawerLabelFontSize())
                     .setFastAdapterItem();
         }
     }

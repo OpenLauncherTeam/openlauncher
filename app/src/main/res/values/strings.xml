@@ -78,7 +78,8 @@
     <string name="pref_title__search_bar_force_browser">Force browser search</string>
     <string name="pref_summary__search_bar_force_browser">Always use the browser for online searches.</string>
     <string name="pref_title__desktop_background_color">Background</string>
-    <string name="pref_title__desktop_folder_color">Folder</string>
+    <string name="pref_title__desktop_folder_color">Folder Background</string>
+    <string name="pref_title__desktop_folder_color_text">Folder Text</string>
     <string name="pref_title__search_bar_show_hidden_apps">Show hidden apps</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Include hidden apps in the search results.</string>
 
@@ -103,6 +104,9 @@
     <string name="pref_title__drawer_card_color">Card View</string>
     <string name="pref_title__drawer_label_color">Label</string>
     <string name="pref_title__drawer_fast_scroll_color">Fast Scroll</string>
+    <string name="settings__pref_drawer_label_font_size">Label Text Size</string>
+    <string name="pref_title__drawer_animation_speed_modifier">Drawer Animation Speed</string>
+
 
     <string name="pref_title__gesture_feedback">Gesture Feedback</string>
     <string name="pref_summary__gesture_feedback">Get feedback when long pressing an item on the desktop.</string>
@@ -139,6 +143,7 @@
 
     <string name="desktop_indicator_mode_normal">Normal</string>
     <string name="desktop_indicator_mode_arrow">Arrow</string>
+    <string name="dots">Dots</string>
 
     <!-- Item Labels -->
     <string name="label_default">Default</string>

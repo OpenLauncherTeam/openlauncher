@@ -378,7 +378,7 @@ class SettingsActivity : ThemeActivity() {
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             preferenceManager.sharedPreferencesName = "app"
-            addPreferencesFromResource(R.xml.preference_debug)
+            addPreferencesFromResource(R.xml.preferences_debug)
         }
 
         override fun onPreferenceTreeClick(preference: Preference): Boolean {

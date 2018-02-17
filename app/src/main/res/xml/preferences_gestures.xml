@@ -22,7 +22,7 @@
             android:title="@string/pref_title__gesture_double_tap" />
 
         <android.support.v7.preference.ListPreference
-            android:defaultValue="0"
+            android:defaultValue="8"
             android:entries="@array/entries__gestures"
             android:entryValues="@array/values__zero_to_nine"
             android:key="@string/pref_key__gesture_swipe_up"

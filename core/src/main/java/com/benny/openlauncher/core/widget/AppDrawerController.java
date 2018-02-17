@@ -39,6 +39,7 @@ public class AppDrawerController extends RevealFrameLayout {
 
     public AppDrawerController(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        Setup.Companion.appSettings().getDrawerAnimationSpeedModifier();
     }
 
     public void setCallBack(CallBack openCallBack, CallBack closeCallBack) {
@@ -53,11 +54,12 @@ public class AppDrawerController extends RevealFrameLayout {
     public void open(int cx, int cy, int startRadius, int finalRadius) {
         if (isOpen) return;
         isOpen = true;
+        drawerAnimationTime = (long) (240 * Setup.appSettings().getDrawerAnimationSpeedModifier());
 
         appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(getChildAt(0), cx, cy, startRadius, finalRadius);
         appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         appDrawerAnimator.setDuration(drawerAnimationTime);
-        appDrawerAnimator.setStartDelay(100L);
+        appDrawerAnimator.setStartDelay((int)(Setup.appSettings().getDrawerAnimationSpeedModifier() * 200));
         openCallBack.onStart();
         appDrawerAnimator.addListener(new Animator.AnimatorListener() {
             @Override
@@ -65,7 +67,7 @@ public class AppDrawerController extends RevealFrameLayout {
                 getChildAt(0).setVisibility(View.VISIBLE);
 
                 ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(getBackground(), PropertyValuesHolder.ofInt("alpha", 0, 255));
-                animator.setDuration(200);
+                animator.setDuration(drawerAnimationTime);
                 animator.start();
 
                 switch (drawerMode) {
@@ -76,12 +78,12 @@ public class AppDrawerController extends RevealFrameLayout {
                         if (drawerViewPaged.pages.size() > 0) {
                             View mGrid = drawerViewPaged.pages.get(drawerViewPaged.getCurrentItem()).findViewById(R.id.group);
                             mGrid.setAlpha(0);
-                            mGrid.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime - 50).setInterpolator(new AccelerateDecelerateInterpolator());
+                            mGrid.animate().alpha(1).setDuration(150L).setStartDelay(Math.max(drawerAnimationTime - 50, 1)).setInterpolator(new AccelerateDecelerateInterpolator());
                         }
                         break;
                     case DrawerMode.VERTICAL:
                         drawerViewGrid.recyclerView.setAlpha(0);
-                        drawerViewGrid.recyclerView.animate().alpha(1).setDuration(150L).setStartDelay(drawerAnimationTime - 50).setInterpolator(new AccelerateDecelerateInterpolator());
+                        drawerViewGrid.recyclerView.animate().alpha(1).setDuration(150L).setStartDelay(Math.max(drawerAnimationTime - 50, 1)).setInterpolator(new AccelerateDecelerateInterpolator());
                         break;
                 }
             }
@@ -119,7 +121,7 @@ public class AppDrawerController extends RevealFrameLayout {
                 closeCallBack.onStart();
 
                 ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(getBackground(), PropertyValuesHolder.ofInt("alpha", 255, 0));
-                animator.setDuration(200);
+                animator.setDuration(drawerAnimationTime);
                 animator.start();
             }
 

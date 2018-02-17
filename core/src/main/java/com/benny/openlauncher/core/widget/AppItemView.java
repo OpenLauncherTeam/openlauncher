@@ -47,6 +47,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     private boolean vibrateWhenLongPress;
     private float labelHeight;
     private int targetedWidth;
+    private int fontSizeSp;
     private int targetedHeightPadding;
     private float heightPadding;
     private boolean fastAdapterItem;
@@ -68,15 +69,16 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         labelHeight = Tool.dp2px(14, getContext());
 
-        textPaint.setTextSize(Tool.sp2px(getContext(), 14));
+        textPaint.setTextSize(Tool.sp2px(getContext(), 13));
         textPaint.setColor(Color.DKGRAY);
         textPaint.setTypeface(typeface);
     }
 
-    public static AppItemView createAppItemViewPopup(Context context, Item groupItem, AbstractApp item, int iconSize) {
+    public static AppItemView createAppItemViewPopup(Context context, Item groupItem, AbstractApp item, int iconSize, float fontSizeSp) {
         AppItemView.Builder b = new AppItemView.Builder(context, iconSize)
                 .withOnTouchGetPosition(groupItem, Setup.Companion.itemGestureCallback())
-                .setTextColor(Setup.Companion.appSettings().getFolderLabelColor());
+                .setTextColor(Setup.Companion.appSettings().getFolderLabelColor())
+                .setFontSize(context, fontSizeSp);
         if (groupItem.getType() == Item.Type.SHORTCUT) {
             b.setShortcutItem(groupItem);
         } else {
@@ -95,6 +97,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                 .withOnLongClick(app, DragAction.Action.APP_DRAWER, longPressCallBack)
                 .setLabelVisibility(Setup.Companion.appSettings().isDrawerShowLabel())
                 .setTextColor(Setup.Companion.appSettings().getDrawerLabelColor())
+                .setFontSize(context, Setup.Companion.appSettings().getDrawerLabelFontSize())
                 .getView();
     }
 
@@ -419,6 +422,11 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder setTextColor(@ColorInt int color) {
             view.textPaint.setColor(color);
+            return this;
+        }
+
+        public Builder setFontSize(Context context, float fontSizeSp) {
+            view.textPaint.setTextSize(Tool.sp2px(context, fontSizeSp));
             return this;
         }
 

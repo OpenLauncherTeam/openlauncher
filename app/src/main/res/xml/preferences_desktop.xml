@@ -119,6 +119,13 @@
             app:cpv_showAlphaSlider="true"/>
 
         <com.benny.openlauncher.preference.ColorPreferenceSupport
+            android:defaultValue="@color/black"
+            android:key="@string/pref_key__desktop_folder_label_color"
+            android:title="@string/pref_title__desktop_folder_color_text"
+            app:cpv_dialogTitle="@string/pref_title__desktop_folder_color_text"
+            app:cpv_showAlphaSlider="true"/>
+
+        <com.benny.openlauncher.preference.ColorPreferenceSupport
             android:defaultValue="@color/colorPrimaryDark"
             android:key="@string/pref_key__minibar_background_color"
             android:title="@string/pref_title__minibar_background_color"

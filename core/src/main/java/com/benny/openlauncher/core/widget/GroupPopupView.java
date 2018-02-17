@@ -3,6 +3,7 @@ package com.benny.openlauncher.core.widget;
 import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.CoreHome;
 import com.benny.openlauncher.core.interfaces.AbstractApp;
+import com.benny.openlauncher.core.interfaces.SettingsManager;
 import com.benny.openlauncher.core.manager.Setup;
 import com.benny.openlauncher.core.model.Item;
 import com.benny.openlauncher.core.util.Definitions;
@@ -90,7 +92,8 @@ public class GroupPopupView extends RevealFrameLayout {
         String label = item.getLabel();
         textView.setVisibility(label.isEmpty() ? GONE : VISIBLE);
         textView.setText(label);
-        textView.setTextColor(Setup.appSettings().getDrawerLabelColor());
+        textView.setTextColor(Setup.appSettings().getFolderLabelColor());
+        textView.setTypeface(null, Typeface.BOLD);
 
         final Context c = itemView.getContext();
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.getGroupItems().size());
@@ -105,9 +108,10 @@ public class GroupPopupView extends RevealFrameLayout {
                 if (y2 * cellSize[0] + x2 > item.getGroupItems().size() - 1) {
                     continue;
                 }
+                final SettingsManager settingsManager = Setup.Companion.appSettings();
                 final Item groupItem = item.getGroupItems().get(y2 * cellSize[0] + x2);
                 final AbstractApp groupApp = groupItem.getType() != Item.Type.SHORTCUT ? Setup.Companion.appLoader().findItemApp(groupItem) : null;
-                AppItemView appItemView = AppItemView.createAppItemViewPopup(getContext(), groupItem, groupApp, Setup.Companion.appSettings().getDesktopIconSize());
+                AppItemView appItemView = AppItemView.createAppItemViewPopup(getContext(), groupItem, groupApp, settingsManager.getDesktopIconSize(), settingsManager.getDrawerLabelFontSize());
                 final View view = appItemView.getView();
 
                 view.setOnLongClickListener(new OnLongClickListener() {

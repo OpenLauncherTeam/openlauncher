@@ -54,11 +54,26 @@
             android:summary="@string/pref_summary__drawer_show_position_indicator"
             android:title="@string/pref_title__drawer_show_position_indicator" />
 
+        <android.support.v7.preference.SeekBarPreference
+            android:defaultValue="30"
+            android:key="@string/pref_key__drawer_animation_speed_modifier"
+            android:max="100"
+            android:title="@string/pref_title__drawer_animation_speed_modifier"
+            app:min="1" />
+
         <android.support.v7.preference.CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__drawer_show_label"
             android:summary="@string/pref_summary__drawer_show_label"
             android:title="@string/pref_title__drawer_show_label" />
+
+        <android.support.v7.preference.SeekBarPreference
+            android:defaultValue="13"
+            android:key="@string/pref_key__drawer_label_font_size"
+            android:max="20"
+            android:title="@string/settings__pref_drawer_label_font_size"
+            app:min="7" />
+
 
     </android.support.v7.preference.PreferenceCategory>
 
@@ -72,21 +87,21 @@
             app:cpv_showAlphaSlider="true" />
 
         <com.benny.openlauncher.preference.ColorPreferenceSupport
-            android:defaultValue="@color/white"
+            android:defaultValue="@color/drawer_background_transparentish"
             android:key="@string/pref_key__drawer_card_color"
             android:title="@string/pref_title__drawer_card_color"
             app:cpv_dialogTitle="@string/pref_title__drawer_card_color"
             app:cpv_showAlphaSlider="true" />
 
         <com.benny.openlauncher.preference.ColorPreferenceSupport
-            android:defaultValue="@color/darkGrey"
+            android:defaultValue="@color/white"
             android:key="@string/pref_key__drawer_label_color"
             android:title="@string/pref_title__drawer_label_color"
             app:cpv_dialogTitle="@string/pref_title__drawer_label_color"
             app:cpv_showAlphaSlider="true" />
 
         <com.benny.openlauncher.preference.ColorPreferenceSupport
-            android:defaultValue="@color/colorAccent"
+            android:defaultValue="@color/op_red"
             android:key="@string/pref_key__drawer_fast_scroll_color"
             android:title="@string/pref_title__drawer_fast_scroll_color"
             app:cpv_dialogTitle="@string/pref_title__drawer_fast_scroll_color"

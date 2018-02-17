@@ -13,10 +13,10 @@ import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.core.widget.Desktop;
 import com.benny.openlauncher.core.widget.PagerIndicator;
 
+import net.gsantner.opoc.util.AppSettingsBase;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-import net.gsantner.opoc.util.AppSettingsBase;
 
 public class AppSettings extends AppSettingsBase implements SettingsManager {
     private AppSettings(Context context) {
@@ -127,7 +127,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     @Override
     public int getFolderLabelColor() {
-        return getDrawerLabelColor();
+        return getInt(R.string.pref_key__desktop_folder_label_color, Color.BLACK);
     }
 
     @Override
@@ -193,16 +193,16 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     public int getDrawerCardColor() {
-        return getInt(R.string.pref_key__drawer_card_color, Color.WHITE);
+        return getInt(R.string.pref_key__drawer_card_color, rcolor(R.color.drawer_background_transparentish));
     }
 
     public int getDrawerLabelColor() {
-        return getInt(R.string.pref_key__drawer_label_color, Color.DKGRAY);
+        return getInt(R.string.pref_key__drawer_label_color, Color.WHITE);
     }
 
     @Override
     public int getDrawerFastScrollColor() {
-        return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.Companion.appContext(), R.color.colorAccent));
+        return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.Companion.appContext(), R.color.op_red));
     }
 
     @Override
@@ -233,7 +233,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     public String getGestureSwipeUp() {
-        return getString(R.string.pref_key__gesture_swipe_up, "0");
+        return getString(R.string.pref_key__gesture_swipe_up, "8");
     }
 
     public String getGestureSwipeDown() {
@@ -259,7 +259,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     public int getIconSize() {
-        return getInt(R.string.pref_key__icon_size, 52);
+        return getInt(R.string.pref_key__icon_size, 48);
     }
 
     public String getIconPack() {
@@ -364,5 +364,15 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     @Override
     public boolean enableImageCaching() {
         return true;
+    }
+
+    @Override
+    public float getDrawerLabelFontSize() {
+        return getInt(R.string.pref_key__drawer_label_font_size, 13);
+    }
+
+    @Override
+    public float getDrawerAnimationSpeedModifier() {
+        return (float) (getInt(R.string.pref_key__drawer_animation_speed_modifier, 30) / 100.0);
     }
 }

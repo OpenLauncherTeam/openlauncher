@@ -17,7 +17,6 @@ import android.view.View.OnClickListener
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.benny.openlauncher.core.R
-import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.core.drawable.LauncherCircleDrawable
 import com.benny.openlauncher.core.interfaces.AbstractApp
 import com.benny.openlauncher.core.interfaces.AppUpdateListener
@@ -28,8 +27,6 @@ import com.benny.openlauncher.core.util.DragAction
 import com.benny.openlauncher.core.util.Tool
 import com.mikepenz.fastadapter.IItemAdapter
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
-import eightbitlab.com.blurview.BlurView
-import eightbitlab.com.blurview.RenderScriptBlur
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -173,6 +170,16 @@ class SearchBar : FrameLayout {
 
             override fun afterTextChanged(s: Editable) {
 
+            }
+        })
+        searchInput.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if ((event != null) && (event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    callback!!.onInternetSearch(searchInput.text.toString())
+                    searchInput.text.clear()
+                    return true
+                }
+                return false
             }
         })
         val inputCardParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
