@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.benny.openlauncher.core.R;
-import com.benny.openlauncher.core.activity.CoreHome;
 import com.benny.openlauncher.core.interfaces.AbstractApp;
 import com.benny.openlauncher.core.interfaces.FastItem;
 import com.benny.openlauncher.core.manager.Setup;
@@ -86,7 +85,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
                     .withOnTouchGetPosition(null, null)
                     .setLabelVisibility(Setup.Companion.appSettings().isDrawerShowLabel())
                     .setTextColor(Setup.Companion.appSettings().getDrawerLabelColor())
-                    .setFontSize(appItemView.getContext(),Setup.Companion.appSettings().getDrawerLabelFontSize())
+                    .setFontSize(appItemView.getContext(), Setup.Companion.appSettings().getDrawerLabelFontSize())
                     .setFastAdapterItem();
         }
     }

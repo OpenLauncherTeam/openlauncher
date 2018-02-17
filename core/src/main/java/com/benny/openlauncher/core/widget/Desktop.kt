@@ -6,7 +6,10 @@ import android.content.Context
 import android.graphics.Point
 import android.os.Build
 import android.util.AttributeSet
-import android.view.*
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowInsets
 import android.view.animation.AccelerateDecelerateInterpolator
 import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.core.manager.Setup
@@ -282,7 +285,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
 
-        when (ev!!.actionMasked){
+        when (ev!!.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 CoreHome.launcher?.getDesktopIndicator()?.showNow()
             }
@@ -293,7 +296,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
 
     override fun onTouchEvent(ev: MotionEvent?): Boolean {
 
-        when (ev!!.actionMasked){
+        when (ev!!.actionMasked) {
             MotionEvent.ACTION_UP -> {
                 CoreHome.launcher?.getDesktopIndicator()?.hideDelay()
             }

@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.ButterKnife
 import com.benny.openlauncher.R
 import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.util.AppSettings

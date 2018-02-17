@@ -1,29 +1,24 @@
 package com.benny.openlauncher.viewutil
 
-import android.app.WallpaperManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Environment
 import android.support.v7.widget.LinearLayoutManager
-import android.view.DragEvent
 import android.view.Gravity
 import android.widget.Toast
-
 import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.R
 import com.benny.openlauncher.core.model.IconLabelItem
 import com.benny.openlauncher.core.model.Item
-import com.benny.openlauncher.core.util.DragNDropHandler
 import com.benny.openlauncher.core.util.Tool
 import com.benny.openlauncher.util.AppManager
 import com.benny.openlauncher.util.LauncherAction
 import com.benny.openlauncher.util.copy
 import com.benny.openlauncher.util.getStartAppIntent
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
-
 import java.io.File
-import java.util.ArrayList
+import java.util.*
 
 object DialogHelper {
 

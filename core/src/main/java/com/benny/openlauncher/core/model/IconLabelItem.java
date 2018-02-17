@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -159,7 +158,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
-    public void setHideLabel(boolean hideLabel){
+    public void setHideLabel(boolean hideLabel) {
         this.hideLabel = hideLabel;
     }
 
@@ -179,7 +178,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         this.iconProvider = Setup.imageLoader().createIconProvider(resId);
     }
 
-    public void setIconGravity(int gravity){
+    public void setIconGravity(int gravity) {
         this.iconGravity = gravity;
     }
 
@@ -219,7 +218,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         if (hideLabel) {
             holder.textView.setText(null);
             iconProvider.loadIconIntoTextView(holder.textView, forceSize, Gravity.TOP);
-        }else {
+        } else {
             iconProvider.loadIconIntoTextView(holder.textView, forceSize, iconGravity);
         }
 

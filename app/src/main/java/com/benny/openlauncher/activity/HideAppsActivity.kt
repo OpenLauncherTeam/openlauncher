@@ -53,7 +53,7 @@ class HideAppsActivity : ThemeActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    internal inner class ViewPagerAdapter (manager: FragmentManager) : FragmentPagerAdapter(manager) {
+    internal inner class ViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
         private val mFragmentList = ArrayList<Fragment>()
         private val mFragmentTitleList = ArrayList<String>()
 

@@ -26,12 +26,7 @@ import android.support.v7.preference.PreferenceManager
 import android.support.v7.preference.PreferenceViewHolder
 import android.util.AttributeSet
 import android.view.ContextThemeWrapper
-
-import com.jaredrummler.android.colorpicker.R
-import com.jaredrummler.android.colorpicker.ColorPanelView
-import com.jaredrummler.android.colorpicker.ColorPickerDialog
-import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
-import com.jaredrummler.android.colorpicker.ColorShape
+import com.jaredrummler.android.colorpicker.*
 
 /**
  * A Preference to select a color

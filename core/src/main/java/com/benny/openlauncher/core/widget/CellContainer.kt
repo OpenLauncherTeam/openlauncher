@@ -466,7 +466,7 @@ open class CellContainer : ViewGroup {
         Tool.print("Setting")
         for (x in lp.x until lp.x + lp.xSpan) {
             for (y in lp.y until lp.y + lp.ySpan) {
-                Tool.print("Setting ok (" + b.toString(),")")
+                Tool.print("Setting ok (" + b.toString(), ")")
                 occupied!![x][y] = b
             }
         }

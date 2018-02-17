@@ -1,6 +1,6 @@
 <resources>
     <!-- This is the serbian latin variant. As it is only supported by Android 7 or above, latin is used for default serbian till there is a cyrillic translation available too -->
-  <!-- Toasts -->
+    <!-- Toasts -->
     <string name="toast_free_ram">Slobodna Memorija: %1$d MB. Sačuvano %2$d MB.</string>
     <string name="toast_free_all_ram">Slobodna Memorija: %1$d MB. Vaš RAM je u najboljem stanju.</string>
     <string name="toast_device_admin_required">Molimo vas omogzućite administraciju uređaja.</string>

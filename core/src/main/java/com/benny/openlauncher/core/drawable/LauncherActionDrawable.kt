@@ -1,6 +1,5 @@
 package com.benny.openlauncher.core.drawable
 
-import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import com.benny.openlauncher.core.manager.Setup

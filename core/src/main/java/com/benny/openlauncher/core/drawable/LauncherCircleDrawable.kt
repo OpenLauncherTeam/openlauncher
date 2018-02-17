@@ -1,13 +1,8 @@
 package com.benny.openlauncher.core.drawable
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.ColorFilter
-import android.graphics.Paint
-import android.graphics.PixelFormat
+import android.graphics.*
 import android.graphics.drawable.Drawable
-
 import com.benny.openlauncher.core.util.Tool
 
 class LauncherCircleDrawable(context: Context, icon: Drawable, color: Int) : Drawable() {

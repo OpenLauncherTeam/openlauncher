@@ -4,17 +4,11 @@ import android.content.ClipData
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Point
-import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Parcelable
 import android.view.DragEvent
 import android.view.View
 import com.benny.openlauncher.core.activity.CoreHome
-import com.benny.openlauncher.core.interfaces.AbstractApp
-import com.benny.openlauncher.core.manager.Setup
-import com.benny.openlauncher.core.model.IconLabelItem
-
 import com.benny.openlauncher.core.model.Item
 import com.benny.openlauncher.core.viewutil.GoodDragShadowBuilder
 import com.benny.openlauncher.core.widget.AppItemView
@@ -29,14 +23,14 @@ object DragNDropHandler {
     private fun loadBitmapFromView(view: View): Bitmap {
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-        var tempLabel : String? = null
-        if (view is AppItemView){
+        var tempLabel: String? = null
+        if (view is AppItemView) {
             tempLabel = view.label
             view.label = " "
         }
         view.layout(0, 0, view.width, view.height)
         view.draw(canvas)
-        if (view is AppItemView){
+        if (view is AppItemView) {
             view.label = tempLabel
         }
         view.parent.requestLayout()

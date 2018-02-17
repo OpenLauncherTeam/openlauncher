@@ -1,7 +1,6 @@
 package com.benny.openlauncher.activity
 
 import android.content.Context
-import android.content.res.Resources
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle

@@ -9,7 +9,6 @@ import android.content.pm.ResolveInfo
 import android.os.AsyncTask
 import android.support.v4.app.ActivityCompat
 import android.view.Gravity
-
 import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.R
 import com.benny.openlauncher.activity.Home
@@ -24,11 +23,8 @@ import com.benny.openlauncher.core.util.BaseIconProvider
 import com.benny.openlauncher.core.util.Tool
 import com.benny.openlauncher.core.util.toPx
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
-
 import java.text.Collator
-import java.util.ArrayList
-import java.util.Collections
-import java.util.UUID
+import java.util.*
 
 class AppManager(val context: Context) : Setup.AppLoader<AppManager.App> {
 

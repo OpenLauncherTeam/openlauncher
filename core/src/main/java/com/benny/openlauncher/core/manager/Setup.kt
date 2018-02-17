@@ -3,13 +3,7 @@ package com.benny.openlauncher.core.manager
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
-import android.view.DragEvent
-
-import com.benny.openlauncher.core.interfaces.AbstractApp
-import com.benny.openlauncher.core.interfaces.AppDeleteListener
-import com.benny.openlauncher.core.interfaces.AppUpdateListener
-import com.benny.openlauncher.core.interfaces.DialogListener
-import com.benny.openlauncher.core.interfaces.SettingsManager
+import com.benny.openlauncher.core.interfaces.*
 import com.benny.openlauncher.core.model.Item
 import com.benny.openlauncher.core.util.BaseIconProvider
 import com.benny.openlauncher.core.util.Definitions

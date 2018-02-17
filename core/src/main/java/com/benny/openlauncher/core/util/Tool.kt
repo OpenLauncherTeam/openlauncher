@@ -18,7 +18,6 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-
 import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.core.interfaces.AbstractApp
 import com.benny.openlauncher.core.interfaces.IconProvider
@@ -26,12 +25,11 @@ import com.benny.openlauncher.core.manager.Setup
 import com.benny.openlauncher.core.model.Item
 import com.benny.openlauncher.core.util.Tool.dp2Px
 import com.benny.openlauncher.core.viewutil.ItemGestureListener
-
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.net.URISyntaxException
-import java.util.ArrayList
+import java.util.*
 
 fun Int.toPx(): Int = dp2Px(this)
 

@@ -118,7 +118,7 @@ public class IconPackHelper {
                     scaledOrig = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
                     scaledBitmap = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
                     canvas = new Canvas(scaledBitmap);
-                    
+
                     if (back != null)
                         canvas.drawBitmap(back, getResizedMatrix(back, iconSize, iconSize), p);
 

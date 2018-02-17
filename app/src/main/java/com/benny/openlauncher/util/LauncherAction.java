@@ -1,13 +1,11 @@
 package com.benny.openlauncher.util;
 
-import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -19,8 +17,6 @@ import com.benny.openlauncher.activity.MinibarEditActivity;
 import com.benny.openlauncher.activity.SettingsActivity;
 import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
-
-import java.util.List;
 
 public class LauncherAction {
 

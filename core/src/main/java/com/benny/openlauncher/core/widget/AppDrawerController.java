@@ -59,7 +59,7 @@ public class AppDrawerController extends RevealFrameLayout {
         appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(getChildAt(0), cx, cy, startRadius, finalRadius);
         appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         appDrawerAnimator.setDuration(drawerAnimationTime);
-        appDrawerAnimator.setStartDelay((int)(Setup.appSettings().getDrawerAnimationSpeedModifier() * 200));
+        appDrawerAnimator.setStartDelay((int) (Setup.appSettings().getDrawerAnimationSpeedModifier() * 200));
         openCallBack.onStart();
         appDrawerAnimator.addListener(new Animator.AnimatorListener() {
             @Override

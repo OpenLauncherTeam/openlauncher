@@ -5,14 +5,11 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
-import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.View
-
 import com.benny.openlauncher.core.manager.Setup
 import com.benny.openlauncher.core.util.Tool
 import com.benny.openlauncher.core.util.toPx
-
 import com.benny.openlauncher.core.widget.PagerIndicator.Mode.ARROW
 import com.benny.openlauncher.core.widget.PagerIndicator.Mode.NORMAL
 

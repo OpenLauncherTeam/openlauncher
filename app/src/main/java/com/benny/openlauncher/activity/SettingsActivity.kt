@@ -10,12 +10,10 @@ import android.support.v4.app.ActivityCompat
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceCategory
 import android.support.v7.preference.PreferenceFragmentCompat
-import com.afollestad.materialdialogs.DialogAction
 import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.R
 import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.core.util.DatabaseHelper
-import com.benny.openlauncher.core.util.Tool
 import com.benny.openlauncher.core.widget.AppDrawerController
 import com.benny.openlauncher.util.AppManager
 import com.benny.openlauncher.util.AppSettings
@@ -123,7 +121,7 @@ class SettingsActivity : ThemeActivity() {
                 } else if (settings.isKeyEqual(key, R.string.pref_key__cat_icons)) {
                     (activity as SettingsActivity).showFragment(SettingsFragmentIcons.TAG, true)
                     return true
-                }else if (settings.isKeyEqual(key, R.string.pref_key__cat_debug)) {
+                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_debug)) {
                     (activity as SettingsActivity).showFragment(SettingsFragmentDebug.TAG, true)
                     return true
                 } else if (settings.isKeyEqual(key, R.string.pref_key__cat_miscellaneous)) {
@@ -386,7 +384,7 @@ class SettingsActivity : ThemeActivity() {
                 val key = preference.key
 
                 if (key == getString(R.string.pref_key__clear_database)) {
-                    DialogHelper.alertDialog(context!!,"Clear user data","Are you sure, all your shortcuts will be removed.", MaterialDialog.SingleButtonCallback { dialog, which ->
+                    DialogHelper.alertDialog(context!!, "Clear user data", "Are you sure, all your shortcuts will be removed.", MaterialDialog.SingleButtonCallback { dialog, which ->
                         if (Home.launcher != null)
                             Home.launcher?.recreate()
                         (CoreHome.db as DatabaseHelper).onUpgrade((CoreHome.db as DatabaseHelper).writableDatabase, 1, 1)

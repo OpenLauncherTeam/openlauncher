@@ -4,16 +4,13 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Parcel
 import android.os.Parcelable
-
 import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.core.interfaces.AbstractApp
 import com.benny.openlauncher.core.interfaces.LabelProvider
 import com.benny.openlauncher.core.manager.Setup
 import com.benny.openlauncher.core.util.BaseIconProvider
 import com.benny.openlauncher.core.util.Tool
-
-import java.util.ArrayList
-import java.util.Random
+import java.util.*
 
 data class Item(
         var type: Type? = null,
