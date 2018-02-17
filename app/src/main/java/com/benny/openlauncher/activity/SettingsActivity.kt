@@ -293,7 +293,14 @@ class SettingsActivity : ThemeActivity() {
         companion object {
             val TAG = "com.benny.openlauncher.settings.SettingsFragmentAppDrawer"
 
-            private val requireRestartPreferenceIds = intArrayOf(R.string.pref_key__drawer_columns, R.string.pref_key__drawer_rows, R.string.pref_key__drawer_style, R.string.pref_key__drawer_show_card_view, R.string.pref_key__drawer_show_position_indicator, R.string.pref_key__drawer_show_label, R.string.pref_key__drawer_background_color, R.string.pref_key__drawer_card_color, R.string.pref_key__drawer_label_color, R.string.pref_key__drawer_fast_scroll_color)
+            private val requireRestartPreferenceIds = intArrayOf(
+                    R.string.pref_key__drawer_columns, R.string.pref_key__drawer_rows, R.string.pref_key__drawer_style,
+                    R.string.pref_key__drawer_show_card_view, R.string.pref_key__drawer_show_position_indicator,
+                    R.string.pref_key__drawer_show_label, R.string.pref_key__drawer_background_color,
+                    R.string.pref_key__drawer_card_color, R.string.pref_key__drawer_label_color,
+                    R.string.pref_key__drawer_fast_scroll_color, R.string.pref_key__date_bar_date_format_custom_1,
+                    R.string.pref_key__date_bar_date_format_custom_2, R.string.pref_key__date_bar_date_format_type,
+                    R.string.pref_key__date_bar_date_text_color)
         }
     }
 

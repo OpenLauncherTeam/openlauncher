@@ -23,12 +23,12 @@
     <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__appearance">
 
         <!--<android.support.v7.preference.ListPreference-->
-            <!--android:defaultValue="0"-->
-            <!--android:entries="@array/entries__desktop_styles"-->
-            <!--android:entryValues="@array/values__zero_to_one"-->
-            <!--android:key="@string/pref_key__desktop_style"-->
-            <!--android:summary="@string/pref_summary__desktop_style"-->
-            <!--android:title="@string/pref_title__desktop_style" />-->
+        <!--android:defaultValue="0"-->
+        <!--android:entries="@array/entries__desktop_styles"-->
+        <!--android:entryValues="@array/values__zero_to_one"-->
+        <!--android:key="@string/pref_key__desktop_style"-->
+        <!--android:summary="@string/pref_summary__desktop_style"-->
+        <!--android:title="@string/pref_title__desktop_style" />-->
 
         <android.support.v7.preference.ListPreference
             android:defaultValue="0"
@@ -109,28 +109,60 @@
             android:key="@string/pref_key__desktop_background_color"
             android:title="@string/pref_title__desktop_background_color"
             app:cpv_dialogTitle="@string/pref_title__desktop_background_color"
-            app:cpv_showAlphaSlider="true"/>
+            app:cpv_showAlphaSlider="true" />
 
         <com.benny.openlauncher.preference.ColorPreferenceSupport
             android:defaultValue="@color/white"
             android:key="@string/pref_key__desktop_folder_color"
             android:title="@string/pref_title__desktop_folder_color"
             app:cpv_dialogTitle="@string/pref_title__desktop_folder_color"
-            app:cpv_showAlphaSlider="true"/>
+            app:cpv_showAlphaSlider="true" />
 
         <com.benny.openlauncher.preference.ColorPreferenceSupport
             android:defaultValue="@color/black"
             android:key="@string/pref_key__desktop_folder_label_color"
             android:title="@string/pref_title__desktop_folder_color_text"
             app:cpv_dialogTitle="@string/pref_title__desktop_folder_color_text"
-            app:cpv_showAlphaSlider="true"/>
+            app:cpv_showAlphaSlider="true" />
 
         <com.benny.openlauncher.preference.ColorPreferenceSupport
             android:defaultValue="@color/colorPrimaryDark"
             android:key="@string/pref_key__minibar_background_color"
             android:title="@string/pref_title__minibar_background_color"
             app:cpv_dialogTitle="@string/pref_title__minibar_background_color"
-            app:cpv_showAlphaSlider="true"/>
+            app:cpv_showAlphaSlider="true" />
+
+    </android.support.v7.preference.PreferenceCategory>
+
+    <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__date_bar">
+
+        <com.benny.openlauncher.preference.ColorPreferenceSupport
+            android:defaultValue="@color/white"
+            android:key="@string/pref_key__date_bar_date_text_color"
+            android:title="@string/pref_title__date_bar_text_color"
+            app:cpv_dialogTitle="@string/pref_title__date_bar_text_color"
+            app:cpv_showAlphaSlider="true" />
+
+        <android.support.v7.preference.ListPreference
+            android:defaultValue="1"
+            android:entries="@array/entires__date_format"
+            android:entryValues="@array/values__zero_to_four"
+            android:key="@string/pref_key__date_bar_date_format_type"
+            android:title="@string/pref_title__date_bar_date_format" />
+
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue="@string/pref_key__date_bar_date_format_custom__default_value_1"
+            android:hint="@string/pref_key__date_bar_date_format_custom__default_value_1"
+            android:key="@string/pref_key__date_bar_date_format_custom_1"
+            android:summary="@string/pref_title__date_bar"
+            android:title="@string/pref_title__date_bar_date_format_custom_1" />
+
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue="@string/pref_key__date_bar_date_format_custom__default_value_2"
+            android:hint="@string/pref_key__date_bar_date_format_custom__default_value_2"
+            android:key="@string/pref_key__date_bar_date_format_custom_2"
+            android:summary="@string/pref_title__date_bar"
+            android:title="@string/pref_title__date_bar_date_format_custom_2" />
 
     </android.support.v7.preference.PreferenceCategory>
 

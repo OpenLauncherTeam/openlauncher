@@ -83,8 +83,13 @@ public interface SettingsManager {
     // not in app settings yet
     boolean isSearchBarTimeEnabled();
 
-    // not in app settings yet
     SimpleDateFormat getUserDateFormat();
+
+    int getDesktopDateMode();
+
+    // not in app settings yet
+    int getDesktopDateTextColor();
+
 
     // not in app settings yet
     boolean isResetSearchBarOnOpen();

@@ -16,6 +16,7 @@
     <string name="intro4_community">The Launcher from the community for the community</string>
     <string name="intro4_features">Features packed</string>
     <string name="intro4_customizable">Customizable</string>
+    <string name="custom">Custom</string>
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
@@ -178,4 +179,10 @@
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
     <string name="debug">Debug</string>
+    <string name="pref_title__date_bar">Date Bar</string>
+    <string name="pref_title__date_bar_text_color">Text Color</string>
+    <string name="pref_title__date_bar_date_format">Date Format</string>
+    <string name="pref_title__date_bar_date_format_custom_1">Custom Format: Line 1</string>
+    <string name="pref_title__date_bar_date_format_custom_2">Custom Format: Line 2</string>
+
 </resources>

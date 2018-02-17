@@ -20,6 +20,7 @@ import com.benny.openlauncher.core.R
 import com.benny.openlauncher.core.drawable.LauncherCircleDrawable
 import com.benny.openlauncher.core.interfaces.AbstractApp
 import com.benny.openlauncher.core.interfaces.AppUpdateListener
+import com.benny.openlauncher.core.interfaces.SettingsManager
 import com.benny.openlauncher.core.manager.Setup
 import com.benny.openlauncher.core.model.IconLabelItem
 import com.benny.openlauncher.core.model.Item
@@ -349,13 +350,24 @@ class SearchBar : FrameLayout {
     }
 
     fun updateClock() {
-        if (!Setup.appSettings().isSearchBarTimeEnabled) {
+        val settingsManager: SettingsManager =  Setup.appSettings()
+        if (!settingsManager.isSearchBarTimeEnabled) {
             searchClock!!.text = ""
             return
         }
-
+        searchClock!!.setTextColor(settingsManager.desktopDateTextColor)
         val calendar = Calendar.getInstance(Locale.getDefault())
+
+
         var sdf: SimpleDateFormat? = mode.sdf
+        val mode = settingsManager.desktopDateMode
+        if (mode >= 0 && mode < Mode.count()){
+            sdf = Mode.getById(mode).sdf
+            if (mode == 0){
+                sdf = settingsManager.userDateFormat
+            }
+        }
+
         if (sdf == null) {
             sdf = Setup.appSettings().userDateFormat
         }
@@ -408,6 +420,9 @@ class SearchBar : FrameLayout {
                     }
                 }
                 throw RuntimeException("ID not found!")
+            }
+            fun count(): Int {
+                return values().size;
             }
         }
     }

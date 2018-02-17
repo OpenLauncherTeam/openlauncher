@@ -17,6 +17,7 @@ import net.gsantner.opoc.util.AppSettingsBase;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class AppSettings extends AppSettingsBase implements SettingsManager {
     private AppSettings(Context context) {
@@ -78,8 +79,26 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     @Override
+    @SuppressLint("SimpleDateFormat")
     public SimpleDateFormat getUserDateFormat() {
-        return null;
+        String line1 = getString(R.string.pref_key__date_bar_date_format_custom_1, rstr(R.string.pref_key__date_bar_date_format_custom__default_value_1));
+        String line2 = getString(R.string.pref_key__date_bar_date_format_custom_2, rstr(R.string.pref_key__date_bar_date_format_custom__default_value_2));
+
+        try {
+            return new SimpleDateFormat((line1 + "'\n'" + line2).replace("''", ""), Locale.getDefault());
+        } catch (Exception ex) {
+            return new SimpleDateFormat("'Invalid pattern''\n''Invalid Pattern'");
+        }
+    }
+
+    @Override
+    public int getDesktopDateMode() {
+        return getIntOfStringPref(R.string.pref_key__date_bar_date_format_type, 1);
+    }
+
+    @Override
+    public int getDesktopDateTextColor() {
+        return getInt(R.string.pref_key__date_bar_date_text_color, Color.WHITE);
     }
 
     @Override

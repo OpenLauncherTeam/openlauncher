@@ -3,7 +3,8 @@
     <string name="intro1_title" translatable="false">@string/app_name</string>
     <string name="intro2_title" translatable="false">@string/minibar</string>
     <string name="truly_launcher" translatable="false">The truly open source launcher that comes with awesome features!</string>
-
+    <string name="pref_key__date_bar_date_format_custom__default_value_1" translatable="false"><![CDATA[EEEE\', \'dd\'.\']]></string>
+    <string name="pref_key__date_bar_date_format_custom__default_value_2" translatable="false"><![CDATA[MMMM yyyy\', KW \'ww]]></string>
 
     <string name="about_team" translatable="false">Open Launcher Team</string>
     <string name="about_credit_text_bennykok" translatable="false">Project starter</string>
@@ -95,5 +96,10 @@
 
     <string name="pref_key__desktop_search_use_grid" translatable="false">pref_key__desktop_search_use_grid</string>
     <string name="pref_key__drawer_label_font_size" translatable="false">pref_key__drawer_label_font_size</string>
+    <string name="pref_key__date_bar_date_format_type" translatable="false">pref_key__date_bar_date_format_type</string>
+    <string name="pref_key__date_bar_date_format_custom_1" translatable="false">pref_key__date_bar_date_format_custom_1</string>
+    <string name="pref_key__date_bar_date_format_custom_2" translatable="false">pref_key__date_bar_date_format_custom_2</string>
+    <string name="pref_key__date_bar_date_text_color" translatable="false">pref_key__date_bar_date_text_color</string>
+
 
 </resources>

@@ -793,7 +793,11 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
 
     private fun updateSearchClock() {
         if (searchBar!!.searchClock.text != null) {
-            searchBar!!.updateClock()
+            try {
+                searchBar!!.updateClock()
+            } catch (ex: Exception) {
+                searchBar.searchClock.setText(R.string.bad_format)
+            }
         }
     }
 

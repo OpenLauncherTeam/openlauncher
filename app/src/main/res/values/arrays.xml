@@ -48,6 +48,22 @@
         <item>Blur Wallpaper</item>
     </string-array>
 
+    <string-array name="entires__date_format" translatable="false">
+        <item>@string/intro4_customizable</item>
+        <item>February 17\nSaturday, 2018</item>
+        <item>February 17\n15:48</item>
+        <item>February 17, 2018\n15:48</item>
+        <item>15:48\nFebruary 17, 2018</item>
+    </string-array>
+
+    <string-array name="values__zero_to_four" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
     <string-array name="values__zero_to_one" translatable="false">
         <item>0</item>
         <item>1</item>

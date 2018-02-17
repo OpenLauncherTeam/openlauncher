@@ -26,5 +26,6 @@
     <string name="cancel">Cancel</string>
     <string name="search_hint">Search…</string>
     <string name="search_online">Search online&#8230;</string>
+    <string name="bad_format">Bad Format</string>
 
 </resources>
