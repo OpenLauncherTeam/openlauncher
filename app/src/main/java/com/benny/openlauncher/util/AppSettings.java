@@ -391,7 +391,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     @Override
-    public float getDrawerAnimationSpeedModifier() {
-        return (float) (getInt(R.string.pref_key__drawer_animation_speed_modifier, 30) / 100.0);
+    public float getOverallAnimationSpeedModifier() {
+        return (float) (getInt(R.string.pref_key__overall_animation_speed_modifier, 30) / 100.0);
     }
 }

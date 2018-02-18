@@ -48,19 +48,13 @@ object Tool {
     @JvmStatic
     fun visibleViews(vararg views: View?) {
         for (view in views) {
-            if (view == null) continue
-            view.visibility = View.VISIBLE
-            view.animate().alpha(1f).setStartDelay(0).setDuration(200).interpolator = AccelerateDecelerateInterpolator()
+            visibleViews(200, 0, *views)
         }
     }
 
     @JvmStatic
     fun visibleViews(duration: Long, vararg views: View?) {
-        for (view in views) {
-            if (view == null) continue
-            view.visibility = View.VISIBLE
-            view.animate().alpha(1f).setStartDelay(0).setDuration(duration).interpolator = AccelerateDecelerateInterpolator()
-        }
+        visibleViews(duration, 0, *views)
     }
 
     @JvmStatic
@@ -111,13 +105,13 @@ object Tool {
     }
 
     @JvmStatic
-    fun createScaleInScaleOutAnim(view: View, endAction: Runnable) {
-        val animMod = Setup.appSettings().drawerAnimationSpeedModifier
-        view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(((animMod * 150).toLong())).interpolator = AccelerateDecelerateInterpolator()
+    fun createScaleInScaleOutAnim(view: View, endAction: Runnable, runActionAtPercent: Float = 1.0f) {
+        val animTime = (Setup.appSettings().overallAnimationSpeedModifier * 200).toLong()
+        view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(animTime).interpolator = AccelerateDecelerateInterpolator()
         Handler().postDelayed({
-            view.animate().scaleX(1f).scaleY(1f).setDuration(((animMod * 150).toLong())).interpolator = AccelerateDecelerateInterpolator()
-            Handler().postDelayed({ endAction.run() }, ((animMod * 150).toLong()))
-        }, ((animMod * 150).toLong()))
+            view.animate().scaleX(1f).scaleY(1f).setDuration(animTime).interpolator = AccelerateDecelerateInterpolator()
+            Handler().postDelayed({ endAction.run() }, animTime)
+        }, (animTime * runActionAtPercent).toLong())
     }
 
     @JvmStatic

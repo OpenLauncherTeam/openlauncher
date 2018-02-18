@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
-<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__gestures">
 
         <android.support.v7.preference.CheckBoxPreference
@@ -50,5 +51,13 @@
             android:title="@string/pref_title__gesture_unpinch" />
 
     </android.support.v7.preference.PreferenceCategory>
+
+    <android.support.v7.preference.SeekBarPreference
+        android:defaultValue="30"
+        android:key="@string/pref_key__overall_animation_speed_modifier"
+        android:max="100"
+        android:summary="@string/pref_summnary__overall_animation_speed_modifier"
+        android:title="@string/pref_title__overall_animation_speed_modifier"
+        app:min="1" />
 
 </android.support.v7.preference.PreferenceScreen>

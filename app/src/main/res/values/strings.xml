@@ -104,9 +104,10 @@
     <string name="pref_title__drawer_background_color">Background</string>
     <string name="pref_title__drawer_card_color">Card View</string>
     <string name="pref_title__drawer_label_color">Label</string>
-    <string name="pref_title__drawer_fast_scroll_color">Fast Scroll</string>
+    <string name="pref_title__drawer_fast_scroll_color">Scrollbar</string>
     <string name="settings__pref_drawer_label_font_size">Label Text Size</string>
-    <string name="pref_title__drawer_animation_speed_modifier">Drawer Animation Speed</string>
+    <string name="pref_title__overall_animation_speed_modifier">Animation Speed</string>
+    <string name="pref_summnary__overall_animation_speed_modifier">Modify the overall speed of animations</string>
 
 
     <string name="pref_title__gesture_feedback">Gesture Feedback</string>

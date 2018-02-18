@@ -59,7 +59,7 @@
     <string name="pref_key__drawer_card_color" translatable="false">pref_key__drawer_card_color</string>
     <string name="pref_key__drawer_label_color" translatable="false">pref_key__drawer_label_color</string>
     <string name="pref_key__drawer_fast_scroll_color" translatable="false">pref_key__drawer_fast_scroll_color</string>
-    <string name="pref_key__drawer_animation_speed_modifier" translatable="false">pref_key__drawer_animation_speed_modifier</string>
+    <string name="pref_key__overall_animation_speed_modifier" translatable="false">pref_key__overall_animation_speed_modifier</string>
     <string name="pref_key__desktop_rotate" translatable="false">pref_key__desktop_rotate</string>
 
     <string name="pref_key__gesture_feedback" translatable="false">pref_key__gesture_feedback</string>

@@ -104,7 +104,7 @@
     <string name="pref_title__drawer_background_color">Drawer Hintergrund</string>
     <string name="pref_title__drawer_card_color">Karten</string>
     <string name="pref_title__drawer_label_color">Beschriftung</string>
-    <string name="pref_title__drawer_fast_scroll_color">Schnell scrollen</string>
+    <string name="pref_title__drawer_fast_scroll_color">Scroll-Leiste</string>
 
     <string name="pref_title__gesture_feedback">Gesten Feedback</string>
     <string name="pref_summary__gesture_feedback">Feedback bekommen wenn ein Element auf dem Desktop lang gedrückt wurde.</string>
@@ -193,7 +193,7 @@
     <string name="pref_title__desktop_folder_color_text">Ordner Text</string>
     <string name="dots">Punkte</string>
     <string name="settings__pref_drawer_label_font_size">Bezeichnung Text-Größe</string>
-    <string name="pref_title__drawer_animation_speed_modifier">App-Drawer Anmiations-Geschwindigkeit</string>
+    <string name="pref_title__overall_animation_speed_modifier">Anmiations Geschwindigkeit</string>
 
     <string name="pref_title__date_bar">Datums Anzeige</string>
     <string name="pref_title__date_bar_text_color">Text Farbe</string>
@@ -201,4 +201,5 @@
     <string name="pref_title__date_bar_date_format_custom_1">Benutzerdefinierter Format: Zeile 1</string>
     <string name="pref_title__date_bar_date_format_custom_2">Benutzerdefinierter Format: Zeile 2</string>
     <string name="custom">Benutzerdefiniert</string>
+    <string name="pref_summnary__overall_animation_speed_modifier">Skalierung der insgesamten Animations Geschwindigkeit</string>
 </resources>

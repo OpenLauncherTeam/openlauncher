@@ -319,7 +319,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                         public void run() {
                             Tool.startApp(view.getContext(), app, view);
                         }
-                    });
+                    }, 0.85f);
                 }
             });
             return this;
@@ -336,7 +336,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                         public void run() {
                             Tool.startApp(view.getContext(), item.getIntent(), view);
                         }
-                    });
+                    }, 0.85f);
                 }
             });
             return this;
@@ -353,7 +353,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                         public void run() {
                             view.getContext().startActivity(item.getIntent());
                         }
-                    });
+                    }, 0.85f);
                 }
             });
             return this;

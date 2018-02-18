@@ -29,8 +29,6 @@ import io.codetail.animation.ViewAnimationUtils;
 import io.codetail.widget.RevealFrameLayout;
 
 public class GroupPopupView extends RevealFrameLayout {
-
-    private static final Long folderAnimationTime = 200L;
     private boolean isShowing;
     private CardView popupCard;
     private CellContainer cellContainer;
@@ -145,7 +143,7 @@ public class GroupPopupView extends RevealFrameLayout {
                                     setVisibility(View.INVISIBLE);
                                     view.getContext().startActivity(groupItem.getIntent());
                                 }
-                            });
+                            }, 1f);
                         }
                     });
                 }
@@ -234,12 +232,13 @@ public class GroupPopupView extends RevealFrameLayout {
         int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());
         int startRadius = Tool.dp2px(Setup.Companion.appSettings().getDesktopIconSize() / 2, getContext());
 
+        long animDuration = 1 + (long) (210 * Setup.appSettings().getOverallAnimationSpeedModifier());
         folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, startRadius, finalRadius);
         folderAnimator.setStartDelay(0);
         folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        folderAnimator.setDuration(folderAnimationTime);
+        folderAnimator.setDuration(animDuration);
         folderAnimator.start();
-        Tool.visibleViews(100, 100, cellContainer);
+        Tool.visibleViews(animDuration, animDuration, cellContainer);
     }
 
     public void dismissPopup() {
@@ -247,14 +246,15 @@ public class GroupPopupView extends RevealFrameLayout {
         if (folderAnimator == null || folderAnimator.isRunning())
             return;
 
-        Tool.INSTANCE.invisibleViews(200, cellContainer);
+        long animDuration = 1 + (long) (210 * Setup.appSettings().getOverallAnimationSpeedModifier());
+        Tool.INSTANCE.invisibleViews(animDuration, cellContainer);
 
         int startRadius = Tool.dp2px(Setup.Companion.appSettings().getDesktopIconSize() / 2, getContext());
         int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());
         folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, finalRadius, startRadius);
-        folderAnimator.setStartDelay(200 * Setup.appSettings().getDrawerAnimationSpeedModifier());
+        folderAnimator.setStartDelay(1 + animDuration / 2);
         folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        folderAnimator.setDuration(folderAnimationTime);
+        folderAnimator.setDuration(animDuration);
         folderAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator p1) {

@@ -143,5 +143,5 @@ public interface SettingsManager {
 
     float getDrawerLabelFontSize();
 
-    float getDrawerAnimationSpeedModifier();
+    float getOverallAnimationSpeedModifier();
 }

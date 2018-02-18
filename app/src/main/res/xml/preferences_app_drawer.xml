@@ -54,13 +54,6 @@
             android:summary="@string/pref_summary__drawer_show_position_indicator"
             android:title="@string/pref_title__drawer_show_position_indicator" />
 
-        <android.support.v7.preference.SeekBarPreference
-            android:defaultValue="30"
-            android:key="@string/pref_key__drawer_animation_speed_modifier"
-            android:max="100"
-            android:title="@string/pref_title__drawer_animation_speed_modifier"
-            app:min="1" />
-
         <android.support.v7.preference.CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__drawer_show_label"
