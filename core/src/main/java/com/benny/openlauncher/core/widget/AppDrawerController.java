@@ -20,7 +20,6 @@ import com.benny.openlauncher.core.util.Tool;
 import io.codetail.widget.RevealFrameLayout;
 
 public class AppDrawerController extends RevealFrameLayout {
-
     public AppDrawerPaged drawerViewPaged;
     public AppDrawerVertical drawerViewGrid;
     public int drawerMode;
@@ -39,7 +38,6 @@ public class AppDrawerController extends RevealFrameLayout {
 
     public AppDrawerController(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        Setup.Companion.appSettings().getDrawerAnimationSpeedModifier();
     }
 
     public void setCallBack(CallBack openCallBack, CallBack closeCallBack) {

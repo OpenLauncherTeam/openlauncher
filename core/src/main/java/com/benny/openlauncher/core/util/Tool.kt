@@ -112,11 +112,12 @@ object Tool {
 
     @JvmStatic
     fun createScaleInScaleOutAnim(view: View, endAction: Runnable) {
-        view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(80).interpolator = AccelerateDecelerateInterpolator()
+        val animMod = Setup.appSettings().drawerAnimationSpeedModifier
+        view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(((animMod * 150).toLong())).interpolator = AccelerateDecelerateInterpolator()
         Handler().postDelayed({
-            view.animate().scaleX(1f).scaleY(1f).setDuration(80).interpolator = AccelerateDecelerateInterpolator()
-            Handler().postDelayed({ endAction.run() }, 80)
-        }, 80)
+            view.animate().scaleX(1f).scaleY(1f).setDuration(((animMod * 150).toLong())).interpolator = AccelerateDecelerateInterpolator()
+            Handler().postDelayed({ endAction.run() }, ((animMod * 150).toLong()))
+        }, ((animMod * 150).toLong()))
     }
 
     @JvmStatic
