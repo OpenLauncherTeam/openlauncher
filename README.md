@@ -9,7 +9,7 @@
 After I recovered, life just got busier, so please, be patient, updates aren't coming very soon.
 
 # OpenLauncher
-### Aplha
+### Alpha
 <img src="/app/src/main/ic_launcher-web.png" align="left" width="100" hspace="10" vspace="10">
 This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven launcher for Android.
 Please go to the <a href="https://github.com/Benny-Kok/OpenLauncher/wiki">OpenLauncher Wiki</a>
@@ -27,10 +27,10 @@ for more information.
 
 ### Pre-Alpha
 <img src="/app/src/flavorGplayPreAlpha/ic_launcher-web.png" align="left" width="100" hspace="10" vspace="10">
-The pre-alpha Play Store verion will be getting updates more frequently than the alpha version. And you can support the development by purchasing the pre-alph version.
+The pre-alpha Play Store version will be getting updates more frequently than the alpha version. And you can support the development by purchasing the pre-alpha version.
 
 You will get the same result if you compile directly from the source, no fancy stuffs.
-But it will contiune the development.
+But it will continue the development.
 
 <a href="https://play.google.com/store/apps/details?id=com.benny.openlauncherprealpha">
     <img alt="Get it on Google Play" height="80" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
