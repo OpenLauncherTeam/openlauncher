@@ -1,4 +1,3 @@
-<!-- File "strings.xml" -->
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Titles -->
@@ -29,12 +28,6 @@
     <string name="search_online">Rechercher sur internet…</string>
     <string name="bad_format">Mauvais Format</string>
 
-</resources>
-
-<!-- File "strings2.xml" -->
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
     <string-array name="entries__gestures">
         <item>Ne rien faire</item>
         <item>Paramètres de la minibarre</item>
@@ -52,25 +45,11 @@
         <item>Volet des applications</item>
     </string-array>
 
-
-
-
-
-
     <string-array name="entries__wallpaper_options">
         <item>Modifier le fond d\'écran</item>
         <item>Rendre le fond d\'écran flou</item>
     </string-array>
 
-
-
-
-
-</resources>
-
-<!-- File "strings3.xml" -->
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
     <!-- Toasts -->
     <string name="toast_free_ram">Mémoire disponible : %1$d mb %2$d mb économisé</string>
     <string name="toast_free_all_ram">Mémoire disponible : %1$d MB. Votre RAM est en pleine forme.</string>
