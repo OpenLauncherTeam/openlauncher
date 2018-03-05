@@ -20,12 +20,14 @@ android {
 
         applicationId "com.benny.openlauncher"
         resValue 'string', 'app_name', "OpenLauncher"
+        resValue "string", "manifest_package_id", "com.benny.openlauncher"
+        multiDexEnabled false
+
 
         buildConfigField "boolean", "IS_TEST_BUILD", "false"
         buildConfigField "boolean", "IS_GPLAY_BUILD", "false"
-        buildConfigField "String[]", "APPLICATION_LANGUAGES", "${getUsedAndroidLanguages()}"
+        buildConfigField "String[]", "DETECTED_ANDROID_LOCALES", "${findUsedAndroidLocales()}"
         buildConfigField "String", "GITHASH", "\"${getGitHash()}\""
-        multiDexEnabled false
     }
 
     productFlavors {
