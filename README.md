@@ -5,9 +5,6 @@
 [![Chat - Matrix](https://img.shields.io/badge/chat-on%20matrix-blue.svg)](https://matrix.to/#/#openlauncher:matrix.org)
 [![Translate - with Stringlate](https://img.shields.io/badge/stringlate-translate-green.svg)](https://lonamiwebs.github.io/stringlate/translate?git=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher.git&name=OpenLauncher&web=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher)
 
-## Notice
-After I recovered, life just got busier, so please, be patient, updates aren't coming very soon.
-
 # OpenLauncher
 ### Alpha
 <img src="/app/src/main/ic_launcher-web.png" align="left" width="100" hspace="10" vspace="10">
