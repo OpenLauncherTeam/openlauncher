@@ -13,13 +13,13 @@ import com.benny.openlauncher.core.widget.AppDrawerController;
 import com.benny.openlauncher.core.widget.Desktop;
 import com.benny.openlauncher.core.widget.PagerIndicator;
 
-import net.gsantner.opoc.util.AppSettingsBase;
+import net.gsantner.opoc.preference.SharedPreferencesPropertyBackend;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class AppSettings extends AppSettingsBase implements SettingsManager {
+public class AppSettings extends SharedPreferencesPropertyBackend implements SettingsManager {
     private AppSettings(Context context) {
         super(context);
     }

@@ -8,8 +8,8 @@
  *  https://www.apache.org/licenses/LICENSE-2.0
  *
 #########################################################*/
- 
- /*
+
+/*
  * Parses most common markdown tags. Only inline tags are supported, multiline/block syntax
  * is not supported (citation, multiline code, ..). This is intended to stay as easy as possible.
  *
@@ -33,7 +33,7 @@ import java.io.InputStreamReader;
 /**
  * Simple Markdown Parser
  */
-@SuppressWarnings({"WeakerAccess", "CaughtExceptionImmediatelyRethrown", "SameParameterValue", "unused", "SpellCheckingInspection", "RepeatedSpace", "SingleCharAlternation"})
+@SuppressWarnings({"WeakerAccess", "CaughtExceptionImmediatelyRethrown", "SameParameterValue", "unused", "SpellCheckingInspection", "RepeatedSpace", "SingleCharAlternation", "Convert2Lambda"})
 public class SimpleMarkdownParser {
     //########################
     //## Statics
