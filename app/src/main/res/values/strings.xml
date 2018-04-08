@@ -69,7 +69,7 @@
     <string name="pref_summary__desktop_show_position_indicator">Show the page indicator below the desktop.</string>
     <string name="pref_title__desktop_show_label">Show Labels</string>
     <string name="pref_summary__desktop_show_label">Show item labels below their icons.</string>
-    <string name="pref_title__desktop_rotate">Roate</string>
+    <string name="pref_title__desktop_rotate">Rotate</string>
     <string name="pref_summary__desktop_rotate">Allow screen rotate.</string>
 
     <string name="pref_title__search_bar_base_uri">Search URI</string>
