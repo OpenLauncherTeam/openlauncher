@@ -10,13 +10,13 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 
 import com.benny.openlauncher.core.R;
 import com.benny.openlauncher.core.activity.CoreHome;
-import com.benny.openlauncher.core.drawable.LauncherActionDrawable;
 import com.benny.openlauncher.core.interfaces.AbstractApp;
 import com.benny.openlauncher.core.interfaces.IconDrawer;
 import com.benny.openlauncher.core.interfaces.IconProvider;
@@ -375,7 +375,8 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder setActionItem(Item item) {
             view.setLabel(item.getLabel());
-            view.setIconProvider(Setup.imageLoader().createIconProvider(new LauncherActionDrawable(R.drawable.ic_apps_white_24dp)));
+            view.setIconProvider(Setup.imageLoader().createIconProvider(
+                    ContextCompat.getDrawable(Setup.appContext(), R.drawable.ic_apps_white_48dp)));
             switch (item.getActionValue()) {
                 case Definitions.ACTION_LAUNCHER:
                     view.setOnClickListener(new OnClickListener() {

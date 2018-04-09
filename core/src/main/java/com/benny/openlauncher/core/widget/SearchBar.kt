@@ -109,7 +109,7 @@ class SearchBar : FrameLayout {
 
         // && Setup.appSettings().isSearchGridListSwitchEnabled()
 
-        icon2 = LauncherCircleDrawable(context, resources.getDrawable(if (Setup.appSettings().isSearchUseGrid) R.drawable.ic_apps_white_24dp else R.drawable.ic_view_list_white_24dp), Color.BLACK)
+        icon2 = LauncherCircleDrawable(context, resources.getDrawable(if (Setup.appSettings().isSearchUseGrid) R.drawable.ic_apps_white_48dp else R.drawable.ic_view_list_white_24dp), Color.BLACK)
         switchButton = AppCompatImageView(context)
         switchButton.setImageDrawable(icon2)
         switchButton.setOnClickListener {
@@ -318,7 +318,7 @@ class SearchBar : FrameLayout {
     }
 
     private fun updateSwitchIcon() {
-        icon2.setIcon(resources.getDrawable(if (Setup.appSettings().isSearchUseGrid) R.drawable.ic_apps_white_24dp else R.drawable.ic_view_list_white_24dp))
+        icon2.setIcon(resources.getDrawable(if (Setup.appSettings().isSearchUseGrid) R.drawable.ic_apps_white_48dp else R.drawable.ic_view_list_white_24dp))
     }
 
     private fun updateRecyclerViewLayoutManager() {

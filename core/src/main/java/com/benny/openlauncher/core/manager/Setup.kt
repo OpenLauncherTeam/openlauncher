@@ -39,9 +39,9 @@ abstract class Setup<A : AbstractApp> {
     // ----------------
 
     interface ImageLoader<A : AbstractApp> {
-        fun createIconProvider(drawable: Drawable?): BaseIconProvider
-
         fun createIconProvider(icon: Int): BaseIconProvider
+
+        fun createIconProvider(drawable: Drawable?): BaseIconProvider
     }
 
     interface DataManager {
