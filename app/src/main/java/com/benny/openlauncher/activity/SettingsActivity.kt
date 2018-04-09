@@ -2,6 +2,7 @@ package com.benny.openlauncher.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -14,11 +15,15 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.R
 import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.core.util.DatabaseHelper
+import com.benny.openlauncher.core.util.Tool
 import com.benny.openlauncher.core.widget.AppDrawerController
 import com.benny.openlauncher.util.AppManager
 import com.benny.openlauncher.util.AppSettings
 import com.benny.openlauncher.util.LauncherAction
+import com.benny.openlauncher.util.getStartAppIntent
 import com.benny.openlauncher.viewutil.DialogHelper
+import com.benny.openlauncher.viewutil.DialogHelper.OnAppSelectedListener
+import com.benny.openlauncher.viewutil.DialogHelper.selectAppDialog
 import kotlinx.android.synthetic.main.toolbar.*
 
 class SettingsActivity : ThemeActivity() {
@@ -330,6 +335,26 @@ class SettingsActivity : ThemeActivity() {
 
         override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
             checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key)
+
+            var speca = intArrayOf(
+                    R.string.pref_key__gesture_double_tap,
+                    R.string.pref_key__gesture_swipe_up,
+                    R.string.pref_key__gesture_swipe_down,
+                    R.string.pref_key__gesture_pinch,
+                    R.string.pref_key__gesture_unpinch
+            )
+            for (spec in speca){
+                if (key.equals(getString(spec))){
+                    if (sharedPreferences.getString(key,"0").equals("9")){
+                        selectAppDialog(context!!, object : OnAppSelectedListener {
+                            override fun onAppSelected(app: AppManager.App) {
+                                sharedPreferences.edit().putString(key+"__", app.packageName).apply()
+                            }
+                        })
+                    }
+                }
+            }
+
         }
 
         companion object {

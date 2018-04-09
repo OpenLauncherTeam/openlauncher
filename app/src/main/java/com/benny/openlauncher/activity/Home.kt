@@ -185,6 +185,8 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
                         if (gesture != null && AppSettings.get().isGestureFeedback) {
                             Tool.vibrate(desktop)
                         }
+
+                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_swipe_up)+"__","")))
                         LauncherAction.RunAction(gesture, desktop.context)
                     }
                     true
@@ -195,6 +197,7 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
                         if (gesture != null && AppSettings.get().isGestureFeedback) {
                             Tool.vibrate(desktop)
                         }
+                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_swipe_down)+"__","")))
                         LauncherAction.RunAction(gesture, desktop.context)
                     }
                     true
@@ -207,6 +210,7 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
                         if (gesture != null && AppSettings.get().isGestureFeedback) {
                             Tool.vibrate(desktop)
                         }
+                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_pinch)+"__","")))
                         LauncherAction.RunAction(gesture, desktop.context)
                     }
                     true
@@ -217,6 +221,7 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
                         if (gesture != null && AppSettings.get().isGestureFeedback) {
                             Tool.vibrate(desktop)
                         }
+                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_unpinch)+"__","")))
                         LauncherAction.RunAction(gesture, desktop.context)
                     }
                     true
@@ -227,6 +232,7 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
                         if (gesture != null && AppSettings.get().isGestureFeedback) {
                             Tool.vibrate(desktop)
                         }
+                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_double_tap)+"__","")))
                         LauncherAction.RunAction(gesture, desktop.context)
                     }
                     true
