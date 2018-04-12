@@ -178,26 +178,32 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
             override fun createIconProvider(icon: Int): BaseIconProvider = SimpleIconProvider(icon)
         }
         val desktopGestureCallback = DesktopGestureListener.DesktopGestureCallback { desktop, event ->
+            var gestureid: Int
             when (event) {
                 DesktopGestureListener.Type.SwipeUp -> {
-                    if (Integer.parseInt(AppSettings.get().gestureSwipeUp) != 0) {
-                        val gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().gestureSwipeUp) - 1)
+                    gestureid = AppSettings.get().gestureSwipeUp
+                    if (gestureid != 0) {
+                        val gesture = LauncherAction.getActionItem(gestureid - 1)
                         if (gesture != null && AppSettings.get().isGestureFeedback) {
                             Tool.vibrate(desktop)
                         }
-
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_swipe_up)+"__","")))
+                        if (gestureid == 9) {
+                            gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_swipe_up) + "__", "")))
+                        }
                         LauncherAction.RunAction(gesture, desktop.context)
                     }
                     true
                 }
                 DesktopGestureListener.Type.SwipeDown -> {
-                    if (Integer.parseInt(AppSettings.get().gestureSwipeDown) != 0) {
-                        val gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().gestureSwipeDown) - 1)
+                    gestureid = AppSettings.get().gestureSwipeDown
+                    if (gestureid != 0) {
+                        val gesture = LauncherAction.getActionItem(gestureid - 1)
                         if (gesture != null && AppSettings.get().isGestureFeedback) {
                             Tool.vibrate(desktop)
                         }
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_swipe_down)+"__","")))
+                        if (gestureid == 9) {
+                            gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_swipe_down) + "__", "")))
+                        }
                         LauncherAction.RunAction(gesture, desktop.context)
                     }
                     true
@@ -205,34 +211,43 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
                 DesktopGestureListener.Type.SwipeLeft -> false
                 DesktopGestureListener.Type.SwipeRight -> false
                 DesktopGestureListener.Type.Pinch -> {
-                    if (Integer.parseInt(AppSettings.get().gesturePinch) != 0) {
-                        val gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().gesturePinch) - 1)
+                    gestureid = AppSettings.get().gestureSwipeDown
+                    if (gestureid != 0) {
+                        val gesture = LauncherAction.getActionItem(gestureid - 1)
                         if (gesture != null && AppSettings.get().isGestureFeedback) {
                             Tool.vibrate(desktop)
                         }
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_pinch)+"__","")))
+                        if (gestureid == 9) {
+                            gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_pinch) + "__", "")))
+                        }
                         LauncherAction.RunAction(gesture, desktop.context)
                     }
                     true
                 }
                 DesktopGestureListener.Type.Unpinch -> {
-                    if (Integer.parseInt(AppSettings.get().gestureUnpinch) != 0) {
-                        val gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().gestureUnpinch) - 1)
+                    gestureid = AppSettings.get().gestureSwipeDown
+                    if (gestureid != 0) {
+                        val gesture = LauncherAction.getActionItem(gestureid - 1)
                         if (gesture != null && AppSettings.get().isGestureFeedback) {
                             Tool.vibrate(desktop)
                         }
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_unpinch)+"__","")))
+                        if (gestureid == 9) {
+                            gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_unpinch) + "__", "")))
+                        }
                         LauncherAction.RunAction(gesture, desktop.context)
                     }
                     true
                 }
                 DesktopGestureListener.Type.DoubleTap -> {
-                    if (Integer.parseInt(AppSettings.get().gestureDoubleTap) != 0) {
-                        val gesture = LauncherAction.getActionItem(Integer.parseInt(AppSettings.get().gestureDoubleTap) - 1)
+                    gestureid = AppSettings.get().gestureSwipeDown
+                    if (gestureid != 0) {
+                        val gesture = LauncherAction.getActionItem(gestureid - 1)
                         if (gesture != null && AppSettings.get().isGestureFeedback) {
                             Tool.vibrate(desktop)
                         }
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_double_tap)+"__","")))
+                        if (gestureid == 9) {
+                            gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(settingsManager.getString(getString(R.string.pref_key__gesture_double_tap) + "__", "")))
+                        }
                         LauncherAction.RunAction(gesture, desktop.context)
                     }
                     true

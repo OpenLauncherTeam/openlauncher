@@ -247,24 +247,24 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
         return getBool(R.string.pref_key__gesture_quick_swipe, true);
     }
 
-    public String getGestureDoubleTap() {
-        return getString(R.string.pref_key__gesture_double_tap, "0");
+    public int getGestureDoubleTap() {
+        return getIntOfStringPref(R.string.pref_key__gesture_double_tap, 0);
     }
 
-    public String getGestureSwipeUp() {
-        return getString(R.string.pref_key__gesture_swipe_up, "8");
+    public int getGestureSwipeUp() {
+        return getIntOfStringPref(R.string.pref_key__gesture_swipe_up, 8);
     }
 
-    public String getGestureSwipeDown() {
-        return getString(R.string.pref_key__gesture_swipe_down, "0");
+    public int getGestureSwipeDown() {
+        return getIntOfStringPref(R.string.pref_key__gesture_swipe_down, 0);
     }
 
-    public String getGesturePinch() {
-        return getString(R.string.pref_key__gesture_pinch, "0");
+    public int getGesturePinch() {
+        return getIntOfStringPref(R.string.pref_key__gesture_pinch, 0);
     }
 
-    public String getGestureUnpinch() {
-        return getString(R.string.pref_key__gesture_unpinch, "0");
+    public int getGestureUnpinch() {
+        return getIntOfStringPref(R.string.pref_key__gesture_unpinch, 0);
     }
 
     @Override
