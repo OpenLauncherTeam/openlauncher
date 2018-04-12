@@ -11,6 +11,7 @@
         <item>Настройки громкости</item>
         <item>Открыть меню приложений</item>
         <item>Запустить приложение</item>
+        <item>@string/pref_title__search_bar</item>
     </string-array>
 
     <string-array name="entries__desktop_actions">

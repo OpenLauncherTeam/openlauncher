@@ -12,6 +12,7 @@
         <item>Controllo volume</item>
         <item>Apri Drawer</item>
         <item>Esegui App</item>
+        <item>@string/pref_title__search_bar</item>
     </string-array>
 
     <string-array name="entries__desktop_actions">

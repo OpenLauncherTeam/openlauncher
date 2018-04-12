@@ -12,6 +12,7 @@
         <item>Lautstärke Dialog</item>
         <item>Öffne App Drawer</item>
         <item>Launch App</item>
+        <item>@string/pref_title__search_bar</item>
     </string-array>
 
     <string-array name="entries__desktop_actions">

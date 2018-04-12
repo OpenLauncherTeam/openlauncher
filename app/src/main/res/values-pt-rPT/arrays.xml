@@ -12,6 +12,7 @@
         <item>Painel de Volume</item>
         <item>Abrir lista de aplicações</item>
         <item>Abrir aplicação</item>
+        <item>@string/pref_title__search_bar</item>
     </string-array>
 
     <string-array name="entries__desktop_actions">

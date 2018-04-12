@@ -12,6 +12,7 @@
         <item>Volumpanelo</item>
         <item>Malfermi aplikaĵujon</item>
         <item>Malfermi aplikaĵon</item>
+        <item>@string/pref_title__search_bar</item>
     </string-array>
 
     <string-array name="desktopActionEntries">

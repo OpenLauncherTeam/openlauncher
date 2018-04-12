@@ -12,6 +12,7 @@
         <item>Panel de Volumen</item>
         <item>Abrir cajón de aplicaciones</item>
         <item>Abrir aplicación</item>
+        <item>@string/pref_title__search_bar</item>
     </string-array>
 
     <string-array name="desktopActionEntries">

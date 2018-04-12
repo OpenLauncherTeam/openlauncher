@@ -28,7 +28,9 @@ public class LauncherAction {
             new ActionDisplayItem(Action.DeviceSettings, Home.Companion.get_resources().getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp),
             new ActionDisplayItem(Action.LauncherSettings, Home.Companion.get_resources().getString(R.string.minibar_5), R.drawable.ic_settings_launcher_black_24dp),
             new ActionDisplayItem(Action.VolumeDialog, Home.Companion.get_resources().getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp),
-            new ActionDisplayItem(Action.OpenAppDrawer, Home.Companion.get_resources().getString(R.string.minibar_8), R.drawable.ic_apps_dark_24dp)
+            new ActionDisplayItem(Action.OpenAppDrawer, Home.Companion.get_resources().getString(R.string.minibar_8), R.drawable.ic_apps_dark_24dp),
+            new ActionDisplayItem(Action.OpenSearch, Home.Companion.get_resources().getString(R.string.pref_title__search_bar), R.drawable.ic_settings_applications_black_24dp)
+
     };
 
     public static boolean clearingRam = false;
@@ -83,6 +85,10 @@ public class LauncherAction {
             case OpenAppDrawer:
                 Home.Companion.getLauncher().openAppDrawer();
                 break;
+            case OpenSearch: {
+                Home.Companion.getLauncher().getSearchBar().getSearchButton().performClick();
+                break;
+            }
             case VolumeDialog:
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                     try {
@@ -130,7 +136,7 @@ public class LauncherAction {
     }
 
     public enum Action {
-        EditMinBar, SetWallpaper, LockScreen, ClearRam, DeviceSettings, LauncherSettings, VolumeDialog, OpenAppDrawer, LaunchApp
+        EditMinBar, SetWallpaper, LockScreen, ClearRam, DeviceSettings, LauncherSettings, VolumeDialog, OpenAppDrawer, LaunchApp, OpenSearch
     }
 
     public static class ActionItem {

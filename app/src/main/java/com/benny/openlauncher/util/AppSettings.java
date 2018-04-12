@@ -256,7 +256,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
     }
 
     public int getGestureSwipeDown() {
-        return getIntOfStringPref(R.string.pref_key__gesture_swipe_down, 0);
+        return getIntOfStringPref(R.string.pref_key__gesture_swipe_down, 10);
     }
 
     public int getGesturePinch() {

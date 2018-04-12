@@ -12,6 +12,7 @@
         <item>Fenêtre de volume</item>
         <item>Ouvrir le volet des applications</item>
         <item>Lancer une application</item>
+        <item>@string/pref_title__search_bar</item>
     </string-array>
 
     <string-array name="entries__desktop_actions">

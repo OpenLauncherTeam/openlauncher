@@ -12,6 +12,7 @@
         <item>Dialog hlasitosti</item>
         <item>Otevřít šuplík aplikací</item>
         <item>Spustit aplikaci</item>
+        <item>@string/pref_title__search_bar</item>
     </string-array>
 
     <string-array name="entries__desktop_actions">

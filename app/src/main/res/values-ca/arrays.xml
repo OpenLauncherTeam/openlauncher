@@ -12,6 +12,7 @@
         <item>Quadre de diàleg de volum</item>
         <item>Obrir calaix d\'Apps</item>
         <item>Obrir aplicació</item>
+        <item>@string/pref_title__search_bar</item>
     </string-array>
 
     <string-array name="desktopActionEntries">

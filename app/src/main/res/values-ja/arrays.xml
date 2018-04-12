@@ -11,5 +11,6 @@
         <item>ボリュームダイアログ</item>
         <item>アプリドロワーを開く</item>
         <item>Launch App</item>
+        <item>@string/pref_title__search_bar</item>
     </string-array>
 </resources>

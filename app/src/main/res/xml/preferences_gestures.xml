@@ -18,35 +18,35 @@
         <android.support.v7.preference.ListPreference
             android:defaultValue="0"
             android:entries="@array/entries__gestures"
-            android:entryValues="@array/values__zero_to_nine"
+            android:entryValues="@array/values__zero_to_ten"
             android:key="@string/pref_key__gesture_double_tap"
             android:title="@string/pref_title__gesture_double_tap" />
 
         <android.support.v7.preference.ListPreference
             android:defaultValue="8"
             android:entries="@array/entries__gestures"
-            android:entryValues="@array/values__zero_to_nine"
+            android:entryValues="@array/values__zero_to_ten"
             android:key="@string/pref_key__gesture_swipe_up"
             android:title="@string/pref_title__gesture_swipe_up" />
 
         <android.support.v7.preference.ListPreference
-            android:defaultValue="0"
+            android:defaultValue="10"
             android:entries="@array/entries__gestures"
-            android:entryValues="@array/values__zero_to_nine"
+            android:entryValues="@array/values__zero_to_ten"
             android:key="@string/pref_key__gesture_swipe_down"
             android:title="@string/pref_title__gesture_swipe_down" />
 
         <android.support.v7.preference.ListPreference
             android:defaultValue="0"
             android:entries="@array/entries__gestures"
-            android:entryValues="@array/values__zero_to_nine"
+            android:entryValues="@array/values__zero_to_ten"
             android:key="@string/pref_key__gesture_pinch"
             android:title="@string/pref_title__gesture_pinch" />
 
         <android.support.v7.preference.ListPreference
             android:defaultValue="0"
             android:entries="@array/entries__gestures"
-            android:entryValues="@array/values__zero_to_nine"
+            android:entryValues="@array/values__zero_to_ten"
             android:key="@string/pref_key__gesture_unpinch"
             android:title="@string/pref_title__gesture_unpinch" />
 
