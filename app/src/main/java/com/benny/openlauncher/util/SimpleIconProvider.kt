@@ -84,7 +84,7 @@ open class SimpleIconProvider : BaseIconProvider {
         var _drawable = drawable
         var _forceSize = forceSize
         if (drawable != null && forceSize != Definitions.NO_SCALE) {
-            _forceSize = _forceSize.toPx()
+            _forceSize = Tool.toPx(_forceSize)
             _drawable = BitmapDrawable(Setup.appContext().resources, Bitmap.createScaledBitmap(Tool.drawableToBitmap(drawable)!!, _forceSize, _forceSize, true))
         }
         return _drawable

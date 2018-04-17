@@ -35,17 +35,17 @@ public class CalendarDropDownView extends CardView implements View.OnClickListen
     private void init() {
         calendarView = new MaterialCalendarView(getContext());
         addView(calendarView);
-        int twoDp = Tool.INSTANCE.dp2px(2, getContext());
+        int twoDp = Tool.dp2px(2, getContext());
         setContentPadding(0, twoDp * 5, 0, 0);
         calendarView.setTileHeightDp(40);
 
-        Tool.INSTANCE.invisibleViews(calendarView);
+        Tool.invisibleViews(calendarView);
         setScaleY(0);
     }
 
     public void animateShow() {
         if (stateOpened) return;
-        Tool.INSTANCE.invisibleViews(CoreHome.Companion.getLauncher().getSearchBar());
+        Tool.invisibleViews(CoreHome.Companion.getLauncher().getSearchBar());
         CoreHome.Companion.getLauncher().dimBackground();
         CoreHome.Companion.getLauncher().clearRoomForPopUp();
         CoreHome.Companion.getLauncher().getBackground().setOnClickListener(this);
@@ -54,19 +54,19 @@ public class CalendarDropDownView extends CardView implements View.OnClickListen
         animate().scaleY(1).setDuration(200).withEndAction(new Runnable() {
             @Override
             public void run() {
-                Tool.INSTANCE.visibleViews(200, calendarView);
+                Tool.visibleViews(200, calendarView);
             }
         });
     }
 
     public void animateHide() {
         if (!stateOpened) return;
-        Tool.INSTANCE.visibleViews(CoreHome.Companion.getLauncher().getSearchBar());
+        Tool.visibleViews(CoreHome.Companion.getLauncher().getSearchBar());
         CoreHome.Companion.getLauncher().unDimBackground();
         CoreHome.Companion.getLauncher().unClearRoomForPopUp();
         CoreHome.Companion.getLauncher().getBackground().setOnClickListener(null);
         stateOpened = false;
-        Tool.INSTANCE.invisibleViews(200, calendarView);
+        Tool.invisibleViews(200, calendarView);
         animate().scaleY(0).setStartDelay(200).setDuration(200);
     }
 

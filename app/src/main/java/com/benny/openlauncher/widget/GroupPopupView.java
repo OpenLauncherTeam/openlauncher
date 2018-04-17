@@ -247,7 +247,7 @@ public class GroupPopupView extends RevealFrameLayout {
             return;
 
         long animDuration = 1 + (long) (210 * Setup.appSettings().getOverallAnimationSpeedModifier());
-        Tool.INSTANCE.invisibleViews(animDuration, cellContainer);
+        Tool.invisibleViews(animDuration, cellContainer);
 
         int startRadius = Tool.dp2px(Setup.Companion.appSettings().getDesktopIconSize() / 2, getContext());
         int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());

@@ -55,7 +55,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
         }
         Point preferredPos = CoreHome.Companion.getLauncher().getDesktop().getPages().get(CoreHome.Companion.getLauncher().getDesktop().getCurrentItem()).findFreeSpace();
         if (preferredPos == null) {
-            Tool.INSTANCE.toast(CoreHome.Companion.getLauncher(), R.string.toast_not_enough_space);
+            Tool.toast(CoreHome.Companion.getLauncher(), R.string.toast_not_enough_space);
         } else {
             item.setX(preferredPos.x);
             item.setY(preferredPos.y);

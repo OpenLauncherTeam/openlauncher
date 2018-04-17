@@ -78,9 +78,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         switch (item.getType()) {
             case APP:
                 if (Setup.Companion.appSettings().enableImageCaching()) {
-                    Tool.INSTANCE.saveIcon(context, Tool.INSTANCE.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(-1)), Integer.toString(item.getId()));
+                    Tool.saveIcon(context, Tool.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(-1)), Integer.toString(item.getId()));
                 }
-                itemValues.put(COLUMN_DATA, Tool.INSTANCE.getIntentAsString(item.getIntent()));
+                itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.getIntent()));
                 break;
             case GROUP:
                 for (Item tmp : item.getItems()) {
@@ -176,7 +176,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
             } while (cursor.moveToNext());
         }
         cursor.close();
-        Tool.INSTANCE.print("database : dock size is ", dock.size());
+        Tool.print("database : dock size is ", dock.size());
         return dock;
     }
 
@@ -205,9 +205,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         switch (item.getType()) {
             case APP:
                 if (Setup.Companion.appSettings().enableImageCaching()) {
-                    Tool.INSTANCE.saveIcon(context, Tool.INSTANCE.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE)), Integer.toString(item.getId()));
+                    Tool.saveIcon(context, Tool.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE)), Integer.toString(item.getId()));
                 }
-                itemValues.put(COLUMN_DATA, Tool.INSTANCE.getIntentAsString(item.getIntent()));
+                itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.getIntent()));
                 break;
             case GROUP:
                 for (Item tmp : item.getItems()) {
@@ -262,9 +262,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         switch (type) {
             case APP:
             case SHORTCUT:
-                item.setIntent(Tool.INSTANCE.getIntentFromString(data));
+                item.setIntent(Tool.getIntentFromString(data));
                 if (Setup.Companion.appSettings().enableImageCaching()) {
-                    item.setIconProvider(Setup.get().getImageLoader().createIconProvider(Tool.INSTANCE.getIcon(CoreHome.Companion.getLauncher(), Integer.toString(id))));
+                    item.setIconProvider(Setup.get().getImageLoader().createIconProvider(Tool.getIcon(CoreHome.Companion.getLauncher(), Integer.toString(id))));
                 } else {
                     switch (type) {
                         case APP:

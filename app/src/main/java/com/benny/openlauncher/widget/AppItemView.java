@@ -334,7 +334,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                     Tool.createScaleInScaleOutAnim(view, new Runnable() {
                         @Override
                         public void run() {
-                            Tool.startApp(view.getContext(), item.getIntent(), view);
+                            Tool.startApp(view.getContext(), app, view);
                         }
                     }, 0.85f);
                 }

@@ -13,7 +13,6 @@ import com.benny.openlauncher.model.Item
 import com.benny.openlauncher.util.DragAction
 import com.benny.openlauncher.util.DragNDropHandler
 import com.benny.openlauncher.util.Tool
-import com.benny.openlauncher.util.toPx
 import com.benny.openlauncher.viewutil.DesktopCallBack
 import com.benny.openlauncher.viewutil.ItemViewFactory
 
@@ -103,7 +102,7 @@ class Dock @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) : C
                     CoreHome.launcher?.getDragNDropView()?.showFolderPreviewAt(
                             this,
                             cellWidth * (coordinate.x + 0.5f),
-                            cellHeight * (coordinate.y + 0.5f) - if (Setup.appSettings().isDockShowLabel) (7).toPx() else 0
+                            cellHeight * (coordinate.y + 0.5f) - if (Setup.appSettings().isDockShowLabel) Tool.toPx(7) else 0
                     )
             }
         }

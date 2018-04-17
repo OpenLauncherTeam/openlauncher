@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import com.benny.openlauncher.activity.CoreHome
 import com.benny.openlauncher.util.Tool
-import com.benny.openlauncher.util.toPx
 import java.util.*
 
 open class CellContainer : ViewGroup {
@@ -562,7 +561,7 @@ open class CellContainer : ViewGroup {
                     }
                     if (checkBoundary) {
                         val offsetCell = Rect(cell)
-                        val dp2 = 6.toPx()
+                        val dp2 = Tool.toPx(6)
                         offsetCell.inset(dp2, dp2)
                         if (mY >= offsetCell.top && mY <= offsetCell.bottom && mX >= offsetCell.left && mX <= offsetCell.right) {
                             coordinate.set(-1, -1)

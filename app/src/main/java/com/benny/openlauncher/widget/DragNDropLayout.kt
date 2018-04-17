@@ -20,7 +20,6 @@ import com.benny.openlauncher.model.PopupIconLabelItem
 import com.benny.openlauncher.util.DragAction
 import com.benny.openlauncher.util.DragNDropHandler
 import com.benny.openlauncher.util.Tool
-import com.benny.openlauncher.util.toPx
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
@@ -128,7 +127,7 @@ class DragNDropLayout @JvmOverloads constructor(context: Context, attrs: Attribu
         if (canvas != null && showFolderPreview && !previewLocation.equals(-1f, -1f)) {
             folderPreviewScale += 0.08f
             folderPreviewScale = Tool.clampFloat(folderPreviewScale, 0.5f, 1f)
-            canvas.drawCircle(previewLocation.x, previewLocation.y, (Setup.appSettings().desktopIconSize / 2 + 10).toPx().toFloat() * folderPreviewScale, paint)
+            canvas.drawCircle(previewLocation.x, previewLocation.y, Tool.toPx(Setup.appSettings().desktopIconSize / 2 + 10).toFloat() * folderPreviewScale, paint)
         }
 
         if (showFolderPreview) {

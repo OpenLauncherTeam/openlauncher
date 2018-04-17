@@ -202,7 +202,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
                     CoreHome.launcher?.getDragNDropView()?.showFolderPreviewAt(
                             this,
                             currentPage.cellWidth * (coordinate.x + 0.5f),
-                            currentPage.cellHeight * (coordinate.y + 0.5f) - if (Setup.appSettings().isDesktopShowLabel) 7.toPx() else 0
+                            currentPage.cellHeight * (coordinate.y + 0.5f) - if (Setup.appSettings().isDesktopShowLabel) Tool.toPx(7) else 0
                     )
             }
         }
@@ -445,7 +445,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
 
         fun enterDesktopEditMode() {
             scaleFactor = 0.8f
-            translateFactor = (if (Setup.appSettings().searchBarEnable) 20 else 40).toPx().toFloat()
+            translateFactor = Tool.toPx(if (Setup.appSettings().searchBarEnable) 20 else 40).toFloat()
             for (v in desktop.pages) {
                 v.blockTouch = true
                 v.animateBackgroundShow()

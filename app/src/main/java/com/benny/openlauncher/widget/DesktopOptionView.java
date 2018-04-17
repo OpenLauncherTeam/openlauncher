@@ -98,7 +98,7 @@ public class DesktopOptionView extends FrameLayout {
             return;
         }
 
-        final int paddingHorizontal = Tool.INSTANCE.dp2px(42, getContext());
+        final int paddingHorizontal = Tool.dp2px(42, getContext());
         final Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
 
         actionAdapters[0] = new FastItemAdapter<>();
@@ -119,19 +119,19 @@ public class DesktopOptionView extends FrameLayout {
                         if (!Setup.Companion.appSettings().isDesktopLock()) {
                             desktopOptionViewListener.onRemovePage();
                         } else {
-                            Tool.INSTANCE.toast(getContext(), "Desktop is locked.");
+                            Tool.toast(getContext(), "Desktop is locked.");
                         }
                     } else if (id == R.string.widget) {
                         if (!Setup.Companion.appSettings().isDesktopLock()) {
                             desktopOptionViewListener.onPickWidget();
                         } else {
-                            Tool.INSTANCE.toast(getContext(), "Desktop is locked.");
+                            Tool.toast(getContext(), "Desktop is locked.");
                         }
                     } else if (id == R.string.action) {
                         if (!Setup.Companion.appSettings().isDesktopLock()) {
                             desktopOptionViewListener.onPickDesktopAction();
                         } else {
-                            Tool.INSTANCE.toast(getContext(), "Desktop is locked.");
+                            Tool.toast(getContext(), "Desktop is locked.");
                         }
                     } else if (id == R.string.lock) {
                         Setup.Companion.appSettings().setDesktopLock(!Setup.Companion.appSettings().isDesktopLock());
@@ -173,7 +173,7 @@ public class DesktopOptionView extends FrameLayout {
         actionAdapters[1].set(itemsBottom);
         actionAdapters[1].withOnClickListener(clickListener);
 
-        ((MarginLayoutParams) ((View) actionRecyclerViews[0].getParent()).getLayoutParams()).topMargin = Tool.INSTANCE.dp2px(Setup.Companion.appSettings().getSearchBarEnable() ? 36 : 4, getContext());
+        ((MarginLayoutParams) ((View) actionRecyclerViews[0].getParent()).getLayoutParams()).topMargin = Tool.dp2px(Setup.Companion.appSettings().getSearchBarEnable() ? 36 : 4, getContext());
     }
 
     private RecyclerView createRecyclerView(FastAdapter adapter, int gravity, int paddingHorizontal) {

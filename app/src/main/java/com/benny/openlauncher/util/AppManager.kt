@@ -83,7 +83,7 @@ class AppManager(val context: Context) : Setup.AppLoader<AppManager.App> {
                 .build()
 
         fastItemAdapter.add(IconLabelItem(activity, R.drawable.ic_launcher, R.string.label_default, -1)
-                .withDrawablePadding(8.toPx().toFloat())
+                .withDrawablePadding(Tool.toPx(8).toFloat())
                 .withIconGravity(Gravity.START)
                 .withOnClickListener {
                     recreateAfterGettingApps = true

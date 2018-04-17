@@ -9,7 +9,6 @@ import android.util.AttributeSet
 import android.view.View
 import com.benny.openlauncher.manager.Setup
 import com.benny.openlauncher.util.Tool
-import com.benny.openlauncher.util.toPx
 import com.benny.openlauncher.widget.PagerIndicator.Mode.ARROW
 import com.benny.openlauncher.widget.PagerIndicator.Mode.NORMAL
 
@@ -46,11 +45,11 @@ class PagerIndicator : View, SmoothViewPager.OnPageChangeListener {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     init {
-        pad = 3.toPx().toFloat()
+        pad = Tool.toPx(3).toFloat()
 
         setWillNotDraw(false)
         dotPaint.color = Color.WHITE
-        dotPaint.strokeWidth = 2.toPx().toFloat()
+        dotPaint.strokeWidth = Tool.toPx(2).toFloat()
         dotPaint.isAntiAlias = true
 
         arrowPaint.color = Color.WHITE

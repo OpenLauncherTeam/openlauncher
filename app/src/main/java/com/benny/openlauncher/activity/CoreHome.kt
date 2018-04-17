@@ -305,20 +305,20 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
                 }
             }
 
-            var x = dragNDropView.dragLocation.x - CoreHome.itemTouchX + 10.toPx()
-            var y = dragNDropView.dragLocation.y - CoreHome.itemTouchY - (46 * itemList.size).toPx()
+            var x = dragNDropView.dragLocation.x - CoreHome.itemTouchX + Tool.toPx(10)
+            var y = dragNDropView.dragLocation.y - CoreHome.itemTouchY - Tool.toPx((46 * itemList.size))
 
-            if ((x + 200.toPx()) > dragNDropView.width) {
+            if ((x + Tool.toPx(200)) > dragNDropView.width) {
                 dragNDropView.setPopupMenuShowDirection(false)
-                x = dragNDropView.dragLocation.x - CoreHome.itemTouchX + desktop.currentPage.cellWidth - 200.toPx().toFloat() - 10.toPx()
+                x = dragNDropView.dragLocation.x - CoreHome.itemTouchX + desktop.currentPage.cellWidth - Tool.toPx(200).toFloat() - Tool.toPx(10)
             } else {
                 dragNDropView.setPopupMenuShowDirection(true)
             }
 
             if (y < 0)
-                y = dragNDropView.dragLocation.y - CoreHome.itemTouchY + desktop.currentPage.cellHeight + 4.toPx()
+                y = dragNDropView.dragLocation.y - CoreHome.itemTouchY + desktop.currentPage.cellHeight + Tool.toPx(4)
             else
-                y -= 4.toPx()
+                y -= Tool.toPx(4)
 
             dragNDropView.showPopupMenuForItem(x, y, itemList, OnClickListener { v, adapter, item, position ->
                 when (item.identifier) {
@@ -979,7 +979,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
                 if (appItemView!!.showLabel) {
                     cy -= Tool.dp2px(14, this) / 2
                 }
-                rad = (appItemView.iconSize / 2 - 4.toPx()).toInt()
+                rad = (appItemView.iconSize / 2 - Tool.toPx(4)).toInt()
             }
             cx -= (appDrawerController!!.drawer.layoutParams as ViewGroup.MarginLayoutParams).leftMargin
             cy -= (appDrawerController!!.drawer.layoutParams as ViewGroup.MarginLayoutParams).topMargin

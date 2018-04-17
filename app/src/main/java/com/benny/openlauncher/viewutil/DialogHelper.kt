@@ -14,8 +14,6 @@ import com.benny.openlauncher.model.Item
 import com.benny.openlauncher.util.Tool
 import com.benny.openlauncher.util.AppManager
 import com.benny.openlauncher.util.LauncherAction
-import com.benny.openlauncher.util.copy
-import com.benny.openlauncher.util.getStartAppIntent
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
 import java.io.File
 import java.util.*
