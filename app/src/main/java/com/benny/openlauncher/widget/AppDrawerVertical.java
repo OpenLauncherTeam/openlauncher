@@ -127,7 +127,7 @@ public class AppDrawerVertical extends CardView {
 
         List<App> allApps = Setup.Companion.appLoader().getAllApps(getContext(), false);
         if (allApps.size() != 0) {
-            AppDrawerVertical.this.apps = allApps;
+            apps = allApps;
             ArrayList<FastItem.AppItem> items = new ArrayList<>();
             for (int i = 0; i < apps.size(); i++) {
                 items.add(new DrawerAppItem(apps.get(i)));
@@ -137,7 +137,7 @@ public class AppDrawerVertical extends CardView {
         Setup.Companion.appLoader().addUpdateListener(new AppUpdateListener() {
             @Override
             public boolean onAppUpdated(List<App> apps) {
-                AppDrawerVertical.this.apps = apps;
+                AppDrawerVertical.apps = apps;
                 ArrayList<FastItem.AppItem> items = new ArrayList<>();
                 for (int i = 0; i < apps.size(); i++) {
                     items.add(new DrawerAppItem(apps.get(i)));

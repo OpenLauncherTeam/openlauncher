@@ -55,9 +55,9 @@ public class HideAppsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.request, container, false);
-        switcherLoad = (ViewSwitcher) rootView.findViewById(R.id.viewSwitcherLoadingMain);
+        switcherLoad = rootView.findViewById(R.id.viewSwitcherLoadingMain);
 
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_rq);
+        FloatingActionButton fab = rootView.findViewById(R.id.fab_rq);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -173,7 +173,7 @@ public class HideAppsFragment extends Fragment {
 
     @SuppressWarnings("unchecked")
     private void populateView() {
-        grid = (ListView) getActivity().findViewById(R.id.app_grid);
+        grid = getActivity().findViewById(R.id.app_grid);
 
         assert grid != null;
         grid.setFastScrollEnabled(true);
@@ -185,8 +185,8 @@ public class HideAppsFragment extends Fragment {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> AdapterView, View view, int position, long row) {
                 AppInfo appInfo = (AppInfo) AdapterView.getItemAtPosition(position);
-                CheckBox checker = (CheckBox) view.findViewById(R.id.CBappSelect);
-                ViewSwitcher icon = (ViewSwitcher) view.findViewById(R.id.viewSwitcherChecked);
+                CheckBox checker = view.findViewById(R.id.CBappSelect);
+                ViewSwitcher icon = view.findViewById(R.id.viewSwitcherChecked);
 
                 checker.toggle();
                 appInfo.setSelected(checker.isChecked());
@@ -219,11 +219,11 @@ public class HideAppsFragment extends Fragment {
             if (convertView == null) {
                 convertView = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.request_item_list, parent, false);
                 holder = new ViewHolder();
-                holder.apkIcon = (ImageView) convertView.findViewById(R.id.IVappIcon);
-                holder.apkName = (TextView) convertView.findViewById(R.id.TVappName);
-                holder.apkPackage = (TextView) convertView.findViewById(R.id.TVappPackage);
-                holder.checker = (CheckBox) convertView.findViewById(R.id.CBappSelect);
-                holder.switcherChecked = (ViewSwitcher) convertView.findViewById(R.id.viewSwitcherChecked);
+                holder.apkIcon = convertView.findViewById(R.id.IVappIcon);
+                holder.apkName = convertView.findViewById(R.id.TVappName);
+                holder.apkPackage = convertView.findViewById(R.id.TVappPackage);
+                holder.checker = convertView.findViewById(R.id.CBappSelect);
+                holder.switcherChecked = convertView.findViewById(R.id.viewSwitcherChecked);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();

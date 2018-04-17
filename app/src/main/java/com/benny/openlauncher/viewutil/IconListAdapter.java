@@ -47,8 +47,8 @@ public class IconListAdapter extends BaseAdapter {
             view = convertView;
         }
 
-        iv = (ImageView) view.findViewById(R.id.iv);
-        tv = (TextView) view.findViewById(R.id.tv);
+        iv = view.findViewById(R.id.iv);
+        tv = view.findViewById(R.id.tv);
 
         //tv.setText(labels.get(position));
         iv.setImageResource(icons.get(position));

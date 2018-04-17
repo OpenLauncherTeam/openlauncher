@@ -191,11 +191,6 @@ open class CellContainer : ViewGroup {
         //        return null;
     }
 
-    fun onItemRearrange(from: Point, to: Point) {
-        if (onItemRearrangeListener != null)
-            onItemRearrangeListener!!.onItemRearrange(from, to)
-    }
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (MotionEventCompat.getActionMasked(event)) {
             MotionEvent.ACTION_DOWN -> down = System.currentTimeMillis()
@@ -681,6 +676,6 @@ open class CellContainer : ViewGroup {
             this.ySpan = ySpan
         }
 
-        constructor(w: Int, h: Int) : super(w, h) {}
+        constructor(w: Int, h: Int) : super(w, h)
     }
 }

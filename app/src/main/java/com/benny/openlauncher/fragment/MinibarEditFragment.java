@@ -175,10 +175,10 @@ public class MinibarEditFragment extends Fragment implements ItemTouchCallback {
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                label = (TextView) itemView.findViewById(R.id.tv);
-                description = (TextView) itemView.findViewById(R.id.tv2);
-                icon = (ImageView) itemView.findViewById(R.id.iv);
-                checkbox = (CheckBox) itemView.findViewById(R.id.cb);
+                label = itemView.findViewById(R.id.tv);
+                description = itemView.findViewById(R.id.tv2);
+                icon = itemView.findViewById(R.id.iv);
+                checkbox = itemView.findViewById(R.id.cb);
             }
         }
     }

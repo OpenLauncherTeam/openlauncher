@@ -57,29 +57,6 @@ class SearchBar : FrameLayout {
 
     constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    fun setSearchInternetEnabled(enabled: Boolean): SearchBar {
-        searchInternetEnabled = enabled
-        return this
-    }
-
-    fun setSearchClockTextSize(size: Int): SearchBar {
-        searchClockTextSize = size
-        if (searchClock != null) {
-            searchClock!!.setTextSize(TypedValue.COMPLEX_UNIT_DIP, searchClockTextSize.toFloat())
-        }
-        return this
-    }
-
-    fun setSearchClockSubTextFactor(factor: Float): SearchBar {
-        searchClockSubTextFactor = factor
-        return this
-    }
-
-    fun setMode(mode: Mode): SearchBar {
-        this.mode = mode
-        return this
-    }
-
     fun setCallback(callback: CallBack) {
         this.callback = callback
     }
@@ -102,7 +79,7 @@ class SearchBar : FrameLayout {
         val iconPadding = dp1 * 6 // LauncherCircleDrawable uses 6dp as well!!
 
         searchClock = LayoutInflater.from(context).inflate(R.layout.view_search_clock, this, false) as TextView
-        searchClock!!.setTextSize(TypedValue.COMPLEX_UNIT_DIP, searchClockTextSize.toFloat())
+        searchClock.setTextSize(TypedValue.COMPLEX_UNIT_DIP, searchClockTextSize.toFloat())
         val clockParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         clockParams.setMargins(iconMarginOutside, 0, 0, 0)
         clockParams.gravity = Gravity.START
@@ -294,8 +271,8 @@ class SearchBar : FrameLayout {
         if (callback != null) {
             callback!!.onCollapse()
         }
-        icon!!.setIcon(resources.getDrawable(R.drawable.ic_search_light_24dp))
-        Tool.visibleViews(ANIM_TIME, searchClock!!)
+        icon.setIcon(resources.getDrawable(R.drawable.ic_search_light_24dp))
+        Tool.visibleViews(ANIM_TIME, searchClock)
         Tool.goneViews(ANIM_TIME, searchCardContainer, searchRecycler, switchButton)
         searchInput.text.clear()
     }
@@ -312,9 +289,9 @@ class SearchBar : FrameLayout {
                 (searchRecycler.layoutManager as GridLayoutManager).scrollToPositionWithOffset(0, 0)
             }
         }
-        icon!!.setIcon(resources.getDrawable(R.drawable.ic_clear_white_24dp))
+        icon.setIcon(resources.getDrawable(R.drawable.ic_clear_white_24dp))
         Tool.visibleViews(ANIM_TIME, searchCardContainer, searchRecycler, switchButton)
-        Tool.goneViews(ANIM_TIME, searchClock!!)
+        Tool.goneViews(ANIM_TIME, searchClock)
     }
 
     private fun updateSwitchIcon() {
@@ -352,10 +329,10 @@ class SearchBar : FrameLayout {
     fun updateClock() {
         val AppSettings: AppSettings = Setup.appSettings()
         if (!AppSettings.isSearchBarTimeEnabled) {
-            searchClock!!.text = ""
+            searchClock.text = ""
             return
         }
-        searchClock!!.setTextColor(AppSettings.desktopDateTextColor)
+        searchClock.setTextColor(AppSettings.desktopDateTextColor)
         val calendar = Calendar.getInstance(Locale.getDefault())
 
 
@@ -375,7 +352,7 @@ class SearchBar : FrameLayout {
         val lines = text.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         val span = SpannableString(text)
         span.setSpan(RelativeSizeSpan(searchClockSubTextFactor), lines[0].length + 1, lines[0].length + 1 + lines[1].length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        searchClock!!.text = span
+        searchClock.text = span
     }
 
     override fun onApplyWindowInsets(insets: WindowInsets): WindowInsets {
@@ -385,7 +362,7 @@ class SearchBar : FrameLayout {
         return insets
     }
 
-    enum class Mode private constructor(id: Int, internal var sdf: SimpleDateFormat?) {
+    enum class Mode(id: Int, internal var sdf: SimpleDateFormat?) {
         DateAll(1, SimpleDateFormat("MMMM dd'\n'EEEE',' yyyy", Locale.getDefault())),
         DateNoYearAndTime(2, SimpleDateFormat("MMMM dd'\n'HH':'mm", Locale.getDefault())),
         DateAllAndTime(3, SimpleDateFormat("MMMM dd',' yyyy'\n'HH':'mm", Locale.getDefault())),
@@ -409,21 +386,8 @@ class SearchBar : FrameLayout {
                 throw RuntimeException("ID not found!")
             }
 
-            fun getByIndex(index: Int): Mode {
-                return values()[index]
-            }
-
-            fun getIndex(id: Int): Int {
-                for (i in 0 until values().size) {
-                    if (values()[i].id == id) {
-                        return i
-                    }
-                }
-                throw RuntimeException("ID not found!")
-            }
-
             fun count(): Int {
-                return values().size;
+                return values().size
             }
         }
     }

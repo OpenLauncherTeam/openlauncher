@@ -114,7 +114,7 @@ abstract class Setup {
         fun itemGestureCallback(): ItemGestureListener.ItemGestureCallback = get().getItemGestureCallback()
 
         @JvmStatic
-        fun imageLoader(): Setup.ImageLoader = get().getImageLoader() as Setup.ImageLoader
+        fun imageLoader(): Setup.ImageLoader = get().getImageLoader()
 
         @JvmStatic
         fun dataManager(): DataManager = get().getDataManager()

@@ -39,7 +39,7 @@ public final class LauncherActionDrawable extends Drawable {
 
     public void draw(@Nullable Canvas canvas) {
         if (canvas != null) {
-            _paint.setColorFilter((ColorFilter) null);
+            _paint.setColorFilter(null);
             canvas.drawCircle(((float) _iconSize) / 2.0f, ((float) _iconSize) / 2.0f, _iconRadius, _paint);
             _paint.setColorFilter(_filterDkGray);
             canvas.drawBitmap(_icon, ((float) (_iconSize - _icon.getWidth())) / 2.0f, ((float) (_iconSize - _icon.getWidth())) / 2.0f, _paint);

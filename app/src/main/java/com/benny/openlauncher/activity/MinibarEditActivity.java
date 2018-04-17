@@ -75,8 +75,8 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
                 buttonView.setText(isChecked ? R.string.on : R.string.off);
                 AppSettings.get().setMinibarEnable(isChecked);
                 if (Home.Companion.getLauncher() != null) {
-                    ((Home) Home.Companion.getLauncher()).closeAppDrawer();
-                    ((Home) Home.Companion.getLauncher()).getDrawerLayout().setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    Home.Companion.getLauncher().closeAppDrawer();
+                    Home.Companion.getLauncher().getDrawerLayout().setDrawerLockMode(isChecked ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 }
             }
         });
@@ -100,7 +100,7 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
     @Override
     protected void onStop() {
         if (Home.Companion.getLauncher() != null) {
-            ((Home) Home.Companion.getLauncher()).initMinibar();
+            Home.Companion.getLauncher().initMinibar();
         }
         super.onStop();
     }
@@ -167,10 +167,10 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                tv = (TextView) itemView.findViewById(R.id.tv);
-                tv2 = (TextView) itemView.findViewById(R.id.tv2);
-                iv = (ImageView) itemView.findViewById(R.id.iv);
-                cb = (CheckBox) itemView.findViewById(R.id.cb);
+                tv = itemView.findViewById(R.id.tv);
+                tv2 = itemView.findViewById(R.id.tv2);
+                iv = itemView.findViewById(R.id.iv);
+                cb = itemView.findViewById(R.id.cb);
             }
         }
     }

@@ -52,7 +52,7 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
         var _resources: Resources? = null
         val REQUEST_PICK_APPWIDGET = 0x6475
         val REQUEST_CREATE_APPWIDGET = 0x3648
-        public val REQUEST_PERMISSION_STORAGE = 0x2678
+        val REQUEST_PERMISSION_STORAGE = 0x2678
 
         // static members, easier to access from any activity and class
         lateinit var db: Setup.DataManager
@@ -330,33 +330,6 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
     override fun onBackPressed() {
         handleLauncherPause(false)
         drawer_layout.closeDrawers()
-    }
-
-    // search button in the search bar is clicked
-    fun onSearch(view: View) {
-        var i: Intent
-        try {
-            i = Intent(Intent.ACTION_MAIN)
-            i.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.SearchActivity")
-            this@Home.startActivity(i)
-        } catch (e: Exception) {
-            i = Intent(Intent.ACTION_WEB_SEARCH)
-            i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        }
-
-        this@Home.startActivity(i)
-    }
-
-    // voice button in the search bar clicked
-    fun onVoiceSearch(view: View) {
-        try {
-            val i = Intent(Intent.ACTION_MAIN)
-            i.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.VoiceSearchActivity")
-            this@Home.startActivity(i)
-        } catch (e: Exception) {
-            Tool.toast(this@Home, "Can not find google search app")
-        }
-
     }
 
     override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
@@ -1276,5 +1249,4 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
         val finalRadius = Math.max(appDrawerController!!.drawer.width, appDrawerController!!.drawer.height)
         appDrawerController!!.close(cx, cy, rad, finalRadius)
     }
-
 }

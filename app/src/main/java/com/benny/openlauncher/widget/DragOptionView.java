@@ -79,10 +79,7 @@ public class DragOptionView extends CardView {
             public boolean onDrag(final View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
-                        if (((DragAction) dragEvent.getLocalState()).action == DragAction.Action.APP_DRAWER) {
-                            return false;
-                        }
-                        return true;
+                        return ((DragAction) dragEvent.getLocalState()).action != DragAction.Action.APP_DRAWER;
                     case DragEvent.ACTION_DRAG_ENTERED:
                         return true;
                     case DragEvent.ACTION_DRAG_EXITED:
@@ -107,7 +104,7 @@ public class DragOptionView extends CardView {
                 return false;
             }
         });
-        removeIcon = (TextView) dragOptions.findViewById(R.id.removeIcon);
+        removeIcon = dragOptions.findViewById(R.id.removeIcon);
         removeIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
@@ -141,7 +138,7 @@ public class DragOptionView extends CardView {
                 return false;
             }
         });
-        infoIcon = (TextView) dragOptions.findViewById(R.id.infoIcon);
+        infoIcon = dragOptions.findViewById(R.id.infoIcon);
         infoIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
@@ -172,7 +169,7 @@ public class DragOptionView extends CardView {
                 return false;
             }
         });
-        deleteIcon = (TextView) dragOptions.findViewById(R.id.deleteIcon);
+        deleteIcon = dragOptions.findViewById(R.id.deleteIcon);
         deleteIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {

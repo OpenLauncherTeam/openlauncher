@@ -262,7 +262,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
                     Intrinsics.throwNpe();
                 }
                 smoothViewPager.removeOnPageChangeListener(this);
-                this.pager = (SmoothViewPager) null;
+                this.pager = null;
                 invalidate();
             }
             return;

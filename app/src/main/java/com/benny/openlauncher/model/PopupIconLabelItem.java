@@ -29,8 +29,8 @@ public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, P
         public ViewHolder_PopupIconLabelItem(@NotNull View itemView) {
             super(itemView);
             this.cardView = (CardView) itemView;
-            this.labelView = (TextView) itemView.findViewById(R.id.item_popup_label);
-            this.iconView = (ImageView) itemView.findViewById(R.id.item_popup_icon);
+            this.labelView = itemView.findViewById(R.id.item_popup_label);
+            this.iconView = itemView.findViewById(R.id.item_popup_icon);
         }
 
         @NotNull
@@ -105,7 +105,7 @@ public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, P
         if (holder != null) {
             TextView labelView = holder.getLabelView();
             if (labelView != null) {
-                labelView.setText((CharSequence) null);
+                labelView.setText(null);
             }
         }
         if (holder != null) {
