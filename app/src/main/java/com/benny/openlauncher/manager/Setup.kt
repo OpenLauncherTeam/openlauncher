@@ -5,12 +5,13 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import com.benny.openlauncher.interfaces.*
 import com.benny.openlauncher.model.Item
+import com.benny.openlauncher.util.AppManager
 import com.benny.openlauncher.util.BaseIconProvider
 import com.benny.openlauncher.util.Definitions
 import com.benny.openlauncher.viewutil.DesktopGestureListener
 import com.benny.openlauncher.viewutil.ItemGestureListener
 
-abstract class Setup<A : AbstractApp> {
+abstract class Setup {
 
     // ----------------
     // Settings
@@ -24,11 +25,11 @@ abstract class Setup<A : AbstractApp> {
 
     abstract fun getItemGestureCallback(): ItemGestureListener.ItemGestureCallback
 
-    abstract fun getImageLoader(): ImageLoader<A>
+    abstract fun getImageLoader(): ImageLoader<AppManager.App>
 
     abstract fun getDataManager(): DataManager
 
-    abstract fun getAppLoader(): AppLoader<A>
+    abstract fun getAppLoader(): AppLoader<AppManager.App>
 
     abstract fun getEventHandler(): EventHandler
 
@@ -102,18 +103,18 @@ abstract class Setup<A : AbstractApp> {
     companion object {
 
         @JvmStatic
-        private var setup: Setup<*>? = null
+        private var setup: Setup? = null
 
         @JvmStatic
         fun wasInitialised(): Boolean = setup != null
 
         @JvmStatic
-        fun init(setup: Setup<*>) {
+        fun init(setup: Setup) {
             Setup.setup = setup
         }
 
         @JvmStatic
-        fun get(): Setup<*> {
+        fun get(): Setup {
             if (setup == null) {
                 throw RuntimeException("Setup has not been initialised!")
             }

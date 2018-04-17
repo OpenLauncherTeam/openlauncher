@@ -289,7 +289,7 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
                 Log.println(priority, tag, String.format(msg, *args))
             }
         }
-        Setup.init(object : Setup<AppManager.App>() {
+        Setup.init(object : Setup() {
             override fun getAppContext(): Context = App.get()!!.applicationContext
 
             override fun getAppSettings(): SettingsManager = settingsManager
