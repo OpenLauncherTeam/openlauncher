@@ -2,10 +2,10 @@ package com.benny.openlauncher;
 
 import android.app.Application;
 
-public class App extends Application {
-    private static App instance;
+public class AppObject extends Application {
+    private static AppObject instance;
 
-    public static App get() {
+    public static AppObject get() {
         return instance;
     }
 

@@ -4,7 +4,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.benny.openlauncher.App;
+import com.benny.openlauncher.AppObject;
 import com.benny.openlauncher.R;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class ClearRamAsyncTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPreExecute() {
         LauncherAction.clearingRam = true;
-        Context context = App.get();
+        Context context = AppObject.get();
 
         if (context == null) {
             cancel(true);
@@ -51,7 +51,7 @@ public class ClearRamAsyncTask extends AsyncTask<Void, Void, Void> {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         activityManager.getMemoryInfo(mi);
         long current = mi.availMem / 1048576L;
-        Context context = App.get();
+        Context context = AppObject.get();
         if (context == null) {
             super.onPostExecute(result);
             return;

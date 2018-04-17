@@ -13,7 +13,7 @@ import android.view.View
 import android.widget.AdapterView
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash
 import com.afollestad.materialdialogs.MaterialDialog
-import com.benny.openlauncher.App
+import com.benny.openlauncher.AppObject
 import com.benny.openlauncher.BuildConfig
 import com.benny.openlauncher.R
 import com.benny.openlauncher.interfaces.AbstractApp
@@ -290,7 +290,7 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
             }
         }
         Setup.init(object : Setup() {
-            override fun getAppContext(): Context = App.get()!!.applicationContext
+            override fun getAppContext(): Context = AppObject.get()!!.applicationContext
 
             override fun getAppSettings(): SettingsManager = settingsManager
 

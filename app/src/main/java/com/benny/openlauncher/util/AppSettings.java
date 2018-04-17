@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
-import com.benny.openlauncher.App;
+import com.benny.openlauncher.AppObject;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.SettingsManager;
 import com.benny.openlauncher.manager.Setup;
@@ -25,7 +25,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
     }
 
     public static AppSettings get() {
-        return new AppSettings(App.get());
+        return new AppSettings(AppObject.get());
     }
 
     public int getDesktopColumnCount() {
