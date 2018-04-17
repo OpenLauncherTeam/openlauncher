@@ -8,7 +8,7 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 
-import com.benny.openlauncher.core.util.Tool;
+import com.benny.openlauncher.util.Tool;
 
 public class CircleDrawable extends Drawable {
 

@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.benny.openlauncher.activity.AutoFinishActivity;
-import com.benny.openlauncher.core.util.Tool;
 
 public class FiveSecsDelayContentProvider extends ContentProvider {
 

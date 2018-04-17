@@ -11,8 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.BitmapDrawable;
 
-import com.benny.openlauncher.core.manager.Setup;
-import com.benny.openlauncher.core.util.Definitions;
+import com.benny.openlauncher.manager.Setup;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;

@@ -11,7 +11,6 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import com.benny.openlauncher.R
-import com.benny.openlauncher.core.activity.CoreHome
 import com.benny.openlauncher.util.AppSettings
 import com.benny.openlauncher.util.LauncherAction
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter

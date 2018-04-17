@@ -6,7 +6,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.ListView;
 
-import com.benny.openlauncher.core.util.Tool;
+import com.benny.openlauncher.util.Tool;
 
 public class SwipeListView extends ListView {
     private GestureDetector mGestureDetector;

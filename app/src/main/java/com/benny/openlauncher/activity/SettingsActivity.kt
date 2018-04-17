@@ -2,7 +2,6 @@ package com.benny.openlauncher.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -13,14 +12,11 @@ import android.support.v7.preference.PreferenceCategory
 import android.support.v7.preference.PreferenceFragmentCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.R
-import com.benny.openlauncher.core.activity.CoreHome
-import com.benny.openlauncher.core.util.DatabaseHelper
-import com.benny.openlauncher.core.util.Tool
-import com.benny.openlauncher.core.widget.AppDrawerController
+import com.benny.openlauncher.util.DatabaseHelper
+import com.benny.openlauncher.widget.AppDrawerController
 import com.benny.openlauncher.util.AppManager
 import com.benny.openlauncher.util.AppSettings
 import com.benny.openlauncher.util.LauncherAction
-import com.benny.openlauncher.util.getStartAppIntent
 import com.benny.openlauncher.viewutil.DialogHelper
 import com.benny.openlauncher.viewutil.DialogHelper.OnAppSelectedListener
 import com.benny.openlauncher.viewutil.DialogHelper.selectAppDialog

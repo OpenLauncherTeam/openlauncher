@@ -15,7 +15,6 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.activity.MinibarEditActivity;
 import com.benny.openlauncher.activity.SettingsActivity;
-import com.benny.openlauncher.core.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
 
 public class LauncherAction {

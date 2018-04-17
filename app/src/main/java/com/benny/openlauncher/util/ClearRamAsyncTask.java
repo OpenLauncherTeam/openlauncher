@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 
 import com.benny.openlauncher.App;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.core.util.Tool;
 
 import java.util.List;
 

@@ -7,11 +7,11 @@ import android.support.v4.content.ContextCompat;
 
 import com.benny.openlauncher.App;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.core.interfaces.SettingsManager;
-import com.benny.openlauncher.core.manager.Setup;
-import com.benny.openlauncher.core.widget.AppDrawerController;
-import com.benny.openlauncher.core.widget.Desktop;
-import com.benny.openlauncher.core.widget.PagerIndicator;
+import com.benny.openlauncher.interfaces.SettingsManager;
+import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.widget.AppDrawerController;
+import com.benny.openlauncher.widget.Desktop;
+import com.benny.openlauncher.widget.PagerIndicator;
 
 import net.gsantner.opoc.preference.SharedPreferencesPropertyBackend;
 

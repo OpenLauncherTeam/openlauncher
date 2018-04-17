@@ -84,7 +84,7 @@
         </receiver>
 
         <receiver
-            android:name="com.benny.openlauncher.core.util.ShortcutReceiver"
+            android:name="com.benny.openlauncher.util.ShortcutReceiver"
             android:permission="com.android.launcher.permission.INSTALL_SHORTCUT">
             <intent-filter>
                 <action android:name="com.android.launcher.action.INSTALL_SHORTCUT" />

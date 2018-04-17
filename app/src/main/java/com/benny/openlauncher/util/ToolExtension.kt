@@ -24,8 +24,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.benny.openlauncher.BuildConfig
 import com.benny.openlauncher.R
-import com.benny.openlauncher.core.activity.CoreHome
-import com.benny.openlauncher.core.util.Tool
+import com.benny.openlauncher.activity.CoreHome
 import java.io.*
 import java.util.*
 

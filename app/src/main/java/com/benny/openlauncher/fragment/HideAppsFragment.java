@@ -22,8 +22,8 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.core.model.AppInfo;
-import com.benny.openlauncher.core.util.Definitions;
+import com.benny.openlauncher.model.AppInfo;
+import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 

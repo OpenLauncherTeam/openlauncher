@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:text="Text" />
 
-        <com.benny.openlauncher.core.widget.CellContainer
+        <com.benny.openlauncher.widget.CellContainer
             android:id="@+id/group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
