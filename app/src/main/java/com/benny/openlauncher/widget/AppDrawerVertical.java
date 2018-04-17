@@ -12,11 +12,11 @@ import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.interfaces.FastItem;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.DrawerAppItem;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;

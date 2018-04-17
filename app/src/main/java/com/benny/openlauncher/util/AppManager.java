@@ -14,10 +14,8 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.interfaces.AppDeleteListener;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
-import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.IconLabelItem;
 import com.benny.openlauncher.model.Item;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -300,7 +298,7 @@ public class AppManager {
         }
     }
 
-    public static abstract class AppUpdatedListener implements AppUpdateListener{
+    public static abstract class AppUpdatedListener implements AppUpdateListener {
         private String listenerID;
 
         public AppUpdatedListener() {

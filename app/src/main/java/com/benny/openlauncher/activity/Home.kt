@@ -31,7 +31,6 @@ import com.benny.openlauncher.R
 import com.benny.openlauncher.interfaces.AppDeleteListener
 import com.benny.openlauncher.interfaces.AppUpdateListener
 import com.benny.openlauncher.interfaces.DialogListener
-import com.benny.openlauncher.util.AppSettings
 import com.benny.openlauncher.manager.Setup
 import com.benny.openlauncher.model.Item
 import com.benny.openlauncher.model.PopupIconLabelItem
@@ -931,6 +930,7 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
         }
         return if (opts != null) opts.toBundle() else null
     }
+
     override fun onDesktopEdit() {
         Tool.visibleViews(100, 20, desktopEditOptionPanel)
 

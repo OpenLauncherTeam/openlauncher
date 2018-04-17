@@ -18,12 +18,12 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import com.benny.openlauncher.R
 import com.benny.openlauncher.drawable.LauncherCircleDrawable
-import com.benny.openlauncher.util.App
 import com.benny.openlauncher.interfaces.AppUpdateListener
-import com.benny.openlauncher.util.AppSettings
 import com.benny.openlauncher.manager.Setup
 import com.benny.openlauncher.model.IconLabelItem
 import com.benny.openlauncher.model.Item
+import com.benny.openlauncher.util.App
+import com.benny.openlauncher.util.AppSettings
 import com.benny.openlauncher.util.DragAction
 import com.benny.openlauncher.util.Tool
 import com.mikepenz.fastadapter.IItemAdapter
@@ -350,7 +350,7 @@ class SearchBar : FrameLayout {
     }
 
     fun updateClock() {
-        val AppSettings: AppSettings =  Setup.appSettings()
+        val AppSettings: AppSettings = Setup.appSettings()
         if (!AppSettings.isSearchBarTimeEnabled) {
             searchClock!!.text = ""
             return
@@ -361,9 +361,9 @@ class SearchBar : FrameLayout {
 
         var sdf: SimpleDateFormat? = mode.sdf
         val mode = AppSettings.desktopDateMode
-        if (mode >= 0 && mode < Mode.count()){
+        if (mode >= 0 && mode < Mode.count()) {
             sdf = Mode.getById(mode).sdf
-            if (mode == 0){
+            if (mode == 0) {
                 sdf = AppSettings.userDateFormat
             }
         }
@@ -421,6 +421,7 @@ class SearchBar : FrameLayout {
                 }
                 throw RuntimeException("ID not found!")
             }
+
             fun count(): Int {
                 return values().size;
             }

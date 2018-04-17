@@ -4,9 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.FastItem;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.widget.AppDrawerVertical;
 import com.benny.openlauncher.widget.AppItemView;

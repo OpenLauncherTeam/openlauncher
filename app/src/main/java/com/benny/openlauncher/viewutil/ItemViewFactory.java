@@ -14,9 +14,9 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragNDropHandler;
 import com.benny.openlauncher.util.Tool;

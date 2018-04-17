@@ -1,11 +1,13 @@
 package com.benny.openlauncher.manager
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.drawable.Drawable
-import com.benny.openlauncher.interfaces.*
+import com.benny.openlauncher.interfaces.DialogListener
 import com.benny.openlauncher.model.Item
-import com.benny.openlauncher.util.*
+import com.benny.openlauncher.util.AppManager
+import com.benny.openlauncher.util.AppSettings
+import com.benny.openlauncher.util.BaseIconProvider
+import com.benny.openlauncher.util.Definitions
 import com.benny.openlauncher.viewutil.DesktopGestureListener
 import com.benny.openlauncher.viewutil.ItemGestureListener
 

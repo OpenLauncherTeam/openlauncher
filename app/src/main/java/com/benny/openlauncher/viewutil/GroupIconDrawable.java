@@ -13,10 +13,10 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.IconDrawer;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.Tool;
 
 public class GroupIconDrawable extends Drawable implements IconDrawer {

@@ -5,11 +5,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.LabelProvider;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.BaseIconProvider;
 import com.benny.openlauncher.util.Tool;
 

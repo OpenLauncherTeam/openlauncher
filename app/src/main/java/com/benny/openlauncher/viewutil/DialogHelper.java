@@ -11,20 +11,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
+
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.model.IconLabelItem;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.App;
-import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.LauncherAction;
-//import com.benny.openlauncher.util.copy;
-// import com.benny.openlauncher.util.getStartAppIntent;
+import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+//import com.benny.openlauncher.util.copy;
+// import com.benny.openlauncher.util.getStartAppIntent;
 
 public class DialogHelper {
     public static void editItemDialog(String title, String defaultText, Context c, final OnItemEditListener listener) {

@@ -8,10 +8,13 @@ import android.widget.TextView;
 
 import com.benny.openlauncher.R;
 import com.mikepenz.fastadapter.items.AbstractItem;
-import java.util.List;
-import kotlin.jvm.internal.Intrinsics;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+
+import kotlin.jvm.internal.Intrinsics;
 
 public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, PopupIconLabelItem.ViewHolder_PopupIconLabelItem> {
     private final int iconRes;

@@ -14,7 +14,10 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import com.benny.openlauncher.activity.Home
 import com.benny.openlauncher.manager.Setup
 import com.benny.openlauncher.model.Item
-import com.benny.openlauncher.util.*
+import com.benny.openlauncher.util.Definitions
+import com.benny.openlauncher.util.DragAction
+import com.benny.openlauncher.util.DragNDropHandler
+import com.benny.openlauncher.util.Tool
 import com.benny.openlauncher.viewutil.DesktopCallBack
 import com.benny.openlauncher.viewutil.DesktopGestureListener
 import com.benny.openlauncher.viewutil.ItemViewFactory
@@ -366,7 +369,8 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
                 layout.gestures = mySfg
                 layout.onItemRearrangeListener = object : CellContainer.OnItemRearrangeListener {
                     override fun onItemRearrange(from: Point, to: Point) {
-                        val itemFromCoordinate = Desktop.getItemFromCoordinate(from, currentItem) ?: return
+                        val itemFromCoordinate = Desktop.getItemFromCoordinate(from, currentItem)
+                                ?: return
                         itemFromCoordinate.x = to.x
                         itemFromCoordinate.y = to.y
                     }

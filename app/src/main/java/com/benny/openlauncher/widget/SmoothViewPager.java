@@ -1936,15 +1936,15 @@ public class SmoothViewPager extends ViewGroup {
 
         switch (action) {
             case MotionEvent.ACTION_MOVE: {
-                    /*
-                     * mIsBeingDragged == false, otherwise the shortcut would have caught it. Check
-					 * whether the user has moved far enough from his original down touch.
-					 */
+                /*
+                 * mIsBeingDragged == false, otherwise the shortcut would have caught it. Check
+                 * whether the user has moved far enough from his original down touch.
+                 */
 
-					/*
-                     * Locally do absolute value. mLastMotionY is set to the y value
-					 * of the down event.
-					 */
+                /*
+                 * Locally do absolute value. mLastMotionY is set to the y value
+                 * of the down event.
+                 */
                 final int activePointerId = mActivePointerId;
                 if (activePointerId == INVALID_POINTER) {
                     // If we don't have a valid id, the touch down wasn't on content.
@@ -1996,10 +1996,10 @@ public class SmoothViewPager extends ViewGroup {
             }
 
             case MotionEvent.ACTION_DOWN: {
-                    /*
-                     * Remember location of down touch.
-					 * ACTION_DOWN always refers to pointer index 0.
-					 */
+                /*
+                 * Remember location of down touch.
+                 * ACTION_DOWN always refers to pointer index 0.
+                 */
                 mLastMotionX = mInitialMotionX = ev.getX();
                 mLastMotionY = mInitialMotionY = ev.getY();
                 mActivePointerId = MotionEventCompat.getPointerId(ev, 0);

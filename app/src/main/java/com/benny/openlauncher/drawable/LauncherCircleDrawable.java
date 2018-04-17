@@ -8,10 +8,13 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
+
 import com.benny.openlauncher.util.Tool;
-import kotlin.jvm.internal.Intrinsics;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import kotlin.jvm.internal.Intrinsics;
 
 /* compiled from: LauncherCircleDrawable.kt */
 public final class LauncherCircleDrawable extends Drawable {
@@ -25,7 +28,6 @@ public final class LauncherCircleDrawable extends Drawable {
     private final Paint _paint;
     private final Paint _paint2;
     private final float _scaleStep = 0.1f;
-
 
 
     public void draw(@NotNull Canvas canvas) {

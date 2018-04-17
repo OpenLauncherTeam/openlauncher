@@ -13,10 +13,10 @@ import android.support.v7.preference.PreferenceFragmentCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.R
 import com.benny.openlauncher.util.*
-import com.benny.openlauncher.widget.AppDrawerController
 import com.benny.openlauncher.viewutil.DialogHelper
 import com.benny.openlauncher.viewutil.DialogHelper.OnAppSelectedListener
 import com.benny.openlauncher.viewutil.DialogHelper.selectAppDialog
+import com.benny.openlauncher.widget.AppDrawerController
 import kotlinx.android.synthetic.main.toolbar.*
 
 class SettingsActivity : ThemeActivity() {
@@ -336,12 +336,12 @@ class SettingsActivity : ThemeActivity() {
                     R.string.pref_key__gesture_pinch,
                     R.string.pref_key__gesture_unpinch
             )
-            for (spec in speca){
-                if (key.equals(getString(spec))){
-                    if (sharedPreferences.getString(key,"0").equals("9")){
+            for (spec in speca) {
+                if (key.equals(getString(spec))) {
+                    if (sharedPreferences.getString(key, "0").equals("9")) {
                         selectAppDialog(context!!, object : OnAppSelectedListener {
                             override fun onAppSelected(app: App) {
-                                sharedPreferences.edit().putString(key+"__", app.packageName).apply()
+                                sharedPreferences.edit().putString(key + "__", app.packageName).apply()
                             }
                         })
                     }
