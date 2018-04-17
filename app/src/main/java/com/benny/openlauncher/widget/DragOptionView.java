@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.CoreHome;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.interfaces.DialogListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
@@ -33,7 +33,7 @@ public class DragOptionView extends CardView {
     private TextView removeIcon;
     private TextView infoIcon;
     private TextView deleteIcon;
-    private CoreHome home;
+    private Home home;
     private Long animSpeed = 120L;
 
     public DragOptionView(Context context) {
@@ -46,7 +46,7 @@ public class DragOptionView extends CardView {
         init();
     }
 
-    public void setHome(CoreHome home) {
+    public void setHome(Home home) {
         this.home = home;
     }
 
@@ -94,10 +94,10 @@ public class DragOptionView extends CardView {
                             @Override
                             public void onRename(String name) {
                                 item.setLabel(name);
-                                CoreHome.Companion.getDb().saveItem(item);
+                                Home.Companion.getDb().saveItem(item);
 
-                                CoreHome.Companion.getLauncher().getDesktop().addItemToCell(item, item.getX(), item.getY());
-                                CoreHome.Companion.getLauncher().getDesktop().removeItem(CoreHome.Companion.getLauncher().getDesktop().getCurrentPage().coordinateToChildView(new Point(item.getX(), item.getY())), false);
+                                Home.Companion.getLauncher().getDesktop().addItemToCell(item, item.getX(), item.getY());
+                                Home.Companion.getLauncher().getDesktop().removeItem(Home.Companion.getLauncher().getDesktop().getCurrentPage().coordinateToChildView(new Point(item.getX(), item.getY())), false);
                             }
                         });
                         return true;
@@ -130,7 +130,7 @@ public class DragOptionView extends CardView {
                         Item item = DragNDropHandler.INSTANCE.getDraggedObject(dragEvent);
 
                         // remove all items from the database
-                        CoreHome.Companion.getLauncher().Companion.getDb().deleteItem(item, true);
+                        Home.Companion.getLauncher().Companion.getDb().deleteItem(item, true);
 
                         home.getDesktop().consumeRevert();
                         home.getDock().consumeRevert();
@@ -304,7 +304,7 @@ public class DragOptionView extends CardView {
                     Tool.visibleViews(Math.round(animSpeed / 1.3f), hideViews);
 
                 // the search view might be disabled
-                CoreHome.Companion.getLauncher().updateSearchBar(true);
+                Home.Companion.getLauncher().updateSearchBar(true);
 
                 isDraggedFromDrawer = false;
 

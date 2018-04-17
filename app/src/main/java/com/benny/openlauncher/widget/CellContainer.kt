@@ -10,7 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import com.benny.openlauncher.activity.CoreHome
+import com.benny.openlauncher.activity.Home
 import com.benny.openlauncher.util.Tool
 import java.util.*
 
@@ -411,7 +411,7 @@ open class CellContainer : ViewGroup {
         }
 
         //Animating alpha and drawing projected image
-        if (CoreHome.launcher!!.getDragNDropView().dragExceedThreshold && currentOutlineCoordinate.x != -1 && currentOutlineCoordinate.y != -1) {
+        if (Home.launcher!!.getDragNDropView().dragExceedThreshold && currentOutlineCoordinate.x != -1 && currentOutlineCoordinate.y != -1) {
             if (outlinePaint.alpha != 160)
                 outlinePaint.alpha = Math.min(outlinePaint.alpha + 20, 160)
             drawCachedOutlineBitmap(canvas, cells!![currentOutlineCoordinate.x][currentOutlineCoordinate.y]!!)

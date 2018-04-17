@@ -23,7 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.CoreHome;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.IconProvider;
@@ -216,16 +216,16 @@ public class Tool {
 
     public static void startApp(Context context, App app) {
         if (Home.Companion.getLauncher() != null)
-            Home.Companion.getLauncher().onStartApp(context, app);
+            Home.Companion.getLauncher().onStartApp(context, app, null);
     }
 
     public static void startApp(Context context, Intent intent) {
         if (Home.Companion.getLauncher() != null)
-            Home.Companion.getLauncher().onStartApp(context, intent);
+            Home.Companion.getLauncher().onStartApp(context, intent, null);
     }
 
     public static final void startApp(@NotNull Context context, @NotNull App app, @Nullable View view) {
-        CoreHome launcher = CoreHome.Companion.getLauncher();
+        Home launcher = Home.Companion.getLauncher();
         if (launcher != null) {
             launcher.onStartApp(context, app, view);
         }
@@ -383,8 +383,8 @@ public class Tool {
         return new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                CoreHome.Companion.setItemTouchX((int) motionEvent.getX());
-                CoreHome.Companion.setItemTouchY((int) motionEvent.getY());
+                Home.Companion.setItemTouchX((int) motionEvent.getX());
+                Home.Companion.setItemTouchY((int) motionEvent.getY());
                 if (itemGestureListener != null) {
                     return itemGestureListener.onTouchEvent(motionEvent);
                 }

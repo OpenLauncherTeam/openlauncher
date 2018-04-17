@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowInsets
-import com.benny.openlauncher.activity.CoreHome
+import com.benny.openlauncher.activity.Home
 import com.benny.openlauncher.manager.Setup
 import com.benny.openlauncher.model.Item
 import com.benny.openlauncher.util.DragAction
@@ -21,7 +21,7 @@ class Dock @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) : C
     var previousItem: Item? = null
     private var startPosX: Float = 0.toFloat()
     private var startPosY: Float = 0.toFloat()
-    private var home: CoreHome? = null
+    private var home: Home? = null
     private val coordinate = Point()
 
     override fun init() {
@@ -31,10 +31,10 @@ class Dock @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) : C
         super.init()
     }
 
-    fun initDockItem(home: CoreHome) {
+    fun initDockItem(home: Home) {
         val columns = Setup.appSettings().dockSize
         setGridSize(columns, 1)
-        val dockItems = CoreHome.db.dock
+        val dockItems = Home.db.dock
 
         this.home = home
         removeAllViews()
@@ -54,7 +54,7 @@ class Dock @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) : C
     }
 
     private fun detectSwipe(ev: MotionEvent) {
-        if (CoreHome.launcher == null) return
+        if (Home.launcher == null) return
         when (ev.action) {
             MotionEvent.ACTION_UP -> {
                 Tool.print("ACTION_UP")
@@ -62,10 +62,10 @@ class Dock @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) : C
                 Tool.print(ev.x.toInt(), ev.y.toInt())
                 if (startPosY - ev.y > minDist) {
                     if (Setup.appSettings().gestureDockSwipeUp) {
-                        val p = Tool.convertPoint(Point(ev.x.toInt(), ev.y.toInt()), this, CoreHome.launcher!!.getAppDrawerController())
+                        val p = Tool.convertPoint(Point(ev.x.toInt(), ev.y.toInt()), this, Home.launcher!!.getAppDrawerController())
                         if (Setup.appSettings().isGestureFeedback)
                             Tool.vibrate(this)
-                        CoreHome.launcher!!.openAppDrawer(this, p.x, p.y)
+                        Home.launcher!!.openAppDrawer(this, p.x, p.y)
                     }
                 }
             }
@@ -83,7 +83,7 @@ class Dock @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) : C
         val state = peekItemAndSwap(x, y, coordinate)
 
         if (previousDragPoint != coordinate)
-            CoreHome.launcher?.getDragNDropView()?.cancelFolderPreview()
+            Home.launcher?.getDragNDropView()?.cancelFolderPreview()
         previousDragPoint.set(coordinate.x, coordinate.y)
 
         when (state) {
@@ -96,10 +96,10 @@ class Dock @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) : C
             CellContainer.DragState.CurrentOccupied -> {
                 clearCachedOutlineBitmap()
 
-                val action = CoreHome.launcher?.getDragNDropView()?.dragAction
+                val action = Home.launcher?.getDragNDropView()?.dragAction
                 if (action != DragAction.Action.WIDGET && action != DragAction.Action.ACTION &&
                         coordinateToChildView(coordinate) is AppItemView)
-                    CoreHome.launcher?.getDragNDropView()?.showFolderPreviewAt(
+                    Home.launcher?.getDragNDropView()?.showFolderPreviewAt(
                             this,
                             cellWidth * (coordinate.x + 0.5f),
                             cellHeight * (coordinate.y + 0.5f) - if (Setup.appSettings().isDockShowLabel) Tool.toPx(7) else 0
@@ -161,7 +161,7 @@ class Dock @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) : C
         val itemView = ItemViewFactory.getItemView(context, item, Setup.appSettings().isDockShowLabel, this, Setup.appSettings().dockIconSize)
 
         if (itemView == null) {
-            CoreHome.db.deleteItem(item, true)
+            Home.db.deleteItem(item, true)
             return false
         } else {
             item.locationInLauncher = Item.LOCATION_DOCK

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.CoreHome;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.App;
@@ -25,7 +25,7 @@ public class AppDrawerPaged extends SmoothViewPager {
 
     public List<ViewGroup> pages = new ArrayList<>();
 
-    private CoreHome home;
+    private Home home;
 
     private static int rowCellCount, columnCellCount;
 
@@ -115,7 +115,7 @@ public class AppDrawerPaged extends SmoothViewPager {
         });
     }
 
-    public void withHome(CoreHome home, PagerIndicator appDrawerIndicator) {
+    public void withHome(Home home, PagerIndicator appDrawerIndicator) {
         this.home = home;
         this.appDrawerIndicator = appDrawerIndicator;
         appDrawerIndicator.setMode(PagerIndicator.Mode.INSTANCE.getNORMAL());
@@ -153,7 +153,7 @@ public class AppDrawerPaged extends SmoothViewPager {
 
                                 @Override
                                 public void afterDrag(View view) {
-                                    //This will be handled by the Drag N Drop listener in the CoreHome
+                                    //This will be handled by the Drag N Drop listener in the Home
                                     //home.closeAppDrawer();
                                 }
                             });

@@ -4,14 +4,14 @@ import android.os.Handler;
 import android.view.DragEvent;
 import android.view.View;
 
-import com.benny.openlauncher.activity.CoreHome;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.DragAction;
 
 public class DragNavigationControl {
 
     private static boolean leftok = true, rightok = true;
 
-    public static void init(final CoreHome home, final View leftView, final View rightView) {
+    public static void init(final Home home, final View leftView, final View rightView) {
         final Handler l = new Handler();
         final Runnable right = new Runnable() {
             @Override

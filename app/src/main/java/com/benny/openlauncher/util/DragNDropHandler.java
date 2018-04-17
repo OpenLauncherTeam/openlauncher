@@ -9,7 +9,7 @@ import android.os.Parcelable;
 import android.view.DragEvent;
 import android.view.View;
 
-import com.benny.openlauncher.activity.CoreHome;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.widget.AppItemView;
 
@@ -28,8 +28,8 @@ public final class DragNDropHandler {
     public static <T extends Parcelable> void startDrag(View view, Item item, DragAction.Action action, @Nullable final AppItemView.LongPressCallBack eventAction) {
         cachedDragBitmap = loadBitmapFromView(view);
 
-        if (CoreHome.Companion.getLauncher() != null)
-            CoreHome.Companion.getLauncher().getDragNDropView().startDragNDropOverlay(view, item, action);
+        if (Home.Companion.getLauncher() != null)
+            Home.Companion.getLauncher().getDragNDropView().startDragNDropOverlay(view, item, action);
 
         if (eventAction != null)
             eventAction.afterDrag(view);

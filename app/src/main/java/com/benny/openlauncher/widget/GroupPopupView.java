@@ -13,7 +13,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.CoreHome;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.SettingsManager;
 import com.benny.openlauncher.manager.Setup;
@@ -287,8 +287,8 @@ public class GroupPopupView extends RevealFrameLayout {
     private void removeItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, AppItemView currentView) {
         currentItem.getGroupItems().remove(dragOutItem);
 
-        CoreHome.Companion.getDb().saveItem(dragOutItem, Definitions.ItemState.Visible);
-        CoreHome.Companion.getDb().saveItem(currentItem);
+        Home.Companion.getDb().saveItem(dragOutItem, Definitions.ItemState.Visible);
+        Home.Companion.getDb().saveItem(currentItem);
 
         currentView.setIconProvider(Setup.Companion.imageLoader().createIconProvider(new GroupIconDrawable(context, currentItem, Setup.Companion.appSettings().getDesktopIconSize())));
     }
@@ -298,21 +298,21 @@ public class GroupPopupView extends RevealFrameLayout {
             final App app = Setup.appLoader().findItemApp(currentItem.getGroupItems().get(0));
             if (app != null) {
                 //Creating a new app item fixed the folder crash bug
-                Item item = Item.newAppItem(app); //CoreHome.Companion.getDb().getItem(currentItem.getGroupItems().get(0).getId());
+                Item item = Item.newAppItem(app); //Home.Companion.getDb().getItem(currentItem.getGroupItems().get(0).getId());
 
                 item.setX(currentItem.getX());
                 item.setY(currentItem.getY());
 
-                CoreHome.Companion.getDb().saveItem(item);
-                CoreHome.Companion.getDb().saveItem(item, Definitions.ItemState.Visible);
-                CoreHome.Companion.getDb().deleteItem(currentItem, true);
+                Home.Companion.getDb().saveItem(item);
+                Home.Companion.getDb().saveItem(item, Definitions.ItemState.Visible);
+                Home.Companion.getDb().deleteItem(currentItem, true);
 
                 callBack.removeItem(currentView, false);
                 Tool.print("_______________________");
                 callBack.addItemToCell(item, item.getX(), item.getY());
             }
-            if (CoreHome.Companion.getLauncher() != null) {
-                CoreHome.Companion.getLauncher().getDesktop().requestLayout();
+            if (Home.Companion.getLauncher() != null) {
+                Home.Companion.getLauncher().getDesktop().requestLayout();
             }
         }
     }

@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.view.animation.AccelerateDecelerateInterpolator
-import com.benny.openlauncher.activity.CoreHome
+import com.benny.openlauncher.activity.Home
 import com.benny.openlauncher.manager.Setup
 import com.benny.openlauncher.model.Item
 import com.benny.openlauncher.util.*
@@ -31,7 +31,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
     var previousPage = -1
     var pageCount: Int = 0
 
-    private var home: CoreHome? = null
+    private var home: Home? = null
     private var pageIndicator: PagerIndicator? = null
     private val coordinate = Point(-1, -1)
 
@@ -50,7 +50,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
             return
         }
 
-        pageCount = CoreHome.db.desktop.size
+        pageCount = Home.db.desktop.size
         if (pageCount == 0) {
             pageCount = 1
         }
@@ -58,7 +58,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
         currentItem = Setup.appSettings().desktopPageCurrent
     }
 
-    fun initDesktopNormal(home: CoreHome) {
+    fun initDesktopNormal(home: Home) {
         adapter = DesktopAdapter(this)
         if (Setup.appSettings().isDesktopShowIndicator && pageIndicator != null) {
             pageIndicator!!.setViewPager(this)
@@ -67,7 +67,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
 
         val columns = Setup.appSettings().desktopColumnCount
         val rows = Setup.appSettings().desktopRowCount
-        val desktopItems = CoreHome.db.desktop
+        val desktopItems = Home.db.desktop
         for (pageCount in desktopItems.indices) {
             if (pages.size <= pageCount) break
             pages[pageCount].removeAllViews()
@@ -81,7 +81,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
         }
     }
 
-    fun initDesktopShowAll(c: Context, home: CoreHome) {
+    fun initDesktopShowAll(c: Context, home: Home) {
         val apps = ArrayList<Item>()
         val allApps = Setup.appLoader().getAllApps(c, false)
         for (app in allApps)
@@ -182,7 +182,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
         val state = currentPage.peekItemAndSwap(x, y, coordinate)
 
         if (previousDragPoint != coordinate)
-            CoreHome.launcher?.getDragNDropView()?.cancelFolderPreview()
+            Home.launcher?.getDragNDropView()?.cancelFolderPreview()
         previousDragPoint.set(coordinate.x, coordinate.y)
 
         when (state) {
@@ -196,10 +196,10 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
                 for (page in pages)
                     page.clearCachedOutlineBitmap()
 
-                val action = CoreHome.launcher?.getDragNDropView()?.dragAction
+                val action = Home.launcher?.getDragNDropView()?.dragAction
                 if (action != DragAction.Action.WIDGET && action != DragAction.Action.ACTION &&
                         currentPage.coordinateToChildView(coordinate) is AppItemView)
-                    CoreHome.launcher?.getDragNDropView()?.showFolderPreviewAt(
+                    Home.launcher?.getDragNDropView()?.showFolderPreviewAt(
                             this,
                             currentPage.cellWidth * (coordinate.x + 0.5f),
                             currentPage.cellHeight * (coordinate.y + 0.5f) - if (Setup.appSettings().isDesktopShowLabel) Tool.toPx(7) else 0
@@ -238,7 +238,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
         val itemView = ItemViewFactory.getItemView(context, item, Setup.appSettings().isDesktopShowLabel, this, Setup.appSettings().desktopIconSize)
 
         if (itemView == null) {
-            CoreHome.db.deleteItem(item, true)
+            Home.db.deleteItem(item, true)
             return false
         } else {
             item.locationInLauncher = Item.LOCATION_DESKTOP
@@ -287,7 +287,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
 
         when (ev!!.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
-                CoreHome.launcher?.getDesktopIndicator()?.showNow()
+                Home.launcher?.getDesktopIndicator()?.showNow()
             }
         }
 
@@ -298,7 +298,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
 
         when (ev!!.actionMasked) {
             MotionEvent.ACTION_UP -> {
-                CoreHome.launcher?.getDesktopIndicator()?.hideDelay()
+                Home.launcher?.getDesktopIndicator()?.hideDelay()
             }
         }
 
@@ -322,7 +322,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
         if (isInEditMode) {
             return
         }
-        CoreHome.launcher?.getDragNDropView()?.cancelFolderPreview()
+        Home.launcher?.getDragNDropView()?.cancelFolderPreview()
         WallpaperManager.getInstance(context).setWallpaperOffsets(windowToken, (position + offset) / (pageCount - 1), 0f)
         super.onPageScrolled(position, offset, offsetPixels)
     }
@@ -331,7 +331,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             topInset = insets.systemWindowInsetTop
             bottomInset = insets.systemWindowInsetBottom
-            CoreHome.launcher!!.updateHomeLayout()
+            Home.launcher!!.updateHomeLayout()
         }
         return insets
     }
@@ -413,7 +413,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
                 for (v in views) {
                     val item = v.tag
                     if (item is Item) {
-                        CoreHome.db.deleteItem(item, true)
+                        Home.db.deleteItem(item, true)
                     }
                 }
             }
@@ -477,7 +477,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
         var bottomInset: Int = 0
 
         fun getItemFromCoordinate(point: Point, page: Int): Item? {
-            val desktopItems = CoreHome.db.desktop
+            val desktopItems = Home.db.desktop
             val pageData = desktopItems[page]
             for (i in pageData.indices) {
                 val item = pageData[i]
@@ -488,7 +488,7 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
             return null
         }
 
-        fun handleOnDropOver(home: CoreHome?, dropItem: Item?, item: Item?, itemView: View, parent: ViewGroup, page: Int, itemPosition: Definitions.ItemPosition, callback: DesktopCallBack<*>): Boolean {
+        fun handleOnDropOver(home: Home?, dropItem: Item?, item: Item?, itemView: View, parent: ViewGroup, page: Int, itemPosition: Definitions.ItemPosition, callback: DesktopCallBack<*>): Boolean {
             if (item == null || dropItem == null) {
                 return false
             }
@@ -505,19 +505,19 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
                     group.y = item.y
 
                     // add the drop item just in case it is coming from the app drawer
-                    CoreHome.db.saveItem(dropItem, page, itemPosition)
+                    Home.db.saveItem(dropItem, page, itemPosition)
 
                     // hide the apps added to the group
-                    CoreHome.db.saveItem(item, Definitions.ItemState.Hidden)
-                    CoreHome.db.saveItem(dropItem, Definitions.ItemState.Hidden)
+                    Home.db.saveItem(item, Definitions.ItemState.Hidden)
+                    Home.db.saveItem(dropItem, Definitions.ItemState.Hidden)
 
                     // add the item to the database
-                    CoreHome.db.saveItem(group, page, itemPosition)
+                    Home.db.saveItem(group, page, itemPosition)
 
                     callback.addItemToPage(group, page)
 
-                    CoreHome.launcher?.getDesktop()?.consumeRevert()
-                    CoreHome.launcher?.getDock()?.consumeRevert()
+                    Home.launcher?.getDesktop()?.consumeRevert()
+                    Home.launcher?.getDock()?.consumeRevert()
                     return true
                 }
                 Item.Type.GROUP -> if ((dropItem.type == Item.Type.APP || dropItem.type == Item.Type.SHORTCUT) && item.groupItems.size < GroupPopupView.GroupDef.maxItem) {
@@ -526,18 +526,18 @@ class Desktop @JvmOverloads constructor(c: Context, attr: AttributeSet? = null) 
                     item.groupItems.add(dropItem)
 
                     // add the drop item just in case it is coming from the app drawer
-                    CoreHome.db.saveItem(dropItem, page, itemPosition)
+                    Home.db.saveItem(dropItem, page, itemPosition)
 
                     // hide the new app in the group
-                    CoreHome.db.saveItem(dropItem, Definitions.ItemState.Hidden)
+                    Home.db.saveItem(dropItem, Definitions.ItemState.Hidden)
 
                     // add the item to the database
-                    CoreHome.db.saveItem(item, page, itemPosition)
+                    Home.db.saveItem(item, page, itemPosition)
 
                     callback.addItemToPage(item, page)
 
-                    CoreHome.launcher?.getDesktop()?.consumeRevert()
-                    CoreHome.launcher?.getDock()?.consumeRevert()
+                    Home.launcher?.getDesktop()?.consumeRevert()
+                    Home.launcher?.getDock()?.consumeRevert()
                     return true
                 }
                 else -> {

@@ -16,7 +16,7 @@ import android.view.HapticFeedbackConstants;
 import android.view.View;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.CoreHome;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.IconDrawer;
 import com.benny.openlauncher.interfaces.IconProvider;
@@ -90,7 +90,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         return b.getView();
     }
 
-    public static View createDrawerAppItemView(Context context, final CoreHome home, App app, int iconSize, AppItemView.LongPressCallBack longPressCallBack) {
+    public static View createDrawerAppItemView(Context context, final Home home, App app, int iconSize, AppItemView.LongPressCallBack longPressCallBack) {
         return new AppItemView.Builder(context, iconSize)
                 .setAppItem(app)
                 .withOnTouchGetPosition(null, null)
@@ -365,7 +365,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (CoreHome.Companion.getLauncher() != null && (CoreHome.Companion.getLauncher()).getGroupPopup().showWindowV(item, v, callback)) {
+                    if (Home.Companion.getLauncher() != null && (Home.Companion.getLauncher()).getGroupPopup().showWindowV(item, v, callback)) {
                         ((GroupIconDrawable) ((AppItemView) v).getCurrentIcon()).popUp();
                     }
                 }
@@ -383,7 +383,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                         @Override
                         public void onClick(View view) {
                             view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                            CoreHome.Companion.getLauncher().openAppDrawer(view);
+                            Home.Companion.getLauncher().openAppDrawer(view);
                         }
                     });
                     break;

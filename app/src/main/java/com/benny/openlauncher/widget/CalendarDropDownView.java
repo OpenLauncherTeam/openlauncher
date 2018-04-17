@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.WindowInsets;
 
-import com.benny.openlauncher.activity.CoreHome;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.Tool;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
@@ -45,10 +45,10 @@ public class CalendarDropDownView extends CardView implements View.OnClickListen
 
     public void animateShow() {
         if (stateOpened) return;
-        Tool.invisibleViews(CoreHome.Companion.getLauncher().getSearchBar());
-        CoreHome.Companion.getLauncher().dimBackground();
-        CoreHome.Companion.getLauncher().clearRoomForPopUp();
-        CoreHome.Companion.getLauncher().getBackground().setOnClickListener(this);
+        Tool.invisibleViews(Home.Companion.getLauncher().getSearchBar());
+        Home.Companion.getLauncher().dimBackground();
+        Home.Companion.getLauncher().clearRoomForPopUp();
+        Home.Companion.getLauncher().getBackground().setOnClickListener(this);
         calendarView.setSelectedDate(Calendar.getInstance());
         stateOpened = true;
         animate().scaleY(1).setDuration(200).withEndAction(new Runnable() {
@@ -61,10 +61,10 @@ public class CalendarDropDownView extends CardView implements View.OnClickListen
 
     public void animateHide() {
         if (!stateOpened) return;
-        Tool.visibleViews(CoreHome.Companion.getLauncher().getSearchBar());
-        CoreHome.Companion.getLauncher().unDimBackground();
-        CoreHome.Companion.getLauncher().unClearRoomForPopUp();
-        CoreHome.Companion.getLauncher().getBackground().setOnClickListener(null);
+        Tool.visibleViews(Home.Companion.getLauncher().getSearchBar());
+        Home.Companion.getLauncher().unDimBackground();
+        Home.Companion.getLauncher().unClearRoomForPopUp();
+        Home.Companion.getLauncher().getBackground().setOnClickListener(null);
         stateOpened = false;
         Tool.invisibleViews(200, calendarView);
         animate().scaleY(0).setStartDelay(200).setDuration(200);

@@ -13,7 +13,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.FrameLayout
-import com.benny.openlauncher.activity.CoreHome
+import com.benny.openlauncher.activity.Home
 import com.benny.openlauncher.manager.Setup
 import com.benny.openlauncher.model.Item
 import com.benny.openlauncher.model.PopupIconLabelItem
@@ -157,8 +157,8 @@ class DragNDropLayout @JvmOverloads constructor(context: Context, attrs: Attribu
 
             if (canvas == null || DragNDropHandler.cachedDragBitmap == null || dragLocation.equals(-1f, -1f)) return
 
-            val x = dragLocation.x - CoreHome.itemTouchX
-            val y = dragLocation.y - CoreHome.itemTouchY
+            val x = dragLocation.x - Home.itemTouchX
+            val y = dragLocation.y - Home.itemTouchY
 
             if (dragging) {
                 canvas.save()

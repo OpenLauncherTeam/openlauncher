@@ -12,7 +12,7 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.CoreHome;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
@@ -53,14 +53,14 @@ public class ShortcutReceiver extends BroadcastReceiver {
         } else {
             item = Item.newShortcutItem(newIntent, shortcutIconDrawable, name);
         }
-        Point preferredPos = CoreHome.Companion.getLauncher().getDesktop().getPages().get(CoreHome.Companion.getLauncher().getDesktop().getCurrentItem()).findFreeSpace();
+        Point preferredPos = Home.Companion.getLauncher().getDesktop().getPages().get(Home.Companion.getLauncher().getDesktop().getCurrentItem()).findFreeSpace();
         if (preferredPos == null) {
-            Tool.toast(CoreHome.Companion.getLauncher(), R.string.toast_not_enough_space);
+            Tool.toast(Home.Companion.getLauncher(), R.string.toast_not_enough_space);
         } else {
             item.setX(preferredPos.x);
             item.setY(preferredPos.y);
-            CoreHome.Companion.getDb().saveItem(item, CoreHome.Companion.getLauncher().getDesktop().getCurrentItem(), Definitions.ItemPosition.Desktop);
-            boolean added = CoreHome.Companion.getLauncher().getDesktop().addItemToPage(item, CoreHome.Companion.getLauncher().getDesktop().getCurrentItem());
+            Home.Companion.getDb().saveItem(item, Home.Companion.getLauncher().getDesktop().getCurrentItem(), Definitions.ItemPosition.Desktop);
+            boolean added = Home.Companion.getLauncher().getDesktop().addItemToPage(item, Home.Companion.getLauncher().getDesktop().getCurrentItem());
 
             Setup.Companion.logger().log(this, Log.INFO, null, "Shortcut installed - %s => Intent: %s (Item type: %s; x = %d, y = %d, added = %b)", name, newIntent, item.getType(), item.getX(), item.getY(), added);
         }

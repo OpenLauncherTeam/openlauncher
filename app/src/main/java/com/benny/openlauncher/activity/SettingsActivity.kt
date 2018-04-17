@@ -412,7 +412,7 @@ class SettingsActivity : ThemeActivity() {
                     DialogHelper.alertDialog(context!!, "Clear user data", "Are you sure, all your shortcuts will be removed.", MaterialDialog.SingleButtonCallback { dialog, which ->
                         if (Home.launcher != null)
                             Home.launcher?.recreate()
-                        (CoreHome.db as DatabaseHelper).onUpgrade((CoreHome.db as DatabaseHelper).writableDatabase, 1, 1)
+                        (Home.db as DatabaseHelper).onUpgrade((Home.db as DatabaseHelper).writableDatabase, 1, 1)
                         activity!!.finish()
                     })
                     return true
@@ -471,7 +471,7 @@ class SettingsActivity : ThemeActivity() {
                     if (ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         DialogHelper.backupDialog(activity)
                     } else {
-                        ActivityCompat.requestPermissions(Home.launcher!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), CoreHome.REQUEST_PERMISSION_STORAGE)
+                        ActivityCompat.requestPermissions(Home.launcher!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), Home.REQUEST_PERMISSION_STORAGE)
                     }
                 }
             }

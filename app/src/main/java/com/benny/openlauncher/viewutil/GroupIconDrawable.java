@@ -12,7 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
-import com.benny.openlauncher.activity.CoreHome;
+import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.IconDrawer;
 import com.benny.openlauncher.manager.Setup;
@@ -80,7 +80,7 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         paintOuterCircle.setAntiAlias(true);
         paintOuterCircle.setFlags(Paint.ANTI_ALIAS_FLAG);
         paintOuterCircle.setStyle(Paint.Style.STROKE);
-        outline = Tool.dp2px(2, CoreHome.Companion.getLauncher());
+        outline = Tool.dp2px(2, Home.Companion.getLauncher());
         paintOuterCircle.setStrokeWidth(outline);
 
         this.paintIcon = new Paint();

@@ -148,7 +148,7 @@ class SearchBar : FrameLayout {
         searchCardContainer.visibility = View.GONE
         searchCardContainer.setPadding(dp1 * 4, dp1 * 4, dp1 * 4, dp1 * 4)
 
-//        val root = CoreHome.launcher!!.window.decorView.findViewById<ViewGroup>(android.R.id.content)
+//        val root = Home.launcher!!.window.decorView.findViewById<ViewGroup>(android.R.id.content)
 //        searchCardContainer.setupWith(root)
 //                .windowBackground(root.background)
 //                .blurAlgorithm(RenderScriptBlur(context))
