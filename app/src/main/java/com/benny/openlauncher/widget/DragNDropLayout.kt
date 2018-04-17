@@ -233,7 +233,7 @@ class DragNDropLayout @JvmOverloads constructor(context: Context, attrs: Attribu
         overlayIconScale = 0f
 
         dragView = view
-        dragItem = item.copy()
+        dragItem = item
         dragAction = action
 
         dragLocationStart.set(dragLocation)

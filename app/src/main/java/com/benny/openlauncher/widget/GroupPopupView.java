@@ -206,7 +206,7 @@ public class GroupPopupView extends RevealFrameLayout {
             coordinates[1] += popupHeight / 2;
         }
 
-        if (item.getLocationInLauncher() == Item.Companion.getLOCATION_DOCK()) {
+        if (item.getLocationInLauncher() == Item.LOCATION_DOCK) {
             coordinates[1] -= iconSize / 2;
             cy += iconSize / 2 + (Setup.Companion.appSettings().isDockShowLabel() ? 0 : Tool.dp2px(10, getContext()));
         }

@@ -392,7 +392,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         public Builder withOnLongClick(final App app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
-            withOnLongClick(Item.Companion.newAppItem(app), action, eventAction);
+            withOnLongClick(Item.newAppItem(app), action, eventAction);
             return this;
         }
 
