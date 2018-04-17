@@ -202,4 +202,56 @@
     <string name="pref_title__date_bar_date_format_custom_2">Benutzerdefinierter Format: Zeile 2</string>
     <string name="custom">Benutzerdefiniert</string>
     <string name="pref_summnary__overall_animation_speed_modifier">Skalierung der insgesamten Animations Geschwindigkeit</string>
+
+
+
+
+
+    <!-- Titles -->
+
+    <string name="settings">Einstellungen</string>
+
+    <!-- Drag Option View -->
+
+    <string name="edit">Bearbeiten</string>
+    <string name="info">Info</string>
+    <string name="uninstall">Deinstallieren</string>
+    <string name="remove">Entfernen</string>
+
+    <!-- Desktop Option View -->
+
+    <string name="home">Home</string>
+    <string name="action">Aktion</string>
+    <string name="lock">Sperren</string>
+    <string name="widget">Widget</string>
+
+    <!-- Toasts -->
+
+    <string name="toast_not_enough_space">Nicht genügend Platz</string>
+    <string name="toast_app_uninstalled">Die App wurde deinstalliert.</string>
+
+    <!-- Intro -->
+
+    <!-- Minibar -->
+
+    <!-- About -->
+
+    <!-- Settings -->
+
+
+    <!-- Preference Keys -->
+
+    <!-- Internal Keys -->
+
+    <!-- Item Labels -->
+
+    <string name="folder">Ordner</string>
+
+    <!-- Dialogs -->
+
+    <string name="cancel">Abbrechen</string>
+    <string name="search_hint">Suchen...</string>
+    <string name="search_online">ONLINE SUCHEN</string>
+
 </resources>
+

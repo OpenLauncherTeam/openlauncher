@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name" translatable="false">APP NAME</string>
-    <string name="pref_default__search_bar_base_uri" translatable="false"><![CDATA[https://duckduckgo.com/?kae=c&k1=-1&kaj=m&kv=l&kp=-1&q={query}]]></string>
-</resources>

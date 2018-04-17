@@ -21,7 +21,7 @@ public class ClearRamAsyncTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPreExecute() {
         LauncherAction.clearingRam = true;
-        Context context = App.Companion.get();
+        Context context = App.get();
 
         if (context == null) {
             cancel(true);
@@ -52,7 +52,7 @@ public class ClearRamAsyncTask extends AsyncTask<Void, Void, Void> {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         activityManager.getMemoryInfo(mi);
         long current = mi.availMem / 1048576L;
-        Context context = App.Companion.get();
+        Context context = App.get();
         if (context == null) {
             super.onPostExecute(result);
             return;

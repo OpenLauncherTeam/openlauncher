@@ -25,7 +25,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
     }
 
     public static AppSettings get() {
-        return new AppSettings(App.Companion.get());
+        return new AppSettings(App.get());
     }
 
     public int getDesktopColumnCount() {
