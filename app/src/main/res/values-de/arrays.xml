@@ -20,15 +20,10 @@
     </string-array>
 
 
-
-
-
-
     <string-array name="entries__wallpaper_options">
         <item>Hintergrund ändern</item>
         <item>Hintergrund verwischen</item>
     </string-array>
-
 
 
 </resources>

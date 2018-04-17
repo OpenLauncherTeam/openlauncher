@@ -185,9 +185,6 @@
     <string name="pref_title__date_bar_date_format_custom_2">Format personnalisé: Ligne 2</string>
 
 
-
-
-
     <!-- Titles -->
     <string name="settings">Paramètres</string>
 
@@ -215,7 +212,6 @@
     <string name="search_hint">Chercher…</string>
     <string name="search_online">Rechercher sur internet…</string>
     <string name="bad_format">Mauvais Format</string>
-
 
 
 </resources>

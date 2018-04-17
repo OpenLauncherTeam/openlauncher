@@ -111,9 +111,6 @@
     <string name="wallpaper_unable_to_blur">ぼかすことができません</string>
 
 
-
-
-
     <!-- Titles -->
     <string name="settings">設定</string>
 
@@ -144,7 +141,6 @@
     <string name="cancel">キャンセル</string>
     <string name="home">ホーム</string>
     <string name="folder">名前なし</string>
-
 
 
 </resources>

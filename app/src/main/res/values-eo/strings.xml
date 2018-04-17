@@ -180,8 +180,6 @@
     <string name="debug">Senerarado</string>
 
 
-
-
     <!-- Titles -->
     <string name="settings">Agordoj</string>
 
@@ -208,7 +206,6 @@
     <string name="cancel">Nuligi</string>
     <string name="search_hint">Serĉi…</string>
     <string name="search_online">TTT-serĉi&#8230;</string>
-
 
 
 </resources>

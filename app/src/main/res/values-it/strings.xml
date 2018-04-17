@@ -186,8 +186,6 @@
     <string name="pref_title__date_bar_date_format_custom_2">Formato personalizzato: Linea 2</string>
 
 
-
-
     <!-- Titles -->
     <string name="settings">Impostazioni</string>
 
@@ -215,7 +213,6 @@
     <string name="search_hint">Cerca…</string>
     <string name="search_online">Cerca online...</string>
     <string name="bad_format">Formato non valido</string>
-
 
 
 </resources>

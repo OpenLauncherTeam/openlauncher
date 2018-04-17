@@ -18,8 +18,10 @@
         <item>Меню приложений</item>
     </string-array>
 
+
     <string-array name="entries__wallpaper_options">
         <item>Установить обои</item>
         <item>Размыть обои</item>
     </string-array>
+
 </resources>

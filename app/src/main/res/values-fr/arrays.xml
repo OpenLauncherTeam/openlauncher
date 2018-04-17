@@ -20,17 +20,10 @@
     </string-array>
 
 
-
-
-
-
     <string-array name="entries__wallpaper_options">
         <item>Modifier le fond d\'écran</item>
         <item>Rendre le fond d\'écran flou</item>
     </string-array>
-
-
-
 
 
 </resources>

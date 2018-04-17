@@ -161,9 +161,6 @@
     <string name="volume_level_media">媒体</string>
 
 
-
-
-
     <!-- Titles -->
 
     <string name="settings">设置</string>
@@ -208,7 +205,6 @@
     <string name="cancel">取消</string>
     <string name="search_hint">搜索...</string>
     <string name="search_online">在线搜索&#8230;</string>
-
 
 
 </resources>
