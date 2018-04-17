@@ -144,7 +144,10 @@ public class AppDrawerController extends RevealFrameLayout {
                     mGrid.animate().setStartDelay(0).alpha(0).setDuration(60L).withEndAction(new Runnable() {
                         @Override
                         public void run() {
-                            appDrawerAnimator.start();
+                            try {
+                                appDrawerAnimator.start();
+                            } catch (NullPointerException ignored) {
+                            }
                         }
                     });
                 }
@@ -153,7 +156,10 @@ public class AppDrawerController extends RevealFrameLayout {
                 drawerViewGrid.recyclerView.animate().setStartDelay(0).alpha(0).setDuration(60L).withEndAction(new Runnable() {
                     @Override
                     public void run() {
-                        appDrawerAnimator.start();
+                        try {
+                            appDrawerAnimator.start();
+                        } catch (NullPointerException ignored) {
+                        }
                     }
                 });
                 break;

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.App;
-import com.benny.openlauncher.interfaces.SettingsManager;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.Definitions;
@@ -106,10 +106,10 @@ public class GroupPopupView extends RevealFrameLayout {
                 if (y2 * cellSize[0] + x2 > item.getGroupItems().size() - 1) {
                     continue;
                 }
-                final SettingsManager settingsManager = Setup.Companion.appSettings();
+                final AppSettings AppSettings = Setup.Companion.appSettings();
                 final Item groupItem = item.getGroupItems().get(y2 * cellSize[0] + x2);
                 final App groupApp = groupItem.getType() != Item.Type.SHORTCUT ? Setup.Companion.appLoader().findItemApp(groupItem) : null;
-                AppItemView appItemView = AppItemView.createAppItemViewPopup(getContext(), groupItem, groupApp, settingsManager.getDesktopIconSize(), settingsManager.getDrawerLabelFontSize());
+                AppItemView appItemView = AppItemView.createAppItemViewPopup(getContext(), groupItem, groupApp, AppSettings.getDesktopIconSize(), AppSettings.getDrawerLabelFontSize());
                 final View view = appItemView.getView();
 
                 view.setOnLongClickListener(new OnLongClickListener() {

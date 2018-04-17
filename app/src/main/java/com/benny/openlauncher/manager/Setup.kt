@@ -5,10 +5,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import com.benny.openlauncher.interfaces.*
 import com.benny.openlauncher.model.Item
-import com.benny.openlauncher.util.App
-import com.benny.openlauncher.util.AppManager
-import com.benny.openlauncher.util.BaseIconProvider
-import com.benny.openlauncher.util.Definitions
+import com.benny.openlauncher.util.*
 import com.benny.openlauncher.viewutil.DesktopGestureListener
 import com.benny.openlauncher.viewutil.ItemGestureListener
 
@@ -20,7 +17,7 @@ abstract class Setup {
 
     abstract fun getAppContext(): Context
 
-    abstract fun getAppSettings(): SettingsManager
+    abstract fun getAppSettings(): AppSettings
 
     abstract fun getDesktopGestureCallback(): DesktopGestureListener.DesktopGestureCallback
 
@@ -106,7 +103,7 @@ abstract class Setup {
         fun appContext(): Context = get().getAppContext()
 
         @JvmStatic
-        fun appSettings(): SettingsManager = get().getAppSettings()
+        fun appSettings(): AppSettings = get().getAppSettings()
 
         @JvmStatic
         fun desktopGestureCallback(): DesktopGestureListener.DesktopGestureCallback = get().getDesktopGestureCallback()

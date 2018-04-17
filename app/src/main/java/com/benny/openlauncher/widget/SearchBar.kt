@@ -20,7 +20,7 @@ import com.benny.openlauncher.R
 import com.benny.openlauncher.drawable.LauncherCircleDrawable
 import com.benny.openlauncher.util.App
 import com.benny.openlauncher.interfaces.AppUpdateListener
-import com.benny.openlauncher.interfaces.SettingsManager
+import com.benny.openlauncher.util.AppSettings
 import com.benny.openlauncher.manager.Setup
 import com.benny.openlauncher.model.IconLabelItem
 import com.benny.openlauncher.model.Item
@@ -350,21 +350,21 @@ class SearchBar : FrameLayout {
     }
 
     fun updateClock() {
-        val settingsManager: SettingsManager =  Setup.appSettings()
-        if (!settingsManager.isSearchBarTimeEnabled) {
+        val AppSettings: AppSettings =  Setup.appSettings()
+        if (!AppSettings.isSearchBarTimeEnabled) {
             searchClock!!.text = ""
             return
         }
-        searchClock!!.setTextColor(settingsManager.desktopDateTextColor)
+        searchClock!!.setTextColor(AppSettings.desktopDateTextColor)
         val calendar = Calendar.getInstance(Locale.getDefault())
 
 
         var sdf: SimpleDateFormat? = mode.sdf
-        val mode = settingsManager.desktopDateMode
+        val mode = AppSettings.desktopDateMode
         if (mode >= 0 && mode < Mode.count()){
             sdf = Mode.getById(mode).sdf
             if (mode == 0){
-                sdf = settingsManager.userDateFormat
+                sdf = AppSettings.userDateFormat
             }
         }
 

@@ -24,8 +24,8 @@ public abstract class ThemeActivity extends AppCompatActivity {
             setTheme(R.style.NormalActivity_Dark);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(dark(AppSettings.get().getPrimaryColor(), 0.8));
-            getWindow().setNavigationBarColor(AppSettings.get().getPrimaryColor());
+            getWindow().setStatusBarColor(dark(appSettings.getPrimaryColor(), 0.8));
+            getWindow().setNavigationBarColor(appSettings.getPrimaryColor());
         }
         super.onCreate(savedInstanceState);
     }

@@ -7,7 +7,6 @@ import android.support.v4.content.ContextCompat;
 
 import com.benny.openlauncher.AppObject;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.interfaces.SettingsManager;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.Desktop;
@@ -19,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class AppSettings extends SharedPreferencesPropertyBackend implements SettingsManager {
+public class AppSettings extends SharedPreferencesPropertyBackend {
     private AppSettings(Context context) {
         super(context);
     }
@@ -68,17 +67,17 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
         return getBool(R.string.pref_key__search_bar_force_browser, false);
     }
 
-    @Override
+
     public boolean getSearchBarShouldShowHiddenApps() {
         return getBool(R.string.pref_key__search_bar_show_hidden_apps, false);
     }
 
-    @Override
+
     public boolean isSearchBarTimeEnabled() {
         return true;
     }
 
-    @Override
+
     @SuppressLint("SimpleDateFormat")
     public SimpleDateFormat getUserDateFormat() {
         String line1 = getString(R.string.pref_key__date_bar_date_format_custom_1, rstr(R.string.pref_key__date_bar_date_format_custom__default_value_1));
@@ -91,42 +90,42 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
         }
     }
 
-    @Override
+
     public int getDesktopDateMode() {
         return getIntOfStringPref(R.string.pref_key__date_bar_date_format_type, 1);
     }
 
-    @Override
+
     public int getDesktopDateTextColor() {
         return getInt(R.string.pref_key__date_bar_date_text_color, Color.WHITE);
     }
 
-    @Override
+
     public boolean isResetSearchBarOnOpen() {
         return false;
     }
 
-    @Override
+
     public boolean isSearchGridListSwitchEnabled() {
         return false;
     }
 
-    @Override
+
     public boolean isSearchUseGrid() {
         return getBool(R.string.pref_key__desktop_search_use_grid, false);
     }
 
-    @Override
+
     public void setSearchUseGrid(boolean enabled) {
         setBool(R.string.pref_key__desktop_search_use_grid, enabled);
     }
 
-    @Override
+
     public int getSearchGridSize() {
         return 4;
     }
 
-    @Override
+
     public int getSearchLabelLines() {
         return Integer.MAX_VALUE;
     }
@@ -135,7 +134,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
         return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
     }
 
-    @Override
+
     public int getDesktopFolderColor() {
         return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
     }
@@ -144,12 +143,12 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
         return getInt(R.string.pref_key__minibar_background_color, ContextCompat.getColor(_context, R.color.colorPrimary));
     }
 
-    @Override
+
     public int getFolderLabelColor() {
         return getInt(R.string.pref_key__desktop_folder_label_color, Color.BLACK);
     }
 
-    @Override
+
     public int getDesktopIconSize() {
         return getIconSize();
     }
@@ -174,7 +173,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
         return getInt(R.string.pref_key__dock_background_color, Color.TRANSPARENT);
     }
 
-    @Override
+
     public int getDockIconSize() {
         return getIconSize();
     }
@@ -219,22 +218,22 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
         return getInt(R.string.pref_key__drawer_label_color, Color.WHITE);
     }
 
-    @Override
+
     public int getDrawerFastScrollColor() {
         return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.Companion.appContext(), R.color.op_red));
     }
 
-    @Override
+
     public int getVerticalDrawerHorizontalMargin() {
         return 8;
     }
 
-    @Override
+
     public int getVerticalDrawerVerticalMargin() {
         return 16;
     }
 
-    @Override
+
     public int getDrawerIconSize() {
         return getIconSize();
     }
@@ -267,12 +266,12 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
         return getIntOfStringPref(R.string.pref_key__gesture_unpinch, 0);
     }
 
-    @Override
+
     public boolean isDesktopHideGrid() {
         return getBool(R.string.pref_key__desktop_hide_grid, true);
     }
 
-    @Override
+
     public void setDesktopHideGrid(boolean hideGrid) {
         setBool(R.string.pref_key__desktop_hide_grid, hideGrid);
     }
@@ -349,12 +348,12 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
         setBool(R.string.pref_key__desktop_lock, value);
     }
 
-    @Override
+
     public int getDesktopIndicatorMode() {
         return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.INSTANCE.getNORMAL());
     }
 
-    @Override
+
     public void setDesktopIndicatorMode(int mode) {
         setInt(R.string.pref_key__desktop_indicator_style, mode);
     }
@@ -380,17 +379,17 @@ public class AppSettings extends SharedPreferencesPropertyBackend implements Set
         _prefApp.edit().putBoolean(_context.getString(R.string.pref_key__first_start), value).commit();
     }
 
-    @Override
+
     public boolean enableImageCaching() {
         return true;
     }
 
-    @Override
+
     public float getDrawerLabelFontSize() {
         return getInt(R.string.pref_key__drawer_label_font_size, 13);
     }
 
-    @Override
+
     public float getOverallAnimationSpeedModifier() {
         return (float) (getInt(R.string.pref_key__overall_animation_speed_modifier, 30) / 100.0);
     }
