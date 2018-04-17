@@ -84,7 +84,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
                 break;
             case GROUP:
                 for (Item tmp : item.getItems()) {
-                    concat += tmp.getId() + Definitions.INT_SEP;
+                    if (tmp != null) {
+                        concat += tmp.getId() + Definitions.INT_SEP;
+                    }
                 }
                 itemValues.put(COLUMN_DATA, concat);
                 break;
