@@ -13,7 +13,7 @@ import android.util.Log;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.CoreHome;
-import com.benny.openlauncher.interfaces.AbstractApp;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 
@@ -46,7 +46,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
                 shortcutIconDrawable = new BitmapDrawable(context.getResources(), (Bitmap) intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON));
         }
 
-        AbstractApp app = Setup.Companion.appLoader().createApp(newIntent);
+        App app = Setup.Companion.appLoader().createApp(newIntent);
         Item item;
         if (app != null) {
             item = Item.Companion.newAppItem(app);

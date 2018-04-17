@@ -11,6 +11,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.R
 import com.benny.openlauncher.model.IconLabelItem
 import com.benny.openlauncher.model.Item
+import com.benny.openlauncher.util.App
 import com.benny.openlauncher.util.Tool
 import com.benny.openlauncher.util.AppManager
 import com.benny.openlauncher.util.LauncherAction
@@ -103,7 +104,7 @@ object DialogHelper {
                         if (item != null && item.action == LauncherAction.Action.LaunchApp) {
                             val finalItem = item
                             selectAppDialog(context, object : OnAppSelectedListener {
-                                override fun onAppSelected(app: AppManager.App) {
+                                override fun onAppSelected(app: App) {
                                     finalItem.extraData = Tool.getStartAppIntent(app)
                                     onActionSelectedListener!!.onActionSelected(finalItem)
                                 }
@@ -191,7 +192,7 @@ object DialogHelper {
     }
 
     interface OnAppSelectedListener {
-        fun onAppSelected(app: AppManager.App)
+        fun onAppSelected(app: App)
     }
 
     interface OnActionSelectedListener {

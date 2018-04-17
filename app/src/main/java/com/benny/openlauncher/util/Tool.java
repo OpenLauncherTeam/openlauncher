@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.CoreHome;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.interfaces.AbstractApp;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.IconProvider;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
@@ -214,7 +214,7 @@ public class Tool {
         return Math.max(min, Math.min(max, target));
     }
 
-    public static void startApp(Context context, AppManager.App app) {
+    public static void startApp(Context context, App app) {
         if (Home.Companion.getLauncher() != null)
             Home.Companion.getLauncher().onStartApp(context, app);
     }
@@ -224,7 +224,7 @@ public class Tool {
             Home.Companion.getLauncher().onStartApp(context, intent);
     }
 
-    public static final void startApp(@NotNull Context context, @NotNull AbstractApp app, @Nullable View view) {
+    public static final void startApp(@NotNull Context context, @NotNull App app, @Nullable View view) {
         CoreHome launcher = CoreHome.Companion.getLauncher();
         if (launcher != null) {
             launcher.onStartApp(context, app, view);
@@ -423,14 +423,14 @@ public class Tool {
         }
     }
 
-    public static Intent getStartAppIntent(AppManager.App app) {
+    public static Intent getStartAppIntent(App app) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setClassName(app.getPackageName(), app.getClassName());
         return intent;
     }
 
-    public static <A extends AppManager.App> List<A> getRemovedApps(List<A> oldApps, List<A> newApps) {
+    public static <A extends App> List<A> getRemovedApps(List<A> oldApps, List<A> newApps) {
         List<A> removed = new ArrayList<>();
         // if this is the first call to this function and we did not know any app yet, we return an empty list
         if (oldApps.size() == 0) {

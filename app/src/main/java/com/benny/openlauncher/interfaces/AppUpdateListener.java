@@ -1,12 +1,14 @@
 package com.benny.openlauncher.interfaces;
 
+import com.benny.openlauncher.util.App;
+
 import java.util.List;
 
-public interface AppUpdateListener<A extends AbstractApp> {
+public interface AppUpdateListener {
 
     /**
      * @param apps list of apps
      * @return true, if the listener should be removed
      */
-    boolean onAppUpdated(List<A> apps);
+    boolean onAppUpdated(List<App> apps);
 }

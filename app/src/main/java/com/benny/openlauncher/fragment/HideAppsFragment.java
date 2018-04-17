@@ -23,6 +23,7 @@ import android.widget.ViewSwitcher;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.model.AppInfo;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
@@ -157,9 +158,9 @@ public class HideAppsFragment extends Fragment {
     }
 
     private void prepareData() {
-        List<AppManager.App> apps = AppManager.Companion.getInstance(getContext()).getNonFilteredApps();
+        List<App> apps = AppManager.getInstance(getContext()).getNonFilteredApps();
 
-        for (AppManager.App app : apps) {
+        for (App app : apps) {
             AppInfo tempAppInfo = new AppInfo(
                     app.getPackageName() + "/" + app.getClassName(),
                     app.getLabel(),
@@ -191,12 +192,12 @@ public class HideAppsFragment extends Fragment {
                 appInfo.setSelected(checker.isChecked());
 
                 if (appInfo.isSelected()) {
-                    if (DEBUG) Log.v(TAG, "Selected AbstractApp: " + appInfo.getName());
+                    if (DEBUG) Log.v(TAG, "Selected App: " + appInfo.getName());
                     if (icon.getDisplayedChild() == 0) {
                         icon.showNext();
                     }
                 } else {
-                    if (DEBUG) Log.v(TAG, "Deselected AbstractApp: " + appInfo.getName());
+                    if (DEBUG) Log.v(TAG, "Deselected App: " + appInfo.getName());
                     if (icon.getDisplayedChild() == 1) {
                         icon.showPrevious();
                     }

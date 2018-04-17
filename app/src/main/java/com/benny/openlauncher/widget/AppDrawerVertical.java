@@ -12,7 +12,7 @@ import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.interfaces.AbstractApp;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.interfaces.FastItem;
 import com.benny.openlauncher.manager.Setup;
@@ -36,7 +36,7 @@ public class AppDrawerVertical extends CardView {
     public GridAppDrawerAdapter gridDrawerAdapter;
     public DragScrollBar scrollBar;
 
-    private static List<AbstractApp> apps;
+    private static List<App> apps;
     private GridLayoutManager layoutManager;
     private RelativeLayout rl;
 
@@ -125,7 +125,7 @@ public class AppDrawerVertical extends CardView {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setDrawingCacheEnabled(true);
 
-        List<AbstractApp> allApps = Setup.Companion.appLoader().getAllApps(getContext(), false);
+        List<App> allApps = Setup.Companion.appLoader().getAllApps(getContext(), false);
         if (allApps.size() != 0) {
             AppDrawerVertical.this.apps = allApps;
             ArrayList<FastItem.AppItem> items = new ArrayList<>();
@@ -134,9 +134,9 @@ public class AppDrawerVertical extends CardView {
             }
             gridDrawerAdapter.set(items);
         }
-        Setup.Companion.appLoader().addUpdateListener(new AppUpdateListener<AbstractApp>() {
+        Setup.Companion.appLoader().addUpdateListener(new AppUpdateListener() {
             @Override
-            public boolean onAppUpdated(List<AbstractApp> apps) {
+            public boolean onAppUpdated(List<App> apps) {
                 AppDrawerVertical.this.apps = apps;
                 ArrayList<FastItem.AppItem> items = new ArrayList<>();
                 for (int i = 0; i < apps.size(); i++) {

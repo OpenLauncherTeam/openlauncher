@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.CoreHome;
-import com.benny.openlauncher.interfaces.AbstractApp;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction;
@@ -38,7 +38,7 @@ public class ItemViewFactory {
         View view = null;
         switch (item.getType()) {
             case APP:
-                final AbstractApp app = Setup.Companion.appLoader().findItemApp(item);
+                final App app = Setup.Companion.appLoader().findItemApp(item);
                 if (app == null) {
                     break;
                 }

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import com.benny.openlauncher.interfaces.*
 import com.benny.openlauncher.model.Item
+import com.benny.openlauncher.util.App
 import com.benny.openlauncher.util.AppManager
 import com.benny.openlauncher.util.BaseIconProvider
 import com.benny.openlauncher.util.Definitions
@@ -25,11 +26,11 @@ abstract class Setup {
 
     abstract fun getItemGestureCallback(): ItemGestureListener.ItemGestureCallback
 
-    abstract fun getImageLoader(): ImageLoader<AppManager.App>
+    abstract fun getImageLoader(): ImageLoader
 
     abstract fun getDataManager(): DataManager
 
-    abstract fun getAppLoader(): AppLoader<AppManager.App>
+    abstract fun getAppLoader(): AppManager
 
     abstract fun getEventHandler(): EventHandler
 
@@ -39,7 +40,7 @@ abstract class Setup {
     // Interfaces
     // ----------------
 
-    interface ImageLoader<A : AbstractApp> {
+    interface ImageLoader {
         fun createIconProvider(icon: Int): BaseIconProvider
 
         fun createIconProvider(drawable: Drawable?): BaseIconProvider
@@ -60,30 +61,6 @@ abstract class Setup {
         fun deleteItem(item: Item, deleteSubItems: Boolean)
 
         fun getItem(id: Int): Item
-    }
-
-    interface AppLoader<A : AbstractApp> {
-        fun loadItems()
-
-        fun getAllApps(context: Context, includeHidden: Boolean): List<A>
-
-        fun createApp(intent: Intent): A?
-
-        fun findItemApp(item: Item): A?
-
-        fun onAppUpdated(p1: Context, p2: Intent)
-
-        fun addUpdateListener(updateListener: AppUpdateListener<A>)
-
-        fun removeUpdateListener(updateListener: AppUpdateListener<A>)
-
-        fun addDeleteListener(deleteListener: AppDeleteListener<A>)
-
-        fun removeDeleteListener(deleteListener: AppDeleteListener<A>)
-
-        fun notifyUpdateListeners(apps: List<A>)
-
-        fun notifyRemoveListeners(apps: List<A>)
     }
 
     interface EventHandler {
@@ -138,13 +115,13 @@ abstract class Setup {
         fun itemGestureCallback(): ItemGestureListener.ItemGestureCallback = get().getItemGestureCallback()
 
         @JvmStatic
-        fun imageLoader(): Setup.ImageLoader<AbstractApp> = get().getImageLoader() as Setup.ImageLoader<AbstractApp>
+        fun imageLoader(): Setup.ImageLoader = get().getImageLoader() as Setup.ImageLoader
 
         @JvmStatic
         fun dataManager(): DataManager = get().getDataManager()
 
         @JvmStatic
-        fun appLoader(): Setup.AppLoader<AbstractApp> = get().getAppLoader() as Setup.AppLoader<AbstractApp>
+        fun appLoader(): AppManager = get().getAppLoader()
 
         @JvmStatic
         fun eventHandler(): EventHandler = get().getEventHandler()

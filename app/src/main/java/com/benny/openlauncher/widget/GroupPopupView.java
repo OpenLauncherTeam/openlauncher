@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.CoreHome;
-import com.benny.openlauncher.interfaces.AbstractApp;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.SettingsManager;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
@@ -108,7 +108,7 @@ public class GroupPopupView extends RevealFrameLayout {
                 }
                 final SettingsManager settingsManager = Setup.Companion.appSettings();
                 final Item groupItem = item.getGroupItems().get(y2 * cellSize[0] + x2);
-                final AbstractApp groupApp = groupItem.getType() != Item.Type.SHORTCUT ? Setup.Companion.appLoader().findItemApp(groupItem) : null;
+                final App groupApp = groupItem.getType() != Item.Type.SHORTCUT ? Setup.Companion.appLoader().findItemApp(groupItem) : null;
                 AppItemView appItemView = AppItemView.createAppItemViewPopup(getContext(), groupItem, groupApp, settingsManager.getDesktopIconSize(), settingsManager.getDrawerLabelFontSize());
                 final View view = appItemView.getView();
 
@@ -129,7 +129,7 @@ public class GroupPopupView extends RevealFrameLayout {
                         return true;
                     }
                 });
-                final AbstractApp app = Setup.Companion.appLoader().findItemApp(groupItem);
+                final App app = Setup.Companion.appLoader().findItemApp(groupItem);
                 if (app == null) {
                     removeItem(c, callBack, item, groupItem, (AppItemView) itemView);
                 } else {
@@ -295,7 +295,7 @@ public class GroupPopupView extends RevealFrameLayout {
 
     public void updateItem(final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, View currentView) {
         if (currentItem.getGroupItems().size() == 1) {
-            final AbstractApp app = Setup.appLoader().findItemApp(currentItem.getGroupItems().get(0));
+            final App app = Setup.appLoader().findItemApp(currentItem.getGroupItems().get(0));
             if (app != null) {
                 //Creating a new app item fixed the folder crash bug
                 Item item = Item.newAppItem(app); //CoreHome.Companion.getDb().getItem(currentItem.getGroupItems().get(0).getId());

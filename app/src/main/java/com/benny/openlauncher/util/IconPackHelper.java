@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.util.List;
 
 public class IconPackHelper {
-    public static void themePacs(AppManager appManager, final int iconSize, String resPacName, List<AppManager.App> apps) {
+    public static void themePacs(AppManager appManager, final int iconSize, String resPacName, List<App> apps) {
         //theming vars-----------------------------------------------
         Resources themeRes = null;
         String iconResource;

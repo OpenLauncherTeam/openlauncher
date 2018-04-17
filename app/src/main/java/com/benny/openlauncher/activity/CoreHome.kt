@@ -16,7 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import com.benny.openlauncher.R
-import com.benny.openlauncher.interfaces.AbstractApp
+import com.benny.openlauncher.util.App
 import com.benny.openlauncher.interfaces.AppDeleteListener
 import com.benny.openlauncher.interfaces.AppUpdateListener
 import com.benny.openlauncher.interfaces.DialogListener
@@ -35,7 +35,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
     companion object {
         val REQUEST_PICK_APPWIDGET = 0x6475
         val REQUEST_CREATE_APPWIDGET = 0x3648
-        val REQUEST_PERMISSION_STORAGE = 0x2678
+        public val REQUEST_PERMISSION_STORAGE = 0x2678
 
         // static members, easier to access from any activity and class
         var launcher: CoreHome? = null
@@ -548,7 +548,7 @@ abstract class CoreHome : Activity(), Desktop.OnDesktopEditListener, DesktopOpti
     }
 
     @JvmOverloads
-    open fun onStartApp(context: Context, app: AbstractApp, view: View? = null) = try {
+    open fun onStartApp(context: Context, app: App, view: View? = null) = try {
         val intent = Intent(Intent.ACTION_MAIN)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         intent.setClassName(app.packageName, app.className)

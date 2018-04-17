@@ -16,20 +16,14 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.AppObject
 import com.benny.openlauncher.BuildConfig
 import com.benny.openlauncher.R
-import com.benny.openlauncher.interfaces.AbstractApp
+import com.benny.openlauncher.util.App
 import com.benny.openlauncher.interfaces.DialogListener
 import com.benny.openlauncher.interfaces.SettingsManager
 import com.benny.openlauncher.manager.Setup
 import com.benny.openlauncher.model.Item
-import com.benny.openlauncher.util.BaseIconProvider
-import com.benny.openlauncher.util.DatabaseHelper
-import com.benny.openlauncher.util.SimpleIconProvider
-import com.benny.openlauncher.util.Tool
+import com.benny.openlauncher.util.*
 import com.benny.openlauncher.viewutil.DesktopGestureListener
 import com.benny.openlauncher.viewutil.ItemGestureListener
-import com.benny.openlauncher.util.AppManager
-import com.benny.openlauncher.util.AppSettings
-import com.benny.openlauncher.util.LauncherAction
 import com.benny.openlauncher.viewutil.DialogHelper
 import com.benny.openlauncher.viewutil.IconListAdapter
 import kotlinx.android.synthetic.main.activity_home.*
@@ -67,7 +61,7 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
             } else
                 super.onStartApp(context, intent, view)
 
-    override fun onStartApp(context: Context, app: AbstractApp, view: View?) =
+    override fun onStartApp(context: Context, app: App, view: View?) =
             if (app.packageName == "com.benny.openlauncher") {
                 LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, context)
                 consumeNextResume = true
@@ -171,7 +165,7 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
 
     override fun initStaticHelper() {
         val settingsManager = AppSettings.get()
-        val imageLoader = object : Setup.ImageLoader<AppManager.App> {
+        val imageLoader = object : Setup.ImageLoader {
             override fun createIconProvider(drawable: Drawable?): BaseIconProvider = SimpleIconProvider(drawable)
 
             override fun createIconProvider(icon: Int): BaseIconProvider = SimpleIconProvider(icon)
@@ -298,7 +292,7 @@ class Home : CoreHome(), DrawerLayout.DrawerListener {
 
             override fun getItemGestureCallback(): ItemGestureListener.ItemGestureCallback = itemGestureCallback
 
-            override fun getImageLoader(): ImageLoader<AppManager.App> = imageLoader
+            override fun getImageLoader(): ImageLoader = imageLoader
 
             override fun getDataManager(): Setup.DataManager = dataManager
 

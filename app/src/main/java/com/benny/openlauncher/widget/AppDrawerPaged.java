@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.CoreHome;
-import com.benny.openlauncher.interfaces.AbstractApp;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
 
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppDrawerPaged extends SmoothViewPager {
-    private List<AbstractApp> apps;
+    private List<App> apps;
 
     public List<ViewGroup> pages = new ArrayList<>();
 
@@ -93,7 +93,7 @@ public class AppDrawerPaged extends SmoothViewPager {
             setLandscapeValue();
         }
 
-        List<AbstractApp> allApps = Setup.Companion.appLoader().getAllApps(c, false);
+        List<App> allApps = Setup.Companion.appLoader().getAllApps(c, false);
         if (allApps.size() != 0) {
             AppDrawerPaged.this.apps = allApps;
             calculatePage();
@@ -101,9 +101,9 @@ public class AppDrawerPaged extends SmoothViewPager {
             if (appDrawerIndicator != null)
                 appDrawerIndicator.setViewPager(AppDrawerPaged.this);
         }
-        Setup.Companion.appLoader().addUpdateListener(new AppUpdateListener<AbstractApp>() {
+        Setup.Companion.appLoader().addUpdateListener(new AppUpdateListener() {
             @Override
-            public boolean onAppUpdated(List<AbstractApp> apps) {
+            public boolean onAppUpdated(List<App> apps) {
                 AppDrawerPaged.this.apps = apps;
                 calculatePage();
                 setAdapter(new Adapter());
@@ -137,7 +137,7 @@ public class AppDrawerPaged extends SmoothViewPager {
             if (pos >= apps.size())
                 return null;
 
-            final AbstractApp app = apps.get(pos);
+            final App app = apps.get(pos);
 
             return AppItemView
                     .createDrawerAppItemView(

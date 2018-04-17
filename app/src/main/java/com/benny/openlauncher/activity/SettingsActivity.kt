@@ -12,11 +12,8 @@ import android.support.v7.preference.PreferenceCategory
 import android.support.v7.preference.PreferenceFragmentCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.R
-import com.benny.openlauncher.util.DatabaseHelper
+import com.benny.openlauncher.util.*
 import com.benny.openlauncher.widget.AppDrawerController
-import com.benny.openlauncher.util.AppManager
-import com.benny.openlauncher.util.AppSettings
-import com.benny.openlauncher.util.LauncherAction
 import com.benny.openlauncher.viewutil.DialogHelper
 import com.benny.openlauncher.viewutil.DialogHelper.OnAppSelectedListener
 import com.benny.openlauncher.viewutil.DialogHelper.selectAppDialog
@@ -343,7 +340,7 @@ class SettingsActivity : ThemeActivity() {
                 if (key.equals(getString(spec))){
                     if (sharedPreferences.getString(key,"0").equals("9")){
                         selectAppDialog(context!!, object : OnAppSelectedListener {
-                            override fun onAppSelected(app: AppManager.App) {
+                            override fun onAppSelected(app: App) {
                                 sharedPreferences.edit().putString(key+"__", app.packageName).apply()
                             }
                         })

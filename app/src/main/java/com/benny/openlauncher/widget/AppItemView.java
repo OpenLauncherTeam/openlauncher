@@ -17,7 +17,7 @@ import android.view.View;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.CoreHome;
-import com.benny.openlauncher.interfaces.AbstractApp;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.IconDrawer;
 import com.benny.openlauncher.interfaces.IconProvider;
 import com.benny.openlauncher.manager.Setup;
@@ -74,7 +74,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         textPaint.setTypeface(typeface);
     }
 
-    public static AppItemView createAppItemViewPopup(Context context, Item groupItem, AbstractApp item, int iconSize, float fontSizeSp) {
+    public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item, int iconSize, float fontSizeSp) {
         AppItemView.Builder b = new AppItemView.Builder(context, iconSize)
                 .withOnTouchGetPosition(groupItem, Setup.Companion.itemGestureCallback())
                 .setTextColor(Setup.Companion.appSettings().getFolderLabelColor())
@@ -82,7 +82,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         if (groupItem.getType() == Item.Type.SHORTCUT) {
             b.setShortcutItem(groupItem);
         } else {
-            AbstractApp app = Setup.Companion.appLoader().findItemApp(groupItem);
+            App app = Setup.Companion.appLoader().findItemApp(groupItem);
             if (app != null) {
                 b.setAppItem(groupItem, app);
             }
@@ -90,7 +90,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         return b.getView();
     }
 
-    public static View createDrawerAppItemView(Context context, final CoreHome home, AbstractApp app, int iconSize, AppItemView.LongPressCallBack longPressCallBack) {
+    public static View createDrawerAppItemView(Context context, final CoreHome home, App app, int iconSize, AppItemView.LongPressCallBack longPressCallBack) {
         return new AppItemView.Builder(context, iconSize)
                 .setAppItem(app)
                 .withOnTouchGetPosition(null, null)
@@ -308,7 +308,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             return view;
         }
 
-        public Builder setAppItem(final AbstractApp app) {
+        public Builder setAppItem(final App app) {
             view.setLabel(app.getLabel());
             view.setIconProvider(app.getIconProvider());
             view.setOnClickListener(new OnClickListener() {
@@ -325,7 +325,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             return this;
         }
 
-        public Builder setAppItem(final Item item, final AbstractApp app) {
+        public Builder setAppItem(final Item item, final App app) {
             view.setLabel(item.getLabel());
             view.setIconProvider(app.getIconProvider());
             view.setOnClickListener(new OnClickListener() {
@@ -391,7 +391,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             return this;
         }
 
-        public Builder withOnLongClick(final AbstractApp app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
+        public Builder withOnLongClick(final App app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
             withOnLongClick(Item.Companion.newAppItem(app), action, eventAction);
             return this;
         }

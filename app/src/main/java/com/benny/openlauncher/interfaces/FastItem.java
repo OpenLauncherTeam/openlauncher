@@ -2,11 +2,12 @@ package com.benny.openlauncher.interfaces;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.benny.openlauncher.util.App;
 import com.mikepenz.fastadapter.IItem;
 
 public interface FastItem {
     interface AppItem<T, VH extends RecyclerView.ViewHolder> extends IItem<T, VH> {
-        AbstractApp getApp();
+        App getApp();
     }
 
     interface DesktopOptionsItem<T, VH extends RecyclerView.ViewHolder> extends IItem<T, VH> {

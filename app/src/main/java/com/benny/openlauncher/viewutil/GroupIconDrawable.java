@@ -13,7 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.benny.openlauncher.activity.CoreHome;
-import com.benny.openlauncher.interfaces.AbstractApp;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.IconDrawer;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
@@ -41,7 +41,7 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         init(icons, size);
         for (int i = 0; i < 4 && i < item.getItems().size(); i++) {
             Item temp = item.getItems().get(i);
-            AbstractApp app = null;
+            App app = null;
             if (temp != null) {
                 app = Setup.Companion.appLoader().findItemApp(temp);
             }

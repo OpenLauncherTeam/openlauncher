@@ -18,7 +18,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import com.benny.openlauncher.R
 import com.benny.openlauncher.drawable.LauncherCircleDrawable
-import com.benny.openlauncher.interfaces.AbstractApp
+import com.benny.openlauncher.util.App
 import com.benny.openlauncher.interfaces.AppUpdateListener
 import com.benny.openlauncher.interfaces.SettingsManager
 import com.benny.openlauncher.manager.Setup
@@ -345,7 +345,7 @@ class SearchBar : FrameLayout {
         item.withIconGravity(if (Setup.appSettings().isSearchUseGrid) Gravity.TOP else Gravity.LEFT)
     }
 
-    protected fun startApp(context: Context, app: AbstractApp, view: View) {
+    protected fun startApp(context: Context, app: App, view: View) {
         Tool.startApp(context, app, view)
     }
 

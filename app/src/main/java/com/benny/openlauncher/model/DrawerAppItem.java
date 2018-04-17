@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.interfaces.AbstractApp;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.interfaces.FastItem;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.DragAction;
@@ -16,10 +16,10 @@ import com.mikepenz.fastadapter.items.AbstractItem;
 import java.util.List;
 
 public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.ViewHolder> implements FastItem.AppItem<DrawerAppItem, DrawerAppItem.ViewHolder> {
-    private AbstractApp app;
+    private App app;
     private AppItemView.LongPressCallBack onLongClickCallback;
 
-    public DrawerAppItem(AbstractApp app) {
+    public DrawerAppItem(App app) {
         this.app = app;
         onLongClickCallback = new AppItemView.LongPressCallBack() {
             @Override
@@ -51,7 +51,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
     }
 
     @Override
-    public AbstractApp getApp() {
+    public App getApp() {
         return app;
     }
 

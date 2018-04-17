@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.benny.openlauncher.activity.CoreHome;
-import com.benny.openlauncher.interfaces.AbstractApp;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 
@@ -269,7 +269,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
                     switch (type) {
                         case APP:
                         case SHORTCUT:
-                            AbstractApp app = Setup.Companion.get().getAppLoader().findItemApp(item);
+                            App app = Setup.Companion.get().getAppLoader().findItemApp(item);
                             item.setIconProvider(app != null ? app.getIconProvider() : null);
                             break;
                         default:

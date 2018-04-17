@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable
 import android.os.Parcel
 import android.os.Parcelable
 import com.benny.openlauncher.activity.CoreHome
-import com.benny.openlauncher.interfaces.AbstractApp
+import com.benny.openlauncher.util.App
 import com.benny.openlauncher.interfaces.LabelProvider
 import com.benny.openlauncher.manager.Setup
 import com.benny.openlauncher.util.BaseIconProvider
@@ -155,7 +155,7 @@ data class Item(
         }
 
         @JvmStatic
-        fun newAppItem(app: AbstractApp): Item {
+        fun newAppItem(app: App): Item {
             val item = Item()
             item.type = Type.APP
             item.name = app.label
@@ -208,7 +208,7 @@ data class Item(
         }
 
         @JvmStatic
-        private fun toIntent(app: AbstractApp): Intent {
+        private fun toIntent(app: App): Intent {
             val intent = Intent(Intent.ACTION_MAIN)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             intent.setClassName(app.packageName, app.className)
