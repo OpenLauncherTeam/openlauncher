@@ -60,7 +60,7 @@ class AboutActivity : MaterialAboutActivity() {
                 .text(getString(R.string.version) + " " + BuildConfig.VERSION_NAME)
                 .setOnClickAction {
                     getSharedPreferences("quickSettings", Context.MODE_PRIVATE).edit().putBoolean("firstStart", true).apply()
-                    startActivity(Intent(this, InitActivity::class.java))
+                    startActivity(Intent(this, OnBoardActivity::class.java))
                 }
                 .build())
         titleCard.addItem(ConvenienceBuilder.createWebsiteActionItem(this, resources.getDrawable(R.drawable.ic_github_dark_24dp), "GitHub", false, Uri.parse("https://github.com/OpenLauncherTeam/openlauncher")))

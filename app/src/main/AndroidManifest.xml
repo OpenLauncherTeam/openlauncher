@@ -24,7 +24,7 @@
             android:value="2.1" />
 
         <activity
-            android:name="com.benny.openlauncher.activity.InitActivity"
+            android:name="com.benny.openlauncher.activity.OnBoardActivity"
             android:clearTaskOnLaunch="true"
             android:label="@string/app_name"
             android:theme="@style/Home.Intro">
