@@ -15,6 +15,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.model.IconLabelItem;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.LauncherAction;
@@ -26,7 +27,7 @@ import java.io.File;
 import java.util.*;
 
 public class DialogHelper {
-    public static void editItemDialog(String title, String defaultText, Context c, final onItemEditListener listener) {
+    public static void editItemDialog(String title, String defaultText, Context c, final OnItemEditListener listener) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(c);
         builder.title(title)
                 .positiveText(R.string.ok)
@@ -86,7 +87,7 @@ public class DialogHelper {
 
         final MaterialDialog dialog = builder.build();
         List<IconLabelItem> items = new ArrayList<>();
-        final List<AppManager.App> apps = AppManager.Companion.getInstance(context).getApps(); // TODO: Tool.java migration
+        final List<App> apps = AppManager.getInstance(context).getApps(); // TODO: Tool.java migration
         int size = Tool.dp2px(18, context);
         int sizePad = Tool.dp2px(8, context);
         for (int i = 0; i < apps.size(); i++) {
@@ -123,7 +124,7 @@ public class DialogHelper {
                                 final LauncherAction.ActionItem finalItem = item;
                                 selectAppDialog(context, new OnAppSelectedListener() {
                                     @Override
-                                    public void onAppSelected(AppManager.App app) {
+                                    public void onAppSelected(App app) {
                                         finalItem.extraData = Tool.getStartAppIntent(app); // TODO
                                         onActionSelectedListener.onActionSelected(finalItem);
                                     }
@@ -215,15 +216,14 @@ public class DialogHelper {
     }
 
     public interface OnAppSelectedListener {
-        void onAppSelected(AppManager.App app);
+        void onAppSelected(App app);
     }
 
     public interface OnActionSelectedListener {
         void onActionSelected(LauncherAction.ActionItem item);
     }
 
-    public interface onItemEditListener {
+    public interface OnItemEditListener {
         void itemLabel(String label);
     }
 }
-

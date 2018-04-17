@@ -52,13 +52,13 @@ public class LauncherAction {
                 context.startActivity(new Intent(context, MinibarEditActivity.class));
                 break;
             case SetWallpaper:
-                DialogHelper.INSTANCE.setWallpaperDialog(context);
+                DialogHelper.setWallpaperDialog(context);
                 break;
             case LockScreen:
                 try {
                     ((DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE)).lockNow();
                 } catch (Exception e) {
-                    DialogHelper.INSTANCE.alertDialog(context, "Device Admin Required", "To lock your screen by gesture, OpenLauncher require Device Administration, please enable it in the settings to use this features. The force-lock policy will only be used for locking the screen via gesture.", "Enable", new MaterialDialog.SingleButtonCallback() {
+                    DialogHelper.alertDialog(context, "Device Admin Required", "To lock your screen by gesture, OpenLauncher require Device Administration, please enable it in the settings to use this features. The force-lock policy will only be used for locking the screen via gesture.", "Enable", new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                             Tool.toast(context, context.getString(R.string.toast_device_admin_required));
