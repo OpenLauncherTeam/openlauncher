@@ -2,14 +2,14 @@
 <resources>
 
     <string-array name="entries__gestures">
-        <item>Nenhum</item>
-        <item>Definições da Mini-barra</item>
-        <item>Definir imagem de fundo</item>
-        <item>Ecrã de Bloqueio</item>
+        <item>Nada</item>
+        <item>Definições da mini-barra</item>
+        <item>Definir imagem</item>
+        <item>Ecrã de bloqueio</item>
         <item>Limpar RAM</item>
-        <item>Definições do Dispositivo</item>
-        <item>Definições do Inicio</item>
-        <item>Painel de Volume</item>
+        <item>Definições do dispositivo</item>
+        <item>Definições do Início</item>
+        <item>Painel de volume</item>
         <item>Abrir lista de aplicações</item>
         <item>Abrir aplicação</item>
         <item>@string/pref_title__search_bar</item>
@@ -35,8 +35,8 @@
     </string-array>
 
     <string-array name="entries__wallpaper_options">
-        <item>Definir imagem de fundo</item>
-        <item>Desfocar imagem de fundo</item>
+        <item>Definir imagem</item>
+        <item>Desfocar imagem</item>
     </string-array>
 
     <string-array name="values__zero_to_one" translatable="false">
