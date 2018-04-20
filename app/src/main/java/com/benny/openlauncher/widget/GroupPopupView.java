@@ -108,7 +108,7 @@ public class GroupPopupView extends RevealFrameLayout {
                 }
                 final AppSettings AppSettings = Setup.Companion.appSettings();
                 final Item groupItem = item.getGroupItems().get(y2 * cellSize[0] + x2);
-                if (groupItem == null){
+                if (groupItem == null) {
                     continue;
                 }
                 final App groupApp = groupItem.getType() != Item.Type.SHORTCUT ? Setup.Companion.appLoader().findItemApp(groupItem) : null;

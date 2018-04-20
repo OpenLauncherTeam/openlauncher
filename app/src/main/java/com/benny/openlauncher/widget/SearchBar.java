@@ -373,9 +373,9 @@ public class SearchBar extends FrameLayout {
         SimpleDateFormat sdf = mode.sdf;
 
         int mode = appSettings.getDesktopDateMode();
-        if (mode >= 0 && mode < Mode.getCount()){
+        if (mode >= 0 && mode < Mode.getCount()) {
             sdf = Mode.getById(mode).sdf;
-            if (mode == 0){
+            if (mode == 0) {
                 sdf = appSettings.getUserDateFormat();
             }
         }
@@ -426,7 +426,8 @@ public class SearchBar extends FrameLayout {
         public int getId() {
             return id;
         }
-        public static int getCount(){
+
+        public static int getCount() {
             return values().length;
         }
     }

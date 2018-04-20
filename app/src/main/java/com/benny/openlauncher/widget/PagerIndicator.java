@@ -8,14 +8,18 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
+
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
 import com.benny.openlauncher.widget.SmoothViewPager.OnPageChangeListener;
-import java.util.HashMap;
-import kotlin.jvm.internal.Intrinsics;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+
+import kotlin.jvm.internal.Intrinsics;
 
 import static com.benny.openlauncher.widget.PagerIndicator.Mode.ARROW;
 import static com.benny.openlauncher.widget.PagerIndicator.Mode.NORMAL;
@@ -103,37 +107,37 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
                 if (pager != null) {
 
                     dotPaint.setAlpha(255);
-                    float circlesWidth = pager.getAdapter().getCount()* (dotSize + pad * 2);
+                    float circlesWidth = pager.getAdapter().getCount() * (dotSize + pad * 2);
                     canvas.translate(getWidth() / 2 - circlesWidth / 2, 0f);
 
-                    if (realPreviousPage != pager.getCurrentItem()){
+                    if (realPreviousPage != pager.getCurrentItem()) {
                         scaleFactor = 1f;
                         realPreviousPage = pager.getCurrentItem();
                     }
 
-                    for (int i= 0; i < pager.getAdapter().getCount(); i++){
+                    for (int i = 0; i < pager.getAdapter().getCount(); i++) {
                         float targetFactor = 1.5f;
                         float targetFactor2 = 1f;
                         float increaseFactor = 0.05f;
-                        if (i == previousPage && i != pager.getCurrentItem()){
+                        if (i == previousPage && i != pager.getCurrentItem()) {
                             scaleFactor2 = Tool.clampFloat(scaleFactor2 - increaseFactor, targetFactor2, targetFactor);
                             Tool.print(scaleFactor2);
-                            canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, (float)(getHeight() / 2), scaleFactor2 * dotSize / 2, dotPaint);
+                            canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, (float) (getHeight() / 2), scaleFactor2 * dotSize / 2, dotPaint);
                             if (scaleFactor2 != targetFactor2)
                                 invalidate();
                             else {
                                 scaleFactor2 = 1.5f;
                                 previousPage = -1;
                             }
-                        } else if (pager.getCurrentItem() == i){
+                        } else if (pager.getCurrentItem() == i) {
                             if (previousPage == -1)
                                 previousPage = i;
                             scaleFactor = Tool.clampFloat(scaleFactor + increaseFactor, targetFactor2, targetFactor);
-                            canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, (float)(getHeight() / 2), scaleFactor * dotSize / 2, dotPaint);
+                            canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, (float) (getHeight() / 2), scaleFactor * dotSize / 2, dotPaint);
                             if (scaleFactor != targetFactor)
                                 invalidate();
-                        } else{
-                            canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, (float)(getHeight() / 2), dotSize / 2, dotPaint);
+                        } else {
+                            canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, (float) (getHeight() / 2), dotSize / 2, dotPaint);
                         }
                     }
                 }
@@ -143,10 +147,10 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
 
                 if (pager != null) {
                     arrowPath.reset();
-                    arrowPath.moveTo(getWidth() / 2 - dotSize * 1.5f, (float)(getHeight()) - dotSize / 3 - pad / 2);
+                    arrowPath.moveTo(getWidth() / 2 - dotSize * 1.5f, (float) (getHeight()) - dotSize / 3 - pad / 2);
                     arrowPath.lineTo((getWidth() / 2f), pad / 2);
                     arrowPath.
-                    lineTo(getWidth() / 2 + dotSize * 1.5f, (float)(getHeight()) - dotSize / 3 - pad / 2);
+                            lineTo(getWidth() / 2 + dotSize * 1.5f, (float) (getHeight()) - dotSize / 3 - pad / 2);
 
                     canvas.drawPath(arrowPath, arrowPaint);
 
@@ -173,7 +177,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
                         invalidate();
                     }
 
-                    canvas.drawLine(myX, (float)getHeight(), myX + lineWidth, (float)getHeight(), dotPaint);
+                    canvas.drawLine(myX, (float) getHeight(), myX + lineWidth, (float) getHeight(), dotPaint);
                 }
             }
             break;
