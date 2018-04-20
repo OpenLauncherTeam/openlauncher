@@ -1,15 +1,10 @@
 package com.benny.openlauncher.manager;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.view.DragEvent;
 
-import com.benny.openlauncher.interfaces.AppDeleteListener;
-import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.interfaces.DialogListener;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.BaseIconProvider;
@@ -128,30 +123,6 @@ public abstract class Setup {
         List<Item> getDock();
 
         Item getItem(int id);
-    }
-
-    public interface AppLoader {
-        void loadItems();
-
-        List<App> getAllApps(Context context, boolean includeHidden);
-
-        App createApp(Intent intent);
-
-        App findItemApp(Item item);
-
-        void onAppUpdated(Context p1, Intent p2);
-
-        void addUpdateListener(AppUpdateListener updateListener);
-
-        void removeUpdateListener(AppUpdateListener updateListener);
-
-        void addDeleteListener(AppDeleteListener deleteListener);
-
-        void removeDeleteListener(AppDeleteListener deleteListener);
-
-        void notifyUpdateListeners(List<App> apps);
-
-        void notifyRemoveListeners(List<App> apps);
     }
 
     public interface EventHandler {
