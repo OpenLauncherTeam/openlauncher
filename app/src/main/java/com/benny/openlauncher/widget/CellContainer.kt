@@ -85,22 +85,6 @@ open class CellContainer : ViewGroup {
         super.removeAllViews()
     }
 
-    private fun getPeekDirectionFromCoordinate(from: Point, to: Point): PeekDirection? {
-        if (from.y - to.y > 0)
-            return PeekDirection.UP
-        else if (from.y - to.y < 0)
-            return PeekDirection.DOWN
-
-        if (from.x - to.x > 0)
-            return PeekDirection.LEFT
-        else if (from.x - to.x < 0)
-            return PeekDirection.RIGHT
-
-        return null
-    }
-
-    private var newImageJustProjected: Boolean = false
-    private var previousProjectedCoordinate: Point? = null
 
     fun projectImageOutlineAt(newCoordinate: Point, bitmap: Bitmap?) {
         cachedOutlineBitmap = bitmap
@@ -112,8 +96,6 @@ open class CellContainer : ViewGroup {
 
         invalidate()
     }
-
-    fun hasCachedOutlineBitmap(): Boolean = cachedOutlineBitmap != null
 
     private fun drawCachedOutlineBitmap(canvas: Canvas, cell: Rect) {
         if (cachedOutlineBitmap != null)
@@ -190,6 +172,21 @@ open class CellContainer : ViewGroup {
 
         //        return null;
     }
+
+    private fun getPeekDirectionFromCoordinate(from: Point, to: Point): PeekDirection? {
+        if (from.y - to.y > 0)
+            return PeekDirection.UP
+        else if (from.y - to.y < 0)
+            return PeekDirection.DOWN
+
+        if (from.x - to.x > 0)
+            return PeekDirection.LEFT
+        else if (from.x - to.x < 0)
+            return PeekDirection.RIGHT
+
+        return null
+    }
+
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (MotionEventCompat.getActionMasked(event)) {
@@ -276,98 +273,6 @@ open class CellContainer : ViewGroup {
         }
         return null
     }
-
-    /**
-     * Locate the first 1x1 empty space near but not equal to the supplied starting position.
-     *
-     *
-     * TODO: check this won't return the starting point if the starting point is surrounded by two occupied cells in each direction
-     *
-     * @param cx            - starting x coordinate
-     * @param cy            - starting y coordinate
-     * @param peekDirection - direction to look first or null
-     * @return the first empty space or null if no free space found
-     */
-    fun findFreeSpace(cx: Int, cy: Int, peekDirection: PeekDirection?): Point? {
-        if (peekDirection != null) {
-            val target: Point
-            when (peekDirection) {
-                CellContainer.PeekDirection.DOWN -> {
-                    target = Point(cx, cy - 1)
-                    if (isValid(target.x, target.y) && !occupied!![target.x][target.y])
-                        return target
-                }
-                CellContainer.PeekDirection.LEFT -> {
-                    target = Point(cx + 1, cy)
-                    if (isValid(target.x, target.y) && !occupied!![target.x][target.y])
-                        return target
-                }
-                CellContainer.PeekDirection.RIGHT -> {
-                    target = Point(cx - 1, cy)
-                    if (isValid(target.x, target.y) && !occupied!![target.x][target.y])
-                        return target
-                }
-                CellContainer.PeekDirection.UP -> {
-                    target = Point(cx, cy + 1)
-                    if (isValid(target.x, target.y) && !occupied!![target.x][target.y])
-                        return target
-                }
-            }
-        }
-        val toExplore = LinkedList<Point>()
-        val explored = HashSet<Point>()
-        toExplore.add(Point(cx, cy))
-        while (!toExplore.isEmpty()) {
-            val p = toExplore.remove()
-            var cp: Point
-            if (isValid(p.x, p.y - 1)) {
-                cp = Point(p.x, p.y - 1)
-                if (!explored.contains(cp)) {
-                    if (!occupied!![cp.x][cp.y])
-                        return cp
-                    else
-                        toExplore.add(cp)
-                    explored.add(p)
-                }
-            }
-
-            if (isValid(p.x, p.y + 1)) {
-                cp = Point(p.x, p.y + 1)
-                if (!explored.contains(cp)) {
-                    if (!occupied!![cp.x][cp.y])
-                        return cp
-                    else
-                        toExplore.add(cp)
-                    explored.add(p)
-                }
-            }
-
-            if (isValid(p.x - 1, p.y)) {
-                cp = Point(p.x - 1, p.y)
-                if (!explored.contains(cp)) {
-                    if (!occupied!![cp.x][cp.y])
-                        return cp
-                    else
-                        toExplore.add(cp)
-                    explored.add(p)
-                }
-            }
-
-            if (isValid(p.x + 1, p.y)) {
-                cp = Point(p.x + 1, p.y)
-                if (!explored.contains(cp)) {
-                    if (!occupied!![cp.x][cp.y])
-                        return cp
-                    else
-                        toExplore.add(cp)
-                    explored.add(p)
-                }
-            }
-        }
-        return null
-    }
-
-    private fun isValid(x: Int, y: Int): Boolean = x >= 0 && x <= occupied!!.size - 1 && y >= 0 && y <= occupied!![0].size - 1
 
     public override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
