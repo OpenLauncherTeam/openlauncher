@@ -133,7 +133,7 @@ public class Tool {
     }
 
     public static final void createScaleInScaleOutAnim(@NotNull final View view, @NotNull final Runnable endAction, float runActionAtPercent) {
-        final long animTime = (long) (Setup.Companion.appSettings().getOverallAnimationSpeedModifier() * ((float) ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION));
+        final long animTime = (long) (Setup.appSettings().getOverallAnimationSpeedModifier() * ((float) ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION));
         ViewPropertyAnimator duration = view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(animTime);
 
         duration.setInterpolator(new AccelerateDecelerateInterpolator());

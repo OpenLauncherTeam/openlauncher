@@ -334,7 +334,7 @@ public final class DragNDropLayout extends FrameLayout {
         if (!(canvas == null || !this.showFolderPreview || this.previewLocation.equals(-1.0f, -1.0f))) {
             this.folderPreviewScale += 0.08f;
             this.folderPreviewScale = Tool.clampFloat(this.folderPreviewScale, 0.5f, 1.0f);
-            canvas.drawCircle(this.previewLocation.x, this.previewLocation.y, ((float) Tool.toPx((Setup.Companion.appSettings().getDesktopIconSize() / 2) + 10)) * this.folderPreviewScale, this.paint);
+            canvas.drawCircle(this.previewLocation.x, this.previewLocation.y, ((float) Tool.toPx((Setup.appSettings().getDesktopIconSize() / 2) + 10)) * this.folderPreviewScale, this.paint);
         }
         if (this.showFolderPreview) {
             invalidate();

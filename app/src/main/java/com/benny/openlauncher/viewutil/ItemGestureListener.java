@@ -66,7 +66,7 @@ public class ItemGestureListener extends GestureDetector.SimpleOnGestureListener
                 }
             }
         } catch (Exception exception) {
-            Setup.Companion.logger().log(this, Log.ERROR, null, exception.getMessage());
+            Setup.logger().log(this, Log.ERROR, null, exception.getMessage());
         }
         return result;
     }

@@ -104,7 +104,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
 
     public final void initDockItem(@NotNull Home home) {
         Intrinsics.checkParameterIsNotNull(home, "home");
-        int columns = Setup.Companion.appSettings().getDockSize();
+        int columns = Setup.appSettings().getDockSize();
         setGridSize(columns, 1);
         List<Item> dockItems = Home.Companion.getDb().getDock();
         this.home = home;
@@ -134,7 +134,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
                 case 1:
                     Tool.print((Object) "ACTION_UP");
                     Tool.print(Integer.valueOf((int) ev.getX()), Integer.valueOf((int) ev.getY()));
-                    if (this.startPosY - ev.getY() > 150.0f && Setup.Companion.appSettings().getGestureDockSwipeUp()) {
+                    if (this.startPosY - ev.getY() > 150.0f && Setup.appSettings().getGestureDockSwipeUp()) {
                         Point p = new Point((int) ev.getX(), (int) ev.getY());
                         View view = this;
                         Home launcher = Home.Companion.getLauncher();
@@ -142,7 +142,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
                             Intrinsics.throwNpe();
                         }
                         p = Tool.convertPoint(p, view, launcher.getAppDrawerController());
-                        if (Setup.Companion.appSettings().isGestureFeedback()) {
+                        if (Setup.appSettings().isGestureFeedback()) {
                             Tool.vibrate(this);
                         }
                         Home launcher2 = Home.Companion.getLauncher();
@@ -194,7 +194,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
                             if (launcher2 != null) {
                                 dragNDropView2 = launcher2.getDragNDropView();
                                 if (dragNDropView2 != null) {
-                                    dragNDropView2.showFolderPreviewAt(this, ((float) getCellWidth()) * (((float) this.coordinate.x) + 0.5f), (((float) getCellHeight()) * (((float) this.coordinate.y) + 0.5f)) - ((float) (Setup.Companion.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0)));
+                                    dragNDropView2.showFolderPreviewAt(this, ((float) getCellWidth()) * (((float) this.coordinate.x) + 0.5f), (((float) getCellHeight()) * (((float) this.coordinate.y) + 0.5f)) - ((float) (Setup.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0)));
                                     break;
                                 }
                             }
@@ -207,9 +207,9 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
                 if (launcher2 != null) {
                     dragNDropView2 = launcher2.getDragNDropView();
                     if (dragNDropView2 != null) {
-                        if (Setup.Companion.appSettings().isDockShowLabel()) {
+                        if (Setup.appSettings().isDockShowLabel()) {
                         }
-                        dragNDropView2.showFolderPreviewAt(this, ((float) getCellWidth()) * (((float) this.coordinate.x) + 0.5f), (((float) getCellHeight()) * (((float) this.coordinate.y) + 0.5f)) - ((float) (Setup.Companion.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0)));
+                        dragNDropView2.showFolderPreviewAt(this, ((float) getCellWidth()) * (((float) this.coordinate.x) + 0.5f), (((float) getCellHeight()) * (((float) this.coordinate.y) + 0.5f)) - ((float) (Setup.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0)));
                     }
                 }
                 break;
@@ -240,8 +240,8 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
         if (!isInEditMode()) {
             int height;
             int height2 = View.getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
-            int iconSize = Setup.Companion.appSettings().getDockIconSize();
-            if (Setup.Companion.appSettings().isDockShowLabel()) {
+            int iconSize = Setup.appSettings().getDockIconSize();
+            if (Setup.appSettings().isDockShowLabel()) {
                 height = Tool.dp2px(((16 + iconSize) + 14) + 10, getContext()) + Companion.getBottomInset();
             } else {
                 height = Tool.dp2px((16 + iconSize) + 10, getContext()) + Companion.getBottomInset();
@@ -271,7 +271,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
 
     public boolean addItemToPage(@NotNull Item item, int page) {
         Intrinsics.checkParameterIsNotNull(item, "item");
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.Companion.appSettings().isDockShowLabel(), (DesktopCallBack) this, Setup.Companion.appSettings().getDockIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDockIconSize());
         if (itemView == null) {
             Home.Companion.getDb().deleteItem(item, true);
             return false;
@@ -290,7 +290,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
         item.locationInLauncher = 1;
         item.x = positionToLayoutPrams.getX();
         item.y = positionToLayoutPrams.getY();
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.Companion.appSettings().isDockShowLabel(), (DesktopCallBack) this, Setup.Companion.appSettings().getDockIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDockIconSize());
         if (itemView != null) {
             itemView.setLayoutParams(positionToLayoutPrams);
             addView(itemView);
@@ -303,7 +303,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
         item.locationInLauncher = 1;
         item.x = x;
         item.y = y;
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.Companion.appSettings().isDockShowLabel(), (DesktopCallBack) this, Setup.Companion.appSettings().getDockIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDockIconSize());
         if (itemView == null) {
             return false;
         }

@@ -63,12 +63,12 @@ public class AppDrawerVertical extends CardView {
 
                 rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_vertical_inner, AppDrawerVertical.this, false);
                 recyclerView = rl.findViewById(R.id.vDrawerRV);
-                layoutManager = new GridLayoutManager(getContext(), Setup.Companion.appSettings().getDrawerColumnCount());
+                layoutManager = new GridLayoutManager(getContext(), Setup.appSettings().getDrawerColumnCount());
 
                 itemWidth = (getWidth() - recyclerView.getPaddingRight() - recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
                 init();
 
-                if (!Setup.Companion.appSettings().isDrawerShowIndicator())
+                if (!Setup.appSettings().isDrawerShowIndicator())
                     scrollBar.setVisibility(View.GONE);
             }
         });
@@ -90,12 +90,12 @@ public class AppDrawerVertical extends CardView {
     }
 
     private void setPortraitValue() {
-        layoutManager.setSpanCount(Setup.Companion.appSettings().getDrawerColumnCount());
+        layoutManager.setSpanCount(Setup.appSettings().getDrawerColumnCount());
         gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
     private void setLandscapeValue() {
-        layoutManager.setSpanCount(Setup.Companion.appSettings().getDrawerRowCount());
+        layoutManager.setSpanCount(Setup.appSettings().getDrawerRowCount());
         gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
@@ -109,7 +109,7 @@ public class AppDrawerVertical extends CardView {
         scrollBar.post(new Runnable() {
             @Override
             public void run() {
-                scrollBar.setHandleColour(Setup.Companion.appSettings().getDrawerFastScrollColor());
+                scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
             }
         });
 
@@ -125,7 +125,7 @@ public class AppDrawerVertical extends CardView {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setDrawingCacheEnabled(true);
 
-        List<App> allApps = Setup.Companion.appLoader().getAllApps(getContext(), false);
+        List<App> allApps = Setup.appLoader().getAllApps(getContext(), false);
         if (allApps.size() != 0) {
             apps = allApps;
             ArrayList<FastItem.AppItem> items = new ArrayList<>();
@@ -134,7 +134,7 @@ public class AppDrawerVertical extends CardView {
             }
             gridDrawerAdapter.set(items);
         }
-        Setup.Companion.appLoader().addUpdateListener(new AppUpdateListener() {
+        Setup.appLoader().addUpdateListener(new AppUpdateListener() {
             @Override
             public boolean onAppUpdated(List<App> apps) {
                 AppDrawerVertical.apps = apps;

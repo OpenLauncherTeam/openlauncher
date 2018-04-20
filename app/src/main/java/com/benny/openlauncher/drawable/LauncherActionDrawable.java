@@ -24,7 +24,7 @@ public final class LauncherActionDrawable extends Drawable {
 
     public LauncherActionDrawable(@NotNull Bitmap icon) {
         _icon = icon;
-        _iconSize = Tool.toPx(Setup.Companion.appSettings().getDesktopIconSize());
+        _iconSize = Tool.toPx(Setup.appSettings().getDesktopIconSize());
         _iconRadius = (((float) _iconSize) / 2.0f) - ((float) Tool.toPx(4));
         _paint = new Paint(1);
         _filterDkGray = new LightingColorFilter(-12303292, 1);

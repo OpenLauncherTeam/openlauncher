@@ -45,7 +45,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
                 shortcutIconDrawable = new BitmapDrawable(context.getResources(), (Bitmap) intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON));
         }
 
-        App app = Setup.Companion.appLoader().createApp(newIntent);
+        App app = Setup.appLoader().createApp(newIntent);
         Item item;
         if (app != null) {
             item = Item.newAppItem(app);
@@ -61,7 +61,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
             Home.Companion.getDb().saveItem(item, Home.Companion.getLauncher().getDesktop().getCurrentItem(), Definitions.ItemPosition.Desktop);
             boolean added = Home.Companion.getLauncher().getDesktop().addItemToPage(item, Home.Companion.getLauncher().getDesktop().getCurrentItem());
 
-            Setup.Companion.logger().log(this, Log.INFO, null, "Shortcut installed - %s => Intent: %s (Item type: %s; x = %d, y = %d, added = %b)", name, newIntent, item.getType(), item.getX(), item.getY(), added);
+            Setup.logger().log(this, Log.INFO, null, "Shortcut installed - %s => Intent: %s (Item type: %s; x = %d, y = %d, added = %b)", name, newIntent, item.getType(), item.getX(), item.getY(), added);
         }
     }
 }

@@ -43,10 +43,10 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
             Item temp = item.getItems().get(i);
             App app = null;
             if (temp != null) {
-                app = Setup.Companion.appLoader().findItemApp(temp);
+                app = Setup.appLoader().findItemApp(temp);
             }
             if (app == null) {
-                Setup.Companion.logger().log(this, Log.DEBUG, null, "Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, temp == null ? "Item is NULL" : temp.getIntent());
+                Setup.logger().log(this, Log.DEBUG, null, "Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, temp == null ? "Item is NULL" : temp.getIntent());
                 icons[i] = new ColorDrawable(Color.TRANSPARENT);
             } else {
                 app.getIconProvider().loadIconIntoIconDrawer(this, (int) size, i);

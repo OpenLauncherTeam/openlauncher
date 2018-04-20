@@ -24,7 +24,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
         onLongClickCallback = new AppItemView.LongPressCallBack() {
             @Override
             public boolean readyForDrag(View view) {
-                return Setup.Companion.appSettings().getDesktopStyle() != Desktop.DesktopMode.INSTANCE.getSHOW_ALL_APPS();
+                return Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.INSTANCE.getSHOW_ALL_APPS();
             }
 
             @Override
@@ -81,11 +81,11 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
             appItemView.setTargetedWidth(AppDrawerVertical.itemWidth);
             appItemView.setTargetedHeightPadding(AppDrawerVertical.itemHeightPadding);
 
-            builder = new AppItemView.Builder(appItemView, Setup.Companion.appSettings().getDrawerIconSize())
+            builder = new AppItemView.Builder(appItemView, Setup.appSettings().getDrawerIconSize())
                     .withOnTouchGetPosition(null, null)
-                    .setLabelVisibility(Setup.Companion.appSettings().isDrawerShowLabel())
-                    .setTextColor(Setup.Companion.appSettings().getDrawerLabelColor())
-                    .setFontSize(appItemView.getContext(), Setup.Companion.appSettings().getDrawerLabelFontSize())
+                    .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
+                    .setTextColor(Setup.appSettings().getDrawerLabelColor())
+                    .setFontSize(appItemView.getContext(), Setup.appSettings().getDrawerLabelFontSize())
                     .setFastAdapterItem();
         }
     }

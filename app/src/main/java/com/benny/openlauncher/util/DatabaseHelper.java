@@ -71,12 +71,12 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         itemValues.put(COLUMN_X_POS, item.getX());
         itemValues.put(COLUMN_Y_POS, item.getY());
 
-        Setup.Companion.logger().log(this, Log.INFO, null, "createItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+        Setup.logger().log(this, Log.INFO, null, "createItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
 
         String concat = "";
         switch (item.getType()) {
             case APP:
-                if (Setup.Companion.appSettings().enableImageCaching()) {
+                if (Setup.appSettings().enableImageCaching()) {
                     Tool.saveIcon(context, Tool.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(-1)), Integer.toString(item.getId()));
                 }
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.getIntent()));
@@ -200,12 +200,12 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         itemValues.put(COLUMN_X_POS, item.getX());
         itemValues.put(COLUMN_Y_POS, item.getY());
 
-        Setup.Companion.logger().log(this, Log.INFO, null, "updateItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+        Setup.logger().log(this, Log.INFO, null, "updateItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
 
         String concat = "";
         switch (item.getType()) {
             case APP:
-                if (Setup.Companion.appSettings().enableImageCaching()) {
+                if (Setup.appSettings().enableImageCaching()) {
                     Tool.saveIcon(context, Tool.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE)), Integer.toString(item.getId()));
                 }
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.getIntent()));
@@ -232,14 +232,14 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
     // update the state of an item
     public void updateItem(Item item, Definitions.ItemState state) {
         ContentValues itemValues = new ContentValues();
-        Setup.Companion.logger().log(this, Log.INFO, null, "updateItem (state): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+        Setup.logger().log(this, Log.INFO, null, "updateItem (state): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
         itemValues.put(COLUMN_STATE, state.ordinal());
         db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
     }
 
     // update the fields only used by the database
     public void updateItem(Item item, int page, Definitions.ItemPosition itemPosition) {
-        Setup.Companion.logger().log(this, Log.INFO, null, "updateItem (delete + create): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+        Setup.logger().log(this, Log.INFO, null, "updateItem (delete + create): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
         deleteItem(item, false);
         createItem(item, page, itemPosition);
     }
@@ -264,13 +264,13 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
             case APP:
             case SHORTCUT:
                 item.setIntent(Tool.getIntentFromString(data));
-                if (Setup.Companion.appSettings().enableImageCaching()) {
+                if (Setup.appSettings().enableImageCaching()) {
                     item.setIconProvider(Setup.get().getImageLoader().createIconProvider(Tool.getIcon(Home.Companion.getLauncher(), Integer.toString(id))));
                 } else {
                     switch (type) {
                         case APP:
                         case SHORTCUT:
-                            App app = Setup.Companion.get().getAppLoader().findItemApp(item);
+                            App app = Setup.get().getAppLoader().findItemApp(item);
                             item.setIconProvider(app != null ? app.getIconProvider() : null);
                             break;
                         default:

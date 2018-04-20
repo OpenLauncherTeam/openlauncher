@@ -220,7 +220,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
 
 
     public int getDrawerFastScrollColor() {
-        return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.Companion.appContext(), R.color.op_red));
+        return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.appContext(), R.color.op_red));
     }
 
 

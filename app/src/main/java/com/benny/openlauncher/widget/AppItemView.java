@@ -76,13 +76,13 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
     public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item, int iconSize, float fontSizeSp) {
         AppItemView.Builder b = new AppItemView.Builder(context, iconSize)
-                .withOnTouchGetPosition(groupItem, Setup.Companion.itemGestureCallback())
-                .setTextColor(Setup.Companion.appSettings().getFolderLabelColor())
+                .withOnTouchGetPosition(groupItem, Setup.itemGestureCallback())
+                .setTextColor(Setup.appSettings().getFolderLabelColor())
                 .setFontSize(context, fontSizeSp);
         if (groupItem.getType() == Item.Type.SHORTCUT) {
             b.setShortcutItem(groupItem);
         } else {
-            App app = Setup.Companion.appLoader().findItemApp(groupItem);
+            App app = Setup.appLoader().findItemApp(groupItem);
             if (app != null) {
                 b.setAppItem(groupItem, app);
             }
@@ -95,9 +95,9 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                 .setAppItem(app)
                 .withOnTouchGetPosition(null, null)
                 .withOnLongClick(app, DragAction.Action.APP_DRAWER, longPressCallBack)
-                .setLabelVisibility(Setup.Companion.appSettings().isDrawerShowLabel())
-                .setTextColor(Setup.Companion.appSettings().getDrawerLabelColor())
-                .setFontSize(context, Setup.Companion.appSettings().getDrawerLabelFontSize())
+                .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
+                .setTextColor(Setup.appSettings().getDrawerLabelColor())
+                .setFontSize(context, Setup.appSettings().getDrawerLabelFontSize())
                 .getView();
     }
 
@@ -291,7 +291,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             return new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (Setup.Companion.appSettings().isDesktopLock()) {
+                    if (Setup.appSettings().isDesktopLock()) {
                         return false;
                     }
                     if (eventAction != null && !eventAction.readyForDrag(v)) {
@@ -361,7 +361,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder setGroupItem(Context context, final DesktopCallBack callback, final Item item, int iconSize) {
             view.setLabel(item.getLabel());
-            view.setIconProvider(Setup.Companion.imageLoader().createIconProvider(new GroupIconDrawable(context, item, iconSize)));
+            view.setIconProvider(Setup.imageLoader().createIconProvider(new GroupIconDrawable(context, item, iconSize)));
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -400,7 +400,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             view.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (Setup.Companion.appSettings().isDesktopLock()) {
+                    if (Setup.appSettings().isDesktopLock()) {
                         return false;
                     }
                     if (eventAction != null && !eventAction.readyForDrag(v)) {

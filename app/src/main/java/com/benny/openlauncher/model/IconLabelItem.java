@@ -50,7 +50,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     public IconLabelItem(Context context, int icon, int label) {
-        this.iconProvider = Setup.Companion.imageLoader().createIconProvider(icon);
+        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
         this.label = context.getString(label);
     }
 
@@ -61,14 +61,14 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     public IconLabelItem(Context context, int icon, String label, int forceSize) {
         this(null);
         this.label = label;
-        this.iconProvider = Setup.Companion.imageLoader().createIconProvider(icon);
+        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
         this.forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, int icon, int label, int forceSize) {
         this(null);
         this.label = context.getString(label);
-        this.iconProvider = Setup.Companion.imageLoader().createIconProvider(icon);
+        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
         this.forceSize = forceSize;
     }
 
@@ -82,14 +82,14 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     public IconLabelItem(Context context, Drawable icon, String label, int forceSize) {
         this(null);
         this.label = label;
-        this.iconProvider = Setup.Companion.imageLoader().createIconProvider(icon);
+        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
         this.forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, Drawable icon, int label, int forceSize) {
         this(null);
         this.label = context.getString(label);
-        this.iconProvider = Setup.Companion.imageLoader().createIconProvider(icon);
+        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
         this.forceSize = forceSize;
     }
 

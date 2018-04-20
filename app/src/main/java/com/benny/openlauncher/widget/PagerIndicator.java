@@ -197,7 +197,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
         this.arrowPaint.setStrokeWidth(Companion.getPad() / 1.5f);
         this.arrowPaint.setStrokeJoin(Join.ROUND);
         this.arrowPath = new Path();
-        this.mode = Setup.Companion.appSettings().getDesktopIndicatorMode();
+        this.mode = Setup.appSettings().getDesktopIndicatorMode();
         this.delayShow = new PagerIndicato_delayShow(this);
         this.mCurrentPagerState = -1;
     }
@@ -215,7 +215,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
         this.arrowPaint.setStrokeWidth(Companion.getPad() / 1.5f);
         this.arrowPaint.setStrokeJoin(Join.ROUND);
         this.arrowPath = new Path();
-        this.mode = Setup.Companion.appSettings().getDesktopIndicatorMode();
+        this.mode = Setup.appSettings().getDesktopIndicatorMode();
         this.delayShow = new PagerIndicato_delayShow(this);
         this.mCurrentPagerState = -1;
     }

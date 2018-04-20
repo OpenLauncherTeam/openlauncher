@@ -87,7 +87,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DROP:
                         final Item item = DragNDropHandler.INSTANCE.getDraggedObject(dragEvent);
 
-                        Setup.Companion.eventHandler().showEditDialog(getContext(), item, new DialogListener.OnEditDialogListener() {
+                        Setup.eventHandler().showEditDialog(getContext(), item, new DialogListener.OnEditDialogListener() {
                             @Override
                             public void onRename(String name) {
                                 item.setLabel(name);
@@ -185,7 +185,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        //Setup.Companion.eventHandler().showDeletePackageDialog(getContext(), dragEvent);
+                        //Setup.eventHandler().showDeletePackageDialog(getContext(), dragEvent);
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;
@@ -234,7 +234,7 @@ public class DragOptionView extends CardView {
         if (hideViews != null) {
             isDraggedFromDrawer = true;
 
-            if (Setup.Companion.get().getAppSettings().getSearchBarEnable())
+            if (Setup.get().getAppSettings().getSearchBarEnable())
                 Tool.invisibleViews(Math.round(animSpeed / 1.3f), hideViews);
 
             animate().alpha(1);
@@ -247,7 +247,7 @@ public class DragOptionView extends CardView {
             case DragEvent.ACTION_DRAG_STARTED:
                 dragging = true;
                 animShowView();
-                boolean desktopHideGrid = Setup.Companion.appSettings().isDesktopHideGrid();
+                boolean desktopHideGrid = Setup.appSettings().isDesktopHideGrid();
                 home.getDock().setHideGrid(desktopHideGrid);
                 for (CellContainer cellContainer : home.getDesktop().getPages()) {
                     cellContainer.setHideGrid(desktopHideGrid);
@@ -297,7 +297,7 @@ public class DragOptionView extends CardView {
                 infoIcon.setVisibility(View.GONE);
                 deleteIcon.setVisibility(View.GONE);
 
-                if (Setup.Companion.get().getAppSettings().getSearchBarEnable())
+                if (Setup.get().getAppSettings().getSearchBarEnable())
                     Tool.visibleViews(Math.round(animSpeed / 1.3f), hideViews);
 
                 // the search view might be disabled
