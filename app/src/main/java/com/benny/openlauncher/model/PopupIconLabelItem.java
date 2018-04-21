@@ -15,8 +15,8 @@ import android.support.annotation.Nullable;
 import java.util.List;
 
 public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, PopupIconLabelItem.ViewHolder_PopupIconLabelItem> {
-    private final int iconRes;
-    private final int labelRes;
+    private final int _iconRes;
+    private final int _labelRes;
 
     public static final class ViewHolder_PopupIconLabelItem extends RecyclerView.ViewHolder {
         @NonNull
@@ -41,8 +41,8 @@ public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, P
     }
 
     public PopupIconLabelItem(int labelRes, int iconRes) {
-        this.labelRes = labelRes;
-        this.iconRes = iconRes;
+        this._labelRes = labelRes;
+        this._iconRes = iconRes;
     }
 
     public int getType() {
@@ -58,13 +58,13 @@ public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, P
         if (holder != null) {
             TextView labelView = holder.getLabelView();
             if (labelView != null) {
-                labelView.setText(this.labelRes);
+                labelView.setText(this._labelRes);
             }
         }
         if (holder != null) {
             ImageView iconView = holder.getIconView();
             if (iconView != null) {
-                iconView.setImageResource(this.iconRes);
+                iconView.setImageResource(this._iconRes);
             }
         }
     }

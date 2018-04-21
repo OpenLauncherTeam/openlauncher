@@ -354,7 +354,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
                         appSettings.setAppFirstLaunch(false);
                         Item appDrawerBtnItem = Item.newActionItem(8);
-                        appDrawerBtnItem.x = 2;
+                        appDrawerBtnItem._x = 2;
                         Home.Companion.getDb().saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
                     }
                 }
@@ -551,7 +551,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556, new Intent(this, Home.class), PendingIntent.FLAG_CANCEL_CURRENT);
             AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             if (mgr == null) {
-                throw new TypeCastException("null cannot be cast to non-null type android.app.AlarmManager");
+                throw new TypeCastException("null cannot be cast to non-null _type android.app.AlarmManager");
             }
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + ((long) 100), restartIntentP);
             System.exit(0);
@@ -677,12 +677,12 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     public final void onRemoveItem(@NonNull Item item) {
 
         View coordinateToChildView;
-        switch (item.locationInLauncher) {
+        switch (item._locationInLauncher) {
             case 0:
                 Desktop desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
                 Desktop desktop2 = (Desktop) _$_findCachedViewById(R.id.desktop);
 
-                coordinateToChildView = desktop2.getCurrentPage().coordinateToChildView(new Point(item.x, item.y));
+                coordinateToChildView = desktop2.getCurrentPage().coordinateToChildView(new Point(item._x, item._y));
                 if (coordinateToChildView == null) {
                     Intrinsics.throwNpe();
                 }
@@ -690,7 +690,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                 break;
             case 1:
                 Dock dock = (Dock) _$_findCachedViewById(R.id.dock);
-                coordinateToChildView = ((Dock) _$_findCachedViewById(R.id.dock)).coordinateToChildView(new Point(item.x, item.y));
+                coordinateToChildView = ((Dock) _$_findCachedViewById(R.id.dock)).coordinateToChildView(new Point(item._x, item._y));
                 if (coordinateToChildView == null) {
                     Intrinsics.throwNpe();
                 }
@@ -704,12 +704,12 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
     public final void onInfoItem(@NonNull Item item) {
 
-        if (item.type == Type.APP) {
+        if (item._type == Type.APP) {
             try {
                 String str = "android.settings.APPLICATION_DETAILS_SETTINGS";
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("package:");
-                Intent intent = item.intent;
+                Intent intent = item._intent;
                 if (intent == null) {
                     Intrinsics.throwNpe();
                 }
@@ -857,7 +857,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             }
             layoutParams = desktop.getLayoutParams();
             if (layoutParams == null) {
-                throw new TypeCastException("null cannot be cast to non-null type android.view.ViewGroup.MarginLayoutParams");
+                throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
             }
             ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, (Context) this);
             pagerIndicator = (PagerIndicator) _$_findCachedViewById(R.id.desktopIndicator);
@@ -866,7 +866,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             }
             layoutParams = pagerIndicator.getLayoutParams();
             if (layoutParams == null) {
-                throw new TypeCastException("null cannot be cast to non-null type android.view.ViewGroup.MarginLayoutParams");
+                throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
             }
             ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, (Context) this);
         } else {
@@ -882,7 +882,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                 }
                 layoutParams = pagerIndicator.getLayoutParams();
                 if (layoutParams == null) {
-                    throw new TypeCastException("null cannot be cast to non-null type android.view.ViewGroup.MarginLayoutParams");
+                    throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
                 }
                 ((MarginLayoutParams) layoutParams).bottomMargin = Desktop._bottomInset + Tool.dp2px(4, (Context) this);
                 desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
@@ -891,7 +891,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                 }
                 layoutParams = desktop.getLayoutParams();
                 if (layoutParams == null) {
-                    throw new TypeCastException("null cannot be cast to non-null type android.view.ViewGroup.MarginLayoutParams");
+                    throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
                 }
                 ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, (Context) this);
             }
@@ -973,7 +973,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             }
             LayoutParams layoutParams = _$_findCachedViewById.getLayoutParams();
             if (layoutParams == null) {
-                throw new TypeCastException("null cannot be cast to non-null type android.view.ViewGroup.MarginLayoutParams");
+                throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
             }
             ((MarginLayoutParams) layoutParams).topMargin = Desktop._topInset;
             _$_findCachedViewById = _$_findCachedViewById(R.id.rightDragHandle);
@@ -982,7 +982,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             }
             layoutParams = _$_findCachedViewById.getLayoutParams();
             if (layoutParams == null) {
-                throw new TypeCastException("null cannot be cast to non-null type android.view.ViewGroup.MarginLayoutParams");
+                throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
             }
             Desktop desktop;
             ((MarginLayoutParams) layoutParams).topMargin = Desktop._topInset;
@@ -1062,7 +1062,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         }
         Object obj = pages.get(desktop2.getCurrentItem());
 
-        item.spanX = (i / ((CellContainer) obj).getCellWidth()) + 1;
+        item._spanX = (i / ((CellContainer) obj).getCellWidth()) + 1;
         i = appWidgetInfo.minHeight - 1;
         desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
         if (desktop == null) {
@@ -1079,15 +1079,15 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         }
         obj = pages.get(desktop2.getCurrentItem());
 
-        item.spanY = (i / ((CellContainer) obj).getCellHeight()) + 1;
+        item._spanY = (i / ((CellContainer) obj).getCellHeight()) + 1;
         Desktop desktop3 = (Desktop) _$_findCachedViewById(R.id.desktop);
         if (desktop3 == null) {
             Intrinsics.throwNpe();
         }
-        Point point = desktop3.getCurrentPage().findFreeSpace(item.spanX, item.spanY);
+        Point point = desktop3.getCurrentPage().findFreeSpace(item._spanX, item._spanY);
         if (point != null) {
-            item.x = point.x;
-            item.y = point.y;
+            item._x = point.x;
+            item._y = point.y;
             DataManager db = Companion.getDb();
             desktop2 = (Desktop) _$_findCachedViewById(R.id.desktop);
             if (desktop2 == null) {

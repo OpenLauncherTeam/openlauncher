@@ -53,7 +53,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
         this._home = home;
         removeAllViews();
         for (Item item : dockItems) {
-            if (item.x < columns && item.y == 0) {
+            if (item._x < columns && item._y == 0) {
                 addItemToPage(item, 0);
             }
         }
@@ -208,20 +208,20 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
             Home.Companion.getDb().deleteItem(item, true);
             return false;
         }
-        item.locationInLauncher = 1;
-        addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
+        item._locationInLauncher = 1;
+        addViewToGrid(itemView, item._x, item._y, item._spanX, item._spanY);
         return true;
     }
 
     public boolean addItemToPoint(@NonNull Item item, int x, int y) {
 
-        LayoutParams positionToLayoutPrams = coordinateToLayoutParams(x, y, item.spanX, item.spanY);
+        LayoutParams positionToLayoutPrams = coordinateToLayoutParams(x, y, item._spanX, item._spanY);
         if (positionToLayoutPrams == null) {
             return false;
         }
-        item.locationInLauncher = 1;
-        item.x = positionToLayoutPrams.getX();
-        item.y = positionToLayoutPrams.getY();
+        item._locationInLauncher = 1;
+        item._x = positionToLayoutPrams.getX();
+        item._y = positionToLayoutPrams.getY();
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDockIconSize());
         if (itemView != null) {
             itemView.setLayoutParams(positionToLayoutPrams);
@@ -232,14 +232,14 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
 
     public boolean addItemToCell(@NonNull Item item, int x, int y) {
 
-        item.locationInLauncher = 1;
-        item.x = x;
-        item.y = y;
+        item._locationInLauncher = 1;
+        item._x = x;
+        item._y = y;
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDockIconSize());
         if (itemView == null) {
             return false;
         }
-        addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
+        addViewToGrid(itemView, item._x, item._y, item._spanX, item._spanY);
         return true;
     }
 

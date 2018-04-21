@@ -84,7 +84,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
             int size = pageData.size();
             for (int i = 0; i < size; i++) {
                 Item item = (Item) pageData.get(i);
-                if (item.x == point.x && item.y == point.y && item.spanX == 1 && item.spanY == 1) {
+                if (item._x == point.x && item._y == point.y && item._spanX == 1 && item._spanY == 1) {
                     return (Item) pageData.get(i);
                 }
             }
@@ -98,18 +98,18 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
 
         if (item != null) {
             if (dropItem != null) {
-                Type type = item.type;
+                Type type = item._type;
                 if (type != null) {
                     switch (type) {
                         case APP:
                         case SHORTCUT:
-                            if (Intrinsics.areEqual(dropItem.type, Type.APP) || Intrinsics.areEqual(dropItem.type, Type.SHORTCUT)) {
+                            if (Intrinsics.areEqual(dropItem._type, Type.APP) || Intrinsics.areEqual(dropItem._type, Type.SHORTCUT)) {
                                 parent.removeView(itemView);
                                 Item group = Item.newGroupItem();
                                 group.getGroupItems().add(item);
                                 group.getGroupItems().add(dropItem);
-                                group.x = item.x;
-                                group.y = item.y;
+                                group._x = item._x;
+                                group._y = item._y;
                                 Home.Companion.getDb().saveItem(dropItem, page, itemPosition);
                                 Home.Companion.getDb().saveItem(item, ItemState.Hidden);
                                 Home.Companion.getDb().saveItem(dropItem, ItemState.Hidden);
@@ -132,7 +132,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                                 return true;
                             }
                         case GROUP:
-                            if ((Intrinsics.areEqual(dropItem.type, Type.APP) || Intrinsics.areEqual(dropItem.type, Type.SHORTCUT)) && item.getGroupItems().size() < GroupPopupView.GroupDef._maxItem) {
+                            if ((Intrinsics.areEqual(dropItem._type, Type.APP) || Intrinsics.areEqual(dropItem._type, Type.SHORTCUT)) && item.getGroupItems().size() < GroupPopupView.GroupDef._maxItem) {
                                 parent.removeView(itemView);
                                 item.getGroupItems().add(dropItem);
                                 Home.Companion.getDb().saveItem(dropItem, page, itemPosition);
@@ -219,8 +219,8 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                 public void onItemRearrange(@NonNull Point from, @NonNull Point to) {
                     Item itemFromCoordinate = Desktop._companion.getItemFromCoordinate(from, getCurrentItem());
                     if (itemFromCoordinate != null) {
-                        itemFromCoordinate.x = to.x;
-                        itemFromCoordinate.y = to.y;
+                        itemFromCoordinate._x = to.x;
+                        itemFromCoordinate._y = to.y;
                     }
                 }
             });
@@ -436,7 +436,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                 int size2 = items.size();
                 for (int j = 0; j < size2; j++) {
                     Item item = (Item) items.get(j);
-                    if (item.x + item.spanX <= columns && item.y + item.spanY <= rows) {
+                    if (item._x + item._spanX <= columns && item._y + item._spanY <= rows) {
                         addItemToPage(item, pageCount);
                     }
                 }
@@ -487,8 +487,8 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                     int pos = columns * rows * i + pagePos;
                     if (pos < apps.size()) {
                         Item appItem = (Item) apps.get(pos);
-                        appItem.x = x;
-                        appItem.y = y;
+                        appItem._x = x;
+                        appItem._y = y;
                         addItemToPage(appItem, i);
                     }
                 }
@@ -501,7 +501,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         int previousPage = getCurrentItem();
         SmoothPagerAdapter adapter = getAdapter();
         if (adapter == null) {
-            throw new TypeCastException("null cannot be cast to non-null type com.benny.openlauncher.widget.Desktop.DesktopAdapter");
+            throw new TypeCastException("null cannot be cast to non-null _type com.benny.openlauncher.widget.Desktop.DesktopAdapter");
         }
         ((DesktopAdapter) adapter).addPageRight();
         setCurrentItem(previousPage + 1);
@@ -522,7 +522,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         int previousPage = getCurrentItem();
         SmoothPagerAdapter adapter = getAdapter();
         if (adapter == null) {
-            throw new TypeCastException("null cannot be cast to non-null type com.benny.openlauncher.widget.Desktop.DesktopAdapter");
+            throw new TypeCastException("null cannot be cast to non-null _type com.benny.openlauncher.widget.Desktop.DesktopAdapter");
         }
         ((DesktopAdapter) adapter).addPageLeft();
         setCurrentItem(previousPage + 1, false);
@@ -545,7 +545,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
             int previousPage = getCurrentItem();
             SmoothPagerAdapter adapter = getAdapter();
             if (adapter == null) {
-                throw new TypeCastException("null cannot be cast to non-null type com.benny.openlauncher.widget.Desktop.DesktopAdapter");
+                throw new TypeCastException("null cannot be cast to non-null _type com.benny.openlauncher.widget.Desktop.DesktopAdapter");
             }
             ((DesktopAdapter) adapter).removePage(getCurrentItem(), true);
             for (CellContainer v : this._pages) {
@@ -559,7 +559,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                 addPageRight(false);
                 adapter = getAdapter();
                 if (adapter == null) {
-                    throw new TypeCastException("null cannot be cast to non-null type com.benny.openlauncher.widget.Desktop.DesktopAdapter");
+                    throw new TypeCastException("null cannot be cast to non-null _type com.benny.openlauncher.widget.Desktop.DesktopAdapter");
                 }
                 ((DesktopAdapter) adapter).exitDesktopEditMode();
             } else {
@@ -674,19 +674,19 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
             Home.Companion.getDb().deleteItem(item, true);
             return false;
         }
-        item.locationInLauncher = 0;
-        ((CellContainer) this._pages.get(page)).addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
+        item._locationInLauncher = 0;
+        ((CellContainer) this._pages.get(page)).addViewToGrid(itemView, item._x, item._y, item._spanX, item._spanY);
         return true;
     }
 
     public boolean addItemToPoint(@NonNull Item item, int x, int y) {
-        CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().coordinateToLayoutParams(x, y, item.spanX, item.spanY);
+        CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().coordinateToLayoutParams(x, y, item._spanX, item._spanY);
         if (positionToLayoutPrams == null) {
             return false;
         }
-        item.locationInLauncher = 0;
-        item.x = positionToLayoutPrams.getX();
-        item.y = positionToLayoutPrams.getY();
+        item._locationInLauncher = 0;
+        item._x = positionToLayoutPrams.getX();
+        item._y = positionToLayoutPrams.getY();
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDesktopIconSize());
         if (itemView != null) {
             itemView.setLayoutParams(positionToLayoutPrams);
@@ -697,14 +697,14 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
 
     public boolean addItemToCell(@NonNull Item item, int x, int y) {
 
-        item.locationInLauncher = 0;
-        item.x = x;
-        item.y = y;
+        item._locationInLauncher = 0;
+        item._x = x;
+        item._y = y;
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDesktopIconSize());
         if (itemView == null) {
             return false;
         }
-        getCurrentPage().addViewToGrid(itemView, item.x, item.y, item.spanX, item.spanY);
+        getCurrentPage().addViewToGrid(itemView, item._x, item._y, item._spanX, item._spanY);
         return true;
     }
 

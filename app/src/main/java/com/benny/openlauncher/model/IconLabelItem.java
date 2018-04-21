@@ -23,35 +23,35 @@ import java.util.List;
 public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> implements FastItem.LabelItem<IconLabelItem, IconLabelItem.ViewHolder>, FastItem.DesktopOptionsItem<IconLabelItem, IconLabelItem.ViewHolder> {
 
     // Data
-    public BaseIconProvider iconProvider = null;
-    public View.OnLongClickListener onLongClickListener;
-    protected String label = null;
+    public BaseIconProvider _iconProvider = null;
+    public View.OnLongClickListener _onLongClickListener;
+    protected String _label = null;
     // Others
-    protected View.OnClickListener listener;
-    protected View.OnTouchListener onOnTouchListener;
+    protected View.OnClickListener _listener;
+    protected View.OnTouchListener _onOnTouchListener;
 
-    private int forceSize = -1;
-    private int iconGravity;
-    private int textColor = Color.DKGRAY;
-    private int gravity = android.view.Gravity.CENTER_VERTICAL;
-    private float drawablePadding;
-    private Typeface typeface;
-    private boolean matchParent = true;
-    private int width = -1;
-    private boolean bold = false;
-    private int textGravity = Gravity.CENTER_VERTICAL;
-    private int maxTextLines = 1;
-    private boolean dontSetOnLongClickListener;
-    private boolean hideLabel = false;
+    private int _forceSize = -1;
+    private int _iconGravity;
+    private int _textColor = Color.DKGRAY;
+    private int _gravity = android.view.Gravity.CENTER_VERTICAL;
+    private float _drawablePadding;
+    private Typeface _typeface;
+    private boolean _matchParent = true;
+    private int _width = -1;
+    private boolean _bold = false;
+    private int _textGravity = Gravity.CENTER_VERTICAL;
+    private int _maxTextLines = 1;
+    private boolean _dontSetOnLongClickListener;
+    private boolean _hideLabel = false;
 
     public IconLabelItem(Item item) {
-        this.iconProvider = item != null ? item.getIconProvider() : null;
-        this.label = item != null ? item.getLabel() : null;
+        this._iconProvider = item != null ? item.getIconProvider() : null;
+        this._label = item != null ? item.getLabel() : null;
     }
 
     public IconLabelItem(Context context, int icon, int label) {
-        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
-        this.label = context.getString(label);
+        this._iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this._label = context.getString(label);
     }
 
     public IconLabelItem(Context context, int label) {
@@ -60,103 +60,103 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     public IconLabelItem(Context context, int icon, String label, int forceSize) {
         this(null);
-        this.label = label;
-        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
-        this.forceSize = forceSize;
+        this._label = label;
+        this._iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this._forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, int icon, int label, int forceSize) {
         this(null);
-        this.label = context.getString(label);
-        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
-        this.forceSize = forceSize;
+        this._label = context.getString(label);
+        this._iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this._forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, BaseIconProvider iconProvider, String label, int forceSize) {
         this(null);
-        this.label = label;
-        this.iconProvider = iconProvider;
-        this.forceSize = forceSize;
+        this._label = label;
+        this._iconProvider = iconProvider;
+        this._forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, Drawable icon, String label, int forceSize) {
         this(null);
-        this.label = label;
-        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
-        this.forceSize = forceSize;
+        this._label = label;
+        this._iconProvider = Setup.imageLoader().createIconProvider(icon);
+        this._forceSize = forceSize;
     }
 
     public IconLabelItem withIconGravity(int iconGravity) {
-        this.iconGravity = iconGravity;
+        this._iconGravity = iconGravity;
         return this;
     }
 
     public IconLabelItem withDrawablePadding(Context context, int drawablePadding) {
-        this.drawablePadding = Tool.dp2px(drawablePadding, context);
+        this._drawablePadding = Tool.dp2px(drawablePadding, context);
         return this;
     }
 
 
     public IconLabelItem withTextColor(int textColor) {
-        this.textColor = textColor;
+        this._textColor = textColor;
         return this;
     }
 
     public IconLabelItem withBold(boolean bold) {
-        this.bold = bold;
+        this._bold = bold;
         return this;
     }
 
     public IconLabelItem withTypeface(Typeface typeface) {
-        this.typeface = typeface;
+        this._typeface = typeface;
         return this;
     }
 
     public IconLabelItem withGravity(int gravity) {
-        this.gravity = gravity;
+        this._gravity = gravity;
         return this;
     }
 
     public IconLabelItem withTextGravity(int textGravity) {
-        this.textGravity = textGravity;
+        this._textGravity = textGravity;
         return this;
     }
 
     public IconLabelItem withMatchParent(boolean matchParent) {
-        this.matchParent = matchParent;
+        this._matchParent = matchParent;
         return this;
     }
 
     public IconLabelItem withWidth(int width) {
-        this.width = width;
+        this._width = width;
         return this;
     }
 
     public IconLabelItem withOnClickListener(@Nullable View.OnClickListener listener) {
-        this.listener = listener;
+        this._listener = listener;
         return this;
     }
 
     public IconLabelItem withMaxTextLines(int maxTextLines) {
-        this.maxTextLines = maxTextLines;
+        this._maxTextLines = maxTextLines;
         return this;
     }
 
 
     public IconLabelItem withOnLongClickListener(@Nullable View.OnLongClickListener onLongClickListener) {
-        this.onLongClickListener = onLongClickListener;
+        this._onLongClickListener = onLongClickListener;
         return this;
     }
 
 
     @Override
     public void setIcon(int resId) {
-        this.iconProvider = Setup.imageLoader().createIconProvider(resId);
+        this._iconProvider = Setup.imageLoader().createIconProvider(resId);
     }
 
     @Override
     public String getLabel() {
-        return label;
+        return _label;
     }
 
     @Override
@@ -176,45 +176,45 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     @Override
     public void bindView(IconLabelItem.ViewHolder holder, List payloads) {
-        if (matchParent)
+        if (_matchParent)
             holder.itemView.getLayoutParams().width = RecyclerView.LayoutParams.MATCH_PARENT;
-        if (width != -1)
-            holder.itemView.getLayoutParams().width = width;
+        if (_width != -1)
+            holder.itemView.getLayoutParams().width = _width;
         holder.textView.setMaxLines(1);
         if (getLabel() != null)
-            holder.textView.setText(maxTextLines != 0 ? getLabel() : "");
-        holder.textView.setGravity(gravity);
-        holder.textView.setGravity(textGravity);
-        holder.textView.setCompoundDrawablePadding((int) drawablePadding);
+            holder.textView.setText(_maxTextLines != 0 ? getLabel() : "");
+        holder.textView.setGravity(_gravity);
+        holder.textView.setGravity(_textGravity);
+        holder.textView.setCompoundDrawablePadding((int) _drawablePadding);
 
-        if (hideLabel) {
+        if (_hideLabel) {
             holder.textView.setText(null);
-            iconProvider.loadIconIntoTextView(holder.textView, forceSize, Gravity.TOP);
+            _iconProvider.loadIconIntoTextView(holder.textView, _forceSize, Gravity.TOP);
         } else {
-            iconProvider.loadIconIntoTextView(holder.textView, forceSize, iconGravity);
+            _iconProvider.loadIconIntoTextView(holder.textView, _forceSize, _iconGravity);
         }
 
-        holder.textView.setTypeface(typeface);
-        if (bold)
+        holder.textView.setTypeface(_typeface);
+        if (_bold)
             holder.textView.setTypeface(Typeface.DEFAULT_BOLD);
 
         //Setup.logger().log(this, Log.INFO, null, "IconLabelItem - forceSize: %d", forceSize);
 
-        holder.textView.setTextColor(textColor);
-        if (listener != null)
-            holder.itemView.setOnClickListener(listener);
-        if (onLongClickListener != null && !dontSetOnLongClickListener)
-            holder.itemView.setOnLongClickListener(onLongClickListener);
-        if (onOnTouchListener != null)
-            holder.itemView.setOnTouchListener(onOnTouchListener);
+        holder.textView.setTextColor(_textColor);
+        if (_listener != null)
+            holder.itemView.setOnClickListener(_listener);
+        if (_onLongClickListener != null && !_dontSetOnLongClickListener)
+            holder.itemView.setOnLongClickListener(_onLongClickListener);
+        if (_onOnTouchListener != null)
+            holder.itemView.setOnTouchListener(_onOnTouchListener);
         super.bindView(holder, payloads);
     }
 
     @Override
     public void unbindView(@NonNull ViewHolder holder) {
         super.unbindView(holder);
-        if (iconProvider != null) {
-            iconProvider.cancelLoad(holder.textView);
+        if (_iconProvider != null) {
+            _iconProvider.cancelLoad(holder.textView);
         }
         holder.textView.setText("");
         holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);

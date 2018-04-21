@@ -124,7 +124,7 @@ class HpDragNDrop {
 
         fun showItemPopup() {
             val itemList = arrayListOf<PopupIconLabelItem>()
-            when (dragNDropView.dragItem?.type) {
+            when (dragNDropView.dragItem?._type) {
                 Item.Type.APP, Item.Type.SHORTCUT, Item.Type.GROUP -> {
                     if (dragNDropView.dragAction == DragAction.Action.APP_DRAWER) {
                         itemList.add(uninstallItem)
@@ -202,7 +202,7 @@ class HpDragNDrop {
                     Home.db.saveItem(item, _home.getDesktop().currentItem, Definitions.ItemPosition.Desktop)
                 } else {
                     val pos = Point()
-                    _home.getDesktop().currentPage.touchPosToCoordinate(pos, x, y, item.spanX, item.spanY, false)
+                    _home.getDesktop().currentPage.touchPosToCoordinate(pos, x, y, item._spanX, item._spanY, false)
                     val itemView = _home.getDesktop().currentPage.coordinateToChildView(pos)
                     if (itemView != null && Desktop.handleOnDropOver(_home, item, itemView.tag as Item, itemView, _home.getDesktop().currentPage, _home.getDesktop().currentItem, Definitions.ItemPosition.Desktop, _home.getDesktop())) {
                         _home.getDesktop().consumeRevert()
@@ -259,7 +259,7 @@ class HpDragNDrop {
                     Home.db.saveItem(item, 0, Definitions.ItemPosition.Dock)
                 } else {
                     val pos = Point()
-                    _home.getDock().touchPosToCoordinate(pos, x, y, item.spanX, item.spanY, false)
+                    _home.getDock().touchPosToCoordinate(pos, x, y, item._spanX, item._spanY, false)
                     val itemView = _home.getDock().coordinateToChildView(pos)
                     if (itemView != null) {
                         if (Desktop.handleOnDropOver(_home, item, itemView.tag as Item, itemView, _home.getDock(), 0, Definitions.ItemPosition.Dock, _home.getDock())) {

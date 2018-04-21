@@ -61,7 +61,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
             Home.Companion.getDb().saveItem(item, Home.Companion.getLauncher().getDesktop().getCurrentItem(), Definitions.ItemPosition.Desktop);
             boolean added = Home.Companion.getLauncher().getDesktop().addItemToPage(item, Home.Companion.getLauncher().getDesktop().getCurrentItem());
 
-            Setup.logger().log(this, Log.INFO, null, "Shortcut installed - %s => Intent: %s (Item type: %s; x = %d, y = %d, added = %b)", name, newIntent, item.getType(), item.getX(), item.getY(), added);
+            Setup.logger().log(this, Log.INFO, null, "Shortcut installed - %s => Intent: %s (Item _type: %s; x = %d, y = %d, added = %b)", name, newIntent, item.getType(), item.getX(), item.getY(), added);
         }
     }
 }

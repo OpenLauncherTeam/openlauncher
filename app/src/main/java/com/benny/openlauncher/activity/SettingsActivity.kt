@@ -140,7 +140,7 @@ class SettingsActivity : ThemeActivity() {
 
             val settings = AppSettings.get()
 
-            val desktopSummary = String.format("%s: %d x %d", getString(R.string.pref_title__size), settings.desktopColumnCount, settings.desktopRowCount)
+            val desktopSummary = String.format("%s: %d _x %d", getString(R.string.pref_title__size), settings.desktopColumnCount, settings.desktopRowCount)
             findPreference(getString(R.string.pref_key__cat_desktop)).summary = desktopSummary
 
             val dockSummary = String.format("%s: %d", getString(R.string.pref_title__size), settings.dockSize)

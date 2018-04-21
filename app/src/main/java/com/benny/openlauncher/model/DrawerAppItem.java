@@ -16,12 +16,12 @@ import com.mikepenz.fastadapter.items.AbstractItem;
 import java.util.List;
 
 public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.ViewHolder> implements FastItem.AppItem<DrawerAppItem, DrawerAppItem.ViewHolder> {
-    private App app;
-    private AppItemView.LongPressCallBack onLongClickCallback;
+    private App _app;
+    private AppItemView.LongPressCallBack _onLongClickCallback;
 
     public DrawerAppItem(App app) {
-        this.app = app;
-        onLongClickCallback = new AppItemView.LongPressCallBack() {
+        this._app = app;
+        _onLongClickCallback = new AppItemView.LongPressCallBack() {
             @Override
             public boolean readyForDrag(View view) {
                 return Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.INSTANCE.getSHOW_ALL_APPS();
@@ -52,14 +52,14 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
 
     @Override
     public App getApp() {
-        return app;
+        return _app;
     }
 
     @Override
     public void bindView(DrawerAppItem.ViewHolder holder, List payloads) {
         holder.builder
-                .setAppItem(app)
-                .withOnLongClick(app, DragAction.Action.APP_DRAWER, onLongClickCallback)
+                .setAppItem(_app)
+                .withOnLongClick(_app, DragAction.Action.APP_DRAWER, _onLongClickCallback)
                 .withOnTouchGetPosition(null, null);
         holder.appItemView.load();
         super.bindView(holder, payloads);
