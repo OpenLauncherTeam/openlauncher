@@ -50,22 +50,6 @@ public class App {
         return iconProvider;
     }
 
-
-    public void setLabel(@NotNull String s) {
-
-    }
-
-
-    public void setPackageName(@NotNull String s) {
-
-    }
-
-
-    public void setClassName(@NotNull String s) {
-
-    }
-
-
     public void setIconProvider(@NotNull BaseIconProvider baseIconProvider) {
 
     }

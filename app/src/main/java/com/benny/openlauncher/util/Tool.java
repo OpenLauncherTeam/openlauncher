@@ -151,20 +151,6 @@ public class Tool {
         }, (long) (animTime * runActionAtPercent));
     }
 
-    public static void createScaleInScaleOutAnim(final View view, final Runnable endAction) {
-        view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(80).setInterpolator(new AccelerateDecelerateInterpolator());
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                view.animate().scaleX(1f).scaleY(1f).setDuration(80).setInterpolator(new AccelerateDecelerateInterpolator());
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        endAction.run();
-                    }
-                }, 80);
-            }
-        }, 80);
-    }
-
     public static void toast(Context context, String str) {
         Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
     }
@@ -189,10 +175,7 @@ public class Tool {
         }
     }
 
-    public static float dp2px(float dp, Context context) {
-        Resources resources = context.getResources();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
-    }
+
 
     public static int dp2px(int dp, Context context) {
         Resources resources = context.getResources();
@@ -256,14 +239,6 @@ public class Tool {
         return bitmap;
     }
 
-    public static Bitmap loadBitmapFromView(View v) {
-        Bitmap b = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(b);
-        v.layout(0, 0, v.getLayoutParams().width, v.getLayoutParams().height);
-        v.draw(c);
-        return b;
-    }
-
     public static Point convertPoint(Point fromPoint, View fromView, View toView) {
         int[] fromCoord = new int[2];
         int[] toCoord = new int[2];
@@ -321,13 +296,6 @@ public class Tool {
                 return new Intent();
             }
         }
-    }
-
-    public static IconProvider getIcon(Context context, Item item) {
-        if (item == null) {
-            return null;
-        }
-        return item.getIconProvider();
     }
 
     public static Drawable getIcon(Context context, String filename) {
@@ -419,13 +387,6 @@ public class Tool {
         } catch (Exception e) {
             Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public static Intent getStartAppIntent(App app) {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setClassName(app.getPackageName(), app.getClassName());
-        return intent;
     }
 
     public static <A extends App> List<A> getRemovedApps(List<A> oldApps, List<A> newApps) {

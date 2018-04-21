@@ -86,13 +86,6 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         this.forceSize = forceSize;
     }
 
-    public IconLabelItem(Context context, Drawable icon, int label, int forceSize) {
-        this(null);
-        this.label = context.getString(label);
-        this.iconProvider = Setup.imageLoader().createIconProvider(icon);
-        this.forceSize = forceSize;
-    }
-
     public IconLabelItem withIconGravity(int iconGravity) {
         this.iconGravity = iconGravity;
         return this;
@@ -103,10 +96,6 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
-    public IconLabelItem withDrawablePadding(float drawablePadding) {
-        this.drawablePadding = drawablePadding;
-        return this;
-    }
 
     public IconLabelItem withTextColor(int textColor) {
         this.textColor = textColor;
@@ -148,38 +137,21 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
-    public IconLabelItem withOnTouchListener(@Nullable View.OnTouchListener listener) {
-        this.onOnTouchListener = listener;
-        return this;
-    }
-
     public IconLabelItem withMaxTextLines(int maxTextLines) {
         this.maxTextLines = maxTextLines;
         return this;
     }
 
-    public void setHideLabel(boolean hideLabel) {
-        this.hideLabel = hideLabel;
-    }
 
     public IconLabelItem withOnLongClickListener(@Nullable View.OnLongClickListener onLongClickListener) {
         this.onLongClickListener = onLongClickListener;
         return this;
     }
 
-    public IconLabelItem withOnLongClickListener(boolean dontSet, @Nullable View.OnLongClickListener onLongClickListener) {
-        this.dontSetOnLongClickListener = dontSet;
-        this.onLongClickListener = onLongClickListener;
-        return this;
-    }
 
     @Override
     public void setIcon(int resId) {
         this.iconProvider = Setup.imageLoader().createIconProvider(resId);
-    }
-
-    public void setIconGravity(int gravity) {
-        this.iconGravity = gravity;
     }
 
     @Override

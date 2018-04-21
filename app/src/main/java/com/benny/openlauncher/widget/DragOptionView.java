@@ -54,10 +54,6 @@ public class DragOptionView extends CardView {
         hideViews = v;
     }
 
-    public void resetAutoHideView() {
-        hideViews = null;
-    }
-
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {

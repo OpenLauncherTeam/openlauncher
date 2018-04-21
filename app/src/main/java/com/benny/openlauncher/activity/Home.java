@@ -142,18 +142,6 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             Home._resources = v;
         }
 
-        public final int getREQUEST_PICK_APPWIDGET() {
-            return Home.REQUEST_PICK_APPWIDGET;
-        }
-
-        public final int getREQUEST_CREATE_APPWIDGET() {
-            return Home.REQUEST_CREATE_APPWIDGET;
-        }
-
-        public final int getREQUEST_PERMISSION_STORAGE() {
-            return Home.REQUEST_PERMISSION_STORAGE;
-        }
-
         @NotNull
         public final DataManager getDb() {
             DataManager dataManager = Home.db;
@@ -228,11 +216,6 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         }
     }
 
-    public void _$_clearFindViewByIdCache() {
-        if (this._$_findViewCache != null) {
-            this._$_findViewCache.clear();
-        }
-    }
 
     public View _$_findCachedViewById(int i) {
         if (this._$_findViewCache == null) {
@@ -255,11 +238,6 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     @JvmOverloads
     public final void openAppDrawer(@Nullable View view) {
         openAppDrawer$default(this, view, 0, 0, 6, null);
-    }
-
-    @JvmOverloads
-    public final void openAppDrawer(@Nullable View view, int i) {
-        openAppDrawer$default(this, view, i, 0, 4, null);
     }
 
     @JvmOverloads
@@ -1037,7 +1015,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         int appWidgetId = Companion.getAppWidgetHost().allocateAppWidgetId();
         Intent pickIntent = new Intent("android.appwidget.action.APPWIDGET_PICK");
         pickIntent.putExtra("appWidgetId", appWidgetId);
-        startActivityForResult(pickIntent, Companion.getREQUEST_PICK_APPWIDGET());
+        startActivityForResult(pickIntent,REQUEST_PICK_APPWIDGET);
     }
 
     private final void configureWidget(Intent data) {
@@ -1054,7 +1032,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             Intent intent = new Intent("android.appwidget.action.APPWIDGET_CONFIGURE");
             intent.setComponent(appWidgetInfo.configure);
             intent.putExtra("appWidgetId", appWidgetId);
-            startActivityForResult(intent, Companion.getREQUEST_CREATE_APPWIDGET());
+            startActivityForResult(intent, REQUEST_CREATE_APPWIDGET);
         } else {
             createWidget(data);
         }
@@ -1156,9 +1134,9 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == -1) {
-            if (requestCode == Companion.getREQUEST_PICK_APPWIDGET()) {
+            if (requestCode == REQUEST_PICK_APPWIDGET) {
                 configureWidget(data);
-            } else if (requestCode == Companion.getREQUEST_CREATE_APPWIDGET()) {
+            } else if (requestCode == REQUEST_CREATE_APPWIDGET) {
                 createWidget(data);
             }
         } else if (resultCode == 0 && data != null) {

@@ -126,83 +126,28 @@ public class CellContainer extends ViewGroup {
         UP, LEFT, RIGHT, DOWN
     }
 
-    public void _$_clearFindViewByIdCache() {
-        if (this._$_findViewCache != null) {
-            this._$_findViewCache.clear();
-        }
-    }
-
-    public View _$_findCachedViewById(int i) {
-        if (this._$_findViewCache == null) {
-            this._$_findViewCache = new HashMap();
-        }
-        View view = (View) this._$_findViewCache.get(Integer.valueOf(i));
-        if (view != null) {
-            return view;
-        }
-        view = findViewById(i);
-        this._$_findViewCache.put(Integer.valueOf(i), view);
-        return view;
-    }
-
-
-    @NotNull
-    public final Rect getTempRect() {
-        return this.tempRect;
-    }
-
     public final int getCellWidth() {
         return this.cellWidth;
-    }
-
-    public final void setCellWidth(int v) {
-        this.cellWidth = v;
     }
 
     public final int getCellHeight() {
         return this.cellHeight;
     }
 
-    public final void setCellHeight(int v) {
-        this.cellHeight = v;
-    }
-
     public final int getCellSpanV() {
         return this.cellSpanV;
-    }
-
-    public final void setCellSpanV(int v) {
-        this.cellSpanV = v;
     }
 
     public final int getCellSpanH() {
         return this.cellSpanH;
     }
 
-    public final void setCellSpanH(int v) {
-        this.cellSpanH = v;
-    }
-
-    public final boolean getBlockTouch() {
-        return this.blockTouch;
-    }
-
     public final void setBlockTouch(boolean v) {
         this.blockTouch = v;
     }
 
-    @Nullable
-    public final SimpleFingerGestures getGestures() {
-        return this.gestures;
-    }
-
     public final void setGestures(@Nullable SimpleFingerGestures v) {
         this.gestures = v;
-    }
-
-    @Nullable
-    public final OnItemRearrangeListener getOnItemRearrangeListener() {
-        return this.onItemRearrangeListener;
     }
 
     public final void setOnItemRearrangeListener(@Nullable OnItemRearrangeListener v) {

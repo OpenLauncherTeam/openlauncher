@@ -283,10 +283,6 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             view.setIconSize(Tool.dp2px(iconSize, view.getContext()));
         }
 
-        public static OnTouchListener getOnTouchGetPosition(Item item, ItemGestureListener.ItemGestureCallback itemGestureCallback) {
-            return Tool.getItemOnTouchListener(item, itemGestureCallback);
-        }
-
         public static OnLongClickListener getLongClickDragAppListener(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
             return new OnLongClickListener() {
                 @Override

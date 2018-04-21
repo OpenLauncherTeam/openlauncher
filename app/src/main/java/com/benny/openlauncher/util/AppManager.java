@@ -82,11 +82,6 @@ public class AppManager {
         return nonFilteredApps;
     }
 
-    public void clearListener() {
-        updateListeners.clear();
-        deleteListeners.clear();
-    }
-
     public void init() {
         getAllApps();
     }
@@ -139,7 +134,7 @@ public class AppManager {
                                 d.dismiss();
                             } else {
                                 Tool.toast(context, (activity.getString(R.string.dialog__icon_pack_info_toast)));
-                                ActivityCompat.requestPermissions(Home.Companion.getLauncher(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.Companion.getREQUEST_PERMISSION_STORAGE());
+                                ActivityCompat.requestPermissions(Home.Companion.getLauncher(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
                             }
                         }
                     }));
@@ -154,10 +149,6 @@ public class AppManager {
     // -----------------------
     // AppLoader interface
     // -----------------------
-
-    public void loadItems() {
-        getAllApps();
-    }
 
     public List<App> getAllApps(Context context, boolean includeHidden) {
         return includeHidden ? getNonFilteredApps() : getApps();
@@ -187,16 +178,8 @@ public class AppManager {
         updateListeners.add(updateListener);
     }
 
-    public void removeUpdateListener(AppUpdateListener updateListener) {
-        updateListeners.remove(updateListener);
-    }
-
     public void addDeleteListener(AppDeleteListener deleteListener) {
         deleteListeners.add(deleteListener);
-    }
-
-    public void removeDeleteListener(AppDeleteListener deleteListener) {
-        deleteListeners.remove(deleteListener);
     }
 
     public void notifyUpdateListeners(@NotNull List<App> apps) {

@@ -139,26 +139,6 @@ public final class DragNDropLayout extends FrameLayout {
 
     @SuppressLint({"ResourceType"})
     public final class OverlayView extends View {
-        private HashMap _$_findViewCache;
-
-        public void _$_clearFindViewByIdCache() {
-            if (this._$_findViewCache != null) {
-                this._$_findViewCache.clear();
-            }
-        }
-
-        public View _$_findCachedViewById(int i) {
-            if (this._$_findViewCache == null) {
-                this._$_findViewCache = new HashMap();
-            }
-            View view = (View) this._$_findViewCache.get(Integer.valueOf(i));
-            if (view != null) {
-                return view;
-            }
-            view = findViewById(i);
-            this._$_findViewCache.put(Integer.valueOf(i), view);
-            return view;
-        }
 
         public OverlayView() {
             super(DragNDropLayout.this.getContext());
@@ -205,25 +185,6 @@ public final class DragNDropLayout extends FrameLayout {
         }
     }
 
-    public void _$_clearFindViewByIdCache() {
-        if (this._$_findViewCache != null) {
-            this._$_findViewCache.clear();
-        }
-    }
-
-    public View _$_findCachedViewById(int i) {
-        if (this._$_findViewCache == null) {
-            this._$_findViewCache = new HashMap();
-        }
-        View view = (View) this._$_findViewCache.get(Integer.valueOf(i));
-        if (view != null) {
-            return view;
-        }
-        view = findViewById(i);
-        this._$_findViewCache.put(Integer.valueOf(i), view);
-        return view;
-    }
-
     public DragNDropLayout(@NotNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.DRAG_THRESHOLD = 20.0f;
@@ -253,16 +214,9 @@ public final class DragNDropLayout extends FrameLayout {
         setWillNotDraw(false);
     }
 
-    private final void setDragging(boolean v) {
-        this.dragging = v;
-    }
 
     public final boolean getDragging() {
         return this.dragging;
-    }
-
-    private final void setDragLocation(PointF v) {
-        this.dragLocation = v;
     }
 
     @NotNull
@@ -270,34 +224,15 @@ public final class DragNDropLayout extends FrameLayout {
         return this.dragLocation;
     }
 
-    private final void setDragAction(Action v) {
-        this.dragAction = v;
-    }
 
     @Nullable
     public final Action getDragAction() {
         return this.dragAction;
     }
 
-    private final void setDragExceedThreshold(boolean v) {
-        this.dragExceedThreshold = v;
-    }
 
     public final boolean getDragExceedThreshold() {
         return this.dragExceedThreshold;
-    }
-
-    private final void setDragView(View v) {
-        this.dragView = v;
-    }
-
-    @Nullable
-    public final View getDragView() {
-        return this.dragView;
-    }
-
-    private final void setDragItem(Item v) {
-        this.dragItem = v;
     }
 
     @Nullable
@@ -431,11 +366,6 @@ public final class DragNDropLayout extends FrameLayout {
         Map map = this.registeredDropTargetEntries;
         Pair pair = new Pair(targetListener, new DragFlag());
         map.put(pair.getFirst(), pair.getSecond());
-    }
-
-    public final void unregisterDropTarget(@NotNull DropTargetListener targetListener) {
-        Intrinsics.checkParameterIsNotNull(targetListener, "targetListener");
-        this.registeredDropTargetEntries.remove(targetListener);
     }
 
     public boolean onInterceptTouchEvent(@Nullable MotionEvent event) {

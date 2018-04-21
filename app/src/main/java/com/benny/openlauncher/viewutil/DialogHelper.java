@@ -44,15 +44,6 @@ public class DialogHelper {
                 }).show();
     }
 
-    public static void alertDialog(Context context, String title, String msg) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(title)
-                .content(msg)
-                .negativeText(R.string.cancel)
-                .positiveText(R.string.ok)
-                .show();
-    }
-
     public static void alertDialog(Context context, String title, String msg, MaterialDialog.SingleButtonCallback onPositive) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(title)
@@ -112,36 +103,6 @@ public class DialogHelper {
         });
         dialog.show();
     }
-
-    public static void selectActionDialog(final Context context, String title, LauncherAction.ActionItem selected, final OnActionSelectedListener onActionSelectedListener) {
-        new MaterialDialog.Builder(context)
-                .title(title)
-                .negativeText(R.string.cancel)
-                .items(R.array.entries__gestures)
-                .itemsCallbackSingleChoice(LauncherAction.getActionItemIndex(selected) + 1, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                        LauncherAction.ActionItem item = null;
-                        if (which > 0) {
-                            item = LauncherAction.getActionItem(which - 1);
-                            if (item != null && item.action == LauncherAction.Action.LaunchApp) {
-                                final LauncherAction.ActionItem finalItem = item;
-                                selectAppDialog(context, new OnAppSelectedListener() {
-                                    @Override
-                                    public void onAppSelected(App app) {
-                                        finalItem.extraData = Tool.getStartAppIntent(app); // TODO
-                                        onActionSelectedListener.onActionSelected(finalItem);
-                                    }
-                                });
-                            } else if (onActionSelectedListener != null) {
-                                onActionSelectedListener.onActionSelected(item);
-                            }
-                        }
-                        return true;
-                    }
-                }).show();
-    }
-
 
     public static void setWallpaperDialog(final Context context) {
         new MaterialDialog.Builder(context)
@@ -221,10 +182,6 @@ public class DialogHelper {
 
     public interface OnAppSelectedListener {
         void onAppSelected(App app);
-    }
-
-    public interface OnActionSelectedListener {
-        void onActionSelected(LauncherAction.ActionItem item);
     }
 
     public interface OnItemEditListener {

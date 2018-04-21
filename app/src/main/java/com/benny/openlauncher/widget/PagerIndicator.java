@@ -38,7 +38,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     private float dotSize;
     private boolean hasTriggedAlphaShow;
     private int mCurrentPagerState;
-    private int mode = Mode.INSTANCE.getNORMAL();
+    private int mode = Mode.NORMAL;
     private float myX;
     private SmoothViewPager pager;
     private int prePageCount;
@@ -63,47 +63,16 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
         }
     }
 
-    public static final class Mode {
-        public static final int ARROW = 1;
-        public static final Mode INSTANCE = new Mode();
+    public static class Mode {
         public static final int NORMAL = 0;
-
-        private Mode() {
-        }
-
-        public final int getNORMAL() {
-            return NORMAL;
-        }
-
-        public final int getARROW() {
-            return ARROW;
-        }
-    }
-
-    public void clearFindViewByIdCache() {
-        if (this._findViewCache != null) {
-            this._findViewCache.clear();
-        }
-    }
-
-    public View findCachedViewById(int i) {
-        if (this._findViewCache == null) {
-            this._findViewCache = new HashMap();
-        }
-        View view = (View) this._findViewCache.get(Integer.valueOf(i));
-        if (view != null) {
-            return view;
-        }
-        view = findViewById(i);
-        _findViewCache.put(Integer.valueOf(i), view);
-        return view;
+        public static final int ARROW = 1;
     }
 
     protected void onDraw(Canvas canvas) {
         dotSize = getHeight() - pad * 1.25f;
 
         switch (mode) {
-            case NORMAL: {
+            case Mode.NORMAL: {
                 if (pager != null) {
 
                     dotPaint.setAlpha(255);
@@ -239,24 +208,6 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
         invalidate();
     }
 
-    public final void setOutlinePaint() {
-        Paint paint = this.dotPaint;
-        if (paint == null) {
-            Intrinsics.throwNpe();
-        }
-        paint.setStyle(Style.STROKE);
-        invalidate();
-    }
-
-    public final void setFillPaint() {
-        this.dotPaint.setStyle(Style.FILL);
-        invalidate();
-    }
-
-    public final void setColor(int c) {
-        this.dotPaint.setColor(c);
-        invalidate();
-    }
 
     public final void setViewPager(@Nullable SmoothViewPager pager) {
         if (pager == null) {
@@ -316,14 +267,6 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
 
     public final void hideDelay() {
         postDelayed(this.delayShow, 500);
-    }
-
-    public final int getMCurrentPagerState() {
-        return this.mCurrentPagerState;
-    }
-
-    public final void setMCurrentPagerState(int v) {
-        this.mCurrentPagerState = v;
     }
 
     public void onPageScrollStateChanged(int state) {

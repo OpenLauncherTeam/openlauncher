@@ -290,10 +290,6 @@ public class Item implements LabelProvider, Parcelable {
         return locationInLauncher;
     }
 
-    public void setLocationInLauncher(int locationInLauncher) {
-        this.locationInLauncher = locationInLauncher;
-    }
-
     public void setIntent(Intent intent) {
         this.intent = intent;
     }
@@ -320,21 +316,5 @@ public class Item implements LabelProvider, Parcelable {
 
     public void setWidgetValue(int widgetValue) {
         this.widgetValue = widgetValue;
-    }
-
-    public int getIdValue() {
-        return idValue;
-    }
-
-    public void setIdValue(int idValue) {
-        this.idValue = idValue;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

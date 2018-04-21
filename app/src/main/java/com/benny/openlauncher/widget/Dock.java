@@ -78,24 +78,6 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
         super(c, attr);
     }
 
-    @Nullable
-    public final View getPreviousItemView() {
-        return this.previousItemView;
-    }
-
-    public final void setPreviousItemView(@Nullable View v) {
-        this.previousItemView = v;
-    }
-
-    @Nullable
-    public final Item getPreviousItem() {
-        return this.previousItem;
-    }
-
-    public final void setPreviousItem(@Nullable Item v) {
-        this.previousItem = v;
-    }
-
     public void init() {
         if (!isInEditMode()) {
             super.init();

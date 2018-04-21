@@ -283,41 +283,10 @@ public abstract class SmoothPagerAdapter {
         mObservable.notifyChanged();
     }
 
-    /**
-     * Register an observer to receive callbacks related to the adapter's data changing.
-     *
-     * @param observer The {@link android.database.DataSetObserver} which will receive callbacks.
-     */
-    public void registerDataSetObserver(DataSetObserver observer) {
-        mObservable.registerObserver(observer);
-    }
-
-    /**
-     * Unregister an observer from callbacks related to the adapter's data changing.
-     *
-     * @param observer The {@link android.database.DataSetObserver} which will be unregistered.
-     */
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-        mObservable.unregisterObserver(observer);
-    }
-
     public void setViewPagerObserver(DataSetObserver observer) {
         synchronized (this) {
             mViewPagerObserver = observer;
         }
-    }
-
-    /**
-     * This method may be called by the ViewPager to obtain a title string
-     * to describe the specified page. This method may return null
-     * indicating no title for this page. The default implementation returns
-     * null.
-     *
-     * @param position The position of the title requested
-     * @return A title for the requested page
-     */
-    public CharSequence getPageTitle(int position) {
-        return null;
     }
 
     /**

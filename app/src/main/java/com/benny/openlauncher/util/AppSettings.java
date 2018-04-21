@@ -350,7 +350,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
 
 
     public int getDesktopIndicatorMode() {
-        return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.INSTANCE.getNORMAL());
+        return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.NORMAL);
     }
 
 

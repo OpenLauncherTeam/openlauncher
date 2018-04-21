@@ -57,19 +57,6 @@ public class LauncherLoadingIcon extends FrameLayout {
         }
     };
 
-    public boolean isLoading() {
-        return loading;
-    }
-
-    public void setLoading(boolean loading) {
-        if (loading != this.loading && loading) {
-            removeCallbacks(null);
-            post(ANIM_1);
-        }
-        this.loading = loading;
-    }
-
-
     public LauncherLoadingIcon(Context context) {
         this(context, null);
     }
