@@ -10,12 +10,10 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.res.Resources
 import android.graphics.Point
-import android.graphics.PointF
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.provider.Settings
 import android.support.v4.widget.DrawerLayout
 import android.util.Log
@@ -29,18 +27,17 @@ import com.benny.openlauncher.AppObject
 import com.benny.openlauncher.BuildConfig
 import com.benny.openlauncher.R
 import com.benny.openlauncher.activity.home.HomeDesktopGestureCallback
+import com.benny.openlauncher.activity.home.HomeDragNDrop
 import com.benny.openlauncher.activity.home.HomeEventHandler
 import com.benny.openlauncher.interfaces.AppDeleteListener
 import com.benny.openlauncher.interfaces.AppUpdateListener
 import com.benny.openlauncher.interfaces.DialogListener
 import com.benny.openlauncher.manager.Setup
 import com.benny.openlauncher.model.Item
-import com.benny.openlauncher.model.PopupIconLabelItem
 import com.benny.openlauncher.util.*
 import com.benny.openlauncher.viewutil.*
 import com.benny.openlauncher.widget.*
 import com.benny.openlauncher.widget.Desktop
-import com.mikepenz.fastadapter.listeners.OnClickListener
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.view_drawer_indicator.*
 import kotlinx.android.synthetic.main.view_home.*
@@ -446,7 +443,7 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
 
         initViews()
 
-        initDragNDrop()
+        HomeDragNDrop().initDragNDrop(this@Home, leftDragHandle, rightDragHandle, dragNDropView)
 
         registerBroadcastReceiver()
 
@@ -501,285 +498,6 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
                     dock.removeItem(dock.coordinateToChildView(Point(item.x, item.y))!!, false)
                     dock.addItemToCell(item, item.x, item.y)
                 }
-            }
-        })
-    }
-
-    protected open fun initDragNDrop() {
-        //dragHandle's drag event
-        val dragHandler = Handler()
-
-        dragNDropView.registerDropTarget(object : DragNDropLayout.DropTargetListener(leftDragHandle) {
-
-            val leftRunnable = object : Runnable {
-                override fun run() {
-                    if (getDesktop().currentItem > 0)
-                        getDesktop().currentItem = getDesktop().currentItem - 1
-                    else if (getDesktop().currentItem == 0)
-                        getDesktop().addPageLeft(true)
-                    dragHandler.postDelayed(this, 1000)
-                }
-            }
-
-            override fun onStart(action: DragAction.Action, location: PointF, isInside: Boolean): Boolean =
-                    when (action) {
-                        DragAction.Action.APP,
-                        DragAction.Action.WIDGET,
-                        DragAction.Action.SEARCH_RESULT,
-                        DragAction.Action.APP_DRAWER,
-                        DragAction.Action.GROUP,
-                        DragAction.Action.SHORTCUT,
-                        DragAction.Action.ACTION -> {
-                            true
-                        }
-                    }
-
-            override fun onStartDrag(action: DragAction.Action, location: PointF) {
-                if (leftDragHandle.alpha == 0f)
-                    leftDragHandle.animate().alpha(0.5f)
-            }
-
-            override fun onEnter(action: DragAction.Action, location: PointF) {
-                dragHandler.post(leftRunnable)
-                leftDragHandle.animate().alpha(0.9f)
-            }
-
-            override fun onExit(action: DragAction.Action, location: PointF) {
-                dragHandler.removeCallbacksAndMessages(null)
-                leftDragHandle.animate().alpha(0.5f)
-            }
-
-            override fun onEnd() {
-                dragHandler.removeCallbacksAndMessages(null)
-                leftDragHandle.animate().alpha(0f)
-            }
-        })
-        dragNDropView.registerDropTarget(object : DragNDropLayout.DropTargetListener(rightDragHandle) {
-
-            val rightRunnable = object : Runnable {
-                override fun run() {
-                    if (getDesktop().currentItem < getDesktop().pageCount - 1)
-                        getDesktop().currentItem = getDesktop().currentItem + 1
-                    else if (getDesktop().currentItem == getDesktop().pageCount - 1)
-                        getDesktop().addPageRight(true)
-                    dragHandler.postDelayed(this, 1000)
-                }
-            }
-
-            override fun onStart(action: DragAction.Action, location: PointF, isInside: Boolean): Boolean =
-                    when (action) {
-                        DragAction.Action.APP,
-                        DragAction.Action.WIDGET,
-                        DragAction.Action.SEARCH_RESULT,
-                        DragAction.Action.APP_DRAWER,
-                        DragAction.Action.GROUP,
-                        DragAction.Action.SHORTCUT,
-                        DragAction.Action.ACTION -> {
-                            true
-                        }
-                    }
-
-            override fun onStartDrag(action: DragAction.Action, location: PointF) {
-                if (rightDragHandle.alpha == 0f)
-                    rightDragHandle.animate().alpha(0.5f)
-            }
-
-            override fun onEnter(action: DragAction.Action, location: PointF) {
-                dragHandler.post(rightRunnable)
-                rightDragHandle.animate().alpha(0.9f)
-            }
-
-            override fun onExit(action: DragAction.Action, location: PointF) {
-                dragHandler.removeCallbacksAndMessages(null)
-                rightDragHandle.animate().alpha(0.5f)
-            }
-
-            override fun onEnd() {
-                dragHandler.removeCallbacksAndMessages(null)
-                rightDragHandle.animate().alpha(0f)
-            }
-        })
-
-        val uninstallItemIdentifier = 83L
-        val infoItemIdentifier = 84L
-        val editItemIdentifier = 85L
-        val removeItemIdentifier = 86L
-
-        val uninstallItem = PopupIconLabelItem(R.string.uninstall, R.drawable.ic_delete_dark_24dp).withIdentifier(uninstallItemIdentifier)
-        val infoItem = PopupIconLabelItem(R.string.info, R.drawable.ic_info_outline_dark_24dp).withIdentifier(infoItemIdentifier)
-        val editItem = PopupIconLabelItem(R.string.edit, R.drawable.ic_edit_black_24dp).withIdentifier(editItemIdentifier)
-        val removeItem = PopupIconLabelItem(R.string.remove, R.drawable.ic_close_dark_24dp).withIdentifier(removeItemIdentifier)
-
-        fun showItemPopup() {
-            val itemList = arrayListOf<PopupIconLabelItem>()
-            when (dragNDropView.dragItem?.type) {
-                Item.Type.APP, Item.Type.SHORTCUT, Item.Type.GROUP -> {
-                    if (dragNDropView.dragAction == DragAction.Action.APP_DRAWER) {
-                        itemList.add(uninstallItem)
-                        itemList.add(infoItem)
-                    } else {
-                        itemList.add(editItem)
-                        itemList.add(removeItem)
-                        itemList.add(infoItem)
-                    }
-                }
-                Item.Type.ACTION -> {
-                    itemList.add(editItem)
-                    itemList.add(removeItem)
-                }
-                Item.Type.WIDGET -> {
-                    itemList.add(removeItem)
-                }
-            }
-
-            var x = dragNDropView.dragLocation.x - Home.itemTouchX + Tool.toPx(10)
-            var y = dragNDropView.dragLocation.y - Home.itemTouchY - Tool.toPx((46 * itemList.size))
-
-            if ((x + Tool.toPx(200)) > dragNDropView.width) {
-                dragNDropView.setPopupMenuShowDirection(false)
-                x = dragNDropView.dragLocation.x - Home.itemTouchX + desktop.currentPage.cellWidth - Tool.toPx(200).toFloat() - Tool.toPx(10)
-            } else {
-                dragNDropView.setPopupMenuShowDirection(true)
-            }
-
-            if (y < 0)
-                y = dragNDropView.dragLocation.y - Home.itemTouchY + desktop.currentPage.cellHeight + Tool.toPx(4)
-            else
-                y -= Tool.toPx(4)
-
-            dragNDropView.showPopupMenuForItem(x, y, itemList, OnClickListener { v, adapter, item, position ->
-                when (item.identifier) {
-                    uninstallItemIdentifier -> onUninstallItem(dragNDropView.dragItem!!)
-                    editItemIdentifier -> onEditItem(dragNDropView.dragItem!!)
-                    removeItemIdentifier -> onRemoveItem(dragNDropView.dragItem!!)
-                    infoItemIdentifier -> onInfoItem(dragNDropView.dragItem!!)
-                }
-                dragNDropView.hidePopupMenu()
-                true
-            })
-        }
-
-        //desktop's drag event
-        dragNDropView.registerDropTarget(object : DragNDropLayout.DropTargetListener(desktop) {
-            override fun onStart(action: DragAction.Action, location: PointF, isInside: Boolean): Boolean {
-                if (action != DragAction.Action.SEARCH_RESULT)
-                    showItemPopup()
-                return true
-            }
-
-            override fun onExit(action: DragAction.Action, location: PointF) {
-                for (page in desktop.pages)
-                    page.clearCachedOutlineBitmap()
-                dragNDropView.cancelFolderPreview()
-            }
-
-            override fun onDrop(action: DragAction.Action, location: PointF, item: Item) {
-                // this statement makes sure that adding an app multiple times from the app drawer works
-                // the app will get a new id every time
-                if (action == DragAction.Action.APP_DRAWER) {
-                    if (appDrawerController.isOpen) return
-                    item.reset()
-                }
-
-                val x = location.x.toInt()
-                val y = location.y.toInt()
-                if (desktop.addItemToPoint(item, x, y)) {
-                    desktop.consumeRevert()
-                    dock.consumeRevert()
-                    // add the item to the database
-                    Home.db.saveItem(item, desktop.currentItem, Definitions.ItemPosition.Desktop)
-                } else {
-                    val pos = Point()
-                    desktop.currentPage.touchPosToCoordinate(pos, x, y, item.spanX, item.spanY, false)
-                    val itemView = desktop.currentPage.coordinateToChildView(pos)
-                    if (itemView != null && Desktop.handleOnDropOver(this@Home, item, itemView.tag as Item, itemView, desktop.currentPage, desktop.currentItem, Definitions.ItemPosition.Desktop, desktop)) {
-                        desktop.consumeRevert()
-                        dock.consumeRevert()
-                    } else {
-                        Tool.toast(this@Home, R.string.toast_not_enough_space)
-                        desktop.revertLastItem()
-                        dock.revertLastItem()
-                    }
-                }
-            }
-
-            override fun onStartDrag(action: DragAction.Action, location: PointF) {
-                closeAppDrawer()
-            }
-
-            override fun onEnd() {
-                Home.launcher?.getDesktopIndicator()?.hideDelay()
-                for (page in desktop.pages)
-                    page.clearCachedOutlineBitmap()
-            }
-
-            override fun onMove(action: DragAction.Action, location: PointF) {
-                if (action != DragAction.Action.SEARCH_RESULT && action != DragAction.Action.WIDGET)
-                    desktop.updateIconProjection(location.x.toInt(), location.y.toInt())
-            }
-        })
-
-        //dock's drag event
-        dragNDropView.registerDropTarget(object : DragNDropLayout.DropTargetListener(dock) {
-            override fun onStart(action: DragAction.Action, location: PointF, isInside: Boolean): Boolean {
-                val ok = (action != DragAction.Action.WIDGET)
-
-                if (ok && isInside) {
-                    //showItemPopup()
-                }
-
-                return ok
-            }
-
-            override fun onDrop(action: DragAction.Action, location: PointF, item: Item) {
-                if (action == DragAction.Action.APP_DRAWER) {
-                    if (appDrawerController.isOpen) return
-                    item.reset()
-                }
-
-                val x = location.x.toInt()
-                val y = location.y.toInt()
-                if (dock.addItemToPoint(item, x, y)) {
-                    desktop.consumeRevert()
-                    dock.consumeRevert()
-
-                    // add the item to the database
-                    Home.db.saveItem(item, 0, Definitions.ItemPosition.Dock)
-                } else {
-                    val pos = Point()
-                    dock.touchPosToCoordinate(pos, x, y, item.spanX, item.spanY, false)
-                    val itemView = dock.coordinateToChildView(pos)
-                    if (itemView != null) {
-                        if (Desktop.handleOnDropOver(this@Home, item, itemView.tag as Item, itemView, dock, 0, Definitions.ItemPosition.Dock, dock)) {
-                            desktop.consumeRevert()
-                            dock.consumeRevert()
-                        } else {
-                            Tool.toast(this@Home, R.string.toast_not_enough_space)
-                            desktop.revertLastItem()
-                            dock.revertLastItem()
-                        }
-                    } else {
-                        Tool.toast(this@Home, R.string.toast_not_enough_space)
-                        desktop.revertLastItem()
-                        dock.revertLastItem()
-                    }
-                }
-            }
-
-            override fun onExit(action: DragAction.Action, location: PointF) {
-                dock.clearCachedOutlineBitmap()
-                dragNDropView.cancelFolderPreview()
-            }
-
-            override fun onEnd() {
-                if (dragNDropView.dragAction == DragAction.Action.WIDGET)
-                    desktop.revertLastItem()
-                dock.clearCachedOutlineBitmap()
-            }
-
-            override fun onMove(action: DragAction.Action, location: PointF) {
-                if (action != DragAction.Action.SEARCH_RESULT)
-                    dock.updateIconProjection(location.x.toInt(), location.y.toInt())
             }
         })
     }

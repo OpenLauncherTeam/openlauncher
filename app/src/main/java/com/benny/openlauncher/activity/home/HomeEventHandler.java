@@ -21,7 +21,7 @@ public class HomeEventHandler implements Setup.EventHandler {
         DialogHelper.addActionItemDialog(context, new MaterialDialog.ListCallback() {
             @Override
             public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                if (position == 0){
+                if (position == 0) {
                     listener.onAdd();
                 }
             }
