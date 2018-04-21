@@ -110,7 +110,7 @@ public class SearchBar extends FrameLayout {
         clockParams.gravity = Gravity.START;
 
         LayoutParams switchButtonParams = null;
-        // && Setup.appSettings().isSearchGridListSwitchEnabled()
+        // && Setup._appSettings().isSearchGridListSwitchEnabled()
 
         switchButton = new AppCompatImageView(getContext());
         updateSwitchIcon();

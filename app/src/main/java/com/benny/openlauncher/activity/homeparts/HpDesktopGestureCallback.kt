@@ -11,40 +11,40 @@ import com.benny.openlauncher.viewutil.DesktopGestureListener
 import com.benny.openlauncher.widget.Desktop
 
 class HpDesktopGestureCallback : DesktopGestureListener.DesktopGestureCallback {
-    val appSettings: AppSettings
+    val _appSettings: AppSettings
 
-    constructor(pappSettings: AppSettings) {
-        appSettings = pappSettings
+    constructor(appSettings: AppSettings) {
+        _appSettings = appSettings
     }
 
     override fun onDrawerGesture(desktop: Desktop, event: DesktopGestureListener.Type): Boolean {
-        val context: Context = appSettings.context
+        val context: Context = _appSettings.context
         val packageManager: PackageManager = context.packageManager
         var gestureid: Int
         when (event) {
             DesktopGestureListener.Type.SwipeUp -> {
-                gestureid = appSettings.gestureSwipeUp
+                gestureid = _appSettings.gestureSwipeUp
                 if (gestureid != 0) {
                     val gesture = LauncherAction.getActionItem(gestureid - 1)
-                    if (gesture != null && appSettings.isGestureFeedback) {
+                    if (gesture != null && _appSettings.isGestureFeedback) {
                         Tool.vibrate(desktop)
                     }
                     if (gestureid == 9) {
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(appSettings.getString(context.getString(R.string.pref_key__gesture_swipe_up) + "__", "")))
+                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_swipe_up) + "__", "")))
                     }
                     LauncherAction.RunAction(gesture, desktop.context)
                 }
                 return true
             }
             DesktopGestureListener.Type.SwipeDown -> {
-                gestureid = appSettings.gestureSwipeDown
+                gestureid = _appSettings.gestureSwipeDown
                 if (gestureid != 0) {
                     val gesture = LauncherAction.getActionItem(gestureid - 1)
-                    if (gesture != null && appSettings.isGestureFeedback) {
+                    if (gesture != null && _appSettings.isGestureFeedback) {
                         Tool.vibrate(desktop)
                     }
                     if (gestureid == 9) {
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(appSettings.getString(context.getString(R.string.pref_key__gesture_swipe_down) + "__", "")))
+                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_swipe_down) + "__", "")))
                     }
                     LauncherAction.RunAction(gesture, desktop.context)
                 }
@@ -53,42 +53,42 @@ class HpDesktopGestureCallback : DesktopGestureListener.DesktopGestureCallback {
             DesktopGestureListener.Type.SwipeLeft -> return false
             DesktopGestureListener.Type.SwipeRight -> return false
             DesktopGestureListener.Type.Pinch -> {
-                gestureid = appSettings.gestureSwipeDown
+                gestureid = _appSettings.gestureSwipeDown
                 if (gestureid != 0) {
                     val gesture = LauncherAction.getActionItem(gestureid - 1)
-                    if (gesture != null && appSettings.isGestureFeedback) {
+                    if (gesture != null && _appSettings.isGestureFeedback) {
                         Tool.vibrate(desktop)
                     }
                     if (gestureid == 9) {
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(appSettings.getString(context.getString(R.string.pref_key__gesture_pinch) + "__", "")))
+                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_pinch) + "__", "")))
                     }
                     LauncherAction.RunAction(gesture, desktop.context)
                 }
                 return true
             }
             DesktopGestureListener.Type.Unpinch -> {
-                gestureid = appSettings.gestureSwipeDown
+                gestureid = _appSettings.gestureSwipeDown
                 if (gestureid != 0) {
                     val gesture = LauncherAction.getActionItem(gestureid - 1)
-                    if (gesture != null && appSettings.isGestureFeedback) {
+                    if (gesture != null && _appSettings.isGestureFeedback) {
                         Tool.vibrate(desktop)
                     }
                     if (gestureid == 9) {
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(appSettings.getString(context.getString(R.string.pref_key__gesture_unpinch) + "__", "")))
+                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_unpinch) + "__", "")))
                     }
                     LauncherAction.RunAction(gesture, desktop.context)
                 }
                 return true
             }
             DesktopGestureListener.Type.DoubleTap -> {
-                gestureid = appSettings.gestureSwipeDown
+                gestureid = _appSettings.gestureSwipeDown
                 if (gestureid != 0) {
                     val gesture = LauncherAction.getActionItem(gestureid - 1)
-                    if (gesture != null && appSettings.isGestureFeedback) {
+                    if (gesture != null && _appSettings.isGestureFeedback) {
                         Tool.vibrate(desktop)
                     }
                     if (gestureid == 9) {
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(appSettings.getString(context.getString(R.string.pref_key__gesture_double_tap) + "__", "")))
+                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_double_tap) + "__", "")))
                     }
                     LauncherAction.RunAction(gesture, desktop.context)
                 }

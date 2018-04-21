@@ -88,8 +88,9 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
         ContextUtils(applicationContext).setAppLanguage(AppSettings.get().language) // before setContentView
         super.onCreate(savedInstanceState)
 
-        if (!Setup.wasInitialised())
-            initStaticHelper()
+        if (!Setup.wasInitialised()) {
+            Setup.init(HpInitSetup(this@Home))
+        }
 
         if (Setup.appSettings().isSearchBarTimeEnabled) {
             timeChangedReceiver = object : BroadcastReceiver() {
@@ -296,44 +297,6 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
     override fun onDrawerClosed(drawerView: View) {}
 
     override fun onDrawerStateChanged(newState: Int) {}
-
-    fun initStaticHelper() {
-        val appSettings = AppSettings.get()
-        val imageLoader = object : Setup.ImageLoader {
-            override fun createIconProvider(drawable: Drawable?): BaseIconProvider = SimpleIconProvider(drawable)
-
-            override fun createIconProvider(icon: Int): BaseIconProvider = SimpleIconProvider(icon)
-        }
-        val desktopGestureCallback = HpDesktopGestureCallback(appSettings)
-        val itemGestureCallback: ItemGestureListener.ItemGestureCallback = ItemGestureListener.ItemGestureCallback { _, _ -> false }
-        val dataManager = DatabaseHelper(this)
-        val appLoader = AppManager.getInstance(this)
-        val eventHandler = HpEventHandler();
-        val logger = object : Setup.Logger {
-            override fun log(source: Any, priority: Int, tag: String?, msg: String, vararg args: Any) {
-                Log.println(priority, tag, String.format(msg, *args))
-            }
-        }
-        Setup.init(object : Setup() {
-            override fun getAppContext(): Context = AppObject.get()!!.applicationContext
-
-            override fun getAppSettings(): AppSettings = AppSettings.get()
-
-            override fun getDesktopGestureCallback(): DesktopGestureListener.DesktopGestureCallback = desktopGestureCallback
-
-            override fun getItemGestureCallback(): ItemGestureListener.ItemGestureCallback = itemGestureCallback
-
-            override fun getImageLoader(): ImageLoader = imageLoader
-
-            override fun getDataManager(): Setup.DataManager = dataManager
-
-            override fun getAppLoader(): AppManager = appLoader
-
-            override fun getEventHandler(): Setup.EventHandler = eventHandler
-
-            override fun getLogger(): Setup.Logger = logger
-        })
-    }
 
     override fun onResume() {
         super.onResume()
