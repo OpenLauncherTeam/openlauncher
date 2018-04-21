@@ -6,7 +6,7 @@ import android.content.pm.ResolveInfo;
 
 import com.benny.openlauncher.manager.Setup;
 
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 public class App {
     public String label, packageName, className;
@@ -50,7 +50,7 @@ public class App {
         return iconProvider;
     }
 
-    public void setIconProvider(@NotNull BaseIconProvider baseIconProvider) {
+    public void setIconProvider(@NonNull BaseIconProvider baseIconProvider) {
 
     }
 }

@@ -14,8 +14,8 @@ import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
 import com.benny.openlauncher.widget.SmoothViewPager.OnPageChangeListener;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.HashMap;
 
@@ -170,7 +170,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
         this.mCurrentPagerState = -1;
     }
 
-    public PagerIndicator(@NotNull Context context, @NotNull AttributeSet attrs) {
+    public PagerIndicator(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
         Companion.setPad((float) Tool.toPx(3));
         setWillNotDraw(false);

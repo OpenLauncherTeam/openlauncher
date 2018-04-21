@@ -24,7 +24,7 @@ import com.benny.openlauncher.util.DragNDropHandler;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +44,7 @@ public final class DragNDropLayout extends FrameLayout {
     private boolean dragExceedThreshold;
     @Nullable
     private Item dragItem;
-    @NotNull
+    @NonNull
     private PointF dragLocation;
     private PointF dragLocationConverted;
     private PointF dragLocationStart;
@@ -88,46 +88,46 @@ public final class DragNDropLayout extends FrameLayout {
     }
 
     public static class DropTargetListener {
-        @NotNull
+        @NonNull
         private final View view;
 
-        public DropTargetListener(@NotNull View view) {
+        public DropTargetListener(@NonNull View view) {
 
             this.view = view;
         }
 
-        @NotNull
+        @NonNull
         public final View getView() {
             return this.view;
         }
 
-        public boolean onStart(@NotNull Action action, @NotNull PointF location, boolean isInside) {
+        public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
 
 
             return false;
         }
 
-        public void onStartDrag(@NotNull Action action, @NotNull PointF location) {
+        public void onStartDrag(@NonNull Action action, @NonNull PointF location) {
 
 
         }
 
-        public void onDrop(@NotNull Action action, @NotNull PointF location, @NotNull Item item) {
+        public void onDrop(@NonNull Action action, @NonNull PointF location, @NonNull Item item) {
 
 
         }
 
-        public void onMove(@NotNull Action action, @NotNull PointF location) {
+        public void onMove(@NonNull Action action, @NonNull PointF location) {
 
 
         }
 
-        public void onEnter(@NotNull Action action, @NotNull PointF location) {
+        public void onEnter(@NonNull Action action, @NonNull PointF location) {
 
 
         }
 
-        public void onExit(@NotNull Action action, @NotNull PointF location) {
+        public void onExit(@NonNull Action action, @NonNull PointF location) {
 
 
         }
@@ -184,7 +184,7 @@ public final class DragNDropLayout extends FrameLayout {
         }
     }
 
-    public DragNDropLayout(@NotNull Context context, @Nullable AttributeSet attrs) {
+    public DragNDropLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.DRAG_THRESHOLD = 20.0f;
         this.paint = new Paint(1);
@@ -218,7 +218,7 @@ public final class DragNDropLayout extends FrameLayout {
         return this.dragging;
     }
 
-    @NotNull
+    @NonNull
     public final PointF getDragLocation() {
         return this.dragLocation;
     }
@@ -239,7 +239,7 @@ public final class DragNDropLayout extends FrameLayout {
         return this.dragItem;
     }
 
-    public final void showFolderPreviewAt(@NotNull View fromView, float x, float y) {
+    public final void showFolderPreviewAt(@NonNull View fromView, float x, float y) {
         if (!this.showFolderPreview) {
             this.showFolderPreview = true;
             convertPoint(fromView, this, x, y);
@@ -248,7 +248,7 @@ public final class DragNDropLayout extends FrameLayout {
         }
     }
 
-    public final void convertPoint(@NotNull View fromView, @NotNull View toView, float x, float y) {
+    public final void convertPoint(@NonNull View fromView, @NonNull View toView, float x, float y) {
         int[] fromCoordinate = new int[2];
         int[] toCoordinate = new int[2];
         fromView.getLocationOnScreen(fromCoordinate);
@@ -281,7 +281,7 @@ public final class DragNDropLayout extends FrameLayout {
         this.overlayPopup.bringToFront();
     }
 
-    public final void showPopupMenuForItem(float x, float y, @NotNull List<PopupIconLabelItem> popupItem, com.mikepenz.fastadapter.listeners.OnClickListener<PopupIconLabelItem> listener) {
+    public final void showPopupMenuForItem(float x, float y, @NonNull List<PopupIconLabelItem> popupItem, com.mikepenz.fastadapter.listeners.OnClickListener<PopupIconLabelItem> listener) {
         if (!this.overlayPopupShowing) {
             this.overlayPopupShowing = true;
             this.overlayPopup.setVisibility(View.VISIBLE);
@@ -319,7 +319,7 @@ public final class DragNDropLayout extends FrameLayout {
         }
     }
 
-    public final void startDragNDropOverlay(@NotNull View view, @NotNull Item item, @NotNull Action action) {
+    public final void startDragNDropOverlay(@NonNull View view, @NonNull Item item, @NonNull Action action) {
 
 
         this.dragging = true;
@@ -359,7 +359,7 @@ public final class DragNDropLayout extends FrameLayout {
         }
     }
 
-    public final void registerDropTarget(@NotNull DropTargetListener targetListener) {
+    public final void registerDropTarget(@NonNull DropTargetListener targetListener) {
 
         Map map = this.registeredDropTargetEntries;
         Pair pair = new Pair(targetListener, new DragFlag());
@@ -475,7 +475,7 @@ public final class DragNDropLayout extends FrameLayout {
         cancelFolderPreview();
     }
 
-    public final void convertPoint(@NotNull View toView) {
+    public final void convertPoint(@NonNull View toView) {
 
         int[] fromCoordinate = new int[2];
         int[] toCoordinate = new int[2];

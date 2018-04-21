@@ -9,8 +9,8 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -19,12 +19,12 @@ public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, P
     private final int labelRes;
 
     public static final class ViewHolder_PopupIconLabelItem extends RecyclerView.ViewHolder {
-        @NotNull
+        @NonNull
         private final CardView cardView;
         private ImageView iconView;
         private TextView labelView;
 
-        public ViewHolder_PopupIconLabelItem(@NotNull View itemView) {
+        public ViewHolder_PopupIconLabelItem(@NonNull View itemView) {
             super(itemView);
             this.cardView = (CardView) itemView;
             this.labelView = itemView.findViewById(R.id.item_popup_label);

@@ -28,8 +28,8 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.viewutil.ItemGestureListener;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -131,7 +131,7 @@ public class Tool {
         }
     }
 
-    public static final void createScaleInScaleOutAnim(@NotNull final View view, @NotNull final Runnable endAction, float runActionAtPercent) {
+    public static final void createScaleInScaleOutAnim(@NonNull final View view, @NonNull final Runnable endAction, float runActionAtPercent) {
         final long animTime = (long) (Setup.appSettings().getOverallAnimationSpeedModifier() * ((float) ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION));
         ViewPropertyAnimator duration = view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(animTime);
 
@@ -164,7 +164,7 @@ public class Tool {
         return (int) (f * system.getDisplayMetrics().density);
     }
 
-    public static final boolean isPackageInstalled(@NotNull String packageName, @NotNull PackageManager packageManager) {
+    public static final boolean isPackageInstalled(@NonNull String packageName, @NonNull PackageManager packageManager) {
 
         try {
             packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
@@ -203,7 +203,7 @@ public class Tool {
             Home.Companion.getLauncher().onStartApp(context, intent, null);
     }
 
-    public static final void startApp(@NotNull Context context, @NotNull App app, @Nullable View view) {
+    public static final void startApp(@NonNull Context context, @NonNull App app, @Nullable View view) {
         Home launcher = Home.Companion.getLauncher();
         if (launcher != null) {
             launcher.onStartApp(context, app, view);

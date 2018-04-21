@@ -18,7 +18,7 @@ import com.benny.openlauncher.viewutil.DesktopGestureListener.DesktopGestureCall
 import com.benny.openlauncher.viewutil.ItemGestureListener;
 import com.benny.openlauncher.viewutil.ItemGestureListener.ItemGestureCallback;
 
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 /* compiled from: Home.kt */
 public final class HpInitSetup extends Setup {
@@ -46,12 +46,12 @@ public final class HpInitSetup extends Setup {
         };
 
         _imageLoader = new ImageLoader() {
-            @NotNull
+            @NonNull
             public BaseIconProvider createIconProvider(@Nullable Drawable drawable) {
                 return new SimpleIconProvider(drawable);
             }
 
-            @NotNull
+            @NonNull
             public BaseIconProvider createIconProvider(int icon) {
                 return new SimpleIconProvider(icon);
             }
@@ -64,47 +64,47 @@ public final class HpInitSetup extends Setup {
         };
     }
 
-    @NotNull
+    @NonNull
     public Context getAppContext() {
         return AppObject.get();
     }
 
-    @NotNull
+    @NonNull
     public AppSettings getAppSettings() {
         return _appSettings;
     }
 
-    @NotNull
+    @NonNull
     public DesktopGestureCallback getDesktopGestureCallback() {
         return _desktopGestureCallback;
     }
 
-    @NotNull
+    @NonNull
     public ItemGestureCallback getItemGestureCallback() {
         return _itemGestureCallback;
     }
 
-    @NotNull
+    @NonNull
     public ImageLoader getImageLoader() {
         return _imageLoader;
     }
 
-    @NotNull
+    @NonNull
     public DataManager getDataManager() {
         return _dataManager;
     }
 
-    @NotNull
+    @NonNull
     public AppManager getAppLoader() {
         return _appLoader;
     }
 
-    @NotNull
+    @NonNull
     public EventHandler getEventHandler() {
         return _eventHandler;
     }
 
-    @NotNull
+    @NonNull
     public Logger getLogger() {
         return _logger;
     }

@@ -29,8 +29,8 @@ import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
 import com.benny.openlauncher.widget.CellContainer.DragState;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,7 +56,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
     private int pageCount;
     private PagerIndicator pageIndicator;
 
-    @NotNull
+    @NonNull
     private final List<CellContainer> pages = new ArrayList<CellContainer>();
     private final Point previousDragPoint = new Point();
 
@@ -80,7 +80,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         }
 
         @Nullable
-        public final Item getItemFromCoordinate(@NotNull Point point, int page) {
+        public final Item getItemFromCoordinate(@NonNull Point point, int page) {
 
             List pageData = (List) Home.Companion.getDb().getDesktop().get(page);
             int size = pageData.size();
@@ -197,7 +197,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         final /* synthetic */ Desktop this$0;
         private float translateFactor;
 
-        public DesktopAdapter(@NotNull Desktop $outer, Desktop desktop) {
+        public DesktopAdapter(@NonNull Desktop $outer, Desktop desktop) {
 
             this.this$0 = $outer;
             this.desktop = desktop;
@@ -221,7 +221,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
             layout.setGestures(mySfg);
             layout.setOnItemRearrangeListener(new CellContainer.OnItemRearrangeListener() {
                 @Override
-                public void onItemRearrange(@NotNull Point from, @NotNull Point to) {
+                public void onItemRearrange(@NonNull Point from, @NonNull Point to) {
                     Item itemFromCoordinate = Desktop.Companion.getItemFromCoordinate(from, getCurrentItem());
                     if (itemFromCoordinate != null) {
                         itemFromCoordinate.x = to.x;
@@ -291,7 +291,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
             notifyDataSetChanged();
         }
 
-        public int getItemPosition(@NotNull Object object) {
+        public int getItemPosition(@NonNull Object object) {
 
             return -2;
         }
@@ -300,20 +300,20 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
             return this.desktop.getPageCount();
         }
 
-        public boolean isViewFromObject(@NotNull View p1, @NotNull Object p2) {
+        public boolean isViewFromObject(@NonNull View p1, @NonNull Object p2) {
 
 
             return p1 == p2;
         }
 
-        public void destroyItem(@NotNull ViewGroup container, int position, @NotNull Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
 
 
             container.removeView((View) object);
         }
 
-        @NotNull
-        public Object instantiateItem(@NotNull ViewGroup container, int pos) {
+        @NonNull
+        public Object instantiateItem(@NonNull ViewGroup container, int pos) {
 
             CellContainer layout = (CellContainer) this.desktop.getPages().get(pos);
             container.addView(layout);
@@ -360,15 +360,15 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
     }
 
     @JvmOverloads
-    public Desktop(@NotNull Context context) {
+    public Desktop(@NonNull Context context) {
         super(context, null);
     }
 
-    public Desktop(@NotNull Context c, @Nullable AttributeSet attr) {
+    public Desktop(@NonNull Context c, @Nullable AttributeSet attr) {
         super(c, attr);
     }
 
-    @NotNull
+    @NonNull
     public final List<CellContainer> getPages() {
         return this.pages;
     }
@@ -398,12 +398,12 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         return getCurrentPage().getChildCount() == 0;
     }
 
-    @NotNull
+    @NonNull
     public final CellContainer getCurrentPage() {
         return (CellContainer) this.pages.get(getCurrentItem());
     }
 
-    public final void setPageIndicator(@NotNull PagerIndicator pageIndicator) {
+    public final void setPageIndicator(@NonNull PagerIndicator pageIndicator) {
 
         this.pageIndicator = pageIndicator;
     }
@@ -418,7 +418,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         }
     }
 
-    public final void initDesktopNormal(@NotNull Home home) {
+    public final void initDesktopNormal(@NonNull Home home) {
 
         setAdapter(new DesktopAdapter(this, this));
         if (Setup.appSettings().isDesktopShowIndicator() && this.pageIndicator != null) {
@@ -452,7 +452,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         }
     }
 
-    public final void initDesktopShowAll(@NotNull Context c, @NotNull Home home) {
+    public final void initDesktopShowAll(@NonNull Context c, @NonNull Home home) {
         Desktop desktop = this;
         Context context = c;
         Home home2 = home;
@@ -640,7 +640,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         }
     }
 
-    public void setLastItem(@NotNull Object... args) {
+    public void setLastItem(@NonNull Object... args) {
         Item item = (Item) args[0];
         View v = (View) args[1];
         this.previousPage = getCurrentItem();
@@ -672,7 +672,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         this.previousPage = -1;
     }
 
-    public boolean addItemToPage(@NotNull Item item, int page) {
+    public boolean addItemToPage(@NonNull Item item, int page) {
 
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDesktopIconSize());
         if (itemView == null) {
@@ -684,7 +684,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         return true;
     }
 
-    public boolean addItemToPoint(@NotNull Item item, int x, int y) {
+    public boolean addItemToPoint(@NonNull Item item, int x, int y) {
         CellContainer.LayoutParams positionToLayoutPrams = getCurrentPage().coordinateToLayoutParams(x, y, item.spanX, item.spanY);
         if (positionToLayoutPrams == null) {
             return false;
@@ -700,7 +700,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         return true;
     }
 
-    public boolean addItemToCell(@NotNull Item item, int x, int y) {
+    public boolean addItemToCell(@NonNull Item item, int x, int y) {
 
         item.locationInLauncher = 0;
         item.x = x;
@@ -777,8 +777,8 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         }
     }
 
-    @NotNull
-    public WindowInsets onApplyWindowInsets(@NotNull WindowInsets insets) {
+    @NonNull
+    public WindowInsets onApplyWindowInsets(@NonNull WindowInsets insets) {
 
         if (VERSION.SDK_INT >= 20) {
             Companion.setTopInset(insets.getSystemWindowInsetTop());

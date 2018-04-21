@@ -20,7 +20,7 @@ import com.benny.openlauncher.model.IconLabelItem;
 import com.benny.openlauncher.model.Item;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -182,7 +182,7 @@ public class AppManager {
         deleteListeners.add(deleteListener);
     }
 
-    public void notifyUpdateListeners(@NotNull List<App> apps) {
+    public void notifyUpdateListeners(@NonNull List<App> apps) {
         Iterator<AppUpdateListener> iter = updateListeners.iterator();
         while (iter.hasNext()) {
             if (iter.next().onAppUpdated(apps)) {
@@ -191,7 +191,7 @@ public class AppManager {
         }
     }
 
-    public void notifyRemoveListeners(@NotNull List<App> apps) {
+    public void notifyRemoveListeners(@NonNull List<App> apps) {
         Iterator<AppDeleteListener> iter = deleteListeners.iterator();
         while (iter.hasNext()) {
             if (iter.next().onAppDeleted(apps)) {

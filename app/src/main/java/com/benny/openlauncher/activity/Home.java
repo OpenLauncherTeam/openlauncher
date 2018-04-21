@@ -77,8 +77,8 @@ import com.benny.openlauncher.widget.SwipeListView;
 
 import net.gsantner.opoc.util.ContextUtils;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,10 +99,10 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     private static final IntentFilter appUpdateIntentFilter = new IntentFilter();
     @Nullable
     private static WidgetHost appWidgetHost;
-    @NotNull
+    @NonNull
     public static AppWidgetManager appWidgetManager;
     private static boolean consumeNextResume;
-    @NotNull
+    @NonNull
     public static DataManager db;
     public static float itemTouchX;
     public static float itemTouchY;
@@ -117,7 +117,6 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     private int rad;
     private final ShortcutReceiver shortcutReceiver = new ShortcutReceiver();
     private BroadcastReceiver timeChangedReceiver;
-
 
     public static final class Companion {
         private Companion() {
@@ -141,7 +140,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             Home._resources = v;
         }
 
-        @NotNull
+        @NonNull
         public final DataManager getDb() {
             DataManager dataManager = Home.db;
             if (dataManager == null) {
@@ -150,7 +149,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             return dataManager;
         }
 
-        public final void setDb(@NotNull DataManager v) {
+        public final void setDb(@NonNull DataManager v) {
 
             Home.db = v;
         }
@@ -164,7 +163,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             Home.appWidgetHost = v;
         }
 
-        @NotNull
+        @NonNull
         public final AppWidgetManager getAppWidgetManager() {
             AppWidgetManager appWidgetManager = Home.appWidgetManager;
             if (appWidgetManager == null) {
@@ -173,7 +172,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             return appWidgetManager;
         }
 
-        public final void setAppWidgetManager(@NotNull AppWidgetManager v) {
+        public final void setAppWidgetManager(@NonNull AppWidgetManager v) {
 
             Home.appWidgetManager = v;
         }
@@ -255,7 +254,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         Companion.getShortcutIntentFilter().addAction("com.android.launcher.action.INSTALL_SHORTCUT");
     }
 
-    @NotNull
+    @NonNull
     public final DrawerLayout getDrawerLayout() {
         DrawerLayout drawerLayout = (DrawerLayout) _$_findCachedViewById(R.id.drawer_layout);
         return drawerLayout;
@@ -300,7 +299,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         init();
     }
 
-    public final void onStartApp(@NotNull Context context, @NotNull Intent intent, @Nullable View view) {
+    public final void onStartApp(@NonNull Context context, @NonNull Intent intent, @Nullable View view) {
 
 
         ComponentName component = intent.getComponent();
@@ -320,7 +319,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         }
     }
 
-    public final void onStartApp(@NotNull Context context, @NotNull App app, @Nullable View view) {
+    public final void onStartApp(@NonNull Context context, @NonNull App app, @Nullable View view) {
 
 
         if (Intrinsics.areEqual(app.packageName, BuildConfig.APPLICATION_ID)) {
@@ -526,15 +525,15 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         ((DrawerLayout) _$_findCachedViewById(R.id.drawer_layout)).closeDrawers();
     }
 
-    public void onDrawerSlide(@NotNull View drawerView, float slideOffset) {
+    public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 
     }
 
-    public void onDrawerOpened(@NotNull View drawerView) {
+    public void onDrawerOpened(@NonNull View drawerView) {
 
     }
 
-    public void onDrawerClosed(@NotNull View drawerView) {
+    public void onDrawerClosed(@NonNull View drawerView) {
 
     }
 
@@ -587,56 +586,56 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         }
     }
 
-    @NotNull
+    @NonNull
     public final Desktop getDesktop() {
         Desktop desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
 
         return desktop;
     }
 
-    @NotNull
+    @NonNull
     public final Dock getDock() {
         Dock dock = (Dock) _$_findCachedViewById(R.id.dock);
 
         return dock;
     }
 
-    @NotNull
+    @NonNull
     public final AppDrawerController getAppDrawerController() {
         AppDrawerController appDrawerController = (AppDrawerController) _$_findCachedViewById(R.id.appDrawerController);
 
         return appDrawerController;
     }
 
-    @NotNull
+    @NonNull
     public final GroupPopupView getGroupPopup() {
         GroupPopupView groupPopupView = (GroupPopupView) _$_findCachedViewById(R.id.groupPopup);
 
         return groupPopupView;
     }
 
-    @NotNull
+    @NonNull
     public final SearchBar getSearchBar() {
         SearchBar searchBar = (SearchBar) _$_findCachedViewById(R.id.searchBar);
 
         return searchBar;
     }
 
-    @NotNull
+    @NonNull
     public final View getBackground() {
         View _$_findCachedViewById = _$_findCachedViewById(R.id.background);
 
         return _$_findCachedViewById;
     }
 
-    @NotNull
+    @NonNull
     public final PagerIndicator getDesktopIndicator() {
         PagerIndicator pagerIndicator = (PagerIndicator) _$_findCachedViewById(R.id.desktopIndicator);
 
         return pagerIndicator;
     }
 
-    @NotNull
+    @NonNull
     public final DragNDropLayout getDragNDropView() {
         DragNDropLayout dragNDropLayout = (DragNDropLayout) _$_findCachedViewById(R.id.dragNDropView);
 
@@ -670,13 +669,13 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         System.gc();
     }
 
-    public final void onUninstallItem(@NotNull Item item) {
+    public final void onUninstallItem(@NonNull Item item) {
 
         Companion.setConsumeNextResume(true);
         Setup.eventHandler().showDeletePackageDialog(this, item);
     }
 
-    public final void onRemoveItem(@NotNull Item item) {
+    public final void onRemoveItem(@NonNull Item item) {
 
         View coordinateToChildView;
         switch (item.locationInLauncher) {
@@ -704,7 +703,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         Companion.getDb().deleteItem(item, true);
     }
 
-    public final void onInfoItem(@NotNull Item item) {
+    public final void onInfoItem(@NonNull Item item) {
 
         if (item.type == Type.APP) {
             try {
@@ -797,6 +796,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         if (dock == null) {
             Intrinsics.throwNpe();
         }
+        dock.setHome(this);
         dock.init();
         AppSettings appSettings = Setup.appSettings();
 
@@ -805,13 +805,13 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             if (dock == null) {
                 Intrinsics.throwNpe();
             }
-            dock.getLayoutParams().height = Tool.dp2px(((16 + iconSize) + 14) + 10, (Context) this) + Dock.bottomInset;
+            dock.getLayoutParams().height = Tool.dp2px(((16 + iconSize) + 14) + 10, (Context) this) + dock.getBottomInset();
         } else {
             dock = (Dock) _$_findCachedViewById(R.id.dock);
             if (dock == null) {
                 Intrinsics.throwNpe();
             }
-            dock.getLayoutParams().height = Tool.dp2px((16 + iconSize) + 10, (Context) this) + Dock.bottomInset;
+            dock.getLayoutParams().height = Tool.dp2px((16 + iconSize) + 10, (Context) this) + dock.getBottomInset();
         }
     }
 

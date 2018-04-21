@@ -13,7 +13,7 @@ import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.widget.AppItemView;
 
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.Nullable;
 
 public final class DragNDropHandler {
     private static final String DRAG_DROP_EXTRA = "DRAG_DROP_EXTRA";

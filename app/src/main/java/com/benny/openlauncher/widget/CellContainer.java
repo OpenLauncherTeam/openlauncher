@@ -18,8 +18,8 @@ import android.view.ViewGroup;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.Tool;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +54,7 @@ public class CellContainer extends ViewGroup {
     private Long peekDownTime = Long.valueOf(-1);
     private Point preCoordinate = new Point(-1, -1);
     private Point startCoordinate = new Point();
-    @NotNull
+    @NonNull
     private final Rect tempRect = new Rect();
 
     public enum DragState {
@@ -119,7 +119,7 @@ public class CellContainer extends ViewGroup {
     }
 
     public interface OnItemRearrangeListener {
-        void onItemRearrange(@NotNull Point point, @NotNull Point point2);
+        void onItemRearrange(@NonNull Point point, @NonNull Point point2);
     }
 
     public enum PeekDirection {
@@ -154,7 +154,7 @@ public class CellContainer extends ViewGroup {
         this.onItemRearrangeListener = v;
     }
 
-    @NotNull
+    @NonNull
     public final List<View> getAllCells() {
         ArrayList views = new ArrayList();
         int childCount = getChildCount();
@@ -164,11 +164,11 @@ public class CellContainer extends ViewGroup {
         return views;
     }
 
-    public CellContainer(@NotNull Context c) {
+    public CellContainer(@NonNull Context c) {
         this(c, null);
     }
 
-    public CellContainer(@NotNull Context c, @Nullable AttributeSet attr) {
+    public CellContainer(@NonNull Context c, @Nullable AttributeSet attr) {
         super(c, attr);
         this.mPaint.setStyle(Style.STROKE);
         this.mPaint.setStrokeWidth(2.0f);
@@ -212,7 +212,7 @@ public class CellContainer extends ViewGroup {
         super.removeAllViews();
     }
 
-    public final void projectImageOutlineAt(@NotNull Point newCoordinate, @Nullable Bitmap bitmap) {
+    public final void projectImageOutlineAt(@NonNull Point newCoordinate, @Nullable Bitmap bitmap) {
         this.cachedOutlineBitmap = bitmap;
         if (!currentOutlineCoordinate.equals(newCoordinate)) {
             this.outlinePaint.setAlpha(0);
@@ -240,13 +240,13 @@ public class CellContainer extends ViewGroup {
         invalidate();
     }
 
-    @NotNull
-    public final DragState peekItemAndSwap(@NotNull DragEvent event, @NotNull Point coordinate) {
+    @NonNull
+    public final DragState peekItemAndSwap(@NonNull DragEvent event, @NonNull Point coordinate) {
         return peekItemAndSwap((int) event.getX(), (int) event.getY(), coordinate);
     }
 
-    @NotNull
-    public final DragState peekItemAndSwap(int x, int y, @NotNull Point coordinate) {
+    @NonNull
+    public final DragState peekItemAndSwap(int x, int y, @NonNull Point coordinate) {
         touchPosToCoordinate(coordinate, x, y, 1, 1, false, false);
         if (coordinate.x != -1) {
             if (coordinate.y != -1) {
@@ -292,7 +292,7 @@ public class CellContainer extends ViewGroup {
         return null;
     }
 
-    public boolean onTouchEvent(@NotNull MotionEvent event) {
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
         switch (MotionEventCompat.getActionMasked(event)) {
             case 0:
                 this.down = System.currentTimeMillis();
@@ -319,7 +319,7 @@ public class CellContainer extends ViewGroup {
         return super.onTouchEvent(event);
     }
 
-    public boolean onInterceptTouchEvent(@NotNull MotionEvent ev) {
+    public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
         if (this.blockTouch) {
             return true;
         }
@@ -446,28 +446,28 @@ public class CellContainer extends ViewGroup {
         }
     }
 
-    public void addView(@NotNull View child) {
+    public void addView(@NonNull View child) {
         LayoutParams lp = (CellContainer.LayoutParams) child.getLayoutParams();
         setOccupied(true, lp);
         super.addView(child);
     }
 
-    public void removeView(@NotNull View view) {
+    public void removeView(@NonNull View view) {
         LayoutParams lp = (CellContainer.LayoutParams) view.getLayoutParams();
         setOccupied(false, lp);
         super.removeView(view);
     }
 
-    public final void addViewToGrid(@NotNull View view, int x, int y, int xSpan, int ySpan) {
+    public final void addViewToGrid(@NonNull View view, int x, int y, int xSpan, int ySpan) {
         view.setLayoutParams(new LayoutParams(-2, -2, x, y, xSpan, ySpan));
         addView(view);
     }
 
-    public final void addViewToGrid(@NotNull View view) {
+    public final void addViewToGrid(@NonNull View view) {
         addView(view);
     }
 
-    public final void setOccupied(boolean b, @NotNull LayoutParams lp) {
+    public final void setOccupied(boolean b, @NonNull LayoutParams lp) {
         Tool.print("Setting");
         int x = lp.getX() + lp.getXSpan();
         for (int x2 = lp.getX(); x2 < x; x2++) {
@@ -486,7 +486,7 @@ public class CellContainer extends ViewGroup {
         }
     }
 
-    public final boolean checkOccupied(@NotNull Point start, int spanX, int spanY) {
+    public final boolean checkOccupied(@NonNull Point start, int spanX, int spanY) {
         int i = start.x + spanX;
         boolean[][] zArr = this.occupied;
         if (i <= ((Object[]) zArr).length) {
@@ -530,12 +530,12 @@ public class CellContainer extends ViewGroup {
         return !pos.equals(-1, -1) ? new LayoutParams(WRAP_CONTENT, WRAP_CONTENT, pos.x, pos.y, xSpan, ySpan) : null;
     }
 
-    public void touchPosToCoordinate(@NotNull Point coordinate, int mX, int mY, int xSpan, int ySpan, boolean checkAvailability) {
+    public void touchPosToCoordinate(@NonNull Point coordinate, int mX, int mY, int xSpan, int ySpan, boolean checkAvailability) {
         touchPosToCoordinate(coordinate, mX, mY, xSpan, ySpan, checkAvailability, false);
     }
 
 
-    public final void touchPosToCoordinate(@NotNull Point coordinate, int mX, int mY, int xSpan, int ySpan, boolean checkAvailability, boolean checkBoundary) {
+    public final void touchPosToCoordinate(@NonNull Point coordinate, int mX, int mY, int xSpan, int ySpan, boolean checkAvailability, boolean checkBoundary) {
         if (cells == null) {
             coordinate.set(-1, -1);
             return;
