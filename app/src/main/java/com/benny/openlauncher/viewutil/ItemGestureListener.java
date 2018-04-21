@@ -24,19 +24,19 @@ public class ItemGestureListener extends GestureDetector.SimpleOnGestureListener
     private static final int SWIPE_THRESHOLD = 30;
     private static final int SWIPE_VELOCITY_THRESHOLD = 20;
 
-    private final ItemGestureCallback callback;
-    private final Item item;
-    private GestureDetectorCompat detector;
+    private final ItemGestureCallback _callback;
+    private final Item _item;
+    private GestureDetectorCompat _detector;
 
     public ItemGestureListener(Context context, Item item, ItemGestureCallback callback) {
-        detector = new GestureDetectorCompat(context, this);
-        detector.setOnDoubleTapListener(this);
-        this.item = item;
-        this.callback = callback;
+        _detector = new GestureDetectorCompat(context, this);
+        _detector.setOnDoubleTapListener(this);
+        this._item = item;
+        this._callback = callback;
     }
 
     public boolean onTouchEvent(MotionEvent event) {
-        return detector.onTouchEvent(event);
+        return _detector.onTouchEvent(event);
     }
 
     @Override
@@ -53,16 +53,16 @@ public class ItemGestureListener extends GestureDetector.SimpleOnGestureListener
             if (Math.abs(diffX) > Math.abs(diffY)) {
                 if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                     if (diffX > 0) {
-                        result = callback.onItemGesture(item, Type.SwipeRight);
+                        result = _callback.onItemGesture(_item, Type.SwipeRight);
                     } else {
-                        result = callback.onItemGesture(item, Type.SwipeLeft);
+                        result = _callback.onItemGesture(_item, Type.SwipeLeft);
                     }
                 }
             } else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
                 if (diffY > 0) {
-                    result = callback.onItemGesture(item, Type.SwipeDown);
+                    result = _callback.onItemGesture(_item, Type.SwipeDown);
                 } else {
-                    result = callback.onItemGesture(item, Type.SwipeUp);
+                    result = _callback.onItemGesture(_item, Type.SwipeUp);
                 }
             }
         } catch (Exception exception) {
@@ -82,7 +82,7 @@ public class ItemGestureListener extends GestureDetector.SimpleOnGestureListener
 //    }
 
     public boolean onSingleTapConfirmed(MotionEvent e) {
-        return callback.onItemGesture(item, Type.Click);
+        return _callback.onItemGesture(_item, Type.Click);
     }
 
     public interface ItemGestureCallback {

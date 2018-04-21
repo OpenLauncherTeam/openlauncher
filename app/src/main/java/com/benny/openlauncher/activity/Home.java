@@ -321,14 +321,14 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     public final void onStartApp(@NonNull Context context, @NonNull App app, @Nullable View view) {
 
 
-        if (Intrinsics.areEqual(app.packageName, BuildConfig.APPLICATION_ID)) {
+        if (Intrinsics.areEqual(app._packageName, BuildConfig.APPLICATION_ID)) {
             LauncherAction.RunAction(Action.LauncherSettings, context);
             Companion.setConsumeNextResume(true);
         } else {
             try {
                 Intent intent = new Intent("android.intent.action.MAIN");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClassName(app.packageName, app.className);
+                intent.setClassName(app._packageName, app._className);
                 context.startActivity(intent, getActivityAnimationOpts(view));
                 Companion.setConsumeNextResume(true);
             } catch (Exception e) {
@@ -493,8 +493,8 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             if (act.length() > 1 && act.charAt(0) == '0') {
                 LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
                 if (item != null) {
-                    labels.add(item.label.toString());
-                    icons.add(item.icon);
+                    labels.add(item._label.toString());
+                    icons.add(item._icon);
                 }
             }
         }

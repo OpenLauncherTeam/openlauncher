@@ -30,7 +30,7 @@ class HpDesktopGestureCallback : DesktopGestureListener.DesktopGestureCallback {
                         Tool.vibrate(desktop)
                     }
                     if (gestureid == 9) {
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_swipe_up) + "__", "")))
+                        gesture._extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_swipe_up) + "__", "")))
                     }
                     LauncherAction.RunAction(gesture, desktop.context)
                 }
@@ -44,7 +44,7 @@ class HpDesktopGestureCallback : DesktopGestureListener.DesktopGestureCallback {
                         Tool.vibrate(desktop)
                     }
                     if (gestureid == 9) {
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_swipe_down) + "__", "")))
+                        gesture._extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_swipe_down) + "__", "")))
                     }
                     LauncherAction.RunAction(gesture, desktop.context)
                 }
@@ -60,7 +60,7 @@ class HpDesktopGestureCallback : DesktopGestureListener.DesktopGestureCallback {
                         Tool.vibrate(desktop)
                     }
                     if (gestureid == 9) {
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_pinch) + "__", "")))
+                        gesture._extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_pinch) + "__", "")))
                     }
                     LauncherAction.RunAction(gesture, desktop.context)
                 }
@@ -74,7 +74,7 @@ class HpDesktopGestureCallback : DesktopGestureListener.DesktopGestureCallback {
                         Tool.vibrate(desktop)
                     }
                     if (gestureid == 9) {
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_unpinch) + "__", "")))
+                        gesture._extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_unpinch) + "__", "")))
                     }
                     LauncherAction.RunAction(gesture, desktop.context)
                 }
@@ -88,7 +88,7 @@ class HpDesktopGestureCallback : DesktopGestureListener.DesktopGestureCallback {
                         Tool.vibrate(desktop)
                     }
                     if (gestureid == 9) {
-                        gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_double_tap) + "__", "")))
+                        gesture._extraData = Intent(packageManager.getLaunchIntentForPackage(_appSettings.getString(context.getString(R.string.pref_key__gesture_double_tap) + "__", "")))
                     }
                     LauncherAction.RunAction(gesture, desktop.context)
                 }

@@ -32,17 +32,17 @@ public class LauncherAction {
 
     };
 
-    public static boolean clearingRam = false;
+    public static boolean _clearingRam = false;
 
     public static void RunAction(@Nullable ActionItem actionItem, final Context context) {
         if (actionItem != null)
-            switch (actionItem.action) {
+            switch (actionItem._action) {
                 case LaunchApp:
-                    Tool.startApp(context, actionItem.extraData);
+                    Tool.startApp(context, actionItem._extraData);
                     break;
 
                 default:
-                    RunAction(actionItem.action, context);
+                    RunAction(actionItem._action, context);
             }
     }
 
@@ -70,7 +70,7 @@ public class LauncherAction {
                 }
                 break;
             case ClearRam:
-                if (clearingRam) {
+                if (_clearingRam) {
                     break;
                 }
                 new ClearRamAsyncTask().execute();
@@ -110,7 +110,7 @@ public class LauncherAction {
 
     public static ActionDisplayItem getActionItemFromString(String string) {
         for (ActionDisplayItem item : actionDisplayItems) {
-            if (item.label.toString().equals(string)) {
+            if (item._label.toString().equals(string)) {
                 return item;
             }
         }
@@ -121,42 +121,29 @@ public class LauncherAction {
         return new ActionItem(Action.values()[position], null);
     }
 
-    public static int getActionItemIndex(ActionItem item) {
-        if (item == null) return -1;
-        for (int i = 0; i < Action.values().length; i++) {
-            if (item.action == Action.values()[i])
-                return i;
-        }
-        return -1;
-    }
-
-    public enum Theme {
-        Dark, Light
-    }
-
     public enum Action {
         EditMinBar, SetWallpaper, LockScreen, ClearRam, DeviceSettings, LauncherSettings, VolumeDialog, OpenAppDrawer, LaunchApp, OpenSearch
     }
 
     public static class ActionItem {
-        public Action action;
-        public Intent extraData;
+        public Action _action;
+        public Intent _extraData;
 
         public ActionItem(Action action, Intent extraData) {
-            this.action = action;
-            this.extraData = extraData;
+            this._action = action;
+            this._extraData = extraData;
         }
     }
 
     public static class ActionDisplayItem {
-        public Action label;
-        public String description;
-        public int icon;
+        public Action _label;
+        public String _description;
+        public int _icon;
 
         public ActionDisplayItem(Action label, String description, int icon) {
-            this.label = label;
-            this.description = description;
-            this.icon = icon;
+            this._label = label;
+            this._description = description;
+            this._icon = icon;
         }
     }
 }

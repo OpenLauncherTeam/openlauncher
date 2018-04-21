@@ -341,7 +341,7 @@ class SettingsActivity : ThemeActivity() {
                     if (sharedPreferences.getString(key, "0").equals("9")) {
                         selectAppDialog(context!!, object : OnAppSelectedListener {
                             override fun onAppSelected(app: App) {
-                                sharedPreferences.edit().putString(key + "__", app.packageName).apply()
+                                sharedPreferences.edit().putString(key + "__", app._packageName).apply()
                             }
                         })
                     }

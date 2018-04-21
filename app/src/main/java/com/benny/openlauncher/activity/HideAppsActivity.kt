@@ -35,7 +35,7 @@ class HideAppsActivity : ThemeActivity() {
     }
 
     override fun onDestroy() {
-        AppManager.getInstance(this).recreateAfterGettingApps = true
+        AppManager.getInstance(this)._recreateAfterGettingApps = true
         AppManager.getInstance(this).init()
         super.onDestroy()
     }

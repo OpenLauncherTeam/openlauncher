@@ -589,7 +589,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         this._previousDragPoint.set(this._coordinate.x, this._coordinate.y);
         switch (state) {
             case CurrentNotOccupied:
-                getCurrentPage().projectImageOutlineAt(this._coordinate, DragNDropHandler.cachedDragBitmap);
+                getCurrentPage().projectImageOutlineAt(this._coordinate, DragNDropHandler._cachedDragBitmap);
                 break;
             case OutOffRange:
             case ItemViewNotFound:

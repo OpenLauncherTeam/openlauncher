@@ -152,7 +152,7 @@ public final class DragNDropLayout extends FrameLayout {
 
         protected void onDraw(@Nullable Canvas canvas) {
             super.onDraw(canvas);
-            if (!(canvas == null || DragNDropHandler.cachedDragBitmap == null)) {
+            if (!(canvas == null || DragNDropHandler._cachedDragBitmap == null)) {
                 if (!DragNDropLayout.this.getDragLocation().equals(-1.0f, -1.0f)) {
                     float x = DragNDropLayout.this.getDragLocation().x - Home.Companion.getItemTouchX();
                     float y = DragNDropLayout.this.getDragLocation().y - Home.Companion.getItemTouchY();
@@ -161,17 +161,17 @@ public final class DragNDropLayout extends FrameLayout {
                         DragNDropLayout.this._overlayIconScale = Tool.clampFloat(DragNDropLayout.this._overlayIconScale + 0.05f, 1.0f, 1.1f);
                         float access$getOverlayIconScale$p = DragNDropLayout.this._overlayIconScale;
                         float access$getOverlayIconScale$p2 = DragNDropLayout.this._overlayIconScale;
-                        Bitmap bitmap = DragNDropHandler.cachedDragBitmap;
+                        Bitmap bitmap = DragNDropHandler._cachedDragBitmap;
                         if (bitmap == null) {
                             Intrinsics.throwNpe();
                         }
                         float width = ((float) (bitmap.getWidth() / 2)) + x;
-                        Bitmap bitmap2 = DragNDropHandler.cachedDragBitmap;
+                        Bitmap bitmap2 = DragNDropHandler._cachedDragBitmap;
                         if (bitmap2 == null) {
                             Intrinsics.throwNpe();
                         }
                         canvas.scale(access$getOverlayIconScale$p, access$getOverlayIconScale$p2, width, ((float) (bitmap2.getHeight() / 2)) + y);
-                        canvas.drawBitmap(DragNDropHandler.cachedDragBitmap, x, y, DragNDropLayout.this._paint);
+                        canvas.drawBitmap(DragNDropHandler._cachedDragBitmap, x, y, DragNDropLayout.this._paint);
                         canvas.restore();
                     }
                     if (DragNDropLayout.this.getDragging()) {

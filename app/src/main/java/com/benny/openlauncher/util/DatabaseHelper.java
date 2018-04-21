@@ -40,13 +40,14 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
                     COLUMN_STATE + " INTEGER)";
     protected static final String SQL_DELETE = "DROP TABLE IF EXISTS ";
     protected static final String SQL_QUERY = "SELECT * FROM ";
-    protected SQLiteDatabase db;
-    protected Context context;
+
+    protected SQLiteDatabase _db;
+    protected Context _context;
 
     public DatabaseHelper(Context c) {
         super(c, DATABASE_HOME, null, 1);
-        db = getWritableDatabase();
-        context = c;
+        _db = getWritableDatabase();
+        _context = c;
     }
 
     public void onCreate(SQLiteDatabase db) {
@@ -77,7 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         switch (item.getType()) {
             case APP:
                 if (Setup.appSettings().enableImageCaching()) {
-                    Tool.saveIcon(context, Tool.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(-1)), Integer.toString(item.getId()));
+                    Tool.saveIcon(_context, Tool.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(-1)), Integer.toString(item.getId()));
                 }
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.getIntent()));
                 break;
@@ -104,7 +105,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
 
         // item will always be visible when first added
         itemValues.put(COLUMN_STATE, 1);
-        db.insert(TABLE_HOME, null, itemValues);
+        _db.insert(TABLE_HOME, null, itemValues);
     }
 
     @Override
@@ -120,7 +121,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
     @Override
     public void saveItem(Item item, int page, Definitions.ItemPosition itemPosition) {
         String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
-        Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
+        Cursor cursor = _db.rawQuery(SQL_QUERY_SPECIFIC, null);
         if (cursor.getCount() == 0) {
             createItem(item, page, itemPosition);
         } else if (cursor.getCount() == 1) {
@@ -137,13 +138,13 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
             }
         }
         // delete the item itself
-        db.delete(TABLE_HOME, COLUMN_TIME + " = ?", new String[]{String.valueOf(item.getId())});
+        _db.delete(TABLE_HOME, COLUMN_TIME + " = ?", new String[]{String.valueOf(item.getId())});
     }
 
     @Override
     public List<List<Item>> getDesktop() {
         String SQL_QUERY_DESKTOP = SQL_QUERY + TABLE_HOME;
-        Cursor cursor = db.rawQuery(SQL_QUERY_DESKTOP, null);
+        Cursor cursor = _db.rawQuery(SQL_QUERY_DESKTOP, null);
         List<List<Item>> desktop = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
@@ -165,7 +166,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
     @Override
     public List<Item> getDock() {
         String SQL_QUERY_DESKTOP = SQL_QUERY + TABLE_HOME;
-        Cursor cursor = db.rawQuery(SQL_QUERY_DESKTOP, null);
+        Cursor cursor = _db.rawQuery(SQL_QUERY_DESKTOP, null);
         List<Item> dock = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
@@ -184,7 +185,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
     @Override
     public Item getItem(int id) {
         String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + id;
-        Cursor cursor = db.rawQuery(SQL_QUERY_SPECIFIC, null);
+        Cursor cursor = _db.rawQuery(SQL_QUERY_SPECIFIC, null);
         Item item = null;
         if (cursor.moveToFirst()) {
             item = getSelection(cursor);
@@ -206,7 +207,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         switch (item.getType()) {
             case APP:
                 if (Setup.appSettings().enableImageCaching()) {
-                    Tool.saveIcon(context, Tool.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE)), Integer.toString(item.getId()));
+                    Tool.saveIcon(_context, Tool.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE)), Integer.toString(item.getId()));
                 }
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.getIntent()));
                 break;
@@ -226,7 +227,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
                 itemValues.put(COLUMN_DATA, concat);
                 break;
         }
-        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
+        _db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
     }
 
     // update the state of an item
@@ -234,7 +235,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         ContentValues itemValues = new ContentValues();
         Setup.logger().log(this, Log.INFO, null, "updateItem (state): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
         itemValues.put(COLUMN_STATE, state.ordinal());
-        db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
+        _db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
     }
 
     // update the fields only used by the database

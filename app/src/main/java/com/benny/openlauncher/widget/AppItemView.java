@@ -207,7 +207,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             }
         }
 
-        // center the icon
+        // center the _icon
         if (_icon != null) {
             canvas.save();
             canvas.translate((getWidth() - _iconSize) / 2, _heightPadding);

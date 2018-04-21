@@ -89,9 +89,9 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
         ArrayList<String> minibarArrangement = new ArrayList<>();
         for (Item item : adapter.getAdapterItems()) {
             if (item.enable) {
-                minibarArrangement.add("0" + item.item.label.toString());
+                minibarArrangement.add("0" + item.item._label.toString());
             } else
-                minibarArrangement.add("1" + item.item.label.toString());
+                minibarArrangement.add("1" + item.item._label.toString());
         }
         AppSettings.get().setMinibarArrangement(minibarArrangement);
         super.onPause();
@@ -145,9 +145,9 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
 
         @Override
         public void bindView(ViewHolder holder, List payloads) {
-            holder.tv.setText(item.label.toString());
-            holder.tv2.setText(item.description);
-            holder.iv.setImageResource(item.icon);
+            holder.tv.setText(item._label.toString());
+            holder.tv2.setText(item._description);
+            holder.iv.setImageResource(item._icon);
             holder.cb.setChecked(enable);
             holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override

@@ -13,24 +13,24 @@ import com.benny.openlauncher.viewutil.GroupIconDrawable;
 
 public class SimpleIconProvider extends BaseIconProvider {
 
-    protected Drawable drawable;
-    protected int drawableResource;
+    protected Drawable _drawable;
+    protected int _drawableResource;
 
     public SimpleIconProvider(Drawable drawable) {
-        this.drawable = drawable;
-        this.drawableResource = -1;
+        this._drawable = drawable;
+        this._drawableResource = -1;
     }
 
     public SimpleIconProvider(int drawableResource) {
-        this.drawable = null;
-        this.drawableResource = drawableResource;
+        this._drawable = null;
+        this._drawableResource = drawableResource;
     }
 
     private Drawable getDrawable() {
-        if (drawable != null) {
-            return drawable;
-        } else if (drawableResource > 0) {
-            return Setup.appContext().getResources().getDrawable(drawableResource);
+        if (_drawable != null) {
+            return _drawable;
+        } else if (_drawableResource > 0) {
+            return Setup.appContext().getResources().getDrawable(_drawableResource);
         }
         return null;
     }
@@ -85,7 +85,7 @@ public class SimpleIconProvider extends BaseIconProvider {
 
     @Override
     public boolean isGroupIconDrawable() {
-        return drawable != null && drawable instanceof GroupIconDrawable;
+        return _drawable != null && _drawable instanceof GroupIconDrawable;
     }
 
     private Drawable scaleDrawable(Drawable drawable, int forceSize) {

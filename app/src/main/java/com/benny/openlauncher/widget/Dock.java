@@ -106,7 +106,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
         _previousDragPoint.set(this._coordinate.x, this._coordinate.y);
         switch (state) {
             case CurrentNotOccupied:
-                projectImageOutlineAt(this._coordinate, DragNDropHandler.cachedDragBitmap);
+                projectImageOutlineAt(this._coordinate, DragNDropHandler._cachedDragBitmap);
                 break;
             case OutOffRange:
             case ItemViewNotFound:
