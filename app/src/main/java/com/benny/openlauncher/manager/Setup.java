@@ -20,21 +20,21 @@ public abstract class Setup {
     // Class and singleton
     // ----------------
 
-    private static Setup setup = null;
+    private static Setup _setup = null;
 
     public static boolean wasInitialised() {
-        return setup != null;
+        return _setup != null;
     }
 
     public static void init(Setup setup) {
-        Setup.setup = setup;
+        Setup._setup = setup;
     }
 
     public static Setup get() {
-        if (setup == null) {
+        if (_setup == null) {
             throw new RuntimeException("Setup has not been initialised!");
         }
-        return setup;
+        return _setup;
     }
 
     // ----------------

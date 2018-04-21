@@ -11,21 +11,21 @@ import com.benny.openlauncher.util.AppSettings;
 
 public abstract class ThemeActivity extends AppCompatActivity {
 
-    private AppSettings appSettings;
-    private String currentTheme;
+    private AppSettings _appSettings;
+    private String _currentTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        appSettings = AppSettings.get();
-        currentTheme = appSettings.getTheme();
-        if (appSettings.getTheme().equals("0")) {
+        _appSettings = AppSettings.get();
+        _currentTheme = _appSettings.getTheme();
+        if (_appSettings.getTheme().equals("0")) {
             setTheme(R.style.NormalActivity_Light);
         } else {
             setTheme(R.style.NormalActivity_Dark);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(dark(appSettings.getPrimaryColor(), 0.8));
-            getWindow().setNavigationBarColor(appSettings.getPrimaryColor());
+            getWindow().setStatusBarColor(dark(_appSettings.getPrimaryColor(), 0.8));
+            getWindow().setNavigationBarColor(_appSettings.getPrimaryColor());
         }
         super.onCreate(savedInstanceState);
     }
@@ -33,7 +33,7 @@ public abstract class ThemeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (!appSettings.getTheme().equals(currentTheme)) {
+        if (!_appSettings.getTheme().equals(_currentTheme)) {
             restart();
         }
     }

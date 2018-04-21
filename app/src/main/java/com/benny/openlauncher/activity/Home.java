@@ -95,27 +95,27 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     public static final int REQUEST_PICK_APPWIDGET = 0x2678;
     @Nullable
     private static Resources _resources;
-    private static final IntentFilter appUpdateIntentFilter = new IntentFilter();
+    private static final IntentFilter _appUpdateIntentFilter = new IntentFilter();
     @Nullable
-    private static WidgetHost appWidgetHost;
+    private static WidgetHost _appWidgetHost;
     @NonNull
-    public static AppWidgetManager appWidgetManager;
-    private static boolean consumeNextResume;
+    public static AppWidgetManager _appWidgetManager;
+    private static boolean _consumeNextResume;
     @NonNull
-    public static DataManager db;
-    public static float itemTouchX;
-    public static float itemTouchY;
+    public static DataManager _db;
+    public static float _itemTouchX;
+    public static float _itemTouchY;
     @Nullable
-    public static Home launcher;
-    private static final IntentFilter shortcutIntentFilter = new IntentFilter();
-    private static final IntentFilter timeChangesIntentFilter = new IntentFilter();
-    private HashMap _$_findViewCache;
-    private final AppUpdateReceiver appUpdateReceiver = new AppUpdateReceiver();
+    public static Home _launcher;
+    private static final IntentFilter _shortcutIntentFilter = new IntentFilter();
+    private static final IntentFilter _timeChangesIntentFilter = new IntentFilter();
+    private HashMap deleteMefindViewCache;
+    private final AppUpdateReceiver _appUpdateReceiver = new AppUpdateReceiver();
     private int cx;
     private int cy;
     private int rad;
-    private final ShortcutReceiver shortcutReceiver = new ShortcutReceiver();
-    private BroadcastReceiver timeChangedReceiver;
+    private final ShortcutReceiver _shortcutReceiver = new ShortcutReceiver();
+    private BroadcastReceiver _timeChangedReceiver;
 
     public static final class Companion {
         private Companion() {
@@ -123,11 +123,11 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
         @Nullable
         public final Home getLauncher() {
-            return Home.launcher;
+            return Home._launcher;
         }
 
         public final void setLauncher(@Nullable Home v) {
-            Home.launcher = v;
+            Home._launcher = v;
         }
 
         @Nullable
@@ -141,7 +141,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
         @NonNull
         public final DataManager getDb() {
-            DataManager dataManager = Home.db;
+            DataManager dataManager = Home._db;
             if (dataManager == null) {
                 Intrinsics.throwUninitializedPropertyAccessException("db");
             }
@@ -150,21 +150,21 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
         public final void setDb(@NonNull DataManager v) {
 
-            Home.db = v;
+            Home._db = v;
         }
 
         @Nullable
         public final WidgetHost getAppWidgetHost() {
-            return Home.appWidgetHost;
+            return Home._appWidgetHost;
         }
 
         public final void setAppWidgetHost(@Nullable WidgetHost v) {
-            Home.appWidgetHost = v;
+            Home._appWidgetHost = v;
         }
 
         @NonNull
         public final AppWidgetManager getAppWidgetManager() {
-            AppWidgetManager appWidgetManager = Home.appWidgetManager;
+            AppWidgetManager appWidgetManager = Home._appWidgetManager;
             if (appWidgetManager == null) {
                 Intrinsics.throwUninitializedPropertyAccessException("appWidgetManager");
             }
@@ -173,57 +173,57 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
         public final void setAppWidgetManager(@NonNull AppWidgetManager v) {
 
-            Home.appWidgetManager = v;
+            Home._appWidgetManager = v;
         }
 
         public final float getItemTouchX() {
-            return Home.itemTouchX;
+            return Home._itemTouchX;
         }
 
         public final void setItemTouchX(float v) {
-            Home.itemTouchX = v;
+            Home._itemTouchX = v;
         }
 
         public final float getItemTouchY() {
-            return Home.itemTouchY;
+            return Home._itemTouchY;
         }
 
         public final void setItemTouchY(float v) {
-            Home.itemTouchY = v;
+            Home._itemTouchY = v;
         }
 
         public final boolean getConsumeNextResume() {
-            return Home.consumeNextResume;
+            return Home._consumeNextResume;
         }
 
         public final void setConsumeNextResume(boolean v) {
-            Home.consumeNextResume = v;
+            Home._consumeNextResume = v;
         }
 
         private final IntentFilter getTimeChangesIntentFilter() {
-            return Home.timeChangesIntentFilter;
+            return Home._timeChangesIntentFilter;
         }
 
         private final IntentFilter getAppUpdateIntentFilter() {
-            return Home.appUpdateIntentFilter;
+            return Home._appUpdateIntentFilter;
         }
 
         private final IntentFilter getShortcutIntentFilter() {
-            return Home.shortcutIntentFilter;
+            return Home._shortcutIntentFilter;
         }
     }
 
 
     public View _$_findCachedViewById(int i) {
-        if (this._$_findViewCache == null) {
-            this._$_findViewCache = new HashMap();
+        if (this.deleteMefindViewCache == null) {
+            this.deleteMefindViewCache = new HashMap();
         }
-        View view = (View) this._$_findViewCache.get(Integer.valueOf(i));
+        View view = (View) this.deleteMefindViewCache.get(Integer.valueOf(i));
         if (view != null) {
             return view;
         }
         view = findViewById(i);
-        this._$_findViewCache.put(Integer.valueOf(i), view);
+        this.deleteMefindViewCache.put(Integer.valueOf(i), view);
         return view;
     }
 
@@ -273,7 +273,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         AppSettings appSettings2 = Setup.appSettings();
 
         if (appSettings2.isSearchBarTimeEnabled()) {
-            this.timeChangedReceiver = new BroadcastReceiver() {
+            this._timeChangedReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     if (intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
@@ -507,7 +507,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
                 if (action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.EditMinBar) {
-                    consumeNextResume = true;
+                    _consumeNextResume = true;
                 }
                 LauncherAction.RunAction(action, Home.this);
                 if (action != LauncherAction.Action.DeviceSettings && action != LauncherAction.Action.LauncherSettings && action != LauncherAction.Action.EditMinBar) {
@@ -1000,11 +1000,11 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     }
 
     private final void registerBroadcastReceiver() {
-        registerReceiver(this.appUpdateReceiver, Companion.getAppUpdateIntentFilter());
-        if (this.timeChangedReceiver != null) {
-            registerReceiver(this.timeChangedReceiver, Companion.getTimeChangesIntentFilter());
+        registerReceiver(this._appUpdateReceiver, Companion.getAppUpdateIntentFilter());
+        if (this._timeChangedReceiver != null) {
+            registerReceiver(this._timeChangedReceiver, Companion.getTimeChangesIntentFilter());
         }
-        registerReceiver(this.shortcutReceiver, Companion.getShortcutIntentFilter());
+        registerReceiver(this._shortcutReceiver, Companion.getShortcutIntentFilter());
     }
 
     private final void pickWidget() {
@@ -1114,11 +1114,11 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             appWidgetHost.stopListening();
         }
         Companion.setAppWidgetHost((WidgetHost) null);
-        unregisterReceiver(this.appUpdateReceiver);
-        if (this.timeChangedReceiver != null) {
-            unregisterReceiver(this.timeChangedReceiver);
+        unregisterReceiver(this._appUpdateReceiver);
+        if (this._timeChangedReceiver != null) {
+            unregisterReceiver(this._timeChangedReceiver);
         }
-        unregisterReceiver(this.shortcutReceiver);
+        unregisterReceiver(this._shortcutReceiver);
         Companion.setLauncher((Home) null);
         super.onDestroy();
     }

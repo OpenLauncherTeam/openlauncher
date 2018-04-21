@@ -73,7 +73,7 @@ public class Item implements LabelProvider, Parcelable {
                 parcel.readStringList(labels);
                 _items = new ArrayList<>();
                 for (String s : labels) {
-                    _items.add(Home.Companion.getLauncher().db.getItem(Integer.parseInt(s)));
+                    _items.add(Home.Companion.getLauncher()._db.getItem(Integer.parseInt(s)));
                 }
                 break;
             case ACTION:

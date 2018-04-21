@@ -30,12 +30,12 @@ import butterknife.ButterKnife;
 
 public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallback {
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar _toolbar;
     @BindView(R.id.enableSwitch)
-    SwitchCompat enableSwitch;
+    SwitchCompat _enableSwitch;
     @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    private FastItemAdapter<Item> adapter;
+    RecyclerView _recyclerView;
+    private FastItemAdapter<Item> _adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,33 +43,33 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
 
         setContentView(R.layout.activity_minibar_edit);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(_toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle(R.string.minibar);
 
-        adapter = new FastItemAdapter<>();
+        _adapter = new FastItemAdapter<>();
 
         SimpleDragCallback touchCallback = new SimpleDragCallback(this);
         ItemTouchHelper touchHelper = new ItemTouchHelper(touchCallback);
-        touchHelper.attachToRecyclerView(recyclerView);
+        touchHelper.attachToRecyclerView(_recyclerView);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        _recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        recyclerView.setAdapter(adapter);
+        _recyclerView.setAdapter(_adapter);
 
         int i = 0;
         final ArrayList<String> minibarArrangement = AppSettings.get().getMinibarArrangement();
         for (String act : minibarArrangement) {
             LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
-            adapter.add(new Item(i, item, act.charAt(0) == '0'));
+            _adapter.add(new Item(i, item, act.charAt(0) == '0'));
             i++;
         }
 
         boolean minBarEnable = AppSettings.get().getMinibarEnable();
-        enableSwitch.setChecked(minBarEnable);
-        enableSwitch.setText(minBarEnable ? R.string.on : R.string.off);
-        enableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        _enableSwitch.setChecked(minBarEnable);
+        _enableSwitch.setText(minBarEnable ? R.string.on : R.string.off);
+        _enableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 buttonView.setText(isChecked ? R.string.on : R.string.off);
@@ -87,7 +87,7 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
     @Override
     protected void onPause() {
         ArrayList<String> minibarArrangement = new ArrayList<>();
-        for (Item item : adapter.getAdapterItems()) {
+        for (Item item : _adapter.getAdapterItems()) {
             if (item.enable) {
                 minibarArrangement.add("0" + item.item._label.toString());
             } else
@@ -107,8 +107,8 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
 
     @Override
     public boolean itemTouchOnMove(int oldPosition, int newPosition) {
-        Collections.swap(adapter.getAdapterItems(), oldPosition, newPosition);
-        adapter.notifyAdapterDataSetChanged();
+        Collections.swap(_adapter.getAdapterItems(), oldPosition, newPosition);
+        _adapter.notifyAdapterDataSetChanged();
         return false;
     }
 
@@ -145,11 +145,11 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
 
         @Override
         public void bindView(ViewHolder holder, List payloads) {
-            holder.tv.setText(item._label.toString());
-            holder.tv2.setText(item._description);
-            holder.iv.setImageResource(item._icon);
-            holder.cb.setChecked(enable);
-            holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            holder._tv.setText(item._label.toString());
+            holder._tv2.setText(item._description);
+            holder._iv.setImageResource(item._icon);
+            holder._cb.setChecked(enable);
+            holder._cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     edited = true;
@@ -160,17 +160,17 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
-            TextView tv;
-            TextView tv2;
-            ImageView iv;
-            CheckBox cb;
+            TextView _tv;
+            TextView _tv2;
+            ImageView _iv;
+            CheckBox _cb;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                tv = itemView.findViewById(R.id.tv);
-                tv2 = itemView.findViewById(R.id.tv2);
-                iv = itemView.findViewById(R.id.iv);
-                cb = itemView.findViewById(R.id.cb);
+                _tv = itemView.findViewById(R.id.tv);
+                _tv2 = itemView.findViewById(R.id.tv2);
+                _iv = itemView.findViewById(R.id.iv);
+                _cb = itemView.findViewById(R.id.cb);
             }
         }
     }

@@ -194,10 +194,10 @@ class SettingsActivity : ThemeActivity() {
         override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
             checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key)
             if (key == getString(R.string.pref_key__desktop_indicator_style)) {
-                Home.launcher?.getDesktopIndicator()?.setMode(appSettings.desktopIndicatorMode)
+                Home._launcher?.getDesktopIndicator()?.setMode(appSettings.desktopIndicatorMode)
             }
             if (key == getString(R.string.pref_title__desktop_show_position_indicator)) {
-                Home.launcher?.updateDesktopIndicatorVisibility()
+                Home._launcher?.updateDesktopIndicatorVisibility()
             }
         }
 
@@ -240,7 +240,7 @@ class SettingsActivity : ThemeActivity() {
         override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
             checkIfPreferenceChangedRequireRestart(requireRestartPreferenceIds, key)
             if (key == getString(R.string.pref_key__dock_enable)) {
-                Home.launcher?.updateDock(true)
+                Home._launcher?.updateDock(true)
             }
         }
 
@@ -410,17 +410,17 @@ class SettingsActivity : ThemeActivity() {
 
                 if (key == getString(R.string.pref_key__clear_database)) {
                     DialogHelper.alertDialog(context!!, "Clear user data", "Are you sure, all your shortcuts will be removed.", MaterialDialog.SingleButtonCallback { dialog, which ->
-                        if (Home.launcher != null)
-                            Home.launcher?.recreate()
-                        (Home.db as DatabaseHelper).onUpgrade((Home.db as DatabaseHelper).writableDatabase, 1, 1)
+                        if (Home._launcher != null)
+                            Home._launcher?.recreate()
+                        (Home._db as DatabaseHelper).onUpgrade((Home._db as DatabaseHelper).writableDatabase, 1, 1)
                         activity!!.finish()
                     })
                     return true
                 }
 
                 if (key == getString(R.string.pref_key__restart)) {
-                    if (Home.launcher != null)
-                        Home.launcher?.recreate()
+                    if (Home._launcher != null)
+                        Home._launcher?.recreate()
                     activity!!.finish()
                     return true
                 }
@@ -471,7 +471,7 @@ class SettingsActivity : ThemeActivity() {
                     if (ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         DialogHelper.backupDialog(activity)
                     } else {
-                        ActivityCompat.requestPermissions(Home.launcher!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), Home.REQUEST_PERMISSION_STORAGE)
+                        ActivityCompat.requestPermissions(Home._launcher!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), Home.REQUEST_PERMISSION_STORAGE)
                     }
                 }
             }

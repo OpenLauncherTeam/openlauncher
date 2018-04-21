@@ -34,28 +34,28 @@ import java.util.List;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class HideAppsFragment extends Fragment {
-
-    @SuppressWarnings("unchecked")
-    private ArrayList<String> list_activities = new ArrayList();
-    @SuppressWarnings("unchecked")
-    private ArrayList<AppInfo> list_activities_final = new ArrayList();
-    @SuppressLint("StaticFieldLeak")
-    private ViewSwitcher switcherLoad;
-    private AsyncWorkerList taskList = new AsyncWorkerList();
-    private Typeface tf;
-
     private static final String TAG = "RequestActivity";
     private static final boolean DEBUG = true;
 
+    @SuppressWarnings("unchecked")
+    private ArrayList<String> _listActivities = new ArrayList();
+    @SuppressWarnings("unchecked")
+    private ArrayList<AppInfo> _listActivitiesFinal = new ArrayList();
+    @SuppressLint("StaticFieldLeak")
+    private ViewSwitcher _switcherLoad;
+    private AsyncWorkerList _taskList = new AsyncWorkerList();
+    private Typeface _tf;
+
+
     @SuppressWarnings("unused")
-    private ViewSwitcher viewSwitcher;
-    private ListView grid;
-    private AppAdapter appInfoAdapter;
+    private ViewSwitcher _viewSwitcher;
+    private ListView _grid;
+    private AppAdapter _appInfoAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.request, container, false);
-        switcherLoad = rootView.findViewById(R.id.viewSwitcherLoadingMain);
+        _switcherLoad = rootView.findViewById(R.id.viewSwitcherLoadingMain);
 
         FloatingActionButton fab = rootView.findViewById(R.id.fab_rq);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -65,12 +65,12 @@ public class HideAppsFragment extends Fragment {
             }
         });
 
-        if (taskList.getStatus() == AsyncTask.Status.PENDING) {
+        if (_taskList.getStatus() == AsyncTask.Status.PENDING) {
             // My AsyncTask has not started yet
-            taskList.execute();
+            _taskList.execute();
         }
 
-        if (taskList.getStatus() == AsyncTask.Status.FINISHED) {
+        if (_taskList.getStatus() == AsyncTask.Status.FINISHED) {
             // My AsyncTask is done and onPostExecute was called
             new AsyncWorkerList().execute();
         }
@@ -86,7 +86,7 @@ public class HideAppsFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             List<String> hiddenList = AppSettings.get().getHiddenAppsList();
-            list_activities.addAll(hiddenList);
+            _listActivities.addAll(hiddenList);
 
             super.onPreExecute();
         }
@@ -107,7 +107,7 @@ public class HideAppsFragment extends Fragment {
         protected void onPostExecute(String result) {
             populateView();
             //Switch from loading screen to the main view
-            switcherLoad.showNext();
+            _switcherLoad.showNext();
 
             super.onPostExecute(result);
         }
@@ -128,15 +128,15 @@ public class HideAppsFragment extends Fragment {
                 ArrayList<String> hiddenList = new ArrayList<>();
 
                 // Get all selected apps
-                for (int i = 0; i < list_activities_final.size(); i++) {
-                    if ((list_activities_final.get(i)).isSelected()) {
-                        hiddenList.add((list_activities_final.get(i)).getCode());
+                for (int i = 0; i < _listActivitiesFinal.size(); i++) {
+                    if ((_listActivitiesFinal.get(i)).isSelected()) {
+                        hiddenList.add((_listActivitiesFinal.get(i)).getCode());
                         selected++;
                     }
                 }
                 if (selected == 0) {//When there's no app selected show a toast and return.
                     Snackbar snackbar = Snackbar
-                            .make(grid, R.string.request_toast, Snackbar.LENGTH_INDEFINITE)
+                            .make(_grid, R.string.request_toast, Snackbar.LENGTH_INDEFINITE)
                             .setAction(getString(R.string.ok), new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -165,24 +165,24 @@ public class HideAppsFragment extends Fragment {
                     app.getPackageName() + "/" + app.getClassName(),
                     app.getLabel(),
                     app.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE),
-                    list_activities.contains(app.getPackageName() + "/" + app.getClassName())
+                    _listActivities.contains(app.getPackageName() + "/" + app.getClassName())
             );
-            list_activities_final.add(tempAppInfo);
+            _listActivitiesFinal.add(tempAppInfo);
         }
     }
 
     @SuppressWarnings("unchecked")
     private void populateView() {
-        grid = getActivity().findViewById(R.id.app_grid);
+        _grid = getActivity().findViewById(R.id.app_grid);
 
-        assert grid != null;
-        grid.setFastScrollEnabled(true);
-        grid.setFastScrollAlwaysVisible(false);
+        assert _grid != null;
+        _grid.setFastScrollEnabled(true);
+        _grid.setFastScrollAlwaysVisible(false);
 
-        appInfoAdapter = new AppAdapter(getActivity(), list_activities_final);
+        _appInfoAdapter = new AppAdapter(getActivity(), _listActivitiesFinal);
 
-        grid.setAdapter(appInfoAdapter);
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        _grid.setAdapter(_appInfoAdapter);
+        _grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> AdapterView, View view, int position, long row) {
                 AppInfo appInfo = (AppInfo) AdapterView.getItemAtPosition(position);
                 CheckBox checker = view.findViewById(R.id.CBappSelect);
@@ -219,11 +219,11 @@ public class HideAppsFragment extends Fragment {
             if (convertView == null) {
                 convertView = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.request_item_list, parent, false);
                 holder = new ViewHolder();
-                holder.apkIcon = convertView.findViewById(R.id.IVappIcon);
-                holder.apkName = convertView.findViewById(R.id.TVappName);
-                holder.apkPackage = convertView.findViewById(R.id.TVappPackage);
-                holder.checker = convertView.findViewById(R.id.CBappSelect);
-                holder.switcherChecked = convertView.findViewById(R.id.viewSwitcherChecked);
+                holder._apkIcon = convertView.findViewById(R.id.IVappIcon);
+                holder._apkName = convertView.findViewById(R.id.TVappName);
+                holder._apkPackage = convertView.findViewById(R.id.TVappPackage);
+                holder._checker = convertView.findViewById(R.id.CBappSelect);
+                holder._switcherChecked = convertView.findViewById(R.id.viewSwitcherChecked);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -231,24 +231,24 @@ public class HideAppsFragment extends Fragment {
 
             AppInfo appInfo = getItem(position);
 
-            holder.apkPackage.setText(appInfo.getCode());
-            holder.apkPackage.setTypeface(tf);
+            holder._apkPackage.setText(appInfo.getCode());
+            holder._apkPackage.setTypeface(_tf);
 
-            holder.apkName.setText(appInfo.getName());
+            holder._apkName.setText(appInfo.getName());
 
-            holder.apkIcon.setImageDrawable(appInfo.getImage());
+            holder._apkIcon.setImageDrawable(appInfo.getImage());
 
-            holder.switcherChecked.setInAnimation(null);
-            holder.switcherChecked.setOutAnimation(null);
+            holder._switcherChecked.setInAnimation(null);
+            holder._switcherChecked.setOutAnimation(null);
 
-            holder.checker.setChecked(appInfo.isSelected());
+            holder._checker.setChecked(appInfo.isSelected());
             if (appInfo.isSelected()) {
-                if (holder.switcherChecked.getDisplayedChild() == 0) {
-                    holder.switcherChecked.showNext();
+                if (holder._switcherChecked.getDisplayedChild() == 0) {
+                    holder._switcherChecked.showNext();
                 }
             } else {
-                if (holder.switcherChecked.getDisplayedChild() == 1) {
-                    holder.switcherChecked.showPrevious();
+                if (holder._switcherChecked.getDisplayedChild() == 1) {
+                    holder._switcherChecked.showPrevious();
                 }
             }
             return convertView;
@@ -256,11 +256,11 @@ public class HideAppsFragment extends Fragment {
     }
 
     private class ViewHolder {
-        TextView apkName;
-        TextView apkPackage;
-        ImageView apkIcon;
-        CheckBox checker;
-        ViewSwitcher switcherChecked;
+        TextView _apkName;
+        TextView _apkPackage;
+        ImageView _apkIcon;
+        CheckBox _checker;
+        ViewSwitcher _switcherChecked;
     }
 
 }

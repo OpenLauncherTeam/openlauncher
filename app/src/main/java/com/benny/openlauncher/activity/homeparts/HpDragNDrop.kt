@@ -144,18 +144,18 @@ class HpDragNDrop {
                 }
             }
 
-            var x = dragNDropView.dragLocation.x - Home.itemTouchX + Tool.toPx(10)
-            var y = dragNDropView.dragLocation.y - Home.itemTouchY - Tool.toPx((46 * itemList.size))
+            var x = dragNDropView.dragLocation.x - Home._itemTouchX + Tool.toPx(10)
+            var y = dragNDropView.dragLocation.y - Home._itemTouchY - Tool.toPx((46 * itemList.size))
 
             if ((x + Tool.toPx(200)) > dragNDropView.width) {
                 dragNDropView.setPopupMenuShowDirection(false)
-                x = dragNDropView.dragLocation.x - Home.itemTouchX + _home.getDesktop().currentPage.cellWidth - Tool.toPx(200).toFloat() - Tool.toPx(10)
+                x = dragNDropView.dragLocation.x - Home._itemTouchX + _home.getDesktop().currentPage.cellWidth - Tool.toPx(200).toFloat() - Tool.toPx(10)
             } else {
                 dragNDropView.setPopupMenuShowDirection(true)
             }
 
             if (y < 0)
-                y = dragNDropView.dragLocation.y - Home.itemTouchY + _home.getDesktop().currentPage.cellHeight + Tool.toPx(4)
+                y = dragNDropView.dragLocation.y - Home._itemTouchY + _home.getDesktop().currentPage.cellHeight + Tool.toPx(4)
             else
                 y -= Tool.toPx(4)
 
@@ -199,7 +199,7 @@ class HpDragNDrop {
                     _home.getDesktop().consumeRevert()
                     _home.getDock().consumeRevert()
                     // add the item to the database
-                    Home.db.saveItem(item, _home.getDesktop().currentItem, Definitions.ItemPosition.Desktop)
+                    Home._db.saveItem(item, _home.getDesktop().currentItem, Definitions.ItemPosition.Desktop)
                 } else {
                     val pos = Point()
                     _home.getDesktop().currentPage.touchPosToCoordinate(pos, x, y, item._spanX, item._spanY, false)
@@ -220,7 +220,7 @@ class HpDragNDrop {
             }
 
             override fun onEnd() {
-                Home.launcher?.getDesktopIndicator()?.hideDelay()
+                Home._launcher?.getDesktopIndicator()?.hideDelay()
                 for (page in _home.getDesktop().pages)
                     page.clearCachedOutlineBitmap()
             }
@@ -256,7 +256,7 @@ class HpDragNDrop {
                     _home.getDock().consumeRevert()
 
                     // add the item to the database
-                    Home.db.saveItem(item, 0, Definitions.ItemPosition.Dock)
+                    Home._db.saveItem(item, 0, Definitions.ItemPosition.Dock)
                 } else {
                     val pos = Point()
                     _home.getDock().touchPosToCoordinate(pos, x, y, item._spanX, item._spanY, false)
