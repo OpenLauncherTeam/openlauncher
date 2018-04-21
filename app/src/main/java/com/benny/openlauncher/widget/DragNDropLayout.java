@@ -2,10 +2,10 @@ package com.benny.openlauncher.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,8 +24,6 @@ import com.benny.openlauncher.util.DragNDropHandler;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
-import android.support.annotation.NonNull;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +32,6 @@ import java.util.Map.Entry;
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import kotlin.Pair;
-import kotlin.jvm.internal.Intrinsics;
 
 public final class DragNDropLayout extends FrameLayout {
     private final float DRAG_THRESHOLD;
@@ -152,33 +149,22 @@ public final class DragNDropLayout extends FrameLayout {
 
         protected void onDraw(@Nullable Canvas canvas) {
             super.onDraw(canvas);
-            if (!(canvas == null || DragNDropHandler._cachedDragBitmap == null)) {
-                if (!DragNDropLayout.this.getDragLocation().equals(-1.0f, -1.0f)) {
-                    float x = DragNDropLayout.this.getDragLocation().x - Home.Companion.getItemTouchX();
-                    float y = DragNDropLayout.this.getDragLocation().y - Home.Companion.getItemTouchY();
-                    if (DragNDropLayout.this.getDragging()) {
-                        canvas.save();
-                        DragNDropLayout.this._overlayIconScale = Tool.clampFloat(DragNDropLayout.this._overlayIconScale + 0.05f, 1.0f, 1.1f);
-                        float access$getOverlayIconScale$p = DragNDropLayout.this._overlayIconScale;
-                        float access$getOverlayIconScale$p2 = DragNDropLayout.this._overlayIconScale;
-                        Bitmap bitmap = DragNDropHandler._cachedDragBitmap;
-                        if (bitmap == null) {
-                            Intrinsics.throwNpe();
-                        }
-                        float width = ((float) (bitmap.getWidth() / 2)) + x;
-                        Bitmap bitmap2 = DragNDropHandler._cachedDragBitmap;
-                        if (bitmap2 == null) {
-                            Intrinsics.throwNpe();
-                        }
-                        canvas.scale(access$getOverlayIconScale$p, access$getOverlayIconScale$p2, width, ((float) (bitmap2.getHeight() / 2)) + y);
-                        canvas.drawBitmap(DragNDropHandler._cachedDragBitmap, x, y, DragNDropLayout.this._paint);
-                        canvas.restore();
-                    }
-                    if (DragNDropLayout.this.getDragging()) {
-                        invalidate();
-                    }
-                }
+            if (canvas == null || DragNDropHandler._cachedDragBitmap == null || _dragLocation.equals(-1f, -1f))
+                return;
+
+            float x = _dragLocation.x - Home._itemTouchX;
+            float y = _dragLocation.y - Home._itemTouchY;
+
+            if (_dragging) {
+                canvas.save();
+                _overlayIconScale = Tool.clampFloat(_overlayIconScale + 0.05f, 1f, 1.1f);
+                canvas.scale(_overlayIconScale, _overlayIconScale, x + DragNDropHandler._cachedDragBitmap.getWidth() / 2, y + DragNDropHandler._cachedDragBitmap.getHeight() / 2);
+                canvas.drawBitmap(DragNDropHandler._cachedDragBitmap, x, y, _paint);
+                canvas.restore();
             }
+
+            if (_dragging)
+                invalidate();
         }
     }
 
@@ -331,11 +317,7 @@ public final class DragNDropLayout extends FrameLayout {
             convertPoint(((DropTargetListener) dropTarget.getKey()).getView());
             DragFlag dragFlag = (DragFlag) dropTarget.getValue();
             DropTargetListener dropTargetListener = (DropTargetListener) dropTarget.getKey();
-            Action action2 = _dragAction;
-            if (action2 == null) {
-                Intrinsics.throwNpe();
-            }
-            dragFlag.setShouldIgnore(dropTargetListener.onStart(action2, _dragLocationConverted, isViewContains(((DropTargetListener) dropTarget.getKey()).getView(), (int) _dragLocation.x, (int) _dragLocation.y)) ^ true);
+            dragFlag.setShouldIgnore(!dropTargetListener.onStart(_dragAction, _dragLocationConverted, isViewContains(((DropTargetListener) dropTarget.getKey()).getView(), (int) _dragLocation.x, (int) _dragLocation.y)));
         }
         _overlayView.invalidate();
     }
@@ -406,14 +388,10 @@ public final class DragNDropLayout extends FrameLayout {
             _dragExceedThreshold = true;
             for (Entry dropTarget : _registeredDropTargetEntries.entrySet()) {
                 if (!((DragFlag) dropTarget.getValue()).getShouldIgnore()) {
-                    Action action;
                     convertPoint(((DropTargetListener) dropTarget.getKey()).getView());
                     DropTargetListener dropTargetListener = (DropTargetListener) dropTarget.getKey();
-                    action = _dragAction;
-                    if (action == null) {
-                        Intrinsics.throwNpe();
-                    }
-                    dropTargetListener.onStartDrag(action, _dragLocationConverted);
+
+                    dropTargetListener.onStartDrag(_dragAction, _dragLocationConverted);
                 }
             }
         }
@@ -421,49 +399,34 @@ public final class DragNDropLayout extends FrameLayout {
             hidePopupMenu();
         }
         for (Entry<DropTargetListener, DragFlag> dropTarget2 : _registeredDropTargetEntries.entrySet()) {
-            DropTargetListener dropTargetListener = (DropTargetListener) dropTarget2.getKey();
-            Action action = _dragAction;
-            if (!((DragFlag) dropTarget2.getValue()).getShouldIgnore()) {
-                convertPoint(((DropTargetListener) dropTarget2.getKey()).getView());
-                if (isViewContains(((DropTargetListener) dropTarget2.getKey()).getView(), (int) _dragLocation.x, (int) _dragLocation.y)) {
+            DropTargetListener dropTargetListener = dropTarget2.getKey();
+            if (!dropTarget2.getValue().getShouldIgnore()) {
+                convertPoint(dropTarget2.getKey().getView());
+                if (isViewContains(dropTarget2.getKey().getView(), (int) _dragLocation.x, (int) _dragLocation.y)) {
 
-                    dropTargetListener.onMove(action, _dragLocationConverted);
-                    if (((DragFlag) dropTarget2.getValue()).getPreviousOutside()) {
-                        ((DragFlag) dropTarget2.getValue()).setPreviousOutside(false);
-                        dropTargetListener = (DropTargetListener) dropTarget2.getKey();
-                        action = _dragAction;
-                        dropTargetListener.onEnter(action, _dragLocationConverted);
+                    dropTargetListener.onMove(_dragAction, _dragLocationConverted);
+                    if (dropTarget2.getValue().getPreviousOutside()) {
+                        dropTarget2.getValue().setPreviousOutside(false);
+                        dropTargetListener = dropTarget2.getKey();
+                        dropTargetListener.onEnter(_dragAction, _dragLocationConverted);
                     }
-                } else if (!((DragFlag) dropTarget2.getValue()).getPreviousOutside()) {
-                    ((DragFlag) dropTarget2.getValue()).setPreviousOutside(true);
-                    dropTargetListener = (DropTargetListener) dropTarget2.getKey();
-                    action = _dragAction;
-                    if (action == null) {
-                        Intrinsics.throwNpe();
-                    }
-                    dropTargetListener.onExit(action, _dragLocationConverted);
+                } else if (!dropTarget2.getValue().getPreviousOutside()) {
+                    dropTarget2.getValue().setPreviousOutside(true);
+                    dropTargetListener = dropTarget2.getKey();
+                    dropTargetListener.onExit(_dragAction, _dragLocationConverted);
                 }
             }
         }
     }
 
-    private final void handleDragFinished() {
+    private void handleDragFinished() {
         _dragging = false;
         for (Entry dropTarget : _registeredDropTargetEntries.entrySet()) {
             if (!((DragFlag) dropTarget.getValue()).getShouldIgnore()) {
                 if (isViewContains(((DropTargetListener) dropTarget.getKey()).getView(), (int) _dragLocation.x, (int) _dragLocation.y)) {
                     convertPoint(((DropTargetListener) dropTarget.getKey()).getView());
                     DropTargetListener dropTargetListener = (DropTargetListener) dropTarget.getKey();
-                    Action action = _dragAction;
-                    if (action == null) {
-                        Intrinsics.throwNpe();
-                    }
-                    PointF pointF = _dragLocationConverted;
-                    Item item = _dragItem;
-                    if (item == null) {
-                        Intrinsics.throwNpe();
-                    }
-                    dropTargetListener.onDrop(action, pointF, item);
+                    dropTargetListener.onDrop(_dragAction, _dragLocationConverted, _dragItem);
                 }
             }
         }
