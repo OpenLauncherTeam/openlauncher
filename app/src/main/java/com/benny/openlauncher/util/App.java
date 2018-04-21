@@ -14,7 +14,7 @@ public class App {
     public ResolveInfo _info;
 
     public App(Context context, ResolveInfo info, PackageManager pm) {
-        this._info = info;
+        _info = info;
 
         _iconProvider = Setup.imageLoader().createIconProvider(info.loadIcon(pm));
         _label = info.loadLabel(pm).toString();
@@ -26,7 +26,7 @@ public class App {
     public boolean equals(Object o) {
         if (o instanceof App) {
             App temp = (App) o;
-            return this._packageName.equals(temp._packageName);
+            return _packageName.equals(temp._packageName);
         } else {
             return false;
         }

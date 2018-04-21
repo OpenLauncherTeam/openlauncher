@@ -83,7 +83,7 @@ public class SearchBar extends FrameLayout {
     }
 
     public void setCallback(CallBack callback) {
-        this._callback = callback;
+        _callback = callback;
     }
 
     public boolean collapse() {

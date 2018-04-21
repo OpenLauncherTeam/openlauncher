@@ -41,8 +41,8 @@ public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, P
     }
 
     public PopupIconLabelItem(int labelRes, int iconRes) {
-        this._labelRes = labelRes;
-        this._iconRes = iconRes;
+        _labelRes = labelRes;
+        _iconRes = iconRes;
     }
 
     public int getType() {
@@ -58,13 +58,13 @@ public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, P
         if (holder != null) {
             TextView labelView = holder.getLabelView();
             if (labelView != null) {
-                labelView.setText(this._labelRes);
+                labelView.setText(_labelRes);
             }
         }
         if (holder != null) {
             ImageView iconView = holder.getIconView();
             if (iconView != null) {
-                iconView.setImageResource(this._iconRes);
+                iconView.setImageResource(_iconRes);
             }
         }
     }

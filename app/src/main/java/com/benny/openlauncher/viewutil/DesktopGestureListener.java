@@ -20,8 +20,8 @@ public class DesktopGestureListener implements SimpleFingerGestures.OnFingerGest
     private final Desktop _desktop;
 
     public DesktopGestureListener(Desktop desktop, DesktopGestureCallback callback) {
-        this._desktop = desktop;
-        this._callback = callback;
+        _desktop = desktop;
+        _callback = callback;
     }
 
     @Override

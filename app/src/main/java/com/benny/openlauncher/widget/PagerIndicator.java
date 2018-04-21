@@ -155,17 +155,17 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
         super(context, attrs);
         _companion.setPad((float) Tool.toPx(3));
         setWillNotDraw(false);
-        this._dotPaint.setColor(-1);
-        this._dotPaint.setStrokeWidth((float) Tool.toPx(2));
-        this._dotPaint.setAntiAlias(true);
-        this._arrowPaint.setColor(-1);
-        this._arrowPaint.setAntiAlias(true);
-        this._arrowPaint.setStyle(Style.STROKE);
-        this._arrowPaint.setStrokeWidth(_companion.getPad() / 1.5f);
-        this._arrowPaint.setStrokeJoin(Join.ROUND);
-        this._arrowPath = new Path();
-        this._mode = Setup.appSettings().getDesktopIndicatorMode();
-        this._delayShow = new Runnable() {
+        _dotPaint.setColor(-1);
+        _dotPaint.setStrokeWidth((float) Tool.toPx(2));
+        _dotPaint.setAntiAlias(true);
+        _arrowPaint.setColor(-1);
+        _arrowPaint.setAntiAlias(true);
+        _arrowPaint.setStyle(Style.STROKE);
+        _arrowPaint.setStrokeWidth(_companion.getPad() / 1.5f);
+        _arrowPaint.setStrokeJoin(Join.ROUND);
+        _arrowPath = new Path();
+        _mode = Setup.appSettings().getDesktopIndicatorMode();
+        _delayShow = new Runnable() {
             @Override
             public void run() {
                 _alphaFade = true;
@@ -173,31 +173,31 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
                 invalidate();
             }
         };
-        this._currentPagerState = -1;
+        _currentPagerState = -1;
     }
 
     public final void setMode(int mode) {
-        this._mode = mode;
+        _mode = mode;
         invalidate();
     }
 
 
     public final void setViewPager(@Nullable SmoothViewPager pager) {
         if (pager == null) {
-            if (this._pager != null) {
-                SmoothViewPager smoothViewPager = this._pager;
+            if (_pager != null) {
+                SmoothViewPager smoothViewPager = _pager;
                 if (smoothViewPager == null) {
                     Intrinsics.throwNpe();
                 }
                 smoothViewPager.removeOnPageChangeListener(this);
-                this._pager = null;
+                _pager = null;
                 invalidate();
             }
             return;
         }
-        this._pager = pager;
+        _pager = pager;
         SmoothPagerAdapter adapter = pager.getAdapter();
-        this._prePageCount = adapter.getCount();
+        _prePageCount = adapter.getCount();
         pager.addOnPageChangeListener(this);
         adapter = pager.getAdapter();
         Tool.print(Integer.valueOf(adapter.getCount()));
@@ -205,22 +205,22 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     }
 
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        int i = this._prePageCount;
-        SmoothViewPager smoothViewPager = this._pager;
+        int i = _prePageCount;
+        SmoothViewPager smoothViewPager = _pager;
         if (smoothViewPager == null) {
             Intrinsics.throwNpe();
         }
         SmoothPagerAdapter adapter = smoothViewPager.getAdapter();
         if (i != adapter.getCount()) {
-            SmoothViewPager smoothViewPager2 = this._pager;
+            SmoothViewPager smoothViewPager2 = _pager;
             if (smoothViewPager2 == null) {
                 Intrinsics.throwNpe();
             }
             SmoothPagerAdapter adapter2 = smoothViewPager2.getAdapter();
-            this._prePageCount = adapter2.getCount();
+            _prePageCount = adapter2.getCount();
         }
-        this._scrollOffset = positionOffset;
-        this._scrollPagePosition = position;
+        _scrollOffset = positionOffset;
+        _scrollPagePosition = position;
         invalidate();
     }
 
@@ -228,22 +228,22 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     }
 
     public final void showNow() {
-        removeCallbacks(this._delayShow);
-        this._alphaShow = true;
-        this._alphaFade = false;
+        removeCallbacks(_delayShow);
+        _alphaShow = true;
+        _alphaFade = false;
         invalidate();
     }
 
     public final void hideDelay() {
-        postDelayed(this._delayShow, 500);
+        postDelayed(_delayShow, 500);
     }
 
     public void onPageScrollStateChanged(int state) {
-        this._currentPagerState = state;
+        _currentPagerState = state;
     }
 
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        this._dotSize = ((float) getHeight()) - (_companion.getPad() * 1.25f);
+        _dotSize = ((float) getHeight()) - (_companion.getPad() * 1.25f);
         super.onLayout(changed, left, top, right, bottom);
     }
 }

@@ -19,9 +19,9 @@ public class IconListAdapter extends BaseAdapter {
     private List<Integer> _icons;
 
     public IconListAdapter(Context context, List labels, List icons) {
-        this._context = context;
-        this._labels = labels;
-        this._icons = icons;
+        _context = context;
+        _labels = labels;
+        _icons = icons;
     }
 
     public int getCount() {

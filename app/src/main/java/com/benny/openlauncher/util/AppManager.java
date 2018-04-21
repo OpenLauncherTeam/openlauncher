@@ -55,8 +55,8 @@ public class AppManager {
     }
 
     public AppManager(Context c) {
-        this._context = c;
-        this._packageManager = c.getPackageManager();
+        _context = c;
+        _packageManager = c.getPackageManager();
     }
 
     public App findApp(Intent intent) {

@@ -50,7 +50,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
         int columns = Setup.appSettings().getDockSize();
         setGridSize(columns, 1);
         List<Item> dockItems = Home.Companion.getDb().getDock();
-        this._home = home;
+        _home = home;
         removeAllViews();
         for (Item item : dockItems) {
             if (item._x < columns && item._y == 0) {
@@ -76,7 +76,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
             case 1:
                 Tool.print("ACTION_UP");
                 Tool.print(Integer.valueOf((int) ev.getX()), Integer.valueOf((int) ev.getY()));
-                if (this._startPosY - ev.getY() > 150.0f && Setup.appSettings().getGestureDockSwipeUp()) {
+                if (_startPosY - ev.getY() > 150.0f && Setup.appSettings().getGestureDockSwipeUp()) {
                     Point p = new Point((int) ev.getX(), (int) ev.getY());
                     p = Tool.convertPoint(p, this, _home.getAppDrawerController());
                     if (Setup.appSettings().isGestureFeedback()) {
@@ -93,7 +93,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
     public final void updateIconProjection(int x, int y) {
         Home launcher;
         DragNDropLayout dragNDropView;
-        DragState state = peekItemAndSwap(x, y, this._coordinate);
+        DragState state = peekItemAndSwap(x, y, _coordinate);
         if (!_coordinate.equals(_previousDragPoint)) {
             launcher = _home;
             if (launcher != null) {
@@ -103,10 +103,10 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
                 }
             }
         }
-        _previousDragPoint.set(this._coordinate.x, this._coordinate.y);
+        _previousDragPoint.set(_coordinate.x, _coordinate.y);
         switch (state) {
             case CurrentNotOccupied:
-                projectImageOutlineAt(this._coordinate, DragNDropHandler._cachedDragBitmap);
+                projectImageOutlineAt(_coordinate, DragNDropHandler._cachedDragBitmap);
                 break;
             case OutOffRange:
             case ItemViewNotFound:
@@ -126,7 +126,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
                             if (launcher2 != null) {
                                 dragNDropView2 = launcher2.getDragNDropView();
                                 if (dragNDropView2 != null) {
-                                    dragNDropView2.showFolderPreviewAt(this, ((float) getCellWidth()) * (((float) this._coordinate.x) + 0.5f), (((float) getCellHeight()) * (((float) this._coordinate.y) + 0.5f)) - ((float) (Setup.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0)));
+                                    dragNDropView2.showFolderPreviewAt(this, ((float) getCellWidth()) * (((float) _coordinate.x) + 0.5f), (((float) getCellHeight()) * (((float) _coordinate.y) + 0.5f)) - ((float) (Setup.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0)));
                                     break;
                                 }
                             }
@@ -141,7 +141,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
                     if (dragNDropView2 != null) {
                         if (Setup.appSettings().isDockShowLabel()) {
                         }
-                        dragNDropView2.showFolderPreviewAt(this, ((float) getCellWidth()) * (((float) this._coordinate.x) + 0.5f), (((float) getCellHeight()) * (((float) this._coordinate.y) + 0.5f)) - ((float) (Setup.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0)));
+                        dragNDropView2.showFolderPreviewAt(this, ((float) getCellWidth()) * (((float) _coordinate.x) + 0.5f), (((float) getCellHeight()) * (((float) _coordinate.y) + 0.5f)) - ((float) (Setup.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0)));
                     }
                 }
                 break;
@@ -153,8 +153,8 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
     public void setLastItem(@NonNull Object... args) {
         Item item = (Item) args[0];
         View v = (View) args[1];
-        this._previousItemView = v;
-        this._previousItem = item;
+        _previousItemView = v;
+        _previousItem = item;
         removeView(v);
     }
 
@@ -185,19 +185,19 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
     }
 
     public void consumeRevert() {
-        this._previousItem = (Item) null;
-        this._previousItemView = (View) null;
+        _previousItem = (Item) null;
+        _previousItemView = (View) null;
     }
 
     public void revertLastItem() {
-        if (this._previousItemView != null) {
-            View view = this._previousItemView;
+        if (_previousItemView != null) {
+            View view = _previousItemView;
             if (view == null) {
                 Intrinsics.throwNpe();
             }
             addViewToGrid(view);
-            this._previousItem = (Item) null;
-            this._previousItemView = (View) null;
+            _previousItem = (Item) null;
+            _previousItemView = (View) null;
         }
     }
 
@@ -264,6 +264,6 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
     }
 
     public void setHome(Home home) {
-        this._home = home;
+        _home = home;
     }
 }

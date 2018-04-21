@@ -47,7 +47,7 @@ public class DragOptionView extends CardView {
     }
 
     public void setHome(Home home) {
-        this._home = home;
+        _home = home;
     }
 
     public void setAutoHideView(View... v) {

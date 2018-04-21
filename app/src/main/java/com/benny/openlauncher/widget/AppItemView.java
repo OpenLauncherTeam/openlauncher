@@ -115,7 +115,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     }
 
     public void setIconProvider(BaseIconProvider iconProvider) {
-        this._iconProvider = iconProvider;
+        _iconProvider = iconProvider;
         iconProvider.loadIconIntoIconDrawer(this, (int) _iconSize, 0);
     }
 
@@ -128,7 +128,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     }
 
     public void setLabel(String label) {
-        this._label = label;
+        _label = label;
     }
 
     public float getIconSize() {
@@ -136,7 +136,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     }
 
     public void setIconSize(float iconSize) {
-        this._iconSize = iconSize;
+        _iconSize = iconSize;
     }
 
     public boolean getShowLabel() {
@@ -279,7 +279,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         public Builder(AppItemView view, int iconSize) {
-            this._view = view;
+            _view = view;
             view.setIconSize(Tool.dp2px(iconSize, view.getContext()));
         }
 

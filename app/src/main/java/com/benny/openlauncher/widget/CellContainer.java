@@ -66,49 +66,49 @@ public class CellContainer extends ViewGroup {
         private int _ySpan = 1;
 
         public final int getX() {
-            return this._x;
+            return _x;
         }
 
         public final void setX(int v) {
-            this._x = v;
+            _x = v;
         }
 
         public final int getY() {
-            return this._y;
+            return _y;
         }
 
         public final void setY(int v) {
-            this._y = v;
+            _y = v;
         }
 
         public final int getXSpan() {
-            return this._xSpan;
+            return _xSpan;
         }
 
         public final void setXSpan(int v) {
-            this._xSpan = v;
+            _xSpan = v;
         }
 
         public final int getYSpan() {
-            return this._ySpan;
+            return _ySpan;
         }
 
         public final void setYSpan(int v) {
-            this._ySpan = v;
+            _ySpan = v;
         }
 
         public LayoutParams(int w, int h, int x, int y) {
             super(w, h);
-            this._x = x;
-            this._y = y;
+            _x = x;
+            _y = y;
         }
 
         public LayoutParams(int w, int h, int x, int y, int xSpan, int ySpan) {
             super(w, h);
-            this._x = x;
-            this._y = y;
-            this._xSpan = xSpan;
-            this._ySpan = ySpan;
+            _x = x;
+            _y = y;
+            _xSpan = xSpan;
+            _ySpan = ySpan;
         }
 
         public LayoutParams(int w, int h) {
@@ -125,31 +125,31 @@ public class CellContainer extends ViewGroup {
     }
 
     public final int getCellWidth() {
-        return this._cellWidth;
+        return _cellWidth;
     }
 
     public final int getCellHeight() {
-        return this._cellHeight;
+        return _cellHeight;
     }
 
     public final int getCellSpanV() {
-        return this._cellSpanV;
+        return _cellSpanV;
     }
 
     public final int getCellSpanH() {
-        return this._cellSpanH;
+        return _cellSpanH;
     }
 
     public final void setBlockTouch(boolean v) {
-        this._blockTouch = v;
+        _blockTouch = v;
     }
 
     public final void setGestures(@Nullable SimpleFingerGestures v) {
-        this._gestures = v;
+        _gestures = v;
     }
 
     public final void setOnItemRearrangeListener(@Nullable OnItemRearrangeListener v) {
-        this._onItemRearrangeListener = v;
+        _onItemRearrangeListener = v;
     }
 
     @NonNull
@@ -168,22 +168,22 @@ public class CellContainer extends ViewGroup {
 
     public CellContainer(@NonNull Context c, @Nullable AttributeSet attr) {
         super(c, attr);
-        this._paint.setStyle(Style.STROKE);
-        this._paint.setStrokeWidth(2.0f);
-        this._paint.setStrokeJoin(Join.ROUND);
-        this._paint.setColor(-1);
-        this._paint.setAlpha(0);
-        this._bgPaint.setStyle(Style.FILL);
-        this._bgPaint.setColor(-1);
-        this._bgPaint.setAlpha(0);
-        this._outlinePaint.setColor(-1);
-        this._outlinePaint.setAlpha(0);
+        _paint.setStyle(Style.STROKE);
+        _paint.setStrokeWidth(2.0f);
+        _paint.setStrokeJoin(Join.ROUND);
+        _paint.setColor(-1);
+        _paint.setAlpha(0);
+        _bgPaint.setStyle(Style.FILL);
+        _bgPaint.setColor(-1);
+        _bgPaint.setAlpha(0);
+        _outlinePaint.setColor(-1);
+        _outlinePaint.setAlpha(0);
         init();
     }
 
     public final void setGridSize(int x, int y) {
-        this._cellSpanV = y;
-        this._cellSpanH = x;
+        _cellSpanV = y;
+        _cellSpanH = x;
 
         _occupied = new boolean[_cellSpanH][_cellSpanV];
         for (int i = 0; i < _cellSpanH; i++) {
@@ -195,12 +195,12 @@ public class CellContainer extends ViewGroup {
     }
 
     public final void setHideGrid(boolean hideGrid) {
-        this._hideGrid = hideGrid;
+        _hideGrid = hideGrid;
         invalidate();
     }
 
     public final void resetOccupiedSpace() {
-        if (this._cellSpanH > 0 && this._cellSpanV > 0) {
+        if (_cellSpanH > 0 && _cellSpanV > 0) {
             _occupied = new boolean[_cellSpanH][_cellSpanV];
         }
     }
@@ -211,30 +211,30 @@ public class CellContainer extends ViewGroup {
     }
 
     public final void projectImageOutlineAt(@NonNull Point newCoordinate, @Nullable Bitmap bitmap) {
-        this._cachedOutlineBitmap = bitmap;
+        _cachedOutlineBitmap = bitmap;
         if (!_currentOutlineCoordinate.equals(newCoordinate)) {
-            this._outlinePaint.setAlpha(0);
+            _outlinePaint.setAlpha(0);
         }
-        this._currentOutlineCoordinate.set(newCoordinate.x, newCoordinate.y);
+        _currentOutlineCoordinate.set(newCoordinate.x, newCoordinate.y);
         invalidate();
     }
 
     private final void drawCachedOutlineBitmap(Canvas canvas, Rect cell) {
-        if (this._cachedOutlineBitmap != null) {
-            Bitmap bitmap = this._cachedOutlineBitmap;
+        if (_cachedOutlineBitmap != null) {
+            Bitmap bitmap = _cachedOutlineBitmap;
             float centerX = (float) cell.centerX();
-            Bitmap bitmap2 = this._cachedOutlineBitmap;
+            Bitmap bitmap2 = _cachedOutlineBitmap;
             float f = (float) 2;
             centerX -= ((float) bitmap2.getWidth()) / f;
             float centerY = (float) cell.centerY();
-            Bitmap bitmap3 = this._cachedOutlineBitmap;
-            canvas.drawBitmap(bitmap, centerX, centerY - (((float) bitmap3.getWidth()) / f), this._outlinePaint);
+            Bitmap bitmap3 = _cachedOutlineBitmap;
+            canvas.drawBitmap(bitmap, centerX, centerY - (((float) bitmap3.getWidth()) / f), _outlinePaint);
         }
     }
 
     public final void clearCachedOutlineBitmap() {
-        this._outlinePaint.setAlpha(0);
-        this._cachedOutlineBitmap = (Bitmap) null;
+        _outlinePaint.setAlpha(0);
+        _cachedOutlineBitmap = (Bitmap) null;
         invalidate();
     }
 
@@ -249,20 +249,20 @@ public class CellContainer extends ViewGroup {
         if (coordinate.x != -1) {
             if (coordinate.y != -1) {
                 DragState dragState;
-                if (this._startCoordinate == null) {
-                    this._startCoordinate = coordinate;
+                if (_startCoordinate == null) {
+                    _startCoordinate = coordinate;
                 }
                 if (!_preCoordinate.equals(coordinate)) {
-                    this._peekDownTime = Long.valueOf(-1);
+                    _peekDownTime = Long.valueOf(-1);
                 }
-                Long l = this._peekDownTime;
+                Long l = _peekDownTime;
                 if (l != null && l == -1) {
-                    this._peekDirection = getPeekDirectionFromCoordinate(this._startCoordinate, coordinate);
-                    this._peekDownTime = Long.valueOf(System.currentTimeMillis());
-                    this._preCoordinate = coordinate;
+                    _peekDirection = getPeekDirectionFromCoordinate(_startCoordinate, coordinate);
+                    _peekDownTime = Long.valueOf(System.currentTimeMillis());
+                    _preCoordinate = coordinate;
 
                 }
-                boolean[][] zArr = this._occupied;
+                boolean[][] zArr = _occupied;
                 if (zArr[coordinate.x][coordinate.y]) {
                     dragState = DragState.CurrentOccupied;
                 } else {
@@ -293,32 +293,32 @@ public class CellContainer extends ViewGroup {
     public boolean onTouchEvent(@NonNull MotionEvent event) {
         switch (MotionEventCompat.getActionMasked(event)) {
             case 0:
-                this._down = System.currentTimeMillis();
+                _down = System.currentTimeMillis();
                 break;
             case 1:
                 long currentTimeMillis = System.currentTimeMillis();
-                Long l = this._down;
-                if (currentTimeMillis - l.longValue() < 260 && this._blockTouch) {
+                Long l = _down;
+                if (currentTimeMillis - l.longValue() < 260 && _blockTouch) {
                     performClick();
                     break;
                 }
             default:
                 break;
         }
-        if (this._blockTouch) {
+        if (_blockTouch) {
             return true;
         }
-        if (this._gestures == null) {
+        if (_gestures == null) {
             Tool.print((Object) "gestures is null");
             return super.onTouchEvent(event);
         }
-        SimpleFingerGestures simpleFingerGestures = this._gestures;
+        SimpleFingerGestures simpleFingerGestures = _gestures;
         simpleFingerGestures.onTouch(this, event);
         return super.onTouchEvent(event);
     }
 
     public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
-        if (this._blockTouch) {
+        if (_blockTouch) {
             return true;
         }
         return super.onInterceptTouchEvent(ev);
@@ -329,24 +329,24 @@ public class CellContainer extends ViewGroup {
     }
 
     public final void animateBackgroundShow() {
-        this._animateBackground = true;
+        _animateBackground = true;
         invalidate();
     }
 
     public final void animateBackgroundHide() {
-        this._animateBackground = false;
+        _animateBackground = false;
         invalidate();
     }
 
     @Nullable
     public final Point findFreeSpace() {
-        boolean[][] zArr = this._occupied;
+        boolean[][] zArr = _occupied;
         int length = zArr[0].length;
         for (int y = 0; y < length; y++) {
-            boolean[][] zArr2 = this._occupied;
+            boolean[][] zArr2 = _occupied;
             int length2 = zArr2.length;
             for (int x = 0; x < length2; x++) {
-                boolean[][] zArr3 = this._occupied;
+                boolean[][] zArr3 = _occupied;
                 if (!zArr3[x][y]) {
                     return new Point(x, y);
                 }
@@ -357,15 +357,15 @@ public class CellContainer extends ViewGroup {
 
     @Nullable
     public final Point findFreeSpace(int spanX, int spanY) {
-        boolean[][] zArr = this._occupied;
+        boolean[][] zArr = _occupied;
         int length = zArr[0].length;
         int y = 0;
         while (y < length) {
-            boolean[][] zArr2 = this._occupied;
+            boolean[][] zArr2 = _occupied;
             int length2 = zArr2.length;
             int x = 0;
             while (x < length2) {
-                boolean[][] zArr3 = this._occupied;
+                boolean[][] zArr3 = _occupied;
                 if (!zArr3[x][y] && !checkOccupied(new Point(x, y), spanX, spanY)) {
                     return new Point(x, y);
                 }
@@ -478,7 +478,7 @@ public class CellContainer extends ViewGroup {
                 objArr[0] = stringBuilder.toString();
                 objArr[1] = ")";
                 Tool.print(objArr);
-                boolean[][] zArr = this._occupied;
+                boolean[][] zArr = _occupied;
                 zArr[x2][y2] = b;
             }
         }
@@ -486,16 +486,16 @@ public class CellContainer extends ViewGroup {
 
     public final boolean checkOccupied(@NonNull Point start, int spanX, int spanY) {
         int i = start.x + spanX;
-        boolean[][] zArr = this._occupied;
+        boolean[][] zArr = _occupied;
         if (i <= ((Object[]) zArr).length) {
             i = start.y + spanY;
-            zArr = this._occupied;
+            zArr = _occupied;
             if (i <= zArr[0].length) {
                 int i2 = start.y + spanY;
                 for (i = start.y; i < i2; i++) {
                     int i3 = start.x + spanX;
                     for (int x = start.x; x < i3; x++) {
-                        boolean[][] zArr2 = this._occupied;
+                        boolean[][] zArr2 = _occupied;
                         if (zArr2[x][i]) {
                             return true;
                         }
@@ -597,7 +597,7 @@ public class CellContainer extends ViewGroup {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int width = ((r - l) - getPaddingLeft()) - getPaddingRight();
         int height = ((b - t) - getPaddingTop()) - getPaddingBottom();
-        if (this._cellSpanH == 0) {
+        if (_cellSpanH == 0) {
             _cellSpanH = 1;
         }
         if (_cellSpanV == 0) {

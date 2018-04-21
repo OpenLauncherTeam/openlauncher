@@ -25,7 +25,7 @@ public class CircleDrawable extends Drawable {
     private boolean _hidingOldIcon;
 
     public CircleDrawable(Context context, Drawable icon, int color) {
-        this._icon = Tool.drawableToBitmap(icon);
+        _icon = Tool.drawableToBitmap(icon);
 
         _iconPadding = Tool.dp2px(6, context);
 
@@ -42,10 +42,10 @@ public class CircleDrawable extends Drawable {
     }
 
     public void setIcon(Drawable icon) {
-        _iconToFade = this._icon;
+        _iconToFade = _icon;
         _hidingOldIcon = true;
 
-        this._icon = Tool.drawableToBitmap(icon);
+        _icon = Tool.drawableToBitmap(icon);
         invalidateSelf();
     }
 

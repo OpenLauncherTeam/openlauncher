@@ -45,13 +45,13 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private boolean _hideLabel = false;
 
     public IconLabelItem(Item item) {
-        this._iconProvider = item != null ? item.getIconProvider() : null;
-        this._label = item != null ? item.getLabel() : null;
+        _iconProvider = item != null ? item.getIconProvider() : null;
+        _label = item != null ? item.getLabel() : null;
     }
 
     public IconLabelItem(Context context, int icon, int label) {
-        this._iconProvider = Setup.imageLoader().createIconProvider(icon);
-        this._label = context.getString(label);
+        _iconProvider = Setup.imageLoader().createIconProvider(icon);
+        _label = context.getString(label);
     }
 
     public IconLabelItem(Context context, int label) {
@@ -60,98 +60,98 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     public IconLabelItem(Context context, int icon, String label, int forceSize) {
         this(null);
-        this._label = label;
-        this._iconProvider = Setup.imageLoader().createIconProvider(icon);
-        this._forceSize = forceSize;
+        _label = label;
+        _iconProvider = Setup.imageLoader().createIconProvider(icon);
+        _forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, int icon, int label, int forceSize) {
         this(null);
-        this._label = context.getString(label);
-        this._iconProvider = Setup.imageLoader().createIconProvider(icon);
-        this._forceSize = forceSize;
+        _label = context.getString(label);
+        _iconProvider = Setup.imageLoader().createIconProvider(icon);
+        _forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, BaseIconProvider iconProvider, String label, int forceSize) {
         this(null);
-        this._label = label;
-        this._iconProvider = iconProvider;
-        this._forceSize = forceSize;
+        _label = label;
+        _iconProvider = iconProvider;
+        _forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, Drawable icon, String label, int forceSize) {
         this(null);
-        this._label = label;
-        this._iconProvider = Setup.imageLoader().createIconProvider(icon);
-        this._forceSize = forceSize;
+        _label = label;
+        _iconProvider = Setup.imageLoader().createIconProvider(icon);
+        _forceSize = forceSize;
     }
 
     public IconLabelItem withIconGravity(int iconGravity) {
-        this._iconGravity = iconGravity;
+        _iconGravity = iconGravity;
         return this;
     }
 
     public IconLabelItem withDrawablePadding(Context context, int drawablePadding) {
-        this._drawablePadding = Tool.dp2px(drawablePadding, context);
+        _drawablePadding = Tool.dp2px(drawablePadding, context);
         return this;
     }
 
 
     public IconLabelItem withTextColor(int textColor) {
-        this._textColor = textColor;
+        _textColor = textColor;
         return this;
     }
 
     public IconLabelItem withBold(boolean bold) {
-        this._bold = bold;
+        _bold = bold;
         return this;
     }
 
     public IconLabelItem withTypeface(Typeface typeface) {
-        this._typeface = typeface;
+        _typeface = typeface;
         return this;
     }
 
     public IconLabelItem withGravity(int gravity) {
-        this._gravity = gravity;
+        _gravity = gravity;
         return this;
     }
 
     public IconLabelItem withTextGravity(int textGravity) {
-        this._textGravity = textGravity;
+        _textGravity = textGravity;
         return this;
     }
 
     public IconLabelItem withMatchParent(boolean matchParent) {
-        this._matchParent = matchParent;
+        _matchParent = matchParent;
         return this;
     }
 
     public IconLabelItem withWidth(int width) {
-        this._width = width;
+        _width = width;
         return this;
     }
 
     public IconLabelItem withOnClickListener(@Nullable View.OnClickListener listener) {
-        this._listener = listener;
+        _listener = listener;
         return this;
     }
 
     public IconLabelItem withMaxTextLines(int maxTextLines) {
-        this._maxTextLines = maxTextLines;
+        _maxTextLines = maxTextLines;
         return this;
     }
 
 
     public IconLabelItem withOnLongClickListener(@Nullable View.OnLongClickListener onLongClickListener) {
-        this._onLongClickListener = onLongClickListener;
+        _onLongClickListener = onLongClickListener;
         return this;
     }
 
 
     @Override
     public void setIcon(int resId) {
-        this._iconProvider = Setup.imageLoader().createIconProvider(resId);
+        _iconProvider = Setup.imageLoader().createIconProvider(resId);
     }
 
     @Override

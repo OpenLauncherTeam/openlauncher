@@ -44,7 +44,7 @@ public class AppDrawerController extends RevealFrameLayout {
 
     // arg 1 = open/close, arg 2 = start/end
     public void setCallBack(Callback.a2<Boolean, Boolean> callBack) {
-        this._appDrawerCallback = callBack;
+        _appDrawerCallback = callBack;
     }
 
     public View getDrawer() {

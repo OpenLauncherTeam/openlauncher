@@ -69,19 +69,19 @@ public final class DragNDropLayout extends FrameLayout {
         private boolean _shouldIgnore;
 
         public final boolean getPreviousOutside() {
-            return this._previousOutside;
+            return _previousOutside;
         }
 
         public final void setPreviousOutside(boolean v) {
-            this._previousOutside = v;
+            _previousOutside = v;
         }
 
         public final boolean getShouldIgnore() {
-            return this._shouldIgnore;
+            return _shouldIgnore;
         }
 
         public final void setShouldIgnore(boolean v) {
-            this._shouldIgnore = v;
+            _shouldIgnore = v;
         }
     }
 
@@ -185,63 +185,63 @@ public final class DragNDropLayout extends FrameLayout {
     public DragNDropLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.DRAG_THRESHOLD = 20.0f;
-        this._paint = new Paint(1);
-        this._registeredDropTargetEntries = new HashMap();
-        this._tempArrayOfInt2 = new int[2];
-        this._dragLocation = new PointF();
-        this._dragLocationStart = new PointF();
-        this._dragLocationConverted = new PointF();
-        this._overlayIconScale = 1.0f;
-        this._overlayPopupAdapter = new FastItemAdapter();
-        this._previewLocation = new PointF();
-        this._slideInLeftAnimator = new SlideInLeftAnimator(new AccelerateDecelerateInterpolator());
-        this._slideInRightAnimator = new SlideInRightAnimator(new AccelerateDecelerateInterpolator());
-        this._paint.setFilterBitmap(true);
-        this._paint.setColor(-1);
-        this._overlayView = new OverlayView();
-        this._overlayPopup = new RecyclerView(context);
-        this._overlayPopup.setVisibility(View.INVISIBLE);
-        this._overlayPopup.setAlpha(0.0f);
-        this._overlayPopup.setOverScrollMode(2);
-        this._overlayPopup.setLayoutManager(new LinearLayoutManager(context, 1, false));
-        this._overlayPopup.setItemAnimator(this._slideInLeftAnimator);
-        this._overlayPopup.setAdapter(this._overlayPopupAdapter);
-        addView(this._overlayView, new LayoutParams(-1, -1));
-        addView(this._overlayPopup, new LayoutParams(-2, -2));
+        _paint = new Paint(1);
+        _registeredDropTargetEntries = new HashMap();
+        _tempArrayOfInt2 = new int[2];
+        _dragLocation = new PointF();
+        _dragLocationStart = new PointF();
+        _dragLocationConverted = new PointF();
+        _overlayIconScale = 1.0f;
+        _overlayPopupAdapter = new FastItemAdapter();
+        _previewLocation = new PointF();
+        _slideInLeftAnimator = new SlideInLeftAnimator(new AccelerateDecelerateInterpolator());
+        _slideInRightAnimator = new SlideInRightAnimator(new AccelerateDecelerateInterpolator());
+        _paint.setFilterBitmap(true);
+        _paint.setColor(-1);
+        _overlayView = new OverlayView();
+        _overlayPopup = new RecyclerView(context);
+        _overlayPopup.setVisibility(View.INVISIBLE);
+        _overlayPopup.setAlpha(0.0f);
+        _overlayPopup.setOverScrollMode(2);
+        _overlayPopup.setLayoutManager(new LinearLayoutManager(context, 1, false));
+        _overlayPopup.setItemAnimator(_slideInLeftAnimator);
+        _overlayPopup.setAdapter(_overlayPopupAdapter);
+        addView(_overlayView, new LayoutParams(-1, -1));
+        addView(_overlayPopup, new LayoutParams(-2, -2));
         setWillNotDraw(false);
     }
 
 
     public final boolean getDragging() {
-        return this._dragging;
+        return _dragging;
     }
 
     @NonNull
     public final PointF getDragLocation() {
-        return this._dragLocation;
+        return _dragLocation;
     }
 
 
     @Nullable
     public final Action getDragAction() {
-        return this._dragAction;
+        return _dragAction;
     }
 
 
     public final boolean getDragExceedThreshold() {
-        return this._dragExceedThreshold;
+        return _dragExceedThreshold;
     }
 
     @Nullable
     public final Item getDragItem() {
-        return this._dragItem;
+        return _dragItem;
     }
 
     public final void showFolderPreviewAt(@NonNull View fromView, float x, float y) {
-        if (!this._showFolderPreview) {
-            this._showFolderPreview = true;
+        if (!_showFolderPreview) {
+            _showFolderPreview = true;
             convertPoint(fromView, this, x, y);
-            this._folderPreviewScale = 0.0f;
+            _folderPreviewScale = 0.0f;
             invalidate();
         }
     }
@@ -251,23 +251,23 @@ public final class DragNDropLayout extends FrameLayout {
         int[] toCoordinate = new int[2];
         fromView.getLocationOnScreen(fromCoordinate);
         toView.getLocationOnScreen(toCoordinate);
-        this._previewLocation.set(((float) (fromCoordinate[0] - toCoordinate[0])) + x, ((float) (fromCoordinate[1] - toCoordinate[1])) + y);
+        _previewLocation.set(((float) (fromCoordinate[0] - toCoordinate[0])) + x, ((float) (fromCoordinate[1] - toCoordinate[1])) + y);
     }
 
     public final void cancelFolderPreview() {
-        this._showFolderPreview = false;
-        this._previewLocation.set(-1.0f, -1.0f);
+        _showFolderPreview = false;
+        _previewLocation.set(-1.0f, -1.0f);
         invalidate();
     }
 
     protected void onDraw(@Nullable Canvas canvas) {
         super.onDraw(canvas);
-        if (!(canvas == null || !this._showFolderPreview || this._previewLocation.equals(-1.0f, -1.0f))) {
-            this._folderPreviewScale += 0.08f;
-            this._folderPreviewScale = Tool.clampFloat(this._folderPreviewScale, 0.5f, 1.0f);
-            canvas.drawCircle(this._previewLocation.x, this._previewLocation.y, ((float) Tool.toPx((Setup.appSettings().getDesktopIconSize() / 2) + 10)) * this._folderPreviewScale, this._paint);
+        if (!(canvas == null || !_showFolderPreview || _previewLocation.equals(-1.0f, -1.0f))) {
+            _folderPreviewScale += 0.08f;
+            _folderPreviewScale = Tool.clampFloat(_folderPreviewScale, 0.5f, 1.0f);
+            canvas.drawCircle(_previewLocation.x, _previewLocation.y, ((float) Tool.toPx((Setup.appSettings().getDesktopIconSize() / 2) + 10)) * _folderPreviewScale, _paint);
         }
-        if (this._showFolderPreview) {
+        if (_showFolderPreview) {
             invalidate();
         }
     }
@@ -275,44 +275,44 @@ public final class DragNDropLayout extends FrameLayout {
     @SuppressLint({"ResourceType"})
     public void onViewAdded(@Nullable View child) {
         super.onViewAdded(child);
-        this._overlayView.bringToFront();
-        this._overlayPopup.bringToFront();
+        _overlayView.bringToFront();
+        _overlayPopup.bringToFront();
     }
 
     public final void showPopupMenuForItem(float x, float y, @NonNull List<PopupIconLabelItem> popupItem, com.mikepenz.fastadapter.listeners.OnClickListener<PopupIconLabelItem> listener) {
-        if (!this._overlayPopupShowing) {
-            this._overlayPopupShowing = true;
-            this._overlayPopup.setVisibility(View.VISIBLE);
-            this._overlayPopup.setTranslationX(x);
-            this._overlayPopup.setTranslationY(y);
-            this._overlayPopup.setAlpha(1.0f);
-            this._overlayPopupAdapter.add((List) popupItem);
-            this._overlayPopupAdapter.withOnClickListener(listener);
+        if (!_overlayPopupShowing) {
+            _overlayPopupShowing = true;
+            _overlayPopup.setVisibility(View.VISIBLE);
+            _overlayPopup.setTranslationX(x);
+            _overlayPopup.setTranslationY(y);
+            _overlayPopup.setAlpha(1.0f);
+            _overlayPopupAdapter.add((List) popupItem);
+            _overlayPopupAdapter.withOnClickListener(listener);
         }
     }
 
     public final void setPopupMenuShowDirection(boolean left) {
         if (left) {
-            this._overlayPopup.setItemAnimator(this._slideInLeftAnimator);
+            _overlayPopup.setItemAnimator(_slideInLeftAnimator);
         } else {
-            this._overlayPopup.setItemAnimator(this._slideInRightAnimator);
+            _overlayPopup.setItemAnimator(_slideInRightAnimator);
         }
     }
 
     public final void hidePopupMenu() {
-        if (this._overlayPopupShowing) {
-            this._overlayPopupShowing = false;
-            this._overlayPopup.animate().alpha(0.0f).withEndAction(new Runnable() {
+        if (_overlayPopupShowing) {
+            _overlayPopupShowing = false;
+            _overlayPopup.animate().alpha(0.0f).withEndAction(new Runnable() {
                 @Override
                 public void run() {
                     _overlayPopup.setVisibility(View.INVISIBLE);
                     _overlayPopupAdapter.clear();
                 }
             });
-            if (!this._dragging) {
-                this._dragView = (View) null;
-                this._dragItem = (Item) null;
-                this._dragAction = (Action) null;
+            if (!_dragging) {
+                _dragView = (View) null;
+                _dragItem = (Item) null;
+                _dragAction = (Action) null;
             }
         }
     }
@@ -320,24 +320,24 @@ public final class DragNDropLayout extends FrameLayout {
     public final void startDragNDropOverlay(@NonNull View view, @NonNull Item item, @NonNull Action action) {
 
 
-        this._dragging = true;
-        this._dragExceedThreshold = false;
-        this._overlayIconScale = 0.0f;
-        this._dragView = view;
-        this._dragItem = item;
-        this._dragAction = action;
-        this._dragLocationStart.set(this._dragLocation);
-        for (Entry dropTarget : this._registeredDropTargetEntries.entrySet()) {
+        _dragging = true;
+        _dragExceedThreshold = false;
+        _overlayIconScale = 0.0f;
+        _dragView = view;
+        _dragItem = item;
+        _dragAction = action;
+        _dragLocationStart.set(_dragLocation);
+        for (Entry dropTarget : _registeredDropTargetEntries.entrySet()) {
             convertPoint(((DropTargetListener) dropTarget.getKey()).getView());
             DragFlag dragFlag = (DragFlag) dropTarget.getValue();
             DropTargetListener dropTargetListener = (DropTargetListener) dropTarget.getKey();
-            Action action2 = this._dragAction;
+            Action action2 = _dragAction;
             if (action2 == null) {
                 Intrinsics.throwNpe();
             }
-            dragFlag.setShouldIgnore(dropTargetListener.onStart(action2, this._dragLocationConverted, isViewContains(((DropTargetListener) dropTarget.getKey()).getView(), (int) this._dragLocation.x, (int) this._dragLocation.y)) ^ true);
+            dragFlag.setShouldIgnore(dropTargetListener.onStart(action2, _dragLocationConverted, isViewContains(((DropTargetListener) dropTarget.getKey()).getView(), (int) _dragLocation.x, (int) _dragLocation.y)) ^ true);
         }
-        this._overlayView.invalidate();
+        _overlayView.invalidate();
     }
 
     protected void onDetachedFromWindow() {
@@ -346,33 +346,33 @@ public final class DragNDropLayout extends FrameLayout {
     }
 
     public final void cancelAllDragNDrop() {
-        this._dragging = false;
-        if (!this._overlayPopupShowing) {
-            this._dragView = (View) null;
-            this._dragItem = (Item) null;
-            this._dragAction = (Action) null;
+        _dragging = false;
+        if (!_overlayPopupShowing) {
+            _dragView = (View) null;
+            _dragItem = (Item) null;
+            _dragAction = (Action) null;
         }
-        for (Entry dropTarget : this._registeredDropTargetEntries.entrySet()) {
+        for (Entry dropTarget : _registeredDropTargetEntries.entrySet()) {
             ((DropTargetListener) dropTarget.getKey()).onEnd();
         }
     }
 
     public final void registerDropTarget(@NonNull DropTargetListener targetListener) {
 
-        Map map = this._registeredDropTargetEntries;
+        Map map = _registeredDropTargetEntries;
         Pair pair = new Pair(targetListener, new DragFlag());
         map.put(pair.getFirst(), pair.getSecond());
     }
 
     public boolean onInterceptTouchEvent(@Nullable MotionEvent event) {
-        if (event != null && event.getActionMasked() == 1 && this._dragging) {
+        if (event != null && event.getActionMasked() == 1 && _dragging) {
             handleDragFinished();
         }
-        if (this._dragging) {
+        if (_dragging) {
             return true;
         }
         if (event != null) {
-            this._dragLocation.set(event.getX(), event.getY());
+            _dragLocation.set(event.getX(), event.getY());
         }
         return super.onInterceptTouchEvent(event);
     }
@@ -380,8 +380,8 @@ public final class DragNDropLayout extends FrameLayout {
     @SuppressLint({"ClickableViewAccessibility"})
     public boolean onTouchEvent(@Nullable MotionEvent event) {
         if (event != null) {
-            if (this._dragging) {
-                this._dragLocation.set(event.getX(), event.getY());
+            if (_dragging) {
+                _dragLocation.set(event.getX(), event.getY());
                 switch (event.getActionMasked()) {
                     case 1:
                         handleDragFinished();
@@ -392,7 +392,7 @@ public final class DragNDropLayout extends FrameLayout {
                     default:
                         break;
                 }
-                if (this._dragging) {
+                if (_dragging) {
                     return true;
                 }
                 return super.onTouchEvent(event);
@@ -402,64 +402,64 @@ public final class DragNDropLayout extends FrameLayout {
     }
 
     private final void handleMovement() {
-        if (!this._dragExceedThreshold && (Math.abs(this._dragLocationStart.x - this._dragLocation.x) > this.DRAG_THRESHOLD || Math.abs(this._dragLocationStart.y - this._dragLocation.y) > this.DRAG_THRESHOLD)) {
-            this._dragExceedThreshold = true;
-            for (Entry dropTarget : this._registeredDropTargetEntries.entrySet()) {
+        if (!_dragExceedThreshold && (Math.abs(_dragLocationStart.x - _dragLocation.x) > this.DRAG_THRESHOLD || Math.abs(_dragLocationStart.y - _dragLocation.y) > this.DRAG_THRESHOLD)) {
+            _dragExceedThreshold = true;
+            for (Entry dropTarget : _registeredDropTargetEntries.entrySet()) {
                 if (!((DragFlag) dropTarget.getValue()).getShouldIgnore()) {
                     Action action;
                     convertPoint(((DropTargetListener) dropTarget.getKey()).getView());
                     DropTargetListener dropTargetListener = (DropTargetListener) dropTarget.getKey();
-                    action = this._dragAction;
+                    action = _dragAction;
                     if (action == null) {
                         Intrinsics.throwNpe();
                     }
-                    dropTargetListener.onStartDrag(action, this._dragLocationConverted);
+                    dropTargetListener.onStartDrag(action, _dragLocationConverted);
                 }
             }
         }
-        if (this._dragExceedThreshold) {
+        if (_dragExceedThreshold) {
             hidePopupMenu();
         }
-        for (Entry<DropTargetListener, DragFlag> dropTarget2 : this._registeredDropTargetEntries.entrySet()) {
+        for (Entry<DropTargetListener, DragFlag> dropTarget2 : _registeredDropTargetEntries.entrySet()) {
             DropTargetListener dropTargetListener = (DropTargetListener) dropTarget2.getKey();
-            Action action = this._dragAction;
+            Action action = _dragAction;
             if (!((DragFlag) dropTarget2.getValue()).getShouldIgnore()) {
                 convertPoint(((DropTargetListener) dropTarget2.getKey()).getView());
-                if (isViewContains(((DropTargetListener) dropTarget2.getKey()).getView(), (int) this._dragLocation.x, (int) this._dragLocation.y)) {
+                if (isViewContains(((DropTargetListener) dropTarget2.getKey()).getView(), (int) _dragLocation.x, (int) _dragLocation.y)) {
 
-                    dropTargetListener.onMove(action, this._dragLocationConverted);
+                    dropTargetListener.onMove(action, _dragLocationConverted);
                     if (((DragFlag) dropTarget2.getValue()).getPreviousOutside()) {
                         ((DragFlag) dropTarget2.getValue()).setPreviousOutside(false);
                         dropTargetListener = (DropTargetListener) dropTarget2.getKey();
-                        action = this._dragAction;
-                        dropTargetListener.onEnter(action, this._dragLocationConverted);
+                        action = _dragAction;
+                        dropTargetListener.onEnter(action, _dragLocationConverted);
                     }
                 } else if (!((DragFlag) dropTarget2.getValue()).getPreviousOutside()) {
                     ((DragFlag) dropTarget2.getValue()).setPreviousOutside(true);
                     dropTargetListener = (DropTargetListener) dropTarget2.getKey();
-                    action = this._dragAction;
+                    action = _dragAction;
                     if (action == null) {
                         Intrinsics.throwNpe();
                     }
-                    dropTargetListener.onExit(action, this._dragLocationConverted);
+                    dropTargetListener.onExit(action, _dragLocationConverted);
                 }
             }
         }
     }
 
     private final void handleDragFinished() {
-        this._dragging = false;
-        for (Entry dropTarget : this._registeredDropTargetEntries.entrySet()) {
+        _dragging = false;
+        for (Entry dropTarget : _registeredDropTargetEntries.entrySet()) {
             if (!((DragFlag) dropTarget.getValue()).getShouldIgnore()) {
-                if (isViewContains(((DropTargetListener) dropTarget.getKey()).getView(), (int) this._dragLocation.x, (int) this._dragLocation.y)) {
+                if (isViewContains(((DropTargetListener) dropTarget.getKey()).getView(), (int) _dragLocation.x, (int) _dragLocation.y)) {
                     convertPoint(((DropTargetListener) dropTarget.getKey()).getView());
                     DropTargetListener dropTargetListener = (DropTargetListener) dropTarget.getKey();
-                    Action action = this._dragAction;
+                    Action action = _dragAction;
                     if (action == null) {
                         Intrinsics.throwNpe();
                     }
-                    PointF pointF = this._dragLocationConverted;
-                    Item item = this._dragItem;
+                    PointF pointF = _dragLocationConverted;
+                    Item item = _dragItem;
                     if (item == null) {
                         Intrinsics.throwNpe();
                     }
@@ -467,7 +467,7 @@ public final class DragNDropLayout extends FrameLayout {
                 }
             }
         }
-        for (Entry dropTarget2 : this._registeredDropTargetEntries.entrySet()) {
+        for (Entry dropTarget2 : _registeredDropTargetEntries.entrySet()) {
             ((DropTargetListener) dropTarget2.getKey()).onEnd();
         }
         cancelFolderPreview();
@@ -479,13 +479,13 @@ public final class DragNDropLayout extends FrameLayout {
         int[] toCoordinate = new int[2];
         getLocationOnScreen(fromCoordinate);
         toView.getLocationOnScreen(toCoordinate);
-        this._dragLocationConverted.set(((float) (fromCoordinate[0] - toCoordinate[0])) + this._dragLocation.x, ((float) (fromCoordinate[1] - toCoordinate[1])) + this._dragLocation.y);
+        _dragLocationConverted.set(((float) (fromCoordinate[0] - toCoordinate[0])) + _dragLocation.x, ((float) (fromCoordinate[1] - toCoordinate[1])) + _dragLocation.y);
     }
 
     private final boolean isViewContains(View view, int rx, int ry) {
-        view.getLocationOnScreen(this._tempArrayOfInt2);
-        int x = this._tempArrayOfInt2[0];
-        int y = this._tempArrayOfInt2[1];
+        view.getLocationOnScreen(_tempArrayOfInt2);
+        int x = _tempArrayOfInt2[0];
+        int y = _tempArrayOfInt2[1];
         int w = view.getWidth();
         int h = view.getHeight();
         if (rx < x || rx > x + w || ry < y || ry > y + h) {

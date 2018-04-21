@@ -51,7 +51,7 @@ public class DesktopOptionView extends FrameLayout {
     }
 
     public void setDesktopOptionViewListener(DesktopOptionViewListener desktopOptionViewListener) {
-        this._desktopOptionViewListener = desktopOptionViewListener;
+        _desktopOptionViewListener = desktopOptionViewListener;
     }
 
     public void updateHomeIcon(final boolean home) {

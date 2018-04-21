@@ -17,13 +17,13 @@ public class SimpleIconProvider extends BaseIconProvider {
     protected int _drawableResource;
 
     public SimpleIconProvider(Drawable drawable) {
-        this._drawable = drawable;
-        this._drawableResource = -1;
+        _drawable = drawable;
+        _drawableResource = -1;
     }
 
     public SimpleIconProvider(int drawableResource) {
-        this._drawable = null;
-        this._drawableResource = drawableResource;
+        _drawable = null;
+        _drawableResource = drawableResource;
     }
 
     private Drawable getDrawable() {

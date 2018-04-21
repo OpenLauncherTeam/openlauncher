@@ -161,7 +161,7 @@ public class Item implements LabelProvider, Parcelable {
     @Override
     public boolean equals(Object object) {
         Item itemObject = (Item) object;
-        return object != null && this._idValue == itemObject._idValue;
+        return object != null && _idValue == itemObject._idValue;
     }
 
     @Override
@@ -179,7 +179,7 @@ public class Item implements LabelProvider, Parcelable {
         switch (_type) {
             case APP:
             case SHORTCUT:
-                out.writeString(Tool.getIntentAsString(this._intent));
+                out.writeString(Tool.getIntentAsString(_intent));
                 break;
             case GROUP:
                 List<String> labels = new ArrayList<>();
@@ -223,7 +223,7 @@ public class Item implements LabelProvider, Parcelable {
     }
 
     public void setLabel(String label) {
-        this._name = label;
+        _name = label;
     }
 
     public Type getType() {
@@ -239,7 +239,7 @@ public class Item implements LabelProvider, Parcelable {
     }
 
     public void setX(int x) {
-        this._x = x;
+        _x = x;
     }
 
     public int getY() {
@@ -247,7 +247,7 @@ public class Item implements LabelProvider, Parcelable {
     }
 
     public void setY(int y) {
-        this._y = y;
+        _y = y;
     }
 
     public int getSpanX() {
@@ -279,11 +279,11 @@ public class Item implements LabelProvider, Parcelable {
     }
 
     public void setType(Type type) {
-        this._type = type;
+        _type = type;
     }
 
     public void setIconProvider(BaseIconProvider iconProvider) {
-        this._iconProvider = iconProvider;
+        _iconProvider = iconProvider;
     }
 
     public int getLocationInLauncher() {
@@ -291,7 +291,7 @@ public class Item implements LabelProvider, Parcelable {
     }
 
     public void setIntent(Intent intent) {
-        this._intent = intent;
+        _intent = intent;
     }
 
     public List<Item> getItems() {
@@ -299,7 +299,7 @@ public class Item implements LabelProvider, Parcelable {
     }
 
     public void setItems(List<Item> items) {
-        this._items = items;
+        _items = items;
     }
 
     public int getActionValue() {
@@ -307,7 +307,7 @@ public class Item implements LabelProvider, Parcelable {
     }
 
     public void setActionValue(int actionValue) {
-        this._actionValue = actionValue;
+        _actionValue = actionValue;
     }
 
     public int getWidgetValue() {
@@ -315,6 +315,6 @@ public class Item implements LabelProvider, Parcelable {
     }
 
     public void setWidgetValue(int widgetValue) {
-        this._widgetValue = widgetValue;
+        _widgetValue = widgetValue;
     }
 }

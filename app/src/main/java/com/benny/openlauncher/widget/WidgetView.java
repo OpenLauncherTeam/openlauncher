@@ -19,12 +19,12 @@ public class WidgetView extends AppWidgetHostView {
 
     @Override
     public void setOnTouchListener(OnTouchListener onTouchListener) {
-        this._onTouchListener = onTouchListener;
+        _onTouchListener = onTouchListener;
     }
 
     @Override
     public void setOnLongClickListener(OnLongClickListener l) {
-        this._longClick = l;
+        _longClick = l;
     }
 
     @Override

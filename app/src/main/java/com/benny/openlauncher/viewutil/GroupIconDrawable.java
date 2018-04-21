@@ -65,17 +65,17 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
     }
 
     private void init(Drawable[] icons, float size) {
-        this._icons = icons;
-        this._iconSize = size;
+        _icons = icons;
+        _iconSize = size;
         _iconSizeDiv2 = Math.round(_iconSize / 2f);
         _padding = _iconSize / 25f;
 
-        this._paintInnerCircle = new Paint();
+        _paintInnerCircle = new Paint();
         _paintInnerCircle.setColor(Color.WHITE);
         _paintInnerCircle.setAlpha(150);
         _paintInnerCircle.setAntiAlias(true);
 
-        this._paintOuterCircle = new Paint();
+        _paintOuterCircle = new Paint();
         _paintOuterCircle.setColor(Color.WHITE);
         _paintOuterCircle.setAntiAlias(true);
         _paintOuterCircle.setFlags(Paint.ANTI_ALIAS_FLAG);
@@ -83,7 +83,7 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
         _outline = Tool.dp2px(2, Home.Companion.getLauncher());
         _paintOuterCircle.setStrokeWidth(_outline);
 
-        this._paintIcon = new Paint();
+        _paintIcon = new Paint();
         _paintIcon.setAntiAlias(true);
         _paintIcon.setFilterBitmap(true);
     }

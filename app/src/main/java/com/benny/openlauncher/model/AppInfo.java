@@ -9,10 +9,10 @@ public class AppInfo {
     private boolean _selected = false;
 
     public AppInfo(String code, String name, Drawable icon, boolean selected) {
-        this._code = code;
-        this._name = name;
-        this._icon = icon;
-        this._selected = selected;
+        _code = code;
+        _name = name;
+        _icon = icon;
+        _selected = selected;
     }
 
     public String getCode() {

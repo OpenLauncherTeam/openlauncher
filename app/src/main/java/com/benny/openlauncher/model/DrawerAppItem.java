@@ -20,7 +20,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
     private AppItemView.LongPressCallBack _onLongClickCallback;
 
     public DrawerAppItem(App app) {
-        this._app = app;
+        _app = app;
         _onLongClickCallback = new AppItemView.LongPressCallBack() {
             @Override
             public boolean readyForDrag(View view) {

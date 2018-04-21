@@ -31,8 +31,8 @@ public class ItemGestureListener extends GestureDetector.SimpleOnGestureListener
     public ItemGestureListener(Context context, Item item, ItemGestureCallback callback) {
         _detector = new GestureDetectorCompat(context, this);
         _detector.setOnDoubleTapListener(this);
-        this._item = item;
-        this._callback = callback;
+        _item = item;
+        _callback = callback;
     }
 
     public boolean onTouchEvent(MotionEvent event) {

@@ -12,7 +12,7 @@ public class SwipeListView extends ListView {
     private GestureDetector _gestureDetector;
 
     public void setOnSwipeRight(OnSwipeRight onSwipeRight) {
-        this._onSwipeRight = onSwipeRight;
+        _onSwipeRight = onSwipeRight;
     }
 
     private OnSwipeRight _onSwipeRight;

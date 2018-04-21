@@ -130,8 +130,8 @@ public class LauncherAction {
         public Intent _extraData;
 
         public ActionItem(Action action, Intent extraData) {
-            this._action = action;
-            this._extraData = extraData;
+            _action = action;
+            _extraData = extraData;
         }
     }
 
@@ -141,9 +141,9 @@ public class LauncherAction {
         public int _icon;
 
         public ActionDisplayItem(Action label, String description, int icon) {
-            this._label = label;
-            this._description = description;
-            this._icon = icon;
+            _label = label;
+            _description = description;
+            _icon = icon;
         }
     }
 }

@@ -273,7 +273,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         AppSettings appSettings2 = Setup.appSettings();
 
         if (appSettings2.isSearchBarTimeEnabled()) {
-            this._timeChangedReceiver = new BroadcastReceiver() {
+            _timeChangedReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     if (intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
@@ -1000,11 +1000,11 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     }
 
     private final void registerBroadcastReceiver() {
-        registerReceiver(this._appUpdateReceiver, Companion.getAppUpdateIntentFilter());
-        if (this._timeChangedReceiver != null) {
-            registerReceiver(this._timeChangedReceiver, Companion.getTimeChangesIntentFilter());
+        registerReceiver(_appUpdateReceiver, Companion.getAppUpdateIntentFilter());
+        if (_timeChangedReceiver != null) {
+            registerReceiver(_timeChangedReceiver, Companion.getTimeChangesIntentFilter());
         }
-        registerReceiver(this._shortcutReceiver, Companion.getShortcutIntentFilter());
+        registerReceiver(_shortcutReceiver, Companion.getShortcutIntentFilter());
     }
 
     private final void pickWidget() {
@@ -1114,11 +1114,11 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             appWidgetHost.stopListening();
         }
         Companion.setAppWidgetHost((WidgetHost) null);
-        unregisterReceiver(this._appUpdateReceiver);
-        if (this._timeChangedReceiver != null) {
-            unregisterReceiver(this._timeChangedReceiver);
+        unregisterReceiver(_appUpdateReceiver);
+        if (_timeChangedReceiver != null) {
+            unregisterReceiver(_timeChangedReceiver);
         }
-        unregisterReceiver(this._shortcutReceiver);
+        unregisterReceiver(_shortcutReceiver);
         Companion.setLauncher((Home) null);
         super.onDestroy();
     }
