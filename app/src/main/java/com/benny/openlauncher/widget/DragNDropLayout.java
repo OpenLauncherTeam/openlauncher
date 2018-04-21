@@ -92,7 +92,7 @@ public final class DragNDropLayout extends FrameLayout {
         private final View view;
 
         public DropTargetListener(@NotNull View view) {
-            Intrinsics.checkParameterIsNotNull(view, "view");
+
             this.view = view;
         }
 
@@ -102,35 +102,34 @@ public final class DragNDropLayout extends FrameLayout {
         }
 
         public boolean onStart(@NotNull Action action, @NotNull PointF location, boolean isInside) {
-            Intrinsics.checkParameterIsNotNull(action, "action");
-            Intrinsics.checkParameterIsNotNull(location, "location");
+
+
             return false;
         }
 
         public void onStartDrag(@NotNull Action action, @NotNull PointF location) {
-            Intrinsics.checkParameterIsNotNull(action, "action");
-            Intrinsics.checkParameterIsNotNull(location, "location");
+
+
         }
 
         public void onDrop(@NotNull Action action, @NotNull PointF location, @NotNull Item item) {
-            Intrinsics.checkParameterIsNotNull(action, "action");
-            Intrinsics.checkParameterIsNotNull(location, "location");
-            Intrinsics.checkParameterIsNotNull(item, "item");
+
+
         }
 
         public void onMove(@NotNull Action action, @NotNull PointF location) {
-            Intrinsics.checkParameterIsNotNull(action, "action");
-            Intrinsics.checkParameterIsNotNull(location, "location");
+
+
         }
 
         public void onEnter(@NotNull Action action, @NotNull PointF location) {
-            Intrinsics.checkParameterIsNotNull(action, "action");
-            Intrinsics.checkParameterIsNotNull(location, "location");
+
+
         }
 
         public void onExit(@NotNull Action action, @NotNull PointF location) {
-            Intrinsics.checkParameterIsNotNull(action, "action");
-            Intrinsics.checkParameterIsNotNull(location, "location");
+
+
         }
 
         public void onEnd() {
@@ -321,9 +320,8 @@ public final class DragNDropLayout extends FrameLayout {
     }
 
     public final void startDragNDropOverlay(@NotNull View view, @NotNull Item item, @NotNull Action action) {
-        Intrinsics.checkParameterIsNotNull(view, "view");
-        Intrinsics.checkParameterIsNotNull(item, "item");
-        Intrinsics.checkParameterIsNotNull(action, "action");
+
+
         this.dragging = true;
         this.dragExceedThreshold = false;
         this.overlayIconScale = 0.0f;
@@ -362,7 +360,7 @@ public final class DragNDropLayout extends FrameLayout {
     }
 
     public final void registerDropTarget(@NotNull DropTargetListener targetListener) {
-        Intrinsics.checkParameterIsNotNull(targetListener, "targetListener");
+
         Map map = this.registeredDropTargetEntries;
         Pair pair = new Pair(targetListener, new DragFlag());
         map.put(pair.getFirst(), pair.getSecond());
@@ -478,7 +476,7 @@ public final class DragNDropLayout extends FrameLayout {
     }
 
     public final void convertPoint(@NotNull View toView) {
-        Intrinsics.checkParameterIsNotNull(toView, "toView");
+
         int[] fromCoordinate = new int[2];
         int[] toCoordinate = new int[2];
         getLocationOnScreen(fromCoordinate);

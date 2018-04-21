@@ -81,7 +81,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
 
         @Nullable
         public final Item getItemFromCoordinate(@NotNull Point point, int page) {
-            Intrinsics.checkParameterIsNotNull(point, "point");
+
             List pageData = (List) Home.Companion.getDb().getDesktop().get(page);
             int size = pageData.size();
             for (int i = 0; i < size; i++) {
@@ -96,10 +96,8 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
 
 
     public static boolean handleOnDropOver(Home home, Item dropItem, Item item, View itemView, CellContainer parent, int page, ItemPosition itemPosition, DesktopCallBack<?> callback) {
-        Intrinsics.checkParameterIsNotNull(itemView, "itemView");
-        Intrinsics.checkParameterIsNotNull(parent, "parent");
-        Intrinsics.checkParameterIsNotNull(itemPosition, "itemPosition");
-        Intrinsics.checkParameterIsNotNull(callback, "callback");
+
+
         if (item != null) {
             if (dropItem != null) {
                 Type type = item.type;
@@ -110,7 +108,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                             if (Intrinsics.areEqual(dropItem.type, Type.APP) || Intrinsics.areEqual(dropItem.type, Type.SHORTCUT)) {
                                 parent.removeView(itemView);
                                 Item group = Item.newGroupItem();
-                                Intrinsics.checkExpressionValueIsNotNull(group, "group");
                                 group.getGroupItems().add(item);
                                 group.getGroupItems().add(dropItem);
                                 group.x = item.x;
@@ -201,7 +198,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         private float translateFactor;
 
         public DesktopAdapter(@NotNull Desktop $outer, Desktop desktop) {
-            Intrinsics.checkParameterIsNotNull(desktop, "desktop");
+
             this.this$0 = $outer;
             this.desktop = desktop;
             this.desktop.getPages().clear();
@@ -217,7 +214,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
 
         private final CellContainer getItemLayout() {
             Context context = this.desktop.getContext();
-            Intrinsics.checkExpressionValueIsNotNull(context, "desktop.context");
             CellContainer layout = new CellContainer(context);
             layout.setSoundEffectsEnabled(false);
             SimpleFingerGestures mySfg = new SimpleFingerGestures();
@@ -245,7 +241,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                 @Override
                 public void onClick(View view) {
                     if (!(desktop.getInEditMode() || currentEvent == null)) {
-                        Intrinsics.checkExpressionValueIsNotNull(view, "view");
                         WallpaperManager instance = WallpaperManager.getInstance(view.getContext());
                         IBinder windowToken = view.getWindowToken();
                         String str = "android.wallpaper.tap";
@@ -297,7 +292,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         }
 
         public int getItemPosition(@NotNull Object object) {
-            Intrinsics.checkParameterIsNotNull(object, "object");
+
             return -2;
         }
 
@@ -306,20 +301,20 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         }
 
         public boolean isViewFromObject(@NotNull View p1, @NotNull Object p2) {
-            Intrinsics.checkParameterIsNotNull(p1, "p1");
-            Intrinsics.checkParameterIsNotNull(p2, "p2");
+
+
             return p1 == p2;
         }
 
         public void destroyItem(@NotNull ViewGroup container, int position, @NotNull Object object) {
-            Intrinsics.checkParameterIsNotNull(container, "container");
-            Intrinsics.checkParameterIsNotNull(object, "object");
+
+
             container.removeView((View) object);
         }
 
         @NotNull
         public Object instantiateItem(@NotNull ViewGroup container, int pos) {
-            Intrinsics.checkParameterIsNotNull(container, "container");
+
             CellContainer layout = (CellContainer) this.desktop.getPages().get(pos);
             container.addView(layout);
             return layout;
@@ -332,7 +327,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                 v.setBlockTouch(true);
                 v.animateBackgroundShow();
                 ViewPropertyAnimator translationY = v.animate().scaleX(this.scaleFactor).scaleY(this.scaleFactor).translationY(this.translateFactor);
-                Intrinsics.checkExpressionValueIsNotNull(translationY, "v.animate().scaleX(scale…slationY(translateFactor)");
                 translationY.setInterpolator(new AccelerateDecelerateInterpolator());
             }
             this.desktop.setInEditMode(true);
@@ -352,7 +346,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                 v.setBlockTouch(false);
                 v.animateBackgroundHide();
                 ViewPropertyAnimator translationY = v.animate().scaleX(this.scaleFactor).scaleY(this.scaleFactor).translationY(this.translateFactor);
-                Intrinsics.checkExpressionValueIsNotNull(translationY, "v.animate().scaleX(scale…slationY(translateFactor)");
                 translationY.setInterpolator(new AccelerateDecelerateInterpolator());
             }
             this.desktop.setInEditMode(false);
@@ -411,7 +404,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
     }
 
     public final void setPageIndicator(@NotNull PagerIndicator pageIndicator) {
-        Intrinsics.checkParameterIsNotNull(pageIndicator, "pageIndicator");
+
         this.pageIndicator = pageIndicator;
     }
 
@@ -426,7 +419,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
     }
 
     public final void initDesktopNormal(@NotNull Home home) {
-        Intrinsics.checkParameterIsNotNull(home, "home");
+
         setAdapter(new DesktopAdapter(this, this));
         if (Setup.appSettings().isDesktopShowIndicator() && this.pageIndicator != null) {
             PagerIndicator pagerIndicator = this.pageIndicator;
@@ -463,8 +456,8 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         Desktop desktop = this;
         Context context = c;
         Home home2 = home;
-        Intrinsics.checkParameterIsNotNull(context, "c");
-        Intrinsics.checkParameterIsNotNull(home2, "home");
+
+
         ArrayList apps = new ArrayList();
         for (App app : Setup.appLoader().getAllApps(context, false)) {
             apps.add(Item.newAppItem(app));
@@ -659,7 +652,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
     public void revertLastItem() {
         if (this.previousItemView != null) {
             SmoothPagerAdapter adapter = getAdapter();
-            Intrinsics.checkExpressionValueIsNotNull(adapter, "adapter");
             if (adapter.getCount() >= this.previousPage && this.previousPage > -1) {
                 CellContainer cellContainer = (CellContainer) this.pages.get(this.previousPage);
                 View view = this.previousItemView;
@@ -681,7 +673,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
     }
 
     public boolean addItemToPage(@NotNull Item item, int page) {
-        Intrinsics.checkParameterIsNotNull(item, "item");
+
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDesktopIconSize());
         if (itemView == null) {
             Home.Companion.getDb().deleteItem(item, true);
@@ -709,7 +701,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
     }
 
     public boolean addItemToCell(@NotNull Item item, int x, int y) {
-        Intrinsics.checkParameterIsNotNull(item, "item");
+
         item.locationInLauncher = 0;
         item.x = x;
         item.y = y;
@@ -754,7 +746,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
     }
 
     public void removeItem(final View view, boolean animate) {
-        Intrinsics.checkParameterIsNotNull(view, "view");
+
         Tool.print("Start Removing a view from Desktop");
         if (animate) {
             view.animate().setDuration(100).scaleX(0.0f).scaleY(0.0f).withEndAction(new Runnable() {
@@ -787,7 +779,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
 
     @NotNull
     public WindowInsets onApplyWindowInsets(@NotNull WindowInsets insets) {
-        Intrinsics.checkParameterIsNotNull(insets, "insets");
+
         if (VERSION.SDK_INT >= 20) {
             Companion.setTopInset(insets.getSystemWindowInsetTop());
             Companion.setBottomInset(insets.getSystemWindowInsetBottom());

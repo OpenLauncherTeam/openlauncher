@@ -22,7 +22,6 @@ import java.util.HashMap;
 import kotlin.jvm.internal.Intrinsics;
 
 import static com.benny.openlauncher.widget.PagerIndicator.Mode.ARROW;
-import static com.benny.openlauncher.widget.PagerIndicator.Mode.NORMAL;
 
 /* compiled from: PagerIndicator.kt */
 public final class PagerIndicator extends View implements OnPageChangeListener {
@@ -224,11 +223,9 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
         }
         this.pager = pager;
         SmoothPagerAdapter adapter = pager.getAdapter();
-        Intrinsics.checkExpressionValueIsNotNull(adapter, "pager.adapter");
         this.prePageCount = adapter.getCount();
         pager.addOnPageChangeListener(this);
         adapter = pager.getAdapter();
-        Intrinsics.checkExpressionValueIsNotNull(adapter, "pager.adapter");
         Tool.print(Integer.valueOf(adapter.getCount()));
         invalidate();
     }
@@ -240,14 +237,12 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
             Intrinsics.throwNpe();
         }
         SmoothPagerAdapter adapter = smoothViewPager.getAdapter();
-        Intrinsics.checkExpressionValueIsNotNull(adapter, "pager!!.adapter");
         if (i != adapter.getCount()) {
             SmoothViewPager smoothViewPager2 = this.pager;
             if (smoothViewPager2 == null) {
                 Intrinsics.throwNpe();
             }
             SmoothPagerAdapter adapter2 = smoothViewPager2.getAdapter();
-            Intrinsics.checkExpressionValueIsNotNull(adapter2, "pager!!.adapter");
             this.prePageCount = adapter2.getCount();
         }
         this.scrollOffset = positionOffset;

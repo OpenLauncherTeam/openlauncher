@@ -85,7 +85,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
     }
 
     public final void initDockItem(@NotNull Home home) {
-        Intrinsics.checkParameterIsNotNull(home, "home");
+
         int columns = Setup.appSettings().getDockSize();
         setGridSize(columns, 1);
         List<Item> dockItems = Home.Companion.getDb().getDock();
@@ -99,7 +99,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
     }
 
     public boolean dispatchTouchEvent(@NotNull MotionEvent ev) {
-        Intrinsics.checkParameterIsNotNull(ev, "ev");
+
         detectSwipe(ev);
         super.dispatchTouchEvent(ev);
         return true;
@@ -210,7 +210,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
 
     @NotNull
     public WindowInsets onApplyWindowInsets(@NotNull WindowInsets insets) {
-        Intrinsics.checkParameterIsNotNull(insets, "insets");
+
         if (VERSION.SDK_INT >= 20) {
             Companion.setBottomInset(insets.getSystemWindowInsetBottom());
             setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), Companion.getBottomInset());
@@ -252,7 +252,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
     }
 
     public boolean addItemToPage(@NotNull Item item, int page) {
-        Intrinsics.checkParameterIsNotNull(item, "item");
+
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDockIconSize());
         if (itemView == null) {
             Home.Companion.getDb().deleteItem(item, true);
@@ -264,7 +264,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
     }
 
     public boolean addItemToPoint(@NotNull Item item, int x, int y) {
-        Intrinsics.checkParameterIsNotNull(item, "item");
+
         LayoutParams positionToLayoutPrams = coordinateToLayoutParams(x, y, item.spanX, item.spanY);
         if (positionToLayoutPrams == null) {
             return false;
@@ -281,7 +281,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
     }
 
     public boolean addItemToCell(@NotNull Item item, int x, int y) {
-        Intrinsics.checkParameterIsNotNull(item, "item");
+
         item.locationInLauncher = 1;
         item.x = x;
         item.y = y;
@@ -294,7 +294,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
     }
 
     public void removeItem(final View view, boolean animate) {
-        Intrinsics.checkParameterIsNotNull(view, "view");
+
         if (animate) {
             view.animate().setDuration(100).scaleX(0.0f).scaleY(0.0f).withEndAction(new Runnable() {
                 @Override

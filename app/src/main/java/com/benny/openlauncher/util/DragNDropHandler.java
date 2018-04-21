@@ -15,8 +15,6 @@ import com.benny.openlauncher.widget.AppItemView;
 
 import org.jetbrains.annotations.Nullable;
 
-import kotlin.jvm.internal.Intrinsics;
-
 public final class DragNDropHandler {
     private static final String DRAG_DROP_EXTRA = "DRAG_DROP_EXTRA";
     private static final String DRAG_DROP_INTENT = "DRAG_DROP_INTENT";
@@ -48,12 +46,11 @@ public final class DragNDropHandler {
             ((AppItemView) view).setLabel(tempLabel);
         }
         view.getParent().requestLayout();
-        Intrinsics.checkExpressionValueIsNotNull(bitmap, "bitmap");
         return bitmap;
     }
 
     public <T extends Parcelable> T getDraggedObject(DragEvent dragEvent) {
-        Intrinsics.checkParameterIsNotNull(dragEvent, "dragEvent");
+
         ClipData.Item cdi = dragEvent.getClipData().getItemAt(0);
         if (cdi != null) {
             Intent intent = cdi.getIntent();

@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.interfaces.IconProvider;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.viewutil.ItemGestureListener;
@@ -174,7 +173,6 @@ public class Tool {
             return false;
         }
     }
-
 
 
     public static int dp2px(int dp, Context context) {
