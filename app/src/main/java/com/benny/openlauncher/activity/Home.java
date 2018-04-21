@@ -123,48 +123,43 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
         @Nullable
         public final Home getLauncher() {
-            return Home._launcher;
+            return _launcher;
         }
 
         public final void setLauncher(@Nullable Home v) {
-            Home._launcher = v;
+            _launcher = v;
         }
 
         @Nullable
         public final Resources get_resources() {
-            return Home._resources;
+            return _resources;
         }
 
         public final void set_resources(@Nullable Resources v) {
-            Home._resources = v;
+            _resources = v;
         }
 
         @NonNull
         public final DataManager getDb() {
-            DataManager dataManager = Home._db;
-            if (dataManager == null) {
-                Intrinsics.throwUninitializedPropertyAccessException("db");
-            }
-            return dataManager;
+            return _db;
         }
 
         public final void setDb(@NonNull DataManager v) {
-
-            Home._db = v;
+            _db = v;
         }
 
         @Nullable
         public final WidgetHost getAppWidgetHost() {
-            return Home._appWidgetHost;
+            return _appWidgetHost;
         }
 
         public final void setAppWidgetHost(@Nullable WidgetHost v) {
-            Home._appWidgetHost = v;
+            _appWidgetHost = v;
         }
 
         @NonNull
         public final AppWidgetManager getAppWidgetManager() {
-            AppWidgetManager appWidgetManager = Home._appWidgetManager;
+            AppWidgetManager appWidgetManager = _appWidgetManager;
             if (appWidgetManager == null) {
                 Intrinsics.throwUninitializedPropertyAccessException("appWidgetManager");
             }
@@ -173,43 +168,43 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
         public final void setAppWidgetManager(@NonNull AppWidgetManager v) {
 
-            Home._appWidgetManager = v;
+            _appWidgetManager = v;
         }
 
         public final float getItemTouchX() {
-            return Home._itemTouchX;
+            return _itemTouchX;
         }
 
         public final void setItemTouchX(float v) {
-            Home._itemTouchX = v;
+            _itemTouchX = v;
         }
 
         public final float getItemTouchY() {
-            return Home._itemTouchY;
+            return _itemTouchY;
         }
 
         public final void setItemTouchY(float v) {
-            Home._itemTouchY = v;
+            _itemTouchY = v;
         }
 
         public final boolean getConsumeNextResume() {
-            return Home._consumeNextResume;
+            return _consumeNextResume;
         }
 
         public final void setConsumeNextResume(boolean v) {
-            Home._consumeNextResume = v;
+            _consumeNextResume = v;
         }
 
         private final IntentFilter getTimeChangesIntentFilter() {
-            return Home._timeChangesIntentFilter;
+            return _timeChangesIntentFilter;
         }
 
         private final IntentFilter getAppUpdateIntentFilter() {
-            return Home._appUpdateIntentFilter;
+            return _appUpdateIntentFilter;
         }
 
         private final IntentFilter getShortcutIntentFilter() {
-            return Home._shortcutIntentFilter;
+            return _shortcutIntentFilter;
         }
     }
 
@@ -355,7 +350,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                         appSettings.setAppFirstLaunch(false);
                         Item appDrawerBtnItem = Item.newActionItem(8);
                         appDrawerBtnItem._x = 2;
-                        Home.Companion.getDb().saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
+                        Companion.getDb().saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
                     }
                 }
                 appSettings = Setup.appSettings();

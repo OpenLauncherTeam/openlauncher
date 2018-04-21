@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Build.VERSION;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,9 +31,6 @@ import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
 import com.benny.openlauncher.widget.CellContainer.DragState;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +38,6 @@ import in.championswimmer.sfg.lib.SimpleFingerGestures;
 import in.championswimmer.sfg.lib.SimpleFingerGestures.OnFingerGestureListener;
 import kotlin.TypeCastException;
 import kotlin.jvm.JvmOverloads;
-import kotlin.jvm.internal.Intrinsics;
 
 public final class Desktop extends SmoothViewPager implements DesktopCallBack<View> {
     public static final Companion _companion = new Companion();
@@ -103,7 +101,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                     switch (type) {
                         case APP:
                         case SHORTCUT:
-                            if (Intrinsics.areEqual(dropItem._type, Type.APP) || Intrinsics.areEqual(dropItem._type, Type.SHORTCUT)) {
+                            if (Type.APP.equals(dropItem._type) || Type.SHORTCUT.equals(dropItem._type)) {
                                 parent.removeView(itemView);
                                 Item group = Item.newGroupItem();
                                 group.getGroupItems().add(item);
@@ -117,41 +115,23 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                                 callback.addItemToPage(group, page);
                                 Home launcher = Home.Companion.getLauncher();
                                 if (launcher != null) {
-                                    Desktop desktop = launcher.getDesktop();
-                                    if (desktop != null) {
-                                        desktop.consumeRevert();
-                                    }
-                                }
-                                launcher = Home.Companion.getLauncher();
-                                if (launcher != null) {
-                                    Dock dock = launcher.getDock();
-                                    if (dock != null) {
-                                        dock.consumeRevert();
-                                    }
+                                    launcher.getDesktop().consumeRevert();
+                                    launcher.getDock().consumeRevert();
                                 }
                                 return true;
                             }
                         case GROUP:
-                            if ((Intrinsics.areEqual(dropItem._type, Type.APP) || Intrinsics.areEqual(dropItem._type, Type.SHORTCUT)) && item.getGroupItems().size() < GroupPopupView.GroupDef._maxItem) {
+                            if ((Item.Type.APP.equals(dropItem._type) || Type.SHORTCUT.equals(dropItem._type)) && item.getGroupItems().size() < GroupPopupView.GroupDef._maxItem) {
                                 parent.removeView(itemView);
                                 item.getGroupItems().add(dropItem);
                                 Home.Companion.getDb().saveItem(dropItem, page, itemPosition);
                                 Home.Companion.getDb().saveItem(dropItem, ItemState.Hidden);
                                 Home.Companion.getDb().saveItem(item, page, itemPosition);
                                 callback.addItemToPage(item, page);
-                                Home launcher2 = Home.Companion.getLauncher();
-                                if (launcher2 != null) {
-                                    Desktop desktop2 = launcher2.getDesktop();
-                                    if (desktop2 != null) {
-                                        desktop2.consumeRevert();
-                                    }
-                                }
-                                launcher2 = Home.Companion.getLauncher();
-                                if (launcher2 != null) {
-                                    Dock dock2 = launcher2.getDock();
-                                    if (dock2 != null) {
-                                        dock2.consumeRevert();
-                                    }
+                                Home launcher = Home.Companion.getLauncher();
+                                if (launcher != null) {
+                                    launcher.getDesktop().consumeRevert();
+                                    launcher.getDock().consumeRevert();
                                 }
                                 return true;
                             }
@@ -240,15 +220,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                         IBinder windowToken = view.getWindowToken();
                         String str = "android.wallpaper.tap";
                         MotionEvent access$getCurrentEvent$p = _currentEvent;
-                        if (access$getCurrentEvent$p == null) {
-                            Intrinsics.throwNpe();
-                        }
-                        int x = (int) access$getCurrentEvent$p.getX();
-                        access$getCurrentEvent$p = _currentEvent;
-                        if (access$getCurrentEvent$p == null) {
-                            Intrinsics.throwNpe();
-                        }
-                        instance.sendWallpaperCommand(windowToken, str, x, (int) access$getCurrentEvent$p.getY(), 0, null);
+                        instance.sendWallpaperCommand(windowToken, str, (int) access$getCurrentEvent$p.getX(), (int) access$getCurrentEvent$p.getY(), 0, null);
                     }
                     exitDesktopEditMode();
                 }
@@ -327,9 +299,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
             _desktop.setInEditMode(true);
             if (_desktop.getDesktopEditListener() != null) {
                 OnDesktopEditListener desktopEditListener = _desktop.getDesktopEditListener();
-                if (desktopEditListener == null) {
-                    Intrinsics.throwNpe();
-                }
                 desktopEditListener.onDesktopEdit();
             }
         }
@@ -346,9 +315,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
             _desktop.setInEditMode(false);
             if (_desktop.getDesktopEditListener() != null) {
                 OnDesktopEditListener desktopEditListener = _desktop.getDesktopEditListener();
-                if (desktopEditListener == null) {
-                    Intrinsics.throwNpe();
-                }
                 desktopEditListener.onFinishDesktopEdit();
             }
         }
@@ -417,11 +383,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
 
         setAdapter(new DesktopAdapter(this));
         if (Setup.appSettings().isDesktopShowIndicator() && _pageIndicator != null) {
-            PagerIndicator pagerIndicator = _pageIndicator;
-            if (pagerIndicator == null) {
-                Intrinsics.throwNpe();
-            }
-            pagerIndicator.setViewPager(this);
+            _pageIndicator.setViewPager(this);
         }
         _home = home;
         int columns = Setup.appSettings().getDesktopColumnCount();
@@ -431,7 +393,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         int pageCount = 0;
         while (pageCount < size) {
             if (_pages.size() > pageCount) {
-                ((CellContainer) _pages.get(pageCount)).removeAllViews();
+                _pages.get(pageCount).removeAllViews();
                 List items = (List) desktopItems.get(pageCount);
                 int size2 = items.size();
                 for (int j = 0; j < size2; j++) {
@@ -472,11 +434,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         }
         setAdapter(new DesktopAdapter(desktop));
         if (Setup.appSettings().isDesktopShowIndicator() && desktop._pageIndicator != null) {
-            PagerIndicator pagerIndicator = desktop._pageIndicator;
-            if (pagerIndicator == null) {
-                Intrinsics.throwNpe();
-            }
-            pagerIndicator.setViewPager(desktop);
+            desktop._pageIndicator.setViewPager(desktop);
         }
         desktop._home = home2;
 
@@ -510,11 +468,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                 cellContainer.setHideGrid(!showGrid);
             }
         }
-        PagerIndicator pagerIndicator = _pageIndicator;
-        if (pagerIndicator == null) {
-            Intrinsics.throwNpe();
-        }
-        pagerIndicator.invalidate();
+        _pageIndicator.invalidate();
     }
 
     public final void addPageLeft(boolean showGrid) {
@@ -532,11 +486,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                 cellContainer.setHideGrid(!showGrid);
             }
         }
-        PagerIndicator pagerIndicator = _pageIndicator;
-        if (pagerIndicator == null) {
-            Intrinsics.throwNpe();
-        }
-        pagerIndicator.invalidate();
+        _pageIndicator.invalidate();
     }
 
     public final void removeCurrentPage() {
@@ -564,11 +514,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                 ((DesktopAdapter) adapter).exitDesktopEditMode();
             } else {
                 setCurrentItem(previousPage);
-                PagerIndicator pagerIndicator = _pageIndicator;
-                if (pagerIndicator == null) {
-                    Intrinsics.throwNpe();
-                }
-                pagerIndicator.invalidate();
+                _pageIndicator.invalidate();
             }
         }
     }
@@ -648,22 +594,18 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         if (_previousItemView != null) {
             SmoothPagerAdapter adapter = getAdapter();
             if (adapter.getCount() >= _previousPage && _previousPage > -1) {
-                CellContainer cellContainer = (CellContainer) _pages.get(_previousPage);
-                View view = _previousItemView;
-                if (view == null) {
-                    Intrinsics.throwNpe();
-                }
-                cellContainer.addViewToGrid(view);
-                _previousItem = (Item) null;
-                _previousItemView = (View) null;
+                CellContainer cellContainer = _pages.get(_previousPage);
+                cellContainer.addViewToGrid(_previousItemView);
+                _previousItem = null;
+                _previousItemView = null;
                 _previousPage = -1;
             }
         }
     }
 
     public void consumeRevert() {
-        _previousItem = (Item) null;
-        _previousItemView = (View) null;
+        _previousItem = null;
+        _previousItemView = null;
         _previousPage = -1;
     }
 
@@ -709,32 +651,21 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
     }
 
     public boolean onInterceptTouchEvent(@Nullable MotionEvent ev) {
-        if (ev == null) {
-            Intrinsics.throwNpe();
-        }
-        if (ev.getActionMasked() == 0) {
+        if (ev != null && ev.getActionMasked() == 0) {
             Home launcher = Home.Companion.getLauncher();
             if (launcher != null) {
                 PagerIndicator desktopIndicator = launcher.getDesktopIndicator();
-                if (desktopIndicator != null) {
-                    desktopIndicator.showNow();
-                }
+                desktopIndicator.showNow();
             }
         }
         return super.onInterceptTouchEvent(ev);
     }
 
     public boolean onTouchEvent(@Nullable MotionEvent ev) {
-        if (ev == null) {
-            Intrinsics.throwNpe();
-        }
-        if (ev.getActionMasked() == 1) {
+        if (ev != null && ev.getActionMasked() == 1) {
             Home launcher = Home.Companion.getLauncher();
             if (launcher != null) {
-                PagerIndicator desktopIndicator = launcher.getDesktopIndicator();
-                if (desktopIndicator != null) {
-                    desktopIndicator.hideDelay();
-                }
+                launcher.getDesktopIndicator().hideDelay();
             }
         }
         return super.onTouchEvent(ev);
@@ -753,7 +684,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
                     }
                 }
             });
-        } else if (Intrinsics.areEqual(view.getParent(), getCurrentPage())) {
+        } else if (getCurrentPage().equals(view.getParent())) {
             getCurrentPage().removeView(view);
         }
     }
@@ -779,10 +710,9 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
             _companion.setTopInset(insets.getSystemWindowInsetTop());
             _companion.setBottomInset(insets.getSystemWindowInsetBottom());
             Home launcher = Home.Companion.getLauncher();
-            if (launcher == null) {
-                Intrinsics.throwNpe();
+            if (launcher != null) {
+                launcher.updateHomeLayout();
             }
-            launcher.updateHomeLayout();
         }
         return insets;
     }
