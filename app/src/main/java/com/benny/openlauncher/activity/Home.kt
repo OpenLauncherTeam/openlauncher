@@ -26,10 +26,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.AppObject
 import com.benny.openlauncher.BuildConfig
 import com.benny.openlauncher.R
-import com.benny.openlauncher.activity.homeparts.HpDesktopGestureCallback
-import com.benny.openlauncher.activity.homeparts.HpDragNDrop
-import com.benny.openlauncher.activity.homeparts.HpEventHandler
-import com.benny.openlauncher.activity.homeparts.HpSearchBar
+import com.benny.openlauncher.activity.homeparts.*
 import com.benny.openlauncher.interfaces.AppDeleteListener
 import com.benny.openlauncher.interfaces.AppUpdateListener
 import com.benny.openlauncher.interfaces.DialogListener
@@ -225,36 +222,7 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
 
         dragOptionPanel.setAutoHideView(searchBar)
 
-        appDrawerController!!.setCallBack(object : AppDrawerController.CallBack {
-            override fun onStart() {
-                Tool.visibleViews(appDrawerIndicator)
-                Tool.invisibleViews(desktop)
-                hideDesktopIndicator()
-                updateDock(false)
-                updateSearchBar(false)
-            }
-
-            override fun onEnd() {}
-        }, object : AppDrawerController.CallBack {
-            override fun onStart() {
-                Tool.invisibleViews(appDrawerIndicator)
-                Tool.visibleViews(desktop)
-                showDesktopIndicator()
-                if (Setup.appSettings().drawerStyle == AppDrawerController.DrawerMode.HORIZONTAL_PAGED)
-                    updateDock(true, 200)
-                else
-                    updateDock(true)
-                updateSearchBar(!dragOptionPanel.isDraggedFromDrawer)
-                dragOptionPanel.isDraggedFromDrawer = false
-            }
-
-            override fun onEnd() {
-                if (!Setup.appSettings().isDrawerRememberPosition) {
-                    appDrawerController!!.scrollToStart()
-                }
-                appDrawerController!!.drawer.visibility = View.INVISIBLE
-            }
-        })
+        HpAppDrawer(this@Home, appDrawerIndicator, dragOptionPanel).initAppDrawer(appDrawerController)
 
         initMinibar()
     }
@@ -272,17 +240,6 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
         desktop!!.setBackgroundColor(Setup.appSettings().desktopBackgroundColor)
         dock!!.setBackgroundColor(Setup.appSettings().dockColor)
 
-        appDrawerController!!.setBackgroundColor(Setup.appSettings().drawerBackgroundColor)
-        appDrawerController!!.background.alpha = 0
-        appDrawerController!!.reloadDrawerCardTheme()
-
-        when (Setup.appSettings().drawerStyle) {
-            AppDrawerController.DrawerMode.HORIZONTAL_PAGED -> if (!Setup.appSettings().isDrawerShowIndicator) {
-                appDrawerController!!.getChildAt(1).visibility = View.GONE
-            }
-            AppDrawerController.DrawerMode.VERTICAL -> {
-            }
-        }// handled in the AppDrawerVertical class
         drawer_layout.setDrawerLockMode(if (AppSettings.get().minibarEnable) DrawerLayout.LOCK_MODE_UNLOCKED else DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 

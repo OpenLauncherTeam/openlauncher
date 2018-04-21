@@ -17,6 +17,8 @@ import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.Tool;
 
+import net.gsantner.opoc.util.Callback;
+
 import io.codetail.widget.RevealFrameLayout;
 
 public class AppDrawerController extends RevealFrameLayout {
@@ -24,7 +26,7 @@ public class AppDrawerController extends RevealFrameLayout {
     public AppDrawerVertical drawerViewGrid;
     public int drawerMode;
     public boolean isOpen = false;
-    private CallBack openCallBack, closeCallBack;
+    private Callback.a2<Boolean, Boolean> appDrawerCallback;
     private Animator appDrawerAnimator;
     private Long drawerAnimationTime = 200L;
 
@@ -40,9 +42,9 @@ public class AppDrawerController extends RevealFrameLayout {
         super(context, attrs, defStyle);
     }
 
-    public void setCallBack(CallBack openCallBack, CallBack closeCallBack) {
-        this.openCallBack = openCallBack;
-        this.closeCallBack = closeCallBack;
+    // arg 1 = open/close, arg 2 = start/end
+    public void setCallBack(Callback.a2<Boolean, Boolean> callBack) {
+        this.appDrawerCallback = callBack;
     }
 
     public View getDrawer() {
@@ -58,7 +60,7 @@ public class AppDrawerController extends RevealFrameLayout {
         appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         appDrawerAnimator.setDuration(drawerAnimationTime);
         appDrawerAnimator.setStartDelay((int) (Setup.appSettings().getOverallAnimationSpeedModifier() * 200));
-        openCallBack.onStart();
+        appDrawerCallback.callback(true, true);
         appDrawerAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator p1) {
@@ -88,7 +90,7 @@ public class AppDrawerController extends RevealFrameLayout {
 
             @Override
             public void onAnimationEnd(Animator p1) {
-                openCallBack.onEnd();
+                appDrawerCallback.callback(true, false);
             }
 
             @Override
@@ -116,7 +118,7 @@ public class AppDrawerController extends RevealFrameLayout {
         appDrawerAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator p1) {
-                closeCallBack.onStart();
+                appDrawerCallback.callback(false, true);
 
                 ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(getBackground(), PropertyValuesHolder.ofInt("alpha", 255, 0));
                 animator.setDuration(drawerAnimationTime);
@@ -125,7 +127,7 @@ public class AppDrawerController extends RevealFrameLayout {
 
             @Override
             public void onAnimationEnd(Animator p1) {
-                closeCallBack.onEnd();
+                appDrawerCallback.callback(false, false);
             }
 
             @Override
@@ -238,12 +240,6 @@ public class AppDrawerController extends RevealFrameLayout {
             case DrawerMode.VERTICAL:
                 break;
         }
-    }
-
-    public interface CallBack {
-        void onStart();
-
-        void onEnd();
     }
 
     public static class DrawerMode {
