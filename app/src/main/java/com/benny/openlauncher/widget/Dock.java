@@ -21,8 +21,6 @@ import com.benny.openlauncher.viewutil.ItemViewFactory;
 
 import java.util.List;
 
-import kotlin.jvm.internal.Intrinsics;
-
 public final class Dock extends CellContainer implements DesktopCallBack<View> {
     public int _bottomInset;
     private final Point _coordinate = new Point();
@@ -190,14 +188,10 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
     }
 
     public void revertLastItem() {
-        if (_previousItemView != null) {
-            View view = _previousItemView;
-            if (view == null) {
-                Intrinsics.throwNpe();
-            }
-            addViewToGrid(view);
-            _previousItem = (Item) null;
-            _previousItemView = (View) null;
+        if (_previousItemView != null && _previousItem != null) {
+            addViewToGrid(_previousItemView);
+            _previousItem = null;
+            _previousItemView = null;
         }
     }
 
@@ -254,7 +248,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
                     }
                 }
             });
-        } else if (Intrinsics.areEqual(view.getParent(), (Object) this)) {
+        } else if (this.equals(view.getParent())) {
             removeView(view);
         }
     }

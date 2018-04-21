@@ -16,10 +16,6 @@ import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
 import com.benny.openlauncher.widget.SmoothViewPager.OnPageChangeListener;
 
-import kotlin.jvm.internal.Intrinsics;
-
-import static com.benny.openlauncher.widget.PagerIndicator.Mode.ARROW;
-
 public final class PagerIndicator extends View implements OnPageChangeListener {
     public static final Companion _companion = new Companion();
     private static float _pad;
@@ -106,7 +102,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
                 }
                 break;
             }
-            case ARROW: {
+            case Mode.ARROW: {
 
                 if (_pager != null) {
                     _arrowPath.reset();
@@ -148,7 +144,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     }
 
     public PagerIndicator(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public PagerIndicator(@NonNull Context context, @NonNull AttributeSet attrs) {
@@ -183,41 +179,23 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
 
 
     public final void setViewPager(@Nullable SmoothViewPager pager) {
-        if (pager == null) {
-            if (_pager != null) {
-                SmoothViewPager smoothViewPager = _pager;
-                if (smoothViewPager == null) {
-                    Intrinsics.throwNpe();
-                }
-                smoothViewPager.removeOnPageChangeListener(this);
-                _pager = null;
-                invalidate();
+        if (pager == null && _pager != null) {
+            _pager.removeOnPageChangeListener(this);
+            _pager = null;
+        } else {
+            _pager = pager;
+            _prePageCount = pager != null ? pager.getAdapter().getCount() : 0;
+            if (pager != null) {
+                pager.addOnPageChangeListener(this);
             }
-            return;
         }
-        _pager = pager;
-        SmoothPagerAdapter adapter = pager.getAdapter();
-        _prePageCount = adapter.getCount();
-        pager.addOnPageChangeListener(this);
-        adapter = pager.getAdapter();
-        Tool.print(Integer.valueOf(adapter.getCount()));
         invalidate();
     }
 
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        int i = _prePageCount;
-        SmoothViewPager smoothViewPager = _pager;
-        if (smoothViewPager == null) {
-            Intrinsics.throwNpe();
-        }
-        SmoothPagerAdapter adapter = smoothViewPager.getAdapter();
-        if (i != adapter.getCount()) {
-            SmoothViewPager smoothViewPager2 = _pager;
-            if (smoothViewPager2 == null) {
-                Intrinsics.throwNpe();
-            }
-            SmoothPagerAdapter adapter2 = smoothViewPager2.getAdapter();
-            _prePageCount = adapter2.getCount();
+        SmoothPagerAdapter adapter = _pager.getAdapter();
+        if (_prePageCount != adapter.getCount()) {
+            _prePageCount = _pager.getAdapter().getCount();
         }
         _scrollOffset = positionOffset;
         _scrollPagePosition = position;
