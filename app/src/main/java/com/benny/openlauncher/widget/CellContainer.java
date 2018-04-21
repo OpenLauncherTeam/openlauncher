@@ -22,7 +22,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
@@ -30,87 +29,86 @@ import in.championswimmer.sfg.lib.SimpleFingerGestures;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class CellContainer extends ViewGroup {
-    private HashMap _$_findViewCache;
-    private boolean animateBackground;
-    private final Paint bgPaint = new Paint(1);
-    private boolean blockTouch;
-    private Bitmap cachedOutlineBitmap;
-    private int cellHeight;
-    private int cellSpanH;
-    private int cellSpanV;
-    private int cellWidth;
-    private Rect[][] cells;
-    private Point currentOutlineCoordinate = new Point(-1, -1);
-    private Long down = Long.valueOf(0);
+    private boolean _animateBackground;
+    private final Paint _bgPaint = new Paint(1);
+    private boolean _blockTouch;
+    private Bitmap _cachedOutlineBitmap;
+    private int _cellHeight;
+    private int _cellSpanH;
+    private int _cellSpanV;
+    private int _cellWidth;
+    private Rect[][] _cells;
+    private Point _currentOutlineCoordinate = new Point(-1, -1);
+    private Long _down = Long.valueOf(0);
     @Nullable
-    private SimpleFingerGestures gestures;
-    private boolean hideGrid = true;
-    private final Paint mPaint = new Paint(1);
-    private boolean[][] occupied;
+    private SimpleFingerGestures _gestures;
+    private boolean _hideGrid = true;
+    private final Paint _paint = new Paint(1);
+    private boolean[][] _occupied;
     @Nullable
-    private OnItemRearrangeListener onItemRearrangeListener;
-    private final Paint outlinePaint = new Paint(1);
-    private PeekDirection peekDirection;
-    private Long peekDownTime = Long.valueOf(-1);
-    private Point preCoordinate = new Point(-1, -1);
-    private Point startCoordinate = new Point();
+    private OnItemRearrangeListener _onItemRearrangeListener;
+    private final Paint _outlinePaint = new Paint(1);
+    private PeekDirection _peekDirection;
+    private Long _peekDownTime = Long.valueOf(-1);
+    private Point _preCoordinate = new Point(-1, -1);
+    private Point _startCoordinate = new Point();
     @NonNull
-    private final Rect tempRect = new Rect();
+    private final Rect _tempRect = new Rect();
 
     public enum DragState {
         CurrentNotOccupied, OutOffRange, ItemViewNotFound, CurrentOccupied
     }
 
     public static final class LayoutParams extends android.view.ViewGroup.LayoutParams {
-        private int x;
-        private int xSpan = 1;
-        private int y;
-        private int ySpan = 1;
+        private int _x;
+        private int _xSpan = 1;
+        private int _y;
+        private int _ySpan = 1;
 
         public final int getX() {
-            return this.x;
+            return this._x;
         }
 
         public final void setX(int v) {
-            this.x = v;
+            this._x = v;
         }
 
         public final int getY() {
-            return this.y;
+            return this._y;
         }
 
         public final void setY(int v) {
-            this.y = v;
+            this._y = v;
         }
 
         public final int getXSpan() {
-            return this.xSpan;
+            return this._xSpan;
         }
 
         public final void setXSpan(int v) {
-            this.xSpan = v;
+            this._xSpan = v;
         }
 
         public final int getYSpan() {
-            return this.ySpan;
+            return this._ySpan;
         }
 
         public final void setYSpan(int v) {
-            this.ySpan = v;
+            this._ySpan = v;
         }
 
         public LayoutParams(int w, int h, int x, int y) {
             super(w, h);
-            this.x = x;
-            this.y = y;
+            this._x = x;
+            this._y = y;
         }
 
         public LayoutParams(int w, int h, int x, int y, int xSpan, int ySpan) {
             super(w, h);
-            this.x = x;
-            this.y = y;
-            this.xSpan = xSpan;
-            this.ySpan = ySpan;
+            this._x = x;
+            this._y = y;
+            this._xSpan = xSpan;
+            this._ySpan = ySpan;
         }
 
         public LayoutParams(int w, int h) {
@@ -127,31 +125,31 @@ public class CellContainer extends ViewGroup {
     }
 
     public final int getCellWidth() {
-        return this.cellWidth;
+        return this._cellWidth;
     }
 
     public final int getCellHeight() {
-        return this.cellHeight;
+        return this._cellHeight;
     }
 
     public final int getCellSpanV() {
-        return this.cellSpanV;
+        return this._cellSpanV;
     }
 
     public final int getCellSpanH() {
-        return this.cellSpanH;
+        return this._cellSpanH;
     }
 
     public final void setBlockTouch(boolean v) {
-        this.blockTouch = v;
+        this._blockTouch = v;
     }
 
     public final void setGestures(@Nullable SimpleFingerGestures v) {
-        this.gestures = v;
+        this._gestures = v;
     }
 
     public final void setOnItemRearrangeListener(@Nullable OnItemRearrangeListener v) {
-        this.onItemRearrangeListener = v;
+        this._onItemRearrangeListener = v;
     }
 
     @NonNull
@@ -170,40 +168,40 @@ public class CellContainer extends ViewGroup {
 
     public CellContainer(@NonNull Context c, @Nullable AttributeSet attr) {
         super(c, attr);
-        this.mPaint.setStyle(Style.STROKE);
-        this.mPaint.setStrokeWidth(2.0f);
-        this.mPaint.setStrokeJoin(Join.ROUND);
-        this.mPaint.setColor(-1);
-        this.mPaint.setAlpha(0);
-        this.bgPaint.setStyle(Style.FILL);
-        this.bgPaint.setColor(-1);
-        this.bgPaint.setAlpha(0);
-        this.outlinePaint.setColor(-1);
-        this.outlinePaint.setAlpha(0);
+        this._paint.setStyle(Style.STROKE);
+        this._paint.setStrokeWidth(2.0f);
+        this._paint.setStrokeJoin(Join.ROUND);
+        this._paint.setColor(-1);
+        this._paint.setAlpha(0);
+        this._bgPaint.setStyle(Style.FILL);
+        this._bgPaint.setColor(-1);
+        this._bgPaint.setAlpha(0);
+        this._outlinePaint.setColor(-1);
+        this._outlinePaint.setAlpha(0);
         init();
     }
 
     public final void setGridSize(int x, int y) {
-        this.cellSpanV = y;
-        this.cellSpanH = x;
+        this._cellSpanV = y;
+        this._cellSpanH = x;
 
-        occupied = new boolean[cellSpanH][cellSpanV];
-        for (int i = 0; i < cellSpanH; i++) {
-            for (int j = 0; j < cellSpanV; j++) {
-                occupied[i][j] = false;
+        _occupied = new boolean[_cellSpanH][_cellSpanV];
+        for (int i = 0; i < _cellSpanH; i++) {
+            for (int j = 0; j < _cellSpanV; j++) {
+                _occupied[i][j] = false;
             }
         }
         requestLayout();
     }
 
     public final void setHideGrid(boolean hideGrid) {
-        this.hideGrid = hideGrid;
+        this._hideGrid = hideGrid;
         invalidate();
     }
 
     public final void resetOccupiedSpace() {
-        if (this.cellSpanH > 0 && this.cellSpanV > 0) {
-            occupied = new boolean[cellSpanH][cellSpanV];
+        if (this._cellSpanH > 0 && this._cellSpanV > 0) {
+            _occupied = new boolean[_cellSpanH][_cellSpanV];
         }
     }
 
@@ -213,30 +211,30 @@ public class CellContainer extends ViewGroup {
     }
 
     public final void projectImageOutlineAt(@NonNull Point newCoordinate, @Nullable Bitmap bitmap) {
-        this.cachedOutlineBitmap = bitmap;
-        if (!currentOutlineCoordinate.equals(newCoordinate)) {
-            this.outlinePaint.setAlpha(0);
+        this._cachedOutlineBitmap = bitmap;
+        if (!_currentOutlineCoordinate.equals(newCoordinate)) {
+            this._outlinePaint.setAlpha(0);
         }
-        this.currentOutlineCoordinate.set(newCoordinate.x, newCoordinate.y);
+        this._currentOutlineCoordinate.set(newCoordinate.x, newCoordinate.y);
         invalidate();
     }
 
     private final void drawCachedOutlineBitmap(Canvas canvas, Rect cell) {
-        if (this.cachedOutlineBitmap != null) {
-            Bitmap bitmap = this.cachedOutlineBitmap;
+        if (this._cachedOutlineBitmap != null) {
+            Bitmap bitmap = this._cachedOutlineBitmap;
             float centerX = (float) cell.centerX();
-            Bitmap bitmap2 = this.cachedOutlineBitmap;
+            Bitmap bitmap2 = this._cachedOutlineBitmap;
             float f = (float) 2;
             centerX -= ((float) bitmap2.getWidth()) / f;
             float centerY = (float) cell.centerY();
-            Bitmap bitmap3 = this.cachedOutlineBitmap;
-            canvas.drawBitmap(bitmap, centerX, centerY - (((float) bitmap3.getWidth()) / f), this.outlinePaint);
+            Bitmap bitmap3 = this._cachedOutlineBitmap;
+            canvas.drawBitmap(bitmap, centerX, centerY - (((float) bitmap3.getWidth()) / f), this._outlinePaint);
         }
     }
 
     public final void clearCachedOutlineBitmap() {
-        this.outlinePaint.setAlpha(0);
-        this.cachedOutlineBitmap = (Bitmap) null;
+        this._outlinePaint.setAlpha(0);
+        this._cachedOutlineBitmap = (Bitmap) null;
         invalidate();
     }
 
@@ -251,20 +249,20 @@ public class CellContainer extends ViewGroup {
         if (coordinate.x != -1) {
             if (coordinate.y != -1) {
                 DragState dragState;
-                if (this.startCoordinate == null) {
-                    this.startCoordinate = coordinate;
+                if (this._startCoordinate == null) {
+                    this._startCoordinate = coordinate;
                 }
-                if (!preCoordinate.equals(coordinate)) {
-                    this.peekDownTime = Long.valueOf(-1);
+                if (!_preCoordinate.equals(coordinate)) {
+                    this._peekDownTime = Long.valueOf(-1);
                 }
-                Long l = this.peekDownTime;
+                Long l = this._peekDownTime;
                 if (l != null && l == -1) {
-                    this.peekDirection = getPeekDirectionFromCoordinate(this.startCoordinate, coordinate);
-                    this.peekDownTime = Long.valueOf(System.currentTimeMillis());
-                    this.preCoordinate = coordinate;
+                    this._peekDirection = getPeekDirectionFromCoordinate(this._startCoordinate, coordinate);
+                    this._peekDownTime = Long.valueOf(System.currentTimeMillis());
+                    this._preCoordinate = coordinate;
 
                 }
-                boolean[][] zArr = this.occupied;
+                boolean[][] zArr = this._occupied;
                 if (zArr[coordinate.x][coordinate.y]) {
                     dragState = DragState.CurrentOccupied;
                 } else {
@@ -295,32 +293,32 @@ public class CellContainer extends ViewGroup {
     public boolean onTouchEvent(@NonNull MotionEvent event) {
         switch (MotionEventCompat.getActionMasked(event)) {
             case 0:
-                this.down = System.currentTimeMillis();
+                this._down = System.currentTimeMillis();
                 break;
             case 1:
                 long currentTimeMillis = System.currentTimeMillis();
-                Long l = this.down;
-                if (currentTimeMillis - l.longValue() < 260 && this.blockTouch) {
+                Long l = this._down;
+                if (currentTimeMillis - l.longValue() < 260 && this._blockTouch) {
                     performClick();
                     break;
                 }
             default:
                 break;
         }
-        if (this.blockTouch) {
+        if (this._blockTouch) {
             return true;
         }
-        if (this.gestures == null) {
+        if (this._gestures == null) {
             Tool.print((Object) "gestures is null");
             return super.onTouchEvent(event);
         }
-        SimpleFingerGestures simpleFingerGestures = this.gestures;
+        SimpleFingerGestures simpleFingerGestures = this._gestures;
         simpleFingerGestures.onTouch(this, event);
         return super.onTouchEvent(event);
     }
 
     public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
-        if (this.blockTouch) {
+        if (this._blockTouch) {
             return true;
         }
         return super.onInterceptTouchEvent(ev);
@@ -331,24 +329,24 @@ public class CellContainer extends ViewGroup {
     }
 
     public final void animateBackgroundShow() {
-        this.animateBackground = true;
+        this._animateBackground = true;
         invalidate();
     }
 
     public final void animateBackgroundHide() {
-        this.animateBackground = false;
+        this._animateBackground = false;
         invalidate();
     }
 
     @Nullable
     public final Point findFreeSpace() {
-        boolean[][] zArr = this.occupied;
+        boolean[][] zArr = this._occupied;
         int length = zArr[0].length;
         for (int y = 0; y < length; y++) {
-            boolean[][] zArr2 = this.occupied;
+            boolean[][] zArr2 = this._occupied;
             int length2 = zArr2.length;
             for (int x = 0; x < length2; x++) {
-                boolean[][] zArr3 = this.occupied;
+                boolean[][] zArr3 = this._occupied;
                 if (!zArr3[x][y]) {
                     return new Point(x, y);
                 }
@@ -359,15 +357,15 @@ public class CellContainer extends ViewGroup {
 
     @Nullable
     public final Point findFreeSpace(int spanX, int spanY) {
-        boolean[][] zArr = this.occupied;
+        boolean[][] zArr = this._occupied;
         int length = zArr[0].length;
         int y = 0;
         while (y < length) {
-            boolean[][] zArr2 = this.occupied;
+            boolean[][] zArr2 = this._occupied;
             int length2 = zArr2.length;
             int x = 0;
             while (x < length2) {
-                boolean[][] zArr3 = this.occupied;
+                boolean[][] zArr3 = this._occupied;
                 if (!zArr3[x][y] && !checkOccupied(new Point(x, y), spanX, spanY)) {
                     return new Point(x, y);
                 }
@@ -381,67 +379,67 @@ public class CellContainer extends ViewGroup {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawRect(0f, 0f, getWidth(), getHeight(), bgPaint);
+        canvas.drawRect(0f, 0f, getWidth(), getHeight(), _bgPaint);
 
-        if (cells == null)
+        if (_cells == null)
             return;
 
         float s = 7f;
-        for (int x = 0; x < cellSpanH; x++) {
-            for (int y = 0; y < cellSpanV; y++) {
-                if (x >= cells.length || y >= cells[0].length)
+        for (int x = 0; x < _cellSpanH; x++) {
+            for (int y = 0; y < _cellSpanV; y++) {
+                if (x >= _cells.length || y >= _cells[0].length)
                     continue;
 
-                Rect cell = cells[x][y];
+                Rect cell = _cells[x][y];
 
                 canvas.save();
                 canvas.rotate(45f, cell.left, cell.top);
-                canvas.drawRect(cell.left - s, cell.top - s, cell.left + s, cell.top + s, mPaint);
+                canvas.drawRect(cell.left - s, cell.top - s, cell.left + s, cell.top + s, _paint);
                 canvas.restore();
 
                 canvas.save();
                 canvas.rotate(45f, cell.left, cell.bottom);
-                canvas.drawRect(cell.left - s, cell.bottom - s, cell.left + s, cell.bottom + s, mPaint);
+                canvas.drawRect(cell.left - s, cell.bottom - s, cell.left + s, cell.bottom + s, _paint);
                 canvas.restore();
 
                 canvas.save();
                 canvas.rotate(45f, cell.right, cell.top);
-                canvas.drawRect(cell.right - s, cell.top - s, cell.right + s, cell.top + s, mPaint);
+                canvas.drawRect(cell.right - s, cell.top - s, cell.right + s, cell.top + s, _paint);
                 canvas.restore();
 
                 canvas.save();
                 canvas.rotate(45f, cell.right, cell.bottom);
-                canvas.drawRect(cell.right - s, cell.bottom - s, cell.right + s, cell.bottom + s, mPaint);
+                canvas.drawRect(cell.right - s, cell.bottom - s, cell.right + s, cell.bottom + s, _paint);
                 canvas.restore();
             }
         }
 
         //Animating alpha and drawing projected image
         Home home = Home.Companion.getLauncher();
-        if (home != null && home.getDragNDropView().getDragExceedThreshold() && currentOutlineCoordinate.x != -1 && currentOutlineCoordinate.y != -1) {
-            if (outlinePaint.getAlpha() != 160)
-                outlinePaint.setAlpha(Math.min(outlinePaint.getAlpha() + 20, 160));
-            drawCachedOutlineBitmap(canvas, cells[currentOutlineCoordinate.x][currentOutlineCoordinate.y]);
+        if (home != null && home.getDragNDropView().getDragExceedThreshold() && _currentOutlineCoordinate.x != -1 && _currentOutlineCoordinate.y != -1) {
+            if (_outlinePaint.getAlpha() != 160)
+                _outlinePaint.setAlpha(Math.min(_outlinePaint.getAlpha() + 20, 160));
+            drawCachedOutlineBitmap(canvas, _cells[_currentOutlineCoordinate.x][_currentOutlineCoordinate.y]);
 
-            if (outlinePaint.getAlpha() <= 160)
+            if (_outlinePaint.getAlpha() <= 160)
                 invalidate();
         }
 
         //Animating alpha
-        if (hideGrid && mPaint.getAlpha() != 0) {
-            mPaint.setAlpha(Math.max(mPaint.getAlpha() - 20, 0));
+        if (_hideGrid && _paint.getAlpha() != 0) {
+            _paint.setAlpha(Math.max(_paint.getAlpha() - 20, 0));
             invalidate();
-        } else if (!hideGrid && mPaint.getAlpha() != 255) {
-            mPaint.setAlpha(Math.min(mPaint.getAlpha() + 20, 255));
+        } else if (!_hideGrid && _paint.getAlpha() != 255) {
+            _paint.setAlpha(Math.min(_paint.getAlpha() + 20, 255));
             invalidate();
         }
 
         //Animating alpha
-        if (!animateBackground && bgPaint.getAlpha() != 0) {
-            bgPaint.setAlpha(Math.max(bgPaint.getAlpha() - 10, 0));
+        if (!_animateBackground && _bgPaint.getAlpha() != 0) {
+            _bgPaint.setAlpha(Math.max(_bgPaint.getAlpha() - 10, 0));
             invalidate();
-        } else if (animateBackground && bgPaint.getAlpha() != 100) {
-            bgPaint.setAlpha(Math.min(bgPaint.getAlpha() + 10, 100));
+        } else if (_animateBackground && _bgPaint.getAlpha() != 100) {
+            _bgPaint.setAlpha(Math.min(_bgPaint.getAlpha() + 10, 100));
             invalidate();
         }
     }
@@ -480,7 +478,7 @@ public class CellContainer extends ViewGroup {
                 objArr[0] = stringBuilder.toString();
                 objArr[1] = ")";
                 Tool.print(objArr);
-                boolean[][] zArr = this.occupied;
+                boolean[][] zArr = this._occupied;
                 zArr[x2][y2] = b;
             }
         }
@@ -488,16 +486,16 @@ public class CellContainer extends ViewGroup {
 
     public final boolean checkOccupied(@NonNull Point start, int spanX, int spanY) {
         int i = start.x + spanX;
-        boolean[][] zArr = this.occupied;
+        boolean[][] zArr = this._occupied;
         if (i <= ((Object[]) zArr).length) {
             i = start.y + spanY;
-            zArr = this.occupied;
+            zArr = this._occupied;
             if (i <= zArr[0].length) {
                 int i2 = start.y + spanY;
                 for (i = start.y; i < i2; i++) {
                     int i3 = start.x + spanX;
                     for (int x = start.x; x < i3; x++) {
-                        boolean[][] zArr2 = this.occupied;
+                        boolean[][] zArr2 = this._occupied;
                         if (zArr2[x][i]) {
                             return true;
                         }
@@ -516,7 +514,7 @@ public class CellContainer extends ViewGroup {
         }
         for (int i = 0; i < getChildCount(); i++) {
             LayoutParams lp = (LayoutParams) getChildAt(i).getLayoutParams();
-            if (pos.x >= lp.x && pos.y >= lp.y && pos.x < lp.x + lp.xSpan && pos.y < lp.y + lp.ySpan) {
+            if (pos.x >= lp._x && pos.y >= lp._y && pos.x < lp._x + lp._xSpan && pos.y < lp._y + lp._ySpan) {
                 return getChildAt(i);
             }
         }
@@ -536,23 +534,23 @@ public class CellContainer extends ViewGroup {
 
 
     public final void touchPosToCoordinate(@NonNull Point coordinate, int mX, int mY, int xSpan, int ySpan, boolean checkAvailability, boolean checkBoundary) {
-        if (cells == null) {
+        if (_cells == null) {
             coordinate.set(-1, -1);
             return;
         }
 
 
-        mX -= (xSpan - 1) * cellWidth / 2f;
-        mY -= (ySpan - 1) * cellHeight / 2f;
+        mX -= (xSpan - 1) * _cellWidth / 2f;
+        mY -= (ySpan - 1) * _cellHeight / 2f;
 
         int x = 0;
-        while (x < cellSpanH) {
+        while (x < _cellSpanH) {
             int y = 0;
-            while (y < cellSpanV) {
-                Rect cell = cells[x][y];
+            while (y < _cellSpanV) {
+                Rect cell = _cells[x][y];
                 if (mY >= cell.top && mY <= cell.bottom && mX >= cell.left && mX <= cell.right) {
                     if (checkAvailability) {
-                        if (occupied[x][y]) {
+                        if (_occupied[x][y]) {
                             coordinate.set(-1, -1);
                             return;
                         }
@@ -560,18 +558,18 @@ public class CellContainer extends ViewGroup {
                         int dx = x + xSpan - 1;
                         int dy = y + ySpan - 1;
 
-                        if (dx >= cellSpanH - 1) {
-                            dx = cellSpanH - 1;
+                        if (dx >= _cellSpanH - 1) {
+                            dx = _cellSpanH - 1;
                             x = dx + 1 - xSpan;
                         }
-                        if (dy >= cellSpanV - 1) {
-                            dy = cellSpanV - 1;
+                        if (dy >= _cellSpanV - 1) {
+                            dy = _cellSpanV - 1;
                             y = dy + 1 - ySpan;
                         }
 
                         for (int x2 = x; x2 < x + xSpan; x2++) {
                             for (int y2 = y; y2 < y + ySpan; y2++) {
-                                if (occupied[x2][y2]) {
+                                if (_occupied[x2][y2]) {
                                     coordinate.set(-1, -1);
                                     return;
                                 }
@@ -599,28 +597,28 @@ public class CellContainer extends ViewGroup {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int width = ((r - l) - getPaddingLeft()) - getPaddingRight();
         int height = ((b - t) - getPaddingTop()) - getPaddingBottom();
-        if (this.cellSpanH == 0) {
-            cellSpanH = 1;
+        if (this._cellSpanH == 0) {
+            _cellSpanH = 1;
         }
-        if (cellSpanV == 0) {
-            cellSpanV = 1;
+        if (_cellSpanV == 0) {
+            _cellSpanV = 1;
         }
-        cellWidth = width / cellSpanH;
-        cellHeight = height / cellSpanV;
+        _cellWidth = width / _cellSpanH;
+        _cellHeight = height / _cellSpanV;
         initCellInfo(getPaddingLeft(), getPaddingTop(), width - getPaddingRight(), height - getPaddingBottom());
         int count = getChildCount();
-        if (cells != null) {
+        if (_cells != null) {
             int i = 0;
             while (i < count) {
                 View child = getChildAt(i);
                 if (child.getVisibility() != View.GONE) {
                     LayoutParams lp = (LayoutParams) child.getLayoutParams();
-                    child.measure(MeasureSpec.makeMeasureSpec(lp.getXSpan() * cellWidth, View.MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(lp.getYSpan() * cellHeight, View.MeasureSpec.EXACTLY));
-                    Rect[][] rectArr = cells;
+                    child.measure(MeasureSpec.makeMeasureSpec(lp.getXSpan() * _cellWidth, View.MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(lp.getYSpan() * _cellHeight, View.MeasureSpec.EXACTLY));
+                    Rect[][] rectArr = _cells;
                     Rect upRect = rectArr[lp.getX()][lp.getY()];
-                    Rect downRect = tempRect;
-                    if ((lp.getX() + lp.getXSpan()) - 1 < cellSpanH && (lp.getY() + lp.getYSpan()) - 1 < cellSpanV) {
-                        Rect[][] rectArr2 = cells;
+                    Rect downRect = _tempRect;
+                    if ((lp.getX() + lp.getXSpan()) - 1 < _cellSpanH && (lp.getY() + lp.getYSpan()) - 1 < _cellSpanV) {
+                        Rect[][] rectArr2 = _cells;
                         downRect = rectArr2[(lp.getX() + lp.getXSpan()) - 1][(lp.getY() + lp.getYSpan()) - 1];
                     }
                     if (lp.getXSpan() == 1 && lp.getYSpan() == 1) {
@@ -639,29 +637,29 @@ public class CellContainer extends ViewGroup {
     }
 
     private void initCellInfo(int l, int t, int r, int b) {
-        cells = new Rect[cellSpanH][cellSpanV];
+        _cells = new Rect[_cellSpanH][_cellSpanV];
 
         int curLeft = l;
         int curTop = t;
-        int curRight = l + cellWidth;
-        int curBottom = t + cellHeight;
+        int curRight = l + _cellWidth;
+        int curBottom = t + _cellHeight;
 
-        for (int i = 0; i < cellSpanH; i++) {
+        for (int i = 0; i < _cellSpanH; i++) {
             if (i != 0) {
-                curLeft += cellWidth;
-                curRight += cellWidth;
+                curLeft += _cellWidth;
+                curRight += _cellWidth;
             }
-            for (int j = 0; j < cellSpanV; j++) {
+            for (int j = 0; j < _cellSpanV; j++) {
                 if (j != 0) {
-                    curTop += cellHeight;
-                    curBottom += cellHeight;
+                    curTop += _cellHeight;
+                    curBottom += _cellHeight;
                 }
 
                 Rect rect = new Rect(curLeft, curTop, curRight, curBottom);
-                cells[i][j] = rect;
+                _cells[i][j] = rect;
             }
             curTop = t;
-            curBottom = t + cellHeight;
+            curBottom = t + _cellHeight;
         }
     }
 }

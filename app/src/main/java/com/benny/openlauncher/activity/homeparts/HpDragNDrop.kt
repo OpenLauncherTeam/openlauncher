@@ -189,7 +189,7 @@ class HpDragNDrop {
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
                 if (action == DragAction.Action.APP_DRAWER) {
-                    if (_home.getAppDrawerController().isOpen) return
+                    if (_home.getAppDrawerController()._isOpen) return
                     item.reset()
                 }
 
@@ -245,7 +245,7 @@ class HpDragNDrop {
 
             override fun onDrop(action: DragAction.Action, location: PointF, item: Item) {
                 if (action == DragAction.Action.APP_DRAWER) {
-                    if (_home.getAppDrawerController().isOpen) return
+                    if (_home.getAppDrawerController()._isOpen) return
                     item.reset()
                 }
 

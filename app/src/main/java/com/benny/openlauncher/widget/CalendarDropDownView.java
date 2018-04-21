@@ -19,8 +19,8 @@ import java.util.Calendar;
 
 public class CalendarDropDownView extends CardView implements View.OnClickListener {
 
-    public MaterialCalendarView calendarView;
-    private boolean stateOpened = false;
+    public MaterialCalendarView _calendarView;
+    private boolean _stateOpened = false;
 
     public CalendarDropDownView(Context context) {
         super(context);
@@ -33,40 +33,40 @@ public class CalendarDropDownView extends CardView implements View.OnClickListen
     }
 
     private void init() {
-        calendarView = new MaterialCalendarView(getContext());
-        addView(calendarView);
+        _calendarView = new MaterialCalendarView(getContext());
+        addView(_calendarView);
         int twoDp = Tool.dp2px(2, getContext());
         setContentPadding(0, twoDp * 5, 0, 0);
-        calendarView.setTileHeightDp(40);
+        _calendarView.setTileHeightDp(40);
 
-        Tool.invisibleViews(calendarView);
+        Tool.invisibleViews(_calendarView);
         setScaleY(0);
     }
 
     public void animateShow() {
-        if (stateOpened) return;
+        if (_stateOpened) return;
         Tool.invisibleViews(Home.Companion.getLauncher().getSearchBar());
         Home.Companion.getLauncher().dimBackground();
         Home.Companion.getLauncher().clearRoomForPopUp();
         Home.Companion.getLauncher().getBackground().setOnClickListener(this);
-        calendarView.setSelectedDate(Calendar.getInstance());
-        stateOpened = true;
+        _calendarView.setSelectedDate(Calendar.getInstance());
+        _stateOpened = true;
         animate().scaleY(1).setDuration(200).withEndAction(new Runnable() {
             @Override
             public void run() {
-                Tool.visibleViews(200, calendarView);
+                Tool.visibleViews(200, _calendarView);
             }
         });
     }
 
     public void animateHide() {
-        if (!stateOpened) return;
+        if (!_stateOpened) return;
         Tool.visibleViews(Home.Companion.getLauncher().getSearchBar());
         Home.Companion.getLauncher().unDimBackground();
         Home.Companion.getLauncher().unClearRoomForPopUp();
         Home.Companion.getLauncher().getBackground().setOnClickListener(null);
-        stateOpened = false;
-        Tool.invisibleViews(200, calendarView);
+        _stateOpened = false;
+        Tool.invisibleViews(200, _calendarView);
         animate().scaleY(0).setStartDelay(200).setDuration(200);
     }
 

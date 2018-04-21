@@ -29,16 +29,16 @@ import java.util.List;
 
 public class AppDrawerVertical extends CardView {
 
-    public static int itemWidth;
-    public static int itemHeightPadding;
+    public static int _itemWidth;
+    public static int _itemHeightPadding;
 
-    public RecyclerView recyclerView;
-    public GridAppDrawerAdapter gridDrawerAdapter;
-    public DragScrollBar scrollBar;
+    public RecyclerView _recyclerView;
+    public GridAppDrawerAdapter _gridDrawerAdapter;
+    public DragScrollBar _scrollBar;
 
-    private static List<App> apps;
-    private GridLayoutManager layoutManager;
-    private RelativeLayout rl;
+    private static List<App> _apps;
+    private GridLayoutManager _layoutManager;
+    private RelativeLayout _rl;
 
     public AppDrawerVertical(Context context) {
         super(context);
@@ -61,22 +61,22 @@ public class AppDrawerVertical extends CardView {
             public void onGlobalLayout() {
                 getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-                rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_vertical_inner, AppDrawerVertical.this, false);
-                recyclerView = rl.findViewById(R.id.vDrawerRV);
-                layoutManager = new GridLayoutManager(getContext(), Setup.appSettings().getDrawerColumnCount());
+                _rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_vertical_inner, AppDrawerVertical.this, false);
+                _recyclerView = _rl.findViewById(R.id.vDrawerRV);
+                _layoutManager = new GridLayoutManager(getContext(), Setup.appSettings().getDrawerColumnCount());
 
-                itemWidth = (getWidth() - recyclerView.getPaddingRight() - recyclerView.getPaddingRight()) / layoutManager.getSpanCount();
+                _itemWidth = (getWidth() - _recyclerView.getPaddingRight() - _recyclerView.getPaddingRight()) / _layoutManager.getSpanCount();
                 init();
 
                 if (!Setup.appSettings().isDrawerShowIndicator())
-                    scrollBar.setVisibility(View.GONE);
+                    _scrollBar.setVisibility(View.GONE);
             }
         });
     }
 
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
-        if (apps == null || layoutManager == null) {
+        if (_apps == null || _layoutManager == null) {
             super.onConfigurationChanged(newConfig);
             return;
         }
@@ -90,65 +90,65 @@ public class AppDrawerVertical extends CardView {
     }
 
     private void setPortraitValue() {
-        layoutManager.setSpanCount(Setup.appSettings().getDrawerColumnCount());
-        gridDrawerAdapter.notifyAdapterDataSetChanged();
+        _layoutManager.setSpanCount(Setup.appSettings().getDrawerColumnCount());
+        _gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
     private void setLandscapeValue() {
-        layoutManager.setSpanCount(Setup.appSettings().getDrawerRowCount());
-        gridDrawerAdapter.notifyAdapterDataSetChanged();
+        _layoutManager.setSpanCount(Setup.appSettings().getDrawerRowCount());
+        _gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
     private void init() {
-        itemHeightPadding = Tool.dp2px(15, getContext());
+        _itemHeightPadding = Tool.dp2px(15, getContext());
 
-        scrollBar = rl.findViewById(R.id.dragScrollBar);
-        scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
-        scrollBar.setClipToPadding(true);
-        scrollBar.setDraggableFromAnywhere(true);
-        scrollBar.post(new Runnable() {
+        _scrollBar = _rl.findViewById(R.id.dragScrollBar);
+        _scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
+        _scrollBar.setClipToPadding(true);
+        _scrollBar.setDraggableFromAnywhere(true);
+        _scrollBar.post(new Runnable() {
             @Override
             public void run() {
-                scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
+                _scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
             }
         });
 
         boolean mPortrait = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-        gridDrawerAdapter = new GridAppDrawerAdapter();
-        recyclerView.setAdapter(gridDrawerAdapter);
+        _gridDrawerAdapter = new GridAppDrawerAdapter();
+        _recyclerView.setAdapter(_gridDrawerAdapter);
 
         if (mPortrait) {
             setPortraitValue();
         } else {
             setLandscapeValue();
         }
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setDrawingCacheEnabled(true);
+        _recyclerView.setLayoutManager(_layoutManager);
+        _recyclerView.setDrawingCacheEnabled(true);
 
         List<App> allApps = Setup.appLoader().getAllApps(getContext(), false);
         if (allApps.size() != 0) {
-            apps = allApps;
+            _apps = allApps;
             ArrayList<FastItem.AppItem> items = new ArrayList<>();
-            for (int i = 0; i < apps.size(); i++) {
-                items.add(new DrawerAppItem(apps.get(i)));
+            for (int i = 0; i < _apps.size(); i++) {
+                items.add(new DrawerAppItem(_apps.get(i)));
             }
-            gridDrawerAdapter.set(items);
+            _gridDrawerAdapter.set(items);
         }
         Setup.appLoader().addUpdateListener(new AppUpdateListener() {
             @Override
             public boolean onAppUpdated(List<App> apps) {
-                AppDrawerVertical.apps = apps;
+                AppDrawerVertical._apps = apps;
                 ArrayList<FastItem.AppItem> items = new ArrayList<>();
                 for (int i = 0; i < apps.size(); i++) {
                     items.add(new DrawerAppItem(apps.get(i)));
                 }
-                gridDrawerAdapter.set(items);
+                _gridDrawerAdapter.set(items);
 
                 return false;
             }
         });
 
-        addView(rl);
+        addView(_rl);
     }
 
     public static class GridAppDrawerAdapter extends FastItemAdapter<FastItem.AppItem> implements INameableAdapter {
@@ -164,8 +164,8 @@ public class AppDrawerVertical extends CardView {
 
         @Override
         public Character getCharacterForElement(int element) {
-            if (apps != null && element < apps.size() && apps.get(element) != null && apps.get(element).getLabel().length() > 0)
-                return apps.get(element).getLabel().charAt(0);
+            if (_apps != null && element < _apps.size() && _apps.get(element) != null && _apps.get(element).getLabel().length() > 0)
+                return _apps.get(element).getLabel().charAt(0);
             else return '#';
         }
     }

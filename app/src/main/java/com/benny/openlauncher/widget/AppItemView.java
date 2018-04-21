@@ -36,21 +36,21 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     private static final int MIN_ICON_TEXT_MARGIN = 8;
     private static final char ELLIPSIS = '…';
 
-    private Drawable icon = null;
-    private BaseIconProvider iconProvider;
-    private String label;
-    private Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Rect textContainer = new Rect(), testTextContainer = new Rect();
-    private Typeface typeface;
-    private float iconSize;
-    private boolean showLabel = true;
-    private boolean vibrateWhenLongPress;
-    private float labelHeight;
-    private int targetedWidth;
-    private int fontSizeSp;
-    private int targetedHeightPadding;
-    private float heightPadding;
-    private boolean fastAdapterItem;
+    private Drawable _icon = null;
+    private BaseIconProvider _iconProvider;
+    private String _label;
+    private Paint _textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Rect _textContainer = new Rect(), testTextContainer = new Rect();
+    private Typeface _typeface;
+    private float _iconSize;
+    private boolean _showLabel = true;
+    private boolean _vibrateWhenLongPress;
+    private float _labelHeight;
+    private int _targetedWidth;
+    private int _fontSizeSp;
+    private int _targetedHeightPadding;
+    private float _heightPadding;
+    private boolean _fastAdapterItem;
 
     public AppItemView(Context context) {
         this(context, null);
@@ -59,19 +59,19 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     public AppItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        if (typeface == null) {
-            typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
+        if (_typeface == null) {
+            _typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
         }
 
         setWillNotDraw(false);
         setDrawingCacheEnabled(true);
         setWillNotCacheDrawing(false);
 
-        labelHeight = Tool.dp2px(14, getContext());
+        _labelHeight = Tool.dp2px(14, getContext());
 
-        textPaint.setTextSize(Tool.sp2px(getContext(), 13));
-        textPaint.setColor(Color.DKGRAY);
-        textPaint.setTypeface(typeface);
+        _textPaint.setTextSize(Tool.sp2px(getContext(), 13));
+        _textPaint.setColor(Color.DKGRAY);
+        _textPaint.setTypeface(_typeface);
     }
 
     public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item, int iconSize, float fontSizeSp) {
@@ -103,7 +103,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
     @Override
     public Bitmap getDrawingCache() {
-        return Tool.drawableToBitmap(icon);
+        return Tool.drawableToBitmap(_icon);
     }
 
     public View getView() {
@@ -111,69 +111,69 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     }
 
     public IconProvider getIconProvider() {
-        return iconProvider;
+        return _iconProvider;
     }
 
     public void setIconProvider(BaseIconProvider iconProvider) {
-        this.iconProvider = iconProvider;
-        iconProvider.loadIconIntoIconDrawer(this, (int) iconSize, 0);
+        this._iconProvider = iconProvider;
+        iconProvider.loadIconIntoIconDrawer(this, (int) _iconSize, 0);
     }
 
     public Drawable getCurrentIcon() {
-        return icon;
+        return _icon;
     }
 
     public String getLabel() {
-        return label;
+        return _label;
     }
 
     public void setLabel(String label) {
-        this.label = label;
+        this._label = label;
     }
 
     public float getIconSize() {
-        return iconSize;
+        return _iconSize;
     }
 
     public void setIconSize(float iconSize) {
-        this.iconSize = iconSize;
+        this._iconSize = iconSize;
     }
 
     public boolean getShowLabel() {
-        return showLabel;
+        return _showLabel;
     }
 
     public void setTargetedWidth(int width) {
-        targetedWidth = width;
+        _targetedWidth = width;
     }
 
     public void setTargetedHeightPadding(int padding) {
-        targetedHeightPadding = padding;
+        _targetedHeightPadding = padding;
     }
 
     public void load() {
-        if (iconProvider != null) {
-            iconProvider.loadIconIntoIconDrawer(this, (int) iconSize, 0);
+        if (_iconProvider != null) {
+            _iconProvider.loadIconIntoIconDrawer(this, (int) _iconSize, 0);
         }
     }
 
     public void reset() {
-        if (iconProvider != null) {
-            iconProvider.cancelLoad(this);
+        if (_iconProvider != null) {
+            _iconProvider.cancelLoad(this);
         }
-        label = "";
-        icon = null;
+        _label = "";
+        _icon = null;
         invalidate();
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        float mWidth = iconSize;
-        float mHeight = iconSize + (showLabel ? 0 : labelHeight);
-        if (targetedWidth != 0) {
-            mWidth = targetedWidth;
+        float mWidth = _iconSize;
+        float mHeight = _iconSize + (_showLabel ? 0 : _labelHeight);
+        if (_targetedWidth != 0) {
+            mWidth = _targetedWidth;
         }
-        setMeasuredDimension((int) Math.ceil(mWidth), (int) Math.ceil((int) mHeight) + Tool.dp2px(2, getContext()) + targetedHeightPadding * 2);
+        setMeasuredDimension((int) Math.ceil(mWidth), (int) Math.ceil((int) mHeight) + Tool.dp2px(2, getContext()) + _targetedHeightPadding * 2);
     }
 
     @Override
@@ -185,80 +185,80 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        heightPadding = (getHeight() - iconSize - (showLabel ? labelHeight : 0)) / 2f;
+        _heightPadding = (getHeight() - _iconSize - (_showLabel ? _labelHeight : 0)) / 2f;
 
-        if (label != null && showLabel) {
-            textPaint.getTextBounds(label, 0, label.length(), textContainer);
+        if (_label != null && _showLabel) {
+            _textPaint.getTextBounds(_label, 0, _label.length(), _textContainer);
             int maxTextWidth = getWidth() - MIN_ICON_TEXT_MARGIN * 2;
 
             // use ellipsis if the label is too long
-            if (textContainer.width() > maxTextWidth) {
-                String testLabel = label + ELLIPSIS;
-                textPaint.getTextBounds(testLabel, 0, testLabel.length(), testTextContainer);
+            if (_textContainer.width() > maxTextWidth) {
+                String testLabel = _label + ELLIPSIS;
+                _textPaint.getTextBounds(testLabel, 0, testLabel.length(), testTextContainer);
 
                 //Premeditate to be faster
                 float characterSize = testTextContainer.width() / testLabel.length();
                 int charsToTruncate = (int) ((testTextContainer.width() - maxTextWidth) / characterSize);
 
-                canvas.drawText(label.substring(0, label.length() - charsToTruncate) + ELLIPSIS,
-                        MIN_ICON_TEXT_MARGIN, getHeight() - heightPadding, textPaint);
+                canvas.drawText(_label.substring(0, _label.length() - charsToTruncate) + ELLIPSIS,
+                        MIN_ICON_TEXT_MARGIN, getHeight() - _heightPadding, _textPaint);
             } else {
-                canvas.drawText(label, (getWidth() - textContainer.width()) / 2f, getHeight() - heightPadding, textPaint);
+                canvas.drawText(_label, (getWidth() - _textContainer.width()) / 2f, getHeight() - _heightPadding, _textPaint);
             }
         }
 
         // center the icon
-        if (icon != null) {
+        if (_icon != null) {
             canvas.save();
-            canvas.translate((getWidth() - iconSize) / 2, heightPadding);
-            icon.setBounds(0, 0, (int) iconSize, (int) iconSize);
-            icon.draw(canvas);
+            canvas.translate((getWidth() - _iconSize) / 2, _heightPadding);
+            _icon.setBounds(0, 0, (int) _iconSize, (int) _iconSize);
+            _icon.draw(canvas);
             canvas.restore();
         }
     }
 
     public float getDrawIconTop() {
-        return heightPadding;
+        return _heightPadding;
     }
 
     public float getDrawIconLeft() {
-        return (getWidth() - iconSize) / 2;
+        return (getWidth() - _iconSize) / 2;
     }
 
     @Override
     public void onIconAvailable(Drawable drawable, int index) {
-        icon = drawable;
+        _icon = drawable;
         super.invalidate();
     }
 
     @Override
     public void onIconCleared(Drawable placeholder, int index) {
-        icon = placeholder;
+        _icon = placeholder;
         super.invalidate();
     }
 
     @Override
     public void onAttachedToWindow() {
-        if (!fastAdapterItem && iconProvider != null) {
-            iconProvider.loadIconIntoIconDrawer(this, (int) iconSize, 0);
+        if (!_fastAdapterItem && _iconProvider != null) {
+            _iconProvider.loadIconIntoIconDrawer(this, (int) _iconSize, 0);
         }
         super.onAttachedToWindow();
     }
 
     @Override
     public void onDetachedFromWindow() {
-        if (!fastAdapterItem && iconProvider != null) {
-            iconProvider.cancelLoad(this);
-            icon = null;
+        if (!_fastAdapterItem && _iconProvider != null) {
+            _iconProvider.cancelLoad(this);
+            _icon = null;
         }
         super.onDetachedFromWindow();
     }
 
     @Override
     public void invalidate() {
-        if (!fastAdapterItem && iconProvider != null) {
-            iconProvider.cancelLoad(this);
-            icon = null;
+        if (!_fastAdapterItem && _iconProvider != null) {
+            _iconProvider.cancelLoad(this);
+            _icon = null;
         } else {
             super.invalidate();
         }
@@ -271,15 +271,15 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     }
 
     public static class Builder {
-        AppItemView view;
+        AppItemView _view;
 
         public Builder(Context context, int iconSize) {
-            view = new AppItemView(context);
-            view.setIconSize(Tool.dp2px(iconSize, view.getContext()));
+            _view = new AppItemView(context);
+            _view.setIconSize(Tool.dp2px(iconSize, _view.getContext()));
         }
 
         public Builder(AppItemView view, int iconSize) {
-            this.view = view;
+            this._view = view;
             view.setIconSize(Tool.dp2px(iconSize, view.getContext()));
         }
 
@@ -301,19 +301,19 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         public AppItemView getView() {
-            return view;
+            return _view;
         }
 
         public Builder setAppItem(final App app) {
-            view.setLabel(app.getLabel());
-            view.setIconProvider(app.getIconProvider());
-            view.setOnClickListener(new OnClickListener() {
+            _view.setLabel(app.getLabel());
+            _view.setIconProvider(app.getIconProvider());
+            _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                    Tool.createScaleInScaleOutAnim(_view, new Runnable() {
                         @Override
                         public void run() {
-                            Tool.startApp(view.getContext(), app, view);
+                            Tool.startApp(_view.getContext(), app, _view);
                         }
                     }, 0.85f);
                 }
@@ -322,15 +322,15 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         public Builder setAppItem(final Item item, final App app) {
-            view.setLabel(item.getLabel());
-            view.setIconProvider(app.getIconProvider());
-            view.setOnClickListener(new OnClickListener() {
+            _view.setLabel(item.getLabel());
+            _view.setIconProvider(app.getIconProvider());
+            _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                    Tool.createScaleInScaleOutAnim(_view, new Runnable() {
                         @Override
                         public void run() {
-                            Tool.startApp(view.getContext(), app, view);
+                            Tool.startApp(_view.getContext(), app, _view);
                         }
                     }, 0.85f);
                 }
@@ -339,15 +339,15 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         public Builder setShortcutItem(final Item item) {
-            view.setLabel(item.getLabel());
-            view.setIconProvider(item.getIconProvider());
-            view.setOnClickListener(new OnClickListener() {
+            _view.setLabel(item.getLabel());
+            _view.setIconProvider(item.getIconProvider());
+            _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                    Tool.createScaleInScaleOutAnim(_view, new Runnable() {
                         @Override
                         public void run() {
-                            view.getContext().startActivity(item.getIntent());
+                            _view.getContext().startActivity(item.getIntent());
                         }
                     }, 0.85f);
                 }
@@ -356,9 +356,9 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         public Builder setGroupItem(Context context, final DesktopCallBack callback, final Item item, int iconSize) {
-            view.setLabel(item.getLabel());
-            view.setIconProvider(Setup.imageLoader().createIconProvider(new GroupIconDrawable(context, item, iconSize)));
-            view.setOnClickListener(new View.OnClickListener() {
+            _view.setLabel(item.getLabel());
+            _view.setIconProvider(Setup.imageLoader().createIconProvider(new GroupIconDrawable(context, item, iconSize)));
+            _view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (Home.Companion.getLauncher() != null && (Home.Companion.getLauncher()).getGroupPopup().showWindowV(item, v, callback)) {
@@ -370,12 +370,12 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         public Builder setActionItem(Item item) {
-            view.setLabel(item.getLabel());
-            view.setIconProvider(Setup.imageLoader().createIconProvider(
+            _view.setLabel(item.getLabel());
+            _view.setIconProvider(Setup.imageLoader().createIconProvider(
                     ContextCompat.getDrawable(Setup.appContext(), R.drawable.ic_apps_white_48dp)));
             switch (item.getActionValue()) {
                 case Definitions.ACTION_LAUNCHER:
-                    view.setOnClickListener(new OnClickListener() {
+                    _view.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
@@ -393,7 +393,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         public Builder withOnLongClick(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
-            view.setOnLongClickListener(new OnLongClickListener() {
+            _view.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     if (Setup.appSettings().isDesktopLock()) {
@@ -402,10 +402,10 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                     if (eventAction != null && !eventAction.readyForDrag(v)) {
                         return false;
                     }
-                    if (view.vibrateWhenLongPress) {
+                    if (_view._vibrateWhenLongPress) {
                         v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                     }
-                    DragNDropHandler.startDrag(view, item, action, eventAction);
+                    DragNDropHandler.startDrag(_view, item, action, eventAction);
                     return true;
                 }
             });
@@ -413,32 +413,32 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         }
 
         public Builder withOnTouchGetPosition(Item item, ItemGestureListener.ItemGestureCallback itemGestureCallback) {
-            view.setOnTouchListener(Tool.getItemOnTouchListener(item, itemGestureCallback));
+            _view.setOnTouchListener(Tool.getItemOnTouchListener(item, itemGestureCallback));
             return this;
         }
 
         public Builder setTextColor(@ColorInt int color) {
-            view.textPaint.setColor(color);
+            _view._textPaint.setColor(color);
             return this;
         }
 
         public Builder setFontSize(Context context, float fontSizeSp) {
-            view.textPaint.setTextSize(Tool.sp2px(context, fontSizeSp));
+            _view._textPaint.setTextSize(Tool.sp2px(context, fontSizeSp));
             return this;
         }
 
         public Builder setLabelVisibility(boolean visible) {
-            view.showLabel = visible;
+            _view._showLabel = visible;
             return this;
         }
 
         public Builder vibrateWhenLongPress() {
-            view.vibrateWhenLongPress = true;
+            _view._vibrateWhenLongPress = true;
             return this;
         }
 
         public Builder setFastAdapterItem() {
-            view.fastAdapterItem = true;
+            _view._fastAdapterItem = true;
             return this;
         }
     }

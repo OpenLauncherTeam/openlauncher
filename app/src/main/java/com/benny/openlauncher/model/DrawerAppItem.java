@@ -78,8 +78,8 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
         ViewHolder(View itemView) {
             super(itemView);
             appItemView = (AppItemView) itemView;
-            appItemView.setTargetedWidth(AppDrawerVertical.itemWidth);
-            appItemView.setTargetedHeightPadding(AppDrawerVertical.itemHeightPadding);
+            appItemView.setTargetedWidth(AppDrawerVertical._itemWidth);
+            appItemView.setTargetedHeightPadding(AppDrawerVertical._itemHeightPadding);
 
             builder = new AppItemView.Builder(appItemView, Setup.appSettings().getDrawerIconSize())
                     .withOnTouchGetPosition(null, null)
