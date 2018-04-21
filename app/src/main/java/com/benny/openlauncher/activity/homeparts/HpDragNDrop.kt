@@ -1,4 +1,4 @@
-package com.benny.openlauncher.activity.home
+package com.benny.openlauncher.activity.homeparts
 
 import android.graphics.Point
 import android.graphics.PointF
@@ -15,7 +15,7 @@ import com.benny.openlauncher.widget.Desktop
 import com.benny.openlauncher.widget.DragNDropLayout
 import com.mikepenz.fastadapter.listeners.OnClickListener
 
-class HomeDragNDrop {
+class HpDragNDrop {
 
     public fun initDragNDrop(_home: Home, leftDragHandle: View, rightDragHandle: View, dragNDropView: DragNDropLayout) {
         //dragHandle's drag event

@@ -26,9 +26,10 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.AppObject
 import com.benny.openlauncher.BuildConfig
 import com.benny.openlauncher.R
-import com.benny.openlauncher.activity.home.HomeDesktopGestureCallback
-import com.benny.openlauncher.activity.home.HomeDragNDrop
-import com.benny.openlauncher.activity.home.HomeEventHandler
+import com.benny.openlauncher.activity.homeparts.HpDesktopGestureCallback
+import com.benny.openlauncher.activity.homeparts.HpDragNDrop
+import com.benny.openlauncher.activity.homeparts.HpEventHandler
+import com.benny.openlauncher.activity.homeparts.HpSearchBar
 import com.benny.openlauncher.interfaces.AppDeleteListener
 import com.benny.openlauncher.interfaces.AppUpdateListener
 import com.benny.openlauncher.interfaces.DialogListener
@@ -197,7 +198,7 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
 
     // called to initialize the views
     protected open fun initViews() {
-        initSearchBar()
+        HpSearchBar(this@Home, searchBar, calendarDropDownView).initSearchBar()
         initDock()
 
         appDrawerController.init()
@@ -346,11 +347,11 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
 
             override fun createIconProvider(icon: Int): BaseIconProvider = SimpleIconProvider(icon)
         }
-        val desktopGestureCallback = HomeDesktopGestureCallback(appSettings)
+        val desktopGestureCallback = HpDesktopGestureCallback(appSettings)
         val itemGestureCallback: ItemGestureListener.ItemGestureCallback = ItemGestureListener.ItemGestureCallback { _, _ -> false }
         val dataManager = DatabaseHelper(this)
         val appLoader = AppManager.getInstance(this)
-        val eventHandler = HomeEventHandler();
+        val eventHandler = HpEventHandler();
         val logger = object : Setup.Logger {
             override fun log(source: Any, priority: Int, tag: String?, msg: String, vararg args: Any) {
                 Log.println(priority, tag, String.format(msg, *args))
@@ -443,7 +444,7 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
 
         initViews()
 
-        HomeDragNDrop().initDragNDrop(this@Home, leftDragHandle, rightDragHandle, dragNDropView)
+        HpDragNDrop().initDragNDrop(this@Home, leftDragHandle, rightDragHandle, dragNDropView)
 
         registerBroadcastReceiver()
 
@@ -592,57 +593,6 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
         updateDock(true)
     }
 
-    private fun initSearchBar() {
-        searchBar.setCallback(object : SearchBar.CallBack {
-            override fun onInternetSearch(string: String) {
-                val intent = Intent()
-
-                if (Tool.isIntentActionAvailable(applicationContext, Intent.ACTION_WEB_SEARCH) && !Setup.appSettings().searchBarForceBrowser) {
-                    intent.action = Intent.ACTION_WEB_SEARCH
-                    intent.putExtra(SearchManager.QUERY, string)
-                } else {
-                    val baseUri = Setup.appSettings().searchBarBaseURI
-                    val searchUri = if (baseUri.contains("{query}")) baseUri.replace("{query}", string) else baseUri + string
-
-                    intent.action = Intent.ACTION_VIEW
-                    intent.data = Uri.parse(searchUri)
-                }
-
-                try {
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-
-            }
-
-            override fun onExpand() {
-                clearRoomForPopUp()
-                dimBackground()
-
-                searchBar.searchInput.isFocusable = true
-                searchBar.searchInput.isFocusableInTouchMode = true
-                searchBar.searchInput.post { searchBar.searchInput.requestFocus() }
-
-                Tool.showKeyboard(this@Home, searchBar.searchInput)
-            }
-
-            override fun onCollapse() {
-                desktop.postDelayed({
-                    unClearRoomForPopUp()
-                }, 100)
-                unDimBackground()
-
-                searchBar.searchInput.clearFocus()
-
-                Tool.hideKeyboard(this@Home, searchBar.searchInput)
-            }
-        })
-        searchBar.searchClock.setOnClickListener { calendarDropDownView.animateShow() }
-
-        // this view is just a text view of the current date
-        updateSearchClock()
-    }
 
     @JvmOverloads
     fun updateDock(show: Boolean, delay: Long = 0) = if (Setup.appSettings().dockEnable && show) {
@@ -685,7 +635,7 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
             Tool.visibleViews(100, desktopIndicator)
     }
 
-    private fun updateSearchClock() {
+    public fun updateSearchClock() {
         if (searchBar!!.searchClock.text != null) {
             try {
                 searchBar!!.updateClock()

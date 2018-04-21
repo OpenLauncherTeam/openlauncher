@@ -1,4 +1,4 @@
-package com.benny.openlauncher.activity.home;
+package com.benny.openlauncher.activity.homeparts;
 
 import android.content.Context;
 import android.view.View;
@@ -10,7 +10,7 @@ import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.viewutil.DialogHelper;
 
-public class HomeEventHandler implements Setup.EventHandler {
+public class HpEventHandler implements Setup.EventHandler {
     @Override
     public void showLauncherSettings(Context context) {
         LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, context);

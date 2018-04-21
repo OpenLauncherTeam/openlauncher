@@ -1,4 +1,4 @@
-package com.benny.openlauncher.activity.home
+package com.benny.openlauncher.activity.homeparts
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,7 @@ import com.benny.openlauncher.util.Tool
 import com.benny.openlauncher.viewutil.DesktopGestureListener
 import com.benny.openlauncher.widget.Desktop
 
-class HomeDesktopGestureCallback : DesktopGestureListener.DesktopGestureCallback {
+class HpDesktopGestureCallback : DesktopGestureListener.DesktopGestureCallback {
     val appSettings: AppSettings
 
     constructor(pappSettings: AppSettings) {
