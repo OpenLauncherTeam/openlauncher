@@ -10,19 +10,19 @@ import android.widget.ImageView;
 import com.benny.openlauncher.R;
 
 public class LauncherLoadingIcon extends FrameLayout {
-    private static final AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
+    private static final AccelerateDecelerateInterpolator _interpolator = new AccelerateDecelerateInterpolator();
     private static final Long ANIM_DURATION = 250L;
-    private ImageView[] iv;
-    private boolean loading = false;
+    private ImageView[] _ivs;
+    private boolean _loading = false;
 
     private final Runnable ANIM_1 = new Runnable() {
         @Override
         public void run() {
-            if (iv != null && iv[0] != null) {
-                iv[0].setScaleX(0);
-                iv[1].setScaleY(0);
-                iv[2].setScaleX(0);
-                iv[0].animate().setDuration(ANIM_DURATION).scaleX(1).alpha(1).withEndAction(ANIM_2).setInterpolator(interpolator);
+            if (_ivs != null && _ivs[0] != null) {
+                _ivs[0].setScaleX(0);
+                _ivs[1].setScaleY(0);
+                _ivs[2].setScaleX(0);
+                _ivs[0].animate().setDuration(ANIM_DURATION).scaleX(1).alpha(1).withEndAction(ANIM_2).setInterpolator(_interpolator);
             }
         }
     };
@@ -30,8 +30,8 @@ public class LauncherLoadingIcon extends FrameLayout {
     private final Runnable ANIM_2 = new Runnable() {
         @Override
         public void run() {
-            if (iv != null && iv[1] != null) {
-                iv[1].animate().setDuration(ANIM_DURATION).scaleY(1).alpha(1).withEndAction(ANIM_3).setInterpolator(interpolator);
+            if (_ivs != null && _ivs[1] != null) {
+                _ivs[1].animate().setDuration(ANIM_DURATION).scaleY(1).alpha(1).withEndAction(ANIM_3).setInterpolator(_interpolator);
             }
         }
     };
@@ -39,8 +39,8 @@ public class LauncherLoadingIcon extends FrameLayout {
     private final Runnable ANIM_3 = new Runnable() {
         @Override
         public void run() {
-            if (iv != null && iv[2] != null) {
-                iv[2].animate().setDuration(ANIM_DURATION).scaleX(1).alpha(1).withEndAction(ANIM_4).setInterpolator(interpolator);
+            if (_ivs != null && _ivs[2] != null) {
+                _ivs[2].animate().setDuration(ANIM_DURATION).scaleX(1).alpha(1).withEndAction(ANIM_4).setInterpolator(_interpolator);
             }
         }
     };
@@ -48,12 +48,12 @@ public class LauncherLoadingIcon extends FrameLayout {
     private final Runnable ANIM_4 = new Runnable() {
         @Override
         public void run() {
-            iv[0].animate().setDuration(ANIM_DURATION).alpha(0).setInterpolator(interpolator);
-            iv[1].animate().setDuration(ANIM_DURATION).alpha(0).setInterpolator(interpolator);
-            if (loading)
-                iv[2].animate().setDuration(ANIM_DURATION).alpha(0).withEndAction(ANIM_1).setInterpolator(interpolator);
+            _ivs[0].animate().setDuration(ANIM_DURATION).alpha(0).setInterpolator(_interpolator);
+            _ivs[1].animate().setDuration(ANIM_DURATION).alpha(0).setInterpolator(_interpolator);
+            if (_loading)
+                _ivs[2].animate().setDuration(ANIM_DURATION).alpha(0).withEndAction(ANIM_1).setInterpolator(_interpolator);
             else
-                iv[2].animate().setDuration(ANIM_DURATION).alpha(0).setInterpolator(interpolator);
+                _ivs[2].animate().setDuration(ANIM_DURATION).alpha(0).setInterpolator(_interpolator);
         }
     };
 
@@ -65,29 +65,29 @@ public class LauncherLoadingIcon extends FrameLayout {
         super(context, attrs);
 
         int[] res = {R.drawable.ol_loading_3, R.drawable.ol_loading_2, R.drawable.ol_loading_1};
-        iv = new ImageView[3];
-        for (int i = 0; i < iv.length; i++) {
-            iv[i] = new ImageView(getContext());
-            iv[i].setImageResource(res[i]);
-            addView(iv[i]);
-            iv[i].setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            iv[i].setScaleType(ImageView.ScaleType.CENTER_CROP);
+        _ivs = new ImageView[3];
+        for (int i = 0; i < _ivs.length; i++) {
+            _ivs[i] = new ImageView(getContext());
+            _ivs[i].setImageResource(res[i]);
+            addView(_ivs[i]);
+            _ivs[i].setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            _ivs[i].setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
-        iv[0].setScaleX(0);
-        iv[1].setScaleY(0);
-        iv[2].setScaleX(0);
+        _ivs[0].setScaleX(0);
+        _ivs[1].setScaleY(0);
+        _ivs[2].setScaleX(0);
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        iv[0].setPivotX(getHeight());
-        iv[0].setPivotY(getHeight());
+        _ivs[0].setPivotX(getHeight());
+        _ivs[0].setPivotY(getHeight());
 
-        iv[1].setPivotY(getHeight());
-        iv[1].setPivotX(0);
+        _ivs[1].setPivotY(getHeight());
+        _ivs[1].setPivotX(0);
 
-        iv[2].setPivotX(0);
-        iv[2].setPivotY(0);
+        _ivs[2].setPivotX(0);
+        _ivs[2].setPivotY(0);
         super.onLayout(changed, left, top, right, bottom);
     }
 }

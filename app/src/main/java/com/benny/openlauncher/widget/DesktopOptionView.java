@@ -31,9 +31,9 @@ import java.util.List;
 
 public class DesktopOptionView extends FrameLayout {
 
-    private RecyclerView[] actionRecyclerViews = new RecyclerView[2];
-    private FastItemAdapter<FastItem.DesktopOptionsItem>[] actionAdapters = new FastItemAdapter[2];
-    private DesktopOptionViewListener desktopOptionViewListener;
+    private RecyclerView[] _actionRecyclerViews = new RecyclerView[2];
+    private FastItemAdapter<FastItem.DesktopOptionsItem>[] _actionAdapters = new FastItemAdapter[2];
+    private DesktopOptionViewListener _desktopOptionViewListener;
 
     public DesktopOptionView(@NonNull Context context) {
         super(context);
@@ -51,7 +51,7 @@ public class DesktopOptionView extends FrameLayout {
     }
 
     public void setDesktopOptionViewListener(DesktopOptionViewListener desktopOptionViewListener) {
-        this.desktopOptionViewListener = desktopOptionViewListener;
+        this._desktopOptionViewListener = desktopOptionViewListener;
     }
 
     public void updateHomeIcon(final boolean home) {
@@ -59,27 +59,27 @@ public class DesktopOptionView extends FrameLayout {
             @Override
             public void run() {
                 if (home) {
-                    actionAdapters[0].getAdapterItem(1).setIcon(R.drawable.ic_star_white_36dp);
+                    _actionAdapters[0].getAdapterItem(1).setIcon(R.drawable.ic_star_white_36dp);
                 } else {
-                    actionAdapters[0].getAdapterItem(1).setIcon(R.drawable.ic_star_border_white_36dp);
+                    _actionAdapters[0].getAdapterItem(1).setIcon(R.drawable.ic_star_border_white_36dp);
                 }
-                actionAdapters[0].notifyAdapterItemChanged(1);
+                _actionAdapters[0].notifyAdapterItemChanged(1);
             }
         });
     }
 
     public void updateLockIcon(final boolean lock) {
-        if (actionAdapters.length == 0) return;
-        if (actionAdapters[0].getAdapterItemCount() == 0) return;
+        if (_actionAdapters.length == 0) return;
+        if (_actionAdapters[0].getAdapterItemCount() == 0) return;
         post(new Runnable() {
             @Override
             public void run() {
                 if (lock) {
-                    actionAdapters[0].getAdapterItem(2).setIcon(R.drawable.ic_lock_white_36dp);
+                    _actionAdapters[0].getAdapterItem(2).setIcon(R.drawable.ic_lock_white_36dp);
                 } else {
-                    actionAdapters[0].getAdapterItem(2).setIcon(R.drawable.ic_lock_open_white_36dp);
+                    _actionAdapters[0].getAdapterItem(2).setIcon(R.drawable.ic_lock_open_white_36dp);
                 }
-                actionAdapters[0].notifyAdapterItemChanged(2);
+                _actionAdapters[0].notifyAdapterItemChanged(2);
             }
         });
     }
@@ -101,35 +101,35 @@ public class DesktopOptionView extends FrameLayout {
         final int paddingHorizontal = Tool.dp2px(42, getContext());
         final Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
 
-        actionAdapters[0] = new FastItemAdapter<>();
-        actionAdapters[1] = new FastItemAdapter<>();
+        _actionAdapters[0] = new FastItemAdapter<>();
+        _actionAdapters[1] = new FastItemAdapter<>();
 
-        actionRecyclerViews[0] = createRecyclerView(actionAdapters[0], Gravity.TOP | Gravity.CENTER_HORIZONTAL, paddingHorizontal);
-        actionRecyclerViews[1] = createRecyclerView(actionAdapters[1], Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, paddingHorizontal);
+        _actionRecyclerViews[0] = createRecyclerView(_actionAdapters[0], Gravity.TOP | Gravity.CENTER_HORIZONTAL, paddingHorizontal);
+        _actionRecyclerViews[1] = createRecyclerView(_actionAdapters[1], Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, paddingHorizontal);
 
         final com.mikepenz.fastadapter.listeners.OnClickListener<FastItem.DesktopOptionsItem> clickListener = new com.mikepenz.fastadapter.listeners.OnClickListener<FastItem.DesktopOptionsItem>() {
             @Override
             public boolean onClick(View v, IAdapter<FastItem.DesktopOptionsItem> adapter, FastItem.DesktopOptionsItem item, int position) {
-                if (desktopOptionViewListener != null) {
+                if (_desktopOptionViewListener != null) {
                     final int id = (int) item.getIdentifier();
                     if (id == R.string.home) {
                         updateHomeIcon(true);
-                        desktopOptionViewListener.onSetPageAsHome();
+                        _desktopOptionViewListener.onSetPageAsHome();
                     } else if (id == R.string.remove) {
                         if (!Setup.appSettings().isDesktopLock()) {
-                            desktopOptionViewListener.onRemovePage();
+                            _desktopOptionViewListener.onRemovePage();
                         } else {
                             Tool.toast(getContext(), "Desktop is locked.");
                         }
                     } else if (id == R.string.widget) {
                         if (!Setup.appSettings().isDesktopLock()) {
-                            desktopOptionViewListener.onPickWidget();
+                            _desktopOptionViewListener.onPickWidget();
                         } else {
                             Tool.toast(getContext(), "Desktop is locked.");
                         }
                     } else if (id == R.string.action) {
                         if (!Setup.appSettings().isDesktopLock()) {
-                            desktopOptionViewListener.onPickDesktopAction();
+                            _desktopOptionViewListener.onPickDesktopAction();
                         } else {
                             Tool.toast(getContext(), "Desktop is locked.");
                         }
@@ -138,7 +138,7 @@ public class DesktopOptionView extends FrameLayout {
                         //LauncherSettings.getInstance(getContext()).generalSettings.desktopLock = !LauncherSettings.getInstance(getContext()).generalSettings.desktopLock;
                         updateLockIcon(Setup.appSettings().isDesktopLock());
                     } else if (id == R.string.settings) {
-                        desktopOptionViewListener.onLaunchSettings();
+                        _desktopOptionViewListener.onLaunchSettings();
                     } else {
                         return false;
                     }
@@ -163,17 +163,17 @@ public class DesktopOptionView extends FrameLayout {
         itemsTop.add(createItem(R.drawable.ic_delete_white_36dp, R.string.remove, typeface, itemWidth));
         itemsTop.add(createItem(R.drawable.ic_star_white_36dp, R.string.home, typeface, itemWidth));
         itemsTop.add(createItem(R.drawable.ic_lock_open_white_36dp, R.string.lock, typeface, itemWidth));
-        actionAdapters[0].set(itemsTop);
-        actionAdapters[0].withOnClickListener(clickListener);
+        _actionAdapters[0].set(itemsTop);
+        _actionAdapters[0].withOnClickListener(clickListener);
 
         List<FastItem.DesktopOptionsItem> itemsBottom = new ArrayList<>();
         itemsBottom.add(createItem(R.drawable.ic_dashboard_white_36dp, R.string.widget, typeface, itemWidth));
         itemsBottom.add(createItem(R.drawable.ic_launch_white_36dp, R.string.action, typeface, itemWidth));
         itemsBottom.add(createItem(R.drawable.ic_settings_launcher_white_36dp, R.string.settings, typeface, itemWidth));
-        actionAdapters[1].set(itemsBottom);
-        actionAdapters[1].withOnClickListener(clickListener);
+        _actionAdapters[1].set(itemsBottom);
+        _actionAdapters[1].withOnClickListener(clickListener);
 
-        ((MarginLayoutParams) ((View) actionRecyclerViews[0].getParent()).getLayoutParams()).topMargin = Tool.dp2px(Setup.appSettings().getSearchBarEnable() ? 36 : 4, getContext());
+        ((MarginLayoutParams) ((View) _actionRecyclerViews[0].getParent()).getLayoutParams()).topMargin = Tool.dp2px(Setup.appSettings().getSearchBarEnable() ? 36 : 4, getContext());
     }
 
     private RecyclerView createRecyclerView(FastAdapter adapter, int gravity, int paddingHorizontal) {

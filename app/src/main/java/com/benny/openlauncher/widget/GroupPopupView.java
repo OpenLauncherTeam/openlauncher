@@ -29,14 +29,14 @@ import io.codetail.animation.ViewAnimationUtils;
 import io.codetail.widget.RevealFrameLayout;
 
 public class GroupPopupView extends RevealFrameLayout {
-    private boolean isShowing;
-    private CardView popupCard;
-    private CellContainer cellContainer;
-    private PopupWindow.OnDismissListener dismissListener;
-    private Animator folderAnimator;
-    private int cx;
-    private int cy;
-    private TextView textView;
+    private boolean _isShowing;
+    private CardView _popupCard;
+    private CellContainer _cellContainer;
+    private PopupWindow.OnDismissListener _dismissListener;
+    private Animator _folderAnimator;
+    private int _cx;
+    private int _cy;
+    private TextView _textView;
 
     public GroupPopupView(Context context) {
         super(context);
@@ -52,50 +52,50 @@ public class GroupPopupView extends RevealFrameLayout {
         if (isInEditMode()) {
             return;
         }
-        popupCard = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_group_popup, this, false);
+        _popupCard = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_group_popup, this, false);
         // set the CardView color
         int color = Setup.appSettings().getDesktopFolderColor();
         int alpha = Color.alpha(color);
-        popupCard.setCardBackgroundColor(color);
+        _popupCard.setCardBackgroundColor(color);
         // remove elevation if CardView's background is transparent to avoid weird shadows because CardView does not support transparent backgrounds
         if (alpha == 0) {
-            popupCard.setCardElevation(0f);
+            _popupCard.setCardElevation(0f);
         }
-        cellContainer = popupCard.findViewById(R.id.group);
+        _cellContainer = _popupCard.findViewById(R.id.group);
 
         bringToFront();
 
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (dismissListener != null) {
-                    dismissListener.onDismiss();
+                if (_dismissListener != null) {
+                    _dismissListener.onDismiss();
                 }
                 dismissPopup();
             }
         });
 
-        addView(popupCard);
-        popupCard.setVisibility(View.INVISIBLE);
+        addView(_popupCard);
+        _popupCard.setVisibility(View.INVISIBLE);
         setVisibility(View.INVISIBLE);
 
-        textView = popupCard.findViewById(R.id.group_popup_label);
+        _textView = _popupCard.findViewById(R.id.group_popup_label);
     }
 
 
     public boolean showWindowV(final Item item, final View itemView, final DesktopCallBack callBack) {
-        if (isShowing || getVisibility() == View.VISIBLE) return false;
-        isShowing = true;
+        if (_isShowing || getVisibility() == View.VISIBLE) return false;
+        _isShowing = true;
 
         String label = item.getLabel();
-        textView.setVisibility(label.isEmpty() ? GONE : VISIBLE);
-        textView.setText(label);
-        textView.setTextColor(Setup.appSettings().getFolderLabelColor());
-        textView.setTypeface(null, Typeface.BOLD);
+        _textView.setVisibility(label.isEmpty() ? GONE : VISIBLE);
+        _textView.setText(label);
+        _textView.setTextColor(Setup.appSettings().getFolderLabelColor());
+        _textView.setTypeface(null, Typeface.BOLD);
 
         final Context c = itemView.getContext();
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.getGroupItems().size());
-        cellContainer.setGridSize(cellSize[0], cellSize[1]);
+        _cellContainer.setGridSize(cellSize[0], cellSize[1]);
 
         int iconSize = Tool.dp2px(Setup.appSettings().getDesktopIconSize(), c);
         int textSize = Tool.dp2px(22, c);
@@ -150,11 +150,11 @@ public class GroupPopupView extends RevealFrameLayout {
                         }
                     });
                 }
-                cellContainer.addViewToGrid(view, x2, y2, 1, 1);
+                _cellContainer.addViewToGrid(view, x2, y2, 1, 1);
             }
         }
 
-        dismissListener = new PopupWindow.OnDismissListener() {
+        _dismissListener = new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 if (((AppItemView) itemView).getIconProvider().isGroupIconDrawable()) {
@@ -165,14 +165,14 @@ public class GroupPopupView extends RevealFrameLayout {
             }
         };
 
-        int popupWidth = contentPadding * 8 + popupCard.getContentPaddingLeft() + popupCard.getContentPaddingRight() + (iconSize) * cellSize[0];
-        popupCard.getLayoutParams().width = popupWidth;
+        int popupWidth = contentPadding * 8 + _popupCard.getContentPaddingLeft() + _popupCard.getContentPaddingRight() + (iconSize) * cellSize[0];
+        _popupCard.getLayoutParams().width = popupWidth;
 
-        int popupHeight = contentPadding * 2 + popupCard.getContentPaddingTop() + popupCard.getContentPaddingBottom() + Tool.dp2px(30, c) + (iconSize + textSize) * cellSize[1];
-        popupCard.getLayoutParams().height = popupHeight;
+        int popupHeight = contentPadding * 2 + _popupCard.getContentPaddingTop() + _popupCard.getContentPaddingBottom() + Tool.dp2px(30, c) + (iconSize + textSize) * cellSize[1];
+        _popupCard.getLayoutParams().height = popupHeight;
 
-        cx = popupWidth / 2;
-        cy = popupHeight / 2 - (Setup.appSettings().isDesktopShowLabel() ? Tool.dp2px(10, getContext()) : 0);
+        _cx = popupWidth / 2;
+        _cy = popupHeight / 2 - (Setup.appSettings().isDesktopShowLabel() ? Tool.dp2px(10, getContext()) : 0);
 
         int[] coordinates = new int[2];
         itemView.getLocationInWindow(coordinates);
@@ -190,8 +190,8 @@ public class GroupPopupView extends RevealFrameLayout {
             int v = width - (coordinates[0] + popupWidth);
             coordinates[0] += v;
             coordinates[0] -= contentPadding;
-            cx -= v;
-            cx += contentPadding;
+            _cx -= v;
+            _cx += contentPadding;
         }
         if (coordinates[1] + popupHeight > height) {
             coordinates[1] += height - (coordinates[1] + popupHeight);
@@ -200,9 +200,9 @@ public class GroupPopupView extends RevealFrameLayout {
             coordinates[0] -= itemView.getWidth() / 2;
             coordinates[0] += popupWidth / 2;
             coordinates[0] += contentPadding;
-            cx += itemView.getWidth() / 2;
-            cx -= popupWidth / 2;
-            cx -= contentPadding;
+            _cx += itemView.getWidth() / 2;
+            _cx -= popupWidth / 2;
+            _cx -= contentPadding;
         }
         if (coordinates[1] < 0) {
             coordinates[1] -= itemView.getHeight() / 2;
@@ -211,68 +211,68 @@ public class GroupPopupView extends RevealFrameLayout {
 
         if (item.getLocationInLauncher() == Item.LOCATION_DOCK) {
             coordinates[1] -= iconSize / 2;
-            cy += iconSize / 2 + (Setup.appSettings().isDockShowLabel() ? 0 : Tool.dp2px(10, getContext()));
+            _cy += iconSize / 2 + (Setup.appSettings().isDockShowLabel() ? 0 : Tool.dp2px(10, getContext()));
         }
 
         int x = coordinates[0];
         int y = coordinates[1];
 
-        popupCard.setPivotX(0);
-        popupCard.setPivotX(0);
-        popupCard.setX(x);
-        popupCard.setY(y);
+        _popupCard.setPivotX(0);
+        _popupCard.setPivotX(0);
+        _popupCard.setX(x);
+        _popupCard.setY(y);
 
         setVisibility(View.VISIBLE);
-        popupCard.setVisibility(View.VISIBLE);
+        _popupCard.setVisibility(View.VISIBLE);
         animateFolderOpen();
 
         return true;
     }
 
     private void animateFolderOpen() {
-        cellContainer.setAlpha(0);
+        _cellContainer.setAlpha(0);
 
-        int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());
+        int finalRadius = Math.max(_popupCard.getWidth(), _popupCard.getHeight());
         int startRadius = Tool.dp2px(Setup.appSettings().getDesktopIconSize() / 2, getContext());
 
         long animDuration = 1 + (long) (210 * Setup.appSettings().getOverallAnimationSpeedModifier());
-        folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, startRadius, finalRadius);
-        folderAnimator.setStartDelay(0);
-        folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        folderAnimator.setDuration(animDuration);
-        folderAnimator.start();
-        Tool.visibleViews(animDuration, animDuration, cellContainer);
+        _folderAnimator = ViewAnimationUtils.createCircularReveal(_popupCard, _cx, _cy, startRadius, finalRadius);
+        _folderAnimator.setStartDelay(0);
+        _folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        _folderAnimator.setDuration(animDuration);
+        _folderAnimator.start();
+        Tool.visibleViews(animDuration, animDuration, _cellContainer);
     }
 
     public void dismissPopup() {
-        if (!isShowing) return;
-        if (folderAnimator == null || folderAnimator.isRunning())
+        if (!_isShowing) return;
+        if (_folderAnimator == null || _folderAnimator.isRunning())
             return;
 
         long animDuration = 1 + (long) (210 * Setup.appSettings().getOverallAnimationSpeedModifier());
-        Tool.invisibleViews(animDuration, cellContainer);
+        Tool.invisibleViews(animDuration, _cellContainer);
 
         int startRadius = Tool.dp2px(Setup.appSettings().getDesktopIconSize() / 2, getContext());
-        int finalRadius = Math.max(popupCard.getWidth(), popupCard.getHeight());
-        folderAnimator = ViewAnimationUtils.createCircularReveal(popupCard, cx, cy, finalRadius, startRadius);
-        folderAnimator.setStartDelay(1 + animDuration / 2);
-        folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        folderAnimator.setDuration(animDuration);
-        folderAnimator.addListener(new Animator.AnimatorListener() {
+        int finalRadius = Math.max(_popupCard.getWidth(), _popupCard.getHeight());
+        _folderAnimator = ViewAnimationUtils.createCircularReveal(_popupCard, _cx, _cy, finalRadius, startRadius);
+        _folderAnimator.setStartDelay(1 + animDuration / 2);
+        _folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        _folderAnimator.setDuration(animDuration);
+        _folderAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator p1) {
             }
 
             @Override
             public void onAnimationEnd(Animator p1) {
-                popupCard.setVisibility(View.INVISIBLE);
-                isShowing = false;
+                _popupCard.setVisibility(View.INVISIBLE);
+                _isShowing = false;
 
-                if (dismissListener != null) {
-                    dismissListener.onDismiss();
+                if (_dismissListener != null) {
+                    _dismissListener.onDismiss();
                 }
 
-                cellContainer.removeAllViews();
+                _cellContainer.removeAllViews();
                 setVisibility(View.INVISIBLE);
             }
 
@@ -284,7 +284,7 @@ public class GroupPopupView extends RevealFrameLayout {
             public void onAnimationRepeat(Animator p1) {
             }
         });
-        folderAnimator.start();
+        _folderAnimator.start();
     }
 
     private void removeItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, AppItemView currentView) {
@@ -321,7 +321,7 @@ public class GroupPopupView extends RevealFrameLayout {
     }
 
     static class GroupDef {
-        static int maxItem = 12;
+        static int _maxItem = 12;
 
         static int[] getCellSize(int count) {
             if (count <= 1)

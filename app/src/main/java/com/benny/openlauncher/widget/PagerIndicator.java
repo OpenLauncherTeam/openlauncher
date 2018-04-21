@@ -6,6 +6,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -14,39 +16,32 @@ import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
 import com.benny.openlauncher.widget.SmoothViewPager.OnPageChangeListener;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import java.util.HashMap;
-
 import kotlin.jvm.internal.Intrinsics;
 
 import static com.benny.openlauncher.widget.PagerIndicator.Mode.ARROW;
 
-/* compiled from: PagerIndicator.kt */
 public final class PagerIndicator extends View implements OnPageChangeListener {
-    public static final Companion Companion = new Companion();
-    private static float pad;
-    private HashMap _findViewCache;
-    private boolean alphaFade;
-    private boolean alphaShow;
-    private Paint arrowPaint = new Paint(1);
-    private Path arrowPath;
-    private final Runnable delayShow;
-    private Paint dotPaint = new Paint(1);
-    private float dotSize;
-    private boolean hasTriggedAlphaShow;
-    private int mCurrentPagerState;
-    private int mode = Mode.NORMAL;
+    public static final Companion _companion = new Companion();
+    private static float _pad;
+    private boolean _alphaFade;
+    private boolean _alphaShow;
+    private Paint _arrowPaint = new Paint(1);
+    private Path _arrowPath;
+    private final Runnable _delayShow;
+    private Paint _dotPaint = new Paint(1);
+    private float _dotSize;
+    private boolean _hasTriggedAlphaShow;
+    private int _currentPagerState;
+    private int _mode = Mode.NORMAL;
     private float myX;
-    private SmoothViewPager pager;
-    private int prePageCount;
-    private int previousPage = -1;
-    private int realPreviousPage;
-    private float scaleFactor = 1.0f;
-    private float scaleFactor2 = 1.5f;
-    private float scrollOffset;
-    private int scrollPagePosition;
+    private SmoothViewPager _pager;
+    private int _prePageCount;
+    private int _previousPage = -1;
+    private int _realPreviousPage;
+    private float _scaleFactor = 1.0f;
+    private float _scaleFactor2 = 1.5f;
+    private float _scrollOffset;
+    private int _scrollPagePosition;
 
     /* compiled from: PagerIndicator.kt */
     public static final class Companion {
@@ -54,11 +49,11 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
         }
 
         private final float getPad() {
-            return PagerIndicator.pad;
+            return PagerIndicator._pad;
         }
 
         private final void setPad(float v) {
-            PagerIndicator.pad = v;
+            PagerIndicator._pad = v;
         }
     }
 
@@ -68,44 +63,44 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     }
 
     protected void onDraw(Canvas canvas) {
-        dotSize = getHeight() - pad * 1.25f;
+        _dotSize = getHeight() - _pad * 1.25f;
 
-        switch (mode) {
+        switch (_mode) {
             case Mode.NORMAL: {
-                if (pager != null) {
+                if (_pager != null) {
 
-                    dotPaint.setAlpha(255);
-                    float circlesWidth = pager.getAdapter().getCount() * (dotSize + pad * 2);
+                    _dotPaint.setAlpha(255);
+                    float circlesWidth = _pager.getAdapter().getCount() * (_dotSize + _pad * 2);
                     canvas.translate(getWidth() / 2 - circlesWidth / 2, 0f);
 
-                    if (realPreviousPage != pager.getCurrentItem()) {
-                        scaleFactor = 1f;
-                        realPreviousPage = pager.getCurrentItem();
+                    if (_realPreviousPage != _pager.getCurrentItem()) {
+                        _scaleFactor = 1f;
+                        _realPreviousPage = _pager.getCurrentItem();
                     }
 
-                    for (int i = 0; i < pager.getAdapter().getCount(); i++) {
+                    for (int i = 0; i < _pager.getAdapter().getCount(); i++) {
                         float targetFactor = 1.5f;
                         float targetFactor2 = 1f;
                         float increaseFactor = 0.05f;
-                        if (i == previousPage && i != pager.getCurrentItem()) {
-                            scaleFactor2 = Tool.clampFloat(scaleFactor2 - increaseFactor, targetFactor2, targetFactor);
-                            Tool.print(scaleFactor2);
-                            canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, (float) (getHeight() / 2), scaleFactor2 * dotSize / 2, dotPaint);
-                            if (scaleFactor2 != targetFactor2)
+                        if (i == _previousPage && i != _pager.getCurrentItem()) {
+                            _scaleFactor2 = Tool.clampFloat(_scaleFactor2 - increaseFactor, targetFactor2, targetFactor);
+                            Tool.print(_scaleFactor2);
+                            canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * i, (float) (getHeight() / 2), _scaleFactor2 * _dotSize / 2, _dotPaint);
+                            if (_scaleFactor2 != targetFactor2)
                                 invalidate();
                             else {
-                                scaleFactor2 = 1.5f;
-                                previousPage = -1;
+                                _scaleFactor2 = 1.5f;
+                                _previousPage = -1;
                             }
-                        } else if (pager.getCurrentItem() == i) {
-                            if (previousPage == -1)
-                                previousPage = i;
-                            scaleFactor = Tool.clampFloat(scaleFactor + increaseFactor, targetFactor2, targetFactor);
-                            canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, (float) (getHeight() / 2), scaleFactor * dotSize / 2, dotPaint);
-                            if (scaleFactor != targetFactor)
+                        } else if (_pager.getCurrentItem() == i) {
+                            if (_previousPage == -1)
+                                _previousPage = i;
+                            _scaleFactor = Tool.clampFloat(_scaleFactor + increaseFactor, targetFactor2, targetFactor);
+                            canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * i, (float) (getHeight() / 2), _scaleFactor * _dotSize / 2, _dotPaint);
+                            if (_scaleFactor != targetFactor)
                                 invalidate();
                         } else {
-                            canvas.drawCircle(dotSize / 2 + pad + (dotSize + pad * 2) * i, (float) (getHeight() / 2), dotSize / 2, dotPaint);
+                            canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * i, (float) (getHeight() / 2), _dotSize / 2, _dotPaint);
                         }
                     }
                 }
@@ -113,39 +108,39 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
             }
             case ARROW: {
 
-                if (pager != null) {
-                    arrowPath.reset();
-                    arrowPath.moveTo(getWidth() / 2 - dotSize * 1.5f, (float) (getHeight()) - dotSize / 3 - pad / 2);
-                    arrowPath.lineTo((getWidth() / 2f), pad / 2);
-                    arrowPath.
-                            lineTo(getWidth() / 2 + dotSize * 1.5f, (float) (getHeight()) - dotSize / 3 - pad / 2);
+                if (_pager != null) {
+                    _arrowPath.reset();
+                    _arrowPath.moveTo(getWidth() / 2 - _dotSize * 1.5f, (float) (getHeight()) - _dotSize / 3 - _pad / 2);
+                    _arrowPath.lineTo((getWidth() / 2f), _pad / 2);
+                    _arrowPath.
+                            lineTo(getWidth() / 2 + _dotSize * 1.5f, (float) (getHeight()) - _dotSize / 3 - _pad / 2);
 
-                    canvas.drawPath(arrowPath, arrowPaint);
+                    canvas.drawPath(_arrowPath, _arrowPaint);
 
-                    float lineWidth = getWidth() / pager.getAdapter().getCount();
-                    float currentStartX = scrollPagePosition * lineWidth;
+                    float lineWidth = getWidth() / _pager.getAdapter().getCount();
+                    float currentStartX = _scrollPagePosition * lineWidth;
 
-                    myX = currentStartX + scrollOffset * lineWidth;
+                    myX = currentStartX + _scrollOffset * lineWidth;
 
                     if (myX % lineWidth != 0f)
                         invalidate();
 
-                    if (alphaFade) {
-                        dotPaint.setAlpha(Tool.clampInt(dotPaint.getAlpha() - 10, 0, 255));
-                        if (dotPaint.getAlpha() == 0)
-                            alphaFade = false;
+                    if (_alphaFade) {
+                        _dotPaint.setAlpha(Tool.clampInt(_dotPaint.getAlpha() - 10, 0, 255));
+                        if (_dotPaint.getAlpha() == 0)
+                            _alphaFade = false;
                         invalidate();
                     }
 
-                    if (alphaShow) {
-                        dotPaint.setAlpha(Tool.clampInt(dotPaint.getAlpha() + 10, 0, 255));
-                        if (dotPaint.getAlpha() == 255) {
-                            alphaShow = false;
+                    if (_alphaShow) {
+                        _dotPaint.setAlpha(Tool.clampInt(_dotPaint.getAlpha() + 10, 0, 255));
+                        if (_dotPaint.getAlpha() == 255) {
+                            _alphaShow = false;
                         }
                         invalidate();
                     }
 
-                    canvas.drawLine(myX, (float) getHeight(), myX + lineWidth, (float) getHeight(), dotPaint);
+                    canvas.drawLine(myX, (float) getHeight(), myX + lineWidth, (float) getHeight(), _dotPaint);
                 }
             }
             break;
@@ -153,77 +148,56 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     }
 
     public PagerIndicator(Context context) {
-        super(context);
-        Companion.setPad((float) Tool.toPx(3));
-        setWillNotDraw(false);
-        this.dotPaint.setColor(-1);
-        this.dotPaint.setStrokeWidth((float) Tool.toPx(2));
-        this.dotPaint.setAntiAlias(true);
-        this.arrowPaint.setColor(-1);
-        this.arrowPaint.setAntiAlias(true);
-        this.arrowPaint.setStyle(Style.STROKE);
-        this.arrowPaint.setStrokeWidth(Companion.getPad() / 1.5f);
-        this.arrowPaint.setStrokeJoin(Join.ROUND);
-        this.arrowPath = new Path();
-        this.mode = Setup.appSettings().getDesktopIndicatorMode();
-        this.delayShow = new PagerIndicato_delayShow(this);
-        this.mCurrentPagerState = -1;
+        this(context,null);
     }
 
     public PagerIndicator(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
-        Companion.setPad((float) Tool.toPx(3));
+        _companion.setPad((float) Tool.toPx(3));
         setWillNotDraw(false);
-        this.dotPaint.setColor(-1);
-        this.dotPaint.setStrokeWidth((float) Tool.toPx(2));
-        this.dotPaint.setAntiAlias(true);
-        this.arrowPaint.setColor(-1);
-        this.arrowPaint.setAntiAlias(true);
-        this.arrowPaint.setStyle(Style.STROKE);
-        this.arrowPaint.setStrokeWidth(Companion.getPad() / 1.5f);
-        this.arrowPaint.setStrokeJoin(Join.ROUND);
-        this.arrowPath = new Path();
-        this.mode = Setup.appSettings().getDesktopIndicatorMode();
-        this.delayShow = new PagerIndicato_delayShow(this);
-        this.mCurrentPagerState = -1;
-    }
-
-    final class PagerIndicato_delayShow implements Runnable {
-        final PagerIndicator _pagerIndicator;
-
-        PagerIndicato_delayShow(PagerIndicator pagerIndicator) {
-            _pagerIndicator = pagerIndicator;
-        }
-
-        public final void run() {
-            _pagerIndicator.alphaFade = true;
-            _pagerIndicator.alphaShow = false;
-            _pagerIndicator.invalidate();
-        }
+        this._dotPaint.setColor(-1);
+        this._dotPaint.setStrokeWidth((float) Tool.toPx(2));
+        this._dotPaint.setAntiAlias(true);
+        this._arrowPaint.setColor(-1);
+        this._arrowPaint.setAntiAlias(true);
+        this._arrowPaint.setStyle(Style.STROKE);
+        this._arrowPaint.setStrokeWidth(_companion.getPad() / 1.5f);
+        this._arrowPaint.setStrokeJoin(Join.ROUND);
+        this._arrowPath = new Path();
+        this._mode = Setup.appSettings().getDesktopIndicatorMode();
+        this._delayShow = new Runnable() {
+            @Override
+            public void run() {
+                _alphaFade = true;
+                _alphaShow = false;
+                invalidate();
+            }
+        };
+        this._currentPagerState = -1;
     }
 
     public final void setMode(int mode) {
-        this.mode = mode;
+        this._mode = mode;
         invalidate();
     }
 
 
     public final void setViewPager(@Nullable SmoothViewPager pager) {
         if (pager == null) {
-            if (this.pager != null) {
-                SmoothViewPager smoothViewPager = this.pager;
+            if (this._pager != null) {
+                SmoothViewPager smoothViewPager = this._pager;
                 if (smoothViewPager == null) {
                     Intrinsics.throwNpe();
                 }
                 smoothViewPager.removeOnPageChangeListener(this);
-                this.pager = null;
+                this._pager = null;
                 invalidate();
             }
             return;
         }
-        this.pager = pager;
+        this._pager = pager;
         SmoothPagerAdapter adapter = pager.getAdapter();
-        this.prePageCount = adapter.getCount();
+        this._prePageCount = adapter.getCount();
         pager.addOnPageChangeListener(this);
         adapter = pager.getAdapter();
         Tool.print(Integer.valueOf(adapter.getCount()));
@@ -231,22 +205,22 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     }
 
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        int i = this.prePageCount;
-        SmoothViewPager smoothViewPager = this.pager;
+        int i = this._prePageCount;
+        SmoothViewPager smoothViewPager = this._pager;
         if (smoothViewPager == null) {
             Intrinsics.throwNpe();
         }
         SmoothPagerAdapter adapter = smoothViewPager.getAdapter();
         if (i != adapter.getCount()) {
-            SmoothViewPager smoothViewPager2 = this.pager;
+            SmoothViewPager smoothViewPager2 = this._pager;
             if (smoothViewPager2 == null) {
                 Intrinsics.throwNpe();
             }
             SmoothPagerAdapter adapter2 = smoothViewPager2.getAdapter();
-            this.prePageCount = adapter2.getCount();
+            this._prePageCount = adapter2.getCount();
         }
-        this.scrollOffset = positionOffset;
-        this.scrollPagePosition = position;
+        this._scrollOffset = positionOffset;
+        this._scrollPagePosition = position;
         invalidate();
     }
 
@@ -254,22 +228,22 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     }
 
     public final void showNow() {
-        removeCallbacks(this.delayShow);
-        this.alphaShow = true;
-        this.alphaFade = false;
+        removeCallbacks(this._delayShow);
+        this._alphaShow = true;
+        this._alphaFade = false;
         invalidate();
     }
 
     public final void hideDelay() {
-        postDelayed(this.delayShow, 500);
+        postDelayed(this._delayShow, 500);
     }
 
     public void onPageScrollStateChanged(int state) {
-        this.mCurrentPagerState = state;
+        this._currentPagerState = state;
     }
 
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        this.dotSize = ((float) getHeight()) - (Companion.getPad() * 1.25f);
+        this._dotSize = ((float) getHeight()) - (_companion.getPad() * 1.25f);
         super.onLayout(changed, left, top, right, bottom);
     }
 }

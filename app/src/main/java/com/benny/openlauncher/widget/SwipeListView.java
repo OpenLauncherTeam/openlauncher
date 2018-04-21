@@ -9,13 +9,13 @@ import android.widget.ListView;
 import com.benny.openlauncher.util.Tool;
 
 public class SwipeListView extends ListView {
-    private GestureDetector mGestureDetector;
+    private GestureDetector _gestureDetector;
 
     public void setOnSwipeRight(OnSwipeRight onSwipeRight) {
-        this.onSwipeRight = onSwipeRight;
+        this._onSwipeRight = onSwipeRight;
     }
 
-    private OnSwipeRight onSwipeRight;
+    private OnSwipeRight _onSwipeRight;
 
     public SwipeListView(Context context) {
         super(context);
@@ -40,7 +40,7 @@ public class SwipeListView extends ListView {
 
         final float dis = Tool.dp2px(10, getContext());
         final float vDis = Tool.dp2px(30, getContext());
-        mGestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
+        _gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                 if (e1 == null) return true;
                 int dx = (int) (e2.getX() - e1.getX());
@@ -49,8 +49,8 @@ public class SwipeListView extends ListView {
                     if (velocityX > 0) {
                         try {
                             int pos = pointToPosition((int) e1.getX(), (int) e1.getY());
-                            if (pos != -1 && onSwipeRight != null)
-                                onSwipeRight.onSwipe(pos, e1.getX(), e1.getY());
+                            if (pos != -1 && _onSwipeRight != null)
+                                _onSwipeRight.onSwipe(pos, e1.getX(), e1.getY());
                         } catch (Exception ignored) {
 
                         }
@@ -65,7 +65,7 @@ public class SwipeListView extends ListView {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        mGestureDetector.onTouchEvent(ev);
+        _gestureDetector.onTouchEvent(ev);
         return super.dispatchTouchEvent(ev);
     }
 

@@ -77,7 +77,6 @@ import com.benny.openlauncher.widget.SwipeListView;
 
 import net.gsantner.opoc.util.ContextUtils;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -885,7 +884,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                 if (layoutParams == null) {
                     throw new TypeCastException("null cannot be cast to non-null type android.view.ViewGroup.MarginLayoutParams");
                 }
-                ((MarginLayoutParams) layoutParams).bottomMargin = Desktop.bottomInset + Tool.dp2px(4, (Context) this);
+                ((MarginLayoutParams) layoutParams).bottomMargin = Desktop._bottomInset + Tool.dp2px(4, (Context) this);
                 desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
                 if (desktop == null) {
                     Intrinsics.throwNpe();
@@ -946,7 +945,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         if (searchBar == null) {
             Intrinsics.throwNpe();
         }
-        TextView textView = searchBar.searchClock;
+        TextView textView = searchBar._searchClock;
 
         if (textView.getText() != null) {
             try {
@@ -956,7 +955,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                 }
                 searchBar.updateClock();
             } catch (Exception e) {
-                ((SearchBar) _$_findCachedViewById(R.id.searchBar)).searchClock.setText(R.string.bad_format);
+                ((SearchBar) _$_findCachedViewById(R.id.searchBar))._searchClock.setText(R.string.bad_format);
             }
         }
     }
@@ -976,7 +975,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             if (layoutParams == null) {
                 throw new TypeCastException("null cannot be cast to non-null type android.view.ViewGroup.MarginLayoutParams");
             }
-            ((MarginLayoutParams) layoutParams).topMargin = Desktop.topInset;
+            ((MarginLayoutParams) layoutParams).topMargin = Desktop._topInset;
             _$_findCachedViewById = _$_findCachedViewById(R.id.rightDragHandle);
             if (_$_findCachedViewById == null) {
                 Intrinsics.throwNpe();
@@ -986,17 +985,17 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                 throw new TypeCastException("null cannot be cast to non-null type android.view.ViewGroup.MarginLayoutParams");
             }
             Desktop desktop;
-            ((MarginLayoutParams) layoutParams).topMargin = Desktop.topInset;
+            ((MarginLayoutParams) layoutParams).topMargin = Desktop._topInset;
             desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
             if (desktop == null) {
                 Intrinsics.throwNpe();
             }
-            desktop.setPadding(0, Desktop.topInset, 0, 0);
+            desktop.setPadding(0, Desktop._topInset, 0, 0);
         }
         appSettings = Setup.appSettings();
 
         if (!appSettings.getDockEnable()) {
-            getDesktop().setPadding(0, 0, 0, Desktop.bottomInset);
+            getDesktop().setPadding(0, 0, 0, Desktop._bottomInset);
         }
     }
 

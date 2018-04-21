@@ -25,16 +25,16 @@ import com.benny.openlauncher.util.DragNDropHandler;
 import com.benny.openlauncher.util.Tool;
 
 public class DragOptionView extends CardView {
-    public boolean isDraggedFromDrawer = false;
-    public boolean dragging = false;
-    private View[] hideViews;
-    private LinearLayout dragOptions;
-    private TextView editIcon;
-    private TextView removeIcon;
-    private TextView infoIcon;
-    private TextView deleteIcon;
-    private Home home;
-    private Long animSpeed = 120L;
+    public boolean _isDraggedFromDrawer = false;
+    public boolean _dragging = false;
+    private View[] _hideViews;
+    private LinearLayout _dragOptions;
+    private TextView _editIcon;
+    private TextView _removeIcon;
+    private TextView _infoIcon;
+    private TextView _deleteIcon;
+    private Home _home;
+    private Long _animSpeed = 120L;
 
     public DragOptionView(Context context) {
         super(context);
@@ -47,11 +47,11 @@ public class DragOptionView extends CardView {
     }
 
     public void setHome(Home home) {
-        this.home = home;
+        this._home = home;
     }
 
     public void setAutoHideView(View... v) {
-        hideViews = v;
+        _hideViews = v;
     }
 
     @Override
@@ -66,11 +66,11 @@ public class DragOptionView extends CardView {
         setCardElevation(Tool.dp2px(4, getContext()));
         setRadius(Tool.dp2px(2, getContext()));
 
-        dragOptions = (LinearLayout) ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_drag_option, this, false);
-        addView(dragOptions);
+        _dragOptions = (LinearLayout) ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_drag_option, this, false);
+        addView(_dragOptions);
 
-        editIcon = dragOptions.findViewById(R.id.editIcon);
-        editIcon.setOnDragListener(new View.OnDragListener() {
+        _editIcon = _dragOptions.findViewById(R.id.editIcon);
+        _editIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(final View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
@@ -100,8 +100,8 @@ public class DragOptionView extends CardView {
                 return false;
             }
         });
-        removeIcon = dragOptions.findViewById(R.id.removeIcon);
-        removeIcon.setOnDragListener(new View.OnDragListener() {
+        _removeIcon = _dragOptions.findViewById(R.id.removeIcon);
+        _removeIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
@@ -125,8 +125,8 @@ public class DragOptionView extends CardView {
                         // remove all items from the database
                         Home.Companion.getLauncher().Companion.getDb().deleteItem(item, true);
 
-                        home.getDesktop().consumeRevert();
-                        home.getDock().consumeRevert();
+                        _home.getDesktop().consumeRevert();
+                        _home.getDock().consumeRevert();
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;
@@ -134,8 +134,8 @@ public class DragOptionView extends CardView {
                 return false;
             }
         });
-        infoIcon = dragOptions.findViewById(R.id.infoIcon);
-        infoIcon.setOnDragListener(new View.OnDragListener() {
+        _infoIcon = _dragOptions.findViewById(R.id.infoIcon);
+        _infoIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
@@ -165,8 +165,8 @@ public class DragOptionView extends CardView {
                 return false;
             }
         });
-        deleteIcon = dragOptions.findViewById(R.id.deleteIcon);
-        deleteIcon.setOnDragListener(new View.OnDragListener() {
+        _deleteIcon = _dragOptions.findViewById(R.id.deleteIcon);
+        _deleteIcon.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View view, DragEvent dragEvent) {
                 switch (dragEvent.getAction()) {
@@ -190,13 +190,13 @@ public class DragOptionView extends CardView {
             }
         });
 
-        editIcon.setText(editIcon.getText(), TextView.BufferType.SPANNABLE);
-        removeIcon.setText(removeIcon.getText(), TextView.BufferType.SPANNABLE);
-        infoIcon.setText(infoIcon.getText(), TextView.BufferType.SPANNABLE);
-        deleteIcon.setText(deleteIcon.getText(), TextView.BufferType.SPANNABLE);
+        _editIcon.setText(_editIcon.getText(), TextView.BufferType.SPANNABLE);
+        _removeIcon.setText(_removeIcon.getText(), TextView.BufferType.SPANNABLE);
+        _infoIcon.setText(_infoIcon.getText(), TextView.BufferType.SPANNABLE);
+        _deleteIcon.setText(_deleteIcon.getText(), TextView.BufferType.SPANNABLE);
 
-        for (int i = 0; i < dragOptions.getChildCount(); i++) {
-            dragOptions.getChildAt(i).setVisibility(View.GONE);
+        for (int i = 0; i < _dragOptions.getChildCount(); i++) {
+            _dragOptions.getChildAt(i).setVisibility(View.GONE);
         }
     }
 
@@ -227,11 +227,11 @@ public class DragOptionView extends CardView {
     }
 
     private void animShowView() {
-        if (hideViews != null) {
-            isDraggedFromDrawer = true;
+        if (_hideViews != null) {
+            _isDraggedFromDrawer = true;
 
             if (Setup.get().getAppSettings().getSearchBarEnable())
-                Tool.invisibleViews(Math.round(animSpeed / 1.3f), hideViews);
+                Tool.invisibleViews(Math.round(_animSpeed / 1.3f), _hideViews);
 
             animate().alpha(1);
         }
@@ -241,37 +241,37 @@ public class DragOptionView extends CardView {
     public boolean onDragEvent(DragEvent event) {
         switch (event.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
-                dragging = true;
+                _dragging = true;
                 animShowView();
                 boolean desktopHideGrid = Setup.appSettings().isDesktopHideGrid();
-                home.getDock().setHideGrid(desktopHideGrid);
-                for (CellContainer cellContainer : home.getDesktop().getPages()) {
+                _home.getDock().setHideGrid(desktopHideGrid);
+                for (CellContainer cellContainer : _home.getDesktop().getPages()) {
                     cellContainer.setHideGrid(desktopHideGrid);
                 }
                 switch (((DragAction) event.getLocalState()).action) {
                     case ACTION:
-                        editIcon.setVisibility(View.VISIBLE);
-                        removeIcon.setVisibility(View.VISIBLE);
+                        _editIcon.setVisibility(View.VISIBLE);
+                        _removeIcon.setVisibility(View.VISIBLE);
                         return true;
                     case APP:
-                        editIcon.setVisibility(View.VISIBLE);
-                        removeIcon.setVisibility(View.VISIBLE);
-                        infoIcon.setVisibility(View.VISIBLE);
-                        deleteIcon.setVisibility(View.VISIBLE);
+                        _editIcon.setVisibility(View.VISIBLE);
+                        _removeIcon.setVisibility(View.VISIBLE);
+                        _infoIcon.setVisibility(View.VISIBLE);
+                        _deleteIcon.setVisibility(View.VISIBLE);
                     case APP_DRAWER:
-                        removeIcon.setVisibility(View.VISIBLE);
-                        infoIcon.setVisibility(View.VISIBLE);
-                        deleteIcon.setVisibility(View.VISIBLE);
+                        _removeIcon.setVisibility(View.VISIBLE);
+                        _infoIcon.setVisibility(View.VISIBLE);
+                        _deleteIcon.setVisibility(View.VISIBLE);
                         return true;
                     case WIDGET:
-                        removeIcon.setVisibility(View.VISIBLE);
+                        _removeIcon.setVisibility(View.VISIBLE);
                         return true;
                     case GROUP:
-                        editIcon.setVisibility(View.VISIBLE);
-                        removeIcon.setVisibility(View.VISIBLE);
+                        _editIcon.setVisibility(View.VISIBLE);
+                        _removeIcon.setVisibility(View.VISIBLE);
                         return true;
                     case SHORTCUT:
-                        removeIcon.setVisibility(View.VISIBLE);
+                        _removeIcon.setVisibility(View.VISIBLE);
                         return true;
                 }
             case DragEvent.ACTION_DRAG_ENTERED:
@@ -281,28 +281,28 @@ public class DragOptionView extends CardView {
             case DragEvent.ACTION_DROP:
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
-                dragging = false;
-                home.getDock().setHideGrid(true);
-                for (CellContainer cellContainer : home.getDesktop().getPages()) {
+                _dragging = false;
+                _home.getDock().setHideGrid(true);
+                for (CellContainer cellContainer : _home.getDesktop().getPages()) {
                     cellContainer.setHideGrid(true);
                 }
 
                 animate().alpha(0);
-                editIcon.setVisibility(View.GONE);
-                removeIcon.setVisibility(View.GONE);
-                infoIcon.setVisibility(View.GONE);
-                deleteIcon.setVisibility(View.GONE);
+                _editIcon.setVisibility(View.GONE);
+                _removeIcon.setVisibility(View.GONE);
+                _infoIcon.setVisibility(View.GONE);
+                _deleteIcon.setVisibility(View.GONE);
 
                 if (Setup.get().getAppSettings().getSearchBarEnable())
-                    Tool.visibleViews(Math.round(animSpeed / 1.3f), hideViews);
+                    Tool.visibleViews(Math.round(_animSpeed / 1.3f), _hideViews);
 
                 // the search view might be disabled
                 Home.Companion.getLauncher().updateSearchBar(true);
 
-                isDraggedFromDrawer = false;
+                _isDraggedFromDrawer = false;
 
-                home.getDock().revertLastItem();
-                home.getDesktop().revertLastItem();
+                _home.getDock().revertLastItem();
+                _home.getDesktop().revertLastItem();
                 return true;
         }
         return false;

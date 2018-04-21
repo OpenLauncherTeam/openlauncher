@@ -9,9 +9,9 @@ import android.view.MotionEvent;
 //However, you will need to move a bit to trigger the long press, when dragging. But this can be useful, as we can implement a
 //popup menu of the widget when it was being pressed.
 public class WidgetView extends AppWidgetHostView {
-    private OnTouchListener onTouchListener;
-    private OnLongClickListener longClick;
-    private long down;
+    private OnTouchListener _onTouchListener;
+    private OnLongClickListener _longClick;
+    private long _down;
 
     public WidgetView(Context context) {
         super(context);
@@ -19,26 +19,26 @@ public class WidgetView extends AppWidgetHostView {
 
     @Override
     public void setOnTouchListener(OnTouchListener onTouchListener) {
-        this.onTouchListener = onTouchListener;
+        this._onTouchListener = onTouchListener;
     }
 
     @Override
     public void setOnLongClickListener(OnLongClickListener l) {
-        this.longClick = l;
+        this._longClick = l;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (onTouchListener != null)
-            onTouchListener.onTouch(this, ev);
+        if (_onTouchListener != null)
+            _onTouchListener.onTouch(this, ev);
         switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
-                down = System.currentTimeMillis();
+                _down = System.currentTimeMillis();
                 break;
             case MotionEvent.ACTION_MOVE:
-                boolean upVal = System.currentTimeMillis() - down > 300L;
+                boolean upVal = System.currentTimeMillis() - _down > 300L;
                 if (upVal) {
-                    longClick.onLongClick(WidgetView.this);
+                    _longClick.onLongClick(WidgetView.this);
                 }
                 break;
         }

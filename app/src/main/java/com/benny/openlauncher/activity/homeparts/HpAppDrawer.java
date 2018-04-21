@@ -64,8 +64,8 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
                     _home.updateDock(true, 200);
                 else
                     _home.updateDock(true);
-                _home.updateSearchBar(!_dragOptionPanel.isDraggedFromDrawer);
-                _dragOptionPanel.isDraggedFromDrawer = false;
+                _home.updateSearchBar(!_dragOptionPanel._isDraggedFromDrawer);
+                _dragOptionPanel._isDraggedFromDrawer = false;
             } else {
                 if (!Setup.appSettings().isDrawerRememberPosition()) {
                     _home.getAppDrawerController().scrollToStart();
