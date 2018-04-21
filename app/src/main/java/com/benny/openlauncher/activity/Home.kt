@@ -28,6 +28,8 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.benny.openlauncher.AppObject
 import com.benny.openlauncher.BuildConfig
 import com.benny.openlauncher.R
+import com.benny.openlauncher.activity.home.HomeDesktopGestureCallback
+import com.benny.openlauncher.activity.home.HomeEventHandler
 import com.benny.openlauncher.interfaces.AppDeleteListener
 import com.benny.openlauncher.interfaces.AppUpdateListener
 import com.benny.openlauncher.interfaces.DialogListener
@@ -347,114 +349,11 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
 
             override fun createIconProvider(icon: Int): BaseIconProvider = SimpleIconProvider(icon)
         }
-        val desktopGestureCallback = DesktopGestureListener.DesktopGestureCallback { desktop, event ->
-            var gestureid: Int
-            when (event) {
-                DesktopGestureListener.Type.SwipeUp -> {
-                    gestureid = appSettings.gestureSwipeUp
-                    if (gestureid != 0) {
-                        val gesture = LauncherAction.getActionItem(gestureid - 1)
-                        if (gesture != null && appSettings.isGestureFeedback) {
-                            Tool.vibrate(desktop)
-                        }
-                        if (gestureid == 9) {
-                            gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(appSettings.getString(getString(R.string.pref_key__gesture_swipe_up) + "__", "")))
-                        }
-                        LauncherAction.RunAction(gesture, desktop.context)
-                    }
-                    true
-                }
-                DesktopGestureListener.Type.SwipeDown -> {
-                    gestureid = appSettings.gestureSwipeDown
-                    if (gestureid != 0) {
-                        val gesture = LauncherAction.getActionItem(gestureid - 1)
-                        if (gesture != null && appSettings.isGestureFeedback) {
-                            Tool.vibrate(desktop)
-                        }
-                        if (gestureid == 9) {
-                            gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(appSettings.getString(getString(R.string.pref_key__gesture_swipe_down) + "__", "")))
-                        }
-                        LauncherAction.RunAction(gesture, desktop.context)
-                    }
-                    true
-                }
-                DesktopGestureListener.Type.SwipeLeft -> false
-                DesktopGestureListener.Type.SwipeRight -> false
-                DesktopGestureListener.Type.Pinch -> {
-                    gestureid = appSettings.gestureSwipeDown
-                    if (gestureid != 0) {
-                        val gesture = LauncherAction.getActionItem(gestureid - 1)
-                        if (gesture != null && appSettings.isGestureFeedback) {
-                            Tool.vibrate(desktop)
-                        }
-                        if (gestureid == 9) {
-                            gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(appSettings.getString(getString(R.string.pref_key__gesture_pinch) + "__", "")))
-                        }
-                        LauncherAction.RunAction(gesture, desktop.context)
-                    }
-                    true
-                }
-                DesktopGestureListener.Type.Unpinch -> {
-                    gestureid = appSettings.gestureSwipeDown
-                    if (gestureid != 0) {
-                        val gesture = LauncherAction.getActionItem(gestureid - 1)
-                        if (gesture != null && appSettings.isGestureFeedback) {
-                            Tool.vibrate(desktop)
-                        }
-                        if (gestureid == 9) {
-                            gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(appSettings.getString(getString(R.string.pref_key__gesture_unpinch) + "__", "")))
-                        }
-                        LauncherAction.RunAction(gesture, desktop.context)
-                    }
-                    true
-                }
-                DesktopGestureListener.Type.DoubleTap -> {
-                    gestureid = appSettings.gestureSwipeDown
-                    if (gestureid != 0) {
-                        val gesture = LauncherAction.getActionItem(gestureid - 1)
-                        if (gesture != null && appSettings.isGestureFeedback) {
-                            Tool.vibrate(desktop)
-                        }
-                        if (gestureid == 9) {
-                            gesture.extraData = Intent(packageManager.getLaunchIntentForPackage(appSettings.getString(getString(R.string.pref_key__gesture_double_tap) + "__", "")))
-                        }
-                        LauncherAction.RunAction(gesture, desktop.context)
-                    }
-                    true
-                }
-                else -> {
-                    throw RuntimeException("Type not handled!")
-                }
-            }
-        }
+        val desktopGestureCallback = HomeDesktopGestureCallback(appSettings)
         val itemGestureCallback: ItemGestureListener.ItemGestureCallback = ItemGestureListener.ItemGestureCallback { _, _ -> false }
         val dataManager = DatabaseHelper(this)
         val appLoader = AppManager.getInstance(this)
-        val eventHandler = object : Setup.EventHandler {
-            override fun showLauncherSettings(context: Context) {
-                LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, context)
-            }
-
-            override fun showPickAction(context: Context, listener: DialogListener.OnAddAppDrawerItemListener) {
-                DialogHelper.addActionItemDialog(context, MaterialDialog.ListCallback { _, _, position, _ ->
-                    when (position) {
-                        0 -> listener.onAdd()
-                    }
-                })
-            }
-
-            override fun showEditDialog(context: Context, item: Item, listener: DialogListener.OnEditDialogListener) {
-                DialogHelper.editItemDialog("Edit Item", item.label, context, object : DialogHelper.OnItemEditListener {
-                    override fun itemLabel(label: String) {
-                        listener.onRename(label)
-                    }
-                })
-            }
-
-            override fun showDeletePackageDialog(context: Context, item: Item) {
-                DialogHelper.deletePackageDialog(context, item)
-            }
-        }
+        val eventHandler = HomeEventHandler();
         val logger = object : Setup.Logger {
             override fun log(source: Any, priority: Int, tag: String?, msg: String, vararg args: Any) {
                 Log.println(priority, tag, String.format(msg, *args))
@@ -609,6 +508,7 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
     protected open fun initDragNDrop() {
         //dragHandle's drag event
         val dragHandler = Handler()
+
         dragNDropView.registerDropTarget(object : DragNDropLayout.DropTargetListener(leftDragHandle) {
 
             val leftRunnable = object : Runnable {
