@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.util.Log;
@@ -77,15 +78,12 @@ import com.benny.openlauncher.widget.SwipeListView;
 
 import net.gsantner.opoc.util.ContextUtils;
 
-import android.support.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import kotlin.TypeCastException;
 import kotlin.jvm.JvmOverloads;
-import kotlin.jvm.internal.Intrinsics;
 
 
 public final class Home extends Activity implements OnDesktopEditListener, DesktopOptionViewListener, DrawerListener {
@@ -159,11 +157,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
         @NonNull
         public final AppWidgetManager getAppWidgetManager() {
-            AppWidgetManager appWidgetManager = _appWidgetManager;
-            if (appWidgetManager == null) {
-                Intrinsics.throwUninitializedPropertyAccessException("appWidgetManager");
-            }
-            return appWidgetManager;
+            return _appWidgetManager;
         }
 
         public final void setAppWidgetManager(@NonNull AppWidgetManager v) {
@@ -208,20 +202,6 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         }
     }
 
-
-    public View _$_findCachedViewById(int i) {
-        if (this.deleteMefindViewCache == null) {
-            this.deleteMefindViewCache = new HashMap();
-        }
-        View view = (View) this.deleteMefindViewCache.get(Integer.valueOf(i));
-        if (view != null) {
-            return view;
-        }
-        view = findViewById(i);
-        this.deleteMefindViewCache.put(Integer.valueOf(i), view);
-        return view;
-    }
-
     @JvmOverloads
     public final void openAppDrawer() {
         openAppDrawer$default(this, null, 0, 0, 7, null);
@@ -250,8 +230,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
     @NonNull
     public final DrawerLayout getDrawerLayout() {
-        DrawerLayout drawerLayout = (DrawerLayout) _$_findCachedViewById(R.id.drawer_layout);
-        return drawerLayout;
+        return findViewById(R.id.drawer_layout);
     }
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -294,13 +273,9 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     }
 
     public final void onStartApp(@NonNull Context context, @NonNull Intent intent, @Nullable View view) {
-
-
         ComponentName component = intent.getComponent();
-        if (component == null) {
-            Intrinsics.throwNpe();
-        }
-        if (Intrinsics.areEqual(component.getPackageName(), BuildConfig.APPLICATION_ID)) {
+
+        if (BuildConfig.APPLICATION_ID.equals(component.getPackageName())) {
             LauncherAction.RunAction(Action.LauncherSettings, context);
             Companion.setConsumeNextResume(true);
         } else {
@@ -316,7 +291,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     public final void onStartApp(@NonNull Context context, @NonNull App app, @Nullable View view) {
 
 
-        if (Intrinsics.areEqual(app._packageName, BuildConfig.APPLICATION_ID)) {
+        if (BuildConfig.APPLICATION_ID.equals(app._packageName)) {
             LauncherAction.RunAction(Action.LauncherSettings, context);
             Companion.setConsumeNextResume(true);
         } else {
@@ -374,15 +349,15 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                 AppSettings appSettings = Setup.appSettings();
 
                 if (appSettings.getDesktopStyle() == 0) {
-                    ((Desktop) _$_findCachedViewById(R.id.desktop)).initDesktopNormal(Home.this);
+                    ((Desktop) findViewById(R.id.desktop)).initDesktopNormal(Home.this);
                 } else {
                     appSettings = Setup.appSettings();
 
                     if (appSettings.getDesktopStyle() == 1) {
-                        ((Desktop) _$_findCachedViewById(R.id.desktop)).initDesktopShowAll(Home.this, Home.this);
+                        ((Desktop) findViewById(R.id.desktop)).initDesktopShowAll(Home.this, Home.this);
                     }
                 }
-                ((Dock) _$_findCachedViewById(R.id.dock)).initDockItem(Home.this);
+                ((Dock) findViewById(R.id.dock)).initDockItem(Home.this);
                 setToHomePage();
                 return false;
             }
@@ -391,26 +366,26 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     }
 
     protected void initViews() {
-        new HpSearchBar(this, (SearchBar) _$_findCachedViewById(R.id.searchBar), (CalendarDropDownView) _$_findCachedViewById(R.id.calendarDropDownView)).initSearchBar();
+        new HpSearchBar(this, (SearchBar) findViewById(R.id.searchBar), (CalendarDropDownView) findViewById(R.id.calendarDropDownView)).initSearchBar();
         initDock();
-        ((AppDrawerController) _$_findCachedViewById(R.id.appDrawerController)).init();
-        ((AppDrawerController) _$_findCachedViewById(R.id.appDrawerController)).setHome(this);
-        ((DragOptionView) _$_findCachedViewById(R.id.dragOptionPanel)).setHome(this);
-        ((Desktop) _$_findCachedViewById(R.id.desktop)).init();
-        Desktop desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
+        ((AppDrawerController) findViewById(R.id.appDrawerController)).init();
+        ((AppDrawerController) findViewById(R.id.appDrawerController)).setHome(this);
+        ((DragOptionView) findViewById(R.id.dragOptionPanel)).setHome(this);
+        ((Desktop) findViewById(R.id.desktop)).init();
+        Desktop desktop = (Desktop) findViewById(R.id.desktop);
 
         desktop.setDesktopEditListener(this);
-        ((DesktopOptionView) _$_findCachedViewById(R.id.desktopEditOptionPanel)).setDesktopOptionViewListener(this);
-        DesktopOptionView desktopOptionView = (DesktopOptionView) _$_findCachedViewById(R.id.desktopEditOptionPanel);
+        ((DesktopOptionView) findViewById(R.id.desktopEditOptionPanel)).setDesktopOptionViewListener(this);
+        DesktopOptionView desktopOptionView = (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel);
         AppSettings appSettings = Setup.appSettings();
 
         desktopOptionView.updateLockIcon(appSettings.isDesktopLock());
-        ((Desktop) _$_findCachedViewById(R.id.desktop)).addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
+        ((Desktop) findViewById(R.id.desktop)).addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
 
             public void onPageSelected(int position) {
-                DesktopOptionView desktopOptionView = (DesktopOptionView) _$_findCachedViewById(R.id.desktopEditOptionPanel);
+                DesktopOptionView desktopOptionView = (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel);
                 AppSettings appSettings = Setup.appSettings();
 
                 desktopOptionView.updateHomeIcon(appSettings.getDesktopPageCurrent() == position);
@@ -419,13 +394,10 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             public void onPageScrollStateChanged(int state) {
             }
         });
-        desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
-        if (desktop == null) {
-            Intrinsics.throwNpe();
-        }
-        desktop.setPageIndicator((PagerIndicator) _$_findCachedViewById(R.id.desktopIndicator));
-        ((DragOptionView) _$_findCachedViewById(R.id.dragOptionPanel)).setAutoHideView((SearchBar) _$_findCachedViewById(R.id.searchBar));
-        new HpAppDrawer(this, (PagerIndicator) _$_findCachedViewById(R.id.appDrawerIndicator), (DragOptionView) _$_findCachedViewById(R.id.dragOptionPanel)).initAppDrawer((AppDrawerController) _$_findCachedViewById(R.id.appDrawerController));
+        desktop = (Desktop) findViewById(R.id.desktop);
+        desktop.setPageIndicator((PagerIndicator) findViewById(R.id.desktopIndicator));
+        ((DragOptionView) findViewById(R.id.dragOptionPanel)).setAutoHideView((SearchBar) findViewById(R.id.searchBar));
+        new HpAppDrawer(this, (PagerIndicator) findViewById(R.id.appDrawerIndicator), (DragOptionView) findViewById(R.id.dragOptionPanel)).initAppDrawer((AppDrawerController) findViewById(R.id.appDrawerController));
         initMinibar();
     }
 
@@ -438,44 +410,28 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         } else {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         }
-        Desktop desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
-        if (desktop == null) {
-            Intrinsics.throwNpe();
-        }
+        Desktop desktop = findViewById(R.id.desktop);
         AppSettings appSettings2 = Setup.appSettings();
 
         desktop.setBackgroundColor(appSettings2.getDesktopBackgroundColor());
-        Dock dock = (Dock) _$_findCachedViewById(R.id.dock);
-        if (dock == null) {
-            Intrinsics.throwNpe();
-        }
+        Dock dock = findViewById(R.id.dock);
         appSettings2 = Setup.appSettings();
 
         dock.setBackgroundColor(appSettings2.getDockColor());
-        DrawerLayout drawerLayout = (DrawerLayout) _$_findCachedViewById(R.id.drawer_layout);
-        appSettings2 = AppSettings.get();
-
         getDrawerLayout().setDrawerLockMode(AppSettings.get().getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
 
     public void onRemovePage() {
         if (getDesktop().isCurrentPageEmpty()) {
-            Desktop desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
-            if (desktop == null) {
-                Intrinsics.throwNpe();
-            }
-            desktop.removeCurrentPage();
+
+            getDesktop().removeCurrentPage();
             return;
         }
         DialogHelper.alertDialog(this, getString(R.string.remove), "This page is not empty. Those item will also be removed.", new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                Desktop desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
-                if (desktop == null) {
-                    Intrinsics.throwNpe();
-                }
-                desktop.removeCurrentPage();
+                getDesktop().removeCurrentPage();
             }
         });
     }
@@ -516,7 +472,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
     public void onBackPressed() {
         handleLauncherPause(false);
-        ((DrawerLayout) _$_findCachedViewById(R.id.drawer_layout)).closeDrawers();
+        ((DrawerLayout) findViewById(R.id.drawer_layout)).closeDrawers();
     }
 
     public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
@@ -559,7 +515,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         }
         Intent intent = getIntent();
 
-        handleLauncherPause(Intrinsics.areEqual(intent.getAction(), (Object) "android.intent.action.MAIN"));
+        handleLauncherPause(Intent.ACTION_MAIN.equals(intent.getAction()));
         boolean user = AppSettings.get().getBool(R.string.pref_key__desktop_rotate, false);
         boolean system = false;
         try {
@@ -582,56 +538,56 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
     @NonNull
     public final Desktop getDesktop() {
-        Desktop desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
+        Desktop desktop = (Desktop) findViewById(R.id.desktop);
 
         return desktop;
     }
 
     @NonNull
     public final Dock getDock() {
-        Dock dock = (Dock) _$_findCachedViewById(R.id.dock);
+        Dock dock = (Dock) findViewById(R.id.dock);
 
         return dock;
     }
 
     @NonNull
     public final AppDrawerController getAppDrawerController() {
-        AppDrawerController appDrawerController = (AppDrawerController) _$_findCachedViewById(R.id.appDrawerController);
+        AppDrawerController appDrawerController = (AppDrawerController) findViewById(R.id.appDrawerController);
 
         return appDrawerController;
     }
 
     @NonNull
     public final GroupPopupView getGroupPopup() {
-        GroupPopupView groupPopupView = (GroupPopupView) _$_findCachedViewById(R.id.groupPopup);
+        GroupPopupView groupPopupView = (GroupPopupView) findViewById(R.id.groupPopup);
 
         return groupPopupView;
     }
 
     @NonNull
     public final SearchBar getSearchBar() {
-        SearchBar searchBar = (SearchBar) _$_findCachedViewById(R.id.searchBar);
+        SearchBar searchBar = (SearchBar) findViewById(R.id.searchBar);
 
         return searchBar;
     }
 
     @NonNull
     public final View getBackground() {
-        View _$_findCachedViewById = _$_findCachedViewById(R.id.background);
+        View findViewById = findViewById(R.id.background);
 
-        return _$_findCachedViewById;
+        return findViewById;
     }
 
     @NonNull
     public final PagerIndicator getDesktopIndicator() {
-        PagerIndicator pagerIndicator = (PagerIndicator) _$_findCachedViewById(R.id.desktopIndicator);
+        PagerIndicator pagerIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
 
         return pagerIndicator;
     }
 
     @NonNull
     public final DragNDropLayout getDragNDropView() {
-        DragNDropLayout dragNDropLayout = (DragNDropLayout) _$_findCachedViewById(R.id.dragNDropView);
+        DragNDropLayout dragNDropLayout = (DragNDropLayout) findViewById(R.id.dragNDropView);
 
         return dragNDropLayout;
     }
@@ -643,19 +599,16 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
         companion.setAppWidgetManager(instance);
         WidgetHost appWidgetHost = Companion.getAppWidgetHost();
-        if (appWidgetHost == null) {
-            Intrinsics.throwNpe();
-        }
         appWidgetHost.startListening();
         initViews();
         HpDragNDrop hpDragNDrop = new HpDragNDrop();
-        View _$_findCachedViewById = _$_findCachedViewById(R.id.leftDragHandle);
+        View findViewById = findViewById(R.id.leftDragHandle);
 
-        View _$_findCachedViewById2 = _$_findCachedViewById(R.id.rightDragHandle);
+        View findViewById2 = findViewById(R.id.rightDragHandle);
 
-        DragNDropLayout dragNDropLayout = (DragNDropLayout) _$_findCachedViewById(R.id.dragNDropView);
+        DragNDropLayout dragNDropLayout = findViewById(R.id.dragNDropView);
 
-        hpDragNDrop.initDragNDrop(this, _$_findCachedViewById, _$_findCachedViewById2, dragNDropLayout);
+        hpDragNDrop.initDragNDrop(this, findViewById, findViewById2, dragNDropLayout);
         registerBroadcastReceiver();
         initAppManager();
         initSettings();
@@ -670,25 +623,16 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     }
 
     public final void onRemoveItem(@NonNull Item item) {
-
+        Desktop desktop = getDesktop();
         View coordinateToChildView;
         switch (item._locationInLauncher) {
             case 0:
-                Desktop desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
-                Desktop desktop2 = (Desktop) _$_findCachedViewById(R.id.desktop);
-
-                coordinateToChildView = desktop2.getCurrentPage().coordinateToChildView(new Point(item._x, item._y));
-                if (coordinateToChildView == null) {
-                    Intrinsics.throwNpe();
-                }
+                coordinateToChildView = desktop.getCurrentPage().coordinateToChildView(new Point(item._x, item._y));
                 desktop.removeItem(coordinateToChildView, true);
                 break;
             case 1:
-                Dock dock = (Dock) _$_findCachedViewById(R.id.dock);
-                coordinateToChildView = ((Dock) _$_findCachedViewById(R.id.dock)).coordinateToChildView(new Point(item._x, item._y));
-                if (coordinateToChildView == null) {
-                    Intrinsics.throwNpe();
-                }
+                Dock dock = getDock();
+                coordinateToChildView = dock.coordinateToChildView(new Point(item._x, item._y));
                 dock.removeItem(coordinateToChildView, true);
                 break;
             default:
@@ -705,13 +649,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("package:");
                 Intent intent = item._intent;
-                if (intent == null) {
-                    Intrinsics.throwNpe();
-                }
                 ComponentName component = intent.getComponent();
-                if (component == null) {
-                    Intrinsics.throwNpe();
-                }
                 stringBuilder.append(component.getPackageName());
                 startActivity(new Intent(str, Uri.parse(stringBuilder.toString())));
             } catch (Exception e) {
@@ -747,15 +685,15 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     }
 
     public void onDesktopEdit() {
-        Tool.visibleViews(100, 20, (DesktopOptionView) _$_findCachedViewById(R.id.desktopEditOptionPanel));
+        Tool.visibleViews(100, 20, (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel));
         hideDesktopIndicator();
         updateDock$default(this, false, 0, 2, null);
         updateSearchBar(false);
     }
 
     public void onFinishDesktopEdit() {
-        Tool.invisibleViews(100, 20, (DesktopOptionView) _$_findCachedViewById(R.id.desktopEditOptionPanel));
-        ((PagerIndicator) _$_findCachedViewById(R.id.desktopIndicator)).hideDelay();
+        Tool.invisibleViews(100, 20, (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel));
+        ((PagerIndicator) findViewById(R.id.desktopIndicator)).hideDelay();
         showDesktopIndicator();
         updateDock$default(this, true, 0, 2, null);
         updateSearchBar(true);
@@ -764,10 +702,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     public void onSetPageAsHome() {
         AppSettings appSettings = Setup.appSettings();
 
-        Desktop desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
-        if (desktop == null) {
-            Intrinsics.throwNpe();
-        }
+        Desktop desktop = findViewById(R.id.desktop);
         appSettings.setDesktopPageCurrent(desktop.getCurrentItem());
     }
 
@@ -786,45 +721,34 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
     private final void initDock() {
         int iconSize = Setup.appSettings().getDockIconSize();
-        Dock dock = (Dock) _$_findCachedViewById(R.id.dock);
-        if (dock == null) {
-            Intrinsics.throwNpe();
-        }
+        Dock dock = findViewById(R.id.dock);
         dock.setHome(this);
         dock.init();
         AppSettings appSettings = Setup.appSettings();
 
         if (appSettings.isDockShowLabel()) {
-            dock = (Dock) _$_findCachedViewById(R.id.dock);
-            if (dock == null) {
-                Intrinsics.throwNpe();
-            }
-            dock.getLayoutParams().height = Tool.dp2px(((16 + iconSize) + 14) + 10, (Context) this) + dock.getBottomInset();
+            dock.getLayoutParams().height = Tool.dp2px(((16 + iconSize) + 14) + 10, this) + dock.getBottomInset();
         } else {
-            dock = (Dock) _$_findCachedViewById(R.id.dock);
-            if (dock == null) {
-                Intrinsics.throwNpe();
-            }
-            dock.getLayoutParams().height = Tool.dp2px((16 + iconSize) + 10, (Context) this) + dock.getBottomInset();
+            dock.getLayoutParams().height = Tool.dp2px((16 + iconSize) + 10, this) + dock.getBottomInset();
         }
     }
 
     public final void dimBackground() {
-        Tool.visibleViews(_$_findCachedViewById(R.id.background));
+        Tool.visibleViews(findViewById(R.id.background));
     }
 
     public final void unDimBackground() {
-        Tool.invisibleViews(_$_findCachedViewById(R.id.background));
+        Tool.invisibleViews(findViewById(R.id.background));
     }
 
     public final void clearRoomForPopUp() {
-        Tool.invisibleViews((Desktop) _$_findCachedViewById(R.id.desktop));
+        Tool.invisibleViews((Desktop) findViewById(R.id.desktop));
         hideDesktopIndicator();
         updateDock$default(this, false, 0, 2, null);
     }
 
     public final void unClearRoomForPopUp() {
-        Tool.visibleViews((Desktop) _$_findCachedViewById(R.id.desktop));
+        Tool.visibleViews((Desktop) findViewById(R.id.desktop));
         showDesktopIndicator();
         updateDock$default(this, true, 0, 2, null);
     }
@@ -845,45 +769,27 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         LayoutParams layoutParams;
         PagerIndicator pagerIndicator;
         if (appSettings.getDockEnable() && show) {
-            Tool.visibleViews(100, delay, (Dock) _$_findCachedViewById(R.id.dock));
-            desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
-            if (desktop == null) {
-                Intrinsics.throwNpe();
-            }
+            Tool.visibleViews(100, delay, (Dock) findViewById(R.id.dock));
+            desktop = findViewById(R.id.desktop);
             layoutParams = desktop.getLayoutParams();
-            if (layoutParams == null) {
-                throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
-            }
-            ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, (Context) this);
-            pagerIndicator = (PagerIndicator) _$_findCachedViewById(R.id.desktopIndicator);
-            if (pagerIndicator == null) {
-                Intrinsics.throwNpe();
-            }
+            ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, this);
+            pagerIndicator = findViewById(R.id.desktopIndicator);
             layoutParams = pagerIndicator.getLayoutParams();
-            if (layoutParams == null) {
-                throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
-            }
-            ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, (Context) this);
+            ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, this);
         } else {
             appSettings = Setup.appSettings();
 
             if (appSettings.getDockEnable()) {
-                Tool.invisibleViews(100, (Dock) _$_findCachedViewById(R.id.dock));
+                Tool.invisibleViews(100, (Dock) findViewById(R.id.dock));
             } else {
-                Tool.goneViews(100, (Dock) _$_findCachedViewById(R.id.dock));
-                pagerIndicator = (PagerIndicator) _$_findCachedViewById(R.id.desktopIndicator);
-                if (pagerIndicator == null) {
-                    Intrinsics.throwNpe();
-                }
+                Tool.goneViews(100, (Dock) findViewById(R.id.dock));
+                pagerIndicator = findViewById(R.id.desktopIndicator);
                 layoutParams = pagerIndicator.getLayoutParams();
                 if (layoutParams == null) {
                     throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
                 }
                 ((MarginLayoutParams) layoutParams).bottomMargin = Desktop._bottomInset + Tool.dp2px(4, (Context) this);
-                desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
-                if (desktop == null) {
-                    Intrinsics.throwNpe();
-                }
+                desktop = (Desktop) findViewById(R.id.desktop);
                 layoutParams = desktop.getLayoutParams();
                 if (layoutParams == null) {
                     throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
@@ -897,14 +803,14 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         AppSettings appSettings = Setup.appSettings();
 
         if (appSettings.getSearchBarEnable() && show) {
-            Tool.visibleViews(100, (SearchBar) _$_findCachedViewById(R.id.searchBar));
+            Tool.visibleViews(100, (SearchBar) findViewById(R.id.searchBar));
         } else {
             appSettings = Setup.appSettings();
 
             if (appSettings.getSearchBarEnable()) {
-                Tool.invisibleViews(100, (SearchBar) _$_findCachedViewById(R.id.searchBar));
+                Tool.invisibleViews(100, (SearchBar) findViewById(R.id.searchBar));
             } else {
-                Tool.goneViews((SearchBar) _$_findCachedViewById(R.id.searchBar));
+                Tool.goneViews((SearchBar) findViewById(R.id.searchBar));
             }
         }
     }
@@ -913,17 +819,17 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         AppSettings appSettings = Setup.appSettings();
 
         if (appSettings.isDesktopShowIndicator()) {
-            Tool.visibleViews(100, (PagerIndicator) _$_findCachedViewById(R.id.desktopIndicator));
+            Tool.visibleViews(100, (PagerIndicator) findViewById(R.id.desktopIndicator));
             return;
         }
-        Tool.goneViews(100, (PagerIndicator) _$_findCachedViewById(R.id.desktopIndicator));
+        Tool.goneViews(100, (PagerIndicator) findViewById(R.id.desktopIndicator));
     }
 
     public final void hideDesktopIndicator() {
         AppSettings appSettings = Setup.appSettings();
 
         if (appSettings.isDesktopShowIndicator()) {
-            Tool.invisibleViews(100, (PagerIndicator) _$_findCachedViewById(R.id.desktopIndicator));
+            Tool.invisibleViews(100, (PagerIndicator) findViewById(R.id.desktopIndicator));
         }
     }
 
@@ -931,26 +837,20 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         AppSettings appSettings = Setup.appSettings();
 
         if (appSettings.isDesktopShowIndicator()) {
-            Tool.visibleViews(100, (PagerIndicator) _$_findCachedViewById(R.id.desktopIndicator));
+            Tool.visibleViews(100, (PagerIndicator) findViewById(R.id.desktopIndicator));
         }
     }
 
     public final void updateSearchClock() {
-        SearchBar searchBar = (SearchBar) _$_findCachedViewById(R.id.searchBar);
-        if (searchBar == null) {
-            Intrinsics.throwNpe();
-        }
+        SearchBar searchBar = (SearchBar) findViewById(R.id.searchBar);
         TextView textView = searchBar._searchClock;
 
         if (textView.getText() != null) {
             try {
-                searchBar = (SearchBar) _$_findCachedViewById(R.id.searchBar);
-                if (searchBar == null) {
-                    Intrinsics.throwNpe();
-                }
+                searchBar = (SearchBar) findViewById(R.id.searchBar);
                 searchBar.updateClock();
             } catch (Exception e) {
-                ((SearchBar) _$_findCachedViewById(R.id.searchBar))._searchClock.setText(R.string.bad_format);
+                ((SearchBar) findViewById(R.id.searchBar))._searchClock.setText(R.string.bad_format);
             }
         }
     }
@@ -962,29 +862,14 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         AppSettings appSettings = Setup.appSettings();
 
         if (!appSettings.getSearchBarEnable()) {
-            View _$_findCachedViewById = _$_findCachedViewById(R.id.leftDragHandle);
-            if (_$_findCachedViewById == null) {
-                Intrinsics.throwNpe();
-            }
-            LayoutParams layoutParams = _$_findCachedViewById.getLayoutParams();
-            if (layoutParams == null) {
-                throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
-            }
+            View findViewById = findViewById(R.id.leftDragHandle);
+            LayoutParams layoutParams = findViewById.getLayoutParams();
             ((MarginLayoutParams) layoutParams).topMargin = Desktop._topInset;
-            _$_findCachedViewById = _$_findCachedViewById(R.id.rightDragHandle);
-            if (_$_findCachedViewById == null) {
-                Intrinsics.throwNpe();
-            }
-            layoutParams = _$_findCachedViewById.getLayoutParams();
-            if (layoutParams == null) {
-                throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
-            }
+            findViewById = findViewById(R.id.rightDragHandle);
+            layoutParams = findViewById.getLayoutParams();
             Desktop desktop;
             ((MarginLayoutParams) layoutParams).topMargin = Desktop._topInset;
-            desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
-            if (desktop == null) {
-                Intrinsics.throwNpe();
-            }
+            desktop = (Desktop) findViewById(R.id.desktop);
             desktop.setPadding(0, Desktop._topInset, 0, 0);
         }
         appSettings = Setup.appSettings();
@@ -1011,13 +896,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     }
 
     private final void configureWidget(Intent data) {
-        if (data == null) {
-            Intrinsics.throwNpe();
-        }
         Bundle extras = data.getExtras();
-        if (extras == null) {
-            Intrinsics.throwNpe();
-        }
         int appWidgetId = extras.getInt("appWidgetId", -1);
         AppWidgetProviderInfo appWidgetInfo = Companion.getAppWidgetManager().getAppWidgetInfo(appWidgetId);
         if (appWidgetInfo.configure != null) {
@@ -1031,73 +910,31 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     }
 
     private final void createWidget(Intent data) {
-        if (data == null) {
-            Intrinsics.throwNpe();
-        }
         Bundle extras = data.getExtras();
-        if (extras == null) {
-            Intrinsics.throwNpe();
-        }
         int appWidgetId = extras.getInt("appWidgetId", -1);
         AppWidgetProviderInfo appWidgetInfo = Companion.getAppWidgetManager().getAppWidgetInfo(appWidgetId);
         Item item = Item.newWidgetItem(appWidgetId);
         int i = appWidgetInfo.minWidth - 1;
-        Desktop desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
-        if (desktop == null) {
-            Intrinsics.throwNpe();
-        }
-        List pages = desktop.getPages();
+        List pages = getDesktop().getPages();
         Home launcher = Companion.getLauncher();
-        if (launcher == null) {
-            Intrinsics.throwNpe();
-        }
-        Desktop desktop2 = (Desktop) launcher._$_findCachedViewById(R.id.desktop);
-        if (desktop2 == null) {
-            Intrinsics.throwNpe();
-        }
+        Desktop desktop2 = (Desktop) launcher.findViewById(R.id.desktop);
         Object obj = pages.get(desktop2.getCurrentItem());
 
         item._spanX = (i / ((CellContainer) obj).getCellWidth()) + 1;
         i = appWidgetInfo.minHeight - 1;
-        desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
-        if (desktop == null) {
-            Intrinsics.throwNpe();
-        }
-        pages = desktop.getPages();
+        pages = getDesktop().getPages();
         launcher = Companion.getLauncher();
-        if (launcher == null) {
-            Intrinsics.throwNpe();
-        }
-        desktop2 = (Desktop) launcher._$_findCachedViewById(R.id.desktop);
-        if (desktop2 == null) {
-            Intrinsics.throwNpe();
-        }
         obj = pages.get(desktop2.getCurrentItem());
 
         item._spanY = (i / ((CellContainer) obj).getCellHeight()) + 1;
-        Desktop desktop3 = (Desktop) _$_findCachedViewById(R.id.desktop);
-        if (desktop3 == null) {
-            Intrinsics.throwNpe();
-        }
+        Desktop desktop3 = (Desktop) findViewById(R.id.desktop);
         Point point = desktop3.getCurrentPage().findFreeSpace(item._spanX, item._spanY);
         if (point != null) {
             item._x = point.x;
             item._y = point.y;
             DataManager db = Companion.getDb();
-            desktop2 = (Desktop) _$_findCachedViewById(R.id.desktop);
-            if (desktop2 == null) {
-                Intrinsics.throwNpe();
-            }
             db.saveItem(item, desktop2.getCurrentItem(), ItemPosition.Desktop);
-            desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
-            if (desktop == null) {
-                Intrinsics.throwNpe();
-            }
-            desktop2 = (Desktop) _$_findCachedViewById(R.id.desktop);
-            if (desktop2 == null) {
-                Intrinsics.throwNpe();
-            }
-            desktop.addItemToPage(item, desktop2.getCurrentItem());
+            getDesktop().addItemToPage(item, getDesktop().getCurrentItem());
         } else {
             Tool.toast((Context) this, (int) R.string.toast_not_enough_space);
         }
@@ -1160,22 +997,22 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     }
 
     protected void onHandleLauncherPause() {
-        ((GroupPopupView) _$_findCachedViewById(R.id.groupPopup)).dismissPopup();
-        ((CalendarDropDownView) _$_findCachedViewById(R.id.calendarDropDownView)).animateHide();
-        ((DragNDropLayout) _$_findCachedViewById(R.id.dragNDropView)).hidePopupMenu();
-        if (!((SearchBar) _$_findCachedViewById(R.id.searchBar)).collapse()) {
-            if (((Desktop) _$_findCachedViewById(R.id.desktop)) != null) {
-                Desktop desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
+        ((GroupPopupView) findViewById(R.id.groupPopup)).dismissPopup();
+        ((CalendarDropDownView) findViewById(R.id.calendarDropDownView)).animateHide();
+        ((DragNDropLayout) findViewById(R.id.dragNDropView)).hidePopupMenu();
+        if (!((SearchBar) findViewById(R.id.searchBar)).collapse()) {
+            if (((Desktop) findViewById(R.id.desktop)) != null) {
+                Desktop desktop = (Desktop) findViewById(R.id.desktop);
 
                 if (desktop.getInEditMode()) {
-                    desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
+                    desktop = (Desktop) findViewById(R.id.desktop);
 
                     List pages = desktop.getPages();
-                    Desktop desktop2 = (Desktop) _$_findCachedViewById(R.id.desktop);
+                    Desktop desktop2 = (Desktop) findViewById(R.id.desktop);
 
                     ((CellContainer) pages.get(desktop2.getCurrentItem())).performClick();
                 } else {
-                    AppDrawerController appDrawerController = (AppDrawerController) _$_findCachedViewById(R.id.appDrawerController);
+                    AppDrawerController appDrawerController = (AppDrawerController) findViewById(R.id.appDrawerController);
 
                     View drawer = appDrawerController.getDrawer();
 
@@ -1190,7 +1027,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     }
 
     private final void setToHomePage() {
-        Desktop desktop = (Desktop) _$_findCachedViewById(R.id.desktop);
+        Desktop desktop = (Desktop) findViewById(R.id.desktop);
 
         AppSettings appSettings = Setup.appSettings();
 
@@ -1200,7 +1037,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     @JvmOverloads
     public static /* bridge */ /* synthetic */ void openAppDrawer$default(Home home, View view, int i, int i2, int i3, Object obj) {
         if ((i3 & 1) != 0) {
-            view = (Desktop) home._$_findCachedViewById(R.id.desktop);
+            view = (Desktop) home.findViewById(R.id.desktop);
         }
         if ((i3 & 2) != 0) {
             i = -1;
