@@ -3,7 +3,7 @@ package com.benny.openlauncher.interfaces;
 public interface DialogListener {
 
     interface OnAddAppDrawerItemListener {
-        void onAdd();
+        void onAdd(int type);
     }
 
     interface OnEditDialogListener {

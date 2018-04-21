@@ -7,6 +7,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.interfaces.DialogListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.viewutil.DialogHelper;
 
@@ -22,7 +23,7 @@ public class HpEventHandler implements Setup.EventHandler {
             @Override
             public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                 if (position == 0) {
-                    listener.onAdd();
+                    listener.onAdd(Definitions.ACTION_LAUNCHER);
                 }
             }
         });

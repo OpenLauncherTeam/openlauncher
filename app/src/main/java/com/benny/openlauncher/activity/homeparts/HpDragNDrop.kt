@@ -162,7 +162,7 @@ class HpDragNDrop {
             dragNDropView.showPopupMenuForItem(x, y, itemList, OnClickListener { v, adapter, item, position ->
                 when (item.identifier) {
                     uninstallItemIdentifier -> _home.onUninstallItem(dragNDropView.dragItem!!)
-                    editItemIdentifier -> _home.onEditItem(dragNDropView.dragItem!!)
+                    editItemIdentifier -> HpAppEditApplier(_home).onEditItem(dragNDropView.dragItem!!)
                     removeItemIdentifier -> _home.onRemoveItem(dragNDropView.dragItem!!)
                     infoItemIdentifier -> _home.onInfoItem(dragNDropView.dragItem!!)
                 }

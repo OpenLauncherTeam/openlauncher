@@ -442,24 +442,6 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
         }
     }
 
-    fun onEditItem(item: Item) {
-        Setup.eventHandler().showEditDialog(this, item, DialogListener.OnEditDialogListener { name ->
-            item.label = name
-            db.saveItem(item)
-
-            when (item.locationInLauncher) {
-                Item.LOCATION_DESKTOP -> {
-                    desktop.removeItem(desktop.currentPage.coordinateToChildView(Point(item.x, item.y))!!, false)
-                    desktop.addItemToCell(item, item.x, item.y)
-                }
-                Item.LOCATION_DOCK -> {
-                    dock.removeItem(dock.coordinateToChildView(Point(item.x, item.y))!!, false)
-                    dock.addItemToCell(item, item.x, item.y)
-                }
-            }
-        })
-    }
-
     private fun getActivityAnimationOpts(view: View?): Bundle? {
         if (view == null) return null
         var opts: ActivityOptions? = null
@@ -507,13 +489,7 @@ class Home : Activity(), Desktop.OnDesktopEditListener, DesktopOptionView.Deskto
     }
 
     override fun onPickDesktopAction() {
-        Setup.eventHandler().showPickAction(this, DialogListener.OnAddAppDrawerItemListener {
-            val pos = desktop!!.currentPage.findFreeSpace()
-            if (pos != null)
-                desktop!!.addItemToCell(Item.newActionItem(Definitions.ACTION_LAUNCHER), pos.x, pos.y)
-            else
-                Tool.toast(this@Home, R.string.toast_not_enough_space)
-        })
+        HpDesktopPickAction(this@Home).onPickDesktopAction()
     }
 
     override fun onPickWidget() {
