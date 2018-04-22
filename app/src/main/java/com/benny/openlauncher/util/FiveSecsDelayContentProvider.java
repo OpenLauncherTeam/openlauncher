@@ -56,7 +56,7 @@ public class FiveSecsDelayContentProvider extends ContentProvider {
              * This assumes you have a transparent activity that will just call finish() during its onCreate method
              * Activity in this case also provides a static method for starting itself
              */
-            AutoFinishActivity.Companion.start(getContext());
+            AutoFinishActivity.start(getContext());
             return 1;
         }
         return 0;

@@ -125,9 +125,6 @@ class SettingsActivity : ThemeActivity() {
                 } else if (settings.isKeyEqual(key, R.string.pref_key__cat_miscellaneous)) {
                     (activity as SettingsActivity).showFragment(SettingsFragmentMiscellaneous.TAG, true)
                     return true
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_about)) {
-                    startActivity(Intent(activity, AboutActivity::class.java))
-                    return true
                 }
             }
             return super.onPreferenceTreeClick(preference)
