@@ -15,6 +15,7 @@
     <string name="intro4_community">Um launcher feito pela a comunidade, para a comunidade.</string>
     <string name="intro4_features">Cheio de recursos</string>
     <string name="intro4_customizable">Personalizável</string>
+    <string name="custom">Personalizado</string>
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
@@ -77,6 +78,7 @@
     <string name="pref_summary__search_bar_force_browser">Sempre usar o navegador para pesquisas online.</string>
     <string name="pref_title__desktop_background_color">Plano de fundo</string>
     <string name="pref_title__desktop_folder_color">Pastas</string>
+    <string name="pref_title__desktop_folder_color_text">Texto da Pasta</string>
     <string name="pref_title__search_bar_show_hidden_apps">Exibir apps ocultos</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Inclui apps ocultos nos resultados de pesquisa.</string>
 
@@ -101,6 +103,9 @@
     <string name="pref_title__drawer_card_color">Cartão</string>
     <string name="pref_title__drawer_label_color">Rótulos</string>
     <string name="pref_title__drawer_fast_scroll_color">Rolagem rápida</string>
+    <string name="settings__pref_drawer_label_font_size">Tamanho do Texto</string>
+    <string name="pref_title__overall_animation_speed_modifier">Velocidade da Animação</string>
+    <string name="pref_summnary__overall_animation_speed_modifier">Alterar a velocidade geral das animações</string>
 
     <string name="pref_title__gesture_feedback">Feedback</string>
     <string name="pref_summary__gesture_feedback">Obtenha um retorno tátil ao pressionar e segurar um item na área de trabalho.</string>
@@ -137,6 +142,7 @@
 
     <string name="desktop_indicator_mode_normal">Normal</string>
     <string name="desktop_indicator_mode_arrow">Seta</string>
+    <string name="dots">Pontos</string>
 
     <!-- Item Labels -->
     <string name="label_default">Padrão</string>
@@ -171,4 +177,37 @@
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Escuro</string>
     <string name="debug">Depuração</string>
+    <string name="pref_title__date_bar">Barra de Data</string>
+    <string name="pref_title__date_bar_text_color">Cor do Texto</string>
+    <string name="pref_title__date_bar_date_format">Formato da Data</string>
+    <string name="pref_title__date_bar_date_format_custom_1">Formato Personalizado: Linha 1</string>
+    <string name="pref_title__date_bar_date_format_custom_2">Formato Personalizado: Linha 2</string>
+
+    <!-- Titles -->
+    <string name="settings">Configurações</string>
+
+    <!-- Drag Option View -->
+    <string name="edit">Editar</string>
+    <string name="info">Informação</string>
+    <string name="uninstall">Desinstalar</string>
+    <string name="remove">Remover</string>
+
+    <!-- Desktop Option View -->
+    <string name="home">Início</string>
+    <string name="action">Ação</string>
+    <string name="lock">Bloquear</string>
+    <string name="widget">Widget</string>
+
+    <!-- Toasts -->
+    <string name="toast_not_enough_space">Sem espaço suficiente.</string>
+    <string name="toast_app_uninstalled">Aplicativo desinstalado.</string>
+
+    <!-- Item Labels -->
+    <string name="folder">Sem nome</string>
+
+    <!-- Dialogs -->
+    <string name="cancel">Cancelar</string>
+    <string name="search_hint">Pesquisar...</string>
+    <string name="search_online">Pesquisar online...</string>
+    <string name="bad_format">Mal formatado</string>
 </resources>
