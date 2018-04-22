@@ -38,7 +38,7 @@ static String getUsedAndroidLanguages() {
 
  * Define element in Preferences-XML:
     <net.gsantner.opoc.preference.LanguagePreferenceCompat
-        android:_icon="@drawable/ic_language_black_24dp"
+        android:icon="@drawable/ic_language_black_24dp"
         android:key="@string/pref_key__language"
         android:summary="@string/pref_desc__language"
         android:title="@string/pref_title__language"/>
