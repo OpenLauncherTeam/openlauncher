@@ -90,13 +90,13 @@
     <string name="pref_title__drawer_card_color">Kortvisning</string>
     <string name="pref_title__drawer_label_color">Etikett</string>
 
-    <string name="pref_title__dock_swipe_up">Dra skuff raskt</string>
-    <string name="pref_summary__dock_swipe_up">Dra oppover på samlevinduet for å åpne programskuffen.</string>
-    <string name="pref_title__desktop_double_tap">Dobbelttrykk</string>
-    <string name="pref_title__desktop_swipe_up">Dra oppover</string>
-    <string name="pref_title__desktop_swipe_down">Dra nedover</string>
-    <string name="pref_title__desktop_pinch">Knip</string>
-    <string name="pref_title__desktop_unpinch">Utvid knipetak</string>
+    <string name="pref_title__gesture_quick_swipe">Dra skuff raskt</string>
+    <string name="pref_summary__gesture_quick_swipe">Dra oppover på samlevinduet for å åpne programskuffen.</string>
+    <string name="pref_title__gesture_double_tap">Dobbelttrykk</string>
+    <string name="pref_title__gesture_swipe_up">Dra oppover</string>
+    <string name="pref_title__gesture_swipe_down">Dra nedover</string>
+    <string name="pref_title__gesture_pinch">Knip</string>
+    <string name="pref_title__gesture_unpinch">Utvid knipetak</string>
 
     <string name="pref_summary__icon_size">Størrelse for alle programikoner.</string>
     <string name="pref_title__icon_pack">Ikonpakke</string>
@@ -111,10 +111,10 @@
 
     <!-- Preference Keys -->
 
-    <string name="pref_key__outer_cat_interfaces">Grensesnitt</string>
-    <string name="pref_key__outer_cat_inputs">Inndata</string>
-    <string name="pref_key__outer_cat_feels">Føles</string>
-    <string name="pref_key__outer_cat_others">Annet</string>
+    <string name="pref_title__interfaces">Grensesnitt</string>
+    <string name="pref_title__inputs">Inndata</string>
+    <string name="pref_title__feels">Føles</string>
+    <string name="pref_title__others">Annet</string>
 
     <!-- Item Labels -->
 
@@ -137,4 +137,48 @@
     <string name="dialog__backup_app_settings__error">Noe gikk galt.</string>
     <string name="columns">Kolonner</string>
     <string name="rows">Rader</string>
+
+
+    <!-- Titles -->
+    <string name="settings">Innstillinger</string>
+
+    <!-- Drag Option View -->
+
+    <string name="edit">Rediger</string>
+    <string name="info">Info</string>
+    <string name="uninstall">Avinstaller</string>
+    <string name="remove">Fjern</string>
+
+    <!-- Desktop Option View -->
+
+    <string name="home">Hjem</string>
+    <string name="action">Handling</string>
+    <string name="lock">Lås</string>
+    <string name="widget">Miniprogram</string>
+
+    <!-- Toasts -->
+
+    <string name="toast_not_enough_space">Ikke nok plass</string>
+    <string name="toast_app_uninstalled">Program avinstallert.</string>
+
+    <!-- Intro -->
+
+    <!-- Minibar -->
+
+    <!-- About -->
+
+    <!-- Settings -->
+
+    <!-- Preference Keys -->
+
+    <!-- Item Labels -->
+
+    <string name="folder">Uten navn</string>
+
+    <!-- Dialogs -->
+
+    <string name="cancel">Avbryt</string>
+    <string name="search_online">SØK PÅ NETT</string>
+
+
 </resources>

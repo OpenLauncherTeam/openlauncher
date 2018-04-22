@@ -11,5 +11,6 @@
         <item>صندوق التحكم بالصوت</item>
         <item>افتح درج التطبيقات</item>
         <item>شغل التطبيق</item>
+        <item>@string/pref_title__search_bar</item>
     </string-array>
 </resources>

@@ -107,7 +107,6 @@
     <string name="pref_title__overall_animation_speed_modifier">Velocidade da Animação</string>
     <string name="pref_summnary__overall_animation_speed_modifier">Alterar a velocidade geral das animações</string>
 
-
     <string name="pref_title__gesture_feedback">Feedback</string>
     <string name="pref_summary__gesture_feedback">Obtenha um retorno tátil ao pressionar e segurar um item na área de trabalho.</string>
     <string name="pref_title__gesture_quick_swipe">Deslizar para cima na dock</string>
@@ -211,5 +210,4 @@
     <string name="search_hint">Pesquisar...</string>
     <string name="search_online">Pesquisar online...</string>
     <string name="bad_format">Mal formatado</string>
-
 </resources>

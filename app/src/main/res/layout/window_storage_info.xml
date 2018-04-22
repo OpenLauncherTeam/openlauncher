@@ -35,7 +35,7 @@
                 android:layout_marginRight="8dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_memory_black_24dp"
-                android:tint="@color/dark_grey" />
+                android:tint="@color/darkGrey" />
 
             <TextView
                 android:id="@+id/available_ram"
@@ -59,7 +59,7 @@
                 android:layout_marginRight="8dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_storage_black_24dp"
-                android:tint="@color/dark_grey" />
+                android:tint="@color/darkGrey" />
 
             <TextView
                 android:id="@+id/available_storage"

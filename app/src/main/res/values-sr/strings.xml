@@ -1,0 +1,173 @@
+<resources>
+    <!-- This is the serbian latin variant. As it is only supported by Android 7 or above, latin is used for default serbian till there is a cyrillic translation available too -->
+    <!-- Toasts -->
+    <string name="toast_free_ram">Slobodna Memorija: %1$d MB. Sačuvano %2$d MB.</string>
+    <string name="toast_free_all_ram">Slobodna Memorija: %1$d MB. Vaš RAM je u najboljem stanju.</string>
+    <string name="toast_device_admin_required">Molimo vas omogzućite administraciju uređaja.</string>
+
+    <!-- Intro -->
+    <string name="intro_skip">Preskoči</string>
+    <string name="intro_finish">Počni.</string>
+    <string name="intro1_text">Ovo je OpenLauncher. Kompletno open source pokretač. Za tebe.</string>
+    <string name="intro2_text">Prevucite sa levog ruba vaše početnog ekrana da otvorite minibar. Tu možete pronaći podešavanja,
+        promijeniti sliku ekrana, i dosta drugih stvari.</string>
+    <string name="intro3_title">Podešavanja</string>
+    <string name="intro3_text">Možeš podesiti tvoj desktop, aplikacioni panel, i pristanište, Pokušaj!</string>
+
+    <!-- Minibar -->
+    <string name="minibar">Minibar</string>
+    <string name="minibar_0">Promijeni izgled minibar.</string>
+    <string name="minibar_1">Podesi blur na slici ekrana.</string>
+    <string name="minibar_2">zaključaj ekran odmah, zahtjeva administraciju uređaja.</string>
+    <string name="minibar_3">Oslobodi RAM zatvarajući druge servise.</string>
+    <string name="minibar_4">Perčica do podešavanja uređaja.</string>
+    <string name="minibar_5">Shortcut to OpenLauncher podešavanja.</string>
+    <string name="minibar_7">Prikaži zvučne klizače.</string>
+    <string name="minibar_8">Otvori aplikacioni panel.</string>
+
+    <!-- About -->
+    <string name="about_libs">Otvori Source Libraries</string>
+    <string name="about_rate">Oceni</string>
+    <string name="about_credit">Pomagači</string>
+    <string name="about_credit_text_all_contributors">Svi pomagači</string>
+
+    <!-- Settings -->
+
+    <string name="pref_title__desktop">Desktop</string>
+    <string name="pref_title__dock">Prisanište</string>
+    <string name="pref_title__app_drawer">Aplikacioni panel</string>
+    <string name="pref_title__gestures">Gestovi</string>
+    <string name="pref_title__icons">Ikonice</string>
+    <string name="pref_title__miscellaneous">Ostalo</string>
+    <string name="pref_title__about">O proizvodu</string>
+
+    <string name="pref_title__size">Veličina</string>
+    <string name="pref_title__style">Stil</string>
+    <string name="pref_title__appearance">Izgled</string>
+    <string name="pref_title__color">Boja</string>
+    <string name="pref_title__search_bar">Pretraga</string>
+    <string name="pref_title__interfaces">Interfejs</string>
+    <string name="pref_title__inputs">Inputi</string>
+    <string name="pref_title__feels">Osjećaji</string>
+    <string name="pref_title__others">Ostalo</string>
+
+    <string name="pref_title__desktop_style">Stil</string>
+    <string name="pref_title__desktop_indicator_style">Stil indikatora</string>
+    <string name="pref_summary__desktop_style">Izaberi između normalnog desktopa i prikazivanja svih instaliranih aplikacija.</string>
+    <string name="pref_summary__minibar">Podesi redosled i vidljivost stvari u minibaru.</string>
+    <string name="pref_title__search_bar_enable">Pretraga</string>
+    <string name="pref_summary__search_bar_enable">Prikaži pretragu iznad desktopa.</string>
+    <string name="pref_title__desktop_fullscreen">Ceo ekran</string>
+    <string name="pref_title__desktop_hide_grid">Sakrij Mrežu</string>
+    <string name="pref_summary__desktop_fullscreen">Omogući ceo ekran za desktop.</string>
+    <string name="pref_summary__desktop_hide_grid">Sakrij uceću mrežu.</string>
+    <string name="pref_title__desktop_show_position_indicator">Indikator pozicije</string>
+    <string name="pref_summary__desktop_show_position_indicator">Prikaži indikator stranice ispod desktopa.</string>
+    <string name="pref_title__desktop_show_label">Prikaži Oznake</string>
+    <string name="pref_summary__desktop_show_label">Prikaži oznake ispod njihovih ikonica.</string>
+    <string name="pref_title__desktop_rotate">Rotiraj</string>
+    <string name="pref_summary__desktop_rotate">Doyvoli rotaciju ekrana.</string>
+
+    <string name="pref_title__search_bar_base_uri">Pretraži URI</string>
+    <string name="pref_summary__search_bar_base_uri">Postavi URI korišćen za web pretragu.</string>
+    <string name="pref_dialog__search_bar_base_uri">Unesite URI koji će biti korišćen za web pretragu. Oznaka {query} može se koristiti kao
+      mesto za upit za pretragu, u koliko ne koristite korisničko ime, upit za pretragu će se dodati na kraju URI-a.</string>
+    <string name="pref_title__search_bar_force_browser">Prinudna pretraga browsera</string>
+    <string name="pref_summary__search_bar_force_browser">Uvijek koristi browser za online pretragu.</string>
+    <string name="pref_title__desktop_background_color">Pozadina</string>
+    <string name="pref_title__desktop_folder_color">Folder</string>
+    <string name="pref_title__search_bar_show_hidden_apps">Prikaži skrivene aplikacije</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Obuhvati skrivene aplikacije u rezultatima pretrage.</string>
+
+    <string name="pref_summary__dock_size">Podesi veličinu pristaništa.</string>
+    <string name="pref_title__dock_show_label">Prikaži Natpise</string>
+    <string name="pref_summary__dock_show_label">Prikaži natpise ispod njihovih ikonica.</string>
+    <string name="pref_title__dock_background_color">Pozadina</string>
+
+    <string name="pref_title__drawer_style">Stil</string>
+    <string name="pref_summary__drawer_style">Izaberi između obeleženog i vertikalnog aplikacionog panela.</string>
+    <string name="pref_title__hide_apps">Sakrij Aplikacije</string>
+    <string name="pref_summary__hide_apps">Sakrij označene aplikacije iz pokretača.</string>
+    <string name="pref_title__drawer_show_card_view">Kartni pregled</string>
+    <string name="pref_summary__drawer_show_card_view">Prikaži kartni pregled iznad panela pozadine.</string>
+    <string name="pref_title__drawer_remember_position">Zapamti zadnju stranicu</string>
+    <string name="pref_summary__drawer_remember_position">Prati trag sadašnje aplikacije na panelskoj stranici.</string>
+    <string name="pref_title__drawer_show_position_indicator">Indikator pozicije</string>
+    <string name="pref_summary__drawer_show_position_indicator">Prikaži indikator ili skrolbar u zavisnosti od vašeg stila.</string>
+    <string name="pref_title__drawer_show_label">Prikaži nalepnice</string>
+    <string name="pref_summary__drawer_show_label">Show item labels below their icons.</string>
+    <string name="pref_title__drawer_background_color">Pozadina</string>
+    <string name="pref_title__drawer_card_color">Kartni pregled</string>
+    <string name="pref_title__drawer_label_color">Nalepnica</string>
+    <string name="pref_title__drawer_fast_scroll_color">Brzi premotavanje na gore</string>
+
+    <string name="pref_title__gesture_feedback">Gestovane povratne informacije</string>
+    <string name="pref_summary__gesture_feedback">Dobij povratne informacije kada dugo držiš stvar na desktopu.</string>
+    <string name="pref_title__gesture_quick_swipe">Brzi prevlačeći panel</string>
+    <string name="pref_summary__gesture_quick_swipe">Prevucite nagore na pristaništu da otvorite aplikacioni panel.</string>
+    <string name="pref_title__gesture_double_tap">Dupli klik</string>
+    <string name="pref_title__gesture_swipe_up">Prevucite Gore</string>
+    <string name="pref_title__gesture_swipe_down">Prevucite Dole</string>
+    <string name="pref_title__gesture_pinch">Uredi</string>
+    <string name="pref_title__gesture_unpinch">Neuredi</string>
+
+    <string name="pref_summary__icon_size">Veličina svih ikonica.</string>
+    <string name="pref_title__icon_pack">Setovi ikonica</string>
+    <string name="pref_summary__icon_pack">Izaberi instalirani set ikonica.</string>
+
+    <string name="pref_summary__language">promijeni jezik aplikacije. Restartuj aplikaciju da bi promjene stupile na efekat</string>
+    <string name="pref_title__language">Jezik</string>
+    <string name="pref_title__backup">Rezerva</string>
+    <string name="pref_summary__backup">Rezerva i povraćaj vaših podešavanja.</string>
+    <string name="pref_title__clear_database">Izbriši bazu podataka</string>
+    <string name="pref_summary__clear_database">izbriši sve podatke iz pristaništa i desktopa da popravite probleme.</string>
+    <string name="pref_title__restart">Restartuj</string>
+    <string name="pref_summary__restart">Restartuj pokretač u slučaju da se čudno ponaša.</string>
+    <string name="pref_summary__theme">Postavi temu cijele aplikacije.</string>
+    <string name="pref_title__theme">Tema</string>
+    <string name="pref_title__primary_color">Primarna Boja</string>
+    <string name="pref_summary__primary_color">postavi primarnu boju aplikacije.</string>
+
+    <string name="vertical_scroll_drawer">Vertikalno</string>
+    <string name="horizontal_paged_drawer">Označeno</string>
+
+    <string name="desktop_mode_normal">Normalno</string>
+    <string name="desktop_mode_show_all_apps">Prikaži Sve Aplikacije</string>
+
+    <string name="desktop_indicator_mode_normal">Normalno</string>
+    <string name="desktop_indicator_mode_arrow">Strelica</string>
+
+    <!-- Item Labels -->
+    <string name="label_default">Podrazumevano</string>
+
+    <!-- Dialogs -->
+    <string name="request_dummy_text">Zdravo Svijete!</string>
+    <string name="request_please_wait">Pretraživanje instaliranih aplikacija. Molim vas sačekajte.</string>
+    <string name="request_toast">Nijedna aplikacija izabrana. Prikaži sve aplikacije na panelu?</string>
+    <string name="on">Uključeno</string>
+    <string name="desktop_action">Akcija na Desktopu</string>
+    <string name="select_app">Izaberi Aplikaciju</string>
+    <string name="off">Isključeno</string>
+    <string name="ok">OK</string>
+    <string name="version">Verzija</string>
+    <string name="wallpaper">Slika Ekrana</string>
+    <string name="wallpaper_pick">Izaberi Sliku Ekrana</string>
+    <string name="wallpaper_unable_to_blur">Nije u mogućnosti da bluruje</string>
+    <string name="dialog__icon_pack_title">Izaberi set ikonica</string>
+    <string name="dialog__icon_pack_info_toast">Nije u mogućnosti da uzme ikonicu bez READ_EXTERNAL_STORAGE dozvole.</string>
+    <string name="dialog__backup_app_settings__backup">Rezerna kopija</string>
+    <string name="dialog__backup_app_settings__restore">Povrati</string>
+    <string name="dialog__backup_app_settings__success">završeno.</string>
+    <string name="dialog__backup_app_settings__error">Nešto je krenulo kako ne treba.</string>
+    <string name="columns">Kolone</string>
+    <string name="rows">Redovi</string>
+    <string name="memory">Memorija</string>
+    <string name="storage">Skladište</string>
+    <string name="volume_level_ringtone">Ton zvona</string>
+    <string name="volume_level_notification">Notifikacije</string>
+    <string name="volume_level_system">Sistem</string>
+    <string name="volume_level_media">Medij</string>
+    <string name="theme_light">Svijetlo</string>
+    <string name="theme_dark">Tamno</string>
+    <string name="debug">Debug</string>
+</resources>

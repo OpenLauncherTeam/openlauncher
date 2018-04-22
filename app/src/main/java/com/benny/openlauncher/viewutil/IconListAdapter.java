@@ -14,18 +14,18 @@ import java.util.List;
 
 public class IconListAdapter extends BaseAdapter {
 
-    private Context c;
-    private List<String> labels;
-    private List<Integer> icons;
+    private Context _context;
+    private List<String> _labels;
+    private List<Integer> _icons;
 
-    public IconListAdapter(Context c, List labels, List icons) {
-        this.c = c;
-        this.labels = labels;
-        this.icons = icons;
+    public IconListAdapter(Context context, List labels, List icons) {
+        _context = context;
+        _labels = labels;
+        _icons = icons;
     }
 
     public int getCount() {
-        return labels.size();
+        return _labels.size();
     }
 
     public Object getItem(int arg0) {
@@ -41,17 +41,17 @@ public class IconListAdapter extends BaseAdapter {
         TextView tv;
         ImageView iv;
         if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(c);
+            LayoutInflater inflater = LayoutInflater.from(_context);
             view = inflater.inflate(R.layout.item_minibar, parent, false);
         } else {
             view = convertView;
         }
 
-        iv = (ImageView) view.findViewById(R.id.iv);
-        tv = (TextView) view.findViewById(R.id.tv);
+        iv = view.findViewById(R.id.iv);
+        tv = view.findViewById(R.id.tv);
 
         //tv.setText(labels.get(position));
-        iv.setImageResource(icons.get(position));
+        iv.setImageResource(_icons.get(position));
         return view;
     }
 }

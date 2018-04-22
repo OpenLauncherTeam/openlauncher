@@ -2,8 +2,10 @@
 <resources>
     <item name="item_note" type="id"/>
     <item name="item_header_search" type="id"/>
-
     <item type="id" name="id_adapter_app_item" />
-    <item type="id" name="id_adapter_drawer_app_item" />
 
+    <item type="id" name="app_widget_host" />
+    <item type="id" name="id_adapter_icon_label_item" />
+    <item type="id" name="id_adapter_drawer_app_item" />
+    <item type="id" name="id_adapter_popup_icon_label_item" />
 </resources>

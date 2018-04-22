@@ -1,612 +1,1076 @@
 package com.benny.openlauncher.activity;
 
-import android.Manifest;
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProviderInfo;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.ContentObserver;
-import android.database.Cursor;
-import android.graphics.Color;
+import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.graphics.Point;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build.VERSION;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.CallLog;
+import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.DragEvent;
-import android.view.Gravity;
+import android.support.v4.widget.DrawerLayout.DrawerListener;
+import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.benny.openlauncher.BuildConfig;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.core.interfaces.AppDeleteListener;
-import com.benny.openlauncher.core.interfaces.AppUpdateListener;
-import com.benny.openlauncher.core.viewutil.DesktopGestureListener;
-import com.benny.openlauncher.core.interfaces.DialogHandler;
-import com.benny.openlauncher.core.interfaces.FastItem;
-import com.benny.openlauncher.core.interfaces.SettingsManager;
-import com.benny.openlauncher.core.manager.Setup;
-import com.benny.openlauncher.core.util.DragAction;
-import com.benny.openlauncher.core.viewutil.DesktopCallBack;
-import com.benny.openlauncher.core.widget.Desktop;
-import com.benny.openlauncher.core.widget.GroupPopupView;
-import com.benny.openlauncher.model.DrawerAppItem;
-import com.benny.openlauncher.model.IconLabelItem;
+import com.benny.openlauncher.activity.homeparts.HpAppDrawer;
+import com.benny.openlauncher.activity.homeparts.HpDesktopPickAction;
+import com.benny.openlauncher.activity.homeparts.HpDragNDrop;
+import com.benny.openlauncher.activity.homeparts.HpInitSetup;
+import com.benny.openlauncher.activity.homeparts.HpSearchBar;
+import com.benny.openlauncher.interfaces.AppDeleteListener;
+import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.manager.Setup.DataManager;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.model.Item.Type;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.DatabaseHelper;
+import com.benny.openlauncher.util.AppUpdateReceiver;
+import com.benny.openlauncher.util.Definitions;
+import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.LauncherAction;
+import com.benny.openlauncher.util.LauncherAction.Action;
+import com.benny.openlauncher.util.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
-import com.benny.openlauncher.viewutil.GroupIconDrawable;
 import com.benny.openlauncher.viewutil.IconListAdapter;
-import com.benny.openlauncher.viewutil.ItemViewFactory;
-import com.benny.openlauncher.viewutil.QuickCenterItem;
+import com.benny.openlauncher.viewutil.WidgetHost;
+import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.AppItemView;
-import com.benny.openlauncher.widget.LauncherLoadingIcon;
-import com.benny.openlauncher.widget.MiniPopupView;
+import com.benny.openlauncher.widget.CalendarDropDownView;
+import com.benny.openlauncher.widget.CellContainer;
+import com.benny.openlauncher.widget.Desktop;
+import com.benny.openlauncher.widget.Desktop.OnDesktopEditListener;
+import com.benny.openlauncher.widget.DesktopOptionView;
+import com.benny.openlauncher.widget.DesktopOptionView.DesktopOptionViewListener;
+import com.benny.openlauncher.widget.Dock;
+import com.benny.openlauncher.widget.DragNDropLayout;
+import com.benny.openlauncher.widget.DragOptionView;
+import com.benny.openlauncher.widget.GroupPopupView;
+import com.benny.openlauncher.widget.PagerIndicator;
+import com.benny.openlauncher.widget.SearchBar;
+import com.benny.openlauncher.widget.SmoothViewPager;
 import com.benny.openlauncher.widget.SwipeListView;
-import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+
+import net.gsantner.opoc.util.ContextUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
+import kotlin.TypeCastException;
+import kotlin.jvm.JvmOverloads;
 
-public class Home extends com.benny.openlauncher.core.activity.Home implements DrawerLayout.DrawerListener
-{
-    private Unbinder unbinder;
 
-    @BindView(R.id.groupPopup)
-    public GroupPopupView groupPopup;
-    @BindView(R.id.minibar)
-    public SwipeListView minibar;
-    @BindView(R.id.minibar_background)
-    public FrameLayout minibarBackground;
-    @BindView(R.id.drawer_layout)
-    public DrawerLayout drawerLayout;
-    @BindView(R.id.miniPopup)
-    public MiniPopupView miniPopup;
-    @BindView(R.id.shortcutLayout)
-    public RelativeLayout shortcutLayout;
-    @BindView(R.id.loadingIcon)
-    public LauncherLoadingIcon loadingIcon;
-    @BindView(R.id.loadingSplash)
-    public FrameLayout loadingSplash;
-    private FastItemAdapter<QuickCenterItem.ContactItem> quickContactFA;
-    private CallLogObserver callLogObserver;
+public final class Home extends Activity implements OnDesktopEditListener, DesktopOptionViewListener, DrawerListener {
+    public static final Companion Companion = new Companion();
+    public static final int REQUEST_CREATE_APPWIDGET = 0x6475;
+    public static final int REQUEST_PERMISSION_STORAGE = 0x3648;
+    public static final int REQUEST_PICK_APPWIDGET = 0x2678;
+    @Nullable
+    private static Resources _resources;
+    private static final IntentFilter _appUpdateIntentFilter = new IntentFilter();
+    @Nullable
+    private static WidgetHost _appWidgetHost;
+    @NonNull
+    public static AppWidgetManager _appWidgetManager;
+    private static boolean _consumeNextResume;
+    @NonNull
+    public static DataManager _db;
+    public static float _itemTouchX;
+    public static float _itemTouchY;
+    @Nullable
+    public static Home _launcher;
+    private static final IntentFilter _shortcutIntentFilter = new IntentFilter();
+    private static final IntentFilter _timeChangesIntentFilter = new IntentFilter();
+    private HashMap deleteMefindViewCache;
+    private final AppUpdateReceiver _appUpdateReceiver = new AppUpdateReceiver();
+    private int cx;
+    private int cy;
+    private int rad;
+    private final ShortcutReceiver _shortcutReceiver = new ShortcutReceiver();
+    private BroadcastReceiver _timeChangedReceiver;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public static final class Companion {
+        private Companion() {
+        }
 
-        CustomActivityOnCrash.setShowErrorDetails(true);
-        CustomActivityOnCrash.setEnableAppRestart(false);
-        CustomActivityOnCrash.setDefaultErrorActivityDrawable(R.drawable.rip);
-        CustomActivityOnCrash.install(this);
+        @Nullable
+        public final Home getLauncher() {
+            return _launcher;
+        }
+
+        public final void setLauncher(@Nullable Home v) {
+            _launcher = v;
+        }
+
+        @Nullable
+        public final Resources get_resources() {
+            return _resources;
+        }
+
+        public final void set_resources(@Nullable Resources v) {
+            _resources = v;
+        }
+
+        @NonNull
+        public final DataManager getDb() {
+            return _db;
+        }
+
+        public final void setDb(@NonNull DataManager v) {
+            _db = v;
+        }
+
+        @Nullable
+        public final WidgetHost getAppWidgetHost() {
+            return _appWidgetHost;
+        }
+
+        public final void setAppWidgetHost(@Nullable WidgetHost v) {
+            _appWidgetHost = v;
+        }
+
+        @NonNull
+        public final AppWidgetManager getAppWidgetManager() {
+            return _appWidgetManager;
+        }
+
+        public final void setAppWidgetManager(@NonNull AppWidgetManager v) {
+
+            _appWidgetManager = v;
+        }
+
+        public final float getItemTouchX() {
+            return _itemTouchX;
+        }
+
+        public final void setItemTouchX(float v) {
+            _itemTouchX = v;
+        }
+
+        public final float getItemTouchY() {
+            return _itemTouchY;
+        }
+
+        public final void setItemTouchY(float v) {
+            _itemTouchY = v;
+        }
+
+        public final boolean getConsumeNextResume() {
+            return _consumeNextResume;
+        }
+
+        public final void setConsumeNextResume(boolean v) {
+            _consumeNextResume = v;
+        }
+
+        private final IntentFilter getTimeChangesIntentFilter() {
+            return _timeChangesIntentFilter;
+        }
+
+        private final IntentFilter getAppUpdateIntentFilter() {
+            return _appUpdateIntentFilter;
+        }
+
+        private final IntentFilter getShortcutIntentFilter() {
+            return _shortcutIntentFilter;
+        }
     }
 
-    @Override
-    protected void bindViews()
-    {
-        super.bindViews();
-        unbinder = ButterKnife.bind(this);
+    @JvmOverloads
+    public final void openAppDrawer() {
+        openAppDrawer$default(this, null, 0, 0, 7, null);
+    }
 
-        loadingSplash.animate().alpha(0).withEndAction(new Runnable() {
+    @JvmOverloads
+    public final void openAppDrawer(@Nullable View view) {
+        openAppDrawer$default(this, view, 0, 0, 6, null);
+    }
+
+    @JvmOverloads
+    public final void updateDock(boolean z) {
+        updateDock$default(this, z, 0, 2, null);
+    }
+
+    static {
+        Companion.getTimeChangesIntentFilter().addAction("android.intent.action.TIME_TICK");
+        Companion.getTimeChangesIntentFilter().addAction("android.intent.action.TIMEZONE_CHANGED");
+        Companion.getTimeChangesIntentFilter().addAction("android.intent.action.TIME_SET");
+        Companion.getAppUpdateIntentFilter().addAction("android.intent.action.PACKAGE_ADDED");
+        Companion.getAppUpdateIntentFilter().addAction("android.intent.action.PACKAGE_REMOVED");
+        Companion.getAppUpdateIntentFilter().addAction("android.intent.action.PACKAGE_CHANGED");
+        Companion.getAppUpdateIntentFilter().addDataScheme("package");
+        Companion.getShortcutIntentFilter().addAction("com.android.launcher.action.INSTALL_SHORTCUT");
+    }
+
+    @NonNull
+    public final DrawerLayout getDrawerLayout() {
+        return findViewById(R.id.drawer_layout);
+    }
+
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Companion.setLauncher(this);
+        Companion.set_resources(getResources());
+        ContextUtils contextUtils = new ContextUtils(getApplicationContext());
+        AppSettings appSettings = AppSettings.get();
+
+        contextUtils.setAppLanguage(appSettings.getLanguage());
+        super.onCreate(savedInstanceState);
+        if (!Setup.wasInitialised()) {
+            Setup.init(new HpInitSetup(this));
+        }
+        AppSettings appSettings2 = Setup.appSettings();
+
+        if (appSettings2.isSearchBarTimeEnabled()) {
+            _timeChangedReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    if (intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
+                        updateSearchClock();
+                    }
+                }
+            };
+        }
+        Companion.setLauncher(this);
+        Companion companion = Companion;
+        DataManager dataManager = Setup.dataManager();
+
+        companion.setDb(dataManager);
+        setContentView(getLayoutInflater().inflate(R.layout.activity_home, null));
+        if (VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+
+            View decorView = window.getDecorView();
+
+            decorView.setSystemUiVisibility(1536);
+        }
+        init();
+    }
+
+    public final void onStartApp(@NonNull Context context, @NonNull Intent intent, @Nullable View view) {
+        ComponentName component = intent.getComponent();
+
+        if (BuildConfig.APPLICATION_ID.equals(component.getPackageName())) {
+            LauncherAction.RunAction(Action.LauncherSettings, context);
+            Companion.setConsumeNextResume(true);
+        } else {
+            try {
+                context.startActivity(intent, getActivityAnimationOpts(view));
+                Companion.setConsumeNextResume(true);
+            } catch (Exception e) {
+                Tool.toast(context, (int) R.string.toast_app_uninstalled);
+            }
+        }
+    }
+
+    public final void onStartApp(@NonNull Context context, @NonNull App app, @Nullable View view) {
+
+
+        if (BuildConfig.APPLICATION_ID.equals(app._packageName)) {
+            LauncherAction.RunAction(Action.LauncherSettings, context);
+            Companion.setConsumeNextResume(true);
+        } else {
+            try {
+                Intent intent = new Intent("android.intent.action.MAIN");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setClassName(app._packageName, app._className);
+                context.startActivity(intent, getActivityAnimationOpts(view));
+                Companion.setConsumeNextResume(true);
+            } catch (Exception e) {
+                Tool.toast(context, (int) R.string.toast_app_uninstalled);
+            }
+        }
+    }
+
+    protected void initAppManager() {
+        Setup.appLoader().addUpdateListener(new AppManager.AppUpdatedListener() {
             @Override
-            public void run() {
-                myScreen.removeView(loadingSplash);
+            public boolean onAppUpdated(List<App> it) {
+                if ((getDesktop() == null)) {
+                    return false;
+                }
+                AppSettings appSettings = Setup.appSettings();
+
+                if (appSettings.getDesktopStyle() != 1) {
+                    appSettings = Setup.appSettings();
+
+                    if (appSettings.isAppFirstLaunch()) {
+                        appSettings = Setup.appSettings();
+
+                        appSettings.setAppFirstLaunch(false);
+                        Item appDrawerBtnItem = Item.newActionItem(8);
+                        appDrawerBtnItem._x = 2;
+                        Companion.getDb().saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
+                    }
+                }
+                appSettings = Setup.appSettings();
+
+                if (appSettings.getDesktopStyle() == 0) {
+                    getDesktop().initDesktopNormal(Home.this);
+                } else {
+                    appSettings = Setup.appSettings();
+
+                    if (appSettings.getDesktopStyle() == 1) {
+                        getDesktop().initDesktopShowAll(Home.this, Home.this);
+                    }
+                }
+                getDock().initDockItem(Home.this);
+                return true;
+            }
+        });
+        Setup.appLoader().addDeleteListener(new AppDeleteListener() {
+            @Override
+            public boolean onAppDeleted(List<App> apps) {
+                AppSettings appSettings = Setup.appSettings();
+
+                if (appSettings.getDesktopStyle() == 0) {
+                    ((Desktop) findViewById(R.id.desktop)).initDesktopNormal(Home.this);
+                } else {
+                    appSettings = Setup.appSettings();
+
+                    if (appSettings.getDesktopStyle() == 1) {
+                        ((Desktop) findViewById(R.id.desktop)).initDesktopShowAll(Home.this, Home.this);
+                    }
+                }
+                ((Dock) findViewById(R.id.dock)).initDockItem(Home.this);
+                setToHomePage();
+                return false;
+            }
+        });
+        AppManager.getInstance(this).init();
+    }
+
+    protected void initViews() {
+        new HpSearchBar(this, (SearchBar) findViewById(R.id.searchBar), (CalendarDropDownView) findViewById(R.id.calendarDropDownView)).initSearchBar();
+        initDock();
+        ((AppDrawerController) findViewById(R.id.appDrawerController)).init();
+        ((AppDrawerController) findViewById(R.id.appDrawerController)).setHome(this);
+        ((DragOptionView) findViewById(R.id.dragOptionPanel)).setHome(this);
+        ((Desktop) findViewById(R.id.desktop)).init();
+        Desktop desktop = (Desktop) findViewById(R.id.desktop);
+
+        desktop.setDesktopEditListener(this);
+        ((DesktopOptionView) findViewById(R.id.desktopEditOptionPanel)).setDesktopOptionViewListener(this);
+        DesktopOptionView desktopOptionView = (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel);
+        AppSettings appSettings = Setup.appSettings();
+
+        desktopOptionView.updateLockIcon(appSettings.isDesktopLock());
+        ((Desktop) findViewById(R.id.desktop)).addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            public void onPageSelected(int position) {
+                DesktopOptionView desktopOptionView = (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel);
+                AppSettings appSettings = Setup.appSettings();
+
+                desktopOptionView.updateHomeIcon(appSettings.getDesktopPageCurrent() == position);
+            }
+
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+        desktop = (Desktop) findViewById(R.id.desktop);
+        desktop.setPageIndicator((PagerIndicator) findViewById(R.id.desktopIndicator));
+        ((DragOptionView) findViewById(R.id.dragOptionPanel)).setAutoHideView((SearchBar) findViewById(R.id.searchBar));
+        new HpAppDrawer(this, (PagerIndicator) findViewById(R.id.appDrawerIndicator), (DragOptionView) findViewById(R.id.dragOptionPanel)).initAppDrawer((AppDrawerController) findViewById(R.id.appDrawerController));
+        initMinibar();
+    }
+
+    public final void initSettings() {
+        updateHomeLayout();
+        AppSettings appSettings = Setup.appSettings();
+
+        if (appSettings.isDesktopFullscreen()) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        }
+        Desktop desktop = findViewById(R.id.desktop);
+        AppSettings appSettings2 = Setup.appSettings();
+
+        desktop.setBackgroundColor(appSettings2.getDesktopBackgroundColor());
+        Dock dock = findViewById(R.id.dock);
+        appSettings2 = Setup.appSettings();
+
+        dock.setBackgroundColor(appSettings2.getDockColor());
+        getDrawerLayout().setDrawerLockMode(AppSettings.get().getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+    }
+
+
+    public void onRemovePage() {
+        if (getDesktop().isCurrentPageEmpty()) {
+
+            getDesktop().removeCurrentPage();
+            return;
+        }
+        DialogHelper.alertDialog(this, getString(R.string.remove), "This page is not empty. Those item will also be removed.", new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                getDesktop().removeCurrentPage();
             }
         });
     }
 
-    @Override
-    protected void unbindViews()
-    {
-        super.unbindViews();
-        if (unbinder != null)
-            unbinder.unbind();
-    }
-
-    @Override
-    protected void initAppManager() {
-        super.initAppManager();
-        AppManager.getInstance(this).init();
-    }
-
-    @Override
-    protected void initViews() {
-        super.initViews();
-
-        initMinibar();
-        initQuickCenter();
-    }
-
-    @Override
-    protected void initSettings() {
-        super.initSettings();
-        drawerLayout.setDrawerLockMode(AppSettings.get().getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-    }
-
-    public void initMinibar() {
-        final ArrayList<String> labels = new ArrayList<>();
+    public final void initMinibar() {
+        final ArrayList<String> labels = new ArrayList<String>();
         final ArrayList<Integer> icons = new ArrayList<>();
 
         for (String act : AppSettings.get().getMinibarArrangement()) {
             if (act.length() > 1 && act.charAt(0) == '0') {
                 LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
                 if (item != null) {
-                    labels.add(item.label.toString());
-                    icons.add(item.icon);
+                    labels.add(item._label.toString());
+                    icons.add(item._icon);
                 }
             }
         }
 
+        SwipeListView minibar = findViewById(R.id.minibar);
+
         minibar.setAdapter(new IconListAdapter(this, labels, icons));
-        minibar.setOnSwipeRight(new SwipeListView.OnSwipeRight() {
-            @Override
-            public void onSwipe(int pos, float x, float y) {
-                miniPopup.showActionWindow(LauncherAction.Action.valueOf(labels.get(pos)), x, y + (shortcutLayout.getHeight() - minibar.getHeight()) / 2);
-            }
-        });
         minibar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
                 if (action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.EditMinBar) {
-                    consumeNextResume = true;
+                    _consumeNextResume = true;
                 }
                 LauncherAction.RunAction(action, Home.this);
                 if (action != LauncherAction.Action.DeviceSettings && action != LauncherAction.Action.LauncherSettings && action != LauncherAction.Action.EditMinBar) {
-                    drawerLayout.closeDrawers();
+                    getDrawerLayout().closeDrawers();
                 }
             }
         });
-        minibar.setBackgroundColor(AppSettings.get().getMinibarBackgroundColor());
-        minibarBackground.setBackgroundColor(AppSettings.get().getMinibarBackgroundColor());
+        // frame layout spans the entire side while the minibar container has gaps at the top and bottom
+        ((FrameLayout) minibar.getParent()).setBackgroundColor(AppSettings.get().getMinibarBackgroundColor());
     }
 
-    private void initQuickCenter() {
-        RecyclerView quickContact = (RecyclerView) findViewById(R.id.quickContactRv);
-        quickContact.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        quickContactFA = new FastItemAdapter<>();
-        quickContact.setAdapter(quickContactFA);
+    public void onBackPressed() {
+        handleLauncherPause(false);
+        ((DrawerLayout) findViewById(R.id.drawer_layout)).closeDrawers();
+    }
 
-        if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED) {
-            callLogObserver = new CallLogObserver(new Handler());
-            getApplicationContext().getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI, true, callLogObserver);
+    public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 
-            // get the call history for the adapter
-            callLogObserver.onChange(true);
+    }
+
+    public void onDrawerOpened(@NonNull View drawerView) {
+
+    }
+
+    public void onDrawerClosed(@NonNull View drawerView) {
+
+    }
+
+    public void onDrawerStateChanged(int newState) {
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AppSettings appSettings = Setup.appSettings();
+
+        boolean rotate = false;
+        if (appSettings.getAppRestartRequired()) {
+            appSettings = Setup.appSettings();
+
+            appSettings.setAppRestartRequired(false);
+            PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556, new Intent(this, Home.class), PendingIntent.FLAG_CANCEL_CURRENT);
+            AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            if (mgr == null) {
+                throw new TypeCastException("null cannot be cast to non-null _type android.app.AlarmManager");
+            }
+            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + ((long) 100), restartIntentP);
+            System.exit(0);
+            return;
+        }
+        Companion.setLauncher(this);
+        WidgetHost appWidgetHost = Companion.getAppWidgetHost();
+        if (appWidgetHost != null) {
+            appWidgetHost.startListening();
+        }
+        Intent intent = getIntent();
+
+        handleLauncherPause(Intent.ACTION_MAIN.equals(intent.getAction()));
+        boolean user = AppSettings.get().getBool(R.string.pref_key__desktop_rotate, false);
+        boolean system = false;
+        try {
+            system = Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION) == 1;
+        } catch (SettingNotFoundException e) {
+            Log.d(Home.class.getSimpleName(), "Unable to read settings", e);
+        }
+        boolean rotate2 = false;
+        if (getResources().getBoolean(R.bool.isTablet)) {
+            rotate = system;
+        } else if (user && system) {
+            rotate = true;
+        }
+        if (rotate) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         } else {
-            ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.READ_CALL_LOG}, REQUEST_PERMISSION_READ_CALL_LOG);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        // check if reading the call log is permitted
-        if (requestCode == REQUEST_PERMISSION_READ_CALL_LOG && callLogObserver != null) {
-            callLogObserver = new CallLogObserver(new Handler());
-            getApplicationContext().getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI, true, callLogObserver);
+    @NonNull
+    public final Desktop getDesktop() {
+        Desktop desktop = (Desktop) findViewById(R.id.desktop);
 
-            // get the call history for the adapter
-            callLogObserver.onChange(true);
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        return desktop;
     }
 
-    @Override
+    @NonNull
+    public final Dock getDock() {
+        Dock dock = (Dock) findViewById(R.id.dock);
+
+        return dock;
+    }
+
+    @NonNull
+    public final AppDrawerController getAppDrawerController() {
+        AppDrawerController appDrawerController = (AppDrawerController) findViewById(R.id.appDrawerController);
+
+        return appDrawerController;
+    }
+
+    @NonNull
+    public final GroupPopupView getGroupPopup() {
+        GroupPopupView groupPopupView = (GroupPopupView) findViewById(R.id.groupPopup);
+
+        return groupPopupView;
+    }
+
+    @NonNull
+    public final SearchBar getSearchBar() {
+        SearchBar searchBar = (SearchBar) findViewById(R.id.searchBar);
+
+        return searchBar;
+    }
+
+    @NonNull
+    public final View getBackground() {
+        View findViewById = findViewById(R.id.background);
+
+        return findViewById;
+    }
+
+    @NonNull
+    public final PagerIndicator getDesktopIndicator() {
+        PagerIndicator pagerIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
+
+        return pagerIndicator;
+    }
+
+    @NonNull
+    public final DragNDropLayout getDragNDropView() {
+        DragNDropLayout dragNDropLayout = (DragNDropLayout) findViewById(R.id.dragNDropView);
+
+        return dragNDropLayout;
+    }
+
+    private final void init() {
+        Companion.setAppWidgetHost(new WidgetHost(getApplicationContext(), R.id.app_widget_host));
+        Companion companion = Companion;
+        AppWidgetManager instance = AppWidgetManager.getInstance(this);
+
+        companion.setAppWidgetManager(instance);
+        WidgetHost appWidgetHost = Companion.getAppWidgetHost();
+        appWidgetHost.startListening();
+        initViews();
+        HpDragNDrop hpDragNDrop = new HpDragNDrop();
+        View findViewById = findViewById(R.id.leftDragHandle);
+
+        View findViewById2 = findViewById(R.id.rightDragHandle);
+
+        DragNDropLayout dragNDropLayout = findViewById(R.id.dragNDropView);
+
+        hpDragNDrop.initDragNDrop(this, findViewById, findViewById2, dragNDropLayout);
+        registerBroadcastReceiver();
+        initAppManager();
+        initSettings();
+        System.runFinalization();
+        System.gc();
+    }
+
+    public final void onUninstallItem(@NonNull Item item) {
+
+        Companion.setConsumeNextResume(true);
+        Setup.eventHandler().showDeletePackageDialog(this, item);
+    }
+
+    public final void onRemoveItem(@NonNull Item item) {
+        Desktop desktop = getDesktop();
+        View coordinateToChildView;
+        switch (item._locationInLauncher) {
+            case 0:
+                coordinateToChildView = desktop.getCurrentPage().coordinateToChildView(new Point(item._x, item._y));
+                desktop.removeItem(coordinateToChildView, true);
+                break;
+            case 1:
+                Dock dock = getDock();
+                coordinateToChildView = dock.coordinateToChildView(new Point(item._x, item._y));
+                dock.removeItem(coordinateToChildView, true);
+                break;
+            default:
+                break;
+        }
+        Companion.getDb().deleteItem(item, true);
+    }
+
+    public final void onInfoItem(@NonNull Item item) {
+
+        if (item._type == Type.APP) {
+            try {
+                String str = "android.settings.APPLICATION_DETAILS_SETTINGS";
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("package:");
+                Intent intent = item._intent;
+                ComponentName component = intent.getComponent();
+                stringBuilder.append(component.getPackageName());
+                startActivity(new Intent(str, Uri.parse(stringBuilder.toString())));
+            } catch (Exception e) {
+                Tool.toast((Context) this, (int) R.string.toast_app_uninstalled);
+            }
+        }
+    }
+
+    private final Bundle getActivityAnimationOpts(View view) {
+        Bundle bundle = null;
+        if (view == null) {
+            return null;
+        }
+        ActivityOptions opts = null;
+        if (VERSION.SDK_INT >= 23) {
+            int left = 0;
+            int top = 0;
+            int width = view.getMeasuredWidth();
+            int height = view.getMeasuredHeight();
+            if (view instanceof AppItemView) {
+                width = (int) ((AppItemView) view).getIconSize();
+                left = (int) ((AppItemView) view).getDrawIconLeft();
+                top = (int) ((AppItemView) view).getDrawIconTop();
+            }
+            opts = ActivityOptions.makeClipRevealAnimation(view, left, top, width, height);
+        } else if (VERSION.SDK_INT < 21) {
+            opts = ActivityOptions.makeScaleUpAnimation(view, 0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+        }
+        if (opts != null) {
+            bundle = opts.toBundle();
+        }
+        return bundle;
+    }
+
+    public void onDesktopEdit() {
+        Tool.visibleViews(100, 20, (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel));
+        hideDesktopIndicator();
+        updateDock$default(this, false, 0, 2, null);
+        updateSearchBar(false);
+    }
+
+    public void onFinishDesktopEdit() {
+        Tool.invisibleViews(100, 20, (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel));
+        ((PagerIndicator) findViewById(R.id.desktopIndicator)).hideDelay();
+        showDesktopIndicator();
+        updateDock$default(this, true, 0, 2, null);
+        updateSearchBar(true);
+    }
+
+    public void onSetPageAsHome() {
+        AppSettings appSettings = Setup.appSettings();
+
+        Desktop desktop = findViewById(R.id.desktop);
+        appSettings.setDesktopPageCurrent(desktop.getCurrentItem());
+    }
+
+    public void onLaunchSettings() {
+        Companion.setConsumeNextResume(true);
+        Setup.eventHandler().showLauncherSettings(this);
+    }
+
+    public void onPickDesktopAction() {
+        new HpDesktopPickAction(this).onPickDesktopAction();
+    }
+
+    public void onPickWidget() {
+        pickWidget();
+    }
+
+    private final void initDock() {
+        int iconSize = Setup.appSettings().getDockIconSize();
+        Dock dock = findViewById(R.id.dock);
+        dock.setHome(this);
+        dock.init();
+        AppSettings appSettings = Setup.appSettings();
+
+        if (appSettings.isDockShowLabel()) {
+            dock.getLayoutParams().height = Tool.dp2px(((16 + iconSize) + 14) + 10, this) + dock.getBottomInset();
+        } else {
+            dock.getLayoutParams().height = Tool.dp2px((16 + iconSize) + 10, this) + dock.getBottomInset();
+        }
+    }
+
+    public final void dimBackground() {
+        Tool.visibleViews(findViewById(R.id.background));
+    }
+
+    public final void unDimBackground() {
+        Tool.invisibleViews(findViewById(R.id.background));
+    }
+
+    public final void clearRoomForPopUp() {
+        Tool.invisibleViews((Desktop) findViewById(R.id.desktop));
+        hideDesktopIndicator();
+        updateDock$default(this, false, 0, 2, null);
+    }
+
+    public final void unClearRoomForPopUp() {
+        Tool.visibleViews((Desktop) findViewById(R.id.desktop));
+        showDesktopIndicator();
+        updateDock$default(this, true, 0, 2, null);
+    }
+
+    @JvmOverloads
+    public static /* bridge */ /* synthetic */ void updateDock$default(Home home, boolean z, long j, int i, Object obj) {
+        if ((i & 2) != 0) {
+            j = 0;
+        }
+        home.updateDock(z, j);
+    }
+
+    @JvmOverloads
+    public final void updateDock(boolean show, long delay) {
+        AppSettings appSettings = Setup.appSettings();
+
+        Desktop desktop;
+        LayoutParams layoutParams;
+        PagerIndicator pagerIndicator;
+        if (appSettings.getDockEnable() && show) {
+            Tool.visibleViews(100, delay, (Dock) findViewById(R.id.dock));
+            desktop = findViewById(R.id.desktop);
+            layoutParams = desktop.getLayoutParams();
+            ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, this);
+            pagerIndicator = findViewById(R.id.desktopIndicator);
+            layoutParams = pagerIndicator.getLayoutParams();
+            ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, this);
+        } else {
+            appSettings = Setup.appSettings();
+
+            if (appSettings.getDockEnable()) {
+                Tool.invisibleViews(100, (Dock) findViewById(R.id.dock));
+            } else {
+                Tool.goneViews(100, (Dock) findViewById(R.id.dock));
+                pagerIndicator = findViewById(R.id.desktopIndicator);
+                layoutParams = pagerIndicator.getLayoutParams();
+                if (layoutParams == null) {
+                    throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
+                }
+                ((MarginLayoutParams) layoutParams).bottomMargin = Desktop._bottomInset + Tool.dp2px(4, (Context) this);
+                desktop = (Desktop) findViewById(R.id.desktop);
+                layoutParams = desktop.getLayoutParams();
+                if (layoutParams == null) {
+                    throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
+                }
+                ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, (Context) this);
+            }
+        }
+    }
+
+    public final void updateSearchBar(boolean show) {
+        AppSettings appSettings = Setup.appSettings();
+
+        if (appSettings.getSearchBarEnable() && show) {
+            Tool.visibleViews(100, (SearchBar) findViewById(R.id.searchBar));
+        } else {
+            appSettings = Setup.appSettings();
+
+            if (appSettings.getSearchBarEnable()) {
+                Tool.invisibleViews(100, (SearchBar) findViewById(R.id.searchBar));
+            } else {
+                Tool.goneViews((SearchBar) findViewById(R.id.searchBar));
+            }
+        }
+    }
+
+    public final void updateDesktopIndicatorVisibility() {
+        AppSettings appSettings = Setup.appSettings();
+
+        if (appSettings.isDesktopShowIndicator()) {
+            Tool.visibleViews(100, (PagerIndicator) findViewById(R.id.desktopIndicator));
+            return;
+        }
+        Tool.goneViews(100, (PagerIndicator) findViewById(R.id.desktopIndicator));
+    }
+
+    public final void hideDesktopIndicator() {
+        AppSettings appSettings = Setup.appSettings();
+
+        if (appSettings.isDesktopShowIndicator()) {
+            Tool.invisibleViews(100, (PagerIndicator) findViewById(R.id.desktopIndicator));
+        }
+    }
+
+    public final void showDesktopIndicator() {
+        AppSettings appSettings = Setup.appSettings();
+
+        if (appSettings.isDesktopShowIndicator()) {
+            Tool.visibleViews(100, (PagerIndicator) findViewById(R.id.desktopIndicator));
+        }
+    }
+
+    public final void updateSearchClock() {
+        SearchBar searchBar = (SearchBar) findViewById(R.id.searchBar);
+        TextView textView = searchBar._searchClock;
+
+        if (textView.getText() != null) {
+            try {
+                searchBar = (SearchBar) findViewById(R.id.searchBar);
+                searchBar.updateClock();
+            } catch (Exception e) {
+                ((SearchBar) findViewById(R.id.searchBar))._searchClock.setText(R.string.bad_format);
+            }
+        }
+    }
+
+    public final void updateHomeLayout() {
+        updateSearchBar(true);
+        updateDock$default(this, true, 0, 2, null);
+        updateDesktopIndicatorVisibility();
+        AppSettings appSettings = Setup.appSettings();
+
+        if (!appSettings.getSearchBarEnable()) {
+            View findViewById = findViewById(R.id.leftDragHandle);
+            LayoutParams layoutParams = findViewById.getLayoutParams();
+            ((MarginLayoutParams) layoutParams).topMargin = Desktop._topInset;
+            findViewById = findViewById(R.id.rightDragHandle);
+            layoutParams = findViewById.getLayoutParams();
+            Desktop desktop;
+            ((MarginLayoutParams) layoutParams).topMargin = Desktop._topInset;
+            desktop = (Desktop) findViewById(R.id.desktop);
+            desktop.setPadding(0, Desktop._topInset, 0, 0);
+        }
+        appSettings = Setup.appSettings();
+
+        if (!appSettings.getDockEnable()) {
+            getDesktop().setPadding(0, 0, 0, Desktop._bottomInset);
+        }
+    }
+
+    private final void registerBroadcastReceiver() {
+        registerReceiver(_appUpdateReceiver, Companion.getAppUpdateIntentFilter());
+        if (_timeChangedReceiver != null) {
+            registerReceiver(_timeChangedReceiver, Companion.getTimeChangesIntentFilter());
+        }
+        registerReceiver(_shortcutReceiver, Companion.getShortcutIntentFilter());
+    }
+
+    private final void pickWidget() {
+        Companion.setConsumeNextResume(true);
+        int appWidgetId = Companion.getAppWidgetHost().allocateAppWidgetId();
+        Intent pickIntent = new Intent("android.appwidget.action.APPWIDGET_PICK");
+        pickIntent.putExtra("appWidgetId", appWidgetId);
+        startActivityForResult(pickIntent, REQUEST_PICK_APPWIDGET);
+    }
+
+    private final void configureWidget(Intent data) {
+        Bundle extras = data.getExtras();
+        int appWidgetId = extras.getInt("appWidgetId", -1);
+        AppWidgetProviderInfo appWidgetInfo = Companion.getAppWidgetManager().getAppWidgetInfo(appWidgetId);
+        if (appWidgetInfo.configure != null) {
+            Intent intent = new Intent("android.appwidget.action.APPWIDGET_CONFIGURE");
+            intent.setComponent(appWidgetInfo.configure);
+            intent.putExtra("appWidgetId", appWidgetId);
+            startActivityForResult(intent, REQUEST_CREATE_APPWIDGET);
+        } else {
+            createWidget(data);
+        }
+    }
+
+    private final void createWidget(Intent data) {
+        Bundle extras = data.getExtras();
+        int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
+        AppWidgetProviderInfo appWidgetInfo = Companion.getAppWidgetManager().getAppWidgetInfo(appWidgetId);
+        Item item = Item.newWidgetItem(appWidgetId);
+        Desktop desktop = getDesktop();
+        List<CellContainer> pages = desktop.getPages();
+        item._spanX = (appWidgetInfo.minWidth - 1) / pages.get(desktop.getCurrentItem()).getCellWidth() + 1;
+        item._spanY = (appWidgetInfo.minHeight - 1) / pages.get(desktop.getCurrentItem()).getCellHeight() + 1;
+        Point point = desktop.getCurrentPage().findFreeSpace(item._spanX, item._spanY);
+        if (point != null) {
+            item._x = point.x;
+            item._y = point.y;
+
+            // add item to database
+            _db.saveItem(item, desktop.getCurrentItem(), Definitions.ItemPosition.Desktop);
+            desktop.addItemToPage(item, desktop.getCurrentItem());
+        } else {
+            Tool.toast(this, R.string.toast_not_enough_space);
+        }
+    }
+
     protected void onDestroy() {
-        if (callLogObserver != null)
-            getApplicationContext().getContentResolver().unregisterContentObserver(callLogObserver);
+        WidgetHost appWidgetHost = Companion.getAppWidgetHost();
+        if (appWidgetHost != null) {
+            appWidgetHost.stopListening();
+        }
+        Companion.setAppWidgetHost((WidgetHost) null);
+        unregisterReceiver(_appUpdateReceiver);
+        if (_timeChangedReceiver != null) {
+            unregisterReceiver(_timeChangedReceiver);
+        }
+        unregisterReceiver(_shortcutReceiver);
+        Companion.setLauncher((Home) null);
         super.onDestroy();
     }
 
-    @Override
-    public void onBackPressed() {
-        drawerLayout.closeDrawers();
-        super.onBackPressed();
+    public void onLowMemory() {
+        System.runFinalization();
+        System.gc();
+        super.onLowMemory();
     }
 
-    // search button in the search bar is clicked
-    public void onSearch(View view) {
-        Intent i;
-        try {
-            i = new Intent(Intent.ACTION_MAIN);
-            i.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.SearchActivity");
-            Home.this.startActivity(i);
-        } catch (Exception e) {
-            i = new Intent(Intent.ACTION_WEB_SEARCH);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
-        Home.this.startActivity(i);
-    }
-
-    // voice button in the search bar clicked
-    public void onVoiceSearch(View view) {
-        try {
-            Intent i = new Intent(Intent.ACTION_MAIN);
-            i.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.VoiceSearchActivity");
-            Home.this.startActivity(i);
-        } catch (Exception e) {
-            Tool.toast(Home.this, "Can not find google search app");
-        }
-    }
-
-    @Override
-    public void onDrawerSlide(View drawerView, float slideOffset) {
-    }
-
-    @Override
-    public void onDrawerOpened(View drawerView) {
-    }
-
-    @Override
-    public void onDrawerClosed(View drawerView) {
-    }
-
-    @Override
-    public void onDrawerStateChanged(int newState) {
-        switch (newState) {
-            case DrawerLayout.STATE_DRAGGING:
-            case DrawerLayout.STATE_SETTLING:
-                if (shortcutLayout.getAlpha() == 1)
-                    shortcutLayout.animate().setDuration(180L).alpha(0).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            shortcutLayout.setVisibility(View.INVISIBLE);
-                        }
-                    });
-                break;
-            case DrawerLayout.STATE_IDLE:
-                if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                    shortcutLayout.setVisibility(View.VISIBLE);
-                    shortcutLayout.setAlpha(0);
-                    shortcutLayout.animate().setDuration(180L).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == -1) {
+            if (requestCode == REQUEST_PICK_APPWIDGET) {
+                configureWidget(data);
+            } else if (requestCode == REQUEST_CREATE_APPWIDGET) {
+                createWidget(data);
+            }
+        } else if (resultCode == 0 && data != null) {
+            int appWidgetId = data.getIntExtra("appWidgetId", -1);
+            if (appWidgetId != -1) {
+                WidgetHost appWidgetHost = Companion.getAppWidgetHost();
+                if (appWidgetHost != null) {
+                    appWidgetHost.deleteAppWidgetId(appWidgetId);
                 }
-                break;
+            }
         }
     }
 
-    @Override
-    protected void onHandleLauncherPause()
-    {
-        super.onHandleLauncherPause();
+    protected void onStart() {
+        Companion.setLauncher(this);
+        WidgetHost appWidgetHost = Companion.getAppWidgetHost();
+        if (appWidgetHost != null) {
+            appWidgetHost.startListening();
+        }
+        super.onStart();
     }
 
-    @Override
-    protected void initStaticHelper()
-    {
-        final DialogHandler<Item> dialogHandler = new DialogHandler<Item>() {
-            @Override
-            public void showPickAction(Context context, final OnAddAppDrawerItemListener listener) {
-                DialogHelper.addActionItemDialog(context, new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+    private final void handleLauncherPause(boolean wasHomePressed) {
+        if (!Companion.getConsumeNextResume() || wasHomePressed) {
+            onHandleLauncherPause();
+        } else {
+            Companion.setConsumeNextResume(false);
+        }
+    }
 
-                        switch (which) {
-                            case 0:
-                                listener.onAdd();
-                                break;
-                        }
-                    }
-                });
-            }
+    protected void onHandleLauncherPause() {
+        ((GroupPopupView) findViewById(R.id.groupPopup)).dismissPopup();
+        ((CalendarDropDownView) findViewById(R.id.calendarDropDownView)).animateHide();
+        ((DragNDropLayout) findViewById(R.id.dragNDropView)).hidePopupMenu();
+        if (!((SearchBar) findViewById(R.id.searchBar)).collapse()) {
+            if (((Desktop) findViewById(R.id.desktop)) != null) {
+                Desktop desktop = (Desktop) findViewById(R.id.desktop);
 
-            @Override
-            public void showEditDialog(Context context, final Item item, OnEditDialogListener listener) {
-                DialogHelper.editItemDialog("Edit Item", item.getLabel(), context, new DialogHelper.onItemEditListener() {
-                    @Override
-                    public void itemLabel(String label) {
-                        item.setLabel(label);
-                        Home.db.updateItem(item);
+                if (desktop.getInEditMode()) {
+                    desktop = (Desktop) findViewById(R.id.desktop);
 
-                        Home.launcher.desktop.addItemToCell(item, item.getX(), item.getY());
-                        Home.launcher.desktop.removeItem(Home.launcher.desktop.getCurrentPage().coordinateToChildView(new Point(item.getX(), item.getY())));
-                    }
-                });
-            }
+                    List pages = desktop.getPages();
+                    Desktop desktop2 = (Desktop) findViewById(R.id.desktop);
 
-            @Override
-            public void showDeletePackageDialog(Context context, DragEvent dragEvent) {
-                DialogHelper.deletePackageDialog(context, dragEvent);
-            }
-        };
-        Setup.init(new Setup<Home, AppManager.App, Item, DrawerAppItem, AppItemView>() {
-
-            @Override
-            public SettingsManager getAppSettings() {
-                return AppSettings.get();
-            }
-
-            @Override
-            public FastItem.LabelItem createSearchBarInternetItem(Context context, int label, @Nullable View.OnClickListener listener) {
-                return new IconLabelItem(context, label)
-                        .withIconGravity(Gravity.START)
-                        .withOnClickListener(listener)
-                        .withTextColor(Color.WHITE)
-                        .withDrawablePadding(context, 8)
-                        .withBold(true)
-                        .withTextGravity(Gravity.END);
-            }
-
-            @Override
-            public FastItem.LabelItem createSearchBarItem(Context context, AppManager.App app, @Nullable View.OnClickListener listener) {
-                return new IconLabelItem(context, app.getIcon(), app.getLabel(), 36)
-                        .withIconGravity(Gravity.START)
-                        .withOnClickListener(listener)
-                        .withTextColor(Color.WHITE)
-                        .withDrawablePadding(context, 8);
-            }
-
-            @Override
-            public FastItem.DesktopOptionsItem createDesktopOptionsViewItem(Context context, int icon, int label, @Nullable View.OnClickListener listener, Typeface typeface) {
-                return new IconLabelItem(context, icon, context.getString(label), -1)
-                        .withOnClickListener(listener)
-                        .withTextColor(Color.WHITE)
-                        .withDrawablePadding(context, 8)
-                        .withIconGravity(Gravity.TOP)
-                        .withGravity(Gravity.CENTER)
-                        .withMatchParent(false)
-                        .withTypeface(typeface)
-                        .withDrawablePadding(context, 0)
-                        .withTextGravity(Gravity.CENTER);
-            }
-
-            @Override
-            public DatabaseHelper createDatabaseHelper(Context context) {
-                return new DatabaseHelper(context);
-            }
-
-            @Override
-            public List<AppManager.App> getAllApps(Context context) {
-                return AppManager.getInstance(context).getApps();
-            }
-
-            @Override
-            public List<Item> createAllAppItems(Context context) {
-                List<Item> items = new ArrayList<>();
-                List<AppManager.App> apps = getAllApps(context);
-                for (AppManager.App app : apps)
-                    items.add(Item.newAppItem(app));
-                return items;
-            }
-
-            @Override
-            public DrawerAppItem createDrawerAppItem(AppManager.App app) {
-                return new DrawerAppItem(app);
-            }
-
-            @Override
-            public View createDrawerAppItemView(Context context, final Home home, AppManager.App app, AppItemView.LongPressCallBack longPressCallBack) {
-                return new AppItemView.Builder(context)
-                        .setAppItem(app)
-                        .withOnTouchGetPosition()
-                        .withOnLongClick(app, DragAction.Action.APP_DRAWER, new AppItemView.LongPressCallBack() {
-                            @Override
-                            public boolean readyForDrag(View view) {
-                                return AppSettings.get().getDesktopStyle() != Desktop.DesktopMode.SHOW_ALL_APPS;
-                            }
-
-                            @Override
-                            public void afterDrag(View view) {
-                                home.closeAppDrawer();
-                            }
-                        })
-                        .setLabelVisibility(AppSettings.get().isDrawerShowLabel())
-                        .setTextColor(AppSettings.get().getDrawerLabelColor())
-                        .getView();
-            }
-
-            @Override
-            public AppItemView createAppItemViewPopup(Context context, Item groupItem, AppManager.App item) {
-                AppItemView.Builder b = new AppItemView.Builder(context)
-                        .withOnTouchGetPosition()
-                        .setTextColor(AppSettings.get().getDrawerLabelColor());
-                if (groupItem.type == Item.Type.SHORTCUT) {
-                    b.setShortcutItem(groupItem);
+                    ((CellContainer) pages.get(desktop2.getCurrentItem())).performClick();
                 } else {
-                    AppManager.App app = AppManager.getInstance(context).findApp(groupItem.intent);
-                    if (app != null) {
-                        b.setAppItem(groupItem, app);
+                    AppDrawerController appDrawerController = (AppDrawerController) findViewById(R.id.appDrawerController);
+
+                    View drawer = appDrawerController.getDrawer();
+
+                    if (drawer.getVisibility() == View.VISIBLE) {
+                        closeAppDrawer();
+                    } else {
+                        setToHomePage();
                     }
                 }
-                return b.getView();
             }
-
-            @Override
-            public Item newGroupItem() {
-                return Item.newGroupItem();
-            }
-
-            @Override
-            public Item newWidgetItem(int appWidgetId) {
-                return Item.newWidgetItem(appWidgetId);
-            }
-
-            @Override
-            public Item newActionItem(int action) {
-                return Item.newActionItem(action);
-            }
-
-            @Override
-            public View getItemView(Context context, Item item, boolean showLabels, DesktopCallBack callBack) {
-                int flag = showLabels ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
-                View itemView = ItemViewFactory.getItemView(context, callBack, item, flag);
-                return itemView;
-            }
-
-            @Override
-            public Item createShortcut(Intent intent, Drawable icon, String name) {
-                return Item.newShortcutItem(intent, icon, name);
-            }
-
-            @Override
-            public void showLauncherSettings(Context context) {
-                LauncherAction.RunAction(LauncherAction.Action.LauncherSettings, context);
-            }
-
-            @Override
-            public DialogHandler<Item> getDialogHandler() {
-                return dialogHandler;
-            }
-
-            @Override
-            public DesktopGestureListener.DesktopGestureCallback getDrawerGestureCallback() {
-                return new DesktopGestureListener.DesktopGestureCallback() {
-                    @Override
-                    public boolean onDrawerGesture(Desktop desktop, DesktopGestureListener.Type event) {
-                        switch (event) {
-                            case SwipeUp: {
-                                LauncherAction.ActionItem gesture = ((DatabaseHelper) Home.db).getGesture(1);
-                                if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                                    Tool.vibrate(desktop);
-                                }
-                                LauncherAction.RunAction(gesture, desktop.getContext());
-                                return true;
-                            }
-                            case SwipeDown: {
-                                LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(2);
-                                if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                                    Tool.vibrate(desktop);
-                                }
-                                LauncherAction.RunAction(gesture, desktop.getContext());
-                                return true;
-                            }
-                            case SwipeLeft:
-                            case SwipeRight:
-                                return false;
-                            case Pinch: {
-                                LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(3);
-                                if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                                    Tool.vibrate(desktop);
-                                }
-                                LauncherAction.RunAction(gesture, desktop.getContext());
-                                return true;
-                            }
-                            case Unpinch: {
-                                LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(4);
-                                if (gesture != null && AppSettings.get().isGestureFeedback()) {
-                                    Tool.vibrate(desktop);
-                                }
-                                LauncherAction.RunAction(gesture, desktop.getContext());
-                                return true;
-                            }
-                            case DoubleTap: {
-                                LauncherAction.ActionItem gesture = ((DatabaseHelper)Home.db).getGesture(0);
-                                if (gesture != null && AppSettings.get().isGestureFeedback())  {
-                                    Tool.vibrate(desktop);
-                                }
-                                LauncherAction.RunAction(gesture, desktop.getContext());
-                                return true;
-                            }
-                            default: {
-                                throw new RuntimeException("Type not handled!");
-                            }
-                        }
-                    }
-                };
-            }
-
-            @Override
-            public Class<Item> getItemClass() {
-                return Item.class;
-            }
-
-            public List<AppUpdateListener<AppManager.App>> getAppUpdatedListener(Context c) {
-                return AppManager.getInstance(c).updateListeners;
-            }
-            public List<AppDeleteListener<AppManager.App>> getAppDeletedListener(Context c) {
-                return AppManager.getInstance(c).deleteListeners;
-            }
-
-            @Override
-            public void onAppUpdated(Context p1, Intent p2) {
-                AppManager.getInstance(p1).onReceive(p1, p2);
-            }
-
-            @Override
-            public AppManager.App findApp(Context c, Intent intent) {
-                return AppManager.getInstance(c).findApp(intent);
-            }
-
-            @Override
-            public void updateIcon(Context context, AppItemView currentView, Item currentItem) {
-                currentView.setIcon(new GroupIconDrawable(context, currentItem));
-            }
-
-            @Override
-            public void onItemViewDismissed(AppItemView itemView) {
-                if (itemView.getIcon() instanceof GroupIconDrawable) {
-                    ((GroupIconDrawable) itemView.getIcon()).popBack();
-                }
-            }
-        });
+        }
     }
 
-    public class CallLogObserver extends ContentObserver {
+    private final void setToHomePage() {
+        Desktop desktop = (Desktop) findViewById(R.id.desktop);
 
-        private final String columns[] = new String[]{
-                CallLog.Calls._ID,
-                CallLog.Calls.NUMBER,
-                CallLog.Calls.CACHED_NAME};
+        AppSettings appSettings = Setup.appSettings();
 
-        public CallLogObserver(Handler handler) {
-            super(handler);
+        desktop.setCurrentItem(appSettings.getDesktopPageCurrent());
+    }
+
+    @JvmOverloads
+    public static /* bridge */ /* synthetic */ void openAppDrawer$default(Home home, View view, int i, int i2, int i3, Object obj) {
+        if ((i3 & 1) != 0) {
+            view = (Desktop) home.findViewById(R.id.desktop);
         }
-
-        @Override
-        public boolean deliverSelfNotifications() {
-            return true;
+        if ((i3 & 2) != 0) {
+            i = -1;
         }
+        if ((i3 & 4) != 0) {
+            i2 = -1;
+        }
+        home.openAppDrawer(view, i, i2);
+    }
 
-        public void logCallLog() {
-            if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
-                Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_DENIED");
-                ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.READ_CALL_LOG}, REQUEST_PERMISSION_READ_CALL_LOG);
-            } else {
-                Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, columns, null, null, CallLog.Calls.DATE + " DESC LIMIT 15");
-                int number = c.getColumnIndex(CallLog.Calls.NUMBER);
-                int name = c.getColumnIndex(CallLog.Calls.CACHED_NAME);
+    @JvmOverloads
+    public final void openAppDrawer(@Nullable View view, int x, int y) {
+        if (!(x > 0 && y > 0)) {
+            int[] pos = new int[2];
+            view.getLocationInWindow(pos);
+            cx = pos[0];
+            cy = pos[1];
 
-                Tool.print("Manifest.permission.READ_CALL_LOG : PERMISSION_GRANTED");
-                quickContactFA.clear();
-                while (c.moveToNext()) {
-                    String phone = c.getString(number);
-                    String uri = "tel:" + phone;
-                    Intent intent = new Intent(Intent.ACTION_CALL);
-                    intent.setData(Uri.parse(uri));
-                    String caller = c.getString(name);
-                    quickContactFA.add(new QuickCenterItem.ContactItem(
-                            new QuickCenterItem.ContactContent(caller, phone, intent,
-                                    Tool.fetchThumbnail(Home.this, phone))));
+            cx += view.getWidth() / 2f;
+            cy += view.getHeight() / 2f;
+            if (view instanceof AppItemView) {
+                AppItemView appItemView = (AppItemView) view;
+                if (appItemView != null && appItemView.getShowLabel()) {
+                    cy -= Tool.dp2px(14, this) / 2f;
                 }
+                rad = (int) (appItemView.getIconSize() / 2f - Tool.toPx(4));
             }
+            cx -= ((MarginLayoutParams) getAppDrawerController().getDrawer().getLayoutParams()).getMarginStart();
+            cy -= ((MarginLayoutParams) getAppDrawerController().getDrawer().getLayoutParams()).topMargin;
+            cy -= getAppDrawerController().getPaddingTop();
+        } else {
+            cx = x;
+            cy = y;
+            rad = 0;
         }
+        int finalRadius = Math.max(getAppDrawerController().getDrawer().getWidth(), getAppDrawerController().getDrawer().getHeight());
+        getAppDrawerController().open(cx, cy, rad, finalRadius);
+    }
 
-        @Override
-        public void onChange(boolean selfChange) {
-            this.onChange(selfChange, null);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            logCallLog();
-        }
+    public final void closeAppDrawer() {
+        int finalRadius = Math.max(getAppDrawerController().getDrawer().getWidth(), getAppDrawerController().getDrawer().getHeight());
+        getAppDrawerController().close(cx, cy, rad, finalRadius);
     }
 }

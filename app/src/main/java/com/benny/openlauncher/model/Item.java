@@ -3,19 +3,23 @@ package com.benny.openlauncher.model;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
+import android.os.Parcelable;
 
-import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.core.interfaces.FastItem;
-import com.benny.openlauncher.core.interfaces.LabelProvider;
-import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.interfaces.LabelProvider;
+import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.util.App;
+import com.benny.openlauncher.util.BaseIconProvider;
 import com.benny.openlauncher.util.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Item implements com.benny.openlauncher.core.interfaces.Item<Item>, LabelProvider {
+public class Item implements LabelProvider, Parcelable {
+
+    public static final int LOCATION_DESKTOP = 0;
+    public static final int LOCATION_DOCK = 1;
     public static final Creator<Item> CREATOR = new Creator<Item>() {
 
         @Override
@@ -28,117 +32,136 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item>, 
             return new Item[size];
         }
     };
-
-    // all items need these values
-    private int idValue;
-    public Type type;
-    private String name = "";
-    public Drawable icon = Home.launcher.getResources().getDrawable(R.drawable.rip);
-    public int x = 0;
-    public int y = 0;
-
+    public Type _type;
+    public BaseIconProvider _iconProvider = null;
+    public int _x = 0;
+    public int _y = 0;
+    //Needed for folder to optimize the folder open position
+    public int _locationInLauncher;
     // intent for shortcuts and apps
-    public Intent intent;
-
+    public Intent _intent;
     // list of items for groups
-    public List<Item> items;
-
+    public List<Item> _items;
     // int value for launcher action
-    public int actionValue;
-
+    public int _actionValue;
     // widget specific values
-    public int widgetValue;
-    public int spanX = 1;
-    public int spanY = 1;
+    public int _widgetValue;
+    public int _spanX = 1;
+    public int _spanY = 1;
+    // all items need these values
+    private int _idValue;
+    private String _name = "";
 
     public Item() {
         Random random = new Random();
-        idValue = random.nextInt();
+        _idValue = random.nextInt();
     }
 
     public Item(Parcel parcel) {
-        idValue = parcel.readInt();
-        type = Type.valueOf(parcel.readString());
-        name = parcel.readString();
-        x = parcel.readInt();
-        y = parcel.readInt();
-        switch (type) {
+        _idValue = parcel.readInt();
+        _type = Type.valueOf(parcel.readString());
+        _name = parcel.readString();
+        _x = parcel.readInt();
+        _y = parcel.readInt();
+        switch (_type) {
             case APP:
             case SHORTCUT:
-                intent = Tool.getIntentFromString(parcel.readString());
+                _intent = Tool.getIntentFromString(parcel.readString());
                 break;
             case GROUP:
                 List<String> labels = new ArrayList<>();
                 parcel.readStringList(labels);
-                items = new ArrayList<>();
+                _items = new ArrayList<>();
                 for (String s : labels) {
-                    items.add((Item)Home.launcher.db.getItem(Integer.parseInt(s)));
+                    _items.add(Home.Companion.getLauncher()._db.getItem(Integer.parseInt(s)));
                 }
                 break;
             case ACTION:
-                actionValue = parcel.readInt();
+                _actionValue = parcel.readInt();
                 break;
             case WIDGET:
-                widgetValue = parcel.readInt();
-                spanX = parcel.readInt();
-                spanY = parcel.readInt();
+                _widgetValue = parcel.readInt();
+                _spanX = parcel.readInt();
+                _spanY = parcel.readInt();
                 break;
         }
-        icon = Tool.getIcon(Home.launcher, Integer.toString(idValue));
+        _locationInLauncher = parcel.readInt();
+
+        if (Setup.appSettings().enableImageCaching()) {
+            _iconProvider = Setup.imageLoader().createIconProvider(Tool.getIcon(Home.Companion.getLauncher(), Integer.toString(_idValue)));
+        } else {
+            switch (_type) {
+                case APP:
+                case SHORTCUT:
+                    App app = Setup.appLoader().findItemApp(this);
+                    _iconProvider = app != null ? app.getIconProvider() : null;
+                    break;
+                default:
+                    // TODO...
+                    break;
+            }
+        }
     }
 
-    @Override
-    public boolean equals(Object object) {
-        Item itemObject = (Item) object;
-        return object != null && this.idValue == itemObject.idValue;
-    }
-
-    public static Item newAppItem(AppManager.App app) {
+    public static Item newAppItem(App app) {
         Item item = new Item();
-        item.type = Type.APP;
-        item.name = app.label;
-        item.icon = app.icon;
-        item.intent = toIntent(app);
+        item._type = Type.APP;
+        item._name = app.getLabel();
+        item._iconProvider = app.getIconProvider();
+        item._intent = toIntent(app);
         return item;
     }
 
     public static Item newShortcutItem(Intent intent, Drawable icon, String name) {
         Item item = new Item();
-        item.type = Type.SHORTCUT;
-        item.name = name;
-        item.icon = icon;
-        item.spanX = 1;
-        item.spanY = 1;
-        item.intent = intent;
+        item._type = Type.SHORTCUT;
+        item._name = name;
+        item._iconProvider = Setup.imageLoader().createIconProvider(icon);
+        item._spanX = 1;
+        item._spanY = 1;
+        item._intent = intent;
         return item;
     }
 
     public static Item newGroupItem() {
         Item item = new Item();
-        item.type = Type.GROUP;
-        item.name = Home.launcher.getString(R.string.folder);
-        item.spanX = 1;
-        item.spanY = 1;
-        item.items = new ArrayList<>();
+        item._type = Type.GROUP;
+        item._name = "";
+        item._spanX = 1;
+        item._spanY = 1;
+        item._items = new ArrayList<>();
         return item;
     }
 
     public static Item newActionItem(int action) {
         Item item = new Item();
-        item.type = Type.ACTION;
-        item.spanX = 1;
-        item.spanY = 1;
-        item.actionValue = action;
+        item._type = Type.ACTION;
+        item._spanX = 1;
+        item._spanY = 1;
+        item._actionValue = action;
         return item;
     }
 
     public static Item newWidgetItem(int widgetValue) {
         Item item = new Item();
-        item.type = Type.WIDGET;
-        item.widgetValue = widgetValue;
-        item.spanX = 1;
-        item.spanY = 1;
+        item._type = Type.WIDGET;
+        item._widgetValue = widgetValue;
+        item._spanX = 1;
+        item._spanY = 1;
         return item;
+    }
+
+    private static Intent toIntent(App app) {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setClassName(app.getPackageName(), app.getClassName());
+        return intent;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        Item itemObject = (Item) object;
+        return object != null && _idValue == itemObject._idValue;
     }
 
     @Override
@@ -148,118 +171,150 @@ public class Item implements com.benny.openlauncher.core.interfaces.Item<Item>, 
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(idValue);
-        out.writeString(type.toString());
-        out.writeString(name);
-        out.writeInt(x);
-        out.writeInt(y);
-        switch (type) {
+        out.writeInt(_idValue);
+        out.writeString(_type.toString());
+        out.writeString(_name);
+        out.writeInt(_x);
+        out.writeInt(_y);
+        switch (_type) {
             case APP:
             case SHORTCUT:
-                out.writeString(Tool.getIntentAsString(this.intent));
+                out.writeString(Tool.getIntentAsString(_intent));
                 break;
             case GROUP:
                 List<String> labels = new ArrayList<>();
-                for (Item i : items) {
-                    labels.add(Integer.toString(i.idValue));
+                for (Item i : _items) {
+                    labels.add(Integer.toString(i._idValue));
                 }
                 out.writeStringList(labels);
                 break;
             case ACTION:
-                out.writeInt(actionValue);
+                out.writeInt(_actionValue);
                 break;
             case WIDGET:
-                out.writeInt(widgetValue);
-                out.writeInt(spanX);
-                out.writeInt(spanY);
+                out.writeInt(_widgetValue);
+                out.writeInt(_spanX);
+                out.writeInt(_spanY);
                 break;
         }
+        out.writeInt(_locationInLauncher);
     }
 
-    @Override
     public void reset() {
         Random random = new Random();
-        idValue = random.nextInt();
+        _idValue = random.nextInt();
     }
 
-    @Override
-    public int getId() {
-        return idValue;
+    public Integer getId() {
+        return _idValue;
     }
 
-    public void setId(int id) {
-        idValue = id;
+    public void setItemId(int id) {
+        _idValue = id;
     }
 
-    @Override
     public Intent getIntent() {
-        return intent;
+        return _intent;
     }
 
     @Override
     public String getLabel() {
-        return name;
+        return _name;
     }
 
-    @Override
     public void setLabel(String label) {
-        this.name = label;
+        _name = label;
     }
 
-    @Override
     public Type getType() {
-        return type;
+        return _type;
     }
 
-    @Override
     public List<Item> getGroupItems() {
-        return items;
+        return _items;
     }
 
-    @Override
     public int getX() {
-        return x;
+        return _x;
     }
 
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    @Override
-    public int getSpanX() {
-        return spanX;
-    }
-
-    @Override
-    public int getSpanY() {
-        return spanY;
-    }
-
-    @Override
-    public void setSpanX(int x) {
-        spanX = x;
-    }
-
-    @Override
-    public void setSpanY(int y) {
-        spanY = y;
-    }
-
-    @Override
     public void setX(int x) {
-        this.x = x;
+        _x = x;
     }
 
-    @Override
+    public int getY() {
+        return _y;
+    }
+
     public void setY(int y) {
-        this.y = y;
+        _y = y;
     }
 
-    private static Intent toIntent(AppManager.App app) {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setClassName(app.packageName, app.className);
-        return intent;
+    public int getSpanX() {
+        return _spanX;
+    }
+
+    public void setSpanX(int x) {
+        _spanX = x;
+    }
+
+    public int getSpanY() {
+        return _spanY;
+    }
+
+    public void setSpanY(int y) {
+        _spanY = y;
+    }
+
+    public BaseIconProvider getIconProvider() {
+        return _iconProvider;
+    }
+
+    public enum Type {
+        APP,
+        SHORTCUT,
+        GROUP,
+        ACTION,
+        WIDGET
+    }
+
+    public void setType(Type type) {
+        _type = type;
+    }
+
+    public void setIconProvider(BaseIconProvider iconProvider) {
+        _iconProvider = iconProvider;
+    }
+
+    public int getLocationInLauncher() {
+        return _locationInLauncher;
+    }
+
+    public void setIntent(Intent intent) {
+        _intent = intent;
+    }
+
+    public List<Item> getItems() {
+        return _items;
+    }
+
+    public void setItems(List<Item> items) {
+        _items = items;
+    }
+
+    public int getActionValue() {
+        return _actionValue;
+    }
+
+    public void setActionValue(int actionValue) {
+        _actionValue = actionValue;
+    }
+
+    public int getWidgetValue() {
+        return _widgetValue;
+    }
+
+    public void setWidgetValue(int widgetValue) {
+        _widgetValue = widgetValue;
     }
 }

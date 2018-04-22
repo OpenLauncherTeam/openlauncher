@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Titles -->
+
+    <string name="minibar">Minibar</string>
+
+    <!-- Drag Option View -->
+
+    <!-- Desktop Option View -->
+
+    <!-- Toasts -->
+
+    <string name="toast_free_ram">Memòria lliure: %1$d MB. Estalviats %2$d MB.</string>
+    <string name="toast_free_all_ram">Memòria lliure: %1$d MB. La teva RAM està en millor estat.</string>
+    <string name="toast_device_admin_required">Si us plau, habilita tempArrayOfInt2\'opció d\'administració de dispositiu.</string>
+
+    <!-- Intro -->
+
+    <string name="intro_skip">Ometre</string>
+    <string name="intro_finish">Comencem.</string>
+    <string name="intro1_text">Moltes gràcies per escollir OpenLauncher. És completament de Codi Obert i encara es troba en desenvolupament.
+	Aquí hi ha una petita introducció sobre com utilitzar-lo&#8230;</string>
+    <string name="intro2_text">Fes lliscar el dit cap endins des de la vora esquerra de la teva pantalla d\'inici per obrir la minibar. Allà podràs trobar els paràmetres,
+	canviar el fons de pantalla, i fer un munt de coses.</string>
+    <string name="intro3_title">Paràmetres</string>
+    <string name="intro3_text">Pots configurar el teu escriptori, el calaix d\'aplicacions i tempArrayOfInt2\'acoblador. Prova-ho!</string>
+
+    <!-- Minibar -->
+
+    <string name="minibar_0">Canvia el diseny de la minibar.</string>
+    <string name="minibar_1">Estableix o difumina el fons de pantalla.</string>
+    <string name="minibar_2">Bloqueja la pantalla inmediatament, requereix ser administrador del dispositiu.</string>
+    <string name="minibar_3">Allibera memòria RAM forçant el tancament d\'altres procesos en execució.</string>
+    <string name="minibar_4">Drecera als paràmetres del dispositiu.</string>
+    <string name="minibar_5">Drecera als paràmetres de OpenLauncher.</string>
+    <string name="minibar_7">Desplegar el panell de volum.</string>
+    <string name="minibar_8">Obrir calaix d\'aplicacions.</string>
+
+    <!-- About -->
+
+    <string name="about_libs">LLibreries de Codi Obert</string>
+    <string name="about_rate">Qualifica</string>
+    <string name="about_credit">Contribuïdors</string>
+    <string name="about_credit_text_all_contributors">Tots els contribuïdors</string>
+    <string name="about_credit_text_bennykok" translatable="false">Inici del projecte</string>
+    <string name="about_credit_text_chris_debrodie" translatable="false">Va ajudar molt amb errors i sugerències</string>
+    <string name="about_credit_text_gaukler_faun" translatable="false">Va afegir alguns paràmetres, traducció a tempArrayOfInt2\'alemany</string>
+    <string name="about_credit_text_gsantner" translatable="false">Encarregat, traducció a tempArrayOfInt2\'alemany</string>
+    <string name="about_credit_text_dkanada" translatable="false">Encarregat, base de dades</string>
+
+    <!-- Settings -->
+
+    <string name="pref_title__desktop">Escriptori</string>
+    <string name="pref_title__dock">Acoblador</string>
+    <string name="pref_title__app_drawer">Calaix d\'apps</string>
+    <string name="pref_title__gestures">Gestos</string>
+    <string name="pref_title__icons">Icones</string>
+    <string name="pref_title__miscellaneous">Miscel·lanània</string>
+    <string name="pref_title__about">Quant a</string>
+
+    <string name="pref_title__size">Mida</string>
+    <string name="pref_title__style">Estil</string>
+    <string name="pref_title__appearance">Aparença</string>
+    <string name="pref_title__color">Colors</string>
+    <string name="pref_title__search_bar">Barra de cerca</string>
+
+    <string name="pref_title__desktop_style">Estil</string>
+    <string name="pref_summary__desktop_style">Tria entre tempArrayOfInt2\'escriptori normal o un que mostri totes les apliccions instal·lades</string>
+    <string name="pref_summary__minibar">Configura tempArrayOfInt2\'ordre i la visibilitat dels items de la minibar.</string>
+    <string name="pref_title__search_bar_enable">Barra de cerca</string>
+    <string name="pref_summary__search_bar_enable">Mostra una barra de cerca a sobre de tempArrayOfInt2\'escriptori.</string>
+    <string name="pref_title__desktop_fullscreen">Pantalla complerta</string>
+    <string name="pref_summary__desktop_fullscreen">Habilita la pantalla complerta per tempArrayOfInt2\'escriptori.</string>
+    <string name="pref_title__desktop_show_position_indicator">Indicador de desplaçament</string>
+    <string name="pref_summary__desktop_show_position_indicator">Mostra tempArrayOfInt2\'indicador de la pàgina sota de tempArrayOfInt2\'escriptori.</string>
+    <string name="pref_title__desktop_show_label">Mostrar les etiquetes</string>
+    <string name="pref_summary__desktop_show_label">Mostra les etiquetes dels items sota de les seves icones.</string>
+    <string name="pref_title__search_bar_base_uri">Motor de cerca</string>
+    <string name="pref_summary__search_bar_base_uri">Estableix el motor de cerca utilitzat per les cerces en la web.</string>
+    <string name="pref_dialog__search_bar_base_uri">Afegeix el motor de cerca (URI) que vol utilitzar en les cerques de la web. L\'etiqueta {query} es pot utilitzar com
+	marcador de la posició per les cerces, en cas de que no s\'utilitzi un marcador de posició la consulta de cerca s\'annexarà al final del URI.</string>
+    <string name="pref_title__desktop_background_color">Fons</string>
+    <string name="pref_title__desktop_folder_color">Carpeta</string>
+
+    <string name="pref_summary__dock_size">Estableix la mida de tempArrayOfInt2\'acoblador.</string>
+    <string name="pref_title__dock_show_label">Mostrar les etiquetes.</string>
+    <string name="pref_summary__dock_show_label">Mostrar les etiquetes dels items sota de les icones.</string>
+    <string name="pref_title__dock_background_color">Fons</string>
+
+    <string name="pref_title__drawer_style">Estil</string>
+    <string name="pref_summary__drawer_style">Tria entre un calaix d\'aplicacions paginat o vertical.</string>
+    <string name="pref_title__hide_apps">Amaga aplicacions</string>
+    <string name="pref_summary__hide_apps">Amaga les aplicacions seleccionades des de el llançador.</string>
+    <string name="pref_title__drawer_show_card_view">Vista de la targeta</string>
+    <string name="pref_summary__drawer_show_card_view">Mostra la targeta sobre el fons del calaix.</string>
+    <string name="pref_title__drawer_remember_position">Recorda tempArrayOfInt2\'última pàgina</string>
+    <string name="pref_summary__drawer_remember_position">Recorda tempArrayOfInt2\'actual pàgina del calaix d\'aplicacions.</string>
+    <string name="pref_title__drawer_show_position_indicator">Indicador de desplaçament</string>
+    <string name="pref_summary__drawer_show_position_indicator">Mostra tempArrayOfInt2\'indicador de la pàgina o de la barra de desplaçament depenent de tempArrayOfInt2\'estil.</string>
+    <string name="pref_title__drawer_show_label">Mostra les etiquetes</string>
+    <string name="pref_summary__drawer_show_label">Mostra les etiquetes dels items sota de les seves icones.</string>
+    <string name="pref_title__drawer_background_color">Fons</string>
+    <string name="pref_title__drawer_card_color">Vista de la targeta</string>
+    <string name="pref_title__drawer_label_color">Etiqueta</string>
+
+    <string name="pref_title__gesture_quick_swipe">Desplaçament ràpid del calaix</string>
+    <string name="pref_summary__gesture_quick_swipe">Llisca cap amunt en en acoblament per obrir el calaix d\'aplicacions.</string>
+    <string name="pref_title__gesture_double_tap">Fer dos tocs</string>
+    <string name="pref_title__gesture_swipe_up">Desplaçament cap amunt</string>
+    <string name="pref_title__gesture_swipe_down">Desplaçament cap avall</string>
+    <string name="pref_title__gesture_pinch">Pessigar</string>
+    <string name="pref_title__gesture_unpinch">Pessigar invers</string>
+    <string name="pref_title__gesture_feedback">Reacció</string>
+
+    <string name="pref_summary__icon_size">Mida de les icones de totes les aplicacions.</string>
+    <string name="pref_title__icon_pack">Tema d\'icones</string>
+    <string name="pref_summary__icon_pack">Selecciona un tema d\'icones instal·lat.</string>
+
+    <string name="pref_title__backup">Còpia de seguretat</string>
+    <string name="pref_summary__backup">Importació i còpia de seguretat dels teus ajustos.</string>
+    <string name="pref_title__clear_database">Buida la base de dades</string>
+    <string name="pref_summary__clear_database">Esborra les dades del acoblador i de tempArrayOfInt2\'escriptori per solucionar problemes.</string>
+    <string name="pref_title__restart">Reiniciar</string>
+    <string name="pref_summary__restart">Reiniciar el llançador en cas de tenir un comportamer erroni.</string>
+
+    <string name="vertical_scroll_drawer">Vertical</string>
+    <string name="horizontal_paged_drawer">Paginat</string>
+
+    <string name="desktop_mode_normal">Normal</string>
+    <string name="desktop_mode_show_all_apps">Mostrar totes les aplicacions</string>
+
+    <!-- Preference Keys -->
+
+    <string name="pref_title__interfaces">Interfícies</string>
+    <string name="pref_title__inputs">Entrada</string>
+    <string name="pref_title__feels">Comportament</string>
+    <string name="pref_title__others">Altres</string>
+
+    <!-- Item Labels -->
+
+    <string name="label_default">Per defecte</string>
+
+    <!-- Dialogs -->
+
+    <string name="request_dummy_text">¡Hola Món!</string>
+    <string name="request_please_wait">Cercant aplicacions instal·lades. Si us plau, esperi.</string>
+    <string name="request_toast">No hi ha aplicacions seleccionades. ¿Vols mostrar-les totes al calaix d\'aplicacions?</string>
+    <string name="on">Actiu</string>
+    <string name="desktop_action">Accions de tempArrayOfInt2\'escriptori</string>
+    <string name="select_app">Selecciona la aplicació</string>
+    <string name="off">Inactiu</string>
+    <string name="ok">D\'acord</string>
+    <string name="version">Versió</string>
+    <string name="wallpaper">Fons de pantalla</string>
+    <string name="wallpaper_pick">Tria fons de pantalla</string>
+    <string name="wallpaper_unable_to_blur">Incapaç de difuminar</string>
+    <string name="dialog__icon_pack_title">Tria tema d\'icones</string>
+    <string name="dialog__icon_pack_info_toast">Incapaç de seleccionar tempArrayOfInt2\'icona sense el permís de LECTURA DEL CONTINGUT A LA TARGETA SD.</string>
+    <string name="dialog__backup_app_settings__backup">Còpia de seguretat</string>
+    <string name="dialog__backup_app_settings__restore">Importar</string>
+    <string name="dialog__backup_app_settings__success">Fet.</string>
+    <string name="dialog__backup_app_settings__error">Alguna cosa no ha anat bé.</string>
+    <string name="columns">Columnes</string>
+    <string name="rows">Files</string>
+    <string name="memory">Memòria</string>
+    <string name="storage">Emmagatzematge</string>
+    <string name="volume_level_ringtone">To de la trucada</string>
+    <string name="volume_level_notification">Notificacions</string>
+    <string name="volume_level_system">Sistema</string>
+    <string name="volume_level_media">Multimèdia</string>
+
+</resources>

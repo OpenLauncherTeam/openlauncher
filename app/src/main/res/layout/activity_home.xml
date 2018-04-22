@@ -33,45 +33,4 @@
 
     </android.support.v4.widget.DrawerLayout>
 
-    <RelativeLayout
-        android:fitsSystemWindows="true"
-        android:id="@+id/shortcutLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/quickContactRv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="74dp"
-            android:clipToPadding="false"
-            android:paddingLeft="8dp" />
-
-        <com.benny.openlauncher.widget.MiniPopupView
-            android:id="@+id/miniPopup"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </com.benny.openlauncher.widget.MiniPopupView>
-
-    </RelativeLayout>
-
-    <FrameLayout
-        android:id="@+id/loadingSplash"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#90000000">
-
-        <com.benny.openlauncher.widget.LauncherLoadingIcon
-            android:id="@+id/loadingIcon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center" />
-
-    </FrameLayout>
-
 </FrameLayout>

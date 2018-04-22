@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.benny.openlauncher">
-    <!--
-    TODO activate later again
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_CALL_LOG" />-->
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
@@ -14,10 +9,9 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name="com.benny.openlauncher.App"
-        android:allowBackup="true"
+        android:name="com.benny.openlauncher.AppObject"
         android:hardwareAccelerated="true"
-        android:icon="${appIcon}"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="false"
         android:launchMode="singleTask"
@@ -25,25 +19,26 @@
         android:taskAffinity=""
         android:theme="@style/Home.Light">
 
-        <meta-data android:name="android.max_aspect" android:value="2.1" />
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
 
         <activity
-            android:name="com.benny.openlauncher.activity.InitActivity"
+            android:name="com.benny.openlauncher.activity.OnBoardActivity"
             android:clearTaskOnLaunch="true"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/Home.Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.benny.openlauncher.activity.Home"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|keyboard|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             android:taskAffinity=""
             android:windowSoftInputMode="adjustNothing">
@@ -54,14 +49,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <provider
-            android:name="com.benny.openlauncher.util.FiveSecsDelayContentProvider"
-            android:authorities="${applicationId}.util.FiveSecsDelayContentProvider"
-            android:enabled="true"
-            android:exported="true"
-            android:grantUriPermissions="true" />
-
         <activity
             android:name="com.benny.openlauncher.activity.AutoFinishActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
@@ -75,13 +62,10 @@
             android:configChanges="orientation|keyboard|screenSize"
             android:label="Settings"
             android:theme="@style/NormalActivity.Light" />
-
         <activity
-            android:name="com.benny.openlauncher.activity.HideAppsSelectionActivity"
-            android:enabled="true"
+            android:name="com.benny.openlauncher.activity.HideAppsActivity"
             android:label="@string/app_name"
             android:theme="@style/NormalActivity.Light" />
-
 
         <receiver
             android:name="com.benny.openlauncher.util.DeviceAdminReceiver"
@@ -89,20 +73,18 @@
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/device_admin" />
         </receiver>
-        <receiver
-            android:name="com.benny.openlauncher.core.util.ShortcutReceiver"
-            android:enabled="true"
-            android:exported="true" />
 
-        <activity
-            android:name="com.benny.openlauncher.activity.AboutActivity"
-            android:label="About"
-            android:theme="@style/AppTheme.MaterialAboutActivity" />
+        <receiver
+            android:name="com.benny.openlauncher.util.ShortcutReceiver"
+            android:permission="com.android.launcher.permission.INSTALL_SHORTCUT">
+            <intent-filter>
+                <action android:name="com.android.launcher.action.INSTALL_SHORTCUT" />
+            </intent-filter>
+        </receiver>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -113,6 +95,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <provider
+            android:name="com.benny.openlauncher.util.FiveSecsDelayContentProvider"
+            android:authorities="${applicationId}.util.FiveSecsDelayContentProvider"
+            android:enabled="true"
+            android:exported="true"
+            android:grantUriPermissions="true" />
 
     </application>
 

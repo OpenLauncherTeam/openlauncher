@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="entries__gestures">
+        <item>Cap</item>
+        <item>Paràmetres de la Minibar</item>
+        <item>Establir fons de pantalla</item>
+        <item>Bloquejar pantalla</item>
+        <item>Lliberar memòria RAM</item>
+        <item>Paràmetres del Dispositiu</item>
+        <item>Paràmetres d\'inici</item>
+        <item>Quadre de diàleg de volum</item>
+        <item>Obrir calaix d\'Apps</item>
+        <item>Obrir aplicació</item>
+        <item>@string/pref_title__search_bar</item>
+    </string-array>
+
+    <string-array name="desktopActionEntries">
+        <item>Calaix d\'Apps</item>
+    </string-array>
+
+    <string-array name="entries__drawer_modes">
+        <item>Horitzontal (Paginat)</item>
+        <item>Vertical</item>
+    </string-array>
+
+    <string-array name="wallpaperOptionEntries">
+        <item>Establir fons de pantalla</item>
+        <item>Difuminar fons de pantalla</item>
+    </string-array>
+</resources>

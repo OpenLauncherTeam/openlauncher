@@ -1,33 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-
-    <!-- Titles -->
-
-    <string name="minibar">Мини-бар</string>
-
-    <!-- Drag Option View -->
-
-    <!-- Desktop Option View -->
-
     <!-- Toasts -->
-
     <string name="toast_free_ram">Свободной памяти: %1$d МБ. Освобождено %2$d МБ.</string>
     <string name="toast_free_all_ram">Свободной памяти: %1$d МБ. Состояние памяти наилучшее.</string>
     <string name="toast_device_admin_required">Пожалуйста, разрешите администрирование устройства.</string>
 
     <!-- Intro -->
-
     <string name="intro_skip">Пропустить</string>
     <string name="intro_finish">Давайте начнём.</string>
-    <string name="intro1_text">Спасибо, что выбрали OpenLauncher. Это приложение с полностью открытым исходным кодом, пока находящееся в разработке.
- Вот несколько слов об его использовании…</string>
-    <string name="intro2_text">Проведите пальцем слева направо от левой границы рабочего стола, чтобы открыть мини-бар. Там можно найти настройки,
- сменить обои и сделать много других вещей.</string>
+    <string name="intro1_text">Спасибо, что выбрали OpenLauncher. Это приложение с полностью открытым исходным кодом, пока находящееся в разработке.  Вот несколько слов об его использовании…</string>
+    <string name="intro2_text">Проведите пальцем слева направо от левой границы рабочего стола, чтобы открыть мини-бар. Там можно найти настройки,  сменить обои и сделать много других вещей.</string>
     <string name="intro3_title">Настройки</string>
     <string name="intro3_text">Вы можете настроить рабочий стол, меню приложений и док, просто попробуйте!</string>
+    <string name="intro4_community">Рабочее окружение от сообщества и для сообщества</string>
+    <string name="intro4_customizable">Настраиваемый</string>
 
     <!-- Minibar -->
-
+    <string name="minibar">Мини-бар</string>
     <string name="minibar_0">Изменить вид мини-бара.</string>
     <string name="minibar_1">Установить или размыть обои.</string>
     <string name="minibar_2">Заблокировать экран, требует прав администратора устройства.</string>
@@ -38,7 +27,6 @@
     <string name="minibar_8">Открыть меню приложений.</string>
 
     <!-- About -->
-
     <string name="about_libs">Библиотеки с открытым исходным кодом</string>
     <string name="about_rate">Оценить</string>
     <string name="about_credit">Участники</string>
@@ -55,22 +43,41 @@
     <string name="pref_title__about">О программе</string>
 
     <string name="pref_title__size">Размер</string>
+    <string name="pref_title__style">Стиль</string>
     <string name="pref_title__appearance">Внешний вид</string>
     <string name="pref_title__color">Цвета</string>
+    <string name="pref_title__search_bar">Строка поиска</string>
+    <string name="pref_title__interfaces">Интерфейсы</string>
+    <string name="pref_title__inputs">Ввод</string>
+    <string name="pref_title__feels">Ощущения</string>
+    <string name="pref_title__others">Другое</string>
 
     <string name="pref_title__desktop_style">Стиль</string>
+    <string name="pref_title__desktop_indicator_style">Стиль индикатора</string>
     <string name="pref_summary__desktop_style">Выбрать между обычным рабочим столом и показом всех установленных приложений.</string>
     <string name="pref_summary__minibar">Изменить порядок и видимость элементов мини-бара.</string>
     <string name="pref_title__search_bar_enable">Строка поиска</string>
     <string name="pref_summary__search_bar_enable">Показывать строку поиска на рабочем столе.</string>
     <string name="pref_title__desktop_fullscreen">Полноэкранный режим</string>
+    <string name="pref_title__desktop_hide_grid">Скрыть сетку</string>
     <string name="pref_summary__desktop_fullscreen">Использовать полноэкранный режим для рабочего стола.</string>
+    <string name="pref_summary__desktop_hide_grid">Скрыть направляющую сетку.</string>
     <string name="pref_title__desktop_show_position_indicator">Индикатор страниц</string>
-    <string name="pref_summary__desktop_show_position_indicator">Показать индикатор страниц внизу рабочего стола.</string>
+    <string name="pref_summary__desktop_show_position_indicator">Показывать индикатор страниц внизу рабочего стола.</string>
     <string name="pref_title__desktop_show_label">Показывать подписи</string>
     <string name="pref_summary__desktop_show_label">Показывать подписи под значками.</string>
+    <string name="pref_title__desktop_rotate">Поворот</string>
+    <string name="pref_summary__desktop_rotate">Разрешить поворот экрана.</string>
+
+    <string name="pref_title__search_bar_base_uri">URI поиска</string>
+    <string name="pref_summary__search_bar_base_uri">Установить URI поисковой системы.</string>
+    <string name="pref_title__search_bar_force_browser">Всегда искать в браузере</string>
+    <string name="pref_summary__search_bar_force_browser">Всегда использовать браузер для онлайн-поиска.</string>
     <string name="pref_title__desktop_background_color">Фон</string>
     <string name="pref_title__desktop_folder_color">Папка</string>
+    <string name="pref_title__search_bar_show_hidden_apps">Показывать скрытые приложения</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Включить спрятанные приложения в результаты поиска.</string>
+
     <string name="pref_summary__dock_size">Установить размер дока.</string>
     <string name="pref_title__dock_show_label">Показывать подписи</string>
     <string name="pref_summary__dock_show_label">Показывать подписи под значками.</string>
@@ -91,42 +98,52 @@
     <string name="pref_title__drawer_background_color">Фон</string>
     <string name="pref_title__drawer_card_color">Карточка</string>
     <string name="pref_title__drawer_label_color">Подпись</string>
+    <string name="pref_title__drawer_fast_scroll_color">Панель прокрутки</string>
+    <string name="pref_title__overall_animation_speed_modifier">Скорость анимаций</string>
+    <string name="pref_summnary__overall_animation_speed_modifier">Изменить скорость анимаций</string>
 
-    <string name="pref_title__dock_swipe_up">Открывать меню жестом</string>
-    <string name="pref_summary__dock_swipe_up">Проведите пальцем вверх из дока, чтобы открыть меню приложений.</string>
-    <string name="pref_title__desktop_double_tap">Двойное нажатие</string>
+
+    <string name="pref_title__gesture_quick_swipe">Открывать меню жестом</string>
+    <string name="pref_summary__gesture_quick_swipe">Проведите пальцем вверх из дока, чтобы открыть меню приложений.</string>
+    <string name="pref_title__gesture_double_tap">Двойное нажатие</string>
+
     <string name="pref_summary__icon_size">Размер всех значков приложений.</string>
     <string name="pref_title__icon_pack">Набор значков</string>
     <string name="pref_summary__icon_pack">Выбрать установленный набор значков.</string>
 
+    <string name="pref_summary__language">Изменить язык приложения. После изменения требуется перезапуск.</string>
+    <string name="pref_title__language">Язык</string>
     <string name="pref_title__backup">Резервное копирование</string>
     <string name="pref_summary__backup">Резервное копирование и восстановление настроек.</string>
     <string name="pref_title__clear_database">Очистить базу данных</string>
     <string name="pref_summary__clear_database">Удалить данные дока и рабочего стола, чтобы исправить проблемы.</string>
     <string name="pref_title__restart">Перезапустить</string>
     <string name="pref_summary__restart">Перезапустить лаунчер, если он странно себя ведёт.</string>
+    <string name="pref_summary__theme">Установить тему для всего приложения.</string>
+    <string name="pref_title__theme">Тема</string>
+    <string name="pref_title__primary_color">Основной цвет</string>
+    <string name="pref_summary__primary_color">Установить основной цвет приложения.</string>
 
-    <string name="horizontal_paged_drawer">Горизонтальный (постраничный)</string>
     <string name="vertical_scroll_drawer">Вертикальный</string>
+    <string name="horizontal_paged_drawer">Постраничный</string>
 
     <string name="desktop_mode_normal">Обычный</string>
     <string name="desktop_mode_show_all_apps">Все приложения</string>
 
-    <!-- Preference Keys -->
-
-    <string name="pref_key__outer_cat_interfaces">Интерфейсы</string>
-    <string name="pref_key__outer_cat_inputs">Ввод</string>
-    <string name="pref_key__outer_cat_others">Другое</string>
-
-    <!-- Internal Keys -->
+    <string name="desktop_indicator_mode_normal">Обычный</string>
+    <string name="desktop_indicator_mode_arrow">Стрелка</string>
+    <string name="dots">Точки</string>
 
     <!-- Item Labels -->
+    <string name="label_default">По умолчанию</string>
 
     <!-- Dialogs -->
-
+    <string name="request_dummy_text">Привет мир!</string>
     <string name="request_please_wait">Поиск установленных приложений. Подождите.</string>
     <string name="request_toast">Приложения не выбраны. Показать в меню все приложения?</string>
     <string name="on">Вкл</string>
+    <string name="desktop_action">Действия рабочего стола</string>
+    <string name="select_app">Выберите приложение</string>
     <string name="off">Выкл</string>
     <string name="ok">OK</string>
     <string name="version">Версия</string>
@@ -141,9 +158,46 @@
     <string name="dialog__backup_app_settings__error">Что-то пошло не так.</string>
     <string name="columns">Столбцы</string>
     <string name="rows">Строки</string>
+    <string name="memory">Память</string>
+    <string name="storage">Накопитель</string>
     <string name="volume_level_ringtone">Рингтон</string>
     <string name="volume_level_notification">Уведомление</string>
     <string name="volume_level_system">Система</string>
     <string name="volume_level_media">Медиа</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="debug">Отладка</string>
+    <string name="pref_title__date_bar">Панель даты</string>
+    <string name="pref_title__date_bar_text_color">Цвет текста</string>
+    <string name="pref_title__date_bar_date_format">Формат даты</string>
+    <string name="pref_title__date_bar_date_format_custom_1">Свой формат: первая строка</string>
+    <string name="pref_title__date_bar_date_format_custom_2">Свой формат: вторая строка</string>
+
+    <!-- Titles -->
+    <string name="settings">Настройки</string>
+
+    <!-- Drag Option View -->
+    <string name="edit">Изменить</string>
+    <string name="info">Информация</string>
+    <string name="uninstall">Удалить</string>
+    <string name="remove">Убрать</string>
+
+    <!-- Desktop Option View -->
+    <string name="action">Действие</string>
+    <string name="lock">Блокировка</string>
+    <string name="widget">Виджет</string>
+
+    <!-- Toasts -->
+    <string name="toast_not_enough_space">Недостаточно места.</string>
+    <string name="toast_app_uninstalled">Приложение удалено.</string>
+
+    <!-- Item Labels -->
+    <string name="folder">Без имени</string>
+
+    <!-- Dialogs -->
+    <string name="cancel">Отмена</string>
+    <string name="search_hint">Поиск...</string>
+    <string name="search_online">Поиск в сети…</string>
+    <string name="bad_format">Неверный формат</string>
 
 </resources>

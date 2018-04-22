@@ -5,24 +5,26 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
-import com.benny.openlauncher.App;
+import com.benny.openlauncher.AppObject;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.core.interfaces.SettingsManager;
-import com.benny.openlauncher.core.widget.AppDrawerController;
-import com.benny.openlauncher.core.widget.Desktop;
+import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.widget.AppDrawerController;
+import com.benny.openlauncher.widget.Desktop;
+import com.benny.openlauncher.widget.PagerIndicator;
+
+import net.gsantner.opoc.preference.SharedPreferencesPropertyBackend;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
-import io.github.gsantner.opoc.util.AppSettingsBase;
-
-public class AppSettings extends AppSettingsBase implements SettingsManager {
+public class AppSettings extends SharedPreferencesPropertyBackend {
     private AppSettings(Context context) {
         super(context);
     }
 
     public static AppSettings get() {
-        return new AppSettings(App.get());
+        return new AppSettings(AppObject.get());
     }
 
     public int getDesktopColumnCount() {
@@ -34,15 +36,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     public int getDesktopStyle() {
-        return getIntOfStringPref(R.string.pref_key__desktop_style, Desktop.DesktopMode.NORMAL);
+        return getIntOfStringPref(R.string.pref_key__desktop_style, Desktop.DesktopMode.INSTANCE.getNORMAL());
     }
 
     public void setDesktopStyle(int style) {
         setInt(R.string.pref_key__desktop_style, style);
-    }
-
-    public boolean getSearchBarEnable() {
-        return getBool(R.string.pref_key__search_bar_enable, true);
     }
 
     public boolean isDesktopFullscreen() {
@@ -57,27 +55,102 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         return getBool(R.string.pref_key__desktop_show_label, true);
     }
 
+    public boolean getSearchBarEnable() {
+        return getBool(R.string.pref_key__search_bar_enable, true);
+    }
+
     public String getSearchBarBaseURI() {
         return getString(R.string.pref_key__search_bar_base_uri, R.string.pref_default__search_bar_base_uri);
     }
 
-    @Override
-    public boolean searchBarTimeEnabled() {
+    public boolean getSearchBarForceBrowser() {
+        return getBool(R.string.pref_key__search_bar_force_browser, false);
+    }
+
+
+    public boolean getSearchBarShouldShowHiddenApps() {
+        return getBool(R.string.pref_key__search_bar_show_hidden_apps, false);
+    }
+
+
+    public boolean isSearchBarTimeEnabled() {
         return true;
     }
 
-    @Override
+
+    @SuppressLint("SimpleDateFormat")
     public SimpleDateFormat getUserDateFormat() {
-        // TODO: offer some setup for a custom format and save and retrieve it in the database
-        return null;
+        String line1 = getString(R.string.pref_key__date_bar_date_format_custom_1, rstr(R.string.pref__date_bar_date_format_custom__default_value_1));
+        String line2 = getString(R.string.pref_key__date_bar_date_format_custom_2, rstr(R.string.pref__date_bar_date_format_custom__default_value_2));
+
+        try {
+            return new SimpleDateFormat((line1 + "'\n'" + line2).replace("''", ""), Locale.getDefault());
+        } catch (Exception ex) {
+            return new SimpleDateFormat("'Invalid pattern''\n''Invalid Pattern'");
+        }
     }
 
-    public int getDesktopColor() {
+
+    public int getDesktopDateMode() {
+        return getIntOfStringPref(R.string.pref_key__date_bar_date_format_type, 1);
+    }
+
+
+    public int getDesktopDateTextColor() {
+        return getInt(R.string.pref_key__date_bar_date_text_color, Color.WHITE);
+    }
+
+
+    public boolean isResetSearchBarOnOpen() {
+        return false;
+    }
+
+
+    public boolean isSearchGridListSwitchEnabled() {
+        return false;
+    }
+
+
+    public boolean isSearchUseGrid() {
+        return getBool(R.string.pref_key__desktop_search_use_grid, false);
+    }
+
+
+    public void setSearchUseGrid(boolean enabled) {
+        setBool(R.string.pref_key__desktop_search_use_grid, enabled);
+    }
+
+
+    public int getSearchGridSize() {
+        return 4;
+    }
+
+
+    public int getSearchLabelLines() {
+        return Integer.MAX_VALUE;
+    }
+
+    public int getDesktopBackgroundColor() {
         return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
     }
 
+
     public int getDesktopFolderColor() {
         return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
+    }
+
+    public int getMinibarBackgroundColor() {
+        return getInt(R.string.pref_key__minibar_background_color, ContextCompat.getColor(_context, R.color.colorPrimary));
+    }
+
+
+    public int getFolderLabelColor() {
+        return getInt(R.string.pref_key__desktop_folder_label_color, Color.BLACK);
+    }
+
+
+    public int getDesktopIconSize() {
+        return getIconSize();
     }
 
     public boolean getDockEnable() {
@@ -98,6 +171,11 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
 
     public int getDockColor() {
         return getInt(R.string.pref_key__dock_background_color, Color.TRANSPARENT);
+    }
+
+
+    public int getDockIconSize() {
+        return getIconSize();
     }
 
     public int getDrawerColumnCount() {
@@ -133,27 +211,73 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     }
 
     public int getDrawerCardColor() {
-        return getInt(R.string.pref_key__drawer_card_color, Color.WHITE);
+        return getInt(R.string.pref_key__drawer_card_color, rcolor(R.color.drawer_background_transparentish));
     }
 
     public int getDrawerLabelColor() {
-        return getInt(R.string.pref_key__drawer_label_color, Color.DKGRAY);
+        return getInt(R.string.pref_key__drawer_label_color, Color.WHITE);
     }
 
-    public int getMinibarBackgroundColor() {
-        return getInt(R.string.pref_key__minibar_background_color, ContextCompat.getColor(context, R.color.colorPrimaryDark));
+
+    public int getDrawerFastScrollColor() {
+        return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.appContext(), R.color.op_red));
     }
 
-    public boolean getGestureDockSwipeUp() {
-        return getBool(R.string.pref_key__dock_swipe_up, true);
+
+    public int getVerticalDrawerHorizontalMargin() {
+        return 8;
+    }
+
+
+    public int getVerticalDrawerVerticalMargin() {
+        return 16;
+    }
+
+
+    public int getDrawerIconSize() {
+        return getIconSize();
     }
 
     public boolean isGestureFeedback() {
-        return getBool(R.string.pref_key__desktop_gesture_feedback, false);
+        return getBool(R.string.pref_key__gesture_feedback, false);
+    }
+
+    public boolean getGestureDockSwipeUp() {
+        return getBool(R.string.pref_key__gesture_quick_swipe, true);
+    }
+
+    public int getGestureDoubleTap() {
+        return getIntOfStringPref(R.string.pref_key__gesture_double_tap, 0);
+    }
+
+    public int getGestureSwipeUp() {
+        return getIntOfStringPref(R.string.pref_key__gesture_swipe_up, 8);
+    }
+
+    public int getGestureSwipeDown() {
+        return getIntOfStringPref(R.string.pref_key__gesture_swipe_down, 10);
+    }
+
+    public int getGesturePinch() {
+        return getIntOfStringPref(R.string.pref_key__gesture_pinch, 0);
+    }
+
+    public int getGestureUnpinch() {
+        return getIntOfStringPref(R.string.pref_key__gesture_unpinch, 0);
+    }
+
+
+    public boolean isDesktopHideGrid() {
+        return getBool(R.string.pref_key__desktop_hide_grid, true);
+    }
+
+
+    public void setDesktopHideGrid(boolean hideGrid) {
+        setBool(R.string.pref_key__desktop_hide_grid, hideGrid);
     }
 
     public int getIconSize() {
-        return getInt(R.string.pref_key__icon_size, 52);
+        return getInt(R.string.pref_key__icon_size, 48);
     }
 
     public String getIconPack() {
@@ -164,33 +288,19 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         setString(R.string.pref_key__icon_pack, value);
     }
 
+    public String getLanguage() {
+        return getString(R.string.pref_key__language, "");
+    }
+
+    public String getTheme() {
+        return getString(R.string.pref_key__theme, "0");
+    }
+
+    public int getPrimaryColor() {
+        return getInt(R.string.pref_key__primary_color, _context.getResources().getColor(R.color.colorPrimary));
+    }
+
     // internal preferences below here
-    public boolean isAppFirstLaunch() {
-        return getBool(R.string.pref_key__first_start, true);
-    }
-
-    @SuppressLint("ApplySharedPref")
-    public void setAppFirstLaunch(boolean value) {
-        // MUST be committed
-        prefApp.edit().putBoolean(context.getString(R.string.pref_key__first_start), value).commit();
-    }
-
-    public boolean isDesktopLock() {
-        return getBool(R.string.pref_key__desktop_lock, false);
-    }
-
-    public void setDesktopLock(boolean value) {
-        setBool(R.string.pref_key__desktop_lock, value);
-    }
-
-    public int getDesktopPageCurrent() {
-        return getInt(R.string.pref_key__desktop_current_position, 0);
-    }
-
-    public void setDesktopPageCurrent(int value) {
-        setInt(R.string.pref_key__desktop_current_position, value);
-    }
-
     public boolean getMinibarEnable() {
         return getBool(R.string.pref_key__minibar_enable, true);
     }
@@ -203,7 +313,7 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         ArrayList<String> ret = getStringList(R.string.pref_key__minibar_arrangement);
         if (ret.isEmpty()) {
             for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
-                ret.add("0" + item.label.toString());
+                ret.add("0" + item._label.toString());
             }
             setMinibarArrangement(ret);
         }
@@ -222,6 +332,32 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
         setStringList(R.string.pref_key__hidden_apps, value);
     }
 
+    public int getDesktopPageCurrent() {
+        return getInt(R.string.pref_key__desktop_current_position, 0);
+    }
+
+    public void setDesktopPageCurrent(int value) {
+        setInt(R.string.pref_key__desktop_current_position, value);
+    }
+
+    public boolean isDesktopLock() {
+        return getBool(R.string.pref_key__desktop_lock, false);
+    }
+
+    public void setDesktopLock(boolean value) {
+        setBool(R.string.pref_key__desktop_lock, value);
+    }
+
+
+    public int getDesktopIndicatorMode() {
+        return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.NORMAL);
+    }
+
+
+    public void setDesktopIndicatorMode(int mode) {
+        setInt(R.string.pref_key__desktop_indicator_style, mode);
+    }
+
     public boolean getAppRestartRequired() {
         return getBool(R.string.pref_key__queue_restart, false);
     }
@@ -229,7 +365,32 @@ public class AppSettings extends AppSettingsBase implements SettingsManager {
     @SuppressLint("ApplySharedPref")
     public void setAppRestartRequired(boolean value) {
         // MUST be committed
-        prefApp.edit().putBoolean(context.getString
+        _prefApp.edit().putBoolean(_context.getString
                 (R.string.pref_key__queue_restart), value).commit();
+    }
+
+    public boolean isAppFirstLaunch() {
+        return getBool(R.string.pref_key__first_start, true);
+    }
+
+    @SuppressLint("ApplySharedPref")
+    public void setAppFirstLaunch(boolean value) {
+        // MUST be committed
+        _prefApp.edit().putBoolean(_context.getString(R.string.pref_key__first_start), value).commit();
+    }
+
+
+    public boolean enableImageCaching() {
+        return true;
+    }
+
+
+    public float getDrawerLabelFontSize() {
+        return getInt(R.string.pref_key__drawer_label_font_size, 13);
+    }
+
+
+    public float getOverallAnimationSpeedModifier() {
+        return (float) (getInt(R.string.pref_key__overall_animation_speed_modifier, 30) / 100.0);
     }
 }

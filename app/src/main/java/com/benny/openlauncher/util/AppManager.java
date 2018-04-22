@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.view.Gravity;
@@ -15,11 +14,13 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.core.interfaces.App;
-import com.benny.openlauncher.core.interfaces.AppDeleteListener;
-import com.benny.openlauncher.core.interfaces.AppUpdateListener;
+import com.benny.openlauncher.interfaces.AppDeleteListener;
+import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.model.IconLabelItem;
+import com.benny.openlauncher.model.Item;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+
+import android.support.annotation.NonNull;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -30,41 +31,41 @@ import java.util.List;
 import java.util.UUID;
 
 public class AppManager {
-    private static AppManager ref;
-
-    public Context getContext() {
-        return context;
-    }
-
-    private Context context;
-
-    public PackageManager getPackageManager() {
-        return packageManager;
-    }
-
-    private PackageManager packageManager;
-    private List<App> apps = new ArrayList<>();
-    private List<App> nonFilteredApps = new ArrayList<>();
-    public final List<AppUpdateListener<App>> updateListeners = new ArrayList<>();
-    public final List<AppDeleteListener<App>> deleteListeners = new ArrayList<>();
-    public boolean recreateAfterGettingApps;
-
-    private AsyncTask task;
+    private static AppManager _ref;
 
     public static AppManager getInstance(Context context) {
-        return ref == null ? (ref = new AppManager(context)) : ref;
+        return _ref == null ? (_ref = new AppManager(context)) : _ref;
+    }
+
+    private PackageManager _packageManager;
+    private List<App> _apps = new ArrayList<>();
+    private List<App> _nonFilteredApps = new ArrayList<>();
+    public final List<AppUpdateListener> _updateListeners = new ArrayList<>();
+    public final List<AppDeleteListener> _deleteListeners = new ArrayList<>();
+    public boolean _recreateAfterGettingApps;
+    private AsyncTask _task;
+    private Context _context;
+
+    public PackageManager getPackageManager() {
+        return _packageManager;
+    }
+
+    public Context getContext() {
+        return _context;
     }
 
     public AppManager(Context c) {
-        this.context = c;
-        this.packageManager = c.getPackageManager();
+        _context = c;
+        _packageManager = c.getPackageManager();
     }
 
     public App findApp(Intent intent) {
+        if (intent == null || intent.getComponent() == null) return null;
+
         String packageName = intent.getComponent().getPackageName();
         String className = intent.getComponent().getClassName();
-        for (App app : apps) {
-            if (app.className.equals(className) && app.packageName.equals(packageName)) {
+        for (App app : _apps) {
+            if (app._className.equals(className) && app._packageName.equals(packageName)) {
                 return app;
             }
         }
@@ -72,16 +73,11 @@ public class AppManager {
     }
 
     public List<App> getApps() {
-        return apps;
+        return _apps;
     }
 
     public List<App> getNonFilteredApps() {
-        return nonFilteredApps;
-    }
-
-    public void clearListener() {
-        updateListeners.clear();
-        deleteListeners.clear();
+        return _nonFilteredApps;
     }
 
     public void init() {
@@ -89,11 +85,11 @@ public class AppManager {
     }
 
     private void getAllApps() {
-        if (task == null || task.getStatus() == AsyncTask.Status.FINISHED)
-            task = new AsyncGetApps().execute();
-        else if (task.getStatus() == AsyncTask.Status.RUNNING) {
-            task.cancel(false);
-            task = new AsyncGetApps().execute();
+        if (_task == null || _task.getStatus() == AsyncTask.Status.FINISHED)
+            _task = new AsyncGetApps().execute();
+        else if (_task.getStatus() == AsyncTask.Status.RUNNING) {
+            _task.cancel(false);
+            _task = new AsyncGetApps().execute();
         }
     }
 
@@ -103,8 +99,8 @@ public class AppManager {
 
         FastItemAdapter<IconLabelItem> fastItemAdapter = new FastItemAdapter<>();
 
-        final List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, 0);
-        Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(packageManager));
+        final List<ResolveInfo> resolveInfos = _packageManager.queryIntentActivities(intent, 0);
+        Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(_packageManager));
         final MaterialDialog d = new MaterialDialog.Builder(activity)
                 .adapter(fastItemAdapter, null)
                 .title((activity.getString(R.string.dialog__icon_pack_title)))
@@ -115,7 +111,7 @@ public class AppManager {
                 .withOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        recreateAfterGettingApps = true;
+                        _recreateAfterGettingApps = true;
                         AppSettings.get().setIconPack("");
                         getAllApps();
                         d.dismiss();
@@ -124,19 +120,19 @@ public class AppManager {
 
         for (int i = 0; i < resolveInfos.size(); i++) {
             final int mI = i;
-            fastItemAdapter.add(new IconLabelItem(activity, resolveInfos.get(i).loadIcon(packageManager), resolveInfos.get(i).loadLabel(packageManager).toString(), -1)
+            fastItemAdapter.add(new IconLabelItem(activity, resolveInfos.get(i).loadIcon(_packageManager), resolveInfos.get(i).loadLabel(_packageManager).toString(), -1)
                     .withIconGravity(Gravity.START)
                     .withOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                                recreateAfterGettingApps = true;
+                            if (ActivityCompat.checkSelfPermission(_context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                                _recreateAfterGettingApps = true;
                                 AppSettings.get().setIconPack(resolveInfos.get(mI).activityInfo.packageName);
                                 getAllApps();
                                 d.dismiss();
                             } else {
-                                Tool.toast(context, (activity.getString(R.string.dialog__icon_pack_info_toast)));
-                                ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
+                                Tool.toast(_context, (activity.getString(R.string.dialog__icon_pack_info_toast)));
+                                ActivityCompat.requestPermissions(Home.Companion.getLauncher(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
                             }
                         }
                     }));
@@ -148,12 +144,66 @@ public class AppManager {
         getAllApps();
     }
 
+    // -----------------------
+    // AppLoader interface
+    // -----------------------
+
+    public List<App> getAllApps(Context context, boolean includeHidden) {
+        return includeHidden ? getNonFilteredApps() : getApps();
+    }
+
+    public App findItemApp(Item item) {
+        return findApp(item.getIntent());
+    }
+
+    public App createApp(Intent intent) {
+        try {
+            ResolveInfo info = _packageManager.resolveActivity(intent, 0);
+            App app = new App(getContext(), info, _packageManager);
+            if (_apps != null && !_apps.contains(app))
+                _apps.add(app);
+            return app;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public void onAppUpdated(Context p1, Intent p2) {
+        onReceive(p1, p2);
+    }
+
+    public void addUpdateListener(AppUpdateListener updateListener) {
+        _updateListeners.add(updateListener);
+    }
+
+    public void addDeleteListener(AppDeleteListener deleteListener) {
+        _deleteListeners.add(deleteListener);
+    }
+
+    public void notifyUpdateListeners(@NonNull List<App> apps) {
+        Iterator<AppUpdateListener> iter = _updateListeners.iterator();
+        while (iter.hasNext()) {
+            if (iter.next().onAppUpdated(apps)) {
+                iter.remove();
+            }
+        }
+    }
+
+    public void notifyRemoveListeners(@NonNull List<App> apps) {
+        Iterator<AppDeleteListener> iter = _deleteListeners.iterator();
+        while (iter.hasNext()) {
+            if (iter.next().onAppDeleted(apps)) {
+                iter.remove();
+            }
+        }
+    }
+
     private class AsyncGetApps extends AsyncTask {
         private List<App> tempApps;
 
         @Override
         protected void onPreExecute() {
-            tempApps = new ArrayList<>(apps);
+            tempApps = new ArrayList<>(_apps);
             super.onPreExecute();
         }
 
@@ -165,46 +215,46 @@ public class AppManager {
 
         @Override
         protected Object doInBackground(Object[] p1) {
-            apps.clear();
-            nonFilteredApps.clear();
+            _apps.clear();
+            _nonFilteredApps.clear();
 
             Intent intent = new Intent(Intent.ACTION_MAIN, null);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            List<ResolveInfo> activitiesInfo = packageManager.queryIntentActivities(intent, 0);
+            List<ResolveInfo> activitiesInfo = _packageManager.queryIntentActivities(intent, 0);
             Collections.sort(activitiesInfo, new Comparator<ResolveInfo>() {
                 @Override
                 public int compare(ResolveInfo p1, ResolveInfo p2) {
-                    return Collator.getInstance().compare(p1.loadLabel(packageManager).toString(), p2.loadLabel(packageManager).toString());
+                    return Collator.getInstance().compare(p1.loadLabel(_packageManager).toString(), p2.loadLabel(_packageManager).toString());
                 }
             });
 
             for (ResolveInfo info : activitiesInfo) {
-                App app = new App(context, info, packageManager);
-                nonFilteredApps.add(app);
+                App app = new App(_context, info, _packageManager);
+                _nonFilteredApps.add(app);
             }
 
             List<String> hiddenList = AppSettings.get().getHiddenAppsList();
             if (hiddenList != null) {
-                for (int i = 0; i < nonFilteredApps.size(); i++) {
+                for (int i = 0; i < _nonFilteredApps.size(); i++) {
                     boolean shouldGetAway = false;
                     for (String hidItemRaw : hiddenList) {
-                        if ((nonFilteredApps.get(i).packageName + "/" + nonFilteredApps.get(i).className).equals(hidItemRaw)) {
+                        if ((_nonFilteredApps.get(i)._packageName + "/" + _nonFilteredApps.get(i)._className).equals(hidItemRaw)) {
                             shouldGetAway = true;
                             break;
                         }
                     }
                     if (!shouldGetAway) {
-                        apps.add(nonFilteredApps.get(i));
+                        _apps.add(_nonFilteredApps.get(i));
                     }
                 }
             } else {
                 for (ResolveInfo info : activitiesInfo)
-                    apps.add(new App(context, info, packageManager));
+                    _apps.add(new App(_context, info, _packageManager));
             }
 
             AppSettings appSettings = AppSettings.get();
-            if (!appSettings.getIconPack().isEmpty() && Tool.isPackageInstalled(appSettings.getIconPack(), packageManager)) {
-                IconPackHelper.themePacs(AppManager.this, Tool.dp2px(appSettings.getIconSize(), context), appSettings.getIconPack(), apps);
+            if (!appSettings.getIconPack().isEmpty() && Tool.isPackageInstalled(appSettings.getIconPack(), _packageManager)) {
+                IconPackHelper.themePacs(AppManager.this, Tool.dp2px(appSettings.getIconSize(), _context), appSettings.getIconPack(), _apps);
             }
             return null;
         }
@@ -212,86 +262,24 @@ public class AppManager {
         @Override
         protected void onPostExecute(Object result) {
 
-            Iterator<AppUpdateListener<App>> iter = updateListeners.iterator();
-            while (iter.hasNext()) {
-                if (iter.next().onAppUpdated(apps)) {
-                    iter.remove();
-                }
+            notifyUpdateListeners(_apps);
+
+            List<App> removed = Tool.getRemovedApps(tempApps, _apps);
+            if (removed.size() > 0) {
+                notifyRemoveListeners(removed);
             }
 
-            if (tempApps.size() > apps.size()) {
-                App temp = null;
-                for (int i = 0; i < tempApps.size(); i++) {
-                    if (!apps.contains(tempApps.get(i))) {
-                        temp = tempApps.get(i);
-                        break;
-                    }
-                }
-                for (AppDeleteListener<App> listener : deleteListeners) {
-                    listener.onAppDeleted(temp);
-                }
-            }
-
-            if (recreateAfterGettingApps) {
-                recreateAfterGettingApps = false;
-                if (context instanceof Home)
-                    ((Home) context).recreate();
+            if (_recreateAfterGettingApps) {
+                _recreateAfterGettingApps = false;
+                if (_context instanceof Home)
+                    ((Home) _context).recreate();
             }
 
             super.onPostExecute(result);
         }
     }
 
-    public static class App implements com.benny.openlauncher.core.interfaces.App {
-        public String label, packageName, className;
-        public Drawable icon;
-        public ResolveInfo info;
-
-        public App(Context context, ResolveInfo info, PackageManager pm) {
-            this.info = info;
-
-            icon = info.loadIcon(pm);
-            label = info.loadLabel(pm).toString();
-            packageName = info.activityInfo.packageName;
-            className = info.activityInfo.name;
-
-            if (packageName.equals("com.benny.openlauncher")) {
-                label = context.getString(R.string.ol_settings);
-            }
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (o instanceof App) {
-                App temp = (App) o;
-                return this.packageName.equals(temp.packageName);
-            } else {
-                return false;
-            }
-        }
-
-        @Override
-        public String getLabel() {
-            return label;
-        }
-
-        @Override
-        public String getPackageName() {
-            return packageName;
-        }
-
-        @Override
-        public String getClassName() {
-            return className;
-        }
-
-        @Override
-        public Drawable getIcon() {
-            return icon;
-        }
-    }
-
-    public static abstract class AppUpdatedListener implements AppUpdateListener<App> {
+    public static abstract class AppUpdatedListener implements AppUpdateListener {
         private String listenerID;
 
         public AppUpdatedListener() {

@@ -1,125 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!-- Titles -->
-    <string name="minibar">Minibar</string>
-    <string name="pref_title__about">À propos</string>
-
-    <!-- Drag Option View -->
-
-    <!-- Desktop Option View -->
-
     <!-- Toasts -->
-
     <string name="toast_free_ram">Mémoire disponible : %1$d mb %2$d mb économisé</string>
-    <string name="toast_free_all_ram">Mémoire disponible : %1$d mb Votre RAM est en pleine forme</string>
-    <string name="toast_device_admin_required">Veuillez activer l\administration de l\'appareil</string>
+    <string name="toast_free_all_ram">Mémoire disponible : %1$d MB. Votre RAM est en pleine forme.</string>
+    <string name="toast_device_admin_required">Veuillez autoriser l\'administration de l\'appareil.</string>
 
     <!-- Intro -->
-
     <string name="intro_skip">Ignorer</string>
     <string name="intro_finish">C\'est parti.</string>
-    <string name="intro1_text">Merci d\'avoir choisi OpenLauncher. Il est entièrement open source et toujours en développement.
-        Voilà une rapide intro sur son fonctionnement...</string>
-    <string name="intro2_text">Glissez le doigt depuis le bord de gauche de votre écran pour ouvrir la Minibar. Là, vous pourrez accéder aux paramètres, modifier le fond d\'écran et beaucoup d\'autres choses.</string>
+    <string name="intro1_text">Merci d\'avoir choisi OpenLauncher. Il est entièrement open source et toujours en développement.         Voici une rapide introduction sur son fonctionnement…</string>
+    <string name="intro2_text">Glissez votre doigt depuis le bord de gauche de votre écran pour ouvrir la Minibarre. Cette dernière vous permet d\'accéder aux paramètres, changer de fond d\'écran et beaucoup d\'autres choses.</string>
     <string name="intro3_title">Paramètres</string>
     <string name="intro3_text">Vous pouvez configurer votre bureau, le tiroir d\'applis, le dock... Essayez-la !</string>
+    <string name="intro4_community">Le lanceur d\'applications créé par la communauté, pour la communauté</string>
+    <string name="intro4_features">Remplis de fonctionnalités</string>
+    <string name="intro4_customizable">Personnalisable</string>
+    <string name="custom">Personnalisation</string>
 
     <!-- Minibar -->
-
-    <string name="minibar_0">Modifier la disposition de la Minibar.</string>
-    <string name="minibar_1">Définir et flouter le fond d\écran.</string>
-    <string name="minibar_2">Verrouiller l\'écran immédiatement, requiert l\'administration de l\'appareil.</string>
-    <string name="minibar_3">Libérer de la RAM en forçant la fermeture d\'autres services en-cours.</string>
+    <string name="minibar">Minibarre</string>
+    <string name="minibar_0">Modifier la disposition de la Minibarre.</string>
+    <string name="minibar_1">Définir et rendre le fond d\'écran flou.</string>
+    <string name="minibar_2">Verrouiller l\'écran immédiatement, requiert le droit d\'administration de l\'appareil.</string>
+    <string name="minibar_3">Libérer de la mémoire vive en forçant la fermeture d\'autres services en cours.</string>
     <string name="minibar_4">Raccourci vers les paramètres de l\'appareil.</string>
     <string name="minibar_5">Raccourci vers les paramètres d\'OpenLauncher.</string>
     <string name="minibar_7">Ouvrir la pop-up du volume.</string>
-    <string name="minibar_8">Ouvrir le tiroir des applis.</string>
+    <string name="minibar_8">Ouvrir le volet des applications.</string>
 
     <!-- About -->
-
     <string name="about_libs">Bibliothèques Open Source</string>
     <string name="about_rate">Noter</string>
     <string name="about_credit">Contributeurs</string>
+    <string name="about_credit_text_all_contributors">Tous les contributeurs</string>
 
     <!-- Settings -->
 
     <string name="pref_title__desktop">Bureau</string>
     <string name="pref_title__dock">Dock</string>
-    <string name="pref_title__app_drawer">Tiroir Applis</string>
+    <string name="pref_title__app_drawer">Volet des applications</string>
     <string name="pref_title__gestures">Gestes</string>
     <string name="pref_title__icons">Icônes</string>
     <string name="pref_title__miscellaneous">Divers</string>
+    <string name="pref_title__about">À propos de</string>
 
     <string name="pref_title__size">Taille</string>
+    <string name="pref_title__style">Style</string>
     <string name="pref_title__appearance">Apparence</string>
     <string name="pref_title__color">Couleurs</string>
+    <string name="pref_title__search_bar">Barre de recherche</string>
+    <string name="pref_title__interfaces">Préférences</string>
+    <string name="pref_title__inputs">Interactions</string>
+    <string name="pref_title__feels">Ambiance</string>
+    <string name="pref_title__others">Autres</string>
 
-    <string name="pref_summary__minibar">Configurer l\'ordre et la visibilité des éléments de la Minibar.</string>
+    <string name="pref_title__desktop_style">Style</string>
+    <string name="pref_title__desktop_indicator_style">Style de l\'indicateur</string>
+    <string name="pref_summary__desktop_style">Choisir entre afficher un bureau standard ou montrer toutes les applications installées.</string>
+    <string name="pref_summary__minibar">Configurer l\'ordre et la visibilité des éléments de la Minibarre.</string>
     <string name="pref_title__search_bar_enable">Barre de recherche</string>
-    <string name="pref_summary__search_bar_enable">Afficher une barre de recherche par-dessus le bureau.</string>
+    <string name="pref_summary__search_bar_enable">Afficher une barre de recherche sur le bureau.</string>
     <string name="pref_title__desktop_fullscreen">Plein écran</string>
+    <string name="pref_title__desktop_hide_grid">Cacher la grille</string>
     <string name="pref_summary__desktop_fullscreen">Activer le plein écran pour votre bureau.</string>
-    <string name="pref_title__desktop_show_position_indicator">Position indicateur</string>
-    <string name="pref_summary__desktop_show_position_indicator">Afficher l\'indicateur de la page en bas du bureau.</string>
-    <string name="pref_title__desktop_show_label">Libellé</string>
+    <string name="pref_summary__desktop_hide_grid">Cacher la grille d\'alignement.</string>
+    <string name="pref_title__desktop_show_position_indicator">Position de l\'indicateur</string>
+    <string name="pref_summary__desktop_show_position_indicator">Afficher l\'indicateur de bureau au bas de l\'écran.</string>
+    <string name="pref_title__desktop_show_label">Montrer les noms</string>
     <string name="pref_summary__desktop_show_label">Afficher les noms des applis et dossiers sous leurs icônes.</string>
+    <string name="pref_title__desktop_rotate">Rotation</string>
+    <string name="pref_summary__desktop_rotate">Allouer la rotation de l\'écran</string>
+
+    <string name="pref_title__search_bar_base_uri">URI de recherche</string>
+    <string name="pref_summary__search_bar_base_uri">Spécifier l\'URI utilisée pour les recherches sur internet.</string>
+    <string name="pref_dialog__search_bar_base_uri">Entrez l\'URI devant être utilisée pour les recherches sur internet. L\'étiquette {query} peut être utilisée en remplacement de la requête. Si cette étiquette n\'est pas présente, la requête sera ajoutée à la fin de l\'URI.</string>
+    <string name="pref_title__search_bar_force_browser">Forcer la recherche via le navigateur</string>
+    <string name="pref_summary__search_bar_force_browser">Toujours utiliser le navigateur pour les recherches sur internet.</string>
     <string name="pref_title__desktop_background_color">Arrière-plan</string>
     <string name="pref_title__desktop_folder_color">Dossier</string>
+    <string name="pref_title__desktop_folder_color_text">Couleur du dossier</string>
+    <string name="pref_title__search_bar_show_hidden_apps">Montrer les applications cachées</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Inclure des applications cachées dans les résultats de recherches</string>
 
     <string name="pref_summary__dock_size">Définir la taille du dock.</string>
-    <string name="pref_title__dock_show_label">Libellé</string>
-    <string name="pref_summary__dock_show_label">Afficher les noms des applis et dossiers sous leurs icônes.</string>
+    <string name="pref_title__dock_show_label">Montrer les noms</string>
+    <string name="pref_summary__dock_show_label">Afficher le nom des applications et des dossiers sous leurs icônes.</string>
     <string name="pref_title__dock_background_color">Arrière-plan</string>
 
     <string name="pref_title__drawer_style">Style</string>
-    <string name="pref_summary__drawer_style">Choisir entre un tiroir d\'applis horizontal ou vertical.</string>
-    <string name="pref_title__drawer_show_card_view">Carte</string>
-    <string name="pref_summary__drawer_show_card_view">Afficher une vue Carte par-dessus l\'arrière-plan du tiroir.</string>
+    <string name="pref_summary__drawer_style">Choisir entre un volet d\'applications paginé ou vertical.</string>
+    <string name="pref_title__hide_apps">Cacher des applications</string>
+    <string name="pref_summary__hide_apps">Masquer les applications sélectionnées du launcher.</string>
+    <string name="pref_title__drawer_show_card_view">Masque</string>
+    <string name="pref_summary__drawer_show_card_view">Placer un écran de masquage derrière le volet des applications.</string>
     <string name="pref_title__drawer_remember_position">Se rappeler de la dernière page</string>
-    <string name="pref_summary__drawer_remember_position">Garder trace de la page actuelle du tiroir d\'applis.</string>
-    <string name="pref_title__drawer_show_position_indicator">Position indicateur</string>
+    <string name="pref_summary__drawer_remember_position">Mémoriser la page courante du volet des applications.</string>
+    <string name="pref_title__drawer_show_position_indicator">Position de l\'indicateur</string>
     <string name="pref_summary__drawer_show_position_indicator">Afficher l\'indicateur de page ou la barre de défilement selon le style.</string>
-    <string name="pref_title__drawer_show_label">Libellé</string>
-    <string name="pref_summary__drawer_show_label">Afficher les libellés des applis sous leur icône.</string>
+    <string name="pref_title__drawer_show_label">Montrer les noms</string>
+    <string name="pref_summary__drawer_show_label">Afficher le nom des applications sous leur icône.</string>
     <string name="pref_title__drawer_background_color">Arrière-plan</string>
-    <string name="pref_title__drawer_card_color">Affichage carte</string>
-    <string name="pref_title__drawer_label_color">Libellé</string>
+    <string name="pref_title__drawer_card_color">Masque</string>
+    <string name="pref_title__drawer_label_color">Nom</string>
+    <string name="pref_title__drawer_fast_scroll_color">Défilement rapide</string>
+    <string name="settings__pref_drawer_label_font_size">Grandeur du texte des étiquettes</string>
+    <string name="pref_title__overall_animation_speed_modifier">Vitesse d\'animation</string>
+    <string name="pref_summnary__overall_animation_speed_modifier">Modifier la vitesse des animations</string>
 
-    <string name="pref_title__dock_swipe_up">Glisser pour ouvrir</string>
-    <string name="pref_summary__dock_swipe_up">Glisser vers le haut sur le dock pour ouvrir le tiroir.</string>
-    <string name="pref_title__desktop_double_tap">Appui double</string>
-    <string name="pref_title__desktop_swipe_up">Glisser vers le haut</string>
-    <string name="pref_title__desktop_swipe_down">Glisser vers le bas</string>
-    <string name="pref_title__desktop_pinch">Pincement</string>
-	<string name="pref_title__desktop_unpinch">Écartement</string>
 
-    <string name="pref_summary__icon_size">Taille de tous les icônes d\'applis.</string>
+    <string name="pref_title__gesture_feedback">Retour sur les gestes effectués</string>
+    <string name="pref_summary__gesture_feedback">Obtenir un retour lors d\'un appui long sur un élément du bureau.</string>
+    <string name="pref_title__gesture_quick_swipe">Glisser pour ouvrir</string>
+    <string name="pref_summary__gesture_quick_swipe">Glisser vers le haut sur le dock pour ouvrir le volet des applications.</string>
+    <string name="pref_title__gesture_double_tap">Appui double</string>
+    <string name="pref_title__gesture_swipe_up">Glisser vers le haut</string>
+    <string name="pref_title__gesture_swipe_down">Glisser vers le bas</string>
+    <string name="pref_title__gesture_pinch">Pincement</string>
+    <string name="pref_title__gesture_unpinch">Écartement</string>
+
+    <string name="pref_summary__icon_size">Taille des icônes des applications.</string>
     <string name="pref_title__icon_pack">Pack d\'icônes</string>
     <string name="pref_summary__icon_pack">Sélectionner un pack d\'icônes installé.</string>
-    <string name="pref_title__hide_apps">Masquer des applis</string>
-    <string name="pref_summary__hide_apps">Masquer les applis sélectionnées du launcher.</string>
 
+    <string name="pref_summary__language">Changer la langue de l\'application. Vous devez redémarrer l\'application pour que le changement soit pris en compte</string>
+    <string name="pref_title__language">Langue</string>
     <string name="pref_title__backup">Sauvegarde</string>
     <string name="pref_summary__backup">Sauvegarder et restaurer vos paramètres.</string>
     <string name="pref_title__clear_database">Vider la base de données</string>
     <string name="pref_summary__clear_database">Supprimer les données de votre dock et bureau pour corriger des problèmes.</string>
     <string name="pref_title__restart">Redémarrer</string>
     <string name="pref_summary__restart">Redémarrer le launcher en cas de comportement étrange.</string>
+    <string name="pref_summary__theme">Définir le thème global de l\'application</string>
+    <string name="pref_title__theme">Thème</string>
+    <string name="pref_title__primary_color">Couleur primaire</string>
+    <string name="pref_summary__primary_color">Choisir la couleur principale de l\'application.</string>
+
+    <string name="vertical_scroll_drawer">Vertical</string>
+    <string name="horizontal_paged_drawer">Paginé</string>
+
+    <string name="desktop_mode_normal">Normal</string>
+    <string name="desktop_mode_show_all_apps">Montrer toutes les applications</string>
+
+    <string name="desktop_indicator_mode_normal">Normal</string>
+    <string name="desktop_indicator_mode_arrow">Flèche</string>
+    <string name="dots">Points</string>
 
     <!-- Item Labels -->
+    <string name="label_default">Défaut</string>
 
     <!-- Dialogs -->
-
     <string name="request_dummy_text">Bonjour !</string>
-    <string name="request_please_wait">Recherche des applis installées. Veuillez patienter.</string>
-    <string name="request_toast">Aucune appli sélectionnée. Afficher toutes les applis dans le tiroir ?</string>
+    <string name="request_please_wait">Recherche des applications installées. Veuillez patienter.</string>
+    <string name="request_toast">Aucune application sélectionnée. Afficher toutes les applications dans le volet ?</string>
     <string name="on">Activé</string>
+    <string name="desktop_action">Action du bureau</string>
+    <string name="select_app">Choisir l\'application</string>
     <string name="off">Désactivé</string>
     <string name="ok">OK</string>
+    <string name="version">Version</string>
     <string name="wallpaper">Fond d\'écran</string>
     <string name="wallpaper_pick">Sélectionner un fond d\'écran</string>
-    <string name="wallpaper_unable_to_blur">Impossible de flouter</string>
+    <string name="wallpaper_unable_to_blur">Impossible de rendre flou</string>
     <string name="dialog__icon_pack_title">Sélectionner un pack d\'icônes</string>
     <string name="dialog__icon_pack_info_toast">Impossible de récupérer l\'icône sans la permission READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Sauvegarder</string>
@@ -128,4 +169,49 @@
     <string name="dialog__backup_app_settings__error">Une erreur est survenue.</string>
     <string name="columns">Colonnes</string>
     <string name="rows">Lignes</string>
+    <string name="memory">Mémoire</string>
+    <string name="storage">Stockage</string>
+    <string name="volume_level_ringtone">Sonnerie</string>
+    <string name="volume_level_notification">Notification</string>
+    <string name="volume_level_system">Système</string>
+    <string name="volume_level_media">Media</string>
+    <string name="theme_light">Clair</string>
+    <string name="theme_dark">Foncé</string>
+    <string name="debug">Déboguage</string>
+    <string name="pref_title__date_bar">Barre de dates</string>
+    <string name="pref_title__date_bar_text_color">Couleur du texte</string>
+    <string name="pref_title__date_bar_date_format">Format de la date</string>
+    <string name="pref_title__date_bar_date_format_custom_1">Format personnalisé: Ligne 1</string>
+    <string name="pref_title__date_bar_date_format_custom_2">Format personnalisé: Ligne 2</string>
+
+
+    <!-- Titles -->
+    <string name="settings">Paramètres</string>
+
+    <!-- Drag Option View -->
+    <string name="edit">Modifier</string>
+    <string name="info">Info</string>
+    <string name="uninstall">Désinstaller</string>
+    <string name="remove">Supprimer</string>
+
+    <!-- Desktop Option View -->
+    <string name="home">Accueil</string>
+    <string name="action">Action</string>
+    <string name="lock">Verrouiller</string>
+    <string name="widget">Widget</string>
+
+    <!-- Toasts -->
+    <string name="toast_not_enough_space">Espace insuffisant.</string>
+    <string name="toast_app_uninstalled">Cette application a été désinstallée.</string>
+
+    <!-- Item Labels -->
+    <string name="folder">Aucun nom</string>
+
+    <!-- Dialogs -->
+    <string name="cancel">Annuler</string>
+    <string name="search_hint">Chercher…</string>
+    <string name="search_online">Rechercher sur internet…</string>
+    <string name="bad_format">Mauvais Format</string>
+
+
 </resources>
