@@ -51,6 +51,7 @@ import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.AppUpdateReceiver;
+import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherAction.Action;
@@ -911,32 +912,23 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
     private final void createWidget(Intent data) {
         Bundle extras = data.getExtras();
-        int appWidgetId = extras.getInt("appWidgetId", -1);
+        int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
         AppWidgetProviderInfo appWidgetInfo = Companion.getAppWidgetManager().getAppWidgetInfo(appWidgetId);
         Item item = Item.newWidgetItem(appWidgetId);
-        int i = appWidgetInfo.minWidth - 1;
-        List pages = getDesktop().getPages();
-        Home launcher = Companion.getLauncher();
-        Desktop desktop2 = (Desktop) launcher.findViewById(R.id.desktop);
-        Object obj = pages.get(desktop2.getCurrentItem());
-
-        item._spanX = (i / ((CellContainer) obj).getCellWidth()) + 1;
-        i = appWidgetInfo.minHeight - 1;
-        pages = getDesktop().getPages();
-        launcher = Companion.getLauncher();
-        obj = pages.get(desktop2.getCurrentItem());
-
-        item._spanY = (i / ((CellContainer) obj).getCellHeight()) + 1;
-        Desktop desktop3 = (Desktop) findViewById(R.id.desktop);
-        Point point = desktop3.getCurrentPage().findFreeSpace(item._spanX, item._spanY);
+        Desktop desktop = getDesktop();
+        List<CellContainer> pages = desktop.getPages();
+        item._spanX = (appWidgetInfo.minWidth - 1) / pages.get(desktop.getCurrentItem()).getCellWidth() + 1;
+        item._spanY = (appWidgetInfo.minHeight - 1) / pages.get(desktop.getCurrentItem()).getCellHeight() + 1;
+        Point point = desktop.getCurrentPage().findFreeSpace(item._spanX, item._spanY);
         if (point != null) {
             item._x = point.x;
             item._y = point.y;
-            DataManager db = Companion.getDb();
-            db.saveItem(item, desktop2.getCurrentItem(), ItemPosition.Desktop);
-            getDesktop().addItemToPage(item, getDesktop().getCurrentItem());
+
+            // add item to database
+            _db.saveItem(item, desktop.getCurrentItem(), Definitions.ItemPosition.Desktop);
+            desktop.addItemToPage(item, desktop.getCurrentItem());
         } else {
-            Tool.toast((Context) this, (int) R.string.toast_not_enough_space);
+            Tool.toast(this, R.string.toast_not_enough_space);
         }
     }
 

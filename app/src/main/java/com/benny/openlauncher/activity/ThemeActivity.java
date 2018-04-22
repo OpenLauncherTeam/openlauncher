@@ -11,7 +11,7 @@ import com.benny.openlauncher.util.AppSettings;
 
 public abstract class ThemeActivity extends AppCompatActivity {
 
-    private AppSettings _appSettings;
+    protected AppSettings _appSettings;
     private String _currentTheme;
 
     @Override
@@ -25,7 +25,7 @@ public abstract class ThemeActivity extends AppCompatActivity {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(dark(_appSettings.getPrimaryColor(), 0.8));
-            getWindow().setNavigationBarColor(_appSettings.getPrimaryColor());
+            //getWindow().setNavigationBarColor(_appSettings.getPrimaryColor());
         }
         super.onCreate(savedInstanceState);
     }

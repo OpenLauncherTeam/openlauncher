@@ -80,8 +80,8 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
 
     @SuppressLint("SimpleDateFormat")
     public SimpleDateFormat getUserDateFormat() {
-        String line1 = getString(R.string.pref_key__date_bar_date_format_custom_1, rstr(R.string.pref_key__date_bar_date_format_custom__default_value_1));
-        String line2 = getString(R.string.pref_key__date_bar_date_format_custom_2, rstr(R.string.pref_key__date_bar_date_format_custom__default_value_2));
+        String line1 = getString(R.string.pref_key__date_bar_date_format_custom_1, rstr(R.string.pref__date_bar_date_format_custom__default_value_1));
+        String line2 = getString(R.string.pref_key__date_bar_date_format_custom_2, rstr(R.string.pref__date_bar_date_format_custom__default_value_2));
 
         try {
             return new SimpleDateFormat((line1 + "'\n'" + line2).replace("''", ""), Locale.getDefault());

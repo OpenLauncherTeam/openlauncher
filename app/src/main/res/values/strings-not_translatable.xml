@@ -3,8 +3,8 @@
     <string name="intro1_title" translatable="false">@string/app_name</string>
     <string name="intro2_title" translatable="false">@string/minibar</string>
     <string name="truly_launcher" translatable="false">The truly open source launcher that comes with awesome features!</string>
-    <string name="pref_key__date_bar_date_format_custom__default_value_1" translatable="false"><![CDATA[EEEE\', \'dd\'.\']]></string>
-    <string name="pref_key__date_bar_date_format_custom__default_value_2" translatable="false"><![CDATA[MMMM yyyy\', KW \'ww]]></string>
+    <string name="pref__date_bar_date_format_custom__default_value_1" translatable="false"><![CDATA[EEEE\', \'dd\'.\']]></string>
+    <string name="pref__date_bar_date_format_custom__default_value_2" translatable="false"><![CDATA[MMMM yyyy\', KW \'ww]]></string>
 
     <string name="about_team" translatable="false">Open Launcher Team</string>
     <string name="about_credit_text_bennykok" translatable="false">Project starter</string>
@@ -75,11 +75,11 @@
     <string name="pref_key__icon_size" translatable="false">pref_key__icon_size</string>
     <string name="pref_key__icon_pack" translatable="false">pref_key__icon_pack</string>
 
-    <string name="pref_key__language" translatable="false" >pref_key__language</string>
+    <string name="pref_key__language" translatable="false">pref_key__language</string>
     <string name="pref_key__backup" translatable="false">pref_key__backup</string>
     <string name="pref_key__clear_database" translatable="false">pref_key__clear_database</string>
     <string name="pref_key__restart" translatable="false">pref_key__restart</string>
-    <string name="pref_key__theme" translatable="false" >pref_key__theme</string>
+    <string name="pref_key__theme" translatable="false">pref_key__theme</string>
     <string name="pref_key__primary_color" translatable="false">pref_key__primary_color</string>
 
     <string name="pref_key__cat_desktop" translatable="false">pref_key__cat_desktop</string>

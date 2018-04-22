@@ -215,7 +215,7 @@ public class HpDragNDrop {
 
             @Override
             public void onEnd() {
-                Home.Companion.getLauncher().getDesktopIndicator().hideDelay();
+                _home.getDesktopIndicator().hideDelay();
                 for (CellContainer page : _home.getDesktop().getPages()) {
                     page.clearCachedOutlineBitmap();
                 }
