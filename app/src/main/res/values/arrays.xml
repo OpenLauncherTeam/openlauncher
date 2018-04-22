@@ -13,6 +13,7 @@
         <item>@string/open_app_drawer</item>
         <item>@string/launch_app</item>
         <item>@string/pref_title__search_bar</item>
+        <item>@string/mobile_network_settings</item>
     </string-array>
 
     <string-array name="entries__desktop_actions" translatable="false">
@@ -82,6 +83,7 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
+        <item>11</item>
     </string-array>
 
 </resources>
