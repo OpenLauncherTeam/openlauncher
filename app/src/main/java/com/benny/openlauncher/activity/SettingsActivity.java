@@ -20,11 +20,14 @@ import android.text.TextUtils;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.preference.ColorPreferenceCompat;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.viewutil.DialogHelper;
+import com.jaredrummler.android.colorpicker.ColorPickerDialog;
+import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
 
 import net.gsantner.opoc.preference.GsPreferenceFragmentCompat;
 import net.gsantner.opoc.util.ContextUtils;
@@ -296,6 +299,20 @@ public class SettingsActivity extends ThemeActivity {
                     return true;
                 }
             }
+
+            if (preference instanceof ColorPreferenceCompat) {
+                ColorPickerDialog dialog = ((ColorPreferenceCompat) preference).getDialog();
+                dialog.setColorPickerDialogListener(new ColorPickerDialogListener() {
+                    public void onColorSelected(int dialogId, int color) {
+                        ((ColorPreferenceCompat) preference).saveValue(color);
+                    }
+
+                    public void onDialogDismissed(int dialogId) {
+                    }
+                });
+                dialog.show(getActivity().getFragmentManager(), "color-picker-dialog");
+            }
+
             return false;
         }
     }
