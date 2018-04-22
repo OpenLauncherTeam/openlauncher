@@ -249,6 +249,46 @@
     <string name="cancel">Abbrechen</string>
     <string name="search_hint">Suchen...</string>
     <string name="search_online">ONLINE SUCHEN</string>
+    <string name="bad_format">Format ungültig</string>
+    <string name="clear_user_data">Benutzerdaten löschen</string>
+    <string name="clear_user_data_are_you_sure">Bist du sicher? Deine Verknüpfungen werden gelöscht.</string>
+
+    <string name="open_source_licenses">Open Source Lizenzen</string>
+    <string name="rate_the_app">App bewerten</string>
+    <string name="translate">Übersetzen</string>
+    <string name="help_this_app">Mehr Infos und Hilfe zu dieser App</string>
+    <string name="bug_reports">Fehler melden</string>
+    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Weitere Informationen zum Spenden oder zur anderweitigen Unterstützung dieses Projekts</string>
+    <string name="android_contribution_guide">Unterstützungs Guide für Android</string>
+    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Weitere Informationen zum Beitrag zu Open Source-Projekten, insbesondere zu Android Apps</string>
+    <string name="join_community">Community beitreten</string>
+    <string name="bug_reports_suggest_improvements">Feedback geben, Fehler melden, Verbesserungen vorschlagen</string>
+    <string name="help_translating_this_app">Übersetzen dieser App in andere Sprachen</string>
+    <string name="source_code">Quellcode</string>
+    <string name="project_license">Projekt Lizenz</string>
+    <string name="project_contribution_info">Projekt-Unterstützungs-Info</string>
+    <string name="more_info_on_how_to_contribute_to_this_project">Weitere Informationen dazu, wie dieses Projekt unterstützt werden kann</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">Projekt mit Code unterstützen. Alle sind eingeladen das zu tun, auch Newcomer</string>
+    <string name="project_team">Projekt Team</string>
+    <string name="contributors_public_info">Zeige Informationen über Mitwirkende. Mitwirkende können Informationen bereitstellen die hier angezeigt werden (Opt-in), nach der Mitwirkung.</string>
+    <string name="help">Hilfe</string>
+    <string name="licenses">Lizenzen</string>
+    <string name="contributors">Beitragende</string>
+    <string name="changelog">Änderungen</string>
+    <string name="more">Mehr</string>
+    <string name="contribute">Beitragen</string>
+    <string name="donate">Spenden</string>
+    <string name="set_wallpaper">Wallpaper setzen</string>
+    <string name="none">Nichts</string>
+    <string name="minibar_settings">Minibar Einstellungen</string>
+    <string name="lock_screen">Lock Screen</string>
+    <string name="clear_ram">RAM bereinigen</string>
+    <string name="device_settings">Geräte-Einstellungen</string>
+    <string name="launcher_settings">Launcher-Einstellungen</string>
+    <string name="volume_dialog">Lautstärke-Dialog</string>
+    <string name="open_app_drawer">App Drawer öffnen</string>
+    <string name="launch_app">App starten</string>
+    <string name="app_drawer">App Drawer</string>
 
 </resources>
 

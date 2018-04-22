@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="entries__gestures">
-        <item>None</item>
-        <item>Minibar Settings</item>
-        <item>Set Wallpaper</item>
-        <item>Lock Screen</item>
-        <item>Clear RAM</item>
-        <item>Device Settings</item>
-        <item>Launcher Settings</item>
-        <item>Volume Dialog</item>
-        <item>Open App Drawer</item>
-        <item>Launch App</item>
+    <string-array name="entries__gestures" translatable="false">
+        <item>@string/none</item>
+        <item>@string/minibar_settings</item>
+        <item>@string/wallpaper_pick</item>
+        <item>@string/lock_screen</item>
+        <item>@string/clear_ram</item>
+        <item>@string/device_settings</item>
+        <item>@string/launcher_settings</item>
+        <item>@string/volume_dialog</item>
+        <item>@string/open_app_drawer</item>
+        <item>@string/launch_app</item>
         <item>@string/pref_title__search_bar</item>
     </string-array>
 
-    <string-array name="entries__desktop_actions">
-        <item>App Drawer</item>
+    <string-array name="entries__desktop_actions" translatable="false">
+        <item>@string/app_drawer</item>
+    </string-array>
+
+    <string-array name="entries__wallpaper_options" translatable="false">
+        <item>@string/set_wallpaper</item>
+        <item>@string/blur_wallpaper</item>
     </string-array>
 
     <string-array name="entries__desktop_styles" translatable="false">
@@ -34,7 +39,7 @@
         <item>@string/vertical_scroll_drawer</item>
     </string-array>
 
-    <string-array name="entries__backup_options">
+    <string-array name="entries__backup_options" translatable="false">
         <item>@string/dialog__backup_app_settings__backup</item>
         <item>@string/dialog__backup_app_settings__restore</item>
     </string-array>
@@ -42,11 +47,6 @@
     <string-array name="entries__themes" translatable="false">
         <item>@string/theme_light</item>
         <item>@string/theme_dark</item>
-    </string-array>
-
-    <string-array name="entries__wallpaper_options">
-        <item>Set Wallpaper</item>
-        <item>Blur Wallpaper</item>
     </string-array>
 
     <string-array name="entires__date_format" translatable="false">

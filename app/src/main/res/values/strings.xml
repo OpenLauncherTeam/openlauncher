@@ -242,5 +242,17 @@
     <string name="contribute">Contribute</string>
     <string name="donate">Donate</string>
 
+    <string name="set_wallpaper">Set Wallpaper</string>
+    <string name="blur_wallpaper" translatable="false">Blur Wallpaper</string>
+    <string name="none">None</string>
+    <string name="minibar_settings">Minibar Settings</string>
+    <string name="lock_screen">Lock Screen</string>
+    <string name="clear_ram">Clear RAM</string>
+    <string name="device_settings">Device Settings</string>
+    <string name="launcher_settings">Launcher Settings</string>
+    <string name="volume_dialog">Volume Dialog</string>
+    <string name="open_app_drawer">Open App Drawer</string>
+    <string name="launch_app">Launch App</string>
+    <string name="app_drawer">App Drawer</string>
 
 </resources>
