@@ -134,21 +134,8 @@ public class HideAppsFragment extends Fragment {
                         selected++;
                     }
                 }
-                if (selected == 0) {//When there's no app selected show a toast and return.
-                    Snackbar snackbar = Snackbar
-                            .make(_grid, R.string.request_toast, Snackbar.LENGTH_INDEFINITE)
-                            .setAction(getString(R.string.ok), new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    getActivity().finish();
-                                }
-                            });
-                    snackbar.show();
-
-                } else {
-                    AppSettings.get().setHiddenAppsList(hiddenList);
-                    getActivity().finish();
-                }
+                AppSettings.get().setHiddenAppsList(hiddenList);
+                getActivity().finish();
             }
         };
         if (!actionSend_Thread.isAlive()) {
