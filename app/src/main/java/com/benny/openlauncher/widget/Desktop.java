@@ -36,8 +36,6 @@ import java.util.List;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 import in.championswimmer.sfg.lib.SimpleFingerGestures.OnFingerGestureListener;
-import kotlin.TypeCastException;
-import kotlin.jvm.JvmOverloads;
 
 public final class Desktop extends SmoothViewPager implements DesktopCallBack<View> {
     public static final Companion _companion = new Companion();
@@ -320,7 +318,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         }
     }
 
-    @JvmOverloads
     public Desktop(@NonNull Context context) {
         super(context, null);
     }
@@ -458,9 +455,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         _pageCount++;
         int previousPage = getCurrentItem();
         SmoothPagerAdapter adapter = getAdapter();
-        if (adapter == null) {
-            throw new TypeCastException("null cannot be cast to non-null _type com.benny.openlauncher.widget.Desktop.DesktopAdapter");
-        }
         ((DesktopAdapter) adapter).addPageRight();
         setCurrentItem(previousPage + 1);
         if (!Setup.appSettings().isDesktopHideGrid()) {
@@ -475,9 +469,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         _pageCount++;
         int previousPage = getCurrentItem();
         SmoothPagerAdapter adapter = getAdapter();
-        if (adapter == null) {
-            throw new TypeCastException("null cannot be cast to non-null _type com.benny.openlauncher.widget.Desktop.DesktopAdapter");
-        }
         ((DesktopAdapter) adapter).addPageLeft();
         setCurrentItem(previousPage + 1, false);
         setCurrentItem(previousPage - 1);
@@ -494,9 +485,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
             _pageCount--;
             int previousPage = getCurrentItem();
             SmoothPagerAdapter adapter = getAdapter();
-            if (adapter == null) {
-                throw new TypeCastException("null cannot be cast to non-null _type com.benny.openlauncher.widget.Desktop.DesktopAdapter");
-            }
             ((DesktopAdapter) adapter).removePage(getCurrentItem(), true);
             for (CellContainer v : _pages) {
                 v.setAlpha(0.0f);
@@ -508,9 +496,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
             if (_pageCount == 0) {
                 addPageRight(false);
                 adapter = getAdapter();
-                if (adapter == null) {
-                    throw new TypeCastException("null cannot be cast to non-null _type com.benny.openlauncher.widget.Desktop.DesktopAdapter");
-                }
                 ((DesktopAdapter) adapter).exitDesktopEditMode();
             } else {
                 setCurrentItem(previousPage);

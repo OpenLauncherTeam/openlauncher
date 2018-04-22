@@ -83,10 +83,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import kotlin.TypeCastException;
-import kotlin.jvm.JvmOverloads;
-
-
 public final class Home extends Activity implements OnDesktopEditListener, DesktopOptionViewListener, DrawerListener {
     public static final Companion Companion = new Companion();
     public static final int REQUEST_CREATE_APPWIDGET = 0x6475;
@@ -203,17 +199,14 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         }
     }
 
-    @JvmOverloads
     public final void openAppDrawer() {
         openAppDrawer$default(this, null, 0, 0, 7, null);
     }
 
-    @JvmOverloads
     public final void openAppDrawer(@Nullable View view) {
         openAppDrawer$default(this, view, 0, 0, 6, null);
     }
 
-    @JvmOverloads
     public final void updateDock(boolean z) {
         updateDock$default(this, z, 0, 2, null);
     }
@@ -502,9 +495,6 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             appSettings.setAppRestartRequired(false);
             PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556, new Intent(this, Home.class), PendingIntent.FLAG_CANCEL_CURRENT);
             AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            if (mgr == null) {
-                throw new TypeCastException("null cannot be cast to non-null _type android.app.AlarmManager");
-            }
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + ((long) 100), restartIntentP);
             System.exit(0);
             return;
@@ -754,7 +744,6 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         updateDock$default(this, true, 0, 2, null);
     }
 
-    @JvmOverloads
     public static /* bridge */ /* synthetic */ void updateDock$default(Home home, boolean z, long j, int i, Object obj) {
         if ((i & 2) != 0) {
             j = 0;
@@ -762,7 +751,6 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         home.updateDock(z, j);
     }
 
-    @JvmOverloads
     public final void updateDock(boolean show, long delay) {
         AppSettings appSettings = Setup.appSettings();
 
@@ -786,15 +774,9 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                 Tool.goneViews(100, (Dock) findViewById(R.id.dock));
                 pagerIndicator = findViewById(R.id.desktopIndicator);
                 layoutParams = pagerIndicator.getLayoutParams();
-                if (layoutParams == null) {
-                    throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
-                }
                 ((MarginLayoutParams) layoutParams).bottomMargin = Desktop._bottomInset + Tool.dp2px(4, (Context) this);
                 desktop = (Desktop) findViewById(R.id.desktop);
                 layoutParams = desktop.getLayoutParams();
-                if (layoutParams == null) {
-                    throw new TypeCastException("null cannot be cast to non-null _type android.view.ViewGroup.MarginLayoutParams");
-                }
                 ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, (Context) this);
             }
         }
@@ -1026,7 +1008,6 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         desktop.setCurrentItem(appSettings.getDesktopPageCurrent());
     }
 
-    @JvmOverloads
     public static /* bridge */ /* synthetic */ void openAppDrawer$default(Home home, View view, int i, int i2, int i3, Object obj) {
         if ((i3 & 1) != 0) {
             view = (Desktop) home.findViewById(R.id.desktop);
@@ -1040,7 +1021,6 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         home.openAppDrawer(view, i, i2);
     }
 
-    @JvmOverloads
     public final void openAppDrawer(@Nullable View view, int x, int y) {
         if (!(x > 0 && y > 0)) {
             int[] pos = new int[2];

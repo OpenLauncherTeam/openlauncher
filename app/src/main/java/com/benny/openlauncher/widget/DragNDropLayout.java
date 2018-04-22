@@ -26,12 +26,10 @@ import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
-import kotlin.Pair;
 
 public final class DragNDropLayout extends FrameLayout {
     private final float DRAG_THRESHOLD;
@@ -340,10 +338,7 @@ public final class DragNDropLayout extends FrameLayout {
     }
 
     public final void registerDropTarget(@NonNull DropTargetListener targetListener) {
-
-        Map map = _registeredDropTargetEntries;
-        Pair pair = new Pair(targetListener, new DragFlag());
-        map.put(pair.getFirst(), pair.getSecond());
+        _registeredDropTargetEntries.put(targetListener, new DragFlag());
     }
 
     public boolean onInterceptTouchEvent(@Nullable MotionEvent event) {

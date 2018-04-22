@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.view.DragEvent;
 import android.view.View;
 
@@ -13,15 +14,12 @@ import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.widget.AppItemView;
 
-import android.support.annotation.Nullable;
-
 public final class DragNDropHandler {
     private static final String DRAG_DROP_EXTRA = "DRAG_DROP_EXTRA";
     private static final String DRAG_DROP_INTENT = "DRAG_DROP_INTENT";
     public static final DragNDropHandler INSTANCE = new DragNDropHandler();
     public static Bitmap _cachedDragBitmap;
 
-    @kotlin.jvm.JvmStatic
     public static <T extends Parcelable> void startDrag(View view, Item item, DragAction.Action action, @Nullable final AppItemView.LongPressCallBack eventAction) {
         _cachedDragBitmap = loadBitmapFromView(view);
 

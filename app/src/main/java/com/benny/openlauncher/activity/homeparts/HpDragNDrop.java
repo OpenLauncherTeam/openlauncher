@@ -20,8 +20,6 @@ import com.benny.openlauncher.widget.DragNDropLayout;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 
 public class HpDragNDrop {
@@ -36,7 +34,7 @@ public class HpDragNDrop {
     private PopupIconLabelItem removeItem = new PopupIconLabelItem(R.string.remove, R.drawable.ic_close_dark_24dp).withIdentifier(removeItemIdentifier);
 
 
-    public void initDragNDrop(@NotNull final Home _home, @NotNull final View leftDragHandle, @NotNull final View rightDragHandle, @NotNull final DragNDropLayout dragNDropView) {
+    public void initDragNDrop(@NonNull final Home _home, @NonNull final View leftDragHandle, @NonNull final View rightDragHandle, @NonNull final DragNDropLayout dragNDropView) {
         //dragHandle's drag event
         final Handler dragHandler = new Handler();
 
@@ -306,7 +304,7 @@ public class HpDragNDrop {
     }
 
 
-    void showItemPopup(@NotNull final DragNDropLayout dragNDropView, final Home home) {
+    void showItemPopup(@NonNull final DragNDropLayout dragNDropView, final Home home) {
         ArrayList<PopupIconLabelItem> itemList = new ArrayList<>();
         switch (dragNDropView.getDragItem().getType()) {
             case APP:
