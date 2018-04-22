@@ -104,10 +104,10 @@ dependencies {
     implementation "com.android.support:support-v13:${version_library_appcompat}"
     implementation "com.android.support:preference-v7:${version_library_appcompat}"
     implementation "com.android.support:preference-v14:${version_library_appcompat}"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 
     // UI Libs
-    implementation 'com.mikepenz:fastadapter:3.0.0@aar'
+    implementation 'com.mikepenz:fastadapter:3.2.3@aar'
     implementation 'com.mikepenz:fastadapter-commons:3.0.0@aar'
     implementation 'com.mikepenz:fastadapter-extensions:3.0.0@aar'
     implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
@@ -122,14 +122,11 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-    implementation 'com.github.kizitonwose.colorpreference:support:1.0.4'
-    implementation 'com.github.daniel-stoneuk:material-about-library:2.2.3-support26.1.0'
-    implementation 'com.afollestad.material-dialogs:core:0.9.4.5'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.balysv:material-ripple:1.0.2'
-    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     implementation 'agency.tango.android:material-intro-screen:0.0.5'
-    implementation 'cat.ereza:customactivityoncrash:1.5.0'
-    implementation 'de.psdev.licensesdialog:licensesdialog:1.8.2'
+    implementation 'cat.ereza:customactivityoncrash:2.2.0'
+    implementation 'de.psdev.licensesdialog:licensesdialog:1.8.3'
     implementation 'com.jaredrummler:colorpicker:1.0.1'
     implementation 'in.championswimmer:SimpleFingerGestures_Android_Library:1.2'
 
