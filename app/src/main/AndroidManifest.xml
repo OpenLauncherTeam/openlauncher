@@ -66,6 +66,15 @@
             android:name="com.benny.openlauncher.activity.HideAppsActivity"
             android:label="@string/app_name"
             android:theme="@style/NormalActivity.Light" />
+        <activity
+            android:name="com.benny.openlauncher.activity.MoreActivity"
+            android:parentActivityName="com.benny.openlauncher.activity.SettingsActivity"
+            android:theme="@style/NormalActivity.Light">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.benny.openlauncher.activity.SettingsActivity" />
+        </activity>
+
 
         <receiver
             android:name="com.benny.openlauncher.util.DeviceAdminReceiver"

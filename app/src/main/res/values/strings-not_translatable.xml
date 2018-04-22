@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_license_name" translatable="false">Apache 2.0</string>
+    <string name="app_community_url" translatable="false">https://matrix.to/#/#openlauncher:matrix.org</string>
+    <string name="app_bugreport_url" translatable="false">https://github.com/openlauncherteam/openlauncher/issues</string>
+    <string name="app_translate_url" translatable="false"><![CDATA[https://lonamiwebs.github.io/stringlate/translate?git=https%3A%2F%2Fgithub.com%2Fopenlauncherteam%2Fopenlauncher.git&mail=gro.xobliam@@rentnasg&name=OpenLauncher&web=https%3A%2F%2Fgithub.com%2Fopenlauncherteam%2Fopenlauncher]]></string>
+    <string name="app_web_url" translatable="false">https://gsantner.net/?project=openlauncher</string>
+    <string name="app_source_code_url" translatable="false">https://github.com/openlauncherteam/openlauncher</string>
+    <string name="app_donate_url" translatable="false"><![CDATA[https://gsantner.net/supportme/?project=openlauncher&source=inapp_supdon]]></string>
+    <string name="app_contribution_info_url" translatable="false">https://github.com/openlauncherteam/openlauncher/blob/master/README.md#contributions</string>
+
+    <string name="community" translatable="false">Community</string>
     <string name="intro1_title" translatable="false">@string/app_name</string>
     <string name="intro2_title" translatable="false">@string/minibar</string>
     <string name="truly_launcher" translatable="false">The truly open source launcher that comes with awesome features!</string>
@@ -89,7 +99,7 @@
     <string name="pref_key__cat_icons" translatable="false">pref_key__cat_icons</string>
     <string name="pref_key__cat_debug" translatable="false">pref_key__cat_debug</string>
     <string name="pref_key__cat_miscellaneous" translatable="false">pref_key__cat_miscellaneous</string>
-    <string name="pref_key__cat_about" translatable="false">pref_key__cat_about</string>
+    <string name="pref_key__about" translatable="false">pref_key__about</string>
 
     <string name="pref_key__first_start" translatable="false">pref_key__first_start</string>
     <string name="pref_key__desktop_lock" translatable="false">pref_key__desktop_lock</string>
@@ -103,5 +113,22 @@
     <string name="pref_key__date_bar_date_format_custom_2" translatable="false">pref_key__date_bar_date_format_custom_2</string>
     <string name="pref_key__date_bar_date_text_color" translatable="false">pref_key__date_bar_date_text_color</string>
 
+    <string name="pref_key__more_info__settings" translatable="false">pref_key__more_info__settings</string>
+    <string name="pref_key__more_info__source_code" translatable="false">pref_key__more_info__source_code</string>
+    <string name="pref_key__more_info__project_license" translatable="false">pref_key__more_info__project_license</string>
+    <string name="pref_key__more_info__open_source_licenses" translatable="false">pref_key__more_info__open_source_licenses</string>
+    <string name="pref_key__more_info__bug_reports" translatable="false">pref_key__more_info__bug_reports</string>
+    <string name="pref_key__more_info__help" translatable="false">pref_key__more_info__help</string>
+    <string name="pref_key__more_info__rate_app" translatable="false">pref_key__more_info__rate_app</string>
+    <string name="pref_key__more_info__translate" translatable="false">pref_key__more_info__translate</string>
+    <string name="pref_key__more_info__join_community" translatable="false">pref_key__more_info__join_community</string>
+    <string name="pref_key__more_info__android_contribution_guide" translatable="false">pref_key__more_info__android_contribution_guide</string>
+    <string name="pref_key__more_info__app" translatable="false">pref_key__more_info__app</string>
+    <string name="pref_key__more_info__donate" translatable="false">pref_key__more_info__donate</string>
+    <string name="pref_key__more_info__project_contribution_info" translatable="false">pref_key__more_info__project_contribution_info</string>
+    <string name="pref_key__more_info__project_community" translatable="false">pref_key__more_info__project_community</string>
+    <string name="pref_key__more_info__project_team" translatable="false">pref_key__more_info__project_team</string>
+    <string name="pref_key__more_info__contributors_public_info" translatable="false">pref_key__more_info__contributors_public_info</string>
+    <string name="pref_key__more_info__copy_build_information" translatable="false">pref_key__more_info__copy_build_information</string>
 
 </resources>

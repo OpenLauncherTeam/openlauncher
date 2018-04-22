@@ -298,6 +298,10 @@ public class SettingsActivity extends ThemeActivity {
                     getActivity().finish();
                     return true;
                 }
+                case R.string.pref_key__about: {
+                    startActivity(new Intent(getActivity(), MoreActivity.class));
+                    return true;
+                }
             }
 
             if (preference instanceof ColorPreferenceCompat) {
