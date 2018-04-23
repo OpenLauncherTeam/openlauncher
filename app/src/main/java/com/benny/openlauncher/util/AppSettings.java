@@ -16,6 +16,7 @@ import net.gsantner.opoc.preference.SharedPreferencesPropertyBackend;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 
 public class AppSettings extends SharedPreferencesPropertyBackend {
@@ -313,7 +314,9 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         ArrayList<String> ret = getStringList(R.string.pref_key__minibar_arrangement);
         if (ret.isEmpty()) {
             for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
-                ret.add(Integer.toString(item._id));
+                if (Arrays.asList(98, 36, 24, 50, 71, 25, 73).contains(item._id)) {
+                    ret.add(Integer.toString(item._id));
+                }
             }
             setMinibarArrangement(ret);
         }
