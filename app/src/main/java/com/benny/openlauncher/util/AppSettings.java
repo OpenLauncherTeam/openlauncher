@@ -313,7 +313,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         ArrayList<String> ret = getStringList(R.string.pref_key__minibar_arrangement);
         if (ret.isEmpty()) {
             for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
-                ret.add("0" + item._label.toString());
+                ret.add(Integer.toString(item._id));
             }
             setMinibarArrangement(ret);
         }

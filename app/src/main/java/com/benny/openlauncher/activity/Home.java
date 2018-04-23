@@ -431,12 +431,12 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     }
 
     public final void initMinibar() {
-        final ArrayList<String> labels = new ArrayList<String>();
+        final ArrayList<String> labels = new ArrayList<>();
         final ArrayList<Integer> icons = new ArrayList<>();
 
         for (String act : AppSettings.get().getMinibarArrangement()) {
-            if (act.length() > 1 && act.charAt(0) == '0') {
-                LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
+            if (act.length() > 1) {
+                LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act);
                 if (item != null) {
                     labels.add(item._label.toString());
                     icons.add(item._icon);

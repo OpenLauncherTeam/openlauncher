@@ -40,7 +40,7 @@
     <string name="pref_key__desktop_indicator_style" translatable="false">pref_key__desktop_indicator_style</string>
     <string name="pref_key__minibar" translatable="false">pref_key__minibar</string>
     <string name="pref_key__minibar_enable" translatable="false">pref_key__minibar_enable</string>
-    <string name="pref_key__minibar_arrangement" translatable="false">pref_key__minibar_arrangement</string>
+    <string name="pref_key__minibar_arrangement" translatable="false">pref_key__minibar_items</string>
     <string name="pref_key__search_bar_enable" translatable="false">pref_key__search_bar_enable</string>
     <string name="pref_key__search_bar_show_hidden_apps" translatable="false">pref_key__search_bar_show_hidden_apps</string>
     <string name="pref_key__desktop_fullscreen" translatable="false">pref_key__desktop_fullscreen</string>

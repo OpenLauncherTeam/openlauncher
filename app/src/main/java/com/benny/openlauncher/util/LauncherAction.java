@@ -25,16 +25,16 @@ public class LauncherAction {
     }
 
     static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
-            new ActionDisplayItem(Action.EditMinBar, Home.Companion.get_resources().getString(R.string.minibar_0), R.drawable.ic_mode_edit_black_24dp),
-            new ActionDisplayItem(Action.SetWallpaper, Home.Companion.get_resources().getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp),
-            new ActionDisplayItem(Action.LockScreen, Home.Companion.get_resources().getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp),
-            new ActionDisplayItem(Action.ClearRam, Home.Companion.get_resources().getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp),
-            new ActionDisplayItem(Action.DeviceSettings, Home.Companion.get_resources().getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp),
-            new ActionDisplayItem(Action.LauncherSettings, Home.Companion.get_resources().getString(R.string.minibar_5), R.drawable.ic_settings_launcher_black_24dp),
-            new ActionDisplayItem(Action.VolumeDialog, Home.Companion.get_resources().getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp),
-            new ActionDisplayItem(Action.OpenAppDrawer, Home.Companion.get_resources().getString(R.string.minibar_8), R.drawable.ic_apps_dark_24dp),
-            new ActionDisplayItem(Action.OpenSearch, Home.Companion.get_resources().getString(R.string.pref_title__search_bar), R.drawable.ic_settings_applications_black_24dp),
-            new ActionDisplayItem(Action.MobileNetworkSettings, Home.Companion.get_resources().getString(R.string.mobile_network_settings), R.drawable.ic_settings_applications_black_24dp),
+            new ActionDisplayItem(Action.EditMinBar, Home.Companion.get_resources().getString(R.string.minibar_0), R.drawable.ic_mode_edit_black_24dp, 98),
+            new ActionDisplayItem(Action.SetWallpaper, Home.Companion.get_resources().getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp, 36),
+            new ActionDisplayItem(Action.LockScreen, Home.Companion.get_resources().getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp, 24),
+            new ActionDisplayItem(Action.ClearRam, Home.Companion.get_resources().getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp, 19),
+            new ActionDisplayItem(Action.DeviceSettings, Home.Companion.get_resources().getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp, 25),
+            new ActionDisplayItem(Action.LauncherSettings, Home.Companion.get_resources().getString(R.string.minibar_5), R.drawable.ic_settings_launcher_black_24dp, 50),
+            new ActionDisplayItem(Action.VolumeDialog, Home.Companion.get_resources().getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp, 71),
+            new ActionDisplayItem(Action.OpenAppDrawer, Home.Companion.get_resources().getString(R.string.minibar_8), R.drawable.ic_apps_dark_24dp, 73),
+            new ActionDisplayItem(Action.OpenSearch, Home.Companion.get_resources().getString(R.string.pref_title__search_bar), R.drawable.ic_settings_applications_black_24dp, 89),
+            new ActionDisplayItem(Action.MobileNetworkSettings, Home.Companion.get_resources().getString(R.string.mobile_network_settings), R.drawable.ic_settings_applications_black_24dp, 46),
     };
 
     public static boolean _clearingRam = false;
@@ -119,7 +119,7 @@ public class LauncherAction {
 
     public static ActionDisplayItem getActionItemFromString(String string) {
         for (ActionDisplayItem item : actionDisplayItems) {
-            if (item._label.toString().equals(string)) {
+            if (Integer.toString(item._id).equals(string)) {
                 return item;
             }
         }
@@ -144,11 +144,13 @@ public class LauncherAction {
         public Action _label;
         public String _description;
         public int _icon;
+        public int _id;
 
-        public ActionDisplayItem(Action label, String description, int icon) {
+        public ActionDisplayItem(Action label, String description, int icon, int id) {
             _label = label;
             _description = description;
             _icon = icon;
+            _id = id;
         }
     }
 }
