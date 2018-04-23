@@ -58,7 +58,7 @@ import com.benny.openlauncher.util.LauncherAction.Action;
 import com.benny.openlauncher.util.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
-import com.benny.openlauncher.viewutil.IconListAdapter;
+import com.benny.openlauncher.viewutil.MinibarAdapter;
 import com.benny.openlauncher.viewutil.WidgetHost;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.AppItemView;
@@ -446,7 +446,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
 
         SwipeListView minibar = findViewById(R.id.minibar);
 
-        minibar.setAdapter(new IconListAdapter(this, labels, icons));
+        minibar.setAdapter(new MinibarAdapter(this, labels, icons));
         minibar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {

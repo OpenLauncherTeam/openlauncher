@@ -12,13 +12,13 @@ import com.benny.openlauncher.R;
 
 import java.util.List;
 
-public class IconListAdapter extends BaseAdapter {
+public class MinibarAdapter extends BaseAdapter {
 
     private Context _context;
     private List<String> _labels;
     private List<Integer> _icons;
 
-    public IconListAdapter(Context context, List labels, List icons) {
+    public MinibarAdapter(Context context, List labels, List icons) {
         _context = context;
         _labels = labels;
         _icons = icons;
