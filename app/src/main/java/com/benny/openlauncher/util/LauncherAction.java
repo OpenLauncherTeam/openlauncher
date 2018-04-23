@@ -21,11 +21,11 @@ import com.benny.openlauncher.viewutil.DialogHelper;
 public class LauncherAction {
 
     public enum Action {
-        EditMinBar, SetWallpaper, LockScreen, ClearRam, DeviceSettings, LauncherSettings, VolumeDialog, OpenAppDrawer, LaunchApp, OpenSearch, MobileNetworkSettings,
+        EditMinibar, SetWallpaper, LockScreen, ClearRam, DeviceSettings, LauncherSettings, VolumeDialog, OpenAppDrawer, LaunchApp, OpenSearch, MobileNetworkSettings,
     }
 
     static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
-            new ActionDisplayItem(Action.EditMinBar, Home.Companion.get_resources().getString(R.string.minibar_0), R.drawable.ic_mode_edit_black_24dp, 98),
+            new ActionDisplayItem(Action.EditMinibar, Home.Companion.get_resources().getString(R.string.minibar_0), R.drawable.ic_mode_edit_black_24dp, 98),
             new ActionDisplayItem(Action.SetWallpaper, Home.Companion.get_resources().getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp, 36),
             new ActionDisplayItem(Action.LockScreen, Home.Companion.get_resources().getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp, 24),
             new ActionDisplayItem(Action.ClearRam, Home.Companion.get_resources().getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp, 19),
@@ -53,7 +53,7 @@ public class LauncherAction {
 
     public static void RunAction(Action action, final Context context) {
         switch (action) {
-            case EditMinBar:
+            case EditMinibar:
                 context.startActivity(new Intent(context, MinibarEditActivity.class));
                 break;
             case MobileNetworkSettings: {
@@ -61,13 +61,14 @@ public class LauncherAction {
                 break;
             }
             case SetWallpaper:
-                DialogHelper.setWallpaperDialog(context);
+                Intent in = new Intent(Intent.ACTION_SET_WALLPAPER);
+                context.startActivity(Intent.createChooser(in, context.getString(R.string.wallpaper_pick)));
                 break;
             case LockScreen:
                 try {
                     ((DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE)).lockNow();
                 } catch (Exception e) {
-                    DialogHelper.alertDialog(context, "Device Admin Required", "To lock your screen by gesture, OpenLauncher require Device Administration, please enable it in the settings to use this features. The force-lock policy will only be used for locking the screen via gesture.", "Enable", new MaterialDialog.SingleButtonCallback() {
+                    DialogHelper.alertDialog(context, "Device Admin Required", "OpenLauncher requires the Device Administration permission to lock your screen. Please enable it in the settings to use this feature.", "Enable", new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                             Tool.toast(context, context.getString(R.string.toast_device_admin_required));

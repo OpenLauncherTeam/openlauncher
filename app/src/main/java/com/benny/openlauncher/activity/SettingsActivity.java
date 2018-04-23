@@ -258,7 +258,7 @@ public class SettingsActivity extends ThemeActivity {
 
             switch (keyRes) {
                 case R.string.pref_key__minibar: {
-                    LauncherAction.RunAction(LauncherAction.Action.EditMinBar, getActivity());
+                    LauncherAction.RunAction(LauncherAction.Action.EditMinibar, getActivity());
                     return true;
                 }
                 case R.string.pref_key__hidden_apps: {

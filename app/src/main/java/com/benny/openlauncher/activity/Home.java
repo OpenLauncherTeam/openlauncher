@@ -451,11 +451,11 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
-                if (action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.EditMinBar) {
+                if (action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.EditMinibar) {
                     _consumeNextResume = true;
                 }
                 LauncherAction.RunAction(action, Home.this);
-                if (action != LauncherAction.Action.DeviceSettings && action != LauncherAction.Action.LauncherSettings && action != LauncherAction.Action.EditMinBar) {
+                if (action != LauncherAction.Action.DeviceSettings && action != LauncherAction.Action.LauncherSettings && action != LauncherAction.Action.EditMinibar) {
                     getDrawerLayout().closeDrawers();
                 }
             }

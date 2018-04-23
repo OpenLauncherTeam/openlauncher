@@ -103,27 +103,6 @@ public class DialogHelper {
         dialog.show();
     }
 
-    public static void setWallpaperDialog(final Context context) {
-        new MaterialDialog.Builder(context)
-                .title(R.string.wallpaper)
-                .iconRes(R.drawable.ic_photo_black_24dp)
-                .items(R.array.entries__wallpaper_options)
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        switch (position) {
-                            case 0:
-                                Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
-                                context.startActivity(Intent.createChooser(intent, context.getString(R.string.wallpaper_pick)));
-                                break;
-                            case 1:
-                                Tool.toast(context, "This is no longer supported, wait for future updates.");
-                                break;
-                        }
-                    }
-                }).show();
-    }
-
     public static void deletePackageDialog(Context context, Item item) {
         if (item.getType() == Item.Type.APP) {
             try {
