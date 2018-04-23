@@ -8,6 +8,8 @@ import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.view.DragEvent;
@@ -17,9 +19,6 @@ import android.view.ViewGroup;
 
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.util.Tool;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -312,8 +311,11 @@ public class CellContainer extends ViewGroup {
             Tool.print((Object) "gestures is null");
             return super.onTouchEvent(event);
         }
-        SimpleFingerGestures simpleFingerGestures = _gestures;
-        simpleFingerGestures.onTouch(this, event);
+        try {
+            SimpleFingerGestures simpleFingerGestures = _gestures;
+            simpleFingerGestures.onTouch(this, event);
+        } catch (Exception ignored) {
+        }
         return super.onTouchEvent(event);
     }
 
