@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!-- Toasts -->
     <string name="toast_free_ram">Memória livre: %1$d MB. Poupados %2$d MB.</string>
     <string name="toast_free_all_ram">Memória livre: %1$d MB. A RAM está no seu melhor estado.</string>
@@ -12,7 +11,7 @@
     <string name="intro1_text">Este é o OpenLauncher, cujo código fonte é aberto. É para si.</string>
     <string name="intro2_text">Deslize para a direita desde a margem esquerda do ecrã para abrir a mini-barra. Aqui encontra diversas definições de configuração.</string>
     <string name="intro3_title">Definições</string>
-    <string name="intro3_text">Pode configurar a área de trabalho, a lista de aplicações e a doca, experimente!</string>
+    <string name="intro3_text">Pode configurar a área de trabalho, o menu de aplicações e a doca, experimente!</string>
     <string name="intro4_community">O launcher da comunidade para a comunidade.</string>
     <string name="intro4_features">Repleto de funcionalidades</string>
     <string name="intro4_customizable">Personalizável</string>
@@ -27,7 +26,7 @@
     <string name="minibar_4">Atalho para as definições do dispositivo.</string>
     <string name="minibar_5">Atalho para as definições do OpenLauncher.</string>
     <string name="minibar_7">Mostrar controlos de volume.</string>
-    <string name="minibar_8">Abrir lista de aplicações.</string>
+    <string name="minibar_8">Abrir menu de aplicações.</string>
 
     <!-- About -->
     <string name="about_libs">Bibliotecas de código aberto</string>
@@ -39,7 +38,7 @@
 
     <string name="pref_title__desktop">Área de trabalho</string>
     <string name="pref_title__dock">Doca</string>
-    <string name="pref_title__app_drawer">Lista de aplicações</string>
+    <string name="pref_title__app_drawer">Menu de aplicações</string>
     <string name="pref_title__gestures">Gestos</string>
     <string name="pref_title__icons">Ícones</string>
     <string name="pref_title__miscellaneous">Diversas</string>
@@ -89,13 +88,13 @@
     <string name="pref_title__dock_background_color">Fundo</string>
 
     <string name="pref_title__drawer_style">Estilo</string>
-    <string name="pref_summary__drawer_style">Escolher entre uma lista de aplicações paginada ou vertical.</string>
+    <string name="pref_summary__drawer_style">Escolher entre o menu de aplicações paginado e o menu vertical.</string>
     <string name="pref_title__hide_apps">Ocultar aplicações</string>
     <string name="pref_summary__hide_apps">Ocultar do launcher as aplicações selecionadas.</string>
     <string name="pref_title__drawer_show_card_view">Cartões</string>
-    <string name="pref_summary__drawer_show_card_view">Mostrar vista de cartão na lista de aplicações.</string>
+    <string name="pref_summary__drawer_show_card_view">Mostrar vista de cartões no menu de aplicações.</string>
     <string name="pref_title__drawer_remember_position">Memorizar última página</string>
-    <string name="pref_summary__drawer_remember_position">Lembrar página atual da lista de aplicações.</string>
+    <string name="pref_summary__drawer_remember_position">Memorizar última página aberta no menu de aplicações.</string>
     <string name="pref_title__drawer_show_position_indicator">Indicador de posição</string>
     <string name="pref_summary__drawer_show_position_indicator">Mostra indicador de página ou barra de deslocação de acordo com o estilo.</string>
     <string name="pref_title__drawer_show_label">Mostrar nome</string>
@@ -111,8 +110,8 @@
 
     <string name="pref_title__gesture_feedback">Feedback para gestos</string>
     <string name="pref_summary__gesture_feedback">Obter feedback ao tocar longamente nos itens da área de trabalho.</string>
-    <string name="pref_title__gesture_quick_swipe">Deslize rápido na lista</string>
-    <string name="pref_summary__gesture_quick_swipe">Deslize para cima na doca para abrir a lista de aplicações.</string>
+    <string name="pref_title__gesture_quick_swipe">Deslize rápido no menu</string>
+    <string name="pref_summary__gesture_quick_swipe">Deslize para cima na doca para abrir o menu de aplicações.</string>
     <string name="pref_title__gesture_double_tap">Toque duplo</string>
     <string name="pref_title__gesture_swipe_up">Deslize para cima</string>
     <string name="pref_title__gesture_swipe_down">Deslize para baixo</string>
@@ -137,7 +136,7 @@
     <string name="pref_summary__primary_color">Definir a cor primária da aplicação.</string>
 
     <string name="vertical_scroll_drawer">Vertical</string>
-    <string name="horizontal_paged_drawer">Paginada</string>
+    <string name="horizontal_paged_drawer">Paginado</string>
 
     <string name="desktop_mode_normal">Normal</string>
     <string name="desktop_mode_show_all_apps">Mostrar todas as aplicações</string>
@@ -152,7 +151,7 @@
     <!-- Dialogs -->
     <string name="request_dummy_text">Olá mundo!</string>
     <string name="request_please_wait">A analisar as aplicações instaladas. Aguarde...</string>
-    <string name="request_toast">Nenhuma aplicação selecionada. Mostrar todas na lista de aplicações?</string>
+    <string name="request_toast">Não selecionou uma aplicação. Deseja  mostrar todas as aplicações no menu?</string>
     <string name="on">Ligado</string>
     <string name="desktop_action">Ação da área de trabalho</string>
     <string name="select_app">Selecionar aplicação</string>
@@ -212,5 +211,45 @@
     <string name="search_hint">Pesquisar...</string>
     <string name="search_online">Pesquisar na web...</string>
     <string name="bad_format">Formato inválido</string>
+    <string name="clear_user_data">Limpar dados de utilizador</string>
+    <string name="clear_user_data_are_you_sure">Tem a certeza? Todos os atalhos serão removidos.</string>
+    <string name="help">Ajuda</string>
+    <string name="licenses">Licenças</string>
+    <string name="contributors">Colaboradores</string>
+    <string name="changelog">Alterações</string>
 
+    <string name="more">Mais</string>
+    <string name="open_source_licenses">Licenças Open Source</string>
+    <string name="rate_the_app">Avaliar</string>
+    <string name="translate">Traduzir</string>
+    <string name="help_this_app">Mais informações e ajuda sobre esta aplicação</string>
+    <string name="bug_reports">Reporte de erros</string>
+    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Mais informações sobre donativos ou outro tipo de ajuda para este projeto</string>
+    <string name="android_contribution_guide">Manual de contributos para Android</string>
+    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Mais informações sobre como  contribuir em projetos Open Source, em especial para aplicações Android</string>
+    <string name="join_community">Integrar a comunidade</string>
+    <string name="bug_reports_suggest_improvements">Comentários, reporte de erros e sugestões</string>
+    <string name="help_translating_this_app">Traduzir esta aplicação</string>
+    <string name="source_code">Código fonte</string>
+    <string name="project_license">Licença do projeto</string>
+    <string name="project_contribution_info">Informação para colaboração no projeto</string>
+    <string name="more_info_on_how_to_contribute_to_this_project">Mais informações sobre como colaborar neste projeto</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">Colabore com o nosso projeto. Todos os contributos serão apreciados.</string>
+    <string name="project_team">Equipa do projeto</string>
+    <string name="contributors_public_info">Mostra a informação sobre os colaboradores. Os colaboradores podem disponibilizar as informação a mostrar aqui (opt-in) de depois do seu contributo.</string>
+    <string name="contribute">Participar</string>
+    <string name="donate">Donativos</string>
+
+    <string name="set_wallpaper">Definir papel de parede</string>
+    <string name="none">Nenhum</string>
+    <string name="minibar_settings">Definições da mini-barra</string>
+    <string name="lock_screen">Bloquear ecrã</string>
+    <string name="clear_ram">Limpar RAM</string>
+    <string name="device_settings">Definições do dispositivo</string>
+    <string name="launcher_settings">Definições da aplicação</string>
+    <string name="volume_dialog">Diálogo de volume</string>
+    <string name="open_app_drawer">Abrir menu de aplicações</string>
+    <string name="launch_app">Abrir aplicação</string>
+    <string name="app_drawer">Menu de aplicações</string>
+    <string name="mobile_network_settings">Definições de redes móveis</string>
 </resources>
