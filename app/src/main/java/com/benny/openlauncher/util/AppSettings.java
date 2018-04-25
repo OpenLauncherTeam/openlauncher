@@ -311,7 +311,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public ArrayList<String> getMinibarArrangement() {
-        ArrayList<String> ret = getStringList(R.string.pref_key__minibar_arrangement);
+        ArrayList<String> ret = getStringList(R.string.pref_key__minibar_items);
         if (ret.isEmpty()) {
             for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
                 if (Arrays.asList(98, 36, 24, 50, 71, 25, 73).contains(item._id)) {
@@ -324,7 +324,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public void setMinibarArrangement(ArrayList<String> value) {
-        setStringList(R.string.pref_key__minibar_arrangement, value);
+        setStringList(R.string.pref_key__minibar_items, value);
     }
 
     public ArrayList<String> getHiddenAppsList() {
