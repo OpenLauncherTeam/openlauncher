@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.fragment.MoreInfoFragment;
 
-public class MoreActivity extends ThemeActivity {
+public class MoreInfoActivity extends ThemeActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

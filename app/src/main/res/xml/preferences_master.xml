@@ -422,7 +422,7 @@
         Icons
         -->
         <PreferenceScreen
-            android:icon="@drawable/ic_android_dark_24dp"
+            android:icon="@drawable/ic_android"
             android:key="@string/pref_key__cat_icons"
             android:title="@string/pref_title__icons">
 

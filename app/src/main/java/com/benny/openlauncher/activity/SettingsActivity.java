@@ -299,7 +299,7 @@ public class SettingsActivity extends ThemeActivity {
                     return true;
                 }
                 case R.string.pref_key__about: {
-                    startActivity(new Intent(getActivity(), MoreActivity.class));
+                    startActivity(new Intent(getActivity(), MoreInfoActivity.class));
                     return true;
                 }
             }

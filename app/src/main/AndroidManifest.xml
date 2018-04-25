@@ -67,7 +67,7 @@
             android:label="@string/app_name"
             android:theme="@style/NormalActivity.Light" />
         <activity
-            android:name="com.benny.openlauncher.activity.MoreActivity"
+            android:name="com.benny.openlauncher.activity.MoreInfoActivity"
             android:parentActivityName="com.benny.openlauncher.activity.SettingsActivity"
             android:theme="@style/NormalActivity.Light">
             <meta-data
