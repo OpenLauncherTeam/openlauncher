@@ -13,7 +13,7 @@
  * Copy this file from opoc to your app and modify
  * packageId, resources and arguments to needs and availability
  */
-package com.benny.openlauncher.activity;
+package com.benny.openlauncher.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +22,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.SettingsActivity;
 import com.benny.openlauncher.util.AppSettings;
 import net.gsantner.opoc.format.markdown.SimpleMarkdownParser;
 import net.gsantner.opoc.preference.GsPreferenceFragmentCompat;
