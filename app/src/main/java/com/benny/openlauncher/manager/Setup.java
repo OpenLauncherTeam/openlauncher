@@ -7,8 +7,8 @@ import com.benny.openlauncher.interfaces.DialogListener;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.BaseIconProvider;
 import com.benny.openlauncher.util.Definitions;
+import com.benny.openlauncher.util.SimpleIconProvider;
 import com.benny.openlauncher.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.viewutil.ItemGestureListener;
 
@@ -104,9 +104,9 @@ public abstract class Setup {
     // ----------------
 
     public interface ImageLoader {
-        BaseIconProvider createIconProvider(Drawable drawable);
+        SimpleIconProvider createIconProvider(Drawable drawable);
 
-        BaseIconProvider createIconProvider(int icon);
+        SimpleIconProvider createIconProvider(int icon);
     }
 
     public interface DataManager {

@@ -8,10 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.benny.openlauncher.interfaces.IconDrawer;
+import com.benny.openlauncher.interfaces.IconProvider;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 
-public class SimpleIconProvider extends BaseIconProvider {
+public class SimpleIconProvider implements IconProvider {
 
     protected Drawable _drawable;
     protected int _drawableResource;

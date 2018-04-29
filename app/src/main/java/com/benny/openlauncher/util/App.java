@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
 
 public class App {
     public String _label, _packageName, _className;
-    public BaseIconProvider _iconProvider;
+    public SimpleIconProvider _iconProvider;
     public ResolveInfo _info;
 
     public App(Context context, ResolveInfo info, PackageManager pm) {
@@ -46,11 +46,11 @@ public class App {
     }
 
 
-    public BaseIconProvider getIconProvider() {
+    public SimpleIconProvider getIconProvider() {
         return _iconProvider;
     }
 
-    public void setIconProvider(@NonNull BaseIconProvider baseIconProvider) {
+    public void setIconProvider(@NonNull SimpleIconProvider baseIconProvider) {
 
     }
 }

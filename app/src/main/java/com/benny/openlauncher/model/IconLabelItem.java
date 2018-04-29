@@ -13,8 +13,9 @@ import android.widget.TextView;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.FastItem;
+import com.benny.openlauncher.interfaces.IconProvider;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.util.BaseIconProvider;
+import com.benny.openlauncher.util.SimpleIconProvider;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
@@ -23,7 +24,7 @@ import java.util.List;
 public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> implements FastItem.LabelItem<IconLabelItem, IconLabelItem.ViewHolder>, FastItem.DesktopOptionsItem<IconLabelItem, IconLabelItem.ViewHolder> {
 
     // Data
-    public BaseIconProvider _iconProvider = null;
+    public SimpleIconProvider _iconProvider = null;
     public View.OnLongClickListener _onLongClickListener;
     protected String _label = null;
     // Others
@@ -72,7 +73,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         _forceSize = forceSize;
     }
 
-    public IconLabelItem(Context context, BaseIconProvider iconProvider, String label, int forceSize) {
+    public IconLabelItem(Context context, SimpleIconProvider iconProvider, String label, int forceSize) {
         this(null);
         _label = label;
         _iconProvider = iconProvider;
@@ -189,9 +190,9 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
         if (_hideLabel) {
             holder.textView.setText(null);
-            _iconProvider.loadIconIntoTextView(holder.textView, _forceSize, Gravity.TOP);
+            _iconProvider.loadIcon(IconProvider.IconTargetType.TextView, _forceSize, holder.textView, Gravity.TOP);
         } else {
-            _iconProvider.loadIconIntoTextView(holder.textView, _forceSize, _iconGravity);
+            _iconProvider.loadIcon(IconProvider.IconTargetType.TextView, _forceSize, holder.textView, _iconGravity);
         }
 
         holder.textView.setTypeface(_typeface);
@@ -214,7 +215,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     public void unbindView(@NonNull ViewHolder holder) {
         super.unbindView(holder);
         if (_iconProvider != null) {
-            _iconProvider.cancelLoad(holder.textView);
+            _iconProvider.cancelLoad(IconProvider.IconTargetType.TextView, holder.textView);
         }
         holder.textView.setText("");
         holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);

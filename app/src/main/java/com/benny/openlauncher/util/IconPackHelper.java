@@ -21,7 +21,6 @@ import java.util.List;
 
 public class IconPackHelper {
     public static void themePacs(AppManager appManager, final int iconSize, String resPacName, List<App> apps) {
-        //theming vars-----------------------------------------------
         Resources themeRes = null;
         String iconResource;
         int intres;
@@ -224,7 +223,6 @@ public class IconPackHelper {
         return scaleFactor;
     }
 
-
     private static String getResourceName(Resources res, String string, String componentInfo) {
         String resource = null;
         XmlResourceParser xrp = null;
@@ -277,7 +275,6 @@ public class IconPackHelper {
         }
         return resource;
     }
-
 
     private static String[] getIconBackAndMaskResourceName(Resources res, String packageName) {
         String[] resource = new String[3];

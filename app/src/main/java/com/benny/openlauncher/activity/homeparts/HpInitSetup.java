@@ -11,7 +11,6 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.BaseIconProvider;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.SimpleIconProvider;
 import com.benny.openlauncher.viewutil.DesktopGestureListener.DesktopGestureCallback;
@@ -47,12 +46,12 @@ public final class HpInitSetup extends Setup {
 
         _imageLoader = new ImageLoader() {
             @NonNull
-            public BaseIconProvider createIconProvider(@Nullable Drawable drawable) {
+            public SimpleIconProvider createIconProvider(@Nullable Drawable drawable) {
                 return new SimpleIconProvider(drawable);
             }
 
             @NonNull
-            public BaseIconProvider createIconProvider(int icon) {
+            public SimpleIconProvider createIconProvider(int icon) {
                 return new SimpleIconProvider(icon);
             }
         };

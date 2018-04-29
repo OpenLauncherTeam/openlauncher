@@ -22,10 +22,10 @@ import com.benny.openlauncher.interfaces.IconProvider;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.App;
-import com.benny.openlauncher.util.BaseIconProvider;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragNDropHandler;
+import com.benny.openlauncher.util.SimpleIconProvider;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
@@ -37,7 +37,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     private static final char ELLIPSIS = '…';
 
     private Drawable _icon = null;
-    private BaseIconProvider _iconProvider;
+    private SimpleIconProvider _iconProvider;
     private String _label;
     private Paint _textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Rect _textContainer = new Rect(), testTextContainer = new Rect();
@@ -114,9 +114,9 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         return _iconProvider;
     }
 
-    public void setIconProvider(BaseIconProvider iconProvider) {
+    public void setIconProvider(SimpleIconProvider iconProvider) {
         _iconProvider = iconProvider;
-        iconProvider.loadIconIntoIconDrawer(this, (int) _iconSize, 0);
+        iconProvider.loadIcon(IconProvider.IconTargetType.IconDrawer, (int) _iconSize, this, 0);
     }
 
     public Drawable getCurrentIcon() {
@@ -153,13 +153,13 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
     public void load() {
         if (_iconProvider != null) {
-            _iconProvider.loadIconIntoIconDrawer(this, (int) _iconSize, 0);
+            _iconProvider.loadIcon(IconProvider.IconTargetType.IconDrawer, (int) _iconSize, this, 0);
         }
     }
 
     public void reset() {
         if (_iconProvider != null) {
-            _iconProvider.cancelLoad(this);
+            _iconProvider.cancelLoad(IconProvider.IconTargetType.IconDrawer, this);
         }
         _label = "";
         _icon = null;
@@ -240,7 +240,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     @Override
     public void onAttachedToWindow() {
         if (!_fastAdapterItem && _iconProvider != null) {
-            _iconProvider.loadIconIntoIconDrawer(this, (int) _iconSize, 0);
+            _iconProvider.loadIcon(IconProvider.IconTargetType.IconDrawer, (int) _iconSize, this, 0);
         }
         super.onAttachedToWindow();
     }
@@ -248,7 +248,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     @Override
     public void onDetachedFromWindow() {
         if (!_fastAdapterItem && _iconProvider != null) {
-            _iconProvider.cancelLoad(this);
+            _iconProvider.cancelLoad(IconProvider.IconTargetType.IconDrawer, this);
             _icon = null;
         }
         super.onDetachedFromWindow();
@@ -257,7 +257,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     @Override
     public void invalidate() {
         if (!_fastAdapterItem && _iconProvider != null) {
-            _iconProvider.cancelLoad(this);
+            _iconProvider.cancelLoad(IconProvider.IconTargetType.IconDrawer, this);
             _icon = null;
         } else {
             super.invalidate();

@@ -9,7 +9,7 @@ import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.interfaces.LabelProvider;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.App;
-import com.benny.openlauncher.util.BaseIconProvider;
+import com.benny.openlauncher.util.SimpleIconProvider;
 import com.benny.openlauncher.util.Tool;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class Item implements LabelProvider, Parcelable {
         }
     };
     public Type _type;
-    public BaseIconProvider _iconProvider = null;
+    public SimpleIconProvider _iconProvider = null;
     public int _x = 0;
     public int _y = 0;
     //Needed for folder to optimize the folder open position
@@ -266,7 +266,7 @@ public class Item implements LabelProvider, Parcelable {
         _spanY = y;
     }
 
-    public BaseIconProvider getIconProvider() {
+    public SimpleIconProvider getIconProvider() {
         return _iconProvider;
     }
 
@@ -282,7 +282,7 @@ public class Item implements LabelProvider, Parcelable {
         _type = type;
     }
 
-    public void setIconProvider(BaseIconProvider iconProvider) {
+    public void setIconProvider(SimpleIconProvider iconProvider) {
         _iconProvider = iconProvider;
     }
 
