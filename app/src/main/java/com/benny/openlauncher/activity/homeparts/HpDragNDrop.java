@@ -33,7 +33,6 @@ public class HpDragNDrop {
     private PopupIconLabelItem editItem = new PopupIconLabelItem(R.string.edit, R.drawable.ic_edit_black_24dp).withIdentifier(editItemIdentifier);
     private PopupIconLabelItem removeItem = new PopupIconLabelItem(R.string.remove, R.drawable.ic_close_dark_24dp).withIdentifier(removeItemIdentifier);
 
-
     public void initDragNDrop(@NonNull final Home _home, @NonNull final View leftDragHandle, @NonNull final View rightDragHandle, @NonNull final DragNDropLayout dragNDropView) {
         //dragHandle's drag event
         final Handler dragHandler = new Handler();
@@ -221,7 +220,6 @@ public class HpDragNDrop {
         });
 
         //dock's drag event
-
         dragNDropView.registerDropTarget(new DragNDropLayout.DropTargetListener(_home.getDock()) {
             @Override
             public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
@@ -310,7 +308,7 @@ public class HpDragNDrop {
             case APP:
             case SHORTCUT:
             case GROUP: {
-                if (DragAction.Action.APP_DRAWER.equals(dragNDropView.getDragAction())) {
+                if (dragNDropView.getDragAction().equals(Action.APP_DRAWER)) {
                     itemList.add(uninstallItem);
                     itemList.add(infoItem);
                 } else {
@@ -376,4 +374,3 @@ public class HpDragNDrop {
         });
     }
 }
-

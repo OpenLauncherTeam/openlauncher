@@ -5,6 +5,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -21,7 +22,7 @@ import com.benny.openlauncher.viewutil.DialogHelper;
 public class LauncherAction {
 
     public enum Action {
-        EditMinibar, SetWallpaper, LockScreen, DeviceSettings, LauncherSettings, VolumeDialog, OpenAppDrawer, LaunchApp, OpenSearch, MobileNetworkSettings,
+        EditMinibar, SetWallpaper, LockScreen, LauncherSettings, VolumeDialog, DeviceSettings, OpenAppDrawer, OpenSearch, MobileNetworkSettings, LaunchApp
     }
 
     static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
@@ -36,20 +37,12 @@ public class LauncherAction {
             new ActionDisplayItem(Action.MobileNetworkSettings, Home.Companion.get_resources().getString(R.string.mobile_network_settings), R.drawable.ic_network_24dp, 46),
     };
 
-    public static void RunAction(@Nullable ActionItem actionItem, final Context context) {
-        if (actionItem != null)
-            switch (actionItem._action) {
-                case LaunchApp:
-                    Tool.startApp(context, actionItem._extraData);
-                    break;
-
-                default:
-                    RunAction(actionItem._action, context);
-            }
+    public static void RunAction(Action action, final Context context) {
+        LauncherAction.RunAction(new ActionItem(action, null), context);
     }
 
-    public static void RunAction(Action action, final Context context) {
-        switch (action) {
+    public static void RunAction(ActionItem action, final Context context) {
+        switch (action._action) {
             case EditMinibar:
                 context.startActivity(new Intent(context, MinibarEditActivity.class));
                 break;
@@ -104,6 +97,10 @@ public class LauncherAction {
                     AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
                     audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamVolume(AudioManager.STREAM_RING), AudioManager.FLAG_SHOW_UI);
                 }
+                break;
+            case LaunchApp:
+                PackageManager pm = AppManager.getInstance(context).getPackageManager();
+                action._extraData = new Intent(pm.getLaunchIntentForPackage(AppSettings.get().getString(context.getString(R.string.pref_key__gesture_double_tap) + "__", "")));
                 break;
         }
     }
