@@ -28,13 +28,13 @@ public class HideAppsActivity extends ThemeActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
+
         ViewPager viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getString(R.string.pref_title__hide_apps));
         setSupportActionBar(toolbar);
-
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

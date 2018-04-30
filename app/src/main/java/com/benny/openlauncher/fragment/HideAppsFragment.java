@@ -1,13 +1,10 @@
 package com.benny.openlauncher.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,26 +28,16 @@ import com.benny.openlauncher.util.Definitions;
 import java.util.ArrayList;
 import java.util.List;
 
-
-@SuppressWarnings("ResultOfMethodCallIgnored")
 public class HideAppsFragment extends Fragment {
     private static final String TAG = "RequestActivity";
     private static final boolean DEBUG = true;
 
-    @SuppressWarnings("unchecked")
-    private ArrayList<String> _listActivities = new ArrayList();
-    @SuppressWarnings("unchecked")
-    private ArrayList<AppInfo> _listActivitiesFinal = new ArrayList();
-    @SuppressLint("StaticFieldLeak")
-    private ViewSwitcher _switcherLoad;
+    private ArrayList<String> _listActivitiesHidden = new ArrayList();
+    private ArrayList<AppInfo> _listActivitiesAll = new ArrayList();
     private AsyncWorkerList _taskList = new AsyncWorkerList();
-    private Typeface _tf;
-
-
-    @SuppressWarnings("unused")
-    private ViewSwitcher _viewSwitcher;
-    private ListView _grid;
     private AppAdapter _appInfoAdapter;
+    private ViewSwitcher _switcherLoad;
+    private ListView _grid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,12 +53,12 @@ public class HideAppsFragment extends Fragment {
         });
 
         if (_taskList.getStatus() == AsyncTask.Status.PENDING) {
-            // My AsyncTask has not started yet
+            // task has not started yet
             _taskList.execute();
         }
 
         if (_taskList.getStatus() == AsyncTask.Status.FINISHED) {
-            // My AsyncTask is done and onPostExecute was called
+            // task is done and onPostExecute has been called
             new AsyncWorkerList().execute();
         }
 
@@ -86,7 +73,7 @@ public class HideAppsFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             List<String> hiddenList = AppSettings.get().getHiddenAppsList();
-            _listActivities.addAll(hiddenList);
+            _listActivitiesHidden.addAll(hiddenList);
 
             super.onPreExecute();
         }
@@ -94,7 +81,7 @@ public class HideAppsFragment extends Fragment {
         @Override
         protected String doInBackground(String... arg0) {
             try {
-                // Compare them to installed apps
+                // compare to installed apps
                 prepareData();
                 return null;
             } catch (Throwable e) {
@@ -106,7 +93,7 @@ public class HideAppsFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             populateView();
-            //Switch from loading screen to the main view
+            // switch from loading screen to the main view
             _switcherLoad.showNext();
 
             super.onPostExecute(result);
@@ -124,22 +111,14 @@ public class HideAppsFragment extends Fragment {
 
             @Override
             public void run() {
-                int selected = 0;
-                ArrayList<String> hiddenList = new ArrayList<>();
-
-                // Get all selected apps
-                for (int i = 0; i < _listActivitiesFinal.size(); i++) {
-                    if ((_listActivitiesFinal.get(i)).isSelected()) {
-                        hiddenList.add((_listActivitiesFinal.get(i)).getCode());
-                        selected++;
-                    }
-                }
-                AppSettings.get().setHiddenAppsList(hiddenList);
+                // update hidden apps
+                AppSettings.get().setHiddenAppsList(_listActivitiesHidden);
                 getActivity().finish();
             }
         };
+
         if (!actionSend_Thread.isAlive()) {
-            //Prevents the thread to be executed twice (or more) times.
+            // prevents thread from being executed more than once
             actionSend_Thread.start();
         }
     }
@@ -151,14 +130,12 @@ public class HideAppsFragment extends Fragment {
             AppInfo tempAppInfo = new AppInfo(
                     app.getPackageName() + "/" + app.getClassName(),
                     app.getLabel(),
-                    app.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE),
-                    _listActivities.contains(app.getPackageName() + "/" + app.getClassName())
+                    app.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE)
             );
-            _listActivitiesFinal.add(tempAppInfo);
+            _listActivitiesAll.add(tempAppInfo);
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void populateView() {
         _grid = getActivity().findViewById(R.id.app_grid);
 
@@ -166,7 +143,7 @@ public class HideAppsFragment extends Fragment {
         _grid.setFastScrollEnabled(true);
         _grid.setFastScrollAlwaysVisible(false);
 
-        _appInfoAdapter = new AppAdapter(getActivity(), _listActivitiesFinal);
+        _appInfoAdapter = new AppAdapter(getActivity(), _listActivitiesAll);
 
         _grid.setAdapter(_appInfoAdapter);
         _grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -176,14 +153,14 @@ public class HideAppsFragment extends Fragment {
                 ViewSwitcher icon = view.findViewById(R.id.viewSwitcherChecked);
 
                 checker.toggle();
-                appInfo.setSelected(checker.isChecked());
-
-                if (appInfo.isSelected()) {
+                if (checker.isChecked()) {
+                    _listActivitiesHidden.add(appInfo.getCode());
                     if (DEBUG) Log.v(TAG, "Selected App: " + appInfo.getName());
                     if (icon.getDisplayedChild() == 0) {
                         icon.showNext();
                     }
                 } else {
+                    _listActivitiesHidden.remove(appInfo.getCode());
                     if (DEBUG) Log.v(TAG, "Deselected App: " + appInfo.getName());
                     if (icon.getDisplayedChild() == 1) {
                         icon.showPrevious();
@@ -194,8 +171,6 @@ public class HideAppsFragment extends Fragment {
     }
 
     private class AppAdapter extends ArrayAdapter<AppInfo> {
-        @SuppressWarnings("unchecked")
-
         private AppAdapter(Context context, ArrayList<AppInfo> adapterArrayList) {
             super(context, R.layout.request_item_list, adapterArrayList);
         }
@@ -219,17 +194,13 @@ public class HideAppsFragment extends Fragment {
             AppInfo appInfo = getItem(position);
 
             holder._apkPackage.setText(appInfo.getCode());
-            holder._apkPackage.setTypeface(_tf);
-
             holder._apkName.setText(appInfo.getName());
-
             holder._apkIcon.setImageDrawable(appInfo.getImage());
 
             holder._switcherChecked.setInAnimation(null);
             holder._switcherChecked.setOutAnimation(null);
-
-            holder._checker.setChecked(appInfo.isSelected());
-            if (appInfo.isSelected()) {
+            holder._checker.setChecked(_listActivitiesHidden.contains(appInfo.getCode()));
+            if (_listActivitiesHidden.contains(appInfo.getCode())) {
                 if (holder._switcherChecked.getDisplayedChild() == 0) {
                     holder._switcherChecked.showNext();
                 }
@@ -249,5 +220,4 @@ public class HideAppsFragment extends Fragment {
         CheckBox _checker;
         ViewSwitcher _switcherChecked;
     }
-
 }

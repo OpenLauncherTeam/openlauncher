@@ -27,7 +27,6 @@ public class HpEventHandler implements Setup.EventHandler {
                 }
             }
         });
-
     }
 
     @Override

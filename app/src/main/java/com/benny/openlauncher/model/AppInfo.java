@@ -3,16 +3,14 @@ package com.benny.openlauncher.model;
 import android.graphics.drawable.Drawable;
 
 public class AppInfo {
-    private String _code = null;
-    private String _name = null;
-    private final Drawable _icon;
-    private boolean _selected = false;
+    private String _code;
+    private String _name;
+    private Drawable _icon;
 
-    public AppInfo(String code, String name, Drawable icon, boolean selected) {
+    public AppInfo(String code, String name, Drawable icon) {
         _code = code;
         _name = name;
         _icon = icon;
-        _selected = selected;
     }
 
     public String getCode() {
@@ -25,13 +23,5 @@ public class AppInfo {
 
     public String getName() {
         return _name;
-    }
-
-    public boolean isSelected() {
-        return _selected;
-    }
-
-    public void setSelected(boolean paramBoolean) {
-        _selected = paramBoolean;
     }
 }
