@@ -60,7 +60,7 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
 
         final ArrayList<String> minibarArrangement = AppSettings.get().getMinibarArrangement();
         for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
-            _adapter.add(new Item(item._id, item, minibarArrangement.contains(item)));
+            _adapter.add(new Item(item._id, item, minibarArrangement.contains(Integer.toString(item._id))));
         }
 
         boolean minibarEnable = AppSettings.get().getMinibarEnable();
