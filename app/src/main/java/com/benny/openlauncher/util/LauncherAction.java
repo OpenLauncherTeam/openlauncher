@@ -25,7 +25,7 @@ public class LauncherAction {
         EditMinibar, SetWallpaper, LockScreen, LauncherSettings, VolumeDialog, DeviceSettings, OpenAppDrawer, OpenSearch, MobileNetworkSettings, LaunchApp
     }
 
-    static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
+    public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
             new ActionDisplayItem(Action.EditMinibar, Home.Companion.get_resources().getString(R.string.minibar_0), R.drawable.ic_mode_edit_black_24dp, 98),
             new ActionDisplayItem(Action.SetWallpaper, Home.Companion.get_resources().getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp, 36),
             new ActionDisplayItem(Action.LockScreen, Home.Companion.get_resources().getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp, 24),

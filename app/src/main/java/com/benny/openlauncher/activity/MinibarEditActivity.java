@@ -58,17 +58,14 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
 
         _recyclerView.setAdapter(_adapter);
 
-        int i = 0;
         final ArrayList<String> minibarArrangement = AppSettings.get().getMinibarArrangement();
-        for (String act : minibarArrangement) {
-            LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act.substring(1));
-            _adapter.add(new Item(i, item, act.charAt(0) == '0'));
-            i++;
+        for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
+            _adapter.add(new Item(item._id, item, minibarArrangement.contains(item)));
         }
 
-        boolean minBarEnable = AppSettings.get().getMinibarEnable();
-        _enableSwitch.setChecked(minBarEnable);
-        _enableSwitch.setText(minBarEnable ? R.string.on : R.string.off);
+        boolean minibarEnable = AppSettings.get().getMinibarEnable();
+        _enableSwitch.setChecked(minibarEnable);
+        _enableSwitch.setText(minibarEnable ? R.string.on : R.string.off);
         _enableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -88,10 +85,7 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
     protected void onPause() {
         ArrayList<String> minibarArrangement = new ArrayList<>();
         for (Item item : _adapter.getAdapterItems()) {
-            if (item.enable) {
-                minibarArrangement.add("0" + item.item._label.toString());
-            } else
-                minibarArrangement.add("1" + item.item._label.toString());
+            if (item.enable) minibarArrangement.add(Long.toString(item.id));
         }
         AppSettings.get().setMinibarArrangement(minibarArrangement);
         super.onPause();
