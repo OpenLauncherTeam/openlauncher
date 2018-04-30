@@ -13,7 +13,7 @@
         <item>@string/open_app_drawer</item>
         <item>@string/launch_app</item>
         <item>@string/pref_title__search_bar</item>
-        <item>@string/mobile_network_settings</item>
+        <item>@string/minibar_10</item>
     </string-array>
 
     <string-array name="entries__desktop_actions" translatable="false">

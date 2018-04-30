@@ -23,7 +23,6 @@
     <string name="minibar_0">Cambia il layout della Minibar.</string>
     <string name="minibar_1">Imposta o sfoca lo sfondo</string>
     <string name="minibar_2">Blocca immediatamente lo schermo, richiede amministrazione del dispositivo.</string>
-    <string name="minibar_3">Libera la RAM forzando la chiusura degli altri servizi in esecuzione.</string>
     <string name="minibar_4">Scorciatoia impostazioni.</string>
     <string name="minibar_5">Scorciatoia impostazioni OpenLauncher.</string>
     <string name="minibar_7">Mostra slider volume.</string>

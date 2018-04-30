@@ -431,6 +431,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     }
 
     public final void initMinibar() {
+        final ArrayList<LauncherAction.ActionDisplayItem> items = new ArrayList<>();
         final ArrayList<String> labels = new ArrayList<>();
         final ArrayList<Integer> icons = new ArrayList<>();
 
@@ -438,7 +439,8 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             if (act.length() > 1) {
                 LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act);
                 if (item != null) {
-                    labels.add(item._label.toString());
+                    items.add(item);
+                    labels.add(item._label);
                     icons.add(item._icon);
                 }
             }
@@ -450,7 +452,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         minibar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                LauncherAction.Action action = LauncherAction.Action.valueOf(labels.get(i));
+                LauncherAction.Action action = items.get(i)._action;
                 if (action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.EditMinibar) {
                     _consumeNextResume = true;
                 }

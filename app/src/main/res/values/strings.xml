@@ -20,14 +20,15 @@
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
-    <string name="minibar_0">Change the layout of the minibar.</string>
-    <string name="minibar_1">Set or blur the wallpaper.</string>
+    <string name="minibar_0">Change the minibar layout.</string>
+    <string name="minibar_1">Set the desktop wallpaper.</string>
     <string name="minibar_2">Lock the screen immediately, requires device administration.</string>
-    <string name="minibar_3">Free the RAM by forcibly closing other running services.</string>
     <string name="minibar_4">Shortcut to device settings.</string>
     <string name="minibar_5">Shortcut to OpenLauncher settings.</string>
-    <string name="minibar_7">Display volume sliders.</string>
-    <string name="minibar_8">Open app drawer.</string>
+    <string name="minibar_7">Display all available volume sliders.</string>
+    <string name="minibar_8">Open the app drawer.</string>
+    <string name="minibar_9">Open the search bar.</string>
+    <string name="minibar_10">Mobile network settings.</string>
 
     <!-- About -->
     <string name="about_libs">Open Source Libraries</string>
@@ -254,6 +255,5 @@
     <string name="open_app_drawer">Open App Drawer</string>
     <string name="launch_app">Launch App</string>
     <string name="app_drawer">App Drawer</string>
-    <string name="mobile_network_settings">Mobile network settings</string>
 
 </resources>

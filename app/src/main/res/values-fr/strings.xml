@@ -22,7 +22,6 @@
     <string name="minibar_0">Modifier la disposition de la Minibarre.</string>
     <string name="minibar_1">Définir et rendre le fond d\'écran flou.</string>
     <string name="minibar_2">Verrouiller l\'écran immédiatement, requiert le droit d\'administration de l\'appareil.</string>
-    <string name="minibar_3">Libérer de la mémoire vive en forçant la fermeture d\'autres services en cours.</string>
     <string name="minibar_4">Raccourci vers les paramètres de l\'appareil.</string>
     <string name="minibar_5">Raccourci vers les paramètres d\'OpenLauncher.</string>
     <string name="minibar_7">Ouvrir la pop-up du volume.</string>

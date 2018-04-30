@@ -31,7 +31,6 @@
     <string name="minibar_0">调整快捷操作栏的布局</string>
     <string name="minibar_1">设置或模糊壁纸</string>
     <string name="minibar_2">立即锁定屏幕, 需要设备管理器</string>
-    <string name="minibar_3">强行停止其他运行中的服务以释放内存</string>
     <string name="minibar_4">系统设置快捷方式</string>
     <string name="minibar_5">OpenLauncher 设置快捷方式</string>
     <string name="minibar_7">显示音量调节</string>

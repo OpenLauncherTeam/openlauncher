@@ -20,7 +20,6 @@
     <string name="minibar_0">Изменить вид мини-бара.</string>
     <string name="minibar_1">Установить или размыть обои.</string>
     <string name="minibar_2">Заблокировать экран, требует прав администратора устройства.</string>
-    <string name="minibar_3">Освободить оперативную память, принудительно завершив другие запущенные службы.</string>
     <string name="minibar_4">Быстрый доступ к настройкам устройства.</string>
     <string name="minibar_5">Быстрый доступ к настройкам OpenLauncher.</string>
     <string name="minibar_7">Отобразить регуляторы громкости.</string>

@@ -31,7 +31,6 @@
     <string name="minibar_0">Canvia el diseny de la minibar.</string>
     <string name="minibar_1">Estableix o difumina el fons de pantalla.</string>
     <string name="minibar_2">Bloqueja la pantalla inmediatament, requereix ser administrador del dispositiu.</string>
-    <string name="minibar_3">Allibera memòria RAM forçant el tancament d\'altres procesos en execució.</string>
     <string name="minibar_4">Drecera als paràmetres del dispositiu.</string>
     <string name="minibar_5">Drecera als paràmetres de OpenLauncher.</string>
     <string name="minibar_7">Desplegar el panell de volum.</string>

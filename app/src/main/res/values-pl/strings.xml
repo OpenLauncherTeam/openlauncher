@@ -22,7 +22,6 @@
     <string name="minibar_0">Zmień układ minipaska.</string>
     <string name="minibar_1">Ustaw lub rozmyj tapetę.</string>
     <string name="minibar_2">Natychmiast zablokuj ekran. Wymaga uprawnień administratora urządzenia.</string>
-    <string name="minibar_3">Zwolnij pamięć RAM, wymuszając zamknięcie innych działających usług.</string>
     <string name="minibar_4">Skrót do ustawień urządzenia.</string>
     <string name="minibar_5">Skrót do ustawień launchera.</string>
     <string name="minibar_7">Pokaż suwak głośności.</string>
@@ -251,6 +250,6 @@
     <string name="open_app_drawer">Otwórz menu aplikacji</string>
     <string name="launch_app">Uruchom aplikację</string>
     <string name="app_drawer">Menu aplikacji</string>
-    <string name="mobile_network_settings">Ustawienia sieci mobilnych</string>
+    <string name="minibar_10">Ustawienia sieci mobilnych</string>
 
 </resources>

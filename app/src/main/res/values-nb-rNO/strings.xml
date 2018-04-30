@@ -31,7 +31,6 @@
     <string name="minibar_0">Endre utformingen på sidepanelet.</string>
     <string name="minibar_1">Velg og tilslør bakgrunnsbildet.</string>
     <string name="minibar_2">Lås skjermen umiddelbart. Krever enhetsadministrasjon.</string>
-    <string name="minibar_3">Frigjør RAM ved å tvinge lukking av andre kjørende tjenester.</string>
     <string name="minibar_4">Snarvei til enhetsinnstillingene.</string>
     <string name="minibar_5">Snarvei til OpenLauncher-innstillingene.</string>
     <string name="minibar_7">Åpne lydstyrkejustering.</string>

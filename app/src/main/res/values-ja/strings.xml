@@ -29,7 +29,6 @@
     <string name="minibar_0">ミニバーのレイアウトを変更。</string>
     <string name="minibar_1">壁紙の設定と、ぼかし。</string>
     <string name="minibar_2">画面をすぐにロック。 デバイス管理が必要です。</string>
-    <string name="minibar_3">強制的に他の実行中のサービスを閉じて RAM を解放。</string>
     <string name="minibar_4">デバイス設定のショートカット。</string>
     <string name="minibar_5">OpenLauncher 設定のショートカット。</string>
     <string name="minibar_7">ボリュームダイアログを開く。</string>
