@@ -20,7 +20,7 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.PopupIconLabelItem;
 import com.benny.openlauncher.util.DragAction.Action;
-import com.benny.openlauncher.util.DragNDropHandler;
+import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
@@ -147,7 +147,7 @@ public final class DragNDropLayout extends FrameLayout {
 
         protected void onDraw(@Nullable Canvas canvas) {
             super.onDraw(canvas);
-            if (canvas == null || DragNDropHandler._cachedDragBitmap == null || _dragLocation.equals(-1f, -1f))
+            if (canvas == null || DragHandler._cachedDragBitmap == null || _dragLocation.equals(-1f, -1f))
                 return;
 
             float x = _dragLocation.x - Home._itemTouchX;
@@ -156,8 +156,8 @@ public final class DragNDropLayout extends FrameLayout {
             if (_dragging) {
                 canvas.save();
                 _overlayIconScale = Tool.clampFloat(_overlayIconScale + 0.05f, 1f, 1.1f);
-                canvas.scale(_overlayIconScale, _overlayIconScale, x + DragNDropHandler._cachedDragBitmap.getWidth() / 2, y + DragNDropHandler._cachedDragBitmap.getHeight() / 2);
-                canvas.drawBitmap(DragNDropHandler._cachedDragBitmap, x, y, _paint);
+                canvas.scale(_overlayIconScale, _overlayIconScale, x + DragHandler._cachedDragBitmap.getWidth() / 2, y + DragHandler._cachedDragBitmap.getHeight() / 2);
+                canvas.drawBitmap(DragHandler._cachedDragBitmap, x, y, _paint);
                 canvas.restore();
             }
 

@@ -20,7 +20,7 @@ import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.DragNDropHandler;
+import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
@@ -125,7 +125,7 @@ public class GroupPopupView extends RevealFrameLayout {
                         DragAction.Action action = groupItem.getType() == Item.Type.SHORTCUT ? DragAction.Action.SHORTCUT : DragAction.Action.APP;
 
                         // start the drag action
-                        DragNDropHandler.startDrag(view, groupItem, action, null);
+                        DragHandler.startDrag(view, groupItem, action, null);
 
                         dismissPopup();
                         updateItem(callBack, item, groupItem, itemView);

@@ -14,10 +14,10 @@ import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.widget.AppItemView;
 
-public final class DragNDropHandler {
+public final class DragHandler {
     private static final String DRAG_DROP_EXTRA = "DRAG_DROP_EXTRA";
     private static final String DRAG_DROP_INTENT = "DRAG_DROP_INTENT";
-    public static final DragNDropHandler INSTANCE = new DragNDropHandler();
+    public static final DragHandler INSTANCE = new DragHandler();
     public static Bitmap _cachedDragBitmap;
 
     public static <T extends Parcelable> void startDrag(View view, Item item, DragAction.Action action, @Nullable final AppItemView.LongPressCallBack eventAction) {

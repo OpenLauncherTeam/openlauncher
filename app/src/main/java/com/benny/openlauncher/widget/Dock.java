@@ -14,7 +14,7 @@ import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction.Action;
-import com.benny.openlauncher.util.DragNDropHandler;
+import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
@@ -104,7 +104,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
         _previousDragPoint.set(_coordinate.x, _coordinate.y);
         switch (state) {
             case CurrentNotOccupied:
-                projectImageOutlineAt(_coordinate, DragNDropHandler._cachedDragBitmap);
+                projectImageOutlineAt(_coordinate, DragHandler._cachedDragBitmap);
                 break;
             case OutOffRange:
             case ItemViewNotFound:

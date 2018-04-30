@@ -18,7 +18,7 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.DragNDropHandler;
+import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.widget.CellContainer;
@@ -171,7 +171,7 @@ public class ItemViewFactory {
                             return false;
                         }
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                        DragNDropHandler.startDrag(view, item, DragAction.Action.WIDGET, null);
+                        DragHandler.startDrag(view, item, DragAction.Action.WIDGET, null);
 
                         callBack.setLastItem(item, widgetContainer);
                         return true;

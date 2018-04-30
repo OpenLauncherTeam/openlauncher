@@ -21,7 +21,7 @@ import com.benny.openlauncher.interfaces.DialogListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.DragNDropHandler;
+import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 
 public class DragOptionView extends CardView {
@@ -81,7 +81,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        final Item item = DragNDropHandler.INSTANCE.getDraggedObject(dragEvent);
+                        final Item item = DragHandler.INSTANCE.getDraggedObject(dragEvent);
 
                         Setup.eventHandler().showEditDialog(getContext(), item, new DialogListener.OnEditDialogListener() {
                             @Override
@@ -120,7 +120,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Item item = DragNDropHandler.INSTANCE.getDraggedObject(dragEvent);
+                        Item item = DragHandler.INSTANCE.getDraggedObject(dragEvent);
 
                         // remove all items from the database
                         Home.Companion.getLauncher().Companion.getDb().deleteItem(item, true);
@@ -150,7 +150,7 @@ public class DragOptionView extends CardView {
                     case DragEvent.ACTION_DRAG_EXITED:
                         return true;
                     case DragEvent.ACTION_DROP:
-                        Item item = DragNDropHandler.INSTANCE.getDraggedObject(dragEvent);
+                        Item item = DragHandler.INSTANCE.getDraggedObject(dragEvent);
                         if (item.getType() == Item.Type.APP) {
                             try {
                                 getContext().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + item.getIntent().getComponent().getPackageName())));

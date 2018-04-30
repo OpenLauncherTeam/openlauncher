@@ -24,7 +24,7 @@ import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.util.DragNDropHandler;
+import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.SimpleIconProvider;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
@@ -294,7 +294,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                         return false;
                     }
                     v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                    DragNDropHandler.startDrag(v, item, action, eventAction);
+                    DragHandler.startDrag(v, item, action, eventAction);
                     return true;
                 }
             };
@@ -405,7 +405,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                     if (_view._vibrateWhenLongPress) {
                         v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                     }
-                    DragNDropHandler.startDrag(_view, item, action, eventAction);
+                    DragHandler.startDrag(_view, item, action, eventAction);
                     return true;
                 }
             });

@@ -23,7 +23,7 @@ import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.Definitions.ItemState;
 import com.benny.openlauncher.util.DragAction.Action;
-import com.benny.openlauncher.util.DragNDropHandler;
+import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.DesktopGestureListener;
@@ -520,7 +520,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         _previousDragPoint.set(_coordinate.x, _coordinate.y);
         switch (state) {
             case CurrentNotOccupied:
-                getCurrentPage().projectImageOutlineAt(_coordinate, DragNDropHandler._cachedDragBitmap);
+                getCurrentPage().projectImageOutlineAt(_coordinate, DragHandler._cachedDragBitmap);
                 break;
             case OutOffRange:
             case ItemViewNotFound:
