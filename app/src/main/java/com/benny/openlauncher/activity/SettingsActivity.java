@@ -21,6 +21,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.preference.ColorPreferenceCompat;
+import com.benny.openlauncher.util.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DatabaseHelper;
@@ -212,7 +213,7 @@ public class SettingsActivity extends ThemeActivity {
         }
 
         @Override
-        protected void onPreferenceChanged(SharedPreferences prefs, String key) {
+        protected void onPreferenceChanged(SharedPreferences prefs, final String key) {
             super.onPreferenceChanged(prefs, key);
             int keyRes = _cu.getResId(ContextUtils.ResType.STRING, key);
             Home launcher = Home.Companion.getLauncher();
@@ -236,8 +237,12 @@ public class SettingsActivity extends ThemeActivity {
                 case R.string.pref_key__gesture_pinch:
                 case R.string.pref_key__gesture_unpinch: {
                     if (prefs.getString(key, "0").equals("9")) {
-                        DialogHelper.selectAppDialog(getContext(), app ->
-                                prefs.edit().putString(key + "__", app._packageName).apply());
+                        DialogHelper.selectAppDialog(getContext(), new DialogHelper.OnAppSelectedListener() {
+                            @Override
+                            public void onAppSelected(App app) {
+                                AppSettings.get().setString(key, app._packageName);
+                            }
+                        });
                     }
                     break;
                 }

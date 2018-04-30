@@ -81,7 +81,7 @@ public class DialogHelper {
 
         final MaterialDialog dialog = builder.build();
         List<IconLabelItem> items = new ArrayList<>();
-        final List<App> apps = AppManager.getInstance(context).getApps(); // TODO: Tool.java migration
+        final List<App> apps = AppManager.getInstance(context).getApps();
         int size = Tool.dp2px(18, context);
         int sizePad = Tool.dp2px(8, context);
         for (int i = 0; i < apps.size(); i++) {
