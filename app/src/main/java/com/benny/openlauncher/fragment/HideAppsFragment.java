@@ -20,7 +20,7 @@ import android.widget.ViewSwitcher;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.model.AppInfo;
-import com.benny.openlauncher.util.App;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.Definitions;

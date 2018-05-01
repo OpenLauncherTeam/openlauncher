@@ -16,7 +16,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.util.App;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;

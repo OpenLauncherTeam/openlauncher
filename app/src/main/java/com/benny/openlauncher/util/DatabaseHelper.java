@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 
 import java.util.ArrayList;

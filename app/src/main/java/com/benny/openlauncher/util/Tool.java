@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.Home;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.viewutil.ItemGestureListener;
 
@@ -164,8 +165,7 @@ public class Tool {
         return (int) (f * system.getDisplayMetrics().density);
     }
 
-    public static final boolean isPackageInstalled(@NonNull String packageName, @NonNull PackageManager packageManager) {
-
+    public static boolean isPackageInstalled(@NonNull String packageName, @NonNull PackageManager packageManager) {
         try {
             packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
             return true;
@@ -173,7 +173,6 @@ public class Tool {
             return false;
         }
     }
-
 
     public static int dp2px(int dp, Context context) {
         Resources resources = context.getResources();

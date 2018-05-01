@@ -47,7 +47,7 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.manager.Setup.DataManager;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.Item.Type;
-import com.benny.openlauncher.util.App;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.AppUpdateReceiver;

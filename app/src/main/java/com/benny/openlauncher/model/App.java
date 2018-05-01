@@ -1,10 +1,11 @@
-package com.benny.openlauncher.util;
+package com.benny.openlauncher.model;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.util.SimpleIconProvider;
 
 import android.support.annotation.NonNull;
 

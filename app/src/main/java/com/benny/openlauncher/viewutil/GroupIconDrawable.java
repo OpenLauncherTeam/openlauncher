@@ -17,7 +17,7 @@ import com.benny.openlauncher.interfaces.IconDrawer;
 import com.benny.openlauncher.interfaces.IconProvider;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.util.App;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Tool;
 
 public class GroupIconDrawable extends Drawable implements IconDrawer {
