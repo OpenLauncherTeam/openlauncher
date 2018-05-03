@@ -41,17 +41,15 @@ public class App {
         return _packageName;
     }
 
-
     public String getClassName() {
         return _className;
     }
-
 
     public SimpleIconProvider getIconProvider() {
         return _iconProvider;
     }
 
-    public void setIconProvider(@NonNull SimpleIconProvider baseIconProvider) {
-
+    public void setIconProvider(@NonNull SimpleIconProvider iconProvider) {
+        _iconProvider = iconProvider;
     }
 }
