@@ -244,7 +244,7 @@
     <string name="donate">Donate</string>
 
     <string name="set_wallpaper">Set Wallpaper</string>
-    <string name="blur_wallpaper" translatable="false">Blur Wallpaper</string>
+    <string name="blur_wallpaper">Blur Wallpaper</string>
     <string name="none">None</string>
     <string name="minibar_settings">Minibar Settings</string>
     <string name="lock_screen">Lock Screen</string>
