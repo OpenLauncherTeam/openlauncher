@@ -42,11 +42,6 @@
     <string name="about_rate">Qualifica</string>
     <string name="about_credit">Contribuïdors</string>
     <string name="about_credit_text_all_contributors">Tots els contribuïdors</string>
-    <string name="about_credit_text_bennykok" translatable="false">Inici del projecte</string>
-    <string name="about_credit_text_chris_debrodie" translatable="false">Va ajudar molt amb errors i sugerències</string>
-    <string name="about_credit_text_gaukler_faun" translatable="false">Va afegir alguns paràmetres, traducció a tempArrayOfInt2\'alemany</string>
-    <string name="about_credit_text_gsantner" translatable="false">Encarregat, traducció a tempArrayOfInt2\'alemany</string>
-    <string name="about_credit_text_dkanada" translatable="false">Encarregat, base de dades</string>
 
     <!-- Settings -->
 

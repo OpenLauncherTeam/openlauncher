@@ -16,14 +16,6 @@
     <string name="pref__date_bar_date_format_custom__default_value_1" translatable="false"><![CDATA[EEEE\', \'dd\'.\']]></string>
     <string name="pref__date_bar_date_format_custom__default_value_2" translatable="false"><![CDATA[MMMM yyyy\', KW \'ww]]></string>
 
-    <string name="about_team" translatable="false">Open Launcher Team</string>
-    <string name="about_credit_text_bennykok" translatable="false">Project starter</string>
-    <string name="about_credit_text_chris_debrodie" translatable="false">Helped a lot with bugs and suggestions</string>
-    <string name="about_credit_text_gaukler_faun" translatable="false">Added some settings, German translation</string>
-    <string name="about_credit_text_gsantner" translatable="false">Maintainer, German translations</string>
-    <string name="about_credit_text_dkanada" translatable="false">Maintainer, Database</string>
-
-
     <string name="pref_title__minibar" translatable="false">@string/minibar</string>
     <string name="pref_title__minibar_background_color" translatable="false">@string/minibar</string>
     <string name="pref_title__dock_size" translatable="false">@string/pref_title__size</string>
