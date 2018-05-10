@@ -255,7 +255,7 @@ public class AppManager {
 
             AppSettings appSettings = AppSettings.get();
             if (!appSettings.getIconPack().isEmpty() && Tool.isPackageInstalled(appSettings.getIconPack(), _packageManager)) {
-                IconPackHelper.themePacs(AppManager.this, Tool.dp2px(appSettings.getIconSize(), _context), appSettings.getIconPack(), _apps);
+                IconPackHelper.applyIconPack(AppManager.this, Tool.dp2px(appSettings.getIconSize(), _context), appSettings.getIconPack(), _apps);
             }
             return null;
         }

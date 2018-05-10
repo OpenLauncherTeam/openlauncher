@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.util.List;
 
 public class IconPackHelper {
-    public static void themePacs(AppManager appManager, final int iconSize, String iconPackName, List<App> apps) {
+    public static void applyIconPack(AppManager appManager, final int iconSize, String iconPackName, List<App> apps) {
         Resources iconPackResources = null;
         int intResourceIcon = 0;
         int intResourceBack = 0;
