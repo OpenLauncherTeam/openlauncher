@@ -62,11 +62,11 @@ public class IconPackHelper {
         uniformOptions.inScaled = false;
         uniformOptions.inDither = false;
 
-        Canvas origCanv;
-        Canvas canvas;
         Bitmap back = null;
         Bitmap mask = null;
         Bitmap upon = null;
+        Canvas canvasOrig;
+        Canvas canvas;
         Bitmap scaledBitmap;
         Bitmap scaledOrig;
         Bitmap orig;
@@ -94,6 +94,8 @@ public class IconPackHelper {
                 String iconResource = getResource(iconPackResources, iconPackName, null, "ComponentInfo{" + apps.get(I).getPackageName() + "/" + apps.get(I).getClassName() + "}");
                 if (iconResource != null) {
                     intResourceIcon = iconPackResources.getIdentifier(iconResource, "drawable", iconPackName);
+                } else {
+                    intResourceIcon = 0;
                 }
 
                 if (intResourceIcon != 0) {
@@ -115,12 +117,12 @@ public class IconPackHelper {
                     if (back != null)
                         canvas.drawBitmap(back, getResizedMatrix(back, iconSize, iconSize), p);
 
-                    origCanv = new Canvas(scaledOrig);
+                    canvasOrig = new Canvas(scaledOrig);
                     orig = getResizedBitmap(orig, (int) (iconSize * scale), (int) (iconSize * scale));
-                    origCanv.drawBitmap(orig, scaledOrig.getWidth() - (orig.getWidth() / 2) - scaledOrig.getWidth() / 2, scaledOrig.getWidth() - (orig.getWidth() / 2) - scaledOrig.getWidth() / 2, origP);
+                    canvasOrig.drawBitmap(orig, scaledOrig.getWidth() - (orig.getWidth() / 2) - scaledOrig.getWidth() / 2, scaledOrig.getWidth() - (orig.getWidth() / 2) - scaledOrig.getWidth() / 2, origP);
 
                     if (mask != null)
-                        origCanv.drawBitmap(mask, getResizedMatrix(mask, iconSize, iconSize), maskP);
+                        canvasOrig.drawBitmap(mask, getResizedMatrix(mask, iconSize, iconSize), maskP);
 
                     canvas.drawBitmap(getResizedBitmap(scaledOrig, iconSize, iconSize), 0, 0, p);
 
