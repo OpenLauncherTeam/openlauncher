@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
@@ -267,7 +267,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
             case SHORTCUT:
                 item.setIntent(Tool.getIntentFromString(data));
                 if (Setup.appSettings().enableImageCaching()) {
-                    item.setIconProvider(Setup.get().getImageLoader().createIconProvider(Tool.getIcon(Home.Companion.getLauncher(), Integer.toString(id))));
+                    item.setIconProvider(Setup.get().getImageLoader().createIconProvider(Tool.getIcon(HomeActivity.Companion.getLauncher(), Integer.toString(id))));
                 } else {
                     switch (type) {
                         case APP:

@@ -16,7 +16,7 @@ import android.view.HapticFeedbackConstants;
 import android.view.View;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.IconDrawer;
 import com.benny.openlauncher.interfaces.IconProvider;
 import com.benny.openlauncher.manager.Setup;
@@ -90,7 +90,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         return b.getView();
     }
 
-    public static View createDrawerAppItemView(Context context, final Home home, App app, int iconSize, AppItemView.LongPressCallBack longPressCallBack) {
+    public static View createDrawerAppItemView(Context context, final HomeActivity homeActivity, App app, int iconSize, AppItemView.LongPressCallBack longPressCallBack) {
         return new AppItemView.Builder(context, iconSize)
                 .setAppItem(app)
                 .withOnTouchGetPosition(null, null)
@@ -361,7 +361,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
             _view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Home.Companion.getLauncher() != null && (Home.Companion.getLauncher()).getGroupPopup().showWindowV(item, v, callback)) {
+                    if (HomeActivity.Companion.getLauncher() != null && (HomeActivity.Companion.getLauncher()).getGroupPopup().showWindowV(item, v, callback)) {
                         ((GroupIconDrawable) ((AppItemView) v).getCurrentIcon()).popUp();
                     }
                 }
@@ -379,7 +379,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
                         @Override
                         public void onClick(View view) {
                             view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                            Home.Companion.getLauncher().openAppDrawer(view);
+                            HomeActivity.Companion.getLauncher().openAppDrawer(view);
                         }
                     });
                     break;

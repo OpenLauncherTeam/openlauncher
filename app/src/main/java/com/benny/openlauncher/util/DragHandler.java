@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.view.DragEvent;
 import android.view.View;
 
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.widget.AppItemView;
 
@@ -23,8 +23,8 @@ public final class DragHandler {
     public static <T extends Parcelable> void startDrag(View view, Item item, DragAction.Action action, @Nullable final AppItemView.LongPressCallBack eventAction) {
         _cachedDragBitmap = loadBitmapFromView(view);
 
-        if (Home.Companion.getLauncher() != null)
-            Home.Companion.getLauncher().getDragNDropView().startDragNDropOverlay(view, item, action);
+        if (HomeActivity.Companion.getLauncher() != null)
+            HomeActivity.Companion.getLauncher().getDragNDropView().startDragNDropOverlay(view, item, action);
 
         if (eventAction != null)
             eventAction.afterDrag(view);

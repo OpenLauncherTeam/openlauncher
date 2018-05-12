@@ -13,7 +13,7 @@ import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.AppDeleteListener;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.model.App;
@@ -133,7 +133,7 @@ public class AppManager {
                                 d.dismiss();
                             } else {
                                 Tool.toast(_context, (activity.getString(R.string.dialog__icon_pack_info_toast)));
-                                ActivityCompat.requestPermissions(Home.Companion.getLauncher(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
+                                ActivityCompat.requestPermissions(HomeActivity.Companion.getLauncher(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, HomeActivity.REQUEST_PERMISSION_STORAGE);
                             }
                         }
                     }));
@@ -272,8 +272,8 @@ public class AppManager {
 
             if (_recreateAfterGettingApps) {
                 _recreateAfterGettingApps = false;
-                if (_context instanceof Home)
-                    ((Home) _context).recreate();
+                if (_context instanceof HomeActivity)
+                    ((HomeActivity) _context).recreate();
             }
 
             super.onPostExecute(result);

@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.LabelProvider;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.SimpleIconProvider;
@@ -72,7 +72,7 @@ public class Item implements LabelProvider, Parcelable {
                 parcel.readStringList(labels);
                 _items = new ArrayList<>();
                 for (String s : labels) {
-                    _items.add(Home.Companion.getLauncher()._db.getItem(Integer.parseInt(s)));
+                    _items.add(HomeActivity.Companion.getLauncher()._db.getItem(Integer.parseInt(s)));
                 }
                 break;
             case ACTION:
@@ -87,7 +87,7 @@ public class Item implements LabelProvider, Parcelable {
         _locationInLauncher = parcel.readInt();
 
         if (Setup.appSettings().enableImageCaching()) {
-            _iconProvider = Setup.imageLoader().createIconProvider(Tool.getIcon(Home.Companion.getLauncher(), Integer.toString(_idValue)));
+            _iconProvider = Setup.imageLoader().createIconProvider(Tool.getIcon(HomeActivity.Companion.getLauncher(), Integer.toString(_idValue)));
         } else {
             switch (_type) {
                 case APP:

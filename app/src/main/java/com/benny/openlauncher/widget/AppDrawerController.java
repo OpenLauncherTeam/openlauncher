@@ -13,7 +13,7 @@ import android.view.WindowInsets;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.Tool;
 
@@ -232,10 +232,10 @@ public class AppDrawerController extends RevealFrameLayout {
         }
     }
 
-    public void setHome(Home home) {
+    public void setHome(HomeActivity homeActivity) {
         switch (_drawerMode) {
             case DrawerMode.HORIZONTAL_PAGED:
-                _drawerViewPaged.withHome(home, (PagerIndicator) findViewById(R.id.appDrawerIndicator));
+                _drawerViewPaged.withHome(homeActivity, (PagerIndicator) findViewById(R.id.appDrawerIndicator));
                 break;
             case DrawerMode.VERTICAL:
                 break;

@@ -23,7 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
@@ -193,17 +193,17 @@ public class Tool {
     }
 
     public static void startApp(Context context, App app) {
-        if (Home.Companion.getLauncher() != null)
-            Home.Companion.getLauncher().onStartApp(context, app, null);
+        if (HomeActivity.Companion.getLauncher() != null)
+            HomeActivity.Companion.getLauncher().onStartApp(context, app, null);
     }
 
     public static void startApp(Context context, Intent intent) {
-        if (Home.Companion.getLauncher() != null)
-            Home.Companion.getLauncher().onStartApp(context, intent, null);
+        if (HomeActivity.Companion.getLauncher() != null)
+            HomeActivity.Companion.getLauncher().onStartApp(context, intent, null);
     }
 
     public static final void startApp(@NonNull Context context, @NonNull App app, @Nullable View view) {
-        Home launcher = Home.Companion.getLauncher();
+        HomeActivity launcher = HomeActivity.Companion.getLauncher();
         if (launcher != null) {
             launcher.onStartApp(context, app, view);
         }
@@ -346,8 +346,8 @@ public class Tool {
         return new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                Home.Companion.setItemTouchX((int) motionEvent.getX());
-                Home.Companion.setItemTouchY((int) motionEvent.getY());
+                HomeActivity.Companion.setItemTouchX((int) motionEvent.getX());
+                HomeActivity.Companion.setItemTouchY((int) motionEvent.getY());
                 if (itemGestureListener != null) {
                     return itemGestureListener.onTouchEvent(motionEvent);
                 }

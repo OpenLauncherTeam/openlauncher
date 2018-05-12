@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.PopupIconLabelItem;
@@ -150,8 +150,8 @@ public final class DragNDropLayout extends FrameLayout {
             if (canvas == null || DragHandler._cachedDragBitmap == null || _dragLocation.equals(-1f, -1f))
                 return;
 
-            float x = _dragLocation.x - Home._itemTouchX;
-            float y = _dragLocation.y - Home._itemTouchY;
+            float x = _dragLocation.x - HomeActivity._itemTouchX;
+            float y = _dragLocation.y - HomeActivity._itemTouchY;
 
             if (_dragging) {
                 canvas.save();

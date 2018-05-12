@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.benny.openlauncher.AppObject;
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
@@ -30,11 +30,11 @@ public final class HpInitSetup extends Setup {
     private final Logger _logger;
     private final AppSettings _appSettings;
 
-    public HpInitSetup(Home home) {
+    public HpInitSetup(HomeActivity homeActivity) {
         _appSettings = AppSettings.get();
         _desktopGestureCallback = new HpDesktopGestureCallback(_appSettings);
-        _dataManager = new DatabaseHelper(home);
-        _appLoader = AppManager.getInstance(home);
+        _dataManager = new DatabaseHelper(homeActivity);
+        _appLoader = AppManager.getInstance(homeActivity);
         _eventHandler = new HpEventHandler();
 
         _logger = new Logger() {

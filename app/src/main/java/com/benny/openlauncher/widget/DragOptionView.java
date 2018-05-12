@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.DialogListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
@@ -33,7 +33,7 @@ public class DragOptionView extends CardView {
     private TextView _removeIcon;
     private TextView _infoIcon;
     private TextView _deleteIcon;
-    private Home _home;
+    private HomeActivity _homeActivity;
     private Long _animSpeed = 120L;
 
     public DragOptionView(Context context) {
@@ -46,8 +46,8 @@ public class DragOptionView extends CardView {
         init();
     }
 
-    public void setHome(Home home) {
-        _home = home;
+    public void setHome(HomeActivity homeActivity) {
+        _homeActivity = homeActivity;
     }
 
     public void setAutoHideView(View... v) {
@@ -87,10 +87,10 @@ public class DragOptionView extends CardView {
                             @Override
                             public void onRename(String name) {
                                 item.setLabel(name);
-                                Home.Companion.getDb().saveItem(item);
+                                HomeActivity.Companion.getDb().saveItem(item);
 
-                                Home.Companion.getLauncher().getDesktop().addItemToCell(item, item.getX(), item.getY());
-                                Home.Companion.getLauncher().getDesktop().removeItem(Home.Companion.getLauncher().getDesktop().getCurrentPage().coordinateToChildView(new Point(item.getX(), item.getY())), false);
+                                HomeActivity.Companion.getLauncher().getDesktop().addItemToCell(item, item.getX(), item.getY());
+                                HomeActivity.Companion.getLauncher().getDesktop().removeItem(HomeActivity.Companion.getLauncher().getDesktop().getCurrentPage().coordinateToChildView(new Point(item.getX(), item.getY())), false);
                             }
                         });
                         return true;
@@ -123,10 +123,10 @@ public class DragOptionView extends CardView {
                         Item item = DragHandler.INSTANCE.getDraggedObject(dragEvent);
 
                         // remove all items from the database
-                        Home.Companion.getLauncher().Companion.getDb().deleteItem(item, true);
+                        HomeActivity.Companion.getLauncher().Companion.getDb().deleteItem(item, true);
 
-                        _home.getDesktop().consumeRevert();
-                        _home.getDock().consumeRevert();
+                        _homeActivity.getDesktop().consumeRevert();
+                        _homeActivity.getDock().consumeRevert();
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:
                         return true;
@@ -244,8 +244,8 @@ public class DragOptionView extends CardView {
                 _dragging = true;
                 animShowView();
                 boolean desktopHideGrid = Setup.appSettings().isDesktopHideGrid();
-                _home.getDock().setHideGrid(desktopHideGrid);
-                for (CellContainer cellContainer : _home.getDesktop().getPages()) {
+                _homeActivity.getDock().setHideGrid(desktopHideGrid);
+                for (CellContainer cellContainer : _homeActivity.getDesktop().getPages()) {
                     cellContainer.setHideGrid(desktopHideGrid);
                 }
                 switch (((DragAction) event.getLocalState()).action) {
@@ -282,8 +282,8 @@ public class DragOptionView extends CardView {
                 return true;
             case DragEvent.ACTION_DRAG_ENDED:
                 _dragging = false;
-                _home.getDock().setHideGrid(true);
-                for (CellContainer cellContainer : _home.getDesktop().getPages()) {
+                _homeActivity.getDock().setHideGrid(true);
+                for (CellContainer cellContainer : _homeActivity.getDesktop().getPages()) {
                     cellContainer.setHideGrid(true);
                 }
 
@@ -297,12 +297,12 @@ public class DragOptionView extends CardView {
                     Tool.visibleViews(Math.round(_animSpeed / 1.3f), _hideViews);
 
                 // the search view might be disabled
-                Home.Companion.getLauncher().updateSearchBar(true);
+                HomeActivity.Companion.getLauncher().updateSearchBar(true);
 
                 _isDraggedFromDrawer = false;
 
-                _home.getDock().revertLastItem();
-                _home.getDesktop().revertLastItem();
+                _homeActivity.getDock().revertLastItem();
+                _homeActivity.getDesktop().revertLastItem();
                 return true;
         }
         return false;

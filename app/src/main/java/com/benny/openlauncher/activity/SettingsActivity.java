@@ -216,7 +216,7 @@ public class SettingsActivity extends ThemeActivity {
         protected void onPreferenceChanged(SharedPreferences prefs, final String key) {
             super.onPreferenceChanged(prefs, key);
             int keyRes = _cu.getResId(ContextUtils.ResType.STRING, key);
-            Home launcher = Home.Companion.getLauncher();
+            HomeActivity launcher = HomeActivity.Companion.getLauncher();
             switch (keyRes) {
                 case R.string.pref_key__desktop_indicator_style: {
                     launcher.getDesktopIndicator().setMode(_as.getDesktopIndicatorMode());
@@ -259,7 +259,7 @@ public class SettingsActivity extends ThemeActivity {
         @SuppressWarnings({"ConstantConditions", "ConstantIfStatement", "StatementWithEmptyBody"})
         public Boolean onPreferenceClicked(Preference preference) {
             int keyRes = _cu.getResId(ContextUtils.ResType.STRING, preference.getKey());
-            Home launcher = Home.Companion.getLauncher();
+            HomeActivity launcher = HomeActivity.Companion.getLauncher();
 
             switch (keyRes) {
                 case R.string.pref_key__minibar: {
@@ -283,7 +283,7 @@ public class SettingsActivity extends ThemeActivity {
                             if (launcher != null) {
                                 launcher.recreate();
                             }
-                            DatabaseHelper db = (DatabaseHelper) Home._db;
+                            DatabaseHelper db = (DatabaseHelper) HomeActivity._db;
                             db.onUpgrade(db.getWritableDatabase(), 1, 1);
                             getActivity().finish();
                         }

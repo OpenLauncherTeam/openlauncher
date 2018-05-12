@@ -83,7 +83,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public final class Home extends Activity implements OnDesktopEditListener, DesktopOptionViewListener, DrawerListener {
+public final class HomeActivity extends Activity implements OnDesktopEditListener, DesktopOptionViewListener, DrawerListener {
     public static final Companion Companion = new Companion();
     public static final int REQUEST_CREATE_APPWIDGET = 0x6475;
     public static final int REQUEST_PERMISSION_STORAGE = 0x3648;
@@ -101,7 +101,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
     public static float _itemTouchX;
     public static float _itemTouchY;
     @Nullable
-    public static Home _launcher;
+    public static HomeActivity _launcher;
     private static final IntentFilter _shortcutIntentFilter = new IntentFilter();
     private static final IntentFilter _timeChangesIntentFilter = new IntentFilter();
     private HashMap deleteMefindViewCache;
@@ -117,11 +117,11 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         }
 
         @Nullable
-        public final Home getLauncher() {
+        public final HomeActivity getLauncher() {
             return _launcher;
         }
 
-        public final void setLauncher(@Nullable Home v) {
+        public final void setLauncher(@Nullable HomeActivity v) {
             _launcher = v;
         }
 
@@ -325,15 +325,15 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                 appSettings = Setup.appSettings();
 
                 if (appSettings.getDesktopStyle() == 0) {
-                    getDesktop().initDesktopNormal(Home.this);
+                    getDesktop().initDesktopNormal(HomeActivity.this);
                 } else {
                     appSettings = Setup.appSettings();
 
                     if (appSettings.getDesktopStyle() == 1) {
-                        getDesktop().initDesktopShowAll(Home.this, Home.this);
+                        getDesktop().initDesktopShowAll(HomeActivity.this, HomeActivity.this);
                     }
                 }
-                getDock().initDockItem(Home.this);
+                getDock().initDockItem(HomeActivity.this);
                 return true;
             }
         });
@@ -343,15 +343,15 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                 AppSettings appSettings = Setup.appSettings();
 
                 if (appSettings.getDesktopStyle() == 0) {
-                    ((Desktop) findViewById(R.id.desktop)).initDesktopNormal(Home.this);
+                    ((Desktop) findViewById(R.id.desktop)).initDesktopNormal(HomeActivity.this);
                 } else {
                     appSettings = Setup.appSettings();
 
                     if (appSettings.getDesktopStyle() == 1) {
-                        ((Desktop) findViewById(R.id.desktop)).initDesktopShowAll(Home.this, Home.this);
+                        ((Desktop) findViewById(R.id.desktop)).initDesktopShowAll(HomeActivity.this, HomeActivity.this);
                     }
                 }
-                ((Dock) findViewById(R.id.dock)).initDockItem(Home.this);
+                ((Dock) findViewById(R.id.dock)).initDockItem(HomeActivity.this);
                 setToHomePage();
                 return false;
             }
@@ -456,7 +456,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
                 if (action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.EditMinibar) {
                     _consumeNextResume = true;
                 }
-                LauncherAction.RunAction(action, Home.this);
+                LauncherAction.RunAction(action, HomeActivity.this);
                 if (action != LauncherAction.Action.DeviceSettings && action != LauncherAction.Action.LauncherSettings && action != LauncherAction.Action.EditMinibar) {
                     getDrawerLayout().closeDrawers();
                 }
@@ -495,7 +495,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             appSettings = Setup.appSettings();
 
             appSettings.setAppRestartRequired(false);
-            PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556, new Intent(this, Home.class), PendingIntent.FLAG_CANCEL_CURRENT);
+            PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556, new Intent(this, HomeActivity.class), PendingIntent.FLAG_CANCEL_CURRENT);
             AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + ((long) 100), restartIntentP);
             System.exit(0);
@@ -514,7 +514,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         try {
             system = Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION) == 1;
         } catch (SettingNotFoundException e) {
-            Log.d(Home.class.getSimpleName(), "Unable to read settings", e);
+            Log.d(HomeActivity.class.getSimpleName(), "Unable to read settings", e);
         }
         boolean rotate2 = false;
         if (getResources().getBoolean(R.bool.isTablet)) {
@@ -746,11 +746,11 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         updateDock$default(this, true, 0, 2, null);
     }
 
-    public static /* bridge */ /* synthetic */ void updateDock$default(Home home, boolean z, long j, int i, Object obj) {
+    public static /* bridge */ /* synthetic */ void updateDock$default(HomeActivity homeActivity, boolean z, long j, int i, Object obj) {
         if ((i & 2) != 0) {
             j = 0;
         }
-        home.updateDock(z, j);
+        homeActivity.updateDock(z, j);
     }
 
     public final void updateDock(boolean show, long delay) {
@@ -927,7 +927,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
             unregisterReceiver(_timeChangedReceiver);
         }
         unregisterReceiver(_shortcutReceiver);
-        Companion.setLauncher((Home) null);
+        Companion.setLauncher((HomeActivity) null);
         super.onDestroy();
     }
 
@@ -1010,9 +1010,9 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         desktop.setCurrentItem(appSettings.getDesktopPageCurrent());
     }
 
-    public static /* bridge */ /* synthetic */ void openAppDrawer$default(Home home, View view, int i, int i2, int i3, Object obj) {
+    public static /* bridge */ /* synthetic */ void openAppDrawer$default(HomeActivity homeActivity, View view, int i, int i2, int i3, Object obj) {
         if ((i3 & 1) != 0) {
-            view = (Desktop) home.findViewById(R.id.desktop);
+            view = (Desktop) homeActivity.findViewById(R.id.desktop);
         }
         if ((i3 & 2) != 0) {
             i = -1;
@@ -1020,7 +1020,7 @@ public final class Home extends Activity implements OnDesktopEditListener, Deskt
         if ((i3 & 4) != 0) {
             i2 = -1;
         }
-        home.openAppDrawer(view, i, i2);
+        homeActivity.openAppDrawer(view, i, i2);
     }
 
     public final void openAppDrawer(@Nullable View view, int x, int y) {

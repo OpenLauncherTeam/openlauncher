@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.PopupIconLabelItem;
 import com.benny.openlauncher.util.Definitions;
@@ -33,7 +33,7 @@ public class HpDragNDrop {
     private PopupIconLabelItem editItem = new PopupIconLabelItem(R.string.edit, R.drawable.ic_edit_black_24dp).withIdentifier(editItemIdentifier);
     private PopupIconLabelItem removeItem = new PopupIconLabelItem(R.string.remove, R.drawable.ic_close_dark_24dp).withIdentifier(removeItemIdentifier);
 
-    public void initDragNDrop(@NonNull final Home _home, @NonNull final View leftDragHandle, @NonNull final View rightDragHandle, @NonNull final DragNDropLayout dragNDropView) {
+    public void initDragNDrop(@NonNull final HomeActivity _homeActivity, @NonNull final View leftDragHandle, @NonNull final View rightDragHandle, @NonNull final DragNDropLayout dragNDropView) {
         //dragHandle's drag event
         final Handler dragHandler = new Handler();
 
@@ -41,11 +41,11 @@ public class HpDragNDrop {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    int i = _home.getDesktop().getCurrentItem();
+                    int i = _homeActivity.getDesktop().getCurrentItem();
                     if (i > 0) {
-                        _home.getDesktop().setCurrentItem(i - 1);
+                        _homeActivity.getDesktop().setCurrentItem(i - 1);
                     } else if (i == 0) {
-                        _home.getDesktop().addPageLeft(true);
+                        _homeActivity.getDesktop().addPageLeft(true);
                     }
                     dragHandler.postDelayed(this, 1000);
                 }
@@ -96,11 +96,11 @@ public class HpDragNDrop {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    int i = _home.getDesktop().getCurrentItem();
-                    if (i < _home.getDesktop().getPageCount() - 1) {
-                        _home.getDesktop().setCurrentItem(i + 1);
-                    } else if (i == _home.getDesktop().getPageCount() - 1) {
-                        _home.getDesktop().addPageRight(true);
+                    int i = _homeActivity.getDesktop().getCurrentItem();
+                    if (i < _homeActivity.getDesktop().getPageCount() - 1) {
+                        _homeActivity.getDesktop().setCurrentItem(i + 1);
+                    } else if (i == _homeActivity.getDesktop().getPageCount() - 1) {
+                        _homeActivity.getDesktop().addPageRight(true);
                     }
                     dragHandler.postDelayed(this, 1000);
                 }
@@ -148,17 +148,17 @@ public class HpDragNDrop {
 
 
         //desktop's drag event
-        dragNDropView.registerDropTarget(new DragNDropLayout.DropTargetListener(_home.getDesktop()) {
+        dragNDropView.registerDropTarget(new DragNDropLayout.DropTargetListener(_homeActivity.getDesktop()) {
             @Override
             public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
                 if (!DragAction.Action.SEARCH_RESULT.equals(action))
-                    showItemPopup(dragNDropView, _home);
+                    showItemPopup(dragNDropView, _homeActivity);
                 return true;
             }
 
             @Override
             public void onStartDrag(@NonNull Action action, @NonNull PointF location) {
-                _home.closeAppDrawer();
+                _homeActivity.closeAppDrawer();
             }
 
             @Override
@@ -166,7 +166,7 @@ public class HpDragNDrop {
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
                 if (DragAction.Action.APP_DRAWER.equals(action)) {
-                    if (_home.getAppDrawerController()._isOpen) {
+                    if (_homeActivity.getAppDrawerController()._isOpen) {
                         return;
                     }
                     item.reset();
@@ -174,37 +174,37 @@ public class HpDragNDrop {
 
                 int x = (int) location.x;
                 int y = (int) location.y;
-                if (_home.getDesktop().addItemToPoint(item, x, y)) {
-                    _home.getDesktop().consumeRevert();
-                    _home.getDock().consumeRevert();
+                if (_homeActivity.getDesktop().addItemToPoint(item, x, y)) {
+                    _homeActivity.getDesktop().consumeRevert();
+                    _homeActivity.getDock().consumeRevert();
                     // add the item to the database
-                    Home._db.saveItem(item, _home.getDesktop().getCurrentItem(), Definitions.ItemPosition.Desktop);
+                    HomeActivity._db.saveItem(item, _homeActivity.getDesktop().getCurrentItem(), Definitions.ItemPosition.Desktop);
                 } else {
                     Point pos = new Point();
-                    _home.getDesktop().getCurrentPage().touchPosToCoordinate(pos, x, y, item._spanX, item._spanY, false);
-                    View itemView = _home.getDesktop().getCurrentPage().coordinateToChildView(pos);
-                    if (itemView != null && Desktop.handleOnDropOver(_home, item, (Item) itemView.getTag(), itemView, _home.getDesktop().getCurrentPage(), _home.getDesktop().getCurrentItem(), Definitions.ItemPosition.Desktop, _home.getDesktop())) {
-                        _home.getDesktop().consumeRevert();
-                        _home.getDock().consumeRevert();
+                    _homeActivity.getDesktop().getCurrentPage().touchPosToCoordinate(pos, x, y, item._spanX, item._spanY, false);
+                    View itemView = _homeActivity.getDesktop().getCurrentPage().coordinateToChildView(pos);
+                    if (itemView != null && Desktop.handleOnDropOver(_homeActivity, item, (Item) itemView.getTag(), itemView, _homeActivity.getDesktop().getCurrentPage(), _homeActivity.getDesktop().getCurrentItem(), Definitions.ItemPosition.Desktop, _homeActivity.getDesktop())) {
+                        _homeActivity.getDesktop().consumeRevert();
+                        _homeActivity.getDock().consumeRevert();
                     } else {
-                        Tool.toast(_home, R.string.toast_not_enough_space);
-                        _home.getDesktop().revertLastItem();
-                        _home.getDock().revertLastItem();
+                        Tool.toast(_homeActivity, R.string.toast_not_enough_space);
+                        _homeActivity.getDesktop().revertLastItem();
+                        _homeActivity.getDock().revertLastItem();
                     }
                 }
             }
 
             @Override
             public void onMove(@NonNull Action action, @NonNull PointF location) {
-                Home.Companion.getLauncher().getDesktopIndicator().hideDelay();
-                for (CellContainer page : _home.getDesktop().getPages()) {
+                HomeActivity.Companion.getLauncher().getDesktopIndicator().hideDelay();
+                for (CellContainer page : _homeActivity.getDesktop().getPages()) {
                     page.clearCachedOutlineBitmap();
                 }
             }
 
             @Override
             public void onExit(@NonNull Action action, @NonNull PointF location) {
-                for (CellContainer page : _home.getDesktop().getPages()) {
+                for (CellContainer page : _homeActivity.getDesktop().getPages()) {
                     page.clearCachedOutlineBitmap();
                 }
                 dragNDropView.cancelFolderPreview();
@@ -212,15 +212,15 @@ public class HpDragNDrop {
 
             @Override
             public void onEnd() {
-                _home.getDesktopIndicator().hideDelay();
-                for (CellContainer page : _home.getDesktop().getPages()) {
+                _homeActivity.getDesktopIndicator().hideDelay();
+                for (CellContainer page : _homeActivity.getDesktop().getPages()) {
                     page.clearCachedOutlineBitmap();
                 }
             }
         });
 
         //dock's drag event
-        dragNDropView.registerDropTarget(new DragNDropLayout.DropTargetListener(_home.getDock()) {
+        dragNDropView.registerDropTarget(new DragNDropLayout.DropTargetListener(_homeActivity.getDock()) {
             @Override
             public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
                 boolean ok = !DragAction.Action.WIDGET.equals(action);
@@ -238,7 +238,7 @@ public class HpDragNDrop {
             @Override
             public void onDrop(@NonNull Action action, @NonNull PointF location, @NonNull Item item) {
                 if (DragAction.Action.APP_DRAWER.equals(action)) {
-                    if (_home.getAppDrawerController()._isOpen) {
+                    if (_homeActivity.getAppDrawerController()._isOpen) {
                         return;
                     }
                     item.reset();
@@ -246,29 +246,29 @@ public class HpDragNDrop {
 
                 int x = (int) location.x;
                 int y = (int) location.y;
-                if (_home.getDock().addItemToPoint(item, x, y)) {
-                    _home.getDesktop().consumeRevert();
-                    _home.getDock().consumeRevert();
+                if (_homeActivity.getDock().addItemToPoint(item, x, y)) {
+                    _homeActivity.getDesktop().consumeRevert();
+                    _homeActivity.getDock().consumeRevert();
 
                     // add the item to the database
-                    Home._db.saveItem(item, 0, Definitions.ItemPosition.Dock);
+                    HomeActivity._db.saveItem(item, 0, Definitions.ItemPosition.Dock);
                 } else {
                     Point pos = new Point();
-                    _home.getDock().touchPosToCoordinate(pos, x, y, item._spanX, item._spanY, false);
-                    View itemView = _home.getDock().coordinateToChildView(pos);
+                    _homeActivity.getDock().touchPosToCoordinate(pos, x, y, item._spanX, item._spanY, false);
+                    View itemView = _homeActivity.getDock().coordinateToChildView(pos);
                     if (itemView != null) {
-                        if (Desktop.handleOnDropOver(_home, item, (Item) itemView.getTag(), itemView, _home.getDock(), 0, Definitions.ItemPosition.Dock, _home.getDock())) {
-                            _home.getDesktop().consumeRevert();
-                            _home.getDock().consumeRevert();
+                        if (Desktop.handleOnDropOver(_homeActivity, item, (Item) itemView.getTag(), itemView, _homeActivity.getDock(), 0, Definitions.ItemPosition.Dock, _homeActivity.getDock())) {
+                            _homeActivity.getDesktop().consumeRevert();
+                            _homeActivity.getDock().consumeRevert();
                         } else {
-                            Tool.toast(_home, R.string.toast_not_enough_space);
-                            _home.getDesktop().revertLastItem();
-                            _home.getDock().revertLastItem();
+                            Tool.toast(_homeActivity, R.string.toast_not_enough_space);
+                            _homeActivity.getDesktop().revertLastItem();
+                            _homeActivity.getDock().revertLastItem();
                         }
                     } else {
-                        Tool.toast(_home, R.string.toast_not_enough_space);
-                        _home.getDesktop().revertLastItem();
-                        _home.getDock().revertLastItem();
+                        Tool.toast(_homeActivity, R.string.toast_not_enough_space);
+                        _homeActivity.getDesktop().revertLastItem();
+                        _homeActivity.getDock().revertLastItem();
                     }
                 }
             }
@@ -276,7 +276,7 @@ public class HpDragNDrop {
             @Override
             public void onMove(@NonNull Action action, @NonNull PointF location) {
                 if (action != DragAction.Action.SEARCH_RESULT) {
-                    _home.getDock().updateIconProjection((int) location.x, (int) location.y);
+                    _homeActivity.getDock().updateIconProjection((int) location.x, (int) location.y);
                 }
             }
 
@@ -287,22 +287,22 @@ public class HpDragNDrop {
 
             @Override
             public void onExit(@NonNull Action action, @NonNull PointF location) {
-                _home.getDock().clearCachedOutlineBitmap();
+                _homeActivity.getDock().clearCachedOutlineBitmap();
                 dragNDropView.cancelFolderPreview();
             }
 
             @Override
             public void onEnd() {
                 if (DragAction.Action.WIDGET.equals(dragNDropView.getDragAction())) {
-                    _home.getDesktop().revertLastItem();
+                    _homeActivity.getDesktop().revertLastItem();
                 }
-                _home.getDock().clearCachedOutlineBitmap();
+                _homeActivity.getDock().clearCachedOutlineBitmap();
             }
         });
     }
 
 
-    void showItemPopup(@NonNull final DragNDropLayout dragNDropView, final Home home) {
+    void showItemPopup(@NonNull final DragNDropLayout dragNDropView, final HomeActivity homeActivity) {
         ArrayList<PopupIconLabelItem> itemList = new ArrayList<>();
         switch (dragNDropView.getDragItem().getType()) {
             case APP:
@@ -329,18 +329,18 @@ public class HpDragNDrop {
             }
         }
 
-        float x = dragNDropView.getDragLocation().x - Home._itemTouchX + Tool.toPx(10);
-        float y = dragNDropView.getDragLocation().y - Home._itemTouchY - Tool.toPx((46 * itemList.size()));
+        float x = dragNDropView.getDragLocation().x - HomeActivity._itemTouchX + Tool.toPx(10);
+        float y = dragNDropView.getDragLocation().y - HomeActivity._itemTouchY - Tool.toPx((46 * itemList.size()));
 
         if ((x + Tool.toPx(200)) > dragNDropView.getWidth()) {
             dragNDropView.setPopupMenuShowDirection(false);
-            x = dragNDropView.getDragLocation().x - Home._itemTouchX + home.getDesktop().getCurrentPage().getCellWidth() - Tool.toPx(200) - Tool.toPx(10);
+            x = dragNDropView.getDragLocation().x - HomeActivity._itemTouchX + homeActivity.getDesktop().getCurrentPage().getCellWidth() - Tool.toPx(200) - Tool.toPx(10);
         } else {
             dragNDropView.setPopupMenuShowDirection(true);
         }
 
         if (y < 0)
-            y = dragNDropView.getDragLocation().y - Home._itemTouchY + home.getDesktop().getCurrentPage().getCellHeight() + Tool.toPx(4);
+            y = dragNDropView.getDragLocation().y - HomeActivity._itemTouchY + homeActivity.getDesktop().getCurrentPage().getCellHeight() + Tool.toPx(4);
         else
             y -= Tool.toPx(4);
 
@@ -351,19 +351,19 @@ public class HpDragNDrop {
                 if ((dragItem = dragNDropView.getDragItem()) != null) {
                     switch ((int) item.getIdentifier()) {
                         case uninstallItemIdentifier: {
-                            home.onUninstallItem(dragItem);
+                            homeActivity.onUninstallItem(dragItem);
                             break;
                         }
                         case editItemIdentifier: {
-                            new HpAppEditApplier(home).onEditItem(dragItem);
+                            new HpAppEditApplier(homeActivity).onEditItem(dragItem);
                             break;
                         }
                         case removeItemIdentifier: {
-                            home.onRemoveItem(dragItem);
+                            homeActivity.onRemoveItem(dragItem);
                             break;
                         }
                         case infoItemIdentifier: {
-                            home.onInfoItem(dragItem);
+                            homeActivity.onInfoItem(dragItem);
                             break;
                         }
                     }

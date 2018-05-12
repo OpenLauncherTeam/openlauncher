@@ -17,7 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.util.Tool;
 
 import java.util.ArrayList;
@@ -417,8 +417,8 @@ public class CellContainer extends ViewGroup {
         }
 
         //Animating alpha and drawing projected image
-        Home home = Home.Companion.getLauncher();
-        if (home != null && home.getDragNDropView().getDragExceedThreshold() && _currentOutlineCoordinate.x != -1 && _currentOutlineCoordinate.y != -1) {
+        HomeActivity homeActivity = HomeActivity.Companion.getLauncher();
+        if (homeActivity != null && homeActivity.getDragNDropView().getDragExceedThreshold() && _currentOutlineCoordinate.x != -1 && _currentOutlineCoordinate.y != -1) {
             if (_outlinePaint.getAlpha() != 160)
                 _outlinePaint.setAlpha(Math.min(_outlinePaint.getAlpha() + 20, 160));
             drawCachedOutlineBitmap(canvas, _cells[_currentOutlineCoordinate.x][_currentOutlineCoordinate.y]);
