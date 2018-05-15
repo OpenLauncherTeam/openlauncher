@@ -86,7 +86,7 @@ public class IconPackHelper {
 
         for (int I = 0; I < apps.size(); I++) {
             if (iconPackResources != null) {
-                String iconResource = getResource(iconPackResources, iconPackName, null, "ComponentInfo{" + apps.get(I).getPackageName() + "/" + apps.get(I).getClassName() + "}");
+                String iconResource = getResource(iconPackResources, iconPackName, null, apps.get(I).getComponentName());
                 if (iconResource != null) {
                     intResourceIcon = iconPackResources.getIdentifier(iconResource, "drawable", iconPackName);
                 } else {

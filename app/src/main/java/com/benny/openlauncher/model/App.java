@@ -51,6 +51,6 @@ public class App {
     }
 
     public String getComponentName() {
-        return "ComponentName{" + _packageName + "/" + _className + "}";
+        return "ComponentInfo{" + _packageName + "/" + _className + "}";
     }
 }
