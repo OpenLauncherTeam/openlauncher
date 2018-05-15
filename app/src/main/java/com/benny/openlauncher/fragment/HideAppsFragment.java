@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.model.AppInfo;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
@@ -32,7 +31,7 @@ public class HideAppsFragment extends Fragment {
     private static final boolean DEBUG = true;
 
     private ArrayList<String> _listActivitiesHidden = new ArrayList();
-    private ArrayList<AppInfo> _listActivitiesAll = new ArrayList();
+    private ArrayList<App> _listActivitiesAll = new ArrayList();
     private AsyncWorkerList _taskList = new AsyncWorkerList();
     private AppAdapter _appInfoAdapter;
     private ViewSwitcher _switcherLoad;
@@ -124,15 +123,7 @@ public class HideAppsFragment extends Fragment {
 
     private void prepareData() {
         List<App> apps = AppManager.getInstance(getContext()).getNonFilteredApps();
-
-        for (App app : apps) {
-            AppInfo tempAppInfo = new AppInfo(
-                    app.getPackageName() + "/" + app.getClassName(),
-                    app.getLabel(),
-                    app.getIcon()
-            );
-            _listActivitiesAll.add(tempAppInfo);
-        }
+        _listActivitiesAll.addAll(apps);
     }
 
     private void populateView() {
@@ -147,20 +138,20 @@ public class HideAppsFragment extends Fragment {
         _grid.setAdapter(_appInfoAdapter);
         _grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> AdapterView, View view, int position, long row) {
-                AppInfo appInfo = (AppInfo) AdapterView.getItemAtPosition(position);
+                App appInfo = (App) AdapterView.getItemAtPosition(position);
                 CheckBox checker = view.findViewById(R.id.CBappSelect);
                 ViewSwitcher icon = view.findViewById(R.id.viewSwitcherChecked);
 
                 checker.toggle();
                 if (checker.isChecked()) {
-                    _listActivitiesHidden.add(appInfo.getCode());
-                    if (DEBUG) Log.v(TAG, "Selected App: " + appInfo.getName());
+                    _listActivitiesHidden.add(appInfo.getComponentName());
+                    if (DEBUG) Log.v(TAG, "Selected App: " + appInfo.getLabel());
                     if (icon.getDisplayedChild() == 0) {
                         icon.showNext();
                     }
                 } else {
-                    _listActivitiesHidden.remove(appInfo.getCode());
-                    if (DEBUG) Log.v(TAG, "Deselected App: " + appInfo.getName());
+                    _listActivitiesHidden.remove(appInfo.getComponentName());
+                    if (DEBUG) Log.v(TAG, "Deselected App: " + appInfo.getLabel());
                     if (icon.getDisplayedChild() == 1) {
                         icon.showPrevious();
                     }
@@ -169,8 +160,8 @@ public class HideAppsFragment extends Fragment {
         });
     }
 
-    private class AppAdapter extends ArrayAdapter<AppInfo> {
-        private AppAdapter(Context context, ArrayList<AppInfo> adapterArrayList) {
+    private class AppAdapter extends ArrayAdapter<App> {
+        private AppAdapter(Context context, ArrayList<App> adapterArrayList) {
             super(context, R.layout.request_item_list, adapterArrayList);
         }
 
@@ -190,16 +181,16 @@ public class HideAppsFragment extends Fragment {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            AppInfo appInfo = getItem(position);
+            App appInfo = getItem(position);
 
-            holder._apkPackage.setText(appInfo.getCode());
-            holder._apkName.setText(appInfo.getName());
-            holder._apkIcon.setImageDrawable(appInfo.getImage());
+            holder._apkPackage.setText(appInfo.getComponentName());
+            holder._apkName.setText(appInfo.getLabel());
+            holder._apkIcon.setImageDrawable(appInfo.getIcon());
 
             holder._switcherChecked.setInAnimation(null);
             holder._switcherChecked.setOutAnimation(null);
-            holder._checker.setChecked(_listActivitiesHidden.contains(appInfo.getCode()));
-            if (_listActivitiesHidden.contains(appInfo.getCode())) {
+            holder._checker.setChecked(_listActivitiesHidden.contains(appInfo.getComponentName()));
+            if (_listActivitiesHidden.contains(appInfo.getComponentName())) {
                 if (holder._switcherChecked.getDisplayedChild() == 0) {
                     holder._switcherChecked.showNext();
                 }
