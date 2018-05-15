@@ -160,7 +160,7 @@ public class AppManager {
     public App createApp(Intent intent) {
         try {
             ResolveInfo info = _packageManager.resolveActivity(intent, 0);
-            App app = new App(getContext(), info, _packageManager);
+            App app = new App(_packageManager, info);
             if (_apps != null && !_apps.contains(app))
                 _apps.add(app);
             return app;
@@ -230,7 +230,7 @@ public class AppManager {
             });
 
             for (ResolveInfo info : activitiesInfo) {
-                App app = new App(_context, info, _packageManager);
+                App app = new App(_packageManager, info);
                 _nonFilteredApps.add(app);
             }
 
@@ -250,7 +250,7 @@ public class AppManager {
                 }
             } else {
                 for (ResolveInfo info : activitiesInfo)
-                    _apps.add(new App(_context, info, _packageManager));
+                    _apps.add(new App(_packageManager, info));
             }
 
             AppSettings appSettings = AppSettings.get();

@@ -14,7 +14,6 @@ import android.util.Log;
 
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.IconDrawer;
-import com.benny.openlauncher.interfaces.IconProvider;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
@@ -50,7 +49,7 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
                 Setup.logger().log(this, Log.DEBUG, null, "Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, temp == null ? "Item is NULL" : temp.getIntent());
                 icons[i] = new ColorDrawable(Color.TRANSPARENT);
             } else {
-                app.getIconProvider().loadIcon(IconProvider.IconTargetType.IconDrawer, (int) size, this, i);
+                _icons[i] = app.getIcon();
             }
         }
     }

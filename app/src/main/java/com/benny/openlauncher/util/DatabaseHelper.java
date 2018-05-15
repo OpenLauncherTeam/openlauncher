@@ -273,7 +273,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
                         case APP:
                         case SHORTCUT:
                             App app = Setup.get().getAppLoader().findItemApp(item);
-                            item.setIconProvider(app != null ? app.getIconProvider() : null);
+                            item.setIconProvider(app != null ? Setup.imageLoader().createIconProvider(app.getIcon()) : null);
                             break;
                         default:
                             // TODO...

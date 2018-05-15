@@ -23,7 +23,6 @@ import com.benny.openlauncher.model.AppInfo;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.Definitions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,7 +129,7 @@ public class HideAppsFragment extends Fragment {
             AppInfo tempAppInfo = new AppInfo(
                     app.getPackageName() + "/" + app.getClassName(),
                     app.getLabel(),
-                    app.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE)
+                    app.getIcon()
             );
             _listActivitiesAll.add(tempAppInfo);
         }

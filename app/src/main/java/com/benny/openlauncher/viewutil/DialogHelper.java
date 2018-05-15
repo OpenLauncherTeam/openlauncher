@@ -85,7 +85,7 @@ public class DialogHelper {
         int size = Tool.dp2px(18, context);
         int sizePad = Tool.dp2px(8, context);
         for (int i = 0; i < apps.size(); i++) {
-            items.add(new IconLabelItem(context, apps.get(i).getIconProvider(), apps.get(i).getLabel(), size)
+            items.add(new IconLabelItem(context, apps.get(i).getIcon(), apps.get(i).getLabel(), size)
                     .withIconGravity(Gravity.START)
                     .withDrawablePadding(context, sizePad));
         }

@@ -93,7 +93,7 @@ public class Item implements LabelProvider, Parcelable {
                 case APP:
                 case SHORTCUT:
                     App app = Setup.appLoader().findItemApp(this);
-                    _iconProvider = app != null ? app.getIconProvider() : null;
+                    _iconProvider = app != null ? Setup.imageLoader().createIconProvider(app.getIcon()) : null;
                     break;
                 default:
                     // TODO...
@@ -106,7 +106,7 @@ public class Item implements LabelProvider, Parcelable {
         Item item = new Item();
         item._type = Type.APP;
         item._name = app.getLabel();
-        item._iconProvider = app.getIconProvider();
+        item._iconProvider = Setup.imageLoader().createIconProvider(app.getIcon());
         item._intent = toIntent(app);
         return item;
     }

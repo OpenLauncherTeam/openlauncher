@@ -1,23 +1,20 @@
 package com.benny.openlauncher.model;
 
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
-import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.SimpleIconProvider;
 
-import android.support.annotation.NonNull;
+import android.graphics.drawable.Drawable;
 
 public class App {
-    public String _label, _packageName, _className;
-    public SimpleIconProvider _iconProvider;
-    public ResolveInfo _info;
+    public Drawable _icon;
+    public String _label;
+    public String _packageName;
+    public String _className;
 
-    public App(Context context, ResolveInfo info, PackageManager pm) {
-        _info = info;
-
-        _iconProvider = Setup.imageLoader().createIconProvider(info.loadIcon(pm));
+    public App(PackageManager pm, ResolveInfo info) {
+        _icon = info.loadIcon(pm);
         _label = info.loadLabel(pm).toString();
         _packageName = info.activityInfo.packageName;
         _className = info.activityInfo.name;
@@ -33,6 +30,14 @@ public class App {
         }
     }
 
+    public void setIcon(Drawable icon) {
+        _icon = icon;
+    }
+
+    public Drawable getIcon() {
+        return _icon;
+    }
+
     public String getLabel() {
         return _label;
     }
@@ -45,11 +50,7 @@ public class App {
         return _className;
     }
 
-    public SimpleIconProvider getIconProvider() {
-        return _iconProvider;
-    }
-
-    public void setIconProvider(@NonNull SimpleIconProvider iconProvider) {
-        _iconProvider = iconProvider;
+    public String getComponentName() {
+        return "ComponentName{" + _packageName + "/" + _className + "}";
     }
 }

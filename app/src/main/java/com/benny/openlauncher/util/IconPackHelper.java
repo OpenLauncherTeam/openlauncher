@@ -11,13 +11,8 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.BitmapDrawable;
 
-import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.InputStream;
 import java.util.List;
 
 public class IconPackHelper {
@@ -100,15 +95,15 @@ public class IconPackHelper {
 
                 if (intResourceIcon != 0) {
                     // has single drawable for app
-                    apps.get(I).setIconProvider(Setup.imageLoader().createIconProvider(new BitmapDrawable(BitmapFactory.decodeResource(iconPackResources, intResourceIcon, uniformOptions))));
+                    apps.get(I).setIcon(new BitmapDrawable(BitmapFactory.decodeResource(iconPackResources, intResourceIcon, uniformOptions)));
                 } else {
                     try {
-                        orig = Bitmap.createBitmap(apps.get(I).getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE).getIntrinsicWidth(), apps.get(I).getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE).getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                        orig = Bitmap.createBitmap(apps.get(I).getIcon().getIntrinsicWidth(), apps.get(I).getIcon().getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
                     } catch (Exception e) {
                         continue;
                     }
-                    apps.get(I).getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE).setBounds(0, 0, apps.get(I).getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE).getIntrinsicWidth(), apps.get(I).getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE).getIntrinsicHeight());
-                    apps.get(I).getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE).draw(new Canvas(orig));
+                    apps.get(I).getIcon().setBounds(0, 0, apps.get(I).getIcon().getIntrinsicWidth(), apps.get(I).getIcon().getIntrinsicHeight());
+                    apps.get(I).getIcon().draw(new Canvas(orig));
 
                     scaledOrig = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
                     scaledBitmap = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
@@ -129,7 +124,7 @@ public class IconPackHelper {
                     if (upon != null)
                         canvas.drawBitmap(upon, getResizedMatrix(upon, iconSize, iconSize), p);
 
-                    apps.get(I).setIconProvider(Setup.imageLoader().createIconProvider(new BitmapDrawable(appManager.getContext().getResources(), scaledBitmap)));
+                    apps.get(I).setIcon(new BitmapDrawable(appManager.getContext().getResources(), scaledBitmap));
                 }
             }
         }

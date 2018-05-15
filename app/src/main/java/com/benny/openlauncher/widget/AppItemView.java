@@ -306,7 +306,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder setAppItem(final App app) {
             _view.setLabel(app.getLabel());
-            _view.setIconProvider(app.getIconProvider());
+            _view.setIconProvider(Setup.imageLoader().createIconProvider(app.getIcon()));
             _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -323,7 +323,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder setAppItem(final Item item, final App app) {
             _view.setLabel(item.getLabel());
-            _view.setIconProvider(app.getIconProvider());
+            _view.setIconProvider(Setup.imageLoader().createIconProvider(app.getIcon()));
             _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
