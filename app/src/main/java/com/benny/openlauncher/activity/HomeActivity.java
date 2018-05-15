@@ -305,33 +305,21 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         Setup.appLoader().addUpdateListener(new AppManager.AppUpdatedListener() {
             @Override
             public boolean onAppUpdated(List<App> it) {
-                if ((getDesktop() == null)) {
+                if (getDesktop() == null) {
                     return false;
                 }
+
                 AppSettings appSettings = Setup.appSettings();
-
-                if (appSettings.getDesktopStyle() != 1) {
-                    appSettings = Setup.appSettings();
-
+                if (appSettings.getDesktopStyle() == 0) {
+                    getDesktop().initDesktopNormal(HomeActivity.this);
                     if (appSettings.isAppFirstLaunch()) {
-                        appSettings = Setup.appSettings();
-
                         appSettings.setAppFirstLaunch(false);
                         Item appDrawerBtnItem = Item.newActionItem(8);
                         appDrawerBtnItem._x = 2;
                         Companion.getDb().saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
                     }
-                }
-                appSettings = Setup.appSettings();
-
-                if (appSettings.getDesktopStyle() == 0) {
-                    getDesktop().initDesktopNormal(HomeActivity.this);
                 } else {
-                    appSettings = Setup.appSettings();
-
-                    if (appSettings.getDesktopStyle() == 1) {
-                        getDesktop().initDesktopShowAll(HomeActivity.this, HomeActivity.this);
-                    }
+                    getDesktop().initDesktopShowAll(HomeActivity.this, HomeActivity.this);
                 }
                 getDock().initDockItem(HomeActivity.this);
                 return true;
@@ -341,17 +329,12 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             @Override
             public boolean onAppDeleted(List<App> apps) {
                 AppSettings appSettings = Setup.appSettings();
-
                 if (appSettings.getDesktopStyle() == 0) {
-                    ((Desktop) findViewById(R.id.desktop)).initDesktopNormal(HomeActivity.this);
+                    getDesktop().initDesktopNormal(HomeActivity.this);
                 } else {
-                    appSettings = Setup.appSettings();
-
-                    if (appSettings.getDesktopStyle() == 1) {
-                        ((Desktop) findViewById(R.id.desktop)).initDesktopShowAll(HomeActivity.this, HomeActivity.this);
-                    }
+                    getDesktop().initDesktopShowAll(HomeActivity.this, HomeActivity.this);
                 }
-                ((Dock) findViewById(R.id.dock)).initDockItem(HomeActivity.this);
+                getDock().initDockItem(HomeActivity.this);
                 setToHomePage();
                 return false;
             }
