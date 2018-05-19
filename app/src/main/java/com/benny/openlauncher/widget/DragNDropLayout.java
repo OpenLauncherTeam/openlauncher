@@ -18,7 +18,7 @@ import android.widget.FrameLayout;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.model.PopupIconLabelItem;
+import com.benny.openlauncher.viewutil.PopupIconLabelItem;
 import com.benny.openlauncher.util.DragAction.Action;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;

@@ -1,4 +1,4 @@
-package com.benny.openlauncher.model;
+package com.benny.openlauncher.viewutil;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;

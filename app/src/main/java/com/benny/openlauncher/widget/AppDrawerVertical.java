@@ -15,7 +15,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.interfaces.FastItem;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.model.DrawerAppItem;
+import com.benny.openlauncher.viewutil.DrawerAppItem;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.IItemAdapter;

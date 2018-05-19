@@ -20,7 +20,7 @@ import android.widget.FrameLayout;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.FastItem;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.model.IconLabelItem;
+import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;

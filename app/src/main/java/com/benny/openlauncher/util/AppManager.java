@@ -17,7 +17,7 @@ import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.AppDeleteListener;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.model.App;
-import com.benny.openlauncher.model.IconLabelItem;
+import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.benny.openlauncher.model.Item;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 

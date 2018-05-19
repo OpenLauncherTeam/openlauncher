@@ -1,4 +1,4 @@
-package com.benny.openlauncher.model;
+package com.benny.openlauncher.viewutil;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -15,6 +15,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.FastItem;
 import com.benny.openlauncher.interfaces.IconProvider;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.SimpleIconProvider;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.items.AbstractItem;

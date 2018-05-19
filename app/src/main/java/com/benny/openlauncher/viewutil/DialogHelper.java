@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.model.IconLabelItem;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppManager;

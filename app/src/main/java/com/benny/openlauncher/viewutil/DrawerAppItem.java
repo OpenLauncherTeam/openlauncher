@@ -1,4 +1,4 @@
-package com.benny.openlauncher.model;
+package com.benny.openlauncher.viewutil;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.view.View;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.FastItem;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.widget.AppDrawerVertical;
 import com.benny.openlauncher.widget.AppItemView;

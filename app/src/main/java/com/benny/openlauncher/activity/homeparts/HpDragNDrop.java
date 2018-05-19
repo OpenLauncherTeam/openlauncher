@@ -9,7 +9,7 @@ import android.view.View;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.model.PopupIconLabelItem;
+import com.benny.openlauncher.viewutil.PopupIconLabelItem;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragAction.Action;
