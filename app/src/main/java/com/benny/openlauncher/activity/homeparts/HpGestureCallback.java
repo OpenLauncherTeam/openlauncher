@@ -6,10 +6,10 @@ import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.widget.Desktop;
 
-public class HpDesktopGestureCallback implements DesktopGestureListener.DesktopGestureCallback {
+public class HpGestureCallback implements DesktopGestureListener.DesktopGestureCallback {
     private AppSettings _appSettings;
 
-    HpDesktopGestureCallback(AppSettings appSettings) {
+    HpGestureCallback(AppSettings appSettings) {
         _appSettings = appSettings;
     }
 

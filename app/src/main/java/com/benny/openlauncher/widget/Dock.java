@@ -16,12 +16,12 @@ import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction.Action;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.viewutil.DesktopCallBack;
+import com.benny.openlauncher.viewutil.DesktopCallback;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
 
 import java.util.List;
 
-public final class Dock extends CellContainer implements DesktopCallBack<View> {
+public final class Dock extends CellContainer implements DesktopCallback<View> {
     public int _bottomInset;
     private final Point _coordinate = new Point();
     private HomeActivity _homeActivity;
@@ -90,7 +90,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
 
     public final void updateIconProjection(int x, int y) {
         HomeActivity launcher;
-        DragNDropLayout dragNDropView;
+        DragOptionLayout dragNDropView;
         DragState state = peekItemAndSwap(x, y, _coordinate);
         if (!_coordinate.equals(_previousDragPoint)) {
             launcher = _homeActivity;
@@ -112,7 +112,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
             case CurrentOccupied:
                 Object action;
                 HomeActivity launcher2;
-                DragNDropLayout dragNDropView2;
+                DragOptionLayout dragNDropView2;
                 clearCachedOutlineBitmap();
                 launcher = _homeActivity;
                 if (launcher != null) {
@@ -197,7 +197,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
 
     public boolean addItemToPage(@NonNull Item item, int page) {
 
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDockIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallback) this, Setup.appSettings().getDockIconSize());
         if (itemView == null) {
             HomeActivity.Companion.getDb().deleteItem(item, true);
             return false;
@@ -216,7 +216,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
         item._locationInLauncher = 1;
         item._x = positionToLayoutPrams.getX();
         item._y = positionToLayoutPrams.getY();
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDockIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallback) this, Setup.appSettings().getDockIconSize());
         if (itemView != null) {
             itemView.setLayoutParams(positionToLayoutPrams);
             addView(itemView);
@@ -229,7 +229,7 @@ public final class Dock extends CellContainer implements DesktopCallBack<View> {
         item._locationInLauncher = 1;
         item._x = x;
         item._y = y;
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDockIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallback) this, Setup.appSettings().getDockIconSize());
         if (itemView == null) {
             return false;
         }

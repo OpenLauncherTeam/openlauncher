@@ -29,12 +29,12 @@ public class ItemViewFactory {
     public static final int NO_FLAGS = 0x01;
     public static final int NO_LABEL = 0x02;
 
-    public static View getItemView(Context context, Item item, boolean showLabels, DesktopCallBack callBack, int iconSize) {
+    public static View getItemView(Context context, Item item, boolean showLabels, DesktopCallback callBack, int iconSize) {
         int flag = showLabels ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
         return getItemView(context, callBack, item, iconSize, flag);
     }
 
-    private static View getItemView(final Context context, final DesktopCallBack callBack, final Item item, int iconSize, int flags) {
+    private static View getItemView(final Context context, final DesktopCallback callback, final Item item, int iconSize, int flags) {
         View view = null;
         switch (item.getType()) {
             case APP:
@@ -54,7 +54,7 @@ public class ItemViewFactory {
 
                             @Override
                             public void afterDrag(View view) {
-                                callBack.setLastItem(item, view);
+                                callback.setLastItem(item, view);
                             }
                         })
                         .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
@@ -74,7 +74,7 @@ public class ItemViewFactory {
 
                             @Override
                             public void afterDrag(View view) {
-                                callBack.setLastItem(item, view);
+                                callback.setLastItem(item, view);
                             }
                         })
                         .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
@@ -83,7 +83,7 @@ public class ItemViewFactory {
                 break;
             case GROUP:
                 view = new AppItemView.Builder(context, iconSize)
-                        .setGroupItem(context, callBack, item, iconSize)
+                        .setGroupItem(context, callback, item, iconSize)
                         .withOnTouchGetPosition(item, Setup.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.GROUP, new AppItemView.LongPressCallBack() {
@@ -94,7 +94,7 @@ public class ItemViewFactory {
 
                             @Override
                             public void afterDrag(View view) {
-                                callBack.setLastItem(item, view);
+                                callback.setLastItem(item, view);
                             }
                         })
                         .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
@@ -115,7 +115,7 @@ public class ItemViewFactory {
 
                             @Override
                             public void afterDrag(View view) {
-                                callBack.setLastItem(item, view);
+                                callback.setLastItem(item, view);
                             }
                         })
                         .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
@@ -173,7 +173,7 @@ public class ItemViewFactory {
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                         DragHandler.startDrag(view, item, DragAction.Action.WIDGET, null);
 
-                        callBack.setLastItem(item, widgetContainer);
+                        callback.setLastItem(item, widgetContainer);
                         return true;
                     }
                 });

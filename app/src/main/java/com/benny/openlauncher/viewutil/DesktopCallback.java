@@ -5,7 +5,7 @@ import android.view.View;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.RevertibleAction;
 
-public interface DesktopCallBack<V extends View> extends RevertibleAction {
+public interface DesktopCallback<V extends View> extends RevertibleAction {
     boolean addItemToPoint(Item item, int x, int y);
 
     boolean addItemToPage(Item item, int page);

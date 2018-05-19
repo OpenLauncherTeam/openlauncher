@@ -31,7 +31,7 @@ import java.util.Map.Entry;
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 
-public final class DragNDropLayout extends FrameLayout {
+public final class DragOptionLayout extends FrameLayout {
     private final float DRAG_THRESHOLD;
     @Nullable
     private Action _dragAction;
@@ -133,15 +133,15 @@ public final class DragNDropLayout extends FrameLayout {
     public final class OverlayView extends View {
 
         public OverlayView() {
-            super(DragNDropLayout.this.getContext());
+            super(DragOptionLayout.this.getContext());
             setWillNotDraw(false);
         }
 
         public boolean onTouchEvent(@Nullable MotionEvent event) {
-            if (event == null || event.getActionMasked() != 0 || DragNDropLayout.this.getDragging() || !DragNDropLayout.this._overlayPopupShowing) {
+            if (event == null || event.getActionMasked() != 0 || DragOptionLayout.this.getDragging() || !DragOptionLayout.this._overlayPopupShowing) {
                 return super.onTouchEvent(event);
             }
-            DragNDropLayout.this.hidePopupMenu();
+            DragOptionLayout.this.hidePopupMenu();
             return true;
         }
 
@@ -166,7 +166,7 @@ public final class DragNDropLayout extends FrameLayout {
         }
     }
 
-    public DragNDropLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public DragOptionLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.DRAG_THRESHOLD = 20.0f;
         _paint = new Paint(1);

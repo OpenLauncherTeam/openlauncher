@@ -39,7 +39,7 @@ import com.benny.openlauncher.BuildConfig;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.homeparts.HpAppDrawer;
 import com.benny.openlauncher.activity.homeparts.HpDesktopPickAction;
-import com.benny.openlauncher.activity.homeparts.HpDragNDrop;
+import com.benny.openlauncher.activity.homeparts.HpDragOption;
 import com.benny.openlauncher.activity.homeparts.HpInitSetup;
 import com.benny.openlauncher.activity.homeparts.HpSearchBar;
 import com.benny.openlauncher.interfaces.AppDeleteListener;
@@ -69,7 +69,7 @@ import com.benny.openlauncher.widget.Desktop.OnDesktopEditListener;
 import com.benny.openlauncher.widget.DesktopOptionView;
 import com.benny.openlauncher.widget.DesktopOptionView.DesktopOptionViewListener;
 import com.benny.openlauncher.widget.Dock;
-import com.benny.openlauncher.widget.DragNDropLayout;
+import com.benny.openlauncher.widget.DragOptionLayout;
 import com.benny.openlauncher.widget.DragOptionView;
 import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
@@ -87,28 +87,25 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public static final int REQUEST_CREATE_APPWIDGET = 0x6475;
     public static final int REQUEST_PERMISSION_STORAGE = 0x3648;
     public static final int REQUEST_PICK_APPWIDGET = 0x2678;
-    @Nullable
     private static Resources _resources;
-    private static final IntentFilter _appUpdateIntentFilter = new IntentFilter();
-    @Nullable
     private static WidgetHost _appWidgetHost;
-    @NonNull
     public static AppWidgetManager _appWidgetManager;
     private static boolean _consumeNextResume;
-    @NonNull
     public static DataManager _db;
     public static float _itemTouchX;
     public static float _itemTouchY;
     @Nullable
     public static HomeActivity _launcher;
+    private static final IntentFilter _appUpdateIntentFilter = new IntentFilter();
     private static final IntentFilter _shortcutIntentFilter = new IntentFilter();
     private static final IntentFilter _timeChangesIntentFilter = new IntentFilter();
-    private final AppUpdateReceiver _appUpdateReceiver = new AppUpdateReceiver();
+    private AppUpdateReceiver _appUpdateReceiver = new AppUpdateReceiver();
+    private ShortcutReceiver _shortcutReceiver = new ShortcutReceiver();
+    private BroadcastReceiver _timeChangedReceiver;
+
     private int cx;
     private int cy;
     private int rad;
-    private final ShortcutReceiver _shortcutReceiver = new ShortcutReceiver();
-    private BroadcastReceiver _timeChangedReceiver;
 
     public static final class Companion {
         private Companion() {
@@ -548,10 +545,10 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     @NonNull
-    public final DragNDropLayout getDragNDropView() {
-        DragNDropLayout dragNDropLayout = (DragNDropLayout) findViewById(R.id.dragNDropView);
+    public final DragOptionLayout getDragNDropView() {
+        DragOptionLayout dragOptionLayout = (DragOptionLayout) findViewById(R.id.dragNDropView);
 
-        return dragNDropLayout;
+        return dragOptionLayout;
     }
 
     private final void init() {
@@ -563,14 +560,14 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         WidgetHost appWidgetHost = Companion.getAppWidgetHost();
         appWidgetHost.startListening();
         initViews();
-        HpDragNDrop hpDragNDrop = new HpDragNDrop();
+        HpDragOption hpDragOption = new HpDragOption();
         View findViewById = findViewById(R.id.leftDragHandle);
 
         View findViewById2 = findViewById(R.id.rightDragHandle);
 
-        DragNDropLayout dragNDropLayout = findViewById(R.id.dragNDropView);
+        DragOptionLayout dragOptionLayout = findViewById(R.id.dragNDropView);
 
-        hpDragNDrop.initDragNDrop(this, findViewById, findViewById2, dragNDropLayout);
+        hpDragOption.initDragNDrop(this, findViewById, findViewById2, dragOptionLayout);
         registerBroadcastReceiver();
         initAppManager();
         initSettings();
@@ -944,7 +941,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     protected void onHandleLauncherPause() {
         ((GroupPopupView) findViewById(R.id.groupPopup)).dismissPopup();
         ((CalendarDropDownView) findViewById(R.id.calendarDropDownView)).animateHide();
-        ((DragNDropLayout) findViewById(R.id.dragNDropView)).hidePopupMenu();
+        ((DragOptionLayout) findViewById(R.id.dragNDropView)).hidePopupMenu();
         if (!((SearchBar) findViewById(R.id.searchBar)).collapse()) {
             if (((Desktop) findViewById(R.id.desktop)) != null) {
                 Desktop desktop = (Desktop) findViewById(R.id.desktop);

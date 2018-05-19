@@ -25,7 +25,7 @@ import com.benny.openlauncher.util.Definitions.ItemState;
 import com.benny.openlauncher.util.DragAction.Action;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.viewutil.DesktopCallBack;
+import com.benny.openlauncher.viewutil.DesktopCallback;
 import com.benny.openlauncher.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
@@ -37,7 +37,7 @@ import java.util.List;
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 import in.championswimmer.sfg.lib.SimpleFingerGestures.OnFingerGestureListener;
 
-public final class Desktop extends SmoothViewPager implements DesktopCallBack<View> {
+public final class Desktop extends SmoothViewPager implements DesktopCallback<View> {
     public static final Companion _companion = new Companion();
     public static int _bottomInset;
     public static int _topInset;
@@ -89,9 +89,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
     }
 
 
-    public static boolean handleOnDropOver(HomeActivity homeActivity, Item dropItem, Item item, View itemView, CellContainer parent, int page, ItemPosition itemPosition, DesktopCallBack<?> callback) {
-
-
+    public static boolean handleOnDropOver(HomeActivity homeActivity, Item dropItem, Item item, View itemView, CellContainer parent, int page, ItemPosition itemPosition, DesktopCallback callback) {
         if (item != null) {
             if (dropItem != null) {
                 Type type = item._type;
@@ -506,7 +504,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
 
     public final void updateIconProjection(int x, int y) {
         HomeActivity launcher;
-        DragNDropLayout dragNDropView;
+        DragOptionLayout dragNDropView;
         DragState state = getCurrentPage().peekItemAndSwap(x, y, _coordinate);
         if (_previousDragPoint != null && !_previousDragPoint.equals(_coordinate)) {
             launcher = HomeActivity.Companion.getLauncher();
@@ -528,7 +526,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
             case CurrentOccupied:
                 Object action;
                 HomeActivity launcher2;
-                DragNDropLayout dragNDropView2;
+                DragOptionLayout dragNDropView2;
                 for (CellContainer page : _pages) {
                     page.clearCachedOutlineBitmap();
                 }
@@ -596,7 +594,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
 
     public boolean addItemToPage(@NonNull Item item, int page) {
 
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDesktopIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallback) this, Setup.appSettings().getDesktopIconSize());
         if (itemView == null) {
             HomeActivity.Companion.getDb().deleteItem(item, true);
             return false;
@@ -614,7 +612,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         item._locationInLauncher = 0;
         item._x = positionToLayoutPrams.getX();
         item._y = positionToLayoutPrams.getY();
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDesktopIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallback) this, Setup.appSettings().getDesktopIconSize());
         if (itemView != null) {
             itemView.setLayoutParams(positionToLayoutPrams);
             getCurrentPage().addView(itemView);
@@ -627,7 +625,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         item._locationInLauncher = 0;
         item._x = x;
         item._y = y;
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallBack) this, Setup.appSettings().getDesktopIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallback) this, Setup.appSettings().getDesktopIconSize());
         if (itemView == null) {
             return false;
         }
@@ -678,7 +676,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallBack<Vi
         if (!isInEditMode()) {
             HomeActivity launcher = HomeActivity.Companion.getLauncher();
             if (launcher != null) {
-                DragNDropLayout dragNDropView = launcher.getDragNDropView();
+                DragOptionLayout dragNDropView = launcher.getDragNDropView();
                 if (dragNDropView != null) {
                     dragNDropView.cancelFolderPreview();
                 }

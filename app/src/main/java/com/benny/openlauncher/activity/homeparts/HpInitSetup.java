@@ -20,7 +20,7 @@ import android.support.annotation.NonNull;
 public final class HpInitSetup extends Setup {
     private final AppManager _appLoader;
     private final DatabaseHelper _dataManager;
-    private final HpDesktopGestureCallback _desktopGestureCallback;
+    private final HpGestureCallback _desktopGestureCallback;
     private final HpEventHandler _eventHandler;
     private final ItemGestureCallback _itemGestureCallback;
     private final Logger _logger;
@@ -28,7 +28,7 @@ public final class HpInitSetup extends Setup {
 
     public HpInitSetup(HomeActivity homeActivity) {
         _appSettings = AppSettings.get();
-        _desktopGestureCallback = new HpDesktopGestureCallback(_appSettings);
+        _desktopGestureCallback = new HpGestureCallback(_appSettings);
         _dataManager = new DatabaseHelper(homeActivity);
         _appLoader = AppManager.getInstance(homeActivity);
         _eventHandler = new HpEventHandler();

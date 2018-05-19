@@ -22,7 +22,7 @@ import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.viewutil.DesktopCallBack;
+import com.benny.openlauncher.viewutil.DesktopCallback;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 
 import io.codetail.animation.ViewAnimationUtils;
@@ -83,7 +83,7 @@ public class GroupPopupView extends RevealFrameLayout {
     }
 
 
-    public boolean showWindowV(final Item item, final View itemView, final DesktopCallBack callBack) {
+    public boolean showWindowV(final Item item, final View itemView, final DesktopCallback callback) {
         if (_isShowing || getVisibility() == View.VISIBLE) return false;
         _isShowing = true;
 
@@ -120,7 +120,7 @@ public class GroupPopupView extends RevealFrameLayout {
                     public boolean onLongClick(View view2) {
                         if (Setup.appSettings().isDesktopLock()) return false;
 
-                        removeItem(c, callBack, item, groupItem, (AppItemView) itemView);
+                        removeItem(c, callback, item, groupItem, (AppItemView) itemView);
 
                         DragAction.Action action = groupItem.getType() == Item.Type.SHORTCUT ? DragAction.Action.SHORTCUT : DragAction.Action.APP;
 
@@ -128,13 +128,13 @@ public class GroupPopupView extends RevealFrameLayout {
                         DragHandler.startDrag(view, groupItem, action, null);
 
                         dismissPopup();
-                        updateItem(callBack, item, groupItem, itemView);
+                        updateItem(callback, item, groupItem, itemView);
                         return true;
                     }
                 });
                 final App app = Setup.appLoader().findItemApp(groupItem);
                 if (app == null) {
-                    removeItem(c, callBack, item, groupItem, (AppItemView) itemView);
+                    removeItem(c, callback, item, groupItem, (AppItemView) itemView);
                 } else {
                     view.setOnClickListener(new OnClickListener() {
                         @Override
@@ -285,7 +285,7 @@ public class GroupPopupView extends RevealFrameLayout {
         _folderAnimator.start();
     }
 
-    private void removeItem(Context context, final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, AppItemView currentView) {
+    private void removeItem(Context context, final DesktopCallback callback, final Item currentItem, Item dragOutItem, AppItemView currentView) {
         currentItem.getGroupItems().remove(dragOutItem);
 
         HomeActivity.Companion.getDb().saveItem(dragOutItem, Definitions.ItemState.Visible);
@@ -294,7 +294,7 @@ public class GroupPopupView extends RevealFrameLayout {
         currentView.setCurrentIcon(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
     }
 
-    public void updateItem(final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, View currentView) {
+    public void updateItem(final DesktopCallback callback, final Item currentItem, Item dragOutItem, View currentView) {
         if (currentItem.getGroupItems().size() == 1) {
             final App app = Setup.appLoader().findItemApp(currentItem.getGroupItems().get(0));
             if (app != null) {
@@ -308,9 +308,9 @@ public class GroupPopupView extends RevealFrameLayout {
                 HomeActivity.Companion.getDb().saveItem(item, Definitions.ItemState.Visible);
                 HomeActivity.Companion.getDb().deleteItem(currentItem, true);
 
-                callBack.removeItem(currentView, false);
+                callback.removeItem(currentView, false);
                 Tool.print("_______________________");
-                callBack.addItemToCell(item, item.getX(), item.getY());
+                callback.addItemToCell(item, item.getX(), item.getY());
             }
             if (HomeActivity.Companion.getLauncher() != null) {
                 HomeActivity.Companion.getLauncher().getDesktop().requestLayout();
