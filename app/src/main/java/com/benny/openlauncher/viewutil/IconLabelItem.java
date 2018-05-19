@@ -20,13 +20,10 @@ import java.util.List;
 
 public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> {
 
-    // Data
     public Drawable _icon;
-    public View.OnLongClickListener _onLongClickListener;
-    public String _label = null;
-    // Others
-    protected View.OnClickListener _listener;
-    protected View.OnTouchListener _onOnTouchListener;
+    public String _label;
+    private View.OnLongClickListener _onLongClickListener;
+    private View.OnClickListener _onClickListener;
 
     private int _forceSize = -1;
     private int _iconGravity;
@@ -39,8 +36,6 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private boolean _bold = false;
     private int _textGravity = Gravity.CENTER_VERTICAL;
     private int _maxTextLines = 1;
-    private boolean _dontSetOnLongClickListener;
-    private boolean _hideLabel = false;
 
     public IconLabelItem(Item item) {
         _icon = item != null ? item.getIcon() : null;
@@ -57,14 +52,12 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     public IconLabelItem(Context context, int icon, String label, int forceSize) {
-        this(null);
         _label = label;
         _icon = context.getResources().getDrawable(icon);
         _forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, int icon, int label, int forceSize) {
-        this(null);
         _label = context.getString(label);
         _icon = context.getResources().getDrawable(icon);
         _forceSize = forceSize;
@@ -81,11 +74,10 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
-    public IconLabelItem withDrawablePadding(Context context, int drawablePadding) {
+    public IconLabelItem withIconPadding(Context context, int drawablePadding) {
         _drawablePadding = Tool.dp2px(drawablePadding, context);
         return this;
     }
-
 
     public IconLabelItem withTextColor(int textColor) {
         _textColor = textColor;
@@ -123,7 +115,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     public IconLabelItem withOnClickListener(@Nullable View.OnClickListener listener) {
-        _listener = listener;
+        _onClickListener = listener;
         return this;
     }
 
@@ -131,7 +123,6 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         _maxTextLines = maxTextLines;
         return this;
     }
-
 
     public IconLabelItem withOnLongClickListener(@Nullable View.OnLongClickListener onLongClickListener) {
         _onLongClickListener = onLongClickListener;
@@ -159,17 +150,12 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
             holder.itemView.getLayoutParams().width = RecyclerView.LayoutParams.MATCH_PARENT;
         if (_width != -1)
             holder.itemView.getLayoutParams().width = _width;
-        holder.textView.setMaxLines(1);
+        holder.textView.setMaxLines(_maxTextLines);
         if (_label != null)
             holder.textView.setText(_maxTextLines != 0 ? _label : "");
         holder.textView.setGravity(_gravity);
         holder.textView.setGravity(_textGravity);
         holder.textView.setCompoundDrawablePadding((int) _drawablePadding);
-
-        if (_hideLabel) {
-            holder.textView.setText(null);
-        }
-
         holder.textView.setTypeface(_typeface);
         if (_bold)
             holder.textView.setTypeface(Typeface.DEFAULT_BOLD);
@@ -177,12 +163,10 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         //Setup.logger().log(this, Log.INFO, null, "IconLabelItem - forceSize: %d", forceSize);
 
         holder.textView.setTextColor(_textColor);
-        if (_listener != null)
-            holder.itemView.setOnClickListener(_listener);
-        if (_onLongClickListener != null && !_dontSetOnLongClickListener)
+        if (_onClickListener != null)
+            holder.itemView.setOnClickListener(_onClickListener);
+        if (_onLongClickListener != null)
             holder.itemView.setOnLongClickListener(_onLongClickListener);
-        if (_onOnTouchListener != null)
-            holder.itemView.setOnTouchListener(_onOnTouchListener);
         super.bindView(holder, payloads);
     }
 

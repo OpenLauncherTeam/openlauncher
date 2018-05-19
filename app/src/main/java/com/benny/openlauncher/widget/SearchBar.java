@@ -223,7 +223,7 @@ public class SearchBar extends FrameLayout {
                                 }
                             })
                             .withTextColor(Color.WHITE)
-                            .withDrawablePadding(getContext(), 8)
+                            .withIconPadding(getContext(), 8)
                             .withBold(true)
                             .withMatchParent(true)
                             .withTextGravity(Gravity.END));
@@ -255,7 +255,7 @@ public class SearchBar extends FrameLayout {
                             }))
                             .withTextColor(Color.WHITE)
                             .withMatchParent(true)
-                            .withDrawablePadding(getContext(), 8)
+                            .withIconPadding(getContext(), 8)
                             .withMaxTextLines(Setup.appSettings().getSearchLabelLines()));
                 }
                 _adapter.set(items);

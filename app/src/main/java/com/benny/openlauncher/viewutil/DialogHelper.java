@@ -86,7 +86,7 @@ public class DialogHelper {
         for (int i = 0; i < apps.size(); i++) {
             items.add(new IconLabelItem(context, apps.get(i).getIcon(), apps.get(i).getLabel(), size)
                     .withIconGravity(Gravity.START)
-                    .withDrawablePadding(context, sizePad));
+                    .withIconPadding(context, sizePad));
         }
         fastItemAdapter.set(items);
         fastItemAdapter.withOnClickListener(new com.mikepenz.fastadapter.listeners.OnClickListener<IconLabelItem>() {

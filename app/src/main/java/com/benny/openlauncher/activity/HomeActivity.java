@@ -50,12 +50,12 @@ import com.benny.openlauncher.model.Item.Type;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.AppUpdateReceiver;
+import com.benny.openlauncher.receivers.AppUpdateReceiver;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherAction.Action;
-import com.benny.openlauncher.util.ShortcutReceiver;
+import com.benny.openlauncher.receivers.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.viewutil.MinibarAdapter;
@@ -80,7 +80,6 @@ import com.benny.openlauncher.widget.SwipeListView;
 import net.gsantner.opoc.util.ContextUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public final class HomeActivity extends Activity implements OnDesktopEditListener, DesktopOptionViewListener, DrawerListener {
@@ -104,7 +103,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public static HomeActivity _launcher;
     private static final IntentFilter _shortcutIntentFilter = new IntentFilter();
     private static final IntentFilter _timeChangesIntentFilter = new IntentFilter();
-    private HashMap deleteMefindViewCache;
     private final AppUpdateReceiver _appUpdateReceiver = new AppUpdateReceiver();
     private int cx;
     private int cy;
@@ -238,9 +236,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         if (!Setup.wasInitialised()) {
             Setup.init(new HpInitSetup(this));
         }
-        AppSettings appSettings2 = Setup.appSettings();
-
-        if (appSettings2.isSearchBarTimeEnabled()) {
+        if (appSettings.isSearchBarTimeEnabled()) {
             _timeChangedReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
@@ -251,16 +247,13 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             };
         }
         Companion.setLauncher(this);
-        Companion companion = Companion;
         DataManager dataManager = Setup.dataManager();
 
-        companion.setDb(dataManager);
+        Companion.setDb(dataManager);
         setContentView(getLayoutInflater().inflate(R.layout.activity_home, null));
         if (VERSION.SDK_INT >= 21) {
             Window window = getWindow();
-
             View decorView = window.getDecorView();
-
             decorView.setSystemUiVisibility(1536);
         }
         init();
@@ -268,7 +261,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public final void onStartApp(@NonNull Context context, @NonNull Intent intent, @Nullable View view) {
         ComponentName component = intent.getComponent();
-
         if (BuildConfig.APPLICATION_ID.equals(component.getPackageName())) {
             LauncherAction.RunAction(Action.LauncherSettings, context);
             Companion.setConsumeNextResume(true);
@@ -277,14 +269,12 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 context.startActivity(intent, getActivityAnimationOpts(view));
                 Companion.setConsumeNextResume(true);
             } catch (Exception e) {
-                Tool.toast(context, (int) R.string.toast_app_uninstalled);
+                Tool.toast(context, R.string.toast_app_uninstalled);
             }
         }
     }
 
     public final void onStartApp(@NonNull Context context, @NonNull App app, @Nullable View view) {
-
-
         if (BuildConfig.APPLICATION_ID.equals(app._packageName)) {
             LauncherAction.RunAction(Action.LauncherSettings, context);
             Companion.setConsumeNextResume(true);
@@ -388,13 +378,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         }
         Desktop desktop = findViewById(R.id.desktop);
-        AppSettings appSettings2 = Setup.appSettings();
-
-        desktop.setBackgroundColor(appSettings2.getDesktopBackgroundColor());
+        desktop.setBackgroundColor(appSettings.getDesktopBackgroundColor());
         Dock dock = findViewById(R.id.dock);
-        appSettings2 = Setup.appSettings();
-
-        dock.setBackgroundColor(appSettings2.getDockColor());
+        dock.setBackgroundColor(appSettings.getDockColor());
         getDrawerLayout().setDrawerLockMode(AppSettings.get().getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 

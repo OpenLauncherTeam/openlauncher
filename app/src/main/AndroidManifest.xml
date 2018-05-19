@@ -74,7 +74,7 @@
         </activity>
 
         <receiver
-            android:name="com.benny.openlauncher.util.DeviceAdminReceiver"
+            android:name="com.benny.openlauncher.receivers.DeviceAdminReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
@@ -84,7 +84,7 @@
                 android:resource="@xml/device_admin" />
         </receiver>
         <receiver
-            android:name="com.benny.openlauncher.util.ShortcutReceiver"
+            android:name="com.benny.openlauncher.receivers.ShortcutReceiver"
             android:permission="com.android.launcher.permission.INSTALL_SHORTCUT">
             <intent-filter>
                 <action android:name="com.android.launcher.action.INSTALL_SHORTCUT" />
