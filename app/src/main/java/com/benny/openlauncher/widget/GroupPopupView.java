@@ -157,10 +157,8 @@ public class GroupPopupView extends RevealFrameLayout {
         _dismissListener = new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                if (((AppItemView) itemView).getIconProvider().isGroupIconDrawable()) {
-                    if (((AppItemView) itemView).getCurrentIcon() != null) {
-                        ((GroupIconDrawable) ((AppItemView) itemView).getCurrentIcon()).popBack();
-                    }
+                if (((AppItemView) itemView).getCurrentIcon() != null) {
+                    ((GroupIconDrawable) ((AppItemView) itemView).getCurrentIcon()).popBack();
                 }
             }
         };
@@ -293,7 +291,7 @@ public class GroupPopupView extends RevealFrameLayout {
         HomeActivity.Companion.getDb().saveItem(dragOutItem, Definitions.ItemState.Visible);
         HomeActivity.Companion.getDb().saveItem(currentItem);
 
-        currentView.setIconProvider(Setup.imageLoader().createIconProvider(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize())));
+        currentView.setCurrentIcon(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
     }
 
     public void updateItem(final DesktopCallBack callBack, final Item currentItem, Item dragOutItem, View currentView) {

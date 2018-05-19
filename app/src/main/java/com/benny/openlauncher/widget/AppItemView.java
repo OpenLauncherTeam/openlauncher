@@ -18,14 +18,12 @@ import android.view.View;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.IconDrawer;
-import com.benny.openlauncher.interfaces.IconProvider;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
-import com.benny.openlauncher.util.SimpleIconProvider;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
@@ -37,7 +35,6 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
     private static final char ELLIPSIS = '…';
 
     private Drawable _icon = null;
-    private SimpleIconProvider _iconProvider;
     private String _label;
     private Paint _textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Rect _textContainer = new Rect(), testTextContainer = new Rect();
@@ -110,17 +107,12 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         return this;
     }
 
-    public IconProvider getIconProvider() {
-        return _iconProvider;
-    }
-
-    public void setIconProvider(SimpleIconProvider iconProvider) {
-        _iconProvider = iconProvider;
-        iconProvider.loadIcon(IconProvider.IconTargetType.IconDrawer, (int) _iconSize, this, 0);
-    }
-
     public Drawable getCurrentIcon() {
         return _icon;
+    }
+
+    public void setCurrentIcon(Drawable icon) {
+        _icon = icon;
     }
 
     public String getLabel() {
@@ -151,16 +143,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         _targetedHeightPadding = padding;
     }
 
-    public void load() {
-        if (_iconProvider != null) {
-            _iconProvider.loadIcon(IconProvider.IconTargetType.IconDrawer, (int) _iconSize, this, 0);
-        }
-    }
-
     public void reset() {
-        if (_iconProvider != null) {
-            _iconProvider.cancelLoad(IconProvider.IconTargetType.IconDrawer, this);
-        }
         _label = "";
         _icon = null;
         invalidate();
@@ -237,33 +220,6 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
         super.invalidate();
     }
 
-    @Override
-    public void onAttachedToWindow() {
-        if (!_fastAdapterItem && _iconProvider != null) {
-            _iconProvider.loadIcon(IconProvider.IconTargetType.IconDrawer, (int) _iconSize, this, 0);
-        }
-        super.onAttachedToWindow();
-    }
-
-    @Override
-    public void onDetachedFromWindow() {
-        if (!_fastAdapterItem && _iconProvider != null) {
-            _iconProvider.cancelLoad(IconProvider.IconTargetType.IconDrawer, this);
-            _icon = null;
-        }
-        super.onDetachedFromWindow();
-    }
-
-    @Override
-    public void invalidate() {
-        if (!_fastAdapterItem && _iconProvider != null) {
-            _iconProvider.cancelLoad(IconProvider.IconTargetType.IconDrawer, this);
-            _icon = null;
-        } else {
-            super.invalidate();
-        }
-    }
-
     public interface LongPressCallBack {
         boolean readyForDrag(View view);
 
@@ -306,7 +262,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder setAppItem(final App app) {
             _view.setLabel(app.getLabel());
-            _view.setIconProvider(Setup.imageLoader().createIconProvider(app.getIcon()));
+            _view.setCurrentIcon(app.getIcon());
             _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -323,7 +279,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder setAppItem(final Item item, final App app) {
             _view.setLabel(item.getLabel());
-            _view.setIconProvider(Setup.imageLoader().createIconProvider(app.getIcon()));
+            _view.setCurrentIcon(app.getIcon());
             _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -340,7 +296,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder setShortcutItem(final Item item) {
             _view.setLabel(item.getLabel());
-            _view.setIconProvider(item.getIconProvider());
+            _view.setCurrentIcon(item.getIcon());
             _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -357,7 +313,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder setGroupItem(Context context, final DesktopCallBack callback, final Item item, int iconSize) {
             _view.setLabel(item.getLabel());
-            _view.setIconProvider(Setup.imageLoader().createIconProvider(new GroupIconDrawable(context, item, iconSize)));
+            _view.setCurrentIcon(new GroupIconDrawable(context, item, iconSize));
             _view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -371,8 +327,7 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
         public Builder setActionItem(Item item) {
             _view.setLabel(item.getLabel());
-            _view.setIconProvider(Setup.imageLoader().createIconProvider(
-                    ContextCompat.getDrawable(Setup.appContext(), R.drawable.ic_apps_white_48dp)));
+            _view.setCurrentIcon(ContextCompat.getDrawable(Setup.appContext(), R.drawable.ic_apps_white_48dp));
             switch (item.getActionValue()) {
                 case Definitions.ACTION_LAUNCHER:
                     _view.setOnClickListener(new OnClickListener() {

@@ -60,7 +60,6 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
                 .setAppItem(_app)
                 .withOnLongClick(_app, DragAction.Action.APP_DRAWER, _onLongClickCallback)
                 .withOnTouchGetPosition(null, null);
-        holder.appItemView.load();
         super.bindView(holder, payloads);
     }
 

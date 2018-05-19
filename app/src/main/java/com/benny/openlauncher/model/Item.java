@@ -32,6 +32,7 @@ public class Item implements LabelProvider, Parcelable {
         }
     };
     public Type _type;
+    public Drawable _icon;
     public SimpleIconProvider _iconProvider = null;
     public int _x = 0;
     public int _y = 0;
@@ -267,6 +268,10 @@ public class Item implements LabelProvider, Parcelable {
 
     public SimpleIconProvider getIconProvider() {
         return _iconProvider;
+    }
+
+    public Drawable getIcon() {
+        return _icon;
     }
 
     public enum Type {
