@@ -79,7 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         switch (item.getType()) {
             case APP:
                 if (Setup.appSettings().enableImageCaching()) {
-                    Tool.saveIcon(_context, Tool.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(-1)), Integer.toString(item.getId()));
+                    Tool.saveIcon(_context, Tool.drawableToBitmap(item.getIcon()), Integer.toString(item.getId()));
                 }
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.getIntent()));
                 break;
@@ -208,7 +208,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         switch (item.getType()) {
             case APP:
                 if (Setup.appSettings().enableImageCaching()) {
-                    Tool.saveIcon(_context, Tool.drawableToBitmap(item.getIconProvider().getDrawableSynchronously(Definitions.NO_SCALE)), Integer.toString(item.getId()));
+                    Tool.saveIcon(_context, Tool.drawableToBitmap(item.getIcon()), Integer.toString(item.getId()));
                 }
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.getIntent()));
                 break;
@@ -267,13 +267,13 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
             case SHORTCUT:
                 item.setIntent(Tool.getIntentFromString(data));
                 if (Setup.appSettings().enableImageCaching()) {
-                    item.setIconProvider(Setup.get().getImageLoader().createIconProvider(Tool.getIcon(HomeActivity.Companion.getLauncher(), Integer.toString(id))));
+                    item.setIcon(Tool.getIcon(HomeActivity.Companion.getLauncher(), Integer.toString(id)));
                 } else {
                     switch (type) {
                         case APP:
                         case SHORTCUT:
                             App app = Setup.get().getAppLoader().findItemApp(item);
-                            item.setIconProvider(app != null ? Setup.imageLoader().createIconProvider(app.getIcon()) : null);
+                            item.setIcon(app != null ? app.getIcon() : null);
                             break;
                         default:
                             // TODO...

@@ -33,7 +33,6 @@ public class Item implements LabelProvider, Parcelable {
     };
     public Type _type;
     public Drawable _icon;
-    public SimpleIconProvider _iconProvider = null;
     public int _x = 0;
     public int _y = 0;
     //Needed for folder to optimize the folder open position
@@ -88,13 +87,13 @@ public class Item implements LabelProvider, Parcelable {
         _locationInLauncher = parcel.readInt();
 
         if (Setup.appSettings().enableImageCaching()) {
-            _iconProvider = Setup.imageLoader().createIconProvider(Tool.getIcon(HomeActivity.Companion.getLauncher(), Integer.toString(_idValue)));
+            _icon = Tool.getIcon(HomeActivity.Companion.getLauncher(), Integer.toString(_idValue));
         } else {
             switch (_type) {
                 case APP:
                 case SHORTCUT:
                     App app = Setup.appLoader().findItemApp(this);
-                    _iconProvider = app != null ? Setup.imageLoader().createIconProvider(app.getIcon()) : null;
+                    _icon = app != null ? app.getIcon() : null;
                     break;
                 default:
                     // TODO...
@@ -107,7 +106,7 @@ public class Item implements LabelProvider, Parcelable {
         Item item = new Item();
         item._type = Type.APP;
         item._name = app.getLabel();
-        item._iconProvider = Setup.imageLoader().createIconProvider(app.getIcon());
+        item._icon = app.getIcon();
         item._intent = toIntent(app);
         return item;
     }
@@ -116,7 +115,7 @@ public class Item implements LabelProvider, Parcelable {
         Item item = new Item();
         item._type = Type.SHORTCUT;
         item._name = name;
-        item._iconProvider = Setup.imageLoader().createIconProvider(icon);
+        item._icon = icon;
         item._spanX = 1;
         item._spanY = 1;
         item._intent = intent;
@@ -266,10 +265,6 @@ public class Item implements LabelProvider, Parcelable {
         _spanY = y;
     }
 
-    public SimpleIconProvider getIconProvider() {
-        return _iconProvider;
-    }
-
     public Drawable getIcon() {
         return _icon;
     }
@@ -286,8 +281,8 @@ public class Item implements LabelProvider, Parcelable {
         _type = type;
     }
 
-    public void setIconProvider(SimpleIconProvider iconProvider) {
-        _iconProvider = iconProvider;
+    public void setIcon(Drawable icon) {
+        _icon = icon;
     }
 
     public int getLocationInLauncher() {

@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
@@ -25,7 +26,7 @@ import java.util.List;
 public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> implements FastItem.LabelItem<IconLabelItem, IconLabelItem.ViewHolder>, FastItem.DesktopOptionsItem<IconLabelItem, IconLabelItem.ViewHolder> {
 
     // Data
-    public SimpleIconProvider _iconProvider = null;
+    public Drawable _icon;
     public View.OnLongClickListener _onLongClickListener;
     protected String _label = null;
     // Others
@@ -47,44 +48,36 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private boolean _hideLabel = false;
 
     public IconLabelItem(Item item) {
-        _iconProvider = item != null ? item.getIconProvider() : null;
+        _icon = item != null ? item.getIcon() : null;
         _label = item != null ? item.getLabel() : null;
     }
 
     public IconLabelItem(Context context, int icon, int label) {
-        _iconProvider = Setup.imageLoader().createIconProvider(icon);
+        _icon = context.getResources().getDrawable(icon);
         _label = context.getString(label);
     }
 
     public IconLabelItem(Context context, int label) {
-        this(context, 0, label);
+        _label = context.getString(label);
     }
 
     public IconLabelItem(Context context, int icon, String label, int forceSize) {
         this(null);
         _label = label;
-        _iconProvider = Setup.imageLoader().createIconProvider(icon);
+        _icon = context.getResources().getDrawable(icon);
         _forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, int icon, int label, int forceSize) {
         this(null);
         _label = context.getString(label);
-        _iconProvider = Setup.imageLoader().createIconProvider(icon);
-        _forceSize = forceSize;
-    }
-
-    public IconLabelItem(Context context, SimpleIconProvider iconProvider, String label, int forceSize) {
-        this(null);
-        _label = label;
-        _iconProvider = iconProvider;
+        _icon = context.getResources().getDrawable(icon);
         _forceSize = forceSize;
     }
 
     public IconLabelItem(Context context, Drawable icon, String label, int forceSize) {
-        this(null);
         _label = label;
-        _iconProvider = Setup.imageLoader().createIconProvider(icon);
+        _icon = icon;
         _forceSize = forceSize;
     }
 
@@ -150,10 +143,9 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
-
     @Override
     public void setIcon(int resId) {
-        _iconProvider = Setup.imageLoader().createIconProvider(resId);
+        // remove fast item interfaces
     }
 
     @Override
@@ -191,9 +183,6 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
         if (_hideLabel) {
             holder.textView.setText(null);
-            _iconProvider.loadIcon(IconProvider.IconTargetType.TextView, _forceSize, holder.textView, Gravity.TOP);
-        } else {
-            _iconProvider.loadIcon(IconProvider.IconTargetType.TextView, _forceSize, holder.textView, _iconGravity);
         }
 
         holder.textView.setTypeface(_typeface);
@@ -215,9 +204,6 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     @Override
     public void unbindView(@NonNull ViewHolder holder) {
         super.unbindView(holder);
-        if (_iconProvider != null) {
-            _iconProvider.cancelLoad(IconProvider.IconTargetType.TextView, holder.textView);
-        }
         holder.textView.setText("");
         holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
     }
