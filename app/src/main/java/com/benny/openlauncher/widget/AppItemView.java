@@ -17,7 +17,6 @@ import android.view.View;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.interfaces.IconDrawer;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
@@ -29,7 +28,7 @@ import com.benny.openlauncher.viewutil.DesktopCallBack;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 import com.benny.openlauncher.viewutil.ItemGestureListener;
 
-public class AppItemView extends View implements Drawable.Callback, IconDrawer {
+public class AppItemView extends View implements Drawable.Callback {
 
     private static final int MIN_ICON_TEXT_MARGIN = 8;
     private static final char ELLIPSIS = '…';
@@ -206,18 +205,6 @@ public class AppItemView extends View implements Drawable.Callback, IconDrawer {
 
     public float getDrawIconLeft() {
         return (getWidth() - _iconSize) / 2;
-    }
-
-    @Override
-    public void onIconAvailable(Drawable drawable, int index) {
-        _icon = drawable;
-        super.invalidate();
-    }
-
-    @Override
-    public void onIconCleared(Drawable placeholder, int index) {
-        _icon = placeholder;
-        super.invalidate();
     }
 
     public interface LongPressCallBack {

@@ -6,29 +6,24 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.interfaces.FastItem;
-import com.benny.openlauncher.interfaces.IconProvider;
-import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.util.SimpleIconProvider;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
 
-public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> implements FastItem.LabelItem<IconLabelItem, IconLabelItem.ViewHolder>, FastItem.DesktopOptionsItem<IconLabelItem, IconLabelItem.ViewHolder> {
+public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> {
 
     // Data
     public Drawable _icon;
     public View.OnLongClickListener _onLongClickListener;
-    protected String _label = null;
+    public String _label = null;
     // Others
     protected View.OnClickListener _listener;
     protected View.OnTouchListener _onOnTouchListener;
@@ -144,16 +139,6 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     @Override
-    public void setIcon(int resId) {
-        // remove fast item interfaces
-    }
-
-    @Override
-    public String getLabel() {
-        return _label;
-    }
-
-    @Override
     public ViewHolder getViewHolder(View v) {
         return new ViewHolder(v, this);
     }
@@ -175,8 +160,8 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         if (_width != -1)
             holder.itemView.getLayoutParams().width = _width;
         holder.textView.setMaxLines(1);
-        if (getLabel() != null)
-            holder.textView.setText(_maxTextLines != 0 ? getLabel() : "");
+        if (_label != null)
+            holder.textView.setText(_maxTextLines != 0 ? _label : "");
         holder.textView.setGravity(_gravity);
         holder.textView.setGravity(_textGravity);
         holder.textView.setCompoundDrawablePadding((int) _drawablePadding);

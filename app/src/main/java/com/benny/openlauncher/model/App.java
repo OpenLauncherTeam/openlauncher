@@ -3,8 +3,6 @@ package com.benny.openlauncher.model;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
-import com.benny.openlauncher.util.SimpleIconProvider;
-
 import android.graphics.drawable.Drawable;
 
 public class App {

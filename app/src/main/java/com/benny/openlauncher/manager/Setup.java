@@ -1,14 +1,12 @@
 package com.benny.openlauncher.manager;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 
 import com.benny.openlauncher.interfaces.DialogListener;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.Definitions;
-import com.benny.openlauncher.util.SimpleIconProvider;
 import com.benny.openlauncher.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.viewutil.ItemGestureListener;
 
@@ -57,10 +55,6 @@ public abstract class Setup {
         return get().getItemGestureCallback();
     }
 
-    public static ImageLoader imageLoader() {
-        return get().getImageLoader();
-    }
-
     public static DataManager dataManager() {
         return get().getDataManager();
     }
@@ -89,8 +83,6 @@ public abstract class Setup {
 
     public abstract ItemGestureListener.ItemGestureCallback getItemGestureCallback();
 
-    public abstract ImageLoader getImageLoader();
-
     public abstract DataManager getDataManager();
 
     public abstract AppManager getAppLoader();
@@ -102,12 +94,6 @@ public abstract class Setup {
     // ----------------
     // Interfaces
     // ----------------
-
-    public interface ImageLoader {
-        SimpleIconProvider createIconProvider(Drawable drawable);
-
-        SimpleIconProvider createIconProvider(int icon);
-    }
 
     public interface DataManager {
         void saveItem(Item item);
@@ -128,7 +114,7 @@ public abstract class Setup {
     public interface EventHandler {
         void showLauncherSettings(Context context);
 
-        void showPickAction(Context context, DialogListener.OnAddAppDrawerItemListener listener);
+        void showPickAction(Context context, DialogListener.OnAddActionListener listener);
 
         void showEditDialog(Context context, Item item, DialogListener.OnEditDialogListener listener);
 

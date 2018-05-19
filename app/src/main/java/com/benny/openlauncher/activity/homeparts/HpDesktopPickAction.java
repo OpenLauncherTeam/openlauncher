@@ -9,7 +9,7 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.Tool;
 
-public class HpDesktopPickAction implements DialogListener.OnAddAppDrawerItemListener {
+public class HpDesktopPickAction implements DialogListener.OnAddActionListener {
     private HomeActivity _homeActivity;
 
     public HpDesktopPickAction(HomeActivity homeActivity) {

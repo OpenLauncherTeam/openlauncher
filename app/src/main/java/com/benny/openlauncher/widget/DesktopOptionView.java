@@ -18,7 +18,6 @@ import android.view.WindowInsets;
 import android.widget.FrameLayout;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.interfaces.FastItem;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.benny.openlauncher.util.Tool;
@@ -32,7 +31,7 @@ import java.util.List;
 public class DesktopOptionView extends FrameLayout {
 
     private RecyclerView[] _actionRecyclerViews = new RecyclerView[2];
-    private FastItemAdapter<FastItem.DesktopOptionsItem>[] _actionAdapters = new FastItemAdapter[2];
+    private FastItemAdapter<IconLabelItem>[] _actionAdapters = new FastItemAdapter[2];
     private DesktopOptionViewListener _desktopOptionViewListener;
 
     public DesktopOptionView(@NonNull Context context) {
@@ -59,9 +58,9 @@ public class DesktopOptionView extends FrameLayout {
             @Override
             public void run() {
                 if (home) {
-                    _actionAdapters[0].getAdapterItem(1).setIcon(R.drawable.ic_star_white_36dp);
+                    //_actionAdapters[0].getAdapterItem(1).setIcon(R.drawable.ic_star_white_36dp);
                 } else {
-                    _actionAdapters[0].getAdapterItem(1).setIcon(R.drawable.ic_star_border_white_36dp);
+                    //_actionAdapters[0].getAdapterItem(1).setIcon(R.drawable.ic_star_border_white_36dp);
                 }
                 _actionAdapters[0].notifyAdapterItemChanged(1);
             }
@@ -75,9 +74,9 @@ public class DesktopOptionView extends FrameLayout {
             @Override
             public void run() {
                 if (lock) {
-                    _actionAdapters[0].getAdapterItem(2).setIcon(R.drawable.ic_lock_white_36dp);
+                    //_actionAdapters[0].getAdapterItem(2).setIcon(R.drawable.ic_lock_white_36dp);
                 } else {
-                    _actionAdapters[0].getAdapterItem(2).setIcon(R.drawable.ic_lock_open_white_36dp);
+                    //_actionAdapters[0].getAdapterItem(2).setIcon(R.drawable.ic_lock_open_white_36dp);
                 }
                 _actionAdapters[0].notifyAdapterItemChanged(2);
             }
@@ -107,9 +106,9 @@ public class DesktopOptionView extends FrameLayout {
         _actionRecyclerViews[0] = createRecyclerView(_actionAdapters[0], Gravity.TOP | Gravity.CENTER_HORIZONTAL, paddingHorizontal);
         _actionRecyclerViews[1] = createRecyclerView(_actionAdapters[1], Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, paddingHorizontal);
 
-        final com.mikepenz.fastadapter.listeners.OnClickListener<FastItem.DesktopOptionsItem> clickListener = new com.mikepenz.fastadapter.listeners.OnClickListener<FastItem.DesktopOptionsItem>() {
+        final com.mikepenz.fastadapter.listeners.OnClickListener<IconLabelItem> clickListener = new com.mikepenz.fastadapter.listeners.OnClickListener<IconLabelItem>() {
             @Override
-            public boolean onClick(View v, IAdapter<FastItem.DesktopOptionsItem> adapter, FastItem.DesktopOptionsItem item, int position) {
+            public boolean onClick(View v, IAdapter<IconLabelItem> adapter, IconLabelItem item, int position) {
                 if (_desktopOptionViewListener != null) {
                     final int id = (int) item.getIdentifier();
                     if (id == R.string.home) {
@@ -158,15 +157,15 @@ public class DesktopOptionView extends FrameLayout {
         });
     }
 
-    private void initItems(final Typeface typeface, final com.mikepenz.fastadapter.listeners.OnClickListener<FastItem.DesktopOptionsItem> clickListener, int itemWidth) {
-        List<FastItem.DesktopOptionsItem> itemsTop = new ArrayList<>();
+    private void initItems(final Typeface typeface, final com.mikepenz.fastadapter.listeners.OnClickListener<IconLabelItem> clickListener, int itemWidth) {
+        List<IconLabelItem> itemsTop = new ArrayList<>();
         itemsTop.add(createItem(R.drawable.ic_delete_white_36dp, R.string.remove, typeface, itemWidth));
         itemsTop.add(createItem(R.drawable.ic_star_white_36dp, R.string.home, typeface, itemWidth));
         itemsTop.add(createItem(R.drawable.ic_lock_open_white_36dp, R.string.lock, typeface, itemWidth));
         _actionAdapters[0].set(itemsTop);
         _actionAdapters[0].withOnClickListener(clickListener);
 
-        List<FastItem.DesktopOptionsItem> itemsBottom = new ArrayList<>();
+        List<IconLabelItem> itemsBottom = new ArrayList<>();
         itemsBottom.add(createItem(R.drawable.ic_dashboard_white_36dp, R.string.widget, typeface, itemWidth));
         itemsBottom.add(createItem(R.drawable.ic_launch_white_36dp, R.string.action, typeface, itemWidth));
         itemsBottom.add(createItem(R.drawable.ic_settings_launcher_white_36dp, R.string.settings, typeface, itemWidth));
@@ -191,7 +190,7 @@ public class DesktopOptionView extends FrameLayout {
         return actionRecyclerView;
     }
 
-    private FastItem.DesktopOptionsItem createItem(int icon, int label, Typeface typeface, int width) {
+    private IconLabelItem createItem(int icon, int label, Typeface typeface, int width) {
         return new IconLabelItem(getContext(), icon, getContext().getString(label), -1)
                 .withIdentifier(label)
                 .withOnClickListener(null)

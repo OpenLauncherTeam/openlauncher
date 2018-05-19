@@ -6,16 +6,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.interfaces.LabelProvider;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.util.SimpleIconProvider;
 import com.benny.openlauncher.util.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Item implements LabelProvider, Parcelable {
+public class Item implements Parcelable {
 
     public static final int LOCATION_DESKTOP = 0;
     public static final int LOCATION_DOCK = 1;
@@ -216,7 +214,6 @@ public class Item implements LabelProvider, Parcelable {
         return _intent;
     }
 
-    @Override
     public String getLabel() {
         return _name;
     }

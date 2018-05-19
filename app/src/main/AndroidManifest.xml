@@ -44,7 +44,6 @@
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -75,7 +74,6 @@
                 android:value="com.benny.openlauncher.activity.SettingsActivity" />
         </activity>
 
-
         <receiver
             android:name="com.benny.openlauncher.util.DeviceAdminReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
@@ -86,7 +84,6 @@
                 android:name="android.app.device_admin"
                 android:resource="@xml/device_admin" />
         </receiver>
-
         <receiver
             android:name="com.benny.openlauncher.util.ShortcutReceiver"
             android:permission="com.android.launcher.permission.INSTALL_SHORTCUT">
@@ -104,7 +101,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
         <provider
             android:name="com.benny.openlauncher.util.FiveSecsDelayContentProvider"
             android:authorities="${applicationId}.util.FiveSecsDelayContentProvider"

@@ -15,6 +15,5 @@ public class AutoFinishActivity extends Activity {
 
     public static void start(Context c) {
         c.startActivity(new Intent(c, AutoFinishActivity.class));
-
     }
 }

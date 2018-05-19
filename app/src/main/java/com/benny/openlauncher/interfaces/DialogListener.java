@@ -2,7 +2,7 @@ package com.benny.openlauncher.interfaces;
 
 public interface DialogListener {
 
-    interface OnAddAppDrawerItemListener {
+    interface OnAddActionListener {
         void onAdd(int type);
     }
 

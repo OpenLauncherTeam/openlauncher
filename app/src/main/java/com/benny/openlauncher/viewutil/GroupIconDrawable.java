@@ -13,13 +13,12 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.interfaces.IconDrawer;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Tool;
 
-public class GroupIconDrawable extends Drawable implements IconDrawer {
+public class GroupIconDrawable extends Drawable {
     private Drawable[] _icons;
     private Paint _paintInnerCircle;
     private Paint _paintOuterCircle;
@@ -162,17 +161,5 @@ public class GroupIconDrawable extends Drawable implements IconDrawer {
     @Override
     public int getOpacity() {
         return PixelFormat.TRANSPARENT;
-    }
-
-    @Override
-    public void onIconAvailable(Drawable drawable, int index) {
-        _icons[index] = drawable;
-        invalidateSelf();
-    }
-
-    @Override
-    public void onIconCleared(Drawable placeholder, int index) {
-        _icons[index] = placeholder == null ? new ColorDrawable(Color.TRANSPARENT) : placeholder;
-        invalidateSelf();
     }
 }

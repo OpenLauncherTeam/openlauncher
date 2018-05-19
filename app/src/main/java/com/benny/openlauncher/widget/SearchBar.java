@@ -31,7 +31,6 @@ import android.widget.TextView;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
-import com.benny.openlauncher.interfaces.FastItem;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.benny.openlauncher.model.Item;
@@ -59,7 +58,7 @@ public class SearchBar extends FrameLayout {
     public RecyclerView _searchRecycler;
     private CircleDrawable _icon;
     private CardView _searchCardContainer;
-    private FastItemAdapter<FastItem.LabelItem> _adapter = new FastItemAdapter<>();
+    private FastItemAdapter<IconLabelItem> _adapter = new FastItemAdapter<>();
     private CallBack _callback;
     private boolean _expanded;
     private boolean _searchInternetEnabled = true;
@@ -212,7 +211,7 @@ public class SearchBar extends FrameLayout {
                 if (Setup.appSettings().getSearchBarShouldShowHiddenApps()) {
                     apps = Setup.appLoader().getAllApps(getContext(), true);
                 }
-                List<FastItem.LabelItem> items = new ArrayList<>();
+                List<IconLabelItem> items = new ArrayList<>();
                 if (_searchInternetEnabled) {
                     items.add(new IconLabelItem(getContext(), R.string.search_online)
                             .withIconGravity(Gravity.START)
@@ -264,15 +263,15 @@ public class SearchBar extends FrameLayout {
                 return false;
             }
         });
-        _adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<FastItem.LabelItem>() {
+        _adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<IconLabelItem>() {
             @Override
-            public boolean filter(FastItem.LabelItem item, CharSequence constraint) {
-                if (item.getLabel().equals(getContext().getString(R.string.search_online)))
+            public boolean filter(IconLabelItem item, CharSequence constraint) {
+                if (item._label.equals(getContext().getString(R.string.search_online)))
                     return false;
                 String s = constraint.toString();
                 if (s.isEmpty())
                     return true;
-                else if (item.getLabel().toLowerCase().contains(s.toLowerCase()))
+                else if (item._label.toLowerCase().contains(s.toLowerCase()))
                     return false;
                 else
                     return true;
