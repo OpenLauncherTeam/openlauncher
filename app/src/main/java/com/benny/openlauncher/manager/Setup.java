@@ -6,6 +6,7 @@ import com.benny.openlauncher.interfaces.DialogListener;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
+import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.viewutil.ItemGestureListener;
@@ -55,7 +56,7 @@ public abstract class Setup {
         return get().getItemGestureCallback();
     }
 
-    public static DataManager dataManager() {
+    public static DatabaseHelper dataManager() {
         return get().getDataManager();
     }
 
@@ -83,7 +84,7 @@ public abstract class Setup {
 
     public abstract ItemGestureListener.ItemGestureCallback getItemGestureCallback();
 
-    public abstract DataManager getDataManager();
+    public abstract DatabaseHelper getDataManager();
 
     public abstract AppManager getAppLoader();
 
@@ -94,22 +95,6 @@ public abstract class Setup {
     // ----------------
     // Interfaces
     // ----------------
-
-    public interface DataManager {
-        void saveItem(Item item);
-
-        void saveItem(Item item, Definitions.ItemState state);
-
-        void saveItem(Item item, int page, Definitions.ItemPosition desktop);
-
-        void deleteItem(Item item, boolean deleteSubItems);
-
-        List<List<Item>> getDesktop();
-
-        List<Item> getDock();
-
-        Item getItem(int id);
-    }
 
     public interface EventHandler {
         void showLauncherSettings(Context context);

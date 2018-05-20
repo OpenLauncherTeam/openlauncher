@@ -15,7 +15,7 @@ import com.benny.openlauncher.model.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManager {
+public class DatabaseHelper extends SQLiteOpenHelper {
     protected static final String DATABASE_HOME = "home.db";
     protected static final String TABLE_HOME = "home";
     protected static final String COLUMN_TIME = "time";
@@ -109,17 +109,14 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         _db.insert(TABLE_HOME, null, itemValues);
     }
 
-    @Override
     public void saveItem(Item item) {
         updateItem(item);
     }
 
-    @Override
     public void saveItem(Item item, Definitions.ItemState state) {
         updateItem(item, state);
     }
 
-    @Override
     public void saveItem(Item item, int page, Definitions.ItemPosition itemPosition) {
         String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + item.getId();
         Cursor cursor = _db.rawQuery(SQL_QUERY_SPECIFIC, null);
@@ -130,7 +127,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         }
     }
 
-    @Override
     public void deleteItem(Item item, boolean deleteSubItems) {
         // if the item is a group then remove all entries
         if (deleteSubItems && item.getType() == Item.Type.GROUP) {
@@ -142,7 +138,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         _db.delete(TABLE_HOME, COLUMN_TIME + " = ?", new String[]{String.valueOf(item.getId())});
     }
 
-    @Override
     public List<List<Item>> getDesktop() {
         String SQL_QUERY_DESKTOP = SQL_QUERY + TABLE_HOME;
         Cursor cursor = _db.rawQuery(SQL_QUERY_DESKTOP, null);
@@ -164,7 +159,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         return desktop;
     }
 
-    @Override
     public List<Item> getDock() {
         String SQL_QUERY_DESKTOP = SQL_QUERY + TABLE_HOME;
         Cursor cursor = _db.rawQuery(SQL_QUERY_DESKTOP, null);
@@ -183,7 +177,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Setup.DataManage
         return dock;
     }
 
-    @Override
     public Item getItem(int id) {
         String SQL_QUERY_SPECIFIC = SQL_QUERY + TABLE_HOME + " WHERE " + COLUMN_TIME + " = " + id;
         Cursor cursor = _db.rawQuery(SQL_QUERY_SPECIFIC, null);

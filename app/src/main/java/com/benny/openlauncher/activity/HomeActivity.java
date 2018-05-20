@@ -17,6 +17,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.support.annotation.NonNull;
@@ -44,13 +45,13 @@ import com.benny.openlauncher.activity.homeparts.HpInitSetup;
 import com.benny.openlauncher.activity.homeparts.HpSearchBar;
 import com.benny.openlauncher.interfaces.AppDeleteListener;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.manager.Setup.DataManager;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.Item.Type;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.receivers.AppUpdateReceiver;
+import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.LauncherAction;
@@ -91,7 +92,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     private static WidgetHost _appWidgetHost;
     public static AppWidgetManager _appWidgetManager;
     private static boolean _consumeNextResume;
-    public static DataManager _db;
+    public static DatabaseHelper _db;
     public static float _itemTouchX;
     public static float _itemTouchY;
     @Nullable
@@ -130,11 +131,11 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
 
         @NonNull
-        public final DataManager getDb() {
+        public final DatabaseHelper getDb() {
             return _db;
         }
 
-        public final void setDb(@NonNull DataManager v) {
+        public final void setDb(@NonNull DatabaseHelper v) {
             _db = v;
         }
 
@@ -244,7 +245,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             };
         }
         Companion.setLauncher(this);
-        DataManager dataManager = Setup.dataManager();
+        DatabaseHelper dataManager = Setup.dataManager();
 
         Companion.setDb(dataManager);
         setContentView(getLayoutInflater().inflate(R.layout.activity_home, null));

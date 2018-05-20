@@ -68,7 +68,7 @@ public final class HpInitSetup extends Setup {
     }
 
     @NonNull
-    public DataManager getDataManager() {
+    public DatabaseHelper getDataManager() {
         return _dataManager;
     }
 
