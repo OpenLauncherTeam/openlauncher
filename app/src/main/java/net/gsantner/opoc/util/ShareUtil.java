@@ -54,6 +54,7 @@ public class ShareUtil {
     public final static String EXTRA_FILEPATH = "real_file_path_2";
     public final static SimpleDateFormat SDF_RFC3339_ISH = new SimpleDateFormat("yyyy-MM-dd'T'HH-mm", Locale.getDefault());
     public final static SimpleDateFormat SDF_SHORT = new SimpleDateFormat("yyMMdd-HHmm", Locale.getDefault());
+    public final static String MIME_TEXT_PLAIN = "text/plain";
 
 
     protected Context _context;
@@ -162,7 +163,7 @@ public class ShareUtil {
     public void shareText(String text, @Nullable String mimeType) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_TEXT, text);
-        intent.setType(mimeType != null ? mimeType : "text/plain");
+        intent.setType(mimeType != null ? mimeType : MIME_TEXT_PLAIN);
         showChooser(intent, null);
     }
 
@@ -178,6 +179,22 @@ public class ShareUtil {
         intent.putExtra(Intent.EXTRA_STREAM, fileUri);
         intent.putExtra(EXTRA_FILEPATH, file.getAbsolutePath());
         intent.setType(mimeType);
+        showChooser(intent, null);
+    }
+
+    /**
+     * Open a View intent for given file
+     *
+     * @param file The file to share
+     */
+    public void viewFileInOtherApp(File file, @Nullable String type) {
+        Uri fileUri = FileProvider.getUriForFile(_context, getFileProviderAuthority(), file);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.putExtra(Intent.EXTRA_STREAM, fileUri);
+        intent.setData(fileUri);
+        intent.putExtra(EXTRA_FILEPATH, file.getAbsolutePath());
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setDataAndType(fileUri, type);
         showChooser(intent, null);
     }
 
@@ -396,7 +413,7 @@ public class ShareUtil {
         String tmps;
         String fileStr;
 
-        if ((Intent.ACTION_VIEW.equals(action) || Intent.ACTION_EDIT.equals(action))) {
+        if ((Intent.ACTION_VIEW.equals(action) || Intent.ACTION_EDIT.equals(action)) || Intent.ACTION_SEND.equals(action)) {
             // Markor, S.M.T FileManager
             if (receivingIntent.hasExtra((tmps = EXTRA_FILEPATH))) {
                 return new File(receivingIntent.getStringExtra(tmps));
@@ -419,7 +436,7 @@ public class ShareUtil {
                         fileStr = "/" + fileStr;
                     }
                     // Some do add some custom prefix
-                    for (String prefix : new String[]{"file", "document", "root_files"}) {
+                    for (String prefix : new String[]{"file", "document", "root_files", "name"}) {
                         if (fileStr.startsWith(prefix)) {
                             fileStr = fileStr.substring(prefix.length());
                         }
@@ -443,9 +460,15 @@ public class ShareUtil {
                         tmpf = new File(Uri.decode(fileStr));
                         if (tmpf.exists()) {
                             return tmpf;
+                        } else if ((tmpf = new File(fileStr)).exists()) {
+                            return tmpf;
                         }
                     }
                 }
+            }
+            fileUri = receivingIntent.getParcelableExtra(Intent.EXTRA_STREAM);
+            if (fileUri != null && !TextUtils.isEmpty(tmps = fileUri.getPath()) && tmps.startsWith("/") && (tmpf = new File(tmps)).exists()) {
+                return tmpf;
             }
         }
         return null;
