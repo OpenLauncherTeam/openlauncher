@@ -26,6 +26,8 @@
     <string name="minibar_5">Atalho para as definições do OpenLauncher.</string>
     <string name="minibar_7">Mostrar controlos de volume.</string>
     <string name="minibar_8">Abrir menu de aplicações.</string>
+    <string name="minibar_9">Abrir barra de pesquisa</string>
+    <string name="minibar_10">Definições de redes móveis</string>
 
     <!-- About -->
     <string name="about_libs">Bibliotecas de código aberto</string>
@@ -240,6 +242,7 @@
     <string name="donate">Donativos</string>
 
     <string name="set_wallpaper">Definir papel de parede</string>
+    <string name="blur_wallpaper">Desfocar papel de parede</string>
     <string name="none">Nenhum</string>
     <string name="minibar_settings">Definições da mini-barra</string>
     <string name="lock_screen">Bloquear ecrã</string>
@@ -250,5 +253,5 @@
     <string name="open_app_drawer">Abrir menu de aplicações</string>
     <string name="launch_app">Abrir aplicação</string>
     <string name="app_drawer">Menu de aplicações</string>
-    <string name="minibar_10">Definições de redes móveis</string>
+
 </resources>
