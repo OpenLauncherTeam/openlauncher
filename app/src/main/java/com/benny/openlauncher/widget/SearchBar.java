@@ -271,7 +271,7 @@ public class SearchBar extends FrameLayout {
                 String s = constraint.toString();
                 if (s.isEmpty())
                     return true;
-                else if (item._label.toLowerCase().contains(s.toLowerCase()))
+                else if (!item._label.toLowerCase().contains(s.toLowerCase()))
                     return false;
                 else
                     return true;
