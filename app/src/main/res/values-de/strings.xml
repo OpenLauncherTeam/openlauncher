@@ -288,6 +288,7 @@
     <string name="open_app_drawer">App Drawer öffnen</string>
     <string name="launch_app">App starten</string>
     <string name="app_drawer">App Drawer</string>
-
+    <string name="blur_wallpaper">Blur Wallpaper</string>
+    <string name="minibar_9">In der Such-Leiste öffnen.</string>
+    <string name="minibar_10">Mobilfunkeinstellungen.</string>
 </resources>
-
