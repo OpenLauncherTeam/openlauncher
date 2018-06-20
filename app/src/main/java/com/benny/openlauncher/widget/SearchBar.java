@@ -231,7 +231,7 @@ public class SearchBar extends FrameLayout {
                 for (int i = 0; i < apps.size(); i++) {
                     final App app = apps.get(i);
                     final int finalI = i;
-                    items.add(new IconLabelItem(getContext(), app.getIcon(), app.getLabel(), 36)
+                    items.add(new IconLabelItem(getContext(), app.getIcon(), app.getLabel(), app._universalLabel, 36)
                             .withIconGravity(Setup.appSettings().getSearchGridSize() > 1 && Setup.appSettings().getSearchLabelLines() == 0 ? Gravity.TOP : Gravity.START)
                             .withOnClickListener(new OnClickListener() {
                                 @Override
@@ -276,6 +276,10 @@ public class SearchBar extends FrameLayout {
 
                 String s = constraint.toString().toLowerCase();
                 if (item._label.toLowerCase().contains(s)) {
+                    return true;
+                }
+
+                if (item._searchInfo != null && item._searchInfo.toLowerCase().contains(s)) {
                     return true;
                 }
 
