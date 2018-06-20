@@ -90,7 +90,7 @@ public class App {
         return _universalLabel;
     }
 
-    public void setUniversalLabel(@Nullable String _universalLabel) {
-        this._universalLabel = _universalLabel;
+    public void setUniversalLabel(@Nullable String universalLabel) {
+        this._universalLabel = universalLabel;
     }
 }
