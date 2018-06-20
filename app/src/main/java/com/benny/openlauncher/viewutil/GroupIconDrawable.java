@@ -1,91 +1,101 @@
 package com.benny.openlauncher.viewutil;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
-import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.IntegerRes;
+import android.util.Log;
 
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.util.AppSettings;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Tool;
 
 public class GroupIconDrawable extends Drawable {
+    private Drawable[] _icons;
+    private Paint _paintInnerCircle;
+    private Paint _paintOuterCircle;
+    private Paint _paintIcon;
+    private boolean _needAnimate;
+    private boolean _needAnimateScale;
+    private float _scaleFactor = 1;
+    private float _iconSize;
+    private float _padding;
+    private int _outline;
+    private int _iconSizeDiv2;
 
-    private int outlinepad;
-    Bitmap[] icons;
-    public float iconSize;
-    Paint paint;
-    Paint paint2;
-    Paint paint4;
-    private int iconSizeDiv2;
-    private float padding;
-
-    private float scaleFactor = 1;
-
-    private boolean needAnimate, needAnimateScale;
-
-    private float sx = 1;
-    private float sy = 1;
-
-    public GroupIconDrawable(Context context, Item item) {
-        final float size = Tool.dp2px(AppSettings.get().getIconSize(), context);
-        final Bitmap[] icons = new Bitmap[4];
+    public GroupIconDrawable(Context context, Item item, int iconSize) {
+        final float size = Tool.dp2px(iconSize, context);
+        final Drawable[] icons = new Drawable[4];
         for (int i = 0; i < 4; i++) {
-            if (i < item.items.size() && item.items.get(i) != null) {
-                icons[i] = Tool.drawableToBitmap(AppManager.getInstance(context).findApp(item.items.get(i).intent).icon);
-            } else {
-                icons[i] = Tool.drawableToBitmap(new ColorDrawable(Color.TRANSPARENT));
-            }
+            icons[i] = null;
         }
         init(icons, size);
+        for (int i = 0; i < 4 && i < item.getItems().size(); i++) {
+            Item temp = item.getItems().get(i);
+            App app = null;
+            if (temp != null) {
+                app = Setup.appLoader().findItemApp(temp);
+            }
+            if (app == null) {
+                Setup.logger().log(this, Log.DEBUG, null, "Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, temp == null ? "Item is NULL" : temp.getIntent());
+                icons[i] = new ColorDrawable(Color.TRANSPARENT);
+            } else {
+                _icons[i] = app.getIcon();
+            }
+        }
     }
 
-    private void init(Bitmap[] icons, float size) {
-        this.icons = icons;
-        this.iconSize = size;
-        iconSizeDiv2 = Math.round(iconSize / 2f);
-        padding = iconSize / 25f;
+    @Override
+    public int getIntrinsicHeight() {
+        return (int) _iconSize;
+    }
 
-        this.paint = new Paint();
-        paint.setColor(Color.WHITE);
-        paint.setAlpha(150);
-        paint.setAntiAlias(true);
+    @Override
+    public int getIntrinsicWidth() {
+        return (int) _iconSize;
+    }
 
-        this.paint4 = new Paint();
-        paint4.setColor(Color.WHITE);
-        paint4.setAntiAlias(true);
-        paint4.setFlags(Paint.ANTI_ALIAS_FLAG);
-        paint4.setStyle(Paint.Style.STROKE);
-        outlinepad = Tool.dp2px(2, Home.launcher);
-        paint4.setStrokeWidth(outlinepad);
+    private void init(Drawable[] icons, float size) {
+        _icons = icons;
+        _iconSize = size;
+        _iconSizeDiv2 = Math.round(_iconSize / 2f);
+        _padding = _iconSize / 25f;
 
-        this.paint2 = new Paint();
-        paint2.setAntiAlias(true);
-        paint2.setFilterBitmap(true);
+        _paintInnerCircle = new Paint();
+        _paintInnerCircle.setColor(Color.WHITE);
+        _paintInnerCircle.setAlpha(150);
+        _paintInnerCircle.setAntiAlias(true);
+
+        _paintOuterCircle = new Paint();
+        _paintOuterCircle.setColor(Color.WHITE);
+        _paintOuterCircle.setAntiAlias(true);
+        _paintOuterCircle.setFlags(Paint.ANTI_ALIAS_FLAG);
+        _paintOuterCircle.setStyle(Paint.Style.STROKE);
+        _outline = Tool.dp2px(2, HomeActivity.Companion.getLauncher());
+        _paintOuterCircle.setStrokeWidth(_outline);
+
+        _paintIcon = new Paint();
+        _paintIcon.setAntiAlias(true);
+        _paintIcon.setFilterBitmap(true);
     }
 
     public void popUp() {
-        sy = 1;
-        sx = 1;
-        needAnimate = true;
-        needAnimateScale = true;
+        _needAnimate = true;
+        _needAnimateScale = true;
         invalidateSelf();
     }
 
     public void popBack() {
-        needAnimate = false;
-        needAnimateScale = false;
+        _needAnimate = false;
+        _needAnimateScale = false;
         invalidateSelf();
     }
 
@@ -93,44 +103,51 @@ public class GroupIconDrawable extends Drawable {
     public void draw(Canvas canvas) {
         canvas.save();
 
-        if (needAnimateScale) {
-            scaleFactor = Tool.clampFloat(scaleFactor - 0.09f, 0.5f, 1f);
+        if (_needAnimateScale) {
+            _scaleFactor = Tool.clampFloat(_scaleFactor - 0.09f, 0.5f, 1f);
         } else {
-            scaleFactor = Tool.clampFloat(scaleFactor + 0.09f, 0.5f, 1f);
+            _scaleFactor = Tool.clampFloat(_scaleFactor + 0.09f, 0.5f, 1f);
         }
 
-        canvas.scale(scaleFactor, scaleFactor, iconSize / 2, iconSize / 2);
+        canvas.scale(_scaleFactor, _scaleFactor, _iconSize / 2, _iconSize / 2);
 
-        Path clipp = new Path();
-        clipp.addCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, Path.Direction.CW);
-        canvas.clipPath(clipp, Region.Op.REPLACE);
+        Path clip = new Path();
+        clip.addCircle(_iconSize / 2, _iconSize / 2, _iconSize / 2 - _outline, Path.Direction.CW);
+        canvas.clipPath(clip, Region.Op.REPLACE);
 
-        canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, paint);
+        canvas.drawCircle(_iconSize / 2, _iconSize / 2, _iconSize / 2 - _outline, _paintInnerCircle);
 
-        if (icons[0] != null) {
-            canvas.drawBitmap(icons[0], null, new RectF(padding, padding, iconSizeDiv2 - padding, iconSizeDiv2 - padding), paint2);
+        if (_icons[0] != null) {
+            drawIcon(canvas, _icons[0], _padding, _padding, _iconSizeDiv2 - _padding, _iconSizeDiv2 - _padding, _paintIcon);
         }
-        if (icons[1] != null) {
-            canvas.drawBitmap(icons[1], null, new RectF(iconSizeDiv2 + padding, padding, iconSize - padding, iconSizeDiv2 - padding), paint2);
+        if (_icons[1] != null) {
+            drawIcon(canvas, _icons[1], _iconSizeDiv2 + _padding, _padding, _iconSize - _padding, _iconSizeDiv2 - _padding, _paintIcon);
         }
-        if (icons[2] != null) {
-            canvas.drawBitmap(icons[2], null, new RectF(padding, iconSizeDiv2 + padding, iconSizeDiv2 - padding, iconSize - padding), paint2);
+        if (_icons[2] != null) {
+            drawIcon(canvas, _icons[2], _padding, _iconSizeDiv2 + _padding, _iconSizeDiv2 - _padding, _iconSize - _padding, _paintIcon);
         }
-        if (icons[3] != null) {
-            canvas.drawBitmap(icons[3], null, new RectF(iconSizeDiv2 + padding, iconSizeDiv2 + padding, iconSize - padding, iconSize - padding), paint2);
+        if (_icons[3] != null) {
+            drawIcon(canvas, _icons[3], _iconSizeDiv2 + _padding, _iconSizeDiv2 + _padding, _iconSize - _padding, _iconSize - _padding, _paintIcon);
         }
-        canvas.clipRect(0, 0, iconSize, iconSize, Region.Op.REPLACE);
+        canvas.clipRect(0, 0, _iconSize, _iconSize, Region.Op.REPLACE);
 
-        canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2 - outlinepad, paint4);
+        canvas.drawCircle(_iconSize / 2, _iconSize / 2, _iconSize / 2 - _outline, _paintOuterCircle);
         canvas.restore();
 
-        if (needAnimate) {
-            paint2.setAlpha(Tool.clampInt(paint2.getAlpha() - 25, 0, 255));
+        if (_needAnimate) {
+            _paintIcon.setAlpha(Tool.clampInt(_paintIcon.getAlpha() - 25, 0, 255));
             invalidateSelf();
-        } else if (paint2.getAlpha() != 255) {
-            paint2.setAlpha(Tool.clampInt(paint2.getAlpha() + 25, 0, 255));
+        } else if (_paintIcon.getAlpha() != 255) {
+            _paintIcon.setAlpha(Tool.clampInt(_paintIcon.getAlpha() + 25, 0, 255));
             invalidateSelf();
         }
+    }
+
+    private void drawIcon(Canvas canvas, Drawable icon, float l, float t, float r, float b, Paint paint) {
+        icon.setBounds((int) l, (int) t, (int) r, (int) b);
+        icon.setFilterBitmap(true);
+        icon.setAlpha(paint.getAlpha());
+        icon.draw(canvas);
     }
 
     @Override

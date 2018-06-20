@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Toasts -->
+    <string name="toast_free_ram">Dostępna pamięć: %1$d MB. Zwolniono %2$d MB.</string>
+    <string name="toast_free_all_ram">Dostępna pamięć: %1$d MB. Pamięć RAM jest już w najlepszym stanie.</string>
+    <string name="toast_device_admin_required">Włącz administratora urządzenia.</string>
+
+    <!-- Intro -->
+    <string name="intro_skip">Pomiń</string>
+    <string name="intro_finish">Zaczynajmy.</string>
+    <string name="intro1_text">W pełni otwarty launcher. Tu dla Ciebie.</string>
+    <string name="intro2_text">Przesuń od lewej krawędzi do środka ekranu domowego, żeby przywołać minipasek. Z jego pomocą możesz modyfikować ustawienia, zmienić tapetę i zrobić wiele innych rzeczy.</string>
+    <string name="intro3_title">Ustawienia</string>
+    <string name="intro3_text">Możesz konfigurować swój pulpit, menu aplikacji oraz dok. Wypróbuj!</string>
+    <string name="intro4_community">Launcher od społeczności dla społeczności</string>
+    <string name="intro4_features">Bogaty w funkcje</string>
+    <string name="intro4_customizable">Konfigurowalny</string>
+    <string name="custom">Niestandardowy</string>
+
+    <!-- Minibar -->
+    <string name="minibar">Minipasek</string>
+    <string name="minibar_0">Zmień układ minipaska.</string>
+    <string name="minibar_1">Ustaw lub rozmyj tapetę.</string>
+    <string name="minibar_2">Natychmiast zablokuj ekran. Wymaga uprawnień administratora urządzenia.</string>
+    <string name="minibar_4">Skrót do ustawień urządzenia.</string>
+    <string name="minibar_5">Skrót do ustawień launchera.</string>
+    <string name="minibar_7">Pokaż suwak głośności.</string>
+    <string name="minibar_8">Otwórz menu aplikacji.</string>
+
+    <!-- About -->
+    <string name="about_libs">Biblioteki open-source</string>
+    <string name="about_rate">Oceń</string>
+    <string name="about_credit">Współtwórcy</string>
+    <string name="about_credit_text_all_contributors">Wszyscy współtwórcy</string>
+
+    <!-- Settings -->
+
+    <string name="pref_title__desktop">Pulpit</string>
+    <string name="pref_title__dock">Dok</string>
+    <string name="pref_title__app_drawer">Menu aplikacji</string>
+    <string name="pref_title__gestures">Gesty</string>
+    <string name="pref_title__icons">Ikony</string>
+    <string name="pref_title__miscellaneous">Różne</string>
+    <string name="pref_title__about">O programie</string>
+
+    <string name="pref_title__size">Wielkość</string>
+    <string name="pref_title__style">Styl</string>
+    <string name="pref_title__appearance">Wygląd</string>
+    <string name="pref_title__color">Kolory</string>
+    <string name="pref_title__search_bar">Pasek wyszukiwania</string>
+    <string name="pref_title__interfaces">Interfejs</string>
+    <string name="pref_title__inputs">Sterowanie</string>
+    <string name="pref_title__feels">Odczucia</string>
+    <string name="pref_title__others">Inne</string>
+
+    <string name="pref_title__desktop_style">Styl</string>
+    <string name="pref_title__desktop_indicator_style">Styl wskaźnika</string>
+    <string name="pref_summary__desktop_style">Wybierz pomiędzy normalnym pulpitem lub pokazywaniem wszystkich zainstalowanych aplikacji.</string>
+    <string name="pref_summary__minibar">Zmień kolejność i widoczność elementów na minipasku.</string>
+    <string name="pref_title__search_bar_enable">Pasek wyszukiwania</string>
+    <string name="pref_summary__search_bar_enable">Pokaż pasek wyszukiwania na górze pulpitu.</string>
+    <string name="pref_title__desktop_fullscreen">Pełny ekran</string>
+    <string name="pref_title__desktop_hide_grid">Ukryj siatkę</string>
+    <string name="pref_summary__desktop_fullscreen">Włącz pełny ekran na pulpicie</string>
+    <string name="pref_summary__desktop_hide_grid">Ukryj siatkę pomocniczą.</string>
+    <string name="pref_title__desktop_show_position_indicator">Wskaźnik położenia</string>
+    <string name="pref_summary__desktop_show_position_indicator">Pokaż wskaźnik strony na dole pulpitu.</string>
+    <string name="pref_title__desktop_show_label">Pokaż etykiety</string>
+    <string name="pref_summary__desktop_show_label">Pokaż etykiety elementów pod ich ikonami.</string>
+    <string name="pref_title__desktop_rotate">Rotacja ekranu</string>
+    <string name="pref_summary__desktop_rotate">Pozwól na obrót ekranu.</string>
+
+    <string name="pref_title__search_bar_base_uri">URI wyszukiwania</string>
+    <string name="pref_summary__search_bar_base_uri">Ustaw URI używany do wyszukiwania w Internecie.</string>
+    <string name="pref_dialog__search_bar_base_uri">Wprowadź URI, który będzie używany do wyszukiwania w Internecie. Tag {query} może być użyty jako symbol zastępczy dla zapytania wyszukiwania. W przypadku, gdy nie użyto symbolu zastępczego, zapytanie zostanie dodane na końcu URI.</string>
+    <string name="pref_title__search_bar_force_browser">Wymuś wyszukiwanie w przeglądarce</string>
+    <string name="pref_summary__search_bar_force_browser">Zawsze używaj przeglądarki do wyszukiwania online.</string>
+    <string name="pref_title__desktop_background_color">Tło</string>
+    <string name="pref_title__desktop_folder_color">Tło folderu</string>
+    <string name="pref_title__desktop_folder_color_text">Tekst folderu</string>
+    <string name="pref_title__search_bar_show_hidden_apps">Pokaż ukryte aplikacje</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Uwzględnij ukryte aplikacje w wynikach wyszukiwania.</string>
+
+    <string name="pref_summary__dock_size">Ustaw rozmiar doku.</string>
+    <string name="pref_title__dock_show_label">Pokaż etykiety</string>
+    <string name="pref_summary__dock_show_label">Pokaż etykiety elementów pod ich ikonami.</string>
+    <string name="pref_title__dock_background_color">Tło</string>
+
+    <string name="pref_title__drawer_style">Styl</string>
+    <string name="pref_summary__drawer_style">Wybierz pomiędzy poziomym lub pionowym stylem menu aplikacji.</string>
+    <string name="pref_title__hide_apps">Ukryj aplikacje</string>
+    <string name="pref_summary__hide_apps">Ukryj wybrane aplikacje z launchera.</string>
+    <string name="pref_title__drawer_show_card_view">Karta</string>
+    <string name="pref_summary__drawer_show_card_view">Pokaż kartę nad tłem menu.</string>
+    <string name="pref_title__drawer_remember_position">Pamiętaj ostatnią stronę</string>
+    <string name="pref_summary__drawer_remember_position">Pamiętaj aktualną pozycję menu aplikacji.</string>
+    <string name="pref_title__drawer_show_position_indicator">Wskaźnik położenia</string>
+    <string name="pref_summary__drawer_show_position_indicator">Pokaż wskaźnik strony lub pasek przewijania, w zależności od wybranego stylu.</string>
+    <string name="pref_title__drawer_show_label">Pokaż etykiety</string>
+    <string name="pref_summary__drawer_show_label">Pokaż etykiety elementów pod ich ikonami.</string>
+    <string name="pref_title__drawer_background_color">Tło</string>
+    <string name="pref_title__drawer_card_color">Karta</string>
+    <string name="pref_title__drawer_label_color">Etykieta</string>
+    <string name="pref_title__drawer_fast_scroll_color">Pasek przewijania</string>
+    <string name="settings__pref_drawer_label_font_size">Rozmiar tekstu etykiety</string>
+    <string name="pref_title__overall_animation_speed_modifier">Szybkość animacji</string>
+    <string name="pref_summnary__overall_animation_speed_modifier">Zmień szybkość animacji</string>
+
+
+    <string name="pref_title__gesture_feedback">Informacja zwrotna gestów</string>
+    <string name="pref_summary__gesture_feedback">Zawibruj po długim naciśnięciu elementu na pulpicie.</string>
+    <string name="pref_title__gesture_quick_swipe">Szybkie otwarcie menu aplikacji</string>
+    <string name="pref_summary__gesture_quick_swipe">Przesuń do góry po doku, żeby otworzyć menu aplikacji.</string>
+    <string name="pref_title__gesture_double_tap">Podwójne dotknięcie</string>
+    <string name="pref_title__gesture_swipe_up">Przesunięcie do góry</string>
+    <string name="pref_title__gesture_swipe_down">Przesunięcie w dół</string>
+    <string name="pref_title__gesture_pinch">Uszczypnięcie</string>
+    <string name="pref_title__gesture_unpinch">Gest powiększenia</string>
+
+    <string name="pref_summary__icon_size">Rozmiar wszystkich ikon aplikacji.</string>
+    <string name="pref_title__icon_pack">Zestaw ikon</string>
+    <string name="pref_summary__icon_pack">Wybierz zainstalowany zestaw ikon.</string>
+
+    <string name="pref_summary__language">Zmień język aplikacji. Zrestartuj launcher, żeby zobaczyć efekt</string>
+    <string name="pref_title__language">Język</string>
+    <string name="pref_title__backup">Kopia zapasowa</string>
+    <string name="pref_summary__backup">Utwórz kopię zapasową i przywróć ustawienia.</string>
+    <string name="pref_title__clear_database">Wyczyść bazę danych</string>
+    <string name="pref_summary__clear_database">Usuń dane doku i pulpitu, żeby naprawić błędy.</string>
+    <string name="pref_title__restart">Restart</string>
+    <string name="pref_summary__restart">Zrestartuj launcher w przypadku jego niewłaściwego działania.</string>
+    <string name="pref_summary__theme">Ustaw motyw aplikacji.</string>
+    <string name="pref_title__theme">Motyw</string>
+    <string name="pref_title__primary_color">Główny kolor</string>
+    <string name="pref_summary__primary_color">Ustaw główny kolor aplikacji.</string>
+
+    <string name="vertical_scroll_drawer">Pionowy</string>
+    <string name="horizontal_paged_drawer">Poziomy</string>
+
+    <string name="desktop_mode_normal">Normalny</string>
+    <string name="desktop_mode_show_all_apps">Pokaż wszystkie aplikacje</string>
+
+    <string name="desktop_indicator_mode_normal">Zwykły</string>
+    <string name="desktop_indicator_mode_arrow">Strzałka</string>
+    <string name="dots">Kropki</string>
+
+    <!-- Item Labels -->
+    <string name="label_default">Domyślne</string>
+
+    <!-- Dialogs -->
+    <string name="request_dummy_text">Witaj świecie!</string>
+    <string name="request_please_wait">Szukanie zainstalowanych aplikacji. Proszę czekać.</string>
+    <string name="request_toast">Nie wybrano żadnych aplikacji. Pokazać wszystkie aplikacje w menu?</string>
+    <string name="on">Wł.</string>
+    <string name="desktop_action">Akcja pulpitu</string>
+    <string name="select_app">Wybierz aplikację</string>
+    <string name="off">Wył.</string>
+    <string name="ok">OK</string>
+    <string name="version">Wersja</string>
+    <string name="wallpaper">Tapeta</string>
+    <string name="wallpaper_pick">Wybierz tapetę</string>
+    <string name="wallpaper_unable_to_blur">Nie można rozmyć</string>
+    <string name="dialog__icon_pack_title">Wybierz zestaw ikon</string>
+    <string name="dialog__icon_pack_info_toast">Nie można wczytać ikony bez uprawnienia READ_EXTERNAL_STORAGE.</string>
+    <string name="dialog__backup_app_settings__backup">Kopia zapasowa</string>
+    <string name="dialog__backup_app_settings__restore">Przywróć</string>
+    <string name="dialog__backup_app_settings__success">Gotowe.</string>
+    <string name="dialog__backup_app_settings__error">Coś poszło nie tak.</string>
+    <string name="columns">Kolumny</string>
+    <string name="rows">Rzędy</string>
+    <string name="memory">Pamięć</string>
+    <string name="storage">Pamięć</string>
+    <string name="volume_level_ringtone">Dzwonek</string>
+    <string name="volume_level_notification">Powiadomienia</string>
+    <string name="volume_level_system">System</string>
+    <string name="volume_level_media">Media</string>
+    <string name="theme_light">Jasny</string>
+    <string name="theme_dark">Ciemny</string>
+    <string name="debug">Debugowanie</string>
+    <string name="pref_title__date_bar">Pasek daty</string>
+    <string name="pref_title__date_bar_text_color">Kolor tekstu</string>
+    <string name="pref_title__date_bar_date_format">Format daty</string>
+    <string name="pref_title__date_bar_date_format_custom_1">Niestandardowy format: 1 linia</string>
+    <string name="pref_title__date_bar_date_format_custom_2">Niestandardowy format: 2 linia</string>
+
+    <!-- Titles -->
+    <string name="settings">Ustawienia</string>
+
+    <!-- Drag Option View -->
+    <string name="edit">Edytuj</string>
+    <string name="info">Informacja</string>
+    <string name="uninstall">Odinstaluj</string>
+    <string name="remove">Usuń</string>
+
+    <!-- Desktop Option View -->
+    <string name="home">Dom</string>
+    <string name="action">Czynność</string>
+    <string name="lock">Zablokuj</string>
+    <string name="widget">Widżet</string>
+
+    <!-- Toasts -->
+    <string name="toast_not_enough_space">Brak miejsca.</string>
+    <string name="toast_app_uninstalled">Aplikacja odinstalowana.</string>
+
+    <!-- Item Labels -->
+    <string name="folder">Bez nazwy</string>
+
+    <!-- Dialogs -->
+    <string name="cancel">Anuluj</string>
+    <string name="search_hint">Szukaj…</string>
+	<string name="search_online">Szukaj online&#8230;</string>
+    <string name="bad_format">Nieprawidłowy format</string>
+    <string name="clear_user_data">Wyczyść dane użytkownika</string>
+    <string name="clear_user_data_are_you_sure">Czy jesteś pewien? Wszystkie twoje skróty zostaną usunięte.</string>
+    <string name="help">Pomoc</string>
+    <string name="licenses">Licencje</string>
+    <string name="contributors">Współtwórcy</string>
+    <string name="changelog">Dziennik zmian</string>
+
+    <string name="more">Więcej</string>
+    <string name="open_source_licenses">Licencje open-source</string>
+    <string name="rate_the_app">Oceń tę aplikację</string>
+    <string name="translate">Przetłumacz</string>
+    <string name="help_this_app">Pomoc i więcej informacji dotyczących tej aplikacji</string>
+    <string name="bug_reports">Zgłoś błędy</string>
+    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Więcej informacji na temat przekazywania darowizny lub wspierania tego projektu w inny sposób</string>
+    <string name="android_contribution_guide">Przewodnik współtworzenia Android</string>
+    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Więcej informacji na temat współtworzenia projektów open-source, a zwłaszcza aplikacji na Androida</string>
+    <string name="join_community">Dołącz do społeczności</string>
+    <string name="bug_reports_suggest_improvements">Prześlij informację zwrotną, zgłoś błędy lub zaproponuj ulepszenia</string>
+    <string name="help_translating_this_app">Przetłumacz tę aplikację na inne języki</string>
+    <string name="source_code">Kod źródłowy</string>
+    <string name="project_license">Licencja projektu</string>
+    <string name="project_contribution_info">Informacja o współtworzeniu projektu</string>
+    <string name="more_info_on_how_to_contribute_to_this_project">Więcej informacji o tym, jak wnieść swój wkład do tego projektu</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">Współtwórz kod tego projektu. Każdy jest mile widziany, także nowicjusze.</string>
+    <string name="project_team">Grupa projektowa</string>
+    <string name="contributors_public_info">Pokaż informacje o deweloperach. Deweloperzy mogą udostępnić informacje, które zostaną tutaj wyświetlone (opt-in)</string>
+    <string name="contribute">Przyłącz się</string>
+    <string name="donate">Przekaż darowiznę</string>
+
+    <string name="set_wallpaper">Ustaw tapetę</string>
+    <string name="none">Nic</string>
+    <string name="minibar_settings">Ustawienia minipaska</string>
+    <string name="lock_screen">Zablokuj ekran</string>
+    <string name="clear_ram">Wyczyść pamięć RAM</string>
+    <string name="device_settings">Ustawienia urządzenia</string>
+    <string name="launcher_settings">Ustawienia launchera</string>
+    <string name="volume_dialog">Okno dialogowe głośności</string>
+    <string name="open_app_drawer">Otwórz menu aplikacji</string>
+    <string name="launch_app">Uruchom aplikację</string>
+    <string name="app_drawer">Menu aplikacji</string>
+    <string name="minibar_10">Ustawienia sieci mobilnych</string>
+
+</resources>

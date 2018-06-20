@@ -1,6 +1,7 @@
 package com.benny.openlauncher.widget;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,75 +10,43 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.Home;
-import com.benny.openlauncher.core.manager.Setup;
-import com.benny.openlauncher.core.util.DragDropHandler;
+import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.core.util.DragAction;
+import com.benny.openlauncher.model.App;
+import com.benny.openlauncher.util.Definitions;
+import com.benny.openlauncher.util.DragAction;
+import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.core.viewutil.DesktopCallBack;
+import com.benny.openlauncher.viewutil.DesktopCallback;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
+import com.benny.openlauncher.viewutil.ItemGestureListener;
 
-public class AppItemView extends View implements Drawable.Callback, com.benny.openlauncher.core.interfaces.AppItemView {
-    private Drawable icon;
-    private String label;
-    private Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Rect textContainer = new Rect();
-    private Typeface typeface;
-    private float iconSize;
-    private boolean showLabel = false;
-    private boolean vibrateWhenLongPress;
-    private float labelHeight;
-    private int targetedWidth;
-    private int targetedHeightPadding;
-    private float heightPadding;
+public class AppItemView extends View implements Drawable.Callback {
 
-    public View getView() {
-        return this;
-    }
+    private static final int MIN_ICON_TEXT_MARGIN = 8;
+    private static final char ELLIPSIS = '…';
 
-    public Drawable getIcon() {
-        return icon;
-    }
-
-    public void setIcon(Drawable icon) {
-        this.icon = icon;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public float getIconSize() {
-        return iconSize;
-    }
-
-    public void setIconSize(float iconSize) {
-        this.iconSize = iconSize;
-    }
-
-    public boolean getShowLabel() {
-        return showLabel;
-    }
-
-    public void setTargetedWidth(int width) {
-        targetedWidth = width;
-    }
-
-    public void setTargetedHeightPadding(int padding) {
-        targetedHeightPadding = padding;
-    }
+    private Drawable _icon = null;
+    private String _label;
+    private Paint _textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Rect _textContainer = new Rect(), testTextContainer = new Rect();
+    private Typeface _typeface;
+    private float _iconSize;
+    private boolean _showLabel = true;
+    private boolean _vibrateWhenLongPress;
+    private float _labelHeight;
+    private int _targetedWidth;
+    private int _fontSizeSp;
+    private int _targetedHeightPadding;
+    private float _heightPadding;
+    private boolean _fastAdapterItem;
 
     public AppItemView(Context context) {
         this(context, null);
@@ -86,29 +55,107 @@ public class AppItemView extends View implements Drawable.Callback, com.benny.op
     public AppItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        if (typeface == null) {
-            typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
+        if (_typeface == null) {
+            _typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
         }
 
         setWillNotDraw(false);
         setDrawingCacheEnabled(true);
         setWillNotCacheDrawing(false);
 
-        labelHeight = Tool.dp2px(14, getContext());
+        _labelHeight = Tool.dp2px(14, getContext());
 
-        textPaint.setTextSize(Tool.sp2px(getContext(), 14));
-        textPaint.setColor(Color.DKGRAY);
-        textPaint.setTypeface(typeface);
+        _textPaint.setTextSize(Tool.sp2px(getContext(), 13));
+        _textPaint.setColor(Color.DKGRAY);
+        _textPaint.setTypeface(_typeface);
+    }
+
+    public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item, int iconSize, float fontSizeSp) {
+        AppItemView.Builder b = new AppItemView.Builder(context, iconSize)
+                .withOnTouchGetPosition(groupItem, Setup.itemGestureCallback())
+                .setTextColor(Setup.appSettings().getFolderLabelColor())
+                .setFontSize(context, fontSizeSp);
+        if (groupItem.getType() == Item.Type.SHORTCUT) {
+            b.setShortcutItem(groupItem);
+        } else {
+            App app = Setup.appLoader().findItemApp(groupItem);
+            if (app != null) {
+                b.setAppItem(groupItem, app);
+            }
+        }
+        return b.getView();
+    }
+
+    public static View createDrawerAppItemView(Context context, final HomeActivity homeActivity, App app, int iconSize, AppItemView.LongPressCallBack longPressCallBack) {
+        return new AppItemView.Builder(context, iconSize)
+                .setAppItem(app)
+                .withOnTouchGetPosition(null, null)
+                .withOnLongClick(app, DragAction.Action.APP_DRAWER, longPressCallBack)
+                .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
+                .setTextColor(Setup.appSettings().getDrawerLabelColor())
+                .setFontSize(context, Setup.appSettings().getDrawerLabelFontSize())
+                .getView();
+    }
+
+    @Override
+    public Bitmap getDrawingCache() {
+        return Tool.drawableToBitmap(_icon);
+    }
+
+    public View getView() {
+        return this;
+    }
+
+    public Drawable getCurrentIcon() {
+        return _icon;
+    }
+
+    public void setCurrentIcon(Drawable icon) {
+        _icon = icon;
+    }
+
+    public String getLabel() {
+        return _label;
+    }
+
+    public void setLabel(String label) {
+        _label = label;
+    }
+
+    public float getIconSize() {
+        return _iconSize;
+    }
+
+    public void setIconSize(float iconSize) {
+        _iconSize = iconSize;
+    }
+
+    public boolean getShowLabel() {
+        return _showLabel;
+    }
+
+    public void setTargetedWidth(int width) {
+        _targetedWidth = width;
+    }
+
+    public void setTargetedHeightPadding(int padding) {
+        _targetedHeightPadding = padding;
+    }
+
+    public void reset() {
+        _label = "";
+        _icon = null;
+        invalidate();
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        float mWidth = iconSize;
-        float mHeight = iconSize + (showLabel ? 0 : labelHeight);
-        if (targetedWidth != 0) {
-            mWidth = targetedWidth;
+        float mWidth = _iconSize;
+        float mHeight = _iconSize + (_showLabel ? 0 : _labelHeight);
+        if (_targetedWidth != 0) {
+            mWidth = _targetedWidth;
         }
-        setMeasuredDimension((int) Math.ceil(mWidth), (int) Math.ceil((int) mHeight) + Tool.dp2px(2, getContext()) + targetedHeightPadding * 2);
+        setMeasuredDimension((int) Math.ceil(mWidth), (int) Math.ceil((int) mHeight) + Tool.dp2px(2, getContext()) + _targetedHeightPadding * 2);
     }
 
     @Override
@@ -120,114 +167,145 @@ public class AppItemView extends View implements Drawable.Callback, com.benny.op
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        heightPadding = (getHeight() - iconSize - (showLabel ? 0 : labelHeight)) / 2f;
-        if (label != null && !showLabel) {
-            textPaint.getTextBounds(label, 0, label.length(), textContainer);
-        }
+        _heightPadding = (getHeight() - _iconSize - (_showLabel ? _labelHeight : 0)) / 2f;
 
-        // use ellipsis if the label is too long
-        if (label != null && !showLabel && textContainer.width() > 0) {
-            float characterSize = textContainer.width() / label.length();
-            int charToTruncate = (int) Math.ceil(((label.length() * characterSize) - getWidth()) / characterSize);
+        if (_label != null && _showLabel) {
+            _textPaint.getTextBounds(_label, 0, _label.length(), _textContainer);
+            int maxTextWidth = getWidth() - MIN_ICON_TEXT_MARGIN * 2;
 
-            // set start position manually if text container is too large
-            float x = Math.max(8, (getWidth() - textContainer.width()) / 2f);
+            // use ellipsis if the label is too long
+            if (_textContainer.width() > maxTextWidth) {
+                String testLabel = _label + ELLIPSIS;
+                _textPaint.getTextBounds(testLabel, 0, testLabel.length(), testTextContainer);
 
-            if (textContainer.width() > getWidth() && label.length() - 3 - charToTruncate > 0) {
-                canvas.drawText(label.substring(0, label.length() - 3 - charToTruncate) + "...", x, getHeight() - heightPadding, textPaint);
+                //Premeditate to be faster
+                float characterSize = testTextContainer.width() / testLabel.length();
+                int charsToTruncate = (int) ((testTextContainer.width() - maxTextWidth) / characterSize);
+
+                canvas.drawText(_label.substring(0, _label.length() - charsToTruncate) + ELLIPSIS,
+                        MIN_ICON_TEXT_MARGIN, getHeight() - _heightPadding, _textPaint);
             } else {
-                canvas.drawText(label, x, getHeight() - heightPadding, textPaint);
+                canvas.drawText(_label, (getWidth() - _textContainer.width()) / 2f, getHeight() - _heightPadding, _textPaint);
             }
         }
 
-        // center the icon
-        if (icon != null) {
+        // center the _icon
+        if (_icon != null) {
             canvas.save();
-            canvas.translate((getWidth() - iconSize) / 2, heightPadding);
-            icon.setBounds(0, 0, (int) iconSize, (int) iconSize);
-            icon.draw(canvas);
+            canvas.translate((getWidth() - _iconSize) / 2, _heightPadding);
+            _icon.setBounds(0, 0, (int) _iconSize, (int) _iconSize);
+            _icon.draw(canvas);
             canvas.restore();
         }
     }
 
-    public static class Builder {
-        AppItemView view;
+    public float getDrawIconTop() {
+        return _heightPadding;
+    }
 
-        public Builder(Context context) {
-            view = new AppItemView(context);
-            float iconSize = Tool.dp2px(AppSettings.get().getIconSize(), view.getContext());
-            view.setIconSize(iconSize);
+    public float getDrawIconLeft() {
+        return (getWidth() - _iconSize) / 2;
+    }
+
+    public interface LongPressCallBack {
+        boolean readyForDrag(View view);
+
+        void afterDrag(View view);
+    }
+
+    public static class Builder {
+        AppItemView _view;
+
+        public Builder(Context context, int iconSize) {
+            _view = new AppItemView(context);
+            _view.setIconSize(Tool.dp2px(iconSize, _view.getContext()));
         }
 
-        public Builder(AppItemView view) {
-            this.view = view;
-            float iconSize = Tool.dp2px(AppSettings.get().getIconSize(), view.getContext());
-            view.setIconSize(iconSize);
+        public Builder(AppItemView view, int iconSize) {
+            _view = view;
+            view.setIconSize(Tool.dp2px(iconSize, view.getContext()));
+        }
+
+        public static OnLongClickListener getLongClickDragAppListener(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
+            return new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (Setup.appSettings().isDesktopLock()) {
+                        return false;
+                    }
+                    if (eventAction != null && !eventAction.readyForDrag(v)) {
+                        return false;
+                    }
+                    v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                    DragHandler.startDrag(v, item, action, eventAction);
+                    return true;
+                }
+            };
         }
 
         public AppItemView getView() {
-            return view;
+            return _view;
         }
 
-        public Builder setAppItem(final AppManager.App app) {
-            view.setLabel(app.label);
-            view.setIcon(app.icon);
-            view.setOnClickListener(new OnClickListener() {
+        public Builder setAppItem(final App app) {
+            _view.setLabel(app.getLabel());
+            _view.setCurrentIcon(app.getIcon());
+            _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                    Tool.createScaleInScaleOutAnim(_view, new Runnable() {
                         @Override
                         public void run() {
-                            Tool.startApp(view.getContext(), app);
+                            Tool.startApp(_view.getContext(), app, _view);
                         }
-                    });
+                    }, 0.85f);
                 }
             });
             return this;
         }
 
-        public Builder setAppItem(final Item item, final AppManager.App app) {
-            view.setLabel(item.getLabel());
-            view.setIcon(app.icon);
-            view.setOnClickListener(new OnClickListener() {
+        public Builder setAppItem(final Item item, final App app) {
+            _view.setLabel(item.getLabel());
+            _view.setCurrentIcon(app.getIcon());
+            _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                    Tool.createScaleInScaleOutAnim(_view, new Runnable() {
                         @Override
                         public void run() {
-                            Tool.startApp(view.getContext(), item.intent);
+                            Tool.startApp(_view.getContext(), app, _view);
                         }
-                    });
+                    }, 0.85f);
                 }
             });
             return this;
         }
 
         public Builder setShortcutItem(final Item item) {
-            view.setLabel(item.getLabel());
-            view.setIcon(item.icon);
-            view.setOnClickListener(new OnClickListener() {
+            _view.setLabel(item.getLabel());
+            _view.setCurrentIcon(item.getIcon());
+            _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(view, new Runnable() {
+                    Tool.createScaleInScaleOutAnim(_view, new Runnable() {
                         @Override
                         public void run() {
-                            view.getContext().startActivity(item.intent);
+                            _view.getContext().startActivity(item.getIntent());
                         }
-                    });
+                    }, 0.85f);
                 }
             });
             return this;
         }
 
-        public Builder setGroupItem(Context context, final DesktopCallBack callback, final Item item) {
-            view.setLabel(item.getLabel());
-            view.setIcon(new GroupIconDrawable(context, item));
-            view.setOnClickListener(new View.OnClickListener() {
+        public Builder setGroupItem(Context context, final DesktopCallback callback, final Item item, int iconSize) {
+            _view.setLabel(item.getLabel());
+            _view.setCurrentIcon(new GroupIconDrawable(context, item, iconSize));
+            _view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Home.launcher != null && ((Home)Home.launcher).groupPopup.showWindowV(item, v, callback)) {
-                        ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
+                    if (HomeActivity.Companion.getLauncher() != null && (HomeActivity.Companion.getLauncher()).getGroupPopup().showWindowV(item, v, callback)) {
+                        ((GroupIconDrawable) ((AppItemView) v).getCurrentIcon()).popUp();
                     }
                 }
             });
@@ -235,15 +313,15 @@ public class AppItemView extends View implements Drawable.Callback, com.benny.op
         }
 
         public Builder setActionItem(Item item) {
-            view.setLabel(item.getLabel());
-            view.setIcon(Home.launcher.getResources().getDrawable(R.drawable.ic_app_drawer_24dp));
-            switch (item.actionValue) {
-                case 8:
-                    view.setOnClickListener(new OnClickListener() {
+            _view.setLabel(item.getLabel());
+            _view.setCurrentIcon(ContextCompat.getDrawable(Setup.appContext(), R.drawable.ic_apps_white_48dp));
+            switch (item.getActionValue()) {
+                case Definitions.ACTION_LAUNCHER:
+                    _view.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                            Home.launcher.openAppDrawer(view);
+                            HomeActivity.Companion.getLauncher().openAppDrawer(view);
                         }
                     });
                     break;
@@ -251,48 +329,58 @@ public class AppItemView extends View implements Drawable.Callback, com.benny.op
             return this;
         }
 
-        public Builder withOnLongClick(final AppManager.App app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
+        public Builder withOnLongClick(final App app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
             withOnLongClick(Item.newAppItem(app), action, eventAction);
             return this;
         }
 
         public Builder withOnLongClick(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
-            view.setOnLongClickListener(new OnLongClickListener() {
+            _view.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (AppSettings.get().isDesktopLock()) {
+                    if (Setup.appSettings().isDesktopLock()) {
                         return false;
                     }
                     if (eventAction != null && !eventAction.readyForDrag(v)) {
                         return false;
                     }
-                    if (view.vibrateWhenLongPress) {
+                    if (_view._vibrateWhenLongPress) {
                         v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                     }
-                    DragDropHandler.startDrag(v, item, action, eventAction);
+                    DragHandler.startDrag(_view, item, action, eventAction);
                     return true;
                 }
             });
             return this;
         }
 
-        public Builder withOnTouchGetPosition() {
-            view.setOnTouchListener(Tool.getItemOnTouchListener());
+        public Builder withOnTouchGetPosition(Item item, ItemGestureListener.ItemGestureCallback itemGestureCallback) {
+            _view.setOnTouchListener(Tool.getItemOnTouchListener(item, itemGestureCallback));
             return this;
         }
 
         public Builder setTextColor(@ColorInt int color) {
-            view.textPaint.setColor(color);
+            _view._textPaint.setColor(color);
+            return this;
+        }
+
+        public Builder setFontSize(Context context, float fontSizeSp) {
+            _view._textPaint.setTextSize(Tool.sp2px(context, fontSizeSp));
             return this;
         }
 
         public Builder setLabelVisibility(boolean visible) {
-            view.showLabel = !visible;
+            _view._showLabel = visible;
             return this;
         }
 
         public Builder vibrateWhenLongPress() {
-            view.vibrateWhenLongPress = true;
+            _view._vibrateWhenLongPress = true;
+            return this;
+        }
+
+        public Builder setFastAdapterItem() {
+            _view._fastAdapterItem = true;
             return this;
         }
     }

@@ -30,7 +30,6 @@
     <string name="minibar_0">تغيير تخطيط الشريط المصغر</string>
     <string name="minibar_1">تعيين صورة الخلفية وإضافة تأثير الضبابية</string>
     <string name="minibar_2">إغلاق الشاشة فورا، صلاحية مدير الجهاز مطلوبة</string>
-    <string name="minibar_3">تنظيف الرام عن طريق الإغلاق الإجباري للتطبيقات التي تعمل</string>
     <string name="minibar_4">اختصار لإعدادات الجهاز</string>
     <string name="minibar_5">اختصار لإعدادات أوبن لانشر</string>
     <string name="minibar_7">عرض صندوق التحكم بالصوت</string>
@@ -88,13 +87,13 @@
     <string name="pref_title__drawer_card_color">عرض البطاقة</string>
     <string name="pref_title__drawer_label_color">التصنيف</string>
 
-    <string name="pref_title__dock_swipe_up">اسحب الدرج بسرعة</string>
-    <string name="pref_summary__dock_swipe_up">اسحب شريط التطبيقات لأعلى لكي تفتح درج التطبيقات</string>
-    <string name="pref_title__desktop_double_tap">اللمس المزدوج</string>
-    <string name="pref_title__desktop_swipe_up">اسحب لأعلى</string>
-    <string name="pref_title__desktop_swipe_down">اسحب لأسفل</string>
-    <string name="pref_title__desktop_pinch">سحب بإصبعين للداخل</string>
-    <string name="pref_title__desktop_unpinch">اسحب بإصبعين للخارج</string>
+    <string name="pref_title__gesture_quick_swipe">اسحب الدرج بسرعة</string>
+    <string name="pref_summary__gesture_quick_swipe">اسحب شريط التطبيقات لأعلى لكي تفتح درج التطبيقات</string>
+    <string name="pref_title__gesture_double_tap">اللمس المزدوج</string>
+    <string name="pref_title__gesture_swipe_up">اسحب لأعلى</string>
+    <string name="pref_title__gesture_swipe_down">اسحب لأسفل</string>
+    <string name="pref_title__gesture_pinch">سحب بإصبعين للداخل</string>
+    <string name="pref_title__gesture_unpinch">اسحب بإصبعين للخارج</string>
 
     <string name="pref_title__icon_pack">حزمة أيقونات</string>
     <string name="pref_summary__icon_pack">اختر حزمة أيقونات مثبتة</string>
@@ -107,10 +106,10 @@
     <string name="pref_summary__restart">إعادة تشغيل اللانشر في حالة إظهار أخطاء</string>
 
     <!-- Preference Keys -->
-    <string name="pref_key__outer_cat_interfaces">الواجهات</string>
-    <string name="pref_key__outer_cat_inputs">المدخلات</string>
-    <string name="pref_key__outer_cat_feels">الشعور</string>
-    <string name="pref_key__outer_cat_others">أخرى</string>
+    <string name="pref_title__interfaces">الواجهات</string>
+    <string name="pref_title__inputs">المدخلات</string>
+    <string name="pref_title__feels">الشعور</string>
+    <string name="pref_title__others">أخرى</string>
     <string name="vertical_scroll_drawer">أفقي (متعدد الصفحات)</string>
     <string name="horizontal_paged_drawer">رأسي</string>
 
@@ -138,4 +137,49 @@
     <string name="dialog__backup_app_settings__error">هناك خطأ ما.</string>
     <string name="columns">الأعمدة</string>
     <string name="rows">صفوف</string>
+
+
+    <!-- Titles -->
+    <string name="settings">الإعدادات</string>
+
+    <!-- Drag Option View -->
+
+    <string name="edit">تعديل</string>
+    <string name="info">معلومات</string>
+    <string name="uninstall">إلغاء التثبيت</string>
+    <string name="remove">إزالة</string>
+
+    <!-- Desktop Option View -->
+    <string name="home">الرئيسية</string>
+    <string name="action">عمل</string>
+    <string name="lock">قفل</string>
+    <string name="widget">أداة</string>
+
+    <!-- Toasts -->
+
+    <string name="toast_not_enough_space">المساحة غير كافية</string>
+    <string name="toast_app_uninstalled">تم إلغاء تثبيت التطبيق</string>
+
+    <!-- Intro -->
+
+    <!-- Minibar -->
+
+    <!-- About -->
+
+    <!-- Settings -->
+
+    <!-- Preference Keys -->
+
+
+    <!-- Internal Keys -->
+
+
+    <!-- Item Labels -->
+
+    <string name="folder">غير مسمى</string>
+
+    <!-- Dialogs -->
+
+    <string name="cancel">إلغاء الأمر</string>
+    <string name="search_online">البحث عبر الإنترنت</string>
 </resources>

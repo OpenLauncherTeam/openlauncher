@@ -1,108 +1,71 @@
 package com.benny.openlauncher.util;
 
-import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
-import android.os.AsyncTask;
-import android.support.annotation.Nullable;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.Home;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.activity.MinibarEditActivity;
 import com.benny.openlauncher.activity.SettingsActivity;
 import com.benny.openlauncher.viewutil.DialogHelper;
 
-import java.util.List;
-
-import static com.benny.openlauncher.activity.Home.resources;
-
 public class LauncherAction {
 
-    public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
-            new ActionDisplayItem(Action.EditMinBar, resources.getString(R.string.minibar_0), R.drawable.ic_mode_edit_black_24dp),
-            new ActionDisplayItem(Action.SetWallpaper, resources.getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp),
-            new ActionDisplayItem(Action.LockScreen, resources.getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp),
-            new ActionDisplayItem(Action.ClearRam, resources.getString(R.string.minibar_3), R.drawable.ic_donut_large_black_24dp),
-            new ActionDisplayItem(Action.DeviceSettings, resources.getString(R.string.minibar_4), R.drawable.ic_settings_applications_black_24dp),
-            new ActionDisplayItem(Action.LauncherSettings, resources.getString(R.string.minibar_5), R.drawable.ic_settings_launcher_black_24dp),
-            new ActionDisplayItem(Action.VolumeDialog, resources.getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp),
-            new ActionDisplayItem(Action.OpenAppDrawer, resources.getString(R.string.minibar_8), R.drawable.ic_apps_dark_24dp)
-    };
-    private static boolean clearingRam = false;
-
-    public static void RunAction(@Nullable ActionItem actionItem, final Context context) {
-        if (actionItem != null)
-            switch (actionItem.action) {
-                case LaunchApp:
-                    Tool.startApp(context, actionItem.extraData);
-                    break;
-
-                default:
-                    RunAction(actionItem.action, context);
-            }
+    public enum Action {
+        EditMinibar, SetWallpaper, LockScreen, LauncherSettings, VolumeDialog, DeviceSettings, AppDrawer, SearchBar, MobileNetworkSettings, LaunchApp
     }
 
+    public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
+            new ActionDisplayItem(Action.EditMinibar, "Edit Minibar", HomeActivity.Companion.get_resources().getString(R.string.minibar_0), R.drawable.ic_mode_edit_black_24dp, 98),
+            new ActionDisplayItem(Action.SetWallpaper, "Set Wallpaper", HomeActivity.Companion.get_resources().getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp, 36),
+            new ActionDisplayItem(Action.LockScreen, "Lock Screen", HomeActivity.Companion.get_resources().getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp, 24),
+            new ActionDisplayItem(Action.LauncherSettings, "Launcher Settings", HomeActivity.Companion.get_resources().getString(R.string.minibar_5), R.drawable.ic_settings_launcher_black_24dp, 50),
+            new ActionDisplayItem(Action.VolumeDialog, "Volume Dialog", HomeActivity.Companion.get_resources().getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp, 71),
+            new ActionDisplayItem(Action.DeviceSettings, "Device Settings", HomeActivity.Companion.get_resources().getString(R.string.minibar_4), R.drawable.ic_android_minimal, 25),
+            new ActionDisplayItem(Action.AppDrawer, "App Drawer", HomeActivity.Companion.get_resources().getString(R.string.minibar_8), R.drawable.ic_apps_dark_24dp, 73),
+            new ActionDisplayItem(Action.SearchBar, "Search Bar", HomeActivity.Companion.get_resources().getString(R.string.minibar_9), R.drawable.ic_search_light_24dp, 89),
+            new ActionDisplayItem(Action.MobileNetworkSettings, "Mobile Network", HomeActivity.Companion.get_resources().getString(R.string.minibar_10), R.drawable.ic_network_24dp, 46),
+    };
+
     public static void RunAction(Action action, final Context context) {
-        switch (action) {
-            case EditMinBar:
+        LauncherAction.RunAction(new ActionItem(action, null), context);
+    }
+
+    public static void RunAction(ActionItem action, final Context context) {
+        switch (action._action) {
+            case EditMinibar:
                 context.startActivity(new Intent(context, MinibarEditActivity.class));
                 break;
+            case MobileNetworkSettings: {
+                context.startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
+                break;
+            }
             case SetWallpaper:
-                DialogHelper.setWallpaperDialog(context);
+                context.startActivity(Intent.createChooser(new Intent(Intent.ACTION_SET_WALLPAPER), context.getString(R.string.wallpaper_pick)));
                 break;
             case LockScreen:
                 try {
                     ((DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE)).lockNow();
                 } catch (Exception e) {
-                    Tool.toast(context, context.getString(R.string.toast_device_admin_required));
-                    Intent intent = new Intent();
-                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.DeviceAdminSettings"));
-                    context.startActivity(intent);
-                }
-                break;
-            case ClearRam:
-                if (clearingRam) {
-                    break;
-                }
-                ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-                final ActivityManager activityManager = (ActivityManager) context.getSystemService(context.ACTIVITY_SERVICE);
-                activityManager.getMemoryInfo(mi);
-                final long pre = mi.availMem / 1048576L;
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected void onPreExecute() {
-                        clearingRam = true;
-                    }
-
-                    @Override
-                    protected Void doInBackground(Void[] p1) {
-                        List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfo = activityManager.getRunningAppProcesses();
-                        for (int i = 0; i < runningAppProcessInfo.size(); i++) {
-                            activityManager.killBackgroundProcesses(runningAppProcessInfo.get(i).pkgList[0]);
+                    DialogHelper.alertDialog(context, "Device Admin Required", "OpenLauncher requires the Device Administration permission to lock your screen. Please enable it in the settings to use this feature.", "Enable", new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            Tool.toast(context, context.getString(R.string.toast_device_admin_required));
+                            Intent intent = new Intent();
+                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.DeviceAdminSettings"));
+                            context.startActivity(intent);
                         }
-                        System.runFinalization();
-                        Runtime.getRuntime().gc();
-                        System.gc();
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Void result) {
-                        clearingRam = false;
-                        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-                        activityManager.getMemoryInfo(mi);
-                        long current = mi.availMem / 1048576L;
-                        if (current - pre > 10)
-                            Tool.toast(context, context.getResources().getString(R.string.toast_free_ram, current, current - pre));
-                        else
-                            Tool.toast(context, context.getResources().getString(R.string.toast_free_all_ram, current));
-                        super.onPostExecute(result);
-                    }
-                }.execute();
+                    });
+                }
                 break;
             case DeviceSettings:
                 context.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
@@ -110,9 +73,13 @@ public class LauncherAction {
             case LauncherSettings:
                 context.startActivity(new Intent(context, SettingsActivity.class));
                 break;
-            case OpenAppDrawer:
-                Home.launcher.openAppDrawer();
+            case AppDrawer:
+                HomeActivity.Companion.getLauncher().openAppDrawer();
                 break;
+            case SearchBar: {
+                HomeActivity.Companion.getLauncher().getSearchBar().getSearchButton().performClick();
+                break;
+            }
             case VolumeDialog:
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                     try {
@@ -130,12 +97,16 @@ public class LauncherAction {
                     audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamVolume(AudioManager.STREAM_RING), AudioManager.FLAG_SHOW_UI);
                 }
                 break;
+            case LaunchApp:
+                PackageManager pm = AppManager.getInstance(context).getPackageManager();
+                action._extraData = new Intent(pm.getLaunchIntentForPackage(AppSettings.get().getString(context.getString(R.string.pref_key__gesture_double_tap) + "__", "")));
+                break;
         }
     }
 
     public static ActionDisplayItem getActionItemFromString(String string) {
         for (ActionDisplayItem item : actionDisplayItems) {
-            if (item.label.toString().equals(string)) {
+            if (Integer.toString(item._id).equals(string)) {
                 return item;
             }
         }
@@ -146,42 +117,29 @@ public class LauncherAction {
         return new ActionItem(Action.values()[position], null);
     }
 
-    public static int getActionItemIndex(ActionItem item) {
-        if (item == null) return -1;
-        for (int i = 0; i < Action.values().length; i++) {
-            if (item.action == Action.values()[i])
-                return i;
-        }
-        return -1;
-    }
-
-    public enum Theme {
-        Dark, Light
-    }
-
-    public enum Action {
-        EditMinBar, SetWallpaper, LockScreen, ClearRam, DeviceSettings, LauncherSettings, VolumeDialog, OpenAppDrawer, LaunchApp
-    }
-
     public static class ActionItem {
-        public Action action;
-        public Intent extraData;
+        public Action _action;
+        public Intent _extraData;
 
         public ActionItem(Action action, Intent extraData) {
-            this.action = action;
-            this.extraData = extraData;
+            _action = action;
+            _extraData = extraData;
         }
     }
 
     public static class ActionDisplayItem {
-        public Action label;
-        public String description;
-        public int icon;
+        public Action _action;
+        public String _label;
+        public String _description;
+        public int _icon;
+        public int _id;
 
-        public ActionDisplayItem(Action label, String description, int icon) {
-            this.label = label;
-            this.description = description;
-            this.icon = icon;
+        public ActionDisplayItem(Action action, String label, String description, int icon, int id) {
+            _action = action;
+            _label = label;
+            _description = description;
+            _icon = icon;
+            _id = id;
         }
     }
 }
