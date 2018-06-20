@@ -77,8 +77,10 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     public IconLabelItem(Context context, Drawable icon, String label, @Nullable String searchInfo, int forceSize) {
-        this(context, icon, label, forceSize);
-        this._searchInfo = searchInfo;
+        _label = label;
+        _icon = icon;
+        _forceSize = forceSize;
+        _searchInfo = searchInfo;
     }
 
     public IconLabelItem withIconGravity(int iconGravity) {
