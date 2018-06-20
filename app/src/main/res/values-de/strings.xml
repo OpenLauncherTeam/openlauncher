@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Titles -->
+
+    <string name="minibar">Minibar</string>
+
+    <!-- Drag Option View -->
+
+    <!-- Desktop Option View -->
+
     <!-- Toasts -->
+
     <string name="toast_free_ram">Freier Speicher: %1$d mb frei gegeben %2$d mb</string>
     <string name="toast_free_all_ram">Freier Speicher: %1$d mb dein Ram ist in einem guten Zustand</string>
     <string name="toast_device_admin_required">Bitte \"Geräteadministrator\" aktivieren.</string>
 
     <!-- Intro -->
+
     <string name="intro_skip">Überspringen</string>
     <string name="intro_finish">Los geht\'s!</string>
     <string name="intro1_text">Danke, dass du dich für Open Launcher entschieden hast. Er ist komplett quelloffen und wird ständig         weiter entwickelt. Hier eine kurze Einführung …</string>
     <string name="intro2_text">Wische vom linken Bildschirmrand nach rechts, um die Minibar zu öffnen. Dort gelangst du zu den         Einstellungen, kannst das Wallpaper ändern und weitere Dinge machen …</string>
     <string name="intro3_title">Einstellungen</string>
     <string name="intro3_text">Hier kannst du deinen Desktop, den App Drawer, das Dock und … Probier\'s einfach aus!</string>
-    <string name="intro4_community">Der Launcher von der Community für die Community</string>
-    <string name="intro4_features">Voller Features</string>
-    <string name="intro4_customizable">Anpassbar</string>
-    <string name="custom">Benutzerdefiniert</string>
 
     <!-- Minibar -->
-    <string name="minibar">Minibar</string>
+
     <string name="minibar_0">Edit</string>
     <string name="minibar_1">Wallpaper aussuchen oder unscharf machen</string>
     <string name="minibar_2">Sperre sofort den Bildschirm, braucht die Berechtigung \"Geräteadministrator\".</string>
@@ -26,10 +33,9 @@
     <string name="minibar_5">OpenLauncher Einstellungsseite.</string>
     <string name="minibar_7">Öffne den Lautstärkedialog.</string>
     <string name="minibar_8">Öffne den App Drawer.</string>
-    <string name="minibar_9">In der Such-Leiste öffnen.</string>
-    <string name="minibar_10">Mobilfunkeinstellungen.</string>
 
     <!-- About -->
+
     <string name="about_libs">Open Source Bibliotheken</string>
     <string name="about_rate">Bewerte die App</string>
     <string name="about_credit">Beteiligte</string>
@@ -69,9 +75,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Zeige den Seitenindikator auf dem Desktop an.</string>
     <string name="pref_title__desktop_show_label">Beschriftung</string>
     <string name="pref_summary__desktop_show_label">Zeige Anwendungs- und Ordnernamen auf dem Desktop.</string>
-    <string name="pref_title__desktop_rotate">Drehen</string>
-    <string name="pref_summary__desktop_rotate">Bildschirm-Rotation erlauben</string>
-
     <string name="pref_title__search_bar_base_uri">Such-Adresse</string>
     <string name="pref_summary__search_bar_base_uri">Konfiguration der URI für die Web-Suche</string>
     <string name="pref_dialog__search_bar_base_uri">Gib die URI an die benutzt werden soll für die Websuche. Das Token {query} kann benutzt werden als Platzhalter für den eingegbenen Text</string>
@@ -79,9 +82,6 @@
     <string name="pref_summary__search_bar_force_browser">Immer den Browser für Onlinesuchen verwenden.</string>
     <string name="pref_title__desktop_background_color">Hintergrund</string>
     <string name="pref_title__desktop_folder_color">Ordner</string>
-    <string name="pref_title__desktop_folder_color_text">Ordner Text</string>
-    <string name="pref_title__search_bar_show_hidden_apps">Versteckte Apps anzeigen</string>
-    <string name="pref_summary__search_bar_show_hidden_apps">Versteckte Apps in Suchergebnissen anzeigen</string>
 
     <string name="pref_summary__dock_size">Bestimme die Größe des Docks.</string>
     <string name="pref_title__dock_show_label">Beschriftung</string>
@@ -104,10 +104,6 @@
     <string name="pref_title__drawer_card_color">Karten</string>
     <string name="pref_title__drawer_label_color">Beschriftung</string>
     <string name="pref_title__drawer_fast_scroll_color">Scroll-Leiste</string>
-    <string name="settings__pref_drawer_label_font_size">Bezeichnung Text-Größe</string>
-    <string name="pref_title__overall_animation_speed_modifier">Anmiations Geschwindigkeit</string>
-    <string name="pref_summnary__overall_animation_speed_modifier">Skalierung der insgesamten Animations Geschwindigkeit</string>
-
 
     <string name="pref_title__gesture_feedback">Gesten Feedback</string>
     <string name="pref_summary__gesture_feedback">Feedback bekommen wenn ein Element auf dem Desktop lang gedrückt wurde.</string>
@@ -144,12 +140,19 @@
 
     <string name="desktop_indicator_mode_normal">Normal</string>
     <string name="desktop_indicator_mode_arrow">Pfeil</string>
-    <string name="dots">Punkte</string>
+
+    <!-- Preference Keys -->
+
+
+    <!-- Internal Keys -->
+
 
     <!-- Item Labels -->
+
     <string name="label_default">Standard</string>
 
     <!-- Dialogs -->
+
     <string name="request_dummy_text">Hello world!</string>
     <string name="request_please_wait">Suche nach installierten Anwendungen. Bitte warten.</string>
     <string name="request_toast">Nichts ausgewählt. Alle Anwendungen im Drawer anzeigen?</string>
@@ -178,48 +181,77 @@
     <string name="volume_level_media">Medien</string>
     <string name="theme_light">Hell</string>
     <string name="theme_dark">Dunkel</string>
+    <string name="intro4_community">Der Launcher von der Community für die Community</string>
+    <string name="intro4_features">Voller Features</string>
+    <string name="intro4_customizable">Anpassbar</string>
+    <string name="pref_title__desktop_rotate">Drehen</string>
+    <string name="pref_summary__desktop_rotate">Bildschirm-Rotation erlauben</string>
+    <string name="pref_title__search_bar_show_hidden_apps">Versteckte Apps anzeigen</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Versteckte Apps in Suchergebnissen anzeigen</string>
     <string name="debug">Fehlerbehebung</string>
+    <string name="pref_title__desktop_folder_color_text">Ordner Text</string>
+    <string name="dots">Punkte</string>
+    <string name="settings__pref_drawer_label_font_size">Bezeichnung Text-Größe</string>
+    <string name="pref_title__overall_animation_speed_modifier">Anmiations Geschwindigkeit</string>
+
     <string name="pref_title__date_bar">Datums Anzeige</string>
     <string name="pref_title__date_bar_text_color">Text Farbe</string>
     <string name="pref_title__date_bar_date_format">Datums Format</string>
     <string name="pref_title__date_bar_date_format_custom_1">Benutzerdefinierter Format: Zeile 1</string>
     <string name="pref_title__date_bar_date_format_custom_2">Benutzerdefinierter Format: Zeile 2</string>
+    <string name="custom">Benutzerdefiniert</string>
+    <string name="pref_summnary__overall_animation_speed_modifier">Skalierung der insgesamten Animations Geschwindigkeit</string>
+
 
     <!-- Titles -->
+
     <string name="settings">Einstellungen</string>
 
     <!-- Drag Option View -->
+
     <string name="edit">Bearbeiten</string>
     <string name="info">Info</string>
     <string name="uninstall">Deinstallieren</string>
     <string name="remove">Entfernen</string>
 
     <!-- Desktop Option View -->
+
     <string name="home">Home</string>
     <string name="action">Aktion</string>
     <string name="lock">Sperren</string>
     <string name="widget">Widget</string>
 
     <!-- Toasts -->
+
     <string name="toast_not_enough_space">Nicht genügend Platz</string>
     <string name="toast_app_uninstalled">Die App wurde deinstalliert.</string>
 
+    <!-- Intro -->
+
+    <!-- Minibar -->
+
+    <!-- About -->
+
+    <!-- Settings -->
+
+
+    <!-- Preference Keys -->
+
+    <!-- Internal Keys -->
+
     <!-- Item Labels -->
+
     <string name="folder">Ordner</string>
 
     <!-- Dialogs -->
+
     <string name="cancel">Abbrechen</string>
     <string name="search_hint">Suchen...</string>
     <string name="search_online">ONLINE SUCHEN</string>
     <string name="bad_format">Format ungültig</string>
     <string name="clear_user_data">Benutzerdaten löschen</string>
     <string name="clear_user_data_are_you_sure">Bist du sicher? Deine Verknüpfungen werden gelöscht.</string>
-    <string name="help">Hilfe</string>
-    <string name="licenses">Lizenzen</string>
-    <string name="contributors">Beitragende</string>
-    <string name="changelog">Änderungen</string>
 
-    <string name="more">Mehr</string>
     <string name="open_source_licenses">Open Source Lizenzen</string>
     <string name="rate_the_app">App bewerten</string>
     <string name="translate">Übersetzen</string>
@@ -238,11 +270,14 @@
     <string name="contribute_code_to_this_project_anybody_welcome">Projekt mit Code unterstützen. Alle sind eingeladen das zu tun, auch Newcomer</string>
     <string name="project_team">Projekt Team</string>
     <string name="contributors_public_info">Zeige Informationen über Mitwirkende. Mitwirkende können Informationen bereitstellen die hier angezeigt werden (Opt-in), nach der Mitwirkung.</string>
+    <string name="help">Hilfe</string>
+    <string name="licenses">Lizenzen</string>
+    <string name="contributors">Beitragende</string>
+    <string name="changelog">Änderungen</string>
+    <string name="more">Mehr</string>
     <string name="contribute">Beitragen</string>
     <string name="donate">Spenden</string>
-
     <string name="set_wallpaper">Wallpaper setzen</string>
-    <string name="blur_wallpaper">Blur Wallpaper</string>
     <string name="none">Nichts</string>
     <string name="minibar_settings">Minibar Einstellungen</string>
     <string name="lock_screen">Lock Screen</string>
@@ -253,5 +288,7 @@
     <string name="open_app_drawer">App Drawer öffnen</string>
     <string name="launch_app">App starten</string>
     <string name="app_drawer">App Drawer</string>
-
+    <string name="blur_wallpaper">Blur Wallpaper</string>
+    <string name="minibar_9">In der Such-Leiste öffnen.</string>
+    <string name="minibar_10">Mobilfunkeinstellungen.</string>
 </resources>
