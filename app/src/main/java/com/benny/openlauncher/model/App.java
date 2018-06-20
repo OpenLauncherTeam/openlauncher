@@ -91,6 +91,6 @@ public class App {
     }
 
     public void setUniversalLabel(@Nullable String universalLabel) {
-        this._universalLabel = universalLabel;
+        _universalLabel = universalLabel;
     }
 }
