@@ -266,15 +266,20 @@ public class SearchBar extends FrameLayout {
         _adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<IconLabelItem>() {
             @Override
             public boolean filter(IconLabelItem item, CharSequence constraint) {
-                if (item._label.equals(getContext().getString(R.string.search_online)))
+                if (item._label.equals(getContext().getString(R.string.search_online))) {
                     return false;
-                String s = constraint.toString();
-                if (s.isEmpty())
+                }
+
+                if (constraint.length() == 0) {
                     return true;
-                else if (!item._label.toLowerCase().contains(s.toLowerCase()))
-                    return false;
-                else
+                }
+
+                String s = constraint.toString().toLowerCase();
+                if (item._label.toLowerCase().contains(s)) {
                     return true;
+                }
+
+                return false;
             }
         });
 
