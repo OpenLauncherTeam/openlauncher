@@ -16,10 +16,6 @@ public class App {
     public Drawable _icon;
     public String _label;
 
-    /**
-     * App label for root locale.
-     * @see Locale#ROOT
-     */
     @Nullable public String _universalLabel;
 
     public String _packageName;
@@ -33,7 +29,7 @@ public class App {
 
         try {
             updateUniversalLabel(pm, info);
-            Log.d("AppModel", "Universal label " + _universalLabel);
+            Log.d("AppModel", "Universal label " + getUniversalLabel());
         } catch (Exception e) {
             Log.e("AppModel", "Cannot resolve universal label for " + _label, e);
         }
@@ -48,7 +44,7 @@ public class App {
         Resources resources = pm.getResourcesForApplication(appInfo);
         resources.updateConfiguration(config, null);
 
-        _universalLabel = resources.getString(appInfo.labelRes);
+        setUniversalLabel(resources.getString(appInfo.labelRes));
     }
 
     @Override
@@ -83,5 +79,18 @@ public class App {
 
     public String getComponentName() {
         return "ComponentInfo{" + _packageName + "/" + _className + "}";
+    }
+
+    /**
+     * App label for root locale.
+     * @see Locale#ROOT
+     */
+    @Nullable
+    public String getUniversalLabel() {
+        return _universalLabel;
+    }
+
+    public void setUniversalLabel(@Nullable String _universalLabel) {
+        this._universalLabel = _universalLabel;
     }
 }
