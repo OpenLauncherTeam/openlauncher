@@ -246,7 +246,7 @@
     <!-- Dialogs -->
 
     <string name="cancel">Abbrechen</string>
-    <string name="search_hint">Suchen...</string>
+    <string name="search_hint">Suchen…</string>
     <string name="search_online">ONLINE SUCHEN</string>
     <string name="bad_format">Format ungültig</string>
     <string name="clear_user_data">Benutzerdaten löschen</string>

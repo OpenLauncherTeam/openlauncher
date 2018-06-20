@@ -80,7 +80,7 @@
     <string name="pref_summary__search_bar_base_uri">Estableix el motor de cerca utilitzat per les cerces en la web.</string>
     <string name="pref_dialog__search_bar_base_uri">Afegeix el motor de cerca (URI) que vol utilitzar en les cerques de la web. L\'etiqueta {query} es pot utilitzar com
     marcador de la posició per les cerces, en cas de que no s\'utilitzi un marcador de posició la consulta de cerca s\'annexarà al final del URI.</string>
-     <string name="pref_title__search_bar_force_browser">Cerca amb navegador</string>
+    <string name="pref_title__search_bar_force_browser">Cerca amb navegador</string>
     <string name="pref_summary__search_bar_force_browser">Sempre fer servir el navegador per a cerques en línia.</string>
     <string name="pref_title__desktop_background_color">Fons</string>
     <string name="pref_title__desktop_folder_color">Carpeta</string>
@@ -128,7 +128,7 @@
     <string name="pref_summary__icon_pack">Selecciona un tema d\'icones instal·lat.</string>
 
     <string name="pref_summary__language">Triar l\'idioma d\'aquesta app. Reinicia-la per activar els canvis.</string>
-    <string name="pref_title__language">Idioma</string> 
+    <string name="pref_title__language">Idioma</string>
     <string name="pref_title__backup">Còpia de seguretat</string>
     <string name="pref_summary__backup">Importació i còpia de seguretat dels teus ajustos.</string>
     <string name="pref_title__clear_database">Buida la base de dades</string>
@@ -139,7 +139,7 @@
     <string name="pref_title__theme">Tema</string>
     <string name="pref_title__primary_color">Color de base</string>
     <string name="pref_summary__primary_color">Tria el color de base de l\'app.</string>
-    
+
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paginat</string>
 
@@ -180,10 +180,6 @@
     <string name="volume_level_notification">Notificacions</string>
     <string name="volume_level_system">Sistema</string>
     <string name="volume_level_media">Multimèdia</string>
-
-
-
-
 
 
     <string name="theme_light">Clar</string>

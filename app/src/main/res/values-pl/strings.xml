@@ -208,7 +208,7 @@
     <!-- Dialogs -->
     <string name="cancel">Anuluj</string>
     <string name="search_hint">Szukaj…</string>
-	<string name="search_online">Szukaj online&#8230;</string>
+    <string name="search_online">Szukaj online&#8230;</string>
     <string name="bad_format">Nieprawidłowy format</string>
     <string name="clear_user_data">Wyczyść dane użytkownika</string>
     <string name="clear_user_data_are_you_sure">Czy jesteś pewien? Wszystkie twoje skróty zostaną usunięte.</string>
