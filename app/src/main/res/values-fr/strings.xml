@@ -68,7 +68,7 @@
     <string name="pref_title__desktop_show_label">Montrer les noms</string>
     <string name="pref_summary__desktop_show_label">Afficher les noms des applis et dossiers sous leurs icônes.</string>
     <string name="pref_title__desktop_rotate">Rotation</string>
-    <string name="pref_summary__desktop_rotate">Allouer la rotation de l\'écran</string>
+    <string name="pref_summary__desktop_rotate">Autoriser la rotation de l\'écran</string>
 
     <string name="pref_title__search_bar_base_uri">URI de recherche</string>
     <string name="pref_summary__search_bar_base_uri">Spécifier l\'URI utilisée pour les recherches sur internet.</string>
@@ -183,7 +183,6 @@
     <string name="pref_title__date_bar_date_format_custom_1">Format personnalisé: Ligne 1</string>
     <string name="pref_title__date_bar_date_format_custom_2">Format personnalisé: Ligne 2</string>
 
-
     <!-- Titles -->
     <string name="settings">Paramètres</string>
 
@@ -211,6 +210,5 @@
     <string name="search_hint">Chercher…</string>
     <string name="search_online">Rechercher sur internet…</string>
     <string name="bad_format">Mauvais Format</string>
-
 
 </resources>
