@@ -29,7 +29,6 @@
     <string name="minibar_0">ミニバーのレイアウトを変更。</string>
     <string name="minibar_1">壁紙の設定と、ぼかし。</string>
     <string name="minibar_2">画面をすぐにロック。 デバイス管理が必要です。</string>
-    <string name="minibar_3">強制的に他の実行中のサービスを閉じて RAM を解放。</string>
     <string name="minibar_4">デバイス設定のショートカット。</string>
     <string name="minibar_5">OpenLauncher 設定のショートカット。</string>
     <string name="minibar_7">ボリュームダイアログを開く。</string>
@@ -78,8 +77,8 @@
     <string name="pref_title__drawer_show_position_indicator">ドロワーのスクロールバー</string>
     <string name="pref_summary__drawer_show_position_indicator">ドロワーにページインジケーターを表示します。</string>
 
-    <string name="pref_title__dock_swipe_up">ドロワーの高速スワイプ</string>
-    <string name="pref_summary__dock_swipe_up">ドロワーのアプリアイコンを上にスワイプして、アプリドロワーを開きます。</string>
+    <string name="pref_title__gesture_quick_swipe">ドロワーの高速スワイプ</string>
+    <string name="pref_summary__gesture_quick_swipe">ドロワーのアプリアイコンを上にスワイプして、アプリドロワーを開きます。</string>
 
     <string name="pref_title__dock_background_color">ドック</string>
     <string name="pref_title__drawer_background_color">ドロワーの背景</string>
@@ -110,4 +109,38 @@
     <string name="wallpaper_pick">壁紙の選択</string>
     <string name="wallpaper_unable_to_blur">ぼかすことができません</string>
 
+
+    <!-- Titles -->
+    <string name="settings">設定</string>
+
+    <!-- Edit Mode -->
+
+    <string name="info">情報</string>
+    <string name="uninstall">アンインストール</string>
+    <string name="widget">ウィジェット</string>
+    <string name="remove">削除</string>
+
+    <!-- Toasts -->
+
+    <string name="toast_not_enough_space">容量が不足しています</string>
+    <string name="toast_app_uninstalled">このアプリはアンインストールされました。</string>
+
+    <!-- Intro -->
+
+    <!-- MiniBar -->
+
+    <!-- About -->
+
+    <!-- Dialogs -->
+
+    <!-- Settings -->
+
+    <!-- Other -->
+
+    <string name="cancel">キャンセル</string>
+    <string name="home">ホーム</string>
+    <string name="folder">名前なし</string>
+
+
 </resources>
+    

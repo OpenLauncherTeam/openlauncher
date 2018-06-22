@@ -1,410 +1,328 @@
+/*
+ * Copyright (c) 2017-2018 Gregor Santner
+ *
+ * Licensed under the MIT license. See LICENSE file in the project root for details.
+ */
 package com.benny.openlauncher.activity;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.text.TextUtils;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.preference.ColorPreferenceCompat;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.viewutil.DialogHelper;
-import com.benny.openlauncher.core.widget.AppDrawerController;
+import com.jaredrummler.android.colorpicker.ColorPickerDialog;
+import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
+
+import net.gsantner.opoc.preference.GsPreferenceFragmentCompat;
+import net.gsantner.opoc.util.ContextUtils;
+import net.gsantner.opoc.util.PermissionChecker;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-    @BindView(R.id.settings_appbar)
-    protected AppBarLayout appBarLayout;
-    @BindView(R.id.settings_toolbar)
-    protected Toolbar toolbar;
-    protected static Context context;
+import static com.benny.openlauncher.widget.AppDrawerController.DrawerMode.HORIZONTAL_PAGED;
+import static com.benny.openlauncher.widget.AppDrawerController.DrawerMode.VERTICAL;
 
-    private AppSettings appSettings;
-    private boolean shouldLauncherRestart = false;
+public class SettingsActivity extends ThemeActivity {
+    static class RESULT {
+        static final int NOCHANGE = -1;
+        static final int CHANGED = 1;
+        static final int RESTART_REQ = 2;
+    }
+
+    public static int activityRetVal = RESULT.NOCHANGE;
+
+    @BindView(R.id.toolbar)
+    protected Toolbar toolbar;
 
     public void onCreate(Bundle b) {
+        // Must be applied before setContentView
         super.onCreate(b);
+        ContextUtils contextUtils = new ContextUtils(this);
+        contextUtils.setAppLanguage(_appSettings.getLanguage());
+
+        // Load UI
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
-        context = this;
+
+        // Custom code
         toolbar.setTitle(R.string.settings);
         setSupportActionBar(toolbar);
-        appSettings = AppSettings.get();
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24px));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                SettingsActivity.this.onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        toolbar.setBackgroundColor(_appSettings.getPrimaryColor());
         showFragment(SettingsFragmentMaster.TAG, false);
     }
 
     protected void showFragment(String tag, boolean addToBackStack) {
-        PreferenceFragment fragment = (PreferenceFragment) getFragmentManager().findFragmentByTag(tag);
-        if (fragment == null) {
+        String toolbarTitle = getString(R.string.settings);
+        GsPreferenceFragmentCompat prefFrag = (GsPreferenceFragmentCompat) getSupportFragmentManager().findFragmentByTag(tag);
+        if (prefFrag == null) {
             switch (tag) {
-                case SettingsFragmentDesktop.TAG:
-                    fragment = new SettingsFragmentDesktop();
-                    toolbar.setTitle(R.string.pref_title__desktop);
-                    break;
-                case SettingsFragmentAppDrawer.TAG:
-                    fragment = new SettingsFragmentAppDrawer();
-                    toolbar.setTitle(R.string.pref_title__app_drawer);
-                    break;
-                case SettingsFragmentDock.TAG:
-                    fragment = new SettingsFragmentDock();
-                    toolbar.setTitle(R.string.pref_title__dock);
-                    break;
-                case SettingsFragmentGestures.TAG:
-                    fragment = new SettingsFragmentGestures();
-                    toolbar.setTitle(R.string.pref_title__gestures);
-                    break;
-                case SettingsFragmentIcons.TAG:
-                    fragment = new SettingsFragmentIcons();
-                    toolbar.setTitle(R.string.pref_title__icons);
-                    break;
-                case SettingsFragmentMiscellaneous.TAG:
-                    fragment = new SettingsFragmentMiscellaneous();
-                    toolbar.setTitle(R.string.pref_title__miscellaneous);
-                    break;
                 case SettingsFragmentMaster.TAG:
-                default:
-                    fragment = new SettingsFragmentMaster();
-                    toolbar.setTitle(R.string.settings);
+                default: {
+                    prefFrag = new SettingsFragmentMaster();
+                    toolbarTitle = prefFrag.getTitleOrDefault(toolbarTitle);
                     break;
+                }
             }
         }
-        FragmentTransaction t = getFragmentManager().beginTransaction();
+        toolbar.setTitle(toolbarTitle);
+        FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         if (addToBackStack) {
             t.addToBackStack(tag);
         }
-        t.replace(R.id.settings_fragment_container, fragment, tag).commit();
+        t.replace(R.id.settings__activity__fragment_placeholder, prefFrag, tag).commit();
     }
 
     @Override
-    protected void onResume() {
-        appSettings.registerPreferenceChangedListener(this);
-        super.onResume();
+    protected void onStop() {
+        setResult(activityRetVal);
+        super.onStop();
     }
 
     @Override
-    protected void onPause() {
-        appSettings.unregisterPreferenceChangedListener(this);
-        appSettings.setAppRestartRequired(shouldLauncherRestart);
-        super.onPause();
+    public void onBackPressed() {
+        GsPreferenceFragmentCompat prefFrag = (GsPreferenceFragmentCompat) getSupportFragmentManager().findFragmentByTag(SettingsFragmentMaster.TAG);
+        if (prefFrag != null && prefFrag.canGoBack()) {
+            prefFrag.goBack();
+            return;
+        }
+        super.onBackPressed();
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        shouldLauncherRestart = true;
-    }
+    public static abstract class OlSettingsFragment extends GsPreferenceFragmentCompat<AppSettings> {
+        protected AppSettings _as;
 
-
-    public static class SettingsFragmentMaster extends PreferenceFragment {
-        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentMaster";
-
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
-            getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences_master);
+        @Override
+        protected AppSettings getAppSettings(Context context) {
+            if (_as == null) {
+                _as = AppSettings.get();
+            }
+            return _as;
         }
 
         @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
-            if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
-                String key = preference.getKey();
-                if (settings.isKeyEqual(key, R.string.pref_key__cat_desktop)) {
-                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentDesktop.TAG, true);
-                    return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_app_drawer)) {
-                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentAppDrawer.TAG, true);
-                    return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_dock)) {
-                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentDock.TAG, true);
-                    return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_gestures)) {
-                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentGestures.TAG, true);
-                    return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_icons)) {
-                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentIcons.TAG, true);
-                    return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__cat_miscellaneous)) {
-                    ((SettingsActivity) getActivity()).showFragment(SettingsFragmentMiscellaneous.TAG, true);
-                    return true;
-                } else if (settings.isKeyEqual(key, R.string.pref_key__about)) {
-                    startActivity(new Intent(getActivity(), AboutActivity.class));
+        protected void onPreferenceChanged(SharedPreferences prefs, String key) {
+            activityRetVal = RESULT.CHANGED;
+        }
+
+        @Override
+        protected void onPreferenceScreenChanged(PreferenceFragmentCompat preferenceFragmentCompat, PreferenceScreen preferenceScreen) {
+            super.onPreferenceScreenChanged(preferenceFragmentCompat, preferenceScreen);
+            if (!TextUtils.isEmpty(preferenceScreen.getTitle())) {
+                SettingsActivity a = (SettingsActivity) getActivity();
+                if (a != null) {
+                    a.toolbar.setTitle(preferenceScreen.getTitle());
+                }
+            }
+        }
+    }
+
+    public static class SettingsFragmentMaster extends OlSettingsFragment {
+        public static final String TAG = "SettingsFragmentMaster";
+
+
+        private static final int[] requireRestartPreferenceIds = new int[]{
+                R.string.pref_key__desktop_columns, R.string.pref_key__desktop_rows, R.string.pref_key__desktop_style,
+                R.string.pref_key__desktop_fullscreen, R.string.pref_key__desktop_show_label, R.string.pref_key__search_bar_enable,
+                R.string.pref_key__search_bar_show_hidden_apps, R.string.pref_key__desktop_background_color,
+                R.string.pref_key__minibar_background_color, R.string.pref_key__dock_enable, R.string.pref_key__dock_size,
+                R.string.pref_key__dock_show_label, R.string.pref_key__dock_background_color, R.string.pref_key__drawer_columns,
+                R.string.pref_key__drawer_rows, R.string.pref_key__drawer_style, R.string.pref_key__drawer_show_card_view,
+                R.string.pref_key__drawer_show_position_indicator, R.string.pref_key__drawer_show_label,
+                R.string.pref_key__drawer_background_color, R.string.pref_key__drawer_card_color, R.string.pref_key__drawer_label_color,
+                R.string.pref_key__drawer_fast_scroll_color, R.string.pref_key__date_bar_date_format_custom_1,
+                R.string.pref_key__date_bar_date_format_custom_2, R.string.pref_key__date_bar_date_format_type,
+                R.string.pref_key__date_bar_date_text_color, R.string.pref_key__icon_size, R.string.pref_key__icon_pack,
+                R.string.pref_title__clear_database, R.string.pref_summary__backup, R.string.pref_summary__theme
+        };
+
+        @Override
+        public int getPreferenceResourceForInflation() {
+            return R.xml.preferences_master;
+        }
+
+        @Override
+        public String getFragmentTag() {
+            return TAG;
+        }
+
+        private boolean requiresRestart(int key) {
+            for (int k : requireRestartPreferenceIds) {
+                if (k == key) {
                     return true;
                 }
             }
-            return super.onPreferenceTreeClick(screen, preference);
+            return false;
         }
 
         @Override
-        @SuppressLint("DefaultLocale")
-        public void onResume() {
-            super.onResume();
-            ((SettingsActivity) getActivity()).toolbar.setTitle(R.string.settings);
+        public void doUpdatePreferences() {
+            Preference pref;
+            String tmp;
 
-            AppSettings settings = AppSettings.get();
-
-            String desktopSummary = String.format("%s: %d x %d", getString(R.string.pref_title__size), settings.getDesktopColumnCount(), (settings.getDesktopRowCount()));
-            findPreference(getString(R.string.pref_key__cat_desktop)).setSummary(desktopSummary);
-
-            String dockSummary = String.format("%s: %d", getString(R.string.pref_title__size), settings.getDockSize());
-            findPreference(getString(R.string.pref_key__cat_dock)).setSummary(dockSummary);
-
-            String drawerSummary = String.format("%s: ", getString(R.string.pref_title__style));
-            switch (settings.getDrawerStyle()) {
-                case AppDrawerController.DrawerMode.HORIZONTAL_PAGED:
-                    drawerSummary += getString(R.string.horizontal_paged_drawer);
-                    break;
-                case AppDrawerController.DrawerMode.VERTICAL:
-                    drawerSummary += getString(R.string.vertical_scroll_drawer);
-                    break;
+            //
+            // Preference in Master screen
+            //
+            if ((pref = findPreference(R.string.pref_key__cat_desktop)) != null) {
+                tmp = String.format(Locale.ENGLISH, "%s: %d x %d", getString(R.string.pref_title__size), _as.getDesktopColumnCount(), _as.getDesktopRowCount());
+                pref.setSummary(tmp);
             }
-            findPreference(getString(R.string.pref_key__cat_app_drawer)).setSummary(drawerSummary);
-
-            String iconsSummary = String.format("%s: %ddp", getString(R.string.pref_title__size), settings.getIconSize());
-            findPreference(getString(R.string.pref_key__cat_icons)).setSummary(iconsSummary);
-        }
-    }
-
-
-    public static class SettingsFragmentDesktop extends PreferenceFragment {
-        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentDesktop";
-
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
-            getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences_desktop);
-        }
-
-        @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
-            if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
-                String key = preference.getKey();
-
-                if (key.equals(getString(R.string.pref_key__desktop_style))) {
-                    ((SettingsActivity) getActivity()).shouldLauncherRestart = true;
-                    return true;
-                }
-
-                if (key.equals(getString(R.string.pref_key__minibar))) {
-                    LauncherAction.RunAction(LauncherAction.Action.EditMinBar, getActivity());
-                    return true;
-                }
+            if ((pref = findPreference(R.string.pref_key__cat_dock)) != null) {
+                tmp = String.format(Locale.ENGLISH, "%s: %d", getString(R.string.pref_title__size), _as.getDockSize());
+                pref.setSummary(tmp);
             }
-            return super.onPreferenceTreeClick(screen, preference);
-        }
-    }
-
-    public static class SettingsFragmentDock extends PreferenceFragment {
-        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentDock";
-
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
-            getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences_dock);
-        }
-
-        @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
-            if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
-                String key = preference.getKey();
-
-                if (key.equals(getString(R.string.pref_key__dock_enable))) {
-                    Home.launcher.updateDock(true);
-                    ((SettingsActivity) getActivity()).shouldLauncherRestart = false;
-                    return true;
-                }
-            }
-            return super.onPreferenceTreeClick(screen, preference);
-        }
-    }
-
-    public static class SettingsFragmentAppDrawer extends PreferenceFragment {
-        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentAppDrawer";
-
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
-            getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences_app_drawer);
-        }
-
-        @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
-            if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
-                String key = preference.getKey();
-
-                if (key.equals(getString(R.string.pref_key__hidden_apps))) {
-                    Intent intent = new Intent(getActivity(), HideAppsSelectionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    startActivity(intent);
-                    ((SettingsActivity) getActivity()).shouldLauncherRestart = true;
-                    return true;
-                }
-
-            }
-            return super.onPreferenceTreeClick(screen, preference);
-        }
-    }
-
-    public static class SettingsFragmentGestures extends PreferenceFragment {
-        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentGestures";
-
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
-            getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences_gestures);
-        }
-
-        @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
-            if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
-                String key = preference.getKey();
-
-                if (key.equals(getString(R.string.pref_key__desktop_double_tap))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper)Home.launcher.db).getGesture(0), 0, new DialogHelper.OnActionSelectedListener() {
-                        @Override
-                        public void onActionSelected(LauncherAction.ActionItem item) {
-                            // do nothing
-                        }
-                    });
-                    return true;
-                }
-
-                if (key.equals(getString(R.string.pref_key__desktop_swipe_up))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper)Home.launcher.db).getGesture(1), 1, new DialogHelper.OnActionSelectedListener() {
-                        @Override
-                        public void onActionSelected(LauncherAction.ActionItem item) {
-                            // do nothing
-                        }
-                    });
-                    return true;
-                }
-
-                if (key.equals(getString(R.string.pref_key__desktop_swipe_down))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper)Home.launcher.db).getGesture(2), 2, new DialogHelper.OnActionSelectedListener() {
-                        @Override
-                        public void onActionSelected(LauncherAction.ActionItem item) {
-                            // do nothing
-                        }
-                    });
-                    return true;
-                }
-
-                if (key.equals(getString(R.string.pref_key__desktop_pinch))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper)Home.launcher.db).getGesture(3), 3, new DialogHelper.OnActionSelectedListener() {
-                        @Override
-                        public void onActionSelected(LauncherAction.ActionItem item) {
-                            // do nothing
-                        }
-                    });
-                    return true;
-                }
-
-                if (key.equals(getString(R.string.pref_key__desktop_unpinch))) {
-                    DialogHelper.selectActionDialog(context, R.string.pref_title__desktop_double_tap, ((DatabaseHelper)Home.launcher.db).getGesture(4), 4, new DialogHelper.OnActionSelectedListener() {
-                        @Override
-                        public void onActionSelected(LauncherAction.ActionItem item) {
-                            // do nothing
-                        }
-                    });
-                    return true;
-                }
-            }
-            return super.onPreferenceTreeClick(screen, preference);
-        }
-    }
-
-    public static class SettingsFragmentIcons extends PreferenceFragment {
-        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentIcons";
-
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
-            getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences_icons);
-        }
-
-        @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
-            if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
-                String key = preference.getKey();
-
-                if (key.equals(getString(R.string.pref_key__icon_pack))) {
-                    AppManager.getInstance(getActivity()).startPickIconPackIntent(getActivity());
-                    ((SettingsActivity) getActivity()).shouldLauncherRestart = true;
-                    return true;
-                }
-            }
-            return super.onPreferenceTreeClick(screen, preference);
-        }
-    }
-
-    public static class SettingsFragmentMiscellaneous extends PreferenceFragment {
-        public static final String TAG = "com.benny.openlauncher.settings.SettingsFragmentMiscellaneous";
-
-        public void onCreate(Bundle savedInstances) {
-            super.onCreate(savedInstances);
-            getPreferenceManager().setSharedPreferencesName("app");
-            addPreferencesFromResource(R.xml.preferences_miscellaneous);
-        }
-
-        @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
-            if (isAdded() && preference.hasKey()) {
-                AppSettings settings = AppSettings.get();
-                String key = preference.getKey();
-                Activity activity = getActivity();
-
-                if (key.equals(getString(R.string.pref_key__backup))) {
-                    if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                        DialogHelper.backupDialog(activity);
-                    } else {
-                        ActivityCompat.requestPermissions(Home.launcher, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Home.REQUEST_PERMISSION_STORAGE);
+            if ((pref = findPreference(R.string.pref_key__cat_app_drawer)) != null) {
+                tmp = String.format("%s: ", getString(R.string.pref_title__style));
+                switch (_as.getDrawerStyle()) {
+                    case HORIZONTAL_PAGED: {
+                        tmp += getString(R.string.horizontal_paged_drawer);
+                        break;
+                    }
+                    case VERTICAL: {
+                        tmp += getString(R.string.vertical_scroll_drawer);
+                        break;
                     }
                 }
+                pref.setSummary(tmp);
+            }
+            if ((pref = findPreference(R.string.pref_key__cat_icons)) != null) {
+                tmp = String.format(Locale.ENGLISH, "%s: %ddp", getString(R.string.pref_title__size), _as.getIconSize());
+                pref.setSummary(tmp);
+            }
+        }
 
-                if (key.equals(getString(R.string.pref_key__clear_database))) {
-                    if (Home.launcher != null)
-                        Home.launcher.recreate();
-                    ((DatabaseHelper)Home.launcher.db).onUpgrade(((DatabaseHelper)Home.launcher.db).getWritableDatabase(), 1, 1);
+        @Override
+        protected void onPreferenceChanged(SharedPreferences prefs, final String key) {
+            super.onPreferenceChanged(prefs, key);
+            int keyRes = _cu.getResId(ContextUtils.ResType.STRING, key);
+            HomeActivity launcher = HomeActivity.Companion.getLauncher();
+            switch (keyRes) {
+                case R.string.pref_key__desktop_indicator_style: {
+                    launcher.getDesktopIndicator().setMode(_as.getDesktopIndicatorMode());
+
+                    break;
+                }
+                case R.string.pref_title__desktop_show_position_indicator: {
+                    launcher.updateDesktopIndicatorVisibility();
+                    break;
+                }
+                case R.string.pref_key__dock_enable: {
+                    launcher.updateDock(true);
+                    break;
+                }
+                case R.string.pref_key__gesture_double_tap:
+                case R.string.pref_key__gesture_swipe_up:
+                case R.string.pref_key__gesture_swipe_down:
+                case R.string.pref_key__gesture_pinch:
+                case R.string.pref_key__gesture_unpinch: {
+                    if (prefs.getString(key, "0").equals("9")) {
+                        DialogHelper.selectAppDialog(getContext(), new DialogHelper.OnAppSelectedListener() {
+                            @Override
+                            public void onAppSelected(App app) {
+                                AppSettings.get().setString(key, app._packageName);
+                            }
+                        });
+                    }
+                    break;
+                }
+            }
+
+
+            if (requiresRestart(keyRes)) {
+                activityRetVal = RESULT.RESTART_REQ;
+                _as.setAppRestartRequired(true);
+            }
+        }
+
+        @Override
+        @SuppressWarnings({"ConstantConditions", "ConstantIfStatement", "StatementWithEmptyBody"})
+        public Boolean onPreferenceClicked(Preference preference) {
+            int keyRes = _cu.getResId(ContextUtils.ResType.STRING, preference.getKey());
+            HomeActivity launcher = HomeActivity.Companion.getLauncher();
+
+            switch (keyRes) {
+                case R.string.pref_key__minibar: {
+                    LauncherAction.RunAction(LauncherAction.Action.EditMinibar, getActivity());
+                    return true;
+                }
+                case R.string.pref_key__hidden_apps: {
+                    Intent intent = new Intent(getActivity(), HideAppsActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent);
+                    return true;
+                }
+                case R.string.pref_key__icon_pack: {
+                    AppManager.getInstance(getActivity()).startPickIconPackIntent(getActivity());
+                    return true;
+                }
+                case R.string.pref_key__clear_database: {
+                    DialogHelper.alertDialog(getContext(), getString(R.string.clear_user_data), getString(R.string.clear_user_data_are_you_sure), new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            if (launcher != null) {
+                                launcher.recreate();
+                            }
+                            DatabaseHelper db = (DatabaseHelper) HomeActivity._db;
+                            db.onUpgrade(db.getWritableDatabase(), 1, 1);
+                            getActivity().finish();
+                        }
+                    });
+                    return true;
+                }
+                case R.string.pref_key__backup: {
+                    if (new PermissionChecker(getActivity()).doIfExtStoragePermissionGranted()) {
+                        DialogHelper.backupDialog(getActivity());
+                    }
+                    return true;
+                }
+                case R.string.pref_key__restart: {
+                    if (launcher != null) {
+                        launcher.recreate();
+                    }
                     getActivity().finish();
                     return true;
                 }
-
-                if (key.equals(getString(R.string.pref_key__restart))) {
-                    if (Home.launcher != null)
-                        Home.launcher.recreate();
-                    ((SettingsActivity) activity).shouldLauncherRestart = true;
-                    getActivity().finish();
+                case R.string.pref_key__about: {
+                    startActivity(new Intent(getActivity(), MoreInfoActivity.class));
                     return true;
                 }
             }
-            return super.onPreferenceTreeClick(screen, preference);
+
+            if (preference instanceof ColorPreferenceCompat) {
+                ColorPickerDialog dialog = ((ColorPreferenceCompat) preference).getDialog();
+                dialog.setColorPickerDialogListener(new ColorPickerDialogListener() {
+                    public void onColorSelected(int dialogId, int color) {
+                        ((ColorPreferenceCompat) preference).saveValue(color);
+                    }
+
+                    public void onDialogDismissed(int dialogId) {
+                    }
+                });
+                dialog.show(getActivity().getFragmentManager(), "color-picker-dialog");
+            }
+
+            return false;
         }
     }
 }

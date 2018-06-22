@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <external-path path="/Android/data/launcher.backup/" name="files_root" />
-    <external-path path="." name="external_storage_root" />
-    <root-path path="/storage/." name="ext_sd" />
+    <external-path
+        name="files_root"
+        path="/Android/data/launcher.backup/" />
+    <external-path
+        name="external_storage_root"
+        path="." />
+    <root-path
+        name="ext_sd"
+        path="/storage/." />
 </paths>

@@ -12,78 +12,78 @@ import com.benny.openlauncher.util.Tool;
 
 public class CircleDrawable extends Drawable {
 
-    private int iconSize;
-    private int iconSizeReal;
-    private int iconPadding;
-    private Bitmap icon;
-    private Bitmap iconToFade;
-    private Paint paint;
-    private Paint paint2;
+    private int _iconSize;
+    private int _iconSizeReal;
+    private int _iconPadding;
+    private Bitmap _icon;
+    private Bitmap _iconToFade;
+    private Paint _paint;
+    private Paint _paint2;
 
-    private float scaleStep = 0.08f;
-    private float currentScale = 1f;
-    private boolean hidingOldIcon;
+    private float _scaleStep = 0.08f;
+    private float _currentScale = 1f;
+    private boolean _hidingOldIcon;
 
     public CircleDrawable(Context context, Drawable icon, int color) {
-        this.icon = Tool.drawableToBitmap(icon);
+        _icon = Tool.drawableToBitmap(icon);
 
-        iconPadding = Tool.dp2px(6, context);
+        _iconPadding = Tool.dp2px(6, context);
 
-        iconSizeReal = icon.getIntrinsicHeight();
-        iconSize = icon.getIntrinsicHeight() + iconPadding * 2;
+        _iconSizeReal = icon.getIntrinsicHeight();
+        _iconSize = icon.getIntrinsicHeight() + _iconPadding * 2;
 
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(color);
-        paint.setAlpha(100);
-        paint.setStyle(Paint.Style.FILL);
+        _paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        _paint.setColor(color);
+        _paint.setAlpha(100);
+        _paint.setStyle(Paint.Style.FILL);
 
-        paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint2.setFilterBitmap(true);
+        _paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
+        _paint2.setFilterBitmap(true);
     }
 
     public void setIcon(Drawable icon) {
-        iconToFade = this.icon;
-        hidingOldIcon = true;
+        _iconToFade = _icon;
+        _hidingOldIcon = true;
 
-        this.icon = Tool.drawableToBitmap(icon);
+        _icon = Tool.drawableToBitmap(icon);
         invalidateSelf();
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawCircle(iconSize / 2, iconSize / 2, iconSize / 2, paint);
+        canvas.drawCircle(_iconSize / 2, _iconSize / 2, _iconSize / 2, _paint);
 
-        if (iconToFade != null) {
+        if (_iconToFade != null) {
             canvas.save();
-            if (hidingOldIcon)
-                currentScale -= scaleStep;
+            if (_hidingOldIcon)
+                _currentScale -= _scaleStep;
             else
-                currentScale += scaleStep;
-            currentScale = Tool.clampFloat(currentScale, 0, 1);
-            canvas.scale(currentScale, currentScale, iconSize / 2, iconSize / 2);
-            canvas.drawBitmap(hidingOldIcon ? iconToFade : icon, iconSize / 2 - iconSizeReal / 2, iconSize / 2 - iconSizeReal / 2, paint2);
+                _currentScale += _scaleStep;
+            _currentScale = Tool.clampFloat(_currentScale, 0, 1);
+            canvas.scale(_currentScale, _currentScale, _iconSize / 2, _iconSize / 2);
+            canvas.drawBitmap(_hidingOldIcon ? _iconToFade : _icon, _iconSize / 2 - _iconSizeReal / 2, _iconSize / 2 - _iconSizeReal / 2, _paint2);
             canvas.restore();
 
-            if (currentScale == 0)
-                hidingOldIcon = false;
+            if (_currentScale == 0)
+                _hidingOldIcon = false;
 
-            if (!hidingOldIcon && scaleStep == 1)
-                iconToFade = null;
+            if (!_hidingOldIcon && _scaleStep == 1)
+                _iconToFade = null;
 
             invalidateSelf();
         } else {
-            canvas.drawBitmap(icon, iconSize / 2 - iconSizeReal / 2, iconSize / 2 - iconSizeReal / 2, paint2);
+            canvas.drawBitmap(_icon, _iconSize / 2 - _iconSizeReal / 2, _iconSize / 2 - _iconSizeReal / 2, _paint2);
         }
     }
 
     @Override
     public int getIntrinsicWidth() {
-        return iconSize;
+        return _iconSize;
     }
 
     @Override
     public int getIntrinsicHeight() {
-        return iconSize;
+        return _iconSize;
     }
 
     @Override
