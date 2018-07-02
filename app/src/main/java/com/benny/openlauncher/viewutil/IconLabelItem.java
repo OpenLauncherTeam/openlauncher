@@ -172,7 +172,20 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         if (_bold)
             holder.textView.setTypeface(Typeface.DEFAULT_BOLD);
 
-        //Setup.logger().log(this, Log.INFO, null, "IconLabelItem - forceSize: %d", forceSize);
+        switch (_iconGravity) {
+            case Gravity.START:
+                holder.textView.setCompoundDrawablesWithIntrinsicBounds(_icon, null, null, null);
+                break;
+            case Gravity.END:
+                holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, _icon, null);
+                break;
+            case Gravity.TOP:
+                holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, _icon, null, null);
+                break;
+            case Gravity.BOTTOM:
+                holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, _icon);
+                break;
+        }
 
         holder.textView.setTextColor(_textColor);
         if (_onClickListener != null)
@@ -197,5 +210,9 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
             textView = (TextView) itemView;
             textView.setTag(item);
         }
+    }
+
+    public void setIcon(Drawable icon) {
+        _icon = icon;
     }
 }

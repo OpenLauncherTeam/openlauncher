@@ -248,11 +248,9 @@ public class Tool {
         return toPoint;
     }
 
-    //
     public static void vibrate(View view) {
         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
     }
-    //
 
     public static void print(Object o) {
         if (o != null) {

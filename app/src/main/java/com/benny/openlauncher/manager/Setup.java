@@ -7,11 +7,8 @@ import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DatabaseHelper;
-import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.viewutil.ItemGestureListener;
-
-import java.util.List;
 
 public abstract class Setup {
 
@@ -99,7 +96,7 @@ public abstract class Setup {
     public interface EventHandler {
         void showLauncherSettings(Context context);
 
-        void showPickAction(Context context, DialogListener.OnAddActionListener listener);
+        void showPickAction(Context context, DialogListener.OnActionDialogListener listener);
 
         void showEditDialog(Context context, Item item, DialogListener.OnEditDialogListener listener);
 

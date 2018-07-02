@@ -141,7 +141,7 @@ public class AppManager {
         d.show();
     }
 
-    public void onReceive(Context p1, Intent p2) {
+    public void onReceive(Context context, Intent intent) {
         getAllApps();
     }
 
