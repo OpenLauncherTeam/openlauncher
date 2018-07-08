@@ -22,18 +22,6 @@ for more information.
 </a>
 </div></br>
 
-### Pre-Alpha
-<img src="/app/src/flavorGplayPreAlpha/ic_launcher-web.png" align="left" width="100" hspace="10" vspace="10">
-The pre-alpha Play Store version will be getting updates more frequently than the alpha version. And you can support the development by purchasing the pre-alpha version.
-
-You will get the same result if you compile directly from the source, no fancy stuffs.
-But it will continue the development.
-
-<a href="https://play.google.com/store/apps/details?id=com.benny.openlauncherprealpha">
-    <img alt="Get it on Google Play" height="80" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
-</a>
-</div></br>
-
 
 ## Description
 
