@@ -293,7 +293,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         ArrayList<String> ret = getStringList(R.string.pref_key__minibar_items);
         if (ret.isEmpty()) {
             for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
-                if (Arrays.asList(98, 36, 24, 50, 71, 25, 73).contains(item._id)) {
+                if (Arrays.asList(98, 36, 24, 50, 71, 25).contains(item._id)) {
                     ret.add(Integer.toString(item._id));
                 }
             }

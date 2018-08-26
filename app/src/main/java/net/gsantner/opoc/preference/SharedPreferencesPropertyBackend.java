@@ -3,7 +3,7 @@
  *   Maintained by Gregor Santner, 2016-
  *   https://gsantner.net/
  *
- *   License: Apache 2.0
+ *   License: Apache 2.0 / Commercial
  *  https://github.com/gsantner/opoc/#licensing
  *  https://www.apache.org/licenses/LICENSE-2.0
  *
@@ -209,7 +209,7 @@ public class SharedPreferencesPropertyBackend implements PropertyBackend<String,
         String value = pref
                 .getString(key, ARRAY_SEPARATOR)
                 .replace(ARRAY_SEPARATOR_SUBSTITUTE, ARRAY_SEPARATOR);
-        if (value.equals(ARRAY_SEPARATOR)) {
+        if (value.equals(ARRAY_SEPARATOR) || TextUtils.isEmpty(value)) {
             return ret;
         }
         ret.addAll(Arrays.asList(value.split(ARRAY_SEPARATOR)));
