@@ -200,6 +200,9 @@ public class HpDragOption {
                 for (CellContainer page : _homeActivity.getDesktop().getPages()) {
                     page.clearCachedOutlineBitmap();
                 }
+                if (action != DragAction.Action.SEARCH_RESULT) {
+                    _homeActivity.getDesktop().updateIconProjection((int) location.x, (int) location.y);
+                }
             }
 
             @Override
