@@ -81,6 +81,10 @@ public class App {
         return "ComponentInfo{" + _packageName + "/" + _className + "}";
     }
 
+    public String getFullName() {
+        return _packageName + "/" + _className;
+    }
+
     /**
      * App label for root locale.
      * @see Locale#ROOT

@@ -1,12 +1,11 @@
-![GitHub release](https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/featureGraphic.png)
+![graphic](https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/featureGraphic.png)
 
-[![GitHub release](https://img.shields.io/badge/release-0.5.8-blue.svg)](https://github.com/OpenLauncherTeam/openlauncher/releases)
-[![CircleCI](https://circleci.com/gh/OpenLauncherTeam/openlauncher.svg?style=shield)](https://circleci.com/gh/OpenLauncherTeam/openlauncher)
-[![Chat - Matrix](https://img.shields.io/badge/chat-on%20matrix-blue.svg)](https://matrix.to/#/#openlauncher:matrix.org)
-[![Translate - with Stringlate](https://img.shields.io/badge/stringlate-translate-green.svg)](https://lonamiwebs.github.io/stringlate/translate?git=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher.git&name=OpenLauncher&web=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher)
+[![release](https://img.shields.io/badge/release-0.5.8-blue.svg)](https://github.com/OpenLauncherTeam/openlauncher/releases)
+[![circleci](https://circleci.com/gh/OpenLauncherTeam/openlauncher.svg?style=shield)](https://circleci.com/gh/OpenLauncherTeam/openlauncher)
+[![matrix](https://img.shields.io/badge/chat-on%20matrix-blue.svg)](https://matrix.to/#/#openlauncher:matrix.org)
+[![stringlate](https://img.shields.io/badge/stringlate-translate-green.svg)](https://lonamiwebs.github.io/stringlate/translate?git=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher.git&name=OpenLauncher&web=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher)
 
 # OpenLauncher
-### Alpha
 <img src="/app/src/main/ic_launcher-web.png" align="left" width="100" hspace="10" vspace="10">
 This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven launcher for Android.
 
@@ -23,10 +22,13 @@ This an open source Android launcher project, started from scratch. We aim to cr
 ## Description
 
 ### Features
-Paged desktop || Dock || Double tap to sleep || Dock || 
-Scrollable background || Drag and drop || Paged app drawer || 
-Vertical app drawer || Hide apps || Search bar || Icon packs || 
-Widget || Gesture
+  * Paged desktop
+  * Dock
+  * Drag and drop
+  * Hide apps
+  * Scrollable background
+  * Search bar
+  * Icon packs
 
 <div style="display:flex;">
 	<img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/screenshots.png">
@@ -35,10 +37,8 @@ Widget || Gesture
 ### Status
 If your instance is crashing frequently please make sure you update to the latest version and reset the app data before creating an issue.
 
-
 ## Contributions
 The project is always open for contributions and accepts pull requests. Please use the _auto reformat feature_ in Android Studio before sending a pull request. Translations can be contributed on GitHub. You can use Stringlate to translate the project directly on your Android phone. It allows you to post the translations on GitHub with little effort.
-
 
 ### Resources
 * Project: [Changelog](/CHANGELOG.md) | [License](/LICENSE)
@@ -56,10 +56,10 @@ I would like to thank everyone who has helped out in any way.
 * ...
 
 ### Donation
-You can support us and buy us some coffee.
-* Open Launcher Team: <noscript><a href="https://liberapay.com/OpenLauncherTeam/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
-* BennyKok: [paypal](https://www.paypal.me/BennyKok) or <noscript><a href="https://liberapay.com/BennyKok/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
-* [gsantner](https://gsantner.net/supportme?source=readme&project=openlauncher) | <noscript><a href="https://liberapay.com/gsantner/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+You can support us so we can buy the occasional coffee.
+* Open Launcher Team: [liberapay](https://liberapay.com/OpenLauncherTeam/donate)
+* bennykok: [paypal](https://www.paypal.me/BennyKok) or [liberapay](https://liberapay.com/BennyKok/donate)
+* gsantner: [website](https://gsantner.net/supportme?source=readme&project=openlauncher) or [liberapay](https://liberapay.com/gsantner/donate)
 
 ### License
 The app is licensed with Apache 2.0.
