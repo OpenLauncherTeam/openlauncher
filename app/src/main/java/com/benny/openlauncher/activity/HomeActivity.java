@@ -17,7 +17,6 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.support.annotation.NonNull;
@@ -404,7 +403,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
         for (String act : AppSettings.get().getMinibarArrangement()) {
             if (act.length() > 1) {
-                LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemFromString(act);
+                LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemById(Integer.parseInt(act));
                 if (item != null) {
                     items.add(item);
                     labels.add(item._label);
@@ -420,12 +419,10 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 LauncherAction.Action action = items.get(i)._action;
-                if (action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings || action == LauncherAction.Action.EditMinibar) {
-                    _consumeNextResume = true;
-                }
-                LauncherAction.RunAction(action, HomeActivity.this);
-                if (action != LauncherAction.Action.DeviceSettings && action != LauncherAction.Action.LauncherSettings && action != LauncherAction.Action.EditMinibar) {
+                LauncherAction.RunAction(items.get(i), HomeActivity.this);
+                if (action == LauncherAction.Action.EditMinibar || action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings) {
                     getDrawerLayout().closeDrawers();
+                    _consumeNextResume = true;
                 }
             }
         });

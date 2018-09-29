@@ -15,19 +15,19 @@ public class HpGestureCallback implements DesktopGestureListener.DesktopGestureC
 
     @Override
     public boolean onDrawerGesture(Desktop desktop, DesktopGestureListener.Type event) {
-        LauncherAction.ActionItem gesture = null;
+        LauncherAction.ActionDisplayItem gesture = null;
         int gestureIndex;
         switch (event) {
             case SwipeUp:
                 gestureIndex = _appSettings.getGestureSwipeUp();
                 if (gestureIndex != 0) {
-                    gesture = LauncherAction.getActionItem(gestureIndex - 1);
+                    gesture = LauncherAction.getActionItemByPosition(gestureIndex - 1);
                 }
                 break;
             case SwipeDown:
                 gestureIndex = _appSettings.getGestureSwipeDown();
                 if (gestureIndex != 0) {
-                    gesture = LauncherAction.getActionItem(gestureIndex - 1);
+                    gesture = LauncherAction.getActionItemByPosition(gestureIndex - 1);
                 }
                 break;
             case SwipeLeft:
@@ -36,19 +36,19 @@ public class HpGestureCallback implements DesktopGestureListener.DesktopGestureC
             case Pinch:
                 gestureIndex = _appSettings.getGesturePinch();
                 if (gestureIndex != 0) {
-                    gesture = LauncherAction.getActionItem(gestureIndex - 1);
+                    gesture = LauncherAction.getActionItemByPosition(gestureIndex - 1);
                 }
                 break;
             case Unpinch:
                 gestureIndex = _appSettings.getGestureUnpinch();
                 if (gestureIndex != 0) {
-                    gesture = LauncherAction.getActionItem(gestureIndex - 1);
+                    gesture = LauncherAction.getActionItemByPosition(gestureIndex - 1);
                 }
                 break;
             case DoubleTap:
                 gestureIndex = _appSettings.getGestureDoubleTap();
                 if (gestureIndex != 0) {
-                    gesture = LauncherAction.getActionItem(gestureIndex - 1);
+                    gesture = LauncherAction.getActionItemByPosition(gestureIndex - 1);
                 }
                 break;
             default:

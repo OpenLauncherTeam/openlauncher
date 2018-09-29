@@ -21,7 +21,7 @@ import com.benny.openlauncher.viewutil.DialogHelper;
 public class LauncherAction {
 
     public enum Action {
-        EditMinibar, SetWallpaper, LockScreen, LauncherSettings, VolumeDialog, DeviceSettings, AppDrawer, SearchBar, MobileNetworkSettings, LaunchApp
+        LaunchApp, EditMinibar, SetWallpaper, LockScreen, LauncherSettings, DeviceSettings, VolumeDialog, AppDrawer, SearchBar, MobileNetworkSettings
     }
 
     public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
@@ -37,14 +37,14 @@ public class LauncherAction {
     };
 
     public static void RunAction(Action action, final Context context) {
-        LauncherAction.RunAction(new ActionItem(action, null), context);
+        LauncherAction.RunAction(getActionItem(action), context);
     }
 
-    public static void RunAction(ActionItem action, final Context context) {
+    public static void RunAction(ActionDisplayItem action, final Context context) {
         switch (action._action) {
             case LaunchApp:
                 PackageManager pm = AppManager.getInstance(context).getPackageManager();
-                action._extraData = new Intent(pm.getLaunchIntentForPackage(AppSettings.get().getString(context.getString(R.string.pref_key__gesture_double_tap) + "__", "")));
+                //action._extraData = new Intent(pm.getLaunchIntentForPackage(AppSettings.get().getString(context.getString(R.string.pref_key__gesture_double_tap) + "__", "")));
                 break;
             case EditMinibar:
                 context.startActivity(new Intent(context, MinibarEditActivity.class));
@@ -104,27 +104,26 @@ public class LauncherAction {
         }
     }
 
-    public static ActionDisplayItem getActionItemFromString(String string) {
+    public static ActionDisplayItem getActionItemById(int id) {
         for (ActionDisplayItem item : actionDisplayItems) {
-            if (Integer.toString(item._id).equals(string)) {
+            if (Integer.toString(item._id).equals(Integer.toString(id))) {
                 return item;
             }
         }
         return null;
     }
 
-    public static ActionItem getActionItem(int position) {
-        return new ActionItem(Action.values()[position], null);
+    public static ActionDisplayItem getActionItemByPosition(int position) {
+        return getActionItem(Action.values()[position]);
     }
 
-    public static class ActionItem {
-        public Action _action;
-        public Intent _extraData;
-
-        public ActionItem(Action action, Intent extraData) {
-            _action = action;
-            _extraData = extraData;
+    public static ActionDisplayItem getActionItem(Action action) {
+        for (ActionDisplayItem item : actionDisplayItems) {
+            if (item._action.equals(action)) {
+                return item;
+            }
         }
+        return null;
     }
 
     public static class ActionDisplayItem {
