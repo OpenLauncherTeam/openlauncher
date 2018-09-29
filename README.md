@@ -9,76 +9,57 @@
 ### Alpha
 <img src="/app/src/main/ic_launcher-web.png" align="left" width="100" hspace="10" vspace="10">
 This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven launcher for Android.
-Please go to the <a href="https://github.com/Benny-Kok/OpenLauncher/wiki">OpenLauncher Wiki</a>
 
-for more information.
-
-<div style="display:flex;" >
+<div style="display:flex;">
 <a href="https://f-droid.org/repository/browse/?fdid=com.benny.openlauncher">
-    <img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80">
+    <img height="80" alt="Get it on F-Droid" src="https://f-droid.org/badge/get-it-on.png">
 </a>
 <a href="https://play.google.com/store/apps/details?id=com.benny.openlauncher">
-    <img alt="Get it on Google Play" height="80" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
+    <img height="80" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
 </a>
-</div></br>
-
+</div>
+</br>
 
 ## Description
 
-#### Currently supported
+### Features
 Paged desktop || Dock || Double tap to sleep || Dock || 
 Scrollable background || Drag and drop || Paged app drawer || 
 Vertical app drawer || Hide apps || Search bar || Icon packs || 
-Widget || Gesture || AIO Search Bar || Gesture support
+Widget || Gesture
 
-<div style="display:flex;" >
+<div style="display:flex;">
 	<img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/screenshots.png">
 </div>
 
-#### ToDo List
-Desktop clock customization ||  More actions for the minibar (later to support expandable minibar) ||
-Support landscape orientation || Code refactoring || Add more options in the settings ||
-Better support for gestures || Item customization on the desktop || Scrollable dock
-
-#### Status
-If your instance is crashing frequently please make sure you update to the latest version (from Github or F-Droid, not the Play store) and reset the app data before creating an issue. We made a lot of changes that broke compatibility in the older versions.
-
-Currently there are a lot of issues and we are all working on this app in our spare time so please be patient if your issue is not immediately resolved. We are going to review the structure of the launcher since I wrote this app a long time ago so we might break functionality at times. Thanks for your support.
+### Status
+If your instance is crashing frequently please make sure you update to the latest version and reset the app data before creating an issue.
 
 
 ## Contributions
-The project is always open for contributions and accepts pull requests.
-You may use Android Studios _auto reformat feature_ before sending a PR.
-
-Translations can be contributed on GitHub. You can use Stringlate ([![Translate - with Stringlate](https://img.shields.io/badge/stringlate-translate-green.svg)](https://lonamiwebs.github.io/stringlate/translate?git=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher.git&name=OpenLauncher&web=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher)) to translate the project directly on your Android phone. It allows you to export as E-Mail attachement and to post on GitHub.
+The project is always open for contributions and accepts pull requests. Please use the _auto reformat feature_ in Android Studio before sending a pull request. Translations can be contributed on GitHub. You can use Stringlate to translate the project directly on your Android phone. It allows you to post the translations on GitHub with little effort.
 
 
-#### Resources
-* Project: [Changelog](/CHANGELOG.md) | [Issues level/beginner](https://github.com/OpenLauncherTeam/openlauncher/issues?q=is%3Aissue+is%3Aopen+label%3Alevel%2Fbeginner) | [License](/LICENSE)
-* App on F-Droid: [Metadata](https://gitlab.com/fdroid/fdroiddata/blob/master/metadata/com.benny.openlauncher.txt) | [Page](https://f-droid.org/packages/com.benny.openlauncher/) | [Wiki](https://f-droid.org/wiki/page/com.benny.openlauncher) | [Build log](https://f-droid.org/wiki/page/com.benny.openlauncher/lastbuild)
+### Resources
+* Project: [Changelog](/CHANGELOG.md) | [License](/LICENSE)
+* F-Droid: [Metadata](https://gitlab.com/fdroid/fdroiddata/blob/master/metadata/com.benny.openlauncher.txt) | [Page](https://f-droid.org/packages/com.benny.openlauncher/) | [Wiki](https://f-droid.org/wiki/page/com.benny.openlauncher) | [Build](https://f-droid.org/wiki/page/com.benny.openlauncher/lastbuild)
  
-### Project team
+### Team
 [bennykok](https://github.com/BennyKok) | [dkanada](https://github.com/dkanada) | [gsantner](https://gsantner.net/supportme?source=readme&project=openlauncher)
 
-We would be happy if you want to be part of this game.
-
-### Special thanks
-First I need to thanks everyone, from the start to now, sorry if I couldn't list all of your names here.
+### Thanks
+I would like to thank everyone who has helped out in any way.
 * dkanada
 * gsantner
-* Chris
 * MF
+* Chris
 * ...
 
-**Donation**  
-You can support us and buy us some coffee.  
+### Donation
+You can support us and buy us some coffee.
 * Open Launcher Team: <noscript><a href="https://liberapay.com/OpenLauncherTeam/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
-* BennyKok: [paypal](https://www.paypal.me/BennyKok) or <noscript><a href="https://liberapay.com/BennyKok/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript> 
+* BennyKok: [paypal](https://www.paypal.me/BennyKok) or <noscript><a href="https://liberapay.com/BennyKok/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
 * [gsantner](https://gsantner.net/supportme?source=readme&project=openlauncher) | <noscript><a href="https://liberapay.com/gsantner/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
- 
-## Licensing
-The app is licensed Apache 2.0. 
 
-<!--
-### Notice
--->
+### License
+The app is licensed with Apache 2.0.
