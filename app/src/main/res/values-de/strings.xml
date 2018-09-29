@@ -24,13 +24,13 @@
 
     <!-- Minibar -->
 
-    <string name="minibar_0">Edit</string>
-    <string name="minibar_1">Wallpaper aussuchen oder unscharf machen</string>
-    <string name="minibar_2">Sperre sofort den Bildschirm, braucht die Berechtigung \"Geräteadministrator\".</string>
-    <string name="minibar_4">Verknüpfung zu den Systemeinstellungen.</string>
-    <string name="minibar_5">OpenLauncher Einstellungsseite.</string>
-    <string name="minibar_7">Öffne den Lautstärkedialog.</string>
-    <string name="minibar_8">Öffne den App Drawer.</string>
+    <string name="minibar_summary__edit">Edit</string>
+    <string name="minibar_summary__set_wallpaper">Wallpaper aussuchen oder unscharf machen</string>
+    <string name="minibar_summary__lock_screen">Sperre sofort den Bildschirm, braucht die Berechtigung \"Geräteadministrator\".</string>
+    <string name="minibar_summary__device_settings">Verknüpfung zu den Systemeinstellungen.</string>
+    <string name="minibar_summary__launcher_settings">OpenLauncher Einstellungsseite.</string>
+    <string name="minibar_summary__volume">Öffne den Lautstärkedialog.</string>
+    <string name="minibar_summary__app_drawer">Öffne den App Drawer.</string>
 
     <!-- About -->
 
@@ -161,7 +161,6 @@
     <string name="version">Version</string>
     <string name="wallpaper">Wallpaper</string>
     <string name="wallpaper_pick">Suche Wallpaper aus</string>
-    <string name="wallpaper_unable_to_blur">Kann Blureffekt nicht anwenden.</string>
     <string name="pick_icon_pack">Wähle ein Icon Pack aus</string>
     <string name="toast_icon_pack_error">Du must zuerst die Berechtigung \"Manifest.permission.READ_EXTERNAL_STORAGE\" gewähren.</string>
     <string name="dialog__backup_app_settings__backup">Sicherung</string>
@@ -274,16 +273,16 @@
     <string name="more">Mehr</string>
     <string name="contribute">Beitragen</string>
     <string name="donate">Spenden</string>
-    <string name="set_wallpaper">Wallpaper setzen</string>
+    <string name="minibar_title__set_wallpaper">Wallpaper setzen</string>
     <string name="none">Nichts</string>
-    <string name="minibar_settings">Minibar Einstellungen</string>
-    <string name="lock_screen">Lock Screen</string>
-    <string name="device_settings">Geräte-Einstellungen</string>
-    <string name="launcher_settings">Launcher-Einstellungen</string>
-    <string name="volume_dialog">Lautstärke-Dialog</string>
-    <string name="open_app_drawer">App Drawer öffnen</string>
+    <string name="minibar_title__edit">Minibar Einstellungen</string>
+    <string name="minibar_title__lock_screen">Lock Screen</string>
+    <string name="minibar_title__device_settings">Geräte-Einstellungen</string>
+    <string name="minibar_title__launcher_settings">Launcher-Einstellungen</string>
+    <string name="minibar_title__volume">Lautstärke-Dialog</string>
+    <string name="minibar_title__app_drawer">App Drawer öffnen</string>
     <string name="launch_app">App starten</string>
     <string name="app_drawer">App Drawer</string>
-    <string name="minibar_9">In der Such-Leiste öffnen.</string>
-    <string name="minibar_10">Mobilfunkeinstellungen.</string>
+    <string name="minibar_summary__search_bar">In der Such-Leiste öffnen.</string>
+    <string name="minibar_summary__mobile_network">Mobilfunkeinstellungen.</string>
 </resources>

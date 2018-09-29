@@ -14,13 +14,13 @@
 
     <!-- Minibar -->
     <string name="minibar">Afeggag amectuḥ</string>
-    <string name="minibar_0">Beddel taneɣruft n ufeggag amectuḥ.</string>
-    <string name="minibar_1">Sbadu neɣ sibrek agilal n ugdil.</string>
-    <string name="minibar_2">Sekkeṛ agdil tura yakan, yesra tadbelt n yibenk.</string>
-    <string name="minibar_4">Anegzum ar iɣewwaṛen n yibenk.</string>
-    <string name="minibar_5">Anegzum ar iɣewwaṛen OpenLauncher.</string>
-    <string name="minibar_7">Sken asfaylu n ubleɣ.</string>
-    <string name="minibar_8">Ldi agalis n yisnasen.</string>
+    <string name="minibar_summary__edit">Beddel taneɣruft n ufeggag amectuḥ.</string>
+    <string name="minibar_summary__set_wallpaper">Sbadu neɣ sibrek agilal n ugdil.</string>
+    <string name="minibar_summary__lock_screen">Sekkeṛ agdil tura yakan, yesra tadbelt n yibenk.</string>
+    <string name="minibar_summary__device_settings">Anegzum ar iɣewwaṛen n yibenk.</string>
+    <string name="minibar_summary__launcher_settings">Anegzum ar iɣewwaṛen OpenLauncher.</string>
+    <string name="minibar_summary__volume">Sken asfaylu n ubleɣ.</string>
+    <string name="minibar_summary__app_drawer">Ldi agalis n yisnasen.</string>
 
     <!-- About -->
     <string name="about_libs">Tinedlisin n u qbalu yeldin</string>
@@ -148,7 +148,6 @@
     <string name="version">Lqem</string>
     <string name="wallpaper">Tugna n ugilal</string>
     <string name="wallpaper_pick">Fren tugna n ugilal</string>
-    <string name="wallpaper_unable_to_blur">Ur izmir ara ad isibrek</string>
     <string name="pick_icon_pack">Fren tagrumma n tignitin</string>
     <string name="toast_icon_pack_error">Ur izmir ara ad d-yerr tignit s war tasiregt READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Ḥrez</string>

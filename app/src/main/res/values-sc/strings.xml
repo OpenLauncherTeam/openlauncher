@@ -17,15 +17,15 @@
 
     <!-- Minibar -->
     <string name="minibar">Minibarra</string>
-    <string name="minibar_0">Muda sa dispositzione de sa minibarra.</string>
-    <string name="minibar_1">Imposta s\'immàgine de isfondu de s\'iscrivania.</string>
-    <string name="minibar_2">Bloca s\'ischermu immediatamente. Tenet bisòngiu de dos diritos de amministratzione de su dispositivu.</string>
-    <string name="minibar_4">Incurtzada a sas impostatziones de su dispositivu.</string>
-    <string name="minibar_5">Incurtzada a sas impostatziones de OpenLauncher.</string>
-    <string name="minibar_7">Ammustra totu sas barras de su volume.</string>
-    <string name="minibar_8">Aberi su menù de sas aplicatziones.</string>
-    <string name="minibar_9">Aberi sa barra de chirca.</string>
-    <string name="minibar_10">Impostatziones pro sas retzas mòbiles.</string>
+    <string name="minibar_summary__edit">Muda sa dispositzione de sa minibarra.</string>
+    <string name="minibar_summary__set_wallpaper">Imposta s\'immàgine de isfondu de s\'iscrivania.</string>
+    <string name="minibar_summary__lock_screen">Bloca s\'ischermu immediatamente. Tenet bisòngiu de dos diritos de amministratzione de su dispositivu.</string>
+    <string name="minibar_summary__device_settings">Incurtzada a sas impostatziones de su dispositivu.</string>
+    <string name="minibar_summary__launcher_settings">Incurtzada a sas impostatziones de OpenLauncher.</string>
+    <string name="minibar_summary__volume">Ammustra totu sas barras de su volume.</string>
+    <string name="minibar_summary__app_drawer">Aberi su menù de sas aplicatziones.</string>
+    <string name="minibar_summary__search_bar">Aberi sa barra de chirca.</string>
+    <string name="minibar_summary__mobile_network">Impostatziones pro sas retzas mòbiles.</string>
 
     <!-- About -->
     <string name="about_libs">Librerias a mitza aberta</string>
@@ -158,7 +158,6 @@
     <string name="version">Versione</string>
     <string name="wallpaper">Immàgine de isfundu</string>
     <string name="wallpaper_pick">Issèbera un\'immàgine de isfundu</string>
-    <string name="wallpaper_unable_to_blur">Impossìbile isfocare</string>
     <string name="pick_icon_pack">Issèbera unu pachete de iconas</string>
     <string name="toast_icon_pack_error">Impossìbile otènnere s\'icona chene su permissu READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Faghe una còpia de seguresa</string>
@@ -238,14 +237,14 @@
     <string name="contribute">Contribui</string>
     <string name="donate">Dona</string>
 
-    <string name="set_wallpaper">Imposta s\'immàgine de isfundu</string>
+    <string name="minibar_title__set_wallpaper">Imposta s\'immàgine de isfundu</string>
     <string name="none">perunu</string>
-    <string name="minibar_settings">Impostatziones de sa minibarra</string>
-    <string name="lock_screen">Bloca s\'ischermu</string>
-    <string name="device_settings">Impostatziones de su dispositivu</string>
-    <string name="launcher_settings">Launcher Settings</string>
-    <string name="volume_dialog">Diàlogu de su volume</string>
-    <string name="open_app_drawer">Aberi su menù de sas aplicatziones</string>
+    <string name="minibar_title__edit">Impostatziones de sa minibarra</string>
+    <string name="minibar_title__lock_screen">Bloca s\'ischermu</string>
+    <string name="minibar_title__device_settings">Impostatziones de su dispositivu</string>
+    <string name="minibar_title__launcher_settings">Launcher Settings</string>
+    <string name="minibar_title__volume">Diàlogu de su volume</string>
+    <string name="minibar_title__app_drawer">Aberi su menù de sas aplicatziones</string>
     <string name="launch_app">Aberi un\'aplicatzione</string>
     <string name="app_drawer">Menù de sas aplicatziones</string>
 

@@ -25,15 +25,15 @@ public class LauncherAction {
     }
 
     public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
-            new ActionDisplayItem(Action.EditMinibar, "Edit Minibar", HomeActivity.Companion.get_resources().getString(R.string.minibar_0), R.drawable.ic_mode_edit_black_24dp, 98),
-            new ActionDisplayItem(Action.SetWallpaper, "Set Wallpaper", HomeActivity.Companion.get_resources().getString(R.string.minibar_1), R.drawable.ic_photo_black_24dp, 36),
-            new ActionDisplayItem(Action.LockScreen, "Lock Screen", HomeActivity.Companion.get_resources().getString(R.string.minibar_2), R.drawable.ic_lock_black_24dp, 24),
-            new ActionDisplayItem(Action.LauncherSettings, "Launcher Settings", HomeActivity.Companion.get_resources().getString(R.string.minibar_5), R.drawable.ic_settings_launcher_black_24dp, 50),
-            new ActionDisplayItem(Action.VolumeDialog, "Volume Dialog", HomeActivity.Companion.get_resources().getString(R.string.minibar_7), R.drawable.ic_volume_up_black_24dp, 71),
-            new ActionDisplayItem(Action.DeviceSettings, "Device Settings", HomeActivity.Companion.get_resources().getString(R.string.minibar_4), R.drawable.ic_android_minimal, 25),
-            new ActionDisplayItem(Action.AppDrawer, "App Drawer", HomeActivity.Companion.get_resources().getString(R.string.minibar_8), R.drawable.ic_apps_dark_24dp, 73),
-            new ActionDisplayItem(Action.SearchBar, "Search Bar", HomeActivity.Companion.get_resources().getString(R.string.minibar_9), R.drawable.ic_search_light_24dp, 89),
-            new ActionDisplayItem(Action.MobileNetworkSettings, "Mobile Network", HomeActivity.Companion.get_resources().getString(R.string.minibar_10), R.drawable.ic_network_24dp, 46),
+            new ActionDisplayItem(Action.EditMinibar, "Edit Minibar", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__edit), R.drawable.ic_mode_edit_black_24dp, 98),
+            new ActionDisplayItem(Action.SetWallpaper, "Set Wallpaper", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__set_wallpaper), R.drawable.ic_photo_black_24dp, 36),
+            new ActionDisplayItem(Action.LockScreen, "Lock Screen", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__lock_screen), R.drawable.ic_lock_black_24dp, 24),
+            new ActionDisplayItem(Action.LauncherSettings, "Launcher Settings", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__launcher_settings), R.drawable.ic_settings_launcher_black_24dp, 50),
+            new ActionDisplayItem(Action.VolumeDialog, "Volume Dialog", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__volume), R.drawable.ic_volume_up_black_24dp, 71),
+            new ActionDisplayItem(Action.DeviceSettings, "Device Settings", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__device_settings), R.drawable.ic_android_minimal, 25),
+            new ActionDisplayItem(Action.AppDrawer, "App Drawer", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__app_drawer), R.drawable.ic_apps_dark_24dp, 73),
+            new ActionDisplayItem(Action.SearchBar, "Search Bar", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__search_bar), R.drawable.ic_search_light_24dp, 89),
+            new ActionDisplayItem(Action.MobileNetworkSettings, "Mobile Network", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__mobile_network), R.drawable.ic_network_24dp, 46),
     };
 
     public static void RunAction(Action action, final Context context) {
@@ -42,13 +42,13 @@ public class LauncherAction {
 
     public static void RunAction(ActionItem action, final Context context) {
         switch (action._action) {
+            case LaunchApp:
+                PackageManager pm = AppManager.getInstance(context).getPackageManager();
+                action._extraData = new Intent(pm.getLaunchIntentForPackage(AppSettings.get().getString(context.getString(R.string.pref_key__gesture_double_tap) + "__", "")));
+                break;
             case EditMinibar:
                 context.startActivity(new Intent(context, MinibarEditActivity.class));
                 break;
-            case MobileNetworkSettings: {
-                context.startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
-                break;
-            }
             case SetWallpaper:
                 context.startActivity(Intent.createChooser(new Intent(Intent.ACTION_SET_WALLPAPER), context.getString(R.string.wallpaper_pick)));
                 break;
@@ -73,13 +73,6 @@ public class LauncherAction {
             case LauncherSettings:
                 context.startActivity(new Intent(context, SettingsActivity.class));
                 break;
-            case AppDrawer:
-                HomeActivity.Companion.getLauncher().openAppDrawer();
-                break;
-            case SearchBar: {
-                HomeActivity.Companion.getLauncher().getSearchBar().getSearchButton().performClick();
-                break;
-            }
             case VolumeDialog:
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                     try {
@@ -97,10 +90,17 @@ public class LauncherAction {
                     audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamVolume(AudioManager.STREAM_RING), AudioManager.FLAG_SHOW_UI);
                 }
                 break;
-            case LaunchApp:
-                PackageManager pm = AppManager.getInstance(context).getPackageManager();
-                action._extraData = new Intent(pm.getLaunchIntentForPackage(AppSettings.get().getString(context.getString(R.string.pref_key__gesture_double_tap) + "__", "")));
+            case AppDrawer:
+                HomeActivity.Companion.getLauncher().openAppDrawer();
                 break;
+            case SearchBar: {
+                HomeActivity.Companion.getLauncher().getSearchBar().getSearchButton().performClick();
+                break;
+            }
+            case MobileNetworkSettings: {
+                context.startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
+                break;
+            }
         }
     }
 

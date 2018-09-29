@@ -147,7 +147,7 @@ public class HpDragOption {
         });
 
 
-        //desktop's drag event
+        // desktop drag event
         dragNDropView.registerDropTarget(new DragOptionLayout.DropTargetListener(_homeActivity.getDesktop()) {
             @Override
             public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
@@ -222,7 +222,7 @@ public class HpDragOption {
             }
         });
 
-        //dock's drag event
+        // dock drag event
         dragNDropView.registerDropTarget(new DragOptionLayout.DropTargetListener(_homeActivity.getDock()) {
             @Override
             public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {

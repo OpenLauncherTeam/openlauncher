@@ -26,13 +26,13 @@
 
     <!-- Minibar -->
 
-    <string name="minibar_0">Endre utformingen på sidepanelet.</string>
-    <string name="minibar_1">Velg og tilslør bakgrunnsbildet.</string>
-    <string name="minibar_2">Lås skjermen umiddelbart. Krever enhetsadministrasjon.</string>
-    <string name="minibar_4">Snarvei til enhetsinnstillingene.</string>
-    <string name="minibar_5">Snarvei til OpenLauncher-innstillingene.</string>
-    <string name="minibar_7">Åpne lydstyrkejustering.</string>
-    <string name="minibar_8">Åpne programskuffen.</string>
+    <string name="minibar_summary__edit">Endre utformingen på sidepanelet.</string>
+    <string name="minibar_summary__set_wallpaper">Velg og tilslør bakgrunnsbildet.</string>
+    <string name="minibar_summary__lock_screen">Lås skjermen umiddelbart. Krever enhetsadministrasjon.</string>
+    <string name="minibar_summary__device_settings">Snarvei til enhetsinnstillingene.</string>
+    <string name="minibar_summary__launcher_settings">Snarvei til OpenLauncher-innstillingene.</string>
+    <string name="minibar_summary__volume">Åpne lydstyrkejustering.</string>
+    <string name="minibar_summary__app_drawer">Åpne programskuffen.</string>
 
     <!-- About -->
 
@@ -124,7 +124,6 @@
     <string name="off">Av</string>
     <string name="wallpaper">Bakgrunnsbilde</string>
     <string name="wallpaper_pick">Velg bakgrunnsbilde</string>
-    <string name="wallpaper_unable_to_blur">Klarte ikke å tilsløre</string>
     <string name="pick_icon_pack">Velg ikonpakke</string>
     <string name="toast_icon_pack_error">Klarte ikke å hente ikon uten READ_EXTERNAL_STORAGE-tilgang.</string>
     <string name="dialog__backup_app_settings__backup">Sikkerhetskopier</string>

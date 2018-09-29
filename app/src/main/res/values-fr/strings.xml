@@ -17,13 +17,13 @@
 
     <!-- Minibar -->
     <string name="minibar">Minibarre</string>
-    <string name="minibar_0">Modifier la disposition de la Minibarre.</string>
-    <string name="minibar_1">Définir et rendre le fond d\'écran flou.</string>
-    <string name="minibar_2">Verrouiller l\'écran immédiatement, requiert le droit d\'administration de l\'appareil.</string>
-    <string name="minibar_4">Raccourci vers les paramètres de l\'appareil.</string>
-    <string name="minibar_5">Raccourci vers les paramètres d\'OpenLauncher.</string>
-    <string name="minibar_7">Ouvrir la pop-up du volume.</string>
-    <string name="minibar_8">Ouvrir le volet des applications.</string>
+    <string name="minibar_summary__edit">Modifier la disposition de la Minibarre.</string>
+    <string name="minibar_summary__set_wallpaper">Définir et rendre le fond d\'écran flou.</string>
+    <string name="minibar_summary__lock_screen">Verrouiller l\'écran immédiatement, requiert le droit d\'administration de l\'appareil.</string>
+    <string name="minibar_summary__device_settings">Raccourci vers les paramètres de l\'appareil.</string>
+    <string name="minibar_summary__launcher_settings">Raccourci vers les paramètres d\'OpenLauncher.</string>
+    <string name="minibar_summary__volume">Ouvrir la pop-up du volume.</string>
+    <string name="minibar_summary__app_drawer">Ouvrir le volet des applications.</string>
 
     <!-- About -->
     <string name="about_libs">Bibliothèques Open Source</string>
@@ -156,7 +156,6 @@
     <string name="version">Version</string>
     <string name="wallpaper">Fond d\'écran</string>
     <string name="wallpaper_pick">Sélectionner un fond d\'écran</string>
-    <string name="wallpaper_unable_to_blur">Impossible de rendre flou</string>
     <string name="pick_icon_pack">Sélectionner un pack d\'icônes</string>
     <string name="toast_icon_pack_error">Impossible de récupérer l\'icône sans la permission READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Sauvegarder</string>

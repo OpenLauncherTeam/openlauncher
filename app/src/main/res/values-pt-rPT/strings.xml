@@ -17,15 +17,15 @@
 
     <!-- Minibar -->
     <string name="minibar">Mini-barra</string>
-    <string name="minibar_0">Mudar disposição da mini-barra.</string>
-    <string name="minibar_1">Definir ou desfocar a imagem.</string>
-    <string name="minibar_2">Bloquear ecrã imediatamente, requer administração do dispositivo.</string>
-    <string name="minibar_4">Atalho para as definições do dispositivo.</string>
-    <string name="minibar_5">Atalho para as definições do OpenLauncher.</string>
-    <string name="minibar_7">Mostrar controlos de volume.</string>
-    <string name="minibar_8">Abrir menu de aplicações.</string>
-    <string name="minibar_9">Abrir barra de pesquisa</string>
-    <string name="minibar_10">Definições de redes móveis</string>
+    <string name="minibar_summary__edit">Mudar disposição da mini-barra.</string>
+    <string name="minibar_summary__set_wallpaper">Definir ou desfocar a imagem.</string>
+    <string name="minibar_summary__lock_screen">Bloquear ecrã imediatamente, requer administração do dispositivo.</string>
+    <string name="minibar_summary__device_settings">Atalho para as definições do dispositivo.</string>
+    <string name="minibar_summary__launcher_settings">Atalho para as definições do OpenLauncher.</string>
+    <string name="minibar_summary__volume">Mostrar controlos de volume.</string>
+    <string name="minibar_summary__app_drawer">Abrir menu de aplicações.</string>
+    <string name="minibar_summary__search_bar">Abrir barra de pesquisa</string>
+    <string name="minibar_summary__mobile_network">Definições de redes móveis</string>
 
     <!-- About -->
     <string name="about_libs">Bibliotecas de código aberto</string>
@@ -158,7 +158,6 @@
     <string name="version">Versão</string>
     <string name="wallpaper">Imagem de fundo</string>
     <string name="wallpaper_pick">Escolher imagem</string>
-    <string name="wallpaper_unable_to_blur">Incapaz de desfocar</string>
     <string name="pick_icon_pack">Escolher pacote de ícones</string>
     <string name="toast_icon_pack_error">Não é possível carregar o ícone sem a permissão READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Backup</string>
@@ -238,14 +237,14 @@
     <string name="contribute">Participar</string>
     <string name="donate">Donativos</string>
 
-    <string name="set_wallpaper">Definir papel de parede</string>
+    <string name="minibar_title__set_wallpaper">Definir papel de parede</string>
     <string name="none">Nenhum</string>
-    <string name="minibar_settings">Definições da mini-barra</string>
-    <string name="lock_screen">Bloquear ecrã</string>
-    <string name="device_settings">Definições do dispositivo</string>
-    <string name="launcher_settings">Definições da aplicação</string>
-    <string name="volume_dialog">Diálogo de volume</string>
-    <string name="open_app_drawer">Abrir menu de aplicações</string>
+    <string name="minibar_title__edit">Definições da mini-barra</string>
+    <string name="minibar_title__lock_screen">Bloquear ecrã</string>
+    <string name="minibar_title__device_settings">Definições do dispositivo</string>
+    <string name="minibar_title__launcher_settings">Definições da aplicação</string>
+    <string name="minibar_title__volume">Diálogo de volume</string>
+    <string name="minibar_title__app_drawer">Abrir menu de aplicações</string>
     <string name="launch_app">Abrir aplicação</string>
     <string name="app_drawer">Menu de aplicações</string>
 

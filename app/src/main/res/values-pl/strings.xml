@@ -17,13 +17,13 @@
 
     <!-- Minibar -->
     <string name="minibar">Minipasek</string>
-    <string name="minibar_0">Zmień układ minipaska.</string>
-    <string name="minibar_1">Ustaw lub rozmyj tapetę.</string>
-    <string name="minibar_2">Natychmiast zablokuj ekran. Wymaga uprawnień administratora urządzenia.</string>
-    <string name="minibar_4">Skrót do ustawień urządzenia.</string>
-    <string name="minibar_5">Skrót do ustawień launchera.</string>
-    <string name="minibar_7">Pokaż suwak głośności.</string>
-    <string name="minibar_8">Otwórz menu aplikacji.</string>
+    <string name="minibar_summary__edit">Zmień układ minipaska.</string>
+    <string name="minibar_summary__set_wallpaper">Ustaw lub rozmyj tapetę.</string>
+    <string name="minibar_summary__lock_screen">Natychmiast zablokuj ekran. Wymaga uprawnień administratora urządzenia.</string>
+    <string name="minibar_summary__device_settings">Skrót do ustawień urządzenia.</string>
+    <string name="minibar_summary__launcher_settings">Skrót do ustawień launchera.</string>
+    <string name="minibar_summary__volume">Pokaż suwak głośności.</string>
+    <string name="minibar_summary__app_drawer">Otwórz menu aplikacji.</string>
 
     <!-- About -->
     <string name="about_libs">Biblioteki open-source</string>
@@ -156,7 +156,6 @@
     <string name="version">Wersja</string>
     <string name="wallpaper">Tapeta</string>
     <string name="wallpaper_pick">Wybierz tapetę</string>
-    <string name="wallpaper_unable_to_blur">Nie można rozmyć</string>
     <string name="pick_icon_pack">Wybierz zestaw ikon</string>
     <string name="toast_icon_pack_error">Nie można wczytać ikony bez uprawnienia READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Kopia zapasowa</string>
@@ -236,16 +235,16 @@
     <string name="contribute">Przyłącz się</string>
     <string name="donate">Przekaż darowiznę</string>
 
-    <string name="set_wallpaper">Ustaw tapetę</string>
+    <string name="minibar_title__set_wallpaper">Ustaw tapetę</string>
     <string name="none">Nic</string>
-    <string name="minibar_settings">Ustawienia minipaska</string>
-    <string name="lock_screen">Zablokuj ekran</string>
-    <string name="device_settings">Ustawienia urządzenia</string>
-    <string name="launcher_settings">Ustawienia launchera</string>
-    <string name="volume_dialog">Okno dialogowe głośności</string>
-    <string name="open_app_drawer">Otwórz menu aplikacji</string>
+    <string name="minibar_title__edit">Ustawienia minipaska</string>
+    <string name="minibar_title__lock_screen">Zablokuj ekran</string>
+    <string name="minibar_title__device_settings">Ustawienia urządzenia</string>
+    <string name="minibar_title__launcher_settings">Ustawienia launchera</string>
+    <string name="minibar_title__volume">Okno dialogowe głośności</string>
+    <string name="minibar_title__app_drawer">Otwórz menu aplikacji</string>
     <string name="launch_app">Uruchom aplikację</string>
     <string name="app_drawer">Menu aplikacji</string>
-    <string name="minibar_10">Ustawienia sieci mobilnych</string>
+    <string name="minibar_summary__mobile_network">Ustawienia sieci mobilnych</string>
 
 </resources>

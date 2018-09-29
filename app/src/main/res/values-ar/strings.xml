@@ -25,13 +25,13 @@
 
     <!-- Minibar -->
 
-    <string name="minibar_0">تغيير تخطيط الشريط المصغر</string>
-    <string name="minibar_1">تعيين صورة الخلفية وإضافة تأثير الضبابية</string>
-    <string name="minibar_2">إغلاق الشاشة فورا، صلاحية مدير الجهاز مطلوبة</string>
-    <string name="minibar_4">اختصار لإعدادات الجهاز</string>
-    <string name="minibar_5">اختصار لإعدادات أوبن لانشر</string>
-    <string name="minibar_7">عرض صندوق التحكم بالصوت</string>
-    <string name="minibar_8">فتح درج التطبيقات</string>
+    <string name="minibar_summary__edit">تغيير تخطيط الشريط المصغر</string>
+    <string name="minibar_summary__set_wallpaper">تعيين صورة الخلفية وإضافة تأثير الضبابية</string>
+    <string name="minibar_summary__lock_screen">إغلاق الشاشة فورا، صلاحية مدير الجهاز مطلوبة</string>
+    <string name="minibar_summary__device_settings">اختصار لإعدادات الجهاز</string>
+    <string name="minibar_summary__launcher_settings">اختصار لإعدادات أوبن لانشر</string>
+    <string name="minibar_summary__volume">عرض صندوق التحكم بالصوت</string>
+    <string name="minibar_summary__app_drawer">فتح درج التطبيقات</string>
 
     <!-- About -->
 
@@ -125,7 +125,6 @@
     <string name="off">إيقاف</string>
     <string name="wallpaper">صورة الخلفية</string>
     <string name="wallpaper_pick">اختر صورة الخلفية</string>
-    <string name="wallpaper_unable_to_blur">لا يمكن التعتيم</string>
     <string name="pick_icon_pack">اختر حزمة الأيقونات</string>
     <string name="toast_icon_pack_error">تعذر جلب صورة الأيقونة بدون صلاحية قراءة الذاكرة</string>
     <string name="dialog__backup_app_settings__backup">نسخة احتياطية</string>

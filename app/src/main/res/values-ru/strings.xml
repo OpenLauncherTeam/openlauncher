@@ -15,13 +15,13 @@
 
     <!-- Minibar -->
     <string name="minibar">Мини-бар</string>
-    <string name="minibar_0">Изменить вид мини-бара.</string>
-    <string name="minibar_1">Установить или размыть обои.</string>
-    <string name="minibar_2">Заблокировать экран, требует прав администратора устройства.</string>
-    <string name="minibar_4">Быстрый доступ к настройкам устройства.</string>
-    <string name="minibar_5">Быстрый доступ к настройкам OpenLauncher.</string>
-    <string name="minibar_7">Отобразить регуляторы громкости.</string>
-    <string name="minibar_8">Открыть меню приложений.</string>
+    <string name="minibar_summary__edit">Изменить вид мини-бара.</string>
+    <string name="minibar_summary__set_wallpaper">Установить или размыть обои.</string>
+    <string name="minibar_summary__lock_screen">Заблокировать экран, требует прав администратора устройства.</string>
+    <string name="minibar_summary__device_settings">Быстрый доступ к настройкам устройства.</string>
+    <string name="minibar_summary__launcher_settings">Быстрый доступ к настройкам OpenLauncher.</string>
+    <string name="minibar_summary__volume">Отобразить регуляторы громкости.</string>
+    <string name="minibar_summary__app_drawer">Открыть меню приложений.</string>
 
     <!-- About -->
     <string name="about_libs">Библиотеки с открытым исходным кодом</string>
@@ -145,7 +145,6 @@
     <string name="version">Версия</string>
     <string name="wallpaper">Обои</string>
     <string name="wallpaper_pick">Выберите обои</string>
-    <string name="wallpaper_unable_to_blur">Не удалось размыть</string>
     <string name="pick_icon_pack">Выберите набор значков</string>
     <string name="toast_icon_pack_error">Не удалось захватить значок без разрешения READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Создать резервную копию</string>

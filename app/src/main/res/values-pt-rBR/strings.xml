@@ -17,13 +17,13 @@
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
-    <string name="minibar_0">Mudar o layout da minibar</string>
-    <string name="minibar_1">Definir ou borrar o papel de parede</string>
-    <string name="minibar_2">Bloqueia a tela imediatamente (requer administrador do dispositivo)</string>
-    <string name="minibar_4">Atalho para as configurações do dispositivo</string>
-    <string name="minibar_5">Atalho para as configurações do launcher</string>
-    <string name="minibar_7">Exibir o painel de som</string>
-    <string name="minibar_8">Abrir a gaveta de aplicativos.</string>
+    <string name="minibar_summary__edit">Mudar o layout da minibar</string>
+    <string name="minibar_summary__set_wallpaper">Definir ou borrar o papel de parede</string>
+    <string name="minibar_summary__lock_screen">Bloqueia a tela imediatamente (requer administrador do dispositivo)</string>
+    <string name="minibar_summary__device_settings">Atalho para as configurações do dispositivo</string>
+    <string name="minibar_summary__launcher_settings">Atalho para as configurações do launcher</string>
+    <string name="minibar_summary__volume">Exibir o painel de som</string>
+    <string name="minibar_summary__app_drawer">Abrir a gaveta de aplicativos.</string>
 
     <!-- About -->
     <string name="about_libs">Bibliotecas de código aberto</string>
@@ -155,7 +155,6 @@
     <string name="version">Versão</string>
     <string name="wallpaper">Papel de parede</string>
     <string name="wallpaper_pick">Escolha um papel de parede</string>
-    <string name="wallpaper_unable_to_blur">Não foi possível borrar o papel de parede</string>
     <string name="pick_icon_pack">Escolha um pacote de ícones</string>
     <string name="toast_icon_pack_error">Não foi possível obter o ícone sem a permissão READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Fazer backup</string>

@@ -531,7 +531,6 @@
             android:key="@string/pref_key__about"
             android:title="@string/pref_title__about">
 
-
         </PreferenceScreen>
 
     </PreferenceCategory>

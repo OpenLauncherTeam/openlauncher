@@ -22,13 +22,13 @@
 
     <!-- Minibar -->
     <string name="minibar">Barra lateral</string>
-    <string name="minibar_0">Cambia el diseño de la barra lateral.</string>
-    <string name="minibar_1">Establece o difumina el fondo de pantalla.</string>
-    <string name="minibar_2">Bloquea la pantalla inmediatamente, requiere ser administrador del dispositivo.</string>
-    <string name="minibar_4">Atajo a los ajustes del dispositivo.</string>
-    <string name="minibar_5">Atajo a los ajustes de OpenLauncher.</string>
-    <string name="minibar_7">Desplegar el panel de volumen.</string>
-    <string name="minibar_8">Abrir el cajón de aplicaciones.</string>
+    <string name="minibar_summary__edit">Cambia el diseño de la barra lateral.</string>
+    <string name="minibar_summary__set_wallpaper">Establece o difumina el fondo de pantalla.</string>
+    <string name="minibar_summary__lock_screen">Bloquea la pantalla inmediatamente, requiere ser administrador del dispositivo.</string>
+    <string name="minibar_summary__device_settings">Atajo a los ajustes del dispositivo.</string>
+    <string name="minibar_summary__launcher_settings">Atajo a los ajustes de OpenLauncher.</string>
+    <string name="minibar_summary__volume">Desplegar el panel de volumen.</string>
+    <string name="minibar_summary__app_drawer">Abrir el cajón de aplicaciones.</string>
 
     <!-- About -->
     <string name="about_libs">Librerías de Código Abierto</string>
@@ -156,7 +156,6 @@
     <string name="version">Versión</string>
     <string name="wallpaper">Fondo de pantalla</string>
     <string name="wallpaper_pick">Escoger fondo de pantalla</string>
-    <string name="wallpaper_unable_to_blur">Incapaz de difuminar</string>
     <string name="pick_icon_pack">Escoger paquete de íconos</string>
     <string name="toast_icon_pack_error">Incapaz de seleccionar el ícono sin el permiso READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Copia de seguridad</string>

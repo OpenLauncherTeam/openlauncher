@@ -17,13 +17,13 @@
 
     <!-- Minibar -->
     <string name="minibar">Mini lišta</string>
-    <string name="minibar_0">Zmeniť rozloženie mini panela.</string>
-    <string name="minibar_1">Rozostriť tapetu</string>
-    <string name="minibar_2">Okamžité uzamknutie obrazovky vyžaduje práva správcu zariadenia</string>
-    <string name="minibar_4">Skratka k nastaveniam zariadenia.</string>
-    <string name="minibar_5">Skratka k nastaveniam OpenLaunchera.</string>
-    <string name="minibar_7">Zobraziť posuvník hlasitosti.</string>
-    <string name="minibar_8">Otvoriť zoznam aplikácií.</string>
+    <string name="minibar_summary__edit">Zmeniť rozloženie mini panela.</string>
+    <string name="minibar_summary__set_wallpaper">Rozostriť tapetu</string>
+    <string name="minibar_summary__lock_screen">Okamžité uzamknutie obrazovky vyžaduje práva správcu zariadenia</string>
+    <string name="minibar_summary__device_settings">Skratka k nastaveniam zariadenia.</string>
+    <string name="minibar_summary__launcher_settings">Skratka k nastaveniam OpenLaunchera.</string>
+    <string name="minibar_summary__volume">Zobraziť posuvník hlasitosti.</string>
+    <string name="minibar_summary__app_drawer">Otvoriť zoznam aplikácií.</string>
 
     <!-- About -->
     <string name="about_libs">Knižnice Open Source</string>
@@ -156,7 +156,6 @@
     <string name="version">Verzia</string>
     <string name="wallpaper">Tapeta</string>
     <string name="wallpaper_pick">Vyberte tapetu</string>
-    <string name="wallpaper_unable_to_blur">Nemožno rozmazať</string>
     <string name="pick_icon_pack">Vybrať súbor ikon</string>
     <string name="toast_icon_pack_error">Nemožno zobrať ikony bez READ_EXTERNAL_STORAGE práv.</string>
     <string name="dialog__backup_app_settings__backup">Záloha</string>
@@ -236,16 +235,16 @@
     <string name="contribute">Zapojte sa</string>
     <string name="donate">Podporiť</string>
 
-    <string name="set_wallpaper">Nastaviť tapetu</string>
+    <string name="minibar_title__set_wallpaper">Nastaviť tapetu</string>
     <string name="none">Žiadne</string>
-    <string name="minibar_settings">Nastavenia mini lišty</string>
-    <string name="lock_screen">Zamknúť obrazovku</string>
-    <string name="device_settings">Nastavenie zariadenia</string>
-    <string name="launcher_settings">Nastavenia spúštača</string>
-    <string name="volume_dialog">Nastavenia zvuku</string>
-    <string name="open_app_drawer">Otvoriť zoznam aplikácií.</string>
+    <string name="minibar_title__edit">Nastavenia mini lišty</string>
+    <string name="minibar_title__lock_screen">Zamknúť obrazovku</string>
+    <string name="minibar_title__device_settings">Nastavenie zariadenia</string>
+    <string name="minibar_title__launcher_settings">Nastavenia spúštača</string>
+    <string name="minibar_title__volume">Nastavenia zvuku</string>
+    <string name="minibar_title__app_drawer">Otvoriť zoznam aplikácií.</string>
     <string name="launch_app">Spustiť aplikáciu</string>
     <string name="app_drawer">Správca aplikácií</string>
-    <string name="minibar_10">Nastavenie mobilnej siete</string>
+    <string name="minibar_summary__mobile_network">Nastavenie mobilnej siete</string>
 
 </resources>

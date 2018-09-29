@@ -24,13 +24,13 @@
 
     <!-- MiniBar -->
 
-    <string name="minibar_0">ミニバーのレイアウトを変更。</string>
-    <string name="minibar_1">壁紙の設定と、ぼかし。</string>
-    <string name="minibar_2">画面をすぐにロック。 デバイス管理が必要です。</string>
-    <string name="minibar_4">デバイス設定のショートカット。</string>
-    <string name="minibar_5">OpenLauncher 設定のショートカット。</string>
-    <string name="minibar_7">ボリュームダイアログを開く。</string>
-    <string name="minibar_8">アプリドロワーを開く。</string>
+    <string name="minibar_summary__edit">ミニバーのレイアウトを変更。</string>
+    <string name="minibar_summary__set_wallpaper">壁紙の設定と、ぼかし。</string>
+    <string name="minibar_summary__lock_screen">画面をすぐにロック。 デバイス管理が必要です。</string>
+    <string name="minibar_summary__device_settings">デバイス設定のショートカット。</string>
+    <string name="minibar_summary__launcher_settings">OpenLauncher 設定のショートカット。</string>
+    <string name="minibar_summary__volume">ボリュームダイアログを開く。</string>
+    <string name="minibar_summary__app_drawer">アプリドロワーを開く。</string>
 
     <!-- About -->
 
@@ -104,8 +104,6 @@
     <string name="off">オフ</string>
     <string name="wallpaper">壁紙</string>
     <string name="wallpaper_pick">壁紙の選択</string>
-    <string name="wallpaper_unable_to_blur">ぼかすことができません</string>
-
 
     <!-- Titles -->
     <string name="settings">設定</string>

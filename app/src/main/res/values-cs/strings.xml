@@ -16,13 +16,13 @@
 
     <!-- Minibar -->
     <string name="minibar">MiniBar - boční menu</string>
-    <string name="minibar_0">Změnit rozložení MiniBaru.</string>
-    <string name="minibar_1">Nastavit nebo rozmazat pozadí.</string>
-    <string name="minibar_2">Okamžitě zamknout obrazovku, vyžaduje práva administrátora zařízení.</string>
-    <string name="minibar_4">Otevřít nastavení systému.</string>
-    <string name="minibar_5">Otevřít nastavení OpenLauncheru.</string>
-    <string name="minibar_7">Zobrazit nastavení hlasitosti.</string>
-    <string name="minibar_8">Otevřít menu aplikací.</string>
+    <string name="minibar_summary__edit">Změnit rozložení MiniBaru.</string>
+    <string name="minibar_summary__set_wallpaper">Nastavit nebo rozmazat pozadí.</string>
+    <string name="minibar_summary__lock_screen">Okamžitě zamknout obrazovku, vyžaduje práva administrátora zařízení.</string>
+    <string name="minibar_summary__device_settings">Otevřít nastavení systému.</string>
+    <string name="minibar_summary__launcher_settings">Otevřít nastavení OpenLauncheru.</string>
+    <string name="minibar_summary__volume">Zobrazit nastavení hlasitosti.</string>
+    <string name="minibar_summary__app_drawer">Otevřít menu aplikací.</string>
 
     <!-- About -->
     <string name="about_libs">Open Source knihovny</string>
@@ -148,7 +148,6 @@
     <string name="version">Verze</string>
     <string name="wallpaper">Pozadí</string>
     <string name="wallpaper_pick">Výběr pozadí</string>
-    <string name="wallpaper_unable_to_blur">Nedaří se rozmazání</string>
     <string name="pick_icon_pack">Vyberte sadu ikon</string>
     <string name="toast_icon_pack_error">Ikonu nelze získat bez práv pro čtení externího úložiště.</string>
     <string name="dialog__backup_app_settings__backup">Zálohovat</string>

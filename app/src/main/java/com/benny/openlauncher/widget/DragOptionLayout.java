@@ -85,7 +85,6 @@ public final class DragOptionLayout extends FrameLayout {
         private final View view;
 
         public DropTargetListener(@NonNull View view) {
-
             this.view = view;
         }
 
@@ -95,34 +94,22 @@ public final class DragOptionLayout extends FrameLayout {
         }
 
         public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
-
-
             return false;
         }
 
         public void onStartDrag(@NonNull Action action, @NonNull PointF location) {
-
-
         }
 
         public void onDrop(@NonNull Action action, @NonNull PointF location, @NonNull Item item) {
-
-
         }
 
         public void onMove(@NonNull Action action, @NonNull PointF location) {
-
-
         }
 
         public void onEnter(@NonNull Action action, @NonNull PointF location) {
-
-
         }
 
         public void onExit(@NonNull Action action, @NonNull PointF location) {
-
-
         }
 
         public void onEnd() {
@@ -150,14 +137,14 @@ public final class DragOptionLayout extends FrameLayout {
             if (canvas == null || DragHandler._cachedDragBitmap == null || _dragLocation.equals(-1f, -1f))
                 return;
 
-            float x = _dragLocation.x - HomeActivity._itemTouchX;
-            float y = _dragLocation.y - HomeActivity._itemTouchY;
+            float x = _dragLocation.x;
+            float y = _dragLocation.y;
 
             if (_dragging) {
                 canvas.save();
                 _overlayIconScale = Tool.clampFloat(_overlayIconScale + 0.05f, 1f, 1.1f);
                 canvas.scale(_overlayIconScale, _overlayIconScale, x + DragHandler._cachedDragBitmap.getWidth() / 2, y + DragHandler._cachedDragBitmap.getHeight() / 2);
-                canvas.drawBitmap(DragHandler._cachedDragBitmap, x, y, _paint);
+                canvas.drawBitmap(DragHandler._cachedDragBitmap, x - DragHandler._cachedDragBitmap.getWidth() / 2, y - DragHandler._cachedDragBitmap.getHeight() / 2, _paint);
                 canvas.restore();
             }
 
@@ -302,8 +289,6 @@ public final class DragOptionLayout extends FrameLayout {
     }
 
     public final void startDragNDropOverlay(@NonNull View view, @NonNull Item item, @NonNull Action action) {
-
-
         _dragging = true;
         _dragExceedThreshold = false;
         _overlayIconScale = 0.0f;
@@ -432,7 +417,6 @@ public final class DragOptionLayout extends FrameLayout {
     }
 
     public final void convertPoint(@NonNull View toView) {
-
         int[] fromCoordinate = new int[2];
         int[] toCoordinate = new int[2];
         getLocationOnScreen(fromCoordinate);

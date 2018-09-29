@@ -19,15 +19,15 @@
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
-    <string name="minibar_0">Canvia el diseny de la minibar.</string>
-    <string name="minibar_1">Estableix o difumina el fons de pantalla.</string>
-    <string name="minibar_2">Bloqueja la pantalla inmediatament, requereix ser administrador del dispositiu.</string>
-    <string name="minibar_4">Drecera als paràmetres del dispositiu.</string>
-    <string name="minibar_5">Drecera als paràmetres de OpenLauncher.</string>
-    <string name="minibar_7">Desplegar el panell de volum.</string>
-    <string name="minibar_8">Obrir calaix d\'aplicacions.</string>
-    <string name="minibar_9">Obrir la barra de cerca.</string>
-    <string name="minibar_10">Configuració de la xarxa mòbil.</string>
+    <string name="minibar_summary__edit">Canvia el diseny de la minibar.</string>
+    <string name="minibar_summary__set_wallpaper">Estableix o difumina el fons de pantalla.</string>
+    <string name="minibar_summary__lock_screen">Bloqueja la pantalla inmediatament, requereix ser administrador del dispositiu.</string>
+    <string name="minibar_summary__device_settings">Drecera als paràmetres del dispositiu.</string>
+    <string name="minibar_summary__launcher_settings">Drecera als paràmetres de OpenLauncher.</string>
+    <string name="minibar_summary__volume">Desplegar el panell de volum.</string>
+    <string name="minibar_summary__app_drawer">Obrir calaix d\'aplicacions.</string>
+    <string name="minibar_summary__search_bar">Obrir la barra de cerca.</string>
+    <string name="minibar_summary__mobile_network">Configuració de la xarxa mòbil.</string>
 
     <!-- About -->
     <string name="about_libs">LLibreries de Codi Obert</string>
@@ -162,7 +162,6 @@
     <string name="version">Versió</string>
     <string name="wallpaper">Fons de pantalla</string>
     <string name="wallpaper_pick">Tria fons de pantalla</string>
-    <string name="wallpaper_unable_to_blur">Incapaç de difuminar</string>
     <string name="pick_icon_pack">Tria tema d\'icones</string>
     <string name="toast_icon_pack_error">Incapaç de seleccionar la icona sense el permís de LECTURA DEL CONTINGUT A LA TARGETA SD.</string>
     <string name="dialog__backup_app_settings__backup">Còpia de seguretat</string>
@@ -244,14 +243,14 @@
     <string name="contribute">Contribuïr</string>
     <string name="donate">Donacions</string>
 
-    <string name="set_wallpaper">Establir el fons de pantalla</string>
+    <string name="minibar_title__set_wallpaper">Establir el fons de pantalla</string>
     <string name="none">Cap</string>
-    <string name="minibar_settings">Paràmetres de la minibar</string>
-    <string name="lock_screen">Bloqueja la pantalla</string>
-    <string name="device_settings">Paràmetres del dispositiu</string>
-    <string name="launcher_settings">Paràmetres del llençador</string>
-    <string name="volume_dialog">Diàleg del volum</string>
-    <string name="open_app_drawer">Obrir el calaix d\'apps</string>
+    <string name="minibar_title__edit">Paràmetres de la minibar</string>
+    <string name="minibar_title__lock_screen">Bloqueja la pantalla</string>
+    <string name="minibar_title__device_settings">Paràmetres del dispositiu</string>
+    <string name="minibar_title__launcher_settings">Paràmetres del llençador</string>
+    <string name="minibar_title__volume">Diàleg del volum</string>
+    <string name="minibar_title__app_drawer">Obrir el calaix d\'apps</string>
     <string name="launch_app">Engegar una app</string>
     <string name="app_drawer">Calaix d\'apps</string>
 

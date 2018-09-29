@@ -26,13 +26,13 @@
 
     <!-- Minibar -->
 
-    <string name="minibar_0">调整快捷操作栏的布局</string>
-    <string name="minibar_1">设置或模糊壁纸</string>
-    <string name="minibar_2">立即锁定屏幕, 需要设备管理器</string>
-    <string name="minibar_4">系统设置快捷方式</string>
-    <string name="minibar_5">OpenLauncher 设置快捷方式</string>
-    <string name="minibar_7">显示音量调节</string>
-    <string name="minibar_8">打开应用抽屉</string>
+    <string name="minibar_summary__edit">调整快捷操作栏的布局</string>
+    <string name="minibar_summary__set_wallpaper">设置或模糊壁纸</string>
+    <string name="minibar_summary__lock_screen">立即锁定屏幕, 需要设备管理器</string>
+    <string name="minibar_summary__device_settings">系统设置快捷方式</string>
+    <string name="minibar_summary__launcher_settings">OpenLauncher 设置快捷方式</string>
+    <string name="minibar_summary__volume">显示音量调节</string>
+    <string name="minibar_summary__app_drawer">打开应用抽屉</string>
 
     <!-- About -->
 
@@ -140,7 +140,6 @@
     <string name="version">版本</string>
     <string name="wallpaper">壁纸</string>
     <string name="wallpaper_pick">选择壁纸</string>
-    <string name="wallpaper_unable_to_blur">无法应用模糊</string>
     <string name="pick_icon_pack">选择图标包</string>
     <string name="toast_icon_pack_error">没有读取外置存储的权限, 无法获取图标</string>
     <string name="dialog__backup_app_settings__backup">备份</string>

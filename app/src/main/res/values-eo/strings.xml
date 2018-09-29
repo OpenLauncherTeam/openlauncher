@@ -22,13 +22,13 @@
 
     <!-- Minibar -->
     <string name="minibar">Laterbreto</string>
-    <string name="minibar_0">Ŝangi laterbretan stilon.</string>
-    <string name="minibar_1">Agordi aŭ malklari ekranfonon.</string>
-    <string name="minibar_2">Ŝlosi nun ekranon, estas nepra havi ĉefuzantajn privilegiojn.</string>
-    <string name="minibar_4">Mallongindiko al aparata agordoj.</string>
-    <string name="minibar_5">Mallongindiko al OpenLauncher-a agordoj.</string>
-    <string name="minibar_7">Malfermi volumpanelo.</string>
-    <string name="minibar_8">Malfermi aplikaĵujon.</string>
+    <string name="minibar_summary__edit">Ŝangi laterbretan stilon.</string>
+    <string name="minibar_summary__set_wallpaper">Agordi aŭ malklari ekranfonon.</string>
+    <string name="minibar_summary__lock_screen">Ŝlosi nun ekranon, estas nepra havi ĉefuzantajn privilegiojn.</string>
+    <string name="minibar_summary__device_settings">Mallongindiko al aparata agordoj.</string>
+    <string name="minibar_summary__launcher_settings">Mallongindiko al OpenLauncher-a agordoj.</string>
+    <string name="minibar_summary__volume">Malfermi volumpanelo.</string>
+    <string name="minibar_summary__app_drawer">Malfermi aplikaĵujon.</string>
 
     <!-- About -->
     <string name="about_libs">Malfermitkoda biblioteko</string>
@@ -156,7 +156,6 @@
     <string name="version">Versiono</string>
     <string name="wallpaper">Ekranfono</string>
     <string name="wallpaper_pick">Elekti ekranfonon</string>
-    <string name="wallpaper_unable_to_blur">Ne povas malklarigi.</string>
     <string name="pick_icon_pack">Elekti piktogrampakaĵo.</string>
     <string name="toast_icon_pack_error">Ne povas elekti piktogramon sen READ_EXTERNAL_STORAGE-a permesilo.</string>
     <string name="dialog__backup_app_settings__backup">Savkopio</string>

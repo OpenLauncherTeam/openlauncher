@@ -14,13 +14,13 @@
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
-    <string name="minibar_0">Promijeni izgled minibar.</string>
-    <string name="minibar_1">Podesi blur na slici ekrana.</string>
-    <string name="minibar_2">zaključaj ekran odmah, zahtjeva administraciju uređaja.</string>
-    <string name="minibar_4">Perčica do podešavanja uređaja.</string>
-    <string name="minibar_5">Shortcut to OpenLauncher podešavanja.</string>
-    <string name="minibar_7">Prikaži zvučne klizače.</string>
-    <string name="minibar_8">Otvori aplikacioni panel.</string>
+    <string name="minibar_summary__edit">Promijeni izgled minibar.</string>
+    <string name="minibar_summary__set_wallpaper">Podesi blur na slici ekrana.</string>
+    <string name="minibar_summary__lock_screen">zaključaj ekran odmah, zahtjeva administraciju uređaja.</string>
+    <string name="minibar_summary__device_settings">Perčica do podešavanja uređaja.</string>
+    <string name="minibar_summary__launcher_settings">Shortcut to OpenLauncher podešavanja.</string>
+    <string name="minibar_summary__volume">Prikaži zvučne klizače.</string>
+    <string name="minibar_summary__app_drawer">Otvori aplikacioni panel.</string>
 
     <!-- About -->
     <string name="about_libs">Otvori Source Libraries</string>
@@ -148,7 +148,6 @@
     <string name="version">Verzija</string>
     <string name="wallpaper">Slika Ekrana</string>
     <string name="wallpaper_pick">Izaberi Sliku Ekrana</string>
-    <string name="wallpaper_unable_to_blur">Nije u mogućnosti da bluruje</string>
     <string name="pick_icon_pack">Izaberi set ikonica</string>
     <string name="toast_icon_pack_error">Nije u mogućnosti da uzme ikonicu bez READ_EXTERNAL_STORAGE dozvole.</string>
     <string name="dialog__backup_app_settings__backup">Rezerna kopija</string>

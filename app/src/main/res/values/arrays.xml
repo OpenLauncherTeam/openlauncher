@@ -3,16 +3,16 @@
 
     <string-array name="entries__gestures" translatable="false">
         <item>@string/none</item>
-        <item>@string/minibar_settings</item>
-        <item>@string/wallpaper_pick</item>
-        <item>@string/lock_screen</item>
-        <item>@string/device_settings</item>
-        <item>@string/launcher_settings</item>
-        <item>@string/volume_dialog</item>
-        <item>@string/open_app_drawer</item>
         <item>@string/launch_app</item>
-        <item>@string/pref_title__search_bar</item>
-        <item>@string/mobile_network_settings</item>
+        <item>@string/minibar_title__edit</item>
+        <item>@string/minibar_title__set_wallpaper</item>
+        <item>@string/minibar_title__lock_screen</item>
+        <item>@string/minibar_title__device_settings</item>
+        <item>@string/minibar_title__launcher_settings</item>
+        <item>@string/minibar_title__volume</item>
+        <item>@string/minibar_title__app_drawer</item>
+        <item>@string/minibar_title__search_bar</item>
+        <item>@string/minibar_title__mobile_network</item>
     </string-array>
 
     <string-array name="entries__desktop_actions" translatable="false">

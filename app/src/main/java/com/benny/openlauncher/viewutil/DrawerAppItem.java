@@ -6,6 +6,7 @@ import android.view.View;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.widget.AppDrawerVertical;
 import com.benny.openlauncher.widget.AppItemView;
@@ -58,7 +59,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
         holder.builder
                 .setAppItem(_app)
                 .withOnLongClick(_app, DragAction.Action.APP_DRAWER, _onLongClickCallback)
-                .withOnTouchGetPosition(null, null);
+                .withOnTouchGetPosition(Item.newAppItem(_app), Setup.itemGestureCallback());
         super.bindView(holder, payloads);
     }
 
@@ -79,7 +80,6 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
             appItemView.setTargetedHeightPadding(AppDrawerVertical._itemHeightPadding);
 
             builder = new AppItemView.Builder(appItemView, Setup.appSettings().getDrawerIconSize())
-                    .withOnTouchGetPosition(null, null)
                     .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
                     .setTextColor(Setup.appSettings().getDrawerLabelColor())
                     .setFontSize(appItemView.getContext(), Setup.appSettings().getDrawerLabelFontSize())
