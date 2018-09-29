@@ -8,11 +8,8 @@ package com.benny.openlauncher.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.preference.Preference;
@@ -233,8 +230,8 @@ public class SettingsActivity extends ThemeActivity {
                 }
                 pref.setSummary(tmp);
             }
-            if ((pref = findPreference(R.string.pref_key__cat_icons)) != null) {
-                tmp = String.format(Locale.ENGLISH, "%s: %ddp", getString(R.string.pref_title__size), _as.getIconSize());
+            if ((pref = findPreference(R.string.pref_key__cat_appearance)) != null) {
+                tmp = String.format(Locale.ENGLISH, "Icons: %ddp", _as.getIconSize());
                 pref.setSummary(tmp);
             }
         }

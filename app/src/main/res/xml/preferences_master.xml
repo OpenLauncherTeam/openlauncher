@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:title="@string/settings">
 
-    <PreferenceCategory android:title="@string/pref_title__interfaces">
 
 
         <!--
@@ -23,15 +22,15 @@
                 <android.support.v7.preference.SeekBarPreference
                     android:defaultValue="4"
                     android:key="@string/pref_key__desktop_columns"
-                    android:title="@string/columns"
                     android:max="20"
+                    android:title="@string/columns"
                     app:min="2" />
 
                 <android.support.v7.preference.SeekBarPreference
                     android:defaultValue="5"
                     android:key="@string/pref_key__desktop_rows"
-                    android:title="@string/rows"
                     android:max="20"
+                    android:title="@string/rows"
                     app:min="2" />
 
             </android.support.v7.preference.PreferenceCategory>
@@ -200,9 +199,9 @@
                 <android.support.v7.preference.SeekBarPreference
                     android:defaultValue="5"
                     android:key="@string/pref_key__dock_size"
+                    android:max="20"
                     android:summary="@string/pref_summary__dock_size"
                     android:title="@string/pref_title__dock_size"
-                    android:max="20"
                     app:min="2" />
 
             </android.support.v7.preference.PreferenceCategory>
@@ -244,15 +243,15 @@
                 <android.support.v7.preference.SeekBarPreference
                     android:defaultValue="4"
                     android:key="@string/pref_key__drawer_columns"
-                    android:title="@string/columns"
                     android:max="20"
+                    android:title="@string/columns"
                     app:min="2" />
 
                 <android.support.v7.preference.SeekBarPreference
                     android:defaultValue="5"
                     android:key="@string/pref_key__drawer_rows"
-                    android:title="@string/rows"
                     android:max="20"
+                    android:title="@string/rows"
                     app:min="2" />
 
             </android.support.v7.preference.PreferenceCategory>
@@ -341,104 +340,39 @@
 
         </PreferenceScreen>
 
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="@string/pref_title__inputs">
-
         <!--
-        Gestures
+        Appearance
         -->
         <PreferenceScreen
-            android:icon="@drawable/ic_gesture_dark_24dp"
-            android:key="@string/pref_key__cat_gestures"
-            android:title="@string/pref_title__gestures">
+            android:icon="@drawable/ic_palette_black_24dp"
+            android:key="@string/pref_key__cat_appearance"
+            android:title="@string/pref_title__appearance">
 
-            <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__gestures">
+            <com.benny.openlauncher.preference.ColorPreferenceCompat
+                android:defaultValue="@color/colorPrimary"
+                android:key="@string/pref_key__primary_color"
+                android:title="@string/pref_title__primary_color"
+                app:cpv_dialogTitle="@string/pref_title__primary_color"
+                app:cpv_showAlphaSlider="true" />
 
-                <android.support.v7.preference.CheckBoxPreference
-                    android:defaultValue="false"
-                    android:key="@string/pref_key__gesture_feedback"
-                    android:summary="@string/pref_summary__gesture_feedback"
-                    android:title="@string/pref_title__gesture_feedback" />
 
-                <android.support.v7.preference.CheckBoxPreference
-                    android:defaultValue="true"
-                    android:key="@string/pref_key__gesture_quick_swipe"
-                    android:summary="@string/pref_summary__gesture_quick_swipe"
-                    android:title="@string/pref_title__gesture_quick_swipe" />
+            <android.support.v7.preference.ListPreference
+                android:defaultValue="0"
+                android:entries="@array/entries__themes"
+                android:entryValues="@array/values__zero_to_one"
+                android:key="@string/pref_key__theme"
+                android:summary="@string/pref_summary__theme"
+                android:title="@string/pref_title__theme" />
 
-                <android.support.v7.preference.ListPreference
-                    android:defaultValue="0"
-                    android:entries="@array/entries__gestures"
-                    android:entryValues="@array/values__zero_to_ten"
-                    android:key="@string/pref_key__gesture_double_tap"
-                    android:title="@string/pref_title__gesture_double_tap" />
-
-                <android.support.v7.preference.ListPreference
-                    android:defaultValue="8"
-                    android:entries="@array/entries__gestures"
-                    android:entryValues="@array/values__zero_to_ten"
-                    android:key="@string/pref_key__gesture_swipe_up"
-                    android:title="@string/pref_title__gesture_swipe_up" />
-
-                <android.support.v7.preference.ListPreference
-                    android:defaultValue="10"
-                    android:entries="@array/entries__gestures"
-                    android:entryValues="@array/values__zero_to_ten"
-                    android:key="@string/pref_key__gesture_swipe_down"
-                    android:title="@string/pref_title__gesture_swipe_down" />
-
-                <android.support.v7.preference.ListPreference
-                    android:defaultValue="0"
-                    android:entries="@array/entries__gestures"
-                    android:entryValues="@array/values__zero_to_ten"
-                    android:key="@string/pref_key__gesture_pinch"
-                    android:title="@string/pref_title__gesture_pinch" />
-
-                <android.support.v7.preference.ListPreference
-                    android:defaultValue="0"
-                    android:entries="@array/entries__gestures"
-                    android:entryValues="@array/values__zero_to_ten"
-                    android:key="@string/pref_key__gesture_unpinch"
-                    android:title="@string/pref_title__gesture_unpinch" />
-
-            </android.support.v7.preference.PreferenceCategory>
-
-            <android.support.v7.preference.SeekBarPreference
-                android:defaultValue="30"
-                android:key="@string/pref_key__overall_animation_speed_modifier"
-                android:max="100"
-                android:summary="@string/pref_summary__animation_speed_modifier"
-                android:title="@string/pref_title__animation_speed_modifier"
-                app:min="1" />
-
-        </PreferenceScreen>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="@string/pref_title__feels">
-
-        <!--
-        Icons
-        -->
-        <PreferenceScreen
-            android:icon="@drawable/ic_android"
-            android:key="@string/pref_key__cat_icons"
-            android:title="@string/pref_title__icons">
-
-            <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__size">
+            <android.support.v7.preference.PreferenceCategory android:title="@string/icons">
 
                 <android.support.v7.preference.SeekBarPreference
                     android:defaultValue="48"
                     android:key="@string/pref_key__icon_size"
+                    android:max="120"
                     android:summary="@string/pref_summary__icon_size"
                     android:title="@string/pref_title__icon_size"
-                    android:max="120"
-                    app:min="20"/>
-
-            </android.support.v7.preference.PreferenceCategory>
-
-            <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__appearance">
+                    app:min="20" />
 
                 <android.support.v7.preference.Preference
                     android:key="@string/pref_key__icon_pack"
@@ -450,30 +384,76 @@
 
         </PreferenceScreen>
 
-    </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__others">
+    <!--
+    Gestures
+    -->
+    <PreferenceScreen
+        android:icon="@drawable/ic_gesture_dark_24dp"
+        android:key="@string/pref_key__cat_gestures"
+        android:title="@string/pref_title__gestures">
 
-        <!--
-        Debug
-        -->
-        <PreferenceScreen
-            android:icon="@drawable/ic_bug_report_dark_24dp"
-            android:key="@string/pref_key__cat_debug"
-            android:title="@string/debug">
+        <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__gestures">
 
-            <android.support.v7.preference.Preference
-                android:key="@string/pref_key__clear_database"
-                android:summary="@string/pref_summary__clear_database"
-                android:title="@string/pref_title__clear_database" />
+            <android.support.v7.preference.CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_key__gesture_feedback"
+                android:summary="@string/pref_summary__gesture_feedback"
+                android:title="@string/pref_title__gesture_feedback" />
 
-            <android.support.v7.preference.Preference
-                android:key="@string/pref_key__restart"
-                android:summary="@string/pref_summary__restart"
-                android:title="@string/pref_title__restart" />
+            <android.support.v7.preference.CheckBoxPreference
+                android:defaultValue="true"
+                android:key="@string/pref_key__gesture_quick_swipe"
+                android:summary="@string/pref_summary__gesture_quick_swipe"
+                android:title="@string/pref_title__gesture_quick_swipe" />
 
+            <android.support.v7.preference.ListPreference
+                android:defaultValue="0"
+                android:entries="@array/entries__gestures"
+                android:entryValues="@array/values__zero_to_ten"
+                android:key="@string/pref_key__gesture_double_tap"
+                android:title="@string/pref_title__gesture_double_tap" />
 
-        </PreferenceScreen>
+            <android.support.v7.preference.ListPreference
+                android:defaultValue="8"
+                android:entries="@array/entries__gestures"
+                android:entryValues="@array/values__zero_to_ten"
+                android:key="@string/pref_key__gesture_swipe_up"
+                android:title="@string/pref_title__gesture_swipe_up" />
+
+            <android.support.v7.preference.ListPreference
+                android:defaultValue="10"
+                android:entries="@array/entries__gestures"
+                android:entryValues="@array/values__zero_to_ten"
+                android:key="@string/pref_key__gesture_swipe_down"
+                android:title="@string/pref_title__gesture_swipe_down" />
+
+            <android.support.v7.preference.ListPreference
+                android:defaultValue="0"
+                android:entries="@array/entries__gestures"
+                android:entryValues="@array/values__zero_to_ten"
+                android:key="@string/pref_key__gesture_pinch"
+                android:title="@string/pref_title__gesture_pinch" />
+
+            <android.support.v7.preference.ListPreference
+                android:defaultValue="0"
+                android:entries="@array/entries__gestures"
+                android:entryValues="@array/values__zero_to_ten"
+                android:key="@string/pref_key__gesture_unpinch"
+                android:title="@string/pref_title__gesture_unpinch" />
+
+        </android.support.v7.preference.PreferenceCategory>
+
+        <android.support.v7.preference.SeekBarPreference
+            android:defaultValue="30"
+            android:key="@string/pref_key__overall_animation_speed_modifier"
+            android:max="100"
+            android:summary="@string/pref_summary__animation_speed_modifier"
+            android:title="@string/pref_title__animation_speed_modifier"
+            app:min="1" />
+
+    </PreferenceScreen>
+
 
         <!--
         Miscellaneous
@@ -489,23 +469,6 @@
                 android:summary="@string/pref_summary__language"
                 android:title="@string/pref_title__language" />
 
-            <android.support.v7.preference.Preference
-                android:key="@string/pref_key__backup"
-                android:summary="@string/pref_summary__backup"
-                android:title="@string/pref_title__backup" />
-
-            <android.support.v7.preference.Preference
-                android:key="@string/pref_key__restore"
-                android:summary="@string/pref_summary__restore"
-                android:title="@string/pref_title__restore" />
-
-            <android.support.v7.preference.ListPreference
-                android:defaultValue="0"
-                android:entries="@array/entries__themes"
-                android:entryValues="@array/values__zero_to_one"
-                android:key="@string/pref_key__theme"
-                android:summary="@string/pref_summary__theme"
-                android:title="@string/pref_title__theme" />
 
             <android.support.v7.preference.CheckBoxPreference
                 android:defaultValue="false"
@@ -513,12 +476,32 @@
                 android:summary="@string/pref_summary__desktop_rotate"
                 android:title="@string/pref_title__desktop_rotate" />
 
-            <com.benny.openlauncher.preference.ColorPreferenceCompat
-                android:defaultValue="@color/colorPrimary"
-                android:key="@string/pref_key__primary_color"
-                android:title="@string/pref_title__primary_color"
-                app:cpv_dialogTitle="@string/pref_title__primary_color"
-                app:cpv_showAlphaSlider="true" />
+            <PreferenceCategory android:title="@string/pref_title__backup">
+
+                <android.support.v7.preference.Preference
+                    android:key="@string/pref_key__backup"
+                    android:summary="@string/pref_summary__backup"
+                    android:title="@string/pref_title__backup" />
+
+                <android.support.v7.preference.Preference
+                    android:key="@string/pref_key__restore"
+                    android:summary="@string/pref_summary__restore"
+                    android:title="@string/pref_title__restore" />
+            </PreferenceCategory>
+
+
+            <PreferenceCategory android:title="@string/debug">
+
+                <android.support.v7.preference.Preference
+                    android:key="@string/pref_key__clear_database"
+                    android:summary="@string/pref_summary__clear_database"
+                    android:title="@string/pref_title__clear_database" />
+
+                <android.support.v7.preference.Preference
+                    android:key="@string/pref_key__restart"
+                    android:summary="@string/pref_summary__restart"
+                    android:title="@string/pref_title__restart" />
+            </PreferenceCategory>
 
 
         </PreferenceScreen>
@@ -533,6 +516,5 @@
 
         </PreferenceScreen>
 
-    </PreferenceCategory>
 
 </PreferenceScreen>

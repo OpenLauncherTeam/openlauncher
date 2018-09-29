@@ -9,6 +9,7 @@
     <string name="app_donate_url" translatable="false"><![CDATA[https://gsantner.net/supportme/?project=openlauncher&source=inapp_supdon]]></string>
     <string name="app_contribution_info_url" translatable="false">https://github.com/openlauncherteam/openlauncher/blob/master/README.md#contributions</string>
 
+    <string name="icons" translatable="false">Icons</string>
     <string name="community" translatable="false">Community</string>
     <string name="intro1_title" translatable="false">@string/app_name</string>
     <string name="intro2_title" translatable="false">@string/minibar</string>
@@ -89,7 +90,7 @@
     <string name="pref_key__cat_dock" translatable="false">pref_key__cat_dock</string>
     <string name="pref_key__cat_app_drawer" translatable="false">pref_key__cat_app_drawer</string>
     <string name="pref_key__cat_gestures" translatable="false">pref_key__cat_gestures</string>
-    <string name="pref_key__cat_icons" translatable="false">pref_key__cat_icons</string>
+    <string name="pref_key__cat_appearance" translatable="false">pref_key__cat_appearance</string>
     <string name="pref_key__cat_debug" translatable="false">pref_key__cat_debug</string>
     <string name="pref_key__cat_miscellaneous" translatable="false">pref_key__cat_miscellaneous</string>
     <string name="pref_key__about" translatable="false">pref_key__about</string>
