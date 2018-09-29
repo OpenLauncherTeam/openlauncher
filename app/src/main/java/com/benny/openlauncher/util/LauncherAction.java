@@ -25,15 +25,15 @@ public class LauncherAction {
     }
 
     public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
-            new ActionDisplayItem(Action.EditMinibar, "Edit Minibar", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__edit), R.drawable.ic_mode_edit_black_24dp, 98),
-            new ActionDisplayItem(Action.SetWallpaper, "Set Wallpaper", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__set_wallpaper), R.drawable.ic_photo_black_24dp, 36),
-            new ActionDisplayItem(Action.LockScreen, "Lock Screen", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__lock_screen), R.drawable.ic_lock_black_24dp, 24),
-            new ActionDisplayItem(Action.LauncherSettings, "Launcher Settings", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__launcher_settings), R.drawable.ic_settings_launcher_black_24dp, 50),
-            new ActionDisplayItem(Action.VolumeDialog, "Volume Dialog", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__volume), R.drawable.ic_volume_up_black_24dp, 71),
-            new ActionDisplayItem(Action.DeviceSettings, "Device Settings", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__device_settings), R.drawable.ic_android_minimal, 25),
-            new ActionDisplayItem(Action.AppDrawer, "App Drawer", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__app_drawer), R.drawable.ic_apps_dark_24dp, 73),
-            new ActionDisplayItem(Action.SearchBar, "Search Bar", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__search_bar), R.drawable.ic_search_light_24dp, 89),
-            new ActionDisplayItem(Action.MobileNetworkSettings, "Mobile Network", HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__mobile_network), R.drawable.ic_network_24dp, 46),
+            new ActionDisplayItem(Action.EditMinibar, HomeActivity.Companion.get_resources().getString(R.string.minibar_title__edit), HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__edit), R.drawable.ic_mode_edit_black_24dp, 98),
+            new ActionDisplayItem(Action.SetWallpaper, HomeActivity.Companion.get_resources().getString(R.string.minibar_title__set_wallpaper), HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__set_wallpaper), R.drawable.ic_photo_black_24dp, 36),
+            new ActionDisplayItem(Action.LockScreen, HomeActivity.Companion.get_resources().getString(R.string.minibar_title__lock_screen), HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__lock_screen), R.drawable.ic_lock_black_24dp, 24),
+            new ActionDisplayItem(Action.LauncherSettings, HomeActivity.Companion.get_resources().getString(R.string.minibar_title__launcher_settings), HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__launcher_settings), R.drawable.ic_settings_launcher_black_24dp, 50),
+            new ActionDisplayItem(Action.VolumeDialog, HomeActivity.Companion.get_resources().getString(R.string.minibar_title__volume), HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__volume), R.drawable.ic_volume_up_black_24dp, 71),
+            new ActionDisplayItem(Action.DeviceSettings, HomeActivity.Companion.get_resources().getString(R.string.minibar_title__device_settings), HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__device_settings), R.drawable.ic_android_minimal, 25),
+            new ActionDisplayItem(Action.AppDrawer, HomeActivity.Companion.get_resources().getString(R.string.minibar_title__app_drawer), HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__app_drawer), R.drawable.ic_apps_dark_24dp, 73),
+            new ActionDisplayItem(Action.SearchBar, HomeActivity.Companion.get_resources().getString(R.string.minibar_title__search_bar), HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__search_bar), R.drawable.ic_search_light_24dp, 89),
+            new ActionDisplayItem(Action.MobileNetworkSettings, HomeActivity.Companion.get_resources().getString(R.string.minibar_title__mobile_network), HomeActivity.Companion.get_resources().getString(R.string.minibar_summary__mobile_network), R.drawable.ic_network_24dp, 46),
     };
 
     public static void RunAction(Action action, final Context context) {

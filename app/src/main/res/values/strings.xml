@@ -32,7 +32,7 @@
     <string name="minibar_title__search_bar">Search Bar</string>
     <string name="minibar_summary__search_bar">Open the search bar.</string>
     <string name="minibar_title__mobile_network">Mobile Network Settings</string>
-    <string name="minibar_summary__mobile_network">Mobile network settings.</string>
+    <string name="minibar_summary__mobile_network">Shortcut to the mobile network settings.</string>
 
     <!-- About -->
     <string name="about_libs">Open Source Libraries</string>
