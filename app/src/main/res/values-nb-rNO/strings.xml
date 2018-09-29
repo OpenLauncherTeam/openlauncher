@@ -11,8 +11,6 @@
 
     <!-- Toasts -->
 
-    <string name="toast_free_ram">Ledig minne: %1$d MB frigjorde %2$d MB</string>
-    <string name="toast_free_all_ram">Ledig minne: %1$d MB All RAM i beste velstand</string>
     <string name="toast_device_admin_required">Skru på enhetsadministrasjon</string>
 
     <!-- Intro -->
@@ -124,16 +122,15 @@
     <string name="request_toast">Ingen programmer installert. Vis alle programmer i skuff?</string>
     <string name="on">På</string>
     <string name="off">Av</string>
-    <string name="ok">OK</string>
     <string name="wallpaper">Bakgrunnsbilde</string>
     <string name="wallpaper_pick">Velg bakgrunnsbilde</string>
     <string name="wallpaper_unable_to_blur">Klarte ikke å tilsløre</string>
-    <string name="dialog__icon_pack_title">Velg ikonpakke</string>
-    <string name="dialog__icon_pack_info_toast">Klarte ikke å hente ikon uten READ_EXTERNAL_STORAGE-tilgang.</string>
+    <string name="pick_icon_pack">Velg ikonpakke</string>
+    <string name="toast_icon_pack_error">Klarte ikke å hente ikon uten READ_EXTERNAL_STORAGE-tilgang.</string>
     <string name="dialog__backup_app_settings__backup">Sikkerhetskopier</string>
     <string name="dialog__backup_app_settings__restore">Gjenopprett</string>
-    <string name="dialog__backup_app_settings__success">Utført.</string>
-    <string name="dialog__backup_app_settings__error">Noe gikk galt.</string>
+    <string name="toast_backup_success">Utført.</string>
+    <string name="toast_backup_error">Noe gikk galt.</string>
     <string name="columns">Kolonner</string>
     <string name="rows">Rader</string>
 

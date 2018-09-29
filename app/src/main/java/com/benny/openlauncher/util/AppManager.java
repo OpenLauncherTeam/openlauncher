@@ -104,7 +104,7 @@ public class AppManager {
         Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(_packageManager));
         final MaterialDialog d = new MaterialDialog.Builder(activity)
                 .adapter(fastItemAdapter, null)
-                .title((activity.getString(R.string.dialog__icon_pack_title)))
+                .title((activity.getString(R.string.pick_icon_pack)))
                 .build();
 
         fastItemAdapter.add(new IconLabelItem(activity, R.drawable.ic_launcher, R.string.label_default, -1)
@@ -132,7 +132,7 @@ public class AppManager {
                                 getAllApps();
                                 d.dismiss();
                             } else {
-                                Tool.toast(_context, (activity.getString(R.string.dialog__icon_pack_info_toast)));
+                                Tool.toast(_context, (activity.getString(R.string.toast_icon_pack_error)));
                                 ActivityCompat.requestPermissions(HomeActivity.Companion.getLauncher(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, HomeActivity.REQUEST_PERMISSION_STORAGE);
                             }
                         }

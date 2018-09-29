@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Mémoire disponible : %1$d mb %2$d mb économisé</string>
-    <string name="toast_free_all_ram">Mémoire disponible : %1$d MB. Votre RAM est en pleine forme.</string>
     <string name="toast_device_admin_required">Veuillez autoriser l\'administration de l\'appareil.</string>
 
     <!-- Intro -->
@@ -102,9 +100,9 @@
     <string name="pref_title__drawer_card_color">Masque</string>
     <string name="pref_title__drawer_label_color">Nom</string>
     <string name="pref_title__drawer_fast_scroll_color">Défilement rapide</string>
-    <string name="settings__pref_drawer_label_font_size">Grandeur du texte des étiquettes</string>
-    <string name="pref_title__overall_animation_speed_modifier">Vitesse d\'animation</string>
-    <string name="pref_summnary__overall_animation_speed_modifier">Modifier la vitesse des animations</string>
+    <string name="pref_title__drawer_label_font_size">Grandeur du texte des étiquettes</string>
+    <string name="pref_title__animation_speed_modifier">Vitesse d\'animation</string>
+    <string name="pref_summary__animation_speed_modifier">Modifier la vitesse des animations</string>
 
 
     <string name="pref_title__gesture_feedback">Retour sur les gestes effectués</string>
@@ -155,17 +153,16 @@
     <string name="desktop_action">Action du bureau</string>
     <string name="select_app">Choisir l\'application</string>
     <string name="off">Désactivé</string>
-    <string name="ok">OK</string>
     <string name="version">Version</string>
     <string name="wallpaper">Fond d\'écran</string>
     <string name="wallpaper_pick">Sélectionner un fond d\'écran</string>
     <string name="wallpaper_unable_to_blur">Impossible de rendre flou</string>
-    <string name="dialog__icon_pack_title">Sélectionner un pack d\'icônes</string>
-    <string name="dialog__icon_pack_info_toast">Impossible de récupérer l\'icône sans la permission READ_EXTERNAL_STORAGE.</string>
+    <string name="pick_icon_pack">Sélectionner un pack d\'icônes</string>
+    <string name="toast_icon_pack_error">Impossible de récupérer l\'icône sans la permission READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Sauvegarder</string>
     <string name="dialog__backup_app_settings__restore">Restaurer</string>
-    <string name="dialog__backup_app_settings__success">Opération réussie.</string>
-    <string name="dialog__backup_app_settings__error">Une erreur est survenue.</string>
+    <string name="toast_backup_success">Opération réussie.</string>
+    <string name="toast_backup_error">Une erreur est survenue.</string>
     <string name="columns">Colonnes</string>
     <string name="rows">Lignes</string>
     <string name="memory">Mémoire</string>

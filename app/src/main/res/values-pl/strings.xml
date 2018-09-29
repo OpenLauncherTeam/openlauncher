@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Dostępna pamięć: %1$d MB. Zwolniono %2$d MB.</string>
-    <string name="toast_free_all_ram">Dostępna pamięć: %1$d MB. Pamięć RAM jest już w najlepszym stanie.</string>
     <string name="toast_device_admin_required">Włącz administratora urządzenia.</string>
 
     <!-- Intro -->
@@ -102,9 +100,9 @@
     <string name="pref_title__drawer_card_color">Karta</string>
     <string name="pref_title__drawer_label_color">Etykieta</string>
     <string name="pref_title__drawer_fast_scroll_color">Pasek przewijania</string>
-    <string name="settings__pref_drawer_label_font_size">Rozmiar tekstu etykiety</string>
-    <string name="pref_title__overall_animation_speed_modifier">Szybkość animacji</string>
-    <string name="pref_summnary__overall_animation_speed_modifier">Zmień szybkość animacji</string>
+    <string name="pref_title__drawer_label_font_size">Rozmiar tekstu etykiety</string>
+    <string name="pref_title__animation_speed_modifier">Szybkość animacji</string>
+    <string name="pref_summary__animation_speed_modifier">Zmień szybkość animacji</string>
 
 
     <string name="pref_title__gesture_feedback">Informacja zwrotna gestów</string>
@@ -155,17 +153,16 @@
     <string name="desktop_action">Akcja pulpitu</string>
     <string name="select_app">Wybierz aplikację</string>
     <string name="off">Wył.</string>
-    <string name="ok">OK</string>
     <string name="version">Wersja</string>
     <string name="wallpaper">Tapeta</string>
     <string name="wallpaper_pick">Wybierz tapetę</string>
     <string name="wallpaper_unable_to_blur">Nie można rozmyć</string>
-    <string name="dialog__icon_pack_title">Wybierz zestaw ikon</string>
-    <string name="dialog__icon_pack_info_toast">Nie można wczytać ikony bez uprawnienia READ_EXTERNAL_STORAGE.</string>
+    <string name="pick_icon_pack">Wybierz zestaw ikon</string>
+    <string name="toast_icon_pack_error">Nie można wczytać ikony bez uprawnienia READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Kopia zapasowa</string>
     <string name="dialog__backup_app_settings__restore">Przywróć</string>
-    <string name="dialog__backup_app_settings__success">Gotowe.</string>
-    <string name="dialog__backup_app_settings__error">Coś poszło nie tak.</string>
+    <string name="toast_backup_success">Gotowe.</string>
+    <string name="toast_backup_error">Coś poszło nie tak.</string>
     <string name="columns">Kolumny</string>
     <string name="rows">Rzędy</string>
     <string name="memory">Pamięć</string>
@@ -243,7 +240,6 @@
     <string name="none">Nic</string>
     <string name="minibar_settings">Ustawienia minipaska</string>
     <string name="lock_screen">Zablokuj ekran</string>
-    <string name="clear_ram">Wyczyść pamięć RAM</string>
     <string name="device_settings">Ustawienia urządzenia</string>
     <string name="launcher_settings">Ustawienia launchera</string>
     <string name="volume_dialog">Okno dialogowe głośności</string>

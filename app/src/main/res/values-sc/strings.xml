@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Memòria lìbera: %1$d MB. %2$d MB sarvados.</string>
-    <string name="toast_free_all_ram">Memòria lìbera: %1$d MB. Sa RAM tua est in su mègius istadu.</string>
     <string name="toast_device_admin_required">Pro praghere abìlita s\'amministratzione de su dispositivu.</string>
 
     <!-- Intro -->
@@ -104,9 +102,9 @@
     <string name="pref_title__drawer_card_color">Visione a ischeda</string>
     <string name="pref_title__drawer_label_color">Eticheta</string>
     <string name="pref_title__drawer_fast_scroll_color">Barra de iscurrimentu</string>
-    <string name="settings__pref_drawer_label_font_size">Mannària de su testu de sas etichetas</string>
-    <string name="pref_title__overall_animation_speed_modifier">Lestresa de sas aplicatziones</string>
-    <string name="pref_summnary__overall_animation_speed_modifier">Acontza sa lestresa generale de sas animatziones</string>
+    <string name="pref_title__drawer_label_font_size">Mannària de su testu de sas etichetas</string>
+    <string name="pref_title__animation_speed_modifier">Lestresa de sas aplicatziones</string>
+    <string name="pref_summary__animation_speed_modifier">Acontza sa lestresa generale de sas animatziones</string>
 
 
     <string name="pref_title__gesture_feedback">Reatziones a sos gestos</string>
@@ -157,17 +155,16 @@
     <string name="desktop_action">Atzione de s\'iscrivania</string>
     <string name="select_app">Ischerta s\'aplicatzione</string>
     <string name="off">Istudada</string>
-    <string name="ok">AB</string>
     <string name="version">Versione</string>
     <string name="wallpaper">Immàgine de isfundu</string>
     <string name="wallpaper_pick">Issèbera un\'immàgine de isfundu</string>
     <string name="wallpaper_unable_to_blur">Impossìbile isfocare</string>
-    <string name="dialog__icon_pack_title">Issèbera unu pachete de iconas</string>
-    <string name="dialog__icon_pack_info_toast">Impossìbile otènnere s\'icona chene su permissu READ_EXTERNAL_STORAGE.</string>
+    <string name="pick_icon_pack">Issèbera unu pachete de iconas</string>
+    <string name="toast_icon_pack_error">Impossìbile otènnere s\'icona chene su permissu READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Faghe una còpia de seguresa</string>
     <string name="dialog__backup_app_settings__restore">Riprìstina</string>
-    <string name="dialog__backup_app_settings__success">Fatu.</string>
-    <string name="dialog__backup_app_settings__error">B\'est istadu carchi errore.</string>
+    <string name="toast_backup_success">Fatu.</string>
+    <string name="toast_backup_error">B\'est istadu carchi errore.</string>
     <string name="columns">Colunnas</string>
     <string name="rows">Rigas</string>
     <string name="memory">Memòria</string>
@@ -242,11 +239,9 @@
     <string name="donate">Dona</string>
 
     <string name="set_wallpaper">Imposta s\'immàgine de isfundu</string>
-    <string name="blur_wallpaper">Isfoca s\'immàgine de isfundu</string>
     <string name="none">perunu</string>
     <string name="minibar_settings">Impostatziones de sa minibarra</string>
     <string name="lock_screen">Bloca s\'ischermu</string>
-    <string name="clear_ram">Inneta sa RAM</string>
     <string name="device_settings">Impostatziones de su dispositivu</string>
     <string name="launcher_settings">Launcher Settings</string>
     <string name="volume_dialog">Diàlogu de su volume</string>

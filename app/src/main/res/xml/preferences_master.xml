@@ -300,7 +300,7 @@
                     android:defaultValue="13"
                     android:key="@string/pref_key__drawer_label_font_size"
                     android:max="20"
-                    android:title="@string/settings__pref_drawer_label_font_size"
+                    android:title="@string/pref_title__drawer_label_font_size"
                     app:min="7" />
 
 
@@ -408,8 +408,8 @@
                 android:defaultValue="30"
                 android:key="@string/pref_key__overall_animation_speed_modifier"
                 android:max="100"
-                android:summary="@string/pref_summnary__overall_animation_speed_modifier"
-                android:title="@string/pref_title__overall_animation_speed_modifier"
+                android:summary="@string/pref_summary__animation_speed_modifier"
+                android:title="@string/pref_title__animation_speed_modifier"
                 app:min="1" />
 
         </PreferenceScreen>
@@ -493,6 +493,11 @@
                 android:key="@string/pref_key__backup"
                 android:summary="@string/pref_summary__backup"
                 android:title="@string/pref_title__backup" />
+
+            <android.support.v7.preference.Preference
+                android:key="@string/pref_key__restore"
+                android:summary="@string/pref_summary__restore"
+                android:title="@string/pref_title__restore" />
 
             <android.support.v7.preference.ListPreference
                 android:defaultValue="0"

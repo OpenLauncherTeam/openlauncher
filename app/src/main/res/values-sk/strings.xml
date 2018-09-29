@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Voľná pamäť: %1$d MB. Bolo Ulušetrených %2$d MB.</string>
-    <string name="toast_free_all_ram">Voľná pamäť: %1$d MB. Vaša RAM je najlepšom stave.</string>
     <string name="toast_device_admin_required">Prosím umožnite správu zariadenia.</string>
 
     <!-- Intro -->
@@ -102,9 +100,9 @@
     <string name="pref_title__drawer_card_color">Zobrazenie karty</string>
     <string name="pref_title__drawer_label_color">Štítky</string>
     <string name="pref_title__drawer_fast_scroll_color">Posuvník</string>
-    <string name="settings__pref_drawer_label_font_size">Veľkosť textu štítkov</string>
-    <string name="pref_title__overall_animation_speed_modifier">Rýchlosť animácie</string>
-    <string name="pref_summnary__overall_animation_speed_modifier">Upraviť celkovú rýchlosť animácie</string>
+    <string name="pref_title__drawer_label_font_size">Veľkosť textu štítkov</string>
+    <string name="pref_title__animation_speed_modifier">Rýchlosť animácie</string>
+    <string name="pref_summary__animation_speed_modifier">Upraviť celkovú rýchlosť animácie</string>
 
 
     <string name="pref_title__gesture_feedback">Spätná väzba pri gestách</string>
@@ -155,17 +153,16 @@
     <string name="desktop_action">Akcie plochy</string>
     <string name="select_app">Vyberte aplikáciu.</string>
     <string name="off">Vyp.</string>
-    <string name="ok">OK</string>
     <string name="version">Verzia</string>
     <string name="wallpaper">Tapeta</string>
     <string name="wallpaper_pick">Vyberte tapetu</string>
     <string name="wallpaper_unable_to_blur">Nemožno rozmazať</string>
-    <string name="dialog__icon_pack_title">Vybrať súbor ikon</string>
-    <string name="dialog__icon_pack_info_toast">Nemožno zobrať ikony bez READ_EXTERNAL_STORAGE práv.</string>
+    <string name="pick_icon_pack">Vybrať súbor ikon</string>
+    <string name="toast_icon_pack_error">Nemožno zobrať ikony bez READ_EXTERNAL_STORAGE práv.</string>
     <string name="dialog__backup_app_settings__backup">Záloha</string>
     <string name="dialog__backup_app_settings__restore">Obnova</string>
-    <string name="dialog__backup_app_settings__success">Hotovo.</string>
-    <string name="dialog__backup_app_settings__error">Niečo sa pokazilo.</string>
+    <string name="toast_backup_success">Hotovo.</string>
+    <string name="toast_backup_error">Niečo sa pokazilo.</string>
     <string name="columns">Stĺpce</string>
     <string name="rows">Riadky</string>
     <string name="memory">Pamäť</string>
@@ -243,7 +240,6 @@
     <string name="none">Žiadne</string>
     <string name="minibar_settings">Nastavenia mini lišty</string>
     <string name="lock_screen">Zamknúť obrazovku</string>
-    <string name="clear_ram">Vyčistiť RAM</string>
     <string name="device_settings">Nastavenie zariadenia</string>
     <string name="launcher_settings">Nastavenia spúštača</string>
     <string name="volume_dialog">Nastavenia zvuku</string>

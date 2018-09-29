@@ -380,7 +380,7 @@ public class Tool {
             Tool.print("copied");
 
         } catch (Exception e) {
-            Toast.makeText(context, R.string.dialog__backup_app_settings__error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.toast_backup_error, Toast.LENGTH_SHORT).show();
         }
     }
 

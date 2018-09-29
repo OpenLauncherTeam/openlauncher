@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Takatut yellan: %1$d MB. %2$d MB yettwaḥrez.</string>
-    <string name="toast_free_all_ram">Takatut yellan: %1$d MB. Takatut-ik RAM attan di tezmert yelhan.</string>
     <string name="toast_device_admin_required">Ma ulac aɣilif, rmed tadbelt n yibenk.</string>
 
     <!-- Intro -->
@@ -147,17 +145,16 @@
     <string name="desktop_action">Tigawt n tnarit</string>
     <string name="select_app">Fren asnas</string>
     <string name="off">Insa</string>
-    <string name="ok">IH</string>
     <string name="version">Lqem</string>
     <string name="wallpaper">Tugna n ugilal</string>
     <string name="wallpaper_pick">Fren tugna n ugilal</string>
     <string name="wallpaper_unable_to_blur">Ur izmir ara ad isibrek</string>
-    <string name="dialog__icon_pack_title">Fren tagrumma n tignitin</string>
-    <string name="dialog__icon_pack_info_toast">Ur izmir ara ad d-yerr tignit s war tasiregt READ_EXTERNAL_STORAGE.</string>
+    <string name="pick_icon_pack">Fren tagrumma n tignitin</string>
+    <string name="toast_icon_pack_error">Ur izmir ara ad d-yerr tignit s war tasiregt READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Ḥrez</string>
     <string name="dialog__backup_app_settings__restore">Err-d</string>
-    <string name="dialog__backup_app_settings__success">Immed.</string>
-    <string name="dialog__backup_app_settings__error">Yella wayen yeḍran.</string>
+    <string name="toast_backup_success">Immed.</string>
+    <string name="toast_backup_error">Yella wayen yeḍran.</string>
     <string name="columns">Tigejda</string>
     <string name="rows">Izirigen</string>
     <string name="memory">Takatut</string>

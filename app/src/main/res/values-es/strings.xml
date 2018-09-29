@@ -6,8 +6,6 @@
                         "dock" is "dock"-->
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Memoria libre: %1$d MB. Ahorrados %2$d MB.</string>
-    <string name="toast_free_all_ram">Memoria libre: %1$d MB. Tu RAM está en mejor estado.</string>
     <string name="toast_device_admin_required">Por favor, habilita la opción de adminsitración de dispositivo.</string>
 
     <!-- Intro -->
@@ -155,17 +153,16 @@
     <string name="desktop_action">Acciones del escritorio</string>
     <string name="select_app">Selecciona la aplicación</string>
     <string name="off">Apagado</string>
-    <string name="ok">OK</string>
     <string name="version">Versión</string>
     <string name="wallpaper">Fondo de pantalla</string>
     <string name="wallpaper_pick">Escoger fondo de pantalla</string>
     <string name="wallpaper_unable_to_blur">Incapaz de difuminar</string>
-    <string name="dialog__icon_pack_title">Escoger paquete de íconos</string>
-    <string name="dialog__icon_pack_info_toast">Incapaz de seleccionar el ícono sin el permiso READ_EXTERNAL_STORAGE.</string>
+    <string name="pick_icon_pack">Escoger paquete de íconos</string>
+    <string name="toast_icon_pack_error">Incapaz de seleccionar el ícono sin el permiso READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Copia de seguridad</string>
     <string name="dialog__backup_app_settings__restore">Restaurar</string>
-    <string name="dialog__backup_app_settings__success">Hecho.</string>
-    <string name="dialog__backup_app_settings__error">Algo salió mal.</string>
+    <string name="toast_backup_success">Hecho.</string>
+    <string name="toast_backup_error">Algo salió mal.</string>
     <string name="columns">Columnas</string>
     <string name="rows">Filas</string>
     <string name="memory">Memoria</string>

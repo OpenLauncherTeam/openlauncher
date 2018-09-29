@@ -79,6 +79,7 @@
 
     <string name="pref_key__language" translatable="false">pref_key__language</string>
     <string name="pref_key__backup" translatable="false">pref_key__backup</string>
+    <string name="pref_key__restore" translatable="false">pref_key__restore</string>
     <string name="pref_key__clear_database" translatable="false">pref_key__clear_database</string>
     <string name="pref_key__restart" translatable="false">pref_key__restart</string>
     <string name="pref_key__theme" translatable="false">pref_key__theme</string>

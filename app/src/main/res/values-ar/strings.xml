@@ -11,8 +11,6 @@
 
     <!-- Toasts -->
 
-    <string name="toast_free_ram">الرام الفارغ: %2$d ميجا بايت، تم تحرير %1$d ميجا بايت</string>
-    <string name="toast_free_all_ram">الرام الفارغ: %1$d ميجا بايت، الرام في أفضل حالة.</string>
     <string name="toast_device_admin_required">من فضلك، قم بتفعيل صلاحية مدير الجهاز.</string>
 
     <!-- Intro -->
@@ -125,16 +123,15 @@
     <string name="request_toast">لم يتم اختيار تطبيقات، هل تود إظهار كافة التطبيقات في الدرج؟</string>
     <string name="on">تشغيل</string>
     <string name="off">إيقاف</string>
-    <string name="ok">حسنا</string>
     <string name="wallpaper">صورة الخلفية</string>
     <string name="wallpaper_pick">اختر صورة الخلفية</string>
     <string name="wallpaper_unable_to_blur">لا يمكن التعتيم</string>
-    <string name="dialog__icon_pack_title">اختر حزمة الأيقونات</string>
-    <string name="dialog__icon_pack_info_toast">تعذر جلب صورة الأيقونة بدون صلاحية قراءة الذاكرة</string>
+    <string name="pick_icon_pack">اختر حزمة الأيقونات</string>
+    <string name="toast_icon_pack_error">تعذر جلب صورة الأيقونة بدون صلاحية قراءة الذاكرة</string>
     <string name="dialog__backup_app_settings__backup">نسخة احتياطية</string>
     <string name="dialog__backup_app_settings__restore">استعادة</string>
-    <string name="dialog__backup_app_settings__success">تم</string>
-    <string name="dialog__backup_app_settings__error">هناك خطأ ما.</string>
+    <string name="toast_backup_success">تم</string>
+    <string name="toast_backup_error">هناك خطأ ما.</string>
     <string name="columns">الأعمدة</string>
     <string name="rows">صفوف</string>
 

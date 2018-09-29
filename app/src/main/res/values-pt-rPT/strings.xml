@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Memória livre: %1$d MB. Poupados %2$d MB.</string>
-    <string name="toast_free_all_ram">Memória livre: %1$d MB. A RAM está no seu melhor estado.</string>
     <string name="toast_device_admin_required">Por favor, ative a administração do dispositivo.</string>
 
     <!-- Intro -->
@@ -104,9 +102,9 @@
     <string name="pref_title__drawer_card_color">Cartões</string>
     <string name="pref_title__drawer_label_color">Nome</string>
     <string name="pref_title__drawer_fast_scroll_color">Barra de deslocação</string>
-    <string name="settings__pref_drawer_label_font_size">Tamanho do texto</string>
-    <string name="pref_title__overall_animation_speed_modifier">Velocidade da animação</string>
-    <string name="pref_summnary__overall_animation_speed_modifier">Alterar a velocidade das animações.</string>
+    <string name="pref_title__drawer_label_font_size">Tamanho do texto</string>
+    <string name="pref_title__animation_speed_modifier">Velocidade da animação</string>
+    <string name="pref_summary__animation_speed_modifier">Alterar a velocidade das animações.</string>
 
 
     <string name="pref_title__gesture_feedback">Feedback para gestos</string>
@@ -157,17 +155,16 @@
     <string name="desktop_action">Ação da área de trabalho</string>
     <string name="select_app">Selecionar aplicação</string>
     <string name="off">Desligado</string>
-    <string name="ok">OK</string>
     <string name="version">Versão</string>
     <string name="wallpaper">Imagem de fundo</string>
     <string name="wallpaper_pick">Escolher imagem</string>
     <string name="wallpaper_unable_to_blur">Incapaz de desfocar</string>
-    <string name="dialog__icon_pack_title">Escolher pacote de ícones</string>
-    <string name="dialog__icon_pack_info_toast">Não é possível carregar o ícone sem a permissão READ_EXTERNAL_STORAGE.</string>
+    <string name="pick_icon_pack">Escolher pacote de ícones</string>
+    <string name="toast_icon_pack_error">Não é possível carregar o ícone sem a permissão READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Backup</string>
     <string name="dialog__backup_app_settings__restore">Restaurar</string>
-    <string name="dialog__backup_app_settings__success">Feito.</string>
-    <string name="dialog__backup_app_settings__error">Algo errado ocorreu.</string>
+    <string name="toast_backup_success">Feito.</string>
+    <string name="toast_backup_error">Algo errado ocorreu.</string>
     <string name="columns">Colunas</string>
     <string name="rows">Linhas</string>
     <string name="memory">Memória</string>
@@ -242,11 +239,9 @@
     <string name="donate">Donativos</string>
 
     <string name="set_wallpaper">Definir papel de parede</string>
-    <string name="blur_wallpaper">Desfocar papel de parede</string>
     <string name="none">Nenhum</string>
     <string name="minibar_settings">Definições da mini-barra</string>
     <string name="lock_screen">Bloquear ecrã</string>
-    <string name="clear_ram">Limpar RAM</string>
     <string name="device_settings">Definições do dispositivo</string>
     <string name="launcher_settings">Definições da aplicação</string>
     <string name="volume_dialog">Diálogo de volume</string>

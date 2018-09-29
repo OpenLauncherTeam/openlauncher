@@ -1,8 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Свободной памяти: %1$d МБ. Освобождено %2$d МБ.</string>
-    <string name="toast_free_all_ram">Свободной памяти: %1$d МБ. Состояние памяти наилучшее.</string>
     <string name="toast_device_admin_required">Пожалуйста, разрешите администрирование устройства.</string>
 
     <!-- Intro -->
@@ -98,8 +96,8 @@
     <string name="pref_title__drawer_card_color">Карточка</string>
     <string name="pref_title__drawer_label_color">Подпись</string>
     <string name="pref_title__drawer_fast_scroll_color">Панель прокрутки</string>
-    <string name="pref_title__overall_animation_speed_modifier">Скорость анимаций</string>
-    <string name="pref_summnary__overall_animation_speed_modifier">Изменить скорость анимаций</string>
+    <string name="pref_title__animation_speed_modifier">Скорость анимаций</string>
+    <string name="pref_summary__animation_speed_modifier">Изменить скорость анимаций</string>
 
 
     <string name="pref_title__gesture_quick_swipe">Открывать меню жестом</string>
@@ -144,17 +142,16 @@
     <string name="desktop_action">Действия рабочего стола</string>
     <string name="select_app">Выберите приложение</string>
     <string name="off">Выкл</string>
-    <string name="ok">OK</string>
     <string name="version">Версия</string>
     <string name="wallpaper">Обои</string>
     <string name="wallpaper_pick">Выберите обои</string>
     <string name="wallpaper_unable_to_blur">Не удалось размыть</string>
-    <string name="dialog__icon_pack_title">Выберите набор значков</string>
-    <string name="dialog__icon_pack_info_toast">Не удалось захватить значок без разрешения READ_EXTERNAL_STORAGE.</string>
+    <string name="pick_icon_pack">Выберите набор значков</string>
+    <string name="toast_icon_pack_error">Не удалось захватить значок без разрешения READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Создать резервную копию</string>
     <string name="dialog__backup_app_settings__restore">Восстановить</string>
-    <string name="dialog__backup_app_settings__success">Готово.</string>
-    <string name="dialog__backup_app_settings__error">Что-то пошло не так.</string>
+    <string name="toast_backup_success">Готово.</string>
+    <string name="toast_backup_error">Что-то пошло не так.</string>
     <string name="columns">Столбцы</string>
     <string name="rows">Строки</string>
     <string name="memory">Память</string>

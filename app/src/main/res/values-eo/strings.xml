@@ -6,8 +6,6 @@
                         "dock" is "dock"-->
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Libera memorilo: %1$d MB. Ŝparita %2$d MB.</string>
-    <string name="toast_free_all_ram">Libera memorilo: %1$d MB. Via ĉefmemorilo estas plej bona stato.</string>
     <string name="toast_device_admin_required">Bonvole, ebligi la aparatmastrumadan opcion.</string>
 
     <!-- Intro -->
@@ -155,17 +153,16 @@
     <string name="desktop_action">Labortabla ago</string>
     <string name="select_app">Elekti aplikaĵon</string>
     <string name="off">Malŝaltita</string>
-    <string name="ok">OK</string>
     <string name="version">Versiono</string>
     <string name="wallpaper">Ekranfono</string>
     <string name="wallpaper_pick">Elekti ekranfonon</string>
     <string name="wallpaper_unable_to_blur">Ne povas malklarigi.</string>
-    <string name="dialog__icon_pack_title">Elekti piktogrampakaĵo.</string>
-    <string name="dialog__icon_pack_info_toast">Ne povas elekti piktogramon sen READ_EXTERNAL_STORAGE-a permesilo.</string>
+    <string name="pick_icon_pack">Elekti piktogrampakaĵo.</string>
+    <string name="toast_icon_pack_error">Ne povas elekti piktogramon sen READ_EXTERNAL_STORAGE-a permesilo.</string>
     <string name="dialog__backup_app_settings__backup">Savkopio</string>
     <string name="dialog__backup_app_settings__restore">Restaŭri</string>
-    <string name="dialog__backup_app_settings__success">Farita.</string>
-    <string name="dialog__backup_app_settings__error">Io eraris.</string>
+    <string name="toast_backup_success">Farita.</string>
+    <string name="toast_backup_error">Io eraris.</string>
     <string name="columns">Kolumnoj</string>
     <string name="rows">Vicoj</string>
     <string name="memory">Memorilo</string>

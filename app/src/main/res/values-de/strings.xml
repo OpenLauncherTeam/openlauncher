@@ -11,8 +11,6 @@
 
     <!-- Toasts -->
 
-    <string name="toast_free_ram">Freier Speicher: %1$d mb frei gegeben %2$d mb</string>
-    <string name="toast_free_all_ram">Freier Speicher: %1$d mb dein Ram ist in einem guten Zustand</string>
     <string name="toast_device_admin_required">Bitte \"Geräteadministrator\" aktivieren.</string>
 
     <!-- Intro -->
@@ -160,17 +158,16 @@
     <string name="desktop_action">Desktop Aktion</string>
     <string name="select_app">Anwendung auswählen</string>
     <string name="off">Aus</string>
-    <string name="ok">OK</string>
     <string name="version">Version</string>
     <string name="wallpaper">Wallpaper</string>
     <string name="wallpaper_pick">Suche Wallpaper aus</string>
     <string name="wallpaper_unable_to_blur">Kann Blureffekt nicht anwenden.</string>
-    <string name="dialog__icon_pack_title">Wähle ein Icon Pack aus</string>
-    <string name="dialog__icon_pack_info_toast">Du must zuerst die Berechtigung \"Manifest.permission.READ_EXTERNAL_STORAGE\" gewähren.</string>
+    <string name="pick_icon_pack">Wähle ein Icon Pack aus</string>
+    <string name="toast_icon_pack_error">Du must zuerst die Berechtigung \"Manifest.permission.READ_EXTERNAL_STORAGE\" gewähren.</string>
     <string name="dialog__backup_app_settings__backup">Sicherung</string>
     <string name="dialog__backup_app_settings__restore">Wiederherstellung</string>
-    <string name="dialog__backup_app_settings__success">Erfolgreich ausgeführt.</string>
-    <string name="dialog__backup_app_settings__error">Etwas ging schief.</string>
+    <string name="toast_backup_success">Erfolgreich ausgeführt.</string>
+    <string name="toast_backup_error">Etwas ging schief.</string>
     <string name="columns">Spalten</string>
     <string name="rows">Zeilen</string>
     <string name="memory">Arbeitsspeicher</string>
@@ -191,8 +188,8 @@
     <string name="debug">Fehlerbehebung</string>
     <string name="pref_title__desktop_folder_color_text">Ordner Text</string>
     <string name="dots">Punkte</string>
-    <string name="settings__pref_drawer_label_font_size">Bezeichnung Text-Größe</string>
-    <string name="pref_title__overall_animation_speed_modifier">Anmiations Geschwindigkeit</string>
+    <string name="pref_title__drawer_label_font_size">Bezeichnung Text-Größe</string>
+    <string name="pref_title__animation_speed_modifier">Anmiations Geschwindigkeit</string>
 
     <string name="pref_title__date_bar">Datums Anzeige</string>
     <string name="pref_title__date_bar_text_color">Text Farbe</string>
@@ -200,7 +197,7 @@
     <string name="pref_title__date_bar_date_format_custom_1">Benutzerdefinierter Format: Zeile 1</string>
     <string name="pref_title__date_bar_date_format_custom_2">Benutzerdefinierter Format: Zeile 2</string>
     <string name="custom">Benutzerdefiniert</string>
-    <string name="pref_summnary__overall_animation_speed_modifier">Skalierung der insgesamten Animations Geschwindigkeit</string>
+    <string name="pref_summary__animation_speed_modifier">Skalierung der insgesamten Animations Geschwindigkeit</string>
 
 
     <!-- Titles -->
@@ -281,14 +278,12 @@
     <string name="none">Nichts</string>
     <string name="minibar_settings">Minibar Einstellungen</string>
     <string name="lock_screen">Lock Screen</string>
-    <string name="clear_ram">RAM bereinigen</string>
     <string name="device_settings">Geräte-Einstellungen</string>
     <string name="launcher_settings">Launcher-Einstellungen</string>
     <string name="volume_dialog">Lautstärke-Dialog</string>
     <string name="open_app_drawer">App Drawer öffnen</string>
     <string name="launch_app">App starten</string>
     <string name="app_drawer">App Drawer</string>
-    <string name="blur_wallpaper">Blur Wallpaper</string>
     <string name="minibar_9">In der Such-Leiste öffnen.</string>
     <string name="minibar_10">Mobilfunkeinstellungen.</string>
 </resources>

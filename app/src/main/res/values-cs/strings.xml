@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Volná paměť: %1$d MB. Ušetřeno %2$d MB.</string>
-    <string name="toast_free_all_ram">Volná paměť: %1$d MB. Paměť RAM je ve výborném stavu.</string>
     <string name="toast_device_admin_required">Prosím povolte administraci zařízení.</string>
 
     <!-- Intro -->
@@ -147,17 +145,16 @@
     <string name="desktop_action">Akce na ploše</string>
     <string name="select_app">Výběr aplikací</string>
     <string name="off">Vypnout</string>
-    <string name="ok">OK</string>
     <string name="version">Verze</string>
     <string name="wallpaper">Pozadí</string>
     <string name="wallpaper_pick">Výběr pozadí</string>
     <string name="wallpaper_unable_to_blur">Nedaří se rozmazání</string>
-    <string name="dialog__icon_pack_title">Vyberte sadu ikon</string>
-    <string name="dialog__icon_pack_info_toast">Ikonu nelze získat bez práv pro čtení externího úložiště.</string>
+    <string name="pick_icon_pack">Vyberte sadu ikon</string>
+    <string name="toast_icon_pack_error">Ikonu nelze získat bez práv pro čtení externího úložiště.</string>
     <string name="dialog__backup_app_settings__backup">Zálohovat</string>
     <string name="dialog__backup_app_settings__restore">Obnovit</string>
-    <string name="dialog__backup_app_settings__success">Hotovo.</string>
-    <string name="dialog__backup_app_settings__error">Něco se pokazilo.</string>
+    <string name="toast_backup_success">Hotovo.</string>
+    <string name="toast_backup_error">Něco se pokazilo.</string>
     <string name="columns">Sloupce</string>
     <string name="rows">Řádky</string>
     <string name="memory">Paměť</string>

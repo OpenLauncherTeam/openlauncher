@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Memória livre: %1$d MB. %2$d MB salvos.</string>
-    <string name="toast_free_all_ram">Memória livre: %1$d MB. Sua memória RAM está em um ótimo estado.</string>
     <string name="toast_device_admin_required">Por favor, habilite a administração do dispositivo.</string>
 
     <!-- Intro -->
@@ -102,9 +100,9 @@
     <string name="pref_title__drawer_card_color">Cartão</string>
     <string name="pref_title__drawer_label_color">Rótulos</string>
     <string name="pref_title__drawer_fast_scroll_color">Rolagem rápida</string>
-    <string name="settings__pref_drawer_label_font_size">Tamanho do Texto</string>
-    <string name="pref_title__overall_animation_speed_modifier">Velocidade da Animação</string>
-    <string name="pref_summnary__overall_animation_speed_modifier">Alterar a velocidade geral das animações</string>
+    <string name="pref_title__drawer_label_font_size">Tamanho do Texto</string>
+    <string name="pref_title__animation_speed_modifier">Velocidade da Animação</string>
+    <string name="pref_summary__animation_speed_modifier">Alterar a velocidade geral das animações</string>
 
     <string name="pref_title__gesture_feedback">Feedback</string>
     <string name="pref_summary__gesture_feedback">Obtenha um retorno tátil ao pressionar e segurar um item na área de trabalho.</string>
@@ -154,17 +152,16 @@
     <string name="desktop_action">Ação da área de trabalho</string>
     <string name="select_app">Selecionar aplicativo</string>
     <string name="off">Desligado</string>
-    <string name="ok">OK</string>
     <string name="version">Versão</string>
     <string name="wallpaper">Papel de parede</string>
     <string name="wallpaper_pick">Escolha um papel de parede</string>
     <string name="wallpaper_unable_to_blur">Não foi possível borrar o papel de parede</string>
-    <string name="dialog__icon_pack_title">Escolha um pacote de ícones</string>
-    <string name="dialog__icon_pack_info_toast">Não foi possível obter o ícone sem a permissão READ_EXTERNAL_STORAGE.</string>
+    <string name="pick_icon_pack">Escolha um pacote de ícones</string>
+    <string name="toast_icon_pack_error">Não foi possível obter o ícone sem a permissão READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Fazer backup</string>
     <string name="dialog__backup_app_settings__restore">Restaurar backup</string>
-    <string name="dialog__backup_app_settings__success">Concluído.</string>
-    <string name="dialog__backup_app_settings__error">Algo deu errado..</string>
+    <string name="toast_backup_success">Concluído.</string>
+    <string name="toast_backup_error">Algo deu errado..</string>
     <string name="columns">Colunas</string>
     <string name="rows">Linhas</string>
     <string name="memory">Memória</string>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Memoria libera: %1$d MB. Salvati %2$d MB.</string>
-    <string name="toast_free_all_ram">Memoria libera: %1$d MB. La RAM è nel miglior stato.</string>
     <string name="toast_device_admin_required">Per favore abilita l\'amministrazione del dispositivo.</string>
 
     <!-- Intro -->
@@ -103,9 +101,9 @@
     <string name="pref_title__drawer_card_color">Sfondo a scheda</string>
     <string name="pref_title__drawer_label_color">Etichetta</string>
     <string name="pref_title__drawer_fast_scroll_color">Barra di scorrimento</string>
-    <string name="settings__pref_drawer_label_font_size">Dimensione testo etichette</string>
-    <string name="pref_title__overall_animation_speed_modifier">Velocità animazioni</string>
-    <string name="pref_summnary__overall_animation_speed_modifier">Modifica la velocità generale delle animazioni</string>
+    <string name="pref_title__drawer_label_font_size">Dimensione testo etichette</string>
+    <string name="pref_title__animation_speed_modifier">Velocità animazioni</string>
+    <string name="pref_summary__animation_speed_modifier">Modifica la velocità generale delle animazioni</string>
 
 
     <string name="pref_title__gesture_feedback">Gesture Feedback</string>
@@ -156,17 +154,16 @@
     <string name="desktop_action">Desktop Action</string>
     <string name="select_app">Select App</string>
     <string name="off">Off</string>
-    <string name="ok">OK</string>
     <string name="version">Versione</string>
     <string name="wallpaper">Sfondo</string>
     <string name="wallpaper_pick">Pick Wallpaper</string>
     <string name="wallpaper_unable_to_blur">Unable to blur</string>
-    <string name="dialog__icon_pack_title">Pick icon pack</string>
-    <string name="dialog__icon_pack_info_toast">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
+    <string name="pick_icon_pack">Pick icon pack</string>
+    <string name="toast_icon_pack_error">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
     <string name="dialog__backup_app_settings__backup">Backup</string>
     <string name="dialog__backup_app_settings__restore">Ripristina</string>
-    <string name="dialog__backup_app_settings__success">Fatto.</string>
-    <string name="dialog__backup_app_settings__error">Qualcosa è andato storto.</string>
+    <string name="toast_backup_success">Fatto.</string>
+    <string name="toast_backup_error">Qualcosa è andato storto.</string>
     <string name="columns">Colonne</string>
     <string name="rows">Righe</string>
     <string name="memory">Memoria</string>

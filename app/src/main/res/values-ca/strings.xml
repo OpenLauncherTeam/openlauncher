@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toasts -->
-    <string name="toast_free_ram">Memòria lliure: %1$d MB. Estalviats %2$d MB.</string>
-    <string name="toast_free_all_ram">Memòria lliure: %1$d MB. La teva RAM està en millor estat.</string>
     <string name="toast_device_admin_required">Si us plau, habilita la opció d\'administració de dispositiu.</string>
 
     <!-- Intro -->
@@ -109,9 +107,9 @@
     <string name="pref_title__drawer_card_color">Vista de la targeta</string>
     <string name="pref_title__drawer_label_color">Etiqueta</string>
     <string name="pref_title__drawer_fast_scroll_color">Barra de desplaçament</string>
-    <string name="settings__pref_drawer_label_font_size">Mida de les etiquetes</string>
-    <string name="pref_title__overall_animation_speed_modifier">Velocitat de les animacions</string>
-    <string name="pref_summnary__overall_animation_speed_modifier">Modificar la velocitat mitjana de les animacions</string>
+    <string name="pref_title__drawer_label_font_size">Mida de les etiquetes</string>
+    <string name="pref_title__animation_speed_modifier">Velocitat de les animacions</string>
+    <string name="pref_summary__animation_speed_modifier">Modificar la velocitat mitjana de les animacions</string>
 
     <string name="pref_title__gesture_feedback">Reacció</string>
     <string name="pref_summary__gesture_feedback">Vibrar en una pulsació llarga sobre un objecte de l\'escriptori.</string>
@@ -161,17 +159,16 @@
     <string name="desktop_action">Accions de l\'escriptori</string>
     <string name="select_app">Selecciona la aplicació</string>
     <string name="off">Inactiu</string>
-    <string name="ok">D\'acord</string>
     <string name="version">Versió</string>
     <string name="wallpaper">Fons de pantalla</string>
     <string name="wallpaper_pick">Tria fons de pantalla</string>
     <string name="wallpaper_unable_to_blur">Incapaç de difuminar</string>
-    <string name="dialog__icon_pack_title">Tria tema d\'icones</string>
-    <string name="dialog__icon_pack_info_toast">Incapaç de seleccionar la icona sense el permís de LECTURA DEL CONTINGUT A LA TARGETA SD.</string>
+    <string name="pick_icon_pack">Tria tema d\'icones</string>
+    <string name="toast_icon_pack_error">Incapaç de seleccionar la icona sense el permís de LECTURA DEL CONTINGUT A LA TARGETA SD.</string>
     <string name="dialog__backup_app_settings__backup">Còpia de seguretat</string>
     <string name="dialog__backup_app_settings__restore">Importar</string>
-    <string name="dialog__backup_app_settings__success">Fet.</string>
-    <string name="dialog__backup_app_settings__error">Alguna cosa no ha anat bé.</string>
+    <string name="toast_backup_success">Fet.</string>
+    <string name="toast_backup_error">Alguna cosa no ha anat bé.</string>
     <string name="columns">Columnes</string>
     <string name="rows">Files</string>
     <string name="memory">Memòria</string>
@@ -248,11 +245,9 @@
     <string name="donate">Donacions</string>
 
     <string name="set_wallpaper">Establir el fons de pantalla</string>
-    <string name="blur_wallpaper">Difuminar el fons de pantalla</string>
     <string name="none">Cap</string>
     <string name="minibar_settings">Paràmetres de la minibar</string>
     <string name="lock_screen">Bloqueja la pantalla</string>
-    <string name="clear_ram">Neteja la RAM</string>
     <string name="device_settings">Paràmetres del dispositiu</string>
     <string name="launcher_settings">Paràmetres del llençador</string>
     <string name="volume_dialog">Diàleg del volum</string>

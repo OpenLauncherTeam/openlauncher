@@ -8,7 +8,11 @@ package com.benny.openlauncher.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.preference.Preference;
@@ -24,16 +28,22 @@ import com.benny.openlauncher.preference.ColorPreferenceCompat;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
+import com.benny.openlauncher.util.BackupHelper;
 import com.benny.openlauncher.util.DatabaseHelper;
+import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.viewutil.DialogHelper;
 import com.jaredrummler.android.colorpicker.ColorPickerDialog;
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
+import com.nononsenseapps.filepicker.FilePickerActivity;
+import com.nononsenseapps.filepicker.Utils;
 
 import net.gsantner.opoc.preference.GsPreferenceFragmentCompat;
 import net.gsantner.opoc.util.ContextUtils;
 import net.gsantner.opoc.util.PermissionChecker;
 
+import java.io.File;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -108,6 +118,23 @@ public class SettingsActivity extends ThemeActivity {
             return;
         }
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            List<Uri> files = Utils.getSelectedFilesFromResult(data);
+            switch (requestCode) {
+                case Definitions.INTENT_BACKUP:
+                    BackupHelper.backupConfig(this, new File(Utils.getFileForUri(files.get(0)).getAbsolutePath() + "/openlauncher.zip").toString());
+                    break;
+                case Definitions.INTENT_RESTORE:
+                    BackupHelper.restoreConfig(this, Utils.getFileForUri(files.get(0)).toString());
+                    System.exit(0);
+                    break;
+            }
+        }
     }
 
     public static abstract class OlSettingsFragment extends GsPreferenceFragmentCompat<AppSettings> {
@@ -292,7 +319,19 @@ public class SettingsActivity extends ThemeActivity {
                 }
                 case R.string.pref_key__backup: {
                     if (new PermissionChecker(getActivity()).doIfExtStoragePermissionGranted()) {
-                        DialogHelper.backupDialog(getActivity());
+                        Intent i = new Intent(getActivity(), FilePickerActivity.class)
+                            .putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, true)
+                            .putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_DIR);
+                        getActivity().startActivityForResult(i, Definitions.INTENT_BACKUP);
+                    }
+                    return true;
+                }
+                case R.string.pref_key__restore: {
+                    if (new PermissionChecker(getActivity()).doIfExtStoragePermissionGranted()) {
+                        Intent i = new Intent(getActivity(), FilePickerActivity.class)
+                            .putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false)
+                            .putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
+                        getActivity().startActivityForResult(i, Definitions.INTENT_RESTORE);
                     }
                     return true;
                 }

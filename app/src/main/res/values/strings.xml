@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Toasts -->
-    <string name="toast_free_ram">Free Memory: %1$d MB. Saved %2$d MB.</string>
-    <string name="toast_free_all_ram">Free Memory: %1$d MB. Your RAM is in best state.</string>
-    <string name="toast_device_admin_required">Please enable device administration.</string>
-
     <!-- Intro -->
     <string name="intro_skip">Skip</string>
     <string name="intro_finish">Let\'s start.</string>
@@ -22,7 +17,7 @@
     <string name="minibar">Minibar</string>
     <string name="minibar_0">Change the minibar layout.</string>
     <string name="minibar_1">Set the desktop wallpaper.</string>
-    <string name="minibar_2">Lock the screen immediately, requires device administration.</string>
+    <string name="minibar_2">Lock the screen immediately.</string>
     <string name="minibar_4">Shortcut to device settings.</string>
     <string name="minibar_5">Shortcut to OpenLauncher settings.</string>
     <string name="minibar_7">Display all available volume sliders.</string>
@@ -106,9 +101,9 @@
     <string name="pref_title__drawer_card_color">Card View</string>
     <string name="pref_title__drawer_label_color">Label</string>
     <string name="pref_title__drawer_fast_scroll_color">Scrollbar</string>
-    <string name="settings__pref_drawer_label_font_size">Label Text Size</string>
-    <string name="pref_title__overall_animation_speed_modifier">Animation Speed</string>
-    <string name="pref_summnary__overall_animation_speed_modifier">Modify the overall speed of animations</string>
+    <string name="pref_title__drawer_label_font_size">Label Font Size</string>
+    <string name="pref_title__animation_speed_modifier">Animation Speed</string>
+    <string name="pref_summary__animation_speed_modifier">Modify the overall speed of animations</string>
 
 
     <string name="pref_title__gesture_feedback">Gesture Feedback</string>
@@ -125,16 +120,18 @@
     <string name="pref_title__icon_pack">Icon Pack</string>
     <string name="pref_summary__icon_pack">Select an installed icon pack.</string>
 
-    <string name="pref_summary__language">Change language of this app. Restart app for changes to take effect</string>
     <string name="pref_title__language">Language</string>
+    <string name="pref_summary__language">Change language of this app. Restart app for changes to take effect</string>
     <string name="pref_title__backup">Backup</string>
-    <string name="pref_summary__backup">Backup and restore your settings.</string>
+    <string name="pref_summary__backup">Backup your desktop and settings.</string>
+    <string name="pref_title__restore">Restore</string>
+    <string name="pref_summary__restore">Restore your desktop and settings.</string>
     <string name="pref_title__clear_database">Clear Database</string>
     <string name="pref_summary__clear_database">Delete the data for the dock and desktop to fix issues.</string>
     <string name="pref_title__restart">Restart</string>
     <string name="pref_summary__restart">Restart the launcher in case it\'s misbehaving.</string>
-    <string name="pref_summary__theme">Set the theme for the entire app.</string>
     <string name="pref_title__theme">Theme</string>
+    <string name="pref_summary__theme">Set the theme for the entire app.</string>
     <string name="pref_title__primary_color">Primary Color</string>
     <string name="pref_summary__primary_color">Set the primary color for the app.</string>
 
@@ -159,17 +156,11 @@
     <string name="desktop_action">Desktop Action</string>
     <string name="select_app">Select App</string>
     <string name="off">Off</string>
-    <string name="ok">OK</string>
     <string name="version">Version</string>
     <string name="wallpaper">Wallpaper</string>
     <string name="wallpaper_pick">Pick Wallpaper</string>
     <string name="wallpaper_unable_to_blur">Unable to blur</string>
-    <string name="dialog__icon_pack_title">Pick icon pack</string>
-    <string name="dialog__icon_pack_info_toast">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
-    <string name="dialog__backup_app_settings__backup">Backup</string>
-    <string name="dialog__backup_app_settings__restore">Restore</string>
-    <string name="dialog__backup_app_settings__success">Done.</string>
-    <string name="dialog__backup_app_settings__error">Something went wrong.</string>
+    <string name="pick_icon_pack">Pick icon pack</string>
     <string name="columns">Columns</string>
     <string name="rows">Rows</string>
     <string name="memory">Memory</string>
@@ -205,6 +196,10 @@
     <!-- Toasts -->
     <string name="toast_not_enough_space">Not enough space.</string>
     <string name="toast_app_uninstalled">App uninstalled.</string>
+    <string name="toast_device_admin_required">Please enable device administration.</string>
+    <string name="toast_backup_success">Done.</string>
+    <string name="toast_backup_error">Something went wrong.</string>
+    <string name="toast_icon_pack_error">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
 
     <!-- Item Labels -->
     <string name="folder">Unnamed</string>
@@ -220,7 +215,6 @@
     <string name="licenses">Licenses</string>
     <string name="contributors">Contributors</string>
     <string name="changelog">Changelog</string>
-
     <string name="more">More</string>
     <string name="open_source_licenses">Open Source Licenses</string>
     <string name="rate_the_app">Rate this app</string>
@@ -242,18 +236,16 @@
     <string name="contributors_public_info">Show information about contributors. Contributors can provide information to be shown here (opt-in) after contribution</string>
     <string name="contribute">Contribute</string>
     <string name="donate">Donate</string>
-
     <string name="set_wallpaper">Set Wallpaper</string>
-    <string name="blur_wallpaper">Blur Wallpaper</string>
     <string name="none">None</string>
     <string name="minibar_settings">Minibar Settings</string>
     <string name="lock_screen">Lock Screen</string>
-    <string name="clear_ram">Clear RAM</string>
     <string name="device_settings">Device Settings</string>
     <string name="launcher_settings">Launcher Settings</string>
     <string name="volume_dialog">Volume Dialog</string>
     <string name="open_app_drawer">Open App Drawer</string>
     <string name="launch_app">Launch App</string>
+    <string name="mobile_network_settings">Mobile Network Settings</string>
     <string name="app_drawer">App Drawer</string>
 
 </resources>

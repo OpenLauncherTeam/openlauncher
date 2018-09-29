@@ -1,8 +1,6 @@
 <resources>
     <!-- This is the serbian latin variant. As it is only supported by Android 7 or above, latin is used for default serbian till there is a cyrillic translation available too -->
     <!-- Toasts -->
-    <string name="toast_free_ram">Slobodna Memorija: %1$d MB. Sačuvano %2$d MB.</string>
-    <string name="toast_free_all_ram">Slobodna Memorija: %1$d MB. Vaš RAM je u najboljem stanju.</string>
     <string name="toast_device_admin_required">Molimo vas omogzućite administraciju uređaja.</string>
 
     <!-- Intro -->
@@ -147,17 +145,16 @@
     <string name="desktop_action">Akcija na Desktopu</string>
     <string name="select_app">Izaberi Aplikaciju</string>
     <string name="off">Isključeno</string>
-    <string name="ok">OK</string>
     <string name="version">Verzija</string>
     <string name="wallpaper">Slika Ekrana</string>
     <string name="wallpaper_pick">Izaberi Sliku Ekrana</string>
     <string name="wallpaper_unable_to_blur">Nije u mogućnosti da bluruje</string>
-    <string name="dialog__icon_pack_title">Izaberi set ikonica</string>
-    <string name="dialog__icon_pack_info_toast">Nije u mogućnosti da uzme ikonicu bez READ_EXTERNAL_STORAGE dozvole.</string>
+    <string name="pick_icon_pack">Izaberi set ikonica</string>
+    <string name="toast_icon_pack_error">Nije u mogućnosti da uzme ikonicu bez READ_EXTERNAL_STORAGE dozvole.</string>
     <string name="dialog__backup_app_settings__backup">Rezerna kopija</string>
     <string name="dialog__backup_app_settings__restore">Povrati</string>
-    <string name="dialog__backup_app_settings__success">završeno.</string>
-    <string name="dialog__backup_app_settings__error">Nešto je krenulo kako ne treba.</string>
+    <string name="toast_backup_success">završeno.</string>
+    <string name="toast_backup_error">Nešto je krenulo kako ne treba.</string>
     <string name="columns">Kolone</string>
     <string name="rows">Redovi</string>
     <string name="memory">Memorija</string>

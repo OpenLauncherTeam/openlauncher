@@ -6,23 +6,17 @@
         <item>@string/minibar_settings</item>
         <item>@string/wallpaper_pick</item>
         <item>@string/lock_screen</item>
-        <item>@string/clear_ram</item>
         <item>@string/device_settings</item>
         <item>@string/launcher_settings</item>
         <item>@string/volume_dialog</item>
         <item>@string/open_app_drawer</item>
         <item>@string/launch_app</item>
         <item>@string/pref_title__search_bar</item>
-        <item>@string/minibar_10</item>
+        <item>@string/mobile_network_settings</item>
     </string-array>
 
     <string-array name="entries__desktop_actions" translatable="false">
         <item>@string/app_drawer</item>
-    </string-array>
-
-    <string-array name="entries__wallpaper_options" translatable="false">
-        <item>@string/set_wallpaper</item>
-        <item>@string/blur_wallpaper</item>
     </string-array>
 
     <string-array name="entries__desktop_styles" translatable="false">
@@ -38,11 +32,6 @@
     <string-array name="entries__drawer_styles" translatable="false">
         <item>@string/horizontal_paged_drawer</item>
         <item>@string/vertical_scroll_drawer</item>
-    </string-array>
-
-    <string-array name="entries__backup_options" translatable="false">
-        <item>@string/dialog__backup_app_settings__backup</item>
-        <item>@string/dialog__backup_app_settings__restore</item>
     </string-array>
 
     <string-array name="entries__themes" translatable="false">
@@ -83,7 +72,6 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
-        <item>11</item>
     </string-array>
 
 </resources>
