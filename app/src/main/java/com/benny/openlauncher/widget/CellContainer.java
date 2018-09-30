@@ -221,19 +221,15 @@ public class CellContainer extends ViewGroup {
     private final void drawCachedOutlineBitmap(Canvas canvas, Rect cell) {
         if (_cachedOutlineBitmap != null) {
             Bitmap bitmap = _cachedOutlineBitmap;
-            float centerX = (float) cell.centerX();
-            Bitmap bitmap2 = _cachedOutlineBitmap;
-            float f = (float) 2;
-            centerX -= ((float) bitmap2.getWidth()) / f;
-            float centerY = (float) cell.centerY();
-            Bitmap bitmap3 = _cachedOutlineBitmap;
-            canvas.drawBitmap(bitmap, centerX, centerY - (((float) bitmap3.getWidth()) / f), _outlinePaint);
+            float centerX = cell.centerX();
+            float centerY = cell.centerY();
+            canvas.drawBitmap(bitmap, centerX - (bitmap.getWidth() / 2), centerY - (bitmap.getHeight() / 2), _outlinePaint);
         }
     }
 
     public final void clearCachedOutlineBitmap() {
         _outlinePaint.setAlpha(0);
-        _cachedOutlineBitmap = (Bitmap) null;
+        _cachedOutlineBitmap = null;
         invalidate();
     }
 
