@@ -52,7 +52,7 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
                 Tool.visibleViews(_appDrawerIndicator);
                 Tool.invisibleViews(_homeActivity.getDesktop());
                 _homeActivity.hideDesktopIndicator();
-                _homeActivity.updateDock(false);
+                _homeActivity.updateDock(false, 0);
                 _homeActivity.updateSearchBar(false);
             }
         } else {
@@ -63,7 +63,7 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
                 if (Setup.appSettings().getDrawerStyle() == AppDrawerController.DrawerMode.HORIZONTAL_PAGED)
                     _homeActivity.updateDock(true, 200);
                 else
-                    _homeActivity.updateDock(true);
+                    _homeActivity.updateDock(true, 200);
                 _homeActivity.updateSearchBar(!_dragOptionPanel._isDraggedFromDrawer);
                 _dragOptionPanel._isDraggedFromDrawer = false;
             } else {

@@ -194,18 +194,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
     }
 
-    public final void openAppDrawer() {
-        openAppDrawer$default(this, null, 0, 0, 7, null);
-    }
-
-    public final void openAppDrawer(@Nullable View view) {
-        openAppDrawer$default(this, view, 0, 0, 6, null);
-    }
-
-    public final void updateDock(boolean z) {
-        updateDock$default(this, z, 0, 2, null);
-    }
-
     static {
         Companion.getTimeChangesIntentFilter().addAction("android.intent.action.TIME_TICK");
         Companion.getTimeChangesIntentFilter().addAction("android.intent.action.TIMEZONE_CHANGED");
@@ -574,7 +562,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     public final void onUninstallItem(@NonNull Item item) {
-
         Companion.setConsumeNextResume(true);
         Setup.eventHandler().showDeletePackageDialog(this, item);
     }
@@ -599,7 +586,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     public final void onInfoItem(@NonNull Item item) {
-
         if (item._type == Type.APP) {
             try {
                 String str = "android.settings.APPLICATION_DETAILS_SETTINGS";
@@ -644,7 +630,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public void onDesktopEdit() {
         Tool.visibleViews(100, 20, (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel));
         hideDesktopIndicator();
-        updateDock$default(this, false, 0, 2, null);
+        updateDock(false, 0);
         updateSearchBar(false);
     }
 
@@ -652,7 +638,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         Tool.invisibleViews(100, 20, (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel));
         ((PagerIndicator) findViewById(R.id.desktopIndicator)).hideDelay();
         showDesktopIndicator();
-        updateDock$default(this, true, 0, 2, null);
+        updateDock(true, 0);
         updateSearchBar(true);
     }
 
@@ -701,20 +687,13 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public final void clearRoomForPopUp() {
         Tool.invisibleViews((Desktop) findViewById(R.id.desktop));
         hideDesktopIndicator();
-        updateDock$default(this, false, 0, 2, null);
+        updateDock(false, 0);
     }
 
     public final void unClearRoomForPopUp() {
         Tool.visibleViews((Desktop) findViewById(R.id.desktop));
         showDesktopIndicator();
-        updateDock$default(this, true, 0, 2, null);
-    }
-
-    public static /* bridge */ /* synthetic */ void updateDock$default(HomeActivity homeActivity, boolean z, long j, int i, Object obj) {
-        if ((i & 2) != 0) {
-            j = 0;
-        }
-        homeActivity.updateDock(z, j);
+        updateDock(true, 0);
     }
 
     public final void updateDock(boolean show, long delay) {
@@ -806,7 +785,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public final void updateHomeLayout() {
         updateSearchBar(true);
-        updateDock$default(this, true, 0, 2, null);
+        updateDock(true, 0);
         updateDesktopIndicatorVisibility();
         AppSettings appSettings = Setup.appSettings();
 
@@ -895,12 +874,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         super.onDestroy();
     }
 
-    public void onLowMemory() {
-        System.runFinalization();
-        System.gc();
-        super.onLowMemory();
-    }
-
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == -1) {
             if (requestCode == REQUEST_PICK_APPWIDGET) {
@@ -974,17 +947,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         desktop.setCurrentItem(appSettings.getDesktopPageCurrent());
     }
 
-    public static /* bridge */ /* synthetic */ void openAppDrawer$default(HomeActivity homeActivity, View view, int i, int i2, int i3, Object obj) {
-        if ((i3 & 1) != 0) {
-            view = (Desktop) homeActivity.findViewById(R.id.desktop);
-        }
-        if ((i3 & 2) != 0) {
-            i = -1;
-        }
-        if ((i3 & 4) != 0) {
-            i2 = -1;
-        }
-        homeActivity.openAppDrawer(view, i, i2);
+    public final void openAppDrawer() {
+        openAppDrawer(null, 0, 0);
     }
 
     public final void openAppDrawer(@Nullable View view, int x, int y) {

@@ -252,7 +252,7 @@ public class SettingsActivity extends ThemeActivity {
                     break;
                 }
                 case R.string.pref_key__dock_enable: {
-                    launcher.updateDock(true);
+                    launcher.updateDock(true, 0);
                     break;
                 }
                 case R.string.pref_key__gesture_double_tap:
