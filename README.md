@@ -1,4 +1,4 @@
-![graphic](https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/featureGraphic.png)
+![graphic](https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher/master/metadata/en-US/featureGraphic.png)
 
 [![release](https://img.shields.io/badge/release-0.5.8-blue.svg)](https://github.com/OpenLauncherTeam/openlauncher/releases)
 [![circleci](https://circleci.com/gh/OpenLauncherTeam/openlauncher.svg?style=shield)](https://circleci.com/gh/OpenLauncherTeam/openlauncher)
@@ -31,7 +31,7 @@ This an open source Android launcher project, started from scratch. We aim to cr
   * Icon packs
 
 <div style="display:flex;">
-	<img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher-metadata-latest/master/en-US/screenshots.png">
+    <img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher/master/metadata/en-US/screenshots.png">
 </div>
 
 ### Status
