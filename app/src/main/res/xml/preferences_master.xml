@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--suppress AndroidElementNotAllowed -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:title="@string/settings">
 
-
-
-        <!--
-        Desktop
-        -->
         <PreferenceScreen
             android:icon="@drawable/ic_desktop_windows_dark_24dp"
             android:key="@string/pref_key__cat_desktop"
@@ -36,14 +29,6 @@
             </android.support.v7.preference.PreferenceCategory>
 
             <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__appearance">
-
-                <!--<android.support.v7.preference.ListPreference-->
-                <!--android:defaultValue="0"-->
-                <!--android:entries="@array/entries__desktop_styles"-->
-                <!--android:entryValues="@array/values__zero_to_one"-->
-                <!--android:key="@string/pref_key__desktop_style"-->
-                <!--android:summary="@string/pref_summary__desktop_style"-->
-                <!--android:title="@string/pref_title__desktop_style" />-->
 
                 <android.support.v7.preference.ListPreference
                     android:defaultValue="0"
@@ -182,9 +167,6 @@
             </android.support.v7.preference.PreferenceCategory>
         </PreferenceScreen>
 
-        <!--
-        Dock
-        -->
         <PreferenceScreen
             android:icon="@drawable/ic_dock_dark_24dp"
             android:key="@string/pref_key__cat_dock"
@@ -229,9 +211,6 @@
 
         </PreferenceScreen>
 
-        <!--
-        APP DRAWER
-        -->
         <PreferenceScreen
             android:icon="@drawable/ic_apps_dark_24dp"
             android:key="@string/pref_key__cat_app_drawer"
@@ -302,7 +281,6 @@
                     android:title="@string/pref_title__drawer_label_font_size"
                     app:min="7" />
 
-
             </android.support.v7.preference.PreferenceCategory>
 
             <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__color">
@@ -329,7 +307,7 @@
                     app:cpv_showAlphaSlider="true" />
 
                 <com.benny.openlauncher.preference.ColorPreferenceCompat
-                    android:defaultValue="@color/op_red"
+                    android:defaultValue="@color/colorPrimaryDark"
                     android:key="@string/pref_key__drawer_fast_scroll_color"
                     android:title="@string/pref_title__drawer_fast_scroll_color"
                     app:cpv_dialogTitle="@string/pref_title__drawer_fast_scroll_color"
@@ -337,12 +315,8 @@
 
             </android.support.v7.preference.PreferenceCategory>
 
-
         </PreferenceScreen>
 
-        <!--
-        Appearance
-        -->
         <PreferenceScreen
             android:icon="@drawable/ic_palette_black_24dp"
             android:key="@string/pref_key__cat_appearance"
@@ -381,13 +355,8 @@
 
             </android.support.v7.preference.PreferenceCategory>
 
-
         </PreferenceScreen>
 
-
-    <!--
-    Gestures
-    -->
     <PreferenceScreen
         android:icon="@drawable/ic_gesture_dark_24dp"
         android:key="@string/pref_key__cat_gestures"
@@ -454,10 +423,6 @@
 
     </PreferenceScreen>
 
-
-        <!--
-        Miscellaneous
-        -->
         <PreferenceScreen
             android:icon="@drawable/ic_more_horiz_black_24dp"
             android:key="@string/pref_key__cat_miscellaneous"
@@ -503,18 +468,10 @@
                     android:title="@string/pref_title__restart" />
             </PreferenceCategory>
 
-
         </PreferenceScreen>
 
-        <!--
-            About
-        -->
         <PreferenceScreen
             android:icon="@drawable/ic_info_outline_dark_24dp"
             android:key="@string/pref_key__about"
-            android:title="@string/pref_title__about">
-
-        </PreferenceScreen>
-
-
+            android:title="@string/pref_title__about" />
 </PreferenceScreen>
