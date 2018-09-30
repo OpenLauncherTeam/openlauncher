@@ -75,7 +75,7 @@ import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
 import com.benny.openlauncher.widget.SearchBar;
 import com.benny.openlauncher.widget.SmoothViewPager;
-import com.benny.openlauncher.widget.SwipeListView;
+import com.benny.openlauncher.widget.MinibarView;
 
 import net.gsantner.opoc.util.ContextUtils;
 
@@ -400,7 +400,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             }
         }
 
-        SwipeListView minibar = findViewById(R.id.minibar);
+        MinibarView minibar = findViewById(R.id.minibar);
 
         minibar.setAdapter(new MinibarAdapter(this, labels, icons));
         minibar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -952,7 +952,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     public final void openAppDrawer(@Nullable View view, int x, int y) {
-        if (!(x > 0 && y > 0)) {
+        if (!(x > 0 && y > 0) && view != null) {
             int[] pos = new int[2];
             view.getLocationInWindow(pos);
             cx = pos[0];

@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 import com.benny.openlauncher.util.Tool;
 
-public class SwipeListView extends ListView {
+public class MinibarView extends ListView {
     private GestureDetector _gestureDetector;
 
     public void setOnSwipeRight(OnSwipeRight onSwipeRight) {
@@ -17,19 +17,19 @@ public class SwipeListView extends ListView {
 
     private OnSwipeRight _onSwipeRight;
 
-    public SwipeListView(Context context) {
+    public MinibarView(Context context) {
         super(context);
 
         init();
     }
 
-    public SwipeListView(Context context, AttributeSet attrs) {
+    public MinibarView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         init();
     }
 
-    public SwipeListView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MinibarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         init();

@@ -510,9 +510,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
             launcher = HomeActivity.Companion.getLauncher();
             if (launcher != null) {
                 dragNDropView = launcher.getDragNDropView();
-                if (dragNDropView != null) {
-                    dragNDropView.cancelFolderPreview();
-                }
+                dragNDropView.cancelFolderPreview();
             }
         }
         _previousDragPoint.set(_coordinate.x, _coordinate.y);
@@ -525,38 +523,15 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
                 break;
             case CurrentOccupied:
                 Object action;
-                HomeActivity launcher2;
-                DragOptionLayout dragNDropView2;
+                launcher = HomeActivity.Companion.getLauncher();
+                dragNDropView = launcher.getDragNDropView();
                 for (CellContainer page : _pages) {
                     page.clearCachedOutlineBitmap();
                 }
-                launcher = HomeActivity.Companion.getLauncher();
-                if (launcher != null) {
-                    dragNDropView = launcher.getDragNDropView();
-                    if (dragNDropView != null) {
-                        action = dragNDropView.getDragAction();
-                        if (!Action.WIDGET.equals(action) || !Action.ACTION.equals(action) && (getCurrentPage().coordinateToChildView(_coordinate) instanceof AppItemView)) {
-                            launcher2 = HomeActivity.Companion.getLauncher();
-                            if (launcher2 != null) {
-                                dragNDropView2 = launcher2.getDragNDropView();
-                                if (dragNDropView2 != null) {
-                                    dragNDropView2.showFolderPreviewAt(this, ((float) getCurrentPage().getCellWidth()) * (((float) _coordinate.x) + 0.5f), (((float) getCurrentPage().getCellHeight()) * (((float) _coordinate.y) + 0.5f)) - ((float) (Setup.appSettings().isDesktopShowLabel() ? Tool.toPx(7) : 0)));
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-                action = null;
-                launcher2 = HomeActivity.Companion.getLauncher();
-                if (launcher2 != null) {
-                    dragNDropView2 = launcher2.getDragNDropView();
-                    if (dragNDropView2 != null) {
-                        if (Setup.appSettings().isDesktopShowLabel()) {
-                        }
-                        dragNDropView2.showFolderPreviewAt(this, ((float) getCurrentPage().getCellWidth()) * (((float) _coordinate.x) + 0.5f), (((float) getCurrentPage().getCellHeight()) * (((float) _coordinate.y) + 0.5f)) - ((float) (Setup.appSettings().isDesktopShowLabel() ? Tool.toPx(7) : 0)));
-                    }
+                action = dragNDropView.getDragAction();
+                if (!Action.WIDGET.equals(action) || !Action.ACTION.equals(action) && (getCurrentPage().coordinateToChildView(_coordinate) instanceof AppItemView)) {
+                    launcher.getDragNDropView().showFolderPreviewAt(this, getCurrentPage().getCellWidth() * (_coordinate.x + 0.5f), getCurrentPage().getCellHeight() * (_coordinate.y + 0.5f));
+                    break;
                 }
                 break;
             default:

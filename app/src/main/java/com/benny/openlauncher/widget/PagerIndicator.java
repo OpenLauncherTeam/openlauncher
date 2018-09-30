@@ -17,8 +17,7 @@ import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
 import com.benny.openlauncher.widget.SmoothViewPager.OnPageChangeListener;
 
 public final class PagerIndicator extends View implements OnPageChangeListener {
-    public static final Companion _companion = new Companion();
-    private static float _pad;
+    private float _pad;
     private boolean _alphaFade;
     private boolean _alphaShow;
     private Paint _arrowPaint = new Paint(1);
@@ -38,20 +37,6 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     private float _scaleFactor2 = 1.5f;
     private float _scrollOffset;
     private int _scrollPagePosition;
-
-    /* compiled from: PagerIndicator.kt */
-    public static final class Companion {
-        private Companion() {
-        }
-
-        private final float getPad() {
-            return PagerIndicator._pad;
-        }
-
-        private final void setPad(float v) {
-            PagerIndicator._pad = v;
-        }
-    }
 
     public static class Mode {
         public static final int NORMAL = 0;
@@ -149,7 +134,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
 
     public PagerIndicator(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
-        _companion.setPad((float) Tool.toPx(3));
+        _pad = Tool.toPx(3);
         setWillNotDraw(false);
         _dotPaint.setColor(-1);
         _dotPaint.setStrokeWidth((float) Tool.toPx(2));
@@ -157,7 +142,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
         _arrowPaint.setColor(-1);
         _arrowPaint.setAntiAlias(true);
         _arrowPaint.setStyle(Style.STROKE);
-        _arrowPaint.setStrokeWidth(_companion.getPad() / 1.5f);
+        _arrowPaint.setStrokeWidth(_pad / 1.5f);
         _arrowPaint.setStrokeJoin(Join.ROUND);
         _arrowPath = new Path();
         _mode = Setup.appSettings().getDesktopIndicatorMode();
@@ -176,7 +161,6 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
         _mode = mode;
         invalidate();
     }
-
 
     public final void setViewPager(@Nullable SmoothViewPager pager) {
         if (pager == null && _pager != null) {
@@ -221,7 +205,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     }
 
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        _dotSize = ((float) getHeight()) - (_companion.getPad() * 1.25f);
+        _dotSize = ((float) getHeight()) - (_pad * 1.25f);
         super.onLayout(changed, left, top, right, bottom);
     }
 }

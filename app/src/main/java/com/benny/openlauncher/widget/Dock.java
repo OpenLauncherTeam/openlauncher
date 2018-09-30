@@ -110,37 +110,12 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
             case ItemViewNotFound:
                 break;
             case CurrentOccupied:
-                Object action;
-                HomeActivity launcher2;
-                DragOptionLayout dragNDropView2;
                 clearCachedOutlineBitmap();
-                launcher = _homeActivity;
-                if (launcher != null) {
-                    dragNDropView = launcher.getDragNDropView();
-                    if (dragNDropView != null) {
-                        action = dragNDropView.getDragAction();
-                        if (!Action.WIDGET.equals(action) || !Action.ACTION.equals(action) && (coordinateToChildView(_coordinate) instanceof AppItemView)) {
-                            launcher2 = _homeActivity;
-                            if (launcher2 != null) {
-                                dragNDropView2 = launcher2.getDragNDropView();
-                                if (dragNDropView2 != null) {
-                                    dragNDropView2.showFolderPreviewAt(this, ((float) getCellWidth()) * (((float) _coordinate.x) + 0.5f), (((float) getCellHeight()) * (((float) _coordinate.y) + 0.5f)) - ((float) (Setup.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0)));
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-                action = null;
-                launcher2 = _homeActivity;
-                if (launcher2 != null) {
-                    dragNDropView2 = launcher2.getDragNDropView();
-                    if (dragNDropView2 != null) {
-                        if (Setup.appSettings().isDockShowLabel()) {
-                        }
-                        dragNDropView2.showFolderPreviewAt(this, ((float) getCellWidth()) * (((float) _coordinate.x) + 0.5f), (((float) getCellHeight()) * (((float) _coordinate.y) + 0.5f)) - ((float) (Setup.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0)));
-                    }
+                dragNDropView = _homeActivity.getDragNDropView();
+                Object action = dragNDropView.getDragAction();
+                if (!Action.WIDGET.equals(action) || !Action.ACTION.equals(action) && (coordinateToChildView(_coordinate) instanceof AppItemView)) {
+                    dragNDropView.showFolderPreviewAt(this, getCellWidth() * (_coordinate.x + 0.5f), getCellHeight() * (_coordinate.y + 0.5f) - (Setup.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0));
+                    break;
                 }
                 break;
             default:
@@ -158,7 +133,6 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
 
     @NonNull
     public WindowInsets onApplyWindowInsets(@NonNull WindowInsets insets) {
-
         if (VERSION.SDK_INT >= 20) {
             _bottomInset = insets.getSystemWindowInsetBottom();
             setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), _bottomInset);
@@ -183,8 +157,8 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     }
 
     public void consumeRevert() {
-        _previousItem = (Item) null;
-        _previousItemView = (View) null;
+        _previousItem = null;
+        _previousItemView = null;
     }
 
     public void revertLastItem() {
@@ -196,7 +170,6 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     }
 
     public boolean addItemToPage(@NonNull Item item, int page) {
-
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallback) this, Setup.appSettings().getDockIconSize());
         if (itemView == null) {
             HomeActivity.Companion.getDb().deleteItem(item, true);
@@ -208,7 +181,6 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     }
 
     public boolean addItemToPoint(@NonNull Item item, int x, int y) {
-
         LayoutParams positionToLayoutPrams = coordinateToLayoutParams(x, y, item._spanX, item._spanY);
         if (positionToLayoutPrams == null) {
             return false;
@@ -225,7 +197,6 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     }
 
     public boolean addItemToCell(@NonNull Item item, int x, int y) {
-
         item._locationInLauncher = 1;
         item._x = x;
         item._y = y;
@@ -238,7 +209,6 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     }
 
     public void removeItem(final View view, boolean animate) {
-
         if (animate) {
             view.animate().setDuration(100).scaleX(0.0f).scaleY(0.0f).withEndAction(new Runnable() {
                 @Override

@@ -8,7 +8,6 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.fragment.MoreInfoFragment;
 
 public class MoreInfoActivity extends ThemeActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,14 +17,8 @@ public class MoreInfoActivity extends ThemeActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        MoreInfoFragment moreInfoFragment;
-        if (savedInstanceState == null) {
-            FragmentTransaction t = getSupportFragmentManager().beginTransaction();
-            moreInfoFragment = MoreInfoFragment.newInstance();
-            t.replace(R.id.more__fragment__placeholder_fragment, moreInfoFragment, MoreInfoFragment.TAG).commit();
-        } else {
-            moreInfoFragment = (MoreInfoFragment) getSupportFragmentManager().findFragmentByTag(MoreInfoFragment.TAG);
-        }
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        MoreInfoFragment moreInfoFragment = MoreInfoFragment.newInstance();
+        transaction.replace(R.id.more__fragment__placeholder_fragment, moreInfoFragment, MoreInfoFragment.TAG).commit();
     }
-
 }
