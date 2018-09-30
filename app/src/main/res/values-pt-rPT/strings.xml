@@ -142,10 +142,9 @@
 
     <string name="desktop_indicator_mode_normal">Normal</string>
     <string name="desktop_indicator_mode_arrow">Seta</string>
-    <string name="dots">Pontos</string>
 
     <!-- Item Labels -->
-    <string name="label_default">Padrão</string>
+    <string name="default_icons">Padrão</string>
 
     <!-- Dialogs -->
     <string name="request_dummy_text">Olá mundo!</string>
@@ -201,7 +200,7 @@
     <string name="toast_app_uninstalled">Aplicação desinstalada.</string>
 
     <!-- Item Labels -->
-    <string name="folder">Sem nome</string>
+    <string name="default_folder">Sem nome</string>
 
     <!-- Dialogs -->
     <string name="cancel">Cancelar</string>

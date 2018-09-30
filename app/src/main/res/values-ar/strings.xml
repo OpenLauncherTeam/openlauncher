@@ -172,7 +172,7 @@
 
     <!-- Item Labels -->
 
-    <string name="folder">غير مسمى</string>
+    <string name="default_folder">غير مسمى</string>
 
     <!-- Dialogs -->
 

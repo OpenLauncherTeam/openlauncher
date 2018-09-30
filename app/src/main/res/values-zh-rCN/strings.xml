@@ -127,7 +127,7 @@
 
     <!-- Item Labels -->
 
-    <string name="label_default">默认</string>
+    <string name="default_icons">默认</string>
 
     <!-- Dialogs -->
 
@@ -193,7 +193,7 @@
 
     <!-- Item Labels -->
 
-    <string name="folder">未命名</string>
+    <string name="default_folder">未命名</string>
 
     <!-- Dialogs -->
 

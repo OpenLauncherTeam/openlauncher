@@ -147,7 +147,7 @@
 
     <!-- Item Labels -->
 
-    <string name="label_default">Standard</string>
+    <string name="default_icons">Standard</string>
 
     <!-- Dialogs -->
 
@@ -186,7 +186,6 @@
     <string name="pref_summary__search_bar_show_hidden_apps">Versteckte Apps in Suchergebnissen anzeigen</string>
     <string name="debug">Fehlerbehebung</string>
     <string name="pref_title__desktop_folder_color_text">Ordner Text</string>
-    <string name="dots">Punkte</string>
     <string name="pref_title__drawer_label_font_size">Bezeichnung Text-Größe</string>
     <string name="pref_title__animation_speed_modifier">Anmiations Geschwindigkeit</string>
 
@@ -237,7 +236,7 @@
 
     <!-- Item Labels -->
 
-    <string name="folder">Ordner</string>
+    <string name="default_folder">Ordner</string>
 
     <!-- Dialogs -->
 

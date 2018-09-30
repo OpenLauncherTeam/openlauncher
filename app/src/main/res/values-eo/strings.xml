@@ -143,7 +143,7 @@
     <string name="desktop_indicator_mode_arrow">Sago</string>
 
     <!-- Item Labels -->
-    <string name="label_default">Defaŭlta</string>
+    <string name="default_icons">Defaŭlta</string>
 
     <!-- Dialogs -->
     <string name="request_dummy_text">Saluton Mondo!</string>
@@ -195,7 +195,7 @@
     <string name="toast_app_uninstalled">Aplikaĵo malistalita.</string>
 
     <!-- Item Labels -->
-    <string name="folder">Nenomita</string>
+    <string name="default_folder">Nenomita</string>
 
     <!-- Dialogs -->
     <string name="cancel">Nuligi</string>

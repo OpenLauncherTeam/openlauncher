@@ -135,7 +135,7 @@
     <string name="desktop_indicator_mode_arrow">Strelica</string>
 
     <!-- Item Labels -->
-    <string name="label_default">Podrazumevano</string>
+    <string name="default_icons">Podrazumevano</string>
 
     <!-- Dialogs -->
     <string name="request_dummy_text">Zdravo Svijete!</string>

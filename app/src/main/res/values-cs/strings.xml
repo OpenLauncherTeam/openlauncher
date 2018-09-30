@@ -135,7 +135,7 @@
     <string name="desktop_indicator_mode_arrow">Šipka</string>
 
     <!-- Item Labels -->
-    <string name="label_default">Výchozí</string>
+    <string name="default_icons">Výchozí</string>
 
     <!-- Dialogs -->
     <string name="request_dummy_text">Ahoj světe!</string>
@@ -186,7 +186,7 @@
     <string name="toast_app_uninstalled">Aplikace odinstalována.</string>
 
     <!-- Item Labels -->
-    <string name="folder">Nepojmenovanný</string>
+    <string name="default_folder">Nepojmenovanný</string>
 
     <!-- Dialogs -->
     <string name="cancel">Zrušit</string>

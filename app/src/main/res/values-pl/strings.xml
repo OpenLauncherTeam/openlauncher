@@ -140,10 +140,9 @@
 
     <string name="desktop_indicator_mode_normal">Zwykły</string>
     <string name="desktop_indicator_mode_arrow">Strzałka</string>
-    <string name="dots">Kropki</string>
 
     <!-- Item Labels -->
-    <string name="label_default">Domyślne</string>
+    <string name="default_icons">Domyślne</string>
 
     <!-- Dialogs -->
     <string name="request_dummy_text">Witaj świecie!</string>
@@ -199,7 +198,7 @@
     <string name="toast_app_uninstalled">Aplikacja odinstalowana.</string>
 
     <!-- Item Labels -->
-    <string name="folder">Bez nazwy</string>
+    <string name="default_folder">Bez nazwy</string>
 
     <!-- Dialogs -->
     <string name="cancel">Anuluj</string>

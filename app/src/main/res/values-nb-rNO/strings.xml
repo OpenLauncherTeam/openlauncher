@@ -168,7 +168,7 @@
 
     <!-- Item Labels -->
 
-    <string name="folder">Uten navn</string>
+    <string name="default_folder">Uten navn</string>
 
     <!-- Dialogs -->
 

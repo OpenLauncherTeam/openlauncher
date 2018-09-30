@@ -146,10 +146,9 @@
 
     <string name="desktop_indicator_mode_normal">Normal</string>
     <string name="desktop_indicator_mode_arrow">Fletxa</string>
-    <string name="dots">Punts</string>
 
     <!-- Item Labels -->
-    <string name="label_default">Per defecte</string>
+    <string name="default_icons">Per defecte</string>
 
     <!-- Dialogs -->
     <string name="request_dummy_text">¡Hola Món!</string>
@@ -207,7 +206,7 @@
     <string name="toast_app_uninstalled">L\'app s\'ha desinstal·lat.</string>
 
     <!-- Item Labels -->
-    <string name="folder">Sense nom</string>
+    <string name="default_folder">Sense nom</string>
 
     <!-- Dialogs -->
     <string name="cancel">Cancel·la</string>

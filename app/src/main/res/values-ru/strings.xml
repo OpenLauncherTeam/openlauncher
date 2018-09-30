@@ -129,10 +129,9 @@
 
     <string name="desktop_indicator_mode_normal">Обычный</string>
     <string name="desktop_indicator_mode_arrow">Стрелка</string>
-    <string name="dots">Точки</string>
 
     <!-- Item Labels -->
-    <string name="label_default">По умолчанию</string>
+    <string name="default_icons">По умолчанию</string>
 
     <!-- Dialogs -->
     <string name="request_dummy_text">Привет мир!</string>
@@ -187,7 +186,7 @@
     <string name="toast_app_uninstalled">Приложение удалено.</string>
 
     <!-- Item Labels -->
-    <string name="folder">Без имени</string>
+    <string name="default_folder">Без имени</string>
 
     <!-- Dialogs -->
     <string name="cancel">Отмена</string>

@@ -142,10 +142,9 @@
 
     <string name="desktop_indicator_mode_normal">Normale</string>
     <string name="desktop_indicator_mode_arrow">Fritza</string>
-    <string name="dots">Puntos</string>
 
     <!-- Item Labels -->
-    <string name="label_default">Predefinidu</string>
+    <string name="default_icons">Predefinidu</string>
 
     <!-- Dialogs -->
     <string name="request_dummy_text">Salude mundu!</string>
@@ -201,7 +200,7 @@
     <string name="toast_app_uninstalled">Aplicatzione disinstallada.</string>
 
     <!-- Item Labels -->
-    <string name="folder">Chene nùmene</string>
+    <string name="default_folder">Chene nùmene</string>
 
     <!-- Dialogs -->
     <string name="cancel">Annulla</string>

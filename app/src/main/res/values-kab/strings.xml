@@ -135,7 +135,7 @@
     <string name="desktop_indicator_mode_arrow">Aneccab</string>
 
     <!-- Item Labels -->
-    <string name="label_default">Amezwer</string>
+    <string name="default_icons">Amezwer</string>
 
     <!-- Dialogs -->
     <string name="request_dummy_text">Azul i umaḍal!</string>

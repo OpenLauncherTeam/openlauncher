@@ -134,7 +134,7 @@
 
     <string name="cancel">キャンセル</string>
     <string name="home">ホーム</string>
-    <string name="folder">名前なし</string>
+    <string name="default_folder">名前なし</string>
 
 
 </resources>

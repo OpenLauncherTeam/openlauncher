@@ -107,7 +107,7 @@ public class AppManager {
                 .title((activity.getString(R.string.pick_icon_pack)))
                 .build();
 
-        fastItemAdapter.add(new IconLabelItem(activity, R.drawable.ic_launcher, R.string.label_default, -1)
+        fastItemAdapter.add(new IconLabelItem(activity, R.drawable.ic_launcher, R.string.default_icons, -1)
                 .withIconGravity(Gravity.START)
                 .withOnClickListener(new View.OnClickListener() {
                     @Override

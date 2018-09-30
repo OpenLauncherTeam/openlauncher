@@ -140,10 +140,9 @@
 
     <string name="desktop_indicator_mode_normal">Normálny</string>
     <string name="desktop_indicator_mode_arrow">Šípka</string>
-    <string name="dots">Bodky</string>
 
     <!-- Item Labels -->
-    <string name="label_default">Prednastavené</string>
+    <string name="default_icons">Prednastavené</string>
 
     <!-- Dialogs -->
     <string name="request_dummy_text">Ahoj svet!</string>
@@ -199,7 +198,7 @@
     <string name="toast_app_uninstalled">Applikácia bola odinštalovaná.</string>
 
     <!-- Item Labels -->
-    <string name="folder">Bez mena</string>
+    <string name="default_folder">Bez mena</string>
 
     <!-- Dialogs -->
     <string name="cancel">Zrušiť</string>

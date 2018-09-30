@@ -140,10 +140,9 @@
 
     <string name="desktop_indicator_mode_normal">Normal</string>
     <string name="desktop_indicator_mode_arrow">Flèche</string>
-    <string name="dots">Points</string>
 
     <!-- Item Labels -->
-    <string name="label_default">Défaut</string>
+    <string name="default_icons">Défaut</string>
 
     <!-- Dialogs -->
     <string name="request_dummy_text">Bonjour !</string>
@@ -199,7 +198,7 @@
     <string name="toast_app_uninstalled">Cette application a été désinstallée.</string>
 
     <!-- Item Labels -->
-    <string name="folder">Aucun nom</string>
+    <string name="default_folder">Aucun nom</string>
 
     <!-- Dialogs -->
     <string name="cancel">Annuler</string>

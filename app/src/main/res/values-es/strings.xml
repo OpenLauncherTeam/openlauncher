@@ -143,7 +143,7 @@
     <string name="desktop_indicator_mode_arrow">Flecha</string>
 
     <!-- Item Labels -->
-    <string name="label_default">Por defecto</string>
+    <string name="default_icons">Por defecto</string>
 
     <!-- Dialogs -->
     <string name="request_dummy_text">¡Hola Mundo!</string>
@@ -195,7 +195,7 @@
     <string name="toast_app_uninstalled">App desinstalada.</string>
 
     <!-- Item Labels -->
-    <string name="folder">Sin nombre</string>
+    <string name="default_folder">Sin nombre</string>
 
     <!-- Dialogs -->
     <string name="cancel">Cancelar</string>
