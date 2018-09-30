@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.viewutil.PopupIconLabelItem;
 import com.benny.openlauncher.util.Definitions;
@@ -159,6 +160,12 @@ public class HpDragOption {
             @Override
             public void onStartDrag(@NonNull Action action, @NonNull PointF location) {
                 _homeActivity.closeAppDrawer();
+                if (!Setup.appSettings().isDesktopHideGrid()) {
+                    _homeActivity.getDock().setHideGrid(false);
+                    for (CellContainer cellContainer : _homeActivity.getDesktop().getPages()) {
+                        cellContainer.setHideGrid(false);
+                    }
+                }
             }
 
             @Override
@@ -215,6 +222,12 @@ public class HpDragOption {
                 _homeActivity.getDesktopIndicator().hideDelay();
                 for (CellContainer page : _homeActivity.getDesktop().getPages()) {
                     page.clearCachedOutlineBitmap();
+                }
+                if (!Setup.appSettings().isDesktopHideGrid()) {
+                    _homeActivity.getDock().setHideGrid(true);
+                    for (CellContainer cellContainer : _homeActivity.getDesktop().getPages()) {
+                        cellContainer.setHideGrid(true);
+                    }
                 }
             }
         });

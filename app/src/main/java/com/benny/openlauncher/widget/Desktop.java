@@ -593,7 +593,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
     }
 
     public boolean addItemToPage(@NonNull Item item, int page) {
-
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallback) this, Setup.appSettings().getDesktopIconSize());
         if (itemView == null) {
             HomeActivity.Companion.getDb().deleteItem(item, true);
@@ -621,7 +620,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
     }
 
     public boolean addItemToCell(@NonNull Item item, int x, int y) {
-
         item._locationInLauncher = 0;
         item._x = x;
         item._y = y;
@@ -655,7 +653,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
     }
 
     public void removeItem(final View view, boolean animate) {
-
         Tool.print("Start Removing a view from Desktop");
         if (animate) {
             view.animate().setDuration(100).scaleX(0.0f).scaleY(0.0f).withEndAction(new Runnable() {
@@ -688,7 +685,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
 
     @NonNull
     public WindowInsets onApplyWindowInsets(@NonNull WindowInsets insets) {
-
         if (VERSION.SDK_INT >= 20) {
             _companion.setTopInset(insets.getSystemWindowInsetTop());
             _companion.setBottomInset(insets.getSystemWindowInsetBottom());
