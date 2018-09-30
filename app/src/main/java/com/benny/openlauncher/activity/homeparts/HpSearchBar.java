@@ -8,18 +8,18 @@ import android.view.View;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.widget.CalendarDropDownView;
+import com.benny.openlauncher.widget.CalendarView;
 import com.benny.openlauncher.widget.SearchBar;
 
 public class HpSearchBar implements SearchBar.CallBack, View.OnClickListener {
     private HomeActivity _homeActivity;
     private SearchBar _searchBar;
-    private CalendarDropDownView _calendarDropDownView;
+    private CalendarView _calendarView;
 
-    public HpSearchBar(HomeActivity homeActivity, SearchBar searchBar, CalendarDropDownView calendarDropDownView) {
+    public HpSearchBar(HomeActivity homeActivity, SearchBar searchBar, CalendarView calendarView) {
         _homeActivity = homeActivity;
         _searchBar = searchBar;
-        _calendarDropDownView = calendarDropDownView;
+        _calendarView = calendarView;
     }
 
 
@@ -84,6 +84,6 @@ public class HpSearchBar implements SearchBar.CallBack, View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        _calendarDropDownView.animateShow();
+        _calendarView.animateShow();
     }
 }

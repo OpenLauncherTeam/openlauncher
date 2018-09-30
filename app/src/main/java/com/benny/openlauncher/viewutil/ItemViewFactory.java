@@ -29,9 +29,9 @@ public class ItemViewFactory {
     public static final int NO_FLAGS = 0x01;
     public static final int NO_LABEL = 0x02;
 
-    public static View getItemView(Context context, Item item, boolean showLabels, DesktopCallback callBack, int iconSize) {
+    public static View getItemView(Context context, Item item, boolean showLabels, DesktopCallback callback, int iconSize) {
         int flag = showLabels ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
-        return getItemView(context, callBack, item, iconSize, flag);
+        return getItemView(context, callback, item, iconSize, flag);
     }
 
     private static View getItemView(final Context context, final DesktopCallback callback, final Item item, int iconSize, int flags) {

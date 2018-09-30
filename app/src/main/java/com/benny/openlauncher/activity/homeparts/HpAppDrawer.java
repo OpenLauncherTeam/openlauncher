@@ -7,7 +7,6 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppDrawerController;
-import com.benny.openlauncher.widget.DragOptionView;
 import com.benny.openlauncher.widget.PagerIndicator;
 
 import net.gsantner.opoc.util.Callback;
@@ -15,12 +14,10 @@ import net.gsantner.opoc.util.Callback;
 public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
     private HomeActivity _homeActivity;
     private PagerIndicator _appDrawerIndicator;
-    private DragOptionView _dragOptionPanel;
 
-    public HpAppDrawer(HomeActivity homeActivity, PagerIndicator appDrawerIndicator, DragOptionView dragOptionPanel) {
+    public HpAppDrawer(HomeActivity homeActivity, PagerIndicator appDrawerIndicator) {
         _homeActivity = homeActivity;
         _appDrawerIndicator = appDrawerIndicator;
-        _dragOptionPanel = dragOptionPanel;
     }
 
     public void initAppDrawer(AppDrawerController appDrawerController) {
@@ -64,8 +61,7 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
                     _homeActivity.updateDock(true, 200);
                 else
                     _homeActivity.updateDock(true, 200);
-                _homeActivity.updateSearchBar(!_dragOptionPanel._isDraggedFromDrawer);
-                _dragOptionPanel._isDraggedFromDrawer = false;
+                _homeActivity.updateSearchBar(true);
             } else {
                 if (!Setup.appSettings().isDrawerRememberPosition()) {
                     _homeActivity.getAppDrawerController().scrollToStart();

@@ -62,15 +62,14 @@ import com.benny.openlauncher.viewutil.MinibarAdapter;
 import com.benny.openlauncher.viewutil.WidgetHost;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.AppItemView;
-import com.benny.openlauncher.widget.CalendarDropDownView;
+import com.benny.openlauncher.widget.CalendarView;
 import com.benny.openlauncher.widget.CellContainer;
 import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.Desktop.OnDesktopEditListener;
 import com.benny.openlauncher.widget.DesktopOptionView;
 import com.benny.openlauncher.widget.DesktopOptionView.DesktopOptionViewListener;
 import com.benny.openlauncher.widget.Dock;
-import com.benny.openlauncher.widget.DragOptionLayout;
-import com.benny.openlauncher.widget.DragOptionView;
+import com.benny.openlauncher.widget.ItemOptionView;
 import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
 import com.benny.openlauncher.widget.SearchBar;
@@ -318,11 +317,10 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     protected void initViews() {
-        new HpSearchBar(this, (SearchBar) findViewById(R.id.searchBar), (CalendarDropDownView) findViewById(R.id.calendarDropDownView)).initSearchBar();
+        new HpSearchBar(this, (SearchBar) findViewById(R.id.searchBar), (CalendarView) findViewById(R.id.calendarDropDownView)).initSearchBar();
         initDock();
         ((AppDrawerController) findViewById(R.id.appDrawerController)).init();
         ((AppDrawerController) findViewById(R.id.appDrawerController)).setHome(this);
-        ((DragOptionView) findViewById(R.id.dragOptionPanel)).setHome(this);
         ((Desktop) findViewById(R.id.desktop)).init();
         Desktop desktop = (Desktop) findViewById(R.id.desktop);
 
@@ -348,8 +346,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         });
         desktop = (Desktop) findViewById(R.id.desktop);
         desktop.setPageIndicator((PagerIndicator) findViewById(R.id.desktopIndicator));
-        ((DragOptionView) findViewById(R.id.dragOptionPanel)).setAutoHideView((SearchBar) findViewById(R.id.searchBar));
-        new HpAppDrawer(this, (PagerIndicator) findViewById(R.id.appDrawerIndicator), (DragOptionView) findViewById(R.id.dragOptionPanel)).initAppDrawer((AppDrawerController) findViewById(R.id.appDrawerController));
+        new HpAppDrawer(this, (PagerIndicator) findViewById(R.id.appDrawerIndicator)).initAppDrawer(findViewById(R.id.appDrawerController));
         initMinibar();
     }
 
@@ -531,10 +528,10 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     @NonNull
-    public final DragOptionLayout getDragNDropView() {
-        DragOptionLayout dragOptionLayout = (DragOptionLayout) findViewById(R.id.dragNDropView);
+    public final ItemOptionView getDragNDropView() {
+        ItemOptionView itemOptionView = (ItemOptionView) findViewById(R.id.dragNDropView);
 
-        return dragOptionLayout;
+        return itemOptionView;
     }
 
     private final void init() {
@@ -551,9 +548,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
         View findViewById2 = findViewById(R.id.rightDragHandle);
 
-        DragOptionLayout dragOptionLayout = findViewById(R.id.dragNDropView);
+        ItemOptionView itemOptionView = findViewById(R.id.dragNDropView);
 
-        hpDragOption.initDragNDrop(this, findViewById, findViewById2, dragOptionLayout);
+        hpDragOption.initDragNDrop(this, findViewById, findViewById2, itemOptionView);
         registerBroadcastReceiver();
         initAppManager();
         initSettings();
@@ -911,8 +908,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     protected void onHandleLauncherPause() {
         ((GroupPopupView) findViewById(R.id.groupPopup)).dismissPopup();
-        ((CalendarDropDownView) findViewById(R.id.calendarDropDownView)).animateHide();
-        ((DragOptionLayout) findViewById(R.id.dragNDropView)).hidePopupMenu();
+        ((CalendarView) findViewById(R.id.calendarDropDownView)).animateHide();
+        ((ItemOptionView) findViewById(R.id.dragNDropView)).hidePopupMenu();
         if (!((SearchBar) findViewById(R.id.searchBar)).collapse()) {
             if (((Desktop) findViewById(R.id.desktop)) != null) {
                 Desktop desktop = (Desktop) findViewById(R.id.desktop);

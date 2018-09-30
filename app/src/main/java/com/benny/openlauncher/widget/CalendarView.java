@@ -17,17 +17,17 @@ import java.util.Calendar;
  * Created by BennyKok on 9/9/2017.
  */
 
-public class CalendarDropDownView extends CardView implements View.OnClickListener {
+public class CalendarView extends CardView implements View.OnClickListener {
 
     public MaterialCalendarView _calendarView;
     private boolean _stateOpened = false;
 
-    public CalendarDropDownView(Context context) {
+    public CalendarView(Context context) {
         super(context);
         init();
     }
 
-    public CalendarDropDownView(Context context, AttributeSet attrs) {
+    public CalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }

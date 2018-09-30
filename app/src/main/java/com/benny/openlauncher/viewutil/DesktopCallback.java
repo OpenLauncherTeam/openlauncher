@@ -3,7 +3,7 @@ package com.benny.openlauncher.viewutil;
 import android.view.View;
 
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.util.RevertibleAction;
+import com.benny.openlauncher.interfaces.RevertibleAction;
 
 public interface DesktopCallback<V extends View> extends RevertibleAction {
     boolean addItemToPoint(Item item, int x, int y);

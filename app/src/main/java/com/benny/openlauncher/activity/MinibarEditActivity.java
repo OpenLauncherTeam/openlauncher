@@ -129,7 +129,7 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
 
         @Override
         public int getLayoutRes() {
-            return R.layout.item_minibar_edit;
+            return R.layout.item_edit_minibar;
         }
 
         @Override

@@ -90,7 +90,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
 
     public final void updateIconProjection(int x, int y) {
         HomeActivity launcher;
-        DragOptionLayout dragNDropView;
+        ItemOptionView dragNDropView;
         DragState state = peekItemAndSwap(x, y, _coordinate);
         if (!_coordinate.equals(_previousDragPoint)) {
             launcher = _homeActivity;
@@ -115,7 +115,6 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
                 Object action = dragNDropView.getDragAction();
                 if (!Action.WIDGET.equals(action) || !Action.ACTION.equals(action) && (coordinateToChildView(_coordinate) instanceof AppItemView)) {
                     dragNDropView.showFolderPreviewAt(this, getCellWidth() * (_coordinate.x + 0.5f), getCellHeight() * (_coordinate.y + 0.5f) - (Setup.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0));
-                    break;
                 }
                 break;
             default:

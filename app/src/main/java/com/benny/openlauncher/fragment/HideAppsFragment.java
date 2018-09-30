@@ -33,7 +33,7 @@ public class HideAppsFragment extends Fragment {
     private ArrayList<String> _listActivitiesHidden = new ArrayList();
     private ArrayList<App> _listActivitiesAll = new ArrayList();
     private AsyncWorkerList _taskList = new AsyncWorkerList();
-    private AppAdapter _appInfoAdapter;
+    private HideAppsAdapter _appInfoAdapter;
     private ViewSwitcher _switcherLoad;
     private ListView _grid;
 
@@ -133,7 +133,7 @@ public class HideAppsFragment extends Fragment {
         _grid.setFastScrollEnabled(true);
         _grid.setFastScrollAlwaysVisible(false);
 
-        _appInfoAdapter = new AppAdapter(getActivity(), _listActivitiesAll);
+        _appInfoAdapter = new HideAppsAdapter(getActivity(), _listActivitiesAll);
 
         _grid.setAdapter(_appInfoAdapter);
         _grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -160,16 +160,16 @@ public class HideAppsFragment extends Fragment {
         });
     }
 
-    private class AppAdapter extends ArrayAdapter<App> {
-        private AppAdapter(Context context, ArrayList<App> adapterArrayList) {
-            super(context, R.layout.request_item_list, adapterArrayList);
+    private class HideAppsAdapter extends ArrayAdapter<App> {
+        private HideAppsAdapter(Context context, ArrayList<App> adapterArrayList) {
+            super(context, R.layout.item_hide_apps, adapterArrayList);
         }
 
         @NonNull
         public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
-                convertView = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.request_item_list, parent, false);
+                convertView = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_hide_apps, parent, false);
                 holder = new ViewHolder();
                 holder._apkIcon = convertView.findViewById(R.id.IVappIcon);
                 holder._apkName = convertView.findViewById(R.id.TVappName);
@@ -183,7 +183,7 @@ public class HideAppsFragment extends Fragment {
 
             App appInfo = getItem(position);
 
-            holder._apkPackage.setText(appInfo.getComponentName());
+            holder._apkPackage.setText(appInfo.getClassName());
             holder._apkName.setText(appInfo.getLabel());
             holder._apkIcon.setImageDrawable(appInfo.getIcon());
 

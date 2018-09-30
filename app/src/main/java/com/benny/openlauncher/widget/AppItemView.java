@@ -378,10 +378,5 @@ public class AppItemView extends View implements Drawable.Callback {
             _view._vibrateWhenLongPress = true;
             return this;
         }
-
-        public Builder setFastAdapterItem() {
-            _view._fastAdapterItem = true;
-            return this;
-        }
     }
 }

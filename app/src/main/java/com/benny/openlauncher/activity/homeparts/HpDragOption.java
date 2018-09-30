@@ -17,7 +17,7 @@ import com.benny.openlauncher.util.DragAction.Action;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.CellContainer;
 import com.benny.openlauncher.widget.Desktop;
-import com.benny.openlauncher.widget.DragOptionLayout;
+import com.benny.openlauncher.widget.ItemOptionView;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
 
@@ -34,11 +34,11 @@ public class HpDragOption {
     private PopupIconLabelItem editItem = new PopupIconLabelItem(R.string.edit, R.drawable.ic_edit_black_24dp).withIdentifier(editItemIdentifier);
     private PopupIconLabelItem removeItem = new PopupIconLabelItem(R.string.remove, R.drawable.ic_close_dark_24dp).withIdentifier(removeItemIdentifier);
 
-    public void initDragNDrop(@NonNull final HomeActivity _homeActivity, @NonNull final View leftDragHandle, @NonNull final View rightDragHandle, @NonNull final DragOptionLayout dragNDropView) {
+    public void initDragNDrop(@NonNull final HomeActivity _homeActivity, @NonNull final View leftDragHandle, @NonNull final View rightDragHandle, @NonNull final ItemOptionView dragNDropView) {
         //dragHandle's drag event
         final Handler dragHandler = new Handler();
 
-        dragNDropView.registerDropTarget(new DragOptionLayout.DropTargetListener(leftDragHandle) {
+        dragNDropView.registerDropTarget(new ItemOptionView.DropTargetListener(leftDragHandle) {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
@@ -93,7 +93,7 @@ public class HpDragOption {
         });
 
 
-        dragNDropView.registerDropTarget(new DragOptionLayout.DropTargetListener(rightDragHandle) {
+        dragNDropView.registerDropTarget(new ItemOptionView.DropTargetListener(rightDragHandle) {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
@@ -149,7 +149,7 @@ public class HpDragOption {
 
 
         // desktop drag event
-        dragNDropView.registerDropTarget(new DragOptionLayout.DropTargetListener(_homeActivity.getDesktop()) {
+        dragNDropView.registerDropTarget(new ItemOptionView.DropTargetListener(_homeActivity.getDesktop()) {
             @Override
             public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
                 if (!DragAction.Action.SEARCH_RESULT.equals(action))
@@ -233,7 +233,7 @@ public class HpDragOption {
         });
 
         // dock drag event
-        dragNDropView.registerDropTarget(new DragOptionLayout.DropTargetListener(_homeActivity.getDock()) {
+        dragNDropView.registerDropTarget(new ItemOptionView.DropTargetListener(_homeActivity.getDock()) {
             @Override
             public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
                 boolean ok = !DragAction.Action.WIDGET.equals(action);
@@ -315,7 +315,7 @@ public class HpDragOption {
     }
 
 
-    void showItemPopup(@NonNull final DragOptionLayout dragNDropView, final HomeActivity homeActivity) {
+    void showItemPopup(@NonNull final ItemOptionView dragNDropView, final HomeActivity homeActivity) {
         ArrayList<PopupIconLabelItem> itemList = new ArrayList<>();
         switch (dragNDropView.getDragItem().getType()) {
             case APP:

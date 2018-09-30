@@ -1,4 +1,4 @@
-package com.benny.openlauncher.util;
+package com.benny.openlauncher.interfaces;
 
 public interface RevertibleAction {
     void revertLastItem();

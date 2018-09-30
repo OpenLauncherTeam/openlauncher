@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 
-import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.viewutil.PopupIconLabelItem;
@@ -31,7 +30,7 @@ import java.util.Map.Entry;
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 
-public final class DragOptionLayout extends FrameLayout {
+public final class ItemOptionView extends FrameLayout {
     private final float DRAG_THRESHOLD;
     @Nullable
     private Action _dragAction;
@@ -120,15 +119,15 @@ public final class DragOptionLayout extends FrameLayout {
     public final class OverlayView extends View {
 
         public OverlayView() {
-            super(DragOptionLayout.this.getContext());
+            super(ItemOptionView.this.getContext());
             setWillNotDraw(false);
         }
 
         public boolean onTouchEvent(@Nullable MotionEvent event) {
-            if (event == null || event.getActionMasked() != 0 || DragOptionLayout.this.getDragging() || !DragOptionLayout.this._overlayPopupShowing) {
+            if (event == null || event.getActionMasked() != 0 || ItemOptionView.this.getDragging() || !ItemOptionView.this._overlayPopupShowing) {
                 return super.onTouchEvent(event);
             }
-            DragOptionLayout.this.hidePopupMenu();
+            ItemOptionView.this.hidePopupMenu();
             return true;
         }
 
@@ -153,7 +152,7 @@ public final class DragOptionLayout extends FrameLayout {
         }
     }
 
-    public DragOptionLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public ItemOptionView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.DRAG_THRESHOLD = 20.0f;
         _paint = new Paint(1);
@@ -222,7 +221,7 @@ public final class DragOptionLayout extends FrameLayout {
         int[] toCoordinate = new int[2];
         fromView.getLocationOnScreen(fromCoordinate);
         toView.getLocationOnScreen(toCoordinate);
-        _previewLocation.set(((float) (fromCoordinate[0] - toCoordinate[0])) + x, ((float) (fromCoordinate[1] - toCoordinate[1])) + y);
+        _previewLocation.set(fromCoordinate[0] - toCoordinate[0] + x, fromCoordinate[1] - toCoordinate[1] + y);
     }
 
     public final void cancelFolderPreview() {
@@ -233,7 +232,7 @@ public final class DragOptionLayout extends FrameLayout {
 
     protected void onDraw(@Nullable Canvas canvas) {
         super.onDraw(canvas);
-        if (!(canvas == null || !_showFolderPreview || _previewLocation.equals(-1.0f, -1.0f))) {
+        if (canvas != null && _showFolderPreview && !_previewLocation.equals(-1.0f, -1.0f)) {
             _folderPreviewScale += 0.08f;
             _folderPreviewScale = Tool.clampFloat(_folderPreviewScale, 0.5f, 1.0f);
             canvas.drawCircle(_previewLocation.x, _previewLocation.y, ((float) Tool.toPx((Setup.appSettings().getDesktopIconSize() / 2) + 10)) * _folderPreviewScale, _paint);
@@ -281,9 +280,9 @@ public final class DragOptionLayout extends FrameLayout {
                 }
             });
             if (!_dragging) {
-                _dragView = (View) null;
-                _dragItem = (Item) null;
-                _dragAction = (Action) null;
+                _dragView = null;
+                _dragItem = null;
+                _dragAction = null;
             }
         }
     }
@@ -313,9 +312,9 @@ public final class DragOptionLayout extends FrameLayout {
     public final void cancelAllDragNDrop() {
         _dragging = false;
         if (!_overlayPopupShowing) {
-            _dragView = (View) null;
-            _dragItem = (Item) null;
-            _dragAction = (Action) null;
+            _dragView = null;
+            _dragItem = null;
+            _dragAction = null;
         }
         for (Entry dropTarget : _registeredDropTargetEntries.entrySet()) {
             ((DropTargetListener) dropTarget.getKey()).onEnd();

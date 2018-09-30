@@ -21,7 +21,12 @@ This an open source Android launcher project, started from scratch. We aim to cr
 
 ## Description
 
+<div style="display:flex;">
+    <img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher/master/metadata/en-US/screenshots.png">
+</div>
+
 ### Features
+
   * Paged desktop
   * Dock
   * Drag and drop
@@ -29,10 +34,6 @@ This an open source Android launcher project, started from scratch. We aim to cr
   * Scrollable background
   * Search bar
   * Icon packs
-
-<div style="display:flex;">
-    <img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher/master/metadata/en-US/screenshots.png">
-</div>
 
 ### Status
 If your instance is crashing frequently please make sure you update to the latest version and reset the app data before creating an issue.

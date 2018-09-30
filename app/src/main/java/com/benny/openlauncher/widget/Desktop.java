@@ -504,7 +504,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
 
     public final void updateIconProjection(int x, int y) {
         HomeActivity launcher;
-        DragOptionLayout dragNDropView;
+        ItemOptionView dragNDropView;
         DragState state = getCurrentPage().peekItemAndSwap(x, y, _coordinate);
         if (_previousDragPoint != null && !_previousDragPoint.equals(_coordinate)) {
             launcher = HomeActivity.Companion.getLauncher();
@@ -531,7 +531,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
                 action = dragNDropView.getDragAction();
                 if (!Action.WIDGET.equals(action) || !Action.ACTION.equals(action) && (getCurrentPage().coordinateToChildView(_coordinate) instanceof AppItemView)) {
                     launcher.getDragNDropView().showFolderPreviewAt(this, getCurrentPage().getCellWidth() * (_coordinate.x + 0.5f), getCurrentPage().getCellHeight() * (_coordinate.y + 0.5f));
-                    break;
                 }
                 break;
             default:
@@ -568,13 +567,13 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
     }
 
     public boolean addItemToPage(@NonNull Item item, int page) {
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallback) this, Setup.appSettings().getDesktopIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this, Setup.appSettings().getDesktopIconSize());
         if (itemView == null) {
             HomeActivity.Companion.getDb().deleteItem(item, true);
             return false;
         }
         item._locationInLauncher = 0;
-        ((CellContainer) _pages.get(page)).addViewToGrid(itemView, item._x, item._y, item._spanX, item._spanY);
+        _pages.get(page).addViewToGrid(itemView, item._x, item._y, item._spanX, item._spanY);
         return true;
     }
 
@@ -598,7 +597,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         item._locationInLauncher = 0;
         item._x = x;
         item._y = y;
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallback) this, Setup.appSettings().getDesktopIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this, Setup.appSettings().getDesktopIconSize());
         if (itemView == null) {
             return false;
         }
@@ -648,12 +647,9 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         if (!isInEditMode()) {
             HomeActivity launcher = HomeActivity.Companion.getLauncher();
             if (launcher != null) {
-                DragOptionLayout dragNDropView = launcher.getDragNDropView();
-                if (dragNDropView != null) {
-                    dragNDropView.cancelFolderPreview();
-                }
+                launcher.getDragNDropView().cancelFolderPreview();
             }
-            WallpaperManager.getInstance(getContext()).setWallpaperOffsets(getWindowToken(), (((float) position) + offset) / ((float) (_pageCount - 1)), 0.0f);
+            WallpaperManager.getInstance(getContext()).setWallpaperOffsets(getWindowToken(), (position + offset) / (_pageCount - 1), 0.0f);
             super.onPageScrolled(position, offset, offsetPixels);
         }
     }

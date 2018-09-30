@@ -299,7 +299,8 @@ public class GroupPopupView extends RevealFrameLayout {
             final App app = Setup.appLoader().findItemApp(currentItem.getGroupItems().get(0));
             if (app != null) {
                 //Creating a new app item fixed the folder crash bug
-                Item item = Item.newAppItem(app); //Home.Companion.getDb().getItem(currentItem.getGroupItems().get(0).getId());
+                //Home.Companion.getDb().getItem(currentItem.getGroupItems().get(0).getId());
+                Item item = Item.newAppItem(app);
 
                 item.setX(currentItem.getX());
                 item.setY(currentItem.getY());
@@ -309,7 +310,6 @@ public class GroupPopupView extends RevealFrameLayout {
                 HomeActivity.Companion.getDb().deleteItem(currentItem, true);
 
                 callback.removeItem(currentView, false);
-                Tool.print("_______________________");
                 callback.addItemToCell(item, item.getX(), item.getY());
             }
             if (HomeActivity.Companion.getLauncher() != null) {
