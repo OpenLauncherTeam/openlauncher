@@ -45,7 +45,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
 
     @Nullable
     private OnDesktopEditListener _desktopEditListener;
-    private HomeActivity _homeActivity;
     private boolean _inEditMode;
     private int _pageCount;
     private PagerIndicator _pageIndicator;
@@ -54,9 +53,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
     private final List<CellContainer> _pages = new ArrayList<CellContainer>();
     private final Point _previousDragPoint = new Point();
 
-    @Nullable
     private Item _previousItem;
-    @Nullable
     private View _previousItemView;
     private int _previousPage;
 
@@ -87,7 +84,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
             return null;
         }
     }
-
 
     public static boolean handleOnDropOver(HomeActivity homeActivity, Item dropItem, Item item, View itemView, CellContainer parent, int page, ItemPosition itemPosition, DesktopCallback callback) {
         if (item != null) {
@@ -139,23 +135,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
             }
         }
         return false;
-    }
-
-    public static final class DesktopMode {
-        public static final DesktopMode INSTANCE = new DesktopMode();
-        public static final int NORMAL = 0;
-        public static final int SHOW_ALL_APPS = 1;
-
-        private DesktopMode() {
-        }
-
-        public final int getNORMAL() {
-            return NORMAL;
-        }
-
-        public final int getSHOW_ALL_APPS() {
-            return SHOW_ALL_APPS;
-        }
     }
 
     public interface OnDesktopEditListener {
@@ -356,7 +335,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
 
     @NonNull
     public final CellContainer getCurrentPage() {
-        return (CellContainer) _pages.get(getCurrentItem());
+        return _pages.get(getCurrentItem());
     }
 
     public final void setPageIndicator(@NonNull PagerIndicator pageIndicator) {
@@ -374,13 +353,11 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         }
     }
 
-    public final void initDesktopNormal(@NonNull HomeActivity homeActivity) {
-
+    public final void initDesktop() {
         setAdapter(new DesktopAdapter(this));
         if (Setup.appSettings().isDesktopShowIndicator() && _pageIndicator != null) {
             _pageIndicator.setViewPager(this);
         }
-        _homeActivity = homeActivity;
         int columns = Setup.appSettings().getDesktopColumnCount();
         int rows = Setup.appSettings().getDesktopRowCount();
         List desktopItems = HomeActivity.Companion.getDb().getDesktop();
@@ -400,51 +377,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
                 pageCount++;
             } else {
                 return;
-            }
-        }
-    }
-
-    public final void initDesktopShowAll(@NonNull Context c, @NonNull HomeActivity homeActivity) {
-        Desktop desktop = this;
-        Context context = c;
-        HomeActivity homeActivity2 = homeActivity;
-
-
-        ArrayList apps = new ArrayList();
-        for (App app : Setup.appLoader().getAllApps(context, false)) {
-            apps.add(Item.newAppItem(app));
-        }
-        int appsSize = apps.size();
-        desktop._pageCount = 0;
-        int columns = Setup.appSettings().getDesktopColumnCount();
-        int rows = Setup.appSettings().getDesktopRowCount();
-        appsSize -= columns * rows;
-        while (true) {
-            if (appsSize < columns * rows) {
-                if (appsSize <= (-(columns * rows))) {
-                    break;
-                }
-            }
-            desktop._pageCount++;
-        }
-        setAdapter(new DesktopAdapter(desktop));
-        if (Setup.appSettings().isDesktopShowIndicator() && desktop._pageIndicator != null) {
-            desktop._pageIndicator.setViewPager(desktop);
-        }
-        desktop._homeActivity = homeActivity2;
-
-        for (int i = 0; i < _pageCount; i++) {
-            for (int x = 0; x < columns; x++) {
-                for (int y = 0; y < rows; y++) {
-                    int pagePos = y * rows + x;
-                    int pos = columns * rows * i + pagePos;
-                    if (pos < apps.size()) {
-                        Item appItem = (Item) apps.get(pos);
-                        appItem._x = x;
-                        appItem._y = y;
-                        addItemToPage(appItem, i);
-                    }
-                }
             }
         }
     }
@@ -479,26 +411,24 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
     }
 
     public final void removeCurrentPage() {
-        if (Setup.appSettings().getDesktopStyle() != DesktopMode.INSTANCE.getSHOW_ALL_APPS()) {
-            _pageCount--;
-            int previousPage = getCurrentItem();
-            SmoothPagerAdapter adapter = getAdapter();
-            ((DesktopAdapter) adapter).removePage(getCurrentItem(), true);
-            for (CellContainer v : _pages) {
-                v.setAlpha(0.0f);
-                v.animate().alpha(1.0f);
-                v.setScaleX(0.85f);
-                v.setScaleY(0.85f);
-                v.animateBackgroundShow();
-            }
-            if (_pageCount == 0) {
-                addPageRight(false);
-                adapter = getAdapter();
-                ((DesktopAdapter) adapter).exitDesktopEditMode();
-            } else {
-                setCurrentItem(previousPage);
-                _pageIndicator.invalidate();
-            }
+        _pageCount--;
+        int previousPage = getCurrentItem();
+        SmoothPagerAdapter adapter = getAdapter();
+        ((DesktopAdapter) adapter).removePage(getCurrentItem(), true);
+        for (CellContainer v : _pages) {
+            v.setAlpha(0.0f);
+            v.animate().alpha(1.0f);
+            v.setScaleX(0.85f);
+            v.setScaleY(0.85f);
+            v.animateBackgroundShow();
+        }
+        if (_pageCount == 0) {
+            addPageRight(false);
+            adapter = getAdapter();
+            ((DesktopAdapter) adapter).exitDesktopEditMode();
+        } else {
+            setCurrentItem(previousPage);
+            _pageIndicator.invalidate();
         }
     }
 

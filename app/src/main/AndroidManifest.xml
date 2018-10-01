@@ -109,11 +109,5 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <provider
-            android:name="com.benny.openlauncher.util.FiveSecsDelayContentProvider"
-            android:authorities="${applicationId}.util.FiveSecsDelayContentProvider"
-            android:enabled="true"
-            android:exported="true"
-            android:grantUriPermissions="true" />
     </application>
 </manifest>

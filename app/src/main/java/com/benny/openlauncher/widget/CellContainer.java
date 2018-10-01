@@ -239,31 +239,25 @@ public class CellContainer extends ViewGroup {
     }
 
     @NonNull
-    public final DragState peekItemAndSwap(int x, int y, @NonNull Point coordinate) {
+    public final DragState peekItemAndSwap(int x, int y, Point coordinate) {
         touchPosToCoordinate(coordinate, x, y, 1, 1, false, false);
-        if (coordinate.x != -1) {
-            if (coordinate.y != -1) {
-                DragState dragState;
-                if (_startCoordinate == null) {
-                    _startCoordinate = coordinate;
-                }
-                if (!_preCoordinate.equals(coordinate)) {
-                    _peekDownTime = Long.valueOf(-1);
-                }
-                Long l = _peekDownTime;
-                if (l != null && l == -1) {
-                    _peekDirection = getPeekDirectionFromCoordinate(_startCoordinate, coordinate);
-                    _peekDownTime = Long.valueOf(System.currentTimeMillis());
-                    _preCoordinate = coordinate;
+        if (coordinate.x != -1 && coordinate.y != -1) {
+            if (_startCoordinate == null) {
+                _startCoordinate = coordinate;
+            }
+            if (!_preCoordinate.equals(coordinate)) {
+                _peekDownTime = Long.valueOf(-1);
+            }
+            if (_peekDownTime != null && _peekDownTime == -1) {
+                _peekDirection = getPeekDirectionFromCoordinate(_startCoordinate, coordinate);
+                _peekDownTime = Long.valueOf(System.currentTimeMillis());
+                _preCoordinate = coordinate;
 
-                }
-                boolean[][] zArr = _occupied;
-                if (zArr[coordinate.x][coordinate.y]) {
-                    dragState = DragState.CurrentOccupied;
-                } else {
-                    dragState = DragState.CurrentNotOccupied;
-                }
-                return dragState;
+            }
+            if (_occupied[coordinate.x][coordinate.y]) {
+                return DragState.CurrentOccupied;
+            } else {
+                return DragState.CurrentNotOccupied;
             }
         }
         return DragState.OutOffRange;
@@ -304,7 +298,7 @@ public class CellContainer extends ViewGroup {
             return true;
         }
         if (_gestures == null) {
-            Tool.print((Object) "gestures is null");
+            Tool.print("gestures is null");
             return super.onTouchEvent(event);
         }
         try {
@@ -338,14 +332,9 @@ public class CellContainer extends ViewGroup {
 
     @Nullable
     public final Point findFreeSpace() {
-        boolean[][] zArr = _occupied;
-        int length = zArr[0].length;
-        for (int y = 0; y < length; y++) {
-            boolean[][] zArr2 = _occupied;
-            int length2 = zArr2.length;
-            for (int x = 0; x < length2; x++) {
-                boolean[][] zArr3 = _occupied;
-                if (!zArr3[x][y]) {
+        for (int y = 0; y < _occupied[0].length; y++) {
+            for (int x = 0; x < _occupied.length; x++) {
+                if (!_occupied[x][y]) {
                     return new Point(x, y);
                 }
             }
@@ -355,21 +344,12 @@ public class CellContainer extends ViewGroup {
 
     @Nullable
     public final Point findFreeSpace(int spanX, int spanY) {
-        boolean[][] zArr = _occupied;
-        int length = zArr[0].length;
-        int y = 0;
-        while (y < length) {
-            boolean[][] zArr2 = _occupied;
-            int length2 = zArr2.length;
-            int x = 0;
-            while (x < length2) {
-                boolean[][] zArr3 = _occupied;
-                if (!zArr3[x][y] && !checkOccupied(new Point(x, y), spanX, spanY)) {
+        for (int y = 0; y < _occupied[0].length; y++) {
+            for (int x = 0; x < _occupied.length; x++) {
+                if (!_occupied[x][y] && !checkOccupied(new Point(x, y), spanX, spanY)) {
                     return new Point(x, y);
                 }
-                x++;
             }
-            y++;
         }
         return null;
     }
@@ -442,13 +422,13 @@ public class CellContainer extends ViewGroup {
         }
     }
 
-    public void addView(@NonNull View child) {
-        LayoutParams lp = (CellContainer.LayoutParams) child.getLayoutParams();
+    public void addView(View view) {
+        LayoutParams lp = (CellContainer.LayoutParams) view.getLayoutParams();
         setOccupied(true, lp);
-        super.addView(child);
+        super.addView(view);
     }
 
-    public void removeView(@NonNull View view) {
+    public void removeView(View view) {
         LayoutParams lp = (CellContainer.LayoutParams) view.getLayoutParams();
         setOccupied(false, lp);
         super.removeView(view);
@@ -464,37 +444,25 @@ public class CellContainer extends ViewGroup {
     }
 
     public final void setOccupied(boolean b, @NonNull LayoutParams lp) {
-        Tool.print("Setting");
-        int x = lp.getX() + lp.getXSpan();
-        for (int x2 = lp.getX(); x2 < x; x2++) {
-            int y = lp.getY() + lp.getYSpan();
-            for (int y2 = lp.getY(); y2 < y; y2++) {
-                Object[] objArr = new Object[2];
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("Setting ok (");
-                stringBuilder.append(String.valueOf(b));
-                objArr[0] = stringBuilder.toString();
-                objArr[1] = ")";
-                Tool.print(objArr);
-                boolean[][] zArr = _occupied;
-                zArr[x2][y2] = b;
+        int xSpan = lp.getX() + lp.getXSpan();
+        for (int x = lp.getX(); x < xSpan; x++) {
+            int ySpan = lp.getY() + lp.getYSpan();
+            for (int y = lp.getY(); y < ySpan; y++) {
+                _occupied[x][y] = b;
             }
         }
     }
 
-    public final boolean checkOccupied(@NonNull Point start, int spanX, int spanY) {
+    public final boolean checkOccupied(Point start, int spanX, int spanY) {
         int i = start.x + spanX;
-        boolean[][] zArr = _occupied;
-        if (i <= ((Object[]) zArr).length) {
+        if (i <= _occupied.length) {
             i = start.y + spanY;
-            zArr = _occupied;
-            if (i <= zArr[0].length) {
+            if (i <= _occupied[0].length) {
                 int i2 = start.y + spanY;
                 for (i = start.y; i < i2; i++) {
                     int i3 = start.x + spanX;
                     for (int x = start.x; x < i3; x++) {
-                        boolean[][] zArr2 = _occupied;
-                        if (zArr2[x][i]) {
+                        if (_occupied[x][i]) {
                             return true;
                         }
                     }
@@ -505,8 +473,7 @@ public class CellContainer extends ViewGroup {
         return true;
     }
 
-    @Nullable
-    public final View coordinateToChildView(@Nullable Point pos) {
+    public final View coordinateToChildView(Point pos) {
         if (pos == null) {
             return null;
         }
@@ -519,7 +486,6 @@ public class CellContainer extends ViewGroup {
         return null;
     }
 
-    @Nullable
     public final LayoutParams coordinateToLayoutParams(int mX, int mY, int xSpan, int ySpan) {
         Point pos = new Point();
         touchPosToCoordinate(pos, mX, mY, xSpan, ySpan, true);
@@ -530,13 +496,11 @@ public class CellContainer extends ViewGroup {
         touchPosToCoordinate(coordinate, mX, mY, xSpan, ySpan, checkAvailability, false);
     }
 
-
     public final void touchPosToCoordinate(@NonNull Point coordinate, int mX, int mY, int xSpan, int ySpan, boolean checkAvailability, boolean checkBoundary) {
         if (_cells == null) {
             coordinate.set(-1, -1);
             return;
         }
-
 
         mX -= (xSpan - 1) * _cellWidth / 2f;
         mY -= (ySpan - 1) * _cellHeight / 2f;

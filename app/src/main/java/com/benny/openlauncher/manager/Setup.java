@@ -11,11 +11,6 @@ import com.benny.openlauncher.viewutil.DesktopGestureListener;
 import com.benny.openlauncher.viewutil.ItemGestureListener;
 
 public abstract class Setup {
-
-    // ----------------
-    // Class and singleton
-    // ----------------
-
     private static Setup _setup = null;
 
     public static boolean wasInitialised() {
@@ -32,10 +27,6 @@ public abstract class Setup {
         }
         return _setup;
     }
-
-    // ----------------
-    // Methods for convenience and shorter code
-    // ----------------
 
     public static Context appContext() {
         return get().getAppContext();
@@ -69,10 +60,6 @@ public abstract class Setup {
         return get().getLogger();
     }
 
-    // ----------------
-    // Settings
-    // ----------------
-
     public abstract Context getAppContext();
 
     public abstract AppSettings getAppSettings();
@@ -88,10 +75,6 @@ public abstract class Setup {
     public abstract EventHandler getEventHandler();
 
     public abstract Logger getLogger();
-
-    // ----------------
-    // Interfaces
-    // ----------------
 
     public interface EventHandler {
         void showLauncherSettings(Context context);

@@ -284,16 +284,12 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 }
 
                 AppSettings appSettings = Setup.appSettings();
-                if (appSettings.getDesktopStyle() == 0) {
-                    getDesktop().initDesktopNormal(HomeActivity.this);
-                    if (appSettings.isAppFirstLaunch()) {
-                        appSettings.setAppFirstLaunch(false);
-                        Item appDrawerBtnItem = Item.newActionItem(8);
-                        appDrawerBtnItem._x = 2;
-                        Companion.getDb().saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
-                    }
-                } else {
-                    getDesktop().initDesktopShowAll(HomeActivity.this, HomeActivity.this);
+                getDesktop().initDesktop(HomeActivity.this);
+                if (appSettings.isAppFirstLaunch()) {
+                    appSettings.setAppFirstLaunch(false);
+                    Item appDrawerBtnItem = Item.newActionItem(8);
+                    appDrawerBtnItem._x = 2;
+                    Companion.getDb().saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
                 }
                 getDock().initDockItem(HomeActivity.this);
                 return true;
@@ -302,12 +298,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         Setup.appLoader().addDeleteListener(new AppDeleteListener() {
             @Override
             public boolean onAppDeleted(List<App> apps) {
-                AppSettings appSettings = Setup.appSettings();
-                if (appSettings.getDesktopStyle() == 0) {
-                    getDesktop().initDesktopNormal(HomeActivity.this);
-                } else {
-                    getDesktop().initDesktopShowAll(HomeActivity.this, HomeActivity.this);
-                }
+                getDesktop().initDesktop(HomeActivity.this);
                 getDock().initDockItem(HomeActivity.this);
                 setToHomePage();
                 return false;
@@ -465,7 +456,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         } catch (SettingNotFoundException e) {
             Log.d(HomeActivity.class.getSimpleName(), "Unable to read settings", e);
         }
-        boolean rotate2 = false;
         if (getResources().getBoolean(R.bool.isTablet)) {
             rotate = system;
         } else if (user && system) {
@@ -536,10 +526,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     private final void init() {
         Companion.setAppWidgetHost(new WidgetHost(getApplicationContext(), R.id.app_widget_host));
-        Companion companion = Companion;
         AppWidgetManager instance = AppWidgetManager.getInstance(this);
 
-        companion.setAppWidgetManager(instance);
+        Companion.setAppWidgetManager(instance);
         WidgetHost appWidgetHost = Companion.getAppWidgetHost();
         appWidgetHost.startListening();
         initViews();
@@ -554,8 +543,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         registerBroadcastReceiver();
         initAppManager();
         initSettings();
-        System.runFinalization();
-        System.gc();
     }
 
     public final void onUninstallItem(@NonNull Item item) {

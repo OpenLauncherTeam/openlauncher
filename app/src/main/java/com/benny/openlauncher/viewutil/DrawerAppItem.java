@@ -24,7 +24,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
         _onLongClickCallback = new AppItemView.LongPressCallBack() {
             @Override
             public boolean readyForDrag(View view) {
-                return Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.INSTANCE.getSHOW_ALL_APPS();
+                return true;
             }
 
             @Override

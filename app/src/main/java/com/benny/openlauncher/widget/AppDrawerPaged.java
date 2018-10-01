@@ -148,7 +148,7 @@ public class AppDrawerPaged extends SmoothViewPager {
                             new AppItemView.LongPressCallBack() {
                                 @Override
                                 public boolean readyForDrag(View view) {
-                                    return Setup.appSettings().getDesktopStyle() != Desktop.DesktopMode.INSTANCE.getSHOW_ALL_APPS();
+                                    return true;
                                 }
 
                                 @Override

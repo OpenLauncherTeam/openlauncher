@@ -145,10 +145,6 @@ public class AppManager {
         getAllApps();
     }
 
-    // -----------------------
-    // AppLoader interface
-    // -----------------------
-
     public List<App> getAllApps(Context context, boolean includeHidden) {
         return includeHidden ? getNonFilteredApps() : getApps();
     }

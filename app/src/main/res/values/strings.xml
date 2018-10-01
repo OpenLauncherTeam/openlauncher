@@ -72,6 +72,7 @@
     <string name="pref_title__inputs">Inputs</string>
     <string name="pref_title__feels">Feels</string>
     <string name="pref_title__others">Others</string>
+    <string name="pref_title__animations">Animations</string>
 
     <string name="pref_title__desktop_style">Style</string>
     <string name="pref_title__desktop_indicator_style">Indicator Style</string>

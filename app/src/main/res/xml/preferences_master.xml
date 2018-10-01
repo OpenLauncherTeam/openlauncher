@@ -43,6 +43,12 @@
                     android:title="@string/pref_title__minibar" />
 
                 <android.support.v7.preference.CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="@string/pref_key__desktop_rotate"
+                    android:summary="@string/pref_summary__desktop_rotate"
+                    android:title="@string/pref_title__desktop_rotate" />
+
+                <android.support.v7.preference.CheckBoxPreference
                     android:defaultValue="true"
                     android:key="@string/pref_key__desktop_hide_grid"
                     android:summary="@string/pref_summary__desktop_hide_grid"
@@ -322,14 +328,6 @@
             android:key="@string/pref_key__cat_appearance"
             android:title="@string/pref_title__appearance">
 
-            <com.benny.openlauncher.preference.ColorPreferenceCompat
-                android:defaultValue="@color/colorPrimary"
-                android:key="@string/pref_key__primary_color"
-                android:title="@string/pref_title__primary_color"
-                app:cpv_dialogTitle="@string/pref_title__primary_color"
-                app:cpv_showAlphaSlider="true" />
-
-
             <android.support.v7.preference.ListPreference
                 android:defaultValue="0"
                 android:entries="@array/entries__themes"
@@ -337,6 +335,13 @@
                 android:key="@string/pref_key__theme"
                 android:summary="@string/pref_summary__theme"
                 android:title="@string/pref_title__theme" />
+
+            <com.benny.openlauncher.preference.ColorPreferenceCompat
+                android:defaultValue="@color/colorPrimary"
+                android:key="@string/pref_key__primary_color"
+                android:title="@string/pref_title__primary_color"
+                app:cpv_dialogTitle="@string/pref_title__primary_color"
+                app:cpv_showAlphaSlider="true" />
 
             <android.support.v7.preference.PreferenceCategory android:title="@string/icons">
 
@@ -352,6 +357,18 @@
                     android:key="@string/pref_key__icon_pack"
                     android:summary="@string/pref_summary__icon_pack"
                     android:title="@string/pref_title__icon_pack" />
+
+            </android.support.v7.preference.PreferenceCategory>
+
+            <android.support.v7.preference.PreferenceCategory android:title="@string/pref_title__animations">
+
+                <android.support.v7.preference.SeekBarPreference
+                    android:defaultValue="30"
+                    android:key="@string/pref_key__overall_animation_speed_modifier"
+                    android:max="100"
+                    android:summary="@string/pref_summary__animation_speed_modifier"
+                    android:title="@string/pref_title__animation_speed_modifier"
+                    app:min="1" />
 
             </android.support.v7.preference.PreferenceCategory>
 
@@ -413,14 +430,6 @@
 
         </android.support.v7.preference.PreferenceCategory>
 
-        <android.support.v7.preference.SeekBarPreference
-            android:defaultValue="30"
-            android:key="@string/pref_key__overall_animation_speed_modifier"
-            android:max="100"
-            android:summary="@string/pref_summary__animation_speed_modifier"
-            android:title="@string/pref_title__animation_speed_modifier"
-            app:min="1" />
-
     </PreferenceScreen>
 
         <PreferenceScreen
@@ -434,13 +443,6 @@
                 android:summary="@string/pref_summary__language"
                 android:title="@string/pref_title__language" />
 
-
-            <android.support.v7.preference.CheckBoxPreference
-                android:defaultValue="false"
-                android:key="@string/pref_key__desktop_rotate"
-                android:summary="@string/pref_summary__desktop_rotate"
-                android:title="@string/pref_title__desktop_rotate" />
-
             <PreferenceCategory android:title="@string/pref_title__backup">
 
                 <android.support.v7.preference.Preference
@@ -453,7 +455,6 @@
                     android:summary="@string/pref_summary__restore"
                     android:title="@string/pref_title__restore" />
             </PreferenceCategory>
-
 
             <PreferenceCategory android:title="@string/debug">
 

@@ -36,14 +36,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getInt(R.string.pref_key__desktop_rows, 6);
     }
 
-    public int getDesktopStyle() {
-        return getIntOfStringPref(R.string.pref_key__desktop_style, Desktop.DesktopMode.INSTANCE.getNORMAL());
-    }
-
-    public void setDesktopStyle(int style) {
-        setInt(R.string.pref_key__desktop_style, style);
-    }
-
     public boolean isDesktopFullscreen() {
         return getBool(R.string.pref_key__desktop_fullscreen, false);
     }
