@@ -1,13 +1,7 @@
 ![graphic](https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher/master/metadata/en-US/featureGraphic.png)
 
-[![release](https://img.shields.io/badge/release-0.5.8-blue.svg)](https://github.com/OpenLauncherTeam/openlauncher/releases)
-[![circleci](https://circleci.com/gh/OpenLauncherTeam/openlauncher.svg?style=shield)](https://circleci.com/gh/OpenLauncherTeam/openlauncher)
-[![matrix](https://img.shields.io/badge/chat-on%20matrix-blue.svg)](https://matrix.to/#/#openlauncher:matrix.org)
-[![stringlate](https://img.shields.io/badge/stringlate-translate-green.svg)](https://lonamiwebs.github.io/stringlate/translate?git=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher.git&name=OpenLauncher&web=https%3A%2F%2Fgithub.com%2FOpenLauncherTeam%2Fopenlauncher)
-
 # OpenLauncher
-<img src="/app/src/main/ic_launcher-web.png" align="left" width="100" hspace="10" vspace="10">
-This an open source Android launcher project, started from scratch. We aim to create a powerful and community driven launcher for Android.
+This is an open source launcher project for Android devices that has been built completely from scratch. The main goal of this launcher is to find a healthy medium between customization and simplicity. At this point in time it implements most features required in a typical launcher but could benefit greatly from some general polish. If you would like to help out feel free to submit pull requests or ask about joining the development team.
 
 <div style="display:flex;">
 <a href="https://f-droid.org/repository/browse/?fdid=com.benny.openlauncher">
@@ -17,7 +11,6 @@ This an open source Android launcher project, started from scratch. We aim to cr
     <img height="80" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
 </a>
 </div>
-</br>
 
 ## Description
 

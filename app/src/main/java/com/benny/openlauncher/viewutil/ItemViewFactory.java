@@ -123,9 +123,9 @@ public class ItemViewFactory {
                         .getView();
                 break;
             case WIDGET:
-                if (HomeActivity.Companion.getAppWidgetHost() == null) break;
-                final AppWidgetProviderInfo appWidgetInfo = HomeActivity.Companion.getAppWidgetManager().getAppWidgetInfo(item.getWidgetValue());
-                final WidgetView widgetView = (WidgetView) HomeActivity.Companion.getAppWidgetHost().createView(context, item.getWidgetValue(), appWidgetInfo);
+                if (HomeActivity._appWidgetHost == null) break;
+                final AppWidgetProviderInfo appWidgetInfo = HomeActivity._appWidgetManager.getAppWidgetInfo(item.getWidgetValue());
+                final WidgetView widgetView = (WidgetView) HomeActivity._appWidgetHost.createView(context, item.getWidgetValue(), appWidgetInfo);
 
                 widgetView.setAppWidget(item.getWidgetValue(), appWidgetInfo);
                 widgetView.post(new Runnable() {
@@ -245,7 +245,7 @@ public class ItemViewFactory {
             updateWidgetOption(item);
 
             // update the widget size in the database
-            HomeActivity.Companion.getDb().saveItem(item);
+            HomeActivity._db.saveItem(item);
         } else {
             Toast.makeText(HomeActivity.Companion.getLauncher().getDesktop().getContext(), R.string.toast_not_enough_space, Toast.LENGTH_SHORT).show();
 
@@ -260,6 +260,6 @@ public class ItemViewFactory {
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.getSpanX() * HomeActivity.Companion.getLauncher().getDesktop().getCurrentPage().getCellWidth());
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.getSpanY() * HomeActivity.Companion.getLauncher().getDesktop().getCurrentPage().getCellHeight());
         newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.getSpanY() * HomeActivity.Companion.getLauncher().getDesktop().getCurrentPage().getCellHeight());
-        HomeActivity.Companion.getAppWidgetManager().updateAppWidgetOptions(item.getWidgetValue(), newOps);
+        HomeActivity._appWidgetManager.updateAppWidgetOptions(item.getWidgetValue(), newOps);
     }
 }

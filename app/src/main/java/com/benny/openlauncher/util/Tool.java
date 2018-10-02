@@ -197,12 +197,7 @@ public class Tool {
             HomeActivity.Companion.getLauncher().onStartApp(context, app, null);
     }
 
-    public static void startApp(Context context, Intent intent) {
-        if (HomeActivity.Companion.getLauncher() != null)
-            HomeActivity.Companion.getLauncher().onStartApp(context, intent, null);
-    }
-
-    public static final void startApp(@NonNull Context context, @NonNull App app, @Nullable View view) {
+    public static final void startApp(Context context, App app, View view) {
         HomeActivity launcher = HomeActivity.Companion.getLauncher();
         if (launcher != null) {
             launcher.onStartApp(context, app, view);
@@ -344,8 +339,8 @@ public class Tool {
         return new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                HomeActivity.Companion.setItemTouchX((int) motionEvent.getX());
-                HomeActivity.Companion.setItemTouchY((int) motionEvent.getY());
+                HomeActivity._itemTouchX = motionEvent.getX();
+                HomeActivity._itemTouchY = motionEvent.getY();
                 if (itemGestureListener != null) {
                     return itemGestureListener.onTouchEvent(motionEvent);
                 }

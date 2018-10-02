@@ -19,7 +19,6 @@ import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.Item.Type;
-import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.Definitions.ItemState;
 import com.benny.openlauncher.util.DragAction.Action;
@@ -38,10 +37,8 @@ import in.championswimmer.sfg.lib.SimpleFingerGestures;
 import in.championswimmer.sfg.lib.SimpleFingerGestures.OnFingerGestureListener;
 
 public final class Desktop extends SmoothViewPager implements DesktopCallback<View> {
-    public static final Companion _companion = new Companion();
     public static int _bottomInset;
     public static int _topInset;
-    private final Point _coordinate = new Point(-1, -1);
 
     @Nullable
     private OnDesktopEditListener _desktopEditListener;
@@ -53,36 +50,21 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
     private final List<CellContainer> _pages = new ArrayList<CellContainer>();
     private final Point _previousDragPoint = new Point();
 
+    private Point _coordinate = new Point(-1, -1);
     private Item _previousItem;
     private View _previousItemView;
     private int _previousPage;
 
-
-    public static final class Companion {
-        private Companion() {
-        }
-
-        public final void setTopInset(int v) {
-            Desktop._topInset = v;
-        }
-
-        public final void setBottomInset(int v) {
-            Desktop._bottomInset = v;
-        }
-
-        @Nullable
-        public final Item getItemFromCoordinate(@NonNull Point point, int page) {
-
-            List pageData = (List) HomeActivity.Companion.getDb().getDesktop().get(page);
-            int size = pageData.size();
-            for (int i = 0; i < size; i++) {
-                Item item = (Item) pageData.get(i);
-                if (item._x == point.x && item._y == point.y && item._spanX == 1 && item._spanY == 1) {
-                    return (Item) pageData.get(i);
-                }
+    public static Item getItemFromCoordinate(Point point, int page) {
+        List pageData = HomeActivity._db.getDesktop().get(page);
+        int size = pageData.size();
+        for (int i = 0; i < size; i++) {
+            Item item = (Item) pageData.get(i);
+            if (item._x == point.x && item._y == point.y && item._spanX == 1 && item._spanY == 1) {
+                return (Item) pageData.get(i);
             }
-            return null;
         }
+        return null;
     }
 
     public static boolean handleOnDropOver(HomeActivity homeActivity, Item dropItem, Item item, View itemView, CellContainer parent, int page, ItemPosition itemPosition, DesktopCallback callback) {
@@ -100,10 +82,10 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
                                 group.getGroupItems().add(dropItem);
                                 group._x = item._x;
                                 group._y = item._y;
-                                HomeActivity.Companion.getDb().saveItem(dropItem, page, itemPosition);
-                                HomeActivity.Companion.getDb().saveItem(item, ItemState.Hidden);
-                                HomeActivity.Companion.getDb().saveItem(dropItem, ItemState.Hidden);
-                                HomeActivity.Companion.getDb().saveItem(group, page, itemPosition);
+                                HomeActivity._db.saveItem(dropItem, page, itemPosition);
+                                HomeActivity._db.saveItem(item, ItemState.Hidden);
+                                HomeActivity._db.saveItem(dropItem, ItemState.Hidden);
+                                HomeActivity._db.saveItem(group, page, itemPosition);
                                 callback.addItemToPage(group, page);
                                 HomeActivity launcher = HomeActivity.Companion.getLauncher();
                                 if (launcher != null) {
@@ -116,9 +98,9 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
                             if ((Item.Type.APP.equals(dropItem._type) || Type.SHORTCUT.equals(dropItem._type)) && item.getGroupItems().size() < GroupPopupView.GroupDef._maxItem) {
                                 parent.removeView(itemView);
                                 item.getGroupItems().add(dropItem);
-                                HomeActivity.Companion.getDb().saveItem(dropItem, page, itemPosition);
-                                HomeActivity.Companion.getDb().saveItem(dropItem, ItemState.Hidden);
-                                HomeActivity.Companion.getDb().saveItem(item, page, itemPosition);
+                                HomeActivity._db.saveItem(dropItem, page, itemPosition);
+                                HomeActivity._db.saveItem(dropItem, ItemState.Hidden);
+                                HomeActivity._db.saveItem(item, page, itemPosition);
                                 callback.addItemToPage(item, page);
                                 HomeActivity launcher = HomeActivity.Companion.getLauncher();
                                 if (launcher != null) {
@@ -135,12 +117,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
             }
         }
         return false;
-    }
-
-    public interface OnDesktopEditListener {
-        void onDesktopEdit();
-
-        void onFinishDesktopEdit();
     }
 
     public final class DesktopAdapter extends SmoothPagerAdapter {
@@ -172,7 +148,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
             layout.setOnItemRearrangeListener(new CellContainer.OnItemRearrangeListener() {
                 @Override
                 public void onItemRearrange(@NonNull Point from, @NonNull Point to) {
-                    Item itemFromCoordinate = Desktop._companion.getItemFromCoordinate(from, getCurrentItem());
+                    Item itemFromCoordinate = Desktop.getItemFromCoordinate(from, getCurrentItem());
                     if (itemFromCoordinate != null) {
                         itemFromCoordinate._x = to.x;
                         itemFromCoordinate._y = to.y;
@@ -222,10 +198,10 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
 
         public final void removePage(int position, boolean deleteItems) {
             if (deleteItems) {
-                for (View v : ((CellContainer) _desktop.getPages().get(position)).getAllCells()) {
-                    Object item = v.getTag();
+                for (View view : _desktop.getPages().get(position).getAllCells()) {
+                    Object item = view.getTag();
                     if (item instanceof Item) {
-                        HomeActivity.Companion.getDb().deleteItem((Item) item, true);
+                        HomeActivity._db.deleteItem((Item) item, true);
                     }
                 }
             }
@@ -234,7 +210,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         }
 
         public int getItemPosition(@NonNull Object object) {
-
             return -2;
         }
 
@@ -243,21 +218,15 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         }
 
         public boolean isViewFromObject(@NonNull View p1, @NonNull Object p2) {
-
-
             return p1 == p2;
         }
 
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-
-
             container.removeView((View) object);
         }
 
-        @NonNull
-        public Object instantiateItem(@NonNull ViewGroup container, int pos) {
-
-            CellContainer layout = (CellContainer) _desktop.getPages().get(pos);
+        public Object instantiateItem(ViewGroup container, int pos) {
+            CellContainer layout = _desktop.getPages().get(pos);
             container.addView(layout);
             return layout;
         }
@@ -345,7 +314,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
 
     public final void init() {
         if (!isInEditMode()) {
-            _pageCount = HomeActivity.Companion.getDb().getDesktop().size();
+            _pageCount = HomeActivity._db.getDesktop().size();
             if (_pageCount == 0) {
                 _pageCount = 1;
             }
@@ -360,7 +329,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         }
         int columns = Setup.appSettings().getDesktopColumnCount();
         int rows = Setup.appSettings().getDesktopRowCount();
-        List desktopItems = HomeActivity.Companion.getDb().getDesktop();
+        List desktopItems = HomeActivity._db.getDesktop();
         int size = desktopItems.size();
         int pageCount = 0;
         while (pageCount < size) {
@@ -499,7 +468,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
     public boolean addItemToPage(@NonNull Item item, int page) {
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this, Setup.appSettings().getDesktopIconSize());
         if (itemView == null) {
-            HomeActivity.Companion.getDb().deleteItem(item, true);
+            HomeActivity._db.deleteItem(item, true);
             return false;
         }
         item._locationInLauncher = 0;
@@ -563,7 +532,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
                 @Override
                 public void run() {
                     Tool.print("Ok Removing a view from Desktop");
-                    if (getParent() != null && getParent().equals(getCurrentPage())) {
+                    if (getCurrentPage().equals(view.getParent())) {
                         getCurrentPage().removeView(view);
                     }
                 }
@@ -587,13 +556,19 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
     @NonNull
     public WindowInsets onApplyWindowInsets(@NonNull WindowInsets insets) {
         if (VERSION.SDK_INT >= 20) {
-            _companion.setTopInset(insets.getSystemWindowInsetTop());
-            _companion.setBottomInset(insets.getSystemWindowInsetBottom());
-            HomeActivity launcher = HomeActivity.Companion.getLauncher();
+            _topInset = insets.getSystemWindowInsetTop();
+            _bottomInset = insets.getSystemWindowInsetBottom();
+            HomeActivity launcher = HomeActivity._launcher;
             if (launcher != null) {
                 launcher.updateHomeLayout();
             }
         }
         return insets;
+    }
+
+    public interface OnDesktopEditListener {
+        void onDesktopEdit();
+
+        void onFinishDesktopEdit();
     }
 }

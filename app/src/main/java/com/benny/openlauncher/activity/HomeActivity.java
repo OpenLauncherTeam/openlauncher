@@ -12,18 +12,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.content.res.Resources;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.DrawerLayout.DrawerListener;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -81,23 +76,25 @@ import net.gsantner.opoc.util.ContextUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class HomeActivity extends Activity implements OnDesktopEditListener, DesktopOptionViewListener, DrawerListener {
+public final class HomeActivity extends Activity implements OnDesktopEditListener, DesktopOptionViewListener {
     public static final Companion Companion = new Companion();
     public static final int REQUEST_CREATE_APPWIDGET = 0x6475;
     public static final int REQUEST_PERMISSION_STORAGE = 0x3648;
     public static final int REQUEST_PICK_APPWIDGET = 0x2678;
-    private static Resources _resources;
-    private static WidgetHost _appWidgetHost;
+    public static WidgetHost _appWidgetHost;
     public static AppWidgetManager _appWidgetManager;
-    private static boolean _consumeNextResume;
-    public static DatabaseHelper _db;
+    public static boolean _consumeNextResume;
     public static float _itemTouchX;
     public static float _itemTouchY;
-    @Nullable
+
+    // static launcher variables
     public static HomeActivity _launcher;
+    public static DatabaseHelper _db;
+
+    // receiver variables
     private static final IntentFilter _appUpdateIntentFilter = new IntentFilter();
     private static final IntentFilter _shortcutIntentFilter = new IntentFilter();
-    private static final IntentFilter _timeChangesIntentFilter = new IntentFilter();
+    private static final IntentFilter _timeChangedIntentFilter = new IntentFilter();
     private AppUpdateReceiver _appUpdateReceiver = new AppUpdateReceiver();
     private ShortcutReceiver _shortcutReceiver = new ShortcutReceiver();
     private BroadcastReceiver _timeChangedReceiver;
@@ -110,7 +107,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         private Companion() {
         }
 
-        @Nullable
         public final HomeActivity getLauncher() {
             return _launcher;
         }
@@ -118,100 +114,74 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         public final void setLauncher(@Nullable HomeActivity v) {
             _launcher = v;
         }
-
-        @Nullable
-        public final Resources get_resources() {
-            return _resources;
-        }
-
-        public final void set_resources(@Nullable Resources v) {
-            _resources = v;
-        }
-
-        @NonNull
-        public final DatabaseHelper getDb() {
-            return _db;
-        }
-
-        public final void setDb(@NonNull DatabaseHelper v) {
-            _db = v;
-        }
-
-        @Nullable
-        public final WidgetHost getAppWidgetHost() {
-            return _appWidgetHost;
-        }
-
-        public final void setAppWidgetHost(@Nullable WidgetHost v) {
-            _appWidgetHost = v;
-        }
-
-        @NonNull
-        public final AppWidgetManager getAppWidgetManager() {
-            return _appWidgetManager;
-        }
-
-        public final void setAppWidgetManager(@NonNull AppWidgetManager v) {
-
-            _appWidgetManager = v;
-        }
-
-        public final float getItemTouchX() {
-            return _itemTouchX;
-        }
-
-        public final void setItemTouchX(float v) {
-            _itemTouchX = v;
-        }
-
-        public final float getItemTouchY() {
-            return _itemTouchY;
-        }
-
-        public final void setItemTouchY(float v) {
-            _itemTouchY = v;
-        }
-
-        public final boolean getConsumeNextResume() {
-            return _consumeNextResume;
-        }
-
-        public final void setConsumeNextResume(boolean v) {
-            _consumeNextResume = v;
-        }
-
-        private final IntentFilter getTimeChangesIntentFilter() {
-            return _timeChangesIntentFilter;
-        }
-
-        private final IntentFilter getAppUpdateIntentFilter() {
-            return _appUpdateIntentFilter;
-        }
-
-        private final IntentFilter getShortcutIntentFilter() {
-            return _shortcutIntentFilter;
-        }
     }
 
     static {
-        Companion.getTimeChangesIntentFilter().addAction("android.intent.action.TIME_TICK");
-        Companion.getTimeChangesIntentFilter().addAction("android.intent.action.TIMEZONE_CHANGED");
-        Companion.getTimeChangesIntentFilter().addAction("android.intent.action.TIME_SET");
-        Companion.getAppUpdateIntentFilter().addAction("android.intent.action.PACKAGE_ADDED");
-        Companion.getAppUpdateIntentFilter().addAction("android.intent.action.PACKAGE_REMOVED");
-        Companion.getAppUpdateIntentFilter().addAction("android.intent.action.PACKAGE_CHANGED");
-        Companion.getAppUpdateIntentFilter().addDataScheme("package");
-        Companion.getShortcutIntentFilter().addAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        _timeChangedIntentFilter.addAction("android.intent.action.TIME_TICK");
+        _timeChangedIntentFilter.addAction("android.intent.action.TIMEZONE_CHANGED");
+        _timeChangedIntentFilter.addAction("android.intent.action.TIME_SET");
+        _appUpdateIntentFilter.addAction("android.intent.action.PACKAGE_ADDED");
+        _appUpdateIntentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
+        _appUpdateIntentFilter.addAction("android.intent.action.PACKAGE_CHANGED");
+        _appUpdateIntentFilter.addDataScheme("package");
+        _shortcutIntentFilter.addAction("com.android.launcher.action.INSTALL_SHORTCUT");
     }
 
-    @NonNull
     public final DrawerLayout getDrawerLayout() {
         return findViewById(R.id.drawer_layout);
     }
 
+
+    @NonNull
+    public final Desktop getDesktop() {
+        Desktop desktop = (Desktop) findViewById(R.id.desktop);
+        return desktop;
+    }
+
+    @NonNull
+    public final Dock getDock() {
+        Dock dock = (Dock) findViewById(R.id.dock);
+        return dock;
+    }
+
+    @NonNull
+    public final AppDrawerController getAppDrawerController() {
+        AppDrawerController appDrawerController = (AppDrawerController) findViewById(R.id.appDrawerController);
+        return appDrawerController;
+    }
+
+    @NonNull
+    public final GroupPopupView getGroupPopup() {
+        GroupPopupView groupPopupView = (GroupPopupView) findViewById(R.id.groupPopup);
+        return groupPopupView;
+    }
+
+    @NonNull
+    public final SearchBar getSearchBar() {
+        SearchBar searchBar = (SearchBar) findViewById(R.id.searchBar);
+        return searchBar;
+    }
+
+    @NonNull
+    public final View getBackground() {
+        View findViewById = findViewById(R.id.background);
+        return findViewById;
+    }
+
+    @NonNull
+    public final PagerIndicator getDesktopIndicator() {
+        PagerIndicator pagerIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
+        return pagerIndicator;
+    }
+
+    @NonNull
+    public final ItemOptionView getDragNDropView() {
+        ItemOptionView itemOptionView = (ItemOptionView) findViewById(R.id.dragNDropView);
+        return itemOptionView;
+    }
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Companion.setLauncher(this);
-        Companion.set_resources(getResources());
         ContextUtils contextUtils = new ContextUtils(getApplicationContext());
         AppSettings appSettings = AppSettings.get();
 
@@ -231,9 +201,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             };
         }
         Companion.setLauncher(this);
-        DatabaseHelper dataManager = Setup.dataManager();
+        _db = Setup.dataManager();
 
-        Companion.setDb(dataManager);
         setContentView(getLayoutInflater().inflate(R.layout.activity_home, null));
         if (VERSION.SDK_INT >= 21) {
             Window window = getWindow();
@@ -243,32 +212,17 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         init();
     }
 
-    public final void onStartApp(@NonNull Context context, @NonNull Intent intent, @Nullable View view) {
-        ComponentName component = intent.getComponent();
-        if (BuildConfig.APPLICATION_ID.equals(component.getPackageName())) {
-            LauncherAction.RunAction(Action.LauncherSettings, context);
-            Companion.setConsumeNextResume(true);
-        } else {
-            try {
-                context.startActivity(intent, getActivityAnimationOpts(view));
-                Companion.setConsumeNextResume(true);
-            } catch (Exception e) {
-                Tool.toast(context, R.string.toast_app_uninstalled);
-            }
-        }
-    }
-
     public final void onStartApp(@NonNull Context context, @NonNull App app, @Nullable View view) {
         if (BuildConfig.APPLICATION_ID.equals(app._packageName)) {
             LauncherAction.RunAction(Action.LauncherSettings, context);
-            Companion.setConsumeNextResume(true);
+            _consumeNextResume = true;
         } else {
             try {
                 Intent intent = new Intent("android.intent.action.MAIN");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setClassName(app._packageName, app._className);
                 context.startActivity(intent, getActivityAnimationOpts(view));
-                Companion.setConsumeNextResume(true);
+                _consumeNextResume = true;
             } catch (Exception e) {
                 Tool.toast(context, (int) R.string.toast_app_uninstalled);
             }
@@ -284,12 +238,12 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 }
 
                 AppSettings appSettings = Setup.appSettings();
-                getDesktop().initDesktop(HomeActivity.this);
+                getDesktop().initDesktop();
                 if (appSettings.isAppFirstLaunch()) {
                     appSettings.setAppFirstLaunch(false);
                     Item appDrawerBtnItem = Item.newActionItem(8);
                     appDrawerBtnItem._x = 2;
-                    Companion.getDb().saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
+                    _db.saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
                 }
                 getDock().initDockItem(HomeActivity.this);
                 return true;
@@ -298,7 +252,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         Setup.appLoader().addDeleteListener(new AppDeleteListener() {
             @Override
             public boolean onAppDeleted(List<App> apps) {
-                getDesktop().initDesktop(HomeActivity.this);
+                getDesktop().initDesktop();
                 getDock().initDockItem(HomeActivity.this);
                 setToHomePage();
                 return false;
@@ -411,126 +365,11 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         ((DrawerLayout) findViewById(R.id.drawer_layout)).closeDrawers();
     }
 
-    public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-
-    }
-
-    public void onDrawerOpened(@NonNull View drawerView) {
-
-    }
-
-    public void onDrawerClosed(@NonNull View drawerView) {
-
-    }
-
-    public void onDrawerStateChanged(int newState) {
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AppSettings appSettings = Setup.appSettings();
-
-        boolean rotate = false;
-        if (appSettings.getAppRestartRequired()) {
-            appSettings = Setup.appSettings();
-
-            appSettings.setAppRestartRequired(false);
-            PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556, new Intent(this, HomeActivity.class), PendingIntent.FLAG_CANCEL_CURRENT);
-            AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + ((long) 100), restartIntentP);
-            System.exit(0);
-            return;
-        }
-        Companion.setLauncher(this);
-        WidgetHost appWidgetHost = Companion.getAppWidgetHost();
-        if (appWidgetHost != null) {
-            appWidgetHost.startListening();
-        }
-        Intent intent = getIntent();
-
-        handleLauncherPause(Intent.ACTION_MAIN.equals(intent.getAction()));
-        boolean user = AppSettings.get().getBool(R.string.pref_key__desktop_rotate, false);
-        boolean system = false;
-        try {
-            system = Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION) == 1;
-        } catch (SettingNotFoundException e) {
-            Log.d(HomeActivity.class.getSimpleName(), "Unable to read settings", e);
-        }
-        if (getResources().getBoolean(R.bool.isTablet)) {
-            rotate = system;
-        } else if (user && system) {
-            rotate = true;
-        }
-        if (rotate) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-        } else {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
-    }
-
-    @NonNull
-    public final Desktop getDesktop() {
-        Desktop desktop = (Desktop) findViewById(R.id.desktop);
-
-        return desktop;
-    }
-
-    @NonNull
-    public final Dock getDock() {
-        Dock dock = (Dock) findViewById(R.id.dock);
-
-        return dock;
-    }
-
-    @NonNull
-    public final AppDrawerController getAppDrawerController() {
-        AppDrawerController appDrawerController = (AppDrawerController) findViewById(R.id.appDrawerController);
-
-        return appDrawerController;
-    }
-
-    @NonNull
-    public final GroupPopupView getGroupPopup() {
-        GroupPopupView groupPopupView = (GroupPopupView) findViewById(R.id.groupPopup);
-
-        return groupPopupView;
-    }
-
-    @NonNull
-    public final SearchBar getSearchBar() {
-        SearchBar searchBar = (SearchBar) findViewById(R.id.searchBar);
-
-        return searchBar;
-    }
-
-    @NonNull
-    public final View getBackground() {
-        View findViewById = findViewById(R.id.background);
-
-        return findViewById;
-    }
-
-    @NonNull
-    public final PagerIndicator getDesktopIndicator() {
-        PagerIndicator pagerIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
-
-        return pagerIndicator;
-    }
-
-    @NonNull
-    public final ItemOptionView getDragNDropView() {
-        ItemOptionView itemOptionView = (ItemOptionView) findViewById(R.id.dragNDropView);
-
-        return itemOptionView;
-    }
-
     private final void init() {
-        Companion.setAppWidgetHost(new WidgetHost(getApplicationContext(), R.id.app_widget_host));
-        AppWidgetManager instance = AppWidgetManager.getInstance(this);
+        _appWidgetManager = AppWidgetManager.getInstance(this);
+        _appWidgetHost = new WidgetHost(getApplicationContext(), R.id.app_widget_host);
+        _appWidgetHost.startListening();
 
-        Companion.setAppWidgetManager(instance);
-        WidgetHost appWidgetHost = Companion.getAppWidgetHost();
-        appWidgetHost.startListening();
         initViews();
         HpDragOption hpDragOption = new HpDragOption();
         View findViewById = findViewById(R.id.leftDragHandle);
@@ -546,7 +385,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     public final void onUninstallItem(@NonNull Item item) {
-        Companion.setConsumeNextResume(true);
+        _consumeNextResume = true;
         Setup.eventHandler().showDeletePackageDialog(this, item);
     }
 
@@ -566,7 +405,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             default:
                 break;
         }
-        Companion.getDb().deleteItem(item, true);
+        _db.deleteItem(item, true);
     }
 
     public final void onInfoItem(@NonNull Item item) {
@@ -580,7 +419,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 stringBuilder.append(component.getPackageName());
                 startActivity(new Intent(str, Uri.parse(stringBuilder.toString())));
             } catch (Exception e) {
-                Tool.toast((Context) this, (int) R.string.toast_app_uninstalled);
+                Tool.toast(this, R.string.toast_app_uninstalled);
             }
         }
     }
@@ -634,7 +473,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     public void onLaunchSettings() {
-        Companion.setConsumeNextResume(true);
+        _consumeNextResume = true;
         Setup.eventHandler().showLauncherSettings(this);
     }
 
@@ -792,16 +631,16 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     private final void registerBroadcastReceiver() {
-        registerReceiver(_appUpdateReceiver, Companion.getAppUpdateIntentFilter());
+        registerReceiver(_appUpdateReceiver, _appUpdateIntentFilter);
+        registerReceiver(_shortcutReceiver, _shortcutIntentFilter);
         if (_timeChangedReceiver != null) {
-            registerReceiver(_timeChangedReceiver, Companion.getTimeChangesIntentFilter());
+            registerReceiver(_timeChangedReceiver, _timeChangedIntentFilter);
         }
-        registerReceiver(_shortcutReceiver, Companion.getShortcutIntentFilter());
     }
 
     private final void pickWidget() {
-        Companion.setConsumeNextResume(true);
-        int appWidgetId = Companion.getAppWidgetHost().allocateAppWidgetId();
+        _consumeNextResume = true;
+        int appWidgetId = _appWidgetHost.allocateAppWidgetId();
         Intent pickIntent = new Intent("android.appwidget.action.APPWIDGET_PICK");
         pickIntent.putExtra("appWidgetId", appWidgetId);
         startActivityForResult(pickIntent, REQUEST_PICK_APPWIDGET);
@@ -810,7 +649,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     private final void configureWidget(Intent data) {
         Bundle extras = data.getExtras();
         int appWidgetId = extras.getInt("appWidgetId", -1);
-        AppWidgetProviderInfo appWidgetInfo = Companion.getAppWidgetManager().getAppWidgetInfo(appWidgetId);
+        AppWidgetProviderInfo appWidgetInfo = _appWidgetManager.getAppWidgetInfo(appWidgetId);
         if (appWidgetInfo.configure != null) {
             Intent intent = new Intent("android.appwidget.action.APPWIDGET_CONFIGURE");
             intent.setComponent(appWidgetInfo.configure);
@@ -824,7 +663,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     private final void createWidget(Intent data) {
         Bundle extras = data.getExtras();
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
-        AppWidgetProviderInfo appWidgetInfo = Companion.getAppWidgetManager().getAppWidgetInfo(appWidgetId);
+        AppWidgetProviderInfo appWidgetInfo = _appWidgetManager.getAppWidgetInfo(appWidgetId);
         Item item = Item.newWidgetItem(appWidgetId);
         Desktop desktop = getDesktop();
         List<CellContainer> pages = desktop.getPages();
@@ -843,21 +682,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
     }
 
-    protected void onDestroy() {
-        WidgetHost appWidgetHost = Companion.getAppWidgetHost();
-        if (appWidgetHost != null) {
-            appWidgetHost.stopListening();
-        }
-        Companion.setAppWidgetHost((WidgetHost) null);
-        unregisterReceiver(_appUpdateReceiver);
-        if (_timeChangedReceiver != null) {
-            unregisterReceiver(_timeChangedReceiver);
-        }
-        unregisterReceiver(_shortcutReceiver);
-        Companion.setLauncher((HomeActivity) null);
-        super.onDestroy();
-    }
-
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == -1) {
             if (requestCode == REQUEST_PICK_APPWIDGET) {
@@ -868,28 +692,61 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         } else if (resultCode == 0 && data != null) {
             int appWidgetId = data.getIntExtra("appWidgetId", -1);
             if (appWidgetId != -1) {
-                WidgetHost appWidgetHost = Companion.getAppWidgetHost();
-                if (appWidgetHost != null) {
-                    appWidgetHost.deleteAppWidgetId(appWidgetId);
-                }
+                _appWidgetHost.deleteAppWidgetId(appWidgetId);
             }
         }
     }
 
     protected void onStart() {
-        Companion.setLauncher(this);
-        WidgetHost appWidgetHost = Companion.getAppWidgetHost();
-        if (appWidgetHost != null) {
-            appWidgetHost.startListening();
-        }
+        _appWidgetHost.startListening();
+        _launcher = this;
+
         super.onStart();
     }
 
+    protected void onResume() {
+        _appWidgetHost.startListening();
+        _launcher = this;
+
+        // handle restart if something needs to be reset
+        AppSettings appSettings = Setup.appSettings();
+        if (appSettings.getAppRestartRequired()) {
+            appSettings = Setup.appSettings();
+            appSettings.setAppRestartRequired(false);
+            PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556, new Intent(this, HomeActivity.class), PendingIntent.FLAG_CANCEL_CURRENT);
+            AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + ((long) 100), restartIntentP);
+            System.exit(0);
+            return;
+        }
+
+        // handle launcher rotation
+        if (AppSettings.get().getBool(R.string.pref_key__desktop_rotate, false)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
+        Intent intent = getIntent();
+        handleLauncherPause(Intent.ACTION_MAIN.equals(intent.getAction()));
+        super.onResume();
+    }
+
+    protected void onDestroy() {
+        _appWidgetHost.stopListening();
+        _launcher = null;
+
+        unregisterReceiver(_appUpdateReceiver);
+        unregisterReceiver(_shortcutReceiver);
+        unregisterReceiver(_timeChangedReceiver);
+        super.onDestroy();
+    }
+
     private final void handleLauncherPause(boolean wasHomePressed) {
-        if (!Companion.getConsumeNextResume() || wasHomePressed) {
+        if (!_consumeNextResume || wasHomePressed) {
             onHandleLauncherPause();
         } else {
-            Companion.setConsumeNextResume(false);
+            _consumeNextResume = false;
         }
     }
 

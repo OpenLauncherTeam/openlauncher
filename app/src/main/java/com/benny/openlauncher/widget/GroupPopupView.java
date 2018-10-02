@@ -288,8 +288,8 @@ public class GroupPopupView extends RevealFrameLayout {
     private void removeItem(Context context, final DesktopCallback callback, final Item currentItem, Item dragOutItem, AppItemView currentView) {
         currentItem.getGroupItems().remove(dragOutItem);
 
-        HomeActivity.Companion.getDb().saveItem(dragOutItem, Definitions.ItemState.Visible);
-        HomeActivity.Companion.getDb().saveItem(currentItem);
+        HomeActivity._db.saveItem(dragOutItem, Definitions.ItemState.Visible);
+        HomeActivity._db.saveItem(currentItem);
 
         currentView.setCurrentIcon(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
     }
@@ -305,9 +305,9 @@ public class GroupPopupView extends RevealFrameLayout {
                 item.setX(currentItem.getX());
                 item.setY(currentItem.getY());
 
-                HomeActivity.Companion.getDb().saveItem(item);
-                HomeActivity.Companion.getDb().saveItem(item, Definitions.ItemState.Visible);
-                HomeActivity.Companion.getDb().deleteItem(currentItem, true);
+                HomeActivity._db.saveItem(item);
+                HomeActivity._db.saveItem(item, Definitions.ItemState.Visible);
+                HomeActivity._db.deleteItem(currentItem, true);
 
                 callback.removeItem(currentView, false);
                 callback.addItemToCell(item, item.getX(), item.getY());

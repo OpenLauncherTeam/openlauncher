@@ -47,7 +47,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
 
         int columns = Setup.appSettings().getDockSize();
         setGridSize(columns, 1);
-        List<Item> dockItems = HomeActivity.Companion.getDb().getDock();
+        List<Item> dockItems = HomeActivity._db.getDock();
         _homeActivity = homeActivity;
         removeAllViews();
         for (Item item : dockItems) {
@@ -58,7 +58,6 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     }
 
     public boolean dispatchTouchEvent(@NonNull MotionEvent ev) {
-
         detectSwipe(ev);
         super.dispatchTouchEvent(ev);
         return true;
@@ -130,8 +129,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         removeView(v);
     }
 
-    @NonNull
-    public WindowInsets onApplyWindowInsets(@NonNull WindowInsets insets) {
+    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (VERSION.SDK_INT >= 20) {
             _bottomInset = insets.getSystemWindowInsetBottom();
             setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), _bottomInset);
@@ -171,7 +169,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     public boolean addItemToPage(@NonNull Item item, int page) {
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallback) this, Setup.appSettings().getDockIconSize());
         if (itemView == null) {
-            HomeActivity.Companion.getDb().deleteItem(item, true);
+            HomeActivity._db.deleteItem(item, true);
             return false;
         }
         item._locationInLauncher = 1;
