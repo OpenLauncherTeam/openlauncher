@@ -29,6 +29,8 @@ public class GroupIconDrawable extends Drawable {
     private float _scaleFactor = 1;
     private float _iconSize;
     private float _padding;
+    private float _padding31; // For group of 3 icons (1st row extra padding)
+    private float _padding32; // For group of 3 icons (2st row extra padding)
     private int _outline;
     private int _iconSizeDiv2;
     private int _iconSizeDiv4;
@@ -65,6 +67,9 @@ public class GroupIconDrawable extends Drawable {
         return (int) _iconSize;
     }
 
+    private static final float PADDING31_KOEF = (1f - (float) Math.sqrt(3) / 2f);
+    private static final float PADDING32_KOEF = ((float) (Math.sqrt(3) - 1f) / (2f * (float) Math.sqrt(3)));
+
     private void init(Drawable[] icons, int iconsCount, float size) {
         _icons = icons;
         _iconsCount = iconsCount;
@@ -72,6 +77,9 @@ public class GroupIconDrawable extends Drawable {
         _iconSizeDiv2 = Math.round(_iconSize / 2f);
         _iconSizeDiv4 = Math.round(_iconSize / 4f);
         _padding = _iconSize / 25f;
+        float b = _iconSize / 2f + 2 * _padding;
+        _padding31 = b * PADDING31_KOEF;
+        _padding32 = b * (PADDING32_KOEF - PADDING31_KOEF);
 
         _paintInnerCircle = new Paint();
         _paintInnerCircle.setColor(Color.WHITE);
@@ -136,13 +144,13 @@ public class GroupIconDrawable extends Drawable {
             }
         } else if (_iconsCount > 2) {
             if (_icons[0] != null) {
-                drawIcon(canvas, _icons[0], _padding, _padding, _iconSizeDiv2 - _padding, _iconSizeDiv2 - _padding, _paintIcon);
+                drawIcon(canvas, _icons[0], _padding, _padding + _padding31, _iconSizeDiv2 - _padding, _iconSizeDiv2 - _padding + _padding31, _paintIcon);
             }
             if (_icons[1] != null) {
-                drawIcon(canvas, _icons[1], _iconSizeDiv2 + _padding, _padding, _iconSize - _padding, _iconSizeDiv2 - _padding, _paintIcon);
+                drawIcon(canvas, _icons[1], _iconSizeDiv2 + _padding, _padding + _padding31, _iconSize - _padding, _iconSizeDiv2 - _padding + _padding31, _paintIcon);
             }
             if (_icons[2] != null) {
-                drawIcon(canvas, _icons[2], _padding + _iconSizeDiv4, _iconSizeDiv2 + _padding, _iconSizeDiv4 + _iconSizeDiv2 - _padding, _iconSize - _padding, _paintIcon);
+                drawIcon(canvas, _icons[2], _padding + _iconSizeDiv4, _iconSizeDiv2 + _padding + _padding32, _iconSizeDiv4 + _iconSizeDiv2 - _padding, _iconSize - _padding + _padding32, _paintIcon);
             }
         } else {// if (_iconsCount <= 2) {
             if (_icons[0] != null) {
