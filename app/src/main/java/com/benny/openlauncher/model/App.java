@@ -48,10 +48,10 @@ public class App {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o instanceof App) {
-            App temp = (App) o;
-            return _packageName.equals(temp._packageName);
+    public boolean equals(Object object) {
+        if (object instanceof App) {
+            App app = (App) object;
+            return _packageName.equals(app._packageName);
         } else {
             return false;
         }

@@ -133,43 +133,35 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     public final Desktop getDesktop() {
-        Desktop desktop = (Desktop) findViewById(R.id.desktop);
-        return desktop;
+        return findViewById(R.id.desktop);
     }
 
     public final Dock getDock() {
-        Dock dock = (Dock) findViewById(R.id.dock);
-        return dock;
+        return findViewById(R.id.dock);
     }
 
     public final AppDrawerController getAppDrawerController() {
-        AppDrawerController appDrawerController = (AppDrawerController) findViewById(R.id.appDrawerController);
-        return appDrawerController;
+        return findViewById(R.id.appDrawerController);
     }
 
     public final GroupPopupView getGroupPopup() {
-        GroupPopupView groupPopupView = (GroupPopupView) findViewById(R.id.groupPopup);
-        return groupPopupView;
+        return findViewById(R.id.groupPopup);
     }
 
     public final SearchBar getSearchBar() {
-        SearchBar searchBar = (SearchBar) findViewById(R.id.searchBar);
-        return searchBar;
+        return findViewById(R.id.searchBar);
     }
 
     public final View getBackground() {
-        View findViewById = findViewById(R.id.background);
-        return findViewById;
+        return findViewById(R.id.background);
     }
 
     public final PagerIndicator getDesktopIndicator() {
-        PagerIndicator pagerIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
-        return pagerIndicator;
+        return findViewById(R.id.desktopIndicator);
     }
 
     public final ItemOptionView getDragNDropView() {
-        ItemOptionView itemOptionView = (ItemOptionView) findViewById(R.id.dragNDropView);
-        return itemOptionView;
+        return findViewById(R.id.dragNDropView);
     }
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -256,12 +248,13 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     protected void initViews() {
         new HpSearchBar(this, (SearchBar) findViewById(R.id.searchBar), (CalendarView) findViewById(R.id.calendarDropDownView)).initSearchBar();
         initDock();
-        ((AppDrawerController) findViewById(R.id.appDrawerController)).init();
-        ((AppDrawerController) findViewById(R.id.appDrawerController)).setHome(this);
-        ((Desktop) findViewById(R.id.desktop)).init();
-        Desktop desktop = (Desktop) findViewById(R.id.desktop);
+        getAppDrawerController().init();
+        getAppDrawerController().setHome(this);
 
-        desktop.setDesktopEditListener(this);
+        getDesktop().init();
+        getDesktop().setDesktopEditListener(this);
+        getDesktop().setPageIndicator(getDesktopIndicator());
+
         ((DesktopOptionView) findViewById(R.id.desktopEditOptionPanel)).setDesktopOptionViewListener(this);
         DesktopOptionView desktopOptionView = (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel);
         AppSettings appSettings = Setup.appSettings();
@@ -281,8 +274,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             public void onPageScrollStateChanged(int state) {
             }
         });
-        desktop = (Desktop) findViewById(R.id.desktop);
-        desktop.setPageIndicator((PagerIndicator) findViewById(R.id.desktopIndicator));
         new HpAppDrawer(this, (PagerIndicator) findViewById(R.id.appDrawerIndicator)).initAppDrawer(findViewById(R.id.appDrawerController));
         initMinibar();
     }
@@ -306,11 +297,10 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public void onRemovePage() {
         if (getDesktop().isCurrentPageEmpty()) {
-
             getDesktop().removeCurrentPage();
             return;
         }
-        DialogHelper.alertDialog(this, getString(R.string.remove), "This page is not empty. Those item will also be removed.", new MaterialDialog.SingleButtonCallback() {
+        DialogHelper.alertDialog(this, getString(R.string.remove), "This page is not empty. Those items will also be removed.", new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 getDesktop().removeCurrentPage();
@@ -320,30 +310,23 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public final void initMinibar() {
         final ArrayList<LauncherAction.ActionDisplayItem> items = new ArrayList<>();
-        final ArrayList<String> labels = new ArrayList<>();
-        final ArrayList<Integer> icons = new ArrayList<>();
-
-        for (String act : AppSettings.get().getMinibarArrangement()) {
-            if (act.length() > 1) {
-                LauncherAction.ActionDisplayItem item = LauncherAction.getActionItemById(Integer.parseInt(act));
-                if (item != null) {
-                    items.add(item);
-                    labels.add(item._label);
-                    icons.add(item._icon);
-                }
+        for (String action : AppSettings.get().getMinibarArrangement()) {
+            LauncherAction.ActionDisplayItem item = LauncherAction.getActionItem(action);
+            if (item != null) {
+                items.add(item);
             }
         }
 
         MinibarView minibar = findViewById(R.id.minibar);
-
-        minibar.setAdapter(new MinibarAdapter(this, labels, icons));
+        minibar.setAdapter(new MinibarAdapter(this, items));
         minibar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 LauncherAction.Action action = items.get(i)._action;
                 LauncherAction.RunAction(items.get(i), HomeActivity.this);
-                if (action == LauncherAction.Action.EditMinibar || action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings) {
+                if (action != LauncherAction.Action.EditMinibar && action != LauncherAction.Action.DeviceSettings && action != LauncherAction.Action.LauncherSettings) {
                     getDrawerLayout().closeDrawers();
+                } else {
                     _consumeNextResume = true;
                 }
             }

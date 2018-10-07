@@ -275,7 +275,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
                 break;
             case GROUP:
-                item.setItems(new ArrayList<Item>());
+                item.setItems(new ArrayList<>());
                 dataSplit = data.split(Definitions.INT_SEP);
                 for (String s : dataSplit) {
                     item.getItems().add(getItem(Integer.parseInt(s)));

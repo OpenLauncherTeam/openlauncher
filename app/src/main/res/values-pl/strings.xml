@@ -242,7 +242,7 @@
     <string name="minibar_title__launcher_settings">Ustawienia launchera</string>
     <string name="minibar_title__volume">Okno dialogowe głośności</string>
     <string name="minibar_title__app_drawer">Otwórz menu aplikacji</string>
-    <string name="launch_app">Uruchom aplikację</string>
+    <string name="launch">Uruchom aplikację</string>
     <string name="app_drawer">Menu aplikacji</string>
     <string name="minibar_summary__mobile_network">Ustawienia sieci mobilnych</string>
 

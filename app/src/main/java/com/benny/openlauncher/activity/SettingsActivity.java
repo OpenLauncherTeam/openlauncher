@@ -17,6 +17,7 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -259,11 +260,18 @@ public class SettingsActivity extends ThemeActivity {
                 case R.string.pref_key__gesture_swipe_down:
                 case R.string.pref_key__gesture_pinch:
                 case R.string.pref_key__gesture_unpinch: {
-                    if (prefs.getString(key, "0").equals("9")) {
+                    if (prefs.getString(key, "0").equals("1")) {
+                        DialogHelper.selectActionDialog(getContext(), new MaterialDialog.ListCallback() {
+                            @Override
+                            public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                                AppSettings.get().setString(key, "1" + position);
+                            }
+                        });
+                    } else if (prefs.getString(key, "0").equals("2")) {
                         DialogHelper.selectAppDialog(getContext(), new DialogHelper.OnAppSelectedListener() {
                             @Override
                             public void onAppSelected(App app) {
-                                AppSettings.get().setString(key, app._packageName);
+                                AppSettings.get().setString(key, "2" + app._packageName);
                             }
                         });
                     }

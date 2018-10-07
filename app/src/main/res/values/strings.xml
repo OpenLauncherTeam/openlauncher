@@ -243,7 +243,7 @@
     <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">More information on donating or otherwise supporting this project</string>
     <string name="android_contribution_guide">Android contribution guide</string>
     <string name="none">None</string>
-    <string name="launch_app">Launch App</string>
+    <string name="launch">Launch App</string>
     <string name="app_drawer">App Drawer</string>
 
 </resources>

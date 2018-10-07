@@ -18,10 +18,14 @@ import com.benny.openlauncher.activity.MinibarEditActivity;
 import com.benny.openlauncher.activity.SettingsActivity;
 import com.benny.openlauncher.viewutil.DialogHelper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class LauncherAction {
 
     public enum Action {
-        LaunchApp, EditMinibar, SetWallpaper, LockScreen, LauncherSettings, DeviceSettings, VolumeDialog, AppDrawer, SearchBar, MobileNetworkSettings
+        EditMinibar, SetWallpaper, LockScreen, LauncherSettings, DeviceSettings, VolumeDialog, AppDrawer, SearchBar, MobileNetworkSettings
     }
 
     public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
@@ -36,16 +40,18 @@ public class LauncherAction {
             new ActionDisplayItem(Action.MobileNetworkSettings, HomeActivity._launcher.getResources().getString(R.string.minibar_title__mobile_network), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__mobile_network), R.drawable.ic_network_24dp, 46),
     };
 
+    public static List<Action> defaultArrangement = Arrays.asList(
+            Action.EditMinibar, Action.SetWallpaper,
+            Action.LockScreen, Action.LauncherSettings,
+            Action.VolumeDialog, Action.DeviceSettings
+    );
+
     public static void RunAction(Action action, final Context context) {
         LauncherAction.RunAction(getActionItem(action), context);
     }
 
     public static void RunAction(ActionDisplayItem action, final Context context) {
         switch (action._action) {
-            case LaunchApp:
-                //PackageManager pm = AppManager.getInstance(context).getPackageManager();
-                //action._extraData = new Intent(pm.getLaunchIntentForPackage(AppSettings.get().getString(context.getString(R.string.pref_key__gesture_double_tap) + "__", "")));
-                break;
             case EditMinibar:
                 context.startActivity(new Intent(context, MinibarEditActivity.class));
                 break;
@@ -104,22 +110,17 @@ public class LauncherAction {
         }
     }
 
-    public static ActionDisplayItem getActionItemById(int id) {
-        for (ActionDisplayItem item : actionDisplayItems) {
-            if (Integer.toString(item._id).equals(Integer.toString(id))) {
-                return item;
-            }
-        }
-        return null;
-    }
-
-    public static ActionDisplayItem getActionItemByPosition(int position) {
+    public static ActionDisplayItem getActionItem(int position) {
         return getActionItem(Action.values()[position]);
     }
 
     public static ActionDisplayItem getActionItem(Action action) {
+        return getActionItem(action.toString());
+    }
+
+    public static ActionDisplayItem getActionItem(String action) {
         for (ActionDisplayItem item : actionDisplayItems) {
-            if (item._action.equals(action)) {
+            if (item._action.toString().equals(action)) {
                 return item;
             }
         }

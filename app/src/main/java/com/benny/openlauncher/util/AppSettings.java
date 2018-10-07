@@ -2,6 +2,7 @@ package com.benny.openlauncher.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
@@ -136,10 +137,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getBool(R.string.pref_key__dock_enable, true);
     }
 
-    public void setDockEnable(boolean enable) {
-        setBool(R.string.pref_key__dock_enable, enable);
-    }
-
     public int getDockSize() {
         return getInt(R.string.pref_key__dock_size, 5);
     }
@@ -220,32 +217,44 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getBool(R.string.pref_key__gesture_quick_swipe, true);
     }
 
-    public int getGestureDoubleTap() {
-        return getIntOfStringPref(R.string.pref_key__gesture_double_tap, 0);
+    public Object getGestureDoubleTap() {
+        return getGesture(R.string.pref_key__gesture_double_tap);
     }
 
-    public int getGestureSwipeUp() {
-        return getIntOfStringPref(R.string.pref_key__gesture_swipe_up, 8);
+    public Object getGestureSwipeUp() {
+        return getGesture(R.string.pref_key__gesture_swipe_up);
     }
 
-    public int getGestureSwipeDown() {
-        return getIntOfStringPref(R.string.pref_key__gesture_swipe_down, 10);
+    public Object getGestureSwipeDown() {
+        return getGesture(R.string.pref_key__gesture_swipe_down);
     }
 
-    public int getGesturePinch() {
-        return getIntOfStringPref(R.string.pref_key__gesture_pinch, 0);
+    public Object getGesturePinch() {
+        return getGesture(R.string.pref_key__gesture_pinch);
     }
 
-    public int getGestureUnpinch() {
-        return getIntOfStringPref(R.string.pref_key__gesture_unpinch, 0);
+    public Object getGestureUnpinch() {
+        return getGesture(R.string.pref_key__gesture_unpinch);
+    }
+
+    public Object getGesture(int key) {
+        // return either ActionItem or Intent
+        // both cases will return null if method call fails
+        String result = getString(key, "0");
+        int type = Integer.parseInt(result.substring(0, 1));
+        switch (type) {
+            case 1:
+                return LauncherAction.getActionItem(Integer.parseInt(result.substring(1, 2)));
+            case 2:
+                return Tool.getIntentFromString(result.substring(1, result.length()));
+            default:
+                // gesture is disabled
+                return null;
+        }
     }
 
     public boolean isDesktopHideGrid() {
         return getBool(R.string.pref_key__desktop_hide_grid, true);
-    }
-
-    public void setDesktopHideGrid(boolean hideGrid) {
-        setBool(R.string.pref_key__desktop_hide_grid, hideGrid);
     }
 
     public int getIconSize() {
@@ -282,16 +291,16 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public ArrayList<String> getMinibarArrangement() {
-        ArrayList<String> ret = getStringList(R.string.pref_key__minibar_items);
-        if (ret.isEmpty()) {
+        ArrayList<String> arrangement = getStringList(R.string.pref_key__minibar_items);
+        if (arrangement.isEmpty()) {
             for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
-                if (Arrays.asList(98, 36, 24, 50, 71, 25).contains(item._id)) {
-                    ret.add(Integer.toString(item._id));
+                if (LauncherAction.defaultArrangement.contains(item._action)) {
+                    arrangement.add(item._action.toString());
                 }
             }
-            setMinibarArrangement(ret);
+            setMinibarArrangement(arrangement);
         }
-        return ret;
+        return arrangement;
     }
 
     public void setMinibarArrangement(ArrayList<String> value) {
@@ -324,10 +333,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
 
     public int getDesktopIndicatorMode() {
         return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.NORMAL);
-    }
-
-    public void setDesktopIndicatorMode(int mode) {
-        setInt(R.string.pref_key__desktop_indicator_style, mode);
     }
 
     public boolean getAppRestartRequired() {

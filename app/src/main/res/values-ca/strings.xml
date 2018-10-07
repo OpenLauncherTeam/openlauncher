@@ -250,7 +250,7 @@
     <string name="minibar_title__launcher_settings">Paràmetres del llençador</string>
     <string name="minibar_title__volume">Diàleg del volum</string>
     <string name="minibar_title__app_drawer">Obrir el calaix d\'apps</string>
-    <string name="launch_app">Engegar una app</string>
+    <string name="launch">Engegar una app</string>
     <string name="app_drawer">Calaix d\'apps</string>
 
 </resources>

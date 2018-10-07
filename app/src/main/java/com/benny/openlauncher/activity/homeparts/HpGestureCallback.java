@@ -1,5 +1,10 @@
 package com.benny.openlauncher.activity.homeparts;
 
+import android.content.Intent;
+import android.util.Log;
+
+import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
@@ -15,50 +20,38 @@ public class HpGestureCallback implements DesktopGestureListener.DesktopGestureC
 
     @Override
     public boolean onDrawerGesture(Desktop desktop, DesktopGestureListener.Type event) {
-        LauncherAction.ActionDisplayItem gesture = null;
-        int gestureIndex;
+        Object gesture = null;
         switch (event) {
             case SwipeUp:
-                gestureIndex = _appSettings.getGestureSwipeUp();
-                if (gestureIndex != 0) {
-                    gesture = LauncherAction.getActionItemByPosition(gestureIndex - 1);
-                }
+                gesture = _appSettings.getGestureSwipeUp();
                 break;
             case SwipeDown:
-                gestureIndex = _appSettings.getGestureSwipeDown();
-                if (gestureIndex != 0) {
-                    gesture = LauncherAction.getActionItemByPosition(gestureIndex - 1);
-                }
+                gesture = _appSettings.getGestureSwipeDown();
                 break;
             case SwipeLeft:
             case SwipeRight:
                 break;
             case Pinch:
-                gestureIndex = _appSettings.getGesturePinch();
-                if (gestureIndex != 0) {
-                    gesture = LauncherAction.getActionItemByPosition(gestureIndex - 1);
-                }
+                gesture = _appSettings.getGesturePinch();
                 break;
             case Unpinch:
-                gestureIndex = _appSettings.getGestureUnpinch();
-                if (gestureIndex != 0) {
-                    gesture = LauncherAction.getActionItemByPosition(gestureIndex - 1);
-                }
+                gesture = _appSettings.getGestureUnpinch();
                 break;
             case DoubleTap:
-                gestureIndex = _appSettings.getGestureDoubleTap();
-                if (gestureIndex != 0) {
-                    gesture = LauncherAction.getActionItemByPosition(gestureIndex - 1);
-                }
+                gesture = _appSettings.getGestureDoubleTap();
                 break;
             default:
-                throw new RuntimeException("type not handled");
+                Log.e(getClass().toString(), "gesture error");
         }
         if (gesture != null) {
             if (_appSettings.isGestureFeedback()) {
                 Tool.vibrate(desktop);
             }
-            LauncherAction.RunAction(gesture, desktop.getContext());
+            if (gesture instanceof Intent) {
+                Tool.startApp(desktop.getContext(), AppManager.getInstance(desktop.getContext()).createApp((Intent) gesture));
+            } else if (gesture instanceof LauncherAction.ActionDisplayItem) {
+                LauncherAction.RunAction((LauncherAction.ActionDisplayItem) gesture, desktop.getContext());
+            }
             return true;
         }
         return false;

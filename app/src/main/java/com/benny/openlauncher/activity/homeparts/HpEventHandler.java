@@ -19,7 +19,7 @@ public class HpEventHandler implements Setup.EventHandler {
 
     @Override
     public void showPickAction(Context context, final DialogListener.OnActionDialogListener listener) {
-        DialogHelper.addActionItemDialog(context, new MaterialDialog.ListCallback() {
+        DialogHelper.selectActionDialog(context, new MaterialDialog.ListCallback() {
             @Override
             public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                 if (position == 0) {

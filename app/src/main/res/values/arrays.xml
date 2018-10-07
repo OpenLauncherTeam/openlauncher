@@ -3,25 +3,12 @@
 
     <string-array name="entries__gestures" translatable="false">
         <item>@string/none</item>
-        <item>@string/launch_app</item>
-        <item>@string/minibar_title__edit</item>
-        <item>@string/minibar_title__set_wallpaper</item>
-        <item>@string/minibar_title__lock_screen</item>
-        <item>@string/minibar_title__device_settings</item>
-        <item>@string/minibar_title__launcher_settings</item>
-        <item>@string/minibar_title__volume</item>
-        <item>@string/minibar_title__app_drawer</item>
-        <item>@string/minibar_title__search_bar</item>
-        <item>@string/minibar_title__mobile_network</item>
+        <item>@string/action</item>
+        <item>@string/launch</item>
     </string-array>
 
     <string-array name="entries__desktop_actions" translatable="false">
-        <item>@string/app_drawer</item>
-    </string-array>
-
-    <string-array name="entries__desktop_styles" translatable="false">
-        <item>@string/desktop_mode_normal</item>
-        <item>@string/desktop_mode_show_all_apps</item>
+        <item>@string/minibar_title__app_drawer</item>
     </string-array>
 
     <string-array name="entries__desktop_indicator_mode" translatable="false">
@@ -39,12 +26,23 @@
         <item>@string/theme_dark</item>
     </string-array>
 
-    <string-array name="entires__date_format" translatable="false">
+    <string-array name="entries__date_format" translatable="false">
         <item>@string/custom</item>
         <item>February 17\nSaturday, 2018</item>
         <item>February 17\n15:48</item>
         <item>February 17, 2018\n15:48</item>
         <item>15:48\nFebruary 17, 2018</item>
+    </string-array>
+
+    <string-array name="values__zero_to_one" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="values__zero_to_two" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="values__zero_to_four" translatable="false">
@@ -53,25 +51,6 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
-    </string-array>
-
-    <string-array name="values__zero_to_one" translatable="false">
-        <item>0</item>
-        <item>1</item>
-    </string-array>
-
-    <string-array name="values__zero_to_ten" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
     </string-array>
 
 </resources>

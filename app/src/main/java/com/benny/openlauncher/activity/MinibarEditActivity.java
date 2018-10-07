@@ -55,12 +55,11 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
         touchHelper.attachToRecyclerView(_recyclerView);
 
         _recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         _recyclerView.setAdapter(_adapter);
 
         final ArrayList<String> minibarArrangement = AppSettings.get().getMinibarArrangement();
         for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
-            _adapter.add(new Item(item._id, item, minibarArrangement.contains(Integer.toString(item._id))));
+            _adapter.add(new Item(item, minibarArrangement.contains(item._action.toString())));
         }
 
         boolean minibarEnable = AppSettings.get().getMinibarEnable();
@@ -85,7 +84,7 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
     protected void onPause() {
         ArrayList<String> minibarArrangement = new ArrayList<>();
         for (Item item : _adapter.getAdapterItems()) {
-            if (item.enable) minibarArrangement.add(Long.toString(item.id));
+            if (item.enable) minibarArrangement.add(item.item._action.toString());
         }
         AppSettings.get().setMinibarArrangement(minibarArrangement);
         super.onPause();
@@ -111,13 +110,10 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
     }
 
     public static class Item extends AbstractItem<Item, Item.ViewHolder> {
-        public final long id;
         public final LauncherAction.ActionDisplayItem item;
         public boolean enable;
-        public boolean edited;
 
-        public Item(long id, LauncherAction.ActionDisplayItem item, boolean enable) {
-            this.id = id;
+        public Item(LauncherAction.ActionDisplayItem item, boolean enable) {
             this.item = item;
             this.enable = enable;
         }
@@ -139,14 +135,13 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
 
         @Override
         public void bindView(ViewHolder holder, List payloads) {
-            holder._tv.setText(item._label.toString());
-            holder._tv2.setText(item._description);
-            holder._iv.setImageResource(item._icon);
+            holder._label.setText(item._label);
+            holder._description.setText(item._description);
+            holder._icon.setImageResource(item._icon);
             holder._cb.setChecked(enable);
             holder._cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    edited = true;
                     enable = b;
                 }
             });
@@ -154,16 +149,16 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
-            TextView _tv;
-            TextView _tv2;
-            ImageView _iv;
+            TextView _label;
+            TextView _description;
+            ImageView _icon;
             CheckBox _cb;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                _tv = itemView.findViewById(R.id.tv);
-                _tv2 = itemView.findViewById(R.id.tv2);
-                _iv = itemView.findViewById(R.id.iv);
+                _label = itemView.findViewById(R.id.tv);
+                _description = itemView.findViewById(R.id.tv2);
+                _icon = itemView.findViewById(R.id.iv);
                 _cb = itemView.findViewById(R.id.cb);
             }
         }

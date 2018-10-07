@@ -197,7 +197,7 @@ public class Tool {
             HomeActivity.Companion.getLauncher().onStartApp(context, app, null);
     }
 
-    public static final void startApp(Context context, App app, View view) {
+    public static void startApp(Context context, App app, View view) {
         HomeActivity launcher = HomeActivity.Companion.getLauncher();
         if (launcher != null) {
             launcher.onStartApp(context, app, view);
@@ -277,14 +277,11 @@ public class Tool {
     }
 
     public static Intent getIntentFromString(String string) {
-        if (string == null || string.isEmpty()) {
-            return new Intent();
-        } else {
-            try {
-                return new Intent().parseUri(string, 0);
-            } catch (URISyntaxException e) {
-                return new Intent();
-            }
+        try {
+            return new Intent().parseUri(string, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -385,15 +382,13 @@ public class Tool {
         if (oldApps.size() == 0) {
             return removed;
         }
-        // we can't rely on sizes because apps may have been installed and deinstalled!
-        //if (oldApps.size() > newApps.size()) {
+        // we can't rely on sizes because apps may have been installed or uninstalled
         for (int i = 0; i < oldApps.size(); i++) {
             if (!newApps.contains(oldApps.get(i))) {
                 removed.add(oldApps.get(i));
                 break;
             }
         }
-//        }
         return removed;
     }
 }

@@ -280,7 +280,7 @@
     <string name="minibar_title__launcher_settings">Launcher-Einstellungen</string>
     <string name="minibar_title__volume">Lautstärke-Dialog</string>
     <string name="minibar_title__app_drawer">App Drawer öffnen</string>
-    <string name="launch_app">App starten</string>
+    <string name="launch">App starten</string>
     <string name="app_drawer">App Drawer</string>
     <string name="minibar_summary__search_bar">In der Such-Leiste öffnen.</string>
     <string name="minibar_summary__mobile_network">Mobilfunkeinstellungen.</string>

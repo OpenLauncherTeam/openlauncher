@@ -244,7 +244,7 @@
     <string name="minibar_title__launcher_settings">Definições da aplicação</string>
     <string name="minibar_title__volume">Diálogo de volume</string>
     <string name="minibar_title__app_drawer">Abrir menu de aplicações</string>
-    <string name="launch_app">Abrir aplicação</string>
+    <string name="launch">Abrir aplicação</string>
     <string name="app_drawer">Menu de aplicações</string>
 
 </resources>

@@ -9,23 +9,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.util.LauncherAction;
 
 import java.util.List;
 
 public class MinibarAdapter extends BaseAdapter {
 
-    private Context _context;
-    private List<String> _labels;
-    private List<Integer> _icons;
+    private Context context;
+    private List<LauncherAction.ActionDisplayItem> items;
 
-    public MinibarAdapter(Context context, List labels, List icons) {
-        _context = context;
-        _labels = labels;
-        _icons = icons;
+    public MinibarAdapter(Context context, List<LauncherAction.ActionDisplayItem> items) {
+        this.context = context;
+        this.items = items;
     }
 
     public int getCount() {
-        return _labels.size();
+        return items.size();
     }
 
     public Object getItem(int arg0) {
@@ -37,21 +36,14 @@ public class MinibarAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
-        TextView tv;
-        ImageView iv;
-        if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(_context);
-            view = inflater.inflate(R.layout.item_minibar, parent, false);
-        } else {
-            view = convertView;
-        }
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.item_minibar, parent, false);
 
-        iv = view.findViewById(R.id.iv);
-        tv = view.findViewById(R.id.tv);
+        ImageView icon = view.findViewById(R.id.iv);
+        TextView label = view.findViewById(R.id.tv);
 
-        //tv.setText(labels.get(position));
-        iv.setImageResource(_icons.get(position));
+        icon.setImageResource(items.get(position)._icon);
+        label.setText(items.get(position)._label);
         return view;
     }
 }

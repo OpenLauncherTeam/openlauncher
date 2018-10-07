@@ -151,7 +151,7 @@
 
             <android.support.v7.preference.ListPreference
                 android:defaultValue="1"
-                android:entries="@array/entires__date_format"
+                android:entries="@array/entries__date_format"
                 android:entryValues="@array/values__zero_to_four"
                 android:key="@string/pref_key__date_bar_date_format_type"
                 android:title="@string/pref_title__date_bar_date_format" />
@@ -397,35 +397,35 @@
             <android.support.v7.preference.ListPreference
                 android:defaultValue="0"
                 android:entries="@array/entries__gestures"
-                android:entryValues="@array/values__zero_to_ten"
+                android:entryValues="@array/values__zero_to_two"
                 android:key="@string/pref_key__gesture_double_tap"
                 android:title="@string/pref_title__gesture_double_tap" />
 
             <android.support.v7.preference.ListPreference
-                android:defaultValue="8"
+                android:defaultValue="0"
                 android:entries="@array/entries__gestures"
-                android:entryValues="@array/values__zero_to_ten"
+                android:entryValues="@array/values__zero_to_two"
                 android:key="@string/pref_key__gesture_swipe_up"
                 android:title="@string/pref_title__gesture_swipe_up" />
 
             <android.support.v7.preference.ListPreference
-                android:defaultValue="10"
+                android:defaultValue="0"
                 android:entries="@array/entries__gestures"
-                android:entryValues="@array/values__zero_to_ten"
+                android:entryValues="@array/values__zero_to_two"
                 android:key="@string/pref_key__gesture_swipe_down"
                 android:title="@string/pref_title__gesture_swipe_down" />
 
             <android.support.v7.preference.ListPreference
                 android:defaultValue="0"
                 android:entries="@array/entries__gestures"
-                android:entryValues="@array/values__zero_to_ten"
+                android:entryValues="@array/values__zero_to_two"
                 android:key="@string/pref_key__gesture_pinch"
                 android:title="@string/pref_title__gesture_pinch" />
 
             <android.support.v7.preference.ListPreference
                 android:defaultValue="0"
                 android:entries="@array/entries__gestures"
-                android:entryValues="@array/values__zero_to_ten"
+                android:entryValues="@array/values__zero_to_two"
                 android:key="@string/pref_key__gesture_unpinch"
                 android:title="@string/pref_title__gesture_unpinch" />
 

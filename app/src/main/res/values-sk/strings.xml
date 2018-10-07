@@ -242,7 +242,7 @@
     <string name="minibar_title__launcher_settings">Nastavenia spúštača</string>
     <string name="minibar_title__volume">Nastavenia zvuku</string>
     <string name="minibar_title__app_drawer">Otvoriť zoznam aplikácií.</string>
-    <string name="launch_app">Spustiť aplikáciu</string>
+    <string name="launch">Spustiť aplikáciu</string>
     <string name="app_drawer">Správca aplikácií</string>
     <string name="minibar_summary__mobile_network">Nastavenie mobilnej siete</string>
 
