@@ -197,6 +197,10 @@ public class Tool {
             HomeActivity.Companion.getLauncher().onStartApp(context, app, null);
     }
 
+    public static void startIntent(Context context, Intent intent) {
+        context.startActivity(intent);
+    }
+
     public static void startApp(Context context, App app, View view) {
         HomeActivity launcher = HomeActivity.Companion.getLauncher();
         if (launcher != null) {
@@ -278,11 +282,18 @@ public class Tool {
 
     public static Intent getIntentFromString(String string) {
         try {
-            return new Intent().parseUri(string, 0);
+            return Intent.parseUri(string, 0);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static Intent getIntentFromApp(App app) {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setClassName(app.getPackageName(), app.getClassName());
+        return intent;
     }
 
     public static Drawable getIcon(Context context, String filename) {

@@ -156,11 +156,9 @@ public class AppManager {
     public App createApp(Intent intent) {
         try {
             ResolveInfo info = _packageManager.resolveActivity(intent, 0);
-            App app = new App(_packageManager, info);
-            if (_apps != null && !_apps.contains(app))
-                _apps.add(app);
-            return app;
+            return new App(_packageManager, info);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

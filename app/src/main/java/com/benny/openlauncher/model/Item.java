@@ -105,7 +105,7 @@ public class Item implements Parcelable {
         item._type = Type.APP;
         item._name = app.getLabel();
         item._icon = app.getIcon();
-        item._intent = toIntent(app);
+        item._intent = Tool.getIntentFromApp(app);
         return item;
     }
 
@@ -146,13 +146,6 @@ public class Item implements Parcelable {
         item._spanX = 1;
         item._spanY = 1;
         return item;
-    }
-
-    private static Intent toIntent(App app) {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setClassName(app.getPackageName(), app.getClassName());
-        return intent;
     }
 
     @Override

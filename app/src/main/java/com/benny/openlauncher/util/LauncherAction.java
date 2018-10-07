@@ -111,6 +111,7 @@ public class LauncherAction {
     }
 
     public static ActionDisplayItem getActionItem(int position) {
+        // used for pick action dialog
         return getActionItem(Action.values()[position]);
     }
 

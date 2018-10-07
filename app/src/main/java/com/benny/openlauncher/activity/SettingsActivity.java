@@ -30,6 +30,7 @@ import com.benny.openlauncher.util.BackupHelper;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.LauncherAction;
+import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
 import com.jaredrummler.android.colorpicker.ColorPickerDialog;
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
@@ -271,7 +272,7 @@ public class SettingsActivity extends ThemeActivity {
                         DialogHelper.selectAppDialog(getContext(), new DialogHelper.OnAppSelectedListener() {
                             @Override
                             public void onAppSelected(App app) {
-                                AppSettings.get().setString(key, "2" + app._packageName);
+                                AppSettings.get().setString(key, "2" + Tool.getIntentAsString(Tool.getIntentFromApp(app)));
                             }
                         });
                     }

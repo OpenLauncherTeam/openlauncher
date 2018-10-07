@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherAction;
@@ -48,7 +49,7 @@ public class HpGestureCallback implements DesktopGestureListener.DesktopGestureC
                 Tool.vibrate(desktop);
             }
             if (gesture instanceof Intent) {
-                Tool.startApp(desktop.getContext(), AppManager.getInstance(desktop.getContext()).createApp((Intent) gesture));
+                Tool.startIntent(HomeActivity._launcher, (Intent) gesture);
             } else if (gesture instanceof LauncherAction.ActionDisplayItem) {
                 LauncherAction.RunAction((LauncherAction.ActionDisplayItem) gesture, desktop.getContext());
             }

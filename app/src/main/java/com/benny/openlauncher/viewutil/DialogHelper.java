@@ -13,6 +13,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -55,6 +56,14 @@ public class DialogHelper {
     }
 
     public static void selectActionDialog(final Context context, MaterialDialog.ListCallback callback) {
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        builder.title(R.string.desktop_action)
+                .items(R.array.entries__gesture_actions)
+                .itemsCallback(callback)
+                .show();
+    }
+
+    public static void selectDesktopActionDialog(final Context context, MaterialDialog.ListCallback callback) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(R.string.desktop_action)
                 .items(R.array.entries__desktop_actions)

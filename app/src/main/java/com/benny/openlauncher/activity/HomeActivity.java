@@ -202,13 +202,11 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             _consumeNextResume = true;
         } else {
             try {
-                Intent intent = new Intent("android.intent.action.MAIN");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClassName(app._packageName, app._className);
+                Intent intent = Tool.getIntentFromApp(app);
                 context.startActivity(intent, getActivityAnimationOpts(view));
                 _consumeNextResume = true;
             } catch (Exception e) {
-                Tool.toast(context, (int) R.string.toast_app_uninstalled);
+                Tool.toast(context, R.string.toast_app_uninstalled);
             }
         }
     }
