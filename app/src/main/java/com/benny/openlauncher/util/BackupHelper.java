@@ -1,10 +1,8 @@
 package com.benny.openlauncher.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Environment;
 import android.widget.Toast;
 
 import com.benny.openlauncher.R;

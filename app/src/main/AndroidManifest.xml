@@ -34,10 +34,9 @@
         </activity>
         <activity
             android:name="com.benny.openlauncher.activity.HomeActivity"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="orientation|keyboard|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
+            android:clearTaskOnLaunch="true"
             android:stateNotNeeded="true"
             android:taskAffinity=""
             android:windowSoftInputMode="adjustNothing">

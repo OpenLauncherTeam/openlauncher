@@ -1,23 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-    /*#######################################################
-    *
-    *   Maintained by Gregor Santner, 2018-
-    *   https://gsantner.net/
-    *
-    *   License: Apache 2.0
-    *  https://github.com/gsantner/opoc/#licensing
-    *  https://www.apache.org/licenses/LICENSE-2.0
-    *
-    #########################################################*/
--->
-
-<!--suppress AndroidElementNotAllowed -->
+<?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:title="@string/more">
-
 
     <Preference
         android:key="@string/pref_key__more_info__app"
@@ -40,7 +26,6 @@
         android:key="@string/pref_key__more_info__help"
         android:summary="@string/help_this_app"
         android:title="@string/help" />
-
 
     <PreferenceCategory android:title="@string/contribute">
 
@@ -100,6 +85,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/licenses">
+
         <Preference
             android:icon="@drawable/ic_copyright_black_24dp"
             android:key="@string/pref_key__more_info__project_license"
@@ -124,5 +110,4 @@
 
     </PreferenceCategory>
 
-
-</PreferenceScreen> <!-- Screen -->
+</PreferenceScreen>

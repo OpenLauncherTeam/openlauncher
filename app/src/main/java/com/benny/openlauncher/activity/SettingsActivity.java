@@ -178,7 +178,7 @@ public class SettingsActivity extends ThemeActivity {
                 R.string.pref_key__drawer_fast_scroll_color, R.string.pref_key__date_bar_date_format_custom_1,
                 R.string.pref_key__date_bar_date_format_custom_2, R.string.pref_key__date_bar_date_format_type,
                 R.string.pref_key__date_bar_date_text_color, R.string.pref_key__icon_size, R.string.pref_key__icon_pack,
-                R.string.pref_title__clear_database, R.string.pref_summary__backup, R.string.pref_summary__theme
+                R.string.pref_key__clear_database, R.string.pref_key__backup, R.string.pref_key__restore, R.string.pref_key__theme
         };
 
         @Override
@@ -244,7 +244,6 @@ public class SettingsActivity extends ThemeActivity {
             switch (keyRes) {
                 case R.string.pref_key__desktop_indicator_style: {
                     launcher.getDesktopIndicator().setMode(_as.getDesktopIndicatorMode());
-
                     break;
                 }
                 case R.string.pref_title__desktop_show_position_indicator: {
@@ -271,8 +270,6 @@ public class SettingsActivity extends ThemeActivity {
                     break;
                 }
             }
-
-
             if (requiresRestart(keyRes)) {
                 activityRetVal = RESULT.RESTART_REQ;
                 _as.setAppRestartRequired(true);
@@ -307,7 +304,7 @@ public class SettingsActivity extends ThemeActivity {
                             if (launcher != null) {
                                 launcher.recreate();
                             }
-                            DatabaseHelper db = (DatabaseHelper) HomeActivity._db;
+                            DatabaseHelper db = HomeActivity._db;
                             db.onUpgrade(db.getWritableDatabase(), 1, 1);
                             getActivity().finish();
                         }

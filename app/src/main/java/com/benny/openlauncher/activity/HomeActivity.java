@@ -592,7 +592,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
     }
 
-    private final void registerBroadcastReceiver() {
+    private void registerBroadcastReceiver() {
         registerReceiver(_appUpdateReceiver, _appUpdateIntentFilter);
         registerReceiver(_shortcutReceiver, _shortcutIntentFilter);
         if (_timeChangedReceiver != null) {
@@ -600,7 +600,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
     }
 
-    private final void pickWidget() {
+    private void pickWidget() {
         _consumeNextResume = true;
         int appWidgetId = _appWidgetHost.allocateAppWidgetId();
         Intent pickIntent = new Intent("android.appwidget.action.APPWIDGET_PICK");
@@ -608,7 +608,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         startActivityForResult(pickIntent, REQUEST_PICK_APPWIDGET);
     }
 
-    private final void configureWidget(Intent data) {
+    private void configureWidget(Intent data) {
         Bundle extras = data.getExtras();
         int appWidgetId = extras.getInt("appWidgetId", -1);
         AppWidgetProviderInfo appWidgetInfo = _appWidgetManager.getAppWidgetInfo(appWidgetId);
@@ -622,7 +622,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
     }
 
-    private final void createWidget(Intent data) {
+    private void createWidget(Intent data) {
         Bundle extras = data.getExtras();
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
         AppWidgetProviderInfo appWidgetInfo = _appWidgetManager.getAppWidgetInfo(appWidgetId);
@@ -703,34 +703,28 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         super.onDestroy();
     }
 
-    private final void handleLauncherResume(boolean wasHomePressed) {
-        if (_consumeNextResume) {
-            _consumeNextResume = false;
-            return;
-        }
-        if (wasHomePressed) {
-            onHandleLauncherResume();
-        }
-    }
-
-    protected void onHandleLauncherResume() {
-        getGroupPopup().dismissPopup();
-        ((CalendarView) findViewById(R.id.calendarDropDownView)).animateHide();
-        getDragNDropView().hidePopupMenu();
-        getSearchBar().collapse();
-        if (!getSearchBar().collapse()) {
-            if (getDesktop().getInEditMode()) {
-                List pages = getDesktop().getPages();
-                ((CellContainer) pages.get(getDesktop().getCurrentItem())).performClick();
-            } else if (getAppDrawerController().getDrawer().getVisibility() == View.VISIBLE) {
-                closeAppDrawer();
-            } else {
-                setToHomePage();
+    private void handleLauncherResume(boolean wasHomePressed) {
+        if (!_consumeNextResume || wasHomePressed) {
+            getGroupPopup().dismissPopup();
+            ((CalendarView) findViewById(R.id.calendarDropDownView)).animateHide();
+            getDragNDropView().hidePopupMenu();
+            getSearchBar().collapse();
+            if (!getSearchBar().collapse()) {
+                if (getDesktop().getInEditMode()) {
+                    CellContainer currentPage = getDesktop().getPages().get(getDesktop().getCurrentItem());
+                    currentPage.performClick();
+                } else if (getAppDrawerController().getDrawer().getVisibility() == View.VISIBLE) {
+                    closeAppDrawer();
+                } else {
+                    setToHomePage();
+                }
             }
+        } else {
+            _consumeNextResume = false;
         }
     }
 
-    private final void setToHomePage() {
+    private void setToHomePage() {
         AppSettings appSettings = Setup.appSettings();
         getDesktop().setCurrentItem(appSettings.getDesktopPageCurrent());
     }

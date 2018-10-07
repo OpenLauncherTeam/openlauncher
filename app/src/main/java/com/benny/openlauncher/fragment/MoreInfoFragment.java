@@ -41,7 +41,7 @@ public class MoreInfoFragment extends GsPreferenceFragmentCompat<AppSettings> {
 
     @Override
     public int getPreferenceResourceForInflation() {
-        return R.xml.prefactions__more_information;
+        return R.xml.preferences_about;
     }
 
     @Override
@@ -201,7 +201,6 @@ public class MoreInfoFragment extends GsPreferenceFragmentCompat<AppSettings> {
                 }
                 appendPreference(person, (PreferenceGroup) pref);
             }
-
         }
     }
 }
