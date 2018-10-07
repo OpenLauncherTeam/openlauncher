@@ -81,6 +81,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public static final int REQUEST_CREATE_APPWIDGET = 0x6475;
     public static final int REQUEST_PERMISSION_STORAGE = 0x3648;
     public static final int REQUEST_PICK_APPWIDGET = 0x2678;
+    public static final int REQUEST_RESTART_APP = 0x9387;
     public static WidgetHost _appWidgetHost;
     public static AppWidgetManager _appWidgetManager;
     public static boolean _consumeNextResume;
@@ -131,50 +132,41 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         return findViewById(R.id.drawer_layout);
     }
 
-
-    @NonNull
     public final Desktop getDesktop() {
         Desktop desktop = (Desktop) findViewById(R.id.desktop);
         return desktop;
     }
 
-    @NonNull
     public final Dock getDock() {
         Dock dock = (Dock) findViewById(R.id.dock);
         return dock;
     }
 
-    @NonNull
     public final AppDrawerController getAppDrawerController() {
         AppDrawerController appDrawerController = (AppDrawerController) findViewById(R.id.appDrawerController);
         return appDrawerController;
     }
 
-    @NonNull
     public final GroupPopupView getGroupPopup() {
         GroupPopupView groupPopupView = (GroupPopupView) findViewById(R.id.groupPopup);
         return groupPopupView;
     }
 
-    @NonNull
     public final SearchBar getSearchBar() {
         SearchBar searchBar = (SearchBar) findViewById(R.id.searchBar);
         return searchBar;
     }
 
-    @NonNull
     public final View getBackground() {
         View findViewById = findViewById(R.id.background);
         return findViewById;
     }
 
-    @NonNull
     public final PagerIndicator getDesktopIndicator() {
         PagerIndicator pagerIndicator = (PagerIndicator) findViewById(R.id.desktopIndicator);
         return pagerIndicator;
     }
 
-    @NonNull
     public final ItemOptionView getDragNDropView() {
         ItemOptionView itemOptionView = (ItemOptionView) findViewById(R.id.dragNDropView);
         return itemOptionView;
@@ -360,8 +352,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         ((FrameLayout) minibar.getParent()).setBackgroundColor(AppSettings.get().getMinibarBackgroundColor());
     }
 
+    @Override
     public void onBackPressed() {
-        handleLauncherPause(false);
+        handleLauncherResume(false);
         ((DrawerLayout) findViewById(R.id.drawer_layout)).closeDrawers();
     }
 
@@ -452,15 +445,15 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public void onDesktopEdit() {
         Tool.visibleViews(100, 20, (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel));
-        hideDesktopIndicator();
+        updateDesktopIndicator(false);
         updateDock(false, 0);
         updateSearchBar(false);
     }
 
     public void onFinishDesktopEdit() {
         Tool.invisibleViews(100, 20, (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel));
-        ((PagerIndicator) findViewById(R.id.desktopIndicator)).hideDelay();
-        showDesktopIndicator();
+        getDesktopIndicator().hideDelay();
+        updateDesktopIndicator(true);
         updateDock(true, 0);
         updateSearchBar(true);
     }
@@ -509,99 +502,68 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public final void clearRoomForPopUp() {
         Tool.invisibleViews((Desktop) findViewById(R.id.desktop));
-        hideDesktopIndicator();
+        updateDesktopIndicator(false);
         updateDock(false, 0);
     }
 
     public final void unClearRoomForPopUp() {
         Tool.visibleViews((Desktop) findViewById(R.id.desktop));
-        showDesktopIndicator();
+        updateDesktopIndicator(true);
         updateDock(true, 0);
     }
 
     public final void updateDock(boolean show, long delay) {
         AppSettings appSettings = Setup.appSettings();
-
-        Desktop desktop;
-        LayoutParams layoutParams;
-        PagerIndicator pagerIndicator;
+        MarginLayoutParams layoutParams;
         if (appSettings.getDockEnable() && show) {
             Tool.visibleViews(100, delay, (Dock) findViewById(R.id.dock));
-            desktop = findViewById(R.id.desktop);
-            layoutParams = desktop.getLayoutParams();
-            ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, this);
-            pagerIndicator = findViewById(R.id.desktopIndicator);
-            layoutParams = pagerIndicator.getLayoutParams();
-            ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, this);
+            layoutParams = (MarginLayoutParams) getDesktop().getLayoutParams();
+            layoutParams.bottomMargin = Tool.dp2px(4, this);
+            layoutParams = (MarginLayoutParams) getDesktopIndicator().getLayoutParams();
+            layoutParams.bottomMargin = Tool.dp2px(4, this);
         } else {
-            appSettings = Setup.appSettings();
-
             if (appSettings.getDockEnable()) {
                 Tool.invisibleViews(100, (Dock) findViewById(R.id.dock));
             } else {
                 Tool.goneViews(100, (Dock) findViewById(R.id.dock));
-                pagerIndicator = findViewById(R.id.desktopIndicator);
-                layoutParams = pagerIndicator.getLayoutParams();
-                ((MarginLayoutParams) layoutParams).bottomMargin = Desktop._bottomInset + Tool.dp2px(4, (Context) this);
-                desktop = (Desktop) findViewById(R.id.desktop);
-                layoutParams = desktop.getLayoutParams();
-                ((MarginLayoutParams) layoutParams).bottomMargin = Tool.dp2px(4, (Context) this);
+                layoutParams = (MarginLayoutParams) getDesktopIndicator().getLayoutParams();
+                layoutParams.bottomMargin = Desktop._bottomInset + Tool.dp2px(4, (Context) this);
+                layoutParams = (MarginLayoutParams) getDesktop().getLayoutParams();
+                layoutParams.bottomMargin = Tool.dp2px(4, (Context) this);
             }
         }
     }
 
     public final void updateSearchBar(boolean show) {
         AppSettings appSettings = Setup.appSettings();
-
         if (appSettings.getSearchBarEnable() && show) {
-            Tool.visibleViews(100, (SearchBar) findViewById(R.id.searchBar));
+            Tool.visibleViews(100, getSearchBar());
         } else {
-            appSettings = Setup.appSettings();
-
             if (appSettings.getSearchBarEnable()) {
-                Tool.invisibleViews(100, (SearchBar) findViewById(R.id.searchBar));
+                Tool.invisibleViews(100, getSearchBar());
             } else {
-                Tool.goneViews((SearchBar) findViewById(R.id.searchBar));
+                Tool.goneViews(getSearchBar());
             }
         }
     }
 
-    public final void updateDesktopIndicatorVisibility() {
+    public final void updateDesktopIndicator(boolean show) {
         AppSettings appSettings = Setup.appSettings();
-
-        if (appSettings.isDesktopShowIndicator()) {
-            Tool.visibleViews(100, (PagerIndicator) findViewById(R.id.desktopIndicator));
-            return;
-        }
-        Tool.goneViews(100, (PagerIndicator) findViewById(R.id.desktopIndicator));
-    }
-
-    public final void hideDesktopIndicator() {
-        AppSettings appSettings = Setup.appSettings();
-
-        if (appSettings.isDesktopShowIndicator()) {
-            Tool.invisibleViews(100, (PagerIndicator) findViewById(R.id.desktopIndicator));
-        }
-    }
-
-    public final void showDesktopIndicator() {
-        AppSettings appSettings = Setup.appSettings();
-
-        if (appSettings.isDesktopShowIndicator()) {
-            Tool.visibleViews(100, (PagerIndicator) findViewById(R.id.desktopIndicator));
+        if (appSettings.isDesktopShowIndicator() && show) {
+            Tool.visibleViews(100, getDesktopIndicator());
+        } else {
+            Tool.goneViews(100, getDesktopIndicator());
         }
     }
 
     public final void updateSearchClock() {
-        SearchBar searchBar = (SearchBar) findViewById(R.id.searchBar);
-        TextView textView = searchBar._searchClock;
+        TextView textView = getSearchBar()._searchClock;
 
         if (textView.getText() != null) {
             try {
-                searchBar = (SearchBar) findViewById(R.id.searchBar);
-                searchBar.updateClock();
+                getSearchBar().updateClock();
             } catch (Exception e) {
-                ((SearchBar) findViewById(R.id.searchBar))._searchClock.setText(R.string.bad_format);
+                getSearchBar()._searchClock.setText(R.string.bad_format);
             }
         }
     }
@@ -609,7 +571,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public final void updateHomeLayout() {
         updateSearchBar(true);
         updateDock(true, 0);
-        updateDesktopIndicatorVisibility();
+        updateDesktopIndicator(true);
         AppSettings appSettings = Setup.appSettings();
 
         if (!appSettings.getSearchBarEnable()) {
@@ -711,12 +673,11 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         // handle restart if something needs to be reset
         AppSettings appSettings = Setup.appSettings();
         if (appSettings.getAppRestartRequired()) {
-            appSettings = Setup.appSettings();
             appSettings.setAppRestartRequired(false);
-            PendingIntent restartIntentP = PendingIntent.getActivity(this, 123556, new Intent(this, HomeActivity.class), PendingIntent.FLAG_CANCEL_CURRENT);
-            AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + ((long) 100), restartIntentP);
-            System.exit(0);
+            Intent intent = new Intent(this, HomeActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, REQUEST_RESTART_APP, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            manager.set(AlarmManager.RTC, System.currentTimeMillis() + 100, pendingIntent);
             return;
         }
 
@@ -728,7 +689,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
 
         Intent intent = getIntent();
-        handleLauncherPause(Intent.ACTION_MAIN.equals(intent.getAction()));
+        handleLauncherResume(Intent.ACTION_MAIN.equals(intent.getAction()));
         super.onResume();
     }
 
@@ -742,50 +703,36 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         super.onDestroy();
     }
 
-    private final void handleLauncherPause(boolean wasHomePressed) {
-        if (!_consumeNextResume || wasHomePressed) {
-            onHandleLauncherPause();
-        } else {
+    private final void handleLauncherResume(boolean wasHomePressed) {
+        if (_consumeNextResume) {
             _consumeNextResume = false;
+            return;
+        }
+        if (wasHomePressed) {
+            onHandleLauncherResume();
         }
     }
 
-    protected void onHandleLauncherPause() {
-        ((GroupPopupView) findViewById(R.id.groupPopup)).dismissPopup();
+    protected void onHandleLauncherResume() {
+        getGroupPopup().dismissPopup();
         ((CalendarView) findViewById(R.id.calendarDropDownView)).animateHide();
-        ((ItemOptionView) findViewById(R.id.dragNDropView)).hidePopupMenu();
-        if (!((SearchBar) findViewById(R.id.searchBar)).collapse()) {
-            if (((Desktop) findViewById(R.id.desktop)) != null) {
-                Desktop desktop = (Desktop) findViewById(R.id.desktop);
-
-                if (desktop.getInEditMode()) {
-                    desktop = (Desktop) findViewById(R.id.desktop);
-
-                    List pages = desktop.getPages();
-                    Desktop desktop2 = (Desktop) findViewById(R.id.desktop);
-
-                    ((CellContainer) pages.get(desktop2.getCurrentItem())).performClick();
-                } else {
-                    AppDrawerController appDrawerController = (AppDrawerController) findViewById(R.id.appDrawerController);
-
-                    View drawer = appDrawerController.getDrawer();
-
-                    if (drawer.getVisibility() == View.VISIBLE) {
-                        closeAppDrawer();
-                    } else {
-                        setToHomePage();
-                    }
-                }
+        getDragNDropView().hidePopupMenu();
+        getSearchBar().collapse();
+        if (!getSearchBar().collapse()) {
+            if (getDesktop().getInEditMode()) {
+                List pages = getDesktop().getPages();
+                ((CellContainer) pages.get(getDesktop().getCurrentItem())).performClick();
+            } else if (getAppDrawerController().getDrawer().getVisibility() == View.VISIBLE) {
+                closeAppDrawer();
+            } else {
+                setToHomePage();
             }
         }
     }
 
     private final void setToHomePage() {
-        Desktop desktop = (Desktop) findViewById(R.id.desktop);
-
         AppSettings appSettings = Setup.appSettings();
-
-        desktop.setCurrentItem(appSettings.getDesktopPageCurrent());
+        getDesktop().setCurrentItem(appSettings.getDesktopPageCurrent());
     }
 
     public final void openAppDrawer() {

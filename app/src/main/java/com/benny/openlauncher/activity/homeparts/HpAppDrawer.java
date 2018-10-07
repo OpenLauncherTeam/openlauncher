@@ -48,7 +48,7 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
             if (startOrEnd) {
                 Tool.visibleViews(_appDrawerIndicator);
                 Tool.invisibleViews(_homeActivity.getDesktop());
-                _homeActivity.hideDesktopIndicator();
+                _homeActivity.updateDesktopIndicator(false);
                 _homeActivity.updateDock(false, 0);
                 _homeActivity.updateSearchBar(false);
             }
@@ -56,7 +56,7 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
             if (startOrEnd) {
                 Tool.invisibleViews(_appDrawerIndicator);
                 Tool.visibleViews(_homeActivity.getDesktop());
-                _homeActivity.showDesktopIndicator();
+                _homeActivity.updateDesktopIndicator(true);
                 if (Setup.appSettings().getDrawerStyle() == AppDrawerController.DrawerMode.HORIZONTAL_PAGED)
                     _homeActivity.updateDock(true, 200);
                 else

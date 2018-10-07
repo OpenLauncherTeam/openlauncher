@@ -248,7 +248,7 @@ public class SettingsActivity extends ThemeActivity {
                     break;
                 }
                 case R.string.pref_title__desktop_show_position_indicator: {
-                    launcher.updateDesktopIndicatorVisibility();
+                    launcher.updateDesktopIndicator(true);
                     break;
                 }
                 case R.string.pref_key__dock_enable: {
