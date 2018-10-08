@@ -61,7 +61,6 @@ public class SearchBar extends FrameLayout {
     private FastItemAdapter<IconLabelItem> _adapter = new FastItemAdapter<>();
     private CallBack _callback;
     private boolean _expanded;
-    private boolean _searchInternetEnabled = true;
     private Mode _mode = Mode.DateAll;
     private int _searchClockTextSize = 28;
     private float _searchClockSubTextFactor = 0.5f;
@@ -97,10 +96,9 @@ public class SearchBar extends FrameLayout {
         int dp1 = Tool.dp2px(1, getContext());
         int iconMarginOutside = dp1 * 16;
         int iconMarginTop = dp1 * 13;
-        int searchTextHorizontalMargin = dp1 * 8;
         int searchTextMarginTop = dp1 * 4;
         int iconSize = dp1 * 24;
-        int iconPadding = dp1 * 6; // CircleDrawable uses 6dp as well!!
+        int iconPadding = dp1 * 6;
 
         _searchClock = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.view_search_clock, this, false);
         _searchClock.setTextSize(TypedValue.COMPLEX_UNIT_DIP, _searchClockTextSize);
@@ -108,11 +106,7 @@ public class SearchBar extends FrameLayout {
         clockParams.setMargins(iconMarginOutside, 0, 0, 0);
         clockParams.gravity = Gravity.START;
 
-        LayoutParams switchButtonParams = null;
-        // && Setup._appSettings().isSearchGridListSwitchEnabled()
-
         _switchButton = new AppCompatImageView(getContext());
-        updateSwitchIcon();
         _switchButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,8 +117,9 @@ public class SearchBar extends FrameLayout {
         });
         _switchButton.setVisibility(View.GONE);
         _switchButton.setPadding(0, iconPadding, 0, iconPadding);
+        updateSwitchIcon();
 
-        switchButtonParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LayoutParams switchButtonParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         switchButtonParams.setMargins(iconMarginOutside / 2, 0, 0, 0);
         switchButtonParams.gravity = Gravity.START | Gravity.CENTER_VERTICAL;
 
@@ -191,13 +186,10 @@ public class SearchBar extends FrameLayout {
             }
         });
         LayoutParams inputCardParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        //(switchButton != null ? iconMarginOutside + iconSize : 0) + searchTextHorizontalMargin
-        //iconMarginOutside + iconSize + searchTextHorizontalMargin
         inputCardParams.setMargins(0, searchTextMarginTop, 0, 0);
 
         LayoutParams inputParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         inputParams.setMargins(iconMarginOutside + iconSize, 0, 0, 0);
-
 
         _searchCardContainer.addView(_switchButton, switchButtonParams);
         _searchCardContainer.addView(_searchInput, inputParams);
@@ -212,22 +204,6 @@ public class SearchBar extends FrameLayout {
                     apps = Setup.appLoader().getAllApps(getContext(), true);
                 }
                 List<IconLabelItem> items = new ArrayList<>();
-                if (_searchInternetEnabled) {
-                    items.add(new IconLabelItem(getContext(), R.string.search_online)
-                            .withTextColor(Color.WHITE)
-                            .withIconPadding(getContext(), 8)
-                            .withBold(true)
-                            .withMatchParent(true)
-                            .withTextGravity(Gravity.END)
-                            .withIconGravity(Gravity.START)
-                            .withOnClickListener(new OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    _callback.onInternetSearch(_searchInput.getText().toString());
-                                    _searchInput.getText().clear();
-                                }
-                            }));
-                }
                 for (int i = 0; i < apps.size(); i++) {
                     final App app = apps.get(i);
                     final int finalI = i;
@@ -338,7 +314,7 @@ public class SearchBar extends FrameLayout {
     }
 
     private void updateSwitchIcon() {
-        _switchButton.setImageResource(Setup.appSettings().isSearchUseGrid() ? R.drawable.ic_apps_white_48dp : R.drawable.ic_view_list_white_24dp);
+        _switchButton.setImageResource(Setup.appSettings().isSearchUseGrid() ? R.drawable.ic_view_grid_white_24dp : R.drawable.ic_view_list_white_24dp);
     }
 
     private void updateRecyclerViewLayoutManager() {
