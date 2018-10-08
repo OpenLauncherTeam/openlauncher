@@ -107,7 +107,8 @@ public class AppManager {
                 .title((activity.getString(R.string.pick_icon_pack)))
                 .build();
 
-        fastItemAdapter.add(new IconLabelItem(activity, R.drawable.ic_launcher, R.string.default_icons, -1)
+        fastItemAdapter.add(new IconLabelItem(activity, R.drawable.ic_launcher, R.string.default_icons)
+                .withIconPadding(_context, 16)
                 .withIconGravity(Gravity.START)
                 .withOnClickListener(new View.OnClickListener() {
                     @Override
@@ -121,7 +122,9 @@ public class AppManager {
 
         for (int i = 0; i < resolveInfos.size(); i++) {
             final int mI = i;
-            fastItemAdapter.add(new IconLabelItem(activity, resolveInfos.get(i).loadIcon(_packageManager), resolveInfos.get(i).loadLabel(_packageManager).toString(), -1)
+            fastItemAdapter.add(new IconLabelItem(activity, resolveInfos.get(i).loadIcon(_packageManager), resolveInfos.get(i).loadLabel(_packageManager).toString())
+                    .withIconPadding(_context, 16)
+                    .withIconSize(_context, 50)
                     .withIconGravity(Gravity.START)
                     .withOnClickListener(new View.OnClickListener() {
                         @Override

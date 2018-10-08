@@ -191,13 +191,12 @@ public class DesktopOptionView extends FrameLayout {
     }
 
     private IconLabelItem createItem(int icon, int label, Typeface typeface, int width) {
-        return new IconLabelItem(getContext(), icon, getContext().getString(label), -1)
+        return new IconLabelItem(getContext(), icon, label)
                 .withIdentifier(label)
                 .withOnClickListener(null)
                 .withTextColor(Color.WHITE)
-                .withIconPadding(getContext(), 0)
+                .withIconPadding(getContext(), 4)
                 .withIconGravity(Gravity.TOP)
-                .withGravity(Gravity.CENTER)
                 .withMatchParent(false)
                 .withWidth(width)
                 .withTypeface(typeface)

@@ -81,12 +81,11 @@ public class DialogHelper {
         final MaterialDialog dialog = builder.build();
         List<IconLabelItem> items = new ArrayList<>();
         final List<App> apps = AppManager.getInstance(context).getApps();
-        int size = Tool.dp2px(18, context);
-        int sizePad = Tool.dp2px(8, context);
         for (int i = 0; i < apps.size(); i++) {
-            items.add(new IconLabelItem(context, apps.get(i).getIcon(), apps.get(i).getLabel(), size)
+            items.add(new IconLabelItem(context, apps.get(i).getIcon(), apps.get(i).getLabel())
+                    .withIconSize(context, 50)
                     .withIconGravity(Gravity.START)
-                    .withIconPadding(context, sizePad));
+                    .withIconPadding(context, 8));
         }
         fastItemAdapter.set(items);
         fastItemAdapter.withOnClickListener(new com.mikepenz.fastadapter.listeners.OnClickListener<IconLabelItem>() {
