@@ -15,7 +15,7 @@
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
-    <string name="minibar_title__edit">Edit Minibar</string>
+    <string name="minibar_title__edit_minibar">Edit Minibar</string>
     <string name="minibar_summary__edit">Change the minibar layout.</string>
     <string name="minibar_title__set_wallpaper">Set Wallpaper</string>
     <string name="minibar_summary__set_wallpaper">Set the desktop wallpaper.</string>

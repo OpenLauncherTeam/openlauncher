@@ -5,7 +5,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -18,18 +17,17 @@ import com.benny.openlauncher.activity.MinibarEditActivity;
 import com.benny.openlauncher.activity.SettingsActivity;
 import com.benny.openlauncher.viewutil.DialogHelper;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class LauncherAction {
 
     public enum Action {
-        EditMinibar, SetWallpaper, LockScreen, LauncherSettings, DeviceSettings, VolumeDialog, AppDrawer, SearchBar, MobileNetworkSettings
+        EditMinibar, SetWallpaper, LockScreen, LauncherSettings, VolumeDialog, DeviceSettings, AppDrawer, SearchBar, MobileNetworkSettings
     }
 
     public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
-            new ActionDisplayItem(Action.EditMinibar, HomeActivity._launcher.getResources().getString(R.string.minibar_title__edit), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__edit), R.drawable.ic_mode_edit_black_24dp, 98),
+            new ActionDisplayItem(Action.EditMinibar, HomeActivity._launcher.getResources().getString(R.string.minibar_title__edit_minibar), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__edit), R.drawable.ic_mode_edit_black_24dp, 98),
             new ActionDisplayItem(Action.SetWallpaper, HomeActivity._launcher.getResources().getString(R.string.minibar_title__set_wallpaper), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__set_wallpaper), R.drawable.ic_photo_black_24dp, 36),
             new ActionDisplayItem(Action.LockScreen, HomeActivity._launcher.getResources().getString(R.string.minibar_title__lock_screen), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__lock_screen), R.drawable.ic_lock_black_24dp, 24),
             new ActionDisplayItem(Action.LauncherSettings, HomeActivity._launcher.getResources().getString(R.string.minibar_title__launcher_settings), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__launcher_settings), R.drawable.ic_settings_launcher_black_24dp, 50),

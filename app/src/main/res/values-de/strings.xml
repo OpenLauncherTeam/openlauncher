@@ -274,7 +274,7 @@
     <string name="donate">Spenden</string>
     <string name="minibar_title__set_wallpaper">Wallpaper setzen</string>
     <string name="none">Nichts</string>
-    <string name="minibar_title__edit">Minibar Einstellungen</string>
+    <string name="minibar_title__edit_minibar">Minibar Einstellungen</string>
     <string name="minibar_title__lock_screen">Lock Screen</string>
     <string name="minibar_title__device_settings">Geräte-Einstellungen</string>
     <string name="minibar_title__launcher_settings">Launcher-Einstellungen</string>

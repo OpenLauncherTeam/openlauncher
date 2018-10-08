@@ -238,7 +238,7 @@
 
     <string name="minibar_title__set_wallpaper">Definir papel de parede</string>
     <string name="none">Nenhum</string>
-    <string name="minibar_title__edit">Definições da mini-barra</string>
+    <string name="minibar_title__edit_minibar">Definições da mini-barra</string>
     <string name="minibar_title__lock_screen">Bloquear ecrã</string>
     <string name="minibar_title__device_settings">Definições do dispositivo</string>
     <string name="minibar_title__launcher_settings">Definições da aplicação</string>

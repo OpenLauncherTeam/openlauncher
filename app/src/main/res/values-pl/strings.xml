@@ -236,7 +236,7 @@
 
     <string name="minibar_title__set_wallpaper">Ustaw tapetę</string>
     <string name="none">Nic</string>
-    <string name="minibar_title__edit">Ustawienia minipaska</string>
+    <string name="minibar_title__edit_minibar">Ustawienia minipaska</string>
     <string name="minibar_title__lock_screen">Zablokuj ekran</string>
     <string name="minibar_title__device_settings">Ustawienia urządzenia</string>
     <string name="minibar_title__launcher_settings">Ustawienia launchera</string>

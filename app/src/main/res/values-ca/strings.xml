@@ -244,7 +244,7 @@
 
     <string name="minibar_title__set_wallpaper">Establir el fons de pantalla</string>
     <string name="none">Cap</string>
-    <string name="minibar_title__edit">Paràmetres de la minibar</string>
+    <string name="minibar_title__edit_minibar">Paràmetres de la minibar</string>
     <string name="minibar_title__lock_screen">Bloqueja la pantalla</string>
     <string name="minibar_title__device_settings">Paràmetres del dispositiu</string>
     <string name="minibar_title__launcher_settings">Paràmetres del llençador</string>

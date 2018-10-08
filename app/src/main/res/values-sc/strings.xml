@@ -238,7 +238,7 @@
 
     <string name="minibar_title__set_wallpaper">Imposta s\'immàgine de isfundu</string>
     <string name="none">perunu</string>
-    <string name="minibar_title__edit">Impostatziones de sa minibarra</string>
+    <string name="minibar_title__edit_minibar">Impostatziones de sa minibarra</string>
     <string name="minibar_title__lock_screen">Bloca s\'ischermu</string>
     <string name="minibar_title__device_settings">Impostatziones de su dispositivu</string>
     <string name="minibar_title__launcher_settings">Launcher Settings</string>

@@ -236,7 +236,7 @@
 
     <string name="minibar_title__set_wallpaper">Nastaviť tapetu</string>
     <string name="none">Žiadne</string>
-    <string name="minibar_title__edit">Nastavenia mini lišty</string>
+    <string name="minibar_title__edit_minibar">Nastavenia mini lišty</string>
     <string name="minibar_title__lock_screen">Zamknúť obrazovku</string>
     <string name="minibar_title__device_settings">Nastavenie zariadenia</string>
     <string name="minibar_title__launcher_settings">Nastavenia spúštača</string>

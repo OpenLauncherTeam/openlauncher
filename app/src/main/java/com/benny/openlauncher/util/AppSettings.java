@@ -242,15 +242,23 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         // both cases will return null if method call fails
         String result = getString(key, "0");
         int type = Integer.parseInt(result.substring(0, 1));
+        Object gesture = null;
         switch (type) {
             case 1:
-                return LauncherAction.getActionItem(Integer.parseInt(result.substring(1, 2)));
+                gesture = LauncherAction.getActionItem(Integer.parseInt(result.substring(1, 2)));
+                break;
             case 2:
-                return Tool.getIntentFromString(result.substring(1, result.length()));
+                gesture = Tool.getIntentFromString(result.substring(1, result.length()));
+                break;
             default:
                 // gesture is disabled
-                return null;
+                break;
         }
+        // reset the setting if invalid value
+        if (gesture == null) {
+            setString(key, null);
+        }
+        return gesture;
     }
 
     public boolean isDesktopHideGrid() {
