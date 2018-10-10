@@ -648,6 +648,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     protected void onResume() {
+        super.onResume();
         _appWidgetHost.startListening();
         _launcher = this;
 
@@ -671,7 +672,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
         Intent intent = getIntent();
         handleLauncherResume(Intent.ACTION_MAIN.equals(intent.getAction()));
-        super.onResume();
     }
 
     protected void onDestroy() {
