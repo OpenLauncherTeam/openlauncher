@@ -172,7 +172,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
             HomeActivity._db.deleteItem(item, true);
             return false;
         }
-        item._locationInLauncher = 1;
+        item._location = Item.LOCATION_DOCK;
         addViewToGrid(itemView, item._x, item._y, item._spanX, item._spanY);
         return true;
     }
@@ -182,7 +182,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         if (positionToLayoutPrams == null) {
             return false;
         }
-        item._locationInLauncher = 1;
+        item._location = Item.LOCATION_DOCK;
         item._x = positionToLayoutPrams.getX();
         item._y = positionToLayoutPrams.getY();
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallback) this, Setup.appSettings().getDockIconSize());
@@ -194,7 +194,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     }
 
     public boolean addItemToCell(@NonNull Item item, int x, int y) {
-        item._locationInLauncher = 1;
+        item._location = Item.LOCATION_DOCK;
         item._x = x;
         item._y = y;
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallback) this, Setup.appSettings().getDockIconSize());

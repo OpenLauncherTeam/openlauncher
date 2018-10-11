@@ -207,18 +207,16 @@ public class SearchBar extends FrameLayout {
                 for (int i = 0; i < apps.size(); i++) {
                     final App app = apps.get(i);
                     final int finalI = i;
-                    items.add(new IconLabelItem(getContext(), app.getIcon(), app.getLabel())
-                            .withSearchInfo(app.getUniversalLabel())
+                    items.add(new IconLabelItem(app.getIcon(), app.getLabel())
                             .withIconSize(getContext(), 50)
                             .withTextColor(Color.WHITE)
-                            .withMatchParent(true)
                             .withIconPadding(getContext(), 8)
-                            .withTextMaxLines(Setup.appSettings().getSearchLabelLines())
-                            .withIconGravity(Setup.appSettings().getSearchGridSize() > 1 && Setup.appSettings().getSearchLabelLines() == 0 ? Gravity.TOP : Gravity.START)
+                            .withTextGravity(Setup.appSettings().getSearchGridSize() > 1 ? Gravity.CENTER : Gravity.CENTER_VERTICAL)
+                            .withIconGravity(Setup.appSettings().getSearchGridSize() > 1 ? Gravity.TOP : Gravity.START)
                             .withOnClickListener(new OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startApp(v.getContext(), app);
+                                    Tool.startApp(v.getContext(), app);
                                 }
                             })
                             .withOnLongClickListener(AppItemView.Builder.getLongClickDragAppListener(Item.newAppItem(app), DragAction.Action.APP, new AppItemView.LongPressCallBack() {
@@ -244,20 +242,12 @@ public class SearchBar extends FrameLayout {
         _adapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<IconLabelItem>() {
             @Override
             public boolean filter(IconLabelItem item, CharSequence constraint) {
-                if (item._label.equals(getContext().getString(R.string.search_online))) {
-                    return false;
-                }
-
                 if (constraint.length() == 0) {
                     return true;
                 }
 
                 String s = constraint.toString().toLowerCase();
                 if (item._label.toLowerCase().contains(s)) {
-                    return true;
-                }
-
-                if (item._searchInfo != null && item._searchInfo.toLowerCase().contains(s)) {
                     return true;
                 }
 
@@ -321,10 +311,20 @@ public class SearchBar extends FrameLayout {
         int gridSize = Setup.appSettings().isSearchUseGrid() ? Setup.appSettings().getSearchGridSize() : 1;
         if (gridSize == 1) {
             _searchRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+            updateList(Gravity.START, Gravity.CENTER_VERTICAL);
         } else {
             _searchRecycler.setLayoutManager(new GridLayoutManager(getContext(), gridSize, GridLayoutManager.VERTICAL, false));
+            updateList(Gravity.TOP, Gravity.CENTER);
         }
         _searchRecycler.getLayoutManager().setAutoMeasureEnabled(false);
+    }
+
+    private void updateList(int iconGravity, int textGravity) {
+        List<IconLabelItem> apps = _adapter.getAdapterItems();
+        for (IconLabelItem app : apps) {
+            app.setIconGravity(iconGravity);
+            app.setTextGravity(textGravity);
+        }
     }
 
     protected void initRecyclerView() {
@@ -335,10 +335,6 @@ public class SearchBar extends FrameLayout {
         _searchRecycler.setClipToPadding(false);
         _searchRecycler.setHasFixedSize(true);
         updateRecyclerViewLayoutManager();
-    }
-
-    protected void startApp(Context context, App app) {
-        Tool.startApp(context, app);
     }
 
     public AppCompatImageView getSearchButton() {

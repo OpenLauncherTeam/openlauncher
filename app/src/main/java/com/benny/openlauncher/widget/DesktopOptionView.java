@@ -58,9 +58,9 @@ public class DesktopOptionView extends FrameLayout {
             @Override
             public void run() {
                 if (home) {
-                    _actionAdapters[0].getAdapterItem(1).setIcon(getContext().getResources().getDrawable(R.drawable.ic_star_white_36dp));
+                    _actionAdapters[0].getAdapterItem(1)._icon = getContext().getResources().getDrawable(R.drawable.ic_star_white_36dp);
                 } else {
-                    _actionAdapters[0].getAdapterItem(1).setIcon(getContext().getResources().getDrawable(R.drawable.ic_star_border_white_36dp));
+                    _actionAdapters[0].getAdapterItem(1)._icon = getContext().getResources().getDrawable(R.drawable.ic_star_border_white_36dp);
                 }
                 _actionAdapters[0].notifyAdapterItemChanged(1);
             }
@@ -74,9 +74,9 @@ public class DesktopOptionView extends FrameLayout {
             @Override
             public void run() {
                 if (lock) {
-                    _actionAdapters[0].getAdapterItem(2).setIcon(getContext().getResources().getDrawable(R.drawable.ic_lock_white_36dp));
+                    _actionAdapters[0].getAdapterItem(2)._icon = getContext().getResources().getDrawable(R.drawable.ic_lock_white_36dp);
                 } else {
-                    _actionAdapters[0].getAdapterItem(2).setIcon(getContext().getResources().getDrawable(R.drawable.ic_lock_open_white_36dp));
+                    _actionAdapters[0].getAdapterItem(2)._icon = getContext().getResources().getDrawable(R.drawable.ic_lock_open_white_36dp);
                 }
                 _actionAdapters[0].notifyAdapterItemChanged(2);
             }
@@ -197,9 +197,7 @@ public class DesktopOptionView extends FrameLayout {
                 .withTextColor(Color.WHITE)
                 .withIconPadding(getContext(), 4)
                 .withIconGravity(Gravity.TOP)
-                .withMatchParent(false)
                 .withWidth(width)
-                .withTypeface(typeface)
                 .withTextGravity(Gravity.CENTER);
     }
 

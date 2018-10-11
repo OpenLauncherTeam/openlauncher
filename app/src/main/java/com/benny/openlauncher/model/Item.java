@@ -31,33 +31,36 @@ public class Item implements Parcelable {
     };
     public Type _type;
     public Drawable _icon;
+    public int _location;
     public int _x = 0;
     public int _y = 0;
-    //Needed for folder to optimize the folder open position
-    public int _locationInLauncher;
+
     // intent for shortcuts and apps
     public Intent _intent;
+
     // list of items for groups
     public List<Item> _items;
+
     // int value for launcher action
     public int _actionValue;
+
     // widget specific values
     public int _widgetValue;
     public int _spanX = 1;
     public int _spanY = 1;
     // all items need these values
-    private int _idValue;
-    private String _name = "";
+    private int _id;
+    private String _label = "";
 
     public Item() {
         Random random = new Random();
-        _idValue = random.nextInt();
+        _id = random.nextInt();
     }
 
     public Item(Parcel parcel) {
-        _idValue = parcel.readInt();
+        _id = parcel.readInt();
         _type = Type.valueOf(parcel.readString());
-        _name = parcel.readString();
+        _label = parcel.readString();
         _x = parcel.readInt();
         _y = parcel.readInt();
         switch (_type) {
@@ -66,11 +69,11 @@ public class Item implements Parcelable {
                 _intent = Tool.getIntentFromString(parcel.readString());
                 break;
             case GROUP:
-                List<String> labels = new ArrayList<>();
-                parcel.readStringList(labels);
+                List<String> items = new ArrayList<>();
+                parcel.readStringList(items);
                 _items = new ArrayList<>();
-                for (String s : labels) {
-                    _items.add(HomeActivity.Companion.getLauncher()._db.getItem(Integer.parseInt(s)));
+                for (String item : items) {
+                    _items.add(HomeActivity.Companion.getLauncher()._db.getItem(Integer.parseInt(item)));
                 }
                 break;
             case ACTION:
@@ -82,10 +85,10 @@ public class Item implements Parcelable {
                 _spanY = parcel.readInt();
                 break;
         }
-        _locationInLauncher = parcel.readInt();
+        _location = parcel.readInt();
 
         if (Setup.appSettings().enableImageCaching()) {
-            _icon = Tool.getIcon(HomeActivity.Companion.getLauncher(), Integer.toString(_idValue));
+            _icon = Tool.getIcon(HomeActivity.Companion.getLauncher(), Integer.toString(_id));
         } else {
             switch (_type) {
                 case APP:
@@ -103,7 +106,7 @@ public class Item implements Parcelable {
     public static Item newAppItem(App app) {
         Item item = new Item();
         item._type = Type.APP;
-        item._name = app.getLabel();
+        item._label = app.getLabel();
         item._icon = app.getIcon();
         item._intent = Tool.getIntentFromApp(app);
         return item;
@@ -112,7 +115,7 @@ public class Item implements Parcelable {
     public static Item newShortcutItem(Intent intent, Drawable icon, String name) {
         Item item = new Item();
         item._type = Type.SHORTCUT;
-        item._name = name;
+        item._label = name;
         item._icon = icon;
         item._spanX = 1;
         item._spanY = 1;
@@ -123,7 +126,7 @@ public class Item implements Parcelable {
     public static Item newGroupItem() {
         Item item = new Item();
         item._type = Type.GROUP;
-        item._name = "";
+        item._label = "";
         item._spanX = 1;
         item._spanY = 1;
         item._items = new ArrayList<>();
@@ -151,7 +154,7 @@ public class Item implements Parcelable {
     @Override
     public boolean equals(Object object) {
         Item itemObject = (Item) object;
-        return object != null && _idValue == itemObject._idValue;
+        return object != null && _id == itemObject._id;
     }
 
     @Override
@@ -161,9 +164,9 @@ public class Item implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(_idValue);
+        out.writeInt(_id);
         out.writeString(_type.toString());
-        out.writeString(_name);
+        out.writeString(_label);
         out.writeInt(_x);
         out.writeInt(_y);
         switch (_type) {
@@ -172,11 +175,11 @@ public class Item implements Parcelable {
                 out.writeString(Tool.getIntentAsString(_intent));
                 break;
             case GROUP:
-                List<String> labels = new ArrayList<>();
-                for (Item i : _items) {
-                    labels.add(Integer.toString(i._idValue));
+                List<String> items = new ArrayList<>();
+                for (Item item : _items) {
+                    items.add(Integer.toString(item._id));
                 }
-                out.writeStringList(labels);
+                out.writeStringList(items);
                 break;
             case ACTION:
                 out.writeInt(_actionValue);
@@ -187,20 +190,20 @@ public class Item implements Parcelable {
                 out.writeInt(_spanY);
                 break;
         }
-        out.writeInt(_locationInLauncher);
+        out.writeInt(_location);
     }
 
     public void reset() {
         Random random = new Random();
-        _idValue = random.nextInt();
+        _id = random.nextInt();
     }
 
     public Integer getId() {
-        return _idValue;
+        return _id;
     }
 
-    public void setItemId(int id) {
-        _idValue = id;
+    public void setId(int id) {
+        _id = id;
     }
 
     public Intent getIntent() {
@@ -208,11 +211,11 @@ public class Item implements Parcelable {
     }
 
     public String getLabel() {
-        return _name;
+        return _label;
     }
 
     public void setLabel(String label) {
-        _name = label;
+        _label = label;
     }
 
     public Type getType() {
@@ -275,8 +278,8 @@ public class Item implements Parcelable {
         _icon = icon;
     }
 
-    public int getLocationInLauncher() {
-        return _locationInLauncher;
+    public int getLocation() {
+        return _location;
     }
 
     public void setIntent(Intent intent) {

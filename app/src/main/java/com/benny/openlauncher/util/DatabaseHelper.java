@@ -248,7 +248,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int y = Integer.parseInt(cursor.getString(4));
         String data = cursor.getString(5);
 
-        item.setItemId(id);
+        item.setId(id);
         item.setLabel(label);
         item.setX(x);
         item.setY(y);

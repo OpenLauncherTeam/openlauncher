@@ -109,10 +109,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return 4;
     }
 
-    public int getSearchLabelLines() {
-        return Integer.MAX_VALUE;
-    }
-
     public int getDesktopBackgroundColor() {
         return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
     }

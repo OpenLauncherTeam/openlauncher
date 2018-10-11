@@ -471,7 +471,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
             HomeActivity._db.deleteItem(item, true);
             return false;
         }
-        item._locationInLauncher = 0;
+        item._location = Item.LOCATION_DESKTOP;
         _pages.get(page).addViewToGrid(itemView, item._x, item._y, item._spanX, item._spanY);
         return true;
     }
@@ -481,7 +481,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         if (positionToLayoutPrams == null) {
             return false;
         }
-        item._locationInLauncher = 0;
+        item._location = Item.LOCATION_DESKTOP;
         item._x = positionToLayoutPrams.getX();
         item._y = positionToLayoutPrams.getY();
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallback) this, Setup.appSettings().getDesktopIconSize());
@@ -493,7 +493,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
     }
 
     public boolean addItemToCell(@NonNull Item item, int x, int y) {
-        item._locationInLauncher = 0;
+        item._location = Item.LOCATION_DESKTOP;
         item._x = x;
         item._y = y;
         View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this, Setup.appSettings().getDesktopIconSize());

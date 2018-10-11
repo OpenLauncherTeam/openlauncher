@@ -366,12 +366,12 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public final void onRemoveItem(@NonNull Item item) {
         Desktop desktop = getDesktop();
         View coordinateToChildView;
-        switch (item._locationInLauncher) {
-            case 0:
+        switch (item._location) {
+            case Item.LOCATION_DESKTOP:
                 coordinateToChildView = desktop.getCurrentPage().coordinateToChildView(new Point(item._x, item._y));
                 desktop.removeItem(coordinateToChildView, true);
                 break;
-            case 1:
+            case Item.LOCATION_DOCK:
                 Dock dock = getDock();
                 coordinateToChildView = dock.coordinateToChildView(new Point(item._x, item._y));
                 dock.removeItem(coordinateToChildView, true);

@@ -28,7 +28,7 @@ public class HpAppEditApplier implements DialogListener.OnEditDialogListener {
         Setup.dataManager().saveItem(_item);
         Point point = new Point(_item._x, _item._y);
 
-        switch (_item._locationInLauncher) {
+        switch (_item._location) {
             case Item.LOCATION_DESKTOP: {
                 Desktop desktop = _homeActivity.getDesktop();
                 desktop.removeItem(desktop.getCurrentPage().coordinateToChildView(point), false);

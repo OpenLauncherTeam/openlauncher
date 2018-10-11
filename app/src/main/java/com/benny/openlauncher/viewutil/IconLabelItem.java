@@ -2,65 +2,53 @@ package com.benny.openlauncher.viewutil;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.Tool;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
 
 public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> {
+    private int _width = Integer.MAX_VALUE;
 
     public Drawable _icon;
-    public String _label;
-
-    /**
-     * Extra string for filtering/search purpose.
-     * Ex. root-locale app name (label) and Search Bar.
-     */
-    @Nullable public String _searchInfo;
-
-    private View.OnLongClickListener _onLongClickListener;
-    private View.OnClickListener _onClickListener;
-
-    private Typeface _typeface;
     private int _iconSize = Integer.MAX_VALUE;
     private int _iconGravity;
     private int _iconPadding;
-    private boolean _matchParent = true;
-    private int _width = -1;
-    private boolean _bold = false;
-    private int _textMaxLines = 1;
-    private int _textColor = Integer.MAX_VALUE;
-    private int _textGravity = Gravity.CENTER_VERTICAL;
 
-    public IconLabelItem(Context context, int label) {
-        _label = context.getString(label);
-    }
+    public String _label;
+    private int _textGravity = Gravity.CENTER_VERTICAL;
+    private int _textColor = Integer.MAX_VALUE;
+
+    private View.OnClickListener _onClickListener;
+    private View.OnLongClickListener _onLongClickListener;
 
     public IconLabelItem(Context context, int icon, int label) {
         _label = context.getString(label);
         _icon = context.getResources().getDrawable(icon);
     }
 
-    public IconLabelItem(Context context, Drawable icon, String label) {
+    public IconLabelItem(Drawable icon, String label) {
         _label = label;
         _icon = icon;
     }
 
-    public IconLabelItem withSearchInfo(String searchInfo) {
-        _searchInfo = searchInfo;
+    public IconLabelItem withWidth(int width) {
+        _width = width;
+        return this;
+    }
+
+    public IconLabelItem withIconSize(Context context, int iconSize) {
+        _iconSize = Tool.dp2px(iconSize, context);
         return this;
     }
 
@@ -74,21 +62,6 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
-    public IconLabelItem withIconSize(Context context, int iconSize) {
-        _iconSize = Tool.dp2px(iconSize, context);
-        return this;
-    }
-
-    public IconLabelItem withBold(boolean bold) {
-        _bold = bold;
-        return this;
-    }
-
-    public IconLabelItem withTypeface(Typeface typeface) {
-        _typeface = typeface;
-        return this;
-    }
-
     public IconLabelItem withTextGravity(int textGravity) {
         _textGravity = textGravity;
         return this;
@@ -99,27 +72,12 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
-    public IconLabelItem withTextMaxLines(int textMaxLines) {
-        _textMaxLines = textMaxLines;
-        return this;
-    }
-
-    public IconLabelItem withMatchParent(boolean matchParent) {
-        _matchParent = matchParent;
-        return this;
-    }
-
-    public IconLabelItem withWidth(int width) {
-        _width = width;
-        return this;
-    }
-
-    public IconLabelItem withOnClickListener(@Nullable View.OnClickListener listener) {
+    public IconLabelItem withOnClickListener(View.OnClickListener listener) {
         _onClickListener = listener;
         return this;
     }
 
-    public IconLabelItem withOnLongClickListener(@Nullable View.OnLongClickListener onLongClickListener) {
+    public IconLabelItem withOnLongClickListener(View.OnLongClickListener onLongClickListener) {
         _onLongClickListener = onLongClickListener;
         return this;
     }
@@ -141,20 +99,24 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     @Override
     public void bindView(IconLabelItem.ViewHolder holder, List payloads) {
-        if (_matchParent)
+        if (_width == Integer.MAX_VALUE) {
             holder.itemView.getLayoutParams().width = RecyclerView.LayoutParams.MATCH_PARENT;
-        if (_width != -1)
+        } else {
             holder.itemView.getLayoutParams().width = _width;
-        holder.textView.setMaxLines(_textMaxLines);
-        if (_label != null)
-            holder.textView.setText(_label);
-        holder.textView.setGravity(_textGravity);
-        holder.textView.setTypeface(_typeface);
-        if (_textColor != Integer.MAX_VALUE)
-            holder.textView.setTextColor(_textColor);
-        if (_bold)
-            holder.textView.setTypeface(Typeface.DEFAULT_BOLD);
+        }
 
+        // only run all this code if a label was passed
+        if (_label != null) {
+            holder.textView.setText(_label);
+            holder.textView.setGravity(_textGravity);
+            holder.textView.setMaxLines(1);
+            holder.textView.setEllipsize(TextUtils.TruncateAt.END);
+            // no default text color since it will be set by the theme
+            if (_textColor != Integer.MAX_VALUE)
+                holder.textView.setTextColor(_textColor);
+        }
+
+        // icon specific padding
         holder.textView.setCompoundDrawablePadding(_iconPadding);
         if (_iconSize != Integer.MAX_VALUE)
             _icon = new BitmapDrawable(Setup.appContext().getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(_icon), _iconSize, _iconSize, true));
@@ -172,18 +134,13 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
                 holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, _icon);
                 break;
         }
+
+        // most items will not use a long click
         if (_onClickListener != null)
             holder.itemView.setOnClickListener(_onClickListener);
         if (_onLongClickListener != null)
             holder.itemView.setOnLongClickListener(_onLongClickListener);
         super.bindView(holder, payloads);
-    }
-
-    @Override
-    public void unbindView(@NonNull ViewHolder holder) {
-        super.unbindView(holder);
-        holder.textView.setText("");
-        holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -196,7 +153,12 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         }
     }
 
-    public void setIcon(Drawable icon) {
-        _icon = icon;
+    // only used for search bar
+    public void setIconGravity(int iconGravity) {
+        _iconGravity = iconGravity;
+    }
+
+    public void setTextGravity(int textGravity) {
+        _textGravity = textGravity;
     }
 }

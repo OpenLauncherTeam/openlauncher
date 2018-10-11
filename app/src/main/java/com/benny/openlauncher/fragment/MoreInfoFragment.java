@@ -55,7 +55,6 @@ public class MoreInfoFragment extends GsPreferenceFragmentCompat<AppSettings> {
     }
 
     @Override
-    @SuppressWarnings({"ConstantConditions", "ConstantIfStatement", "StatementWithEmptyBody"})
     public Boolean onPreferenceClicked(Preference preference) {
         ActivityUtils au = new ActivityUtils(getActivity());
         if (isAdded() && preference.hasKey()) {
@@ -72,7 +71,6 @@ public class MoreInfoFragment extends GsPreferenceFragmentCompat<AppSettings> {
                     au.showGooglePlayEntryForThisApp();
                     return true;
                 }
-
                 case R.string.pref_key__more_info__join_community: {
                     _cu.openWebpageInExternalBrowser(getString(R.string.app_community_url));
                     return true;

@@ -122,7 +122,7 @@ public class AppManager {
 
         for (int i = 0; i < resolveInfos.size(); i++) {
             final int mI = i;
-            fastItemAdapter.add(new IconLabelItem(activity, resolveInfos.get(i).loadIcon(_packageManager), resolveInfos.get(i).loadLabel(_packageManager).toString())
+            fastItemAdapter.add(new IconLabelItem(resolveInfos.get(i).loadIcon(_packageManager), resolveInfos.get(i).loadLabel(_packageManager).toString())
                     .withIconPadding(_context, 16)
                     .withIconSize(_context, 50)
                     .withIconGravity(Gravity.START)

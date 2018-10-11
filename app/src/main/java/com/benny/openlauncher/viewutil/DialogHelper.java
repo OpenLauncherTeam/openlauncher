@@ -82,7 +82,7 @@ public class DialogHelper {
         List<IconLabelItem> items = new ArrayList<>();
         final List<App> apps = AppManager.getInstance(context).getApps();
         for (int i = 0; i < apps.size(); i++) {
-            items.add(new IconLabelItem(context, apps.get(i).getIcon(), apps.get(i).getLabel())
+            items.add(new IconLabelItem(apps.get(i).getIcon(), apps.get(i).getLabel())
                     .withIconSize(context, 50)
                     .withIconGravity(Gravity.START)
                     .withIconPadding(context, 8));
