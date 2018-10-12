@@ -242,7 +242,7 @@
     <string name="minibar_title__lock_screen">Bloca s\'ischermu</string>
     <string name="minibar_title__device_settings">Impostatziones de su dispositivu</string>
     <string name="minibar_title__launcher_settings">Launcher Settings</string>
-    <string name="minibar_title__volume">Diàlogu de su volume</string>
+    <string name="minibar_title__volume_dialog">Diàlogu de su volume</string>
     <string name="minibar_title__app_drawer">Aberi su menù de sas aplicatziones</string>
     <string name="launch">Aberi un\'aplicatzione</string>
     <string name="app_drawer">Menù de sas aplicatziones</string>

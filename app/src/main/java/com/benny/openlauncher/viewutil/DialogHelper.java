@@ -45,11 +45,11 @@ public class DialogHelper {
                 .show();
     }
 
-    public static void alertDialog(Context context, String title, String msg, String positive, MaterialDialog.SingleButtonCallback onPositive) {
+    public static void alertDialog(Context context, String title, String message, String positive, MaterialDialog.SingleButtonCallback onPositive) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(title)
                 .onPositive(onPositive)
-                .content(msg)
+                .content(message)
                 .negativeText(R.string.cancel)
                 .positiveText(positive)
                 .show();
@@ -67,6 +67,14 @@ public class DialogHelper {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(R.string.desktop_action)
                 .items(R.array.entries__desktop_actions)
+                .itemsCallback(callback)
+                .show();
+    }
+
+    public static void selectGestureDialog(final Context context, String title, MaterialDialog.ListCallback callback) {
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        builder.title(title)
+                .items(R.array.entries__gestures)
                 .itemsCallback(callback)
                 .show();
     }
@@ -108,7 +116,7 @@ public class DialogHelper {
                 Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
                 context.startActivity(uninstallIntent);
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
     }

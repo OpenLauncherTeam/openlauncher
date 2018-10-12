@@ -233,28 +233,6 @@ public class SettingsActivity extends ThemeActivity {
                     launcher.updateDock(true, 0);
                     break;
                 }
-                case R.string.pref_key__gesture_double_tap:
-                case R.string.pref_key__gesture_swipe_up:
-                case R.string.pref_key__gesture_swipe_down:
-                case R.string.pref_key__gesture_pinch:
-                case R.string.pref_key__gesture_unpinch: {
-                    if (prefs.getString(key, "0").equals("1")) {
-                        DialogHelper.selectActionDialog(getContext(), new MaterialDialog.ListCallback() {
-                            @Override
-                            public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                                AppSettings.get().setString(key, "1" + position);
-                            }
-                        });
-                    } else if (prefs.getString(key, "0").equals("2")) {
-                        DialogHelper.selectAppDialog(getContext(), new DialogHelper.OnAppSelectedListener() {
-                            @Override
-                            public void onAppSelected(App app) {
-                                AppSettings.get().setString(key, "2" + Tool.getIntentAsString(Tool.getIntentFromApp(app)));
-                            }
-                        });
-                    }
-                    break;
-                }
             }
             if (requiresRestart(keyRes)) {
                 _as.setAppRestartRequired(true);
@@ -268,21 +246,46 @@ public class SettingsActivity extends ThemeActivity {
             HomeActivity launcher = HomeActivity.Companion.getLauncher();
 
             switch (key) {
-                case R.string.pref_key__minibar: {
+                case R.string.pref_key__minibar:
                     LauncherAction.RunAction(LauncherAction.Action.EditMinibar, getActivity());
                     return true;
-                }
-                case R.string.pref_key__hidden_apps: {
+                case R.string.pref_key__hidden_apps:
                     Intent intent = new Intent(getActivity(), HideAppsActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                     return true;
-                }
-                case R.string.pref_key__icon_pack: {
+                case R.string.pref_key__icon_pack:
                     AppManager.getInstance(getActivity()).startPickIconPackIntent(getActivity());
                     return true;
-                }
-                case R.string.pref_key__clear_database: {
+                case R.string.pref_key__gesture_double_tap:
+                case R.string.pref_key__gesture_swipe_up:
+                case R.string.pref_key__gesture_swipe_down:
+                case R.string.pref_key__gesture_pinch:
+                case R.string.pref_key__gesture_unpinch:
+                    DialogHelper.selectGestureDialog(getContext(), preference.getTitle().toString(), new MaterialDialog.ListCallback() {
+                        @Override
+                        public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                            if (position == 1) {
+                                DialogHelper.selectActionDialog(getContext(), new MaterialDialog.ListCallback() {
+                                    @Override
+                                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                                        AppSettings.get().setString(key, "1" + position);
+                                    }
+                                });
+                            } else if (position == 2) {
+                                DialogHelper.selectAppDialog(getContext(), new DialogHelper.OnAppSelectedListener() {
+                                    @Override
+                                    public void onAppSelected(App app) {
+                                        AppSettings.get().setString(key, "2" + Tool.getIntentAsString(Tool.getIntentFromApp(app)));
+                                    }
+                                });
+                            } else {
+                                AppSettings.get().setString(key, "0");
+                            }
+                        }
+                    });
+                    break;
+                case R.string.pref_key__clear_database:
                     DialogHelper.alertDialog(getContext(), getString(R.string.clear_user_data), getString(R.string.clear_user_data_are_you_sure), new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -295,8 +298,7 @@ public class SettingsActivity extends ThemeActivity {
                         }
                     });
                     return true;
-                }
-                case R.string.pref_key__backup: {
+                case R.string.pref_key__backup:
                     if (new PermissionChecker(getActivity()).doIfExtStoragePermissionGranted()) {
                         Intent i = new Intent(getActivity(), FilePickerActivity.class)
                             .putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, true)
@@ -304,8 +306,7 @@ public class SettingsActivity extends ThemeActivity {
                         getActivity().startActivityForResult(i, Definitions.INTENT_BACKUP);
                     }
                     return true;
-                }
-                case R.string.pref_key__restore: {
+                case R.string.pref_key__restore:
                     if (new PermissionChecker(getActivity()).doIfExtStoragePermissionGranted()) {
                         Intent i = new Intent(getActivity(), FilePickerActivity.class)
                             .putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false)
@@ -313,16 +314,13 @@ public class SettingsActivity extends ThemeActivity {
                         getActivity().startActivityForResult(i, Definitions.INTENT_RESTORE);
                     }
                     return true;
-                }
-                case R.string.pref_key__restart: {
+                case R.string.pref_key__restart:
                     launcher.recreate();
                     getActivity().finish();
                     return true;
-                }
-                case R.string.pref_key__about: {
+                case R.string.pref_key__about:
                     startActivity(new Intent(getActivity(), MoreInfoActivity.class));
                     return true;
-                }
             }
 
             if (preference instanceof ColorPreferenceCompat) {

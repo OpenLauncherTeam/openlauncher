@@ -25,7 +25,7 @@
     <string name="minibar_summary__device_settings">Shortcut to device settings.</string>
     <string name="minibar_title__launcher_settings">Launcher Settings</string>
     <string name="minibar_summary__launcher_settings">Shortcut to OpenLauncher settings.</string>
-    <string name="minibar_title__volume">Volume Dialog</string>
+    <string name="minibar_title__volume_dialog">Volume Dialog</string>
     <string name="minibar_summary__volume">Display all available volume sliders.</string>
     <string name="minibar_title__app_drawer">Open App Drawer</string>
     <string name="minibar_summary__app_drawer">Open the app drawer.</string>

@@ -12,7 +12,7 @@
         <item>@string/minibar_title__set_wallpaper</item>
         <item>@string/minibar_title__lock_screen</item>
         <item>@string/minibar_title__launcher_settings</item>
-        <item>@string/minibar_title__volume</item>
+        <item>@string/minibar_title__volume_dialog</item>
         <item>@string/minibar_title__device_settings</item>
         <item>@string/minibar_title__app_drawer</item>
         <item>@string/minibar_title__search_bar</item>
@@ -49,12 +49,6 @@
     <string-array name="values__zero_to_one" translatable="false">
         <item>0</item>
         <item>1</item>
-    </string-array>
-
-    <string-array name="values__zero_to_two" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
     </string-array>
 
     <string-array name="values__zero_to_four" translatable="false">

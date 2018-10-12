@@ -278,7 +278,7 @@
     <string name="minibar_title__lock_screen">Lock Screen</string>
     <string name="minibar_title__device_settings">Geräte-Einstellungen</string>
     <string name="minibar_title__launcher_settings">Launcher-Einstellungen</string>
-    <string name="minibar_title__volume">Lautstärke-Dialog</string>
+    <string name="minibar_title__volume_dialog">Lautstärke-Dialog</string>
     <string name="minibar_title__app_drawer">App Drawer öffnen</string>
     <string name="launch">App starten</string>
     <string name="app_drawer">App Drawer</string>

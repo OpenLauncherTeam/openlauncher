@@ -240,7 +240,7 @@
     <string name="minibar_title__lock_screen">Zamknúť obrazovku</string>
     <string name="minibar_title__device_settings">Nastavenie zariadenia</string>
     <string name="minibar_title__launcher_settings">Nastavenia spúštača</string>
-    <string name="minibar_title__volume">Nastavenia zvuku</string>
+    <string name="minibar_title__volume_dialog">Nastavenia zvuku</string>
     <string name="minibar_title__app_drawer">Otvoriť zoznam aplikácií.</string>
     <string name="launch">Spustiť aplikáciu</string>
     <string name="app_drawer">Správca aplikácií</string>

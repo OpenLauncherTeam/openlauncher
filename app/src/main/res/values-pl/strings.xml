@@ -240,7 +240,7 @@
     <string name="minibar_title__lock_screen">Zablokuj ekran</string>
     <string name="minibar_title__device_settings">Ustawienia urządzenia</string>
     <string name="minibar_title__launcher_settings">Ustawienia launchera</string>
-    <string name="minibar_title__volume">Okno dialogowe głośności</string>
+    <string name="minibar_title__volume_dialog">Okno dialogowe głośności</string>
     <string name="minibar_title__app_drawer">Otwórz menu aplikacji</string>
     <string name="launch">Uruchom aplikację</string>
     <string name="app_drawer">Menu aplikacji</string>
