@@ -81,7 +81,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public static final int REQUEST_CREATE_APPWIDGET = 0x6475;
     public static final int REQUEST_PERMISSION_STORAGE = 0x3648;
     public static final int REQUEST_PICK_APPWIDGET = 0x2678;
-    public static final int REQUEST_RESTART_APP = 0x9387;
     public static WidgetHost _appWidgetHost;
     public static AppWidgetManager _appWidgetManager;
     public static boolean _consumeNextResume;
@@ -626,13 +625,13 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == -1) {
+        if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_PICK_APPWIDGET) {
                 configureWidget(data);
             } else if (requestCode == REQUEST_CREATE_APPWIDGET) {
                 createWidget(data);
             }
-        } else if (resultCode == 0 && data != null) {
+        } else if (resultCode == RESULT_CANCELED && data != null) {
             int appWidgetId = data.getIntExtra("appWidgetId", -1);
             if (appWidgetId != -1) {
                 _appWidgetHost.deleteAppWidgetId(appWidgetId);
@@ -656,10 +655,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         AppSettings appSettings = Setup.appSettings();
         if (appSettings.getAppRestartRequired()) {
             appSettings.setAppRestartRequired(false);
-            Intent intent = new Intent(this, HomeActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, REQUEST_RESTART_APP, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            manager.set(AlarmManager.RTC, System.currentTimeMillis() + 100, pendingIntent);
+            this.recreate();
             return;
         }
 

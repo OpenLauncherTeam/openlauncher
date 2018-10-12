@@ -52,14 +52,6 @@ import static com.benny.openlauncher.widget.AppDrawerController.DrawerMode.HORIZ
 import static com.benny.openlauncher.widget.AppDrawerController.DrawerMode.VERTICAL;
 
 public class SettingsActivity extends ThemeActivity {
-    static class RESULT {
-        static final int NOCHANGE = -1;
-        static final int CHANGED = 1;
-        static final int RESTART_REQ = 2;
-    }
-
-    public static int activityRetVal = RESULT.NOCHANGE;
-
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
@@ -104,12 +96,6 @@ public class SettingsActivity extends ThemeActivity {
     }
 
     @Override
-    protected void onStop() {
-        setResult(activityRetVal);
-        super.onStop();
-    }
-
-    @Override
     public void onBackPressed() {
         GsPreferenceFragmentCompat prefFrag = (GsPreferenceFragmentCompat) getSupportFragmentManager().findFragmentByTag(SettingsFragmentMaster.TAG);
         if (prefFrag != null && prefFrag.canGoBack()) {
@@ -145,11 +131,6 @@ public class SettingsActivity extends ThemeActivity {
                 _as = AppSettings.get();
             }
             return _as;
-        }
-
-        @Override
-        protected void onPreferenceChanged(SharedPreferences prefs, String key) {
-            activityRetVal = RESULT.CHANGED;
         }
 
         @Override
@@ -207,9 +188,7 @@ public class SettingsActivity extends ThemeActivity {
             Preference pref;
             String tmp;
 
-            //
-            // Preference in Master screen
-            //
+            // preferences in master screen
             if ((pref = findPreference(R.string.pref_key__cat_desktop)) != null) {
                 tmp = String.format(Locale.ENGLISH, "%s: %d x %d", getString(R.string.pref_title__size), _as.getDesktopColumnCount(), _as.getDesktopRowCount());
                 pref.setSummary(tmp);
@@ -221,14 +200,12 @@ public class SettingsActivity extends ThemeActivity {
             if ((pref = findPreference(R.string.pref_key__cat_app_drawer)) != null) {
                 tmp = String.format("%s: ", getString(R.string.pref_title__style));
                 switch (_as.getDrawerStyle()) {
-                    case HORIZONTAL_PAGED: {
+                    case HORIZONTAL_PAGED:
                         tmp += getString(R.string.horizontal_paged_drawer);
                         break;
-                    }
-                    case VERTICAL: {
+                    case VERTICAL:
                         tmp += getString(R.string.vertical_scroll_drawer);
                         break;
-                    }
                 }
                 pref.setSummary(tmp);
             }
@@ -280,7 +257,6 @@ public class SettingsActivity extends ThemeActivity {
                 }
             }
             if (requiresRestart(keyRes)) {
-                activityRetVal = RESULT.RESTART_REQ;
                 _as.setAppRestartRequired(true);
             }
         }
@@ -288,10 +264,10 @@ public class SettingsActivity extends ThemeActivity {
         @Override
         @SuppressWarnings({"ConstantConditions", "ConstantIfStatement", "StatementWithEmptyBody"})
         public Boolean onPreferenceClicked(Preference preference) {
-            int keyRes = _cu.getResId(ContextUtils.ResType.STRING, preference.getKey());
+            int key = _cu.getResId(ContextUtils.ResType.STRING, preference.getKey());
             HomeActivity launcher = HomeActivity.Companion.getLauncher();
 
-            switch (keyRes) {
+            switch (key) {
                 case R.string.pref_key__minibar: {
                     LauncherAction.RunAction(LauncherAction.Action.EditMinibar, getActivity());
                     return true;
@@ -339,9 +315,7 @@ public class SettingsActivity extends ThemeActivity {
                     return true;
                 }
                 case R.string.pref_key__restart: {
-                    if (launcher != null) {
-                        launcher.recreate();
-                    }
+                    launcher.recreate();
                     getActivity().finish();
                     return true;
                 }
