@@ -5,20 +5,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.fragment.MoreInfoFragment;
+import com.benny.openlauncher.fragment.SettingsAboutFragment;
 
 public class MoreInfoActivity extends ThemeActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        MoreInfoFragment moreInfoFragment = MoreInfoFragment.newInstance();
-        transaction.replace(R.id.more__fragment__placeholder_fragment, moreInfoFragment, MoreInfoFragment.TAG).commit();
+        SettingsAboutFragment settingsAboutFragment = SettingsAboutFragment.newInstance();
+        transaction.replace(R.id.fragment_holder, settingsAboutFragment, SettingsAboutFragment.TAG).commit();
     }
 }

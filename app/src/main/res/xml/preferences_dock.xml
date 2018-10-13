@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:title="@string/pref_title__dock">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="@string/pref_key__dock_enable"
+        android:title="Enable dock" />
+
+    <PreferenceCategory android:title="@string/pref_title__size">
+
+        <SeekBarPreference
+            android:defaultValue="5"
+            android:key="@string/pref_key__dock_size"
+            android:max="20"
+            android:summary="@string/pref_summary__dock_size"
+            android:title="@string/pref_title__dock_size"
+            app:min="2" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_title__appearance">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__dock_show_label"
+            android:summary="@string/pref_summary__dock_show_label"
+            android:title="@string/pref_title__dock_show_label" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_title__color">
+
+        <com.benny.openlauncher.preference.ColorPreferenceCompat
+            android:defaultValue="@color/transparent"
+            android:key="@string/pref_key__dock_background_color"
+            android:title="@string/pref_title__dock_background_color"
+            app:cpv_dialogTitle="@string/pref_title__dock_background_color"
+            app:cpv_showAlphaSlider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

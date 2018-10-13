@@ -45,7 +45,6 @@
         app:layout_constraintRight_toLeftOf="@+id/cb"
         app:layout_constraintTop_toBottomOf="@+id/tv"/>
 
-
     <CheckBox
         android:id="@+id/cb"
         android:layout_width="0dp"

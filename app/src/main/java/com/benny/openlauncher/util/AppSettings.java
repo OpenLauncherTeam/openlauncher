@@ -2,7 +2,6 @@ package com.benny.openlauncher.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
@@ -10,14 +9,12 @@ import com.benny.openlauncher.AppObject;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.widget.AppDrawerController;
-import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.PagerIndicator;
 
 import net.gsantner.opoc.preference.SharedPreferencesPropertyBackend;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 
 public class AppSettings extends SharedPreferencesPropertyBackend {
