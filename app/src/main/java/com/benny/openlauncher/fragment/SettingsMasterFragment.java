@@ -1,10 +1,16 @@
 package com.benny.openlauncher.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceManager;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.activity.MoreInfoActivity;
 import com.benny.openlauncher.util.AppSettings;
+
+import net.gsantner.opoc.util.ContextUtils;
 
 import java.util.Locale;
 
@@ -38,5 +44,17 @@ public class SettingsMasterFragment extends SettingsBaseFragment {
                 categoryAppDrawer.setSummary(String.format("%s: %s", getString(R.string.pref_title__style), getString(R.string.vertical_scroll_drawer)));
                 break;
         }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        super.onPreferenceTreeClick(preference);
+        HomeActivity homeActivity = HomeActivity._launcher;
+        int key = new ContextUtils(homeActivity).getResId(ContextUtils.ResType.STRING, preference.getKey());
+        if (key == R.string.pref_key__about) {
+            startActivity(new Intent(getActivity(), MoreInfoActivity.class));
+            return true;
+        }
+        return false;
     }
 }
