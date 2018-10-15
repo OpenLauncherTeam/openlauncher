@@ -34,23 +34,23 @@ public class OnBoardActivity extends MaterialIntroActivity {
         addSlide(new OnBoardActivity.CustomSlide());
 
         addSlide(new SlideFragmentBuilder()
-                .backgroundColor(R.color.op_red)
-                .buttonsColor(R.color.intro_button_color)
+                .backgroundColor(R.color.materialRed)
+                .buttonsColor(R.color.introButton)
                 .image(R.drawable.intro_2)
                 .description(getString(R.string.intro2_text))
                 .build());
 
         addSlide(new SlideFragmentBuilder()
-                .backgroundColor(R.color.op_green)
-                .buttonsColor(R.color.intro_button_color)
+                .backgroundColor(R.color.materialGreen)
+                .buttonsColor(R.color.introButton)
                 .image(R.drawable.intro_3)
                 .title(getString(R.string.intro3_title))
                 .description(getString(R.string.intro3_text))
                 .build());
 
         addSlide(new SlideFragmentBuilder()
-                .backgroundColor(R.color.op_blue)
-                .buttonsColor(R.color.intro_button_color)
+                .backgroundColor(R.color.materialBlue)
+                .buttonsColor(R.color.introButton)
                 .image(R.drawable.intro_4)
                 .description(getString(R.string.intro_finish))
                 .build());
@@ -88,12 +88,12 @@ public class OnBoardActivity extends MaterialIntroActivity {
 
         @Override
         public int backgroundColor() {
-            return R.color.op_blue;
+            return R.color.materialBlue;
         }
 
         @Override
         public int buttonsColor() {
-            return R.color.intro_button_color;
+            return R.color.introButton;
         }
     }
 }

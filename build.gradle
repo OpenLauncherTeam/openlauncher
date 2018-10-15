@@ -11,12 +11,11 @@
 import java.text.SimpleDateFormat
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     ext.version_setup_compileSdk = 27
     ext.version_setup_minSdk = 17
     ext.version_setup_targetSdk = ext.version_setup_compileSdk
-    ext.version_setup_buildTools = "27.0.3" // Specifying optional
+    ext.version_setup_buildTools = "27.0.3"
 
     // https://developer.android.com/studio/releases/gradle-plugin.html
     ext.version_gradle_tools = "3.1.0"
@@ -26,9 +25,6 @@ buildscript {
     ext.version_library_butterknife = "8.8.1"
     // https://github.com/guardianproject/NetCipher/releases
     ext.version_library_netcipher = "2.0.0-alpha1"
-    // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin#LookAtCentral
-    ext.version_plugin_kotlin = "1.2.21"
-    ext.enable_plugin_kotlin = false
 
     repositories {
         google()
@@ -37,9 +33,6 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$version_gradle_tools"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-        if (project.enable_plugin_kotlin) {
-            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_plugin_kotlin"
-        }
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -70,7 +63,6 @@ task copyRepoFiles(type: Copy) {
     rename { String fileName -> fileName.replace(fileName, fileName.toLowerCase()) }
 }
 
-
 @SuppressWarnings(["UnnecessaryQualifiedReference", "SpellCheckingInspection", "GroovyUnusedDeclaration"])
 // Returns used android languages as a buildConfig array: {'de', 'it', ..}"
 static String findUsedAndroidLocales() {
@@ -100,6 +92,7 @@ ext.getGitHash = { ->
         return 'unknown'
     }
 }
+
 @SuppressWarnings(["UnnecessaryQualifiedReference", "SpellCheckingInspection", "GroovyUnusedDeclaration"])
 // Returns the build date in a RFC3339 compatible format. TZ is always converted to UTC
 static String getBuildDate() {

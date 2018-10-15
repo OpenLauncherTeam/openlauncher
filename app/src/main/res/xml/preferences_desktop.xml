@@ -105,44 +105,44 @@
 
     <PreferenceCategory android:title="@string/pref_title__color">
 
-        <com.benny.openlauncher.preference.ColorPreferenceCompat
+        <com.flask.colorpicker.ColorPickerPreference
             android:defaultValue="@color/transparent"
             android:key="@string/pref_key__desktop_background_color"
             android:title="@string/pref_title__desktop_background_color"
-            app:cpv_dialogTitle="@string/pref_title__desktop_background_color"
-            app:cpv_showAlphaSlider="true" />
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
 
-        <com.benny.openlauncher.preference.ColorPreferenceCompat
+        <com.flask.colorpicker.ColorPickerPreference
             android:defaultValue="@color/white"
             android:key="@string/pref_key__desktop_folder_color"
             android:title="@string/pref_title__desktop_folder_color"
-            app:cpv_dialogTitle="@string/pref_title__desktop_folder_color"
-            app:cpv_showAlphaSlider="true" />
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
 
-        <com.benny.openlauncher.preference.ColorPreferenceCompat
+        <com.flask.colorpicker.ColorPickerPreference
             android:defaultValue="@color/black"
             android:key="@string/pref_key__desktop_folder_label_color"
             android:title="@string/pref_title__desktop_folder_color_text"
-            app:cpv_dialogTitle="@string/pref_title__desktop_folder_color_text"
-            app:cpv_showAlphaSlider="true" />
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
 
-        <com.benny.openlauncher.preference.ColorPreferenceCompat
+        <com.flask.colorpicker.ColorPickerPreference
             android:defaultValue="@color/colorPrimaryDark"
             android:key="@string/pref_key__minibar_background_color"
             android:title="@string/pref_title__minibar_background_color"
-            app:cpv_dialogTitle="@string/pref_title__minibar_background_color"
-            app:cpv_showAlphaSlider="true" />
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title__date_bar">
 
-        <com.benny.openlauncher.preference.ColorPreferenceCompat
+        <com.flask.colorpicker.ColorPickerPreference
             android:defaultValue="@color/white"
             android:key="@string/pref_key__date_bar_date_text_color"
             android:title="@string/pref_title__date_bar_text_color"
-            app:cpv_dialogTitle="@string/pref_title__date_bar_text_color"
-            app:cpv_showAlphaSlider="true" />
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
 
         <ListPreference
             android:defaultValue="1"

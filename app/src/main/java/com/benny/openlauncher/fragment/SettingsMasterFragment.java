@@ -2,8 +2,8 @@ package com.benny.openlauncher.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceManager;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
@@ -19,7 +19,8 @@ import static com.benny.openlauncher.widget.AppDrawerController.DrawerMode.VERTI
 
 public class SettingsMasterFragment extends SettingsBaseFragment {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences_master);
     }
 
@@ -47,8 +48,8 @@ public class SettingsMasterFragment extends SettingsBaseFragment {
     }
 
     @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        super.onPreferenceTreeClick(preference);
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        super.onPreferenceTreeClick(preferenceScreen, preference);
         HomeActivity homeActivity = HomeActivity._launcher;
         int key = new ContextUtils(homeActivity).getResId(ContextUtils.ResType.STRING, preference.getKey());
         if (key == R.string.pref_key__about) {

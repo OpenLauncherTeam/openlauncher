@@ -1,9 +1,4 @@
 apply plugin: 'com.android.application'
-if (enable_plugin_kotlin) {
-    apply plugin: 'kotlin-android'
-    apply plugin: 'kotlin-android-extensions'
-    apply plugin: 'kotlin-kapt'
-}
 
 android {
     compileSdkVersion version_setup_compileSdk
@@ -56,12 +51,6 @@ android {
             versionCode = Integer.parseInt(new Date().format('yyMMdd'))
             versionName = new Date().format('yyMMdd')
             applicationId "io.github.openlauncherteam.openlauncher.test"
-        }
-    }
-
-    sourceSets {
-        if (enable_plugin_kotlin) {
-            main.java.srcDirs += 'src/main/kotlin'
         }
     }
 
@@ -122,9 +111,9 @@ dependencies {
     implementation 'agency.tango.android:material-intro-screen:0.0.5'
     implementation 'cat.ereza:customactivityoncrash:2.2.0'
     implementation 'de.psdev.licensesdialog:licensesdialog:1.8.3'
-    implementation 'com.jaredrummler:colorpicker:1.0.1'
     implementation 'in.championswimmer:SimpleFingerGestures_Android_Library:1.2'
     implementation 'com.nononsenseapps:filepicker:4.2.1'
+    implementation 'com.github.QuadFlask:colorpicker:0.0.13'
 
     implementation ('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
         transitive = true
@@ -134,24 +123,16 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-
     // Tools
     implementation "com.jakewharton:butterknife:${version_library_butterknife}"
-    if (enable_plugin_kotlin) {
-        implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$version_plugin_kotlin"
-    }
 
     // Processors
     def anpros = ["com.jakewharton:butterknife-compiler:${version_library_butterknife}"]
     for (anpro in anpros) {
-        if (enable_plugin_kotlin) {
-            kapt anpro
-        } else {
-            annotationProcessor anpro
-        }
+        annotationProcessor anpro
     }
-
 }
+
 repositories {
     mavenCentral()
 }

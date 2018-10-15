@@ -50,7 +50,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/app_name"
                     android:textAppearance="@style/TextAppearance.AppCompat"
-                    android:textColor="@color/darkGrey"
+                    android:textColor="@color/introText"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="4dp"
                     android:text="@string/truly_launcher"
-                    android:textColor="@color/darkGrey"
+                    android:textColor="@color/introText"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -95,7 +95,7 @@
                 android:paddingRight="8dp"
                 android:paddingTop="4dp"
                 android:text="@string/intro4_community"
-                android:textColor="@color/darkGrey"
+                android:textColor="@color/introText"
                 android:textSize="14sp" />
 
             <TextView
@@ -111,7 +111,7 @@
                 android:paddingRight="8dp"
                 android:paddingTop="4dp"
                 android:text="@string/intro4_features"
-                android:textColor="@color/darkGrey"
+                android:textColor="@color/introText"
                 android:textSize="14sp" />
 
             <TextView
@@ -127,7 +127,7 @@
                 android:paddingRight="8dp"
                 android:paddingTop="4dp"
                 android:text="@string/intro4_customizable"
-                android:textColor="@color/darkGrey"
+                android:textColor="@color/introText"
                 android:textSize="14sp" />
 
         </LinearLayout>

@@ -1,7 +1,8 @@
 package com.benny.openlauncher.fragment;
 
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -16,12 +17,13 @@ import net.gsantner.opoc.util.ContextUtils;
 
 public class SettingsGesturesFragment extends SettingsBaseFragment {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences_gestures);
     }
 
     @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         HomeActivity homeActivity = HomeActivity._launcher;
         int key = new ContextUtils(homeActivity).getResId(ContextUtils.ResType.STRING, preference.getKey());
         switch (key) {

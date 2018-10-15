@@ -179,7 +179,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getDrawerCardColor() {
-        return getInt(R.string.pref_key__drawer_card_color, rcolor(R.color.drawer_background_transparentish));
+        return getInt(R.string.pref_key__drawer_card_color, rcolor(R.color.darkTransparent));
     }
 
     public int getDrawerLabelColor() {
@@ -187,7 +187,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getDrawerFastScrollColor() {
-        return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.appContext(), R.color.op_red));
+        return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.appContext(), R.color.materialRed));
     }
 
     public int getVerticalDrawerHorizontalMargin() {

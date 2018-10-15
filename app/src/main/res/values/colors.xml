@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <color name="colorPrimary">#5c6bc0</color>
     <color name="colorPrimaryDark">#4254b3</color>
     <color name="colorAccent">#5c6bc0</color>
@@ -15,15 +14,13 @@
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="darkTransparent">#B0000000</color>
     <color name="transparent">#00000000</color>
-    <color name="darkGrey">#ff444444</color>
 
-    <color name="op_green">#b4c64a</color>
-    <color name="op_blue">#1892cc</color>
-    <color name="op_red">#d6552e</color>
+    <color name="materialRed">#d6552e</color>
+    <color name="materialGreen">#b4c64a</color>
+    <color name="materialBlue">#1892cc</color>
 
-    <color name="drawer_background_transparentish">#B0101010</color>
-
-    <color name="intro_button_color">#7d000000</color>
-
+    <color name="introText">#ff444444</color>
+    <color name="introButton">#7d000000</color>
 </resources>

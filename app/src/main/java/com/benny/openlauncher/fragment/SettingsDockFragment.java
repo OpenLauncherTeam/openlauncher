@@ -6,7 +6,8 @@ import com.benny.openlauncher.R;
 
 public class SettingsDockFragment extends SettingsBaseFragment {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences_dock);
     }
 }

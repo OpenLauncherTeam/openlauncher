@@ -73,33 +73,33 @@
 
     <PreferenceCategory android:title="@string/pref_title__color">
 
-        <com.benny.openlauncher.preference.ColorPreferenceCompat
+        <com.flask.colorpicker.ColorPickerPreference
             android:defaultValue="@color/transparent"
             android:key="@string/pref_key__drawer_background_color"
             android:title="@string/pref_title__drawer_background_color"
-            app:cpv_dialogTitle="@string/pref_title__drawer_background_color"
-            app:cpv_showAlphaSlider="true" />
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
 
-        <com.benny.openlauncher.preference.ColorPreferenceCompat
-            android:defaultValue="@color/drawer_background_transparentish"
+        <com.flask.colorpicker.ColorPickerPreference
+            android:defaultValue="@color/darkTransparent"
             android:key="@string/pref_key__drawer_card_color"
             android:title="@string/pref_title__drawer_card_color"
-            app:cpv_dialogTitle="@string/pref_title__drawer_card_color"
-            app:cpv_showAlphaSlider="true" />
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
 
-        <com.benny.openlauncher.preference.ColorPreferenceCompat
+        <com.flask.colorpicker.ColorPickerPreference
             android:defaultValue="@color/white"
             android:key="@string/pref_key__drawer_label_color"
             android:title="@string/pref_title__drawer_label_color"
-            app:cpv_dialogTitle="@string/pref_title__drawer_label_color"
-            app:cpv_showAlphaSlider="true" />
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
 
-        <com.benny.openlauncher.preference.ColorPreferenceCompat
+        <com.flask.colorpicker.ColorPickerPreference
             android:defaultValue="@color/colorPrimaryDark"
             android:key="@string/pref_key__drawer_fast_scroll_color"
             android:title="@string/pref_title__drawer_fast_scroll_color"
-            app:cpv_dialogTitle="@string/pref_title__drawer_fast_scroll_color"
-            app:cpv_showAlphaSlider="true" />
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
 
     </PreferenceCategory>
 
