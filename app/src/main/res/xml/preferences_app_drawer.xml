@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:sample="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:title="@string/pref_title__app_drawer">
 
     <PreferenceCategory android:title="@string/pref_title__size">
 
-        <SeekBarPreference
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
             android:defaultValue="4"
             android:key="@string/pref_key__drawer_columns"
-            android:max="20"
             android:title="@string/columns"
-            app:min="2" />
+            sample:msbp_minValue="2"
+            sample:msbp_maxValue="20"
+            sample:msbp_dialogEnabled="false" />
 
-        <SeekBarPreference
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
             android:defaultValue="5"
             android:key="@string/pref_key__drawer_rows"
-            android:max="20"
             android:title="@string/rows"
-            app:min="2" />
+            sample:msbp_minValue="2"
+            sample:msbp_maxValue="20"
+            sample:msbp_dialogEnabled="false" />
 
     </PreferenceCategory>
 
@@ -62,12 +65,13 @@
             android:summary="@string/pref_summary__drawer_show_label"
             android:title="@string/pref_title__drawer_show_label" />
 
-        <SeekBarPreference
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
             android:defaultValue="13"
             android:key="@string/pref_key__drawer_label_font_size"
-            android:max="20"
             android:title="@string/pref_title__drawer_label_font_size"
-            app:min="7" />
+            sample:msbp_minValue="7"
+            sample:msbp_maxValue="20"
+            sample:msbp_dialogEnabled="false" />
 
     </PreferenceCategory>
 

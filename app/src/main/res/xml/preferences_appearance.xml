@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:sample="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:title="@string/pref_title__appearance">
@@ -22,13 +23,15 @@
 
     <PreferenceCategory android:title="@string/icons">
 
-        <SeekBarPreference
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
             android:defaultValue="48"
             android:key="@string/pref_key__icon_size"
-            android:max="120"
             android:summary="@string/pref_summary__icon_size"
             android:title="@string/pref_title__icon_size"
-            app:min="20" />
+            sample:msbp_minValue="20"
+            sample:msbp_maxValue="120"
+            sample:msbp_measurementUnit="dp"
+            sample:msbp_dialogEnabled="false" />
 
         <Preference
             android:key="@string/pref_key__icon_pack"
@@ -39,13 +42,15 @@
 
     <PreferenceCategory android:title="@string/pref_title__animations">
 
-        <SeekBarPreference
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
             android:defaultValue="30"
             android:key="@string/pref_key__overall_animation_speed_modifier"
-            android:max="100"
             android:summary="@string/pref_summary__animation_speed_modifier"
             android:title="@string/pref_title__animation_speed_modifier"
-            app:min="1" />
+            sample:msbp_minValue="1"
+            sample:msbp_maxValue="100"
+            sample:msbp_measurementUnit="ms"
+            sample:msbp_dialogEnabled="false" />
 
     </PreferenceCategory>
 

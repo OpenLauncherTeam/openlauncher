@@ -113,6 +113,7 @@ dependencies {
     implementation 'de.psdev.licensesdialog:licensesdialog:1.8.3'
     implementation 'in.championswimmer:SimpleFingerGestures_Android_Library:1.2'
     implementation 'com.nononsenseapps:filepicker:4.2.1'
+    implementation 'com.pavelsikun:material-seekbar-preference:2.3.0+'
 
     implementation ('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
         transitive = true
