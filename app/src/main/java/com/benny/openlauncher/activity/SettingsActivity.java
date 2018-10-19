@@ -1,12 +1,12 @@
 package com.benny.openlauncher.activity;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.widget.Toolbar;
 
 import com.benny.openlauncher.R;
@@ -43,14 +43,14 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         toolbar.setBackgroundColor(_appSettings.getPrimaryColor());
 
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_holder, new SettingsMasterFragment()).commit();
     }
 
     @Override
-    public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference preference) {
+    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference preference) {
         Fragment fragment = Fragment.instantiate(this, preference.getFragment(), preference.getExtras());
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_holder, fragment)
                 .addToBackStack(fragment.getTag())
                 .commit();

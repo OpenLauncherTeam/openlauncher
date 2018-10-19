@@ -2,8 +2,7 @@ package com.benny.openlauncher.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HideAppsActivity;
@@ -13,13 +12,12 @@ import net.gsantner.opoc.util.ContextUtils;
 
 public class SettingsAppDrawerFragment extends SettingsBaseFragment {
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences_app_drawer);
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         HomeActivity homeActivity = HomeActivity._launcher;
         int key = new ContextUtils(homeActivity).getResId(ContextUtils.ResType.STRING, preference.getKey());
         switch (key) {
