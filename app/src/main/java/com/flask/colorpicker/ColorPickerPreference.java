@@ -5,10 +5,9 @@ import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.preference.Preference;
-import android.support.annotation.NonNull;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.flask.colorpicker.builder.ColorPickerClickListener;
@@ -83,8 +82,8 @@ public class ColorPickerPreference extends Preference {
 
 
 	@Override
-	protected void onBindView(@NonNull View view) {
-		super.onBindView(view);
+	public void onBindViewHolder(PreferenceViewHolder view) {
+		super.onBindViewHolder(view);
 
 		int tmpColor = isEnabled()
 				? selectedColor
