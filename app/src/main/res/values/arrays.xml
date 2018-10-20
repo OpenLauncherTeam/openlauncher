@@ -36,6 +36,7 @@
     <string-array name="entries__themes" translatable="false">
         <item>@string/theme_light</item>
         <item>@string/theme_dark</item>
+        <item>@string/theme_black</item>
     </string-array>
 
     <string-array name="entries__date_format" translatable="false">
@@ -49,6 +50,12 @@
     <string-array name="values__zero_to_one" translatable="false">
         <item>0</item>
         <item>1</item>
+    </string-array>
+
+    <string-array name="values__zero_to_two" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="values__zero_to_four" translatable="false">

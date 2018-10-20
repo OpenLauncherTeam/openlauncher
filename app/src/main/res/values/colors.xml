@@ -12,6 +12,8 @@
     <color name="Dark.TextColor">#ffffff</color>
     <color name="Dark.TextColorSecondary">#9e9e9e</color>
 
+    <color name="Black.Background">#000000</color>
+
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="darkTransparent">#B0000000</color>

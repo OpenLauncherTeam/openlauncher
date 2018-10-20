@@ -40,6 +40,18 @@
         <item name="android:textColorSecondary">@color/Dark.TextColorSecondary</item>
     </style>
 
+    <style name="NormalActivity.Black" parent="Theme.AppCompat.NoActionBar">
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowBackground">@color/Black.Background</item>
+        <item name="android:textColorPrimary">@color/Dark.TextColor</item>
+        <item name="android:textColor">@color/Dark.TextColor</item>
+        <item name="android:textColorSecondary">@color/Dark.TextColorSecondary</item>
+    </style>
+
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorControlNormal">@color/white</item>
         <item name="titleTextColor">@color/white</item>

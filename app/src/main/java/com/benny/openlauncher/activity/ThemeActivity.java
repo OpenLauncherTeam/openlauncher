@@ -20,8 +20,10 @@ public abstract class ThemeActivity extends AppCompatActivity {
         _currentTheme = _appSettings.getTheme();
         if (_appSettings.getTheme().equals("0")) {
             setTheme(R.style.NormalActivity_Light);
-        } else {
+        } else if (_appSettings.getTheme().equals("1")) {
             setTheme(R.style.NormalActivity_Dark);
+        } else {
+            setTheme(R.style.NormalActivity_Black);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(dark(_appSettings.getPrimaryColor(), 0.8));
