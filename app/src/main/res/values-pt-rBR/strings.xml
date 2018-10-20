@@ -17,12 +17,12 @@
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
-    <string name="minibar_summary__edit">Mudar o layout da minibar</string>
+    <string name="minibar_summary__edit_minibar">Mudar o layout da minibar</string>
     <string name="minibar_summary__set_wallpaper">Definir ou borrar o papel de parede</string>
     <string name="minibar_summary__lock_screen">Bloqueia a tela imediatamente (requer administrador do dispositivo)</string>
     <string name="minibar_summary__device_settings">Atalho para as configurações do dispositivo</string>
     <string name="minibar_summary__launcher_settings">Atalho para as configurações do launcher</string>
-    <string name="minibar_summary__volume">Exibir o painel de som</string>
+    <string name="minibar_summary__volume_dialog">Exibir o painel de som</string>
     <string name="minibar_summary__app_drawer">Abrir a gaveta de aplicativos.</string>
 
     <!-- About -->

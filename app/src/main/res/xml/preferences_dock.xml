@@ -14,10 +14,9 @@
 
         <SeekBarPreference
             android:defaultValue="5"
-            android:key="@string/pref_key__dock_size"
+            android:key="@string/pref_key__dock_columns"
             android:max="20"
-            android:summary="@string/pref_summary__dock_size"
-            android:title="@string/pref_title__dock_size"
+            android:title="@string/columns"
             app:min="2" />
 
     </PreferenceCategory>

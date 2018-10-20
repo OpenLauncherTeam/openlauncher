@@ -25,16 +25,7 @@ import com.benny.openlauncher.widget.CellContainer;
 import com.benny.openlauncher.widget.WidgetView;
 
 public class ItemViewFactory {
-
-    public static final int NO_FLAGS = 0x01;
-    public static final int NO_LABEL = 0x02;
-
-    public static View getItemView(Context context, Item item, boolean showLabels, DesktopCallback callback, int iconSize) {
-        int flag = showLabels ? ItemViewFactory.NO_FLAGS : ItemViewFactory.NO_LABEL;
-        return getItemView(context, callback, item, iconSize, flag);
-    }
-
-    private static View getItemView(final Context context, final DesktopCallback callback, final Item item, int iconSize, int flags) {
+    public static View getItemView(final Context context, final DesktopCallback callback, final Item item, int iconSize, boolean showLabel) {
         View view = null;
         switch (item.getType()) {
             case APP:
@@ -43,7 +34,7 @@ public class ItemViewFactory {
                     break;
                 }
                 view = new AppItemView.Builder(context, iconSize)
-                        .setAppItem(item, app)
+                        .setAppItem(item)
                         .withOnTouchGetPosition(item, Setup.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.APP, new AppItemView.LongPressCallBack() {
@@ -57,7 +48,7 @@ public class ItemViewFactory {
                                 callback.setLastItem(item, view);
                             }
                         })
-                        .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
+                        .setLabelVisibility(showLabel)
                         .setTextColor(Color.WHITE)
                         .getView();
                 break;
@@ -77,7 +68,7 @@ public class ItemViewFactory {
                                 callback.setLastItem(item, view);
                             }
                         })
-                        .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
+                        .setLabelVisibility(showLabel)
                         .setTextColor(Color.WHITE)
                         .getView();
                 break;
@@ -97,7 +88,7 @@ public class ItemViewFactory {
                                 callback.setLastItem(item, view);
                             }
                         })
-                        .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
+                        .setLabelVisibility(showLabel)
                         .setTextColor(Color.WHITE)
                         .getView();
                 view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -118,7 +109,7 @@ public class ItemViewFactory {
                                 callback.setLastItem(item, view);
                             }
                         })
-                        .setLabelVisibility((flags & NO_LABEL) != NO_LABEL)
+                        .setLabelVisibility(showLabel)
                         .setTextColor(Color.WHITE)
                         .getView();
                 break;

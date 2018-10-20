@@ -26,12 +26,12 @@
 
     <!-- Minibar -->
 
-    <string name="minibar_summary__edit">调整快捷操作栏的布局</string>
+    <string name="minibar_summary__edit_minibar">调整快捷操作栏的布局</string>
     <string name="minibar_summary__set_wallpaper">设置或模糊壁纸</string>
     <string name="minibar_summary__lock_screen">立即锁定屏幕, 需要设备管理器</string>
     <string name="minibar_summary__device_settings">系统设置快捷方式</string>
     <string name="minibar_summary__launcher_settings">OpenLauncher 设置快捷方式</string>
-    <string name="minibar_summary__volume">显示音量调节</string>
+    <string name="minibar_summary__volume_dialog">显示音量调节</string>
     <string name="minibar_summary__app_drawer">打开应用抽屉</string>
 
     <!-- About -->

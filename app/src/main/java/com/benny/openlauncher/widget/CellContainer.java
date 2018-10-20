@@ -161,12 +161,12 @@ public class CellContainer extends ViewGroup {
         return views;
     }
 
-    public CellContainer(@NonNull Context c) {
-        this(c, null);
+    public CellContainer(Context context) {
+        this(context, null);
     }
 
-    public CellContainer(@NonNull Context c, @Nullable AttributeSet attr) {
-        super(c, attr);
+    public CellContainer(Context context, AttributeSet attr) {
+        super(context, attr);
         _paint.setStyle(Style.STROKE);
         _paint.setStrokeWidth(2.0f);
         _paint.setStrokeJoin(Join.ROUND);
@@ -279,26 +279,9 @@ public class CellContainer extends ViewGroup {
         return null;
     }
 
-    public boolean onTouchEvent(@NonNull MotionEvent event) {
-        switch (MotionEventCompat.getActionMasked(event)) {
-            case 0:
-                _down = System.currentTimeMillis();
-                break;
-            case 1:
-                long currentTimeMillis = System.currentTimeMillis();
-                Long l = _down;
-                if (currentTimeMillis - l.longValue() < 260 && _blockTouch) {
-                    performClick();
-                    break;
-                }
-            default:
-                break;
-        }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
         if (_blockTouch) {
-            return true;
-        }
-        if (_gestures == null) {
-            Tool.print("gestures is null");
             return super.onTouchEvent(event);
         }
         try {
@@ -306,6 +289,7 @@ public class CellContainer extends ViewGroup {
             simpleFingerGestures.onTouch(this, event);
         } catch (Exception e) {
             e.printStackTrace();
+            return super.onTouchEvent(event);
         }
         return super.onTouchEvent(event);
     }
@@ -497,7 +481,7 @@ public class CellContainer extends ViewGroup {
         touchPosToCoordinate(coordinate, mX, mY, xSpan, ySpan, checkAvailability, false);
     }
 
-    public final void touchPosToCoordinate(@NonNull Point coordinate, int mX, int mY, int xSpan, int ySpan, boolean checkAvailability, boolean checkBoundary) {
+    public final void touchPosToCoordinate(Point coordinate, int mX, int mY, int xSpan, int ySpan, boolean checkAvailability, boolean checkBoundary) {
         if (_cells == null) {
             coordinate.set(-1, -1);
             return;

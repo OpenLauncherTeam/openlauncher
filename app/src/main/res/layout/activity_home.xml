@@ -7,12 +7,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- The main content view -->
         <include layout="@layout/view_home" />
 
-        <!-- The navigation drawer -->
         <FrameLayout
-            android:id="@+id/minibar_background"
+            android:id="@+id/minibar_frame"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
@@ -23,10 +21,7 @@
                 android:layout_width="74dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|start"
-                android:clipToPadding="true"
                 android:divider="@android:color/transparent"
-                android:dividerHeight="0dp"
-                android:listSelector="@android:color/transparent"
                 android:scrollbars="none" />
 
         </FrameLayout>

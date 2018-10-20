@@ -26,12 +26,12 @@
 
     <!-- Minibar -->
 
-    <string name="minibar_summary__edit">Endre utformingen på sidepanelet.</string>
+    <string name="minibar_summary__edit_minibar">Endre utformingen på sidepanelet.</string>
     <string name="minibar_summary__set_wallpaper">Velg og tilslør bakgrunnsbildet.</string>
     <string name="minibar_summary__lock_screen">Lås skjermen umiddelbart. Krever enhetsadministrasjon.</string>
     <string name="minibar_summary__device_settings">Snarvei til enhetsinnstillingene.</string>
     <string name="minibar_summary__launcher_settings">Snarvei til OpenLauncher-innstillingene.</string>
-    <string name="minibar_summary__volume">Åpne lydstyrkejustering.</string>
+    <string name="minibar_summary__volume_dialog">Åpne lydstyrkejustering.</string>
     <string name="minibar_summary__app_drawer">Åpne programskuffen.</string>
 
     <!-- About -->

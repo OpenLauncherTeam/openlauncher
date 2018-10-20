@@ -30,6 +30,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.viewutil.IconLabelItem;
@@ -95,15 +96,15 @@ public class SearchBar extends FrameLayout {
     private void init() {
         int dp1 = Tool.dp2px(1, getContext());
         int iconMarginOutside = dp1 * 16;
-        int iconMarginTop = dp1 * 13;
-        int searchTextMarginTop = dp1 * 4;
+        int iconMarginTop = dp1 * 30;
+        int searchTextMarginTop = dp1 * 20;
         int iconSize = dp1 * 24;
         int iconPadding = dp1 * 6;
 
         _searchClock = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.view_search_clock, this, false);
         _searchClock.setTextSize(TypedValue.COMPLEX_UNIT_DIP, _searchClockTextSize);
         LayoutParams clockParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        clockParams.setMargins(iconMarginOutside, 0, 0, 0);
+        clockParams.setMargins(iconMarginOutside, dp1 * 16, 0, dp1 * 16);
         clockParams.gravity = Gravity.START;
 
         _switchButton = new AppCompatImageView(getContext());
@@ -266,12 +267,11 @@ public class SearchBar extends FrameLayout {
             @Override
             public void onGlobalLayout() {
                 _searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int marginTop = Tool.dp2px(56, getContext()) + _searchInput.getHeight();
-                int marginBottom = Desktop._bottomInset;
+                int marginTop = Tool.dp2px(60, getContext()) + HomeActivity._launcher.getStatusView().getHeight() + _searchInput.getHeight();
+                int marginBottom = HomeActivity._launcher.getNavigationView().getHeight();
                 recyclerParams.setMargins(0, marginTop, 0, marginBottom);
-                recyclerParams.height = ((View) getParent()).getHeight() - marginTop - marginBottom / 2;
                 _searchRecycler.setLayoutParams(recyclerParams);
-                _searchRecycler.setPadding(0, 0, 0, (int) (marginBottom * 1.5f));
+                _searchRecycler.setPadding(0, 0, 0, marginBottom);
             }
         });
     }
@@ -370,15 +370,6 @@ public class SearchBar extends FrameLayout {
         Spannable span = new SpannableString(text);
         span.setSpan(new RelativeSizeSpan(_searchClockSubTextFactor), lines[0].length() + 1, lines[0].length() + 1 + lines[1].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         _searchClock.setText(span);
-    }
-
-    @Override
-    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            int topInset = insets.getSystemWindowInsetTop();
-            setPadding(getPaddingLeft(), topInset + Tool.dp2px(10, getContext()), getPaddingRight(), getPaddingBottom());
-        }
-        return insets;
     }
 
     public enum Mode {

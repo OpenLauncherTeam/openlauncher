@@ -15,12 +15,12 @@
 
     <!-- Minibar -->
     <string name="minibar">Мини-бар</string>
-    <string name="minibar_summary__edit">Изменить вид мини-бара.</string>
+    <string name="minibar_summary__edit_minibar">Изменить вид мини-бара.</string>
     <string name="minibar_summary__set_wallpaper">Установить или размыть обои.</string>
     <string name="minibar_summary__lock_screen">Заблокировать экран, требует прав администратора устройства.</string>
     <string name="minibar_summary__device_settings">Быстрый доступ к настройкам устройства.</string>
     <string name="minibar_summary__launcher_settings">Быстрый доступ к настройкам OpenLauncher.</string>
-    <string name="minibar_summary__volume">Отобразить регуляторы громкости.</string>
+    <string name="minibar_summary__volume_dialog">Отобразить регуляторы громкости.</string>
     <string name="minibar_summary__app_drawer">Открыть меню приложений.</string>
 
     <!-- About -->

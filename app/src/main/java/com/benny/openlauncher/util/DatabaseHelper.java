@@ -259,20 +259,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             case APP:
             case SHORTCUT:
                 item.setIntent(Tool.getIntentFromString(data));
-                if (Setup.appSettings().enableImageCaching()) {
-                    item.setIcon(Tool.getIcon(HomeActivity.Companion.getLauncher(), Integer.toString(id)));
-                } else {
-                    switch (type) {
-                        case APP:
-                        case SHORTCUT:
-                            App app = Setup.get().getAppLoader().findItemApp(item);
-                            item.setIcon(app != null ? app.getIcon() : null);
-                            break;
-                        default:
-                            // TODO...
-                            break;
-                    }
-                }
+                App app = Setup.get().getAppLoader().findItemApp(item);
+                item.setIcon(app != null ? app.getIcon() : null);
                 break;
             case GROUP:
                 item.setItems(new ArrayList<>());

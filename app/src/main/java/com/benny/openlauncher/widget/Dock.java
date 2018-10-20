@@ -22,19 +22,19 @@ import com.benny.openlauncher.viewutil.ItemViewFactory;
 import java.util.List;
 
 public final class Dock extends CellContainer implements DesktopCallback<View> {
-    public int _bottomInset;
-    private final Point _coordinate = new Point();
     private HomeActivity _homeActivity;
+    private final Point _coordinate = new Point();
     private final Point _previousDragPoint = new Point();
-    @Nullable
+
     private Item _previousItem;
-    @Nullable
     private View _previousItemView;
+
+    // open app drawer on slide up gesture
     private float _startPosX;
     private float _startPosY;
 
-    public Dock(@NonNull Context c, @Nullable AttributeSet attr) {
-        super(c, attr);
+    public Dock(Context context, AttributeSet attr) {
+        super(context, attr);
     }
 
     public void init() {
@@ -44,14 +44,14 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     }
 
     public final void initDockItem(@NonNull HomeActivity homeActivity) {
-
-        int columns = Setup.appSettings().getDockSize();
-        setGridSize(columns, 1);
+        int columns = Setup.appSettings().getDockColumnCount();
+        int rows = Setup.appSettings().getDockRowCount();
+        setGridSize(columns, rows);
         List<Item> dockItems = HomeActivity._db.getDock();
         _homeActivity = homeActivity;
         removeAllViews();
         for (Item item : dockItems) {
-            if (item._x < columns && item._y == 0) {
+            if (item._x + item._spanX <= columns && item._y + item._spanY <= rows) {
                 addItemToPage(item, 0);
             }
         }
@@ -63,7 +63,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         return true;
     }
 
-    private final void detectSwipe(MotionEvent ev) {
+    private void detectSwipe(MotionEvent ev) {
         switch (ev.getAction()) {
             case 0:
                 Tool.print("ACTION_DOWN");
@@ -129,23 +129,14 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         removeView(v);
     }
 
-    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
-        if (VERSION.SDK_INT >= 20) {
-            _bottomInset = insets.getSystemWindowInsetBottom();
-            setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), _bottomInset);
-        }
-        return insets;
-    }
-
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (!isInEditMode()) {
             int height;
-            int height2 = View.getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
             int iconSize = Setup.appSettings().getDockIconSize();
             if (Setup.appSettings().isDockShowLabel()) {
-                height = Tool.dp2px(((16 + iconSize) + 14) + 10, getContext()) + _bottomInset;
+                height = Tool.dp2px(((16 + iconSize) + 14) + 10, getContext());
             } else {
-                height = Tool.dp2px((16 + iconSize) + 10, getContext()) + _bottomInset;
+                height = Tool.dp2px((16 + iconSize) + 10, getContext());
             }
             getLayoutParams().height = height;
             setMeasuredDimension(View.getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec), height);
@@ -167,7 +158,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     }
 
     public boolean addItemToPage(@NonNull Item item, int page) {
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallback) this, Setup.appSettings().getDockIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDockIconSize(), Setup.appSettings().isDesktopShowLabel());
         if (itemView == null) {
             HomeActivity._db.deleteItem(item, true);
             return false;
@@ -185,7 +176,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         item._location = Item.LOCATION_DOCK;
         item._x = positionToLayoutPrams.getX();
         item._y = positionToLayoutPrams.getY();
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallback) this, Setup.appSettings().getDockIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDockIconSize(), Setup.appSettings().isDesktopShowLabel());
         if (itemView != null) {
             itemView.setLayoutParams(positionToLayoutPrams);
             addView(itemView);
@@ -197,7 +188,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         item._location = Item.LOCATION_DOCK;
         item._x = x;
         item._y = y;
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDockShowLabel(), (DesktopCallback) this, Setup.appSettings().getDockIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDockIconSize(), Setup.appSettings().isDesktopShowLabel());
         if (itemView == null) {
             return false;
         }
@@ -218,10 +209,6 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         } else if (this.equals(view.getParent())) {
             removeView(view);
         }
-    }
-
-    public int getBottomInset() {
-        return _bottomInset;
     }
 
     public void setHome(HomeActivity homeActivity) {

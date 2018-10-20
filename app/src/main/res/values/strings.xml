@@ -7,16 +7,16 @@
     <string name="intro2_text">Swipe inwards from the left border of your home screen to open the minibar. There you can find the settings,
         change the wallpaper, and do lots of other stuff.</string>
     <string name="intro3_title">Settings</string>
-    <string name="intro3_text">You can configure your desktop, the app drawer, and the dock, try it out!</string>
-    <string name="intro4_community">The Launcher from the community for the community</string>
-    <string name="intro4_features">Features packed</string>
+    <string name="intro3_text">You can configure your desktop, app drawer, and dock. Try it out!</string>
+    <string name="intro4_community">Large community</string>
+    <string name="intro4_features">Packed with features</string>
     <string name="intro4_customizable">Customizable</string>
     <string name="custom">Custom</string>
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
     <string name="minibar_title__edit_minibar">Edit Minibar</string>
-    <string name="minibar_summary__edit">Change the minibar layout.</string>
+    <string name="minibar_summary__edit_minibar">Change the minibar layout.</string>
     <string name="minibar_title__set_wallpaper">Set Wallpaper</string>
     <string name="minibar_summary__set_wallpaper">Set the desktop wallpaper.</string>
     <string name="minibar_title__lock_screen">Lock Screen</string>
@@ -26,7 +26,7 @@
     <string name="minibar_title__launcher_settings">Launcher Settings</string>
     <string name="minibar_summary__launcher_settings">Shortcut to OpenLauncher settings.</string>
     <string name="minibar_title__volume_dialog">Volume Dialog</string>
-    <string name="minibar_summary__volume">Display all available volume sliders.</string>
+    <string name="minibar_summary__volume_dialog">Display all available volume sliders.</string>
     <string name="minibar_title__app_drawer">Open App Drawer</string>
     <string name="minibar_summary__app_drawer">Open the app drawer.</string>
     <string name="minibar_title__search_bar">Search Bar</string>
@@ -54,7 +54,6 @@
     <string name="donate">Donate</string>
 
     <!-- Settings -->
-
     <string name="pref_title__desktop">Desktop</string>
     <string name="pref_title__dock">Dock</string>
     <string name="pref_title__app_drawer">App Drawer</string>
@@ -75,14 +74,14 @@
     <string name="pref_title__animations">Animations</string>
 
     <string name="pref_title__desktop_style">Style</string>
-    <string name="pref_title__desktop_indicator_style">Indicator Style</string>
     <string name="pref_summary__desktop_style">Choose between a normal desktop and showing all installed apps.</string>
+    <string name="pref_title__desktop_indicator_style">Indicator Style</string>
     <string name="pref_summary__minibar">Configure the order and visibility of minibar items.</string>
     <string name="pref_title__search_bar_enable">Search Bar</string>
     <string name="pref_summary__search_bar_enable">Display a search bar above the desktop.</string>
     <string name="pref_title__desktop_fullscreen">Fullscreen</string>
-    <string name="pref_title__desktop_hide_grid">Hide Grid</string>
     <string name="pref_summary__desktop_fullscreen">Enable fullscreen for the desktop.</string>
+    <string name="pref_title__desktop_hide_grid">Hide Grid</string>
     <string name="pref_summary__desktop_hide_grid">Hide the guiding grid.</string>
     <string name="pref_title__desktop_show_position_indicator">Position Indicator</string>
     <string name="pref_summary__desktop_show_position_indicator">Show the page indicator below the desktop.</string>

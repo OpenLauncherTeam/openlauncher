@@ -130,8 +130,12 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getBool(R.string.pref_key__dock_enable, true);
     }
 
-    public int getDockSize() {
-        return getInt(R.string.pref_key__dock_size, 5);
+    public int getDockColumnCount() {
+        return getInt(R.string.pref_key__dock_columns, 5);
+    }
+
+    public int getDockRowCount() {
+        return getInt(R.string.pref_key__dock_rows, 1);
     }
 
     public boolean isDockShowLabel() {

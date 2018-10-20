@@ -14,12 +14,12 @@
 
     <!-- Minibar -->
     <string name="minibar">Afeggag amectuḥ</string>
-    <string name="minibar_summary__edit">Beddel taneɣruft n ufeggag amectuḥ.</string>
+    <string name="minibar_summary__edit_minibar">Beddel taneɣruft n ufeggag amectuḥ.</string>
     <string name="minibar_summary__set_wallpaper">Sbadu neɣ sibrek agilal n ugdil.</string>
     <string name="minibar_summary__lock_screen">Sekkeṛ agdil tura yakan, yesra tadbelt n yibenk.</string>
     <string name="minibar_summary__device_settings">Anegzum ar iɣewwaṛen n yibenk.</string>
     <string name="minibar_summary__launcher_settings">Anegzum ar iɣewwaṛen OpenLauncher.</string>
-    <string name="minibar_summary__volume">Sken asfaylu n ubleɣ.</string>
+    <string name="minibar_summary__volume_dialog">Sken asfaylu n ubleɣ.</string>
     <string name="minibar_summary__app_drawer">Ldi agalis n yisnasen.</string>
 
     <!-- About -->

@@ -20,6 +20,7 @@ import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
+import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
@@ -80,7 +81,7 @@ public class AppItemView extends View implements Drawable.Callback {
         } else {
             App app = Setup.appLoader().findItemApp(groupItem);
             if (app != null) {
-                b.setAppItem(groupItem, app);
+                b.setAppItem(groupItem);
             }
         }
         return b.getView();
@@ -264,16 +265,16 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder setAppItem(final Item item, final App app) {
+        public Builder setAppItem(final Item item) {
             _view.setLabel(item.getLabel());
-            _view.setCurrentIcon(app.getIcon());
+            _view.setCurrentIcon(item.getIcon());
             _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Tool.createScaleInScaleOutAnim(_view, new Runnable() {
                         @Override
                         public void run() {
-                            Tool.startApp(_view.getContext(), app, _view);
+                            Tool.startApp(_view.getContext(), AppManager.getInstance(_view.getContext()).findApp(item._intent), _view);
                         }
                     }, 0.85f);
                 }
@@ -304,7 +305,7 @@ public class AppItemView extends View implements Drawable.Callback {
             _view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (HomeActivity.Companion.getLauncher() != null && (HomeActivity.Companion.getLauncher()).getGroupPopup().showWindowV(item, v, callback)) {
+                    if (HomeActivity.Companion.getLauncher() != null && (HomeActivity.Companion.getLauncher()).getGroupPopup().showPopup(item, v, callback)) {
                         ((GroupIconDrawable) ((AppItemView) v).getCurrentIcon()).popUp();
                     }
                 }

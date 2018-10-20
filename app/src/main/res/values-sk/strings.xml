@@ -17,12 +17,12 @@
 
     <!-- Minibar -->
     <string name="minibar">Mini lišta</string>
-    <string name="minibar_summary__edit">Zmeniť rozloženie mini panela.</string>
+    <string name="minibar_summary__edit_minibar">Zmeniť rozloženie mini panela.</string>
     <string name="minibar_summary__set_wallpaper">Rozostriť tapetu</string>
     <string name="minibar_summary__lock_screen">Okamžité uzamknutie obrazovky vyžaduje práva správcu zariadenia</string>
     <string name="minibar_summary__device_settings">Skratka k nastaveniam zariadenia.</string>
     <string name="minibar_summary__launcher_settings">Skratka k nastaveniam OpenLaunchera.</string>
-    <string name="minibar_summary__volume">Zobraziť posuvník hlasitosti.</string>
+    <string name="minibar_summary__volume_dialog">Zobraziť posuvník hlasitosti.</string>
     <string name="minibar_summary__app_drawer">Otvoriť zoznam aplikácií.</string>
 
     <!-- About -->

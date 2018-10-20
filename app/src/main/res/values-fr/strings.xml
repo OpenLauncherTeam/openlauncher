@@ -17,12 +17,12 @@
 
     <!-- Minibar -->
     <string name="minibar">Minibarre</string>
-    <string name="minibar_summary__edit">Modifier la disposition de la Minibarre.</string>
+    <string name="minibar_summary__edit_minibar">Modifier la disposition de la Minibarre.</string>
     <string name="minibar_summary__set_wallpaper">Définir et rendre le fond d\'écran flou.</string>
     <string name="minibar_summary__lock_screen">Verrouiller l\'écran immédiatement, requiert le droit d\'administration de l\'appareil.</string>
     <string name="minibar_summary__device_settings">Raccourci vers les paramètres de l\'appareil.</string>
     <string name="minibar_summary__launcher_settings">Raccourci vers les paramètres d\'OpenLauncher.</string>
-    <string name="minibar_summary__volume">Ouvrir la pop-up du volume.</string>
+    <string name="minibar_summary__volume_dialog">Ouvrir la pop-up du volume.</string>
     <string name="minibar_summary__app_drawer">Ouvrir le volet des applications.</string>
 
     <!-- About -->

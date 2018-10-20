@@ -24,12 +24,12 @@
 
     <!-- MiniBar -->
 
-    <string name="minibar_summary__edit">ミニバーのレイアウトを変更。</string>
+    <string name="minibar_summary__edit_minibar">ミニバーのレイアウトを変更。</string>
     <string name="minibar_summary__set_wallpaper">壁紙の設定と、ぼかし。</string>
     <string name="minibar_summary__lock_screen">画面をすぐにロック。 デバイス管理が必要です。</string>
     <string name="minibar_summary__device_settings">デバイス設定のショートカット。</string>
     <string name="minibar_summary__launcher_settings">OpenLauncher 設定のショートカット。</string>
-    <string name="minibar_summary__volume">ボリュームダイアログを開く。</string>
+    <string name="minibar_summary__volume_dialog">ボリュームダイアログを開く。</string>
     <string name="minibar_summary__app_drawer">アプリドロワーを開く。</string>
 
     <!-- About -->

@@ -18,12 +18,12 @@
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
-    <string name="minibar_summary__edit">Cambia il layout della Minibar.</string>
+    <string name="minibar_summary__edit_minibar">Cambia il layout della Minibar.</string>
     <string name="minibar_summary__set_wallpaper">Imposta o sfoca lo sfondo</string>
     <string name="minibar_summary__lock_screen">Blocca immediatamente lo schermo, richiede amministrazione del dispositivo.</string>
     <string name="minibar_summary__device_settings">Scorciatoia impostazioni.</string>
     <string name="minibar_summary__launcher_settings">Scorciatoia impostazioni OpenLauncher.</string>
-    <string name="minibar_summary__volume">Mostra slider volume.</string>
+    <string name="minibar_summary__volume_dialog">Mostra slider volume.</string>
     <string name="minibar_summary__app_drawer">Apri Drawer.</string>
 
     <!-- About -->

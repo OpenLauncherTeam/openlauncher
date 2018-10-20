@@ -17,12 +17,12 @@
 
     <!-- Minibar -->
     <string name="minibar">Mini-barra</string>
-    <string name="minibar_summary__edit">Mudar disposição da mini-barra.</string>
+    <string name="minibar_summary__edit_minibar">Mudar disposição da mini-barra.</string>
     <string name="minibar_summary__set_wallpaper">Definir ou desfocar a imagem.</string>
     <string name="minibar_summary__lock_screen">Bloquear ecrã imediatamente, requer administração do dispositivo.</string>
     <string name="minibar_summary__device_settings">Atalho para as definições do dispositivo.</string>
     <string name="minibar_summary__launcher_settings">Atalho para as definições do OpenLauncher.</string>
-    <string name="minibar_summary__volume">Mostrar controlos de volume.</string>
+    <string name="minibar_summary__volume_dialog">Mostrar controlos de volume.</string>
     <string name="minibar_summary__app_drawer">Abrir menu de aplicações.</string>
     <string name="minibar_summary__search_bar">Abrir barra de pesquisa</string>
     <string name="minibar_summary__mobile_network">Definições de redes móveis</string>

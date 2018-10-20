@@ -4,7 +4,6 @@
     <style name="Home.Light" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:navigationBarColor" tools:targetApi="21">@android:color/transparent</item>
         <item name="android:colorPrimaryDark"  tools:targetApi="21">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
         <item name="android:windowShowWallpaper">true</item>
 
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -18,7 +17,6 @@
     </style>
 
     <style name="NormalActivity.Light" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -30,8 +28,6 @@
     </style>
 
     <style name="NormalActivity.Dark" parent="Theme.AppCompat.NoActionBar">
-        <!--Important for the Preference compat-->
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -48,13 +44,7 @@
         <item name="background">@color/colorPrimary</item>
     </style>
 
-    <style name="FullscreenTheme" parent="Home.Light">
-        <item name="android:actionBarStyle">@style/Widget.AppCompat.ActionBar</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
-    </style>
-
-    <style name="Home.Intro" parent="Theme.AppCompat.NoActionBar">
+    <style name="IntroTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowTranslucentStatus" tools:ignore="NewApi">true</item>
         <item name="android:windowBackground">@null</item>
         <item name="android:windowShowWallpaper">true</item>

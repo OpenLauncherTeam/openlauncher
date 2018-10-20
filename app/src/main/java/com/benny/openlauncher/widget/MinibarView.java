@@ -19,19 +19,16 @@ public class MinibarView extends ListView {
 
     public MinibarView(Context context) {
         super(context);
-
         init();
     }
 
     public MinibarView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         init();
     }
 
     public MinibarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         init();
     }
 
@@ -51,11 +48,9 @@ public class MinibarView extends ListView {
                             int pos = pointToPosition((int) e1.getX(), (int) e1.getY());
                             if (pos != -1 && _onSwipeRight != null)
                                 _onSwipeRight.onSwipe(pos, e1.getX(), e1.getY());
-                        } catch (Exception ignored) {
-
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    } else {
-
                     }
                 }
                 return true;

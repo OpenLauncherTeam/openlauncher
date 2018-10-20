@@ -37,17 +37,12 @@ import in.championswimmer.sfg.lib.SimpleFingerGestures;
 import in.championswimmer.sfg.lib.SimpleFingerGestures.OnFingerGestureListener;
 
 public final class Desktop extends SmoothViewPager implements DesktopCallback<View> {
-    public static int _bottomInset;
-    public static int _topInset;
-
-    @Nullable
     private OnDesktopEditListener _desktopEditListener;
     private boolean _inEditMode;
     private int _pageCount;
     private PagerIndicator _pageIndicator;
 
-    @NonNull
-    private final List<CellContainer> _pages = new ArrayList<CellContainer>();
+    private final List<CellContainer> _pages = new ArrayList<>();
     private final Point _previousDragPoint = new Point();
 
     private Point _coordinate = new Point(-1, -1);
@@ -264,20 +259,18 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         }
     }
 
-    public Desktop(@NonNull Context context) {
+    public Desktop(Context context) {
         super(context, null);
     }
 
-    public Desktop(@NonNull Context c, @Nullable AttributeSet attr) {
-        super(c, attr);
+    public Desktop(Context context, AttributeSet attr) {
+        super(context, attr);
     }
 
-    @NonNull
     public final List<CellContainer> getPages() {
         return _pages;
     }
 
-    @Nullable
     public final OnDesktopEditListener getDesktopEditListener() {
         return _desktopEditListener;
     }
@@ -302,13 +295,11 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         return getCurrentPage().getChildCount() == 0;
     }
 
-    @NonNull
     public final CellContainer getCurrentPage() {
         return _pages.get(getCurrentItem());
     }
 
-    public final void setPageIndicator(@NonNull PagerIndicator pageIndicator) {
-
+    public final void setPageIndicator(PagerIndicator pageIndicator) {
         _pageIndicator = pageIndicator;
     }
 
@@ -466,7 +457,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
     }
 
     public boolean addItemToPage(@NonNull Item item, int page) {
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this, Setup.appSettings().getDesktopIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDesktopIconSize(), Setup.appSettings().isDesktopShowLabel());
         if (itemView == null) {
             HomeActivity._db.deleteItem(item, true);
             return false;
@@ -484,7 +475,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         item._location = Item.LOCATION_DESKTOP;
         item._x = positionToLayoutPrams.getX();
         item._y = positionToLayoutPrams.getY();
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), (DesktopCallback) this, Setup.appSettings().getDesktopIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDesktopIconSize(), Setup.appSettings().isDesktopShowLabel());
         if (itemView != null) {
             itemView.setLayoutParams(positionToLayoutPrams);
             getCurrentPage().addView(itemView);
@@ -496,7 +487,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         item._location = Item.LOCATION_DESKTOP;
         item._x = x;
         item._y = y;
-        View itemView = ItemViewFactory.getItemView(getContext(), item, Setup.appSettings().isDesktopShowLabel(), this, Setup.appSettings().getDesktopIconSize());
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDesktopIconSize(), Setup.appSettings().isDesktopShowLabel());
         if (itemView == null) {
             return false;
         }
@@ -551,19 +542,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
             WallpaperManager.getInstance(getContext()).setWallpaperOffsets(getWindowToken(), (position + offset) / (_pageCount - 1), 0.0f);
             super.onPageScrolled(position, offset, offsetPixels);
         }
-    }
-
-    @NonNull
-    public WindowInsets onApplyWindowInsets(@NonNull WindowInsets insets) {
-        if (VERSION.SDK_INT >= 20) {
-            _topInset = insets.getSystemWindowInsetTop();
-            _bottomInset = insets.getSystemWindowInsetBottom();
-            HomeActivity launcher = HomeActivity._launcher;
-            if (launcher != null) {
-                launcher.updateHomeLayout();
-            }
-        }
-        return insets;
     }
 
     public interface OnDesktopEditListener {

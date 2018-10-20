@@ -15,6 +15,7 @@ import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.viewutil.ItemViewFactory;
 import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
 
 import java.util.ArrayList;

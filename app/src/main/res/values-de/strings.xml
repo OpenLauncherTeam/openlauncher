@@ -24,12 +24,12 @@
 
     <!-- Minibar -->
 
-    <string name="minibar_summary__edit">Edit</string>
+    <string name="minibar_summary__edit_minibar">Edit</string>
     <string name="minibar_summary__set_wallpaper">Wallpaper aussuchen oder unscharf machen</string>
     <string name="minibar_summary__lock_screen">Sperre sofort den Bildschirm, braucht die Berechtigung \"Geräteadministrator\".</string>
     <string name="minibar_summary__device_settings">Verknüpfung zu den Systemeinstellungen.</string>
     <string name="minibar_summary__launcher_settings">OpenLauncher Einstellungsseite.</string>
-    <string name="minibar_summary__volume">Öffne den Lautstärkedialog.</string>
+    <string name="minibar_summary__volume_dialog">Öffne den Lautstärkedialog.</string>
     <string name="minibar_summary__app_drawer">Öffne den App Drawer.</string>
 
     <!-- About -->

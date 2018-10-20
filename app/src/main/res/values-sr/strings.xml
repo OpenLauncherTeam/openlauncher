@@ -14,12 +14,12 @@
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
-    <string name="minibar_summary__edit">Promijeni izgled minibar.</string>
+    <string name="minibar_summary__edit_minibar">Promijeni izgled minibar.</string>
     <string name="minibar_summary__set_wallpaper">Podesi blur na slici ekrana.</string>
     <string name="minibar_summary__lock_screen">zaključaj ekran odmah, zahtjeva administraciju uređaja.</string>
     <string name="minibar_summary__device_settings">Perčica do podešavanja uređaja.</string>
     <string name="minibar_summary__launcher_settings">Shortcut to OpenLauncher podešavanja.</string>
-    <string name="minibar_summary__volume">Prikaži zvučne klizače.</string>
+    <string name="minibar_summary__volume_dialog">Prikaži zvučne klizače.</string>
     <string name="minibar_summary__app_drawer">Otvori aplikacioni panel.</string>
 
     <!-- About -->

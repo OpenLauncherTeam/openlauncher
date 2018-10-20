@@ -17,12 +17,12 @@
 
     <!-- Minibar -->
     <string name="minibar">Minipasek</string>
-    <string name="minibar_summary__edit">Zmień układ minipaska.</string>
+    <string name="minibar_summary__edit_minibar">Zmień układ minipaska.</string>
     <string name="minibar_summary__set_wallpaper">Ustaw lub rozmyj tapetę.</string>
     <string name="minibar_summary__lock_screen">Natychmiast zablokuj ekran. Wymaga uprawnień administratora urządzenia.</string>
     <string name="minibar_summary__device_settings">Skrót do ustawień urządzenia.</string>
     <string name="minibar_summary__launcher_settings">Skrót do ustawień launchera.</string>
-    <string name="minibar_summary__volume">Pokaż suwak głośności.</string>
+    <string name="minibar_summary__volume_dialog">Pokaż suwak głośności.</string>
     <string name="minibar_summary__app_drawer">Otwórz menu aplikacji.</string>
 
     <!-- About -->

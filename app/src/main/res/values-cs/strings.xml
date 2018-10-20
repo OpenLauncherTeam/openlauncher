@@ -16,12 +16,12 @@
 
     <!-- Minibar -->
     <string name="minibar">MiniBar - boční menu</string>
-    <string name="minibar_summary__edit">Změnit rozložení MiniBaru.</string>
+    <string name="minibar_summary__edit_minibar">Změnit rozložení MiniBaru.</string>
     <string name="minibar_summary__set_wallpaper">Nastavit nebo rozmazat pozadí.</string>
     <string name="minibar_summary__lock_screen">Okamžitě zamknout obrazovku, vyžaduje práva administrátora zařízení.</string>
     <string name="minibar_summary__device_settings">Otevřít nastavení systému.</string>
     <string name="minibar_summary__launcher_settings">Otevřít nastavení OpenLauncheru.</string>
-    <string name="minibar_summary__volume">Zobrazit nastavení hlasitosti.</string>
+    <string name="minibar_summary__volume_dialog">Zobrazit nastavení hlasitosti.</string>
     <string name="minibar_summary__app_drawer">Otevřít menu aplikací.</string>
 
     <!-- About -->

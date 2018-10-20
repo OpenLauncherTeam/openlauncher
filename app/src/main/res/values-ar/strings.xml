@@ -25,12 +25,12 @@
 
     <!-- Minibar -->
 
-    <string name="minibar_summary__edit">تغيير تخطيط الشريط المصغر</string>
+    <string name="minibar_summary__edit_minibar">تغيير تخطيط الشريط المصغر</string>
     <string name="minibar_summary__set_wallpaper">تعيين صورة الخلفية وإضافة تأثير الضبابية</string>
     <string name="minibar_summary__lock_screen">إغلاق الشاشة فورا، صلاحية مدير الجهاز مطلوبة</string>
     <string name="minibar_summary__device_settings">اختصار لإعدادات الجهاز</string>
     <string name="minibar_summary__launcher_settings">اختصار لإعدادات أوبن لانشر</string>
-    <string name="minibar_summary__volume">عرض صندوق التحكم بالصوت</string>
+    <string name="minibar_summary__volume_dialog">عرض صندوق التحكم بالصوت</string>
     <string name="minibar_summary__app_drawer">فتح درج التطبيقات</string>
 
     <!-- About -->

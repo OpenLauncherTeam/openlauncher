@@ -83,7 +83,7 @@ public class GroupPopupView extends RevealFrameLayout {
     }
 
 
-    public boolean showWindowV(final Item item, final View itemView, final DesktopCallback callback) {
+    public boolean showPopup(final Item item, final View itemView, final DesktopCallback callback) {
         if (_isShowing || getVisibility() == View.VISIBLE) return false;
         _isShowing = true;
 
@@ -120,7 +120,7 @@ public class GroupPopupView extends RevealFrameLayout {
                     public boolean onLongClick(View view2) {
                         if (Setup.appSettings().isDesktopLock()) return false;
 
-                        removeItem(c, callback, item, groupItem, (AppItemView) itemView);
+                        removeItem(c, item, groupItem, (AppItemView) itemView);
 
                         DragAction.Action action = groupItem.getType() == Item.Type.SHORTCUT ? DragAction.Action.SHORTCUT : DragAction.Action.APP;
 
@@ -128,13 +128,15 @@ public class GroupPopupView extends RevealFrameLayout {
                         DragHandler.startDrag(view, groupItem, action, null);
 
                         dismissPopup();
-                        updateItem(callback, item, groupItem, itemView);
+
+                        // convert group item into app item if there is only one item left
+                        updateItem(callback, item, itemView);
                         return true;
                     }
                 });
                 final App app = Setup.appLoader().findItemApp(groupItem);
                 if (app == null) {
-                    removeItem(c, callback, item, groupItem, (AppItemView) itemView);
+                    removeItem(c, item, groupItem, (AppItemView) itemView);
                 } else {
                     view.setOnClickListener(new OnClickListener() {
                         @Override
@@ -285,7 +287,7 @@ public class GroupPopupView extends RevealFrameLayout {
         _folderAnimator.start();
     }
 
-    private void removeItem(Context context, final DesktopCallback callback, final Item currentItem, Item dragOutItem, AppItemView currentView) {
+    private void removeItem(Context context, final Item currentItem, Item dragOutItem, AppItemView currentView) {
         currentItem.getGroupItems().remove(dragOutItem);
 
         HomeActivity._db.saveItem(dragOutItem, Definitions.ItemState.Visible);
@@ -294,26 +296,22 @@ public class GroupPopupView extends RevealFrameLayout {
         currentView.setCurrentIcon(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
     }
 
-    public void updateItem(final DesktopCallback callback, final Item currentItem, Item dragOutItem, View currentView) {
+    public void updateItem(DesktopCallback callback, final Item currentItem, View currentView) {
         if (currentItem.getGroupItems().size() == 1) {
             final App app = Setup.appLoader().findItemApp(currentItem.getGroupItems().get(0));
             if (app != null) {
-                //Creating a new app item fixed the folder crash bug
-                //Home.Companion.getDb().getItem(currentItem.getGroupItems().get(0).getId());
-                Item item = Item.newAppItem(app);
-
+                Item item = HomeActivity._db.getItem(currentItem.getGroupItems().get(0).getId());
                 item.setX(currentItem.getX());
                 item.setY(currentItem.getY());
 
+                // update db
                 HomeActivity._db.saveItem(item);
                 HomeActivity._db.saveItem(item, Definitions.ItemState.Visible);
                 HomeActivity._db.deleteItem(currentItem, true);
 
+                // update launcher
                 callback.removeItem(currentView, false);
                 callback.addItemToCell(item, item.getX(), item.getY());
-            }
-            if (HomeActivity.Companion.getLauncher() != null) {
-                HomeActivity.Companion.getLauncher().getDesktop().requestLayout();
             }
         }
     }

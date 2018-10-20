@@ -17,12 +17,12 @@
 
     <!-- Minibar -->
     <string name="minibar">Minibarra</string>
-    <string name="minibar_summary__edit">Muda sa dispositzione de sa minibarra.</string>
+    <string name="minibar_summary__edit_minibar">Muda sa dispositzione de sa minibarra.</string>
     <string name="minibar_summary__set_wallpaper">Imposta s\'immàgine de isfondu de s\'iscrivania.</string>
     <string name="minibar_summary__lock_screen">Bloca s\'ischermu immediatamente. Tenet bisòngiu de dos diritos de amministratzione de su dispositivu.</string>
     <string name="minibar_summary__device_settings">Incurtzada a sas impostatziones de su dispositivu.</string>
     <string name="minibar_summary__launcher_settings">Incurtzada a sas impostatziones de OpenLauncher.</string>
-    <string name="minibar_summary__volume">Ammustra totu sas barras de su volume.</string>
+    <string name="minibar_summary__volume_dialog">Ammustra totu sas barras de su volume.</string>
     <string name="minibar_summary__app_drawer">Aberi su menù de sas aplicatziones.</string>
     <string name="minibar_summary__search_bar">Aberi sa barra de chirca.</string>
     <string name="minibar_summary__mobile_network">Impostatziones pro sas retzas mòbiles.</string>
