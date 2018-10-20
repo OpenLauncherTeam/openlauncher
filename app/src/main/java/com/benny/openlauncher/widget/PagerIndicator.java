@@ -2,6 +2,7 @@ package com.benny.openlauncher.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
@@ -88,10 +89,10 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
             case Mode.ARROW: {
                 if (_pager != null) {
                     _arrowPath.reset();
-                    _arrowPath.moveTo(getWidth() / 2 - _dotSize * 1.5f, (float) (getHeight()) - _dotSize / 3 - _pad / 2);
-                    _arrowPath.lineTo((getWidth() / 2f), _pad / 2);
-                    _arrowPath.
-                            lineTo(getWidth() / 2 + _dotSize * 1.5f, (float) (getHeight()) - _dotSize / 3 - _pad / 2);
+                    // TODO remove this section entirely and clean up PagerIndicator
+                    //_arrowPath.moveTo(getWidth() / 2 - _dotSize * 1.5f, (float) (getHeight()) - _dotSize / 3 - _pad / 2);
+                    //_arrowPath.lineTo((getWidth() / 2f), _pad / 2);
+                    //_arrowPath.lineTo(getWidth() / 2 + _dotSize * 1.5f, (float) (getHeight()) - _dotSize / 3 - _pad / 2);
 
                     canvas.drawPath(_arrowPath, _arrowPaint);
 
@@ -118,7 +119,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
                         invalidate();
                     }
 
-                    canvas.drawLine(myX, (float) getHeight(), myX + lineWidth, (float) getHeight(), _dotPaint);
+                    canvas.drawLine(myX, getHeight() / 2, myX + lineWidth, getHeight() / 2, _dotPaint);
                 }
             }
             break;
@@ -131,12 +132,12 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
 
     public PagerIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
-        _pad = Tool.toPx(3);
+        _pad = Tool.toPx(4);
         setWillNotDraw(false);
-        _dotPaint.setColor(-1);
-        _dotPaint.setStrokeWidth((float) Tool.toPx(2));
+        _dotPaint.setColor(Color.WHITE);
+        _dotPaint.setStrokeWidth(Tool.toPx(4));
         _dotPaint.setAntiAlias(true);
-        _arrowPaint.setColor(-1);
+        _arrowPaint.setColor(Color.WHITE);
         _arrowPaint.setAntiAlias(true);
         _arrowPaint.setStyle(Style.STROKE);
         _arrowPaint.setStrokeWidth(_pad / 1.5f);
