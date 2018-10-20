@@ -116,6 +116,11 @@ public class ColorPickerPreference extends Preference {
 	}
 
 	@Override
+	protected Object onGetDefaultValue(TypedArray a, int index) {
+		return a.getInt(index, 0);
+	}
+
+	@Override
 	protected void onClick() {
 		ColorPickerDialogBuilder builder = ColorPickerDialogBuilder
 			.with(getContext())
