@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.benny.openlauncher.R;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
@@ -44,12 +45,9 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     }
 
     protected void onDraw(Canvas canvas) {
-        _dotSize = getHeight() - _pad * 1.25f;
-
         switch (_mode) {
             case Mode.NORMAL: {
                 if (_pager != null) {
-
                     _dotPaint.setAlpha(255);
                     float circlesWidth = _pager.getAdapter().getCount() * (_dotSize + _pad * 2);
                     canvas.translate(getWidth() / 2 - circlesWidth / 2, 0f);
@@ -88,7 +86,6 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
                 break;
             }
             case Mode.ARROW: {
-
                 if (_pager != null) {
                     _arrowPath.reset();
                     _arrowPath.moveTo(getWidth() / 2 - _dotSize * 1.5f, (float) (getHeight()) - _dotSize / 3 - _pad / 2);
@@ -132,7 +129,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
         this(context, null);
     }
 
-    public PagerIndicator(@NonNull Context context, @NonNull AttributeSet attrs) {
+    public PagerIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
         _pad = Tool.toPx(3);
         setWillNotDraw(false);
@@ -205,7 +202,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     }
 
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        _dotSize = ((float) getHeight()) - (_pad * 1.25f);
+        _dotSize = getHeight() / 2;
         super.onLayout(changed, left, top, right, bottom);
     }
 }

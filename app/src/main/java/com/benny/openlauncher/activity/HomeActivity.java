@@ -515,22 +515,13 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public final void updateDock(boolean show, long delay) {
         AppSettings appSettings = Setup.appSettings();
-        MarginLayoutParams layoutParams;
         if (appSettings.getDockEnable() && show) {
             Tool.visibleViews(100, delay, getDock());
-            layoutParams = (MarginLayoutParams) getDesktop().getLayoutParams();
-            layoutParams.bottomMargin = Tool.dp2px(4, this);
-            layoutParams = (MarginLayoutParams) getDesktopIndicator().getLayoutParams();
-            layoutParams.bottomMargin = Tool.dp2px(4, this);
         } else {
             if (appSettings.getDockEnable()) {
-                Tool.invisibleViews(100, (Dock) findViewById(R.id.dock));
+                Tool.invisibleViews(100, getDock());
             } else {
                 Tool.goneViews(100, getDock());
-                layoutParams = (MarginLayoutParams) getDesktopIndicator().getLayoutParams();
-                layoutParams.bottomMargin = Tool.dp2px(4, this);
-                layoutParams = (MarginLayoutParams) getDesktop().getLayoutParams();
-                layoutParams.bottomMargin = Tool.dp2px(4, this);
             }
         }
     }

@@ -60,8 +60,7 @@
         <com.benny.openlauncher.widget.PagerIndicator
             android:id="@+id/desktopIndicator"
             android:layout_width="0dp"
-            android:layout_height="10dp"
-            android:layout_marginBottom="4dp"
+            android:layout_height="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/dock" />
