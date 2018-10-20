@@ -143,10 +143,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = _db.rawQuery(SQL_QUERY_DESKTOP, null);
         List<List<Item>> desktop = new ArrayList<>();
         if (cursor.moveToFirst()) {
+            int pageColumnIndex = cursor.getColumnIndex(COLUMN_PAGE);
+            int desktopColumnIndex = cursor.getColumnIndex(COLUMN_DESKTOP);
+            int stateColumnIndex = cursor.getColumnIndex(COLUMN_STATE);
             do {
-                int page = Integer.parseInt(cursor.getString(6));
-                int desktopVar = Integer.parseInt(cursor.getString(7));
-                int stateVar = Integer.parseInt(cursor.getString(8));
+                int page = Integer.parseInt(cursor.getString(pageColumnIndex));
+                int desktopVar = Integer.parseInt(cursor.getString(desktopColumnIndex));
+                int stateVar = Integer.parseInt(cursor.getString(stateColumnIndex));
                 while (page >= desktop.size()) {
                     desktop.add(new ArrayList<Item>());
                 }
@@ -164,9 +167,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = _db.rawQuery(SQL_QUERY_DESKTOP, null);
         List<Item> dock = new ArrayList<>();
         if (cursor.moveToFirst()) {
+            int desktopColumnIndex = cursor.getColumnIndex(COLUMN_DESKTOP);
+            int stateColumnIndex = cursor.getColumnIndex(COLUMN_STATE);
             do {
-                int desktopVar = Integer.parseInt(cursor.getString(7));
-                int stateVar = Integer.parseInt(cursor.getString(8));
+                int desktopVar = Integer.parseInt(cursor.getString(desktopColumnIndex));
+                int stateVar = Integer.parseInt(cursor.getString(stateColumnIndex));
                 if (desktopVar == 0 && stateVar == 1) {
                     dock.add(getSelection(cursor));
                 }
@@ -241,12 +246,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private Item getSelection(Cursor cursor) {
         Item item = new Item();
-        int id = Integer.parseInt(cursor.getString(0));
-        Item.Type type = Item.Type.valueOf(cursor.getString(1));
-        String label = cursor.getString(2);
-        int x = Integer.parseInt(cursor.getString(3));
-        int y = Integer.parseInt(cursor.getString(4));
-        String data = cursor.getString(5);
+        int id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_TIME)));
+        Item.Type type = Item.Type.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_TYPE)));
+        String label = cursor.getString(cursor.getColumnIndex(COLUMN_LABEL));
+        int x = Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_X_POS)));
+        int y = Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_Y_POS)));
+        String data = cursor.getString(cursor.getColumnIndex(COLUMN_DATA));
 
         item.setId(id);
         item.setLabel(label);
