@@ -116,6 +116,10 @@ public class ColorPickerPreference extends Preference {
 		setValue(restoreValue ? getPersistedInt(0) : (Integer) defaultValue);
 	}
 
+    protected Object onGetDefaultValue(TypedArray a, int index) {
+	    return a.getInt(index, 0);
+    }
+
 	@Override
 	protected void onClick() {
 		ColorPickerDialogBuilder builder = ColorPickerDialogBuilder
