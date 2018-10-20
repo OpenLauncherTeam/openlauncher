@@ -1,8 +1,8 @@
 package com.benny.openlauncher.fragment;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
+import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 
 import com.benny.openlauncher.R;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class SettingsBaseFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public abstract class SettingsBaseFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final List<Integer> noRestart = new ArrayList<>(Arrays.asList(
             R.string.pref_key__gesture_double_tap, R.string.pref_key__gesture_swipe_up,
             R.string.pref_key__gesture_swipe_down, R.string.pref_key__gesture_pinch,
