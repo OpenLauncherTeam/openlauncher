@@ -116,10 +116,10 @@ public class ColorPickerPreference extends Preference {
 		setValue(restoreValue ? getPersistedInt(0) : (Integer) defaultValue);
 	}
 
-    @Override
-    protected Object onGetDefaultValue(TypedArray a, int index) {
-	    return a.getInt(index, 0);
-    }
+	@Override
+	protected Object onGetDefaultValue(TypedArray a, int index) {
+		return a.getInt(index, 0);
+	}
 
 	@Override
 	protected void onClick() {
