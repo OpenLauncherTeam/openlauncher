@@ -180,9 +180,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Companion.setLauncher(this);
-        ContextUtils contextUtils = new ContextUtils(getApplicationContext());
         AppSettings appSettings = AppSettings.get();
 
+        ContextUtils contextUtils = new ContextUtils(getApplicationContext());
         contextUtils.setAppLanguage(appSettings.getLanguage());
         super.onCreate(savedInstanceState);
         if (!Setup.wasInitialised()) {
@@ -202,6 +202,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         _db = Setup.dataManager();
 
         setContentView(getLayoutInflater().inflate(R.layout.activity_home, null));
+
+        // transparent status and navigation
         if (VERSION.SDK_INT >= 21) {
             Window window = getWindow();
             View decorView = window.getDecorView();
@@ -216,14 +218,14 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         _appWidgetHost.startListening();
 
         initViews();
+
+        // item drag and drop
         HpDragOption hpDragOption = new HpDragOption();
         View findViewById = findViewById(R.id.leftDragHandle);
-
         View findViewById2 = findViewById(R.id.rightDragHandle);
-
         ItemOptionView itemOptionView = findViewById(R.id.dragNDropView);
-
         hpDragOption.initDragNDrop(this, findViewById, findViewById2, itemOptionView);
+
         registerBroadcastReceiver();
         initAppManager();
         initSettings();
@@ -391,12 +393,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        handleLauncherResume(false);
-        getDrawerLayout().closeDrawers();
-    }
-
     public final void onUninstallItem(@NonNull Item item) {
         _consumeNextResume = true;
         Setup.eventHandler().showDeletePackageDialog(this, item);
@@ -437,7 +433,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
     }
 
-    private final Bundle getActivityAnimationOpts(View view) {
+    private Bundle getActivityAnimationOpts(View view) {
         Bundle bundle = null;
         if (view == null) {
             return null;
@@ -480,7 +476,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public void onSetPageAsHome() {
         AppSettings appSettings = Setup.appSettings();
-
         Desktop desktop = findViewById(R.id.desktop);
         appSettings.setDesktopPageCurrent(desktop.getCurrentItem());
     }
@@ -624,6 +619,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
     }
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_PICK_APPWIDGET) {
@@ -637,6 +633,12 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 _appWidgetHost.deleteAppWidgetId(appWidgetId);
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        handleLauncherResume(false);
+        getDrawerLayout().closeDrawers();
     }
 
     @Override
@@ -713,7 +715,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         openAppDrawer(null, 0, 0);
     }
 
-    public final void openAppDrawer(@Nullable View view, int x, int y) {
+    public final void openAppDrawer(View view, int x, int y) {
         if (!(x > 0 && y > 0) && view != null) {
             int[] pos = new int[2];
             view.getLocationInWindow(pos);
