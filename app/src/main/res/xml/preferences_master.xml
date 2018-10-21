@@ -4,45 +4,53 @@
     android:layout_height="match_parent"
     android:title="@string/settings">
 
-    <PreferenceScreen
-        android:fragment="com.benny.openlauncher.fragment.SettingsDesktopFragment"
-        android:icon="@drawable/ic_desktop_windows_dark_24dp"
-        android:key="@string/pref_key__cat_desktop"
-        android:title="@string/pref_title__desktop" />
+    <PreferenceCategory android:title="@string/pref_title__interfaces">
 
-    <PreferenceScreen
-        android:fragment="com.benny.openlauncher.fragment.SettingsDockFragment"
-        android:icon="@drawable/ic_dock_dark_24dp"
-        android:key="@string/pref_key__cat_dock"
-        android:title="@string/pref_title__dock" />
+        <PreferenceScreen
+            android:fragment="com.benny.openlauncher.fragment.SettingsDesktopFragment"
+            android:icon="@drawable/ic_desktop_windows_dark_24dp"
+            android:key="@string/pref_key__cat_desktop"
+            android:title="@string/pref_title__desktop" />
 
-    <PreferenceScreen
-        android:fragment="com.benny.openlauncher.fragment.SettingsAppDrawerFragment"
-        android:icon="@drawable/ic_apps_dark_24dp"
-        android:key="@string/pref_key__cat_app_drawer"
-        android:title="@string/pref_title__app_drawer" />
+        <PreferenceScreen
+            android:fragment="com.benny.openlauncher.fragment.SettingsDockFragment"
+            android:icon="@drawable/ic_dock_dark_24dp"
+            android:key="@string/pref_key__cat_dock"
+            android:title="@string/pref_title__dock" />
 
-    <PreferenceScreen
-        android:fragment="com.benny.openlauncher.fragment.SettingsAppearanceFragment"
-        android:icon="@drawable/ic_palette_black_24dp"
-        android:key="@string/pref_key__cat_appearance"
-        android:title="@string/pref_title__appearance" />
+        <PreferenceScreen
+            android:fragment="com.benny.openlauncher.fragment.SettingsAppDrawerFragment"
+            android:icon="@drawable/ic_apps_dark_24dp"
+            android:key="@string/pref_key__cat_app_drawer"
+            android:title="@string/pref_title__app_drawer" />
 
-    <PreferenceScreen
-        android:fragment="com.benny.openlauncher.fragment.SettingsGesturesFragment"
-        android:icon="@drawable/ic_gesture_dark_24dp"
-        android:key="@string/pref_key__cat_gestures"
-        android:title="@string/pref_title__gestures" />
+        <PreferenceScreen
+            android:fragment="com.benny.openlauncher.fragment.SettingsAppearanceFragment"
+            android:icon="@drawable/ic_palette_black_24dp"
+            android:key="@string/pref_key__cat_appearance"
+            android:title="@string/pref_title__appearance" />
 
-    <PreferenceScreen
-        android:fragment="com.benny.openlauncher.fragment.SettingsMiscellaneousFragment"
-        android:icon="@drawable/ic_more_horiz_black_24dp"
-        android:key="@string/pref_key__cat_miscellaneous"
-        android:title="@string/pref_title__miscellaneous" />
+    </PreferenceCategory>
 
-    <PreferenceScreen
-        android:icon="@drawable/ic_info_outline_dark_24dp"
-        android:key="@string/pref_key__about"
-        android:title="@string/pref_title__about" />
+    <PreferenceCategory android:title="@string/pref_title__others">
+
+        <PreferenceScreen
+            android:fragment="com.benny.openlauncher.fragment.SettingsGesturesFragment"
+            android:icon="@drawable/ic_gesture_dark_24dp"
+            android:key="@string/pref_key__cat_gestures"
+            android:title="@string/pref_title__gestures" />
+
+        <PreferenceScreen
+            android:fragment="com.benny.openlauncher.fragment.SettingsMiscellaneousFragment"
+            android:icon="@drawable/ic_more_horiz_black_24dp"
+            android:key="@string/pref_key__cat_miscellaneous"
+            android:title="@string/pref_title__miscellaneous" />
+
+        <PreferenceScreen
+            android:icon="@drawable/ic_info_outline_dark_24dp"
+            android:key="@string/pref_key__about"
+            android:title="@string/pref_title__about" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

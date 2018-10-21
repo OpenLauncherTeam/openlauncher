@@ -17,8 +17,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.DrawerLayout;
+import android.text.Layout;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
@@ -216,8 +219,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         _appWidgetHost = new WidgetHost(getApplicationContext(), R.id.app_widget_host);
         _appWidgetHost.startListening();
 
-        initViews();
-
         // item drag and drop
         HpDragOption hpDragOption = new HpDragOption();
         View findViewById = findViewById(R.id.leftDragHandle);
@@ -228,6 +229,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         registerBroadcastReceiver();
         initAppManager();
         initSettings();
+        initViews();
     }
 
     protected void initAppManager() {
@@ -264,8 +266,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     protected void initViews() {
         new HpSearchBar(this, getSearchBar(), findViewById(R.id.calendarDropDownView)).initSearchBar();
-        initDock();
         getAppDrawerController().init();
+        getDock().setHome(this);
 
         getDesktop().init();
         getDesktop().setDesktopEditListener(this);
@@ -289,18 +291,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         });
         new HpAppDrawer(this, findViewById(R.id.appDrawerIndicator)).initAppDrawer(getAppDrawerController());
         initMinibar();
-    }
-
-    private void initDock() {
-        int iconSize = Setup.appSettings().getDockIconSize();
-        getDock().setHome(this);
-        AppSettings appSettings = Setup.appSettings();
-
-        if (appSettings.isDockShowLabel()) {
-            getDock().getLayoutParams().height = Tool.dp2px(((16 + iconSize) + 14) + 10, this);
-        } else {
-            getDock().getLayoutParams().height = Tool.dp2px((16 + iconSize) + 10, this);
-        }
     }
 
     public final void initMinibar() {

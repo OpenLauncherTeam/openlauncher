@@ -19,6 +19,13 @@
             android:title="@string/columns"
             app:min="2" />
 
+        <SeekBarPreference
+            android:defaultValue="1"
+            android:key="@string/pref_key__dock_rows"
+            android:max="10"
+            android:title="@string/rows"
+            app:min="0" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title__appearance">

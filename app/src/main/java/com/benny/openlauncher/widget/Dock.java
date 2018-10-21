@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
 
+import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
@@ -43,7 +44,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         }
     }
 
-    public final void initDockItem(@NonNull HomeActivity homeActivity) {
+    public final void initDockItem(HomeActivity homeActivity) {
         int columns = Setup.appSettings().getDockColumnCount();
         int rows = Setup.appSettings().getDockRowCount();
         setGridSize(columns, rows);
@@ -55,6 +56,9 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
                 addItemToPage(item, 0);
             }
         }
+
+        // call onMeasure to set the height
+        measure(getMeasuredWidth(), getMeasuredHeight());
     }
 
     public boolean dispatchTouchEvent(@NonNull MotionEvent ev) {
@@ -131,13 +135,10 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
 
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (!isInEditMode()) {
-            int height;
+            // set the height for the dock based on the number of rows and the show label preference
             int iconSize = Setup.appSettings().getDockIconSize();
-            if (Setup.appSettings().isDockShowLabel()) {
-                height = Tool.dp2px(((16 + iconSize) + 14) + 10, getContext());
-            } else {
-                height = Tool.dp2px((16 + iconSize) + 10, getContext());
-            }
+            int height = Tool.dp2px((iconSize + 60) * getCellSpanV(), _homeActivity);
+            if (Setup.appSettings().isDockShowLabel()) height += Tool.dp2px(20, getContext());
             getLayoutParams().height = height;
             setMeasuredDimension(View.getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec), height);
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);

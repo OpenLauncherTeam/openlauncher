@@ -218,7 +218,7 @@ public class CellContainer extends ViewGroup {
         invalidate();
     }
 
-    private final void drawCachedOutlineBitmap(Canvas canvas, Rect cell) {
+    private void drawCachedOutlineBitmap(Canvas canvas, Rect cell) {
         if (_cachedOutlineBitmap != null) {
             Bitmap bitmap = _cachedOutlineBitmap;
             float centerX = cell.centerX();
@@ -263,7 +263,7 @@ public class CellContainer extends ViewGroup {
         return DragState.OutOffRange;
     }
 
-    private final PeekDirection getPeekDirectionFromCoordinate(Point from, Point to) {
+    private PeekDirection getPeekDirectionFromCoordinate(Point from, Point to) {
         if (from.y - to.y > 0) {
             return PeekDirection.UP;
         }

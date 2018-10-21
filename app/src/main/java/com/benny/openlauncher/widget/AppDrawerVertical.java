@@ -151,7 +151,6 @@ public class AppDrawerVertical extends CardView {
     }
 
     public static class GridAppDrawerAdapter extends FastItemAdapter<DrawerAppItem> implements INameableAdapter {
-
         GridAppDrawerAdapter() {
             getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<DrawerAppItem>() {
                 @Override
