@@ -158,7 +158,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     }
 
     public boolean addItemToPage(@NonNull Item item, int page) {
-        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDockIconSize(), Setup.appSettings().isDesktopShowLabel());
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDockIconSize(), Setup.appSettings().isDockShowLabel());
         if (itemView == null) {
             HomeActivity._db.deleteItem(item, true);
             return false;
@@ -176,7 +176,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         item._location = Item.LOCATION_DOCK;
         item._x = positionToLayoutPrams.getX();
         item._y = positionToLayoutPrams.getY();
-        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDockIconSize(), Setup.appSettings().isDesktopShowLabel());
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDockIconSize(), Setup.appSettings().isDockShowLabel());
         if (itemView != null) {
             itemView.setLayoutParams(positionToLayoutPrams);
             addView(itemView);
@@ -188,7 +188,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         item._location = Item.LOCATION_DOCK;
         item._x = x;
         item._y = y;
-        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDockIconSize(), Setup.appSettings().isDesktopShowLabel());
+        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDockIconSize(), Setup.appSettings().isDockShowLabel());
         if (itemView == null) {
             return false;
         }
