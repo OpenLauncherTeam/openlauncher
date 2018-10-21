@@ -10,10 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.benny.openlauncher.widget.InsetView
+        <com.benny.openlauncher.widget.StatusView
             android:id="@+id/status_frame"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
@@ -127,12 +128,11 @@
             app:layout_constraintRight_toRightOf="@+id/desktop"
             app:layout_constraintTop_toTopOf="@+id/desktop" />
 
-        <com.benny.openlauncher.widget.InsetView
+        <com.benny.openlauncher.widget.NavigationView
             android:id="@+id/navigation_frame"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </android.support.constraint.ConstraintLayout>

@@ -62,7 +62,6 @@ import com.benny.openlauncher.widget.Desktop.OnDesktopEditListener;
 import com.benny.openlauncher.widget.DesktopOptionView;
 import com.benny.openlauncher.widget.DesktopOptionView.DesktopOptionViewListener;
 import com.benny.openlauncher.widget.Dock;
-import com.benny.openlauncher.widget.InsetView;
 import com.benny.openlauncher.widget.ItemOptionView;
 import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
@@ -91,8 +90,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public static DatabaseHelper _db;
 
     public FrameLayout minibarFrame;
-    public InsetView statusView;
-    public InsetView navigationView;
+    public View statusView;
+    public View navigationView;
 
     // receiver variables
     private static final IntentFilter _appUpdateIntentFilter = new IntentFilter();
@@ -170,11 +169,11 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         return findViewById(R.id.minibar_frame);
     }
 
-    public final InsetView getStatusView() {
+    public final View getStatusView() {
         return findViewById(R.id.status_frame);
     }
 
-    public final InsetView getNavigationView() {
+    public final View getNavigationView() {
         return findViewById(R.id.navigation_frame);
     }
 
@@ -737,10 +736,5 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public final void closeAppDrawer() {
         int finalRadius = Math.max(getAppDrawerController().getDrawer().getWidth(), getAppDrawerController().getDrawer().getHeight());
         getAppDrawerController().close(cx, cy, rad, finalRadius);
-    }
-
-    public void setInsets() {
-        getStatusView().useTopInset();
-        getNavigationView().useBottomInset();
     }
 }
