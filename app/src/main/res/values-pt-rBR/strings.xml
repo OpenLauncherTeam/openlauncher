@@ -51,9 +51,7 @@
     <string name="pref_title__feels">Aparência</string>
     <string name="pref_title__others">Outros</string>
 
-    <string name="pref_title__desktop_style">Estilo</string>
     <string name="pref_title__desktop_indicator_style">Estilo do indicador</string>
-    <string name="pref_summary__desktop_style">Escolha entre a área de trabalho normal e mostrar todos os apps instalados.</string>
     <string name="pref_summary__minibar">Configure a ordem e a visibilidade dos itens da minibar.</string>
     <string name="pref_title__search_bar_enable">Barra de pesquisa</string>
     <string name="pref_summary__search_bar_enable">Exibe uma barra de pesquisa acima da área de trabalho.</string>
@@ -79,7 +77,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Exibir apps ocultos</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Inclui apps ocultos nos resultados de pesquisa.</string>
 
-    <string name="pref_summary__dock_size">Define o tamanho da dock.</string>
     <string name="pref_title__dock_show_label">Exibir rótulos</string>
     <string name="pref_summary__dock_show_label">Exibe o rótulo de um item embaixo do seu ícone.</string>
     <string name="pref_title__dock_background_color">Plano de fundo</string>
@@ -133,12 +130,6 @@
 
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paginada</string>
-
-    <string name="desktop_mode_normal">Normal</string>
-    <string name="desktop_mode_show_all_apps">Exibir todos os apps</string>
-
-    <string name="desktop_indicator_mode_normal">Normal</string>
-    <string name="desktop_indicator_mode_arrow">Seta</string>
 
     <!-- Item Labels -->
     <string name="default_icons">Padrão</string>

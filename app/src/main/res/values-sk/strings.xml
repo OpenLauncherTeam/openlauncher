@@ -51,9 +51,7 @@
     <string name="pref_title__feels">Pocity</string>
     <string name="pref_title__others">Iné</string>
 
-    <string name="pref_title__desktop_style">Štýl</string>
     <string name="pref_title__desktop_indicator_style">Štýl indikátora</string>
-    <string name="pref_summary__desktop_style">Vyberte si medzi klasickou plochou alebo zobrazením všetkých aplikácií.</string>
     <string name="pref_summary__minibar">Nastavenie poradia a viditeľnosti položiek v mini menu.</string>
     <string name="pref_title__search_bar_enable">Vyhľadávacie lišta</string>
     <string name="pref_summary__search_bar_enable">Zobrazovať vyhľadávací panel v hornej časti plochy.</string>
@@ -79,7 +77,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Zobraziť skryté aplikácie</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Do výsledkov vyhľadávania zahrnúť aj skryté aplikácie.</string>
 
-    <string name="pref_summary__dock_size">Nastaviť veľkosť dokovacej oblasti.</string>
     <string name="pref_title__dock_show_label">Zobrazovať štítky</string>
     <string name="pref_summary__dock_show_label">Zobrazovať štítky s názvom pod ikonami.</string>
     <string name="pref_title__dock_background_color">Pozadie</string>
@@ -134,12 +131,6 @@
 
     <string name="vertical_scroll_drawer">Zvisle</string>
     <string name="horizontal_paged_drawer">Stránkované</string>
-
-    <string name="desktop_mode_normal">Normálny</string>
-    <string name="desktop_mode_show_all_apps">Zobraziť všetky aplikácie</string>
-
-    <string name="desktop_indicator_mode_normal">Normálny</string>
-    <string name="desktop_indicator_mode_arrow">Šípka</string>
 
     <!-- Item Labels -->
     <string name="default_icons">Prednastavené</string>

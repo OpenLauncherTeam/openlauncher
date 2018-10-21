@@ -51,8 +51,6 @@
     <string name="pref_title__feels">Feels</string>
     <string name="pref_title__others">Altro</string>
 
-    <string name="pref_title__desktop_style">Stile</string>
-    <string name="pref_summary__desktop_style">Choose between a normal desktop and showing all installed apps.</string>
     <string name="pref_title__desktop_indicator_style">Stile indicatore</string>
     <string name="pref_summary__minibar">Configura l\'ordine e la visibilità degli elementi della Minibar.</string>
     <string name="pref_title__search_bar_enable">Barra di ricerca</string>
@@ -80,7 +78,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Mostra app nascoste</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Includi app nascoste nei risultati di ricerca.</string>
 
-    <string name="pref_summary__dock_size">Imposta dimensione della dock.</string>
     <string name="pref_title__dock_show_label">Mostra etichette</string>
     <string name="pref_summary__dock_show_label">Mostra etichette sotto le rispettive icone.</string>
     <string name="pref_title__dock_background_color">Sfondo</string>
@@ -135,12 +132,6 @@
 
     <string name="vertical_scroll_drawer">Verticale</string>
     <string name="horizontal_paged_drawer">Orizzontale</string>
-
-    <string name="desktop_mode_normal">Normale</string>
-    <string name="desktop_mode_show_all_apps">Mostra tutte le app</string>
-
-    <string name="desktop_indicator_mode_normal">Normale</string>
-    <string name="desktop_indicator_mode_arrow">Freccia</string>
 
     <!-- Item Labels -->
     <string name="default_icons">Predefinito</string>

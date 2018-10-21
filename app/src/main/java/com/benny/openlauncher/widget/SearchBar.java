@@ -212,8 +212,8 @@ public class SearchBar extends FrameLayout {
                             .withIconSize(getContext(), 50)
                             .withTextColor(Color.WHITE)
                             .withIconPadding(getContext(), 8)
-                            .withTextGravity(Setup.appSettings().getSearchGridSize() > 1 ? Gravity.CENTER : Gravity.CENTER_VERTICAL)
-                            .withIconGravity(Setup.appSettings().getSearchGridSize() > 1 ? Gravity.TOP : Gravity.START)
+                            .withTextGravity(Setup.appSettings().isSearchUseGrid() ? Gravity.CENTER : Gravity.CENTER_VERTICAL)
+                            .withIconGravity(Setup.appSettings().isSearchUseGrid() ? Gravity.TOP : Gravity.START)
                             .withOnClickListener(new OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -308,7 +308,7 @@ public class SearchBar extends FrameLayout {
     }
 
     private void updateRecyclerViewLayoutManager() {
-        int gridSize = Setup.appSettings().isSearchUseGrid() ? Setup.appSettings().getSearchGridSize() : 1;
+        int gridSize = Setup.appSettings().isSearchUseGrid() ? 4 : 1;
         if (gridSize == 1) {
             _searchRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
             updateList(Gravity.START, Gravity.CENTER_VERTICAL);

@@ -24,8 +24,8 @@
     </string-array>
 
     <string-array name="entries__desktop_indicator_mode" translatable="false">
-        <item>@string/desktop_indicator_mode_normal</item>
-        <item>@string/desktop_indicator_mode_arrow</item>
+        <item>@string/indicator_mode_dots</item>
+        <item>@string/indicator_mode_lines</item>
     </string-array>
 
     <string-array name="entries__drawer_styles" translatable="false">

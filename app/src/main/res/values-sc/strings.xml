@@ -53,9 +53,7 @@
     <string name="pref_title__feels">Cumportamentu</string>
     <string name="pref_title__others">Àteru</string>
 
-    <string name="pref_title__desktop_style">Istile</string>
     <string name="pref_title__desktop_indicator_style">Istile de s\'indicadore</string>
-    <string name="pref_summary__desktop_style">Issèbera intre un\'iscrivania normale e una chi ammustret totu sas aplicatziones installadas.</string>
     <string name="pref_summary__minibar">Cunfigura s\'òrdine e sa visibilidade de sos elementos de sa minibarra.</string>
     <string name="pref_title__search_bar_enable">Barra de chirca</string>
     <string name="pref_summary__search_bar_enable">Ammustra una barra de chirca a pitzu de s\'iscrivania.</string>
@@ -81,7 +79,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Ammustra sas aplicatziones istichidas</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Inclui sas aplicatziones istichidas in sos risultados de chirca.</string>
 
-    <string name="pref_summary__dock_size">Imposta sa mannària de sa barra de suta.</string>
     <string name="pref_title__dock_show_label">Ammustra sas etichetas</string>
     <string name="pref_summary__dock_show_label">Ammustra sas etichetas de sos elementos in suta de sas iconas issoro.</string>
     <string name="pref_title__dock_background_color">Isfundu</string>
@@ -136,12 +133,6 @@
 
     <string name="vertical_scroll_drawer">Verticale</string>
     <string name="horizontal_paged_drawer">Orizontale</string>
-
-    <string name="desktop_mode_normal">Normale</string>
-    <string name="desktop_mode_show_all_apps">Ammustra totu sas aplicatziones</string>
-
-    <string name="desktop_indicator_mode_normal">Normale</string>
-    <string name="desktop_indicator_mode_arrow">Fritza</string>
 
     <!-- Item Labels -->
     <string name="default_icons">Predefinidu</string>

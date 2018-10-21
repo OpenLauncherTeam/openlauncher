@@ -56,9 +56,7 @@
     <string name="pref_title__feels">Aspektoj</string>
     <string name="pref_title__others">Aliaj</string>
 
-    <string name="pref_title__desktop_style">Stilo</string>
     <string name="pref_title__desktop_indicator_style">Indikila stilo</string>
-    <string name="pref_summary__desktop_style">Elekti inter normala labortablo kaj labortablo ke montri ĉiujn instalitajn aplikaĵojn.</string>
     <string name="pref_summary__minibar">Agordi ordon kaj videblon de minibretaj eroj.</string>
     <string name="pref_title__search_bar_enable">Ŝercbreto</string>
     <string name="pref_summary__search_bar_enable">Montri serĉbreton sur labortablo.</string>
@@ -84,7 +82,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Montri kaŝitajsn aplikaĵojn</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Montri kaŝitajn aplikaĵojn en la serĉrezultoj.</string>
 
-    <string name="pref_summary__dock_size">Agordi dokgrando.</string>
     <string name="pref_title__dock_show_label">Montri markojn.</string>
     <string name="pref_summary__dock_show_label">Montri ermarkon sub ĝiaj piktogramoj.</string>
     <string name="pref_title__dock_background_color">Fono</string>
@@ -135,12 +132,6 @@
 
     <string name="vertical_scroll_drawer">Vertikala</string>
     <string name="horizontal_paged_drawer">Paĝe</string>
-
-    <string name="desktop_mode_normal">Normala</string>
-    <string name="desktop_mode_show_all_apps">Montri ĉiujn aplikaĵojn</string>
-
-    <string name="desktop_indicator_mode_normal">Normala</string>
-    <string name="desktop_indicator_mode_arrow">Sago</string>
 
     <!-- Item Labels -->
     <string name="default_icons">Defaŭlta</string>

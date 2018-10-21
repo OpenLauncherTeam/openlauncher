@@ -26,22 +26,27 @@
     <!-- Preference Keys -->
     <string name="pref_key__desktop_columns" translatable="false">pref_key__desktop_columns</string>
     <string name="pref_key__desktop_rows" translatable="false">pref_key__desktop_rows</string>
-    <string name="pref_key__desktop_style" translatable="false">pref_key__desktop_style</string>
     <string name="pref_key__desktop_indicator_style" translatable="false">pref_key__desktop_indicator_style</string>
     <string name="pref_key__minibar" translatable="false">pref_key__minibar</string>
     <string name="pref_key__minibar_enable" translatable="false">pref_key__minibar_enable</string>
     <string name="pref_key__minibar_items" translatable="false">pref_key__minibar_items</string>
-    <string name="pref_key__search_bar_enable" translatable="false">pref_key__search_bar_enable</string>
-    <string name="pref_key__search_bar_show_hidden_apps" translatable="false">pref_key__search_bar_show_hidden_apps</string>
-    <string name="pref_key__desktop_fullscreen" translatable="false">pref_key__desktop_fullscreen</string>
+    <string name="pref_key__desktop_rotate" translatable="false">pref_key__desktop_rotate</string>
     <string name="pref_key__desktop_hide_grid" translatable="false">pref_key__desktop_hide_grid</string>
+    <string name="pref_key__desktop_fullscreen" translatable="false">pref_key__desktop_fullscreen</string>
     <string name="pref_key__desktop_show_position_indicator" translatable="false">pref_key__desktop_show_position_indicator</string>
     <string name="pref_key__desktop_show_label" translatable="false">pref_key__desktop_show_label</string>
+    <string name="pref_key__search_bar_enable" translatable="false">pref_key__search_bar_enable</string>
     <string name="pref_key__search_bar_base_uri" translatable="false">pref_key__search_bar_base_uri</string>
     <string name="pref_key__search_bar_force_browser" translatable="false">pref_key__search_bar_force_browser</string>
+    <string name="pref_key__search_bar_show_hidden_apps" translatable="false">pref_key__search_bar_show_hidden_apps</string>
+    <string name="pref_key__date_bar_date_format_type" translatable="false">pref_key__date_bar_date_format_type</string>
+    <string name="pref_key__date_bar_date_format_custom_1" translatable="false">pref_key__date_bar_date_format_custom_1</string>
+    <string name="pref_key__date_bar_date_format_custom_2" translatable="false">pref_key__date_bar_date_format_custom_2</string>
+    <string name="pref_key__date_bar_date_text_color" translatable="false">pref_key__date_bar_date_text_color</string>
     <string name="pref_key__desktop_background_color" translatable="false">pref_key__desktop_background_color</string>
     <string name="pref_key__desktop_folder_color" translatable="false">pref_key__desktop_folder_color</string>
     <string name="pref_key__desktop_folder_label_color" translatable="false">pref_key__desktop_folder_label_color</string>
+    <string name="pref_key__desktop_inset_color" translatable="false">pref_key__desktop_inset_color</string>
     <string name="pref_key__minibar_background_color" translatable="false">pref_key__minibar_background_color</string>
 
     <string name="pref_key__dock_enable" translatable="false">pref_key__dock_enable</string>
@@ -58,12 +63,11 @@
     <string name="pref_key__drawer_remember_position" translatable="false">pref_key__drawer_remember_position</string>
     <string name="pref_key__drawer_show_position_indicator" translatable="false">pref_key__drawer_show_position_indicator</string>
     <string name="pref_key__drawer_show_label" translatable="false">pref_key__drawer_show_label</string>
+    <string name="pref_key__drawer_label_font_size" translatable="false">pref_key__drawer_label_font_size</string>
     <string name="pref_key__drawer_background_color" translatable="false">pref_key__drawer_background_color</string>
     <string name="pref_key__drawer_card_color" translatable="false">pref_key__drawer_card_color</string>
     <string name="pref_key__drawer_label_color" translatable="false">pref_key__drawer_label_color</string>
     <string name="pref_key__drawer_fast_scroll_color" translatable="false">pref_key__drawer_fast_scroll_color</string>
-    <string name="pref_key__overall_animation_speed_modifier" translatable="false">pref_key__overall_animation_speed_modifier</string>
-    <string name="pref_key__desktop_rotate" translatable="false">pref_key__desktop_rotate</string>
 
     <string name="pref_key__gesture_feedback" translatable="false">pref_key__gesture_feedback</string>
     <string name="pref_key__gesture_quick_swipe" translatable="false">pref_key__gesture_quick_swipe</string>
@@ -73,16 +77,17 @@
     <string name="pref_key__gesture_pinch" translatable="false">pref_key__gesture_pinch</string>
     <string name="pref_key__gesture_unpinch" translatable="false">pref_key__gesture_unpinch</string>
 
+    <string name="pref_key__theme" translatable="false">pref_key__theme</string>
+    <string name="pref_key__primary_color" translatable="false">pref_key__primary_color</string>
     <string name="pref_key__icon_size" translatable="false">pref_key__icon_size</string>
     <string name="pref_key__icon_pack" translatable="false">pref_key__icon_pack</string>
+    <string name="pref_key__overall_animation_speed_modifier" translatable="false">pref_key__overall_animation_speed_modifier</string>
 
     <string name="pref_key__language" translatable="false">pref_key__language</string>
     <string name="pref_key__backup" translatable="false">pref_key__backup</string>
     <string name="pref_key__restore" translatable="false">pref_key__restore</string>
     <string name="pref_key__clear_database" translatable="false">pref_key__clear_database</string>
     <string name="pref_key__restart" translatable="false">pref_key__restart</string>
-    <string name="pref_key__theme" translatable="false">pref_key__theme</string>
-    <string name="pref_key__primary_color" translatable="false">pref_key__primary_color</string>
 
     <string name="pref_key__cat_desktop" translatable="false">pref_key__cat_desktop</string>
     <string name="pref_key__cat_dock" translatable="false">pref_key__cat_dock</string>
@@ -97,13 +102,7 @@
     <string name="pref_key__desktop_lock" translatable="false">pref_key__desktop_lock</string>
     <string name="pref_key__desktop_current_position" translatable="false">pref_key__desktop_current_position</string>
     <string name="pref_key__queue_restart" translatable="false">pref_key__queue_restart</string>
-
     <string name="pref_key__desktop_search_use_grid" translatable="false">pref_key__desktop_search_use_grid</string>
-    <string name="pref_key__drawer_label_font_size" translatable="false">pref_key__drawer_label_font_size</string>
-    <string name="pref_key__date_bar_date_format_type" translatable="false">pref_key__date_bar_date_format_type</string>
-    <string name="pref_key__date_bar_date_format_custom_1" translatable="false">pref_key__date_bar_date_format_custom_1</string>
-    <string name="pref_key__date_bar_date_format_custom_2" translatable="false">pref_key__date_bar_date_format_custom_2</string>
-    <string name="pref_key__date_bar_date_text_color" translatable="false">pref_key__date_bar_date_text_color</string>
 
     <string name="pref_key__more_info__settings" translatable="false">pref_key__more_info__settings</string>
     <string name="pref_key__more_info__source_code" translatable="false">pref_key__more_info__source_code</string>

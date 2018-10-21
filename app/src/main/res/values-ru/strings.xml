@@ -49,9 +49,7 @@
     <string name="pref_title__feels">Ощущения</string>
     <string name="pref_title__others">Другое</string>
 
-    <string name="pref_title__desktop_style">Стиль</string>
     <string name="pref_title__desktop_indicator_style">Стиль индикатора</string>
-    <string name="pref_summary__desktop_style">Выбрать между обычным рабочим столом и показом всех установленных приложений.</string>
     <string name="pref_summary__minibar">Изменить порядок и видимость элементов мини-бара.</string>
     <string name="pref_title__search_bar_enable">Строка поиска</string>
     <string name="pref_summary__search_bar_enable">Показывать строку поиска на рабочем столе.</string>
@@ -75,7 +73,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Показывать скрытые приложения</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Включить спрятанные приложения в результаты поиска.</string>
 
-    <string name="pref_summary__dock_size">Установить размер дока.</string>
     <string name="pref_title__dock_show_label">Показывать подписи</string>
     <string name="pref_summary__dock_show_label">Показывать подписи под значками.</string>
     <string name="pref_title__dock_background_color">Фон</string>
@@ -123,12 +120,6 @@
 
     <string name="vertical_scroll_drawer">Вертикальный</string>
     <string name="horizontal_paged_drawer">Постраничный</string>
-
-    <string name="desktop_mode_normal">Обычный</string>
-    <string name="desktop_mode_show_all_apps">Все приложения</string>
-
-    <string name="desktop_indicator_mode_normal">Обычный</string>
-    <string name="desktop_indicator_mode_arrow">Стрелка</string>
 
     <!-- Item Labels -->
     <string name="default_icons">По умолчанию</string>

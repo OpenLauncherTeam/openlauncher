@@ -51,9 +51,7 @@
     <string name="pref_title__feels">Ambiance</string>
     <string name="pref_title__others">Autres</string>
 
-    <string name="pref_title__desktop_style">Style</string>
     <string name="pref_title__desktop_indicator_style">Style de l\'indicateur</string>
-    <string name="pref_summary__desktop_style">Choisir entre afficher un bureau standard ou montrer toutes les applications installées.</string>
     <string name="pref_summary__minibar">Configurer l\'ordre et la visibilité des éléments de la Minibarre.</string>
     <string name="pref_title__search_bar_enable">Barre de recherche</string>
     <string name="pref_summary__search_bar_enable">Afficher une barre de recherche sur le bureau.</string>
@@ -79,7 +77,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Montrer les applications cachées</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Inclure des applications cachées dans les résultats de recherches</string>
 
-    <string name="pref_summary__dock_size">Définir la taille du dock.</string>
     <string name="pref_title__dock_show_label">Montrer les noms</string>
     <string name="pref_summary__dock_show_label">Afficher le nom des applications et des dossiers sous leurs icônes.</string>
     <string name="pref_title__dock_background_color">Arrière-plan</string>
@@ -134,12 +131,6 @@
 
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paginé</string>
-
-    <string name="desktop_mode_normal">Normal</string>
-    <string name="desktop_mode_show_all_apps">Montrer toutes les applications</string>
-
-    <string name="desktop_indicator_mode_normal">Normal</string>
-    <string name="desktop_indicator_mode_arrow">Flèche</string>
 
     <!-- Item Labels -->
     <string name="default_icons">Défaut</string>

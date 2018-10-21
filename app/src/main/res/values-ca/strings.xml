@@ -55,9 +55,7 @@
     <string name="pref_title__feels">Comportament</string>
     <string name="pref_title__others">Altres</string>
 
-    <string name="pref_title__desktop_style">Estil</string>
     <string name="pref_title__desktop_indicator_style">Estil de l\'indicador</string>
-    <string name="pref_summary__desktop_style">Tria entre l\'escriptori normal o un que mostri totes les aplicacions instal·lades</string>
 
     <string name="pref_summary__minibar">Configura l\'ordre i la visibilitat dels items de la minibar.</string>
     <string name="pref_title__search_bar_enable">Barra de cerca</string>
@@ -86,7 +84,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Mostra apps ocultes</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Inclou les apps ocultes en els resultats de la cerca.</string>
 
-    <string name="pref_summary__dock_size">Estableix la mida de l\'acoblador.</string>
     <string name="pref_title__dock_show_label">Mostrar les etiquetes.</string>
     <string name="pref_summary__dock_show_label">Mostrar les etiquetes dels items sota de les icones.</string>
     <string name="pref_title__dock_background_color">Fons</string>
@@ -140,12 +137,6 @@
 
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paginat</string>
-
-    <string name="desktop_mode_normal">Normal</string>
-    <string name="desktop_mode_show_all_apps">Mostrar totes les aplicacions</string>
-
-    <string name="desktop_indicator_mode_normal">Normal</string>
-    <string name="desktop_indicator_mode_arrow">Fletxa</string>
 
     <!-- Item Labels -->
     <string name="default_icons">Per defecte</string>

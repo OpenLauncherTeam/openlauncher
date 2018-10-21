@@ -5,7 +5,7 @@
     <string name="intro_finish">Let\'s start.</string>
     <string name="intro1_text">This is OpenLauncher. A fully open source launcher. Here for you.</string>
     <string name="intro2_text">Swipe inwards from the left border of your home screen to open the minibar. There you can find the settings,
-        change the wallpaper, and do lots of other stuff.</string>
+        change the wallpaper, lots of other stuff.</string>
     <string name="intro3_title">Settings</string>
     <string name="intro3_text">You can configure your desktop, app drawer, and dock. Try it out!</string>
     <string name="intro4_community">Large community</string>
@@ -73,36 +73,40 @@
     <string name="pref_title__others">Others</string>
     <string name="pref_title__animations">Animations</string>
 
-    <string name="pref_title__desktop_style">Style</string>
-    <string name="pref_summary__desktop_style">Choose between a normal desktop and showing all installed apps.</string>
     <string name="pref_title__desktop_indicator_style">Indicator Style</string>
     <string name="pref_summary__minibar">Configure the order and visibility of minibar items.</string>
-    <string name="pref_title__search_bar_enable">Search Bar</string>
-    <string name="pref_summary__search_bar_enable">Display a search bar above the desktop.</string>
-    <string name="pref_title__desktop_fullscreen">Fullscreen</string>
-    <string name="pref_summary__desktop_fullscreen">Enable fullscreen for the desktop.</string>
+    <string name="pref_title__desktop_rotate">Rotate</string>
+    <string name="pref_summary__desktop_rotate">Allow screen rotate.</string>
     <string name="pref_title__desktop_hide_grid">Hide Grid</string>
     <string name="pref_summary__desktop_hide_grid">Hide the guiding grid.</string>
+    <string name="pref_title__desktop_fullscreen">Fullscreen</string>
+    <string name="pref_summary__desktop_fullscreen">Enable fullscreen for the desktop.</string>
     <string name="pref_title__desktop_show_position_indicator">Position Indicator</string>
     <string name="pref_summary__desktop_show_position_indicator">Show the page indicator below the desktop.</string>
     <string name="pref_title__desktop_show_label">Show Labels</string>
     <string name="pref_summary__desktop_show_label">Show item labels below their icons.</string>
-    <string name="pref_title__desktop_rotate">Rotate</string>
-    <string name="pref_summary__desktop_rotate">Allow screen rotate.</string>
+    <string name="pref_title__desktop_background_color">Background</string>
+    <string name="pref_title__desktop_folder_color">Folder Background</string>
+    <string name="pref_title__desktop_folder_color_text">Folder Text</string>
+    <string name="pref_title__desktop_inset_color">System Bars</string>
 
+    <string name="pref_title__search_bar_enable">Search Bar</string>
+    <string name="pref_summary__search_bar_enable">Display a search bar above the desktop.</string>
     <string name="pref_title__search_bar_base_uri">Search URI</string>
     <string name="pref_summary__search_bar_base_uri">Set the URI used for web searches.</string>
     <string name="pref_dialog__search_bar_base_uri">Enter the URI that should be used for web searches. The tag {query} can be used as
       placeholder for the search query, in case no placeholder is used the search query will be appended at the end of the URI.</string>
     <string name="pref_title__search_bar_force_browser">Force browser search</string>
     <string name="pref_summary__search_bar_force_browser">Always use the browser for online searches.</string>
-    <string name="pref_title__desktop_background_color">Background</string>
-    <string name="pref_title__desktop_folder_color">Folder Background</string>
-    <string name="pref_title__desktop_folder_color_text">Folder Text</string>
     <string name="pref_title__search_bar_show_hidden_apps">Show hidden apps</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Include hidden apps in the search results.</string>
 
-    <string name="pref_summary__dock_size">Set the dock size.</string>
+    <string name="pref_title__date_bar">Date Bar</string>
+    <string name="pref_title__date_bar_text_color">Text Color</string>
+    <string name="pref_title__date_bar_date_format">Date Format</string>
+    <string name="pref_title__date_bar_date_format_custom_1">Custom Format: Line 1</string>
+    <string name="pref_title__date_bar_date_format_custom_2">Custom Format: Line 2</string>
+
     <string name="pref_title__dock_show_label">Show Labels</string>
     <string name="pref_summary__dock_show_label">Show item labels below their icons.</string>
     <string name="pref_title__dock_background_color">Background</string>
@@ -124,9 +128,6 @@
     <string name="pref_title__drawer_label_color">Label</string>
     <string name="pref_title__drawer_fast_scroll_color">Scrollbar</string>
     <string name="pref_title__drawer_label_font_size">Label Font Size</string>
-    <string name="pref_title__animation_speed_modifier">Animation Speed</string>
-    <string name="pref_summary__animation_speed_modifier">Modify the overall speed of animations</string>
-
 
     <string name="pref_title__gesture_feedback">Gesture Feedback</string>
     <string name="pref_summary__gesture_feedback">Get feedback when long pressing an item on the desktop.</string>
@@ -138,9 +139,15 @@
     <string name="pref_title__gesture_pinch">Pinch</string>
     <string name="pref_title__gesture_unpinch">Unpinch</string>
 
+    <string name="pref_title__theme">Theme</string>
+    <string name="pref_summary__theme">Set the theme for the entire app.</string>
+    <string name="pref_title__primary_color">Primary Color</string>
+    <string name="pref_summary__primary_color">Set the primary color for the app.</string>
     <string name="pref_summary__icon_size">Size of all app icons.</string>
     <string name="pref_title__icon_pack">Icon Pack</string>
     <string name="pref_summary__icon_pack">Select an installed icon pack.</string>
+    <string name="pref_title__animation_speed_modifier">Animation Speed</string>
+    <string name="pref_summary__animation_speed_modifier">Modify the overall speed of animations</string>
 
     <string name="pref_title__language">Language</string>
     <string name="pref_summary__language">Change language of this app. Restart app for changes to take effect</string>
@@ -152,19 +159,16 @@
     <string name="pref_summary__clear_database">Delete the data for the dock and desktop to fix issues.</string>
     <string name="pref_title__restart">Restart</string>
     <string name="pref_summary__restart">Restart the launcher in case it\'s misbehaving.</string>
-    <string name="pref_title__theme">Theme</string>
-    <string name="pref_summary__theme">Set the theme for the entire app.</string>
-    <string name="pref_title__primary_color">Primary Color</string>
-    <string name="pref_summary__primary_color">Set the primary color for the app.</string>
 
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paged</string>
 
-    <string name="desktop_mode_normal">Normal</string>
-    <string name="desktop_mode_show_all_apps">Show All Apps</string>
+    <string name="indicator_mode_dots">Dots</string>
+    <string name="indicator_mode_lines">Lines</string>
 
-    <string name="desktop_indicator_mode_normal">Normal</string>
-    <string name="desktop_indicator_mode_arrow">Arrow</string>
+    <string name="none">None</string>
+    <string name="launch">Launch App</string>
+    <string name="app_drawer">App Drawer</string>
 
     <!-- Item Labels -->
     <string name="default_icons">Default</string>
@@ -194,11 +198,6 @@
     <string name="theme_dark">Dark</string>
     <string name="theme_black">Black</string>
     <string name="debug">Debug</string>
-    <string name="pref_title__date_bar">Date Bar</string>
-    <string name="pref_title__date_bar_text_color">Text Color</string>
-    <string name="pref_title__date_bar_date_format">Date Format</string>
-    <string name="pref_title__date_bar_date_format_custom_1">Custom Format: Line 1</string>
-    <string name="pref_title__date_bar_date_format_custom_2">Custom Format: Line 2</string>
 
     <!-- Titles -->
     <string name="settings">Settings</string>
@@ -242,8 +241,5 @@
     <string name="bug_reports">Report bugs</string>
     <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">More information on donating or otherwise supporting this project</string>
     <string name="android_contribution_guide">Android contribution guide</string>
-    <string name="none">None</string>
-    <string name="launch">Launch App</string>
-    <string name="app_drawer">App Drawer</string>
 
 </resources>

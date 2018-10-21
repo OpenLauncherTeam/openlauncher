@@ -48,9 +48,7 @@
     <string name="pref_title__feels">Iḥulfan</string>
     <string name="pref_title__others">Ayen nniḍen</string>
 
-    <string name="pref_title__desktop_style">Aɣanib</string>
     <string name="pref_title__desktop_indicator_style">Aɣani n unamel</string>
-    <string name="pref_summary__desktop_style">Fren gar tnarit Choose between a normal desktop and showing all installed apps.</string>
     <string name="pref_summary__minibar">Swel asmizzwer akked tiẓri n iferdisen n ufeggag amectuḥ.</string>
     <string name="pref_title__search_bar_enable">Afeggag n unadi</string>
     <string name="pref_summary__search_bar_enable">Sken afeggag n unadi nnig n tnarit.</string>
@@ -76,7 +74,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Sken isnasen yeffren</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Seddu isnasen yeffren deg ugmuḍ n unadi.</string>
 
-    <string name="pref_summary__dock_size">Sbadu teɣzi n dock.</string>
     <string name="pref_title__dock_show_label">Sken tibzimin</string>
     <string name="pref_summary__dock_show_label">Sken tibzimin n iferdisen ddaw n tignitin-nsen.</string>
     <string name="pref_title__dock_background_color">Agilal</string>
@@ -127,12 +124,6 @@
 
     <string name="vertical_scroll_drawer">Ubdid</string>
     <string name="horizontal_paged_drawer">S isebtar</string>
-
-    <string name="desktop_mode_normal">Amagnu</string>
-    <string name="desktop_mode_show_all_apps">Sken akk isnasen</string>
-
-    <string name="desktop_indicator_mode_normal">Amagnu</string>
-    <string name="desktop_indicator_mode_arrow">Aneccab</string>
 
     <!-- Item Labels -->
     <string name="default_icons">Amezwer</string>

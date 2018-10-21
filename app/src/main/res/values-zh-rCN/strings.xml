@@ -57,8 +57,6 @@
     <string name="pref_title__color">颜色</string>
     <string name="pref_title__search_bar">搜索栏</string>
 
-    <string name="pref_title__desktop_style">样式</string>
-    <string name="pref_summary__desktop_style">选择使用正常桌面，或显示所有已安装的应用</string>
     <string name="pref_summary__minibar">设置快捷操作栏项的排序和可见度</string>
     <string name="pref_title__search_bar_enable">搜索栏</string>
     <string name="pref_summary__search_bar_enable">在桌面上部显示一个搜索栏</string>
@@ -76,7 +74,6 @@
     <string name="pref_title__desktop_background_color">背景</string>
     <string name="pref_title__desktop_folder_color">文件夹</string>
 
-    <string name="pref_summary__dock_size">设置托盘尺寸</string>
     <string name="pref_title__dock_show_label">显示标签</string>
     <string name="pref_summary__dock_show_label">在项的图标下方显示相应标签</string>
     <string name="pref_title__dock_background_color">背景</string>
@@ -119,9 +116,6 @@
 
     <string name="vertical_scroll_drawer">垂直</string>
     <string name="horizontal_paged_drawer">分页</string>
-
-    <string name="desktop_mode_normal">正常</string>
-    <string name="desktop_mode_show_all_apps">显示所有应用</string>
 
     <!-- Preference Keys -->
 

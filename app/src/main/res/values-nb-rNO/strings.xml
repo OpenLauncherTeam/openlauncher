@@ -66,7 +66,6 @@
     <string name="pref_title__desktop_background_color">Bakgrunn</string>
     <string name="pref_title__desktop_folder_color">Mappe</string>
 
-    <string name="pref_summary__dock_size">Vis samlevindusstørrelse.</string>
     <string name="pref_title__dock_show_label">Vis etiketter</string>
     <string name="pref_summary__dock_show_label">Vis program- og mappe-navn under deres respektive ikoner.</string>
     <string name="pref_title__dock_background_color">Bakgrunn</string>

@@ -34,6 +34,14 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getInt(R.string.pref_key__desktop_rows, 6);
     }
 
+    public int getDesktopIndicatorMode() {
+        return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.NORMAL);
+    }
+
+    public boolean isDesktopHideGrid() {
+        return getBool(R.string.pref_key__desktop_hide_grid, true);
+    }
+
     public boolean isDesktopFullscreen() {
         return getBool(R.string.pref_key__desktop_fullscreen, false);
     }
@@ -86,26 +94,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getInt(R.string.pref_key__date_bar_date_text_color, Color.WHITE);
     }
 
-    public boolean isResetSearchBarOnOpen() {
-        return false;
-    }
-
-    public boolean isSearchGridListSwitchEnabled() {
-        return false;
-    }
-
-    public boolean isSearchUseGrid() {
-        return getBool(R.string.pref_key__desktop_search_use_grid, false);
-    }
-
-    public void setSearchUseGrid(boolean enabled) {
-        setBool(R.string.pref_key__desktop_search_use_grid, enabled);
-    }
-
-    public int getSearchGridSize() {
-        return 4;
-    }
-
     public int getDesktopBackgroundColor() {
         return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
     }
@@ -114,12 +102,16 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
     }
 
-    public int getMinibarBackgroundColor() {
-        return getInt(R.string.pref_key__minibar_background_color, ContextCompat.getColor(_context, R.color.colorPrimary));
-    }
-
     public int getFolderLabelColor() {
         return getInt(R.string.pref_key__desktop_folder_label_color, Color.BLACK);
+    }
+
+    public int getDesktopInsetColor() {
+        return getInt(R.string.pref_key__desktop_inset_color, ContextCompat.getColor(_context, R.color.transparent));
+    }
+
+    public int getMinibarBackgroundColor() {
+        return getInt(R.string.pref_key__minibar_background_color, ContextCompat.getColor(_context, R.color.colorPrimary));
     }
 
     public int getDesktopIconSize() {
@@ -176,6 +168,10 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
 
     public boolean isDrawerShowLabel() {
         return getBool(R.string.pref_key__drawer_show_label, true);
+    }
+
+    public float getDrawerLabelFontSize() {
+        return getInt(R.string.pref_key__drawer_label_font_size, 13);
     }
 
     public int getDrawerBackgroundColor() {
@@ -250,8 +246,12 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return gesture;
     }
 
-    public boolean isDesktopHideGrid() {
-        return getBool(R.string.pref_key__desktop_hide_grid, true);
+    public String getTheme() {
+        return getString(R.string.pref_key__theme, "0");
+    }
+
+    public int getPrimaryColor() {
+        return getInt(R.string.pref_key__primary_color, _context.getResources().getColor(R.color.colorPrimary));
     }
 
     public int getIconSize() {
@@ -266,16 +266,12 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         setString(R.string.pref_key__icon_pack, value);
     }
 
+    public float getOverallAnimationSpeedModifier() {
+        return (float) (getInt(R.string.pref_key__overall_animation_speed_modifier, 30) / 100.0);
+    }
+
     public String getLanguage() {
         return getString(R.string.pref_key__language, "");
-    }
-
-    public String getTheme() {
-        return getString(R.string.pref_key__theme, "0");
-    }
-
-    public int getPrimaryColor() {
-        return getInt(R.string.pref_key__primary_color, _context.getResources().getColor(R.color.colorPrimary));
     }
 
     // internal preferences below here
@@ -304,6 +300,18 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         setStringList(R.string.pref_key__minibar_items, value);
     }
 
+    public boolean isResetSearchBarOnOpen() {
+        return false;
+    }
+
+    public boolean isSearchUseGrid() {
+        return getBool(R.string.pref_key__desktop_search_use_grid, false);
+    }
+
+    public void setSearchUseGrid(boolean enabled) {
+        setBool(R.string.pref_key__desktop_search_use_grid, enabled);
+    }
+
     public ArrayList<String> getHiddenAppsList() {
         return getStringList(R.string.pref_key__hidden_apps);
     }
@@ -326,10 +334,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
 
     public void setDesktopLock(boolean value) {
         setBool(R.string.pref_key__desktop_lock, value);
-    }
-
-    public int getDesktopIndicatorMode() {
-        return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.NORMAL);
     }
 
     public boolean getAppRestartRequired() {
@@ -355,13 +359,5 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
 
     public boolean enableImageCaching() {
         return true;
-    }
-
-    public float getDrawerLabelFontSize() {
-        return getInt(R.string.pref_key__drawer_label_font_size, 13);
-    }
-
-    public float getOverallAnimationSpeedModifier() {
-        return (float) (getInt(R.string.pref_key__overall_animation_speed_modifier, 30) / 100.0);
     }
 }

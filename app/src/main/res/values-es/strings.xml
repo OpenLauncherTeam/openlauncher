@@ -56,9 +56,7 @@
     <string name="pref_title__feels">Apariencia</string>
     <string name="pref_title__others">Otros</string>
 
-    <string name="pref_title__desktop_style">Estilo</string>
     <string name="pref_title__desktop_indicator_style">Estilo del indicador</string>
-    <string name="pref_summary__desktop_style">Elige entre el escritorio normal y uno que muestre todas las aplicaciones instaladas.</string>
     <string name="pref_summary__minibar">Configura el orden y la visibilidad de los ítems de la minibar.</string>
     <string name="pref_title__search_bar_enable">Barra de búsqueda</string>
     <string name="pref_summary__search_bar_enable">Muestra una barra de búsqueda encima del escritorio.</string>
@@ -84,7 +82,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Mostrar apps escondidas</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Mostrar aplicaciones escondidas en los resultados de búsqueda.</string>
 
-    <string name="pref_summary__dock_size">Establece el tamaño del dock.</string>
     <string name="pref_title__dock_show_label">Mostrar las etiquetas.</string>
     <string name="pref_summary__dock_show_label">Mostrar las etiquetas de los ítems debajo de sus íconos.</string>
     <string name="pref_title__dock_background_color">Fondo</string>
@@ -135,12 +132,6 @@
 
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paginado</string>
-
-    <string name="desktop_mode_normal">Normal</string>
-    <string name="desktop_mode_show_all_apps">Mostrar todas las aplicaciones</string>
-
-    <string name="desktop_indicator_mode_normal">Normal</string>
-    <string name="desktop_indicator_mode_arrow">Flecha</string>
 
     <!-- Item Labels -->
     <string name="default_icons">Por defecto</string>

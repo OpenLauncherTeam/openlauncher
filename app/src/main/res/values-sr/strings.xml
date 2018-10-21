@@ -48,9 +48,7 @@
     <string name="pref_title__feels">Osjećaji</string>
     <string name="pref_title__others">Ostalo</string>
 
-    <string name="pref_title__desktop_style">Stil</string>
     <string name="pref_title__desktop_indicator_style">Stil indikatora</string>
-    <string name="pref_summary__desktop_style">Izaberi između normalnog desktopa i prikazivanja svih instaliranih aplikacija.</string>
     <string name="pref_summary__minibar">Podesi redosled i vidljivost stvari u minibaru.</string>
     <string name="pref_title__search_bar_enable">Pretraga</string>
     <string name="pref_summary__search_bar_enable">Prikaži pretragu iznad desktopa.</string>
@@ -76,7 +74,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Prikaži skrivene aplikacije</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Obuhvati skrivene aplikacije u rezultatima pretrage.</string>
 
-    <string name="pref_summary__dock_size">Podesi veličinu pristaništa.</string>
     <string name="pref_title__dock_show_label">Prikaži Natpise</string>
     <string name="pref_summary__dock_show_label">Prikaži natpise ispod njihovih ikonica.</string>
     <string name="pref_title__dock_background_color">Pozadina</string>
@@ -127,12 +124,6 @@
 
     <string name="vertical_scroll_drawer">Vertikalno</string>
     <string name="horizontal_paged_drawer">Označeno</string>
-
-    <string name="desktop_mode_normal">Normalno</string>
-    <string name="desktop_mode_show_all_apps">Prikaži Sve Aplikacije</string>
-
-    <string name="desktop_indicator_mode_normal">Normalno</string>
-    <string name="desktop_indicator_mode_arrow">Strelica</string>
 
     <!-- Item Labels -->
     <string name="default_icons">Podrazumevano</string>

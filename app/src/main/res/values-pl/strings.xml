@@ -51,9 +51,7 @@
     <string name="pref_title__feels">Odczucia</string>
     <string name="pref_title__others">Inne</string>
 
-    <string name="pref_title__desktop_style">Styl</string>
     <string name="pref_title__desktop_indicator_style">Styl wskaźnika</string>
-    <string name="pref_summary__desktop_style">Wybierz pomiędzy normalnym pulpitem lub pokazywaniem wszystkich zainstalowanych aplikacji.</string>
     <string name="pref_summary__minibar">Zmień kolejność i widoczność elementów na minipasku.</string>
     <string name="pref_title__search_bar_enable">Pasek wyszukiwania</string>
     <string name="pref_summary__search_bar_enable">Pokaż pasek wyszukiwania na górze pulpitu.</string>
@@ -79,7 +77,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Pokaż ukryte aplikacje</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Uwzględnij ukryte aplikacje w wynikach wyszukiwania.</string>
 
-    <string name="pref_summary__dock_size">Ustaw rozmiar doku.</string>
     <string name="pref_title__dock_show_label">Pokaż etykiety</string>
     <string name="pref_summary__dock_show_label">Pokaż etykiety elementów pod ich ikonami.</string>
     <string name="pref_title__dock_background_color">Tło</string>
@@ -134,12 +131,6 @@
 
     <string name="vertical_scroll_drawer">Pionowy</string>
     <string name="horizontal_paged_drawer">Poziomy</string>
-
-    <string name="desktop_mode_normal">Normalny</string>
-    <string name="desktop_mode_show_all_apps">Pokaż wszystkie aplikacje</string>
-
-    <string name="desktop_indicator_mode_normal">Zwykły</string>
-    <string name="desktop_indicator_mode_arrow">Strzałka</string>
 
     <!-- Item Labels -->
     <string name="default_icons">Domyślne</string>

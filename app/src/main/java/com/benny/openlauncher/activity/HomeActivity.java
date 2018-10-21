@@ -348,8 +348,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
         // frame colors
         getMinibarFrame().setBackgroundColor(appSettings.getMinibarBackgroundColor());
-        getStatusView().setBackgroundColor(appSettings.getPrimaryColor());
-        getNavigationView().setBackgroundColor(appSettings.getPrimaryColor());
+        getStatusView().setBackgroundColor(appSettings.getDesktopInsetColor());
+        getNavigationView().setBackgroundColor(appSettings.getDesktopInsetColor());
 
         // lock the minibar
         getDrawerLayout().setDrawerLockMode(appSettings.getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
