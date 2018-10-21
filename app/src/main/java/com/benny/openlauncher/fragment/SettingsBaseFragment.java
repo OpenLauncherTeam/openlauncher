@@ -1,12 +1,19 @@
 package com.benny.openlauncher.fragment;
 
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppSettings;
+
+import net.gsantner.opoc.util.ContextUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +33,9 @@ public abstract class SettingsBaseFragment extends PreferenceFragmentCompat impl
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+
+        PreferenceGroup prefGroup = getPreferenceScreen();
+        tintIcons(prefGroup);
     }
 
     @Override
@@ -39,6 +49,24 @@ public abstract class SettingsBaseFragment extends PreferenceFragmentCompat impl
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (!noRestart.contains(key)) {
             AppSettings.get().setAppRestartRequired(true);
+        }
+    }
+
+    public void tintIcons(PreferenceGroup prefGroup) {
+        if (prefGroup != null && isAdded()) {
+            int prefCount = prefGroup.getPreferenceCount();
+            for (int i = 0; i < prefCount; i++) {
+                Preference preference = prefGroup.getPreference(i);
+                if (preference != null) {
+                    Drawable drawable = preference.getIcon();
+                    if (drawable != null) {
+                        drawable.mutate().setColorFilter(getResources().getColor(R.color.Dark_TextColor), PorterDuff.Mode.SRC_IN);
+                    }
+                    if (preference instanceof PreferenceGroup) {
+                        tintIcons((PreferenceGroup) preference);
+                    }
+                }
+            }
         }
     }
 }
