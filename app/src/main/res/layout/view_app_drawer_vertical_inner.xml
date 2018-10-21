@@ -9,18 +9,14 @@
         android:id="@+id/vDrawerRV"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:clipToPadding="false"
-        android:padding="8dp" />
+        android:layout_centerInParent="true" />
 
     <com.turingtechnologies.materialscrollbar.DragScrollBar
         android:id="@+id/dragScrollBar"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:fitsSystemWindows="true"
         app:msb_handleColour="@color/colorAccent"
         app:msb_lightOnTouch="false"
         app:msb_recyclerView="@id/vDrawerRV" />

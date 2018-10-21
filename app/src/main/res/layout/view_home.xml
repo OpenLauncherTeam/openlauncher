@@ -81,7 +81,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/status_frame"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/navigation_frame" />
 
         <com.benny.openlauncher.widget.DesktopOptionView
             android:id="@+id/desktopEditOptionPanel"

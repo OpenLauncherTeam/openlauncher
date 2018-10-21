@@ -20,7 +20,7 @@ public class NavigationView extends View {
 
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
-        if (Build.VERSION.SDK_INT >= 20) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             int inset = insets.getSystemWindowInsetBottom();
             if (inset != 0) {
                 ViewGroup.LayoutParams layoutParams = getLayoutParams();

@@ -27,19 +27,6 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
         appDrawerController.setBackgroundColor(appSettings.getDrawerBackgroundColor());
         appDrawerController.getBackground().setAlpha(0);
         appDrawerController.reloadDrawerCardTheme();
-
-        switch (appSettings.getDrawerStyle()) {
-            case AppDrawerController.DrawerMode.HORIZONTAL_PAGED: {
-                if (!appSettings.isDrawerShowIndicator()) {
-                    appDrawerController.getChildAt(1).setVisibility(View.GONE);
-                }
-                break;
-            }
-            case AppDrawerController.DrawerMode.VERTICAL: {
-                // handled in the AppDrawerVertical class
-                break;
-            }
-        }
     }
 
     @Override
@@ -49,7 +36,7 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
                 Tool.visibleViews(_appDrawerIndicator);
                 Tool.invisibleViews(_homeActivity.getDesktop());
                 _homeActivity.updateDesktopIndicator(false);
-                _homeActivity.updateDock(false, 0);
+                _homeActivity.updateDock(false);
                 _homeActivity.updateSearchBar(false);
             }
         } else {
@@ -57,10 +44,7 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
                 Tool.invisibleViews(_appDrawerIndicator);
                 Tool.visibleViews(_homeActivity.getDesktop());
                 _homeActivity.updateDesktopIndicator(true);
-                if (Setup.appSettings().getDrawerStyle() == AppDrawerController.DrawerMode.HORIZONTAL_PAGED)
-                    _homeActivity.updateDock(true, 200);
-                else
-                    _homeActivity.updateDock(true, 200);
+                _homeActivity.updateDock(true);
                 _homeActivity.updateSearchBar(true);
             } else {
                 if (!Setup.appSettings().isDrawerRememberPosition()) {

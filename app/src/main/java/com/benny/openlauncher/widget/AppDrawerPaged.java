@@ -26,9 +26,8 @@ public class AppDrawerPaged extends SmoothViewPager {
 
     public List<ViewGroup> _pages = new ArrayList<>();
 
-    private HomeActivity _homeActivity;
-
-    private static int _rowCellCount, _columnCellCount;
+    private static int _columnCellCount;
+    private static int _rowCellCount;
 
     private PagerIndicator _appDrawerIndicator;
 
@@ -116,8 +115,7 @@ public class AppDrawerPaged extends SmoothViewPager {
         });
     }
 
-    public void withHome(HomeActivity homeActivity, PagerIndicator appDrawerIndicator) {
-        _homeActivity = homeActivity;
+    public void withHome(PagerIndicator appDrawerIndicator) {
         _appDrawerIndicator = appDrawerIndicator;
         appDrawerIndicator.setMode(PagerIndicator.Mode.NORMAL);
         if (getAdapter() != null)
@@ -143,7 +141,7 @@ public class AppDrawerPaged extends SmoothViewPager {
             return AppItemView
                     .createDrawerAppItemView(
                             getContext(),
-                            _homeActivity,
+                            HomeActivity._launcher,
                             app,
                             Setup.appSettings().getDrawerIconSize(),
                             new AppItemView.LongPressCallBack() {

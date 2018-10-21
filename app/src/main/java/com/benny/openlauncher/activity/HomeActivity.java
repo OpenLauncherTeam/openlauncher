@@ -266,7 +266,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         new HpSearchBar(this, getSearchBar(), findViewById(R.id.calendarDropDownView)).initSearchBar();
         initDock();
         getAppDrawerController().init();
-        getAppDrawerController().setHome(this);
 
         getDesktop().init();
         getDesktop().setDesktopEditListener(this);
@@ -461,7 +460,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public void onDesktopEdit() {
         Tool.visibleViews(100, 20, (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel));
         updateDesktopIndicator(false);
-        updateDock(false, 0);
+        updateDock(false);
         updateSearchBar(false);
     }
 
@@ -469,7 +468,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         Tool.invisibleViews(100, 20, (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel));
         getDesktopIndicator().hideDelay();
         updateDesktopIndicator(true);
-        updateDock(true, 0);
+        updateDock(true);
         updateSearchBar(true);
     }
 
@@ -503,19 +502,19 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public final void clearRoomForPopUp() {
         Tool.invisibleViews(getDesktop());
         updateDesktopIndicator(false);
-        updateDock(false, 0);
+        updateDock(false);
     }
 
     public final void unClearRoomForPopUp() {
         Tool.visibleViews(getDesktop());
         updateDesktopIndicator(true);
-        updateDock(true, 0);
+        updateDock(true);
     }
 
-    public final void updateDock(boolean show, long delay) {
+    public final void updateDock(boolean show) {
         AppSettings appSettings = Setup.appSettings();
         if (appSettings.getDockEnable() && show) {
-            Tool.visibleViews(100, delay, getDock());
+            Tool.visibleViews(100, getDock());
         } else {
             if (appSettings.getDockEnable()) {
                 Tool.invisibleViews(100, getDock());
@@ -561,7 +560,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public final void updateHomeLayout() {
         updateSearchBar(true);
-        updateDock(true, 0);
+        updateDock(true);
         updateDesktopIndicator(true);
     }
 

@@ -7,10 +7,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="8dp"
+        android:layout_margin="14dp"
         app:cardBackgroundColor="@color/white"
-        app:cardElevation="4dp"
-        app:contentPadding="10dp">
+        app:cardElevation="4dp">
 
         <com.benny.openlauncher.widget.CellContainer
             android:id="@+id/group"
