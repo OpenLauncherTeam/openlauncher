@@ -29,13 +29,12 @@ public class SettingsMiscellaneousFragment extends SettingsBaseFragment {
         int key = new ContextUtils(homeActivity).getResId(ContextUtils.ResType.STRING, preference.getKey());
         switch (key) {
             case R.string.pref_key__clear_database:
-                DialogHelper.alertDialog(homeActivity, getString(R.string.clear_user_data), getString(R.string.clear_user_data_are_you_sure), new MaterialDialog.SingleButtonCallback() {
+                DialogHelper.alertDialog(getActivity(), getString(R.string.clear_user_data), getString(R.string.clear_user_data_are_you_sure), new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        homeActivity.recreate();
                         DatabaseHelper db = HomeActivity._db;
                         db.onUpgrade(db.getWritableDatabase(), 1, 1);
-                        getActivity().finish();
+                        System.exit(0);
                     }
                 });
                 return true;
