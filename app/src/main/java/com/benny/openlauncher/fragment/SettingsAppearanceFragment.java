@@ -6,6 +6,7 @@ import android.support.v7.preference.Preference;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.util.AppManager;
+import com.benny.openlauncher.viewutil.DialogHelper;
 
 import net.gsantner.opoc.util.ContextUtils;
 
@@ -21,7 +22,7 @@ public class SettingsAppearanceFragment extends SettingsBaseFragment {
         int key = new ContextUtils(homeActivity).getResId(ContextUtils.ResType.STRING, preference.getKey());
         switch (key) {
             case R.string.pref_key__icon_pack:
-                AppManager.getInstance(getActivity()).startPickIconPackIntent(getActivity());
+                DialogHelper.startPickIconPackIntent(getActivity());
                 return true;
         }
         return false;

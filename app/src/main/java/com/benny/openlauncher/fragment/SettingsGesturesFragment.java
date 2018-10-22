@@ -30,18 +30,18 @@ public class SettingsGesturesFragment extends SettingsBaseFragment {
             case R.string.pref_key__gesture_swipe_down:
             case R.string.pref_key__gesture_pinch:
             case R.string.pref_key__gesture_unpinch:
-                DialogHelper.selectGestureDialog(homeActivity, preference.getTitle().toString(), new MaterialDialog.ListCallback() {
+                DialogHelper.selectGestureDialog(getActivity(), preference.getTitle().toString(), new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                         if (position == 1) {
-                            DialogHelper.selectActionDialog(homeActivity, new MaterialDialog.ListCallback() {
+                            DialogHelper.selectActionDialog(getActivity(), new MaterialDialog.ListCallback() {
                                 @Override
                                 public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                                     AppSettings.get().setString(key, "1" + position);
                                 }
                             });
                         } else if (position == 2) {
-                            DialogHelper.selectAppDialog(homeActivity, new DialogHelper.OnAppSelectedListener() {
+                            DialogHelper.selectAppDialog(getActivity(), new DialogHelper.OnAppSelectedListener() {
                                 @Override
                                 public void onAppSelected(App app) {
                                     AppSettings.get().setString(key, "2" + Tool.getIntentAsString(Tool.getIntentFromApp(app)));
