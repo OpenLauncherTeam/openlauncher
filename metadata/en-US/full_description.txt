@@ -1,16 +1,16 @@
-This is an open source launcher project for Android devices that has been built completely from scratch. The main goal of this launcher is to find a healthy medium between customization and simplicity. At this point in time it implements most features required in a typical launcher but could benefit greatly from some general polish. If you would like to help out feel free to submit pull requests or ask about joining the development team.
+This is an open source launcher project for Android devices that has been built completely from scratch. The main goal of this launcher is to find a healthy balance between an adequate level of customization and too many unused features that only complicate a launcher. If you would like to help out feel free to submit pull requests or ask about joining the development team. Jump on Stringlate or GitHub and translate this app to your native language, we will always accept a community translation!
 
-'''Features'''
+<b>Features</b>
 
 * Paged desktop
 * Scrollable background
 * Paged app drawer
 * Vertical app drawer
 * Search bar
-* Custom icon pack
+* Custom icon packs
 
-'''Support the Project'''
+<b>Support the Project</b>
 
-[https://lonamiwebs.github.io/stringlate/translate?git=https%3A%2F%2Fgithub.com%2Fopenlauncherteam%2Fopenlauncher.git&name=OpenLauncher&mail=gro.xobliam@@rentnasg Translate using Stringlate]
+<a href="https://lonamiwebs.github.io/stringlate/translate?git=https%3A%2F%2Fgithub.com%2Fopenlauncherteam%2Fopenlauncher.git&name=OpenLauncher&mail=gro.xobliam@@rentnasg>Translate using Stringlate</a>
 
-[https://gsantner.net/android-contribution-guide/?packageid=com.benny.openlauncher&name=OpenLauncher&web=https://github.com/openlauncherteam/openlauncher Contribution Guide]
+<a href="https://gsantner.net/android-contribution-guide/?packageid=com.benny.openlauncher&name=OpenLauncher&web=https://github.com/openlauncherteam/openlauncher>Contribution Guide</a>

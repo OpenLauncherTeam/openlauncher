@@ -1,0 +1,10 @@
+* fix gesture issues and redesign the selection dialog
+* backup and restore settings at a custom location
+* add new color picker preference
+* implement multiple rows for dock
+* fix several folder crashes
+* add preference for status and navigation bar color in desktop
+* add option to reset settings
+* slightly modify the look of line pager indicator
+* add black theme in the settings
+* center item arrangement in group drawables for two and three items

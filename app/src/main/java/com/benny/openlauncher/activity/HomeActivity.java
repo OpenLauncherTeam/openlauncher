@@ -277,7 +277,12 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         AppSettings appSettings = Setup.appSettings();
 
         desktopOptionView.setDesktopOptionViewListener(this);
-        desktopOptionView.updateLockIcon(appSettings.isDesktopLock());
+        desktopOptionView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                desktopOptionView.updateLockIcon(appSettings.isDesktopLock());
+            }
+        }, 100);
         getDesktop().addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
