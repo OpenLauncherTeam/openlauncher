@@ -2,7 +2,6 @@ package com.benny.openlauncher.fragment;
 
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;

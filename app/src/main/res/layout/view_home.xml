@@ -37,17 +37,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.benny.openlauncher.widget.CalendarView
-            android:id="@+id/calendarDropDownView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:transformPivotY="0dp"
-            app:cardCornerRadius="0dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/status_frame"
-            app:layout_constraintWidth_max="400dp" />
-
         <com.benny.openlauncher.widget.Desktop
             android:id="@+id/desktop"
             android:layout_width="0dp"

@@ -58,7 +58,6 @@ import com.benny.openlauncher.viewutil.MinibarAdapter;
 import com.benny.openlauncher.viewutil.WidgetHost;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.AppItemView;
-import com.benny.openlauncher.widget.CalendarView;
 import com.benny.openlauncher.widget.CellContainer;
 import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.Desktop.OnDesktopEditListener;
@@ -265,7 +264,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     protected void initViews() {
-        new HpSearchBar(this, getSearchBar(), findViewById(R.id.calendarDropDownView)).initSearchBar();
+        new HpSearchBar(this, getSearchBar()).initSearchBar();
         getAppDrawerController().init();
         getDock().setHome(this);
 
@@ -667,7 +666,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     private void handleLauncherResume(boolean wasHomePressed) {
         if (!_consumeNextResume || wasHomePressed) {
             getGroupPopup().dismissPopup();
-            ((CalendarView) findViewById(R.id.calendarDropDownView)).animateHide();
             getDragNDropView().hidePopupMenu();
             getSearchBar().collapse();
             if (!getSearchBar().collapse()) {
