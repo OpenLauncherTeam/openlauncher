@@ -22,6 +22,9 @@ public class OnBoardActivity extends MaterialIntroActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (!getSharedPreferences("quickSettings", Context.MODE_PRIVATE).getBoolean("firstStart", true)) {
+            getSharedPreferences("app", Context.MODE_PRIVATE).edit().putBoolean(getResources().getString(R.string.pref_key__show_intro), false).commit();
+        }
         if (!getSharedPreferences("app", Context.MODE_PRIVATE).getBoolean(getResources().getString(R.string.pref_key__show_intro), false)) {
             skipStart();
             return;
