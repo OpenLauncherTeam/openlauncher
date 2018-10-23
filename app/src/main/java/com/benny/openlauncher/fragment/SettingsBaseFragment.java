@@ -8,11 +8,10 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppSettings;
-
-import net.gsantner.opoc.util.ContextUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,7 +58,9 @@ public abstract class SettingsBaseFragment extends PreferenceFragmentCompat impl
                 if (preference != null) {
                     Drawable drawable = preference.getIcon();
                     if (drawable != null) {
-                        drawable.mutate().setColorFilter(getResources().getColor(R.color.Dark_TextColor), PorterDuff.Mode.SRC_IN);
+                        TypedValue color = new TypedValue();
+                        getContext().getTheme().resolveAttribute(android.R.attr.textColor, color, true);
+                        drawable.mutate().setColorFilter(getResources().getColor(color.resourceId), PorterDuff.Mode.SRC_IN);
                     }
                     if (preference instanceof PreferenceGroup) {
                         tintIcons((PreferenceGroup) preference);
