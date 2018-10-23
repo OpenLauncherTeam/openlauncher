@@ -65,6 +65,7 @@ public class SearchBar extends FrameLayout {
     private Mode _mode = Mode.DateAll;
     private int _searchClockTextSize = 28;
     private float _searchClockSubTextFactor = 0.5f;
+    private int bottomInset;
 
     public SearchBar(@NonNull Context context) {
         super(context);
@@ -270,7 +271,7 @@ public class SearchBar extends FrameLayout {
                 int marginTop = Tool.dp2px(100, getContext());
                 recyclerParams.setMargins(0, marginTop, 0, 0);
                 _searchRecycler.setLayoutParams(recyclerParams);
-                _searchRecycler.setPadding(0, 0, 0, 20);
+                _searchRecycler.setPadding(0, 0, 0, bottomInset);
             }
         });
     }
@@ -374,7 +375,8 @@ public class SearchBar extends FrameLayout {
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            setPadding(0, insets.getSystemWindowInsetTop(), 0, insets.getSystemWindowInsetBottom());
+            bottomInset = insets.getSystemWindowInsetBottom();
+            setPadding(0, insets.getSystemWindowInsetTop(), 0, 0);
             return insets;
         }
         return insets;

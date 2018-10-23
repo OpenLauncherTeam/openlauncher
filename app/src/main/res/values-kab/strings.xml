@@ -4,12 +4,8 @@
     <string name="toast_device_admin_required">Ma ulac aɣilif, rmed tadbelt n yibenk.</string>
 
     <!-- Intro -->
-    <string name="intro_skip">Zgel</string>
-    <string name="intro_finish">Bdu.</string>
-    <string name="intro1_text">Wagi d OpenLauncher. Amsenker n uɣbalu yeldin. Dagi i kečč.</string>
     <string name="intro2_text">Zuɣer aḍad-ik si tama tazelmaḍt n ugdil-ik akken ad teldiḍ afeggag amectuḥ. Din-a ad tafeḍ iɣewwaṛen,
         beddel tugna n ugilal, d ddeqs n tiɣawsiwin nniḍen.</string>
-    <string name="intro3_title">Iɣewwaṛen</string>
     <string name="intro3_text">Tzemreḍ ad tbeddleḍ tanarit-ik, agalis n yisnasen, dock, ɛreḍ-it tura!</string>
 
     <!-- Minibar -->
@@ -111,8 +107,8 @@
     <string name="pref_title__language">Tutlayt</string>
     <string name="pref_title__backup">Ḥrez</string>
     <string name="pref_summary__backup">Ḥrez sakin err-d iɣewwaṛen.</string>
-    <string name="pref_title__clear_database">Sfeḍ taffa n isefka</string>
-    <string name="pref_summary__clear_database">Kkes isefka si dock ad tnarit akken ad tefruḍ uguren.</string>
+    <string name="pref_title__reset_database">Sfeḍ taffa n isefka</string>
+    <string name="pref_summary__reset_database">Kkes isefka si dock ad tnarit akken ad tefruḍ uguren.</string>
     <string name="pref_title__restart">Ales tanekra</string>
     <string name="pref_summary__restart">Ales tanekra n umsenker ma yella ur yeddi ara.</string>
     <string name="pref_summary__theme">Sbadu asentel i usnas meṛṛa.</string>

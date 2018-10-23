@@ -9,16 +9,12 @@
     <string name="toast_device_admin_required">Bonvole, ebligi la aparatmastrumadan opcion.</string>
 
     <!-- Intro -->
-    <string name="intro_skip">Salti</string>
-    <string name="intro_finish">Vi komencu.</string>
-    <string name="intro1_text">Tio estas OpenLauncher. A alpikaĵlanĉilo tute kreita kun malfermitkodo. Ĉi tie por vi.</string>
     <string name="intro2_text">Ŝovumi ene maldekstrrando de via komencekrano por malfermi la laterbreton. Ĉi tien povas trovi agordilo,
         ŝanĝi ekranfonon, kaj fari multajn aĵojn.</string>
-    <string name="intro3_title">Agordoj</string>
     <string name="intro3_text">Vi povas agordi vian labortablon, la aplikaĵujon kaj doko, ¡provu!</string>
-    <string name="intro4_community">Aplikaĵlanĉilo de la komunumo pro la komunumo</string>
-    <string name="intro4_features">Kun multa funkcioj</string>
-    <string name="intro4_customizable">Tajlorebla</string>
+    <string name="intro1_community">Aplikaĵlanĉilo de la komunumo pro la komunumo</string>
+    <string name="intro1_features">Kun multa funkcioj</string>
+    <string name="intro1_customizable">Tajlorebla</string>
 
     <!-- Minibar -->
     <string name="minibar">Laterbreto</string>
@@ -118,9 +114,9 @@
     <string name="pref_summary__language">Ŝangi lingvon de la aplikaĵo. Rekomenci por apliki la ŝanĝoj.</string>
     <string name="pref_title__language">Lingvo</string>
     <string name="pref_title__backup">Savkopio</string>
-    <string name="pref_title__clear_database">Malplenigi datumbazilon</string>
+    <string name="pref_title__reset_database">Malplenigi datumbazilon</string>
     <string name="pref_summary__backup">Fari savkopion kaj restaŭri viajn agordojn.</string>
-    <string name="pref_summary__clear_database">Forigi dokdatumojn kaj labortablon por ripari erarojn.</string>
+    <string name="pref_summary__reset_database">Forigi dokdatumojn kaj labortablon por ripari erarojn.</string>
     <string name="pref_title__restart">Rekomenci</string>
     <string name="pref_summary__restart">Rekomenci aplikaĵlanĉilos se ĝi havas eraran konduton.</string>
     <string name="pref_summary__theme">Agordi temon por aplikaĵo.</string>

@@ -26,9 +26,14 @@
     <PreferenceCategory android:title="@string/pref_title__debug">
 
         <Preference
-            android:key="@string/pref_key__clear_database"
-            android:summary="@string/pref_summary__clear_database"
-            android:title="@string/pref_title__clear_database" />
+            android:key="@string/pref_key__reset_settings"
+            android:summary="@string/pref_summary__reset_settings"
+            android:title="@string/pref_title__reset_settings" />
+
+        <Preference
+            android:key="@string/pref_key__reset_database"
+            android:summary="@string/pref_summary__reset_database"
+            android:title="@string/pref_title__reset_database" />
 
         <Preference
             android:key="@string/pref_key__restart"

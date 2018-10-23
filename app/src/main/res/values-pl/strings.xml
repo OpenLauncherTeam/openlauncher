@@ -4,15 +4,11 @@
     <string name="toast_device_admin_required">Włącz administratora urządzenia.</string>
 
     <!-- Intro -->
-    <string name="intro_skip">Pomiń</string>
-    <string name="intro_finish">Zaczynajmy.</string>
-    <string name="intro1_text">W pełni otwarty launcher. Tu dla Ciebie.</string>
     <string name="intro2_text">Przesuń od lewej krawędzi do środka ekranu domowego, żeby przywołać minipasek. Z jego pomocą możesz modyfikować ustawienia, zmienić tapetę i zrobić wiele innych rzeczy.</string>
-    <string name="intro3_title">Ustawienia</string>
     <string name="intro3_text">Możesz konfigurować swój pulpit, menu aplikacji oraz dok. Wypróbuj!</string>
-    <string name="intro4_community">Launcher od społeczności dla społeczności</string>
-    <string name="intro4_features">Bogaty w funkcje</string>
-    <string name="intro4_customizable">Konfigurowalny</string>
+    <string name="intro1_community">Launcher od społeczności dla społeczności</string>
+    <string name="intro1_features">Bogaty w funkcje</string>
+    <string name="intro1_customizable">Konfigurowalny</string>
     <string name="custom">Niestandardowy</string>
 
     <!-- Minibar -->
@@ -118,8 +114,8 @@
     <string name="pref_title__language">Język</string>
     <string name="pref_title__backup">Kopia zapasowa</string>
     <string name="pref_summary__backup">Utwórz kopię zapasową i przywróć ustawienia.</string>
-    <string name="pref_title__clear_database">Wyczyść bazę danych</string>
-    <string name="pref_summary__clear_database">Usuń dane doku i pulpitu, żeby naprawić błędy.</string>
+    <string name="pref_title__reset_database">Wyczyść bazę danych</string>
+    <string name="pref_summary__reset_database">Usuń dane doku i pulpitu, żeby naprawić błędy.</string>
     <string name="pref_title__restart">Restart</string>
     <string name="pref_summary__restart">Zrestartuj launcher w przypadku jego niewłaściwego działania.</string>
     <string name="pref_summary__theme">Ustaw motyw aplikacji.</string>

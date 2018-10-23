@@ -4,15 +4,11 @@
     <string name="toast_device_admin_required">Veuillez autoriser l\'administration de l\'appareil.</string>
 
     <!-- Intro -->
-    <string name="intro_skip">Ignorer</string>
-    <string name="intro_finish">C\'est parti.</string>
-    <string name="intro1_text">Merci d\'avoir choisi OpenLauncher. Il est entièrement open source et toujours en développement.         Voici une rapide introduction sur son fonctionnement…</string>
     <string name="intro2_text">Glissez votre doigt depuis le bord de gauche de votre écran pour ouvrir la Minibarre. Cette dernière vous permet d\'accéder aux paramètres, changer de fond d\'écran et beaucoup d\'autres choses.</string>
-    <string name="intro3_title">Paramètres</string>
     <string name="intro3_text">Vous pouvez configurer votre bureau, le tiroir d\'applis, le dock... Essayez-la !</string>
-    <string name="intro4_community">Le lanceur d\'applications créé par la communauté, pour la communauté</string>
-    <string name="intro4_features">Remplis de fonctionnalités</string>
-    <string name="intro4_customizable">Personnalisable</string>
+    <string name="intro1_community">Le lanceur d\'applications créé par la communauté, pour la communauté</string>
+    <string name="intro1_features">Remplis de fonctionnalités</string>
+    <string name="intro1_customizable">Personnalisable</string>
     <string name="custom">Personnalisation</string>
 
     <!-- Minibar -->
@@ -118,8 +114,8 @@
     <string name="pref_title__language">Langue</string>
     <string name="pref_title__backup">Sauvegarde</string>
     <string name="pref_summary__backup">Sauvegarder et restaurer vos paramètres.</string>
-    <string name="pref_title__clear_database">Vider la base de données</string>
-    <string name="pref_summary__clear_database">Supprimer les données de votre dock et bureau pour corriger des problèmes.</string>
+    <string name="pref_title__reset_database">Vider la base de données</string>
+    <string name="pref_summary__reset_database">Supprimer les données de votre dock et bureau pour corriger des problèmes.</string>
     <string name="pref_title__restart">Redémarrer</string>
     <string name="pref_summary__restart">Redémarrer le launcher en cas de comportement étrange.</string>
     <string name="pref_summary__theme">Définir le thème global de l\'application</string>

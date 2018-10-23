@@ -243,6 +243,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 getDesktop().initDesktop();
                 if (appSettings.isAppFirstLaunch()) {
                     appSettings.setAppFirstLaunch(false);
+                    appSettings.setAppShowIntro(false);
                     Item appDrawerBtnItem = Item.newActionItem(8);
                     appDrawerBtnItem._x = 2;
                     _db.saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);

@@ -4,15 +4,11 @@
     <string name="toast_device_admin_required">Por favor, ative a administração do dispositivo.</string>
 
     <!-- Intro -->
-    <string name="intro_skip">Ignorar</string>
-    <string name="intro_finish">Vamos começar.</string>
-    <string name="intro1_text">Este é o OpenLauncher, cujo código fonte é aberto. É para si.</string>
     <string name="intro2_text">Deslize para a direita desde a margem esquerda do ecrã para abrir a mini-barra. Aqui encontra diversas definições de configuração.</string>
-    <string name="intro3_title">Definições</string>
     <string name="intro3_text">Pode configurar a área de trabalho, o menu de aplicações e a doca, experimente!</string>
-    <string name="intro4_community">O launcher da comunidade para a comunidade.</string>
-    <string name="intro4_features">Repleto de funcionalidades</string>
-    <string name="intro4_customizable">Personalizável</string>
+    <string name="intro1_community">O launcher da comunidade para a comunidade.</string>
+    <string name="intro1_features">Repleto de funcionalidades</string>
+    <string name="intro1_customizable">Personalizável</string>
     <string name="custom">Personalizado</string>
 
     <!-- Minibar -->
@@ -120,8 +116,8 @@
     <string name="pref_title__language">Idioma</string>
     <string name="pref_title__backup">Backup</string>
     <string name="pref_summary__backup">Backup e reposição de definições.</string>
-    <string name="pref_title__clear_database">Limpar base de dados</string>
-    <string name="pref_summary__clear_database">Apagar os dados da doca e da área de trabalho para corrigir erros.</string>
+    <string name="pref_title__reset_database">Limpar base de dados</string>
+    <string name="pref_summary__reset_database">Apagar os dados da doca e da área de trabalho para corrigir erros.</string>
     <string name="pref_title__restart">Reiniciar</string>
     <string name="pref_summary__restart">Reiniciar o launcher em caso de mau comportamento.</string>
     <string name="pref_summary__theme">Definir o tema de toda a aplicação.</string>

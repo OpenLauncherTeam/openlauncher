@@ -80,8 +80,8 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
 
     @SuppressLint("SimpleDateFormat")
     public SimpleDateFormat getUserDateFormat() {
-        String line1 = getString(R.string.pref_key__date_bar_date_format_custom_1, rstr(R.string.pref__date_bar_date_format_custom__default_value_1));
-        String line2 = getString(R.string.pref_key__date_bar_date_format_custom_2, rstr(R.string.pref__date_bar_date_format_custom__default_value_2));
+        String line1 = getString(R.string.pref_key__date_bar_date_format_custom_1, rstr(R.string.pref_default__date_bar_date_format_custom_1));
+        String line2 = getString(R.string.pref_key__date_bar_date_format_custom_2, rstr(R.string.pref_default__date_bar_date_format_custom_2));
 
         try {
             return new SimpleDateFormat((line1 + "'\n'" + line2).replace("''", ""), Locale.getDefault());
@@ -356,6 +356,12 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         // MUST be committed
         _prefApp.edit().putBoolean(_context.getString
                 (R.string.pref_key__queue_restart), value).commit();
+    }
+
+    @SuppressLint("ApplySharedPref")
+    public void setAppShowIntro(boolean value) {
+        // MUST be committed
+        _prefApp.edit().putBoolean(_context.getString(R.string.pref_key__show_intro), value).commit();
     }
 
     public boolean isAppFirstLaunch() {

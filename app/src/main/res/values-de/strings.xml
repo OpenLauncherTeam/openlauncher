@@ -15,11 +15,7 @@
 
     <!-- Intro -->
 
-    <string name="intro_skip">Überspringen</string>
-    <string name="intro_finish">Los geht\'s!</string>
-    <string name="intro1_text">Danke, dass du dich für Open Launcher entschieden hast. Er ist komplett quelloffen und wird ständig         weiter entwickelt. Hier eine kurze Einführung …</string>
     <string name="intro2_text">Wische vom linken Bildschirmrand nach rechts, um die Minibar zu öffnen. Dort gelangst du zu den         Einstellungen, kannst das Wallpaper ändern und weitere Dinge machen …</string>
-    <string name="intro3_title">Einstellungen</string>
     <string name="intro3_text">Hier kannst du deinen Desktop, den App Drawer, das Dock und … Probier\'s einfach aus!</string>
 
     <!-- Minibar -->
@@ -116,8 +112,8 @@
     <string name="pref_title__language">Sprache</string>
     <string name="pref_title__backup">Sicherung</string>
     <string name="pref_summary__backup">Sichere deine Einstellungen oder stelle sie wieder her.</string>
-    <string name="pref_title__clear_database">Datenbank zurücksetzen</string>
-    <string name="pref_summary__clear_database">Die Daten von Desktop und Dock zurücksetzen um Probleme zu beheben</string>
+    <string name="pref_title__reset_database">Datenbank zurücksetzen</string>
+    <string name="pref_summary__reset_database">Die Daten von Desktop und Dock zurücksetzen um Probleme zu beheben</string>
     <string name="pref_title__restart">Neustart</string>
     <string name="pref_summary__restart">Starte den Launcher neu, um alle Änderungen zu übernehmen.</string>
     <string name="pref_summary__theme">Setze das Thema der gesamten App.</string>
@@ -161,9 +157,9 @@
     <string name="volume_level_media">Medien</string>
     <string name="light">Hell</string>
     <string name="dark">Dunkel</string>
-    <string name="intro4_community">Der Launcher von der Community für die Community</string>
-    <string name="intro4_features">Voller Features</string>
-    <string name="intro4_customizable">Anpassbar</string>
+    <string name="intro1_community">Der Launcher von der Community für die Community</string>
+    <string name="intro1_features">Voller Features</string>
+    <string name="intro1_customizable">Anpassbar</string>
     <string name="pref_title__desktop_rotate">Drehen</string>
     <string name="pref_summary__desktop_rotate">Bildschirm-Rotation erlauben</string>
     <string name="pref_title__search_bar_show_hidden_apps">Versteckte Apps anzeigen</string>

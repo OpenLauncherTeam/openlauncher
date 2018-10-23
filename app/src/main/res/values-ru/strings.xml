@@ -4,14 +4,10 @@
     <string name="toast_device_admin_required">Пожалуйста, разрешите администрирование устройства.</string>
 
     <!-- Intro -->
-    <string name="intro_skip">Пропустить</string>
-    <string name="intro_finish">Давайте начнём.</string>
-    <string name="intro1_text">Спасибо, что выбрали OpenLauncher. Это приложение с полностью открытым исходным кодом, пока находящееся в разработке.  Вот несколько слов об его использовании…</string>
     <string name="intro2_text">Проведите пальцем слева направо от левой границы рабочего стола, чтобы открыть мини-бар. Там можно найти настройки,  сменить обои и сделать много других вещей.</string>
-    <string name="intro3_title">Настройки</string>
     <string name="intro3_text">Вы можете настроить рабочий стол, меню приложений и док, просто попробуйте!</string>
-    <string name="intro4_community">Рабочее окружение от сообщества и для сообщества</string>
-    <string name="intro4_customizable">Настраиваемый</string>
+    <string name="intro1_community">Рабочее окружение от сообщества и для сообщества</string>
+    <string name="intro1_customizable">Настраиваемый</string>
 
     <!-- Minibar -->
     <string name="minibar">Мини-бар</string>
@@ -107,8 +103,8 @@
     <string name="pref_title__language">Язык</string>
     <string name="pref_title__backup">Резервное копирование</string>
     <string name="pref_summary__backup">Резервное копирование и восстановление настроек.</string>
-    <string name="pref_title__clear_database">Очистить базу данных</string>
-    <string name="pref_summary__clear_database">Удалить данные дока и рабочего стола, чтобы исправить проблемы.</string>
+    <string name="pref_title__reset_database">Очистить базу данных</string>
+    <string name="pref_summary__reset_database">Удалить данные дока и рабочего стола, чтобы исправить проблемы.</string>
     <string name="pref_title__restart">Перезапустить</string>
     <string name="pref_summary__restart">Перезапустить лаунчер, если он странно себя ведёт.</string>
     <string name="pref_summary__theme">Установить тему для всего приложения.</string>

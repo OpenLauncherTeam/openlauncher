@@ -15,13 +15,8 @@
 
     <!-- Intro -->
 
-    <string name="intro_skip">跳过</string>
-    <string name="intro_finish">开始吧</string>
-    <string name="intro1_text">感谢你选择 OpenLauncher. 它完全开源且仍在开发中.
-        这里有其使用方法的简略介绍&#8230;</string>
     <string name="intro2_text">在主页左侧右滑来打开快捷操作栏. 你可以找到设置,
         更换壁纸, 或者做许多其他的事.</string>
-    <string name="intro3_title">设置</string>
     <string name="intro3_text">你可以设置你的桌面, 应用抽屉, 以及托盘. 试试吧.</string>
 
     <!-- Minibar -->
@@ -109,8 +104,8 @@
 
     <string name="pref_title__backup">备份</string>
     <string name="pref_summary__backup">备份和恢复你的设置</string>
-    <string name="pref_title__clear_database">清空数据库</string>
-    <string name="pref_summary__clear_database">删除托盘和桌面的数据以修复错误</string>
+    <string name="pref_title__reset_database">清空数据库</string>
+    <string name="pref_summary__reset_database">删除托盘和桌面的数据以修复错误</string>
     <string name="pref_title__restart">重启</string>
     <string name="pref_summary__restart">如果启动器出错，重启它</string>
 

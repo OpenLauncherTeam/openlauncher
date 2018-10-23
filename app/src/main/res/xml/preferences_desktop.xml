@@ -35,7 +35,7 @@
         <Preference
             android:key="@string/pref_key__minibar"
             android:summary="@string/pref_summary__minibar"
-            android:title="@string/pref_title__minibar" />
+            android:title="@string/minibar" />
 
         <CheckBoxPreference
             android:defaultValue="false"
@@ -102,7 +102,7 @@
         <com.flask.colorpicker.ColorPickerPreference
             android:defaultValue="@color/colorPrimaryDark"
             android:key="@string/pref_key__minibar_background_color"
-            android:title="@string/pref_title__minibar_background_color"
+            android:title="@string/minibar"
             app:lightnessSlider="true"
             app:alphaSlider="true" />
 
@@ -159,15 +159,15 @@
             android:title="@string/pref_title__date_bar_date_format" />
 
         <EditTextPreference
-            android:defaultValue="@string/pref__date_bar_date_format_custom__default_value_1"
-            android:hint="@string/pref__date_bar_date_format_custom__default_value_1"
+            android:defaultValue="@string/pref_default__date_bar_date_format_custom_1"
+            android:hint="@string/pref_default__date_bar_date_format_custom_1"
             android:key="@string/pref_key__date_bar_date_format_custom_1"
             android:summary="@string/pref_title__date_bar"
             android:title="@string/pref_title__date_bar_date_format_custom_1" />
 
         <EditTextPreference
-            android:defaultValue="@string/pref__date_bar_date_format_custom__default_value_2"
-            android:hint="@string/pref__date_bar_date_format_custom__default_value_2"
+            android:defaultValue="@string/pref_default__date_bar_date_format_custom_2"
+            android:hint="@string/pref_default__date_bar_date_format_custom_2"
             android:key="@string/pref_key__date_bar_date_format_custom_2"
             android:summary="@string/pref_title__date_bar"
             android:title="@string/pref_title__date_bar_date_format_custom_2" />

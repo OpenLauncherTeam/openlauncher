@@ -22,7 +22,7 @@ public class OnBoardActivity extends MaterialIntroActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!getSharedPreferences("quickSettings", Context.MODE_PRIVATE).getBoolean("firstStart", true)) {
+        if (!getSharedPreferences("app", Context.MODE_PRIVATE).getBoolean(getResources().getString(R.string.pref_key__show_intro), false)) {
             skipStart();
             return;
         }
@@ -37,6 +37,7 @@ public class OnBoardActivity extends MaterialIntroActivity {
                 .backgroundColor(R.color.materialRed)
                 .buttonsColor(R.color.introButton)
                 .image(R.drawable.intro_2)
+                .title(getString(R.string.minibar))
                 .description(getString(R.string.intro2_text))
                 .build());
 
@@ -44,7 +45,7 @@ public class OnBoardActivity extends MaterialIntroActivity {
                 .backgroundColor(R.color.materialGreen)
                 .buttonsColor(R.color.introButton)
                 .image(R.drawable.intro_3)
-                .title(getString(R.string.intro3_title))
+                .title(getString(R.string.pref_title__app_drawer))
                 .description(getString(R.string.intro3_text))
                 .build());
 
@@ -52,7 +53,8 @@ public class OnBoardActivity extends MaterialIntroActivity {
                 .backgroundColor(R.color.materialBlue)
                 .buttonsColor(R.color.introButton)
                 .image(R.drawable.intro_4)
-                .description(getString(R.string.intro_finish))
+                .title(getString(R.string.pref_title__search_bar))
+                .description(getString(R.string.intro4_text))
                 .build());
     }
 
@@ -69,7 +71,7 @@ public class OnBoardActivity extends MaterialIntroActivity {
 
 
     private void setState() {
-        getSharedPreferences("quickSettings", Context.MODE_PRIVATE).edit().putBoolean("firstStart", false).apply();
+        getSharedPreferences("app", Context.MODE_PRIVATE).edit().putBoolean(getResources().getString(R.string.pref_key__show_intro), false).apply();
 
         Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

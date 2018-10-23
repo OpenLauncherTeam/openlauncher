@@ -13,13 +13,8 @@
 
     <!-- Intro -->
 
-    <string name="intro_skip">スキップ</string>
-    <string name="intro_finish">始めましょう。</string>
-    <string name="intro1_text">OpenLauncher を選んでいただきありがとうございます。 これは完全にオープンソースで、今も開発中です。
-        これは簡単な使い方の紹介です …</string>
     <string name="intro2_text">画面の左端から右にスワイプするとミニバーが開きます。 設定や、
         壁紙の変更、他にも多くのことができます。</string>
-    <string name="intro3_title">設定</string>
     <string name="intro3_text">デスクトップ、アプリケーションドロワー、ドックを設定することができます … 試してみてください!</string>
 
     <!-- MiniBar -->

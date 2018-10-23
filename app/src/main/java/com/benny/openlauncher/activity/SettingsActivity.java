@@ -45,6 +45,12 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_holder, new SettingsMasterFragment()).commit();
+
+        // if system exit is called the app will open settings activity again
+        // this pushes the user back out to the home activity
+        if (_appSettings.getAppRestartRequired()) {
+            startActivity(new Intent(this, HomeActivity.class));
+        }
     }
 
     @Override

@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Intro -->
-    <string name="intro_skip">Skip</string>
-    <string name="intro_finish">Let\'s start.</string>
-    <string name="intro1_text">This is OpenLauncher. A fully open source launcher. Here for you.</string>
-    <string name="intro2_text">Swipe inwards from the left border of your home screen to open the minibar. There you can find the settings,
-        change the wallpaper, lots of other stuff.</string>
-    <string name="intro3_title">Settings</string>
-    <string name="intro3_text">You can configure your desktop, app drawer, and dock. Try it out!</string>
-    <string name="intro4_community">Large community</string>
-    <string name="intro4_features">Packed with features</string>
-    <string name="intro4_customizable">Customizable</string>
-    <string name="custom">Custom</string>
+    <string name="intro1_text">An open source launcher with lots of useful features.</string>
+    <string name="intro1_community">Large Community</string>
+    <string name="intro1_features">Packed with Features</string>
+    <string name="intro1_customizable">Customizable</string>
+    <string name="intro2_text">Swipe inwards from the left border of your home screen to open the minibar and select an action.</string>
+    <string name="intro3_text">You can choose a style for your app drawer and hide unused apps from the settings.</string>
+    <string name="intro4_text">Search for something on the web or filter your apps from the search bar.</string>
 
     <!-- Minibar -->
     <string name="minibar">Minibar</string>
@@ -29,7 +25,7 @@
     <string name="minibar_summary__volume_dialog">Display all available volume sliders.</string>
     <string name="minibar_title__app_drawer">Open App Drawer</string>
     <string name="minibar_summary__app_drawer">Open the app drawer.</string>
-    <string name="minibar_title__search_bar">Search Bar</string>
+    <string name="minibar_title__search_bar">Open Search Bar</string>
     <string name="minibar_summary__search_bar">Open the search bar.</string>
     <string name="minibar_title__mobile_network">Mobile Network Settings</string>
     <string name="minibar_summary__mobile_network">Shortcut to the mobile network settings.</string>
@@ -38,6 +34,7 @@
     <string name="about_libs">Open Source Libraries</string>
     <string name="about_rate">Rate</string>
     <string name="about_credit">Contributors</string>
+    <string name="community">Community</string>
     <string name="about_credit_text_all_contributors">All contributors</string>
     <string name="more_info_on_how_to_contribute_to_foss_android_projects">More information on contributing to Open Source projects, especially Android Apps</string>
     <string name="join_community">Join the Community</string>
@@ -157,6 +154,7 @@
     <string name="pref_summary__theme">Set the theme for the entire app.</string>
     <string name="pref_title__primary_color">Primary Color</string>
     <string name="pref_summary__primary_color">Set the primary color for the app.</string>
+    <string name="pref_title__icon_size">Icon Size</string>
     <string name="pref_summary__icon_size">Size of all app icons.</string>
     <string name="pref_title__icon_pack">Icon Pack</string>
     <string name="pref_summary__icon_pack">Select an installed icon pack.</string>
@@ -169,10 +167,12 @@
     <string name="pref_summary__backup">Backup your desktop and settings.</string>
     <string name="pref_title__restore">Restore</string>
     <string name="pref_summary__restore">Restore your desktop and settings.</string>
-    <string name="pref_title__clear_database">Clear Database</string>
-    <string name="pref_summary__clear_database">Delete the data for the dock and desktop to fix issues.</string>
+    <string name="pref_title__reset_settings">Reset Settings</string>
+    <string name="pref_summary__reset_settings">Delete the app settings.</string>
+    <string name="pref_title__reset_database">Reset Database</string>
+    <string name="pref_summary__reset_database">Remove all items from the launcher.</string>
     <string name="pref_title__restart">Restart</string>
-    <string name="pref_summary__restart">Restart the launcher in case it\'s misbehaving.</string>
+    <string name="pref_summary__restart">Restart the launcher.</string>
 
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paged</string>
@@ -210,6 +210,7 @@
     <string name="version">Version</string>
     <string name="enable">Enable</string>
     <string name="placeholder">Hello world!</string>
+    <string name="custom">Custom</string>
     <string name="default_folder">Unnamed</string>
     <string name="default_icons">Default</string>
 

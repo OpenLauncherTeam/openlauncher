@@ -4,12 +4,8 @@
     <string name="toast_device_admin_required">Molimo vas omogzućite administraciju uređaja.</string>
 
     <!-- Intro -->
-    <string name="intro_skip">Preskoči</string>
-    <string name="intro_finish">Počni.</string>
-    <string name="intro1_text">Ovo je OpenLauncher. Kompletno open source pokretač. Za tebe.</string>
     <string name="intro2_text">Prevucite sa levog ruba vaše početnog ekrana da otvorite minibar. Tu možete pronaći podešavanja,
         promijeniti sliku ekrana, i dosta drugih stvari.</string>
-    <string name="intro3_title">Podešavanja</string>
     <string name="intro3_text">Možeš podesiti tvoj desktop, aplikacioni panel, i pristanište, Pokušaj!</string>
 
     <!-- Minibar -->
@@ -111,8 +107,8 @@
     <string name="pref_title__language">Jezik</string>
     <string name="pref_title__backup">Rezerva</string>
     <string name="pref_summary__backup">Rezerva i povraćaj vaših podešavanja.</string>
-    <string name="pref_title__clear_database">Izbriši bazu podataka</string>
-    <string name="pref_summary__clear_database">izbriši sve podatke iz pristaništa i desktopa da popravite probleme.</string>
+    <string name="pref_title__reset_database">Izbriši bazu podataka</string>
+    <string name="pref_summary__reset_database">izbriši sve podatke iz pristaništa i desktopa da popravite probleme.</string>
     <string name="pref_title__restart">Restartuj</string>
     <string name="pref_summary__restart">Restartuj pokretač u slučaju da se čudno ponaša.</string>
     <string name="pref_summary__theme">Postavi temu cijele aplikacije.</string>

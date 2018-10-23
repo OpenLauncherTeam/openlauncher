@@ -15,12 +15,7 @@
 
     <!-- Intro -->
 
-    <string name="intro_skip">تخطي</string>
-    <string name="intro_finish">هيا نبدأ</string>
-    <string name="intro1_text">شكرا على اختيارك أوبن لانشر، إنه مفتوح المصدر بشكل كامل ولا زال قيد التطوير حاليا. \n
- هذه مقدمة بسيطة لكيفية استخدامه.</string>
-    <string name="intro2_text">المس الشاشة من اليسار لليمين في الصفحة الرئيسية لعرض الشريط المصغر. حيث تجد الإعدادات، يمكنك تغيير صورة الخلفية، وفعل الكثير من الأشياء.</string>
-    <string name="intro3_title">الإعدادات</string>
+   <string name="intro2_text">المس الشاشة من اليسار لليمين في الصفحة الرئيسية لعرض الشريط المصغر. حيث تجد الإعدادات، يمكنك تغيير صورة الخلفية، وفعل الكثير من الأشياء.</string>
     <string name="intro3_text">تستطيع ضبط سطح المكتب، درج التطبيقات، وشريط التطبيقات. جرب الآن!</string>
 
     <!-- Minibar -->
@@ -98,8 +93,8 @@
 
     <string name="pref_title__backup">نسخ احتياطي</string>
     <string name="pref_summary__backup">النسخ الاحتياطي والاسترجاع</string>
-    <string name="pref_title__clear_database">حذف قاعدة البيانات</string>
-    <string name="pref_summary__clear_database">حذف بيانات شريط التطبيقات وسطح المكتب لإصلاح الأخطاء</string>
+    <string name="pref_title__reset_database">حذف قاعدة البيانات</string>
+    <string name="pref_summary__reset_database">حذف بيانات شريط التطبيقات وسطح المكتب لإصلاح الأخطاء</string>
     <string name="pref_title__restart">إعادة التشغيل</string>
     <string name="pref_summary__restart">إعادة تشغيل اللانشر في حالة إظهار أخطاء</string>
 

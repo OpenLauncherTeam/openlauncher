@@ -4,16 +4,12 @@
     <string name="toast_device_admin_required">Per favore abilita l\'amministrazione del dispositivo.</string>
 
     <!-- Intro -->
-    <string name="intro_skip">Salta</string>
-    <string name="intro_finish">Iniziamo.</string>
-    <string name="intro1_text">Stai usando OpenLauncher, un Launcher completamente open source.</string>
     <string name="intro2_text">Scorri verso l\'interno dal bordo sinistro della home per aprire la Minbar. Da qui puoi accedere alle impostazioni,
         cambiare sfondo e molto altro ancora.</string>
-    <string name="intro3_title">Impostazioni</string>
     <string name="intro3_text">Puoi configurare il desktop, il Drawer e la dock, provalo!</string>
-    <string name="intro4_community">Il Launcher creato dalla community per la community</string>
-    <string name="intro4_features">Ricco di funzioni</string>
-    <string name="intro4_customizable">Personalizzabile</string>
+    <string name="intro1_community">Il Launcher creato dalla community per la community</string>
+    <string name="intro1_features">Ricco di funzioni</string>
+    <string name="intro1_customizable">Personalizzabile</string>
     <string name="custom">Personalizzato</string>
 
     <!-- Minibar -->
@@ -119,8 +115,8 @@
     <string name="pref_title__language">Lingua</string>
     <string name="pref_title__backup">Backup</string>
     <string name="pref_summary__backup">Backup e ripristino delle tue impostazioni.</string>
-    <string name="pref_title__clear_database">Cancella Database</string>
-    <string name="pref_summary__clear_database">Cancella i dati del desktop e della dock per risolvere gli errori.</string>
+    <string name="pref_title__reset_database">Cancella Database</string>
+    <string name="pref_summary__reset_database">Cancella i dati del desktop e della dock per risolvere gli errori.</string>
     <string name="pref_title__restart">Riavvia</string>
     <string name="pref_summary__restart">Riavvia il Launcher se funziona male.</string>
     <string name="pref_summary__theme">Imposta il tema dell\'app.</string>

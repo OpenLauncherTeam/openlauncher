@@ -9,16 +9,12 @@
     <string name="toast_device_admin_required">Por favor, habilita la opción de adminsitración de dispositivo.</string>
 
     <!-- Intro -->
-    <string name="intro_skip">Omitir</string>
-    <string name="intro_finish">Comencemos.</string>
-    <string name="intro1_text">Esto es OpenLaucher. Un lanzador de aplicaciones enteramente compuesto por código abierto. Aquí para ti.</string>
     <string name="intro2_text">Desliza hacia adentro desde el borde izquierdo de tu pantalla de inicio para abrir la barra lateral. Allí podrás encontrar los ajustes,
         cambiar el fondo de pantalla, y hacer un montón de otras cosas.</string>
-    <string name="intro3_title">Ajustes</string>
     <string name="intro3_text">Puedes configurar tu escritorio, el cajón de aplicaciones y el dock, ¡pruébalo!</string>
-    <string name="intro4_community">Un lanzador de apps de la comunidad para la comunidad</string>
-    <string name="intro4_features">Con muchas funcionalidades</string>
-    <string name="intro4_customizable">Personalizable</string>
+    <string name="intro1_community">Un lanzador de apps de la comunidad para la comunidad</string>
+    <string name="intro1_features">Con muchas funcionalidades</string>
+    <string name="intro1_customizable">Personalizable</string>
 
     <!-- Minibar -->
     <string name="minibar">Barra lateral</string>
@@ -118,9 +114,9 @@
     <string name="pref_summary__language">Cambia el lenguaje de esta aplicación. Reinicia para que los cambios surtan efecto.</string>
     <string name="pref_title__language">Idioma</string>
     <string name="pref_title__backup">Copia de seguridad</string>
-    <string name="pref_title__clear_database">Limpia la base de datos</string>
+    <string name="pref_title__reset_database">Limpia la base de datos</string>
     <string name="pref_summary__backup">Resguarda y restaura tus ajustes.</string>
-    <string name="pref_summary__clear_database">Elimina los datos del dock y el escritorio para solucionar problemas.</string>
+    <string name="pref_summary__reset_database">Elimina los datos del dock y el escritorio para solucionar problemas.</string>
     <string name="pref_title__restart">Reiniciar</string>
     <string name="pref_summary__restart">Reinicia el lanzador de aplicaciones si tiene un comportamiento anómalo.</string>
     <string name="pref_summary__theme">Configura el tema para la aplicación.</string>

@@ -15,13 +15,8 @@
 
     <!-- Intro -->
 
-    <string name="intro_skip">Hopp over</string>
-    <string name="intro_finish">La oss komme igang.</string>
-    <string name="intro1_text">Takk for at du valgte OpenLauncher. Det er fri programvare og i utvikling.
-        Her er en kort introduksjon av bruken.</string>
     <string name="intro2_text">Dra venstre skjermkant innover for å åpne sidepanelet, der finner du innstillingene,
         bakgrunnsbildemeny, og mye annet.</string>
-    <string name="intro3_title">Innstillinger</string>
     <string name="intro3_text">Du kan sette opp skrivebordet, programskuffen, og samlevinduet. Prøv det.</string>
 
     <!-- Minibar -->
@@ -100,8 +95,8 @@
 
     <string name="pref_title__backup">Sikkerhetskopier</string>
     <string name="pref_summary__backup">Sikkerhetskopier og gjenopprett dine innstillinger.</string>
-    <string name="pref_title__clear_database">Tøm database</string>
-    <string name="pref_summary__clear_database">Slatt dataen for samleområdet og skrivebordet for å ordne opp i problemer.</string>
+    <string name="pref_title__reset_database">Tøm database</string>
+    <string name="pref_summary__reset_database">Slatt dataen for samleområdet og skrivebordet for å ordne opp i problemer.</string>
     <string name="pref_title__restart">Omstart</string>
     <string name="pref_summary__restart">Start oppstarteren på nytt hvis den oppfører seg rart.</string>
 

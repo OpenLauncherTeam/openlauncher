@@ -4,15 +4,11 @@
     <string name="toast_device_admin_required">Pro praghere abìlita s\'amministratzione de su dispositivu.</string>
 
     <!-- Intro -->
-    <string name="intro_skip">Brinca</string>
-    <string name="intro_finish">Incumintzamus.</string>
-    <string name="intro1_text">Custu est OpenLauncher. Un\'allughidore de aplicatziones interamente a mitza aberta. Creadu pro tie.</string>
     <string name="intro2_text">Iscurre cara a su tzentru dae s\'oru de s\'ischermu printzipale pro abèrrere sa minibarra. In cue as a agatare sas impostatziones e as a pòdere cambiare s\'immàgine de isfundu e fàghere meda àteras cosas.</string>
-    <string name="intro3_title">Impostatziones</string>
     <string name="intro3_text">Podes cunfigurare s\'iscrivania tua, su menù de sas aplicatziones e sa barra de sas aplicatziones de suta, proa·lu!</string>
-    <string name="intro4_community">S\'allughidore dae sa comunidade pro sa comunidade</string>
-    <string name="intro4_features">Prenu de funtzionalidades</string>
-    <string name="intro4_customizable">Personalizàbile</string>
+    <string name="intro1_community">S\'allughidore dae sa comunidade pro sa comunidade</string>
+    <string name="intro1_features">Prenu de funtzionalidades</string>
+    <string name="intro1_customizable">Personalizàbile</string>
     <string name="custom">Personalizadu</string>
 
     <!-- Minibar -->
@@ -120,8 +116,8 @@
     <string name="pref_title__language">Limba</string>
     <string name="pref_title__backup">Còpia de seguresa</string>
     <string name="pref_summary__backup">Sarva una còpia de seguresa e riprìstina sas impostatziones tuas.</string>
-    <string name="pref_title__clear_database">Isbòida sa base de datos</string>
-    <string name="pref_summary__clear_database">Iscantzella sos datos de sa barra de suta e de s\'iscrivania pro isòrvere sos errores.</string>
+    <string name="pref_title__reset_database">Isbòida sa base de datos</string>
+    <string name="pref_summary__reset_database">Iscantzella sos datos de sa barra de suta e de s\'iscrivania pro isòrvere sos errores.</string>
     <string name="pref_title__restart">Torra a allùghere</string>
     <string name="pref_summary__restart">Torra a allùghere s\'allughidore si est funtzionende male.</string>
     <string name="pref_summary__theme">Imposta su tema globale de s\'aplicatzione</string>

@@ -20,7 +20,7 @@
         app:lightnessSlider="true"
         app:alphaSlider="true" />
 
-    <PreferenceCategory android:title="@string/icons">
+    <PreferenceCategory android:title="@string/pref_title__icons">
 
         <SeekBarPreference
             android:defaultValue="48"

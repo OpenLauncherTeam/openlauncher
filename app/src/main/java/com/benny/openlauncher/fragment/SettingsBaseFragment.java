@@ -14,6 +14,8 @@ import android.util.TypedValue;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppSettings;
 
+import net.gsantner.opoc.util.ContextUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +37,7 @@ public abstract class SettingsBaseFragment extends PreferenceFragmentCompat impl
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         if (toolbar != null) toolbar.setTitle(getPreferenceScreen().getTitle());
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences sharedPreferences = AppSettings.get().getDefaultPreferences();
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
         PreferenceGroup prefGroup = getPreferenceScreen();
@@ -45,7 +47,7 @@ public abstract class SettingsBaseFragment extends PreferenceFragmentCompat impl
     @Override
     public void onPause() {
         super.onPause();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences sharedPreferences = AppSettings.get().getDefaultPreferences();
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
 

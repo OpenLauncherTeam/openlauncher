@@ -4,17 +4,12 @@
     <string name="toast_device_admin_required">Si us plau, habilita la opció d\'administració de dispositiu.</string>
 
     <!-- Intro -->
-    <string name="intro_skip">Ometre</string>
-    <string name="intro_finish">Comencem.</string>
-    <string name="intro1_text">Moltes gràcies per escollir OpenLauncher. És completament de Codi Obert i encara es troba en desenvolupament.
-	Aquí hi ha una petita introducció sobre com utilitzar-lo.</string>
     <string name="intro2_text">Fes lliscar el dit cap endins des de la vora esquerra de la teva pantalla d\'inici per obrir la minibar. Allà podràs trobar els paràmetres,
 	canviar el fons de pantalla, i fer un munt de coses.</string>
-    <string name="intro3_title">Paràmetres</string>
     <string name="intro3_text">Pots configurar el teu escriptori, el calaix d\'aplicacions i l\'acoblador. Prova-ho!</string>
-    <string name="intro4_community">El llençador de la comunitat per a la comunitat</string>
-    <string name="intro4_features">Característiques empaquetades</string>
-    <string name="intro4_customizable">Personalitzable</string>
+    <string name="intro1_community">El llençador de la comunitat per a la comunitat</string>
+    <string name="intro1_features">Característiques empaquetades</string>
+    <string name="intro1_customizable">Personalitzable</string>
     <string name="custom">Personalització</string>
 
     <!-- Minibar -->
@@ -124,8 +119,8 @@
     <string name="pref_title__language">Idioma</string>
     <string name="pref_title__backup">Còpia de seguretat</string>
     <string name="pref_summary__backup">Importació i còpia de seguretat dels teus ajustos.</string>
-    <string name="pref_title__clear_database">Buida la base de dades</string>
-    <string name="pref_summary__clear_database">Esborra les dades de l\'acoblador i de l\'escriptori per solucionar problemes.</string>
+    <string name="pref_title__reset_database">Buida la base de dades</string>
+    <string name="pref_summary__reset_database">Esborra les dades de l\'acoblador i de l\'escriptori per solucionar problemes.</string>
     <string name="pref_title__restart">Reiniciar</string>
     <string name="pref_summary__restart">Reiniciar el llançador en cas de tenir un comportamer erroni.</string>
     <string name="pref_summary__theme">Triar el tema de l\'app.</string>

@@ -67,14 +67,14 @@
     <PreferenceCategory android:title="@string/pref_title__color">
 
         <com.flask.colorpicker.ColorPickerPreference
-            android:defaultValue="@color/transparent"
+            android:defaultValue="@color/darkTransparent"
             android:key="@string/pref_key__drawer_background_color"
             android:title="@string/pref_title__drawer_background_color"
             app:lightnessSlider="true"
             app:alphaSlider="true" />
 
         <com.flask.colorpicker.ColorPickerPreference
-            android:defaultValue="@color/darkTransparent"
+            android:defaultValue="@color/white"
             android:key="@string/pref_key__drawer_card_color"
             android:title="@string/pref_title__drawer_card_color"
             app:lightnessSlider="true"

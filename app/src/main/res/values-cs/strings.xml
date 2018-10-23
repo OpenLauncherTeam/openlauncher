@@ -4,15 +4,11 @@
     <string name="toast_device_admin_required">Prosím povolte administraci zařízení.</string>
 
     <!-- Intro -->
-    <string name="intro_skip">Přeskočit</string>
-    <string name="intro_finish">Pojďme na to!</string>
-    <string name="intro1_text">Děkujeme, že jste si vybrali OpenLauncher. Je plně open source a stále ve vývoji.     Následuje krátký úvod do jeho používání…</string>
     <string name="intro2_text">Táhnutím doleva od okraje otevřete MiniBar. Můžete tam najít nastavení, změnit pozadí a udělat spoustu jiných věcí.</string>
-    <string name="intro3_title">Nastavení</string>
     <string name="intro3_text">Můžete si nastavit plochu, menu aplikací a spodní dok, zkuste si to!</string>
-    <string name="intro4_community">Launcher od komunity pro komunitu</string>
-    <string name="intro4_features">Vlastnosti</string>
-    <string name="intro4_customizable">Nastavitelné</string>
+    <string name="intro1_community">Launcher od komunity pro komunitu</string>
+    <string name="intro1_features">Vlastnosti</string>
+    <string name="intro1_customizable">Nastavitelné</string>
 
     <!-- Minibar -->
     <string name="minibar">MiniBar - boční menu</string>
@@ -111,8 +107,8 @@
     <string name="pref_title__language">Jazyk</string>
     <string name="pref_title__backup">Zálohovat</string>
     <string name="pref_summary__backup">Zálohovat a obnovit nastavení.</string>
-    <string name="pref_title__clear_database">Vyčistit databázi</string>
-    <string name="pref_summary__clear_database">Odstranit data spodního doku a plochy k odstranění problémů.</string>
+    <string name="pref_title__reset_database">Vyčistit databázi</string>
+    <string name="pref_summary__reset_database">Odstranit data spodního doku a plochy k odstranění problémů.</string>
     <string name="pref_title__restart">Restartovat</string>
     <string name="pref_summary__restart">Restartovat aplikaci.</string>
     <string name="pref_summary__theme">Nastavit vzhled celé aplikace</string>
