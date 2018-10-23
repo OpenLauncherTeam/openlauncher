@@ -54,9 +54,7 @@
     <string name="pref_title__search_bar_enable">Строка поиска</string>
     <string name="pref_summary__search_bar_enable">Показывать строку поиска на рабочем столе.</string>
     <string name="pref_title__desktop_fullscreen">Полноэкранный режим</string>
-    <string name="pref_title__desktop_hide_grid">Скрыть сетку</string>
     <string name="pref_summary__desktop_fullscreen">Использовать полноэкранный режим для рабочего стола.</string>
-    <string name="pref_summary__desktop_hide_grid">Скрыть направляющую сетку.</string>
     <string name="pref_title__desktop_show_position_indicator">Индикатор страниц</string>
     <string name="pref_summary__desktop_show_position_indicator">Показывать индикатор страниц внизу рабочего стола.</string>
     <string name="pref_title__desktop_show_label">Показывать подписи</string>

@@ -61,9 +61,7 @@
     <string name="pref_title__search_bar_enable">Barra de búsqueda</string>
     <string name="pref_summary__search_bar_enable">Muestra una barra de búsqueda encima del escritorio.</string>
     <string name="pref_title__desktop_fullscreen">Pantalla completa</string>
-    <string name="pref_title__desktop_hide_grid">Esconder grilla</string>
     <string name="pref_summary__desktop_fullscreen">Habilita la pantalla completa para el escritorio.</string>
-    <string name="pref_summary__desktop_hide_grid">Esconder la grilla que guía.</string>
     <string name="pref_title__desktop_show_position_indicator">Indicador de posición</string>
     <string name="pref_summary__desktop_show_position_indicator">Muestra el indicador de página debajo del escritorio.</string>
     <string name="pref_title__desktop_show_label">Mostrar las etiquetas</string>

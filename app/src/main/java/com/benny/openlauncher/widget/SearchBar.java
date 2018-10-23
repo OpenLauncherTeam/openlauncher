@@ -267,11 +267,10 @@ public class SearchBar extends FrameLayout {
             @Override
             public void onGlobalLayout() {
                 _searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int marginTop = Tool.dp2px(60, getContext()) + HomeActivity._launcher.getStatusView().getHeight() + _searchInput.getHeight();
-                int marginBottom = HomeActivity._launcher.getNavigationView().getHeight();
-                recyclerParams.setMargins(0, marginTop, 0, marginBottom);
+                int marginTop = Tool.dp2px(100, getContext());
+                recyclerParams.setMargins(0, marginTop, 0, 0);
                 _searchRecycler.setLayoutParams(recyclerParams);
-                _searchRecycler.setPadding(0, 0, 0, marginBottom);
+                _searchRecycler.setPadding(0, 0, 0, 20);
             }
         });
     }
@@ -370,6 +369,15 @@ public class SearchBar extends FrameLayout {
         Spannable span = new SpannableString(text);
         span.setSpan(new RelativeSizeSpan(_searchClockSubTextFactor), lines[0].length() + 1, lines[0].length() + 1 + lines[1].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         _searchClock.setText(span);
+    }
+
+    @Override
+    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            setPadding(0, insets.getSystemWindowInsetTop(), 0, insets.getSystemWindowInsetBottom());
+            return insets;
+        }
+        return insets;
     }
 
     public enum Mode {

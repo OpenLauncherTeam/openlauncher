@@ -58,9 +58,7 @@
     <string name="pref_title__search_bar_enable">Barra de pesquisa</string>
     <string name="pref_summary__search_bar_enable">Mostrar barra de pesquisa acima da área de trabalho.</string>
     <string name="pref_title__desktop_fullscreen">Ecrã completo</string>
-    <string name="pref_title__desktop_hide_grid">Ocultar grelha</string>
     <string name="pref_summary__desktop_fullscreen">Ativar ecrã completo na área de trabalho.</string>
-    <string name="pref_summary__desktop_hide_grid">Ocultar grelha de alinhamento.</string>
     <string name="pref_title__desktop_show_position_indicator">Indicador de posição</string>
     <string name="pref_summary__desktop_show_position_indicator">Mostrar indicador de página abaixo da área de trabalho.</string>
     <string name="pref_title__desktop_show_label">Mostrar nome</string>

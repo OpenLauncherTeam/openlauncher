@@ -5,9 +5,11 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowInsets;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.benny.openlauncher.R;
@@ -203,6 +205,15 @@ public class AppDrawerController extends RevealFrameLayout {
                 }
                 break;
         }
+    }
+
+    @Override
+    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            setPadding(0, insets.getSystemWindowInsetTop(), 0, insets.getSystemWindowInsetBottom());
+            return insets;
+        }
+        return insets;
     }
 
     public void scrollToStart() {

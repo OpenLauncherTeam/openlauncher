@@ -56,9 +56,7 @@
     <string name="pref_title__search_bar_enable">Vyhľadávacie lišta</string>
     <string name="pref_summary__search_bar_enable">Zobrazovať vyhľadávací panel v hornej časti plochy.</string>
     <string name="pref_title__desktop_fullscreen">Celá obrazovka</string>
-    <string name="pref_title__desktop_hide_grid">Skryť mriežku</string>
     <string name="pref_summary__desktop_fullscreen">Povoliť režim celej obrazovky pre plochu</string>
-    <string name="pref_summary__desktop_hide_grid">Skryť vodiacu mriežku</string>
     <string name="pref_title__desktop_show_position_indicator">Ukazovateľ polohy</string>
     <string name="pref_summary__desktop_show_position_indicator">Zobrazovať indikátor strany pod plochou.</string>
     <string name="pref_title__desktop_show_label">Zobrazovať štítky</string>

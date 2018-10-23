@@ -137,7 +137,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         if (!isInEditMode()) {
             // set the height for the dock based on the number of rows and the show label preference
             int iconSize = Setup.appSettings().getDockIconSize();
-            int height = Tool.dp2px((iconSize + 60) * getCellSpanV(), _homeActivity);
+            int height = Tool.dp2px((iconSize + 20) * getCellSpanV(), _homeActivity);
             if (Setup.appSettings().isDockShowLabel()) height += Tool.dp2px(20, getContext());
             getLayoutParams().height = height;
             setMeasuredDimension(View.getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec), height);

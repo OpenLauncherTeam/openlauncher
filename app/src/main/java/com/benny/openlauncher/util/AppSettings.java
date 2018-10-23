@@ -38,8 +38,12 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.NORMAL);
     }
 
-    public boolean isDesktopHideGrid() {
-        return getBool(R.string.pref_key__desktop_hide_grid, true);
+    public boolean isDesktopRotate() {
+        return getBool(R.string.pref_key__desktop_rotate, false);
+    }
+
+    public boolean isDesktopShowGrid() {
+        return getBool(R.string.pref_key__desktop_show_grid, true);
     }
 
     public boolean isDesktopFullscreen() {
@@ -171,11 +175,11 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getDrawerBackgroundColor() {
-        return getInt(R.string.pref_key__drawer_background_color, Color.TRANSPARENT);
+        return getInt(R.string.pref_key__drawer_background_color, rcolor(R.color.darkTransparent));
     }
 
     public int getDrawerCardColor() {
-        return getInt(R.string.pref_key__drawer_card_color, rcolor(R.color.darkTransparent));
+        return getInt(R.string.pref_key__drawer_card_color, Color.WHITE);
     }
 
     public int getDrawerLabelColor() {

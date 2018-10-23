@@ -64,9 +64,7 @@
     <string name="pref_title__search_bar_enable">Suchleiste</string>
     <string name="pref_summary__search_bar_enable">Zeige eine Suchleiste am oberen Desktoprand.</string>
     <string name="pref_title__desktop_fullscreen">Vollbild</string>
-    <string name="pref_title__desktop_hide_grid">Gitter verstecken</string>
     <string name="pref_summary__desktop_fullscreen">Aktiviere den Vollbildmodus für deinen Desktop.</string>
-    <string name="pref_summary__desktop_hide_grid">Verstecken des Außen-Gitters</string>
     <string name="pref_title__desktop_show_position_indicator">Seitenindikator</string>
     <string name="pref_summary__desktop_show_position_indicator">Zeige den Seitenindikator auf dem Desktop an.</string>
     <string name="pref_title__desktop_show_label">Beschriftung</string>

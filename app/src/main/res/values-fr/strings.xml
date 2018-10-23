@@ -56,9 +56,7 @@
     <string name="pref_title__search_bar_enable">Barre de recherche</string>
     <string name="pref_summary__search_bar_enable">Afficher une barre de recherche sur le bureau.</string>
     <string name="pref_title__desktop_fullscreen">Plein écran</string>
-    <string name="pref_title__desktop_hide_grid">Cacher la grille</string>
     <string name="pref_summary__desktop_fullscreen">Activer le plein écran pour votre bureau.</string>
-    <string name="pref_summary__desktop_hide_grid">Cacher la grille d\'alignement.</string>
     <string name="pref_title__desktop_show_position_indicator">Position de l\'indicateur</string>
     <string name="pref_summary__desktop_show_position_indicator">Afficher l\'indicateur de bureau au bas de l\'écran.</string>
     <string name="pref_title__desktop_show_label">Montrer les noms</string>

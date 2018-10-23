@@ -53,9 +53,7 @@
     <string name="pref_title__search_bar_enable">Afeggag n unadi</string>
     <string name="pref_summary__search_bar_enable">Sken afeggag n unadi nnig n tnarit.</string>
     <string name="pref_title__desktop_fullscreen">Agdil aččran</string>
-    <string name="pref_title__desktop_hide_grid">Ffer iẓiki</string>
     <string name="pref_summary__desktop_fullscreen">Rmed agdil aččuran n tnarit.</string>
-    <string name="pref_summary__desktop_hide_grid">Ffer iẓiki n ureyyec.</string>
     <string name="pref_title__desktop_show_position_indicator">Adig n unamal</string>
     <string name="pref_summary__desktop_show_position_indicator">Sken anamal n usebter ddaw n tnarit.</string>
     <string name="pref_title__desktop_show_label">Sken tibzimin</string>

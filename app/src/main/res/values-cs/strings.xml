@@ -54,9 +54,7 @@
     <string name="pref_title__search_bar_enable">Vyhledávací řádek</string>
     <string name="pref_summary__search_bar_enable">Zobrazit vyhledávací řádek nad plochou.</string>
     <string name="pref_title__desktop_fullscreen">Celá obrazovka</string>
-    <string name="pref_title__desktop_hide_grid">Schovat mřížku</string>
     <string name="pref_summary__desktop_fullscreen">Povolit zobrazení na celou obrazovku.</string>
-    <string name="pref_summary__desktop_hide_grid">Schovat pomocnou mřížku</string>
     <string name="pref_title__desktop_show_position_indicator">Indikátor pozice</string>
     <string name="pref_summary__desktop_show_position_indicator">Zobrazovat indikátor aktivní plochy.</string>
     <string name="pref_title__desktop_show_label">Zobrazovat popisky</string>

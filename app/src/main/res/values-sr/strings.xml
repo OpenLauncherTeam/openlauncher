@@ -53,9 +53,7 @@
     <string name="pref_title__search_bar_enable">Pretraga</string>
     <string name="pref_summary__search_bar_enable">Prikaži pretragu iznad desktopa.</string>
     <string name="pref_title__desktop_fullscreen">Ceo ekran</string>
-    <string name="pref_title__desktop_hide_grid">Sakrij Mrežu</string>
     <string name="pref_summary__desktop_fullscreen">Omogući ceo ekran za desktop.</string>
-    <string name="pref_summary__desktop_hide_grid">Sakrij uceću mrežu.</string>
     <string name="pref_title__desktop_show_position_indicator">Indikator pozicije</string>
     <string name="pref_summary__desktop_show_position_indicator">Prikaži indikator stranice ispod desktopa.</string>
     <string name="pref_title__desktop_show_label">Prikaži Oznake</string>

@@ -643,7 +643,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
 
         // handle launcher rotation
-        if (appSettings.getBool(R.string.pref_key__desktop_rotate, false)) {
+        if (appSettings.isDesktopRotate()) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

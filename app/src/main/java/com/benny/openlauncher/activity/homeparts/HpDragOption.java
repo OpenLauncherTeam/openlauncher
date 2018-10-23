@@ -160,7 +160,7 @@ public class HpDragOption {
             @Override
             public void onStartDrag(@NonNull Action action, @NonNull PointF location) {
                 _homeActivity.closeAppDrawer();
-                if (!Setup.appSettings().isDesktopHideGrid()) {
+                if (Setup.appSettings().isDesktopShowGrid()) {
                     _homeActivity.getDock().setHideGrid(false);
                     for (CellContainer cellContainer : _homeActivity.getDesktop().getPages()) {
                         cellContainer.setHideGrid(false);
@@ -223,7 +223,7 @@ public class HpDragOption {
                 for (CellContainer page : _homeActivity.getDesktop().getPages()) {
                     page.clearCachedOutlineBitmap();
                 }
-                if (!Setup.appSettings().isDesktopHideGrid()) {
+                if (Setup.appSettings().isDesktopShowGrid()) {
                     _homeActivity.getDock().setHideGrid(true);
                     for (CellContainer cellContainer : _homeActivity.getDesktop().getPages()) {
                         cellContainer.setHideGrid(true);

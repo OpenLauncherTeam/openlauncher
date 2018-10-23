@@ -57,8 +57,6 @@
     <string name="pref_summary__search_bar_enable">Mostra barra di ricerca in cima al desktop.</string>
     <string name="pref_title__desktop_fullscreen">Schermo intero</string>
     <string name="pref_summary__desktop_fullscreen">Abilita desktop a schermo intero.</string>
-    <string name="pref_title__desktop_hide_grid">Nascondi griglia</string>
-    <string name="pref_summary__desktop_hide_grid">Nascondi griglia guida.</string>
     <string name="pref_title__desktop_show_position_indicator">Posizione indicatore</string>
     <string name="pref_summary__desktop_show_position_indicator">Mostra indicatore delle pagine nel desktop.</string>
     <string name="pref_title__desktop_show_label">Mostra etichette</string>

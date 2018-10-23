@@ -58,9 +58,7 @@
     <string name="pref_title__search_bar_enable">Barra de chirca</string>
     <string name="pref_summary__search_bar_enable">Ammustra una barra de chirca a pitzu de s\'iscrivania.</string>
     <string name="pref_title__desktop_fullscreen">Ischermu intreu</string>
-    <string name="pref_title__desktop_hide_grid">Istichi sa grìllia</string>
     <string name="pref_summary__desktop_fullscreen">Abìlita s\'ischermu intreu pro s\'iscrivania.</string>
-    <string name="pref_summary__desktop_hide_grid">Istichi sa grìllia de ghia.</string>
     <string name="pref_title__desktop_show_position_indicator">Indicadore de positzione</string>
     <string name="pref_summary__desktop_show_position_indicator">Ammustra s\'indicadore de pàgina in suta de s\'iscrivania.</string>
     <string name="pref_title__desktop_show_label">Ammustra sas etichetas</string>

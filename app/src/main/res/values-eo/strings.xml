@@ -61,9 +61,7 @@
     <string name="pref_title__search_bar_enable">Ŝercbreto</string>
     <string name="pref_summary__search_bar_enable">Montri serĉbreton sur labortablo.</string>
     <string name="pref_title__desktop_fullscreen">Plenekrano</string>
-    <string name="pref_title__desktop_hide_grid">Kaŝi kradon</string>
     <string name="pref_summary__desktop_fullscreen">Ebligi plenekrana por la labortablo.</string>
-    <string name="pref_summary__desktop_hide_grid">Kaŝi helpanta kradon.</string>
     <string name="pref_title__desktop_show_position_indicator">Lokokupilo</string>
     <string name="pref_summary__desktop_show_position_indicator">Montri lokokupilo sub labortablo.</string>
     <string name="pref_title__desktop_show_label">Montri markon</string>

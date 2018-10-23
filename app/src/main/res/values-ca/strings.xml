@@ -61,9 +61,7 @@
     <string name="pref_title__search_bar_enable">Barra de cerca</string>
     <string name="pref_summary__search_bar_enable">Mostra una barra de cerca a sobre de l\'escriptori.</string>
     <string name="pref_title__desktop_fullscreen">Pantalla completa</string>
-    <string name="pref_title__desktop_hide_grid">Amaga la graella</string>
     <string name="pref_summary__desktop_fullscreen">Habilita la pantalla completa per l\'escriptori.</string>
-    <string name="pref_summary__desktop_hide_grid">Amaga les guies de la graella.</string>
     <string name="pref_title__desktop_show_position_indicator">Indicador de desplaçament</string>
     <string name="pref_summary__desktop_show_position_indicator">Mostra l\'indicador de la pàgina sota de l\'escriptori.</string>
 
