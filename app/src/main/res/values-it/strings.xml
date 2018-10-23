@@ -137,17 +137,14 @@
     <string name="default_icons">Predefinito</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Hello world!</string>
-    <string name="request_please_wait">Searching for installed apps. Please wait.</string>
-    <string name="request_toast">No apps selected. Show all apps in drawer?</string>
+    <string name="placeholder">Hello world!</string>
+    <string name="please_wait">Searching for installed apps. Please wait.</string>
     <string name="on">On</string>
-    <string name="desktop_action">Desktop Action</string>
     <string name="select_app">Select App</string>
     <string name="off">Off</string>
     <string name="version">Versione</string>
-    <string name="wallpaper">Sfondo</string>
-    <string name="wallpaper_pick">Pick Wallpaper</string>
-    <string name="pick_icon_pack">Pick icon pack</string>
+    <string name="select_wallpaper">Pick Wallpaper</string>
+    <string name="select_icon_pack">Pick icon pack</string>
     <string name="toast_icon_pack_error">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
     <string name="dialog__backup_app_settings__backup">Backup</string>
     <string name="dialog__backup_app_settings__restore">Ripristina</string>
@@ -155,15 +152,13 @@
     <string name="toast_backup_error">Qualcosa è andato storto.</string>
     <string name="columns">Colonne</string>
     <string name="rows">Righe</string>
-    <string name="memory">Memoria</string>
-    <string name="storage">Storage</string>
     <string name="volume_level_ringtone">Suoneria</string>
     <string name="volume_level_notification">Notifiche</string>
     <string name="volume_level_system">Sistema</string>
     <string name="volume_level_media">Media</string>
-    <string name="theme_light">Chiaro</string>
-    <string name="theme_dark">Scuro</string>
-    <string name="debug">Debug</string>
+    <string name="light">Chiaro</string>
+    <string name="dark">Scuro</string>
+    <string name="pref_title__debug">Debug</string>
     <string name="pref_title__date_bar">Barra data</string>
     <string name="pref_title__date_bar_text_color">Colore testo</string>
     <string name="pref_title__date_bar_date_format">Formato data</string>
@@ -172,7 +167,7 @@
 
 
     <!-- Titles -->
-    <string name="settings">Impostazioni</string>
+    <string name="pref_title__settings">Impostazioni</string>
 
     <!-- Drag Option View -->
     <string name="edit">Modifica</string>
@@ -194,9 +189,7 @@
     <string name="default_folder">Senza nome</string>
 
     <!-- Dialogs -->
-    <string name="cancel">Cancella</string>
     <string name="search_hint">Cerca…</string>
-    <string name="search_online">Cerca online...</string>
     <string name="bad_format">Formato non valido</string>
 
 

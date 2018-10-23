@@ -116,14 +116,12 @@
 
     <!-- Dialogs -->
 
-    <string name="request_dummy_text">Hei verden!</string>
-    <string name="request_please_wait">Søker etter installerte programmer. Vent.</string>
-    <string name="request_toast">Ingen programmer installert. Vis alle programmer i skuff?</string>
+    <string name="placeholder">Hei verden!</string>
+    <string name="please_wait">Søker etter installerte programmer. Vent.</string>
     <string name="on">På</string>
     <string name="off">Av</string>
-    <string name="wallpaper">Bakgrunnsbilde</string>
-    <string name="wallpaper_pick">Velg bakgrunnsbilde</string>
-    <string name="pick_icon_pack">Velg ikonpakke</string>
+    <string name="select_wallpaper">Velg bakgrunnsbilde</string>
+    <string name="select_icon_pack">Velg ikonpakke</string>
     <string name="toast_icon_pack_error">Klarte ikke å hente ikon uten READ_EXTERNAL_STORAGE-tilgang.</string>
     <string name="dialog__backup_app_settings__backup">Sikkerhetskopier</string>
     <string name="dialog__backup_app_settings__restore">Gjenopprett</string>
@@ -134,7 +132,7 @@
 
 
     <!-- Titles -->
-    <string name="settings">Innstillinger</string>
+    <string name="pref_title__settings">Innstillinger</string>
 
     <!-- Drag Option View -->
 
@@ -170,9 +168,5 @@
     <string name="default_folder">Uten navn</string>
 
     <!-- Dialogs -->
-
-    <string name="cancel">Avbryt</string>
-    <string name="search_online">SØK PÅ NETT</string>
-
 
 </resources>

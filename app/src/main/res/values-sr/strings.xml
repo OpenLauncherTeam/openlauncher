@@ -129,17 +129,14 @@
     <string name="default_icons">Podrazumevano</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Zdravo Svijete!</string>
-    <string name="request_please_wait">Pretraživanje instaliranih aplikacija. Molim vas sačekajte.</string>
-    <string name="request_toast">Nijedna aplikacija izabrana. Prikaži sve aplikacije na panelu?</string>
+    <string name="placeholder">Zdravo Svijete!</string>
+    <string name="please_wait">Pretraživanje instaliranih aplikacija. Molim vas sačekajte.</string>
     <string name="on">Uključeno</string>
-    <string name="desktop_action">Akcija na Desktopu</string>
     <string name="select_app">Izaberi Aplikaciju</string>
     <string name="off">Isključeno</string>
     <string name="version">Verzija</string>
-    <string name="wallpaper">Slika Ekrana</string>
-    <string name="wallpaper_pick">Izaberi Sliku Ekrana</string>
-    <string name="pick_icon_pack">Izaberi set ikonica</string>
+    <string name="select_wallpaper">Izaberi Sliku Ekrana</string>
+    <string name="select_icon_pack">Izaberi set ikonica</string>
     <string name="toast_icon_pack_error">Nije u mogućnosti da uzme ikonicu bez READ_EXTERNAL_STORAGE dozvole.</string>
     <string name="dialog__backup_app_settings__backup">Rezerna kopija</string>
     <string name="dialog__backup_app_settings__restore">Povrati</string>
@@ -147,13 +144,11 @@
     <string name="toast_backup_error">Nešto je krenulo kako ne treba.</string>
     <string name="columns">Kolone</string>
     <string name="rows">Redovi</string>
-    <string name="memory">Memorija</string>
-    <string name="storage">Skladište</string>
     <string name="volume_level_ringtone">Ton zvona</string>
     <string name="volume_level_notification">Notifikacije</string>
     <string name="volume_level_system">Sistem</string>
     <string name="volume_level_media">Medij</string>
-    <string name="theme_light">Svijetlo</string>
-    <string name="theme_dark">Tamno</string>
-    <string name="debug">Debug</string>
+    <string name="light">Svijetlo</string>
+    <string name="dark">Tamno</string>
+    <string name="pref_title__debug">Debug</string>
 </resources>

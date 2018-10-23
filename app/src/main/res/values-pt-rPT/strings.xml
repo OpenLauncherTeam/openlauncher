@@ -138,17 +138,14 @@
     <string name="default_icons">Padrão</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Olá mundo!</string>
-    <string name="request_please_wait">A analisar as aplicações instaladas. Aguarde...</string>
-    <string name="request_toast">Não selecionou uma aplicação. Deseja  mostrar todas as aplicações no menu?</string>
+    <string name="placeholder">Olá mundo!</string>
+    <string name="please_wait">A analisar as aplicações instaladas. Aguarde...</string>
     <string name="on">Ligado</string>
-    <string name="desktop_action">Ação da área de trabalho</string>
     <string name="select_app">Selecionar aplicação</string>
     <string name="off">Desligado</string>
     <string name="version">Versão</string>
-    <string name="wallpaper">Imagem de fundo</string>
-    <string name="wallpaper_pick">Escolher imagem</string>
-    <string name="pick_icon_pack">Escolher pacote de ícones</string>
+    <string name="select_wallpaper">Escolher imagem</string>
+    <string name="select_icon_pack">Escolher pacote de ícones</string>
     <string name="toast_icon_pack_error">Não é possível carregar o ícone sem a permissão READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Backup</string>
     <string name="dialog__backup_app_settings__restore">Restaurar</string>
@@ -156,15 +153,13 @@
     <string name="toast_backup_error">Algo errado ocorreu.</string>
     <string name="columns">Colunas</string>
     <string name="rows">Linhas</string>
-    <string name="memory">Memória</string>
-    <string name="storage">Armazenamento</string>
     <string name="volume_level_ringtone">Toque de chamada</string>
     <string name="volume_level_notification">Notificação</string>
     <string name="volume_level_system">Sistema</string>
     <string name="volume_level_media">Multimédia</string>
-    <string name="theme_light">Claro</string>
-    <string name="theme_dark">Escuro</string>
-    <string name="debug">Depuração</string>
+    <string name="light">Claro</string>
+    <string name="dark">Escuro</string>
+    <string name="pref_title__debug">Depuração</string>
     <string name="pref_title__date_bar">Barra de data</string>
     <string name="pref_title__date_bar_text_color">Cor do texto</string>
     <string name="pref_title__date_bar_date_format">Formato da data</string>
@@ -172,7 +167,7 @@
     <string name="pref_title__date_bar_date_format_custom_2">Personalizado: linha 2</string>
 
     <!-- Titles -->
-    <string name="settings">Definições</string>
+    <string name="pref_title__settings">Definições</string>
 
     <!-- Drag Option View -->
     <string name="edit">Editar</string>
@@ -194,12 +189,9 @@
     <string name="default_folder">Sem nome</string>
 
     <!-- Dialogs -->
-    <string name="cancel">Cancelar</string>
     <string name="search_hint">Pesquisar...</string>
-    <string name="search_online">Pesquisar na web...</string>
     <string name="bad_format">Formato inválido</string>
-    <string name="clear_user_data">Limpar dados de utilizador</string>
-    <string name="clear_user_data_are_you_sure">Tem a certeza? Todos os atalhos serão removidos.</string>
+    <string name="are_you_sure">Tem a certeza? Todos os atalhos serão removidos.</string>
     <string name="help">Ajuda</string>
     <string name="licenses">Licenças</string>
     <string name="contributors">Colaboradores</string>
@@ -235,7 +227,7 @@
     <string name="minibar_title__launcher_settings">Definições da aplicação</string>
     <string name="minibar_title__volume_dialog">Diálogo de volume</string>
     <string name="minibar_title__app_drawer">Abrir menu de aplicações</string>
-    <string name="launch">Abrir aplicação</string>
+    <string name="app">Abrir aplicação</string>
     <string name="app_drawer">Menu de aplicações</string>
 
 </resources>

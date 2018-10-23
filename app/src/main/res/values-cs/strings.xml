@@ -129,17 +129,14 @@
     <string name="default_icons">Výchozí</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Ahoj světe!</string>
-    <string name="request_please_wait">Vyhledávání nainstalovaných aplikací. Prosím čekejte.</string>
-    <string name="request_toast">Nebyly vybrány žádné aplikace. Mám zobrazit všechny?</string>
+    <string name="placeholder">Ahoj světe!</string>
+    <string name="please_wait">Vyhledávání nainstalovaných aplikací. Prosím čekejte.</string>
     <string name="on">Zapnout</string>
-    <string name="desktop_action">Akce na ploše</string>
     <string name="select_app">Výběr aplikací</string>
     <string name="off">Vypnout</string>
     <string name="version">Verze</string>
-    <string name="wallpaper">Pozadí</string>
-    <string name="wallpaper_pick">Výběr pozadí</string>
-    <string name="pick_icon_pack">Vyberte sadu ikon</string>
+    <string name="select_wallpaper">Výběr pozadí</string>
+    <string name="select_icon_pack">Vyberte sadu ikon</string>
     <string name="toast_icon_pack_error">Ikonu nelze získat bez práv pro čtení externího úložiště.</string>
     <string name="dialog__backup_app_settings__backup">Zálohovat</string>
     <string name="dialog__backup_app_settings__restore">Obnovit</string>
@@ -147,18 +144,16 @@
     <string name="toast_backup_error">Něco se pokazilo.</string>
     <string name="columns">Sloupce</string>
     <string name="rows">Řádky</string>
-    <string name="memory">Paměť</string>
-    <string name="storage">Úložiště</string>
     <string name="volume_level_ringtone">Vyzvánění</string>
     <string name="volume_level_notification">Notifikace</string>
     <string name="volume_level_system">Systém</string>
     <string name="volume_level_media">Multimédia</string>
-    <string name="theme_light">Světlé</string>
-    <string name="theme_dark">Tmavé</string>
+    <string name="light">Světlé</string>
+    <string name="dark">Tmavé</string>
 
 
     <!-- Titles -->
-    <string name="settings">Nastavení</string>
+    <string name="pref_title__settings">Nastavení</string>
 
     <!-- Drag Option View -->
     <string name="edit">Upravit</string>
@@ -180,8 +175,6 @@
     <string name="default_folder">Nepojmenovanný</string>
 
     <!-- Dialogs -->
-    <string name="cancel">Zrušit</string>
     <string name="search_hint">Hledat...</string>
-    <string name="search_online">Hledat online</string>
 </resources>
 

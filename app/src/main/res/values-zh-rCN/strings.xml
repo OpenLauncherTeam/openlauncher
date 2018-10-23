@@ -125,16 +125,13 @@
 
     <!-- Dialogs -->
 
-    <string name="request_please_wait">正在搜索已安装的应用, 请稍候</string>
-    <string name="request_toast">没有选中的应用. 在抽屉中显示所有应用吗?</string>
+    <string name="please_wait">正在搜索已安装的应用, 请稍候</string>
     <string name="on">开</string>
-    <string name="desktop_action">桌面动作</string>
     <string name="select_app">选择应用</string>
     <string name="off">关</string>
     <string name="version">版本</string>
-    <string name="wallpaper">壁纸</string>
-    <string name="wallpaper_pick">选择壁纸</string>
-    <string name="pick_icon_pack">选择图标包</string>
+    <string name="select_wallpaper">选择壁纸</string>
+    <string name="select_icon_pack">选择图标包</string>
     <string name="toast_icon_pack_error">没有读取外置存储的权限, 无法获取图标</string>
     <string name="dialog__backup_app_settings__backup">备份</string>
     <string name="dialog__backup_app_settings__restore">恢复</string>
@@ -142,8 +139,6 @@
     <string name="toast_backup_error">出了些问题</string>
     <string name="columns">列数</string>
     <string name="rows">行数</string>
-    <string name="memory">内存</string>
-    <string name="storage">存储</string>
     <string name="volume_level_ringtone">铃声</string>
     <string name="volume_level_notification">通知</string>
     <string name="volume_level_system">系统</string>
@@ -152,7 +147,7 @@
 
     <!-- Titles -->
 
-    <string name="settings">设置</string>
+    <string name="pref_title__settings">设置</string>
 
     <!-- Drag Option View -->
 
@@ -191,9 +186,6 @@
 
     <!-- Dialogs -->
 
-    <string name="cancel">取消</string>
     <string name="search_hint">搜索...</string>
-    <string name="search_online">在线搜索&#8230;</string>
-
 
 </resources>

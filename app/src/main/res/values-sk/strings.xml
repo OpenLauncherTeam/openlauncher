@@ -136,17 +136,14 @@
     <string name="default_icons">Prednastavené</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Ahoj svet!</string>
-    <string name="request_please_wait">Vyhľadávanie nainštalovaných aplikácií. Prosím čakajte.</string>
-    <string name="request_toast">Žadne aplikácie neboli vybrané. Zobraziť všetky v zozname?</string>
+    <string name="placeholder">Ahoj svet!</string>
+    <string name="please_wait">Vyhľadávanie nainštalovaných aplikácií. Prosím čakajte.</string>
     <string name="on">Zap.</string>
-    <string name="desktop_action">Akcie plochy</string>
     <string name="select_app">Vyberte aplikáciu.</string>
     <string name="off">Vyp.</string>
     <string name="version">Verzia</string>
-    <string name="wallpaper">Tapeta</string>
-    <string name="wallpaper_pick">Vyberte tapetu</string>
-    <string name="pick_icon_pack">Vybrať súbor ikon</string>
+    <string name="select_wallpaper">Vyberte tapetu</string>
+    <string name="select_icon_pack">Vybrať súbor ikon</string>
     <string name="toast_icon_pack_error">Nemožno zobrať ikony bez READ_EXTERNAL_STORAGE práv.</string>
     <string name="dialog__backup_app_settings__backup">Záloha</string>
     <string name="dialog__backup_app_settings__restore">Obnova</string>
@@ -154,15 +151,13 @@
     <string name="toast_backup_error">Niečo sa pokazilo.</string>
     <string name="columns">Stĺpce</string>
     <string name="rows">Riadky</string>
-    <string name="memory">Pamäť</string>
-    <string name="storage">Úložisko</string>
     <string name="volume_level_ringtone">Zvonenie</string>
     <string name="volume_level_notification">Upozornenie</string>
     <string name="volume_level_system">Systém</string>
     <string name="volume_level_media">Médiá</string>
-    <string name="theme_light">Svetlá</string>
-    <string name="theme_dark">Tmavá</string>
-    <string name="debug">Ladenie</string>
+    <string name="light">Svetlá</string>
+    <string name="dark">Tmavá</string>
+    <string name="pref_title__debug">Ladenie</string>
     <string name="pref_title__date_bar">Lišta dátumu</string>
     <string name="pref_title__date_bar_text_color">Farba textu</string>
     <string name="pref_title__date_bar_date_format">Formát dátumu</string>
@@ -170,7 +165,7 @@
     <string name="pref_title__date_bar_date_format_custom_2">Vlastný formát: Riadok 2</string>
 
     <!-- Titles -->
-    <string name="settings">Nastavenia</string>
+    <string name="pref_title__settings">Nastavenia</string>
 
     <!-- Drag Option View -->
     <string name="edit">Upraviť</string>
@@ -192,12 +187,9 @@
     <string name="default_folder">Bez mena</string>
 
     <!-- Dialogs -->
-    <string name="cancel">Zrušiť</string>
     <string name="search_hint">Hľadať...</string>
-    <string name="search_online">Hľadať online...</string>
     <string name="bad_format">Zlý formát</string>
-    <string name="clear_user_data">Vyčistiť používateľské dáta</string>
-    <string name="clear_user_data_are_you_sure">Ste si istý? Všetky vaše skratky budú odstránené.</string>
+    <string name="are_you_sure">Ste si istý? Všetky vaše skratky budú odstránené.</string>
     <string name="help">Pomoc</string>
     <string name="licenses">Licencie</string>
     <string name="contributors">Prispievatelia</string>
@@ -233,7 +225,7 @@
     <string name="minibar_title__launcher_settings">Nastavenia spúštača</string>
     <string name="minibar_title__volume_dialog">Nastavenia zvuku</string>
     <string name="minibar_title__app_drawer">Otvoriť zoznam aplikácií.</string>
-    <string name="launch">Spustiť aplikáciu</string>
+    <string name="app">Spustiť aplikáciu</string>
     <string name="app_drawer">Správca aplikácií</string>
     <string name="minibar_summary__mobile_network">Nastavenie mobilnej siete</string>
 

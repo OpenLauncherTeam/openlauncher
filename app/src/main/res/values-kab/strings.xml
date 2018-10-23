@@ -129,17 +129,14 @@
     <string name="default_icons">Amezwer</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Azul i umaḍal!</string>
-    <string name="request_please_wait">Anadi n yisnasen ibedden. Rǧu ma ulac aɣilif.</string>
-    <string name="request_toast">Ulac isnasen yettwafernen. Sken akk isnasen deg ugalis?</string>
+    <string name="placeholder">Azul i umaḍal!</string>
+    <string name="please_wait">Anadi n yisnasen ibedden. Rǧu ma ulac aɣilif.</string>
     <string name="on">Irmed</string>
-    <string name="desktop_action">Tigawt n tnarit</string>
     <string name="select_app">Fren asnas</string>
     <string name="off">Insa</string>
     <string name="version">Lqem</string>
-    <string name="wallpaper">Tugna n ugilal</string>
-    <string name="wallpaper_pick">Fren tugna n ugilal</string>
-    <string name="pick_icon_pack">Fren tagrumma n tignitin</string>
+    <string name="select_wallpaper">Fren tugna n ugilal</string>
+    <string name="select_icon_pack">Fren tagrumma n tignitin</string>
     <string name="toast_icon_pack_error">Ur izmir ara ad d-yerr tignit s war tasiregt READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Ḥrez</string>
     <string name="dialog__backup_app_settings__restore">Err-d</string>
@@ -147,13 +144,11 @@
     <string name="toast_backup_error">Yella wayen yeḍran.</string>
     <string name="columns">Tigejda</string>
     <string name="rows">Izirigen</string>
-    <string name="memory">Takatut</string>
-    <string name="storage">Asekles</string>
     <string name="volume_level_ringtone">Taṭentunt</string>
     <string name="volume_level_notification">Alɣu</string>
     <string name="volume_level_system">Anagraw</string>
     <string name="volume_level_media">Amidya</string>
-    <string name="theme_light">Light</string>
-    <string name="theme_dark">Ubrik</string>
-    <string name="debug">Debug</string>
+    <string name="light">Light</string>
+    <string name="dark">Ubrik</string>
+    <string name="pref_title__debug">Debug</string>
 </resources>

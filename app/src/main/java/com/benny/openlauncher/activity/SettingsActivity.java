@@ -37,7 +37,7 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
 
-        toolbar.setTitle(R.string.settings);
+        toolbar.setTitle(R.string.pref_title__settings);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24px));
         toolbar.setNavigationOnClickListener(v -> onBackPressed());

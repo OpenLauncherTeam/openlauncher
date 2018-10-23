@@ -23,7 +23,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/debug">
+    <PreferenceCategory android:title="@string/pref_title__debug">
 
         <Preference
             android:key="@string/pref_key__clear_database"

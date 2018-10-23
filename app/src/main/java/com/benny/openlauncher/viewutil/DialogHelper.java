@@ -33,7 +33,7 @@ public class DialogHelper {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(c);
         builder.title(title)
                 .positiveText(android.R.string.ok)
-                .negativeText(R.string.cancel)
+                .negativeText(android.R.string.cancel)
                 .input(null, defaultText, new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
@@ -47,7 +47,7 @@ public class DialogHelper {
         builder.title(title)
                 .onPositive(onPositive)
                 .content(msg)
-                .negativeText(R.string.cancel)
+                .negativeText(android.R.string.cancel)
                 .positiveText(android.R.string.ok)
                 .show();
     }
@@ -57,22 +57,22 @@ public class DialogHelper {
         builder.title(title)
                 .onPositive(onPositive)
                 .content(message)
-                .negativeText(R.string.cancel)
+                .negativeText(android.R.string.cancel)
                 .positiveText(positive)
                 .show();
     }
 
     public static void selectActionDialog(final Context context, MaterialDialog.ListCallback callback) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(R.string.desktop_action)
-                .items(R.array.entries__gesture_actions)
+        builder.title(R.string.action)
+                .items(R.array.entries__gesture_action)
                 .itemsCallback(callback)
                 .show();
     }
 
     public static void selectDesktopActionDialog(final Context context, MaterialDialog.ListCallback callback) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
-        builder.title(R.string.desktop_action)
+        builder.title(R.string.action)
                 .items(R.array.entries__desktop_actions)
                 .itemsCallback(callback)
                 .show();
@@ -81,7 +81,7 @@ public class DialogHelper {
     public static void selectGestureDialog(final Context context, String title, MaterialDialog.ListCallback callback) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
         builder.title(title)
-                .items(R.array.entries__gestures)
+                .items(R.array.entries__gesture)
                 .itemsCallback(callback)
                 .show();
     }
@@ -91,7 +91,7 @@ public class DialogHelper {
         FastItemAdapter<IconLabelItem> fastItemAdapter = new FastItemAdapter<>();
         builder.title(R.string.select_app)
                 .adapter(fastItemAdapter, new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
-                .negativeText(R.string.cancel);
+                .negativeText(android.R.string.cancel);
 
         final MaterialDialog dialog = builder.build();
         List<IconLabelItem> items = new ArrayList<>();
@@ -129,7 +129,7 @@ public class DialogHelper {
         Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(packageManager));
         final MaterialDialog dialog = new MaterialDialog.Builder(activity)
                 .adapter(fastItemAdapter, null)
-                .title((activity.getString(R.string.pick_icon_pack)))
+                .title((activity.getString(R.string.select_icon_pack)))
                 .build();
 
         fastItemAdapter.add(new IconLabelItem(activity, R.drawable.ic_launcher, R.string.default_icons)

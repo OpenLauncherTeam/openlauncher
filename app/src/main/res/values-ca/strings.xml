@@ -142,17 +142,14 @@
     <string name="default_icons">Per defecte</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">¡Hola Món!</string>
-    <string name="request_please_wait">Cercant aplicacions instal·lades. Si us plau, esperi.</string>
-    <string name="request_toast">No hi ha aplicacions seleccionades. ¿Vols mostrar-les totes al calaix d\'aplicacions?</string>
+    <string name="placeholder">¡Hola Món!</string>
+    <string name="please_wait">Cercant aplicacions instal·lades. Si us plau, esperi.</string>
     <string name="on">Actiu</string>
-    <string name="desktop_action">Accions de l\'escriptori</string>
     <string name="select_app">Selecciona la aplicació</string>
     <string name="off">Inactiu</string>
     <string name="version">Versió</string>
-    <string name="wallpaper">Fons de pantalla</string>
-    <string name="wallpaper_pick">Tria fons de pantalla</string>
-    <string name="pick_icon_pack">Tria tema d\'icones</string>
+    <string name="select_wallpaper">Tria fons de pantalla</string>
+    <string name="select_icon_pack">Tria tema d\'icones</string>
     <string name="toast_icon_pack_error">Incapaç de seleccionar la icona sense el permís de LECTURA DEL CONTINGUT A LA TARGETA SD.</string>
     <string name="dialog__backup_app_settings__backup">Còpia de seguretat</string>
     <string name="dialog__backup_app_settings__restore">Importar</string>
@@ -160,17 +157,15 @@
     <string name="toast_backup_error">Alguna cosa no ha anat bé.</string>
     <string name="columns">Columnes</string>
     <string name="rows">Files</string>
-    <string name="memory">Memòria</string>
-    <string name="storage">Emmagatzematge</string>
     <string name="volume_level_ringtone">To de la trucada</string>
     <string name="volume_level_notification">Notificacions</string>
     <string name="volume_level_system">Sistema</string>
     <string name="volume_level_media">Multimèdia</string>
 
 
-    <string name="theme_light">Clar</string>
-    <string name="theme_dark">Fosc</string>
-    <string name="debug">Depura</string>
+    <string name="light">Clar</string>
+    <string name="dark">Fosc</string>
+    <string name="pref_title__debug">Depura</string>
     <string name="pref_title__date_bar">Data</string>
     <string name="pref_title__date_bar_text_color">Color del text</string>
     <string name="pref_title__date_bar_date_format">Format de la data</string>
@@ -178,7 +173,7 @@
     <string name="pref_title__date_bar_date_format_custom_2">Format personalitzat: Línia 2</string>
 
     <!-- Titles -->
-    <string name="settings">Configuració</string>
+    <string name="pref_title__settings">Configuració</string>
 
     <!-- Drag Option View -->
     <string name="edit">Edita</string>
@@ -200,12 +195,9 @@
     <string name="default_folder">Sense nom</string>
 
     <!-- Dialogs -->
-    <string name="cancel">Cancel·la</string>
     <string name="search_hint">Cerca…</string>
-    <string name="search_online">Cerca en línia&#8230;</string>
     <string name="bad_format">Format erroni</string>
-    <string name="clear_user_data">Neteja dades de l\'usuari</string>
-    <string name="clear_user_data_are_you_sure">¿Estàs segur?, s\'esborraran totes les teves dreceres.</string>
+    <string name="are_you_sure">¿Estàs segur?, s\'esborraran totes les teves dreceres.</string>
     <string name="help">Ajuda</string>
     <string name="licenses">Llicències</string>
     <string name="contributors">Contribuïdors</string>
@@ -241,7 +233,7 @@
     <string name="minibar_title__launcher_settings">Paràmetres del llençador</string>
     <string name="minibar_title__volume_dialog">Diàleg del volum</string>
     <string name="minibar_title__app_drawer">Obrir el calaix d\'apps</string>
-    <string name="launch">Engegar una app</string>
+    <string name="app">Engegar una app</string>
     <string name="app_drawer">Calaix d\'apps</string>
 
 </resources>

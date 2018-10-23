@@ -137,17 +137,14 @@
     <string name="default_icons">Por defecto</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">¡Hola Mundo!</string>
-    <string name="request_please_wait">Buscando aplicaciones instaladas. Por favor, espera.</string>
-    <string name="request_toast">No hay aplicaciones seleccionadas. ¿Mostrar todas las aplicaciones en el cajón?</string>
+    <string name="placeholder">¡Hola Mundo!</string>
+    <string name="please_wait">Buscando aplicaciones instaladas. Por favor, espera.</string>
     <string name="on">Encendido</string>
-    <string name="desktop_action">Acciones del escritorio</string>
     <string name="select_app">Selecciona la aplicación</string>
     <string name="off">Apagado</string>
     <string name="version">Versión</string>
-    <string name="wallpaper">Fondo de pantalla</string>
-    <string name="wallpaper_pick">Escoger fondo de pantalla</string>
-    <string name="pick_icon_pack">Escoger paquete de íconos</string>
+    <string name="select_wallpaper">Escoger fondo de pantalla</string>
+    <string name="select_icon_pack">Escoger paquete de íconos</string>
     <string name="toast_icon_pack_error">Incapaz de seleccionar el ícono sin el permiso READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Copia de seguridad</string>
     <string name="dialog__backup_app_settings__restore">Restaurar</string>
@@ -155,19 +152,17 @@
     <string name="toast_backup_error">Algo salió mal.</string>
     <string name="columns">Columnas</string>
     <string name="rows">Filas</string>
-    <string name="memory">Memoria</string>
-    <string name="storage">Almacenamiento</string>
     <string name="volume_level_ringtone">Tono de llamada</string>
     <string name="volume_level_notification">Notificaciones</string>
     <string name="volume_level_system">Sistema</string>
     <string name="volume_level_media">Multimedia</string>
-    <string name="theme_light">Claro</string>
-    <string name="theme_dark">Oscuro</string>
-    <string name="debug">Depuración</string>
+    <string name="light">Claro</string>
+    <string name="dark">Oscuro</string>
+    <string name="pref_title__debug">Depuración</string>
 
 
     <!-- Titles -->
-    <string name="settings">Ajustes</string>
+    <string name="pref_title__settings">Ajustes</string>
 
     <!-- Drag Option View -->
     <string name="edit">Editar</string>
@@ -189,8 +184,6 @@
     <string name="default_folder">Sin nombre</string>
 
     <!-- Dialogs -->
-    <string name="cancel">Cancelar</string>
     <string name="search_hint">Buscar…</string>
-    <string name="search_online">Buscar en línea&#8230;</string>
 
 </resources>

@@ -40,7 +40,7 @@
 
     <!-- Dialogs -->
 
-    <string name="pick_icon_pack">アイコンパックの選択</string>
+    <string name="select_icon_pack">アイコンパックの選択</string>
     <string name="toast_icon_pack_error">READ_EXTERNAL_STORAGE アクセス許可がないとアイコンを取得できません。</string>
     <string name="dialog__backup_app_settings__backup">バックアップ</string>
     <string name="dialog__backup_app_settings__restore">復元</string>
@@ -96,16 +96,14 @@
 
     <!-- Other -->
 
-    <string name="request_dummy_text">Hello world!</string>
-    <string name="request_please_wait">インストールされたアプリを検索中。しばらくお待ちください。</string>
-    <string name="request_toast">アプリが選択されていません。 ドロワーにすべてのアプリを表示しますか?</string>
+    <string name="placeholder">Hello world!</string>
+    <string name="please_wait">インストールされたアプリを検索中。しばらくお待ちください。</string>
     <string name="on">オン</string>
     <string name="off">オフ</string>
-    <string name="wallpaper">壁紙</string>
-    <string name="wallpaper_pick">壁紙の選択</string>
+    <string name="select_wallpaper">壁紙の選択</string>
 
     <!-- Titles -->
-    <string name="settings">設定</string>
+    <string name="pref_title__settings">設定</string>
 
     <!-- Edit Mode -->
 
@@ -131,7 +129,6 @@
 
     <!-- Other -->
 
-    <string name="cancel">キャンセル</string>
     <string name="home">ホーム</string>
     <string name="default_folder">名前なし</string>
 

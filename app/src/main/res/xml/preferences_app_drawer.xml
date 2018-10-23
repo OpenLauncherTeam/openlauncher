@@ -27,7 +27,7 @@
 
         <ListPreference
             android:defaultValue="1"
-            android:entries="@array/entries__drawer_styles"
+            android:entries="@array/entries__app_drawer_style"
             android:entryValues="@array/values__zero_to_one"
             android:key="@string/pref_key__drawer_style"
             android:summary="@string/pref_summary__drawer_style"
@@ -61,13 +61,6 @@
             android:key="@string/pref_key__drawer_show_label"
             android:summary="@string/pref_summary__drawer_show_label"
             android:title="@string/pref_title__drawer_show_label" />
-
-        <SeekBarPreference
-            android:defaultValue="13"
-            android:key="@string/pref_key__drawer_label_font_size"
-            android:max="20"
-            android:title="@string/pref_title__drawer_label_font_size"
-            app:min="7" />
 
     </PreferenceCategory>
 

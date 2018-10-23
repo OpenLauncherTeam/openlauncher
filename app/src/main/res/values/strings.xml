@@ -52,26 +52,40 @@
     <string name="contributors_public_info">Show information about contributors. Contributors can provide information to be shown here (opt-in) after contribution</string>
     <string name="contribute">Contribute</string>
     <string name="donate">Donate</string>
+    <string name="help">Help</string>
+    <string name="licenses">Licenses</string>
+    <string name="contributors">Contributors</string>
+    <string name="changelog">Changelog</string>
+    <string name="more">More</string>
+    <string name="open_source_licenses">Open Source Licenses</string>
+    <string name="rate_the_app">Rate this app</string>
+    <string name="translate">Translate</string>
+    <string name="help_this_app">More information and help about this app</string>
+    <string name="bug_reports">Report bugs</string>
+    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">More information on donating or otherwise supporting this project</string>
+    <string name="android_contribution_guide">Android contribution guide</string>
 
     <!-- Settings -->
+    <string name="pref_title__settings">Settings</string>
     <string name="pref_title__desktop">Desktop</string>
     <string name="pref_title__dock">Dock</string>
     <string name="pref_title__app_drawer">App Drawer</string>
+    <string name="pref_title__appearance">Appearance</string>
     <string name="pref_title__gestures">Gestures</string>
-    <string name="pref_title__icons">Icons</string>
     <string name="pref_title__miscellaneous">Miscellaneous</string>
     <string name="pref_title__about">About</string>
 
     <string name="pref_title__size">Size</string>
     <string name="pref_title__style">Style</string>
-    <string name="pref_title__appearance">Appearance</string>
     <string name="pref_title__color">Colors</string>
+    <string name="pref_title__icons">Icons</string>
     <string name="pref_title__search_bar">Search Bar</string>
     <string name="pref_title__interfaces">Interfaces</string>
     <string name="pref_title__inputs">Inputs</string>
     <string name="pref_title__feels">Feels</string>
     <string name="pref_title__others">Others</string>
     <string name="pref_title__animations">Animations</string>
+    <string name="pref_title__debug">Debug</string>
 
     <string name="pref_title__desktop_indicator_style">Indicator Style</string>
     <string name="pref_summary__minibar">Configure the order and visibility of minibar items.</string>
@@ -167,40 +181,37 @@
     <string name="indicator_mode_lines">Lines</string>
 
     <string name="none">None</string>
-    <string name="launch">Launch App</string>
-    <string name="app_drawer">App Drawer</string>
+    <string name="app">App</string>
 
-    <!-- Item Labels -->
-    <string name="default_icons">Default</string>
-    <string name="default_folder">Unnamed</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="black">Black</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Hello world!</string>
-    <string name="request_please_wait">Searching for installed apps. Please wait.</string>
-    <string name="request_toast">No apps selected. Show all apps in drawer?</string>
-    <string name="on">On</string>
-    <string name="desktop_action">Desktop Action</string>
+    <string name="please_wait">Searching for installed apps. Please wait.</string>
+    <string name="are_you_sure">Are you sure? This action cannot be undone unless you have a backup.</string>
+    <string name="device_admin_title">Device Admin Required</string>
+    <string name="device_admin_summary">OpenLauncher requires the Device Administration permission to lock your screen. Please enable it in the settings to use this feature.</string>
     <string name="select_app">Select App</string>
-    <string name="off">Off</string>
-    <string name="version">Version</string>
-    <string name="wallpaper">Wallpaper</string>
-    <string name="wallpaper_pick">Pick Wallpaper</string>
-    <string name="pick_icon_pack">Pick icon pack</string>
-    <string name="columns">Columns</string>
-    <string name="rows">Rows</string>
-    <string name="memory">Memory</string>
-    <string name="storage">Storage</string>
+    <string name="select_wallpaper">Select Wallpaper</string>
+    <string name="select_icon_pack">Select Icon Pack</string>
     <string name="volume_level_ringtone">Ringtone</string>
     <string name="volume_level_notification">Notification</string>
     <string name="volume_level_system">System</string>
     <string name="volume_level_media">Media</string>
-    <string name="theme_light">Light</string>
-    <string name="theme_dark">Dark</string>
-    <string name="theme_black">Black</string>
-    <string name="debug">Debug</string>
 
-    <!-- Titles -->
-    <string name="settings">Settings</string>
+    <!-- Other -->
+    <string name="columns">Columns</string>
+    <string name="rows">Rows</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="search_hint">Search</string>
+    <string name="bad_format">Bad Format</string>
+    <string name="version">Version</string>
+    <string name="enable">Enable</string>
+    <string name="placeholder">Hello world!</string>
+    <string name="default_folder">Unnamed</string>
+    <string name="default_icons">Default</string>
 
     <!-- Drag Option View -->
     <string name="edit">Edit</string>
@@ -221,25 +232,5 @@
     <string name="toast_backup_success">Done.</string>
     <string name="toast_backup_error">Something went wrong.</string>
     <string name="toast_icon_pack_error">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
-
-    <!-- Dialogs -->
-    <string name="cancel">Cancel</string>
-    <string name="search_hint">Search…</string>
-    <string name="search_online">Search online&#8230;</string>
-    <string name="bad_format">Bad Format</string>
-    <string name="clear_user_data">Clear user data</string>
-    <string name="clear_user_data_are_you_sure">Are you sure? all your shortcuts will be removed.</string>
-    <string name="help">Help</string>
-    <string name="licenses">Licenses</string>
-    <string name="contributors">Contributors</string>
-    <string name="changelog">Changelog</string>
-    <string name="more">More</string>
-    <string name="open_source_licenses">Open Source Licenses</string>
-    <string name="rate_the_app">Rate this app</string>
-    <string name="translate">Translate</string>
-    <string name="help_this_app">More information and help about this app</string>
-    <string name="bug_reports">Report bugs</string>
-    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">More information on donating or otherwise supporting this project</string>
-    <string name="android_contribution_guide">Android contribution guide</string>
 
 </resources>

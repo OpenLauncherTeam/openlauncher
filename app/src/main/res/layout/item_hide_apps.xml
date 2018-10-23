@@ -55,7 +55,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-condensed"
             android:lines="1"
-            android:text="@string/request_dummy_text"
+            android:text="@string/placeholder"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -69,7 +69,7 @@
             android:layout_marginRight="16dp"
             android:fontFamily="sans-serif"
             android:lines="1"
-            android:text="@string/request_dummy_text"
+            android:text="@string/placeholder"
             android:textSize="12sp"
             android:typeface="serif" />
     </LinearLayout>

@@ -119,13 +119,11 @@
 
     <!-- Dialogs -->
 
-    <string name="request_dummy_text">مرحبا بالعالم!</string>
-    <string name="request_toast">لم يتم اختيار تطبيقات، هل تود إظهار كافة التطبيقات في الدرج؟</string>
+    <string name="placeholder">مرحبا بالعالم!</string>
     <string name="on">تشغيل</string>
     <string name="off">إيقاف</string>
-    <string name="wallpaper">صورة الخلفية</string>
-    <string name="wallpaper_pick">اختر صورة الخلفية</string>
-    <string name="pick_icon_pack">اختر حزمة الأيقونات</string>
+    <string name="select_wallpaper">اختر صورة الخلفية</string>
+    <string name="select_icon_pack">اختر حزمة الأيقونات</string>
     <string name="toast_icon_pack_error">تعذر جلب صورة الأيقونة بدون صلاحية قراءة الذاكرة</string>
     <string name="dialog__backup_app_settings__backup">نسخة احتياطية</string>
     <string name="dialog__backup_app_settings__restore">استعادة</string>
@@ -136,7 +134,7 @@
 
 
     <!-- Titles -->
-    <string name="settings">الإعدادات</string>
+    <string name="pref_title__settings">الإعدادات</string>
 
     <!-- Drag Option View -->
 
@@ -176,6 +174,4 @@
 
     <!-- Dialogs -->
 
-    <string name="cancel">إلغاء الأمر</string>
-    <string name="search_online">البحث عبر الإنترنت</string>
 </resources>

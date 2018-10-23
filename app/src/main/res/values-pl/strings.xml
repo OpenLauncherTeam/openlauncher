@@ -136,17 +136,14 @@
     <string name="default_icons">Domyślne</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Witaj świecie!</string>
-    <string name="request_please_wait">Szukanie zainstalowanych aplikacji. Proszę czekać.</string>
-    <string name="request_toast">Nie wybrano żadnych aplikacji. Pokazać wszystkie aplikacje w menu?</string>
+    <string name="placeholder">Witaj świecie!</string>
+    <string name="please_wait">Szukanie zainstalowanych aplikacji. Proszę czekać.</string>
     <string name="on">Wł.</string>
-    <string name="desktop_action">Akcja pulpitu</string>
     <string name="select_app">Wybierz aplikację</string>
     <string name="off">Wył.</string>
     <string name="version">Wersja</string>
-    <string name="wallpaper">Tapeta</string>
-    <string name="wallpaper_pick">Wybierz tapetę</string>
-    <string name="pick_icon_pack">Wybierz zestaw ikon</string>
+    <string name="select_wallpaper">Wybierz tapetę</string>
+    <string name="select_icon_pack">Wybierz zestaw ikon</string>
     <string name="toast_icon_pack_error">Nie można wczytać ikony bez uprawnienia READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Kopia zapasowa</string>
     <string name="dialog__backup_app_settings__restore">Przywróć</string>
@@ -154,15 +151,13 @@
     <string name="toast_backup_error">Coś poszło nie tak.</string>
     <string name="columns">Kolumny</string>
     <string name="rows">Rzędy</string>
-    <string name="memory">Pamięć</string>
-    <string name="storage">Pamięć</string>
     <string name="volume_level_ringtone">Dzwonek</string>
     <string name="volume_level_notification">Powiadomienia</string>
     <string name="volume_level_system">System</string>
     <string name="volume_level_media">Media</string>
-    <string name="theme_light">Jasny</string>
-    <string name="theme_dark">Ciemny</string>
-    <string name="debug">Debugowanie</string>
+    <string name="light">Jasny</string>
+    <string name="dark">Ciemny</string>
+    <string name="pref_title__debug">Debugowanie</string>
     <string name="pref_title__date_bar">Pasek daty</string>
     <string name="pref_title__date_bar_text_color">Kolor tekstu</string>
     <string name="pref_title__date_bar_date_format">Format daty</string>
@@ -170,7 +165,7 @@
     <string name="pref_title__date_bar_date_format_custom_2">Niestandardowy format: 2 linia</string>
 
     <!-- Titles -->
-    <string name="settings">Ustawienia</string>
+    <string name="pref_title__settings">Ustawienia</string>
 
     <!-- Drag Option View -->
     <string name="edit">Edytuj</string>
@@ -192,12 +187,9 @@
     <string name="default_folder">Bez nazwy</string>
 
     <!-- Dialogs -->
-    <string name="cancel">Anuluj</string>
     <string name="search_hint">Szukaj…</string>
-    <string name="search_online">Szukaj online&#8230;</string>
     <string name="bad_format">Nieprawidłowy format</string>
-    <string name="clear_user_data">Wyczyść dane użytkownika</string>
-    <string name="clear_user_data_are_you_sure">Czy jesteś pewien? Wszystkie twoje skróty zostaną usunięte.</string>
+    <string name="are_you_sure">Czy jesteś pewien? Wszystkie twoje skróty zostaną usunięte.</string>
     <string name="help">Pomoc</string>
     <string name="licenses">Licencje</string>
     <string name="contributors">Współtwórcy</string>
@@ -233,7 +225,7 @@
     <string name="minibar_title__launcher_settings">Ustawienia launchera</string>
     <string name="minibar_title__volume_dialog">Okno dialogowe głośności</string>
     <string name="minibar_title__app_drawer">Otwórz menu aplikacji</string>
-    <string name="launch">Uruchom aplikację</string>
+    <string name="app">Uruchom aplikację</string>
     <string name="app_drawer">Menu aplikacji</string>
     <string name="minibar_summary__mobile_network">Ustawienia sieci mobilnych</string>
 

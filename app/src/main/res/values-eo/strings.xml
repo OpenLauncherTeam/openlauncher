@@ -137,17 +137,14 @@
     <string name="default_icons">Defaŭlta</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Saluton Mondo!</string>
-    <string name="request_please_wait">Serĉanta instalitajn aplikajojn. Bonvole, atendu.</string>
-    <string name="request_toast">Ne estas elektita aplikaĵo. Montri ĉiun aplikaĵojn en la ujo?</string>
+    <string name="placeholder">Saluton Mondo!</string>
+    <string name="please_wait">Serĉanta instalitajn aplikajojn. Bonvole, atendu.</string>
     <string name="on">Ŝaltita</string>
-    <string name="desktop_action">Labortabla ago</string>
     <string name="select_app">Elekti aplikaĵon</string>
     <string name="off">Malŝaltita</string>
     <string name="version">Versiono</string>
-    <string name="wallpaper">Ekranfono</string>
-    <string name="wallpaper_pick">Elekti ekranfonon</string>
-    <string name="pick_icon_pack">Elekti piktogrampakaĵo.</string>
+    <string name="select_wallpaper">Elekti ekranfonon</string>
+    <string name="select_icon_pack">Elekti piktogrampakaĵo.</string>
     <string name="toast_icon_pack_error">Ne povas elekti piktogramon sen READ_EXTERNAL_STORAGE-a permesilo.</string>
     <string name="dialog__backup_app_settings__backup">Savkopio</string>
     <string name="dialog__backup_app_settings__restore">Restaŭri</string>
@@ -155,19 +152,17 @@
     <string name="toast_backup_error">Io eraris.</string>
     <string name="columns">Kolumnoj</string>
     <string name="rows">Vicoj</string>
-    <string name="memory">Memorilo</string>
-    <string name="storage">Memoro</string>
     <string name="volume_level_ringtone">Vokosono</string>
     <string name="volume_level_notification">Sciigoj</string>
     <string name="volume_level_system">Sistemo</string>
     <string name="volume_level_media">Plurmedio</string>
-    <string name="theme_light">Luma</string>
-    <string name="theme_dark">Malluma</string>
-    <string name="debug">Senerarado</string>
+    <string name="light">Luma</string>
+    <string name="dark">Malluma</string>
+    <string name="pref_title__debug">Senerarado</string>
 
 
     <!-- Titles -->
-    <string name="settings">Agordoj</string>
+    <string name="pref_title__settings">Agordoj</string>
 
     <!-- Drag Option View -->
     <string name="edit">Redakti</string>
@@ -189,9 +184,6 @@
     <string name="default_folder">Nenomita</string>
 
     <!-- Dialogs -->
-    <string name="cancel">Nuligi</string>
     <string name="search_hint">Serĉi…</string>
-    <string name="search_online">TTT-serĉi&#8230;</string>
-
 
 </resources>

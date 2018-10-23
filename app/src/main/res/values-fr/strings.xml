@@ -136,17 +136,14 @@
     <string name="default_icons">Défaut</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Bonjour !</string>
-    <string name="request_please_wait">Recherche des applications installées. Veuillez patienter.</string>
-    <string name="request_toast">Aucune application sélectionnée. Afficher toutes les applications dans le volet ?</string>
+    <string name="placeholder">Bonjour !</string>
+    <string name="please_wait">Recherche des applications installées. Veuillez patienter.</string>
     <string name="on">Activé</string>
-    <string name="desktop_action">Action du bureau</string>
     <string name="select_app">Choisir l\'application</string>
     <string name="off">Désactivé</string>
     <string name="version">Version</string>
-    <string name="wallpaper">Fond d\'écran</string>
-    <string name="wallpaper_pick">Sélectionner un fond d\'écran</string>
-    <string name="pick_icon_pack">Sélectionner un pack d\'icônes</string>
+    <string name="select_wallpaper">Sélectionner un fond d\'écran</string>
+    <string name="select_icon_pack">Sélectionner un pack d\'icônes</string>
     <string name="toast_icon_pack_error">Impossible de récupérer l\'icône sans la permission READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Sauvegarder</string>
     <string name="dialog__backup_app_settings__restore">Restaurer</string>
@@ -154,15 +151,13 @@
     <string name="toast_backup_error">Une erreur est survenue.</string>
     <string name="columns">Colonnes</string>
     <string name="rows">Lignes</string>
-    <string name="memory">Mémoire</string>
-    <string name="storage">Stockage</string>
     <string name="volume_level_ringtone">Sonnerie</string>
     <string name="volume_level_notification">Notification</string>
     <string name="volume_level_system">Système</string>
     <string name="volume_level_media">Media</string>
-    <string name="theme_light">Clair</string>
-    <string name="theme_dark">Foncé</string>
-    <string name="debug">Déboguage</string>
+    <string name="light">Clair</string>
+    <string name="dark">Foncé</string>
+    <string name="pref_title__debug">Déboguage</string>
     <string name="pref_title__date_bar">Barre de dates</string>
     <string name="pref_title__date_bar_text_color">Couleur du texte</string>
     <string name="pref_title__date_bar_date_format">Format de la date</string>
@@ -170,7 +165,7 @@
     <string name="pref_title__date_bar_date_format_custom_2">Format personnalisé: Ligne 2</string>
 
     <!-- Titles -->
-    <string name="settings">Paramètres</string>
+    <string name="pref_title__settings">Paramètres</string>
 
     <!-- Drag Option View -->
     <string name="edit">Modifier</string>
@@ -192,9 +187,7 @@
     <string name="default_folder">Aucun nom</string>
 
     <!-- Dialogs -->
-    <string name="cancel">Annuler</string>
     <string name="search_hint">Chercher…</string>
-    <string name="search_online">Rechercher sur internet…</string>
     <string name="bad_format">Mauvais Format</string>
 
 </resources>

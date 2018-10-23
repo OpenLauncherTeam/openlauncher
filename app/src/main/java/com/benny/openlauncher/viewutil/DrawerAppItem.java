@@ -81,8 +81,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
 
             builder = new AppItemView.Builder(appItemView, Setup.appSettings().getDrawerIconSize())
                     .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
-                    .setTextColor(Setup.appSettings().getDrawerLabelColor())
-                    .setFontSize(appItemView.getContext(), Setup.appSettings().getDrawerLabelFontSize());
+                    .setTextColor(Setup.appSettings().getDrawerLabelColor());
         }
     }
 }

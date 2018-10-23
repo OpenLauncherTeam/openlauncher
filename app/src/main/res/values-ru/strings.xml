@@ -125,17 +125,14 @@
     <string name="default_icons">По умолчанию</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Привет мир!</string>
-    <string name="request_please_wait">Поиск установленных приложений. Подождите.</string>
-    <string name="request_toast">Приложения не выбраны. Показать в меню все приложения?</string>
+    <string name="placeholder">Привет мир!</string>
+    <string name="please_wait">Поиск установленных приложений. Подождите.</string>
     <string name="on">Вкл</string>
-    <string name="desktop_action">Действия рабочего стола</string>
     <string name="select_app">Выберите приложение</string>
     <string name="off">Выкл</string>
     <string name="version">Версия</string>
-    <string name="wallpaper">Обои</string>
-    <string name="wallpaper_pick">Выберите обои</string>
-    <string name="pick_icon_pack">Выберите набор значков</string>
+    <string name="select_wallpaper">Выберите обои</string>
+    <string name="select_icon_pack">Выберите набор значков</string>
     <string name="toast_icon_pack_error">Не удалось захватить значок без разрешения READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Создать резервную копию</string>
     <string name="dialog__backup_app_settings__restore">Восстановить</string>
@@ -143,15 +140,13 @@
     <string name="toast_backup_error">Что-то пошло не так.</string>
     <string name="columns">Столбцы</string>
     <string name="rows">Строки</string>
-    <string name="memory">Память</string>
-    <string name="storage">Накопитель</string>
     <string name="volume_level_ringtone">Рингтон</string>
     <string name="volume_level_notification">Уведомление</string>
     <string name="volume_level_system">Система</string>
     <string name="volume_level_media">Медиа</string>
-    <string name="theme_light">Светлая</string>
-    <string name="theme_dark">Тёмная</string>
-    <string name="debug">Отладка</string>
+    <string name="light">Светлая</string>
+    <string name="dark">Тёмная</string>
+    <string name="pref_title__debug">Отладка</string>
     <string name="pref_title__date_bar">Панель даты</string>
     <string name="pref_title__date_bar_text_color">Цвет текста</string>
     <string name="pref_title__date_bar_date_format">Формат даты</string>
@@ -159,7 +154,7 @@
     <string name="pref_title__date_bar_date_format_custom_2">Свой формат: вторая строка</string>
 
     <!-- Titles -->
-    <string name="settings">Настройки</string>
+    <string name="pref_title__settings">Настройки</string>
 
     <!-- Drag Option View -->
     <string name="edit">Изменить</string>
@@ -180,9 +175,7 @@
     <string name="default_folder">Без имени</string>
 
     <!-- Dialogs -->
-    <string name="cancel">Отмена</string>
     <string name="search_hint">Поиск...</string>
-    <string name="search_online">Поиск в сети…</string>
     <string name="bad_format">Неверный формат</string>
 
 </resources>

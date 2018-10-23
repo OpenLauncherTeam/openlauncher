@@ -142,17 +142,14 @@
 
     <!-- Dialogs -->
 
-    <string name="request_dummy_text">Hello world!</string>
-    <string name="request_please_wait">Suche nach installierten Anwendungen. Bitte warten.</string>
-    <string name="request_toast">Nichts ausgewählt. Alle Anwendungen im Drawer anzeigen?</string>
+    <string name="placeholder">Hello world!</string>
+    <string name="please_wait">Suche nach installierten Anwendungen. Bitte warten.</string>
     <string name="on">Ein</string>
-    <string name="desktop_action">Desktop Aktion</string>
     <string name="select_app">Anwendung auswählen</string>
     <string name="off">Aus</string>
     <string name="version">Version</string>
-    <string name="wallpaper">Wallpaper</string>
-    <string name="wallpaper_pick">Suche Wallpaper aus</string>
-    <string name="pick_icon_pack">Wähle ein Icon Pack aus</string>
+    <string name="select_wallpaper">Suche Wallpaper aus</string>
+    <string name="select_icon_pack">Wähle ein Icon Pack aus</string>
     <string name="toast_icon_pack_error">Du must zuerst die Berechtigung \"Manifest.permission.READ_EXTERNAL_STORAGE\" gewähren.</string>
     <string name="dialog__backup_app_settings__backup">Sicherung</string>
     <string name="dialog__backup_app_settings__restore">Wiederherstellung</string>
@@ -160,14 +157,12 @@
     <string name="toast_backup_error">Etwas ging schief.</string>
     <string name="columns">Spalten</string>
     <string name="rows">Zeilen</string>
-    <string name="memory">Arbeitsspeicher</string>
-    <string name="storage">Datenspeicher</string>
     <string name="volume_level_ringtone">Klingelton</string>
     <string name="volume_level_notification">Benachrichtigung</string>
     <string name="volume_level_system">System</string>
     <string name="volume_level_media">Medien</string>
-    <string name="theme_light">Hell</string>
-    <string name="theme_dark">Dunkel</string>
+    <string name="light">Hell</string>
+    <string name="dark">Dunkel</string>
     <string name="intro4_community">Der Launcher von der Community für die Community</string>
     <string name="intro4_features">Voller Features</string>
     <string name="intro4_customizable">Anpassbar</string>
@@ -175,7 +170,7 @@
     <string name="pref_summary__desktop_rotate">Bildschirm-Rotation erlauben</string>
     <string name="pref_title__search_bar_show_hidden_apps">Versteckte Apps anzeigen</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Versteckte Apps in Suchergebnissen anzeigen</string>
-    <string name="debug">Fehlerbehebung</string>
+    <string name="pref_title__debug">Fehlerbehebung</string>
     <string name="pref_title__desktop_folder_color_text">Ordner Text</string>
     <string name="pref_title__drawer_label_font_size">Bezeichnung Text-Größe</string>
     <string name="pref_title__animation_speed_modifier">Anmiations Geschwindigkeit</string>
@@ -191,7 +186,7 @@
 
     <!-- Titles -->
 
-    <string name="settings">Einstellungen</string>
+    <string name="pref_title__settings">Einstellungen</string>
 
     <!-- Drag Option View -->
 
@@ -231,12 +226,9 @@
 
     <!-- Dialogs -->
 
-    <string name="cancel">Abbrechen</string>
     <string name="search_hint">Suchen…</string>
-    <string name="search_online">ONLINE SUCHEN</string>
     <string name="bad_format">Format ungültig</string>
-    <string name="clear_user_data">Benutzerdaten löschen</string>
-    <string name="clear_user_data_are_you_sure">Bist du sicher? Deine Verknüpfungen werden gelöscht.</string>
+    <string name="are_you_sure">Bist du sicher? Deine Verknüpfungen werden gelöscht.</string>
 
     <string name="open_source_licenses">Open Source Lizenzen</string>
     <string name="rate_the_app">App bewerten</string>
@@ -271,7 +263,7 @@
     <string name="minibar_title__launcher_settings">Launcher-Einstellungen</string>
     <string name="minibar_title__volume_dialog">Lautstärke-Dialog</string>
     <string name="minibar_title__app_drawer">App Drawer öffnen</string>
-    <string name="launch">App starten</string>
+    <string name="app">App starten</string>
     <string name="app_drawer">App Drawer</string>
     <string name="minibar_summary__search_bar">In der Such-Leiste öffnen.</string>
     <string name="minibar_summary__mobile_network">Mobilfunkeinstellungen.</string>

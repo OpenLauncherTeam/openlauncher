@@ -7,7 +7,7 @@
 
     <ListPreference
         android:defaultValue="0"
-        android:entries="@array/entries__themes"
+        android:entries="@array/entries__theme"
         android:entryValues="@array/values__zero_to_two"
         android:key="@string/pref_key__theme"
         android:summary="@string/pref_summary__theme"

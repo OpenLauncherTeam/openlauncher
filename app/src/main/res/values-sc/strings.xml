@@ -138,17 +138,14 @@
     <string name="default_icons">Predefinidu</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Salude mundu!</string>
-    <string name="request_please_wait">Chirchende sas aplicatziones installadas. Pro praghere iseta.</string>
-    <string name="request_toast">Peruna aplicatzione ischertada. Ammustrare totu sas aplicatziones in su menù?</string>
+    <string name="placeholder">Salude mundu!</string>
+    <string name="please_wait">Chirchende sas aplicatziones installadas. Pro praghere iseta.</string>
     <string name="on">Alluta</string>
-    <string name="desktop_action">Atzione de s\'iscrivania</string>
     <string name="select_app">Ischerta s\'aplicatzione</string>
     <string name="off">Istudada</string>
     <string name="version">Versione</string>
-    <string name="wallpaper">Immàgine de isfundu</string>
-    <string name="wallpaper_pick">Issèbera un\'immàgine de isfundu</string>
-    <string name="pick_icon_pack">Issèbera unu pachete de iconas</string>
+    <string name="select_wallpaper">Issèbera un\'immàgine de isfundu</string>
+    <string name="select_icon_pack">Issèbera unu pachete de iconas</string>
     <string name="toast_icon_pack_error">Impossìbile otènnere s\'icona chene su permissu READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Faghe una còpia de seguresa</string>
     <string name="dialog__backup_app_settings__restore">Riprìstina</string>
@@ -156,15 +153,13 @@
     <string name="toast_backup_error">B\'est istadu carchi errore.</string>
     <string name="columns">Colunnas</string>
     <string name="rows">Rigas</string>
-    <string name="memory">Memòria</string>
-    <string name="storage">Memòria</string>
     <string name="volume_level_ringtone">Tonu de mutida</string>
     <string name="volume_level_notification">Notìficas</string>
     <string name="volume_level_system">Sistema</string>
     <string name="volume_level_media">Documentos multimediales</string>
-    <string name="theme_light">Craru</string>
-    <string name="theme_dark">Iscuru</string>
-    <string name="debug">Depuratzione (debug)</string>
+    <string name="light">Craru</string>
+    <string name="dark">Iscuru</string>
+    <string name="pref_title__debug">Depuratzione (debug)</string>
     <string name="pref_title__date_bar">Barra de sa data</string>
     <string name="pref_title__date_bar_text_color">Colore de su testu</string>
     <string name="pref_title__date_bar_date_format">Formatu de sa data</string>
@@ -172,7 +167,7 @@
     <string name="pref_title__date_bar_date_format_custom_2">Formatu personalizadu: Lìnia 2</string>
 
     <!-- Titles -->
-    <string name="settings">Impostatziones</string>
+    <string name="pref_title__settings">Impostatziones</string>
 
     <!-- Drag Option View -->
     <string name="edit">Muda</string>
@@ -194,12 +189,9 @@
     <string name="default_folder">Chene nùmene</string>
 
     <!-- Dialogs -->
-    <string name="cancel">Annulla</string>
     <string name="search_hint">Chirca…</string>
-    <string name="search_online">Chirca in lìnia…</string>
     <string name="bad_format">Formatu non vàlidu</string>
-    <string name="clear_user_data">Inneta sos datos de s\'impreadore</string>
-    <string name="clear_user_data_are_you_sure">Seguru ses? Totu sas incurtzadas tuas ant a èssere bogadas.</string>
+    <string name="are_you_sure">Seguru ses? Totu sas incurtzadas tuas ant a èssere bogadas.</string>
     <string name="help">Agiudu</string>
     <string name="licenses">Litzèntzias</string>
     <string name="contributors">Contribuidores</string>
@@ -235,7 +227,7 @@
     <string name="minibar_title__launcher_settings">Launcher Settings</string>
     <string name="minibar_title__volume_dialog">Diàlogu de su volume</string>
     <string name="minibar_title__app_drawer">Aberi su menù de sas aplicatziones</string>
-    <string name="launch">Aberi un\'aplicatzione</string>
+    <string name="app">Aberi un\'aplicatzione</string>
     <string name="app_drawer">Menù de sas aplicatziones</string>
 
 </resources>

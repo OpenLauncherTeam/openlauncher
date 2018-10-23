@@ -170,10 +170,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getBool(R.string.pref_key__drawer_show_label, true);
     }
 
-    public float getDrawerLabelFontSize() {
-        return getInt(R.string.pref_key__drawer_label_font_size, 13);
-    }
-
     public int getDrawerBackgroundColor() {
         return getInt(R.string.pref_key__drawer_background_color, Color.TRANSPARENT);
     }

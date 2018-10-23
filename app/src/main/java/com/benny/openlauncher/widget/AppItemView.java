@@ -66,16 +66,15 @@ public class AppItemView extends View implements Drawable.Callback {
 
         _labelHeight = Tool.dp2px(14, getContext());
 
-        _textPaint.setTextSize(Tool.sp2px(getContext(), 13));
+        _textPaint.setTextSize(Tool.sp2px(getContext(), 12));
         _textPaint.setColor(Color.DKGRAY);
         _textPaint.setTypeface(_typeface);
     }
 
-    public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item, int iconSize, float fontSizeSp) {
+    public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item, int iconSize) {
         AppItemView.Builder b = new AppItemView.Builder(context, iconSize)
                 .withOnTouchGetPosition(groupItem, Setup.itemGestureCallback())
-                .setTextColor(Setup.appSettings().getFolderLabelColor())
-                .setFontSize(context, fontSizeSp);
+                .setTextColor(Setup.appSettings().getFolderLabelColor());
         if (groupItem.getType() == Item.Type.SHORTCUT) {
             b.setShortcutItem(groupItem);
         } else {
@@ -94,7 +93,6 @@ public class AppItemView extends View implements Drawable.Callback {
                 .withOnLongClick(app, DragAction.Action.APP_DRAWER, longPressCallBack)
                 .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
                 .setTextColor(Setup.appSettings().getDrawerLabelColor())
-                .setFontSize(context, Setup.appSettings().getDrawerLabelFontSize())
                 .getView();
     }
 
@@ -152,7 +150,7 @@ public class AppItemView extends View implements Drawable.Callback {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         float mWidth = _iconSize;
-        float mHeight = _iconSize + (_showLabel ? 0 : _labelHeight);
+        float mHeight = _iconSize + (_showLabel ? _labelHeight : 0);
         if (_targetedWidth != 0) {
             mWidth = _targetedWidth;
         }

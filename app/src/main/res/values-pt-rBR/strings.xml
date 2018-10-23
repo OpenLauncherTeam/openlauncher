@@ -135,17 +135,14 @@
     <string name="default_icons">Padrão</string>
 
     <!-- Dialogs -->
-    <string name="request_dummy_text">Olá, mundo!</string>
-    <string name="request_please_wait">Procurando por aplicativos instalados. Por favor, aguarde.</string>
-    <string name="request_toast">Nenhum aplicativo selecionado. Exibir todos os aplicativos na gaveta?</string>
+    <string name="placeholder">Olá, mundo!</string>
+    <string name="please_wait">Procurando por aplicativos instalados. Por favor, aguarde.</string>
     <string name="on">Ligado</string>
-    <string name="desktop_action">Ação da área de trabalho</string>
     <string name="select_app">Selecionar aplicativo</string>
     <string name="off">Desligado</string>
     <string name="version">Versão</string>
-    <string name="wallpaper">Papel de parede</string>
-    <string name="wallpaper_pick">Escolha um papel de parede</string>
-    <string name="pick_icon_pack">Escolha um pacote de ícones</string>
+    <string name="select_wallpaper">Escolha um papel de parede</string>
+    <string name="select_icon_pack">Escolha um pacote de ícones</string>
     <string name="toast_icon_pack_error">Não foi possível obter o ícone sem a permissão READ_EXTERNAL_STORAGE.</string>
     <string name="dialog__backup_app_settings__backup">Fazer backup</string>
     <string name="dialog__backup_app_settings__restore">Restaurar backup</string>
@@ -153,15 +150,13 @@
     <string name="toast_backup_error">Algo deu errado..</string>
     <string name="columns">Colunas</string>
     <string name="rows">Linhas</string>
-    <string name="memory">Memória</string>
-    <string name="storage">Armazenamento</string>
     <string name="volume_level_ringtone">Toque</string>
     <string name="volume_level_notification">Notificação</string>
     <string name="volume_level_system">Sistema</string>
     <string name="volume_level_media">Mídia</string>
-    <string name="theme_light">Claro</string>
-    <string name="theme_dark">Escuro</string>
-    <string name="debug">Depuração</string>
+    <string name="light">Claro</string>
+    <string name="dark">Escuro</string>
+    <string name="pref_title__debug">Depuração</string>
     <string name="pref_title__date_bar">Barra de Data</string>
     <string name="pref_title__date_bar_text_color">Cor do Texto</string>
     <string name="pref_title__date_bar_date_format">Formato da Data</string>
@@ -169,7 +164,7 @@
     <string name="pref_title__date_bar_date_format_custom_2">Formato Personalizado: Linha 2</string>
 
     <!-- Titles -->
-    <string name="settings">Configurações</string>
+    <string name="pref_title__settings">Configurações</string>
 
     <!-- Drag Option View -->
     <string name="edit">Editar</string>
@@ -191,8 +186,6 @@
     <string name="default_folder">Sem nome</string>
 
     <!-- Dialogs -->
-    <string name="cancel">Cancelar</string>
     <string name="search_hint">Pesquisar...</string>
-    <string name="search_online">Pesquisar online...</string>
     <string name="bad_format">Mal formatado</string>
 </resources>

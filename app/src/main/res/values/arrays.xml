@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="entries__gestures" translatable="false">
+    <string-array name="entries__gesture" translatable="false">
         <item>@string/none</item>
         <item>@string/action</item>
-        <item>@string/launch</item>
+        <item>@string/app</item>
     </string-array>
 
-    <string-array name="entries__gesture_actions" translatable="false">
+    <string-array name="entries__gesture_action" translatable="false">
         <item>@string/minibar_title__edit_minibar</item>
         <item>@string/minibar_title__set_wallpaper</item>
         <item>@string/minibar_title__lock_screen</item>
@@ -23,20 +23,20 @@
         <item>@string/minibar_title__app_drawer</item>
     </string-array>
 
-    <string-array name="entries__desktop_indicator_mode" translatable="false">
+    <string-array name="entries__indicator_mode" translatable="false">
         <item>@string/indicator_mode_dots</item>
         <item>@string/indicator_mode_lines</item>
     </string-array>
 
-    <string-array name="entries__drawer_styles" translatable="false">
+    <string-array name="entries__app_drawer_style" translatable="false">
         <item>@string/horizontal_paged_drawer</item>
         <item>@string/vertical_scroll_drawer</item>
     </string-array>
 
-    <string-array name="entries__themes" translatable="false">
-        <item>@string/theme_light</item>
-        <item>@string/theme_dark</item>
-        <item>@string/theme_black</item>
+    <string-array name="entries__theme" translatable="false">
+        <item>@string/light</item>
+        <item>@string/dark</item>
+        <item>@string/black</item>
     </string-array>
 
     <string-array name="entries__date_format" translatable="false">
