@@ -271,6 +271,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 item.setItems(new ArrayList<>());
                 dataSplit = data.split(Definitions.INT_SEP);
                 for (String s : dataSplit) {
+                    if (s.isEmpty()) continue;
                     Item groupItem = getItem(Integer.parseInt(s));
                     if (groupItem != null) {
                         item.getItems().add(groupItem);
