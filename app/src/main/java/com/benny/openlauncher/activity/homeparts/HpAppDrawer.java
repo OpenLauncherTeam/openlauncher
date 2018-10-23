@@ -33,11 +33,16 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
     public void callback(Boolean openingOrClosing, Boolean startOrEnd) {
         if (openingOrClosing) {
             if (startOrEnd) {
-                Tool.visibleViews(_appDrawerIndicator);
-                Tool.invisibleViews(_homeActivity.getDesktop());
-                _homeActivity.updateDesktopIndicator(false);
-                _homeActivity.updateDock(false);
-                _homeActivity.updateSearchBar(false);
+                _homeActivity.getAppDrawerController().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Tool.visibleViews(_appDrawerIndicator);
+                        Tool.invisibleViews(_homeActivity.getDesktop());
+                        _homeActivity.updateDesktopIndicator(false);
+                        _homeActivity.updateDock(false);
+                        _homeActivity.updateSearchBar(false);
+                    }
+                }, 100);
             }
         } else {
             if (startOrEnd) {

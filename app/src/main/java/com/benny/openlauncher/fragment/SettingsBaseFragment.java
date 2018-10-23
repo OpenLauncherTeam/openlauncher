@@ -26,7 +26,7 @@ public abstract class SettingsBaseFragment extends PreferenceFragmentCompat impl
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        getPreferenceManager().setSharedPreferencesName("app_preferences");
+        getPreferenceManager().setSharedPreferencesName("app");
     }
 
     @Override

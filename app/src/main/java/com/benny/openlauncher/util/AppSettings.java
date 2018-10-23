@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class AppSettings extends SharedPreferencesPropertyBackend {
     public AppSettings(Context context) {
-        super(context, "app_preferences");
+        super(context, "app");
     }
 
     public static AppSettings get() {

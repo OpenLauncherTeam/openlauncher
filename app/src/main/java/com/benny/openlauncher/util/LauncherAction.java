@@ -95,10 +95,10 @@ public class LauncherAction {
                 }
                 break;
             case AppDrawer:
-                HomeActivity.Companion.getLauncher().openAppDrawer();
+                HomeActivity._launcher.openAppDrawer();
                 break;
             case SearchBar: {
-                HomeActivity.Companion.getLauncher().getSearchBar().getSearchButton().performClick();
+                HomeActivity._launcher.getSearchBar().getSearchButton().performClick();
                 break;
             }
             case MobileNetworkSettings: {

@@ -51,18 +51,16 @@ public class HpSearchBar implements SearchBar.CallBack, View.OnClickListener {
 
     @Override
     public void onExpand() {
-        _homeActivity.clearRoomForPopUp();
-        _homeActivity.dimBackground();
-
         _searchBar._searchInput.setFocusable(true);
         _searchBar._searchInput.setFocusableInTouchMode(true);
-        _searchBar._searchInput.post(new Runnable() {
+        _searchBar._searchInput.postDelayed(new Runnable() {
             @Override
             public void run() {
+                _homeActivity.dimBackground();
+                _homeActivity.clearRoomForPopUp();
                 _searchBar._searchInput.requestFocus();
             }
-        });
-
+        }, 100);
         Tool.showKeyboard(_homeActivity, _searchBar._searchInput);
     }
 
@@ -71,12 +69,11 @@ public class HpSearchBar implements SearchBar.CallBack, View.OnClickListener {
         _homeActivity.getDesktop().postDelayed(new Runnable() {
             @Override
             public void run() {
+                _homeActivity.unDimBackground();
                 _homeActivity.unClearRoomForPopUp();
+                _searchBar._searchInput.clearFocus();
             }
         }, 100);
-
-        _homeActivity.unDimBackground();
-        _searchBar._searchInput.clearFocus();
         Tool.hideKeyboard(_homeActivity, _searchBar._searchInput);
     }
 
