@@ -293,14 +293,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     public final void initMinibar() {
-        final ArrayList<LauncherAction.ActionDisplayItem> items = new ArrayList<>();
-        for (String action : AppSettings.get().getMinibarArrangement()) {
-            LauncherAction.ActionDisplayItem item = LauncherAction.getActionItem(action);
-            if (item != null) {
-                items.add(item);
-            }
-        }
-
+        final ArrayList<LauncherAction.ActionDisplayItem> items = AppSettings.get().getMinibarArrangement();
         MinibarView minibar = findViewById(R.id.minibar);
         minibar.setAdapter(new MinibarAdapter(this, items));
         minibar.setOnItemClickListener(new AdapterView.OnItemClickListener() {

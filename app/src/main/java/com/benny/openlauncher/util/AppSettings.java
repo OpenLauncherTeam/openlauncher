@@ -283,17 +283,24 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         setBool(R.string.pref_key__minibar_enable, value);
     }
 
-    public ArrayList<String> getMinibarArrangement() {
-        ArrayList<String> arrangement = getStringList(R.string.pref_key__minibar_items);
-        if (arrangement.isEmpty()) {
+    public ArrayList<LauncherAction.ActionDisplayItem> getMinibarArrangement() {
+        ArrayList<String> minibarString = getStringList(R.string.pref_key__minibar_items);
+        ArrayList<LauncherAction.ActionDisplayItem> minibarObject = new ArrayList<>();
+        for (String action : minibarString) {
+            LauncherAction.ActionDisplayItem item = LauncherAction.getActionItem(action);
+            if (item != null) {
+                minibarObject.add(item);
+            }
+        }
+        if (minibarObject.isEmpty()) {
             for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
                 if (LauncherAction.defaultArrangement.contains(item._action)) {
-                    arrangement.add(item._action.toString());
+                    minibarObject.add(item);
                 }
             }
-            setMinibarArrangement(arrangement);
+            setMinibarArrangement(minibarString);
         }
-        return arrangement;
+        return minibarObject;
     }
 
     public void setMinibarArrangement(ArrayList<String> value) {

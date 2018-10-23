@@ -57,9 +57,9 @@ public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallb
         _recyclerView.setLayoutManager(new LinearLayoutManager(this));
         _recyclerView.setAdapter(_adapter);
 
-        final ArrayList<String> minibarArrangement = AppSettings.get().getMinibarArrangement();
+        final ArrayList<LauncherAction.ActionDisplayItem> minibarArrangement = AppSettings.get().getMinibarArrangement();
         for (LauncherAction.ActionDisplayItem item : LauncherAction.actionDisplayItems) {
-            _adapter.add(new Item(item, minibarArrangement.contains(item._action.toString())));
+            _adapter.add(new Item(item, minibarArrangement.contains(item)));
         }
 
         boolean minibarEnable = AppSettings.get().getMinibarEnable();
