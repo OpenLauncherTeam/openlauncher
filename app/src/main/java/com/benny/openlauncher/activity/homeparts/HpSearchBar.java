@@ -83,6 +83,6 @@ public class HpSearchBar implements SearchBar.CallBack, View.OnClickListener {
     @Override
     public void onClick(View v) {
         Intent calendar = new Intent(Intent.ACTION_VIEW, CalendarContract.CONTENT_URI.buildUpon().appendPath("time").build());
-        _homeActivity.startActivity(calendar);
+        Tool.startIntent(_homeActivity, calendar);
     }
 }

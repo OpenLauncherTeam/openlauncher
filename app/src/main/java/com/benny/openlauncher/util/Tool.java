@@ -198,7 +198,12 @@ public class Tool {
     }
 
     public static void startIntent(Context context, Intent intent) {
-        context.startActivity(intent);
+        try {
+            context.startActivity(intent);
+        } catch (Exception e) {
+            // there is no activity to handle this intent
+            e.printStackTrace();
+        }
     }
 
     public static void startApp(Context context, App app, View view) {
