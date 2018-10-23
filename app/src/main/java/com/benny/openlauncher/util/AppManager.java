@@ -1,25 +1,16 @@
 package com.benny.openlauncher.util;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
-import android.support.v4.app.ActivityCompat;
-import android.view.Gravity;
-import android.view.View;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.AppDeleteListener;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.model.App;
-import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.benny.openlauncher.model.Item;
-import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import android.support.annotation.NonNull;
 

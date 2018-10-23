@@ -20,6 +20,7 @@ import net.gsantner.opoc.util.PermissionChecker;
 public class SettingsMiscellaneousFragment extends SettingsBaseFragment {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
         addPreferencesFromResource(R.xml.preferences_miscellaneous);
     }
 

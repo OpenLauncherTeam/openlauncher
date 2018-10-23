@@ -13,6 +13,7 @@ import net.gsantner.opoc.util.ContextUtils;
 public class SettingsAppearanceFragment extends SettingsBaseFragment {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
         addPreferencesFromResource(R.xml.preferences_appearance);
     }
 

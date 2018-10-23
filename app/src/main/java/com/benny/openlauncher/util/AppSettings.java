@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class AppSettings extends SharedPreferencesPropertyBackend {
     public AppSettings(Context context) {
-        super(context);
+        super(context, "app_preferences");
     }
 
     public static AppSettings get() {
@@ -226,6 +226,10 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         // return either ActionItem or Intent
         // both cases will return null if method call fails
         String result = getString(key, "0");
+        // TODO delete this later once most people have migrated to new version
+        if (result.length() == 1 && result.charAt(0) <= 8) {
+            result = "1" + result;
+        }
         int type = Integer.parseInt(result.substring(0, 1));
         Object gesture = null;
         switch (type) {

@@ -28,7 +28,7 @@ public class BackupHelper {
             ZipOutputStream zos = new ZipOutputStream(bos);
 
             addFileToZip(zos, dataDir + "/databases/home.db", "home.db");
-            addFileToZip(zos, dataDir + "/shared_prefs/com.benny.openlauncher_preferences.xml", "preferences.xml");
+            addFileToZip(zos, dataDir + "/shared_prefs/app_preferences.xml", "preferences.xml");
             Toast.makeText(context, R.string.toast_backup_success, Toast.LENGTH_SHORT).show();
             zos.flush();
             zos.close();
@@ -44,7 +44,7 @@ public class BackupHelper {
             String dataDir = p.applicationInfo.dataDir;
 
             extractFileFromZip(file, dataDir + "/databases/home.db", "home.db");
-            extractFileFromZip(file, dataDir + "/shared_prefs/com.benny.openlauncher_preferences.xml", "preferences.xml");
+            extractFileFromZip(file, dataDir + "/shared_prefs/app_preferences.xml", "preferences.xml");
             Toast.makeText(context, R.string.toast_backup_success, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(context, R.string.toast_backup_error, Toast.LENGTH_SHORT).show();

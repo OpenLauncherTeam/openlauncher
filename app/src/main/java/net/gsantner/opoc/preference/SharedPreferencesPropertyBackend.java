@@ -36,7 +36,6 @@ package net.gsantner.opoc.preference;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -74,7 +73,7 @@ public class SharedPreferencesPropertyBackend implements PropertyBackend<String,
         _context = context.getApplicationContext();
         _prefAppName = TextUtils.isEmpty(prefAppName) ?
                 _context.getPackageName() + "_preferences" : prefAppName;
-        _prefApp = PreferenceManager.getDefaultSharedPreferences(context);
+        _prefApp = _context.getSharedPreferences(_prefAppName, Context.MODE_PRIVATE);
     }
 
     //

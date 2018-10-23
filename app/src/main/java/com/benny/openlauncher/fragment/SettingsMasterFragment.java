@@ -19,6 +19,7 @@ import static com.benny.openlauncher.widget.AppDrawerController.DrawerMode.VERTI
 public class SettingsMasterFragment extends SettingsBaseFragment {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
         addPreferencesFromResource(R.xml.preferences_master);
     }
 

@@ -12,6 +12,7 @@ import net.gsantner.opoc.util.ContextUtils;
 public class SettingsDesktopFragment extends SettingsBaseFragment {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
         addPreferencesFromResource(R.xml.preferences_desktop);
     }
 

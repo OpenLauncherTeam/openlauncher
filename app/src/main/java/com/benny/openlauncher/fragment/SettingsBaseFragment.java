@@ -3,6 +3,7 @@ package com.benny.openlauncher.fragment;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceGroup;
@@ -22,6 +23,11 @@ public abstract class SettingsBaseFragment extends PreferenceFragmentCompat impl
             R.string.pref_key__gesture_double_tap, R.string.pref_key__gesture_swipe_up,
             R.string.pref_key__gesture_swipe_down, R.string.pref_key__gesture_pinch,
             R.string.pref_key__gesture_unpinch));
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        getPreferenceManager().setSharedPreferencesName("app_preferences");
+    }
 
     @Override
     public void onResume() {
