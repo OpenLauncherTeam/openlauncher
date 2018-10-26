@@ -2,7 +2,7 @@
 
 # OpenLauncher
 
-This is an open source launcher project for Android devices that has been built completely from scratch. The main goal of this launcher is to find a healthy medium between customization and simplicity. At this point in time it implements most features required in a typical launcher but could benefit greatly from some general polish. If you would like to help out feel free to submit pull requests or ask about joining the development team.
+This is an open source launcher project for Android devices that has been built completely from scratch. The main goal of this launcher is to find a healthy medium between customization and simplicity. At this point in time it implements most features required in a typical launcher but could benefit greatly from some general polish. If you would like to help out feel free to submit issues or ask about submitting a pull request with a feature you want to see in the launcher.
 
 <div style="display:flex;">
 <a href="https://f-droid.org/repository/browse/?fdid=com.benny.openlauncher">

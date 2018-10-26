@@ -122,10 +122,6 @@ public class LauncherAction {
             if (item._action.toString().equals(action)) {
                 return item;
             }
-            // TODO delete id check in the future
-            if (Integer.toString(item._id).equals(action)) {
-                return item;
-            }
         }
         return null;
     }
