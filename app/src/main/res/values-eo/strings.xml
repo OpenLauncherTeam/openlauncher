@@ -140,8 +140,6 @@
     <string name="select_wallpaper">Elekti ekranfonon</string>
     <string name="select_icon_pack">Elekti piktogrampakaĵo.</string>
     <string name="toast_icon_pack_error">Ne povas elekti piktogramon sen READ_EXTERNAL_STORAGE-a permesilo.</string>
-    <string name="dialog__backup_app_settings__backup">Savkopio</string>
-    <string name="dialog__backup_app_settings__restore">Restaŭri</string>
     <string name="toast_backup_success">Farita.</string>
     <string name="toast_backup_error">Io eraris.</string>
     <string name="columns">Kolumnoj</string>

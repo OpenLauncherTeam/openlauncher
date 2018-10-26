@@ -139,8 +139,6 @@
     <string name="select_wallpaper">Sélectionner un fond d\'écran</string>
     <string name="select_icon_pack">Sélectionner un pack d\'icônes</string>
     <string name="toast_icon_pack_error">Impossible de récupérer l\'icône sans la permission READ_EXTERNAL_STORAGE.</string>
-    <string name="dialog__backup_app_settings__backup">Sauvegarder</string>
-    <string name="dialog__backup_app_settings__restore">Restaurer</string>
     <string name="toast_backup_success">Opération réussie.</string>
     <string name="toast_backup_error">Une erreur est survenue.</string>
     <string name="columns">Colonnes</string>

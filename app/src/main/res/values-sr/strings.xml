@@ -132,8 +132,6 @@
     <string name="select_wallpaper">Izaberi Sliku Ekrana</string>
     <string name="select_icon_pack">Izaberi set ikonica</string>
     <string name="toast_icon_pack_error">Nije u mogućnosti da uzme ikonicu bez READ_EXTERNAL_STORAGE dozvole.</string>
-    <string name="dialog__backup_app_settings__backup">Rezerna kopija</string>
-    <string name="dialog__backup_app_settings__restore">Povrati</string>
     <string name="toast_backup_success">završeno.</string>
     <string name="toast_backup_error">Nešto je krenulo kako ne treba.</string>
     <string name="columns">Kolone</string>

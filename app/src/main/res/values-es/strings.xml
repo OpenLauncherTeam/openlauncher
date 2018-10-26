@@ -140,8 +140,6 @@
     <string name="select_wallpaper">Escoger fondo de pantalla</string>
     <string name="select_icon_pack">Escoger paquete de íconos</string>
     <string name="toast_icon_pack_error">Incapaz de seleccionar el ícono sin el permiso READ_EXTERNAL_STORAGE.</string>
-    <string name="dialog__backup_app_settings__backup">Copia de seguridad</string>
-    <string name="dialog__backup_app_settings__restore">Restaurar</string>
     <string name="toast_backup_success">Hecho.</string>
     <string name="toast_backup_error">Algo salió mal.</string>
     <string name="columns">Columnas</string>

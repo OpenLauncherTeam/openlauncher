@@ -140,8 +140,6 @@
     <string name="select_wallpaper">Pick Wallpaper</string>
     <string name="select_icon_pack">Pick icon pack</string>
     <string name="toast_icon_pack_error">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
-    <string name="dialog__backup_app_settings__backup">Backup</string>
-    <string name="dialog__backup_app_settings__restore">Ripristina</string>
     <string name="toast_backup_success">Fatto.</string>
     <string name="toast_backup_error">Qualcosa è andato storto.</string>
     <string name="columns">Colonne</string>

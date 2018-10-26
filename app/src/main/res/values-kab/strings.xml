@@ -132,8 +132,6 @@
     <string name="select_wallpaper">Fren tugna n ugilal</string>
     <string name="select_icon_pack">Fren tagrumma n tignitin</string>
     <string name="toast_icon_pack_error">Ur izmir ara ad d-yerr tignit s war tasiregt READ_EXTERNAL_STORAGE.</string>
-    <string name="dialog__backup_app_settings__backup">Ḥrez</string>
-    <string name="dialog__backup_app_settings__restore">Err-d</string>
     <string name="toast_backup_success">Immed.</string>
     <string name="toast_backup_error">Yella wayen yeḍran.</string>
     <string name="columns">Tigejda</string>

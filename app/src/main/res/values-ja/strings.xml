@@ -37,8 +37,6 @@
 
     <string name="select_icon_pack">アイコンパックの選択</string>
     <string name="toast_icon_pack_error">READ_EXTERNAL_STORAGE アクセス許可がないとアイコンを取得できません。</string>
-    <string name="dialog__backup_app_settings__backup">バックアップ</string>
-    <string name="dialog__backup_app_settings__restore">復元</string>
     <string name="toast_backup_success">完了しました。</string>
     <string name="toast_backup_error">問題が発生しました。</string>
 

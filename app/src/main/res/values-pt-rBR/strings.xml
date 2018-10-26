@@ -138,8 +138,6 @@
     <string name="select_wallpaper">Escolha um papel de parede</string>
     <string name="select_icon_pack">Escolha um pacote de ícones</string>
     <string name="toast_icon_pack_error">Não foi possível obter o ícone sem a permissão READ_EXTERNAL_STORAGE.</string>
-    <string name="dialog__backup_app_settings__backup">Fazer backup</string>
-    <string name="dialog__backup_app_settings__restore">Restaurar backup</string>
     <string name="toast_backup_success">Concluído.</string>
     <string name="toast_backup_error">Algo deu errado..</string>
     <string name="columns">Colunas</string>

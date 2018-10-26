@@ -141,8 +141,6 @@
     <string name="select_wallpaper">Escolher imagem</string>
     <string name="select_icon_pack">Escolher pacote de ícones</string>
     <string name="toast_icon_pack_error">Não é possível carregar o ícone sem a permissão READ_EXTERNAL_STORAGE.</string>
-    <string name="dialog__backup_app_settings__backup">Backup</string>
-    <string name="dialog__backup_app_settings__restore">Restaurar</string>
     <string name="toast_backup_success">Feito.</string>
     <string name="toast_backup_error">Algo errado ocorreu.</string>
     <string name="columns">Colunas</string>
@@ -222,6 +220,5 @@
     <string name="minibar_title__volume_dialog">Diálogo de volume</string>
     <string name="minibar_title__app_drawer">Abrir menu de aplicações</string>
     <string name="app">Abrir aplicação</string>
-    <string name="app_drawer">Menu de aplicações</string>
 
 </resources>

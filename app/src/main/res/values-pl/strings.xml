@@ -139,8 +139,6 @@
     <string name="select_wallpaper">Wybierz tapetę</string>
     <string name="select_icon_pack">Wybierz zestaw ikon</string>
     <string name="toast_icon_pack_error">Nie można wczytać ikony bez uprawnienia READ_EXTERNAL_STORAGE.</string>
-    <string name="dialog__backup_app_settings__backup">Kopia zapasowa</string>
-    <string name="dialog__backup_app_settings__restore">Przywróć</string>
     <string name="toast_backup_success">Gotowe.</string>
     <string name="toast_backup_error">Coś poszło nie tak.</string>
     <string name="columns">Kolumny</string>
@@ -220,7 +218,6 @@
     <string name="minibar_title__volume_dialog">Okno dialogowe głośności</string>
     <string name="minibar_title__app_drawer">Otwórz menu aplikacji</string>
     <string name="app">Uruchom aplikację</string>
-    <string name="app_drawer">Menu aplikacji</string>
     <string name="minibar_summary__mobile_network">Ustawienia sieci mobilnych</string>
 
 </resources>

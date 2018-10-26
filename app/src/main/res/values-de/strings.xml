@@ -145,8 +145,6 @@
     <string name="select_wallpaper">Suche Wallpaper aus</string>
     <string name="select_icon_pack">Wähle ein Icon Pack aus</string>
     <string name="toast_icon_pack_error">Du must zuerst die Berechtigung \"Manifest.permission.READ_EXTERNAL_STORAGE\" gewähren.</string>
-    <string name="dialog__backup_app_settings__backup">Sicherung</string>
-    <string name="dialog__backup_app_settings__restore">Wiederherstellung</string>
     <string name="toast_backup_success">Erfolgreich ausgeführt.</string>
     <string name="toast_backup_error">Etwas ging schief.</string>
     <string name="columns">Spalten</string>
@@ -258,7 +256,6 @@
     <string name="minibar_title__volume_dialog">Lautstärke-Dialog</string>
     <string name="minibar_title__app_drawer">App Drawer öffnen</string>
     <string name="app">App starten</string>
-    <string name="app_drawer">App Drawer</string>
     <string name="minibar_summary__search_bar">In der Such-Leiste öffnen.</string>
     <string name="minibar_summary__mobile_network">Mobilfunkeinstellungen.</string>
 </resources>

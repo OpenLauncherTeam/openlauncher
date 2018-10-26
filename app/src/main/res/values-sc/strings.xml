@@ -141,8 +141,6 @@
     <string name="select_wallpaper">Issèbera un\'immàgine de isfundu</string>
     <string name="select_icon_pack">Issèbera unu pachete de iconas</string>
     <string name="toast_icon_pack_error">Impossìbile otènnere s\'icona chene su permissu READ_EXTERNAL_STORAGE.</string>
-    <string name="dialog__backup_app_settings__backup">Faghe una còpia de seguresa</string>
-    <string name="dialog__backup_app_settings__restore">Riprìstina</string>
     <string name="toast_backup_success">Fatu.</string>
     <string name="toast_backup_error">B\'est istadu carchi errore.</string>
     <string name="columns">Colunnas</string>
@@ -222,6 +220,5 @@
     <string name="minibar_title__volume_dialog">Diàlogu de su volume</string>
     <string name="minibar_title__app_drawer">Aberi su menù de sas aplicatziones</string>
     <string name="app">Aberi un\'aplicatzione</string>
-    <string name="app_drawer">Menù de sas aplicatziones</string>
 
 </resources>

@@ -144,8 +144,6 @@
     <string name="select_wallpaper">Tria fons de pantalla</string>
     <string name="select_icon_pack">Tria tema d\'icones</string>
     <string name="toast_icon_pack_error">Incapaç de seleccionar la icona sense el permís de LECTURA DEL CONTINGUT A LA TARGETA SD.</string>
-    <string name="dialog__backup_app_settings__backup">Còpia de seguretat</string>
-    <string name="dialog__backup_app_settings__restore">Importar</string>
     <string name="toast_backup_success">Fet.</string>
     <string name="toast_backup_error">Alguna cosa no ha anat bé.</string>
     <string name="columns">Columnes</string>
@@ -227,6 +225,5 @@
     <string name="minibar_title__volume_dialog">Diàleg del volum</string>
     <string name="minibar_title__app_drawer">Obrir el calaix d\'apps</string>
     <string name="app">Engegar una app</string>
-    <string name="app_drawer">Calaix d\'apps</string>
 
 </resources>

@@ -120,8 +120,6 @@
     <string name="select_wallpaper">اختر صورة الخلفية</string>
     <string name="select_icon_pack">اختر حزمة الأيقونات</string>
     <string name="toast_icon_pack_error">تعذر جلب صورة الأيقونة بدون صلاحية قراءة الذاكرة</string>
-    <string name="dialog__backup_app_settings__backup">نسخة احتياطية</string>
-    <string name="dialog__backup_app_settings__restore">استعادة</string>
     <string name="toast_backup_success">تم</string>
     <string name="toast_backup_error">هناك خطأ ما.</string>
     <string name="columns">الأعمدة</string>

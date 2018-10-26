@@ -139,8 +139,6 @@
     <string name="select_wallpaper">Vyberte tapetu</string>
     <string name="select_icon_pack">Vybrať súbor ikon</string>
     <string name="toast_icon_pack_error">Nemožno zobrať ikony bez READ_EXTERNAL_STORAGE práv.</string>
-    <string name="dialog__backup_app_settings__backup">Záloha</string>
-    <string name="dialog__backup_app_settings__restore">Obnova</string>
     <string name="toast_backup_success">Hotovo.</string>
     <string name="toast_backup_error">Niečo sa pokazilo.</string>
     <string name="columns">Stĺpce</string>
@@ -220,7 +218,6 @@
     <string name="minibar_title__volume_dialog">Nastavenia zvuku</string>
     <string name="minibar_title__app_drawer">Otvoriť zoznam aplikácií.</string>
     <string name="app">Spustiť aplikáciu</string>
-    <string name="app_drawer">Správca aplikácií</string>
     <string name="minibar_summary__mobile_network">Nastavenie mobilnej siete</string>
 
 </resources>
