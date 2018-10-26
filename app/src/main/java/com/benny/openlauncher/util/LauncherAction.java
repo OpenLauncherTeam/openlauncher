@@ -119,8 +119,11 @@ public class LauncherAction {
 
     public static ActionDisplayItem getActionItem(String action) {
         for (ActionDisplayItem item : actionDisplayItems) {
+            if (item._action.toString().equals(action)) {
+                return item;
+            }
             // TODO delete id check in the future
-            if (item._action.toString().equals(action) || Integer.toString(item._id).equals(action)) {
+            if (Integer.toString(item._id).equals(action)) {
                 return item;
             }
         }

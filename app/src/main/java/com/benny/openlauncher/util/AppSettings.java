@@ -2,6 +2,7 @@ package com.benny.openlauncher.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
@@ -224,24 +225,12 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
 
     public Object getGesture(int key) {
         // return either ActionItem or Intent
-        // both cases will return null if method call fails
-        String result = getString(key, "0");
-        // TODO delete this later once most people have migrated to new version
-        if (result.length() == 1 && result.charAt(0) <= 8) {
-            result = "1" + result;
-        }
-        int type = Integer.parseInt(result.substring(0, 1));
-        Object gesture = null;
-        switch (type) {
-            case 1:
-                gesture = LauncherAction.getActionItem(Integer.parseInt(result.substring(1, 2)));
-                break;
-            case 2:
-                gesture = Tool.getIntentFromString(result.substring(1, result.length()));
-                break;
-            default:
-                // gesture is disabled
-                break;
+        String result = getString(key, "");
+        Object gesture = LauncherAction.getActionItem(result);
+        // no action was found so it must be an intent string
+        if (gesture == null) {
+            gesture = Tool.getIntentFromString(result);
+            if (AppManager.getInstance(_context).findApp((Intent) gesture) == null) gesture = null;
         }
         // reset the setting if invalid value
         if (gesture == null) {

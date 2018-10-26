@@ -97,15 +97,15 @@ public class SearchBar extends FrameLayout {
     private void init() {
         int dp1 = Tool.dp2px(1, getContext());
         int iconMarginOutside = dp1 * 16;
-        int iconMarginTop = dp1 * 30;
-        int searchTextMarginTop = dp1 * 20;
+        int iconMarginTop = dp1 * 14;
+        int searchTextMarginTop = dp1 * 4;
         int iconSize = dp1 * 24;
         int iconPadding = dp1 * 6;
 
         _searchClock = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.view_search_clock, this, false);
         _searchClock.setTextSize(TypedValue.COMPLEX_UNIT_DIP, _searchClockTextSize);
         LayoutParams clockParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        clockParams.setMargins(iconMarginOutside, dp1 * 16, 0, dp1 * 16);
+        clockParams.setMargins(iconMarginOutside, dp1 * 4, 0, dp1 * 4);
         clockParams.gravity = Gravity.START;
 
         _switchButton = new AppCompatImageView(getContext());
@@ -268,10 +268,10 @@ public class SearchBar extends FrameLayout {
             @Override
             public void onGlobalLayout() {
                 _searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int marginTop = Tool.dp2px(100, getContext());
+                int marginTop = Tool.dp2px(60, getContext());
                 recyclerParams.setMargins(0, marginTop, 0, 0);
                 _searchRecycler.setLayoutParams(recyclerParams);
-                _searchRecycler.setPadding(0, 0, 0, bottomInset);
+                _searchRecycler.setPadding(0, 0, 0, (int) (bottomInset * 1.5));
             }
         });
     }

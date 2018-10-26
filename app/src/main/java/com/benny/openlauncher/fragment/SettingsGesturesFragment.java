@@ -1,18 +1,28 @@
 package com.benny.openlauncher.fragment;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.model.App;
+import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
+import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
 
 import net.gsantner.opoc.util.ContextUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 public class SettingsGesturesFragment extends SettingsBaseFragment {
     @Override
@@ -38,18 +48,18 @@ public class SettingsGesturesFragment extends SettingsBaseFragment {
                             DialogHelper.selectActionDialog(getActivity(), new MaterialDialog.ListCallback() {
                                 @Override
                                 public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                                    AppSettings.get().setString(key, "1" + position);
+                                    AppSettings.get().setString(key, LauncherAction.getActionItem(position)._action.toString());
                                 }
                             });
                         } else if (position == 2) {
                             DialogHelper.selectAppDialog(getActivity(), new DialogHelper.OnAppSelectedListener() {
                                 @Override
                                 public void onAppSelected(App app) {
-                                    AppSettings.get().setString(key, "2" + Tool.getIntentAsString(Tool.getIntentFromApp(app)));
+                                    AppSettings.get().setString(key, Tool.getIntentAsString(Tool.getIntentFromApp(app)));
                                 }
                             });
                         } else {
-                            AppSettings.get().setString(key, "0");
+                            AppSettings.get().setString(key, "");
                         }
                     }
                 });
