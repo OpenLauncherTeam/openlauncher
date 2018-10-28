@@ -7,14 +7,11 @@ import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppSettings;
-
-import net.gsantner.opoc.util.ContextUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +38,8 @@ public abstract class SettingsBaseFragment extends PreferenceFragmentCompat impl
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
         PreferenceGroup prefGroup = getPreferenceScreen();
-        tintIcons(prefGroup);
+        updateIcons(prefGroup);
+        updateSummaries();
     }
 
     @Override
@@ -53,12 +51,17 @@ public abstract class SettingsBaseFragment extends PreferenceFragmentCompat impl
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        updateSummaries();
         if (!noRestart.contains(key)) {
             AppSettings.get().setAppRestartRequired(true);
         }
     }
 
-    public void tintIcons(PreferenceGroup prefGroup) {
+    public void updateSummaries() {
+        // override in fragments
+    }
+
+    public void updateIcons(PreferenceGroup prefGroup) {
         if (prefGroup != null && isAdded()) {
             int prefCount = prefGroup.getPreferenceCount();
             for (int i = 0; i < prefCount; i++) {
@@ -71,7 +74,7 @@ public abstract class SettingsBaseFragment extends PreferenceFragmentCompat impl
                         drawable.mutate().setColorFilter(getResources().getColor(color.resourceId), PorterDuff.Mode.SRC_IN);
                     }
                     if (preference instanceof PreferenceGroup) {
-                        tintIcons((PreferenceGroup) preference);
+                        updateIcons((PreferenceGroup) preference);
                     }
                 }
             }

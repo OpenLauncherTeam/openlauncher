@@ -67,4 +67,23 @@ public class SettingsGesturesFragment extends SettingsBaseFragment {
         }
         return false;
     }
+
+    @Override
+    public void updateSummaries() {
+        List<Integer> gestures = new ArrayList<>(Arrays.asList(
+                R.string.pref_key__gesture_double_tap, R.string.pref_key__gesture_swipe_up,
+                R.string.pref_key__gesture_swipe_down, R.string.pref_key__gesture_pinch,
+                R.string.pref_key__gesture_unpinch));
+        for (int resId : gestures) {
+            Preference preference = findPreference(getString(resId));
+            Object gesture = AppSettings.get().getGesture(resId);
+            if (gesture instanceof Intent) {
+                preference.setSummary(String.format(Locale.ENGLISH, "%s: %s", getString(R.string.app), AppManager.getInstance(getContext()).findApp((Intent) gesture)._label));
+            } else if (gesture instanceof LauncherAction.ActionDisplayItem) {
+                preference.setSummary(String.format(Locale.ENGLISH, "%s: %s", getString(R.string.action), ((LauncherAction.ActionDisplayItem) gesture)._label));
+            } else {
+                preference.setSummary(String.format(Locale.ENGLISH, "%s", getString(R.string.none)));
+            }
+        }
+    }
 }

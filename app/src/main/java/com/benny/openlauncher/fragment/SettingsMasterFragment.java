@@ -1,6 +1,7 @@
 package com.benny.openlauncher.fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
@@ -24,9 +25,19 @@ public class SettingsMasterFragment extends SettingsBaseFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public boolean onPreferenceTreeClick(Preference preference) {
+        super.onPreferenceTreeClick(preference);
+        HomeActivity homeActivity = HomeActivity._launcher;
+        int key = new ContextUtils(homeActivity).getResId(ContextUtils.ResType.STRING, preference.getKey());
+        if (key == R.string.pref_key__about) {
+            startActivity(new Intent(getActivity(), MoreInfoActivity.class));
+            return true;
+        }
+        return false;
+    }
 
+    @Override
+    public void updateSummaries() {
         Preference categoryDesktop = findPreference(getString(R.string.pref_key__cat_desktop));
         Preference categoryDock = findPreference(getString(R.string.pref_key__cat_dock));
         Preference categoryAppDrawer = findPreference(getString(R.string.pref_key__cat_app_drawer));
@@ -44,17 +55,5 @@ public class SettingsMasterFragment extends SettingsBaseFragment {
                 categoryAppDrawer.setSummary(String.format("%s: %s", getString(R.string.pref_title__style), getString(R.string.vertical_scroll_drawer)));
                 break;
         }
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        super.onPreferenceTreeClick(preference);
-        HomeActivity homeActivity = HomeActivity._launcher;
-        int key = new ContextUtils(homeActivity).getResId(ContextUtils.ResType.STRING, preference.getKey());
-        if (key == R.string.pref_key__about) {
-            startActivity(new Intent(getActivity(), MoreInfoActivity.class));
-            return true;
-        }
-        return false;
     }
 }
