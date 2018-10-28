@@ -17,6 +17,7 @@
         <item>@string/minibar_title__app_drawer</item>
         <item>@string/minibar_title__search_bar</item>
         <item>@string/minibar_title__mobile_network</item>
+        <item>@string/minibar_title__show_notifications</item>
     </string-array>
 
     <string-array name="entries__desktop_actions" translatable="false">

@@ -17,13 +17,14 @@ import com.benny.openlauncher.activity.MinibarEditActivity;
 import com.benny.openlauncher.activity.SettingsActivity;
 import com.benny.openlauncher.viewutil.DialogHelper;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
 public class LauncherAction {
 
     public enum Action {
-        EditMinibar, SetWallpaper, LockScreen, LauncherSettings, VolumeDialog, DeviceSettings, AppDrawer, SearchBar, MobileNetworkSettings
+        EditMinibar, SetWallpaper, LockScreen, LauncherSettings, VolumeDialog, DeviceSettings, AppDrawer, SearchBar, MobileNetworkSettings, ShowNotifications
     }
 
     public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
@@ -36,6 +37,7 @@ public class LauncherAction {
             new ActionDisplayItem(Action.AppDrawer, HomeActivity._launcher.getResources().getString(R.string.minibar_title__app_drawer), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__app_drawer), R.drawable.ic_apps_dark_24dp, 73),
             new ActionDisplayItem(Action.SearchBar, HomeActivity._launcher.getResources().getString(R.string.minibar_title__search_bar), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__search_bar), R.drawable.ic_search_light_24dp, 89),
             new ActionDisplayItem(Action.MobileNetworkSettings, HomeActivity._launcher.getResources().getString(R.string.minibar_title__mobile_network), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__mobile_network), R.drawable.ic_network_24dp, 46),
+            new ActionDisplayItem(Action.ShowNotifications, HomeActivity._launcher.getResources().getString(R.string.minibar_title__show_notifications), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__show_notifications), R.drawable.ic_notifications, 46),
     };
 
     public static List<Action> defaultArrangement = Arrays.asList(
@@ -97,14 +99,22 @@ public class LauncherAction {
             case AppDrawer:
                 HomeActivity._launcher.openAppDrawer();
                 break;
-            case SearchBar: {
+            case SearchBar:
                 HomeActivity._launcher.getSearchBar().getSearchButton().performClick();
                 break;
-            }
-            case MobileNetworkSettings: {
+            case MobileNetworkSettings:
                 context.startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
                 break;
-            }
+            case ShowNotifications:
+                try {
+                    Object statusBarService = context.getSystemService("statusbar");
+                    Class<?> statusBarManager = Class.forName("android.app.StatusBarManager");
+                    Method statusBarExpand = statusBarManager.getMethod("expandNotificationsPanel");
+                    statusBarExpand.invoke(statusBarService);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
         }
     }
 

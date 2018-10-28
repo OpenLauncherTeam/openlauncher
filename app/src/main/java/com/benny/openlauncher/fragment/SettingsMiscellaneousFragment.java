@@ -13,7 +13,6 @@ import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.Definitions;
-import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
 import com.nononsenseapps.filepicker.FilePickerActivity;
 
