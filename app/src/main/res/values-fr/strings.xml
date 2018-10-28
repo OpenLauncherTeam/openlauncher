@@ -14,8 +14,11 @@
     <string name="minibar_summary__set_wallpaper">Définir et rendre le fond d\'écran flou.</string>
     <string name="minibar_title__lock_screen">Verrouiller l\'écran</string>
     <string name="minibar_summary__lock_screen">Verrouiller l\'écran immédiatement, requiert le droit d\'administration de l\'appareil.</string>
+    <string name="minibar_title__device_settings">Paramètres de l\'appareil</string>
     <string name="minibar_summary__device_settings">Raccourci vers les paramètres de l\'appareil.</string>
+    <string name="minibar_title__launcher_settings">Paramètres du lanceur</string>
     <string name="minibar_summary__launcher_settings">Raccourci vers les paramètres d\'OpenLauncher.</string>
+    <string name="minibar_title__volume_dialog">Barre de volume</string>
     <string name="minibar_summary__volume_dialog">Ouvrir la pop-up du volume.</string>
     <string name="minibar_title__app_drawer">Ouvrir le tiroir d\'application</string>
     <string name="minibar_summary__app_drawer">Ouvrir le volet des applications.</string>
@@ -30,21 +33,29 @@
     <string name="about_credit">Contributeurs</string>
     <string name="community">Communauté</string>
     <string name="about_credit_text_all_contributors">Tous les contributeurs</string>
+    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Plus d\'informations sur la contribution aux projets open source, notamment les applications Android</string>
     <string name="join_community">Rejoindre la communauté</string>
     <string name="bug_reports_suggest_improvements">Envoyer un commentaire, rapporter un bug ou proposer des améliorations</string>
     <string name="help_translating_this_app">Traduire cette application dans d\'autres langues</string>
     <string name="source_code">Code source</string>
     <string name="project_license">License du projet</string>
+    <string name="project_contribution_info">Informations sur la contribution au projet</string>
+    <string name="more_info_on_how_to_contribute_to_this_project">Plus d\'informations sur comment contribuer au projet</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">Contribuer du code au projet. Tout le monde est invité à le faire, même les nouveaux venus.</string>
     <string name="project_team">Équipe du projet</string>
     <string name="contribute">Contribuer</string>
     <string name="donate">Faire un don</string>
+    <string name="help">Aide</string>
     <string name="licenses">Licenses</string>
     <string name="contributors">Contributeurs</string>
     <string name="more">Plus</string>
     <string name="open_source_licenses">Licenses open source</string>
     <string name="rate_the_app">Noter cette application</string>
     <string name="translate">Traduire</string>
+    <string name="help_this_app">Plus d\'informations et aide à propos de cette application</string>
     <string name="bug_reports">Rapporter un bug</string>
+    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Plus d\'informations sur les dons ou autre manière de supporter ce projet</string>
+    <string name="android_contribution_guide">Guide de contribution Android</string>
 
     <!-- Settings -->
     <string name="pref_title__settings">Paramètres</string>
@@ -65,12 +76,15 @@
     <string name="pref_title__inputs">Interactions</string>
     <string name="pref_title__feels">Ambiance</string>
     <string name="pref_title__others">Autres</string>
+    <string name="pref_title__animations">Animations</string>
     <string name="pref_title__debug">Déboguage</string>
 
     <string name="pref_title__desktop_indicator_style">Style de l\'indicateur</string>
     <string name="pref_summary__minibar">Configurer l\'ordre et la visibilité des éléments de la Minibarre.</string>
     <string name="pref_title__desktop_rotate">Rotation</string>
     <string name="pref_summary__desktop_rotate">Autoriser la rotation de l\'écran</string>
+    <string name="pref_title__desktop_show_grid">Afficher la grille</string>
+    <string name="pref_summary__desktop_show_grid">Afficher la grille lors du déplacement d\'objet.</string>
     <string name="pref_title__desktop_fullscreen">Plein écran</string>
     <string name="pref_summary__desktop_fullscreen">Activer le plein écran pour votre bureau.</string>
     <string name="pref_title__desktop_show_position_indicator">Position de l\'indicateur</string>
@@ -80,6 +94,7 @@
     <string name="pref_title__desktop_background_color">Arrière-plan</string>
     <string name="pref_title__desktop_folder_color">Dossier</string>
     <string name="pref_title__desktop_folder_color_text">Couleur du dossier</string>
+    <string name="pref_title__desktop_inset_color">Barre système</string>
 
     <string name="pref_title__search_bar_enable">Barre de recherche</string>
     <string name="pref_summary__search_bar_enable">Afficher une barre de recherche sur le bureau.</string>
@@ -133,6 +148,7 @@
     <string name="pref_summary__theme">Définir le thème global de l\'application</string>
     <string name="pref_title__primary_color">Couleur primaire</string>
     <string name="pref_summary__primary_color">Choisir la couleur principale de l\'application.</string>
+    <string name="pref_title__icon_size">Taille des icônes</string>
     <string name="pref_summary__icon_size">Taille des icônes des applications.</string>
     <string name="pref_title__icon_pack">Pack d\'icônes</string>
     <string name="pref_summary__icon_pack">Sélectionner un pack d\'icônes installé.</string>
@@ -143,6 +159,10 @@
     <string name="pref_summary__language">Changer la langue de l\'application. Vous devez redémarrer l\'application pour que le changement soit pris en compte</string>
     <string name="pref_title__backup">Sauvegarde</string>
     <string name="pref_summary__backup">Sauvegarder et restaurer vos paramètres.</string>
+    <string name="pref_title__restore">Restaurer</string>
+    <string name="pref_summary__restore">Restaurer votre bureau et vos paramètres.</string>
+    <string name="pref_title__reset_settings">Remettre à zéro les paramètres</string>
+    <string name="pref_summary__reset_settings">Supprimer les paramètres de l\'application.</string>
     <string name="pref_title__reset_database">Vider la base de données</string>
     <string name="pref_summary__reset_database">Supprimer les données de votre dock et bureau pour corriger des problèmes.</string>
     <string name="pref_title__restart">Redémarrer</string>
@@ -151,7 +171,10 @@
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paginé</string>
 
+    <string name="indicator_mode_dots">Points</string>
+    <string name="indicator_mode_lines">Lignes</string>
 
+    <string name="none">Aucun</string>
     <string name="app">Application</string>
 
     <string name="light">Clair</string>
@@ -160,6 +183,7 @@
 
     <!-- Dialogs -->
     <string name="please_wait">Recherche des applications installées. Veuillez patienter.</string>
+    <string name="are_you_sure">Êtes-vous sûr ? Cette action ne peut être annulée, sauf si vous avez une sauvegarde.</string>
     <string name="select_app">Choisir l\'application</string>
     <string name="select_wallpaper">Sélectionner un fond d\'écran</string>
     <string name="select_icon_pack">Sélectionner un pack d\'icônes</string>
@@ -176,6 +200,7 @@
     <string name="search_hint">Chercher…</string>
     <string name="bad_format">Mauvais Format</string>
     <string name="version">Version</string>
+    <string name="enable">Activer</string>
     <string name="placeholder">Bonjour !</string>
     <string name="custom">Personnalisation</string>
     <string name="default_folder">Aucun nom</string>
