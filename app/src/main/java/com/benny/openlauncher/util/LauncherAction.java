@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 
@@ -24,7 +25,7 @@ import java.util.List;
 public class LauncherAction {
 
     public enum Action {
-        EditMinibar, SetWallpaper, LockScreen, LauncherSettings, VolumeDialog, DeviceSettings, AppDrawer, SearchBar, MobileNetworkSettings, ShowNotifications
+        EditMinibar, SetWallpaper, LockScreen, LauncherSettings, VolumeDialog, DeviceSettings, AppDrawer, SearchBar, MobileNetworkSettings, ShowNotifications, TurnOffScreen
     }
 
     public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
@@ -113,6 +114,20 @@ public class LauncherAction {
                     statusBarExpand.invoke(statusBarService);
                 } catch (Exception e) {
                     e.printStackTrace();
+                }
+                break;
+            case TurnOffScreen:
+                try {
+                    // not functional yet, needs to reset screen timeout to default on activity destroy
+                    // also might want to set up a permission manager to handle this, device admin for lock,
+                    // and storage request for icons and backup/restore
+                    int defaultTurnOffTime =  Settings.System.getInt(context.getContentResolver(),Settings.System.SCREEN_OFF_TIMEOUT, 60000);
+                    Settings.System.putInt(context.getContentResolver(),Settings.System.SCREEN_OFF_TIMEOUT, 1000);
+                    Settings.System.putInt(context.getContentResolver(),Settings.System.SCREEN_OFF_TIMEOUT, defaultTurnOffTime);
+                } catch (Exception e) {
+                    Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                    intent.setData(Uri.parse("package:" + context.getPackageName()));
+                    context.startActivity(intent);
                 }
                 break;
         }
