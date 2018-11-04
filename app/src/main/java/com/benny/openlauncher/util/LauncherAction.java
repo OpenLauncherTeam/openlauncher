@@ -51,6 +51,7 @@ public class LauncherAction {
         LauncherAction.RunAction(getActionItem(action), context);
     }
 
+    @SuppressWarnings("WrongConstant")
     public static void RunAction(ActionDisplayItem action, final Context context) {
         switch (action._action) {
             case EditMinibar:
