@@ -1,27 +1,20 @@
-
-
-
-
-
-
 <!-- 
+
 Hello, and thanks for contributing!
 
-Please always do auto-reformat on code before creating a PR.
-In Android-Studio do a right-click on java->Reformat and check the first two options.
+Please always auto-reformat code before creating a pull request. In Android Studio, right click the java file and select reformat, then check the first two options. After creating the request, please wait patiently until somebody from the team has time to review the changes.
 
-After creating the PR please wait patiently till somebody from the team has time to give a review.
-The top-priority requirement for this to get merged is, that building/tests don't fail.
-If theres an continious integration system integrated in this project, you should see a colored checkmark in the PR window which tells the status.
+## Contributors
+Feel free to add yourself to the list of contributors! When adding your information to the `CONTRIBUTORS.md` file, please use the following format.
 
-## Contributors document
-Add yourself! When adding your information to the `CONTRIBUTORS.md` file, please use the following format:
+Schema:  **[Name](Reference)**<br/>~° Text
 
-Schema:  **[Name](Reference)**<br/>~° Text 
-Where: 
-  * Name: username, first/lastname 
-  * Reference: E-Mail, Webpage 
-  * Text: Information about / kind of contribution 
+Where:
+  * Name: username, full name
+  * Reference: email, website
+  * Text: information about your contribution
+
 Example:
-* **[Nice Guy](http://niceguy.web)**<br/>~° German localization 
+* **[Nice Guy](http://niceguy.web)**<br/>~° German localization
+
 -->

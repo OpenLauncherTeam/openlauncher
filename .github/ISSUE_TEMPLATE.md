@@ -1,35 +1,19 @@
-If you are reporting crashes or expected behaviour then please check if all requirements are fulfilled otherwise the issue will be closed without any comment
+#### General Information
 
-  * Add details to fields  below
-  * Use search. Check if the issue is already reported before creating a new one. 
-    https://github.com/OpenLauncherTeam/openlauncher/issues
-  * Don't report update problems. Note that the OL Team is working on the core features and breaking changes may occur. We try to keep the amount of legacy code low. Try to reset app before posting.
-  * Delete this info block
------------------------------
-
-#### General information
-
-* **App version:** 
-* **System:** 
+* **OpenLauncher Version:** 1.0?
+* **Android Version:** 1.0?
+* **Custom ROM:** None?
+* **Install Source:** F-Droid?
 
 #### Description
 
 
 #### Log
 
-<!-- 
-  Look for already reported issues before posting!
-  Also take a look at documentation and wiki, or write in the project chat.
+This is only needed for crashes or other issues you notice in your system logs from OpenLauncher.
 
-  App version: The version of the app installed and the installation source. Example: v0.3.5 F-Droid
-               Please keep in mind that only the latest downloadable version is supported and that there are no backports to older versions.
-  System:      Information about where the app is running. Give all details you know, but at least the Android OS version.
-               Example: Android 8.0.1, Nexus 5, LineageOS
+<!--
 
-  Description:
-  What this is about, what happens and what is expected to happen. What needs to be done for it to happen.
-  If a crash is happening a log is needed. Screenshots or demonstration videos are always helpful too.
+Look for already reported issues before posting! If the issue doesn't exist please give as much information as possible, including what happens versus exactly what you expect to happen in that situation. Screenshots or videos are always helpful for UI issues.
 
-  About logging:
-  https://gsantner.net/android-contribution-guide/?packageid=net.gsantner.markor&name=Markor&web=https://github.com/gsantner/markor#logcat
 -->
