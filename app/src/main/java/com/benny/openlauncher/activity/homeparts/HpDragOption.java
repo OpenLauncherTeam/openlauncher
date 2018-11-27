@@ -381,7 +381,7 @@ public class HpDragOption {
                         }
                     }
                 }
-                dragNDropView.hidePopupMenu();
+                dragNDropView.collapse();
                 return true;
             }
         });

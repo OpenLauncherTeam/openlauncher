@@ -134,7 +134,6 @@ public class DesktopOptionView extends FrameLayout {
                         }
                     } else if (id == R.string.lock) {
                         Setup.appSettings().setDesktopLock(!Setup.appSettings().isDesktopLock());
-                        //LauncherSettings.getInstance(getContext()).generalSettings.desktopLock = !LauncherSettings.getInstance(getContext()).generalSettings.desktopLock;
                         updateLockIcon(Setup.appSettings().isDesktopLock());
                     } else if (id == R.string.pref_title__settings) {
                         _desktopOptionViewListener.onLaunchSettings();

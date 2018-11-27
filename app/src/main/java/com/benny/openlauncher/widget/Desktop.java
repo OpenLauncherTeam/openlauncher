@@ -163,8 +163,8 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
                         WallpaperManager instance = WallpaperManager.getInstance(view.getContext());
                         IBinder windowToken = view.getWindowToken();
                         String str = "android.wallpaper.tap";
-                        MotionEvent access$getCurrentEvent$p = _currentEvent;
-                        instance.sendWallpaperCommand(windowToken, str, (int) access$getCurrentEvent$p.getX(), (int) access$getCurrentEvent$p.getY(), 0, null);
+                        MotionEvent currentEvent = _currentEvent;
+                        instance.sendWallpaperCommand(windowToken, str, (int) currentEvent.getX(), (int) currentEvent.getY(), 0, null);
                     }
                     exitDesktopEditMode();
                 }
@@ -397,7 +397,7 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         if (_previousDragPoint != null && !_previousDragPoint.equals(_coordinate)) {
             launcher = HomeActivity.Companion.getLauncher();
             if (launcher != null) {
-                dragNDropView = launcher.getDragNDropView();
+                dragNDropView = launcher.getItemOptionView();
                 dragNDropView.cancelFolderPreview();
             }
         }
@@ -412,13 +412,13 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
             case CurrentOccupied:
                 Object action;
                 launcher = HomeActivity.Companion.getLauncher();
-                dragNDropView = launcher.getDragNDropView();
+                dragNDropView = launcher.getItemOptionView();
                 for (CellContainer page : _pages) {
                     page.clearCachedOutlineBitmap();
                 }
                 action = dragNDropView.getDragAction();
                 if (!Action.WIDGET.equals(action) || !Action.ACTION.equals(action) && (getCurrentPage().coordinateToChildView(_coordinate) instanceof AppItemView)) {
-                    launcher.getDragNDropView().showFolderPreviewAt(this, getCurrentPage().getCellWidth() * (_coordinate.x + 0.5f), getCurrentPage().getCellHeight() * (_coordinate.y + 0.5f));
+                    launcher.getItemOptionView().showFolderPreviewAt(this, getCurrentPage().getCellWidth() * (_coordinate.x + 0.5f), getCurrentPage().getCellHeight() * (_coordinate.y + 0.5f));
                 }
                 break;
             default:
@@ -535,8 +535,9 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         if (!isInEditMode()) {
             HomeActivity launcher = HomeActivity.Companion.getLauncher();
             if (launcher != null) {
-                launcher.getDragNDropView().cancelFolderPreview();
+                launcher.getItemOptionView().cancelFolderPreview();
             }
+            // TODO scroll options
             WallpaperManager.getInstance(getContext()).setWallpaperOffsets(getWindowToken(), (position + offset) / (_pageCount - 1), 0.0f);
             super.onPageScrolled(position, offset, offsetPixels);
         }

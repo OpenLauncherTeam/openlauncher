@@ -127,7 +127,7 @@ public final class ItemOptionView extends FrameLayout {
             if (event == null || event.getActionMasked() != 0 || ItemOptionView.this.getDragging() || !ItemOptionView.this._overlayPopupShowing) {
                 return super.onTouchEvent(event);
             }
-            ItemOptionView.this.hidePopupMenu();
+            ItemOptionView.this.collapse();
             return true;
         }
 
@@ -269,7 +269,7 @@ public final class ItemOptionView extends FrameLayout {
         }
     }
 
-    public final void hidePopupMenu() {
+    public final void collapse() {
         if (_overlayPopupShowing) {
             _overlayPopupShowing = false;
             _overlayPopup.animate().alpha(0.0f).withEndAction(new Runnable() {
@@ -375,7 +375,7 @@ public final class ItemOptionView extends FrameLayout {
             }
         }
         if (_dragExceedThreshold) {
-            hidePopupMenu();
+            collapse();
         }
         for (Entry<DropTargetListener, DragFlag> dropTarget2 : _registeredDropTargetEntries.entrySet()) {
             DropTargetListener dropTargetListener = dropTarget2.getKey();

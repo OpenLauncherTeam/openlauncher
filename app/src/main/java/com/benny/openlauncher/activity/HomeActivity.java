@@ -14,14 +14,10 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.DrawerLayout;
-import android.text.Layout;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
@@ -83,17 +79,13 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public static final int REQUEST_PICK_APPWIDGET = 0x2678;
     public static WidgetHost _appWidgetHost;
     public static AppWidgetManager _appWidgetManager;
-    public static boolean _consumeNextResume;
+    public static boolean ignoreResume;
     public static float _itemTouchX;
     public static float _itemTouchY;
 
     // static launcher variables
     public static HomeActivity _launcher;
     public static DatabaseHelper _db;
-
-    public FrameLayout minibarFrame;
-    public View statusView;
-    public View navigationView;
 
     // receiver variables
     private static final IntentFilter _appUpdateIntentFilter = new IntentFilter();
@@ -163,8 +155,12 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         return findViewById(R.id.desktopIndicator);
     }
 
-    public final ItemOptionView getDragNDropView() {
-        return findViewById(R.id.dragNDropView);
+    public final DesktopOptionView getDesktopOptionView() {
+        return findViewById(R.id.desktop_option);
+    }
+
+    public final ItemOptionView getItemOptionView() {
+        return findViewById(R.id.item_option);
     }
 
     public final FrameLayout getMinibarFrame() {
@@ -222,8 +218,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         HpDragOption hpDragOption = new HpDragOption();
         View findViewById = findViewById(R.id.leftDragHandle);
         View findViewById2 = findViewById(R.id.rightDragHandle);
-        ItemOptionView itemOptionView = findViewById(R.id.dragNDropView);
-        hpDragOption.initDragNDrop(this, findViewById, findViewById2, itemOptionView);
+        hpDragOption.initDragNDrop(this, findViewById, findViewById2, getItemOptionView());
 
         registerBroadcastReceiver();
         initAppManager();
@@ -257,7 +252,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             public boolean onAppDeleted(List<App> apps) {
                 getDesktop().initDesktop();
                 getDock().initDockItem(HomeActivity.this);
-                setToHomePage();
                 return false;
             }
         });
@@ -273,14 +267,12 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         getDesktop().setDesktopEditListener(this);
         getDesktop().setPageIndicator(getDesktopIndicator());
 
-        DesktopOptionView desktopOptionView = findViewById(R.id.desktopEditOptionPanel);
         AppSettings appSettings = Setup.appSettings();
-
-        desktopOptionView.setDesktopOptionViewListener(this);
-        desktopOptionView.postDelayed(new Runnable() {
+        getDesktopOptionView().setDesktopOptionViewListener(this);
+        getDesktopOptionView().postDelayed(new Runnable() {
             @Override
             public void run() {
-                desktopOptionView.updateLockIcon(appSettings.isDesktopLock());
+                getDesktopOptionView().updateLockIcon(appSettings.isDesktopLock());
             }
         }, 100);
         getDesktop().addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
@@ -288,7 +280,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             }
 
             public void onPageSelected(int position) {
-                desktopOptionView.updateHomeIcon(appSettings.getDesktopPageCurrent() == position);
+                getDesktopOptionView().updateHomeIcon(appSettings.getDesktopPageCurrent() == position);
             }
 
             public void onPageScrollStateChanged(int state) {
@@ -307,17 +299,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 LauncherAction.Action action = items.get(i)._action;
                 LauncherAction.RunAction(items.get(i), HomeActivity.this);
-                if (action == LauncherAction.Action.EditMinibar || action == LauncherAction.Action.DeviceSettings || action == LauncherAction.Action.LauncherSettings) {
-                    _consumeNextResume = true;
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            getDrawerLayout().closeDrawers();
-                        }
-                    }, 300);
-                } else {
-                    getDrawerLayout().closeDrawers();
-                }
             }
         });
     }
@@ -334,7 +315,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         getDesktop().setBackgroundColor(appSettings.getDesktopBackgroundColor());
         getDock().setBackgroundColor(appSettings.getDockColor());
 
-        // frame colors
+        // set frame colors
         getMinibarFrame().setBackgroundColor(appSettings.getMinibarBackgroundColor());
         getStatusView().setBackgroundColor(appSettings.getDesktopInsetColor());
         getNavigationView().setBackgroundColor(appSettings.getDesktopInsetColor());
@@ -367,20 +348,19 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public final void onStartApp(@NonNull Context context, @NonNull App app, @Nullable View view) {
         if (BuildConfig.APPLICATION_ID.equals(app._packageName)) {
             LauncherAction.RunAction(Action.LauncherSettings, context);
-            _consumeNextResume = true;
         } else {
             try {
                 Intent intent = Tool.getIntentFromApp(app);
                 context.startActivity(intent, getActivityAnimationOpts(view));
-                _consumeNextResume = true;
             } catch (Exception e) {
+                e.printStackTrace();
                 Tool.toast(context, R.string.toast_app_uninstalled);
             }
         }
     }
 
     public final void onUninstallItem(@NonNull Item item) {
-        _consumeNextResume = true;
+        ignoreResume = true;
         Setup.eventHandler().showDeletePackageDialog(this, item);
     }
 
@@ -446,14 +426,14 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     public void onDesktopEdit() {
-        Tool.visibleViews(100, 20, (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel));
+        Tool.visibleViews(100, 20, getDesktopOptionView());
         updateDesktopIndicator(false);
         updateDock(false);
         updateSearchBar(false);
     }
 
     public void onFinishDesktopEdit() {
-        Tool.invisibleViews(100, 20, (DesktopOptionView) findViewById(R.id.desktopEditOptionPanel));
+        Tool.invisibleViews(100, 20, getDesktopOptionView());
         getDesktopIndicator().hideDelay();
         updateDesktopIndicator(true);
         updateDock(true);
@@ -462,12 +442,10 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public void onSetPageAsHome() {
         AppSettings appSettings = Setup.appSettings();
-        Desktop desktop = findViewById(R.id.desktop);
-        appSettings.setDesktopPageCurrent(desktop.getCurrentItem());
+        appSettings.setDesktopPageCurrent(getDesktop().getCurrentItem());
     }
 
     public void onLaunchSettings() {
-        _consumeNextResume = true;
         Setup.eventHandler().showLauncherSettings(this);
     }
 
@@ -553,7 +531,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     private void pickWidget() {
-        _consumeNextResume = true;
+        ignoreResume = true;
         int appWidgetId = _appWidgetHost.allocateAppWidgetId();
         Intent pickIntent = new Intent("android.appwidget.action.APPWIDGET_PICK");
         pickIntent.putExtra("appWidgetId", appWidgetId);
@@ -614,8 +592,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     @Override
     public void onBackPressed() {
-        handleLauncherResume(false);
-        getDrawerLayout().closeDrawers();
+        handleLauncherResume();
     }
 
     @Override
@@ -647,8 +624,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
-        Intent intent = getIntent();
-        handleLauncherResume(Intent.ACTION_MAIN.equals(intent.getAction()));
+        handleLauncherResume();
     }
 
     @Override
@@ -662,29 +638,28 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         super.onDestroy();
     }
 
-    private void handleLauncherResume(boolean wasHomePressed) {
-        if (!_consumeNextResume || wasHomePressed) {
-            getGroupPopup().dismissPopup();
-            getDragNDropView().hidePopupMenu();
-            getSearchBar().collapse();
-            if (!getSearchBar().collapse()) {
-                if (getDesktop().getInEditMode()) {
-                    CellContainer currentPage = getDesktop().getPages().get(getDesktop().getCurrentItem());
-                    currentPage.performClick();
-                } else if (getAppDrawerController().getDrawer().getVisibility() == View.VISIBLE) {
-                    closeAppDrawer();
-                } else {
-                    setToHomePage();
-                }
-            }
+    private void handleLauncherResume() {
+        if (ignoreResume) {
+            // only triggers when a new activity is launched that should leave launcher state alone
+            // uninstall package activity and pick widget activity
+            ignoreResume = false;
         } else {
-            _consumeNextResume = false;
+            getSearchBar().collapse();
+            getGroupPopup().collapse();
+            // close app option menu
+            getItemOptionView().collapse();
+            // close minibar
+            getDrawerLayout().closeDrawers();
+            if (getDesktop().getInEditMode()) {
+                // exit desktop edit mode
+                getDesktop().getCurrentPage().performClick();
+            } else if (getAppDrawerController().getDrawer().getVisibility() == View.VISIBLE) {
+                closeAppDrawer();
+            } else if (getDesktop().getCurrentItem() != 0) {
+                AppSettings appSettings = Setup.appSettings();
+                getDesktop().setCurrentItem(appSettings.getDesktopPageCurrent());
+            }
         }
-    }
-
-    private void setToHomePage() {
-        AppSettings appSettings = Setup.appSettings();
-        getDesktop().setCurrentItem(appSettings.getDesktopPageCurrent());
     }
 
     public final void openAppDrawer() {

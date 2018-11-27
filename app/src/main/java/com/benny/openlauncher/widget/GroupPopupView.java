@@ -71,7 +71,7 @@ public class GroupPopupView extends RevealFrameLayout {
                 if (_dismissListener != null) {
                     _dismissListener.onDismiss();
                 }
-                dismissPopup();
+                collapse();
             }
         });
 
@@ -127,7 +127,7 @@ public class GroupPopupView extends RevealFrameLayout {
                         // start the drag action
                         DragHandler.startDrag(view, groupItem, action, null);
 
-                        dismissPopup();
+                        collapse();
 
                         // convert group item into app item if there is only one item left
                         updateItem(callback, item, itemView);
@@ -144,7 +144,7 @@ public class GroupPopupView extends RevealFrameLayout {
                             Tool.createScaleInScaleOutAnim(view, new Runnable() {
                                 @Override
                                 public void run() {
-                                    dismissPopup();
+                                    collapse();
                                     setVisibility(View.INVISIBLE);
                                     view.getContext().startActivity(groupItem.getIntent());
                                 }
@@ -244,7 +244,7 @@ public class GroupPopupView extends RevealFrameLayout {
         Tool.visibleViews(animDuration, animDuration, _cellContainer);
     }
 
-    public void dismissPopup() {
+    public void collapse() {
         if (!_isShowing) return;
         if (_folderAnimator == null || _folderAnimator.isRunning())
             return;

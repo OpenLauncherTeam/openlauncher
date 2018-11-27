@@ -2,15 +2,11 @@ package com.benny.openlauncher.widget;
 
 import android.content.Context;
 import android.graphics.Point;
-import android.os.Build.VERSION;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowInsets;
 
-import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
@@ -98,7 +94,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         if (!_coordinate.equals(_previousDragPoint)) {
             launcher = _homeActivity;
             if (launcher != null) {
-                dragNDropView = launcher.getDragNDropView();
+                dragNDropView = launcher.getItemOptionView();
                 if (dragNDropView != null) {
                     dragNDropView.cancelFolderPreview();
                 }
@@ -114,7 +110,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
                 break;
             case CurrentOccupied:
                 clearCachedOutlineBitmap();
-                dragNDropView = _homeActivity.getDragNDropView();
+                dragNDropView = _homeActivity.getItemOptionView();
                 Object action = dragNDropView.getDragAction();
                 if (!Action.WIDGET.equals(action) || !Action.ACTION.equals(action) && (coordinateToChildView(_coordinate) instanceof AppItemView)) {
                     dragNDropView.showFolderPreviewAt(this, getCellWidth() * (_coordinate.x + 0.5f), getCellHeight() * (_coordinate.y + 0.5f) - (Setup.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0));
