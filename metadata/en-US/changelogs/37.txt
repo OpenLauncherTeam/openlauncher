@@ -1,0 +1,2 @@
+* add action to expand the notification bar
+* show summary for gesture preferences in settings
