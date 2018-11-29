@@ -493,27 +493,6 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         return true;
     }
 
-    public boolean onInterceptTouchEvent(@Nullable MotionEvent ev) {
-        if (ev != null && ev.getActionMasked() == 0) {
-            HomeActivity launcher = HomeActivity.Companion.getLauncher();
-            if (launcher != null) {
-                PagerIndicator desktopIndicator = launcher.getDesktopIndicator();
-                desktopIndicator.showNow();
-            }
-        }
-        return super.onInterceptTouchEvent(ev);
-    }
-
-    public boolean onTouchEvent(@Nullable MotionEvent ev) {
-        if (ev != null && ev.getActionMasked() == 1) {
-            HomeActivity launcher = HomeActivity.Companion.getLauncher();
-            if (launcher != null) {
-                launcher.getDesktopIndicator().hideDelay();
-            }
-        }
-        return super.onTouchEvent(ev);
-    }
-
     public void removeItem(final View view, boolean animate) {
         Tool.print("Start Removing a view from Desktop");
         if (animate) {
@@ -531,6 +510,30 @@ public final class Desktop extends SmoothViewPager implements DesktopCallback<Vi
         }
     }
 
+    @Override
+    public boolean onInterceptTouchEvent(@Nullable MotionEvent ev) {
+        if (ev != null && ev.getActionMasked() == 0) {
+            HomeActivity launcher = HomeActivity.Companion.getLauncher();
+            if (launcher != null) {
+                PagerIndicator desktopIndicator = launcher.getDesktopIndicator();
+                desktopIndicator.showNow();
+            }
+        }
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(@Nullable MotionEvent ev) {
+        if (ev != null && ev.getActionMasked() == 1) {
+            HomeActivity launcher = HomeActivity.Companion.getLauncher();
+            if (launcher != null) {
+                launcher.getDesktopIndicator().hideDelay();
+            }
+        }
+        return super.onTouchEvent(ev);
+    }
+
+    @Override
     protected void onPageScrolled(int position, float offset, int offsetPixels) {
         if (!isInEditMode()) {
             HomeActivity launcher = HomeActivity.Companion.getLauncher();
