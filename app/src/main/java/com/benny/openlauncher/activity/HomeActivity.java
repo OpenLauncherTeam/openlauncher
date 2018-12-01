@@ -16,6 +16,7 @@ import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -64,7 +65,6 @@ import com.benny.openlauncher.widget.ItemOptionView;
 import com.benny.openlauncher.widget.GroupPopupView;
 import com.benny.openlauncher.widget.PagerIndicator;
 import com.benny.openlauncher.widget.SearchBar;
-import com.benny.openlauncher.widget.SmoothViewPager;
 import com.benny.openlauncher.widget.MinibarView;
 
 import net.gsantner.opoc.util.ContextUtils;
@@ -275,7 +275,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 getDesktopOptionView().updateLockIcon(appSettings.isDesktopLock());
             }
         }, 100);
-        getDesktop().addOnPageChangeListener(new SmoothViewPager.OnPageChangeListener() {
+        getDesktop().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
 

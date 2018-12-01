@@ -7,31 +7,25 @@ import android.graphics.Paint;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.benny.openlauncher.R;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
-import com.benny.openlauncher.widget.SmoothViewPager.OnPageChangeListener;
 
-public final class PagerIndicator extends View implements OnPageChangeListener {
+public final class PagerIndicator extends View implements ViewPager.OnPageChangeListener {
     private float _pad;
     private boolean _alphaFade;
     private boolean _alphaShow;
-    private Paint _arrowPaint = new Paint(1);
-    private Path _arrowPath;
     private final Runnable _delayShow;
     private Paint _dotPaint = new Paint(1);
     private float _dotSize;
-    private boolean _hasTriggedAlphaShow;
     private int _currentPagerState;
-    private int _mode = Mode.NORMAL;
+    private int _mode = Mode.DOTS;
     private float myX;
-    private SmoothViewPager _pager;
+    private ViewPager _pager;
     private int _prePageCount;
     private int _previousPage = -1;
     private int _realPreviousPage;
@@ -41,86 +35,78 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     private int _scrollPagePosition;
 
     public static class Mode {
-        public static final int NORMAL = 0;
-        public static final int ARROW = 1;
+        public static final int DOTS = 0;
+        public static final int LINES = 1;
     }
 
     protected void onDraw(Canvas canvas) {
+        if (_pager == null) return;
         switch (_mode) {
-            case Mode.NORMAL: {
-                if (_pager != null) {
-                    _dotPaint.setAlpha(255);
-                    float circlesWidth = _pager.getAdapter().getCount() * (_dotSize + _pad * 2);
-                    canvas.translate(getWidth() / 2 - circlesWidth / 2, 0f);
+            case Mode.DOTS: {
+                PagerAdapter adapter = _pager.getAdapter();
+                _dotPaint.setAlpha(255);
+                float circlesWidth = adapter.getCount() * (_dotSize + _pad * 2);
+                canvas.translate(getWidth() / 2 - circlesWidth / 2, 0f);
 
-                    if (_realPreviousPage != _pager.getCurrentItem()) {
-                        _scaleFactor = 1f;
-                        _realPreviousPage = _pager.getCurrentItem();
-                    }
+                if (_realPreviousPage != _pager.getCurrentItem()) {
+                    _scaleFactor = 1f;
+                    _realPreviousPage = _pager.getCurrentItem();
+                }
 
-                    for (int i = 0; i < _pager.getAdapter().getCount(); i++) {
-                        float targetFactor = 1.5f;
-                        float targetFactor2 = 1f;
-                        float increaseFactor = 0.05f;
-                        if (i == _previousPage && i != _pager.getCurrentItem()) {
-                            _scaleFactor2 = Tool.clampFloat(_scaleFactor2 - increaseFactor, targetFactor2, targetFactor);
-                            Tool.print(_scaleFactor2);
-                            canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * i, (float) (getHeight() / 2), _scaleFactor2 * _dotSize / 2, _dotPaint);
-                            if (_scaleFactor2 != targetFactor2)
-                                invalidate();
-                            else {
-                                _scaleFactor2 = 1.5f;
-                                _previousPage = -1;
-                            }
-                        } else if (_pager.getCurrentItem() == i) {
-                            if (_previousPage == -1)
-                                _previousPage = i;
-                            _scaleFactor = Tool.clampFloat(_scaleFactor + increaseFactor, targetFactor2, targetFactor);
-                            canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * i, (float) (getHeight() / 2), _scaleFactor * _dotSize / 2, _dotPaint);
-                            if (_scaleFactor != targetFactor)
-                                invalidate();
-                        } else {
-                            canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * i, (float) (getHeight() / 2), _dotSize / 2, _dotPaint);
+                for (int i = 0; i < adapter.getCount(); i++) {
+                    float targetFactor = 1.5f;
+                    float targetFactor2 = 1f;
+                    float increaseFactor = 0.05f;
+                    if (i == _previousPage && i != _pager.getCurrentItem()) {
+                        _scaleFactor2 = Tool.clampFloat(_scaleFactor2 - increaseFactor, targetFactor2, targetFactor);
+                        Tool.print(_scaleFactor2);
+                        canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * i, (float) (getHeight() / 2), _scaleFactor2 * _dotSize / 2, _dotPaint);
+                        if (_scaleFactor2 != targetFactor2)
+                            invalidate();
+                        else {
+                            _scaleFactor2 = 1.5f;
+                            _previousPage = -1;
                         }
+                    } else if (_pager.getCurrentItem() == i) {
+                        if (_previousPage == -1)
+                            _previousPage = i;
+                        _scaleFactor = Tool.clampFloat(_scaleFactor + increaseFactor, targetFactor2, targetFactor);
+                        canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * i, (float) (getHeight() / 2), _scaleFactor * _dotSize / 2, _dotPaint);
+                        if (_scaleFactor != targetFactor)
+                            invalidate();
+                    } else {
+                        canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * i, (float) (getHeight() / 2), _dotSize / 2, _dotPaint);
                     }
                 }
                 break;
             }
-            case Mode.ARROW: {
-                if (_pager != null) {
-                    _arrowPath.reset();
-                    // TODO remove this section entirely and clean up PagerIndicator
-                    //_arrowPath.moveTo(getWidth() / 2 - _dotSize * 1.5f, (float) (getHeight()) - _dotSize / 3 - _pad / 2);
-                    //_arrowPath.lineTo((getWidth() / 2f), _pad / 2);
-                    //_arrowPath.lineTo(getWidth() / 2 + _dotSize * 1.5f, (float) (getHeight()) - _dotSize / 3 - _pad / 2);
+            case Mode.LINES: {
+                PagerAdapter adapter = _pager.getAdapter();
 
-                    canvas.drawPath(_arrowPath, _arrowPaint);
+                float lineWidth = getWidth() / adapter.getCount();
+                float currentStartX = _scrollPagePosition * lineWidth;
 
-                    float lineWidth = getWidth() / _pager.getAdapter().getCount();
-                    float currentStartX = _scrollPagePosition * lineWidth;
+                myX = currentStartX + _scrollOffset * lineWidth;
 
-                    myX = currentStartX + _scrollOffset * lineWidth;
+                if (myX % lineWidth != 0f)
+                    invalidate();
 
-                    if (myX % lineWidth != 0f)
-                        invalidate();
-
-                    if (_alphaFade) {
-                        _dotPaint.setAlpha(Tool.clampInt(_dotPaint.getAlpha() - 10, 0, 255));
-                        if (_dotPaint.getAlpha() == 0)
-                            _alphaFade = false;
-                        invalidate();
-                    }
-
-                    if (_alphaShow) {
-                        _dotPaint.setAlpha(Tool.clampInt(_dotPaint.getAlpha() + 10, 0, 255));
-                        if (_dotPaint.getAlpha() == 255) {
-                            _alphaShow = false;
-                        }
-                        invalidate();
-                    }
-
-                    canvas.drawLine(myX, getHeight() / 2, myX + lineWidth, getHeight() / 2, _dotPaint);
+                if (_alphaFade) {
+                    _dotPaint.setAlpha(Tool.clampInt(_dotPaint.getAlpha() - 10, 0, 255));
+                    if (_dotPaint.getAlpha() == 0)
+                        _alphaFade = false;
+                    invalidate();
                 }
+
+                if (_alphaShow) {
+                    _dotPaint.setAlpha(Tool.clampInt(_dotPaint.getAlpha() + 10, 0, 255));
+                    if (_dotPaint.getAlpha() == 255) {
+                        _alphaShow = false;
+                    }
+                    invalidate();
+                }
+
+                canvas.drawLine(myX, getHeight() / 2, myX + lineWidth, getHeight() / 2, _dotPaint);
             }
             break;
         }
@@ -132,17 +118,11 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
 
     public PagerIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
-        _pad = Tool.toPx(4);
         setWillNotDraw(false);
+        _pad = Tool.toPx(4);
         _dotPaint.setColor(Color.WHITE);
         _dotPaint.setStrokeWidth(Tool.toPx(4));
         _dotPaint.setAntiAlias(true);
-        _arrowPaint.setColor(Color.WHITE);
-        _arrowPaint.setAntiAlias(true);
-        _arrowPaint.setStyle(Style.STROKE);
-        _arrowPaint.setStrokeWidth(_pad / 1.5f);
-        _arrowPaint.setStrokeJoin(Join.ROUND);
-        _arrowPath = new Path();
         _mode = Setup.appSettings().getDesktopIndicatorMode();
         _delayShow = new Runnable() {
             @Override
@@ -160,7 +140,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
         invalidate();
     }
 
-    public final void setViewPager(@Nullable SmoothViewPager pager) {
+    public final void setViewPager(ViewPager pager) {
         if (pager == null && _pager != null) {
             _pager.removeOnPageChangeListener(this);
             _pager = null;
@@ -175,7 +155,7 @@ public final class PagerIndicator extends View implements OnPageChangeListener {
     }
 
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        SmoothPagerAdapter adapter = _pager.getAdapter();
+        PagerAdapter adapter = _pager.getAdapter();
         if (_prePageCount != adapter.getCount()) {
             _prePageCount = _pager.getAdapter().getCount();
         }

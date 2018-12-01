@@ -43,8 +43,6 @@ public class CellContainer extends ViewGroup {
     private boolean _hideGrid = true;
     private final Paint _paint = new Paint(1);
     private boolean[][] _occupied;
-    @Nullable
-    private OnItemRearrangeListener _onItemRearrangeListener;
     private final Paint _outlinePaint = new Paint(1);
     private PeekDirection _peekDirection;
     private Long _peekDownTime = Long.valueOf(-1);
@@ -114,10 +112,6 @@ public class CellContainer extends ViewGroup {
         }
     }
 
-    public interface OnItemRearrangeListener {
-        void onItemRearrange(@NonNull Point point, @NonNull Point point2);
-    }
-
     public enum PeekDirection {
         UP, LEFT, RIGHT, DOWN
     }
@@ -144,10 +138,6 @@ public class CellContainer extends ViewGroup {
 
     public final void setGestures(@Nullable SimpleFingerGestures v) {
         _gestures = v;
-    }
-
-    public final void setOnItemRearrangeListener(@Nullable OnItemRearrangeListener v) {
-        _onItemRearrangeListener = v;
     }
 
     @NonNull

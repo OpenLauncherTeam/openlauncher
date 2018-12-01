@@ -3,6 +3,8 @@ package com.benny.openlauncher.widget;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -15,13 +17,11 @@ import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Tool;
-import com.benny.openlauncher.viewutil.ItemViewFactory;
-import com.benny.openlauncher.viewutil.SmoothPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppDrawerPaged extends SmoothViewPager {
+public class AppDrawerPaged extends ViewPager {
     private List<App> _apps;
 
     public List<ViewGroup> _pages = new ArrayList<>();
@@ -117,7 +117,7 @@ public class AppDrawerPaged extends SmoothViewPager {
 
     public void withHome(PagerIndicator appDrawerIndicator) {
         _appDrawerIndicator = appDrawerIndicator;
-        appDrawerIndicator.setMode(PagerIndicator.Mode.NORMAL);
+        appDrawerIndicator.setMode(PagerIndicator.Mode.DOTS);
         if (getAdapter() != null)
             appDrawerIndicator.setViewPager(AppDrawerPaged.this);
     }
@@ -127,7 +127,7 @@ public class AppDrawerPaged extends SmoothViewPager {
         setAdapter(new Adapter());
     }
 
-    public class Adapter extends SmoothPagerAdapter {
+    public class Adapter extends PagerAdapter {
 
         private View getItemView(int page, int x, int y) {
             int pagePos = y * _columnCellCount + x;
