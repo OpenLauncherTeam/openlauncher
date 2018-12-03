@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Intro -->
+    <string name="intro1_text">Egy nyitott forráskódú launcher sok, hasznos funkcióval.</string>
+    <string name="intro1_community">Nagy közösség</string>
+    <string name="intro1_features">Funkciókal szállítva</string>
+    <string name="intro1_customizable">Egyedivé tehető</string>
+    <string name="intro2_text">Húzz befele a bal oldaltól a kezdőlapig, majd nyisd meg a minibar-t, és válasz egy cselekményt.</string>
+    <string name="intro3_text">Ki tudsz választani egy stílus az alkalmazás szekrényedhez, és eltudod tüntetni a nem használt alkalmazásokat a beállításokban.</string>
+    <string name="intro4_text">Keress valamire a neten, vagy szűrd ki az alkalmazásaidat a keresővel.</string>
+
+    <!-- Minibar -->
+    <string name="minibar">Minibar</string>
+    <string name="minibar_title__edit_minibar">Minibar szerkesztése</string>
+    <string name="minibar_summary__edit_minibar">Megváltoztatni a minibar kialakításat.</string>
+    <string name="minibar_title__set_wallpaper">Háttér beállítása</string>
+    <string name="minibar_title__lock_screen">Zár képernyő</string>
+    <string name="minibar_summary__lock_screen">Lezárni a kijelzőt egyből.</string>
+    <string name="minibar_title__device_settings">Eszköz beállítások</string>
+    <string name="minibar_summary__device_settings">Parancsikon az eszköz beállításaidhoz.</string>
+    <string name="minibar_title__launcher_settings">Launcher beállítások</string>
+    <string name="minibar_summary__launcher_settings">Parancsikon az OpenLauncher beállításaihoz.</string>
+    <string name="minibar_title__volume_dialog">Hangerő dialog</string>
+    <string name="minibar_title__app_drawer">Alkalmazás szekrény megnyitása</string>
+    <string name="minibar_summary__app_drawer">Nyisd ki az alkalmazás szekrényed.</string>
+    <string name="minibar_title__search_bar">Kereső bar megnyitása</string>
+    <string name="minibar_summary__search_bar">Nyisd meg a kereső Bart.</string>
+    <string name="minibar_summary__mobile_network">Parancsikon a mobilnet beállításokhoz.</string>
+    <string name="minibar_title__show_notifications">Értesítések mutatása</string>
+
+    <!-- About -->
+    <string name="about_libs">Nyitott Forráskódú Könyvtárak</string>
+    <string name="about_rate">Értékelés</string>
+    <string name="about_credit">Támogatók</string>
+    <string name="community">Közösség</string>
+    <string name="about_credit_text_all_contributors">Összes támogató</string>
+    <string name="join_community">Csatlakozz a Közösséghez</string>
+    <string name="bug_reports_suggest_improvements">Visszajelzés küldése, hibák jelentése, vagy újítás ajánlása</string>
+    <string name="help_translating_this_app">Fordítsd le ezt az alkalmazást más nyelvekre</string>
+    <string name="source_code">Forráskód</string>
+    <string name="project_license">Projekt Licensz</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">Támogasd kódot a projektbe. Mindenkit várunk, még az újakat is</string>
+    <string name="project_team">Projekt Csapat</string>
+    <string name="contributors_public_info">Információ a támogatókról. A támogatók megadhatnak információkat magukról itt támogatás után</string>
+    <string name="contribute">Támogatni</string>
+    <string name="donate">Adományozni</string>
+    <string name="help">Segítség</string>
+    <string name="licenses">Licenszek</string>
+    <string name="contributors">Támogatók</string>
+    <string name="changelog">Changelog</string>
+    <string name="more">Több</string>
+    <string name="open_source_licenses">Nyitott Forráskódú Licenszek</string>
+    <string name="rate_the_app">Értékeld ezt az appot</string>
+    <string name="translate">Fordítás</string>
+    <string name="help_this_app">További információk és segítség az alkalmazásról</string>
+    <string name="bug_reports">Hibajelentés</string>
+    <string name="android_contribution_guide">Android támogatói útmutató</string>
+
+    <!-- Settings -->
+    <string name="pref_title__settings">Beállítások</string>
+    <string name="pref_title__desktop">Asztal</string>
+    <string name="pref_title__dock">Dock</string>
+    <string name="pref_title__app_drawer">Alkalmazás szekrény</string>
+    <string name="pref_title__appearance">Kinézet</string>
+    <string name="pref_title__gestures">Gesztúrák</string>
+    <string name="pref_title__miscellaneous">Apróságok</string>
+    <string name="pref_title__about">Rólunk</string>
+
+    <string name="pref_title__size">Méret</string>
+    <string name="pref_title__style">Stílus</string>
+    <string name="pref_title__color">Színek</string>
+    <string name="pref_title__icons">Ikonok</string>
+    <string name="pref_title__search_bar">Kereső bar</string>
+    <string name="pref_title__interfaces">Interfészek</string>
+    <string name="pref_title__inputs">Bemenetek</string>
+    <string name="pref_title__feels">Érzések</string>
+    <string name="pref_title__others">Egyebek</string>
+    <string name="pref_title__animations">Animációk</string>
+    <string name="pref_title__debug">Debug</string>
+
+    <string name="pref_title__desktop_indicator_style">Jelző stílus</string>
+    <string name="pref_title__desktop_rotate">Forgatás</string>
+    <string name="pref_summary__desktop_rotate">Kijelzőt forgatás engedély</string>
+    <string name="pref_title__desktop_show_grid">Négyzetrács mutatása</string>
+    <string name="pref_title__desktop_fullscreen">Teljes képernyő</string>
+    <string name="pref_title__desktop_show_position_indicator">Pozíció indikátor</string>
+    <string name="pref_title__desktop_show_label">Mutasd a címkéket</string>
+    <string name="pref_title__desktop_background_color">Háttér</string>
+    <string name="pref_title__desktop_folder_color">Mappa háttér</string>
+    <string name="pref_title__desktop_folder_color_text">Mappa szöveg</string>
+    <string name="pref_title__desktop_inset_color">Rendszer barok</string>
+
+    <string name="pref_title__search_bar_enable">Kereső bar</string>
+    <string name="pref_title__search_bar_base_uri">URl-re keresés</string>
+    <string name="pref_title__search_bar_show_hidden_apps">Mutasd a rejtett alkalmazásokat</string>
+
+    <string name="pref_title__date_bar">Dátum bar</string>
+    <string name="pref_title__date_bar_text_color">Szöveg szín</string>
+    <string name="pref_title__date_bar_date_format">Dátum formátum</string>
+
+    <string name="pref_title__dock_show_label">Mutasd a címkéket</string>
+    <string name="pref_title__dock_background_color">Háttér</string>
+
+    <string name="pref_title__drawer_style">Stílus</string>
+    <string name="pref_title__hide_apps">Alkalmazások eltűntetése</string>
+    <string name="pref_title__drawer_show_card_view">Kártya nézet</string>
+    <string name="pref_title__drawer_remember_position">Utolsó oldal megjegyzése</string>
+    <string name="pref_title__drawer_show_position_indicator">Pozíció indikátor</string>
+    <string name="pref_title__drawer_show_label">Mutasd a címkéket</string>
+    <string name="pref_title__drawer_background_color">Háttér</string>
+    <string name="pref_title__drawer_card_color">Kártya nézet</string>
+    <string name="pref_title__drawer_label_color">Címke</string>
+    <string name="pref_title__drawer_fast_scroll_color">Scrollbar</string>
+    <string name="pref_title__drawer_label_font_size">Címke font méret</string>
+
+    <string name="pref_title__gesture_feedback">Gesztúra visszajelzés</string>
+    <string name="pref_title__gesture_quick_swipe">Gyors szekrény húzás</string>
+    <string name="pref_title__gesture_double_tap">Dupla kattintás</string>
+    <string name="pref_title__gesture_swipe_up">Felfelé húzás</string>
+    <string name="pref_title__gesture_swipe_down">Lefelé húzás</string>
+    <string name="pref_title__gesture_pinch">Közelíteni</string>
+    <string name="pref_title__gesture_unpinch">Távolítás</string>
+
+    <string name="pref_title__theme">Téma</string>
+    <string name="pref_title__primary_color">Elsődleges szín</string>
+    <string name="pref_title__icon_size">Ikon méret</string>
+    <string name="pref_title__icon_pack">Ikon csomag</string>
+    <string name="pref_title__animation_speed_modifier">Animáció sebesség</string>
+
+    <string name="pref_title__language">Nyelv</string>
+    <string name="pref_title__backup">Mentés</string>
+    <string name="pref_title__restore">Visszaállítás</string>
+    <string name="pref_title__reset_settings">Beállítások alaphelyzetbe</string>
+    <string name="pref_title__reset_database">Adatbázis alaphelyzetbe</string>
+    <string name="pref_title__restart">Újraindítás</string>
+
+    <string name="vertical_scroll_drawer">Függőleges</string>
+    <string name="horizontal_paged_drawer">Lapozva</string>
+
+    <string name="indicator_mode_dots">Pontok</string>
+    <string name="indicator_mode_lines">Vonalak</string>
+
+    <string name="none">Nincs</string>
+    <string name="app">Alkalmazás</string>
+
+    <string name="light">Világos</string>
+    <string name="dark">Sötét</string>
+    <string name="black">Fekete</string>
+
+    <!-- Dialogs -->
+    <string name="are_you_sure">Biztos vagy benne? Ennek a következménye nem vonható vissza, kivéve ha van mentésed.</string>
+    <string name="device_admin_title">Eszköz Adminisztráció kell</string>
+    <string name="device_admin_summary">Az alkalmazásnak kell az Eszköz Adminisztrációs engedély hogy lezárhassa a kijelzőt. Kérlek kapcsold be a beállításokban hogy használhasd ezt a funkciót.</string>
+    <string name="select_app">Válassz applikációt</string>
+    <string name="select_wallpaper">Válassz hátteret</string>
+    <string name="select_icon_pack">Válassz ikon csomagot</string>
+    <string name="volume_level_ringtone">Csengőhang</string>
+    <string name="volume_level_notification">Értesítések</string>
+    <string name="volume_level_system">Rendszer</string>
+    <string name="volume_level_media">Média</string>
+
+    <!-- Other -->
+    <string name="columns">Sorok</string>
+    <string name="rows">Sorok</string>
+    <string name="on">Be</string>
+    <string name="off">Ki</string>
+    <string name="search_hint">Keresés</string>
+    <string name="bad_format">Rossz formátum</string>
+    <string name="version">Verziók</string>
+    <string name="enable">Bekapcsolás</string>
+    <string name="placeholder">Hello világ!</string>
+    <string name="custom">Egyedi</string>
+    <string name="default_folder">Névtelen</string>
+    <string name="default_icons">Alapértelmezett</string>
+
+    <!-- Drag Option View -->
+    <string name="edit">Szerkesztés</string>
+    <string name="info">Információ</string>
+    <string name="uninstall">Alkalmazás törlése</string>
+    <string name="remove">Törlés</string>
+
+    <!-- Desktop Option View -->
+    <string name="home">Kezdőlap</string>
+    <string name="action">Cselekvés</string>
+    <string name="lock">Zárás</string>
+    <string name="widget">Widget</string>
+
+    <!-- Toasts -->
+    <string name="toast_not_enough_space">Nincs elég hely.</string>
+    <string name="toast_app_uninstalled">Alkalmazás törölve</string>
+    <string name="toast_backup_success">Kész.</string>
+
+</resources>
