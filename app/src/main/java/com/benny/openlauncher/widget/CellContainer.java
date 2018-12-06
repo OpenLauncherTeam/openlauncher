@@ -239,9 +239,8 @@ public class CellContainer extends ViewGroup {
             }
             if (_peekDownTime != null && _peekDownTime == -1) {
                 _peekDirection = getPeekDirectionFromCoordinate(_startCoordinate, coordinate);
-                _peekDownTime = Long.valueOf(System.currentTimeMillis());
+                _peekDownTime = System.currentTimeMillis();
                 _preCoordinate = coordinate;
-
             }
             if (_occupied[coordinate.x][coordinate.y]) {
                 return DragState.CurrentOccupied;
@@ -409,7 +408,7 @@ public class CellContainer extends ViewGroup {
     }
 
     public final void addViewToGrid(@NonNull View view, int x, int y, int xSpan, int ySpan) {
-        view.setLayoutParams(new LayoutParams(-2, -2, x, y, xSpan, ySpan));
+        view.setLayoutParams(new LayoutParams(WRAP_CONTENT, WRAP_CONTENT, x, y, xSpan, ySpan));
         addView(view);
     }
 

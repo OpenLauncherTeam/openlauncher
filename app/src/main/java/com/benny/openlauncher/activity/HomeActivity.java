@@ -243,7 +243,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                     appDrawerBtnItem._x = 2;
                     _db.saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
                 }
-                getDock().initDockItem(HomeActivity.this);
+                getDock().initDock();
                 return true;
             }
         });
@@ -251,7 +251,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             @Override
             public boolean onAppDeleted(List<App> apps) {
                 getDesktop().initDesktop();
-                getDock().initDockItem(HomeActivity.this);
+                getDock().initDock();
                 return false;
             }
         });
@@ -263,7 +263,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         getAppDrawerController().init();
         getDock().setHome(this);
 
-        getDesktop().init();
         getDesktop().setDesktopEditListener(this);
         getDesktop().setPageIndicator(getDesktopIndicator());
 
@@ -426,14 +425,14 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     public void onDesktopEdit() {
-        Tool.visibleViews(100, 20, getDesktopOptionView());
+        Tool.visibleViews(100, getDesktopOptionView());
         updateDesktopIndicator(false);
         updateDock(false);
         updateSearchBar(false);
     }
 
     public void onFinishDesktopEdit() {
-        Tool.invisibleViews(100, 20, getDesktopOptionView());
+        Tool.invisibleViews(100, getDesktopOptionView());
         getDesktopIndicator().hideDelay();
         updateDesktopIndicator(true);
         updateDock(true);

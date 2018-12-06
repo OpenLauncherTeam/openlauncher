@@ -92,15 +92,14 @@ public class HpDragOption {
             }
         });
 
-
         dragNDropView.registerDropTarget(new ItemOptionView.DropTargetListener(rightDragHandle) {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
                     int i = _homeActivity.getDesktop().getCurrentItem();
-                    if (i < _homeActivity.getDesktop().getPageCount() - 1) {
+                    if (i < _homeActivity.getDesktop().getPages().size() - 1) {
                         _homeActivity.getDesktop().setCurrentItem(i + 1);
-                    } else if (i == _homeActivity.getDesktop().getPageCount() - 1) {
+                    } else if (i == _homeActivity.getDesktop().getPages().size() - 1) {
                         _homeActivity.getDesktop().addPageRight(true);
                     }
                     dragHandler.postDelayed(this, 1000);
@@ -146,7 +145,6 @@ public class HpDragOption {
                 rightDragHandle.animate().alpha(0f);
             }
         });
-
 
         // desktop drag event
         dragNDropView.registerDropTarget(new ItemOptionView.DropTargetListener(_homeActivity.getDesktop()) {

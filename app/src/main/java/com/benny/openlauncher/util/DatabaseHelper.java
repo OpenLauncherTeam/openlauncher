@@ -151,7 +151,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int desktopVar = Integer.parseInt(cursor.getString(desktopColumnIndex));
                 int stateVar = Integer.parseInt(cursor.getString(stateColumnIndex));
                 while (page >= desktop.size()) {
-                    desktop.add(new ArrayList<Item>());
+                    desktop.add(new ArrayList<>());
                 }
                 if (desktopVar == 1 && stateVar == 1) {
                     desktop.get(page).add(getSelection(cursor));

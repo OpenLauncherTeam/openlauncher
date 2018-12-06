@@ -34,18 +34,11 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         super(context, attr);
     }
 
-    public void init() {
-        if (!isInEditMode()) {
-            super.init();
-        }
-    }
-
-    public final void initDockItem(HomeActivity homeActivity) {
+    public final void initDock() {
         int columns = Setup.appSettings().getDockColumnCount();
         int rows = Setup.appSettings().getDockRowCount();
         setGridSize(columns, rows);
         List<Item> dockItems = HomeActivity._db.getDock();
-        _homeActivity = homeActivity;
         removeAllViews();
         for (Item item : dockItems) {
             if (item._x + item._spanX <= columns && item._y + item._spanY <= rows) {

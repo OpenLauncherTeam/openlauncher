@@ -3,6 +3,7 @@ package com.benny.openlauncher.widget;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -37,7 +38,6 @@ import in.championswimmer.sfg.lib.SimpleFingerGestures.OnFingerGestureListener;
 public final class Desktop extends ViewPager implements DesktopCallback<View> {
     private OnDesktopEditListener _desktopEditListener;
     private boolean _inEditMode;
-    private int _pageCount;
     private PagerIndicator _pageIndicator;
 
     private final List<CellContainer> _pages = new ArrayList<>();
@@ -48,6 +48,14 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
     private Item _previousItem;
     private View _previousItemView;
     private int _previousPage;
+
+    public Desktop(Context context) {
+        super(context, null);
+    }
+
+    public Desktop(Context context, AttributeSet attr) {
+        super(context, attr);
+    }
 
     public static boolean handleOnDropOver(HomeActivity homeActivity, Item dropItem, Item item, View itemView, CellContainer parent, int page, ItemPosition itemPosition, DesktopCallback callback) {
         if (item != null) {
@@ -102,13 +110,13 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
     }
 
     public final class DesktopAdapter extends PagerAdapter {
-        private MotionEvent _currentEvent;
         private final Desktop _desktop;
 
         public DesktopAdapter(Desktop desktop) {
             _desktop = desktop;
             _desktop.getPages().clear();
-            int count = getCount();
+            int count = HomeActivity._db.getDesktop().size();
+            if (count == 0) count++;
             for (int i = 0; i < count; i++) {
                 _desktop.getPages().add(getItemLayout());
             }
@@ -171,7 +179,7 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
 
         @Override
         public int getCount() {
-            return _desktop.getPageCount();
+            return _desktop.getPages().size();
         }
 
         @Override
@@ -196,14 +204,14 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
             return layout;
         }
 
-        public void enterDesktopEditMode() {
+        private void enterDesktopEditMode() {
             float scaleFactor = 0.8f;
             float translateFactor = (float) Tool.toPx(Setup.appSettings().getSearchBarEnable() ? 20 : 40);
             for (CellContainer v : _desktop.getPages()) {
                 v.setBlockTouch(true);
                 v.animateBackgroundShow();
-                ViewPropertyAnimator translationY = v.animate().scaleX(scaleFactor).scaleY(scaleFactor).translationY(translateFactor);
-                translationY.setInterpolator(new AccelerateDecelerateInterpolator());
+                ViewPropertyAnimator animation = v.animate().scaleX(scaleFactor).scaleY(scaleFactor).translationY(translateFactor);
+                animation.setInterpolator(new AccelerateDecelerateInterpolator());
             }
             _desktop.setInEditMode(true);
             if (_desktop.getDesktopEditListener() != null) {
@@ -212,14 +220,14 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
             }
         }
 
-        public void exitDesktopEditMode() {
+        private void exitDesktopEditMode() {
             float scaleFactor = 1.0f;
             float translateFactor = 0.0f;
             for (CellContainer v : _desktop.getPages()) {
                 v.setBlockTouch(false);
                 v.animateBackgroundHide();
-                ViewPropertyAnimator translationY = v.animate().scaleX(scaleFactor).scaleY(scaleFactor).translationY(translateFactor);
-                translationY.setInterpolator(new AccelerateDecelerateInterpolator());
+                ViewPropertyAnimator animation = v.animate().scaleX(scaleFactor).scaleY(scaleFactor).translationY(translateFactor);
+                animation.setInterpolator(new AccelerateDecelerateInterpolator());
             }
             _desktop.setInEditMode(false);
             if (_desktop.getDesktopEditListener() != null) {
@@ -227,14 +235,6 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
                 desktopEditListener.onFinishDesktopEdit();
             }
         }
-    }
-
-    public Desktop(Context context) {
-        super(context, null);
-    }
-
-    public Desktop(Context context, AttributeSet attr) {
-        super(context, attr);
     }
 
     public final List<CellContainer> getPages() {
@@ -257,10 +257,6 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
         _inEditMode = v;
     }
 
-    public final int getPageCount() {
-        return _pageCount;
-    }
-
     public final boolean isCurrentPageEmpty() {
         return getCurrentPage().getChildCount() == 0;
     }
@@ -273,17 +269,10 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
         _pageIndicator = pageIndicator;
     }
 
-    public final void init() {
-        _pageCount = HomeActivity._db.getDesktop().size();
-        if (_pageCount == 0) {
-            _pageCount = 1;
-        }
-        setCurrentItem(Setup.appSettings().getDesktopPageCurrent());
-    }
-
     public final void initDesktop() {
         _adapter = new DesktopAdapter(this);
         setAdapter(_adapter);
+        setCurrentItem(Setup.appSettings().getDesktopPageCurrent());
         if (Setup.appSettings().isDesktopShowIndicator() && _pageIndicator != null) {
             _pageIndicator.setViewPager(this);
         }
@@ -303,7 +292,6 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
     }
 
     public final void addPageRight(boolean showGrid) {
-        _pageCount++;
         int previousPage = getCurrentItem();
         _adapter.addPageRight();
         setCurrentItem(previousPage + 1);
@@ -316,7 +304,6 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
     }
 
     public final void addPageLeft(boolean showGrid) {
-        _pageCount++;
         int previousPage = getCurrentItem();
         _adapter.addPageLeft();
         setCurrentItem(previousPage + 1, false);
@@ -330,21 +317,13 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
     }
 
     public final void removeCurrentPage() {
-        _pageCount--;
         int previousPage = getCurrentItem();
         _adapter.removePage(getCurrentItem(), true);
-        for (CellContainer v : _pages) {
-            v.setAlpha(0.0f);
-            v.animate().alpha(1.0f);
-            v.setScaleX(0.85f);
-            v.setScaleY(0.85f);
-            v.animateBackgroundShow();
-        }
-        if (_pageCount == 0) {
+        if (_pages.size() == 0) {
             addPageRight(false);
             _adapter.exitDesktopEditMode();
         } else {
-            setCurrentItem(previousPage);
+            setCurrentItem(previousPage, true);
             _pageIndicator.invalidate();
         }
     }
@@ -493,8 +472,14 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
 
     @Override
     protected void onPageScrolled(int position, float offset, int offsetPixels) {
-        float xOffset = (position + offset) / (_pageCount - 1);
-        WallpaperManager.getInstance(getContext()).setWallpaperOffsets(getWindowToken(), xOffset, 0.0f);
+        // normal
+        float xOffset = (position + offset) / (_pages.size() - 1);
+        // inverse
+        //xOffset = 1f - xOffset;
+        // off
+        //xOffset = 0.5f;
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(getContext());
+        wallpaperManager.setWallpaperOffsets(getWindowToken(), xOffset, 0.0f);
         super.onPageScrolled(position, offset, offsetPixels);
     }
 
