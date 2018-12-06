@@ -448,29 +448,6 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
     }
 
     @Override
-    public boolean onInterceptTouchEvent(@Nullable MotionEvent ev) {
-        if (ev != null && ev.getActionMasked() == MotionEvent.ACTION_UP) {
-            HomeActivity launcher = HomeActivity.Companion.getLauncher();
-            if (launcher != null) {
-                PagerIndicator desktopIndicator = launcher.getDesktopIndicator();
-                desktopIndicator.showNow();
-            }
-        }
-        return super.onInterceptTouchEvent(ev);
-    }
-
-    @Override
-    public boolean onTouchEvent(@Nullable MotionEvent ev) {
-        if (ev != null && ev.getActionMasked() == MotionEvent.ACTION_DOWN) {
-            HomeActivity launcher = HomeActivity.Companion.getLauncher();
-            if (launcher != null) {
-                launcher.getDesktopIndicator().hideDelay();
-            }
-        }
-        return super.onTouchEvent(ev);
-    }
-
-    @Override
     protected void onPageScrolled(int position, float offset, int offsetPixels) {
         // normal
         float xOffset = (position + offset) / (_pages.size() - 1);

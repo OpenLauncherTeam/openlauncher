@@ -201,7 +201,6 @@ public class HpDragOption {
 
             @Override
             public void onMove(@NonNull Action action, @NonNull PointF location) {
-                HomeActivity.Companion.getLauncher().getDesktopIndicator().hideDelay();
                 if (action != DragAction.Action.SEARCH_RESULT) {
                     _homeActivity.getDesktop().updateIconProjection((int) location.x, (int) location.y);
                 }
@@ -217,7 +216,6 @@ public class HpDragOption {
 
             @Override
             public void onEnd() {
-                _homeActivity.getDesktopIndicator().hideDelay();
                 for (CellContainer page : _homeActivity.getDesktop().getPages()) {
                     page.clearCachedOutlineBitmap();
                 }

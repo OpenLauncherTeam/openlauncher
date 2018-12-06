@@ -265,6 +265,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
         getDesktop().setDesktopEditListener(this);
         getDesktop().setPageIndicator(getDesktopIndicator());
+        getDesktopIndicator().setMode(Setup.appSettings().getDesktopIndicatorMode());
 
         AppSettings appSettings = Setup.appSettings();
         getDesktopOptionView().setDesktopOptionViewListener(this);
@@ -433,7 +434,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public void onFinishDesktopEdit() {
         Tool.invisibleViews(100, getDesktopOptionView());
-        getDesktopIndicator().hideDelay();
         updateDesktopIndicator(true);
         updateDock(true);
         updateSearchBar(true);
