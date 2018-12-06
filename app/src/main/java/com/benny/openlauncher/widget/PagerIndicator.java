@@ -17,15 +17,16 @@ public final class PagerIndicator extends View implements ViewPager.OnPageChange
     private int _mode = Mode.DOTS;
     private float _pad;
     private float _dotSize;
-    private float myX;
     private int _previousPage = -1;
     private int _realPreviousPage;
-    private float _scaleFactor = 1.0f;
-    private float _scaleFactor2 = 1.5f;
 
     // current position and offset
     private float _scrollOffset;
     private int _scrollPosition;
+
+    // dot animations
+    private float _shrinkFactor = 1.0f;
+    private float _expandFactor = 1.5f;
 
     public static class Mode {
         public static final int DOTS = 0;
@@ -61,47 +62,45 @@ public final class PagerIndicator extends View implements ViewPager.OnPageChange
                 canvas.translate(getWidth() / 2 - circlesWidth / 2, 0f);
 
                 if (_realPreviousPage != _pager.getCurrentItem()) {
-                    _scaleFactor = 1f;
+                    _shrinkFactor = 1f;
                     _realPreviousPage = _pager.getCurrentItem();
                 }
 
                 for (int dot = 0; dot < pageCount; dot++) {
                     float stepFactor = 0.05f;
-                    float smallFactor = 1f;
+                    float smallFactor = 1.0f;
                     float largeFactor = 1.5f;
                     if (dot == _pager.getCurrentItem()) {
-                        // animate shrink
+                        // draw shrinking dot
                         if (_previousPage == -1)
                             _previousPage = dot;
-                        _scaleFactor = Tool.clampFloat(_scaleFactor + stepFactor, smallFactor, largeFactor);
-                        canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * dot, (float) (getHeight() / 2), _scaleFactor * _dotSize / 2, _paint);
-                        if (_scaleFactor != largeFactor)
+                        _shrinkFactor = Tool.clampFloat(_shrinkFactor + stepFactor, smallFactor, largeFactor);
+                        canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * dot, (float) (getHeight() / 2), _shrinkFactor * _dotSize / 2, _paint);
+                        if (_shrinkFactor != largeFactor)
                             invalidate();
                     } else if (dot != _pager.getCurrentItem() && dot == _previousPage) {
-                        // animate expand
-                        _scaleFactor2 = Tool.clampFloat(_scaleFactor2 - stepFactor, smallFactor, largeFactor);
-                        canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * dot, (float) (getHeight() / 2), _scaleFactor2 * _dotSize / 2, _paint);
-                        if (_scaleFactor2 != smallFactor)
+                        // draw expanding dot
+                        _expandFactor = Tool.clampFloat(_expandFactor - stepFactor, smallFactor, largeFactor);
+                        canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * dot, (float) (getHeight() / 2), _expandFactor * _dotSize / 2, _paint);
+                        if (_expandFactor != smallFactor)
                             invalidate();
                         else {
-                            _scaleFactor2 = 1.5f;
+                            _expandFactor = 1.5f;
                             _previousPage = -1;
                         }
                     } else {
-                        // draw normal circle
+                        // draw normal dot
                         canvas.drawCircle(_dotSize / 2 + _pad + (_dotSize + _pad * 2) * dot, (float) (getHeight() / 2), _dotSize / 2, _paint);
                     }
                 }
                 break;
             case Mode.LINES:
                 float width = getWidth() / pageCount;
-                float start = _scrollPosition * width;
+                float startX = (_scrollPosition + _scrollOffset) * width;
+                float startY = getHeight() / 2;
 
-                myX = start + _scrollOffset * width;
-
-                if (myX % width != 0f) invalidate();
-
-                canvas.drawLine(myX, getHeight() / 2, myX + width, getHeight() / 2, _paint);
+                canvas.drawLine(startX, startY, startX + width, startY, _paint);
+                if (_scrollOffset != 0f) invalidate();
                 break;
         }
     }
