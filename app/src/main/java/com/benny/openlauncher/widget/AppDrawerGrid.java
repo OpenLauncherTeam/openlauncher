@@ -2,14 +2,11 @@ package com.benny.openlauncher.widget;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
@@ -26,7 +23,7 @@ import com.turingtechnologies.materialscrollbar.INameableAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppDrawerVertical extends CardView {
+public class AppDrawerGrid extends FrameLayout {
 
     public static int _itemWidth;
     public static int _itemHeightPadding;
@@ -37,38 +34,44 @@ public class AppDrawerVertical extends CardView {
 
     private static List<App> _apps;
     private GridLayoutManager _layoutManager;
-    private RelativeLayout _rl;
 
-    public AppDrawerVertical(Context context) {
+    public AppDrawerGrid(Context context) {
         super(context);
-        preInit();
+        LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+        View view = layoutInflater.inflate(R.layout.view_app_drawer_grid, AppDrawerGrid.this, false);
+        addView(view);
+
+        _recyclerView = findViewById(R.id.recycler_view);
+        _scrollBar = findViewById(R.id.scroll_bar);
+        _layoutManager = new GridLayoutManager(getContext(), Setup.appSettings().getDrawerColumnCount());
+
+        init();
     }
 
-    public AppDrawerVertical(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        preInit();
-    }
+    @Override
+    public void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
 
-    public AppDrawerVertical(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        preInit();
-    }
+        _itemWidth = getWidth() / _layoutManager.getSpanCount();
+        _itemHeightPadding = Tool.dp2px(20, getContext());
 
-    public void preInit() {
-        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        _apps = Setup.appLoader().getAllApps(getContext(), false);
+        ArrayList<DrawerAppItem> items = new ArrayList<>();
+        for (int i = 0; i < _apps.size(); i++) {
+            items.add(new DrawerAppItem(_apps.get(i)));
+        }
+        _gridDrawerAdapter.set(items);
+        Setup.appLoader().addUpdateListener(new AppUpdateListener() {
             @Override
-            public void onGlobalLayout() {
-                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            public boolean onAppUpdated(List<App> apps) {
+                _apps = apps;
+                ArrayList<DrawerAppItem> items = new ArrayList<>();
+                for (int i = 0; i < apps.size(); i++) {
+                    items.add(new DrawerAppItem(apps.get(i)));
+                }
+                _gridDrawerAdapter.set(items);
 
-                _rl = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_vertical_inner, AppDrawerVertical.this, false);
-                _recyclerView = _rl.findViewById(R.id.vDrawerRV);
-                _layoutManager = new GridLayoutManager(getContext(), Setup.appSettings().getDrawerColumnCount());
-
-                _itemWidth = (getWidth() - _recyclerView.getPaddingRight() - _recyclerView.getPaddingRight()) / _layoutManager.getSpanCount();
-                init();
-
-                if (!Setup.appSettings().isDrawerShowIndicator())
-                    _scrollBar.setVisibility(View.GONE);
+                return false;
             }
         });
     }
@@ -99,18 +102,12 @@ public class AppDrawerVertical extends CardView {
     }
 
     private void init() {
-        _itemHeightPadding = Tool.dp2px(15, getContext());
-
-        _scrollBar = _rl.findViewById(R.id.dragScrollBar);
+        if (!Setup.appSettings().isDrawerShowIndicator())
+            _scrollBar.setVisibility(View.GONE);
         _scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
         _scrollBar.setClipToPadding(true);
         _scrollBar.setDraggableFromAnywhere(true);
-        _scrollBar.post(new Runnable() {
-            @Override
-            public void run() {
-                _scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
-            }
-        });
+        _scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
 
         boolean mPortrait = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
         _gridDrawerAdapter = new GridAppDrawerAdapter();
@@ -123,35 +120,10 @@ public class AppDrawerVertical extends CardView {
         }
         _recyclerView.setLayoutManager(_layoutManager);
         _recyclerView.setDrawingCacheEnabled(true);
-
-        List<App> allApps = Setup.appLoader().getAllApps(getContext(), false);
-        if (allApps.size() != 0) {
-            _apps = allApps;
-            ArrayList<DrawerAppItem> items = new ArrayList<>();
-            for (int i = 0; i < _apps.size(); i++) {
-                items.add(new DrawerAppItem(_apps.get(i)));
-            }
-            _gridDrawerAdapter.set(items);
-        }
-        Setup.appLoader().addUpdateListener(new AppUpdateListener() {
-            @Override
-            public boolean onAppUpdated(List<App> apps) {
-                AppDrawerVertical._apps = apps;
-                ArrayList<DrawerAppItem> items = new ArrayList<>();
-                for (int i = 0; i < apps.size(); i++) {
-                    items.add(new DrawerAppItem(apps.get(i)));
-                }
-                _gridDrawerAdapter.set(items);
-
-                return false;
-            }
-        });
-
-        addView(_rl);
     }
 
     public static class GridAppDrawerAdapter extends FastItemAdapter<DrawerAppItem> implements INameableAdapter {
-        GridAppDrawerAdapter() {
+        public GridAppDrawerAdapter() {
             getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<DrawerAppItem>() {
                 @Override
                 public boolean filter(DrawerAppItem item, CharSequence constraint) {

@@ -6,19 +6,19 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/vDrawerRV"
-        android:layout_width="wrap_content"
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true" />
 
     <com.turingtechnologies.materialscrollbar.DragScrollBar
-        android:id="@+id/dragScrollBar"
+        android:id="@+id/scroll_bar"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         app:msb_handleColour="@color/colorAccent"
         app:msb_lightOnTouch="false"
-        app:msb_recyclerView="@id/vDrawerRV" />
+        app:msb_recyclerView="@id/recycler_view" />
 
 </RelativeLayout>

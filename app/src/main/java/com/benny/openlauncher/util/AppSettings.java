@@ -156,7 +156,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getDrawerStyle() {
-        return getIntOfStringPref(R.string.pref_key__drawer_style, AppDrawerController.DrawerMode.VERTICAL);
+        return getIntOfStringPref(R.string.pref_key__drawer_style, AppDrawerController.Mode.GRID);
     }
 
     public boolean isDrawerShowCardView() {

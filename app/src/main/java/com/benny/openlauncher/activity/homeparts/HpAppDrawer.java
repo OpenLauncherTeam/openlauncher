@@ -1,7 +1,5 @@
 package com.benny.openlauncher.activity.homeparts;
 
-import android.view.View;
-
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.AppSettings;
@@ -22,11 +20,6 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
 
     public void initAppDrawer(AppDrawerController appDrawerController) {
         appDrawerController.setCallBack(this);
-        AppSettings appSettings = Setup.appSettings();
-
-        appDrawerController.setBackgroundColor(appSettings.getDrawerBackgroundColor());
-        appDrawerController.getBackground().setAlpha(0);
-        appDrawerController.reloadDrawerCardTheme();
     }
 
     @Override
@@ -53,9 +46,8 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
                 _homeActivity.updateSearchBar(true);
             } else {
                 if (!Setup.appSettings().isDrawerRememberPosition()) {
-                    _homeActivity.getAppDrawerController().scrollToStart();
+                    _homeActivity.getAppDrawerController().reset();
                 }
-                _homeActivity.getAppDrawerController().getDrawer().setVisibility(View.INVISIBLE);
             }
         }
     }

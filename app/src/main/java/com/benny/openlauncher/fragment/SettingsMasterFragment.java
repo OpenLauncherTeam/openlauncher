@@ -1,7 +1,6 @@
 package com.benny.openlauncher.fragment;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
@@ -14,8 +13,8 @@ import net.gsantner.opoc.util.ContextUtils;
 
 import java.util.Locale;
 
-import static com.benny.openlauncher.widget.AppDrawerController.DrawerMode.HORIZONTAL_PAGED;
-import static com.benny.openlauncher.widget.AppDrawerController.DrawerMode.VERTICAL;
+import static com.benny.openlauncher.widget.AppDrawerController.Mode.PAGE;
+import static com.benny.openlauncher.widget.AppDrawerController.Mode.GRID;
 
 public class SettingsMasterFragment extends SettingsBaseFragment {
     @Override
@@ -48,11 +47,12 @@ public class SettingsMasterFragment extends SettingsBaseFragment {
         categoryAppearance.setSummary(String.format(Locale.ENGLISH, "Icons: %ddp", AppSettings.get().getIconSize()));
 
         switch (AppSettings.get().getDrawerStyle()) {
-            case HORIZONTAL_PAGED:
-                categoryAppDrawer.setSummary(String.format("%s: %s", getString(R.string.pref_title__style), getString(R.string.horizontal_paged_drawer)));
-                break;
-            case VERTICAL:
+            case GRID:
                 categoryAppDrawer.setSummary(String.format("%s: %s", getString(R.string.pref_title__style), getString(R.string.vertical_scroll_drawer)));
+                break;
+            case PAGE:
+            default:
+                categoryAppDrawer.setSummary(String.format("%s: %s", getString(R.string.pref_title__style), getString(R.string.horizontal_paged_drawer)));
                 break;
         }
     }

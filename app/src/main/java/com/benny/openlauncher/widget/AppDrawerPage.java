@@ -21,7 +21,7 @@ import com.benny.openlauncher.util.Tool;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppDrawerPaged extends ViewPager {
+public class AppDrawerPage extends ViewPager {
     private List<App> _apps;
 
     public List<ViewGroup> _pages = new ArrayList<>();
@@ -33,14 +33,14 @@ public class AppDrawerPaged extends ViewPager {
 
     private int _pageCount = 0;
 
-    public AppDrawerPaged(Context c, AttributeSet attr) {
-        super(c, attr);
-        init(c);
+    public AppDrawerPage(Context context, AttributeSet attr) {
+        super(context, attr);
+        init(context);
     }
 
-    public AppDrawerPaged(Context c) {
-        super(c);
-        init(c);
+    public AppDrawerPage(Context context) {
+        super(context);
+        init(context);
     }
 
     @Override
@@ -95,20 +95,20 @@ public class AppDrawerPaged extends ViewPager {
 
         List<App> allApps = Setup.appLoader().getAllApps(c, false);
         if (allApps.size() != 0) {
-            AppDrawerPaged.this._apps = allApps;
+            AppDrawerPage.this._apps = allApps;
             calculatePage();
             setAdapter(new Adapter());
             if (_appDrawerIndicator != null)
-                _appDrawerIndicator.setViewPager(AppDrawerPaged.this);
+                _appDrawerIndicator.setViewPager(AppDrawerPage.this);
         }
         Setup.appLoader().addUpdateListener(new AppUpdateListener() {
             @Override
             public boolean onAppUpdated(List<App> apps) {
-                AppDrawerPaged.this._apps = apps;
+                AppDrawerPage.this._apps = apps;
                 calculatePage();
                 setAdapter(new Adapter());
                 if (_appDrawerIndicator != null)
-                    _appDrawerIndicator.setViewPager(AppDrawerPaged.this);
+                    _appDrawerIndicator.setViewPager(AppDrawerPage.this);
 
                 return false;
             }
@@ -119,12 +119,7 @@ public class AppDrawerPaged extends ViewPager {
         _appDrawerIndicator = appDrawerIndicator;
         appDrawerIndicator.setMode(PagerIndicator.Mode.DOTS);
         if (getAdapter() != null)
-            appDrawerIndicator.setViewPager(AppDrawerPaged.this);
-    }
-
-    public void resetAdapter() {
-        setAdapter(null);
-        setAdapter(new Adapter());
+            appDrawerIndicator.setViewPager(AppDrawerPage.this);
     }
 
     public class Adapter extends PagerAdapter {
@@ -161,7 +156,7 @@ public class AppDrawerPaged extends ViewPager {
         public Adapter() {
             _pages.clear();
             for (int i = 0; i < getCount(); i++) {
-                ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_paged_inner, null);
+                ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_page_inner, null);
                 if (!Setup.appSettings().isDrawerShowCardView()) {
                     ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Color.TRANSPARENT);
                     ((CardView) layout.getChildAt(0)).setCardElevation(0);

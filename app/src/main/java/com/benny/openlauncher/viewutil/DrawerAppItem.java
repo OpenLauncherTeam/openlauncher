@@ -8,9 +8,8 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction;
-import com.benny.openlauncher.widget.AppDrawerVertical;
+import com.benny.openlauncher.widget.AppDrawerGrid;
 import com.benny.openlauncher.widget.AppItemView;
-import com.benny.openlauncher.widget.Desktop;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
@@ -76,8 +75,8 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
         ViewHolder(View itemView) {
             super(itemView);
             appItemView = (AppItemView) itemView;
-            appItemView.setTargetedWidth(AppDrawerVertical._itemWidth);
-            appItemView.setTargetedHeightPadding(AppDrawerVertical._itemHeightPadding);
+            appItemView.setTargetedWidth(AppDrawerGrid._itemWidth);
+            appItemView.setTargetedHeightPadding(AppDrawerGrid._itemHeightPadding);
 
             builder = new AppItemView.Builder(appItemView, Setup.appSettings().getDrawerIconSize())
                     .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())

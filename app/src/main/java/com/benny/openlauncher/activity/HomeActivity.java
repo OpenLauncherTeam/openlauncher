@@ -97,7 +97,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     private int cx;
     private int cy;
-    private int rad;
 
     public static final class Companion {
         private Companion() {
@@ -679,22 +678,16 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 if (appItemView != null && appItemView.getShowLabel()) {
                     cy -= Tool.dp2px(14, this) / 2f;
                 }
-                rad = (int) (appItemView.getIconSize() / 2f - Tool.toPx(4));
             }
-            cx -= ((MarginLayoutParams) getAppDrawerController().getDrawer().getLayoutParams()).getMarginStart();
-            cy -= ((MarginLayoutParams) getAppDrawerController().getDrawer().getLayoutParams()).topMargin;
             cy -= getAppDrawerController().getPaddingTop();
         } else {
             cx = x;
             cy = y;
-            rad = 0;
         }
-        int finalRadius = Math.max(getAppDrawerController().getDrawer().getWidth(), getAppDrawerController().getDrawer().getHeight());
-        getAppDrawerController().open(cx, cy, rad, finalRadius);
+        getAppDrawerController().open(cx, cy);
     }
 
     public final void closeAppDrawer() {
-        int finalRadius = Math.max(getAppDrawerController().getDrawer().getWidth(), getAppDrawerController().getDrawer().getHeight());
-        getAppDrawerController().close(cx, cy, rad, finalRadius);
+        getAppDrawerController().close(cx, cy);
     }
 }
