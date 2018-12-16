@@ -27,6 +27,7 @@ public class ItemViewFactory {
     public static View getItemView(final Context context, final DesktopCallback callback, final DragAction.Action type, final Item item) {
         AppItemView.Builder builder = new AppItemView.Builder(context);
         builder.setIconSize(Setup.appSettings().getIconSize());
+        builder.vibrateWhenLongPress(Setup.appSettings().isGestureFeedback());
         View view = null;
 
         switch(type) {
@@ -69,25 +70,17 @@ public class ItemViewFactory {
             case APP:
                 final App app = Setup.appLoader().findItemApp(item);
                 if (app == null) break;
-                view = builder.setAppItem(item)
-                        .vibrateWhenLongPress()
-                        .getView();
+                view = builder.setAppItem(item).getView();
                 break;
             case SHORTCUT:
-                view = builder.setShortcutItem(item)
-                        .vibrateWhenLongPress()
-                        .getView();
+                view = builder.setShortcutItem(item).getView();
                 break;
             case GROUP:
-                view = builder.setGroupItem(context, callback, item)
-                        .vibrateWhenLongPress()
-                        .getView();
+                view = builder.setGroupItem(context, callback, item).getView();
                 view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
                 break;
             case ACTION:
-                view = builder.setActionItem(item)
-                        .vibrateWhenLongPress()
-                        .getView();
+                view = builder.setActionItem(item).getView();
                 break;
             case WIDGET:
                 if (HomeActivity._appWidgetHost == null) break;

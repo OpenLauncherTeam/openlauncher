@@ -7,6 +7,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -311,7 +314,16 @@ public class AppItemView extends View implements Drawable.Callback {
                         return false;
                     }
                     if (_view._vibrateWhenLongPress) {
-                        v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                        Vibrator vibrator = (Vibrator) _view.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                        if (vibrator == null) {
+                            // some manufacturers do not vibrate on long press
+                            // might as well make this a fallback method
+                            v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            vibrator.vibrate(VibrationEffect.createOneShot(50, 80));
+                        } else {
+                            vibrator.vibrate(50);
+                        }
                     }
                     DragHandler.startDrag(_view, item, action, eventAction);
                     return true;
@@ -335,8 +347,8 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder vibrateWhenLongPress() {
-            _view._vibrateWhenLongPress = true;
+        public Builder vibrateWhenLongPress(boolean vibrate) {
+            _view._vibrateWhenLongPress = vibrate;
             return this;
         }
     }
