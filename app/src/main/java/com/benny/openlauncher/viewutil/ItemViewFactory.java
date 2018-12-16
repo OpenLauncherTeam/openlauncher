@@ -19,94 +19,74 @@ import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
-import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.widget.CellContainer;
 import com.benny.openlauncher.widget.WidgetView;
 
 public class ItemViewFactory {
-    public static View getItemView(final Context context, final DesktopCallback callback, final Item item, int iconSize, boolean showLabel) {
+    public static View getItemView(final Context context, final DesktopCallback callback, final DragAction.Action type, final Item item) {
+        AppItemView.Builder builder = new AppItemView.Builder(context);
+        builder.setIconSize(Setup.appSettings().getIconSize());
         View view = null;
+
+        switch(type) {
+            case DRAWER:
+                builder.setLabelVisibility(Setup.appSettings().isDrawerShowLabel());
+                builder.setTextColor(Setup.appSettings().getDrawerLabelColor());
+                break;
+            case DESKTOP:
+            default:
+                builder.setLabelVisibility(Setup.appSettings().isDesktopShowLabel());
+                builder.setTextColor(Color.WHITE);
+                break;
+        }
+        if (callback != null) {
+            builder.withOnLongClick(item, type, new AppItemView.LongPressCallBack() {
+                @Override
+                public boolean readyForDrag(View view) {
+                    return true;
+                }
+
+                @Override
+                public void afterDrag(View view) {
+                    callback.setLastItem(item, view);
+                }
+            });
+        } else {
+            builder.withOnLongClick(item, type, new AppItemView.LongPressCallBack() {
+                @Override
+                public boolean readyForDrag(View view) {
+                    return true;
+                }
+
+                @Override
+                public void afterDrag(View view) {
+                    // do nothing
+                }
+            });
+        }
         switch (item.getType()) {
             case APP:
                 final App app = Setup.appLoader().findItemApp(item);
-                if (app == null) {
-                    break;
-                }
-                view = new AppItemView.Builder(context, iconSize)
-                        .setAppItem(item)
+                if (app == null) break;
+                view = builder.setAppItem(item)
                         .vibrateWhenLongPress()
-                        .withOnLongClick(item, DragAction.Action.APP, new AppItemView.LongPressCallBack() {
-                            @Override
-                            public boolean readyForDrag(View view) {
-                                return true;
-                            }
-
-                            @Override
-                            public void afterDrag(View view) {
-                                callback.setLastItem(item, view);
-                            }
-                        })
-                        .setLabelVisibility(showLabel)
-                        .setTextColor(Color.WHITE)
                         .getView();
                 break;
             case SHORTCUT:
-                view = new AppItemView.Builder(context, iconSize)
-                        .setShortcutItem(item)
+                view = builder.setShortcutItem(item)
                         .vibrateWhenLongPress()
-                        .withOnLongClick(item, DragAction.Action.SHORTCUT, new AppItemView.LongPressCallBack() {
-                            @Override
-                            public boolean readyForDrag(View view) {
-                                return true;
-                            }
-
-                            @Override
-                            public void afterDrag(View view) {
-                                callback.setLastItem(item, view);
-                            }
-                        })
-                        .setLabelVisibility(showLabel)
-                        .setTextColor(Color.WHITE)
                         .getView();
                 break;
             case GROUP:
-                view = new AppItemView.Builder(context, iconSize)
-                        .setGroupItem(context, callback, item, iconSize)
+                view = builder.setGroupItem(context, callback, item)
                         .vibrateWhenLongPress()
-                        .withOnLongClick(item, DragAction.Action.GROUP, new AppItemView.LongPressCallBack() {
-                            @Override
-                            public boolean readyForDrag(View view) {
-                                return true;
-                            }
-
-                            @Override
-                            public void afterDrag(View view) {
-                                callback.setLastItem(item, view);
-                            }
-                        })
-                        .setLabelVisibility(showLabel)
-                        .setTextColor(Color.WHITE)
                         .getView();
                 view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
                 break;
             case ACTION:
-                view = new AppItemView.Builder(context, iconSize)
-                        .setActionItem(item)
+                view = builder.setActionItem(item)
                         .vibrateWhenLongPress()
-                        .withOnLongClick(item, DragAction.Action.ACTION, new AppItemView.LongPressCallBack() {
-                            @Override
-                            public boolean readyForDrag(View view) {
-                                return true;
-                            }
-
-                            @Override
-                            public void afterDrag(View view) {
-                                callback.setLastItem(item, view);
-                            }
-                        })
-                        .setLabelVisibility(showLabel)
-                        .setTextColor(Color.WHITE)
                         .getView();
                 break;
             case WIDGET:
@@ -157,7 +137,7 @@ public class ItemViewFactory {
                             return false;
                         }
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                        DragHandler.startDrag(view, item, DragAction.Action.WIDGET, null);
+                        DragHandler.startDrag(view, item, DragAction.Action.DESKTOP, null);
 
                         callback.setLastItem(item, widgetContainer);
                         return true;

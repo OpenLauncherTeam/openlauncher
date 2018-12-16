@@ -12,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
+import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.viewutil.ItemViewFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,24 +135,7 @@ public class AppDrawerPage extends ViewPager {
 
             final App app = _apps.get(pos);
 
-            return AppItemView
-                    .createDrawerAppItemView(
-                            getContext(),
-                            HomeActivity._launcher,
-                            app,
-                            Setup.appSettings().getDrawerIconSize(),
-                            new AppItemView.LongPressCallBack() {
-                                @Override
-                                public boolean readyForDrag(View view) {
-                                    return true;
-                                }
-
-                                @Override
-                                public void afterDrag(View view) {
-                                    //This will be handled by the Drag N Drop listener in the Home
-                                    //home.closeAppDrawer();
-                                }
-                            });
+            return ItemViewFactory.getItemView(getContext(), null, DragAction.Action.DRAWER, Item.newAppItem(app));
         }
 
         public Adapter() {

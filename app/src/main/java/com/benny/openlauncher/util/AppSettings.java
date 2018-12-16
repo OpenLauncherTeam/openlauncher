@@ -191,10 +191,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.appContext(), R.color.materialRed));
     }
 
-    public int getDrawerIconSize() {
-        return getIconSize();
-    }
-
     public boolean isGestureFeedback() {
         return getBool(R.string.pref_key__gesture_feedback, false);
     }

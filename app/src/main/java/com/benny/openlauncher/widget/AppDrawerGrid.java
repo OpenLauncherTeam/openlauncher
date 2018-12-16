@@ -73,27 +73,25 @@ public class AppDrawerGrid extends FrameLayout {
                 getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 _itemWidth = getWidth() / _layoutManager.getSpanCount();
                 _itemHeightPadding = Tool.dp2px(20, getContext());
-                _apps = Setup.appLoader().getAllApps(getContext(), false);
-                ArrayList<DrawerAppItem> items = new ArrayList<>();
-                for (int i = 0; i < _apps.size(); i++) {
-                    items.add(new DrawerAppItem(_apps.get(i)));
-                }
-                _gridDrawerAdapter.set(items);
+                updateAdapter(Setup.appLoader().getAllApps(getContext(), false));
                 Setup.appLoader().addUpdateListener(new AppUpdateListener() {
                     @Override
                     public boolean onAppUpdated(List<App> apps) {
-                        _apps = apps;
-                        ArrayList<DrawerAppItem> items = new ArrayList<>();
-                        for (int i = 0; i < apps.size(); i++) {
-                            items.add(new DrawerAppItem(apps.get(i)));
-                        }
-                        _gridDrawerAdapter.set(items);
-
+                        updateAdapter(apps);
                         return false;
                     }
                 });
             }
         });
+    }
+
+    public void updateAdapter(List<App> apps) {
+        _apps = apps;
+        ArrayList<DrawerAppItem> items = new ArrayList<>();
+        for (int i = 0; i < apps.size(); i++) {
+            items.add(new DrawerAppItem(apps.get(i)));
+        }
+        _gridDrawerAdapter.set(items);
     }
 
     @Override

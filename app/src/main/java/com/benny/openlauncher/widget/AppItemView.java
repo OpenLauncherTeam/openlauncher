@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
@@ -63,7 +62,8 @@ public class AppItemView extends View implements Drawable.Callback {
     }
 
     public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item, int iconSize) {
-        AppItemView.Builder b = new AppItemView.Builder(context, iconSize)
+        AppItemView.Builder b = new AppItemView.Builder(context)
+                .setIconSize(iconSize)
                 .setTextColor(Setup.appSettings().getFolderLabelColor());
         if (groupItem.getType() == Item.Type.SHORTCUT) {
             b.setShortcutItem(groupItem);
@@ -76,15 +76,6 @@ public class AppItemView extends View implements Drawable.Callback {
         return b.getView();
     }
 
-    public static View createDrawerAppItemView(Context context, final HomeActivity homeActivity, App app, int iconSize, AppItemView.LongPressCallBack longPressCallBack) {
-        return new AppItemView.Builder(context, iconSize)
-                .setAppItem(app)
-                .withOnLongClick(Item.newAppItem(app), DragAction.Action.APP_DRAWER, longPressCallBack)
-                .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
-                .setTextColor(Setup.appSettings().getDrawerLabelColor())
-                .getView();
-    }
-
     @Override
     public Bitmap getDrawingCache() {
         return Tool.drawableToBitmap(_icon);
@@ -94,11 +85,11 @@ public class AppItemView extends View implements Drawable.Callback {
         return this;
     }
 
-    public Drawable getCurrentIcon() {
+    public Drawable getIcon() {
         return _icon;
     }
 
-    public void setCurrentIcon(Drawable icon) {
+    public void setIcon(Drawable icon) {
         _icon = icon;
     }
 
@@ -128,12 +119,6 @@ public class AppItemView extends View implements Drawable.Callback {
 
     public void setTargetedHeightPadding(int padding) {
         _targetedHeightPadding = padding;
-    }
-
-    public void reset() {
-        _label = "";
-        _icon = null;
-        invalidate();
     }
 
     @Override
@@ -204,14 +189,12 @@ public class AppItemView extends View implements Drawable.Callback {
     public static class Builder {
         AppItemView _view;
 
-        public Builder(Context context, int iconSize) {
+        public Builder(Context context) {
             _view = new AppItemView(context);
-            _view.setIconSize(Tool.dp2px(iconSize, _view.getContext()));
         }
 
-        public Builder(AppItemView view, int iconSize) {
+        public Builder(AppItemView view) {
             _view = view;
-            view.setIconSize(Tool.dp2px(iconSize, view.getContext()));
         }
 
         public static OnLongClickListener getLongClickDragAppListener(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
@@ -237,7 +220,7 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder setAppItem(final App app) {
             _view.setLabel(app.getLabel());
-            _view.setCurrentIcon(app.getIcon());
+            _view.setIcon(app.getIcon());
             _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -254,7 +237,7 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder setAppItem(final Item item) {
             _view.setLabel(item.getLabel());
-            _view.setCurrentIcon(item.getIcon());
+            _view.setIcon(item.getIcon());
             _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -271,7 +254,7 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder setShortcutItem(final Item item) {
             _view.setLabel(item.getLabel());
-            _view.setCurrentIcon(item.getIcon());
+            _view.setIcon(item.getIcon());
             _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -286,14 +269,14 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder setGroupItem(Context context, final DesktopCallback callback, final Item item, int iconSize) {
+        public Builder setGroupItem(Context context, final DesktopCallback callback, final Item item) {
             _view.setLabel(item.getLabel());
-            _view.setCurrentIcon(new GroupIconDrawable(context, item, iconSize));
+            _view.setIcon(new GroupIconDrawable(context, item, Setup.appSettings().getIconSize()));
             _view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (HomeActivity.Companion.getLauncher() != null && (HomeActivity.Companion.getLauncher()).getGroupPopup().showPopup(item, v, callback)) {
-                        ((GroupIconDrawable) ((AppItemView) v).getCurrentIcon()).popUp();
+                        ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
                     }
                 }
             });
@@ -302,7 +285,7 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder setActionItem(Item item) {
             _view.setLabel(item.getLabel());
-            _view.setCurrentIcon(ContextCompat.getDrawable(Setup.appContext(), R.drawable.ic_apps_white_48dp));
+            _view.setIcon(ContextCompat.getDrawable(Setup.appContext(), R.drawable.ic_apps_white_48dp));
             switch (item.getActionValue()) {
                 case Definitions.ACTION_LAUNCHER:
                     _view.setOnClickListener(new OnClickListener() {
@@ -342,8 +325,8 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder setFontSize(Context context, float fontSizeSp) {
-            _view._textPaint.setTextSize(Tool.sp2px(context, fontSizeSp));
+        public Builder setIconSize(int iconSize) {
+            _view.setIconSize(Tool.dp2px(iconSize, _view.getContext()));
             return this;
         }
 

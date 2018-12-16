@@ -207,7 +207,6 @@ public class SearchBar extends FrameLayout {
                 List<IconLabelItem> items = new ArrayList<>();
                 for (int i = 0; i < apps.size(); i++) {
                     final App app = apps.get(i);
-                    final int finalI = i;
                     items.add(new IconLabelItem(app.getIcon(), app.getLabel())
                             .withIconSize(getContext(), 50)
                             .withTextColor(Color.WHITE)
@@ -220,11 +219,9 @@ public class SearchBar extends FrameLayout {
                                     Tool.startApp(v.getContext(), app);
                                 }
                             })
-                            .withOnLongClickListener(AppItemView.Builder.getLongClickDragAppListener(Item.newAppItem(app), DragAction.Action.APP, new AppItemView.LongPressCallBack() {
+                            .withOnLongClickListener(AppItemView.Builder.getLongClickDragAppListener(Item.newAppItem(app), DragAction.Action.SEARCH, new AppItemView.LongPressCallBack() {
                                 @Override
                                 public boolean readyForDrag(View view) {
-                                    if (finalI == -1) return false;
-
                                     _expanded = !_expanded;
                                     collapseInternal();
                                     return true;

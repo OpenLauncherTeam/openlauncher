@@ -256,7 +256,7 @@ public final class ItemOptionView extends FrameLayout {
             _overlayPopup.setTranslationX(x);
             _overlayPopup.setTranslationY(y);
             _overlayPopup.setAlpha(1.0f);
-            _overlayPopupAdapter.add((List) popupItem);
+            _overlayPopupAdapter.add(popupItem);
             _overlayPopupAdapter.withOnClickListener(listener);
         }
     }

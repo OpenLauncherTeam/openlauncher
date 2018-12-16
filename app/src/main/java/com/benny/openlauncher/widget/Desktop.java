@@ -3,13 +3,11 @@ package com.benny.openlauncher.widget;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
@@ -329,15 +327,11 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
     }
 
     public final void updateIconProjection(int x, int y) {
-        HomeActivity launcher;
-        ItemOptionView dragNDropView;
+        HomeActivity launcher = HomeActivity.Companion.getLauncher();
+        ItemOptionView dragNDropView = launcher.getItemOptionView();
         DragState state = getCurrentPage().peekItemAndSwap(x, y, _coordinate);
-        if (_previousDragPoint != null && !_previousDragPoint.equals(_coordinate)) {
-            launcher = HomeActivity.Companion.getLauncher();
-            if (launcher != null) {
-                dragNDropView = launcher.getItemOptionView();
-                dragNDropView.cancelFolderPreview();
-            }
+        if (!_coordinate.equals(_previousDragPoint)) {
+            dragNDropView.cancelFolderPreview();
         }
         _previousDragPoint.set(_coordinate.x, _coordinate.y);
         switch (state) {
@@ -348,15 +342,12 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
             case ItemViewNotFound:
                 break;
             case CurrentOccupied:
-                Object action;
-                launcher = HomeActivity.Companion.getLauncher();
-                dragNDropView = launcher.getItemOptionView();
+                Item.Type type = dragNDropView.getDragItem()._type;
                 for (CellContainer page : _pages) {
                     page.clearCachedOutlineBitmap();
                 }
-                action = dragNDropView.getDragAction();
-                if (!Action.WIDGET.equals(action) || !Action.ACTION.equals(action) && (getCurrentPage().coordinateToChildView(_coordinate) instanceof AppItemView)) {
-                    launcher.getItemOptionView().showFolderPreviewAt(this, getCurrentPage().getCellWidth() * (_coordinate.x + 0.5f), getCurrentPage().getCellHeight() * (_coordinate.y + 0.5f));
+                if (!type.equals(Type.WIDGET) && (getCurrentPage().coordinateToChildView(_coordinate) instanceof AppItemView)) {
+                    dragNDropView.showFolderPreviewAt(this, getCurrentPage().getCellWidth() * (_coordinate.x + 0.5f), getCurrentPage().getCellHeight() * (_coordinate.y + 0.5f));
                 }
                 break;
             default:
@@ -392,7 +383,7 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
     }
 
     public boolean addItemToPage(@NonNull Item item, int page) {
-        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDesktopIconSize(), Setup.appSettings().isDesktopShowLabel());
+        View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item);
         if (itemView == null) {
             HomeActivity._db.deleteItem(item, true);
             return false;
@@ -410,7 +401,7 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
         item._location = Item.LOCATION_DESKTOP;
         item._x = positionToLayoutPrams.getX();
         item._y = positionToLayoutPrams.getY();
-        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDesktopIconSize(), Setup.appSettings().isDesktopShowLabel());
+        View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item);
         if (itemView != null) {
             itemView.setLayoutParams(positionToLayoutPrams);
             getCurrentPage().addView(itemView);
@@ -422,7 +413,7 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
         item._location = Item.LOCATION_DESKTOP;
         item._x = x;
         item._y = y;
-        View itemView = ItemViewFactory.getItemView(getContext(), this, item, Setup.appSettings().getDesktopIconSize(), Setup.appSettings().isDesktopShowLabel());
+        View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item);
         if (itemView == null) {
             return false;
         }

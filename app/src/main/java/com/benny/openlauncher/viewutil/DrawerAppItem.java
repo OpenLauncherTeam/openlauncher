@@ -28,8 +28,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
 
             @Override
             public void afterDrag(View view) {
-                //This will be handled by the Drag N Drop listener in the Home
-                //Home.Companion.getLauncher().closeAppDrawer();
+                // do nothing
             }
         };
     }
@@ -57,14 +56,8 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
     public void bindView(DrawerAppItem.ViewHolder holder, List payloads) {
         holder.builder
                 .setAppItem(_app)
-                .withOnLongClick(Item.newAppItem(_app), DragAction.Action.APP_DRAWER, _onLongClickCallback);
+                .withOnLongClick(Item.newAppItem(_app), DragAction.Action.DRAWER, _onLongClickCallback);
         super.bindView(holder, payloads);
-    }
-
-    @Override
-    public void unbindView(DrawerAppItem.ViewHolder holder) {
-        super.unbindView(holder);
-        holder.appItemView.reset();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -77,7 +70,8 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
             appItemView.setTargetedWidth(AppDrawerGrid._itemWidth);
             appItemView.setTargetedHeightPadding(AppDrawerGrid._itemHeightPadding);
 
-            builder = new AppItemView.Builder(appItemView, Setup.appSettings().getDrawerIconSize())
+            builder = new AppItemView.Builder(appItemView)
+                    .setIconSize(Setup.appSettings().getIconSize())
                     .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
                     .setTextColor(Setup.appSettings().getDrawerLabelColor());
         }

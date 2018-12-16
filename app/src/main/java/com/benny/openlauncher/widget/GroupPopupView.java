@@ -122,10 +122,8 @@ public class GroupPopupView extends RevealFrameLayout {
 
                         removeItem(c, item, groupItem, (AppItemView) itemView);
 
-                        DragAction.Action action = groupItem.getType() == Item.Type.SHORTCUT ? DragAction.Action.SHORTCUT : DragAction.Action.APP;
-
                         // start the drag action
-                        DragHandler.startDrag(view, groupItem, action, null);
+                        DragHandler.startDrag(view, groupItem, DragAction.Action.DESKTOP, null);
 
                         collapse();
 
@@ -159,8 +157,8 @@ public class GroupPopupView extends RevealFrameLayout {
         _dismissListener = new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                if (((AppItemView) itemView).getCurrentIcon() != null) {
-                    ((GroupIconDrawable) ((AppItemView) itemView).getCurrentIcon()).popBack();
+                if (((AppItemView) itemView).getIcon() != null) {
+                    ((GroupIconDrawable) ((AppItemView) itemView).getIcon()).popBack();
                 }
             }
         };
@@ -293,7 +291,7 @@ public class GroupPopupView extends RevealFrameLayout {
         HomeActivity._db.saveItem(dragOutItem, Definitions.ItemState.Visible);
         HomeActivity._db.saveItem(currentItem);
 
-        currentView.setCurrentIcon(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
+        currentView.setIcon(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
     }
 
     public void updateItem(DesktopCallback callback, final Item currentItem, View currentView) {

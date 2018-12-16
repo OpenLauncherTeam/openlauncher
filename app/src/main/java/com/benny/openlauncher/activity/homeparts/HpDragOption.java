@@ -54,17 +54,7 @@ public class HpDragOption {
 
             @Override
             public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
-                switch (action) {
-                    case APP:
-                    case WIDGET:
-                    case SEARCH_RESULT:
-                    case APP_DRAWER:
-                    case GROUP:
-                    case SHORTCUT:
-                    case ACTION:
-                        return true;
-                }
-                return false;
+                return true;
             }
 
             @Override
@@ -108,17 +98,7 @@ public class HpDragOption {
 
             @Override
             public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
-                switch (action) {
-                    case APP:
-                    case WIDGET:
-                    case SEARCH_RESULT:
-                    case APP_DRAWER:
-                    case GROUP:
-                    case SHORTCUT:
-                    case ACTION:
-                        return true;
-                }
-                return false;
+                return true;
             }
 
             @Override
@@ -150,7 +130,7 @@ public class HpDragOption {
         dragNDropView.registerDropTarget(new ItemOptionView.DropTargetListener(_homeActivity.getDesktop()) {
             @Override
             public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
-                if (!DragAction.Action.SEARCH_RESULT.equals(action))
+                if (!DragAction.Action.SEARCH.equals(action))
                     showItemPopup(dragNDropView, _homeActivity);
                 return true;
             }
@@ -170,7 +150,7 @@ public class HpDragOption {
             public void onDrop(@NonNull Action action, @NonNull PointF location, @NonNull Item item) {
                 // this statement makes sure that adding an app multiple times from the app drawer works
                 // the app will get a new id every time
-                if (DragAction.Action.APP_DRAWER.equals(action)) {
+                if (DragAction.Action.DRAWER.equals(action)) {
                     if (_homeActivity.getAppDrawerController()._isOpen) {
                         return;
                     }
@@ -201,7 +181,7 @@ public class HpDragOption {
 
             @Override
             public void onMove(@NonNull Action action, @NonNull PointF location) {
-                if (action != DragAction.Action.SEARCH_RESULT) {
+                if (action != DragAction.Action.SEARCH) {
                     _homeActivity.getDesktop().updateIconProjection((int) location.x, (int) location.y);
                 }
             }
@@ -232,11 +212,7 @@ public class HpDragOption {
         dragNDropView.registerDropTarget(new ItemOptionView.DropTargetListener(_homeActivity.getDock()) {
             @Override
             public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
-                boolean ok = !DragAction.Action.WIDGET.equals(action);
-                if (ok && isInside) {
-                    //showItemPopup()
-                }
-                return ok;
+                return true;
             }
 
             @Override
@@ -246,7 +222,7 @@ public class HpDragOption {
 
             @Override
             public void onDrop(@NonNull Action action, @NonNull PointF location, @NonNull Item item) {
-                if (DragAction.Action.APP_DRAWER.equals(action)) {
+                if (DragAction.Action.DRAWER.equals(action)) {
                     if (_homeActivity.getAppDrawerController()._isOpen) {
                         return;
                     }
@@ -284,7 +260,7 @@ public class HpDragOption {
 
             @Override
             public void onMove(@NonNull Action action, @NonNull PointF location) {
-                if (action != DragAction.Action.SEARCH_RESULT) {
+                if (action != DragAction.Action.SEARCH) {
                     _homeActivity.getDock().updateIconProjection((int) location.x, (int) location.y);
                 }
             }
@@ -302,9 +278,6 @@ public class HpDragOption {
 
             @Override
             public void onEnd() {
-                if (DragAction.Action.WIDGET.equals(dragNDropView.getDragAction())) {
-                    _homeActivity.getDesktop().revertLastItem();
-                }
                 _homeActivity.getDock().clearCachedOutlineBitmap();
             }
         });
@@ -317,7 +290,7 @@ public class HpDragOption {
             case APP:
             case SHORTCUT:
             case GROUP: {
-                if (dragNDropView.getDragAction().equals(Action.APP_DRAWER)) {
+                if (dragNDropView.getDragAction().equals(Action.DRAWER)) {
                     itemList.add(uninstallItem);
                     itemList.add(infoItem);
                 } else {
