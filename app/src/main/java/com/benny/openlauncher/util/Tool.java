@@ -10,19 +10,18 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
@@ -30,47 +29,44 @@ import com.benny.openlauncher.model.App;
 import android.support.annotation.NonNull;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Tool {
-
     public static void hideKeyboard(Context context, View view) {
-        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputMethodManager == null) return;
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     public static void showKeyboard(Context context, View view) {
-        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(view.getWindowToken(), InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
+        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputMethodManager == null) return;
+        inputMethodManager.toggleSoftInputFromWindow(view.getWindowToken(), InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
-    public static void visibleViews(View... views) {
-        visibleViews(200, 0, views);
-    }
-
-    public static void visibleViews(long duration, View... views) {
-        visibleViews(duration, 0, views);
-    }
-
-    public static void visibleViews(long duration, long delay, View... views) {
-        if (views == null) return;
-        for (View view : views) {
-            if (view == null) continue;
-            view.setVisibility(View.VISIBLE);
-            view.animate().alpha(1).setStartDelay(delay).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator());
+    public static void vibrate(View view) {
+        Vibrator vibrator = (Vibrator) view.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator == null) {
+            // some manufacturers do not vibrate on long press
+            // might as well make this a fallback method
+            view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createOneShot(50, 80));
+        } else {
+            vibrator.vibrate(50);
         }
     }
 
-    public static void invisibleViews(View... views) {
+    public static void visibleViews(long duration, View... views) {
         if (views == null) return;
-        for (final View view : views) {
+        for (View view : views) {
             if (view == null) continue;
-            view.animate().alpha(0).setStartDelay(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+            view.animate().alpha(1).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withStartAction(new Runnable() {
                 @Override
                 public void run() {
-                    view.setVisibility(View.INVISIBLE);
+                    view.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -80,36 +76,10 @@ public class Tool {
         if (views == null) return;
         for (final View view : views) {
             if (view == null) continue;
-            view.animate().alpha(0).setStartDelay(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+            view.animate().alpha(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                 @Override
                 public void run() {
                     view.setVisibility(View.INVISIBLE);
-                }
-            });
-        }
-    }
-
-    public static void invisibleViews(long duration, long delay, View... views) {
-        if (views == null) return;
-        for (final View view : views) {
-            if (view == null) continue;
-            view.animate().alpha(0).setStartDelay(delay).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
-                @Override
-                public void run() {
-                    view.setVisibility(View.INVISIBLE);
-                }
-            });
-        }
-    }
-
-    public static void goneViews(View... views) {
-        if (views == null) return;
-        for (final View view : views) {
-            if (view == null) continue;
-            view.animate().alpha(0).setStartDelay(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
-                @Override
-                public void run() {
-                    view.setVisibility(View.GONE);
                 }
             });
         }
@@ -119,7 +89,7 @@ public class Tool {
         if (views == null) return;
         for (final View view : views) {
             if (view == null) continue;
-            view.animate().alpha(0).setStartDelay(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+            view.animate().alpha(0).setDuration(duration).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                 @Override
                 public void run() {
                     view.setVisibility(View.GONE);
@@ -147,18 +117,12 @@ public class Tool {
         }, (long) (animTime * runActionAtPercent));
     }
 
-    public static void toast(Context context, String str) {
-        Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
-    }
-
     public static void toast(Context context, int str) {
         Toast.makeText(context, context.getResources().getString(str), Toast.LENGTH_SHORT).show();
     }
 
-    public static int toPx(int dp) {
-        float f = (float) dp;
-        Resources system = Resources.getSystem();
-        return (int) (f * system.getDisplayMetrics().density);
+    public static void toast(Context context, String str) {
+        Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
     }
 
     public static boolean isPackageInstalled(@NonNull String packageName, @NonNull PackageManager packageManager) {
@@ -170,14 +134,16 @@ public class Tool {
         }
     }
 
-    public static int dp2px(int dp, Context context) {
-        Resources resources = context.getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics()));
+    public static int dp2px(float dp) {
+        Resources resources = Resources.getSystem();
+        float px = dp * resources.getDisplayMetrics().density;
+        return (int) Math.ceil(px);
     }
 
-    public static int sp2px(Context context, float spValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (spValue * fontScale + 0.5f);
+    public static int sp2px(float sp) {
+        Resources resources = Resources.getSystem();
+        float px = sp * resources.getDisplayMetrics().scaledDensity;
+        return (int) Math.ceil(px);
     }
 
     public static int clampInt(int target, int min, int max) {
@@ -188,25 +154,9 @@ public class Tool {
         return Math.max(min, Math.min(max, target));
     }
 
-    public static void startApp(Context context, App app) {
-        if (HomeActivity.Companion.getLauncher() != null)
-            HomeActivity.Companion.getLauncher().onStartApp(context, app, null);
-    }
-
-    public static void startIntent(Context context, Intent intent) {
-        try {
-            context.startActivity(intent);
-        } catch (Exception e) {
-            // there is no activity to handle this intent
-            e.printStackTrace();
-        }
-    }
-
     public static void startApp(Context context, App app, View view) {
         HomeActivity launcher = HomeActivity.Companion.getLauncher();
-        if (launcher != null) {
-            launcher.onStartApp(context, app, view);
-        }
+        launcher.onStartApp(context, app, view);
     }
 
     public static Bitmap drawableToBitmap(Drawable drawable) {
@@ -223,7 +173,7 @@ public class Tool {
 
         Bitmap bitmap;
         if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            // single color bitmap will be created of 1x1 pixel
+            // single color bitmap will be created
             bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
         } else {
             bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -237,33 +187,13 @@ public class Tool {
     }
 
     public static Point convertPoint(Point fromPoint, View fromView, View toView) {
-        int[] fromCoord = new int[2];
-        int[] toCoord = new int[2];
-        fromView.getLocationOnScreen(fromCoord);
-        toView.getLocationOnScreen(toCoord);
+        int[] fromCoordinate = new int[2];
+        int[] toCoordinate = new int[2];
+        fromView.getLocationOnScreen(fromCoordinate);
+        toView.getLocationOnScreen(toCoordinate);
 
-        Point toPoint = new Point(fromCoord[0] - toCoord[0] + fromPoint.x,
-                fromCoord[1] - toCoord[1] + fromPoint.y);
-
+        Point toPoint = new Point(fromCoordinate[0] - toCoordinate[0] + fromPoint.x, fromCoordinate[1] - toCoordinate[1] + fromPoint.y);
         return toPoint;
-    }
-
-    public static void vibrate(View view) {
-        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-    }
-
-    public static void print(Object o) {
-        if (o != null) {
-            Log.e("Hey", o.toString());
-        }
-    }
-
-    public static void print(Object... o) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < o.length; i++) {
-            sb.append(o[i].toString()).append("  ");
-        }
-        Log.e("Hey", sb.toString());
     }
 
     public static boolean isIntentActionAvailable(Context context, String action) {
@@ -341,51 +271,5 @@ public class Tool {
                 e.printStackTrace();
             }
         }
-    }
-
-    public static void copy(Context context, String stringIn, String stringOut) {
-        try {
-            File desktopData = new File(stringOut);
-            desktopData.delete();
-            File dockData = new File(stringOut);
-            dockData.delete();
-            File generalSettings = new File(stringOut);
-            generalSettings.delete();
-            Tool.print("deleted");
-
-            FileInputStream in = new FileInputStream(stringIn);
-            FileOutputStream out = new FileOutputStream(stringOut);
-
-            byte[] buffer = new byte[1024];
-            int read;
-            while ((read = in.read(buffer)) != -1) {
-                out.write(buffer, 0, read);
-            }
-            in.close();
-
-            // write the output file
-            out.flush();
-            out.close();
-            Tool.print("copied");
-
-        } catch (Exception e) {
-            Toast.makeText(context, R.string.toast_backup_error, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public static <A extends App> List<A> getRemovedApps(List<A> oldApps, List<A> newApps) {
-        List<A> removed = new ArrayList<>();
-        // if this is the first call to this function and we did not know any app yet, we return an empty list
-        if (oldApps.size() == 0) {
-            return removed;
-        }
-        // we can't rely on sizes because apps may have been installed or uninstalled
-        for (int i = 0; i < oldApps.size(); i++) {
-            if (!newApps.contains(oldApps.get(i))) {
-                removed.add(oldApps.get(i));
-                break;
-            }
-        }
-        return removed;
     }
 }

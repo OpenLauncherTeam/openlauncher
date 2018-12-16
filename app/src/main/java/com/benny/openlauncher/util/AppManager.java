@@ -193,7 +193,7 @@ public class AppManager {
 
             AppSettings appSettings = AppSettings.get();
             if (!appSettings.getIconPack().isEmpty() && Tool.isPackageInstalled(appSettings.getIconPack(), _packageManager)) {
-                IconPackHelper.applyIconPack(AppManager.this, Tool.dp2px(appSettings.getIconSize(), _context), appSettings.getIconPack(), _apps);
+                IconPackHelper.applyIconPack(AppManager.this, Tool.dp2px(appSettings.getIconSize()), appSettings.getIconPack(), _apps);
             }
             return null;
         }
@@ -203,7 +203,7 @@ public class AppManager {
 
             notifyUpdateListeners(_apps);
 
-            List<App> removed = Tool.getRemovedApps(tempApps, _apps);
+            List<App> removed = getRemovedApps(tempApps, _apps);
             if (removed.size() > 0) {
                 notifyRemoveListeners(removed);
             }
@@ -216,6 +216,21 @@ public class AppManager {
 
             super.onPostExecute(result);
         }
+    }
+
+    public static List<App> getRemovedApps(List<App> oldApps, List<App> newApps) {
+        List<App> removed = new ArrayList<>();
+        // if this is the first call then return an empty list
+        if (oldApps.size() == 0) {
+            return removed;
+        }
+        for (int i = 0; i < oldApps.size(); i++) {
+            if (!newApps.contains(oldApps.get(i))) {
+                removed.add(oldApps.get(i));
+                break;
+            }
+        }
+        return removed;
     }
 
     public static abstract class AppUpdatedListener implements AppUpdateListener {

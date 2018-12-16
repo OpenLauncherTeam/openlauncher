@@ -59,20 +59,17 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     private void detectSwipe(MotionEvent ev) {
         switch (ev.getAction()) {
             case 0:
-                Tool.print("ACTION_DOWN");
                 _startPosX = ev.getX();
                 _startPosY = ev.getY();
                 break;
             case 1:
-                Tool.print("ACTION_UP");
-                Tool.print(Integer.valueOf((int) ev.getX()), Integer.valueOf((int) ev.getY()));
                 if (_startPosY - ev.getY() > 150.0f && Setup.appSettings().getGestureDockSwipeUp()) {
-                    Point p = new Point((int) ev.getX(), (int) ev.getY());
-                    p = Tool.convertPoint(p, this, _homeActivity.getAppDrawerController());
+                    Point point = new Point((int) ev.getX(), (int) ev.getY());
+                    point = Tool.convertPoint(point, this, _homeActivity.getAppDrawerController());
                     if (Setup.appSettings().isGestureFeedback()) {
                         Tool.vibrate(this);
                     }
-                    _homeActivity.openAppDrawer(this, p.x, p.y);
+                    _homeActivity.openAppDrawer(this, point.x, point.y);
                     break;
                 }
             default:
@@ -99,7 +96,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
                 Item.Type type = dragNDropView.getDragItem()._type;
                 clearCachedOutlineBitmap();
                 if (!type.equals(Item.Type.WIDGET) && (coordinateToChildView(_coordinate) instanceof AppItemView)) {
-                    dragNDropView.showFolderPreviewAt(this, getCellWidth() * (_coordinate.x + 0.5f), getCellHeight() * (_coordinate.y + 0.5f) - (Setup.appSettings().isDockShowLabel() ? Tool.toPx(7) : 0));
+                    dragNDropView.showFolderPreviewAt(this, getCellWidth() * (_coordinate.x + 0.5f), getCellHeight() * (_coordinate.y + 0.5f) - (Setup.appSettings().isDockShowLabel() ? Tool.dp2px(7) : 0));
                 }
                 break;
             default:
@@ -119,8 +116,8 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         if (!isInEditMode()) {
             // set the height for the dock based on the number of rows and the show label preference
             int iconSize = Setup.appSettings().getDockIconSize();
-            int height = Tool.dp2px((iconSize + 20) * getCellSpanV(), _homeActivity);
-            if (Setup.appSettings().isDockShowLabel()) height += Tool.dp2px(20, getContext());
+            int height = Tool.dp2px((iconSize + 20) * getCellSpanV());
+            if (Setup.appSettings().isDockShowLabel()) height += Tool.dp2px(20);
             getLayoutParams().height = height;
             setMeasuredDimension(View.getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec), height);
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);

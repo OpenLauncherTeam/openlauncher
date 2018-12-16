@@ -27,7 +27,7 @@ public class CircleDrawable extends Drawable {
     public CircleDrawable(Context context, Drawable icon, int color) {
         _icon = Tool.drawableToBitmap(icon);
 
-        _iconPadding = Tool.dp2px(6, context);
+        _iconPadding = Tool.dp2px(6);
 
         _iconSizeReal = icon.getIntrinsicHeight();
         _iconSize = icon.getIntrinsicHeight() + _iconPadding * 2;

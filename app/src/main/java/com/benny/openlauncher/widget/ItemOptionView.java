@@ -235,14 +235,13 @@ public final class ItemOptionView extends FrameLayout {
         if (canvas != null && _showFolderPreview && !_previewLocation.equals(-1.0f, -1.0f)) {
             _folderPreviewScale += 0.08f;
             _folderPreviewScale = Tool.clampFloat(_folderPreviewScale, 0.5f, 1.0f);
-            canvas.drawCircle(_previewLocation.x, _previewLocation.y, ((float) Tool.toPx((Setup.appSettings().getDesktopIconSize() / 2) + 10)) * _folderPreviewScale, _paint);
+            canvas.drawCircle(_previewLocation.x, _previewLocation.y, ((float) Tool.dp2px((Setup.appSettings().getDesktopIconSize() / 2) + 10)) * _folderPreviewScale, _paint);
         }
         if (_showFolderPreview) {
             invalidate();
         }
     }
 
-    @SuppressLint({"ResourceType"})
     public void onViewAdded(@Nullable View child) {
         super.onViewAdded(child);
         _overlayView.bringToFront();
@@ -338,7 +337,6 @@ public final class ItemOptionView extends FrameLayout {
         return super.onInterceptTouchEvent(event);
     }
 
-    @SuppressLint({"ClickableViewAccessibility"})
     public boolean onTouchEvent(@Nullable MotionEvent event) {
         if (event != null) {
             if (_dragging) {

@@ -72,7 +72,7 @@ public class AppDrawerGrid extends FrameLayout {
             public void onGlobalLayout() {
                 getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 _itemWidth = getWidth() / _layoutManager.getSpanCount();
-                _itemHeightPadding = Tool.dp2px(20, getContext());
+                _itemHeightPadding = Tool.dp2px(20);
                 updateAdapter(Setup.appLoader().getAllApps(getContext(), false));
                 Setup.appLoader().addUpdateListener(new AppUpdateListener() {
                     @Override

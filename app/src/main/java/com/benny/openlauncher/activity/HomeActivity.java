@@ -456,21 +456,21 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     public final void dimBackground() {
-        Tool.visibleViews(getBackground());
+        Tool.visibleViews(200, getBackground());
     }
 
     public final void unDimBackground() {
-        Tool.invisibleViews(getBackground());
+        Tool.invisibleViews(200, getBackground());
     }
 
     public final void clearRoomForPopUp() {
-        Tool.invisibleViews(getDesktop());
+        Tool.invisibleViews(200, getDesktop());
         updateDesktopIndicator(false);
         updateDock(false);
     }
 
     public final void unClearRoomForPopUp() {
-        Tool.visibleViews(getDesktop());
+        Tool.visibleViews(200, getDesktop());
         updateDesktopIndicator(true);
         updateDock(true);
     }
@@ -496,7 +496,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             if (appSettings.getSearchBarEnable()) {
                 Tool.invisibleViews(100, getSearchBar());
             } else {
-                Tool.goneViews(getSearchBar());
+                Tool.goneViews(100, getSearchBar());
             }
         }
     }
@@ -676,7 +676,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             if (view instanceof AppItemView) {
                 AppItemView appItemView = (AppItemView) view;
                 if (appItemView != null && appItemView.getShowLabel()) {
-                    cy -= Tool.dp2px(14, this) / 2f;
+                    cy -= Tool.dp2px(14) / 2f;
                 }
             }
             cy -= getAppDrawerController().getPaddingTop();

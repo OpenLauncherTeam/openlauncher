@@ -204,7 +204,7 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
 
         private void enterDesktopEditMode() {
             float scaleFactor = 0.8f;
-            float translateFactor = (float) Tool.toPx(Setup.appSettings().getSearchBarEnable() ? 20 : 40);
+            float translateFactor = (float) Tool.dp2px(Setup.appSettings().getSearchBarEnable() ? 20 : 40);
             for (CellContainer v : _desktop.getPages()) {
                 v.setBlockTouch(true);
                 v.animateBackgroundShow();
@@ -422,12 +422,10 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
     }
 
     public void removeItem(final View view, boolean animate) {
-        Tool.print("Start Removing a view from Desktop");
         if (animate) {
             view.animate().setDuration(100).scaleX(0.0f).scaleY(0.0f).withEndAction(new Runnable() {
                 @Override
                 public void run() {
-                    Tool.print("Ok Removing a view from Desktop");
                     if (getCurrentPage().equals(view.getParent())) {
                         getCurrentPage().removeView(view);
                     }

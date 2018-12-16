@@ -48,7 +48,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     public IconLabelItem withIconSize(Context context, int iconSize) {
-        _iconSize = Tool.dp2px(iconSize, context);
+        _iconSize = Tool.dp2px(iconSize);
         return this;
     }
 
@@ -58,7 +58,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     }
 
     public IconLabelItem withIconPadding(Context context, int iconPadding) {
-        _iconPadding = Tool.dp2px(iconPadding, context);
+        _iconPadding = Tool.dp2px(iconPadding);
         return this;
     }
 

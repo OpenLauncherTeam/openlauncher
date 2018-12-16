@@ -513,7 +513,7 @@ public class CellContainer extends ViewGroup {
                     }
                     if (checkBoundary) {
                         Rect offsetCell = new Rect(cell);
-                        int dp2 = Tool.toPx(6);
+                        int dp2 = Tool.dp2px(6);
                         offsetCell.inset(dp2, dp2);
                         if (mY >= offsetCell.top && mY <= offsetCell.bottom && mX >= offsetCell.left && mX <= offsetCell.right) {
                             coordinate.set(-1, -1);

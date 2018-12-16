@@ -94,7 +94,7 @@ public class SearchBar extends FrameLayout {
     }
 
     private void init() {
-        int dp1 = Tool.dp2px(1, getContext());
+        int dp1 = Tool.dp2px(1);
         int iconMarginOutside = dp1 * 16;
         int iconMarginTop = dp1 * 14;
         int searchTextMarginTop = dp1 * 4;
@@ -216,7 +216,7 @@ public class SearchBar extends FrameLayout {
                             .withOnClickListener(new OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Tool.startApp(v.getContext(), app);
+                                    Tool.startApp(v.getContext(), app, null);
                                 }
                             })
                             .withOnLongClickListener(AppItemView.Builder.getLongClickDragAppListener(Item.newAppItem(app), DragAction.Action.SEARCH, new AppItemView.LongPressCallBack() {
@@ -264,7 +264,7 @@ public class SearchBar extends FrameLayout {
             @Override
             public void onGlobalLayout() {
                 _searchInput.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int marginTop = Tool.dp2px(60, getContext());
+                int marginTop = Tool.dp2px(60);
                 recyclerParams.setMargins(0, marginTop, 0, 0);
                 _searchRecycler.setLayoutParams(recyclerParams);
                 _searchRecycler.setPadding(0, 0, 0, (int) (bottomInset * 1.5));

@@ -147,7 +147,7 @@ public class AppDrawerPage extends ViewPager {
                     ((CardView) layout.getChildAt(0)).setCardElevation(0);
                 } else {
                     ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Setup.appSettings().getDrawerCardColor());
-                    ((CardView) layout.getChildAt(0)).setCardElevation(Tool.dp2px(4, getContext()));
+                    ((CardView) layout.getChildAt(0)).setCardElevation(Tool.dp2px(4));
                 }
                 CellContainer cc = layout.findViewById(R.id.group);
                 cc.setGridSize(_columnCellCount, _rowCellCount);

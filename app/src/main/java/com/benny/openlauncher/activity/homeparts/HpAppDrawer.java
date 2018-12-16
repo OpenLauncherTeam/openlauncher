@@ -29,8 +29,8 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
                 _homeActivity.getAppDrawerController().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Tool.visibleViews(_appDrawerIndicator);
-                        Tool.invisibleViews(_homeActivity.getDesktop());
+                        Tool.visibleViews(200, _appDrawerIndicator);
+                        Tool.invisibleViews(200, _homeActivity.getDesktop());
                         _homeActivity.updateDesktopIndicator(false);
                         _homeActivity.updateDock(false);
                         _homeActivity.updateSearchBar(false);
@@ -39,8 +39,8 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
             }
         } else {
             if (startOrEnd) {
-                Tool.invisibleViews(_appDrawerIndicator);
-                Tool.visibleViews(_homeActivity.getDesktop());
+                Tool.invisibleViews(200, _appDrawerIndicator);
+                Tool.visibleViews(200, _homeActivity.getDesktop());
                 _homeActivity.updateDesktopIndicator(true);
                 _homeActivity.updateDock(true);
                 _homeActivity.updateSearchBar(true);

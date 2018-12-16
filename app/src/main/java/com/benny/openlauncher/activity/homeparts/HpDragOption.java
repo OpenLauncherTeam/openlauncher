@@ -35,7 +35,6 @@ public class HpDragOption {
     private PopupIconLabelItem removeItem = new PopupIconLabelItem(R.string.remove, R.drawable.ic_close_dark_24dp).withIdentifier(removeItemIdentifier);
 
     public void initDragNDrop(@NonNull final HomeActivity _homeActivity, @NonNull final View leftDragHandle, @NonNull final View rightDragHandle, @NonNull final ItemOptionView dragNDropView) {
-        //dragHandle's drag event
         final Handler dragHandler = new Handler();
 
         dragNDropView.registerDropTarget(new ItemOptionView.DropTargetListener(leftDragHandle) {
@@ -59,8 +58,7 @@ public class HpDragOption {
 
             @Override
             public void onStartDrag(@NonNull Action action, @NonNull PointF location) {
-                if (leftDragHandle.getAlpha() >= -0.01 && leftDragHandle.getAlpha() <= 0.01)
-                    leftDragHandle.animate().alpha(0.5f);
+                leftDragHandle.animate().alpha(0.5f);
             }
 
             @Override
@@ -103,8 +101,7 @@ public class HpDragOption {
 
             @Override
             public void onStartDrag(@NonNull Action action, @NonNull PointF location) {
-                if (rightDragHandle.getAlpha() >= -0.01 && rightDragHandle.getAlpha() <= 0.01)
-                    rightDragHandle.animate().alpha(0.5f);
+                rightDragHandle.animate().alpha(0.5f);
             }
 
             @Override
@@ -311,20 +308,20 @@ public class HpDragOption {
             }
         }
 
-        float x = dragNDropView.getDragLocation().x - HomeActivity._itemTouchX + Tool.toPx(10);
-        float y = dragNDropView.getDragLocation().y - HomeActivity._itemTouchY - Tool.toPx((46 * itemList.size()));
+        float x = dragNDropView.getDragLocation().x - HomeActivity._itemTouchX + Tool.dp2px(10);
+        float y = dragNDropView.getDragLocation().y - HomeActivity._itemTouchY - Tool.dp2px((46 * itemList.size()));
 
-        if ((x + Tool.toPx(200)) > dragNDropView.getWidth()) {
+        if ((x + Tool.dp2px(200)) > dragNDropView.getWidth()) {
             dragNDropView.setPopupMenuShowDirection(false);
-            x = dragNDropView.getDragLocation().x - HomeActivity._itemTouchX + homeActivity.getDesktop().getCurrentPage().getCellWidth() - Tool.toPx(200) - Tool.toPx(10);
+            x = dragNDropView.getDragLocation().x - HomeActivity._itemTouchX + homeActivity.getDesktop().getCurrentPage().getCellWidth() - Tool.dp2px(200) - Tool.dp2px(10);
         } else {
             dragNDropView.setPopupMenuShowDirection(true);
         }
 
         if (y < 0)
-            y = dragNDropView.getDragLocation().y - HomeActivity._itemTouchY + homeActivity.getDesktop().getCurrentPage().getCellHeight() + Tool.toPx(4);
+            y = dragNDropView.getDragLocation().y - HomeActivity._itemTouchY + homeActivity.getDesktop().getCurrentPage().getCellHeight() + Tool.dp2px(4);
         else
-            y -= Tool.toPx(4);
+            y -= Tool.dp2px(4);
 
         dragNDropView.showPopupMenuForItem(x, y, itemList, new OnClickListener<PopupIconLabelItem>() {
             @Override

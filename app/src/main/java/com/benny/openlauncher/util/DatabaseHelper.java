@@ -178,7 +178,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         cursor.close();
-        Tool.print("database : dock size is ", dock.size());
         return dock;
     }
 

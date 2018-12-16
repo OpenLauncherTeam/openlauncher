@@ -1,7 +1,6 @@
 package com.benny.openlauncher.widget;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -54,38 +52,9 @@ public class AppItemView extends View implements Drawable.Callback {
     public AppItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        setWillNotDraw(false);
-        setDrawingCacheEnabled(true);
-        setWillNotCacheDrawing(false);
-
-        _labelHeight = Tool.dp2px(14, getContext());
-
-        _textPaint.setTextSize(Tool.sp2px(getContext(), 12));
+        _labelHeight = Tool.dp2px(14);
+        _textPaint.setTextSize(Tool.sp2px(12));
         _textPaint.setColor(Color.WHITE);
-    }
-
-    public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item, int iconSize) {
-        AppItemView.Builder b = new AppItemView.Builder(context)
-                .setIconSize(iconSize)
-                .setTextColor(Setup.appSettings().getFolderLabelColor());
-        if (groupItem.getType() == Item.Type.SHORTCUT) {
-            b.setShortcutItem(groupItem);
-        } else {
-            App app = Setup.appLoader().findItemApp(groupItem);
-            if (app != null) {
-                b.setAppItem(groupItem);
-            }
-        }
-        return b.getView();
-    }
-
-    @Override
-    public Bitmap getDrawingCache() {
-        return Tool.drawableToBitmap(_icon);
-    }
-
-    public View getView() {
-        return this;
     }
 
     public Drawable getIcon() {
@@ -131,7 +100,7 @@ public class AppItemView extends View implements Drawable.Callback {
         if (_targetedWidth != 0) {
             mWidth = _targetedWidth;
         }
-        setMeasuredDimension((int) Math.ceil(mWidth), (int) Math.ceil((int) mHeight) + Tool.dp2px(2, getContext()) + _targetedHeightPadding * 2);
+        setMeasuredDimension((int) Math.ceil(mWidth), (int) Math.ceil((int) mHeight) + Tool.dp2px(2) + _targetedHeightPadding * 2);
     }
 
     @Override
@@ -190,6 +159,9 @@ public class AppItemView extends View implements Drawable.Callback {
     }
 
     public static class Builder {
+        // TODO accept any view and just add onclick and longclick stuff
+        // this will work for widget, other cases
+        // need to move to separate class
         AppItemView _view;
 
         public Builder(Context context) {
@@ -314,16 +286,7 @@ public class AppItemView extends View implements Drawable.Callback {
                         return false;
                     }
                     if (_view._vibrateWhenLongPress) {
-                        Vibrator vibrator = (Vibrator) _view.getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                        if (vibrator == null) {
-                            // some manufacturers do not vibrate on long press
-                            // might as well make this a fallback method
-                            v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            vibrator.vibrate(VibrationEffect.createOneShot(50, 80));
-                        } else {
-                            vibrator.vibrate(50);
-                        }
+                        Tool.vibrate(_view);
                     }
                     DragHandler.startDrag(_view, item, action, eventAction);
                     return true;
@@ -332,13 +295,13 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder setTextColor(@ColorInt int color) {
+        public Builder setTextColor(int color) {
             _view._textPaint.setColor(color);
             return this;
         }
 
         public Builder setIconSize(int iconSize) {
-            _view.setIconSize(Tool.dp2px(iconSize, _view.getContext()));
+            _view.setIconSize(Tool.dp2px(iconSize));
             return this;
         }
 

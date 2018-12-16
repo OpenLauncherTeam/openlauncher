@@ -97,7 +97,7 @@ public class DesktopOptionView extends FrameLayout {
             return;
         }
 
-        final int paddingHorizontal = Tool.dp2px(42, getContext());
+        final int paddingHorizontal = Tool.dp2px(42);
         final Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
 
         _actionAdapters[0] = new FastItemAdapter<>();
@@ -171,7 +171,7 @@ public class DesktopOptionView extends FrameLayout {
         _actionAdapters[1].set(itemsBottom);
         _actionAdapters[1].withOnClickListener(clickListener);
 
-        ((MarginLayoutParams) ((View) _actionRecyclerViews[0].getParent()).getLayoutParams()).topMargin = Tool.dp2px(Setup.appSettings().getSearchBarEnable() ? 36 : 4, getContext());
+        ((MarginLayoutParams) ((View) _actionRecyclerViews[0].getParent()).getLayoutParams()).topMargin = Tool.dp2px(Setup.appSettings().getSearchBarEnable() ? 36 : 4);
     }
 
     private RecyclerView createRecyclerView(FastAdapter adapter, int gravity, int paddingHorizontal) {

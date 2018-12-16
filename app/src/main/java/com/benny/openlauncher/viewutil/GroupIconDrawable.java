@@ -36,7 +36,7 @@ public class GroupIconDrawable extends Drawable {
     private int _iconSizeDiv4;
 
     public GroupIconDrawable(Context context, Item item, int iconSize) {
-        final float size = Tool.dp2px(iconSize, context);
+        final float size = Tool.dp2px(iconSize);
         final Drawable[] icons = new Drawable[4];
         for (int i = 0; i < 4; i++) {
             icons[i] = null;
@@ -91,7 +91,7 @@ public class GroupIconDrawable extends Drawable {
         _paintOuterCircle.setAntiAlias(true);
         _paintOuterCircle.setFlags(Paint.ANTI_ALIAS_FLAG);
         _paintOuterCircle.setStyle(Paint.Style.STROKE);
-        _outline = Tool.dp2px(2, HomeActivity.Companion.getLauncher());
+        _outline = Tool.dp2px(2);
         _paintOuterCircle.setStrokeWidth(_outline);
 
         _paintIcon = new Paint();
