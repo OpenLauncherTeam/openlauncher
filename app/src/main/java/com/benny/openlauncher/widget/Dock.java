@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.interfaces.ItemHistory;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction.Action;
@@ -18,7 +19,7 @@ import com.benny.openlauncher.viewutil.ItemViewFactory;
 
 import java.util.List;
 
-public final class Dock extends CellContainer implements DesktopCallback<View> {
+public final class Dock extends CellContainer implements DesktopCallback {
     private HomeActivity _homeActivity;
     private final Point _coordinate = new Point();
     private final Point _previousDragPoint = new Point();
@@ -105,12 +106,10 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     }
 
     @Override
-    public void setLastItem(@NonNull Object... args) {
-        Item item = (Item) args[0];
-        View v = (View) args[1];
-        _previousItemView = v;
+    public void setLastItem(Item item, View view) {
+        _previousItemView = view;
         _previousItem = item;
-        removeView(v);
+        removeView(view);
     }
 
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -126,7 +125,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
     }
 
     @Override
-    public void consumeRevert() {
+    public void consumeLastItem() {
         _previousItem = null;
         _previousItemView = null;
     }

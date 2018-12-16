@@ -199,8 +199,8 @@ public class HpDragOption {
                 int x = (int) location.x;
                 int y = (int) location.y;
                 if (_homeActivity.getDesktop().addItemToPoint(item, x, y)) {
-                    _homeActivity.getDesktop().consumeRevert();
-                    _homeActivity.getDock().consumeRevert();
+                    _homeActivity.getDesktop().consumeLastItem();
+                    _homeActivity.getDock().consumeLastItem();
                     // add the item to the database
                     HomeActivity._db.saveItem(item, _homeActivity.getDesktop().getCurrentItem(), Definitions.ItemPosition.Desktop);
                 } else {
@@ -208,8 +208,8 @@ public class HpDragOption {
                     _homeActivity.getDesktop().getCurrentPage().touchPosToCoordinate(pos, x, y, item._spanX, item._spanY, false);
                     View itemView = _homeActivity.getDesktop().getCurrentPage().coordinateToChildView(pos);
                     if (itemView != null && Desktop.handleOnDropOver(_homeActivity, item, (Item) itemView.getTag(), itemView, _homeActivity.getDesktop().getCurrentPage(), _homeActivity.getDesktop().getCurrentItem(), Definitions.ItemPosition.Desktop, _homeActivity.getDesktop())) {
-                        _homeActivity.getDesktop().consumeRevert();
-                        _homeActivity.getDock().consumeRevert();
+                        _homeActivity.getDesktop().consumeLastItem();
+                        _homeActivity.getDock().consumeLastItem();
                     } else {
                         Tool.toast(_homeActivity, R.string.toast_not_enough_space);
                         _homeActivity.getDesktop().revertLastItem();
@@ -276,8 +276,8 @@ public class HpDragOption {
                 int x = (int) location.x;
                 int y = (int) location.y;
                 if (_homeActivity.getDock().addItemToPoint(item, x, y)) {
-                    _homeActivity.getDesktop().consumeRevert();
-                    _homeActivity.getDock().consumeRevert();
+                    _homeActivity.getDesktop().consumeLastItem();
+                    _homeActivity.getDock().consumeLastItem();
 
                     // add the item to the database
                     HomeActivity._db.saveItem(item, 0, Definitions.ItemPosition.Dock);
@@ -287,8 +287,8 @@ public class HpDragOption {
                     View itemView = _homeActivity.getDock().coordinateToChildView(pos);
                     if (itemView != null) {
                         if (Desktop.handleOnDropOver(_homeActivity, item, (Item) itemView.getTag(), itemView, _homeActivity.getDock(), 0, Definitions.ItemPosition.Dock, _homeActivity.getDock())) {
-                            _homeActivity.getDesktop().consumeRevert();
-                            _homeActivity.getDock().consumeRevert();
+                            _homeActivity.getDesktop().consumeLastItem();
+                            _homeActivity.getDock().consumeLastItem();
                         } else {
                             Tool.toast(_homeActivity, R.string.toast_not_enough_space);
                             _homeActivity.getDesktop().revertLastItem();

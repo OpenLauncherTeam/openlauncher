@@ -14,6 +14,7 @@ import android.view.ViewPropertyAnimator;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.interfaces.ItemHistory;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.Item.Type;
@@ -33,7 +34,7 @@ import java.util.List;
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 import in.championswimmer.sfg.lib.SimpleFingerGestures.OnFingerGestureListener;
 
-public final class Desktop extends ViewPager implements DesktopCallback<View> {
+public final class Desktop extends ViewPager implements DesktopCallback {
     private OnDesktopEditListener _desktopEditListener;
     private boolean _inEditMode;
     private PagerIndicator _pageIndicator;
@@ -77,8 +78,8 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
                                 callback.addItemToPage(group, page);
                                 HomeActivity launcher = HomeActivity.Companion.getLauncher();
                                 if (launcher != null) {
-                                    launcher.getDesktop().consumeRevert();
-                                    launcher.getDock().consumeRevert();
+                                    launcher.getDesktop().consumeLastItem();
+                                    launcher.getDock().consumeLastItem();
                                 }
                                 return true;
                             }
@@ -92,8 +93,8 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
                                 callback.addItemToPage(item, page);
                                 HomeActivity launcher = HomeActivity.Companion.getLauncher();
                                 if (launcher != null) {
-                                    launcher.getDesktop().consumeRevert();
-                                    launcher.getDock().consumeRevert();
+                                    launcher.getDesktop().consumeLastItem();
+                                    launcher.getDock().consumeLastItem();
                                 }
                                 return true;
                             }
@@ -355,15 +356,15 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
         }
     }
 
-    public void setLastItem(@NonNull Object... args) {
-        Item item = (Item) args[0];
-        View v = (View) args[1];
+    @Override
+    public void setLastItem(Item item, View view) {
         _previousPage = getCurrentItem();
-        _previousItemView = v;
+        _previousItemView = view;
         _previousItem = item;
-        getCurrentPage().removeView(v);
+        getCurrentPage().removeView(view);
     }
 
+    @Override
     public void revertLastItem() {
         if (_previousItemView != null) {
             if (_adapter.getCount() >= _previousPage && _previousPage > -1) {
@@ -376,7 +377,8 @@ public final class Desktop extends ViewPager implements DesktopCallback<View> {
         }
     }
 
-    public void consumeRevert() {
+    @Override
+    public void consumeLastItem() {
         _previousItem = null;
         _previousItemView = null;
         _previousPage = -1;
