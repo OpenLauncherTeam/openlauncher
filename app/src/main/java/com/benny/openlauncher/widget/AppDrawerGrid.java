@@ -15,7 +15,6 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.viewutil.DrawerAppItem;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Tool;
-import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.turingtechnologies.materialscrollbar.AlphabetIndicator;
 import com.turingtechnologies.materialscrollbar.DragScrollBar;
@@ -30,7 +29,7 @@ public class AppDrawerGrid extends FrameLayout {
     public static int _itemHeightPadding;
 
     public RecyclerView _recyclerView;
-    public GridAppDrawerAdapter _gridDrawerAdapter;
+    public AppDrawerGridAdapter _gridDrawerAdapter;
     public DragScrollBar _scrollBar;
 
     private static List<App> _apps;
@@ -56,7 +55,7 @@ public class AppDrawerGrid extends FrameLayout {
         _scrollBar.setDraggableFromAnywhere(true);
         _scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
 
-        _gridDrawerAdapter = new GridAppDrawerAdapter();
+        _gridDrawerAdapter = new AppDrawerGridAdapter();
 
         if (getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             setPortraitValue();
@@ -119,14 +118,8 @@ public class AppDrawerGrid extends FrameLayout {
         _gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
-    public static class GridAppDrawerAdapter extends FastItemAdapter<DrawerAppItem> implements INameableAdapter {
-        public GridAppDrawerAdapter() {
-            getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<DrawerAppItem>() {
-                @Override
-                public boolean filter(DrawerAppItem item, CharSequence constraint) {
-                    return !item.getApp().getLabel().toLowerCase().contains(constraint.toString().toLowerCase());
-                }
-            });
+    public static class AppDrawerGridAdapter extends FastItemAdapter<DrawerAppItem> implements INameableAdapter {
+        public AppDrawerGridAdapter() {
         }
 
         @Override

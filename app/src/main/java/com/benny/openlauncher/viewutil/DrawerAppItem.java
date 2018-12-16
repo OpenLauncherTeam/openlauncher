@@ -16,21 +16,9 @@ import java.util.List;
 
 public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.ViewHolder> {
     private App _app;
-    private AppItemView.LongPressCallBack _onLongClickCallback;
 
     public DrawerAppItem(App app) {
         _app = app;
-        _onLongClickCallback = new AppItemView.LongPressCallBack() {
-            @Override
-            public boolean readyForDrag(View view) {
-                return true;
-            }
-
-            @Override
-            public void afterDrag(View view) {
-                // do nothing
-            }
-        };
     }
 
     @Override
@@ -48,15 +36,21 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
         return new ViewHolder(v);
     }
 
-    public App getApp() {
-        return _app;
-    }
-
     @Override
     public void bindView(DrawerAppItem.ViewHolder holder, List payloads) {
         holder.builder
                 .setAppItem(_app)
-                .withOnLongClick(Item.newAppItem(_app), DragAction.Action.DRAWER, _onLongClickCallback);
+                .withOnLongClick(Item.newAppItem(_app), DragAction.Action.DRAWER, new AppItemView.LongPressCallBack() {
+                    @Override
+                    public boolean readyForDrag(View view) {
+                        return true;
+                    }
+
+                    @Override
+                    public void afterDrag(View view) {
+                        // do nothing
+                    }
+                });
         super.bindView(holder, payloads);
     }
 
@@ -64,7 +58,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
         AppItemView appItemView;
         AppItemView.Builder builder;
 
-        ViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
             appItemView = (AppItemView) itemView;
             appItemView.setTargetedWidth(AppDrawerGrid._itemWidth);

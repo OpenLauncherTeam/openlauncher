@@ -152,6 +152,7 @@ public class AppItemView extends View implements Drawable.Callback {
         return (getWidth() - _iconSize) / 2;
     }
 
+    // TODO REMOVE THIS
     public interface LongPressCallBack {
         boolean readyForDrag(View view);
 

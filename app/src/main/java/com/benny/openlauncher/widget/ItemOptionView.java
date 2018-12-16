@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 
+import com.benny.openlauncher.interfaces.DropTargetListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.viewutil.PopupIconLabelItem;
@@ -76,42 +77,6 @@ public final class ItemOptionView extends FrameLayout {
 
         public final void setShouldIgnore(boolean v) {
             _shouldIgnore = v;
-        }
-    }
-
-    public static class DropTargetListener {
-        @NonNull
-        private final View view;
-
-        public DropTargetListener(@NonNull View view) {
-            this.view = view;
-        }
-
-        @NonNull
-        public final View getView() {
-            return this.view;
-        }
-
-        public boolean onStart(@NonNull Action action, @NonNull PointF location, boolean isInside) {
-            return false;
-        }
-
-        public void onStartDrag(@NonNull Action action, @NonNull PointF location) {
-        }
-
-        public void onDrop(@NonNull Action action, @NonNull PointF location, @NonNull Item item) {
-        }
-
-        public void onMove(@NonNull Action action, @NonNull PointF location) {
-        }
-
-        public void onEnter(@NonNull Action action, @NonNull PointF location) {
-        }
-
-        public void onExit(@NonNull Action action, @NonNull PointF location) {
-        }
-
-        public void onEnd() {
         }
     }
 
@@ -181,22 +146,17 @@ public final class ItemOptionView extends FrameLayout {
         setWillNotDraw(false);
     }
 
-
     public final boolean getDragging() {
         return _dragging;
     }
 
-    @NonNull
     public final PointF getDragLocation() {
         return _dragLocation;
     }
 
-
-    @Nullable
     public final Action getDragAction() {
         return _dragAction;
     }
-
 
     public final boolean getDragExceedThreshold() {
         return _dragExceedThreshold;

@@ -104,6 +104,7 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         }
     }
 
+    @Override
     public void setLastItem(@NonNull Object... args) {
         Item item = (Item) args[0];
         View v = (View) args[1];
@@ -124,11 +125,13 @@ public final class Dock extends CellContainer implements DesktopCallback<View> {
         }
     }
 
+    @Override
     public void consumeRevert() {
         _previousItem = null;
         _previousItemView = null;
     }
 
+    @Override
     public void revertLastItem() {
         if (_previousItemView != null && _previousItem != null) {
             addViewToGrid(_previousItemView);

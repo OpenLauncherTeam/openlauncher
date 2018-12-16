@@ -24,7 +24,7 @@ public final class DragHandler {
         _cachedDragBitmap = loadBitmapFromView(view);
 
         if (HomeActivity.Companion.getLauncher() != null)
-            HomeActivity.Companion.getLauncher().getItemOptionView().startDragNDropOverlay(view, item, action);
+            HomeActivity._launcher.getItemOptionView().startDragNDropOverlay(view, item, action);
 
         if (eventAction != null)
             eventAction.afterDrag(view);
