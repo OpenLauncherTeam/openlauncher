@@ -35,7 +35,6 @@ public class ItemViewFactory {
                 }
                 view = new AppItemView.Builder(context, iconSize)
                         .setAppItem(item)
-                        .withOnTouchGetPosition(item, Setup.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.APP, new AppItemView.LongPressCallBack() {
                             @Override
@@ -55,7 +54,6 @@ public class ItemViewFactory {
             case SHORTCUT:
                 view = new AppItemView.Builder(context, iconSize)
                         .setShortcutItem(item)
-                        .withOnTouchGetPosition(item, Setup.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.SHORTCUT, new AppItemView.LongPressCallBack() {
                             @Override
@@ -75,7 +73,6 @@ public class ItemViewFactory {
             case GROUP:
                 view = new AppItemView.Builder(context, iconSize)
                         .setGroupItem(context, callback, item, iconSize)
-                        .withOnTouchGetPosition(item, Setup.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.GROUP, new AppItemView.LongPressCallBack() {
                             @Override
@@ -96,7 +93,6 @@ public class ItemViewFactory {
             case ACTION:
                 view = new AppItemView.Builder(context, iconSize)
                         .setActionItem(item)
-                        .withOnTouchGetPosition(item, Setup.itemGestureCallback())
                         .vibrateWhenLongPress()
                         .withOnLongClick(item, DragAction.Action.ACTION, new AppItemView.LongPressCallBack() {
                             @Override
@@ -154,7 +150,6 @@ public class ItemViewFactory {
                 };
 
                 widgetContainer.postDelayed(action, 2000);
-                widgetView.setOnTouchListener(Tool.getItemOnTouchListener(item, Setup.itemGestureCallback()));
                 widgetView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {

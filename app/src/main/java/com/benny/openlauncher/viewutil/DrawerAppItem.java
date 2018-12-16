@@ -57,8 +57,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
     public void bindView(DrawerAppItem.ViewHolder holder, List payloads) {
         holder.builder
                 .setAppItem(_app)
-                .withOnLongClick(_app, DragAction.Action.APP_DRAWER, _onLongClickCallback)
-                .withOnTouchGetPosition(Item.newAppItem(_app), Setup.itemGestureCallback());
+                .withOnLongClick(Item.newAppItem(_app), DragAction.Action.APP_DRAWER, _onLongClickCallback);
         super.bindView(holder, payloads);
     }
 

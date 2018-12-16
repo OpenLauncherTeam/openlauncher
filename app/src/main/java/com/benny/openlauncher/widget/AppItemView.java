@@ -27,7 +27,6 @@ import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallback;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
-import com.benny.openlauncher.viewutil.ItemGestureListener;
 
 public class AppItemView extends View implements Drawable.Callback {
 
@@ -38,16 +37,13 @@ public class AppItemView extends View implements Drawable.Callback {
     private String _label;
     private Paint _textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Rect _textContainer = new Rect(), testTextContainer = new Rect();
-    private Typeface _typeface;
     private float _iconSize;
     private boolean _showLabel = true;
     private boolean _vibrateWhenLongPress;
     private float _labelHeight;
     private int _targetedWidth;
-    private int _fontSizeSp;
     private int _targetedHeightPadding;
     private float _heightPadding;
-    private boolean _fastAdapterItem;
 
     public AppItemView(Context context) {
         this(context, null);
@@ -56,10 +52,6 @@ public class AppItemView extends View implements Drawable.Callback {
     public AppItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        if (_typeface == null) {
-            _typeface = Typeface.createFromAsset(getContext().getAssets(), "RobotoCondensed-Regular.ttf");
-        }
-
         setWillNotDraw(false);
         setDrawingCacheEnabled(true);
         setWillNotCacheDrawing(false);
@@ -67,13 +59,11 @@ public class AppItemView extends View implements Drawable.Callback {
         _labelHeight = Tool.dp2px(14, getContext());
 
         _textPaint.setTextSize(Tool.sp2px(getContext(), 12));
-        _textPaint.setColor(Color.DKGRAY);
-        _textPaint.setTypeface(_typeface);
+        _textPaint.setColor(Color.WHITE);
     }
 
     public static AppItemView createAppItemViewPopup(Context context, Item groupItem, App item, int iconSize) {
         AppItemView.Builder b = new AppItemView.Builder(context, iconSize)
-                .withOnTouchGetPosition(groupItem, Setup.itemGestureCallback())
                 .setTextColor(Setup.appSettings().getFolderLabelColor());
         if (groupItem.getType() == Item.Type.SHORTCUT) {
             b.setShortcutItem(groupItem);
@@ -89,8 +79,7 @@ public class AppItemView extends View implements Drawable.Callback {
     public static View createDrawerAppItemView(Context context, final HomeActivity homeActivity, App app, int iconSize, AppItemView.LongPressCallBack longPressCallBack) {
         return new AppItemView.Builder(context, iconSize)
                 .setAppItem(app)
-                .withOnTouchGetPosition(null, null)
-                .withOnLongClick(app, DragAction.Action.APP_DRAWER, longPressCallBack)
+                .withOnLongClick(Item.newAppItem(app), DragAction.Action.APP_DRAWER, longPressCallBack)
                 .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
                 .setTextColor(Setup.appSettings().getDrawerLabelColor())
                 .getView();
@@ -328,11 +317,6 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder withOnLongClick(final App app, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
-            withOnLongClick(Item.newAppItem(app), action, eventAction);
-            return this;
-        }
-
         public Builder withOnLongClick(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
             _view.setOnLongClickListener(new OnLongClickListener() {
                 @Override
@@ -350,11 +334,6 @@ public class AppItemView extends View implements Drawable.Callback {
                     return true;
                 }
             });
-            return this;
-        }
-
-        public Builder withOnTouchGetPosition(Item item, ItemGestureListener.ItemGestureCallback itemGestureCallback) {
-            _view.setOnTouchListener(Tool.getItemOnTouchListener(item, itemGestureCallback));
             return this;
         }
 

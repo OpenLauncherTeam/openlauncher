@@ -26,17 +26,13 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
-import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.viewutil.ItemGestureListener;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -345,21 +341,6 @@ public class Tool {
                 e.printStackTrace();
             }
         }
-    }
-
-    public static View.OnTouchListener getItemOnTouchListener(Item item, final ItemGestureListener.ItemGestureCallback itemGestureCallback) {
-        final ItemGestureListener itemGestureListener = Definitions.ENABLE_ITEM_TOUCH_LISTENER && itemGestureCallback != null ? new ItemGestureListener(Setup.appContext(), item, itemGestureCallback) : null;
-        return new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                HomeActivity._itemTouchX = motionEvent.getX();
-                HomeActivity._itemTouchY = motionEvent.getY();
-                if (itemGestureListener != null) {
-                    return itemGestureListener.onTouchEvent(motionEvent);
-                }
-                return false;
-            }
-        };
     }
 
     public static void copy(Context context, String stringIn, String stringOut) {

@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 
 import com.benny.openlauncher.R;
@@ -48,30 +49,49 @@ public class AppDrawerGrid extends FrameLayout {
         init();
     }
 
-    @Override
-    public void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
+    private void init() {
+        if (!Setup.appSettings().isDrawerShowIndicator()) _scrollBar.setVisibility(View.GONE);
+        _scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
+        _scrollBar.setClipToPadding(true);
+        _scrollBar.setDraggableFromAnywhere(true);
+        _scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
 
-        _itemWidth = getWidth() / _layoutManager.getSpanCount();
-        _itemHeightPadding = Tool.dp2px(20, getContext());
+        _gridDrawerAdapter = new GridAppDrawerAdapter();
 
-        _apps = Setup.appLoader().getAllApps(getContext(), false);
-        ArrayList<DrawerAppItem> items = new ArrayList<>();
-        for (int i = 0; i < _apps.size(); i++) {
-            items.add(new DrawerAppItem(_apps.get(i)));
+        if (getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            setPortraitValue();
+        } else {
+            setLandscapeValue();
         }
-        _gridDrawerAdapter.set(items);
-        Setup.appLoader().addUpdateListener(new AppUpdateListener() {
+        _recyclerView.setAdapter(_gridDrawerAdapter);
+        _recyclerView.setLayoutManager(_layoutManager);
+        _recyclerView.setDrawingCacheEnabled(true);
+
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
-            public boolean onAppUpdated(List<App> apps) {
-                _apps = apps;
+            public void onGlobalLayout() {
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                _itemWidth = getWidth() / _layoutManager.getSpanCount();
+                _itemHeightPadding = Tool.dp2px(20, getContext());
+                _apps = Setup.appLoader().getAllApps(getContext(), false);
                 ArrayList<DrawerAppItem> items = new ArrayList<>();
-                for (int i = 0; i < apps.size(); i++) {
-                    items.add(new DrawerAppItem(apps.get(i)));
+                for (int i = 0; i < _apps.size(); i++) {
+                    items.add(new DrawerAppItem(_apps.get(i)));
                 }
                 _gridDrawerAdapter.set(items);
+                Setup.appLoader().addUpdateListener(new AppUpdateListener() {
+                    @Override
+                    public boolean onAppUpdated(List<App> apps) {
+                        _apps = apps;
+                        ArrayList<DrawerAppItem> items = new ArrayList<>();
+                        for (int i = 0; i < apps.size(); i++) {
+                            items.add(new DrawerAppItem(apps.get(i)));
+                        }
+                        _gridDrawerAdapter.set(items);
 
-                return false;
+                        return false;
+                    }
+                });
             }
         });
     }
@@ -99,27 +119,6 @@ public class AppDrawerGrid extends FrameLayout {
     private void setLandscapeValue() {
         _layoutManager.setSpanCount(Setup.appSettings().getDrawerRowCount());
         _gridDrawerAdapter.notifyAdapterDataSetChanged();
-    }
-
-    private void init() {
-        if (!Setup.appSettings().isDrawerShowIndicator())
-            _scrollBar.setVisibility(View.GONE);
-        _scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
-        _scrollBar.setClipToPadding(true);
-        _scrollBar.setDraggableFromAnywhere(true);
-        _scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
-
-        boolean mPortrait = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-        _gridDrawerAdapter = new GridAppDrawerAdapter();
-        _recyclerView.setAdapter(_gridDrawerAdapter);
-
-        if (mPortrait) {
-            setPortraitValue();
-        } else {
-            setLandscapeValue();
-        }
-        _recyclerView.setLayoutManager(_layoutManager);
-        _recyclerView.setDrawingCacheEnabled(true);
     }
 
     public static class GridAppDrawerAdapter extends FastItemAdapter<DrawerAppItem> implements INameableAdapter {

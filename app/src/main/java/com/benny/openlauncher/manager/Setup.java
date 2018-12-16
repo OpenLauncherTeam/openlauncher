@@ -8,7 +8,6 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.viewutil.DesktopGestureListener;
-import com.benny.openlauncher.viewutil.ItemGestureListener;
 
 public abstract class Setup {
     private static Setup _setup = null;
@@ -40,10 +39,6 @@ public abstract class Setup {
         return get().getDesktopGestureCallback();
     }
 
-    public static ItemGestureListener.ItemGestureCallback itemGestureCallback() {
-        return get().getItemGestureCallback();
-    }
-
     public static DatabaseHelper dataManager() {
         return get().getDataManager();
     }
@@ -65,8 +60,6 @@ public abstract class Setup {
     public abstract AppSettings getAppSettings();
 
     public abstract DesktopGestureListener.DesktopGestureCallback getDesktopGestureCallback();
-
-    public abstract ItemGestureListener.ItemGestureCallback getItemGestureCallback();
 
     public abstract DatabaseHelper getDataManager();
 

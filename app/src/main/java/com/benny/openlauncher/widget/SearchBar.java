@@ -30,7 +30,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.viewutil.IconLabelItem;

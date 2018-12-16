@@ -6,23 +6,18 @@ import android.util.Log;
 import com.benny.openlauncher.AppObject;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.viewutil.DesktopGestureListener.DesktopGestureCallback;
-import com.benny.openlauncher.viewutil.ItemGestureListener;
-import com.benny.openlauncher.viewutil.ItemGestureListener.ItemGestureCallback;
 
 import android.support.annotation.NonNull;
 
-/* compiled from: Home.kt */
 public final class HpInitSetup extends Setup {
     private final AppManager _appLoader;
     private final DatabaseHelper _dataManager;
     private final HpGestureCallback _desktopGestureCallback;
     private final HpEventHandler _eventHandler;
-    private final ItemGestureCallback _itemGestureCallback;
     private final Logger _logger;
     private final AppSettings _appSettings;
 
@@ -37,12 +32,6 @@ public final class HpInitSetup extends Setup {
             @Override
             public void log(Object source, int priority, String tag, String msg, Object... args) {
                 Log.println(priority, tag, String.format(msg, args));
-            }
-        };
-        _itemGestureCallback = new ItemGestureCallback() {
-            @Override
-            public boolean onItemGesture(Item item, ItemGestureListener.Type event) {
-                return false;
             }
         };
     }
@@ -60,11 +49,6 @@ public final class HpInitSetup extends Setup {
     @NonNull
     public DesktopGestureCallback getDesktopGestureCallback() {
         return _desktopGestureCallback;
-    }
-
-    @NonNull
-    public ItemGestureCallback getItemGestureCallback() {
-        return _itemGestureCallback;
     }
 
     @NonNull
