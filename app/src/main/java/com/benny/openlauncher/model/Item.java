@@ -3,6 +3,7 @@ package com.benny.openlauncher.model;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
+import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.Tool;
 
 import java.util.ArrayList;
@@ -10,15 +11,12 @@ import java.util.List;
 import java.util.Random;
 
 public class Item {
-    public static final int LOCATION_DESKTOP = 0;
-    public static final int LOCATION_DOCK = 1;
-
     // all items need these values
     public Drawable _icon;
     public String _label;
     public Type _type;
     public int _id;
-    public int _location;
+    public ItemPosition _location;
     public int _x = 0;
     public int _y = 0;
 
@@ -183,10 +181,6 @@ public class Item {
 
     public void setIcon(Drawable icon) {
         _icon = icon;
-    }
-
-    public int getLocation() {
-        return _location;
     }
 
     public void setIntent(Intent intent) {

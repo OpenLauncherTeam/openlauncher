@@ -10,6 +10,7 @@ import android.view.View;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.DragAction.Action;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
@@ -145,7 +146,7 @@ public final class Dock extends CellContainer implements DesktopCallback {
             //HomeActivity._db.deleteItem(item, true);
             return false;
         }
-        item._location = Item.LOCATION_DOCK;
+        item._location = ItemPosition.Dock;
         addViewToGrid(itemView, item._x, item._y, item._spanX, item._spanY);
         return true;
     }
@@ -155,7 +156,7 @@ public final class Dock extends CellContainer implements DesktopCallback {
         if (positionToLayoutPrams == null) {
             return false;
         }
-        item._location = Item.LOCATION_DOCK;
+        item._location = ItemPosition.Dock;
         item._x = positionToLayoutPrams.getX();
         item._y = positionToLayoutPrams.getY();
         View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item);
@@ -167,7 +168,7 @@ public final class Dock extends CellContainer implements DesktopCallback {
     }
 
     public boolean addItemToCell(@NonNull Item item, int x, int y) {
-        item._location = Item.LOCATION_DOCK;
+        item._location = ItemPosition.Dock;
         item._x = x;
         item._y = y;
         View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item);

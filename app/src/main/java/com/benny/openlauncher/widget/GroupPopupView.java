@@ -17,7 +17,8 @@ import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
-import com.benny.openlauncher.util.Definitions;
+import com.benny.openlauncher.util.Definitions.ItemPosition;
+import com.benny.openlauncher.util.Definitions.ItemState;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
@@ -203,7 +204,7 @@ public class GroupPopupView extends RevealFrameLayout {
             coordinates[1] += popupHeight / 2;
         }
 
-        if (item.getLocation() == Item.LOCATION_DOCK) {
+        if (item._location == ItemPosition.Dock) {
             coordinates[1] -= iconSize / 2;
             _cy += iconSize / 2 + (Setup.appSettings().getDockShowLabel() ? 0 : Tool.dp2px(10));
         }
@@ -284,7 +285,7 @@ public class GroupPopupView extends RevealFrameLayout {
     private void removeItem(Context context, final Item currentItem, Item dragOutItem, AppItemView currentView) {
         currentItem.getGroupItems().remove(dragOutItem);
 
-        HomeActivity._db.saveItem(dragOutItem, Definitions.ItemState.Visible);
+        HomeActivity._db.saveItem(dragOutItem, ItemState.Visible);
         HomeActivity._db.saveItem(currentItem);
 
         currentView.setIcon(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
@@ -300,7 +301,7 @@ public class GroupPopupView extends RevealFrameLayout {
 
                 // update db
                 HomeActivity._db.saveItem(item);
-                HomeActivity._db.saveItem(item, Definitions.ItemState.Visible);
+                HomeActivity._db.saveItem(item, ItemState.Visible);
                 HomeActivity._db.deleteItem(currentItem, true);
 
                 // update launcher

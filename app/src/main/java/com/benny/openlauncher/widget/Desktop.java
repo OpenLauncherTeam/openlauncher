@@ -397,7 +397,7 @@ public final class Desktop extends ViewPager implements DesktopCallback {
             //HomeActivity._db.deleteItem(item, true);
             return false;
         }
-        item._location = Item.LOCATION_DESKTOP;
+        item._location = ItemPosition.Desktop;
         _pages.get(page).addViewToGrid(itemView, item._x, item._y, item._spanX, item._spanY);
         return true;
     }
@@ -407,7 +407,7 @@ public final class Desktop extends ViewPager implements DesktopCallback {
         if (positionToLayoutPrams == null) {
             return false;
         }
-        item._location = Item.LOCATION_DESKTOP;
+        item._location = ItemPosition.Desktop;
         item._x = positionToLayoutPrams.getX();
         item._y = positionToLayoutPrams.getY();
         View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item);
@@ -419,7 +419,7 @@ public final class Desktop extends ViewPager implements DesktopCallback {
     }
 
     public boolean addItemToCell(@NonNull Item item, int x, int y) {
-        item._location = Item.LOCATION_DESKTOP;
+        item._location = ItemPosition.Desktop;
         item._x = x;
         item._y = y;
         View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item);

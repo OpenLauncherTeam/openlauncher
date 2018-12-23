@@ -19,6 +19,7 @@ import java.util.List;
 
 public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.ViewHolder> {
     private int _width = Integer.MAX_VALUE;
+    private int _height = Integer.MAX_VALUE;
 
     public Drawable _icon;
     private int _iconSize = Integer.MAX_VALUE;
@@ -117,7 +118,13 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
             holder.itemView.getLayoutParams().width = _width;
         }
 
-        // only run all this code if a label was passed
+        if (_height == Integer.MAX_VALUE) {
+            holder.itemView.getLayoutParams().height = RecyclerView.LayoutParams.MATCH_PARENT;
+        } else {
+            holder.itemView.getLayoutParams().height = _height;
+        }
+
+        // only run all this code if a label should be shown
         if (_label != null && _textVisibility) {
             holder.textView.setText(_label);
             holder.textView.setGravity(_textGravity);

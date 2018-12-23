@@ -43,7 +43,6 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.receivers.AppUpdateReceiver;
 import com.benny.openlauncher.util.DatabaseHelper;
-import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherAction.Action;
@@ -365,18 +364,13 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public final void onRemoveItem(@NonNull Item item) {
         Desktop desktop = getDesktop();
         View coordinateToChildView;
-        switch (item._location) {
-            case Item.LOCATION_DESKTOP:
-                coordinateToChildView = desktop.getCurrentPage().coordinateToChildView(new Point(item._x, item._y));
-                desktop.removeItem(coordinateToChildView, true);
-                break;
-            case Item.LOCATION_DOCK:
-                Dock dock = getDock();
-                coordinateToChildView = dock.coordinateToChildView(new Point(item._x, item._y));
-                dock.removeItem(coordinateToChildView, true);
-                break;
-            default:
-                break;
+        if (item._location.equals(ItemPosition.Desktop)) {
+            coordinateToChildView = desktop.getCurrentPage().coordinateToChildView(new Point(item._x, item._y));
+            desktop.removeItem(coordinateToChildView, true);
+        } else {
+            Dock dock = getDock();
+            coordinateToChildView = dock.coordinateToChildView(new Point(item._x, item._y));
+            dock.removeItem(coordinateToChildView, true);
         }
         _db.deleteItem(item, true);
     }
@@ -564,7 +558,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             item._y = point.y;
 
             // add item to database
-            _db.saveItem(item, desktop.getCurrentItem(), Definitions.ItemPosition.Desktop);
+            _db.saveItem(item, desktop.getCurrentItem(), ItemPosition.Desktop);
             desktop.addItemToPage(item, desktop.getCurrentItem());
         } else {
             Tool.toast(this, R.string.toast_not_enough_space);
