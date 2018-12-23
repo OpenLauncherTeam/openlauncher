@@ -17,6 +17,7 @@ import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.Item.Type;
+import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.Definitions.ItemState;
 import com.benny.openlauncher.util.DragAction.Action;
@@ -32,6 +33,10 @@ import java.util.List;
 
 import in.championswimmer.sfg.lib.SimpleFingerGestures;
 import in.championswimmer.sfg.lib.SimpleFingerGestures.OnFingerGestureListener;
+
+import static com.benny.openlauncher.util.Definitions.WallpaperScroll.Inverse;
+import static com.benny.openlauncher.util.Definitions.WallpaperScroll.Normal;
+import static com.benny.openlauncher.util.Definitions.WallpaperScroll.Off;
 
 public final class Desktop extends ViewPager implements DesktopCallback {
     private OnDesktopEditListener _desktopEditListener;
@@ -442,12 +447,14 @@ public final class Desktop extends ViewPager implements DesktopCallback {
 
     @Override
     protected void onPageScrolled(int position, float offset, int offsetPixels) {
-        // normal
+        // TODO add as a setting
+        Definitions.WallpaperScroll scroll = Normal;
         float xOffset = (position + offset) / (_pages.size() - 1);
-        // inverse
-        //xOffset = 1f - xOffset;
-        // off
-        //xOffset = 0.5f;
+        if (scroll.equals(Inverse)) {
+            xOffset = 1f - xOffset;
+        } else if (scroll.equals(Off)) {
+            xOffset = 0.5f;
+        }
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(getContext());
         wallpaperManager.setWallpaperOffsets(getWindowToken(), xOffset, 0.0f);
         super.onPageScrolled(position, offset, offsetPixels);

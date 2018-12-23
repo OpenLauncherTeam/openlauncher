@@ -19,4 +19,10 @@ public class Definitions {
         Hidden,
         Visible
     }
+
+    public enum WallpaperScroll {
+        Normal,
+        Inverse,
+        Off
+    }
 }
