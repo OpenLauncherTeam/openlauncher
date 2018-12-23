@@ -8,7 +8,7 @@ public class Definitions {
     public static final int ACTION_LAUNCHER = 8;
 
     // separates a list of integers
-    public static final String INT_SEP = "#";
+    public static final String DELIMITER = "#";
 
     public enum ItemPosition {
         Dock,
@@ -19,7 +19,4 @@ public class Definitions {
         Hidden,
         Visible
     }
-
-    // doesn't work reliably yet
-    public static final boolean ENABLE_ITEM_TOUCH_LISTENER = false;
 }

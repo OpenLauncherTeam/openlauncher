@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
@@ -85,7 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             case GROUP:
                 for (Item tmp : item.getItems()) {
                     if (tmp != null) {
-                        concat += tmp.getId() + Definitions.INT_SEP;
+                        concat += tmp.getId() + Definitions.DELIMITER;
                     }
                 }
                 itemValues.put(COLUMN_DATA, concat);
@@ -94,8 +93,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 itemValues.put(COLUMN_DATA, item.getActionValue());
                 break;
             case WIDGET:
-                concat = Integer.toString(item.getWidgetValue()) + Definitions.INT_SEP
-                        + Integer.toString(item.getSpanX()) + Definitions.INT_SEP
+                concat = Integer.toString(item.getWidgetValue()) + Definitions.DELIMITER
+                        + Integer.toString(item.getSpanX()) + Definitions.DELIMITER
                         + Integer.toString(item.getSpanY());
                 itemValues.put(COLUMN_DATA, concat);
                 break;
@@ -193,12 +192,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // update data attribute for an item
     public void updateItem(Item item) {
+        Setup.logger().log(this, Log.INFO, null, "updateItem: %s %d", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
         ContentValues itemValues = new ContentValues();
         itemValues.put(COLUMN_LABEL, item.getLabel());
         itemValues.put(COLUMN_X_POS, item.getX());
         itemValues.put(COLUMN_Y_POS, item.getY());
-
-        Setup.logger().log(this, Log.INFO, null, "updateItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
 
         String concat = "";
         switch (item.getType()) {
@@ -209,7 +207,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 break;
             case GROUP:
                 for (Item tmp : item.getItems()) {
-                    concat += tmp.getId() + Definitions.INT_SEP;
+                    concat += tmp.getId() + Definitions.DELIMITER;
                 }
                 itemValues.put(COLUMN_DATA, concat);
                 break;
@@ -217,8 +215,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 itemValues.put(COLUMN_DATA, item.getActionValue());
                 break;
             case WIDGET:
-                concat = Integer.toString(item.getWidgetValue()) + Definitions.INT_SEP
-                        + Integer.toString(item.getSpanX()) + Definitions.INT_SEP
+                concat = Integer.toString(item.getWidgetValue()) + Definitions.DELIMITER
+                        + Integer.toString(item.getSpanX()) + Definitions.DELIMITER
                         + Integer.toString(item.getSpanY());
                 itemValues.put(COLUMN_DATA, concat);
                 break;
@@ -229,14 +227,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // update the state of an item
     public void updateItem(Item item, Definitions.ItemState state) {
         ContentValues itemValues = new ContentValues();
-        Setup.logger().log(this, Log.INFO, null, "updateItem (state): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+        Setup.logger().log(this, Log.INFO, null, "updateItem: %s %d", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
         itemValues.put(COLUMN_STATE, state.ordinal());
         _db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
     }
 
     // update the fields only used by the database
     public void updateItem(Item item, int page, Definitions.ItemPosition itemPosition) {
-        Setup.logger().log(this, Log.INFO, null, "updateItem (delete + create): %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+        Setup.logger().log(this, Log.INFO, null, "updateItem: %s %d", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
         deleteItem(item, false);
         createItem(item, page, itemPosition);
     }
@@ -266,10 +264,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 break;
             case GROUP:
                 item.setItems(new ArrayList<>());
-                dataSplit = data.split(Definitions.INT_SEP);
-                for (String s : dataSplit) {
-                    if (s.isEmpty()) continue;
-                    Item groupItem = getItem(Integer.parseInt(s));
+                dataSplit = data.split(Definitions.DELIMITER);
+                for (String string : dataSplit) {
+                    if (string.isEmpty()) continue;
+                    Item groupItem = getItem(Integer.parseInt(string));
                     if (groupItem != null) {
                         item.getItems().add(groupItem);
                     }
@@ -279,7 +277,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 item.setActionValue(Integer.parseInt(data));
                 break;
             case WIDGET:
-                dataSplit = data.split(Definitions.INT_SEP);
+                dataSplit = data.split(Definitions.DELIMITER);
                 item.setWidgetValue(Integer.parseInt(dataSplit[0]));
                 item.setSpanX(Integer.parseInt(dataSplit[1]));
                 item.setSpanY(Integer.parseInt(dataSplit[2]));

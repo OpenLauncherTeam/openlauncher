@@ -141,7 +141,8 @@ public final class Dock extends CellContainer implements DesktopCallback {
     public boolean addItemToPage(@NonNull Item item, int page) {
         View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item);
         if (itemView == null) {
-            HomeActivity._db.deleteItem(item, true);
+            // TODO see if this fixes SD card bug
+            //HomeActivity._db.deleteItem(item, true);
             return false;
         }
         item._location = Item.LOCATION_DOCK;
