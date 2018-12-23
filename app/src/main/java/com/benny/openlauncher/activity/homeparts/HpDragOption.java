@@ -11,7 +11,6 @@ import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.DropTargetListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.viewutil.PopupIconLabelItem;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragAction.Action;
@@ -19,22 +18,8 @@ import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.CellContainer;
 import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.ItemOptionView;
-import com.mikepenz.fastadapter.IAdapter;
-import com.mikepenz.fastadapter.listeners.OnClickListener;
-
-import java.util.ArrayList;
 
 public class HpDragOption {
-    private final int uninstallItemIdentifier = 83;
-    private final int infoItemIdentifier = 84;
-    private final int editItemIdentifier = 85;
-    private final int removeItemIdentifier = 86;
-
-    private PopupIconLabelItem uninstallItem = new PopupIconLabelItem(R.string.uninstall, R.drawable.ic_delete_dark_24dp).withIdentifier(uninstallItemIdentifier);
-    private PopupIconLabelItem infoItem = new PopupIconLabelItem(R.string.info, R.drawable.ic_info_outline_dark_24dp).withIdentifier(infoItemIdentifier);
-    private PopupIconLabelItem editItem = new PopupIconLabelItem(R.string.edit, R.drawable.ic_edit_black_24dp).withIdentifier(editItemIdentifier);
-    private PopupIconLabelItem removeItem = new PopupIconLabelItem(R.string.remove, R.drawable.ic_close_dark_24dp).withIdentifier(removeItemIdentifier);
-
     public void initDragNDrop(@NonNull final HomeActivity _homeActivity, @NonNull final View leftDragHandle, @NonNull final View rightDragHandle, @NonNull final ItemOptionView dragNDropView) {
         final Handler dragHandler = new Handler();
 
@@ -164,7 +149,7 @@ public class HpDragOption {
             @Override
             public boolean onStart(Action action, PointF location, boolean isInside) {
                 if (!DragAction.Action.SEARCH.equals(action))
-                    showItemPopup(dragNDropView, _homeActivity);
+                    _homeActivity.getItemOptionView().showItemPopup(_homeActivity);
                 return true;
             }
 
@@ -323,78 +308,6 @@ public class HpDragOption {
             @Override
             public void onEnd() {
                 _homeActivity.getDock().clearCachedOutlineBitmap();
-            }
-        });
-    }
-
-    void showItemPopup(@NonNull final ItemOptionView dragNDropView, final HomeActivity homeActivity) {
-        ArrayList<PopupIconLabelItem> itemList = new ArrayList<>();
-        switch (dragNDropView.getDragItem().getType()) {
-            case APP:
-            case SHORTCUT:
-            case GROUP: {
-                if (dragNDropView.getDragAction().equals(Action.DRAWER)) {
-                    itemList.add(uninstallItem);
-                    itemList.add(infoItem);
-                } else {
-                    itemList.add(editItem);
-                    itemList.add(removeItem);
-                    itemList.add(infoItem);
-                }
-                break;
-            }
-            case ACTION: {
-                itemList.add(editItem);
-                itemList.add(removeItem);
-                break;
-            }
-            case WIDGET: {
-                itemList.add(removeItem);
-                break;
-            }
-        }
-
-        float x = dragNDropView.getDragLocation().x - HomeActivity._itemTouchX + Tool.dp2px(10);
-        float y = dragNDropView.getDragLocation().y - HomeActivity._itemTouchY - Tool.dp2px((46 * itemList.size()));
-
-        if ((x + Tool.dp2px(200)) > dragNDropView.getWidth()) {
-            dragNDropView.setPopupMenuShowDirection(false);
-            x = dragNDropView.getDragLocation().x - HomeActivity._itemTouchX + homeActivity.getDesktop().getCurrentPage().getCellWidth() - Tool.dp2px(200) - Tool.dp2px(10);
-        } else {
-            dragNDropView.setPopupMenuShowDirection(true);
-        }
-
-        if (y < 0)
-            y = dragNDropView.getDragLocation().y - HomeActivity._itemTouchY + homeActivity.getDesktop().getCurrentPage().getCellHeight() + Tool.dp2px(4);
-        else
-            y -= Tool.dp2px(4);
-
-        dragNDropView.showPopupMenuForItem(x, y, itemList, new OnClickListener<PopupIconLabelItem>() {
-            @Override
-            public boolean onClick(View v, IAdapter<PopupIconLabelItem> adapter, PopupIconLabelItem item, int position) {
-                Item dragItem;
-                if ((dragItem = dragNDropView.getDragItem()) != null) {
-                    switch ((int) item.getIdentifier()) {
-                        case uninstallItemIdentifier: {
-                            homeActivity.onUninstallItem(dragItem);
-                            break;
-                        }
-                        case editItemIdentifier: {
-                            new HpAppEditApplier(homeActivity).onEditItem(dragItem);
-                            break;
-                        }
-                        case removeItemIdentifier: {
-                            homeActivity.onRemoveItem(dragItem);
-                            break;
-                        }
-                        case infoItemIdentifier: {
-                            homeActivity.onInfoItem(dragItem);
-                            break;
-                        }
-                    }
-                }
-                dragNDropView.collapse();
-                return true;
             }
         });
     }

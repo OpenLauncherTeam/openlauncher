@@ -14,7 +14,6 @@ import android.view.ViewPropertyAnimator;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.interfaces.ItemHistory;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.Item.Type;
