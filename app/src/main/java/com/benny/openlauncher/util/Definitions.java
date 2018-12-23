@@ -9,14 +9,16 @@ public class Definitions {
     // separates a list of integers
     public static final String DELIMITER = "#";
 
+    // DO NOT REARRANGE
+    // enum ordinal used for db
     public enum ItemPosition {
-        Desktop,
-        Dock
+        Dock,
+        Desktop
     }
 
     public enum ItemState {
-        Visible,
-        Hidden
+        Hidden,
+        Visible
     }
 
     public enum WallpaperScroll {

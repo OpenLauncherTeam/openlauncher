@@ -119,7 +119,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         }
 
         if (_height == Integer.MAX_VALUE) {
-            holder.itemView.getLayoutParams().height = RecyclerView.LayoutParams.MATCH_PARENT;
+            holder.itemView.getLayoutParams().height = RecyclerView.LayoutParams.WRAP_CONTENT;
         } else {
             holder.itemView.getLayoutParams().height = _height;
         }

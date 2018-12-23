@@ -18,6 +18,7 @@ import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
+import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.widget.CellContainer;
 import com.benny.openlauncher.widget.WidgetView;
@@ -98,7 +99,21 @@ public class ItemViewFactory {
                 };
 
                 widgetContainer.postDelayed(action, 2000);
-                widgetView.setOnLongClickListener(DragHandler.getLongClick(item, DragAction.Action.DESKTOP, callback));
+                // TODO move this to standard DragHandler.getLongClick() method
+                // needs to be set on widgetView but use widgetContainer inside
+                widgetView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        if (Setup.appSettings().getDesktopLock()) {
+                            return false;
+                        }
+                        if (Setup.appSettings().getGestureFeedback()) {
+                            Tool.vibrate(view);
+                        }
+                        DragHandler.startDrag(widgetContainer, item, DragAction.Action.DESKTOP, callback);
+                        return true;
+                    }
+                });
 
                 ve.setOnClickListener(new View.OnClickListener() {
                     @Override

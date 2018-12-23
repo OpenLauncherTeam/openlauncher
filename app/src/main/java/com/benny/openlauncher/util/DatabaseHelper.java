@@ -10,6 +10,8 @@ import android.util.Log;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.util.Definitions.ItemPosition;
+import com.benny.openlauncher.util.Definitions.ItemState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,7 +153,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 while (page >= desktop.size()) {
                     desktop.add(new ArrayList<>());
                 }
-                if (desktopVar == 1 && stateVar == 1) {
+                if (desktopVar == ItemPosition.Desktop.ordinal() && stateVar == ItemState.Visible.ordinal()) {
                     desktop.get(page).add(getSelection(cursor));
                 }
             } while (cursor.moveToNext());
@@ -170,7 +172,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 int desktopVar = Integer.parseInt(cursor.getString(desktopColumnIndex));
                 int stateVar = Integer.parseInt(cursor.getString(stateColumnIndex));
-                if (desktopVar == 0 && stateVar == 1) {
+                if (desktopVar == ItemPosition.Dock.ordinal() && stateVar == ItemState.Visible.ordinal()) {
                     dock.add(getSelection(cursor));
                 }
             } while (cursor.moveToNext());
