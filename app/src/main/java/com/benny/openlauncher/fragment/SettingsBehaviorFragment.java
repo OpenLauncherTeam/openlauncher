@@ -1,10 +1,8 @@
 package com.benny.openlauncher.fragment;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -24,11 +22,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class SettingsGesturesFragment extends SettingsBaseFragment {
+public class SettingsBehaviorFragment extends SettingsBaseFragment {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        addPreferencesFromResource(R.xml.preferences_gestures);
+        addPreferencesFromResource(R.xml.preferences_behavior);
     }
 
     @Override

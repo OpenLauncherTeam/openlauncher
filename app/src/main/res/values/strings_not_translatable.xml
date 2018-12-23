@@ -83,9 +83,8 @@
     <string name="pref_key__cat_desktop" translatable="false">pref_key__cat_desktop</string>
     <string name="pref_key__cat_dock" translatable="false">pref_key__cat_dock</string>
     <string name="pref_key__cat_app_drawer" translatable="false">pref_key__cat_app_drawer</string>
-    <string name="pref_key__cat_gestures" translatable="false">pref_key__cat_gestures</string>
     <string name="pref_key__cat_appearance" translatable="false">pref_key__cat_appearance</string>
-    <string name="pref_key__cat_debug" translatable="false">pref_key__cat_debug</string>
+    <string name="pref_key__cat_behavior" translatable="false">pref_key__cat_behavior</string>
     <string name="pref_key__cat_miscellaneous" translatable="false">pref_key__cat_miscellaneous</string>
     <string name="pref_key__about" translatable="false">pref_key__about</string>
 

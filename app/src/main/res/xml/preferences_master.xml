@@ -35,10 +35,10 @@
     <PreferenceCategory android:title="@string/pref_title__others">
 
         <PreferenceScreen
-            android:fragment="com.benny.openlauncher.fragment.SettingsGesturesFragment"
-            android:icon="@drawable/ic_gesture_dark_24dp"
-            android:key="@string/pref_key__cat_gestures"
-            android:title="@string/pref_title__gestures" />
+            android:fragment="com.benny.openlauncher.fragment.SettingsBehaviorFragment"
+            android:icon="@drawable/ic_behavior"
+            android:key="@string/pref_key__cat_behavior"
+            android:title="@string/pref_title__behavior" />
 
         <PreferenceScreen
             android:fragment="com.benny.openlauncher.fragment.SettingsMiscellaneousFragment"
