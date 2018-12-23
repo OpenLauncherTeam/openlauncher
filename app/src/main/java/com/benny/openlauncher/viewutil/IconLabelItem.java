@@ -30,6 +30,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private int _textColor = Integer.MAX_VALUE;
     private boolean _textVisibility = true;
 
+    private boolean _onClickAnimate = true;
     private View.OnClickListener _onClickListener;
     private View.OnLongClickListener _onLongClickListener;
 
@@ -75,6 +76,11 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     public IconLabelItem withTextVisibility(boolean visibility) {
         _textVisibility = visibility;
+        return this;
+    }
+
+    public IconLabelItem withOnClickAnimate(boolean background) {
+        _onClickAnimate = background;
         return this;
     }
 
@@ -142,6 +148,8 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         }
 
         // most items will not use a long click
+        if (!_onClickAnimate)
+            holder.itemView.setBackgroundResource(0);
         if (_onClickListener != null)
             holder.itemView.setOnClickListener(_onClickListener);
         if (_onLongClickListener != null)

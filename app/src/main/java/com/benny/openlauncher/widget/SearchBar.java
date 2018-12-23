@@ -212,6 +212,7 @@ public class SearchBar extends FrameLayout {
                             .withIconSize(getContext(), 50)
                             .withTextColor(Color.WHITE)
                             .withIconPadding(getContext(), 8)
+                            .withOnClickAnimate(false)
                             .withTextGravity(Setup.appSettings().isSearchUseGrid() ? Gravity.CENTER : Gravity.CENTER_VERTICAL)
                             .withIconGravity(Setup.appSettings().isSearchUseGrid() ? Gravity.TOP : Gravity.START)
                             .withOnClickListener(new OnClickListener() {
