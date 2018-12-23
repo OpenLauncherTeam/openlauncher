@@ -205,9 +205,7 @@ public class HpDragOption {
 
             @Override
             public void onMove(Action action, PointF location) {
-                if (action != DragAction.Action.SEARCH) {
-                    _homeActivity.getDesktop().updateIconProjection((int) location.x, (int) location.y);
-                }
+                _homeActivity.getDesktop().updateIconProjection((int) location.x, (int) location.y);
             }
 
             @Override
@@ -289,9 +287,7 @@ public class HpDragOption {
 
             @Override
             public void onMove(Action action, PointF location) {
-                if (action != DragAction.Action.SEARCH) {
-                    _homeActivity.getDock().updateIconProjection((int) location.x, (int) location.y);
-                }
+                _homeActivity.getDock().updateIconProjection((int) location.x, (int) location.y);
             }
 
             @Override

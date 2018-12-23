@@ -108,7 +108,7 @@ public class AppDrawerGrid extends FrameLayout {
                             Tool.startApp(v.getContext(), app, null);
                         }
                     })
-                    .withOnLongClickListener(DragHandler.getLongClick(Item.newAppItem(app), DragAction.Action.SEARCH, null)));
+                    .withOnLongClickListener(DragHandler.getLongClick(Item.newAppItem(app), DragAction.Action.DRAWER, null)));
         }
         _gridDrawerAdapter.set(items);
     }
