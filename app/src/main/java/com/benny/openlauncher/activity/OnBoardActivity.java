@@ -22,7 +22,7 @@ public class OnBoardActivity extends MaterialIntroActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO remove
+        // TODO remove after sufficient time has passed
         if (!getSharedPreferences("quickSettings", Context.MODE_PRIVATE).getBoolean("firstStart", true)) {
             getSharedPreferences("app", Context.MODE_PRIVATE).edit().putBoolean(getResources().getString(R.string.pref_key__show_intro), false).commit();
         }

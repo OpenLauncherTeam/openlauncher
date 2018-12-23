@@ -160,9 +160,9 @@ public class AppItemView extends View implements Drawable.Callback {
     }
 
     public static class Builder {
-        // TODO accept any view and just add onclick and longclick stuff
-        // this will work for widget, other cases
-        // need to move to separate class
+        // TODO accept any view and just add click and long click listeners
+        // this class isn't necessary
+        // remove in favor of using ItemViewFactory
         AppItemView _view;
 
         public Builder(Context context) {
