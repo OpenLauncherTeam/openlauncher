@@ -38,19 +38,10 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
 
     @Override
     public void bindView(DrawerAppItem.ViewHolder holder, List payloads) {
+        Item item = Item.newAppItem(_app);
         holder.builder
-                .setAppItem(_app)
-                .withOnLongClick(Item.newAppItem(_app), DragAction.Action.DRAWER, new AppItemView.LongPressCallBack() {
-                    @Override
-                    public boolean readyForDrag(View view) {
-                        return true;
-                    }
-
-                    @Override
-                    public void afterDrag(View view) {
-                        // do nothing
-                    }
-                });
+                .setAppItem(item)
+                .withOnLongClick(item, DragAction.Action.DRAWER, null);
         super.bindView(holder, payloads);
     }
 

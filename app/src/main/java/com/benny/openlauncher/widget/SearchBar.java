@@ -32,6 +32,7 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
@@ -219,17 +220,7 @@ public class SearchBar extends FrameLayout {
                                     Tool.startApp(v.getContext(), app, null);
                                 }
                             })
-                            .withOnLongClickListener(AppItemView.Builder.getLongClickDragAppListener(Item.newAppItem(app), DragAction.Action.SEARCH, new AppItemView.LongPressCallBack() {
-                                @Override
-                                public boolean readyForDrag(View view) {
-                                    return true;
-                                }
-
-                                @Override
-                                public void afterDrag(View view) {
-                                    // do nothing
-                                }
-                            })));
+                            .withOnLongClickListener(DragHandler.getLongClick(Item.newAppItem(app), DragAction.Action.SEARCH, null)));
                 }
                 _adapter.set(items);
 

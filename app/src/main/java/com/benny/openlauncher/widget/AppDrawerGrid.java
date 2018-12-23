@@ -16,6 +16,7 @@ import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction;
+import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.viewutil.DrawerAppItem;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Tool;
@@ -107,17 +108,7 @@ public class AppDrawerGrid extends FrameLayout {
                             Tool.startApp(v.getContext(), app, null);
                         }
                     })
-                    .withOnLongClickListener(AppItemView.Builder.getLongClickDragAppListener(Item.newAppItem(app), DragAction.Action.SEARCH, new AppItemView.LongPressCallBack() {
-                        @Override
-                        public boolean readyForDrag(View view) {
-                            return true;
-                        }
-
-                        @Override
-                        public void afterDrag(View view) {
-                            // do nothing
-                        }
-                    })));
+                    .withOnLongClickListener(DragHandler.getLongClick(Item.newAppItem(app), DragAction.Action.SEARCH, null)));
         }
         _gridDrawerAdapter.set(items);
     }

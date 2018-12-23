@@ -28,6 +28,7 @@ public class ItemViewFactory {
         AppItemView.Builder builder = new AppItemView.Builder(context);
         builder.setIconSize(Setup.appSettings().getIconSize());
         builder.vibrateWhenLongPress(Setup.appSettings().isGestureFeedback());
+        builder.withOnLongClick(item, type, callback);
         View view = null;
 
         switch(type) {
@@ -40,31 +41,6 @@ public class ItemViewFactory {
                 builder.setLabelVisibility(Setup.appSettings().isDesktopShowLabel());
                 builder.setTextColor(Color.WHITE);
                 break;
-        }
-        if (callback != null) {
-            builder.withOnLongClick(item, type, new AppItemView.LongPressCallBack() {
-                @Override
-                public boolean readyForDrag(View view) {
-                    return true;
-                }
-
-                @Override
-                public void afterDrag(View view) {
-                    callback.setLastItem(item, view);
-                }
-            });
-        } else {
-            builder.withOnLongClick(item, type, new AppItemView.LongPressCallBack() {
-                @Override
-                public boolean readyForDrag(View view) {
-                    return true;
-                }
-
-                @Override
-                public void afterDrag(View view) {
-                    // do nothing
-                }
-            });
         }
         switch (item.getType()) {
             case APP:

@@ -152,13 +152,6 @@ public class AppItemView extends View implements Drawable.Callback {
         return (getWidth() - _iconSize) / 2;
     }
 
-    // TODO REMOVE THIS
-    public interface LongPressCallBack {
-        boolean readyForDrag(View view);
-
-        void afterDrag(View view);
-    }
-
     public static class Builder {
         // TODO accept any view and just add click and long click listeners
         // this class isn't necessary
@@ -173,42 +166,8 @@ public class AppItemView extends View implements Drawable.Callback {
             _view = view;
         }
 
-        public static OnLongClickListener getLongClickDragAppListener(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
-            return new OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    if (Setup.appSettings().isDesktopLock()) {
-                        return false;
-                    }
-                    if (eventAction != null && !eventAction.readyForDrag(v)) {
-                        return false;
-                    }
-                    v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                    DragHandler.startDrag(v, item, action, eventAction);
-                    return true;
-                }
-            };
-        }
-
         public AppItemView getView() {
             return _view;
-        }
-
-        public Builder setAppItem(final App app) {
-            _view.setLabel(app.getLabel());
-            _view.setIcon(app.getIcon());
-            _view.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Tool.createScaleInScaleOutAnim(_view, new Runnable() {
-                        @Override
-                        public void run() {
-                            Tool.startApp(_view.getContext(), app, _view);
-                        }
-                    }, 0.85f);
-                }
-            });
-            return this;
         }
 
         public Builder setAppItem(final Item item) {
@@ -267,7 +226,6 @@ public class AppItemView extends View implements Drawable.Callback {
                     _view.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                             HomeActivity.Companion.getLauncher().openAppDrawer(_view, 0, 0);
                         }
                     });
@@ -276,20 +234,17 @@ public class AppItemView extends View implements Drawable.Callback {
             return this;
         }
 
-        public Builder withOnLongClick(final Item item, final DragAction.Action action, @Nullable final LongPressCallBack eventAction) {
+        public Builder withOnLongClick(final Item item, final DragAction.Action action, DesktopCallback desktopCallback) {
             _view.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     if (Setup.appSettings().isDesktopLock()) {
                         return false;
                     }
-                    if (eventAction != null && !eventAction.readyForDrag(v)) {
-                        return false;
-                    }
                     if (_view._vibrateWhenLongPress) {
                         Tool.vibrate(_view);
                     }
-                    DragHandler.startDrag(_view, item, action, eventAction);
+                    DragHandler.startDrag(_view, item, action, desktopCallback);
                     return true;
                 }
             });

@@ -119,9 +119,7 @@ public class LauncherAction {
                 break;
             case TurnOffScreen:
                 try {
-                    // not functional yet, needs to reset screen timeout to default on activity destroy
-                    // also might want to set up a permission manager to handle this, device admin for lock,
-                    // and storage request for icons and backup/restore
+                    // still needs to reset screen timeout back to default on activity destroy
                     int defaultTurnOffTime =  Settings.System.getInt(context.getContentResolver(),Settings.System.SCREEN_OFF_TIMEOUT, 60000);
                     Settings.System.putInt(context.getContentResolver(),Settings.System.SCREEN_OFF_TIMEOUT, 1000);
                     Settings.System.putInt(context.getContentResolver(),Settings.System.SCREEN_OFF_TIMEOUT, defaultTurnOffTime);

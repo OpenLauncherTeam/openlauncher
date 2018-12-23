@@ -3,24 +3,40 @@ package com.benny.openlauncher.util;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
-import android.support.annotation.Nullable;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 
 import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.viewutil.DesktopCallback;
 import com.benny.openlauncher.widget.AppItemView;
 
 public final class DragHandler {
     public static Bitmap _cachedDragBitmap;
 
-    public static void startDrag(View view, Item item, DragAction.Action action, @Nullable final AppItemView.LongPressCallBack eventAction) {
+    public static void startDrag(View view, Item item, DragAction.Action action, final DesktopCallback desktopCallback) {
         _cachedDragBitmap = loadBitmapFromView(view);
 
         if (HomeActivity.Companion.getLauncher() != null)
             HomeActivity._launcher.getItemOptionView().startDragNDropOverlay(view, item, action);
 
-        if (eventAction != null)
-            eventAction.afterDrag(view);
+        if (desktopCallback != null)
+            desktopCallback.setLastItem(item, view);
+    }
+
+    public static View.OnLongClickListener getLongClick(final Item item, final DragAction.Action action, final DesktopCallback desktopCallback) {
+        return new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (Setup.appSettings().isDesktopLock()) {
+                    return false;
+                }
+                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                startDrag(view, item, action, desktopCallback);
+                return true;
+            }
+        };
     }
 
     private static Bitmap loadBitmapFromView(View view) {
