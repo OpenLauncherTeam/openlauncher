@@ -13,7 +13,8 @@ public class StatusView extends View {
     }
 
     public void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        // same as navigation view but uses top inset
+        // scale the view to pad the home layout for the missing status and navigation bars
+        // TODO move home layout to class so this can be done within the view itself
     }
 
     @Override

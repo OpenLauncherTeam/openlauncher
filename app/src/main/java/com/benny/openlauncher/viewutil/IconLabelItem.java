@@ -28,6 +28,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     public String _label;
     private int _textGravity = Gravity.CENTER_VERTICAL;
     private int _textColor = Integer.MAX_VALUE;
+    private boolean _textVisibility = true;
 
     private View.OnClickListener _onClickListener;
     private View.OnLongClickListener _onLongClickListener;
@@ -72,6 +73,11 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         return this;
     }
 
+    public IconLabelItem withTextVisibility(boolean visibility) {
+        _textVisibility = visibility;
+        return this;
+    }
+
     public IconLabelItem withOnClickListener(View.OnClickListener listener) {
         _onClickListener = listener;
         return this;
@@ -106,7 +112,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         }
 
         // only run all this code if a label was passed
-        if (_label != null) {
+        if (_label != null && _textVisibility) {
             holder.textView.setText(_label);
             holder.textView.setGravity(_textGravity);
             holder.textView.setMaxLines(1);

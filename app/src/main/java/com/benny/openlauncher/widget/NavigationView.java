@@ -7,15 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
 
-import com.benny.openlauncher.activity.HomeActivity;
-
 public class NavigationView extends View {
     public NavigationView(Context context, AttributeSet attr) {
         super(context, attr);
     }
 
     public void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        // same as status view but uses top inset
+        // scale the view to pad the home layout for the missing status and navigation bars
+        // TODO move home layout to class so this can be done within the view itself
     }
 
     @Override

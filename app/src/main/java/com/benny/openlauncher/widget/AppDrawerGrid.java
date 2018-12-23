@@ -2,8 +2,10 @@ package com.benny.openlauncher.widget;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -12,9 +14,12 @@ import android.widget.FrameLayout;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.viewutil.DrawerAppItem;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.turingtechnologies.materialscrollbar.AlphabetIndicator;
 import com.turingtechnologies.materialscrollbar.DragScrollBar;
@@ -86,9 +91,33 @@ public class AppDrawerGrid extends FrameLayout {
 
     public void updateAdapter(List<App> apps) {
         _apps = apps;
-        ArrayList<DrawerAppItem> items = new ArrayList<>();
+        ArrayList<IconLabelItem> items = new ArrayList<>();
         for (int i = 0; i < apps.size(); i++) {
-            items.add(new DrawerAppItem(apps.get(i)));
+            App app = apps.get(i);
+            items.add(new IconLabelItem(app.getIcon(), app.getLabel())
+                    .withIconSize(getContext(), 50)
+                    .withTextColor(Color.WHITE)
+                    .withTextVisibility(Setup.appSettings().isDrawerShowLabel())
+                    .withIconPadding(getContext(), 8)
+                    .withTextGravity(Gravity.CENTER)
+                    .withIconGravity(Gravity.TOP)
+                    .withOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Tool.startApp(v.getContext(), app, null);
+                        }
+                    })
+                    .withOnLongClickListener(AppItemView.Builder.getLongClickDragAppListener(Item.newAppItem(app), DragAction.Action.SEARCH, new AppItemView.LongPressCallBack() {
+                        @Override
+                        public boolean readyForDrag(View view) {
+                            return true;
+                        }
+
+                        @Override
+                        public void afterDrag(View view) {
+                            // do nothing
+                        }
+                    })));
         }
         _gridDrawerAdapter.set(items);
     }
@@ -118,7 +147,7 @@ public class AppDrawerGrid extends FrameLayout {
         _gridDrawerAdapter.notifyAdapterDataSetChanged();
     }
 
-    public static class AppDrawerGridAdapter extends FastItemAdapter<DrawerAppItem> implements INameableAdapter {
+    public static class AppDrawerGridAdapter extends FastItemAdapter<IconLabelItem> implements INameableAdapter {
         public AppDrawerGridAdapter() {
         }
 
