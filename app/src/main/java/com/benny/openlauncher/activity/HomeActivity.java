@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.content.pm.LauncherApps;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build.VERSION;

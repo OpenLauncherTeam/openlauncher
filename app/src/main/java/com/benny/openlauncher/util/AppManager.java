@@ -2,6 +2,8 @@ package com.benny.openlauncher.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.LauncherActivityInfo;
+import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
@@ -12,6 +14,8 @@ import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 
+import android.os.Build;
+import android.os.UserHandle;
 import android.support.annotation.NonNull;
 
 import java.text.Collator;
@@ -156,6 +160,18 @@ public class AppManager {
         protected Object doInBackground(Object[] p1) {
             _apps.clear();
             _nonFilteredApps.clear();
+
+            // work profile support
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                LauncherApps launcherApps = (LauncherApps) _context.getSystemService(Context.LAUNCHER_APPS_SERVICE);
+                List<UserHandle> profiles = launcherApps.getProfiles();
+                for (UserHandle userHandle : profiles) {
+                    List<LauncherActivityInfo> apps = launcherApps.getActivityList(null, userHandle);
+                    for (LauncherActivityInfo info : apps) {
+                        _nonFilteredApps.add(new App(_packageManager, info.getApplicationInfo()));
+                    }
+                }
+            }
 
             Intent intent = new Intent(Intent.ACTION_MAIN, null);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);

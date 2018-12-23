@@ -1,5 +1,6 @@
 package com.benny.openlauncher.model;
 
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
@@ -16,6 +17,13 @@ public class App {
         _label = info.loadLabel(pm).toString();
         _packageName = info.activityInfo.packageName;
         _className = info.activityInfo.name;
+    }
+
+    public App(PackageManager pm, ApplicationInfo info) {
+        _icon = info.loadIcon(pm);
+        _label = info.loadLabel(pm).toString();
+        _packageName = info.packageName;
+        _className = info.name;
     }
 
     @Override
