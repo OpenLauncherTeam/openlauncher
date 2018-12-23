@@ -2,35 +2,22 @@ package com.benny.openlauncher.model;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Parcel;
-import android.os.Parcelable;
 
-import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Item implements Parcelable {
-
+public class Item {
     public static final int LOCATION_DESKTOP = 0;
     public static final int LOCATION_DOCK = 1;
-    public static final Creator<Item> CREATOR = new Creator<Item>() {
 
-        @Override
-        public Item createFromParcel(Parcel parcel) {
-            return new Item(parcel);
-        }
-
-        @Override
-        public Item[] newArray(int size) {
-            return new Item[size];
-        }
-    };
-    public Type _type;
+    // all items need these values
     public Drawable _icon;
+    public String _label;
+    public Type _type;
+    public int _id;
     public int _location;
     public int _x = 0;
     public int _y = 0;
@@ -48,59 +35,11 @@ public class Item implements Parcelable {
     public int _widgetValue;
     public int _spanX = 1;
     public int _spanY = 1;
-    // all items need these values
-    private int _id;
-    private String _label = "";
 
     public Item() {
         Random random = new Random();
         _id = random.nextInt();
-    }
-
-    public Item(Parcel parcel) {
-        _id = parcel.readInt();
-        _type = Type.valueOf(parcel.readString());
-        _label = parcel.readString();
-        _x = parcel.readInt();
-        _y = parcel.readInt();
-        switch (_type) {
-            case APP:
-            case SHORTCUT:
-                _intent = Tool.getIntentFromString(parcel.readString());
-                break;
-            case GROUP:
-                List<String> items = new ArrayList<>();
-                parcel.readStringList(items);
-                _items = new ArrayList<>();
-                for (String item : items) {
-                    _items.add(HomeActivity.Companion.getLauncher()._db.getItem(Integer.parseInt(item)));
-                }
-                break;
-            case ACTION:
-                _actionValue = parcel.readInt();
-                break;
-            case WIDGET:
-                _widgetValue = parcel.readInt();
-                _spanX = parcel.readInt();
-                _spanY = parcel.readInt();
-                break;
-        }
-        _location = parcel.readInt();
-
-        if (Setup.appSettings().enableImageCaching()) {
-            _icon = Tool.getIcon(HomeActivity.Companion.getLauncher(), Integer.toString(_id));
-        } else {
-            switch (_type) {
-                case APP:
-                case SHORTCUT:
-                    App app = Setup.appLoader().findItemApp(this);
-                    _icon = app != null ? app.getIcon() : null;
-                    break;
-                default:
-                    // TODO...
-                    break;
-            }
-        }
+        _label = "";
     }
 
     public static Item newAppItem(App app) {
@@ -153,44 +92,12 @@ public class Item implements Parcelable {
 
     @Override
     public boolean equals(Object object) {
-        Item itemObject = (Item) object;
-        return object != null && _id == itemObject._id;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(_id);
-        out.writeString(_type.toString());
-        out.writeString(_label);
-        out.writeInt(_x);
-        out.writeInt(_y);
-        switch (_type) {
-            case APP:
-            case SHORTCUT:
-                out.writeString(Tool.getIntentAsString(_intent));
-                break;
-            case GROUP:
-                List<String> items = new ArrayList<>();
-                for (Item item : _items) {
-                    items.add(Integer.toString(item._id));
-                }
-                out.writeStringList(items);
-                break;
-            case ACTION:
-                out.writeInt(_actionValue);
-                break;
-            case WIDGET:
-                out.writeInt(_widgetValue);
-                out.writeInt(_spanX);
-                out.writeInt(_spanY);
-                break;
+        if (object instanceof Item) {
+            Item item = (Item) object;
+            return _id == item._id;
+        } else {
+            return false;
         }
-        out.writeInt(_location);
     }
 
     public void reset() {

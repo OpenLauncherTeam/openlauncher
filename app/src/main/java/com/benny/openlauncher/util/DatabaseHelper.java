@@ -78,9 +78,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String concat = "";
         switch (item.getType()) {
             case APP:
-                if (Setup.appSettings().enableImageCaching()) {
-                    Tool.saveIcon(_context, Tool.drawableToBitmap(item.getIcon()), Integer.toString(item.getId()));
-                }
+            case SHORTCUT:
+                Tool.saveIcon(_context, Tool.drawableToBitmap(item.getIcon()), Integer.toString(item.getId()));
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.getIntent()));
                 break;
             case GROUP:
@@ -204,9 +203,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String concat = "";
         switch (item.getType()) {
             case APP:
-                if (Setup.appSettings().enableImageCaching()) {
-                    Tool.saveIcon(_context, Tool.drawableToBitmap(item.getIcon()), Integer.toString(item.getId()));
-                }
+            case SHORTCUT:
+                Tool.saveIcon(_context, Tool.drawableToBitmap(item.getIcon()), Integer.toString(item.getId()));
                 itemValues.put(COLUMN_DATA, Tool.getIntentAsString(item.getIntent()));
                 break;
             case GROUP:

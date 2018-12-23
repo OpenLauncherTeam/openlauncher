@@ -255,8 +255,9 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         setString(R.string.pref_key__icon_pack, value);
     }
 
-    public float getOverallAnimationSpeedModifier() {
-        return (float) (getInt(R.string.pref_key__overall_animation_speed_modifier, 30) / 100.0);
+    public int getAnimationSpeed() {
+        // invert the value because it is used as a duration
+        return 100 - getInt(R.string.pref_key__overall_animation_speed_modifier, 70);
     }
 
     public String getLanguage() {
@@ -296,10 +297,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         setStringList(R.string.pref_key__minibar_items, value);
     }
 
-    public boolean isResetSearchBarOnOpen() {
-        return false;
-    }
-
     public boolean isSearchUseGrid() {
         return getBool(R.string.pref_key__desktop_search_use_grid, false);
     }
@@ -324,7 +321,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         setInt(R.string.pref_key__desktop_current_position, value);
     }
 
-    public boolean isDesktopLock() {
+    public boolean getDesktopLock() {
         return getBool(R.string.pref_key__desktop_lock, false);
     }
 
@@ -339,8 +336,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     @SuppressLint("ApplySharedPref")
     public void setAppRestartRequired(boolean value) {
         // MUST be committed
-        _prefApp.edit().putBoolean(_context.getString
-                (R.string.pref_key__queue_restart), value).commit();
+        _prefApp.edit().putBoolean(_context.getString(R.string.pref_key__queue_restart), value).commit();
     }
 
     @SuppressLint("ApplySharedPref")
@@ -349,7 +345,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         _prefApp.edit().putBoolean(_context.getString(R.string.pref_key__show_intro), value).commit();
     }
 
-    public boolean isAppFirstLaunch() {
+    public boolean getAppFirstLaunch() {
         return getBool(R.string.pref_key__first_start, true);
     }
 
@@ -357,9 +353,5 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     public void setAppFirstLaunch(boolean value) {
         // MUST be committed
         _prefApp.edit().putBoolean(_context.getString(R.string.pref_key__first_start), value).commit();
-    }
-
-    public boolean enableImageCaching() {
-        return true;
     }
 }

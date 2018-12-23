@@ -115,26 +115,26 @@ public class DesktopOptionView extends FrameLayout {
                         updateHomeIcon(true);
                         _desktopOptionViewListener.onSetPageAsHome();
                     } else if (id == R.string.remove) {
-                        if (!Setup.appSettings().isDesktopLock()) {
+                        if (!Setup.appSettings().getDesktopLock()) {
                             _desktopOptionViewListener.onRemovePage();
                         } else {
                             Tool.toast(getContext(), "Desktop is locked.");
                         }
                     } else if (id == R.string.widget) {
-                        if (!Setup.appSettings().isDesktopLock()) {
+                        if (!Setup.appSettings().getDesktopLock()) {
                             _desktopOptionViewListener.onPickWidget();
                         } else {
                             Tool.toast(getContext(), "Desktop is locked.");
                         }
                     } else if (id == R.string.action) {
-                        if (!Setup.appSettings().isDesktopLock()) {
+                        if (!Setup.appSettings().getDesktopLock()) {
                             _desktopOptionViewListener.onPickDesktopAction();
                         } else {
                             Tool.toast(getContext(), "Desktop is locked.");
                         }
                     } else if (id == R.string.lock) {
-                        Setup.appSettings().setDesktopLock(!Setup.appSettings().isDesktopLock());
-                        updateLockIcon(Setup.appSettings().isDesktopLock());
+                        Setup.appSettings().setDesktopLock(!Setup.appSettings().getDesktopLock());
+                        updateLockIcon(Setup.appSettings().getDesktopLock());
                     } else if (id == R.string.pref_title__settings) {
                         _desktopOptionViewListener.onLaunchSettings();
                     } else {

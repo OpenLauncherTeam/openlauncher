@@ -181,7 +181,7 @@ public class AppItemView extends View implements Drawable.Callback {
                         public void run() {
                             Tool.startApp(_view.getContext(), AppManager.getInstance(_view.getContext()).findApp(item._intent), _view);
                         }
-                    }, 0.85f);
+                    });
                 }
             });
             return this;
@@ -198,7 +198,7 @@ public class AppItemView extends View implements Drawable.Callback {
                         public void run() {
                             _view.getContext().startActivity(item.getIntent());
                         }
-                    }, 0.85f);
+                    });
                 }
             });
             return this;
@@ -221,33 +221,22 @@ public class AppItemView extends View implements Drawable.Callback {
         public Builder setActionItem(Item item) {
             _view.setLabel(item.getLabel());
             _view.setIcon(ContextCompat.getDrawable(Setup.appContext(), R.drawable.ic_apps_white_48dp));
-            switch (item.getActionValue()) {
-                case Definitions.ACTION_LAUNCHER:
-                    _view.setOnClickListener(new OnClickListener() {
+            _view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Tool.createScaleInScaleOutAnim(_view, new Runnable() {
                         @Override
-                        public void onClick(View view) {
+                        public void run() {
                             HomeActivity.Companion.getLauncher().openAppDrawer(_view, 0, 0);
                         }
                     });
-                    break;
-            }
+                }
+            });
             return this;
         }
 
         public Builder withOnLongClick(final Item item, final DragAction.Action action, DesktopCallback desktopCallback) {
-            _view.setOnLongClickListener(new OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    if (Setup.appSettings().isDesktopLock()) {
-                        return false;
-                    }
-                    if (_view._vibrateWhenLongPress) {
-                        Tool.vibrate(_view);
-                    }
-                    DragHandler.startDrag(_view, item, action, desktopCallback);
-                    return true;
-                }
-            });
+            _view.setOnLongClickListener(DragHandler.getLongClick(item, action, desktopCallback));
             return this;
         }
 

@@ -3,7 +3,6 @@ package com.benny.openlauncher.util;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
-import android.view.HapticFeedbackConstants;
 import android.view.View;
 
 import com.benny.openlauncher.activity.HomeActivity;
@@ -29,10 +28,12 @@ public final class DragHandler {
         return new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                if (Setup.appSettings().isDesktopLock()) {
+                if (Setup.appSettings().getDesktopLock()) {
                     return false;
                 }
-                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                if (Setup.appSettings().isGestureFeedback()) {
+                    Tool.vibrate(view);
+                }
                 startDrag(view, item, action, desktopCallback);
                 return true;
             }

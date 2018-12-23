@@ -19,7 +19,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -235,7 +234,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
                 AppSettings appSettings = Setup.appSettings();
                 getDesktop().initDesktop();
-                if (appSettings.isAppFirstLaunch()) {
+                if (appSettings.getAppFirstLaunch()) {
                     appSettings.setAppFirstLaunch(false);
                     appSettings.setAppShowIntro(false);
                     Item appDrawerBtnItem = Item.newActionItem(8);
@@ -271,7 +270,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         getDesktopOptionView().postDelayed(new Runnable() {
             @Override
             public void run() {
-                getDesktopOptionView().updateLockIcon(appSettings.isDesktopLock());
+                getDesktopOptionView().updateLockIcon(appSettings.getDesktopLock());
             }
         }, 100);
         getDesktop().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

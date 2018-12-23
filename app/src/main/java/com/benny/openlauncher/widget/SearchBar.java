@@ -276,14 +276,6 @@ public class SearchBar extends FrameLayout {
         if (_callback != null) {
             _callback.onExpand();
         }
-        if (Setup.appSettings().isResetSearchBarOnOpen()) {
-            RecyclerView.LayoutManager lm = _searchRecycler.getLayoutManager();
-            if (lm instanceof LinearLayoutManager) {
-                ((LinearLayoutManager) _searchRecycler.getLayoutManager()).scrollToPositionWithOffset(0, 0);
-            } else if (lm instanceof GridLayoutManager) {
-                ((GridLayoutManager) _searchRecycler.getLayoutManager()).scrollToPositionWithOffset(0, 0);
-            }
-        }
         _icon.setIcon(getResources().getDrawable(R.drawable.ic_clear_white_24dp));
         Tool.visibleViews(ANIM_TIME, _searchCardContainer, _searchRecycler, _switchButton);
         Tool.goneViews(ANIM_TIME, _searchClock);

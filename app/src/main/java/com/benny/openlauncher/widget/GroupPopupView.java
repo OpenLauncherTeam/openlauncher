@@ -17,7 +17,6 @@ import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
-import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
@@ -115,7 +114,7 @@ public class GroupPopupView extends RevealFrameLayout {
                 view.setOnLongClickListener(new OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view2) {
-                        if (Setup.appSettings().isDesktopLock()) return false;
+                        if (Setup.appSettings().getDesktopLock()) return false;
 
                         removeItem(context, item, groupItem, (AppItemView) itemView);
 
@@ -143,7 +142,7 @@ public class GroupPopupView extends RevealFrameLayout {
                                     setVisibility(View.INVISIBLE);
                                     view.getContext().startActivity(groupItem.getIntent());
                                 }
-                            }, 1f);
+                            });
                         }
                     });
                 }
@@ -219,18 +218,18 @@ public class GroupPopupView extends RevealFrameLayout {
 
         setVisibility(View.VISIBLE);
         _popupCard.setVisibility(View.VISIBLE);
-        animateFolderOpen();
+        expand();
 
         return true;
     }
 
-    private void animateFolderOpen() {
+    private void expand() {
         _cellContainer.setAlpha(0);
 
         int finalRadius = Math.max(_popupCard.getWidth(), _popupCard.getHeight());
         int startRadius = Tool.dp2px(Setup.appSettings().getDesktopIconSize() / 2);
 
-        long animDuration = 1 + (long) (210 * Setup.appSettings().getOverallAnimationSpeedModifier());
+        long animDuration = Setup.appSettings().getAnimationSpeed() * 10;
         _folderAnimator = ViewAnimationUtils.createCircularReveal(_popupCard, _cx, _cy, startRadius, finalRadius);
         _folderAnimator.setStartDelay(0);
         _folderAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -244,7 +243,7 @@ public class GroupPopupView extends RevealFrameLayout {
         if (_folderAnimator == null || _folderAnimator.isRunning())
             return;
 
-        long animDuration = 1 + (long) (210 * Setup.appSettings().getOverallAnimationSpeedModifier());
+        long animDuration = Setup.appSettings().getAnimationSpeed() * 10;
         Tool.invisibleViews(animDuration, _cellContainer);
 
         int startRadius = Tool.dp2px(Setup.appSettings().getDesktopIconSize() / 2);

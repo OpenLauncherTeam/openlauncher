@@ -23,7 +23,7 @@ public class AppDrawerController extends RevealFrameLayout {
     public boolean _isOpen = false;
     private Callback.a2<Boolean, Boolean> _appDrawerCallback;
     private Animator _appDrawerAnimator;
-    private Long _drawerAnimationTime = 200L;
+    private int _drawerAnimationTime;
 
     public static class Mode {
         public static final int LIST = 0;
@@ -61,7 +61,7 @@ public class AppDrawerController extends RevealFrameLayout {
         if (_isOpen) return;
         _isOpen = true;
 
-        _drawerAnimationTime = (long) (200 * Setup.appSettings().getOverallAnimationSpeedModifier());
+        _drawerAnimationTime = Setup.appSettings().getAnimationSpeed() * 10;
         _appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(getDrawer(), cx, cy, 0, Math.max(getWidth(), getHeight()));
         _appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         _appDrawerAnimator.setDuration(_drawerAnimationTime);
@@ -93,6 +93,7 @@ public class AppDrawerController extends RevealFrameLayout {
         if (!_isOpen) return;
         _isOpen = false;
 
+        _drawerAnimationTime = Setup.appSettings().getAnimationSpeed() * 10;
         _appDrawerAnimator = io.codetail.animation.ViewAnimationUtils.createCircularReveal(getDrawer(), cx, cy, Math.max(getWidth(), getHeight()), 0);
         _appDrawerAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         _appDrawerAnimator.setDuration(_drawerAnimationTime);

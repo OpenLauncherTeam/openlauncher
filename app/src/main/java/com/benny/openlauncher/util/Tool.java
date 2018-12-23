@@ -14,7 +14,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
@@ -98,23 +98,22 @@ public class Tool {
         }
     }
 
-    public static final void createScaleInScaleOutAnim(@NonNull final View view, @NonNull final Runnable endAction, float runActionAtPercent) {
-        final long animTime = (long) (Setup.appSettings().getOverallAnimationSpeedModifier() * ((float) ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION));
-        ViewPropertyAnimator duration = view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(animTime);
-
-        duration.setInterpolator(new AccelerateDecelerateInterpolator());
+    public static void createScaleInScaleOutAnim(final View view, final Runnable action) {
+        final int animTime = Setup.appSettings().getAnimationSpeed() * 4;
+        ViewPropertyAnimator animateScaleIn = view.animate().scaleX(0.85f).scaleY(0.85f).setDuration(animTime);
+        animateScaleIn.setInterpolator(new AccelerateDecelerateInterpolator());
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ViewPropertyAnimator duration = view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(animTime);
-                duration.setInterpolator(new AccelerateDecelerateInterpolator());
+                ViewPropertyAnimator animateScaleOut = view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(animTime);
+                animateScaleOut.setInterpolator(new AccelerateDecelerateInterpolator());
                 new Handler().postDelayed(new Runnable() {
                     public final void run() {
-                        endAction.run();
+                        action.run();
                     }
                 }, animTime);
             }
-        }, (long) (animTime * runActionAtPercent));
+        }, animTime);
     }
 
     public static void toast(Context context, int str) {
@@ -228,32 +227,17 @@ public class Tool {
     }
 
     public static Drawable getIcon(Context context, String filename) {
-        if (filename == null) {
-            return null;
-        }
-        Drawable icon = null;
         Bitmap bitmap = BitmapFactory.decodeFile(context.getFilesDir() + "/icons/" + filename + ".png");
-        if (bitmap != null) {
-            icon = new BitmapDrawable(context.getResources(), bitmap);
-        }
-        return icon;
+        if (bitmap != null) return new BitmapDrawable(context.getResources(), bitmap);
+        return null;
     }
 
     public static void saveIcon(Context context, Bitmap icon, String filename) {
-        File directory = new File(context.getFilesDir() + "/icons");
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-
-        File file = new File(context.getFilesDir() + "/icons/" + filename + ".png");
-        removeIcon(context, filename);
+        File directory = new File(context.getFilesDir() + "/icons/");
+        if (!directory.exists()) directory.mkdir();
+        File file = new File(directory + filename + ".png");
         try {
             file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
             FileOutputStream out = new FileOutputStream(file);
             icon.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.close();

@@ -99,19 +99,7 @@ public class ItemViewFactory {
                 };
 
                 widgetContainer.postDelayed(action, 2000);
-                widgetView.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View view) {
-                        if (Setup.appSettings().isDesktopLock()) {
-                            return false;
-                        }
-                        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                        DragHandler.startDrag(view, item, DragAction.Action.DESKTOP, null);
-
-                        callback.setLastItem(item, widgetContainer);
-                        return true;
-                    }
-                });
+                widgetView.setOnLongClickListener(DragHandler.getLongClick(item, DragAction.Action.DESKTOP, callback));
 
                 ve.setOnClickListener(new View.OnClickListener() {
                     @Override
