@@ -18,6 +18,10 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
     private App _app;
 
     public DrawerAppItem(App app) {
+        // TODO merge IconLabelItem and DrawerAppItem into one class
+        // they both do the same thing
+        // ideally remove all the custom code for AppItemView in favor of the
+        // nicer code in IconLabelItem
         _app = app;
     }
 
@@ -57,7 +61,7 @@ public class DrawerAppItem extends AbstractItem<DrawerAppItem, DrawerAppItem.Vie
 
             builder = new AppItemView.Builder(appItemView)
                     .setIconSize(Setup.appSettings().getIconSize())
-                    .setLabelVisibility(Setup.appSettings().isDrawerShowLabel())
+                    .setLabelVisibility(Setup.appSettings().getDrawerShowLabel())
                     .setTextColor(Setup.appSettings().getDrawerLabelColor());
         }
     }

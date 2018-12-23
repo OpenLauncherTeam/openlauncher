@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.interfaces.ItemHistory;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction.Action;
@@ -67,7 +66,7 @@ public final class Dock extends CellContainer implements DesktopCallback {
                 if (_startPosY - ev.getY() > 150.0f && Setup.appSettings().getGestureDockSwipeUp()) {
                     Point point = new Point((int) ev.getX(), (int) ev.getY());
                     point = Tool.convertPoint(point, this, _homeActivity.getAppDrawerController());
-                    if (Setup.appSettings().isGestureFeedback()) {
+                    if (Setup.appSettings().getGestureFeedback()) {
                         Tool.vibrate(this);
                     }
                     _homeActivity.openAppDrawer(this, point.x, point.y);
@@ -97,7 +96,7 @@ public final class Dock extends CellContainer implements DesktopCallback {
                 Item.Type type = dragNDropView.getDragItem()._type;
                 clearCachedOutlineBitmap();
                 if (!type.equals(Item.Type.WIDGET) && (coordinateToChildView(_coordinate) instanceof AppItemView)) {
-                    dragNDropView.showFolderPreviewAt(this, getCellWidth() * (_coordinate.x + 0.5f), getCellHeight() * (_coordinate.y + 0.5f) - (Setup.appSettings().isDockShowLabel() ? Tool.dp2px(7) : 0));
+                    dragNDropView.showFolderPreviewAt(this, getCellWidth() * (_coordinate.x + 0.5f), getCellHeight() * (_coordinate.y + 0.5f) - (Setup.appSettings().getDockShowLabel() ? Tool.dp2px(7) : 0));
                 }
                 break;
             default:
@@ -117,7 +116,7 @@ public final class Dock extends CellContainer implements DesktopCallback {
             // set the height for the dock based on the number of rows and the show label preference
             int iconSize = Setup.appSettings().getDockIconSize();
             int height = Tool.dp2px((iconSize + 20) * getCellSpanV());
-            if (Setup.appSettings().isDockShowLabel()) height += Tool.dp2px(20);
+            if (Setup.appSettings().getDockShowLabel()) height += Tool.dp2px(20);
             getLayoutParams().height = height;
             setMeasuredDimension(View.getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec), height);
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);

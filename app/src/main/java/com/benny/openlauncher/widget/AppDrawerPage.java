@@ -142,7 +142,7 @@ public class AppDrawerPage extends ViewPager {
             _pages.clear();
             for (int i = 0; i < getCount(); i++) {
                 ViewGroup layout = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.view_app_drawer_page_inner, null);
-                if (!Setup.appSettings().isDrawerShowCardView()) {
+                if (!Setup.appSettings().getDrawerShowCardView()) {
                     ((CardView) layout.getChildAt(0)).setCardBackgroundColor(Color.TRANSPARENT);
                     ((CardView) layout.getChildAt(0)).setCardElevation(0);
                 } else {

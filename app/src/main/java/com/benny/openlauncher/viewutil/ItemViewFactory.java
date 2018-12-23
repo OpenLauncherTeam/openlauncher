@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -27,18 +26,18 @@ public class ItemViewFactory {
     public static View getItemView(final Context context, final DesktopCallback callback, final DragAction.Action type, final Item item) {
         AppItemView.Builder builder = new AppItemView.Builder(context);
         builder.setIconSize(Setup.appSettings().getIconSize());
-        builder.vibrateWhenLongPress(Setup.appSettings().isGestureFeedback());
+        builder.vibrateWhenLongPress(Setup.appSettings().getGestureFeedback());
         builder.withOnLongClick(item, type, callback);
         View view = null;
 
         switch(type) {
             case DRAWER:
-                builder.setLabelVisibility(Setup.appSettings().isDrawerShowLabel());
+                builder.setLabelVisibility(Setup.appSettings().getDrawerShowLabel());
                 builder.setTextColor(Setup.appSettings().getDrawerLabelColor());
                 break;
             case DESKTOP:
             default:
-                builder.setLabelVisibility(Setup.appSettings().isDesktopShowLabel());
+                builder.setLabelVisibility(Setup.appSettings().getDesktopShowLabel());
                 builder.setTextColor(Color.WHITE);
                 break;
         }

@@ -271,7 +271,7 @@ public final class Desktop extends ViewPager implements DesktopCallback {
         _adapter = new DesktopAdapter(this);
         setAdapter(_adapter);
         setCurrentItem(Setup.appSettings().getDesktopPageCurrent());
-        if (Setup.appSettings().isDesktopShowIndicator() && _pageIndicator != null) {
+        if (Setup.appSettings().getDesktopShowIndicator() && _pageIndicator != null) {
             _pageIndicator.setViewPager(this);
         }
         int columns = Setup.appSettings().getDesktopColumnCount();
@@ -293,7 +293,7 @@ public final class Desktop extends ViewPager implements DesktopCallback {
         int previousPage = getCurrentItem();
         _adapter.addPageRight();
         setCurrentItem(previousPage + 1);
-        if (Setup.appSettings().isDesktopShowGrid()) {
+        if (Setup.appSettings().getDesktopShowGrid()) {
             for (CellContainer cellContainer : _pages) {
                 cellContainer.setHideGrid(!showGrid);
             }
@@ -306,7 +306,7 @@ public final class Desktop extends ViewPager implements DesktopCallback {
         _adapter.addPageLeft();
         setCurrentItem(previousPage + 1, false);
         setCurrentItem(previousPage - 1);
-        if (Setup.appSettings().isDesktopShowGrid()) {
+        if (Setup.appSettings().getDesktopShowGrid()) {
             for (CellContainer cellContainer : _pages) {
                 cellContainer.setHideGrid(!showGrid);
             }

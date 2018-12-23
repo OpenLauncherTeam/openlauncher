@@ -183,7 +183,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         if (!Setup.wasInitialised()) {
             Setup.init(new HpInitSetup(this));
         }
-        if (appSettings.isSearchBarTimeEnabled()) {
+        if (appSettings.getSearchBarTimeEnabled()) {
             _timeChangedReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
@@ -305,7 +305,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         updateHomeLayout();
 
         AppSettings appSettings = Setup.appSettings();
-        if (appSettings.isDesktopFullscreen()) {
+        if (appSettings.getDesktopFullscreen()) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
 
@@ -502,7 +502,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public final void updateDesktopIndicator(boolean show) {
         AppSettings appSettings = Setup.appSettings();
-        if (appSettings.isDesktopShowIndicator() && show) {
+        if (appSettings.getDesktopShowIndicator() && show) {
             Tool.visibleViews(100, getDesktopIndicator());
         } else {
             Tool.goneViews(100, getDesktopIndicator());
@@ -615,7 +615,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
 
         // handle launcher rotation
-        if (appSettings.isDesktopRotate()) {
+        if (appSettings.getDesktopRotate()) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

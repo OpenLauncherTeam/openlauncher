@@ -2,7 +2,6 @@ package com.benny.openlauncher.activity.homeparts;
 
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.PagerIndicator;
@@ -45,7 +44,7 @@ public class HpAppDrawer implements Callback.a2<Boolean, Boolean> {
                 _homeActivity.updateDock(true);
                 _homeActivity.updateSearchBar(true);
             } else {
-                if (!Setup.appSettings().isDrawerRememberPosition()) {
+                if (!Setup.appSettings().getDrawerRememberPosition()) {
                     _homeActivity.getAppDrawerController().reset();
                 }
             }

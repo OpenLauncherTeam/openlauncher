@@ -39,23 +39,23 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.DOTS);
     }
 
-    public boolean isDesktopRotate() {
+    public boolean getDesktopRotate() {
         return getBool(R.string.pref_key__desktop_rotate, false);
     }
 
-    public boolean isDesktopShowGrid() {
+    public boolean getDesktopShowGrid() {
         return getBool(R.string.pref_key__desktop_show_grid, true);
     }
 
-    public boolean isDesktopFullscreen() {
+    public boolean getDesktopFullscreen() {
         return getBool(R.string.pref_key__desktop_fullscreen, false);
     }
 
-    public boolean isDesktopShowIndicator() {
+    public boolean getDesktopShowIndicator() {
         return getBool(R.string.pref_key__desktop_show_position_indicator, true);
     }
 
-    public boolean isDesktopShowLabel() {
+    public boolean getDesktopShowLabel() {
         return getBool(R.string.pref_key__desktop_show_label, true);
     }
 
@@ -75,7 +75,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getBool(R.string.pref_key__search_bar_show_hidden_apps, false);
     }
 
-    public boolean isSearchBarTimeEnabled() {
+    public boolean getSearchBarTimeEnabled() {
         return true;
     }
 
@@ -135,7 +135,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getInt(R.string.pref_key__dock_rows, 1);
     }
 
-    public boolean isDockShowLabel() {
+    public boolean getDockShowLabel() {
         return getBool(R.string.pref_key__dock_show_label, false);
     }
 
@@ -159,19 +159,19 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getIntOfStringPref(R.string.pref_key__drawer_style, AppDrawerController.Mode.GRID);
     }
 
-    public boolean isDrawerShowCardView() {
+    public boolean getDrawerShowCardView() {
         return getBool(R.string.pref_key__drawer_show_card_view, true);
     }
 
-    public boolean isDrawerRememberPosition() {
+    public boolean getDrawerRememberPosition() {
         return getBool(R.string.pref_key__drawer_remember_position, true);
     }
 
-    public boolean isDrawerShowIndicator() {
+    public boolean getDrawerShowIndicator() {
         return getBool(R.string.pref_key__drawer_show_position_indicator, true);
     }
 
-    public boolean isDrawerShowLabel() {
+    public boolean getDrawerShowLabel() {
         return getBool(R.string.pref_key__drawer_show_label, true);
     }
 
@@ -191,7 +191,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getInt(R.string.pref_key__drawer_fast_scroll_color, ContextCompat.getColor(Setup.appContext(), R.color.materialRed));
     }
 
-    public boolean isGestureFeedback() {
+    public boolean getGestureFeedback() {
         return getBool(R.string.pref_key__gesture_feedback, false);
     }
 
@@ -297,7 +297,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         setStringList(R.string.pref_key__minibar_items, value);
     }
 
-    public boolean isSearchUseGrid() {
+    public boolean getSearchUseGrid() {
         return getBool(R.string.pref_key__desktop_search_use_grid, false);
     }
 

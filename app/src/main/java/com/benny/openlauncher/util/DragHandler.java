@@ -31,7 +31,7 @@ public final class DragHandler {
                 if (Setup.appSettings().getDesktopLock()) {
                     return false;
                 }
-                if (Setup.appSettings().isGestureFeedback()) {
+                if (Setup.appSettings().getGestureFeedback()) {
                     Tool.vibrate(view);
                 }
                 startDrag(view, item, action, desktopCallback);

@@ -166,7 +166,7 @@ public class GroupPopupView extends RevealFrameLayout {
         _popupCard.getLayoutParams().height = popupHeight;
 
         _cx = popupWidth / 2;
-        _cy = popupHeight / 2 - (Setup.appSettings().isDesktopShowLabel() ? Tool.dp2px(10) : 0);
+        _cy = popupHeight / 2 - (Setup.appSettings().getDesktopShowLabel() ? Tool.dp2px(10) : 0);
 
         int[] coordinates = new int[2];
         itemView.getLocationInWindow(coordinates);
@@ -205,7 +205,7 @@ public class GroupPopupView extends RevealFrameLayout {
 
         if (item.getLocation() == Item.LOCATION_DOCK) {
             coordinates[1] -= iconSize / 2;
-            _cy += iconSize / 2 + (Setup.appSettings().isDockShowLabel() ? 0 : Tool.dp2px(10));
+            _cy += iconSize / 2 + (Setup.appSettings().getDockShowLabel() ? 0 : Tool.dp2px(10));
         }
 
         int x = coordinates[0];

@@ -112,7 +112,7 @@ public class SearchBar extends FrameLayout {
         _switchButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Setup.appSettings().setSearchUseGrid(!Setup.appSettings().isSearchUseGrid());
+                Setup.appSettings().setSearchUseGrid(!Setup.appSettings().getSearchUseGrid());
                 updateSwitchIcon();
                 updateRecyclerViewLayoutManager();
             }
@@ -213,8 +213,8 @@ public class SearchBar extends FrameLayout {
                             .withTextColor(Color.WHITE)
                             .withIconPadding(getContext(), 8)
                             .withOnClickAnimate(false)
-                            .withTextGravity(Setup.appSettings().isSearchUseGrid() ? Gravity.CENTER : Gravity.CENTER_VERTICAL)
-                            .withIconGravity(Setup.appSettings().isSearchUseGrid() ? Gravity.TOP : Gravity.START)
+                            .withTextGravity(Setup.appSettings().getSearchUseGrid() ? Gravity.CENTER : Gravity.CENTER_VERTICAL)
+                            .withIconGravity(Setup.appSettings().getSearchUseGrid() ? Gravity.TOP : Gravity.START)
                             .withOnClickListener(new OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -283,11 +283,11 @@ public class SearchBar extends FrameLayout {
     }
 
     private void updateSwitchIcon() {
-        _switchButton.setImageResource(Setup.appSettings().isSearchUseGrid() ? R.drawable.ic_view_grid_white_24dp : R.drawable.ic_view_list_white_24dp);
+        _switchButton.setImageResource(Setup.appSettings().getSearchUseGrid() ? R.drawable.ic_view_grid_white_24dp : R.drawable.ic_view_list_white_24dp);
     }
 
     private void updateRecyclerViewLayoutManager() {
-        int gridSize = Setup.appSettings().isSearchUseGrid() ? 4 : 1;
+        int gridSize = Setup.appSettings().getSearchUseGrid() ? 4 : 1;
         if (gridSize == 1) {
             _searchRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
             updateList(Gravity.START, Gravity.CENTER_VERTICAL);
@@ -322,7 +322,7 @@ public class SearchBar extends FrameLayout {
 
     public void updateClock() {
         AppSettings appSettings = AppSettings.get();
-        if (!appSettings.isSearchBarTimeEnabled()) {
+        if (!appSettings.getSearchBarTimeEnabled()) {
             _searchClock.setText("");
             return;
         }

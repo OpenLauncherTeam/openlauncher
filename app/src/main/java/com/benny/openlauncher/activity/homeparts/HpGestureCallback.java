@@ -5,8 +5,6 @@ import android.util.Log;
 
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.model.App;
-import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.Tool;
@@ -46,7 +44,7 @@ public class HpGestureCallback implements DesktopGestureListener.DesktopGestureC
                 Log.e(getClass().toString(), "gesture error");
         }
         if (gesture != null) {
-            if (_appSettings.isGestureFeedback()) {
+            if (_appSettings.getGestureFeedback()) {
                 Tool.vibrate(desktop);
             }
             if (gesture instanceof Intent) {

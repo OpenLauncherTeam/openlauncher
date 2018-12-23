@@ -17,7 +17,6 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
-import com.benny.openlauncher.viewutil.DrawerAppItem;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.IconLabelItem;
@@ -55,7 +54,7 @@ public class AppDrawerGrid extends FrameLayout {
     }
 
     private void init() {
-        if (!Setup.appSettings().isDrawerShowIndicator()) _scrollBar.setVisibility(View.GONE);
+        if (!Setup.appSettings().getDrawerShowIndicator()) _scrollBar.setVisibility(View.GONE);
         _scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
         _scrollBar.setClipToPadding(true);
         _scrollBar.setDraggableFromAnywhere(true);
@@ -98,7 +97,7 @@ public class AppDrawerGrid extends FrameLayout {
             items.add(new IconLabelItem(app.getIcon(), app.getLabel())
                     .withIconSize(getContext(), 50)
                     .withTextColor(Color.WHITE)
-                    .withTextVisibility(Setup.appSettings().isDrawerShowLabel())
+                    .withTextVisibility(Setup.appSettings().getDrawerShowLabel())
                     .withIconPadding(getContext(), 8)
                     .withTextGravity(Gravity.CENTER)
                     .withIconGravity(Gravity.TOP)
