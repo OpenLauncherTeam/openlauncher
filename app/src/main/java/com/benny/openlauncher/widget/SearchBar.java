@@ -322,14 +322,10 @@ public class SearchBar extends FrameLayout {
 
     public void updateClock() {
         AppSettings appSettings = AppSettings.get();
-        if (!appSettings.getSearchBarTimeEnabled()) {
-            _searchClock.setText("");
-            return;
-        }
-
         if (_searchClock != null) {
             _searchClock.setTextColor(appSettings.getDesktopDateTextColor());
         }
+
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
         SimpleDateFormat sdf = _mode.sdf;
 

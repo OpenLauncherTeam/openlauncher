@@ -28,32 +28,35 @@ public class ShortcutReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent.getExtras() == null) return;
 
-        String name = intent.getExtras().getString(Intent.EXTRA_SHORTCUT_NAME);
-        Intent newIntent = (Intent) intent.getExtras().get(Intent.EXTRA_SHORTCUT_INTENT);
-        Drawable shortcutIconDrawable = null;
+        // this will only work before Android Oreo
+        // was deprecated in favor of ShortcutManager.pinRequestShortcut()
+        String shortcutLabel = intent.getExtras().getString(Intent.EXTRA_SHORTCUT_NAME);
+        Intent shortcutIntent = (Intent) intent.getExtras().get(Intent.EXTRA_SHORTCUT_INTENT);
+        Drawable shortcutIcon = null;
 
         try {
-            Parcelable iconResourceParcelable = intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
-            if (iconResourceParcelable != null && iconResourceParcelable instanceof Intent.ShortcutIconResource) {
-                Intent.ShortcutIconResource iconResource = (Intent.ShortcutIconResource) iconResourceParcelable;
+            Parcelable parcelable = intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
+            if (parcelable instanceof Intent.ShortcutIconResource) {
+                Intent.ShortcutIconResource iconResource = (Intent.ShortcutIconResource) parcelable;
                 Resources resources = context.getPackageManager().getResourcesForApplication(iconResource.packageName);
                 if (resources != null) {
                     int id = resources.getIdentifier(iconResource.resourceName, null, null);
-                    shortcutIconDrawable = resources.getDrawable(id);
+                    shortcutIcon = resources.getDrawable(id);
                 }
             }
-        } catch (Exception ignore) {
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            if (shortcutIconDrawable == null)
-                shortcutIconDrawable = new BitmapDrawable(context.getResources(), (Bitmap) intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON));
+            if (shortcutIcon == null)
+                shortcutIcon = new BitmapDrawable(context.getResources(), (Bitmap) intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON));
         }
 
-        App app = Setup.appLoader().createApp(newIntent);
+        App app = Setup.appLoader().createApp(shortcutIntent);
         Item item;
         if (app != null) {
             item = Item.newAppItem(app);
         } else {
-            item = Item.newShortcutItem(newIntent, shortcutIconDrawable, name);
+            item = Item.newShortcutItem(shortcutIntent, shortcutIcon, shortcutLabel);
         }
         Point preferredPos = HomeActivity.Companion.getLauncher().getDesktop().getPages().get(HomeActivity.Companion.getLauncher().getDesktop().getCurrentItem()).findFreeSpace();
         if (preferredPos == null) {
@@ -62,8 +65,8 @@ public class ShortcutReceiver extends BroadcastReceiver {
             item.setX(preferredPos.x);
             item.setY(preferredPos.y);
             HomeActivity._db.saveItem(item, HomeActivity.Companion.getLauncher().getDesktop().getCurrentItem(), Definitions.ItemPosition.Desktop);
-            boolean added = HomeActivity.Companion.getLauncher().getDesktop().addItemToPage(item, HomeActivity.Companion.getLauncher().getDesktop().getCurrentItem());
-            Log.d(null, String.format("Shortcut installed - %s => Intent: %s (Item _type: %s; x = %d, y = %d, added = %b)", name, newIntent, item.getType(), item.getX(), item.getY(), added));
+            HomeActivity.Companion.getLauncher().getDesktop().addItemToPage(item, HomeActivity.Companion.getLauncher().getDesktop().getCurrentItem());
+            Log.d(this.getClass().toString(), "shortcut installed");
         }
     }
 }

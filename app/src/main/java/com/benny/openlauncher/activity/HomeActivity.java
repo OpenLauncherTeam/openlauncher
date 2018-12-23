@@ -90,8 +90,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     private static final IntentFilter _appUpdateIntentFilter = new IntentFilter();
     private static final IntentFilter _shortcutIntentFilter = new IntentFilter();
     private static final IntentFilter _timeChangedIntentFilter = new IntentFilter();
-    private AppUpdateReceiver _appUpdateReceiver = new AppUpdateReceiver();
-    private ShortcutReceiver _shortcutReceiver = new ShortcutReceiver();
+    private AppUpdateReceiver _appUpdateReceiver;
+    private ShortcutReceiver _shortcutReceiver;
     private BroadcastReceiver _timeChangedReceiver;
 
     private int cx;
@@ -182,16 +182,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         super.onCreate(savedInstanceState);
         if (!Setup.wasInitialised()) {
             Setup.init(new HpInitSetup(this));
-        }
-        if (appSettings.getSearchBarTimeEnabled()) {
-            _timeChangedReceiver = new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    if (intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
-                        updateSearchClock();
-                    }
-                }
-            };
         }
         Companion.setLauncher(this);
         _db = Setup.dataManager();
@@ -323,11 +313,21 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     private void registerBroadcastReceiver() {
+        _appUpdateReceiver = new AppUpdateReceiver();
+        _shortcutReceiver = new ShortcutReceiver();
+        _timeChangedReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
+                    updateSearchClock();
+                }
+            }
+        };
+
+        // register all receivers
         registerReceiver(_appUpdateReceiver, _appUpdateIntentFilter);
         registerReceiver(_shortcutReceiver, _shortcutIntentFilter);
-        if (_timeChangedReceiver != null) {
-            registerReceiver(_timeChangedReceiver, _timeChangedIntentFilter);
-        }
+        registerReceiver(_timeChangedReceiver, _timeChangedIntentFilter);
     }
 
     public void onRemovePage() {

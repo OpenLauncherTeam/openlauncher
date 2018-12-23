@@ -75,10 +75,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getBool(R.string.pref_key__search_bar_show_hidden_apps, false);
     }
 
-    public boolean getSearchBarTimeEnabled() {
-        return true;
-    }
-
     @SuppressLint("SimpleDateFormat")
     public SimpleDateFormat getUserDateFormat() {
         String line1 = getString(R.string.pref_key__date_bar_date_format_custom_1, rstr(R.string.pref_default__date_bar_date_format_custom_1));
