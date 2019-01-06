@@ -1,10 +1,13 @@
 package com.benny.openlauncher.model;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 public class App {
     public Drawable _icon;
@@ -24,6 +27,13 @@ public class App {
         _label = info.loadLabel(pm).toString();
         _packageName = info.packageName;
         _className = info.name;
+        if (_className == null) {
+            // there is definitely a better way to store the apps
+            // should probably just store component name
+            Intent intent = pm.getLaunchIntentForPackage(_packageName);
+            ComponentName componentName = intent.getComponent();
+            _className = componentName.getClassName();
+        }
     }
 
     @Override

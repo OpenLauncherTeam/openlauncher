@@ -216,7 +216,6 @@ public class AppManager {
 
         @Override
         protected void onPostExecute(Object result) {
-
             notifyUpdateListeners(_apps);
 
             List<App> removed = getRemovedApps(tempApps, _apps);
