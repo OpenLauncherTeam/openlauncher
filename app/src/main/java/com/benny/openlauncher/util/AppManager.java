@@ -166,27 +166,31 @@ public class AppManager {
                 LauncherApps launcherApps = (LauncherApps) _context.getSystemService(Context.LAUNCHER_APPS_SERVICE);
                 List<UserHandle> profiles = launcherApps.getProfiles();
                 for (UserHandle userHandle : profiles) {
-                    List<LauncherActivityInfo> apps = launcherApps.getActivityList(null, userHandle);
-                    for (LauncherActivityInfo info : apps) {
-                        _nonFilteredApps.add(new App(_packageManager, info.getApplicationInfo()));
-                    }
+                    // TODO lots of stuff required with the rest of the app to get this working
+                    //List<LauncherActivityInfo> apps = launcherApps.getActivityList(null, userHandle);
+                    //for (LauncherActivityInfo info : apps) {
+                    //    _nonFilteredApps.add(new App(_packageManager, info.getApplicationInfo()));
+                    //}
                 }
             }
 
             Intent intent = new Intent(Intent.ACTION_MAIN, null);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
             List<ResolveInfo> activitiesInfo = _packageManager.queryIntentActivities(intent, 0);
-            Collections.sort(activitiesInfo, new Comparator<ResolveInfo>() {
-                @Override
-                public int compare(ResolveInfo p1, ResolveInfo p2) {
-                    return Collator.getInstance().compare(p1.loadLabel(_packageManager).toString(), p2.loadLabel(_packageManager).toString());
-                }
-            });
-
             for (ResolveInfo info : activitiesInfo) {
                 App app = new App(_packageManager, info);
-                _nonFilteredApps.add(app);
+                if (!_nonFilteredApps.contains(app)) {
+                    _nonFilteredApps.add(app);
+                }
             }
+
+            // sort the apps by label here
+            Collections.sort(_nonFilteredApps, new Comparator<App>() {
+                @Override
+                public int compare(App one, App two) {
+                    return Collator.getInstance().compare(one._label, two._label);
+                }
+            });
 
             List<String> hiddenList = AppSettings.get().getHiddenAppsList();
             if (hiddenList != null) {

@@ -144,13 +144,13 @@ public class HideAppsFragment extends Fragment {
 
                 checker.toggle();
                 if (checker.isChecked()) {
-                    _listActivitiesHidden.add(appInfo.getFullName());
+                    _listActivitiesHidden.add(appInfo.getComponentName());
                     if (DEBUG) Log.v(TAG, "Selected App: " + appInfo.getLabel());
                     if (icon.getDisplayedChild() == 0) {
                         icon.showNext();
                     }
                 } else {
-                    _listActivitiesHidden.remove(appInfo.getFullName());
+                    _listActivitiesHidden.remove(appInfo.getComponentName());
                     if (DEBUG) Log.v(TAG, "Deselected App: " + appInfo.getLabel());
                     if (icon.getDisplayedChild() == 1) {
                         icon.showPrevious();
@@ -189,8 +189,8 @@ public class HideAppsFragment extends Fragment {
 
             holder._switcherChecked.setInAnimation(null);
             holder._switcherChecked.setOutAnimation(null);
-            holder._checker.setChecked(_listActivitiesHidden.contains(appInfo.getFullName()));
-            if (_listActivitiesHidden.contains(appInfo.getFullName())) {
+            holder._checker.setChecked(_listActivitiesHidden.contains(appInfo.getComponentName()));
+            if (_listActivitiesHidden.contains(appInfo.getComponentName())) {
                 if (holder._switcherChecked.getDisplayedChild() == 0) {
                     holder._switcherChecked.showNext();
                 }
