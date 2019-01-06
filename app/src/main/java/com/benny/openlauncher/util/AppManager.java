@@ -2,7 +2,6 @@ package com.benny.openlauncher.util;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -24,13 +23,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 
 public class AppManager {
-    private static AppManager _ref;
+    private static AppManager appManager;
 
     public static AppManager getInstance(Context context) {
-        return _ref == null ? (_ref = new AppManager(context)) : _ref;
+        return appManager == null ? (appManager = new AppManager(context)) : appManager;
     }
 
     private PackageManager _packageManager;
@@ -50,9 +48,9 @@ public class AppManager {
         return _context;
     }
 
-    public AppManager(Context c) {
-        _context = c;
-        _packageManager = c.getPackageManager();
+    public AppManager(Context context) {
+        _context = context;
+        _packageManager = context.getPackageManager();
     }
 
     public App findApp(Intent intent) {
@@ -89,10 +87,6 @@ public class AppManager {
         }
     }
 
-    public void onReceive(Context context, Intent intent) {
-        getAllApps();
-    }
-
     public List<App> getAllApps(Context context, boolean includeHidden) {
         return includeHidden ? getNonFilteredApps() : getApps();
     }
@@ -111,8 +105,8 @@ public class AppManager {
         }
     }
 
-    public void onAppUpdated(Context p1, Intent p2) {
-        onReceive(p1, p2);
+    public void onAppUpdated(Context context, Intent intent) {
+        getAllApps();
     }
 
     public void addUpdateListener(AppUpdateListener updateListener) {
@@ -250,18 +244,5 @@ public class AppManager {
             }
         }
         return removed;
-    }
-
-    public static abstract class AppUpdatedListener implements AppUpdateListener {
-        private String listenerID;
-
-        public AppUpdatedListener() {
-            listenerID = UUID.randomUUID().toString();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return obj instanceof AppUpdatedListener && ((AppUpdatedListener) obj).listenerID.equals(this.listenerID);
-        }
     }
 }
