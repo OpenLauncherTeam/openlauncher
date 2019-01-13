@@ -1,77 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Toasts -->
-    <string name="toast_device_admin_required">Pro praghere abìlita s\'amministratzione de su dispositivu.</string>
-
     <!-- Intro -->
-    <string name="intro2_text">Iscurre cara a su tzentru dae s\'oru de s\'ischermu printzipale pro abèrrere sa minibarra. In cue as a agatare sas impostatziones e as a pòdere cambiare s\'immàgine de isfundu e fàghere meda àteras cosas.</string>
-    <string name="intro3_text">Podes cunfigurare s\'iscrivania tua, su menù de sas aplicatziones e sa barra de sas aplicatziones de suta, proa·lu!</string>
+    <string name="intro1_text">Un\'allughidore de aplicatziones cun unu muntone de funtzionalidades ùtiles.</string>
     <string name="intro1_community">S\'allughidore dae sa comunidade pro sa comunidade</string>
     <string name="intro1_features">Prenu de funtzionalidades</string>
     <string name="intro1_customizable">Personalizàbile</string>
-    <string name="custom">Personalizadu</string>
+    <string name="intro2_text">Iscurre cara a su tzentru dae s\'oru de s\'ischermu printzipale pro abèrrere sa minibarra. In cue as a agatare sas impostatziones e as a pòdere cambiare s\'immàgine de isfundu e fàghere meda àteras cosas.</string>
+    <string name="intro3_text">Podes cunfigurare s\'iscrivania tua, su menù de sas aplicatziones e sa barra de sas aplicatziones de suta, proa·lu!</string>
+    <string name="intro4_text">Chirca in su web o filtra sas aplicatziones tuas dae sa barra de chirca.</string>
 
     <!-- Minibar -->
     <string name="minibar">Minibarra</string>
+    <string name="minibar_title__edit_minibar">Impostatziones de sa minibarra</string>
     <string name="minibar_summary__edit_minibar">Muda sa dispositzione de sa minibarra.</string>
+    <string name="minibar_title__set_wallpaper">Imposta s\'immàgine de isfundu</string>
     <string name="minibar_summary__set_wallpaper">Imposta s\'immàgine de isfondu de s\'iscrivania.</string>
+    <string name="minibar_title__lock_screen">Bloca s\'ischermu</string>
     <string name="minibar_summary__lock_screen">Bloca s\'ischermu immediatamente. Tenet bisòngiu de dos diritos de amministratzione de su dispositivu.</string>
+    <string name="minibar_title__device_settings">Impostatziones de su dispositivu</string>
     <string name="minibar_summary__device_settings">Incurtzada a sas impostatziones de su dispositivu.</string>
+    <string name="minibar_title__launcher_settings">Impostatziones de s\'allughidore</string>
     <string name="minibar_summary__launcher_settings">Incurtzada a sas impostatziones de OpenLauncher.</string>
+    <string name="minibar_title__volume_dialog">Diàlogu de su volume</string>
     <string name="minibar_summary__volume_dialog">Ammustra totu sas barras de su volume.</string>
+    <string name="minibar_title__app_drawer">Aberi su menù de sas aplicatziones</string>
     <string name="minibar_summary__app_drawer">Aberi su menù de sas aplicatziones.</string>
+    <string name="minibar_title__search_bar">Aberi sa barra de chirca</string>
     <string name="minibar_summary__search_bar">Aberi sa barra de chirca.</string>
+    <string name="minibar_title__mobile_network">Impostatziones pro sa retza mòbile</string>
     <string name="minibar_summary__mobile_network">Impostatziones pro sas retzas mòbiles.</string>
+    <string name="minibar_title__show_notifications">Ammustra sas notìficas</string>
+    <string name="minibar_summary__show_notifications">Ismànnia s\'àrea de sas notìficas in pitzu de s\'ischermu.</string>
 
     <!-- About -->
     <string name="about_libs">Librerias a mitza aberta</string>
     <string name="about_rate">Dae unu votu a s\'aplicatzione</string>
     <string name="about_credit">Contribuidores</string>
+    <string name="community">Comunidade</string>
     <string name="about_credit_text_all_contributors">Totu sos contribuidores</string>
+    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Àteras informatziones a pitzu de comente contribuire a progetos a mitza aberta, e in manera particulare a aplicatziones pro Android</string>
+    <string name="join_community">Auni·ti a sa comunidade</string>
+    <string name="bug_reports_suggest_improvements">Dae·nos s\'opinione tua, sinnala·nos errores o cussigia·nos megiorias</string>
+    <string name="help_translating_this_app">Borta custa aplicatzione in àteras limbas</string>
+    <string name="source_code">Còdighe mitza</string>
+    <string name="project_license">Litzèntzia de su progetu</string>
+    <string name="project_contribution_info">Informatziones a pitzu de sa contributzione a su progetu</string>
+    <string name="more_info_on_how_to_contribute_to_this_project">Àteras informatziones a pitzu de comente cuntribuire a custu progetu</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">Contribui cun còdighe a su progetu. Totus sunt invitados a lu fàghere, fintzas sos ùrtimos arribbados.</string>
+    <string name="project_team">Iscuadra de su progetu</string>
+    <string name="contributors_public_info">Ammustra sas informatziones a pitzu de sos contribuidores. Sos contribuidores podent frunire informatziones de ammustrare inoghe (opt-in) a pustis de sa contributzione</string>
+    <string name="contribute">Contribui</string>
+    <string name="donate">Dona</string>
+    <string name="help">Agiudu</string>
+    <string name="licenses">Litzèntzias</string>
+    <string name="contributors">Contribuidores</string>
+    <string name="changelog">Lista de sas modìficas</string>
+    <string name="more">Àteru</string>
+    <string name="open_source_licenses">Litzèntzias a mitza aberta</string>
+    <string name="rate_the_app">Dae unu votu a custa aplicatzione</string>
+    <string name="translate">Tradui</string>
+    <string name="help_this_app">Àteras informatziones e agiudu pro custa aplicatzione</string>
+    <string name="bug_reports">Sinnala errores (bugs)</string>
+    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Àteras informatziones a pitzu de comente fàghere donatziones o suportare custu progetu</string>
+    <string name="android_contribution_guide">Ghia a sa contributzione pro Android</string>
 
     <!-- Settings -->
-
+    <string name="pref_title__settings">Impostatziones</string>
     <string name="pref_title__desktop">Iscrivania</string>
     <string name="pref_title__dock">Barra de suta</string>
     <string name="pref_title__app_drawer">Menù de sas aplicatziones</string>
+    <string name="pref_title__appearance">Aparèntzia</string>
     <string name="pref_title__gestures">Gestos</string>
-    <string name="pref_title__icons">Iconas</string>
+    <string name="pref_title__behavior">Cumportamentu</string>
     <string name="pref_title__miscellaneous">Àteras impostatziones</string>
     <string name="pref_title__about">Informatziones</string>
 
     <string name="pref_title__size">Mannària</string>
     <string name="pref_title__style">Istile</string>
-    <string name="pref_title__appearance">Aparèntzia</string>
     <string name="pref_title__color">Colores</string>
+    <string name="pref_title__icons">Iconas</string>
     <string name="pref_title__search_bar">Barra de chirca</string>
     <string name="pref_title__interfaces">Interfaches</string>
     <string name="pref_title__inputs">Interatziones</string>
     <string name="pref_title__feels">Cumportamentu</string>
     <string name="pref_title__others">Àteru</string>
+    <string name="pref_title__animations">Animatziones</string>
+    <string name="pref_title__debug">Depuratzione (debug)</string>
 
     <string name="pref_title__desktop_indicator_style">Istile de s\'indicadore</string>
     <string name="pref_summary__minibar">Cunfigura s\'òrdine e sa visibilidade de sos elementos de sa minibarra.</string>
-    <string name="pref_title__search_bar_enable">Barra de chirca</string>
-    <string name="pref_summary__search_bar_enable">Ammustra una barra de chirca a pitzu de s\'iscrivania.</string>
+    <string name="pref_title__desktop_rotate">Ròdia</string>
+    <string name="pref_summary__desktop_rotate">Permiti sa rotatzione de s\'ischermu</string>
+    <string name="pref_title__desktop_show_grid">Ammustra sa grìllia</string>
+    <string name="pref_summary__desktop_show_grid">Ammustra sa grìllia de ghia cando ses trisinende elementos.</string>
     <string name="pref_title__desktop_fullscreen">Ischermu intreu</string>
     <string name="pref_summary__desktop_fullscreen">Abìlita s\'ischermu intreu pro s\'iscrivania.</string>
     <string name="pref_title__desktop_show_position_indicator">Indicadore de positzione</string>
     <string name="pref_summary__desktop_show_position_indicator">Ammustra s\'indicadore de pàgina in suta de s\'iscrivania.</string>
     <string name="pref_title__desktop_show_label">Ammustra sas etichetas</string>
     <string name="pref_summary__desktop_show_label">Ammustra sas etichetas de sos elementos in suta de sas iconas issoro.</string>
-    <string name="pref_title__desktop_rotate">Ròdia</string>
-    <string name="pref_summary__desktop_rotate">Permiti sa rotatzione de s\'ischermu</string>
+    <string name="pref_title__desktop_background_color">Isfundu</string>
+    <string name="pref_title__desktop_folder_color">Isfundu de sa cartella</string>
+    <string name="pref_title__desktop_folder_color_text">Testu de sa cartella</string>
+    <string name="pref_title__desktop_inset_color">Barras de sistema</string>
 
+    <string name="pref_title__search_bar_enable">Barra de chirca</string>
+    <string name="pref_summary__search_bar_enable">Ammustra una barra de chirca a pitzu de s\'iscrivania.</string>
     <string name="pref_title__search_bar_base_uri">URI de chirca</string>
     <string name="pref_summary__search_bar_base_uri">Imposta s\'URI impreadu pro sas chircas web.</string>
     <string name="pref_dialog__search_bar_base_uri">Inserta su motore de chirca (s\'URI) chi diat dèpere èssere impreadu pro sas chircas in lìnia. S\'eticheta {query} podet èssere impreada comente       sinnapostu pro s\'interrogatzione de chirca, si non b\'ant a èssere sinnapostos s\'interrogatzione de chirca at a èssere annanta a sa fine de s\'URI.</string>
     <string name="pref_title__search_bar_force_browser">Fortza sa chirca in s\'esploradore</string>
     <string name="pref_summary__search_bar_force_browser">Imprea semper s\'esploradore (su browser) pro sas chircas in lìnia.</string>
-    <string name="pref_title__desktop_background_color">Isfundu</string>
-    <string name="pref_title__desktop_folder_color">Isfundu de sa cartella</string>
-    <string name="pref_title__desktop_folder_color_text">Testu de sa cartella</string>
     <string name="pref_title__search_bar_show_hidden_apps">Ammustra sas aplicatziones istichidas</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Inclui sas aplicatziones istichidas in sos risultados de chirca.</string>
+
+    <string name="pref_title__date_bar">Barra de sa data</string>
+    <string name="pref_title__date_bar_text_color">Colore de su testu</string>
+    <string name="pref_title__date_bar_date_format">Formatu de sa data</string>
+    <string name="pref_title__date_bar_date_format_custom_1">Formatu personalizadu: Lìnia 1</string>
+    <string name="pref_title__date_bar_date_format_custom_2">Formatu personalizadu: Lìnia 2</string>
 
     <string name="pref_title__dock_show_label">Ammustra sas etichetas</string>
     <string name="pref_summary__dock_show_label">Ammustra sas etichetas de sos elementos in suta de sas iconas issoro.</string>
@@ -94,9 +141,6 @@
     <string name="pref_title__drawer_label_color">Eticheta</string>
     <string name="pref_title__drawer_fast_scroll_color">Barra de iscurrimentu</string>
     <string name="pref_title__drawer_label_font_size">Mannària de su testu de sas etichetas</string>
-    <string name="pref_title__animation_speed_modifier">Lestresa de sas aplicatziones</string>
-    <string name="pref_summary__animation_speed_modifier">Acontza sa lestresa generale de sas animatziones</string>
-
 
     <string name="pref_title__gesture_feedback">Reatziones a sos gestos</string>
     <string name="pref_summary__gesture_feedback">Retzi una risposta cando incarcas a longu un\'elementu in s\'iscrivania.</string>
@@ -108,58 +152,69 @@
     <string name="pref_title__gesture_pinch">Pìtzigu</string>
     <string name="pref_title__gesture_unpinch">Ismanniada</string>
 
+    <string name="pref_title__theme">Tema</string>
+    <string name="pref_summary__theme">Imposta su tema globale de s\'aplicatzione</string>
+    <string name="pref_title__primary_color">Colore primàriu</string>
+    <string name="pref_summary__primary_color">Imposta su colore primàriu de s\'aplicatzione</string>
+    <string name="pref_title__icon_size">Mannària de sas iconas</string>
     <string name="pref_summary__icon_size">Mannària de sas iconas de sas aplicatziones.</string>
     <string name="pref_title__icon_pack">Pachete de iconas</string>
     <string name="pref_summary__icon_pack">Ischerta unu pachete de iconas installadu.</string>
+    <string name="pref_title__animation_speed_modifier">Lestresa de sas aplicatziones</string>
+    <string name="pref_summary__animation_speed_modifier">Acontza sa lestresa generale de sas animatziones</string>
 
-    <string name="pref_summary__language">Muda sa limba de custa aplicatzione. Torra·la a allùghere pro permìtere a sas modìficas de tènnere efetu.</string>
     <string name="pref_title__language">Limba</string>
+    <string name="pref_summary__language">Muda sa limba de custa aplicatzione. Torra·la a allùghere pro permìtere a sas modìficas de tènnere efetu.</string>
     <string name="pref_title__backup">Còpia de seguresa</string>
     <string name="pref_summary__backup">Sarva una còpia de seguresa e riprìstina sas impostatziones tuas.</string>
+    <string name="pref_title__restore">Riprìstina</string>
+    <string name="pref_summary__restore">Riprìstina s\'iscrivania e sas impostatziones tuas.</string>
+    <string name="pref_title__reset_settings">Torra a sas impostatziones predefinidas</string>
+    <string name="pref_summary__reset_settings">Iscantzella sas impostatziones de s\'aplicatzione.</string>
     <string name="pref_title__reset_database">Isbòida sa base de datos</string>
     <string name="pref_summary__reset_database">Iscantzella sos datos de sa barra de suta e de s\'iscrivania pro isòrvere sos errores.</string>
     <string name="pref_title__restart">Torra a allùghere</string>
-    <string name="pref_summary__restart">Torra a allùghere s\'allughidore si est funtzionende male.</string>
-    <string name="pref_summary__theme">Imposta su tema globale de s\'aplicatzione</string>
-    <string name="pref_title__theme">Tema</string>
-    <string name="pref_title__primary_color">Colore primàriu</string>
-    <string name="pref_summary__primary_color">Imposta su colore primàriu de s\'aplicatzione</string>
+    <string name="pref_summary__restart">Torra a allùghere s\'allughidore.</string>
 
     <string name="vertical_scroll_drawer">Verticale</string>
     <string name="horizontal_paged_drawer">Orizontale</string>
 
-    <!-- Item Labels -->
-    <string name="default_icons">Predefinidu</string>
+    <string name="indicator_mode_dots">Puntos</string>
+    <string name="indicator_mode_lines">Lìnias</string>
+
+    <string name="none">Perunu</string>
+    <string name="app">Aberi un\'aplicatzione</string>
+
+    <string name="light">Craru</string>
+    <string name="dark">Iscuru</string>
+    <string name="black">Nieddu</string>
 
     <!-- Dialogs -->
-    <string name="placeholder">Salude mundu!</string>
     <string name="please_wait">Chirchende sas aplicatziones installadas. Pro praghere iseta.</string>
-    <string name="on">Alluta</string>
+    <string name="are_you_sure">Seguru ses? Totu sas incurtzadas tuas ant a èssere bogadas.</string>
+    <string name="device_admin_title">Permissu de amministratzione de su dispositivu netzessàriu</string>
+    <string name="device_admin_summary">OpenLauncher tenet bisòngiu de su permissu pro s\'amministratzione de su sistema pro blocare s\'ischermu tuo. Pro praghere abilita·lu in sas impostatziones pro impreare custa funtzionalidade.</string>
     <string name="select_app">Ischerta s\'aplicatzione</string>
-    <string name="off">Istudada</string>
-    <string name="version">Versione</string>
     <string name="select_wallpaper">Issèbera un\'immàgine de isfundu</string>
     <string name="select_icon_pack">Issèbera unu pachete de iconas</string>
-    <string name="toast_icon_pack_error">Impossìbile otènnere s\'icona chene su permissu READ_EXTERNAL_STORAGE.</string>
-    <string name="toast_backup_success">Fatu.</string>
-    <string name="toast_backup_error">B\'est istadu carchi errore.</string>
-    <string name="columns">Colunnas</string>
-    <string name="rows">Rigas</string>
     <string name="volume_level_ringtone">Tonu de mutida</string>
     <string name="volume_level_notification">Notìficas</string>
     <string name="volume_level_system">Sistema</string>
     <string name="volume_level_media">Documentos multimediales</string>
-    <string name="light">Craru</string>
-    <string name="dark">Iscuru</string>
-    <string name="pref_title__debug">Depuratzione (debug)</string>
-    <string name="pref_title__date_bar">Barra de sa data</string>
-    <string name="pref_title__date_bar_text_color">Colore de su testu</string>
-    <string name="pref_title__date_bar_date_format">Formatu de sa data</string>
-    <string name="pref_title__date_bar_date_format_custom_1">Formatu personalizadu: Lìnia 1</string>
-    <string name="pref_title__date_bar_date_format_custom_2">Formatu personalizadu: Lìnia 2</string>
 
-    <!-- Titles -->
-    <string name="pref_title__settings">Impostatziones</string>
+    <!-- Other -->
+    <string name="columns">Colunnas</string>
+    <string name="rows">Rigas</string>
+    <string name="on">Alluta</string>
+    <string name="off">Istudada</string>
+    <string name="search_hint">Chirca…</string>
+    <string name="bad_format">Formatu non vàlidu</string>
+    <string name="version">Versione</string>
+    <string name="enable">Abìlita</string>
+    <string name="placeholder">Salude mundu!</string>
+    <string name="custom">Personalizadu</string>
+    <string name="default_folder">Chene nùmene</string>
+    <string name="default_icons">Predefinidu</string>
 
     <!-- Drag Option View -->
     <string name="edit">Muda</string>
@@ -176,49 +231,9 @@
     <!-- Toasts -->
     <string name="toast_not_enough_space">Non b\'est memòria bastante.</string>
     <string name="toast_app_uninstalled">Aplicatzione disinstallada.</string>
-
-    <!-- Item Labels -->
-    <string name="default_folder">Chene nùmene</string>
-
-    <!-- Dialogs -->
-    <string name="search_hint">Chirca…</string>
-    <string name="bad_format">Formatu non vàlidu</string>
-    <string name="are_you_sure">Seguru ses? Totu sas incurtzadas tuas ant a èssere bogadas.</string>
-    <string name="help">Agiudu</string>
-    <string name="licenses">Litzèntzias</string>
-    <string name="contributors">Contribuidores</string>
-    <string name="changelog">Lista de sas modìficas</string>
-
-    <string name="more">Àteru</string>
-    <string name="open_source_licenses">Litzèntzias a mitza aberta</string>
-    <string name="rate_the_app">Dae unu votu a custa aplicatzione</string>
-    <string name="translate">Tradui</string>
-    <string name="help_this_app">Àteras informatziones e agiudu pro custa aplicatzione</string>
-    <string name="bug_reports">Sinnala errores (bugs)</string>
-    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Àteras informatziones a pitzu de comente fàghere donatziones o suportare custu progetu</string>
-    <string name="android_contribution_guide">Ghia a sa contributzione pro Android</string>
-    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Àteras informatziones a pitzu de comente cuntribuire a progetos a mitza aberta, e in manera particulare a aplicatziones pro Android</string>
-    <string name="join_community">Auni·ti a sa comunidade</string>
-    <string name="bug_reports_suggest_improvements">Dae·nos s\'opinione tua, sinnala·nos errores o cussigia·nos megiorias</string>
-    <string name="help_translating_this_app">Borta custa aplicatzione in àteras limbas</string>
-    <string name="source_code">Còdighe mitza</string>
-    <string name="project_license">Litzèntzia de su progetu</string>
-    <string name="project_contribution_info">Informatziones a pitzu de sa contributzione a su progetu</string>
-    <string name="more_info_on_how_to_contribute_to_this_project">Àteras informatziones a pitzu de comente cuntribuire a custu progetu</string>
-    <string name="contribute_code_to_this_project_anybody_welcome">Contribui cun còdighe a su progetu. Totus sunt invitados a lu fàghere, fintzas sos ùrtimos arribbados.</string>
-    <string name="project_team">Iscuadra de su progetu</string>
-    <string name="contributors_public_info">Ammustra sas informatziones a pitzu de sos contribuidores. Sos contribuidores podent frunire informatziones de ammustrare inoghe (opt-in) a pustis de sa contributzione</string>
-    <string name="contribute">Contribui</string>
-    <string name="donate">Dona</string>
-
-    <string name="minibar_title__set_wallpaper">Imposta s\'immàgine de isfundu</string>
-    <string name="none">perunu</string>
-    <string name="minibar_title__edit_minibar">Impostatziones de sa minibarra</string>
-    <string name="minibar_title__lock_screen">Bloca s\'ischermu</string>
-    <string name="minibar_title__device_settings">Impostatziones de su dispositivu</string>
-    <string name="minibar_title__launcher_settings">Launcher Settings</string>
-    <string name="minibar_title__volume_dialog">Diàlogu de su volume</string>
-    <string name="minibar_title__app_drawer">Aberi su menù de sas aplicatziones</string>
-    <string name="app">Aberi un\'aplicatzione</string>
+    <string name="toast_device_admin_required">Pro praghere abìlita s\'amministratzione de su dispositivu.</string>
+    <string name="toast_backup_success">Fatu.</string>
+    <string name="toast_backup_error">B\'est istadu carchi errore.</string>
+    <string name="toast_icon_pack_error">Impossìbile otènnere s\'icona chene su permissu READ_EXTERNAL_STORAGE.</string>
 
 </resources>
