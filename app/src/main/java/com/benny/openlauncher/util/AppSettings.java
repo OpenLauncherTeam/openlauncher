@@ -43,6 +43,10 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getBool(R.string.pref_key__desktop_rotate, false);
     }
 
+    public boolean getDesktopLandscape() {
+        return getBool(R.string.pref_key__desktop_landscape, false);
+    }
+
     public boolean getDesktopShowGrid() {
         return getBool(R.string.pref_key__desktop_show_grid, true);
     }
