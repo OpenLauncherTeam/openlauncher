@@ -37,17 +37,13 @@
             android:summary="@string/pref_summary__minibar"
             android:title="@string/minibar" />
 
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_key__desktop_rotate"
-            android:summary="@string/pref_summary__desktop_rotate"
-            android:title="@string/pref_title__desktop_rotate" />
+	<ListPreference
+            android:defaultValue="0"
+            android:entries="@array/entries__orientation_mode"
+            android:entryValues="@array/values__zero_to_two"
+            android:key="@string/pref_key__desktop_orientation"
+            android:title="@string/pref_title__desktop_orientation" />
 
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_key__desktop_landscape"
-            android:summary="@string/pref_summary__desktop_landscape"
-            android:title="@string/pref_title__desktop_landscape" />
 
         <CheckBoxPreference
             android:defaultValue="true"
