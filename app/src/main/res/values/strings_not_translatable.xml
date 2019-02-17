@@ -17,10 +17,10 @@
     <string name="pref_key__desktop_columns" translatable="false">pref_key__desktop_columns</string>
     <string name="pref_key__desktop_rows" translatable="false">pref_key__desktop_rows</string>
     <string name="pref_key__desktop_indicator_style" translatable="false">pref_key__desktop_indicator_style</string>
+    <string name="pref_key__desktop_orientation" translatable="false">pref_key__desktop_orientation</string>
     <string name="pref_key__minibar" translatable="false">pref_key__minibar</string>
     <string name="pref_key__minibar_enable" translatable="false">pref_key__minibar_enable</string>
     <string name="pref_key__minibar_items" translatable="false">pref_key__minibar_items</string>
-    <string name="pref_key__desktop_rotate" translatable="false">pref_key__desktop_rotate</string>
     <string name="pref_key__desktop_show_grid" translatable="false">pref_key__desktop_show_grid</string>
     <string name="pref_key__desktop_fullscreen" translatable="false">pref_key__desktop_fullscreen</string>
     <string name="pref_key__desktop_show_position_indicator" translatable="false">pref_key__desktop_show_position_indicator</string>

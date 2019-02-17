@@ -29,6 +29,12 @@
         <item>@string/indicator_mode_lines</item>
     </string-array>
 
+    <string-array name="entries__orientation_mode" translatable="false">
+        <item>@string/orientation_mode_portrait</item>
+        <item>@string/orientation_mode_rotate</item>
+        <item>@string/orientation_mode_landscape</item>
+    </string-array>
+
     <string-array name="entries__app_drawer_style" translatable="false">
         <item>@string/horizontal_paged_drawer</item>
         <item>@string/vertical_scroll_drawer</item>

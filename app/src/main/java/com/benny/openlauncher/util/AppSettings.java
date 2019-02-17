@@ -39,8 +39,8 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.DOTS);
     }
 
-    public boolean getDesktopRotate() {
-        return getBool(R.string.pref_key__desktop_rotate, false);
+    public int getDesktopOrientationMode() {
+        return getIntOfStringPref(R.string.pref_key__desktop_orientation, 0);
     }
 
     public boolean getDesktopShowGrid() {

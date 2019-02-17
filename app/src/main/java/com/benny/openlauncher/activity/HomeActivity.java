@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.content.pm.LauncherApps;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build.VERSION;
@@ -36,6 +35,7 @@ import com.benny.openlauncher.activity.homeparts.HpDragOption;
 import com.benny.openlauncher.activity.homeparts.HpInitSetup;
 import com.benny.openlauncher.activity.homeparts.HpSearchBar;
 import com.benny.openlauncher.interfaces.AppDeleteListener;
+import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.Item.Type;
@@ -215,24 +215,19 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     protected void initAppManager() {
-        Setup.appLoader().addUpdateListener(new AppManager.AppUpdatedListener() {
+        if (Setup.appSettings().getAppFirstLaunch()) {
+            Setup.appSettings().setAppFirstLaunch(false);
+            Setup.appSettings().setAppShowIntro(false);
+            Item appDrawerBtnItem = Item.newActionItem(8);
+            appDrawerBtnItem._x = 2;
+            _db.saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
+        }
+        Setup.appLoader().addUpdateListener(new AppUpdateListener() {
             @Override
             public boolean onAppUpdated(List<App> it) {
-                if (getDesktop() == null) {
-                    return false;
-                }
-
-                AppSettings appSettings = Setup.appSettings();
                 getDesktop().initDesktop();
-                if (appSettings.getAppFirstLaunch()) {
-                    appSettings.setAppFirstLaunch(false);
-                    appSettings.setAppShowIntro(false);
-                    Item appDrawerBtnItem = Item.newActionItem(8);
-                    appDrawerBtnItem._x = 2;
-                    _db.saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
-                }
                 getDock().initDock();
-                return true;
+                return false;
             }
         });
         Setup.appLoader().addDeleteListener(new AppDeleteListener() {
@@ -285,7 +280,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         minibar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                LauncherAction.Action action = items.get(i)._action;
                 LauncherAction.RunAction(items.get(i), HomeActivity.this);
             }
         });
@@ -350,6 +344,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             try {
                 Intent intent = Tool.getIntentFromApp(app);
                 context.startActivity(intent, getActivityAnimationOpts(view));
+                // close app drawer and other items in advance
+                // annoying to wait for app drawer to close
+                handleLauncherResume();
             } catch (Exception e) {
                 e.printStackTrace();
                 Tool.toast(context, R.string.toast_app_uninstalled);
@@ -610,11 +607,14 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
 
         // handle launcher rotation
-        if (appSettings.getDesktopRotate()) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-        } else {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
+	if (appSettings.getDesktopOrientationMode() == 2) {
+	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else if (appSettings.getDesktopOrientationMode() == 1) {
+	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+	}
+	else {
+	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	}
 
         handleLauncherResume();
     }
