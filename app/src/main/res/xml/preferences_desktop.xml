@@ -37,13 +37,12 @@
             android:summary="@string/pref_summary__minibar"
             android:title="@string/minibar" />
 
-	<ListPreference
+        <ListPreference
             android:defaultValue="0"
             android:entries="@array/entries__orientation_mode"
             android:entryValues="@array/values__zero_to_two"
             android:key="@string/pref_key__desktop_orientation"
             android:title="@string/pref_title__desktop_orientation" />
-
 
         <CheckBoxPreference
             android:defaultValue="true"

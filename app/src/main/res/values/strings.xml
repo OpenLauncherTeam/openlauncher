@@ -89,9 +89,7 @@
 
     <string name="pref_title__desktop_indicator_style">Indicator Style</string>
     <string name="pref_summary__minibar">Configure the order and visibility of minibar items.</string>
-
     <string name="pref_title__desktop_orientation">Desktop orientation.</string>
-
     <string name="pref_title__desktop_show_grid">Show Grid</string>
     <string name="pref_summary__desktop_show_grid">Show the guiding grid when dragging items.</string>
     <string name="pref_title__desktop_fullscreen">Fullscreen</string>

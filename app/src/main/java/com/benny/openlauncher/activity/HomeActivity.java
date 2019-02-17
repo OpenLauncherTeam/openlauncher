@@ -611,11 +611,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else if (appSettings.getDesktopOrientationMode() == 1) {
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-	}
-	else {
+	} else {
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
-
         handleLauncherResume();
     }
 
