@@ -19,7 +19,7 @@
     <string name="minibar_summary__lock_screen">Bloca s\'ischermu immediatamente. Tenet bisòngiu de dos diritos de amministratzione de su dispositivu.</string>
     <string name="minibar_title__device_settings">Impostatziones de su dispositivu</string>
     <string name="minibar_summary__device_settings">Incurtzada a sas impostatziones de su dispositivu.</string>
-    <string name="minibar_title__launcher_settings">Launcher Settings</string>
+    <string name="minibar_title__launcher_settings">Impostatziones de s\'allughidore</string>
     <string name="minibar_summary__launcher_settings">Incurtzada a sas impostatziones de OpenLauncher.</string>
     <string name="minibar_title__volume_dialog">Diàlogu de su volume</string>
     <string name="minibar_summary__volume_dialog">Ammustra totu sas barras de su volume.</string>
@@ -38,7 +38,7 @@
     <string name="about_credit">Contribuidores</string>
     <string name="community">Comunidade</string>
     <string name="about_credit_text_all_contributors">Totu sos contribuidores</string>
-    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Àteras informatziones a pitzu de comente cuntribuire a progetos a mitza aberta, e in manera particulare a aplicatziones pro Android</string>
+    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Àteras informatziones a pitzu de comente contribuire a progetos a mitza aberta, e in manera particulare a aplicatziones pro Android</string>
     <string name="join_community">Auni·ti a sa comunidade</string>
     <string name="bug_reports_suggest_improvements">Dae·nos s\'opinione tua, sinnala·nos errores o cussigia·nos megiorias</string>
     <string name="help_translating_this_app">Borta custa aplicatzione in àteras limbas</string>
@@ -182,7 +182,7 @@
     <string name="indicator_mode_dots">Puntos</string>
     <string name="indicator_mode_lines">Lìnias</string>
 
-    <string name="none">perunu</string>
+    <string name="none">Perunu</string>
     <string name="app">Aberi un\'aplicatzione</string>
 
     <string name="light">Craru</string>
