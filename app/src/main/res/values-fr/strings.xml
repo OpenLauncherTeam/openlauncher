@@ -89,8 +89,7 @@
 
     <string name="pref_title__desktop_indicator_style">Style de l\'indicateur</string>
     <string name="pref_summary__minibar">Configurer l\'ordre et la visibilité des éléments de la Minibarre.</string>
-    <string name="pref_title__desktop_rotate">Rotation</string>
-    <string name="pref_summary__desktop_rotate">Autoriser la rotation de l\'écran</string>
+    <string name="pref_title__desktop_orientation">Orientation du bureau.</string>
     <string name="pref_title__desktop_show_grid">Afficher la grille</string>
     <string name="pref_summary__desktop_show_grid">Afficher la grille lors du déplacement d\'objet.</string>
     <string name="pref_title__desktop_fullscreen">Plein écran</string>
@@ -181,6 +180,10 @@
 
     <string name="indicator_mode_dots">Points</string>
     <string name="indicator_mode_lines">Lignes</string>
+
+    <string name="orientation_mode_portrait">Portrait</string>
+    <string name="orientation_mode_rotate">Pivoter</string>
+    <string name="orientation_mode_landscape">Paysage</string>
 
     <string name="none">Aucun</string>
     <string name="app">Application</string>
