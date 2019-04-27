@@ -58,7 +58,7 @@ public class AppDrawerGrid extends FrameLayout {
         _scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
         _scrollBar.setClipToPadding(true);
         _scrollBar.setDraggableFromAnywhere(true);
-        _scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
+        _scrollBar.setHandleColor(Setup.appSettings().getDrawerFastScrollColor());
 
         _gridDrawerAdapter = new AppDrawerGridAdapter();
 

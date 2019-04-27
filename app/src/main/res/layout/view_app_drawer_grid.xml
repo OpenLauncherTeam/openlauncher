@@ -17,7 +17,6 @@
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        app:msb_handleColour="@color/colorAccent"
         app:msb_lightOnTouch="false"
         app:msb_recyclerView="@id/recycler_view" />
 

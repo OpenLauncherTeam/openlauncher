@@ -109,7 +109,7 @@ dependencies {
         transitive = true
     }
 
-    implementation('com.github.turing-tech:MaterialScrollBar:12.4.0') {
+    implementation('com.github.turing-tech:MaterialScrollBar:13.3.0') {
         exclude group: 'com.android.support'
     }
 
