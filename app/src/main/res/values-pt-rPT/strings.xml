@@ -42,7 +42,7 @@
     <string name="join_community">Integrar a comunidade</string>
     <string name="bug_reports_suggest_improvements">Comentários, reporte de erros e sugestões</string>
     <string name="help_translating_this_app">Traduzir esta aplicação</string>
-    <string name="source_code">Código fonte</string>
+    <string name="source_code">Código-fonte</string>
     <string name="project_license">Licença do projeto</string>
     <string name="project_contribution_info">Informação para colaboração no projeto</string>
     <string name="more_info_on_how_to_contribute_to_this_project">Mais informações sobre como colaborar neste projeto</string>
@@ -71,6 +71,7 @@
     <string name="pref_title__app_drawer">Menu de aplicações</string>
     <string name="pref_title__appearance">Aparência</string>
     <string name="pref_title__gestures">Gestos</string>
+    <string name="pref_title__behavior">Comportamento</string>
     <string name="pref_title__miscellaneous">Diversas</string>
     <string name="pref_title__about">Acerca</string>
 
@@ -80,7 +81,7 @@
     <string name="pref_title__icons">Ícones</string>
     <string name="pref_title__search_bar">Barra de pesquisa</string>
     <string name="pref_title__interfaces">Interfaces</string>
-    <string name="pref_title__inputs">Entradas</string>
+    <string name="pref_title__inputs">Introdução</string>
     <string name="pref_title__feels">Sensações</string>
     <string name="pref_title__others">Outras</string>
     <string name="pref_title__animations">Animações</string>
@@ -104,14 +105,14 @@
     <string name="pref_title__desktop_inset_color">Barras de sistema</string>
 
     <string name="pref_title__search_bar_enable">Barra de pesquisa</string>
-    <string name="pref_summary__search_bar_enable">Mostrar barra de pesquisa acima da área de trabalho.</string>
+    <string name="pref_summary__search_bar_enable">Mostrar barra de pesquisa na área de trabalho.</string>
     <string name="pref_title__search_bar_base_uri">URI de pesquisa</string>
     <string name="pref_summary__search_bar_base_uri">Definir o URI usado nas pesquisas web.</string>
     <string name="pref_dialog__search_bar_base_uri">Digite o URI para utilizar para as pesquisas na web. A etiqueta {query} pode ser usada como espaço reservado para o campo de pesquisa. Na ausência de espaço reservado, a consulta da pesquisa será anexada ao fim do URI.</string>
     <string name="pref_title__search_bar_force_browser">Pesquisar no navegador</string>
     <string name="pref_summary__search_bar_force_browser">Utilizar sempre o navegador para as pesquisas na web.</string>
     <string name="pref_title__search_bar_show_hidden_apps">Mostrar aplicações ocultas</string>
-    <string name="pref_summary__search_bar_show_hidden_apps">Ocultar aplicações ocultas nos resultados da pesquisa.</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Incluir aplicações ocultas nos resultados da pesquisa.</string>
 
     <string name="pref_title__date_bar">Barra de data</string>
     <string name="pref_title__date_bar_text_color">Cor do texto</string>
@@ -181,6 +182,10 @@
     <string name="indicator_mode_dots">Pontos</string>
     <string name="indicator_mode_lines">Linhas</string>
 
+    <string name="orientation_mode_portrait">Vertical</string>
+    <string name="orientation_mode_rotate">Rotação</string>
+    <string name="orientation_mode_landscape">Horizontal</string>    
+
     <string name="none">Nenhum</string>
     <string name="app">Aplicação</string>
 
@@ -189,13 +194,13 @@
     <string name="black">Preto</string>
 
     <!-- Dialogs -->
-    <string name="please_wait">A analisar as aplicações instaladas. Aguarde...</string>
+    <string name="please_wait">A pesquisar as aplicações instaladas. Aguarde...</string>
     <string name="are_you_sure">Tem a certeza? Esta ação não pode ser revertida.</string>
     <string name="device_admin_title">Requer administração de dispositivo</string>
     <string name="device_admin_summary">O OpenLauncher necessita da permissão \'Device Administration\' para bloquear o ecrã. Para utilizar esta função, aceda às definições para a conceder.</string>
     <string name="select_app">Selecionar aplicação</string>
-    <string name="select_wallpaper">Escolher imagem</string>
-    <string name="select_icon_pack">Escolher pacote de ícones</string>
+    <string name="select_wallpaper">Selecionar papel de parede imagem</string>
+    <string name="select_icon_pack">Selecionar pacote de ícones</string>
     <string name="volume_level_ringtone">Toque de chamada</string>
     <string name="volume_level_notification">Notificação</string>
     <string name="volume_level_system">Sistema</string>
