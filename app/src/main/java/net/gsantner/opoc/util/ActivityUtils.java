@@ -3,9 +3,9 @@
  *   Maintained by Gregor Santner, 2016-
  *   https://gsantner.net/
  *
- *   License: Apache 2.0 / Commercial
- *  https://github.com/gsantner/opoc/#licensing
- *  https://www.apache.org/licenses/LICENSE-2.0
+ *   License of this file: Apache 2.0 (Commercial upon request)
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *     https://github.com/gsantner/opoc/#licensing
  *
 #########################################################*/
 package net.gsantner.opoc.util;
@@ -17,8 +17,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.ColorInt;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -32,6 +34,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
+import android.widget.ScrollView;
 
 
 @SuppressWarnings({"WeakerAccess", "unused", "SameParameterValue", "SpellCheckingInspection"})
@@ -44,6 +47,12 @@ public class ActivityUtils extends net.gsantner.opoc.util.ContextUtils {
     public ActivityUtils(final Activity activity) {
         super(activity);
         _activity = activity;
+    }
+
+    @Override
+    public void freeContextRef() {
+        super.freeContextRef();
+        _activity = null;
     }
 
     //########################
@@ -96,18 +105,20 @@ public class ActivityUtils extends net.gsantner.opoc.util.ContextUtils {
                 .show();
     }
 
-    public void hideSoftKeyboard() {
+    public ActivityUtils hideSoftKeyboard() {
         InputMethodManager imm = (InputMethodManager) _activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         if (imm != null && _activity.getCurrentFocus() != null && _activity.getCurrentFocus().getWindowToken() != null) {
             imm.hideSoftInputFromWindow(_activity.getCurrentFocus().getWindowToken(), 0);
         }
+        return this;
     }
 
-    public void showSoftKeyboard() {
+    public ActivityUtils showSoftKeyboard() {
         InputMethodManager imm = (InputMethodManager) _activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         if (imm != null && _activity.getCurrentFocus() != null && _activity.getCurrentFocus().getWindowToken() != null) {
             imm.showSoftInput(_activity.getCurrentFocus(), InputMethodManager.SHOW_FORCED);
         }
+        return this;
     }
 
     public void showDialogWithHtmlTextView(@StringRes int resTitleId, String html) {
@@ -115,18 +126,18 @@ public class ActivityUtils extends net.gsantner.opoc.util.ContextUtils {
     }
 
     public void showDialogWithHtmlTextView(@StringRes int resTitleId, String text, boolean isHtml, DialogInterface.OnDismissListener dismissedListener) {
+        ScrollView scroll = new ScrollView(_context);
         AppCompatTextView textView = new AppCompatTextView(_context);
-        int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16,
-                _context.getResources().getDisplayMetrics());
-        textView.setMovementMethod(new LinkMovementMethod());
-        textView.setPadding(padding, 0, padding, 0);
+        int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, _context.getResources().getDisplayMetrics());
 
+        scroll.setPadding(padding, 0, padding, 0);
+        scroll.addView(textView);
+        textView.setMovementMethod(new LinkMovementMethod());
         textView.setText(isHtml ? new SpannableString(Html.fromHtml(text)) : text);
+
         AlertDialog.Builder dialog = new AlertDialog.Builder(_context)
-                .setPositiveButton(android.R.string.ok, null)
-                .setOnDismissListener(dismissedListener)
-                .setTitle(resTitleId)
-                .setView(textView);
+                .setPositiveButton(android.R.string.ok, null).setOnDismissListener(dismissedListener)
+                .setTitle(resTitleId).setView(scroll);
         dialog.show();
     }
 
@@ -164,7 +175,7 @@ public class ActivityUtils extends net.gsantner.opoc.util.ContextUtils {
             _activity.startActivity(goToMarket);
         } catch (ActivityNotFoundException e) {
             _activity.startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://play.google.com/store/apps/" + pkgId)));
+                    Uri.parse("https://play.google.com/store/apps/" + pkgId)));
         }
     }
 
@@ -184,5 +195,37 @@ public class ActivityUtils extends net.gsantner.opoc.util.ContextUtils {
         ComponentName component = new ComponentName(context, activityClass);
         pkg.setComponentEnabledSetting(component, enable ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED
                 , PackageManager.DONT_KILL_APP);
+    }
+
+
+    @ColorInt
+    public Integer getCurrentPrimaryColor() {
+        TypedValue typedValue = new TypedValue();
+        _context.getTheme().resolveAttribute(getResId(ResType.ATTR, "colorPrimary"), typedValue, true);
+        return typedValue.data;
+    }
+
+    @ColorInt
+    public Integer getCurrentPrimaryDarkColor() {
+        TypedValue typedValue = new TypedValue();
+        _context.getTheme().resolveAttribute(getResId(ResType.ATTR, "colorPrimaryDark"), typedValue, true);
+        return typedValue.data;
+    }
+
+    @ColorInt
+    public Integer getCurrentAccentColor() {
+        TypedValue typedValue = new TypedValue();
+        _context.getTheme().resolveAttribute(getResId(ResType.ATTR, "colorAccent"), typedValue, true);
+        return typedValue.data;
+    }
+
+    @ColorInt
+    public Integer getActivityBackgroundColor() {
+        TypedArray array = _activity.getTheme().obtainStyledAttributes(new int[] {
+                android.R.attr.colorBackground,
+        });
+        int c = array.getColor(0, 0xFF0000);
+        array.recycle();
+        return c;
     }
 }

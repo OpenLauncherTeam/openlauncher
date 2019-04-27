@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion version_setup_compileSdk
-    buildToolsVersion version_setup_buildTools
+    compileSdkVersion version_compileSdk
+    buildToolsVersion version_buildTools
 
     defaultConfig {
-        minSdkVersion version_setup_minSdk
-        targetSdkVersion version_setup_targetSdk
+        minSdkVersion version_minSdk
+        targetSdkVersion version_compileSdk
 
         flavorDimensions "versionCode"
         multiDexEnabled false

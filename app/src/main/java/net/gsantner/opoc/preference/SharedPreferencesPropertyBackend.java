@@ -45,6 +45,7 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -164,6 +165,14 @@ public class SharedPreferencesPropertyBackend implements PropertyBackend<String,
         return ContextCompat.getColor(_context, resColorId);
     }
 
+    public String[] rstrs(int... keyResourceIds) {
+        String[] ret = new String[keyResourceIds.length];
+        for (int i = 0; i < keyResourceIds.length; i++) {
+            ret[i] = rstr(keyResourceIds[i]);
+        }
+        return ret;
+    }
+
 
     //
     // Getter & Setter for String
@@ -243,6 +252,7 @@ public class SharedPreferencesPropertyBackend implements PropertyBackend<String,
         List<String> list = getStringListOne(key, gp(pref));
         return list.toArray(new String[list.size()]);
     }
+
 
     public ArrayList<String> getStringList(@StringRes int keyResourceId, final SharedPreferences... pref) {
         return getStringListOne(rstr(keyResourceId), gp(pref));
@@ -514,14 +524,51 @@ public class SharedPreferencesPropertyBackend implements PropertyBackend<String,
         return this;
     }
 
+    public boolean contains(String key, final SharedPreferences... pref) {
+        return gp(pref).contains(key);
+    }
+
     /**
      * A method to determine if current hour is between begin and end.
      * This is especially useful for time-based light/dark mode
      */
-    public boolean isCurrentHourOfDayBetween(int begin, int end) {
+    public static boolean isCurrentHourOfDayBetween(int begin, int end) {
         begin = (begin >= 23 || begin < 0) ? 0 : begin;
         end = (end >= 23 || end < 0) ? 0 : end;
         int h = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         return h >= begin && h <= end;
+    }
+
+    /**
+     * Substract current datetime by given amount of days
+     */
+    public Date getDateOfDaysAgo(int days) {
+        return new Date(System.currentTimeMillis() - days * 1000 * 60 * 60 * 24);
+    }
+
+    /**
+     * Substract current datetime by given amount of days and check if the given date passed
+     */
+    public boolean didDaysPassedSince(Date date, int days) {
+        if (date == null || days < 0) {
+            return false;
+        }
+        return date.before(getDateOfDaysAgo(days));
+    }
+
+    public boolean afterDaysTrue(String key, int daysSinceLastTime, int firstTime, final SharedPreferences... pref) {
+        Date d = new Date(System.currentTimeMillis());
+        if (!contains(key)) {
+            d = getDateOfDaysAgo(daysSinceLastTime - firstTime);
+            setLong(key, d.getTime());
+            return firstTime < 1;
+        } else {
+            d = new Date(getLong(key, d.getTime()));
+        }
+        boolean trigger = didDaysPassedSince(d, daysSinceLastTime);
+        if (trigger) {
+            setLong(key, new Date(System.currentTimeMillis()).getTime());
+        }
+        return trigger;
     }
 }

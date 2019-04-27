@@ -3,9 +3,9 @@
  *   Maintained by Gregor Santner, 2018-
  *   https://gsantner.net/
  *
- *   License: Apache 2.0 / Commercial
- *  https://github.com/gsantner/opoc/#licensing
- *  https://www.apache.org/licenses/LICENSE-2.0
+ *   License of this file: Apache 2.0 (Commercial upon request)
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *     https://github.com/gsantner/opoc/#licensing
  *
 #########################################################*/
 package net.gsantner.opoc.util;
@@ -30,5 +30,25 @@ public class Callback {
 
     public interface a5<A, B, C, D, E> {
         void callback(A arg1, B arg2, C arg3, D arg4, E arg5);
+    }
+
+    public interface b1<A> {
+        boolean callback(A arg1);
+    }
+
+    public interface b2<A, B> {
+        boolean callback(A arg1, B arg2);
+    }
+
+    public interface b3<A, B, C> {
+        boolean callback(A arg1, B arg2, C arg3);
+    }
+
+    public interface b4<A, B, C, D> {
+        boolean callback(A arg1, B arg2, C arg3, D arg4);
+    }
+
+    public interface b5<A, B, C, D, E> {
+        boolean callback(A arg1, B arg2, C arg3, D arg4, E arg5);
     }
 }

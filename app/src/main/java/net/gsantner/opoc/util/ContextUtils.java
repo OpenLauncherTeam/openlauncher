@@ -3,9 +3,9 @@
  *   Maintained by Gregor Santner, 2016-
  *   https://gsantner.net/
  *
- *   License: Apache 2.0 / Commercial
- *  https://github.com/gsantner/opoc/#licensing
- *  https://www.apache.org/licenses/LICENSE-2.0
+ *   License of this file: Apache 2.0 (Commercial upon request)
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *     https://github.com/gsantner/opoc/#licensing
  *
 #########################################################*/
 package net.gsantner.opoc.util;
@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -37,6 +38,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
+import android.os.SystemClock;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -46,7 +49,9 @@ import android.support.annotation.StringRes;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.util.Pair;
 import android.text.Html;
+import android.text.InputFilter;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -55,6 +60,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -67,6 +75,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -87,6 +98,9 @@ public class ContextUtils {
         return _context;
     }
 
+    public void freeContextRef() {
+        _context = null;
+    }
 
     //
     // Class Methods
@@ -164,21 +178,29 @@ public class ContextUtils {
         return String.format(a ? "#%08X" : "#%06X", (a ? 0xFFFFFFFF : 0xFFFFFF) & intColor);
     }
 
+    public String getAndroidVersion() {
+        return Build.VERSION.RELEASE + " (" + Build.VERSION.SDK_INT + ")";
+    }
+
     public String getAppVersionName() {
+        PackageManager manager = _context.getPackageManager();
         try {
-            PackageManager manager = _context.getPackageManager();
-            PackageInfo info = manager.getPackageInfo(getPackageName(), 0);
+            PackageInfo info = manager.getPackageInfo(getPackageIdManifest(), 0);
             return info.versionName;
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return "?";
+            try {
+                PackageInfo info = manager.getPackageInfo(getPackageIdReal(), 0);
+                return info.versionName;
+            } catch (PackageManager.NameNotFoundException ignored) {
+            }
         }
+        return "?";
     }
 
     public String getAppInstallationSource() {
         String src = null;
         try {
-            src = _context.getPackageManager().getInstallerPackageName(getPackageName());
+            src = _context.getPackageManager().getInstallerPackageName(getPackageIdManifest());
         } catch (Exception ignored) {
         }
         if (TextUtils.isEmpty(src)) {
@@ -224,11 +246,18 @@ public class ContextUtils {
     }
 
     /**
-     * Get this apps package name. The builtin method may fail when used with flavors
+     * Get the apps base packagename, which is equal with all build flavors and variants
      */
-    public String getPackageName() {
+    public String getPackageIdManifest() {
         String pkg = rstr("manifest_package_id");
         return pkg != null ? pkg : _context.getPackageName();
+    }
+
+    /**
+     * Get this apps package name, returns the flavor specific package name.
+     */
+    public String getPackageIdReal() {
+        return _context.getPackageName();
     }
 
     /**
@@ -240,7 +269,7 @@ public class ContextUtils {
      * Falls back to applicationId of the app which may differ from manifest.
      */
     public Object getBuildConfigValue(String fieldName) {
-        String pkg = getPackageName() + ".BuildConfig";
+        String pkg = getPackageIdManifest() + ".BuildConfig";
         try {
             Class<?> c = Class.forName(pkg);
             return c.getField(fieldName).get(null);
@@ -503,6 +532,81 @@ public class ContextUtils {
     }
 
     /**
+     * Get the private directory for the current package (usually /data/data/package.name/)
+     */
+    @SuppressWarnings("StatementWithEmptyBody")
+    public File getAppDataPrivateDir() {
+        File filesDir;
+        try {
+            filesDir = new File(new File(_context.getPackageManager().getPackageInfo(getPackageIdReal(), 0).applicationInfo.dataDir), "files");
+        } catch (PackageManager.NameNotFoundException e) {
+            filesDir = _context.getFilesDir();
+        }
+        if (!filesDir.exists() && filesDir.mkdirs()) ;
+        return filesDir;
+    }
+
+    /**
+     * Get public (accessible) appdata folders
+     */
+    @SuppressWarnings("StatementWithEmptyBody")
+    public List<Pair<File, String>> getAppDataPublicDirs(boolean internalStorageFolder, boolean sdcardFolders, boolean storageNameWithoutType) {
+        List<Pair<File, String>> dirs = new ArrayList<>();
+        for (File externalFileDir : ContextCompat.getExternalFilesDirs(_context, null)) {
+            if (externalFileDir == null || Environment.getExternalStorageDirectory() == null) {
+                continue;
+            }
+            boolean isInt = externalFileDir.getAbsolutePath().startsWith(Environment.getExternalStorageDirectory().getAbsolutePath());
+            boolean add = (internalStorageFolder && isInt) || (sdcardFolders && !isInt);
+            if (add) {
+                dirs.add(new Pair<>(externalFileDir, getStorageName(externalFileDir, storageNameWithoutType)));
+                if (!externalFileDir.exists() && externalFileDir.mkdirs()) ;
+            }
+        }
+        return dirs;
+    }
+
+    public String getStorageName(File externalFileDir, boolean storageNameWithoutType) {
+        boolean isInt = externalFileDir.getAbsolutePath().startsWith(Environment.getExternalStorageDirectory().getAbsolutePath());
+
+        String[] split = externalFileDir.getAbsolutePath().split("/");
+        if (split.length > 2) {
+            return isInt ? (storageNameWithoutType ? "Internal Storage" : "") : (storageNameWithoutType ? split[2] : ("SD Card (" + split[2] + ")"));
+        } else {
+            return "Storage";
+        }
+    }
+
+    public List<Pair<File, String>> getStorages(boolean internalStorageFolder, boolean sdcardFolders) {
+        List<Pair<File, String>> storages = new ArrayList<>();
+        for (Pair<File, String> pair : getAppDataPublicDirs(internalStorageFolder, sdcardFolders, true)) {
+            if (pair.first != null && pair.first.getAbsolutePath().lastIndexOf("/Android/data") > 0) {
+                try {
+                    storages.add(new Pair<>(new File(pair.first.getCanonicalPath().replaceFirst("/Android/data.*", "")), pair.second));
+                } catch (IOException ignored) {
+                }
+            }
+        }
+        return storages;
+    }
+
+    public File getStorageRootFolder(File file) {
+        String filepath;
+        try {
+            filepath = file.getCanonicalPath();
+        } catch (Exception ignored) {
+            return null;
+        }
+        for (Pair<File, String> storage : getStorages(false, true)) {
+            //noinspection ConstantConditions
+            if (filepath.startsWith(storage.first.getAbsolutePath())) {
+                return storage.first;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Request the givens paths to be scanned by MediaScanner
      *
      * @param files Files and folders to scan
@@ -687,9 +791,13 @@ public class ContextUtils {
     public void tintMenuItems(Menu menu, boolean recurse, @ColorInt int iconColor) {
         for (int i = 0; i < menu.size(); i++) {
             MenuItem item = menu.getItem(i);
-            tintDrawable(item.getIcon(), iconColor);
-            if (item.hasSubMenu() && recurse) {
-                tintMenuItems(item.getSubMenu(), recurse, iconColor);
+            try {
+                tintDrawable(item.getIcon(), iconColor);
+                if (item.hasSubMenu() && recurse) {
+                    tintMenuItems(item.getSubMenu(), recurse, iconColor);
+                }
+            } catch (Exception ignored) {
+                // This should not happen at all, but may in bad menu.xml configuration
             }
         }
     }
@@ -727,4 +835,116 @@ public class ContextUtils {
             }
         }
     }
+
+
+    public String getLocalizedDateFormat() {
+        return ((SimpleDateFormat) android.text.format.DateFormat.getDateFormat(_context)).toPattern();
+    }
+
+    public String getLocalizedTimeFormat() {
+        return ((SimpleDateFormat) android.text.format.DateFormat.getTimeFormat(_context)).toPattern();
+    }
+
+    public String getLocalizedDateTimeFormat() {
+        return getLocalizedDateFormat() + " " + getLocalizedTimeFormat();
+    }
+
+    /**
+     * A {@link InputFilter} for filenames
+     */
+    @SuppressWarnings("Convert2Lambda")
+    public static final InputFilter INPUTFILTER_FILENAME = new InputFilter() {
+        public CharSequence filter(CharSequence src, int start, int end, Spanned dest, int dstart, int dend) {
+            if (src.length() < 1) return null;
+            char last = src.charAt(src.length() - 1);
+            String illegal = "|\\?*<\":>+[]/'";
+            if (illegal.indexOf(last) > -1) return src.subSequence(0, src.length() - 1);
+            return null;
+        }
+    };
+
+    /**
+     * A simple {@link Runnable} which does a touch event on a view.
+     * This pops up e.g. the keyboard on a {@link android.widget.EditText}
+     * <p>
+     * Example: new Handler().postDelayed(new DoTouchView(editView), 200);
+     */
+    public static class DoTouchView implements Runnable {
+        View _view;
+
+        public DoTouchView(View view) {
+            _view = view;
+        }
+
+        @Override
+        public void run() {
+            _view.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, 0, 0, 0));
+            _view.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, 0, 0, 0));
+        }
+    }
+
+
+    public String getMimeType(File file) {
+        return getMimeType(Uri.fromFile(file));
+    }
+
+    /**
+     * Detect MimeType of given file
+     * Android/Java's own MimeType map is very very small and detection barely works at all
+     * Hence use custom map for some file extensions
+     */
+    public String getMimeType(Uri uri) {
+        String mimeType = null;
+        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
+            ContentResolver cr = _context.getContentResolver();
+            mimeType = cr.getType(uri);
+        } else {
+            String ext = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
+            mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext.toLowerCase());
+
+            // Try to guess if the recommended methods fail
+            if (TextUtils.isEmpty(mimeType)) {
+                switch (ext) {
+                    case "md":
+                    case "markdown":
+                    case "mkd":
+                    case "mdown":
+                    case "mkdn":
+                    case "mdwn":
+                    case "rmd":
+                        mimeType = "text/markdown";
+                        break;
+                    case "yaml":
+                    case "yml":
+                        mimeType = "text/yaml";
+                        break;
+                    case "json":
+                        mimeType = "text/json";
+                        break;
+                    case "txt":
+                        mimeType = "text/plain";
+                        break;
+                }
+            }
+        }
+
+        if (TextUtils.isEmpty(mimeType)) {
+            mimeType = "*/*";
+        }
+        return mimeType;
+    }
+
+    public Integer parseColor(String colorstr) {
+        if (colorstr == null || colorstr.trim().isEmpty()) {
+            return null;
+        }
+        try {
+            return Color.parseColor(colorstr);
+        } catch (IllegalArgumentException ignored) {
+            return null;
+        }
+    }
+
 }
+
+
