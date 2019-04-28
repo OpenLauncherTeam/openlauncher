@@ -33,11 +33,11 @@ import net.gsantner.opoc.util.ShareUtil;
 import java.io.IOException;
 import java.util.Locale;
 
-public class SettingsAboutFragment extends GsPreferenceFragmentCompat<AppSettings> {
+public class MoreInfoFragment extends GsPreferenceFragmentCompat<AppSettings> {
     public static final String TAG = "MoreInfoFragment";
 
-    public static SettingsAboutFragment newInstance() {
-        return new SettingsAboutFragment();
+    public static MoreInfoFragment newInstance() {
+        return new MoreInfoFragment();
     }
 
     @Override

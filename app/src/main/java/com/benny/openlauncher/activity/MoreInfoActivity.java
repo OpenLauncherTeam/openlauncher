@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.fragment.SettingsAboutFragment;
+import com.benny.openlauncher.fragment.MoreInfoFragment;
 
 public class MoreInfoActivity extends ThemeActivity {
     @Override
@@ -20,7 +20,7 @@ public class MoreInfoActivity extends ThemeActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        SettingsAboutFragment settingsAboutFragment = SettingsAboutFragment.newInstance();
-        transaction.replace(R.id.fragment_holder, settingsAboutFragment, SettingsAboutFragment.TAG).commit();
+        MoreInfoFragment moreInfoFragment = MoreInfoFragment.newInstance();
+        transaction.replace(R.id.fragment_holder, moreInfoFragment, MoreInfoFragment.TAG).commit();
     }
 }
