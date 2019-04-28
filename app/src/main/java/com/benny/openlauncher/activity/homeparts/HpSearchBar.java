@@ -11,6 +11,9 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.SearchBar;
 
+import net.gsantner.opoc.util.ActivityUtils;
+import net.gsantner.opoc.util.ContextUtils;
+
 public class HpSearchBar implements SearchBar.CallBack, View.OnClickListener {
     private HomeActivity _homeActivity;
     private SearchBar _searchBar;
@@ -79,7 +82,6 @@ public class HpSearchBar implements SearchBar.CallBack, View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent calendar = new Intent(Intent.ACTION_VIEW, CalendarContract.CONTENT_URI.buildUpon().appendPath("time").build());
-        Tool.startApp(_homeActivity, Setup.appLoader().findApp(calendar), _searchBar);
+        new ActivityUtils(_homeActivity).startCalendarApp().freeContextRef();
     }
 }
