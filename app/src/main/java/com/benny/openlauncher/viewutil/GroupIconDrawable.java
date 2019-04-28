@@ -124,7 +124,7 @@ public class GroupIconDrawable extends Drawable {
 
         Path clip = new Path();
         clip.addCircle(_iconSize / 2, _iconSize / 2, _iconSize / 2 - _outline, Path.Direction.CW);
-        canvas.clipPath(clip, Region.Op.REPLACE);
+        //canvas.clipPath(clip, Region.Op.REPLACE);
 
         canvas.drawCircle(_iconSize / 2, _iconSize / 2, _iconSize / 2 - _outline, _paintInnerCircle);
 
@@ -159,7 +159,7 @@ public class GroupIconDrawable extends Drawable {
                 drawIcon(canvas, _icons[1], _iconSizeDiv2 + _padding, _padding + _iconSizeDiv4, _iconSize - _padding, _iconSizeDiv4 + _iconSizeDiv2 - _padding, _paintIcon);
             }
         }
-        canvas.clipRect(0, 0, _iconSize, _iconSize, Region.Op.REPLACE);
+        //canvas.clipRect(0, 0, _iconSize, _iconSize, Region.Op.REPLACE);
 
         canvas.drawCircle(_iconSize / 2, _iconSize / 2, _iconSize / 2 - _outline, _paintOuterCircle);
         canvas.restore();
