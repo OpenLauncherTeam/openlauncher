@@ -21,6 +21,7 @@ import com.benny.openlauncher.activity.SettingsActivity;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.Definitions;
+import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.nononsenseapps.filepicker.FilePickerActivity;
@@ -175,6 +176,10 @@ public class SettingsMasterFragment extends GsPreferenceFragmentCompat<AppSettin
                 Intent intent = new Intent(getActivity(), HideAppsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                return true;
+            }
+            case R.string.pref_key__minibar: {
+                LauncherAction.RunAction(LauncherAction.Action.EditMinibar, getActivity());
                 return true;
             }
         }
