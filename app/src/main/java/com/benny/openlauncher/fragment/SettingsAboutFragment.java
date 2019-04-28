@@ -24,6 +24,7 @@ import android.support.v7.preference.PreferenceGroup;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.SettingsActivity;
 import com.benny.openlauncher.util.AppSettings;
+
 import net.gsantner.opoc.format.markdown.SimpleMarkdownParser;
 import net.gsantner.opoc.preference.GsPreferenceFragmentCompat;
 import net.gsantner.opoc.util.ActivityUtils;

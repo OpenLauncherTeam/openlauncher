@@ -37,17 +37,17 @@ import com.benny.openlauncher.activity.homeparts.HpSearchBar;
 import com.benny.openlauncher.interfaces.AppDeleteListener;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.Item.Type;
-import com.benny.openlauncher.model.App;
+import com.benny.openlauncher.receivers.AppUpdateReceiver;
+import com.benny.openlauncher.receivers.ShortcutReceiver;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.receivers.AppUpdateReceiver;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherAction.Action;
-import com.benny.openlauncher.receivers.ShortcutReceiver;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.viewutil.MinibarAdapter;
@@ -60,11 +60,11 @@ import com.benny.openlauncher.widget.Desktop.OnDesktopEditListener;
 import com.benny.openlauncher.widget.DesktopOptionView;
 import com.benny.openlauncher.widget.DesktopOptionView.DesktopOptionViewListener;
 import com.benny.openlauncher.widget.Dock;
-import com.benny.openlauncher.widget.ItemOptionView;
 import com.benny.openlauncher.widget.GroupPopupView;
+import com.benny.openlauncher.widget.ItemOptionView;
+import com.benny.openlauncher.widget.MinibarView;
 import com.benny.openlauncher.widget.PagerIndicator;
 import com.benny.openlauncher.widget.SearchBar;
-import com.benny.openlauncher.widget.MinibarView;
 
 import net.gsantner.opoc.util.ContextUtils;
 
@@ -607,13 +607,13 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
 
         // handle launcher rotation
-	if (appSettings.getDesktopOrientationMode() == 2) {
-	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        if (appSettings.getDesktopOrientationMode() == 2) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else if (appSettings.getDesktopOrientationMode() == 1) {
-	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-	} else {
-	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-	}
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         handleLauncherResume();
     }
 

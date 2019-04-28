@@ -1,6 +1,7 @@
 package com.benny.openlauncher.activity.homeparts;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.benny.openlauncher.AppObject;
@@ -10,8 +11,6 @@ import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.viewutil.DesktopGestureListener.DesktopGestureCallback;
-
-import android.support.annotation.NonNull;
 
 public final class HpInitSetup extends Setup {
     private final AppManager _appLoader;

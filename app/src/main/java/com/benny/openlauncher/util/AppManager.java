@@ -6,16 +6,15 @@ import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.UserHandle;
+import android.support.annotation.NonNull;
 
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.AppDeleteListener;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
-
-import android.os.Build;
-import android.os.UserHandle;
-import android.support.annotation.NonNull;
 
 import java.text.Collator;
 import java.util.ArrayList;

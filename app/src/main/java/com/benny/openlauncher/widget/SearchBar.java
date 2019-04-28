@@ -32,14 +32,14 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.util.DragHandler;
-import com.benny.openlauncher.viewutil.IconLabelItem;
-import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
+import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.CircleDrawable;
+import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 

@@ -5,7 +5,6 @@ import android.support.v7.preference.Preference;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.viewutil.DialogHelper;
 
 import net.gsantner.opoc.util.ContextUtils;

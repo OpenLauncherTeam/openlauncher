@@ -14,8 +14,8 @@ import android.widget.Toast;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
@@ -33,7 +33,7 @@ public class ItemViewFactory {
             builder.setIconSize(Setup.appSettings().getIconSize());
             builder.vibrateWhenLongPress(Setup.appSettings().getGestureFeedback());
             builder.withOnLongClick(item, type, callback);
-            switch(type) {
+            switch (type) {
                 case DRAWER:
                     builder.setLabelVisibility(Setup.appSettings().getDrawerShowLabel());
                     builder.setTextColor(Setup.appSettings().getDrawerLabelColor());

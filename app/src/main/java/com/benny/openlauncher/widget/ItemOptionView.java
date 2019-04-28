@@ -21,13 +21,12 @@ import com.benny.openlauncher.activity.homeparts.HpAppEditApplier;
 import com.benny.openlauncher.interfaces.DropTargetListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.viewutil.PopupIconLabelItem;
 import com.benny.openlauncher.util.DragAction.Action;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.viewutil.PopupIconLabelItem;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
-import com.mikepenz.fastadapter.listeners.OnClickListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -120,9 +120,9 @@ public class LauncherAction {
             case TurnOffScreen:
                 try {
                     // still needs to reset screen timeout back to default on activity destroy
-                    int defaultTurnOffTime =  Settings.System.getInt(context.getContentResolver(),Settings.System.SCREEN_OFF_TIMEOUT, 60000);
-                    Settings.System.putInt(context.getContentResolver(),Settings.System.SCREEN_OFF_TIMEOUT, 1000);
-                    Settings.System.putInt(context.getContentResolver(),Settings.System.SCREEN_OFF_TIMEOUT, defaultTurnOffTime);
+                    int defaultTurnOffTime = Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
+                    Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 1000);
+                    Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, defaultTurnOffTime);
                 } catch (Exception e) {
                     Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
                     intent.setData(Uri.parse("package:" + context.getPackageName()));

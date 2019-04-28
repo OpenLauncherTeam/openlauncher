@@ -3,7 +3,6 @@ package com.benny.openlauncher.activity.homeparts;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.CalendarContract;
 import android.view.View;
 
 import com.benny.openlauncher.activity.HomeActivity;
@@ -12,7 +11,6 @@ import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.SearchBar;
 
 import net.gsantner.opoc.util.ActivityUtils;
-import net.gsantner.opoc.util.ContextUtils;
 
 public class HpSearchBar implements SearchBar.CallBack, View.OnClickListener {
     private HomeActivity _homeActivity;

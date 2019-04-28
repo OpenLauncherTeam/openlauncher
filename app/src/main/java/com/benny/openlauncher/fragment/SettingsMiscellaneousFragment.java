@@ -3,8 +3,8 @@ package com.benny.openlauncher.fragment;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
 import android.support.annotation.NonNull;
+import android.support.v7.preference.Preference;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;

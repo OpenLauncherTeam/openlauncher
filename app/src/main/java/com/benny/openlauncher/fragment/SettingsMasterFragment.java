@@ -13,8 +13,8 @@ import net.gsantner.opoc.util.ContextUtils;
 
 import java.util.Locale;
 
-import static com.benny.openlauncher.widget.AppDrawerController.Mode.PAGE;
 import static com.benny.openlauncher.widget.AppDrawerController.Mode.GRID;
+import static com.benny.openlauncher.widget.AppDrawerController.Mode.PAGE;
 
 public class SettingsMasterFragment extends SettingsBaseFragment {
     @Override
