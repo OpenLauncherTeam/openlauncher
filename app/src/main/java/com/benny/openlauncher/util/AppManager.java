@@ -173,7 +173,7 @@ public class AppManager {
             for (ResolveInfo info : activitiesInfo) {
                 App app = new App(_packageManager, info);
                 //if (!_nonFilteredApps.contains(app)) {
-                    _nonFilteredApps.add(app);
+                _nonFilteredApps.add(app);
                 //}
             }
 

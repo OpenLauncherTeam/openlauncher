@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
@@ -43,6 +42,7 @@ public class SettingsMasterFragment extends GsPreferenceFragmentCompat<AppSettin
     public static final String TAG = "com.benny.openlauncher.fragment.SettingsMasterFragment";
     protected AppSettings _as;
     private int activityRetVal;
+    private Integer iconColor;
 
     @Override
     public int getPreferenceResourceForInflation() {
@@ -60,11 +60,6 @@ public class SettingsMasterFragment extends GsPreferenceFragmentCompat<AppSettin
             _as = new AppSettings(context);
         }
         return _as;
-    }
-
-    @Override
-    public Integer getIconTintColor() {
-        return Color.BLACK;
     }
 
     @Override
@@ -109,11 +104,11 @@ public class SettingsMasterFragment extends GsPreferenceFragmentCompat<AppSettin
             Preference preference = findPreference(getString(resId));
             Object gesture = AppSettings.get().getGesture(resId);
             if (gesture instanceof Intent) {
-                preference.setSummary(String.format(Locale.ENGLISH, "%s: %s", getString(R.string.app), AppManager.getInstance(getContext()).findApp((Intent) gesture)._label));
+                updateSummary(resId, String.format(Locale.ENGLISH, "%s: %s", getString(R.string.app), AppManager.getInstance(getContext()).findApp((Intent) gesture)._label));
             } else if (gesture instanceof LauncherAction.ActionDisplayItem) {
-                preference.setSummary(String.format(Locale.ENGLISH, "%s: %s", getString(R.string.action), ((LauncherAction.ActionDisplayItem) gesture)._label));
+                updateSummary(resId, String.format(Locale.ENGLISH, "%s: %s", getString(R.string.action), ((LauncherAction.ActionDisplayItem) gesture)._label));
             } else {
-                preference.setSummary(String.format(Locale.ENGLISH, "%s", getString(R.string.none)));
+                updateSummary(resId, String.format(Locale.ENGLISH, "%s", getString(R.string.none)));
             }
         }
     }

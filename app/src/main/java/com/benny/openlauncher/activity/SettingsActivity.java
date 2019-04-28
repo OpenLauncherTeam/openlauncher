@@ -3,14 +3,10 @@ package com.benny.openlauncher.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.widget.Toolbar;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.fragment.SettingsBaseFragment;
 import com.benny.openlauncher.fragment.SettingsMasterFragment;
 import com.benny.openlauncher.util.BackupHelper;
 import com.benny.openlauncher.util.Definitions;
@@ -24,7 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsActivity extends ThemeActivity implements SettingsBaseFragment.OnPreferenceStartFragmentCallback {
+public class SettingsActivity extends ThemeActivity {
     @BindView(R.id.toolbar)
     public Toolbar toolbar;
 
@@ -54,16 +50,6 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
         if (_appSettings.getAppRestartRequired()) {
             startActivity(new Intent(this, HomeActivity.class));
         }
-    }
-
-    @Override
-    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference preference) {
-        Fragment fragment = Fragment.instantiate(this, preference.getFragment(), preference.getExtras());
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_holder, fragment)
-                .addToBackStack(fragment.getTag())
-                .commit();
-        return true;
     }
 
     @Override
