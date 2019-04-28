@@ -1,59 +1,101 @@
 package com.benny.openlauncher.fragment;
 
+import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
 
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.activity.MoreInfoActivity;
+import com.benny.openlauncher.activity.SettingsActivity;
 import com.benny.openlauncher.util.AppSettings;
+import com.benny.openlauncher.widget.AppDrawerController;
 
-import net.gsantner.opoc.util.ContextUtils;
+import net.gsantner.opoc.preference.GsPreferenceFragmentCompat;
 
 import java.util.Locale;
 
-import static com.benny.openlauncher.widget.AppDrawerController.Mode.GRID;
-import static com.benny.openlauncher.widget.AppDrawerController.Mode.PAGE;
+public class SettingsMasterFragment extends GsPreferenceFragmentCompat<AppSettings> {
+    public static final String TAG = "com.benny.openlauncher.fragment.SettingsMasterFragment";
+    protected AppSettings _as;
+    private int activityRetVal;
 
-public class SettingsMasterFragment extends SettingsBaseFragment {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
-        addPreferencesFromResource(R.xml.preferences_master);
+    public int getPreferenceResourceForInflation() {
+        return R.xml.preferences_master;
     }
 
     @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        super.onPreferenceTreeClick(preference);
-        HomeActivity homeActivity = HomeActivity._launcher;
-        int key = new ContextUtils(homeActivity).getResId(ContextUtils.ResType.STRING, preference.getKey());
-        if (key == R.string.pref_key__about) {
-            startActivity(new Intent(getActivity(), MoreInfoActivity.class));
-            return true;
+    public String getFragmentTag() {
+        return TAG;
+    }
+
+    @Override
+    protected AppSettings getAppSettings(Context context) {
+        if (_as == null) {
+            _as = new AppSettings(context);
         }
-        return false;
+        return _as;
     }
 
     @Override
-    public void updateSummaries() {
-        Preference categoryDesktop = findPreference(getString(R.string.pref_key__cat_desktop));
-        Preference categoryDock = findPreference(getString(R.string.pref_key__cat_dock));
-        Preference categoryAppDrawer = findPreference(getString(R.string.pref_key__cat_app_drawer));
-        Preference categoryAppearance = findPreference(getString(R.string.pref_key__cat_appearance));
+    public Integer getIconTintColor() {
+        return Color.BLACK;
+    }
 
-        categoryDesktop.setSummary(String.format(Locale.ENGLISH, "%s: %d x %d", getString(R.string.pref_title__size), AppSettings.get().getDesktopColumnCount(), AppSettings.get().getDesktopRowCount()));
-        categoryDock.setSummary(String.format(Locale.ENGLISH, "%s: %d x %d", getString(R.string.pref_title__size), AppSettings.get().getDockColumnCount(), AppSettings.get().getDockRowCount()));
-        categoryAppearance.setSummary(String.format(Locale.ENGLISH, "Icons: %ddp", AppSettings.get().getIconSize()));
+    @Override
+    protected void onPreferenceScreenChanged(PreferenceFragmentCompat preferenceFragmentCompat, PreferenceScreen preferenceScreen) {
+        super.onPreferenceScreenChanged(preferenceFragmentCompat, preferenceScreen);
+        if (!TextUtils.isEmpty(preferenceScreen.getTitle())) {
+            SettingsActivity a = (SettingsActivity) getActivity();
+            if (a != null) {
+                a.toolbar.setTitle(preferenceScreen.getTitle());
+            }
+        }
+    }
 
-        switch (AppSettings.get().getDrawerStyle()) {
-            case GRID:
-                categoryAppDrawer.setSummary(String.format("%s: %s", getString(R.string.pref_title__style), getString(R.string.vertical_scroll_drawer)));
+    @Override
+    public void doUpdatePreferences() {
+        updateSummary(R.string.pref_key__cat_desktop, String.format(Locale.ENGLISH, "%s: %d x %d", getString(R.string.pref_title__size), _as.getDesktopColumnCount(), _as.getDesktopRowCount()));
+        updateSummary(R.string.pref_key__cat_dock, String.format(Locale.ENGLISH, "%s: %d x %d", getString(R.string.pref_title__size), _as.getDockColumnCount(), _as.getDockRowCount()));
+        updateSummary(R.string.pref_key__cat_appearance, String.format(Locale.ENGLISH, "Icons: %ddp", _as.getIconSize()));
+
+        switch (_as.getDrawerStyle()) {
+            case AppDrawerController.Mode.GRID:
+                updateSummary(R.string.pref_key__cat_app_drawer, String.format("%s: %s", getString(R.string.pref_title__style), getString(R.string.vertical_scroll_drawer)));
                 break;
-            case PAGE:
+            case AppDrawerController.Mode.PAGE:
             default:
-                categoryAppDrawer.setSummary(String.format("%s: %s", getString(R.string.pref_title__style), getString(R.string.horizontal_paged_drawer)));
+                updateSummary(R.string.pref_key__cat_app_drawer, String.format("%s: %s", getString(R.string.pref_title__style), getString(R.string.horizontal_paged_drawer)));
                 break;
         }
+    }
+
+    @Override
+    protected void onPreferenceChanged(SharedPreferences prefs, String key) {
+        super.onPreferenceChanged(prefs, key);
+        activityRetVal = 1;
+    }
+
+    @Override
+    @SuppressWarnings({"ConstantIfStatement"})
+    public Boolean onPreferenceClicked(Preference preference, String key, int keyResId) {
+        switch (keyResId) {
+            case R.string.pref_key__about: {
+                startActivity(new Intent(getActivity(), MoreInfoActivity.class));
+                return true;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isDividerVisible() {
+        return true;
+
     }
 }

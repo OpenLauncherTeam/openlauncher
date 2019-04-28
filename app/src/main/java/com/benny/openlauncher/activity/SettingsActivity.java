@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 
 public class SettingsActivity extends ThemeActivity implements SettingsBaseFragment.OnPreferenceStartFragmentCallback {
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    public Toolbar toolbar;
 
     public void onCreate(Bundle b) {
         // must be applied before setContentView
