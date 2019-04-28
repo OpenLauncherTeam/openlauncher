@@ -8,14 +8,14 @@
     <PreferenceCategory android:title="@string/pref_title__size">
 
         <SeekBarPreference
-            android:defaultValue="4"
+            android:defaultValue="5"
             android:key="@string/pref_key__drawer_columns"
             android:max="20"
             android:title="@string/columns"
             app:min="2" />
 
         <SeekBarPreference
-            android:defaultValue="5"
+            android:defaultValue="6"
             android:key="@string/pref_key__drawer_rows"
             android:max="20"
             android:title="@string/rows"
