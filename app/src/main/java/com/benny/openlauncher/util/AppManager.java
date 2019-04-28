@@ -172,9 +172,9 @@ public class AppManager {
             List<ResolveInfo> activitiesInfo = _packageManager.queryIntentActivities(intent, 0);
             for (ResolveInfo info : activitiesInfo) {
                 App app = new App(_packageManager, info);
-                if (!_nonFilteredApps.contains(app)) {
+                //if (!_nonFilteredApps.contains(app)) {
                     _nonFilteredApps.add(app);
-                }
+                //}
             }
 
             // sort the apps by label here
