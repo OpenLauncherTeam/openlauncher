@@ -137,8 +137,9 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
         // icon specific padding
         holder.textView.setCompoundDrawablePadding(_iconPadding);
-        if (_iconSize != Integer.MAX_VALUE)
+        if (_iconSize != Integer.MAX_VALUE) {
             _icon = new BitmapDrawable(Setup.appContext().getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(_icon), _iconSize, _iconSize, true));
+        }
         switch (_iconGravity) {
             case Gravity.START:
                 holder.textView.setCompoundDrawablesWithIntrinsicBounds(_icon, null, null, null);

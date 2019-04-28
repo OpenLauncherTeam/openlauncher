@@ -253,7 +253,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
 
     public int getAnimationSpeed() {
         // invert the value because it is used as a duration
-        return 100 - getInt(R.string.pref_key__overall_animation_speed_modifier, 70);
+        return 100 - getInt(R.string.pref_key__overall_animation_speed_modifier, 84);
     }
 
     public String getLanguage() {
