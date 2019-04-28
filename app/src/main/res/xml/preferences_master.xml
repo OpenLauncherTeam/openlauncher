@@ -330,10 +330,57 @@
         </PreferenceScreen>
 
         <PreferenceScreen
-            android:fragment="com.benny.openlauncher.fragment.SettingsAppearanceFragment"
             android:icon="@drawable/ic_palette_black_24dp"
             android:key="@string/pref_key__cat_appearance"
-            android:title="@string/pref_title__appearance" />
+            android:title="@string/pref_title__appearance">
+
+
+            <ListPreference
+                android:defaultValue="0"
+                android:entries="@array/entries__theme"
+                android:entryValues="@array/values__zero_to_two"
+                android:key="@string/pref_key__theme"
+                android:summary="@string/pref_summary__theme"
+                android:title="@string/pref_title__theme" />
+
+            <com.flask.colorpicker.ColorPickerPreference
+                android:defaultValue="@color/colorPrimary"
+                android:key="@string/pref_key__primary_color"
+                android:title="@string/pref_title__primary_color"
+                app:alphaSlider="true"
+                app:lightnessSlider="true" />
+
+            <PreferenceCategory android:title="@string/pref_title__icons">
+
+                <SeekBarPreference
+                    android:defaultValue="52"
+                    android:key="@string/pref_key__icon_size"
+                    android:max="120"
+                    android:summary="@string/pref_summary__icon_size"
+                    android:title="@string/pref_title__icon_size"
+                    app:min="20" />
+
+                <Preference
+                    android:key="@string/pref_key__icon_pack"
+                    android:summary="@string/pref_summary__icon_pack"
+                    android:title="@string/pref_title__icon_pack" />
+
+            </PreferenceCategory>
+
+            <PreferenceCategory android:title="@string/pref_title__animations">
+
+                <SeekBarPreference
+                    android:defaultValue="84"
+                    android:key="@string/pref_key__overall_animation_speed_modifier"
+                    android:max="100"
+                    android:summary="@string/pref_summary__animation_speed_modifier"
+                    android:title="@string/pref_title__animation_speed_modifier"
+                    app:min="1" />
+
+            </PreferenceCategory>
+
+
+        </PreferenceScreen>
 
     </PreferenceCategory>
 

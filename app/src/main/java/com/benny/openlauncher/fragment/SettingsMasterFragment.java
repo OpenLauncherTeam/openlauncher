@@ -182,6 +182,10 @@ public class SettingsMasterFragment extends GsPreferenceFragmentCompat<AppSettin
                 LauncherAction.RunAction(LauncherAction.Action.EditMinibar, getActivity());
                 return true;
             }
+            case R.string.pref_key__icon_pack: {
+                DialogHelper.startPickIconPackIntent(getActivity());
+                return true;
+            }
         }
         return null;
     }
