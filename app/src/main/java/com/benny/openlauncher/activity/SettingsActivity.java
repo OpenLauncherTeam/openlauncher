@@ -28,6 +28,8 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
     @BindView(R.id.toolbar)
     public Toolbar toolbar;
 
+    private SettingsMasterFragment prefFrag;
+
     public void onCreate(Bundle b) {
         // must be applied before setContentView
         super.onCreate(b);
@@ -43,8 +45,9 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         toolbar.setBackgroundColor(_appSettings.getPrimaryColor());
 
+        prefFrag = new SettingsMasterFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_holder, new SettingsMasterFragment()).commit();
+        transaction.replace(R.id.fragment_holder, prefFrag).commit();
 
         // if system exit is called the app will open settings activity again
         // this pushes the user back out to the home activity
@@ -78,5 +81,14 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
                     break;
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (prefFrag != null && prefFrag.canGoBack()) {
+            prefFrag.goBack();
+            return;
+        }
+        super.onBackPressed();
     }
 }

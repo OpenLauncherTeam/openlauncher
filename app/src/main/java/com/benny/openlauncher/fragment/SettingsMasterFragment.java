@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.HideAppsActivity;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.activity.MoreInfoActivity;
 import com.benny.openlauncher.activity.SettingsActivity;
@@ -150,6 +151,12 @@ public class SettingsMasterFragment extends GsPreferenceFragmentCompat<AppSettin
             case R.string.pref_key__restart: {
                 homeActivity.recreate();
                 getActivity().finish();
+                return true;
+            }
+            case R.string.pref_key__hidden_apps: {
+                Intent intent = new Intent(getActivity(), HideAppsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
                 return true;
             }
         }
