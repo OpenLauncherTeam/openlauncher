@@ -228,7 +228,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public String getTheme() {
-        return getString(R.string.pref_key__theme, "0");
+        return getString(R.string.pref_key__theme, "1");
     }
 
     public int getPrimaryColor() {

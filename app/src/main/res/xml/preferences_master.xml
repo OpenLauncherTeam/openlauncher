@@ -336,7 +336,7 @@
 
 
             <ListPreference
-                android:defaultValue="0"
+                android:defaultValue="1"
                 android:entries="@array/entries__theme"
                 android:entryValues="@array/values__zero_to_two"
                 android:key="@string/pref_key__theme"
