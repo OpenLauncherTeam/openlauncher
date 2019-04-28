@@ -30,6 +30,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private int _textGravity = Gravity.CENTER_VERTICAL;
     private int _textColor = Integer.MAX_VALUE;
     private boolean _textVisibility = true;
+    private boolean _isAppLauncher = false;
 
     private boolean _onClickAnimate = true;
     private View.OnClickListener _onClickListener;
@@ -139,19 +140,39 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         holder.textView.setCompoundDrawablePadding(_iconPadding);
         if (_iconSize != Integer.MAX_VALUE) {
             _icon = new BitmapDrawable(Setup.appContext().getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(_icon), _iconSize, _iconSize, true));
+            if (_isAppLauncher) {
+                _icon.setBounds(0, 0, _iconSize, _iconSize);
+            }
         }
+
         switch (_iconGravity) {
             case Gravity.START:
-                holder.textView.setCompoundDrawablesWithIntrinsicBounds(_icon, null, null, null);
+                if (_isAppLauncher) {
+                    holder.textView.setCompoundDrawables(_icon, null, null, null);
+                } else {
+                    holder.textView.setCompoundDrawablesWithIntrinsicBounds(_icon, null, null, null);
+                }
                 break;
             case Gravity.END:
-                holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, _icon, null);
+                if (_isAppLauncher) {
+                    holder.textView.setCompoundDrawables(null, null, _icon, null);
+                } else {
+                    holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, _icon, null);
+                }
                 break;
             case Gravity.TOP:
-                holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, _icon, null, null);
+                if (_isAppLauncher) {
+                    holder.textView.setCompoundDrawables(null, _icon, null, null);
+                } else {
+                    holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, _icon, null, null);
+                }
                 break;
             case Gravity.BOTTOM:
-                holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, _icon);
+                if (_isAppLauncher) {
+                    holder.textView.setCompoundDrawables(null, null, null, _icon);
+                } else {
+                    holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, _icon);
+                }
                 break;
         }
 
@@ -163,6 +184,11 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         if (_onLongClickListener != null)
             holder.itemView.setOnLongClickListener(_onLongClickListener);
         super.bindView(holder, payloads);
+    }
+
+    public IconLabelItem withIsAppLauncher(boolean isAppLauncher) {
+        _isAppLauncher = isAppLauncher;
+        return this;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

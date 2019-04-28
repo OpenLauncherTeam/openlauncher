@@ -102,6 +102,7 @@ public class AppDrawerGrid extends FrameLayout {
                     .withTextGravity(Gravity.CENTER)
                     .withIconGravity(Gravity.TOP)
                     .withOnClickAnimate(false)
+                    .withIsAppLauncher(true)
                     .withOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
