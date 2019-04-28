@@ -35,7 +35,6 @@
     <string name="pref_key__date_bar_date_text_color" translatable="false">pref_key__date_bar_date_text_color</string>
     <string name="pref_key__desktop_background_color" translatable="false">pref_key__desktop_background_color</string>
     <string name="pref_key__desktop_folder_color" translatable="false">pref_key__desktop_folder_color</string>
-    <string name="pref_key__desktop_folder_label_color" translatable="false">pref_key__desktop_folder_label_color</string>
     <string name="pref_key__desktop_inset_color" translatable="false">pref_key__desktop_inset_color</string>
     <string name="pref_key__minibar_background_color" translatable="false">pref_key__minibar_background_color</string>
 

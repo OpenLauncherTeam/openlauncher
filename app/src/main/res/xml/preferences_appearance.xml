@@ -23,7 +23,7 @@
     <PreferenceCategory android:title="@string/pref_title__icons">
 
         <SeekBarPreference
-            android:defaultValue="48"
+            android:defaultValue="52"
             android:key="@string/pref_key__icon_size"
             android:max="120"
             android:summary="@string/pref_summary__icon_size"

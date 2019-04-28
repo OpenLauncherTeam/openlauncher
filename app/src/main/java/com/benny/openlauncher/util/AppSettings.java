@@ -100,11 +100,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getDesktopFolderColor() {
-        return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
-    }
-
-    public int getFolderLabelColor() {
-        return getInt(R.string.pref_key__desktop_folder_label_color, Color.BLACK);
+        return getInt(R.string.pref_key__desktop_folder_color, Color.parseColor("#ff3d3d3d"));
     }
 
     public int getDesktopInsetColor() {
@@ -240,7 +236,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getIconSize() {
-        return getInt(R.string.pref_key__icon_size, 48);
+        return getInt(R.string.pref_key__icon_size, 52);
     }
 
     public String getIconPack() {

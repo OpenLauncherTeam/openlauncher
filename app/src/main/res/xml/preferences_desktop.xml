@@ -80,16 +80,9 @@
             app:alphaSlider="true" />
 
         <com.flask.colorpicker.ColorPickerPreference
-            android:defaultValue="@color/white"
+            android:defaultValue="@color/folder_background_default_color"
             android:key="@string/pref_key__desktop_folder_color"
             android:title="@string/pref_title__desktop_folder_color"
-            app:lightnessSlider="true"
-            app:alphaSlider="true" />
-
-        <com.flask.colorpicker.ColorPickerPreference
-            android:defaultValue="@color/black"
-            android:key="@string/pref_key__desktop_folder_label_color"
-            android:title="@string/pref_title__desktop_folder_color_text"
             app:lightnessSlider="true"
             app:alphaSlider="true" />
 

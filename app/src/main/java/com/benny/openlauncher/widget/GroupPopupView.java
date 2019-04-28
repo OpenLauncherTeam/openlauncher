@@ -26,6 +26,8 @@ import com.benny.openlauncher.viewutil.DesktopCallback;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
 
+import net.gsantner.opoc.util.ContextUtils;
+
 import io.codetail.animation.ViewAnimationUtils;
 import io.codetail.widget.RevealFrameLayout;
 
@@ -37,7 +39,7 @@ public class GroupPopupView extends RevealFrameLayout {
     private Animator _folderAnimator;
     private int _cx;
     private int _cy;
-    private TextView _textView;
+    private TextView _textViewGroupName;
 
     public GroupPopupView(Context context) {
         super(context);
@@ -80,7 +82,7 @@ public class GroupPopupView extends RevealFrameLayout {
         _popupCard.setVisibility(View.INVISIBLE);
         setVisibility(View.INVISIBLE);
 
-        _textView = _popupCard.findViewById(R.id.group_popup_label);
+        _textViewGroupName = _popupCard.findViewById(R.id.group_popup_label);
     }
 
 
@@ -88,11 +90,13 @@ public class GroupPopupView extends RevealFrameLayout {
         if (_isShowing || getVisibility() == View.VISIBLE) return false;
         _isShowing = true;
 
+        ContextUtils cu = new ContextUtils(_textViewGroupName.getContext());
         String label = item.getLabel();
-        _textView.setVisibility(label.isEmpty() ? GONE : VISIBLE);
-        _textView.setText(label);
-        _textView.setTextColor(Setup.appSettings().getFolderLabelColor());
-        _textView.setTypeface(null, Typeface.BOLD);
+        _textViewGroupName.setVisibility(label.isEmpty() ? GONE : VISIBLE);
+        _textViewGroupName.setText(label);
+        _textViewGroupName.setTextColor(cu.shouldColorOnTopBeLight(Setup.appSettings().getDesktopFolderColor()) ? Color.WHITE : Color.BLACK);
+        _textViewGroupName.setTypeface(null, Typeface.BOLD);
+        cu.freeContextRef();
 
         final Context context = itemView.getContext();
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.getGroupItems().size());
