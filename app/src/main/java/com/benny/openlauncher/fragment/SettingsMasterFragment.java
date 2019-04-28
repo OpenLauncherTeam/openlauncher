@@ -29,6 +29,9 @@ import net.gsantner.opoc.preference.GsPreferenceFragmentCompat;
 import net.gsantner.opoc.util.PermissionChecker;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 public class SettingsMasterFragment extends GsPreferenceFragmentCompat<AppSettings> {
@@ -70,6 +73,17 @@ public class SettingsMasterFragment extends GsPreferenceFragmentCompat<AppSettin
         }
     }
 
+    ///////////////////////////////////
+    ///////////////////////////////////
+    ///////////////////////////////////
+    ///////////////////////////////////
+
+
+    private static final List<Integer> noRestart = new ArrayList<>(Arrays.asList(
+            R.string.pref_key__gesture_double_tap, R.string.pref_key__gesture_swipe_up,
+            R.string.pref_key__gesture_swipe_down, R.string.pref_key__gesture_pinch,
+            R.string.pref_key__gesture_unpinch));
+
     @Override
     public void doUpdatePreferences() {
         updateSummary(R.string.pref_key__cat_desktop, String.format(Locale.ENGLISH, "%s: %d x %d", getString(R.string.pref_title__size), _as.getDesktopColumnCount(), _as.getDesktopRowCount()));
@@ -91,7 +105,11 @@ public class SettingsMasterFragment extends GsPreferenceFragmentCompat<AppSettin
     protected void onPreferenceChanged(SharedPreferences prefs, String key) {
         super.onPreferenceChanged(prefs, key);
         activityRetVal = 1;
+        if (!noRestart.contains(keyToStringResId(key))) {
+            AppSettings.get().setAppRestartRequired(true);
+        }
     }
+
 
     @Override
     @SuppressWarnings({"ConstantIfStatement"})
