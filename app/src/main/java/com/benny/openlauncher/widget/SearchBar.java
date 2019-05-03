@@ -211,6 +211,7 @@ public class SearchBar extends FrameLayout {
                     items.add(new IconLabelItem(app.getIcon(), app.getLabel())
                             .withIconSize(getContext(), 50)
                             .withTextColor(Color.WHITE)
+                            .withIsAppLauncher(true)
                             .withIconPadding(getContext(), 8)
                             .withOnClickAnimate(false)
                             .withTextGravity(Setup.appSettings().getSearchUseGrid() ? Gravity.CENTER : Gravity.CENTER_VERTICAL)

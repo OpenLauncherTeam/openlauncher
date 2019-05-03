@@ -99,6 +99,7 @@ public class DialogHelper {
         for (int i = 0; i < apps.size(); i++) {
             items.add(new IconLabelItem(apps.get(i).getIcon(), apps.get(i).getLabel())
                     .withIconSize(context, 50)
+                    .withIsAppLauncher(true)
                     .withIconGravity(Gravity.START)
                     .withIconPadding(context, 8));
         }
@@ -149,6 +150,7 @@ public class DialogHelper {
             fastItemAdapter.add(new IconLabelItem(resolveInfos.get(i).loadIcon(packageManager), resolveInfos.get(i).loadLabel(packageManager).toString())
                     .withIconPadding(context, 16)
                     .withIconSize(context, 50)
+                    .withIsAppLauncher(true)
                     .withIconGravity(Gravity.START)
                     .withOnClickListener(new View.OnClickListener() {
                         @Override
