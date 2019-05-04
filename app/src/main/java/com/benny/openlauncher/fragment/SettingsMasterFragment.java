@@ -73,12 +73,6 @@ public class SettingsMasterFragment extends GsPreferenceFragmentCompat<AppSettin
         }
     }
 
-    ///////////////////////////////////
-    ///////////////////////////////////
-    ///////////////////////////////////
-    ///////////////////////////////////
-
-
     private static final List<Integer> noRestart = new ArrayList<>(Arrays.asList(
             R.string.pref_key__gesture_double_tap, R.string.pref_key__gesture_swipe_up,
             R.string.pref_key__gesture_swipe_down, R.string.pref_key__gesture_pinch,
