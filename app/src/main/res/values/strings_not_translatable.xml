@@ -26,6 +26,7 @@
     <string name="pref_key__desktop_show_position_indicator" translatable="false">pref_key__desktop_show_position_indicator</string>
     <string name="pref_key__desktop_show_label" translatable="false">pref_key__desktop_show_label</string>
     <string name="pref_key__search_bar_enable" translatable="false">pref_key__search_bar_enable</string>
+    <string name="pref_key__search_bar_startswith" translatable="false">pref_key__search_bar_startswith</string>
     <string name="pref_key__search_bar_base_uri" translatable="false">pref_key__search_bar_base_uri</string>
     <string name="pref_key__search_bar_force_browser" translatable="false">pref_key__search_bar_force_browser</string>
     <string name="pref_key__search_bar_show_hidden_apps" translatable="false">pref_key__search_bar_show_hidden_apps</string>

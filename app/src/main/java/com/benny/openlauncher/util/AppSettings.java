@@ -63,6 +63,10 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getBool(R.string.pref_key__search_bar_enable, true);
     }
 
+    public boolean getSearchBarStartsWith() {
+        return getBool(R.string.pref_key__search_bar_startswith, true);
+    }
+
     public String getSearchBarBaseURI() {
         return getString(R.string.pref_key__search_bar_base_uri, R.string.pref_default__search_bar_base_uri);
     }
