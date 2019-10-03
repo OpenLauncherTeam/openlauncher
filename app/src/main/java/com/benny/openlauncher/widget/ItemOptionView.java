@@ -339,19 +339,17 @@ public final class ItemOptionView extends FrameLayout {
         ArrayList<PopupIconLabelItem> itemList = new ArrayList<>();
         switch (getDragItem().getType()) {
             case APP:
-            case SHORTCUT:
-            case GROUP: {
-                if (getDragAction().equals(Action.DRAWER)) {
-                    itemList.add(uninstallItem);
-                    itemList.add(infoItem);
-                } else {
+            case SHORTCUT: {
+                if (!getDragAction().equals(Action.DRAWER)) {
                     itemList.add(editItem);
                     itemList.add(removeItem);
-                    itemList.add(infoItem);
                 }
+                itemList.add(uninstallItem);
+                itemList.add(infoItem);
                 break;
             }
-            case ACTION: {
+            case ACTION:
+            case GROUP: {
                 itemList.add(editItem);
                 itemList.add(removeItem);
                 break;
