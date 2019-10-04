@@ -16,6 +16,7 @@ import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.notifications.NotificationListener;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
@@ -49,6 +50,8 @@ public class ItemViewFactory {
                     final App app = Setup.appLoader().findItemApp(item);
                     if (app == null) break;
                     view = builder.setAppItem(item).getView();
+                    NotificationListener.setNotificationCallback(app.getPackageName(),
+                        (NotificationListener.NotificationCallback) view);
                     break;
                 case SHORTCUT:
                     view = builder.setShortcutItem(item).getView();

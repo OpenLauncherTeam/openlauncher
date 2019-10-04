@@ -14,10 +14,12 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -592,6 +594,23 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         super.onStart();
     }
 
+    private boolean checkNotificationPermissions() {
+        String pkgName = getPackageName();
+        final String flat = Settings.Secure.getString(getContentResolver(), "enabled_notification_listeners");
+        if (!TextUtils.isEmpty(flat)) {
+            final String[] names = flat.split(":");
+            for (int i = 0; i < names.length; i++) {
+                final ComponentName cn = ComponentName.unflattenFromString(names[i]);
+                if (cn != null) {
+                    if (TextUtils.equals(pkgName, cn.getPackageName())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -605,6 +624,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             recreate();
             return;
         }
+
+        checkNotificationPermissions();
 
         // handle launcher rotation
         if (appSettings.getDesktopOrientationMode() == 2) {
