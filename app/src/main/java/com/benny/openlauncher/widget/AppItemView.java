@@ -14,6 +14,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.notifications.NotificationListener;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
@@ -21,8 +22,7 @@ import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallback;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 
-public class AppItemView extends View implements Drawable.Callback {
-
+public class AppItemView extends View implements Drawable.Callback, NotificationListener.NotificationCallback {
     private static final int MIN_ICON_TEXT_MARGIN = 8;
     private static final char ELLIPSIS = '…';
 
@@ -37,6 +37,8 @@ public class AppItemView extends View implements Drawable.Callback {
     private int _targetedWidth;
     private int _targetedHeightPadding;
     private float _heightPadding;
+
+    private int _notificationCount = 0;
 
     public AppItemView(Context context) {
         this(context, null);
@@ -64,6 +66,12 @@ public class AppItemView extends View implements Drawable.Callback {
 
     public void setLabel(String label) {
         _label = label;
+    }
+
+    public void notificationCallback(Integer count) {
+        _notificationCount = count;
+
+        invalidate();
     }
 
     public float getIconSize() {
@@ -134,6 +142,14 @@ public class AppItemView extends View implements Drawable.Callback {
             _icon.setBounds(0, 0, (int) _iconSize, (int) _iconSize);
             _icon.draw(canvas);
             canvas.restore();
+        }
+
+        if (_notificationCount > 0) {
+            Paint backgroundPaint = new Paint();
+            backgroundPaint.setColor(Color.RED);
+
+            float radius = _iconSize * .15f;
+            canvas.drawCircle(_iconSize - radius, _heightPadding + radius, radius, backgroundPaint);
         }
     }
 

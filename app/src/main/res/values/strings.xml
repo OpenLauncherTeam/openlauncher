@@ -240,4 +240,5 @@
     <string name="toast_backup_error">Something went wrong.</string>
     <string name="toast_icon_pack_error">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
 
+    <string name="icon_badging_service_title">Icon badging service</string>
 </resources>
