@@ -237,8 +237,14 @@ public class SearchBar extends FrameLayout {
                 }
 
                 String s = constraint.toString().toLowerCase();
-                if (item._label.toLowerCase().contains(s)) {
-                    return true;
+                if (Setup.appSettings().getSearchBarStartsWith()) {
+                    if (item._label.toLowerCase().startsWith(s)) {
+                        return true;
+                    }
+                } else {
+                    if (item._label.toLowerCase().contains(s)) {
+                        return true;
+                    }
                 }
 
                 return false;

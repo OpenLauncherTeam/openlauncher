@@ -117,6 +117,12 @@
                     android:summary="@string/pref_summary__search_bar_enable"
                     android:title="@string/pref_title__search_bar_enable" />
 
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="@string/pref_key__search_bar_startswith"
+                    android:summary="@string/pref_summary__search_bar_startswith"
+                    android:title="@string/pref_summary__search_bar_startswith" />
+
                 <EditTextPreference
                     android:defaultValue="@string/pref_default__search_bar_base_uri"
                     android:dependency="@string/pref_key__search_bar_enable"

@@ -105,6 +105,8 @@
 
     <string name="pref_title__search_bar_enable">Search Bar</string>
     <string name="pref_summary__search_bar_enable">Display a search bar above the desktop.</string>
+    <string name="pref_title__search_bar_startswith">Search apps by name</string>
+    <string name="pref_summary__search_bar_startswith">Search for apps starting with the search text.</string>
     <string name="pref_title__search_bar_base_uri">Search URI</string>
     <string name="pref_summary__search_bar_base_uri">Set the URI used for web searches.</string>
     <string name="pref_dialog__search_bar_base_uri">Enter the URI that should be used for web searches. The tag {query} can be used as
