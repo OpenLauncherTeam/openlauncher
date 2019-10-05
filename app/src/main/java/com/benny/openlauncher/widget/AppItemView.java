@@ -29,6 +29,7 @@ public class AppItemView extends View implements Drawable.Callback, Notification
     private Drawable _icon = null;
     private String _label;
     private Paint _textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint _notifyPaint = new Paint();
     private Rect _textContainer = new Rect(), testTextContainer = new Rect();
     private float _iconSize;
     private boolean _showLabel = true;
@@ -50,6 +51,8 @@ public class AppItemView extends View implements Drawable.Callback, Notification
         _labelHeight = Tool.dp2px(14);
         _textPaint.setTextSize(Tool.sp2px(12));
         _textPaint.setColor(Color.WHITE);
+        _notifyPaint.setColor(Color.RED);
+
     }
 
     public Drawable getIcon() {
@@ -141,15 +144,13 @@ public class AppItemView extends View implements Drawable.Callback, Notification
             canvas.translate((getWidth() - _iconSize) / 2, _heightPadding);
             _icon.setBounds(0, 0, (int) _iconSize, (int) _iconSize);
             _icon.draw(canvas);
+
+            if (_notificationCount > 0) {
+                float radius = _iconSize * .15f;
+                canvas.drawCircle(_iconSize - radius, _heightPadding, radius, _notifyPaint);
+            }
+
             canvas.restore();
-        }
-
-        if (_notificationCount > 0) {
-            Paint backgroundPaint = new Paint();
-            backgroundPaint.setColor(Color.RED);
-
-            float radius = _iconSize * .15f;
-            canvas.drawCircle(_iconSize - radius, _heightPadding + radius, radius, backgroundPaint);
         }
     }
 
