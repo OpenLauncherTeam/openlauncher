@@ -371,6 +371,12 @@
                     android:summary="@string/pref_summary__icon_pack"
                     android:title="@string/pref_title__icon_pack" />
 
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="@string/pref_key__icon_show_notifications"
+                    android:summary="@string/pref_summary__icon_show_notifications"
+                    android:title="@string/pref_title__icon_show_notifications" />
+
             </PreferenceCategory>
 
             <PreferenceCategory android:title="@string/pref_title__animations">

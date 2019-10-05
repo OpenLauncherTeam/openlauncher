@@ -50,8 +50,11 @@ public class ItemViewFactory {
                     final App app = Setup.appLoader().findItemApp(item);
                     if (app == null) break;
                     view = builder.setAppItem(item).getView();
-                    NotificationListener.setNotificationCallback(app.getPackageName(),
-                        (NotificationListener.NotificationCallback) view);
+
+                    if (Setup.appSettings().getNotificationStatus()) {
+                        NotificationListener.setNotificationCallback(app.getPackageName(),
+                            (NotificationListener.NotificationCallback) view);
+                    }
                     break;
                 case SHORTCUT:
                     view = builder.setShortcutItem(item).getView();

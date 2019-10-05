@@ -625,7 +625,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             return;
         }
 
-        checkNotificationPermissions();
+        if (appSettings.getNotificationStatus()) {
+            checkNotificationPermissions();
+        }
 
         // handle launcher rotation
         if (appSettings.getDesktopOrientationMode() == 2) {

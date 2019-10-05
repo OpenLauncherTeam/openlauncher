@@ -71,6 +71,7 @@
     <string name="pref_key__primary_color" translatable="false">pref_key__primary_color</string>
     <string name="pref_key__icon_size" translatable="false">pref_key__icon_size</string>
     <string name="pref_key__icon_pack" translatable="false">pref_key__icon_pack</string>
+    <string name="pref_key__icon_show_notifications" translatable="false">pref_key__icon_show_notifications</string>
     <string name="pref_key__overall_animation_speed_modifier" translatable="false">pref_key__overall_animation_speed_modifier</string>
 
     <string name="pref_key__language" translatable="false">pref_key__language</string>
