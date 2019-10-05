@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
@@ -72,6 +73,7 @@ import net.gsantner.opoc.util.ContextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public final class HomeActivity extends Activity implements OnDesktopEditListener, DesktopOptionViewListener {
     public static final Companion Companion = new Companion();
@@ -595,19 +597,13 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     private boolean checkNotificationPermissions() {
-        String pkgName = getPackageName();
-        final String flat = Settings.Secure.getString(getContentResolver(), "enabled_notification_listeners");
-        if (!TextUtils.isEmpty(flat)) {
-            final String[] names = flat.split(":");
-            for (int i = 0; i < names.length; i++) {
-                final ComponentName cn = ComponentName.unflattenFromString(names[i]);
-                if (cn != null) {
-                    if (TextUtils.equals(pkgName, cn.getPackageName())) {
-                        return true;
-                    }
-                }
+        Set<String> appList = NotificationManagerCompat.getEnabledListenerPackages(this);
+        for (String l : appList) {
+            if (l.equals(getPackageName())) {
+                return true;
             }
         }
+
         return false;
     }
 

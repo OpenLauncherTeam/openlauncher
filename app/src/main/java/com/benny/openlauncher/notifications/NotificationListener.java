@@ -14,6 +14,8 @@ import java.util.HashMap;
 public class NotificationListener extends NotificationListenerService {
     private static Logger LOG = LoggerFactory.getLogger("NotificationListener");
 
+    private boolean _isConnected = false;
+
     private static final int EVENT_UPDATE_CURRENT_NOS = 0;
 
     private static HashMap<String, NotificationCallback> _currentNotifications = new HashMap<>();
@@ -44,6 +46,12 @@ public class NotificationListener extends NotificationListenerService {
     }
 
     @Override
+    public void onListenerConnected() {
+        LOG.debug("Listener connected");
+        _isConnected = true;
+    }
+
+    @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         processCallback(sbn.getPackageName(), sbn.getNotification().number);
      }
@@ -66,29 +74,33 @@ public class NotificationListener extends NotificationListenerService {
     }
 
     private void updateCurrentNotifications() {
-        try {
-            StatusBarNotification[] activeNos = getActiveNotifications();
+        if (_isConnected) {
+            try {
+                StatusBarNotification[] activeNos = getActiveNotifications();
 
-            String packageName = "";
-            int notificationCount = 0;
-            for (int i = 0; i < activeNos.length; i++) {
-                String pkg = activeNos[i].getPackageName();
-                if (!packageName.equals(pkg)) {
-                    packageName = pkg;
-                    notificationCount = 0;
+                String packageName = "";
+                int notificationCount = 0;
+                for (int i = 0; i < activeNos.length; i++) {
+                    String pkg = activeNos[i].getPackageName();
+                    if (!packageName.equals(pkg)) {
+                        packageName = pkg;
+                        notificationCount = 0;
+                    }
+                    int count = activeNos[i].getNotification().number;
+                    if (count == 0) {
+                        notificationCount++;
+                    } else {
+                        notificationCount = Math.max(notificationCount, count);
+                    }
+
+                    processCallback(packageName, notificationCount);
+
                 }
-                int count = activeNos[i].getNotification().number;
-                if (count == 0) {
-                    notificationCount++;
-                } else {
-                    notificationCount = Math.max(notificationCount, count);
-                }
-
-                processCallback(packageName, notificationCount);
-
+            } catch (Exception e) {
+                LOG.error("Unexpected exception when updating notifications: {}", e);
             }
-        } catch (Exception e) {
-            LOG.error("Unexpected exception when updating notifications: {}", e);
+        } else {
+            mMonitorHandler.sendMessage(mMonitorHandler.obtainMessage(EVENT_UPDATE_CURRENT_NOS));
         }
     }
 }
