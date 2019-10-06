@@ -43,6 +43,7 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.Item.Type;
+import com.benny.openlauncher.notifications.NotificationListener;
 import com.benny.openlauncher.receivers.AppUpdateReceiver;
 import com.benny.openlauncher.receivers.ShortcutReceiver;
 import com.benny.openlauncher.util.AppManager;
@@ -596,15 +597,27 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         super.onStart();
     }
 
-    private boolean checkNotificationPermissions() {
+    private void checkNotificationPermissions() {
         Set<String> appList = NotificationManagerCompat.getEnabledListenerPackages(this);
         for (String app : appList) {
             if (app.equals(getPackageName())) {
-                return true;
+                // Already allowed, so request a full update when returning to the home screen from another app.
+                Intent i = new Intent(NotificationListener.UPDATE_NOTIFICATIONS_ACTION);
+                i.setPackage(getPackageName());
+                i.putExtra(NotificationListener.UPDATE_NOTIFICATIONS_COMMAND, NotificationListener.UPDATE_NOTIFICATIONS_UPDATE);
+                sendBroadcast(i);
+                return;
             }
         }
 
-        return false;
+        // Request the required permission otherwise.
+        DialogHelper.alertDialog(this, getString(R.string.notification_request_title), getString(R.string.notification_request_summary), getString(R.string.enable), new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                Tool.toast(HomeActivity.this, getString(R.string.toast_notification_permission_required));
+                startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
+            }
+        });
     }
 
     @Override
@@ -622,12 +635,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
 
         if (appSettings.getNotificationStatus()) {
-            if (checkNotificationPermissions()) {
-                Intent i = new Intent("update-notifications");
-                i.setPackage(getPackageName());
-                i.putExtra("command","update");
-                sendBroadcast(i);
-            }
+            // Ask user to allow the Notification permission if not already provided.
+            checkNotificationPermissions();
         }
 
         // handle launcher rotation

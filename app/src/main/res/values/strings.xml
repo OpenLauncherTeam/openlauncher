@@ -209,6 +209,8 @@
     <string name="volume_level_notification">Notification</string>
     <string name="volume_level_system">System</string>
     <string name="volume_level_media">Media</string>
+    <string name="notification_request_title">Notifications Permission Required</string>
+    <string name="notification_request_summary">To enable Notifications, OpenLauncher requires the relevant permission. Please enable it in the settings to use this feature.</string>
 
     <!-- Other -->
     <string name="columns">Columns</string>
@@ -240,6 +242,7 @@
     <string name="toast_not_enough_space">Not enough space.</string>
     <string name="toast_app_uninstalled">App uninstalled.</string>
     <string name="toast_device_admin_required">Please enable device administration.</string>
+    <string name="toast_notification_permission_required">Please enable Notifications.</string>
     <string name="toast_backup_success">Done.</string>
     <string name="toast_backup_error">Something went wrong.</string>
     <string name="toast_icon_pack_error">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>

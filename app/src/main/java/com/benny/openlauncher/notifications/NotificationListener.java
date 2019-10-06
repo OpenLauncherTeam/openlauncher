@@ -18,6 +18,10 @@ import java.util.HashMap;
 public class NotificationListener extends NotificationListenerService {
     private static Logger LOG = LoggerFactory.getLogger("NotificationListener");
 
+    public static String UPDATE_NOTIFICATIONS_ACTION  = "update-notifications";
+    public static String UPDATE_NOTIFICATIONS_COMMAND = "command";
+    public static String UPDATE_NOTIFICATIONS_UPDATE  = "update";
+
     private boolean _isConnected = false;
     private NotificationListenerReceiver _notificationReceiver;
 
@@ -49,11 +53,9 @@ public class NotificationListener extends NotificationListenerService {
 
         if (_notificationReceiver == null) {
             _notificationReceiver = new NotificationListenerReceiver();
-            IntentFilter filter = new IntentFilter("update-notifications");
+            IntentFilter filter = new IntentFilter(UPDATE_NOTIFICATIONS_ACTION);
             registerReceiver(_notificationReceiver, filter);
         }
-
-        mMonitorHandler.sendMessage(mMonitorHandler.obtainMessage(EVENT_UPDATE_CURRENT_NOS));
     }
 
     @Override
@@ -66,6 +68,8 @@ public class NotificationListener extends NotificationListenerService {
     public void onListenerConnected() {
         LOG.debug("Listener connected");
         _isConnected = true;
+
+        mMonitorHandler.sendMessage(mMonitorHandler.obtainMessage(EVENT_UPDATE_CURRENT_NOS));
     }
 
     @Override
@@ -86,6 +90,7 @@ public class NotificationListener extends NotificationListenerService {
             callback.notificationCallback(count);
         }
     }
+
     public static void setNotificationCallback(String packageName, NotificationCallback callback) {
         _currentNotifications.put(packageName, callback);
     }
@@ -116,15 +121,13 @@ public class NotificationListener extends NotificationListenerService {
             } catch (Exception e) {
                 LOG.error("Unexpected exception when updating notifications: {}", e);
             }
-        } else {
-            mMonitorHandler.sendMessage(mMonitorHandler.obtainMessage(EVENT_UPDATE_CURRENT_NOS));
         }
     }
 
     class NotificationListenerReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getStringExtra("command").equals("update")) {
+            if (intent.getStringExtra(UPDATE_NOTIFICATIONS_COMMAND).equals(UPDATE_NOTIFICATIONS_UPDATE)) {
                 NotificationListener.this.updateCurrentNotifications();
             }
         }
