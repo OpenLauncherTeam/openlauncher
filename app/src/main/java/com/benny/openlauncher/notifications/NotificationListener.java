@@ -13,6 +13,7 @@ import android.service.notification.StatusBarNotification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NotificationListener extends NotificationListenerService {
@@ -27,7 +28,7 @@ public class NotificationListener extends NotificationListenerService {
 
     private static final int EVENT_UPDATE_CURRENT_NOS = 0;
 
-    private static HashMap<String, NotificationCallback> _currentNotifications = new HashMap<>();
+    private static HashMap<String, ArrayList<NotificationCallback>> _currentNotifications = new HashMap<>();
 
     public interface NotificationCallback {
         public void notificationCallback(Integer count);
@@ -74,7 +75,14 @@ public class NotificationListener extends NotificationListenerService {
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
-        processCallback(sbn.getPackageName(), sbn.getNotification().number);
+        // Some apps do not track total notifications in their StatusBarNotification; given this
+        // is an onNotificationPosted, ensure we have a minimum count to display the badge, otherwise
+        // it will be removed which is counter-intuitive.
+        int notificationCount = sbn.getNotification().number;
+        if (notificationCount == 0) {
+            notificationCount = 1;
+        }
+        processCallback(sbn.getPackageName(), notificationCount);
      }
 
     @Override
@@ -84,15 +92,26 @@ public class NotificationListener extends NotificationListenerService {
 
     private void processCallback(String packageName, int count) {
         LOG.debug("processCallback({}) -> {}", packageName, count);
-        NotificationCallback callback = _currentNotifications.get(packageName);
+        ArrayList<NotificationCallback> callbacks = _currentNotifications.get(packageName);
 
-        if (callback != null) {
-            callback.notificationCallback(count);
+        if (callbacks != null) {
+            for (NotificationCallback callback : callbacks) {
+                callback.notificationCallback(count);
+            }
         }
     }
 
     public static void setNotificationCallback(String packageName, NotificationCallback callback) {
-        _currentNotifications.put(packageName, callback);
+        ArrayList<NotificationCallback> callbacks =_currentNotifications.get(packageName);
+
+        if (callbacks != null) {
+            callbacks.add(callback);
+        } else {
+            callbacks = new ArrayList<NotificationCallback>(1);
+            callbacks.add(callback);
+            _currentNotifications.put(packageName, callbacks);
+
+        }
     }
 
     private void updateCurrentNotifications() {
