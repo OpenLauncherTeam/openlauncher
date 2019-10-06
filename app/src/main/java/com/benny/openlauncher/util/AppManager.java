@@ -190,7 +190,7 @@ public class AppManager {
                 for (int i = 0; i < _nonFilteredApps.size(); i++) {
                     boolean shouldGetAway = false;
                     for (String hidItemRaw : hiddenList) {
-                        if ((_nonFilteredApps.get(i)._packageName + "/" + _nonFilteredApps.get(i)._className).equals(hidItemRaw)) {
+                        if ((_nonFilteredApps.get(i).getComponentName()).equals(hidItemRaw)) {
                             shouldGetAway = true;
                             break;
                         }
