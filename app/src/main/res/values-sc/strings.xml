@@ -37,7 +37,6 @@
     <string name="about_rate">Dae unu votu a s\'aplicatzione</string>
     <string name="about_credit">Contribuidores</string>
     <string name="community">Comunidade</string>
-    <string name="about_credit_text_all_contributors">Totu sos contribuidores</string>
     <string name="more_info_on_how_to_contribute_to_foss_android_projects">Àteras informatziones a pitzu de comente contribuire a progetos a mitza aberta, e in manera particulare a aplicatziones pro Android</string>
     <string name="join_community">Auni·ti a sa comunidade</string>
     <string name="bug_reports_suggest_improvements">Dae·nos s\'opinione tua, sinnala·nos errores o cussigia·nos megiorias</string>
@@ -59,7 +58,6 @@
     <string name="open_source_licenses">Litzèntzias a mitza aberta</string>
     <string name="rate_the_app">Dae unu votu a custa aplicatzione</string>
     <string name="translate">Tradui</string>
-    <string name="help_this_app">Àteras informatziones e agiudu pro custa aplicatzione</string>
     <string name="bug_reports">Sinnala errores (bugs)</string>
     <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Àteras informatziones a pitzu de comente fàghere donatziones o suportare custu progetu</string>
     <string name="android_contribution_guide">Ghia a sa contributzione pro Android</string>

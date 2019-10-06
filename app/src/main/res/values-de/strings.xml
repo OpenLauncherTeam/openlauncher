@@ -33,7 +33,6 @@
     <string name="about_libs">Open Source Bibliotheken</string>
     <string name="about_rate">Bewerte die App</string>
     <string name="about_credit">Beteiligte</string>
-    <string name="about_credit_text_all_contributors">Alle Beitragenden</string>
 
     <!-- Settings -->
 
@@ -225,7 +224,6 @@
     <string name="open_source_licenses">Open Source Lizenzen</string>
     <string name="rate_the_app">App bewerten</string>
     <string name="translate">Übersetzen</string>
-    <string name="help_this_app">Mehr Infos und Hilfe zu dieser App</string>
     <string name="bug_reports">Fehler melden</string>
     <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Weitere Informationen zum Spenden oder zur anderweitigen Unterstützung dieses Projekts</string>
     <string name="android_contribution_guide">Unterstützungs Guide für Android</string>

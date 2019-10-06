@@ -1,9 +1,9 @@
 BennyKok
-Started OpenLauncher project
+Started OpenLauncher
 https://github.com/openlauncherteam/openlauncher
 
-Gregor Santner (gsantner)
-Austrian software developer and Open Source enthusiast
+Gregor Santner
+Austrian Software Developer
 https://gsantner.net/?project=memetastic
 
 dkanada

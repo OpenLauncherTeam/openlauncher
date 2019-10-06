@@ -33,7 +33,6 @@
     <string name="about_rate">Értékelés</string>
     <string name="about_credit">Támogatók</string>
     <string name="community">Közösség</string>
-    <string name="about_credit_text_all_contributors">Összes támogató</string>
     <string name="join_community">Csatlakozz a Közösséghez</string>
     <string name="bug_reports_suggest_improvements">Visszajelzés küldése, hibák jelentése, vagy újítás ajánlása</string>
     <string name="help_translating_this_app">Fordítsd le ezt az alkalmazást más nyelvekre</string>
@@ -52,7 +51,6 @@
     <string name="open_source_licenses">Nyitott Forráskódú Licenszek</string>
     <string name="rate_the_app">Értékeld ezt az appot</string>
     <string name="translate">Fordítás</string>
-    <string name="help_this_app">További információk és segítség az alkalmazásról</string>
     <string name="bug_reports">Hibajelentés</string>
     <string name="android_contribution_guide">Android támogatói útmutató</string>
 

@@ -5,7 +5,7 @@
     <string name="intro1_community">Large Community</string>
     <string name="intro1_features">Packed with Features</string>
     <string name="intro1_customizable">Customizable</string>
-    <string name="intro2_text">Swipe inwards from the left border of your home screen to open the minibar and select an action.</string>
+    <string name="intro2_text">Swipe in from the left border of your home screen to open the minibar and select an action.</string>
     <string name="intro3_text">You can choose a style for your app drawer and hide unused apps from the settings.</string>
     <string name="intro4_text">Search for something on the web or filter your apps from the search bar.</string>
 
@@ -37,18 +37,17 @@
     <string name="about_rate">Rate</string>
     <string name="about_credit">Contributors</string>
     <string name="community">Community</string>
-    <string name="about_credit_text_all_contributors">All contributors</string>
-    <string name="more_info_on_how_to_contribute_to_foss_android_projects">More information on contributing to Open Source projects, especially Android Apps</string>
+    <string name="more_info_on_how_to_contribute_to_foss_android_projects">More information about contributing to open source projects on Android.</string>
     <string name="join_community">Join the Community</string>
-    <string name="bug_reports_suggest_improvements">Give feedback, report bugs or suggest improvements</string>
-    <string name="help_translating_this_app">Translate this app to other languages</string>
+    <string name="bug_reports_suggest_improvements">Report bugs and suggest improvements on GitHub.</string>
+    <string name="help_translating_this_app">Translate this app to other languages with GitHub or Stringlate!</string>
     <string name="source_code">Source Code</string>
     <string name="project_license">Project License</string>
-    <string name="project_contribution_info">Project contribution info</string>
-    <string name="more_info_on_how_to_contribute_to_this_project">More information on how to contribute to this project</string>
-    <string name="contribute_code_to_this_project_anybody_welcome">Contribute code to the project. Everybody is welcome todo so, including newcomers</string>
+    <string name="project_contribution_info">Contribution Info</string>
+    <string name="more_info_on_how_to_contribute_to_this_project">How you can contribute to this project.</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">Contribute code to the project. Everyone is welcome to submit changes!</string>
     <string name="project_team">Project Team</string>
-    <string name="contributors_public_info">Show information about contributors. Contributors can provide information to be shown here (opt-in) after contribution</string>
+    <string name="contributors_public_info">Contributors can provide information to be shown here after improving the launcher.</string>
     <string name="contribute">Contribute</string>
     <string name="donate">Donate</string>
     <string name="help">Help</string>
@@ -57,12 +56,11 @@
     <string name="changelog">Changelog</string>
     <string name="more">More</string>
     <string name="open_source_licenses">Open Source Licenses</string>
-    <string name="rate_the_app">Rate this app</string>
+    <string name="rate_the_app">Rate</string>
     <string name="translate">Translate</string>
-    <string name="help_this_app">More information and help about this app</string>
-    <string name="bug_reports">Report bugs</string>
-    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">More information on donating or otherwise supporting this project</string>
-    <string name="android_contribution_guide">Android contribution guide</string>
+    <string name="bug_reports">Report Bugs</string>
+    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">More information on donating or otherwise supporting this project.</string>
+    <string name="android_contribution_guide">Android Development</string>
 
     <!-- Settings -->
     <string name="pref_title__settings">Settings</string>
@@ -89,7 +87,7 @@
 
     <string name="pref_title__desktop_indicator_style">Indicator Style</string>
     <string name="pref_summary__minibar">Configure the order and visibility of minibar items.</string>
-    <string name="pref_title__desktop_orientation">Desktop orientation.</string>
+    <string name="pref_title__desktop_orientation">Orientation</string>
     <string name="pref_title__desktop_show_grid">Show Grid</string>
     <string name="pref_summary__desktop_show_grid">Show the guiding grid when dragging items.</string>
     <string name="pref_title__desktop_fullscreen">Fullscreen</string>
@@ -149,8 +147,8 @@
     <string name="pref_title__gesture_quick_swipe">Quick Swipe Drawer</string>
     <string name="pref_summary__gesture_quick_swipe">Swipe upwards on the dock to open the app drawer.</string>
     <string name="pref_title__gesture_double_tap">Double Tap</string>
-    <string name="pref_title__gesture_swipe_up">Swipe Upwards</string>
-    <string name="pref_title__gesture_swipe_down">Swipe Downwards</string>
+    <string name="pref_title__gesture_swipe_up">Swipe Up</string>
+    <string name="pref_title__gesture_swipe_down">Swipe Down</string>
     <string name="pref_title__gesture_pinch">Pinch</string>
     <string name="pref_title__gesture_unpinch">Unpinch</string>
 
@@ -163,20 +161,20 @@
     <string name="pref_title__icon_pack">Icon Pack</string>
     <string name="pref_summary__icon_pack">Select an installed icon pack.</string>
     <string name="pref_title__animation_speed_modifier">Animation Speed</string>
-    <string name="pref_summary__animation_speed_modifier">Modify the overall speed of animations</string>
+    <string name="pref_summary__animation_speed_modifier">Modify the overall speed of animations.</string>
 
     <string name="pref_title__language">Language</string>
-    <string name="pref_summary__language">Change language of this app. Restart app for changes to take effect</string>
+    <string name="pref_summary__language">Change language used throughout the launcher.</string>
     <string name="pref_title__backup">Backup</string>
-    <string name="pref_summary__backup">Backup your desktop and settings.</string>
+    <string name="pref_summary__backup">Backup your desktop and settings to any location.</string>
     <string name="pref_title__restore">Restore</string>
     <string name="pref_summary__restore">Restore your desktop and settings.</string>
     <string name="pref_title__reset_settings">Reset Settings</string>
-    <string name="pref_summary__reset_settings">Delete the app settings.</string>
+    <string name="pref_summary__reset_settings">Delete internal files used to store the settings.</string>
     <string name="pref_title__reset_database">Reset Database</string>
-    <string name="pref_summary__reset_database">Remove all items from the launcher.</string>
+    <string name="pref_summary__reset_database">Remove all items from the desktop.</string>
     <string name="pref_title__restart">Restart</string>
-    <string name="pref_summary__restart">Restart the launcher.</string>
+    <string name="pref_summary__restart">This can be used to manually apply some settings.</string>
 
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paged</string>
@@ -199,7 +197,7 @@
     <string name="please_wait">Searching for installed apps. Please wait.</string>
     <string name="are_you_sure">Are you sure? This action cannot be undone unless you have a backup.</string>
     <string name="device_admin_title">Device Admin Required</string>
-    <string name="device_admin_summary">OpenLauncher requires the Device Administration permission to lock your screen. Please enable it in the settings to use this feature.</string>
+    <string name="device_admin_summary">OpenLauncher requires the Device Administration permission to lock your screen.</string>
     <string name="select_app">Select App</string>
     <string name="select_wallpaper">Select Wallpaper</string>
     <string name="select_icon_pack">Select Icon Pack</string>
@@ -217,7 +215,7 @@
     <string name="bad_format">Bad Format</string>
     <string name="version">Version</string>
     <string name="enable">Enable</string>
-    <string name="placeholder">Hello world!</string>
+    <string name="placeholder">Hello World!</string>
     <string name="custom">Custom</string>
     <string name="default_folder">Unnamed</string>
     <string name="default_icons">Default</string>
@@ -240,6 +238,6 @@
     <string name="toast_device_admin_required">Please enable device administration.</string>
     <string name="toast_backup_success">Done.</string>
     <string name="toast_backup_error">Something went wrong.</string>
-    <string name="toast_icon_pack_error">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
+    <string name="toast_icon_pack_error">Unable to grab the icon without permission to read external storage.</string>
 
 </resources>

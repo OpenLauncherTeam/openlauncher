@@ -25,7 +25,6 @@
     <string name="about_libs">Knižnice Open Source</string>
     <string name="about_rate">Hodnotenie</string>
     <string name="about_credit">Prispievatelia</string>
-    <string name="about_credit_text_all_contributors">Všetci prispievatelia</string>
 
     <!-- Settings -->
 
@@ -191,7 +190,6 @@
     <string name="open_source_licenses">Open Source licencie</string>
     <string name="rate_the_app">Ohodnotiť aplikáciu</string>
     <string name="translate">Preložiť</string>
-    <string name="help_this_app">Viac informácií o tejto aplikácii a nápoveda</string>
     <string name="bug_reports">Nahlásiť chybu</string>
     <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">VIac informácií pre príspevky alebo ďalšie možnosti podpory projektu</string>
     <string name="android_contribution_guide">Sprievodca prispievanín do androidu</string>

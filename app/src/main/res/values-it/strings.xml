@@ -26,7 +26,6 @@
     <string name="about_libs">Librerie open source</string>
     <string name="about_rate">Valuta l\'app</string>
     <string name="about_credit">Collaboratori</string>
-    <string name="about_credit_text_all_contributors">Tutti i collaboratori</string>
 
     <!-- Settings -->
     <string name="pref_title__desktop">Desktop</string>
