@@ -598,8 +598,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     private boolean checkNotificationPermissions() {
         Set<String> appList = NotificationManagerCompat.getEnabledListenerPackages(this);
-        for (String l : appList) {
-            if (l.equals(getPackageName())) {
+        for (String app : appList) {
+            if (app.equals(getPackageName())) {
                 return true;
             }
         }
@@ -622,7 +622,12 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
 
         if (appSettings.getNotificationStatus()) {
-            checkNotificationPermissions();
+            if (checkNotificationPermissions()) {
+                Intent i = new Intent("update-notifications");
+                i.setPackage(getPackageName());
+                i.putExtra("command","update");
+                sendBroadcast(i);
+            }
         }
 
         // handle launcher rotation

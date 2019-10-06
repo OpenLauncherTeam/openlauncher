@@ -1,6 +1,10 @@
 package com.benny.openlauncher.notifications;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Message;
 import android.service.notification.NotificationListenerService;
@@ -15,6 +19,7 @@ public class NotificationListener extends NotificationListenerService {
     private static Logger LOG = LoggerFactory.getLogger("NotificationListener");
 
     private boolean _isConnected = false;
+    private NotificationListenerReceiver _notificationReceiver;
 
     private static final int EVENT_UPDATE_CURRENT_NOS = 0;
 
@@ -42,7 +47,19 @@ public class NotificationListener extends NotificationListenerService {
     public void onCreate() {
         super.onCreate();
 
+        if (_notificationReceiver == null) {
+            _notificationReceiver = new NotificationListenerReceiver();
+            IntentFilter filter = new IntentFilter("update-notifications");
+            registerReceiver(_notificationReceiver, filter);
+        }
+
         mMonitorHandler.sendMessage(mMonitorHandler.obtainMessage(EVENT_UPDATE_CURRENT_NOS));
+    }
+
+    @Override
+    public void onDestroy() {
+        unregisterReceiver(_notificationReceiver);
+        _notificationReceiver = null;
     }
 
     @Override
@@ -101,6 +118,15 @@ public class NotificationListener extends NotificationListenerService {
             }
         } else {
             mMonitorHandler.sendMessage(mMonitorHandler.obtainMessage(EVENT_UPDATE_CURRENT_NOS));
+        }
+    }
+
+    class NotificationListenerReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getStringExtra("command").equals("update")) {
+                NotificationListener.this.updateCurrentNotifications();
+            }
         }
     }
 }
