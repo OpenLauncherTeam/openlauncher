@@ -160,6 +160,8 @@
     <string name="pref_summary__icon_size">Size of all app icons.</string>
     <string name="pref_title__icon_pack">Icon Pack</string>
     <string name="pref_summary__icon_pack">Select an installed icon pack.</string>
+    <string name="pref_title__icon_show_notifications">Show Notification Badge</string>
+    <string name="pref_summary__icon_show_notifications">Update icons with a badge when notifications arrive.</string>
     <string name="pref_title__animation_speed_modifier">Animation Speed</string>
     <string name="pref_summary__animation_speed_modifier">Modify the overall speed of animations.</string>
 
@@ -205,6 +207,8 @@
     <string name="volume_level_notification">Notification</string>
     <string name="volume_level_system">System</string>
     <string name="volume_level_media">Media</string>
+    <string name="notification_request_title">Notifications Permission Required</string>
+    <string name="notification_request_summary">To enable Notifications, OpenLauncher requires the relevant permission. Please enable it in the settings to use this feature.</string>
 
     <!-- Other -->
     <string name="columns">Columns</string>
@@ -236,8 +240,10 @@
     <string name="toast_not_enough_space">Not enough space.</string>
     <string name="toast_app_uninstalled">App uninstalled.</string>
     <string name="toast_device_admin_required">Please enable device administration.</string>
+    <string name="toast_notification_permission_required">Please enable Notifications.</string>
     <string name="toast_backup_success">Done.</string>
     <string name="toast_backup_error">Something went wrong.</string>
     <string name="toast_icon_pack_error">Unable to grab the icon without permission to read external storage.</string>
 
+    <string name="icon_badging_service_title">Icon badging service</string>
 </resources>

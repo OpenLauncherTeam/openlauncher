@@ -14,6 +14,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.notifications.NotificationListener;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
@@ -21,14 +22,14 @@ import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallback;
 import com.benny.openlauncher.viewutil.GroupIconDrawable;
 
-public class AppItemView extends View implements Drawable.Callback {
-
+public class AppItemView extends View implements Drawable.Callback, NotificationListener.NotificationCallback {
     private static final int MIN_ICON_TEXT_MARGIN = 8;
     private static final char ELLIPSIS = '…';
 
     private Drawable _icon = null;
     private String _label;
     private Paint _textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint _notifyPaint = new Paint();
     private Rect _textContainer = new Rect(), testTextContainer = new Rect();
     private float _iconSize;
     private boolean _showLabel = true;
@@ -37,6 +38,8 @@ public class AppItemView extends View implements Drawable.Callback {
     private int _targetedWidth;
     private int _targetedHeightPadding;
     private float _heightPadding;
+
+    private int _notificationCount = 0;
 
     public AppItemView(Context context) {
         this(context, null);
@@ -48,6 +51,8 @@ public class AppItemView extends View implements Drawable.Callback {
         _labelHeight = Tool.dp2px(14);
         _textPaint.setTextSize(Tool.sp2px(12));
         _textPaint.setColor(Color.WHITE);
+        _notifyPaint.setColor(Color.RED);
+
     }
 
     public Drawable getIcon() {
@@ -64,6 +69,12 @@ public class AppItemView extends View implements Drawable.Callback {
 
     public void setLabel(String label) {
         _label = label;
+    }
+
+    public void notificationCallback(Integer count) {
+        _notificationCount = count;
+
+        invalidate();
     }
 
     public float getIconSize() {
@@ -133,6 +144,12 @@ public class AppItemView extends View implements Drawable.Callback {
             canvas.translate((getWidth() - _iconSize) / 2, _heightPadding);
             _icon.setBounds(0, 0, (int) _iconSize, (int) _iconSize);
             _icon.draw(canvas);
+
+            if (_notificationCount > 0) {
+                float radius = _iconSize * .15f;
+                canvas.drawCircle(_iconSize - radius, _heightPadding, radius, _notifyPaint);
+            }
+
             canvas.restore();
         }
     }

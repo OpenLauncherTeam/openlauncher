@@ -247,6 +247,10 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getString(R.string.pref_key__icon_pack, "");
     }
 
+    public boolean getNotificationStatus() {
+        return getBool(R.string.pref_key__icon_show_notifications, true);
+    }
+
     public void setIconPack(String value) {
         setString(R.string.pref_key__icon_pack, value);
     }

@@ -14,10 +14,13 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -40,6 +43,7 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.Item.Type;
+import com.benny.openlauncher.notifications.NotificationListener;
 import com.benny.openlauncher.receivers.AppUpdateReceiver;
 import com.benny.openlauncher.receivers.ShortcutReceiver;
 import com.benny.openlauncher.util.AppManager;
@@ -70,6 +74,7 @@ import net.gsantner.opoc.util.ContextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public final class HomeActivity extends Activity implements OnDesktopEditListener, DesktopOptionViewListener {
     public static final Companion Companion = new Companion();
@@ -592,6 +597,29 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         super.onStart();
     }
 
+    private void checkNotificationPermissions() {
+        Set<String> appList = NotificationManagerCompat.getEnabledListenerPackages(this);
+        for (String app : appList) {
+            if (app.equals(getPackageName())) {
+                // Already allowed, so request a full update when returning to the home screen from another app.
+                Intent i = new Intent(NotificationListener.UPDATE_NOTIFICATIONS_ACTION);
+                i.setPackage(getPackageName());
+                i.putExtra(NotificationListener.UPDATE_NOTIFICATIONS_COMMAND, NotificationListener.UPDATE_NOTIFICATIONS_UPDATE);
+                sendBroadcast(i);
+                return;
+            }
+        }
+
+        // Request the required permission otherwise.
+        DialogHelper.alertDialog(this, getString(R.string.notification_request_title), getString(R.string.notification_request_summary), getString(R.string.enable), new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                Tool.toast(HomeActivity.this, getString(R.string.toast_notification_permission_required));
+                startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
+            }
+        });
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -604,6 +632,11 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             appSettings.setAppRestartRequired(false);
             recreate();
             return;
+        }
+
+        if (appSettings.getNotificationStatus()) {
+            // Ask user to allow the Notification permission if not already provided.
+            checkNotificationPermissions();
         }
 
         // handle launcher rotation
