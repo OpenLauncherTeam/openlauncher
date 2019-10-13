@@ -160,7 +160,7 @@
     <string name="pref_summary__icon_size">Size of all app icons.</string>
     <string name="pref_title__icon_pack">Icon Pack</string>
     <string name="pref_summary__icon_pack">Select an installed icon pack.</string>
-    <string name="pref_title__icon_show_notifications">Show Notification Badge</string>
+    <string name="pref_title__icon_show_notifications">Notification Badge</string>
     <string name="pref_summary__icon_show_notifications">Update icons with a badge when notifications arrive.</string>
     <string name="pref_title__animation_speed_modifier">Animation Speed</string>
     <string name="pref_summary__animation_speed_modifier">Modify the overall speed of animations.</string>
