@@ -46,6 +46,7 @@
             android:taskAffinity=""
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
