@@ -33,16 +33,16 @@ import net.gsantner.opoc.util.ShareUtil;
 import java.io.IOException;
 import java.util.Locale;
 
-public class MoreInfoFragment extends GsPreferenceFragmentCompat<AppSettings> {
+public class SettingsAboutFragment extends GsPreferenceFragmentCompat<AppSettings> {
     public static final String TAG = "MoreInfoFragment";
 
-    public static MoreInfoFragment newInstance() {
-        return new MoreInfoFragment();
+    public static SettingsAboutFragment newInstance() {
+        return new SettingsAboutFragment();
     }
 
     @Override
     public int getPreferenceResourceForInflation() {
-        return R.xml.prefactions__more_information;
+        return R.xml.preferences_about;
     }
 
     @Override
