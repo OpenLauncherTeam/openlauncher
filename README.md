@@ -17,6 +17,10 @@ This is an open source launcher project for Android devices that has been built 
     <img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher/master/metadata/en-US/screenshots.png">
 </div>
 
+### Status
+
+If your instance is crashing frequently please update the app and reset the data and settings before creating an issue. This project is not actively developed at the moment since all of the main contributors either started working on other projects or find the current state of the launcher sufficient for daily use. If you would like to see a change please realize that it may not get added at all unless someone decides to write the functionality. Pull requests are welcome from anyone! Please ask about large features first, we can help navigate the codebase and talk about where best to add the functionality.
+
 ### Features
 
   * Paged desktop
