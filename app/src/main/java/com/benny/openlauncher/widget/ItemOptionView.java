@@ -17,7 +17,7 @@ import android.widget.FrameLayout;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.activity.homeparts.HpAppEditApplier;
+import com.benny.openlauncher.activity.homeparts.HpItemOption;
 import com.benny.openlauncher.interfaces.DropTargetListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
@@ -339,7 +339,7 @@ public final class ItemOptionView extends FrameLayout {
         ArrayList<PopupIconLabelItem> itemList = new ArrayList<>();
         switch (getDragItem().getType()) {
             case APP:
-            case SHORTCUT: {
+            case SHORTCUT:
                 if (!getDragAction().equals(Action.DRAWER)) {
                     itemList.add(editItem);
                     itemList.add(removeItem);
@@ -347,17 +347,14 @@ public final class ItemOptionView extends FrameLayout {
                 itemList.add(uninstallItem);
                 itemList.add(infoItem);
                 break;
-            }
             case ACTION:
-            case GROUP: {
+            case GROUP:
                 itemList.add(editItem);
                 itemList.add(removeItem);
                 break;
-            }
-            case WIDGET: {
+            case WIDGET:
                 itemList.add(removeItem);
                 break;
-            }
         }
 
         float x = getDragLocation().x - HomeActivity._itemTouchX + Tool.dp2px(10);
@@ -370,31 +367,33 @@ public final class ItemOptionView extends FrameLayout {
             setPopupMenuShowDirection(true);
         }
 
-        if (y < 0)
+        if (y < 0) {
             y = getDragLocation().y - HomeActivity._itemTouchY + homeActivity.getDesktop().getCurrentPage().getCellHeight() + Tool.dp2px(4);
-        else
+        } else {
             y -= Tool.dp2px(4);
+        }
 
         showPopupMenuForItem(x, y, itemList, new com.mikepenz.fastadapter.listeners.OnClickListener<PopupIconLabelItem>() {
             @Override
             public boolean onClick(View v, IAdapter<PopupIconLabelItem> adapter, PopupIconLabelItem item, int position) {
-                Item dragItem;
-                if ((dragItem = getDragItem()) != null) {
+                Item dragItem = getDragItem();
+                if (dragItem != null) {
+                    HpItemOption itemOption = new HpItemOption(homeActivity);
                     switch ((int) item.getIdentifier()) {
                         case uninstallItemIdentifier: {
-                            homeActivity.onUninstallItem(dragItem);
+                            itemOption.onUninstallItem(dragItem);
                             break;
                         }
                         case editItemIdentifier: {
-                            new HpAppEditApplier(homeActivity).onEditItem(dragItem);
+                            itemOption.onEditItem(dragItem);
                             break;
                         }
                         case removeItemIdentifier: {
-                            homeActivity.onRemoveItem(dragItem);
+                            itemOption.onRemoveItem(dragItem);
                             break;
                         }
                         case infoItemIdentifier: {
-                            homeActivity.onInfoItem(dragItem);
+                            itemOption.onInfoItem(dragItem);
                             break;
                         }
                     }

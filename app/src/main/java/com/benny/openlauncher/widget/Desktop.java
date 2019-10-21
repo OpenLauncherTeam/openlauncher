@@ -219,7 +219,7 @@ public final class Desktop extends ViewPager implements DesktopCallback {
             _desktop.setInEditMode(true);
             if (_desktop.getDesktopEditListener() != null) {
                 OnDesktopEditListener desktopEditListener = _desktop.getDesktopEditListener();
-                desktopEditListener.onDesktopEdit();
+                desktopEditListener.onStartDesktopEdit();
             }
         }
 
@@ -343,9 +343,6 @@ public final class Desktop extends ViewPager implements DesktopCallback {
             case CurrentNotOccupied:
                 getCurrentPage().projectImageOutlineAt(_coordinate, DragHandler._cachedDragBitmap);
                 break;
-            case OutOffRange:
-            case ItemViewNotFound:
-                break;
             case CurrentOccupied:
                 Item.Type type = dragNDropView.getDragItem()._type;
                 for (CellContainer page : _pages) {
@@ -355,6 +352,8 @@ public final class Desktop extends ViewPager implements DesktopCallback {
                     dragNDropView.showFolderPreviewAt(this, getCurrentPage().getCellWidth() * (_coordinate.x + 0.5f), getCurrentPage().getCellHeight() * (_coordinate.y + 0.5f));
                 }
                 break;
+            case OutOffRange:
+            case ItemViewNotFound:
             default:
                 break;
         }
@@ -455,13 +454,14 @@ public final class Desktop extends ViewPager implements DesktopCallback {
         } else if (scroll.equals(Off)) {
             xOffset = 0.5f;
         }
+
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(getContext());
         wallpaperManager.setWallpaperOffsets(getWindowToken(), xOffset, 0.0f);
         super.onPageScrolled(position, offset, offsetPixels);
     }
 
     public interface OnDesktopEditListener {
-        void onDesktopEdit();
+        void onStartDesktopEdit();
 
         void onFinishDesktopEdit();
     }

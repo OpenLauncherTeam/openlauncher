@@ -113,7 +113,7 @@ public class DesktopOptionView extends FrameLayout {
                     final int id = (int) item.getIdentifier();
                     if (id == R.string.home) {
                         updateHomeIcon(true);
-                        _desktopOptionViewListener.onSetPageAsHome();
+                        _desktopOptionViewListener.onSetHomePage();
                     } else if (id == R.string.remove) {
                         if (!Setup.appSettings().getDesktopLock()) {
                             _desktopOptionViewListener.onRemovePage();
@@ -128,7 +128,7 @@ public class DesktopOptionView extends FrameLayout {
                         }
                     } else if (id == R.string.action) {
                         if (!Setup.appSettings().getDesktopLock()) {
-                            _desktopOptionViewListener.onPickDesktopAction();
+                            _desktopOptionViewListener.onPickAction();
                         } else {
                             Tool.toast(getContext(), "Desktop is locked.");
                         }
@@ -203,12 +203,12 @@ public class DesktopOptionView extends FrameLayout {
     public interface DesktopOptionViewListener {
         void onRemovePage();
 
-        void onSetPageAsHome();
-
-        void onLaunchSettings();
-
-        void onPickDesktopAction();
+        void onSetHomePage();
 
         void onPickWidget();
+
+        void onPickAction();
+
+        void onLaunchSettings();
     }
 }
