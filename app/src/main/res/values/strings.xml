@@ -88,6 +88,7 @@
     <string name="pref_title__desktop_indicator_style">Indicator Style</string>
     <string name="pref_summary__minibar">Configure the order and visibility of minibar items.</string>
     <string name="pref_title__desktop_orientation">Orientation</string>
+    <string name="pref_title__desktop_wallpaper_scroll">Wallpaper Scroll</string>
     <string name="pref_title__desktop_show_grid">Show Grid</string>
     <string name="pref_summary__desktop_show_grid">Show the guiding grid when dragging items.</string>
     <string name="pref_title__desktop_fullscreen">Fullscreen</string>
@@ -187,6 +188,10 @@
     <string name="orientation_mode_portrait">Portrait</string>
     <string name="orientation_mode_rotate">Rotate</string>
     <string name="orientation_mode_landscape">Landscape</string>
+
+    <string name="scroll_normal">Normal</string>
+    <string name="scroll_inverse">Inverse</string>
+    <string name="scroll_off">Off</string>
 
     <string name="none">None</string>
     <string name="app">App</string>

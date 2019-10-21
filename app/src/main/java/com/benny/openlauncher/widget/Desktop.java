@@ -446,8 +446,7 @@ public final class Desktop extends ViewPager implements DesktopCallback {
 
     @Override
     protected void onPageScrolled(int position, float offset, int offsetPixels) {
-        // TODO add as a setting
-        Definitions.WallpaperScroll scroll = Normal;
+        Definitions.WallpaperScroll scroll = Setup.appSettings().getDesktopWallpaperScroll();
         float xOffset = (position + offset) / (_pages.size() - 1);
         if (scroll.equals(Inverse)) {
             xOffset = 1f - xOffset;

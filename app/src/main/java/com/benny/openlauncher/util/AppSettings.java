@@ -43,6 +43,19 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getIntOfStringPref(R.string.pref_key__desktop_orientation, 0);
     }
 
+    public Definitions.WallpaperScroll getDesktopWallpaperScroll() {
+        int value = getIntOfStringPref(R.string.pref_key__desktop_wallpaper_scroll, 0);
+        switch (value) {
+            case 0:
+            default:
+                return Definitions.WallpaperScroll.Normal;
+            case 1:
+                return Definitions.WallpaperScroll.Inverse;
+            case 2:
+                return Definitions.WallpaperScroll.Off;
+        }
+    }
+
     public boolean getDesktopShowGrid() {
         return getBool(R.string.pref_key__desktop_show_grid, true);
     }
