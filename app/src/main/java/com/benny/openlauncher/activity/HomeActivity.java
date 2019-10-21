@@ -506,7 +506,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
 
         // Request the required permission otherwise.
-        DialogHelper.alertDialog(this, getString(R.string.notification_request_title), getString(R.string.notification_request_summary), getString(R.string.enable), new MaterialDialog.SingleButtonCallback() {
+        DialogHelper.alertDialog(this, getString(R.string.notification_title), getString(R.string.notification_summary), getString(R.string.enable), new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 Tool.toast(HomeActivity.this, getString(R.string.toast_notification_permission_required));

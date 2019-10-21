@@ -64,7 +64,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public boolean getSearchBarStartsWith() {
-        return getBool(R.string.pref_key__search_bar_startswith, true);
+        return getBool(R.string.pref_key__search_bar_starts_with, true);
     }
 
     public String getSearchBarBaseURI() {
@@ -306,11 +306,11 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public ArrayList<String> getHiddenAppsList() {
-        return getStringList(R.string.pref_key__hidden_apps);
+        return getStringList(R.string.pref_key__hide_apps);
     }
 
     public void setHiddenAppsList(ArrayList<String> value) {
-        setStringList(R.string.pref_key__hidden_apps, value);
+        setStringList(R.string.pref_key__hide_apps, value);
     }
 
     public int getDesktopPageCurrent() {

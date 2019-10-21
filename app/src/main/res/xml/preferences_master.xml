@@ -48,7 +48,7 @@
 
         <PreferenceScreen
             android:icon="@drawable/ic_info_outline_dark_24dp"
-            android:key="@string/pref_key__about"
+            android:key="@string/pref_key__cat_about"
             android:title="@string/pref_title__about" />
 
     </PreferenceCategory>

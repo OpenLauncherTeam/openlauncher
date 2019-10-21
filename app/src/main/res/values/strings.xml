@@ -103,8 +103,8 @@
 
     <string name="pref_title__search_bar_enable">Search Bar</string>
     <string name="pref_summary__search_bar_enable">Display a search bar above the desktop.</string>
-    <string name="pref_title__search_bar_startswith">Search apps by name</string>
-    <string name="pref_summary__search_bar_startswith">Search for apps starting with the search text.</string>
+    <string name="pref_title__search_bar_starts_with">Search apps by name</string>
+    <string name="pref_summary__search_bar_starts_with">Search for apps starting with the search text.</string>
     <string name="pref_title__search_bar_base_uri">Search URI</string>
     <string name="pref_summary__search_bar_base_uri">Set the URI used for web searches.</string>
     <string name="pref_dialog__search_bar_base_uri">Enter the URI that should be used for web searches. The tag {query} can be used as
@@ -198,8 +198,8 @@
     <!-- Dialogs -->
     <string name="please_wait">Searching for installed apps. Please wait.</string>
     <string name="are_you_sure">Are you sure? This action cannot be undone unless you have a backup.</string>
-    <string name="device_admin_title">Device Admin Required</string>
-    <string name="device_admin_summary">OpenLauncher requires the Device Administration permission to lock your screen.</string>
+    <string name="device_admin_title">Device Administration</string>
+    <string name="device_admin_summary">OpenLauncher requires the device administration permission to lock your screen.</string>
     <string name="select_app">Select App</string>
     <string name="select_wallpaper">Select Wallpaper</string>
     <string name="select_icon_pack">Select Icon Pack</string>
@@ -207,8 +207,8 @@
     <string name="volume_level_notification">Notification</string>
     <string name="volume_level_system">System</string>
     <string name="volume_level_media">Media</string>
-    <string name="notification_request_title">Notifications Permission Required</string>
-    <string name="notification_request_summary">To enable Notifications, OpenLauncher requires the relevant permission. Please enable it in the settings to use this feature.</string>
+    <string name="notification_title">Notification Access</string>
+    <string name="notification_summary">OpenLauncher requires the notification permission to show icon badges.</string>
 
     <!-- Other -->
     <string name="columns">Columns</string>
@@ -240,10 +240,8 @@
     <string name="toast_not_enough_space">Not enough space.</string>
     <string name="toast_app_uninstalled">App uninstalled.</string>
     <string name="toast_device_admin_required">Please enable device administration.</string>
-    <string name="toast_notification_permission_required">Please enable Notifications.</string>
-    <string name="toast_backup_success">Done.</string>
+    <string name="toast_notification_permission_required">Please enable notifications.</string>
+    <string name="toast_backup_success">Backup completed.</string>
     <string name="toast_backup_error">Something went wrong.</string>
-    <string name="toast_icon_pack_error">Unable to grab the icon without permission to read external storage.</string>
-
-    <string name="icon_badging_service_title">Icon badging service</string>
+    <string name="toast_icon_pack_error">Please read access for external storage.</string>
 </resources>

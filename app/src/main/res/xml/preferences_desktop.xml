@@ -122,9 +122,9 @@
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_key__search_bar_startswith"
-            android:summary="@string/pref_summary__search_bar_startswith"
-            android:title="@string/pref_summary__search_bar_startswith" />
+            android:key="@string/pref_key__search_bar_starts_with"
+            android:summary="@string/pref_summary__search_bar_starts_with"
+            android:title="@string/pref_summary__search_bar_starts_with" />
 
         <CheckBoxPreference
             android:defaultValue="false"

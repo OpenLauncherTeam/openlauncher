@@ -28,9 +28,10 @@ public class SettingsMasterFragment extends SettingsBaseFragment {
         super.onPreferenceTreeClick(preference);
         HomeActivity homeActivity = HomeActivity._launcher;
         int key = new ContextUtils(homeActivity).getResId(ContextUtils.ResType.STRING, preference.getKey());
-        if (key == R.string.pref_key__about) {
-            startActivity(new Intent(getActivity(), MoreInfoActivity.class));
-            return true;
+        switch (key) {
+            case R.string.pref_key__cat_about:
+                startActivity(new Intent(getActivity(), MoreInfoActivity.class));
+                return true;
         }
         return false;
     }
