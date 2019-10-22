@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageButton
         android:id="@+id/vertexpand"
@@ -29,7 +29,7 @@
         android:id="@+id/vertless"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_gravity="right|bottom"
+        android:layout_gravity="end|bottom"
         android:background="@drawable/action_scale_widget"
         android:scaleX="0"
         android:scaleY="0"
@@ -40,7 +40,7 @@
         android:id="@+id/horiless"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_gravity="right|top"
+        android:layout_gravity="end|top"
         android:background="@drawable/action_scale_widget"
         android:scaleX="0"
         android:scaleY="0"

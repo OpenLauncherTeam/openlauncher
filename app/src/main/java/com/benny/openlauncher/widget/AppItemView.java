@@ -52,7 +52,6 @@ public class AppItemView extends View implements Drawable.Callback, Notification
         _textPaint.setTextSize(Tool.sp2px(12));
         _textPaint.setColor(Color.WHITE);
         _notifyPaint.setColor(Color.RED);
-
     }
 
     public Drawable getIcon() {

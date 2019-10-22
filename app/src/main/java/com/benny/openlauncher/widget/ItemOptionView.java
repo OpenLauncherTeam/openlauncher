@@ -68,11 +68,13 @@ public final class ItemOptionView extends FrameLayout {
     private final int infoItemIdentifier = 84;
     private final int editItemIdentifier = 85;
     private final int removeItemIdentifier = 86;
+    private final int resizeItemIdentifier = 87;
 
     private PopupIconLabelItem uninstallItem = new PopupIconLabelItem(R.string.uninstall, R.drawable.ic_delete_dark_24dp).withIdentifier(uninstallItemIdentifier);
     private PopupIconLabelItem infoItem = new PopupIconLabelItem(R.string.info, R.drawable.ic_info_outline_dark_24dp).withIdentifier(infoItemIdentifier);
     private PopupIconLabelItem editItem = new PopupIconLabelItem(R.string.edit, R.drawable.ic_edit_black_24dp).withIdentifier(editItemIdentifier);
     private PopupIconLabelItem removeItem = new PopupIconLabelItem(R.string.remove, R.drawable.ic_close_dark_24dp).withIdentifier(removeItemIdentifier);
+    private PopupIconLabelItem resizeItem = new PopupIconLabelItem(R.string.resize, R.drawable.ic_resize).withIdentifier(resizeItemIdentifier);
 
     public static final class DragFlag {
         private boolean _previousOutside = true;
@@ -269,12 +271,14 @@ public final class ItemOptionView extends FrameLayout {
         _dragItem = item;
         _dragAction = action;
         _dragLocationStart.set(_dragLocation);
+
         for (Entry dropTarget : _registeredDropTargetEntries.entrySet()) {
             convertPoint(((DropTargetListener) dropTarget.getKey()).getView());
             DragFlag dragFlag = (DragFlag) dropTarget.getValue();
             DropTargetListener dropTargetListener = (DropTargetListener) dropTarget.getKey();
             dragFlag.setShouldIgnore(!dropTargetListener.onStart(_dragAction, _dragLocationConverted, isViewContains(((DropTargetListener) dropTarget.getKey()).getView(), (int) _dragLocation.x, (int) _dragLocation.y)));
         }
+
         _overlayView.invalidate();
     }
 
@@ -354,6 +358,7 @@ public final class ItemOptionView extends FrameLayout {
                 break;
             case WIDGET:
                 itemList.add(removeItem);
+                itemList.add(resizeItem);
                 break;
         }
 
@@ -380,22 +385,21 @@ public final class ItemOptionView extends FrameLayout {
                 if (dragItem != null) {
                     HpItemOption itemOption = new HpItemOption(homeActivity);
                     switch ((int) item.getIdentifier()) {
-                        case uninstallItemIdentifier: {
+                        case uninstallItemIdentifier:
                             itemOption.onUninstallItem(dragItem);
                             break;
-                        }
-                        case editItemIdentifier: {
+                        case editItemIdentifier:
                             itemOption.onEditItem(dragItem);
                             break;
-                        }
-                        case removeItemIdentifier: {
+                        case removeItemIdentifier:
                             itemOption.onRemoveItem(dragItem);
                             break;
-                        }
-                        case infoItemIdentifier: {
+                        case infoItemIdentifier:
                             itemOption.onInfoItem(dragItem);
                             break;
-                        }
+                        case resizeItemIdentifier:
+                            itemOption.onResizeItem(dragItem);
+                            break;
                     }
                 }
                 collapse();
@@ -457,7 +461,7 @@ public final class ItemOptionView extends FrameLayout {
         cancelFolderPreview();
     }
 
-    public final void convertPoint(@NonNull View toView) {
+    public void convertPoint(@NonNull View toView) {
         int[] fromCoordinate = new int[2];
         int[] toCoordinate = new int[2];
         getLocationOnScreen(fromCoordinate);
@@ -465,15 +469,17 @@ public final class ItemOptionView extends FrameLayout {
         _dragLocationConverted.set(((float) (fromCoordinate[0] - toCoordinate[0])) + _dragLocation.x, ((float) (fromCoordinate[1] - toCoordinate[1])) + _dragLocation.y);
     }
 
-    private final boolean isViewContains(View view, int rx, int ry) {
+    private boolean isViewContains(View view, int rx, int ry) {
         view.getLocationOnScreen(_tempArrayOfInt2);
         int x = _tempArrayOfInt2[0];
         int y = _tempArrayOfInt2[1];
         int w = view.getWidth();
         int h = view.getHeight();
+
         if (rx < x || rx > x + w || ry < y || ry > y + h) {
             return false;
         }
+
         return true;
     }
 }

@@ -16,6 +16,7 @@ import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.Dock;
+import com.benny.openlauncher.widget.WidgetContainer;
 
 public class HpItemOption implements DialogListener.OnEditDialogListener {
     private HomeActivity _homeActivity;
@@ -62,6 +63,21 @@ public class HpItemOption implements DialogListener.OnEditDialogListener {
             } catch (Exception e) {
                 Tool.toast(_homeActivity, R.string.toast_app_uninstalled);
             }
+        }
+    }
+
+    public final void onResizeItem(@NonNull Item item) {
+        View coordinateToChildView;
+        if (item._location.equals(ItemPosition.Desktop)) {
+            Desktop desktop = _homeActivity.getDesktop();
+            coordinateToChildView = desktop.getCurrentPage().coordinateToChildView(new Point(item._x, item._y));
+        } else {
+            Dock dock = _homeActivity.getDock();
+            coordinateToChildView = dock.coordinateToChildView(new Point(item._x, item._y));
+        }
+
+        if (coordinateToChildView != null) {
+            ((WidgetContainer) coordinateToChildView).showResize();
         }
     }
 
