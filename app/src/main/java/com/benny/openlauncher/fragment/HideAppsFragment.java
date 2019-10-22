@@ -39,7 +39,7 @@ public class HideAppsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.request, container, false);
+        final View rootView = inflater.inflate(R.layout.view_hide_apps, container, false);
         _switcherLoad = rootView.findViewById(R.id.viewSwitcherLoadingMain);
 
         FloatingActionButton fab = rootView.findViewById(R.id.fab_rq);
