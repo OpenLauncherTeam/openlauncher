@@ -11,7 +11,7 @@
         android:background="@drawable/scale_widget"
         android:scaleX="0"
         android:scaleY="0"
-        android:src="@drawable/ic_expand_more_black_24dp"
+        android:src="@drawable/ic_expand"
         android:tint="?android:textColorPrimary" />
 
     <ImageButton
@@ -20,9 +20,10 @@
         android:layout_height="30dp"
         android:layout_gravity="top"
         android:background="@drawable/scale_widget"
+        android:rotation="270"
         android:scaleX="0"
         android:scaleY="0"
-        android:src="@drawable/ic_chevron_right_black_24dp"
+        android:src="@drawable/ic_expand"
         android:tint="?android:textColorPrimary" />
 
     <ImageButton
@@ -31,9 +32,10 @@
         android:layout_height="30dp"
         android:layout_gravity="end|bottom"
         android:background="@drawable/scale_widget"
+        android:rotation="180"
         android:scaleX="0"
         android:scaleY="0"
-        android:src="@drawable/ic_expand_less_black_24dp"
+        android:src="@drawable/ic_expand"
         android:tint="?android:textColorPrimary" />
 
     <ImageButton
@@ -42,9 +44,10 @@
         android:layout_height="30dp"
         android:layout_gravity="end|top"
         android:background="@drawable/scale_widget"
+        android:rotation="90"
         android:scaleX="0"
         android:scaleY="0"
-        android:src="@drawable/ic_chevron_left_black_24dp"
+        android:src="@drawable/ic_expand"
         android:tint="?android:textColorPrimary" />
 
 </FrameLayout>
