@@ -35,7 +35,7 @@
             android:title="@string/donate" />
 
         <Preference
-            android:icon="@drawable/ic_bug_report_black_24dp"
+            android:icon="@drawable/ic_bug"
             android:key="@string/pref_key__more_info__bug_reports"
             android:summary="@string/bug_reports_suggest_improvements"
             android:title="@string/bug_reports" />

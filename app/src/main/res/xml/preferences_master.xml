@@ -20,7 +20,7 @@
 
         <PreferenceScreen
             android:fragment="com.benny.openlauncher.fragment.SettingsAppDrawerFragment"
-            android:icon="@drawable/ic_apps_dark_24dp"
+            android:icon="@drawable/ic_apps"
             android:key="@string/pref_key__cat_app_drawer"
             android:title="@string/pref_title__app_drawer" />
 
