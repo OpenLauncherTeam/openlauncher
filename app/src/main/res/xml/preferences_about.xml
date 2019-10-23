@@ -12,24 +12,24 @@
         tools:summary="Version v0.5" />
 
     <Preference
-        android:icon="@drawable/ic_thumb_up_black_24dp"
+        android:icon="@drawable/ic_thumb_up"
         android:key="@string/pref_key__more_info__rate_app"
         android:title="@string/rate_the_app" />
 
     <Preference
-        android:icon="@drawable/ic_settings_black_24dp"
+        android:icon="@drawable/ic_settings"
         android:key="@string/pref_key__more_info__settings"
         android:title="@string/pref_title__settings" />
 
     <Preference
-        android:icon="@drawable/ic_info_black_24dp"
+        android:icon="@drawable/ic_info"
         android:key="@string/pref_key__more_info__help"
         android:title="@string/help" />
 
     <PreferenceCategory android:title="@string/contribute">
 
         <Preference
-            android:icon="@drawable/ic_favorite_black_24dp"
+            android:icon="@drawable/ic_favorite"
             android:key="@string/pref_key__more_info__donate"
             android:summary="@string/more_info_on_how_to_donate_or_otherwise_support_this_project"
             android:title="@string/donate" />
@@ -41,19 +41,19 @@
             android:title="@string/bug_reports" />
 
         <Preference
-            android:icon="@drawable/ic_translate_black_24dp"
+            android:icon="@drawable/ic_translate"
             android:key="@string/pref_key__more_info__translate"
             android:summary="@string/help_translating_this_app"
             android:title="@string/translate" />
 
         <Preference
-            android:icon="@drawable/ic_info_black_24dp"
+            android:icon="@drawable/ic_info"
             android:key="@string/pref_key__more_info__project_contribution_info"
             android:summary="@string/more_info_on_how_to_contribute_to_this_project"
             android:title="@string/project_contribution_info" />
 
         <Preference
-            android:icon="@drawable/ic_info_black_24dp"
+            android:icon="@drawable/ic_info"
             android:key="@string/pref_key__more_info__android_contribution_guide"
             android:summary="@string/more_info_on_how_to_contribute_to_foss_android_projects"
             android:title="@string/android_contribution_guide" />
@@ -71,12 +71,12 @@
         android:title="@string/community">
 
         <Preference
-            android:icon="@drawable/ic_group_black_24dp"
+            android:icon="@drawable/ic_group"
             android:key="@string/pref_key__more_info__join_community"
             android:title="@string/join_community" />
 
         <Preference
-            android:icon="@drawable/ic_info_black_24dp"
+            android:icon="@drawable/ic_info"
             android:key="@string/pref_key__more_info__contributors_public_info"
             android:summary="@string/contributors_public_info"
             android:title="@string/contributors" />
@@ -86,24 +86,24 @@
     <PreferenceCategory android:title="@string/licenses">
 
         <Preference
-            android:icon="@drawable/ic_copyright_black_24dp"
+            android:icon="@drawable/ic_copyright"
             android:key="@string/pref_key__more_info__project_license"
             android:title="@string/project_license" />
 
         <Preference
-            android:icon="@drawable/ic_copyright_black_24dp"
+            android:icon="@drawable/ic_copyright"
             android:key="@string/pref_key__more_info__open_source_licenses"
             android:title="@string/open_source_licenses" />
 
         <Preference
-            android:icon="@drawable/ic_code_black_24dp"
+            android:icon="@drawable/ic_code"
             android:key="@string/pref_key__more_info__source_code"
             android:summary="@string/contribute_code_to_this_project_anybody_welcome"
             android:title="@string/source_code" />
 
 
         <Preference
-            android:icon="@drawable/ic_code_black_24dp"
+            android:icon="@drawable/ic_code"
             android:key="@string/pref_key__more_info__copy_build_information"
             android:title="Copy build information" />
 

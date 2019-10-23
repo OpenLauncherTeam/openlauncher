@@ -70,10 +70,10 @@ public final class ItemOptionView extends FrameLayout {
     private final int removeItemIdentifier = 86;
     private final int resizeItemIdentifier = 87;
 
-    private PopupIconLabelItem uninstallItem = new PopupIconLabelItem(R.string.uninstall, R.drawable.ic_delete_dark_24dp).withIdentifier(uninstallItemIdentifier);
-    private PopupIconLabelItem infoItem = new PopupIconLabelItem(R.string.info, R.drawable.ic_info_outline_dark_24dp).withIdentifier(infoItemIdentifier);
-    private PopupIconLabelItem editItem = new PopupIconLabelItem(R.string.edit, R.drawable.ic_edit_black_24dp).withIdentifier(editItemIdentifier);
-    private PopupIconLabelItem removeItem = new PopupIconLabelItem(R.string.remove, R.drawable.ic_close_dark_24dp).withIdentifier(removeItemIdentifier);
+    private PopupIconLabelItem uninstallItem = new PopupIconLabelItem(R.string.uninstall, R.drawable.ic_delete).withIdentifier(uninstallItemIdentifier);
+    private PopupIconLabelItem infoItem = new PopupIconLabelItem(R.string.info, R.drawable.ic_info).withIdentifier(infoItemIdentifier);
+    private PopupIconLabelItem editItem = new PopupIconLabelItem(R.string.edit, R.drawable.ic_edit).withIdentifier(editItemIdentifier);
+    private PopupIconLabelItem removeItem = new PopupIconLabelItem(R.string.remove, R.drawable.ic_close).withIdentifier(removeItemIdentifier);
     private PopupIconLabelItem resizeItem = new PopupIconLabelItem(R.string.resize, R.drawable.ic_resize).withIdentifier(resizeItemIdentifier);
 
     public static final class DragFlag {

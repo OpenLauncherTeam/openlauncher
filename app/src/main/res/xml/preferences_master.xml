@@ -8,13 +8,13 @@
 
         <PreferenceScreen
             android:fragment="com.benny.openlauncher.fragment.SettingsDesktopFragment"
-            android:icon="@drawable/ic_desktop_windows_dark_24dp"
+            android:icon="@drawable/ic_desktop"
             android:key="@string/pref_key__cat_desktop"
             android:title="@string/pref_title__desktop" />
 
         <PreferenceScreen
             android:fragment="com.benny.openlauncher.fragment.SettingsDockFragment"
-            android:icon="@drawable/ic_dock_dark_24dp"
+            android:icon="@drawable/ic_dock"
             android:key="@string/pref_key__cat_dock"
             android:title="@string/pref_title__dock" />
 
@@ -26,7 +26,7 @@
 
         <PreferenceScreen
             android:fragment="com.benny.openlauncher.fragment.SettingsAppearanceFragment"
-            android:icon="@drawable/ic_palette_black_24dp"
+            android:icon="@drawable/ic_palette"
             android:key="@string/pref_key__cat_appearance"
             android:title="@string/pref_title__appearance" />
 
@@ -42,12 +42,12 @@
 
         <PreferenceScreen
             android:fragment="com.benny.openlauncher.fragment.SettingsMiscellaneousFragment"
-            android:icon="@drawable/ic_more_horiz_black_24dp"
+            android:icon="@drawable/ic_more"
             android:key="@string/pref_key__cat_miscellaneous"
             android:title="@string/pref_title__miscellaneous" />
 
         <PreferenceScreen
-            android:icon="@drawable/ic_info_outline_dark_24dp"
+            android:icon="@drawable/ic_info"
             android:key="@string/pref_key__cat_about"
             android:title="@string/pref_title__about" />
 

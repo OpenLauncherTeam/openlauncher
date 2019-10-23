@@ -3,6 +3,7 @@
     <color name="colorPrimary">#5c6bc0</color>
     <color name="colorPrimaryDark">#4254b3</color>
     <color name="colorAccent">#5c6bc0</color>
+    <color name="colorFolder">#ff3d3d3d</color>
 
     <color name="Light.Background">#f9f9f9</color>
     <color name="Light.TextColor">#616161</color>
@@ -25,6 +26,4 @@
 
     <color name="introText">#ff444444</color>
     <color name="introButton">#7d000000</color>
-
-    <color name="folder_background_default_color">#ff3d3d3d</color>
 </resources>

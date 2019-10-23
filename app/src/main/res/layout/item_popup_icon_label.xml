@@ -19,7 +19,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="14dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_delete_dark_24dp" />
+        android:src="@drawable/ic_delete" />
 
     <TextView
         android:id="@+id/item_popup_label"

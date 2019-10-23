@@ -39,7 +39,7 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
 
         toolbar.setTitle(R.string.pref_title__settings);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24px));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white));
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         toolbar.setBackgroundColor(_appSettings.getPrimaryColor());
 

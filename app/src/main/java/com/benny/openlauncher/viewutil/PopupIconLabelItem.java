@@ -1,7 +1,9 @@
 package com.benny.openlauncher.viewutil;
 
+import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
@@ -62,6 +65,7 @@ public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, P
         }
         if (holder != null) {
             ImageView iconView = holder.getIconView();
+            iconView.setColorFilter(ContextCompat.getColor(HomeActivity._launcher, R.color.Light_TextColor), PorterDuff.Mode.SRC_ATOP);
             if (iconView != null) {
                 iconView.setImageResource(_iconRes);
             }

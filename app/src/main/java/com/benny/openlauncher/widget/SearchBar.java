@@ -297,7 +297,7 @@ public class SearchBar extends FrameLayout {
     }
 
     private void updateSwitchIcon() {
-        _switchButton.setImageResource(Setup.appSettings().getSearchUseGrid() ? R.drawable.ic_view_grid_white_24dp : R.drawable.ic_view_list_white_24dp);
+        _switchButton.setImageResource(Setup.appSettings().getSearchUseGrid() ? R.drawable.ic_view_grid_white : R.drawable.ic_view_list_white);
     }
 
     private void updateRecyclerViewLayoutManager() {

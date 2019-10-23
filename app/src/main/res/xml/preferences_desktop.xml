@@ -87,7 +87,7 @@
             app:alphaSlider="true" />
 
         <com.flask.colorpicker.ColorPickerPreference
-            android:defaultValue="@color/folder_background_default_color"
+            android:defaultValue="@color/colorFolder"
             android:key="@string/pref_key__desktop_folder_color"
             android:title="@string/pref_title__desktop_folder_color"
             app:lightnessSlider="true"
