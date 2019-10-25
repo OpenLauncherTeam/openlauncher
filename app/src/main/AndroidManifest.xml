@@ -57,13 +57,13 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.benny.openlauncher.activity.MinibarEditActivity"
-            android:label="Edit Item"
+            android:label="@string/minibar"
             android:parentActivityName="com.benny.openlauncher.activity.HomeActivity"
             android:theme="@style/NormalActivity.Light" />
         <activity
             android:name="com.benny.openlauncher.activity.SettingsActivity"
             android:configChanges="orientation|keyboard|screenSize"
-            android:label="Settings"
+            android:label="@string/pref_title__settings"
             android:theme="@style/NormalActivity.Light" />
         <activity
             android:name="com.benny.openlauncher.activity.HideAppsActivity"
@@ -124,5 +124,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
     </application>
+
 </manifest>

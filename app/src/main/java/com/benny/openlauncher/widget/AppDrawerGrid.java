@@ -95,10 +95,10 @@ public class AppDrawerGrid extends FrameLayout {
         for (int i = 0; i < apps.size(); i++) {
             App app = apps.get(i);
             items.add(new IconLabelItem(app.getIcon(), app.getLabel())
-                    .withIconSize(getContext(), Setup.appSettings().getIconSize())
+                    .withIconSize(Setup.appSettings().getIconSize())
                     .withTextColor(Color.WHITE)
                     .withTextVisibility(Setup.appSettings().getDrawerShowLabel())
-                    .withIconPadding(getContext(), 8)
+                    .withIconPadding(8)
                     .withTextGravity(Gravity.CENTER)
                     .withIconGravity(Gravity.TOP)
                     .withOnClickAnimate(false)
