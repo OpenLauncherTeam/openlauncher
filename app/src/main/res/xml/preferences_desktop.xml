@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:title="@string/pref_title__desktop">
+
+    <PreferenceCategory android:title="@string/pref_title__size">
+
+        <SeekBarPreference
+            android:defaultValue="5"
+            android:key="@string/pref_key__desktop_columns"
+            android:max="20"
+            android:title="@string/columns"
+            app:min="2" />
+
+        <SeekBarPreference
+            android:defaultValue="6"
+            android:key="@string/pref_key__desktop_rows"
+            android:max="20"
+            android:title="@string/rows"
+            app:min="2" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_title__appearance">
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/entries__indicator_mode"
+            android:entryValues="@array/values__zero_to_one"
+            android:key="@string/pref_key__desktop_indicator_style"
+            android:title="@string/pref_title__desktop_indicator_style" />
+
+        <Preference
+            android:key="@string/pref_key__minibar"
+            android:summary="@string/pref_summary__minibar"
+            android:title="@string/minibar" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/entries__orientation_mode"
+            android:entryValues="@array/values__zero_to_two"
+            android:key="@string/pref_key__desktop_orientation"
+            android:title="@string/pref_title__desktop_orientation" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/entries__wallpaper_scroll"
+            android:entryValues="@array/values__zero_to_two"
+            android:key="@string/pref_key__desktop_wallpaper_scroll"
+            android:title="@string/pref_title__desktop_wallpaper_scroll" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__desktop_show_grid"
+            android:summary="@string/pref_summary__desktop_show_grid"
+            android:title="@string/pref_title__desktop_show_grid" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key__desktop_fullscreen"
+            android:summary="@string/pref_summary__desktop_fullscreen"
+            android:title="@string/pref_title__desktop_fullscreen" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__desktop_show_position_indicator"
+            android:summary="@string/pref_summary__desktop_show_position_indicator"
+            android:title="@string/pref_title__desktop_show_position_indicator" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__desktop_show_label"
+            android:summary="@string/pref_summary__desktop_show_label"
+            android:title="@string/pref_title__desktop_show_label" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_title__color">
+
+        <com.flask.colorpicker.ColorPickerPreference
+            android:defaultValue="@color/transparent"
+            android:key="@string/pref_key__desktop_background_color"
+            android:title="@string/pref_title__desktop_background_color"
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
+
+        <com.flask.colorpicker.ColorPickerPreference
+            android:defaultValue="@color/colorFolder"
+            android:key="@string/pref_key__desktop_folder_color"
+            android:title="@string/pref_title__desktop_folder_color"
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
+
+        <com.flask.colorpicker.ColorPickerPreference
+            android:defaultValue="@color/transparent"
+            android:key="@string/pref_key__desktop_inset_color"
+            android:title="@string/pref_title__desktop_inset_color"
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
+
+        <com.flask.colorpicker.ColorPickerPreference
+            android:defaultValue="@color/colorPrimaryDark"
+            android:key="@string/pref_key__minibar_background_color"
+            android:title="@string/minibar"
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_title__search_bar">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__search_bar_enable"
+            android:summary="@string/pref_summary__search_bar_enable"
+            android:title="@string/pref_title__search_bar_enable" />
+
+        <EditTextPreference
+            android:defaultValue="@string/pref_default__search_bar_base_uri"
+            android:dependency="@string/pref_key__search_bar_enable"
+            android:dialogMessage="@string/pref_dialog__search_bar_base_uri"
+            android:hint="@string/pref_default__search_bar_base_uri"
+            android:inputType="textUri"
+            android:key="@string/pref_key__search_bar_base_uri"
+            android:summary="@string/pref_summary__search_bar_base_uri"
+            android:title="@string/pref_title__search_bar_base_uri" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__search_bar_starts_with"
+            android:summary="@string/pref_summary__search_bar_starts_with"
+            android:title="@string/pref_title__search_bar_starts_with" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="@string/pref_key__search_bar_enable"
+            android:key="@string/pref_key__search_bar_force_browser"
+            android:summary="@string/pref_summary__search_bar_force_browser"
+            android:title="@string/pref_title__search_bar_force_browser" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="@string/pref_key__search_bar_enable"
+            android:key="@string/pref_key__search_bar_show_hidden_apps"
+            android:summary="@string/pref_summary__search_bar_show_hidden_apps"
+            android:title="@string/pref_title__search_bar_show_hidden_apps" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_title__date_bar">
+
+        <com.flask.colorpicker.ColorPickerPreference
+            android:defaultValue="@color/white"
+            android:key="@string/pref_key__date_bar_date_text_color"
+            android:title="@string/pref_title__date_bar_text_color"
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/entries__date_format"
+            android:entryValues="@array/values__zero_to_four"
+            android:key="@string/pref_key__date_bar_date_format_type"
+            android:title="@string/pref_title__date_bar_date_format" />
+
+        <EditTextPreference
+            android:defaultValue="@string/pref_default__date_bar_date_format_custom_1"
+            android:hint="@string/pref_default__date_bar_date_format_custom_1"
+            android:key="@string/pref_key__date_bar_date_format_custom_1"
+            android:summary="@string/pref_title__date_bar"
+            android:title="@string/pref_title__date_bar_date_format_custom_1" />
+
+        <EditTextPreference
+            android:defaultValue="@string/pref_default__date_bar_date_format_custom_2"
+            android:hint="@string/pref_default__date_bar_date_format_custom_2"
+            android:key="@string/pref_key__date_bar_date_format_custom_2"
+            android:summary="@string/pref_title__date_bar"
+            android:title="@string/pref_title__date_bar_date_format_custom_2" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -46,6 +46,7 @@
             android:taskAffinity=""
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -106,7 +107,7 @@
 
         <service
             android:name="com.benny.openlauncher.notifications.NotificationListener"
-            android:label="@string/icon_badging_service_title"
+            android:label="@string/icon_badge_service_title"
             android:enabled="true"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>

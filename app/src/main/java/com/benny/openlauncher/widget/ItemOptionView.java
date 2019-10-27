@@ -17,7 +17,7 @@ import android.widget.FrameLayout;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.activity.homeparts.HpAppEditApplier;
+import com.benny.openlauncher.activity.homeparts.HpItemOption;
 import com.benny.openlauncher.interfaces.DropTargetListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
@@ -68,11 +68,13 @@ public final class ItemOptionView extends FrameLayout {
     private final int infoItemIdentifier = 84;
     private final int editItemIdentifier = 85;
     private final int removeItemIdentifier = 86;
+    private final int resizeItemIdentifier = 87;
 
-    private PopupIconLabelItem uninstallItem = new PopupIconLabelItem(R.string.uninstall, R.drawable.ic_delete_dark_24dp).withIdentifier(uninstallItemIdentifier);
-    private PopupIconLabelItem infoItem = new PopupIconLabelItem(R.string.info, R.drawable.ic_info_outline_dark_24dp).withIdentifier(infoItemIdentifier);
-    private PopupIconLabelItem editItem = new PopupIconLabelItem(R.string.edit, R.drawable.ic_edit_black_24dp).withIdentifier(editItemIdentifier);
-    private PopupIconLabelItem removeItem = new PopupIconLabelItem(R.string.remove, R.drawable.ic_close_dark_24dp).withIdentifier(removeItemIdentifier);
+    private PopupIconLabelItem uninstallItem = new PopupIconLabelItem(R.string.uninstall, R.drawable.ic_delete).withIdentifier(uninstallItemIdentifier);
+    private PopupIconLabelItem infoItem = new PopupIconLabelItem(R.string.info, R.drawable.ic_info).withIdentifier(infoItemIdentifier);
+    private PopupIconLabelItem editItem = new PopupIconLabelItem(R.string.edit, R.drawable.ic_edit).withIdentifier(editItemIdentifier);
+    private PopupIconLabelItem removeItem = new PopupIconLabelItem(R.string.remove, R.drawable.ic_close).withIdentifier(removeItemIdentifier);
+    private PopupIconLabelItem resizeItem = new PopupIconLabelItem(R.string.resize, R.drawable.ic_resize).withIdentifier(resizeItemIdentifier);
 
     public static final class DragFlag {
         private boolean _previousOutside = true;
@@ -269,12 +271,14 @@ public final class ItemOptionView extends FrameLayout {
         _dragItem = item;
         _dragAction = action;
         _dragLocationStart.set(_dragLocation);
+
         for (Entry dropTarget : _registeredDropTargetEntries.entrySet()) {
             convertPoint(((DropTargetListener) dropTarget.getKey()).getView());
             DragFlag dragFlag = (DragFlag) dropTarget.getValue();
             DropTargetListener dropTargetListener = (DropTargetListener) dropTarget.getKey();
             dragFlag.setShouldIgnore(!dropTargetListener.onStart(_dragAction, _dragLocationConverted, isViewContains(((DropTargetListener) dropTarget.getKey()).getView(), (int) _dragLocation.x, (int) _dragLocation.y)));
         }
+
         _overlayView.invalidate();
     }
 
@@ -339,7 +343,7 @@ public final class ItemOptionView extends FrameLayout {
         ArrayList<PopupIconLabelItem> itemList = new ArrayList<>();
         switch (getDragItem().getType()) {
             case APP:
-            case SHORTCUT: {
+            case SHORTCUT:
                 if (!getDragAction().equals(Action.DRAWER)) {
                     itemList.add(editItem);
                     itemList.add(removeItem);
@@ -347,17 +351,15 @@ public final class ItemOptionView extends FrameLayout {
                 itemList.add(uninstallItem);
                 itemList.add(infoItem);
                 break;
-            }
             case ACTION:
-            case GROUP: {
+            case GROUP:
                 itemList.add(editItem);
                 itemList.add(removeItem);
                 break;
-            }
-            case WIDGET: {
+            case WIDGET:
                 itemList.add(removeItem);
+                itemList.add(resizeItem);
                 break;
-            }
         }
 
         float x = getDragLocation().x - HomeActivity._itemTouchX + Tool.dp2px(10);
@@ -370,33 +372,34 @@ public final class ItemOptionView extends FrameLayout {
             setPopupMenuShowDirection(true);
         }
 
-        if (y < 0)
+        if (y < 0) {
             y = getDragLocation().y - HomeActivity._itemTouchY + homeActivity.getDesktop().getCurrentPage().getCellHeight() + Tool.dp2px(4);
-        else
+        } else {
             y -= Tool.dp2px(4);
+        }
 
         showPopupMenuForItem(x, y, itemList, new com.mikepenz.fastadapter.listeners.OnClickListener<PopupIconLabelItem>() {
             @Override
             public boolean onClick(View v, IAdapter<PopupIconLabelItem> adapter, PopupIconLabelItem item, int position) {
-                Item dragItem;
-                if ((dragItem = getDragItem()) != null) {
+                Item dragItem = getDragItem();
+                if (dragItem != null) {
+                    HpItemOption itemOption = new HpItemOption(homeActivity);
                     switch ((int) item.getIdentifier()) {
-                        case uninstallItemIdentifier: {
-                            homeActivity.onUninstallItem(dragItem);
+                        case uninstallItemIdentifier:
+                            itemOption.onUninstallItem(dragItem);
                             break;
-                        }
-                        case editItemIdentifier: {
-                            new HpAppEditApplier(homeActivity).onEditItem(dragItem);
+                        case editItemIdentifier:
+                            itemOption.onEditItem(dragItem);
                             break;
-                        }
-                        case removeItemIdentifier: {
-                            homeActivity.onRemoveItem(dragItem);
+                        case removeItemIdentifier:
+                            itemOption.onRemoveItem(dragItem);
                             break;
-                        }
-                        case infoItemIdentifier: {
-                            homeActivity.onInfoItem(dragItem);
+                        case infoItemIdentifier:
+                            itemOption.onInfoItem(dragItem);
                             break;
-                        }
+                        case resizeItemIdentifier:
+                            itemOption.onResizeItem(dragItem);
+                            break;
                     }
                 }
                 collapse();
@@ -458,7 +461,7 @@ public final class ItemOptionView extends FrameLayout {
         cancelFolderPreview();
     }
 
-    public final void convertPoint(@NonNull View toView) {
+    public void convertPoint(@NonNull View toView) {
         int[] fromCoordinate = new int[2];
         int[] toCoordinate = new int[2];
         getLocationOnScreen(fromCoordinate);
@@ -466,15 +469,17 @@ public final class ItemOptionView extends FrameLayout {
         _dragLocationConverted.set(((float) (fromCoordinate[0] - toCoordinate[0])) + _dragLocation.x, ((float) (fromCoordinate[1] - toCoordinate[1])) + _dragLocation.y);
     }
 
-    private final boolean isViewContains(View view, int rx, int ry) {
+    private boolean isViewContains(View view, int rx, int ry) {
         view.getLocationOnScreen(_tempArrayOfInt2);
         int x = _tempArrayOfInt2[0];
         int y = _tempArrayOfInt2[1];
         int w = view.getWidth();
         int h = view.getHeight();
+
         if (rx < x || rx > x + w || ry < y || ry > y + h) {
             return false;
         }
+
         return true;
     }
 }

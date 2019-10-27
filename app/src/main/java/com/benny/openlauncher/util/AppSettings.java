@@ -45,6 +45,19 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getIntOfStringPref(R.string.pref_key__desktop_orientation, 0);
     }
 
+    public Definitions.WallpaperScroll getDesktopWallpaperScroll() {
+        int value = getIntOfStringPref(R.string.pref_key__desktop_wallpaper_scroll, 0);
+        switch (value) {
+            case 0:
+            default:
+                return Definitions.WallpaperScroll.Normal;
+            case 1:
+                return Definitions.WallpaperScroll.Inverse;
+            case 2:
+                return Definitions.WallpaperScroll.Off;
+        }
+    }
+
     public boolean getDesktopShowGrid() {
         return getBool(R.string.pref_key__desktop_show_grid, true);
     }
@@ -66,7 +79,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public boolean getSearchBarStartsWith() {
-        return getBool(R.string.pref_key__search_bar_startswith, true);
+        return getBool(R.string.pref_key__search_bar_starts_with, true);
     }
 
     public String getSearchBarBaseURI() {
@@ -245,7 +258,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public boolean getNotificationStatus() {
-        return getBool(R.string.pref_key__icon_show_notifications, true);
+        return getBool(R.string.pref_key__icon_show_notifications, false);
     }
 
     public void setIconPack(String value) {
@@ -303,11 +316,11 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public ArrayList<String> getHiddenAppsList() {
-        return getStringList(R.string.pref_key__hidden_apps);
+        return getStringList(R.string.pref_key__hide_apps);
     }
 
     public void setHiddenAppsList(ArrayList<String> value) {
-        setStringList(R.string.pref_key__hidden_apps, value);
+        setStringList(R.string.pref_key__hide_apps, value);
     }
 
     public int getDesktopPageCurrent() {

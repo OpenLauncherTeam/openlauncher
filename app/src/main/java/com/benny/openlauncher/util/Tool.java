@@ -50,7 +50,7 @@ public class Tool {
             // might as well make this a fallback method
             view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(VibrationEffect.createOneShot(50, 80));
+            vibrator.vibrate(VibrationEffect.createOneShot(50, 160));
         } else {
             vibrator.vibrate(50);
         }

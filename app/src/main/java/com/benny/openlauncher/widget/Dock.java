@@ -90,9 +90,6 @@ public final class Dock extends CellContainer implements DesktopCallback {
             case CurrentNotOccupied:
                 projectImageOutlineAt(_coordinate, DragHandler._cachedDragBitmap);
                 break;
-            case OutOffRange:
-            case ItemViewNotFound:
-                break;
             case CurrentOccupied:
                 Item.Type type = dragNDropView.getDragItem()._type;
                 clearCachedOutlineBitmap();
@@ -100,6 +97,8 @@ public final class Dock extends CellContainer implements DesktopCallback {
                     dragNDropView.showFolderPreviewAt(this, getCellWidth() * (_coordinate.x + 0.5f), getCellHeight() * (_coordinate.y + 0.5f) - (Setup.appSettings().getDockShowLabel() ? Tool.dp2px(7) : 0));
                 }
                 break;
+            case OutOffRange:
+            case ItemViewNotFound:
             default:
                 break;
         }

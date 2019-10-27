@@ -43,6 +43,7 @@ public class HpGestureCallback implements DesktopGestureListener.DesktopGestureC
             default:
                 Log.e(getClass().toString(), "gesture error");
         }
+
         if (gesture != null) {
             if (_appSettings.getGestureFeedback()) {
                 Tool.vibrate(desktop);
@@ -55,6 +56,7 @@ public class HpGestureCallback implements DesktopGestureListener.DesktopGestureC
             }
             return true;
         }
+
         return false;
     }
 }

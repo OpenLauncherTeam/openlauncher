@@ -2,6 +2,7 @@ package com.benny.openlauncher.viewutil;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private int _iconSize = Integer.MAX_VALUE;
     private int _iconGravity;
     private int _iconPadding;
+    private int _iconColor;
 
     public String _label;
     private int _textGravity = Gravity.CENTER_VERTICAL;
@@ -53,6 +55,11 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     public IconLabelItem withIconSize(Context context, int iconSize) {
         _iconSize = Tool.dp2px(iconSize);
+        return this;
+    }
+
+    public IconLabelItem withIconColor(int iconColor) {
+        _iconColor = iconColor;
         return this;
     }
 
@@ -140,6 +147,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
         holder.textView.setCompoundDrawablePadding(_iconPadding);
         if (_iconSize != Integer.MAX_VALUE) {
             _icon = new BitmapDrawable(Setup.appContext().getResources(), Bitmap.createScaledBitmap(Tool.drawableToBitmap(_icon), _iconSize, _iconSize, true));
+            _icon.setColorFilter(_iconColor, PorterDuff.Mode.SRC_ATOP);
             if (_isAppLauncher) {
                 _icon.setBounds(0, 0, _iconSize, _iconSize);
             }

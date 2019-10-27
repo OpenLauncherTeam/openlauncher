@@ -35,6 +35,12 @@
         <item>@string/orientation_mode_landscape</item>
     </string-array>
 
+    <string-array name="entries__wallpaper_scroll" translatable="false">
+        <item>@string/scroll_normal</item>
+        <item>@string/scroll_inverse</item>
+        <item>@string/scroll_off</item>
+    </string-array>
+
     <string-array name="entries__app_drawer_style" translatable="false">
         <item>@string/horizontal_paged_drawer</item>
         <item>@string/vertical_scroll_drawer</item>

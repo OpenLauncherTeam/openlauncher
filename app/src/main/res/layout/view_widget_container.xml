@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageButton
         android:id="@+id/vertexpand"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="bottom"
-        android:background="@drawable/action_scale_widget"
+        android:background="@drawable/scale_widget"
         android:scaleX="0"
         android:scaleY="0"
-        android:src="@drawable/ic_expand_more_black_24dp"
+        android:src="@drawable/ic_expand"
         android:tint="?android:textColorPrimary" />
 
     <ImageButton
@@ -19,32 +19,35 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="top"
-        android:background="@drawable/action_scale_widget"
+        android:background="@drawable/scale_widget"
+        android:rotation="270"
         android:scaleX="0"
         android:scaleY="0"
-        android:src="@drawable/ic_chevron_right_black_24dp"
+        android:src="@drawable/ic_expand"
         android:tint="?android:textColorPrimary" />
 
     <ImageButton
         android:id="@+id/vertless"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_gravity="right|bottom"
-        android:background="@drawable/action_scale_widget"
+        android:layout_gravity="end|bottom"
+        android:background="@drawable/scale_widget"
+        android:rotation="180"
         android:scaleX="0"
         android:scaleY="0"
-        android:src="@drawable/ic_expand_less_black_24dp"
+        android:src="@drawable/ic_expand"
         android:tint="?android:textColorPrimary" />
 
     <ImageButton
         android:id="@+id/horiless"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_gravity="right|top"
-        android:background="@drawable/action_scale_widget"
+        android:layout_gravity="end|top"
+        android:background="@drawable/scale_widget"
+        android:rotation="90"
         android:scaleX="0"
         android:scaleY="0"
-        android:src="@drawable/ic_chevron_left_black_24dp"
+        android:src="@drawable/ic_expand"
         android:tint="?android:textColorPrimary" />
 
 </FrameLayout>
