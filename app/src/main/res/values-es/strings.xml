@@ -52,7 +52,6 @@
     <string name="pref_title__others">Otros</string>
 
     <string name="pref_title__desktop_indicator_style">Estilo del indicador</string>
-    <string name="pref_summary__minibar">Configura el orden y la visibilidad de los ítems de la minibar.</string>
     <string name="pref_title__search_bar_enable">Barra de búsqueda</string>
     <string name="pref_summary__search_bar_enable">Muestra una barra de búsqueda encima del escritorio.</string>
     <string name="pref_title__desktop_fullscreen">Pantalla completa</string>

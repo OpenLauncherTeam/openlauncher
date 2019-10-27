@@ -51,7 +51,6 @@
 
     <string name="pref_title__desktop_indicator_style">Estil de l\'indicador</string>
 
-    <string name="pref_summary__minibar">Configura l\'ordre i la visibilitat dels items de la minibar.</string>
     <string name="pref_title__search_bar_enable">Barra de cerca</string>
     <string name="pref_summary__search_bar_enable">Mostra una barra de cerca a sobre de l\'escriptori.</string>
     <string name="pref_title__desktop_fullscreen">Pantalla completa</string>
@@ -70,7 +69,6 @@
     <string name="pref_summary__search_bar_force_browser">Sempre fer servir el navegador per a cerques en línia.</string>
     <string name="pref_title__desktop_background_color">Fons</string>
     <string name="pref_title__desktop_folder_color">Carpeta</string>
-    <string name="pref_title__desktop_folder_color_text">Texte</string>
     <string name="pref_title__search_bar_show_hidden_apps">Mostra apps ocultes</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Inclou les apps ocultes en els resultats de la cerca.</string>
 
@@ -195,9 +193,9 @@
     <string name="rate_the_app">Qualifica aquesta app</string>
     <string name="translate">Tradueix</string>
     <string name="bug_reports">Informa d\'errors</string>
-    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Més informació sobre com donar o contribuïr a aquest projecte</string>
+    <string name="more_info_support">Més informació sobre com donar o contribuïr a aquest projecte</string>
     <string name="android_contribution_guide">Guía de contribució de Android</string>
-    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Més informació sobre com contribuïr en projectes de codi obert, en especial apps Android</string>
+    <string name="more_info_foss">Més informació sobre com contribuïr en projectes de codi obert, en especial apps Android</string>
     <string name="join_community">Ajuntar-se a la comunitat</string>
     <string name="bug_reports_suggest_improvements">Comentar, notificar problemes o suggerir millores</string>
     <string name="help_translating_this_app">Traduïr aquesta app a d\'altres idiomes</string>

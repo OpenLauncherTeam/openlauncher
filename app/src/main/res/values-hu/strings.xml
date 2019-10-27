@@ -26,7 +26,7 @@
     <string name="minibar_title__search_bar">Kereső bar megnyitása</string>
     <string name="minibar_summary__search_bar">Nyisd meg a kereső Bart.</string>
     <string name="minibar_summary__mobile_network">Parancsikon a mobilnet beállításokhoz.</string>
-    <string name="minibar_title__show_notifications">Értesítések mutatása</string>
+    <string name="minibar_title__notification_bar">Értesítések mutatása</string>
 
     <!-- About -->
     <string name="about_libs">Nyitott Forráskódú Könyvtárak</string>
@@ -83,7 +83,6 @@
     <string name="pref_title__desktop_show_label">Mutasd a címkéket</string>
     <string name="pref_title__desktop_background_color">Háttér</string>
     <string name="pref_title__desktop_folder_color">Mappa háttér</string>
-    <string name="pref_title__desktop_folder_color_text">Mappa szöveg</string>
     <string name="pref_title__desktop_inset_color">Rendszer barok</string>
 
     <string name="pref_title__search_bar_enable">Kereső bar</string>

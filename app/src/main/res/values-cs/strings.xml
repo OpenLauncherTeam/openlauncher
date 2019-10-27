@@ -45,7 +45,6 @@
     <string name="pref_title__others">Jiné</string>
 
     <string name="pref_title__desktop_indicator_style">Vzhled indikátoru</string>
-    <string name="pref_summary__minibar">Nastavit pořadí a viditelnost položek v MiniBaru.</string>
     <string name="pref_title__search_bar_enable">Vyhledávací řádek</string>
     <string name="pref_summary__search_bar_enable">Zobrazit vyhledávací řádek nad plochou.</string>
     <string name="pref_title__desktop_fullscreen">Celá obrazovka</string>

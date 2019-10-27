@@ -47,7 +47,6 @@
     <string name="pref_title__appearance">المظهر</string>
     <string name="pref_title__color">الألوان</string>
 
-    <string name="pref_summary__minibar">ضبط ترتيب ورؤية عناصر الشريط المصغر</string>
     <string name="pref_title__search_bar_enable">شريط البحث</string>
     <string name="pref_summary__search_bar_enable">إظهار شريط البحث أعلى سطح المكتب</string>
     <string name="pref_title__desktop_fullscreen">ملء الشاشة</string>

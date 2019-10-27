@@ -8,7 +8,7 @@
     <SwitchPreference
         android:defaultValue="true"
         android:key="@string/pref_key__dock_enable"
-        android:title="Enable dock" />
+        android:title="@string/enable" />
 
     <PreferenceCategory android:title="@string/pref_title__size">
 

@@ -44,7 +44,6 @@
     <string name="pref_title__others">Ostalo</string>
 
     <string name="pref_title__desktop_indicator_style">Stil indikatora</string>
-    <string name="pref_summary__minibar">Podesi redosled i vidljivost stvari u minibaru.</string>
     <string name="pref_title__search_bar_enable">Pretraga</string>
     <string name="pref_summary__search_bar_enable">Prikaži pretragu iznad desktopa.</string>
     <string name="pref_title__desktop_fullscreen">Ceo ekran</string>

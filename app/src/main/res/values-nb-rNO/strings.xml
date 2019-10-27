@@ -48,7 +48,6 @@
     <string name="pref_title__appearance">Utseende</string>
     <string name="pref_title__color">Farger</string>
 
-    <string name="pref_summary__minibar">Sett opp rekkefølgen og synligheten for sidefeltselementene.</string>
     <string name="pref_title__search_bar_enable">Søkefelt</string>
     <string name="pref_summary__search_bar_enable">Vis et søkefelt på toppen av skrivebordet.</string>
     <string name="pref_title__desktop_fullscreen">Fullskjermsvisning</string>

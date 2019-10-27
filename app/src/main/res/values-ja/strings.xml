@@ -45,7 +45,6 @@
     <string name="pref_title__color">色</string>
     <string name="pref_title__advanced">その他</string>
 
-    <string name="pref_summary__minibar">ミニバーのアイテムを設定します。</string>
     <string name="pref_title__size">サイズ</string>
     <string name="pref_title__search_bar_enable">検索バー</string>
     <string name="pref_summary__search_bar_enable">デスクトップの上部に検索バーを表示します。</string>

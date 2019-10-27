@@ -47,7 +47,6 @@
     <string name="pref_title__others">Outros</string>
 
     <string name="pref_title__desktop_indicator_style">Estilo do indicador</string>
-    <string name="pref_summary__minibar">Configure a ordem e a visibilidade dos itens da minibar.</string>
     <string name="pref_title__search_bar_enable">Barra de pesquisa</string>
     <string name="pref_summary__search_bar_enable">Exibe uma barra de pesquisa acima da área de trabalho.</string>
     <string name="pref_title__desktop_fullscreen">Tela cheia</string>
@@ -64,7 +63,6 @@
     <string name="pref_summary__search_bar_force_browser">Sempre usar o navegador para pesquisas online.</string>
     <string name="pref_title__desktop_background_color">Plano de fundo</string>
     <string name="pref_title__desktop_folder_color">Pastas</string>
-    <string name="pref_title__desktop_folder_color_text">Texto da Pasta</string>
     <string name="pref_title__search_bar_show_hidden_apps">Exibir apps ocultos</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Inclui apps ocultos nos resultados de pesquisa.</string>
 

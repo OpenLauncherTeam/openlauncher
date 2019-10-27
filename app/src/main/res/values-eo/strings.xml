@@ -52,7 +52,6 @@
     <string name="pref_title__others">Aliaj</string>
 
     <string name="pref_title__desktop_indicator_style">Indikila stilo</string>
-    <string name="pref_summary__minibar">Agordi ordon kaj videblon de minibretaj eroj.</string>
     <string name="pref_title__search_bar_enable">Ŝercbreto</string>
     <string name="pref_summary__search_bar_enable">Montri serĉbreton sur labortablo.</string>
     <string name="pref_title__desktop_fullscreen">Plenekrano</string>

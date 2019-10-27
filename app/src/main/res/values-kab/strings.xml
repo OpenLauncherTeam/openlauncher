@@ -44,7 +44,6 @@
     <string name="pref_title__others">Ayen nniḍen</string>
 
     <string name="pref_title__desktop_indicator_style">Aɣani n unamel</string>
-    <string name="pref_summary__minibar">Swel asmizzwer akked tiẓri n iferdisen n ufeggag amectuḥ.</string>
     <string name="pref_title__search_bar_enable">Afeggag n unadi</string>
     <string name="pref_summary__search_bar_enable">Sken afeggag n unadi nnig n tnarit.</string>
     <string name="pref_title__desktop_fullscreen">Agdil aččran</string>

@@ -55,7 +55,6 @@
     <string name="pref_title__others">Anderes</string>
 
     <string name="pref_title__desktop_indicator_style">Indikatoren Stil</string>
-    <string name="pref_summary__minibar">Konfiguration der Anordnung und Sichtbarkeing von Minibar Einträgen.</string>
     <string name="pref_title__search_bar_enable">Suchleiste</string>
     <string name="pref_summary__search_bar_enable">Zeige eine Suchleiste am oberen Desktoprand.</string>
     <string name="pref_title__desktop_fullscreen">Vollbild</string>
@@ -159,7 +158,6 @@
     <string name="pref_title__search_bar_show_hidden_apps">Versteckte Apps anzeigen</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Versteckte Apps in Suchergebnissen anzeigen</string>
     <string name="pref_title__debug">Fehlerbehebung</string>
-    <string name="pref_title__desktop_folder_color_text">Ordner Text</string>
     <string name="pref_title__drawer_label_font_size">Bezeichnung Text-Größe</string>
     <string name="pref_title__animation_speed_modifier">Anmiations Geschwindigkeit</string>
 
@@ -222,9 +220,9 @@
     <string name="rate_the_app">App bewerten</string>
     <string name="translate">Übersetzen</string>
     <string name="bug_reports">Fehler melden</string>
-    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Weitere Informationen zum Spenden oder zur anderweitigen Unterstützung dieses Projekts</string>
+    <string name="more_info_support">Weitere Informationen zum Spenden oder zur anderweitigen Unterstützung dieses Projekts</string>
     <string name="android_contribution_guide">Unterstützungs Guide für Android</string>
-    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Weitere Informationen zum Beitrag zu Open Source-Projekten, insbesondere zu Android Apps</string>
+    <string name="more_info_foss">Weitere Informationen zum Beitrag zu Open Source-Projekten, insbesondere zu Android Apps</string>
     <string name="join_community">Community beitreten</string>
     <string name="bug_reports_suggest_improvements">Feedback geben, Fehler melden, Verbesserungen vorschlagen</string>
     <string name="help_translating_this_app">Übersetzen dieser App in andere Sprachen</string>

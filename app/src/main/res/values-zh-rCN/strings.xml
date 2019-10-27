@@ -51,7 +51,6 @@
     <string name="pref_title__color">颜色</string>
     <string name="pref_title__search_bar">搜索栏</string>
 
-    <string name="pref_summary__minibar">设置快捷操作栏项的排序和可见度</string>
     <string name="pref_title__search_bar_enable">搜索栏</string>
     <string name="pref_summary__search_bar_enable">在桌面上部显示一个搜索栏</string>
     <string name="pref_title__desktop_fullscreen">全屏</string>

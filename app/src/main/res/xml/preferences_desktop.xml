@@ -34,7 +34,6 @@
 
         <Preference
             android:key="@string/pref_key__minibar"
-            android:summary="@string/pref_summary__minibar"
             android:title="@string/minibar" />
 
         <ListPreference
