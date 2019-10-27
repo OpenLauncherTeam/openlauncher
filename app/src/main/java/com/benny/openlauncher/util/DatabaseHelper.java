@@ -17,31 +17,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    protected static final String DATABASE_HOME = "home.db";
-    protected static final String TABLE_HOME = "home";
-    protected static final String COLUMN_TIME = "time";
-    protected static final String COLUMN_TYPE = "type";
-    protected static final String COLUMN_LABEL = "label";
-    protected static final String COLUMN_X_POS = "x";
-    protected static final String COLUMN_Y_POS = "y";
-    protected static final String COLUMN_DATA = "data";
-    protected static final String COLUMN_PAGE = "page";
-    protected static final String COLUMN_DESKTOP = "desktop";
-    protected static final String COLUMN_STATE = "state";
+    private static final String DATABASE_HOME = "home.db";
+    private static final String TABLE_HOME = "home";
 
-    protected static final String SQL_CREATE_HOME =
-            "CREATE TABLE " + TABLE_HOME + " (" +
-                    COLUMN_TIME + " INTEGER PRIMARY KEY," +
-                    COLUMN_TYPE + " VARCHAR," +
-                    COLUMN_LABEL + " VARCHAR," +
-                    COLUMN_X_POS + " INTEGER," +
-                    COLUMN_Y_POS + " INTEGER," +
-                    COLUMN_DATA + " VARCHAR," +
-                    COLUMN_PAGE + " INTEGER," +
-                    COLUMN_DESKTOP + " INTEGER," +
-                    COLUMN_STATE + " INTEGER)";
-    protected static final String SQL_DELETE = "DROP TABLE IF EXISTS ";
-    protected static final String SQL_QUERY = "SELECT * FROM ";
+    private static final String COLUMN_TIME = "time";
+    private static final String COLUMN_TYPE = "type";
+    private static final String COLUMN_LABEL = "label";
+    private static final String COLUMN_X_POS = "x";
+    private static final String COLUMN_Y_POS = "y";
+    private static final String COLUMN_DATA = "data";
+    private static final String COLUMN_PAGE = "page";
+    private static final String COLUMN_DESKTOP = "desktop";
+    private static final String COLUMN_STATE = "state";
+
+    private static final String SQL_DELETE = "DROP TABLE IF EXISTS ";
+    private static final String SQL_QUERY = "SELECT * FROM ";
+    private static final String SQL_CREATE =
+            "CREATE TABLE " + TABLE_HOME + " ("
+                    + COLUMN_TIME + " INTEGER PRIMARY KEY,"
+                    + COLUMN_TYPE + " VARCHAR,"
+                    + COLUMN_LABEL + " VARCHAR,"
+                    + COLUMN_X_POS + " INTEGER,"
+                    + COLUMN_Y_POS + " INTEGER,"
+                    + COLUMN_DATA + " VARCHAR,"
+                    + COLUMN_PAGE + " INTEGER,"
+                    + COLUMN_DESKTOP + " INTEGER,"
+                    + COLUMN_STATE + " INTEGER)";
 
     protected SQLiteDatabase _db;
     protected Context _context;
@@ -53,7 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CREATE_HOME);
+        db.execSQL(SQL_CREATE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -67,14 +68,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void createItem(Item item, int page, Definitions.ItemPosition itemPosition) {
+        Log.i(this.getClass().getName(), String.format("createItem: %s (ID: %d)", item.getLabel(), item.getId()));
         ContentValues itemValues = new ContentValues();
         itemValues.put(COLUMN_TIME, item.getId());
         itemValues.put(COLUMN_TYPE, item.getType().toString());
         itemValues.put(COLUMN_LABEL, item.getLabel());
         itemValues.put(COLUMN_X_POS, item.getX());
         itemValues.put(COLUMN_Y_POS, item.getY());
-
-        Setup.logger().log(this, Log.INFO, null, "createItem: %s (ID: %d)", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
 
         String concat = "";
         switch (item.getType()) {
@@ -95,9 +95,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 itemValues.put(COLUMN_DATA, item.getActionValue());
                 break;
             case WIDGET:
-                concat = Integer.toString(item.getWidgetValue()) + Definitions.DELIMITER
-                        + Integer.toString(item.getSpanX()) + Definitions.DELIMITER
-                        + Integer.toString(item.getSpanY());
+                concat = item.getWidgetValue()
+                        + Definitions.DELIMITER
+                        + item.getSpanX()
+                        + Definitions.DELIMITER
+                        + item.getSpanY();
                 itemValues.put(COLUMN_DATA, concat);
                 break;
         }
@@ -134,6 +136,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 deleteItem(i, deleteSubItems);
             }
         }
+
         // delete the item itself
         _db.delete(TABLE_HOME, COLUMN_TIME + " = ?", new String[]{String.valueOf(item.getId())});
     }
@@ -194,7 +197,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // update data attribute for an item
     public void updateItem(Item item) {
-        Setup.logger().log(this, Log.INFO, null, "updateItem: %s %d", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+        Log.i(this.getClass().getName(), String.format("updateItem: %s %d", item.getLabel(), item.getId()));
+
         ContentValues itemValues = new ContentValues();
         itemValues.put(COLUMN_LABEL, item.getLabel());
         itemValues.put(COLUMN_X_POS, item.getX());
@@ -217,9 +221,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 itemValues.put(COLUMN_DATA, item.getActionValue());
                 break;
             case WIDGET:
-                concat = Integer.toString(item.getWidgetValue()) + Definitions.DELIMITER
-                        + Integer.toString(item.getSpanX()) + Definitions.DELIMITER
-                        + Integer.toString(item.getSpanY());
+                concat = item.getWidgetValue()
+                        + Definitions.DELIMITER
+                        + item.getSpanX()
+                        + Definitions.DELIMITER
+                        + item.getSpanY();
                 itemValues.put(COLUMN_DATA, concat);
                 break;
         }
@@ -228,15 +234,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // update the state of an item
     public void updateItem(Item item, Definitions.ItemState state) {
+        Log.i(this.getClass().getName(), String.format("updateItem: %s %d", item.getLabel(), item.getId()));
+
         ContentValues itemValues = new ContentValues();
-        Setup.logger().log(this, Log.INFO, null, "updateItem: %s %d", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
         itemValues.put(COLUMN_STATE, state.ordinal());
+
         _db.update(TABLE_HOME, itemValues, COLUMN_TIME + " = " + item.getId(), null);
     }
 
     // update the fields only used by the database
     public void updateItem(Item item, int page, Definitions.ItemPosition itemPosition) {
-        Setup.logger().log(this, Log.INFO, null, "updateItem: %s %d", item != null ? item.getLabel() : "NULL", item != null ? item.getId() : -1);
+        Log.i(this.getClass().getName(), String.format("updateItem: %s %d", item.getLabel(), item.getId()));
+
         deleteItem(item, false);
         createItem(item, page, itemPosition);
     }
@@ -285,6 +294,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 item.setSpanY(Integer.parseInt(dataSplit[2]));
                 break;
         }
+
         return item;
     }
 }

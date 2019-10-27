@@ -54,7 +54,7 @@ public class GroupDrawable extends Drawable {
                 app = Setup.appLoader().findItemApp(temp);
             }
             if (app == null) {
-                Setup.logger().log(this, Log.DEBUG, null, "Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, temp == null ? "Item is NULL" : temp.getIntent());
+                Log.d(this.getClass().getName(), String.format("Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, temp == null ? "Item is NULL" : temp.getIntent()));
                 icons[i] = new ColorDrawable(Color.TRANSPARENT);
             } else {
                 _icons[i] = app.getIcon();
