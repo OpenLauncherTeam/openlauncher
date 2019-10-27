@@ -20,8 +20,8 @@ import java.util.List;
 public abstract class SettingsBaseFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final List<Integer> noRestart = new ArrayList<>(Arrays.asList(
             R.string.pref_key__gesture_double_tap, R.string.pref_key__gesture_swipe_up,
-            R.string.pref_key__gesture_swipe_down, R.string.pref_key__gesture_pinch,
-            R.string.pref_key__gesture_unpinch));
+            R.string.pref_key__gesture_swipe_down, R.string.pref_key__gesture_pinch_in,
+            R.string.pref_key__gesture_pinch_out));
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

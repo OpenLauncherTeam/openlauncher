@@ -36,7 +36,7 @@
     <string name="pref_title__app_drawer">Calaix d\'apps</string>
     <string name="pref_title__gestures">Gestos</string>
     <string name="pref_title__icons">Icones</string>
-    <string name="pref_title__miscellaneous">Miscel·lanània</string>
+    <string name="pref_title__advanced">Miscel·lanània</string>
     <string name="pref_title__about">Quant a</string>
 
     <string name="pref_title__size">Mida</string>
@@ -107,8 +107,8 @@
     <string name="pref_title__gesture_double_tap">Fer dos tocs</string>
     <string name="pref_title__gesture_swipe_up">Desplaçament cap amunt</string>
     <string name="pref_title__gesture_swipe_down">Desplaçament cap avall</string>
-    <string name="pref_title__gesture_pinch">Pessigar</string>
-    <string name="pref_title__gesture_unpinch">Pessigar invers</string>
+    <string name="pref_title__gesture_pinch_in">Pessigar</string>
+    <string name="pref_title__gesture_pinch_out">Pessigar invers</string>
 
     <string name="pref_summary__icon_size">Mida de les icones de totes les aplicacions.</string>
     <string name="pref_title__icon_pack">Tema d\'icones</string>

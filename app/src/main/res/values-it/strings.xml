@@ -33,7 +33,7 @@
     <string name="pref_title__app_drawer">Drawer</string>
     <string name="pref_title__gestures">Azioni</string>
     <string name="pref_title__icons">Icone</string>
-    <string name="pref_title__miscellaneous">Altre impostazioni</string>
+    <string name="pref_title__advanced">Altre impostazioni</string>
     <string name="pref_title__about">Informazioni</string>
 
     <string name="pref_title__size">Dimensione</string>
@@ -103,8 +103,8 @@
     <string name="pref_title__gesture_double_tap">Doppio tocco</string>
     <string name="pref_title__gesture_swipe_up">Scorrimento verso l\'alto</string>
     <string name="pref_title__gesture_swipe_down">Scorrimento verso il basso</string>
-    <string name="pref_title__gesture_pinch">Pinch in</string>
-    <string name="pref_title__gesture_unpinch">Pinch out</string>
+    <string name="pref_title__gesture_pinch_in">Pinch in</string>
+    <string name="pref_title__gesture_pinch_out">Pinch out</string>
 
     <string name="pref_summary__icon_size">Dimensione icone.</string>
     <string name="pref_title__icon_pack">Pacchetto icone</string>

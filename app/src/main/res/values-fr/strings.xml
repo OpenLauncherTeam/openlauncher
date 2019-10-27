@@ -70,7 +70,7 @@
     <string name="pref_title__appearance">Apparence</string>
     <string name="pref_title__gestures">Gestes</string>
     <string name="pref_title__behavior">Comportement</string>
-    <string name="pref_title__miscellaneous">Divers</string>
+    <string name="pref_title__advanced">Divers</string>
     <string name="pref_title__about">À propos de</string>
 
     <string name="pref_title__size">Taille</string>
@@ -146,8 +146,8 @@
     <string name="pref_title__gesture_double_tap">Appui double</string>
     <string name="pref_title__gesture_swipe_up">Glisser vers le haut</string>
     <string name="pref_title__gesture_swipe_down">Glisser vers le bas</string>
-    <string name="pref_title__gesture_pinch">Pincement</string>
-    <string name="pref_title__gesture_unpinch">Écartement</string>
+    <string name="pref_title__gesture_pinch_in">Pincement</string>
+    <string name="pref_title__gesture_pinch_out">Écartement</string>
 
     <string name="pref_title__theme">Thème</string>
     <string name="pref_summary__theme">Définir le thème global de l\'application</string>

@@ -42,7 +42,7 @@
     <string name="pref_title__app_drawer">Programskuff</string>
     <string name="pref_title__gestures">Berøringsbevegelser</string>
     <string name="pref_title__icons">Ikoner</string>
-    <string name="pref_title__miscellaneous">Ymse</string>
+    <string name="pref_title__advanced">Ymse</string>
 
     <string name="pref_title__size">Størrelse</string>
     <string name="pref_title__appearance">Utseende</string>
@@ -85,8 +85,8 @@
     <string name="pref_title__gesture_double_tap">Dobbelttrykk</string>
     <string name="pref_title__gesture_swipe_up">Dra oppover</string>
     <string name="pref_title__gesture_swipe_down">Dra nedover</string>
-    <string name="pref_title__gesture_pinch">Knip</string>
-    <string name="pref_title__gesture_unpinch">Utvid knipetak</string>
+    <string name="pref_title__gesture_pinch_in">Knip</string>
+    <string name="pref_title__gesture_pinch_out">Utvid knipetak</string>
 
     <string name="pref_summary__icon_size">Størrelse for alle programikoner.</string>
     <string name="pref_title__icon_pack">Ikonpakke</string>

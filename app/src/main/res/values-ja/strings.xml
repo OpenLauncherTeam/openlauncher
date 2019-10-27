@@ -43,7 +43,7 @@
     <!-- Settings -->
 
     <string name="pref_title__color">色</string>
-    <string name="pref_title__miscellaneous">その他</string>
+    <string name="pref_title__advanced">その他</string>
 
     <string name="pref_summary__minibar">ミニバーのアイテムを設定します。</string>
     <string name="pref_title__size">サイズ</string>

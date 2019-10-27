@@ -33,7 +33,7 @@
     <string name="pref_title__app_drawer">Zoznam aplikácií</string>
     <string name="pref_title__gestures">Gestá</string>
     <string name="pref_title__icons">Ikony</string>
-    <string name="pref_title__miscellaneous">Rôzne</string>
+    <string name="pref_title__advanced">Rôzne</string>
     <string name="pref_title__about">O aplikácií</string>
 
     <string name="pref_title__size">Veľkosť</string>
@@ -102,8 +102,8 @@
     <string name="pref_title__gesture_double_tap">Dvojdotyk</string>
     <string name="pref_title__gesture_swipe_up">Potiahnutie hore</string>
     <string name="pref_title__gesture_swipe_down">Potiahnutie dolu</string>
-    <string name="pref_title__gesture_pinch">Štipnutie</string>
-    <string name="pref_title__gesture_unpinch">Odštipnutie</string>
+    <string name="pref_title__gesture_pinch_in">Štipnutie</string>
+    <string name="pref_title__gesture_pinch_out">Odštipnutie</string>
 
     <string name="pref_summary__icon_size">Veľkost ikon aplikácií.</string>
     <string name="pref_title__icon_pack">Balíček ikon</string>

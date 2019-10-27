@@ -37,8 +37,8 @@ public class SettingsBehaviorFragment extends SettingsBaseFragment {
             case R.string.pref_key__gesture_double_tap:
             case R.string.pref_key__gesture_swipe_up:
             case R.string.pref_key__gesture_swipe_down:
-            case R.string.pref_key__gesture_pinch:
-            case R.string.pref_key__gesture_unpinch:
+            case R.string.pref_key__gesture_pinch_in:
+            case R.string.pref_key__gesture_pinch_out:
                 DialogHelper.selectGestureDialog(getActivity(), preference.getTitle().toString(), new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
@@ -70,8 +70,8 @@ public class SettingsBehaviorFragment extends SettingsBaseFragment {
     public void updateSummaries() {
         List<Integer> gestures = new ArrayList<>(Arrays.asList(
                 R.string.pref_key__gesture_double_tap, R.string.pref_key__gesture_swipe_up,
-                R.string.pref_key__gesture_swipe_down, R.string.pref_key__gesture_pinch,
-                R.string.pref_key__gesture_unpinch));
+                R.string.pref_key__gesture_swipe_down, R.string.pref_key__gesture_pinch_in,
+                R.string.pref_key__gesture_pinch_out));
         for (int resId : gestures) {
             Preference preference = findPreference(getString(resId));
             Object gesture = AppSettings.get().getGesture(resId);

@@ -70,7 +70,7 @@
     <string name="pref_title__appearance">Aparèntzia</string>
     <string name="pref_title__gestures">Gestos</string>
     <string name="pref_title__behavior">Cumportamentu</string>
-    <string name="pref_title__miscellaneous">Àteras impostatziones</string>
+    <string name="pref_title__advanced">Àteras impostatziones</string>
     <string name="pref_title__about">Informatziones</string>
 
     <string name="pref_title__size">Mannària</string>
@@ -147,8 +147,8 @@
     <string name="pref_title__gesture_double_tap">Tocu dòpiu</string>
     <string name="pref_title__gesture_swipe_up">Iscurre cara a artu</string>
     <string name="pref_title__gesture_swipe_down">Iscurre cara a bassu</string>
-    <string name="pref_title__gesture_pinch">Pìtzigu</string>
-    <string name="pref_title__gesture_unpinch">Ismanniada</string>
+    <string name="pref_title__gesture_pinch_in">Pìtzigu</string>
+    <string name="pref_title__gesture_pinch_out">Ismanniada</string>
 
     <string name="pref_title__theme">Tema</string>
     <string name="pref_summary__theme">Imposta su tema globale de s\'aplicatzione</string>

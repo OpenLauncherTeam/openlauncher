@@ -33,11 +33,6 @@
             android:summary="@string/pref_summary__drawer_style"
             android:title="@string/pref_title__drawer_style" />
 
-        <Preference
-            android:key="@string/pref_key__hide_apps"
-            android:summary="@string/pref_summary__hide_apps"
-            android:title="@string/pref_title__hide_apps" />
-
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__drawer_show_card_view"

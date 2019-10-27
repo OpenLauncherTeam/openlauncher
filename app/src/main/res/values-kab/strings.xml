@@ -30,7 +30,7 @@
     <string name="pref_title__app_drawer">Agalis n yisnasen</string>
     <string name="pref_title__gestures">Imussuten</string>
     <string name="pref_title__icons">Tignitin</string>
-    <string name="pref_title__miscellaneous">Ayen nniḍen</string>
+    <string name="pref_title__advanced">Ayen nniḍen</string>
     <string name="pref_title__about">Ɣef</string>
 
     <string name="pref_title__size">Teɣzi</string>
@@ -95,8 +95,8 @@
     <string name="pref_title__gesture_double_tap">Nnal snat tikalt</string>
     <string name="pref_title__gesture_swipe_up">Zuɣer d aasawen</string>
     <string name="pref_title__gesture_swipe_down">Zuɣer d akesser</string>
-    <string name="pref_title__gesture_pinch">Aseqreb</string>
-    <string name="pref_title__gesture_unpinch">Asiẓi</string>
+    <string name="pref_title__gesture_pinch_in">Aseqreb</string>
+    <string name="pref_title__gesture_pinch_out">Asiẓi</string>
 
     <string name="pref_summary__icon_size">Teɣzi n tignitin n usnas .</string>
     <string name="pref_title__icon_pack">Tagrumma n tignitin</string>

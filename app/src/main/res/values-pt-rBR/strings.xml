@@ -33,7 +33,7 @@
     <string name="pref_title__app_drawer">Gaveta de aplicativos</string>
     <string name="pref_title__gestures">Gestos</string>
     <string name="pref_title__icons">Ícones</string>
-    <string name="pref_title__miscellaneous">Diversos</string>
+    <string name="pref_title__advanced">Diversos</string>
     <string name="pref_title__about">Sobre</string>
 
     <string name="pref_title__size">Tamanho</string>
@@ -101,8 +101,8 @@
     <string name="pref_title__gesture_double_tap">Toque duplo</string>
     <string name="pref_title__gesture_swipe_up">Deslizar para cima</string>
     <string name="pref_title__gesture_swipe_down">Deslizar para baixo</string>
-    <string name="pref_title__gesture_pinch">Pinçar</string>
-    <string name="pref_title__gesture_unpinch">Ampliar</string>
+    <string name="pref_title__gesture_pinch_in">Pinçar</string>
+    <string name="pref_title__gesture_pinch_out">Ampliar</string>
 
     <string name="pref_summary__icon_size">Tamanho dos ícones dos apps.</string>
     <string name="pref_title__icon_pack">Pacote de ícones</string>

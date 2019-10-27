@@ -42,7 +42,7 @@
     <string name="pref_title__app_drawer">应用抽屉</string>
     <string name="pref_title__gestures">手势</string>
     <string name="pref_title__icons">图标</string>
-    <string name="pref_title__miscellaneous">杂项</string>
+    <string name="pref_title__advanced">杂项</string>
     <string name="pref_title__about">关于</string>
 
     <string name="pref_title__size">尺寸</string>
@@ -93,8 +93,8 @@
     <string name="pref_title__gesture_double_tap">双击</string>
     <string name="pref_title__gesture_swipe_up">上滑</string>
     <string name="pref_title__gesture_swipe_down">下滑</string>
-    <string name="pref_title__gesture_pinch">捏合</string>
-    <string name="pref_title__gesture_unpinch">外张</string>
+    <string name="pref_title__gesture_pinch_in">捏合</string>
+    <string name="pref_title__gesture_pinch_out">外张</string>
     <string name="pref_title__gesture_feedback">反馈</string>
 
     <string name="pref_summary__icon_size">所有图标的尺寸</string>

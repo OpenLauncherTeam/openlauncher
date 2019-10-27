@@ -68,9 +68,9 @@
     <string name="pref_title__dock">Dock</string>
     <string name="pref_title__app_drawer">App Drawer</string>
     <string name="pref_title__appearance">Appearance</string>
-    <string name="pref_title__gestures">Gestures</string>
     <string name="pref_title__behavior">Behavior</string>
-    <string name="pref_title__miscellaneous">Miscellaneous</string>
+    <string name="pref_title__advanced">Advanced</string>
+    <string name="pref_title__hide_apps">Hide Apps</string>
     <string name="pref_title__about">About</string>
 
     <string name="pref_title__size">Size</string>
@@ -81,6 +81,7 @@
     <string name="pref_title__interfaces">Interfaces</string>
     <string name="pref_title__inputs">Inputs</string>
     <string name="pref_title__feels">Feels</string>
+    <string name="pref_title__gestures">Gestures</string>
     <string name="pref_title__others">Others</string>
     <string name="pref_title__animations">Animations</string>
     <string name="pref_title__debug">Debug</string>
@@ -127,8 +128,6 @@
 
     <string name="pref_title__drawer_style">Style</string>
     <string name="pref_summary__drawer_style">Choose between a paged and vertical app drawer.</string>
-    <string name="pref_title__hide_apps">Hide Apps</string>
-    <string name="pref_summary__hide_apps">Hide selected apps from launcher.</string>
     <string name="pref_title__drawer_show_card_view">Card View</string>
     <string name="pref_summary__drawer_show_card_view">Show a card view above the drawer background.</string>
     <string name="pref_title__drawer_remember_position">Remember Last Page</string>
@@ -143,6 +142,8 @@
     <string name="pref_title__drawer_fast_scroll_color">Scrollbar</string>
     <string name="pref_title__drawer_label_font_size">Label Font Size</string>
 
+    <string name="pref_title__gesture_notifications">Notification Badge</string>
+    <string name="pref_summary__gesture_notifications">Update icons with a badge when notifications arrive.</string>
     <string name="pref_title__gesture_feedback">Gesture Feedback</string>
     <string name="pref_summary__gesture_feedback">Get feedback when long pressing an item on the desktop.</string>
     <string name="pref_title__gesture_quick_swipe">Quick Swipe Drawer</string>
@@ -150,8 +151,8 @@
     <string name="pref_title__gesture_double_tap">Double Tap</string>
     <string name="pref_title__gesture_swipe_up">Swipe Up</string>
     <string name="pref_title__gesture_swipe_down">Swipe Down</string>
-    <string name="pref_title__gesture_pinch">Pinch</string>
-    <string name="pref_title__gesture_unpinch">Unpinch</string>
+    <string name="pref_title__gesture_pinch_in">Pinch In</string>
+    <string name="pref_title__gesture_pinch_out">Pinch Out</string>
 
     <string name="pref_title__theme">Theme</string>
     <string name="pref_summary__theme">Set the theme for the entire app.</string>
@@ -161,8 +162,6 @@
     <string name="pref_summary__icon_size">Size of all app icons.</string>
     <string name="pref_title__icon_pack">Icon Pack</string>
     <string name="pref_summary__icon_pack">Select an installed icon pack.</string>
-    <string name="pref_title__icon_show_notifications">Notification Badge</string>
-    <string name="pref_summary__icon_show_notifications">Update icons with a badge when notifications arrive.</string>
     <string name="pref_title__animation_speed_modifier">Animation Speed</string>
     <string name="pref_summary__animation_speed_modifier">Modify the overall speed of animations.</string>
 
@@ -179,6 +178,7 @@
     <string name="pref_title__restart">Restart</string>
     <string name="pref_summary__restart">This can be used to manually apply some settings.</string>
 
+    <!-- Arrays -->
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paged</string>
 

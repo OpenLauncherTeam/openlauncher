@@ -33,7 +33,7 @@
     <string name="pref_title__app_drawer">Menu aplikacji</string>
     <string name="pref_title__gestures">Gesty</string>
     <string name="pref_title__icons">Ikony</string>
-    <string name="pref_title__miscellaneous">Różne</string>
+    <string name="pref_title__advanced">Różne</string>
     <string name="pref_title__about">O programie</string>
 
     <string name="pref_title__size">Wielkość</string>
@@ -102,8 +102,8 @@
     <string name="pref_title__gesture_double_tap">Podwójne dotknięcie</string>
     <string name="pref_title__gesture_swipe_up">Przesunięcie do góry</string>
     <string name="pref_title__gesture_swipe_down">Przesunięcie w dół</string>
-    <string name="pref_title__gesture_pinch">Uszczypnięcie</string>
-    <string name="pref_title__gesture_unpinch">Gest powiększenia</string>
+    <string name="pref_title__gesture_pinch_in">Uszczypnięcie</string>
+    <string name="pref_title__gesture_pinch_out">Gest powiększenia</string>
 
     <string name="pref_summary__icon_size">Rozmiar wszystkich ikon aplikacji.</string>
     <string name="pref_title__icon_pack">Zestaw ikon</string>

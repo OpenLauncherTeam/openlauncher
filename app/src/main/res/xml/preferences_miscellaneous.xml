@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:title="@string/pref_title__miscellaneous">
+    android:title="@string/pref_title__advanced">
 
     <net.gsantner.opoc.preference.LanguagePreferenceCompat
         android:key="@string/pref_key__language"

@@ -81,7 +81,7 @@ public class SettingsAboutFragment extends GsPreferenceFragmentCompat<AppSetting
                     return true;
                 }
                 case R.string.pref_key__more_info__bug_reports: {
-                    _cu.openWebpageInExternalBrowser(getString(R.string.app_bugreport_url));
+                    _cu.openWebpageInExternalBrowser(getString(R.string.app_bug_report_url));
                     return true;
                 }
                 case R.string.pref_key__more_info__translate: {

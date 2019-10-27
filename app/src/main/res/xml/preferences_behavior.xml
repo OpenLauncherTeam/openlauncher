@@ -6,9 +6,9 @@
 
     <CheckBoxPreference
         android:defaultValue="false"
-        android:key="@string/pref_key__icon_show_notifications"
-        android:summary="@string/pref_summary__icon_show_notifications"
-        android:title="@string/pref_title__icon_show_notifications" />
+        android:key="@string/pref_key__gesture_notifications"
+        android:summary="@string/pref_summary__gesture_notifications"
+        android:title="@string/pref_title__gesture_notifications" />
 
     <CheckBoxPreference
         android:defaultValue="false"
@@ -41,13 +41,13 @@
 
         <Preference
             android:defaultValue="0"
-            android:key="@string/pref_key__gesture_pinch"
-            android:title="@string/pref_title__gesture_pinch" />
+            android:key="@string/pref_key__gesture_pinch_in"
+            android:title="@string/pref_title__gesture_pinch_in" />
 
         <Preference
             android:defaultValue="0"
-            android:key="@string/pref_key__gesture_unpinch"
-            android:title="@string/pref_title__gesture_unpinch" />
+            android:key="@string/pref_key__gesture_pinch_out"
+            android:title="@string/pref_title__gesture_pinch_out" />
 
     </PreferenceCategory>
 

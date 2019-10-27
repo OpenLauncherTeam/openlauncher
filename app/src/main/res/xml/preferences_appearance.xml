@@ -40,8 +40,8 @@
     <PreferenceCategory android:title="@string/pref_title__animations">
 
         <SeekBarPreference
-            android:defaultValue="84"
-            android:key="@string/pref_key__overall_animation_speed_modifier"
+            android:defaultValue="80"
+            android:key="@string/pref_key__animation_speed"
             android:max="100"
             android:summary="@string/pref_summary__animation_speed_modifier"
             android:title="@string/pref_title__animation_speed_modifier"

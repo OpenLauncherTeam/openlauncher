@@ -38,7 +38,7 @@
     <string name="pref_title__app_drawer">Aplikaĵujo</string>
     <string name="pref_title__gestures">Gestoj</string>
     <string name="pref_title__icons">Piktogramoj</string>
-    <string name="pref_title__miscellaneous">Diversaĵoj</string>
+    <string name="pref_title__advanced">Diversaĵoj</string>
     <string name="pref_title__about">Pri</string>
 
     <string name="pref_title__size">Grando</string>
@@ -103,8 +103,8 @@
     <string name="pref_title__gesture_double_tap">Duobla frapeto</string>
     <string name="pref_title__gesture_swipe_up">Ŝovumo supren</string>
     <string name="pref_title__gesture_swipe_down">Ŝovumo malsupren</string>
-    <string name="pref_title__gesture_pinch">Amplifi</string>
-    <string name="pref_title__gesture_unpinch">Malamplifi</string>
+    <string name="pref_title__gesture_pinch_in">Amplifi</string>
+    <string name="pref_title__gesture_pinch_out">Malamplifi</string>
 
     <string name="pref_summary__icon_size">Grando de piktogramoj de ĉiuj aplikaĵoj.</string>
     <string name="pref_title__icon_pack">Piktogrampakaĵo</string>

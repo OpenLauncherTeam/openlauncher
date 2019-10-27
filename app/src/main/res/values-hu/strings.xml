@@ -61,7 +61,7 @@
     <string name="pref_title__app_drawer">Alkalmazás szekrény</string>
     <string name="pref_title__appearance">Kinézet</string>
     <string name="pref_title__gestures">Gesztúrák</string>
-    <string name="pref_title__miscellaneous">Apróságok</string>
+    <string name="pref_title__advanced">Apróságok</string>
     <string name="pref_title__about">Rólunk</string>
 
     <string name="pref_title__size">Méret</string>
@@ -116,8 +116,8 @@
     <string name="pref_title__gesture_double_tap">Dupla kattintás</string>
     <string name="pref_title__gesture_swipe_up">Felfelé húzás</string>
     <string name="pref_title__gesture_swipe_down">Lefelé húzás</string>
-    <string name="pref_title__gesture_pinch">Közelíteni</string>
-    <string name="pref_title__gesture_unpinch">Távolítás</string>
+    <string name="pref_title__gesture_pinch_in">Közelíteni</string>
+    <string name="pref_title__gesture_pinch_out">Távolítás</string>
 
     <string name="pref_title__theme">Téma</string>
     <string name="pref_title__primary_color">Elsődleges szín</string>
