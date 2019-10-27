@@ -43,13 +43,17 @@ import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
-import java.text.SimpleDateFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.threeten.bp.ZonedDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 public class SearchBar extends FrameLayout {
+    private static Logger LOG = LoggerFactory.getLogger("SearchBar");
 
     private static final long ANIM_TIME = 200;
     public TextView _searchClock;
@@ -333,21 +337,10 @@ public class SearchBar extends FrameLayout {
             _searchClock.setTextColor(appSettings.getDesktopDateTextColor());
         }
 
-        Calendar calendar = Calendar.getInstance(Locale.getDefault());
-        SimpleDateFormat sdf = _mode.sdf;
+        ZonedDateTime now = ZonedDateTime.now();
+        DateTimeFormatter fmt = _mode.getDateTimeFormat();
 
-        int mode = appSettings.getDesktopDateMode();
-        if (mode >= 0 && mode < Mode.getCount()) {
-            sdf = Mode.getById(mode).sdf;
-            if (mode == 0) {
-                sdf = appSettings.getUserDateFormat();
-            }
-        }
-
-        if (sdf == null) {
-            sdf = Setup.appSettings().getUserDateFormat();
-        }
-        String text = sdf.format(calendar.getTime());
+        String text = now.format(fmt);
         String[] lines = text.split("\n");
         Spannable span = new SpannableString(text);
         span.setSpan(new RelativeSizeSpan(_searchClockSubTextFactor), lines[0].length() + 1, lines[0].length() + 1 + lines[1].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -365,18 +358,18 @@ public class SearchBar extends FrameLayout {
     }
 
     public enum Mode {
-        DateAll(1, new SimpleDateFormat("MMMM dd'\n'EEEE',' yyyy", Locale.getDefault())),
-        DateNoYearAndTime(2, new SimpleDateFormat("MMMM dd'\n'HH':'mm", Locale.getDefault())),
-        DateAllAndTime(3, new SimpleDateFormat("MMMM dd',' yyyy'\n'HH':'mm", Locale.getDefault())),
-        TimeAndDateAll(4, new SimpleDateFormat("HH':'mm'\n'MMMM dd',' yyyy", Locale.getDefault())),
+        DateAll(1, DateTimeFormatter.ofPattern("MMMM dd'\n'EEEE',' yyyy", Locale.getDefault())),
+        DateNoYearAndTime(2, DateTimeFormatter.ofPattern("MMMM dd'\n'HH':'mm", Locale.getDefault())),
+        DateAllAndTime(3, DateTimeFormatter.ofPattern("MMMM dd',' yyyy'\n'HH':'mm", Locale.getDefault())),
+        TimeAndDateAll(4, DateTimeFormatter.ofPattern("HH':'mm'\n'MMMM dd',' yyyy", Locale.getDefault())),
         Custom(0, null);
 
-        SimpleDateFormat sdf;
+        DateTimeFormatter dtf;
         int id;
 
-        Mode(int id, SimpleDateFormat sdf) {
+        Mode(int id, DateTimeFormatter dtf) {
             this.id = id;
-            this.sdf = sdf;
+            this.dtf = dtf;
         }
 
         public static Mode getById(int id) {
@@ -385,6 +378,19 @@ public class SearchBar extends FrameLayout {
                     return values()[i];
             }
             throw new RuntimeException("ID not found!");
+        }
+
+        public DateTimeFormatter getDateTimeFormat() {
+            int mode = Setup.appSettings().getDesktopDateMode();
+            if (mode >= 0 && mode < Mode.getCount()) {
+                dtf = Mode.getById(mode).dtf;
+            }
+
+            if (dtf == null) {
+                dtf = Setup.appSettings().getUserDateFormat();
+            }
+
+            return dtf;
         }
 
 
