@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:title="@string/pref_title__settings">
 
-    <PreferenceCategory android:title="@string/pref_title__interfaces">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__interfaces">
 
         <PreferenceScreen
             android:fragment="com.benny.openlauncher.fragment.SettingsDesktopFragment"
@@ -30,9 +30,9 @@
             android:key="@string/pref_key__cat_appearance"
             android:title="@string/pref_title__appearance" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__others">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__others">
 
         <PreferenceScreen
             android:fragment="com.benny.openlauncher.fragment.SettingsBehaviorFragment"
@@ -56,6 +56,6 @@
             android:key="@string/pref_key__cat_about"
             android:title="@string/pref_title__about" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
 </PreferenceScreen>

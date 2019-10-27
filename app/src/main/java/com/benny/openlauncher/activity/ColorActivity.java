@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppSettings;
 
-public abstract class ThemeActivity extends AppCompatActivity {
+public abstract class ColorActivity extends AppCompatActivity {
 
     protected AppSettings _appSettings;
     private String _currentTheme;

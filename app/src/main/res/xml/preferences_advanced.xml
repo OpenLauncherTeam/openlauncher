@@ -9,7 +9,7 @@
         android:summary="@string/pref_summary__language"
         android:title="@string/pref_title__language" />
 
-    <PreferenceCategory android:title="@string/pref_title__backup">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__backup">
 
         <Preference
             android:key="@string/pref_key__backup"
@@ -21,9 +21,9 @@
             android:summary="@string/pref_summary__restore"
             android:title="@string/pref_title__restore" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__debug">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__debug">
 
         <Preference
             android:key="@string/pref_key__reset_settings"
@@ -40,6 +40,6 @@
             android:summary="@string/pref_summary__restart"
             android:title="@string/pref_title__restart" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
 </PreferenceScreen>

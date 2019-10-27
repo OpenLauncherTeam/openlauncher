@@ -22,7 +22,7 @@
         android:summary="@string/pref_summary__gesture_quick_swipe"
         android:title="@string/pref_title__gesture_quick_swipe" />
 
-    <PreferenceCategory android:title="@string/pref_title__gestures">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__gestures">
 
         <Preference
             android:defaultValue="0"
@@ -49,6 +49,6 @@
             android:key="@string/pref_key__gesture_pinch_out"
             android:title="@string/pref_title__gesture_pinch_out" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
 </PreferenceScreen>

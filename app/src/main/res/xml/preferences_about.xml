@@ -26,7 +26,7 @@
         android:key="@string/pref_key__more_info__help"
         android:title="@string/help" />
 
-    <PreferenceCategory android:title="@string/contribute">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/contribute">
 
         <Preference
             android:icon="@drawable/ic_favorite"
@@ -58,15 +58,15 @@
             android:summary="@string/more_info_foss"
             android:title="@string/android_contribution_guide" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory
+    <com.benny.openlauncher.widget.ColorPreferenceCategory
         android:key="@string/pref_key__more_info__project_team"
         android:title="@string/project_team">
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory
+    <com.benny.openlauncher.widget.ColorPreferenceCategory
         android:key="@string/pref_key__more_info__project_community"
         android:title="@string/community">
 
@@ -81,9 +81,9 @@
             android:summary="@string/contributors_public_info"
             android:title="@string/contributors" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/licenses">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/licenses">
 
         <Preference
             android:icon="@drawable/ic_copyright"
@@ -107,6 +107,6 @@
             android:key="@string/pref_key__more_info__copy_build_information"
             android:title="Copy build information" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
 </PreferenceScreen>
