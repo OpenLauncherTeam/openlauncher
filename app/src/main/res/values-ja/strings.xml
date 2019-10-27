@@ -80,7 +80,6 @@
     <string name="pref_title__icon_pack">アイコンパック</string>
     <string name="pref_summary__icon_pack">インストールしたアイコンパックの選択。</string>
     <string name="pref_title__hide_apps">アプリの非表示</string>
-    <string name="pref_summary__hide_apps">ランチャーから選択したアプリを非表示にします。</string>
 
     <string name="pref_title__backup">バックアップ</string>
     <string name="pref_summary__backup">設定をバックアップおよび復元します。</string>

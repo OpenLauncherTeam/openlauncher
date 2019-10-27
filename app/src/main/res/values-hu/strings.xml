@@ -77,8 +77,6 @@
     <string name="pref_title__debug">Debug</string>
 
     <string name="pref_title__desktop_indicator_style">Jelző stílus</string>
-    <string name="pref_title__desktop_rotate">Forgatás</string>
-    <string name="pref_summary__desktop_rotate">Kijelzőt forgatás engedély</string>
     <string name="pref_title__desktop_show_grid">Négyzetrács mutatása</string>
     <string name="pref_title__desktop_fullscreen">Teljes képernyő</string>
     <string name="pref_title__desktop_show_position_indicator">Pozíció indikátor</string>

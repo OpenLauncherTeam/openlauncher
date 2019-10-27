@@ -87,8 +87,6 @@
 
     <string name="pref_title__desktop_indicator_style">Estilo do indicador</string>
     <string name="pref_summary__minibar">Configure a ordem e a visibilidade dos itens da mini-barra.</string>
-    <string name="pref_title__desktop_rotate">Rodar</string>
-    <string name="pref_summary__desktop_rotate">Permitir rotação do ecrã.</string>
     <string name="pref_title__desktop_show_grid">Mostrar grelha</string>
     <string name="pref_summary__desktop_show_grid">Mostrar grelha de apoio ao arrastar itens.</string>
     <string name="pref_title__desktop_fullscreen">Ecrã completo</string>
@@ -125,7 +123,6 @@
     <string name="pref_title__drawer_style">Estilo</string>
     <string name="pref_summary__drawer_style">Escolher entre o menu de aplicações paginado e o menu vertical.</string>
     <string name="pref_title__hide_apps">Ocultar aplicações</string>
-    <string name="pref_summary__hide_apps">Ocultar do launcher as aplicações selecionadas.</string>
     <string name="pref_title__drawer_show_card_view">Cartões</string>
     <string name="pref_summary__drawer_show_card_view">Mostrar vista de cartões no menu de aplicações.</string>
     <string name="pref_title__drawer_remember_position">Memorizar última página</string>

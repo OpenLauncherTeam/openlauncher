@@ -67,7 +67,6 @@
     <string name="pref_title__drawer_style">Stil</string>
     <string name="pref_summary__drawer_style">Velg mellom en sidevis og vannrett programskuff.</string>
     <string name="pref_title__hide_apps">Skjul programmer</string>
-    <string name="pref_summary__hide_apps">Skjul valgte programmer fra oppstarteren.</string>
     <string name="pref_title__drawer_show_card_view">Kortvisning</string>
     <string name="pref_summary__drawer_show_card_view">Vis et kort over skuffebakgrunnen.</string>
     <string name="pref_title__drawer_remember_position">Husk siste side</string>

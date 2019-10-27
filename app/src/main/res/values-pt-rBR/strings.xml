@@ -56,8 +56,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Exibe o indicador de página abaixo da área de trabalho.</string>
     <string name="pref_title__desktop_show_label">Exibir rótulo</string>
     <string name="pref_summary__desktop_show_label">Exibe o rótulo de um item embaixo do seu ícone.</string>
-    <string name="pref_title__desktop_rotate">Rotação</string>
-    <string name="pref_summary__desktop_rotate">Permite a rotação da tela.</string>
 
     <string name="pref_title__search_bar_base_uri">URL de pesquisa</string>
     <string name="pref_summary__search_bar_base_uri">Define o URL usado para pesquisas na web.</string>
@@ -77,7 +75,6 @@
     <string name="pref_title__drawer_style">Estilo</string>
     <string name="pref_summary__drawer_style">Escolha entre uma gaveta de aplicativos vertical ou paginada.</string>
     <string name="pref_title__hide_apps">Ocultar apps</string>
-    <string name="pref_summary__hide_apps">Oculta os apps selecionados da gaveta.</string>
     <string name="pref_title__drawer_show_card_view">Cartão</string>
     <string name="pref_summary__drawer_show_card_view">Exibe um cartão atrás do plano de fundo da gaveta.</string>
     <string name="pref_title__drawer_remember_position">Lembrar a última página</string>

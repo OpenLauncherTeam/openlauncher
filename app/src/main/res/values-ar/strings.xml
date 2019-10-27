@@ -66,7 +66,6 @@
     <string name="pref_title__drawer_style">التصميم</string>
     <string name="pref_summary__drawer_style">الاختيار بين درج التطبيق المقسم إلى صفحات وبين المقسم إلى أعمدة.</string>
     <string name="pref_title__hide_apps">إخفاء التطبيقات</string>
-    <string name="pref_summary__hide_apps">إخفاء التطبيقات المحددة من المشغل.</string>
     <string name="pref_title__drawer_show_card_view">عرض البطاقة</string>
     <string name="pref_summary__drawer_show_card_view">إظهار طريقة عرض البطاقة أعلى درج التطبيقات .</string>
     <string name="pref_title__drawer_remember_position">تذكر آخر صفحة</string>

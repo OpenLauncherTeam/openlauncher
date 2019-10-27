@@ -124,7 +124,6 @@
     <string name="pref_title__drawer_style">Style</string>
     <string name="pref_summary__drawer_style">Choisir entre un volet d\'applications paginé ou vertical.</string>
     <string name="pref_title__hide_apps">Cacher des applications</string>
-    <string name="pref_summary__hide_apps">Masquer les applications sélectionnées du launcher.</string>
     <string name="pref_title__drawer_show_card_view">Masque</string>
     <string name="pref_summary__drawer_show_card_view">Placer un écran de masquage derrière le volet des applications.</string>
     <string name="pref_title__drawer_remember_position">Se rappeler de la dernière page</string>

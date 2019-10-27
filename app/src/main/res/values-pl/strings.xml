@@ -56,8 +56,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Pokaż wskaźnik strony na dole pulpitu.</string>
     <string name="pref_title__desktop_show_label">Pokaż etykiety</string>
     <string name="pref_summary__desktop_show_label">Pokaż etykiety elementów pod ich ikonami.</string>
-    <string name="pref_title__desktop_rotate">Rotacja ekranu</string>
-    <string name="pref_summary__desktop_rotate">Pozwól na obrót ekranu.</string>
 
     <string name="pref_title__search_bar_base_uri">URI wyszukiwania</string>
     <string name="pref_summary__search_bar_base_uri">Ustaw URI używany do wyszukiwania w Internecie.</string>
@@ -77,7 +75,6 @@
     <string name="pref_title__drawer_style">Styl</string>
     <string name="pref_summary__drawer_style">Wybierz pomiędzy poziomym lub pionowym stylem menu aplikacji.</string>
     <string name="pref_title__hide_apps">Ukryj aplikacje</string>
-    <string name="pref_summary__hide_apps">Ukryj wybrane aplikacje z launchera.</string>
     <string name="pref_title__drawer_show_card_view">Karta</string>
     <string name="pref_summary__drawer_show_card_view">Pokaż kartę nad tłem menu.</string>
     <string name="pref_title__drawer_remember_position">Pamiętaj ostatnią stronę</string>

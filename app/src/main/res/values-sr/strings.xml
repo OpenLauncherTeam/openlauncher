@@ -53,8 +53,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Prikaži indikator stranice ispod desktopa.</string>
     <string name="pref_title__desktop_show_label">Prikaži Oznake</string>
     <string name="pref_summary__desktop_show_label">Prikaži oznake ispod njihovih ikonica.</string>
-    <string name="pref_title__desktop_rotate">Rotiraj</string>
-    <string name="pref_summary__desktop_rotate">Doyvoli rotaciju ekrana.</string>
 
     <string name="pref_title__search_bar_base_uri">Pretraži URI</string>
     <string name="pref_summary__search_bar_base_uri">Postavi URI korišćen za web pretragu.</string>
@@ -74,7 +72,6 @@
     <string name="pref_title__drawer_style">Stil</string>
     <string name="pref_summary__drawer_style">Izaberi između obeleženog i vertikalnog aplikacionog panela.</string>
     <string name="pref_title__hide_apps">Sakrij Aplikacije</string>
-    <string name="pref_summary__hide_apps">Sakrij označene aplikacije iz pokretača.</string>
     <string name="pref_title__drawer_show_card_view">Kartni pregled</string>
     <string name="pref_summary__drawer_show_card_view">Prikaži kartni pregled iznad panela pozadine.</string>
     <string name="pref_title__drawer_remember_position">Zapamti zadnju stranicu</string>

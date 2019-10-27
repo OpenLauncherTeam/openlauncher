@@ -87,8 +87,6 @@
 
     <string name="pref_title__desktop_indicator_style">Istile de s\'indicadore</string>
     <string name="pref_summary__minibar">Cunfigura s\'òrdine e sa visibilidade de sos elementos de sa minibarra.</string>
-    <string name="pref_title__desktop_rotate">Ròdia</string>
-    <string name="pref_summary__desktop_rotate">Permiti sa rotatzione de s\'ischermu</string>
     <string name="pref_title__desktop_show_grid">Ammustra sa grìllia</string>
     <string name="pref_summary__desktop_show_grid">Ammustra sa grìllia de ghia cando ses trisinende elementos.</string>
     <string name="pref_title__desktop_fullscreen">Ischermu intreu</string>
@@ -125,7 +123,6 @@
     <string name="pref_title__drawer_style">Istile</string>
     <string name="pref_summary__drawer_style">Issèbera intre unu menù de sas aplicatziones orizontale o verticale.</string>
     <string name="pref_title__hide_apps">Istichi aplicatziones</string>
-    <string name="pref_summary__hide_apps">Istichi sas aplicatziones ischertadas dae s\'allughidore.</string>
     <string name="pref_title__drawer_show_card_view">Visione a ischeda</string>
     <string name="pref_summary__drawer_show_card_view">Ammustra un\'ischeda in subra de s\'isfundu de su menù de sas aplicatziones.</string>
     <string name="pref_title__drawer_remember_position">Ammenta s\'ùrtima pàgina</string>

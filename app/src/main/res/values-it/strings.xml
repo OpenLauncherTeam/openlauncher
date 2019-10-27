@@ -56,8 +56,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Mostra indicatore delle pagine nel desktop.</string>
     <string name="pref_title__desktop_show_label">Mostra etichette</string>
     <string name="pref_summary__desktop_show_label">Mostra etichette sotto le rispettive icone.</string>
-    <string name="pref_title__desktop_rotate">Rotazione</string>
-    <string name="pref_summary__desktop_rotate">Consenti rotazione schermo.</string>
 
     <string name="pref_title__search_bar_base_uri">Search URI</string>
     <string name="pref_summary__search_bar_base_uri">Imposta l\' URI usato per le ricerche web.</string>
@@ -78,7 +76,6 @@
     <string name="pref_title__drawer_style">Stile</string>
     <string name="pref_summary__drawer_style">Scegli tra un Drawer a pagine o verticale.</string>
     <string name="pref_title__hide_apps">Nascondi app</string>
-    <string name="pref_summary__hide_apps">Nascondi le app selezionate dal Launcher.</string>
     <string name="pref_title__drawer_show_card_view">Sfondo a scheda</string>
     <string name="pref_summary__drawer_show_card_view">Mostra una scheda sopra lo sfondo del Drawer.</string>
     <string name="pref_title__drawer_remember_position">Ricorda ultima pagina</string>

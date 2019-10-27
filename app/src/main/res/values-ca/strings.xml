@@ -61,8 +61,6 @@
 
     <string name="pref_title__desktop_show_label">Mostrar les etiquetes</string>
     <string name="pref_summary__desktop_show_label">Mostra les etiquetes dels items sota de les seves icones.</string>
-    <string name="pref_title__desktop_rotate">Rotació</string>
-    <string name="pref_summary__desktop_rotate">Permet girar la pantalla.</string>
 
     <string name="pref_title__search_bar_base_uri">Motor de cerca</string>
     <string name="pref_summary__search_bar_base_uri">Estableix el motor de cerca utilitzat per les cerces en la web.</string>
@@ -83,7 +81,6 @@
     <string name="pref_title__drawer_style">Estil</string>
     <string name="pref_summary__drawer_style">Tria entre un calaix d\'aplicacions paginat o vertical.</string>
     <string name="pref_title__hide_apps">Amaga aplicacions</string>
-    <string name="pref_summary__hide_apps">Amaga les aplicacions seleccionades des del llançador.</string>
     <string name="pref_title__drawer_show_card_view">Vista de la targeta</string>
     <string name="pref_summary__drawer_show_card_view">Mostra la targeta sobre el fons del calaix.</string>
     <string name="pref_title__drawer_remember_position">Recorda l\'última pàgina</string>

@@ -53,8 +53,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Sken anamal n usebter ddaw n tnarit.</string>
     <string name="pref_title__desktop_show_label">Sken tibzimin</string>
     <string name="pref_summary__desktop_show_label">Sken tibzimin n uferdis ddaw n tgnitin-nsen.</string>
-    <string name="pref_title__desktop_rotate">Zzi</string>
-    <string name="pref_summary__desktop_rotate">Sireg tuzya n ugdil.</string>
 
     <string name="pref_title__search_bar_base_uri">URI n unadi</string>
     <string name="pref_summary__search_bar_base_uri">Sbadu URI yettwaseqdacen i yinadiyen web.</string>
@@ -74,7 +72,6 @@
     <string name="pref_title__drawer_style">Aɣanib</string>
     <string name="pref_summary__drawer_style">Fren gar ugalis n usnas s isebtar neɣ ubdid ubdid.</string>
     <string name="pref_title__hide_apps">Ffer isnasen</string>
-    <string name="pref_summary__hide_apps">Ffer isnasen yettwafernen seg umsenker.</string>
     <string name="pref_title__drawer_show_card_view">Card View</string>
     <string name="pref_summary__drawer_show_card_view">Sers agdil n tuffra deffir n ugalis n yisnasen.</string>
     <string name="pref_title__drawer_remember_position">Cfu ɣef usebter aneggaru</string>

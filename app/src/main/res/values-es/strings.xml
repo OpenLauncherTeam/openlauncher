@@ -61,8 +61,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Muestra el indicador de página debajo del escritorio.</string>
     <string name="pref_title__desktop_show_label">Mostrar las etiquetas</string>
     <string name="pref_summary__desktop_show_label">Muestra las etiquetas de los ítems debajo de sus íconos.</string>
-    <string name="pref_title__desktop_rotate">Rotar</string>
-    <string name="pref_summary__desktop_rotate">Permitir la rotación de la pantalla.</string>
 
     <string name="pref_title__search_bar_base_uri">URI del buscador</string>
     <string name="pref_summary__search_bar_base_uri">Establece el URI utilizado para las búsquedas en la web.</string>
@@ -82,7 +80,6 @@
     <string name="pref_title__drawer_style">Estilo</string>
     <string name="pref_summary__drawer_style">Elige entre un cajón de aplicaciones paginado o vertical.</string>
     <string name="pref_title__hide_apps">Esconder apps</string>
-    <string name="pref_summary__hide_apps">Esconde las aplicaciones seleccionadas desde el lanzador de aplicaciones.</string>
     <string name="pref_title__drawer_show_card_view">Vista de tarjetas</string>
     <string name="pref_summary__drawer_show_card_view">Muestra una tarjeta sobre el fondo del cajón.</string>
     <string name="pref_title__drawer_remember_position">Recuerda la última página</string>

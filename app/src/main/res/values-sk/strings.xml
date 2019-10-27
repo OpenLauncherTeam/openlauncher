@@ -56,8 +56,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Zobrazovať indikátor strany pod plochou.</string>
     <string name="pref_title__desktop_show_label">Zobrazovať štítky</string>
     <string name="pref_summary__desktop_show_label">Zobrazovať štítky s názvom pod ikonami.</string>
-    <string name="pref_title__desktop_rotate">Otáčanie</string>
-    <string name="pref_summary__desktop_rotate">Povoliť otáčanie obrazovky.</string>
 
     <string name="pref_title__search_bar_base_uri">Vyhľadávač URI</string>
     <string name="pref_summary__search_bar_base_uri">Nastavte URI pre vyhľadávanie na webe.</string>
@@ -77,7 +75,6 @@
     <string name="pref_title__drawer_style">Štýl</string>
     <string name="pref_summary__drawer_style">Vyberte si medzi stránkovým alebo vertikálnym zoznamom aplikácií.</string>
     <string name="pref_title__hide_apps">Skryť aplikácie</string>
-    <string name="pref_summary__hide_apps">Skryť vybrané aplikácie v spúštači.</string>
     <string name="pref_title__drawer_show_card_view">Zobrazenie karty</string>
     <string name="pref_summary__drawer_show_card_view">Zobrazovať karty na pozadí zoznamu.</string>
     <string name="pref_title__drawer_remember_position">Pamätať si poslednú stranu</string>
