@@ -69,9 +69,13 @@ public class SettingsBehaviorFragment extends SettingsBaseFragment {
     @Override
     public void updateSummaries() {
         List<Integer> gestures = new ArrayList<>(Arrays.asList(
-                R.string.pref_key__gesture_double_tap, R.string.pref_key__gesture_swipe_up,
-                R.string.pref_key__gesture_swipe_down, R.string.pref_key__gesture_pinch_in,
-                R.string.pref_key__gesture_pinch_out));
+                R.string.pref_key__gesture_double_tap,
+                R.string.pref_key__gesture_swipe_up,
+                R.string.pref_key__gesture_swipe_down,
+                R.string.pref_key__gesture_pinch_in,
+                R.string.pref_key__gesture_pinch_out
+        ));
+
         for (int resId : gestures) {
             Preference preference = findPreference(getString(resId));
             Object gesture = AppSettings.get().getGesture(resId);

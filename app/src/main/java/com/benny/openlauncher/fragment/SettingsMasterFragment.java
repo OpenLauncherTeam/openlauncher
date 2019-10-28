@@ -39,6 +39,7 @@ public class SettingsMasterFragment extends SettingsBaseFragment {
                 startActivity(new Intent(getActivity(), MoreInfoActivity.class));
                 return true;
         }
+
         return false;
     }
 
@@ -51,7 +52,7 @@ public class SettingsMasterFragment extends SettingsBaseFragment {
 
         categoryDesktop.setSummary(String.format(Locale.ENGLISH, "%s: %d x %d", getString(R.string.pref_title__size), AppSettings.get().getDesktopColumnCount(), AppSettings.get().getDesktopRowCount()));
         categoryDock.setSummary(String.format(Locale.ENGLISH, "%s: %d x %d", getString(R.string.pref_title__size), AppSettings.get().getDockColumnCount(), AppSettings.get().getDockRowCount()));
-        categoryAppearance.setSummary(String.format(Locale.ENGLISH, "Icons: %ddp", AppSettings.get().getIconSize()));
+        categoryAppearance.setSummary(String.format(Locale.ENGLISH, "%s: %ddp", getString(R.string.pref_title__icons), AppSettings.get().getIconSize()));
 
         switch (AppSettings.get().getDrawerStyle()) {
             case GRID:
