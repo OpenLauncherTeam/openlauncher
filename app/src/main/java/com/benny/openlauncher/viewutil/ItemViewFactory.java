@@ -82,6 +82,12 @@ public class ItemViewFactory {
         if (HomeActivity._appWidgetHost == null) return null;
 
         final AppWidgetProviderInfo appWidgetInfo = HomeActivity._appWidgetManager.getAppWidgetInfo(item.getWidgetValue());
+
+        // If we can't find the Widget, we don't want to proceed or we'll end up with a phantom on the home screen.
+        if (appWidgetInfo == null) {
+            return null;
+        }
+
         final WidgetView widgetView = (WidgetView) HomeActivity._appWidgetHost.createView(context, item.getWidgetValue(), appWidgetInfo);
         widgetView.setAppWidget(item.getWidgetValue(), appWidgetInfo);
 
