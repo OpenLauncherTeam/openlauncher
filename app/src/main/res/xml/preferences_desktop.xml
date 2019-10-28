@@ -86,13 +86,6 @@
             app:alphaSlider="true" />
 
         <com.flask.colorpicker.ColorPickerPreference
-            android:defaultValue="@color/colorFolder"
-            android:key="@string/pref_key__desktop_folder_color"
-            android:title="@string/pref_title__desktop_folder_color"
-            app:lightnessSlider="true"
-            app:alphaSlider="true" />
-
-        <com.flask.colorpicker.ColorPickerPreference
             android:defaultValue="@color/transparent"
             android:key="@string/pref_key__desktop_inset_color"
             android:title="@string/pref_title__desktop_inset_color"
@@ -100,7 +93,14 @@
             app:alphaSlider="true" />
 
         <com.flask.colorpicker.ColorPickerPreference
-            android:defaultValue="@color/colorPrimaryDark"
+            android:defaultValue="@color/white"
+            android:key="@string/pref_key__desktop_folder_color"
+            android:title="@string/pref_title__desktop_folder_color"
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
+
+        <com.flask.colorpicker.ColorPickerPreference
+            android:defaultValue="@color/colorPrimary"
             android:key="@string/pref_key__minibar_background_color"
             android:title="@string/minibar"
             app:lightnessSlider="true"

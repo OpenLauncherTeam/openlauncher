@@ -116,12 +116,12 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
     }
 
-    public int getDesktopFolderColor() {
-        return getInt(R.string.pref_key__desktop_folder_color, Color.parseColor("#ff3d3d3d"));
+    public int getDesktopInsetColor() {
+        return getInt(R.string.pref_key__desktop_inset_color, Color.TRANSPARENT);
     }
 
-    public int getDesktopInsetColor() {
-        return getInt(R.string.pref_key__desktop_inset_color, ContextCompat.getColor(_context, R.color.transparent));
+    public int getDesktopFolderColor() {
+        return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
     }
 
     public int getMinibarBackgroundColor() {
@@ -185,7 +185,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getDrawerBackgroundColor() {
-        return getInt(R.string.pref_key__drawer_background_color, rcolor(R.color.darkTransparent));
+        return getInt(R.string.pref_key__drawer_background_color, rcolor(R.color.shade));
     }
 
     public int getDrawerCardColor() {

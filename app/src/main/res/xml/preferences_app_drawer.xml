@@ -62,7 +62,7 @@
     <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__color">
 
         <com.flask.colorpicker.ColorPickerPreference
-            android:defaultValue="@color/darkTransparent"
+            android:defaultValue="@color/shade"
             android:key="@string/pref_key__drawer_background_color"
             android:title="@string/pref_title__drawer_background_color"
             app:lightnessSlider="true"
