@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.fragment.SettingsBaseFragment;
 import com.benny.openlauncher.fragment.SettingsMasterFragment;
+import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.BackupHelper;
 import com.benny.openlauncher.util.Definitions;
 import com.nononsenseapps.filepicker.Utils;
@@ -71,7 +72,9 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
                     BackupHelper.backupConfig(this, new File(Utils.getFileForUri(files.get(0)).getAbsolutePath() + "/openlauncher.zip").toString());
                     break;
                 case Definitions.INTENT_RESTORE:
+                    Setup.dataManager().close();
                     BackupHelper.restoreConfig(this, Utils.getFileForUri(files.get(0)).toString());
+                    Setup.dataManager().open();
                     System.exit(0);
                     break;
             }
