@@ -66,15 +66,15 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
+            Setup.dataManager().close();
             List<Uri> files = Utils.getSelectedFilesFromResult(data);
             switch (requestCode) {
                 case Definitions.INTENT_BACKUP:
                     BackupHelper.backupConfig(this, new File(Utils.getFileForUri(files.get(0)).getAbsolutePath() + "/openlauncher.zip").toString());
+                    Setup.dataManager().open();
                     break;
                 case Definitions.INTENT_RESTORE:
-                    Setup.dataManager().close();
                     BackupHelper.restoreConfig(this, Utils.getFileForUri(files.get(0)).toString());
-                    Setup.dataManager().open();
                     System.exit(0);
                     break;
             }

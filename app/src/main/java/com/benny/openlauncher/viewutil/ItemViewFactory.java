@@ -2,6 +2,7 @@ package com.benny.openlauncher.viewutil;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
+import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -17,6 +18,7 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.notifications.NotificationListener;
+import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
@@ -25,7 +27,12 @@ import com.benny.openlauncher.widget.CellContainer;
 import com.benny.openlauncher.widget.WidgetContainer;
 import com.benny.openlauncher.widget.WidgetView;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ItemViewFactory {
+    private static Logger LOG = LoggerFactory.getLogger("ItemViewFactory");
+
     public static View getItemView(final Context context, final DesktopCallback callback, final DragAction.Action type, final Item item) {
         View view = null;
         if (item.getType().equals(Item.Type.WIDGET)) {
@@ -85,7 +92,19 @@ public class ItemViewFactory {
 
         // If we can't find the Widget, we don't want to proceed or we'll end up with a phantom on the home screen.
         if (appWidgetInfo == null) {
-            return null;
+            int appWidgetId = HomeActivity._appWidgetHost.allocateAppWidgetId();
+            if (item._label.contains(Definitions.DELIMITER)) {
+                String[] cnSplit = item._label.split(Definitions.DELIMITER);
+
+                ComponentName cn = new ComponentName(cnSplit[0], cnSplit[1]);
+                if (!HomeActivity._appWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId, cn)) {
+                    LOG.error("Unable to bind app widget id: {} ", cn);
+                    HomeActivity._appWidgetHost.deleteAppWidgetId(appWidgetId); // here it removes the appWidgetId
+                    return null;
+                }
+            } else {
+                return null;
+            }
         }
 
         final WidgetView widgetView = (WidgetView) HomeActivity._appWidgetHost.createView(context, item.getWidgetValue(), appWidgetInfo);

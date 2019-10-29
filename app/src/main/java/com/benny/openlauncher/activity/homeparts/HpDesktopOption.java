@@ -86,7 +86,7 @@ public class HpDesktopOption implements DesktopOptionView.DesktopOptionViewListe
         Bundle extras = data.getExtras();
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
         AppWidgetProviderInfo appWidgetInfo = _homeActivity._appWidgetManager.getAppWidgetInfo(appWidgetId);
-        Item item = Item.newWidgetItem(appWidgetId);
+        Item item = Item.newWidgetItem(appWidgetInfo.provider, appWidgetId);
         Desktop desktop = _homeActivity.getDesktop();
         List<CellContainer> pages = desktop.getPages();
         item._spanX = (appWidgetInfo.minWidth - 1) / pages.get(desktop.getCurrentItem()).getCellWidth() + 1;
