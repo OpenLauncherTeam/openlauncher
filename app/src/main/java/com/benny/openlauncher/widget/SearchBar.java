@@ -48,7 +48,9 @@ import org.slf4j.LoggerFactory;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -66,10 +68,13 @@ public class SearchBar extends FrameLayout {
     private FastItemAdapter<IconLabelItem> _adapter = new FastItemAdapter<>();
     private CallBack _callback;
     private boolean _expanded;
-    private Mode _mode = Mode.DateAll;
     private int _searchClockTextSize = 28;
     private float _searchClockSubTextFactor = 0.5f;
     private int bottomInset;
+
+    private HashMap<Integer, DateTimeFormatter> _clockModes = new HashMap<>(4);
+    private Integer _clockFormatterIndex = -1;
+    private DateTimeFormatter _clockFormatter = null;
 
     public SearchBar(@NonNull Context context) {
         super(context);
@@ -105,6 +110,17 @@ public class SearchBar extends FrameLayout {
         int searchTextMarginTop = dp1 * 4;
         int iconSize = dp1 * 24;
         int iconPadding = dp1 * 6;
+
+        // These have to match the Preferences Array, but without item 0 as that is a custom option which can be changed:
+        //   <item>@string/custom</item>
+        //   <item>February 17\nSaturday, 2018</item>
+        //   <item>February 17\n15:48</item>
+        //   <item>February 17, 2018\n15:48</item>
+        //   <item>15:48\nFebruary 17, 2018</item>
+        _clockModes.put(1, DateTimeFormatter.ofPattern("MMMM dd\nEEEE, yyyy", Locale.getDefault()));
+        _clockModes.put(2, DateTimeFormatter.ofPattern("MMMM dd\nHH:mm", Locale.getDefault()));
+        _clockModes.put(3, DateTimeFormatter.ofPattern("MMMM dd, yyyy\nHH:mm", Locale.getDefault()));
+        _clockModes.put(4, DateTimeFormatter.ofPattern("HH:mm\nMMMM dd, yyyy", Locale.getDefault()));
 
         _searchClock = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.view_search_clock, this, false);
         _searchClock.setTextSize(TypedValue.COMPLEX_UNIT_DIP, _searchClockTextSize);
@@ -345,9 +361,9 @@ public class SearchBar extends FrameLayout {
         }
 
         ZonedDateTime now = ZonedDateTime.now();
-        DateTimeFormatter fmt = _mode.getDateTimeFormat();
+        _clockFormatter = getSearchBarClockFormat(Setup.appSettings().getDesktopDateMode());
 
-        String text = now.format(fmt);
+        String text = now.format(_clockFormatter);
         String[] lines = text.split("\n");
         Spannable span = new SpannableString(text);
         span.setSpan(new RelativeSizeSpan(_searchClockSubTextFactor), lines[0].length() + 1, lines[0].length() + 1 + lines[1].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -364,50 +380,14 @@ public class SearchBar extends FrameLayout {
         return insets;
     }
 
-    public enum Mode {
-        DateAll(1, DateTimeFormatter.ofPattern("MMMM dd'\n'EEEE',' yyyy", Locale.getDefault())),
-        DateNoYearAndTime(2, DateTimeFormatter.ofPattern("MMMM dd'\n'HH':'mm", Locale.getDefault())),
-        DateAllAndTime(3, DateTimeFormatter.ofPattern("MMMM dd',' yyyy'\n'HH':'mm", Locale.getDefault())),
-        TimeAndDateAll(4, DateTimeFormatter.ofPattern("HH':'mm'\n'MMMM dd',' yyyy", Locale.getDefault())),
-        Custom(0, null);
-
-        DateTimeFormatter dtf;
-        int id;
-
-        Mode(int id, DateTimeFormatter dtf) {
-            this.id = id;
-            this.dtf = dtf;
-        }
-
-        public static Mode getById(int id) {
-            for (int i = 0; i < values().length; i++) {
-                if (values()[i].getId() == id)
-                    return values()[i];
+    public DateTimeFormatter getSearchBarClockFormat(Integer id) {
+        if (_clockFormatterIndex != id && id > 0) {
+            if (_clockModes.containsKey(id)) {
+                return _clockModes.get(id);
             }
-            throw new RuntimeException("ID not found!");
         }
 
-        public DateTimeFormatter getDateTimeFormat() {
-            int mode = Setup.appSettings().getDesktopDateMode();
-            if (mode >= 0 && mode < Mode.getCount()) {
-                dtf = Mode.getById(mode).dtf;
-            }
-
-            if (dtf == null) {
-                dtf = Setup.appSettings().getUserDateFormat();
-            }
-
-            return dtf;
-        }
-
-
-        public int getId() {
-            return id;
-        }
-
-        public static int getCount() {
-            return values().length;
-        }
+        return Setup.appSettings().getUserDateFormat();
     }
 
     public interface CallBack {
