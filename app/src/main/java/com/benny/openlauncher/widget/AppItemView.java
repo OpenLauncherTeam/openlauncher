@@ -20,7 +20,7 @@ import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallback;
-import com.benny.openlauncher.viewutil.GroupIconDrawable;
+import com.benny.openlauncher.viewutil.GroupDrawable;
 
 public class AppItemView extends View implements Drawable.Callback, NotificationListener.NotificationCallback {
     private static final int MIN_ICON_TEXT_MARGIN = 8;
@@ -215,12 +215,12 @@ public class AppItemView extends View implements Drawable.Callback, Notification
 
         public Builder setGroupItem(Context context, final DesktopCallback callback, final Item item) {
             _view.setLabel(item.getLabel());
-            _view.setIcon(new GroupIconDrawable(context, item, Setup.appSettings().getIconSize()));
+            _view.setIcon(new GroupDrawable(context, item, Setup.appSettings().getIconSize()));
             _view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (HomeActivity.Companion.getLauncher() != null && (HomeActivity.Companion.getLauncher()).getGroupPopup().showPopup(item, v, callback)) {
-                        ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
+                        ((GroupDrawable) ((AppItemView) v).getIcon()).popUp();
                     }
                 }
             });

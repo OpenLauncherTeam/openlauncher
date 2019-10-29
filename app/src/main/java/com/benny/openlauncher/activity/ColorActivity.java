@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.util.AppSettings;
 
-public abstract class ThemeActivity extends AppCompatActivity {
+public abstract class ColorActivity extends AppCompatActivity {
 
     protected AppSettings _appSettings;
     private String _currentTheme;
@@ -18,6 +18,7 @@ public abstract class ThemeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         _appSettings = AppSettings.get();
         _currentTheme = _appSettings.getTheme();
+
         if (_appSettings.getTheme().equals("0")) {
             setTheme(R.style.NormalActivity_Light);
         } else if (_appSettings.getTheme().equals("1")) {
@@ -25,10 +26,12 @@ public abstract class ThemeActivity extends AppCompatActivity {
         } else {
             setTheme(R.style.NormalActivity_Black);
         }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(dark(_appSettings.getPrimaryColor(), 0.8));
             getWindow().setNavigationBarColor(_appSettings.getPrimaryColor());
         }
+
         super.onCreate(savedInstanceState);
     }
 

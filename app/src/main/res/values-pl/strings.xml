@@ -33,7 +33,7 @@
     <string name="pref_title__app_drawer">Menu aplikacji</string>
     <string name="pref_title__gestures">Gesty</string>
     <string name="pref_title__icons">Ikony</string>
-    <string name="pref_title__miscellaneous">Różne</string>
+    <string name="pref_title__advanced">Różne</string>
     <string name="pref_title__about">O programie</string>
 
     <string name="pref_title__size">Wielkość</string>
@@ -47,7 +47,6 @@
     <string name="pref_title__others">Inne</string>
 
     <string name="pref_title__desktop_indicator_style">Styl wskaźnika</string>
-    <string name="pref_summary__minibar">Zmień kolejność i widoczność elementów na minipasku.</string>
     <string name="pref_title__search_bar_enable">Pasek wyszukiwania</string>
     <string name="pref_summary__search_bar_enable">Pokaż pasek wyszukiwania na górze pulpitu.</string>
     <string name="pref_title__desktop_fullscreen">Pełny ekran</string>
@@ -56,8 +55,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Pokaż wskaźnik strony na dole pulpitu.</string>
     <string name="pref_title__desktop_show_label">Pokaż etykiety</string>
     <string name="pref_summary__desktop_show_label">Pokaż etykiety elementów pod ich ikonami.</string>
-    <string name="pref_title__desktop_rotate">Rotacja ekranu</string>
-    <string name="pref_summary__desktop_rotate">Pozwól na obrót ekranu.</string>
 
     <string name="pref_title__search_bar_base_uri">URI wyszukiwania</string>
     <string name="pref_summary__search_bar_base_uri">Ustaw URI używany do wyszukiwania w Internecie.</string>
@@ -66,7 +63,6 @@
     <string name="pref_summary__search_bar_force_browser">Zawsze używaj przeglądarki do wyszukiwania online.</string>
     <string name="pref_title__desktop_background_color">Tło</string>
     <string name="pref_title__desktop_folder_color">Tło folderu</string>
-    <string name="pref_title__desktop_folder_color_text">Tekst folderu</string>
     <string name="pref_title__search_bar_show_hidden_apps">Pokaż ukryte aplikacje</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Uwzględnij ukryte aplikacje w wynikach wyszukiwania.</string>
 
@@ -77,7 +73,6 @@
     <string name="pref_title__drawer_style">Styl</string>
     <string name="pref_summary__drawer_style">Wybierz pomiędzy poziomym lub pionowym stylem menu aplikacji.</string>
     <string name="pref_title__hide_apps">Ukryj aplikacje</string>
-    <string name="pref_summary__hide_apps">Ukryj wybrane aplikacje z launchera.</string>
     <string name="pref_title__drawer_show_card_view">Karta</string>
     <string name="pref_summary__drawer_show_card_view">Pokaż kartę nad tłem menu.</string>
     <string name="pref_title__drawer_remember_position">Pamiętaj ostatnią stronę</string>
@@ -102,8 +97,8 @@
     <string name="pref_title__gesture_double_tap">Podwójne dotknięcie</string>
     <string name="pref_title__gesture_swipe_up">Przesunięcie do góry</string>
     <string name="pref_title__gesture_swipe_down">Przesunięcie w dół</string>
-    <string name="pref_title__gesture_pinch">Uszczypnięcie</string>
-    <string name="pref_title__gesture_unpinch">Gest powiększenia</string>
+    <string name="pref_title__gesture_pinch_in">Uszczypnięcie</string>
+    <string name="pref_title__gesture_pinch_out">Gest powiększenia</string>
 
     <string name="pref_summary__icon_size">Rozmiar wszystkich ikon aplikacji.</string>
     <string name="pref_title__icon_pack">Zestaw ikon</string>
@@ -191,9 +186,9 @@
     <string name="rate_the_app">Oceń tę aplikację</string>
     <string name="translate">Przetłumacz</string>
     <string name="bug_reports">Zgłoś błędy</string>
-    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Więcej informacji na temat przekazywania darowizny lub wspierania tego projektu w inny sposób</string>
+    <string name="more_info_support">Więcej informacji na temat przekazywania darowizny lub wspierania tego projektu w inny sposób</string>
     <string name="android_contribution_guide">Przewodnik współtworzenia Android</string>
-    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Więcej informacji na temat współtworzenia projektów open-source, a zwłaszcza aplikacji na Androida</string>
+    <string name="more_info_foss">Więcej informacji na temat współtworzenia projektów open-source, a zwłaszcza aplikacji na Androida</string>
     <string name="join_community">Dołącz do społeczności</string>
     <string name="bug_reports_suggest_improvements">Prześlij informację zwrotną, zgłoś błędy lub zaproponuj ulepszenia</string>
     <string name="help_translating_this_app">Przetłumacz tę aplikację na inne języki</string>

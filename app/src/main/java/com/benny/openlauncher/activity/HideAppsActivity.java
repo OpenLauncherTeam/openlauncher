@@ -16,7 +16,7 @@ import com.benny.openlauncher.util.AppManager;
 
 import java.util.ArrayList;
 
-public class HideAppsActivity extends ThemeActivity {
+public class HideAppsActivity extends ColorActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

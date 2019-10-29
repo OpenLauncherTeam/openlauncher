@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:title="@string/pref_title__settings">
 
-    <PreferenceCategory android:title="@string/pref_title__interfaces">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__interfaces">
 
         <PreferenceScreen
             android:fragment="com.benny.openlauncher.fragment.SettingsDesktopFragment"
@@ -30,9 +30,9 @@
             android:key="@string/pref_key__cat_appearance"
             android:title="@string/pref_title__appearance" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__others">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__others">
 
         <PreferenceScreen
             android:fragment="com.benny.openlauncher.fragment.SettingsBehaviorFragment"
@@ -42,15 +42,20 @@
 
         <PreferenceScreen
             android:fragment="com.benny.openlauncher.fragment.SettingsMiscellaneousFragment"
-            android:icon="@drawable/ic_more"
-            android:key="@string/pref_key__cat_miscellaneous"
-            android:title="@string/pref_title__miscellaneous" />
+            android:icon="@drawable/ic_code"
+            android:key="@string/pref_key__cat_advanced"
+            android:title="@string/pref_title__advanced" />
+
+        <PreferenceScreen
+            android:icon="@drawable/ic_visibility"
+            android:key="@string/pref_key__cat_hide_apps"
+            android:title="@string/pref_title__hide_apps" />
 
         <PreferenceScreen
             android:icon="@drawable/ic_info"
             android:key="@string/pref_key__cat_about"
             android:title="@string/pref_title__about" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
 </PreferenceScreen>

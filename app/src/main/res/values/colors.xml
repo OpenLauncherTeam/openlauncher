@@ -3,7 +3,6 @@
     <color name="colorPrimary">#5c6bc0</color>
     <color name="colorPrimaryDark">#4254b3</color>
     <color name="colorAccent">#5c6bc0</color>
-    <color name="colorFolder">#ff3d3d3d</color>
 
     <color name="Light.Background">#f9f9f9</color>
     <color name="Light.TextColor">#616161</color>
@@ -17,8 +16,7 @@
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="darkTransparent">#B0000000</color>
-    <color name="transparent">#00000000</color>
+    <color name="shade">#B0000000</color>
 
     <color name="materialRed">#d6552e</color>
     <color name="materialGreen">#b4c64a</color>

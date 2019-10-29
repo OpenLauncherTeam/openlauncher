@@ -31,7 +31,7 @@
     <string name="pref_title__app_drawer">Меню приложений</string>
     <string name="pref_title__gestures">Жесты</string>
     <string name="pref_title__icons">Значки</string>
-    <string name="pref_title__miscellaneous">Разное</string>
+    <string name="pref_title__advanced">Разное</string>
     <string name="pref_title__about">О программе</string>
 
     <string name="pref_title__size">Размер</string>
@@ -45,7 +45,6 @@
     <string name="pref_title__others">Другое</string>
 
     <string name="pref_title__desktop_indicator_style">Стиль индикатора</string>
-    <string name="pref_summary__minibar">Изменить порядок и видимость элементов мини-бара.</string>
     <string name="pref_title__search_bar_enable">Строка поиска</string>
     <string name="pref_summary__search_bar_enable">Показывать строку поиска на рабочем столе.</string>
     <string name="pref_title__desktop_fullscreen">Полноэкранный режим</string>
@@ -54,8 +53,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Показывать индикатор страниц внизу рабочего стола.</string>
     <string name="pref_title__desktop_show_label">Показывать подписи</string>
     <string name="pref_summary__desktop_show_label">Показывать подписи под значками.</string>
-    <string name="pref_title__desktop_rotate">Поворот</string>
-    <string name="pref_summary__desktop_rotate">Разрешить поворот экрана.</string>
 
     <string name="pref_title__search_bar_base_uri">URI поиска</string>
     <string name="pref_summary__search_bar_base_uri">Установить URI поисковой системы.</string>
@@ -73,7 +70,6 @@
     <string name="pref_title__drawer_style">Стиль</string>
     <string name="pref_summary__drawer_style">Выбрать между постраничным и вертикальным меню приложений.</string>
     <string name="pref_title__hide_apps">Скрыть приложения</string>
-    <string name="pref_summary__hide_apps">Скрыть выбранные приложения из лаунчера.</string>
     <string name="pref_title__drawer_show_card_view">Карточка</string>
     <string name="pref_summary__drawer_show_card_view">Показывать карточку поверх фона меню.</string>
     <string name="pref_title__drawer_remember_position">Запоминать последнюю страницу</string>

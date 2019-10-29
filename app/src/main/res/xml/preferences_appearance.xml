@@ -20,7 +20,7 @@
         app:lightnessSlider="true"
         app:alphaSlider="true" />
 
-    <PreferenceCategory android:title="@string/pref_title__icons">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__icons">
 
         <SeekBarPreference
             android:defaultValue="52"
@@ -35,18 +35,18 @@
             android:summary="@string/pref_summary__icon_pack"
             android:title="@string/pref_title__icon_pack" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__animations">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__animations">
 
         <SeekBarPreference
-            android:defaultValue="84"
-            android:key="@string/pref_key__overall_animation_speed_modifier"
+            android:defaultValue="80"
+            android:key="@string/pref_key__animation_speed"
             android:max="100"
             android:summary="@string/pref_summary__animation_speed_modifier"
             android:title="@string/pref_title__animation_speed_modifier"
             app:min="1" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
 </PreferenceScreen>

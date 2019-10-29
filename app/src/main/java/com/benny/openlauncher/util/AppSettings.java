@@ -113,12 +113,12 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
     }
 
-    public int getDesktopFolderColor() {
-        return getInt(R.string.pref_key__desktop_folder_color, Color.parseColor("#ff3d3d3d"));
+    public int getDesktopInsetColor() {
+        return getInt(R.string.pref_key__desktop_inset_color, Color.TRANSPARENT);
     }
 
-    public int getDesktopInsetColor() {
-        return getInt(R.string.pref_key__desktop_inset_color, ContextCompat.getColor(_context, R.color.transparent));
+    public int getDesktopFolderColor() {
+        return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
     }
 
     public int getMinibarBackgroundColor() {
@@ -182,7 +182,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getDrawerBackgroundColor() {
-        return getInt(R.string.pref_key__drawer_background_color, rcolor(R.color.darkTransparent));
+        return getInt(R.string.pref_key__drawer_background_color, rcolor(R.color.shade));
     }
 
     public int getDrawerCardColor() {
@@ -218,11 +218,11 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public Object getGesturePinch() {
-        return getGesture(R.string.pref_key__gesture_pinch);
+        return getGesture(R.string.pref_key__gesture_pinch_in);
     }
 
     public Object getGestureUnpinch() {
-        return getGesture(R.string.pref_key__gesture_unpinch);
+        return getGesture(R.string.pref_key__gesture_pinch_out);
     }
 
     public Object getGesture(int key) {
@@ -258,7 +258,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public boolean getNotificationStatus() {
-        return getBool(R.string.pref_key__icon_show_notifications, false);
+        return getBool(R.string.pref_key__gesture_notifications, false);
     }
 
     public void setIconPack(String value) {
@@ -266,8 +266,8 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getAnimationSpeed() {
-        // invert the value because it is used as a duration
-        return 100 - getInt(R.string.pref_key__overall_animation_speed_modifier, 84);
+        // invert the value because it is used as a multiplier
+        return 100 - getInt(R.string.pref_key__animation_speed, 80);
     }
 
     public String getLanguage() {
@@ -316,11 +316,11 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public ArrayList<String> getHiddenAppsList() {
-        return getStringList(R.string.pref_key__hide_apps);
+        return getStringList(R.string.pref_key__hidden_apps);
     }
 
     public void setHiddenAppsList(ArrayList<String> value) {
-        setStringList(R.string.pref_key__hide_apps, value);
+        setStringList(R.string.pref_key__hidden_apps, value);
     }
 
     public int getDesktopPageCurrent() {

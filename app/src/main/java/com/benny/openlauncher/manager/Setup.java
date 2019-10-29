@@ -51,10 +51,6 @@ public abstract class Setup {
         return get().getEventHandler();
     }
 
-    public static Logger logger() {
-        return get().getLogger();
-    }
-
     public abstract Context getAppContext();
 
     public abstract AppSettings getAppSettings();
@@ -67,8 +63,6 @@ public abstract class Setup {
 
     public abstract EventHandler getEventHandler();
 
-    public abstract Logger getLogger();
-
     public interface EventHandler {
         void showLauncherSettings(Context context);
 
@@ -77,9 +71,5 @@ public abstract class Setup {
         void showEditDialog(Context context, Item item, DialogListener.OnEditDialogListener listener);
 
         void showDeletePackageDialog(Context context, Item item);
-    }
-
-    public interface Logger {
-        void log(Object source, int priority, String tag, String msg, Object... args);
     }
 }

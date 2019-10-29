@@ -25,7 +25,7 @@ public class SettingsMiscellaneousFragment extends SettingsBaseFragment {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        addPreferencesFromResource(R.xml.preferences_miscellaneous);
+        addPreferencesFromResource(R.xml.preferences_advanced);
     }
 
     @Override

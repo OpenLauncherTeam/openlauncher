@@ -33,19 +33,12 @@ buildscript {
         maven { url 'https://maven.google.com' }
         jcenter()
         maven { url "https://jitpack.io" }
-        mavenCentral()
         google()
     }
 
     dependencies {
         classpath "com.android.tools.build:gradle:${version_gradle_tools}"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        if (project.enable_plugin_kotlin) {
-            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${version_plugin_kotlin}"
-        }
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
@@ -54,7 +47,6 @@ allprojects {
         maven { url 'https://maven.google.com' }
         jcenter()
         maven { url "https://jitpack.io" }
-        mavenCentral()
     }
 
     tasks.matching { task -> task.name.matches('.*generate.*Resources') }.all {

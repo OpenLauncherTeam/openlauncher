@@ -29,15 +29,15 @@
     <string name="minibar_summary__search_bar">Abrir barra de pesquisa.</string>
     <string name="minibar_title__mobile_network">Definições em redes móveis</string>
     <string name="minibar_summary__mobile_network">Atalho para as definições de redes móveis.</string>
-    <string name="minibar_title__show_notifications">Mostrar notificações</string>
-    <string name="minibar_summary__show_notifications">Expandir notificações no topo do ecrã.</string>
+    <string name="minibar_title__notification_bar">Mostrar notificações</string>
+    <string name="minibar_summary__notification_bar">Expandir notificações no topo do ecrã.</string>
 
     <!-- About -->
     <string name="about_libs">Bibliotecas de código aberto</string>
     <string name="about_rate">Avaliar</string>
     <string name="about_credit">Colaboradores</string>
     <string name="community">Comunidade</string>
-    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Mais informações sobre como  contribuir em projetos Open Source, em especial para aplicações Android</string>
+    <string name="more_info_foss">Mais informações sobre como  contribuir em projetos Open Source, em especial para aplicações Android</string>
     <string name="join_community">Integrar a comunidade</string>
     <string name="bug_reports_suggest_improvements">Comentários, reporte de erros e sugestões</string>
     <string name="help_translating_this_app">Traduzir esta aplicação</string>
@@ -59,7 +59,7 @@
     <string name="rate_the_app">Avaliar</string>
     <string name="translate">Traduzir</string>
     <string name="bug_reports">Reporte de erros</string>
-    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Mais informações sobre donativos ou outro tipo de ajuda para este projeto</string>
+    <string name="more_info_support">Mais informações sobre donativos ou outro tipo de ajuda para este projeto</string>
     <string name="android_contribution_guide">Manual de contributos para Android</string>
 
     <!-- Settings -->
@@ -70,7 +70,7 @@
     <string name="pref_title__appearance">Aparência</string>
     <string name="pref_title__gestures">Gestos</string>
     <string name="pref_title__behavior">Comportamento</string>
-    <string name="pref_title__miscellaneous">Diversas</string>
+    <string name="pref_title__advanced">Diversas</string>
     <string name="pref_title__about">Acerca</string>
 
     <string name="pref_title__size">Tamanho</string>
@@ -86,9 +86,6 @@
     <string name="pref_title__debug">Depuração</string>
 
     <string name="pref_title__desktop_indicator_style">Estilo do indicador</string>
-    <string name="pref_summary__minibar">Configure a ordem e a visibilidade dos itens da mini-barra.</string>
-    <string name="pref_title__desktop_rotate">Rodar</string>
-    <string name="pref_summary__desktop_rotate">Permitir rotação do ecrã.</string>
     <string name="pref_title__desktop_show_grid">Mostrar grelha</string>
     <string name="pref_summary__desktop_show_grid">Mostrar grelha de apoio ao arrastar itens.</string>
     <string name="pref_title__desktop_fullscreen">Ecrã completo</string>
@@ -99,7 +96,6 @@
     <string name="pref_summary__desktop_show_label">Mostrar nome do item abaixo do ícone.</string>
     <string name="pref_title__desktop_background_color">Fundo</string>
     <string name="pref_title__desktop_folder_color">Fundo da pasta</string>
-    <string name="pref_title__desktop_folder_color_text">Texto da pasta</string>
     <string name="pref_title__desktop_inset_color">Barras de sistema</string>
 
     <string name="pref_title__search_bar_enable">Barra de pesquisa</string>
@@ -125,7 +121,6 @@
     <string name="pref_title__drawer_style">Estilo</string>
     <string name="pref_summary__drawer_style">Escolher entre o menu de aplicações paginado e o menu vertical.</string>
     <string name="pref_title__hide_apps">Ocultar aplicações</string>
-    <string name="pref_summary__hide_apps">Ocultar do launcher as aplicações selecionadas.</string>
     <string name="pref_title__drawer_show_card_view">Cartões</string>
     <string name="pref_summary__drawer_show_card_view">Mostrar vista de cartões no menu de aplicações.</string>
     <string name="pref_title__drawer_remember_position">Memorizar última página</string>
@@ -147,8 +142,8 @@
     <string name="pref_title__gesture_double_tap">Toque duplo</string>
     <string name="pref_title__gesture_swipe_up">Deslize para cima</string>
     <string name="pref_title__gesture_swipe_down">Deslize para baixo</string>
-    <string name="pref_title__gesture_pinch">Apertar</string>
-    <string name="pref_title__gesture_unpinch">Afastar</string>
+    <string name="pref_title__gesture_pinch_in">Apertar</string>
+    <string name="pref_title__gesture_pinch_out">Afastar</string>
 
     <string name="pref_title__theme">Tema</string>
     <string name="pref_summary__theme">Definir o tema de toda a aplicação.</string>

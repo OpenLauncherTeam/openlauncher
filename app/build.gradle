@@ -85,7 +85,6 @@ android {
     lintOptions {
         disable 'MissingTranslation'
         disable 'InvalidPackage'
-        disable 'ExtraTranslation'
     }
 }
 

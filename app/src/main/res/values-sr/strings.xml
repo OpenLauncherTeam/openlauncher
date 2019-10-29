@@ -30,7 +30,7 @@
     <string name="pref_title__app_drawer">Aplikacioni panel</string>
     <string name="pref_title__gestures">Gestovi</string>
     <string name="pref_title__icons">Ikonice</string>
-    <string name="pref_title__miscellaneous">Ostalo</string>
+    <string name="pref_title__advanced">Ostalo</string>
     <string name="pref_title__about">O proizvodu</string>
 
     <string name="pref_title__size">Veličina</string>
@@ -44,7 +44,6 @@
     <string name="pref_title__others">Ostalo</string>
 
     <string name="pref_title__desktop_indicator_style">Stil indikatora</string>
-    <string name="pref_summary__minibar">Podesi redosled i vidljivost stvari u minibaru.</string>
     <string name="pref_title__search_bar_enable">Pretraga</string>
     <string name="pref_summary__search_bar_enable">Prikaži pretragu iznad desktopa.</string>
     <string name="pref_title__desktop_fullscreen">Ceo ekran</string>
@@ -53,8 +52,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Prikaži indikator stranice ispod desktopa.</string>
     <string name="pref_title__desktop_show_label">Prikaži Oznake</string>
     <string name="pref_summary__desktop_show_label">Prikaži oznake ispod njihovih ikonica.</string>
-    <string name="pref_title__desktop_rotate">Rotiraj</string>
-    <string name="pref_summary__desktop_rotate">Doyvoli rotaciju ekrana.</string>
 
     <string name="pref_title__search_bar_base_uri">Pretraži URI</string>
     <string name="pref_summary__search_bar_base_uri">Postavi URI korišćen za web pretragu.</string>
@@ -74,7 +71,6 @@
     <string name="pref_title__drawer_style">Stil</string>
     <string name="pref_summary__drawer_style">Izaberi između obeleženog i vertikalnog aplikacionog panela.</string>
     <string name="pref_title__hide_apps">Sakrij Aplikacije</string>
-    <string name="pref_summary__hide_apps">Sakrij označene aplikacije iz pokretača.</string>
     <string name="pref_title__drawer_show_card_view">Kartni pregled</string>
     <string name="pref_summary__drawer_show_card_view">Prikaži kartni pregled iznad panela pozadine.</string>
     <string name="pref_title__drawer_remember_position">Zapamti zadnju stranicu</string>
@@ -95,8 +91,8 @@
     <string name="pref_title__gesture_double_tap">Dupli klik</string>
     <string name="pref_title__gesture_swipe_up">Prevucite Gore</string>
     <string name="pref_title__gesture_swipe_down">Prevucite Dole</string>
-    <string name="pref_title__gesture_pinch">Uredi</string>
-    <string name="pref_title__gesture_unpinch">Neuredi</string>
+    <string name="pref_title__gesture_pinch_in">Uredi</string>
+    <string name="pref_title__gesture_pinch_out">Neuredi</string>
 
     <string name="pref_summary__icon_size">Veličina svih ikonica.</string>
     <string name="pref_title__icon_pack">Setovi ikonica</string>
