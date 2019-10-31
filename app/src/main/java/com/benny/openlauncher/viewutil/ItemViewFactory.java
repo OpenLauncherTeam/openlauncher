@@ -113,6 +113,7 @@ public class ItemViewFactory {
                 }
             } else {
                 // Delete the Widget if we don't have enough information to rehydrate it.
+                LOG.debug("Unable to identify Widget for rehydration; removing from database");
                 HomeActivity._db.deleteItem(item, false);
                 return null;
             }
