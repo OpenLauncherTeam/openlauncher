@@ -81,10 +81,10 @@ public class Item {
         return item;
     }
 
-    public static Item newWidgetItem(ComponentName cn, int widgetValue) {
+    public static Item newWidgetItem(ComponentName componentName, int widgetValue) {
         Item item = new Item();
         item._type = Type.WIDGET;
-        item._label = cn.getPackageName() + Definitions.DELIMITER + cn.getClassName();
+        item._label = componentName.getPackageName() + Definitions.DELIMITER + componentName.getClassName();
         item._widgetValue = widgetValue;
         item._spanX = 1;
         item._spanY = 1;
