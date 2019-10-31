@@ -319,7 +319,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         _timeChangedReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(Intent.ACTION_TIME_TICK) || intent.getAction().equals(Intent.ACTION_TIMEZONE_CHANGED) || intent.getAction().equals(Intent.ACTION_TIME_CHANGED)) {
+                if (intent.getAction().equals(Intent.ACTION_TIME_TICK)
+                        || intent.getAction().equals(Intent.ACTION_TIMEZONE_CHANGED)
+                        || intent.getAction().equals(Intent.ACTION_TIME_CHANGED)) {
                     updateSearchClock();
                 }
             }
