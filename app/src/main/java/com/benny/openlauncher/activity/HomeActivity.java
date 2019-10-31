@@ -112,12 +112,10 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         _timeChangedIntentFilter.addAction(Intent.ACTION_TIME_TICK);
         _timeChangedIntentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
         _timeChangedIntentFilter.addAction(Intent.ACTION_TIME_CHANGED);
-
         _appUpdateIntentFilter.addDataScheme("package");
         _appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
         _appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_REMOVED);
         _appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_CHANGED);
-        
         _shortcutIntentFilter.addAction("com.android.launcher.action.INSTALL_SHORTCUT");
     }
 
