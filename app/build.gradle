@@ -97,7 +97,8 @@ dependencies {
     implementation "com.android.support:support-v13:${version_library_appcompat}"
     implementation "com.android.support:preference-v7:${version_library_appcompat}"
     implementation "com.android.support:preference-v14:${version_library_appcompat}"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 
     // UI Libs
     implementation 'com.mikepenz:fastadapter:3.2.3@aar'

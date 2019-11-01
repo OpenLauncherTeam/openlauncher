@@ -14,6 +14,8 @@ import com.benny.openlauncher.widget.PagerIndicator;
 
 import net.gsantner.opoc.preference.SharedPreferencesPropertyBackend;
 
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -92,16 +94,11 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getBool(R.string.pref_key__search_bar_show_hidden_apps, false);
     }
 
-    @SuppressLint("SimpleDateFormat")
-    public SimpleDateFormat getUserDateFormat() {
+    public DateTimeFormatter getUserDateFormat() {
         String line1 = getString(R.string.pref_key__date_bar_date_format_custom_1, rstr(R.string.pref_default__date_bar_date_format_custom_1));
         String line2 = getString(R.string.pref_key__date_bar_date_format_custom_2, rstr(R.string.pref_default__date_bar_date_format_custom_2));
 
-        try {
-            return new SimpleDateFormat((line1 + "'\n'" + line2).replace("''", ""), Locale.getDefault());
-        } catch (Exception ex) {
-            return new SimpleDateFormat("'Invalid pattern''\n''Invalid Pattern'");
-        }
+        return DateTimeFormatter.ofPattern(line1 +  "'\n'" + line2);
     }
 
     public int getDesktopDateMode() {
