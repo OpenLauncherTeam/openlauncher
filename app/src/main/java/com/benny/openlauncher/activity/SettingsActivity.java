@@ -25,7 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsActivity extends ThemeActivity implements SettingsBaseFragment.OnPreferenceStartFragmentCallback {
+public class SettingsActivity extends ColorActivity implements SettingsBaseFragment.OnPreferenceStartFragmentCallback {
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 

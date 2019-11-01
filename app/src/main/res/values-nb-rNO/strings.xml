@@ -42,13 +42,12 @@
     <string name="pref_title__app_drawer">Programskuff</string>
     <string name="pref_title__gestures">Berøringsbevegelser</string>
     <string name="pref_title__icons">Ikoner</string>
-    <string name="pref_title__miscellaneous">Ymse</string>
+    <string name="pref_title__advanced">Ymse</string>
 
     <string name="pref_title__size">Størrelse</string>
     <string name="pref_title__appearance">Utseende</string>
     <string name="pref_title__color">Farger</string>
 
-    <string name="pref_summary__minibar">Sett opp rekkefølgen og synligheten for sidefeltselementene.</string>
     <string name="pref_title__search_bar_enable">Søkefelt</string>
     <string name="pref_summary__search_bar_enable">Vis et søkefelt på toppen av skrivebordet.</string>
     <string name="pref_title__desktop_fullscreen">Fullskjermsvisning</string>
@@ -67,7 +66,6 @@
     <string name="pref_title__drawer_style">Stil</string>
     <string name="pref_summary__drawer_style">Velg mellom en sidevis og vannrett programskuff.</string>
     <string name="pref_title__hide_apps">Skjul programmer</string>
-    <string name="pref_summary__hide_apps">Skjul valgte programmer fra oppstarteren.</string>
     <string name="pref_title__drawer_show_card_view">Kortvisning</string>
     <string name="pref_summary__drawer_show_card_view">Vis et kort over skuffebakgrunnen.</string>
     <string name="pref_title__drawer_remember_position">Husk siste side</string>
@@ -85,8 +83,8 @@
     <string name="pref_title__gesture_double_tap">Dobbelttrykk</string>
     <string name="pref_title__gesture_swipe_up">Dra oppover</string>
     <string name="pref_title__gesture_swipe_down">Dra nedover</string>
-    <string name="pref_title__gesture_pinch">Knip</string>
-    <string name="pref_title__gesture_unpinch">Utvid knipetak</string>
+    <string name="pref_title__gesture_pinch_in">Knip</string>
+    <string name="pref_title__gesture_pinch_out">Utvid knipetak</string>
 
     <string name="pref_summary__icon_size">Størrelse for alle programikoner.</string>
     <string name="pref_title__icon_pack">Ikonpakke</string>

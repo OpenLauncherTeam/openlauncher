@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:title="@string/pref_title__desktop">
 
-    <PreferenceCategory android:title="@string/pref_title__size">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__size">
 
         <SeekBarPreference
             android:defaultValue="5"
@@ -21,9 +21,9 @@
             android:title="@string/rows"
             app:min="2" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__appearance">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__appearance">
 
         <ListPreference
             android:defaultValue="0"
@@ -34,15 +34,7 @@
 
         <Preference
             android:key="@string/pref_key__minibar"
-            android:summary="@string/pref_summary__minibar"
             android:title="@string/minibar" />
-
-        <ListPreference
-            android:defaultValue="0"
-            android:entries="@array/entries__orientation_mode"
-            android:entryValues="@array/values__zero_to_two"
-            android:key="@string/pref_key__desktop_orientation"
-            android:title="@string/pref_title__desktop_orientation" />
 
         <ListPreference
             android:defaultValue="0"
@@ -50,6 +42,13 @@
             android:entryValues="@array/values__zero_to_two"
             android:key="@string/pref_key__desktop_wallpaper_scroll"
             android:title="@string/pref_title__desktop_wallpaper_scroll" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/entries__orientation_mode"
+            android:entryValues="@array/values__zero_to_two"
+            android:key="@string/pref_key__desktop_orientation"
+            android:title="@string/pref_title__desktop_orientation" />
 
         <CheckBoxPreference
             android:defaultValue="true"
@@ -75,21 +74,14 @@
             android:summary="@string/pref_summary__desktop_show_label"
             android:title="@string/pref_title__desktop_show_label" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__color">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__color">
 
         <com.flask.colorpicker.ColorPickerPreference
             android:defaultValue="@color/transparent"
             android:key="@string/pref_key__desktop_background_color"
             android:title="@string/pref_title__desktop_background_color"
-            app:lightnessSlider="true"
-            app:alphaSlider="true" />
-
-        <com.flask.colorpicker.ColorPickerPreference
-            android:defaultValue="@color/colorFolder"
-            android:key="@string/pref_key__desktop_folder_color"
-            android:title="@string/pref_title__desktop_folder_color"
             app:lightnessSlider="true"
             app:alphaSlider="true" />
 
@@ -101,15 +93,22 @@
             app:alphaSlider="true" />
 
         <com.flask.colorpicker.ColorPickerPreference
-            android:defaultValue="@color/colorPrimaryDark"
+            android:defaultValue="@color/white"
+            android:key="@string/pref_key__desktop_folder_color"
+            android:title="@string/pref_title__desktop_folder_color"
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
+
+        <com.flask.colorpicker.ColorPickerPreference
+            android:defaultValue="@color/colorPrimary"
             android:key="@string/pref_key__minibar_background_color"
             android:title="@string/minibar"
             app:lightnessSlider="true"
             app:alphaSlider="true" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__search_bar">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__search_bar">
 
         <CheckBoxPreference
             android:defaultValue="true"
@@ -147,9 +146,9 @@
             android:summary="@string/pref_summary__search_bar_show_hidden_apps"
             android:title="@string/pref_title__search_bar_show_hidden_apps" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__date_bar">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__date_bar">
 
         <com.flask.colorpicker.ColorPickerPreference
             android:defaultValue="@color/white"
@@ -179,6 +178,6 @@
             android:summary="@string/pref_title__date_bar"
             android:title="@string/pref_title__date_bar_date_format_custom_2" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
 </PreferenceScreen>

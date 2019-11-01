@@ -30,7 +30,7 @@
     <string name="pref_title__app_drawer">Agalis n yisnasen</string>
     <string name="pref_title__gestures">Imussuten</string>
     <string name="pref_title__icons">Tignitin</string>
-    <string name="pref_title__miscellaneous">Ayen nniḍen</string>
+    <string name="pref_title__advanced">Ayen nniḍen</string>
     <string name="pref_title__about">Ɣef</string>
 
     <string name="pref_title__size">Teɣzi</string>
@@ -44,7 +44,6 @@
     <string name="pref_title__others">Ayen nniḍen</string>
 
     <string name="pref_title__desktop_indicator_style">Aɣani n unamel</string>
-    <string name="pref_summary__minibar">Swel asmizzwer akked tiẓri n iferdisen n ufeggag amectuḥ.</string>
     <string name="pref_title__search_bar_enable">Afeggag n unadi</string>
     <string name="pref_summary__search_bar_enable">Sken afeggag n unadi nnig n tnarit.</string>
     <string name="pref_title__desktop_fullscreen">Agdil aččran</string>
@@ -53,8 +52,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Sken anamal n usebter ddaw n tnarit.</string>
     <string name="pref_title__desktop_show_label">Sken tibzimin</string>
     <string name="pref_summary__desktop_show_label">Sken tibzimin n uferdis ddaw n tgnitin-nsen.</string>
-    <string name="pref_title__desktop_rotate">Zzi</string>
-    <string name="pref_summary__desktop_rotate">Sireg tuzya n ugdil.</string>
 
     <string name="pref_title__search_bar_base_uri">URI n unadi</string>
     <string name="pref_summary__search_bar_base_uri">Sbadu URI yettwaseqdacen i yinadiyen web.</string>
@@ -74,7 +71,6 @@
     <string name="pref_title__drawer_style">Aɣanib</string>
     <string name="pref_summary__drawer_style">Fren gar ugalis n usnas s isebtar neɣ ubdid ubdid.</string>
     <string name="pref_title__hide_apps">Ffer isnasen</string>
-    <string name="pref_summary__hide_apps">Ffer isnasen yettwafernen seg umsenker.</string>
     <string name="pref_title__drawer_show_card_view">Card View</string>
     <string name="pref_summary__drawer_show_card_view">Sers agdil n tuffra deffir n ugalis n yisnasen.</string>
     <string name="pref_title__drawer_remember_position">Cfu ɣef usebter aneggaru</string>
@@ -95,8 +91,8 @@
     <string name="pref_title__gesture_double_tap">Nnal snat tikalt</string>
     <string name="pref_title__gesture_swipe_up">Zuɣer d aasawen</string>
     <string name="pref_title__gesture_swipe_down">Zuɣer d akesser</string>
-    <string name="pref_title__gesture_pinch">Aseqreb</string>
-    <string name="pref_title__gesture_unpinch">Asiẓi</string>
+    <string name="pref_title__gesture_pinch_in">Aseqreb</string>
+    <string name="pref_title__gesture_pinch_out">Asiẓi</string>
 
     <string name="pref_summary__icon_size">Teɣzi n tignitin n usnas .</string>
     <string name="pref_title__icon_pack">Tagrumma n tignitin</string>

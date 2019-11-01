@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.HideAppsActivity;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.activity.MoreInfoActivity;
 import com.benny.openlauncher.util.AppSettings;
@@ -29,10 +30,16 @@ public class SettingsMasterFragment extends SettingsBaseFragment {
         HomeActivity homeActivity = HomeActivity._launcher;
         int key = new ContextUtils(homeActivity).getResId(ContextUtils.ResType.STRING, preference.getKey());
         switch (key) {
+            case R.string.pref_key__cat_hide_apps:
+                Intent intent = new Intent(getActivity(), HideAppsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+                return true;
             case R.string.pref_key__cat_about:
                 startActivity(new Intent(getActivity(), MoreInfoActivity.class));
                 return true;
         }
+
         return false;
     }
 
@@ -45,7 +52,7 @@ public class SettingsMasterFragment extends SettingsBaseFragment {
 
         categoryDesktop.setSummary(String.format(Locale.ENGLISH, "%s: %d x %d", getString(R.string.pref_title__size), AppSettings.get().getDesktopColumnCount(), AppSettings.get().getDesktopRowCount()));
         categoryDock.setSummary(String.format(Locale.ENGLISH, "%s: %d x %d", getString(R.string.pref_title__size), AppSettings.get().getDockColumnCount(), AppSettings.get().getDockRowCount()));
-        categoryAppearance.setSummary(String.format(Locale.ENGLISH, "Icons: %ddp", AppSettings.get().getIconSize()));
+        categoryAppearance.setSummary(String.format(Locale.ENGLISH, "%s: %ddp", getString(R.string.pref_title__icons), AppSettings.get().getIconSize()));
 
         switch (AppSettings.get().getDrawerStyle()) {
             case GRID:

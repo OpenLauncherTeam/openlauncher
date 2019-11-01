@@ -23,7 +23,7 @@ import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallback;
-import com.benny.openlauncher.viewutil.GroupIconDrawable;
+import com.benny.openlauncher.viewutil.GroupDrawable;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
 
 import net.gsantner.opoc.util.ContextUtils;
@@ -159,7 +159,7 @@ public class GroupPopupView extends RevealFrameLayout {
             @Override
             public void onDismiss() {
                 if (((AppItemView) itemView).getIcon() != null) {
-                    ((GroupIconDrawable) ((AppItemView) itemView).getIcon()).popBack();
+                    ((GroupDrawable) ((AppItemView) itemView).getIcon()).popBack();
                 }
             }
         };
@@ -292,7 +292,7 @@ public class GroupPopupView extends RevealFrameLayout {
         HomeActivity._db.saveItem(dragOutItem, ItemState.Visible);
         HomeActivity._db.saveItem(currentItem);
 
-        currentView.setIcon(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
+        currentView.setIcon(new GroupDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
     }
 
     public void updateItem(DesktopCallback callback, final Item currentItem, View currentView) {

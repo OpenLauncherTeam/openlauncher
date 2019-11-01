@@ -194,9 +194,9 @@ public class DesktopOptionView extends FrameLayout {
                 .withIdentifier(label)
                 .withOnClickListener(null)
                 .withTextColor(Color.WHITE)
-                .withIconSize(getContext(), 36)
+                .withIconSize(36)
                 .withIconColor(Color.WHITE)
-                .withIconPadding(getContext(), 4)
+                .withIconPadding(4)
                 .withIconGravity(Gravity.TOP)
                 .withWidth(width)
                 .withTextGravity(Gravity.CENTER);

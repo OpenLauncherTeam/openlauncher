@@ -28,7 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MinibarEditActivity extends ThemeActivity implements ItemTouchCallback {
+public class MinibarEditActivity extends ColorActivity implements ItemTouchCallback {
     @BindView(R.id.toolbar)
     Toolbar _toolbar;
     @BindView(R.id.enableSwitch)

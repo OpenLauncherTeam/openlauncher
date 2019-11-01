@@ -18,7 +18,7 @@ import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.Tool;
 
-public class GroupIconDrawable extends Drawable {
+public class GroupDrawable extends Drawable {
     private Drawable[] _icons;
     private int _iconsCount;
     private Paint _paintInnerCircle;
@@ -29,18 +29,23 @@ public class GroupIconDrawable extends Drawable {
     private float _scaleFactor = 1;
     private float _iconSize;
     private float _padding;
-    private float _padding31; // For group of 3 icons (1st row extra padding)
-    private float _padding32; // For group of 3 icons (2st row extra padding)
+
+    // For group of 3 icons (1st row extra padding)
+    private float _padding31;
+
+    // For group of 3 icons (2st row extra padding)
+    private float _padding32;
     private int _outline;
     private int _iconSizeDiv2;
     private int _iconSizeDiv4;
 
-    public GroupIconDrawable(Context context, Item item, int iconSize) {
+    public GroupDrawable(Context context, Item item, int iconSize) {
         final float size = Tool.dp2px(iconSize);
         final Drawable[] icons = new Drawable[4];
         for (int i = 0; i < 4; i++) {
             icons[i] = null;
         }
+
         init(icons, item.getItems().size(), size);
         for (int i = 0; i < 4 && i < item.getItems().size(); i++) {
             Item temp = item.getItems().get(i);
@@ -49,7 +54,7 @@ public class GroupIconDrawable extends Drawable {
                 app = Setup.appLoader().findItemApp(temp);
             }
             if (app == null) {
-                Setup.logger().log(this, Log.DEBUG, null, "Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, temp == null ? "Item is NULL" : temp.getIntent());
+                Log.d(this.getClass().getName(), String.format("Item %s has a null app at index %d (Intent: %s)", item.getLabel(), i, temp == null ? "Item is NULL" : temp.getIntent()));
                 icons[i] = new ColorDrawable(Color.TRANSPARENT);
             } else {
                 _icons[i] = app.getIcon();
@@ -82,12 +87,12 @@ public class GroupIconDrawable extends Drawable {
         _padding32 = b * (PADDING32_KOEF - PADDING31_KOEF);
 
         _paintInnerCircle = new Paint();
-        _paintInnerCircle.setColor(Color.WHITE);
+        _paintInnerCircle.setColor(Setup.appSettings().getDesktopFolderColor());
         _paintInnerCircle.setAlpha(150);
         _paintInnerCircle.setAntiAlias(true);
 
         _paintOuterCircle = new Paint();
-        _paintOuterCircle.setColor(Color.WHITE);
+        _paintOuterCircle.setColor(Setup.appSettings().getDesktopFolderColor());
         _paintOuterCircle.setAntiAlias(true);
         _paintOuterCircle.setFlags(Paint.ANTI_ALIAS_FLAG);
         _paintOuterCircle.setStyle(Paint.Style.STROKE);

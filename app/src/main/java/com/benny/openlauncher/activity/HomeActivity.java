@@ -60,6 +60,7 @@ import com.benny.openlauncher.widget.ItemOptionView;
 import com.benny.openlauncher.widget.MinibarView;
 import com.benny.openlauncher.widget.PagerIndicator;
 import com.benny.openlauncher.widget.SearchBar;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import net.gsantner.opoc.util.ContextUtils;
 
@@ -108,15 +109,13 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     static {
-        _timeChangedIntentFilter.addAction("android.intent.action.TIME_TICK");
-        _timeChangedIntentFilter.addAction("android.intent.action.TIMEZONE_CHANGED");
-        _timeChangedIntentFilter.addAction("android.intent.action.TIME_SET");
-
+        _timeChangedIntentFilter.addAction(Intent.ACTION_TIME_TICK);
+        _timeChangedIntentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
+        _timeChangedIntentFilter.addAction(Intent.ACTION_TIME_CHANGED);
         _appUpdateIntentFilter.addDataScheme("package");
-        _appUpdateIntentFilter.addAction("android.intent.action.PACKAGE_ADDED");
-        _appUpdateIntentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
-        _appUpdateIntentFilter.addAction("android.intent.action.PACKAGE_CHANGED");
-
+        _appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
+        _appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        _appUpdateIntentFilter.addAction(Intent.ACTION_PACKAGE_CHANGED);
         _shortcutIntentFilter.addAction("com.android.launcher.action.INSTALL_SHORTCUT");
     }
 
@@ -174,6 +173,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Companion.setLauncher(this);
+        AndroidThreeTen.init(this);
+
         AppSettings appSettings = AppSettings.get();
 
         ContextUtils contextUtils = new ContextUtils(getApplicationContext());
@@ -318,7 +319,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         _timeChangedReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
+                if (intent.getAction().equals(Intent.ACTION_TIME_TICK)
+                        || intent.getAction().equals(Intent.ACTION_TIMEZONE_CHANGED)
+                        || intent.getAction().equals(Intent.ACTION_TIME_CHANGED)) {
                     updateSearchClock();
                 }
             }

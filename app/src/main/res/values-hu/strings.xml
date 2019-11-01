@@ -26,7 +26,7 @@
     <string name="minibar_title__search_bar">Kereső bar megnyitása</string>
     <string name="minibar_summary__search_bar">Nyisd meg a kereső Bart.</string>
     <string name="minibar_summary__mobile_network">Parancsikon a mobilnet beállításokhoz.</string>
-    <string name="minibar_title__show_notifications">Értesítések mutatása</string>
+    <string name="minibar_title__notification_bar">Értesítések mutatása</string>
 
     <!-- About -->
     <string name="about_libs">Nyitott Forráskódú Könyvtárak</string>
@@ -61,7 +61,7 @@
     <string name="pref_title__app_drawer">Alkalmazás szekrény</string>
     <string name="pref_title__appearance">Kinézet</string>
     <string name="pref_title__gestures">Gesztúrák</string>
-    <string name="pref_title__miscellaneous">Apróságok</string>
+    <string name="pref_title__advanced">Apróságok</string>
     <string name="pref_title__about">Rólunk</string>
 
     <string name="pref_title__size">Méret</string>
@@ -77,15 +77,12 @@
     <string name="pref_title__debug">Debug</string>
 
     <string name="pref_title__desktop_indicator_style">Jelző stílus</string>
-    <string name="pref_title__desktop_rotate">Forgatás</string>
-    <string name="pref_summary__desktop_rotate">Kijelzőt forgatás engedély</string>
     <string name="pref_title__desktop_show_grid">Négyzetrács mutatása</string>
     <string name="pref_title__desktop_fullscreen">Teljes képernyő</string>
     <string name="pref_title__desktop_show_position_indicator">Pozíció indikátor</string>
     <string name="pref_title__desktop_show_label">Mutasd a címkéket</string>
     <string name="pref_title__desktop_background_color">Háttér</string>
     <string name="pref_title__desktop_folder_color">Mappa háttér</string>
-    <string name="pref_title__desktop_folder_color_text">Mappa szöveg</string>
     <string name="pref_title__desktop_inset_color">Rendszer barok</string>
 
     <string name="pref_title__search_bar_enable">Kereső bar</string>
@@ -116,8 +113,8 @@
     <string name="pref_title__gesture_double_tap">Dupla kattintás</string>
     <string name="pref_title__gesture_swipe_up">Felfelé húzás</string>
     <string name="pref_title__gesture_swipe_down">Lefelé húzás</string>
-    <string name="pref_title__gesture_pinch">Közelíteni</string>
-    <string name="pref_title__gesture_unpinch">Távolítás</string>
+    <string name="pref_title__gesture_pinch_in">Közelíteni</string>
+    <string name="pref_title__gesture_pinch_out">Távolítás</string>
 
     <string name="pref_title__theme">Téma</string>
     <string name="pref_title__primary_color">Elsődleges szín</string>
