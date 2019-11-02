@@ -132,6 +132,8 @@ public class GroupDrawable extends Drawable {
         clip.addCircle(_iconSize / 2, _iconSize / 2, _iconSize / 2 - _outline, Path.Direction.CW);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
             canvas.clipPath(clip, Region.Op.REPLACE);
+        } else {
+            canvas.clipPath(clip);
         }
 
         canvas.drawCircle(_iconSize / 2, _iconSize / 2, _iconSize / 2 - _outline, _paintInnerCircle);
