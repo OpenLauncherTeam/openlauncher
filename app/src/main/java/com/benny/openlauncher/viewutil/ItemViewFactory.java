@@ -1,5 +1,6 @@
 package com.benny.openlauncher.viewutil;
 
+import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.ComponentName;
 import android.content.Context;
