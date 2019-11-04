@@ -1,8 +1,10 @@
 package com.benny.openlauncher.model;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
+import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.Tool;
 
@@ -79,9 +81,10 @@ public class Item {
         return item;
     }
 
-    public static Item newWidgetItem(int widgetValue) {
+    public static Item newWidgetItem(ComponentName componentName, int widgetValue) {
         Item item = new Item();
         item._type = Type.WIDGET;
+        item._label = componentName.getPackageName() + Definitions.DELIMITER + componentName.getClassName();
         item._widgetValue = widgetValue;
         item._spanX = 1;
         item._spanY = 1;

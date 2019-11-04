@@ -1,7 +1,10 @@
 package com.benny.openlauncher.viewutil;
 
+import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 
@@ -10,6 +13,7 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.notifications.NotificationListener;
+import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
@@ -17,7 +21,12 @@ import com.benny.openlauncher.widget.AppItemView;
 import com.benny.openlauncher.widget.WidgetContainer;
 import com.benny.openlauncher.widget.WidgetView;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ItemViewFactory {
+    private static Logger LOG = LoggerFactory.getLogger("ItemViewFactory");
+
     public static View getItemView(final Context context, final DesktopCallback callback, final DragAction.Action type, final Item item) {
         View view = null;
         if (item.getType().equals(Item.Type.WIDGET)) {
@@ -73,7 +82,36 @@ public class ItemViewFactory {
     public static View getWidgetView(final Context context, final DesktopCallback callback, final DragAction.Action type, final Item item) {
         if (HomeActivity._appWidgetHost == null) return null;
 
-        final AppWidgetProviderInfo appWidgetInfo = HomeActivity._appWidgetManager.getAppWidgetInfo(item.getWidgetValue());
+        AppWidgetProviderInfo appWidgetInfo = HomeActivity._appWidgetManager.getAppWidgetInfo(item.getWidgetValue());
+
+        // If we can't find the Widget, we don't want to proceed or we'll end up with a phantom on the home screen.
+        if (appWidgetInfo == null) {
+            int appWidgetId = HomeActivity._appWidgetHost.allocateAppWidgetId();
+            if (item._label.contains(Definitions.DELIMITER)) {
+                String[] cnSplit = item._label.split(Definitions.DELIMITER);
+                ComponentName cn = new ComponentName(cnSplit[0], cnSplit[1]);
+
+                if (HomeActivity._appWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId, cn)) {
+                    appWidgetInfo = HomeActivity._appWidgetManager.getAppWidgetInfo(appWidgetId);
+                    item.setWidgetValue(appWidgetId);
+                    HomeActivity._db.updateItem(item);
+                } else {
+                    LOG.error("Unable to bind app widget id: {} ", cn);
+                    Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_BIND);
+                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_PROVIDER, cn);
+
+                    HomeActivity._launcher.startActivityForResult(intent, HomeActivity.REQUEST_PICK_APPWIDGET);
+                    return null;
+                }
+            } else {
+                // Delete the Widget if we don't have enough information to rehydrate it.
+                LOG.debug("Unable to identify Widget for rehydration; removing from database");
+                HomeActivity._db.deleteItem(item, false);
+                return null;
+            }
+        }
+
         final WidgetView widgetView = (WidgetView) HomeActivity._appWidgetHost.createView(context, item.getWidgetValue(), appWidgetInfo);
         widgetView.setAppWidget(item.getWidgetValue(), appWidgetInfo);
 

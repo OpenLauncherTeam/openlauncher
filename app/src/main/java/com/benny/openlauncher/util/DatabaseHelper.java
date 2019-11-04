@@ -297,4 +297,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return item;
     }
+
+    public void open() {
+        _db = getWritableDatabase();
+    }
 }
