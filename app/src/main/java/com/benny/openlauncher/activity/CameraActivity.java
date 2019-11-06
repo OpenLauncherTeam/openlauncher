@@ -22,6 +22,9 @@ import com.benny.openlauncher.util.Preview;
 import java.io.File;
 
 public class CameraActivity extends AppCompatActivity implements CallbackInterface {
+    public static final int REQUEST_CAMERA = 1;
+    public static final int REQUEST_STORAGE = 2;
+    private static final String TAG = "CameraActivity";
     private TextureView mCameraTextureView;
     private Preview mPreview;
     private Button mNormalAngleButton;
@@ -29,23 +32,18 @@ public class CameraActivity extends AppCompatActivity implements CallbackInterfa
     private Button mCameraCaptureButton;
     private Button mCameraDirectionButton;
 
-    private static final String TAG = "CameraActivity";
-
-    public static final int REQUEST_CAMERA = 1;
-    public static final int REQUEST_STORAGE = 2;
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-        mNormalAngleButton = (Button) findViewById(R.id.normal);
-        mWideAngleButton = (Button) findViewById(R.id.wide);
-        mCameraCaptureButton = (Button) findViewById(R.id.capture);
-        mCameraDirectionButton = (Button) findViewById(R.id.change);
+        mNormalAngleButton = findViewById(R.id.normal);
+        mWideAngleButton = findViewById(R.id.wide);
+        mCameraCaptureButton = findViewById(R.id.capture);
+        mCameraDirectionButton = findViewById(R.id.change);
 
-        mCameraTextureView = (TextureView) findViewById(R.id.cameraTextureView);
+        mCameraTextureView = findViewById(R.id.cameraTextureView);
         mPreview = new Preview(this, mCameraTextureView, mNormalAngleButton, mWideAngleButton, mCameraCaptureButton, mCameraDirectionButton);
         mPreview.setOnCallbackListener(this);
 

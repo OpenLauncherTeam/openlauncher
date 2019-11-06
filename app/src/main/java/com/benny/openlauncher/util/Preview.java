@@ -53,6 +53,14 @@ import java.util.concurrent.Semaphore;
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class Preview extends Thread {
     private final static String TAG = "Preview : ";
+    private static final SparseIntArray ORIENTATIONS = new SparseIntArray(4);
+
+    static {
+        ORIENTATIONS.append(Surface.ROTATION_0, 90);
+        ORIENTATIONS.append(Surface.ROTATION_90, 0);
+        ORIENTATIONS.append(Surface.ROTATION_180, 270);
+        ORIENTATIONS.append(Surface.ROTATION_270, 180);
+    }
 
     private Size mPreviewSize;
     private Context mContext;
@@ -67,15 +75,64 @@ public class Preview extends Thread {
     private Button mCameraDirectionButton;
     private int mWidth;
     private CallbackInterface mCallbackInterface;
+    private CameraDevice.StateCallback mStateCallback = new CameraDevice.StateCallback() {
 
-    private static final SparseIntArray ORIENTATIONS = new SparseIntArray(4);
+        @Override
+        public void onOpened(CameraDevice camera) {
+            // TODO Auto-generated method stub
+            Log.e(TAG, "onOpened");
+            mCameraDevice = camera;
+            startPreview();
+        }
 
-    static {
-        ORIENTATIONS.append(Surface.ROTATION_0, 90);
-        ORIENTATIONS.append(Surface.ROTATION_90, 0);
-        ORIENTATIONS.append(Surface.ROTATION_180, 270);
-        ORIENTATIONS.append(Surface.ROTATION_270, 180);
-    }
+        @Override
+        public void onDisconnected(CameraDevice camera) {
+            // TODO Auto-generated method stub
+            Log.e(TAG, "onDisconnected");
+        }
+
+        @Override
+        public void onError(CameraDevice camera, int error) {
+            // TODO Auto-generated method stub
+            Log.e(TAG, "onError");
+        }
+
+    };
+    private TextureView.SurfaceTextureListener mSurfaceTextureListener = new TextureView.SurfaceTextureListener() {
+
+        @Override
+        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+            // TODO Auto-generated method stub
+            Log.e(TAG, "onSurfaceTextureAvailable, width=" + width + ", height=" + height);
+            mWidth = width;
+            openCamera();
+        }
+
+        @Override
+        public void onSurfaceTextureSizeChanged(SurfaceTexture surface,
+                                                int width, int height) {
+            // TODO Auto-generated method stub
+            Log.e(TAG, "onSurfaceTextureSizeChanged");
+        }
+
+        @Override
+        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        @Override
+        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+            // TODO Auto-generated method stub
+        }
+    };
+    private Runnable mDelayPreviewRunnable = new Runnable() {
+        @Override
+        public void run() {
+            startPreview();
+        }
+    };
+    private Semaphore mCameraOpenCloseLock = new Semaphore(1);
 
     public Preview(Context context, TextureView textureView, Button button1, Button button2, Button button3, Button button4) {
         mContext = context;
@@ -186,59 +243,6 @@ public class Preview extends Thread {
         Log.e(TAG, "openCamera() End");
     }
 
-    private TextureView.SurfaceTextureListener mSurfaceTextureListener = new TextureView.SurfaceTextureListener() {
-
-        @Override
-        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-            // TODO Auto-generated method stub
-            Log.e(TAG, "onSurfaceTextureAvailable, width=" + width + ", height=" + height);
-            mWidth = width;
-            openCamera();
-        }
-
-        @Override
-        public void onSurfaceTextureSizeChanged(SurfaceTexture surface,
-                                                int width, int height) {
-            // TODO Auto-generated method stub
-            Log.e(TAG, "onSurfaceTextureSizeChanged");
-        }
-
-        @Override
-        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-            // TODO Auto-generated method stub
-            return false;
-        }
-
-        @Override
-        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-            // TODO Auto-generated method stub
-        }
-    };
-
-    private CameraDevice.StateCallback mStateCallback = new CameraDevice.StateCallback() {
-
-        @Override
-        public void onOpened(CameraDevice camera) {
-            // TODO Auto-generated method stub
-            Log.e(TAG, "onOpened");
-            mCameraDevice = camera;
-            startPreview();
-        }
-
-        @Override
-        public void onDisconnected(CameraDevice camera) {
-            // TODO Auto-generated method stub
-            Log.e(TAG, "onDisconnected");
-        }
-
-        @Override
-        public void onError(CameraDevice camera, int error) {
-            // TODO Auto-generated method stub
-            Log.e(TAG, "onError");
-        }
-
-    };
-
     protected void startPreview() {
         // TODO Auto-generated method stub
         if (null == mCameraDevice || !mTextureView.isAvailable() || null == mPreviewSize) {
@@ -302,13 +306,6 @@ public class Preview extends Thread {
             e.printStackTrace();
         }
     }
-
-    private Runnable mDelayPreviewRunnable = new Runnable() {
-        @Override
-        public void run() {
-            startPreview();
-        }
-    };
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     protected void takePicture() {
@@ -441,8 +438,6 @@ public class Preview extends Thread {
         Log.d(TAG, "onResume");
         setSurfaceTextureListener();
     }
-
-    private Semaphore mCameraOpenCloseLock = new Semaphore(1);
 
     public void onPause() {
         // TODO Auto-generated method stub
