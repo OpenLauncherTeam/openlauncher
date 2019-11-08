@@ -79,4 +79,15 @@
         <item>4</item>
     </string-array>
 
+    <string-array name="entries__weather_service" translatable="false">
+        <item>@string/none</item>
+        <item>@string/weather_service_au_bom</item>
+        <item>@string/weather_service_openweather</item>
+    </string-array>
+
+    <string-array name="values__weather_service" translatable="false">
+        <item>"none"</item>
+        <item>"au_bom"</item>
+        <item>"openweather"</item>
+    </string-array>
 </resources>

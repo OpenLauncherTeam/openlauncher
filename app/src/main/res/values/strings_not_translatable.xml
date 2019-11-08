@@ -12,6 +12,7 @@
     <string name="pref_default__date_bar_date_format_custom_1" translatable="false"><![CDATA[EEEE\', \'dd\'.\']]></string>
     <string name="pref_default__date_bar_date_format_custom_2" translatable="false"><![CDATA[MMMM yyyy\', KW \'ww]]></string>
     <string name="pref_default__search_bar_base_uri" translatable="false"><![CDATA[https://duckduckgo.com/?kae=c&k1=-1&kaj=m&kv=l&kp=-1&q={query}]]></string>
+    <string name="pref_default__weather_service_city" translatable="false">Enter Postcode</string>
 
     <string name="icon_badge_service_title" translatable="false">Icon Badges</string>
 
@@ -37,6 +38,9 @@
     <string name="pref_key__date_bar_date_format_custom_1" translatable="false">pref_key__date_bar_date_format_custom_1</string>
     <string name="pref_key__date_bar_date_format_custom_2" translatable="false">pref_key__date_bar_date_format_custom_2</string>
     <string name="pref_key__date_bar_date_text_color" translatable="false">pref_key__date_bar_date_text_color</string>
+    <string name="pref_key__weather_service" translatable="false">pref_key__weather_service</string>
+    <string name="pref_key__weather_service_hourly" translatable="false">pref_key__weather_service_hourly</string>
+    <string name="pref_key__weather_service_city" translatable="false">pref_key__weather_service_city</string>
     <string name="pref_key__desktop_background_color" translatable="false">pref_key__desktop_background_color</string>
     <string name="pref_key__desktop_inset_color" translatable="false">pref_key__desktop_inset_color</string>
     <string name="pref_key__desktop_folder_color" translatable="false">pref_key__desktop_folder_color</string>

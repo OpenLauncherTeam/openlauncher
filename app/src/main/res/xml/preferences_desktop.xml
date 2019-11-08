@@ -177,6 +177,29 @@
             android:key="@string/pref_key__date_bar_date_format_custom_2"
             android:summary="@string/pref_title__date_bar"
             android:title="@string/pref_title__date_bar_date_format_custom_2" />
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
+
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__weather_service">
+
+    <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/entries__weather_service"
+            android:entryValues="@array/values__weather_service"
+            android:key="@string/pref_key__weather_service"
+            android:title="@string/pref_title__weather_service" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__weather_service_hourly"
+            android:summary="@string/pref_summary__weather_service_hourly"
+            android:title="@string/pref_title__weather_service_hourly" />
+
+        <EditTextPreference
+            android:defaultValue=""
+            android:hint="@string/pref_default__weather_service_city"
+            android:key="@string/pref_key__weather_service_city"
+            android:summary="@string/pref_title__weather_service_city"
+            android:title="@string/pref_title__weather_service_city" />
 
     </com.benny.openlauncher.widget.ColorPreferenceCategory>
 

@@ -120,6 +120,12 @@
     <string name="pref_title__date_bar_date_format_custom_1">Custom Format: Line 1</string>
     <string name="pref_title__date_bar_date_format_custom_2">Custom Format: Line 2</string>
 
+    <string name="pref_title__weather_service">Weather Service</string>
+    <string name="pref_title__weather_service_hourly">Hourly Forecasts?</string>
+    <string name="pref_summary__weather_service_hourly">Check the next 3 hours instead of the next 3 days.</string>
+    <string name="pref_title__weather_service_city">Town/City?</string>
+    <string name="pref_summary__weather_service_city">Enter the postcode of your preferred locality if you prefer not to use Location Services. Leave blank otherwise.</string>
+
     <string name="pref_title__dock_show_label">Show Labels</string>
     <string name="pref_summary__dock_show_label">Show item labels below their icons.</string>
     <string name="pref_title__dock_background_color">Background</string>
@@ -212,6 +218,8 @@
     <string name="volume_level_media">Media</string>
     <string name="notification_title">Notification Access</string>
     <string name="notification_summary">OpenLauncher requires the notification permission to show icon badges.</string>
+    <string name="location_title">Location Access</string>
+    <string name="location_summary">OpenLauncher requires the location permission to show display weather updates.</string>
 
     <!-- Other -->
     <string name="columns">Columns</string>
@@ -240,11 +248,16 @@
     <string name="lock">Lock</string>
     <string name="widget">Widget</string>
 
+    <!-- Weather Settings -->
+    <string name="weather_service_au_bom">Australian BOM</string>
+    <string name="weather_service_openweather">OpenWeather</string>
+
     <!-- Toasts -->
     <string name="toast_not_enough_space">Not enough space.</string>
     <string name="toast_app_uninstalled">App uninstalled.</string>
     <string name="toast_device_admin_required">Please enable device administration.</string>
     <string name="toast_notification_permission_required">Please enable notifications.</string>
+    <string name="toast_location_permission_required">Please enable Location Services for Weather forecasts.</string>
     <string name="toast_backup_success">Backup completed.</string>
     <string name="toast_backup_error">Something went wrong.</string>
     <string name="toast_icon_pack_error">Please read access for external storage.</string>

@@ -343,6 +343,22 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getBool(R.string.pref_key__queue_restart, false);
     }
 
+    public String getWeatherAPIKey() {
+        return getString("pref_key__date_bar_weather_api_key", null);
+    }
+
+    public String getWeatherCity() {
+        return getString("pref_key__weather_city", "");
+    }
+
+    public boolean getWeatherForecastByHour() {
+        return getBool("pref_key__weather_service_hourly", false);
+    }
+
+    public String getWeatherService() {
+        return getString("pref_key__weather_service", "none");
+    }
+
     @SuppressLint("ApplySharedPref")
     public void setAppRestartRequired(boolean value) {
         // MUST be committed
