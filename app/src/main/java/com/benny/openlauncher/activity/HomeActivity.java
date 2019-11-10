@@ -239,22 +239,27 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         initAppManager();
         initSettings();
         initViews();
-        initWeatherIfRequired();
     }
 
     protected void initWeatherIfRequired() {
         // Weather Service initialisation, if required. Coarse location only.
         final String weatherServiceRequested = AppSettings.get().getWeatherService();
-        if (_location == null && !weatherServiceRequested.equals("none")) {
+        if (!weatherServiceRequested.equals("none")) {
             // We only ask for a Location if we haven't specified a specific location.
             if (AppSettings.get().getWeatherCity().equals("")) {
-                _location = new SimpleLocation(this);
+                if (_location == null) {
+                    checkLocationPermissions();
+
+                    _location = new SimpleLocation(this);
+                }
             }
 
-            if (weatherServiceRequested.equals("au_bom")) {
-                _weatherService = new BOMWeatherService();
-            } else if (weatherServiceRequested.equals("openweather")) {
-                _weatherService = new OpenWeatherService();
+            if (_weatherService == null || !_weatherService.getName().equals(weatherServiceRequested)) {
+                if (weatherServiceRequested.equals("au_bom")) {
+                    _weatherService = new BOMWeatherService();
+                } else if (weatherServiceRequested.equals("openweather")) {
+                    _weatherService = new OpenWeatherService();
+                }
             }
 
             if (_weatherService != null) {
@@ -262,7 +267,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                     _weatherHandler = new Handler(){
                         @Override
                         public void handleMessage(Message msg){
-                            updateWeather();
+                            if (_latestWeather != null) {
+                                getSearchBar().updateWeather(_latestWeather);
+                            }
                         }
                     };
                 }
@@ -283,8 +290,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 _weatherRunnable.start();
             }
         }
-
-        checkLocationPermissions();
     }
     protected void initAppManager() {
         if (Setup.appSettings().getAppFirstLaunch()) {
@@ -636,6 +641,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
 
         handleLauncherResume();
+        initWeatherIfRequired();
     }
 
     @Override
@@ -706,11 +712,5 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     public final void closeAppDrawer() {
         getAppDrawerController().close(cx, cy);
-    }
-
-    protected void updateWeather() {
-        LOG.debug("updateWeather() -> {}", _latestWeather);
-
-        // TODO:
     }
 }

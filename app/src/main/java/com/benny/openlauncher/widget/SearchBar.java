@@ -2,10 +2,13 @@ package com.benny.openlauncher.widget;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.util.Pair;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.CardView;
@@ -40,6 +43,7 @@ import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.CircleDrawable;
 import com.benny.openlauncher.viewutil.IconLabelItem;
+import com.benny.openlauncher.weather.WeatherResult;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
@@ -48,7 +52,6 @@ import org.slf4j.LoggerFactory;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +64,7 @@ public class SearchBar extends FrameLayout {
     public TextView _searchClock;
     public AppCompatImageView _switchButton;
     public AppCompatImageView _searchButton;
+    public ArrayList<AppCompatButton> _weatherIcons = new ArrayList<>();
     public AppCompatEditText _searchInput;
     public RecyclerView _searchRecycler;
     private CircleDrawable _icon;
@@ -140,6 +144,8 @@ public class SearchBar extends FrameLayout {
         _switchButton.setVisibility(View.GONE);
         _switchButton.setPadding(0, iconPadding, 0, iconPadding);
         updateSwitchIcon();
+
+        createWeatherButtons();
 
         LayoutParams switchButtonParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         switchButtonParams.setMargins(iconMarginOutside / 2, 0, 0, 0);
@@ -299,6 +305,10 @@ public class SearchBar extends FrameLayout {
 
         _icon.setIcon(getResources().getDrawable(R.drawable.ic_search));
 
+        for (AppCompatButton icon : _weatherIcons) {
+            Tool.visibleViews(0, icon);
+        }
+
         Tool.visibleViews(ANIM_TIME, _searchClock);
         Tool.goneViews(ANIM_TIME, _searchCardContainer, _searchRecycler, _switchButton);
 
@@ -311,6 +321,10 @@ public class SearchBar extends FrameLayout {
         }
 
         _icon.setIcon(getResources().getDrawable(R.drawable.ic_clear));
+
+        for (AppCompatButton icon : _weatherIcons) {
+            Tool.goneViews(0, icon);
+        }
 
         Tool.visibleViews(ANIM_TIME, _searchCardContainer, _searchRecycler, _switchButton);
         Tool.goneViews(ANIM_TIME, _searchClock);
@@ -368,6 +382,54 @@ public class SearchBar extends FrameLayout {
         Spannable span = new SpannableString(text);
         span.setSpan(new RelativeSizeSpan(_searchClockSubTextFactor), lines[0].length() + 1, lines[0].length() + 1 + lines[1].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         _searchClock.setText(span);
+    }
+
+    protected void createWeatherButtons() {
+        _weatherIcons.add(new AppCompatButton(getContext()));
+        _weatherIcons.add(new AppCompatButton(getContext()));
+        _weatherIcons.add(new AppCompatButton(getContext()));
+
+        //_weatherWarnings = new AppCompatImageView(getContext());
+
+        for (AppCompatButton icon : _weatherIcons) {
+            icon.setBackgroundColor(Color.TRANSPARENT);
+            icon.setTextColor(AppSettings.get().getDesktopDateTextColor());
+        }
+    }
+
+    public void updateWeather(WeatherResult weather) {
+        LOG.debug("updateWeather() -> {}", weather);
+
+        int numberOfIcons = _weatherIcons.size();
+        int leftPosition = _searchClock.getMeasuredWidth();
+
+        int[] rightPosition = new int[2];
+        _searchButton.getLocationOnScreen(rightPosition);
+
+        int calculatedWidth = (rightPosition[0] - leftPosition) / (numberOfIcons*2);
+        int calculatedHeight = (int) (_searchClock.getMeasuredHeight() * 0.5f);
+
+        for (int i = 0; i <= numberOfIcons-1; i++) {
+            Pair<Double, Drawable> forecast = weather.getForecast(i, calculatedWidth, calculatedHeight);
+
+            // May happen if we get an error from the Weather Service
+            if (forecast == null) {
+                break;
+            }
+
+            AppCompatButton icon = _weatherIcons.get(i);
+            icon.setCompoundDrawablesWithIntrinsicBounds(null, forecast.second, null, null);
+            icon.setText(Double.toString(forecast.first));
+
+            if (icon.getParent() == null) {
+                LayoutParams iconParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                iconParams.setMargins(leftPosition, 0, 0, 0);
+
+                leftPosition += calculatedWidth*2;
+
+                addView(icon, iconParams);
+            }
+        }
     }
 
     @Override

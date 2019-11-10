@@ -10,7 +10,9 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.model.App;
 
 import java.util.List;
@@ -179,5 +181,19 @@ public class IconPackHelper {
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
         return matrix;
+    }
+
+    public static Drawable resizeDrawable(Drawable d, int newWidth, int newHeight) {
+        if ((d == null) || !(d instanceof BitmapDrawable)) {
+            return d;
+        }
+
+        Bitmap b = ((BitmapDrawable) d).getBitmap();
+
+        Bitmap bitmapResized = Bitmap.createScaledBitmap(b, newWidth, newHeight, false);
+
+        d = new BitmapDrawable(HomeActivity.Companion.getLauncher().getResources(), bitmapResized);
+
+        return d;
     }
 }

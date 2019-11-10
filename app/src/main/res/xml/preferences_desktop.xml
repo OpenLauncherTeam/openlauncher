@@ -198,7 +198,7 @@
             android:defaultValue=""
             android:hint="@string/pref_default__weather_service_city"
             android:key="@string/pref_key__weather_service_city"
-            android:summary="@string/pref_title__weather_service_city"
+            android:summary="@string/pref_summary__weather_service_city"
             android:title="@string/pref_title__weather_service_city" />
 
     </com.benny.openlauncher.widget.ColorPreferenceCategory>

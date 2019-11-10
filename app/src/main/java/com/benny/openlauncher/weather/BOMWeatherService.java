@@ -1,7 +1,11 @@
 package com.benny.openlauncher.weather;
 
+import android.graphics.drawable.Drawable;
+
+import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.util.AppSettings;
+import com.benny.openlauncher.util.IconPackHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,6 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import im.delight.android.location.SimpleLocation;
 
@@ -39,11 +44,9 @@ public class BOMWeatherService implements WeatherService {
         AppSettings settings = AppSettings.get();
 
         SimpleLocation loc = HomeActivity._location;
-        String postcode = "";
-        if (loc != null) {
+        String postcode = settings.getWeatherCity();
+        if (postcode.equals("")) {
             postcode = WeatherService.getPostCodeByCoordinates(loc);
-        } else {
-            postcode = settings.getWeatherCity();
         }
 
         String geohash = getGeoHash(postcode);
@@ -68,12 +71,12 @@ public class BOMWeatherService implements WeatherService {
         if (AppSettings.get().getWeatherForecastByHour()) {
             for (int i = 0; i < 3; i++) {
                 JSONObject obj = results.getJSONObject(i);
-                currentWeather.add(obj.getDouble("temp"), obj.getString("icon_descriptor"));
+                currentWeather.add(obj.getDouble("temp"), getWeatherIcon(obj.getString("icon_descriptor")));
             }
         } else {
             for (int i = 0; i < 3; i++) {
                 JSONObject obj = results.getJSONObject(i);
-                currentWeather.add(obj.getDouble("temp_max"), obj.getString("icon_descriptor"));
+                currentWeather.add(obj.getDouble("temp_max"), getWeatherIcon(obj.getString("icon_descriptor")));
             }
         }
 
@@ -96,6 +99,10 @@ public class BOMWeatherService implements WeatherService {
         return suburbs.getJSONObject(0).getString("geohash").substring(0,6);
     }
 
+    public String getName() {
+        return "au_bom";
+    }
+
     public WeatherResult getWeatherForLocation() {
         try {
             final URL url = createURL();
@@ -112,4 +119,42 @@ public class BOMWeatherService implements WeatherService {
 
         return null;
     }
+
+    public int getWeatherIcon(String icon) {
+        if (icon.equals("sunny") || icon.equals("clear")) {
+            return R.drawable.sunny;
+        }
+
+        if (icon.equals("mostly_sunny") || icon.equals("party_cloudy")) {
+            return R.drawable.cloudy;
+        }
+
+        if (icon.equals("cloudy")) {
+            return R.drawable.clouds;
+        }
+
+        if (icon.equals("hazy") || icon.equals("fog")) {
+            return R.drawable.hazy;
+        }
+
+        if (icon.equals("light_rain") || icon.equals("rain") || icon.equals("shower") || icon.equals("light_shower") || icon.equals("heavy_shower")) {
+            return R.drawable.rain;
+        }
+
+        if (icon.equals("frost") || icon.equals("snow")) {
+            return R.drawable.snowflake;
+        }
+
+        if (icon.equals("storm")) {
+            return R.drawable.storm;
+        }
+
+        if (icon.equals("windy")) {
+            return R.drawable.wind;
+        }
+
+        LOG.error("Can't parse weather condition: {}", icon);
+        return -1;
+    }
+
 }
