@@ -403,7 +403,8 @@ public class SearchBar extends FrameLayout {
                     boolean hourly = settings.getWeatherForecastByHour();
 
                     settings.setWeatherForecastByHour(!hourly);
-
+                    
+                    Tool.toast(getContext(), !hourly ? R.string.weather_service_hourly : R.string.weather_service_daily);
                     HomeActivity.Companion.getLauncher().initWeatherIfRequired();
                 }
             });

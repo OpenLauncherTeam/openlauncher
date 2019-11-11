@@ -251,6 +251,8 @@
     <!-- Weather Settings -->
     <string name="weather_service_au_bom">Australian BOM</string>
     <string name="weather_service_openweather">OpenWeather</string>
+    <string name="weather_service_hourly">Switching to hourly forecast.</string>
+    <string name="weather_service_daily">Switching to daily forecast.</string>
 
     <!-- Toasts -->
     <string name="toast_not_enough_space">Not enough space.</string>
