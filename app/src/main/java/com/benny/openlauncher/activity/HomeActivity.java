@@ -241,7 +241,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         initViews();
     }
 
-    protected void initWeatherIfRequired() {
+    public void initWeatherIfRequired() {
         // Weather Service initialisation, if required. Coarse location only.
         final String weatherServiceRequested = AppSettings.get().getWeatherService();
         if (!weatherServiceRequested.equals("none")) {
@@ -264,14 +264,23 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
             if (_weatherService != null) {
                 if (_weatherHandler == null) {
-                    _weatherHandler = new Handler(){
+                    _weatherHandler = new Handler() {
                         @Override
-                        public void handleMessage(Message msg){
-                            if (_latestWeather != null) {
-                                getSearchBar().updateWeather(_latestWeather);
+                        public void handleMessage(Message msg) {
+                            // what == 0 from the postDelayed call below.
+                            if (msg.what == 1) {
+                                if (_latestWeather != null) {
+                                    getSearchBar().updateWeather(_latestWeather);
+                                }
                             }
                         }
                     };
+                } else {
+                    // If we come back in after creation, remove the running callback so that we
+                    // can kick it off immediately below.
+                    if (_weatherRunnable != null) {
+                        _weatherHandler.removeCallbacks(_weatherRunnable);
+                    }
                 }
 
                 _weatherRunnable = new Thread(new Runnable() {
@@ -281,9 +290,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                             _latestWeather = _weatherService.getWeatherForLocation();
                             _weatherHandler.sendEmptyMessage(1);
                         } finally {
-                            // 100% guarantee that this always happens, even if
-                            // your update method throws an exception
-                            _weatherHandler.postDelayed(_weatherRunnable, 60 * 60 *1000l);
+                            // and then reschedule for an hours time!
+                            _weatherHandler.postDelayed(_weatherRunnable, 60 * 60 * 1000l);
                         }
                     }
                 });

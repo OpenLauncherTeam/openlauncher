@@ -96,31 +96,31 @@ public class OpenWeatherService implements WeatherService {
     }
 
     public Integer getWeatherIcon(String icon) {
-        if (icon.equals("01d") || icon.equals("clear")) {
+        if (icon.equals("01d") || icon.equals("01n")) {
             return R.drawable.sunny;
         }
 
-        if (icon.equals("02d") || icon.equals("04d")) {
+        if (icon.equals("02d") || icon.equals("02n") || icon.equals("04d") || icon.equals("04n")) {
             return R.drawable.cloudy;
         }
 
-        if (icon.equals("03d")) {
+        if (icon.equals("03d") || icon.equals("03n")) {
             return R.drawable.clouds;
         }
 
-        if (icon.equals("50d")) {
+        if (icon.equals("50d") || icon.equals("50n")) {
             return R.drawable.hazy;
         }
 
-        if (icon.equals("10d")) {
+        if (icon.equals("10d") || icon.equals("10n")) {
             return R.drawable.rain;
         }
 
-        if (icon.equals("13d")) {
+        if (icon.equals("13d") || icon.equals("13n")) {
             return R.drawable.snowflake;
         }
 
-        if (icon.equals("11d")) {
+        if (icon.equals("11d") || icon.equals("11n")) {
             return R.drawable.storm;
         }
 

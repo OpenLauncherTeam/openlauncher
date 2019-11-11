@@ -34,6 +34,7 @@ public interface WeatherService {
         if (mGeocoder != null) {
             List<Address> addresses = mGeocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 5);
 
+            LOG.debug("looking for postcode from GPS coordinates: {}, {} -> {}", location.getLatitude(), location.getLongitude(), addresses);
             if (addresses != null) {
                 for (Address address : addresses) {
                     if (address.getPostalCode() != null) {

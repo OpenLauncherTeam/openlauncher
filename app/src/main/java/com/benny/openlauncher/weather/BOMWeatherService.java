@@ -51,6 +51,8 @@ public class BOMWeatherService implements WeatherService {
 
         String geohash = getGeoHash(postcode);
 
+        LOG.debug("Getting weather for postcode {} -> {}", postcode, geohash);
+
         // https://api.weather.bom.gov.au/v1/locations/r1r143/forecasts/3-hourly
         StringBuilder url = new StringBuilder();
         url.append(API_BASE).append("/").append(geohash);
@@ -94,7 +96,7 @@ public class BOMWeatherService implements WeatherService {
         JSONObject json = new JSONObject(response);
         JSONArray suburbs = json.getJSONArray("data");
 
-        LOG.debug("JSONarray: {}", suburbs);
+        LOG.debug("suburbs returned for postcode {} -> {}", postcode, suburbs);
 
         return suburbs.getJSONObject(0).getString("geohash").substring(0,6);
     }

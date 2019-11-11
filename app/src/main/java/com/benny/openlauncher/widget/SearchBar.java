@@ -33,6 +33,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
@@ -394,19 +395,35 @@ public class SearchBar extends FrameLayout {
         for (AppCompatButton icon : _weatherIcons) {
             icon.setBackgroundColor(Color.TRANSPARENT);
             icon.setTextColor(AppSettings.get().getDesktopDateTextColor());
+
+            icon.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AppSettings settings = AppSettings.get();
+                    boolean hourly = settings.getWeatherForecastByHour();
+
+                    settings.setWeatherForecastByHour(!hourly);
+
+                    HomeActivity.Companion.getLauncher().initWeatherIfRequired();
+                }
+            });
         }
     }
 
     public void updateWeather(WeatherResult weather) {
         LOG.debug("updateWeather() -> {}", weather);
 
+        int dp1 = Tool.dp2px(1);
+        int iconMarginOutside = dp1 * 16;
+
+        int[] coords = new int[2];
+        _searchButton.getLocationOnScreen(coords);
+
         int numberOfIcons = _weatherIcons.size();
         int leftPosition = _searchClock.getMeasuredWidth();
+        int rightPosition = coords[0] - iconMarginOutside;
 
-        int[] rightPosition = new int[2];
-        _searchButton.getLocationOnScreen(rightPosition);
-
-        int calculatedWidth = (rightPosition[0] - leftPosition) / (numberOfIcons*2);
+        int calculatedWidth = (rightPosition - leftPosition) / (numberOfIcons*2);
         int calculatedHeight = (int) (_searchClock.getMeasuredHeight() * 0.5f);
 
         for (int i = 0; i <= numberOfIcons-1; i++) {

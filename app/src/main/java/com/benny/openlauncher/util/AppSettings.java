@@ -348,12 +348,17 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public String getWeatherCity() {
-        return getString("pref_key__weather_city", "");
+        return getString("pref_key__weather_service_city", "");
     }
 
     public boolean getWeatherForecastByHour() {
         return getBool("pref_key__weather_service_hourly", false);
     }
+
+    public void setWeatherForecastByHour(boolean state) {
+        setBool("pref_key__weather_service_hourly", state);
+    }
+
 
     public String getWeatherService() {
         return getString("pref_key__weather_service", "none");
