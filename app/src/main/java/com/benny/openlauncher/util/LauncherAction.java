@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 
@@ -133,7 +134,7 @@ public class LauncherAction {
                 }
                 break;
             case Camera:
-                context.startActivity(new Intent(context,CameraActivity.class));
+                context.startActivity(new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA));
 
                 break;
 
