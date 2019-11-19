@@ -13,8 +13,8 @@ import java.text.SimpleDateFormat
 
 buildscript {
     ext {
-        version_gradle_tools = "3.4.1"
-        version_plugin_kotlin = "1.3.11"
+        version_gradle_tools = "3.5.2"
+        version_plugin_kotlin = "1.3.60"
         enable_plugin_kotlin = false
 
         version_compileSdk = 28
@@ -33,12 +33,18 @@ buildscript {
         maven { url 'https://maven.google.com' }
         jcenter()
         maven { url "https://jitpack.io" }
-        google()
+        mavenCentral()
     }
 
     dependencies {
         classpath "com.android.tools.build:gradle:${version_gradle_tools}"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        if (project.enable_plugin_kotlin) {
+            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${version_plugin_kotlin}"
+        }
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
     }
 }
 
@@ -47,6 +53,7 @@ allprojects {
         maven { url 'https://maven.google.com' }
         jcenter()
         maven { url "https://jitpack.io" }
+        mavenCentral()
     }
 
     tasks.matching { task -> task.name.matches('.*generate.*Resources') }.all {
