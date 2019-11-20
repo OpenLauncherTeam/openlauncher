@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 
@@ -25,7 +26,7 @@ import java.util.List;
 public class LauncherAction {
 
     public enum Action {
-        EditMinibar, SetWallpaper, LockScreen, LauncherSettings, VolumeDialog, DeviceSettings, AppDrawer, SearchBar, MobileNetworkSettings, ShowNotifications, TurnOffScreen
+        EditMinibar, SetWallpaper, LockScreen, LauncherSettings, VolumeDialog, DeviceSettings, AppDrawer, SearchBar, MobileNetworkSettings, ShowNotifications, TurnOffScreen, Camera
     }
 
     public static ActionDisplayItem[] actionDisplayItems = new ActionDisplayItem[]{
@@ -39,12 +40,15 @@ public class LauncherAction {
             new ActionDisplayItem(Action.SearchBar, HomeActivity._launcher.getResources().getString(R.string.minibar_title__search_bar), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__search_bar), R.drawable.ic_search, 89),
             new ActionDisplayItem(Action.MobileNetworkSettings, HomeActivity._launcher.getResources().getString(R.string.minibar_title__mobile_network), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__mobile_network), R.drawable.ic_network, 46),
             new ActionDisplayItem(Action.ShowNotifications, HomeActivity._launcher.getResources().getString(R.string.minibar_title__notification_bar), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__notification_bar), R.drawable.ic_notifications, 46),
+            new ActionDisplayItem(Action.Camera, HomeActivity._launcher.getResources().getString(R.string.minibar_title__camera), HomeActivity._launcher.getResources().getString(R.string.minibar_summary__camera), R.drawable.ic_camera_, 13)
+
     };
 
     public static List<Action> defaultArrangement = Arrays.asList(
             Action.EditMinibar, Action.SetWallpaper,
             Action.LockScreen, Action.LauncherSettings,
-            Action.VolumeDialog, Action.DeviceSettings
+            Action.VolumeDialog, Action.DeviceSettings,
+            Action.Camera
     );
 
     public static void RunAction(Action action, final Context context) {
@@ -129,6 +133,10 @@ public class LauncherAction {
                     context.startActivity(intent);
                 }
                 break;
+            case Camera:
+                context.startActivity(new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA));
+                break;
+
         }
     }
 
