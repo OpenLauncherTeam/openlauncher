@@ -31,8 +31,8 @@
     <string name="minibar_summary__mobile_network">Shortcut to the mobile network settings.</string>
     <string name="minibar_title__notification_bar">Show Notification Bar</string>
     <string name="minibar_summary__notification_bar">Expand the notification view at the top of the screen.</string>
-    <string name="minibar_title__Camera">open camera shortcut</string>
-    <string name="minibar_summary__Camera">oepn the camera shortcut</string>
+    <string name="minibar_title__camera">open camera shortcut</string>
+    <string name="minibar_summary__camera">oepn the camera shortcut</string>
 
     <!-- About -->
     <string name="about_libs">Open Source Libraries</string>
