@@ -1,4 +1,4 @@
-This is an open source launcher project for Android devices that has been built completely from scratch. The main goal of this launcher is to find a healthy balance between an adequate level of customization and too many unused features that only complicate a launcher. If you would like to help out feel free to submit issues or ask about submitting a pull request with a feature you want to see in the launcher. Jump on Stringlate or GitHub and translate this app to your native language, we will always accept community translations!
+This is an open source launcher project for Android devices that has been built completely from scratch. The main goal of this launcher is to find a healthy balance between customization and unused features. If you would like to help out feel free to submit issues or submit a pull request. Jump on Stringlate or GitHub and translate this app to your native language, we will always accept community translations!
 
 <b>Features</b>
 
