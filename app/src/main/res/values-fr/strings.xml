@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Intro -->
+    <string name="intro1_text">Un lanceur d\'applications open source avec beaucoup de fonctionnalités utiles.</string>
     <string name="intro1_community">Le lanceur d\'applications créé par la communauté, pour la communauté</string>
     <string name="intro1_features">Remplis de fonctionnalités</string>
     <string name="intro1_customizable">Personnalisable</string>
     <string name="intro2_text">Glissez votre doigt depuis le bord de gauche de votre écran pour ouvrir la Minibarre. Cette dernière vous permet d\'accéder aux paramètres, changer de fond d\'écran et beaucoup d\'autres choses.</string>
     <string name="intro3_text">Vous pouvez configurer votre bureau, le tiroir d\'applis, le dock... Essayez-la !</string>
+    <string name="intro4_text">Rechercher quelque chose sur le Web ou filtrer vos applications depuis la barre de recherche.</string>
 
     <!-- Minibar -->
     <string name="minibar">Minibarre</string>
     <string name="minibar_title__edit_minibar">Éditer la minibarre</string>
     <string name="minibar_summary__edit_minibar">Modifier la disposition de la Minibarre.</string>
+    <string name="minibar_title__set_wallpaper">Définir le fond d\'écran</string>
     <string name="minibar_summary__set_wallpaper">Définir et rendre le fond d\'écran flou.</string>
     <string name="minibar_title__lock_screen">Verrouiller l\'écran</string>
     <string name="minibar_summary__lock_screen">Verrouiller l\'écran immédiatement, requiert le droit d\'administration de l\'appareil.</string>
@@ -23,17 +26,20 @@
     <string name="minibar_title__app_drawer">Ouvrir le tiroir d\'application</string>
     <string name="minibar_summary__app_drawer">Ouvrir le volet des applications.</string>
     <string name="minibar_title__search_bar">Ouvrir la barre de recherche</string>
-    <string name="minibar_summary__search_bar">Ouvrir la barre de recherche</string>
+    <string name="minibar_summary__search_bar">Ouvrir la barre de recherche.</string>
     <string name="minibar_title__mobile_network">Paramètres du réseau mobile</string>
     <string name="minibar_summary__mobile_network">Raccourci vers les paramètres de réseau mobile.</string>
+    <string name="minibar_title__notification_bar">Afficher les notifications</string>
+    <string name="minibar_summary__notification_bar">Étendre la zone de notification en haut de l\'écran.</string>
+    <string name="minibar_title__camera">Appareil photo</string>
+    <string name="minibar_summary__camera">Prendre une photo avec votre appareil photo</string>
 
     <!-- About -->
     <string name="about_libs">Bibliothèques Open Source</string>
     <string name="about_rate">Noter</string>
     <string name="about_credit">Contributeurs</string>
     <string name="community">Communauté</string>
-    <string name="about_credit_text_all_contributors">Tous les contributeurs</string>
-    <string name="more_info_on_how_to_contribute_to_foss_android_projects">Plus d\'informations sur la contribution aux projets open source, notamment les applications Android</string>
+    <string name="more_info_foss">Plus d\'informations sur la contribution aux projets open source, notamment les applications Android</string>
     <string name="join_community">Rejoindre la communauté</string>
     <string name="bug_reports_suggest_improvements">Envoyer un commentaire, rapporter un bug ou proposer des améliorations</string>
     <string name="help_translating_this_app">Traduire cette application dans d\'autres langues</string>
@@ -41,20 +47,21 @@
     <string name="project_license">License du projet</string>
     <string name="project_contribution_info">Informations sur la contribution au projet</string>
     <string name="more_info_on_how_to_contribute_to_this_project">Plus d\'informations sur comment contribuer au projet</string>
-    <string name="contribute_code_to_this_project_anybody_welcome">Contribuer du code au projet. Tout le monde est invité à le faire, même les nouveaux venus.</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">Contribuer au code au projet. Tout le monde est invité à le faire, même les nouveaux venus.</string>
     <string name="project_team">Équipe du projet</string>
+    <string name="contributors_public_info">Afficher les informations sur les contributeurs. Les contributeurs peuvent fournir des informations qui seront affichées ici</string>
     <string name="contribute">Contribuer</string>
     <string name="donate">Faire un don</string>
     <string name="help">Aide</string>
     <string name="licenses">Licenses</string>
     <string name="contributors">Contributeurs</string>
+    <string name="changelog">Journal des modifications</string>
     <string name="more">Plus</string>
     <string name="open_source_licenses">Licenses open source</string>
     <string name="rate_the_app">Noter cette application</string>
     <string name="translate">Traduire</string>
-    <string name="help_this_app">Plus d\'informations et aide à propos de cette application</string>
     <string name="bug_reports">Rapporter un bug</string>
-    <string name="more_info_on_how_to_donate_or_otherwise_support_this_project">Plus d\'informations sur les dons ou autre manière de supporter ce projet</string>
+    <string name="more_info_support">Plus d\'informations sur les dons ou autre manière de supporter ce projet</string>
     <string name="android_contribution_guide">Guide de contribution Android</string>
 
     <!-- Settings -->
@@ -63,8 +70,9 @@
     <string name="pref_title__dock">Dock</string>
     <string name="pref_title__app_drawer">Volet des applications</string>
     <string name="pref_title__appearance">Apparence</string>
-    <string name="pref_title__gestures">Gestes</string>
-    <string name="pref_title__miscellaneous">Divers</string>
+    <string name="pref_title__behavior">Comportement</string>
+    <string name="pref_title__advanced">Divers</string>
+    <string name="pref_title__hide_apps">Cacher des applications</string>
     <string name="pref_title__about">À propos de</string>
 
     <string name="pref_title__size">Taille</string>
@@ -75,14 +83,14 @@
     <string name="pref_title__interfaces">Préférences</string>
     <string name="pref_title__inputs">Interactions</string>
     <string name="pref_title__feels">Ambiance</string>
+    <string name="pref_title__gestures">Gestes</string>
     <string name="pref_title__others">Autres</string>
     <string name="pref_title__animations">Animations</string>
     <string name="pref_title__debug">Déboguage</string>
 
     <string name="pref_title__desktop_indicator_style">Style de l\'indicateur</string>
-    <string name="pref_summary__minibar">Configurer l\'ordre et la visibilité des éléments de la Minibarre.</string>
-    <string name="pref_title__desktop_rotate">Rotation</string>
-    <string name="pref_summary__desktop_rotate">Autoriser la rotation de l\'écran</string>
+    <string name="pref_title__desktop_wallpaper_scroll">Défilement du fond d\'écran</string>
+    <string name="pref_title__desktop_orientation">Orientation du bureau</string>
     <string name="pref_title__desktop_show_grid">Afficher la grille</string>
     <string name="pref_summary__desktop_show_grid">Afficher la grille lors du déplacement d\'objet.</string>
     <string name="pref_title__desktop_fullscreen">Plein écran</string>
@@ -92,12 +100,13 @@
     <string name="pref_title__desktop_show_label">Montrer les noms</string>
     <string name="pref_summary__desktop_show_label">Afficher les noms des applis et dossiers sous leurs icônes.</string>
     <string name="pref_title__desktop_background_color">Arrière-plan</string>
-    <string name="pref_title__desktop_folder_color">Dossier</string>
-    <string name="pref_title__desktop_folder_color_text">Couleur du dossier</string>
     <string name="pref_title__desktop_inset_color">Barre système</string>
+    <string name="pref_title__desktop_folder_color">Dossier</string>
 
     <string name="pref_title__search_bar_enable">Barre de recherche</string>
     <string name="pref_summary__search_bar_enable">Afficher une barre de recherche sur le bureau.</string>
+    <string name="pref_title__search_bar_starts_with">Recherche d\'applications par nom</string>
+    <string name="pref_summary__search_bar_starts_with">Recherche d’applications à partir du texte de recherche.</string>
     <string name="pref_title__search_bar_base_uri">URI de recherche</string>
     <string name="pref_summary__search_bar_base_uri">Spécifier l\'URI utilisée pour les recherches sur internet.</string>
     <string name="pref_dialog__search_bar_base_uri">Entrez l\'URI devant être utilisée pour les recherches sur internet. L\'étiquette {query} peut être utilisée en remplacement de la requête. Si cette étiquette n\'est pas présente, la requête sera ajoutée à la fin de l\'URI.</string>
@@ -109,8 +118,8 @@
     <string name="pref_title__date_bar">Barre de dates</string>
     <string name="pref_title__date_bar_text_color">Couleur du texte</string>
     <string name="pref_title__date_bar_date_format">Format de la date</string>
-    <string name="pref_title__date_bar_date_format_custom_1">Format personnalisé: Ligne 1</string>
-    <string name="pref_title__date_bar_date_format_custom_2">Format personnalisé: Ligne 2</string>
+    <string name="pref_title__date_bar_date_format_custom_1">Format personnalisé : Ligne 1</string>
+    <string name="pref_title__date_bar_date_format_custom_2">Format personnalisé : Ligne 2</string>
 
     <string name="pref_title__dock_show_label">Montrer les noms</string>
     <string name="pref_summary__dock_show_label">Afficher le nom des applications et des dossiers sous leurs icônes.</string>
@@ -118,8 +127,6 @@
 
     <string name="pref_title__drawer_style">Style</string>
     <string name="pref_summary__drawer_style">Choisir entre un volet d\'applications paginé ou vertical.</string>
-    <string name="pref_title__hide_apps">Cacher des applications</string>
-    <string name="pref_summary__hide_apps">Masquer les applications sélectionnées du launcher.</string>
     <string name="pref_title__drawer_show_card_view">Masque</string>
     <string name="pref_summary__drawer_show_card_view">Placer un écran de masquage derrière le volet des applications.</string>
     <string name="pref_title__drawer_remember_position">Se rappeler de la dernière page</string>
@@ -134,6 +141,8 @@
     <string name="pref_title__drawer_fast_scroll_color">Défilement rapide</string>
     <string name="pref_title__drawer_label_font_size">Grandeur du texte des étiquettes</string>
 
+    <string name="pref_title__gesture_notifications">Badge de notification</string>
+    <string name="pref_summary__gesture_notifications">Mettre à jour les icônes avec un badge lorsque les notifications arrivent.</string>
     <string name="pref_title__gesture_feedback">Retour sur les gestes effectués</string>
     <string name="pref_summary__gesture_feedback">Obtenir un retour lors d\'un appui long sur un élément du bureau.</string>
     <string name="pref_title__gesture_quick_swipe">Glisser pour ouvrir</string>
@@ -141,8 +150,8 @@
     <string name="pref_title__gesture_double_tap">Appui double</string>
     <string name="pref_title__gesture_swipe_up">Glisser vers le haut</string>
     <string name="pref_title__gesture_swipe_down">Glisser vers le bas</string>
-    <string name="pref_title__gesture_pinch">Pincement</string>
-    <string name="pref_title__gesture_unpinch">Écartement</string>
+    <string name="pref_title__gesture_pinch_in">Pincement</string>
+    <string name="pref_title__gesture_pinch_out">Écartement</string>
 
     <string name="pref_title__theme">Thème</string>
     <string name="pref_summary__theme">Définir le thème global de l\'application</string>
@@ -153,7 +162,7 @@
     <string name="pref_title__icon_pack">Pack d\'icônes</string>
     <string name="pref_summary__icon_pack">Sélectionner un pack d\'icônes installé.</string>
     <string name="pref_title__animation_speed_modifier">Vitesse d\'animation</string>
-    <string name="pref_summary__animation_speed_modifier">Modifier la vitesse des animations</string>
+    <string name="pref_summary__animation_speed_modifier">Modify the overall speed of animations</string>
 
     <string name="pref_title__language">Langue</string>
     <string name="pref_summary__language">Changer la langue de l\'application. Vous devez redémarrer l\'application pour que le changement soit pris en compte</string>
@@ -168,11 +177,20 @@
     <string name="pref_title__restart">Redémarrer</string>
     <string name="pref_summary__restart">Redémarrer le launcher en cas de comportement étrange.</string>
 
+    <!-- Arrays -->
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paginé</string>
 
     <string name="indicator_mode_dots">Points</string>
     <string name="indicator_mode_lines">Lignes</string>
+
+    <string name="orientation_mode_portrait">Portrait</string>
+    <string name="orientation_mode_rotate">Pivoter</string>
+    <string name="orientation_mode_landscape">Paysage</string>
+
+    <string name="scroll_normal">Normal</string>
+    <string name="scroll_inverse">Inversé</string>
+    <string name="scroll_off">Désactivé</string>
 
     <string name="none">Aucun</string>
     <string name="app">Application</string>
@@ -184,6 +202,8 @@
     <!-- Dialogs -->
     <string name="please_wait">Recherche des applications installées. Veuillez patienter.</string>
     <string name="are_you_sure">Êtes-vous sûr ? Cette action ne peut être annulée, sauf si vous avez une sauvegarde.</string>
+    <string name="device_admin_title">Droit d\'administration de l\'appareil requis</string>
+    <string name="device_admin_summary">OpenLauncher requière le droit d\'administration de l\'appareil pour verrouiller l\'écran. Veuillez l\'activer dans les réglages pour utiliser cette fonctionnalité.</string>
     <string name="select_app">Choisir l\'application</string>
     <string name="select_wallpaper">Sélectionner un fond d\'écran</string>
     <string name="select_icon_pack">Sélectionner un pack d\'icônes</string>
@@ -191,6 +211,8 @@
     <string name="volume_level_notification">Notification</string>
     <string name="volume_level_system">Système</string>
     <string name="volume_level_media">Media</string>
+    <string name="notification_title">Notification d\'accès</string>
+    <string name="notification_summary">Openlauncher nécessite la permission de notification pour afficher les badges icônes.</string>
 
     <!-- Other -->
     <string name="columns">Colonnes</string>
@@ -211,6 +233,7 @@
     <string name="info">Info</string>
     <string name="uninstall">Désinstaller</string>
     <string name="remove">Supprimer</string>
+    <string name="resize">Redimensionner</string>
 
     <!-- Desktop Option View -->
     <string name="home">Accueil</string>
@@ -222,8 +245,8 @@
     <string name="toast_not_enough_space">Espace insuffisant.</string>
     <string name="toast_app_uninstalled">Cette application a été désinstallée.</string>
     <string name="toast_device_admin_required">Veuillez autoriser l\'administration de l\'appareil.</string>
+    <string name="toast_notification_permission_required">Veuillez activer les notifications.</string>
     <string name="toast_backup_success">Opération réussie.</string>
     <string name="toast_backup_error">Une erreur est survenue.</string>
     <string name="toast_icon_pack_error">Impossible de récupérer l\'icône sans la permission READ_EXTERNAL_STORAGE.</string>
-
 </resources>
