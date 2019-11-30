@@ -30,7 +30,6 @@
     <string name="about_libs">Librerías de Código Abierto</string>
     <string name="about_rate">Calificar</string>
     <string name="about_credit">Contribuidores</string>
-    <string name="about_credit_text_all_contributors">Todos los contribuidores</string>
 
     <!-- Settings -->
 
@@ -39,7 +38,7 @@
     <string name="pref_title__app_drawer">Cajón de aplicaciones</string>
     <string name="pref_title__gestures">Gestos</string>
     <string name="pref_title__icons">Íconos</string>
-    <string name="pref_title__miscellaneous">Miscelaneas</string>
+    <string name="pref_title__advanced">Miscelaneas</string>
     <string name="pref_title__about">Acerca de</string>
 
     <string name="pref_title__size">Tamaño</string>
@@ -53,7 +52,6 @@
     <string name="pref_title__others">Otros</string>
 
     <string name="pref_title__desktop_indicator_style">Estilo del indicador</string>
-    <string name="pref_summary__minibar">Configura el orden y la visibilidad de los ítems de la minibar.</string>
     <string name="pref_title__search_bar_enable">Barra de búsqueda</string>
     <string name="pref_summary__search_bar_enable">Muestra una barra de búsqueda encima del escritorio.</string>
     <string name="pref_title__desktop_fullscreen">Pantalla completa</string>
@@ -62,8 +60,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Muestra el indicador de página debajo del escritorio.</string>
     <string name="pref_title__desktop_show_label">Mostrar las etiquetas</string>
     <string name="pref_summary__desktop_show_label">Muestra las etiquetas de los ítems debajo de sus íconos.</string>
-    <string name="pref_title__desktop_rotate">Rotar</string>
-    <string name="pref_summary__desktop_rotate">Permitir la rotación de la pantalla.</string>
 
     <string name="pref_title__search_bar_base_uri">URI del buscador</string>
     <string name="pref_summary__search_bar_base_uri">Establece el URI utilizado para las búsquedas en la web.</string>
@@ -83,7 +79,6 @@
     <string name="pref_title__drawer_style">Estilo</string>
     <string name="pref_summary__drawer_style">Elige entre un cajón de aplicaciones paginado o vertical.</string>
     <string name="pref_title__hide_apps">Esconder apps</string>
-    <string name="pref_summary__hide_apps">Esconde las aplicaciones seleccionadas desde el lanzador de aplicaciones.</string>
     <string name="pref_title__drawer_show_card_view">Vista de tarjetas</string>
     <string name="pref_summary__drawer_show_card_view">Muestra una tarjeta sobre el fondo del cajón.</string>
     <string name="pref_title__drawer_remember_position">Recuerda la última página</string>
@@ -104,8 +99,8 @@
     <string name="pref_title__gesture_double_tap">Doble toque</string>
     <string name="pref_title__gesture_swipe_up">Deslizamiento hacia arriba</string>
     <string name="pref_title__gesture_swipe_down">Deslizamiento hacia abajo</string>
-    <string name="pref_title__gesture_pinch">Ampliación</string>
-    <string name="pref_title__gesture_unpinch">Reducción</string>
+    <string name="pref_title__gesture_pinch_in">Ampliación</string>
+    <string name="pref_title__gesture_pinch_out">Reducción</string>
 
     <string name="pref_summary__icon_size">Tamaño de los iconos de todas las aplicaciones.</string>
     <string name="pref_title__icon_pack">Paquete de iconos</string>

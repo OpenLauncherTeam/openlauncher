@@ -1,16 +1,19 @@
 package com.benny.openlauncher.model;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-
 import android.graphics.drawable.Drawable;
+import android.os.UserHandle;
 
 public class App {
     public Drawable _icon;
     public String _label;
     public String _packageName;
     public String _className;
+    public UserHandle _userHandle;
 
     public App(PackageManager pm, ResolveInfo info) {
         _icon = info.loadIcon(pm);
@@ -24,6 +27,15 @@ public class App {
         _label = info.loadLabel(pm).toString();
         _packageName = info.packageName;
         _className = info.name;
+        try {
+            // there is definitely a better way to store the apps
+            // should probably just store component name
+            Intent intent = pm.getLaunchIntentForPackage(_packageName);
+            ComponentName componentName = intent.getComponent();
+            _className = componentName.getClassName();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -57,10 +69,6 @@ public class App {
     }
 
     public String getComponentName() {
-        return "ComponentInfo{" + _packageName + "/" + _className + "}";
-    }
-
-    public String getFullName() {
-        return _packageName + "/" + _className;
+        return new ComponentName(_packageName, _className).toString();
     }
 }

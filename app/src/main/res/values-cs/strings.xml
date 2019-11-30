@@ -23,7 +23,6 @@
     <!-- About -->
     <string name="about_libs">Open Source knihovny</string>
     <string name="about_credit">Přispěvatelé</string>
-    <string name="about_credit_text_all_contributors">Všichni přispěvatelé</string>
 
     <!-- Settings -->
 
@@ -32,7 +31,7 @@
     <string name="pref_title__app_drawer">Seznam aplikací</string>
     <string name="pref_title__gestures">Gesta</string>
     <string name="pref_title__icons">Ikony</string>
-    <string name="pref_title__miscellaneous">Ostatní</string>
+    <string name="pref_title__advanced">Ostatní</string>
     <string name="pref_title__about">O aplikaci</string>
 
     <string name="pref_title__size">Velikost</string>
@@ -46,7 +45,6 @@
     <string name="pref_title__others">Jiné</string>
 
     <string name="pref_title__desktop_indicator_style">Vzhled indikátoru</string>
-    <string name="pref_summary__minibar">Nastavit pořadí a viditelnost položek v MiniBaru.</string>
     <string name="pref_title__search_bar_enable">Vyhledávací řádek</string>
     <string name="pref_summary__search_bar_enable">Zobrazit vyhledávací řádek nad plochou.</string>
     <string name="pref_title__desktop_fullscreen">Celá obrazovka</string>
@@ -55,8 +53,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Zobrazovat indikátor aktivní plochy.</string>
     <string name="pref_title__desktop_show_label">Zobrazovat popisky</string>
     <string name="pref_summary__desktop_show_label">Zobrazovat popisky pod ikonami.</string>
-    <string name="pref_title__desktop_rotate">Otočit</string>
-    <string name="pref_summary__desktop_rotate">Povolit rotaci obrazovky</string>
 
     <string name="pref_title__search_bar_base_uri">Vyhledávací URI</string>
     <string name="pref_summary__search_bar_base_uri">Nastavit URI pro webové hledání.</string>
@@ -75,7 +71,6 @@
     <string name="pref_title__drawer_style">Styl</string>
     <string name="pref_summary__drawer_style">Vyberte mezi stránkováním a svislým seznamem.</string>
     <string name="pref_title__hide_apps">Skrýt aplikace</string>
-    <string name="pref_summary__hide_apps">Skrýt vybrané aplikace z menu.</string>
     <string name="pref_title__drawer_show_card_view">Pozadí menu</string>
     <string name="pref_summary__drawer_show_card_view">Zobrazit jednolité barevné pozadí pod ikonami.</string>
     <string name="pref_title__drawer_remember_position">Pamatovat si poslední stránku</string>
@@ -96,8 +91,8 @@
     <string name="pref_title__gesture_double_tap">Dvojklik</string>
     <string name="pref_title__gesture_swipe_up">Táhnout nahoru</string>
     <string name="pref_title__gesture_swipe_down">Táhnout dolů</string>
-    <string name="pref_title__gesture_pinch">Přiblížit</string>
-    <string name="pref_title__gesture_unpinch">Oddálit</string>
+    <string name="pref_title__gesture_pinch_in">Přiblížit</string>
+    <string name="pref_title__gesture_pinch_out">Oddálit</string>
 
     <string name="pref_summary__icon_size">Velikost ikon aplikací.</string>
     <string name="pref_title__icon_pack">Soubor ikon</string>

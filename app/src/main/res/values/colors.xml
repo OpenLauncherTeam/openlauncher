@@ -16,8 +16,7 @@
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="darkTransparent">#B0000000</color>
-    <color name="transparent">#00000000</color>
+    <color name="shade">#B0000000</color>
 
     <color name="materialRed">#d6552e</color>
     <color name="materialGreen">#b4c64a</color>

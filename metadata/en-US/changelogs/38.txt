@@ -1,0 +1,9 @@
+* add new wallpaper scrolling feature when swiping through pages
+* add setting for landscape mode on the desktop
+* add initial option for basic app notifications
+* improve pager indicator for desktop and app drawer views
+* improve interface for the hide apps activity
+* fix gesture feedback setting for newer devices
+* fix issues with icon projection while dragging items around
+* fix app uninstall for newer android devices
+* more string translations

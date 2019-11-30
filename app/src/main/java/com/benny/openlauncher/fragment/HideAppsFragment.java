@@ -39,7 +39,7 @@ public class HideAppsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.request, container, false);
+        final View rootView = inflater.inflate(R.layout.view_hide_apps, container, false);
         _switcherLoad = rootView.findViewById(R.id.viewSwitcherLoadingMain);
 
         FloatingActionButton fab = rootView.findViewById(R.id.fab_rq);
@@ -139,18 +139,18 @@ public class HideAppsFragment extends Fragment {
         _grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> AdapterView, View view, int position, long row) {
                 App appInfo = (App) AdapterView.getItemAtPosition(position);
-                CheckBox checker = view.findViewById(R.id.CBappSelect);
+                CheckBox checker = view.findViewById(R.id.checkbox);
                 ViewSwitcher icon = view.findViewById(R.id.viewSwitcherChecked);
 
                 checker.toggle();
                 if (checker.isChecked()) {
-                    _listActivitiesHidden.add(appInfo.getFullName());
+                    _listActivitiesHidden.add(appInfo.getComponentName());
                     if (DEBUG) Log.v(TAG, "Selected App: " + appInfo.getLabel());
                     if (icon.getDisplayedChild() == 0) {
                         icon.showNext();
                     }
                 } else {
-                    _listActivitiesHidden.remove(appInfo.getFullName());
+                    _listActivitiesHidden.remove(appInfo.getComponentName());
                     if (DEBUG) Log.v(TAG, "Deselected App: " + appInfo.getLabel());
                     if (icon.getDisplayedChild() == 1) {
                         icon.showPrevious();
@@ -171,10 +171,10 @@ public class HideAppsFragment extends Fragment {
             if (convertView == null) {
                 convertView = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_hide_apps, parent, false);
                 holder = new ViewHolder();
-                holder._apkIcon = convertView.findViewById(R.id.IVappIcon);
-                holder._apkName = convertView.findViewById(R.id.TVappName);
-                holder._apkPackage = convertView.findViewById(R.id.TVappPackage);
-                holder._checker = convertView.findViewById(R.id.CBappSelect);
+                holder._apkIcon = convertView.findViewById(R.id.appIcon);
+                holder._apkName = convertView.findViewById(R.id.appName);
+                holder._apkPackage = convertView.findViewById(R.id.appPackage);
+                holder._checker = convertView.findViewById(R.id.checkbox);
                 holder._switcherChecked = convertView.findViewById(R.id.viewSwitcherChecked);
                 convertView.setTag(holder);
             } else {
@@ -189,8 +189,8 @@ public class HideAppsFragment extends Fragment {
 
             holder._switcherChecked.setInAnimation(null);
             holder._switcherChecked.setOutAnimation(null);
-            holder._checker.setChecked(_listActivitiesHidden.contains(appInfo.getFullName()));
-            if (_listActivitiesHidden.contains(appInfo.getFullName())) {
+            holder._checker.setChecked(_listActivitiesHidden.contains(appInfo.getComponentName()));
+            if (_listActivitiesHidden.contains(appInfo.getComponentName())) {
                 if (holder._switcherChecked.getDisplayedChild() == 0) {
                     holder._switcherChecked.showNext();
                 }

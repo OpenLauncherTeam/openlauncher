@@ -7,6 +7,9 @@ import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.UserHandle;
+import android.support.annotation.NonNull;
 
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.AppDeleteListener;
@@ -14,23 +17,18 @@ import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 
-import android.os.Build;
-import android.os.UserHandle;
-import android.support.annotation.NonNull;
-
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 
 public class AppManager {
-    private static AppManager _ref;
+    private static AppManager appManager;
 
     public static AppManager getInstance(Context context) {
-        return _ref == null ? (_ref = new AppManager(context)) : _ref;
+        return appManager == null ? (appManager = new AppManager(context)) : appManager;
     }
 
     private PackageManager _packageManager;
@@ -50,9 +48,9 @@ public class AppManager {
         return _context;
     }
 
-    public AppManager(Context c) {
-        _context = c;
-        _packageManager = c.getPackageManager();
+    public AppManager(Context context) {
+        _context = context;
+        _packageManager = context.getPackageManager();
     }
 
     public App findApp(Intent intent) {
@@ -89,10 +87,6 @@ public class AppManager {
         }
     }
 
-    public void onReceive(Context context, Intent intent) {
-        getAllApps();
-    }
-
     public List<App> getAllApps(Context context, boolean includeHidden) {
         return includeHidden ? getNonFilteredApps() : getApps();
     }
@@ -111,8 +105,8 @@ public class AppManager {
         }
     }
 
-    public void onAppUpdated(Context p1, Intent p2) {
-        onReceive(p1, p2);
+    public void onAppUpdated(Context context, Intent intent) {
+        getAllApps();
     }
 
     public void addUpdateListener(AppUpdateListener updateListener) {
@@ -168,32 +162,39 @@ public class AppManager {
                 for (UserHandle userHandle : profiles) {
                     List<LauncherActivityInfo> apps = launcherApps.getActivityList(null, userHandle);
                     for (LauncherActivityInfo info : apps) {
-                        _nonFilteredApps.add(new App(_packageManager, info.getApplicationInfo()));
+                        App app = new App(_packageManager, info.getApplicationInfo());
+                        app._userHandle = userHandle;
+                        // not sure if this conditional should be kept
+                        // duplicate apps were showing up in the app drawer
+                        if (!_nonFilteredApps.contains(app)) {
+                            _nonFilteredApps.add(app);
+                        }
                     }
                 }
+            } else {
+                Intent intent = new Intent(Intent.ACTION_MAIN, null);
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                List<ResolveInfo> activitiesInfo = _packageManager.queryIntentActivities(intent, 0);
+                for (ResolveInfo info : activitiesInfo) {
+                    App app = new App(_packageManager, info);
+                    _nonFilteredApps.add(app);
+                }
             }
 
-            Intent intent = new Intent(Intent.ACTION_MAIN, null);
-            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            List<ResolveInfo> activitiesInfo = _packageManager.queryIntentActivities(intent, 0);
-            Collections.sort(activitiesInfo, new Comparator<ResolveInfo>() {
+            // sort the apps by label here
+            Collections.sort(_nonFilteredApps, new Comparator<App>() {
                 @Override
-                public int compare(ResolveInfo p1, ResolveInfo p2) {
-                    return Collator.getInstance().compare(p1.loadLabel(_packageManager).toString(), p2.loadLabel(_packageManager).toString());
+                public int compare(App one, App two) {
+                    return Collator.getInstance().compare(one._label, two._label);
                 }
             });
-
-            for (ResolveInfo info : activitiesInfo) {
-                App app = new App(_packageManager, info);
-                _nonFilteredApps.add(app);
-            }
 
             List<String> hiddenList = AppSettings.get().getHiddenAppsList();
             if (hiddenList != null) {
                 for (int i = 0; i < _nonFilteredApps.size(); i++) {
                     boolean shouldGetAway = false;
                     for (String hidItemRaw : hiddenList) {
-                        if ((_nonFilteredApps.get(i)._packageName + "/" + _nonFilteredApps.get(i)._className).equals(hidItemRaw)) {
+                        if ((_nonFilteredApps.get(i).getComponentName()).equals(hidItemRaw)) {
                             shouldGetAway = true;
                             break;
                         }
@@ -203,8 +204,7 @@ public class AppManager {
                     }
                 }
             } else {
-                for (ResolveInfo info : activitiesInfo)
-                    _apps.add(new App(_packageManager, info));
+                _apps.addAll(_nonFilteredApps);
             }
 
             AppSettings appSettings = AppSettings.get();
@@ -216,7 +216,6 @@ public class AppManager {
 
         @Override
         protected void onPostExecute(Object result) {
-
             notifyUpdateListeners(_apps);
 
             List<App> removed = getRemovedApps(tempApps, _apps);
@@ -247,18 +246,5 @@ public class AppManager {
             }
         }
         return removed;
-    }
-
-    public static abstract class AppUpdatedListener implements AppUpdateListener {
-        private String listenerID;
-
-        public AppUpdatedListener() {
-            listenerID = UUID.randomUUID().toString();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return obj instanceof AppUpdatedListener && ((AppUpdatedListener) obj).listenerID.equals(this.listenerID);
-        }
     }
 }

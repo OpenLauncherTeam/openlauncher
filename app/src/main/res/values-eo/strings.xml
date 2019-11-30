@@ -30,7 +30,6 @@
     <string name="about_libs">Malfermitkoda biblioteko</string>
     <string name="about_rate">Taksi</string>
     <string name="about_credit">Kontribuanto</string>
-    <string name="about_credit_text_all_contributors">Ĉiuj kontribuantoj</string>
 
     <!-- Settings -->
 
@@ -39,7 +38,7 @@
     <string name="pref_title__app_drawer">Aplikaĵujo</string>
     <string name="pref_title__gestures">Gestoj</string>
     <string name="pref_title__icons">Piktogramoj</string>
-    <string name="pref_title__miscellaneous">Diversaĵoj</string>
+    <string name="pref_title__advanced">Diversaĵoj</string>
     <string name="pref_title__about">Pri</string>
 
     <string name="pref_title__size">Grando</string>
@@ -53,7 +52,6 @@
     <string name="pref_title__others">Aliaj</string>
 
     <string name="pref_title__desktop_indicator_style">Indikila stilo</string>
-    <string name="pref_summary__minibar">Agordi ordon kaj videblon de minibretaj eroj.</string>
     <string name="pref_title__search_bar_enable">Ŝercbreto</string>
     <string name="pref_summary__search_bar_enable">Montri serĉbreton sur labortablo.</string>
     <string name="pref_title__desktop_fullscreen">Plenekrano</string>
@@ -62,8 +60,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Montri lokokupilo sub labortablo.</string>
     <string name="pref_title__desktop_show_label">Montri markon</string>
     <string name="pref_summary__desktop_show_label">Montri ermarkon sub ĝiaj piktogramoj.</string>
-    <string name="pref_title__desktop_rotate">Turni</string>
-    <string name="pref_summary__desktop_rotate">Permesi turnado de ekrano.</string>
 
     <string name="pref_title__search_bar_base_uri">URI de serĉilo</string>
     <string name="pref_summary__search_bar_base_uri">Agordi uzita URI por TTT-serĉoj.</string>
@@ -83,7 +79,6 @@
     <string name="pref_title__drawer_style">Stilo</string>
     <string name="pref_summary__drawer_style">Elekti inter vertikala aŭ paĝa aplikaĵujo.</string>
     <string name="pref_title__hide_apps">Kaŝi aplikaĵon</string>
-    <string name="pref_summary__hide_apps">Kaŝi elektitajn aplikaĵojn el aplikaĵlanĉilo.</string>
     <string name="pref_title__drawer_show_card_view">Kartvido</string>
     <string name="pref_summary__drawer_show_card_view">Montri karton sur el ujfono.</string>
     <string name="pref_title__drawer_remember_position">Memori lastapaĝo.</string>
@@ -104,8 +99,8 @@
     <string name="pref_title__gesture_double_tap">Duobla frapeto</string>
     <string name="pref_title__gesture_swipe_up">Ŝovumo supren</string>
     <string name="pref_title__gesture_swipe_down">Ŝovumo malsupren</string>
-    <string name="pref_title__gesture_pinch">Amplifi</string>
-    <string name="pref_title__gesture_unpinch">Malamplifi</string>
+    <string name="pref_title__gesture_pinch_in">Amplifi</string>
+    <string name="pref_title__gesture_pinch_out">Malamplifi</string>
 
     <string name="pref_summary__icon_size">Grando de piktogramoj de ĉiuj aplikaĵoj.</string>
     <string name="pref_title__icon_pack">Piktogrampakaĵo</string>

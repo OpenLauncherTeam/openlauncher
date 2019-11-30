@@ -24,6 +24,7 @@ import android.support.v7.preference.PreferenceGroup;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.SettingsActivity;
 import com.benny.openlauncher.util.AppSettings;
+
 import net.gsantner.opoc.format.markdown.SimpleMarkdownParser;
 import net.gsantner.opoc.preference.GsPreferenceFragmentCompat;
 import net.gsantner.opoc.util.ActivityUtils;
@@ -55,7 +56,7 @@ public class SettingsAboutFragment extends GsPreferenceFragmentCompat<AppSetting
     }
 
     @Override
-    public Boolean onPreferenceClicked(Preference preference) {
+    public Boolean onPreferenceClicked(Preference preference, String key, int keyResId) {
         ActivityUtils au = new ActivityUtils(getActivity());
         if (isAdded() && preference.hasKey()) {
             switch (keyToStringResId(preference)) {
@@ -80,7 +81,7 @@ public class SettingsAboutFragment extends GsPreferenceFragmentCompat<AppSetting
                     return true;
                 }
                 case R.string.pref_key__more_info__bug_reports: {
-                    _cu.openWebpageInExternalBrowser(getString(R.string.app_bugreport_url));
+                    _cu.openWebpageInExternalBrowser(getString(R.string.app_bug_report_url));
                     return true;
                 }
                 case R.string.pref_key__more_info__translate: {
@@ -114,7 +115,7 @@ public class SettingsAboutFragment extends GsPreferenceFragmentCompat<AppSetting
                 case R.string.pref_key__more_info__open_source_licenses: {
                     try {
                         au.showDialogWithHtmlTextView(R.string.licenses, new SimpleMarkdownParser().parse(
-                                getResources().openRawResource(R.raw.licenses_3rd_party),
+                                getResources().openRawResource(R.raw.licenses),
                                 "", SimpleMarkdownParser.FILTER_ANDROID_TEXTVIEW).getHtml());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -166,13 +167,13 @@ public class SettingsAboutFragment extends GsPreferenceFragmentCompat<AppSetting
 
         // Basic app info
         if ((pref = findPreference(R.string.pref_key__more_info__app)) != null && pref.getSummary() == null) {
-            pref.setIcon(R.drawable.ic_launcher);
-            pref.setSummary(String.format(locale, "%s\nVersion v%s (%d)", _cu.getPackageName(), _cu.getAppVersionName(), _cu.bcint("VERSION_CODE", 0)));
+            pref.setIcon(R.mipmap.ic_launcher);
+            pref.setSummary(String.format(locale, "%s\nVersion v%s (%d)", _cu.getPackageIdReal(), _cu.getAppVersionName(), _cu.bcint("VERSION_CODE", 0)));
         }
 
         // Extract some build information and publish in summary
         if ((pref = findPreference(R.string.pref_key__more_info__copy_build_information)) != null && pref.getSummary() == null) {
-            String summary = String.format(locale, "\n<b>Package:</b> %s\n<b>Version:</b> v%s (%d)", _cu.getPackageName(), _cu.getAppVersionName(), _cu.bcint("VERSION_CODE", 0));
+            String summary = String.format(locale, "\n<b>Package:</b> %s\n<b>Version:</b> v%s (%d)", _cu.getPackageIdReal(), _cu.getAppVersionName(), _cu.bcint("VERSION_CODE", 0));
             summary += (tmp = _cu.bcstr("FLAVOR", "")).isEmpty() ? "" : ("\n<b>Flavor:</b> " + tmp.replace("flavor", ""));
             summary += (tmp = _cu.bcstr("BUILD_TYPE", "")).isEmpty() ? "" : (" (" + tmp + ")");
             summary += (tmp = _cu.bcstr("BUILD_DATE", "")).isEmpty() ? "" : ("\n<b>Build date:</b> " + tmp);
@@ -181,15 +182,15 @@ public class SettingsAboutFragment extends GsPreferenceFragmentCompat<AppSetting
             pref.setSummary(_cu.htmlToSpanned(summary.trim().replace("\n", "<br/>")));
         }
 
-        // Extract project team from raw ressource, where 1 person = 4 lines
+        // Extract project team from raw resource, where 1 person = 4 lines
         // 1) Name/Title, 2) Description/Summary, 3) Link/View-Intent, 4) Empty line
         if ((pref = findPreference(R.string.pref_key__more_info__project_team)) != null && ((PreferenceGroup) pref).getPreferenceCount() == 0) {
-            String[] data = (_cu.readTextfileFromRawRes(R.raw.project_team, "", "").trim() + "\n\n").split("\n");
+            String[] data = (_cu.readTextfileFromRawRes(R.raw.project, "", "").trim() + "\n\n").split("\n");
             for (int i = 0; i + 2 < data.length; i += 4) {
                 Preference person = new Preference(context);
                 person.setTitle(data[i]);
                 person.setSummary(data[i + 1]);
-                person.setIcon(R.drawable.ic_person_black_24dp);
+                person.setIcon(R.drawable.ic_person);
                 try {
                     Uri uri = Uri.parse(data[i + 2]);
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);

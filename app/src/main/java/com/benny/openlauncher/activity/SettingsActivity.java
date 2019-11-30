@@ -1,10 +1,10 @@
 package com.benny.openlauncher.activity;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.fragment.SettingsBaseFragment;
 import com.benny.openlauncher.fragment.SettingsMasterFragment;
+import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.BackupHelper;
 import com.benny.openlauncher.util.Definitions;
 import com.nononsenseapps.filepicker.Utils;
@@ -24,7 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsActivity extends ThemeActivity implements SettingsBaseFragment.OnPreferenceStartFragmentCallback {
+public class SettingsActivity extends ColorActivity implements SettingsBaseFragment.OnPreferenceStartFragmentCallback {
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
@@ -39,7 +40,7 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
 
         toolbar.setTitle(R.string.pref_title__settings);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24px));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white));
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         toolbar.setBackgroundColor(_appSettings.getPrimaryColor());
 
@@ -56,10 +57,8 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference preference) {
         Fragment fragment = Fragment.instantiate(this, preference.getFragment(), preference.getExtras());
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_holder, fragment)
-                .addToBackStack(fragment.getTag())
-                .commit();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_holder, fragment).addToBackStack(fragment.getTag()).commit();
         return true;
     }
 
@@ -67,10 +66,12 @@ public class SettingsActivity extends ThemeActivity implements SettingsBaseFragm
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
+            Setup.dataManager().close();
             List<Uri> files = Utils.getSelectedFilesFromResult(data);
             switch (requestCode) {
                 case Definitions.INTENT_BACKUP:
                     BackupHelper.backupConfig(this, new File(Utils.getFileForUri(files.get(0)).getAbsolutePath() + "/openlauncher.zip").toString());
+                    Setup.dataManager().open();
                     break;
                 case Definitions.INTENT_RESTORE:
                     BackupHelper.restoreConfig(this, Utils.getFileForUri(files.get(0)).toString());

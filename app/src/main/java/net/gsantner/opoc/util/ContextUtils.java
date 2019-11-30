@@ -3,18 +3,20 @@
  *   Maintained by Gregor Santner, 2016-
  *   https://gsantner.net/
  *
- *   License: Apache 2.0 / Commercial
- *  https://github.com/gsantner/opoc/#licensing
- *  https://www.apache.org/licenses/LICENSE-2.0
+ *   License of this file: Apache 2.0 (Commercial upon request)
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *     https://github.com/gsantner/opoc/#licensing
  *
 #########################################################*/
 package net.gsantner.opoc.util;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -37,6 +39,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
+import android.os.SystemClock;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -44,9 +50,14 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
 import android.support.annotation.StringRes;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.app.ActivityManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.text.TextUtilsCompat;
+import android.support.v4.util.Pair;
+import android.support.v4.view.ViewCompat;
 import android.text.Html;
+import android.text.InputFilter;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -55,6 +66,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -67,12 +81,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
+import static android.content.Context.VIBRATOR_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.graphics.Bitmap.CompressFormat;
 
-@SuppressWarnings({"WeakerAccess", "unused", "SameParameterValue", "ObsoleteSdkInt", "deprecation", "SpellCheckingInspection"})
+@SuppressWarnings({"WeakerAccess", "unused", "SameParameterValue", "ObsoleteSdkInt", "deprecation", "SpellCheckingInspection", "TryFinallyCanBeTryWithResources", "UnusedAssignment"})
 public class ContextUtils {
     //
     // Members, Constructors
@@ -87,6 +105,9 @@ public class ContextUtils {
         return _context;
     }
 
+    public void freeContextRef() {
+        _context = null;
+    }
 
     //
     // Class Methods
@@ -101,21 +122,29 @@ public class ContextUtils {
      *
      * @return A valid id if the id could be found, else 0
      */
-    public int getResId(ResType resType, final String name) {
-        return _context.getResources().getIdentifier(name, resType.name().toLowerCase(), _context.getPackageName());
+    public int getResId(final ResType resType, final String name) {
+        try {
+            return _context.getResources().getIdentifier(name, resType.name().toLowerCase(), _context.getPackageName());
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     /**
      * Get String by given string ressource id (nuermic)
      */
-    public String rstr(@StringRes int strResId) {
-        return _context.getString(strResId);
+    public String rstr(@StringRes final int strResId) {
+        try {
+            return _context.getString(strResId);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
      * Get String by given string ressource identifier (textual)
      */
-    public String rstr(String strResKey) {
+    public String rstr(final String strResKey) {
         try {
             return rstr(getResId(ResType.STRING, strResKey));
         } catch (Resources.NotFoundException e) {
@@ -126,14 +155,22 @@ public class ContextUtils {
     /**
      * Get drawable from given ressource identifier
      */
-    public Drawable rdrawable(@DrawableRes int resId) {
-        return ContextCompat.getDrawable(_context, resId);
+    public Drawable rdrawable(@DrawableRes final int resId) {
+        try {
+            return ContextCompat.getDrawable(_context, resId);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
      * Get color by given color ressource id
      */
-    public int rcolor(@ColorRes int resId) {
+    public int rcolor(@ColorRes final int resId) {
+        if (resId == 0) {
+            Log.e(getClass().getName(), "ContextUtils::rcolor: resId is 0!");
+            return Color.BLACK;
+        }
         return ContextCompat.getColor(_context, resId);
     }
 
@@ -159,29 +196,37 @@ public class ContextUtils {
      * @param intColor  The color coded in int
      * @param withAlpha Optional; Set first bool parameter to true to also include alpha value
      */
-    public String colorToHexString(int intColor, boolean... withAlpha) {
+    public static String colorToHexString(final int intColor, final boolean... withAlpha) {
         boolean a = withAlpha != null && withAlpha.length >= 1 && withAlpha[0];
         return String.format(a ? "#%08X" : "#%06X", (a ? 0xFFFFFFFF : 0xFFFFFF) & intColor);
     }
 
+    public static String getAndroidVersion() {
+        return Build.VERSION.RELEASE + " (" + Build.VERSION.SDK_INT + ")";
+    }
+
     public String getAppVersionName() {
+        PackageManager manager = _context.getPackageManager();
         try {
-            PackageManager manager = _context.getPackageManager();
-            PackageInfo info = manager.getPackageInfo(getPackageName(), 0);
+            PackageInfo info = manager.getPackageInfo(getPackageIdManifest(), 0);
             return info.versionName;
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return "?";
+            try {
+                PackageInfo info = manager.getPackageInfo(getPackageIdReal(), 0);
+                return info.versionName;
+            } catch (PackageManager.NameNotFoundException ignored) {
+            }
         }
+        return "?";
     }
 
     public String getAppInstallationSource() {
         String src = null;
         try {
-            src = _context.getPackageManager().getInstallerPackageName(getPackageName());
+            src = _context.getPackageManager().getInstallerPackageName(getPackageIdManifest());
         } catch (Exception ignored) {
         }
-        if (TextUtils.isEmpty(src)) {
+        if (src == null || src.trim().isEmpty()) {
             return "Sideloaded";
         } else if (src.toLowerCase().contains(".amazon.")) {
             return "Amazon Appstore";
@@ -189,7 +234,7 @@ public class ContextUtils {
         switch (src) {
             case "com.android.vending":
             case "com.google.android.feedback": {
-                return "Google Play Store";
+                return "Google Play";
             }
             case "org.fdroid.fdroid.privileged":
             case "org.fdroid.fdroid": {
@@ -213,22 +258,29 @@ public class ContextUtils {
      * If the parameter is an string a browser will get triggered
      */
     public void openWebpageInExternalBrowser(final String url) {
-        Uri uri = Uri.parse(url);
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
         try {
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
             _context.startActivity(intent);
-        } catch (ActivityNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Get this apps package name. The builtin method may fail when used with flavors
+     * Get the apps base packagename, which is equal with all build flavors and variants
      */
-    public String getPackageName() {
+    public String getPackageIdManifest() {
         String pkg = rstr("manifest_package_id");
-        return pkg != null ? pkg : _context.getPackageName();
+        return !TextUtils.isEmpty(pkg) ? pkg : _context.getPackageName();
+    }
+
+    /**
+     * Get this apps package name, returns the flavor specific package name.
+     */
+    public String getPackageIdReal() {
+        return _context.getPackageName();
     }
 
     /**
@@ -239,8 +291,8 @@ public class ContextUtils {
      * of the package set in manifest (root element).
      * Falls back to applicationId of the app which may differ from manifest.
      */
-    public Object getBuildConfigValue(String fieldName) {
-        String pkg = getPackageName() + ".BuildConfig";
+    public Object getBuildConfigValue(final String fieldName) {
+        String pkg = getPackageIdManifest() + ".BuildConfig";
         try {
             Class<?> c = Class.forName(pkg);
             return c.getField(fieldName).get(null);
@@ -253,9 +305,9 @@ public class ContextUtils {
     /**
      * Get a BuildConfig bool value
      */
-    public Boolean bcbool(String fieldName, Boolean defaultValue) {
+    public Boolean bcbool(final String fieldName, final Boolean defaultValue) {
         Object field = getBuildConfigValue(fieldName);
-        if (field != null && field instanceof Boolean) {
+        if (field instanceof Boolean) {
             return (Boolean) field;
         }
         return defaultValue;
@@ -264,9 +316,9 @@ public class ContextUtils {
     /**
      * Get a BuildConfig string value
      */
-    public String bcstr(String fieldName, String defaultValue) {
+    public String bcstr(final String fieldName, final String defaultValue) {
         Object field = getBuildConfigValue(fieldName);
-        if (field != null && field instanceof String) {
+        if (field instanceof String) {
             return (String) field;
         }
         return defaultValue;
@@ -275,9 +327,9 @@ public class ContextUtils {
     /**
      * Get a BuildConfig string value
      */
-    public Integer bcint(String fieldName, int defaultValue) {
+    public Integer bcint(final String fieldName, final int defaultValue) {
         Object field = getBuildConfigValue(fieldName);
-        if (field != null && field instanceof Integer) {
+        if (field instanceof Integer) {
             return (Integer) field;
         }
         return defaultValue;
@@ -365,8 +417,8 @@ public class ContextUtils {
      * Check if app with given {@code packageName} is installed
      */
     public boolean isAppInstalled(String packageName) {
-        PackageManager pm = _context.getApplicationContext().getPackageManager();
         try {
+            PackageManager pm = _context.getApplicationContext().getPackageManager();
             pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
             return true;
         } catch (PackageManager.NameNotFoundException e) {
@@ -378,17 +430,17 @@ public class ContextUtils {
      * Restart the current app. Supply the class to start on startup
      */
     public void restartApp(Class classToStart) {
-        Intent inte = new Intent(_context, classToStart);
-        PendingIntent inteP = PendingIntent.getActivity(_context, 555, inte, PendingIntent.FLAG_CANCEL_CURRENT);
+        Intent intent = new Intent(_context, classToStart);
+        PendingIntent pendi = PendingIntent.getActivity(_context, 555, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager mgr = (AlarmManager) _context.getSystemService(Context.ALARM_SERVICE);
         if (_context instanceof Activity) {
             ((Activity) _context).finish();
         }
         if (mgr != null) {
-            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, inteP);
+            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, pendi);
         } else {
-            inte.addFlags(FLAG_ACTIVITY_NEW_TASK);
-            _context.startActivity(inte);
+            intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+            _context.startActivity(intent);
         }
         Runtime.getRuntime().exit(0);
     }
@@ -457,19 +509,25 @@ public class ContextUtils {
      * {@code androidLC} may be in any of the forms: en, de, de-rAt
      * If given an empty string, the default (system) locale gets loaded
      */
-    public void setAppLanguage(String androidLC) {
+    public void setAppLanguage(final String androidLC) {
         Locale locale = getLocaleByAndroidCode(androidLC);
+        locale = (locale != null && !androidLC.isEmpty()) ? locale : Resources.getSystem().getConfiguration().locale;
+        setLocale(locale);
+    }
+
+    public ContextUtils setLocale(final Locale locale) {
         Configuration config = _context.getResources().getConfiguration();
-        config.locale = (locale != null && !androidLC.isEmpty())
-                ? locale : Resources.getSystem().getConfiguration().locale;
+        config.locale = (locale != null ? locale : Resources.getSystem().getConfiguration().locale);
         _context.getResources().updateConfiguration(config, null);
+        Locale.setDefault(locale);
+        return this;
     }
 
     /**
      * Try to guess if the color on top of the given {@code colorOnBottomInt}
      * should be light or dark. Returns true if top color should be light
      */
-    public boolean shouldColorOnTopBeLight(@ColorInt int colorOnBottomInt) {
+    public boolean shouldColorOnTopBeLight(@ColorInt final int colorOnBottomInt) {
         return 186 > (((0.299 * Color.red(colorOnBottomInt))
                 + ((0.587 * Color.green(colorOnBottomInt))
                 + (0.114 * Color.blue(colorOnBottomInt)))));
@@ -478,7 +536,7 @@ public class ContextUtils {
     /**
      * Convert a html string to an android {@link Spanned} object
      */
-    public Spanned htmlToSpanned(String html) {
+    public Spanned htmlToSpanned(final String html) {
         Spanned result;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
@@ -503,11 +561,86 @@ public class ContextUtils {
     }
 
     /**
+     * Get the private directory for the current package (usually /data/data/package.name/)
+     */
+    @SuppressWarnings("StatementWithEmptyBody")
+    public File getAppDataPrivateDir() {
+        File filesDir;
+        try {
+            filesDir = new File(new File(_context.getPackageManager().getPackageInfo(getPackageIdReal(), 0).applicationInfo.dataDir), "files");
+        } catch (PackageManager.NameNotFoundException e) {
+            filesDir = _context.getFilesDir();
+        }
+        if (!filesDir.exists() && filesDir.mkdirs()) ;
+        return filesDir;
+    }
+
+    /**
+     * Get public (accessible) appdata folders
+     */
+    @SuppressWarnings("StatementWithEmptyBody")
+    public List<Pair<File, String>> getAppDataPublicDirs(boolean internalStorageFolder, boolean sdcardFolders, boolean storageNameWithoutType) {
+        List<Pair<File, String>> dirs = new ArrayList<>();
+        for (File externalFileDir : ContextCompat.getExternalFilesDirs(_context, null)) {
+            if (externalFileDir == null || Environment.getExternalStorageDirectory() == null) {
+                continue;
+            }
+            boolean isInt = externalFileDir.getAbsolutePath().startsWith(Environment.getExternalStorageDirectory().getAbsolutePath());
+            boolean add = (internalStorageFolder && isInt) || (sdcardFolders && !isInt);
+            if (add) {
+                dirs.add(new Pair<>(externalFileDir, getStorageName(externalFileDir, storageNameWithoutType)));
+                if (!externalFileDir.exists() && externalFileDir.mkdirs()) ;
+            }
+        }
+        return dirs;
+    }
+
+    public String getStorageName(final File externalFileDir, final boolean storageNameWithoutType) {
+        boolean isInt = externalFileDir.getAbsolutePath().startsWith(Environment.getExternalStorageDirectory().getAbsolutePath());
+
+        String[] split = externalFileDir.getAbsolutePath().split("/");
+        if (split.length > 2) {
+            return isInt ? (storageNameWithoutType ? "Internal Storage" : "") : (storageNameWithoutType ? split[2] : ("SD Card (" + split[2] + ")"));
+        } else {
+            return "Storage";
+        }
+    }
+
+    public List<Pair<File, String>> getStorages(final boolean internalStorageFolder, final boolean sdcardFolders) {
+        List<Pair<File, String>> storages = new ArrayList<>();
+        for (Pair<File, String> pair : getAppDataPublicDirs(internalStorageFolder, sdcardFolders, true)) {
+            if (pair.first != null && pair.first.getAbsolutePath().lastIndexOf("/Android/data") > 0) {
+                try {
+                    storages.add(new Pair<>(new File(pair.first.getCanonicalPath().replaceFirst("/Android/data.*", "")), pair.second));
+                } catch (IOException ignored) {
+                }
+            }
+        }
+        return storages;
+    }
+
+    public File getStorageRootFolder(final File file) {
+        String filepath;
+        try {
+            filepath = file.getCanonicalPath();
+        } catch (Exception ignored) {
+            return null;
+        }
+        for (Pair<File, String> storage : getStorages(false, true)) {
+            //noinspection ConstantConditions
+            if (filepath.startsWith(storage.first.getAbsolutePath())) {
+                return storage.first;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Request the givens paths to be scanned by MediaScanner
      *
      * @param files Files and folders to scan
      */
-    public void mediaScannerScanFile(File... files) {
+    public void mediaScannerScanFile(final File... files) {
         if (android.os.Build.VERSION.SDK_INT > 19) {
             String[] paths = new String[files.length];
             for (int i = 0; i < files.length; i++) {
@@ -556,8 +689,12 @@ public class ContextUtils {
     /**
      * Get a {@link Bitmap} out of a {@link DrawableRes}
      */
-    public Bitmap drawableToBitmap(@DrawableRes int drawableId) {
-        return drawableToBitmap(ContextCompat.getDrawable(_context, drawableId));
+    public Bitmap drawableToBitmap(@DrawableRes final int drawableId) {
+        try {
+            return drawableToBitmap(ContextCompat.getDrawable(_context, drawableId));
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
@@ -565,7 +702,7 @@ public class ContextUtils {
      * Specifying a {@code maxDimen} is also possible and a value below 2000
      * is recommended, otherwise a {@link OutOfMemoryError} may occur
      */
-    public Bitmap loadImageFromFilesystem(File imagePath, int maxDimen) {
+    public Bitmap loadImageFromFilesystem(final File imagePath, final int maxDimen) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(imagePath.getAbsolutePath(), options);
@@ -581,7 +718,7 @@ public class ContextUtils {
      * @param maxDimen Max size of the Bitmap (width or height)
      * @return the scaling factor that needs to be applied to the bitmap
      */
-    public int calculateInSampleSize(BitmapFactory.Options options, int maxDimen) {
+    public int calculateInSampleSize(final BitmapFactory.Options options, final int maxDimen) {
         // Raw height and width of image
         int height = options.outHeight;
         int width = options.outWidth;
@@ -597,7 +734,7 @@ public class ContextUtils {
      * Scale the bitmap so both dimensions are lower or equal to {@code maxDimen}
      * This keeps the aspect ratio
      */
-    public Bitmap scaleBitmap(Bitmap bitmap, int maxDimen) {
+    public Bitmap scaleBitmap(final Bitmap bitmap, final int maxDimen) {
         int picSize = Math.min(bitmap.getHeight(), bitmap.getWidth());
         float scale = 1.f * maxDimen / picSize;
         Matrix matrix = new Matrix();
@@ -608,7 +745,7 @@ public class ContextUtils {
     /**
      * Write the given {@link Bitmap} to {@code imageFile}, in {@link CompressFormat#JPEG} format
      */
-    public boolean writeImageToFileJpeg(File imageFile, Bitmap image) {
+    public boolean writeImageToFileJpeg(final File imageFile, final Bitmap image) {
         return writeImageToFile(imageFile, image, Bitmap.CompressFormat.JPEG, 95);
     }
 
@@ -621,7 +758,7 @@ public class ContextUtils {
      * @param quality    Quality level, defaults to 95
      * @return True if writing was successful
      */
-    public boolean writeImageToFile(File targetFile, Bitmap image, CompressFormat format, Integer quality) {
+    public boolean writeImageToFile(final File targetFile, final Bitmap image, CompressFormat format, Integer quality) {
         File folder = new File(targetFile.getParent());
         if (quality == null || quality < 0 || quality > 100) {
             quality = 95;
@@ -659,7 +796,7 @@ public class ContextUtils {
      * Draw text in the center of the given {@link DrawableRes}
      * This may be useful for e.g. badge counts
      */
-    public Bitmap drawTextOnDrawable(@DrawableRes int drawableRes, String text, int textSize) {
+    public Bitmap drawTextOnDrawable(@DrawableRes final int drawableRes, final String text, final int textSize) {
         Resources resources = _context.getResources();
         float scale = resources.getDisplayMetrics().density;
         Bitmap bitmap = drawableToBitmap(drawableRes);
@@ -684,12 +821,16 @@ public class ContextUtils {
      * Try to tint all {@link Menu}s {@link MenuItem}s with given color
      */
     @SuppressWarnings("ConstantConditions")
-    public void tintMenuItems(Menu menu, boolean recurse, @ColorInt int iconColor) {
+    public void tintMenuItems(final Menu menu, final boolean recurse, @ColorInt final int iconColor) {
         for (int i = 0; i < menu.size(); i++) {
             MenuItem item = menu.getItem(i);
-            tintDrawable(item.getIcon(), iconColor);
-            if (item.hasSubMenu() && recurse) {
-                tintMenuItems(item.getSubMenu(), recurse, iconColor);
+            try {
+                tintDrawable(item.getIcon(), iconColor);
+                if (item.hasSubMenu() && recurse) {
+                    tintMenuItems(item.getSubMenu(), recurse, iconColor);
+                }
+            } catch (Exception ignored) {
+                // This should not happen at all, but may in bad menu.xml configuration
             }
         }
     }
@@ -697,14 +838,14 @@ public class ContextUtils {
     /**
      * Loads {@link Drawable} by given {@link DrawableRes} and applies a color
      */
-    public Drawable tintDrawable(@DrawableRes int drawableRes, @ColorInt int color) {
+    public Drawable tintDrawable(@DrawableRes final int drawableRes, @ColorInt final int color) {
         return tintDrawable(rdrawable(drawableRes), color);
     }
 
     /**
      * Tint a {@link Drawable} with given {@code color}
      */
-    public Drawable tintDrawable(@Nullable Drawable drawable, @ColorInt int color) {
+    public Drawable tintDrawable(@Nullable Drawable drawable, @ColorInt final int color) {
         if (drawable != null) {
             drawable = DrawableCompat.wrap(drawable);
             DrawableCompat.setTint(drawable.mutate(), color);
@@ -716,7 +857,10 @@ public class ContextUtils {
      * Try to make icons in Toolbar/ActionBars SubMenus visible
      * This may not work on some devices and it maybe won't work on future android updates
      */
-    public void setSubMenuIconsVisiblity(Menu menu, boolean visible) {
+    public void setSubMenuIconsVisiblity(final Menu menu, final boolean visible) {
+        if (TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+            return;
+        }
         if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
             try {
                 @SuppressLint("PrivateApi") Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
@@ -727,4 +871,142 @@ public class ContextUtils {
             }
         }
     }
+
+
+    public String getLocalizedDateFormat() {
+        return ((SimpleDateFormat) android.text.format.DateFormat.getDateFormat(_context)).toPattern();
+    }
+
+    public String getLocalizedTimeFormat() {
+        return ((SimpleDateFormat) android.text.format.DateFormat.getTimeFormat(_context)).toPattern();
+    }
+
+    public String getLocalizedDateTimeFormat() {
+        return getLocalizedDateFormat() + " " + getLocalizedTimeFormat();
+    }
+
+    /**
+     * A {@link InputFilter} for filenames
+     */
+    @SuppressWarnings("Convert2Lambda")
+    public static final InputFilter INPUTFILTER_FILENAME = new InputFilter() {
+        public CharSequence filter(CharSequence src, int start, int end, Spanned dest, int dstart, int dend) {
+            if (src.length() < 1) return null;
+            char last = src.charAt(src.length() - 1);
+            String illegal = "|\\?*<\":>+[]/'";
+            if (illegal.indexOf(last) > -1) return src.subSequence(0, src.length() - 1);
+            return null;
+        }
+    };
+
+    /**
+     * A simple {@link Runnable} which does a touch event on a view.
+     * This pops up e.g. the keyboard on a {@link android.widget.EditText}
+     * <p>
+     * Example: new Handler().postDelayed(new DoTouchView(editView), 200);
+     */
+    public static class DoTouchView implements Runnable {
+        View _view;
+
+        public DoTouchView(View view) {
+            _view = view;
+        }
+
+        @Override
+        public void run() {
+            _view.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, 0, 0, 0));
+            _view.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, 0, 0, 0));
+        }
+    }
+
+
+    public String getMimeType(final File file) {
+        return getMimeType(Uri.fromFile(file));
+    }
+
+    /**
+     * Detect MimeType of given file
+     * Android/Java's own MimeType map is very very small and detection barely works at all
+     * Hence use custom map for some file extensions
+     */
+    public String getMimeType(final Uri uri) {
+        String mimeType = null;
+        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
+            ContentResolver cr = _context.getContentResolver();
+            mimeType = cr.getType(uri);
+        } else {
+            String ext = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
+            mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext.toLowerCase());
+
+            // Try to guess if the recommended methods fail
+            if (TextUtils.isEmpty(mimeType)) {
+                switch (ext) {
+                    case "md":
+                    case "markdown":
+                    case "mkd":
+                    case "mdown":
+                    case "mkdn":
+                    case "mdwn":
+                    case "rmd":
+                        mimeType = "text/markdown";
+                        break;
+                    case "yaml":
+                    case "yml":
+                        mimeType = "text/yaml";
+                        break;
+                    case "json":
+                        mimeType = "text/json";
+                        break;
+                    case "txt":
+                        mimeType = "text/plain";
+                        break;
+                }
+            }
+        }
+
+        if (TextUtils.isEmpty(mimeType)) {
+            mimeType = "*/*";
+        }
+        return mimeType;
+    }
+
+    public Integer parseColor(final String colorstr) {
+        if (colorstr == null || colorstr.trim().isEmpty()) {
+            return null;
+        }
+        try {
+            return Color.parseColor(colorstr);
+        } catch (IllegalArgumentException ignored) {
+            return null;
+        }
+    }
+
+    public boolean isDeviceGoodHardware() {
+        try {
+            ActivityManager activityManager = (ActivityManager) _context.getSystemService(Context.ACTIVITY_SERVICE);
+            return !ActivityManagerCompat.isLowRamDevice(activityManager) &&
+                    Runtime.getRuntime().availableProcessors() >= 4 &&
+                    activityManager.getMemoryClass() >= 128;
+        } catch (Exception ignored) {
+            return true;
+        }
+    }
+
+    // Vibrate device one time by given amount of time, defaulting to 50ms
+    // Requires <uses-permission android:name="android.permission.VIBRATE" /> in AndroidManifest to work
+    @SuppressWarnings("UnnecessaryReturnStatement")
+    @SuppressLint("MissingPermission")
+    public void vibrate(final int... ms) {
+        int ms_v = ms != null && ms.length > 0 ? ms[0] : 50;
+        Vibrator vibrator = ((Vibrator) _context.getSystemService(VIBRATOR_SERVICE));
+        if (vibrator == null) {
+            return;
+        } else if (Build.VERSION.SDK_INT >= 26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(ms_v, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            vibrator.vibrate(ms_v);
+        }
+    }
 }
+
+

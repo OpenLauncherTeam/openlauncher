@@ -34,7 +34,6 @@
     <string name="about_libs">开源库</string>
     <string name="about_rate">评分</string>
     <string name="about_credit">贡献者</string>
-    <string name="about_credit_text_all_contributors">所有贡献者</string>
 
     <!-- Settings -->
 
@@ -43,7 +42,7 @@
     <string name="pref_title__app_drawer">应用抽屉</string>
     <string name="pref_title__gestures">手势</string>
     <string name="pref_title__icons">图标</string>
-    <string name="pref_title__miscellaneous">杂项</string>
+    <string name="pref_title__advanced">杂项</string>
     <string name="pref_title__about">关于</string>
 
     <string name="pref_title__size">尺寸</string>
@@ -52,7 +51,6 @@
     <string name="pref_title__color">颜色</string>
     <string name="pref_title__search_bar">搜索栏</string>
 
-    <string name="pref_summary__minibar">设置快捷操作栏项的排序和可见度</string>
     <string name="pref_title__search_bar_enable">搜索栏</string>
     <string name="pref_summary__search_bar_enable">在桌面上部显示一个搜索栏</string>
     <string name="pref_title__desktop_fullscreen">全屏</string>
@@ -76,7 +74,6 @@
     <string name="pref_title__drawer_style">样式</string>
     <string name="pref_summary__drawer_style">选择使用分页或垂直的应用抽屉</string>
     <string name="pref_title__hide_apps">隐藏应用</string>
-    <string name="pref_summary__hide_apps">在启动器中隐藏选中应用</string>
     <string name="pref_title__drawer_show_card_view">卡片背景</string>
     <string name="pref_summary__drawer_show_card_view">在抽屉背景上方显示一个卡片</string>
     <string name="pref_title__drawer_remember_position">记住最后所在的页面</string>
@@ -94,8 +91,8 @@
     <string name="pref_title__gesture_double_tap">双击</string>
     <string name="pref_title__gesture_swipe_up">上滑</string>
     <string name="pref_title__gesture_swipe_down">下滑</string>
-    <string name="pref_title__gesture_pinch">捏合</string>
-    <string name="pref_title__gesture_unpinch">外张</string>
+    <string name="pref_title__gesture_pinch_in">捏合</string>
+    <string name="pref_title__gesture_pinch_out">外张</string>
     <string name="pref_title__gesture_feedback">反馈</string>
 
     <string name="pref_summary__icon_size">所有图标的尺寸</string>

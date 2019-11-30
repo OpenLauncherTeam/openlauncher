@@ -14,10 +14,10 @@ import android.widget.FrameLayout;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
-import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -58,7 +58,7 @@ public class AppDrawerGrid extends FrameLayout {
         _scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
         _scrollBar.setClipToPadding(true);
         _scrollBar.setDraggableFromAnywhere(true);
-        _scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
+        _scrollBar.setHandleColor(Setup.appSettings().getDrawerFastScrollColor());
 
         _gridDrawerAdapter = new AppDrawerGridAdapter();
 
@@ -95,13 +95,14 @@ public class AppDrawerGrid extends FrameLayout {
         for (int i = 0; i < apps.size(); i++) {
             App app = apps.get(i);
             items.add(new IconLabelItem(app.getIcon(), app.getLabel())
-                    .withIconSize(getContext(), 50)
+                    .withIconSize(Setup.appSettings().getIconSize())
                     .withTextColor(Color.WHITE)
                     .withTextVisibility(Setup.appSettings().getDrawerShowLabel())
-                    .withIconPadding(getContext(), 8)
+                    .withIconPadding(8)
                     .withTextGravity(Gravity.CENTER)
                     .withIconGravity(Gravity.TOP)
                     .withOnClickAnimate(false)
+                    .withIsAppLauncher(true)
                     .withOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {

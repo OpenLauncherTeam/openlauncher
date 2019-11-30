@@ -7,7 +7,7 @@
     tools:ignore="ContentDescription">
 
     <CheckBox
-        android:id="@+id/CBappSelect"
+        android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:clickable="false"
@@ -23,21 +23,19 @@
         android:layout_height="46dp">
 
         <ImageView
-            android:id="@+id/IVappIcon"
+            android:id="@+id/appIcon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_launcher" />
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_launcher" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_check_dark_24dp" />
+            android:src="@drawable/ic_check_dark" />
     </ViewSwitcher>
 
     <LinearLayout
@@ -47,7 +45,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/TVappName"
+            android:id="@+id/appName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -61,7 +59,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/TVappPackage"
+            android:id="@+id/appPackage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"

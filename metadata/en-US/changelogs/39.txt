@@ -1,0 +1,9 @@
+Thanks: hobleyd, desempare, saechimdaeki
+
+* add wallpaper scroll setting with three different options
+* new action to open camera from gesture
+* refactor code for item and desktop options
+* fix issues with widget resize action
+* vibrate on desktop edit if gesture feedback is enabled
+* minor changes to folder colors
+* fix lots of issues with broken or missing widgets

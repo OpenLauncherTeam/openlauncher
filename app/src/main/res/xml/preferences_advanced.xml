@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:title="@string/pref_title__advanced">
+
+    <net.gsantner.opoc.preference.LanguagePreferenceCompat
+        android:key="@string/pref_key__language"
+        android:summary="@string/pref_summary__language"
+        android:title="@string/pref_title__language" />
+
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__backup">
+
+        <Preference
+            android:key="@string/pref_key__backup"
+            android:summary="@string/pref_summary__backup"
+            android:title="@string/pref_title__backup" />
+
+        <Preference
+            android:key="@string/pref_key__restore"
+            android:summary="@string/pref_summary__restore"
+            android:title="@string/pref_title__restore" />
+
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
+
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__debug">
+
+        <Preference
+            android:key="@string/pref_key__reset_settings"
+            android:summary="@string/pref_summary__reset_settings"
+            android:title="@string/pref_title__reset_settings" />
+
+        <Preference
+            android:key="@string/pref_key__reset_database"
+            android:summary="@string/pref_summary__reset_database"
+            android:title="@string/pref_title__reset_database" />
+
+        <Preference
+            android:key="@string/pref_key__restart"
+            android:summary="@string/pref_summary__restart"
+            android:title="@string/pref_title__restart" />
+
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
+
+</PreferenceScreen>

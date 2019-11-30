@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
@@ -45,6 +46,7 @@
             android:taskAffinity=""
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -55,13 +57,13 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.benny.openlauncher.activity.MinibarEditActivity"
-            android:label="Edit Item"
+            android:label="@string/minibar"
             android:parentActivityName="com.benny.openlauncher.activity.HomeActivity"
             android:theme="@style/NormalActivity.Light" />
         <activity
             android:name="com.benny.openlauncher.activity.SettingsActivity"
             android:configChanges="orientation|keyboard|screenSize"
-            android:label="Settings"
+            android:label="@string/pref_title__settings"
             android:theme="@style/NormalActivity.Light" />
         <activity
             android:name="com.benny.openlauncher.activity.HideAppsActivity"
@@ -103,6 +105,16 @@
             </intent-filter>
         </receiver>
 
+        <service
+            android:name="com.benny.openlauncher.notifications.NotificationListener"
+            android:label="@string/icon_badge_service_title"
+            android:enabled="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -112,5 +124,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
     </application>
+
 </manifest>

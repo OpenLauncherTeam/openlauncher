@@ -19,9 +19,12 @@ import java.util.List;
 
 public abstract class SettingsBaseFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final List<Integer> noRestart = new ArrayList<>(Arrays.asList(
-            R.string.pref_key__gesture_double_tap, R.string.pref_key__gesture_swipe_up,
-            R.string.pref_key__gesture_swipe_down, R.string.pref_key__gesture_pinch,
-            R.string.pref_key__gesture_unpinch));
+            R.string.pref_key__gesture_double_tap,
+            R.string.pref_key__gesture_swipe_up,
+            R.string.pref_key__gesture_swipe_down,
+            R.string.pref_key__gesture_pinch_in,
+            R.string.pref_key__gesture_pinch_out
+    ));
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -31,20 +34,21 @@ public abstract class SettingsBaseFragment extends PreferenceFragmentCompat impl
     @Override
     public void onResume() {
         super.onResume();
+
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         if (toolbar != null) toolbar.setTitle(getPreferenceScreen().getTitle());
 
         SharedPreferences sharedPreferences = AppSettings.get().getDefaultPreferences();
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
-        PreferenceGroup prefGroup = getPreferenceScreen();
-        updateIcons(prefGroup);
+        updateIcons(getPreferenceScreen());
         updateSummaries();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+
         SharedPreferences sharedPreferences = AppSettings.get().getDefaultPreferences();
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
@@ -73,6 +77,7 @@ public abstract class SettingsBaseFragment extends PreferenceFragmentCompat impl
                         getContext().getTheme().resolveAttribute(android.R.attr.textColor, color, true);
                         drawable.mutate().setColorFilter(getResources().getColor(color.resourceId), PorterDuff.Mode.SRC_IN);
                     }
+
                     if (preference instanceof PreferenceGroup) {
                         updateIcons((PreferenceGroup) preference);
                     }

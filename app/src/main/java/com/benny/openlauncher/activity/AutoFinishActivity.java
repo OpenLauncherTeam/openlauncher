@@ -13,7 +13,7 @@ public class AutoFinishActivity extends Activity {
         finish();
     }
 
-    public static void start(Context c) {
-        c.startActivity(new Intent(c, AutoFinishActivity.class));
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, AutoFinishActivity.class));
     }
 }

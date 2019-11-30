@@ -58,7 +58,7 @@ public class BackupHelper {
         ZipEntry entry = new ZipEntry(name);
         outZip.putNextEntry(entry);
         int count;
-        while((count = inputStream.read(data, 0, Definitions.BUFFER_SIZE)) != -1) {
+        while ((count = inputStream.read(data, 0, Definitions.BUFFER_SIZE)) != -1) {
             outZip.write(data, 0, count);
         }
         inputStream.close();
@@ -70,20 +70,20 @@ public class BackupHelper {
         boolean found = false;
 
         ZipEntry ze;
-        while((ze = inZip.getNextEntry()) != null) {
-            if(ze.getName().equals(name)) {
+        while ((ze = inZip.getNextEntry()) != null) {
+            if (ze.getName().equals(name)) {
                 found = true;
                 // delete old file first
                 File oldFile = new File(file);
-                if(oldFile.exists()) {
-                    if(!oldFile.delete()) {
+                if (oldFile.exists()) {
+                    if (!oldFile.delete()) {
                         throw new Exception("Could not delete " + file);
                     }
                 }
 
                 FileOutputStream outFile = new FileOutputStream(file);
                 int count = 0;
-                while((count = inZip.read(data)) != -1) {
+                while ((count = inZip.read(data)) != -1) {
                     outFile.write(data, 0, count);
                 }
 

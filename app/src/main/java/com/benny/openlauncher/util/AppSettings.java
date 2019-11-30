@@ -14,6 +14,8 @@ import com.benny.openlauncher.widget.PagerIndicator;
 
 import net.gsantner.opoc.preference.SharedPreferencesPropertyBackend;
 
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -39,8 +41,21 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getIntOfStringPref(R.string.pref_key__desktop_indicator_style, PagerIndicator.Mode.DOTS);
     }
 
-    public boolean getDesktopRotate() {
-        return getBool(R.string.pref_key__desktop_rotate, false);
+    public int getDesktopOrientationMode() {
+        return getIntOfStringPref(R.string.pref_key__desktop_orientation, 0);
+    }
+
+    public Definitions.WallpaperScroll getDesktopWallpaperScroll() {
+        int value = getIntOfStringPref(R.string.pref_key__desktop_wallpaper_scroll, 0);
+        switch (value) {
+            case 0:
+            default:
+                return Definitions.WallpaperScroll.Normal;
+            case 1:
+                return Definitions.WallpaperScroll.Inverse;
+            case 2:
+                return Definitions.WallpaperScroll.Off;
+        }
     }
 
     public boolean getDesktopShowGrid() {
@@ -63,6 +78,10 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getBool(R.string.pref_key__search_bar_enable, true);
     }
 
+    public boolean getSearchBarStartsWith() {
+        return getBool(R.string.pref_key__search_bar_starts_with, true);
+    }
+
     public String getSearchBarBaseURI() {
         return getString(R.string.pref_key__search_bar_base_uri, R.string.pref_default__search_bar_base_uri);
     }
@@ -75,16 +94,11 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getBool(R.string.pref_key__search_bar_show_hidden_apps, false);
     }
 
-    @SuppressLint("SimpleDateFormat")
-    public SimpleDateFormat getUserDateFormat() {
+    public DateTimeFormatter getUserDateFormat() {
         String line1 = getString(R.string.pref_key__date_bar_date_format_custom_1, rstr(R.string.pref_default__date_bar_date_format_custom_1));
         String line2 = getString(R.string.pref_key__date_bar_date_format_custom_2, rstr(R.string.pref_default__date_bar_date_format_custom_2));
 
-        try {
-            return new SimpleDateFormat((line1 + "'\n'" + line2).replace("''", ""), Locale.getDefault());
-        } catch (Exception ex) {
-            return new SimpleDateFormat("'Invalid pattern''\n''Invalid Pattern'");
-        }
+        return DateTimeFormatter.ofPattern(line1 +  "'\n'" + line2);
     }
 
     public int getDesktopDateMode() {
@@ -99,16 +113,12 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getInt(R.string.pref_key__desktop_background_color, Color.TRANSPARENT);
     }
 
+    public int getDesktopInsetColor() {
+        return getInt(R.string.pref_key__desktop_inset_color, Color.TRANSPARENT);
+    }
+
     public int getDesktopFolderColor() {
         return getInt(R.string.pref_key__desktop_folder_color, Color.WHITE);
-    }
-
-    public int getFolderLabelColor() {
-        return getInt(R.string.pref_key__desktop_folder_label_color, Color.BLACK);
-    }
-
-    public int getDesktopInsetColor() {
-        return getInt(R.string.pref_key__desktop_inset_color, ContextCompat.getColor(_context, R.color.transparent));
     }
 
     public int getMinibarBackgroundColor() {
@@ -172,7 +182,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getDrawerBackgroundColor() {
-        return getInt(R.string.pref_key__drawer_background_color, rcolor(R.color.darkTransparent));
+        return getInt(R.string.pref_key__drawer_background_color, rcolor(R.color.shade));
     }
 
     public int getDrawerCardColor() {
@@ -208,11 +218,11 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public Object getGesturePinch() {
-        return getGesture(R.string.pref_key__gesture_pinch);
+        return getGesture(R.string.pref_key__gesture_pinch_in);
     }
 
     public Object getGestureUnpinch() {
-        return getGesture(R.string.pref_key__gesture_unpinch);
+        return getGesture(R.string.pref_key__gesture_pinch_out);
     }
 
     public Object getGesture(int key) {
@@ -232,7 +242,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public String getTheme() {
-        return getString(R.string.pref_key__theme, "0");
+        return getString(R.string.pref_key__theme, "1");
     }
 
     public int getPrimaryColor() {
@@ -240,11 +250,15 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getIconSize() {
-        return getInt(R.string.pref_key__icon_size, 48);
+        return getInt(R.string.pref_key__icon_size, 52);
     }
 
     public String getIconPack() {
         return getString(R.string.pref_key__icon_pack, "");
+    }
+
+    public boolean getNotificationStatus() {
+        return getBool(R.string.pref_key__gesture_notifications, false);
     }
 
     public void setIconPack(String value) {
@@ -252,8 +266,8 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getAnimationSpeed() {
-        // invert the value because it is used as a duration
-        return 100 - getInt(R.string.pref_key__overall_animation_speed_modifier, 70);
+        // invert the value because it is used as a multiplier
+        return 100 - getInt(R.string.pref_key__animation_speed, 80);
     }
 
     public String getLanguage() {

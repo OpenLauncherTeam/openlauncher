@@ -5,25 +5,25 @@
     android:layout_height="match_parent"
     android:title="@string/pref_title__app_drawer">
 
-    <PreferenceCategory android:title="@string/pref_title__size">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__size">
 
         <SeekBarPreference
-            android:defaultValue="4"
+            android:defaultValue="5"
             android:key="@string/pref_key__drawer_columns"
             android:max="20"
             android:title="@string/columns"
             app:min="2" />
 
         <SeekBarPreference
-            android:defaultValue="5"
+            android:defaultValue="6"
             android:key="@string/pref_key__drawer_rows"
             android:max="20"
             android:title="@string/rows"
             app:min="2" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__appearance">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__appearance">
 
         <ListPreference
             android:defaultValue="1"
@@ -32,11 +32,6 @@
             android:key="@string/pref_key__drawer_style"
             android:summary="@string/pref_summary__drawer_style"
             android:title="@string/pref_title__drawer_style" />
-
-        <Preference
-            android:key="@string/pref_key__hidden_apps"
-            android:summary="@string/pref_summary__hide_apps"
-            android:title="@string/pref_title__hide_apps" />
 
         <CheckBoxPreference
             android:defaultValue="true"
@@ -62,12 +57,12 @@
             android:summary="@string/pref_summary__drawer_show_label"
             android:title="@string/pref_title__drawer_show_label" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title__color">
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__color">
 
         <com.flask.colorpicker.ColorPickerPreference
-            android:defaultValue="@color/darkTransparent"
+            android:defaultValue="@color/shade"
             android:key="@string/pref_key__drawer_background_color"
             android:title="@string/pref_title__drawer_background_color"
             app:lightnessSlider="true"
@@ -94,6 +89,6 @@
             app:lightnessSlider="true"
             app:alphaSlider="true" />
 
-    </PreferenceCategory>
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
 </PreferenceScreen>

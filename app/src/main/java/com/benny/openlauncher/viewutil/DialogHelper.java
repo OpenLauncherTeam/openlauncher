@@ -16,8 +16,8 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.Tool;
@@ -98,9 +98,10 @@ public class DialogHelper {
         final List<App> apps = AppManager.getInstance(context).getApps();
         for (int i = 0; i < apps.size(); i++) {
             items.add(new IconLabelItem(apps.get(i).getIcon(), apps.get(i).getLabel())
-                    .withIconSize(context, 50)
+                    .withIconSize(50)
+                    .withIsAppLauncher(true)
                     .withIconGravity(Gravity.START)
-                    .withIconPadding(context, 8));
+                    .withIconPadding(8));
         }
         fastItemAdapter.set(items);
         fastItemAdapter.withOnClickListener(new com.mikepenz.fastadapter.listeners.OnClickListener<IconLabelItem>() {
@@ -132,8 +133,8 @@ public class DialogHelper {
                 .title((activity.getString(R.string.select_icon_pack)))
                 .build();
 
-        fastItemAdapter.add(new IconLabelItem(activity, R.drawable.ic_launcher, R.string.default_icons)
-                .withIconPadding(context, 16)
+        fastItemAdapter.add(new IconLabelItem(activity, R.mipmap.ic_launcher, R.string.default_icons)
+                .withIconPadding(16)
                 .withIconGravity(Gravity.START)
                 .withOnClickListener(new View.OnClickListener() {
                     @Override
@@ -147,8 +148,9 @@ public class DialogHelper {
         for (int i = 0; i < resolveInfos.size(); i++) {
             final int mI = i;
             fastItemAdapter.add(new IconLabelItem(resolveInfos.get(i).loadIcon(packageManager), resolveInfos.get(i).loadLabel(packageManager).toString())
-                    .withIconPadding(context, 16)
-                    .withIconSize(context, 50)
+                    .withIconPadding(16)
+                    .withIconSize(50)
+                    .withIsAppLauncher(true)
                     .withIconGravity(Gravity.START)
                     .withOnClickListener(new View.OnClickListener() {
                         @Override

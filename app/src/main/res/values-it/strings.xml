@@ -26,7 +26,6 @@
     <string name="about_libs">Librerie open source</string>
     <string name="about_rate">Valuta l\'app</string>
     <string name="about_credit">Collaboratori</string>
-    <string name="about_credit_text_all_contributors">Tutti i collaboratori</string>
 
     <!-- Settings -->
     <string name="pref_title__desktop">Desktop</string>
@@ -34,7 +33,7 @@
     <string name="pref_title__app_drawer">Drawer</string>
     <string name="pref_title__gestures">Azioni</string>
     <string name="pref_title__icons">Icone</string>
-    <string name="pref_title__miscellaneous">Altre impostazioni</string>
+    <string name="pref_title__advanced">Altre impostazioni</string>
     <string name="pref_title__about">Informazioni</string>
 
     <string name="pref_title__size">Dimensione</string>
@@ -48,7 +47,6 @@
     <string name="pref_title__others">Altro</string>
 
     <string name="pref_title__desktop_indicator_style">Stile indicatore</string>
-    <string name="pref_summary__minibar">Configura l\'ordine e la visibilità degli elementi della Minibar.</string>
     <string name="pref_title__search_bar_enable">Barra di ricerca</string>
     <string name="pref_summary__search_bar_enable">Mostra barra di ricerca in cima al desktop.</string>
     <string name="pref_title__desktop_fullscreen">Schermo intero</string>
@@ -57,8 +55,6 @@
     <string name="pref_summary__desktop_show_position_indicator">Mostra indicatore delle pagine nel desktop.</string>
     <string name="pref_title__desktop_show_label">Mostra etichette</string>
     <string name="pref_summary__desktop_show_label">Mostra etichette sotto le rispettive icone.</string>
-    <string name="pref_title__desktop_rotate">Rotazione</string>
-    <string name="pref_summary__desktop_rotate">Consenti rotazione schermo.</string>
 
     <string name="pref_title__search_bar_base_uri">Search URI</string>
     <string name="pref_summary__search_bar_base_uri">Imposta l\' URI usato per le ricerche web.</string>
@@ -68,7 +64,6 @@
     <string name="pref_summary__search_bar_force_browser">Forza l\'uso del browser per le ricerche online.</string>
     <string name="pref_title__desktop_background_color">Sfondo</string>
     <string name="pref_title__desktop_folder_color">Sfondo cartella</string>
-    <string name="pref_title__desktop_folder_color_text">Testo cartella</string>
     <string name="pref_title__search_bar_show_hidden_apps">Mostra app nascoste</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Includi app nascoste nei risultati di ricerca.</string>
 
@@ -79,7 +74,6 @@
     <string name="pref_title__drawer_style">Stile</string>
     <string name="pref_summary__drawer_style">Scegli tra un Drawer a pagine o verticale.</string>
     <string name="pref_title__hide_apps">Nascondi app</string>
-    <string name="pref_summary__hide_apps">Nascondi le app selezionate dal Launcher.</string>
     <string name="pref_title__drawer_show_card_view">Sfondo a scheda</string>
     <string name="pref_summary__drawer_show_card_view">Mostra una scheda sopra lo sfondo del Drawer.</string>
     <string name="pref_title__drawer_remember_position">Ricorda ultima pagina</string>
@@ -104,8 +98,8 @@
     <string name="pref_title__gesture_double_tap">Doppio tocco</string>
     <string name="pref_title__gesture_swipe_up">Scorrimento verso l\'alto</string>
     <string name="pref_title__gesture_swipe_down">Scorrimento verso il basso</string>
-    <string name="pref_title__gesture_pinch">Pinch in</string>
-    <string name="pref_title__gesture_unpinch">Pinch out</string>
+    <string name="pref_title__gesture_pinch_in">Pinch in</string>
+    <string name="pref_title__gesture_pinch_out">Pinch out</string>
 
     <string name="pref_summary__icon_size">Dimensione icone.</string>
     <string name="pref_title__icon_pack">Pacchetto icone</string>

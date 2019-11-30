@@ -6,36 +6,30 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.view.HapticFeedbackConstants;
 import android.view.View;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
-import com.benny.openlauncher.model.App;
+import com.benny.openlauncher.notifications.NotificationListener;
 import com.benny.openlauncher.util.AppManager;
-import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallback;
-import com.benny.openlauncher.viewutil.GroupIconDrawable;
+import com.benny.openlauncher.viewutil.GroupDrawable;
 
-public class AppItemView extends View implements Drawable.Callback {
-
+public class AppItemView extends View implements Drawable.Callback, NotificationListener.NotificationCallback {
     private static final int MIN_ICON_TEXT_MARGIN = 8;
     private static final char ELLIPSIS = '…';
 
     private Drawable _icon = null;
     private String _label;
     private Paint _textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint _notifyPaint = new Paint();
     private Rect _textContainer = new Rect(), testTextContainer = new Rect();
     private float _iconSize;
     private boolean _showLabel = true;
@@ -44,6 +38,8 @@ public class AppItemView extends View implements Drawable.Callback {
     private int _targetedWidth;
     private int _targetedHeightPadding;
     private float _heightPadding;
+
+    private int _notificationCount = 0;
 
     public AppItemView(Context context) {
         this(context, null);
@@ -55,6 +51,7 @@ public class AppItemView extends View implements Drawable.Callback {
         _labelHeight = Tool.dp2px(14);
         _textPaint.setTextSize(Tool.sp2px(12));
         _textPaint.setColor(Color.WHITE);
+        _notifyPaint.setColor(Color.RED);
     }
 
     public Drawable getIcon() {
@@ -71,6 +68,12 @@ public class AppItemView extends View implements Drawable.Callback {
 
     public void setLabel(String label) {
         _label = label;
+    }
+
+    public void notificationCallback(Integer count) {
+        _notificationCount = count;
+
+        invalidate();
     }
 
     public float getIconSize() {
@@ -140,6 +143,12 @@ public class AppItemView extends View implements Drawable.Callback {
             canvas.translate((getWidth() - _iconSize) / 2, _heightPadding);
             _icon.setBounds(0, 0, (int) _iconSize, (int) _iconSize);
             _icon.draw(canvas);
+
+            if (_notificationCount > 0) {
+                float radius = _iconSize * .15f;
+                canvas.drawCircle(_iconSize - radius, _heightPadding, radius, _notifyPaint);
+            }
+
             canvas.restore();
         }
     }
@@ -206,12 +215,12 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder setGroupItem(Context context, final DesktopCallback callback, final Item item) {
             _view.setLabel(item.getLabel());
-            _view.setIcon(new GroupIconDrawable(context, item, Setup.appSettings().getIconSize()));
+            _view.setIcon(new GroupDrawable(context, item, Setup.appSettings().getIconSize()));
             _view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (HomeActivity.Companion.getLauncher() != null && (HomeActivity.Companion.getLauncher()).getGroupPopup().showPopup(item, v, callback)) {
-                        ((GroupIconDrawable) ((AppItemView) v).getIcon()).popUp();
+                        ((GroupDrawable) ((AppItemView) v).getIcon()).popUp();
                     }
                 }
             });
@@ -220,7 +229,7 @@ public class AppItemView extends View implements Drawable.Callback {
 
         public Builder setActionItem(Item item) {
             _view.setLabel(item.getLabel());
-            _view.setIcon(ContextCompat.getDrawable(Setup.appContext(), R.drawable.ic_apps_white_48dp));
+            _view.setIcon(ContextCompat.getDrawable(Setup.appContext(), R.drawable.item_drawer));
             _view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {

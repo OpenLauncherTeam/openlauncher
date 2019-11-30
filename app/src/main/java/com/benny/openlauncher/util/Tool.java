@@ -14,7 +14,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
+import android.support.annotation.NonNull;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
@@ -26,11 +26,8 @@ import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 
-import android.support.annotation.NonNull;
-
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 public class Tool {
@@ -53,7 +50,7 @@ public class Tool {
             // might as well make this a fallback method
             view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(VibrationEffect.createOneShot(50, 80));
+            vibrator.vibrate(VibrationEffect.createOneShot(50, 160));
         } else {
             vibrator.vibrate(50);
         }

@@ -15,16 +15,18 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.Definitions.ItemState;
 import com.benny.openlauncher.util.DragAction;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DesktopCallback;
-import com.benny.openlauncher.viewutil.GroupIconDrawable;
+import com.benny.openlauncher.viewutil.GroupDrawable;
 import com.benny.openlauncher.viewutil.ItemViewFactory;
+
+import net.gsantner.opoc.util.ContextUtils;
 
 import io.codetail.animation.ViewAnimationUtils;
 import io.codetail.widget.RevealFrameLayout;
@@ -37,7 +39,7 @@ public class GroupPopupView extends RevealFrameLayout {
     private Animator _folderAnimator;
     private int _cx;
     private int _cy;
-    private TextView _textView;
+    private TextView _textViewGroupName;
 
     public GroupPopupView(Context context) {
         super(context);
@@ -80,7 +82,7 @@ public class GroupPopupView extends RevealFrameLayout {
         _popupCard.setVisibility(View.INVISIBLE);
         setVisibility(View.INVISIBLE);
 
-        _textView = _popupCard.findViewById(R.id.group_popup_label);
+        _textViewGroupName = _popupCard.findViewById(R.id.group_popup_label);
     }
 
 
@@ -88,11 +90,13 @@ public class GroupPopupView extends RevealFrameLayout {
         if (_isShowing || getVisibility() == View.VISIBLE) return false;
         _isShowing = true;
 
+        ContextUtils cu = new ContextUtils(_textViewGroupName.getContext());
         String label = item.getLabel();
-        _textView.setVisibility(label.isEmpty() ? GONE : VISIBLE);
-        _textView.setText(label);
-        _textView.setTextColor(Setup.appSettings().getFolderLabelColor());
-        _textView.setTypeface(null, Typeface.BOLD);
+        _textViewGroupName.setVisibility(label.isEmpty() ? GONE : VISIBLE);
+        _textViewGroupName.setText(label);
+        _textViewGroupName.setTextColor(cu.shouldColorOnTopBeLight(Setup.appSettings().getDesktopFolderColor()) ? Color.WHITE : Color.BLACK);
+        _textViewGroupName.setTypeface(null, Typeface.BOLD);
+        cu.freeContextRef();
 
         final Context context = itemView.getContext();
         int[] cellSize = GroupPopupView.GroupDef.getCellSize(item.getGroupItems().size());
@@ -155,7 +159,7 @@ public class GroupPopupView extends RevealFrameLayout {
             @Override
             public void onDismiss() {
                 if (((AppItemView) itemView).getIcon() != null) {
-                    ((GroupIconDrawable) ((AppItemView) itemView).getIcon()).popBack();
+                    ((GroupDrawable) ((AppItemView) itemView).getIcon()).popBack();
                 }
             }
         };
@@ -288,7 +292,7 @@ public class GroupPopupView extends RevealFrameLayout {
         HomeActivity._db.saveItem(dragOutItem, ItemState.Visible);
         HomeActivity._db.saveItem(currentItem);
 
-        currentView.setIcon(new GroupIconDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
+        currentView.setIcon(new GroupDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
     }
 
     public void updateItem(DesktopCallback callback, final Item currentItem, View currentView) {

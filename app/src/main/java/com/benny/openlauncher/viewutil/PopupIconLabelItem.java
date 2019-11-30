@@ -1,6 +1,6 @@
 package com.benny.openlauncher.viewutil;
 
-import android.support.v7.widget.CardView;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,34 +9,21 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import java.util.List;
 
-public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, PopupIconLabelItem.ViewHolder_PopupIconLabelItem> {
+public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, PopupIconLabelItem.ViewHolder> {
     private final int _iconRes;
     private final int _labelRes;
 
-    public static final class ViewHolder_PopupIconLabelItem extends RecyclerView.ViewHolder {
-        @NonNull
-        private final CardView cardView;
-        private ImageView iconView;
-        private TextView labelView;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView iconView;
+        TextView labelView;
 
-        public ViewHolder_PopupIconLabelItem(@NonNull View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            this.cardView = (CardView) itemView;
-            this.labelView = itemView.findViewById(R.id.item_popup_label);
-            this.iconView = itemView.findViewById(R.id.item_popup_icon);
-        }
 
-        public final TextView getLabelView() {
-            return this.labelView;
-        }
-
-        public final ImageView getIconView() {
-            return this.iconView;
+            labelView = itemView.findViewById(R.id.item_popup_label);
+            iconView = itemView.findViewById(R.id.item_popup_icon);
         }
     }
 
@@ -53,40 +40,30 @@ public final class PopupIconLabelItem extends AbstractItem<PopupIconLabelItem, P
         return R.layout.item_popup_icon_label;
     }
 
-    public void bindView(@Nullable ViewHolder_PopupIconLabelItem holder, @Nullable List<Object> payloads) {
+    public void bindView(@NonNull ViewHolder holder, @NonNull List<Object> payloads) {
         super.bindView(holder, payloads);
-        if (holder != null) {
-            TextView labelView = holder.getLabelView();
-            if (labelView != null) {
-                labelView.setText(_labelRes);
-            }
+
+        TextView labelView = holder.labelView;
+        if (labelView != null) {
+            labelView.setText(_labelRes);
         }
-        if (holder != null) {
-            ImageView iconView = holder.getIconView();
-            if (iconView != null) {
-                iconView.setImageResource(_iconRes);
-            }
-        }
+
+        ImageView iconView = holder.iconView;
+        iconView.setImageResource(_iconRes);
     }
 
-    public void unbindView(@Nullable ViewHolder_PopupIconLabelItem holder) {
+    public void unbindView(@NonNull ViewHolder holder) {
         super.unbindView(holder);
-        if (holder != null) {
-            TextView labelView = holder.getLabelView();
-            if (labelView != null) {
-                labelView.setText(null);
-            }
-        }
-        if (holder != null) {
-            ImageView iconView = holder.getIconView();
-            if (iconView != null) {
-                iconView.setImageDrawable(null);
-            }
-        }
+
+        TextView labelView = holder.labelView;
+        labelView.setText(null);
+
+        ImageView iconView = holder.iconView;
+        iconView.setImageDrawable(null);
     }
 
     @Override
-    public ViewHolder_PopupIconLabelItem getViewHolder(View v) {
-        return new ViewHolder_PopupIconLabelItem(v);
+    public ViewHolder getViewHolder(@NonNull View view) {
+        return new ViewHolder(view);
     }
 }

@@ -3,9 +3,9 @@
  *   Maintained by Gregor Santner, 2017-
  *   https://gsantner.net/
  *
- *   License: Apache 2.0 / Commercial
- *  https://github.com/gsantner/opoc/#licensing
- *  https://www.apache.org/licenses/LICENSE-2.0
+ *   License of this file: Apache 2.0 (Commercial upon request)
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *     https://github.com/gsantner/opoc/#licensing
  *
 #########################################################*/
 package net.gsantner.opoc.util;
@@ -77,7 +77,7 @@ public class NetworkUtils {
             int written = 0;
             final float invLength = 1f / connection.getContentLength();
 
-            byte data[] = new byte[BUFFER_SIZE];
+            byte[] data = new byte[BUFFER_SIZE];
             while ((count = input.read(data)) != -1) {
                 output.write(data, 0, count);
                 if (invLength != -1f && progressCallback != null) {

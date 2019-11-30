@@ -32,24 +32,30 @@ import android.widget.TextView;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.util.DragHandler;
-import com.benny.openlauncher.viewutil.IconLabelItem;
-import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.model.App;
+import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DragAction;
+import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.CircleDrawable;
+import com.benny.openlauncher.viewutil.IconLabelItem;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
-import java.text.SimpleDateFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.threeten.bp.ZonedDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 public class SearchBar extends FrameLayout {
+    private static Logger LOG = LoggerFactory.getLogger("SearchBar");
 
     private static final long ANIM_TIME = 200;
     public TextView _searchClock;
@@ -62,10 +68,13 @@ public class SearchBar extends FrameLayout {
     private FastItemAdapter<IconLabelItem> _adapter = new FastItemAdapter<>();
     private CallBack _callback;
     private boolean _expanded;
-    private Mode _mode = Mode.DateAll;
     private int _searchClockTextSize = 28;
     private float _searchClockSubTextFactor = 0.5f;
     private int bottomInset;
+
+    private HashMap<Integer, DateTimeFormatter> _clockModes = new HashMap<>(4);
+    private Integer _clockFormatterIndex = -1;
+    private DateTimeFormatter _clockFormatter = null;
 
     public SearchBar(@NonNull Context context) {
         super(context);
@@ -102,6 +111,17 @@ public class SearchBar extends FrameLayout {
         int iconSize = dp1 * 24;
         int iconPadding = dp1 * 6;
 
+        // These have to match the Preferences Array, but without item 0 as that is a custom option which can be changed:
+        //   <item>@string/custom</item>
+        //   <item>February 17\nSaturday, 2018</item>
+        //   <item>February 17\n15:48</item>
+        //   <item>February 17, 2018\n15:48</item>
+        //   <item>15:48\nFebruary 17, 2018</item>
+        _clockModes.put(1, DateTimeFormatter.ofPattern("MMMM dd\nEEEE, yyyy", Locale.getDefault()));
+        _clockModes.put(2, DateTimeFormatter.ofPattern("MMMM dd\nHH:mm", Locale.getDefault()));
+        _clockModes.put(3, DateTimeFormatter.ofPattern("MMMM dd, yyyy\nHH:mm", Locale.getDefault()));
+        _clockModes.put(4, DateTimeFormatter.ofPattern("HH:mm\nMMMM dd, yyyy", Locale.getDefault()));
+
         _searchClock = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.view_search_clock, this, false);
         _searchClock.setTextSize(TypedValue.COMPLEX_UNIT_DIP, _searchClockTextSize);
         LayoutParams clockParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -126,7 +146,8 @@ public class SearchBar extends FrameLayout {
         switchButtonParams.gravity = Gravity.START | Gravity.CENTER_VERTICAL;
 
         if (isInEditMode()) return;
-        _icon = new CircleDrawable(getContext(), getResources().getDrawable(R.drawable.ic_search_light_24dp), Color.BLACK);
+
+        _icon = new CircleDrawable(getContext(), getResources().getDrawable(R.drawable.ic_search), Color.WHITE, Color.BLACK, 100);
         _searchButton = new AppCompatImageView(getContext());
         _searchButton.setImageDrawable(_icon);
         _searchButton.setOnClickListener(new OnClickListener() {
@@ -144,6 +165,7 @@ public class SearchBar extends FrameLayout {
                 }
             }
         });
+
         LayoutParams buttonParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         buttonParams.setMargins(0, iconMarginTop, iconMarginOutside, 0);
         buttonParams.gravity = Gravity.END;
@@ -209,9 +231,10 @@ public class SearchBar extends FrameLayout {
                 for (int i = 0; i < apps.size(); i++) {
                     final App app = apps.get(i);
                     items.add(new IconLabelItem(app.getIcon(), app.getLabel())
-                            .withIconSize(getContext(), 50)
+                            .withIconSize(50)
                             .withTextColor(Color.WHITE)
-                            .withIconPadding(getContext(), 8)
+                            .withIsAppLauncher(true)
+                            .withIconPadding(8)
                             .withOnClickAnimate(false)
                             .withTextGravity(Setup.appSettings().getSearchUseGrid() ? Gravity.CENTER : Gravity.CENTER_VERTICAL)
                             .withIconGravity(Setup.appSettings().getSearchUseGrid() ? Gravity.TOP : Gravity.START)
@@ -236,8 +259,14 @@ public class SearchBar extends FrameLayout {
                 }
 
                 String s = constraint.toString().toLowerCase();
-                if (item._label.toLowerCase().contains(s)) {
-                    return true;
+                if (Setup.appSettings().getSearchBarStartsWith()) {
+                    if (item._label.toLowerCase().startsWith(s)) {
+                        return true;
+                    }
+                } else {
+                    if (item._label.toLowerCase().contains(s)) {
+                        return true;
+                    }
                 }
 
                 return false;
@@ -267,9 +296,12 @@ public class SearchBar extends FrameLayout {
         if (_callback != null) {
             _callback.onCollapse();
         }
-        _icon.setIcon(getResources().getDrawable(R.drawable.ic_search_light_24dp));
+
+        _icon.setIcon(getResources().getDrawable(R.drawable.ic_search));
+
         Tool.visibleViews(ANIM_TIME, _searchClock);
         Tool.goneViews(ANIM_TIME, _searchCardContainer, _searchRecycler, _switchButton);
+
         _searchInput.getText().clear();
     }
 
@@ -277,13 +309,15 @@ public class SearchBar extends FrameLayout {
         if (_callback != null) {
             _callback.onExpand();
         }
-        _icon.setIcon(getResources().getDrawable(R.drawable.ic_clear_white_24dp));
+
+        _icon.setIcon(getResources().getDrawable(R.drawable.ic_clear));
+
         Tool.visibleViews(ANIM_TIME, _searchCardContainer, _searchRecycler, _switchButton);
         Tool.goneViews(ANIM_TIME, _searchClock);
     }
 
     private void updateSwitchIcon() {
-        _switchButton.setImageResource(Setup.appSettings().getSearchUseGrid() ? R.drawable.ic_view_grid_white_24dp : R.drawable.ic_view_list_white_24dp);
+        _switchButton.setImageResource(Setup.appSettings().getSearchUseGrid() ? R.drawable.ic_view_grid_white : R.drawable.ic_view_list_white);
     }
 
     private void updateRecyclerViewLayoutManager() {
@@ -326,21 +360,10 @@ public class SearchBar extends FrameLayout {
             _searchClock.setTextColor(appSettings.getDesktopDateTextColor());
         }
 
-        Calendar calendar = Calendar.getInstance(Locale.getDefault());
-        SimpleDateFormat sdf = _mode.sdf;
+        ZonedDateTime now = ZonedDateTime.now();
+        _clockFormatter = getSearchBarClockFormat(Setup.appSettings().getDesktopDateMode());
 
-        int mode = appSettings.getDesktopDateMode();
-        if (mode >= 0 && mode < Mode.getCount()) {
-            sdf = Mode.getById(mode).sdf;
-            if (mode == 0) {
-                sdf = appSettings.getUserDateFormat();
-            }
-        }
-
-        if (sdf == null) {
-            sdf = Setup.appSettings().getUserDateFormat();
-        }
-        String text = sdf.format(calendar.getTime());
+        String text = now.format(_clockFormatter);
         String[] lines = text.split("\n");
         Spannable span = new SpannableString(text);
         span.setSpan(new RelativeSizeSpan(_searchClockSubTextFactor), lines[0].length() + 1, lines[0].length() + 1 + lines[1].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -357,37 +380,14 @@ public class SearchBar extends FrameLayout {
         return insets;
     }
 
-    public enum Mode {
-        DateAll(1, new SimpleDateFormat("MMMM dd'\n'EEEE',' yyyy", Locale.getDefault())),
-        DateNoYearAndTime(2, new SimpleDateFormat("MMMM dd'\n'HH':'mm", Locale.getDefault())),
-        DateAllAndTime(3, new SimpleDateFormat("MMMM dd',' yyyy'\n'HH':'mm", Locale.getDefault())),
-        TimeAndDateAll(4, new SimpleDateFormat("HH':'mm'\n'MMMM dd',' yyyy", Locale.getDefault())),
-        Custom(0, null);
-
-        SimpleDateFormat sdf;
-        int id;
-
-        Mode(int id, SimpleDateFormat sdf) {
-            this.id = id;
-            this.sdf = sdf;
-        }
-
-        public static Mode getById(int id) {
-            for (int i = 0; i < values().length; i++) {
-                if (values()[i].getId() == id)
-                    return values()[i];
+    public DateTimeFormatter getSearchBarClockFormat(Integer id) {
+        if (_clockFormatterIndex != id && id > 0) {
+            if (_clockModes.containsKey(id)) {
+                return _clockModes.get(id);
             }
-            throw new RuntimeException("ID not found!");
         }
 
-
-        public int getId() {
-            return id;
-        }
-
-        public static int getCount() {
-            return values().length;
-        }
+        return Setup.appSettings().getUserDateFormat();
     }
 
     public interface CallBack {

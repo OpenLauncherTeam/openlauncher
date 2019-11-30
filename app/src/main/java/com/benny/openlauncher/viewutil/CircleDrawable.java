@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 
 import com.benny.openlauncher.util.Tool;
@@ -15,6 +16,7 @@ public class CircleDrawable extends Drawable {
     private int _iconSize;
     private int _iconSizeReal;
     private int _iconPadding;
+    private int _iconColor;
     private Bitmap _icon;
     private Bitmap _iconToFade;
     private Paint _paint;
@@ -24,26 +26,31 @@ public class CircleDrawable extends Drawable {
     private float _currentScale = 1f;
     private boolean _hidingOldIcon;
 
-    public CircleDrawable(Context context, Drawable icon, int color) {
+    public CircleDrawable(Context context, Drawable icon, int colorIcon, int colorBackground, int alphaBackground) {
+        icon.setColorFilter(colorIcon, PorterDuff.Mode.SRC_ATOP);
         _icon = Tool.drawableToBitmap(icon);
 
         _iconPadding = Tool.dp2px(6);
+        _iconColor = colorIcon;
 
         _iconSizeReal = icon.getIntrinsicHeight();
         _iconSize = icon.getIntrinsicHeight() + _iconPadding * 2;
 
         _paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        _paint.setColor(color);
-        _paint.setAlpha(100);
+        _paint.setColor(colorBackground);
+        _paint.setAlpha(alphaBackground);
         _paint.setStyle(Paint.Style.FILL);
 
         _paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
+        _paint2.setColor(colorIcon);
         _paint2.setFilterBitmap(true);
     }
 
     public void setIcon(Drawable icon) {
         _iconToFade = _icon;
         _hidingOldIcon = true;
+
+        icon.setColorFilter(_iconColor, PorterDuff.Mode.SRC_ATOP);
 
         _icon = Tool.drawableToBitmap(icon);
         invalidateSelf();

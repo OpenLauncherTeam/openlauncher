@@ -3,6 +3,7 @@ package com.benny.openlauncher.widget;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.Tool;
 
 import java.util.ArrayList;
@@ -159,12 +161,12 @@ public class CellContainer extends ViewGroup {
         _paint.setStyle(Style.STROKE);
         _paint.setStrokeWidth(2.0f);
         _paint.setStrokeJoin(Join.ROUND);
-        _paint.setColor(-1);
+        _paint.setColor(Color.WHITE);
         _paint.setAlpha(0);
         _bgPaint.setStyle(Style.FILL);
-        _bgPaint.setColor(-1);
+        _bgPaint.setColor(Color.WHITE);
         _bgPaint.setAlpha(0);
-        _outlinePaint.setColor(-1);
+        _outlinePaint.setColor(Color.WHITE);
         _outlinePaint.setAlpha(0);
         init();
     }
@@ -179,6 +181,7 @@ public class CellContainer extends ViewGroup {
                 _occupied[i][j] = false;
             }
         }
+
         requestLayout();
     }
 
@@ -283,9 +286,7 @@ public class CellContainer extends ViewGroup {
     }
 
     public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
-        if (_blockTouch) {
-            return true;
-        }
+        if (_blockTouch) return true;
         return super.onInterceptTouchEvent(ev);
     }
 
@@ -312,6 +313,7 @@ public class CellContainer extends ViewGroup {
                 }
             }
         }
+
         return null;
     }
 
@@ -324,6 +326,7 @@ public class CellContainer extends ViewGroup {
                 }
             }
         }
+
         return null;
     }
 
@@ -566,6 +569,7 @@ public class CellContainer extends ViewGroup {
                         child.layout(upRect.left, upRect.top, upRect.right, downRect.bottom);
                     }
                 }
+
                 i++;
             }
         }
@@ -584,6 +588,7 @@ public class CellContainer extends ViewGroup {
                 curLeft += _cellWidth;
                 curRight += _cellWidth;
             }
+
             for (int j = 0; j < _cellSpanV; j++) {
                 if (j != 0) {
                     curTop += _cellHeight;
@@ -593,6 +598,7 @@ public class CellContainer extends ViewGroup {
                 Rect rect = new Rect(curLeft, curTop, curRight, curBottom);
                 _cells[i][j] = rect;
             }
+
             curTop = t;
             curBottom = t + _cellHeight;
         }
