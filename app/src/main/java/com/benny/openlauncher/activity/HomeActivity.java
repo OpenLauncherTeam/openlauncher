@@ -8,6 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.content.pm.LauncherActivityInfo;
+import android.content.pm.LauncherApps;
+import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -336,17 +339,25 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public final void onStartApp(@NonNull Context context, @NonNull App app, @Nullable View view) {
         if (BuildConfig.APPLICATION_ID.equals(app._packageName)) {
             LauncherAction.RunAction(Action.LauncherSettings, context);
-        } else {
-            try {
+            return;
+        }
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && app._userHandle != null) {
+                LauncherApps launcherApps = (LauncherApps) context.getSystemService(Context.LAUNCHER_APPS_SERVICE);
+                List<LauncherActivityInfo> activities = launcherApps.getActivityList(app.getPackageName(), app._userHandle);
+                launcherApps.startMainActivity(activities.get(0).getComponentName(), app._userHandle, null, getActivityAnimationOpts(view));
+            } else {
                 Intent intent = Tool.getIntentFromApp(app);
                 context.startActivity(intent, getActivityAnimationOpts(view));
-                // close app drawer and other items in advance
-                // annoying to wait for app drawer to close
-                handleLauncherResume();
-            } catch (Exception e) {
-                e.printStackTrace();
-                Tool.toast(context, R.string.toast_app_uninstalled);
             }
+
+            // close app drawer and other items in advance
+            // annoying to wait for app drawer to close
+            handleLauncherResume();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Tool.toast(context, R.string.toast_app_uninstalled);
         }
     }
 

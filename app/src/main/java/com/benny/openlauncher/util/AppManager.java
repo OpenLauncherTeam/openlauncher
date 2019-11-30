@@ -2,6 +2,7 @@ package com.benny.openlauncher.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -159,20 +160,25 @@ public class AppManager {
                 LauncherApps launcherApps = (LauncherApps) _context.getSystemService(Context.LAUNCHER_APPS_SERVICE);
                 List<UserHandle> profiles = launcherApps.getProfiles();
                 for (UserHandle userHandle : profiles) {
-                    // TODO lots of stuff required with the rest of the app to get this working
-                    //List<LauncherActivityInfo> apps = launcherApps.getActivityList(null, userHandle);
-                    //for (LauncherActivityInfo info : apps) {
-                    //    _nonFilteredApps.add(new App(_packageManager, info.getApplicationInfo()));
-                    //}
+                    List<LauncherActivityInfo> apps = launcherApps.getActivityList(null, userHandle);
+                    for (LauncherActivityInfo info : apps) {
+                        App app = new App(_packageManager, info.getApplicationInfo());
+                        app._userHandle = userHandle;
+                        // not sure if this conditional should be kept
+                        // duplicate apps were showing up in the app drawer
+                        if (!_nonFilteredApps.contains(app)) {
+                            _nonFilteredApps.add(app);
+                        }
+                    }
                 }
-            }
-
-            Intent intent = new Intent(Intent.ACTION_MAIN, null);
-            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            List<ResolveInfo> activitiesInfo = _packageManager.queryIntentActivities(intent, 0);
-            for (ResolveInfo info : activitiesInfo) {
-                App app = new App(_packageManager, info);
-                _nonFilteredApps.add(app);
+            } else {
+                Intent intent = new Intent(Intent.ACTION_MAIN, null);
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                List<ResolveInfo> activitiesInfo = _packageManager.queryIntentActivities(intent, 0);
+                for (ResolveInfo info : activitiesInfo) {
+                    App app = new App(_packageManager, info);
+                    _nonFilteredApps.add(app);
+                }
             }
 
             // sort the apps by label here
@@ -198,8 +204,7 @@ public class AppManager {
                     }
                 }
             } else {
-                for (ResolveInfo info : activitiesInfo)
-                    _apps.add(new App(_packageManager, info));
+                _apps.addAll(_nonFilteredApps);
             }
 
             AppSettings appSettings = AppSettings.get();
