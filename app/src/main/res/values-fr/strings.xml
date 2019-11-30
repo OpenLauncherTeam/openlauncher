@@ -31,6 +31,8 @@
     <string name="minibar_summary__mobile_network">Raccourci vers les paramètres de réseau mobile.</string>
     <string name="minibar_title__notification_bar">Afficher les notifications</string>
     <string name="minibar_summary__notification_bar">Étendre la zone de notification en haut de l\'écran.</string>
+    <string name="minibar_title__camera">Appareil photo</string>
+    <string name="minibar_summary__camera">Prendre une photo avec votre appareil photo</string>
 
     <!-- About -->
     <string name="about_libs">Bibliothèques Open Source</string>
@@ -71,6 +73,7 @@
     <string name="pref_title__gestures">Gestes</string>
     <string name="pref_title__behavior">Comportement</string>
     <string name="pref_title__advanced">Divers</string>
+    <string name="pref_title__hide_apps">Cacher des applications</string>
     <string name="pref_title__about">À propos de</string>
 
     <string name="pref_title__size">Taille</string>
@@ -81,12 +84,14 @@
     <string name="pref_title__interfaces">Préférences</string>
     <string name="pref_title__inputs">Interactions</string>
     <string name="pref_title__feels">Ambiance</string>
+    <string name="pref_title__gestures">Gestes</string>
     <string name="pref_title__others">Autres</string>
     <string name="pref_title__animations">Animations</string>
     <string name="pref_title__debug">Déboguage</string>
 
     <string name="pref_title__desktop_indicator_style">Style de l\'indicateur</string>
-    <string name="pref_title__desktop_orientation">Orientation du bureau.</string>
+    <string name="pref_title__desktop_wallpaper_scroll">Défilement du fond d\'écran</string>
+    <string name="pref_title__desktop_orientation">Orientation du bureau</string>
     <string name="pref_title__desktop_show_grid">Afficher la grille</string>
     <string name="pref_summary__desktop_show_grid">Afficher la grille lors du déplacement d\'objet.</string>
     <string name="pref_title__desktop_fullscreen">Plein écran</string>
@@ -98,9 +103,12 @@
     <string name="pref_title__desktop_background_color">Arrière-plan</string>
     <string name="pref_title__desktop_folder_color">Dossier</string>
     <string name="pref_title__desktop_inset_color">Barre système</string>
+    <string name="pref_title__desktop_folder_color">Dossier</string>
 
     <string name="pref_title__search_bar_enable">Barre de recherche</string>
     <string name="pref_summary__search_bar_enable">Afficher une barre de recherche sur le bureau.</string>
+    <string name="pref_title__search_bar_starts_with">Recherche d\'applications par nom</string>
+    <string name="pref_summary__search_bar_starts_with">Recherche d’applications à partir du texte de recherche.</string>
     <string name="pref_title__search_bar_base_uri">URI de recherche</string>
     <string name="pref_summary__search_bar_base_uri">Spécifier l\'URI utilisée pour les recherches sur internet.</string>
     <string name="pref_dialog__search_bar_base_uri">Entrez l\'URI devant être utilisée pour les recherches sur internet. L\'étiquette {query} peut être utilisée en remplacement de la requête. Si cette étiquette n\'est pas présente, la requête sera ajoutée à la fin de l\'URI.</string>
@@ -121,7 +129,6 @@
 
     <string name="pref_title__drawer_style">Style</string>
     <string name="pref_summary__drawer_style">Choisir entre un volet d\'applications paginé ou vertical.</string>
-    <string name="pref_title__hide_apps">Cacher des applications</string>
     <string name="pref_title__drawer_show_card_view">Masque</string>
     <string name="pref_summary__drawer_show_card_view">Placer un écran de masquage derrière le volet des applications.</string>
     <string name="pref_title__drawer_remember_position">Se rappeler de la dernière page</string>
@@ -136,6 +143,8 @@
     <string name="pref_title__drawer_fast_scroll_color">Défilement rapide</string>
     <string name="pref_title__drawer_label_font_size">Grandeur du texte des étiquettes</string>
 
+    <string name="pref_title__gesture_notifications">Badge de notification</string>
+    <string name="pref_summary__gesture_notifications">Mettre à jour les icônes avec un badge lorsque les notifications arrivent.</string>
     <string name="pref_title__gesture_feedback">Retour sur les gestes effectués</string>
     <string name="pref_summary__gesture_feedback">Obtenir un retour lors d\'un appui long sur un élément du bureau.</string>
     <string name="pref_title__gesture_quick_swipe">Glisser pour ouvrir</string>
@@ -170,6 +179,7 @@
     <string name="pref_title__restart">Redémarrer</string>
     <string name="pref_summary__restart">Redémarrer le launcher en cas de comportement étrange.</string>
 
+    <!-- Arrays -->
     <string name="vertical_scroll_drawer">Vertical</string>
     <string name="horizontal_paged_drawer">Paginé</string>
 
@@ -179,6 +189,10 @@
     <string name="orientation_mode_portrait">Portrait</string>
     <string name="orientation_mode_rotate">Pivoter</string>
     <string name="orientation_mode_landscape">Paysage</string>
+
+    <string name="scroll_normal">Normal</string>
+    <string name="scroll_inverse">Inversé</string>
+    <string name="scroll_off">Désactivé</string>
 
     <string name="none">Aucun</string>
     <string name="app">Application</string>
@@ -199,6 +213,8 @@
     <string name="volume_level_notification">Notification</string>
     <string name="volume_level_system">Système</string>
     <string name="volume_level_media">Media</string>
+    <string name="notification_title">Notification d\'accès</string>
+    <string name="notification_summary">Openlauncher nécessite la permission de notification pour afficher les badges icônes.</string>
 
     <!-- Other -->
     <string name="columns">Colonnes</string>
@@ -219,6 +235,7 @@
     <string name="info">Info</string>
     <string name="uninstall">Désinstaller</string>
     <string name="remove">Supprimer</string>
+    <string name="resize">Redimensionner</string>
 
     <!-- Desktop Option View -->
     <string name="home">Accueil</string>
@@ -230,8 +247,8 @@
     <string name="toast_not_enough_space">Espace insuffisant.</string>
     <string name="toast_app_uninstalled">Cette application a été désinstallée.</string>
     <string name="toast_device_admin_required">Veuillez autoriser l\'administration de l\'appareil.</string>
+    <string name="toast_notification_permission_required">Veuillez activer les notifications.</string>
     <string name="toast_backup_success">Opération réussie.</string>
     <string name="toast_backup_error">Une erreur est survenue.</string>
     <string name="toast_icon_pack_error">Impossible de récupérer l\'icône sans la permission READ_EXTERNAL_STORAGE.</string>
-
 </resources>
