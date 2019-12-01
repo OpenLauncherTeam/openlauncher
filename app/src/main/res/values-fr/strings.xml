@@ -70,7 +70,6 @@
     <string name="pref_title__dock">Dock</string>
     <string name="pref_title__app_drawer">Volet des applications</string>
     <string name="pref_title__appearance">Apparence</string>
-    <string name="pref_title__gestures">Gestes</string>
     <string name="pref_title__behavior">Comportement</string>
     <string name="pref_title__advanced">Divers</string>
     <string name="pref_title__hide_apps">Cacher des applications</string>
@@ -103,7 +102,6 @@
     <string name="pref_title__desktop_background_color">Arrière-plan</string>
     <string name="pref_title__desktop_folder_color">Dossier</string>
     <string name="pref_title__desktop_inset_color">Barre système</string>
-    <string name="pref_title__desktop_folder_color">Dossier</string>
 
     <string name="pref_title__search_bar_enable">Barre de recherche</string>
     <string name="pref_summary__search_bar_enable">Afficher une barre de recherche sur le bureau.</string>
