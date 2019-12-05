@@ -2,8 +2,10 @@ package com.benny.openlauncher.weather;
 
 import android.graphics.drawable.Drawable;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.util.AppSettings;
 
 import org.json.JSONArray;
@@ -12,49 +14,36 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
-
-import im.delight.android.location.SimpleLocation;
+import java.util.TreeMap;
 
 /*
  * Thanks to https://github.com/martykan/forecastie for the basics for this class. It's a great app;
  * download it!
  */
-public class OpenWeatherService implements WeatherService {
+public class OpenWeatherService extends WeatherService {
     private static Logger LOG = LoggerFactory.getLogger("WeatherService");
 
     private static String API_BASE = "https://api.openweathermap.org/data/2.5/";
-    private static String ICON_BASE = "https://openweathermap.org/img/wn/";
-    private static String ICON_SUFFIX="@2x.png";
 
     private HashMap<String, Drawable> _iconCache = new HashMap<>();
 
-    private URL createURL() throws MalformedURLException {
+    private String createURL() {
         AppSettings settings = AppSettings.get();
         final String apiKey = "3e29e62e2ddf6dd3d2ebd28aed069215";
-        final String postcode = settings.getWeatherCity();
+        final String postcode = "3000";
 
         StringBuilder urlBuilder = new StringBuilder(API_BASE);
-        urlBuilder.append("forecast?");
-
-        if (postcode.equals("")) {
-            SimpleLocation loc = HomeActivity._location;
-            urlBuilder.append("lat=").append(loc.getLatitude()).append("&lon=").append(loc.getLongitude());
-        } else {
-            /*
-            final String cityId = sp.getString("cityId", Constants.DEFAULT_CITY_ID);
-            urlBuilder.append("id=").append(URLEncoder.encode(cityId, "UTF-8"));*/
-            urlBuilder.append("q=").append(postcode);
-        }
-
+        urlBuilder.append("forecast?q=").append(postcode);
         urlBuilder.append("&lang=").append(settings.getLanguage());
         urlBuilder.append("&mode=json");
         urlBuilder.append("&units=metric");
         urlBuilder.append("&appid=").append(apiKey);
 
-        return new URL(urlBuilder.toString());
+        return urlBuilder.toString();
     }
 
     private WeatherResult createWeatherResult(JSONArray results) throws JSONException {
@@ -71,6 +60,42 @@ public class OpenWeatherService implements WeatherService {
         return currentWeather;
     }
 
+    public void getLocationsByName(String name) {
+        JsonObjectRequest request = new JsonObjectRequest(createURL(), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray suburbs = response.getJSONArray("data");
+
+                    WeatherLocation.clear();
+                    for (int i = 0; i < suburbs.length(); i++) {
+                        JSONObject suburb = suburbs.getJSONObject(i);
+                        WeatherLocation wLoc = new WeatherLocation(
+                                suburb.getString("name"),
+                                suburb.getString("postcode"),
+                                suburb.getString("geohash").substring(0, 6));
+
+                        WeatherLocation.put(wLoc);
+                    }
+                } catch (JSONException e) {
+                    LOG.error("Failed to get locations from the BOM Weather Service: {}", e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                LOG.error("Failed to get locations from the BOM Weather Service: {}", error);
+            }
+        });
+        addToRequestQueue(request);
+    }
+
+    public void getLocationsFromResponse(JSONObject response) {
+    }
+
+    public void getLocationsByName(String name, Response.Listener<JSONObject> listener, Response.ErrorListener err) {
+    }
+
     public String getName() {
         return "openweather";
     }
@@ -78,21 +103,28 @@ public class OpenWeatherService implements WeatherService {
     /*
      * This should be called in a Background Thread.
      */
-    public WeatherResult getWeatherForLocation() {
-        try {
-            final URL url = createURL();
-            LOG.debug("URL: {}", url);
+    public void getWeatherForLocation(WeatherLocation location) {
+        String url = createURL();
 
-            final String response = WeatherService.getDataFromWeatherService(url);
-            JSONObject obj = new JSONObject(response);
+        LOG.debug("getWeatherForLocation: {}", url);
+        JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    WeatherResult result = createWeatherResult(response.getJSONArray("data"));
+                    _searchBar.updateWeather(result);
+                } catch (JSONException e) {
+                    LOG.error("Exception calling BOM WeatherService: {}", e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                LOG.error("Error on HTTP request to the BOM Weather Service: {}", error);
+            }
+        });
 
-            return createWeatherResult(obj.getJSONArray("list"));
-
-        } catch (Exception e) {
-            LOG.error("Exception calling OpenWeatherService: {}", e);
-        }
-
-        return null;
+        addToRequestQueue(request);
     }
 
     public Integer getWeatherIcon(String icon) {
@@ -124,8 +156,12 @@ public class OpenWeatherService implements WeatherService {
             return R.drawable.storm;
         }
 
-
         LOG.error("Can't parse weather condition: {}", icon);
         return -1;
+    }
+
+
+    public void openWeatherApp() {
+        openWeatherApp("cz.martykan.forecastie");
     }
 }

@@ -1,11 +1,10 @@
 package com.benny.openlauncher.weather;
 
-import android.graphics.drawable.Drawable;
-
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.util.AppSettings;
-import com.benny.openlauncher.util.IconPackHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,22 +12,11 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Calendar;
-import java.util.HashMap;
-
-import im.delight.android.location.SimpleLocation;
-
 /*
  * Thanks to https://github.com/tonyallan/weather-au for the basics for this class.
  */
 
-public class BOMWeatherService implements WeatherService {
+public class BOMWeatherService extends WeatherService {
     private static Logger LOG = LoggerFactory.getLogger("WeatherService");
 
     private static String API_BASE = "https://api.weather.bom.gov.au/v1/locations";
@@ -40,30 +28,23 @@ public class BOMWeatherService implements WeatherService {
     private static String API_SEARCH = "?search=";
     private static String ACKNOWLEDGEMENT = "Data courtesy of the Australian Bureau of Meteorology (https://api.weather.bom.gov.au)";
 
-    private URL createURL() throws IOException, JSONException {
-        AppSettings settings = AppSettings.get();
-
-        SimpleLocation loc = HomeActivity._location;
-        String postcode = settings.getWeatherCity();
-        if (postcode.equals("")) {
-            postcode = WeatherService.getPostCodeByCoordinates(loc);
+    private String createURL(WeatherLocation location) {
+        if (location == null) {
+            return "";
         }
 
-        String geohash = getGeoHash(postcode);
-
-        LOG.debug("Getting weather for postcode {} -> {}", postcode, geohash);
-
-        // https://api.weather.bom.gov.au/v1/locations/r1r143/forecasts/3-hourly
         StringBuilder url = new StringBuilder();
-        url.append(API_BASE).append("/").append(geohash);
+        url.append(API_BASE)
+                .append("/")
+                .append(location.getId());
 
-        if (settings.getWeatherForecastByHour()) {
+        if (AppSettings.get().getWeatherForecastByHour()) {
             url.append(API_FORECAST_3HOURLY);
         } else {
             url.append((API_FORECAST_DAILY));
         }
 
-        return new URL(url.toString());
+        return url.toString();
     }
 
     private WeatherResult createWeatherResult(JSONArray results) throws JSONException {
@@ -85,41 +66,58 @@ public class BOMWeatherService implements WeatherService {
         return currentWeather;
     }
 
-
-    public String getGeoHash(String postcode) throws IOException, JSONException {
+    public void getLocationsByName(String name, Response.Listener<JSONObject> listener, Response.ErrorListener err) {
         // https://api.weather.bom.gov.au/v1/locations?search=3130
-        URL url = new URL(API_BASE + API_SEARCH + postcode);
+        JsonObjectRequest request = new JsonObjectRequest(API_BASE + API_SEARCH + name, null, listener, err);
+        addToRequestQueue(request);
+    }
 
-        String response = WeatherService.getDataFromWeatherService(url);
-        // data:[{geohash, id, name, postcode, state},]
 
-        JSONObject json = new JSONObject(response);
-        JSONArray suburbs = json.getJSONArray("data");
+    public void getLocationsFromResponse(JSONObject response) {
+        try {
+            JSONArray suburbs = response.getJSONArray("data");
 
-        LOG.debug("suburbs returned for postcode {} -> {}", postcode, suburbs);
+            WeatherLocation.clear();
+            for (int i = 0; i < suburbs.length(); i++) {
+                JSONObject suburb = suburbs.getJSONObject(i);
+                WeatherLocation wLoc = new WeatherLocation(
+                        suburb.getString("name"),
+                        suburb.getString("postcode"),
+                        suburb.getString("geohash").substring(0, 6));
 
-        return suburbs.getJSONObject(0).getString("geohash").substring(0,6);
+                WeatherLocation.put(wLoc);
+            }
+        } catch (JSONException e) {
+            LOG.error("Failed to get locations from the BOM Weather Service: {}", e);
+        }
     }
 
     public String getName() {
         return "au_bom";
     }
 
-    public WeatherResult getWeatherForLocation() {
-        try {
-            final URL url = createURL();
-            LOG.debug("getWeatherForLocation: {}", url);
+    public void getWeatherForLocation(WeatherLocation location) {
+        String url = createURL(location);
 
-            final String response = WeatherService.getDataFromWeatherService(url);
-            JSONObject obj = new JSONObject(response);
+        LOG.debug("getWeatherForLocation: {}", url);
+        JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    WeatherResult result = createWeatherResult(response.getJSONArray("data"));
+                    _searchBar.updateWeather(result);
+                } catch (JSONException e) {
+                    LOG.error("Exception calling BOM WeatherService: {}", e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                LOG.error("Error on HTTP request to the BOM Weather Service: {}", error);
+            }
+        });
 
-            return createWeatherResult(obj.getJSONArray("data"));
-
-        } catch (Exception e) {
-            LOG.error("Exception calling BOM WeatherService: {}", e);
-        }
-
-        return null;
+        addToRequestQueue(request);
     }
 
     public int getWeatherIcon(String icon) {
@@ -157,6 +155,10 @@ public class BOMWeatherService implements WeatherService {
 
         LOG.error("Can't parse weather condition: {}", icon);
         return -1;
+    }
+
+    public void openWeatherApp() {
+        openWeatherApp("au.gov.bom.metview");
     }
 
 }

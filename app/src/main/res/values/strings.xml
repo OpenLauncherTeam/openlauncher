@@ -234,6 +234,8 @@
     <string name="custom">Custom</string>
     <string name="default_folder">Unnamed</string>
     <string name="default_icons">Default</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 
     <!-- Drag Option View -->
     <string name="edit">Edit</string>
@@ -251,8 +253,13 @@
     <!-- Weather Settings -->
     <string name="weather_service_au_bom">Australian BOM</string>
     <string name="weather_service_openweather">OpenWeather</string>
-    <string name="weather_service_hourly">Switching to hourly forecast.</string>
-    <string name="weather_service_daily">Switching to daily forecast.</string>
+    <string name="weather_service_hourly">Switching to hourly forecast for %1$s.</string>
+    <string name="weather_service_daily">Switching to daily forecast for %1$s.</string>
+    <string name="weather_service_choose_location">Choose location:</string>
+    <string name="weather_service_use_network_location">Use Location Services</string>
+    <string name="weather_service_add_location">Add Location</string>
+    <string name="weather_service_finding_city">Searching for Location...</string>
+    <string name="weather_service_current_location">Current Location</string>
 
     <!-- Toasts -->
     <string name="toast_not_enough_space">Not enough space.</string>

@@ -21,6 +21,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -30,6 +32,8 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.benny.openlauncher.BuildConfig;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.homeparts.HpAppDrawer;
@@ -74,14 +78,13 @@ import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import net.gsantner.opoc.util.ContextUtils;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import im.delight.android.location.SimpleLocation;
 
 public final class HomeActivity extends Activity implements OnDesktopEditListener {
     public static Logger LOG = LoggerFactory.getLogger("HomeActivity");
@@ -114,11 +117,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     private int cy;
 
     // Weather Service support
-    public static SimpleLocation _location = null;
     public static WeatherService _weatherService = null;
-    public WeatherResult _latestWeather = null;
-    private Handler _weatherHandler = null;
-    private Thread _weatherRunnable = null;
 
     public static final class Companion {
         private Companion() {
@@ -242,63 +241,21 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     public void initWeatherIfRequired() {
-        // Weather Service initialisation, if required. Coarse location only.
         final String weatherServiceRequested = AppSettings.get().getWeatherService();
-        if (!weatherServiceRequested.equals("none")) {
-            // We only ask for a Location if we haven't specified a specific location.
-            if (AppSettings.get().getWeatherCity().equals("")) {
-                if (_location == null) {
-                    checkLocationPermissions();
 
-                    _location = new SimpleLocation(this);
-                }
-            }
-
-            if (_weatherService == null || !_weatherService.getName().equals(weatherServiceRequested)) {
-                if (weatherServiceRequested.equals("au_bom")) {
-                    _weatherService = new BOMWeatherService();
-                } else if (weatherServiceRequested.equals("openweather")) {
-                    _weatherService = new OpenWeatherService();
-                }
-            }
-
-            if (_weatherService != null) {
-                if (_weatherHandler == null) {
-                    _weatherHandler = new Handler() {
-                        @Override
-                        public void handleMessage(Message msg) {
-                            // what == 0 from the postDelayed call below.
-                            if (msg.what == 1) {
-                                if (_latestWeather != null) {
-                                    getSearchBar().updateWeather(_latestWeather);
-                                }
-                            }
-                        }
-                    };
-                } else {
-                    // If we come back in after creation, remove the running callback so that we
-                    // can kick it off immediately below.
-                    if (_weatherRunnable != null) {
-                        _weatherHandler.removeCallbacks(_weatherRunnable);
-                    }
-                }
-
-                _weatherRunnable = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            _latestWeather = _weatherService.getWeatherForLocation();
-                            _weatherHandler.sendEmptyMessage(1);
-                        } finally {
-                            // and then reschedule for an hours time!
-                            _weatherHandler.postDelayed(_weatherRunnable, 60 * 60 * 1000l);
-                        }
-                    }
-                });
-                _weatherRunnable.start();
+        if (_weatherService == null || !_weatherService.getName().equals(weatherServiceRequested)) {
+            if (weatherServiceRequested.equals("au_bom")) {
+                _weatherService = new BOMWeatherService();
+            } else if (weatherServiceRequested.equals("openweather")) {
+                _weatherService = new OpenWeatherService();
             }
         }
+
+        if (_weatherService != null) {
+            _weatherService.updateWeather(getSearchBar());
+        }
     }
+
     protected void initAppManager() {
         if (Setup.appSettings().getAppFirstLaunch()) {
             Setup.appSettings().setAppFirstLaunch(false);
@@ -578,10 +535,15 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         super.onStart();
     }
 
-    private void checkLocationPermissions() {
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        return getSearchBar().onContextItemSelected(item);
+    }
+
+    public boolean checkLocationPermissions() {
         if (checkCallingOrSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
             && checkCallingOrSelfPermission(Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
-            return;
+            return true;
         }
 
         // Request the required permission otherwise.
@@ -595,6 +557,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                         REQUEST_PERMISSION_NETWORK);
             }
         });
+
+        return false;
     }
 
     private void checkNotificationPermissions() {
@@ -661,9 +625,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         unregisterReceiver(_shortcutReceiver);
         unregisterReceiver(_timeChangedReceiver);
 
-        if (_weatherHandler != null && _weatherHandler != null) {
-            _weatherHandler.removeCallbacks(_weatherRunnable);
-        }
         super.onDestroy();
     }
 

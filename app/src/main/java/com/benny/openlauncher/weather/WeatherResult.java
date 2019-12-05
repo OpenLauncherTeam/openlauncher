@@ -3,7 +3,6 @@ package com.benny.openlauncher.weather;
 import android.graphics.drawable.Drawable;
 import android.support.v4.util.Pair;
 
-import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.util.IconPackHelper;
 

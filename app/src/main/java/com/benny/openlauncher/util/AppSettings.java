@@ -9,18 +9,26 @@ import android.support.v4.content.ContextCompat;
 import com.benny.openlauncher.AppObject;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.weather.WeatherLocation;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.PagerIndicator;
 
 import net.gsantner.opoc.preference.SharedPreferencesPropertyBackend;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 public class AppSettings extends SharedPreferencesPropertyBackend {
+    public static Logger LOG = LoggerFactory.getLogger("AppSettings");
+
     public AppSettings(Context context) {
         super(context, "app");
     }
@@ -347,8 +355,77 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         return getString("pref_key__date_bar_weather_api_key", null);
     }
 
-    public String getWeatherCity() {
-        return getString("pref_key__weather_service_city", "");
+    public WeatherLocation getWeatherCity() {
+        String city = getString("pref_key__weather_service_city", "");
+
+        return WeatherLocation.parse(city);
+    }
+
+    public void setWeatherCity(WeatherLocation city) {
+        StringBuilder serialised = new StringBuilder();
+        if (city != null) {
+            serialised.append(city.getName())
+                    .append("|")
+                    .append(city.getPostcode())
+                    .append("|")
+                    .append(city.getId());
+        }
+        setString("pref_key__weather_service_city", serialised.toString());
+    }
+
+    public ArrayList<WeatherLocation> getWeatherLocations() {
+        String json = getString("pref_key__weather_service_stored_locations", "[]");
+
+        ArrayList<WeatherLocation> storedLocations = new ArrayList<>();
+        try {
+            JSONArray storedLocationsJson = new JSONArray(json);
+
+            for (int i = 0; i < storedLocationsJson.length(); i++) {
+                JSONObject locationJson = storedLocationsJson.getJSONObject(i);
+                WeatherLocation loc = WeatherLocation.fromJson(locationJson);
+                storedLocations.add(loc);
+            }
+        } catch (Exception e) {
+            LOG.error("Can't deserialise json: {}", json);
+        }
+
+        return storedLocations;
+    }
+
+    public void addWeatherLocations(WeatherLocation loc) {
+        ArrayList<WeatherLocation> storedLocations = getWeatherLocations();
+
+        if (!storedLocations.contains(loc)) {
+            LOG.debug("Adding location {} to favourites.", loc);
+            storedLocations.add(loc);
+            Collections.sort(storedLocations, new WeatherLocation.WeatherLocationComparator());
+
+            setString("pref_key__weather_service_stored_locations", serialiseWeatherLocations(storedLocations));
+        }
+    }
+
+    public void removeWeatherLocations(WeatherLocation loc) {
+        ArrayList<WeatherLocation> storedLocations = getWeatherLocations();
+
+        if (storedLocations.contains(loc)) {
+            LOG.debug("Removing location {} from favourites.", loc);
+            storedLocations.remove(loc);
+
+            setString("pref_key__weather_service_stored_locations", serialiseWeatherLocations(storedLocations));
+        }
+    }
+
+    private String serialiseWeatherLocations(ArrayList<WeatherLocation> locations) {
+        JSONArray locationsJson = new JSONArray();
+
+        for (WeatherLocation location : locations) {
+            JSONObject loc = location.toJson();
+            if (loc != null) {
+                locationsJson.put(loc);
+            }
+        }
+
+        return locationsJson.toString();
     }
 
     public boolean getWeatherForecastByHour() {
