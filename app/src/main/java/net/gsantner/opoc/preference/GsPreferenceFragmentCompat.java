@@ -67,7 +67,10 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import net.gsantner.opoc.util.ActivityUtils;
 import net.gsantner.opoc.util.Callback;
@@ -148,6 +151,7 @@ public abstract class GsPreferenceFragmentCompat<AS extends SharedPreferencesPro
         getPreferenceManager().setSharedPreferencesName(getSharedPreferencesName());
         addPreferencesFromResource(getPreferenceResourceForInflation());
 
+
         if (activity != null && activity.getTheme() != null) {
             TypedArray array = activity.getTheme().obtainStyledAttributes(new int[]{android.R.attr.colorBackground});
             int bgcolor = array.getColor(0, 0xFFFFFFFF);
@@ -223,9 +227,22 @@ public abstract class GsPreferenceFragmentCompat<AS extends SharedPreferencesPro
         updatePreferenceIcons.callback(this);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) view.getLayoutParams();
-            lp.rightMargin = lp.leftMargin = (int) _cu.convertDpToPx(16);
-            view.setLayoutParams(lp);
+            view.postDelayed(() -> {
+                ViewGroup.LayoutParams lpg = view.getLayoutParams();
+                if (lpg instanceof LinearLayout.LayoutParams) {
+                    LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) lpg;
+                    lp.rightMargin = lp.leftMargin = (int) _cu.convertDpToPx(16);
+                    view.setLayoutParams(lp);
+                } else if (lpg instanceof FrameLayout.LayoutParams) {
+                    FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) lpg;
+                    lp.rightMargin = lp.leftMargin = (int) _cu.convertDpToPx(16);
+                    view.setLayoutParams(lp);
+                } else if (lpg instanceof RelativeLayout.LayoutParams) {
+                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) lpg;
+                    lp.rightMargin = lp.leftMargin = (int) _cu.convertDpToPx(16);
+                    view.setLayoutParams(lp);
+                }
+            }, 10);
         }
     }
 
@@ -569,7 +586,11 @@ public abstract class GsPreferenceFragmentCompat<AS extends SharedPreferencesPro
         @Override
         public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
             int position = parent.getChildAdapterPosition(view);
-            int viewType = parent.getAdapter() != null ? parent.getAdapter().getItemViewType(position) : 0;
+            int viewType = 0;
+            try {
+                viewType = parent.getAdapter() != null ? parent.getAdapter().getItemViewType(position) : 0;
+            } catch (NullPointerException ignored) {
+            }
             if (viewType != 1) {
                 outRect.set(0, 0, 0, _heightDp);
             } else {

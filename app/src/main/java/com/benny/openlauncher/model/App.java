@@ -6,12 +6,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.os.UserHandle;
 
 public class App {
     public Drawable _icon;
     public String _label;
     public String _packageName;
     public String _className;
+    public UserHandle _userHandle;
 
     public App(PackageManager pm, ResolveInfo info) {
         _icon = info.loadIcon(pm);

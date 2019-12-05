@@ -21,3 +21,4 @@ Also, to all those people who have helped this project, thank you.
 * **[GauklerFaun](https://github.com/scoute-dich)**<br/>~° German translation
 * **[Naofum](https://github.com/naofum)**<br/>~° Japanese translation
 * **[MFlisar](https://github.com/MFlisar)**<br/>~° Extraction of core
+* **[saechimdaeki](https://github.com/saechimdaeki)**<br/>~° Code contributions

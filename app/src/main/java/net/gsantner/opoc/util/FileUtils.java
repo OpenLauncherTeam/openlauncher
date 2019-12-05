@@ -16,6 +16,7 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,6 +29,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -42,11 +44,20 @@ public class FileUtils {
 
     public static String readTextFileFast(final File file) {
         try {
-            return new String(readCloseBinaryStream(new FileInputStream(file)));
+            return new String(readCloseStreamWithSize(new FileInputStream(file), (int) file.length()));
         } catch (FileNotFoundException e) {
             System.err.println("readTextFileFast: File " + file + " not found.");
         }
         return "";
+    }
+
+    public static byte[] readCloseStreamWithSize(final InputStream stream, int size) {
+        byte[] data = new byte[size];
+        try (DataInputStream dis = new DataInputStream(stream)) {
+            dis.readFully(data);
+        } catch (IOException ignored) {
+        }
+        return data;
     }
 
     public static String readTextFile(final File file) {
@@ -211,6 +222,30 @@ public class FileUtils {
             try {
                 is = new FileInputStream(src);
                 os = new FileOutputStream(dst);
+                byte[] buf = new byte[BUFFER_SIZE];
+                int len;
+                while ((len = is.read(buf)) > 0) {
+                    os.write(buf, 0, len);
+                }
+                return true;
+            } finally {
+                if (is != null) {
+                    is.close();
+                }
+                if (os != null) {
+                    os.close();
+                }
+            }
+        } catch (IOException ex) {
+            return false;
+        }
+    }
+
+    public static boolean copyFile(final File src, final FileOutputStream os) {
+        InputStream is = null;
+        try {
+            try {
+                is = new FileInputStream(src);
                 byte[] buf = new byte[BUFFER_SIZE];
                 int len;
                 while ((len = is.read(buf)) > 0) {
@@ -405,7 +440,7 @@ public class FileUtils {
      * Analyze given textfile and retrieve multiple information from it
      * Information is written back to the {@link AtomicInteger} parameters
      */
-    public static void retrieveTextFileSummary(File file, AtomicInteger numCharacters, AtomicInteger numLines) {
+    public static void retrieveTextFileSummary(File file, AtomicInteger numCharacters, AtomicInteger numLines, AtomicInteger numWords) {
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(file));
@@ -413,11 +448,15 @@ public class FileUtils {
             while ((line = br.readLine()) != null) {
                 numLines.getAndIncrement();
                 numCharacters.getAndSet(numCharacters.get() + line.length());
+                if (!line.equals("")) {
+                    numWords.getAndSet(numWords.get() + line.split("\\s+").length);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
             numCharacters.set(-1);
             numLines.set(-1);
+            numWords.set(-1);
         } finally {
             if (br != null) {
                 try {
@@ -438,7 +477,15 @@ public class FileUtils {
         }
         String[] units = abbreviation ? new String[]{"B", "kB", "MB", "GB", "TB"} : new String[]{"Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes"};
         int unit = (int) (Math.log10(size) / Math.log10(1024));
-        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, unit))
-                + " " + units[unit];
+        return new DecimalFormat("#,##0.#", DecimalFormatSymbols.getInstance(Locale.ENGLISH)).format(size / Math.pow(1024, unit)) + " " + units[unit];
+    }
+
+    public static int[] getTimeDiffHMS(long now, long past) {
+        int[] ret = new int[3];
+        long diff = Math.abs(now - past);
+        ret[0] = (int) (diff / (1000 * 60 * 60)); // hours
+        ret[1] = (int) (diff / (1000 * 60)) % 60; // min
+        ret[2] = (int) (diff / 1000) % 60; // sec
+        return ret;
     }
 }

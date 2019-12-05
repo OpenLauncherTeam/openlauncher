@@ -146,7 +146,9 @@ public final class Desktop extends ViewPager implements DesktopCallback {
                 @Override
                 public boolean onLongClick(View v) {
                     enterDesktopEditMode();
-                    Tool.vibrate(HomeActivity._launcher.getDesktop());
+                    if (Setup.appSettings().getGestureFeedback()) {
+                        Tool.vibrate(HomeActivity._launcher.getDesktop());
+                    }
                     return true;
                 }
             });
