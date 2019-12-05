@@ -12,6 +12,7 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
+import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.support.v7.widget.AppCompatButton;
@@ -535,6 +536,7 @@ public class SearchBar extends FrameLayout {
             icon.setOnClickListener(new MultiClickListener() {
                 @Override
                 public void onSingleClick(View v) {
+                    super.onSingleClick(v);
                     AppSettings settings = AppSettings.get();
                     boolean hourly = settings.getWeatherForecastByHour();
 
@@ -559,6 +561,7 @@ public class SearchBar extends FrameLayout {
                 }
 
                 public void onDoubleClick(View v) {
+                    super.onDoubleClick(v);
                     HomeActivity._weatherService.openWeatherApp();
                 }
             });
@@ -567,25 +570,27 @@ public class SearchBar extends FrameLayout {
                 @Override
                 public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
                     menu.setHeaderTitle(getContext().getString(R.string.weather_service_choose_location));
+                    //MenuCompat.setGroupDividerEnabled(menu, true);
+
                     menu.add(0, 0, 0, R.string.weather_service_use_network_location);
 
                     int i = 1;
                     // Stored Locations first
                     ArrayList<WeatherLocation> storedLocations = AppSettings.get().getWeatherLocations();
                     for (WeatherLocation loc : storedLocations) {
-                        menu.add(0, i, i, loc.toString());
+                        menu.add(1, i, i, loc.toString());
                         i++;
                     }
 
                     // Then locations associated with the current location (when using Location Services)
                     if (AppSettings.get().getWeatherCity() == null) {
                         for (String name : WeatherLocation._locations.keySet()) {
-                            menu.add(0, i, i, WeatherLocation.getByName(name).getName());
+                            menu.add(2, i, i, WeatherLocation.getByName(name).getName());
                             i++;
                         }
                     }
 
-                    menu.add(0, 99, 99, R.string.weather_service_add_location);
+                    menu.add(3, 99, 99, R.string.weather_service_add_location);
                 }
             });
         }
