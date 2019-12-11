@@ -80,6 +80,15 @@ public class AppManager {
 
     public void getAllApps() {
         if (_task == null || _task.getStatus() == AsyncTask.Status.FINISHED)
+            _task = new AsyncGetApps().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        else if (_task.getStatus() == AsyncTask.Status.RUNNING) {
+            _task.cancel(false);
+            _task = new AsyncGetApps().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        }
+    }
+
+    public void getAllAppsSynchonous() {
+        if (_task == null || _task.getStatus() == AsyncTask.Status.FINISHED)
             _task = new AsyncGetApps().execute();
         else if (_task.getStatus() == AsyncTask.Status.RUNNING) {
             _task.cancel(false);
@@ -106,7 +115,7 @@ public class AppManager {
     }
 
     public void onAppUpdated(Context context, Intent intent) {
-        getAllApps();
+        getAllAppsSynchonous();
     }
 
     public void addUpdateListener(AppUpdateListener updateListener) {
