@@ -17,6 +17,9 @@ import com.benny.openlauncher.interfaces.AppUpdateListener;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,6 +28,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class AppManager {
+    private static Logger LOG = LoggerFactory.getLogger("AppManager");
+
     private static AppManager appManager;
 
     public static AppManager getInstance(Context context) {
@@ -156,19 +161,16 @@ public class AppManager {
             _nonFilteredApps.clear();
 
             // work profile support
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (false && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 LauncherApps launcherApps = (LauncherApps) _context.getSystemService(Context.LAUNCHER_APPS_SERVICE);
                 List<UserHandle> profiles = launcherApps.getProfiles();
                 for (UserHandle userHandle : profiles) {
                     List<LauncherActivityInfo> apps = launcherApps.getActivityList(null, userHandle);
                     for (LauncherActivityInfo info : apps) {
-                        App app = new App(_packageManager, info.getApplicationInfo());
+                        App app = new App(_packageManager, info);
                         app._userHandle = userHandle;
-                        // not sure if this conditional should be kept
-                        // duplicate apps were showing up in the app drawer
-                        if (!_nonFilteredApps.contains(app)) {
-                            _nonFilteredApps.add(app);
-                        }
+                        LOG.debug("adding work profile to non filtered list: {}, {}, {}", app._label, app._packageName, app._className);
+                        _nonFilteredApps.add(app);
                     }
                 }
             } else {
@@ -177,6 +179,7 @@ public class AppManager {
                 List<ResolveInfo> activitiesInfo = _packageManager.queryIntentActivities(intent, 0);
                 for (ResolveInfo info : activitiesInfo) {
                     App app = new App(_packageManager, info);
+                    LOG.debug("adding app to non filtered list: {}, {}, {}", app._label,  app._packageName, app._className);
                     _nonFilteredApps.add(app);
                 }
             }

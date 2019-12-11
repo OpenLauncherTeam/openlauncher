@@ -1,8 +1,10 @@
 package com.benny.openlauncher.model;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.LauncherActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
@@ -22,20 +24,12 @@ public class App {
         _className = info.activityInfo.name;
     }
 
-    public App(PackageManager pm, ApplicationInfo info) {
-        _icon = info.loadIcon(pm);
-        _label = info.loadLabel(pm).toString();
-        _packageName = info.packageName;
-        _className = info.name;
-        try {
-            // there is definitely a better way to store the apps
-            // should probably just store component name
-            Intent intent = pm.getLaunchIntentForPackage(_packageName);
-            ComponentName componentName = intent.getComponent();
-            _className = componentName.getClassName();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @SuppressLint("NewApi")
+    public App(PackageManager pm, LauncherActivityInfo info) {
+        _icon = info.getIcon(0);
+        _label = info.getLabel().toString();
+        _packageName = info.getComponentName().getPackageName();
+        _className = info.getName();
     }
 
     @Override
