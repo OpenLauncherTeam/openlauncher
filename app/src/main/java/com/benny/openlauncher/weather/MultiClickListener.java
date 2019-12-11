@@ -1,6 +1,5 @@
 package com.benny.openlauncher.weather;
 
-import android.os.SystemClock;
 import android.view.View;
 
 import com.benny.openlauncher.activity.HomeActivity;
@@ -29,7 +28,6 @@ public abstract class MultiClickListener implements View.OnClickListener {
 
             HomeActivity.Companion.getLauncher().getSearchBar().postDelayed(_tapRunnable, CLICK_TIME);
         } else {
-            HomeActivity.Companion.getLauncher().getSearchBar().removeCallbacks(_tapRunnable);
             onDoubleClick(v);
         }
     }

@@ -1,5 +1,7 @@
 package com.benny.openlauncher.weather;
 
+import android.location.Location;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -51,13 +53,14 @@ public class BOMWeatherService extends WeatherService {
         LOG.debug("createWeatherResult: {}", results);
         WeatherResult currentWeather = new WeatherResult();
 
+        int numberOfIcons = _searchBar._weatherIcons.size();
         if (AppSettings.get().getWeatherForecastByHour()) {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < numberOfIcons; i++) {
                 JSONObject obj = results.getJSONObject(i);
                 currentWeather.add(obj.getDouble("temp"), getWeatherIcon(obj.getString("icon_descriptor")));
             }
         } else {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < numberOfIcons; i++) {
                 JSONObject obj = results.getJSONObject(i);
                 currentWeather.add(obj.getDouble("temp_max"), getWeatherIcon(obj.getString("icon_descriptor")));
             }
@@ -94,6 +97,16 @@ public class BOMWeatherService extends WeatherService {
 
     public String getName() {
         return "au_bom";
+    }
+
+    public void getWeatherForLocation(Location location) {
+        if (location != null) {
+            String postcode = getPostCodeByCoordinates(location);
+
+            if (!"".equals(postcode)) {
+                getWeatherForLocation(postcode);
+            }
+        }
     }
 
     public void getWeatherForLocation(WeatherLocation location) {
@@ -155,6 +168,14 @@ public class BOMWeatherService extends WeatherService {
 
         LOG.error("Can't parse weather condition: {}", icon);
         return -1;
+    }
+
+    public boolean isCountrySupported(String countryCode) {
+        if ("AU".equals(countryCode)) {
+            return true;
+        }
+
+        return false;
     }
 
     public void openWeatherApp() {

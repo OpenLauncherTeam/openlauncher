@@ -63,6 +63,7 @@ import com.benny.openlauncher.weather.MultiClickListener;
 import com.benny.openlauncher.weather.WeatherLocation;
 import com.benny.openlauncher.weather.WeatherLocationAdapter;
 import com.benny.openlauncher.weather.WeatherResult;
+import com.benny.openlauncher.weather.WeatherService;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
@@ -86,6 +87,7 @@ public class SearchBar extends FrameLayout {
     public AppCompatImageView _switchButton;
     public AppCompatImageView _searchButton;
     public ArrayList<AppCompatButton> _weatherIcons = new ArrayList<>();
+    protected Integer _weatherIconSize;
     public AppCompatEditText _searchInput;
     public RecyclerView _searchRecycler;
     private CircleDrawable _icon;
@@ -96,6 +98,12 @@ public class SearchBar extends FrameLayout {
     private int _searchClockTextSize = 28;
     private float _searchClockSubTextFactor = 0.5f;
     private int bottomInset;
+
+    private int _iconMarginOutside;
+    private int _iconMarginTop;
+    private int _searchTextMarginTop;
+    private int _iconSize;
+    private int _iconPadding;
 
     private HashMap<Integer, DateTimeFormatter> _clockModes = new HashMap<>(4);
     private Integer _clockFormatterIndex = -1;
@@ -136,11 +144,11 @@ public class SearchBar extends FrameLayout {
 
     private void init() {
         int dp1 = Tool.dp2px(1);
-        int iconMarginOutside = dp1 * 16;
-        int iconMarginTop = dp1 * 14;
-        int searchTextMarginTop = dp1 * 4;
-        int iconSize = dp1 * 24;
-        int iconPadding = dp1 * 6;
+        _iconMarginOutside = dp1 * 16;
+        _iconMarginTop = dp1 * 14;
+        _searchTextMarginTop = dp1 * 4;
+        _iconSize = dp1 * 24;
+        _iconPadding = dp1 * 6;
 
         // These have to match the Preferences Array, but without item 0 as that is a custom option which can be changed:
         //   <item>@string/custom</item>
@@ -156,7 +164,7 @@ public class SearchBar extends FrameLayout {
         _searchClock = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.view_search_clock, this, false);
         _searchClock.setTextSize(TypedValue.COMPLEX_UNIT_DIP, _searchClockTextSize);
         LayoutParams clockParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        clockParams.setMargins(iconMarginOutside, dp1 * 4, 0, dp1 * 4);
+        clockParams.setMargins(_iconMarginOutside, dp1 * 4, 0, dp1 * 4);
         clockParams.gravity = Gravity.START;
 
         _switchButton = new AppCompatImageView(getContext());
@@ -169,13 +177,11 @@ public class SearchBar extends FrameLayout {
             }
         });
         _switchButton.setVisibility(View.GONE);
-        _switchButton.setPadding(0, iconPadding, 0, iconPadding);
+        _switchButton.setPadding(0, _iconPadding, 0, _iconPadding);
         updateSwitchIcon();
 
-        createWeatherButtons();
-
         LayoutParams switchButtonParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        switchButtonParams.setMargins(iconMarginOutside / 2, 0, 0, 0);
+        switchButtonParams.setMargins(_iconMarginOutside / 2, 0, 0, 0);
         switchButtonParams.gravity = Gravity.START | Gravity.CENTER_VERTICAL;
 
         if (isInEditMode()) return;
@@ -200,7 +206,7 @@ public class SearchBar extends FrameLayout {
         });
 
         LayoutParams buttonParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        buttonParams.setMargins(0, iconMarginTop, iconMarginOutside, 0);
+        buttonParams.setMargins(0, _iconMarginTop, _iconMarginOutside, 0);
         buttonParams.gravity = Gravity.END;
 
         _searchCardContainer = new CardView(getContext());
@@ -243,15 +249,24 @@ public class SearchBar extends FrameLayout {
             }
         });
         LayoutParams inputCardParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        inputCardParams.setMargins(0, searchTextMarginTop, 0, 0);
+        inputCardParams.setMargins(0, _searchTextMarginTop, 0, 0);
 
         LayoutParams inputParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        inputParams.setMargins(iconMarginOutside + iconSize, 0, 0, 0);
+        inputParams.setMargins(_iconMarginOutside + _iconSize, 0, 0, 0);
 
         _searchCardContainer.addView(_switchButton, switchButtonParams);
         _searchCardContainer.addView(_searchInput, inputParams);
 
         initRecyclerView();
+
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                SearchBar.this.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                createWeatherButtons();
+            }
+        });
 
         Setup.appLoader().addUpdateListener(new AppUpdateListener() {
             @Override
@@ -521,12 +536,33 @@ public class SearchBar extends FrameLayout {
     }
 
     protected void createWeatherButtons() {
-        _weatherIcons.add(new AppCompatButton(getContext()));
-        _weatherIcons.add(new AppCompatButton(getContext()));
-        _weatherIcons.add(new AppCompatButton(getContext()));
+        int[] coords = new int[2];
+        _searchButton.getLocationOnScreen(coords);
 
-        //_weatherWarnings = new AppCompatImageView(getContext());
+        int leftPosition = _searchClock.getMeasuredWidth();
+        int rightPosition = coords[0] - _iconMarginOutside;
 
+        int totalWidth = rightPosition - leftPosition;
+
+        _weatherIconSize = (int) (_searchClock.getMeasuredHeight() * 0.5f);
+
+        int numberOfIcons = totalWidth / (_weatherIconSize + _iconMarginOutside);
+
+        for (int i = 0; i < numberOfIcons; i++) {
+            AppCompatButton btn =new AppCompatButton(getContext());
+            _weatherIcons.add(btn);
+
+            LayoutParams iconParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            iconParams.setMargins(leftPosition, 0, 0, 0);
+
+            btn.setLayoutParams(iconParams);
+            leftPosition += _weatherIconSize + _iconMarginOutside;
+        }
+
+        setButtonCallbacks();
+    }
+
+    protected void setButtonCallbacks() {
         for (AppCompatButton icon : _weatherIcons) {
             HomeActivity.Companion.getLauncher().registerForContextMenu(icon);
 
@@ -599,21 +635,8 @@ public class SearchBar extends FrameLayout {
     public void updateWeather(WeatherResult weather) {
         LOG.debug("updateWeather() -> {}", weather);
 
-        int dp1 = Tool.dp2px(1);
-        int iconMarginOutside = dp1 * 16;
-
-        int[] coords = new int[2];
-        _searchButton.getLocationOnScreen(coords);
-
-        int numberOfIcons = _weatherIcons.size();
-        int leftPosition = _searchClock.getMeasuredWidth();
-        int rightPosition = coords[0] - iconMarginOutside;
-
-        int calculatedWidth = (rightPosition - leftPosition) / (numberOfIcons*2);
-        int calculatedHeight = (int) (_searchClock.getMeasuredHeight() * 0.5f);
-
-        for (int i = 0; i <= numberOfIcons-1; i++) {
-            Pair<Double, Drawable> forecast = weather.getForecast(i, calculatedWidth, calculatedHeight);
+        for (int i = 0; i < _weatherIcons.size(); i++) {
+            Pair<Double, Drawable> forecast = weather.getForecast(i, _weatherIconSize);
 
             // May happen if we get an error from the Weather Service
             if (forecast == null) {
@@ -625,12 +648,7 @@ public class SearchBar extends FrameLayout {
             icon.setText(Double.toString(forecast.first));
 
             if (icon.getParent() == null) {
-                LayoutParams iconParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                iconParams.setMargins(leftPosition, 0, 0, 0);
-
-                leftPosition += calculatedWidth*2;
-
-                addView(icon, iconParams);
+                addView(icon);
             }
         }
     }

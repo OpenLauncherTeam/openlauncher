@@ -9,22 +9,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -35,8 +31,6 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.benny.openlauncher.BuildConfig;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.homeparts.HpAppDrawer;
@@ -64,7 +58,6 @@ import com.benny.openlauncher.viewutil.MinibarAdapter;
 import com.benny.openlauncher.viewutil.WidgetHost;
 import com.benny.openlauncher.weather.BOMWeatherService;
 import com.benny.openlauncher.weather.OpenWeatherService;
-import com.benny.openlauncher.weather.WeatherResult;
 import com.benny.openlauncher.weather.WeatherService;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.AppItemView;
@@ -81,7 +74,6 @@ import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import net.gsantner.opoc.util.ContextUtils;
 
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

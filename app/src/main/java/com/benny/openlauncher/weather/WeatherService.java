@@ -1,36 +1,33 @@
 package com.benny.openlauncher.weather;
 
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.util.Pair;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.widget.SearchBar;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResult;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -54,7 +51,9 @@ public abstract class WeatherService implements
     public abstract String getName();
     public abstract void getLocationsByName(String name, Response.Listener<JSONObject> listener, Response.ErrorListener err);
     public abstract void getLocationsFromResponse(JSONObject response);
+    public abstract void getWeatherForLocation(Location location);
     public abstract void getWeatherForLocation(WeatherLocation location);
+    public abstract boolean isCountrySupported(String countryCode);
     public abstract void openWeatherApp();
 
     public <T> void addToRequestQueue(Request<T> req) {
@@ -68,13 +67,9 @@ public abstract class WeatherService implements
             getWeatherForLocation(loc);
         } else {
             try {
-                Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(_location);
-                if (currentLocation != null) {
-                    String postcode = getPostCodeByCoordinates(currentLocation);
-
-                    if (!"".equals(postcode)) {
-                        getWeatherForLocation(postcode);
-                    }
+                if (_location.isConnected()) {
+                    Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(_location);
+                    getWeatherForLocation(currentLocation);
                 }
             } catch (SecurityException e) {
                 LOG.error("User has not allowed Location Services: {}", e);
@@ -113,6 +108,10 @@ public abstract class WeatherService implements
                 LOG.debug("looking for postcode from GPS coordinates: {}, {} -> {}", loc.getLatitude(), loc.getLongitude(), addresses);
                 if (addresses != null) {
                     for (Address address : addresses) {
+                        if (!isCountrySupported(address.getCountryCode())) {
+                            break;
+                        }
+
                         if (address.getPostalCode() != null) {
                             return address.getPostalCode();
                         }
@@ -152,21 +151,18 @@ public abstract class WeatherService implements
 
     @Override
     public void onLocationChanged(Location location) {
-        String postcode = getPostCodeByCoordinates(location);
-        LOG.debug("Location changed: {}", postcode);
-
-        if (!"".equals(postcode)) {
-            getWeatherForLocation(postcode);
-        }
+        getWeatherForLocation(location);
     }
 
     public void openWeatherApp(String packageName) {
         Intent intent = _searchBar.getContext().getPackageManager().getLaunchIntentForPackage(packageName);
+
         if (intent == null) {
             // Bring user to the market or let them choose an app?
             intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("market://details?id=" + packageName));
         }
+
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         _searchBar.getContext().startActivity(intent);
     }
@@ -201,9 +197,11 @@ public abstract class WeatherService implements
                             .addApi(LocationServices.API).build();
                     _location.connect();
                 }
+            } else {
+                getWeatherForLocation();
             }
+        } else {
+            getWeatherForLocation();
         }
-
-        getWeatherForLocation();
     }
 }
