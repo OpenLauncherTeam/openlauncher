@@ -146,7 +146,7 @@ public class AppItemView extends View implements Drawable.Callback, Notification
 
             if (_notificationCount > 0) {
                 float radius = _iconSize * .15f;
-                canvas.drawCircle(_iconSize - radius, _heightPadding, radius, _notifyPaint);
+                canvas.drawCircle(_iconSize - radius, radius, radius, _notifyPaint);
             }
 
             canvas.restore();
