@@ -161,7 +161,7 @@ public class AppManager {
             _nonFilteredApps.clear();
 
             // work profile support
-            if (false && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 LauncherApps launcherApps = (LauncherApps) _context.getSystemService(Context.LAUNCHER_APPS_SERVICE);
                 List<UserHandle> profiles = launcherApps.getProfiles();
                 for (UserHandle userHandle : profiles) {
@@ -169,6 +169,7 @@ public class AppManager {
                     for (LauncherActivityInfo info : apps) {
                         App app = new App(_packageManager, info);
                         app._userHandle = userHandle;
+
                         LOG.debug("adding work profile to non filtered list: {}, {}, {}", app._label, app._packageName, app._className);
                         _nonFilteredApps.add(app);
                     }
@@ -179,6 +180,7 @@ public class AppManager {
                 List<ResolveInfo> activitiesInfo = _packageManager.queryIntentActivities(intent, 0);
                 for (ResolveInfo info : activitiesInfo) {
                     App app = new App(_packageManager, info);
+
                     LOG.debug("adding app to non filtered list: {}, {}, {}", app._label,  app._packageName, app._className);
                     _nonFilteredApps.add(app);
                 }
