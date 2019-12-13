@@ -126,7 +126,7 @@
     <string name="pref_title__weather_service_hourly">Hourly Forecasts?</string>
     <string name="pref_summary__weather_service_hourly">Check the next 3 hours instead of the next 3 days.</string>
     <string name="pref_title__weather_service_city">Town/City?</string>
-    <string name="pref_summary__weather_service_city">Enter the postcode of your preferred locality if you prefer not to use Location Services. Leave blank otherwise.</string>
+    <string name="pref_summary__weather_service_city">Enter the name or postcode of your preferred locality if you prefer not to use Location Services. Leave blank otherwise.</string>
 
     <string name="pref_title__dock_show_label">Show Labels</string>
     <string name="pref_summary__dock_show_label">Show item labels below their icons.</string>
