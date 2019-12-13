@@ -188,6 +188,13 @@
             android:key="@string/pref_key__weather_service"
             android:title="@string/pref_title__weather_service" />
 
+        <EditTextPreference
+            android:defaultValue=""
+            android:hint="@string/pref_title__weather_service_apikey"
+            android:key="@string/pref_key__weather_service_apikey"
+            android:summary="@string/pref_summary__weather_service_apikey"
+            android:title="@string/pref_title__weather_service_apikey" />
+
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__weather_service_hourly"

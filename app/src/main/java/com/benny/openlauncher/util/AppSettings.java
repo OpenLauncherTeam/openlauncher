@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 
 import com.benny.openlauncher.AppObject;
 import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.weather.WeatherLocation;
 import com.benny.openlauncher.widget.AppDrawerController;
@@ -352,7 +353,19 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public String getWeatherAPIKey() {
-        return getString("pref_key__date_bar_weather_api_key", null);
+        String weatherService = getWeatherService();
+
+        String defaultKey = "";
+        if ("openweather".equals(weatherService)) {
+            defaultKey = HomeActivity._launcher.getResources().getString(R.string.openWeatherServiceApiKey);
+        }
+
+        return getString("pref_key__weather_service_apikey", defaultKey);
+
+    }
+
+    public void setWeatherAPIKey(String apiKey) {
+        setString("pref_key__weather_service_apikey", apiKey);
     }
 
     public WeatherLocation getWeatherCity() {
@@ -437,7 +450,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     public void setWeatherForecastByHour(boolean state) {
         setBool("pref_key__weather_service_hourly", state);
     }
-
 
     public String getWeatherService() {
         return getString("pref_key__weather_service", "none");

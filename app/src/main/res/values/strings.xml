@@ -123,8 +123,10 @@
     <string name="pref_title__date_bar_date_format_custom_2">Custom Format: Line 2</string>
 
     <string name="pref_title__weather_service">Weather Service</string>
+    <string name="pref_title__weather_service_apikey">API Key</string>
+    <string name="pref_summary__weather_service_apikey">Specify the API Key for the Weather Service (if required).</string>
     <string name="pref_title__weather_service_hourly">Hourly Forecasts?</string>
-    <string name="pref_summary__weather_service_hourly">Check the next 3 hours instead of the next 3 days.</string>
+    <string name="pref_summary__weather_service_hourly">Check the hourly forecast instead of daily (exact experience depends on specific Weather Service used).</string>
     <string name="pref_title__weather_service_city">Town/City?</string>
     <string name="pref_summary__weather_service_city">Enter the name or postcode of your preferred locality if you prefer not to use Location Services. Leave blank otherwise.</string>
 

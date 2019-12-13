@@ -31,12 +31,11 @@ public class OpenWeatherService extends WeatherService {
 
     private void appendURLDetails(StringBuilder urlBuilder) {
         AppSettings settings = AppSettings.get();
-        final String apiKey = "3e29e62e2ddf6dd3d2ebd28aed069215";
 
         urlBuilder.append("&lang=").append(settings.getLanguage());
         urlBuilder.append("&mode=json");
         urlBuilder.append("&units=metric");
-        urlBuilder.append("&appid=").append(apiKey);
+        urlBuilder.append("&appid=").append(settings.getWeatherAPIKey());
     }
 
     private String createURL(String search) {
