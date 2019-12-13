@@ -78,14 +78,15 @@ public class BOMWeatherService extends WeatherService {
 
     public void getLocationsFromResponse(JSONObject response) {
         try {
-            JSONArray suburbs = response.getJSONArray("data");
-
             WeatherLocation.clear();
+
+            JSONArray suburbs = response.getJSONArray("data");
             for (int i = 0; i < suburbs.length(); i++) {
                 JSONObject suburb = suburbs.getJSONObject(i);
                 WeatherLocation wLoc = new WeatherLocation(
                         suburb.getString("name"),
                         suburb.getString("postcode"),
+                        "AU",
                         suburb.getString("geohash").substring(0, 6));
 
                 WeatherLocation.put(wLoc);

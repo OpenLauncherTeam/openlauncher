@@ -527,9 +527,10 @@ public class SearchBar extends FrameLayout {
             findCityToAdd();
             return true;
         } else {
-            AppSettings.get().setWeatherCity(WeatherLocation.getByName(item.toString()));
+            AppSettings.get().setWeatherCity(WeatherLocation.parse(item.toString()));
         }
 
+        displayWeatherChangedToast();
         HomeActivity.Companion.getLauncher().initWeatherIfRequired();
         return true;
 
@@ -574,25 +575,9 @@ public class SearchBar extends FrameLayout {
                 public void onSingleClick(View v) {
                     super.onSingleClick(v);
                     AppSettings settings = AppSettings.get();
-                    boolean hourly = settings.getWeatherForecastByHour();
+                    settings.setWeatherForecastByHour(!settings.getWeatherForecastByHour());
 
-                    settings.setWeatherForecastByHour(!hourly);
-
-                    int toastMessageId = !hourly ? R.string.weather_service_hourly : R.string.weather_service_daily;
-
-                    try {
-                        WeatherLocation loc = settings.getWeatherCity();
-                        String locationName;
-
-                        if (loc == null) {
-                            locationName = getContext().getString(R.string.weather_service_current_location);
-                        } else {
-                            locationName =  loc.getName();
-                        }
-                        Tool.toast(getContext(), String.format(getContext().getString(toastMessageId), locationName));
-                    } catch (Exception e) {
-                        LOG.error("Failed to get location: {}", e);
-                    }
+                    displayWeatherChangedToast();
                     HomeActivity.Companion.getLauncher().initWeatherIfRequired();
                 }
 
@@ -650,6 +635,26 @@ public class SearchBar extends FrameLayout {
             if (icon.getParent() == null) {
                 addView(icon);
             }
+        }
+    }
+
+    protected void displayWeatherChangedToast() {
+        AppSettings settings = AppSettings.get();
+
+        int toastMessageId = settings.getWeatherForecastByHour() ? R.string.weather_service_hourly : R.string.weather_service_daily;
+
+        try {
+            WeatherLocation loc = settings.getWeatherCity();
+            String locationName;
+
+            if (loc == null) {
+                locationName = getContext().getString(R.string.weather_service_current_location);
+            } else {
+                locationName =  loc.getName();
+            }
+            Tool.toast(getContext(), String.format(getContext().getString(toastMessageId), locationName));
+        } catch (Exception e) {
+            LOG.error("Failed to get location: {}", e);
         }
     }
 

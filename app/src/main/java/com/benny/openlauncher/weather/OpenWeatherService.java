@@ -34,7 +34,7 @@ public class OpenWeatherService extends WeatherService {
         final String apiKey = "3e29e62e2ddf6dd3d2ebd28aed069215";
 
         StringBuilder urlBuilder = new StringBuilder(API_BASE);
-        urlBuilder.append("forecast?q=").append(search);
+        urlBuilder.append("find?q=").append(search);
         urlBuilder.append("&lang=").append(settings.getLanguage());
         urlBuilder.append("&mode=json");
         urlBuilder.append("&units=metric");
@@ -114,39 +114,21 @@ public class OpenWeatherService extends WeatherService {
         return currentWeather;
     }
 
-    /*
-    {"city":{"id":1851632,"name":"Shuzenji",
-             "coord":{"lon":138.933334,"lat":34.966671},
-             "country":"JP",
-             "timezone": 32400
-             "cod":"200",
-             "message":0.0045,
-             "cnt":38,
-     "list":[{
-        "dt":1406106000,
-        "main":{
-            "temp":298.77,
-            "temp_min":298.77,
-            "temp_max":298.774,
-            "pressure":1005.93,
-            "sea_level":1018.18,
-            "grnd_level":1005.93,
-            "humidity":87,
-            "temp_kf":0.26},
-        "weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04d"}],
-        "clouds":{"all":88},
-        "wind":{"speed":5.71,"deg":229.501},
-        "sys":{"pod":"d"},
-        "dt_txt":"2014-07-23 09:00:00"}
-        ]}
-     */
     public void getLocationsFromResponse(JSONObject response) {
         try {
-            JSONObject city = response.getJSONObject("city");
-
             WeatherLocation.clear();
-            WeatherLocation wLoc = new WeatherLocation(city.getString("name"), "", city.getString("id"));
-            WeatherLocation.put(wLoc);
+
+            JSONArray locations = response.getJSONArray("list");
+            for (int i = 0; i < locations.length(); i++) {
+                JSONObject city = locations.getJSONObject(i);
+
+                WeatherLocation wLoc = new WeatherLocation(
+                        city.getString("name"),
+                        "",
+                        city.getJSONObject("sys").getString("country"),
+                        city.getString("id"));
+                WeatherLocation.put(wLoc);
+            }
         } catch (JSONException e) {
             LOG.error("Failed to get locations from the OpenWeather Service: {}", e);
         }

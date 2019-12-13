@@ -12,17 +12,20 @@ public class WeatherLocation {
 
     public static String JSON_TAG_NAME = "name";
     public static String JSON_TAG_POSTCODE= "postcode";
+    public static String JSON_TAG_COUNTRYCODE= "country";
     public static String JSON_TAG_SERVICE_ID = "serviceid";
 
     private String _name = "";
     private String _postcode = "";
+    private String _countryCode = "";
     private String _weatherServiceId = "";
 
     public static TreeMap<String, WeatherLocation> _locations = new TreeMap<>();
 
-    public WeatherLocation(String name, String postcode, String weatherServiceId) {
+    public WeatherLocation(String name, String postcode, String countryCode, String weatherServiceId) {
         _name = name;
         _postcode = postcode;
+        _countryCode = countryCode;
         _weatherServiceId = weatherServiceId;
     }
 
@@ -32,7 +35,7 @@ public class WeatherLocation {
 
     public static WeatherLocation fromJson(JSONObject json) {
         try {
-            return new WeatherLocation(json.getString(JSON_TAG_NAME), json.getString(JSON_TAG_POSTCODE), json.getString(JSON_TAG_SERVICE_ID));
+            return new WeatherLocation(json.getString(JSON_TAG_NAME), json.getString(JSON_TAG_POSTCODE), json.getString(JSON_TAG_COUNTRYCODE), json.getString(JSON_TAG_SERVICE_ID));
         } catch (Exception e) {
             LOG.error("Invalid json; can't create WeatherLocation: {}", json);
         }
@@ -46,6 +49,10 @@ public class WeatherLocation {
 
     public String getName() {
         return _name;
+    }
+
+    public String getCountryCode() {
+        return _countryCode;
     }
 
     public String getPostcode() {
@@ -62,6 +69,7 @@ public class WeatherLocation {
         try {
             json.put(JSON_TAG_NAME, _name);
             json.put(JSON_TAG_POSTCODE, _postcode);
+            json.put(JSON_TAG_COUNTRYCODE, _countryCode);
             json.put(JSON_TAG_SERVICE_ID, _weatherServiceId);
         } catch (Exception e) {
             LOG.error("Can't serialise WeatherLocation to Json: {}", this);
@@ -75,6 +83,8 @@ public class WeatherLocation {
         builder.append(_name)
                 .append("|")
                 .append(_postcode)
+                .append("|")
+                .append(_countryCode)
                 .append("|")
                 .append(_weatherServiceId);
 
@@ -102,7 +112,7 @@ public class WeatherLocation {
         }
 
         String[] parts = location.split("\\|");
-        if (parts.length != 3) {
+        if (parts.length != 4) {
             LOG.error("Stored Weather City does not conform to expected format: {}", location);
             return null;
         }
@@ -110,7 +120,7 @@ public class WeatherLocation {
         WeatherLocation loc = getByName(parts[0]);
 
         if (loc == null) {
-            loc = new WeatherLocation(parts[0], parts[1], parts[2]);
+            loc = new WeatherLocation(parts[0], parts[1], parts[2], parts[3]);
 
             _locations.put(loc._name, loc);
         }
@@ -119,13 +129,16 @@ public class WeatherLocation {
     }
 
     public static void put(WeatherLocation location) {
-        _locations.put(location._name, location);
+        _locations.put(location._name + "-" + location._countryCode, location);
     }
 
     public static class WeatherLocationComparator implements Comparator<WeatherLocation>
     {
         public int compare(WeatherLocation left, WeatherLocation right) {
-            return left._name.compareTo(right._name);
+            String leftName = left._name + left._countryCode;
+            String rightName = right._name + right._countryCode;
+
+            return leftName.compareTo(rightName);
         }
     }
 }

@@ -368,6 +368,8 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
                     .append("|")
                     .append(city.getPostcode())
                     .append("|")
+                    .append(city.getCountryCode())
+                    .append("|")
                     .append(city.getId());
         }
         setString("pref_key__weather_service_city", serialised.toString());
