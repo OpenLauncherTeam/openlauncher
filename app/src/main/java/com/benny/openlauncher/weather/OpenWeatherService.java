@@ -53,7 +53,6 @@ public class OpenWeatherService extends WeatherService {
         urlBuilder.append("&lon=").append(location.getLongitude());
         appendURLDetails(urlBuilder);
 
-
         return urlBuilder.toString();
     }
 
