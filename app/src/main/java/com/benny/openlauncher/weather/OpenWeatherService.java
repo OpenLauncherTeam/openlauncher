@@ -34,7 +34,7 @@ public class OpenWeatherService extends WeatherService {
 
         urlBuilder.append("&lang=").append(settings.getLanguage());
         urlBuilder.append("&mode=json");
-        urlBuilder.append("&units=metric");
+        urlBuilder.append("&units=").append(settings.getWeatherMeasurementUnits());
         urlBuilder.append("&appid=").append(settings.getWeatherAPIKey());
     }
 

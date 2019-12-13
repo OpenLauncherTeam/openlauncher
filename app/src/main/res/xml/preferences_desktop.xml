@@ -197,6 +197,12 @@
 
         <CheckBoxPreference
             android:defaultValue="true"
+            android:key="@string/pref_key__weather_service_units"
+            android:summary="@string/pref_summary__weather_service_units"
+            android:title="@string/pref_title__weather_service_units" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
             android:key="@string/pref_key__weather_service_hourly"
             android:summary="@string/pref_summary__weather_service_hourly"
             android:title="@string/pref_title__weather_service_hourly" />
