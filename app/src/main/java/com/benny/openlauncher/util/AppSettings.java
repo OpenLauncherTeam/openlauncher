@@ -353,14 +353,17 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public String getWeatherAPIKey() {
-        String weatherService = getWeatherService();
+        String key = getString("pref_key__weather_service_apikey", "");
 
-        String defaultKey = "";
-        if ("openweather".equals(weatherService)) {
-            defaultKey = HomeActivity._launcher.getResources().getString(R.string.openWeatherServiceApiKey);
+        if (key.equals("")) {
+            String weatherService = getWeatherService();
+
+            if ("openweather".equals(weatherService)) {
+                return HomeActivity._launcher.getResources().getString(R.string.openWeatherServiceApiKey);
+            }
         }
 
-        return getString("pref_key__weather_service_apikey", defaultKey);
+        return "";
 
     }
 
