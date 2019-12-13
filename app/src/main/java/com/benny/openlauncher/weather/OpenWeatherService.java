@@ -29,45 +29,38 @@ public class OpenWeatherService extends WeatherService {
 
     private HashMap<String, Drawable> _iconCache = new HashMap<>();
 
-    private String createURL(String search) {
+    private void appendURLDetails(StringBuilder urlBuilder) {
         AppSettings settings = AppSettings.get();
         final String apiKey = "3e29e62e2ddf6dd3d2ebd28aed069215";
 
-        StringBuilder urlBuilder = new StringBuilder(API_BASE);
-        urlBuilder.append("find?q=").append(search);
         urlBuilder.append("&lang=").append(settings.getLanguage());
         urlBuilder.append("&mode=json");
         urlBuilder.append("&units=metric");
         urlBuilder.append("&appid=").append(apiKey);
+    }
+
+    private String createURL(String search) {
+        StringBuilder urlBuilder = new StringBuilder(API_BASE);
+        urlBuilder.append("find?q=").append(search);
+        appendURLDetails(urlBuilder);
 
         return urlBuilder.toString();
     }
 
     private String createURL(Location location) {
-        AppSettings settings = AppSettings.get();
-        final String apiKey = "3e29e62e2ddf6dd3d2ebd28aed069215";
-
         StringBuilder urlBuilder = new StringBuilder(API_BASE);
         urlBuilder.append("forecast?lat=").append(location.getLatitude());
         urlBuilder.append("&lon=").append(location.getLongitude());
-        urlBuilder.append("&lang=").append(settings.getLanguage());
-        urlBuilder.append("&mode=json");
-        urlBuilder.append("&units=metric");
-        urlBuilder.append("&appid=").append(apiKey);
+        appendURLDetails(urlBuilder);
+
 
         return urlBuilder.toString();
     }
 
     private String createURL(WeatherLocation location) {
-        AppSettings settings = AppSettings.get();
-        final String apiKey = "3e29e62e2ddf6dd3d2ebd28aed069215";
-
         StringBuilder urlBuilder = new StringBuilder(API_BASE);
         urlBuilder.append("forecast?id=").append(location.getId());
-        urlBuilder.append("&lang=").append(settings.getLanguage());
-        urlBuilder.append("&mode=json");
-        urlBuilder.append("&units=metric");
-        urlBuilder.append("&appid=").append(apiKey);
+        appendURLDetails(urlBuilder);
 
         return urlBuilder.toString();
     }
