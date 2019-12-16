@@ -1,10 +1,13 @@
 package com.benny.openlauncher.weather;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.util.Pair;
@@ -18,11 +21,6 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.widget.SearchBar;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -31,15 +29,11 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Locale;
 
-public abstract class WeatherService implements
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+public abstract class WeatherService {
     public static Logger LOG = LoggerFactory.getLogger("WeatherService");
 
     // Location Services, iff required.
-    private GoogleApiClient _location = null;
-    private LocationRequest _locationRequest;
+    private LocationManager _locationManager = null;
 
     // Volley interactions.
     protected RequestQueue _requestQueue;
@@ -67,8 +61,8 @@ public abstract class WeatherService implements
             getWeatherForLocation(loc);
         } else {
             try {
-                if (_location.isConnected()) {
-                    Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(_location);
+                if (_locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    Location currentLocation = _locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                     getWeatherForLocation(currentLocation);
                 }
             } catch (SecurityException e) {
@@ -132,28 +126,6 @@ public abstract class WeatherService implements
         return _requestQueue;
     }
 
-    @Override
-    public void onConnected(Bundle arg0) {
-        // Once connected with google api, get the location
-        LOG.debug("onConnected: {}", arg0);
-        startLocationUpdates();
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult result) {
-        LOG.error("Location Services connection failed: {}", result);
-    }
-
-    @Override
-    public void onConnectionSuspended(int arg0) {
-        _location.connect();
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        getWeatherForLocation(location);
-    }
-
     public void openWeatherApp(String packageName) {
         Intent intent = _searchBar.getContext().getPackageManager().getLaunchIntentForPackage(packageName);
 
@@ -167,35 +139,41 @@ public abstract class WeatherService implements
         _searchBar.getContext().startActivity(intent);
     }
 
-    protected void startLocationUpdates() {
-        LOG.debug("startLocationUpdates()");
-        try {
-            // Create the location request
-            _locationRequest = LocationRequest.create()
-                    .setPriority(LocationRequest.PRIORITY_LOW_POWER)
-                    .setInterval(10000)
-                    .setFastestInterval(5000);
-
-            LocationServices.FusedLocationApi.requestLocationUpdates(_location, _locationRequest, this);
-        } catch (SecurityException e) {
-            LOG.error("User has not allowed Location Services: {}", e);
-        }
-    }
-
     public void updateWeather(SearchBar searchBar) {
         this._searchBar = searchBar;
         // We only ask for a Location if we haven't specified a specific locality.
         if (AppSettings.get().getWeatherCity() == null) {
             HomeActivity activity = HomeActivity.Companion.getLauncher();
-            if (_location == null) {
+            if (_locationManager == null) {
                 // Weather Service initialisation, if required. Coarse location only.
 
                 if (activity.checkLocationPermissions()) {
-                    _location = new GoogleApiClient.Builder(_searchBar.getContext())
-                            .addConnectionCallbacks(this)
-                            .addOnConnectionFailedListener(this)
-                            .addApi(LocationServices.API).build();
-                    _location.connect();
+                    try {
+                        _locationManager = (LocationManager) HomeActivity._launcher.getSystemService(Context.LOCATION_SERVICE);
+
+                        // Define a listener that responds to location updates
+                        LocationListener locationListener = new LocationListener() {
+                            public void onLocationChanged(Location location) {
+                                // Called when a new location is found by the network location provider.
+                                LOG.debug("onLocationChanged() received: {}, {}", location.getLatitude(), location.getLongitude());
+                                getWeatherForLocation(location);
+                            }
+
+                            public void onStatusChanged(String provider, int status, Bundle extras) {
+                            }
+
+                            public void onProviderEnabled(String provider) {
+                            }
+
+                            public void onProviderDisabled(String provider) {
+                            }
+                        };
+
+                        // Register the listener with the Location Manager to receive location updates, 1 hour or 25 klms apart.
+                        _locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60*60*1000l, 25*1000l, locationListener);
+                    } catch (SecurityException e) {
+                        LOG.error("Can't turn on Location Services: {}", e);
+                    }
                 }
             } else {
                 getWeatherForLocation();

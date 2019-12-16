@@ -100,7 +100,6 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
     implementation 'com.android.volley:volley:1.1.0'
-    implementation 'com.google.android.gms:play-services-location:16.0.0'
 
     // UI Libs
     implementation 'com.mikepenz:fastadapter:3.2.3@aar'
