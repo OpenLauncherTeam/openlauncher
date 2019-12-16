@@ -138,7 +138,6 @@ public class OpenWeatherService extends WeatherService {
     public void getWeatherForLocation(Location location) {
         String url = createURL(location);
 
-        Thread.dumpStack();
         getWeatherForUrl(url);
     }
 
