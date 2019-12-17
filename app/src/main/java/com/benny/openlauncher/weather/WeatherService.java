@@ -2,6 +2,11 @@ package com.benny.openlauncher.weather;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -26,10 +31,11 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public abstract class WeatherService {
+public abstract class WeatherService implements LocationListener {
     public static Logger LOG = LoggerFactory.getLogger("WeatherService");
 
     // Location Services, iff required.
@@ -41,10 +47,14 @@ public abstract class WeatherService {
     // Main UI element we interact with.
     protected SearchBar _searchBar;
 
+    // Cache the constructed Drawable.
+    protected HashMap<Integer, Drawable> timingIntervals = new HashMap<>();
+
     protected long _nextQueryTime = 0l;
 
     // Functions for each Weather Service to implement
     public abstract String getName();
+    public abstract int getIntervalResourceId();
     public abstract void getLocationsByName(String name, Response.Listener<JSONObject> listener, Response.ErrorListener err);
     public abstract void getLocationsFromResponse(JSONObject response);
     public abstract void getWeatherForLocation(Location location);
@@ -54,6 +64,39 @@ public abstract class WeatherService {
 
     public <T> void addToRequestQueue(Request<T> req) {
         getRequestQueue().add(req);
+    }
+
+    public Drawable getIntervalDrawable(int size) {
+        int resourceId = getIntervalResourceId();
+
+        Drawable intervalDrawable = timingIntervals.get(resourceId);
+
+        if (intervalDrawable == null) {
+            String timing = _searchBar.getResources().getString(resourceId);
+
+            Paint _textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            Paint _backgroundPaint = new Paint();
+
+            _textPaint.setColor(Color.WHITE);
+            _backgroundPaint.setColor(Color.BLACK);
+
+            float height = size * .4f;
+
+            _textPaint.setTextSize((int) (height * .7));
+            float width = _textPaint.measureText(timing);
+
+            Canvas icon = new Canvas();
+            Bitmap iconBitmap = Bitmap.createBitmap((int) width, (int) height, Bitmap.Config.ARGB_8888);
+
+            icon.setBitmap(iconBitmap);
+            icon.drawRect(0, 0, width, height, _backgroundPaint);
+            icon.drawText(timing, 0, height / 2 - ((_textPaint.descent() + _textPaint.ascent()) / 2), _textPaint);
+
+            intervalDrawable = new BitmapDrawable(_searchBar.getResources(), iconBitmap);
+            timingIntervals.put(resourceId, intervalDrawable);
+        }
+
+        return intervalDrawable;
     }
 
     public void getWeatherForLocation() {
@@ -133,6 +176,21 @@ public abstract class WeatherService {
         return _requestQueue;
     }
 
+    public void onLocationChanged(Location location) {
+        // Called when a new location is found by the network location provider.
+        LOG.debug("onLocationChanged() received: {}, {}", location.getLatitude(), location.getLongitude());
+        getWeatherForLocation(location);
+    }
+
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    public void onProviderEnabled(String provider) {
+    }
+
+    public void onProviderDisabled(String provider) {
+    }
+
     public void openWeatherApp(String packageName) {
         Intent intent = _searchBar.getContext().getPackageManager().getLaunchIntentForPackage(packageName);
 
@@ -146,6 +204,10 @@ public abstract class WeatherService {
         _searchBar.getContext().startActivity(intent);
     }
 
+    public void resetQueryTime() {
+        _nextQueryTime = 0l;
+    }
+
     public void updateWeather(SearchBar searchBar) {
         this._searchBar = searchBar;
         // We only ask for a Location if we haven't specified a specific locality.
@@ -156,28 +218,11 @@ public abstract class WeatherService {
 
                 if (activity.checkLocationPermissions()) {
                     try {
+                        LOG.debug("Creating LocationManager to track current location");
                         _locationManager = (LocationManager) HomeActivity._launcher.getSystemService(Context.LOCATION_SERVICE);
 
-                        // Define a listener that responds to location updates
-                        LocationListener locationListener = new LocationListener() {
-                            public void onLocationChanged(Location location) {
-                                // Called when a new location is found by the network location provider.
-                                LOG.debug("onLocationChanged() received: {}, {}", location.getLatitude(), location.getLongitude());
-                                getWeatherForLocation(location);
-                            }
-
-                            public void onStatusChanged(String provider, int status, Bundle extras) {
-                            }
-
-                            public void onProviderEnabled(String provider) {
-                            }
-
-                            public void onProviderDisabled(String provider) {
-                            }
-                        };
-
                         // Register the listener with the Location Manager to receive location updates, 1 hour or 25 klms apart.
-                        _locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60*60*1000l, 25*1000l, locationListener);
+                        _locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60*60*1000l, 25*1000l, this);
                     } catch (SecurityException e) {
                         LOG.error("Can't turn on Location Services: {}", e);
                     }

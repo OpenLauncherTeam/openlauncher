@@ -1,7 +1,13 @@
 package com.benny.openlauncher.weather;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.support.v4.app.AppOpsManagerCompat;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -103,6 +109,14 @@ public class OpenWeatherService extends WeatherService {
         }
 
         return currentWeather;
+    }
+
+    public int getIntervalResourceId() {
+        if (AppSettings.get().getWeatherForecastByHour()) {
+            return R.string.weather_service_3_hours;
+        } else {
+            return R.string.weather_service_1_day;
+        }
     }
 
     public void getLocationsFromResponse(JSONObject response) {

@@ -531,7 +531,6 @@ public class SearchBar extends FrameLayout {
         }
 
         displayWeatherChangedToast();
-        HomeActivity.Companion.getLauncher().initWeatherIfRequired();
         return true;
 
     }
@@ -578,7 +577,6 @@ public class SearchBar extends FrameLayout {
                     settings.setWeatherForecastByHour(!settings.getWeatherForecastByHour());
 
                     displayWeatherChangedToast();
-                    HomeActivity.Companion.getLauncher().initWeatherIfRequired();
                 }
 
                 public void onDoubleClick(View v) {
@@ -620,6 +618,7 @@ public class SearchBar extends FrameLayout {
     public void updateWeather(WeatherResult weather) {
         LOG.debug("updateWeather() -> {}", weather);
 
+        Drawable interval = null;
         for (int i = 0; i < _weatherIcons.size(); i++) {
             Pair<Double, Drawable> forecast = weather.getForecast(i, _weatherIconSize);
 
@@ -628,8 +627,14 @@ public class SearchBar extends FrameLayout {
                 break;
             }
 
+            if (i == 0) {
+                interval = HomeActivity._weatherService.getIntervalDrawable(_weatherIconSize);
+            } else {
+                interval = null;
+            }
+
             AppCompatButton icon = _weatherIcons.get(i);
-            icon.setCompoundDrawablesWithIntrinsicBounds(null, forecast.second, null, null);
+            icon.setCompoundDrawablesWithIntrinsicBounds(interval, forecast.second, null, null);
             icon.setText(Double.toString(forecast.first));
 
             if (icon.getParent() == null) {
@@ -656,6 +661,9 @@ public class SearchBar extends FrameLayout {
         } catch (Exception e) {
             LOG.error("Failed to get location: {}", e);
         }
+
+        HomeActivity._weatherService.resetQueryTime();
+        HomeActivity.Companion.getLauncher().initWeatherIfRequired();
     }
 
     @Override

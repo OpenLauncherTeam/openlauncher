@@ -1,5 +1,6 @@
 package com.benny.openlauncher.weather;
 
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 
 import com.android.volley.Response;
@@ -67,6 +68,14 @@ public class BOMWeatherService extends WeatherService {
         }
 
         return currentWeather;
+    }
+
+    public int getIntervalResourceId() {
+        if (AppSettings.get().getWeatherForecastByHour()) {
+            return R.string.weather_service_1_hour;
+        } else {
+            return R.string.weather_service_1_day;
+        }
     }
 
     public void getLocationsByName(String name, Response.Listener<JSONObject> listener, Response.ErrorListener err) {

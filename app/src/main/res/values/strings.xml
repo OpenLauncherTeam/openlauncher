@@ -266,6 +266,9 @@
     <string name="weather_service_add_location">Add Location</string>
     <string name="weather_service_finding_city">Searching for Location...</string>
     <string name="weather_service_current_location">Current Location</string>
+    <string name="weather_service_1_hour">+1h</string>
+    <string name="weather_service_3_hours">+3h</string>
+    <string name="weather_service_1_day">+1d</string>
 
     <!-- Toasts -->
     <string name="toast_not_enough_space">Not enough space.</string>
