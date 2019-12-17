@@ -41,6 +41,8 @@ public abstract class WeatherService {
     // Main UI element we interact with.
     protected SearchBar _searchBar;
 
+    protected long _nextQueryTime = 0l;
+
     // Functions for each Weather Service to implement
     public abstract String getName();
     public abstract void getLocationsByName(String name, Response.Listener<JSONObject> listener, Response.ErrorListener err);
@@ -55,18 +57,23 @@ public abstract class WeatherService {
     }
 
     public void getWeatherForLocation() {
-        WeatherLocation loc = AppSettings.get().getWeatherCity();
+        long currentTime = System.currentTimeMillis();
+        if (currentTime > _nextQueryTime) {
+            // Only query once per hour.
+            _nextQueryTime = currentTime + (60 * 60 * 1000l);
 
-        if (loc != null) {
-            getWeatherForLocation(loc);
-        } else {
-            try {
-                if (_locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                    Location currentLocation = _locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                    getWeatherForLocation(currentLocation);
+            WeatherLocation loc = AppSettings.get().getWeatherCity();
+            if (loc != null) {
+                getWeatherForLocation(loc);
+            } else {
+                try {
+                    if (_locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                        Location currentLocation = _locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        getWeatherForLocation(currentLocation);
+                    }
+                } catch (SecurityException e) {
+                    LOG.error("User has not allowed Location Services: {}", e);
                 }
-            } catch (SecurityException e) {
-                LOG.error("User has not allowed Location Services: {}", e);
             }
         }
     }
