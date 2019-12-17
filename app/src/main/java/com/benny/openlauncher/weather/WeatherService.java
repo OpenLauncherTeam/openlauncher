@@ -74,23 +74,18 @@ public abstract class WeatherService implements LocationListener {
         if (intervalDrawable == null) {
             String timing = _searchBar.getResources().getString(resourceId);
 
-            Paint _textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            Paint _backgroundPaint = new Paint();
-
-            _textPaint.setColor(Color.WHITE);
-            _backgroundPaint.setColor(Color.BLACK);
+            Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            textPaint.setColor(AppSettings.get().getDesktopDateTextColor());
 
             float height = size * .4f;
-
-            _textPaint.setTextSize((int) (height * .7));
-            float width = _textPaint.measureText(timing);
+            textPaint.setTextSize((int) (height * .7));
+            float width = textPaint.measureText(timing);
 
             Canvas icon = new Canvas();
             Bitmap iconBitmap = Bitmap.createBitmap((int) width, (int) height, Bitmap.Config.ARGB_8888);
 
             icon.setBitmap(iconBitmap);
-            icon.drawRect(0, 0, width, height, _backgroundPaint);
-            icon.drawText(timing, 0, height / 2 - ((_textPaint.descent() + _textPaint.ascent()) / 2), _textPaint);
+            icon.drawText(timing, 0, height / 2 - ((textPaint.descent() + textPaint.ascent()) / 2), textPaint);
 
             intervalDrawable = new BitmapDrawable(_searchBar.getResources(), iconBitmap);
             timingIntervals.put(resourceId, intervalDrawable);
