@@ -1,6 +1,8 @@
 package com.benny.openlauncher.weather;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -15,7 +17,22 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.util.Pair;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatAutoCompleteTextView;
+import android.support.v7.widget.AppCompatButton;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,12 +42,14 @@ import com.android.volley.toolbox.Volley;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.util.AppSettings;
+import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.SearchBar;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -47,10 +66,21 @@ public abstract class WeatherService implements LocationListener {
     // Main UI element we interact with.
     protected SearchBar _searchBar;
 
+    // Weather UI elements
+    public ArrayList<AppCompatButton> _weatherIcons = new ArrayList<>();
+    protected Integer _weatherIconSize;
+
     // Cache the constructed Drawable.
     protected HashMap<Integer, Drawable> timingIntervals = new HashMap<>();
 
+    protected WeatherResult _latestResult = null;
     protected long _nextQueryTime = 0l;
+
+    // Weather AutoComplete support
+    private static final int TRIGGER_AUTO_COMPLETE = 100;
+    private static final long AUTO_COMPLETE_DELAY = 300;
+    private WeatherLocationAdapter _locationAdapter;
+    private Handler handler;
 
     // Functions for each Weather Service to implement
     public abstract String getName();
@@ -96,7 +126,7 @@ public abstract class WeatherService implements LocationListener {
 
     public void getWeatherForLocation() {
         long currentTime = System.currentTimeMillis();
-        if (currentTime > _nextQueryTime) {
+        if (currentTime > _nextQueryTime || _latestResult == null) {
             // Only query once per hour.
             _nextQueryTime = currentTime + (60 * 60 * 1000l);
 
@@ -113,6 +143,10 @@ public abstract class WeatherService implements LocationListener {
                     LOG.error("User has not allowed Location Services: {}", e);
                 }
             }
+        }
+        else {
+            // Sometimes we need to redisplay the icons on Resume.
+            updateWeather(_latestResult);
         }
     }
 
@@ -204,7 +238,20 @@ public abstract class WeatherService implements LocationListener {
     }
 
     public void updateWeather(SearchBar searchBar) {
-        this._searchBar = searchBar;
+        // Should only need to do this once.
+        if (_searchBar == null) {
+            this._searchBar = searchBar;
+
+            _searchBar.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    _searchBar.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                    createWeatherButtons();
+                }
+            });
+        }
+
         // We only ask for a Location if we haven't specified a specific locality.
         if (AppSettings.get().getWeatherCity() == null) {
             HomeActivity activity = HomeActivity.Companion.getLauncher();
@@ -227,6 +274,258 @@ public abstract class WeatherService implements LocationListener {
             }
         } else {
             getWeatherForLocation();
+        }
+    }
+
+    @SuppressLint("RestrictedApi")
+    private void findCityToAdd() {
+        HomeActivity launcher = HomeActivity.Companion.getLauncher();
+        final AlertDialog.Builder alert = new AlertDialog.Builder(launcher);
+        alert.setTitle(launcher.getString(R.string.weather_service_add_location));
+
+        _locationAdapter = new WeatherLocationAdapter(launcher, android.R.layout.simple_dropdown_item_1line);
+
+        final AppCompatAutoCompleteTextView input = new AppCompatAutoCompleteTextView(launcher);
+        input.setMaxLines(1);
+        input.setThreshold(3);
+        input.setSingleLine(true);
+        input.setAdapter(_locationAdapter);
+
+        input.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        WeatherLocation loc = _locationAdapter.getObject(position);
+                        input.setText(loc.toString());
+                    }
+                });
+
+        input.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                handler.removeMessages(TRIGGER_AUTO_COMPLETE);
+                handler.sendEmptyMessageDelayed(TRIGGER_AUTO_COMPLETE, AUTO_COMPLETE_DELAY);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                if (msg.what == TRIGGER_AUTO_COMPLETE) {
+                    if (!TextUtils.isEmpty(input.getText())) {
+                        launcher._weatherService.getLocationsByName(input.getText().toString(),
+                                new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        launcher._weatherService.getLocationsFromResponse(response);
+                                        _locationAdapter.setData(new ArrayList<>(WeatherLocation._locations.values()));
+                                        _locationAdapter.notifyDataSetChanged();
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        LOG.error("Error getting Location list from Weather Service: {}", error.networkResponse);
+                                    }
+                                });
+                    }
+                }
+                return false;
+            }
+        });
+
+        alert.setView(input, 32, 0, 32, 0);
+
+        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                AppSettings settings = AppSettings.get();
+
+                WeatherLocation loc = WeatherLocation.parse(input.getText().toString());
+                settings.setWeatherCity(loc);
+                settings.addWeatherLocations(loc);
+
+                int toastMessageId = settings.getWeatherForecastByHour() ? R.string.weather_service_hourly : R.string.weather_service_daily;
+                Tool.toast(launcher, String.format(launcher.getString(toastMessageId), loc.getName()));
+
+                getWeatherForLocation();
+                dialog.dismiss();
+            }
+        });
+
+        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.cancel();
+            }
+        });
+        alert.show();
+    }
+
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getItemId() == 0) {
+            // Use Location Services.
+            AppSettings.get().setWeatherCity(null);
+        } else if (item.getItemId() == 99) {
+            // Pop up the add Location Dialog.
+            findCityToAdd();
+            return true;
+        } else {
+            AppSettings.get().setWeatherCity(WeatherLocation.parse(item.toString()));
+        }
+
+        displayWeatherChangedToast();
+        return true;
+
+    }
+
+    protected void createWeatherButtons() {
+        int[] coords = new int[2];
+        _searchBar._searchButton.getLocationOnScreen(coords);
+
+        int leftPosition = _searchBar._searchClock.getMeasuredWidth();
+        int rightPosition = coords[0] - _searchBar._iconMarginOutside;
+
+        int totalWidth = rightPosition - leftPosition;
+
+        _weatherIconSize = (int) (_searchBar._searchClock.getMeasuredHeight() * 0.5f);
+
+        int numberOfIcons = totalWidth / (_weatherIconSize + _searchBar._iconMarginOutside);
+
+        for (int i = 0; i < numberOfIcons; i++) {
+            AppCompatButton btn =new AppCompatButton(_searchBar.getContext());
+            _weatherIcons.add(btn);
+
+            FrameLayout.LayoutParams iconParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            iconParams.setMargins(leftPosition, 0, 0, 0);
+
+            btn.setLayoutParams(iconParams);
+            leftPosition += _weatherIconSize + _searchBar._iconMarginOutside;
+        }
+
+        setButtonCallbacks();
+    }
+
+    protected void setButtonCallbacks() {
+        for (AppCompatButton icon : _weatherIcons) {
+            HomeActivity.Companion.getLauncher().registerForContextMenu(icon);
+
+            icon.setBackgroundColor(Color.TRANSPARENT);
+            icon.setTextColor(AppSettings.get().getDesktopDateTextColor());
+
+            icon.setOnClickListener(new MultiClickListener() {
+                @Override
+                public void onSingleClick(View v) {
+                    super.onSingleClick(v);
+                    AppSettings settings = AppSettings.get();
+                    settings.setWeatherForecastByHour(!settings.getWeatherForecastByHour());
+
+                    displayWeatherChangedToast();
+                }
+
+                public void onDoubleClick(View v) {
+                    super.onDoubleClick(v);
+                    HomeActivity._weatherService.openWeatherApp();
+                }
+            });
+
+            icon.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+                @Override
+                public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                    menu.setHeaderTitle(HomeActivity._launcher.getString(R.string.weather_service_choose_location));
+                    //MenuCompat.setGroupDividerEnabled(menu, true);
+
+                    menu.add(0, 0, 0, R.string.weather_service_use_network_location);
+
+                    int i = 1;
+                    // Stored Locations first
+                    ArrayList<WeatherLocation> storedLocations = AppSettings.get().getWeatherLocations();
+                    for (WeatherLocation loc : storedLocations) {
+                        menu.add(1, i, i, loc.toString());
+                        i++;
+                    }
+
+                    // Then locations associated with the current location (when using Location Services)
+                    if (AppSettings.get().getWeatherCity() == null) {
+                        for (String name : WeatherLocation._locations.keySet()) {
+                            menu.add(2, i, i, WeatherLocation.getByName(name).getName());
+                            i++;
+                        }
+                    }
+
+                    menu.add(3, 99, 99, R.string.weather_service_add_location);
+                }
+            });
+        }
+    }
+
+    public void updateWeather(WeatherResult weather) {
+        LOG.debug("updateWeather() -> {}", weather);
+        _latestResult = weather;
+
+        Drawable interval = null;
+        for (int i = 0; i < _weatherIcons.size(); i++) {
+            Pair<Double, Drawable> forecast = weather.getForecast(i, _weatherIconSize);
+
+            // May happen if we get an error from the Weather Service
+            if (forecast == null) {
+                break;
+            }
+
+            if (i == 0) {
+                interval = HomeActivity._weatherService.getIntervalDrawable(_weatherIconSize);
+            } else {
+                interval = null;
+            }
+
+            AppCompatButton icon = _weatherIcons.get(i);
+            icon.setCompoundDrawablesWithIntrinsicBounds(interval, forecast.second, null, null);
+            icon.setText(Double.toString(forecast.first));
+
+            if (icon.getParent() == null) {
+                _searchBar.addView(icon);
+            }
+        }
+    }
+
+    protected void displayWeatherChangedToast() {
+        AppSettings settings = AppSettings.get();
+
+        int toastMessageId = settings.getWeatherForecastByHour() ? R.string.weather_service_hourly : R.string.weather_service_daily;
+
+        try {
+            WeatherLocation loc = settings.getWeatherCity();
+            String locationName;
+
+            if (loc == null) {
+                locationName = HomeActivity._launcher.getString(R.string.weather_service_current_location);
+            } else {
+                locationName =  loc.getName();
+            }
+            Tool.toast(HomeActivity._launcher, String.format(HomeActivity._launcher.getString(toastMessageId), locationName));
+        } catch (Exception e) {
+            LOG.error("Failed to get location: {}", e);
+        }
+
+        HomeActivity._weatherService.resetQueryTime();
+        HomeActivity.Companion.getLauncher().initWeatherIfRequired();
+    }
+
+    public void toggleWeatherButtons(boolean visible) {
+        for (AppCompatButton icon : _weatherIcons) {
+            if (visible) {
+                Tool.visibleViews(0, icon);
+            } else {
+                Tool.goneViews(0, icon);
+            }
         }
     }
 }

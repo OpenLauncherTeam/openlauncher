@@ -539,7 +539,11 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        return getSearchBar().onContextItemSelected(item);
+        if (_weatherService != null) {
+            return _weatherService.onContextItemSelected(item);
+        }
+
+        return false;
     }
 
     public boolean checkLocationPermissions() {

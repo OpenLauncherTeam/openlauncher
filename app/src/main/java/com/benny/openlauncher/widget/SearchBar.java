@@ -1,20 +1,11 @@
 package com.benny.openlauncher.widget;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.util.Pair;
-import android.support.v4.view.MenuCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
@@ -23,30 +14,22 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowInsets;
-import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.interfaces.AppUpdateListener;
@@ -59,16 +42,9 @@ import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.CircleDrawable;
 import com.benny.openlauncher.viewutil.IconLabelItem;
-import com.benny.openlauncher.weather.MultiClickListener;
-import com.benny.openlauncher.weather.WeatherLocation;
-import com.benny.openlauncher.weather.WeatherLocationAdapter;
-import com.benny.openlauncher.weather.WeatherResult;
-import com.benny.openlauncher.weather.WeatherService;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.threeten.bp.ZonedDateTime;
@@ -86,8 +62,6 @@ public class SearchBar extends FrameLayout {
     public TextView _searchClock;
     public AppCompatImageView _switchButton;
     public AppCompatImageView _searchButton;
-    public ArrayList<AppCompatButton> _weatherIcons = new ArrayList<>();
-    protected Integer _weatherIconSize;
     public AppCompatEditText _searchInput;
     public RecyclerView _searchRecycler;
     private CircleDrawable _icon;
@@ -99,21 +73,15 @@ public class SearchBar extends FrameLayout {
     private float _searchClockSubTextFactor = 0.5f;
     private int bottomInset;
 
-    private int _iconMarginOutside;
-    private int _iconMarginTop;
-    private int _searchTextMarginTop;
-    private int _iconSize;
-    private int _iconPadding;
+    public int _iconMarginOutside;
+    public int _iconMarginTop;
+    public int _searchTextMarginTop;
+    public int _iconSize;
+    public int _iconPadding;
 
     private HashMap<Integer, DateTimeFormatter> _clockModes = new HashMap<>(4);
     private Integer _clockFormatterIndex = -1;
     private DateTimeFormatter _clockFormatter = null;
-
-    // Weather AutoComplete support
-    private static final int TRIGGER_AUTO_COMPLETE = 100;
-    private static final long AUTO_COMPLETE_DELAY = 300;
-    private WeatherLocationAdapter _locationAdapter;
-    private Handler handler;
 
     public SearchBar(@NonNull Context context) {
         super(context);
@@ -259,15 +227,6 @@ public class SearchBar extends FrameLayout {
 
         initRecyclerView();
 
-        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                SearchBar.this.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
-                createWeatherButtons();
-            }
-        });
-
         Setup.appLoader().addUpdateListener(new AppUpdateListener() {
             @Override
             public boolean onAppUpdated(List<App> apps) {
@@ -347,8 +306,8 @@ public class SearchBar extends FrameLayout {
 
         _icon.setIcon(getResources().getDrawable(R.drawable.ic_search));
 
-        for (AppCompatButton icon : _weatherIcons) {
-            Tool.visibleViews(0, icon);
+        if (HomeActivity._weatherService != null) {
+            HomeActivity._weatherService.toggleWeatherButtons(true);
         }
 
         Tool.visibleViews(ANIM_TIME, _searchClock);
@@ -364,8 +323,8 @@ public class SearchBar extends FrameLayout {
 
         _icon.setIcon(getResources().getDrawable(R.drawable.ic_clear));
 
-        for (AppCompatButton icon : _weatherIcons) {
-            Tool.goneViews(0, icon);
+        if (HomeActivity._weatherService != null) {
+            HomeActivity._weatherService.toggleWeatherButtons(false);
         }
 
         Tool.visibleViews(ANIM_TIME, _searchCardContainer, _searchRecycler, _switchButton);
@@ -424,246 +383,6 @@ public class SearchBar extends FrameLayout {
         Spannable span = new SpannableString(text);
         span.setSpan(new RelativeSizeSpan(_searchClockSubTextFactor), lines[0].length() + 1, lines[0].length() + 1 + lines[1].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         _searchClock.setText(span);
-    }
-
-    private void findCityToAdd() {
-        HomeActivity launcher = HomeActivity.Companion.getLauncher();
-        final AlertDialog.Builder alert = new AlertDialog.Builder(launcher);
-        alert.setTitle(launcher.getString(R.string.weather_service_add_location));
-
-        _locationAdapter = new WeatherLocationAdapter(launcher, android.R.layout.simple_dropdown_item_1line);
-
-        final AppCompatAutoCompleteTextView input = new AppCompatAutoCompleteTextView(launcher);
-        input.setMaxLines(1);
-        input.setThreshold(3);
-        input.setSingleLine(true);
-        input.setAdapter(_locationAdapter);
-
-        input.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        WeatherLocation loc = _locationAdapter.getObject(position);
-                        input.setText(loc.toString());
-                    }
-                });
-
-        input.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                handler.removeMessages(TRIGGER_AUTO_COMPLETE);
-                handler.sendEmptyMessageDelayed(TRIGGER_AUTO_COMPLETE, AUTO_COMPLETE_DELAY);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        handler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                if (msg.what == TRIGGER_AUTO_COMPLETE) {
-                    if (!TextUtils.isEmpty(input.getText())) {
-                        launcher._weatherService.getLocationsByName(input.getText().toString(),
-                                new Response.Listener<JSONObject>() {
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        launcher._weatherService.getLocationsFromResponse(response);
-                                        _locationAdapter.setData(new ArrayList<>(WeatherLocation._locations.values()));
-                                        _locationAdapter.notifyDataSetChanged();
-                                    }
-                                },
-                                new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        LOG.error("Error getting Location list from Weather Service: {}", error.networkResponse);
-                                    }
-                                });
-                    }
-                }
-                return false;
-            }
-        });
-
-        alert.setView(input, 32, 0, 32, 0);
-
-        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                AppSettings settings = AppSettings.get();
-
-                WeatherLocation loc = WeatherLocation.parse(input.getText().toString());
-                settings.setWeatherCity(loc);
-                settings.addWeatherLocations(loc);
-
-                int toastMessageId = settings.getWeatherForecastByHour() ? R.string.weather_service_hourly : R.string.weather_service_daily;
-                Tool.toast(getContext(), String.format(getContext().getString(toastMessageId), loc.getName()));
-
-                launcher._weatherService.getWeatherForLocation();
-                dialog.dismiss();
-            }
-        });
-
-        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                dialog.cancel();
-            }
-        });
-        alert.show();
-    }
-
-    public boolean onContextItemSelected(MenuItem item) {
-        if (item.getItemId() == 0) {
-            // Use Location Services.
-            AppSettings.get().setWeatherCity(null);
-        } else if (item.getItemId() == 99) {
-            // Pop up the add Location Dialog.
-            findCityToAdd();
-            return true;
-        } else {
-            AppSettings.get().setWeatherCity(WeatherLocation.parse(item.toString()));
-        }
-
-        displayWeatherChangedToast();
-        return true;
-
-    }
-
-    protected void createWeatherButtons() {
-        int[] coords = new int[2];
-        _searchButton.getLocationOnScreen(coords);
-
-        int leftPosition = _searchClock.getMeasuredWidth();
-        int rightPosition = coords[0] - _iconMarginOutside;
-
-        int totalWidth = rightPosition - leftPosition;
-
-        _weatherIconSize = (int) (_searchClock.getMeasuredHeight() * 0.5f);
-
-        int numberOfIcons = totalWidth / (_weatherIconSize + _iconMarginOutside);
-
-        for (int i = 0; i < numberOfIcons; i++) {
-            AppCompatButton btn =new AppCompatButton(getContext());
-            _weatherIcons.add(btn);
-
-            LayoutParams iconParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            iconParams.setMargins(leftPosition, 0, 0, 0);
-
-            btn.setLayoutParams(iconParams);
-            leftPosition += _weatherIconSize + _iconMarginOutside;
-        }
-
-        setButtonCallbacks();
-    }
-
-    protected void setButtonCallbacks() {
-        for (AppCompatButton icon : _weatherIcons) {
-            HomeActivity.Companion.getLauncher().registerForContextMenu(icon);
-
-            icon.setBackgroundColor(Color.TRANSPARENT);
-            icon.setTextColor(AppSettings.get().getDesktopDateTextColor());
-
-            icon.setOnClickListener(new MultiClickListener() {
-                @Override
-                public void onSingleClick(View v) {
-                    super.onSingleClick(v);
-                    AppSettings settings = AppSettings.get();
-                    settings.setWeatherForecastByHour(!settings.getWeatherForecastByHour());
-
-                    displayWeatherChangedToast();
-                }
-
-                public void onDoubleClick(View v) {
-                    super.onDoubleClick(v);
-                    HomeActivity._weatherService.openWeatherApp();
-                }
-            });
-
-            icon.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
-                @Override
-                public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                    menu.setHeaderTitle(getContext().getString(R.string.weather_service_choose_location));
-                    //MenuCompat.setGroupDividerEnabled(menu, true);
-
-                    menu.add(0, 0, 0, R.string.weather_service_use_network_location);
-
-                    int i = 1;
-                    // Stored Locations first
-                    ArrayList<WeatherLocation> storedLocations = AppSettings.get().getWeatherLocations();
-                    for (WeatherLocation loc : storedLocations) {
-                        menu.add(1, i, i, loc.toString());
-                        i++;
-                    }
-
-                    // Then locations associated with the current location (when using Location Services)
-                    if (AppSettings.get().getWeatherCity() == null) {
-                        for (String name : WeatherLocation._locations.keySet()) {
-                            menu.add(2, i, i, WeatherLocation.getByName(name).getName());
-                            i++;
-                        }
-                    }
-
-                    menu.add(3, 99, 99, R.string.weather_service_add_location);
-                }
-            });
-        }
-    }
-
-    public void updateWeather(WeatherResult weather) {
-        LOG.debug("updateWeather() -> {}", weather);
-
-        Drawable interval = null;
-        for (int i = 0; i < _weatherIcons.size(); i++) {
-            Pair<Double, Drawable> forecast = weather.getForecast(i, _weatherIconSize);
-
-            // May happen if we get an error from the Weather Service
-            if (forecast == null) {
-                break;
-            }
-
-            if (i == 0) {
-                interval = HomeActivity._weatherService.getIntervalDrawable(_weatherIconSize);
-            } else {
-                interval = null;
-            }
-
-            AppCompatButton icon = _weatherIcons.get(i);
-            icon.setCompoundDrawablesWithIntrinsicBounds(interval, forecast.second, null, null);
-            icon.setText(Double.toString(forecast.first));
-
-            if (icon.getParent() == null) {
-                addView(icon);
-            }
-        }
-    }
-
-    protected void displayWeatherChangedToast() {
-        AppSettings settings = AppSettings.get();
-
-        int toastMessageId = settings.getWeatherForecastByHour() ? R.string.weather_service_hourly : R.string.weather_service_daily;
-
-        try {
-            WeatherLocation loc = settings.getWeatherCity();
-            String locationName;
-
-            if (loc == null) {
-                locationName = getContext().getString(R.string.weather_service_current_location);
-            } else {
-                locationName =  loc.getName();
-            }
-            Tool.toast(getContext(), String.format(getContext().getString(toastMessageId), locationName));
-        } catch (Exception e) {
-            LOG.error("Failed to get location: {}", e);
-        }
-
-        HomeActivity._weatherService.resetQueryTime();
-        HomeActivity.Companion.getLauncher().initWeatherIfRequired();
     }
 
     @Override

@@ -69,7 +69,7 @@ public class OpenWeatherService extends WeatherService {
         boolean hourly = AppSettings.get().getWeatherForecastByHour();
         String day = "";
         int i = 0;
-        int numberOfIcons = _searchBar._weatherIcons.size();
+        int numberOfIcons = _weatherIcons.size();
 
         while (currentWeather.size() < numberOfIcons) {
             JSONObject listItem = results.getJSONObject(i);
@@ -161,7 +161,7 @@ public class OpenWeatherService extends WeatherService {
             public void onResponse(JSONObject response) {
                 try {
                     WeatherResult result = createWeatherResult(response.getJSONArray("list"));
-                    _searchBar.updateWeather(result);
+                    updateWeather(result);
                 } catch (JSONException e) {
                     LOG.error("Exception calling BOM WeatherService: {}", e);
                 }
