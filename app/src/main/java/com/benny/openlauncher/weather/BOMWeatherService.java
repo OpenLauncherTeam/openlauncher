@@ -22,13 +22,12 @@ public class BOMWeatherService extends WeatherService {
     private static Logger LOG = LoggerFactory.getLogger("WeatherService");
 
     private static String API_BASE = "https://api.weather.bom.gov.au/v1/locations";
-    private static String API_FORECAST_RAIN = API_BASE + "forecast/weather_rain";
-    private static String API_WARNAPI_FORECAST_WARNINGS = API_BASE + "warnings";
+    private static String API_FORECAST_WARNINGS = "/warnings";
     private static String API_FORECAST_DAILY = "/forecasts/daily";
     private static String API_FORECAST_3HOURLY = "/forecasts/3-hourly";
-    private static String API_OBSERVATIONS = "/observations";
     private static String API_SEARCH = "?search=";
     private static String ACKNOWLEDGEMENT = "Data courtesy of the Australian Bureau of Meteorology (https://api.weather.bom.gov.au)";
+
 
     private String createURL(WeatherLocation location) {
         if (location == null) {

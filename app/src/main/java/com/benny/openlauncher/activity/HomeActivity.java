@@ -246,7 +246,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
 
         if (_weatherService != null) {
-            _weatherService.updateWeather(getSearchBar());
+            _weatherService.updateWeather();
         }
     }
 

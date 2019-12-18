@@ -63,9 +63,6 @@ public abstract class WeatherService implements LocationListener {
     // Volley interactions.
     protected RequestQueue _requestQueue;
 
-    // Main UI element we interact with.
-    protected SearchBar _searchBar;
-
     // Weather UI elements
     public ArrayList<AppCompatButton> _weatherIcons = new ArrayList<>();
     protected Integer _weatherIconSize;
@@ -102,7 +99,7 @@ public abstract class WeatherService implements LocationListener {
         Drawable intervalDrawable = timingIntervals.get(resourceId);
 
         if (intervalDrawable == null) {
-            String timing = _searchBar.getResources().getString(resourceId);
+            String timing = HomeActivity._launcher.getResources().getString(resourceId);
 
             Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
             textPaint.setColor(AppSettings.get().getDesktopDateTextColor());
@@ -117,7 +114,7 @@ public abstract class WeatherService implements LocationListener {
             icon.setBitmap(iconBitmap);
             icon.drawText(timing, 0, height / 2 - ((textPaint.descent() + textPaint.ascent()) / 2), textPaint);
 
-            intervalDrawable = new BitmapDrawable(_searchBar.getResources(), iconBitmap);
+            intervalDrawable = new BitmapDrawable(HomeActivity._launcher.getResources(), iconBitmap);
             timingIntervals.put(resourceId, intervalDrawable);
         }
 
@@ -221,7 +218,7 @@ public abstract class WeatherService implements LocationListener {
     }
 
     public void openWeatherApp(String packageName) {
-        Intent intent = _searchBar.getContext().getPackageManager().getLaunchIntentForPackage(packageName);
+        Intent intent = HomeActivity._launcher.getPackageManager().getLaunchIntentForPackage(packageName);
 
         if (intent == null) {
             // Bring user to the market or let them choose an app?
@@ -230,22 +227,20 @@ public abstract class WeatherService implements LocationListener {
         }
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        _searchBar.getContext().startActivity(intent);
+        HomeActivity._launcher.startActivity(intent);
     }
 
     public void resetQueryTime() {
         _nextQueryTime = 0l;
     }
 
-    public void updateWeather(SearchBar searchBar) {
+    public void updateWeather() {
         // Should only need to do this once.
-        if (_searchBar == null) {
-            this._searchBar = searchBar;
-
-            _searchBar.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        if (_weatherIcons.size() == 0) {
+            HomeActivity._launcher.getSearchBar().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                    _searchBar.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    HomeActivity._launcher.getSearchBar().getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
                     createWeatherButtons();
                 }
@@ -388,28 +383,30 @@ public abstract class WeatherService implements LocationListener {
     }
 
     protected void createWeatherButtons() {
-        int[] coords = new int[2];
-        _searchBar._searchButton.getLocationOnScreen(coords);
+        SearchBar searchBar = HomeActivity._launcher.getSearchBar();
 
-        int leftPosition = _searchBar._searchClock.getMeasuredWidth();
-        int rightPosition = coords[0] - _searchBar._iconMarginOutside;
+        int[] coords = new int[2];
+        searchBar._searchButton.getLocationOnScreen(coords);
+
+        int leftPosition = searchBar._searchClock.getMeasuredWidth();
+        int rightPosition = coords[0] - searchBar._iconMarginOutside;
 
         int totalWidth = rightPosition - leftPosition;
 
-        _weatherIconSize = (int) (_searchBar._searchClock.getMeasuredHeight() * 0.5f);
+        _weatherIconSize = (int) (searchBar._searchClock.getMeasuredHeight() * 0.5f);
 
-        int numberOfIcons = totalWidth / (_weatherIconSize + _searchBar._iconMarginOutside);
-
+        int numberOfIcons = totalWidth / (_weatherIconSize + searchBar._iconMarginOutside);
         for (int i = 0; i < numberOfIcons; i++) {
-            AppCompatButton btn =new AppCompatButton(_searchBar.getContext());
+            AppCompatButton btn = new AppCompatButton(searchBar.getContext());
             _weatherIcons.add(btn);
 
             FrameLayout.LayoutParams iconParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             iconParams.setMargins(leftPosition, 0, 0, 0);
 
             btn.setLayoutParams(iconParams);
-            leftPosition += _weatherIconSize + _searchBar._iconMarginOutside;
+            leftPosition += _weatherIconSize + searchBar._iconMarginOutside;
         }
+
 
         setButtonCallbacks();
     }
@@ -490,8 +487,13 @@ public abstract class WeatherService implements LocationListener {
             icon.setCompoundDrawablesWithIntrinsicBounds(interval, forecast.second, null, null);
             icon.setText(Double.toString(forecast.first));
 
-            if (icon.getParent() == null) {
-                _searchBar.addView(icon);
+            // This is weird, when returning from some full screen apps, the SearchBar gets recreated;
+            // this works around this occurence.
+            if (HomeActivity._launcher.getSearchBar().indexOfChild(icon) == -1) {
+                if (icon.getParent() != null) {
+                    ((ViewGroup) icon.getParent()).removeView(icon);
+                }
+                HomeActivity._launcher.getSearchBar().addView(icon);
             }
         }
     }
