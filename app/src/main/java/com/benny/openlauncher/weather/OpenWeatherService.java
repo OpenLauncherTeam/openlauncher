@@ -1,19 +1,12 @@
 package com.benny.openlauncher.weather;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.support.v4.app.AppOpsManagerCompat;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.benny.openlauncher.R;
-import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppSettings;
 
 import org.json.JSONArray;
@@ -185,31 +178,31 @@ public class OpenWeatherService extends WeatherService {
 
     public Integer getWeatherIcon(String icon) {
         if (icon.equals("01d") || icon.equals("01n")) {
-            return R.drawable.sunny;
+            return R.drawable.weather_sunny;
         }
 
         if (icon.equals("02d") || icon.equals("02n") || icon.equals("04d") || icon.equals("04n")) {
-            return R.drawable.cloudy;
+            return R.drawable.weather_cloudy;
         }
 
         if (icon.equals("03d") || icon.equals("03n")) {
-            return R.drawable.clouds;
+            return R.drawable.weather_clouds;
         }
 
         if (icon.equals("50d") || icon.equals("50n")) {
-            return R.drawable.hazy;
+            return R.drawable.weather_hazy;
         }
 
         if (icon.equals("10d") || icon.equals("10n")) {
-            return R.drawable.rain;
+            return R.drawable.weather_rain;
         }
 
         if (icon.equals("13d") || icon.equals("13n")) {
-            return R.drawable.snowflake;
+            return R.drawable.weather_snowflake;
         }
 
         if (icon.equals("11d") || icon.equals("11n")) {
-            return R.drawable.storm;
+            return R.drawable.weather_storm;
         }
 
         LOG.error("Can't parse weather condition: {}", icon);

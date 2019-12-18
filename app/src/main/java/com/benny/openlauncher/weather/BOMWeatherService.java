@@ -1,6 +1,5 @@
 package com.benny.openlauncher.weather;
 
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 
 import com.android.volley.Response;
@@ -23,7 +22,7 @@ public class BOMWeatherService extends WeatherService {
     private static Logger LOG = LoggerFactory.getLogger("WeatherService");
 
     private static String API_BASE = "https://api.weather.bom.gov.au/v1/locations";
-    private static String API_FORECAST_RAIN = API_BASE + "forecast/rain";
+    private static String API_FORECAST_RAIN = API_BASE + "forecast/weather_rain";
     private static String API_WARNAPI_FORECAST_WARNINGS = API_BASE + "warnings";
     private static String API_FORECAST_DAILY = "/forecasts/daily";
     private static String API_FORECAST_3HOURLY = "/forecasts/3-hourly";
@@ -144,36 +143,36 @@ public class BOMWeatherService extends WeatherService {
     }
 
     public int getWeatherIcon(String icon) {
-        if (icon.equals("sunny") || icon.equals("clear")) {
-            return R.drawable.sunny;
+        if (icon.equals("weather_sunny") || icon.equals("clear")) {
+            return R.drawable.weather_sunny;
         }
 
         if (icon.equals("mostly_sunny") || icon.equals("party_cloudy")) {
-            return R.drawable.cloudy;
+            return R.drawable.weather_cloudy;
         }
 
-        if (icon.equals("cloudy")) {
-            return R.drawable.clouds;
+        if (icon.equals("weather_cloudy")) {
+            return R.drawable.weather_clouds;
         }
 
-        if (icon.equals("hazy") || icon.equals("fog")) {
-            return R.drawable.hazy;
+        if (icon.equals("weather_hazy") || icon.equals("fog")) {
+            return R.drawable.weather_hazy;
         }
 
-        if (icon.equals("light_rain") || icon.equals("rain") || icon.equals("shower") || icon.equals("light_shower") || icon.equals("heavy_shower")) {
-            return R.drawable.rain;
+        if (icon.equals("light_rain") || icon.equals("weather_rain") || icon.equals("shower") || icon.equals("light_shower") || icon.equals("heavy_shower")) {
+            return R.drawable.weather_rain;
         }
 
         if (icon.equals("frost") || icon.equals("snow")) {
-            return R.drawable.snowflake;
+            return R.drawable.weather_snowflake;
         }
 
-        if (icon.equals("storm")) {
-            return R.drawable.storm;
+        if (icon.equals("weather_storm")) {
+            return R.drawable.weather_storm;
         }
 
         if (icon.equals("windy")) {
-            return R.drawable.wind;
+            return R.drawable.weather_wind;
         }
 
         LOG.error("Can't parse weather condition: {}", icon);
