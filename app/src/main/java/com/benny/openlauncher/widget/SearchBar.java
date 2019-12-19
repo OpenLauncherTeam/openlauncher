@@ -42,6 +42,7 @@ import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.CircleDrawable;
 import com.benny.openlauncher.viewutil.IconLabelItem;
+import com.benny.openlauncher.weather.WeatherService;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
@@ -306,8 +307,8 @@ public class SearchBar extends FrameLayout {
 
         _icon.setIcon(getResources().getDrawable(R.drawable.ic_search));
 
-        if (HomeActivity._weatherService != null) {
-            HomeActivity._weatherService.toggleWeatherButtons(true);
+        if (WeatherService._weatherService != null) {
+            WeatherService._weatherService.toggleWeatherButtons(true);
         }
 
         Tool.visibleViews(ANIM_TIME, _searchClock);
@@ -323,8 +324,8 @@ public class SearchBar extends FrameLayout {
 
         _icon.setIcon(getResources().getDrawable(R.drawable.ic_clear));
 
-        if (HomeActivity._weatherService != null) {
-            HomeActivity._weatherService.toggleWeatherButtons(false);
+        if (WeatherService._weatherService != null) {
+            WeatherService._weatherService.toggleWeatherButtons(false);
         }
 
         Tool.visibleViews(ANIM_TIME, _searchCardContainer, _searchRecycler, _switchButton);
