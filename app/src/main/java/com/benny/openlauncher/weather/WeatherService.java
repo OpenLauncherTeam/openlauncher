@@ -57,6 +57,9 @@ import java.util.Locale;
 public abstract class WeatherService implements LocationListener {
     public static Logger LOG = LoggerFactory.getLogger("WeatherService");
 
+    // Weather Service singleton
+    public static WeatherService _weatherService = null;
+
     // Location Services, iff required.
     private LocationManager _locationManager = null;
 
@@ -317,11 +320,11 @@ public abstract class WeatherService implements LocationListener {
             public boolean handleMessage(Message msg) {
                 if (msg.what == TRIGGER_AUTO_COMPLETE) {
                     if (!TextUtils.isEmpty(input.getText())) {
-                        launcher._weatherService.getLocationsByName(input.getText().toString(),
+                        _weatherService.getLocationsByName(input.getText().toString(),
                                 new Response.Listener<JSONObject>() {
                                     @Override
                                     public void onResponse(JSONObject response) {
-                                        launcher._weatherService.getLocationsFromResponse(response);
+                                        _weatherService.getLocationsFromResponse(response);
                                         _locationAdapter.setData(new ArrayList<>(WeatherLocation._locations.values()));
                                         _locationAdapter.notifyDataSetChanged();
                                     }
@@ -430,7 +433,7 @@ public abstract class WeatherService implements LocationListener {
 
                 public void onDoubleClick(View v) {
                     super.onDoubleClick(v);
-                    HomeActivity._weatherService.openWeatherApp();
+                    _weatherService.openWeatherApp();
                 }
             });
 
@@ -478,7 +481,7 @@ public abstract class WeatherService implements LocationListener {
             }
 
             if (i == 0) {
-                interval = HomeActivity._weatherService.getIntervalDrawable(_weatherIconSize);
+                interval = _weatherService.getIntervalDrawable(_weatherIconSize);
             } else {
                 interval = null;
             }
@@ -517,7 +520,7 @@ public abstract class WeatherService implements LocationListener {
             LOG.error("Failed to get location: {}", e);
         }
 
-        HomeActivity._weatherService.resetQueryTime();
+        _weatherService.resetQueryTime();
         HomeActivity.Companion.getLauncher().initWeatherIfRequired();
     }
 
@@ -530,4 +533,19 @@ public abstract class WeatherService implements LocationListener {
             }
         }
     }
+
+    public static WeatherService getWeatherService() {
+        final String weatherServiceRequested = AppSettings.get().getWeatherService();
+
+        if (_weatherService == null || !_weatherService.getName().equals(weatherServiceRequested)) {
+            if (weatherServiceRequested.equals("au_bom")) {
+                _weatherService = new BOMWeatherService();
+            } else if (weatherServiceRequested.equals("openweather")) {
+                _weatherService = new OpenWeatherService();
+            }
+        }
+
+        return _weatherService;
+    }
+
 }

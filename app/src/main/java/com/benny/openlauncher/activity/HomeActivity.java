@@ -111,9 +111,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     private int cx;
     private int cy;
 
-    // Weather Service support
-    public static WeatherService _weatherService = null;
-
     public static final class Companion {
         private Companion() {
         }
@@ -235,18 +232,10 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     }
 
     public void initWeatherIfRequired() {
-        final String weatherServiceRequested = AppSettings.get().getWeatherService();
+        WeatherService weatherService = WeatherService.getWeatherService();
 
-        if (_weatherService == null || !_weatherService.getName().equals(weatherServiceRequested)) {
-            if (weatherServiceRequested.equals("au_bom")) {
-                _weatherService = new BOMWeatherService();
-            } else if (weatherServiceRequested.equals("openweather")) {
-                _weatherService = new OpenWeatherService();
-            }
-        }
-
-        if (_weatherService != null) {
-            _weatherService.updateWeather();
+        if (weatherService != null) {
+            weatherService.updateWeather();
         }
     }
 
@@ -539,8 +528,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        if (_weatherService != null) {
-            return _weatherService.onContextItemSelected(item);
+        WeatherService weatherService = WeatherService.getWeatherService();
+        if (weatherService != null) {
+            return weatherService.onContextItemSelected(item);
         }
 
         return false;
