@@ -372,10 +372,8 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         setString("pref_key__weather_service_apikey", apiKey);
     }
 
-    public String getWeatherMeasurementUnits() {
-        boolean units = getBool("pref_key__weather_service_units", true);
-
-        return units ? "metric" : "imperial";
+    public boolean isMetricUnit() {
+        return getBool("pref_key__weather_service_units", true);
     }
 
     public WeatherLocation getWeatherCity() {

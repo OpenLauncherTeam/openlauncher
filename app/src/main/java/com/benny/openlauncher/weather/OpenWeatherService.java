@@ -31,9 +31,11 @@ public class OpenWeatherService extends WeatherService {
     private void appendURLDetails(StringBuilder urlBuilder) {
         AppSettings settings = AppSettings.get();
 
+        String units = settings.isMetricUnit() ? "metric" : "imperial";
+
         urlBuilder.append("&lang=").append(settings.getLanguage());
         urlBuilder.append("&mode=json");
-        urlBuilder.append("&units=").append(settings.getWeatherMeasurementUnits());
+        urlBuilder.append("&units=").append(units);
         urlBuilder.append("&appid=").append(settings.getWeatherAPIKey());
     }
 
