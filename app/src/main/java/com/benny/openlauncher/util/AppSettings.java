@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 
 import com.benny.openlauncher.AppObject;
 import com.benny.openlauncher.R;
@@ -355,7 +356,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     public String getWeatherAPIKey() {
         String key = getString("pref_key__weather_service_apikey", "");
 
-        if (key.equals("")) {
+        if (TextUtils.isEmpty(key)) {
             String weatherService = getWeatherService();
 
             if ("openweather".equals(weatherService)) {
