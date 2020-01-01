@@ -607,7 +607,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-
         handleLauncherResume();
         initWeatherIfRequired();
     }
