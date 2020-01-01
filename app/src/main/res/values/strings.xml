@@ -258,8 +258,6 @@
     <string name="widget">Widget</string>
 
     <!-- Weather Settings -->
-    <string name="weather_service_au_bom">Australian BOM</string>
-    <string name="weather_service_openweather">OpenWeather</string>
     <string name="weather_service_hourly">Switching to hourly forecast for %1$s.</string>
     <string name="weather_service_daily">Switching to daily forecast for %1$s.</string>
     <string name="weather_service_choose_location">Choose location:</string>
@@ -267,9 +265,6 @@
     <string name="weather_service_add_location">Add Location</string>
     <string name="weather_service_finding_city">Searching for Location...</string>
     <string name="weather_service_current_location">Current Location</string>
-    <string name="weather_service_1_hour">+1h</string>
-    <string name="weather_service_3_hours">+3h</string>
-    <string name="weather_service_1_day">+1d</string>
 
     <!-- Toasts -->
     <string name="toast_not_enough_space">Not enough space.</string>
