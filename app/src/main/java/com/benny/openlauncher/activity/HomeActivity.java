@@ -549,7 +549,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 Tool.toast(HomeActivity.this, getString(R.string.toast_location_permission_required));
                 ActivityCompat.requestPermissions(HomeActivity.this,
-                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET},
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                         REQUEST_PERMISSION_NETWORK);
             }
         });
