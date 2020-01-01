@@ -431,7 +431,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         ArrayList<WeatherLocation> storedLocations = getWeatherLocations();
 
         if (storedLocations.contains(loc)) {
-            LOG.debug("Removing location {} from favourites.", loc);
             storedLocations.remove(loc);
 
             setString("pref_key__weather_service_stored_locations", serialiseWeatherLocations(storedLocations));
