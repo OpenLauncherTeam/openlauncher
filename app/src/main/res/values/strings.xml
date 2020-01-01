@@ -126,9 +126,9 @@
     <string name="pref_title__weather_service_apikey">API Key</string>
     <string name="pref_summary__weather_service_apikey">Specify the API Key for the Weather Service (if required).</string>
     <string name="pref_title__weather_service_units">Metric?</string>
-    <string name="pref_summary__weather_service_units">Select if you want Metric measurements, or deselect for Imperial. OpenWeather only currently.</string>
+    <string name="pref_summary__weather_service_units">Select if you want Metric measurements, or deselect for Imperial. OpenWeatherMap only currently.</string>
      <string name="pref_title__weather_service_hourly">Hourly Forecasts?</string>
-    <string name="pref_summary__weather_service_hourly">Check the hourly forecast instead of daily (hourly for AU BOM, 3 hourly for OpenWeather).</string>
+    <string name="pref_summary__weather_service_hourly">Check the hourly forecast instead of daily (hourly for AU BOM, 3 hourly for OpenWeatherMap).</string>
     <string name="pref_title__weather_service_city">Town/City?</string>c
     <string name="pref_summary__weather_service_city">Enter the name or postcode of your preferred locality if you prefer not to use Location Services. Leave blank otherwise.</string>
     <string name="pref_default__weather_service_city">Enter Postcode</string>

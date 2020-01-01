@@ -124,7 +124,7 @@
     <string name="pref_key__more_info__copy_build_information" translatable="false">pref_key__more_info__copy_build_information</string>
 
     <string name="weather_service_au_bom" translatable="false">Australian BOM</string>
-    <string name="weather_service_openweather" translatable="false">OpenWeather</string>
+    <string name="weather_service_openweather" translatable="false">OpenWeatherMap</string>
     <string name="weather_service_1_hour" translatable="false">+1h</string>
     <string name="weather_service_3_hours" translatable="false">+3h</string>
     <string name="weather_service_1_day" translatable="false">+1d</string>
