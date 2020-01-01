@@ -619,7 +619,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         unregisterReceiver(_appUpdateReceiver);
         unregisterReceiver(_shortcutReceiver);
         unregisterReceiver(_timeChangedReceiver);
-
         super.onDestroy();
     }
 
