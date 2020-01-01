@@ -12,7 +12,6 @@
     <string name="pref_default__date_bar_date_format_custom_1" translatable="false"><![CDATA[EEEE\', \'dd\'.\']]></string>
     <string name="pref_default__date_bar_date_format_custom_2" translatable="false"><![CDATA[MMMM yyyy\', KW \'ww]]></string>
     <string name="pref_default__search_bar_base_uri" translatable="false"><![CDATA[https://duckduckgo.com/?kae=c&k1=-1&kaj=m&kv=l&kp=-1&q={query}]]></string>
-    <string name="pref_default__weather_service_city" translatable="false">Enter Postcode</string>
 
     <string name="icon_badge_service_title" translatable="false">Icon Badges</string>
 

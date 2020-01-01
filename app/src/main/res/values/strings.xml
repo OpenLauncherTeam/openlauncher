@@ -131,6 +131,7 @@
     <string name="pref_summary__weather_service_hourly">Check the hourly forecast instead of daily (hourly for AU BOM, 3 hourly for OpenWeather).</string>
     <string name="pref_title__weather_service_city">Town/City?</string>c
     <string name="pref_summary__weather_service_city">Enter the name or postcode of your preferred locality if you prefer not to use Location Services. Leave blank otherwise.</string>
+    <string name="pref_default__weather_service_city">Enter Postcode</string>
 
     <string name="pref_title__dock_show_label">Show Labels</string>
     <string name="pref_summary__dock_show_label">Show item labels below their icons.</string>
