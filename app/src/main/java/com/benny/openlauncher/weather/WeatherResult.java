@@ -3,19 +3,13 @@ package com.benny.openlauncher.weather;
 import android.graphics.drawable.Drawable;
 import android.support.v4.util.Pair;
 
-import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.util.IconPackHelper;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class WeatherResult {
-    public static Logger LOG = LoggerFactory.getLogger("WeatherService");
-
     private HashMap<Integer, HashMap<Integer, Drawable>> _iconCache = new HashMap<>();
 
     public ArrayList<Pair<Double, Integer>> _weatherResults = new ArrayList();
@@ -57,7 +51,7 @@ public class WeatherResult {
 
                 return icon;
             } catch (Exception e) {
-                LOG.error("Exception when loading Drawable from Resource: {}", e);
+                WeatherService.LOG.error("Exception when loading Drawable from Resource: {}", e);
             }
 
             return null;

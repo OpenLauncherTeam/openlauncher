@@ -22,8 +22,6 @@ import java.util.HashMap;
  * download it!
  */
 public class OpenWeatherService extends WeatherService {
-    private static Logger LOG = LoggerFactory.getLogger("WeatherService");
-
     private static String API_BASE = "https://api.openweathermap.org/data/2.5/";
 
     private HashMap<String, Drawable> _iconCache = new HashMap<>();

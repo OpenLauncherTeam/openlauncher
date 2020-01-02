@@ -19,8 +19,6 @@ import org.slf4j.LoggerFactory;
  */
 
 public class BOMWeatherService extends WeatherService {
-    private static Logger LOG = LoggerFactory.getLogger("WeatherService");
-
     private static String API_BASE = "https://api.weather.bom.gov.au/v1/locations";
     private static String API_FORECAST_WARNINGS = "/warnings";
     private static String API_FORECAST_DAILY = "/forecasts/daily";

@@ -1,15 +1,11 @@
 package com.benny.openlauncher.weather;
 
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Comparator;
 import java.util.TreeMap;
 
 public class WeatherLocation {
-    public static Logger LOG = LoggerFactory.getLogger("WeatherService");
-
     public static String JSON_TAG_NAME = "name";
     public static String JSON_TAG_POSTCODE= "postcode";
     public static String JSON_TAG_COUNTRYCODE= "country";
@@ -37,7 +33,7 @@ public class WeatherLocation {
         try {
             return new WeatherLocation(json.getString(JSON_TAG_NAME), json.getString(JSON_TAG_POSTCODE), json.getString(JSON_TAG_COUNTRYCODE), json.getString(JSON_TAG_SERVICE_ID));
         } catch (Exception e) {
-            LOG.error("Invalid json; can't create WeatherLocation: {}", json);
+            WeatherService.LOG.error("Invalid json; can't create WeatherLocation: {}", json);
         }
 
         return null;
@@ -72,7 +68,7 @@ public class WeatherLocation {
             json.put(JSON_TAG_COUNTRYCODE, _countryCode);
             json.put(JSON_TAG_SERVICE_ID, _weatherServiceId);
         } catch (Exception e) {
-            LOG.error("Can't serialise WeatherLocation to Json: {}", this);
+            WeatherService.LOG.error("Can't serialise WeatherLocation to Json: {}", this);
         }
 
         return json;
@@ -113,7 +109,7 @@ public class WeatherLocation {
 
         String[] parts = location.split("\\|");
         if (parts.length != 4) {
-            LOG.error("Stored Weather City does not conform to expected format: {}", location);
+            WeatherService.LOG.error("Stored Weather City does not conform to expected format: {}", location);
             return null;
         }
 
