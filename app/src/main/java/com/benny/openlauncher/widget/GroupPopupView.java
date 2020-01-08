@@ -306,7 +306,7 @@ public class GroupPopupView extends RevealFrameLayout {
                 // update db
                 HomeActivity._db.saveItem(item);
                 HomeActivity._db.saveItem(item, ItemState.Visible);
-                HomeActivity._db.deleteItem(currentItem, true);
+                HomeActivity._db.deleteItem(currentItem, false);
 
                 // update launcher
                 callback.removeItem(currentView, false);
