@@ -71,11 +71,13 @@ public final class Desktop extends ViewPager implements DesktopCallback {
                             if (Type.APP.equals(dropItem._type) || Type.SHORTCUT.equals(dropItem._type)) {
                                 parent.removeView(itemView);
                                 Item group = Item.newGroupItem();
+                                item._location = ItemPosition.Group;
+                                dropItem._location = ItemPosition.Group;
                                 group.getGroupItems().add(item);
                                 group.getGroupItems().add(dropItem);
                                 group._x = item._x;
                                 group._y = item._y;
-                                HomeActivity._db.saveItem(dropItem, page, itemPosition);
+                                HomeActivity._db.saveItem(dropItem, page, ItemPosition.Group);
                                 HomeActivity._db.saveItem(item, ItemState.Hidden);
                                 HomeActivity._db.saveItem(dropItem, ItemState.Hidden);
                                 HomeActivity._db.saveItem(group, page, itemPosition);
@@ -90,8 +92,9 @@ public final class Desktop extends ViewPager implements DesktopCallback {
                         case GROUP:
                             if ((Item.Type.APP.equals(dropItem._type) || Type.SHORTCUT.equals(dropItem._type)) && item.getGroupItems().size() < GroupPopupView.GroupDef._maxItem) {
                                 parent.removeView(itemView);
+                                dropItem._location = ItemPosition.Group;
                                 item.getGroupItems().add(dropItem);
-                                HomeActivity._db.saveItem(dropItem, page, itemPosition);
+                                HomeActivity._db.saveItem(dropItem, page, ItemPosition.Group);
                                 HomeActivity._db.saveItem(dropItem, ItemState.Hidden);
                                 HomeActivity._db.saveItem(item, page, itemPosition);
                                 callback.addItemToPage(item, page);

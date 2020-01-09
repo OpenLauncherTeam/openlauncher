@@ -38,7 +38,10 @@ public class HpItemOption implements DialogListener.OnEditDialogListener {
 
     public final void onRemoveItem(@NonNull Item item) {
         View coordinateToChildView;
-        if (item._location.equals(ItemPosition.Desktop)) {
+        if (item._location.equals(ItemPosition.Group)) {
+            Tool.toast(_homeActivity, R.string.toast_remove_from_group_first);
+            return;
+        } else if (item._location.equals(ItemPosition.Desktop)) {
             Desktop desktop = _homeActivity.getDesktop();
             coordinateToChildView = desktop.getCurrentPage().coordinateToChildView(new Point(item._x, item._y));
             desktop.removeItem(coordinateToChildView, true);
@@ -87,7 +90,9 @@ public class HpItemOption implements DialogListener.OnEditDialogListener {
         Setup.dataManager().saveItem(_item);
         Point point = new Point(_item._x, _item._y);
 
-        if (_item._location.equals(ItemPosition.Desktop)) {
+        if (_item._location.equals(ItemPosition.Group)) {
+            return;
+        } else if (_item._location.equals(ItemPosition.Desktop)) {
             Desktop desktop = _homeActivity.getDesktop();
             desktop.removeItem(desktop.getCurrentPage().coordinateToChildView(point), false);
             desktop.addItemToCell(_item, _item._x, _item._y);
