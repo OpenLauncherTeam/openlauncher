@@ -321,7 +321,7 @@ public class SearchBar extends FrameLayout {
     }
 
     private void updateRecyclerViewLayoutManager() {
-        int gridSize = Setup.appSettings().getSearchUseGrid() ? 4 : 1;
+        int gridSize = Setup.appSettings().getSearchUseGrid() ? Setup.appSettings().getDrawerColumnCount() : 1;
         if (gridSize == 1) {
             _searchRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
             updateList(Gravity.START, Gravity.CENTER_VERTICAL);
