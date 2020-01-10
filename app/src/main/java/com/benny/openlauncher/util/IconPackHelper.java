@@ -189,11 +189,8 @@ public class IconPackHelper {
         }
 
         Bitmap b = ((BitmapDrawable) d).getBitmap();
-
         Bitmap bitmapResized = Bitmap.createScaledBitmap(b, newWidth, newHeight, false);
-
         d = new BitmapDrawable(HomeActivity.Companion.getLauncher().getResources(), bitmapResized);
-
         return d;
     }
 }
