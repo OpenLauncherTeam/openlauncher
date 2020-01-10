@@ -358,9 +358,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
                 return HomeActivity._launcher.getResources().getString(R.string.openWeatherServiceApiKey);
             }
         }
-
         return "";
-
     }
 
     public void setWeatherAPIKey(String apiKey) {
