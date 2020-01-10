@@ -23,10 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.threeten.bp.format.DateTimeFormatter;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Locale;
 
 public class AppSettings extends SharedPreferencesPropertyBackend {
     public static Logger LOG = LoggerFactory.getLogger("AppSettings");
@@ -423,7 +421,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
             storedLocations.add(loc);
             Collections.sort(storedLocations, new WeatherLocation.WeatherLocationComparator());
 
-            setString("pref_key__weather_service_stored_locations", serialiseWeatherLocations(storedLocations));
+            setString("pref_key__weather_service_stored_locations", serializeWeatherLocations(storedLocations));
         }
     }
 
@@ -433,11 +431,11 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         if (storedLocations.contains(loc)) {
             storedLocations.remove(loc);
 
-            setString("pref_key__weather_service_stored_locations", serialiseWeatherLocations(storedLocations));
+            setString("pref_key__weather_service_stored_locations", serializeWeatherLocations(storedLocations));
         }
     }
 
-    private String serialiseWeatherLocations(ArrayList<WeatherLocation> locations) {
+    private String serializeWeatherLocations(ArrayList<WeatherLocation> locations) {
         JSONArray locationsJson = new JSONArray();
 
         for (WeatherLocation location : locations) {
