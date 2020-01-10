@@ -302,9 +302,11 @@ public class GroupPopupView extends RevealFrameLayout {
                 Item item = HomeActivity._db.getItem(currentItem.getGroupItems().get(0).getId());
                 item.setX(currentItem.getX());
                 item.setY(currentItem.getY());
+                item._location = ItemPosition.Desktop;
 
                 // update db
                 HomeActivity._db.saveItem(item);
+                HomeActivity._db.saveItem(item, HomeActivity._launcher.getDesktop().getCurrentItem(), ItemPosition.Desktop);
                 HomeActivity._db.saveItem(item, ItemState.Visible);
                 HomeActivity._db.deleteItem(currentItem, false);
 
