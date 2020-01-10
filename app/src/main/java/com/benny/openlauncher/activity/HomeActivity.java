@@ -346,7 +346,10 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && app._userHandle != null) {
                 LauncherApps launcherApps = (LauncherApps) context.getSystemService(Context.LAUNCHER_APPS_SERVICE);
                 List<LauncherActivityInfo> activities = launcherApps.getActivityList(app.getPackageName(), app._userHandle);
-                launcherApps.startMainActivity(activities.get(0).getComponentName(), app._userHandle, null, getActivityAnimationOpts(view));
+                for (int intent = 0; intent < activities.size(); intent++) {
+                    if (app.getComponentName().equals(activities.get(intent).getComponentName().toString()))
+                        launcherApps.startMainActivity(activities.get(intent).getComponentName(), app._userHandle, null, getActivityAnimationOpts(view));
+                }
             } else {
                 Intent intent = Tool.getIntentFromApp(app);
                 context.startActivity(intent, getActivityAnimationOpts(view));
