@@ -187,7 +187,6 @@ public class IconPackHelper {
         if ((d == null) || !(d instanceof BitmapDrawable)) {
             return d;
         }
-
         Bitmap b = ((BitmapDrawable) d).getBitmap();
         Bitmap bitmapResized = Bitmap.createScaledBitmap(b, newWidth, newHeight, false);
         d = new BitmapDrawable(HomeActivity.Companion.getLauncher().getResources(), bitmapResized);
