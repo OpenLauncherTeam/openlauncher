@@ -80,7 +80,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     public static final Companion Companion = new Companion();
     public static final int REQUEST_CREATE_APPWIDGET = 0x6475;
     public static final int REQUEST_PERMISSION_STORAGE = 0x3648;
-    public static final int REQUEST_PERMISSION_NETWORK = 0x3649;
+    public static final int REQUEST_PERMISSION_COARSE_LOCATION = 0x3649;
     public static final int REQUEST_PICK_APPWIDGET = 0x2678;
     public static WidgetHost _appWidgetHost;
     public static AppWidgetManager _appWidgetManager;
@@ -542,7 +542,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 Tool.toast(HomeActivity.this, getString(R.string.toast_location_permission_required));
                 ActivityCompat.requestPermissions(HomeActivity.this,
                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                        REQUEST_PERMISSION_NETWORK);
+                        REQUEST_PERMISSION_COARSE_LOCATION);
             }
         });
 
