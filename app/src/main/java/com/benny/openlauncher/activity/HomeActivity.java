@@ -56,8 +56,6 @@ import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.viewutil.DialogHelper;
 import com.benny.openlauncher.viewutil.MinibarAdapter;
 import com.benny.openlauncher.viewutil.WidgetHost;
-import com.benny.openlauncher.weather.BOMWeatherService;
-import com.benny.openlauncher.weather.OpenWeatherService;
 import com.benny.openlauncher.weather.WeatherService;
 import com.benny.openlauncher.widget.AppDrawerController;
 import com.benny.openlauncher.widget.AppItemView;
