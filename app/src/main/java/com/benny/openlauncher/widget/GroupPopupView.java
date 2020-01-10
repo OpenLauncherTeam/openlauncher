@@ -128,6 +128,7 @@ public class GroupPopupView extends RevealFrameLayout {
 
                         collapse();
 
+                        // update group icon or
                         // convert group item into app item if there is only one item left
                         updateItem(callback, item, itemView);
                         return true;
@@ -314,6 +315,9 @@ public class GroupPopupView extends RevealFrameLayout {
                 callback.removeItem(currentView, false);
                 callback.addItemToCell(item, item.getX(), item.getY());
             }
+        } else {
+            callback.removeItem(currentView, false);
+            callback.addItemToCell(currentItem, currentItem.getX(), currentItem.getY());
         }
     }
 
