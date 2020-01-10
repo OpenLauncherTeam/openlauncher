@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.benny.openlauncher.AppObject;
 import com.benny.openlauncher.R;
@@ -19,16 +20,12 @@ import net.gsantner.opoc.preference.SharedPreferencesPropertyBackend;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class AppSettings extends SharedPreferencesPropertyBackend {
-    public static Logger LOG = LoggerFactory.getLogger("AppSettings");
-
     public AppSettings(Context context) {
         super(context, "app");
     }
@@ -407,7 +404,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
                 storedLocations.add(loc);
             }
         } catch (Exception e) {
-            LOG.error("Can't deserialise json: {}", json);
+            Log.e("getWeatherLocations()", "Can't deserialise json: {}" + json.toString());
         }
 
         return storedLocations;
@@ -417,7 +414,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         ArrayList<WeatherLocation> storedLocations = getWeatherLocations();
 
         if (!storedLocations.contains(loc)) {
-            LOG.debug("Adding location {} to favourites.", loc);
             storedLocations.add(loc);
             Collections.sort(storedLocations, new WeatherLocation.WeatherLocationComparator());
 
