@@ -545,7 +545,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                         REQUEST_PERMISSION_COARSE_LOCATION);
             }
         });
-
         return false;
     }
 
