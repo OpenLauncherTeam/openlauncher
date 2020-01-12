@@ -274,5 +274,8 @@
     <string name="toast_location_permission_required">Please enable Location Services for Weather forecasts.</string>
     <string name="toast_backup_success">Backup completed.</string>
     <string name="toast_backup_error">Something went wrong.</string>
+    <string name="toast_settings_restored">Settings restored.</string>
+    <string name="toast_database_deleted">Database deleted.</string>
     <string name="toast_icon_pack_error">Please read access for external storage.</string>
+    <string name="toast_remove_from_group_first">Remove item from group first.</string>
 </resources>

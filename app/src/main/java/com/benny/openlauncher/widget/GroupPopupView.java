@@ -128,6 +128,7 @@ public class GroupPopupView extends RevealFrameLayout {
 
                         collapse();
 
+                        // update group icon or
                         // convert group item into app item if there is only one item left
                         updateItem(callback, item, itemView);
                         return true;
@@ -302,16 +303,21 @@ public class GroupPopupView extends RevealFrameLayout {
                 Item item = HomeActivity._db.getItem(currentItem.getGroupItems().get(0).getId());
                 item.setX(currentItem.getX());
                 item.setY(currentItem.getY());
+                item._location = ItemPosition.Desktop;
 
                 // update db
                 HomeActivity._db.saveItem(item);
+                HomeActivity._db.saveItem(item, HomeActivity._launcher.getDesktop().getCurrentItem(), ItemPosition.Desktop);
                 HomeActivity._db.saveItem(item, ItemState.Visible);
-                HomeActivity._db.deleteItem(currentItem, true);
+                HomeActivity._db.deleteItem(currentItem, false);
 
                 // update launcher
                 callback.removeItem(currentView, false);
                 callback.addItemToCell(item, item.getX(), item.getY());
             }
+        } else {
+            callback.removeItem(currentView, false);
+            callback.addItemToCell(currentItem, currentItem.getX(), currentItem.getY());
         }
     }
 

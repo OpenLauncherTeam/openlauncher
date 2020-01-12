@@ -6,7 +6,7 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.util.AppSettings;
 
 public class ColorPreferenceCategory extends PreferenceCategory {
     public ColorPreferenceCategory(Context context) {
@@ -25,6 +25,6 @@ public class ColorPreferenceCategory extends PreferenceCategory {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         TextView titleView = (TextView) holder.findViewById(android.R.id.title);
-        titleView.setTextColor(Setup.appSettings().getPrimaryColor());
+        titleView.setTextColor(AppSettings.get().getPrimaryColor());
     }
 }

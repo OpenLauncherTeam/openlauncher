@@ -71,11 +71,13 @@ public final class Desktop extends ViewPager implements DesktopCallback {
                             if (Type.APP.equals(dropItem._type) || Type.SHORTCUT.equals(dropItem._type)) {
                                 parent.removeView(itemView);
                                 Item group = Item.newGroupItem();
+                                item._location = ItemPosition.Group;
+                                dropItem._location = ItemPosition.Group;
                                 group.getGroupItems().add(item);
                                 group.getGroupItems().add(dropItem);
                                 group._x = item._x;
                                 group._y = item._y;
-                                HomeActivity._db.saveItem(dropItem, page, itemPosition);
+                                HomeActivity._db.saveItem(dropItem, page, ItemPosition.Group);
                                 HomeActivity._db.saveItem(item, ItemState.Hidden);
                                 HomeActivity._db.saveItem(dropItem, ItemState.Hidden);
                                 HomeActivity._db.saveItem(group, page, itemPosition);
@@ -86,12 +88,33 @@ public final class Desktop extends ViewPager implements DesktopCallback {
                                     launcher.getDock().consumeLastItem();
                                 }
                                 return true;
+                            } else if (Type.GROUP.equals(dropItem._type) && dropItem.getGroupItems().size() < GroupPopupView.GroupDef._maxItem) {
+                                parent.removeView(itemView);
+                                Item group = Item.newGroupItem();
+                                item._location = ItemPosition.Group;
+                                dropItem._location = ItemPosition.Group;
+                                group.getGroupItems().add(item);
+                                group.getGroupItems().addAll(dropItem.getGroupItems());
+                                group._x = item._x;
+                                group._y = item._y;
+                                HomeActivity._db.deleteItem(dropItem, false);
+                                HomeActivity._db.saveItem(item, ItemState.Hidden);
+                                HomeActivity._db.saveItem(group, page, itemPosition);
+                                callback.addItemToPage(group, page);
+                                HomeActivity launcher = HomeActivity.Companion.getLauncher();
+                                if (launcher != null) {
+                                    launcher.getDesktop().consumeLastItem();
+                                    launcher.getDock().consumeLastItem();
+                                }
+                                return true;
                             }
+                            break;
                         case GROUP:
                             if ((Item.Type.APP.equals(dropItem._type) || Type.SHORTCUT.equals(dropItem._type)) && item.getGroupItems().size() < GroupPopupView.GroupDef._maxItem) {
                                 parent.removeView(itemView);
+                                dropItem._location = ItemPosition.Group;
                                 item.getGroupItems().add(dropItem);
-                                HomeActivity._db.saveItem(dropItem, page, itemPosition);
+                                HomeActivity._db.saveItem(dropItem, page, ItemPosition.Group);
                                 HomeActivity._db.saveItem(dropItem, ItemState.Hidden);
                                 HomeActivity._db.saveItem(item, page, itemPosition);
                                 callback.addItemToPage(item, page);
@@ -101,7 +124,20 @@ public final class Desktop extends ViewPager implements DesktopCallback {
                                     launcher.getDock().consumeLastItem();
                                 }
                                 return true;
+                            } else if (Type.GROUP.equals(dropItem._type) && item.getGroupItems().size() < GroupPopupView.GroupDef._maxItem && dropItem.getGroupItems().size() < GroupPopupView.GroupDef._maxItem) {
+                                parent.removeView(itemView);
+                                item.getGroupItems().addAll(dropItem.getGroupItems());
+                                HomeActivity._db.saveItem(item, page, itemPosition);
+                                HomeActivity._db.deleteItem(dropItem, false);
+                                callback.addItemToPage(item, page);
+                                HomeActivity launcher = HomeActivity.Companion.getLauncher();
+                                if (launcher != null) {
+                                    launcher.getDesktop().consumeLastItem();
+                                    launcher.getDock().consumeLastItem();
+                                }
+                                return true;
                             }
+                            break;
                         default:
                             break;
                     }

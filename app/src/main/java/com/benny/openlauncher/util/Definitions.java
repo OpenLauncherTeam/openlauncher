@@ -13,7 +13,8 @@ public class Definitions {
     // enum ordinal used for db
     public enum ItemPosition {
         Dock,
-        Desktop
+        Desktop,
+        Group
     }
 
     public enum ItemState {
