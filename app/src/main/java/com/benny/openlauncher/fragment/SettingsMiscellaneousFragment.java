@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.preference.Preference;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -53,14 +54,9 @@ public class SettingsMiscellaneousFragment extends SettingsBaseFragment {
                 DialogHelper.alertDialog(getActivity(), getString(R.string.pref_title__reset_settings), getString(R.string.are_you_sure), new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        try {
-                            PackageInfo p = getActivity().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
-                            String dataDir = p.applicationInfo.dataDir;
-                            new File(dataDir + "/shared_prefs/app.xml").delete();
-                            System.exit(0);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        AppSettings.get().resetSettings();
+                        homeActivity.recreate();
+                        Toast.makeText(HomeActivity._launcher, R.string.toast_settings_restored, Toast.LENGTH_SHORT).show();
                     }
                 });
                 return true;
@@ -71,7 +67,8 @@ public class SettingsMiscellaneousFragment extends SettingsBaseFragment {
                         DatabaseHelper db = HomeActivity._db;
                         db.onUpgrade(db.getWritableDatabase(), 1, 1);
                         AppSettings.get().setAppFirstLaunch(true);
-                        System.exit(0);
+                        homeActivity.recreate();
+                        Toast.makeText(HomeActivity._launcher, R.string.toast_database_deleted, Toast.LENGTH_SHORT).show();
                     }
                 });
                 return true;
