@@ -262,17 +262,14 @@ public abstract class WeatherService implements LocationListener {
                         _locationManager = (LocationManager) HomeActivity._launcher.getSystemService(Context.LOCATION_SERVICE);
 
                         // Register the listener with the Location Manager to receive location updates, 1 hour or 25 klms apart.
-                        _locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60*60*1000l, 25*1000l, this);
+                        _locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60 * 60 * 1000l, 25 * 1000l, this);
                     } catch (SecurityException e) {
                         LOG.error("Can't turn on Location Services: {}", e);
                     }
                 }
-            } else {
-                getWeatherForLocation();
             }
-        } else {
-            getWeatherForLocation();
         }
+        getWeatherForLocation();
     }
 
     @SuppressLint("RestrictedApi")
