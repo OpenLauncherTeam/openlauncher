@@ -164,7 +164,7 @@ public class BOMWeatherService extends WeatherService {
             return R.drawable.weather_snowflake;
         }
 
-        if (icon.equals("weather_storm")) {
+        if (icon.equals("storm")) {
             return R.drawable.weather_storm;
         }
 
