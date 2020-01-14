@@ -41,6 +41,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.SearchBar;
@@ -130,10 +131,7 @@ public abstract class WeatherService implements LocationListener {
             // Only query once per hour.
             _nextQueryTime = currentTime + (60 * 60 * 1000l);
 
-            WeatherLocation loc = AppSettings.get().getWeatherCity();
-            if (loc != null) {
-                getWeatherForLocation(loc);
-            } else {
+            if (AppSettings.get().isLocationServicesSet()) {
                 try {
                     if (_locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                         Location currentLocation = _locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -141,6 +139,13 @@ public abstract class WeatherService implements LocationListener {
                     }
                 } catch (SecurityException e) {
                     LOG.error("User has not allowed Location Services: {}", e);
+                }
+            } else {
+                WeatherLocation loc = AppSettings.get().getWeatherCity();
+                if (loc != null) {
+                    getWeatherForLocation(loc);
+                } else {
+                    findCityToAdd();
                 }
             }
         }
@@ -251,7 +256,7 @@ public abstract class WeatherService implements LocationListener {
         }
 
         // We only ask for a Location if we haven't specified a specific locality.
-        if (AppSettings.get().getWeatherCity() == null) {
+        if (AppSettings.get().isLocationServicesSet()) {
             HomeActivity activity = HomeActivity.Companion.getLauncher();
             if (_locationManager == null) {
                 // Weather Service initialisation, if required. Coarse location only.
@@ -259,7 +264,7 @@ public abstract class WeatherService implements LocationListener {
                 if (activity.checkLocationPermissions()) {
                     try {
                         LOG.debug("Creating LocationManager to track current location");
-                        _locationManager = (LocationManager) HomeActivity._launcher.getSystemService(Context.LOCATION_SERVICE);
+                        _locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
 
                         // Register the listener with the Location Manager to receive location updates, 1 hour or 25 klms apart.
                         _locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60 * 60 * 1000l, 25 * 1000l, this);
@@ -268,6 +273,9 @@ public abstract class WeatherService implements LocationListener {
                     }
                 }
             }
+        } else if (AppSettings.get().getWeatherCity() == null) {
+            findCityToAdd();
+            return;
         }
         getWeatherForLocation();
     }
@@ -368,7 +376,8 @@ public abstract class WeatherService implements LocationListener {
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getItemId() == 0) {
             // Use Location Services.
-            AppSettings.get().setWeatherCity(null);
+            AppSettings.get().setUseLocationServices(true);
+            HomeActivity._launcher.initWeatherIfRequired();
         } else if (item.getItemId() == 99) {
             // Pop up the add Location Dialog.
             findCityToAdd();
@@ -451,7 +460,7 @@ public abstract class WeatherService implements LocationListener {
                     }
 
                     // Then locations associated with the current location (when using Location Services)
-                    if (AppSettings.get().getWeatherCity() == null) {
+                    if (AppSettings.get().isLocationServicesSet()) {
                         for (String name : WeatherLocation._locations.keySet()) {
                             menu.add(2, i, i, WeatherLocation.getByName(name).getName());
                             i++;
@@ -504,13 +513,16 @@ public abstract class WeatherService implements LocationListener {
         int toastMessageId = settings.getWeatherForecastByHour() ? R.string.weather_service_hourly : R.string.weather_service_daily;
 
         try {
-            WeatherLocation loc = settings.getWeatherCity();
-            String locationName;
+            String locationName = "";
 
-            if (loc == null) {
+            if (AppSettings.get().isLocationServicesSet()) {
                 locationName = HomeActivity._launcher.getString(R.string.weather_service_current_location);
             } else {
-                locationName =  loc.getName();
+                WeatherLocation loc = settings.getWeatherCity();
+
+                if (loc != null) {
+                    locationName = loc.getName();
+                }
             }
             Tool.toast(HomeActivity._launcher, String.format(HomeActivity._launcher.getString(toastMessageId), locationName));
         } catch (Exception e) {

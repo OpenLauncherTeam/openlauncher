@@ -196,6 +196,12 @@
             android:title="@string/pref_title__weather_service_apikey" />
 
         <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key__weather_service_use_location_services"
+            android:summary="@string/pref_summary__weather_service_use_location_services"
+            android:title="@string/pref_title__weather_service_use_location_services" />
+
+        <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key__weather_service_units"
             android:summary="@string/pref_summary__weather_service_units"
@@ -206,13 +212,6 @@
             android:key="@string/pref_key__weather_service_hourly"
             android:summary="@string/pref_summary__weather_service_hourly"
             android:title="@string/pref_title__weather_service_hourly" />
-
-        <EditTextPreference
-            android:defaultValue=""
-            android:hint="@string/pref_default__weather_service_city"
-            android:key="@string/pref_key__weather_service_city"
-            android:summary="@string/pref_summary__weather_service_city"
-            android:title="@string/pref_title__weather_service_city" />
 
     </com.benny.openlauncher.widget.ColorPreferenceCategory>
 

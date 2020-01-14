@@ -365,6 +365,14 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         setString("pref_key__weather_service_apikey", apiKey);
     }
 
+    public boolean isLocationServicesSet() {
+        return getBool("pref_key__weather_service_use_location_services", false);
+    }
+
+    public void setUseLocationServices(boolean state) {
+        setBool("pref_key__weather_service_use_location_services", state);
+    }
+
     public boolean isMetricUnit() {
         return getBool("pref_key__weather_service_units", true);
     }

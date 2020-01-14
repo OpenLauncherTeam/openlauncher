@@ -228,7 +228,9 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         WeatherService weatherService = WeatherService.getWeatherService();
 
         if (weatherService != null) {
-            weatherService.updateWeather();
+            if (!AppSettings.get().isLocationServicesSet() || checkLocationPermissions()) {
+                weatherService.updateWeather();
+            }
         }
     }
 
