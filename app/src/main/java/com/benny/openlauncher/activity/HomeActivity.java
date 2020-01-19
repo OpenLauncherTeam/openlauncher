@@ -364,34 +364,32 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         }
     }
 
-    private Bundle getActivityAnimationOpts(View view) {
-        Bundle bundle = null;
-        if (view == null) {
-            return null;
-        }
-
-        ActivityOptions options = null;
-        if (VERSION.SDK_INT >= 23) {
-            int left = 0;
-            int top = 0;
-            int width = view.getMeasuredWidth();
-            int height = view.getMeasuredHeight();
-            if (view instanceof AppItemView) {
-                width = (int) ((AppItemView) view).getIconSize();
-                left = (int) ((AppItemView) view).getDrawIconLeft();
-                top = (int) ((AppItemView) view).getDrawIconTop();
-            }
-            options = ActivityOptions.makeClipRevealAnimation(view, left, top, width, height);
-        } else if (VERSION.SDK_INT < 21) {
-            options = ActivityOptions.makeScaleUpAnimation(view, 0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
-        }
-
-        if (options != null) {
-            bundle = options.toBundle();
-        }
-
-        return bundle;
-    }
+    private static Bundle getActivityAnimationOpts(View view) {
+		Bundle bundle = null;
+		if (view == null) {
+			return null;
+		}
+		ActivityOptions options = null;
+		if (VERSION.SDK_INT >= 23) {
+			int left = 0;
+			int top = 0;
+			int width = view.getMeasuredWidth();
+			int height = view.getMeasuredHeight();
+			if (view instanceof AppItemView) {
+				width = (int) ((AppItemView) view).getIconSize();
+				left = (int) ((AppItemView) view).getDrawIconLeft();
+				top = (int) ((AppItemView) view).getDrawIconTop();
+			}
+			options = ActivityOptions.makeClipRevealAnimation(view, left, top, width, height);
+		} else if (VERSION.SDK_INT < 21) {
+			options = ActivityOptions.makeScaleUpAnimation(view, 0, 0, view.getMeasuredWidth(),
+					view.getMeasuredHeight());
+		}
+		if (options != null) {
+			bundle = options.toBundle();
+		}
+		return bundle;
+	}
 
     public void onStartDesktopEdit() {
         Tool.visibleViews(100, getDesktopOptionView());
