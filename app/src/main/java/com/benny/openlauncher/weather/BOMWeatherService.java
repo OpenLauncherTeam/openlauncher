@@ -140,7 +140,7 @@ public class BOMWeatherService extends WeatherService {
     }
 
     public int getWeatherIcon(String icon) {
-        if (icon.equals("weather_sunny") || icon.equals("clear")) {
+        if (icon.equals("sunny") || icon.equals("clear")) {
             return R.drawable.weather_sunny;
         }
 
@@ -148,15 +148,15 @@ public class BOMWeatherService extends WeatherService {
             return R.drawable.weather_cloudy;
         }
 
-        if (icon.equals("weather_cloudy")) {
+        if (icon.equals("cloudy")) {
             return R.drawable.weather_clouds;
         }
 
-        if (icon.equals("weather_hazy") || icon.equals("fog")) {
+        if (icon.equals("hazy") || icon.equals("fog")) {
             return R.drawable.weather_hazy;
         }
 
-        if (icon.equals("light_rain") || icon.equals("weather_rain") || icon.equals("shower") || icon.equals("light_shower") || icon.equals("heavy_shower")) {
+        if (icon.equals("light_rain") || icon.equals("rain") || icon.equals("shower") || icon.equals("light_shower") || icon.equals("heavy_shower")) {
             return R.drawable.weather_rain;
         }
 
