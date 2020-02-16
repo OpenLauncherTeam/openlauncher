@@ -12,8 +12,6 @@ import com.benny.openlauncher.util.AppSettings;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
@@ -215,5 +213,16 @@ public class OpenWeatherService extends WeatherService {
 
     public void openWeatherApp() {
         openWeatherApp("cz.martykan.forecastie");
+    }
+
+    public WeatherLocation parse(String location) {
+        String[] parts = location.split("\\|");
+
+        if (parts.length == 3) {
+            return new WeatherLocation(parts[0], "", parts[1], parts[2]);
+        }
+
+        WeatherService.LOG.error("Stored Weather City does not conform to expected format: {}", location);
+        return null;
     }
 }

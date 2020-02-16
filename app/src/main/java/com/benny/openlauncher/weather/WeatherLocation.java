@@ -1,5 +1,10 @@
 package com.benny.openlauncher.weather;
 
+import android.text.TextUtils;
+
+import com.benny.openlauncher.R;
+import com.benny.openlauncher.activity.HomeActivity;
+
 import org.json.JSONObject;
 
 import java.util.Comparator;
@@ -11,12 +16,19 @@ public class WeatherLocation {
     public static String JSON_TAG_COUNTRYCODE= "country";
     public static String JSON_TAG_SERVICE_ID = "serviceid";
 
+    public static WeatherLocation useCurrentLocation = new WeatherLocation(R.string.weather_service_use_network_location);
+    public static WeatherLocation findLocation = new WeatherLocation(R.string.weather_service_add_location);
+
     private String _name = "";
     private String _postcode = "";
     private String _countryCode = "";
     private String _weatherServiceId = "";
 
     public static TreeMap<String, WeatherLocation> _locations = new TreeMap<>();
+
+    public WeatherLocation(int resId) {
+        _name = HomeActivity._launcher.getString(resId);
+    }
 
     public WeatherLocation(String name, String postcode, String countryCode, String weatherServiceId) {
         _name = name;
@@ -27,6 +39,33 @@ public class WeatherLocation {
 
     public static void clear() {
         _locations.clear();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+
+        if (obj instanceof WeatherLocation) {
+            WeatherLocation loc = (WeatherLocation) obj;
+
+            result = _name.equals(loc._name);
+
+            if (!TextUtils.isEmpty(_postcode)) {
+                result &= _postcode.equals(loc._postcode);
+            }
+
+            if (!TextUtils.isEmpty(_weatherServiceId)) {
+                result &= _weatherServiceId.equals(loc._weatherServiceId);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + (_name != null ? _name.hashCode() : 0) + (_postcode != null ? _postcode.hashCode() : 0) + (_weatherServiceId != null ? _weatherServiceId.hashCode() : 0);
+        return hash;
     }
 
     public static WeatherLocation fromJson(JSONObject json) {
@@ -76,19 +115,18 @@ public class WeatherLocation {
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(_name)
-                .append("|")
-                .append(_postcode)
-                .append("|")
-                .append(_countryCode)
-                .append("|")
-                .append(_weatherServiceId);
+        builder.append(_name);
+        if (!TextUtils.isEmpty(_postcode)) {
+            builder.append("|").append(_postcode);
+        }
+        if (!TextUtils.isEmpty(_countryCode)) {
+            builder.append("|").append(_countryCode);
+        }
+        if (!TextUtils.isEmpty(_weatherServiceId)) {
+            builder.append("|").append(_weatherServiceId);
+        }
 
         return builder.toString();
-    }
-
-    public static WeatherLocation getByName(String name) {
-        return _locations.get(name);
     }
 
     public static WeatherLocation getByPostcode(String postcode) {
@@ -107,18 +145,15 @@ public class WeatherLocation {
             return null;
         }
 
-        String[] parts = location.split("\\|");
-        if (parts.length != 4) {
-            WeatherService.LOG.error("Stored Weather City does not conform to expected format: {}", location);
-            return null;
+        WeatherLocation loc = WeatherService.getWeatherService().parse(location);
+
+        if (loc != null && _locations.containsKey(loc._name)) {
+            _locations.put(loc._name, loc);
         }
 
-        WeatherLocation loc = getByName(parts[0]);
-
-        if (loc == null) {
-            loc = new WeatherLocation(parts[0], parts[1], parts[2], parts[3]);
-
-            _locations.put(loc._name, loc);
+        // We don't display WeatherLocations that might be part of another service.
+        if (loc == null && location.indexOf("|") == -1) {
+            loc = new WeatherLocation(location, "", "", "");
         }
 
         return loc;

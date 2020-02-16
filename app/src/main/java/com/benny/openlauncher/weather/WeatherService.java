@@ -1,6 +1,7 @@
 package com.benny.openlauncher.weather;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -26,11 +28,11 @@ import android.support.v7.widget.AppCompatButton;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.ContextMenu;
-import android.view.MenuItem;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 
@@ -41,7 +43,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.Tool;
 import com.benny.openlauncher.widget.SearchBar;
@@ -80,7 +81,7 @@ public abstract class WeatherService implements LocationListener {
     // Weather AutoComplete support
     private static final int TRIGGER_AUTO_COMPLETE = 100;
     private static final long AUTO_COMPLETE_DELAY = 300;
-    private WeatherLocationAdapter _locationAdapter;
+    private WeatherLocationFilterAdapter _locationAdapter;
     private Handler handler;
 
     // Functions for each Weather Service to implement
@@ -92,6 +93,7 @@ public abstract class WeatherService implements LocationListener {
     public abstract void getWeatherForLocation(WeatherLocation location);
     public abstract boolean isCountrySupported(String countryCode);
     public abstract void openWeatherApp();
+    public abstract WeatherLocation parse(String location);
 
     public <T> void addToRequestQueue(Request<T> req) {
         getRequestQueue().add(req);
@@ -281,12 +283,12 @@ public abstract class WeatherService implements LocationListener {
     }
 
     @SuppressLint("RestrictedApi")
-    private void findCityToAdd() {
+    public void findCityToAdd() {
         HomeActivity launcher = HomeActivity.Companion.getLauncher();
         final AlertDialog.Builder alert = new AlertDialog.Builder(launcher);
         alert.setTitle(launcher.getString(R.string.weather_service_add_location));
 
-        _locationAdapter = new WeatherLocationAdapter(launcher, android.R.layout.simple_dropdown_item_1line);
+        _locationAdapter = new WeatherLocationFilterAdapter(launcher, android.R.layout.simple_dropdown_item_1line);
 
         final AppCompatAutoCompleteTextView input = new AppCompatAutoCompleteTextView(launcher);
         input.setMaxLines(1);
@@ -373,24 +375,6 @@ public abstract class WeatherService implements LocationListener {
         alert.show();
     }
 
-    public boolean onContextItemSelected(MenuItem item) {
-        if (item.getItemId() == 0) {
-            // Use Location Services.
-            AppSettings.get().setUseLocationServices(true);
-            HomeActivity._launcher.initWeatherIfRequired();
-        } else if (item.getItemId() == 99) {
-            // Pop up the add Location Dialog.
-            findCityToAdd();
-            return true;
-        } else {
-            AppSettings.get().setWeatherCity(WeatherLocation.parse(item.toString()));
-        }
-
-        displayWeatherChangedToast();
-        return true;
-
-    }
-
     protected void createWeatherButtons() {
         SearchBar searchBar = HomeActivity._launcher.getSearchBar();
 
@@ -443,31 +427,31 @@ public abstract class WeatherService implements LocationListener {
                 }
             });
 
-            icon.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+            icon.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                    menu.setHeaderTitle(HomeActivity._launcher.getString(R.string.weather_service_choose_location));
-                    //MenuCompat.setGroupDividerEnabled(menu, true);
+                public boolean onLongClick(View v) {
+                    Dialog contextDialog = new Dialog(HomeActivity._launcher, android.R.style.Theme_Holo_Light_Dialog_MinWidth);
+                    contextDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                    contextDialog.setTitle(R.string.weather_service_choose_location);
+                    contextDialog.setCancelable(true);
 
-                    menu.add(0, 0, 0, R.string.weather_service_use_network_location);
+                    WindowManager.LayoutParams lp = contextDialog.getWindow().getAttributes();
+                    lp.gravity = Gravity.TOP | Gravity.LEFT;
+                    lp.x = (int) v.getX();
+                    lp.y = (int) v.getY() + v.getHeight();
 
-                    int i = 1;
-                    // Stored Locations first
-                    ArrayList<WeatherLocation> storedLocations = AppSettings.get().getWeatherLocations();
-                    for (WeatherLocation loc : storedLocations) {
-                        menu.add(1, i, i, loc.toString());
-                        i++;
-                    }
+                    WeatherLocationView locationView = WeatherLocationView.build(HomeActivity._launcher, null);
+                    locationView.appendData(WeatherLocation.useCurrentLocation);
+                    locationView.appendData(AppSettings.get().getWeatherLocations());
+                    locationView.appendData(new ArrayList<>(WeatherLocation._locations.values()));
+                    locationView.appendData(WeatherLocation.findLocation);
+                    locationView.setDialog(contextDialog);
 
-                    // Then locations associated with the current location (when using Location Services)
-                    if (AppSettings.get().isLocationServicesSet()) {
-                        for (String name : WeatherLocation._locations.keySet()) {
-                            menu.add(2, i, i, WeatherLocation.getByName(name).getName());
-                            i++;
-                        }
-                    }
+                    contextDialog.setContentView(locationView);
+                    contextDialog.show();
+                    contextDialog.getWindow().setLayout((int) (locationView._maximumWidth * 1.25f), ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                    menu.add(3, 99, 99, R.string.weather_service_add_location);
+                    return true;
                 }
             });
         }
@@ -477,7 +461,7 @@ public abstract class WeatherService implements LocationListener {
         LOG.debug("updateWeather() -> {}", weather);
         _latestResult = weather;
 
-        Drawable interval = null;
+        Drawable interval;
         for (int i = 0; i < _weatherIcons.size(); i++) {
             Pair<Double, Drawable> forecast = weather.getForecast(i, _weatherIconSize);
 
@@ -530,7 +514,7 @@ public abstract class WeatherService implements LocationListener {
         }
 
         _weatherService.resetQueryTime();
-        HomeActivity.Companion.getLauncher().initWeatherIfRequired();
+        _weatherService.getWeatherForLocation();
     }
 
     public void toggleWeatherButtons(boolean visible) {

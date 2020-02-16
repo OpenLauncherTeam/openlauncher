@@ -245,6 +245,7 @@
     <string name="default_icons">Default</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
 
     <!-- Drag Option View -->
     <string name="edit">Edit</string>
@@ -263,7 +264,7 @@
     <string name="weather_service_hourly">Switching to hourly forecast for %1$s.</string>
     <string name="weather_service_daily">Switching to daily forecast for %1$s.</string>
     <string name="weather_service_choose_location">Choose location:</string>
-    <string name="weather_service_use_network_location">Use Location Services</string>
+    <string name="weather_service_use_network_location">Current Location</string>
     <string name="weather_service_add_location">Add Location</string>
     <string name="weather_service_finding_city">Searching for Location...</string>
     <string name="weather_service_current_location">Current Location</string>

@@ -10,10 +10,10 @@ import android.widget.Filterable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeatherLocationAdapter extends ArrayAdapter<WeatherLocation> implements Filterable {
+public class WeatherLocationFilterAdapter extends ArrayAdapter<WeatherLocation> implements Filterable {
     private List<WeatherLocation> _locations;
 
-    public WeatherLocationAdapter(@NonNull Context context, int resource) {
+    public WeatherLocationFilterAdapter(@NonNull Context context, int resource) {
         super(context, resource);
         _locations = new ArrayList<>();
     }

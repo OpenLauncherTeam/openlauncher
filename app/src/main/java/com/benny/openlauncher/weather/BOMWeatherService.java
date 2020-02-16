@@ -11,8 +11,6 @@ import com.benny.openlauncher.util.AppSettings;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /*
  * Thanks to https://github.com/tonyallan/weather-au for the basics for this class.
@@ -50,7 +48,7 @@ public class BOMWeatherService extends WeatherService {
         LOG.debug("createWeatherResult: {}", results);
         WeatherResult currentWeather = new WeatherResult();
 
-        int numberOfIcons = _weatherIcons.size();
+        int numberOfIcons = Math.min(_weatherIcons.size(), results.length());
         if (AppSettings.get().getWeatherForecastByHour()) {
             for (int i = 0; i < numberOfIcons; i++) {
                 JSONObject obj = results.getJSONObject(i);
@@ -188,4 +186,14 @@ public class BOMWeatherService extends WeatherService {
         openWeatherApp("au.gov.bom.metview");
     }
 
+    public WeatherLocation parse(String location) {
+        String[] parts = location.split("\\|");
+
+        if (parts.length == 4) {
+            return new WeatherLocation(parts[0], parts[1], parts[2], parts[3]);
+        }
+
+        WeatherService.LOG.error("Stored Weather City does not conform to expected format: {}", location);
+        return null;
+    }
 }

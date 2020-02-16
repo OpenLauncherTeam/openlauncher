@@ -76,6 +76,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static com.benny.openlauncher.weather.WeatherService.LOG;
+
 public final class HomeActivity extends Activity implements OnDesktopEditListener {
     public static final Companion Companion = new Companion();
     public static final int REQUEST_CREATE_APPWIDGET = 0x6475;
@@ -362,11 +364,13 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 LauncherApps launcherApps = (LauncherApps) context.getSystemService(Context.LAUNCHER_APPS_SERVICE);
                 List<LauncherActivityInfo> activities = launcherApps.getActivityList(app.getPackageName(), app._userHandle);
                 for (int intent = 0; intent < activities.size(); intent++) {
+                    LOG.debug("Checking intents: {} -> {}", activities.get(intent).getComponentName(), activities.get(intent));
                     if (app.getComponentName().equals(activities.get(intent).getComponentName().toString()))
                         launcherApps.startMainActivity(activities.get(intent).getComponentName(), app._userHandle, null, getActivityAnimationOpts(view));
                 }
             } else {
                 Intent intent = Tool.getIntentFromApp(app);
+                LOG.debug("Checking intents: {} -> {}", intent.getComponent(), intent);
                 context.startActivity(intent, getActivityAnimationOpts(view));
             }
 
@@ -522,16 +526,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         _launcher = this;
 
         super.onStart();
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        WeatherService weatherService = WeatherService.getWeatherService();
-        if (weatherService != null) {
-            return weatherService.onContextItemSelected(item);
-        }
-
-        return false;
     }
 
     public boolean checkLocationPermissions() {
