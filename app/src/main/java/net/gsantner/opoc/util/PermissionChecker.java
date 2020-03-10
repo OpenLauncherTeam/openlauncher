@@ -13,9 +13,9 @@ package net.gsantner.opoc.util;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
 
 import java.io.File;
 

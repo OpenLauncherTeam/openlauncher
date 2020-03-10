@@ -14,7 +14,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.ViewPropertyAnimator;

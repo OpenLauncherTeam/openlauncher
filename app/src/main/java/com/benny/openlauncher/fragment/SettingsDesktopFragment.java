@@ -1,7 +1,7 @@
 package com.benny.openlauncher.fragment;
 
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;

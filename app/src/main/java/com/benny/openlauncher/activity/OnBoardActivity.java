@@ -3,18 +3,18 @@ package com.benny.openlauncher.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.benny.openlauncher.R;
 
-import agency.tango.materialintroscreen.MaterialIntroActivity;
-import agency.tango.materialintroscreen.SlideFragment;
-import agency.tango.materialintroscreen.SlideFragmentBuilder;
-import agency.tango.materialintroscreen.widgets.OverScrollViewPager;
-import agency.tango.materialintroscreen.widgets.SwipeableViewPager;
+import io.github.dreierf.materialintroscreen.MaterialIntroActivity;
+import io.github.dreierf.materialintroscreen.SlideFragment;
+import io.github.dreierf.materialintroscreen.SlideFragmentBuilder;
+import io.github.dreierf.materialintroscreen.widgets.OverScrollViewPager;
+import io.github.dreierf.materialintroscreen.widgets.SwipeableViewPager;
 
 public class OnBoardActivity extends MaterialIntroActivity {
 
@@ -31,7 +31,7 @@ public class OnBoardActivity extends MaterialIntroActivity {
             return;
         }
 
-        OverScrollViewPager overScrollLayout = findViewById(agency.tango.materialintroscreen.R.id.view_pager_slides);
+        OverScrollViewPager overScrollLayout = findViewById(io.github.dreierf.materialintroscreen.R.id.view_pager_slides);
         SwipeableViewPager viewPager = overScrollLayout.getOverScrollView();
         viewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
 

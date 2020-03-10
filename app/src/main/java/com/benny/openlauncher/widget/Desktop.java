@@ -3,10 +3,10 @@ package com.benny.openlauncher.widget;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Point;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +35,6 @@ import in.championswimmer.sfg.lib.SimpleFingerGestures;
 import in.championswimmer.sfg.lib.SimpleFingerGestures.OnFingerGestureListener;
 
 import static com.benny.openlauncher.util.Definitions.WallpaperScroll.Inverse;
-import static com.benny.openlauncher.util.Definitions.WallpaperScroll.Normal;
 import static com.benny.openlauncher.util.Definitions.WallpaperScroll.Off;
 
 public final class Desktop extends ViewPager implements DesktopCallback {

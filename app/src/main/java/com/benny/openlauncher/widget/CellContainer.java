@@ -9,8 +9,8 @@ import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.DragEvent;
 import android.view.MotionEvent;
@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.Tool;
 
 import java.util.ArrayList;
