@@ -141,24 +141,25 @@ public class AppManager {
     }
 
     private class AsyncGetApps extends AsyncTask {
-        private List<App> tempApps;
+        private List<App> _appsTemp;
+        private List<App> _nonFilteredAppsTemp;
 
         @Override
         protected void onPreExecute() {
-            tempApps = new ArrayList<>(_apps);
+            _appsTemp = new ArrayList<>();
+            _nonFilteredAppsTemp = new ArrayList<>();
             super.onPreExecute();
         }
 
         @Override
         protected void onCancelled() {
-            tempApps = null;
+            _appsTemp = null;
+            _nonFilteredAppsTemp = null;
             super.onCancelled();
         }
 
         @Override
         protected Object doInBackground(Object[] p1) {
-            _apps.clear();
-            _nonFilteredApps.clear();
 
             // work profile support
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -171,7 +172,7 @@ public class AppManager {
                         app._userHandle = userHandle;
 
                         LOG.debug("adding work profile to non filtered list: {}, {}, {}", app._label, app._packageName, app._className);
-                        _nonFilteredApps.add(app);
+                        _nonFilteredAppsTemp.add(app);
                     }
                 }
             } else {
@@ -182,12 +183,12 @@ public class AppManager {
                     App app = new App(_packageManager, info);
 
                     LOG.debug("adding app to non filtered list: {}, {}, {}", app._label,  app._packageName, app._className);
-                    _nonFilteredApps.add(app);
+                    _nonFilteredAppsTemp.add(app);
                 }
             }
 
             // sort the apps by label here
-            Collections.sort(_nonFilteredApps, new Comparator<App>() {
+            Collections.sort(_nonFilteredAppsTemp, new Comparator<App>() {
                 @Override
                 public int compare(App one, App two) {
                     return Collator.getInstance().compare(one._label, two._label);
@@ -196,34 +197,34 @@ public class AppManager {
 
             List<String> hiddenList = AppSettings.get().getHiddenAppsList();
             if (hiddenList != null) {
-                for (int i = 0; i < _nonFilteredApps.size(); i++) {
+                for (int i = 0; i < _nonFilteredAppsTemp.size(); i++) {
                     boolean shouldGetAway = false;
                     for (String hidItemRaw : hiddenList) {
-                        if ((_nonFilteredApps.get(i).getComponentName()).equals(hidItemRaw)) {
+                        if ((_nonFilteredAppsTemp.get(i).getComponentName()).equals(hidItemRaw)) {
                             shouldGetAway = true;
                             break;
                         }
                     }
                     if (!shouldGetAway) {
-                        _apps.add(_nonFilteredApps.get(i));
+                        _appsTemp.add(_nonFilteredAppsTemp.get(i));
                     }
                 }
             } else {
-                _apps.addAll(_nonFilteredApps);
+                _appsTemp.addAll(_nonFilteredAppsTemp);
             }
 
             AppSettings appSettings = AppSettings.get();
             if (!appSettings.getIconPack().isEmpty() && Tool.isPackageInstalled(appSettings.getIconPack(), _packageManager)) {
-                IconPackHelper.applyIconPack(AppManager.this, Tool.dp2px(appSettings.getIconSize()), appSettings.getIconPack(), _apps);
+                IconPackHelper.applyIconPack(AppManager.this, Tool.dp2px(appSettings.getIconSize()), appSettings.getIconPack(), _appsTemp);
             }
             return null;
         }
 
         @Override
         protected void onPostExecute(Object result) {
-            notifyUpdateListeners(_apps);
+            notifyUpdateListeners(_appsTemp);
 
-            List<App> removed = getRemovedApps(tempApps, _apps);
+            List<App> removed = getRemovedApps(_apps, _appsTemp);
             if (removed.size() > 0) {
                 notifyRemoveListeners(removed);
             }
@@ -233,6 +234,9 @@ public class AppManager {
                 if (_context instanceof HomeActivity)
                     ((HomeActivity) _context).recreate();
             }
+
+            _apps = _appsTemp;
+            _nonFilteredApps = _nonFilteredAppsTemp;
 
             super.onPostExecute(result);
         }
