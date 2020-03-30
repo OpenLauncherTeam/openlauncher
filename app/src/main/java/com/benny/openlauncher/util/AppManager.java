@@ -222,9 +222,13 @@ public class AppManager {
 
         @Override
         protected void onPostExecute(Object result) {
+            List<App> removed = getRemovedApps(_apps, _appsTemp);
+
+            _apps = _appsTemp;
+            _nonFilteredApps = _nonFilteredAppsTemp;
+
             notifyUpdateListeners(_appsTemp);
 
-            List<App> removed = getRemovedApps(_apps, _appsTemp);
             if (removed.size() > 0) {
                 notifyRemoveListeners(removed);
             }
@@ -234,9 +238,6 @@ public class AppManager {
                 if (_context instanceof HomeActivity)
                     ((HomeActivity) _context).recreate();
             }
-
-            _apps = _appsTemp;
-            _nonFilteredApps = _nonFilteredAppsTemp;
 
             super.onPostExecute(result);
         }
