@@ -1,0 +1,7 @@
+Thanks: grenagit, hobleyd, r3r57
+
+* update french translations
+* fix issue with long click haptic feedback
+* notification icon improvements
+* lots of fixes for group items
+* reduce the number of crashes on the desktop
