@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.Definitions.ItemState;
 import com.benny.openlauncher.util.DragAction;
@@ -106,6 +108,8 @@ public class GroupPopupView extends RevealFrameLayout {
         int textSize = Tool.dp2px(22);
         int contentPadding = Tool.dp2px(6);
 
+        boolean appsChanged = false;
+
         for (int x2 = 0; x2 < cellSize[0]; x2++) {
             for (int y2 = 0; y2 < cellSize[1]; y2++) {
                 if (y2 * cellSize[0] + x2 > item.getGroupItems().size() - 1) {
@@ -115,29 +119,31 @@ public class GroupPopupView extends RevealFrameLayout {
                 if (groupItem == null) {
                     continue;
                 }
-                final View view = ItemViewFactory.getItemView(getContext(), callback, DragAction.Action.DESKTOP, groupItem);
-                view.setOnLongClickListener(new OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View view2) {
-                        if (Setup.appSettings().getDesktopLock()) return false;
-
-                        removeItem(context, item, groupItem, (AppItemView) itemView);
-
-                        // start the drag action
-                        DragHandler.startDrag(view, groupItem, DragAction.Action.DESKTOP, null);
-
-                        collapse();
-
-                        // update group icon or
-                        // convert group item into app item if there is only one item left
-                        updateItem(callback, item, itemView);
-                        return true;
-                    }
-                });
                 final App app = Setup.appLoader().findItemApp(groupItem);
-                if (app == null) {
-                    removeItem(context, item, groupItem, (AppItemView) itemView);
+                if (app == null || AppSettings.get().getHiddenAppsList().contains(app.getComponentName())) {
+                    deleteItem(context, item, groupItem, (AppItemView) itemView);
+                    appsChanged = true;
+                    continue;
                 } else {
+                    final View view = ItemViewFactory.getItemView(getContext(), callback, DragAction.Action.DESKTOP, groupItem);
+                    view.setOnLongClickListener(new OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View view2) {
+                            if (Setup.appSettings().getDesktopLock()) return false;
+
+                            removeItem(context, item, groupItem, (AppItemView) itemView);
+
+                            // start the drag action
+                            DragHandler.startDrag(view, groupItem, DragAction.Action.DESKTOP, null);
+
+                            collapse();
+
+                            // update group icon or
+                            // convert group item into app item if there is only one item left
+                            updateItem(callback, item, itemView);
+                            return true;
+                        }
+                    });
                     view.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -151,8 +157,8 @@ public class GroupPopupView extends RevealFrameLayout {
                             });
                         }
                     });
+                    _cellContainer.addViewToGrid(view, x2, y2, 1, 1);
                 }
-                _cellContainer.addViewToGrid(view, x2, y2, 1, 1);
             }
         }
 
@@ -226,6 +232,11 @@ public class GroupPopupView extends RevealFrameLayout {
         _popupCard.setVisibility(View.VISIBLE);
         expand();
 
+        if (appsChanged) {
+            updateItem(callback, item, itemView);
+            Toast.makeText(context, R.string.toast_update_group_due_to_missing_items, Toast.LENGTH_LONG).show();
+        }
+
         return true;
     }
 
@@ -291,6 +302,15 @@ public class GroupPopupView extends RevealFrameLayout {
         currentItem.getGroupItems().remove(dragOutItem);
 
         HomeActivity._db.saveItem(dragOutItem, ItemState.Visible);
+        HomeActivity._db.saveItem(currentItem);
+
+        currentView.setIcon(new GroupDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
+    }
+
+    private void deleteItem(Context context, final Item currentItem, Item dragOutItem, AppItemView currentView) {
+        currentItem.getGroupItems().remove(dragOutItem);
+
+        HomeActivity._db.deleteItem(dragOutItem, false);
         HomeActivity._db.saveItem(currentItem);
 
         currentView.setIcon(new GroupDrawable(context, currentItem, Setup.appSettings().getDesktopIconSize()));
