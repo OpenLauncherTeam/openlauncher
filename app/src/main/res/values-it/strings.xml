@@ -56,10 +56,10 @@
     <string name="pref_title__desktop_show_label">Mostra etichette</string>
     <string name="pref_summary__desktop_show_label">Mostra etichette sotto le rispettive icone.</string>
 
-    <string name="pref_title__search_bar_base_uri">Search URI</string>
-    <string name="pref_summary__search_bar_base_uri">Imposta l\' URI usato per le ricerche web.</string>
+    <string name="pref_title__search_bar_base_uri">URI di ricerca</string>
+    <string name="pref_summary__search_bar_base_uri">Imposta l\'URI usato per le ricerche web.</string>
     <string name="pref_dialog__search_bar_base_uri">Inserisci l\'URI che sarà usato per le ricerche web. Il tag {query} può essere usato come
-      segnaposto per la query di ricerca, nel caso in cui non ci siano segnaposti la query di ricerca sarà aggiunta alla fine dell\' URI.</string>
+      segnaposto per la query di ricerca, nel caso in cui non ci siano segnaposti la query di ricerca sarà aggiunta alla fine dell\'URI.</string>
     <string name="pref_title__search_bar_force_browser">Forza ricerca nel browser</string>
     <string name="pref_summary__search_bar_force_browser">Forza l\'uso del browser per le ricerche online.</string>
     <string name="pref_title__desktop_background_color">Sfondo</string>
@@ -92,9 +92,9 @@
 
 
     <string name="pref_title__gesture_feedback">Gesture Feedback</string>
-    <string name="pref_summary__gesture_feedback">Get feedback when long pressing an item on the desktop.</string>
+    <string name="pref_summary__gesture_feedback">Ricevi un feedback sulla pressione prolungata di un elemento del desktop.</string>
     <string name="pref_title__gesture_quick_swipe">Quick Swipe Drawer</string>
-    <string name="pref_summary__gesture_quick_swipe">Swipe upwards on the dock to open the app drawer.</string>
+    <string name="pref_summary__gesture_quick_swipe">Swipe verso l'alto sulla dock per aprire il drawer delle app.</string>
     <string name="pref_title__gesture_double_tap">Doppio tocco</string>
     <string name="pref_title__gesture_swipe_up">Scorrimento verso l\'alto</string>
     <string name="pref_title__gesture_swipe_down">Scorrimento verso il basso</string>
@@ -126,14 +126,14 @@
 
     <!-- Dialogs -->
     <string name="placeholder">Hello world!</string>
-    <string name="please_wait">Searching for installed apps. Please wait.</string>
+    <string name="please_wait">Ricerca delle app installate. Attendere, prego.</string>
     <string name="on">On</string>
-    <string name="select_app">Select App</string>
+    <string name="select_app">Seleziona App</string>
     <string name="off">Off</string>
     <string name="version">Versione</string>
-    <string name="select_wallpaper">Pick Wallpaper</string>
-    <string name="select_icon_pack">Pick icon pack</string>
-    <string name="toast_icon_pack_error">Unable to grab the icon without READ_EXTERNAL_STORAGE permission.</string>
+    <string name="select_wallpaper">Scegli uno sfondo</string>
+    <string name="select_icon_pack">Scegli un pacchetto di icone</string>
+    <string name="toast_icon_pack_error">Impossibile accedere all\'icona senza l\'autorizzazione READ_EXTERNAL_STORAGE.</string>
     <string name="toast_backup_success">Fatto.</string>
     <string name="toast_backup_error">Qualcosa è andato storto.</string>
     <string name="columns">Colonne</string>
