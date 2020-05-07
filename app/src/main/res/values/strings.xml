@@ -281,4 +281,5 @@
     <string name="toast_database_deleted">Database deleted.</string>
     <string name="toast_icon_pack_error">Please read access for external storage.</string>
     <string name="toast_remove_from_group_first">Remove item from group first.</string>
+    <string name="toast_update_group_due_to_missing_items">Uninstalled or hidden apps were removed from this group.</string>
 </resources>

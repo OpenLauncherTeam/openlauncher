@@ -141,24 +141,25 @@ public class AppManager {
     }
 
     private class AsyncGetApps extends AsyncTask {
-        private List<App> tempApps;
+        private List<App> appsTemp;
+        private List<App> nonFilteredAppsTemp;
 
         @Override
         protected void onPreExecute() {
-            tempApps = new ArrayList<>(_apps);
+            appsTemp = new ArrayList<>();
+            nonFilteredAppsTemp = new ArrayList<>();
             super.onPreExecute();
         }
 
         @Override
         protected void onCancelled() {
-            tempApps = null;
+            appsTemp = null;
+            nonFilteredAppsTemp = null;
             super.onCancelled();
         }
 
         @Override
         protected Object doInBackground(Object[] p1) {
-            _apps.clear();
-            _nonFilteredApps.clear();
 
             // work profile support
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -171,7 +172,7 @@ public class AppManager {
                         app._userHandle = userHandle;
 
                         LOG.debug("adding work profile to non filtered list: {}, {}, {}", app._label, app._packageName, app._className);
-                        _nonFilteredApps.add(app);
+                        nonFilteredAppsTemp.add(app);
                     }
                 }
             } else {
@@ -182,12 +183,12 @@ public class AppManager {
                     App app = new App(_packageManager, info);
 
                     LOG.debug("adding app to non filtered list: {}, {}, {}", app._label,  app._packageName, app._className);
-                    _nonFilteredApps.add(app);
+                    nonFilteredAppsTemp.add(app);
                 }
             }
 
             // sort the apps by label here
-            Collections.sort(_nonFilteredApps, new Comparator<App>() {
+            Collections.sort(nonFilteredAppsTemp, new Comparator<App>() {
                 @Override
                 public int compare(App one, App two) {
                     return Collator.getInstance().compare(one._label, two._label);
@@ -196,34 +197,38 @@ public class AppManager {
 
             List<String> hiddenList = AppSettings.get().getHiddenAppsList();
             if (hiddenList != null) {
-                for (int i = 0; i < _nonFilteredApps.size(); i++) {
+                for (int i = 0; i < nonFilteredAppsTemp.size(); i++) {
                     boolean shouldGetAway = false;
                     for (String hidItemRaw : hiddenList) {
-                        if ((_nonFilteredApps.get(i).getComponentName()).equals(hidItemRaw)) {
+                        if ((nonFilteredAppsTemp.get(i).getComponentName()).equals(hidItemRaw)) {
                             shouldGetAway = true;
                             break;
                         }
                     }
                     if (!shouldGetAway) {
-                        _apps.add(_nonFilteredApps.get(i));
+                        appsTemp.add(nonFilteredAppsTemp.get(i));
                     }
                 }
             } else {
-                _apps.addAll(_nonFilteredApps);
+                appsTemp.addAll(nonFilteredAppsTemp);
             }
 
             AppSettings appSettings = AppSettings.get();
             if (!appSettings.getIconPack().isEmpty() && Tool.isPackageInstalled(appSettings.getIconPack(), _packageManager)) {
-                IconPackHelper.applyIconPack(AppManager.this, Tool.dp2px(appSettings.getIconSize()), appSettings.getIconPack(), _apps);
+                IconPackHelper.applyIconPack(AppManager.this, Tool.dp2px(appSettings.getIconSize()), appSettings.getIconPack(), appsTemp);
             }
             return null;
         }
 
         @Override
         protected void onPostExecute(Object result) {
-            notifyUpdateListeners(_apps);
+            List<App> removed = getRemovedApps(_apps, appsTemp);
 
-            List<App> removed = getRemovedApps(tempApps, _apps);
+            _apps = appsTemp;
+            _nonFilteredApps = nonFilteredAppsTemp;
+
+            notifyUpdateListeners(appsTemp);
+
             if (removed.size() > 0) {
                 notifyRemoveListeners(removed);
             }
