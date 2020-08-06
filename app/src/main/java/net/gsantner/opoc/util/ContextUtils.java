@@ -893,7 +893,7 @@ public class ContextUtils {
         public CharSequence filter(CharSequence src, int start, int end, Spanned dest, int dstart, int dend) {
             if (src.length() < 1) return null;
             char last = src.charAt(src.length() - 1);
-            String illegal = "|\\?*<\":>+[]/'";
+            String illegal = "|\\?*<\":>[]/'";
             if (illegal.indexOf(last) > -1) return src.subSequence(0, src.length() - 1);
             return null;
         }
@@ -935,7 +935,11 @@ public class ContextUtils {
             ContentResolver cr = _context.getContentResolver();
             mimeType = cr.getType(uri);
         } else {
-            String ext = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
+            String filename = uri.toString();
+            if (filename.endsWith(".jenc")) {
+                filename = filename.replace(".jenc", "");
+            }
+            String ext = MimeTypeMap.getFileExtensionFromUrl(filename);
             mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext.toLowerCase());
 
             // Try to guess if the recommended methods fail
