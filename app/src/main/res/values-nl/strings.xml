@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Intro -->
+    <string name="intro1_text">Een open source app launcer met veel handige functies.</string>
+    <string name="intro1_community">Grote Community</string>
+    <string name="intro1_features">Vele functies</string>
+    <string name="intro1_customizable">Aanpasbaar</string>
+    <string name="intro2_text">Swipe naar binnen vanaf de linkerkant van het scherm om de minibar to openen en een actie te selecteren.</string>
+    <string name="intro3_text">Je kan de stijl van de App Drawer kiezen en ook apps verbergen die je niet gebruikt.</string>
+    <string name="intro4_text">Zoek iets op het web of filter je apps vanuit de zoekbalk.</string>
+
+    <!-- Minibar -->
+    <string name="minibar">Minibar</string>
+    <string name="minibar_title__edit_minibar">Minibar aanpassen</string>
+    <string name="minibar_summary__edit_minibar">Wijzig de minibar layout.</string>
+    <string name="minibar_title__set_wallpaper">Achtergrond</string>
+    <string name="minibar_summary__set_wallpaper">Kies de achtergrondafbeelding.</string>
+    <string name="minibar_title__lock_screen">Scherm vergrendelen</string>
+    <string name="minibar_summary__lock_screen">Knop om het scherm te vergrendelen.</string>
+    <string name="minibar_title__device_settings">Toestel Instellingen</string>
+    <string name="minibar_summary__device_settings">Snelkoppeling naar toestel instellingen.</string>
+    <string name="minibar_title__launcher_settings">Launcher Instellingen</string>
+    <string name="minibar_summary__launcher_settings">Snelkoppeling naar OpenLauncher instellingen.</string>
+    <string name="minibar_title__volume_dialog">Volume aanpassen</string>
+    <string name="minibar_summary__volume_dialog">Toon alle beschikbare volume knoppen.</string>
+    <string name="minibar_title__app_drawer">App Drawer</string>
+    <string name="minibar_summary__app_drawer">Open het app menu.</string>
+    <string name="minibar_title__search_bar">Open zoekbalk</string>
+    <string name="minibar_summary__search_bar">Open de zoekbalk.</string>
+    <string name="minibar_title__mobile_network">Mobiel Netwerk Instellingen</string>
+    <string name="minibar_summary__mobile_network">Snelkoppeling naar de mobiele netwerk instellingen.</string>
+    <string name="minibar_title__notification_bar">Notificaties tonen</string>
+    <string name="minibar_summary__notification_bar">Bekijk notificaties boven aan het scherm.</string>
+    <string name="minibar_title__camera">Camera</string>
+    <string name="minibar_summary__camera">Neem een foto met de camera app.</string>
+
+    <!-- About -->
+    <string name="about_libs">Open Source Libraries</string>
+    <string name="about_rate">Rate</string>
+    <string name="about_credit">Contributors</string>
+    <string name="community">Community</string>
+    <string name="more_info_foss">More information about contributing to open source projects on Android.</string>
+    <string name="join_community">Join the Community</string>
+    <string name="bug_reports_suggest_improvements">Report bugs and suggest improvements on GitHub.</string>
+    <string name="help_translating_this_app">Translate this app to other languages with GitHub or Stringlate!</string>
+    <string name="source_code">Source Code</string>
+    <string name="project_license">Project License</string>
+    <string name="project_contribution_info">Contribution Info</string>
+    <string name="more_info_on_how_to_contribute_to_this_project">How you can contribute to this project.</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">Contribute code to the project. Everyone is welcome to submit changes!</string>
+    <string name="project_team">Project Team</string>
+    <string name="contributors_public_info">Contributors can provide information to be shown here after improving the launcher.</string>
+    <string name="contribute">Contribute</string>
+    <string name="donate">Donate</string>
+    <string name="help">Help</string>
+    <string name="licenses">Licenses</string>
+    <string name="contributors">Contributors</string>
+    <string name="changelog">Changelog</string>
+    <string name="more">More</string>
+    <string name="open_source_licenses">Open Source Licenses</string>
+    <string name="rate_the_app">Rate</string>
+    <string name="translate">Translate</string>
+    <string name="bug_reports">Report Bugs</string>
+    <string name="more_info_support">More information on donating or otherwise supporting this project.</string>
+    <string name="android_contribution_guide">Android Development</string>
+
+    <!-- Settings -->
+    <string name="pref_title__settings">Instellingen</string>
+    <string name="pref_title__desktop">Desktop</string>
+    <string name="pref_title__dock">Dock</string>
+    <string name="pref_title__app_drawer">App Drawer</string>
+    <string name="pref_title__appearance">Uiterlijk</string>
+    <string name="pref_title__behavior">Gedrag</string>
+    <string name="pref_title__advanced">Geavanceerd</string>
+    <string name="pref_title__hide_apps">Apps verbergen</string>
+    <string name="pref_title__about">About</string>
+
+    <string name="pref_title__size">Grootte</string>
+    <string name="pref_title__style">Stijl</string>
+    <string name="pref_title__color">Kleuren</string>
+    <string name="pref_title__icons">Iconen</string>
+    <string name="pref_title__search_bar">Zoekbalk</string>
+    <string name="pref_title__interfaces">Gebruikersomgevingen</string>
+    <string name="pref_title__inputs">Inputs</string>
+    <string name="pref_title__feels">Verschijning</string>
+    <string name="pref_title__gestures">Gebaren</string>
+    <string name="pref_title__others">Overige</string>
+    <string name="pref_title__animations">Animaties</string>
+    <string name="pref_title__debug">Debug</string>
+
+    <string name="pref_title__desktop_indicator_style">Indicator Stijl</string>
+    <string name="pref_title__desktop_wallpaper_scroll">Achtergrond Scrollen</string>
+    <string name="pref_title__desktop_orientation">Oriëntatie</string>
+    <string name="pref_title__desktop_show_grid">Toon Raster</string>
+    <string name="pref_summary__desktop_show_grid">Toon hulp raster tijdens het slepen van items.</string>
+    <string name="pref_title__desktop_fullscreen">Volledig scherm</string>
+    <string name="pref_summary__desktop_fullscreen">Volledig scherm inschakelen voor de desktop.</string>
+    <string name="pref_title__desktop_show_position_indicator">Positie Indicator</string>
+    <string name="pref_summary__desktop_show_position_indicator">Toon de pagina indicator onderaan de desktop.</string>
+    <string name="pref_title__desktop_show_label">Toon Labels</string>
+    <string name="pref_summary__desktop_show_label">Toon item labels onder hun icoontjes.</string>
+    <string name="pref_title__desktop_background_color">Achtergrond</string>
+    <string name="pref_title__desktop_inset_color">Systeem Balken</string>
+    <string name="pref_title__desktop_folder_color">Mappen</string>
+
+    <string name="pref_title__search_bar_enable">Zoekbalk</string>
+    <string name="pref_summary__search_bar_enable">Zoekbalk weergeven bovenaan het scherm.</string>
+    <string name="pref_title__search_bar_starts_with">Zoek apps op naam</string>
+    <string name="pref_summary__search_bar_starts_with">Zoeken naar apps die beginnen met de zoektekst.</string>
+    <string name="pref_title__search_bar_base_uri">URI zoekopdrachten</string>
+    <string name="pref_summary__search_bar_base_uri">URI instellen om te gebruiken bij zoekopdrachten op het web.</string>
+    <string name="pref_dialog__search_bar_base_uri">Geef de URI die gebruikt moet worden bij zoekopdrachten op het web. De tag {query} kan gebruikt 
+        worden als plaatshouder voor de zoekterm. Wanneer er geen plaatshouder wordt opgegeven zal de zoekopdracht achteraan de URI toegevoegd worden.</string>
+    <string name="pref_title__search_bar_force_browser">Zoeken met browser afdwingen</string>
+    <string name="pref_summary__search_bar_force_browser">Gebruik altijd de browser voor online zoekopdrachten.</string>
+    <string name="pref_title__search_bar_show_hidden_apps">Verborgen apps tonen</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Verborgen apps weergeven in de zoekresultaten.</string>
+
+    <string name="pref_title__date_bar">Datum Balk</string>
+    <string name="pref_title__date_bar_text_color">Tekst Kleur</string>
+    <string name="pref_title__date_bar_date_format">Datumopmaak</string>
+    <string name="pref_title__date_bar_date_format_custom_1">Aangepast formaat: regel 1</string>
+    <string name="pref_title__date_bar_date_format_custom_2">Aangepast formaat: regel 2</string>
+
+    <string name="pref_title__dock_show_label">Toon Labels</string>
+    <string name="pref_summary__dock_show_label">Toon item labels onder hun icoontjes.</string>
+    <string name="pref_title__dock_background_color">Achtergrond</string>
+
+    <string name="pref_title__drawer_style">Stijl</string>
+    <string name="pref_summary__drawer_style">Kies tussen horizontale pagina's of een verticale app drawer.</string>
+    <string name="pref_title__drawer_show_card_view">Vensterweergave</string>
+    <string name="pref_summary__drawer_show_card_view">De app drawer weergeven in een apart venster.</string>
+    <string name="pref_title__drawer_remember_position">Onthoudt laatste pagina</string>
+    <string name="pref_summary__drawer_remember_position">De huidige pagina in de app drawer bijhouden.</string>
+    <string name="pref_title__drawer_show_position_indicator">Positie Indicator</string>
+    <string name="pref_summary__drawer_show_position_indicator">Toon de pagina indicator of scrollbar afhankelijk van de gekozen stijl.</string>
+    <string name="pref_title__drawer_show_label">Toon Labels</string>
+    <string name="pref_summary__drawer_show_label">Toon item labels onder hun icoontjes.</string>
+    <string name="pref_title__drawer_background_color">Achtergrond</string>
+    <string name="pref_title__drawer_card_color">Vensterweergave</string>
+    <string name="pref_title__drawer_label_color">Label</string>
+    <string name="pref_title__drawer_fast_scroll_color">Scrollbar</string>
+    <string name="pref_title__drawer_label_font_size">Label Grootte Lettertype</string>
+
+    <string name="pref_title__gesture_notifications">Notificatie Badge</string>
+    <string name="pref_summary__gesture_notifications">Update icoontjes met een badge wanneer er notificaties zijn.</string>
+    <string name="pref_title__gesture_feedback">Gebaren Feedback</string>
+    <string name="pref_summary__gesture_feedback">Geef trilsignaal bij lang duwen op een desktop item.</string>
+    <string name="pref_title__gesture_quick_swipe">Quick Swipe Drawer</string>
+    <string name="pref_summary__gesture_quick_swipe">Swipe omhoog vanaf het dock om de app drawer te openen.</string>
+    <string name="pref_title__gesture_double_tap">Dubbel tik</string>
+    <string name="pref_title__gesture_swipe_up">Swipe omhoog</string>
+    <string name="pref_title__gesture_swipe_down">Swipe omlaag</string>
+    <string name="pref_title__gesture_pinch_in">Pinch In</string>
+    <string name="pref_title__gesture_pinch_out">Pinch Uit</string>
+
+    <string name="pref_title__theme">Thema</string>
+    <string name="pref_summary__theme">Stel het thema in voor de gehele app.</string>
+    <string name="pref_title__primary_color">Primaire Kleur</string>
+    <string name="pref_summary__primary_color">Stel de primaire kleur in voor de app.</string>
+    <string name="pref_title__icon_size">Icoon Grootte</string>
+    <string name="pref_summary__icon_size">Grootte van alle app icoontjes.</string>
+    <string name="pref_title__icon_pack">Icoon Pack</string>
+    <string name="pref_summary__icon_pack">Selecteer een geïnstalleerd icoon pack.</string>
+    <string name="pref_title__animation_speed_modifier">Animatie Snelheid</string>
+    <string name="pref_summary__animation_speed_modifier">Wijzig de algemene snelheid van animaties.</string>
+
+    <string name="pref_title__language">Taal</string>
+    <string name="pref_summary__language">Wijzig de gebruikte taal.</string>
+    <string name="pref_title__backup">Backup</string>
+    <string name="pref_summary__backup">Backup je desktop en instellingen op een locatie naar keuze.</string>
+    <string name="pref_title__restore">Herstellen</string>
+    <string name="pref_summary__restore">Herstel je desktop en instellingen.</string>
+    <string name="pref_title__reset_settings">Reset Instellingen</string>
+    <string name="pref_summary__reset_settings">Verwijder de bestanden die de instellingen bevatten.</string>
+    <string name="pref_title__reset_database">Reset Database</string>
+    <string name="pref_summary__reset_database">Verwijder alle items van de desktop.</string>
+    <string name="pref_title__restart">Herstart</string>
+    <string name="pref_summary__restart">Dit kan gebruikt worden om manueel instellen toe te passen.</string>
+
+    <!-- Arrays -->
+    <string name="vertical_scroll_drawer">Verticaal</string>
+    <string name="horizontal_paged_drawer">Pagina's</string>
+
+    <string name="indicator_mode_dots">Stippen</string>
+    <string name="indicator_mode_linresources>es">Lijnen</string>
+
+    <string name="orientation_mode_portrait">Portret</string>
+    <string name="orientation_mode_rotate">Draaien</string>
+    <string name="orientation_mode_landscape">Horizontaal</string>
+
+    <string name="scroll_normal">Normaal</string>
+    <string name="scroll_inverse">Geïnverteerd</string>
+    <string name="scroll_off">Uit</string>
+
+    <string name="none">None</string>
+    <string name="app">App</string>
+
+    <string name="light">Licht</string>
+    <string name="dark">Donker</string>
+    <string name="black">Zwart</string>
+
+    <!-- Dialogs -->
+    <string name="please_wait">Zoeken naar geïnstalleerde apps. Even geduld.</string>
+    <string name="are_you_sure">Bent u zeker? Deze actie kan niet ongedaan gemaakt worden behalve als je een backup hebt.</string>
+    <string name="device_admin_title">Apparaatbeheer</string>
+    <string name="device_admin_summary">OpenLauncher heeft toestemming voor apparaatbeheer nodig om het scherm te vergrendelen.</string>
+    <string name="select_app">Selecteer App</string>
+    <string name="select_wallpaper">Select Achtergrond</string>
+    <string name="select_icon_pack">Selecteer Icoon Pack</string>
+    <string name="volume_level_ringtone">Ringtone</string>
+    <string name="volume_level_notification">Notificatie</string>
+    <string name="volume_level_system">Systeem</string>
+    <string name="volume_level_media">Media</string>
+    <string name="notification_title">Notificatie Toegang</string>
+    <string name="notification_summary">OpenLauncher heeft notificatie toestemming nodig om icoon badges weer te geven.</string>
+
+    <!-- Other -->
+    <string name="columns">Kolommen</string>
+    <string name="rows">Rijen</string>
+    <string name="on">Aan</string>
+    <string name="off">Uit</string>
+    <string name="search_hint">Zoeken</string>
+    <string name="bad_format">Incorrect Formaat</string>
+    <string name="version">Versie</string>
+    <string name="enable">Inschakelen</string>
+    <string name="placeholder">Hello World!</string>
+    <string name="custom">Aangepast</string>
+    <string name="default_folder">Onbenoemd</string>
+    <string name="default_icons">Standaard</string>
+
+    <!-- Drag Option View -->
+    <string name="edit">Wijzigen/string>
+    <string name="info">Info</string>
+    <string name="uninstall">De-installeren</string>
+    <string name="remove">Verwijderen</string>
+    <string name="resize">Grootte</string>
+
+    <!-- Desktop Option View -->
+    <string name="home">Home</string>
+    <string name="action">Actie</string>
+    <string name="lock">Vergrendel</string>
+    <string name="widget">Widget</string>
+
+    <!-- Toasts -->
+    <string name="toast_not_enough_space">Niet genoeg vrije ruimte.</string>
+    <string name="toast_app_uninstalled">App verwijderd.</string>
+    <string name="toast_device_admin_required">Schakel toestemming voor apparaat beheer in.</string>
+    <string name="toast_notification_permission_required">Schakel notificaties in.</string>
+    <string name="toast_backup_success">Backup voltooid.</string>
+    <string name="toast_backup_error">Er liep iets mis.</string>
+    <string name="toast_settings_restored">Instellingen hersteld.</string>
+    <string name="toast_database_deleted">Database verwijderd.</string>
+    <string name="toast_icon_pack_error">Geef toestemming om externe opslag te kunnen lezen.</string>
+    <string name="toast_remove_from_group_first">Verwijder eerst het item uit de groep.</string>
+    <string name="toast_update_group_due_to_missing_items">Verwijderde of verborgen apps zijn uit deze groep verwijderd.</string>
+</resources>
