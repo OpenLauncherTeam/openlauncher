@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 public class ItemViewFactory {
     private static Logger LOG = LoggerFactory.getLogger("ItemViewFactory");
 
-    public static View getItemView(final Context context, final DesktopCallback callback, final DragAction.Action type, final Item item) {
+    public static View getItemView(final Context context, final DesktopCallback callback, final DragAction.Action type, final Item item, Boolean showLabel) {
         View view = null;
         if (item.getType().equals(Item.Type.WIDGET)) {
             view = getWidgetView(context, callback, type, item);
@@ -47,6 +47,11 @@ public class ItemViewFactory {
                     builder.setTextColor(Color.WHITE);
                     break;
             }
+            if (showLabel != null) {
+                boolean labelVisibility = showLabel.booleanValue();
+                builder.setLabelVisibility(labelVisibility);
+            }
+
             switch (item.getType()) {
                 case APP:
                     final App app = Setup.appLoader().findItemApp(item);
@@ -55,7 +60,7 @@ public class ItemViewFactory {
 
                     if (Setup.appSettings().getNotificationStatus()) {
                         NotificationListener.setNotificationCallback(app.getPackageName(),
-                            (NotificationListener.NotificationCallback) view);
+                                (NotificationListener.NotificationCallback) view);
                     }
                     break;
                 case SHORTCUT:
@@ -77,6 +82,10 @@ public class ItemViewFactory {
         }
 
         return view;
+    }
+
+    public static View getItemView(final Context context, final DesktopCallback callback, final DragAction.Action type, final Item item) {
+        return getItemView(context, callback, type, item, null);
     }
 
     public static View getWidgetView(final Context context, final DesktopCallback callback, final DragAction.Action type, final Item item) {

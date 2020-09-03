@@ -139,7 +139,7 @@ public final class Dock extends CellContainer implements DesktopCallback {
     }
 
     public boolean addItemToPage(@NonNull Item item, int page) {
-        View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item);
+        View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item, isDockShowLabel());
         if (itemView == null) {
             // TODO see if this fixes SD card bug
             //HomeActivity._db.deleteItem(item, true);
@@ -158,7 +158,7 @@ public final class Dock extends CellContainer implements DesktopCallback {
         item._location = ItemPosition.Dock;
         item._x = positionToLayoutPrams.getX();
         item._y = positionToLayoutPrams.getY();
-        View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item);
+        View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item, isDockShowLabel());
         if (itemView != null) {
             itemView.setLayoutParams(positionToLayoutPrams);
             addView(itemView);
@@ -170,7 +170,7 @@ public final class Dock extends CellContainer implements DesktopCallback {
         item._location = ItemPosition.Dock;
         item._x = x;
         item._y = y;
-        View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item);
+        View itemView = ItemViewFactory.getItemView(getContext(), this, Action.DESKTOP, item, isDockShowLabel());
         if (itemView == null) {
             return false;
         }
@@ -195,5 +195,11 @@ public final class Dock extends CellContainer implements DesktopCallback {
 
     public void setHome(HomeActivity homeActivity) {
         _homeActivity = homeActivity;
+    }
+
+    private Boolean isDockShowLabel() {
+        boolean b = Setup.appSettings().getDockShowLabel();
+        Boolean ret = new Boolean(b);
+        return ret;
     }
 }
