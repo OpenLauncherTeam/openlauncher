@@ -127,7 +127,7 @@
     <string name="pref_title__dock_background_color">Achtergrond</string>
 
     <string name="pref_title__drawer_style">Stijl</string>
-    <string name="pref_summary__drawer_style">Kies tussen horizontale pagina's of een verticale app drawer.</string>
+    <string name="pref_summary__drawer_style">Kies tussen horizontale pagina\'s of een verticale app drawer.</string>
     <string name="pref_title__drawer_show_card_view">Vensterweergave</string>
     <string name="pref_summary__drawer_show_card_view">De app drawer weergeven in een apart venster.</string>
     <string name="pref_title__drawer_remember_position">Onthoudt laatste pagina</string>
@@ -180,10 +180,10 @@
 
     <!-- Arrays -->
     <string name="vertical_scroll_drawer">Verticaal</string>
-    <string name="horizontal_paged_drawer">Pagina's</string>
+    <string name="horizontal_paged_drawer">Pagina\'s</string>
 
     <string name="indicator_mode_dots">Stippen</string>
-    <string name="indicator_mode_linresources>es">Lijnen</string>
+    <string name="indicator_mode_linresourceses">Lijnen</string>
 
     <string name="orientation_mode_portrait">Portret</string>
     <string name="orientation_mode_rotate">Draaien</string>
@@ -230,7 +230,7 @@
     <string name="default_icons">Standaard</string>
 
     <!-- Drag Option View -->
-    <string name="edit">Wijzigen/string>
+    <string name="edit">Wijzigen</string>
     <string name="info">Info</string>
     <string name="uninstall">De-installeren</string>
     <string name="remove">Verwijderen</string>
