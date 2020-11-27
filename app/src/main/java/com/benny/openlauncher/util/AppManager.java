@@ -235,8 +235,10 @@ public class AppManager {
 
             if (_recreateAfterGettingApps) {
                 _recreateAfterGettingApps = false;
-                if (_context instanceof HomeActivity)
-                    ((HomeActivity) _context).recreate();
+                if (_context instanceof HomeActivity){
+                    ((HomeActivity) _context).onContentChanged();
+                }
+                    
             }
 
             super.onPostExecute(result);
