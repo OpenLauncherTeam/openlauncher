@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Intro -->
+    <string name="intro1_text">An open source launcher with lots of useful features.</string>
+    <string name="intro1_community">Large Community</string>
+    <string name="intro1_features">Packed with Features</string>
+    <string name="intro1_customizable">Customisable</string>
+    <string name="intro2_text">Swipe in from the left border of your home screen to open the minibar and select an action.</string>
+    <string name="intro3_text">You can choose a style for your app drawer and hide unused apps from the settings.</string>
+    <string name="intro4_text">Search for something on the web or filter your apps from the search bar.</string>
+
+    <!-- Minibar -->
+    <string name="minibar">Minibar</string>
+    <string name="minibar_title__edit_minibar">Edit Minibar</string>
+    <string name="minibar_summary__edit_minibar">Change the minibar layout.</string>
+    <string name="minibar_title__set_wallpaper">Set Wallpaper</string>
+    <string name="minibar_summary__set_wallpaper">Set the desktop wallpaper.</string>
+    <string name="minibar_title__lock_screen">Lock Screen</string>
+    <string name="minibar_summary__lock_screen">Lock the screen immediately.</string>
+    <string name="minibar_title__device_settings">Device Settings</string>
+    <string name="minibar_summary__device_settings">Shortcut to device settings.</string>
+    <string name="minibar_title__launcher_settings">Launcher Settings</string>
+    <string name="minibar_summary__launcher_settings">Shortcut to OpenLauncher settings.</string>
+    <string name="minibar_title__volume_dialog">Volume Dialog</string>
+    <string name="minibar_summary__volume_dialog">Display all available volume sliders.</string>
+    <string name="minibar_title__app_drawer">Open App Drawer</string>
+    <string name="minibar_summary__app_drawer">Open the app drawer.</string>
+    <string name="minibar_title__search_bar">Open Search Bar</string>
+    <string name="minibar_summary__search_bar">Open the search bar.</string>
+    <string name="minibar_title__mobile_network">Mobile Network Settings</string>
+    <string name="minibar_summary__mobile_network">Shortcut to the mobile network settings.</string>
+    <string name="minibar_title__notification_bar">Show Notification Bar</string>
+    <string name="minibar_summary__notification_bar">Expand the notification view at the top of the screen.</string>
+    <string name="minibar_title__camera">Camera</string>
+    <string name="minibar_summary__camera">Take a picture with your camera app</string>
+
+    <!-- About -->
+    <string name="about_libs">Open Source Libraries</string>
+    <string name="about_rate">Rate</string>
+    <string name="about_credit">Contributors</string>
+    <string name="community">Community</string>
+    <string name="more_info_foss">More information about contributing to open source projects on Android.</string>
+    <string name="join_community">Join the Community</string>
+    <string name="bug_reports_suggest_improvements">Report bugs and suggest improvements on GitHub.</string>
+    <string name="help_translating_this_app">Translate this app to other languages with GitHub or Stringlate!</string>
+    <string name="source_code">Source Code</string>
+    <string name="project_license">Project Licence</string>
+    <string name="project_contribution_info">Contribution Info</string>
+    <string name="more_info_on_how_to_contribute_to_this_project">How you can contribute to this project.</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">Contribute code to the project. Everyone is welcome to submit changes!</string>
+    <string name="project_team">Project Team</string>
+    <string name="contributors_public_info">Contributors can provide information to be shown here after improving the launcher.</string>
+    <string name="contribute">Contribute</string>
+    <string name="donate">Donate</string>
+    <string name="help">Help</string>
+    <string name="licenses">Licences</string>
+    <string name="contributors">Contributors</string>
+    <string name="changelog">Changelog</string>
+    <string name="more">More</string>
+    <string name="open_source_licenses">Open Source Licences</string>
+    <string name="rate_the_app">Rate</string>
+    <string name="translate">Translate</string>
+    <string name="bug_reports">Report Bugs</string>
+    <string name="more_info_support">More information on donating or otherwise supporting this project.</string>
+    <string name="android_contribution_guide">Android Development</string>
+
+    <!-- Settings -->
+    <string name="pref_title__settings">Settings</string>
+    <string name="pref_title__desktop">Desktop</string>
+    <string name="pref_title__dock">Dock</string>
+    <string name="pref_title__app_drawer">App Drawer</string>
+    <string name="pref_title__appearance">Appearance</string>
+    <string name="pref_title__behavior">Behaviour</string>
+    <string name="pref_title__advanced">Advanced</string>
+    <string name="pref_title__hide_apps">Hide Apps</string>
+    <string name="pref_title__about">About</string>
+
+    <string name="pref_title__size">Size</string>
+    <string name="pref_title__style">Style</string>
+    <string name="pref_title__color">Colours</string>
+    <string name="pref_title__icons">Icons</string>
+    <string name="pref_title__search_bar">Search Bar</string>
+    <string name="pref_title__interfaces">Interfaces</string>
+    <string name="pref_title__inputs">Inputs</string>
+    <string name="pref_title__feels">Feels</string>
+    <string name="pref_title__gestures">Gestures</string>
+    <string name="pref_title__others">Others</string>
+    <string name="pref_title__animations">Animations</string>
+    <string name="pref_title__debug">Debug</string>
+
+    <string name="pref_title__desktop_indicator_style">Indicator Style</string>
+    <string name="pref_title__desktop_wallpaper_scroll">Wallpaper Scroll</string>
+    <string name="pref_title__desktop_orientation">Orientation</string>
+    <string name="pref_title__desktop_show_grid">Show Grid</string>
+    <string name="pref_summary__desktop_show_grid">Show the guiding grid when dragging items.</string>
+    <string name="pref_title__desktop_fullscreen">Fullscreen</string>
+    <string name="pref_summary__desktop_fullscreen">Enable fullscreen for the desktop.</string>
+    <string name="pref_title__desktop_show_position_indicator">Position Indicator</string>
+    <string name="pref_summary__desktop_show_position_indicator">Show the page indicator below the desktop.</string>
+    <string name="pref_title__desktop_show_label">Show Labels</string>
+    <string name="pref_summary__desktop_show_label">Show item labels below their icons.</string>
+    <string name="pref_title__desktop_background_color">Background</string>
+    <string name="pref_title__desktop_inset_color">System Bars</string>
+    <string name="pref_title__desktop_folder_color">Folders</string>
+
+    <string name="pref_title__search_bar_enable">Search Bar</string>
+    <string name="pref_summary__search_bar_enable">Display a search bar above the desktop.</string>
+    <string name="pref_title__search_bar_starts_with">Search apps by name</string>
+    <string name="pref_summary__search_bar_starts_with">Search for apps starting with the search text.</string>
+    <string name="pref_title__search_bar_base_uri">Search URI</string>
+    <string name="pref_summary__search_bar_base_uri">Set the URI used for web searches.</string>
+    <string name="pref_dialog__search_bar_base_uri">Enter the URI that should be used for web searches. The tag {query} can be used as       placeholder for the search query, in case no placeholder is used the search query will be appended at the end of the URI.</string>
+    <string name="pref_title__search_bar_force_browser">Force browser search</string>
+    <string name="pref_summary__search_bar_force_browser">Always use the browser for online searches.</string>
+    <string name="pref_title__search_bar_show_hidden_apps">Show hidden apps</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Include hidden apps in the search results.</string>
+
+    <string name="pref_title__date_bar">Date Bar</string>
+    <string name="pref_title__date_bar_text_color">Text Colour</string>
+    <string name="pref_title__date_bar_date_format">Date Format</string>
+    <string name="pref_title__date_bar_date_format_custom_1">Custom Format: Line 1</string>
+    <string name="pref_title__date_bar_date_format_custom_2">Custom Format: Line 2</string>
+
+    <string name="pref_title__dock_show_label">Show Labels</string>
+    <string name="pref_summary__dock_show_label">Show item labels below their icons.</string>
+    <string name="pref_title__dock_background_color">Background</string>
+
+    <string name="pref_title__drawer_style">Style</string>
+    <string name="pref_summary__drawer_style">Choose between a paged and vertical app drawer.</string>
+    <string name="pref_title__drawer_show_card_view">Card View</string>
+    <string name="pref_summary__drawer_show_card_view">Show a card view above the drawer background.</string>
+    <string name="pref_title__drawer_remember_position">Remember Last Page</string>
+    <string name="pref_summary__drawer_remember_position">Keep track of the current app drawer page.</string>
+    <string name="pref_title__drawer_show_position_indicator">Position Indicator</string>
+    <string name="pref_summary__drawer_show_position_indicator">Show the page indicator or scrollbar depending on the style.</string>
+    <string name="pref_title__drawer_show_label">Show Labels</string>
+    <string name="pref_summary__drawer_show_label">Show item labels below their icons.</string>
+    <string name="pref_title__drawer_background_color">Background</string>
+    <string name="pref_title__drawer_card_color">Card View</string>
+    <string name="pref_title__drawer_label_color">Label</string>
+    <string name="pref_title__drawer_fast_scroll_color">Scrollbar</string>
+    <string name="pref_title__drawer_label_font_size">Label Font Size</string>
+
+    <string name="pref_title__gesture_notifications">Notification Badge</string>
+    <string name="pref_summary__gesture_notifications">Update icons with a badge when notifications arrive.</string>
+    <string name="pref_title__gesture_feedback">Gesture Feedback</string>
+    <string name="pref_summary__gesture_feedback">Get feedback when long pressing an item on the desktop.</string>
+    <string name="pref_title__gesture_quick_swipe">Quick Swipe Drawer</string>
+    <string name="pref_summary__gesture_quick_swipe">Swipe upwards on the dock to open the app drawer.</string>
+    <string name="pref_title__gesture_double_tap">Double Tap</string>
+    <string name="pref_title__gesture_swipe_up">Swipe Up</string>
+    <string name="pref_title__gesture_swipe_down">Swipe Down</string>
+    <string name="pref_title__gesture_pinch_in">Pinch In</string>
+    <string name="pref_title__gesture_pinch_out">Pinch Out</string>
+
+    <string name="pref_title__theme">Theme</string>
+    <string name="pref_summary__theme">Set the theme for the entire app.</string>
+    <string name="pref_title__primary_color">Primary Colour</string>
+    <string name="pref_summary__primary_color">Set the primary colour for the app.</string>
+    <string name="pref_title__icon_size">Icon Size</string>
+    <string name="pref_summary__icon_size">Size of all app icons.</string>
+    <string name="pref_title__icon_pack">Icon Pack</string>
+    <string name="pref_summary__icon_pack">Select an installed icon pack.</string>
+    <string name="pref_title__animation_speed_modifier">Animation Speed</string>
+    <string name="pref_summary__animation_speed_modifier">Modify the overall speed of animations.</string>
+
+    <string name="pref_title__language">Language</string>
+    <string name="pref_summary__language">Change language used throughout the launcher.</string>
+    <string name="pref_title__backup">Backup</string>
+    <string name="pref_summary__backup">Backup your desktop and settings to any location.</string>
+    <string name="pref_title__restore">Restore</string>
+    <string name="pref_summary__restore">Restore your desktop and settings.</string>
+    <string name="pref_title__reset_settings">Reset Settings</string>
+    <string name="pref_summary__reset_settings">Delete internal files used to store the settings.</string>
+    <string name="pref_title__reset_database">Reset Database</string>
+    <string name="pref_summary__reset_database">Remove all items from the desktop.</string>
+    <string name="pref_title__restart">Restart</string>
+    <string name="pref_summary__restart">This can be used to manually apply some settings.</string>
+
+    <!-- Arrays -->
+    <string name="vertical_scroll_drawer">Vertical</string>
+    <string name="horizontal_paged_drawer">Paged</string>
+
+    <string name="indicator_mode_dots">Dots</string>
+    <string name="indicator_mode_lines">Lines</string>
+
+    <string name="orientation_mode_portrait">Portrait</string>
+    <string name="orientation_mode_rotate">Rotate</string>
+    <string name="orientation_mode_landscape">Landscape</string>
+
+    <string name="scroll_normal">Normal</string>
+    <string name="scroll_inverse">Inverse</string>
+    <string name="scroll_off">Off</string>
+
+    <string name="none">None</string>
+    <string name="app">App</string>
+
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="black">Black</string>
+
+    <!-- Dialogs -->
+    <string name="please_wait">Searching for installed apps. Please wait.</string>
+    <string name="are_you_sure">Are you sure? This action cannot be undone unless you have a backup.</string>
+    <string name="device_admin_title">Device Administration</string>
+    <string name="device_admin_summary">OpenLauncher requires the device administration permission to lock your screen.</string>
+    <string name="select_app">Select App</string>
+    <string name="select_wallpaper">Select Wallpaper</string>
+    <string name="select_icon_pack">Select Icon Pack</string>
+    <string name="volume_level_ringtone">Ringtone</string>
+    <string name="volume_level_notification">Notification</string>
+    <string name="volume_level_system">System</string>
+    <string name="volume_level_media">Media</string>
+    <string name="notification_title">Notification Access</string>
+    <string name="notification_summary">OpenLauncher requires the notification permission to show icon badges.</string>
+
+    <!-- Other -->
+    <string name="columns">Columns</string>
+    <string name="rows">Rows</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="search_hint">Search</string>
+    <string name="bad_format">Bad Format</string>
+    <string name="version">Version</string>
+    <string name="enable">Enable</string>
+    <string name="placeholder">Hello World!</string>
+    <string name="custom">Custom</string>
+    <string name="default_folder">Unnamed</string>
+    <string name="default_icons">Default</string>
+
+    <!-- Drag Option View -->
+    <string name="edit">Edit</string>
+    <string name="info">Info</string>
+    <string name="uninstall">Uninstall</string>
+    <string name="remove">Remove</string>
+    <string name="resize">Resize</string>
+
+    <!-- Desktop Option View -->
+    <string name="home">Home</string>
+    <string name="action">Action</string>
+    <string name="lock">Lock</string>
+    <string name="widget">Widget</string>
+
+    <!-- Toasts -->
+    <string name="toast_not_enough_space">Not enough space.</string>
+    <string name="toast_app_uninstalled">App uninstalled.</string>
+    <string name="toast_device_admin_required">Please enable device administration.</string>
+    <string name="toast_notification_permission_required">Please enable notifications.</string>
+    <string name="toast_backup_success">Backup completed.</string>
+    <string name="toast_backup_error">Something went wrong.</string>
+    <string name="toast_settings_restored">Settings restored.</string>
+    <string name="toast_database_deleted">Database deleted.</string>
+    <string name="toast_icon_pack_error">Please read access for external storage.</string>
+    <string name="toast_remove_from_group_first">Remove item from group first.</string>
+    <string name="toast_update_group_due_to_missing_items">Uninstalled or hidden apps were removed from this group.</string>
+</resources>
