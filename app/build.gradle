@@ -22,8 +22,8 @@ android {
         resValue 'string', 'app_name', "OpenLauncher"
 
         applicationId "com.benny.openlauncher"
-        versionCode 41
-        versionName "0.7.3"
+        versionCode 42
+        versionName "0.7.4"
     }
 
     productFlavors {
