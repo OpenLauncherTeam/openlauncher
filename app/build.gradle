@@ -22,8 +22,8 @@ android {
         resValue 'string', 'app_name', "OpenLauncher"
 
         applicationId "com.benny.openlauncher"
-        versionCode 41
-        versionName "0.7.3"
+        versionCode 42
+        versionName "0.7.4"
     }
 
     productFlavors {
@@ -34,13 +34,12 @@ android {
             buildConfigField "boolean", "IS_GPLAY_BUILD", "true"
         }
 
-        flavorNightly {
-            buildConfigField "boolean", "IS_NIGHTLY_BUILD", "true"
-
-            versionCode = Integer.parseInt(new Date().format('yyMMdd'))
-            versionName = new Date().format('yyMMdd')
-            applicationId "com.benny.openlauncher.nightly"
-            resValue 'string', 'app_name', "OL Nightly"
+        flavorAtest {
+          buildConfigField "boolean", "IS_NIGHTLY_BUILD", "true"
+          versionCode = Integer.parseInt(new Date().format('yyMMdd'))
+          versionName = new Date().format('yyMMdd')
+          applicationId "com.benny.openlauncher.nightly"
+          resValue 'string', 'app_name', "OL Nightly"
         }
 
         flavorGsantner {
@@ -83,8 +82,8 @@ android {
     }
 
     lintOptions {
-        disable 'MissingTranslation'
-        disable 'InvalidPackage'
+        disable 'MissingTranslation', 'InvalidPackage', 'ObsoleteLintCustomCheck', 'DefaultLocale', 'UnusedAttribute', 'VectorRaster', 'InflateParams', 'IconLocation', 'UnusedResources', 'TypographyEllipsis'
+        abortOnError false
     }
 }
 

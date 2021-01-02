@@ -20,9 +20,9 @@
 
     <!-- Minibar -->
 
-    <string name="minibar_summary__edit_minibar">Edit</string>
-    <string name="minibar_summary__set_wallpaper">Wallpaper aussuchen oder unscharf machen</string>
-    <string name="minibar_summary__lock_screen">Sperre sofort den Bildschirm, braucht die Berechtigung \"Geräteadministrator\".</string>
+    <string name="minibar_summary__edit_minibar">Ändern</string>
+    <string name="minibar_summary__set_wallpaper">Hintergrundbild aussuchen oder unscharf machen</string>
+    <string name="minibar_summary__lock_screen">Sperre sofort den Bildschirm (benötigt die Berechtigung \"Geräteadministrator\").</string>
     <string name="minibar_summary__device_settings">Verknüpfung zu den Systemeinstellungen.</string>
     <string name="minibar_summary__launcher_settings">OpenLauncher Einstellungsseite.</string>
     <string name="minibar_summary__volume_dialog">Öffne den Lautstärkedialog.</string>
@@ -54,7 +54,7 @@
     <string name="pref_title__feels">Erscheinungsbild</string>
     <string name="pref_title__others">Anderes</string>
 
-    <string name="pref_title__desktop_indicator_style">Indikatoren Stil</string>
+    <string name="pref_title__desktop_indicator_style">Indikatoren-Stil</string>
     <string name="pref_title__search_bar_enable">Suchleiste</string>
     <string name="pref_summary__search_bar_enable">Zeige eine Suchleiste am oberen Desktoprand.</string>
     <string name="pref_title__desktop_fullscreen">Vollbild</string>
@@ -85,21 +85,21 @@
     <string name="pref_title__drawer_show_position_indicator">Seitenindikator/Scrollbar</string>
     <string name="pref_summary__drawer_show_position_indicator">Zeige den Seitenindikator bzw. die Scrollbar im Drawer an.</string>
     <string name="pref_title__drawer_show_label">Beschriftungen anzeigen</string>
-    <string name="pref_summary__drawer_show_label">App Beschriftungen unter den Icons anzeigen</string>
+    <string name="pref_summary__drawer_show_label">App-Beschriftungen unter den Icons anzeigen</string>
     <string name="pref_title__drawer_background_color">Drawer Hintergrund</string>
     <string name="pref_title__drawer_card_color">Karten</string>
     <string name="pref_title__drawer_label_color">Beschriftung</string>
     <string name="pref_title__drawer_fast_scroll_color">Scroll-Leiste</string>
 
-    <string name="pref_title__gesture_feedback">Gesten Feedback</string>
+    <string name="pref_title__gesture_feedback">Gesten-Feedback</string>
     <string name="pref_summary__gesture_feedback">Feedback bekommen wenn ein Element auf dem Desktop lang gedrückt wurde.</string>
     <string name="pref_title__gesture_quick_swipe">Drawer: Wischen</string>
     <string name="pref_summary__gesture_quick_swipe">Wische auf dem Desktop um den App Drawer zu öffnen.</string>
     <string name="pref_title__gesture_double_tap">Doppelt antippen</string>
     <string name="pref_title__gesture_swipe_up">Swipe nach oben</string>
     <string name="pref_title__gesture_swipe_down">Swipe nach unten</string>
-    <string name="pref_title__gesture_pinch_in">Pinch</string>
-    <string name="pref_title__gesture_pinch_out">Unpinch</string>
+    <string name="pref_title__gesture_pinch_in">Vergrößern</string>
+    <string name="pref_title__gesture_pinch_out">Verkleinern</string>
 
     <string name="pref_summary__icon_size">Größe für alle Anwendungsicons.</string>
     <string name="pref_title__icon_pack">Icon Pack</string>
@@ -110,7 +110,7 @@
     <string name="pref_title__backup">Sicherung</string>
     <string name="pref_summary__backup">Sichere deine Einstellungen oder stelle sie wieder her.</string>
     <string name="pref_title__reset_database">Datenbank zurücksetzen</string>
-    <string name="pref_summary__reset_database">Die Daten von Desktop und Dock zurücksetzen um Probleme zu beheben</string>
+    <string name="pref_summary__reset_database">Die Daten von Desktop und Dock zurücksetzen.</string>
     <string name="pref_title__restart">Neustart</string>
     <string name="pref_summary__restart">Starte den Launcher neu, um alle Änderungen zu übernehmen.</string>
     <string name="pref_summary__theme">Setze das Thema der gesamten App.</string>
@@ -141,7 +141,7 @@
     <string name="version">Version</string>
     <string name="select_wallpaper">Suche Wallpaper aus</string>
     <string name="select_icon_pack">Wähle ein Icon Pack aus</string>
-    <string name="toast_icon_pack_error">Du must zuerst die Berechtigung \"Manifest.permission.READ_EXTERNAL_STORAGE\" gewähren.</string>
+    <string name="toast_icon_pack_error">Du musst zuerst Zugriff auf externen Speicher erlauben.</string>
     <string name="toast_backup_success">Erfolgreich ausgeführt.</string>
     <string name="toast_backup_error">Etwas ging schief.</string>
     <string name="columns">Spalten</string>
@@ -158,16 +158,16 @@
     <string name="pref_title__search_bar_show_hidden_apps">Versteckte Apps anzeigen</string>
     <string name="pref_summary__search_bar_show_hidden_apps">Versteckte Apps in Suchergebnissen anzeigen</string>
     <string name="pref_title__debug">Fehlerbehebung</string>
-    <string name="pref_title__drawer_label_font_size">Bezeichnung Text-Größe</string>
-    <string name="pref_title__animation_speed_modifier">Anmiations Geschwindigkeit</string>
+    <string name="pref_title__drawer_label_font_size">Schriftgröße der Bezeichnung</string>
+    <string name="pref_title__animation_speed_modifier">Anmiations-Geschwindigkeit</string>
 
-    <string name="pref_title__date_bar">Datums Anzeige</string>
-    <string name="pref_title__date_bar_text_color">Text Farbe</string>
-    <string name="pref_title__date_bar_date_format">Datums Format</string>
-    <string name="pref_title__date_bar_date_format_custom_1">Benutzerdefinierter Format: Zeile 1</string>
-    <string name="pref_title__date_bar_date_format_custom_2">Benutzerdefinierter Format: Zeile 2</string>
+    <string name="pref_title__date_bar">Datum-Anzeige</string>
+    <string name="pref_title__date_bar_text_color">Textfarbe</string>
+    <string name="pref_title__date_bar_date_format">Datum-Formatierung</string>
+    <string name="pref_title__date_bar_date_format_custom_1">Benutzerdefiniertes Format: Zeile 1</string>
+    <string name="pref_title__date_bar_date_format_custom_2">Benutzerdefiniertes Format: Zeile 2</string>
     <string name="custom">Benutzerdefiniert</string>
-    <string name="pref_summary__animation_speed_modifier">Skalierung der insgesamten Animations Geschwindigkeit</string>
+    <string name="pref_summary__animation_speed_modifier">Skalierung der Animations-Geschwindigkeit</string>
 
 
     <!-- Titles -->
@@ -221,17 +221,17 @@
     <string name="translate">Übersetzen</string>
     <string name="bug_reports">Fehler melden</string>
     <string name="more_info_support">Weitere Informationen zum Spenden oder zur anderweitigen Unterstützung dieses Projekts</string>
-    <string name="android_contribution_guide">Unterstützungs Guide für Android</string>
+    <string name="android_contribution_guide">Android-Entwicklung</string>
     <string name="more_info_foss">Weitere Informationen zum Beitrag zu Open Source-Projekten, insbesondere zu Android Apps</string>
     <string name="join_community">Community beitreten</string>
     <string name="bug_reports_suggest_improvements">Feedback geben, Fehler melden, Verbesserungen vorschlagen</string>
     <string name="help_translating_this_app">Übersetzen dieser App in andere Sprachen</string>
     <string name="source_code">Quellcode</string>
-    <string name="project_license">Projekt Lizenz</string>
+    <string name="project_license">Projekt-Lizenz</string>
     <string name="project_contribution_info">Projekt-Unterstützungs-Info</string>
     <string name="more_info_on_how_to_contribute_to_this_project">Weitere Informationen dazu, wie dieses Projekt unterstützt werden kann</string>
-    <string name="contribute_code_to_this_project_anybody_welcome">Projekt mit Code unterstützen. Alle sind eingeladen das zu tun, auch Newcomer</string>
-    <string name="project_team">Projekt Team</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">Projekt mit Code unterstützen. Alle sind eingeladen das zu tun, auch Anfänger!</string>
+    <string name="project_team">Projekt-Team</string>
     <string name="contributors_public_info">Zeige Informationen über Mitwirkende. Mitwirkende können Informationen bereitstellen die hier angezeigt werden (Opt-in), nach der Mitwirkung.</string>
     <string name="help">Hilfe</string>
     <string name="licenses">Lizenzen</string>
@@ -240,15 +240,60 @@
     <string name="more">Mehr</string>
     <string name="contribute">Beitragen</string>
     <string name="donate">Spenden</string>
-    <string name="minibar_title__set_wallpaper">Wallpaper setzen</string>
+    <string name="minibar_title__set_wallpaper">Hintergrundbild setzen</string>
     <string name="none">Nichts</string>
-    <string name="minibar_title__edit_minibar">Minibar Einstellungen</string>
-    <string name="minibar_title__lock_screen">Lock Screen</string>
+    <string name="minibar_title__edit_minibar">Minibar-Einstellungen</string>
+    <string name="minibar_title__lock_screen">Bildschirm sperren</string>
     <string name="minibar_title__device_settings">Geräte-Einstellungen</string>
     <string name="minibar_title__launcher_settings">Launcher-Einstellungen</string>
     <string name="minibar_title__volume_dialog">Lautstärke-Dialog</string>
     <string name="minibar_title__app_drawer">App Drawer öffnen</string>
     <string name="app">App starten</string>
-    <string name="minibar_summary__search_bar">In der Such-Leiste öffnen.</string>
-    <string name="minibar_summary__mobile_network">Mobilfunkeinstellungen.</string>
+    <string name="minibar_summary__search_bar">Die Such-Leiste öffnen.</string>
+    <string name="minibar_summary__mobile_network">Mobilfunk-Einstellungen.</string>
+    <string name="minibar_title__camera">Kamera</string>
+    <string name="minibar_summary__camera">Bild mit der Kamera aufnehmen</string>
+    <string name="pref_title__behavior">Verhalten</string>
+    <string name="pref_title__animations">Animationen</string>
+    <string name="pref_title__icon_size">Icon-Größe</string>
+    <string name="pref_title__restore">Wiederherstellen</string>
+    <string name="black">Schwarz</string>
+    <string name="scroll_off">Aus</string>
+    <string name="pref_summary__restore">Einstellungen und Desktop wiederherstellen</string>
+    <string name="pref_title__reset_settings">Einstellungen löschen</string>
+    <string name="pref_summary__reset_settings">Interne Datei mit Einstellungen löschen</string>
+    <string name="scroll_normal">Normal</string>
+    <string name="scroll_inverse">Invertiert</string>
+    <string name="device_admin_title">Geräteadministrator</string>
+    <string name="device_admin_summary">OpenLauncher benötigt diese Berechtigung, um den Bildschirm zu sperren.</string>
+    <string name="notification_title">Zugriff auf Benachrichtigungen</string>
+    <string name="notification_summary">OpenLauncher benötigt diese Berechtigung, um die Anzahl der Benachrichtigungen anzuzeigen.</string>
+    <string name="enable">Aktivieren</string>
+    <string name="toast_notification_permission_required">Bitte Zugriff auf Benachrichtigungen aktivieren.</string>
+    <string name="toast_settings_restored">Einstellungen wiederhergestellt.</string>
+    <string name="toast_database_deleted">Datenbank gelöscht.</string>
+    <string name="toast_update_group_due_to_missing_items">Deinstallierte oder versteckte Apps wurden aus dieser Gruppe entfernt.</string>
+    <string name="toast_remove_from_group_first">Entferne zuerst ein Element der Gruppe.</string>
+    <string name="resize">Größe ändern</string>
+    <string name="orientation_mode_landscape">Landschaft</string>
+    <string name="orientation_mode_rotate">Drehen</string>
+    <string name="orientation_mode_portrait">Portrait</string>
+    <string name="indicator_mode_lines">Linien</string>
+    <string name="indicator_mode_dots">Punkte</string>
+    <string name="pref_title__search_bar_starts_with">Apps nach Name suchen</string>
+    <string name="pref_summary__search_bar_starts_with">Suche nach Apps, die mit dem Suchbegriff anfangen</string>
+    <string name="pref_title__desktop_inset_color">Systemleisten</string>
+    <string name="pref_title__desktop_show_grid">Gitter anzeigen</string>
+    <string name="pref_title__desktop_orientation">Drehung</string>
+    <string name="pref_summary__desktop_show_grid">Hilfsgitter anzeigen, wenn Elemente verschoben werden</string>
+    <string name="pref_title__desktop_wallpaper_scroll">Hintergrundbild-Scroll</string>
+    <string name="community">Community</string>
+    <string name="minibar_title__notification_bar">Benachrichtigungen anzeigen</string>
+    <string name="minibar_summary__notification_bar">Benachrichtigungsansicht am oberen Bildschirmende anzeigen</string>
+    <string name="minibar_title__mobile_network">Mobilfunk-Einstellungen</string>
+    <string name="minibar_title__search_bar">Such-Leiste öffnen</string>
+    <string name="intro4_text">Suche im WWW oder filtere deine Apps mit der Such-Leiste.</string>
+    <string name="intro1_text">Ein Open-Source-Launcher mit vielen nützlichen Funktionen.</string>
+    <string name="pref_title__gesture_notifications">Benachrichtigungsanzahl</string>
+    <string name="pref_summary__gesture_notifications">Aktualisiere die Zahl neben Icons, sobald neue Benachrichtigungen eintreffen.</string>
 </resources>

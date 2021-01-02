@@ -59,8 +59,7 @@ public class ItemViewFactory {
                     view = builder.setAppItem(item).getView();
 
                     if (Setup.appSettings().getNotificationStatus()) {
-                        NotificationListener.setNotificationCallback(app.getPackageName(),
-                                (NotificationListener.NotificationCallback) view);
+                        NotificationListener.setNotificationCallback(app.getPackageName(), (NotificationListener.NotificationCallback) view);
                     }
                     break;
                 case SHORTCUT:
