@@ -100,7 +100,7 @@ public class AppDrawerPage extends ViewPager {
             AppDrawerPage.this._apps = allApps;
             calculatePage();
             setAdapter(new Adapter());
-            if (_appDrawerIndicator != null)
+            if (_appDrawerIndicator != null && Setup.appSettings().getDrawerShowIndicator())
                 _appDrawerIndicator.setViewPager(AppDrawerPage.this);
         }
         Setup.appLoader().addUpdateListener(new AppUpdateListener() {
@@ -109,7 +109,7 @@ public class AppDrawerPage extends ViewPager {
                 AppDrawerPage.this._apps = apps;
                 calculatePage();
                 setAdapter(new Adapter());
-                if (_appDrawerIndicator != null)
+                if (_appDrawerIndicator != null && Setup.appSettings().getDrawerShowIndicator())
                     _appDrawerIndicator.setViewPager(AppDrawerPage.this);
 
                 return false;
@@ -120,7 +120,7 @@ public class AppDrawerPage extends ViewPager {
     public void withHome(PagerIndicator appDrawerIndicator) {
         _appDrawerIndicator = appDrawerIndicator;
         appDrawerIndicator.setMode(PagerIndicator.Mode.DOTS);
-        if (getAdapter() != null)
+        if (getAdapter() != null && Setup.appSettings().getDrawerShowIndicator())
             appDrawerIndicator.setViewPager(AppDrawerPage.this);
     }
 
