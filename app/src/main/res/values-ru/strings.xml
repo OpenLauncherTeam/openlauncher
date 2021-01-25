@@ -140,7 +140,7 @@
     <string name="pref_title__drawer_label_font_size">Размер текста</string>
 
     <string name="pref_title__gesture_notifications">Счетчики уведомлений</string>
-    <string name="pref_summary__gesture_notifications">Обновлять счетчики на иконках прилодений при новых уведомлениях</string>
+    <string name="pref_summary__gesture_notifications">Обновлять счетчики на иконках приложений при новых уведомлениях</string>
     <string name="pref_title__gesture_feedback">Виброотклик на жесты</string>
     <string name="pref_summary__gesture_feedback">Виброотклик при долгом нажатии на элементе домашнего экрана</string>
     <string name="pref_title__gesture_quick_swipe">Открывать меню жестом</string>
