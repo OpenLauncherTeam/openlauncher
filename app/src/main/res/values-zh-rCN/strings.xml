@@ -1,181 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!-- Titles -->
-
-    <string name="minibar">快捷操作栏</string>
-
-    <!-- Drag Option View -->
-
-    <!-- Desktop Option View -->
-
-    <!-- Toasts -->
-
-    <string name="toast_device_admin_required">请启用设备管理器</string>
-
     <!-- Intro -->
-
-    <string name="intro2_text">在主页左侧右滑来打开快捷操作栏. 你可以找到设置,
-        更换壁纸, 或者做许多其他的事.</string>
-    <string name="intro3_text">你可以设置你的桌面, 应用抽屉, 以及托盘. 试试吧.</string>
+    <string name="intro1_text">一款拥有众多有用功能的开源启动器</string>
+    <string name="intro1_community">大型社区</string>
+    <string name="intro1_features">功能众多</string>
+    <string name="intro1_customizable">可定制</string>
+    <string name="intro2_text">从主屏幕的左侧滑动进入，打开迷你栏并选择一个操作。</string>
+    <string name="intro3_text">你可以为你的应用程序抽屉选择一个样式，并在设置中隐藏不用的应用程序。</string>
+    <string name="intro4_text">在网络上搜索或从搜索栏过滤你的应用程序。</string>
 
     <!-- Minibar -->
-
-    <string name="minibar_summary__edit_minibar">调整快捷操作栏的布局</string>
-    <string name="minibar_summary__set_wallpaper">设置或模糊壁纸</string>
-    <string name="minibar_summary__lock_screen">立即锁定屏幕, 需要设备管理器</string>
-    <string name="minibar_summary__device_settings">系统设置快捷方式</string>
+    <string name="minibar">迷你栏</string>
+    <string name="minibar_title__edit_minibar">编辑迷你栏</string>
+    <string name="minibar_summary__edit_minibar">更改迷你栏布局</string>
+    <string name="minibar_title__set_wallpaper">设置壁纸</string>
+    <string name="minibar_summary__set_wallpaper">设置桌面壁纸</string>
+    <string name="minibar_title__lock_screen">锁定屏幕</string>
+    <string name="minibar_summary__lock_screen">立即锁屏</string>
+    <string name="minibar_title__device_settings">设备设置</string>
+    <string name="minibar_summary__device_settings">设备设置快捷方式</string>
+    <string name="minibar_title__launcher_settings">启动器设置</string>
     <string name="minibar_summary__launcher_settings">OpenLauncher 设置快捷方式</string>
-    <string name="minibar_summary__volume_dialog">显示音量调节</string>
+    <string name="minibar_title__volume_dialog">音量对话框</string>
+    <string name="minibar_summary__volume_dialog">展示所有可用的音量滑块</string>
+    <string name="minibar_title__app_drawer">打开应用抽屉</string>
     <string name="minibar_summary__app_drawer">打开应用抽屉</string>
+    <string name="minibar_title__search_bar">打开搜索栏</string>
+    <string name="minibar_summary__search_bar">打开搜索栏</string>
+    <string name="minibar_title__mobile_network">移动网络设置</string>
+    <string name="minibar_summary__mobile_network">移动网络设置快捷方式</string>
+    <string name="minibar_title__notification_bar">显示通知栏</string>
+    <string name="minibar_summary__notification_bar">展开屏幕顶部的通知视图</string>
+    <string name="minibar_title__camera">相机</string>
+    <string name="minibar_summary__camera">用你的相机应用拍一张照片</string>
 
     <!-- About -->
-
     <string name="about_libs">开源库</string>
-    <string name="about_rate">评分</string>
+    <string name="about_rate">评价</string>
     <string name="about_credit">贡献者</string>
+    <string name="community">社区</string>
+    <string name="more_info_foss">更多关于为 Android 上的开源项目作贡献的信息。</string>
+    <string name="join_community">加入社区</string>
+    <string name="bug_reports_suggest_improvements">在 GitHub 上报告错误并建议功能改进</string>
+    <string name="help_translating_this_app">通过 GitHub 或 Stringlate 将此应用翻译到其他语言！</string>
+    <string name="source_code">源代码</string>
+    <string name="project_license">项目许可证</string>
+    <string name="project_contribution_info">贡献信息</string>
+    <string name="more_info_on_how_to_contribute_to_this_project">你如何为这个项目作贡献</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">为项目贡献代码。欢迎大家提交修改!</string>
+    <string name="project_team">项目团队</string>
+    <string name="contributors_public_info">改进启动器之后，贡献者可以提供要在这里显示的信息。</string>
+    <string name="contribute">作贡献</string>
+    <string name="donate">捐赠</string>
+    <string name="help">帮助</string>
+    <string name="licenses">许可证</string>
+    <string name="contributors">贡献者</string>
+    <string name="changelog">变更记录</string>
+    <string name="more">更多</string>
+    <string name="open_source_licenses">开放源码许可</string>
+    <string name="rate_the_app">评价</string>
+    <string name="translate">翻译</string>
+    <string name="bug_reports">报告错误</string>
+    <string name="more_info_support">更多关于捐赠或支持这个项目的信息。</string>
+    <string name="android_contribution_guide">安卓开发</string>
 
     <!-- Settings -->
-
+    <string name="pref_title__settings">设置</string>
     <string name="pref_title__desktop">桌面</string>
     <string name="pref_title__dock">托盘</string>
     <string name="pref_title__app_drawer">应用抽屉</string>
-    <string name="pref_title__gestures">手势</string>
-    <string name="pref_title__icons">图标</string>
-    <string name="pref_title__advanced">杂项</string>
+    <string name="pref_title__appearance">外观</string>
+    <string name="pref_title__behavior">行为</string>
+    <string name="pref_title__advanced">高级</string>
+    <string name="pref_title__hide_apps">隐藏应用</string>
     <string name="pref_title__about">关于</string>
 
     <string name="pref_title__size">尺寸</string>
     <string name="pref_title__style">样式</string>
-    <string name="pref_title__appearance">外观</string>
     <string name="pref_title__color">颜色</string>
+    <string name="pref_title__icons">图标</string>
     <string name="pref_title__search_bar">搜索栏</string>
+    <string name="pref_title__interfaces">界面</string>
+    <string name="pref_title__inputs">输入</string>
+    <string name="pref_title__feels">感觉</string>
+    <string name="pref_title__gestures">手势</string>
+    <string name="pref_title__others">其他</string>
+    <string name="pref_title__animations">动画</string>
+    <string name="pref_title__debug">调试</string>
 
-    <string name="pref_title__search_bar_enable">搜索栏</string>
-    <string name="pref_summary__search_bar_enable">在桌面上部显示一个搜索栏</string>
+    <string name="pref_title__desktop_indicator_style">指示器样式</string>
+    <string name="pref_title__desktop_wallpaper_scroll">壁纸滚动</string>
+    <string name="pref_title__desktop_orientation">方向</string>
+    <string name="pref_title__desktop_show_grid">显示网格</string>
+    <string name="pref_summary__desktop_show_grid">拖动项目时显示引导网格</string>
     <string name="pref_title__desktop_fullscreen">全屏</string>
-    <string name="pref_summary__desktop_fullscreen">全屏显示桌面</string>
+    <string name="pref_summary__desktop_fullscreen">为桌面启用全屏</string>
     <string name="pref_title__desktop_show_position_indicator">位置指示器</string>
-    <string name="pref_summary__desktop_show_position_indicator">在桌面下部显示页面指示器</string>
+    <string name="pref_summary__desktop_show_position_indicator">在桌面下方显示页面指示器。</string>
     <string name="pref_title__desktop_show_label">显示标签</string>
-    <string name="pref_summary__desktop_show_label">在项的图标下方显示相应标签</string>
-    <string name="pref_title__search_bar_base_uri">搜索链接</string>
-    <string name="pref_summary__search_bar_base_uri">设置网络搜索使用的链接</string>
-    <string name="pref_title__search_bar_force_browser">强制使用浏览器搜索</string>
-    <string name="pref_summary__search_bar_force_browser">使用浏览器处理所有在线搜索</string>
-    <string name="pref_dialog__search_bar_base_uri">输入网络搜索使用的链接. 标识 {query} 被用作搜索请求的占位符, 若不设置则在搜索链接末端附加搜索请求.</string>
+    <string name="pref_summary__desktop_show_label">在项目图标下面显示项目标签。</string>
     <string name="pref_title__desktop_background_color">背景</string>
+    <string name="pref_title__desktop_inset_color">系统栏</string>
     <string name="pref_title__desktop_folder_color">文件夹</string>
 
+    <string name="pref_title__search_bar_enable">搜索栏</string>
+    <string name="pref_summary__search_bar_enable">在桌面上方显示一个搜索栏</string>
+    <string name="pref_title__search_bar_starts_with">按名称搜索应用</string>
+    <string name="pref_summary__search_bar_starts_with">搜索名称以搜索文本开头的应用</string>
+    <string name="pref_title__search_bar_base_uri">搜索 URI</string>
+    <string name="pref_summary__search_bar_base_uri">设置用于 web 搜索的 URI </string>
+    <string name="pref_dialog__search_bar_base_uri">输入应被用于 web 搜索的 URI。标签 {query} 可作为搜索查询的占位符；
+	如果没有使用占位符，搜索查询将被追加到 URI 的末尾。</string>
+    <string name="pref_title__search_bar_force_browser">强制浏览器搜索</string>
+    <string name="pref_summary__search_bar_force_browser">始终用此浏览器进行在线搜索</string>
+    <string name="pref_title__search_bar_show_hidden_apps">显示隐藏应用</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">在搜索结果中包含隐藏应用</string>
+
+    <string name="pref_title__date_bar">日期栏</string>
+    <string name="pref_title__date_bar_text_color">文本颜色</string>
+    <string name="pref_title__date_bar_date_format">日期格式</string>
+    <string name="pref_title__date_bar_date_format_custom_1">自定义格式：Line 1</string>
+    <string name="pref_title__date_bar_date_format_custom_2">自定义格式：Line 2</string>
+
     <string name="pref_title__dock_show_label">显示标签</string>
-    <string name="pref_summary__dock_show_label">在项的图标下方显示相应标签</string>
+    <string name="pref_summary__dock_show_label">在项目图标下方显示标签</string>
     <string name="pref_title__dock_background_color">背景</string>
 
     <string name="pref_title__drawer_style">样式</string>
-    <string name="pref_summary__drawer_style">选择使用分页或垂直的应用抽屉</string>
-    <string name="pref_title__hide_apps">隐藏应用</string>
-    <string name="pref_title__drawer_show_card_view">卡片背景</string>
-    <string name="pref_summary__drawer_show_card_view">在抽屉背景上方显示一个卡片</string>
-    <string name="pref_title__drawer_remember_position">记住最后所在的页面</string>
-    <string name="pref_summary__drawer_remember_position">保留当前所在的应用抽屉页面</string>
+    <string name="pref_summary__drawer_style">选择使用分页应用抽屉还是垂直应用抽屉</string>
+    <string name="pref_title__drawer_show_card_view">卡片视图</string>
+    <string name="pref_summary__drawer_show_card_view">在抽屉背景上方显示卡片视图</string>
+    <string name="pref_title__drawer_remember_position">记住最后抽屉页</string>
+    <string name="pref_summary__drawer_remember_position">记录当前的应用程序抽屉页。</string>
     <string name="pref_title__drawer_show_position_indicator">位置指示器</string>
-    <string name="pref_summary__drawer_show_position_indicator">根据样式显示页面指示器或滚动条</string>
+    <string name="pref_summary__drawer_show_position_indicator">根据样式显示页面指示器或滚动条。</string>
     <string name="pref_title__drawer_show_label">显示标签</string>
-    <string name="pref_summary__drawer_show_label">在项的图标下方显示相应标签</string>
+    <string name="pref_summary__drawer_show_label">在项目图标下方显示标签</string>
     <string name="pref_title__drawer_background_color">背景</string>
-    <string name="pref_title__drawer_card_color">卡片背景</string>
+    <string name="pref_title__drawer_card_color">卡片视图</string>
     <string name="pref_title__drawer_label_color">标签</string>
+    <string name="pref_title__drawer_fast_scroll_color">滚动条</string>
+    <string name="pref_title__drawer_label_font_size">标签字体大小</string>
 
-    <string name="pref_title__gesture_quick_swipe">滑动打开抽屉</string>
-    <string name="pref_summary__gesture_quick_swipe">在托盘处上滑来打开应用抽屉</string>
-    <string name="pref_title__gesture_double_tap">双击</string>
-    <string name="pref_title__gesture_swipe_up">上滑</string>
-    <string name="pref_title__gesture_swipe_down">下滑</string>
-    <string name="pref_title__gesture_pinch_in">捏合</string>
-    <string name="pref_title__gesture_pinch_out">外张</string>
-    <string name="pref_title__gesture_feedback">反馈</string>
+    <string name="pref_title__gesture_notifications">通知徽章</string>
+    <string name="pref_summary__gesture_notifications">通知到达时，用一个徽章更新图标。</string>
+    <string name="pref_title__gesture_feedback">手势反馈</string>
+    <string name="pref_summary__gesture_feedback">长按桌面上的一个项目时获得反馈</string>
+    <string name="pref_title__gesture_quick_swipe">快速滑动抽屉</string>
+    <string name="pref_summary__gesture_quick_swipe">向上滑动托盘以打开应用抽屉。</string>
+    <string name="pref_title__gesture_double_tap">轻敲两次</string>
+    <string name="pref_title__gesture_swipe_up">向上滑</string>
+    <string name="pref_title__gesture_swipe_down">向下滑</string>
+    <string name="pref_title__gesture_pinch_in">双指向内并拢</string>
+    <string name="pref_title__gesture_pinch_out">双指外张</string>
 
-    <string name="pref_summary__icon_size">所有图标的尺寸</string>
+    <string name="pref_title__theme">主题</string>
+    <string name="pref_summary__theme">设置整个应用的主题</string>
+    <string name="pref_title__primary_color">基色</string>
+    <string name="pref_summary__primary_color">设置应用的基色</string>
+    <string name="pref_title__icon_size">图标尺寸</string>
+    <string name="pref_summary__icon_size">所有应用图标的尺寸</string>
     <string name="pref_title__icon_pack">图标包</string>
-    <string name="pref_summary__icon_pack">选择一个已安装的图标包</string>
+    <string name="pref_summary__icon_pack">选择一款已安装的图标包</string>
+    <string name="pref_title__animation_speed_modifier">动画速度</string>
+    <string name="pref_summary__animation_speed_modifier">修改动画的整体速度</string>
 
+    <string name="pref_title__language">语言</string>
+    <string name="pref_summary__language">改变整个启动器使用的语言</string>
     <string name="pref_title__backup">备份</string>
-    <string name="pref_summary__backup">备份和恢复你的设置</string>
-    <string name="pref_title__reset_database">清空数据库</string>
-    <string name="pref_summary__reset_database">删除托盘和桌面的数据以修复错误</string>
+    <string name="pref_summary__backup">将你的桌面和设置备份到任何位置</string>
+    <string name="pref_title__restore">还原</string>
+    <string name="pref_summary__restore">还原你的桌面和设置</string>
+    <string name="pref_title__reset_settings">重置设置</string>
+    <string name="pref_summary__reset_settings">删除用于储存设置的内部文件</string>
+    <string name="pref_title__reset_database">重置数据库</string>
+    <string name="pref_summary__reset_database">从桌面移除所有项目</string>
     <string name="pref_title__restart">重启</string>
-    <string name="pref_summary__restart">如果启动器出错，重启它</string>
+    <string name="pref_summary__restart">这可被用来手动应用一些设置</string>
 
+    <!-- Arrays -->
     <string name="vertical_scroll_drawer">垂直</string>
     <string name="horizontal_paged_drawer">分页</string>
 
-    <!-- Preference Keys -->
+    <string name="indicator_mode_dots">点</string>
+    <string name="indicator_mode_lines">线</string>
 
-    <!-- Item Labels -->
+    <string name="orientation_mode_portrait">竖屏</string>
+    <string name="orientation_mode_rotate">旋转</string>
+    <string name="orientation_mode_landscape">横屏</string>
 
-    <string name="default_icons">默认</string>
+    <string name="scroll_normal">正常</string>
+    <string name="scroll_inverse">颠倒</string>
+    <string name="scroll_off">关闭</string>
+
+    <string name="none">无</string>
+    <string name="app">应用程序</string>
+
+    <string name="light">浅色</string>
+    <string name="dark">深色</string>
+    <string name="black">黑色</string>
 
     <!-- Dialogs -->
-
-    <string name="please_wait">正在搜索已安装的应用, 请稍候</string>
-    <string name="on">开</string>
+    <string name="please_wait">正在搜索已安装应用。请等候。</string>
+    <string name="are_you_sure">你确定吗？除非你有备份，否则此操作无法撤消。</string>
+    <string name="device_admin_title">设备管理员</string>
+    <string name="device_admin_summary">OpenLauncher 需要设备管理权限才能锁定屏幕。</string>
     <string name="select_app">选择应用</string>
-    <string name="off">关</string>
-    <string name="version">版本</string>
     <string name="select_wallpaper">选择壁纸</string>
     <string name="select_icon_pack">选择图标包</string>
-    <string name="toast_icon_pack_error">没有读取外置存储的权限, 无法获取图标</string>
-    <string name="toast_backup_success">完成.</string>
-    <string name="toast_backup_error">出了些问题</string>
-    <string name="columns">列数</string>
-    <string name="rows">行数</string>
     <string name="volume_level_ringtone">铃声</string>
     <string name="volume_level_notification">通知</string>
     <string name="volume_level_system">系统</string>
     <string name="volume_level_media">媒体</string>
+    <string name="notification_title">通知访问</string>
+    <string name="notification_summary">OpenLauncher 需要通知权限来展示图标徽章</string>
 
-
-    <!-- Titles -->
-
-    <string name="pref_title__settings">设置</string>
+    <!-- Other -->
+    <string name="columns">列</string>
+    <string name="rows">行</string>
+    <string name="on">打开</string>
+    <string name="off">关闭</string>
+    <string name="search_hint">搜索</string>
+    <string name="bad_format">坏格式</string>
+    <string name="version">版本</string>
+    <string name="enable">启用</string>
+    <string name="placeholder">你好，世界！</string>
+    <string name="custom">自定义</string>
+    <string name="default_folder">未命名</string>
+    <string name="default_icons">默认</string>
 
     <!-- Drag Option View -->
-
     <string name="edit">编辑</string>
     <string name="info">信息</string>
     <string name="uninstall">卸载</string>
     <string name="remove">移除</string>
+    <string name="resize">调整大小</string>
 
     <!-- Desktop Option View -->
-
     <string name="home">主页</string>
-    <string name="action">动作</string>
+    <string name="action">操作</string>
     <string name="lock">锁定</string>
     <string name="widget">小部件</string>
 
     <!-- Toasts -->
-
     <string name="toast_not_enough_space">空间不足</string>
-    <string name="toast_app_uninstalled">卸载完成</string>
-
-    <!-- Intro -->
-
-    <!-- Minibar -->
-
-    <!-- About -->
-
-    <!-- Settings -->
-
-    <!-- Preference Keys -->
-
-    <!-- Internal Keys -->
-
-    <!-- Item Labels -->
-
-    <string name="default_folder">未命名</string>
-
-    <!-- Dialogs -->
-
-    <string name="search_hint">搜索...</string>
-
+    <string name="toast_app_uninstalled">应用已被卸载</string>
+    <string name="toast_device_admin_required">请启用设备管理权限</string>
+    <string name="toast_notification_permission_required">请允许通知</string>
+    <string name="toast_backup_success">备份完成</string>
+    <string name="toast_backup_error">出错了</string>
+    <string name="toast_settings_restored">已还原设置</string>
+    <string name="toast_database_deleted">已删除数据库</string>
+    <string name="toast_icon_pack_error">请允许访问外部存储</string>
+    <string name="toast_remove_from_group_first">先将项目从组中移除</string>
+    <string name="toast_update_group_due_to_missing_items">已卸载或隐藏的应用程序从该组中被删除。</string>
 </resources>
