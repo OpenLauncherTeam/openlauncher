@@ -3,27 +3,27 @@
     <!-- Intro -->
     <string name="intro1_text">Лаунчер с открытым исходным кодом с огромным количеством настроек и функций</string>
     <string name="intro1_community">Рабочее окружение от сообщества и для сообщества</string>
-    <string name="intro1_features">Возможности</string>
+    <string name="intro1_features">С различными функциями</string>
     <string name="intro1_customizable">Настраиваемый</string>
-    <string name="intro2_text">Проведите пальцем слева направо от левой границы рабочего стола, чтобы открыть мини-бар. Там можно найти настройки,  сменить обои и сделать много других вещей.</string>
-    <string name="intro3_text">Вы можете настроить рабочий стол, меню приложений и док, просто попробуйте!</string>
-    <string name="intro4_text">Поисковый запрос</string>
+    <string name="intro2_text">Проведите пальцем слева направо от левой границы рабочего стола, чтобы открыть мини-бар. С его помощью можно сменить обои, вызвать настройки и прочее.</string>
+    <string name="intro3_text">Настройте стиль вашего меню приложений и скройте те, что не используете.</string>
+    <string name="intro4_text">Ищите то, что вам нужно как среди ваших приложений, так и в интернете.</string>
 
     <!-- Minibar -->
     <string name="minibar">Мини-бар</string>
-    <string name="minibar_title__edit_minibar">Правка мини-бара</string>
+    <string name="minibar_title__edit_minibar">Изменить мин-бара</string>
     <string name="minibar_summary__edit_minibar">Изменить вид мини-бара.</string>
-    <string name="minibar_title__set_wallpaper">Установить заставку</string>
-    <string name="minibar_summary__set_wallpaper">Установить или размыть обои.</string>
-    <string name="minibar_title__lock_screen">Блокировать экран</string>
-    <string name="minibar_summary__lock_screen">Заблокировать экран, требует прав администратора устройства.</string>
+    <string name="minibar_title__set_wallpaper">Установить обои</string>
+    <string name="minibar_summary__set_wallpaper">Установить обои рабочего стола</string>
+    <string name="minibar_title__lock_screen">Блокировка устройства</string>
+    <string name="minibar_summary__lock_screen">Заблокировать устройство.</string>
     <string name="minibar_title__device_settings">Настройки устройства</string>
     <string name="minibar_summary__device_settings">Быстрый доступ к настройкам устройства.</string>
-    <string name="minibar_title__launcher_settings">Настройки Launcher</string>
+    <string name="minibar_title__launcher_settings">Настройки OpenLauncher</string>
     <string name="minibar_summary__launcher_settings">Быстрый доступ к настройкам OpenLauncher.</string>
     <string name="minibar_title__volume_dialog">Громкость</string>
     <string name="minibar_summary__volume_dialog">Отобразить регуляторы громкости.</string>
-    <string name="minibar_title__app_drawer">Открыть приложение для рисования</string>
+    <string name="minibar_title__app_drawer">Открыть меню приложений</string>
     <string name="minibar_summary__app_drawer">Открыть меню приложений.</string>
     <string name="minibar_title__search_bar">Показать строку поиска</string>
     <string name="minibar_summary__search_bar">Показать строку для поиска</string>
@@ -38,16 +38,16 @@
     <string name="about_credit">Участники</string>
     <string name="community">Сообщество</string>
     <string name="more_info_foss">Дополнительная информация о сотрудничестве в проектах с открытым исходным кодом на платформе Android</string>
-    <string name="join_community">Присоединись к сообществу</string>
+    <string name="join_community">Присоединиться к сообществу</string>
     <string name="bug_reports_suggest_improvements">Сообщить о проблеме или предложить улучшение на GitHub</string>
-    <string name="help_translating_this_app">Переведи это приложение на другие языки с GitHub или Stringlate!</string>
+    <string name="help_translating_this_app">Помочь с переводом приложения на другие языки на GitHub или Stringlate</string>
     <string name="source_code">Исходный код</string>
-    <string name="project_license">Лицензия проекта</string>
-    <string name="project_contribution_info">Информация о сотрудничестве</string>
-    <string name="more_info_on_how_to_contribute_to_this_project">Как Вы можете помочь этому проекту</string>
-    <string name="contribute_code_to_this_project_anybody_welcome">Содействуй в написании кода в этом проекте. Добро пожаловать !</string>
-    <string name="project_team">Комманда проекта</string>
-    <string name="contributors_public_info">Люди, сотрудничавшие в улучшении этого проекта будут упомянуты здесь</string>
+    <string name="project_license">Лицензия</string>
+    <string name="project_contribution_info">Информация для участников</string>
+    <string name="more_info_on_how_to_contribute_to_this_project">Как помочь проекту</string>
+    <string name="contribute_code_to_this_project_anybody_welcome">Содействуй в написании кода в этом проекте. Наш проект открыт для всех!</string>
+    <string name="project_team">Команда проекта</string>
+    <string name="contributors_public_info">Люди, сотрудничавшие в улучшении этого проекта будут здесь упомянуты</string>
     <string name="contribute">Сотрудничать</string>
     <string name="donate">Пожертвовать</string>
     <string name="help">Помощь</string>
@@ -87,7 +87,7 @@
     <string name="pref_title__debug">Отладка</string>
 
     <string name="pref_title__desktop_indicator_style">Стиль индикатора</string>
-    <string name="pref_title__desktop_wallpaper_scroll">Смена заставки</string>
+    <string name="pref_title__desktop_wallpaper_scroll">Прокрутка обоев</string>
     <string name="pref_title__desktop_orientation">Ориентация</string>
     <string name="pref_title__desktop_show_grid">Показывать сетку</string>
     <string name="pref_summary__desktop_show_grid">Показывать вспомогательную сетку при перетаскивании</string>
@@ -111,7 +111,7 @@
     <string name="pref_title__search_bar_force_browser">Всегда искать в браузере</string>
     <string name="pref_summary__search_bar_force_browser">Всегда использовать браузер для онлайн-поиска.</string>
     <string name="pref_title__search_bar_show_hidden_apps">Показывать скрытые приложения</string>
-    <string name="pref_summary__search_bar_show_hidden_apps">Включить спрятанные приложения в результаты поиска.</string>
+    <string name="pref_summary__search_bar_show_hidden_apps">Включить скрытые приложения в результаты поиска.</string>
 
     <string name="pref_title__date_bar">Панель даты</string>
     <string name="pref_title__date_bar_text_color">Цвет текста</string>
@@ -124,7 +124,7 @@
     <string name="pref_title__dock_background_color">Фон</string>
 
     <string name="pref_title__drawer_style">Стиль</string>
-    <string name="pref_summary__drawer_style">Выбрать между постраничным и вертикальным меню приложений.</string>
+    <string name="pref_summary__drawer_style">Выбрать между постраничным и вертикальным видом меню приложений.</string>
     <string name="pref_title__drawer_show_card_view">Карточка</string>
     <string name="pref_summary__drawer_show_card_view">Показывать карточку поверх фона меню.</string>
     <string name="pref_title__drawer_remember_position">Запоминать последнюю страницу</string>
@@ -140,9 +140,9 @@
     <string name="pref_title__drawer_label_font_size">Размер текста</string>
 
     <string name="pref_title__gesture_notifications">Счетчики уведомлений</string>
-    <string name="pref_summary__gesture_notifications">Обновлять счетчики на иконках приложений при новых уведомлениях</string>
+    <string name="pref_summary__gesture_notifications">Обновлять счетчики на иконках приложений при новых уведомлениях.</string>
     <string name="pref_title__gesture_feedback">Виброотклик на жесты</string>
-    <string name="pref_summary__gesture_feedback">Виброотклик при долгом нажатии на элементе домашнего экрана</string>
+    <string name="pref_summary__gesture_feedback">Виброотклик при долгом нажатии на элементе рабочего стола.</string>
     <string name="pref_title__gesture_quick_swipe">Открывать меню жестом</string>
     <string name="pref_summary__gesture_quick_swipe">Проведите пальцем вверх из дока, чтобы открыть меню приложений.</string>
     <string name="pref_title__gesture_double_tap">Двойное нажатие</string>
@@ -169,11 +169,11 @@
     <string name="pref_title__restore">Восстановить</string>
     <string name="pref_summary__restore">Восстановить вид и настройки</string>
     <string name="pref_title__reset_settings">Сбросить настройки</string>
-    <string name="pref_summary__reset_settings">Удалить локальные файлы настроек</string>
+    <string name="pref_summary__reset_settings">Удалить локальные файлы настроек.</string>
     <string name="pref_title__reset_database">Очистить базу данных</string>
-    <string name="pref_summary__reset_database">Удалить данные дока и рабочего стола, чтобы исправить проблемы.</string>
+    <string name="pref_summary__reset_database">Удалить данные дока и рабочего стола.</string>
     <string name="pref_title__restart">Перезапустить</string>
-    <string name="pref_summary__restart">Перезапустить лаунчер, если он странно себя ведёт.</string>
+    <string name="pref_summary__restart">Перезапустить лаунчер для ручного применения некоторых настроек.</string>
 
     <!-- Arrays -->
     <string name="vertical_scroll_drawer">Вертикальный</string>
@@ -184,7 +184,7 @@
 
     <string name="orientation_mode_portrait">Портрет</string>
     <string name="orientation_mode_rotate">Повернуть</string>
-    <string name="orientation_mode_landscape">горизонтальный</string>
+    <string name="orientation_mode_landscape">Горизонтальный</string>
 
     <string name="scroll_normal">Нормально</string>
     <string name="scroll_inverse">Обратить</string>
@@ -198,10 +198,10 @@
     <string name="black">Черный</string>
 
     <!-- Dialogs -->
-    <string name="please_wait">Поиск установленных приложений. Подождите.</string>
-    <string name="are_you_sure">Вы уверены? Это действие нельзя отменить, только восстановиться с резервной копии</string>
-    <string name="device_admin_title">Администратор устройства</string>
-    <string name="device_admin_summary">OpenLauncher необходимо быть администратором устройства, чтобы иметь возможность блокировки экрана</string>
+    <string name="please_wait">Поиск установленных приложений. Пожалуйста, подождите.</string>
+    <string name="are_you_sure">Вы уверены? Это действие нельзя будет отменить, только восстановиться с резервной копии.</string>
+    <string name="device_admin_title">Администрирование устройства</string>
+    <string name="device_admin_summary">OpenLauncher необходимо иметь разрешение на администрирование устройства, чтобы иметь возможность блокировки экрана.</string>
     <string name="select_app">Выберите приложение</string>
     <string name="select_wallpaper">Выберите обои</string>
     <string name="select_icon_pack">Выберите набор значков</string>
@@ -210,7 +210,7 @@
     <string name="volume_level_system">Система</string>
     <string name="volume_level_media">Медиа</string>
     <string name="notification_title">Доступ к уведомлениям</string>
-    <string name="notification_summary">OpenLauncher требуется разрешение на показ уведомлений</string>
+    <string name="notification_summary">OpenLauncher требуется разрешение на показ уведомлений.</string>
 
     <!-- Other -->
     <string name="columns">Столбцы</string>
@@ -221,8 +221,8 @@
     <string name="bad_format">Неверный формат</string>
     <string name="version">Версия</string>
     <string name="enable">Включить</string>
-    <string name="placeholder">Привет мир!</string>
-    <string name="custom">Изменение</string>
+    <string name="placeholder">Привет, мир!</string>
+    <string name="custom">Свой формат</string>
     <string name="default_folder">Без имени</string>
     <string name="default_icons">По умолчанию</string>
 
@@ -244,7 +244,11 @@
     <string name="toast_app_uninstalled">Приложение удалено.</string>
     <string name="toast_device_admin_required">Пожалуйста, разрешите администрирование устройства.</string>
     <string name="toast_notification_permission_required">Пожалуйста, включите уведомления</string>
-    <string name="toast_backup_success">Готово.</string>
+    <string name="toast_backup_success">Резервная копия готова.</string>
     <string name="toast_backup_error">Что-то пошло не так.</string>
+    <string name="toast_settings_restored">Настройки восстановлены из резервной копии.</string>
+    <string name="toast_database_deleted">Локальные настройки удалены.</string>
     <string name="toast_icon_pack_error">Не удалось захватить значок без разрешения READ_EXTERNAL_STORAGE.</string>
+    <string name="toast_remove_from_group_first">Удалите сначала элемент из группы.</string>
+    <string name="toast_update_group_due_to_missing_items">Удаленные или скрытые приложения удалены из группы.</string>
 </resources>
