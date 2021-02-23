@@ -87,6 +87,7 @@
     <string name="pref_key__cat_dock" translatable="false">pref_key__cat_dock</string>
     <string name="pref_key__cat_app_drawer" translatable="false">pref_key__cat_app_drawer</string>
     <string name="pref_key__cat_appearance" translatable="false">pref_key__cat_appearance</string>
+    <string name="pref_key__cat_android_tv" translatable="false">pref_key__cat_android_tv</string>
     <string name="pref_key__cat_behavior" translatable="false">pref_key__cat_behavior</string>
     <string name="pref_key__cat_hide_apps" translatable="false">pref_key__cat_hide_apps</string>
     <string name="pref_key__cat_advanced" translatable="false">pref_key__cat_advanced</string>

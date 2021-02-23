@@ -2,6 +2,8 @@ package com.benny.openlauncher.activity;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.app.UiModeManager;
+import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,6 +12,8 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
@@ -18,6 +22,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -45,6 +50,7 @@ import com.benny.openlauncher.receivers.ShortcutReceiver;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DatabaseHelper;
+import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherAction.Action;
@@ -199,6 +205,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             decorView.setSystemUiVisibility(1536);
         }
 
+        //WallpaperManager.getInstance(getApplicationContext());
+
         init();
     }
 
@@ -311,6 +319,21 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         getMinibarFrame().setBackgroundColor(appSettings.getMinibarBackgroundColor());
         getStatusView().setBackgroundColor(appSettings.getDesktopInsetColor());
         getNavigationView().setBackgroundColor(appSettings.getDesktopInsetColor());
+
+        //getBackground().setAlpha(1);
+        //NICOLA
+        //getBackground().setBackground(Color(Color.RED);
+        getBackground().setVisibility(View.VISIBLE);
+        getBackground().setBackgroundColor(Color.RED);
+
+        UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
+        if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
+            Log.e(this.getClass().getName(), "Running on a TV Device");
+            AppSettings.get().setString(R.string.pref_key__desktop_orientation, Definitions.DESKTOP_ORIENTATION_LANDSCAPE);
+            //getDesktop().
+        } else {
+            Log.e(this.getClass().getName(), "Running on a non-TV Device");
+        }
 
         // lock the minibar
         getDrawerLayout().setDrawerLockMode(appSettings.getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);

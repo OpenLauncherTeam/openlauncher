@@ -1,5 +1,7 @@
 package com.benny.openlauncher.util;
 
+import android.content.pm.ActivityInfo;
+
 public class Definitions {
     public static final int BUFFER_SIZE = 2048;
     public static final int INTENT_BACKUP = 5;
@@ -27,4 +29,8 @@ public class Definitions {
         Inverse,
         Off
     }
+
+    public static final String DESKTOP_ORIENTATION_PORTRAIT  = "0";
+    public static final String DESKTOP_ORIENTATION_SENSOR    = "1";
+    public static final String DESKTOP_ORIENTATION_LANDSCAPE = "2";
 }

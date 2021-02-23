@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:title="@string/pref_title__dock">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="@string/pref_key__dock_enable"
+        android:title="@string/enable" />
+
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__size">
+
+        <SeekBarPreference
+            android:defaultValue="5"
+            android:key="@string/pref_key__dock_columns"
+            android:max="20"
+            android:title="@string/columns"
+            app:min="2" />
+
+        <SeekBarPreference
+            android:defaultValue="1"
+            android:key="@string/pref_key__dock_rows"
+            android:max="10"
+            android:title="@string/rows"
+            app:min="0" />
+
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
+
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__appearance">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key__dock_show_label"
+            android:summary="@string/pref_summary__dock_show_label"
+            android:title="@string/pref_title__dock_show_label" />
+
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
+
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__color">
+
+        <com.flask.colorpicker.ColorPickerPreference
+            android:defaultValue="@color/transparent"
+            android:key="@string/pref_key__dock_background_color"
+            android:title="@string/pref_title__dock_background_color"
+            app:lightnessSlider="true"
+            app:alphaSlider="true" />
+
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
+
+</PreferenceScreen>
