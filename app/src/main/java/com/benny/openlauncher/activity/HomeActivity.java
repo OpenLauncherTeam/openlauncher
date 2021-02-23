@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
@@ -103,6 +104,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     private int cx;
     private int cy;
+
+    SharedPreferences prefs = null;
 
     public static final class Companion {
         private Companion() {
@@ -204,8 +207,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             View decorView = window.getDecorView();
             decorView.setSystemUiVisibility(1536);
         }
-
-        //WallpaperManager.getInstance(getApplicationContext());
 
         init();
     }
@@ -325,15 +326,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         //getBackground().setBackground(Color(Color.RED);
         getBackground().setVisibility(View.VISIBLE);
         getBackground().setBackgroundColor(Color.RED);
-
-        UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
-        if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
-            Log.e(this.getClass().getName(), "Running on a TV Device");
-            AppSettings.get().setString(R.string.pref_key__desktop_orientation, Definitions.DESKTOP_ORIENTATION_LANDSCAPE);
-            //getDesktop().
-        } else {
-            Log.e(this.getClass().getName(), "Running on a non-TV Device");
-        }
 
         // lock the minibar
         getDrawerLayout().setDrawerLockMode(appSettings.getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -573,6 +565,23 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             // Ask user to allow the Notification permission if not already provided.
             checkNotificationPermissions();
         }
+
+
+        // nikiink - Check at first run if on android TV (go landscape)
+        prefs = getSharedPreferences("com.benny.openlauncher", MODE_PRIVATE);
+        if (prefs.getBoolean("firstrun", true)) {
+
+            UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
+            if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
+                Log.e(this.getClass().getName(), "First start - Running on a TV Device");
+                AppSettings.get().setString(R.string.pref_key__desktop_orientation, Definitions.DESKTOP_ORIENTATION_LANDSCAPE);
+            } else {
+                Log.e(this.getClass().getName(), "First start - Running on a non-TV Device");
+            }
+
+            prefs.edit().putBoolean("firstrun", false).commit();
+        }
+
 
         // handle launcher rotation
         if (appSettings.getDesktopOrientationMode() == 2) {
