@@ -1,13 +1,18 @@
 package com.benny.openlauncher.activity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.widget.DrawableUtils;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.fragment.SettingsBaseFragment;
@@ -65,6 +70,7 @@ public class SettingsActivity extends ColorActivity implements SettingsBaseFragm
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (resultCode == RESULT_OK) {
             Setup.dataManager().close();
             List<Uri> files = Utils.getSelectedFilesFromResult(data);
@@ -77,7 +83,29 @@ public class SettingsActivity extends ColorActivity implements SettingsBaseFragm
                     BackupHelper.restoreConfig(this, Utils.getFileForUri(files.get(0)).toString());
                     System.exit(0);
                     break;
+                case Definitions.ANDROID_TV_PICK_WALLPAPER:
+                    Log.i(this.getClass().getName(), "Android Tv Picked Wallpaper");
+                    String imagePath = Utils.getFileForUri(files.get(0)).toString();
+                    Log.i(this.getClass().getName(), "Wallpaper Path: " + imagePath);
+
+
+                    findViewById(R.id.background_frame).setBackground(Drawable.createFromPath(imagePath));
+
+                    //Drawable image = (Drawable)getResources().getDrawable(R.drawable.img);
+
+
+                    //ImageView imageView = (ImageView) findViewById(R.id.image);
+                    //ContextWrapper cw = new ContextWrapper(context);
+
+                    //path to /data/data/yourapp/app_data/dirName
+                    //File directory = cw.getDir("dirName", Context.MODE_PRIVATE);
+                    //File mypath=new File(directory,"imagename.jpg");
+
+                    //imageView.setImageDrawable(Drawable.createFromPath(imagePath));
+
+                    break;
             }
         }
     }
+
 }

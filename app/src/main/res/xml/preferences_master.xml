@@ -34,7 +34,8 @@
             android:fragment="com.benny.openlauncher.fragment.SettingsAndroidTVFragment"
             android:icon="@drawable/ic_desktop"
             android:key="@string/pref_key__cat_android_tv"
-            android:title="@string/pref_title__android_tv" />
+            android:title="@string/pref_title__android_tv"
+            android:summary="@string/pref_summary__android_tv"/>
 
     </com.benny.openlauncher.widget.ColorPreferenceCategory>
 
