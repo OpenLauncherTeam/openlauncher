@@ -339,6 +339,13 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         setBool(R.string.pref_key__desktop_lock, value);
     }
 
+    // Android TV
+    public String getAndroidTvWallpaper() { return getString(R.string.pref_key__android_tv_settings_wallpaper, null); }
+    public void setAndroidTvWallpaper(String value) { setString(R.string.pref_key__android_tv_settings_wallpaper, value); }
+
+    public boolean getAndroidTvOverrideSystemWallpaper() { return getBool(R.string.pref_key__android_tv_settings_override_system_wallpaper, false); }
+    ///
+
     public boolean getAppRestartRequired() {
         return getBool(R.string.pref_key__queue_restart, false);
     }
@@ -364,4 +371,6 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
         // MUST be committed
         _prefApp.edit().putBoolean(_context.getString(R.string.pref_key__first_start), value).commit();
     }
+
+
 }

@@ -1,6 +1,8 @@
 package com.benny.openlauncher.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -18,6 +20,7 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.fragment.SettingsBaseFragment;
 import com.benny.openlauncher.fragment.SettingsMasterFragment;
 import com.benny.openlauncher.manager.Setup;
+import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.BackupHelper;
 import com.benny.openlauncher.util.Definitions;
 import com.nononsenseapps.filepicker.Utils;
@@ -88,21 +91,7 @@ public class SettingsActivity extends ColorActivity implements SettingsBaseFragm
                     String imagePath = Utils.getFileForUri(files.get(0)).toString();
                     Log.i(this.getClass().getName(), "Wallpaper Path: " + imagePath);
 
-
-                    findViewById(R.id.background_frame).setBackground(Drawable.createFromPath(imagePath));
-
-                    //Drawable image = (Drawable)getResources().getDrawable(R.drawable.img);
-
-
-                    //ImageView imageView = (ImageView) findViewById(R.id.image);
-                    //ContextWrapper cw = new ContextWrapper(context);
-
-                    //path to /data/data/yourapp/app_data/dirName
-                    //File directory = cw.getDir("dirName", Context.MODE_PRIVATE);
-                    //File mypath=new File(directory,"imagename.jpg");
-
-                    //imageView.setImageDrawable(Drawable.createFromPath(imagePath));
-
+                    _appSettings.setAndroidTvWallpaper(imagePath);
                     break;
             }
         }

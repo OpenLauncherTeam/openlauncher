@@ -15,6 +15,7 @@ import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
@@ -104,8 +105,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
 
     private int cx;
     private int cy;
-
-    SharedPreferences prefs = null;
 
     public static final class Companion {
         private Companion() {
@@ -235,6 +234,16 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             Item appDrawerBtnItem = Item.newActionItem(8);
             appDrawerBtnItem._x = 2;
             _db.saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
+
+            // nikiink - Check at first run if on android TV (go landscape)
+            UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
+            if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
+                Log.e(this.getClass().getName(), "First start - Running on a TV Device");
+                AppSettings.get().setString(R.string.pref_key__desktop_orientation, Definitions.DESKTOP_ORIENTATION_LANDSCAPE);
+            } else {
+                Log.e(this.getClass().getName(), "First start - Running on a non-TV Device");
+            }
+
         }
         Setup.appLoader().addUpdateListener(new AppUpdateListener() {
             @Override
@@ -320,12 +329,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         getMinibarFrame().setBackgroundColor(appSettings.getMinibarBackgroundColor());
         getStatusView().setBackgroundColor(appSettings.getDesktopInsetColor());
         getNavigationView().setBackgroundColor(appSettings.getDesktopInsetColor());
-
-        //getBackground().setAlpha(1);
-        //NICOLA
-        //getBackground().setBackground(Color(Color.RED);
-        getBackground().setVisibility(View.VISIBLE);
-        getBackground().setBackgroundColor(Color.RED);
 
         // lock the minibar
         getDrawerLayout().setDrawerLockMode(appSettings.getMinibarEnable() ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -566,22 +569,23 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             checkNotificationPermissions();
         }
 
+        //nukiink: set wallpaper from settings
+        Log.e(this.getClass().getName(), "ON RESUMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 
-        // nikiink - Check at first run if on android TV (go landscape)
-        prefs = getSharedPreferences("com.benny.openlauncher", MODE_PRIVATE);
-        if (prefs.getBoolean("firstrun", true)) {
+        if (appSettings.getAndroidTvOverrideSystemWallpaper()) {
+            String wallpaperPath = appSettings.getAndroidTvWallpaper();
+            Log.e(this.getClass().getName(), "Wallpaper in settings: " + wallpaperPath);
 
-            UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
-            if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
-                Log.e(this.getClass().getName(), "First start - Running on a TV Device");
-                AppSettings.get().setString(R.string.pref_key__desktop_orientation, Definitions.DESKTOP_ORIENTATION_LANDSCAPE);
-            } else {
-                Log.e(this.getClass().getName(), "First start - Running on a non-TV Device");
+            if (wallpaperPath!=null) {
+                getBackground().setBackground(Drawable.createFromPath(wallpaperPath));
+                getBackground().setVisibility(View.VISIBLE);
             }
-
-            prefs.edit().putBoolean("firstrun", false).commit();
+        } else {
+            //remove background
+            getBackground().setBackgroundResource(0);
+            getBackground().setVisibility(View.INVISIBLE);
+            //getBackground().setBackgroundColor(Color.RED);
         }
-
 
         // handle launcher rotation
         if (appSettings.getDesktopOrientationMode() == 2) {
