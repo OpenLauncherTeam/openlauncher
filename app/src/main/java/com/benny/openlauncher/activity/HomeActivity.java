@@ -3,18 +3,15 @@ package com.benny.openlauncher.activity;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.UiModeManager;
-import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION;
@@ -230,20 +227,20 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     protected void initAppManager() {
         if (Setup.appSettings().getAppFirstLaunch()) {
             Setup.appSettings().setAppFirstLaunch(false);
-            Setup.appSettings().setAppShowIntro(false);
-            Item appDrawerBtnItem = Item.newActionItem(8);
-            appDrawerBtnItem._x = 2;
-            _db.saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
 
             // nikiink - Check at first run if on android TV (go landscape)
             UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
             if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
-                Log.e(this.getClass().getName(), "First start - Running on a TV Device");
-                AppSettings.get().setString(R.string.pref_key__desktop_orientation, Definitions.DESKTOP_ORIENTATION_LANDSCAPE);
+                Log.i(this.getClass().getName(), "First start - Running on a TV Device - Setting landscape");
+                Setup.appSettings().get().setString(R.string.pref_key__desktop_orientation, Definitions.DESKTOP_ORIENTATION_LANDSCAPE);
             } else {
-                Log.e(this.getClass().getName(), "First start - Running on a non-TV Device");
+                Log.i(this.getClass().getName(), "First start - Running on a non-TV Device");
             }
 
+            Setup.appSettings().setAppShowIntro(false);
+            Item appDrawerBtnItem = Item.newActionItem(8);
+            appDrawerBtnItem._x = 2;
+            _db.saveItem(appDrawerBtnItem, 0, ItemPosition.Dock);
         }
         Setup.appLoader().addUpdateListener(new AppUpdateListener() {
             @Override
@@ -569,24 +566,6 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             checkNotificationPermissions();
         }
 
-        //nukiink: set wallpaper from settings
-        Log.e(this.getClass().getName(), "ON RESUMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-
-        if (appSettings.getAndroidTvOverrideSystemWallpaper()) {
-            String wallpaperPath = appSettings.getAndroidTvWallpaper();
-            Log.e(this.getClass().getName(), "Wallpaper in settings: " + wallpaperPath);
-
-            if (wallpaperPath!=null) {
-                getBackground().setBackground(Drawable.createFromPath(wallpaperPath));
-                getBackground().setVisibility(View.VISIBLE);
-            }
-        } else {
-            //remove background
-            getBackground().setBackgroundResource(0);
-            getBackground().setVisibility(View.INVISIBLE);
-            //getBackground().setBackgroundColor(Color.RED);
-        }
-
         // handle launcher rotation
         if (appSettings.getDesktopOrientationMode() == 2) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -630,6 +609,24 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 AppSettings appSettings = Setup.appSettings();
                 getDesktop().setCurrentItem(appSettings.getDesktopPageCurrent());
             }
+
+            //nukiink: set wallpaper from settings
+            AppSettings appSettings = Setup.appSettings();
+            if (appSettings.getAndroidTvOverrideSystemWallpaper()) {
+                String wallpaperPath = appSettings.getAndroidTvWallpaper();
+                Log.i(this.getClass().getName(), "Wallpaper in settings: " + wallpaperPath);
+
+                if (wallpaperPath!=null) {
+                    getBackground().setBackground(Drawable.createFromPath(wallpaperPath));
+                    getBackground().setVisibility(View.VISIBLE);
+                }
+            } else {
+                //remove background
+                getBackground().setBackgroundResource(0);
+                getBackground().setVisibility(View.INVISIBLE);
+                //getBackground().setBackgroundColor(Color.RED);
+            }
+
         }
     }
 

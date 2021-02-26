@@ -4,14 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
-import com.benny.openlauncher.R;
-import com.benny.openlauncher.activity.HomeActivity;
-import com.benny.openlauncher.util.Definitions;
-import com.benny.openlauncher.util.LauncherAction;
-import com.nononsenseapps.filepicker.FilePickerActivity;
 
-import net.gsantner.opoc.util.ContextUtils;
-import net.gsantner.opoc.util.PermissionChecker;
+import com.benny.openlauncher.R;
+import com.benny.openlauncher.util.Definitions;
+import com.nononsenseapps.filepicker.FilePickerActivity;
 
 public class SettingsAndroidTVFragment extends SettingsBaseFragment {
     @Override
@@ -23,11 +19,14 @@ public class SettingsAndroidTVFragment extends SettingsBaseFragment {
         preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent intent = new Intent();
+
+                Intent intent = new Intent(getActivity(), FilePickerActivity.class)
+                        .putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false)
+                        .putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                //startActivityForResult(Intent.createChooser(intent, "aaaa"), PICK_IMAGE);
                 getActivity().startActivityForResult(intent, Definitions.ANDROID_TV_PICK_WALLPAPER);
                 return true;
+
             }
         });
     }

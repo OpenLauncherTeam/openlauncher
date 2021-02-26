@@ -90,7 +90,7 @@ public class SettingsActivity extends ColorActivity implements SettingsBaseFragm
                     Log.i(this.getClass().getName(), "Android Tv Picked Wallpaper");
                     String imagePath = Utils.getFileForUri(files.get(0)).toString();
                     Log.i(this.getClass().getName(), "Wallpaper Path: " + imagePath);
-
+                    Setup.dataManager().open();
                     _appSettings.setAndroidTvWallpaper(imagePath);
                     break;
             }
