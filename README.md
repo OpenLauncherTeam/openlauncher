@@ -1,5 +1,3 @@
-##  :warning: This fork is for setting wallpaper on Android TV devices that don't support system wallpapers
-
 ![graphic](https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher/master/metadata/en-US/featureGraphic.png)
 
 ### Description

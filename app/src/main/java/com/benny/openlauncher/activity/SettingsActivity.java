@@ -1,18 +1,12 @@
 package com.benny.openlauncher.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.widget.DrawableUtils;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
@@ -20,7 +14,6 @@ import com.benny.openlauncher.R;
 import com.benny.openlauncher.fragment.SettingsBaseFragment;
 import com.benny.openlauncher.fragment.SettingsMasterFragment;
 import com.benny.openlauncher.manager.Setup;
-import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.BackupHelper;
 import com.benny.openlauncher.util.Definitions;
 import com.nononsenseapps.filepicker.Utils;
@@ -90,7 +83,7 @@ public class SettingsActivity extends ColorActivity implements SettingsBaseFragm
                     Log.i(this.getClass().getName(), "Android Tv Picked Wallpaper");
                     String imagePath = Utils.getFileForUri(files.get(0)).toString();
                     Log.i(this.getClass().getName(), "Wallpaper Path: " + imagePath);
-                    Setup.dataManager().open();
+                    Setup.dataManager().open(); // without this, you get sqlite db already closed error
                     _appSettings.setAndroidTvWallpaper(imagePath);
                     break;
             }
