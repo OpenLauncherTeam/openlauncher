@@ -228,7 +228,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         if (Setup.appSettings().getAppFirstLaunch()) {
             Setup.appSettings().setAppFirstLaunch(false);
 
-            // nikiink - Check at first run if on android TV (go landscape)
+            // tonio-nucci - Check at first run if on android TV (go landscape)
             UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
             if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
                 Log.i(this.getClass().getName(), "First start - Running on a TV Device - Setting landscape");
@@ -610,7 +610,7 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 getDesktop().setCurrentItem(appSettings.getDesktopPageCurrent());
             }
 
-            //nukiink: set wallpaper from settings
+            //tonio-nucci: set wallpaper from settings
             AppSettings appSettings = Setup.appSettings();
             if (appSettings.getAndroidTvOverrideSystemWallpaper()) {
                 String wallpaperPath = appSettings.getAndroidTvWallpaper();
