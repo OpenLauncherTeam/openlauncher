@@ -110,6 +110,9 @@ public class GroupPopupView extends RevealFrameLayout {
 
         boolean appsChanged = false;
 
+        //tonio-nucci (for DPAD/TV) - focus on the first item
+        boolean focusSet = false;
+
         for (int x2 = 0; x2 < cellSize[0]; x2++) {
             for (int y2 = 0; y2 < cellSize[1]; y2++) {
                 if (y2 * cellSize[0] + x2 > item.getGroupItems().size() - 1) {
@@ -126,6 +129,13 @@ public class GroupPopupView extends RevealFrameLayout {
                     continue;
                 } else {
                     final View view = ItemViewFactory.getItemView(getContext(), callback, DragAction.Action.DESKTOP, groupItem);
+
+                    //tonio-nucci (for DPAD/TV) - focus on the first item
+                    if (!focusSet) {
+                        view.requestFocus();
+                        focusSet = true;
+                    }
+
                     view.setOnLongClickListener(new OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view2) {

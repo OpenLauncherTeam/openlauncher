@@ -297,7 +297,7 @@ public class AppItemView extends View implements Drawable.Callback, Notification
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                     if (hasFocus) {
-                        v.setBackgroundColor(Color.argb(128, 255,255,255));
+                        v.setBackgroundColor(Color.argb(128, 200, 200, 200));
                     } else {
                         v.setBackgroundColor(Color.TRANSPARENT);
                     }
