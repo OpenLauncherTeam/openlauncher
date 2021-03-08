@@ -627,6 +627,23 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 //getBackground().setBackgroundColor(Color.RED);
             }
 
+            // tonio-nucci (for DPAD/TV)
+            getDesktop().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                 @Override
+                 public void onPageScrolled(int i, float v, int i1) { }
+
+                 @Override
+                 public void onPageSelected(int i) {
+                     Log.i(this.getClass().getName(), "Page selected: " + i);
+                     List<View> pageCells = getDesktop().getCurrentPage().getAllCells();
+                     if (pageCells.size()>0) {
+                         pageCells.get(0).requestFocus();
+                     }
+                 }
+
+                 @Override
+                 public void onPageScrollStateChanged(int i) { }
+            });
         }
     }
 
