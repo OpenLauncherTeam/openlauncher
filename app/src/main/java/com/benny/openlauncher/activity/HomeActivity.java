@@ -590,7 +590,8 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 getDesktop().getCurrentPage().performClick();
             } else if (getAppDrawerController().getDrawer().getVisibility() == View.VISIBLE) {
                 closeAppDrawer();
-            } else if (getDesktop().getCurrentItem() != 0) {
+            }
+            if (getDesktop().getCurrentItem() != 0) {
                 AppSettings appSettings = Setup.appSettings();
                 getDesktop().setCurrentItem(appSettings.getDesktopPageCurrent());
             }
