@@ -1,4 +1,4 @@
-![graphic](https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher/master/metadata/en-US/featureGraphic.png)
+![graphic](https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher/master/fastlane/metadata/android/en-US/images/featureGraphic.png)
 
 ### Description
 
@@ -14,7 +14,7 @@ This is an open source launcher project for Android devices that has been built 
 </div>
 
 <div style="display:flex;">
-    <img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher/master/metadata/en-US/screenshots.png">
+    <img src="https://raw.githubusercontent.com/OpenLauncherTeam/openlauncher/master/assets/screenshots.png">
 </div>
 
 ### Status
