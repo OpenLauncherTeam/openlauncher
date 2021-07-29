@@ -150,6 +150,7 @@ public class NetworkUtils {
         return performCall(url, method, data, null);
     }
 
+    @SuppressWarnings("CharsetObjectCanBeUsed")
     private static String performCall(final URL url, final String method, final String data, final HttpURLConnection existingConnection) {
         try {
             final HttpURLConnection connection = existingConnection != null
@@ -160,7 +161,7 @@ public class NetworkUtils {
             if (data != null && !data.isEmpty()) {
                 connection.setDoOutput(true);
                 final OutputStream output = connection.getOutputStream();
-                output.write(data.getBytes(Charset.forName(UTF8)));
+                output.write(data.getBytes(Charset.forName("UTF-8")));
                 output.flush();
                 output.close();
             }
@@ -219,5 +220,15 @@ public class NetworkUtils {
         }
 
         return result;
+    }
+
+    public static void httpGetAsync(final String url, final Callback.a1<String> callback) {
+        new Thread(() -> {
+            try {
+                String c = NetworkUtils.performCall(url, GET);
+                callback.callback(c);
+            } catch (Exception ignored) {
+            }
+        }).start();
     }
 }

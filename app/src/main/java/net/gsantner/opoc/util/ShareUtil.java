@@ -78,11 +78,12 @@ import static android.app.Activity.RESULT_OK;
  * Also allows to parse/fetch information out of shared information.
  * (M)Permissions are not checked, wrap ShareUtils methods if neccessary
  */
-@SuppressWarnings({"UnusedReturnValue", "WeakerAccess", "SameParameterValue", "unused", "deprecation", "ConstantConditions", "ObsoleteSdkInt", "SpellCheckingInspection", "JavadocReference"})
+@SuppressWarnings({"UnusedReturnValue", "WeakerAccess", "SameParameterValue", "unused", "deprecation", "ConstantConditions", "ObsoleteSdkInt", "SpellCheckingInspection", "JavadocReference", "ConstantLocale"})
 public class ShareUtil {
     public final static String EXTRA_FILEPATH = "real_file_path_2";
     public final static SimpleDateFormat SDF_RFC3339_ISH = new SimpleDateFormat("yyyy-MM-dd'T'HH-mm-ss", Locale.getDefault());
     public final static SimpleDateFormat SDF_SHORT = new SimpleDateFormat("yyMMdd-HHmmss", Locale.getDefault());
+    public final static SimpleDateFormat SDF_IMAGES = new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.getDefault()); //20190511-230845
     public final static String MIME_TEXT_PLAIN = "text/plain";
     public final static String PREF_KEY__SAF_TREE_URI = "pref_key__saf_tree_uri";
 
@@ -93,9 +94,9 @@ public class ShareUtil {
     public final static int MIN_OVERWRITE_LENGTH = 5;
 
     protected static String _lastCameraPictureFilepath;
+    protected static String _fileProviderAuthority;
 
     protected Context _context;
-    protected String _fileProviderAuthority;
     protected String _chooserTitle;
 
     public ShareUtil(final Context context) {
@@ -118,9 +119,8 @@ public class ShareUtil {
         return _fileProviderAuthority;
     }
 
-    public ShareUtil setFileProviderAuthority(final String fileProviderAuthority) {
+    public static void setFileProviderAuthority(final String fileProviderAuthority) {
         _fileProviderAuthority = fileProviderAuthority;
-        return this;
     }
 
 
@@ -230,9 +230,9 @@ public class ShareUtil {
             intent.putExtra(Intent.EXTRA_STREAM, fileUri);
             showChooser(intent, null);
             return true;
-        } catch (Exception e) { // FileUriExposed(API24) / IllegalArgument
-            return false;
+        } catch (Exception ignored) { // FileUriExposed(API24) / IllegalArgument
         }
+        return false;
     }
 
     /**
@@ -323,35 +323,40 @@ public class ShareUtil {
     /**
      * Share the given bitmap with given format
      *
-     * @param bitmap Image
-     * @param format A {@link Bitmap.CompressFormat}, supporting JPEG,PNG,WEBP
-     * @return if success, true
-     */
-    public boolean shareImage(final Bitmap bitmap, final Bitmap.CompressFormat format) {
-        return shareImage(bitmap, format, 95, "SharedImage");
-    }
-
-    /**
-     * Share the given bitmap with given format
-     *
      * @param bitmap    Image
      * @param format    A {@link Bitmap.CompressFormat}, supporting JPEG,PNG,WEBP
      * @param imageName Filename without extension
      * @param quality   Quality of the exported image [0-100]
      * @return if success, true
      */
-    public boolean shareImage(final Bitmap bitmap, final Bitmap.CompressFormat format, final int quality, final String imageName) {
+    public boolean shareImage(final Bitmap bitmap, final Integer... quality) {
         try {
-            String ext = format.name().toLowerCase();
-            File file = File.createTempFile(imageName, "." + ext.replace("jpeg", "jpg"), _context.getExternalCacheDir());
-            if (bitmap != null && new ContextUtils(_context).writeImageToFile(file, bitmap, format, quality)) {
-                shareStream(file, "image/" + ext);
+            File file = new File(_context.getCacheDir(), getFilenameWithTimestamp());
+            if (bitmap != null && new ContextUtils(_context).writeImageToFile(file, bitmap, quality)) {
+                String x = FileUtils.getMimeType(file);
+                shareStream(file, FileUtils.getMimeType(file));
                 return true;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
         return false;
+    }
+
+    /**
+     * Generate a filename based off current datetime in filename (year, month, day, hour, minute, second)
+     * Examples: Screenshot_20210208-184301_Trebuchet.png IMG_20190511-230845.jpg
+     *
+     * @param A0prefixA1postfixA2ext All arguments are optional and default values are taken for null
+     *                               [0] = Prefix [Screenshot/IMG]
+     *                               [1] = Postfix [Trebuchet]
+     *                               [2] = File extensions [jpg/png/txt]
+     * @return Filename
+     */
+    public static String getFilenameWithTimestamp(String... A0prefixA1postfixA2ext) {
+        final String prefix = (((A0prefixA1postfixA2ext != null && A0prefixA1postfixA2ext.length > 0 && !TextUtils.isEmpty(A0prefixA1postfixA2ext[0])) ? A0prefixA1postfixA2ext[0] : "Screenshot") + "_").trim().replaceFirst("^_$", "");
+        final String postfix = ("_" + ((A0prefixA1postfixA2ext != null && A0prefixA1postfixA2ext.length > 1 && !TextUtils.isEmpty(A0prefixA1postfixA2ext[1])) ? A0prefixA1postfixA2ext[1] : "")).trim().replaceFirst("^_$", "");
+        final String ext = (A0prefixA1postfixA2ext != null && A0prefixA1postfixA2ext.length > 2 && !TextUtils.isEmpty(A0prefixA1postfixA2ext[2])) ? A0prefixA1postfixA2ext[2] : "jpg";
+        return String.format("%s%s%s.%s", prefix.trim(), SDF_IMAGES.format(new Date()), postfix.trim(), ext.toLowerCase().replace(".", "").replace("jpeg", "jpg"));
     }
 
     /**
@@ -405,21 +410,21 @@ public class ShareUtil {
      * @return A {@link Bitmap} or null
      */
     @Nullable
-    public static Bitmap getBitmapFromWebView(final WebView webView) {
+    public static Bitmap getBitmapFromWebView(final WebView webView, final boolean... a0fullpage) {
         try {
             //Measure WebView's content
-            int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-            int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-            webView.measure(widthMeasureSpec, heightMeasureSpec);
-            webView.layout(0, 0, webView.getMeasuredWidth(), webView.getMeasuredHeight());
+            if (a0fullpage != null && a0fullpage.length > 0 && a0fullpage[0]) {
+                int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+                int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                webView.measure(widthMeasureSpec, heightMeasureSpec);
+                webView.layout(0, 0, webView.getMeasuredWidth(), webView.getMeasuredHeight());
+            }
 
             //Build drawing cache and store its size
             webView.buildDrawingCache();
-            int measuredWidth = webView.getMeasuredWidth();
-            int measuredHeight = webView.getMeasuredHeight();
 
             //Creates the bitmap and draw WebView's content on in
-            Bitmap bitmap = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888);
+            Bitmap bitmap = Bitmap.createBitmap(webView.getMeasuredWidth(), webView.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
             canvas.drawBitmap(bitmap, 0, bitmap.getHeight(), new Paint());
 
@@ -1148,7 +1153,7 @@ public class ShareUtil {
                     if (isDirectory) {
                         // Nothing to do
                     } else {
-                        pfd = _context.getContentResolver().openFileDescriptor(dof.getUri(), "rw");
+                        pfd = _context.getContentResolver().openFileDescriptor(dof.getUri(), "rwt");
                         fileOutputStream = new FileOutputStream(pfd.getFileDescriptor());
                     }
                 }

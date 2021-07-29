@@ -11,6 +11,7 @@
 package net.gsantner.opoc.util;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -38,8 +39,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.ScrollView;
 
+import java.util.List;
 
-@SuppressWarnings({"WeakerAccess", "unused", "SameParameterValue", "SpellCheckingInspection"})
+
+@SuppressWarnings({"WeakerAccess", "unused", "SameParameterValue", "SpellCheckingInspection", "rawtypes", "UnusedReturnValue"})
 public class ActivityUtils extends net.gsantner.opoc.util.ContextUtils {
     //########################
     //## Members, Constructors
@@ -239,13 +242,22 @@ public class ActivityUtils extends net.gsantner.opoc.util.ContextUtils {
     }
 
     public ActivityUtils setLauncherActivityEnabled(Class activityClass, boolean enable) {
-        Context context = _context.getApplicationContext();
-        PackageManager pkg = context.getPackageManager();
-        ComponentName component = new ComponentName(context, activityClass);
-        pkg.setComponentEnabledSetting(component, enable ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        try {
+            ComponentName component = new ComponentName(_context, activityClass);
+            _context.getPackageManager().setComponentEnabledSetting(component, enable ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        } catch (Exception ignored) {
+        }
         return this;
     }
 
+    public boolean isLauncherEnabled(Class activityClass) {
+        try {
+            ComponentName component = new ComponentName(_context, activityClass);
+            return _context.getPackageManager().getComponentEnabledSetting(component) != PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+        } catch (Exception ignored) {
+        }
+        return false;
+    }
 
     @ColorInt
     public Integer getCurrentPrimaryColor() {
@@ -315,5 +327,21 @@ public class ActivityUtils extends net.gsantner.opoc.util.ContextUtils {
             }
         } catch (Exception ignored) {
         }
+    }
+
+    // Make activity/app not show up in the recents history - call before finish / System.exit
+    public ActivityUtils removeActivityFromHistory() {
+        try {
+            ActivityManager am = (ActivityManager) _activity.getSystemService(Context.ACTIVITY_SERVICE);
+            if (am != null && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                List<ActivityManager.AppTask> tasks = am.getAppTasks();
+                if (tasks != null && !tasks.isEmpty()) {
+                    tasks.get(0).setExcludeFromRecents(true);
+                }
+            }
+
+        } catch (Exception ignored) {
+        }
+        return this;
     }
 }

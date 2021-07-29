@@ -108,7 +108,7 @@ dependencies {
     implementation 'agency.tango.android:material-intro-screen:0.0.5'
     implementation 'cat.ereza:customactivityoncrash:2.2.0'
     implementation 'de.psdev.licensesdialog:licensesdialog:1.8.3'
-    implementation 'com.github.championswimmer:SimpleFingerGestures_Android_Library:1.2'
+    implementation 'com.github.championswimmer:SimpleFingerGestures_Android_Library:1.1'
     implementation 'com.nononsenseapps:filepicker:4.2.1'
     implementation 'org.slf4j:slf4j-android:1.7.21'
 

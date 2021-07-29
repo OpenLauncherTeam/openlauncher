@@ -11,6 +11,8 @@
 package net.gsantner.opoc.util;
 
 
+import android.text.TextUtils;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -37,7 +39,7 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
-@SuppressWarnings({"WeakerAccess", "unused", "SameParameterValue", "SpellCheckingInspection", "deprecation"})
+@SuppressWarnings({"WeakerAccess", "unused", "SameParameterValue", "SpellCheckingInspection", "deprecation", "TryFinallyCanBeTryWithResources"})
 public class FileUtils {
     // Used on methods like copyFile(src, dst)
     private static final int BUFFER_SIZE = 4096;
@@ -391,45 +393,58 @@ public class FileUtils {
      */
     public static String getMimeType(File file) {
         String guess = null;
-        if (file != null && file.exists() && file.isFile()) {
-            InputStream is = null;
-            try {
-                is = new BufferedInputStream(new FileInputStream(file));
-                guess = URLConnection.guessContentTypeFromStream(is);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (is != null) {
-                    try {
-                        is.close();
-                    } catch (IOException ignored) {
+        if (file != null) {
+            if (file.exists() && file.isFile()) {
+                InputStream is = null;
+                try {
+                    is = new BufferedInputStream(new FileInputStream(file));
+                    guess = URLConnection.guessContentTypeFromStream(is);
+                } catch (Exception ignored) {
+                } finally {
+                    if (is != null) {
+                        try {
+                            is.close();
+                        } catch (Exception ignored) {
+                        }
                     }
                 }
             }
 
-            if (guess == null || guess.isEmpty()) {
-                guess = "*/*";
-                String filename = file.getName().replace(".jenc", "");
-                int dot = filename.lastIndexOf(".") + 1;
-                if (dot > 0 && dot < filename.length()) {
-                    switch (filename.substring(dot)) {
-                        case "md":
-                        case "markdown":
-                        case "mkd":
-                        case "mdown":
-                        case "mkdn":
-                        case "mdwn":
-                        case "rmd":
-                            guess = "text/markdown";
-                            break;
-                        case "txt":
-                            guess = "text/plain";
-                            break;
-                    }
+            String filename = file.getName().replace(".jenc", "");
+            int dot = filename.lastIndexOf(".") + 1;
+            if (dot > 0 && dot < filename.length()) {
+                switch (filename.substring(dot)) {
+                    case "md":
+                    case "markdown":
+                    case "mkd":
+                    case "mdown":
+                    case "mkdn":
+                    case "mdwn":
+                    case "rmd":
+                        guess = "text/markdown";
+                        break;
+                    case "txt":
+                        guess = "text/plain";
+                        break;
+                    case "webp":
+                        guess = "image/webp";
+                        break;
+                    case "jpg":
+                    case "jpeg":
+                        guess = "image/jpeg";
+                        break;
+                    case "png":
+                        guess = "image/png";
+                        break;
                 }
             }
+
+            if (TextUtils.isEmpty(guess)) {
+                guess = URLConnection.guessContentTypeFromName(filename);
+            }
         }
-        return guess;
+
+        return TextUtils.isEmpty(guess) ? "*/*" : guess;
     }
 
     public static boolean isTextFile(File file) {
@@ -488,5 +503,26 @@ public class FileUtils {
         ret[1] = (int) (diff / (1000 * 60)) % 60; // min
         ret[2] = (int) (diff / 1000) % 60; // sec
         return ret;
+    }
+
+    public static String getHumanReadableByteCountSI(final long bytes) {
+        if (bytes < 1000) {
+            return String.format(Locale.getDefault(), "%d%s", bytes, "B");
+        } else if (bytes < 1000000) {
+            return String.format(Locale.getDefault(), "%.2f%s", (bytes / 1000f), "KB");
+        } else if (bytes < 1000000000) {
+            return String.format(Locale.getDefault(), "%.2f%s", (bytes / 1000000f), "MB");
+        } else if (bytes < 1000000000000L) {
+            return String.format(Locale.getDefault(), "%.2f%s", (bytes / 1000000000f), "GB");
+        } else {
+            return String.format(Locale.getDefault(), "%.2f%s", (bytes / 1000000000000f), "TB");
+        }
+    }
+
+    public static File join(File file, String... childSegments) {
+        for (final String s : childSegments != null ? childSegments : new String[0]) {
+            file = new File(file, s);
+        }
+        return file;
     }
 }
