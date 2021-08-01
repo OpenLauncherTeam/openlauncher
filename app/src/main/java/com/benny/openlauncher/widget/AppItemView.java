@@ -1,11 +1,14 @@
 package com.benny.openlauncher.widget;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.LauncherApps;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Process;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
@@ -215,7 +218,20 @@ public class AppItemView extends View implements Drawable.Callback, Notification
                     Tool.createScaleInScaleOutAnim(_view, new Runnable() {
                         @Override
                         public void run() {
-                            _view.getContext().startActivity(item.getIntent());
+
+                            Intent intent = item.getIntent();
+                            String id = intent.getStringExtra("shortcut_id");
+
+                            /* old style shortcut */
+                            if (id == null || id.trim().isEmpty()) {
+                                _view.getContext().startActivity(intent);
+                            } 
+                            /* new style shortcut */
+                            else {
+                                LauncherApps launcherApps = (LauncherApps) _view.getContext().getSystemService(Context.LAUNCHER_APPS_SERVICE);
+                                String packageName = intent.getPackage();
+                                launcherApps.startShortcut(packageName, id, intent.getSourceBounds(), null, Process.myUserHandle());
+                            }
                         }
                     });
                 }

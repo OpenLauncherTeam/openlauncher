@@ -1,3 +1,7 @@
+
+/.vscode
+.project
+
 # Common
 *~*
 tmp/
