@@ -70,6 +70,8 @@
     <string name="pref_title__dock">Dock</string>
     <string name="pref_title__app_drawer">App Drawer</string>
     <string name="pref_title__appearance">Appearance</string>
+    <string name="pref_title__android_tv">Android TV</string>
+    <string name="pref_title__android_tv_wallpaper">Wallpaper</string>
     <string name="pref_title__behavior">Behavior</string>
     <string name="pref_title__advanced">Advanced</string>
     <string name="pref_title__hide_apps">Hide Apps</string>
@@ -228,6 +230,12 @@
     <string name="custom">Custom</string>
     <string name="default_folder">Unnamed</string>
     <string name="default_icons">Default</string>
+
+    <!-- Android TV -->
+    <string name="enable_override_system_wallpaper">Override system wallpaper</string>
+    <string name="pref_summary__android_tv">Android TV related settings</string>
+    <string name="pref_title__android_tv_choose_wallpaper">Choose wallpaper</string>
+    <string name="pref_summary__android_tv_choose_wallpaper">Replace system wallpaper</string>
 
     <!-- Drag Option View -->
     <string name="edit">Edit</string>

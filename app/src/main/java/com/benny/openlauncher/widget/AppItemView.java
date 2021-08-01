@@ -190,6 +190,9 @@ public class AppItemView extends View implements Drawable.Callback, Notification
         }
 
         public Builder setAppItem(final Item item) {
+            //tonio-nucci (for DPAD/TV)
+            this.setViewOnFocusChangeListener();
+
             _view.setLabel(item.getLabel());
             _view.setIcon(item.getIcon());
             _view.setOnClickListener(new OnClickListener() {
@@ -207,6 +210,9 @@ public class AppItemView extends View implements Drawable.Callback, Notification
         }
 
         public Builder setShortcutItem(final Item item) {
+            //tonio-nucci (for DPAD/TV)
+            this.setViewOnFocusChangeListener();
+
             _view.setLabel(item.getLabel());
             _view.setIcon(item.getIcon());
             _view.setOnClickListener(new OnClickListener() {
@@ -224,6 +230,9 @@ public class AppItemView extends View implements Drawable.Callback, Notification
         }
 
         public Builder setGroupItem(Context context, final DesktopCallback callback, final Item item) {
+            //tonio-nucci (for DPAD/TV)
+            this.setViewOnFocusChangeListener();
+
             _view.setLabel(item.getLabel());
             _view.setIcon(new GroupDrawable(context, item, Setup.appSettings().getIconSize()));
             _view.setOnClickListener(new View.OnClickListener() {
@@ -238,6 +247,9 @@ public class AppItemView extends View implements Drawable.Callback, Notification
         }
 
         public Builder setActionItem(Item item) {
+            //tonio-nucci (for DPAD/TV)
+            this.setViewOnFocusChangeListener();
+
             _view.setLabel(item.getLabel());
             _view.setIcon(ContextCompat.getDrawable(Setup.appContext(), R.drawable.item_drawer));
             _view.setOnClickListener(new OnClickListener() {
@@ -276,6 +288,21 @@ public class AppItemView extends View implements Drawable.Callback, Notification
 
         public Builder vibrateWhenLongPress(boolean vibrate) {
             _view._vibrateWhenLongPress = vibrate;
+            return this;
+        }
+
+        //tonio-nucci (for DPAD/TV)
+        public Builder setViewOnFocusChangeListener() {
+            _view.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                    if (hasFocus) {
+                        v.setBackgroundColor(Color.argb(128, 200, 200, 200));
+                    } else {
+                        v.setBackgroundColor(Color.TRANSPARENT);
+                    }
+                }
+            });
             return this;
         }
     }

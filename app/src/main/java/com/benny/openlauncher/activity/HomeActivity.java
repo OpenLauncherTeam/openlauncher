@@ -2,6 +2,7 @@ package com.benny.openlauncher.activity;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.app.UiModeManager;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,6 +11,8 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
+import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
@@ -18,6 +21,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -45,6 +49,7 @@ import com.benny.openlauncher.receivers.ShortcutReceiver;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DatabaseHelper;
+import com.benny.openlauncher.util.Definitions;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.LauncherAction;
 import com.benny.openlauncher.util.LauncherAction.Action;
@@ -222,6 +227,16 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
     protected void initAppManager() {
         if (Setup.appSettings().getAppFirstLaunch()) {
             Setup.appSettings().setAppFirstLaunch(false);
+
+            // tonio-nucci - Check at first run if on android TV (go landscape)
+            UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
+            if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
+                Log.i(this.getClass().getName(), "First start - Running on a TV Device - Setting landscape");
+                Setup.appSettings().get().setString(R.string.pref_key__desktop_orientation, Definitions.DESKTOP_ORIENTATION_LANDSCAPE);
+            } else {
+                Log.i(this.getClass().getName(), "First start - Running on a non-TV Device");
+            }
+
             Setup.appSettings().setAppShowIntro(false);
             Item appDrawerBtnItem = Item.newActionItem(8);
             appDrawerBtnItem._x = 2;
@@ -595,6 +610,41 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
                 AppSettings appSettings = Setup.appSettings();
                 getDesktop().setCurrentItem(appSettings.getDesktopPageCurrent());
             }
+
+            //tonio-nucci: set wallpaper from settings
+            AppSettings appSettings = Setup.appSettings();
+            if (appSettings.getAndroidTvOverrideSystemWallpaper()) {
+                String wallpaperPath = appSettings.getAndroidTvWallpaper();
+                Log.i(this.getClass().getName(), "Wallpaper in settings: " + wallpaperPath);
+
+                if (wallpaperPath!=null) {
+                    getBackground().setBackground(Drawable.createFromPath(wallpaperPath));
+                    getBackground().setVisibility(View.VISIBLE);
+                }
+            } else {
+                //remove background
+                getBackground().setBackgroundResource(0);
+                getBackground().setVisibility(View.INVISIBLE);
+                //getBackground().setBackgroundColor(Color.RED);
+            }
+
+            // tonio-nucci (for DPAD/TV)
+            getDesktop().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                 @Override
+                 public void onPageScrolled(int i, float v, int i1) { }
+
+                 @Override
+                 public void onPageSelected(int i) {
+                     Log.i(this.getClass().getName(), "Page selected: " + i);
+                     List<View> pageCells = getDesktop().getCurrentPage().getAllCells();
+                     if (pageCells.size()>0) {
+                         pageCells.get(0).requestFocus();
+                     }
+                 }
+
+                 @Override
+                 public void onPageScrollStateChanged(int i) { }
+            });
         }
     }
 

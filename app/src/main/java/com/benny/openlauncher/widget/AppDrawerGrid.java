@@ -109,7 +109,18 @@ public class AppDrawerGrid extends FrameLayout {
                             Tool.startApp(v.getContext(), app, null);
                         }
                     })
-                    .withOnLongClickListener(DragHandler.getLongClick(Item.newAppItem(app), DragAction.Action.DRAWER, null)));
+                    .withOnLongClickListener(DragHandler.getLongClick(Item.newAppItem(app), DragAction.Action.DRAWER, null))
+                    .withOnFocusChangeListener(new OnFocusChangeListener() { // tonio-nucci (for DPAD/TV)
+                            @Override
+                            public void onFocusChange(View v, boolean hasFocus) {
+                                if (hasFocus) {
+                                    v.setBackgroundColor(Color.argb(128, 255,255,255));
+                                } else {
+                                    v.setBackgroundColor(Color.TRANSPARENT);
+                                }
+                            }
+                    })
+            );
         }
         _gridDrawerAdapter.set(items);
     }

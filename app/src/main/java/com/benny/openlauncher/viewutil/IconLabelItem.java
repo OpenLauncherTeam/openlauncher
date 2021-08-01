@@ -38,6 +38,7 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
     private boolean _onClickAnimate = true;
     private View.OnClickListener _onClickListener;
     private View.OnLongClickListener _onLongClickListener;
+    private View.OnFocusChangeListener _onFocusChangeListener;
 
     public IconLabelItem(Context context, int icon, int label) {
         _label = context.getString(label);
@@ -101,6 +102,11 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
 
     public IconLabelItem withOnLongClickListener(View.OnLongClickListener onLongClickListener) {
         _onLongClickListener = onLongClickListener;
+        return this;
+    }
+
+    public IconLabelItem withOnFocusChangeListener(View.OnFocusChangeListener listener) {
+        _onFocusChangeListener = listener;
         return this;
     }
 
@@ -192,6 +198,8 @@ public class IconLabelItem extends AbstractItem<IconLabelItem, IconLabelItem.Vie
             holder.itemView.setOnClickListener(_onClickListener);
         if (_onLongClickListener != null)
             holder.itemView.setOnLongClickListener(_onLongClickListener);
+        if (_onFocusChangeListener != null)
+            holder.itemView.setOnFocusChangeListener(_onFocusChangeListener);
 
         super.bindView(holder, payloads);
     }

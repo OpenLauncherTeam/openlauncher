@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:title="@string/pref_title__android_tv">
+
+    <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/pref_title__android_tv_wallpaper">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key__android_tv_settings_override_system_wallpaper"
+            android:title="@string/enable_override_system_wallpaper" />
+
+        <Preference
+            android:key="@string/pref_key__android_tv_settings_choose_wallpaper"
+            android:summary="@string/pref_summary__android_tv_choose_wallpaper"
+            android:title="@string/pref_title__android_tv_choose_wallpaper" />
+
+    </com.benny.openlauncher.widget.ColorPreferenceCategory>
+
+
+</PreferenceScreen>

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.fragment.SettingsBaseFragment;
@@ -65,6 +66,7 @@ public class SettingsActivity extends ColorActivity implements SettingsBaseFragm
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (resultCode == RESULT_OK) {
             Setup.dataManager().close();
             List<Uri> files = Utils.getSelectedFilesFromResult(data);
@@ -77,7 +79,15 @@ public class SettingsActivity extends ColorActivity implements SettingsBaseFragm
                     BackupHelper.restoreConfig(this, Utils.getFileForUri(files.get(0)).toString());
                     System.exit(0);
                     break;
+                case Definitions.ANDROID_TV_PICK_WALLPAPER:
+                    Log.i(this.getClass().getName(), "Android Tv Picked Wallpaper");
+                    String imagePath = Utils.getFileForUri(files.get(0)).toString();
+                    Log.i(this.getClass().getName(), "Wallpaper Path: " + imagePath);
+                    Setup.dataManager().open(); // without this, you get sqlite db already closed error
+                    _appSettings.setAndroidTvWallpaper(imagePath);
+                    break;
             }
         }
     }
+
 }

@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
@@ -493,8 +494,18 @@ public final class Desktop extends ViewPager implements DesktopCallback {
             xOffset = 0.5f;
         }
 
-        WallpaperManager wallpaperManager = WallpaperManager.getInstance(getContext());
-        wallpaperManager.setWallpaperOffsets(getWindowToken(), xOffset, 0.0f);
+        try {
+            // On Android TV (not all) there is no WallpaperManager
+            // these lines (the second one) generate an exception
+            // java.lang.NullPointerException: Attempt to invoke virtual method
+            // 'void android.app.WallpaperManager.setWallpaperOffsets(android.os.IBinder, float, float)'
+            // on null object reference
+            WallpaperManager wallpaperManager = WallpaperManager.getInstance(getContext());
+            wallpaperManager.setWallpaperOffsets(getWindowToken(), xOffset, 0.0f);
+        } catch (Exception e) {
+            Log.i(this.getClass().getName(), "Unexistent WallpaperManager, perhaps we are on an Android TV");
+        }
+
         super.onPageScrolled(position, offset, offsetPixels);
     }
 

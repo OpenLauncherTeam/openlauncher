@@ -48,6 +48,10 @@
     <string name="pref_key__dock_show_label" translatable="false">pref_key__dock_show_label</string>
     <string name="pref_key__dock_background_color" translatable="false">pref_key__dock_background_color</string>
 
+    <string name="pref_key__android_tv_settings_override_system_wallpaper" translatable="false">pref_key__android_tv_settings_override_system_wallpaper</string>
+    <string name="pref_key__android_tv_settings_choose_wallpaper" translatable="false">pref_key__android_tv_settings_choose_wallpaper</string>
+    <string name="pref_key__android_tv_settings_wallpaper" translatable="false">pref_key__android_tv_settings_wallpaper</string>
+
     <string name="pref_key__drawer_columns" translatable="false">pref_key__drawer_columns</string>
     <string name="pref_key__drawer_rows" translatable="false">pref_key__drawer_rows</string>
     <string name="pref_key__drawer_style" translatable="false">pref_key__drawer_style</string>
@@ -87,6 +91,7 @@
     <string name="pref_key__cat_dock" translatable="false">pref_key__cat_dock</string>
     <string name="pref_key__cat_app_drawer" translatable="false">pref_key__cat_app_drawer</string>
     <string name="pref_key__cat_appearance" translatable="false">pref_key__cat_appearance</string>
+    <string name="pref_key__cat_android_tv" translatable="false">pref_key__cat_android_tv</string>
     <string name="pref_key__cat_behavior" translatable="false">pref_key__cat_behavior</string>
     <string name="pref_key__cat_hide_apps" translatable="false">pref_key__cat_hide_apps</string>
     <string name="pref_key__cat_advanced" translatable="false">pref_key__cat_advanced</string>
