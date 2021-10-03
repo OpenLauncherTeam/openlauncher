@@ -139,6 +139,10 @@ public class Item {
         return _shortcutInfo;
     }
 
+    public void setShortcutInfo(List<ShortcutInfo> shortcutInfo) {
+        _shortcutInfo = shortcutInfo;
+    }
+
     public List<Item> getGroupItems() {
         return _items;
     }
