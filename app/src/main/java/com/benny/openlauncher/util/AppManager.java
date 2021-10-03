@@ -1,9 +1,5 @@
 package com.benny.openlauncher.util;
 
-import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
-import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_MANIFEST;
-import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.LauncherActivityInfo;
@@ -13,7 +9,6 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Process;
 import android.os.UserHandle;
 import android.support.annotation.NonNull;
 
@@ -109,19 +104,7 @@ public class AppManager {
     public App createApp(Intent intent) {
         try {
             ResolveInfo info = _packageManager.resolveActivity(intent, 0);
-            List<ShortcutInfo> shortcutInfo = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-                String packageName = intent.getComponent().getPackageName();
-                LauncherApps launcherApps = (LauncherApps) getContext().getSystemService(Context.LAUNCHER_APPS_SERVICE);
-                LauncherApps.ShortcutQuery shortcutQuery = new LauncherApps.ShortcutQuery();
-                shortcutQuery.setQueryFlags(FLAG_MATCH_DYNAMIC | FLAG_MATCH_MANIFEST | FLAG_MATCH_PINNED);
-                shortcutQuery.setPackage(packageName);
-                try {
-                    shortcutInfo = launcherApps.getShortcuts(shortcutQuery, Process.myUserHandle());
-                } catch (SecurityException e) {
-                    LOG.warn("Can't get shortcuts info. App is not set as default launcher");
-                }
-            }
+            List<ShortcutInfo> shortcutInfo = Tool.getShortcutInfo(getContext(), intent.getComponent().getPackageName());
             return new App(_packageManager, info, shortcutInfo);
         } catch (Exception e) {
             e.printStackTrace();
@@ -187,15 +170,7 @@ public class AppManager {
                 for (UserHandle userHandle : profiles) {
                     List<LauncherActivityInfo> apps = launcherApps.getActivityList(null, userHandle);
                     for (LauncherActivityInfo info : apps) {
-                        LauncherApps.ShortcutQuery shortcutQuery = new LauncherApps.ShortcutQuery();
-                        shortcutQuery.setQueryFlags(FLAG_MATCH_DYNAMIC | FLAG_MATCH_MANIFEST | FLAG_MATCH_PINNED);
-                        shortcutQuery.setPackage(info.getComponentName().getPackageName());
-                        List<ShortcutInfo> shortcutInfo = null;
-                        try {
-                            shortcutInfo = launcherApps.getShortcuts(shortcutQuery, userHandle);
-                        } catch (SecurityException e) {
-                            LOG.warn("Can't get shortcuts info. App is not set as default launcher");
-                        }
+                        List<ShortcutInfo> shortcutInfo = Tool.getShortcutInfo(getContext(), info.getComponentName().getPackageName());
                         App app = new App(_packageManager, info, shortcutInfo);
                         app._userHandle = userHandle;
                         LOG.debug("adding work profile to non filtered list: {}, {}, {}", app._label, app._packageName, app._className);
@@ -207,20 +182,7 @@ public class AppManager {
                 intent.addCategory(Intent.CATEGORY_LAUNCHER);
                 List<ResolveInfo> activitiesInfo = _packageManager.queryIntentActivities(intent, 0);
                 for (ResolveInfo info : activitiesInfo) {
-                    List<ShortcutInfo> shortcutInfo = null;
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-                        String packageName = intent.getComponent().getPackageName();
-                        LauncherApps launcherApps = (LauncherApps) getContext().getSystemService(Context.LAUNCHER_APPS_SERVICE);
-                        LauncherApps.ShortcutQuery shortcutQuery = new LauncherApps.ShortcutQuery();
-                        shortcutQuery.setQueryFlags(FLAG_MATCH_DYNAMIC | FLAG_MATCH_MANIFEST | FLAG_MATCH_PINNED);
-                        shortcutQuery.setPackage(packageName);
-                        try {
-                            shortcutInfo = launcherApps.getShortcuts(shortcutQuery, Process.myUserHandle());
-                        } catch (SecurityException e) {
-                            LOG.warn("Can't get shortcuts info. App is not set as default launcher");
-                        }
-                    }
-
+                    List<ShortcutInfo> shortcutInfo = Tool.getShortcutInfo(getContext(), intent.getComponent().getPackageName());
                     App app = new App(_packageManager, info, shortcutInfo);
                     LOG.debug("adding app to non filtered list: {}, {}, {}", app._label,  app._packageName, app._className);
                     nonFilteredAppsTemp.add(app);
