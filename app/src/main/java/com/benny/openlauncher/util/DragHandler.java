@@ -29,6 +29,13 @@ public final class DragHandler {
             @Override
             public boolean onLongClick(View view) {
                 if (Setup.appSettings().getDesktopLock()) {
+                    if (HomeActivity.Companion.getLauncher() != null && !DragAction.Action.SEARCH.equals(action)) {
+                        if (Setup.appSettings().getGestureFeedback()) {
+                            Tool.vibrate(view);
+                        }
+                        HomeActivity._launcher.getItemOptionView().showItemPopupForLockedDesktop(item, HomeActivity.Companion.getLauncher());
+                        return true;
+                    }
                     return false;
                 }
                 if (Setup.appSettings().getGestureFeedback()) {

@@ -7,6 +7,7 @@ import android.content.pm.ShortcutInfo;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -425,6 +426,55 @@ public final class ItemOptionView extends FrameLayout {
                 collapse();
                 return true;
             }
+        });
+    }
+
+    public void showItemPopupForLockedDesktop(Item item, final HomeActivity homeActivity) {
+        ArrayList<AbstractPopupIconLabelItem> itemList = new ArrayList<>();
+        switch (item.getType()) {
+            case APP:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1 && item.getShortcutInfo() != null) {
+                    for (ShortcutInfo shortcutInfo : item.getShortcutInfo()) {
+                        itemList.add(getAppShortcutItem(shortcutInfo));
+                    }
+                }
+            case SHORTCUT:
+                itemList.add(uninstallItem);
+                itemList.add(infoItem);
+                break;
+        }
+
+        float x = getDragLocation().x - HomeActivity._itemTouchX + Tool.dp2px(10);
+        float y = getDragLocation().y - HomeActivity._itemTouchY - Tool.dp2px((46 * itemList.size()));
+
+        if ((x + Tool.dp2px(200)) > getWidth()) {
+            setPopupMenuShowDirection(false);
+            x = getDragLocation().x - HomeActivity._itemTouchX + homeActivity.getDesktop().getCurrentPage().getCellWidth() - Tool.dp2px(200) - Tool.dp2px(10);
+        } else {
+            setPopupMenuShowDirection(true);
+        }
+
+        if (y < 0) {
+            y = getDragLocation().y - HomeActivity._itemTouchY + homeActivity.getDesktop().getCurrentPage().getCellHeight() + Tool.dp2px(4);
+        } else {
+            y -= Tool.dp2px(4);
+        }
+
+        showPopupMenuForItem(x, y, itemList, (v, adapter, item1, position) -> {
+            HpItemOption itemOption = new HpItemOption(homeActivity);
+            switch ((int) item1.getIdentifier()) {
+                case uninstallItemIdentifier:
+                    itemOption.onUninstallItem(item);
+                    break;
+                case infoItemIdentifier:
+                    itemOption.onInfoItem(item);
+                    break;
+                case startShortcutItemIdentifier:
+                    itemOption.onStartShortcutItem(item, position);
+                    break;
+            }
+            collapse();
+            return true;
         });
     }
 

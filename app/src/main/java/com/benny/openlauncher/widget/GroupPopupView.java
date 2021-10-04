@@ -129,19 +129,25 @@ public class GroupPopupView extends RevealFrameLayout {
                     view.setOnLongClickListener(new OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view2) {
-                            if (Setup.appSettings().getDesktopLock()) return false;
+                            if (Setup.appSettings().getDesktopLock()) {
+                                if (HomeActivity.Companion.getLauncher() != null) {
+                                    HomeActivity._launcher.getItemOptionView().showItemPopupForLockedDesktop(groupItem, HomeActivity.Companion.getLauncher());
+                                    return true;
+                                }
+                                return false;
+                            } else {
+                                removeItem(context, item, groupItem, (AppItemView) itemView);
 
-                            removeItem(context, item, groupItem, (AppItemView) itemView);
+                                // start the drag action
+                                DragHandler.startDrag(view, groupItem, DragAction.Action.DESKTOP, null);
 
-                            // start the drag action
-                            DragHandler.startDrag(view, groupItem, DragAction.Action.DESKTOP, null);
+                                collapse();
 
-                            collapse();
-
-                            // update group icon or
-                            // convert group item into app item if there is only one item left
-                            updateItem(callback, item, itemView);
-                            return true;
+                                // update group icon or
+                                // convert group item into app item if there is only one item left
+                                updateItem(callback, item, itemView);
+                                return true;
+                            }
                         }
                     });
                     view.setOnClickListener(new OnClickListener() {
