@@ -1,10 +1,19 @@
 package com.benny.openlauncher.activity.homeparts;
 
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_MANIFEST;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED;
+
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.LauncherApps;
+import android.content.pm.ShortcutInfo;
 import android.graphics.Point;
 import android.net.Uri;
+import android.os.Process;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 
 import com.benny.openlauncher.R;
@@ -14,9 +23,12 @@ import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.Definitions.ItemPosition;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.viewutil.PopupDynamicIconLabelItem;
 import com.benny.openlauncher.widget.Desktop;
 import com.benny.openlauncher.widget.Dock;
 import com.benny.openlauncher.widget.WidgetContainer;
+
+import java.util.List;
 
 public class HpItemOption implements DialogListener.OnEditDialogListener {
     private HomeActivity _homeActivity;
@@ -81,6 +93,14 @@ public class HpItemOption implements DialogListener.OnEditDialogListener {
 
         if (coordinateToChildView != null) {
             ((WidgetContainer) coordinateToChildView).showResize();
+        }
+    }
+
+    public final void onStartShortcutItem(@NonNull Item item, int position) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+            LauncherApps launcherApps = (LauncherApps) _homeActivity.getSystemService(Context.LAUNCHER_APPS_SERVICE);
+            ShortcutInfo shortcutInfo = item.getShortcutInfo().get(position);
+            launcherApps.startShortcut(shortcutInfo, null, null);
         }
     }
 

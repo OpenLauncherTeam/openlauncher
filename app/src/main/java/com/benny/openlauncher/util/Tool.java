@@ -1,8 +1,14 @@
 package com.benny.openlauncher.util;
 
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_MANIFEST;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
+import android.content.pm.ShortcutInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,9 +18,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Process;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
@@ -252,5 +261,22 @@ public class Tool {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Nullable
+    public static List<ShortcutInfo> getShortcutInfo(@NonNull Context context, @NonNull String packageName) {
+        List<ShortcutInfo> shortcutInfo = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+            LauncherApps launcherApps = (LauncherApps) context.getSystemService(Context.LAUNCHER_APPS_SERVICE);
+            LauncherApps.ShortcutQuery shortcutQuery = new LauncherApps.ShortcutQuery();
+            shortcutQuery.setQueryFlags(FLAG_MATCH_DYNAMIC | FLAG_MATCH_MANIFEST | FLAG_MATCH_PINNED);
+            shortcutQuery.setPackage(packageName);
+            try {
+                shortcutInfo = launcherApps.getShortcuts(shortcutQuery, Process.myUserHandle());
+            } catch (SecurityException e) {
+                Log.w(Tool.class.getSimpleName(), "Can't get shortcuts info. App is not set as default launcher");
+            }
+        }
+        return shortcutInfo;
     }
 }

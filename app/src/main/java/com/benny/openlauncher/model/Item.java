@@ -2,6 +2,7 @@ package com.benny.openlauncher.model;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ShortcutInfo;
 import android.graphics.drawable.Drawable;
 
 import com.benny.openlauncher.util.Definitions;
@@ -24,6 +25,9 @@ public class Item {
 
     // intent for shortcuts and apps
     public Intent _intent;
+
+    // list of shortcutInfo for shortcuts
+    public List<ShortcutInfo> _shortcutInfo;
 
     // list of items for groups
     public List<Item> _items;
@@ -48,6 +52,7 @@ public class Item {
         item._label = app.getLabel();
         item._icon = app.getIcon();
         item._intent = Tool.getIntentFromApp(app);
+        item._shortcutInfo = app.getShortcutInfo();
         return item;
     }
 
@@ -128,6 +133,14 @@ public class Item {
 
     public Type getType() {
         return _type;
+    }
+
+    public List<ShortcutInfo> getShortcutInfo() {
+        return _shortcutInfo;
+    }
+
+    public void setShortcutInfo(List<ShortcutInfo> shortcutInfo) {
+        _shortcutInfo = shortcutInfo;
     }
 
     public List<Item> getGroupItems() {

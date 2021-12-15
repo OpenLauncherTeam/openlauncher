@@ -6,6 +6,7 @@ import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ShortcutInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.UserHandle;
@@ -103,7 +104,8 @@ public class AppManager {
     public App createApp(Intent intent) {
         try {
             ResolveInfo info = _packageManager.resolveActivity(intent, 0);
-            return new App(_packageManager, info);
+            List<ShortcutInfo> shortcutInfo = Tool.getShortcutInfo(getContext(), intent.getComponent().getPackageName());
+            return new App(_packageManager, info, shortcutInfo);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -168,9 +170,9 @@ public class AppManager {
                 for (UserHandle userHandle : profiles) {
                     List<LauncherActivityInfo> apps = launcherApps.getActivityList(null, userHandle);
                     for (LauncherActivityInfo info : apps) {
-                        App app = new App(_packageManager, info);
+                        List<ShortcutInfo> shortcutInfo = Tool.getShortcutInfo(getContext(), info.getComponentName().getPackageName());
+                        App app = new App(_packageManager, info, shortcutInfo);
                         app._userHandle = userHandle;
-
                         LOG.debug("adding work profile to non filtered list: {}, {}, {}", app._label, app._packageName, app._className);
                         nonFilteredAppsTemp.add(app);
                     }
@@ -180,8 +182,8 @@ public class AppManager {
                 intent.addCategory(Intent.CATEGORY_LAUNCHER);
                 List<ResolveInfo> activitiesInfo = _packageManager.queryIntentActivities(intent, 0);
                 for (ResolveInfo info : activitiesInfo) {
-                    App app = new App(_packageManager, info);
-
+                    List<ShortcutInfo> shortcutInfo = Tool.getShortcutInfo(getContext(), intent.getComponent().getPackageName());
+                    App app = new App(_packageManager, info, shortcutInfo);
                     LOG.debug("adding app to non filtered list: {}, {}, {}", app._label,  app._packageName, app._className);
                     nonFilteredAppsTemp.add(app);
                 }

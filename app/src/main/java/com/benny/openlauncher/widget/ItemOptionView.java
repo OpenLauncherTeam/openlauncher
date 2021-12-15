@@ -2,9 +2,12 @@ package com.benny.openlauncher.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.LauncherApps;
+import android.content.pm.ShortcutInfo;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +27,8 @@ import com.benny.openlauncher.model.Item;
 import com.benny.openlauncher.util.DragAction.Action;
 import com.benny.openlauncher.util.DragHandler;
 import com.benny.openlauncher.util.Tool;
+import com.benny.openlauncher.viewutil.AbstractPopupIconLabelItem;
+import com.benny.openlauncher.viewutil.PopupDynamicIconLabelItem;
 import com.benny.openlauncher.viewutil.PopupIconLabelItem;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -53,7 +58,7 @@ public final class ItemOptionView extends FrameLayout {
     private float _folderPreviewScale;
     private float _overlayIconScale;
     private final RecyclerView _overlayPopup;
-    private final FastItemAdapter<PopupIconLabelItem> _overlayPopupAdapter;
+    private final FastItemAdapter<AbstractPopupIconLabelItem> _overlayPopupAdapter;
     private boolean _overlayPopupShowing;
     private final OverlayView _overlayView;
     private final Paint _paint;
@@ -69,12 +74,14 @@ public final class ItemOptionView extends FrameLayout {
     private final int editItemIdentifier = 85;
     private final int removeItemIdentifier = 86;
     private final int resizeItemIdentifier = 87;
+    private final int startShortcutItemIdentifier = 88;
 
     private PopupIconLabelItem uninstallItem = new PopupIconLabelItem(R.string.uninstall, R.drawable.ic_delete).withIdentifier(uninstallItemIdentifier);
     private PopupIconLabelItem infoItem = new PopupIconLabelItem(R.string.info, R.drawable.ic_info).withIdentifier(infoItemIdentifier);
     private PopupIconLabelItem editItem = new PopupIconLabelItem(R.string.edit, R.drawable.ic_edit).withIdentifier(editItemIdentifier);
     private PopupIconLabelItem removeItem = new PopupIconLabelItem(R.string.remove, R.drawable.ic_close).withIdentifier(removeItemIdentifier);
     private PopupIconLabelItem resizeItem = new PopupIconLabelItem(R.string.resize, R.drawable.ic_resize).withIdentifier(resizeItemIdentifier);
+
 
     public static final class DragFlag {
         private boolean _previousOutside = true;
@@ -225,7 +232,7 @@ public final class ItemOptionView extends FrameLayout {
         _overlayPopup.bringToFront();
     }
 
-    public final void showPopupMenuForItem(float x, float y, @NonNull List<PopupIconLabelItem> popupItem, com.mikepenz.fastadapter.listeners.OnClickListener<PopupIconLabelItem> listener) {
+    public final void showPopupMenuForItem(float x, float y, @NonNull List<AbstractPopupIconLabelItem> popupItem, com.mikepenz.fastadapter.listeners.OnClickListener<AbstractPopupIconLabelItem> listener) {
         if (!_overlayPopupShowing) {
             _overlayPopupShowing = true;
             _overlayPopup.setVisibility(View.VISIBLE);
@@ -340,9 +347,14 @@ public final class ItemOptionView extends FrameLayout {
     }
 
     public void showItemPopup(final HomeActivity homeActivity) {
-        ArrayList<PopupIconLabelItem> itemList = new ArrayList<>();
+        ArrayList<AbstractPopupIconLabelItem> itemList = new ArrayList<>();
         switch (getDragItem().getType()) {
             case APP:
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1 && getDragItem().getShortcutInfo() != null) {
+                    for (ShortcutInfo shortcutInfo : getDragItem().getShortcutInfo()) {
+                        itemList.add(getAppShortcutItem(shortcutInfo));
+                    }
+                }
                 if (!getDragAction().equals(Action.DRAWER)) {
                     itemList.add(editItem);
                     itemList.add(removeItem);
@@ -384,9 +396,9 @@ public final class ItemOptionView extends FrameLayout {
             y -= Tool.dp2px(4);
         }
 
-        showPopupMenuForItem(x, y, itemList, new com.mikepenz.fastadapter.listeners.OnClickListener<PopupIconLabelItem>() {
+        showPopupMenuForItem(x, y, itemList, new com.mikepenz.fastadapter.listeners.OnClickListener<AbstractPopupIconLabelItem>() {
             @Override
-            public boolean onClick(View v, IAdapter<PopupIconLabelItem> adapter, PopupIconLabelItem item, int position) {
+            public boolean onClick(View v, IAdapter<AbstractPopupIconLabelItem> adapter, AbstractPopupIconLabelItem item, int position) {
                 Item dragItem = getDragItem();
                 if (dragItem != null) {
                     HpItemOption itemOption = new HpItemOption(homeActivity);
@@ -406,12 +418,73 @@ public final class ItemOptionView extends FrameLayout {
                         case resizeItemIdentifier:
                             itemOption.onResizeItem(dragItem);
                             break;
+                        case startShortcutItemIdentifier:
+                            itemOption.onStartShortcutItem(dragItem, position);
+                            break;
                     }
                 }
                 collapse();
                 return true;
             }
         });
+    }
+
+    public void showItemPopupForLockedDesktop(Item item, final HomeActivity homeActivity) {
+        ArrayList<AbstractPopupIconLabelItem> itemList = new ArrayList<>();
+        switch (item.getType()) {
+            case APP:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1 && item.getShortcutInfo() != null) {
+                    for (ShortcutInfo shortcutInfo : item.getShortcutInfo()) {
+                        itemList.add(getAppShortcutItem(shortcutInfo));
+                    }
+                }
+            case SHORTCUT:
+                itemList.add(uninstallItem);
+                itemList.add(infoItem);
+                break;
+        }
+
+        float x = getDragLocation().x - HomeActivity._itemTouchX + Tool.dp2px(10);
+        float y = getDragLocation().y - HomeActivity._itemTouchY - Tool.dp2px((46 * itemList.size()));
+
+        if ((x + Tool.dp2px(200)) > getWidth()) {
+            setPopupMenuShowDirection(false);
+            x = getDragLocation().x - HomeActivity._itemTouchX + homeActivity.getDesktop().getCurrentPage().getCellWidth() - Tool.dp2px(200) - Tool.dp2px(10);
+        } else {
+            setPopupMenuShowDirection(true);
+        }
+
+        if (y < 0) {
+            y = getDragLocation().y - HomeActivity._itemTouchY + homeActivity.getDesktop().getCurrentPage().getCellHeight() + Tool.dp2px(4);
+        } else {
+            y -= Tool.dp2px(4);
+        }
+
+        showPopupMenuForItem(x, y, itemList, (v, adapter, item1, position) -> {
+            HpItemOption itemOption = new HpItemOption(homeActivity);
+            switch ((int) item1.getIdentifier()) {
+                case uninstallItemIdentifier:
+                    itemOption.onUninstallItem(item);
+                    break;
+                case infoItemIdentifier:
+                    itemOption.onInfoItem(item);
+                    break;
+                case startShortcutItemIdentifier:
+                    itemOption.onStartShortcutItem(item, position);
+                    break;
+            }
+            collapse();
+            return true;
+        });
+    }
+
+    private PopupDynamicIconLabelItem getAppShortcutItem(@NonNull ShortcutInfo shortcutInfo) {
+        PopupDynamicIconLabelItem popupDynamicIconLabelItem = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+            LauncherApps launcherApps = (LauncherApps) getContext().getSystemService(Context.LAUNCHER_APPS_SERVICE);
+            popupDynamicIconLabelItem = new PopupDynamicIconLabelItem(shortcutInfo.getShortLabel(), launcherApps.getShortcutIconDrawable(shortcutInfo, getContext().getResources().getDisplayMetrics().densityDpi)).withIdentifier(startShortcutItemIdentifier);
+        }
+        return popupDynamicIconLabelItem;
     }
 
     private final void handleMovement() {

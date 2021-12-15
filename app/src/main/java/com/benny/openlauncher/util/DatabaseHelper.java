@@ -267,13 +267,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String[] dataSplit;
         switch (type) {
-            case APP:
-            case SHORTCUT:
+            case APP: {
+                item.setIntent(Tool.getIntentFromString(data));
+                item.setShortcutInfo(Tool.getShortcutInfo(_context, item.getIntent().getComponent().getPackageName()));
+                App app = Setup.get().getAppLoader().findItemApp(item);
+                item.setIcon(app != null ? app.getIcon() : null);
+                break;
+            }
+            case SHORTCUT: {
                 item.setIntent(Tool.getIntentFromString(data));
                 App app = Setup.get().getAppLoader().findItemApp(item);
                 item.setIcon(app != null ? app.getIcon() : null);
                 break;
-            case GROUP:
+            }
+            case GROUP: {
                 item.setItems(new ArrayList<>());
                 dataSplit = data.split(Definitions.DELIMITER);
                 for (String string : dataSplit) {
@@ -284,15 +291,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     }
                 }
                 break;
-            case ACTION:
+            }
+            case ACTION: {
                 item.setActionValue(Integer.parseInt(data));
                 break;
-            case WIDGET:
+            }
+            case WIDGET: {
                 dataSplit = data.split(Definitions.DELIMITER);
                 item.setWidgetValue(Integer.parseInt(dataSplit[0]));
                 item.setSpanX(Integer.parseInt(dataSplit[1]));
                 item.setSpanY(Integer.parseInt(dataSplit[2]));
                 break;
+            }
         }
 
         return item;
