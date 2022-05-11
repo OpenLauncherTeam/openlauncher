@@ -371,9 +371,13 @@ public class SearchBar extends FrameLayout {
 
         String text = now.format(_clockFormatter);
         String[] lines = text.split("\n");
-        Spannable span = new SpannableString(text);
-        span.setSpan(new RelativeSizeSpan(_searchClockSubTextFactor), lines[0].length() + 1, lines[0].length() + 1 + lines[1].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        _searchClock.setText(span);
+        if (lines.length < 2) {
+            _searchClock.setText(lines[0]);
+        } else {
+            Spannable span = new SpannableString(text);
+            span.setSpan(new RelativeSizeSpan(_searchClockSubTextFactor), lines[0].length() + 1, lines[0].length() + 1 + lines[1].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            _searchClock.setText(span);
+        }
     }
 
     @Override
