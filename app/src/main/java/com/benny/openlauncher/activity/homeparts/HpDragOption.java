@@ -266,8 +266,6 @@ public class HpDragOption {
 
                     // add the item to the database
                     HomeActivity._db.saveItem(item, 0, Definitions.ItemPosition.Dock);
-
-
                 } else {
                     Point pos = new Point();
                     _homeActivity.getDock().touchPosToCoordinate(pos, x, y, item._spanX, item._spanY, false);
