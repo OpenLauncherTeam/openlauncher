@@ -147,11 +147,13 @@ public class AppManager {
     private class AsyncGetApps extends AsyncTask {
         private List<App> appsTemp;
         private List<App> nonFilteredAppsTemp;
+        private List<App> removedApps;
 
         @Override
         protected void onPreExecute() {
             appsTemp = new ArrayList<>();
             nonFilteredAppsTemp = new ArrayList<>();
+            removedApps = new ArrayList<>();
             super.onPreExecute();
         }
 
@@ -159,6 +161,7 @@ public class AppManager {
         protected void onCancelled() {
             appsTemp = null;
             nonFilteredAppsTemp = null;
+            removedApps = new ArrayList<>();
             super.onCancelled();
         }
 
@@ -231,6 +234,12 @@ public class AppManager {
                 appsTemp.addAll(nonFilteredAppsTemp);
             }
 
+            removedApps = getRemovedApps(_apps, appsTemp);
+
+            for (App app : removedApps) {
+                HomeActivity._db.deleteItems(app);
+            }
+
             AppSettings appSettings = AppSettings.get();
             if (!appSettings.getIconPack().isEmpty() && Tool.isPackageInstalled(appSettings.getIconPack(), _packageManager)) {
                 IconPackHelper.applyIconPack(AppManager.this, Tool.dp2px(appSettings.getIconSize()), appSettings.getIconPack(), appsTemp);
@@ -240,16 +249,14 @@ public class AppManager {
 
         @Override
         protected void onPostExecute(Object result) {
-            List<App> removed = getRemovedApps(_apps, appsTemp);
-
             _apps = appsTemp;
             _nonFilteredApps = nonFilteredAppsTemp;
 
-            notifyUpdateListeners(appsTemp);
-
-            if (removed.size() > 0) {
-                notifyRemoveListeners(removed);
+            if (removedApps.size() > 0) {
+                notifyRemoveListeners(removedApps);
             }
+
+            notifyUpdateListeners(appsTemp);
 
             if (_recreateAfterGettingApps) {
                 _recreateAfterGettingApps = false;

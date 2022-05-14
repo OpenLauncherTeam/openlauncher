@@ -94,22 +94,19 @@ public class ItemViewFactory {
 
         // If we can't find the Widget, we don't want to proceed or we'll end up with a phantom on the home screen.
         if (appWidgetInfo == null) {
-            int appWidgetId = HomeActivity._appWidgetHost.allocateAppWidgetId();
             if (item._label.contains(Definitions.DELIMITER)) {
                 String[] cnSplit = item._label.split(Definitions.DELIMITER);
                 ComponentName cn = new ComponentName(cnSplit[0], cnSplit[1]);
 
+                int appWidgetId = HomeActivity._appWidgetHost.allocateAppWidgetId();
                 if (HomeActivity._appWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId, cn)) {
                     appWidgetInfo = HomeActivity._appWidgetManager.getAppWidgetInfo(appWidgetId);
                     item.setWidgetValue(appWidgetId);
                     HomeActivity._db.updateItem(item);
                 } else {
-                    LOG.error("Unable to bind app widget id: {} ", cn);
-                    Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_BIND);
-                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_PROVIDER, cn);
-
-                    HomeActivity._launcher.startActivityForResult(intent, HomeActivity.REQUEST_PICK_APPWIDGET);
+                    LOG.error("Unable to bind app widget id: {}; removing from database", cn);
+                    HomeActivity._appWidgetHost.deleteAppWidgetId(appWidgetId);
+                    HomeActivity._db.deleteItem(item, false);
                     return null;
                 }
             } else {
