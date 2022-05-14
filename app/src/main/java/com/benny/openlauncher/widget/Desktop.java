@@ -192,6 +192,10 @@ public final class Desktop extends ViewPager implements DesktopCallback {
         }
 
         public void addPageLeft() {
+            // Shift pages to the right (including home page)
+            HomeActivity._db.addPage(0);
+            Setup.appSettings().setDesktopPageCurrent(Setup.appSettings().getDesktopPageCurrent()+1);
+
             _desktop.getPages().add(0, getItemLayout());
             notifyDataSetChanged();
         }
@@ -210,6 +214,13 @@ public final class Desktop extends ViewPager implements DesktopCallback {
                     }
                 }
             }
+
+            // Shift pages to the left (including home page)
+            HomeActivity._db.removePage(position);
+            if (Setup.appSettings().getDesktopPageCurrent() > position) {
+                Setup.appSettings().setDesktopPageCurrent(Setup.appSettings().getDesktopPageCurrent() - 1);
+            }
+
             _desktop.getPages().remove(position);
             notifyDataSetChanged();
         }
@@ -349,7 +360,7 @@ public final class Desktop extends ViewPager implements DesktopCallback {
         int previousPage = getCurrentItem();
         _adapter.addPageLeft();
         setCurrentItem(previousPage + 1, false);
-        setCurrentItem(previousPage - 1);
+        setCurrentItem(previousPage);
         if (Setup.appSettings().getDesktopShowGrid()) {
             for (CellContainer cellContainer : _pages) {
                 cellContainer.setHideGrid(!showGrid);
