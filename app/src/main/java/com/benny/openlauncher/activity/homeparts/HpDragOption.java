@@ -188,7 +188,7 @@ public class HpDragOption {
                     _homeActivity.getDock().consumeLastItem();
                     // add the item to the database
                     HomeActivity._db.saveItem(item, _homeActivity.getDesktop().getCurrentItem(), Definitions.ItemPosition.Desktop);
-                    _homeActivity.getDesktop().initDesktop();
+                    _homeActivity.getDesktop().updateDesktop();
 
                 } else {
                     Point pos = new Point();
