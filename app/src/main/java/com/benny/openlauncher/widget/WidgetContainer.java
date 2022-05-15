@@ -125,11 +125,19 @@ public class WidgetContainer extends FrameLayout {
     }
 
     public void updateWidgetOption(Item item) {
+        int cellWidth = HomeActivity.Companion.getLauncher().getDesktop().getCurrentPage().getCellWidth();
+        int cellHeight = HomeActivity.Companion.getLauncher().getDesktop().getCurrentPage().getCellHeight();
+
+        if (cellWidth < 1 || cellHeight < 1) {
+            // desktop isn't laid out
+            return;
+        }
+
         Bundle newOps = new Bundle();
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, item.getSpanX() * HomeActivity.Companion.getLauncher().getDesktop().getCurrentPage().getCellWidth());
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.getSpanX() * HomeActivity.Companion.getLauncher().getDesktop().getCurrentPage().getCellWidth());
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.getSpanY() * HomeActivity.Companion.getLauncher().getDesktop().getCurrentPage().getCellHeight());
-        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.getSpanY() * HomeActivity.Companion.getLauncher().getDesktop().getCurrentPage().getCellHeight());
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, item.getSpanX() * cellWidth);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, item.getSpanX() * cellWidth);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, item.getSpanY() * cellHeight);
+        newOps.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, item.getSpanY() * cellHeight);
         HomeActivity._appWidgetManager.updateAppWidgetOptions(item.getWidgetValue(), newOps);
     }
 }
