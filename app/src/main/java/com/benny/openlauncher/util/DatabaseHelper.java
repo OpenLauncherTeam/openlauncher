@@ -308,6 +308,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return item;
     }
 
+    public void addPage(int position) {
+        _db.execSQL("UPDATE " + TABLE_HOME + " SET " + COLUMN_PAGE + " = " + COLUMN_PAGE + " + 1 WHERE " + COLUMN_PAGE + " >= ?",
+                new String[] {String.valueOf(position)});
+    }
+
+    public void removePage(int position) {
+        _db.execSQL("UPDATE " + TABLE_HOME + " SET " + COLUMN_PAGE + " = " + COLUMN_PAGE + " - 1 WHERE " + COLUMN_PAGE + " > ?",
+                new String[] {String.valueOf(position)});
+    }
+
     public void open() {
         _db = getWritableDatabase();
     }
