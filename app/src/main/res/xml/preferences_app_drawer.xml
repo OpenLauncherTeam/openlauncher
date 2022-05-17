@@ -69,7 +69,7 @@
             app:alphaSlider="true" />
 
         <com.flask.colorpicker.ColorPickerPreference
-            android:defaultValue="@color/white"
+            android:defaultValue="@color/shade"
             android:key="@string/pref_key__drawer_card_color"
             android:title="@string/pref_title__drawer_card_color"
             app:lightnessSlider="true"
