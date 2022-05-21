@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
@@ -322,13 +323,19 @@ public final class Desktop extends ViewPager implements DesktopCallback {
         _pageIndicator = pageIndicator;
     }
 
+
     public final void initDesktop() {
         _adapter = new DesktopAdapter(this);
         setAdapter(_adapter);
         setCurrentItem(Setup.appSettings().getDesktopPageCurrent());
+
         if (Setup.appSettings().getDesktopShowIndicator() && _pageIndicator != null) {
             _pageIndicator.setViewPager(this);
         }
+        addItemsToPage();
+    }
+
+    private void addItemsToPage() {
         int columns = Setup.appSettings().getDesktopColumnCount();
         int rows = Setup.appSettings().getDesktopRowCount();
         List<List<Item>> desktopItems = HomeActivity._db.getDesktop();
@@ -341,7 +348,12 @@ public final class Desktop extends ViewPager implements DesktopCallback {
                     addItemToPage(item, pageCount);
                 }
             }
+
         }
+    }
+
+    public final void updateDesktop() {
+        addItemsToPage();
     }
 
     public final void addPageRight(boolean showGrid) {
