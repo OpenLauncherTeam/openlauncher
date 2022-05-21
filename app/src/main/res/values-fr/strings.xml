@@ -53,11 +53,11 @@
     <string name="contribute">Contribuer</string>
     <string name="donate">Faire un don</string>
     <string name="help">Aide</string>
-    <string name="licenses">Licenses</string>
+    <string name="licenses">Licences</string>
     <string name="contributors">Contributeurs</string>
     <string name="changelog">Journal des modifications</string>
     <string name="more">Plus</string>
-    <string name="open_source_licenses">Licenses open source</string>
+    <string name="open_source_licenses">Licences open source</string>
     <string name="rate_the_app">Noter cette application</string>
     <string name="translate">Traduire</string>
     <string name="bug_reports">Rapporter un bug</string>
@@ -162,7 +162,7 @@
     <string name="pref_title__icon_pack">Pack d\'icônes</string>
     <string name="pref_summary__icon_pack">Sélectionner un pack d\'icônes installé.</string>
     <string name="pref_title__animation_speed_modifier">Vitesse d\'animation</string>
-    <string name="pref_summary__animation_speed_modifier">Modify the overall speed of animations</string>
+    <string name="pref_summary__animation_speed_modifier">Modifier la vitesse globale des animations.</string>
 
     <string name="pref_title__language">Langue</string>
     <string name="pref_summary__language">Changer la langue de l\'application. Vous devez redémarrer l\'application pour que le changement soit pris en compte</string>
@@ -248,5 +248,9 @@
     <string name="toast_notification_permission_required">Veuillez activer les notifications.</string>
     <string name="toast_backup_success">Opération réussie.</string>
     <string name="toast_backup_error">Une erreur est survenue.</string>
+    <string name="toast_settings_restored">Paramètres restaurés.</string>
+    <string name="toast_database_deleted">Base de données supprimée.</string>
     <string name="toast_icon_pack_error">Impossible de récupérer l\'icône sans la permission READ_EXTERNAL_STORAGE.</string>
+    <string name="toast_remove_from_group_first">Retirez d\'abord l\'élément du groupe.</string>
+    <string name="toast_update_group_due_to_missing_items">Les applications désinstallées ou cachées ont été retirées de ce groupe.</string>
 </resources>
