@@ -20,6 +20,8 @@ import com.nononsenseapps.filepicker.Utils;
 import net.gsantner.opoc.util.ContextUtils;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -70,7 +72,7 @@ public class SettingsActivity extends ColorActivity implements SettingsBaseFragm
             List<Uri> files = Utils.getSelectedFilesFromResult(data);
             switch (requestCode) {
                 case Definitions.INTENT_BACKUP:
-                    BackupHelper.backupConfig(this, new File(Utils.getFileForUri(files.get(0)).getAbsolutePath() + "/openlauncher.zip").toString());
+                    BackupHelper.backupConfig(this, new File(Utils.getFileForUri(files.get(0)).getAbsolutePath() + "/openlauncher_" + new SimpleDateFormat("yyyyMMdd'T'HHmmss").format(new Date()) + ".zip").toString());
                     Setup.dataManager().open();
                     break;
                 case Definitions.INTENT_RESTORE:
