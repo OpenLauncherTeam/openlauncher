@@ -23,3 +23,4 @@ Also, to all those people who have helped this project, thank you.
 * **[FranzMari](https://github.com/FranzMari)**<br/>~° Italian translation
 * **[MFlisar](https://github.com/MFlisar)**<br/>~° Extraction of core
 * **[saechimdaeki](https://github.com/saechimdaeki)**<br/>~° Code contributions
+* **[P'tit g](https://github.com/Ptitg)**<br/>~° Code contributions

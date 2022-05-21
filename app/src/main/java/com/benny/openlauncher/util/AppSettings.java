@@ -186,7 +186,7 @@ public class AppSettings extends SharedPreferencesPropertyBackend {
     }
 
     public int getDrawerCardColor() {
-        return getInt(R.string.pref_key__drawer_card_color, Color.WHITE);
+        return getInt(R.string.pref_key__drawer_card_color, rcolor(R.color.shade));
     }
 
     public int getDrawerLabelColor() {
