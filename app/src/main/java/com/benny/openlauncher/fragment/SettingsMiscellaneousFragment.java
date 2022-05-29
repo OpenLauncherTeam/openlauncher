@@ -11,6 +11,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.activity.ZipFilePickerActivity;
 import com.benny.openlauncher.util.AppSettings;
 import com.benny.openlauncher.util.DatabaseHelper;
 import com.benny.openlauncher.util.Definitions;
@@ -44,7 +45,7 @@ public class SettingsMiscellaneousFragment extends SettingsBaseFragment {
                 return true;
             case R.string.pref_key__restore:
                 if (new PermissionChecker(getActivity()).doIfExtStoragePermissionGranted()) {
-                    Intent i = new Intent(getActivity(), FilePickerActivity.class)
+                    Intent i = new Intent(getActivity(), ZipFilePickerActivity.class)
                             .putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false)
                             .putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
                     getActivity().startActivityForResult(i, Definitions.INTENT_RESTORE);
