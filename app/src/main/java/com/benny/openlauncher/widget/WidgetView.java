@@ -11,6 +11,7 @@ public class WidgetView extends AppWidgetHostView {
 
     public WidgetView(Context context) {
         super(context);
+        setLongClickable(true);
     }
 
     @Override
