@@ -285,8 +285,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
             case SHORTCUT: {
                 item.setIntent(Tool.getIntentFromString(data));
-                App app = Setup.get().getAppLoader().findItemApp(item);
-                item.setIcon(app != null ? app.getIcon() : null);
+                item.setIcon(Tool.getIcon(_context, Integer.toString(item.getId())));
+                if (item.getIcon() == null) {
+                    App app = Setup.get().getAppLoader().findItemApp(item);
+                    item.setIcon(app != null ? app.getIcon() : null);
+                }
                 break;
             }
             case GROUP: {

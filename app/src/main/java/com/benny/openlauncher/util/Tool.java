@@ -241,7 +241,7 @@ public class Tool {
     public static void saveIcon(Context context, Bitmap icon, String filename) {
         File directory = new File(context.getFilesDir() + "/icons/");
         if (!directory.exists()) directory.mkdir();
-        File file = new File(directory + filename + ".png");
+        File file = new File(directory, filename + ".png");
         try {
             file.createNewFile();
             FileOutputStream out = new FileOutputStream(file);
