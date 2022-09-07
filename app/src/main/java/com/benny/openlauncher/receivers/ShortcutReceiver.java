@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.HomeActivity;
+import com.benny.openlauncher.activity.homeparts.HpInitSetup;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.model.App;
 import com.benny.openlauncher.model.Item;
@@ -49,6 +50,10 @@ public class ShortcutReceiver extends BroadcastReceiver {
         } finally {
             if (shortcutIcon == null)
                 shortcutIcon = new BitmapDrawable(context.getResources(), (Bitmap) intent.getExtras().getParcelable(Intent.EXTRA_SHORTCUT_ICON));
+        }
+
+        if (!Setup.wasInitialised()) {
+            Setup.init(new HpInitSetup(context));
         }
 
         App app = Setup.appLoader().createApp(shortcutIntent);
