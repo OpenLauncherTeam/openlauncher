@@ -2,10 +2,8 @@ package com.benny.openlauncher.activity.homeparts;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.benny.openlauncher.AppObject;
-import com.benny.openlauncher.activity.HomeActivity;
 import com.benny.openlauncher.manager.Setup;
 import com.benny.openlauncher.util.AppManager;
 import com.benny.openlauncher.util.AppSettings;
@@ -19,11 +17,11 @@ public final class HpInitSetup extends Setup {
     private final HpEventHandler _eventHandler;
     private final AppSettings _appSettings;
 
-    public HpInitSetup(HomeActivity homeActivity) {
+    public HpInitSetup(Context context) {
         _appSettings = AppSettings.get();
         _desktopGestureCallback = new HpGestureCallback(_appSettings);
-        _dataManager = new DatabaseHelper(homeActivity);
-        _appLoader = AppManager.getInstance(homeActivity);
+        _dataManager = new DatabaseHelper(context.getApplicationContext());
+        _appLoader = AppManager.getInstance(context.getApplicationContext());
         _eventHandler = new HpEventHandler();
     }
 
