@@ -29,12 +29,6 @@
     <com.benny.openlauncher.widget.ColorPreferenceCategory android:title="@string/contribute">
 
         <Preference
-            android:icon="@drawable/ic_favorite"
-            android:key="@string/pref_key__more_info__donate"
-            android:summary="@string/more_info_support"
-            android:title="@string/donate" />
-
-        <Preference
             android:icon="@drawable/ic_bug"
             android:key="@string/pref_key__more_info__bug_reports"
             android:summary="@string/bug_reports_suggest_improvements"

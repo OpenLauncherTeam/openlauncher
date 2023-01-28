@@ -76,10 +76,6 @@ public class SettingsAboutFragment extends GsPreferenceFragmentCompat<AppSetting
                     _cu.openWebpageInExternalBrowser(getString(R.string.app_community_url));
                     return true;
                 }
-                case R.string.pref_key__more_info__donate: {
-                    _cu.openWebpageInExternalBrowser(getString(R.string.app_donate_url));
-                    return true;
-                }
                 case R.string.pref_key__more_info__bug_reports: {
                     _cu.openWebpageInExternalBrowser(getString(R.string.app_bug_report_url));
                     return true;

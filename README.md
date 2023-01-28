@@ -37,16 +37,10 @@ The project is always open for contributions and accepts pull requests. Please u
 
 ### Resources
 
-  * Team: [bennykok](https://github.com/BennyKok) | [dkanada](https://github.com/dkanada) | [gsantner](https://gsantner.net/supportme?source=readme&project=openlauncher)
+  * Team: [bennykok](https://github.com/BennyKok) | [dkanada](https://github.com/dkanada) | [gsantner](https://github.com/gsantner)
   * Project: [Changelog](/CHANGELOG.md) | [License](/LICENSE)
   * F-Droid: [Metadata](https://gitlab.com/fdroid/fdroiddata/blob/master/metadata/com.benny.openlauncher.txt) | [Page](https://f-droid.org/packages/com.benny.openlauncher/) | [Wiki](https://f-droid.org/wiki/page/com.benny.openlauncher) | [Build](https://f-droid.org/wiki/page/com.benny.openlauncher/lastbuild)
  
-### Donation
-
-  * OpenLauncherTeam: [liberapay](https://liberapay.com/OpenLauncherTeam/donate)
-  * bennykok: [paypal](https://www.paypal.me/BennyKok) or [liberapay](https://liberapay.com/BennyKok/donate)
-  * gsantner: [website](https://gsantner.net/supportme?source=readme&project=openlauncher) or [liberapay](https://liberapay.com/gsantner/donate)
-
 ### License
 
 The app is licensed with Apache 2.0.
