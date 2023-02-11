@@ -108,7 +108,6 @@
     <string name="pref_key__more_info__rate_app" translatable="false">pref_key__more_info__rate_app</string>
     <string name="pref_key__more_info__translate" translatable="false">pref_key__more_info__translate</string>
     <string name="pref_key__more_info__join_community" translatable="false">pref_key__more_info__join_community</string>
-    <string name="pref_key__more_info__android_contribution_guide" translatable="false">pref_key__more_info__android_contribution_guide</string>
     <string name="pref_key__more_info__app" translatable="false">pref_key__more_info__app</string>
     <string name="pref_key__more_info__project_contribution_info" translatable="false">pref_key__more_info__project_contribution_info</string>
     <string name="pref_key__more_info__project_community" translatable="false">pref_key__more_info__project_community</string>

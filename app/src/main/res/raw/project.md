@@ -4,7 +4,7 @@ https://github.com/openlauncherteam/openlauncher
 
 Gregor Santner
 Austrian Software Developer
-https://gsantner.net/?project=memetastic
+https://github.com/gsantner
 
 dkanada
 Android Development

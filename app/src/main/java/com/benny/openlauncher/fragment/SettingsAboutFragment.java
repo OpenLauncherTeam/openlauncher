@@ -1,7 +1,6 @@
 /*#######################################################
  *
- *   Maintained by Gregor Santner, 2018-
- *   https://gsantner.net/
+ *   Maintained 2018-2023 by Gregor Santner <gsantner AT mailbox DOT org>
  *
  *   License: Apache 2.0
  *  https://github.com/gsantner/opoc/#licensing
@@ -86,12 +85,6 @@ public class SettingsAboutFragment extends GsPreferenceFragmentCompat<AppSetting
                 }
                 case R.string.pref_key__more_info__project_contribution_info: {
                     _cu.openWebpageInExternalBrowser(getString(R.string.app_contribution_info_url));
-                    return true;
-                }
-                case R.string.pref_key__more_info__android_contribution_guide: {
-                    _cu.openWebpageInExternalBrowser(
-                            String.format("https://gsantner.net/android-contribution-guide/?packageid=%s&name=%s&web=%s",
-                                    _cu.context().getPackageName(), getString(R.string.app_name), getString(R.string.app_web_url).replace("=", "%3D")));
                     return true;
                 }
                 case R.string.pref_key__more_info__source_code: {

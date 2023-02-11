@@ -13,4 +13,3 @@ This is an open source launcher project for Android devices that has been built 
 
 <a href="https://lonamiwebs.github.io/stringlate/translate?git=https%3A%2F%2Fgithub.com%2Fopenlauncherteam%2Fopenlauncher.git&name=OpenLauncher&mail=gro.xobliam@@rentnasg>Translate using Stringlate</a>
 
-<a href="https://gsantner.net/android-contribution-guide/?packageid=com.benny.openlauncher&name=OpenLauncher&web=https://github.com/openlauncherteam/openlauncher>Contribution Guide</a>
