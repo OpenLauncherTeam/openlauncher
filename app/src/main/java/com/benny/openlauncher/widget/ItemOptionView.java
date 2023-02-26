@@ -438,9 +438,6 @@ public final class ItemOptionView extends FrameLayout {
                         itemList.add(getAppShortcutItem(shortcutInfo));
                     }
                 }
-            case SHORTCUT:
-                itemList.add(uninstallItem);
-                itemList.add(infoItem);
                 break;
         }
 
