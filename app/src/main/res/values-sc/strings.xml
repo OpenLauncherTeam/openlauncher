@@ -31,6 +31,8 @@
     <string name="minibar_summary__mobile_network">Impostatziones pro sas retzas mòbiles.</string>
     <string name="minibar_title__notification_bar">Ammustra sas notìficas</string>
     <string name="minibar_summary__notification_bar">Ismànnia s\'àrea de sas notìficas in pitzu de s\'ischermu.</string>
+    <string name="minibar_title__camera">Fotocàmera</string>
+    <string name="minibar_summary__camera">Faghe una fotografia cun s\'aplicatzione de fotocàmera tua</string>
 
     <!-- About -->
     <string name="about_libs">Librerias a mitza aberta</string>
@@ -67,9 +69,9 @@
     <string name="pref_title__dock">Barra de suta</string>
     <string name="pref_title__app_drawer">Menù de sas aplicatziones</string>
     <string name="pref_title__appearance">Aparèntzia</string>
-    <string name="pref_title__gestures">Gestos</string>
     <string name="pref_title__behavior">Cumportamentu</string>
     <string name="pref_title__advanced">Àteras impostatziones</string>
+    <string name="pref_title__hide_apps">Istichi aplicatziones</string>
     <string name="pref_title__about">Informatziones</string>
 
     <string name="pref_title__size">Mannària</string>
@@ -80,11 +82,14 @@
     <string name="pref_title__interfaces">Interfaches</string>
     <string name="pref_title__inputs">Interatziones</string>
     <string name="pref_title__feels">Cumportamentu</string>
+    <string name="pref_title__gestures">Gestos</string>
     <string name="pref_title__others">Àteru</string>
     <string name="pref_title__animations">Animatziones</string>
     <string name="pref_title__debug">Depuratzione (debug)</string>
 
     <string name="pref_title__desktop_indicator_style">Istile de s\'indicadore</string>
+    <string name="pref_title__desktop_wallpaper_scroll">Iscurrimentu isfundu</string>
+    <string name="pref_title__desktop_orientation">Orientamentu</string>
     <string name="pref_title__desktop_show_grid">Ammustra sa grìllia</string>
     <string name="pref_summary__desktop_show_grid">Ammustra sa grìllia de ghia cando ses trisinende elementos.</string>
     <string name="pref_title__desktop_fullscreen">Ischermu intreu</string>
@@ -94,11 +99,13 @@
     <string name="pref_title__desktop_show_label">Ammustra sas etichetas</string>
     <string name="pref_summary__desktop_show_label">Ammustra sas etichetas de sos elementos in suta de sas iconas issoro.</string>
     <string name="pref_title__desktop_background_color">Isfundu</string>
-    <string name="pref_title__desktop_folder_color">Isfundu de sa cartella</string>
     <string name="pref_title__desktop_inset_color">Barras de sistema</string>
+    <string name="pref_title__desktop_folder_color">Isfundu de sa cartella</string>
 
     <string name="pref_title__search_bar_enable">Barra de chirca</string>
     <string name="pref_summary__search_bar_enable">Ammustra una barra de chirca a pitzu de s\'iscrivania.</string>
+    <string name="pref_title__search_bar_starts_with">Chirca aplicatziones pro nùmene</string>
+    <string name="pref_summary__search_bar_starts_with">Chirca aplicatziones chi incumintzant cun su testu de chirca.</string>
     <string name="pref_title__search_bar_base_uri">URI de chirca</string>
     <string name="pref_summary__search_bar_base_uri">Imposta s\'URI impreadu pro sas chircas web.</string>
     <string name="pref_dialog__search_bar_base_uri">Inserta su motore de chirca (s\'URI) chi diat dèpere èssere impreadu pro sas chircas in lìnia. S\'eticheta {query} podet èssere impreada comente       sinnapostu pro s\'interrogatzione de chirca, si non b\'ant a èssere sinnapostos s\'interrogatzione de chirca at a èssere annanta a sa fine de s\'URI.</string>
@@ -119,7 +126,6 @@
 
     <string name="pref_title__drawer_style">Istile</string>
     <string name="pref_summary__drawer_style">Issèbera intre unu menù de sas aplicatziones orizontale o verticale.</string>
-    <string name="pref_title__hide_apps">Istichi aplicatziones</string>
     <string name="pref_title__drawer_show_card_view">Visione a ischeda</string>
     <string name="pref_summary__drawer_show_card_view">Ammustra un\'ischeda in subra de s\'isfundu de su menù de sas aplicatziones.</string>
     <string name="pref_title__drawer_remember_position">Ammenta s\'ùrtima pàgina</string>
@@ -134,6 +140,8 @@
     <string name="pref_title__drawer_fast_scroll_color">Barra de iscurrimentu</string>
     <string name="pref_title__drawer_label_font_size">Mannària de su testu de sas etichetas</string>
 
+    <string name="pref_title__gesture_notifications">Contadore de notìficas</string>
+    <string name="pref_summary__gesture_notifications">Atualiza sas iconas cun unu contadore cando arribant sas notìficas.</string>
     <string name="pref_title__gesture_feedback">Reatziones a sos gestos</string>
     <string name="pref_summary__gesture_feedback">Retzi una risposta cando incarcas a longu un\'elementu in s\'iscrivania.</string>
     <string name="pref_title__gesture_quick_swipe">Aberi su menù iscurrende</string>
@@ -168,11 +176,20 @@
     <string name="pref_title__restart">Torra a allùghere</string>
     <string name="pref_summary__restart">Torra a allùghere s\'allughidore.</string>
 
+    <!-- Arrays -->
     <string name="vertical_scroll_drawer">Verticale</string>
     <string name="horizontal_paged_drawer">Orizontale</string>
 
     <string name="indicator_mode_dots">Puntos</string>
     <string name="indicator_mode_lines">Lìnias</string>
+
+    <string name="orientation_mode_portrait">Verticale</string>
+    <string name="orientation_mode_rotate">Gira</string>
+    <string name="orientation_mode_landscape">Orizontale</string>
+
+    <string name="scroll_normal">Normale</string>
+    <string name="scroll_inverse">A s\'imbesse</string>
+    <string name="scroll_off">Istudadu</string>
 
     <string name="none">Perunu</string>
     <string name="app">Aberi un\'aplicatzione</string>
@@ -193,6 +210,8 @@
     <string name="volume_level_notification">Notìficas</string>
     <string name="volume_level_system">Sistema</string>
     <string name="volume_level_media">Documentos multimediales</string>
+    <string name="notification_title">Atzessu pro sas notìficas</string>
+    <string name="notification_summary">OpenLauncher tenet bisòngiu de su permissu pro sas notìficas pro mustrare sos contadores in sas iconas.</string>
 
     <!-- Other -->
     <string name="columns">Colunnas</string>
@@ -213,6 +232,7 @@
     <string name="info">Informatziones</string>
     <string name="uninstall">Disinstalla</string>
     <string name="remove">Boga</string>
+    <string name="resize">Muda de mannesa</string>
 
     <!-- Desktop Option View -->
     <string name="home">Pàg. printzipale</string>
@@ -224,8 +244,13 @@
     <string name="toast_not_enough_space">Non b\'est memòria bastante.</string>
     <string name="toast_app_uninstalled">Aplicatzione disinstallada.</string>
     <string name="toast_device_admin_required">Pro praghere abìlita s\'amministratzione de su dispositivu.</string>
+    <string name="toast_notification_permission_required">Pro praghere abìlita sas notìficas.</string>
     <string name="toast_backup_success">Fatu.</string>
     <string name="toast_backup_error">B\'est istadu carchi errore.</string>
+    <string name="toast_settings_restored">Impostatziones ripristinadas.</string>
+    <string name="toast_database_deleted">Base de datos iscantzellada.</string>
     <string name="toast_icon_pack_error">Impossìbile otènnere s\'icona chene su permissu READ_EXTERNAL_STORAGE.</string>
-
+    <string name="toast_remove_from_group_first">In antis boga s\'elementu dae su grupu.</string>
+    <string name="toast_update_group_due_to_missing_items">Sas aplicatziones disinstalladas o cuadas sunt istadas bogadas dae custu grupu.</string>
+    
 </resources>
