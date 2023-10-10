@@ -1,3 +1,9 @@
+### v1.0.0
+* Please see either of the links for changes in the v1.0.0 version:
+* https://github.com/OpenLauncherTeam/openlauncher/compare/v0.7.4...v1.0.0
+* https://github.com/OpenLauncherTeam/openlauncher/milestone/2?closed=1
+* https://github.com/OpenLauncherTeam/openlauncher/commits/master
+
 ### v0.5.1
 * fix incorrect label clipping
 * improve free space calculation for widgets
