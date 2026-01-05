@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.service.notification.NotificationListenerService;
@@ -55,7 +56,11 @@ public class NotificationListener extends NotificationListenerService {
         if (_notificationReceiver == null) {
             _notificationReceiver = new NotificationListenerReceiver();
             IntentFilter filter = new IntentFilter(UPDATE_NOTIFICATIONS_ACTION);
-            registerReceiver(_notificationReceiver, filter);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                registerReceiver(_notificationReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
+            } else {
+                registerReceiver(_notificationReceiver, filter);
+            }
         }
     }
 

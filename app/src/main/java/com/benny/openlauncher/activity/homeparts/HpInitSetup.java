@@ -1,7 +1,7 @@
 package com.benny.openlauncher.activity.homeparts;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.benny.openlauncher.AppObject;
 import com.benny.openlauncher.manager.Setup;

@@ -3,7 +3,7 @@ package com.benny.openlauncher.activity.homeparts;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.Handler;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 
 import com.benny.openlauncher.R;

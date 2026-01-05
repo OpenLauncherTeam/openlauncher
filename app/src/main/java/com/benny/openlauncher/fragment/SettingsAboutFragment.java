@@ -17,8 +17,8 @@ package com.benny.openlauncher.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.activity.SettingsActivity;
@@ -58,80 +58,67 @@ public class SettingsAboutFragment extends GsPreferenceFragmentCompat<AppSetting
     public Boolean onPreferenceClicked(Preference preference, String key, int keyResId) {
         ActivityUtils au = new ActivityUtils(getActivity());
         if (isAdded() && preference.hasKey()) {
-            switch (keyToStringResId(preference)) {
-                case R.string.pref_key__more_info__app: {
-                    _cu.openWebpageInExternalBrowser(getString(R.string.app_web_url));
-                    return true;
+            int prefKey = keyToStringResId(preference);
+            if (prefKey == R.string.pref_key__more_info__app) {
+                _cu.openWebpageInExternalBrowser(getString(R.string.app_web_url));
+                return true;
+            } else if (prefKey == R.string.pref_key__more_info__settings) {
+                au.animateToActivity(SettingsActivity.class, false, 124);
+                return true;
+            } else if (prefKey == R.string.pref_key__more_info__rate_app) {
+                au.showGooglePlayEntryForThisApp();
+                return true;
+            } else if (prefKey == R.string.pref_key__more_info__join_community) {
+                _cu.openWebpageInExternalBrowser(getString(R.string.app_community_url));
+                return true;
+            } else if (prefKey == R.string.pref_key__more_info__bug_reports) {
+                _cu.openWebpageInExternalBrowser(getString(R.string.app_bug_report_url));
+                return true;
+            } else if (prefKey == R.string.pref_key__more_info__translate) {
+                _cu.openWebpageInExternalBrowser(getString(R.string.app_translate_url));
+                return true;
+            } else if (prefKey == R.string.pref_key__more_info__project_contribution_info) {
+                _cu.openWebpageInExternalBrowser(getString(R.string.app_contribution_info_url));
+                return true;
+            } else if (prefKey == R.string.pref_key__more_info__source_code) {
+                _cu.openWebpageInExternalBrowser(getString(R.string.app_source_code_url));
+                return true;
+            } else if (prefKey == R.string.pref_key__more_info__project_license) {
+                try {
+                    au.showDialogWithHtmlTextView(R.string.licenses, new SimpleMarkdownParser().parse(
+                            getResources().openRawResource(R.raw.license),
+                            "", SimpleMarkdownParser.FILTER_ANDROID_TEXTVIEW).getHtml());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                case R.string.pref_key__more_info__settings: {
-                    au.animateToActivity(SettingsActivity.class, false, 124);
-                    return true;
+                return true;
+            } else if (prefKey == R.string.pref_key__more_info__open_source_licenses) {
+                try {
+                    au.showDialogWithHtmlTextView(R.string.licenses, new SimpleMarkdownParser().parse(
+                            getResources().openRawResource(R.raw.licenses),
+                            "", SimpleMarkdownParser.FILTER_ANDROID_TEXTVIEW).getHtml());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                case R.string.pref_key__more_info__rate_app: {
-                    au.showGooglePlayEntryForThisApp();
-                    return true;
+                return true;
+            } else if (prefKey == R.string.pref_key__more_info__contributors_public_info) {
+                try {
+                    au.showDialogWithHtmlTextView(R.string.contributors, new SimpleMarkdownParser().parse(
+                            getResources().openRawResource(R.raw.contributors),
+                            "", SimpleMarkdownParser.FILTER_ANDROID_TEXTVIEW).getHtml());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                case R.string.pref_key__more_info__join_community: {
-                    _cu.openWebpageInExternalBrowser(getString(R.string.app_community_url));
-                    return true;
+                return true;
+            } else if (prefKey == R.string.pref_key__more_info__copy_build_information) {
+                new ShareUtil(getContext()).setClipboard(preference.getSummary());
+                SimpleMarkdownParser smp = new SimpleMarkdownParser();
+                try {
+                    String html = smp.parse(getResources().openRawResource(R.raw.changelog), "", SimpleMarkdownParser.FILTER_ANDROID_TEXTVIEW, SimpleMarkdownParser.FILTER_CHANGELOG).getHtml();
+                    au.showDialogWithHtmlTextView(R.string.changelog, html);
+                } catch (Exception ex) {
                 }
-                case R.string.pref_key__more_info__bug_reports: {
-                    _cu.openWebpageInExternalBrowser(getString(R.string.app_bug_report_url));
-                    return true;
-                }
-                case R.string.pref_key__more_info__translate: {
-                    _cu.openWebpageInExternalBrowser(getString(R.string.app_translate_url));
-                    return true;
-                }
-                case R.string.pref_key__more_info__project_contribution_info: {
-                    _cu.openWebpageInExternalBrowser(getString(R.string.app_contribution_info_url));
-                    return true;
-                }
-                case R.string.pref_key__more_info__source_code: {
-                    _cu.openWebpageInExternalBrowser(getString(R.string.app_source_code_url));
-                    return true;
-                }
-                case R.string.pref_key__more_info__project_license: {
-                    try {
-                        au.showDialogWithHtmlTextView(R.string.licenses, new SimpleMarkdownParser().parse(
-                                getResources().openRawResource(R.raw.license),
-                                "", SimpleMarkdownParser.FILTER_ANDROID_TEXTVIEW).getHtml());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return true;
-                }
-                case R.string.pref_key__more_info__open_source_licenses: {
-                    try {
-                        au.showDialogWithHtmlTextView(R.string.licenses, new SimpleMarkdownParser().parse(
-                                getResources().openRawResource(R.raw.licenses),
-                                "", SimpleMarkdownParser.FILTER_ANDROID_TEXTVIEW).getHtml());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return true;
-                }
-                case R.string.pref_key__more_info__contributors_public_info: {
-                    try {
-                        au.showDialogWithHtmlTextView(R.string.contributors, new SimpleMarkdownParser().parse(
-                                getResources().openRawResource(R.raw.contributors),
-                                "", SimpleMarkdownParser.FILTER_ANDROID_TEXTVIEW).getHtml());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return true;
-                }
-                case R.string.pref_key__more_info__copy_build_information: {
-                    new ShareUtil(getContext()).setClipboard(preference.getSummary());
-                    SimpleMarkdownParser smp = new SimpleMarkdownParser();
-                    try {
-                        String html = smp.parse(getResources().openRawResource(R.raw.changelog), "", SimpleMarkdownParser.FILTER_ANDROID_TEXTVIEW, SimpleMarkdownParser.FILTER_CHANGELOG).getHtml();
-                        au.showDialogWithHtmlTextView(R.string.changelog, html);
-                    } catch (Exception ex) {
-
-                    }
-                    return true;
-                }
+                return true;
             }
         }
         return null;

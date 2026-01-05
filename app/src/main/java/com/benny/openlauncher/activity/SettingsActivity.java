@@ -3,11 +3,11 @@ package com.benny.openlauncher.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.appcompat.widget.Toolbar;
 
 import com.benny.openlauncher.R;
 import com.benny.openlauncher.fragment.SettingsBaseFragment;
@@ -24,12 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class SettingsActivity extends ColorActivity implements SettingsBaseFragment.OnPreferenceStartFragmentCallback {
-    @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    private Toolbar toolbar;
 
     public void onCreate(Bundle b) {
         // must be applied before setContentView
@@ -38,7 +34,7 @@ public class SettingsActivity extends ColorActivity implements SettingsBaseFragm
         contextUtils.setAppLanguage(_appSettings.getLanguage());
 
         setContentView(R.layout.activity_settings);
-        ButterKnife.bind(this);
+        toolbar = findViewById(R.id.toolbar);
 
         toolbar.setTitle(R.string.pref_title__settings);
         setSupportActionBar(toolbar);

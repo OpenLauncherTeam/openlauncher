@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.benny.openlauncher">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -32,6 +31,7 @@
         <activity
             android:name="com.benny.openlauncher.activity.OnBoardActivity"
             android:clearTaskOnLaunch="true"
+            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/IntroTheme">
             <intent-filter>
@@ -44,6 +44,7 @@
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
+            android:exported="true"
             android:stateNotNeeded="true"
             android:taskAffinity=""
             android:windowSoftInputMode="adjustNothing">
@@ -81,6 +82,7 @@
         </activity>
         <activity
             android:name="com.nononsenseapps.filepicker.FilePickerActivity"
+            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/FilePickerTheme">
             <intent-filter>
@@ -92,6 +94,7 @@
             android:name="com.benny.openlauncher.activity.AddShortcutActivity"
             android:autoRemoveFromRecents="true"
             android:excludeFromRecents="true"
+            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/FilePickerTheme">
             <intent-filter>
@@ -101,6 +104,7 @@
 
         <receiver
             android:name="com.benny.openlauncher.receivers.DeviceAdminReceiver"
+            android:exported="true"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
@@ -111,6 +115,7 @@
         </receiver>
         <receiver
             android:name="com.benny.openlauncher.receivers.ShortcutReceiver"
+            android:exported="true"
             android:permission="com.android.launcher.permission.INSTALL_SHORTCUT">
             <intent-filter>
                 <action android:name="com.android.launcher.action.INSTALL_SHORTCUT" />
@@ -121,6 +126,7 @@
             android:name="com.benny.openlauncher.notifications.NotificationListener"
             android:label="@string/icon_badge_service_title"
             android:enabled="true"
+            android:exported="true"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
@@ -128,7 +134,7 @@
         </service>
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
