@@ -13,11 +13,11 @@ import android.content.pm.LauncherApps;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -331,9 +331,15 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
         };
 
         // register all receivers
-        registerReceiver(_appUpdateReceiver, _appUpdateIntentFilter);
-        registerReceiver(_shortcutReceiver, _shortcutIntentFilter);
-        registerReceiver(_timeChangedReceiver, _timeChangedIntentFilter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(_appUpdateReceiver, _appUpdateIntentFilter, Context.RECEIVER_NOT_EXPORTED);
+            registerReceiver(_shortcutReceiver, _shortcutIntentFilter, Context.RECEIVER_EXPORTED);
+            registerReceiver(_timeChangedReceiver, _timeChangedIntentFilter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            registerReceiver(_appUpdateReceiver, _appUpdateIntentFilter);
+            registerReceiver(_shortcutReceiver, _shortcutIntentFilter);
+            registerReceiver(_timeChangedReceiver, _timeChangedIntentFilter);
+        }
     }
 
     public final void onStartApp(@NonNull Context context, @NonNull App app, @Nullable View view) {

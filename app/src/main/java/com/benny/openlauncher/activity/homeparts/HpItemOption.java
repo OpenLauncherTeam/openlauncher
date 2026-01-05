@@ -12,7 +12,7 @@ import android.content.pm.ShortcutInfo;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Process;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 
