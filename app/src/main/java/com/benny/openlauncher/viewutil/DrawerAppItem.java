@@ -1,6 +1,6 @@
 package com.benny.openlauncher.viewutil;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.benny.openlauncher.R;
