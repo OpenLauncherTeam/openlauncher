@@ -2,19 +2,19 @@
 <resources>
     <color name="colorPrimary">#5c6bc0</color>
     <color name="colorPrimaryDark">#4254b3</color>
-    <color name="colorAccent">#5c6bc0</color>
+    <color name="colorAccent">#0078D7</color>
 
-    <color name="Light.Background">#f9f9f9</color>
-    <color name="Light.TextColor">#616161</color>
+    <color name="Light.Background">#F3F3F3</color>
+    <color name="Light.TextColor">#1A1A1A</color>
     <color name="Light.TextColorSecondary">#9e9e9e</color>
 
-    <color name="Dark.Background">#424242</color>
-    <color name="Dark.TextColor">#ffffff</color>
+    <color name="Dark.Background">#202020</color>
+    <color name="Dark.TextColor">#FFFFFF</color>
     <color name="Dark.TextColorSecondary">#9e9e9e</color>
 
     <color name="Black.Background">#000000</color>
 
-    <color name="white">#ffffff</color>
+    <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="shade">#B0000000</color>
 
